@@ -2,36 +2,35 @@ plot_types <- function(data)
 {
 	namesD <- names(data)
 	dataInfo <- NULL
-	for(i in 1:ncol(data))
-		for(j in 1:ncol(data))
-			dataInfo <- rbind(dataInfo, c(find_plot_type(data,i,j),namesD[i],namesD[j]))
+	
+	#horizontal then vertical
+	for(j in 1:ncol(data))
+		for(i in 1:ncol(data))
+			dataInfo <- rbind(dataInfo, c(find_plot_type(data,i,j),namesD[i],namesD[j],i,j))
 	dataInfo <- as.data.frame(dataInfo)
-	colnames(dataInfo) <- c("Type", "xvar", "yvar")
+	colnames(dataInfo) <- c("Type", "xvar", "yvar","posx","posy")
 	dataInfo
 }
 
 
-get_select_data <- function(allData, colMatrix)
+get_select_data <- function(allData, gridPos)
 {
-	if(nrow(colMatrix) < 1) return(NULL)
-	dataTmp <- NULL
-	for(i in 1:nrow(colMatrix))
-	{
-		print(colMatrix[i,])
-		e1 <- allData[,"yvar"] == colMatrix[i,"yvar"]
-		e2 <- allData[,"xvar"] == colMatrix[i,"xvar"]
-		dataTmp <- rbind(dataTmp,allData[e1 & e2,])
-	}
+	if(nrow(gridPos) < 1) return(NULL)
 	
-	dataTmp
+	print(gridPos)
+	
+	print(allData)
+	
+	dataTmp <- allData[,c(gridPos)]
+	
+	colnames(dataTmp) <- c("x","y")
+	
 
 }
 
 
 find_plot_type <- function(data,col1,col2)
 {
-	if(col1 == col2)
-		return("stat_bin")
 
 	y1Type <- "numeric"
 	y2Type <- "numeric"
@@ -41,7 +40,13 @@ find_plot_type <- function(data,col1,col2)
 	if(!is.null(attributes(data[,col2])))
 		y2Type <- "category"
 	
-	
+	if(col1 == col2)
+	{
+		if(y1Type == "numeric")
+			return("stat_bin-num")
+		else
+			return("stat_bin-cat")
+	}
 	
 	return(get_plot_type(y1Type,y2Type))
 }
