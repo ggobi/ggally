@@ -6,8 +6,7 @@ ggpairs <- function (data, mapping = aes(), colour = "black")
 	grid.newpage()
 	numCol <- ncol(data)
 	
-#	pushViewport(viewport(layout = grid.layout(numCol + 1, numCol + 1, widths = c(0.5,rep(1,numCol)), heights = c(rep(1,numCol),0.5) )))
-	pushViewport(viewport(layout = grid.layout(numCol, numCol)
+	pushViewport(viewport(layout = grid.layout(numCol + 1, numCol + 1, widths = c(0.5,rep(1,numCol)), heights = c(rep(1,numCol),0.5) )))
 	
 	
 	
@@ -44,13 +43,11 @@ cat("\n\n\nDATA TYPES\n");print(dataTypes)
 
 		print(head(dataSelect))
 #		if(type == "scatterplot")
-			p <- qplot(dataSelect[,1],dataSelect[,2],xlab=names(data)[posX],ylab=names(data)[posY])
+			p <- qplot(dataSelect[,1], dataSelect[,2])
 		if(type == "box-hori")
-			p <- qplot(dataSelect[,2],dataSelect[,1],ylab=names(data)[posX],xlab=names(data)[posY],geom="boxplot") + coord_flip()
-		
+			p <- qplot(dataSelect[,2], dataSelect[,1], geom="boxplot") + coord_flip()
 		if(type == "box-vert")
-			p <- qplot(dataSelect[,1],dataSelect[,2],xlab=names(data)[posX],ylab=names(data)[posY],geom="boxplot")
-		
+			p <- qplot(dataSelect[,1], dataSelect[,2], geom="boxplot")
 #		if(type == "mosaic")
 		
 		if(type == "stat_bin-num")
@@ -68,15 +65,27 @@ cat("\n\n\nDATA TYPES\n");print(dataTypes)
 					colour = "grey20", 
 					geom = "line"
 				)+
-				xlab(names(data)[posX]) + 
-				ylab(names(data)[posY]) + 
 				ylim(range(dataSelect[,"x"]))
 
 		}
 		
 		if(type == "stat_bin-cat")
 		{
-			p <- qplot(dataSelect[,1],xlab=names(data)[posX],ylab=names(data)[posY],geom="histogram", position = "stack")
+			colnames(dataSelect) <- c("x","y")
+			#p <- qplot(dataSelect[,1],geom="bar", position = "stack")
+			p <- ggplot(dataSelect, aes(x=x))+labs(x=NULL,y=NULL) +  geom_bar( aes(
+						y = ..count.. *diff(range(1:2)) #diff(range(x)) + min(x) 
+					)
+				)
+#			p <- ggplot(dataSelect, aes(x=x)) + 
+#				stat_bin()
+#					aes(
+#						y = ..count.. * 1 #diff(range(x)) + min(x)
+#					),
+#					position = "identity", 
+#					colour = "grey20"#, 
+#					geom = "line"
+#				)
 		
 		}
 		
@@ -85,12 +94,10 @@ cat("\n\n\nDATA TYPES\n");print(dataTypes)
 		{
 			if( posX != 1)
 			{
-				p <- p + labs(x = NULL)
 				p <- p + opts(axis.text.y = theme_blank() )
 			}
 			if( posY != numCol)
 			{
-				p <- p + labs(y = NULL)
 				p <- p + opts(axis.text.x = theme_blank() )
 			}	
 		}
@@ -98,39 +105,38 @@ cat("\n\n\nDATA TYPES\n");print(dataTypes)
 		{
 			if( posX != 1)
 			{
-				p <- p + labs(y = NULL)
 				p <- p + opts(axis.text.y = theme_blank() )
 			}
 			if( posY != numCol)
 			{
-				p <- p + labs(x = NULL)
 				p <- p + opts(axis.text.x = theme_blank() )
 			}	
 		}
 		
+		p <- p + labs(x = NULL) + labs(y = NULL)
 				
 		p <- p + opts(plot.margin = unit(rep(0,4), "lines"))
 
 		
 		
-		print(p, vp = vplayout(as.numeric(posY), as.numeric(posX)))#+1)) 
+		print(p, vp = vplayout(as.numeric(posY), as.numeric(posX)+1)) 
 		
 		
 	}
 
-#	for(i in 1:numCol)
-#	{
-#		pushViewport(vplayout(as.numeric(i), 1))
-#		grid.text(names(data)[i],1,0.5,rot=90,just=c("centre","bottom"))
-#		popViewport()
-#	}
-#
-#	for(i in 1:numCol)
-#	{
-#		pushViewport(vplayout(numCol+1, i+1))
-#		grid.text(names(data)[i],0.5,1,just=c("centre","top"))
-#		popViewport()
-#	}
+	for(i in 1:numCol)
+	{
+		pushViewport(vplayout(as.numeric(i), 1))
+		grid.text(names(data)[i],1,0.5,rot=90,just=c("centre","bottom"))
+		popViewport()
+	}
+
+	for(i in 1:numCol)
+	{
+		pushViewport(vplayout(numCol+1, i+1))
+		grid.text(names(data)[i],0.5,1,just=c("centre","top"))
+		popViewport()
+	}
 
 
 	
