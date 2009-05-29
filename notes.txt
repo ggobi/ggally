@@ -1,0 +1,14 @@
+box plot
+	dot plot √
+	faceted histogram √
+	faceted density √
+
+scatter plot
+	smooth function √ ???Smoother on top of points???
+	correlation text √
+	density plot - contour plot √ ??? include points???
+
+identity
+	density √
+	barchart √
+	
