@@ -1,4 +1,14 @@
-ggscatter_points <- function(data, ...)
+#' Plots the Scatter Plot
+#' Make a scatter plot with a given data set
+#'
+#' @param data data set using
+#' @param ... other arguments to add to geom_point
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_points(mtcars[,3:4])
+#' ggplot_points(mtcars[,3:4],colour = as.factor(mtcars[,"cyl"]), size = mtcars[,"qsec"] - 16)
+ggplot_points <- function(data, ...)
 {
 	
 	oNames <- colnames(data)
@@ -7,36 +17,82 @@ ggscatter_points <- function(data, ...)
 	ggplot(data = data, aes(x = X, y = Y)) + geom_point(...) + labs( x = oNames[1], y = oNames[2])
 }
 
-ggscatter_smooth <- function(data, ...)
+#' Plots the Scatter Plot with Smoothing
+#' Add a smoothed condition mean with a given scatter plot
+#'
+#' @param data data set using
+#' @param ... other arguments to add to geom_point
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_smooth(iris[, 1:2])
+#' ggplot_smooth(iris[, c(1, 3)], colour = as.factor(iris[, "Species"]))
+ggplot_smooth <- function(data, ...)
 {
 	oNames <- colnames(data)
 	colnames(data) <- c("X","Y")
 
-	ggplot(data = data, aes(x = X, y = Y))  + geom_smooth(method="lm", colour = I("black"))+ geom_point(...) + labs( x = oNames[1], y = oNames[2])
+	ggplot(data = data, aes(x = X, y = Y)) +
+		geom_smooth(method="lm", colour = I("black")) +
+		geom_point(...) +
+		labs( x = oNames[1], y = oNames[2])
 }
 
-ggscatter_density <- function(data)
+#' Plots the Scatter Density Plot
+#' Make a scatter density plot from a given data
+#'
+#' @param data data set using
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_density(iris[,c(1,3)])
+#' ggplot_density(iris[,c(1,3)], filled = TRUE)
+ggplot_density <- function(data, filled = FALSE)
 {
-	#contour 
-		p <- qplot(data[,1], data[,2], geom = "density2d", colour = I("black"))
+	oNames <- colnames(data)
+	colnames(data) <- c("X","Y")
+
+	if(filled)
+		p <- ggplot(data = data, aes(x = X, y = Y)) + stat_density2d(aes(fill = ..level..), geom="polygon")
+	else
+		p <- qplot(data = data, X, Y, geom = "density2d", colour = I("black"))
 	
-	#filled contour
-		# p <- ggplot(data = data, aes(x = X, y = Y)) + stat_density2d(aes(fill = ..level..), geom="polygon")
-		
-		p
+	p <- p + labs(x = oNames[1], y = oNames[2])	
+	p
 }
 
-ggscatter_cor <- function(data,size = 8,colour = "black")
+#' Correlation from the Scatter Plot
+#' estimate correlation from the given data
+#'
+#' @param data data set using
+#' @param size setting size
+#' @param colour setting color
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_cor(iris[,c(1,3)])
+#' ggplot_cor(iris[,c(1,3)], size = 15, colour = "red")
+ggplot_cor <- function(data,size = 8,colour = "black", ...)
 {
-	ggplot_Cor(data[,1], data[,2], size = size, colour = colour)
+	.ggplot_corInternal(data[,1], data[,2], size = size, colour = colour, ...)
 }
 		
 
-ggbox_reg <- function(data, ...)
+#' Plots the Box Plot
+#' Make a box plot with a given data set
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_box(iris[,4:5])
+#' ggplot_box(iris[,5:4], outlier.colour = "red", outlier.shape = 13, outlier.size = 8)
+ggplot_box <- function(data, ...)
 {
 
 	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
-	print(horizontal)
+	#print(horizontal)
 	if(horizontal)
 	{
 		p <- qplot(data[,2], data[,1], geom="boxplot",...) + 
@@ -57,13 +113,24 @@ ggbox_reg <- function(data, ...)
 	p 
 }
 
-ggbox_dot <- function(data,...)
+#' Plots the Box Plot with Dot
+#' Add jittering with the box plot
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_dot(iris[,4:5])
+#' ggplot_dot(iris[,5:4],colour = as.factor(iris[,"Species"]))
+ggplot_dot <- function(data, ...)
 {
 	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
-	
+	oNames <- colnames(data)
+	colnames(data) <- c("X","Y")
 	if(horizontal)
 	{
-		p <- qplot(data[,1], data[,2], geom = "jitter") + 
+		p <- ggplot(data = data, aes(x = X, y = Y)) + geom_jitter(...) + 
 			opts(
 				axis.text.y = theme_text(
 					angle = 90, 
@@ -74,13 +141,26 @@ ggbox_dot <- function(data,...)
 	}
 	else
 	{
-		p <- qplot(data[,1], data[,2], geom = "jitter") 
+		p <- ggplot(data = data, aes(x = X, y = Y)) + geom_jitter(...)
 	}
-	p + labs(x = colnames(data)[1], y = colnames(data)[2])
+	
+	p <- p + labs(x = oNames[1], y = oNames[2])
+	
+	p
 }
 
 
-ggbox_facethist <- function(data, ...)
+#' Plots the Histograms by Faceting
+#' Make histograms by displaying subsets of the data in different panels
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_facethist(iris[,4:5])
+#' ggplot_facethist(iris[,5:4], binwidth = .1)
+ggplot_facethist <- function(data, ...)
 {
 	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
 
@@ -97,7 +177,7 @@ ggbox_facethist <- function(data, ...)
 			stat = "bin",
 			facets = Y  ~ .,
 			...
-		) + labs(x = oNames[1], y = oNames[2])
+		) + labs(x = oNames[1]) + scale_y_continuous(oNames[2])
 	}
 	else
 	{	
@@ -107,16 +187,27 @@ ggbox_facethist <- function(data, ...)
 				stat = "bin", 
 				facets = .  ~ X,
 				...
-			) + coord_flip() + labs(x = oNames[1], y = oNames[2])
+			) + coord_flip() + labs(x = oNames[2]) + scale_y_continuous(oNames[1])
 									
 			# + opts(strip.text.y = theme_blank()) 
 
 	}
+	
 	p
 }
 
 
-ggbox_facetdensity <- function(data, ...)
+#' Plots the density plots by Faceting
+#' Make density plots by displaying subsets of the data in different panels
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_facetdensity(iris[,4:5])
+#' ggplot_facetdensity(iris[,5:4], colour = "blue")
+ggplot_facetdensity <- function(data, ...)
 {
 	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
 
@@ -140,7 +231,7 @@ ggbox_facetdensity <- function(data, ...)
 				...
 			)+
 			ylim(range(data[,1])) + 
-			facet_grid(Y ~ .)# + opts(strip.gp = NULL)
+			facet_grid(Y ~ .) + labs(x = oNames[1]) + scale_y_continuous(oNames[2])
 	}
 	else
 	{
@@ -151,21 +242,31 @@ ggbox_facetdensity <- function(data, ...)
 					x = Y, 
 					y = ..scaled.. * diff(range(x)) + min(x)
 				),
-				position = "identity", 
-				colour = "black", 
-				geom = "line"
+				position = "identity",  
+				geom = "line",
+				...
 			)+
 			scale_x_continuous()+
 			ylim(range(data[,2])) +
 			facet_grid(. ~ X) + 
-			coord_flip()
+			coord_flip() + labs(x = oNames[1]) + scale_y_continuous(oNames[2])
 
 	}
 	p
 }
 
 
-ggbox_denstrip <- function(data,...)
+#' Plots the Tile Plot
+#' Make Tile Plot as densely as possible
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggplot_denstrip(iris[,4:5])
+#' ggplot_denstrip(iris[,5:4], binwidth = .2) + scale_fill_gradient(low = "grey80", high = "black")
+ggplot_denstrip <- function(data,...)
 {
 #	if(ncol(data) != 2)
 #		stop("The number of columns in 'data' != 2.")
@@ -174,7 +275,7 @@ ggbox_denstrip <- function(data,...)
 #	if(!is.numeric(data[,1]))
 #		stop("Column 1 of data is not numeric.  It needs to be numeric.")
 	
-	
+	oNames <- colnames(data)
 	horizontal <- length(unique(data[,1])) < length(unique(data[,2]))
 #print(horizontal)
 	if(horizontal)
@@ -193,7 +294,8 @@ ggbox_denstrip <- function(data,...)
 			position="identity",
 			...
 		) + 
-		labs(x = namesData[1], y = NULL)# + 
+		labs(x = oNames[1]) + scale_y_continuous(oNames[2])
+		# + 
 		#scale_fill_gradient("Density", low = "grey80", high = "black")
 	
 	if(horizontal)
@@ -206,14 +308,33 @@ ggbox_denstrip <- function(data,...)
 
 }
 
-ggmosaic_fluc <- function(data,...)
+#' Plots the Mosaic Plots
+#' Plots the mosaic plot by using fluctuation
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' ggplot_rata(movies[,c("mpaa","Action")])
+#' ggplot_rata(movies[,c("mpaa","Action")]) + coord_equal()
+#' ggplot_rata(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
+ggplot_rata <- function(data)
 {
 	dataNames <- colnames(data)
 	ggfluctuation2(table(data[,2], data[,1])) + labs(x = dataNames[1], y = dataNames[2])
 }
 
 
-ggiden_density <- function(data, ...)
+#' Plots the Density Plots by Using Identity
+#' Plots the density plots by using identity
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' ggplot_densityI(movies[,c("rating","rating")])
+#' ggplot_densityI(movies[,c("rating","rating")], colour = "blue")
+ggplot_densityI <- function(data, ...)
 {
 	namesData <- colnames(data)
 	colnames(data) <- c("X","Y")
@@ -227,33 +348,24 @@ ggiden_density <- function(data, ...)
 				y = ..scaled.. * diff(range(x)) + min(x)
 			),
 			position = "identity", 
-			colour = "black", 
-			geom = "line"
+			geom = "line",
+			...
 		)+
 		ylim(range(data[,1])) +
 		xlab(namesData[1])
 }
 
-
-ggiden_bar <- function(data, ...)
+#' Plots the Bar Plots by Using Identity
+#' Plots the bar plots by using identity
+#'
+#' @param data data set using
+#' @param ...
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' ggplot_bar(movies[,c("mpaa","mpaa")])
+#' ggplot_bar(movies[,c("rating","rating")], binwidth = .1)
+ggplot_bar <- function(data, ...)
 {
-#			colnames(data) <- c("X","Y")
-#			#p <- qplot(data[,1],geom="bar", position = "stack")
-#			p <- ggplot(data, aes(x=X))+labs(x=NULL,y=NULL) +  geom_bar( aes(
-#						y = ..count.. *diff(range(1:2)) #diff(range(x)) + min(x) 
-#					)
-#				)
-
-#			p <- ggplot(data, aes(x=x)) + 
-#				stat_bin()
-#					aes(
-#						y = ..count.. * 1 #diff(range(x)) + min(x)
-#					),
-#					position = "identity", 
-#					colour = "grey20"#, 
-#					geom = "line"
-#				)
-
 	namesData <- colnames(data)
 	colnames(data) <- c("X","Y")
 
@@ -262,17 +374,17 @@ ggiden_bar <- function(data, ...)
 	
 	if(numer)
 	{
-		p <- qplot(X,data = data, geom="bar")	
+		p <- qplot(X,data = data, geom="bar", ...)	
 	}
 	else
 	{
 		dataTmp <- as.factor(data[,1])
-		#print(tmp)
 		count <- c()
 		for(z in 1:length(levels(dataTmp)))
 			count <- c(count,length(dataTmp[dataTmp==levels(dataTmp)[z]]))
 					
-		p <- qplot(levels(dataTmp), count, geom="bar", stat="identity")	+ coord_flip() +  
+		p <- qplot(levels(dataTmp), count, geom="bar", stat="identity", ...) +
+			coord_flip() +  
 			opts(
 				axis.text.y = theme_text(
 					angle = 90, 
@@ -281,11 +393,26 @@ ggiden_bar <- function(data, ...)
 				)
 			)
 	}
-	p + xlab(namesData[1])
+	p <- p + xlab(namesData[1])
+	
+	p
 }
 
 
-ggplot_Text <- function(xP, yP, label,xrange = c(0,1),yrange = c(0,1), ...)
+#' GGplot Text
+#' Plot text for a plot
+#'
+#' @param xP horizontal position percentage
+#' @param yP vertical position percentage
+#' @param label text that you want to appear
+#' @param xrange range of the data around it.  Only nice to have if plotting in a matrix
+#' @param yrange range of the data around it.  Only nice to have if plotting in a matrix
+#' @param ... other arguments for geom_text
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' ggplot_text("Example 1")
+#' ggplot_text("Example\nTwo",size = 15, colour = "red")
+ggplot_text <- function(label, xP = 0.5, yP = 0.5,xrange = c(0,1), yrange = c(0,1), ...)
 {
 
 	p <- ggplot(data = 
@@ -316,10 +443,18 @@ ggplot_Text <- function(xP, yP, label,xrange = c(0,1),yrange = c(0,1), ...)
 }
 
 
-ggplot_Cor <- function(xVar, yVar, ...)
+#' Correlation Text
+#' Correlation text printed for a given data set
+#'
+#' @param xVar x variable
+#' @param yVar y variable
+#' @param ... arguements to be supplied to geom_text
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords internal
+.ggplot_corInternal <- function(xVar, yVar, ...)
 {
 
-	ggplot_Text(
+	ggplot_text(
 		x=0.5,
 		y=.5,
 		paste(
@@ -338,15 +473,22 @@ ggplot_Cor <- function(xVar, yVar, ...)
 }
 
 
-ggiden_fluc <- function(data,...)
-{
-	dataNames <- colnames(data)
-	ggfluctuation2(table(data[,1], data[,1])) + labs(x = dataNames[1], y = dataNames[2])
-}
-
-
-ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, 
-	na.rm = TRUE)) 
+#' Fluctuation plot
+#' Create a fluctuation plot.
+#'
+#' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tabless but extension to more should be relatively straightforward.
+#'
+#' @param table a table of values, or a data frame with three columns, the last column being frequency
+#' @param floor don't display cells smaller than this value
+#' @param ceiling max value to compare to
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' ggfluctuation(table(movies$Action, movies$Comedy))
+#' ggfluctuation(table(movies$Action, movies$mpaa))
+#' ggfluctuation(table(movies$Action, movies$Comedy), type="colour")
+#' ggfluctuation(table(warpbreaks$breaks, warpbreaks$tension))
+ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = TRUE)) 
 {
 	
 
@@ -380,11 +522,11 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq,
 	
 
 	table <- cbind(table, xNew, yNew)
-	print(table)
+	#print(table)
 	#print(xNames)
 	#print(yNames)
 	
-	cat("\nmaxLen");print(maxLen)
+	#cat("\nmaxLen");print(maxLen)
 
 	
 	p <- ggplot(
@@ -438,7 +580,14 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq,
 }
 
 
-gg_blank_plot <- function()
+#' Blank
+#' Drawing nothing
+#' 
+#' Makes a "blank" ggplot object that will only draw white space
+#'
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+ggplot_blank <- function()
 {
 	a <- as.data.frame(cbind(1:2,1:2))
 	colnames(a) <- c("X","Y")

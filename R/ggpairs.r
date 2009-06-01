@@ -14,37 +14,93 @@
 #   blank
 
 # mosaic
-#   fluc
+#   rata
 #   blank
 
 
 #' GGpairs - GGplot2 Matrix
-#' Make a matrix of plot with a given data set
+#' Make a matrix of plots with a given data set
 #' 
-#' @param data
-#' @param colour
-#' @param title
-#' @param upper
-#' @param lower
-#' @param identity
-#' @param ...
+#' @param data data set using.  Can have both numerical and categorical data.
+#' @param colour colour of the points
+#' @param title title for the graph
+#' @param upper see Details
+#' @param lower see Details
+#' @param identity see Details
+#' @param ... other parameters being supplied to geoms, such as binwidth
 #' @keyword hplot
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @examples
+#' ggpairs(iris)
+#' ggpairs(iris[,3:5])
 #' ggpairs(
+#' 	iris[,3:5], 
+#' 	upper = list(scatter = "density", conditional = "box"), 
+#' 	lower = list(scatter = "points", conditional = "dot"), 
+#' 	iden = list(scatter = "bar", conditional = "bar")
+#' )
+#
+#' ggpairs(
+#' 	iris[,3:5],
+#' 	upper = list(scatter = "density", conditional = "facetdensity"),
+#' 	lower = "blank",
+#' 	identity = list(scatter = "bar", conditional = "blank")
+#' )
+#' 	
+#' ggpairs(
+#' 	iris[,3:4],
+#' 	upper = list(scatter = "wrongType", conditional = "wrongType"),
+#' 	lower = list(scatter = "IDK", conditional = "5:1", mosaic = "mosaic"),
+#' 	identity = list(scatter = "points", conditional = "box")
+#' )
+#'
+#' ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank")
+#' plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars))) + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
+#' putPlot(1,2,plot)
+#' putPlot(1,2,plot,axes = FALSE)
+#' putPlot(1,3,ggplot_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"),axes = FALSE)
+#' 
+#' ggpairs(iris[,5:4], upper = list(conditional = "denstrip"))
+#' putPlot(1,1,ggplot_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend!"),axes = FALSE)
+#' getPlot(1,2) -> plot
+#' plot
+#' plotNew <- plot + scale_fill_gradient(low = "grey80", high = "black")
+#' plotNew
+#' ggpairs(iris[,5:4], upper = list(conditional = "denstrip"))
+#' putPlot(1,2,plotNew,axes = FALSE)
+
 ggpairs <- function (
 	data, 
 	colour = "black", 
-	upper = list(scatter = "cor", conditional = "denstrip", mosaic = "fluc"), 
-	lower = list(scatter = "smooth", conditional = "denstrip", mosaic = "fluc"), 
-	identity = list(scatter = "density", conditional = "fluc"),
+	upper = list(scatter = "cor", conditional = "facethist", mosaic = "rata"), 
+	lower = list(scatter = "smooth", conditional = "denstrip", mosaic = "rata"), 
+	identity = list(scatter = "density", conditional = "rata"),
 	title = "",
 	...) 
 {
 	
 	makeTitle <- title != ""
 	
-	
+	if(!is.list(upper) && upper == "blank")
+	{
+		upper <- list()
+		upper$scatter = "blank"
+		upper$conditional = "blank"
+		upper$mosaic = "blank"
+	}
+	if(!is.list(lower) && lower == "blank")
+	{
+		lower <- list()
+		lower$scatter = "blank"
+		lower$conditional = "blank"
+		lower$mosaic = "blank"
+	}
+	if(!is.list(identity) && identity == "blank")
+	{
+		identity <- list()
+		identity$scatter = "blank"
+		identity$conditional = "blank"
+	}
 	upper <- .getTypes(upper)
 	lower <- .getTypes(lower)
 	if (is.null(identity$scatter)) {
@@ -95,7 +151,7 @@ ggpairs <- function (
 	dataTypes <- plot_types(data)
 #cat("\n\n\nDATA TYPES\n");print(dataTypes)
 
-	blank <- ggplot_Text(.5,.5,"Blank\nPlot",size=6)
+	blank <- ggplot_text("Incorrect\nPlot",size=6)
 
 
 	#		
@@ -157,18 +213,18 @@ ggpairs <- function (
 				subType <- lower$scatter
 				
 			if(subType == "points")
-				p <- ggscatter_points(dataSelect, colour = colour, ...)
+				p <- ggplot_points(dataSelect, colour = colour, ...)
 			else if(subType == "smooth")
-				p <- ggscatter_smooth(dataSelect, colour = colour, ...)
+				p <- ggplot_smooth(dataSelect, colour = colour, ...)
 			else if(subType == "density")
-				p <- ggscatter_density(dataSelect)
+				p <- ggplot_density(dataSelect)
 			else if(subType == "cor")
 			{
 			###### Get size
-				p <- ggscatter_cor(dataSelect)
+				p <- ggplot_cor(dataSelect)
 			}
 			else if(subType == "blank")
-				p <- gg_blank_plot()
+				p <- ggplot_blank()
 
 		
 		}
@@ -182,50 +238,54 @@ ggpairs <- function (
 				subType <- lower$conditional
 
 			if(subType == "box")
-				p <- ggbox_reg(dataSelect)
+				p <- ggplot_box(dataSelect)
 			else if(subType == "dot")
-				p <- ggbox_dot(dataSelect)
+				p <- ggplot_dot(dataSelect)
 			else if(subType == "facethist")
-				p <- ggbox_facethist(dataSelect)
+				p <- ggplot_facethist(dataSelect)
 			else if(subType == "facetdensity")
-				p <- ggbox_facetdensity(dataSelect)
+				p <- ggplot_facetdensity(dataSelect)
 			else if(subType == "denstrip")
-				p <- ggbox_denstrip(dataSelect[,2:1],...)
+				p <- ggplot_denstrip(dataSelect[,2:1],...)
 			else if(subType == "blank")
-				p <- gg_blank_plot()
+				p <- ggplot_blank()
 		}
 		else if(type == "mosaic")
 		{
-			subType <- "fluc"
+			subType <- "rata"
 			if(up)
 				subType <- upper$mosaic
 			else
 				subType <- lower$mosaic
 
-			if(subType == "fluc")
-				p <- ggmosaic_fluc(dataSelect)
+			if(subType == "rata")
+				p <- ggplot_rata(dataSelect)
 			else if(subType == "blank")
-				p <- gg_blank_plot()
+				p <- ggplot_blank()
 
 		}
 		else if(type == "stat_bin-num")
 		{
-			if(identity$scatter == "density")
-				p <- ggiden_density(dataSelect)
-			else if(identity$scatter == "bar")
-				p <- ggiden_bar(dataSelect)
-			else if(identity$scatter == "blank")
-				p <- gg_blank_plot()
+			subType <- identity$scatter
+		
+			if(subType == "density")
+				p <- ggplot_densityI(dataSelect)
+			else if(subType == "bar")
+				p <- ggplot_bar(dataSelect)
+			else if(subType == "blank")
+				p <- ggplot_blank()
 
 		}
 		else if(type == "stat_bin-cat")
 		{
-			if(identity$conditional == "bar")
-				p <- ggiden_bar(dataSelect)
-			else if(identity$conditional == "fluc")
-				p <- ggiden_fluc(dataSelect)
-			else if(identity$conditional == "blank")
-				p <- gg_blank_plot()
+			subType <- identity$conditional
+		
+			if(subType == "bar")
+				p <- ggplot_bar(dataSelect)
+			else if(subType == "rata")
+				p <- ggplot_rata(dataSelect)
+			else if(subType == "blank")
+				p <- ggplot_blank()
 		}
 		
 		print(posY)
@@ -274,6 +334,12 @@ putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
 #print(str(.v1))
 #print(str(.v2))
 
+	pos <- columnFromLeft + (.ggpairsnumCol) * (rowFromTop - 1)
+	print(pos)
+	pos <- (pos - 1) * 8 + 1
+
+	.ggpairsPlots[pos:(pos + 7)] <<- p
+
 	pushViewport(.v1) # labels on outside
 	pushViewport(.v2) # layout of plots
 
@@ -289,7 +355,8 @@ putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
 			opts(
 				axis.text.x = theme_blank(), 
 				axis.text.y = theme_blank(), 
-				plot.margin = unit(rep(0,4), "lines")
+				plot.margin = unit(rep(0,4), "lines"),
+				legend.position = "none"
 			)
 	}
 	
@@ -298,6 +365,7 @@ putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
 	
 	popViewport()
 	popViewport()
+	
 	
 	#cat("\n\nDone")
 }
@@ -318,6 +386,9 @@ getPlot <- function(x, y)
 
 .getTypes <- function(section)
 {
+	if(!is.list(section))
+		stop("Either upper or lower is not a list")
+
 	if (is.null(section$scatter)) {
 		section$scatter <- "points"
 	}
@@ -325,7 +396,7 @@ getPlot <- function(x, y)
 		section$conditional <- "box"
 	}
 	if (is.null(section$mosaic)) {
-		section$mosaic <- "fluc"
+		section$mosaic <- "rata"
 	}
 	
 	section
