@@ -17,6 +17,21 @@
 #   fluc
 #   blank
 
+
+#' GGpairs - GGplot2 Matrix
+#' Make a matrix of plot with a given data set
+#' 
+#' @param data
+#' @param colour
+#' @param title
+#' @param upper
+#' @param lower
+#' @param identity
+#' @param ...
+#' @keyword hplot
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
+#' @examples
+#' ggpairs(
 ggpairs <- function (
 	data, 
 	colour = "black", 
@@ -142,9 +157,9 @@ ggpairs <- function (
 				subType <- lower$scatter
 				
 			if(subType == "points")
-				p <- ggscatter_points(dataSelect,...)
+				p <- ggscatter_points(dataSelect, colour = colour, ...)
 			else if(subType == "smooth")
-				p <- ggscatter_smooth(dataSelect,...)
+				p <- ggscatter_smooth(dataSelect, colour = colour, ...)
 			else if(subType == "density")
 				p <- ggscatter_density(dataSelect)
 			else if(subType == "cor")
@@ -199,7 +214,7 @@ ggpairs <- function (
 				p <- ggiden_density(dataSelect)
 			else if(identity$scatter == "bar")
 				p <- ggiden_bar(dataSelect)
-			else if(subType == "blank")
+			else if(identity$scatter == "blank")
 				p <- gg_blank_plot()
 
 		}
@@ -209,7 +224,7 @@ ggpairs <- function (
 				p <- ggiden_bar(dataSelect)
 			else if(identity$conditional == "fluc")
 				p <- ggiden_fluc(dataSelect)
-			else if(subType == "blank")
+			else if(identity$conditional == "blank")
 				p <- gg_blank_plot()
 		}
 		

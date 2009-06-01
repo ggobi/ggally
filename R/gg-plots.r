@@ -208,7 +208,8 @@ ggbox_denstrip <- function(data,...)
 
 ggmosaic_fluc <- function(data,...)
 {
-	ggfluctuation2(table(data[,2], data[,1])) 
+	dataNames <- colnames(data)
+	ggfluctuation2(table(data[,2], data[,1])) + labs(x = dataNames[1], y = dataNames[2])
 }
 
 
@@ -339,7 +340,8 @@ ggplot_Cor <- function(xVar, yVar, ...)
 
 ggiden_fluc <- function(data,...)
 {
-	ggfluctuation2(table(data[,1], data[,1]))
+	dataNames <- colnames(data)
+	ggfluctuation2(table(data[,1], data[,1])) + labs(x = dataNames[1], y = dataNames[2])
 }
 
 
