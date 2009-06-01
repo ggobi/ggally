@@ -13,20 +13,12 @@ plot_types <- function(data)
 }
 
 
-get_select_data <- function(allData, gridPos)
-{
-	if(nrow(gridPos) < 1) return(NULL)
-	
-	print(gridPos)
-	
-	print(allData)
-	
-	dataTmp <- allData[,c(gridPos)]
-	
-	colnames(dataTmp) <- c("x","y")
-	
-
-}
+#get_select_data <- function(allData, gridPos)
+#{
+#	if(nrow(gridPos) < 1) return(NULL)
+#	dataTmp <- allData[,c(gridPos)]	
+#	colnames(dataTmp) <- c("x","y")
+#}
 
 
 find_plot_type <- function(data,col1,col2)

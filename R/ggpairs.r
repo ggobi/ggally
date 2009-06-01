@@ -42,6 +42,7 @@ ggpairs <- function (
 
 	data <- as.data.frame(data)
 	numCol <- ncol(data)
+	.ggpairsnumCol <<- numCol
 
 	grid.newpage()
 	if(makeTitle)
@@ -59,6 +60,8 @@ ggpairs <- function (
 		height=unit(1, "npc") - unit(3, "lines")
 	)
 	.v2 <<- viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) ))
+	.ggpairsPlots <<- NULL
+	
 
 	grid <- expand.grid(x = 1:ncol(data), y = 1:ncol(data))
 
@@ -126,7 +129,7 @@ ggpairs <- function (
 	#	print(up)
 
 		dataSelect <- data[,c(posX,posY)]
-		colnames(dataSelect) <- c("X","Y")
+		#colnames(dataSelect) <- c("X","Y")
 
 #print(head(dataSelect))
 		if(type == "scatterplot")
@@ -210,6 +213,10 @@ ggpairs <- function (
 				p <- gg_blank_plot()
 		}
 		
+		print(posY)
+		print(posX)
+		#print(.ggpairsPlots)
+		.ggpairsPlots <<- c( .ggpairsPlots, p)
 		
 		if(type == "box-hori")
 		{
@@ -235,6 +242,7 @@ ggpairs <- function (
 
 		
 		putPlot(as.numeric(posY),as.numeric(posX),p)
+		
 		
 	}
 	
@@ -279,6 +287,17 @@ putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
 	#cat("\n\nDone")
 }
 
+getPlot <- function(x, y)
+{
+	pos <- y + (.ggpairsnumCol) * (x - 1)
+	print(pos)
+	pos <- (pos - 1) * 8 + 1
+	print(pos)
+	plot <- .ggpairsPlots[pos:(pos + 7)]
+	attributes(plot)$class <- "ggplot"
+	plot
+}
+
 
 
 
@@ -298,40 +317,3 @@ putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
 }
 
 
-ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, 
-	na.rm = TRUE)) 
-{
-	
-
-	xNames <- rownames(table)
-	yNames <- colnames(table)
-
-	if (is.table(table)) 
-		table <- as.data.frame(t(table))
-
-
-	oldnames <- names(table)
-	names(table) <- c("x", "y", "result")
-	table <- add.all.combinations(table, list("x", "y"))
-	table <- transform(table, x = as.factor(x), y = as.factor(y), 
-		freq = result)
-
-	table <- transform(table, freq = sqrt(pmin(freq * .95, ceiling)/ceiling), 
-		border = ifelse(is.na(freq), "grey90", ifelse(freq > 
-			ceiling, "grey30", "grey50")))
-	table[is.na(table$freq), "freq"] <- 1
-	table <- subset(table, freq * ceiling >= floor)
-	
-	xNew <- as.numeric(table$x) + 1/2 * table$freq
-	yNew <- as.numeric(table$y) + 1/2 * table$freq
-	
-	table <- cbind(table, xNew, yNew)
-	print(table)
-	#print(xNames)
-	#print(yNames)
-	p <- ggplot(table, aes_string(x = "xNew", y = "yNew", height = "freq", 
-		width = "freq", fill = "border")) + geom_tile(colour = "white") + 
-		scale_fill_identity() + scale_x_continuous(name=oldnames[1], limits=c(1,length(xNames) + 1), breaks=1:(length(xNames) + 1), labels=c(xNames,""), minor_breaks=FALSE) + scale_y_continuous(name=oldnames[2], limits=c(1,length(yNames) + 1), breaks=1:(length(yNames) + 1), labels=c(yNames,""), minor_breaks=FALSE) + coord_equal()
-	
-	p
-}

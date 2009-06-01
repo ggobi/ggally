@@ -145,7 +145,6 @@ ggbox_facetdensity <- function(data, ...)
 	else
 	{
 		p <- ggplot(data, aes(x = Y)) + 
-			scale_x_continuous() + 
 			scale_y_continuous() + 
 			stat_density(
 				aes(
@@ -156,10 +155,10 @@ ggbox_facetdensity <- function(data, ...)
 				colour = "black", 
 				geom = "line"
 			)+
+			scale_x_continuous()+
 			ylim(range(data[,2])) +
 			facet_grid(. ~ X) + 
 			coord_flip()
-			# + opts(strip.text.y = theme_blank()) 
 
 	}
 	p
@@ -209,13 +208,7 @@ ggbox_denstrip <- function(data,...)
 
 ggmosaic_fluc <- function(data,...)
 {
-	ggfluctuation2(table(data[,2], data[,1])) +  
-		opts(
-			axis.text.y = theme_text(
-				angle = 90, 
-				vjust = 0, 
-				colour = "grey50")
-		)
+	ggfluctuation2(table(data[,2], data[,1])) 
 }
 
 
@@ -346,13 +339,7 @@ ggplot_Cor <- function(xVar, yVar, ...)
 
 ggiden_fluc <- function(data,...)
 {
-	ggfluctuation2(table(data[,1], data[,1])) +  
-		opts(
-			axis.text.y = theme_text(
-				angle = 90, 
-				vjust = 0, 
-				colour = "grey50")
-		)
+	ggfluctuation2(table(data[,1], data[,1]))
 }
 
 
@@ -361,14 +348,18 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq,
 {
 	
 
-	xNames <- rownames(table)
-	yNames <- colnames(table)
+	yNames <- rownames(table)
+	xNames <- colnames(table)
+	oldnames <- names(table)
 
 	if (is.table(table)) 
+	{
 		table <- as.data.frame(t(table))
+		
+		oldnames <- c("X","Y")		
+		
+	}
 
-
-	oldnames <- names(table)
 	names(table) <- c("x", "y", "result")
 	table <- add.all.combinations(table, list("x", "y"))
 	table <- transform(table, x = as.factor(x), y = as.factor(y), 
@@ -383,10 +374,17 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq,
 	xNew <- as.numeric(table$x) + 1/2 * table$freq
 	yNew <- as.numeric(table$y) + 1/2 * table$freq
 	
+	maxLen <- max(diff(range(as.numeric(table$x))), diff(range(as.numeric(table$y))) )
+	
+
 	table <- cbind(table, xNew, yNew)
 	print(table)
 	#print(xNames)
 	#print(yNames)
+	
+	cat("\nmaxLen");print(maxLen)
+
+	
 	p <- ggplot(
 			table, 
 			aes_string(
@@ -401,6 +399,9 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq,
 		scale_fill_identity() + 
 		scale_x_continuous(
 			name=oldnames[1], 
+#			limits=c(1,maxLen + 2), 
+#			breaks=1:(maxLen + 2), 
+#			labels=c(xNames,rep("",maxLen - length(xNames) + 2)), 
 			limits=c(1,length(xNames) + 1), 
 			breaks=1:(length(xNames) + 1), 
 			labels=c(xNames,""), 
@@ -408,21 +409,25 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq,
 		) + 
 		scale_y_continuous(
 			name=oldnames[2], 
+#			limits=c(1,maxLen + 2), 
+#			breaks=1:(maxLen + 2), 
+#			labels=c(yNames,rep("",maxLen - length(yNames) + 2)), 
 			limits=c(1,length(yNames) + 1), 
 			breaks=1:(length(yNames) + 1), 
 			labels=c(yNames,""), 
 			minor_breaks=FALSE
 		) + 
-		coord_equal() + 
+#		coord_equal() + 
 		opts(
 			axis.text.x = theme_text(
-				hjust = 1, 
+				hjust = 0, 
 				vjust = 1,
 				colour = "grey50"
 			),
 			axis.text.y = theme_text(
 				angle = 90, 
 				vjust = 0, 
+				hjust = 0,
 				colour = "grey50"
 			)
 		)
