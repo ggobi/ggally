@@ -73,8 +73,8 @@ ggpairs <- function (
 	data, 
 	colour = "black", 
 	upper = list(scatter = "cor", conditional = "facethist", mosaic = "rata"), 
-	lower = list(scatter = "smooth", conditional = "denstrip", mosaic = "rata"), 
-	identity = list(scatter = "density", conditional = "rata"),
+	lower = list(scatter = "points", conditional = "box", mosaic = "rata"), 
+	identity = list(scatter = "density", conditional = "bar"),
 	title = "",
 	...) 
 {
@@ -101,8 +101,33 @@ ggpairs <- function (
 		identity$scatter = "blank"
 		identity$conditional = "blank"
 	}
-	upper <- .getTypes(upper)
-	lower <- .getTypes(lower)
+
+	if(!is.list(upper))
+		stop("upper is not a list")
+
+	if (is.null(upper$scatter)) {
+		upper$scatter <- "cor"
+	}
+	if (is.null(upper$conditional)) {
+		upper$conditional <- "facethist"
+	}
+	if (is.null(upper$mosaic)) {
+		upper$mosaic <- "rata"
+	}
+
+	if(!is.list(lower))
+		stop("lower is not a list")
+
+	if (is.null(lower$scatter)) {
+		lower$scatter <- "cor"
+	}
+	if (is.null(lower$conditional)) {
+		lower$conditional <- "facethist"
+	}
+	if (is.null(lower$mosaic)) {
+		lower$mosaic <- "rata"
+	}
+
 	if (is.null(identity$scatter)) {
 		identity$scatter <- "density"
 	}
@@ -282,8 +307,8 @@ ggpairs <- function (
 		
 			if(subType == "bar")
 				p <- ggplot_bar(dataSelect)
-			else if(subType == "rata")
-				p <- ggplot_rata(dataSelect)
+			#else if(subType == "rata")
+			#	p <- ggplot_rata(dataSelect)
 			else if(subType == "blank")
 				p <- ggplot_blank()
 		}
