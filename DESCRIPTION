@@ -1,0 +1,23 @@
+Package: ggplot2Ext1
+Type: Package
+Title: Extension to ggplot2.  Adds
+    more plot types
+Version: 0.1
+Date: 2009-06-03
+Author: Barret Schloerke
+    <bigbear@iastate.edu>, Haesung
+    Kim <hae0510@iastate.edu>, Di
+    Cook <dicook@iastate.edu> and
+    Heike Hofmann
+    <hofmann@iastate.edu>
+Maintainer: Di Cook
+    <dicook@iastate.edu>
+Description: Package contains
+    templates for different plots.
+    It can also allow for easier
+    plot matrix changes
+Depends: ggplot2
+License: GPL >= 2.0
+LazyLoad: yes
+Collate: 'find-combo.r'
+    'gg-plots.r' 'ggpairs.r'

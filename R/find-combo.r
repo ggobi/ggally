@@ -1,4 +1,10 @@
-plot_types <- function(data)
+#' Plot Types
+#' Retrieves the type of plot that should be used for all combinations
+#' 
+#' @param data data set to be used
+#' @keywords internal
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+.plot_types <- function(data)
 {
 	namesD <- names(data)
 	dataInfo <- NULL
@@ -6,22 +12,22 @@ plot_types <- function(data)
 	#horizontal then vertical
 	for(j in 1:ncol(data))
 		for(i in 1:ncol(data))
-			dataInfo <- rbind(dataInfo, c(find_plot_type(data,i,j),namesD[i],namesD[j],i,j))
+			dataInfo <- rbind(dataInfo, c(.find_plot_type(data,i,j),namesD[i],namesD[j],i,j))
 	dataInfo <- as.data.frame(dataInfo)
 	colnames(dataInfo) <- c("Type", "xvar", "yvar","posx","posy")
 	dataInfo
 }
 
 
-#get_select_data <- function(allData, gridPos)
-#{
-#	if(nrow(gridPos) < 1) return(NULL)
-#	dataTmp <- allData[,c(gridPos)]	
-#	colnames(dataTmp) <- c("x","y")
-#}
-
-
-find_plot_type <- function(data,col1,col2)
+#' Find Plot Types
+#' Retrieves the type of plot for the specific columns
+#' 
+#' @param data data set to be used
+#' @param col1 x column
+#' @param col2 y column
+#' @keywords internal
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+.find_plot_type <- function(data,col1,col2)
 {
 
 	y1Type <- "numeric"
@@ -40,10 +46,17 @@ find_plot_type <- function(data,col1,col2)
 			return("stat_bin-cat")
 	}
 	
-	return(get_plot_type(y1Type,y2Type))
+	return(.get_plot_type(y1Type,y2Type))
 }
 
-get_plot_type <- function(y1_type,y2_type)
+#' Get Plot Type
+#' Retrieves the type of plot for specific info
+#' 
+#' @param y1_type x type.  Either numeric or category
+#' @param y2_type y type.  Either numeric or category
+#' @keywords internal
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+.get_plot_type <- function(y1_type,y2_type)
 {
 	cats <- c(y1_type, y2_type) %in% "category"
 	if(TRUE %in% cats)
@@ -59,7 +72,3 @@ get_plot_type <- function(y1_type,y2_type)
 		return("scatterplot")
 	}	
 }
-
-
-
-

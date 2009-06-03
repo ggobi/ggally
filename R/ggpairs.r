@@ -28,7 +28,7 @@
 #' @param lower see Details
 #' @param identity see Details
 #' @param ... other parameters being supplied to geoms, such as binwidth
-#' @keyword hplot
+#' @keywords hplot
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @examples
 #' ggpairs(iris)
@@ -173,7 +173,7 @@ ggpairs <- function (
 
 #cat("\n\n\nALL\n");print(all)
 
-	dataTypes <- plot_types(data)
+	dataTypes <- .plot_types(data)
 #cat("\n\n\nDATA TYPES\n");print(dataTypes)
 
 	blank <- ggplot_text("Incorrect\nPlot",size=6)
@@ -348,16 +348,31 @@ ggpairs <- function (
 	
 }
 
+
+#' Viewport Layout Wrapper
+#' A wrapper function to set the viewport
+#' 
+#' @param x x position
+#' @param y y position
+#' @keywords internal
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
 .vplayout <- function(x, y) 
 	viewport(layout.pos.row = x, layout.pos.col = y) 
 
 
-
+#' Put Plot
+#' Function to place your own plot in the layout
+#' 
+#' @param rowFromTop row from the top
+#' @param columnFromLeft column from the left
+#' @param p ggplot object to be placed
+#' @param axes Boolean to tell wether or not to print the x and y labels, axis text, and legends
+#' @keywords hplot
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @examples
+#' example(ggpairs)
 putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
 {
-##	print(.vps$first)
-#print(str(.v1))
-#print(str(.v2))
 
 	pos <- columnFromLeft + (.ggpairsnumCol) * (rowFromTop - 1)
 	print(pos)
@@ -395,6 +410,15 @@ putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
 	#cat("\n\nDone")
 }
 
+#' getPlot
+#' Retrieves the ggplot object at the desired location
+#' 
+#' @param x row from the top
+#' @param y column from the left
+#' @keywords hplot
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @examples
+#' example(ggpairs)
 getPlot <- function(x, y)
 {
 	pos <- y + (.ggpairsnumCol) * (x - 1)
@@ -404,27 +428,6 @@ getPlot <- function(x, y)
 	plot <- .ggpairsPlots[pos:(pos + 7)]
 	attributes(plot)$class <- "ggplot"
 	plot
-}
-
-
-
-
-.getTypes <- function(section)
-{
-	if(!is.list(section))
-		stop("Either upper or lower is not a list")
-
-	if (is.null(section$scatter)) {
-		section$scatter <- "points"
-	}
-	if (is.null(section$conditional)) {
-		section$conditional <- "box"
-	}
-	if (is.null(section$mosaic)) {
-		section$mosaic <- "rata"
-	}
-	
-	section
 }
 
 
