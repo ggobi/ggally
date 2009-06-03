@@ -3,11 +3,11 @@
 #'
 #' @param data data set using
 #' @param ... other arguments to add to geom_point
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_points(mtcars[,3:4])
-#' ggplot_points(mtcars[,3:4],colour = as.factor(mtcars[,"cyl"]), size = mtcars[,"qsec"] - 16)
+#' ggplot_points(mtcars[,3:4],colour = as.factor(mtcars[,"cyl"]), size = 1:nrow(mtcars)/nrow(mtcars) * 6)
 ggplot_points <- function(data, ...)
 {
 	
@@ -22,7 +22,7 @@ ggplot_points <- function(data, ...)
 #'
 #' @param data data set using
 #' @param ... other arguments to add to geom_point
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_smooth(iris[, 1:2])
@@ -42,11 +42,13 @@ ggplot_smooth <- function(data, ...)
 #' Make a scatter density plot from a given data
 #'
 #' @param data data set using
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param filled Boolean asking if the contours should be filled.
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_density(iris[,c(1,3)])
 #' ggplot_density(iris[,c(1,3)], filled = TRUE)
+#' ggplot_density(iris[,3:4],TRUE) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
 ggplot_density <- function(data, filled = FALSE)
 {
 	oNames <- colnames(data)
@@ -67,7 +69,8 @@ ggplot_density <- function(data, filled = FALSE)
 #' @param data data set using
 #' @param size setting size
 #' @param colour setting color
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param ... other arguments being supplied to geom_text
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_cor(iris[,c(1,3)])
@@ -83,7 +86,7 @@ ggplot_cor <- function(data,size = 8,colour = "black", ...)
 #'
 #' @param data data set using
 #' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_box(iris[,4:5])
@@ -118,7 +121,7 @@ ggplot_box <- function(data, ...)
 #'
 #' @param data data set using
 #' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_dot(iris[,4:5])
@@ -155,7 +158,7 @@ ggplot_dot <- function(data, ...)
 #'
 #' @param data data set using
 #' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_facethist(iris[,4:5])
@@ -202,7 +205,7 @@ ggplot_facethist <- function(data, ...)
 #'
 #' @param data data set using
 #' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_facetdensity(iris[,4:5])
@@ -261,7 +264,7 @@ ggplot_facetdensity <- function(data, ...)
 #'
 #' @param data data set using
 #' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggplot_denstrip(iris[,4:5])
@@ -312,9 +315,9 @@ ggplot_denstrip <- function(data,...)
 #' Plots the mosaic plot by using fluctuation
 #'
 #' @param data data set using
-#' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
+#' @examples
 #' ggplot_rata(movies[,c("mpaa","Action")])
 #' ggplot_rata(movies[,c("mpaa","Action")]) + coord_equal()
 #' ggplot_rata(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
@@ -330,8 +333,9 @@ ggplot_rata <- function(data)
 #'
 #' @param data data set using
 #' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
+#' @examples
 #' ggplot_densityI(movies[,c("rating","rating")])
 #' ggplot_densityI(movies[,c("rating","rating")], colour = "blue")
 ggplot_densityI <- function(data, ...)
@@ -360,8 +364,9 @@ ggplot_densityI <- function(data, ...)
 #'
 #' @param data data set using
 #' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
+#' @examples
 #' ggplot_bar(movies[,c("mpaa","mpaa")])
 #' ggplot_bar(movies[,c("rating","rating")], binwidth = .1)
 ggplot_bar <- function(data, ...)
@@ -408,8 +413,9 @@ ggplot_bar <- function(data, ...)
 #' @param xrange range of the data around it.  Only nice to have if plotting in a matrix
 #' @param yrange range of the data around it.  Only nice to have if plotting in a matrix
 #' @param ... other arguments for geom_text
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
+#' @examples
 #' ggplot_text("Example 1")
 #' ggplot_text("Example\nTwo",size = 15, colour = "red")
 ggplot_text <- function(label, xP = 0.5, yP = 0.5,xrange = c(0,1), yrange = c(0,1), ...)
@@ -449,7 +455,7 @@ ggplot_text <- function(label, xP = 0.5, yP = 0.5,xrange = c(0,1), yrange = c(0,
 #' @param xVar x variable
 #' @param yVar y variable
 #' @param ... arguements to be supplied to geom_text
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords internal
 .ggplot_corInternal <- function(xVar, yVar, ...)
 {
@@ -481,7 +487,7 @@ ggplot_text <- function(label, xP = 0.5, yP = 0.5,xrange = c(0,1), yrange = c(0,
 #' @param table a table of values, or a data frame with three columns, the last column being frequency
 #' @param floor don't display cells smaller than this value
 #' @param ceiling max value to compare to
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggfluctuation(table(movies$Action, movies$Comedy))
@@ -585,7 +591,7 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = 
 #' 
 #' Makes a "blank" ggplot object that will only draw white space
 #'
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 ggplot_blank <- function()
 {
