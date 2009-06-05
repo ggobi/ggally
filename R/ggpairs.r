@@ -316,7 +316,8 @@ ggpairs <- function (
 		print(posY)
 		print(posX)
 		#print(.ggpairsPlots)
-		.ggpairsPlots <<- c( .ggpairsPlots, p)
+		plot <- p
+		.ggpairsPlots <<- c( .ggpairsPlots, plot)
 		
 		if(type == "box-hori")
 		{

@@ -1,14 +1,41 @@
-box plot
-	dot plot √
-	faceted histogram √
-	faceted density √
+Changes to be made
 
-scatter plot
-	smooth function √ ???Smoother on top of points???
-	correlation text √
-	density plot - contour plot √ ??? include points???
+1.  change "iden" to "diag"
 
-identity
-	density √
-	barchart √
+2.  Make it work with ggplot2's aes function
+	i.e.  if we do 
+		ggpairs(iris, colour = Species)
+	it should split all the colors where possible - density, scatter, dot, ...
 	
+3.  Make it so that 
+
+
+
+4.  Change the collection of "plots" into a 'local' list instead of a 'global' list
+	Have ggpairs return the list but make the class of the list so that it when returned, it prints all the plots at the end of the function.
+	
+	then putPlot would be more like putPlot(ggpairsObj, x, y, newPlot)
+	and changes would be made to other functions as well
+	
+	The list would contain the viewports .v1 and.v2 and the number of columns so that no globals are used
+
+ggpairs(...
+{
+	...
+	
+	for(...
+	{
+		...
+		plotList <- c(plotList, plot)
+		
+		"remove axes and legend"
+		
+		plottedList <- c(plottedList, plot)
+	}
+	
+	
+	superList <- list(columns = numCol, viewports = c(v1,v2), plots = plotList)
+	
+	superList
+}
+
