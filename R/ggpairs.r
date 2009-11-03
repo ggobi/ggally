@@ -18,7 +18,7 @@
 #   blank
 
 
-#' GGpairs - GGplot2 Matrix
+#' ggpairs - A GGplot2 Matrix
 #' Make a matrix of plots with a given data set
 #' 
 #' @param data data set using.  Can have both numerical and categorical data.
@@ -26,10 +26,11 @@
 #' @param title title for the graph
 #' @param upper see Details
 #' @param lower see Details
-#' @param identity see Details
+#' @param diag see Details
 #' @param ... other parameters being supplied to geoms, such as binwidth
 #' @keywords hplot
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}
+#' @returns ggpair object that if called, will reprint
 #' @examples
 #' ggpairs(iris)
 #' ggpairs(iris[,3:5])
@@ -37,49 +38,103 @@
 #' 	iris[,3:5], 
 #' 	upper = list(scatter = "density", conditional = "box"), 
 #' 	lower = list(scatter = "points", conditional = "dot"), 
-#' 	iden = list(scatter = "bar", conditional = "bar")
+#' 	diag = list(scatter = "bar", conditional = "bar")
 #' )
 #
+#'
 #' ggpairs(
 #' 	iris[,3:5],
 #' 	upper = list(scatter = "density", conditional = "facetdensity"),
 #' 	lower = "blank",
-#' 	identity = list(scatter = "bar", conditional = "blank")
+#' 	diag = list(scatter = "bar", conditional = "blank")
 #' )
-#' 	
+#'
+#'
+#' diamondMatrix <- ggpairs(	
+#'  diamonds[,1:3], 	
+#'  upper = list(scatter = "density", conditional = "box"), 	
+#'  lower = list(scatter = "points", conditional = "dot"), 	
+#'  diag = list(scatter = "bar", conditional = "bar"), 
+#'  color = "cut", 
+#'  filled = TRUE,
+#'  title = "Diamonds"
+#' )
+#' diamondMatrix
+#' 
+#'
+#' #will plot four "Incorrect Plots"	
 #' ggpairs(
 #' 	iris[,3:4],
 #' 	upper = list(scatter = "wrongType", conditional = "wrongType"),
 #' 	lower = list(scatter = "IDK", conditional = "5:1", mosaic = "mosaic"),
-#' 	identity = list(scatter = "points", conditional = "box")
+#' 	diag = list(scatter = "points", conditional = "box")
 #' )
 #'
-#' ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank")
-#' plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars))) + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
-#' putPlot(1,2,plot)
-#' putPlot(1,2,plot,axes = FALSE)
-#' putPlot(1,3,ggplot_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"),axes = FALSE)
+#'
+#' #Custom Examples
+#' plotMatrix <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
+#' # ggplot example taken from example(geom_text)
+#'   plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars)))
+#'   plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
+#' plotMatrix <- putPlot(plotMatrix, plot, 1, 2)
+#' plotMatrix <- putPlot(plotMatrix, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
+#' plotMatrix
 #' 
-#' ggpairs(iris[,5:4], upper = list(conditional = "denstrip"))
-#' putPlot(1,1,ggplot_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend!"),axes = FALSE)
-#' getPlot(1,2) -> plot
+#'
+#' # 
+#' plotMatrix2 <- ggpairs(iris[,5:4], upper = list(conditional = "denstrip"))
+#' plotMatrix2 <- putPlot(plotMatrix2, ggally_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend\nand axis labels!"), 1, 1)
+#' getPlot(plotMatrix2, 1, 2) -> plot
 #' plot
 #' plotNew <- plot + scale_fill_gradient(low = "grey80", high = "black")
 #' plotNew
-#' ggpairs(iris[,5:4], upper = list(conditional = "denstrip"))
-#' putPlot(1,2,plotNew,axes = FALSE)
-
+#' plotMatrix2 <- putPlot(plotMatrix2, plotNew, 1, 2)
+#' plotMatrix2
+#'
+#'
+#' plotWithBigLabels <- getPlot(diamondMatrix, 2, 1) 
+#' plotWithBigLabels <- plotWithBigLabels + 
+#'  opts(axis.text.y = 
+#'    theme_text(
+#'      angle = 90, 
+#'      vjust = 0, 
+#'      colour = "grey50",
+#'      size = 4
+#'    )
+#'  )
+#' diamondMatrix <- putPlot(
+#'   diamondMatrix,
+#'   plotWithBigLabels,
+#'   2,
+#'   1
+#' )
+#' plotWithBigLabels2 <- getPlot(diamondMatrix, 3, 2) 
+#' plotWithBigLabels2 <- plotWithBigLabels2 + 
+#'  opts(axis.text.x = 
+#'    theme_text(
+#'      vjust = 1, 
+#'      hjust = 0, 
+#'      colour = "grey50",
+#'      size = 4
+#'    )
+#'  )
+#' diamondMatrix <- putPlot(
+#'   diamondMatrix,
+#'   plotWithBigLabels2,
+#'   3,
+#'   2
+#' )
+#' diamondMatrix
 ggpairs <- function (
 	data, 
 	colour = "black", 
 	upper = list(scatter = "cor", conditional = "facethist", mosaic = "rata"), 
 	lower = list(scatter = "points", conditional = "box", mosaic = "rata"), 
-	identity = list(scatter = "density", conditional = "bar"),
+	diag = list(scatter = "density", conditional = "bar"),
 	title = "",
 	...) 
 {
 	
-	makeTitle <- title != ""
 	
 	if(!is.list(upper) && upper == "blank")
 	{
@@ -95,11 +150,11 @@ ggpairs <- function (
 		lower$conditional = "blank"
 		lower$mosaic = "blank"
 	}
-	if(!is.list(identity) && identity == "blank")
+	if(!is.list(diag) && diag == "blank")
 	{
-		identity <- list()
-		identity$scatter = "blank"
-		identity$conditional = "blank"
+		diag <- list()
+		diag$scatter = "blank"
+		diag$conditional = "blank"
 	}
 
 	if(!is.list(upper))
@@ -128,35 +183,25 @@ ggpairs <- function (
 		lower$mosaic <- "rata"
 	}
 
-	if (is.null(identity$scatter)) {
-		identity$scatter <- "density"
+	if (is.null(diag$scatter)) {
+		diag$scatter <- "density"
 	}
-	if (is.null(identity$conditional)) {
-		identity$conditional <- "bar"
+	if (is.null(diag$conditional)) {
+		diag$conditional <- "bar"
 	}
 
 
 	data <- as.data.frame(data)
 	numCol <- ncol(data)
-	.ggpairsnumCol <<- numCol
+	ggpairsnumCol <- numCol
 
-	grid.newpage()
-	if(makeTitle)
-	{
-		pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
-		grid.text(title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=20, fonttpye = "bold"))
-		popViewport()
-	}
 	
 
-	.v1 <<- viewport(
-#		x = unit(0.5, "npc") + unit(1,"lines"), 
-#		y = unit(0.5, "npc") + unit(1,"lines"), 
-		width=unit(1, "npc") - unit(3,"lines"), 
-		height=unit(1, "npc") - unit(3, "lines")
-	)
-	.v2 <<- viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) ))
-	.ggpairsPlots <<- NULL
+	ggpairsPlots <- NULL
+	subTypeList <- NULL
+	typeList <- NULL
+	posXList <- NULL
+	posYList <- NULL
 	
 
 	grid <- expand.grid(x = 1:ncol(data), y = 1:ncol(data))
@@ -176,8 +221,243 @@ ggpairs <- function (
 	dataTypes <- .plot_types(data)
 #cat("\n\n\nDATA TYPES\n");print(dataTypes)
 
-	blank <- ggplot_text("Incorrect\nPlot",size=6)
 
+	blank <- ggally_text("Incorrect\nPlot",size=6)
+	
+	
+	for(i in 1:nrow(dataTypes))
+	{
+		p <- blank
+		type <- dataTypes[i,"Type"]
+
+		posX <- as.numeric(dataTypes[i,"posx"])
+		posY <- as.numeric(dataTypes[i,"posy"])
+		xColName <- as.character(dataTypes[i,"xvar"])
+		yColName <- as.character(dataTypes[i,"yvar"])
+		
+
+		up <- posX > posY
+		
+	#	print(up)
+
+#print(head(dataSelect))
+		if(type == "scatterplot")
+		{
+			#cat("\nScatterplot")
+			subType <- "points"
+			if(up)
+				subType <- upper$scatter
+			else
+				subType <- lower$scatter
+				
+			if(subType == "points")
+				p <- ggally_points(data, x = xColName, y = yColName, ...)
+			else if(subType == "smooth")
+				p <- ggally_smooth(data, x = xColName, y = yColName, ...)
+			else if(subType == "density")
+			 {
+			  filledP <- aes_string(...)$filled
+			  if(is.null(filledP))
+			     filledP <- FALSE
+			     
+			  if(filledP)
+  				p <- ggally_density(data, x = xColName, y = yColName, ... , filled = TRUE)
+  				else
+  				  				p <- ggally_density(data, x = xColName, y = yColName, ... , filled = FALSE)
+
+			 }
+			else if(subType == "cor")
+			{
+			###### Get size
+				p <- ggally_cor(data, x = xColName, y = yColName, ...)
+			}
+			else if(subType == "blank")
+				p <- ggally_blank()
+
+		
+		}
+		else if(type == "box-hori" || type == "box-vert")
+		{
+			#cat("\nbox-hori")
+			subType <- "box"
+			if(up)
+				subType <- upper$conditional
+			else
+				subType <- lower$conditional
+
+			if(subType == "box")
+				p <- ggally_box(data, x = xColName, y = yColName, ...)
+			else if(subType == "dot")
+				p <- ggally_dot(data, x = xColName, y = yColName, ...)
+			else if(subType == "facethist")
+				p <- ggally_facethist(data, x = xColName, y = yColName, ...)
+			else if(subType == "facetdensity")
+				p <- ggally_facetdensity(data, x = xColName, y = yColName, ...)
+			else if(subType == "denstrip")
+				p <- ggally_denstrip(data, x = xColName, y = yColName, ...)
+			else if(subType == "blank")
+				p <- ggally_blank()
+		}
+		else if(type == "mosaic")
+		{
+			subType <- "rata"
+			if(up)
+				subType <- upper$mosaic
+			else
+				subType <- lower$mosaic
+
+			if(subType == "rata")
+				p <- ggally_rata(data[, c(xColName, yColName)])
+			else if(subType == "blank")
+				p <- ggally_blank()
+
+		}
+		else if(type == "stat_bin-num")
+		{
+			subType <- diag$scatter
+		
+			if(subType == "density")
+				p <- ggally_densityDiag(data, x = xColName, ...)
+			else if(subType == "bar")
+				p <- ggally_barDiag(data, x = xColName, ...)
+			else if(subType == "blank")
+				p <- ggally_blank()
+
+		}
+		else if(type == "stat_bin-cat")
+		{
+			subType <- diag$conditional
+		
+			if(subType == "bar")
+				p <- ggally_barDiag(data, x = xColName,...)
+			#else if(subType == "rata")
+			#	p <- ggally_rata(dataSelect)
+			else if(subType == "blank")
+				p <- ggally_blank()
+		}
+		
+#		print(posY)
+#		print(posX)
+		ggpairsPlots <- c( ggpairsPlots, p)
+		subTypeList <- c(subTypeList, as.character(subType))
+		typeList <- c(typeList, as.character(type))
+		posYList <- c(posYList, posY)
+		posXList <- c(posXList, posX)		
+		
+	}
+	
+	plotMatrix <- list(data = data, plots = ggpairsPlots, subType = subTypeList, type = typeList, positionY = posYList, positionX = posXList, title = title)
+	
+	attributes(plotMatrix)$class <- "ggpairs"
+	
+	plotMatrix
+	
+}
+
+
+#' Viewport Layout Wrapper
+#' A wrapper function to set the viewport
+#' 
+#' @param x row position
+#' @param y coloumn position
+#' @keywords internal
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+.vplayout <- function(x, y) 
+	viewport(layout.pos.row = x, layout.pos.col = y) 
+
+
+#' Put Plot
+#' Function to place your own plot in the layout
+#' 
+#' @param plotMatrix ggally object to be altered
+#' @param plotObj ggplot object to be placed
+#' @param rowFromTop row from the top
+#' @param columnFromLeft column from the left
+#' @keywords hplot
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @examples
+#' example(ggpairs)
+putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft)
+{
+
+	pos <- columnFromLeft + (ncol(plotMatrix$data)) * (rowFromTop - 1)
+#print(pos)
+	pos <- (pos - 1) * 8 + 1
+
+	plotMatrix$plots[pos:(pos + 7)] <- plotObj
+	
+	plotMatrix
+	#cat("\n\nDone")
+}
+
+#' getPlot
+#' Retrieves the ggplot object at the desired location
+#' 
+#' @param plotMatrix ggpair object to select from
+#' @param rowFromTop row from the top
+#' @param columnFromLeft column from the left
+#' @keywords hplot
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @examples
+#' example(ggpairs)
+getPlot <- function(plotMatrix, rowFromTop, columnFromLeft)
+{
+  
+	pos <- columnFromLeft + (ncol(plotMatrix$data)) * (rowFromTop - 1)
+	cat("Plot #",pos,"\n")
+	pos <- (pos - 1) * 8 + 1
+#	cat("Plot List Spot: ",pos,"\n")
+	plot <- plotMatrix$plots[pos:(pos + 7)]
+	attributes(plot)$class <- "ggplot"
+	plot
+}
+
+
+
+#######################################################
+#######################################################
+#######################################################
+#######################################################
+
+
+#' Print ggpair object
+#' Specialized method to print the ggapir object
+#'
+#' @param x ggpair object to be plotted
+#' @param ... not used
+#' @method print ggpairs
+#' @keywords hplot
+#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @examples
+#' example(ggpair)
+print.ggpairs <- function(x, ...)
+{
+  plotObj <- x
+  grid.newpage()
+  v1 <- viewport(
+#		x = unit(0.5, "npc") + unit(1,"lines"), 
+#		y = unit(0.5, "npc") + unit(1,"lines"), 
+		width=unit(1, "npc") - unit(3,"lines"), 
+		height=unit(1, "npc") - unit(3, "lines")
+	)
+	numCol <- ncol(plotObj$data)
+#cat("ncol(data): ", numCol,"\n")
+	v2 <- viewport(
+	     layout = grid.layout(
+	             numCol, 
+	             numCol, 
+	             widths = rep(1,numCol), 
+	             heights = rep(1,numCol) 
+	   ))
+
+	grid.newpage()
+	
+	if(plotObj$title != "")
+	{
+		pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
+		grid.text(plotObj$title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=20, fonttpye = "bold"))
+		popViewport()
+	}
 
 	#		
 	## viewport for Left Names
@@ -188,7 +468,7 @@ ggpairs <- function (
 	# Left Side
 	for(i in 1:numCol)
 	{
-		grid.text(names(data)[i],0,0.5,rot=90,just=c("centre","centre"), vp = .vplayout(as.numeric(i),1))
+		grid.text(names(plotObj$data)[i],0,0.5,rot=90,just=c("centre","centre"), vp = .vplayout(as.numeric(i),1))
 	}
 
 
@@ -205,230 +485,71 @@ ggpairs <- function (
 	# Bottom Side
 	for(i in 1:numCol)
 	{
-		grid.text(names(data)[i],0.5,0,just=c("centre","centre"), vp = .vplayout(numCol, i))
+		grid.text(names(plotObj$data)[i],0.5,0,just=c("centre","centre"), vp = .vplayout(numCol, i))
 	}
 
 	popViewport() #layout
 	popViewport() #spacing
-	
 
-	for(i in 1:nrow(dataTypes))
-	{
-		p <- blank
-		type <- dataTypes[i,"Type"]
+##############################################################  
+####################  End Viewports  #########################
+##############################################################  
 
-		posX <- as.numeric(dataTypes[i,"posx"])
-		posY <- as.numeric(dataTypes[i,"posy"])
+#####################  Plot Objects  #########################
 
-		up <- posX > posY
-		
-	#	print(up)
+	pushViewport(v1) # labels on outside
+	pushViewport(v2) # layout of plots
+  
+    for(rowPos in 1:numCol)
+    {
+      for(columnPos in 1:numCol)
+      {      
+        p <- getPlot(plotObj, rowPos, columnPos)
+        
+      	pos <- columnPos + (rowPos - 1) * numCol
 
-		dataSelect <- data[,c(posX,posY)]
-		#colnames(dataSelect) <- c("X","Y")
+    
+        if(plotObj$type[pos] == "box-hori")
+    		{
+    			if( columnPos != 1)
+    				p <- p + opts(axis.text.y = theme_blank() )
+    			if( rowPos != numCol)
+    				p <- p + opts(axis.text.x = theme_blank() )
+    		}
+    		else
+    		{
+    			if( columnPos != 1)
+    				p <- p + opts(axis.text.y = theme_blank() )
+    			if( rowPos != numCol)
+    				p <- p + opts(axis.text.x = theme_blank() )
+    		}
+    		
+    		if(plotObj$type[pos] == "stat_bin-num")
+    		{
+    		  #cat("stat_bin-num - Plot = ", pos,"\n")
+    		  p <- p + scale_y_continuous("")
+    		}
+    		
+    		
+    		p <- p + 
+    			labs(x = NULL, y = NULL) + 
+    			opts(
+    				plot.margin = unit(rep(0,4), "lines"),
+    				legend.position = "none"
+    			)
+    
+    		
+   			grid.rect(
+   			  gp=gpar(fill="white",lty = "blank"),
+   			  vp = .vplayout(rowPos, columnPos)
+    	  )
+      	print(p, vp = .vplayout(rowPos, columnPos))
+      }
+    }
+	popViewport() #layout
+	popViewport() #spacing
 
-#print(head(dataSelect))
-		if(type == "scatterplot")
-		{
-			#cat("\nScatterplot")
-			subType <- "points"
-			if(up)
-				subType <- upper$scatter
-			else
-				subType <- lower$scatter
-				
-			if(subType == "points")
-				p <- ggplot_points(dataSelect, colour = colour, ...)
-			else if(subType == "smooth")
-				p <- ggplot_smooth(dataSelect, colour = colour, ...)
-			else if(subType == "density")
-				p <- ggplot_density(dataSelect)
-			else if(subType == "cor")
-			{
-			###### Get size
-				p <- ggplot_cor(dataSelect)
-			}
-			else if(subType == "blank")
-				p <- ggplot_blank()
-
-		
-		}
-		else if(type == "box-hori" || type == "box-vert")
-		{
-			#cat("\nbox-hori")
-			subType <- "box"
-			if(up)
-				subType <- upper$conditional
-			else
-				subType <- lower$conditional
-
-			if(subType == "box")
-				p <- ggplot_box(dataSelect)
-			else if(subType == "dot")
-				p <- ggplot_dot(dataSelect)
-			else if(subType == "facethist")
-				p <- ggplot_facethist(dataSelect)
-			else if(subType == "facetdensity")
-				p <- ggplot_facetdensity(dataSelect)
-			else if(subType == "denstrip")
-				p <- ggplot_denstrip(dataSelect[,2:1],...)
-			else if(subType == "blank")
-				p <- ggplot_blank()
-		}
-		else if(type == "mosaic")
-		{
-			subType <- "rata"
-			if(up)
-				subType <- upper$mosaic
-			else
-				subType <- lower$mosaic
-
-			if(subType == "rata")
-				p <- ggplot_rata(dataSelect)
-			else if(subType == "blank")
-				p <- ggplot_blank()
-
-		}
-		else if(type == "stat_bin-num")
-		{
-			subType <- identity$scatter
-		
-			if(subType == "density")
-				p <- ggplot_densityI(dataSelect)
-			else if(subType == "bar")
-				p <- ggplot_bar(dataSelect)
-			else if(subType == "blank")
-				p <- ggplot_blank()
-
-		}
-		else if(type == "stat_bin-cat")
-		{
-			subType <- identity$conditional
-		
-			if(subType == "bar")
-				p <- ggplot_bar(dataSelect)
-			#else if(subType == "rata")
-			#	p <- ggplot_rata(dataSelect)
-			else if(subType == "blank")
-				p <- ggplot_blank()
-		}
-		
-		print(posY)
-		print(posX)
-		#print(.ggpairsPlots)
-		plot <- p
-		.ggpairsPlots <<- c( .ggpairsPlots, plot)
-		
-		if(type == "box-hori")
-		{
-			if( posX != 1)
-				p <- p + opts(axis.text.y = theme_blank() )
-			if( posY != numCol)
-				p <- p + opts(axis.text.x = theme_blank() )
-		}
-		else
-		{
-			if( posX != 1)
-				p <- p + opts(axis.text.y = theme_blank() )
-			if( posY != numCol)
-				p <- p + opts(axis.text.x = theme_blank() )
-		}
-		
-		p <- p + 
-			labs(x = NULL, y = NULL) + 
-			opts(
-				plot.margin = unit(rep(0,4), "lines"),
-				legend.position = "none"
-			)
-
-		
-		putPlot(as.numeric(posY),as.numeric(posX),p)
-		
-		
-	}
-	
-}
-
-
-#' Viewport Layout Wrapper
-#' A wrapper function to set the viewport
-#' 
-#' @param x x position
-#' @param y y position
-#' @keywords internal
-#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
-.vplayout <- function(x, y) 
-	viewport(layout.pos.row = x, layout.pos.col = y) 
-
-
-#' Put Plot
-#' Function to place your own plot in the layout
-#' 
-#' @param rowFromTop row from the top
-#' @param columnFromLeft column from the left
-#' @param p ggplot object to be placed
-#' @param axes Boolean to tell wether or not to print the x and y labels, axis text, and legends
-#' @keywords hplot
-#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
-#' @examples
-#' example(ggpairs)
-putPlot <- function(rowFromTop, columnFromLeft, p, axes = TRUE)
-{
-
-	pos <- columnFromLeft + (.ggpairsnumCol) * (rowFromTop - 1)
-	print(pos)
-	pos <- (pos - 1) * 8 + 1
-
-	.ggpairsPlots[pos:(pos + 7)] <<- p
-
-	pushViewport(.v1) # labels on outside
-	pushViewport(.v2) # layout of plots
-
-	grid.rect(
-		gp=gpar(fill="white",lty = "blank"),
-		vp = .vplayout(rowFromTop, columnFromLeft)
-	)
-	
-	if(!axes)
-	{
-		p <- p +
-			labs(x=NULL,y=NULL) +
-			opts(
-				axis.text.x = theme_blank(), 
-				axis.text.y = theme_blank(), 
-				plot.margin = unit(rep(0,4), "lines"),
-				legend.position = "none"
-			)
-	}
-	
-	
-	print(p, vp = .vplayout(rowFromTop, columnFromLeft))
-	
-	popViewport()
-	popViewport()
-	
-	
-	#cat("\n\nDone")
-}
-
-#' getPlot
-#' Retrieves the ggplot object at the desired location
-#' 
-#' @param x row from the top
-#' @param y column from the left
-#' @keywords hplot
-#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
-#' @examples
-#' example(ggpairs)
-getPlot <- function(x, y)
-{
-	pos <- y + (.ggpairsnumCol) * (x - 1)
-	print(pos)
-	pos <- (pos - 1) * 8 + 1
-	print(pos)
-	plot <- .ggpairsPlots[pos:(pos + 7)]
-	attributes(plot)$class <- "ggplot"
-	plot
+  
 }
 
 

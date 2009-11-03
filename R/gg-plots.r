@@ -1,65 +1,68 @@
+
+
 #' Plots the Scatter Plot
 #' Make a scatter plot with a given data set
 #'
 #' @param data data set using
-#' @param ... other arguments to add to geom_point
+#' @param ... other arguments to add to geom_point by aes_string(...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_points(mtcars[,3:4])
-#' ggplot_points(mtcars[,3:4],colour = as.factor(mtcars[,"cyl"]), size = 1:nrow(mtcars)/nrow(mtcars) * 6)
-ggplot_points <- function(data, ...)
+#' ggally_points(mtcars, x = "disp", y = "hp")
+#' ggally_points(mtcars, x = "disp", y = "hp", colour = "as.factor(cyl)", size = "gear")
+ggally_points <- function(data, ...)
 {
-	
-	oNames <- colnames(data)
-	colnames(data) <- c("X","Y")
-
-	ggplot(data = data, aes(x = X, y = Y)) + geom_point(...) + labs( x = oNames[1], y = oNames[2])
+	ggplot(data = data, aes_string(...)) + geom_point()
 }
 
 #' Plots the Scatter Plot with Smoothing
 #' Add a smoothed condition mean with a given scatter plot
 #'
 #' @param data data set using
-#' @param ... other arguments to add to geom_point
+#' @param ... other arguments to add to geom_point by aes_string(...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_smooth(iris[, 1:2])
-#' ggplot_smooth(iris[, c(1, 3)], colour = as.factor(iris[, "Species"]))
-ggplot_smooth <- function(data, ...)
+#' ggally_smooth(iris, x = "Sepal.Length", y = "Sepal.Width")
+#' ggally_smooth(iris, x = "Sepal.Length", y = "Petal.Length", colour = "Species")
+ggally_smooth <- function(data, ...)
 {
-	oNames <- colnames(data)
-	colnames(data) <- c("X","Y")
-
-	ggplot(data = data, aes(x = X, y = Y)) +
+	ggplot(data = data, aes_string(...)) +
 		geom_smooth(method="lm", colour = I("black")) +
-		geom_point(...) +
-		labs( x = oNames[1], y = oNames[2])
+		geom_point() 
 }
 
 #' Plots the Scatter Density Plot
 #' Make a scatter density plot from a given data
 #'
 #' @param data data set using
-#' @param filled Boolean asking if the contours should be filled.
+#' @param ... parameters sent to aes_string(...).  Will effect either stat_density2d or geom_density2d
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_density(iris[,c(1,3)])
-#' ggplot_density(iris[,c(1,3)], filled = TRUE)
-#' ggplot_density(iris[,3:4],TRUE) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
-ggplot_density <- function(data, filled = FALSE)
+#' ggally_density(iris, x = "Sepal.Length", y = "Petal.Length")
+#' ggally_density(iris, x = "Sepal.Length", y = "Petal.Length", filled = "TRUE")
+#' ggally_density(iris, x = "Petal.Length", y = "Petal.Width",filled = "TRUE") + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
+ggally_density <- function(data, ...)
 {
-	oNames <- colnames(data)
-	colnames(data) <- c("X","Y")
-
+  
+  aesString <- aes_string(...)
+  filled <- as.logical(aesString$filled)
+  print(filled)
+  if(length(filled) < 1)
+    filled <- FALSE
+  aesString$filled <- NULL
+  
+  print(filled)
+  print(str(aesString))
+  
+  
+  p <- ggplot(data = data, aesString)
 	if(filled)
-		p <- ggplot(data = data, aes(x = X, y = Y)) + stat_density2d(aes(fill = ..level..), geom="polygon")
+		p <- p + stat_density2d(aes(fill = ..level..), geom="polygon")
 	else
-		p <- qplot(data = data, X, Y, geom = "density2d", colour = I("black"))
+	  p <- p + geom_density2d( colour = I("black"))
 	
-	p <- p + labs(x = oNames[1], y = oNames[2])	
 	p
 }
 
@@ -67,17 +70,36 @@ ggplot_density <- function(data, filled = FALSE)
 #' estimate correlation from the given data
 #'
 #' @param data data set using
-#' @param size setting size
-#' @param colour setting color
-#' @param ... other arguments being supplied to geom_text
+#' @param ... other arguments being supplied to geom_text by aes_string(...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_cor(iris[,c(1,3)])
-#' ggplot_cor(iris[,c(1,3)], size = 15, colour = "red")
-ggplot_cor <- function(data,size = 8,colour = "black", ...)
+#' ggally_cor(iris, x = "Sepal.Length", y = "Petal.Length")
+#' ggally_cor(iris, x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red")
+ggally_cor <- function(data, ...)
 {
-	.ggplot_corInternal(data[,1], data[,2], size = size, colour = colour, ...)
+
+  aesString <- aes_string(...)
+
+  xVar <- data[,as.character(aesString$x)]
+  yVar <- data[,as.character(aesString$y)]
+
+	ggally_text(
+		label = paste(
+			"Corr:\n",
+			signif(
+				cor(xVar,yVar),
+				3
+			),
+			sep="",collapse=""
+		),
+		xP=0.5,
+		yP=0.5,
+		xrange = range(xVar),
+		yrange = range(yVar),
+		...
+	) +  theme_bw() + opts(legend.position = "none")
+
 }
 		
 
@@ -85,56 +107,86 @@ ggplot_cor <- function(data,size = 8,colour = "black", ...)
 #' Make a box plot with a given data set
 #'
 #' @param data data set using
-#' @param ...
+#' @param ... other arguments being supplied to geom_boxplot by aes_string(...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_box(iris[,4:5])
-#' ggplot_box(iris[,5:4], outlier.colour = "red", outlier.shape = 13, outlier.size = 8)
-ggplot_box <- function(data, ...)
+#' ggally_box(iris, x = "Petal.Width", y = "Species")
+#' ggally_box(iris, y = "Petal.Width", x = "Species", colour = "Species", outlier.colour = "red", outlier.shape = 13, outlier.size = 18)
+ggally_box <- function(data, ...)
 {
-
-	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
-	#print(horizontal)
-	if(horizontal)
-	{
-		p <- qplot(data[,2], data[,1], geom="boxplot",...) + 
-			coord_flip() +  
-			opts(
-				axis.text.y = theme_text(
-					angle = 90, 
-					vjust = 0, 
-					colour = "grey50"
-				)
-			) + 
-			labs(x = colnames(data)[2], y = colnames(data)[1])
-	}
-	else
-	{
-		p <- qplot(data[,1], data[,2], geom="boxplot",...) + labs(x = colnames(data)[1], y = colnames(data)[2])
-	}
-	p 
+  ggally_dotAndBox(data, ..., boxPlot = TRUE)
 }
+
 
 #' Plots the Box Plot with Dot
 #' Add jittering with the box plot
 #'
 #' @param data data set using
-#' @param ...
+#' @param ... other arguments being supplied to geom_jitter by aes_string(...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_dot(iris[,4:5])
-#' ggplot_dot(iris[,5:4],colour = as.factor(iris[,"Species"]))
-ggplot_dot <- function(data, ...)
+#' ggally_dot(iris, x = "Petal.Width", y = "Species")
+#' ggally_dot(iris, x = "Species", y = "Petal.Width", colour = "Species")
+#ggally_dot(iris, x = "Species", y = "Petal.Width", colour = "Species", shape = "Species") + scale_shape(solid=FALSE)
+ggally_dot <- function(data, ...)
 {
-	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
-	oNames <- colnames(data)
-	colnames(data) <- c("X","Y")
+  ggally_dotAndBox(data, ..., boxPlot = FALSE)
+}
+
+
+#' Plots either Box Plot or Dot Plots
+#' Place box plots or dot plots on the graph
+#' @param data data set using
+#' @param ... parameters passed to aes_string(...)
+#' @param boxPlot boolean to decide to plot either box plots (TRUE) or dot plots (FALSE)
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' example(ggally_box)
+#' example(ggally_dot)
+ggally_dotAndBox <- function(data, ..., boxPlot = TRUE)
+{
+	aesString <- aes_string(...)
+  horizontal <-  is.factor(data[,as.character(aesString$y)])
+  
+  if(horizontal)
+  {
+    aesString$tmp <- aesString$x
+    aesString$x <- aesString$y
+    aesString$y <- aesString$tmp
+    aesString$tmp <- NULL
+  } 
+#print(str(aesString))
+
+  p <- ggplot(data = data, aesString)
+  
+
+  outlierColor <- as.character(aesString$outlier.colour)
+  outlierShape <- as.numeric(aesString$outlier.shape)
+  outlierSize <- as.numeric(aesString$outlier.size)
+  
+  if(is.null(aesString$outlier.colour))
+    outlierColor <- "black"
+  if(is.null(aesString$outlier.shape))
+    outlierShape <- 16
+  if(is.null(aesString$outlier.size))
+    outlierSize <- 2
+  
+
+  if(boxPlot)
+    p <- p + geom_boxplot(
+      outlier.colour = outlierColor, 
+      outlier.shape = outlierShape, 
+      outlier.size = outlierSize
+    )
+  else
+    p <- p + geom_jitter()
+
 	if(horizontal)
 	{
-		p <- ggplot(data = data, aes(x = X, y = Y)) + geom_jitter(...) + 
-			opts(
+		p <- p + coord_flip() + opts(
 				axis.text.y = theme_text(
 					angle = 90, 
 					vjust = 0, 
@@ -142,13 +194,6 @@ ggplot_dot <- function(data, ...)
 				)
 			)
 	}
-	else
-	{
-		p <- ggplot(data = data, aes(x = X, y = Y)) + geom_jitter(...)
-	}
-	
-	p <- p + labs(x = oNames[1], y = oNames[2])
-	
 	p
 }
 
@@ -157,238 +202,277 @@ ggplot_dot <- function(data, ...)
 #' Make histograms by displaying subsets of the data in different panels
 #'
 #' @param data data set using
-#' @param ...
+#' @param ... parameters sent to aes_string(...).  It will effect stat_bin()
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_facethist(iris[,4:5])
-#' ggplot_facethist(iris[,5:4], binwidth = .1)
-ggplot_facethist <- function(data, ...)
+#' ggally_facethist(iris, x = "Petal.Width", y = "Species")
+#' ggally_facethist(iris, x = "Species", y = "Petal.Width", binwidth = "0.1")
+ggally_facethist <- function(data, ...)
 {
-	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
+	aesString <- aes_string(...)
+  horizontal <-  is.factor(data[,as.character(aesString$y)])
 
-	oNames <- colnames(data)
-	colnames(data) <- c("X","Y")
-
-	if(horizontal)
+	if(!horizontal)
 	{
-		data[,2] <- factor( data[,2], levels=levels(data[,2])[length(levels(data[,2])):1] )
-				
-		p <- qplot(
-			X,
-			data = data,
-			stat = "bin",
-			facets = Y  ~ .,
-			...
-		) + labs(x = oNames[1]) + scale_y_continuous(oNames[2])
+	   aesString$tmp <- aesString$x
+	   aesString$x <- aesString$y
+	   aesString$y <- aesString$tmp
 	}
 	else
-	{	
-		p <- qplot(
-				Y, 
-				data = data, 
-				stat = "bin", 
-				facets = .  ~ X,
-				...
-			) + coord_flip() + labs(x = oNames[2]) + scale_y_continuous(oNames[1])
-									
-			# + opts(strip.text.y = theme_blank()) 
+	{
+	   levels(data[,as.character(aesString$y)]) <- levels(data[,as.character(aesString$y)])[length(levels(data[,as.character(aesString$y)])):1]
 
 	}
+#cat("Horizontal: ", horizontal, "\n")	
+#print(str(aesString))
+#print(head(data))
 	
-	p
+	
+	
+  xVal <- aesString$x
+	yVal <- aesString$y
+  aesString$y <- NULL
+#str(aesString)
+#str(xVal)
+#str(yVal)
+
+		p <- ggplot(data = data, aesString)
+		aesString$x <- NULL
+		p <- p + stat_bin(
+		      binwidth = aesString$binwidth, 
+		      origin = aesString$origin, 
+		      breaks = aesString$breaks, 
+		      width = aesString$width, 
+		      drop = aesString$drop
+		    ) 
+
+		if(horizontal)
+		{
+  		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+		}
+		else
+		{
+  		p <- p + coord_flip() 
+  		p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
+		}		
+		p <- p + scale_y_continuous(as.character(yVal)) + scale_x_continuous(as.character(xVal))
+		p
 }
 
 
-#' Plots the density plots by Faceting
+#' Plots the density plots by faceting
 #' Make density plots by displaying subsets of the data in different panels
 #'
 #' @param data data set using
-#' @param ...
+#' @param ... other arguments being sent to stat_density's by aes_string(...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_facetdensity(iris[,4:5])
-#' ggplot_facetdensity(iris[,5:4], colour = "blue")
-ggplot_facetdensity <- function(data, ...)
+#' ggally_facetdensity(iris, x = "Petal.Width", y = "Species")
+#' ggally_facetdensity(iris, x = "Species", y = "Petal.Width", colour = "Species")
+ggally_facetdensity <- function(data, ...)
 {
-	horizontal <- length(unique(data[,1])) > length(unique(data[,2]))
-
-	oNames <- colnames(data)
-	colnames(data) <- c("X", "Y")
-
-	if(horizontal)
-	{
-		data[,2] <- factor(data[,2], levels=levels(data[,2])[length(levels(data[,2])):1])
-
-		p <- ggplot(data, aes(x = X)) + 
-			scale_x_continuous() + 
-			scale_y_continuous() + 
-			stat_density(
-				aes(
-					x = X, 
-					y = ..scaled.. * diff(range(x)) + min(x)
-				),
-				position = "identity", 
-				geom = "line",
-				...
-			)+
-			ylim(range(data[,1])) + 
-			facet_grid(Y ~ .) + labs(x = oNames[1]) + scale_y_continuous(oNames[2])
-	}
-	else
-	{
-		p <- ggplot(data, aes(x = Y)) + 
-			scale_y_continuous() + 
-			stat_density(
-				aes(
-					x = Y, 
-					y = ..scaled.. * diff(range(x)) + min(x)
-				),
-				position = "identity",  
-				geom = "line",
-				...
-			)+
-			scale_x_continuous()+
-			ylim(range(data[,2])) +
-			facet_grid(. ~ X) + 
-			coord_flip() + labs(x = oNames[1]) + scale_y_continuous(oNames[2])
-
-	}
-	p
+  ggally_facetdensitystrip(data, ..., den_strip = FALSE)
 }
 
 
-#' Plots the Tile Plot
+#' Plots a tile plot with facets
 #' Make Tile Plot as densely as possible
 #'
 #' @param data data set using
-#' @param ...
+#' @param ... other arguments being sent to stat_bin's by aes_string(...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_denstrip(iris[,4:5])
-#' ggplot_denstrip(iris[,5:4], binwidth = .2) + scale_fill_gradient(low = "grey80", high = "black")
-ggplot_denstrip <- function(data,...)
+#' ggally_denstrip(iris, x = "Petal.Width", y = "Species")
+#' ggally_denstrip(iris, x = "Species", y = "Petal.Width", binwidth = "0.2") + scale_fill_gradient(low = "grey80", high = "black")
+ggally_denstrip <- function(data,...)
 {
-#	if(ncol(data) != 2)
-#		stop("The number of columns in 'data' != 2.")
-#	if(is.numeric(data[,2]))
-#		stop("Column 2 of data is numeric.  It needs to be factors.")
-#	if(!is.numeric(data[,1]))
-#		stop("Column 1 of data is not numeric.  It needs to be numeric.")
-	
-	oNames <- colnames(data)
-	horizontal <- length(unique(data[,1])) < length(unique(data[,2]))
-#print(horizontal)
-	if(horizontal)
-	{
-		data[,1] <- factor(data[,1], levels = levels(data[,1])[length(levels(data[,1])):1])
-		data <- data[,2:1]
-	}
-		
-	namesData <- colnames(data)
-	colnames(data) <- c("X","Y")
-
-	p <- ggplot(data = data, aes( y = 1, x=X)) + 
-		stat_bin(
-			aes(fill=..density..), 
-			geom="tile",  
-			position="identity",
-			...
-		) + 
-		labs(x = oNames[1]) + scale_y_continuous(oNames[2])
-		# + 
-		#scale_fill_gradient("Density", low = "grey80", high = "black")
-	
-	if(horizontal)
-		p <- p +facet_grid(Y ~ .) + opts(axis.text.y = theme_blank()) 
-
-	else
-		p <- p +facet_grid(. ~ Y) + coord_flip() + opts(axis.text.x = theme_blank()) 
-
-	p
-
+  ggally_facetdensitystrip(data, ..., den_strip = TRUE)
 }
 
-#' Plots the Mosaic Plots
+
+
+#' Plots a density plot with facets or a tile plot with facets
+#' Make Tile Plot as densely as possible
+#'
+#' @param data data set using
+#' @param ... other arguments being sent to stat_bin's by aes_string(...)
+#' @param den_strip boolean to deceide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @keywords hplot
+#' @examples
+#' example(ggally_facetdensity)
+#' example(ggally_denstrip)
+ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
+{
+	aesString <- aes_string(...)
+  horizontal <-  is.factor(data[,as.character(aesString$y)])
+  if(!horizontal)
+  {
+    aesString$tmp <- aesString$x
+    aesString$x <- aesString$y
+    aesString$y <- aesString$tmp
+    aesString$tmp <- NULL
+
+  } 
+  else
+  {
+    levels(data[,as.character(aesString$y)]) <- levels(data[,as.character(aesString$y)])[length(levels(data[,as.character(aesString$y)])):1]
+  }
+
+  xVal <- aesString$x
+	yVal <- aesString$y
+  aesString$y <- NULL
+
+		p <- ggplot(data = data, aesString) + 
+		    scale_y_continuous(as.character(yVal)) + 
+		    scale_x_continuous(as.character(xVal))
+		    
+		if(den_strip)
+		{
+  		p <- p +    
+    		stat_bin(
+    		  aes(
+      		  y = 1,
+    		    fill = ..density..
+    		  ), 
+    		  position = "identity", 
+    		  geom = "tile",
+		      binwidth = aesString$binwidth, 
+		      origin = aesString$origin, 
+		      breaks = aesString$breaks, 
+		      width = aesString$width, 
+		      drop = aesString$drop
+
+    		)	
+    		print("Density Strip")	  
+		}
+		else
+		{
+  		p <- p +   
+    		stat_density(
+    		  aes(
+    		    y = ..scaled.. * diff(range(x)) + min(x)
+    		  ), 
+    		  position = "identity", 
+    		  geom = "line"
+    		)
+		}
+    		
+		
+		if(horizontal)
+		{
+#print("horizontal")
+		  p + facet_grid(Species ~ .)
+  		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+  		if(den_strip)
+  		  p <- p + opts(axis.text.y = theme_blank())
+		}
+		else
+		{
+  		p <- p + coord_flip()
+  		p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
+  		if(den_strip)
+        p <- p + opts(axis.text.x = theme_blank())
+
+		}		
+		p
+}
+
+
+#' Plots a mosaic plots
 #' Plots the mosaic plot by using fluctuation
 #'
 #' @param data data set using
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_rata(movies[,c("mpaa","Action")])
-#' ggplot_rata(movies[,c("mpaa","Action")]) + coord_equal()
-#' ggplot_rata(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
-ggplot_rata <- function(data)
+#' ggally_rata(movies[,c("mpaa","Action")])
+#' ggally_rata(movies[,c("mpaa","Action")]) + coord_equal()
+#' ggally_rata(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
+ggally_rata <- function(data)
 {
 	dataNames <- colnames(data)
 	ggfluctuation2(table(data[,2], data[,1])) + labs(x = dataNames[1], y = dataNames[2])
 }
 
 
-#' Plots the Density Plots by Using Identity
-#' Plots the density plots by using identity
+#' Plots the Density Plots by Using Diagonal
+#' Plots the density plots by using Diagonal
 #'
 #' @param data data set using
 #' @param ...
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_densityI(movies[,c("rating","rating")])
-#' ggplot_densityI(movies[,c("rating","rating")], colour = "blue")
-ggplot_densityI <- function(data, ...)
+#' ggally_densityDiag(iris,x = "Petal.Width")
+#' ggally_densityDiag(movies, x="rating")
+#' ggally_densityDiag(movies, x="rating", colour = "mpaa")
+ggally_densityDiag <- function(data, ...)
 {
-	namesData <- colnames(data)
-	colnames(data) <- c("X","Y")
+	aesString <- aes_string(...)
+#str(aesString)
 
-	ggplot(data, aes(x = X)) + 
+	ggplot(data, aesString) + 
 		scale_x_continuous() + 
 		scale_y_continuous() + 
 		stat_density(
 			aes(
-				x = X, 
 				y = ..scaled.. * diff(range(x)) + min(x)
 			),
 			position = "identity", 
-			geom = "line",
-			...
-		)+
-		ylim(range(data[,1])) +
-		xlab(namesData[1])
+			geom = "line"
+		)
 }
 
-#' Plots the Bar Plots by Using Identity
-#' Plots the bar plots by using identity
+#' Plots the Bar Plots by Using Diagonal
+#' Plots the bar plots by using Diagonal
 #'
 #' @param data data set using
 #' @param ...
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_bar(movies[,c("mpaa","mpaa")])
-#' ggplot_bar(movies[,c("rating","rating")], binwidth = .1)
-ggplot_bar <- function(data, ...)
+#' ggally_barDiag(movies, x = "mpaa")
+#' ggally_barDiag(movies, x ="rating", binwidth = ".1")
+ggally_barDiag <- function(data, ...)
 {
-	namesData <- colnames(data)
-	colnames(data) <- c("X","Y")
+	aesString <- aes_string(...)
+	aesString$y <- NULL
 
-
-	numer <- is.null(attributes(data[,1])$class)
+	numer <- is.null(attributes(data[,as.character(aesString$x)])$class)
 	
 	if(numer)
 	{
-		p <- qplot(X,data = data, geom="bar", ...)	
-	}
+    p <- ggplot(data = data, aesString) + geom_bar(binwidth = aesString$binwidth)
+ 	}
 	else
 	{
-		dataTmp <- as.factor(data[,1])
-		count <- c()
+	 ## create a temporary data set that computes the count manually
+		dataTmp <- as.factor(data[,as.character(aesString$x)])
+		levels(dataTmp) <- levels(dataTmp)[length(levels(dataTmp)):1]
+
+
+		count <- rep(0, length(levels(dataTmp)))
+
 		for(z in 1:length(levels(dataTmp)))
-			count <- c(count,length(dataTmp[dataTmp==levels(dataTmp)[z]]))
-					
-		p <- qplot(levels(dataTmp), count, geom="bar", stat="identity", ...) +
+			count[z] <- length(dataTmp[dataTmp==levels(dataTmp)[z]])
+		
+		dataTmp <- cbind(levels(dataTmp), count)
+		dataTmp <- as.data.frame(dataTmp)
+		
+		colnames(dataTmp) <- c(as.character(aesString$x), "Count")
+		
+		## Makes sure the count is numeric instead of factor
+		dataTmp$Count <- as.numeric(as.character(dataTmp$Count))
+		
+#print(head(dataTmp))
+#str(dataTmp)
+		
+		p <- ggplot(data = dataTmp, aesString) + 
+		  geom_bar(aes(y = Count), stat="identity") +
 			coord_flip() +  
 			opts(
 				axis.text.y = theme_text(
@@ -397,11 +481,10 @@ ggplot_bar <- function(data, ...)
 					colour = "grey50"
 				)
 			)
-	}
-	p <- p + xlab(namesData[1])
-	
+	}	
 	p
 }
+
 
 
 #' GGplot Text
@@ -416,11 +499,27 @@ ggplot_bar <- function(data, ...)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggplot_text("Example 1")
-#' ggplot_text("Example\nTwo",size = 15, colour = "red")
-ggplot_text <- function(label, xP = 0.5, yP = 0.5,xrange = c(0,1), yrange = c(0,1), ...)
+#' ggally_text("Example 1")
+#' ggally_text("Example\nTwo",size = 15, colour = "red")
+ggally_text <- function(
+                  label, 
+                  xP = 0.5, 
+                  yP = 0.5,
+                  xrange = c(0,1), 
+                  yrange = c(0,1),
+#                  colour = "black",
+                  ...
+                )
 {
 
+  aesString <- aes_string(...)
+  aesString$x <- aesString$y <- aesString$xmin <- aesString$xax <- aesString$ymin <- aesString$ymax <- NULL
+
+  colour <- as.character(aesString$colour)
+  if(is.null(aesString$colour))
+    colour <- "black" 
+  aesString$colour <- NULL
+  
 	p <- ggplot(data = 
 			data.frame(
 				x0 = xP * diff(xrange) + min(xrange),
@@ -442,47 +541,22 @@ ggplot_text <- function(label, xP = 0.5, yP = 0.5,xrange = c(0,1), yrange = c(0,
 		geom_rect(fill= I("white")) + 
 		labs(x = NULL, y = NULL)
 	
-	p <- p + geom_text( label = label, ...)
+	p <- p + 
+	   geom_text( label = label, aesString, colour = colour) + 
+	   opts(legend.position = "none")
 	
 	p
 
 }
 
 
-#' Correlation Text
-#' Correlation text printed for a given data set
-#'
-#' @param xVar x variable
-#' @param yVar y variable
-#' @param ... arguements to be supplied to geom_text
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
-#' @keywords internal
-.ggplot_corInternal <- function(xVar, yVar, ...)
-{
-
-	ggplot_text(
-		x=0.5,
-		y=.5,
-		paste(
-			"Corr:\n",
-			signif(
-				cor(xVar,yVar),
-				3
-			),
-			sep="",collapse=""
-		),
-		xrange = range(xVar),
-		yrange = range(yVar),
-		...
-	) +  theme_bw()
-
-}
 
 
 #' Fluctuation plot
 #' Create a fluctuation plot.
 #'
-#' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tabless but extension to more should be relatively straightforward.
+#' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.
+#' The function was adopted from experiemntal functions within GGplot2
 #'
 #' @param table a table of values, or a data frame with three columns, the last column being frequency
 #' @param floor don't display cells smaller than this value
@@ -490,13 +564,11 @@ ggplot_text <- function(label, xP = 0.5, yP = 0.5,xrange = c(0,1), yrange = c(0,
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggfluctuation(table(movies$Action, movies$Comedy))
-#' ggfluctuation(table(movies$Action, movies$mpaa))
-#' ggfluctuation(table(movies$Action, movies$Comedy), type="colour")
-#' ggfluctuation(table(warpbreaks$breaks, warpbreaks$tension))
+#' ggfluctuation2(table(movies$Action, movies$Comedy))
+#' ggfluctuation2(table(movies$Action, movies$mpaa))
+#' ggfluctuation2(table(warpbreaks$breaks, warpbreaks$tension))
 ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = TRUE)) 
 {
-	
 
 	yNames <- rownames(table)
 	xNames <- colnames(table)
@@ -575,9 +647,9 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = 
 				colour = "grey50"
 			),
 			axis.text.y = theme_text(
-				angle = 90, 
-				vjust = 0, 
-				hjust = 0,
+				hjust = 0, 
+				vjust = 0,
+				angle = 90,
 				colour = "grey50"
 			)
 		)
@@ -593,7 +665,7 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = 
 #'
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
-ggplot_blank <- function()
+ggally_blank <- function()
 {
 	a <- as.data.frame(cbind(1:2,1:2))
 	colnames(a) <- c("X","Y")
@@ -620,4 +692,3 @@ ggplot_blank <- function()
 		strip.text.y = theme_blank()
 	)
 }
-
