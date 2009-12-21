@@ -67,8 +67,6 @@
 			return("box-vert")
 		return("box-hori")
 	}
-	else
-	{
-		return("scatterplot")
-	}	
+
+	return("scatterplot")
 }

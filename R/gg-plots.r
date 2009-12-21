@@ -1,5 +1,3 @@
-
-
 #' Plots the Scatter Plot
 #' Make a scatter plot with a given data set
 #'
@@ -48,16 +46,17 @@ ggally_density <- function(data, ...)
   
   aesString <- aes_string(...)
   filled <- as.logical(aesString$filled)
-  print(filled)
+  
   if(length(filled) < 1)
     filled <- FALSE
+  
   aesString$filled <- NULL
   
-  print(filled)
-  print(str(aesString))
-  
+  #print(filled)
+  #print(str(aesString))
   
   p <- ggplot(data = data, aesString)
+	
 	if(filled)
 		p <- p + stat_density2d(aes(fill = ..level..), geom="polygon")
 	else
@@ -98,7 +97,9 @@ ggally_cor <- function(data, ...)
 		xrange = range(xVar),
 		yrange = range(yVar),
 		...
-	) +  theme_bw() + opts(legend.position = "none")
+	) +  
+	theme_bw() + 
+	opts(legend.position = "none")
 
 }
 		
@@ -221,9 +222,11 @@ ggally_facethist <- function(data, ...)
 	}
 	else
 	{
+	   # horizontal
+	   # re-order levels to match all other plots
 	   levels(data[,as.character(aesString$y)]) <- levels(data[,as.character(aesString$y)])[length(levels(data[,as.character(aesString$y)])):1]
-
 	}
+
 #cat("Horizontal: ", horizontal, "\n")	
 #print(str(aesString))
 #print(head(data))
@@ -319,6 +322,8 @@ ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
   } 
   else
   {
+    # horizontal
+    # re-order levels to match all other plots
     levels(data[,as.character(aesString$y)]) <- levels(data[,as.character(aesString$y)])[length(levels(data[,as.character(aesString$y)])):1]
   }
 
@@ -326,59 +331,59 @@ ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
 	yVal <- aesString$y
   aesString$y <- NULL
 
-		p <- ggplot(data = data, aesString) + 
-		    scale_y_continuous(as.character(yVal)) + 
-		    scale_x_continuous(as.character(xVal))
+	p <- ggplot(data = data, aesString) + 
+    scale_y_continuous(as.character(yVal)) + 
+    scale_x_continuous(as.character(xVal))
 		    
-		if(den_strip)
-		{
-  		p <- p +    
-    		stat_bin(
-    		  aes(
-      		  y = 1,
-    		    fill = ..density..
-    		  ), 
-    		  position = "identity", 
-    		  geom = "tile",
-		      binwidth = aesString$binwidth, 
-		      origin = aesString$origin, 
-		      breaks = aesString$breaks, 
-		      width = aesString$width, 
-		      drop = aesString$drop
-
-    		)	
-    		print("Density Strip")	  
-		}
-		else
-		{
-  		p <- p +   
-    		stat_density(
-    		  aes(
-    		    y = ..scaled.. * diff(range(x)) + min(x)
-    		  ), 
-    		  position = "identity", 
-    		  geom = "line"
-    		)
-		}
+	if(den_strip)
+	{
+	 # print("Density Strip")	  
+		p <- p +    
+  		stat_bin(
+  		  aes(
+    		  y = 1,
+  		    fill = ..density..
+  		  ), 
+  		  position = "identity", 
+  		  geom = "tile",
+	      binwidth = aesString$binwidth, 
+	      origin = aesString$origin, 
+	      breaks = aesString$breaks, 
+	      width = aesString$width, 
+	      drop = aesString$drop
+  		)	
+	}
+	else
+	{
+		p <- p +   
+  		stat_density(
+		  aes(
+  		    y = ..scaled.. * diff(range(x)) + min(x)
+  		  ), 
+  		  position = "identity", 
+  		  geom = "line"
+  		)
+	}
     		
 		
-		if(horizontal)
-		{
-#print("horizontal")
-		  p + facet_grid(Species ~ .)
-  		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
-  		if(den_strip)
-  		  p <- p + opts(axis.text.y = theme_blank())
-		}
-		else
-		{
-  		p <- p + coord_flip()
-  		p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
-  		if(den_strip)
-        p <- p + opts(axis.text.x = theme_blank())
-
-		}		
-		p
+	if(horizontal)
+	{
+    #print("horizontal")
+	  p + facet_grid(Species ~ .)
+		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+		
+		if(den_strip)
+		  p <- p + opts(axis.text.y = theme_blank())
+	}
+	else
+	{
+		p <- p + coord_flip()
+		p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
+		
+		if(den_strip)
+      p <- p + opts(axis.text.x = theme_blank())
+	}		
+	p
 }
 
 
@@ -389,10 +394,10 @@ ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_rata(movies[,c("mpaa","Action")])
-#' ggally_rata(movies[,c("mpaa","Action")]) + coord_equal()
-#' ggally_rata(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
-ggally_rata <- function(data)
+#' ggally_ratio(movies[,c("mpaa","Action")])
+#' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
+#' ggally_ratio(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
+ggally_ratio <- function(data)
 {
 	dataNames <- colnames(data)
 	ggfluctuation2(table(data[,2], data[,1])) + labs(x = dataNames[1], y = dataNames[2])
@@ -556,12 +561,12 @@ ggally_text <- function(
 #' Create a fluctuation plot.
 #'
 #' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.
-#' The function was adopted from experiemntal functions within GGplot2
+#' The function was adopted from experiemntal functions within GGplot2 developed by Hadley Wickham.
 #'
 #' @param table a table of values, or a data frame with three columns, the last column being frequency
 #' @param floor don't display cells smaller than this value
 #' @param ceiling max value to compare to
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Hadley Wickham \email{h.wickham@@gmail.com}, Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggfluctuation2(table(movies$Action, movies$Comedy))

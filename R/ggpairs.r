@@ -3,7 +3,7 @@
 #	smooth
 #	density
 #	cor
-#   blank
+# blank
 
 # conditional
 #   box
@@ -14,12 +14,29 @@
 #   blank
 
 # mosaic
-#   rata
+#   ratio
 #   blank
+
 
 
 #' ggpairs - A GGplot2 Matrix
 #' Make a matrix of plots with a given data set
+#' 
+#' upper and lower are lists that may contain the variables 'continuous', 
+#' 'combo' and 'discrete'. Each element of the list is a string implementing
+#' the following options: continuous = exactly one of ('points', 'smooth', 
+#' 'density', 'cor', 'blank'); 'combo' = exactly one of ('box', 'dot', 
+#' 'facethist', 'facetdensity', 'denstrip', 'blank'); mosaic = exactly one 
+#' of ('ratio', 'blank').
+#'
+#' diag is a list that may only contain the variables 'continuous' and 'discrete'. 
+#' Each element of the diag list is a string implmenting the following options: 
+#' continuous = exactly one of ('density', 'bar', 'blank'); discrete = exactly one
+#' of ('bar', 'blank').
+#'
+#' If a list option it will be set to the function default.  If 'blank' is ever 
+#' chosen as an option, then ggpairs will produce a blank plot, as if nothing was 
+#' printed there.  
 #' 
 #' @param data data set using.  Can have both numerical and categorical data.
 #' @param colour colour of the points
@@ -27,10 +44,10 @@
 #' @param upper see Details
 #' @param lower see Details
 #' @param diag see Details
-#' @param ... other parameters being supplied to geoms, such as binwidth
+#' @param ... other parameters being supplied to geom's aes, such as color
 #' @keywords hplot
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}
-#' @returns ggpair object that if called, will reprint
+#' @return ggpair object that if called, will reprint
 #' @examples
 #' ggpairs(iris)
 #' ggpairs(iris[,3:5])
@@ -65,8 +82,8 @@
 #' #will plot four "Incorrect Plots"	
 #' ggpairs(
 #' 	iris[,3:4],
-#' 	upper = list(scatter = "wrongType", conditional = "wrongType"),
-#' 	lower = list(scatter = "IDK", conditional = "5:1", mosaic = "mosaic"),
+#' 	upper = list(scatter = "wrongType1", conditional = "wrongType2"),
+#' 	lower = list(scatter = "IDK1", conditional = "IDK2", mosaic = "mosaic"),
 #' 	diag = list(scatter = "points", conditional = "box")
 #' )
 #'
@@ -84,6 +101,7 @@
 #' # 
 #' plotMatrix2 <- ggpairs(iris[,5:4], upper = list(conditional = "denstrip"))
 #' plotMatrix2 <- putPlot(plotMatrix2, ggally_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend\nand axis labels!"), 1, 1)
+#' plotMatrix2
 #' getPlot(plotMatrix2, 1, 2) -> plot
 #' plot
 #' plotNew <- plot + scale_fill_gradient(low = "grey80", high = "black")
@@ -124,12 +142,12 @@
 #'   3,
 #'   2
 #' )
-#' diamondMatrix
+#' diamondMatrix # now with much smaller labels
 ggpairs <- function (
 	data, 
 	colour = "black", 
-	upper = list(scatter = "cor", conditional = "facethist", mosaic = "rata"), 
-	lower = list(scatter = "points", conditional = "box", mosaic = "rata"), 
+	upper = list(scatter = "cor", conditional = "facethist", mosaic = "ratio"), 
+	lower = list(scatter = "points", conditional = "box", mosaic = "ratio"), 
 	diag = list(scatter = "density", conditional = "bar"),
 	title = "",
 	...) 
@@ -167,7 +185,7 @@ ggpairs <- function (
 		upper$conditional <- "facethist"
 	}
 	if (is.null(upper$mosaic)) {
-		upper$mosaic <- "rata"
+		upper$mosaic <- "ratio"
 	}
 
 	if(!is.list(lower))
@@ -180,7 +198,7 @@ ggpairs <- function (
 		lower$conditional <- "facethist"
 	}
 	if (is.null(lower$mosaic)) {
-		lower$mosaic <- "rata"
+		lower$mosaic <- "ratio"
 	}
 
 	if (is.null(diag$scatter)) {
@@ -206,9 +224,6 @@ ggpairs <- function (
 
 	grid <- expand.grid(x = 1:ncol(data), y = 1:ncol(data))
 
-#cat("\nGRID\n");print(grid)
-#print(dataTypes)
-
 
 	all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
 		xcol <- grid[i, "x"]
@@ -216,10 +231,10 @@ ggpairs <- function (
 		data.frame(xvar = names(data)[ycol], yvar = names(data)[xcol])
 	}))
 
-#cat("\n\n\nALL\n");print(all)
+  #cat("\n\n\nALL\n");print(all)
 
 	dataTypes <- .plot_types(data)
-#cat("\n\n\nDATA TYPES\n");print(dataTypes)
+  #cat("\n\n\nDATA TYPES\n");print(dataTypes)
 
 
 	blank <- ggally_text("Incorrect\nPlot",size=6)
@@ -237,10 +252,9 @@ ggpairs <- function (
 		
 
 		up <- posX > posY
-		
-	#	print(up)
+		#	print(up)
 
-#print(head(dataSelect))
+
 		if(type == "scatterplot")
 		{
 			#cat("\nScatterplot")
@@ -300,14 +314,14 @@ ggpairs <- function (
 		}
 		else if(type == "mosaic")
 		{
-			subType <- "rata"
+			subType <- "ratio"
 			if(up)
 				subType <- upper$mosaic
 			else
 				subType <- lower$mosaic
 
-			if(subType == "rata")
-				p <- ggally_rata(data[, c(xColName, yColName)])
+			if(subType == "ratio")
+				p <- ggally_ratio(data[, c(xColName, yColName)])
 			else if(subType == "blank")
 				p <- ggally_blank()
 
@@ -330,14 +344,12 @@ ggpairs <- function (
 		
 			if(subType == "bar")
 				p <- ggally_barDiag(data, x = xColName,...)
-			#else if(subType == "rata")
-			#	p <- ggally_rata(dataSelect)
+			#else if(subType == "ratio")
+			#	p <- ggally_ratio(dataSelect)
 			else if(subType == "blank")
 				p <- ggally_blank()
 		}
 		
-#		print(posY)
-#		print(posX)
 		ggpairsPlots <- c( ggpairsPlots, p)
 		subTypeList <- c(subTypeList, as.character(subType))
 		typeList <- c(typeList, as.character(type))
@@ -404,11 +416,14 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft)
 {
   
 	pos <- columnFromLeft + (ncol(plotMatrix$data)) * (rowFromTop - 1)
-	cat("Plot #",pos,"\n")
-	pos <- (pos - 1) * 8 + 1
+	
+	shiftedPos <- (pos - 1) * 8 + 1
 #	cat("Plot List Spot: ",pos,"\n")
-	plot <- plotMatrix$plots[pos:(pos + 7)]
+	plot <- plotMatrix$plots[shiftedPos:(shiftedPos + 7)]
 	attributes(plot)$class <- "ggplot"
+
+	cat("Plot #",pos); if(.is_blank_plot(plot)) cat(" - Blank"); cat("\n")
+
 	plot
 }
 
@@ -426,14 +441,14 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft)
 #' @param x ggpair object to be plotted
 #' @param ... not used
 #' @method print ggpairs
-#' @keywords hplot
+#' @keywords internal
 #' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
 #' @examples
 #' example(ggpair)
 print.ggpairs <- function(x, ...)
 {
   plotObj <- x
-  grid.newpage()
+  
   v1 <- viewport(
 #		x = unit(0.5, "npc") + unit(1,"lines"), 
 #		y = unit(0.5, "npc") + unit(1,"lines"), 
@@ -441,7 +456,7 @@ print.ggpairs <- function(x, ...)
 		height=unit(1, "npc") - unit(3, "lines")
 	)
 	numCol <- ncol(plotObj$data)
-#cat("ncol(data): ", numCol,"\n")
+
 	v2 <- viewport(
 	     layout = grid.layout(
 	             numCol, 
@@ -506,6 +521,8 @@ print.ggpairs <- function(x, ...)
       {      
         p <- getPlot(plotObj, rowPos, columnPos)
         
+        isBlank <- .is_blank_plot(p)
+        
       	pos <- columnPos + (rowPos - 1) * numCol
 
     
@@ -543,13 +560,27 @@ print.ggpairs <- function(x, ...)
    			  gp=gpar(fill="white",lty = "blank"),
    			  vp = .vplayout(rowPos, columnPos)
     	  )
-      	print(p, vp = .vplayout(rowPos, columnPos))
+    	  
+    	  if(!isBlank)
+        	print(p, vp = .vplayout(rowPos, columnPos))
       }
     }
 	popViewport() #layout
 	popViewport() #spacing
 
   
+}
+
+#' Is Blank Plot?
+#' Find out if the plot equals a blank plot
+#'
+#' @keywords internal
+#' @examples
+#'  .is_blank_plot(ggally_blank())
+#'  .is_blank_plot(ggally_points(mtcars, x = "disp", y = "hp"))
+.is_blank_plot <- function(p)
+{  
+  identical(p, ggally_blank())
 }
 
 
