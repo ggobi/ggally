@@ -1,9 +1,0 @@
-GGally:  a companion to GGplot2.
-
-GGally is a package built to produce scatterplot matrices without the hassel of making viewports and labels yourself.  GGally is built upon the GGplot2 framework.  Keeping the functionality and feel of ggplot, GGally has shortened common function calls and added a few new ones.
-
-ggpairs, the main function within GGally, will take your data set and produce a scatterplot according to the data types given. ggpairs will produce four different types of plots: continuous-continuous, continuous-discrete, discrete-continuous, discrete-discrete.  The function will determine which type is needed and produce a plot according the the specified type given.  General aesthetics can be applied to the whole scatterplot matrix.
-
-This package was developed as an add on package to keep the base functionality of GGplot2 seperate.
-
-- Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham
