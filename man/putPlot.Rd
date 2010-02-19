@@ -5,7 +5,7 @@
 \description{Put Plot
 Function to place your own plot in the layout}
 \keyword{hplot}
-\author{Barret Schloerke \email{bigbear@iastate.edu} and Haesung Kim \email{hae0510@iastate.edu}}
+\author{Barret Schloerke \email{bigbear@iastate.edu}}
 \arguments{\item{plotMatrix}{ggally object to be altered}
 \item{plotObj}{ggplot object to be placed}
 \item{rowFromTop}{row from the top}

@@ -5,6 +5,6 @@
 \description{Viewport Layout Wrapper
 A wrapper function to set the viewport}
 \keyword{internal}
-\author{Barret Schloerke \email{bigbear@iastate.edu} and Haesung Kim \email{hae0510@iastate.edu}}
+\author{Hadley Wickham \email{h.wickham@gmail.com}}
 \arguments{\item{x}{row position}
 \item{y}{coloumn position}}

@@ -5,7 +5,7 @@
 \description{Find Plot Types
 Retrieves the type of plot for the specific columns}
 \keyword{internal}
-\author{Barret Schloerke \email{bigbear@iastate.edu} and Haesung Kim \email{hae0510@iastate.edu}}
+\author{Barret Schloerke \email{bigbear@iastate.edu}}
 \arguments{\item{data}{data set to be used}
 \item{col1}{x column}
 \item{col2}{y column}}

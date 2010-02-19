@@ -4,7 +4,8 @@
 \usage{ggally_ratio(data)}
 \description{Plots a mosaic plots
 Plots the mosaic plot by using fluctuation}
-\author{Barret Schloerke \email{bigbear@iastate.edu}, Haesung Kim \email{hae0510@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@iastate.edu}}
+\details{Must send only two discrete columns in the data set.}
+\author{Barret Schloerke \email{bigbear@iastate.edu}}
 \keyword{hplot}
 \arguments{\item{data}{data set using}}
 \examples{ggally_ratio(movies[,c("mpaa","Action")])

@@ -2,65 +2,61 @@
 #' Make a scatter plot with a given data set
 #'
 #' @param data data set using
-#' @param ... other arguments to add to geom_point by aes_string(...)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguments are sent to geom_point
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_points(mtcars, x = "disp", y = "hp")
-#' ggally_points(mtcars, x = "disp", y = "hp", colour = "as.factor(cyl)", size = "gear")
-ggally_points <- function(data, ...)
+#' ggally_points(mtcars, aes(x = disp, y = hp))
+#' ggally_points(mtcars, aes_string(x = "disp", y = "hp"))
+#' ggally_points(mtcars, aes_string(x = "disp", y = "hp", colour = "as.factor(cyl)", size = "gear"))
+ggally_points <- function(data, mapping, ...)
 {
-	ggplot(data = data, aes_string(...)) + geom_point()
+	ggplot(data = data, mapping = mapping) + geom_point(...)
 }
 
 #' Plots the Scatter Plot with Smoothing
 #' Add a smoothed condition mean with a given scatter plot
 #'
 #' @param data data set using
-#' @param ... other arguments to add to geom_point by aes_string(...)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguments to add to geom_point
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_smooth(iris, x = "Sepal.Length", y = "Sepal.Width")
-#' ggally_smooth(iris, x = "Sepal.Length", y = "Petal.Length", colour = "Species")
-ggally_smooth <- function(data, ...)
+#' ggally_smooth(iris, aes(x = Sepal.Length, y = Sepal.Width))
+#' ggally_smooth(iris, aes_string(x = "Sepal.Length", y = "Sepal.Width"))
+#' ggally_smooth(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", colour = "Species"))
+ggally_smooth <- function(data, mapping, ...)
 {
-	ggplot(data = data, aes_string(...)) +
+	ggplot(data = data, mapping) +
 		geom_smooth(method="lm", colour = I("black")) +
-		geom_point() 
+		geom_point(...) 
 }
 
 #' Plots the Scatter Density Plot
 #' Make a scatter density plot from a given data
 #'
+#' The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_density2d (lines) is used.
+#'
 #' @param data data set using
-#' @param ... parameters sent to aes_string(...).  Will effect either stat_density2d or geom_density2d
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... parameters sent to either stat_density2d or geom_density2d
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_density(iris, x = "Sepal.Length", y = "Petal.Length")
-#' ggally_density(iris, x = "Sepal.Length", y = "Petal.Length", filled = "TRUE")
-#' ggally_density(iris, x = "Petal.Length", y = "Petal.Width",filled = "TRUE") + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
-ggally_density <- function(data, ...)
-{
-  
-  aesString <- aes_string(...)
-  filled <- as.logical(aesString$filled)
-  
-  if(length(filled) < 1)
-    filled <- FALSE
-  
-  aesString$filled <- NULL
-  
-  #print(filled)
-  #print(str(aesString))
-  
-  p <- ggplot(data = data, aesString)
-	
-	if(filled)
-		p <- p + stat_density2d(aes(fill = ..level..), geom="polygon")
+#' ggally_density(iris, aes(x = Sepal.Length, y = Petal.Length))
+#' ggally_density(iris, aes_string(x = "Sepal.Length", y = "Petal.Length"))
+#' ggally_density(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", fill = "..level.."))
+#' ggally_density(iris, aes_string(x = "Petal.Length", y = "Petal.Width",fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2)) 
+ggally_density <- function(data, mapping, ...)
+{  
+  p <- ggplot(data = data, mapping)
+
+	if(!is.null(mapping$fill))
+		p <- p + stat_density2d(geom="polygon", ...)
 	else
-	  p <- p + geom_density2d( colour = I("black"))
+	  p <- p + geom_density2d( colour = I("black"), ...)
 	
 	p
 }
@@ -69,19 +65,19 @@ ggally_density <- function(data, ...)
 #' estimate correlation from the given data
 #'
 #' @param data data set using
-#' @param ... other arguments being supplied to geom_text by aes_string(...)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguments being supplied to geom_text
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_cor(iris, x = "Sepal.Length", y = "Petal.Length")
-#' ggally_cor(iris, x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red")
-ggally_cor <- function(data, ...)
+#' ggally_cor(iris, aes(x = Sepal.Length, y = Petal.Length))
+#' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
+ggally_cor <- function(data, mapping, ...)
 {
 
-  aesString <- aes_string(...)
-
-  xVar <- data[,as.character(aesString$x)]
-  yVar <- data[,as.character(aesString$y)]
+  xVar <- data[,as.character(mapping$x)]
+  yVar <- data[,as.character(mapping$y)]
+  mapping$x <- mapping$y <- NULL
 
 	ggally_text(
 		label = paste(
@@ -92,6 +88,7 @@ ggally_cor <- function(data, ...)
 			),
 			sep="",collapse=""
 		),
+		mapping,
 		xP=0.5,
 		yP=0.5,
 		xrange = range(xVar),
@@ -108,15 +105,17 @@ ggally_cor <- function(data, ...)
 #' Make a box plot with a given data set
 #'
 #' @param data data set using
-#' @param ... other arguments being supplied to geom_boxplot by aes_string(...)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguments being supplied to geom_boxplot
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_box(iris, x = "Petal.Width", y = "Species")
-#' ggally_box(iris, y = "Petal.Width", x = "Species", colour = "Species", outlier.colour = "red", outlier.shape = 13, outlier.size = 18)
-ggally_box <- function(data, ...)
+#' ggally_box(iris, aes(x = Petal.Width, y = Species))
+#' ggally_box(iris, aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_box(iris, aes_string(y = "Petal.Width", x = "Species", colour = "Species", outlier.colour = "red", outlier.shape = 13, outlier.size = 18))
+ggally_box <- function(data, mapping, ...)
 {
-  ggally_dotAndBox(data, ..., boxPlot = TRUE)
+  ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
 
 
@@ -124,66 +123,52 @@ ggally_box <- function(data, ...)
 #' Add jittering with the box plot
 #'
 #' @param data data set using
-#' @param ... other arguments being supplied to geom_jitter by aes_string(...)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguments being supplied to geom_jitter
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_dot(iris, x = "Petal.Width", y = "Species")
-#' ggally_dot(iris, x = "Species", y = "Petal.Width", colour = "Species")
-#ggally_dot(iris, x = "Species", y = "Petal.Width", colour = "Species", shape = "Species") + scale_shape(solid=FALSE)
-ggally_dot <- function(data, ...)
+#' ggally_dot(iris, aes(x = Petal.Width, y = Species))
+#' ggally_dot(iris, aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_dot(iris, aes_string(x = "Species", y = "Petal.Width", colour = "Species"))
+#' ggally_dot(iris, aes_string(x = "Species", y = "Petal.Width", colour = "Species", shape = "Species")) + scale_shape(solid=FALSE)
+ggally_dot <- function(data, mapping, ...)
 {
-  ggally_dotAndBox(data, ..., boxPlot = FALSE)
+  ggally_dotAndBox(data, mapping, ..., boxPlot = FALSE)
 }
 
 
 #' Plots either Box Plot or Dot Plots
 #' Place box plots or dot plots on the graph
 #' @param data data set using
-#' @param ... parameters passed to aes_string(...)
+#' @param mapping aesthetics being used
+#' @param ... parameters passed to either geom_jitter or geom_boxplot
 #' @param boxPlot boolean to decide to plot either box plots (TRUE) or dot plots (FALSE)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' example(ggally_box)
 #' example(ggally_dot)
-ggally_dotAndBox <- function(data, ..., boxPlot = TRUE)
+ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE)
 {
-	aesString <- aes_string(...)
-  horizontal <-  is.factor(data[,as.character(aesString$y)])
+  horizontal <-  is.factor(data[,as.character(mapping$y)])
   
   if(horizontal)
   {
-    aesString$tmp <- aesString$x
-    aesString$x <- aesString$y
-    aesString$y <- aesString$tmp
-    aesString$tmp <- NULL
+    mapping$tmp <- mapping$x
+    mapping$x <- mapping$y
+    mapping$y <- mapping$tmp
+    mapping$tmp <- NULL
   } 
-#print(str(aesString))
+#print(str(mapping))
 
-  p <- ggplot(data = data, aesString)
-  
-
-  outlierColor <- as.character(aesString$outlier.colour)
-  outlierShape <- as.numeric(aesString$outlier.shape)
-  outlierSize <- as.numeric(aesString$outlier.size)
-  
-  if(is.null(aesString$outlier.colour))
-    outlierColor <- "black"
-  if(is.null(aesString$outlier.shape))
-    outlierShape <- 16
-  if(is.null(aesString$outlier.size))
-    outlierSize <- 2
+  p <- ggplot(data = data, mapping)
   
 
   if(boxPlot)
-    p <- p + geom_boxplot(
-      outlier.colour = outlierColor, 
-      outlier.shape = outlierShape, 
-      outlier.size = outlierSize
-    )
+    p <- p + geom_boxplot(...)
   else
-    p <- p + geom_jitter()
+    p <- p + geom_jitter(...)
 
 	if(horizontal)
 	{
@@ -195,6 +180,7 @@ ggally_dotAndBox <- function(data, ..., boxPlot = TRUE)
 				)
 			)
 	}
+
 	p
 }
 
@@ -203,52 +189,51 @@ ggally_dotAndBox <- function(data, ..., boxPlot = TRUE)
 #' Make histograms by displaying subsets of the data in different panels
 #'
 #' @param data data set using
-#' @param ... parameters sent to aes_string(...).  It will effect stat_bin()
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... parameters sent to stat_bin()
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_facethist(iris, x = "Petal.Width", y = "Species")
-#' ggally_facethist(iris, x = "Species", y = "Petal.Width", binwidth = "0.1")
-ggally_facethist <- function(data, ...)
+#' ggally_facethist(iris, aes(x = Petal.Width, y = Species))
+#' ggally_facethist(iris, aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_facethist(iris, aes_string(x = "Species", y = "Petal.Width", binwidth = "0.1"))
+ggally_facethist <- function(data, mapping, ...)
 {
-	aesString <- aes_string(...)
-  horizontal <-  is.factor(data[,as.character(aesString$y)])
+#  str(mapping)
+	#aesString <- aes_string(mapping)
+	#cat("\naesString\n");print(str(aesString))
+
+  horizontal <-  is.factor(data[,as.character(mapping$y)])
 
 	if(!horizontal)
 	{
-	   aesString$tmp <- aesString$x
-	   aesString$x <- aesString$y
-	   aesString$y <- aesString$tmp
+	   mapping$tmp <- mapping$x
+	   mapping$x <- mapping$y
+	   mapping$y <- mapping$tmp
 	}
 	else
 	{
 	   # horizontal
 	   # re-order levels to match all other plots
-	   levels(data[,as.character(aesString$y)]) <- levels(data[,as.character(aesString$y)])[length(levels(data[,as.character(aesString$y)])):1]
+	   levels(data[,as.character(mapping$y)]) <- levels(data[,as.character(mapping$y)])[length(levels(data[,as.character(mapping$y)])):1]
 	}
 
 #cat("Horizontal: ", horizontal, "\n")	
-#print(str(aesString))
-#print(head(data))
+#cat("\nmapping\n");print(str(mapping))
+#cat("\ndata\n");print(head(data))
 	
 	
 	
-  xVal <- aesString$x
-	yVal <- aesString$y
-  aesString$y <- NULL
-#str(aesString)
+  xVal <- mapping$x
+	yVal <- mapping$y
+  mapping$y <- NULL
+#str(mapping)
 #str(xVal)
 #str(yVal)
 
-		p <- ggplot(data = data, aesString)
-		aesString$x <- NULL
-		p <- p + stat_bin(
-		      binwidth = aesString$binwidth, 
-		      origin = aesString$origin, 
-		      breaks = aesString$breaks, 
-		      width = aesString$width, 
-		      drop = aesString$drop
-		    ) 
+		p <- ggplot(data = data, mapping)
+		mapping$x <- NULL
+		p <- p + stat_bin(...) 
 
 		if(horizontal)
 		{
@@ -268,15 +253,17 @@ ggally_facethist <- function(data, ...)
 #' Make density plots by displaying subsets of the data in different panels
 #'
 #' @param data data set using
-#' @param ... other arguments being sent to stat_density's by aes_string(...)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguments being sent to stat_density
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_facetdensity(iris, x = "Petal.Width", y = "Species")
-#' ggally_facetdensity(iris, x = "Species", y = "Petal.Width", colour = "Species")
-ggally_facetdensity <- function(data, ...)
+#' ggally_facetdensity(iris, aes(x = Petal.Width, y = Species))
+#' ggally_facetdensity(iris, aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_facetdensity(iris, aes_string(x = "Species", y = "Petal.Width", colour = "Species"))
+ggally_facetdensity <- function(data, mapping, ...)
 {
-  ggally_facetdensitystrip(data, ..., den_strip = FALSE)
+  ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
 
 
@@ -284,15 +271,17 @@ ggally_facetdensity <- function(data, ...)
 #' Make Tile Plot as densely as possible
 #'
 #' @param data data set using
-#' @param ... other arguments being sent to stat_bin's by aes_string(...)
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguments being sent to stat_bin
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_denstrip(iris, x = "Petal.Width", y = "Species")
-#' ggally_denstrip(iris, x = "Species", y = "Petal.Width", binwidth = "0.2") + scale_fill_gradient(low = "grey80", high = "black")
-ggally_denstrip <- function(data,...)
+#' ggally_denstrip(iris, aes(x = Petal.Width, y = Species))
+#' ggally_denstrip(iris, aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_denstrip(iris, aes_string(x = "Species", y = "Petal.Width", binwidth = "0.2")) + scale_fill_gradient(low = "grey80", high = "black")
+ggally_denstrip <- function(data,mapping, ...)
 {
-  ggally_facetdensitystrip(data, ..., den_strip = TRUE)
+  ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
 
@@ -301,37 +290,37 @@ ggally_denstrip <- function(data,...)
 #' Make Tile Plot as densely as possible
 #'
 #' @param data data set using
-#' @param ... other arguments being sent to stat_bin's by aes_string(...)
+#' @param mapping aesthetics being used
+#' @param ... other arguments being sent to either stat_bin or stat_density
 #' @param den_strip boolean to deceide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' example(ggally_facetdensity)
 #' example(ggally_denstrip)
-ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
+ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE)
 {
-	aesString <- aes_string(...)
-  horizontal <-  is.factor(data[,as.character(aesString$y)])
+  horizontal <-  is.factor(data[,as.character(mapping$y)])
   if(!horizontal)
   {
-    aesString$tmp <- aesString$x
-    aesString$x <- aesString$y
-    aesString$y <- aesString$tmp
-    aesString$tmp <- NULL
+    mapping$tmp <- mapping$x
+    mapping$x <- mapping$y
+    mapping$y <- mapping$tmp
+    mapping$tmp <- NULL
 
   } 
   else
   {
     # horizontal
     # re-order levels to match all other plots
-    levels(data[,as.character(aesString$y)]) <- levels(data[,as.character(aesString$y)])[length(levels(data[,as.character(aesString$y)])):1]
+    levels(data[,as.character(mapping$y)]) <- levels(data[,as.character(mapping$y)])[length(levels(data[,as.character(mapping$y)])):1]
   }
 
-  xVal <- aesString$x
-	yVal <- aesString$y
-  aesString$y <- NULL
+  xVal <- mapping$x
+	yVal <- mapping$y
+  mapping$y <- NULL
 
-	p <- ggplot(data = data, aesString) + 
+	p <- ggplot(data = data, mapping) + 
     scale_y_continuous(as.character(yVal)) + 
     scale_x_continuous(as.character(xVal))
 		    
@@ -346,11 +335,7 @@ ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
   		  ), 
   		  position = "identity", 
   		  geom = "tile",
-	      binwidth = aesString$binwidth, 
-	      origin = aesString$origin, 
-	      breaks = aesString$breaks, 
-	      width = aesString$width, 
-	      drop = aesString$drop
+  		  ...
   		)	
 	}
 	else
@@ -361,7 +346,8 @@ ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
   		    y = ..scaled.. * diff(range(x)) + min(x)
   		  ), 
   		  position = "identity", 
-  		  geom = "line"
+  		  geom = "line",
+  		  ...
   		)
 	}
     		
@@ -369,7 +355,6 @@ ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
 	if(horizontal)
 	{
     #print("horizontal")
-	  p + facet_grid(Species ~ .)
 		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
 		
 		if(den_strip)
@@ -390,8 +375,10 @@ ggally_facetdensitystrip <- function(data, ..., den_strip = FALSE)
 #' Plots a mosaic plots
 #' Plots the mosaic plot by using fluctuation
 #'
+#' Must send only two discrete columns in the data set.
+#'
 #' @param data data set using
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggally_ratio(movies[,c("mpaa","Action")])
@@ -408,19 +395,18 @@ ggally_ratio <- function(data)
 #' Plots the density plots by using Diagonal
 #'
 #' @param data data set using
-#' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used.
+#' @param ... other arguments sent to stat_density
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_densityDiag(iris,x = "Petal.Width")
-#' ggally_densityDiag(movies, x="rating")
-#' ggally_densityDiag(movies, x="rating", colour = "mpaa")
-ggally_densityDiag <- function(data, ...)
+#' ggally_densityDiag(iris, aes(x = Petal.Width))
+#' ggally_densityDiag(movies, aes_string(x="rating"))
+#' ggally_densityDiag(movies, aes_string(x="rating", colour = "mpaa"))
+ggally_densityDiag <- function(data, mapping, ...)
 {
-	aesString <- aes_string(...)
-#str(aesString)
 
-	ggplot(data, aesString) + 
+	ggplot(data, mapping) + 
 		scale_x_continuous() + 
 		scale_y_continuous() + 
 		stat_density(
@@ -428,7 +414,8 @@ ggally_densityDiag <- function(data, ...)
 				y = ..scaled.. * diff(range(x)) + min(x)
 			),
 			position = "identity", 
-			geom = "line"
+			geom = "line",
+			...
 		)
 }
 
@@ -436,27 +423,28 @@ ggally_densityDiag <- function(data, ...)
 #' Plots the bar plots by using Diagonal
 #'
 #' @param data data set using
-#' @param ...
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @param mapping aesthetics being used
+#' @param ... other arguements are sent to geom_bar
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
-#' ggally_barDiag(movies, x = "mpaa")
-#' ggally_barDiag(movies, x ="rating", binwidth = ".1")
-ggally_barDiag <- function(data, ...)
+#' ggally_barDiag(movies, aes(x = mpaa))
+#' ggally_barDiag(movies, aes_string(x = "mpaa"))
+#' ggally_barDiag(movies, aes_string(x ="rating", binwidth = ".1"))
+ggally_barDiag <- function(data, mapping, ...)
 {
-	aesString <- aes_string(...)
-	aesString$y <- NULL
+	mapping$y <- NULL
 
-	numer <- is.null(attributes(data[,as.character(aesString$x)])$class)
+	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
 	
 	if(numer)
 	{
-    p <- ggplot(data = data, aesString) + geom_bar(binwidth = aesString$binwidth)
+    p <- ggplot(data = data, mapping) + geom_bar(...)
  	}
 	else
 	{
 	 ## create a temporary data set that computes the count manually
-		dataTmp <- as.factor(data[,as.character(aesString$x)])
+		dataTmp <- as.factor(data[,as.character(mapping$x)])
 		levels(dataTmp) <- levels(dataTmp)[length(levels(dataTmp)):1]
 
 
@@ -468,7 +456,7 @@ ggally_barDiag <- function(data, ...)
 		dataTmp <- cbind(levels(dataTmp), count)
 		dataTmp <- as.data.frame(dataTmp)
 		
-		colnames(dataTmp) <- c(as.character(aesString$x), "Count")
+		colnames(dataTmp) <- c(as.character(mapping$x), "Count")
 		
 		## Makes sure the count is numeric instead of factor
 		dataTmp$Count <- as.numeric(as.character(dataTmp$Count))
@@ -476,8 +464,8 @@ ggally_barDiag <- function(data, ...)
 #print(head(dataTmp))
 #str(dataTmp)
 		
-		p <- ggplot(data = dataTmp, aesString) + 
-		  geom_bar(aes(y = Count), stat="identity") +
+		p <- ggplot(data = dataTmp, mapping) + 
+		  geom_bar(aes(y = Count), stat="identity", ...) +
 			coord_flip() +  
 			opts(
 				axis.text.y = theme_text(
@@ -495,35 +483,35 @@ ggally_barDiag <- function(data, ...)
 #' GGplot Text
 #' Plot text for a plot
 #'
+#' @param label text that you want to appear
+#' @param mapping aesthetics that don't relate to position (such as colour)
 #' @param xP horizontal position percentage
 #' @param yP vertical position percentage
-#' @param label text that you want to appear
 #' @param xrange range of the data around it.  Only nice to have if plotting in a matrix
 #' @param yrange range of the data around it.  Only nice to have if plotting in a matrix
 #' @param ... other arguments for geom_text
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggally_text("Example 1")
-#' ggally_text("Example\nTwo",size = 15, colour = "red")
+#' ggally_text("Example\nTwo", mapping = aes_string(size = 15, colour = "red"))
 ggally_text <- function(
                   label, 
+                  mapping = aes(colour = "black"),
                   xP = 0.5, 
                   yP = 0.5,
                   xrange = c(0,1), 
                   yrange = c(0,1),
-#                  colour = "black",
                   ...
                 )
 {
+  colour <- as.character(mapping$colour)
 
-  aesString <- aes_string(...)
-  aesString$x <- aesString$y <- aesString$xmin <- aesString$xax <- aesString$ymin <- aesString$ymax <- NULL
-
-  colour <- as.character(aesString$colour)
-  if(is.null(aesString$colour))
+  if(is.null(colour) || length(colour) < 1)
     colour <- "black" 
-  aesString$colour <- NULL
+
+  # remove colour from the aesthetics
+	mapping$colour <- NULL
   
 	p <- ggplot(data = 
 			data.frame(
@@ -545,9 +533,9 @@ ggally_text <- function(
 		)+
 		geom_rect(fill= I("white")) + 
 		labs(x = NULL, y = NULL)
-	
+
 	p <- p + 
-	   geom_text( label = label, aesString, colour = colour) + 
+	   geom_text( label = label, mapping = mapping, colour = colour, ...) + 
 	   opts(legend.position = "none")
 	
 	p
@@ -566,26 +554,27 @@ ggally_text <- function(
 #' @param table a table of values, or a data frame with three columns, the last column being frequency
 #' @param floor don't display cells smaller than this value
 #' @param ceiling max value to compare to
-#' @author Hadley Wickham \email{h.wickham@@gmail.com}, Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Hadley Wickham \email{h.wickham@@gmail.com}, Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 #' @examples
 #' ggfluctuation2(table(movies$Action, movies$Comedy))
 #' ggfluctuation2(table(movies$Action, movies$mpaa))
+#' ggfluctuation2(table(movies[,c("Action", "mpaa")]))
 #' ggfluctuation2(table(warpbreaks$breaks, warpbreaks$tension))
 ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = TRUE)) 
 {
 
 	yNames <- rownames(table)
 	xNames <- colnames(table)
-	oldnames <- names(table)
+	oldnames <- c(names(dimnames(table)[1]), names(dimnames(table)[2]) )
+	#print(oldnames)
 
 	if (is.table(table)) 
-	{
 		table <- as.data.frame(t(table))
-		
+
+	if(all(oldnames == ""))	
 		oldnames <- c("X","Y")		
 		
-	}
 
 	names(table) <- c("x", "y", "result")
 	table <- add.all.combinations(table, list("x", "y"))
@@ -668,7 +657,7 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = 
 #' 
 #' Makes a "blank" ggplot object that will only draw white space
 #'
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}, Haesung Kim \email{hae0510@@iastate.edu}, Di Cook \email{dicook@@iastate.edu} and Heike Hofmann \email{hofmann@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 #' @keywords hplot
 ggally_blank <- function()
 {

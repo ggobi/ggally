@@ -5,6 +5,6 @@
 \description{Get Plot Type
 Retrieves the type of plot for specific info}
 \keyword{internal}
-\author{Barret Schloerke \email{bigbear@iastate.edu} and Haesung Kim \email{hae0510@iastate.edu}}
+\author{Barret Schloerke \email{bigbear@iastate.edu}}
 \arguments{\item{y1_type}{x type.  Either numeric or category}
 \item{y2_type}{y type.  Either numeric or category}}

@@ -1,12 +1,13 @@
 \name{ggally_cor}
 \alias{ggally_cor}
 \title{Correlation from the Scatter Plot...}
-\usage{ggally_cor(data, ...)}
+\usage{ggally_cor(data, mapping, ...)}
 \description{Correlation from the Scatter Plot
 estimate correlation from the given data}
-\author{Barret Schloerke \email{bigbear@iastate.edu}, Haesung Kim \email{hae0510@iastate.edu}, Di Cook \email{dicook@iastate.edu} and Heike Hofmann \email{hofmann@iastate.edu}}
+\author{Barret Schloerke \email{bigbear@iastate.edu}}
 \keyword{hplot}
 \arguments{\item{data}{data set using}
-\item{...}{other arguments being supplied to geom_text by aes_string(...)}}
-\examples{ggally_cor(iris, x = "Sepal.Length", y = "Petal.Length")
-ggally_cor(iris, x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red")}
+\item{mapping}{aesthetics being used}
+\item{...}{other arguments being supplied to geom_text}}
+\examples{ggally_cor(iris, aes(x = Sepal.Length, y = Petal.Length))
+ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))}

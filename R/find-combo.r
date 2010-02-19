@@ -3,7 +3,7 @@
 #' 
 #' @param data data set to be used
 #' @keywords internal
-#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 .plot_types <- function(data)
 {
 	namesD <- names(data)
@@ -26,7 +26,7 @@
 #' @param col1 x column
 #' @param col2 y column
 #' @keywords internal
-#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 .find_plot_type <- function(data,col1,col2)
 {
 
@@ -55,7 +55,7 @@
 #' @param y1_type x type.  Either numeric or category
 #' @param y2_type y type.  Either numeric or category
 #' @keywords internal
-#' @author Barret Schloerke \email{bigbear@@iastate.edu} and Haesung Kim \email{hae0510@@iastate.edu}
+#' @author Barret Schloerke \email{bigbear@@iastate.edu}
 .get_plot_type <- function(y1_type,y2_type)
 {
 	cats <- c(y1_type, y2_type) %in% "category"
