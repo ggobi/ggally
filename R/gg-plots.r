@@ -78,6 +78,23 @@ ggally_cor <- function(data, mapping, ...)
   xVar <- data[,as.character(mapping$x)]
   yVar <- data[,as.character(mapping$y)]
   mapping$x <- mapping$y <- NULL
+    
+  if(length(names(mapping)) > 0)
+  {
+    for(i in length(names(mapping)):1)
+    {
+      # find the last value of the aes, such as cyl of as.factor(cyl)
+      tmp_map_val <- as.character(mapping[names(mapping)[i]][[1]])
+      if(tmp_map_val[length(tmp_map_val)] %in% colnames(data))
+        mapping[names(mapping)[i]] <- NULL
+        
+      if(length(names(mapping)) < 1)
+      {
+        mapping <- NULL
+        break;
+      }
+    }
+  }
 
 	ggally_text(
 		label = paste(
@@ -512,6 +529,7 @@ ggally_text <- function(
 
   # remove colour from the aesthetics
 	mapping$colour <- NULL
+
   
 	p <- ggplot(data = 
 			data.frame(

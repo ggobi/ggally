@@ -7,16 +7,18 @@
 .plot_types <- function(data)
 {
 	namesD <- names(data)
-	dataInfo <- NULL
+	dataInfo <- array("", c(ncol(data)^2,5))
 	
 	#horizontal then vertical
 	for(j in 1:ncol(data))
 		for(i in 1:ncol(data))
-			dataInfo <- rbind(dataInfo, c(.find_plot_type(data,i,j),namesD[i],namesD[j],i,j))
+			dataInfo[(i-1)*ncol(data)+j,] <- c(.find_plot_type(data,i,j),namesD[i],namesD[j],i,j)
+			
 	dataInfo <- as.data.frame(dataInfo)
 	colnames(dataInfo) <- c("Type", "xvar", "yvar","posx","posy")
 	dataInfo
 }
+
 
 
 #' Find Plot Types
@@ -33,9 +35,9 @@
 	y1Type <- "numeric"
 	y2Type <- "numeric"
 	
-	if(!is.null(attributes(data[,col1])))
+	if(!is.null(attributes(data[,col1])) || all(is.character(data[,col1])))
 		y1Type <- "category"
-	if(!is.null(attributes(data[,col2])))
+	if(!is.null(attributes(data[,col2])) || all(is.character(data[,col2])))
 		y2Type <- "category"
 	
 	if(col1 == col2)
@@ -46,6 +48,7 @@
 			return("stat_bin-cat")
 	}
 	
+	#cat(names(data)[col2],": ", y2Type,"\t",names(data)[col1],": ",y1Type,"\n")
 	return(.get_plot_type(y1Type,y2Type))
 }
 
@@ -64,8 +67,8 @@
 		if(all(cats))
 			return("mosaic")
 		if(cats[1])
-			return("box-vert")
-		return("box-hori")
+			return("box-hori")
+		return("box-vert")
 	}
 
 	return("scatterplot")
