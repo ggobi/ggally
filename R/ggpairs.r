@@ -39,18 +39,20 @@
 #' printed there.  
 #' 
 #' @param data data set using.  Can have both numerical and categorical data.
+#' @param columns which columns are used to make plots.  Defaults to all columns.
 #' @param title title for the graph
 #' @param upper see Details
 #' @param lower see Details
 #' @param diag see Details
 #' @param ... other parameters being supplied to geom's aes, such as color
+#' @param .verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
 #' @author Barret Schloerke \email{bigbear@@iastate.edu}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will reprint
 #' @examples
 #' 
 #' # plotting is reduced to the first couple of examples.  
-#' # Feel free to print the ggpair objects created
+#' # Feel free to print the ggpair objects created in the examples
 #' 
 #' #ggpairs(iris)
 #' ggpairs(iris[,3:5])
@@ -107,7 +109,10 @@
 #'
 #' # Custom plot with different scale fill gradient
 #' plotMatrix2 <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
-#' plotMatrix2 <- putPlot(plotMatrix2, ggally_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend\nand axis labels!"), 1, 1)
+#' plotMatrix2 <- putPlot(
+#'  plotMatrix2, 
+#'  ggally_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend\nand axis labels!"),
+#'  1, 1)
 #' #plotMatrix2
 #' getPlot(plotMatrix2, 1, 2) -> plot
 #' #plot
@@ -152,12 +157,30 @@
 #' )
 #' #diamondMatrix # now with much smaller labels
 #' 
+#' 
+#' 
+#'  customDiamond <- ggpairs(
+#'    diamonds,
+#'    columns = 8:10, 
+#'    upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
+#'    lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
+#'    diag = "blank", 
+#'    title = "Diamonds",
+#'    .printInfo=FALSE
+#'  )
+#'  #customDiamond
+#'
+#'
+#' 
 #' ## prints
-#' #   columns = c(1,3,4)
-#' #   color = cyl
-#' #   blank plots along the diag
-#' #   columns c(1,3,4)
-#' #   columns c(1,3,4)
+#' #   data = mtcars
+#' #   columns = c(1,3,4) # (mpg, disp, hp)
+#' #   upper = contains scatter plots with the shape defined by the cyl and size constant at 5
+#' #   lower = contains scatter plots with the size defined by the cyl
+#' #   diag = contains 'blank' plots
+#' #   color = defined by cyl and is applied to botht he upper and lower plots.  It would be applied to diag if it existed
+#' #   title = "Custom Cars"
+#' #   .verbose = FALSE makes the "Plot #1, Plot #2...." not print
 #' carsMatrix <- ggpairs(
 #'   mtcars,
 #'   columns = c(1,3,4), 
@@ -165,21 +188,33 @@
 #'   lower = list(continuous = "points",aes_string = aes_string(size = "cyl")), 
 #'   diag = "blank", 
 #'   color = "cyl", 
-#'   title = "Custom Cars"
-#)
-
+#'   title = "Custom Cars",
+#'   .verbose = FALSE
+#' )
+#' #carsMatrix
 ggpairs <- function (
 	data, 
 	columns = 1:ncol(data),
-	upper = list(continuous = "cor", combo = "facethist", discrete = "ratio", aes_string = NULL), 
-	lower = list(continuous = "points", combo = "box", discrete = "ratio", aes_string = NULL), 
-	diag = list(continuous = "density", discrete = "bar", aes_string = NULL),
+	upper = list(
+	 continuous = "cor", 
+	 combo = "facethist", 
+	 discrete = "ratio", 
+	 aes_string = NULL), 
+	lower = list(
+	 continuous = "points", 
+	 combo = "box", 
+	 discrete = "ratio", 
+	 aes_string = NULL), 
+	diag = list(
+	 continuous = "density", 
+	 discrete = "bar", 
+	 aes_string = NULL),
 	title = "",
 	...,
-	.verbose = TRUE,
-	.printInfo = FALSE)
+	.verbose = TRUE)
 {
-  library(ggplot2)
+  require(ggplot2)
+  .printInfo <- FALSE
 
 	.verbose = .verbose || .printInfo
 	
@@ -241,8 +276,8 @@ ggpairs <- function (
 
 	data <- as.data.frame(data)
 	numCol <- length(columns)
-	if(.printInfo)
-    cat("data col: ", numCol,"\n")
+#	if(.printInfo)
+#    cat("data col: ", numCol,"\n")
 
 	
 
@@ -289,8 +324,7 @@ ggpairs <- function (
 		
 
 		up <- posX < posY
-			print(up)
-
+		
 
 		if(type == "scatterplot")
 		{
@@ -702,50 +736,48 @@ print.ggpairs <- function(x, ...)
 #  title = "Diamonds",
 #  .printInfo=TRUE
 #)
-if(TRUE)
-{
-  
-d <- diamonds[runif(floor(nrow(diamonds)/10),0,nrow(diamonds)),]
-
-diamondMatrix <- ggpairs(
-  d,
-  columns = 8:10, 
-  upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
-  lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
-  diag = "blank", 
-#  color = "color", 
-  title = "Diamonds",
-  .printInfo=FALSE
-)
-
-
-m <- mtcars
-#m$vs <- as.factor(m$vs)
-#m$cyl <- as.factor(m$cyl)
-#m$qsec <- as.factor(m$qsec)
-carsMatrix <- ggpairs(
-  mtcars,
-  columns = c(1,3,4), 
-  upper = list(continuous = "points",aes_string = aes_string(shape = "cyl", size = 5)), 
-  lower = list(continuous = "points",aes_string = aes_string(size = "cyl")), 
-  diag = "blank", 
-  color = "cyl", 
-  title = "mtcars",
-  .printInfo=FALSE,
-  .verbose = FALSE
-)
-
-
- carsMatrix <- ggpairs(
-   mtcars,
-   columns = c(1,3,4), 
-   upper = list(aes_string = aes_string(shape = "as.factor(cyl)", size = 5)), 
-   lower = list(aes_string = aes_string(size = "as.factor(cyl)")), 
-   diag = "blank", 
-   color = "cyl", 
-   title = "Custom Cars",
-   .printInfo = TRUE
- )
-
-
-}
+#if(TRUE)
+#{
+#  
+#d <- diamonds[runif(floor(nrow(diamonds)/10),0,nrow(diamonds)),]
+#
+#diamondMatrix <- ggpairs(
+#  d,
+#  columns = 8:10, 
+#  upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
+#  lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
+#  diag = "blank", 
+##  color = "color", 
+#  title = "Diamonds",
+#  .printInfo=FALSE
+#)
+#
+#
+#m <- mtcars
+##m$vs <- as.factor(m$vs)
+##m$cyl <- as.factor(m$cyl)
+##m$qsec <- as.factor(m$qsec)
+#carsMatrix <- ggpairs(
+#  mtcars,
+#  columns = c(1,3,4), 
+#  upper = list(continuous = "points",aes_string = aes_string(shape = "cyl", size = 5)), 
+#  lower = list(continuous = "points",aes_string = aes_string(size = "cyl")), 
+#  diag = "blank", 
+#  color = "cyl", 
+#  title = "mtcars",
+#  .verbose = FALSE
+#)
+#
+#
+# carsMatrix <- ggpairs(
+#   mtcars,
+#   columns = c(1,3,4), 
+#   upper = list(aes_string = aes_string(shape = "as.factor(cyl)", size = 5)), 
+#   lower = list(aes_string = aes_string(size = "as.factor(cyl)")), 
+#   diag = "blank", 
+#   color = "cyl", 
+#   title = "Custom Cars",
+# )
+#
+#
+#}
