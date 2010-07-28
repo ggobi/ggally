@@ -3,8 +3,9 @@
 #' 
 #' @param data data set to be used
 #' @keywords internal
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}
-.plot_types <- function(data)
+#' @author Barret Schloerke \email{schloerke@@gmail.com}
+# '
+plot_types <- function(data)
 {
 	namesD <- names(data)
 	dataInfo <- array("", c(ncol(data)^2,5))
@@ -12,7 +13,7 @@
 	#horizontal then vertical
 	for(j in 1:ncol(data))
 		for(i in 1:ncol(data))
-			dataInfo[(i-1)*ncol(data)+j,] <- c(.find_plot_type(data,i,j),namesD[i],namesD[j],i,j)
+			dataInfo[(i-1)*ncol(data)+j,] <- c(find_plot_type(data,i,j),namesD[i],namesD[j],i,j)
 			
 	dataInfo <- as.data.frame(dataInfo)
 	colnames(dataInfo) <- c("Type", "xvar", "yvar","posx","posy")
@@ -28,8 +29,8 @@
 #' @param col1 x column
 #' @param col2 y column
 #' @keywords internal
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}
-.find_plot_type <- function(data,col1,col2)
+#' @author Barret Schloerke \email{schloerke@@gmail.com}
+find_plot_type <- function(data,col1,col2)
 {
 
 	y1Type <- "numeric"
@@ -49,7 +50,7 @@
 	}
 	
 	#cat(names(data)[col2],": ", y2Type,"\t",names(data)[col1],": ",y1Type,"\n")
-	return(.get_plot_type(y1Type,y2Type))
+	return(get_plot_type(y1Type,y2Type))
 }
 
 #' Get Plot Type
@@ -58,8 +59,8 @@
 #' @param y1_type x type.  Either numeric or category
 #' @param y2_type y type.  Either numeric or category
 #' @keywords internal
-#' @author Barret Schloerke \email{bigbear@@iastate.edu}
-.get_plot_type <- function(y1_type,y2_type)
+#' @author Barret Schloerke \email{schloerke@@gmail.com}
+get_plot_type <- function(y1_type,y2_type)
 {
 	cats <- c(y1_type, y2_type) %in% "category"
 	if(TRUE %in% cats)

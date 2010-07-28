@@ -3,10 +3,10 @@ Type: Package
 Title: Extension to ggplot2.
 Version: 0.2
 Date: 2010-6-1
-Author: Barret Schloerke <bigbear@iastate.edu>, Di Cook
+Author: Barret Schloerke <schloerke@gmail.com>, Di Cook
     <dicook@iastate.edu>, Heike Hofmann <hofmann@iastate.edu>, and
     Hadley Wickham <h.wickham@iastate.edu>
-Maintainer: Barret Schloerke <bigbear@iastate.edu>
+Maintainer: Barret Schloerke <schloerke@gmail.com>
 Description: Package contains templates for different plots to be
     combined into a plot matrix.
 Depends: ggplot2
