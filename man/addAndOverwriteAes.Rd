@@ -1,11 +1,11 @@
-\name{.addAndOverwriteAes}
-\alias{.addAndOverwriteAes}
+\name{addAndOverwriteAes}
+\alias{addAndOverwriteAes}
 \title{Add new aes...}
-\usage{.addAndOverwriteAes(current, new)}
+\usage{addAndOverwriteAes(current, new)}
 \description{Add new aes
 Add new aesthetics to a previous aes}
 \keyword{internal}
-\author{Barret Schloerke \email{bigbear@iastate.edu}}
+\author{Barret Schloerke \email{schloerke@gmail.com}}
 \value{aes_string output}
 \examples{diamondMatrix <- ggpairs(	
 diamonds,

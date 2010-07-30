@@ -5,7 +5,7 @@
 \description{Plots the Scatter Density Plot
 Make a scatter density plot from a given data}
 \details{The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_density2d (lines) is used.}
-\author{Barret Schloerke \email{bigbear@iastate.edu}}
+\author{Barret Schloerke \email{schloerke@gmail.com}}
 \keyword{hplot}
 \arguments{\item{data}{data set using}
 \item{mapping}{aesthetics being used}

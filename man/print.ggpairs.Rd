@@ -5,7 +5,7 @@
 \description{Print ggpair object
 Specialized method to print the ggapir object}
 \keyword{internal}
-\author{Barret Schloerke \email{bigbear@iastate.edu}}
+\author{Barret Schloerke \email{schloerke@gmail.com}}
 \arguments{\item{x}{ggpair object to be plotted}
 \item{...}{not used}}
-\examples{example(ggpairs)}
+\examples{ggpairs(iris[,3:5])}

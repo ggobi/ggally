@@ -177,7 +177,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  is.factor(data[,as.character(mapping$y)])
   
   if(horizontal) {
-    cat("horizontal dot-box\n")
+#    cat("horizontal dot-box\n")
     mapping$tmp <- mapping$x
     mapping$x <- mapping$y
     mapping$y <- mapping$tmp
@@ -220,6 +220,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   p$horizontal <- horizontal
 	p
 }
+# This is done with side by side and not facets
 #ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE)
 #{
 #  horizontal <-  is.factor(data[,as.character(mapping$y)])
@@ -374,7 +375,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   } else {
     # horizontal
     # re-order levels to match all other plots
-    cat("horizontal facet-density-string\n")
+#    cat("horizontal facet-density-string\n")
 #    levels(data[,as.character(mapping$y)]) <- rev(levels(data[,as.character(mapping$y)]))
   }
 
@@ -382,9 +383,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 	yVal <- mapping$y
   mapping$y <- NULL
 
-	p <- ggplot(data = data, mapping) + 
-    scale_y_continuous(as.character(yVal)) + 
-    scale_x_continuous(as.character(xVal))
+	p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
 		    
 	if(den_strip){
 	 # print("Density Strip")	  
@@ -414,7 +413,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
     		
 		
 	if(horizontal){
-    #print("horizontal")
 		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
 		
 		if(den_strip)
@@ -447,7 +445,11 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' ggally_ratio(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
 ggally_ratio <- function(data){
 	dataNames <- colnames(data)
-	p <- ggfluctuation2(table(data[,2], data[,1])) + labs(x = dataNames[1], y = dataNames[2])
+	data <- data[, 2:1]
+	tmpData <- table(data)
+	tmpData <- tmpData[rev(seq_len(nrow(tmpData))),]
+	tmpData <- as.table(tmpData)
+	p <- ggfluctuation2(tmpData)# + labs(x = dataNames[1], y = dataNames[2])
   p$type <- "discrete"
   p$subType <- "ratio"
   p
@@ -506,57 +508,20 @@ ggally_barDiag <- function(data, mapping, ...){
     p <- ggplot(data = data, mapping) + geom_bar(...)
     p$subType <- "bar_num"
  	} else {
-#	  create a temporary data set that computes the count manually
-#		dataTmp <- as.factor(data[,as.character(mapping$x)])
-#		levels(dataTmp) <- rev(levels(dataTmp))
-#
-#
-#		count <- rep(0, length(levels(dataTmp)))
-#
-#		for(z in seq_along(levels(dataTmp)))
-#			count[z] <- length(dataTmp[dataTmp==levels(dataTmp)[z]])
-#		
-#		dataTmp <- cbind(levels(dataTmp), count)
-#		dataTmp <- as.data.frame(dataTmp, stringsAsFactors=FALSE)
-#		
-#		
-#		colnames(dataTmp) <- c(as.character(mapping$x), "Count")
-#		
-#		 Makes sure the count is numeric instead of factor
-#		dataTmp$Count <- as.numeric(as.character(dataTmp$Count))
-#		xVal <- mapping$x
-#		mapping$x <- "Count"
 
-  dataTmp <- as.factor(data[, as.character(mapping$x)])
-  tabledData <- table(dataTmp)
-  m <- as.data.frame(b, stringsAsFactors = FALSE)
-  colnames(m) <- c(as.character(mapping$x), "Freq")
-  xVal <- mapping$x
-  mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
-		
-print(head(dataTmp))
-str(tabledData)
-str(m)
-str(mapping)
-  p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
-	p$facet$facets <- paste(as.character(xVal)," ~ .", sep = "")
-  p <- p+coord_flip() + scale_x_continuous("", labels ="",breaks = 1)
-
-
-#		p <- ggplot(data = dataTmp, mapping) + 
-#		  geom_bar()# +
-#		  geom_bar(stat="identity")# +
-#			coord_flip()# +  
-#			opts(
-#				axis.text.y = theme_text(
-#					angle = 90, 
-#					vjust = 0, 
-#					colour = "grey50"
-#				)
-#			)
-#			
-
-
+    dataTmp <- as.factor(data[, as.character(mapping$x)])
+    tabledData <- table(dataTmp)
+    m <- as.data.frame(tabledData, stringsAsFactors = FALSE)
+    colnames(m) <- c(as.character(mapping$x), "Freq")
+    xVal <- mapping$x
+    mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
+#print(head(dataTmp))
+#str(tabledData)
+#str(m)
+#str(mapping)
+    p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
+  	p$facet$facets <- paste(as.character(xVal)," ~ .", sep = "")
+    p <- p+coord_flip() + scale_x_continuous(NULL, labels ="",breaks = 1)
     p$subType <- "bar_cat"
 	}
   p$type <- "diag"
@@ -636,7 +601,7 @@ ggally_text <- function(
 #' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.
 #' The function was adopted from experiemntal functions within GGplot2 developed by Hadley Wickham.
 #'
-#' @param table a table of values, or a data frame with three columns, the last column being frequency
+#' @param table_data a table of values, or a data frame with three columns, the last column being frequency
 #' @param floor don't display cells smaller than this value
 #' @param ceiling max value to compare to
 #' @author Hadley Wickham \email{h.wickham@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}
@@ -646,39 +611,38 @@ ggally_text <- function(
 #' ggfluctuation2(table(movies$Action, movies$mpaa))
 #' ggfluctuation2(table(movies[,c("Action", "mpaa")]))
 #' ggfluctuation2(table(warpbreaks$breaks, warpbreaks$tension))
-ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = TRUE)) {
+ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq, na.rm = TRUE)) {
 
-	yNames <- rownames(table)
-	xNames <- colnames(table)
-	oldnames <- c(names(dimnames(table)[1]), names(dimnames(table)[2]) )
-	#print(oldnames)
+	yNames <- rownames(table_data)
+	xNames <- colnames(table_data)
+	oldnames <- rev(names(dimnames(table_data)))
 
-	if (is.table(table)) 
-		table <- as.data.frame(t(table))
+	if (is.table(table_data)) 
+		table_data <- as.data.frame(t(table_data))
 
 	if(all(oldnames == ""))	
 		oldnames <- c("X","Y")		
 		
 
-	names(table) <- c("x", "y", "result")
-	table <- add.all.combinations(table, list("x", "y"))
-	table <- transform(table, x = as.factor(x), y = as.factor(y), 
+	names(table_data) <- c("x", "y", "result")
+	table_data <- add.all.combinations(table_data, list("x", "y"))
+	table_data <- transform(table_data, x = as.factor(x), y = as.factor(y), 
 		freq = result)
 
-	table <- transform(table, freq = sqrt(pmin(freq * .95, ceiling)/ceiling), 
+	table_data <- transform(table_data, freq = sqrt(pmin(freq * .95, ceiling)/ceiling), 
 		border = ifelse(is.na(freq), "grey90", ifelse(freq > 
 			ceiling, "grey30", "grey50")))
-	table[is.na(table$freq), "freq"] <- 1
-	table <- subset(table, freq * ceiling >= floor)
+	table_data[is.na(table_data$freq), "freq"] <- 1
+	table_data <- subset(table_data, freq * ceiling >= floor)
 	
-	xNew <- as.numeric(table$x) + 1/2 * table$freq
-	yNew <- as.numeric(table$y) + 1/2 * table$freq
+	xNew <- as.numeric(table_data$x) + 1/2 * table_data$freq
+	yNew <- as.numeric(table_data$y) + 1/2 * table_data$freq
 	
-	maxLen <- max(diff(range(as.numeric(table$x))), diff(range(as.numeric(table$y))) )
+	maxLen <- max(diff(range(as.numeric(table_data$x))), diff(range(as.numeric(table_data$y))) )
 	
 
-	table <- cbind(table, xNew, yNew)
-	#print(table)
+	table_data <- cbind(table_data, xNew, yNew)
+	#print(table_data)
 	#print(xNames)
 	#print(yNames)
 	
@@ -686,7 +650,7 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = 
 
 	
 	p <- ggplot(
-			table, 
+			table_data, 
 			aes_string(
 				x = "xNew", 
 				y = "yNew", 
@@ -731,6 +695,8 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = 
 				colour = "grey50"
 			)
 		)
+  p$x_names <- xNames
+  p$y_names <- yNames
 	
 	p
 }
@@ -742,31 +708,35 @@ ggfluctuation2 <- function (table, floor = 0, ceiling = max(table$freq, na.rm = 
 #' Makes a "blank" ggplot object that will only draw white space
 #'
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @param ... other arguments ignored
 #' @keywords hplot
 ggally_blank <- function(...){
   ignored <- aes(...)
 	a <- as.data.frame(cbind(1:2,1:2))
 	colnames(a) <- c("X","Y")
 	
-	ggplot(data = a, aes(x = X, y = Y)) + geom_point( colour = "transparent") + opts(
-		axis.line = theme_blank(),
-		axis.text.x = theme_blank(),
-		axis.text.y = theme_blank(),
-		axis.ticks = theme_blank(),
-		axis.title.x = theme_blank(),
-		axis.title.y = theme_blank(),
-		legend.background = theme_blank(),
-		legend.key = theme_blank(),
-		legend.text = theme_blank(),
-		legend.title = theme_blank(),
-		panel.background = theme_blank(),
-		panel.border = theme_blank(),
-		panel.grid.major = theme_blank(),
-		panel.grid.minor = theme_blank(),
-		plot.background = theme_blank(),
-		plot.title = theme_blank(),
-		strip.background = theme_blank(),
-		strip.text.x = theme_blank(),
-		strip.text.y = theme_blank()
-	)
+	p <- ggplot(data = a, aes(x = X, y = Y)) + geom_point( colour = "transparent") + 
+  	opts(
+  		axis.line = theme_blank(),
+  		axis.text.x = theme_blank(),
+  		axis.text.y = theme_blank(),
+  		axis.ticks = theme_blank(),
+  		axis.title.x = theme_blank(),
+  		axis.title.y = theme_blank(),
+  		legend.background = theme_blank(),
+  		legend.key = theme_blank(),
+  		legend.text = theme_blank(),
+  		legend.title = theme_blank(),
+  		panel.background = theme_blank(),
+  		panel.border = theme_blank(),
+  		panel.grid.major = theme_blank(),
+  		panel.grid.minor = theme_blank(),
+  		plot.background = theme_blank(),
+  		plot.title = theme_blank(),
+  		strip.background = theme_blank(),
+  		strip.text.x = theme_blank(),
+  		strip.text.y = theme_blank()
+  	)
+  p$subType <- p$type <- "blank"
+  p
 }

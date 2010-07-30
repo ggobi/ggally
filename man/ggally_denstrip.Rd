@@ -4,7 +4,7 @@
 \usage{ggally_denstrip(data, mapping, ...)}
 \description{Plots a tile plot with facets
 Make Tile Plot as densely as possible}
-\author{Barret Schloerke \email{bigbear@iastate.edu}}
+\author{Barret Schloerke \email{schloerke@gmail.com}}
 \keyword{hplot}
 \arguments{\item{data}{data set using}
 \item{mapping}{aesthetics being used}

@@ -1,3 +1,6 @@
+#make sure it all works!!!!
+
+
 # continuous
 #	  points
 #	  smooth
@@ -16,7 +19,6 @@
 # discrete
 #   ratio
 #   blank
-
 
 
 #' ggpairs - A GGplot2 Matrix
@@ -44,17 +46,18 @@
 #' @param upper see Details
 #' @param lower see Details
 #' @param diag see Details
+#' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
-#' @return ggpair object that if called, will reprint
+#' @return ggpair object that if called, will print
 #' @examples
-#' 
 #' # plotting is reduced to the first couple of examples.  
 #' # Feel free to print the ggpair objects created in the examples
 #' 
 #' #ggpairs(iris)
+#' #ggpairs(iris, upper = "blank")
 #' ggpairs(iris[,3:5])
 #'
 #' # Custom Example
@@ -64,15 +67,7 @@
 #' 	lower = list(continuous = "points", combo = "dot"), 
 #' 	diag = list(continuous = "bar", discrete = "bar")
 #' )
-#
 #'
-#' # Custom Example
-#' #ggpairs(
-#' #	iris[,3:5],
-#' #	upper = list(continuous = "density", combo = "facetdensity"),
-#' #	lower = "blank",
-#' #	diag = list(continuous = "bar", discrete = "blank")
-#' #)
 #'
 #'
 #' # Custom Example
@@ -87,87 +82,68 @@
 #' #diamondMatrix
 #' 
 #'
-#' # Will plot four "Incorrect Plots"	
+#' # Will plot four "Incorrect Plots"
 #' bad_plots <- ggpairs(
 #' 	iris[,3:4],
 #' 	upper = list(continuous = "wrongType1", combo = "wrongType2"),
 #' 	lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
 #' 	diag = list(continuous = "points", discrete = "box")
 #' )
-#; #bad_plots
+#' #bad_plots
 #'
 #'
 #' # Custom Examples
-#' plotMatrix <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
+#' custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
 #'   plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars)))
 #'   plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
-#' plotMatrix <- putPlot(plotMatrix, plot, 1, 2)
-#' plotMatrix <- putPlot(plotMatrix, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
-#' #plotMatrix
+#' custom_car <- putPlot(custom_car, plot, 1, 2)
+#' custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
+#' #custom_car
 #' 
 #'
 #' # Custom plot with different scale fill gradient
-#' plotMatrix2 <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
-#' plotMatrix2 <- putPlot(
-#'  plotMatrix2, 
+#' custom_fill <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
+#' custom_fill <- putPlot(
+#'  custom_fill, 
 #'  ggally_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend\nand axis labels!"),
 #'  1, 1)
-#' #plotMatrix2
-#' plot <- getPlot(plotMatrix2, 1, 2)
+#' #custom_fill
+#' plot <- getPlot(custom_fill, 1, 2)
 #' #plot
 #' plotNew <- plot + scale_fill_gradient(low = "grey80", high = "black")
 #' #plotNew
-#' plotMatrix2 <- putPlot(plotMatrix2, plotNew, 1, 2)
-#' #plotMatrix2
+#' custom_fill <- putPlot(custom_fill, plotNew, 1, 2)
+#' #custom_fill
 #'
 #'
 #' #Sequence to show how to change label size
-#' plotWithBigLabels <- getPlot(diamondMatrix, 2, 1) 
-#' plotWithBigLabels <- plotWithBigLabels + 
-#'  opts(axis.text.y = 
-#'    theme_text(
-#'      angle = 90, 
-#'      vjust = 0, 
-#'      colour = "grey50",
-#'      size = 4
-#'    )
-#'  )
-#' diamondMatrix <- putPlot(
-#'   diamondMatrix,
-#'   plotWithBigLabels,
-#'   2,
-#'   1
+#' make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
+#'   up <- from_left > from_top
+#'   p <- getPlot(plot_matrix, from_top, from_left)
+#'   if(up)
+#'     p <- p + opts(strip.text.x = theme_text(size = new_size))
+#'   else 
+#'     p <- p + opts(strip.text.y = theme_text(angle = -90, size = new_size))
+#'
+#'   putPlot(plot_matrix, p, from_top, from_left)
+#' }
+#' small_label_diamond <- make_small_strip(diamondMatrix, 2, 1)
+#' small_label_diamond <- make_small_strip(small_label_diamond, 1, 2)
+#' small_label_diamond <- make_small_strip(small_label_diamond, 2, 2)
+#' #small_label_diamond # now with much smaller strip text
+#' 
+#' 
+#' 
+#' special_diamond <- ggpairs(
+#'   diamonds,
+#'   columns = 8:10, 
+#'   upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
+#'   lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
+#'   diag = "blank", 
+#'   title = "Diamonds"
 #' )
-#' plotWithBigLabels2 <- getPlot(diamondMatrix, 3, 2) 
-#' plotWithBigLabels2 <- plotWithBigLabels2 + 
-#'  opts(axis.text.x = 
-#'    theme_text(
-#'      vjust = 1, 
-#'      hjust = 0, 
-#'      colour = "grey50",
-#'      size = 4
-#'    )
-#'  )
-#' diamondMatrix <- putPlot(
-#'   diamondMatrix,
-#'   plotWithBigLabels2,
-#'   3,
-#'   2
-#' )
-#' #diamondMatrix # now with much smaller labels
-#' 
-#' 
-#' 
-#'  customDiamond <- ggpairs(
-#'    diamonds,
-#'    columns = 8:10, 
-#'    upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
-#'    lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
-#'    diag = "blank", 
-#'    title = "Diamonds"
-#'  )
-#'  #customDiamond
+#' #special_diamond
 #'
 #'
 #' 
@@ -191,24 +167,25 @@
 #'   verbose = FALSE
 #' )
 #' #carsMatrix
-ggpairs <- function (
+#'
+#'
+#' ## Each list is custom to it's own area
+#' #  params are the parameters applied to the geoms.  Parameters can not be considered aesthetics.
+#' iris_with_params <- ggpairs(
+#'   iris, 
+#'   upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")), 
+#'   lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)), 
+#'   diag = list(continuous = "bar", discrete = "bar", aes_string = aes_string(fill = "Species"), params = c(binwidth = 0.25)),
+#'   title = "Complex Iris Data"
+#'  )
+#' #iris_with_params
+ggpairs <- function(
   data, 
   columns = 1:ncol(data),
   title = "",
-  upper = list(
-    continuous = "cor", 
-    combo = "facethist", 
-    discrete = "ratio", 
-    aes_string = NULL), 
-  lower = list(
-    continuous = "points", 
-    combo = "box", 
-    discrete = "ratio", 
-    aes_string = NULL), 
-  diag = list(
-    continuous = "density", 
-    discrete = "bar", 
-    aes_string = NULL),
+  upper = list(), 
+  lower = list(), 
+  diag = list(),
   params = NULL,
   ...,
   verbose = TRUE
@@ -294,10 +271,9 @@ ggpairs <- function (
 	dataTypes <- plot_types(data[columns])
   if(printInfo){cat("\n\n\nDATA TYPES\n");print(dataTypes)}
 
-	blank <- ggally_text("Incorrect\nPlot",size=6)	
 	
 	for(i in 1:nrow(dataTypes)){
-		p <- blank
+		p <- ggally_blank()
 		type <- dataTypes[i,"Type"]
 
 		posX <- as.numeric(dataTypes[i,"posx"])
@@ -310,24 +286,27 @@ ggpairs <- function (
 		
   	if(printInfo) cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
 
+		section_aes <- section_params <- NULL
 
 		if(type == "scatterplot"){
 			if(printInfo) cat("scatterplot\n")
 			
 			subType <- "points"
-			section_aes <- NULL
 			if(up){
 				subType <- upper$continuous
 				section_aes <- upper$aes_string
+				section_params <- upper$params
 			} else {
 				subType <- lower$continuous
 				section_aes <- lower$aes_string
+				section_params <- lower$params
 			}
 			
 			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+			combo_params <- addAndOverwriteAes(params, section_params)
 				
 				
-				p <- eval_ggpair(subType,data, combo_aes, params)
+				p <- eval_ggpair(subType,data, combo_aes, combo_params, printInfo)
 #			else if(subType == "smooth")
 #				p <- ggally_smooth(data, combo_aes, params)
 #			else if(subType == "density")
@@ -345,16 +324,16 @@ ggpairs <- function (
 			if(up){
 				subType <- upper$combo
 				section_aes <- upper$aes_string
+				section_params <- upper$params
 			} else {
 				subType <- lower$combo
 				section_aes <- lower$aes_string
+				section_params <- lower$params
 			}
 			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
-  		if(printInfo)
-  		  cat("combo_aes: ", str(combo_aes),"\n")
-			
+			combo_params <- addAndOverwriteAes(params, section_params)
 
-			p <- eval_ggpair(subType,data, combo_aes, params)
+			p <- eval_ggpair(subType,data, combo_aes, combo_params, printInfo)
 #			if(subType == "box")
 #				p <- ggally_box(data, combo_aes, params)
 #			else if(subType == "dot")
@@ -378,7 +357,7 @@ ggpairs <- function (
 				subType <- lower$discrete
 
 			if(subType == "ratio")
-				p <- ggally_ratio(data[, c(xColName, yColName)])
+				p <- ggally_ratio(data[, c(yColName, xColName)])
 			else if(subType == "blank")
 				p <- ggally_blank("blank")
 
@@ -388,9 +367,13 @@ ggpairs <- function (
 			subType <- diag$continuous
 			
 			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+			combo_params <- addAndOverwriteAes(params, diag$params)
 		
-			p <- eval_ggpair(str_join(subType, "Diag", sep = "", collapse = ""),data, combo_aes, params)
-#			if(subType == "density")
+			if(subType != "blank")
+        p <- eval_ggpair(paste(subType, "Diag", sep = "", collapse = ""),data, combo_aes, combo_params,printInfo)
+		  else
+		    p <- ggally_blank()
+#			
 #				p <- ggally_densityDiag(data, combo_aes, params)
 #			else if(subType == "bar")
 #				p <- ggally_barDiag(data, combo_aes, params)
@@ -402,8 +385,10 @@ ggpairs <- function (
   		
 			subType <- diag$discrete
 			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+			combo_params <- addAndOverwriteAes(params, diag$params)
+
 		
-			p <- eval_ggpair(str_join(subType, "Diag", sep = "", collapse = ""),data, combo_aes, params)
+			p <- eval_ggpair(paste(subType, "Diag", sep = "", collapse = ""),data, combo_aes, combo_params, printInfo)
 #			if(subType == "bar")
 #				p <- ggally_barDiag(data, combo_aes, params)
 #			#else if(subType == "ratio")
@@ -431,15 +416,39 @@ ggpairs <- function (
 	
 }
 
-eval_ggpair <- function(func, data, mapping, params=NULL){
-  text <- str_join("ggally_", func, "(data, mapping", sep = "", collapse = "")
+#' Evaluate a GGally Function
+#'
+#' Evaluate and GGally function with data, mapping, and parameters
+#'
+#' @param func identifier string in function name
+#' @param data data supplied to the function
+#' @param mapping mapping supplied to the function
+#' @param params parameters applied to the geom in the function
+#' @param printInfo boolean to determine whether or not the executed function should be printed
+eval_ggpair <- function(func, data, mapping, params=NULL, printInfo = FALSE){
+  
+  func_text <- paste("ggally_", func, collapse = "", sep = "")
+  test_for_function <- tryCatch(
+    get(func_text, mode = "function"),
+    error = function(e)
+      "bad_function_name"
+  )
+  
+  if(identical(test_for_function, "bad_function_name")) return( ggally_text("Incorrect\nPlot",size=6))
+
+  
+  text <- paste(func_text, "(data, mapping", sep = "", collapse = "")
+  
   if(!is.null(params)){
-    text <- str_join(text,", ",str_join(names(params), "=", params, sep="", collapse=", "), sep="")
+    params[is.character(params)] <- paste("\"", params[is.character(params)], "\"", sep = "")
+    text <- paste(text, ", ", paste(names(params), "=", params, sep="", collapse=", "), sep="")
   }
-  text <- str_join(text, ")")
+  text <- paste(text, ")", sep = "", collapse = "")
+  if(printInfo)
+    print(text)
   con <- textConnection(text)
+  on.exit(close(con))
   output <- eval(parse(con))
-  close(con)
   output
 }
 
@@ -474,7 +483,7 @@ vplayout <- function(x, y) {
 #' plotMatrix <- putPlot(plotMatrix, plot, 1, 2)
 #' plotMatrix <- putPlot(plotMatrix, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
 #' plotMatrix
-putPlot <- function(plotMatrix, plotObj, columnFromLeft, rowFromTop){
+putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 
 	pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
 	plotMatrix$plots[[pos]] <- plotObj
@@ -519,10 +528,6 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft)
 
 
 
-#######################################################
-#######################################################
-#######################################################
-#######################################################
 
 
 #' Print ggpair object
@@ -603,18 +608,52 @@ print.ggpairs <- function(x, ...){
     for(columnPos in 1:numCol){
       p <- getPlot(plotObj, rowPos, columnPos)
       
-      if(!is_blank_plot( p)){
+      if(!is_blank_plot(p)){
         
       	pos <- columnPos + (rowPos - 1) * numCol
       	type <- p$type
       	subType <- p$subType
-      	if(plotObj$printInfo) cat("Pos #", pos, ": type = ", type,": subType = ", subType,"\n")
-  
-    
-  			if( columnPos != 1)
-  				p <- p + opts(axis.text.y = theme_blank() )
-  			if( rowPos != numCol)
-  				p <- p + opts(axis.text.x = theme_blank() )
+      	if(plotObj$printInfo) {
+          cat("Pos #", pos)
+          if(!is.null(type)) cat(": type = ", type)
+          if(!is.null(subType)) cat(": subType = ", subType)
+          cat("\n")
+      	}
+          
+#         hack because ggplot2 is annoying
+        if(!is.null(subType)){
+          if(subType == "facethist"){
+            p <- p + scale_x_continuous(NULL) + scale_y_continuous(NULL)
+          } else if(subType == "box" || subType == "dot"){
+            p <- p + scale_x_continuous(NULL, labels="", breaks=1)
+          } else if(subType == "ratio"){
+            p <- p + 
+          		scale_x_continuous(
+          			NULL, 
+          			limits=c(1,length(p$x_names) + 1), 
+          			breaks=1:(length(p$x_names) + 1), 
+          			labels=c(p$x_names,""), 
+          			minor_breaks=FALSE
+          		) + 
+          		scale_y_continuous(
+          			NULL, 
+          			limits=c(1,length(p$y_names) + 1), 
+          			breaks=1:(length(p$y_names) + 1), 
+          			labels=c(p$y_names,""), 
+          			minor_breaks=FALSE
+          		)          		
+
+          }
+        }
+
+
+  			if( columnPos != 1){
+  				p <- p + opts(axis.text.y = theme_blank(), axis.title.y = theme_blank() )
+  			}
+
+  			if( rowPos != numCol){
+  				p <- p + opts(axis.text.x = theme_blank(), axis.title.x = theme_blank() )
+  			}
     		
     		p <- p + 
     			labs(x = NULL, y = NULL) + 
@@ -623,12 +662,6 @@ print.ggpairs <- function(x, ...){
     				legend.position = "none"
     			)
         
-        # hack because ggplot2 is annoying
-        if(subType == "facethist"){
-          p <- p + scale_x_continuous(NULL) + scale_y_continuous(NULL)
-        } else if(subType == "box" || subType == "dot"){
-            p <- p + scale_x_continuous("", labels="", breaks=1)
-        }
         
   			grid.rect(
   			  gp=gpar(fill="white",lty = "blank"),
@@ -650,10 +683,13 @@ print.ggpairs <- function(x, ...){
 #' @keywords internal
 #' @examples
 #'  is_blank_plot(ggally_blank())
-#'  is_blank_plot(ggally_points(mtcars, x = "disp", y = "hp"))
+#'  is_blank_plot(ggally_points(mtcars, aes_string(x = "disp", y = "hp")))
 #'
 is_blank_plot <- function(p){  
-  identical(p, ggally_blank("blank"))
+  if( !is.null(p$subType) && !is.null(p$type))
+    p$subType == "blank" && p$type == "blank"
+  else
+    FALSE
 }
 
 

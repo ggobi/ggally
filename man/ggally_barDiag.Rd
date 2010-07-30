@@ -4,7 +4,7 @@
 \usage{ggally_barDiag(data, mapping, ...)}
 \description{Plots the Bar Plots by Using Diagonal
 Plots the bar plots by using Diagonal}
-\author{Barret Schloerke \email{bigbear@iastate.edu}}
+\author{Barret Schloerke \email{schloerke@gmail.com}}
 \keyword{hplot}
 \arguments{\item{data}{data set using}
 \item{mapping}{aesthetics being used}

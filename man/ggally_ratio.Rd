@@ -5,7 +5,7 @@
 \description{Plots a mosaic plots
 Plots the mosaic plot by using fluctuation}
 \details{Must send only two discrete columns in the data set.}
-\author{Barret Schloerke \email{bigbear@iastate.edu}}
+\author{Barret Schloerke \email{schloerke@gmail.com}}
 \keyword{hplot}
 \arguments{\item{data}{data set using}}
 \examples{ggally_ratio(movies[,c("mpaa","Action")])
