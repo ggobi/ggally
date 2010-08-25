@@ -273,7 +273,7 @@ ggpairs <- function(
 
 	
 	for(i in 1:nrow(dataTypes)){
-		p <- ggally_blank()
+		p <- "blank"
 		type <- dataTypes[i,"Type"]
 
 		posX <- as.numeric(dataTypes[i,"posx"])
@@ -306,7 +306,7 @@ ggpairs <- function(
 			combo_params <- addAndOverwriteAes(params, section_params)
 				
 				
-				p <- eval_ggpair(subType,data, combo_aes, combo_params, printInfo)
+				p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
 #			else if(subType == "smooth")
 #				p <- ggally_smooth(data, combo_aes, params)
 #			else if(subType == "density")
@@ -333,7 +333,7 @@ ggpairs <- function(
 			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
 			combo_params <- addAndOverwriteAes(params, section_params)
 
-			p <- eval_ggpair(subType,data, combo_aes, combo_params, printInfo)
+			p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
 #			if(subType == "box")
 #				p <- ggally_box(data, combo_aes, params)
 #			else if(subType == "dot")
@@ -370,9 +370,9 @@ ggpairs <- function(
 			combo_params <- addAndOverwriteAes(params, diag$params)
 		
 			if(subType != "blank")
-        p <- eval_ggpair(paste(subType, "Diag", sep = "", collapse = ""),data, combo_aes, combo_params,printInfo)
+        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
 		  else
-		    p <- ggally_blank()
+		    p <- "blank"
 #			
 #				p <- ggally_densityDiag(data, combo_aes, params)
 #			else if(subType == "bar")
@@ -388,7 +388,7 @@ ggpairs <- function(
 			combo_params <- addAndOverwriteAes(params, diag$params)
 
 		
-			p <- eval_ggpair(paste(subType, "Diag", sep = "", collapse = ""),data, combo_aes, combo_params, printInfo)
+			p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params, printInfo)
 #			if(subType == "bar")
 #				p <- ggally_barDiag(data, combo_aes, params)
 #			#else if(subType == "ratio")
@@ -416,16 +416,16 @@ ggpairs <- function(
 	
 }
 
-#' Evaluate a GGally Function
+#' Generate GGally Function Text
 #'
-#' Evaluate and GGally function with data, mapping, and parameters
+#' Generate GGally function text with data, mapping, and parameters
 #'
 #' @param func identifier string in function name
-#' @param data data supplied to the function
 #' @param mapping mapping supplied to the function
 #' @param params parameters applied to the geom in the function
 #' @param printInfo boolean to determine whether or not the executed function should be printed
-eval_ggpair <- function(func, data, mapping, params=NULL, printInfo = FALSE){
+#' @keywords internal
+make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
   
   func_text <- paste("ggally_", func, collapse = "", sep = "")
   test_for_function <- tryCatch(
@@ -437,7 +437,7 @@ eval_ggpair <- function(func, data, mapping, params=NULL, printInfo = FALSE){
   if(identical(test_for_function, "bad_function_name")) return( ggally_text("Incorrect\nPlot",size=6))
 
   
-  text <- paste(func_text, "(data, mapping", sep = "", collapse = "")
+  text <- paste(func_text, "(ggally_data, aes(", str_join(names(mapping), " = ", as.character(mapping), collapse = ", "), ")", sep = "", collapse = "")
   
   if(!is.null(params)){
     params[is.character(params)] <- paste("\"", params[is.character(params)], "\"", sep = "")
@@ -448,8 +448,19 @@ eval_ggpair <- function(func, data, mapping, params=NULL, printInfo = FALSE){
     print("")
     print(text)
     print(str(mapping))
-  }
-  con <- textConnection(text)
+  } 
+  text
+}
+
+#' Evaluate a GGally Function
+#'
+#' Evaluate and GGally function with data, mapping, and parameters
+#'
+#' @param txt text that should be evaluated to create a plot
+#' @param ggally_data data that should be used when evaluating the text
+#' @keywords internal
+eval_ggpair <- function(txt, ggally_data) {
+  con <- textConnection(txt)
   on.exit(close(con))
   output <- eval(parse(con))
   output
@@ -508,8 +519,7 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #' @examples
 #' plotMatrix2 <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
 #' getPlot(plotMatrix2, 1, 2)
-getPlot <- function(plotMatrix, rowFromTop, columnFromLeft)
-{
+getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   if(plotMatrix$printInfo)
     cat("rowFromTop: ",rowFromTop," columnFromLeft: ",columnFromLeft,"\n")
   
@@ -517,16 +527,25 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft)
 	
   if(plotMatrix$printInfo) cat("Plot List Spot: ",pos,"\n")
   
-	plot <- plotMatrix$plots[[pos]]
-	attributes(plot)$class <- "ggplot"
+  plot_text <- plotMatrix$plots[[pos]]
+  if (is.character(plot_text)) {
+  	if (plot_text != "blank") {
+    	p <- eval_ggpair(plot_text, plotMatrix$data)
+      attributes( p)$class <- "ggplot"
+    } else {
+      p <- ggally_blank()
+  	}
+  } else {
+    p <- plot_text
+  }
 
-	if(plotMatrix$printInfo || plotMatrix$verbose){
+  if(plotMatrix$printInfo || plotMatrix$verbose){
     cat("Plot #",pos)
-    if(is_blank_plot(plot)) cat(" - Blank")
+    if (is.character(plot_text) ) { if (plot_text == "blank") cat(" - Blank")}
     cat("\n")
-	}
+  }
 
-	plot
+  p
 }
 
 
@@ -610,7 +629,6 @@ print.ggpairs <- function(x, ...){
   for(rowPos in 1:numCol){
     for(columnPos in 1:numCol){
       p <- getPlot(plotObj, rowPos, columnPos)
-      
       if(!is_blank_plot(p)){
         
       	pos <- columnPos + (rowPos - 1) * numCol
@@ -623,7 +641,7 @@ print.ggpairs <- function(x, ...){
           cat("\n")
       	}
           
-#         hack because ggplot2 is annoying
+        # hack because ggplot2 is annoying
         if(!is.null(subType)){
           if(subType == "facethist"){
             p <- p + scale_x_continuous(NULL) + scale_y_continuous(NULL)

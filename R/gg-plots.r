@@ -91,9 +91,9 @@ ggally_cor <- function(data, mapping, ...){
   if (any(bad_rows)) {
     total <- sum(bad_rows)
     if (total > 1) {
-      warning("Removed ", total, " rows containing missing values (ggally_cor)")
+      warning("Removed ", total, " rows containing missing values")
     } else if (total == 1) {
-      warning("Removing 1 row that contained a missing value (ggally_cor)")
+      warning("Removing 1 row that contained a missing value")
     }
 
     xVar <- xVar[!bad_rows]
