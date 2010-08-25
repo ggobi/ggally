@@ -85,6 +85,21 @@ ggally_cor <- function(data, mapping, ...){
 
   xVar <- data[,as.character(mapping$x)]
   yVar <- data[,as.character(mapping$y)]
+  x_bad_rows <- is.na(xVar)
+  y_bad_rows <- is.na(yVar)
+  bad_rows <- x_bad_rows | y_bad_rows
+  if (any(bad_rows)) {
+    total <- sum(bad_rows)
+    if (total > 1) {
+      warning("Removed ", total, " rows containing missing values (ggally_cor)")
+    } else if (total == 1) {
+      warning("Removing 1 row that contained a missing value (ggally_cor)")
+    }
+
+    xVar <- xVar[!bad_rows]
+    yVar <- yVar[!bad_rows]
+  }
+
   mapping$x <- mapping$y <- NULL
     
   if(length(names(mapping)) > 0){
@@ -100,7 +115,6 @@ ggally_cor <- function(data, mapping, ...){
       }
     }
   }
-
 	p <- ggally_text(
 		label = paste(
 			"Corr:\n",

@@ -444,8 +444,11 @@ eval_ggpair <- function(func, data, mapping, params=NULL, printInfo = FALSE){
     text <- paste(text, ", ", paste(names(params), "=", params, sep="", collapse=", "), sep="")
   }
   text <- paste(text, ")", sep = "", collapse = "")
-  if(printInfo)
+  if(printInfo){
+    print("")
     print(text)
+    print(str(mapping))
+  }
   con <- textConnection(text)
   on.exit(close(con))
   output <- eval(parse(con))

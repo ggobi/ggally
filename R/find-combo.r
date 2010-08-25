@@ -2,9 +2,8 @@
 #' Retrieves the type of plot that should be used for all combinations
 #' 
 #' @param data data set to be used
-#' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-# '
+#' @keywords internal
 plot_types <- function(data)
 {
 	namesD <- names(data)
