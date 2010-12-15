@@ -89,7 +89,7 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #' ggally_cor(iris, aes(x = Sepal.Length, y = Petal.Length))
 #' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
-ggally_cor <- function(data, mapping, ...){
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -145,12 +145,12 @@ ggally_cor <- function(data, mapping, ...){
 	# splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
 	# splits <- str_c(colorCol, sep = ", ", collapse = ", ")
 	final_text <- ""
-	if(FALSE || str_length(colorCol) > 0) {
+	if(str_length(colorCol) > 0) {
 		
 		txt <- str_c("ddply(data, .(", colorCol, "), transform, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
 		print(unique(txt))
 		cord <- unique(eval_ggpair(txt))
-		browser()
+		# browser()
 		cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
 		
 		# put in correct order
@@ -164,29 +164,49 @@ ggally_cor <- function(data, mapping, ...){
 			}
 		}
 		cord <- cord[ord, ]
+		
 		cord$label <- str_c(cord[[colorCol]], ": ", cord$ggally_cor)
+		
+		txt <- str_c("Cor:", str_c(cord$label, collapse = "\n"), sep = "\n", collapse = "\n")
+		
 		
 		
 		
 		
 		print(cord)
-		browser()
+		# browser()
 		p <- ggally_text(
-			label = cord$label,
+			label = "Cor: ",
 			mapping,
 			xP=0.5,
-			yP=0.5,
+			yP=0.9,
 			xrange = range(xVal),
 			yrange = range(yVal),
-			color = lev,
+			color = "black",
 			...
 		) +  
 		theme_bw() + 
 		opts(legend.position = "none")
-
-	  p$type <- "continuous"
-	  p$subType <- "cor"
-	  p
+		
+		xPos <- rep(corAlignPercent, length(lev))
+		yPos <- seq(from = 0.8, to = 0.2, length.out = length(lev))
+		cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
+		# browser()
+				p <- p + geom_text(
+						data=cordf,
+						aes(
+							x = xPos,
+							y = yPos,
+							label = labelp,
+							color = labelp
+						),
+						hjust = 1
+						
+					)
+		
+		p$type <- "continuous"
+		p$subType <- "cor"
+		p
 	} else {
 		p <- ggally_text(
 			label = paste(
@@ -643,36 +663,42 @@ ggally_text <- function(
   yrange = c(0,1),
   ...
 ){
-  colour <- as.character(mapping$colour)
 
+  
+	p <- ggplot() + xlim(c(0,1)) + ylim(c(0,1)) + 
+		geom_rect(data = 
+				data.frame(
+					x0 = xP * diff(xrange) + min(xrange),
+					y0 = yP * diff(yrange) + min(yrange),
+					x1 = xrange[1], 
+					x2 = xrange[2], 
+					y1 = yrange[1], 
+					y2 = yrange[2]
+				),
+				aes(
+					x = x0,
+					y = y0,
+					xmin=x1,
+					xmax = x2,
+					ymin = y1,
+					ymax = y2
+				),
+				fill= I("white")) + 
+				labs(x = NULL, y = NULL)
+
+	new_mapping <- aes_string(x = xP, y = yP)
+	if(is.null(mapping)) {
+		mapping <- new_mapping
+	} else {
+		mapping <- addAndOverwriteAes(mapping, new_mapping)
+	}
+	colour <- as.character(mapping$colour)
   if(is.null(colour) || length(colour) < 1)
     colour <- "black" 
 
   # remove colour from the aesthetics
 	mapping$colour <- NULL
-
   
-	p <- ggplot(data = 
-			data.frame(
-				x0 = xP * diff(xrange) + min(xrange),
-				y0 = yP * diff(yrange) + min(yrange),
-				x1 = xrange[1], 
-				x2 = xrange[2], 
-				y1 = yrange[1], 
-				y2 = yrange[2]
-			),
-			aes(
-				x = x0,
-				y = y0,
-				xmin=x1,
-				xmax = x2, 
-				ymin = y1, 
-				ymax = y2
-			)
-		)+
-		geom_rect(fill= I("white")) + 
-		labs(x = NULL, y = NULL)
-
 	p <- p + 
 	   geom_text( label = label, mapping = mapping, colour = colour, ...) + 
 	   opts(legend.position = "none")
