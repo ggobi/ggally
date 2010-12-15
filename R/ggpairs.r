@@ -302,7 +302,7 @@ ggpairs <- function(
 				section_params <- lower$params
 			}
 			
-			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
 			combo_params <- addAndOverwriteAes(params, section_params)
 				
 				
@@ -437,7 +437,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
   if(identical(test_for_function, "bad_function_name")) return( ggally_text("Incorrect\nPlot",size=6))
 
   
-  text <- paste(func_text, "(ggally_data, aes(", str_join(names(mapping), " = ", as.character(mapping), collapse = ", "), ")", sep = "", collapse = "")
+  text <- paste(func_text, "(ggally_data, aes(", paste(names(mapping), " = ", as.character(mapping), sep = "", collapse = ", "), ")", sep = "", collapse = "")
   
   if(!is.null(params)){
     params[is.character(params)] <- paste("\"", params[is.character(params)], "\"", sep = "")

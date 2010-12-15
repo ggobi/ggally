@@ -1,10 +1,11 @@
 #' Plots the Scatter Plot
+#'
 #' Make a scatter plot with a given data set
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments are sent to geom_point
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke  \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @examples
 #' ggally_points(mtcars, aes(x = disp, y = hp))
