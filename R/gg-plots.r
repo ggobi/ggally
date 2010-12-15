@@ -148,7 +148,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 	if(str_length(colorCol) > 0) {
 		
 		txt <- str_c("ddply(data, .(", colorCol, "), transform, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
-		print(unique(txt))
+		# print(unique(txt))
 		cord <- unique(eval_ggpair(txt))
 		# browser()
 		cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
@@ -173,8 +173,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 		
 		
 		
-		print(cord)
-		# browser()
+		# print(cord)
 		p <- ggally_text(
 			label = "Cor: ",
 			mapping,
@@ -188,10 +187,11 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 		theme_bw() + 
 		opts(legend.position = "none")
 		
-		xPos <- rep(corAlignPercent, length(lev))
-		yPos <- seq(from = 0.8, to = 0.2, length.out = length(lev))
+		xPos <- rep(corAlignPercent, length(lev)) * diff(range(xVal)) + min(range(xVal))
+		yPos <- seq(from = 0.8, to = 0.2, length.out = length(lev)) * diff(range(yVal)) + min(range(yVal))
+		print(range(yVal))
+		print(yPos)
 		cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
-		# browser()
 				p <- p + geom_text(
 						data=cordf,
 						aes(
@@ -664,20 +664,17 @@ ggally_text <- function(
   ...
 ){
 
-  
-	p <- ggplot() + xlim(c(0,1)) + ylim(c(0,1)) + 
-		geom_rect(data = 
-				data.frame(
-					x0 = xP * diff(xrange) + min(xrange),
-					y0 = yP * diff(yrange) + min(yrange),
-					x1 = xrange[1], 
-					x2 = xrange[2], 
-					y1 = yrange[1], 
-					y2 = yrange[2]
-				),
+  rectData <- data.frame(
+		x1 = xrange[1], 
+		x2 = xrange[2], 
+		y1 = yrange[1], 
+		y2 = yrange[2]
+	)
+	print(rectData)
+	
+	p <- ggplot() + xlim(xrange) + ylim(yrange) + 
+		geom_rect(data = rectData,
 				aes(
-					x = x0,
-					y = y0,
 					xmin=x1,
 					xmax = x2,
 					ymin = y1,
@@ -686,7 +683,7 @@ ggally_text <- function(
 				fill= I("white")) + 
 				labs(x = NULL, y = NULL)
 
-	new_mapping <- aes_string(x = xP, y = yP)
+	new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange), y = yP * diff(yrange) + min(yrange))
 	if(is.null(mapping)) {
 		mapping <- new_mapping
 	} else {
