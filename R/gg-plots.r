@@ -1,3 +1,9 @@
+
+
+
+
+
+
 #' Plots the Scatter Plot
 #'
 #' Make a scatter plot with a given data set
@@ -58,10 +64,11 @@ ggally_smooth <- function(data, mapping, ...){
 ggally_density <- function(data, mapping, ...){  
   p <- ggplot(data = data, mapping)
 
-	if(!is.null(mapping$fill))
+	if(!is.null(mapping$fill)) {
 		p <- p + stat_density2d(geom="polygon", ...)
-	else
-	  p <- p + geom_density2d( colour = I("black"), ...)
+	} else {
+	  p <- p + geom_density2d(...)
+	}
 	
   p$type <- "continuous"
   p$subType <- "density"
@@ -84,26 +91,43 @@ ggally_density <- function(data, mapping, ...){
 #' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
 ggally_cor <- function(data, mapping, ...){
 
-  xVar <- data[,as.character(mapping$x)]
-  yVar <- data[,as.character(mapping$y)]
-  x_bad_rows <- is.na(xVar)
-  y_bad_rows <- is.na(yVar)
-  bad_rows <- x_bad_rows | y_bad_rows
-  if (any(bad_rows)) {
-    total <- sum(bad_rows)
-    if (total > 1) {
-      warning("Removed ", total, " rows containing missing values")
-    } else if (total == 1) {
-      warning("Removing 1 row that contained a missing value")
-    }
+  # xVar <- data[,as.character(mapping$x)]
+  # yVar <- data[,as.character(mapping$y)]
+  # x_bad_rows <- is.na(xVar)
+  # y_bad_rows <- is.na(yVar)
+  # bad_rows <- x_bad_rows | y_bad_rows
+  # if (any(bad_rows)) {
+  #   total <- sum(bad_rows)
+  #   if (total > 1) {
+  #     warning("Removed ", total, " rows containing missing values")
+  #   } else if (total == 1) {
+  #     warning("Removing 1 row that contained a missing value")
+  #   }
+  # 
+  #   xVar <- xVar[!bad_rows]
+  #   yVar <- yVar[!bad_rows]
+  # }
 
-    xVar <- xVar[!bad_rows]
-    yVar <- yVar[!bad_rows]
-  }
+  # mapping$x <- mapping$y <- NULL
 
-  mapping$x <- mapping$y <- NULL
-    
-  if(length(names(mapping)) > 0){
+	rows <- complete.cases(data)
+	if(any(!rows)) {
+		total <- sum(!rows)
+		if (total > 1) {
+		  warning("Removed ", total, " rows containing missing values")
+		} else if (total == 1) {
+		  warning("Removing 1 row that contained a missing value")
+		}
+	}
+	data <- data[rows, ]
+	xCol <- as.character(mapping$x)
+	yCol <- as.character(mapping$y)
+	colorCol <- as.character(mapping$colour)
+	xVal <- data[,xCol]
+	yVal <- data[,yCol]
+	
+	
+	if(length(names(mapping)) > 0){
     for(i in length(names(mapping)):1){
       # find the last value of the aes, such as cyl of as.factor(cyl)
       tmp_map_val <- as.character(mapping[names(mapping)[i]][[1]])
@@ -116,29 +140,77 @@ ggally_cor <- function(data, mapping, ...){
       }
     }
   }
-	p <- ggally_text(
-		label = paste(
-			"Corr:\n",
-			signif(
-				cor(xVar,yVar),
-				3
+  
+	
+	# splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
+	# splits <- str_c(colorCol, sep = ", ", collapse = ", ")
+	final_text <- ""
+	if(FALSE || str_length(colorCol) > 0) {
+		
+		txt <- str_c("ddply(data, .(", colorCol, "), transform, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
+		print(unique(txt))
+		cord <- unique(eval_ggpair(txt))
+		browser()
+		cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
+		
+		# put in correct order
+		lev <- levels(data[[colorCol]])
+		ord <- rep(-1, NROW(cord))
+		for(i in 1:NROW(cord)) {
+			for(j in seq_along(lev)){
+				if(identical(as.character(cord[i, colorCol]), as.character(lev[j]))) {
+					ord[i] <- j
+				}
+			}
+		}
+		cord <- cord[ord, ]
+		cord$label <- str_c(cord[[colorCol]], ": ", cord$ggally_cor)
+		
+		
+		
+		
+		print(cord)
+		browser()
+		p <- ggally_text(
+			label = cord$label,
+			mapping,
+			xP=0.5,
+			yP=0.5,
+			xrange = range(xVal),
+			yrange = range(yVal),
+			color = lev,
+			...
+		) +  
+		theme_bw() + 
+		opts(legend.position = "none")
+
+	  p$type <- "continuous"
+	  p$subType <- "cor"
+	  p
+	} else {
+		p <- ggally_text(
+			label = paste(
+				"Corr:\n",
+				signif(
+					cor(xVal,yVal),
+					3
+				),
+				sep="",collapse=""
 			),
-			sep="",collapse=""
-		),
-		mapping,
-		xP=0.5,
-		yP=0.5,
-		xrange = range(xVar),
-		yrange = range(yVar),
-		...
-	) +  
-	theme_bw() + 
-	opts(legend.position = "none")
+			mapping,
+			xP=0.5,
+			yP=0.5,
+			xrange = range(xVal),
+			yrange = range(yVal),
+			...
+		) +  
+		theme_bw() + 
+		opts(legend.position = "none")
 
-  p$type <- "continuous"
-  p$subType <- "cor"
-  p
-
+	  p$type <- "continuous"
+	  p$subType <- "cor"
+	  p		
+	}
 }
 		
 
@@ -186,8 +258,8 @@ ggally_dot <- function(data, mapping, ...){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @examples
-#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species), boxPlot=TRUE)
-#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species), boxPlot=FALSE)
+#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
+#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Spieces), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  is.factor(data[,as.character(mapping$y)])
   
@@ -200,7 +272,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #    levels(data[,as.character(mapping$x)]) <- rev(levels(data[,as.character(mapping$x)]))
   }
 
-  xVal <- as.character(mapping$x)
+	xVal <- as.character(mapping$x)
   yVal <- as.character(mapping$x)
   mapping$x <- 1
 
@@ -298,7 +370,7 @@ ggally_facethist <- function(data, mapping, ...){
 	   # horizontal
 	   # re-order levels to match all other plots
 #	   levels(data[,as.character(mapping$y)]) <- rev(levels(data[,as.character(mapping$y)]))
-	}
+	}	
 
 #cat("Horizontal: ", horizontal, "\n")	
 #cat("\nmapping\n");print(str(mapping))
@@ -358,7 +430,7 @@ ggally_facetdensity <- function(data, mapping, ...){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @examples
-#' ggally_denstrip(iris, aes(x = Petal.Width, y = Species))
+#' ggally_denstrip(iris, aes(x = Petal.Width, y = Species, color = Species))
 #' ggally_denstrip(iris, aes_string(x = "Petal.Width", y = "Species"))
 #' ggally_denstrip(iris, aes_string(x = "Species", y = "Petal.Width", binwidth = "0.2")) + scale_fill_gradient(low = "grey80", high = "black")
 ggally_denstrip <- function(data,mapping, ...){
@@ -520,23 +592,25 @@ ggally_barDiag <- function(data, mapping, ...){
 	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
 	
 	if(numer){
+		# message("is numeric")
     p <- ggplot(data = data, mapping) + geom_bar(...)
     p$subType <- "bar_num"
  	} else {
-
-    dataTmp <- as.factor(data[, as.character(mapping$x)])
-    tabledData <- table(dataTmp)
-    m <- as.data.frame(tabledData, stringsAsFactors = FALSE)
-    colnames(m) <- c(as.character(mapping$x), "Freq")
-    xVal <- mapping$x
-    mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
+		# dataTmp <- as.factor(data[, as.character(mapping$x)])
+		# tabledData <- table(dataTmp)
+		# m <- as.data.frame(tabledData, stringsAsFactors = FALSE)
+		# colnames(m) <- c(as.character(mapping$x), "Freq")
+		xVal <- mapping$x
+		mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
 #print(head(dataTmp))
 #str(tabledData)
 #str(m)
 #str(mapping)
-    p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
-  	p$facet$facets <- paste(as.character(xVal)," ~ .", sep = "")
-    p <- p+coord_flip() + scale_x_continuous(NULL, labels ="",breaks = 1)
+    # p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
+		p <- ggplot(data, mapping) + geom_bar(...)
+  	p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
+    # p <- p+coord_flip() + 
+		p <- p + scale_x_continuous(NULL, labels ="",breaks = 1)
     p$subType <- "bar_cat"
 	}
   p$type <- "diag"

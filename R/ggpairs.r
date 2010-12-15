@@ -188,7 +188,8 @@ ggpairs <- function(
   diag = list(),
   params = NULL,
   ...,
-  verbose = TRUE
+  verbose = FALSE,
+	removeTicks = FALSE
 ){
   require(ggplot2)
   printInfo <- FALSE
@@ -303,6 +304,11 @@ ggpairs <- function(
 			}
 			
 			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
+			if(subType == "density") {
+				combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
+				combo_aes
+			}
+				
 			combo_params <- addAndOverwriteAes(params, section_params)
 				
 				
@@ -331,6 +337,8 @@ ggpairs <- function(
 				section_params <- lower$params
 			}
 			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
+			if(subType != "dot")
+				combo_aes <- mapping_color_fill(combo_aes)
 			combo_params <- addAndOverwriteAes(params, section_params)
 
 			p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
@@ -367,6 +375,9 @@ ggpairs <- function(
 			subType <- diag$continuous
 			
 			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+			if(subType != "density")
+				combo_aes <- mapping_color_fill(combo_aes)
+
 			combo_params <- addAndOverwriteAes(params, diag$params)
 		
 			if(subType != "blank")
@@ -385,6 +396,8 @@ ggpairs <- function(
   		
 			subType <- diag$discrete
 			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+			combo_aes <- mapping_color_fill(combo_aes)
+			
 			combo_params <- addAndOverwriteAes(params, diag$params)
 
 		
@@ -407,7 +420,8 @@ ggpairs <- function(
     plots = ggpairsPlots, 
     title = title, 
     verbose = verbose, 
-    printInfo = printInfo
+    printInfo = printInfo,
+		removeTicks = removeTicks
   )
 	
 	attributes(plotMatrix)$class <- "ggpairs"
@@ -462,7 +476,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 eval_ggpair <- function(txt, ggally_data) {
   con <- textConnection(txt)
   on.exit(close(con))
-  output <- eval(parse(con))
+  output <- eval(parse(con), envir = globalenv())
   output
 }
 
@@ -667,14 +681,24 @@ print.ggpairs <- function(x, ...){
           }
         }
 
+				removeTicks <- identical(plotObj$removeTicks, TRUE)
 
-  			if( columnPos != 1){
+  			if( columnPos != 1 || removeTicks){
   				p <- p + opts(axis.text.y = theme_blank(), axis.title.y = theme_blank() )
   			}
 
-  			if( rowPos != numCol){
+  			if( rowPos != numCol || removeTicks){
   				p <- p + opts(axis.text.x = theme_blank(), axis.title.x = theme_blank() )
   			}
+
+				if(removeTicks) {
+					p <- p + opts(
+						strip.background = theme_blank(),
+						strip.text.x = theme_blank(),
+						strip.text.y = theme_blank()
+					)
+		  		
+				}
     		
     		p <- p + 
     			labs(x = NULL, y = NULL) + 
@@ -688,8 +712,12 @@ print.ggpairs <- function(x, ...){
   			  gp=gpar(fill="white",lty = "blank"),
   			  vp = vplayout(rowPos, columnPos)
     	  )
-    	  
-      	print(p, vp = vplayout(rowPos, columnPos))
+    	  if(identical(plotObj$verbose, TRUE)) {
+					print(p, vp = vplayout(rowPos, columnPos))
+				} else {
+					suppressMessages(suppressWarnings(print(p, vp = vplayout(rowPos, columnPos))))
+				}
+      	
       }# end plot alterations
     }# end cols
   }# end rows
@@ -740,6 +768,29 @@ addAndOverwriteAes <- function(current, new)
   
   current
 }
+
+
+mapping_color_fill <- function(current) {
+	currentNames <- names(current)
+	color <- c("color", "colour")
+	
+	if(any(color %in% currentNames) && "fill" %in% currentNames) {
+		# do nothing
+	} else if(any(color %in% currentNames)) {
+		# fill <- current[["fill" %in% currentNames]]
+		# col <- current[[color %in% currentNames]]
+		# current <- addAndOverwriteAes(current, aes_string(fill = col, color = NA))
+		current$fill <- current$colour
+		current$colour <- NULL		
+	}
+	
+	# if(!is.null(mapping$colour) && !is.null(mapping$fill)) {
+	# 	# do nothing
+	# } else if(!is.null(mapping$colour)) {
+	# }
+	current	
+}
+
 
 
 #diamondMatrix <- ggpairs(
