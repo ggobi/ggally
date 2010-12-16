@@ -370,14 +370,18 @@ ggpairs <- function(
 				section_aes <- lower$aes_string
 				section_params <- lower$params
 			}
-				
+			
 			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
 			combo_params <- addAndOverwriteAes(params, section_params)
 			
 			if(subType == "ratio")
 				p <- ggally_ratio(data[, c(yColName, xColName)])
-			else if(subType == "facetbar")
+			else if(subType == "facetbar"){
+				if(!is.null(combo_aes$colour)){
+					combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
+				}
 				p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+			}
 			# else if(subType == "blank")
 			# 	p <- "ggally_blank('blank')"
 

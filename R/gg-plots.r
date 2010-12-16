@@ -679,7 +679,7 @@ ggally_text <- function(
 		y1 = yrange[1], 
 		y2 = yrange[2]
 	)
-	print(rectData)
+	# print(rectData)
 	
 	p <- ggplot() + xlim(xrange) + ylim(yrange) + 
 		geom_rect(data = rectData,
@@ -714,55 +714,28 @@ ggally_text <- function(
 }
 
 
-ggally_facetbar <- function(data, mapping, ...){
+#' Plots the Bar Plots Faceted by Conditional Variable
+#'
+#' X variables are plotted using \code{geom_bar} and faceted by the Y variable.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param ... other arguements are sent to geom_bar
+#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @keywords hplot
+#' @examples
+#' ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
+#' ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
+ggally_facetbar <- function(data, mapping, horizontal = TRUE, ...){
 
-  xVal <- mapping$x
+	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
+	xVal <- mapping$x
 	yVal <- mapping$y
-  mapping$y <- NULL
-
-	p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
-		    
-	if(den_strip){
-	 # print("Density Strip")	  
-		p <- p +    
-  		stat_bin(
-  		  aes(
-    		  y = 1,
-  		    fill = ..density..
-  		  ), 
-  		  position = "identity", 
-  		  geom = "tile",
-  		  ...
-  		)	
-    p$subType <- "denstrip"
-	} else {
-		p <- p +   
-  		stat_density(
-		  aes(
-  		    y = ..scaled.. * diff(range(x)) + min(x)
-  		  ), 
-  		  position = "identity", 
-  		  geom = "line",
-  		  ...
-  		)
-    p$subType <- "facetdensity"
-	}
-    		
-		
-	if(horizontal){
-		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
-		
-		if(den_strip)
-		  p <- p + opts(axis.text.y = theme_blank())
-	} else {
-		p <- p + coord_flip()
-		p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
-		
-		if(den_strip)
-      p <- p + opts(axis.text.x = theme_blank())
-	}		
-  p$type <- "combo"
-  p$horizontal <- horizontal
+	mapping$y <- NULL
+	p <- ggplot(data, mapping) + geom_bar(...)
+	p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+	p$subType <- "facetbar"
+	p$type <- "diag"
 
 	p
 }
