@@ -9,7 +9,7 @@ Author: Barret Schloerke <schloerke@gmail.com>, Di Cook
 Maintainer: Barret Schloerke <schloerke@gmail.com>
 Description: Package contains templates for different plots to be
     combined into a plot matrix.
-Depends: ggplot2
+Depends: ggplot2, stringr
 License: GPL (>= 2.0)
 LazyLoad: yes
 Collate: 'find-combo.r' 'gg-plots.r' 'ggpairs.r'
