@@ -89,7 +89,7 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #' ggally_cor(iris, aes(x = Sepal.Length, y = Petal.Length))
 #' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -145,11 +145,16 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 	# splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
 	# splits <- str_c(colorCol, sep = ", ", collapse = ", ")
 	final_text <- ""
-	if(str_length(colorCol) > 0) {
+	# print(colorCol)
+	if(length(colorCol) > 0) {
 		
 		txt <- str_c("ddply(data, .(", colorCol, "), transform, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
 		# print(unique(txt))
-		cord <- unique(eval_ggpair(txt))
+		# cord <- unique(eval_ggpair(txt))		
+		con <- textConnection(txt)
+	  on.exit(close(con))
+	  cord <- unique(eval(parse(con)))
+	  
 		# browser()
 		cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
 		
@@ -182,15 +187,17 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 			xrange = range(xVal),
 			yrange = range(yVal),
 			color = "black",
+			size = corSize,
 			...
 		) +  
 		theme_bw() + 
 		opts(legend.position = "none")
 		
 		xPos <- rep(corAlignPercent, length(lev)) * diff(range(xVal)) + min(range(xVal))
-		yPos <- seq(from = 0.8, to = 0.2, length.out = length(lev)) * diff(range(yVal)) + min(range(yVal))
-		print(range(yVal))
-		print(yPos)
+		yPos <- seq(from = 0.9, to = 0.2, length.out = length(lev) + 1) * diff(range(yVal)) + min(range(yVal))
+		yPos <- yPos[-1]
+		# print(range(yVal))
+		# print(yPos)
 		cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
 				p <- p + geom_text(
 						data=cordf,
@@ -200,7 +207,9 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 							label = labelp,
 							color = labelp
 						),
-						hjust = 1
+						hjust = 1,
+						size = corSize,
+						...
 						
 					)
 		
@@ -704,6 +713,59 @@ ggally_text <- function(
 
 }
 
+
+ggally_facetbar <- function(data, mapping, ...){
+
+  xVal <- mapping$x
+	yVal <- mapping$y
+  mapping$y <- NULL
+
+	p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
+		    
+	if(den_strip){
+	 # print("Density Strip")	  
+		p <- p +    
+  		stat_bin(
+  		  aes(
+    		  y = 1,
+  		    fill = ..density..
+  		  ), 
+  		  position = "identity", 
+  		  geom = "tile",
+  		  ...
+  		)	
+    p$subType <- "denstrip"
+	} else {
+		p <- p +   
+  		stat_density(
+		  aes(
+  		    y = ..scaled.. * diff(range(x)) + min(x)
+  		  ), 
+  		  position = "identity", 
+  		  geom = "line",
+  		  ...
+  		)
+    p$subType <- "facetdensity"
+	}
+    		
+		
+	if(horizontal){
+		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+		
+		if(den_strip)
+		  p <- p + opts(axis.text.y = theme_blank())
+	} else {
+		p <- p + coord_flip()
+		p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
+		
+		if(den_strip)
+      p <- p + opts(axis.text.x = theme_blank())
+	}		
+  p$type <- "combo"
+  p$horizontal <- horizontal
+
+	p
+}
 
 
 

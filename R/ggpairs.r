@@ -18,6 +18,7 @@
 
 # discrete
 #   ratio
+#   facetbar
 #   blank
 
 
@@ -225,7 +226,7 @@ ggpairs <- function(
 		upper$combo <- "facethist"
 	}
 	if (is.null(upper$discrete)) {
-		upper$discrete <- "ratio"
+		upper$discrete <- "facetbar"
 	}
 
 	if(!is.list(lower))
@@ -238,7 +239,7 @@ ggpairs <- function(
 		lower$combo <- "box"
 	}
 	if (is.null(lower$discrete)) {
-		lower$discrete <- "ratio"
+		lower$discrete <- "facetbar"
 	}
 
 	if (is.null(diag$continuous)) {
@@ -358,16 +359,27 @@ ggpairs <- function(
 		} else if(type == "mosaic"){
   		if(printInfo)cat("mosaic\n")
 		  
-			subType <- "ratio"
-			if(up)
+			subType <- "facetbar"
+			section_aes <- NULL
+			if(up){
 				subType <- upper$discrete
-			else
+				section_aes <- upper$aes_string
+				section_params <- upper$params
+			} else {
 				subType <- lower$discrete
-
+				section_aes <- lower$aes_string
+				section_params <- lower$params
+			}
+				
+			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
+			combo_params <- addAndOverwriteAes(params, section_params)
+			
 			if(subType == "ratio")
 				p <- ggally_ratio(data[, c(yColName, xColName)])
-			else if(subType == "blank")
-				p <- ggally_blank("blank")
+			else if(subType == "facetbar")
+				p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+			# else if(subType == "blank")
+			# 	p <- "ggally_blank('blank')"
 
 		} else if(type == "stat_bin-num"){
   		if(printInfo)cat("stat_bin-num\n")
@@ -476,7 +488,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 eval_ggpair <- function(txt, ggally_data) {
   con <- textConnection(txt)
   on.exit(close(con))
-  output <- eval(parse(con), envir = globalenv())
+  output <- eval(parse(con))
   output
 }
 
