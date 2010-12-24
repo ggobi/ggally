@@ -501,7 +501,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
 	p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
 		    
-	if(den_strip){
+	if(identical(den_strip, TRUE)){
 	 # print("Density Strip")	  
 		p <- p +    
   		stat_bin(
@@ -531,13 +531,13 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 	if(horizontal){
 		p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
 		
-		if(den_strip)
+		if(identical(den_strip, TRUE))
 		  p <- p + opts(axis.text.y = theme_blank())
 	} else {
 		p <- p + coord_flip()
 		p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
 		
-		if(den_strip)
+		if(identical(den_strip, TRUE))
       p <- p + opts(axis.text.x = theme_blank())
 	}		
   p$type <- "combo"
@@ -617,29 +617,27 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' ggally_barDiag(movies, aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
 	mapping$y <- NULL
-
 	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
+
+  p <- ggplot(data = data, mapping) + geom_bar(...)
 	
 	if(numer){
 		# message("is numeric")
-    p <- ggplot(data = data, mapping) + geom_bar(...)
     p$subType <- "bar_num"
  	} else {
-		# dataTmp <- as.factor(data[, as.character(mapping$x)])
-		# tabledData <- table(dataTmp)
-		# m <- as.data.frame(tabledData, stringsAsFactors = FALSE)
-		# colnames(m) <- c(as.character(mapping$x), "Freq")
-		xVal <- mapping$x
-		mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
-#print(head(dataTmp))
-#str(tabledData)
-#str(m)
-#str(mapping)
-    # p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
-		p <- ggplot(data, mapping) + geom_bar(...)
-  	p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
-    # p <- p+coord_flip() + 
-		p <- p + scale_x_continuous(NULL, labels ="",breaks = 1)
+		# message("is categorical")
+		# xVal <- mapping$x
+		# mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
+		# # p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
+		# p <- ggplot(data, mapping) + geom_bar(...)
+		# # p <- p + scale_x_continuous(NULL, labels ="",breaks = 1)
+
+		# xVal <- mapping$x
+		# mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
+		# mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
+		# mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
+    # p <- ggplot(data = data, mapping) + geom_bar(...)
+		# p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
     p$subType <- "bar_cat"
 	}
   p$type <- "diag"
