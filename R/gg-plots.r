@@ -83,12 +83,15 @@ ggally_density <- function(data, mapping, ...){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
+#' @param corAlignPercent right align position of numbers. Default is 60 percent across the horizontal
+#' @param corSize size of text
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @examples
 #' ggally_cor(iris, aes(x = Sepal.Length, y = Petal.Length))
 #' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
+#' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"), corSize = 15 )
 ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
   # xVar <- data[,as.character(mapping$x)]
@@ -145,8 +148,11 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 	# splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
 	# splits <- str_c(colorCol, sep = ", ", collapse = ", ")
 	final_text <- ""
-	# print(colorCol)
-	if(length(colorCol) > 0) {
+	print(colorCol)
+	if(length(colorCol) < 1)
+		colorCol <- "ggally_NO_EXIST"
+	# browser()
+	if(colorCol != "ggally_NO_EXIST" && colorCol %in% colnames(data)) {
 		
 		txt <- str_c("ddply(data, .(", colorCol, "), transform, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
 		# print(unique(txt))
@@ -178,7 +184,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 		
 		
 		
-		# print(cord)
+		print(cord)
 		p <- ggally_text(
 			label = "Cor: ",
 			mapping,
@@ -231,6 +237,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 			yP=0.5,
 			xrange = range(xVal),
 			yrange = range(yVal),
+			size = corSize,
 			...
 		) +  
 		theme_bw() + 
@@ -288,7 +295,7 @@ ggally_dot <- function(data, mapping, ...){
 #' @keywords hplot
 #' @examples
 #' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
-#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Spieces), boxPlot=FALSE)
+#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  is.factor(data[,as.character(mapping$y)])
   
@@ -724,7 +731,7 @@ ggally_text <- function(
 #' @examples
 #' ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
 #' ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
-ggally_facetbar <- function(data, mapping, horizontal = TRUE, ...){
+ggally_facetbar <- function(data, mapping, ...){
 
 	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
 	xVal <- mapping$x

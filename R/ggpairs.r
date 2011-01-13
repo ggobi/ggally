@@ -50,6 +50,7 @@
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
+#' @param removeTicks boolean to determine if the ticks/labels are removed from the border areas
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
@@ -786,6 +787,10 @@ addAndOverwriteAes <- function(current, new)
 }
 
 
+#' Aesthetic Mapping Color Fill
+#' Replace the fill with the color and make color NULL
+#'
+#' @param current the current aesthetics
 mapping_color_fill <- function(current) {
 	currentNames <- names(current)
 	color <- c("color", "colour")

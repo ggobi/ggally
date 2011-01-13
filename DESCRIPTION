@@ -1,7 +1,7 @@
 Package: GGally
 Type: Package
 Title: Extension to ggplot2.
-Version: 0.2.2.2
+Version: 0.2.3
 Date: 2010-8-25
 Author: Barret Schloerke <schloerke@gmail.com>, Di Cook
     <dicook@iastate.edu>, Heike Hofmann <hofmann@iastate.edu>, and
