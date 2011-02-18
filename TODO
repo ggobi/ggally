@@ -1,0 +1,12 @@
+
+√ remove all tick labels
+√ remove strips
+
+√ corr should be for each group
+√   ddply(ggally_data, .(color), transform, ggally_cor = cor(price, carat))
+
+
+
+
+
+
