@@ -1,3 +1,5 @@
+# test to make something cool... who knows
+
 plotmatrix2 <- function (data, mapping = aes(), colour = "black") 
 {
     grid <- expand.grid(x = 1:ncol(data), y = 1:ncol(data))

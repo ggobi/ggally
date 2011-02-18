@@ -1,3 +1,5 @@
+# Yaletoolkit version of gpairs
+
 gpairs <- function (
 	x, 
 	upper.pars = list(scatter = "points", conditional = "barcode", mosaic = "mosaic"), 

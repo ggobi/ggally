@@ -1,3 +1,5 @@
+# attempt to make a violin plot
+
 violin <- function(x)
 {
 	b <- density(x)$y
