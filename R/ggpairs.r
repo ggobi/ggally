@@ -30,7 +30,7 @@
 #' the following options: continuous = exactly one of ('points', 'smooth', 
 #' 'density', 'cor', 'blank'); combo = exactly one of ('box', 'dot', 
 #' 'facethist', 'facetdensity', 'denstrip', 'blank'); discrete = exactly one 
-#' of ('ratio', 'blank').
+#' of ('facetbar','ratio', 'blank').
 #'
 #' diag is a list that may only contain the variables 'continuous' and 'discrete'. 
 #' Each element of the diag list is a string implmenting the following options: 
@@ -385,6 +385,7 @@ ggpairs <- function(
 			}
 			# else if(subType == "blank")
 			# 	p <- "ggally_blank('blank')"
+                  else p <- ggally_text("Incorrect\nPlot",size=6)
 
 		} else if(type == "stat_bin-num"){
   		if(printInfo)cat("stat_bin-num\n")
@@ -616,7 +617,7 @@ print.ggpairs <- function(x, ...){
 	
 	if(plotObj$title != ""){
 		pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
-		grid.text(plotObj$title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=20, fonttpye = "bold"))
+		grid.text(plotObj$title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=20))
 		popViewport()
 	}
 

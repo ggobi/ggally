@@ -488,7 +488,7 @@ ggally_denstrip <- function(data,mapping, ...){
 #' example(ggally_facetdensity)
 #' example(ggally_denstrip)
 ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
-  horizontal <-  is.factor(data[,as.character(mapping$y)])
+  horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
   if(!horizontal) {
     mapping$tmp <- mapping$x
     mapping$x <- mapping$y
