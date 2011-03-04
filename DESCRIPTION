@@ -12,4 +12,4 @@ Description: Package contains templates for different plots to be
 Depends: ggplot2, stringr
 License: GPL (>= 2.0)
 LazyLoad: yes
-Collate: 'find-combo.r' 'gg-plots.r' 'ggpairs.r'
+Collate: 'find-combo.r' 'gg-plots.r' 'ggpairs.r' 'ggparcoord.R'
