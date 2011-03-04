@@ -718,12 +718,19 @@ print.ggpairs <- function(x, ...){
 		  		
 				}
     		
-    		p <- p + 
-    			labs(x = NULL, y = NULL) + 
-    			opts(
-    				plot.margin = unit(rep(0,4), "lines"),
-    				legend.position = "none"
-    			)
+                # Adjusts for the blank space left by faceting
+                if (identical(p$type,"combo")) {
+                  if (p$horizontal) {
+                    p <- p + labs(x = NULL, y = NULL) + opts(plot.margin =  
+                      unit(c(0,-0.5,0,0), "lines"), legend.position = "none")
+                  } else {
+                    p <- p + labs(x = NULL, y = NULL) + opts(plot.margin =  
+                      unit(c(-0.5,0,0,0), "lines"), legend.position = "none")
+                  }                  
+                } else {
+                  p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(rep(0, 
+                    4), "lines"), legend.position = "none")
+                }
         
         
   			grid.rect(
