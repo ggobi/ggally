@@ -297,7 +297,7 @@ ggally_dot <- function(data, mapping, ...){
 #' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
 #' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
-  horizontal <-  is.factor(data[,as.character(mapping$y)])
+  horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
   
   if(horizontal) {
 #    cat("horizontal dot-box\n")
@@ -396,7 +396,7 @@ ggally_facethist <- function(data, mapping, ...){
 	#aesString <- aes_string(mapping)
 	#cat("\naesString\n");print(str(aesString))
 
-  horizontal <-  is.factor(data[,as.character(mapping$y)])
+  horizontal <- (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
 
 	if(!horizontal){
 	   mapping$tmp <- mapping$x
