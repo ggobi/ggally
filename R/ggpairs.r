@@ -713,21 +713,61 @@ print.ggpairs <- function(x, ...){
 					p <- p + opts(
 						strip.background = theme_blank(),
 						strip.text.x = theme_blank(),
-						strip.text.y = theme_blank()
+						strip.text.y = theme_blank(),
+                                    axis.ticks = theme_blank()
 					)
 		  		
 				}
     		
-                # Adjusts for the blank space left by faceting
+                # Adjusts for the blank space left by faceting, and manually
+                # sets the limits for numeric axes to 1% of the variable's
+                # range below the min and above the max.
                 if (identical(p$type,"combo")) {
+                  # Scale the numeric variable; the numeric variable is
+                  # mapped to the y variable for dot and box plots, but to the
+                  # x variable for the others
+                  if (p$subType %in% c("dot","box")) {
+                    ymin <- min(p$data[,as.character(p$mapping$y)])
+                    ymax <- max(p$data[,as.character(p$mapping$y)])
+                    p <- p + labs(x = NULL, y = NULL) +
+                      scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
+                  } 
+                  else {
+                    xmin <- min(p$data[,as.character(p$mapping$x)])
+                    xmax <- max(p$data[,as.character(p$mapping$x)])
+                    p <- p + labs(x = NULL, y = NULL) +
+                      scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
+                  }
+                  # Adjust for blank space left by faceting
                   if (p$horizontal) {
-                    p <- p + labs(x = NULL, y = NULL) + opts(plot.margin =  
-                      unit(c(0,-0.5,0,0), "lines"), legend.position = "none")
-                  } else {
-                    p <- p + labs(x = NULL, y = NULL) + opts(plot.margin =  
-                      unit(c(-0.5,0,0,0), "lines"), legend.position = "none")
-                  }                  
-                } else {
+                    p <- p + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"),
+                      legend.position = "none")
+                  } 
+                  else {
+                    p <- p + opts(plot.margin = unit(c(-0.5,0,0,0), "lines"),
+                      legend.position = "none")
+                  }                 
+                }
+                # Need to scale both variables for continuous plots
+                else if (identical(p$type,"continuous") && !identical(p$subType,"cor")) {
+                  xmin <- min(p$data[,as.character(p$mapping$x)])
+                  xmax <- max(p$data[,as.character(p$mapping$x)])
+                  ymin <- min(p$data[,as.character(p$mapping$y)])
+                  ymax <- max(p$data[,as.character(p$mapping$y)])
+                  p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(rep(0, 
+                    4), "lines"), legend.position = "none") +
+                    scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))) +
+                    scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
+                }
+                # Scale the variable for numeric diagonal plots
+                else if (identical(p$type,"diag") && is.numeric(p$data[,as.character(p$mapping$x)])) {
+                  xmin <- min(p$data[,as.character(p$mapping$x)])
+                  xmax <- max(p$data[,as.character(p$mapping$x)])
+                  p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(rep(0,
+                    4), "lines"), legend.position = "none") +
+                    scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
+                }
+                else {
                   p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(rep(0, 
                     4), "lines"), legend.position = "none")
                 }
