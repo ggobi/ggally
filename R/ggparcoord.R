@@ -85,6 +85,17 @@
 #'     on that variable}
 #' }
 #'
+#' \code{order} is either a vector of indices or a character string that denotes how to 
+#'   order the axes (variables) of the parallel coordinate plot. Options:
+#' \itemize{
+#'   \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
+#'   \item{\code{(given vector)}}{: order by the vector specified}
+#'   \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
+#'     by the package \code{scagnostics}. Other scagnostic measures available to order
+#'     by are \code{Skewed, Clumpy, Sparse, Striated, Convex, Skinny, Stringy,} and
+#'     \code{Monotonic}.}
+#' }
+#'
 #' @param data the dataset to plot
 #' @param columns a vector of variables (either names or indices) to be axes in the plot
 #' @param groupColumn a single variable to group (color) by
@@ -94,6 +105,7 @@
 #' @param centerObsID if scale=="centerObs", row number of case plot should
 #'   univariately be centered on
 #' @param missing method used to handle missing values (see Details)
+#' @param order method used to order the axes (see Details)
 #' @param showPoints logical operator indicating whether points should be
 #'   plotted or not
 #' @param alphaLines value of alpha scaler for the lines of the parcoord plot
@@ -125,10 +137,11 @@ ggparcoord <- function(
   scaleSummary="mean",
   centerObsID=1,
   missing="exclude",
+  order=columns,
   showPoints=FALSE,
   alphaLines=1,
   boxplot=FALSE,
-  shadeBox=FALSE,
+  shadeBox=NULL,
   mapping=NULL,
   title=""
 ) {
@@ -237,6 +250,20 @@ ggparcoord <- function(
   names(data)[dim(data)[2]] <- groupCol
 
   data.m <- melt(data,id.vars=c(groupCol,".ID","anyMissing"))
+  
+  ### Ordering ###
+  if(length(order) > 1) {
+     if(is.numeric(order)) {
+       data.m$variable <- factor(data.m$variable,levels=names(data)[order])
+     } else {
+       data.m$variable <- factor(data.m$variable,levels=order)
+     }
+  }
+  else {
+    require(scagnostics)
+    scag <- scagnostics(data[,1:(dim(data)[2]-3)])
+    data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(data[,1:(dim(data)[2]-3)]),order))
+  }
 
   mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
   mapping2 <- eval(parse(text=mapcall))
@@ -266,4 +293,35 @@ ggparcoord <- function(
 #'   the variable names from df
 get.VarTypes <- function(df) {
   return(unlist(lapply(unclass(df),class)))
+}
+
+#' Find order of variables based on a specified scagnostic measure
+#' by maximizing the index values of that measure along the path.
+#'
+#' @param scag \code{scagnostics} object
+#' @param vars character vector of the variables to be ordered
+#' @param measure scagnostics measure to order according to
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @return character vector of variable ordered according to the given 
+#'   scagnostic measure
+scagOrder <- function(scag, vars, measure) {
+  p <- length(vars)
+  scag <- sort(scag[measure,],decreasing=TRUE)
+  d.scag <- data.frame(var1=NA,var2=NA,val=scag)
+  for (i in 1:dim(d.scag)[1]) {
+    d.scag$var1[i] <- substr(names(scag)[i],1,regexpr(" * ",names(scag)[i])-1)
+    d.scag$var2[i] <- substr(names(scag)[i],regexpr(" * ",names(scag)[i])+3,nchar(names(scag)[i]))
+  }  
+  a <- c(d.scag$var1[1],d.scag$var2[1])
+  d.scag <- d.scag[-1,]
+  a <- a[order(c(min(grep(a[1],rownames(d.scag))),min(grep(a[2],rownames(d.scag)))),
+    decreasing=TRUE)]
+  d.scag <- d.scag[-grep(a[1],rownames(d.scag)),]
+  while(length(a) < (p-1)) {
+    k <- length(a)
+    a[k+1] <- d.scag[1,1:2][!(a[k] == d.scag[1,1:2])]
+    d.scag <- d.scag[-grep(a[k],rownames(d.scag)),]
+  }
+  a[p] <- vars[!(vars %in% a)]
+  return(a)
 }
