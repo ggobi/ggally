@@ -1,61 +1,6 @@
-# 1. Scaling
-#    - Options:
-#      - Univariate Min/Max: Define the min and max for each variable to be
-#          zero and scale accordingly
-#      - Global Min/Max: Define the global min and max to be zero and scale
-#          accordingly
-#      - Summary centering: Use Univariate Min/Max method to standardize vert.
-#          height, then center the "bars" at some specified value
-#          - "value" ideas: median, mean, constant
-#          - alternative idea: center at one observation
-#      - Standardize, set ylim()
-#          - mean +/- k*sd
-#          - median +/- k*IQR
-# 2. Missing Values
-#    - Options:
-#      - Exclude
-#      - Imputation
-#        - set to -10% range of min value
-#        - mean, median, random
-# 3. Display
-#    - Lines
-#      - All lines
-#      - Subset of lines
-#        - Random set, user-specified set
-#      - Alpha-scaled lines
-#    - Aesthetics
-#      - Point types, line types
-#        - one interesting point type to use is a flat bar; called barcode 
-#          plot
-#          - for categorical variables, make flat bar thicker for higher n
-#      - Probably pass mapping, params to ggplot to allow flexibility
-#    - Underlay univariate distributions
-#      - boxplots
-#    - Reference decorations
-#      - lines
-#        - @ center
-#        - @ min/max
-#      - grey box that extends from univariate min to univariate max
-# 4. Ordering of Variables
-#    - many different options...will discuss later
-
-# levels of scale:
-#   - "std": subtract mean, divide by sd
-#   - "robust": subtract median, divide by median absolute deviation
-#   - "uniminmax": define min of variable to be zero, max to be one
-#   - "globalminmax": define global min to be zero, global max to be one
-#   - "center": use minmax method to standardize vertical height, then
-#     center each variable at a value specified by the scaleSummary param
-#   - "centerObs": use minmax method to standardize, then center each variable
-#     at the value of the observation specified by centerObsID
-
-# levels of missing:
-#   - "exclude": remove all rows with missing values
-#   - "mean": set missing values to the mean of the variable
-#   - "median": set missing values to the median of the variable
-#   - "min10": set missing values to 10% below the minimum of the variable
-#   - "random": set missing values to value of randomly chosen observation
-#     on that variable
+##### KNOWN BUGS #####
+# - It does not currently work to pass groupColumn one of the variables that is being plotted
+#   as an axis
 
 #' ggparcoord - A ggplot2 Parallel Coordinate Plot
 #' ; A function for plotting static parallel coordinate plots, utilizing
@@ -145,8 +90,44 @@ ggparcoord <- function(
   mapping=NULL,
   title=""
 ) {
-  require(ggplot2)  
+  require(ggplot2)
+  saveData <- data
+  
+  ### Error Checking ###
+  if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
+    stop("invalid value for groupColumn; must be a single numeric or character index")
+  }
+    
+  if(!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
+    stop("invalid value for scale; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
+  }
+  
+  if(!(centerObsID %in% 1:dim(data)[1])) {
+    stop("invalid value for centerObsID; must be a single numeric row index")
+  }
+  
+  if(!(tolower(missing) %in% c("exclude","mean","median","min10","random"))) {
+    stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
+  }
+  
+  if(!(is.numeric(order) || (is.character(order) && (order %in% c('Outlying','Skewed', 
+    'Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
+    stop("invalid value for order; must either be a vector of column indices or one of 'Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+  }
+  
+  if(!(is.logical(showPoints))) {
+    stop("invalid value for showPoints; must be a logical operator")
+  }
+  
+  if((alphaLines < 0) || (alphaLines > 1)) {
+    stop("invalid value for alphaLines; must be a scalar value between 0 and 1")
+  }
+  
+  if(!(is.logical(boxplot))) {
+    stop("invalid value for boxplot; must be a logical operator")
+  }
 
+  ### Setup ###
   if(is.numeric(groupColumn)) {
     groupCol <- names(data)[groupColumn]
   } else 
@@ -254,7 +235,7 @@ ggparcoord <- function(
   ### Ordering ###
   if(length(order) > 1) {
      if(is.numeric(order)) {
-       data.m$variable <- factor(data.m$variable,levels=names(data)[order])
+       data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
      } else {
        data.m$variable <- factor(data.m$variable,levels=order)
      }
