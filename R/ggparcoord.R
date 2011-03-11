@@ -100,7 +100,7 @@
 #' @param columns a vector of variables (either names or indices) to be axes in the plot
 #' @param groupColumn a single variable to group (color) by
 #' @param scale method used to scale the variables (see Details)
-#' @param scaleSummary if scale=="summary", summary statistic to univariately
+#' @param scaleSummary if scale=="center", summary statistic to univariately
 #'   center each variable by
 #' @param centerObsID if scale=="centerObs", row number of case plot should
 #'   univariately be centered on

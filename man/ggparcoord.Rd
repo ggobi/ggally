@@ -1,10 +1,9 @@
 \name{ggparcoord}
 \alias{ggparcoord}
 \title{ggparcoord - A ggplot2 Parallel Coordinate Plot...}
-\usage{ggparcoord(data, columns, groupColumn, scale="std",
-    scaleSummary="mean", centerObsID=1, missing="exclude",
-    showPoints=FALSE, alphaLines=1, boxplot=FALSE, shadeBox=FALSE,
-    mapping, title="")}
+\usage{ggparcoord(data, columns, groupColumn, scale="std", scaleSummary="mean", centerObsID=1,
+    missing="exclude", order=columns, showPoints=FALSE, alphaLines=1, boxplot=FALSE,
+    shadeBox, mapping, title="")}
 \description{ggparcoord - A ggplot2 Parallel Coordinate Plot
 ; A function for plotting static parallel coordinate plots, utilizing
 the \code{ggplot2} graphics package.}
@@ -30,6 +29,17 @@ missing values. Options:
 \item{\code{min10}}{: set missing values to 10\% below the minimum of the variable}
 \item{\code{random}}{: set missing values to value of randomly chosen observation
 on that variable}
+}
+
+\code{order} is either a vector of indices or a character string that denotes how to 
+order the axes (variables) of the parallel coordinate plot. Options:
+\itemize{
+\item{\code{(default)}}{: order by the vector denoted by \code{columns}}
+\item{\code{(given vector)}}{: order by the vector specified}
+\item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
+by the package \code{scagnostics}. Other scagnostic measures available to order
+by are \code{Skewed, Clumpy, Sparse, Striated, Convex, Skinny, Stringy,} and
+\code{Monotonic}.}
 }}
 \author{Jason Crowley \email{crowley.jason.s@gmail.com}, Barret Schloerke \email{schloerke@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}}
 \value{ggplot object that if called, will print}
@@ -37,11 +47,12 @@ on that variable}
 \item{columns}{a vector of variables (either names or indices) to be axes in the plot}
 \item{groupColumn}{a single variable to group (color) by}
 \item{scale}{method used to scale the variables (see Details)}
-\item{scaleSummary}{if scale=="summary", summary statistic to univariately
+\item{scaleSummary}{if scale=="center", summary statistic to univariately
 center each variable by}
 \item{centerObsID}{if scale=="centerObs", row number of case plot should
 univariately be centered on}
 \item{missing}{method used to handle missing values (see Details)}
+\item{order}{method used to order the axes (see Details)}
 \item{showPoints}{logical operator indicating whether points should be
 plotted or not}
 \item{alphaLines}{value of alpha scaler for the lines of the parcoord plot}

@@ -1,8 +1,8 @@
 \name{ggally_text}
 \alias{ggally_text}
 \title{GGplot Text...}
-\usage{ggally_text(label, mapping=aes(color = "black"), xP=0.5, yP=0.5,
-    xrange=c(0, 1), yrange=c(0, 1), ...)}
+\usage{ggally_text(label, mapping=aes(color = "black"), xP=0.5, yP=0.5, xrange=c(0, 1),
+    yrange=c(0, 1), ...)}
 \description{GGplot Text
 Plot text for a plot}
 \author{Barret Schloerke \email{schloerke@gmail.com}}

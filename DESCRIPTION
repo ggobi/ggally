@@ -3,12 +3,11 @@ Type: Package
 Title: Extension to ggplot2.
 Version: 0.2.3
 Date: 2010-8-25
-Author: Barret Schloerke <schloerke@gmail.com>, Di Cook
-    <dicook@iastate.edu>, Heike Hofmann <hofmann@iastate.edu>, and
-    Hadley Wickham <h.wickham@iastate.edu>
+Author: Barret Schloerke <schloerke@gmail.com>, Di Cook <dicook@iastate.edu>, Heike
+    Hofmann <hofmann@iastate.edu>, and Hadley Wickham <h.wickham@iastate.edu>
 Maintainer: Barret Schloerke <schloerke@gmail.com>
-Description: Package contains templates for different plots to be
-    combined into a plot matrix.
+Description: Package contains templates for different plots to be combined into a plot
+    matrix.
 Depends: ggplot2, stringr
 License: GPL (>= 2.0)
 LazyLoad: yes

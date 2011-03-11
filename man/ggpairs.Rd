@@ -1,9 +1,8 @@
 \name{ggpairs}
 \alias{ggpairs}
 \title{ggpairs - A GGplot2 Matrix...}
-\usage{ggpairs(data, columns=1:ncol(data), title="", upper=list(),
-    lower=list(), diag=list(), params, ..., verbose=FALSE,
-    removeTicks=FALSE)}
+\usage{ggpairs(data, columns=1:ncol(data), title="", upper=list(), lower=list(), diag=list(),
+    params, ..., verbose=FALSE, removeTicks=FALSE)}
 \description{ggpairs - A GGplot2 Matrix
 Make a matrix of plots with a given data set}
 \details{upper and lower are lists that may contain the variables 'continuous', 
@@ -11,7 +10,7 @@ Make a matrix of plots with a given data set}
 the following options: continuous = exactly one of ('points', 'smooth', 
 'density', 'cor', 'blank'); combo = exactly one of ('box', 'dot', 
 'facethist', 'facetdensity', 'denstrip', 'blank'); discrete = exactly one 
-of ('ratio', 'blank').
+of ('facetbar','ratio', 'blank').
 
 diag is a list that may only contain the variables 'continuous' and 'discrete'. 
 Each element of the diag list is a string implmenting the following options: 
