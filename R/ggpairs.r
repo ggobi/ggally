@@ -285,7 +285,7 @@ ggpairs <- function(
 		yColName <- as.character(dataTypes[i,"yvar"])
 		
 
-		up <- posX < posY
+		up <- posX > posY
 		
   	if(printInfo) cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
 
