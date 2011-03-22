@@ -261,7 +261,7 @@ ggpairs <- function(
 	ggpairsPlots <- list()
 	
 
-	grid <- rev(expand.grid(y = 1:ncol(data[columns]), x = 1:ncol(data[columns])))
+	grid <- rev(expand.grid(x = 1:ncol(data[columns]), y = 1:ncol(data[columns])))
 
 	all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
 		xcol <- grid[i, "x"]
@@ -305,7 +305,7 @@ ggpairs <- function(
 				section_params <- lower$params
 			}
 			
-			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
+			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
 			if(subType == "density") {
 				combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
 				combo_aes
