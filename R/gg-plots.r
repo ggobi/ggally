@@ -794,11 +794,11 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 	
 
 	table_data <- cbind(table_data, xNew, yNew)
-	#print(table_data)
-	#print(xNames)
-	#print(yNames)
-	
-	#cat("\nmaxLen");print(maxLen)
+  # print(table_data)
+  # print(xNames)
+  # print(yNames)
+  # 
+  # cat("\nmaxLen");print(maxLen)
 
 	
 	p <- ggplot(
@@ -818,7 +818,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #			limits=c(1,maxLen + 2), 
 #			breaks=1:(maxLen + 2), 
 #			labels=c(xNames,rep("",maxLen - length(xNames) + 2)), 
-			limits=c(1,length(xNames) + 1), 
+			limits=c(0.9999,length(xNames) + 1), 
 			breaks=1:(length(xNames) + 1), 
 			labels=c(xNames,""), 
 			minor_breaks=FALSE
@@ -828,7 +828,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #			limits=c(1,maxLen + 2), 
 #			breaks=1:(maxLen + 2), 
 #			labels=c(yNames,rep("",maxLen - length(yNames) + 2)), 
-			limits=c(1,length(yNames) + 1), 
+			limits=c(0.9999,length(yNames) + 1), 
 			breaks=1:(length(yNames) + 1), 
 			labels=c(yNames,""), 
 			minor_breaks=FALSE
