@@ -261,7 +261,7 @@ ggpairs <- function(
 	ggpairsPlots <- list()
 	
 
-	grid <- rev(expand.grid(x = 1:ncol(data[columns]), y = 1:ncol(data[columns])))
+	grid <- rev(expand.grid(y = 1:ncol(data[columns]), x = 1:ncol(data[columns])))
 
 	all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
 		xcol <- grid[i, "x"]
