@@ -35,6 +35,8 @@
 #' \itemize{
 #'   \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
 #'   \item{\code{(given vector)}}{: order by the vector specified}
+#'   \item{\code{skewness}}{: order variables by their sample skewness (most skewed to 
+#'     least skewed)}
 #'   \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
 #'     by the package \code{scagnostics}. Other scagnostic measures available to order
 #'     by are \code{Skewed, Clumpy, Sparse, Striated, Convex, Skinny, Stringy,} and
@@ -111,8 +113,8 @@ ggparcoord <- function(
   }
   
   if(!(is.numeric(order) || (is.character(order) && (order %in% c('Outlying','Skewed', 
-    'Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
-    stop("invalid value for order; must either be a vector of column indices or one of 'Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+    'Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic','skewness'))))) {
+    stop("invalid value for order; must either be a vector of column indices or one of 'Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic','skewness'")
   }
   
   if(!(is.logical(showPoints))) {
@@ -240,10 +242,15 @@ ggparcoord <- function(
        data.m$variable <- factor(data.m$variable,levels=order)
      }
   }
-  else {
+  else if(order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
+    "Stringy","Monotonic")) {
     require(scagnostics)
     scag <- scagnostics(data[,1:(dim(data)[2]-3)])
     data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(data[,1:(dim(data)[2]-3)]),order))
+  }
+  else if(tolower(order) == "skewness") {
+    abs.skew <- abs(apply(saveData[,columns],2,skewness))
+    data.m$variable <- factor(data.m$variable,levels=names(abs.skew)[order(abs.skew,decreasing=TRUE)])
   }
 
   mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
@@ -305,4 +312,18 @@ scagOrder <- function(scag, vars, measure) {
   }
   a[p] <- vars[!(vars %in% a)]
   return(a)
+}
+
+#' Calculate the sample skewness of a vector
+#' while ignoring missing values.
+#'
+#' @param x numeric vector
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @return sample skewness of \code{x}
+skewness <- function(x) {
+  x <- x[!is.na(x)]
+  xbar <- mean(x)
+  n <- length(x)
+  skewness <- (1/n)*sum((x-xbar)^3)/((1/n)*sum((x-xbar)^2))^(3/2)
+  return(skewness)
 }
