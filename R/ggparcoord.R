@@ -35,12 +35,17 @@
 #' \itemize{
 #'   \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
 #'   \item{\code{(given vector)}}{: order by the vector specified}
-#'   \item{\code{skewness}}{: order variables by their sample skewness (most skewed to 
-#'     least skewed)}
+#'   \item{\code{classSep}}{: order variables by their separation between any one class and
+#'     the rest (as opposed to their overall variation between classes). This is accomplished
+#'     by calculating the F-statistic for each class vs. the rest, for each axis variable.
+#'     The axis variables are then ordered (decreasing) by their maximum of k F-statistics,
+#'     where k is the number of classes.}
 #'   \item{\code{overall}}{: order variables by their overall F statistic (decreasing) from
 #'     an ANOVA with \code{groupColumn} as the explanatory variable (note: it is required 
 #'     to specify a \code{groupColumn} with this ordering method). Basically, this method 
 #'     orders the variables by their variation between classes (most to least).}
+#'   \item{\code{skewness}}{: order variables by their sample skewness (most skewed to 
+#'     least skewed)}
 #'   \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
 #'     by the package \code{scagnostics}. Other scagnostic measures available to order
 #'     by are \code{Skewed, Clumpy, Sparse, Striated, Convex, Skinny, Stringy,} and
@@ -116,9 +121,9 @@ ggparcoord <- function(
     stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
   }
   
-  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','overall', 
+  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','overall','classSep', 
     'Outlying','Skewed','Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
-    stop("invalid value for order; must either be a vector of column indices or one of 'skewness','overall','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+    stop("invalid value for order; must either be a vector of column indices or one of 'skewness','overall','classSep','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
   }
   
   if(!(is.logical(showPoints))) {
@@ -269,6 +274,10 @@ ggparcoord <- function(
     }
     data.m$variable <- factor(data.m$variable,levels=names(f.stats)[order(f.stats,decreasing=TRUE)])
   }
+  else if(tolower(order) == "classsep") {
+    axis.order <- singleClassOrder(groupVar,saveData2)
+    data.m$variable <- factor(data.m$variable,levels=axis.order)
+  }
 
   mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
   mapping2 <- eval(parse(text=mapcall))
@@ -329,6 +338,37 @@ scagOrder <- function(scag, vars, measure) {
   }
   a[p] <- vars[!(vars %in% a)]
   return(a)
+}
+
+#' Order axis variables by separation between one class and the rest
+#' (most separation to least)
+#'
+#' @param classVar class variable (vector from original dataset)
+#' @param axisVars variables to be plotted as axes (data frame)
+#' @param specClass character string matching to level of \code{classVar}; instead 
+#'   of looking for separation between any class and the rest, will only look for
+#'   separation between this class and the rest
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @return character vector of names of axisVars ordered such that the first
+#'   variable has the most separation between one of the classes and the rest, and
+#'   the last variable has the least (as measured by F-statistics from an ANOVA)
+singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
+  if(!is.null(specClass)) {
+    # for when user is interested in ordering by variation between one class and
+    # the rest...will add this later
+  } else {
+    var.names <- colnames(axisVars)
+    class.names <- levels(classVar)
+    f.stats <- matrix(NA,nrow=length(class.names),ncol=length(var.names),dimnames=
+      list(class.names,var.names))
+    for(i in 1:length(class.names)) {
+      f.stats[i,] <- apply(axisVars,2,function(x) {
+        return(summary(lm(x ~ as.factor(classVar == class.names[i])))$fstatistic[1])
+      })
+    }
+    var.maxF <- apply(f.stats,2,max)
+    return(names(var.maxF)[order(var.maxF,decreasing=TRUE)])
+  }
 }
 
 #' Calculate the sample skewness of a vector
