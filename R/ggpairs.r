@@ -50,6 +50,7 @@
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
+#' @param axisLabels either "external" for labels on the margins of the plot, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param removeTicks boolean to determine if the ticks/labels are removed from the border areas
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
@@ -191,7 +192,8 @@ ggpairs <- function(
   params = NULL,
   ...,
   verbose = FALSE,
-	removeTicks = FALSE
+  axisLabels = "internal",
+	removeTicks = TRUE
 ){
   require(ggplot2)
   printInfo <- FALSE
@@ -274,7 +276,13 @@ ggpairs <- function(
 	dataTypes <- plot_types(data[columns])
   if(printInfo){cat("\n\n\nDATA TYPES\n");print(dataTypes)}
 
-	
+	if (identical(axisLabels,"internal")) {
+  	dataTypes$Type <- as.character(dataTypes$Type)
+  	dataTypes$Type[dataTypes$posx == dataTypes$posy] <- "label"
+  	dataTypes$Type <- as.factor(dataTypes$Type)
+  }
+  
+  
 	for(i in 1:nrow(dataTypes)){
 		p <- "blank"
 		type <- dataTypes[i,"Type"]
@@ -426,7 +434,12 @@ ggpairs <- function(
 #			#	p <- ggally_ratio(dataSelect)
 #			else if(subType == "blank")
 #				p <- ggally_blank()
-		}
+		} else if(type == "label"){
+    	combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+      combo_params <- addAndOverwriteAes(params, diag$params)
+      
+    	p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
+    }
 		
 		ggpairsPlots[[length(ggpairsPlots)+1]] <- p
 		
@@ -439,6 +452,7 @@ ggpairs <- function(
     title = title, 
     verbose = verbose, 
     printInfo = printInfo,
+    axisLabels = axisLabels,
 		removeTicks = removeTicks
   )
 	
@@ -597,12 +611,25 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 print.ggpairs <- function(x, ...){
   plotObj <- x
   
-  v1 <- viewport(
+  # If using internal axis labels, extend the plotting region out since
+  # variable names on the margins will not be used
+  if(identical(plotObj$axisLabels,"internal")) {
+    v1 <- viewport(
+#		x = unit(0.5, "npc") + unit(1,"lines"), 
+		y = unit(0.5, "npc") - unit(0.5,"lines"), 
+		width=unit(1, "npc") - unit(1,"lines"), 
+		height=unit(1, "npc") - unit(2, "lines")
+	)
+  } else {
+  	v1 <- viewport(
 #		x = unit(0.5, "npc") + unit(1,"lines"), 
 #		y = unit(0.5, "npc") + unit(1,"lines"), 
 		width=unit(1, "npc") - unit(3,"lines"), 
 		height=unit(1, "npc") - unit(3, "lines")
 	)
+  }
+  
+  
 	numCol <- length(plotObj$columns)
 
 	v2 <- viewport(
@@ -621,9 +648,12 @@ print.ggpairs <- function(x, ...){
 		popViewport()
 	}
 
+  # This plots the variable names on the margins, which is not needed if using internal
+# axis labels
+if(!identical(plotObj$axisLabels,"internal")) {
 	# viewport for Left Names
 	pushViewport(viewport(width=unit(1, "npc") - unit(2,"lines"), height=unit(1, "npc") - unit(3, "lines")))
-	
+
 	pushViewport(viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) )))
 
 	# Left Side
@@ -648,6 +678,7 @@ print.ggpairs <- function(x, ...){
 
 	popViewport() #layout
 	popViewport() #spacing
+}
 
 ##############################################################  
 ####################  End Viewports  #########################
