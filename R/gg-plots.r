@@ -678,24 +678,19 @@ ggally_text <- function(
   ...
 ){
 
-  rectData <- data.frame(
-		x1 = xrange[1], 
-		x2 = xrange[2], 
-		y1 = yrange[1], 
-		y2 = yrange[2]
-	)
+  #rectData <- data.frame(
+	#	x1 = xrange[1], 
+	#	x2 = xrange[2], 
+	#	y1 = yrange[1], 
+	#	y2 = yrange[2]
+	#)
 	# print(rectData)
 	
 	p <- ggplot() + xlim(xrange) + ylim(yrange) + 
-		geom_rect(data = rectData,
-				aes(
-					xmin=x1,
-					xmax = x2,
-					ymin = y1,
-					ymax = y2
-				),
-				fill= I("white")) + 
-				labs(x = NULL, y = NULL)
+  		opts(panel.background=theme_blank(),
+        panel.grid.minor=theme_blank(),
+        panel.grid.major=theme_line(colour="grey85")) +
+			labs(x = NULL, y = NULL)
 
 	new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange), y = yP * diff(yrange) + min(yrange))
 	if(is.null(mapping)) {
