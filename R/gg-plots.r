@@ -713,6 +713,53 @@ ggally_text <- function(
 
 }
 
+#' Internal Axis Labeling Plot for ggpairs
+#' ; is used when axisLabels == "internal"
+#'
+#' @param data dataset being plotted
+#' @param mapping aesthetics being used (x is the variable the plot will be made for)
+#' @param ... other arguments for geom_text
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @examples
+#' ggally_diagAxis(iris,aes(x=Petal.Width))
+#' ggally_diagAxis(iris,aes(x=Species))
+ggally_diagAxis <- function(data, mapping, ...) {
+  mapping$y <- NULL
+  numer <- is.null(attributes(data[, as.character(mapping$x)])$class)
+  if(numer) {
+    xmin <- min(data[, as.character(mapping$x)])
+    xmax <- max(data[, as.character(mapping$x)])
+    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+
+    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
+      xrange=xrange,yrange=xrange)
+
+    pGrob <- ggplotGrob(p)
+    axisBreaks <- as.numeric(getGrob(pGrob, "axis.text.x", grep = TRUE)$label)
+    labs <- rbind(expand.grid(x=axisBreaks[1],y=axisBreaks),
+      expand.grid(x=axisBreaks,y=axisBreaks[1]))[-1,]
+    labs$lab <- as.character(apply(labs,1,max))
+    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
+    return(pLabs)
+  } else {
+    breakLabels <- levels(data[,as.character(mapping$x)])
+    numLvls <- length(breakLabels)
+
+    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
+      xrange=c(0,1),yrange=c(0,1),yP=0.55)
+    #axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
+    axisBreaks <- 0:(numLvls-1)*(.125 + (1-.125*(numLvls-1))/numLvls) + 
+      (1-.125*(numLvls-1))/(2*numLvls)
+
+    labs <- data.frame(x=axisBreaks[1:numLvls],y=axisBreaks[numLvls:1],
+      lab=breakLabels)
+    
+    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
+    pLabs <- pLabs + scale_x_continuous(breaks=axisBreaks,limits=c(0,1)) +
+      scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
+    return(pLabs)
+  }
+}
 
 #' Plots the Bar Plots Faceted by Conditional Variable
 #'
