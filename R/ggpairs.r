@@ -748,6 +748,11 @@ print.ggpairs <- function(x, ...){
                       legend.position = "none")
                   }                 
                 }
+                # Adjust for blank space left by faceting in faceted bar plot
+                else if (identical(p$subType,"facetbar")) {
+                  p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"),
+                    legend.position = "none")
+                }
                 # Need to scale both variables for continuous plots
                 else if (identical(p$type,"continuous") && !identical(p$subType,"cor")) {
                   xmin <- min(p$data[,as.character(p$mapping$x)])
