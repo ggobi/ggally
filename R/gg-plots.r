@@ -678,24 +678,19 @@ ggally_text <- function(
   ...
 ){
 
-  rectData <- data.frame(
-		x1 = xrange[1], 
-		x2 = xrange[2], 
-		y1 = yrange[1], 
-		y2 = yrange[2]
-	)
+  #rectData <- data.frame(
+	#	x1 = xrange[1], 
+	#	x2 = xrange[2], 
+	#	y1 = yrange[1], 
+	#	y2 = yrange[2]
+	#)
 	# print(rectData)
 	
 	p <- ggplot() + xlim(xrange) + ylim(yrange) + 
-		geom_rect(data = rectData,
-				aes(
-					xmin=x1,
-					xmax = x2,
-					ymin = y1,
-					ymax = y2
-				),
-				fill= I("white")) + 
-				labs(x = NULL, y = NULL)
+  		opts(panel.background=theme_blank(),
+        panel.grid.minor=theme_blank(),
+        panel.grid.major=theme_line(colour="grey85")) +
+			labs(x = NULL, y = NULL)
 
 	new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange), y = yP * diff(yrange) + min(yrange))
 	if(is.null(mapping)) {
@@ -718,6 +713,53 @@ ggally_text <- function(
 
 }
 
+#' Internal Axis Labeling Plot for ggpairs
+#' ; is used when axisLabels == "internal"
+#'
+#' @param data dataset being plotted
+#' @param mapping aesthetics being used (x is the variable the plot will be made for)
+#' @param ... other arguments for geom_text
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @examples
+#' ggally_diagAxis(iris,aes(x=Petal.Width))
+#' ggally_diagAxis(iris,aes(x=Species))
+ggally_diagAxis <- function(data, mapping, ...) {
+  mapping$y <- NULL
+  numer <- is.null(attributes(data[, as.character(mapping$x)])$class)
+  if(numer) {
+    xmin <- min(data[, as.character(mapping$x)])
+    xmax <- max(data[, as.character(mapping$x)])
+    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+
+    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
+      xrange=xrange,yrange=xrange)
+
+    pGrob <- ggplotGrob(p)
+    axisBreaks <- as.numeric(getGrob(pGrob, "axis.text.x", grep = TRUE)$label)
+    labs <- rbind(expand.grid(x=axisBreaks[1],y=axisBreaks),
+      expand.grid(x=axisBreaks,y=axisBreaks[1]))[-1,]
+    labs$lab <- as.character(apply(labs,1,max))
+    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
+    return(pLabs)
+  } else {
+    breakLabels <- levels(data[,as.character(mapping$x)])
+    numLvls <- length(breakLabels)
+
+    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
+      xrange=c(0,1),yrange=c(0,1),yP=0.55)
+    #axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
+    axisBreaks <- 0:(numLvls-1)*(.125 + (1-.125*(numLvls-1))/numLvls) + 
+      (1-.125*(numLvls-1))/(2*numLvls)
+
+    labs <- data.frame(x=axisBreaks[1:numLvls],y=axisBreaks[numLvls:1],
+      lab=breakLabels)
+    
+    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
+    pLabs <- pLabs + scale_x_continuous(breaks=axisBreaks,limits=c(0,1)) +
+      scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
+    return(pLabs)
+  }
+}
 
 #' Plots the Bar Plots Faceted by Conditional Variable
 #'
@@ -794,11 +836,11 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 	
 
 	table_data <- cbind(table_data, xNew, yNew)
-	#print(table_data)
-	#print(xNames)
-	#print(yNames)
-	
-	#cat("\nmaxLen");print(maxLen)
+  # print(table_data)
+  # print(xNames)
+  # print(yNames)
+  # 
+  # cat("\nmaxLen");print(maxLen)
 
 	
 	p <- ggplot(
@@ -818,7 +860,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #			limits=c(1,maxLen + 2), 
 #			breaks=1:(maxLen + 2), 
 #			labels=c(xNames,rep("",maxLen - length(xNames) + 2)), 
-			limits=c(1,length(xNames) + 1), 
+			limits=c(0.9999,length(xNames) + 1), 
 			breaks=1:(length(xNames) + 1), 
 			labels=c(xNames,""), 
 			minor_breaks=FALSE
@@ -828,7 +870,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #			limits=c(1,maxLen + 2), 
 #			breaks=1:(maxLen + 2), 
 #			labels=c(yNames,rep("",maxLen - length(yNames) + 2)), 
-			limits=c(1,length(yNames) + 1), 
+			limits=c(0.9999,length(yNames) + 1), 
 			breaks=1:(length(yNames) + 1), 
 			labels=c(yNames,""), 
 			minor_breaks=FALSE
