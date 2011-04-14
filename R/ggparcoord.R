@@ -35,12 +35,12 @@
 #' \itemize{
 #'   \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
 #'   \item{\code{(given vector)}}{: order by the vector specified}
-#'   \item{\code{classSep}}{: order variables by their separation between any one class and
+#'   \item{\code{anyClass}}{: order variables by their separation between any one class and
 #'     the rest (as opposed to their overall variation between classes). This is accomplished
 #'     by calculating the F-statistic for each class vs. the rest, for each axis variable.
 #'     The axis variables are then ordered (decreasing) by their maximum of k F-statistics,
 #'     where k is the number of classes.}
-#'   \item{\code{overall}}{: order variables by their overall F statistic (decreasing) from
+#'   \item{\code{allClass}}{: order variables by their overall F statistic (decreasing) from
 #'     an ANOVA with \code{groupColumn} as the explanatory variable (note: it is required 
 #'     to specify a \code{groupColumn} with this ordering method). Basically, this method 
 #'     orders the variables by their variation between classes (most to least).}
@@ -121,9 +121,9 @@ ggparcoord <- function(
     stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
   }
   
-  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','overall','classSep', 
+  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','allClass','anyClass', 
     'Outlying','Skewed','Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
-    stop("invalid value for order; must either be a vector of column indices or one of 'skewness','overall','classSep','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+    stop("invalid value for order; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
   }
   
   if(!(is.logical(showPoints))) {
@@ -266,7 +266,7 @@ ggparcoord <- function(
     abs.skew <- abs(apply(saveData2,2,skewness))
     data.m$variable <- factor(data.m$variable,levels=names(abs.skew)[order(abs.skew,decreasing=TRUE)])
   }
-  else if(tolower(order) == "overall") {
+  else if(tolower(order) == "allclass") {
     f.stats <- rep(NA,length(columns))
     names(f.stats) <- names(saveData2)
     for(i in 1:length(columns)) {
@@ -274,7 +274,7 @@ ggparcoord <- function(
     }
     data.m$variable <- factor(data.m$variable,levels=names(f.stats)[order(f.stats,decreasing=TRUE)])
   }
-  else if(tolower(order) == "classsep") {
+  else if(tolower(order) == "anyclass") {
     axis.order <- singleClassOrder(groupVar,saveData2)
     data.m$variable <- factor(data.m$variable,levels=axis.order)
   }
