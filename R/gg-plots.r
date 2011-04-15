@@ -180,8 +180,13 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 		
 		txt <- str_c("Cor:", str_c(cord$label, collapse = "\n"), sep = "\n", collapse = "\n")
 		
-		
-		
+		# calculate variable ranges so the gridlines line up
+		xmin <- min(xVal)
+    xmax <- max(xVal)
+    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    ymin <- min(yVal)
+    ymax <- max(yVal)
+    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
 		
 		
 		print(cord)
@@ -190,8 +195,8 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 			mapping,
 			xP=0.5,
 			yP=0.9,
-			xrange = range(xVal),
-			yrange = range(yVal),
+			xrange = xrange,
+			yrange = yrange,
 			color = "black",
 			size = corSize,
 			...
@@ -199,8 +204,8 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 		theme_bw() + 
 		opts(legend.position = "none")
 		
-		xPos <- rep(corAlignPercent, length(lev)) * diff(range(xVal)) + min(range(xVal))
-		yPos <- seq(from = 0.9, to = 0.2, length.out = length(lev) + 1) * diff(range(yVal)) + min(range(yVal))
+		xPos <- rep(corAlignPercent, length(lev)) * diff(xrange) + min(xrange)
+		yPos <- seq(from = 0.9, to = 0.2, length.out = length(lev) + 1) * diff(yrange) + min(yrange)
 		yPos <- yPos[-1]
 		# print(range(yVal))
 		# print(yPos)
@@ -223,6 +228,14 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 		p$subType <- "cor"
 		p
 	} else {
+    # calculate variable ranges so the gridlines line up
+    xmin <- min(xVal)
+    xmax <- max(xVal)
+    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    ymin <- min(yVal)
+    ymax <- max(yVal)
+    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
+    
 		p <- ggally_text(
 			label = paste(
 				"Corr:\n",
@@ -235,8 +248,8 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 			mapping,
 			xP=0.5,
 			yP=0.5,
-			xrange = range(xVal),
-			yrange = range(yVal),
+			xrange = xrange,
+			yrange = yrange,
 			size = corSize,
 			...
 		) +  
