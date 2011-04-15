@@ -713,7 +713,7 @@ ggally_text <- function(
 	}
 	colour <- as.character(mapping$colour)
   if(is.null(colour) || length(colour) < 1)
-    colour <- "black" 
+    colour <- "grey50" 
 
   # remove colour from the aesthetics
 	mapping$colour <- NULL
