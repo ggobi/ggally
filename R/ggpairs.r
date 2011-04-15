@@ -287,8 +287,8 @@ ggpairs <- function(
 		p <- "blank"
 		type <- dataTypes[i,"Type"]
 
-		posX <- as.numeric(dataTypes[i,"posx"])
-		posY <- as.numeric(dataTypes[i,"posy"])
+		posX <- as.numeric(as.character(dataTypes[i,"posx"]))
+		posY <- as.numeric(as.character(dataTypes[i,"posy"]))
 		xColName <- as.character(dataTypes[i,"xvar"])
 		yColName <- as.character(dataTypes[i,"yvar"])
 		
