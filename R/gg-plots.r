@@ -201,7 +201,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 			size = corSize,
 			...
 		) +  
-		theme_bw() + 
+		#theme_bw() + 
 		opts(legend.position = "none")
 		
 		xPos <- rep(corAlignPercent, length(lev)) * diff(xrange) + min(xrange)
@@ -253,7 +253,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 			size = corSize,
 			...
 		) +  
-		theme_bw() + 
+		#theme_bw() + 
 		opts(legend.position = "none")
 
 	  p$type <- "continuous"
