@@ -88,7 +88,7 @@
 ggparcoord <- function(
   data,
   columns,
-  groupColumn,
+  groupColumn=NULL,
   scale="std",
   scaleSummary="mean",
   centerObsID=1,
@@ -105,7 +105,11 @@ ggparcoord <- function(
   saveData <- data
   
   ### Error Checking ###
-  if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
+  if(is.null(groupColumn)) {
+    if(any(tolower(order) %in% c("anyclass","allclass"))) {
+      stop("can't use the order methods anyClass or allClass without specifying groupColumn")
+    }
+  } else if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
     stop("invalid value for groupColumn; must be a single numeric or character index")
   }
     
@@ -139,11 +143,13 @@ ggparcoord <- function(
   }
 
   ### Setup ###
-  if(is.numeric(groupColumn)) {
-    groupCol <- names(data)[groupColumn]
-  } else 
-    groupCol <- groupColumn
-  groupVar <- data[,groupCol]
+  if(!is.null(groupColumn)) {
+    if(is.numeric(groupColumn)) {
+      groupCol <- names(data)[groupColumn]
+    } else 
+      groupCol <- groupColumn
+    groupVar <- data[,groupCol]
+  }
   data <- data[,columns]
 
   # Change character vars to factors
@@ -174,11 +180,6 @@ ggparcoord <- function(
   p <- c(dim(data)[2]-1,dim(data)[2])
 
   ### Scaling ###
-  # will need to implement error checking for the scale and other args
-  # tried writing a switch statement to reduce code length and perhaps be
-  #   be more efficient, but it doesn't appear to accept multiple lines for
-  #   an argument
-
   if(tolower(scale) == "std") {
     data <- rescaler(data)
   }
@@ -201,7 +202,9 @@ ggparcoord <- function(
 
   ### Imputation ###
   if(tolower(missing) == "exclude") {
-    groupVar <- groupVar[complete.cases(data)]
+    if(!is.null(groupColumn)) {
+      groupVar <- groupVar[complete.cases(data)]
+    }
     data <- data[complete.cases(data),]
   }
   else if(tolower(missing) == "mean") {
@@ -243,10 +246,14 @@ ggparcoord <- function(
     })
   }
 
-  data <- cbind(data,groupVar)
-  names(data)[dim(data)[2]] <- groupCol
+  if(!is.null(groupColumn)) {
+    data <- cbind(data,groupVar)
+    names(data)[dim(data)[2]] <- groupCol
 
-  data.m <- melt(data,id.vars=c(groupCol,".ID","anyMissing"))
+    data.m <- melt(data,id.vars=c(groupCol,".ID","anyMissing"))
+  } else {
+    data.m <- melt(data,id.vars=c(".ID","anyMissing"))
+  }
   
   ### Ordering ###
   if(length(order) > 1) {
@@ -279,7 +286,11 @@ ggparcoord <- function(
     data.m$variable <- factor(data.m$variable,levels=axis.order)
   }
 
-  mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
+  if(!is.null(groupColumn)) {
+    mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
+  } else {
+    mapcall <- paste("aes_string(x='variable',y='value',group='.ID')",sep="")
+  }
   mapping2 <- eval(parse(text=mapcall))
   mapping2 <- addAndOverwriteAes(mapping2,mapping)
   p <- ggplot(data=data.m,mapping=mapping2)
