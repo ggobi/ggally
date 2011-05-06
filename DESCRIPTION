@@ -1,14 +1,15 @@
 Package: GGally
-Type: Package
-Title: Extension to ggplot2.
-Version: 0.2.3
-Date: 2010-8-25
-Author: Barret Schloerke <schloerke@gmail.com>, Di Cook <dicook@iastate.edu>, Heike
-    Hofmann <hofmann@iastate.edu>, and Hadley Wickham <h.wickham@iastate.edu>
-Maintainer: Barret Schloerke <schloerke@gmail.com>
-Description: Package contains templates for different plots to be combined into a plot
-    matrix.
-Depends: ggplot2, stringr
+Maintainer: Jason Crowley <crowley.jason.s@gmail.com>
 License: GPL (>= 2.0)
+Title: Extension to ggplot2.
+Type: Package
 LazyLoad: yes
+Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley <crowley.jason.s@gmail.com>,
+    Di Cook <dicook@iastate.edu>, Heike Hofmann <hofmann@iastate.edu>,
+    and Hadley Wickham <h.wickham@iastate.edu>
+Description: Package contains templates for different plots to be combined
+    into a plot matrix, as well as a parallel coordinate plot function.
+Version: 0.3.0
+Date: 2011-05-06
+Depends: ggplot2, stringr
 Collate: 'find-combo.r' 'gg-plots.r' 'ggpairs.r' 'ggparcoord.R'

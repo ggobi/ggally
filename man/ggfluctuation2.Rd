@@ -1,7 +1,8 @@
 \name{ggfluctuation2}
 \alias{ggfluctuation2}
 \title{Fluctuation plot...}
-\usage{ggfluctuation2(table_data, floor=0, ceiling=max(table_data$freq, na.rm = TRUE))}
+\usage{ggfluctuation2(table_data, floor=0, ceiling=max(table_data$freq, na.rm =
+    TRUE))}
 \description{Fluctuation plot
 Create a fluctuation plot.}
 \details{A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.

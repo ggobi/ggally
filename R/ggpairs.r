@@ -21,6 +21,23 @@
 #   facetbar
 #   blank
 
+### Example removed due to not using facet labels anymore
+# #Sequence to show how to change label size
+# make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
+#   up <- from_left > from_top
+#   p <- getPlot(plot_matrix, from_top, from_left)
+#   if(up)
+#     p <- p + opts(strip.text.x = theme_text(size = new_size))
+#   else 
+#     p <- p + opts(strip.text.y = theme_text(angle = -90, size = new_size))
+#
+#   putPlot(plot_matrix, p, from_top, from_left)
+# }
+# small_label_diamond <- make_small_strip(diamondMatrix, 2, 1)
+# small_label_diamond <- make_small_strip(small_label_diamond, 1, 2)
+# small_label_diamond <- make_small_strip(small_label_diamond, 2, 2)
+# #small_label_diamond # now with much smaller strip text
+
 
 #' ggpairs - A GGplot2 Matrix
 #' Make a matrix of plots with a given data set
@@ -50,10 +67,10 @@
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
-#' @param axisLabels either "external" for labels on the margins of the plot, "internal" for labels in the diagonal plots, or "none" for no axis labels
+#' @param axisLabels either "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param removeTicks boolean to determine if the ticks/labels are removed from the border areas
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
+#' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
 #' @examples
 #' # plotting is reduced to the first couple of examples.  
@@ -72,10 +89,12 @@
 #' )
 #'
 #'
+#' # Use sample of the diamonds data
+#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 #'
 #' # Custom Example
 #' diamondMatrix <- ggpairs(	
-#'  diamonds[,1:3], 	
+#'  diamonds.samp[,1:3], 	
 #'  upper = list(continuous = "density", combo = "box"), 	
 #'  lower = list(continuous = "points", combo = "dot"), 	
 #'  diag = list(continuous = "bar", discrete = "bar"), 
@@ -119,27 +138,9 @@
 #' custom_fill <- putPlot(custom_fill, plotNew, 1, 2)
 #' #custom_fill
 #'
-#'
-#' #Sequence to show how to change label size
-#' make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
-#'   up <- from_left > from_top
-#'   p <- getPlot(plot_matrix, from_top, from_left)
-#'   if(up)
-#'     p <- p + opts(strip.text.x = theme_text(size = new_size))
-#'   else 
-#'     p <- p + opts(strip.text.y = theme_text(angle = -90, size = new_size))
-#'
-#'   putPlot(plot_matrix, p, from_top, from_left)
-#' }
-#' small_label_diamond <- make_small_strip(diamondMatrix, 2, 1)
-#' small_label_diamond <- make_small_strip(small_label_diamond, 1, 2)
-#' small_label_diamond <- make_small_strip(small_label_diamond, 2, 2)
-#' #small_label_diamond # now with much smaller strip text
-#' 
-#' 
 #' 
 #' special_diamond <- ggpairs(
-#'   diamonds,
+#'   diamonds.samp,
 #'   columns = 8:10, 
 #'   upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
 #'   lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
@@ -149,7 +150,6 @@
 #' #special_diamond
 #'
 #'
-#' 
 #' ## prints
 #' #   data =    mtcars
 #' #   columns = c(1,3,4) # (mpg, disp, hp)
@@ -182,6 +182,17 @@
 #'   title = "Complex Iris Data"
 #'  )
 #' #iris_with_params
+#'
+#' ## The same plot matrix with no axis labels
+#' iris_with_params2 <- ggpairs(
+#'   iris, 
+#'   upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")), 
+#'   lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)), 
+#'   diag = list(continuous = "bar", discrete = "bar", aes_string = aes_string(fill = "Species"), params = c(binwidth = 0.25)),
+#'   title = "Complex Iris Data",
+#'   axisLabels = "none"
+#'  )
+#' #iris_with_params2
 ggpairs <- function(
   data, 
   columns = 1:ncol(data),
