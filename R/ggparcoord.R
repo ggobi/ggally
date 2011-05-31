@@ -12,7 +12,8 @@
 #'   \item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
 #'   \item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
 #'   \item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
-#'   \item{\code{globalminmax}}{: scale so the global minimum is zero, and the global maximum is one}
+#'   \item{\code{globalminmax}}{: no scaling is done; the range of the graphs is defined 
+#'     by the global minimum and the global maximum}
 #'   \item{\code{center}}{: use \code{uniminmax} to standardize vertical height, then
 #'     center each variable at a value specified by the \code{scaleSummary} param}
 #'   \item{\code{centerObs}}{: use \code{uniminmax} to standardize vertical height, then
@@ -129,7 +130,6 @@ ggparcoord <- function(
   mapping=NULL,
   title=""
 ) {
-  require(ggplot2)
   saveData <- data
   
   ### Error Checking ###
@@ -217,10 +217,10 @@ ggparcoord <- function(
   else if(tolower(scale) == "uniminmax") {
     data <- rescaler(data,type="range")
   }
-  else if(tolower(scale) == "globalminmax") {
-    data[,-p] <- data[,-p] - min(data[,-p])
-    data[,-p] <- data[,-p]/max(data[,-p])
-  }
+  #else if(tolower(scale) == "globalminmax") {
+  #  data[,-p] <- data[,-p] - min(data[,-p])
+  #  data[,-p] <- data[,-p]/max(data[,-p])
+  #}
   else if(tolower(scale) == "center") {
     data <- rescaler(data,type="range")
     data[,-p] <- apply(data[,-p],2,function(x){

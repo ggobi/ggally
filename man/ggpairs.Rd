@@ -1,9 +1,9 @@
 \name{ggpairs}
 \alias{ggpairs}
 \title{ggpairs - A GGplot2 Matrix...}
-\usage{ggpairs(data, columns=1:ncol(data), title="", upper=list(), lower=list(),
-    diag=list(), params, ..., verbose=FALSE, axisLabels="internal",
-    removeTicks=TRUE)}
+\usage{ggpairs(data, columns=1:ncol(data), title="", upper=list(),
+    lower=list(), diag=list(), params = NULL, ..., verbose=FALSE,
+    axisLabels="internal", removeTicks=TRUE)}
 \description{ggpairs - A GGplot2 Matrix
 Make a matrix of plots with a given data set}
 \details{upper and lower are lists that may contain the variables 'continuous', 

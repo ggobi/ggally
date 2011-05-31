@@ -1,9 +1,10 @@
 \name{ggparcoord}
 \alias{ggparcoord}
 \title{ggparcoord - A ggplot2 Parallel Coordinate Plot...}
-\usage{ggparcoord(data, columns, groupColumn = NULL, scale="std", scaleSummary="mean",
-    centerObsID=1, missing="exclude", order=columns, showPoints=FALSE,
-    alphaLines=1, boxplot=FALSE, shadeBox = NULL, mapping = NULL, title="")}
+\usage{ggparcoord(data, columns, groupColumn = NULL, scale="std",
+    scaleSummary="mean", centerObsID=1, missing="exclude",
+    order=columns, showPoints=FALSE, alphaLines=1, boxplot=FALSE,
+    shadeBox = NULL, mapping = NULL, title="")}
 \description{ggparcoord - A ggplot2 Parallel Coordinate Plot
 ; A function for plotting static parallel coordinate plots, utilizing
 the \code{ggplot2} graphics package.}
@@ -13,7 +14,8 @@ in the parallel coordinate plot. Options:
 \item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
 \item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
 \item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
-\item{\code{globalminmax}}{: scale so the global minimum is zero, and the global maximum is one}
+\item{\code{globalminmax}}{: no scaling is done; the range of the graphs is defined 
+by the global minimum and the global maximum}
 \item{\code{center}}{: use \code{uniminmax} to standardize vertical height, then
 center each variable at a value specified by the \code{scaleSummary} param}
 \item{\code{centerObs}}{: use \code{uniminmax} to standardize vertical height, then
