@@ -116,7 +116,15 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 	xCol <- as.character(mapping$x)
 	yCol <- as.character(mapping$y)
 	colorCol <- as.character(mapping$colour)
-	rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+        if(length(colorCol) > 0) {
+          if(colorCol %in% colnames(data)) {
+            rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+          } else {
+            rows <- complete.cases(data[,c(xCol,yCol)])
+          }
+        } else {
+          rows <- complete.cases(data[,c(xCol,yCol)])
+        }
 	if(any(!rows)) {
 		total <- sum(!rows)
 		if (total > 1) {
