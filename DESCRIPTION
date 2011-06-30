@@ -12,6 +12,7 @@ Description: Package contains templates for different plots to be
     combined into a plot matrix, as well as a parallel coordinate plot
     function.
 Version: 0.3.0
-Date: 2011-05-31
+Date: 2011-06-30
 Depends: ggplot2, stringr
+Suggests: scagnostics
 Collate: 'find-combo.r' 'gg-plots.r' 'ggpairs.r' 'ggparcoord.R'
