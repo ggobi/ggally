@@ -359,7 +359,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 # This is done with side by side and not facets
 #ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE)
 #{
-#  horizontal <-  is.factor(data[,as.character(mapping$y)])
+#  horizontal <-  is.factor(data[,as.character(mapping$y)]) || is.character(data[,as.character(mapping$y)])
 #  
 #  if(horizontal) {
 #    cat("horizontal dot-box\n")
@@ -637,7 +637,8 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' ggally_barDiag(movies, aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
 	mapping$y <- NULL
-	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
+	numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+
 
   p <- ggplot(data = data, mapping) + geom_bar(...)
 	
@@ -738,7 +739,8 @@ ggally_text <- function(
 #' ggally_diagAxis(iris,aes(x=Species))
 ggally_diagAxis <- function(data, mapping, ...) {
   mapping$y <- NULL
-  numer <- is.null(attributes(data[, as.character(mapping$x)])$class)
+  numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+
   if(numer) {
     xmin <- min(data[, as.character(mapping$x)])
     xmax <- max(data[, as.character(mapping$x)])
@@ -755,7 +757,7 @@ ggally_diagAxis <- function(data, mapping, ...) {
     pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
     return(pLabs)
   } else {
-    breakLabels <- levels(data[,as.character(mapping$x)])
+    breakLabels <- levels(as.factor(data[,as.character(mapping$x)]))
     numLvls <- length(breakLabels)
 
     p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
@@ -788,7 +790,7 @@ ggally_diagAxis <- function(data, mapping, ...) {
 #' ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
 ggally_facetbar <- function(data, mapping, ...){
 
-	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
+  numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
 	xVal <- mapping$x
 	yVal <- mapping$y
 	mapping$y <- NULL

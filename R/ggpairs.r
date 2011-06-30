@@ -68,7 +68,6 @@
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @param axisLabels either "internal" for labels in the diagonal plots, or "none" for no axis labels
-#' @param removeTicks boolean to determine if the ticks/labels are removed from the border areas
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
@@ -203,10 +202,10 @@ ggpairs <- function(
   params = NULL,
   ...,
   verbose = FALSE,
-  axisLabels = "internal",
-	removeTicks = TRUE
+  axisLabels = "internal"
 ){
   require(ggplot2)
+  removeTicks <- TRUE
   printInfo <- FALSE
 
 	verbose = verbose || printInfo
@@ -265,6 +264,9 @@ ggpairs <- function(
 
 
 	data <- as.data.frame(data)
+      for ( i in 1:dim(data)[2] ) {
+        if(is.character(data[,i])) data[,i] <- as.factor(data[,i])
+      }
 	numCol <- length(columns)
 	if(printInfo)
     cat("data col: ", numCol,"\n")

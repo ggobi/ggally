@@ -3,7 +3,7 @@
 \title{ggpairs - A GGplot2 Matrix...}
 \usage{ggpairs(data, columns=1:ncol(data), title="", upper=list(),
     lower=list(), diag=list(), params = NULL, ..., verbose=FALSE,
-    axisLabels="internal", removeTicks=TRUE)}
+    axisLabels="internal")}
 \description{ggpairs - A GGplot2 Matrix
 Make a matrix of plots with a given data set}
 \details{upper and lower are lists that may contain the variables 'continuous', 
@@ -33,8 +33,7 @@ printed there.}
 \item{params}{vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.}
 \item{...}{other parameters being supplied to geom's aes, such as color}
 \item{verbose}{boolean to determine the printing of "Plot #1, Plot #2...."}
-\item{axisLabels}{either "internal" for labels in the diagonal plots, or "none" for no axis labels}
-\item{removeTicks}{boolean to determine if the ticks/labels are removed from the border areas}}
+\item{axisLabels}{either "internal" for labels in the diagonal plots, or "none" for no axis labels}}
 \examples{# plotting is reduced to the first couple of examples.  
 # Feel free to print the ggpair objects created in the examples
 
