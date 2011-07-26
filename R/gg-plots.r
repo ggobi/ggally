@@ -733,16 +733,16 @@ ggally_text <- function(
 #' ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
 ggally_facetbar <- function(data, mapping, ...){
 
-	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
-	xVal <- mapping$x
-	yVal <- mapping$y
-	mapping$y <- NULL
-	p <- ggplot(data, mapping) + geom_bar(...)
-	p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
-	p$subType <- "facetbar"
-	p$type <- "diag"
+  # numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
+  xVal <- mapping$x
+  yVal <- mapping$y
+  mapping$y <- NULL
+  p <- ggplot(data, mapping) + geom_bar(...)
+  p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+  p$subType <- "facetbar"
+  p$type <- "diag"
 
-	p
+  p
 }
 
 
