@@ -21,6 +21,23 @@
 #   facetbar
 #   blank
 
+### Example removed due to not using facet labels anymore
+# #Sequence to show how to change label size
+# make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
+#   up <- from_left > from_top
+#   p <- getPlot(plot_matrix, from_top, from_left)
+#   if(up)
+#     p <- p + opts(strip.text.x = theme_text(size = new_size))
+#   else 
+#     p <- p + opts(strip.text.y = theme_text(angle = -90, size = new_size))
+#
+#   putPlot(plot_matrix, p, from_top, from_left)
+# }
+# small_label_diamond <- make_small_strip(diamondMatrix, 2, 1)
+# small_label_diamond <- make_small_strip(small_label_diamond, 1, 2)
+# small_label_diamond <- make_small_strip(small_label_diamond, 2, 2)
+# #small_label_diamond # now with much smaller strip text
+
 
 #' ggpairs - A GGplot2 Matrix
 #' Make a matrix of plots with a given data set
@@ -50,9 +67,9 @@
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
-#' @param removeTicks boolean to determine if the ticks/labels are removed from the border areas
+#' @param axisLabels either "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
+#' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
 #' @examples
 #' # plotting is reduced to the first couple of examples.  
@@ -71,10 +88,12 @@
 #' )
 #'
 #'
+#' # Use sample of the diamonds data
+#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 #'
 #' # Custom Example
 #' diamondMatrix <- ggpairs(	
-#'  diamonds[,1:3], 	
+#'  diamonds.samp[,1:3], 	
 #'  upper = list(continuous = "density", combo = "box"), 	
 #'  lower = list(continuous = "points", combo = "dot"), 	
 #'  diag = list(continuous = "bar", discrete = "bar"), 
@@ -118,27 +137,9 @@
 #' custom_fill <- putPlot(custom_fill, plotNew, 1, 2)
 #' #custom_fill
 #'
-#'
-#' #Sequence to show how to change label size
-#' make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
-#'   up <- from_left > from_top
-#'   p <- getPlot(plot_matrix, from_top, from_left)
-#'   if(up)
-#'     p <- p + opts(strip.text.x = theme_text(size = new_size))
-#'   else 
-#'     p <- p + opts(strip.text.y = theme_text(angle = -90, size = new_size))
-#'
-#'   putPlot(plot_matrix, p, from_top, from_left)
-#' }
-#' small_label_diamond <- make_small_strip(diamondMatrix, 2, 1)
-#' small_label_diamond <- make_small_strip(small_label_diamond, 1, 2)
-#' small_label_diamond <- make_small_strip(small_label_diamond, 2, 2)
-#' #small_label_diamond # now with much smaller strip text
-#' 
-#' 
 #' 
 #' special_diamond <- ggpairs(
-#'   diamonds,
+#'   diamonds.samp,
 #'   columns = 8:10, 
 #'   upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
 #'   lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
@@ -148,7 +149,6 @@
 #' #special_diamond
 #'
 #'
-#' 
 #' ## prints
 #' #   data =    mtcars
 #' #   columns = c(1,3,4) # (mpg, disp, hp)
@@ -181,6 +181,17 @@
 #'   title = "Complex Iris Data"
 #'  )
 #' #iris_with_params
+#'
+#' ## The same plot matrix with no axis labels
+#' iris_with_params2 <- ggpairs(
+#'   iris, 
+#'   upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")), 
+#'   lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)), 
+#'   diag = list(continuous = "bar", discrete = "bar", aes_string = aes_string(fill = "Species"), params = c(binwidth = 0.25)),
+#'   title = "Complex Iris Data",
+#'   axisLabels = "none"
+#'  )
+#' #iris_with_params2
 ggpairs <- function(
   data, 
   columns = 1:ncol(data),
@@ -191,9 +202,10 @@ ggpairs <- function(
   params = NULL,
   ...,
   verbose = FALSE,
-	removeTicks = FALSE
+  axisLabels = "internal"
 ){
   require(ggplot2)
+  removeTicks <- TRUE
   printInfo <- FALSE
 
 	verbose = verbose || printInfo
@@ -252,6 +264,9 @@ ggpairs <- function(
 
 
 	data <- as.data.frame(data)
+      for ( i in 1:dim(data)[2] ) {
+        if(is.character(data[,i])) data[,i] <- as.factor(data[,i])
+      }
 	numCol <- length(columns)
 	if(printInfo)
     cat("data col: ", numCol,"\n")
@@ -261,7 +276,7 @@ ggpairs <- function(
 	ggpairsPlots <- list()
 	
 
-	grid <- expand.grid(x = 1:ncol(data[columns]), y = 1:ncol(data[columns]))
+	grid <- rev(expand.grid(y = 1:ncol(data[columns]), x = 1:ncol(data[columns])))
 
 	all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
 		xcol <- grid[i, "x"]
@@ -274,18 +289,24 @@ ggpairs <- function(
 	dataTypes <- plot_types(data[columns])
   if(printInfo){cat("\n\n\nDATA TYPES\n");print(dataTypes)}
 
-	
+	if (identical(axisLabels,"internal")) {
+  	dataTypes$Type <- as.character(dataTypes$Type)
+  	dataTypes$Type[dataTypes$posx == dataTypes$posy] <- "label"
+  	dataTypes$Type <- as.factor(dataTypes$Type)
+  }
+  
+  
 	for(i in 1:nrow(dataTypes)){
 		p <- "blank"
 		type <- dataTypes[i,"Type"]
 
-		posX <- as.numeric(dataTypes[i,"posx"])
-		posY <- as.numeric(dataTypes[i,"posy"])
+		posX <- as.numeric(as.character(dataTypes[i,"posx"]))
+		posY <- as.numeric(as.character(dataTypes[i,"posy"]))
 		xColName <- as.character(dataTypes[i,"xvar"])
 		yColName <- as.character(dataTypes[i,"yvar"])
 		
 
-		up <- posX < posY
+		up <- posX > posY
 		
   	if(printInfo) cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
 
@@ -305,7 +326,7 @@ ggpairs <- function(
 				section_params <- lower$params
 			}
 			
-			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
+			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
 			if(subType == "density") {
 				combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
 				combo_aes
@@ -338,7 +359,7 @@ ggpairs <- function(
 				section_aes <- lower$aes_string
 				section_params <- lower$params
 			}
-			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
+			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
 			if(subType != "dot")
 				combo_aes <- mapping_color_fill(combo_aes)
 			combo_params <- addAndOverwriteAes(params, section_params)
@@ -372,7 +393,7 @@ ggpairs <- function(
 				section_params <- lower$params
 			}
 			
-			combo_aes <- addAndOverwriteAes(aes_string(x = yColName, y = xColName, ...), section_aes)
+			combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
 			combo_params <- addAndOverwriteAes(params, section_params)
 			
 			if(subType == "ratio")
@@ -426,7 +447,12 @@ ggpairs <- function(
 #			#	p <- ggally_ratio(dataSelect)
 #			else if(subType == "blank")
 #				p <- ggally_blank()
-		}
+		} else if(type == "label"){
+    	combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+      combo_params <- addAndOverwriteAes(params, diag$params)
+      
+    	p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
+    }
 		
 		ggpairsPlots[[length(ggpairsPlots)+1]] <- p
 		
@@ -439,6 +465,7 @@ ggpairs <- function(
     title = title, 
     verbose = verbose, 
     printInfo = printInfo,
+    axisLabels = axisLabels,
 		removeTicks = removeTicks
   )
 	
@@ -597,12 +624,25 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 print.ggpairs <- function(x, ...){
   plotObj <- x
   
-  v1 <- viewport(
+  # If using internal axis labels, extend the plotting region out since
+  # variable names on the margins will not be used
+  if(identical(plotObj$axisLabels,"internal")) {
+    v1 <- viewport(
+#		x = unit(0.5, "npc") + unit(1,"lines"), 
+		y = unit(0.5, "npc") - unit(0.5,"lines"), 
+		width=unit(1, "npc") - unit(1,"lines"), 
+		height=unit(1, "npc") - unit(2, "lines")
+	)
+  } else {
+  	v1 <- viewport(
 #		x = unit(0.5, "npc") + unit(1,"lines"), 
 #		y = unit(0.5, "npc") + unit(1,"lines"), 
 		width=unit(1, "npc") - unit(3,"lines"), 
 		height=unit(1, "npc") - unit(3, "lines")
 	)
+  }
+  
+  
 	numCol <- length(plotObj$columns)
 
 	v2 <- viewport(
@@ -621,9 +661,12 @@ print.ggpairs <- function(x, ...){
 		popViewport()
 	}
 
+  # This plots the variable names on the margins, which is not needed if using internal
+# axis labels
+if(!identical(plotObj$axisLabels,"internal")) {
 	# viewport for Left Names
 	pushViewport(viewport(width=unit(1, "npc") - unit(2,"lines"), height=unit(1, "npc") - unit(3, "lines")))
-	
+
 	pushViewport(viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) )))
 
 	# Left Side
@@ -648,6 +691,7 @@ print.ggpairs <- function(x, ...){
 
 	popViewport() #layout
 	popViewport() #spacing
+}
 
 ##############################################################  
 ####################  End Viewports  #########################
@@ -747,6 +791,11 @@ print.ggpairs <- function(x, ...){
                     p <- p + opts(plot.margin = unit(c(-0.5,0,0,0), "lines"),
                       legend.position = "none")
                   }                 
+                }
+                # Adjust for blank space left by faceting in faceted bar plot
+                else if (identical(p$subType,"facetbar")) {
+                  p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"),
+                    legend.position = "none")
                 }
                 # Need to scale both variables for continuous plots
                 else if (identical(p$type,"continuous") && !identical(p$subType,"cor")) {

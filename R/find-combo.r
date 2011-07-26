@@ -12,7 +12,7 @@ plot_types <- function(data)
 	#horizontal then vertical
 	for(j in 1:ncol(data))
 		for(i in 1:ncol(data))
-			dataInfo[(i-1)*ncol(data)+j,] <- c(find_plot_type(data,i,j),namesD[i],namesD[j],i,j)
+			dataInfo[(i-1)*ncol(data)+j,] <- c(find_plot_type(data,i,j),namesD[j],namesD[i],j,i)
 			
 	dataInfo <- as.data.frame(dataInfo)
 	colnames(dataInfo) <- c("Type", "xvar", "yvar","posx","posy")

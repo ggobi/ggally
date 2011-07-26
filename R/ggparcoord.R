@@ -12,7 +12,8 @@
 #'   \item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
 #'   \item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
 #'   \item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
-#'   \item{\code{globalminmax}}{: scale so the global minimum is zero, and the global maximum is one}
+#'   \item{\code{globalminmax}}{: no scaling is done; the range of the graphs is defined 
+#'     by the global minimum and the global maximum}
 #'   \item{\code{center}}{: use \code{uniminmax} to standardize vertical height, then
 #'     center each variable at a value specified by the \code{scaleSummary} param}
 #'   \item{\code{centerObs}}{: use \code{uniminmax} to standardize vertical height, then
@@ -35,10 +36,22 @@
 #' \itemize{
 #'   \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
 #'   \item{\code{(given vector)}}{: order by the vector specified}
+#'   \item{\code{anyClass}}{: order variables by their separation between any one class and
+#'     the rest (as opposed to their overall variation between classes). This is accomplished
+#'     by calculating the F-statistic for each class vs. the rest, for each axis variable.
+#'     The axis variables are then ordered (decreasing) by their maximum of k F-statistics,
+#'     where k is the number of classes.}
+#'   \item{\code{allClass}}{: order variables by their overall F statistic (decreasing) from
+#'     an ANOVA with \code{groupColumn} as the explanatory variable (note: it is required 
+#'     to specify a \code{groupColumn} with this ordering method). Basically, this method 
+#'     orders the variables by their variation between classes (most to least).}
+#'   \item{\code{skewness}}{: order variables by their sample skewness (most skewed to 
+#'     least skewed)}
 #'   \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
 #'     by the package \code{scagnostics}. Other scagnostic measures available to order
 #'     by are \code{Skewed, Clumpy, Sparse, Striated, Convex, Skinny, Stringy,} and
-#'     \code{Monotonic}.}
+#'     \code{Monotonic}. Note: To use these methods of ordering, you must have the \code{scagnostics}
+#'     package loaded.}
 #' }
 #'
 #' @param data the dataset to plot
@@ -63,21 +76,48 @@
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggplot object that if called, will print
 #' @examples
-#' # basic parallel coordinate plot, using defaults
-#' ggparcoord(iris,1:4,5)
+#' # use sample of the diamonds data for illustrative purposes
+#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
+#' 
+#' # basic parallel coordinate plot, using default settings
+#' ggparcoord(data = diamonds.samp,columns = c(1,5:10))
+#'
+#' # this time, color by diamond cut
+#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
 #'
 #' # underlay univariate boxplots, add title, use uniminmax scaling
-#' ggparcoord(iris,1:4,5,scale="uniminmax",boxplot=TRUE,title="Parallel Coord. Plot of Iris Data")
+#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
+#'   scale = "uniminmax",boxplot = TRUE,title = "Parallel Coord. Plot of Diamonds Data")
 #'
-#' # utilize ggplot2 aes to switch to dashed lines
-#' ggparcoord(iris,1:4,5,boxplot=TRUE,title="Parallel Coord. Plot of Iris Data",
-#'   mapping=aes_string(lty=2))
-
+#' # utilize ggplot2 aes to switch to thicker lines
+#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2, 
+#'   title="Parallel Coord. Plot of Diamonds Data",mapping = aes(size = 1))
+#'
+#' # basic parallel coord plot of the msleep data, using 'random' imputation and
+#' # coloring by diet (can also use variable names in the columns and groupColumn
+#' # arguments)
+#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing = 
+#'   "random", scale = "uniminmax")
+#'
+#' # center each variable by its median, using the default missing value handler,
+#' # 'exclude'
+#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale = 
+#'   "center", scaleSummary = "median") 
+#'
+#' # with the iris data, order the axes by overall class (Species) separation using
+#' # the anyClass option
+#' ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass")
+#'
+#' # add points to the plot, add a title, and use an alpha scalar to make the lines
+#' # transparent
+#' ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
+#'   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
+#'   alphaLines = 0.3)
 
 ggparcoord <- function(
   data,
   columns,
-  groupColumn,
+  groupColumn=NULL,
   scale="std",
   scaleSummary="mean",
   centerObsID=1,
@@ -90,11 +130,14 @@ ggparcoord <- function(
   mapping=NULL,
   title=""
 ) {
-  require(ggplot2)
   saveData <- data
   
   ### Error Checking ###
-  if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
+  if(is.null(groupColumn)) {
+    if(any(tolower(order) %in% c("anyclass","allclass"))) {
+      stop("can't use the order methods anyClass or allClass without specifying groupColumn")
+    }
+  } else if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
     stop("invalid value for groupColumn; must be a single numeric or character index")
   }
     
@@ -110,9 +153,9 @@ ggparcoord <- function(
     stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
   }
   
-  if(!(is.numeric(order) || (is.character(order) && (order %in% c('Outlying','Skewed', 
-    'Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
-    stop("invalid value for order; must either be a vector of column indices or one of 'Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','allClass','anyClass', 
+    'Outlying','Skewed','Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
+    stop("invalid value for order; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
   }
   
   if(!(is.logical(showPoints))) {
@@ -128,11 +171,13 @@ ggparcoord <- function(
   }
 
   ### Setup ###
-  if(is.numeric(groupColumn)) {
-    groupCol <- names(data)[groupColumn]
-  } else 
-    groupCol <- groupColumn
-  groupVar <- data[,groupCol]
+  if(!is.null(groupColumn)) {
+    if(is.numeric(groupColumn)) {
+      groupCol <- names(data)[groupColumn]
+    } else 
+      groupCol <- groupColumn
+    groupVar <- data[,groupCol]
+  }
   data <- data[,columns]
 
   # Change character vars to factors
@@ -152,17 +197,17 @@ ggparcoord <- function(
       data[,fact.vars[i]] <- as.numeric(data[,fact.vars[i]])
     }
   }
+  
+  # Save this form of the data for order calculations (don't want imputed
+  # missing values affecting order, but do want any factor/character vars
+  # being plotted as numeric)
+  saveData2 <- data
 
   data$.ID <- as.factor(1:dim(data)[1])
   data$anyMissing <- apply(data,1,function(x) { any(is.na(x)) })
   p <- c(dim(data)[2]-1,dim(data)[2])
 
   ### Scaling ###
-  # will need to implement error checking for the scale and other args
-  # tried writing a switch statement to reduce code length and perhaps be
-  #   be more efficient, but it doesn't appear to accept multiple lines for
-  #   an argument
-
   if(tolower(scale) == "std") {
     data <- rescaler(data)
   }
@@ -172,10 +217,10 @@ ggparcoord <- function(
   else if(tolower(scale) == "uniminmax") {
     data <- rescaler(data,type="range")
   }
-  else if(tolower(scale) == "globalminmax") {
-    data[,-p] <- data[,-p] - min(data[,-p])
-    data[,-p] <- data[,-p]/max(data[,-p])
-  }
+  #else if(tolower(scale) == "globalminmax") {
+  #  data[,-p] <- data[,-p] - min(data[,-p])
+  #  data[,-p] <- data[,-p]/max(data[,-p])
+  #}
   else if(tolower(scale) == "center") {
     data <- rescaler(data,type="range")
     data[,-p] <- apply(data[,-p],2,function(x){
@@ -185,7 +230,9 @@ ggparcoord <- function(
 
   ### Imputation ###
   if(tolower(missing) == "exclude") {
-    groupVar <- groupVar[complete.cases(data)]
+    if(!is.null(groupColumn)) {
+      groupVar <- groupVar[complete.cases(data)]
+    }
     data <- data[complete.cases(data),]
   }
   else if(tolower(missing) == "mean") {
@@ -227,10 +274,14 @@ ggparcoord <- function(
     })
   }
 
-  data <- cbind(data,groupVar)
-  names(data)[dim(data)[2]] <- groupCol
+  if(!is.null(groupColumn)) {
+    data <- cbind(data,groupVar)
+    names(data)[dim(data)[2]] <- groupCol
 
-  data.m <- melt(data,id.vars=c(groupCol,".ID","anyMissing"))
+    data.m <- melt(data,id.vars=c(groupCol,".ID","anyMissing"))
+  } else {
+    data.m <- melt(data,id.vars=c(".ID","anyMissing"))
+  }
   
   ### Ordering ###
   if(length(order) > 1) {
@@ -240,13 +291,34 @@ ggparcoord <- function(
        data.m$variable <- factor(data.m$variable,levels=order)
      }
   }
-  else {
+  else if(order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
+    "Stringy","Monotonic")) {
     require(scagnostics)
-    scag <- scagnostics(data[,1:(dim(data)[2]-3)])
-    data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(data[,1:(dim(data)[2]-3)]),order))
+    scag <- scagnostics(saveData2)
+    data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(saveData2),order))
+  }
+  else if(tolower(order) == "skewness") {
+    abs.skew <- abs(apply(saveData2,2,skewness))
+    data.m$variable <- factor(data.m$variable,levels=names(abs.skew)[order(abs.skew,decreasing=TRUE)])
+  }
+  else if(tolower(order) == "allclass") {
+    f.stats <- rep(NA,length(columns))
+    names(f.stats) <- names(saveData2)
+    for(i in 1:length(columns)) {
+      f.stats[i] <- summary(lm(saveData2[,i] ~ groupVar))$fstatistic[1]
+    }
+    data.m$variable <- factor(data.m$variable,levels=names(f.stats)[order(f.stats,decreasing=TRUE)])
+  }
+  else if(tolower(order) == "anyclass") {
+    axis.order <- singleClassOrder(groupVar,saveData2)
+    data.m$variable <- factor(data.m$variable,levels=axis.order)
   }
 
-  mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
+  if(!is.null(groupColumn)) {
+    mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
+  } else {
+    mapcall <- paste("aes_string(x='variable',y='value',group='.ID')",sep="")
+  }
   mapping2 <- eval(parse(text=mapcall))
   mapping2 <- addAndOverwriteAes(mapping2,mapping)
   p <- ggplot(data=data.m,mapping=mapping2)
@@ -261,8 +333,13 @@ ggparcoord <- function(
   }
   if(boxplot) p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
   if(showPoints) p <- p + geom_point()
+  if(!is.null(mapping2$size)) {
+    lineSize <- mapping2$size
+  } else {
+    lineSize <- 0.5
+  }
 
-  p + geom_line(alpha=alphaLines) + opts(title=title)
+  p + geom_line(alpha=alphaLines,size=lineSize) + opts(title=title)
 
 }
 
@@ -305,4 +382,49 @@ scagOrder <- function(scag, vars, measure) {
   }
   a[p] <- vars[!(vars %in% a)]
   return(a)
+}
+
+#' Order axis variables by separation between one class and the rest
+#' (most separation to least)
+#'
+#' @param classVar class variable (vector from original dataset)
+#' @param axisVars variables to be plotted as axes (data frame)
+#' @param specClass character string matching to level of \code{classVar}; instead 
+#'   of looking for separation between any class and the rest, will only look for
+#'   separation between this class and the rest
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @return character vector of names of axisVars ordered such that the first
+#'   variable has the most separation between one of the classes and the rest, and
+#'   the last variable has the least (as measured by F-statistics from an ANOVA)
+singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
+  if(!is.null(specClass)) {
+    # for when user is interested in ordering by variation between one class and
+    # the rest...will add this later
+  } else {
+    var.names <- colnames(axisVars)
+    class.names <- levels(classVar)
+    f.stats <- matrix(NA,nrow=length(class.names),ncol=length(var.names),dimnames=
+      list(class.names,var.names))
+    for(i in 1:length(class.names)) {
+      f.stats[i,] <- apply(axisVars,2,function(x) {
+        return(summary(lm(x ~ as.factor(classVar == class.names[i])))$fstatistic[1])
+      })
+    }
+    var.maxF <- apply(f.stats,2,max)
+    return(names(var.maxF)[order(var.maxF,decreasing=TRUE)])
+  }
+}
+
+#' Calculate the sample skewness of a vector
+#' while ignoring missing values.
+#'
+#' @param x numeric vector
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @return sample skewness of \code{x}
+skewness <- function(x) {
+  x <- x[!is.na(x)]
+  xbar <- mean(x)
+  n <- length(x)
+  skewness <- (1/n)*sum((x-xbar)^3)/((1/n)*sum((x-xbar)^2))^(3/2)
+  return(skewness)
 }

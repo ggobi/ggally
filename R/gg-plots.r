@@ -113,7 +113,18 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
   # mapping$x <- mapping$y <- NULL
 
-	rows <- complete.cases(data)
+	xCol <- as.character(mapping$x)
+	yCol <- as.character(mapping$y)
+	colorCol <- as.character(mapping$colour)
+        if(length(colorCol) > 0) {
+          if(colorCol %in% colnames(data)) {
+            rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+          } else {
+            rows <- complete.cases(data[,c(xCol,yCol)])
+          }
+        } else {
+          rows <- complete.cases(data[,c(xCol,yCol)])
+        }
 	if(any(!rows)) {
 		total <- sum(!rows)
 		if (total > 1) {
@@ -123,9 +134,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 		}
 	}
 	data <- data[rows, ]
-	xCol <- as.character(mapping$x)
-	yCol <- as.character(mapping$y)
-	colorCol <- as.character(mapping$colour)
 	xVal <- data[,xCol]
 	yVal <- data[,yCol]
 	
@@ -180,8 +188,13 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 		
 		txt <- str_c("Cor:", str_c(cord$label, collapse = "\n"), sep = "\n", collapse = "\n")
 		
-		
-		
+		# calculate variable ranges so the gridlines line up
+		xmin <- min(xVal)
+    xmax <- max(xVal)
+    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    ymin <- min(yVal)
+    ymax <- max(yVal)
+    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
 		
 		
 		print(cord)
@@ -190,17 +203,17 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 			mapping,
 			xP=0.5,
 			yP=0.9,
-			xrange = range(xVal),
-			yrange = range(yVal),
+			xrange = xrange,
+			yrange = yrange,
 			color = "black",
 			size = corSize,
 			...
 		) +  
-		theme_bw() + 
+		#theme_bw() + 
 		opts(legend.position = "none")
 		
-		xPos <- rep(corAlignPercent, length(lev)) * diff(range(xVal)) + min(range(xVal))
-		yPos <- seq(from = 0.9, to = 0.2, length.out = length(lev) + 1) * diff(range(yVal)) + min(range(yVal))
+		xPos <- rep(corAlignPercent, length(lev)) * diff(xrange) + min(xrange)
+		yPos <- seq(from = 0.9, to = 0.2, length.out = length(lev) + 1) * diff(yrange) + min(yrange)
 		yPos <- yPos[-1]
 		# print(range(yVal))
 		# print(yPos)
@@ -223,6 +236,14 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 		p$subType <- "cor"
 		p
 	} else {
+    # calculate variable ranges so the gridlines line up
+    xmin <- min(xVal)
+    xmax <- max(xVal)
+    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    ymin <- min(yVal)
+    ymax <- max(yVal)
+    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
+    
 		p <- ggally_text(
 			label = paste(
 				"Corr:\n",
@@ -235,12 +256,12 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 			mapping,
 			xP=0.5,
 			yP=0.5,
-			xrange = range(xVal),
-			yrange = range(yVal),
+			xrange = xrange,
+			yrange = yrange,
 			size = corSize,
 			...
 		) +  
-		theme_bw() + 
+		#theme_bw() + 
 		opts(legend.position = "none")
 
 	  p$type <- "continuous"
@@ -346,7 +367,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 # This is done with side by side and not facets
 #ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE)
 #{
-#  horizontal <-  is.factor(data[,as.character(mapping$y)])
+#  horizontal <-  is.factor(data[,as.character(mapping$y)]) || is.character(data[,as.character(mapping$y)])
 #  
 #  if(horizontal) {
 #    cat("horizontal dot-box\n")
@@ -624,7 +645,8 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' ggally_barDiag(movies, aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
 	mapping$y <- NULL
-	numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
+	numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+
 
   p <- ggplot(data = data, mapping) + geom_bar(...)
 	
@@ -678,24 +700,19 @@ ggally_text <- function(
   ...
 ){
 
-  rectData <- data.frame(
-		x1 = xrange[1], 
-		x2 = xrange[2], 
-		y1 = yrange[1], 
-		y2 = yrange[2]
-	)
+  #rectData <- data.frame(
+	#	x1 = xrange[1], 
+	#	x2 = xrange[2], 
+	#	y1 = yrange[1], 
+	#	y2 = yrange[2]
+	#)
 	# print(rectData)
 	
 	p <- ggplot() + xlim(xrange) + ylim(yrange) + 
-		geom_rect(data = rectData,
-				aes(
-					xmin=x1,
-					xmax = x2,
-					ymin = y1,
-					ymax = y2
-				),
-				fill= I("white")) + 
-				labs(x = NULL, y = NULL)
+  		opts(panel.background=theme_blank(),
+        panel.grid.minor=theme_blank(),
+        panel.grid.major=theme_line(colour="grey85")) +
+			labs(x = NULL, y = NULL)
 
 	new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange), y = yP * diff(yrange) + min(yrange))
 	if(is.null(mapping)) {
@@ -705,7 +722,7 @@ ggally_text <- function(
 	}
 	colour <- as.character(mapping$colour)
   if(is.null(colour) || length(colour) < 1)
-    colour <- "black" 
+    colour <- "grey50" 
 
   # remove colour from the aesthetics
 	mapping$colour <- NULL
@@ -718,6 +735,54 @@ ggally_text <- function(
 
 }
 
+#' Internal Axis Labeling Plot for ggpairs
+#' ; is used when axisLabels == "internal"
+#'
+#' @param data dataset being plotted
+#' @param mapping aesthetics being used (x is the variable the plot will be made for)
+#' @param ... other arguments for geom_text
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @examples
+#' ggally_diagAxis(iris,aes(x=Petal.Width))
+#' ggally_diagAxis(iris,aes(x=Species))
+ggally_diagAxis <- function(data, mapping, ...) {
+  mapping$y <- NULL
+  numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+
+  if(numer) {
+    xmin <- min(data[, as.character(mapping$x)])
+    xmax <- max(data[, as.character(mapping$x)])
+    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+
+    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
+      xrange=xrange,yrange=xrange)
+
+    pGrob <- ggplotGrob(p)
+    axisBreaks <- as.numeric(getGrob(pGrob, "axis.text.x", grep = TRUE)$label)
+    labs <- rbind(expand.grid(x=axisBreaks[1],y=axisBreaks),
+      expand.grid(x=axisBreaks,y=axisBreaks[1]))[-1,]
+    labs$lab <- as.character(apply(labs,1,max))
+    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
+    return(pLabs)
+  } else {
+    breakLabels <- levels(as.factor(data[,as.character(mapping$x)]))
+    numLvls <- length(breakLabels)
+
+    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
+      xrange=c(0,1),yrange=c(0,1),yP=0.55)
+    #axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
+    axisBreaks <- 0:(numLvls-1)*(.125 + (1-.125*(numLvls-1))/numLvls) + 
+      (1-.125*(numLvls-1))/(2*numLvls)
+
+    labs <- data.frame(x=axisBreaks[1:numLvls],y=axisBreaks[numLvls:1],
+      lab=breakLabels)
+    
+    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
+    pLabs <- pLabs + scale_x_continuous(breaks=axisBreaks,limits=c(0,1)) +
+      scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
+    return(pLabs)
+  }
+}
 
 #' Plots the Bar Plots Faceted by Conditional Variable
 #'
@@ -741,7 +806,7 @@ ggally_facetbar <- function(data, mapping, ...){
   p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
   p$subType <- "facetbar"
   p$type <- "diag"
-
+  
   p
 }
 
