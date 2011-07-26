@@ -54,10 +54,10 @@ diag = list(continuous = "bar", discrete = "bar")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 
 # Custom Example
-diamondMatrix <- ggpairs(	
-diamonds.samp[,1:3], 	
-upper = list(continuous = "density", combo = "box"), 	
-lower = list(continuous = "points", combo = "dot"), 	
+diamondMatrix <- ggpairs(  
+diamonds.samp[,1:3],   
+upper = list(continuous = "density", combo = "box"),   
+lower = list(continuous = "points", combo = "dot"),   
 diag = list(continuous = "bar", discrete = "bar"), 
 color = "cut", 
 title = "Diamonds"

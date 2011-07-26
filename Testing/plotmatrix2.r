@@ -11,7 +11,7 @@ print(grid)
         data.frame(xvar = names(data)[ycol], yvar = names(data)[xcol], 
             x = data[, xcol], y = data[, ycol], data)
     }))
-#	print(all)
+#  print(all)
 
     all$xvar <- factor(all$xvar, levels = names(data))
     all$yvar <- factor(all$yvar, levels = names(data))
@@ -21,9 +21,9 @@ print(grid)
             x = data[, i])
     }))
 
-	print(head(all))
-	print(head(densities))
-	y2 <<- all
+  print(head(all))
+  print(head(densities))
+  y2 <<- all
 
     mapping <- defaults(mapping, aes_string(x = "x", y = "y"))
     class(mapping) <- "uneval"
@@ -31,7 +31,7 @@ print(grid)
         geom_point(colour = colour, na.rm = TRUE) + stat_density(aes(x = x, 
         y = ..scaled.. * diff(range(x)) + min(x)), data = densities, 
         position = "identity", colour = "grey20", geom = "line")
-	
-	
+  
+  
 
 }
