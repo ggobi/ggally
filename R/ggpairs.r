@@ -58,6 +58,7 @@
 #' chosen as an option, then ggpairs will produce a blank plot, as if nothing was 
 #' printed there.  
 #' 
+#' @export
 #' @param data data set using.  Can have both numerical and categorical data.
 #' @param columns which columns are used to make plots.  Defaults to all columns.
 #' @param title title for the graph
@@ -66,8 +67,9 @@
 #' @param diag see Details
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
+#' @param axisLabels either "internal" for labels in the diagonal plots, "none" for no axis labels, or "show" to display axisLabels
+#' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
-#' @param axisLabels either "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
@@ -201,10 +203,9 @@ ggpairs <- function(
   diag = list(),
   params = NULL,
   ...,
+  axisLabels = "internal",
   legends = FALSE,
-  removeTicks = TRUE,
-  verbose = FALSE,
-  axisLabels = "internal"
+  verbose = FALSE
 ){
   require(ggplot2)
   printInfo <- FALSE
@@ -553,6 +554,7 @@ vplayout <- function(x, y) {
 #' @param columnFromLeft column from the left
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @export
 #' @examples
 #' plotMatrix <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
@@ -580,6 +582,7 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #' @param columnFromLeft column from the left
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @export
 #' @examples
 #' plotMatrix2 <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
 #' getPlot(plotMatrix2, 1, 2)
@@ -624,6 +627,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @method print ggpairs
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @export
 #' @examples
 #'  ggpairs(iris[,3:5])
 print.ggpairs <- function(x, ...){
@@ -863,8 +867,8 @@ if(!identical(plotObj$axisLabels,"internal")) {
 #'
 #' @keywords internal
 #' @examples
-#'  is_blank_plot(ggally_blank())
-#'  is_blank_plot(ggally_points(mtcars, aes_string(x = "disp", y = "hp")))
+#'  GGally:::is_blank_plot(ggally_blank())
+#'  GGally:::is_blank_plot(ggally_points(mtcars, aes_string(x = "disp", y = "hp")))
 #'
 is_blank_plot <- function(p){  
   if( !is.null(p$subType) && !is.null(p$type))
@@ -906,6 +910,7 @@ addAndOverwriteAes <- function(current, new)
 #' Replace the fill with the color and make color NULL
 #'
 #' @param current the current aesthetics
+#' @keywords internal
 mapping_color_fill <- function(current) {
   currentNames <- names(current)
   color <- c("color", "colour")

@@ -4,15 +4,23 @@ License: GPL (>= 2.0)
 Title: Extension to ggplot2.
 Type: Package
 LazyLoad: yes
-Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
-    <crowley.jason.s@gmail.com>, Di Cook <dicook@iastate.edu>, Heike
-    Hofmann <hofmann@iastate.edu>, and Hadley Wickham
+Author: Barret Schloerke <schloerke@gmail.com>, Jason
+    Crowley <crowley.jason.s@gmail.com>, Di Cook
+    <dicook@iastate.edu>, Heike Hofmann
+    <hofmann@iastate.edu>, and Hadley Wickham
     <h.wickham@iastate.edu>
-Description: Package contains templates for different plots to be
-    combined into a plot matrix, as well as a parallel coordinate plot
-    function.
-Version: 0.3.0
+Description: Package contains templates for different plots
+    to be combined into a plot matrix, as well as a
+    parallel coordinate plot function.
+Version: 0.3.1
 Date: 2011-06-30
-Depends: ggplot2, stringr
-Suggests: scagnostics
-Collate: 'find-combo.r' 'gg-plots.r' 'ggpairs.r' 'ggparcoord.R'
+Depends:
+    ggplot2,
+    stringr
+Suggests:
+    scagnostics
+Collate:
+    'find-combo.r'
+    'gg-plots.r'
+    'ggpairs.r'
+    'ggparcoord.R'

@@ -75,6 +75,7 @@
 #' @param title character string denoting the title of the plot
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggplot object that if called, will print
+#' @export
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]

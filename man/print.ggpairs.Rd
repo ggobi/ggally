@@ -1,11 +1,24 @@
 \name{print.ggpairs}
 \alias{print.ggpairs}
-\title{Print ggpair object...}
-\usage{\method{print}{ggpairs} (x, ...)}
-\description{Print ggpair object
+\title{Print ggpair object
 Specialized method to print the ggapir object}
+\usage{
+  \method{print}{ggpairs} (x, ...)
+}
+\arguments{
+  \item{x}{ggpair object to be plotted}
+
+  \item{...}{not used}
+}
+\description{
+  Print ggpair object Specialized method to print the
+  ggapir object
+}
+\examples{
+ggpairs(iris[,3:5])
+}
+\author{
+  Barret Schloerke \email{schloerke@gmail.com}
+}
 \keyword{internal}
-\author{Barret Schloerke \email{schloerke@gmail.com}}
-\arguments{\item{x}{ggpair object to be plotted}
-\item{...}{not used}}
-\examples{ggpairs(iris[,3:5])}
+

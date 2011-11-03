@@ -1,40 +1,71 @@
 \name{ggpairs}
 \alias{ggpairs}
-\title{ggpairs - A GGplot2 Matrix...}
-\usage{ggpairs(data, columns=1:ncol(data), title="", upper=list(),
-    lower=list(), diag=list(), params = NULL, ..., verbose=FALSE,
-    axisLabels="internal")}
-\description{ggpairs - A GGplot2 Matrix
+\title{ggpairs - A GGplot2 Matrix
 Make a matrix of plots with a given data set}
-\details{upper and lower are lists that may contain the variables 'continuous', 
-'combo' and 'discrete'. Each element of the list is a string implementing
-the following options: continuous = exactly one of ('points', 'smooth', 
-'density', 'cor', 'blank'); combo = exactly one of ('box', 'dot', 
-'facethist', 'facetdensity', 'denstrip', 'blank'); discrete = exactly one 
-of ('facetbar','ratio', 'blank').
+\usage{
+  ggpairs(data, columns = 1:ncol(data), title = "", upper =
+  list(), lower = list(), diag = list(), params = NULL,
+  ..., axisLabels = "internal", legends = FALSE, verbose =
+  FALSE)
+}
+\arguments{
+  \item{data}{data set using.  Can have both numerical and
+  categorical data.}
 
-diag is a list that may only contain the variables 'continuous' and 'discrete'. 
-Each element of the diag list is a string implmenting the following options: 
-continuous = exactly one of ('density', 'bar', 'blank'); discrete = exactly one
-of ('bar', 'blank').
+  \item{columns}{which columns are used to make plots.
+  Defaults to all columns.}
 
-If a list option it will be set to the function default.  If 'blank' is ever 
-chosen as an option, then ggpairs will produce a blank plot, as if nothing was 
-printed there.}
-\keyword{hplot}
-\author{Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason.s@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}}
-\value{ggpair object that if called, will print}
-\arguments{\item{data}{data set using.  Can have both numerical and categorical data.}
-\item{columns}{which columns are used to make plots.  Defaults to all columns.}
-\item{title}{title for the graph}
-\item{upper}{see Details}
-\item{lower}{see Details}
-\item{diag}{see Details}
-\item{params}{vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.}
-\item{...}{other parameters being supplied to geom's aes, such as color}
-\item{verbose}{boolean to determine the printing of "Plot #1, Plot #2...."}
-\item{axisLabels}{either "internal" for labels in the diagonal plots, or "none" for no axis labels}}
-\examples{# plotting is reduced to the first couple of examples.  
+  \item{title}{title for the graph}
+
+  \item{upper}{see Details}
+
+  \item{lower}{see Details}
+
+  \item{diag}{see Details}
+
+  \item{params}{vector of parameters to be applied to
+  geoms.  Each value must have a corresponding name, such
+  as \code{c(binwidth = 0.1)}.}
+
+  \item{...}{other parameters being supplied to geom's aes,
+  such as color}
+
+  \item{axisLabels}{either "internal" for labels in the
+  diagonal plots, "none" for no axis labels, or "show" to
+  display axisLabels}
+
+  \item{legends}{boolean to determine the printing of the
+  legend in each plot. Not recommended.}
+
+  \item{verbose}{boolean to determine the printing of "Plot
+  #1, Plot #2...."}
+}
+\value{
+  ggpair object that if called, will print
+}
+\description{
+  upper and lower are lists that may contain the variables
+  'continuous', 'combo' and 'discrete'. Each element of the
+  list is a string implementing the following options:
+  continuous = exactly one of ('points', 'smooth',
+  'density', 'cor', 'blank'); combo = exactly one of
+  ('box', 'dot', 'facethist', 'facetdensity', 'denstrip',
+  'blank'); discrete = exactly one of ('facetbar','ratio',
+  'blank').
+}
+\details{
+  diag is a list that may only contain the variables
+  'continuous' and 'discrete'. Each element of the diag
+  list is a string implmenting the following options:
+  continuous = exactly one of ('density', 'bar', 'blank');
+  discrete = exactly one of ('bar', 'blank').
+
+  If a list option it will be set to the function default.
+  If 'blank' is ever chosen as an option, then ggpairs will
+  produce a blank plot, as if nothing was printed there.
+}
+\examples{
+# plotting is reduced to the first couple of examples.
 # Feel free to print the ggpair objects created in the examples
 
 #ggpairs(iris)
@@ -43,9 +74,9 @@ ggpairs(iris[,3:5])
 
 # Custom Example
 ggpairs(
-iris[,3:5], 
-upper = list(continuous = "density", combo = "box"), 
-lower = list(continuous = "points", combo = "dot"), 
+iris[,3:5],
+upper = list(continuous = "density", combo = "box"),
+lower = list(continuous = "points", combo = "dot"),
 diag = list(continuous = "bar", discrete = "bar")
 )
 
@@ -54,12 +85,12 @@ diag = list(continuous = "bar", discrete = "bar")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 
 # Custom Example
-diamondMatrix <- ggpairs(  
-diamonds.samp[,1:3],   
-upper = list(continuous = "density", combo = "box"),   
-lower = list(continuous = "points", combo = "dot"),   
-diag = list(continuous = "bar", discrete = "bar"), 
-color = "cut", 
+diamondMatrix <- ggpairs(
+diamonds.samp[,1:3],
+upper = list(continuous = "density", combo = "box"),
+lower = list(continuous = "points", combo = "dot"),
+diag = list(continuous = "bar", discrete = "bar"),
+color = "cut",
 title = "Diamonds"
 )
 #diamondMatrix
@@ -81,15 +112,15 @@ custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Cu
 plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars)))
 plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
 custom_car <- putPlot(custom_car, plot, 1, 2)
-custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
+custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"), 1, 3)
 #custom_car
 
 
 # Custom plot with different scale fill gradient
 custom_fill <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
 custom_fill <- putPlot(
-custom_fill, 
-ggally_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend\nand axis labels!"),
+custom_fill,
+ggally_text("ggpairs allows you\\nto retrieve a plot.\\nWe will grab this one,\\n-->\\nwith the legend\\nand axis labels!"),
 1, 1)
 #custom_fill
 plot <- getPlot(custom_fill, 1, 2)
@@ -102,10 +133,10 @@ custom_fill <- putPlot(custom_fill, plotNew, 1, 2)
 
 special_diamond <- ggpairs(
 diamonds.samp,
-columns = 8:10, 
-upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
-lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
-diag = "blank", 
+columns = 8:10,
+upper = list(continuous = "points",aes_string = aes_string(color = "clarity")),
+lower = list(continuous = "points",aes_string = aes_string(color = "cut")),
+diag = "blank",
 title = "Diamonds"
 )
 #special_diamond
@@ -122,11 +153,11 @@ title = "Diamonds"
 #   verbose = FALSE makes the "Plot #1, Plot #2...." not print
 carsMatrix <- ggpairs(
 mtcars,
-columns = c(1,3,4), 
-upper = list(continuous = "points",aes_string = aes_string(shape = "cyl", size = 5)), 
-lower = list(continuous = "points",aes_string = aes_string(size = "cyl")), 
-diag = "blank", 
-color = "cyl", 
+columns = c(1,3,4),
+upper = list(continuous = "points",aes_string = aes_string(shape = "cyl", size = 5)),
+lower = list(continuous = "points",aes_string = aes_string(size = "cyl")),
+diag = "blank",
+color = "cyl",
 title = "Custom Cars",
 verbose = FALSE
 )
@@ -136,9 +167,9 @@ verbose = FALSE
 ## Each list is custom to it's own area
 #  params are the parameters applied to the geoms.  Parameters can not be considered aesthetics.
 iris_with_params <- ggpairs(
-iris, 
-upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")), 
-lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)), 
+iris,
+upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")),
+lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)),
 diag = list(continuous = "bar", discrete = "bar", aes_string = aes_string(fill = "Species"), params = c(binwidth = 0.25)),
 title = "Complex Iris Data"
 )
@@ -146,11 +177,21 @@ title = "Complex Iris Data"
 
 ## The same plot matrix with no axis labels
 iris_with_params2 <- ggpairs(
-iris, 
-upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")), 
-lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)), 
+iris,
+upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")),
+lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)),
 diag = list(continuous = "bar", discrete = "bar", aes_string = aes_string(fill = "Species"), params = c(binwidth = 0.25)),
 title = "Complex Iris Data",
 axisLabels = "none"
 )
-#iris_with_params2}
+#iris_with_params2
+}
+\author{
+  Barret Schloerke \email{schloerke@gmail.com}, Jason
+  Crowley \email{crowley.jason.s@gmail.com}, Di Cook
+  \email{dicook@iastate.edu}, Heike Hofmann
+  \email{hofmann@iastate.edu}, Hadley Wickham
+  \email{h.wickham@gmail.com}
+}
+\keyword{hplot}
+

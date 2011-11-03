@@ -12,6 +12,7 @@
 #' @param mapping aesthetics being used
 #' @param ... other arguments are sent to geom_point
 #' @author Barret Schloerke  \email{schloerke@@gmail.com}
+#' @export
 #' @keywords hplot
 #' @examples
 #' ggally_points(mtcars, aes(x = disp, y = hp))
@@ -32,6 +33,7 @@ ggally_points <- function(data, mapping, ...){
 #' @param mapping aesthetics being used
 #' @param ... other arguments to add to geom_point
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @export
 #' @keywords hplot
 #' @examples
 #' ggally_smooth(iris, aes(x = Sepal.Length, y = Sepal.Width))
@@ -55,6 +57,7 @@ ggally_smooth <- function(data, mapping, ...){
 #' @param mapping aesthetics being used
 #' @param ... parameters sent to either stat_density2d or geom_density2d
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @export
 #' @keywords hplot
 #' @examples
 #' ggally_density(iris, aes(x = Sepal.Length, y = Petal.Length))
@@ -87,6 +90,7 @@ ggally_density <- function(data, mapping, ...){
 #' @param corSize size of text
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @export
 #' @keywords hplot
 #' @examples
 #' ggally_cor(iris, aes(x = Sepal.Length, y = Petal.Length))
@@ -278,6 +282,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 #' @param ... other arguments being supplied to geom_boxplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_box(iris, aes(x = Petal.Width, y = Species))
 #' ggally_box(iris, aes_string(x = "Petal.Width", y = "Species"))
@@ -295,6 +300,7 @@ ggally_box <- function(data, mapping, ...){
 #' @param ... other arguments being supplied to geom_jitter
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_dot(iris, aes(x = Petal.Width, y = Species))
 #' ggally_dot(iris, aes_string(x = "Petal.Width", y = "Species"))
@@ -313,6 +319,7 @@ ggally_dot <- function(data, mapping, ...){
 #' @param boxPlot boolean to decide to plot either box plots (TRUE) or dot plots (FALSE)
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
 #' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=FALSE)
@@ -408,6 +415,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #' @param ... parameters sent to stat_bin()
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_facethist(iris, aes(x = Petal.Width, y = Species))
 #' ggally_facethist(iris, aes_string(x = "Species", y = "Petal.Width"), binwidth = 0.1)
@@ -469,6 +477,7 @@ ggally_facethist <- function(data, mapping, ...){
 #' @param ... other arguments being sent to stat_density
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_facetdensity(iris, aes(x = Petal.Width, y = Species))
 #' ggally_facetdensity(iris, aes_string(x = "Species", y = "Petal.Width", color = "Species"))
@@ -485,6 +494,7 @@ ggally_facetdensity <- function(data, mapping, ...){
 #' @param ... other arguments being sent to stat_bin
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_denstrip(iris, aes(x = Petal.Width, y = Species, color = Species))
 #' ggally_denstrip(iris, aes_string(x = "Petal.Width", y = "Species"))
@@ -504,6 +514,7 @@ ggally_denstrip <- function(data,mapping, ...){
 #' @param den_strip boolean to deceide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' example(ggally_facetdensity)
 #' example(ggally_denstrip)
@@ -582,6 +593,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @param data data set using
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_ratio(movies[,c("mpaa","Action")])
 #' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
@@ -607,6 +619,7 @@ ggally_ratio <- function(data){
 #' @param ... other arguments sent to stat_density
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_densityDiag(iris, aes(x = Petal.Width))
 #' ggally_densityDiag(movies, aes_string(x="rating"))
@@ -638,6 +651,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' @param ... other arguements are sent to geom_bar
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_barDiag(movies, aes(x = mpaa))
 #' ggally_barDiag(movies, aes_string(x = "mpaa"))
@@ -686,6 +700,7 @@ ggally_barDiag <- function(data, mapping, ...){
 #' @param ... other arguments for geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_text("Example 1")
 #' ggally_text("Example\nTwo", mapping = aes_string(size = 15, color = "red"))
@@ -741,6 +756,7 @@ ggally_text <- function(
 #' @param mapping aesthetics being used (x is the variable the plot will be made for)
 #' @param ... other arguments for geom_text
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @export
 #' @examples
 #' ggally_diagAxis(iris,aes(x=Petal.Width))
 #' ggally_diagAxis(iris,aes(x=Species))
@@ -792,6 +808,7 @@ ggally_diagAxis <- function(data, mapping, ...) {
 #' @param ... other arguements are sent to geom_bar
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
 #' ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
@@ -822,6 +839,7 @@ ggally_facetbar <- function(data, mapping, ...){
 #' @param ceiling max value to compare to
 #' @author Hadley Wickham \email{h.wickham@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
+#' @export
 #' @examples
 #' ggfluctuation2(table(movies$Action, movies$Comedy))
 #' ggfluctuation2(table(movies$Action, movies$mpaa))
@@ -925,6 +943,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #'
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @param ... other arguments ignored
+#' @export
 #' @keywords hplot
 ggally_blank <- function(...){
   ignored <- aes(...)

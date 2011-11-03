@@ -1,14 +1,28 @@
 \name{ggally_box}
 \alias{ggally_box}
-\title{Plots the Box Plot...}
-\usage{ggally_box(data, mapping, ...)}
-\description{Plots the Box Plot
+\title{Plots the Box Plot
 Make a box plot with a given data set}
-\author{Barret Schloerke \email{schloerke@gmail.com}}
-\keyword{hplot}
-\arguments{\item{data}{data set using}
-\item{mapping}{aesthetics being used}
-\item{...}{other arguments being supplied to geom_boxplot}}
-\examples{ggally_box(iris, aes(x = Petal.Width, y = Species))
+\usage{
+  ggally_box(data, mapping, ...)
+}
+\arguments{
+  \item{data}{data set using}
+
+  \item{mapping}{aesthetics being used}
+
+  \item{...}{other arguments being supplied to
+  geom_boxplot}
+}
+\description{
+  Plots the Box Plot Make a box plot with a given data set
+}
+\examples{
+ggally_box(iris, aes(x = Petal.Width, y = Species))
 ggally_box(iris, aes_string(x = "Petal.Width", y = "Species"))
-ggally_box(iris, aes_string(y = "Petal.Width", x = "Species", color = "Species"), outlier.colour = "red", outlier.shape = 13, outlier.size = 18)}
+ggally_box(iris, aes_string(y = "Petal.Width", x = "Species", color = "Species"), outlier.colour = "red", outlier.shape = 13, outlier.size = 18)
+}
+\author{
+  Barret Schloerke \email{schloerke@gmail.com}
+}
+\keyword{hplot}
+
