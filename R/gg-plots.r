@@ -156,7 +156,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
   # splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
   # splits <- str_c(colorCol, sep = ", ", collapse = ", ")
   final_text <- ""
-  print(colorCol)
   if(length(colorCol) < 1)
     colorCol <- "ggally_NO_EXIST"
   # browser()
