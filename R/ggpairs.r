@@ -210,6 +210,11 @@ ggpairs <- function(
   printInfo <- FALSE
 
   verbose = verbose || printInfo
+
+  if (! axisLabels %in% c("none", "show", "internal")) {
+    warning("axisLabels not in c('none', 'show', 'internal').  Reverting to 'internal'")
+    axisLabels <- "internal"
+  }
   
   
   if(!is.list(upper) && upper == "blank"){
@@ -467,14 +472,12 @@ ggpairs <- function(
     verbose = verbose, 
     printInfo = printInfo,
     axisLabels = axisLabels,
-    removeTicks = removeTicks,
     legends = legends
   )
   
   attributes(plotMatrix)$class <- "ggpairs"
   
   plotMatrix
-  
 }
 
 #' Generate GGally Function Text
@@ -744,9 +747,13 @@ if(!identical(plotObj$axisLabels,"internal")) {
 
           }
         }
-
-        removeTicks <- identical(plotObj$removeTicks, TRUE)
-
+          
+        noTicks <- c("internal", "none")
+        removeTicks <- plotObj$axisLabels %in% noTicks
+        if( ! is.null(p$axisLabels)) {
+          removeTicks <- p$axisLabels %in% noTicks
+        }
+  
         if( columnPos != 1 || removeTicks){
           p <- p + opts(axis.text.y = theme_blank(), axis.title.y = theme_blank() )
         }
@@ -828,7 +835,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
             showLegend <- identical(p$ggally$legend, TRUE)
           }
         }
-        if (! showLegend) {
+        if (showLegend == FALSE) {
           p <- p + opts(legend.position = "none")
         }
         
