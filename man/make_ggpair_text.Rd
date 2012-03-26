@@ -2,8 +2,8 @@
 \alias{make_ggpair_text}
 \title{Generate GGally Function Text}
 \usage{
-  make_ggpair_text(func, mapping, params = NULL, printInfo
-  = FALSE)
+make_ggpair_text(func, mapping, params = NULL, 
+    printInfo = FALSE)
 }
 \arguments{
   \item{func}{identifier string in function name}
@@ -21,4 +21,3 @@
   parameters
 }
 \keyword{internal}
-

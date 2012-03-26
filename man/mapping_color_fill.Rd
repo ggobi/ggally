@@ -3,7 +3,7 @@
 \title{Aesthetic Mapping Color Fill
 Replace the fill with the color and make color NULL}
 \usage{
-  mapping_color_fill(current)
+mapping_color_fill(current)
 }
 \arguments{
   \item{current}{the current aesthetics}
@@ -13,4 +13,3 @@ Replace the fill with the color and make color NULL}
   color and make color NULL
 }
 \keyword{internal}
-

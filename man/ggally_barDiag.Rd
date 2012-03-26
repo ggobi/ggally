@@ -3,7 +3,7 @@
 \title{Plots the Bar Plots by Using Diagonal
 Plots the bar plots by using Diagonal}
 \usage{
-  ggally_barDiag(data, mapping, ...)
+ggally_barDiag(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -17,12 +17,14 @@ Plots the bar plots by using Diagonal}
   by using Diagonal
 }
 \examples{
-ggally_barDiag(movies, aes(x = mpaa))
-ggally_barDiag(movies, aes_string(x = "mpaa"))
-ggally_barDiag(movies, aes_string(x ="rating", binwidth = ".1"))
+library(ggplot2)
+data(movies)
+ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
+ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
+ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "rating", 
+    binwidth = ".1"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

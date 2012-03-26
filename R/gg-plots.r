@@ -1,9 +1,3 @@
-
-
-
-
-
-
 #' Plots the Scatter Plot
 #'
 #' Make a scatter plot with a given data set
@@ -15,9 +9,10 @@
 #' @export
 #' @keywords hplot
 #' @examples
-#' ggally_points(mtcars, aes(x = disp, y = hp))
-#' ggally_points(mtcars, aes_string(x = "disp", y = "hp"))
-#' ggally_points(mtcars, aes_string(x = "disp", y = "hp", color = "as.factor(cyl)", size = "gear"))
+#' data(mtcars)
+#' ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp))
+#' ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp"))
+#' ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp", color = "as.factor(cyl)", size = "gear"))
 ggally_points <- function(data, mapping, ...){
   
   p <- ggplot(data = data, mapping = mapping) + geom_point(...)
@@ -36,9 +31,9 @@ ggally_points <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#' ggally_smooth(iris, aes(x = Sepal.Length, y = Sepal.Width))
-#' ggally_smooth(iris, aes_string(x = "Sepal.Length", y = "Sepal.Width"))
-#' ggally_smooth(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"))
+#' ggally_smooth(iris, mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width))
+#' ggally_smooth(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Sepal.Width"))
+#' ggally_smooth(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"))
 ggally_smooth <- function(data, mapping, ...){
   p <- ggplot(data = data, mapping) +
     geom_smooth(method="lm", colour = I("black")) +
@@ -60,10 +55,10 @@ ggally_smooth <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#' ggally_density(iris, aes(x = Sepal.Length, y = Petal.Length))
-#' ggally_density(iris, aes_string(x = "Sepal.Length", y = "Petal.Length"))
-#' ggally_density(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", fill = "..level.."))
-#' ggally_density(iris, aes_string(x = "Petal.Length", y = "Petal.Width",fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2)) 
+#' ggally_density(iris, mapping = ggplot2::aes(x = Sepal.Length, y = Petal.Length))
+#' ggally_density(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length"))
+#' ggally_density(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", fill = "..level.."))
+#' ggally_density(iris, mapping = ggplot2::aes_string(x = "Petal.Length", y = "Petal.Width",fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2)) 
 ggally_density <- function(data, mapping, ...){  
   p <- ggplot(data = data, mapping)
 
@@ -93,9 +88,9 @@ ggally_density <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#' ggally_cor(iris, aes(x = Sepal.Length, y = Petal.Length))
-#' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
-#' ggally_cor(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"), corSize = 15 )
+#' ggally_cor(iris, mapping = ggplot2::aes(x = Sepal.Length, y = Petal.Length))
+#' ggally_cor(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
+#' ggally_cor(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"), corSize = 15 )
 ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
   # xVar <- data[,as.character(mapping$x)]
@@ -284,9 +279,9 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_box(iris, aes(x = Petal.Width, y = Species))
-#' ggally_box(iris, aes_string(x = "Petal.Width", y = "Species"))
-#' ggally_box(iris, aes_string(y = "Petal.Width", x = "Species", color = "Species"), outlier.colour = "red", outlier.shape = 13, outlier.size = 18)
+#' ggally_box(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
+#' ggally_box(iris, mapping = ggplot2::aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_box(iris, mapping = ggplot2::aes_string(y = "Petal.Width", x = "Species", color = "Species"), outlier.colour = "red", outlier.shape = 13, outlier.size = 18)
 ggally_box <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
@@ -302,10 +297,10 @@ ggally_box <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_dot(iris, aes(x = Petal.Width, y = Species))
-#' ggally_dot(iris, aes_string(x = "Petal.Width", y = "Species"))
-#' ggally_dot(iris, aes_string(x = "Species", y = "Petal.Width", color = "Species"))
-#' ggally_dot(iris, aes_string(x = "Species", y = "Petal.Width", color = "Species", shape = "Species")) + scale_shape(solid=FALSE)
+#' ggally_dot(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
+#' ggally_dot(iris, mapping = ggplot2::aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_dot(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", color = "Species"))
+#' ggally_dot(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", color = "Species", shape = "Species")) + scale_shape(solid=FALSE)
 ggally_dot <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = FALSE)
 }
@@ -321,8 +316,8 @@ ggally_dot <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
-#' ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=FALSE)
+#' ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
+#' ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species, color = Species), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
   
@@ -417,8 +412,8 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_facethist(iris, aes(x = Petal.Width, y = Species))
-#' ggally_facethist(iris, aes_string(x = "Species", y = "Petal.Width"), binwidth = 0.1)
+#' ggally_facethist(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
+#' ggally_facethist(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width"), binwidth = 0.1)
 ggally_facethist <- function(data, mapping, ...){
 #  str(mapping)
   #aesString <- aes_string(mapping)
@@ -479,8 +474,8 @@ ggally_facethist <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_facetdensity(iris, aes(x = Petal.Width, y = Species))
-#' ggally_facetdensity(iris, aes_string(x = "Species", y = "Petal.Width", color = "Species"))
+#' ggally_facetdensity(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
+#' ggally_facetdensity(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", color = "Species"))
 ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
@@ -496,9 +491,9 @@ ggally_facetdensity <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_denstrip(iris, aes(x = Petal.Width, y = Species, color = Species))
-#' ggally_denstrip(iris, aes_string(x = "Petal.Width", y = "Species"))
-#' ggally_denstrip(iris, aes_string(x = "Species", y = "Petal.Width", binwidth = "0.2")) + scale_fill_gradient(low = "grey80", high = "black")
+#' ggally_denstrip(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species, color = Species))
+#' ggally_denstrip(iris, mapping = ggplot2::aes_string(x = "Petal.Width", y = "Species"))
+#' ggally_denstrip(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", binwidth = "0.2")) + scale_fill_gradient(low = "grey80", high = "black")
 ggally_denstrip <- function(data,mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
@@ -584,7 +579,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   p
 }
 
-
 #' Plots a mosaic plots
 #' Plots the mosaic plot by using fluctuation
 #'
@@ -595,6 +589,8 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @keywords hplot
 #' @export
 #' @examples
+#' library(ggplot2)
+#' data(movies)
 #' ggally_ratio(movies[,c("mpaa","Action")])
 #' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
 #' ggally_ratio(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
@@ -610,7 +606,6 @@ ggally_ratio <- function(data){
   p
 }
 
-
 #' Plots the Density Plots by Using Diagonal
 #' Plots the density plots by using Diagonal
 #'
@@ -621,9 +616,11 @@ ggally_ratio <- function(data){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_densityDiag(iris, aes(x = Petal.Width))
-#' ggally_densityDiag(movies, aes_string(x="rating"))
-#' ggally_densityDiag(movies, aes_string(x="rating", color = "mpaa"))
+#' ggally_densityDiag(iris, mapping = ggplot2::aes(x = Petal.Width))
+#' library(ggplot2)
+#' data(movies)
+#' ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
+#' ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
 ggally_densityDiag <- function(data, mapping, ...){
 
   p <- ggplot(data, mapping) + 
@@ -653,13 +650,14 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_barDiag(movies, aes(x = mpaa))
-#' ggally_barDiag(movies, aes_string(x = "mpaa"))
-#' ggally_barDiag(movies, aes_string(x ="rating", binwidth = ".1"))
+#' library(ggplot2)
+#' data(movies)
+#' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
+#' ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
+#' ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
   mapping$y <- NULL
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
-
 
   p <- ggplot(data = data, mapping) + geom_bar(...)
   
@@ -685,8 +683,6 @@ ggally_barDiag <- function(data, mapping, ...){
   p$type <- "diag"
   p
 }
-
-
 
 #' GGplot Text
 #' Plot text for a plot
@@ -810,6 +806,7 @@ ggally_diagAxis <- function(data, mapping, ...) {
 #' @keywords hplot
 #' @export
 #' @examples
+#' data(tips)
 #' ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
 #' ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
 ggally_facetbar <- function(data, mapping, ...){
@@ -826,8 +823,6 @@ ggally_facetbar <- function(data, mapping, ...){
   p
 }
 
-
-
 #' Fluctuation plot
 #' Create a fluctuation plot.
 #'
@@ -841,6 +836,8 @@ ggally_facetbar <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
+#' library(ggplot2)
+#' data(movies)
 #' ggfluctuation2(table(movies$Action, movies$Comedy))
 #' ggfluctuation2(table(movies$Action, movies$mpaa))
 #' ggfluctuation2(table(movies[,c("Action", "mpaa")]))
@@ -856,7 +853,6 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 
   if(all(oldnames == ""))  
     oldnames <- c("X","Y")    
-    
 
   names(table_data) <- c("x", "y", "result")
   table_data <- add.all.combinations(table_data, list("x", "y"))

@@ -3,7 +3,7 @@
 \title{Find Plot Types
 Retrieves the type of plot for the specific columns}
 \usage{
-  find_plot_type(data, col1, col2)
+find_plot_type(data, col1, col2)
 }
 \arguments{
   \item{data}{data set to be used}
@@ -20,4 +20,3 @@ Retrieves the type of plot for the specific columns}
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{internal}
-

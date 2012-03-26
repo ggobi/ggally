@@ -114,7 +114,6 @@
 #' ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
 #'   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
 #'   alphaLines = 0.3)
-
 ggparcoord <- function(
   data,
   columns,

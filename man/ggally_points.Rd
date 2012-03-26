@@ -2,7 +2,7 @@
 \alias{ggally_points}
 \title{Plots the Scatter Plot}
 \usage{
-  ggally_points(data, mapping, ...)
+ggally_points(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -15,12 +15,15 @@
   Make a scatter plot with a given data set
 }
 \examples{
-ggally_points(mtcars, aes(x = disp, y = hp))
-ggally_points(mtcars, aes_string(x = "disp", y = "hp"))
-ggally_points(mtcars, aes_string(x = "disp", y = "hp", color = "as.factor(cyl)", size = "gear"))
+data(mtcars)
+ggally_points(mtcars, mapping = ggplot2::aes(x = disp, 
+    y = hp))
+ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", 
+    y = "hp"))
+ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", 
+    y = "hp", color = "as.factor(cyl)", size = "gear"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

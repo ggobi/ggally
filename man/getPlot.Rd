@@ -3,7 +3,7 @@
 \title{getPlot
 Retrieves the ggplot object at the desired location}
 \usage{
-  getPlot(plotMatrix, rowFromTop, columnFromLeft)
+getPlot(plotMatrix, rowFromTop, columnFromLeft)
 }
 \arguments{
   \item{plotMatrix}{ggpair object to select from}
@@ -17,11 +17,10 @@ Retrieves the ggplot object at the desired location}
   location
 }
 \examples{
-plotMatrix2 <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
+plotMatrix2 <- ggpairs(iris[, 5:4], upper = list(combo = "denstrip"))
 getPlot(plotMatrix2, 1, 2)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

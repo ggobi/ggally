@@ -3,7 +3,7 @@
 \title{Plots the density plots by faceting
 Make density plots by displaying subsets of the data in different panels}
 \usage{
-  ggally_facetdensity(data, mapping, ...)
+ggally_facetdensity(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -17,11 +17,12 @@ Make density plots by displaying subsets of the data in different panels}
   displaying subsets of the data in different panels
 }
 \examples{
-ggally_facetdensity(iris, aes(x = Petal.Width, y = Species))
-ggally_facetdensity(iris, aes_string(x = "Species", y = "Petal.Width", color = "Species"))
+ggally_facetdensity(iris, mapping = ggplot2::aes(x = Petal.Width, 
+    y = Species))
+ggally_facetdensity(iris, mapping = ggplot2::aes_string(x = "Species", 
+    y = "Petal.Width", color = "Species"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

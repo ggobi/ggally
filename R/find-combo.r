@@ -19,8 +19,6 @@ plot_types <- function(data)
   dataInfo
 }
 
-
-
 #' Find Plot Types
 #' Retrieves the type of plot for the specific columns
 #' 

@@ -3,7 +3,7 @@
 \title{Plots either Box Plot or Dot Plots
 Place box plots or dot plots on the graph}
 \usage{
-  ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
+ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
 \arguments{
   \item{data}{data set using}
@@ -21,11 +21,12 @@ Place box plots or dot plots on the graph}
   plots on the graph
 }
 \examples{
-ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
-ggally_dotAndBox(iris, aes(x = Petal.Width, y = Species, color = Species), boxPlot=FALSE)
+ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, 
+    y = Species, color = Species), boxPlot = TRUE)
+ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, 
+    y = Species, color = Species), boxPlot = FALSE)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

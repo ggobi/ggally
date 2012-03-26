@@ -3,7 +3,7 @@
 \title{Plots the Scatter Plot with Smoothing
 Add a smoothed condition mean with a given scatter plot}
 \usage{
-  ggally_smooth(data, mapping, ...)
+ggally_smooth(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -17,12 +17,14 @@ Add a smoothed condition mean with a given scatter plot}
   condition mean with a given scatter plot
 }
 \examples{
-ggally_smooth(iris, aes(x = Sepal.Length, y = Sepal.Width))
-ggally_smooth(iris, aes_string(x = "Sepal.Length", y = "Sepal.Width"))
-ggally_smooth(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"))
+ggally_smooth(iris, mapping = ggplot2::aes(x = Sepal.Length, 
+    y = Sepal.Width))
+ggally_smooth(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", 
+    y = "Sepal.Width"))
+ggally_smooth(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", 
+    y = "Petal.Length", color = "Species"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

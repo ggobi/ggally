@@ -1,5 +1,7 @@
 Package: GGally
-Maintainer: Jason Crowley <crowley.jason.s@gmail.com>
+Version: 0.3.2
+Date: 2012-03-22
+Maintainer: Di Cook <dicook@iastate.edu>
 License: GPL (>= 2.0)
 Title: Extension to ggplot2.
 Type: Package
@@ -12,11 +14,13 @@ Author: Barret Schloerke <schloerke@gmail.com>, Jason
 Description: Package contains templates for different plots
     to be combined into a plot matrix, as well as a
     parallel coordinate plot function.
-Version: 0.3.1
-Date: 2011-06-30
 Depends:
-    ggplot2,
-    stringr
+    R (>= 2.14),
+    grid (>= 2.14.0),
+    ggplot2 (>= 0.9.0),
+    stringr (>= 0.6),
+    plyr (>= 1.7.1),
+    reshape (>= 0.8.4)
 Suggests:
     scagnostics
 Collate:

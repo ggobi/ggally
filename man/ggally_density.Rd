@@ -3,7 +3,7 @@
 \title{Plots the Scatter Density Plot
 Make a scatter density plot from a given data}
 \usage{
-  ggally_density(data, mapping, ...)
+ggally_density(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -19,13 +19,17 @@ Make a scatter density plot from a given data}
   used.
 }
 \examples{
-ggally_density(iris, aes(x = Sepal.Length, y = Petal.Length))
-ggally_density(iris, aes_string(x = "Sepal.Length", y = "Petal.Length"))
-ggally_density(iris, aes_string(x = "Sepal.Length", y = "Petal.Length", fill = "..level.."))
-ggally_density(iris, aes_string(x = "Petal.Length", y = "Petal.Width",fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
+ggally_density(iris, mapping = ggplot2::aes(x = Sepal.Length, 
+    y = Petal.Length))
+ggally_density(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", 
+    y = "Petal.Length"))
+ggally_density(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", 
+    y = "Petal.Length", fill = "..level.."))
+ggally_density(iris, mapping = ggplot2::aes_string(x = "Petal.Length", 
+    y = "Petal.Width", fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 
+    0.1, 0.15, 0.2))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

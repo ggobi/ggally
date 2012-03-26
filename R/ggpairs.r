@@ -1,6 +1,4 @@
 #make sure it all works!!!!
-
-
 # continuous
 #    points
 #    smooth
@@ -614,10 +612,6 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 
   p
 }
-
-
-
-
 
 #' Print ggpair object
 #' Specialized method to print the ggapir object
