@@ -1,4 +1,4 @@
-#make sure it all works!!!!
+# list of the different plot types to check
 # continuous
 #    points
 #    smooth
@@ -35,7 +35,6 @@
 # small_label_diamond <- make_small_strip(small_label_diamond, 1, 2)
 # small_label_diamond <- make_small_strip(small_label_diamond, 2, 2)
 # #small_label_diamond # now with much smaller strip text
-
 
 #' ggpairs - A GGplot2 Matrix
 #' Make a matrix of plots with a given data set
@@ -74,44 +73,41 @@
 #' @examples
 #' # plotting is reduced to the first couple of examples.  
 #' # Feel free to print the ggpair objects created in the examples
-#' 
-#' #ggpairs(iris)
-#' #ggpairs(iris, upper = "blank")
-#' ggpairs(iris[,3:5])
+#'
+#' data(tips)
+#' ggpairs(tips)
+#' ggpairs(tips, upper = "blank")
+#' ggpairs(tips[,1:3])
 #'
 #' # Custom Example
 #' ggpairs(
-#'   iris[,3:5], 
+#'   tips[,1:4], 
 #'   upper = list(continuous = "density", combo = "box"), 
-#'   lower = list(continuous = "points", combo = "dot"), 
-#'   diag = list(continuous = "bar", discrete = "bar")
+#'   lower = list(continuous = "points", combo = "dot") 
 #' )
-#'
 #'
 #' # Use sample of the diamonds data
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 #'
 #' # Custom Example
-#' diamondMatrix <- ggpairs(  
+#' ggpairs(  
 #'  diamonds.samp[,1:3],   
 #'  upper = list(continuous = "density", combo = "box"),   
 #'  lower = list(continuous = "points", combo = "dot"),   
-#'  diag = list(continuous = "bar", discrete = "bar"), 
 #'  color = "cut", 
 #'  title = "Diamonds"
 #' )
-#' #diamondMatrix
-#' 
 #'
 #' # Will plot four "Incorrect Plots"
 #' bad_plots <- ggpairs(
-#'   iris[,3:4],
+#'   tips[,1:3],
 #'   upper = list(continuous = "wrongType1", combo = "wrongType2"),
 #'   lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
-#'   diag = list(continuous = "points", discrete = "box")
 #' )
-#' #bad_plots
+#' bad_plots
 #'
+#' # Labels on the outside, grids won't line up
+#' ggpairs(tips[,1:3], axisLabels="none")
 #'
 #' # Custom Examples
 #' custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
@@ -120,78 +116,7 @@
 #'   plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
 #' custom_car <- putPlot(custom_car, plot, 1, 2)
 #' custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
-#' #custom_car
-#' 
-#'
-#' # Custom plot with different scale fill gradient
-#' custom_fill <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
-#' custom_fill <- putPlot(
-#'  custom_fill, 
-#'  ggally_text("ggpairs allows you\nto retrieve a plot.\nWe will grab this one,\n-->\nwith the legend\nand axis labels!"),
-#'  1, 1)
-#' #custom_fill
-#' plot <- getPlot(custom_fill, 1, 2)
-#' #plot
-#' plotNew <- plot + scale_fill_gradient(low = "grey80", high = "black")
-#' #plotNew
-#' custom_fill <- putPlot(custom_fill, plotNew, 1, 2)
-#' #custom_fill
-#'
-#' 
-#' special_diamond <- ggpairs(
-#'   diamonds.samp,
-#'   columns = 8:10, 
-#'   upper = list(continuous = "points",aes_string = aes_string(color = "clarity")), 
-#'   lower = list(continuous = "points",aes_string = aes_string(color = "cut")), 
-#'   diag = "blank", 
-#'   title = "Diamonds"
-#' )
-#' #special_diamond
-#'
-#'
-#' ## prints
-#' #   data =    mtcars
-#' #   columns = c(1,3,4) # (mpg, disp, hp)
-#' #   upper =   contains scatter plots with the shape defined by the cyl and size constant at 5
-#' #   lower =   contains scatter plots with the size defined by the cyl
-#' #   diag =    contains 'blank' plots
-#' #   color =   defined by cyl and is applied to botht he upper and lower plots.  It would be applied to diag if it existed
-#' #   title =   "Custom Cars"
-#' #   verbose = FALSE makes the "Plot #1, Plot #2...." not print
-#' carsMatrix <- ggpairs(
-#'   mtcars,
-#'   columns = c(1,3,4), 
-#'   upper = list(continuous = "points",aes_string = aes_string(shape = "cyl", size = 5)), 
-#'   lower = list(continuous = "points",aes_string = aes_string(size = "cyl")), 
-#'   diag = "blank", 
-#'   color = "cyl", 
-#'   title = "Custom Cars",
-#'   verbose = FALSE
-#' )
-#' #carsMatrix
-#'
-#'
-#' ## Each list is custom to it's own area
-#' #  params are the parameters applied to the geoms.  Parameters can not be considered aesthetics.
-#' iris_with_params <- ggpairs(
-#'   iris, 
-#'   upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")), 
-#'   lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)), 
-#'   diag = list(continuous = "bar", discrete = "bar", aes_string = aes_string(fill = "Species"), params = c(binwidth = 0.25)),
-#'   title = "Complex Iris Data"
-#'  )
-#' #iris_with_params
-#'
-#' ## The same plot matrix with no axis labels
-#' iris_with_params2 <- ggpairs(
-#'   iris, 
-#'   upper = list(continuous = "density", combo = "dot", aes_string = aes_string(color = "Species")), 
-#'   lower = list(continuous = "smooth", combo = "denstrip", aes_string = aes_string(color = "Species", fill = "Species"), params = c(binwidth=0.1)), 
-#'   diag = list(continuous = "bar", discrete = "bar", aes_string = aes_string(fill = "Species"), params = c(binwidth = 0.25)),
-#'   title = "Complex Iris Data",
-#'   axisLabels = "none"
-#'  )
-#' #iris_with_params2
+#' custom_car
 ggpairs <- function(
   data, 
   columns = 1:ncol(data),
@@ -214,7 +139,6 @@ ggpairs <- function(
     warning("axisLabels not in c('none', 'show', 'internal').  Reverting to 'internal'")
     axisLabels <- "internal"
   }
-  
   
   if(!is.list(upper) && upper == "blank"){
     upper <- list()
@@ -241,7 +165,7 @@ ggpairs <- function(
     upper$continuous <- "cor"
   }
   if (is.null(upper$combo)) {
-    upper$combo <- "facethist"
+    upper$combo <- "box"
   }
   if (is.null(upper$discrete)) {
     upper$discrete <- "facetbar"
@@ -254,7 +178,7 @@ ggpairs <- function(
     lower$continuous <- "points"
   }
   if (is.null(lower$combo)) {
-    lower$combo <- "box"
+    lower$combo <- "facethist"
   }
   if (is.null(lower$discrete)) {
     lower$discrete <- "facetbar"
@@ -267,7 +191,6 @@ ggpairs <- function(
     diag$discrete <- "bar"
   }
 
-
   data <- as.data.frame(data)
       for ( i in 1:dim(data)[2] ) {
         if(is.character(data[,i])) data[,i] <- as.factor(data[,i])
@@ -276,10 +199,7 @@ ggpairs <- function(
   if(printInfo)
     cat("data col: ", numCol,"\n")
 
-  
-
   ggpairsPlots <- list()
-  
 
   grid <- rev(expand.grid(y = 1:ncol(data[columns]), x = 1:ncol(data[columns])))
 
@@ -299,7 +219,6 @@ ggpairs <- function(
     dataTypes$Type[dataTypes$posx == dataTypes$posy] <- "label"
     dataTypes$Type <- as.factor(dataTypes$Type)
   }
-  
   
   for(i in 1:nrow(dataTypes)){
     p <- "blank"
@@ -338,7 +257,6 @@ ggpairs <- function(
       }
         
       combo_params <- addAndOverwriteAes(params, section_params)
-        
         
         p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
 #      else if(subType == "smooth")
@@ -475,7 +393,7 @@ ggpairs <- function(
   )
   
   attributes(plotMatrix)$class <- "ggpairs"
-  
+
   plotMatrix
 }
 
@@ -582,7 +500,7 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @examples
-#' plotMatrix2 <- ggpairs(iris[,5:4], upper = list(combo = "denstrip"))
+#' plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
 #' getPlot(plotMatrix2, 1, 2)
 getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   if(plotMatrix$printInfo)
@@ -623,7 +541,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @examples
-#'  ggpairs(iris[,3:5])
+#'  ggpairs(tips[,1:3])
 print.ggpairs <- function(x, ...){
   plotObj <- x
   
@@ -644,7 +562,6 @@ print.ggpairs <- function(x, ...){
     height=unit(1, "npc") - unit(3, "lines")
   )
   }
-  
   
   numCol <- length(plotObj$columns)
 
@@ -677,7 +594,6 @@ if(!identical(plotObj$axisLabels,"internal")) {
     grid.text(names(plotObj$data[,plotObj$columns])[i],0,0.5,rot=90,just=c("centre","centre"), vp = vplayout(as.numeric(i),1))
   }
 
-
   popViewport()# layout
   popViewport()# spacing
 
@@ -704,7 +620,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
 
   pushViewport(v1) # labels on outside
   pushViewport(v2) # layout of plots
-  
+
   for(rowPos in 1:numCol){
     for(columnPos in 1:numCol){
       p <- getPlot(plotObj, rowPos, columnPos)
@@ -769,7 +685,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
           )
           
         }
-        
+
         # Adjusts for the blank space left by faceting, and manually
         # sets the limits for numeric axes to 1% of the variable's
         # range below the min and above the max.
@@ -778,25 +694,45 @@ if(!identical(plotObj$axisLabels,"internal")) {
           # mapped to the y variable for dot and box plots, but to the
           # x variable for the others
           if (p$subType %in% c("dot","box")) {
-            ymin <- min(p$data[,as.character(p$mapping$y)])
-            ymax <- max(p$data[,as.character(p$mapping$y)])
+            if (is.numeric(p$data[,as.character(p$mapping$y)])) {
+              ymin <- min(p$data[,as.character(p$mapping$y)])
+              ymax <- max(p$data[,as.character(p$mapping$y)])
             p <- p + labs(x = NULL, y = NULL) +
               scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
+            }
+            if (is.numeric(p$data[,as.character(p$mapping$x)])) {
+              xmin <- min(p$data[,as.character(p$mapping$x)])
+              xmax <- max(p$data[,as.character(p$mapping$x)])
+              p <- p + labs(x = NULL, y = NULL) +
+                scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
+            }
+
           } 
-          else {
-            xmin <- min(p$data[,as.character(p$mapping$x)])
-            xmax <- max(p$data[,as.character(p$mapping$x)])
+          if (p$subType %in% c("dot","box")) {
+            if (is.numeric(p$data[,as.character(p$mapping$y)])) {
+              ymin <- min(p$data[,as.character(p$mapping$y)])
+              ymax <- max(p$data[,as.character(p$mapping$y)])
             p <- p + labs(x = NULL, y = NULL) +
-              scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
+              scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
+            }
+            if (is.numeric(p$data[,as.character(p$mapping$x)])) {
+              xmin <- min(p$data[,as.character(p$mapping$x)])
+              xmax <- max(p$data[,as.character(p$mapping$x)])
+              p <- p + labs(x = NULL, y = NULL) +
+                scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
+            }
           }
           # Adjust for blank space left by faceting
+         print(p$subType)
+         print(p$horizontal)
           if (p$horizontal) {
-            p <- p + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"))
+#            p <- p + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"))
+            p <- p + opts(plot.margin = unit(c(0,-0.5,-0.5,-0.5), "lines"))
           } 
           else {
-            p <- p + opts(plot.margin = unit(c(-0.5,0,0,0), "lines"))
+            p <- p + opts(plot.margin = unit(c(-0.5,0,-0.5,-0.5), "lines"))
           }                 
-        }
+        } # end if p$type==combo
         # Adjust for blank space left by faceting in faceted bar plot
         else if (identical(p$subType,"facetbar")) {
           p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"))
@@ -825,7 +761,6 @@ if(!identical(plotObj$axisLabels,"internal")) {
             4), "lines"))
         }
         
-        
         showLegend = FALSE
         if (!is.null(plotObj$legends)) showLegend <- identical(plotObj$legends, TRUE)
         if (showLegend == FALSE) {
@@ -851,7 +786,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
       }# end plot alterations
     }# end cols
   }# end rows
-  
+
   popViewport() #layout
   popViewport() #spacing
 }
@@ -871,7 +806,6 @@ is_blank_plot <- function(p){
     FALSE
 }
 
-
 #' Add new aes
 #' Add new aesthetics to a previous aes
 #' 
@@ -879,15 +813,11 @@ is_blank_plot <- function(p){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @return aes_string output
 #' @examples
-#' diamondMatrix <- ggpairs(  
-#'  diamonds,
-#'  columns = 1:3,   
+#' ggpairs(diamonds, columns = 1:3,   
 #'  upper = list(points = "scatterplot", aes_string = aes_string(color = "clarity")),   
 #'  lower = list(points = "scatterplot", aes_string = aes_string(color = "cut")),   
-#'  diag = "blank", 
 #'  color = "color", 
-#'  title = "Diamonds"
-#' )
+#'  title = "Diamonds")
 #'   
 addAndOverwriteAes <- function(current, new)
 {

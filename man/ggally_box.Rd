@@ -17,13 +17,11 @@ ggally_box(data, mapping, ...)
   Plots the Box Plot Make a box plot with a given data set
 }
 \examples{
-ggally_box(iris, mapping = ggplot2::aes(x = Petal.Width, 
-    y = Species))
-ggally_box(iris, mapping = ggplot2::aes_string(x = "Petal.Width", 
-    y = "Species"))
-ggally_box(iris, mapping = ggplot2::aes_string(y = "Petal.Width", 
-    x = "Species", color = "Species"), outlier.colour = "red", 
-    outlier.shape = 13, outlier.size = 18)
+ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", 
+    y = "sex"))
+ggally_box(tips, mapping = ggplot2::aes_string(y = "total_bill", 
+    x = "sex", color = "sex"), outlier.colour = "red", outlier.shape = 13, outlier.size = 8)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

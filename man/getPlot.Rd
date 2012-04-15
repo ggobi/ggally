@@ -17,7 +17,7 @@ getPlot(plotMatrix, rowFromTop, columnFromLeft)
   location
 }
 \examples{
-plotMatrix2 <- ggpairs(iris[, 5:4], upper = list(combo = "denstrip"))
+plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
 getPlot(plotMatrix2, 1, 2)
 }
 \author{

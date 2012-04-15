@@ -3,9 +3,8 @@
 \title{GGplot Text
 Plot text for a plot}
 \usage{
-ggally_text(label, mapping = aes(color = "black"), 
-    xP = 0.5, yP = 0.5, xrange = c(0, 1), yrange = c(0, 1), 
-    ...)
+ggally_text(label, mapping = aes(color = "black"), xP = 0.5, yP = 0.5, 
+    xrange = c(0, 1), yrange = c(0, 1), ...)
 }
 \arguments{
   \item{label}{text that you want to appear}
@@ -30,8 +29,7 @@ ggally_text(label, mapping = aes(color = "black"),
 }
 \examples{
 ggally_text("Example 1")
-ggally_text("Example\\nTwo", mapping = aes_string(size = 15, 
-    color = "red"))
+ggally_text("Example\\nTwo", mapping = aes_string(size = 15, color = "red"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

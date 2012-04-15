@@ -17,10 +17,8 @@ ggally_facetbar(data, mapping, ...)
 }
 \examples{
 data(tips)
-ggally_facetbar(tips, aes(x = sex, y = smoker, 
-    fill = time))
-ggally_facetbar(tips, aes(x = smoker, y = sex, 
-    fill = time))
+ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
+ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

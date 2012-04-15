@@ -31,9 +31,9 @@ ggally_points <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#' ggally_smooth(iris, mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width))
-#' ggally_smooth(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Sepal.Width"))
-#' ggally_smooth(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"))
+#' ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
+#' ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+#' ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
 ggally_smooth <- function(data, mapping, ...){
   p <- ggplot(data = data, mapping) +
     geom_smooth(method="lm", colour = I("black")) +
@@ -55,10 +55,10 @@ ggally_smooth <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#' ggally_density(iris, mapping = ggplot2::aes(x = Sepal.Length, y = Petal.Length))
-#' ggally_density(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length"))
-#' ggally_density(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", fill = "..level.."))
-#' ggally_density(iris, mapping = ggplot2::aes_string(x = "Petal.Length", y = "Petal.Width",fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2)) 
+#' ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
+#' ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+#' ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level.."))
+#' ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2)) 
 ggally_density <- function(data, mapping, ...){  
   p <- ggplot(data = data, mapping)
 
@@ -88,9 +88,9 @@ ggally_density <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#' ggally_cor(iris, mapping = ggplot2::aes(x = Sepal.Length, y = Petal.Length))
-#' ggally_cor(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", size = 15, colour = "red"))
-#' ggally_cor(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", y = "Petal.Length", color = "Species"), corSize = 15 )
+#' ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+#' ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red"))
+#' ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"), corSize = 5)
 ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
   # xVar <- data[,as.character(mapping$x)]
@@ -279,9 +279,9 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_box(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
-#' ggally_box(iris, mapping = ggplot2::aes_string(x = "Petal.Width", y = "Species"))
-#' ggally_box(iris, mapping = ggplot2::aes_string(y = "Petal.Width", x = "Species", color = "Species"), outlier.colour = "red", outlier.shape = 13, outlier.size = 18)
+#' ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+#' ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
+#' ggally_box(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"), outlier.colour = "red", outlier.shape = 13, outlier.size = 8)
 ggally_box <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
@@ -297,10 +297,10 @@ ggally_box <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_dot(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
-#' ggally_dot(iris, mapping = ggplot2::aes_string(x = "Petal.Width", y = "Species"))
-#' ggally_dot(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", color = "Species"))
-#' ggally_dot(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", color = "Species", shape = "Species")) + scale_shape(solid=FALSE)
+#' ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+#' ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
+#' ggally_dot(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
+#' ggally_dot(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")) + scale_shape(solid=FALSE)
 ggally_dot <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = FALSE)
 }
@@ -316,13 +316,14 @@ ggally_dot <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species, color = Species), boxPlot=TRUE)
-#' ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species, color = Species), boxPlot=FALSE)
+#' ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=TRUE)
+#' ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
-  
-  if(horizontal) {
-#    cat("horizontal dot-box\n")
+#  print(horizontal)
+
+  #print(mapping$x[1])
+  if (horizontal) {
     mapping$tmp <- mapping$x
     mapping$x <- mapping$y
     mapping$y <- mapping$tmp
@@ -330,25 +331,29 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #    levels(data[,as.character(mapping$x)]) <- rev(levels(data[,as.character(mapping$x)]))
   }
 
+#  print(as.character(mapping$x))
+#  print(levels(data[,as.character(mapping$x)]))
+#  print(is.factor(data[,as.character(mapping$x)]))
   xVal <- as.character(mapping$x)
   yVal <- as.character(mapping$x)
   mapping$x <- 1
 
-  p <- ggplot(data = data, mapping)
-  
+  p <- ggplot(data = data)
 
-  if(boxPlot){
-    p <- p + geom_boxplot(...)
+  if (boxPlot) {
+    p <- p + geom_boxplot(mapping, ...)
     p$subType <- "box"
   } else {
-    p <- p + geom_jitter(...)
+    p <- p + geom_jitter(mapping, ...)
     p$subType <- "dot"
   }
-    
-
-  if(!horizontal){
-    p$facet$facets <- paste(". ~ ", yVal, sep = "")
-  }else{
+  
+  if (!horizontal) {
+    p <- p + facet_grid(paste(". ~ ", yVal, sep = "")) + opts(panel.margin = unit(0.1, "lines"))
+#    p$facet$facets <- paste(". ~ ", yVal, sep = "")
+  } else {
+#    print(xVal)
+#    print(yVal)
     p <- p + coord_flip() + opts(
         axis.text.y = theme_text(
           angle = 90, 
@@ -356,7 +361,9 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
           colour = "grey50"
         )
       )
-    p$facet$facets <- paste(yVal, " ~ .", sep = "")
+    p <- p + facet_grid(paste(yVal, " ~ .", sep = "")) + opts(panel.margin = unit(0.1, "lines"))
+#    p$facet$facets <- paste(yVal, " ~ .", sep = "")
+#    print(p$facet$facets)
   }    
 
   p <- p + scale_x_continuous(xVal, labels="", breaks=1)
@@ -412,8 +419,8 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_facethist(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
-#' ggally_facethist(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width"), binwidth = 0.1)
+#' ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
+#' ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
 ggally_facethist <- function(data, mapping, ...){
 #  str(mapping)
   #aesString <- aes_string(mapping)
@@ -421,38 +428,42 @@ ggally_facethist <- function(data, mapping, ...){
 
   horizontal <- (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
 
-  if(!horizontal){
-     mapping$tmp <- mapping$x
-     mapping$x <- mapping$y
-     mapping$y <- mapping$tmp
-  } else {
+  if (!horizontal) {
+    mapping$tmp <- mapping$x
+    mapping$x <- mapping$y
+    mapping$y <- mapping$tmp
+    mapping$tmp <- NULL
+  } #else {
      # horizontal
      # re-order levels to match all other plots
 #     levels(data[,as.character(mapping$y)]) <- rev(levels(data[,as.character(mapping$y)]))
-  }  
+  #}  
 
 #cat("Horizontal: ", horizontal, "\n")  
 #cat("\nmapping\n");print(str(mapping))
 #cat("\ndata\n");print(head(data))
   
-  
-  
-  xVal <- mapping$x
-  yVal <- mapping$y
+  xVal <- as.character(mapping$x)
+  yVal <- as.character(mapping$y)
   mapping$y <- NULL
+#  yVal <- as.character(mapping$x)
+#  mapping$x <- 1
 #str(mapping)
 #str(xVal)
 #str(yVal)
 
   p <- ggplot(data = data, mapping)
-  mapping$x <- NULL
+#  mapping$x <- NULL
   p <- p + stat_bin(...) 
 
-  if(horizontal){
-    p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+  if (horizontal) {
+    # facet_grid(list(".", yVal))
+    p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = "")) + opts(panel.margin = unit(0.1, "lines"))
+#    p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
   } else {
+    p <- p + facet_grid(paste(". ~", as.character(yVal), sep = "")) + opts(panel.margin = unit(0.1, "lines"))
     p <- p + coord_flip() 
-    p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
+#    p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
   }    
   p <- p + scale_y_continuous(as.character(yVal)) + scale_x_continuous(as.character(xVal))  
 
@@ -474,12 +485,11 @@ ggally_facethist <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_facetdensity(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species))
-#' ggally_facetdensity(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", color = "Species"))
+#' ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+#' ggally_facetdensity(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
 ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
-
 
 #' Plots a tile plot with facets
 #' Make Tile Plot as densely as possible
@@ -491,14 +501,12 @@ ggally_facetdensity <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_denstrip(iris, mapping = ggplot2::aes(x = Petal.Width, y = Species, color = Species))
-#' ggally_denstrip(iris, mapping = ggplot2::aes_string(x = "Petal.Width", y = "Species"))
-#' ggally_denstrip(iris, mapping = ggplot2::aes_string(x = "Species", y = "Petal.Width", binwidth = "0.2")) + scale_fill_gradient(low = "grey80", high = "black")
+#' ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+#' ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
+#' ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")) + scale_fill_gradient(low = "grey80", high = "black")
 ggally_denstrip <- function(data,mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
-
-
 
 #' Plots a density plot with facets or a tile plot with facets
 #' Make Tile Plot as densely as possible
@@ -534,7 +542,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
   p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
         
-  if(identical(den_strip, TRUE)){
+  if (identical(den_strip, TRUE)) {
    # print("Density Strip")    
     p <- p +    
       stat_bin(
@@ -561,14 +569,16 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   }
         
     
-  if(horizontal){
-    p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+  if (horizontal) {
+    p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = ""))
+    #p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
     
     if(identical(den_strip, TRUE))
       p <- p + opts(axis.text.y = theme_blank())
   } else {
     p <- p + coord_flip()
-    p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
+    p <- p + facet_grid(paste(". ~ ", as.character(yVal), sep = ""))
+    #p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
     
     if(identical(den_strip, TRUE))
       p <- p + opts(axis.text.x = theme_blank())
@@ -616,11 +626,11 @@ ggally_ratio <- function(data){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_densityDiag(iris, mapping = ggplot2::aes(x = Petal.Width))
-#' library(ggplot2)
-#' data(movies)
-#' ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
-#' ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
+#' ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
+#' #library(ggplot2)
+#' #data(movies)
+#' #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
+#' #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
 ggally_densityDiag <- function(data, mapping, ...){
 
   p <- ggplot(data, mapping) + 
@@ -754,8 +764,8 @@ ggally_text <- function(
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
 #' @export
 #' @examples
-#' ggally_diagAxis(iris,aes(x=Petal.Width))
-#' ggally_diagAxis(iris,aes(x=Species))
+#' ggally_diagAxis(tips, aes(x=tip))
+#' ggally_diagAxis(tips,aes(x=sex))
 ggally_diagAxis <- function(data, mapping, ...) {
   mapping$y <- NULL
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
@@ -816,7 +826,8 @@ ggally_facetbar <- function(data, mapping, ...){
   yVal <- mapping$y
   mapping$y <- NULL
   p <- ggplot(data, mapping) + geom_bar(...)
-  p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+  p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = ""))
+  #p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
   p$subType <- "facetbar"
   p$type <- "diag"
   
@@ -931,7 +942,6 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   p
 }
 
-
 #' Blank
 #' Drawing nothing
 #' 
@@ -943,8 +953,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #' @keywords hplot
 ggally_blank <- function(...){
   ignored <- aes(...)
-  a <- as.data.frame(cbind(1:2,1:2))
-  colnames(a) <- c("X","Y")
+  a <- data.frame(X=1:2, Y=1:2)
   
   p <- ggplot(data = a, aes(x = X, y = Y)) + geom_point( colour = "transparent") + 
     opts(

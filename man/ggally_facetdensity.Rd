@@ -17,10 +17,10 @@ ggally_facetdensity(data, mapping, ...)
   displaying subsets of the data in different panels
 }
 \examples{
-ggally_facetdensity(iris, mapping = ggplot2::aes(x = Petal.Width, 
-    y = Species))
-ggally_facetdensity(iris, mapping = ggplot2::aes_string(x = "Species", 
-    y = "Petal.Width", color = "Species"))
+ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, 
+    y = sex))
+ggally_facetdensity(tips, mapping = ggplot2::aes_string(y = "total_bill", 
+    x = "sex", color = "sex"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

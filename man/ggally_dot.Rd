@@ -17,15 +17,13 @@ ggally_dot(data, mapping, ...)
   plot
 }
 \examples{
-ggally_dot(iris, mapping = ggplot2::aes(x = Petal.Width, 
-    y = Species))
-ggally_dot(iris, mapping = ggplot2::aes_string(x = "Petal.Width", 
-    y = "Species"))
-ggally_dot(iris, mapping = ggplot2::aes_string(x = "Species", 
-    y = "Petal.Width", color = "Species"))
-ggally_dot(iris, mapping = ggplot2::aes_string(x = "Species", 
-    y = "Petal.Width", color = "Species", shape = "Species")) + 
-    scale_shape(solid = FALSE)
+ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", 
+    y = "sex"))
+ggally_dot(tips, mapping = ggplot2::aes_string(y = "total_bill", 
+    x = "sex", color = "sex"))
+ggally_dot(tips, mapping = ggplot2::aes_string(y = "total_bill", 
+    x = "sex", color = "sex", shape = "sex")) + scale_shape(solid = FALSE)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

@@ -21,10 +21,10 @@ ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
   plots on the graph
 }
 \examples{
-ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, 
-    y = Species, color = Species), boxPlot = TRUE)
-ggally_dotAndBox(iris, mapping = ggplot2::aes(x = Petal.Width, 
-    y = Species, color = Species), boxPlot = FALSE)
+ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, 
+    color = sex), boxPlot = TRUE)
+ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, 
+    color = sex), boxPlot = FALSE)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

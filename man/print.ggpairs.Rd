@@ -15,7 +15,7 @@ Specialized method to print the ggapir object}
   ggapir object
 }
 \examples{
-ggpairs(iris[, 3:5])
+ggpairs(tips[, 1:3])
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

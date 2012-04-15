@@ -3,8 +3,7 @@
 \title{Correlation from the Scatter Plot
 estimate correlation from the given data}
 \usage{
-ggally_cor(data, mapping, corAlignPercent = 0.6, 
-    corSize = 3, ...)
+ggally_cor(data, mapping, corAlignPercent = 0.6, corSize = 3, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -23,12 +22,12 @@ ggally_cor(data, mapping, corAlignPercent = 0.6,
   from the given data
 }
 \examples{
-ggally_cor(iris, mapping = ggplot2::aes(x = Sepal.Length, 
-    y = Petal.Length))
-ggally_cor(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", 
-    y = "Petal.Length", size = 15, colour = "red"))
-ggally_cor(iris, mapping = ggplot2::aes_string(x = "Sepal.Length", 
-    y = "Petal.Length", color = "Species"), corSize = 15)
+ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", 
+    y = "tip"))
+ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", 
+    y = "tip", size = 15, colour = "red"))
+ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", 
+    y = "tip", color = "sex"), corSize = 5)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

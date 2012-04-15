@@ -4,11 +4,9 @@
 ; A function for plotting static parallel coordinate plots, utilizing
 the \code{ggplot2} graphics package.}
 \usage{
-ggparcoord(data, columns, groupColumn = NULL, 
-    scale = "std", scaleSummary = "mean", centerObsID = 1, 
-    missing = "exclude", order = columns, showPoints = FALSE, 
-    alphaLines = 1, boxplot = FALSE, shadeBox = NULL, mapping = NULL, 
-    title = "")
+ggparcoord(data, columns, groupColumn = NULL, scale = "std", scaleSummary = "mean", 
+    centerObsID = 1, missing = "exclude", order = columns, showPoints = FALSE, 
+    alphaLines = 1, boxplot = FALSE, shadeBox = NULL, mapping = NULL, title = "")
 }
 \arguments{
   \item{data}{the dataset to plot}
@@ -115,56 +113,42 @@ ggparcoord(data, columns, groupColumn = NULL,
   \code{scagnostics} package loaded.} }
 }
 \examples{
-# use sample of the diamonds data for illustrative
-#   purposes
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 
-    100), ]
+# use sample of the diamonds data for illustrative purposes
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 
-# basic parallel coordinate plot, using default
-#   settings
-ggparcoord(data = diamonds.samp, columns = c(1, 
-    5:10))
+# basic parallel coordinate plot, using default settings
+ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
 
 # this time, color by diamond cut
-ggparcoord(data = diamonds.samp, columns = c(1, 
-    5:10), groupColumn = 2)
+ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2)
 
-# underlay univariate boxplots, add title, use
-#   uniminmax scaling
-ggparcoord(data = diamonds.samp, columns = c(1, 
-    5:10), groupColumn = 2, scale = "uniminmax", boxplot = TRUE, 
-    title = "Parallel Coord. Plot of Diamonds Data")
+# underlay univariate boxplots, add title, use uniminmax scaling
+ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, 
+    scale = "uniminmax", boxplot = TRUE, title = "Parallel Coord. Plot of Diamonds Data")
 
 # utilize ggplot2 aes to switch to thicker lines
-ggparcoord(data = diamonds.samp, columns = c(1, 
-    5:10), groupColumn = 2, title = "Parallel Coord. Plot of Diamonds Data", 
-    mapping = aes(size = 1))
+ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, 
+    title = "Parallel Coord. Plot of Diamonds Data", mapping = aes(size = 1))
 
-# basic parallel coord plot of the msleep data, using
-#   'random' imputation and
-# coloring by diet (can also use variable names in the
-#   columns and groupColumn
-# arguments)
-ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", 
-    missing = "random", scale = "uniminmax")
+# basic parallel coord plot of the msleep data, using 'random' imputation
+# and coloring by diet (can also use variable names in the columns and
+# groupColumn arguments)
+ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing = "random", 
+    scale = "uniminmax")
 
-# center each variable by its median, using the default
-#   missing value handler,
-# 'exclude'
-ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", 
-    scale = "center", scaleSummary = "median")
+# center each variable by its median, using the default missing value
+# handler, 'exclude'
+ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale = "center", 
+    scaleSummary = "median")
 
-# with the iris data, order the axes by overall class
-#   (Species) separation using
-# the anyClass option
-ggparcoord(data = iris, columns = 1:4, groupColumn = 5, 
-    order = "anyClass")
+# with the iris data, order the axes by overall class (Species) separation
+# using the anyClass option
+ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass")
 
-# add points to the plot, add a title, and use an alpha
-#   scalar to make the lines
-# transparent
-ggparcoord(data = iris, columns = 1:4, groupColumn = 5, 
-    order = "anyClass", showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data", 
+# add points to the plot, add a title, and use an alpha scalar to make the
+# lines transparent
+ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass", 
+    showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data", 
     alphaLines = 0.3)
 }
 \author{

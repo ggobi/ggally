@@ -18,8 +18,8 @@ ggally_diagAxis(data, mapping, ...)
   axisLabels == "internal"
 }
 \examples{
-ggally_diagAxis(iris, aes(x = Petal.Width))
-ggally_diagAxis(iris, aes(x = Species))
+ggally_diagAxis(tips, aes(x = tip))
+ggally_diagAxis(tips, aes(x = sex))
 }
 \author{
   Jason Crowley \email{crowley.jason.s@gmail.com}
