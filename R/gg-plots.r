@@ -241,14 +241,16 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
     ymin <- min(yVal)
     ymax <- max(yVal)
     yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
-    
+
+    testOutput <- cor.test(xVal, yVal, method='pearson')
+       
     p <- ggally_text(
       label = paste(
-        "Corr:\n",
+        "Corr: ",
         signif(
-          cor(xVal,yVal),
+          testOutput$estimate,
           3
-        ),
+        ), "\n[P(>t) = ", signif(testOutput$p.value, 3), "]",
         sep="",collapse=""
       ),
       mapping,

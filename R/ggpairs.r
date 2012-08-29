@@ -228,6 +228,10 @@ ggpairs <- function(
     posY <- as.numeric(as.character(dataTypes[i,"posy"]))
     xColName <- as.character(dataTypes[i,"xvar"])
     yColName <- as.character(dataTypes[i,"yvar"])
+    #addition to allow for 'illegal' header names
+    xColName <- paste('`', xColName, '`', sep='')
+    yColName <- paste('`', yColName, '`', sep='')
+    
     
 
     up <- posX > posY
@@ -319,9 +323,12 @@ ggpairs <- function(
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
       combo_params <- addAndOverwriteAes(params, section_params)
       
-      if(subType == "ratio")
-        p <- ggally_ratio(data[, c(yColName, xColName)])
-      else if(subType == "facetbar"){
+      if(subType == "ratio"){
+	tmp_yColName <- gsub('`', '', yColName)
+	tmp_xColName <- gsub('`', '', xColName)
+	p <- ggally_ratio(data[, c(tmp_yColName, tmp_xColName)])
+#       p <- ggally_ratio(data[, c(yColName, xColName)])
+      } else if(subType == "facetbar"){
         if(!is.null(combo_aes$colour)){
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
         }
@@ -424,7 +431,8 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
     params[is.character(params)] <- paste("\"", params[is.character(params)], "\"", sep = "")
     text <- paste(text, ", ", paste(names(params), "=", params, sep="", collapse=", "), sep="")
   }
-  text <- paste(text, ")", sep = "", collapse = "")
+  text <- paste(text, ")+ opts(axis.title.x=theme_blank(), axis.title.y=theme_blank())", sep = "", collapse = "")
+ #text <- paste(text, ")", sep = "", collapse = "")
   if(printInfo){
     print("")
     print(text)
