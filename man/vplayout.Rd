@@ -3,7 +3,7 @@
 \title{Viewport Layout Wrapper
 A wrapper function to set the viewport}
 \usage{
-vplayout(x, y)
+  vplayout(x, y)
 }
 \arguments{
   \item{x}{row position}
@@ -18,3 +18,4 @@ vplayout(x, y)
   Hadley Wickham \email{h.wickham@gmail.com}
 }
 \keyword{internal}
+

@@ -3,7 +3,7 @@
 \title{Plot Types
 Retrieves the type of plot that should be used for all combinations}
 \usage{
-plot_types(data)
+  plot_types(data)
 }
 \arguments{
   \item{data}{data set to be used}
@@ -16,3 +16,4 @@ plot_types(data)
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{internal}
+

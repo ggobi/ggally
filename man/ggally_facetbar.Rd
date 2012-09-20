@@ -2,7 +2,7 @@
 \alias{ggally_facetbar}
 \title{Plots the Bar Plots Faceted by Conditional Variable}
 \usage{
-ggally_facetbar(data, mapping, ...)
+  ggally_facetbar(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -24,3 +24,4 @@ ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
+

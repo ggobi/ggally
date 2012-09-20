@@ -3,7 +3,7 @@
 \title{Find order of variables based on a specified scagnostic measure
 by maximizing the index values of that measure along the path.}
 \usage{
-scagOrder(scag, vars, measure)
+  scagOrder(scag, vars, measure)
 }
 \arguments{
   \item{scag}{\code{scagnostics} object}
@@ -25,3 +25,4 @@ scagOrder(scag, vars, measure)
 \author{
   Jason Crowley \email{crowley.jason.s@gmail.com}
 }
+

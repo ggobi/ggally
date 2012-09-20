@@ -3,7 +3,7 @@
 \title{Order axis variables by separation between one class and the rest
 (most separation to least)}
 \usage{
-singleClassOrder(classVar, axisVars, specClass = NULL)
+  singleClassOrder(classVar, axisVars, specClass = NULL)
 }
 \arguments{
   \item{classVar}{class variable (vector from original
@@ -30,3 +30,4 @@ singleClassOrder(classVar, axisVars, specClass = NULL)
 \author{
   Jason Crowley \email{crowley.jason.s@gmail.com}
 }
+

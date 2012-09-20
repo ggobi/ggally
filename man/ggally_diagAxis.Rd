@@ -3,7 +3,7 @@
 \title{Internal Axis Labeling Plot for ggpairs
 ; is used when axisLabels == "internal"}
 \usage{
-ggally_diagAxis(data, mapping, ...)
+  ggally_diagAxis(data, mapping, ...)
 }
 \arguments{
   \item{data}{dataset being plotted}
@@ -18,9 +18,10 @@ ggally_diagAxis(data, mapping, ...)
   axisLabels == "internal"
 }
 \examples{
-ggally_diagAxis(tips, aes(x = tip))
-ggally_diagAxis(tips, aes(x = sex))
+ggally_diagAxis(tips, aes(x=tip))
+ggally_diagAxis(tips,aes(x=sex))
 }
 \author{
   Jason Crowley \email{crowley.jason.s@gmail.com}
 }
+

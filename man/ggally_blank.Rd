@@ -3,7 +3,7 @@
 \title{Blank
 Drawing nothing}
 \usage{
-ggally_blank(...)
+  ggally_blank(...)
 }
 \arguments{
   \item{...}{other arguments ignored}
@@ -16,3 +16,4 @@ ggally_blank(...)
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
+

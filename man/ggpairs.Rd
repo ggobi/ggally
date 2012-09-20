@@ -3,8 +3,9 @@
 \title{ggpairs - A GGplot2 Matrix
 Make a matrix of plots with a given data set}
 \usage{
-ggpairs(data, columns = 1:ncol(data), title = "", upper = list(), 
-    lower = list(), diag = list(), params = NULL, ..., axisLabels = "internal", 
+  ggpairs(data, columns = 1:ncol(data), title = "",
+    upper = list(), lower = list(), diag = list(),
+    params = NULL, ..., axisLabels = "internal",
     legends = FALSE, verbose = FALSE)
 }
 \arguments{
@@ -64,44 +65,51 @@ ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
   produce a blank plot, as if nothing was printed there.
 }
 \examples{
-# plotting is reduced to the first couple of examples.  Feel free to print
-# the ggpair objects created in the examples
+# plotting is reduced to the first couple of examples.
+# Feel free to print the ggpair objects created in the examples
 
 data(tips)
 ggpairs(tips)
 ggpairs(tips, upper = "blank")
-ggpairs(tips[, 1:3])
+ggpairs(tips[,1:3])
 
 # Custom Example
-ggpairs(tips[, 1:4], upper = list(continuous = "density", combo = "box"), 
-    lower = list(continuous = "points", combo = "dot"))
+ggpairs(
+  tips[,1:4],
+  upper = list(continuous = "density", combo = "box"),
+  lower = list(continuous = "points", combo = "dot")
+)
 
 # Use sample of the diamonds data
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 200), ]
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 
 # Custom Example
-ggpairs(diamonds.samp[, 1:3], upper = list(continuous = "density", 
-    combo = "box"), lower = list(continuous = "points", combo = "dot"), color = "cut", 
-    title = "Diamonds")
+ggpairs(
+ diamonds.samp[,1:3],
+ upper = list(continuous = "density", combo = "box"),
+ lower = list(continuous = "points", combo = "dot"),
+ color = "cut",
+ title = "Diamonds"
+)
 
-# Will plot four 'Incorrect Plots'
-bad_plots <- ggpairs(tips[, 1:3], upper = list(continuous = "wrongType1", 
-    combo = "wrongType2"), lower = list(continuous = "IDK1", combo = "IDK2", 
-    discrete = "mosaic"), )
+# Will plot four "Incorrect Plots"
+bad_plots <- ggpairs(
+  tips[,1:3],
+  upper = list(continuous = "wrongType1", combo = "wrongType2"),
+  lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
+)
 bad_plots
 
 # Labels on the outside, grids won't line up
-ggpairs(tips[, 1:3], axisLabels = "none")
+ggpairs(tips[,1:3], axisLabels="none")
 
 # Custom Examples
-custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", 
-    title = "Custom Example")
+custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
 # ggplot example taken from example(geom_text)
-plot <- ggplot(mtcars, aes(x = wt, y = mpg, label = rownames(mtcars)))
-plot <- plot + geom_text(aes(colour = factor(cyl)), size = 3) + scale_colour_discrete(l = 40)
+  plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars)))
+  plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
 custom_car <- putPlot(custom_car, plot, 1, 2)
-custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"), 
-    1, 3)
+custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"), 1, 3)
 custom_car
 }
 \author{
@@ -112,3 +120,4 @@ custom_car
   \email{h.wickham@gmail.com}
 }
 \keyword{hplot}
+

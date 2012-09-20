@@ -3,7 +3,7 @@
 \title{Plots the Scatter Density Plot
 Make a scatter density plot from a given data}
 \usage{
-ggally_density(data, mapping, ...)
+  ggally_density(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -20,15 +20,12 @@ ggally_density(data, mapping, ...)
 }
 \examples{
 ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
-ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", 
-    y = "tip"))
-ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", 
-    y = "tip", fill = "..level.."))
-ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", 
-    y = "tip", fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1, 
-    0.15, 0.2))
+ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level.."))
+ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
+

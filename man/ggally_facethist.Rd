@@ -3,7 +3,7 @@
 \title{Plots the Histograms by Faceting
 Make histograms by displaying subsets of the data in different panels}
 \usage{
-ggally_facethist(data, mapping, ...)
+  ggally_facethist(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -18,10 +18,10 @@ ggally_facethist(data, mapping, ...)
 }
 \examples{
 ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
-ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), 
-    binwidth = 0.1)
+ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
+
