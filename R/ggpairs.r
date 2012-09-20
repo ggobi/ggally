@@ -722,9 +722,13 @@ if(!identical(plotObj$axisLabels,"internal")) {
                 scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
             }
           }
+
           # Adjust for blank space left by faceting
-         print(p$subType)
-         print(p$horizontal)
+          if(plotObj$printInfo) {
+            print(p$subType)
+            print(p$horizontal)
+          }
+
           if (p$horizontal) {
 #            p <- p + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"))
             p <- p + opts(plot.margin = unit(c(0,-0.5,-0.5,-0.5), "lines"))
