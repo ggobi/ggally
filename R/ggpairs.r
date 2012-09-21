@@ -798,11 +798,11 @@ if(!identical(plotObj$axisLabels,"internal")) {
           p <- p + theme(legend.position = "none")
         }
 
-
         grid.rect(
-          gp=gpar(fill="white",lty = "blank"),
+          gp = gpar(fill = "white", lty = "blank"),
           vp = vplayout(rowPos, columnPos)
         )
+
         if(identical(plotObj$verbose, TRUE)) {
           print(p, vp = vplayout(rowPos, columnPos))
         } else {
