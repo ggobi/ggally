@@ -217,19 +217,19 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
     # print(range(yVal))
     # print(yPos)
     cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
-        p <- p + geom_text(
-            data=cordf,
-            aes(
-              x = xPos,
-              y = yPos,
-              label = labelp,
-              color = labelp
-            ),
-            hjust = 1,
-            size = corSize,
-            ...
+    p <- p + geom_text(
+      data=cordf,
+      aes(
+        x = xPos,
+        y = yPos,
+        label = labelp,
+        color = labelp
+      ),
+      hjust = 1,
+      size = corSize,
+      ...
 
-          )
+    )
 
     p$type <- "continuous"
     p$subType <- "cor"
