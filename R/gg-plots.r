@@ -465,7 +465,7 @@ ggally_facethist <- function(data, mapping, ...){
     p <- p + coord_flip()
 #    p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
   }
-  p <- p + scale_y_continuous(as.character(yVal)) + scale_x_continuous(as.character(xVal))
+  p <- p + ylab(as.character(yVal)) + xlab(as.character(xVal))
 
   p$type <- "combo"
   p$subType <- "facethist"
