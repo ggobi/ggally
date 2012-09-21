@@ -764,6 +764,14 @@ if(!identical(plotObj$axisLabels,"internal")) {
         else if (identical(p$subType,"facetbar")) {
           p <- p + labs(x = NULL, y = NULL) + theme(plot.margin = unit(c(0,-0.5,0,0), "lines"))
 
+          if (rowPos != 1) {
+            p <- p + theme(
+              strip.background = element_blank(),
+              strip.text.x     = element_blank(),
+              strip.text.y     = element_blank()
+            )
+          }
+
         }
         # Need to scale both variables for continuous plots
         else if (identical(p$type,"continuous") && !identical(p$subType,"cor")) {
