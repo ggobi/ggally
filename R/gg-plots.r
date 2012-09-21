@@ -755,54 +755,182 @@ ggally_text <- function(
 
 }
 
+
+#' Get x axis labels
+#' retrieve it from the plot object directly
+#'
+#' @param p plot object
+#' @param xRange range of x values
+#' @keywords internal
+get_x_axis_labels <- function(p, xRange) {
+  pGrob <- ggplotGrob(p)
+
+  axisTable <- gtable_filter(pGrob, "axis-b")$grobs[[1]]$children$axis
+
+  # have to do a function as filter doesn't work
+  get_raw_grob_by_name <- function(g, name) {
+    for (item in g$grobs) {
+      if (str_detect(item$name, name) ) {
+        return(item)
+      }
+    }
+    NULL
+  }
+  xAxisGrob <- get_raw_grob_by_name(axisTable, "axis.text.x")
+
+  axisBreaks <- as.numeric(xAxisGrob$label)
+
+  axisLabs <- rbind(
+    expand.grid(xPos = axisBreaks[1], yPos = axisBreaks),
+    expand.grid(xPos = axisBreaks,    yPos = axisBreaks[1])
+  )[-1,]
+
+  axisLabs <- as.data.frame(axisLabs)
+  axisLabs$lab <- as.character(apply(axisLabs,1,max))
+  axisLabs$hjust <- 0.5
+  axisLabs$vjust <- 0.5
+
+  minPos <- xRange[1]
+  maxPos <- xRange[2]
+  for (i in seq_len(nrow(axisLabs))) {
+    xPos <- axisLabs[i,"xPos"]
+    yPos <- axisLabs[i,"yPos"]
+
+    if (yPos < minPos) {
+      axisLabs[i, "yPos"] <- minPos
+      axisLabs[i, "vjust"] <- 0
+    } else if (yPos > maxPos) {
+      axisLabs[i, "yPos"] <- maxPos
+      axisLabs[i, "vjust"] <- 1
+    }
+
+    if (xPos < minPos) {
+      axisLabs[i, "xPos"] <- minPos
+      axisLabs[i, "hjust"] <- 0
+    } else if (xPos > maxPos) {
+      axisLabs[i, "xPos"] <- maxPos
+      axisLabs[i, "hjust"] <- 1
+    }
+  }
+
+  axisLabs
+}
+
+
 #' Internal Axis Labeling Plot for ggpairs
 #' ; is used when axisLabels == "internal"
 #'
 #' @param data dataset being plotted
 #' @param mapping aesthetics being used (x is the variable the plot will be made for)
+#' @param labelSize size of variable label
+#' @param labelXPercent percent of horizontal range
+#' @param labelYPercent percent of vertical range
+#' @param labelHJust hjust supplied to label
+#' @param labelVJust vjust supplied to label
+#' @param gridLabelSize size of grid labels
 #' @param ... other arguments for geom_text
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com} and Barret Schloerke
 #' @export
 #' @examples
 #' ggally_diagAxis(tips, aes(x=tip))
 #' ggally_diagAxis(tips,aes(x=sex))
-ggally_diagAxis <- function(data, mapping, ...) {
+ggally_diagAxis <- function(
+  data,
+  mapping,
+  labelSize     = 5,
+  labelXPercent = 0.5,
+  labelYPercent = 0.55,
+  labelHJust    = 0.5,
+  labelVJust    = 0.5,
+  gridLabelSize = 4,
+  ...
+) {
   mapping$y <- NULL
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
 
   if(numer) {
     xmin <- min(data[, as.character(mapping$x)])
     xmax <- max(data[, as.character(mapping$x)])
-    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
 
-    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
-      xrange=xrange,yrange=xrange)
+    # add a lil fluff... it looks better
+    xrange <- c(xmin - .01 * (xmax-xmin), xmax + .01 * (xmax - xmin))
+    # xrange <- c(xmin, xmax)
 
-    pGrob <- ggplotGrob(p)
-    axisBreaks <- as.numeric(getGrob(pGrob, "axis.text.x", grep = TRUE)$label)
-    labs <- rbind(expand.grid(x=axisBreaks[1],y=axisBreaks),
-      expand.grid(x=axisBreaks,y=axisBreaks[1]))[-1,]
-    labs$lab <- as.character(apply(labs,1,max))
-    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
-    return(pLabs)
+    p <- ggally_text(
+      label   = as.character(mapping$x),
+      mapping = aes(col="grey50"),
+      xrange  = xrange,
+      yrange  = xrange,
+      size    = labelSize,
+      xP      = labelXPercent,
+      yP      = labelYPercent,
+      hjust   = labelHJust,
+      vjust   = labelVJust
+    )
+
+    axisBreaks <- get_x_axis_labels(p, xrange)
+    # print(axisBreaks)
+    pLabs <- p + geom_text(
+      data    = axisBreaks,
+      mapping = aes_string(
+        x     = "xPos",
+        y     = "yPos" ,
+        label = "lab",
+        hjust = "hjust",
+        vjust = "vjust"
+      ),
+      col     = "grey50",
+      size = gridLabelSize
+    )
+
   } else {
     breakLabels <- levels(as.factor(data[,as.character(mapping$x)]))
     numLvls <- length(breakLabels)
 
-    p <- ggally_text(as.character(mapping$x),mapping=aes(col="grey50"),
-      xrange=c(0,1),yrange=c(0,1),yP=0.55)
+    p <- ggally_text(
+      label   = as.character(mapping$x),
+      mapping = aes(col="grey50"),
+      xrange  = c(0,1),
+      yrange  = c(0,1),
+      size    = labelSize,
+      yP      = labelYPercent,
+      xP      = labelXPercent,
+      hjust   = labelHJust,
+      vjust   = labelVJust
+    )
     #axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
     axisBreaks <- 0:(numLvls-1)*(.125 + (1-.125*(numLvls-1))/numLvls) +
       (1-.125*(numLvls-1))/(2*numLvls)
 
-    labs <- data.frame(x=axisBreaks[1:numLvls],y=axisBreaks[numLvls:1],
-      lab=breakLabels)
+    axisLabs <- data.frame(
+      x   = axisBreaks[1:numLvls],
+      y   = axisBreaks[numLvls:1],
+      lab = breakLabels
+    )
 
-    pLabs <- p + geom_text(data=labs,mapping=aes(x=x,y=y,label=lab,cex=0.8),col="grey50")
-    pLabs <- pLabs + scale_x_continuous(breaks=axisBreaks,limits=c(0,1)) +
-      scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
-    return(pLabs)
+    pLabs <- p + geom_text(
+      data = axisLabs,
+      mapping = aes(
+        x     = x,
+        y     = y,
+        label = lab
+      ),
+      col = "grey50",
+      size = gridLabelSize
+    )
+
+    # hack to remove warning message... cuz it doesn't listen to suppress messages
+    pLabs$scales$scales[[1]]$breaks <- axisBreaks
+    pLabs$scales$scales[[2]]$breaks <- axisBreaks
+    # pLabs <- pLabs +
+    #   scale_x_continuous(breaks=axisBreaks,limits=c(0,1)) +
+    #   scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
   }
+
+  pLabs$subType = "internal"
+  pLabs$type = "label"
+  pLabs
+
 }
 
 #' Plots the Bar Plots Faceted by Conditional Variable
