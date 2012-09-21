@@ -1,7 +1,7 @@
 Package: GGally
 Version: 0.4.0
 Date: 2012-03-22
-Maintainer: Di Cook <dicook@iastate.edu>
+Maintainer: Barret Schloerke <schloerke@gmail.com>
 License: GPL (>= 2.0)
 Title: Extension to ggplot2.
 Type: Package
