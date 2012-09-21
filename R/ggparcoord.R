@@ -12,7 +12,7 @@
 #'   \item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
 #'   \item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
 #'   \item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
-#'   \item{\code{globalminmax}}{: no scaling is done; the range of the graphs is defined 
+#'   \item{\code{globalminmax}}{: no scaling is done; the range of the graphs is defined
 #'     by the global minimum and the global maximum}
 #'   \item{\code{center}}{: use \code{uniminmax} to standardize vertical height, then
 #'     center each variable at a value specified by the \code{scaleSummary} param}
@@ -31,7 +31,7 @@
 #'     on that variable}
 #' }
 #'
-#' \code{order} is either a vector of indices or a character string that denotes how to 
+#' \code{order} is either a vector of indices or a character string that denotes how to
 #'   order the axes (variables) of the parallel coordinate plot. Options:
 #' \itemize{
 #'   \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
@@ -42,10 +42,10 @@
 #'     The axis variables are then ordered (decreasing) by their maximum of k F-statistics,
 #'     where k is the number of classes.}
 #'   \item{\code{allClass}}{: order variables by their overall F statistic (decreasing) from
-#'     an ANOVA with \code{groupColumn} as the explanatory variable (note: it is required 
-#'     to specify a \code{groupColumn} with this ordering method). Basically, this method 
+#'     an ANOVA with \code{groupColumn} as the explanatory variable (note: it is required
+#'     to specify a \code{groupColumn} with this ordering method). Basically, this method
 #'     orders the variables by their variation between classes (most to least).}
-#'   \item{\code{skewness}}{: order variables by their sample skewness (most skewed to 
+#'   \item{\code{skewness}}{: order variables by their sample skewness (most skewed to
 #'     least skewed)}
 #'   \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
 #'     by the package \code{scagnostics}. Other scagnostic measures available to order
@@ -79,7 +79,7 @@
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
-#' 
+#'
 #' # basic parallel coordinate plot, using default settings
 #' ggparcoord(data = diamonds.samp,columns = c(1,5:10))
 #'
@@ -91,19 +91,19 @@
 #'   scale = "uniminmax",boxplot = TRUE,title = "Parallel Coord. Plot of Diamonds Data")
 #'
 #' # utilize ggplot2 aes to switch to thicker lines
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2, 
+#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
 #'   title="Parallel Coord. Plot of Diamonds Data",mapping = aes(size = 1))
 #'
 #' # basic parallel coord plot of the msleep data, using 'random' imputation and
 #' # coloring by diet (can also use variable names in the columns and groupColumn
 #' # arguments)
-#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing = 
+#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
 #'   "random", scale = "uniminmax")
 #'
 #' # center each variable by its median, using the default missing value handler,
 #' # 'exclude'
-#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale = 
-#'   "center", scaleSummary = "median") 
+#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale =
+#'   "center", scaleSummary = "median")
 #'
 #' # with the iris data, order the axes by overall class (Species) separation using
 #' # the anyClass option
@@ -131,7 +131,7 @@ ggparcoord <- function(
   title=""
 ) {
   saveData <- data
-  
+
   ### Error Checking ###
   if(is.null(groupColumn)) {
     if(any(tolower(order) %in% c("anyclass","allclass"))) {
@@ -140,32 +140,32 @@ ggparcoord <- function(
   } else if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
     stop("invalid value for groupColumn; must be a single numeric or character index")
   }
-    
+
   if(!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
     stop("invalid value for scale; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
   }
-  
+
   if(!(centerObsID %in% 1:dim(data)[1])) {
     stop("invalid value for centerObsID; must be a single numeric row index")
   }
-  
+
   if(!(tolower(missing) %in% c("exclude","mean","median","min10","random"))) {
     stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
   }
-  
-  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','allClass','anyClass', 
+
+  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','allClass','anyClass',
     'Outlying','Skewed','Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
     stop("invalid value for order; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
   }
-  
+
   if(!(is.logical(showPoints))) {
     stop("invalid value for showPoints; must be a logical operator")
   }
-  
+
   if((alphaLines < 0) || (alphaLines > 1)) {
     stop("invalid value for alphaLines; must be a scalar value between 0 and 1")
   }
-  
+
   if(!(is.logical(boxplot))) {
     stop("invalid value for boxplot; must be a logical operator")
   }
@@ -174,7 +174,7 @@ ggparcoord <- function(
   if(!is.null(groupColumn)) {
     if(is.numeric(groupColumn)) {
       groupCol <- names(data)[groupColumn]
-    } else 
+    } else
       groupCol <- groupColumn
     groupVar <- data[,groupCol]
   }
@@ -197,7 +197,7 @@ ggparcoord <- function(
       data[,fact.vars[i]] <- as.numeric(data[,fact.vars[i]])
     }
   }
-  
+
   # Save this form of the data for order calculations (don't want imputed
   # missing values affecting order, but do want any factor/character vars
   # being plotted as numeric)
@@ -282,7 +282,7 @@ ggparcoord <- function(
   } else {
     data.m <- melt(data,id.vars=c(".ID","anyMissing"))
   }
-  
+
   ### Ordering ###
   if(length(order) > 1) {
      if(is.numeric(order)) {
@@ -339,8 +339,13 @@ ggparcoord <- function(
     lineSize <- 0.5
   }
 
-  p + geom_line(alpha=alphaLines,size=lineSize) + opts(title=title)
+  p <- p + geom_line(alpha = alphaLines, size = lineSize)
 
+  if (title != "") {
+    p <- p + labs(title = title)
+  }
+
+  p
 }
 
 #' Get vector of variable types from data frame
@@ -360,7 +365,7 @@ get.VarTypes <- function(df) {
 #' @param vars character vector of the variables to be ordered
 #' @param measure scagnostics measure to order according to
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
-#' @return character vector of variable ordered according to the given 
+#' @return character vector of variable ordered according to the given
 #'   scagnostic measure
 scagOrder <- function(scag, vars, measure) {
   p <- length(vars)
@@ -369,7 +374,7 @@ scagOrder <- function(scag, vars, measure) {
   for (i in 1:dim(d.scag)[1]) {
     d.scag$var1[i] <- substr(names(scag)[i],1,regexpr(" * ",names(scag)[i])-1)
     d.scag$var2[i] <- substr(names(scag)[i],regexpr(" * ",names(scag)[i])+3,nchar(names(scag)[i]))
-  }  
+  }
   a <- c(d.scag$var1[1],d.scag$var2[1])
   d.scag <- d.scag[-1,]
   a <- a[order(c(min(grep(a[1],rownames(d.scag))),min(grep(a[2],rownames(d.scag)))),
@@ -389,7 +394,7 @@ scagOrder <- function(scag, vars, measure) {
 #'
 #' @param classVar class variable (vector from original dataset)
 #' @param axisVars variables to be plotted as axes (data frame)
-#' @param specClass character string matching to level of \code{classVar}; instead 
+#' @param specClass character string matching to level of \code{classVar}; instead
 #'   of looking for separation between any class and the rest, will only look for
 #'   separation between this class and the rest
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
