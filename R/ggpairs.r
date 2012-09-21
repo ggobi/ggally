@@ -75,28 +75,33 @@
 #' # Feel free to print the ggpair objects created in the examples
 #'
 #' data(tips)
-#' ggpairs(tips)
-#' ggpairs(tips, upper = "blank")
 #' ggpairs(tips[,1:3])
+#' pm <- ggpairs(tips)
+#' # pm
+#' pm <- ggpairs(tips, upper = "blank")
+#' # pm
+#'
 #'
 #' # Custom Example
-#' ggpairs(
+#' pm <- ggpairs(
 #'   tips[,1:4],
 #'   upper = list(continuous = "density", combo = "box"),
 #'   lower = list(continuous = "points", combo = "dot")
 #' )
+#' # pm
 #'
 #' # Use sample of the diamonds data
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 #'
 #' # Custom Example
-#' ggpairs(
+#' pm <- ggpairs(
 #'  diamonds.samp[,1:3],
 #'  upper = list(continuous = "density", combo = "box"),
 #'  lower = list(continuous = "points", combo = "dot"),
 #'  color = "cut",
 #'  title = "Diamonds"
 #' )
+#' # pm
 #'
 #' # Will plot four "Incorrect Plots"
 #' bad_plots <- ggpairs(
@@ -107,7 +112,8 @@
 #' bad_plots
 #'
 #' # Labels on the outside, grids won't line up
-#' ggpairs(tips[,1:3], axisLabels="none")
+#' pm <- ggpairs(tips[,1:3], axisLabels="none")
+#' # pm
 #'
 #' # Custom Examples
 #' custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
@@ -116,7 +122,7 @@
 #'   plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
 #' custom_car <- putPlot(custom_car, plot, 1, 2)
 #' custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
-#' custom_car
+#' # custom_car
 ggpairs <- function(
   data,
   columns = 1:ncol(data),
