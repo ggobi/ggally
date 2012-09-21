@@ -637,30 +637,30 @@ if(!identical(plotObj$axisLabels,"internal")) {
         }
 
         # hack because ggplot2 is annoying
-        if(!is.null(subType)){
-          if(subType == "facethist"){
-            p <- p + scale_x_continuous(NULL) + scale_y_continuous(NULL)
-          } else if(subType == "box" || subType == "dot"){
-            p <- p + scale_x_continuous(NULL, labels="", breaks=1)
-          } else if(subType == "ratio"){
-            p <- p +
-              scale_x_continuous(
-                NULL,
-                limits=c(1,length(p$x_names) + 1),
-                breaks=1:(length(p$x_names) + 1),
-                labels=c(p$x_names,""),
-                minor_breaks=FALSE
-              ) +
-              scale_y_continuous(
-                NULL,
-                limits=c(1,length(p$y_names) + 1),
-                breaks=1:(length(p$y_names) + 1),
-                labels=c(p$y_names,""),
-                minor_breaks=FALSE
-              )
+        # if(!is.null(subType)){
+        #   if(subType == "facethist"){
+        #     p <- p + scale_x_continuous(NULL) + scale_y_continuous(NULL)
+        #   } else if (subType %in% c("box", "dot")) {
+        #     p <- p + scale_x_continuous(NULL, labels="", breaks=1)
+        #   } else if (subType == "ratio"){
+        #     p <- p +
+        #       scale_x_continuous(
+        #         NULL,
+        #         limits=c(1,length(p$x_names) + 1),
+        #         breaks=1:(length(p$x_names) + 1),
+        #         labels=c(p$x_names,""),
+        #         minor_breaks=FALSE
+        #       ) +
+        #       scale_y_continuous(
+        #         NULL,
+        #         limits=c(1,length(p$y_names) + 1),
+        #         breaks=1:(length(p$y_names) + 1),
+        #         labels=c(p$y_names,""),
+        #         minor_breaks=FALSE
+        #       )
 
-          }
-        }
+        #   }
+        # }
 
         noTicks <- c("internal", "none")
         removeTicks <- plotObj$axisLabels %in% noTicks
@@ -697,35 +697,23 @@ if(!identical(plotObj$axisLabels,"internal")) {
           # Scale the numeric variable; the numeric variable is
           # mapped to the y variable for dot and box plots, but to the
           # x variable for the others
-          if (p$subType %in% c("dot","box")) {
-            if (is.numeric(p$data[,as.character(p$mapping$y)])) {
-              ymin <- min(p$data[,as.character(p$mapping$y)])
-              ymax <- max(p$data[,as.character(p$mapping$y)])
-            p <- p + labs(x = NULL, y = NULL) +
-              scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
-            }
-            if (is.numeric(p$data[,as.character(p$mapping$x)])) {
-              xmin <- min(p$data[,as.character(p$mapping$x)])
-              xmax <- max(p$data[,as.character(p$mapping$x)])
-              p <- p + labs(x = NULL, y = NULL) +
-                scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
-            }
+          p <- p + labs(x = NULL, y = NULL)
 
-          }
-          if (p$subType %in% c("dot","box")) {
-            if (is.numeric(p$data[,as.character(p$mapping$y)])) {
-              ymin <- min(p$data[,as.character(p$mapping$y)])
-              ymax <- max(p$data[,as.character(p$mapping$y)])
-            p <- p + labs(x = NULL, y = NULL) +
-              scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
-            }
-            if (is.numeric(p$data[,as.character(p$mapping$x)])) {
-              xmin <- min(p$data[,as.character(p$mapping$x)])
-              xmax <- max(p$data[,as.character(p$mapping$x)])
-              p <- p + labs(x = NULL, y = NULL) +
-                scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
-            }
-          }
+          # if (p$subType %in% c("dot","box")) {
+          #   if (is.numeric(p$data[,as.character(p$mapping$y)])) {
+          #     ymin <- min(p$data[,as.character(p$mapping$y)])
+          #     ymax <- max(p$data[,as.character(p$mapping$y)])
+          #   p <- p + labs(x = NULL, y = NULL) +
+          #     scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
+          #   }
+          #   if (is.numeric(p$data[,as.character(p$mapping$x)])) {
+          #     xmin <- min(p$data[,as.character(p$mapping$x)])
+          #     xmax <- max(p$data[,as.character(p$mapping$x)])
+          #     p <- p + labs(x = NULL, y = NULL) +
+          #       scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
+          #   }
+
+          # }
 
           # Adjust for blank space left by faceting
           if(plotObj$printInfo) {
@@ -779,26 +767,16 @@ if(!identical(plotObj$axisLabels,"internal")) {
         }
         # Need to scale both variables for continuous plots
         else if (identical(p$type,"continuous") && !identical(p$subType,"cor")) {
-          xmin <- min(p$data[,as.character(p$mapping$x)])
-          xmax <- max(p$data[,as.character(p$mapping$x)])
-          ymin <- min(p$data[,as.character(p$mapping$y)])
-          ymax <- max(p$data[,as.character(p$mapping$y)])
-          p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(rep(0,
-            4), "lines")) +
-            scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))) +
-            scale_y_continuous(limits=c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin)))
+          p <- p + labs(x = NULL, y = NULL) + theme(plot.margin = unit(rep(0,4), "lines"))
         }
         # Scale the variable for numeric diagonal plots
         else if (identical(p$type,"diag") && is.numeric(p$data[,as.character(p$mapping$x)])) {
-          xmin <- min(p$data[,as.character(p$mapping$x)])
-          xmax <- max(p$data[,as.character(p$mapping$x)])
-          p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(rep(0,
-            4), "lines")) +
-            scale_x_continuous(limits=c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin)))
+          p <- p + labs(x = NULL, y = NULL) + theme(plot.margin = unit(rep(0,4), "lines"))
         }
+
+        # if not internal labels
         else {
-          p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(rep(0,
-            4), "lines"))
+          p <- p + labs(x = NULL, y = NULL) + theme(plot.margin = unit(rep(0,4), "lines"))
         }
 
         showLegend = FALSE
