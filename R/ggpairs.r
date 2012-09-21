@@ -577,7 +577,7 @@ print.ggpairs <- function(x, ...){
 
   if(plotObj$title != ""){
     pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
-    grid.text(plotObj$title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=20))
+    grid.text(plotObj$title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=15))
     popViewport()
   }
 
