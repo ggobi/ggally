@@ -255,9 +255,9 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, corPVa
 
     cord <- cor.test(xVal, yVal, method='pearson')
     if (corPValues) {
-      label <- str_c("Corr: ", signif(cord$cor, 3), " [P(>t) = ", signif(cord$pValue, 3), "]", collapse = "")
+      label <- str_c("Corr:\n", signif(cord$estimate, 3), "\n[P(>t) = ", signif(cord$p.value, 3), "]", collapse = "")
     } else {
-      label <- str_c("Corr: ", signif(cord$cor, 3), collapse = "")
+      label <- str_c("Corr:\n", signif(cord$estimate, 3), collapse = "")
     }
 
 
