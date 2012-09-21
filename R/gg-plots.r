@@ -196,7 +196,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
     # print(cord)
     p <- ggally_text(
-      label = "Cor: ",
+      label   = str_c("Cor : ", signif(cor(xVal,yVal),3)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
