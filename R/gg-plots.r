@@ -162,12 +162,11 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
   # browser()
   if(colorCol != "ggally_NO_EXIST" && colorCol %in% colnames(data)) {
 
-    txt <- str_c("ddply(data, .(", colorCol, "), transform, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
-    # print(unique(txt))
-    # cord <- unique(eval_ggpair(txt))
+    txt <- str_c("ddply(data, .(", colorCol, "), summarize, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
+
     con <- textConnection(txt)
     on.exit(close(con))
-    cord <- unique(eval(parse(con)))
+    cord <- eval(parse(con))
 
     # browser()
     cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
@@ -185,8 +184,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
     cord <- cord[ord, ]
 
     cord$label <- str_c(cord[[colorCol]], ": ", cord$ggally_cor)
-
-    txt <- str_c("Cor:", str_c(cord$label, collapse = "\n"), sep = "\n", collapse = "\n")
 
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal)
