@@ -514,7 +514,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   if (is.character(plot_text)) {
     if (plot_text != "blank") {
       p <- eval_ggpair(plot_text, plotMatrix$data)
-      attributes( p)$class <- "ggplot"
+      # attributes( p)$class <- "ggplot"
     } else {
       p <- ggally_blank()
     }
