@@ -90,8 +90,8 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #' ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #' ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red"))
-#' ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"), corSize = 5)
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
+#' ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"), corSize = 5, corPValues = TRUE)
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, corPValues = FALSE, ...){
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -162,14 +162,22 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
   # browser()
   if(colorCol != "ggally_NO_EXIST" && colorCol %in% colnames(data)) {
 
-    txt <- str_c("ddply(data, .(", colorCol, "), summarize, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
+    txt <- str_c("dlply(data, .(", colorCol, "), summarize, cor_test = cor.test(", xCol, ", ", yCol, ", method='pearson'))")
 
     con <- textConnection(txt)
     on.exit(close(con))
     cord <- eval(parse(con))
 
+    attr(cord,"split_type") <- NULL
+    attr(cord,"split_labels") <- NULL
+    cord <- ldply(cord, .fun = function(x) {
+      data.frame(cor = x$cor_test$estimate, pValue = x$cor_test$p.value)
+    })
+    colnames(cord)[1] <- colorCol
+
     # browser()
-    cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
+    cord$cor <- signif(as.numeric(cord$cor), 3)
+    cord$pValue <- signif(as.numeric(cord$pValue), 3)
 
     # put in correct order
     lev <- levels(data[[colorCol]])
@@ -183,7 +191,11 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
     }
     cord <- cord[ord, ]
 
-    cord$label <- str_c(cord[[colorCol]], ": ", cord$ggally_cor)
+    if (corPValues) {
+      cord$label <- str_c(cord[[colorCol]], ": ", cord$cor, " [P(>t) = ", cord$pValue, "]")
+    } else {
+      cord$label <- str_c(cord[[colorCol]], ": ", cord$cor)
+    }
 
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal)
@@ -241,15 +253,16 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
     ymax <- max(yVal)
     yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
 
+    cord <- cor.test(xVal, yVal, method='pearson')
+    if (corPValues) {
+      label <- str_c("Corr: ", signif(cord$cor, 3), " [P(>t) = ", signif(cord$pValue, 3), "]", collapse = "")
+    } else {
+      label <- str_c("Corr: ", signif(cord$cor, 3), collapse = "")
+    }
+
+
     p <- ggally_text(
-      label = paste(
-        "Corr:\n",
-        signif(
-          cor(xVal,yVal),
-          3
-        ),
-        sep="",collapse=""
-      ),
+      label = label,
       mapping,
       xP=0.5,
       yP=0.5,
