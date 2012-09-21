@@ -25,9 +25,9 @@
 #   up <- from_left > from_top
 #   p <- getPlot(plot_matrix, from_top, from_left)
 #   if(up)
-#     p <- p + opts(strip.text.x = theme_text(size = new_size))
+#     p <- p + opts(strip.text.x = element_text(size = new_size))
 #   else
-#     p <- p + opts(strip.text.y = theme_text(angle = -90, size = new_size))
+#     p <- p + opts(strip.text.y = element_text(angle = -90, size = new_size))
 #
 #   putPlot(plot_matrix, p, from_top, from_left)
 # }
@@ -669,19 +669,23 @@ if(!identical(plotObj$axisLabels,"internal")) {
         }
 
         if( columnPos != 1 || removeTicks){
-          p <- p + opts(axis.text.y = theme_blank(), axis.title.y = theme_blank() )
+          p <- p + theme(axis.text.y = element_blank(), axis.title.y = element_blank() )
         }
 
-        if( rowPos != numCol || removeTicks){
-          p <- p + opts(axis.text.x = theme_blank(), axis.title.x = theme_blank() )
+        if( (rowPos != numCol) || removeTicks){
+          p <- p + theme(axis.text.x = element_blank(), axis.title.x = element_blank() )
         }
 
         if(removeTicks) {
-          p <- p + opts(
-            strip.background = theme_blank(),
-            strip.text.x = theme_blank(),
-            strip.text.y = theme_blank(),
-                                    axis.ticks = theme_blank()
+          p <- p + theme(
+            # strip.background = element_blank(),
+            # strip.text.x     = element_blank(),
+            # strip.text.y     = element_blank(),
+            # axis.ticks       = element_blank()
+            strip.background = element_rect(fill="white", colour = NA),
+            strip.text.x     = element_blank(),
+            strip.text.y     = element_blank(),
+            axis.ticks       = element_blank()
           )
 
         }
@@ -730,16 +734,48 @@ if(!identical(plotObj$axisLabels,"internal")) {
           }
 
           if (p$horizontal) {
-#            p <- p + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"))
-            p <- p + opts(plot.margin = unit(c(0,-0.5,-0.5,-0.5), "lines"))
-          }
-          else {
-            p <- p + opts(plot.margin = unit(c(-0.5,0,-0.5,-0.5), "lines"))
+#            p <- p + theme(plot.margin = unit(c(0,-0.5,0,0), "lines"))
+
+            # HACK!
+            if (p$subType %in% c("facethist")) {
+              p <- p + theme(plot.margin = unit(c(0, -0.5, 0, 0), "lines"))
+            } else {
+              p <- p + theme(plot.margin = unit(c(0, -0.5, 0, -0.5), "lines"))
+            }
+
+            if (columnPos != numCol) {
+              p <- p + theme(
+                strip.background = element_blank(),
+                strip.text.x     = element_blank(),
+                strip.text.y     = element_blank()
+              )
+            }
+
+          } else {
+            # vertical
+
+            # default
+            # p <- p + theme(plot.margin = unit(c(-0.5,0,-0.5,-0.5), "lines"))
+
+            if (p$subType %in% c("facethist")) {
+              p <- p + theme(plot.margin = unit(c(-0.5, 0, 0, 0), "lines"))
+            } else {
+              p <- p + theme(plot.margin = unit(c(-0.5, 0, -0.5, 0), "lines"))
+            }
+
+            if (rowPos != 1) {
+              p <- p + theme(
+                strip.background = element_blank(),
+                strip.text.x     = element_blank(),
+                strip.text.y     = element_blank()
+              )
+            }
           }
         } # end if p$type==combo
         # Adjust for blank space left by faceting in faceted bar plot
         else if (identical(p$subType,"facetbar")) {
-          p <- p + labs(x = NULL, y = NULL) + opts(plot.margin = unit(c(0,-0.5,0,0), "lines"))
+          p <- p + labs(x = NULL, y = NULL) + theme(plot.margin = unit(c(0,-0.5,0,0), "lines"))
+
         }
         # Need to scale both variables for continuous plots
         else if (identical(p$type,"continuous") && !identical(p$subType,"cor")) {
@@ -773,7 +809,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
           }
         }
         if (showLegend == FALSE) {
-          p <- p + opts(legend.position = "none")
+          p <- p + theme(legend.position = "none")
         }
 
 

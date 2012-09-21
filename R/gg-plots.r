@@ -207,8 +207,8 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
       size = corSize,
       ...
     ) +
-    #theme_bw() +
-    opts(legend.position = "none")
+    #element_bw() +
+    theme(legend.position = "none")
 
     xPos <- rep(corAlignPercent, length(lev)) * diff(xrange) + min(xrange)
     yPos <- seq(from = 0.9, to = 0.2, length.out = length(lev) + 1) * diff(yrange) + min(yrange)
@@ -259,8 +259,8 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
       size = corSize,
       ...
     ) +
-    #theme_bw() +
-    opts(legend.position = "none")
+    #element_bw() +
+    theme(legend.position = "none")
 
     p$type <- "continuous"
     p$subType <- "cor"
@@ -349,19 +349,19 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   }
 
   if (!horizontal) {
-    p <- p + facet_grid(paste(". ~ ", yVal, sep = "")) + opts(panel.margin = unit(0.1, "lines"))
+    p <- p + facet_grid(paste(". ~ ", yVal, sep = "")) + theme(panel.margin = unit(0.1, "lines"))
 #    p$facet$facets <- paste(". ~ ", yVal, sep = "")
   } else {
 #    print(xVal)
 #    print(yVal)
-    p <- p + coord_flip() + opts(
-        axis.text.y = theme_text(
+    p <- p + coord_flip() + theme(
+        axis.text.y = element_text(
           angle = 90,
           vjust = 0,
           colour = "grey50"
         )
       )
-    p <- p + facet_grid(paste(yVal, " ~ .", sep = "")) + opts(panel.margin = unit(0.1, "lines"))
+    p <- p + facet_grid(paste(yVal, " ~ .", sep = "")) + theme(panel.margin = unit(0.1, "lines"))
 #    p$facet$facets <- paste(yVal, " ~ .", sep = "")
 #    print(p$facet$facets)
   }
@@ -396,8 +396,8 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #    p <- p + geom_jitter(...)
 #
 #  if(horizontal){
-#    p <- p + coord_flip() + opts(
-#        axis.text.y = theme_text(
+#    p <- p + coord_flip() + theme(
+#        axis.text.y = element_text(
 #          angle = 90,
 #          vjust = 0,
 #          colour = "grey50"
@@ -458,10 +458,10 @@ ggally_facethist <- function(data, mapping, ...){
 
   if (horizontal) {
     # facet_grid(list(".", yVal))
-    p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = "")) + opts(panel.margin = unit(0.1, "lines"))
+    p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = "")) + theme(panel.margin = unit(0.1, "lines"))
 #    p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
   } else {
-    p <- p + facet_grid(paste(". ~", as.character(yVal), sep = "")) + opts(panel.margin = unit(0.1, "lines"))
+    p <- p + facet_grid(paste(". ~", as.character(yVal), sep = "")) + theme(panel.margin = unit(0.1, "lines"))
     p <- p + coord_flip()
 #    p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
   }
@@ -574,14 +574,14 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
     #p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
 
     if(identical(den_strip, TRUE))
-      p <- p + opts(axis.text.y = theme_blank())
+      p <- p + theme(axis.text.y = element_blank())
   } else {
     p <- p + coord_flip()
     p <- p + facet_grid(paste(". ~ ", as.character(yVal), sep = ""))
     #p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
 
     if(identical(den_strip, TRUE))
-      p <- p + opts(axis.text.x = theme_blank())
+      p <- p + theme(axis.text.x = element_blank())
   }
   p$type <- "combo"
   p$horizontal <- horizontal
@@ -603,7 +603,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' data(movies)
 #' ggally_ratio(movies[,c("mpaa","Action")])
 #' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
-#' ggally_ratio(movies[,c("Action","mpaa")]) + opts(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
+#' ggally_ratio(movies[,c("Action","mpaa")]) + theme(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
 ggally_ratio <- function(data){
   dataNames <- colnames(data)
   data <- data[, 2:1]
@@ -729,9 +729,9 @@ ggally_text <- function(
   # print(rectData)
 
   p <- ggplot() + xlim(xrange) + ylim(yrange) +
-      opts(panel.background=theme_blank(),
-        panel.grid.minor=theme_blank(),
-        panel.grid.major=theme_line(colour="grey85")) +
+      theme(panel.background=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.grid.major=element_line(colour="grey85")) +
       labs(x = NULL, y = NULL)
 
   new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange), y = yP * diff(yrange) + min(yrange))
@@ -749,7 +749,7 @@ ggally_text <- function(
 
   p <- p +
      geom_text( label = label, mapping = mapping, colour = colour, ...) +
-     opts(legend.position = "none")
+     theme(legend.position = "none")
 
   p
 
@@ -923,13 +923,13 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
       minor_breaks=FALSE
     ) +
 #    coord_equal() +
-    opts(
-      axis.text.x = theme_text(
+    theme(
+      axis.text.x = element_text(
         hjust = 0,
         vjust = 1,
         colour = "grey50"
       ),
-      axis.text.y = theme_text(
+      axis.text.y = element_text(
         hjust = 0,
         vjust = 0,
         angle = 90,
@@ -956,26 +956,26 @@ ggally_blank <- function(...){
   a <- data.frame(X=1:2, Y=1:2)
 
   p <- ggplot(data = a, aes(x = X, y = Y)) + geom_point( colour = "transparent") +
-    opts(
-      axis.line = theme_blank(),
-      axis.text.x = theme_blank(),
-      axis.text.y = theme_blank(),
-      axis.ticks = theme_blank(),
-      axis.title.x = theme_blank(),
-      axis.title.y = theme_blank(),
-      legend.background = theme_blank(),
-      legend.key = theme_blank(),
-      legend.text = theme_blank(),
-      legend.title = theme_blank(),
-      panel.background = theme_blank(),
-      panel.border = theme_blank(),
-      panel.grid.major = theme_blank(),
-      panel.grid.minor = theme_blank(),
-      plot.background = theme_blank(),
-      plot.title = theme_blank(),
-      strip.background = theme_blank(),
-      strip.text.x = theme_blank(),
-      strip.text.y = theme_blank()
+    theme(
+      axis.line = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      legend.background = element_blank(),
+      legend.key = element_blank(),
+      legend.text = element_blank(),
+      legend.title = element_blank(),
+      panel.background = element_blank(),
+      panel.border = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.background = element_blank(),
+      plot.title = element_blank(),
+      strip.background = element_blank(),
+      strip.text.x = element_blank(),
+      strip.text.y = element_blank()
     )
   p$subType <- p$type <- "blank"
   p
