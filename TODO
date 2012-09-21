@@ -1,8 +1,67 @@
 
 
 Change to a giant gtable rather than many sub plots.  inifinity times more control over positions!
-  gtable
 
+  NOTES:
+    > q <- ggplot(mtcars, aes(wt, mpg)) + geom_point() + facet_grid(. ~ cyl)
+    > h <- ggplotGrob(q)
+    > h
+    TableGrob (7 x 9) "layout": 14 grobs
+      (1-7,1-9) background: rect[plot.background.rect.157]
+      (3-3,4-4) strip-top: absoluteGrob[strip.absoluteGrob.95]
+      (3-3,6-6) strip-top: absoluteGrob[strip.absoluteGrob.101]
+      (3-3,8-8) strip-top: absoluteGrob[strip.absoluteGrob.107]
+      (4-4,4-4) panel: absoluteGrob[GRID.absoluteGrob.89]
+      (4-4,6-6) panel: gTree[GRID.gTree.121]
+      (4-4,8-8) panel: gTree[GRID.gTree.135]
+      (4-4,3-3) axis-l: gTree[GRID.gTree.149]
+      (5-5,4-4) axis-b: absoluteGrob[GRID.absoluteGrob.71]
+      (5-5,6-6) axis-b: absoluteGrob[GRID.absoluteGrob.77]
+      (5-5,8-8) axis-b: absoluteGrob[GRID.absoluteGrob.83]
+      (6-6,4-8) xlab: text[axis.title.x.text.151]
+      (4-4,2-2) ylab: text[axis.title.y.text.153]
+      (2-2,4-8) title: text[plot.title.text.155]
+    > h$layout
+       t l b r  z clip       name
+    14 1 1 7 9  0   on background
+    1  3 4 3 4  1   on  strip-top
+    2  3 6 3 6  2   on  strip-top
+    3  3 8 3 8  3   on  strip-top
+    4  4 3 4 3  7  off     axis-l
+    5  4 4 4 4  4   on      panel
+    6  4 6 4 6  5   on      panel
+    7  4 8 4 8  6   on      panel
+    8  5 4 5 4  8  off     axis-b
+    9  5 6 5 6  9  off     axis-b
+    10 5 8 5 8 10  off     axis-b
+    11 6 4 6 8 11  off       xlab
+    12 4 2 4 2 12  off       ylab
+    13 2 4 2 8 13  off      title
+    > h[3:4,4:8]
+    TableGrob (2 x 5) "layout": 6 grobs
+      (1-1,1-1) strip-top: absoluteGrob[strip.absoluteGrob.95]
+      (1-1,3-3) strip-top: absoluteGrob[strip.absoluteGrob.101]
+      (1-1,5-5) strip-top: absoluteGrob[strip.absoluteGrob.107]
+      (2-2,1-1) panel: gTree[GRID.gTree.121]
+      (2-2,3-3) panel: gTree[GRID.gTree.135]
+      (2-2,5-5) panel: gTree[GRID.gTree.149]
+    > h[3:4,4:8]
+    TableGrob (2 x 5) "layout": 6 grobs
+      (1-1,1-1) strip-top: absoluteGrob[strip.absoluteGrob.95]
+      (1-1,3-3) strip-top: absoluteGrob[strip.absoluteGrob.101]
+      (1-1,5-5) strip-top: absoluteGrob[strip.absoluteGrob.107]
+      (2-2,1-1) panel: gTree[GRID.gTree.121]
+      (2-2,3-3) panel: gTree[GRID.gTree.135]
+      (2-2,5-5) panel: gTree[GRID.gTree.149]
+    > grid.newpage()
+    > grid.draw(h[3:4,4:8])
+    > grid.newpage()
+    > grid.draw(h[4,4:8])
+    > grid.newpage()
+    > grid.draw(h[3,4:8])
+    > gtable_show_layout(g)
+
+    > j <- gtable_add_grob(h[3,4:8],)
 
 
 
