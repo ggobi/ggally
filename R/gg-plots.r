@@ -181,15 +181,17 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, corPVa
 
     # put in correct order
     lev <- levels(data[[colorCol]])
-    ord <- rep(-1, NROW(cord))
-    for(i in 1:NROW(cord)) {
+    ord <- rep(-1, nrow(cord))
+    for(i in 1:nrow(cord)) {
       for(j in seq_along(lev)){
         if(identical(as.character(cord[i, colorCol]), as.character(lev[j]))) {
           ord[i] <- j
         }
       }
     }
-    cord <- cord[ord, ]
+    # print(order(ord[ord >= 0]))
+    # print(lev)
+    cord <- cord[order(ord[ord >= 0]), ]
 
     if (corPValues) {
       cord$label <- str_c(cord[[colorCol]], ": ", cord$cor, " [P(>t) = ", cord$pValue, "]")
@@ -221,25 +223,25 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, corPVa
     #element_bw() +
     theme(legend.position = "none")
 
-    xPos <- rep(corAlignPercent, length(lev)) * diff(xrange) + min(xrange)
-    yPos <- seq(from = 0.9, to = 0.2, length.out = length(lev) + 1) * diff(yrange) + min(yrange)
+    xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange)
+    yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange)
     yPos <- yPos[-1]
     # print(range(yVal))
     # print(yPos)
     cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
-        p <- p + geom_text(
-            data=cordf,
-            aes(
-              x = xPos,
-              y = yPos,
-              label = labelp,
-              color = labelp
-            ),
-            hjust = 1,
-            size = corSize,
-            ...
+    p <- p + geom_text(
+      data=cordf,
+      aes(
+        x = xPos,
+        y = yPos,
+        label = labelp,
+        color = labelp
+      ),
+      hjust = 1,
+      size = corSize,
+      ...
 
-          )
+    )
 
     p$type <- "continuous"
     p$subType <- "cor"
