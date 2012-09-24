@@ -17,8 +17,9 @@ Make density plots by displaying subsets of the data in different panels}
   displaying subsets of the data in different panels
 }
 \examples{
-ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
-ggally_facetdensity(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
+data(tips, package="reshape")
+ ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+ ggally_facetdensity(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

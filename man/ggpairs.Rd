@@ -68,7 +68,7 @@ Make a matrix of plots with a given data set}
 # plotting is reduced to the first couple of examples.
 # Feel free to print the ggpair objects created in the examples
 
-data(tips)
+data(tips, package="reshape")
 ggpairs(tips[,1:3])
 pm <- ggpairs(tips)
 # pm
@@ -85,6 +85,7 @@ pm <- ggpairs(
 # pm
 
 # Use sample of the diamonds data
+data(diamonds, package="ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 
 # Custom Example

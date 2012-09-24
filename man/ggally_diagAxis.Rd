@@ -33,8 +33,9 @@
   axisLabels == "internal"
 }
 \examples{
-ggally_diagAxis(tips, aes(x=tip))
-ggally_diagAxis(tips,aes(x=sex))
+data(tips, package="reshape")
+ ggally_diagAxis(tips, aes(x=tip))
+ ggally_diagAxis(tips,aes(x=sex))
 }
 \author{
   Jason Crowley \email{crowley.jason.s@gmail.com} and

@@ -116,6 +116,7 @@ the \code{ggplot2} graphics package.}
 }
 \examples{
 # use sample of the diamonds data for illustrative purposes
+data(diamonds, package="ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 
 # basic parallel coordinate plot, using default settings

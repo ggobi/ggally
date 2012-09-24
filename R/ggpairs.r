@@ -74,7 +74,7 @@
 #' # plotting is reduced to the first couple of examples.
 #' # Feel free to print the ggpair objects created in the examples
 #'
-#' data(tips)
+#' data(tips, package="reshape")
 #' ggpairs(tips[,1:3])
 #' pm <- ggpairs(tips)
 #' # pm
@@ -91,6 +91,7 @@
 #' # pm
 #'
 #' # Use sample of the diamonds data
+#' data(diamonds, package="ggplot2")
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 #'
 #' # Custom Example
@@ -459,6 +460,7 @@ eval_ggpair <- function(txt, ggally_data) {
 #'
 #' @param x row position
 #' @param y coloumn position
+#' @importFrom grid viewport
 #' @keywords internal
 #' @author Hadley Wickham \email{h.wickham@@gmail.com}
 # '
@@ -506,8 +508,9 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @examples
-#' plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
-#' getPlot(plotMatrix2, 1, 2)
+#'  data(tips, package="reshape")
+#'  plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
+#'  getPlot(plotMatrix2, 1, 2)
 getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   if(plotMatrix$printInfo)
     cat("rowFromTop: ",rowFromTop," columnFromLeft: ",columnFromLeft,"\n")
@@ -545,8 +548,10 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @method print ggpairs
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport
 #' @export
 #' @examples
+#'  data(tips, package="reshape")
 #'  ggpairs(tips[,1:3])
 print.ggpairs <- function(x, ...){
   plotObj <- x
@@ -845,12 +850,13 @@ is_blank_plot <- function(p){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @return aes_string output
 #' @examples
-#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
-#' ggpairs(diamonds.samp, columns = 5:7,
-#'  upper = list(continuous = "cor", aes_string = aes_string(color = "clarity")),
-#'  lower = list(continuous = "cor", aes_string = aes_string(color = "cut")),
-#'  color = "color",
-#'  title = "Diamonds Sample")
+#'  data(diamonds, package="ggplot2")
+#'  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
+#'  ggpairs(diamonds.samp, columns = 5:7,
+#'   upper = list(continuous = "cor", aes_string = aes_string(color = "clarity")),
+#'   lower = list(continuous = "cor", aes_string = aes_string(color = "cut")),
+#'   color = "color",
+#'   title = "Diamonds Sample")
 #'
 addAndOverwriteAes <- function(current, new) {
   if (length(new) >= 1) {

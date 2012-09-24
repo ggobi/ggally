@@ -17,9 +17,10 @@ Add a smoothed condition mean with a given scatter plot}
   condition mean with a given scatter plot
 }
 \examples{
-ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
-ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
+data(tips, package="reshape")
+ ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
+ ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+ ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
