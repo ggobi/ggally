@@ -18,10 +18,9 @@ Plots the density plots by using Diagonal}
 }
 \examples{
 ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
-#library(ggplot2)
-#data(movies)
-#ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
-#ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
+ #data(movies)
+ #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
+ #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

@@ -17,8 +17,9 @@ Make histograms by displaying subsets of the data in different panels}
   displaying subsets of the data in different panels
 }
 \examples{
-ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
-ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
+data(tips, package="reshape")
+ ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
+ ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

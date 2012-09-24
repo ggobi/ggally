@@ -17,8 +17,9 @@ Retrieves the ggplot object at the desired location}
   location
 }
 \examples{
-plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
-getPlot(plotMatrix2, 1, 2)
+data(tips, package="reshape")
+ plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
+ getPlot(plotMatrix2, 1, 2)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

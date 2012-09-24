@@ -75,9 +75,11 @@
 #' @param title character string denoting the title of the plot
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggplot object that if called, will print
+#' @import plyr
 #' @export
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes
+#' data(diamonds, package="ggplot2")
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 #'
 #' # basic parallel coordinate plot, using default settings
@@ -117,18 +119,18 @@
 ggparcoord <- function(
   data,
   columns,
-  groupColumn=NULL,
-  scale="std",
-  scaleSummary="mean",
-  centerObsID=1,
-  missing="exclude",
-  order=columns,
-  showPoints=FALSE,
-  alphaLines=1,
-  boxplot=FALSE,
-  shadeBox=NULL,
-  mapping=NULL,
-  title=""
+  groupColumn  = NULL,
+  scale        = "std",
+  scaleSummary = "mean",
+  centerObsID  = 1,
+  missing      = "exclude",
+  order        = columns,
+  showPoints   = FALSE,
+  alphaLines   = 1,
+  boxplot      = FALSE,
+  shadeBox     = NULL,
+  mapping      = NULL,
+  title        = ""
 ) {
   saveData <- data
 
@@ -209,7 +211,7 @@ ggparcoord <- function(
 
   ### Scaling ###
   if(tolower(scale) == "std") {
-    data <- rescaler(data)
+    data <- rescaler(data, type = "sd")
   }
   else if(tolower(scale) == "robust") {
     data <- rescaler(data,type="robust")
