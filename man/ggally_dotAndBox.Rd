@@ -1,7 +1,6 @@
 \name{ggally_dotAndBox}
 \alias{ggally_dotAndBox}
-\title{Plots either Box Plot or Dot Plots
-Place box plots or dot plots on the graph}
+\title{Plots either Box Plot or Dot Plots}
 \usage{
   ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
@@ -17,8 +16,7 @@ Place box plots or dot plots on the graph}
   (TRUE) or dot plots (FALSE)}
 }
 \description{
-  Plots either Box Plot or Dot Plots Place box plots or dot
-  plots on the graph
+  Place box plots or dot plots on the graph
 }
 \examples{
 data(tips, package="reshape")
