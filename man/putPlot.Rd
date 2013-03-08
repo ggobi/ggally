@@ -1,7 +1,6 @@
 \name{putPlot}
 \alias{putPlot}
-\title{Put Plot
-Function to place your own plot in the layout}
+\title{Put Plot}
 \usage{
   putPlot(plotMatrix, plotObj, rowFromTop, columnFromLeft)
 }
@@ -15,7 +14,7 @@ Function to place your own plot in the layout}
   \item{columnFromLeft}{column from the left}
 }
 \description{
-  Put Plot Function to place your own plot in the layout
+  Function to place your own plot in the layout.
 }
 \examples{
 plotMatrix <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")

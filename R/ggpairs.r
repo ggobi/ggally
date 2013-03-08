@@ -37,6 +37,7 @@
 # #small_label_diamond # now with much smaller strip text
 
 #' ggpairs - A GGplot2 Matrix
+#' 
 #' Make a matrix of plots with a given data set
 #'
 #' upper and lower are lists that may contain the variables 'continuous',
@@ -406,7 +407,7 @@ ggpairs <- function(
 
 #' Generate GGally Function Text
 #'
-#' Generate GGally function text with data, mapping, and parameters
+#' Generate GGally function text with data, mapping, and parameters.
 #'
 #' @param func identifier string in function name
 #' @param mapping mapping supplied to the function
@@ -442,7 +443,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 
 #' Evaluate a GGally Function
 #'
-#' Evaluate and GGally function with data, mapping, and parameters
+#' Evaluate and GGally function with data, mapping, and parameters.
 #'
 #' @param txt text that should be evaluated to create a plot
 #' @param ggally_data data that should be used when evaluating the text
@@ -456,7 +457,8 @@ eval_ggpair <- function(txt, ggally_data) {
 
 
 #' Viewport Layout Wrapper
-#' A wrapper function to set the viewport
+#' 
+#' A wrapper function to set the viewport.
 #'
 #' @param x row position
 #' @param y coloumn position
@@ -470,7 +472,8 @@ vplayout <- function(x, y) {
 
 
 #' Put Plot
-#' Function to place your own plot in the layout
+#' 
+#' Function to place your own plot in the layout.
 #'
 #' @param plotMatrix ggally object to be altered
 #' @param plotObj ggplot object to be placed
@@ -499,7 +502,8 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 }
 
 #' getPlot
-#' Retrieves the ggplot object at the desired location
+#' 
+#' Retrieves the ggplot object at the desired location.
 #'
 #' @param plotMatrix ggpair object to select from
 #' @param rowFromTop row from the top
@@ -541,7 +545,8 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 }
 
 #' Print ggpair object
-#' Specialized method to print the ggapir object
+#' 
+#' Specialized method to print the ggpair object-
 #'
 #' @param x ggpair object to be plotted
 #' @param ... not used
@@ -844,7 +849,8 @@ is_blank_plot <- function(p){
 }
 
 #' Add new aes
-#' Add new aesthetics to a previous aes
+#' 
+#' Add new aesthetics to a previous aes.
 #'
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -870,7 +876,8 @@ addAndOverwriteAes <- function(current, new) {
 
 
 #' Aesthetic Mapping Color Fill
-#' Replace the fill with the color and make color NULL
+#' 
+#' Replace the fill with the color and make color NULL.
 #'
 #' @param current the current aesthetics
 #' @keywords internal

@@ -1,7 +1,6 @@
 \name{singleClassOrder}
 \alias{singleClassOrder}
-\title{Order axis variables by separation between one class and the rest
-(most separation to least)}
+\title{Order axis variables}
 \usage{
   singleClassOrder(classVar, axisVars, specClass = NULL)
 }
@@ -25,7 +24,7 @@
 }
 \description{
   Order axis variables by separation between one class and
-  the rest (most separation to least)
+  the rest (most separation to least).
 }
 \author{
   Jason Crowley \email{crowley.jason.s@gmail.com}

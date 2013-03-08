@@ -1,7 +1,6 @@
 \name{ggally_facetdensity}
 \alias{ggally_facetdensity}
-\title{Plots the density plots by faceting
-Make density plots by displaying subsets of the data in different panels}
+\title{Plots the density plots by faceting}
 \usage{
   ggally_facetdensity(data, mapping, ...)
 }
@@ -13,8 +12,8 @@ Make density plots by displaying subsets of the data in different panels}
   \item{...}{other arguments being sent to stat_density}
 }
 \description{
-  Plots the density plots by faceting Make density plots by
-  displaying subsets of the data in different panels
+  Make density plots by displaying subsets of the data in
+  different panels.
 }
 \examples{
 data(tips, package="reshape")

@@ -1,7 +1,6 @@
 \name{ggally_dot}
 \alias{ggally_dot}
-\title{Plots the Box Plot with Dot
-Add jittering with the box plot}
+\title{Plots the Box Plot with Dot}
 \usage{
   ggally_dot(data, mapping, ...)
 }
@@ -13,8 +12,7 @@ Add jittering with the box plot}
   \item{...}{other arguments being supplied to geom_jitter}
 }
 \description{
-  Plots the Box Plot with Dot Add jittering with the box
-  plot
+  Add jittering with the box plot
 }
 \examples{
 data(tips, package="reshape")

@@ -1,7 +1,6 @@
 \name{scagOrder}
 \alias{scagOrder}
-\title{Find order of variables based on a specified scagnostic measure
-by maximizing the index values of that measure along the path.}
+\title{Find order of variables}
 \usage{
   scagOrder(scag, vars, measure)
 }

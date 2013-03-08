@@ -1,7 +1,6 @@
 \name{ggally_blank}
 \alias{ggally_blank}
-\title{Blank
-Drawing nothing}
+\title{Blank}
 \usage{
   ggally_blank(...)
 }
@@ -9,6 +8,9 @@ Drawing nothing}
   \item{...}{other arguments ignored}
 }
 \description{
+  Draws nothing.
+}
+\details{
   Makes a "blank" ggplot object that will only draw white
   space
 }

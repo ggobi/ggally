@@ -1,7 +1,6 @@
 \name{print.ggpairs}
 \alias{print.ggpairs}
-\title{Print ggpair object
-Specialized method to print the ggapir object}
+\title{Print ggpair object}
 \usage{
   \method{print}{ggpairs} (x, ...)
 }
@@ -11,8 +10,7 @@ Specialized method to print the ggapir object}
   \item{...}{not used}
 }
 \description{
-  Print ggpair object Specialized method to print the
-  ggapir object
+  Specialized method to print the ggpair object-
 }
 \examples{
 data(tips, package="reshape")

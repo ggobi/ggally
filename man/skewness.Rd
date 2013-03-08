@@ -1,7 +1,6 @@
 \name{skewness}
 \alias{skewness}
-\title{Calculate the sample skewness of a vector
-while ignoring missing values.}
+\title{Sample skewness}
 \usage{
   skewness(x)
 }

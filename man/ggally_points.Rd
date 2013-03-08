@@ -12,7 +12,7 @@
   \item{...}{other arguments are sent to geom_point}
 }
 \description{
-  Make a scatter plot with a given data set
+  Make a scatter plot with a given data set.
 }
 \examples{
 data(mtcars)

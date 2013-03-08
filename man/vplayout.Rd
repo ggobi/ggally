@@ -1,7 +1,6 @@
 \name{vplayout}
 \alias{vplayout}
-\title{Viewport Layout Wrapper
-A wrapper function to set the viewport}
+\title{Viewport Layout Wrapper}
 \usage{
   vplayout(x, y)
 }
@@ -11,8 +10,7 @@ A wrapper function to set the viewport}
   \item{y}{coloumn position}
 }
 \description{
-  Viewport Layout Wrapper A wrapper function to set the
-  viewport
+  A wrapper function to set the viewport.
 }
 \author{
   Hadley Wickham \email{h.wickham@gmail.com}
