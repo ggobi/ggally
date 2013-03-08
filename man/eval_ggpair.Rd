@@ -13,7 +13,7 @@
 }
 \description{
   Evaluate and GGally function with data, mapping, and
-  parameters
+  parameters.
 }
 \keyword{internal}
 

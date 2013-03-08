@@ -1,7 +1,6 @@
 \name{ggally_diagAxis}
 \alias{ggally_diagAxis}
-\title{Internal Axis Labeling Plot for ggpairs
-; is used when axisLabels == "internal"}
+\title{Internal Axis Labeling Plot for ggpairs}
 \usage{
   ggally_diagAxis(data, mapping, labelSize = 5,
     labelXPercent = 0.5, labelYPercent = 0.55,
@@ -29,8 +28,8 @@
   \item{...}{other arguments for geom_text}
 }
 \description{
-  Internal Axis Labeling Plot for ggpairs ; is used when
-  axisLabels == "internal"
+  This function is used when \code{axisLabels ==
+  "internal"}.
 }
 \examples{
 data(tips, package="reshape")

@@ -1,7 +1,6 @@
 \name{ggally_facetdensitystrip}
 \alias{ggally_facetdensitystrip}
-\title{Plots a density plot with facets or a tile plot with facets
-Make Tile Plot as densely as possible}
+\title{Plots a density plot with facets or a tile plot with facets}
 \usage{
   ggally_facetdensitystrip(data, mapping, ...,
     den_strip = FALSE)
@@ -19,8 +18,7 @@ Make Tile Plot as densely as possible}
   plot.}
 }
 \description{
-  Plots a density plot with facets or a tile plot with
-  facets Make Tile Plot as densely as possible
+  Make Tile Plot as densely as possible.
 }
 \examples{
 example(ggally_facetdensity)

@@ -1,7 +1,6 @@
 \name{ggally_smooth}
 \alias{ggally_smooth}
-\title{Plots the Scatter Plot with Smoothing
-Add a smoothed condition mean with a given scatter plot}
+\title{Plots the Scatter Plot with Smoothing}
 \usage{
   ggally_smooth(data, mapping, ...)
 }
@@ -13,8 +12,7 @@ Add a smoothed condition mean with a given scatter plot}
   \item{...}{other arguments to add to geom_point}
 }
 \description{
-  Plots the Scatter Plot with Smoothing Add a smoothed
-  condition mean with a given scatter plot
+  Add a smoothed condition mean with a given scatter plot.
 }
 \examples{
 data(tips, package="reshape")

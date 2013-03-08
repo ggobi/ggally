@@ -1,7 +1,6 @@
 \name{ggally_barDiag}
 \alias{ggally_barDiag}
-\title{Plots the Bar Plots by Using Diagonal
-Plots the bar plots by using Diagonal}
+\title{Plots the Bar Plots by Using Diagonal}
 \usage{
   ggally_barDiag(data, mapping, ...)
 }
@@ -13,8 +12,7 @@ Plots the bar plots by using Diagonal}
   \item{...}{other arguements are sent to geom_bar}
 }
 \description{
-  Plots the Bar Plots by Using Diagonal Plots the bar plots
-  by using Diagonal
+  Plots the bar plots by using Diagonal.
 }
 \examples{
 library(ggplot2)

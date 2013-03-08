@@ -1,7 +1,6 @@
 \name{ggpairs}
 \alias{ggpairs}
-\title{ggpairs - A GGplot2 Matrix
-Make a matrix of plots with a given data set}
+\title{ggpairs - A GGplot2 Matrix}
 \usage{
   ggpairs(data, columns = 1:ncol(data), title = "",
     upper = list(), lower = list(), diag = list(),
@@ -44,6 +43,9 @@ Make a matrix of plots with a given data set}
   ggpair object that if called, will print
 }
 \description{
+  Make a matrix of plots with a given data set
+}
+\details{
   upper and lower are lists that may contain the variables
   'continuous', 'combo' and 'discrete'. Each element of the
   list is a string implementing the following options:
@@ -52,8 +54,7 @@ Make a matrix of plots with a given data set}
   ('box', 'dot', 'facethist', 'facetdensity', 'denstrip',
   'blank'); discrete = exactly one of ('facetbar','ratio',
   'blank').
-}
-\details{
+
   diag is a list that may only contain the variables
   'continuous' and 'discrete'. Each element of the diag
   list is a string implmenting the following options:

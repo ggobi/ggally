@@ -1,7 +1,6 @@
 \name{ggally_cor}
 \alias{ggally_cor}
-\title{Correlation from the Scatter Plot
-estimate correlation from the given data}
+\title{Correlation from the Scatter Plot}
 \usage{
   ggally_cor(data, mapping, corAlignPercent = 0.6,
     corSize = 3, ...)
@@ -19,8 +18,7 @@ estimate correlation from the given data}
   \item{...}{other arguments being supplied to geom_text}
 }
 \description{
-  Correlation from the Scatter Plot estimate correlation
-  from the given data
+  Estimate correlation from the given data.
 }
 \examples{
 data(tips, package="reshape")

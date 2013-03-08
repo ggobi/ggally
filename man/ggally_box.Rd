@@ -1,7 +1,6 @@
 \name{ggally_box}
 \alias{ggally_box}
-\title{Plots the Box Plot
-Make a box plot with a given data set}
+\title{Plots the Box Plot}
 \usage{
   ggally_box(data, mapping, ...)
 }
@@ -14,7 +13,7 @@ Make a box plot with a given data set}
   geom_boxplot}
 }
 \description{
-  Plots the Box Plot Make a box plot with a given data set
+  Make a box plot with a given data set
 }
 \examples{
 data(tips, package="reshape")

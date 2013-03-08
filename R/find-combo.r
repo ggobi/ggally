@@ -1,4 +1,5 @@
 #' Plot Types
+#' 
 #' Retrieves the type of plot that should be used for all combinations
 #' 
 #' @param data data set to be used
@@ -20,6 +21,7 @@ plot_types <- function(data)
 }
 
 #' Find Plot Types
+#' 
 #' Retrieves the type of plot for the specific columns
 #' 
 #' @param data data set to be used
@@ -51,6 +53,7 @@ find_plot_type <- function(data,col1,col2)
 }
 
 #' Get Plot Type
+#' 
 #' Retrieves the type of plot for specific info
 #' 
 #' @param y1_type x type.  Either numeric or category
