@@ -1,7 +1,6 @@
 \name{ggally_facethist}
 \alias{ggally_facethist}
-\title{Plots the Histograms by Faceting
-Make histograms by displaying subsets of the data in different panels}
+\title{Plots the Histograms by Faceting}
 \usage{
   ggally_facethist(data, mapping, ...)
 }
@@ -13,8 +12,8 @@ Make histograms by displaying subsets of the data in different panels}
   \item{...}{parameters sent to stat_bin()}
 }
 \description{
-  Plots the Histograms by Faceting Make histograms by
-  displaying subsets of the data in different panels
+  Make histograms by displaying subsets of the data in
+  different panels.
 }
 \examples{
 data(tips, package="reshape")

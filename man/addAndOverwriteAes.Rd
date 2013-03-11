@@ -1,7 +1,6 @@
 \name{addAndOverwriteAes}
 \alias{addAndOverwriteAes}
-\title{Add new aes
-Add new aesthetics to a previous aes}
+\title{Add new aes}
 \usage{
   addAndOverwriteAes(current, new)
 }
@@ -9,7 +8,7 @@ Add new aesthetics to a previous aes}
   aes_string output
 }
 \description{
-  Add new aes Add new aesthetics to a previous aes
+  Add new aesthetics to a previous aes.
 }
 \examples{
 data(diamonds, package="ggplot2")

@@ -1,7 +1,6 @@
 \name{ggally_text}
 \alias{ggally_text}
-\title{GGplot Text
-Plot text for a plot}
+\title{GGplot Text}
 \usage{
   ggally_text(label, mapping = aes(color = "black"),
     xP = 0.5, yP = 0.5, xrange = c(0, 1), yrange = c(0, 1),
@@ -26,7 +25,7 @@ Plot text for a plot}
   \item{...}{other arguments for geom_text}
 }
 \description{
-  GGplot Text Plot text for a plot
+  Plot text for a plot.
 }
 \examples{
 ggally_text("Example 1")

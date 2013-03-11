@@ -1,8 +1,6 @@
 \name{ggparcoord}
 \alias{ggparcoord}
-\title{ggparcoord - A ggplot2 Parallel Coordinate Plot
-; A function for plotting static parallel coordinate plots, utilizing
-the \code{ggplot2} graphics package.}
+\title{ggparcoord - A ggplot2 Parallel Coordinate Plot}
 \usage{
   ggparcoord(data, columns, groupColumn = NULL,
     scale = "std", scaleSummary = "mean", centerObsID = 1,
@@ -55,6 +53,10 @@ the \code{ggplot2} graphics package.}
   ggplot object that if called, will print
 }
 \description{
+  A function for plotting static parallel coordinate plots,
+  utilizing the \code{ggplot2} graphics package.
+}
+\details{
   \code{scale} is a character string that denotes how to
   scale the variables in the parallel coordinate plot.
   Options: \itemize{ \item{\code{std}}{: univariately,
@@ -72,8 +74,7 @@ the \code{ggplot2} graphics package.}
   \code{uniminmax} to standardize vertical height, then
   center each variable at the value of the observation
   specified by the \code{centerObsID} param} }
-}
-\details{
+
   \code{missing} is a character string that denotes how to
   handle missing missing values. Options: \itemize{
   \item{\code{exclude}}{: remove all cases with missing
