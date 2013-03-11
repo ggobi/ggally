@@ -84,7 +84,6 @@ ggally_density <- function(data, mapping, ...){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param corAlignPercent right align position of numbers. Default is 60 percent across the horizontal
-#' @param corSize size of text
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @import plyr
@@ -95,8 +94,8 @@ ggally_density <- function(data, mapping, ...){
 #'  data(tips, package="reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red"))
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"), corSize = 5)
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
+#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"), size = 5)
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -210,7 +209,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
       xrange  = xrange,
       yrange  = yrange,
       color   = "black",
-      size    = corSize,
       ...
     ) +
     #element_bw() +
@@ -231,7 +229,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
         color = labelp
       ),
       hjust = 1,
-      size = corSize,
       ...
 
     )
@@ -262,7 +259,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
       yP=0.5,
       xrange = xrange,
       yrange = yrange,
-      size = corSize,
       ...
     ) +
     #element_bw() +
