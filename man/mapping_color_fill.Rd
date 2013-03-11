@@ -1,7 +1,6 @@
 \name{mapping_color_fill}
 \alias{mapping_color_fill}
-\title{Aesthetic Mapping Color Fill
-Replace the fill with the color and make color NULL}
+\title{Aesthetic Mapping Color Fill}
 \usage{
   mapping_color_fill(current)
 }
@@ -9,8 +8,7 @@ Replace the fill with the color and make color NULL}
   \item{current}{the current aesthetics}
 }
 \description{
-  Aesthetic Mapping Color Fill Replace the fill with the
-  color and make color NULL
+  Replace the fill with the color and make color NULL.
 }
 \keyword{internal}
 

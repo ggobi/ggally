@@ -1,7 +1,6 @@
 \name{get_x_axis_labels}
 \alias{get_x_axis_labels}
-\title{Get x axis labels
-retrieve it from the plot object directly}
+\title{Get x axis labels}
 \usage{
   get_x_axis_labels(p, xRange)
 }
@@ -11,8 +10,7 @@ retrieve it from the plot object directly}
   \item{xRange}{range of x values}
 }
 \description{
-  Get x axis labels retrieve it from the plot object
-  directly
+  Retrieves x axis labels from the plot object directly.
 }
 \keyword{internal}
 

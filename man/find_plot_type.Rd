@@ -1,7 +1,6 @@
 \name{find_plot_type}
 \alias{find_plot_type}
-\title{Find Plot Types
-Retrieves the type of plot for the specific columns}
+\title{Find Plot Types}
 \usage{
   find_plot_type(data, col1, col2)
 }
@@ -13,8 +12,7 @@ Retrieves the type of plot for the specific columns}
   \item{col2}{y column}
 }
 \description{
-  Find Plot Types Retrieves the type of plot for the
-  specific columns
+  Retrieves the type of plot for the specific columns
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

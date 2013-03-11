@@ -1,7 +1,6 @@
 \name{ggally_ratio}
 \alias{ggally_ratio}
-\title{Plots a mosaic plots
-Plots the mosaic plot by using fluctuation}
+\title{Plots a mosaic plots}
 \usage{
   ggally_ratio(data)
 }
@@ -9,6 +8,9 @@ Plots the mosaic plot by using fluctuation}
   \item{data}{data set using}
 }
 \description{
+  Plots the mosaic plot by using fluctuation.
+}
+\details{
   Must send only two discrete columns in the data set.
 }
 \examples{

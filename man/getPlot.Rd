@@ -1,7 +1,6 @@
 \name{getPlot}
 \alias{getPlot}
-\title{getPlot
-Retrieves the ggplot object at the desired location}
+\title{getPlot}
 \usage{
   getPlot(plotMatrix, rowFromTop, columnFromLeft)
 }
@@ -13,8 +12,7 @@ Retrieves the ggplot object at the desired location}
   \item{columnFromLeft}{column from the left}
 }
 \description{
-  getPlot Retrieves the ggplot object at the desired
-  location
+  Retrieves the ggplot object at the desired location.
 }
 \examples{
 data(tips, package="reshape")

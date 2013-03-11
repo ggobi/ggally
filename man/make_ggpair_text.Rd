@@ -18,7 +18,7 @@
 }
 \description{
   Generate GGally function text with data, mapping, and
-  parameters
+  parameters.
 }
 \keyword{internal}
 
