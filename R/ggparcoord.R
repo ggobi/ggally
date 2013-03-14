@@ -3,7 +3,7 @@
 #   as an axis
 
 #' ggparcoord - A ggplot2 Parallel Coordinate Plot
-#' 
+#'
 #' A function for plotting static parallel coordinate plots, utilizing
 #' the \code{ggplot2} graphics package.
 #'
@@ -67,7 +67,7 @@
 #' @param order method used to order the axes (see Details)
 #' @param showPoints logical operator indicating whether points should be
 #'   plotted or not
-#' @param alphaLines value of alpha scaler for the lines of the parcoord plot
+#' @param alphaLines value of alpha scaler for the lines of the parcoord plot or a column name of the data
 #' @param boxplot logical operator indicating whether or not boxplots should
 #'   underlay the distribution of each variable
 #' @param shadeBox color of underlaying box which extends from the min to the
@@ -87,36 +87,50 @@
 #' ggparcoord(data = diamonds.samp,columns = c(1,5:10))
 #'
 #' # this time, color by diamond cut
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+#' gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+#' # gpd
 #'
 #' # underlay univariate boxplots, add title, use uniminmax scaling
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
+#' gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
 #'   scale = "uniminmax",boxplot = TRUE,title = "Parallel Coord. Plot of Diamonds Data")
+#' # gpd
 #'
 #' # utilize ggplot2 aes to switch to thicker lines
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
+#' gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
 #'   title="Parallel Coord. Plot of Diamonds Data",mapping = aes(size = 1))
+#' # gpd
 #'
 #' # basic parallel coord plot of the msleep data, using 'random' imputation and
 #' # coloring by diet (can also use variable names in the columns and groupColumn
 #' # arguments)
-#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
+#' gpd <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
 #'   "random", scale = "uniminmax")
+#' # gpd
 #'
 #' # center each variable by its median, using the default missing value handler,
 #' # 'exclude'
-#' ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale =
+#' gpd <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale =
 #'   "center", scaleSummary = "median")
+#' # gpd
 #'
 #' # with the iris data, order the axes by overall class (Species) separation using
 #' # the anyClass option
-#' ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass")
+#' gpd <- ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass")
+#' # gpd
 #'
 #' # add points to the plot, add a title, and use an alpha scalar to make the lines
 #' # transparent
-#' ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
+#' gpd <- ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
 #'   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
 #'   alphaLines = 0.3)
+#' # gpd
+#'
+#' iris2 <- iris
+#' iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
+#' gpd <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, order = "anyClass",
+#'   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
+#'   alphaLines = "alphaLevel")
+#' # gpd
 ggparcoord <- function(
   data,
   columns,
@@ -165,7 +179,23 @@ ggparcoord <- function(
     stop("invalid value for showPoints; must be a logical operator")
   }
 
-  if((alphaLines < 0) || (alphaLines > 1)) {
+  alphaLinesIsCharacter <- is.character(alphaLines)
+  if(alphaLinesIsCharacter) {
+    alphaRange <- range(data[,alphaLines])
+    if (any(is.na(alphaRange))) {
+      if(alphaLines %in% names(data)) {
+        stop("missing data in alphaLines column")
+      } else {
+        stop("alphaLines column is missing in data")
+      }
+    }
+
+    if (alphaRange[1] < 0 || alphaRange[2] > 1) {
+      stop("invalid value for alphaLines column; max range must be from 0 to 1")
+    }
+    alphaVar <- data[,alphaLines]
+
+  } else if((alphaLines < 0) || (alphaLines > 1)) {
     stop("invalid value for alphaLines; must be a scalar value between 0 and 1")
   }
 
@@ -233,10 +263,17 @@ ggparcoord <- function(
 
   ### Imputation ###
   if(tolower(missing) == "exclude") {
+    dataCompleteCases <- complete.cases(data)
+
     if(!is.null(groupColumn)) {
-      groupVar <- groupVar[complete.cases(data)]
+      groupVar <- groupVar[dataCompleteCases]
     }
-    data <- data[complete.cases(data),]
+
+    if(alphaLinesIsCharacter) {
+      alphaVar <- alphaVar[dataCompleteCases]
+    }
+
+    data <- data[dataCompleteCases,]
   }
   else if(tolower(missing) == "mean") {
      data[,-p] <- apply(data[,-p],2,function(x) {
@@ -277,14 +314,22 @@ ggparcoord <- function(
     })
   }
 
+  meltIDVars <- c(".ID", "anyMissing")
   if(!is.null(groupColumn)) {
     data <- cbind(data,groupVar)
     names(data)[dim(data)[2]] <- groupCol
 
-    data.m <- melt(data,id.vars=c(groupCol,".ID","anyMissing"))
-  } else {
-    data.m <- melt(data,id.vars=c(".ID","anyMissing"))
+    meltIDVars <- c(groupCol, meltIDVars)
   }
+
+  if(alphaLinesIsCharacter) {
+    data <- cbind(data, alphaVar)
+    names(data)[dim(data)[2]] <- alphaLines
+    meltIDVars <- c(meltIDVars, alphaLines)
+  }
+
+  data.m <- melt(data,id.vars=meltIDVars)
+
 
   ### Ordering ###
   if(length(order) > 1) {
@@ -334,15 +379,26 @@ ggparcoord <- function(
     p <- p + geom_linerange(data=d.sum,size=I(10),col=shadeBox,
       mapping=aes(y=NULL,ymin=min,ymax=max,group=variable))
   }
-  if(boxplot) p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
-  if(showPoints) p <- p + geom_point()
+  if (boxplot)
+    p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
+
+  if (showPoints)
+    p <- p + geom_point()
+
   if(!is.null(mapping2$size)) {
     lineSize <- mapping2$size
   } else {
     lineSize <- 0.5
   }
 
-  p <- p + geom_line(alpha = alphaLines, size = lineSize)
+  if (alphaLinesIsCharacter) {
+    p <- p +
+      geom_line(aes_string(alpha = alphaLines), size = lineSize) +
+      scale_alpha(range = alphaRange)
+
+  } else {
+    p <- p + geom_line(alpha = alphaLines, size = lineSize)
+  }
 
   if (title != "") {
     p <- p + labs(title = title)
@@ -362,7 +418,7 @@ get.VarTypes <- function(df) {
 }
 
 #' Find order of variables
-#' 
+#'
 #' Find order of variables based on a specified scagnostic measure
 #' by maximizing the index values of that measure along the path.
 #'
@@ -395,7 +451,7 @@ scagOrder <- function(scag, vars, measure) {
 }
 
 #' Order axis variables
-#' 
+#'
 #' Order axis variables by separation between one class and the rest
 #' (most separation to least).
 #'
@@ -428,7 +484,7 @@ singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
 }
 
 #' Sample skewness
-#' 
+#'
 #' Calculate the sample skewness of a vector
 #' while ignoring missing values.
 #'
