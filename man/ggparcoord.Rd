@@ -34,7 +34,7 @@
   points should be plotted or not}
 
   \item{alphaLines}{value of alpha scaler for the lines of
-  the parcoord plot}
+  the parcoord plot or a column name of the data}
 
   \item{boxplot}{logical operator indicating whether or not
   boxplots should underlay the distribution of each
@@ -110,9 +110,10 @@
   \item{\code{Outlying}}{: order by the scagnostic measure,
   Outlying, as calculated by the package
   \code{scagnostics}. Other scagnostic measures available
-  to order by are \code{Skewed, Clumpy, Sparse, Striated,
-  Convex, Skinny, Stringy,} and \code{Monotonic}. Note: To
-  use these methods of ordering, you must have the
+  to order by are \code{Skewed}, \code{Clumpy},
+  \code{Sparse}, \code{Striated}, \code{Convex},
+  \code{Skinny}, \code{Stringy}, and \code{Monotonic}.
+  Note: To use these methods of ordering, you must have the
   \code{scagnostics} package loaded.} }
 }
 \examples{
@@ -121,39 +122,54 @@ data(diamonds, package="ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 
 # basic parallel coordinate plot, using default settings
-ggparcoord(data = diamonds.samp,columns = c(1,5:10))
+# ggparcoord(data = diamonds.samp,columns = c(1,5:10))
 
 # this time, color by diamond cut
-ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+# gpd
 
 # underlay univariate boxplots, add title, use uniminmax scaling
-ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
+gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
   scale = "uniminmax",boxplot = TRUE,title = "Parallel Coord. Plot of Diamonds Data")
+# gpd
 
 # utilize ggplot2 aes to switch to thicker lines
-ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
+gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
   title="Parallel Coord. Plot of Diamonds Data",mapping = aes(size = 1))
+# gpd
 
 # basic parallel coord plot of the msleep data, using 'random' imputation and
 # coloring by diet (can also use variable names in the columns and groupColumn
 # arguments)
-ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
+gpd <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
   "random", scale = "uniminmax")
+# gpd
 
 # center each variable by its median, using the default missing value handler,
 # 'exclude'
-ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale =
+gpd <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale =
   "center", scaleSummary = "median")
+# gpd
 
 # with the iris data, order the axes by overall class (Species) separation using
 # the anyClass option
-ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass")
+gpd <- ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass")
+# gpd
 
 # add points to the plot, add a title, and use an alpha scalar to make the lines
 # transparent
-ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
+gpd <- ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
   alphaLines = 0.3)
+# gpd
+
+# color according to a column
+iris2 <- iris
+iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
+gpd <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, order = "anyClass",
+  showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
+  alphaLines = "alphaLevel")
+# gpd
 }
 \author{
   Jason Crowley \email{crowley.jason.s@gmail.com}, Barret

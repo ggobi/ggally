@@ -18,7 +18,10 @@
 \examples{
 data(tips, package="reshape")
  ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
- ggally_facetdensity(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
+ ggally_facetdensity(
+   tips,
+   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+ )
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}
