@@ -50,7 +50,7 @@
 #'     least skewed)}
 #'   \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
 #'     by the package \code{scagnostics}. Other scagnostic measures available to order
-#'     by are \code{Skewed, Clumpy, Sparse, Striated, Convex, Skinny, Stringy,} and
+#'     by are \code{Skewed}, \code{Clumpy}, \code{Sparse}, \code{Striated}, \code{Convex}, \code{Skinny}, \code{Stringy}, and
 #'     \code{Monotonic}. Note: To use these methods of ordering, you must have the \code{scagnostics}
 #'     package loaded.}
 #' }
