@@ -125,6 +125,7 @@
 #'   alphaLines = 0.3)
 #' # gpd
 #'
+#' # color according to a column
 #' iris2 <- iris
 #' iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
 #' gpd <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, order = "anyClass",
