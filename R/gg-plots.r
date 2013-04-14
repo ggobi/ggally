@@ -110,8 +110,15 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #'  data(tips, package="reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red"))
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"), size = 5)
+#'  ggally_cor(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red")
+#'  )
+#'  ggally_cor(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+#'    size = 5
+#'  )
 ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 
   # xVar <- data[,as.character(mapping$x)]
