@@ -123,7 +123,10 @@
 #'   plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars)))
 #'   plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
 #' custom_car <- putPlot(custom_car, plot, 1, 2)
-#' custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
+#' personal_plot <- ggally_text(
+#'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
+#' )
+#' custom_car <- putPlot(custom_car, personal_plot, 1, 3)
 #' # custom_car
 ggpairs <- function(
   data,
