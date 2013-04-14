@@ -30,7 +30,7 @@ ggally_points <- function(data, mapping, ...){
 }
 
 #' Plots the Scatter Plot with Smoothing
-#' 
+#'
 #' Add a smoothed condition mean with a given scatter plot.
 #'
 #' @param data data set using
@@ -54,7 +54,7 @@ ggally_smooth <- function(data, mapping, ...){
 }
 
 #' Plots the Scatter Density Plot
-#' 
+#'
 #' Make a scatter density plot from a given data.
 #'
 #' The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_density2d (lines) is used.
@@ -95,7 +95,7 @@ ggally_density <- function(data, mapping, ...){
 }
 
 #' Correlation from the Scatter Plot
-#' 
+#'
 #' Estimate correlation from the given data.
 #'
 #' @param data data set using
@@ -293,7 +293,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
 
 #' Plots the Box Plot
-#' 
+#'
 #' Make a box plot with a given data set
 #'
 #' @param data data set using
@@ -319,7 +319,7 @@ ggally_box <- function(data, mapping, ...){
 
 
 #' Plots the Box Plot with Dot
-#' 
+#'
 #' Add jittering with the box plot
 #'
 #' @param data data set using
@@ -346,9 +346,9 @@ ggally_dot <- function(data, mapping, ...){
 
 
 #' Plots either Box Plot or Dot Plots
-#' 
+#'
 #' Place box plots or dot plots on the graph
-#' 
+#'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... parameters passed to either geom_jitter or geom_boxplot
@@ -456,7 +456,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
 
 #' Plots the Histograms by Faceting
-#' 
+#'
 #' Make histograms by displaying subsets of the data in different panels.
 #'
 #' @param data data set using
@@ -524,7 +524,7 @@ ggally_facethist <- function(data, mapping, ...){
 
 
 #' Plots the density plots by faceting
-#' 
+#'
 #' Make density plots by displaying subsets of the data in different panels.
 #'
 #' @param data data set using
@@ -545,7 +545,7 @@ ggally_facetdensity <- function(data, mapping, ...){
 }
 
 #' Plots a tile plot with facets
-#' 
+#'
 #' Make Tile Plot as densely as possible.
 #'
 #' @param data data set using
@@ -566,7 +566,7 @@ ggally_denstrip <- function(data,mapping, ...){
 }
 
 #' Plots a density plot with facets or a tile plot with facets
-#' 
+#'
 #' Make Tile Plot as densely as possible.
 #'
 #' @param data data set using
@@ -648,7 +648,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 }
 
 #' Plots a mosaic plots
-#' 
+#'
 #' Plots the mosaic plot by using fluctuation.
 #'
 #' Must send only two discrete columns in the data set.
@@ -682,7 +682,7 @@ ggally_ratio <- function(data){
 }
 
 #' Plots the Density Plots by Using Diagonal
-#' 
+#'
 #' Plots the density plots by using Diagonal.
 #'
 #' @param data data set using
@@ -716,7 +716,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 }
 
 #' Plots the Bar Plots by Using Diagonal
-#' 
+#'
 #' Plots the bar plots by using Diagonal.
 #'
 #' @param data data set using
@@ -761,7 +761,7 @@ ggally_barDiag <- function(data, mapping, ...){
 }
 
 #' GGplot Text
-#' 
+#'
 #' Plot text for a plot.
 #'
 #' @param label text that you want to appear
@@ -824,7 +824,7 @@ ggally_text <- function(
 
 
 #' Get x axis labels
-#' 
+#'
 #' Retrieves x axis labels from the plot object directly.
 #'
 #' @importFrom gtable gtable_filter
@@ -888,7 +888,7 @@ get_x_axis_labels <- function(p, xRange) {
 
 
 #' Internal Axis Labeling Plot for ggpairs
-#' 
+#'
 #' This function is used when \code{axisLabels == "internal"}.
 #'
 #' @param data dataset being plotted
@@ -1035,7 +1035,7 @@ ggally_facetbar <- function(data, mapping, ...){
 }
 
 #' Fluctuation plot
-#' 
+#'
 #' Create a fluctuation plot.
 #'
 #' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.
@@ -1145,7 +1145,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 }
 
 #' Blank
-#' 
+#'
 #' Draws nothing.
 #'
 #' Makes a "blank" ggplot object that will only draw white space

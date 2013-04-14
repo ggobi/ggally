@@ -37,7 +37,7 @@
 # #small_label_diamond # now with much smaller strip text
 
 #' ggpairs - A GGplot2 Matrix
-#' 
+#'
 #' Make a matrix of plots with a given data set
 #'
 #' upper and lower are lists that may contain the variables 'continuous',
@@ -460,7 +460,7 @@ eval_ggpair <- function(txt, ggally_data) {
 
 
 #' Viewport Layout Wrapper
-#' 
+#'
 #' A wrapper function to set the viewport.
 #'
 #' @param x row position
@@ -475,7 +475,7 @@ vplayout <- function(x, y) {
 
 
 #' Put Plot
-#' 
+#'
 #' Function to place your own plot in the layout.
 #'
 #' @param plotMatrix ggally object to be altered
@@ -508,7 +508,7 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 }
 
 #' getPlot
-#' 
+#'
 #' Retrieves the ggplot object at the desired location.
 #'
 #' @param plotMatrix ggpair object to select from
@@ -551,7 +551,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 }
 
 #' Print ggpair object
-#' 
+#'
 #' Specialized method to print the ggpair object-
 #'
 #' @param x ggpair object to be plotted
@@ -855,7 +855,7 @@ is_blank_plot <- function(p){
 }
 
 #' Add new aes
-#' 
+#'
 #' Add new aesthetics to a previous aes.
 #'
 #' @keywords internal
@@ -882,7 +882,7 @@ addAndOverwriteAes <- function(current, new) {
 
 
 #' Aesthetic Mapping Color Fill
-#' 
+#'
 #' Replace the fill with the color and make color NULL.
 #'
 #' @param current the current aesthetics

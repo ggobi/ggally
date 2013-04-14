@@ -3,7 +3,7 @@
 #   as an axis
 
 #' ggparcoord - A ggplot2 Parallel Coordinate Plot
-#' 
+#'
 #' A function for plotting static parallel coordinate plots, utilizing
 #' the \code{ggplot2} graphics package.
 #'
@@ -362,7 +362,7 @@ get.VarTypes <- function(df) {
 }
 
 #' Find order of variables
-#' 
+#'
 #' Find order of variables based on a specified scagnostic measure
 #' by maximizing the index values of that measure along the path.
 #'
@@ -395,7 +395,7 @@ scagOrder <- function(scag, vars, measure) {
 }
 
 #' Order axis variables
-#' 
+#'
 #' Order axis variables by separation between one class and the rest
 #' (most separation to least).
 #'
@@ -428,7 +428,7 @@ singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
 }
 
 #' Sample skewness
-#' 
+#'
 #' Calculate the sample skewness of a vector
 #' while ignoring missing values.
 #'
