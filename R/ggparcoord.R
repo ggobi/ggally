@@ -84,10 +84,10 @@
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 #'
 #' # basic parallel coordinate plot, using default settings
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10))
+#' # ggparcoord(data = diamonds.samp,columns = c(1,5:10))
 #'
 #' # this time, color by diamond cut
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+#' # ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
 #'
 #' # underlay univariate boxplots, add title, use uniminmax scaling
 #' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,

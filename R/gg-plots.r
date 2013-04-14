@@ -729,8 +729,8 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' library(ggplot2)
 #' data(movies)
 #' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
-#' ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
-#' ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
+#' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
+#' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
   mapping$y <- NULL
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))

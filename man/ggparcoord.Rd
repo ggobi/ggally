@@ -110,9 +110,10 @@
   \item{\code{Outlying}}{: order by the scagnostic measure,
   Outlying, as calculated by the package
   \code{scagnostics}. Other scagnostic measures available
-  to order by are \code{Skewed, Clumpy, Sparse, Striated,
-  Convex, Skinny, Stringy,} and \code{Monotonic}. Note: To
-  use these methods of ordering, you must have the
+  to order by are \code{Skewed}, \code{Clumpy},
+  \code{Sparse}, \code{Striated}, \code{Convex},
+  \code{Skinny}, \code{Stringy}, and \code{Monotonic}.
+  Note: To use these methods of ordering, you must have the
   \code{scagnostics} package loaded.} }
 }
 \examples{
@@ -121,10 +122,10 @@ data(diamonds, package="ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 
 # basic parallel coordinate plot, using default settings
-ggparcoord(data = diamonds.samp,columns = c(1,5:10))
+# ggparcoord(data = diamonds.samp,columns = c(1,5:10))
 
 # this time, color by diamond cut
-ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+# ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
 
 # underlay univariate boxplots, add title, use uniminmax scaling
 ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,

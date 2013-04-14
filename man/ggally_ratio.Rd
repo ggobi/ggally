@@ -18,7 +18,13 @@ library(ggplot2)
 data(movies)
 ggally_ratio(movies[,c("mpaa","Action")])
 ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
-ggally_ratio(movies[,c("Action","mpaa")]) + theme(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
+nummpaa <- length(levels(movies[,"mpaa"]))
+numAction <- length(levels(as.factor(movies[,"Action"])))
+ggally_ratio(
+  movies[,c("Action","mpaa")]
+) + theme(
+  aspect.ratio = nummpaa / numAction
+)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

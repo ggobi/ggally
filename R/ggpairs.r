@@ -111,7 +111,7 @@
 #'   upper = list(continuous = "wrongType1", combo = "wrongType2"),
 #'   lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
 #' )
-#' bad_plots
+#' # bad_plots
 #'
 #' # Labels on the outside, grids won't line up
 #' pm <- ggpairs(tips[,1:3], axisLabels="none")
