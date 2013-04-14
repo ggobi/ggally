@@ -20,7 +20,11 @@
 }
 \examples{
 data(tips, package="reshape")
- ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=TRUE)
+ ggally_dotAndBox(
+   tips,
+   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+   boxPlot = TRUE
+ )
  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 }
 \author{

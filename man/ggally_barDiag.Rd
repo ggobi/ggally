@@ -18,8 +18,8 @@
 library(ggplot2)
 data(movies)
 ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
-ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
-ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
+# ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
+# ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

@@ -12,7 +12,15 @@
 #' data(mtcars)
 #' ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp))
 #' ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp"))
-#' ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp", color = "as.factor(cyl)", size = "gear"))
+#' ggally_points(
+#'   mtcars,
+#'   mapping = ggplot2::aes_string(
+#'     x     = "disp",
+#'     y     = "hp",
+#'     color = "as.factor(cyl)",
+#'     size  = "gear"
+#'   )
+#' )
 ggally_points <- function(data, mapping, ...){
 
   p <- ggplot(data = data, mapping = mapping) + geom_point(...)
@@ -22,7 +30,7 @@ ggally_points <- function(data, mapping, ...){
 }
 
 #' Plots the Scatter Plot with Smoothing
-#' 
+#'
 #' Add a smoothed condition mean with a given scatter plot.
 #'
 #' @param data data set using
@@ -46,7 +54,7 @@ ggally_smooth <- function(data, mapping, ...){
 }
 
 #' Plots the Scatter Density Plot
-#' 
+#'
 #' Make a scatter density plot from a given data.
 #'
 #' The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_density2d (lines) is used.
@@ -61,8 +69,14 @@ ggally_smooth <- function(data, mapping, ...){
 #'  data(tips, package="reshape")
 #'  ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
 #'  ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level.."))
-#'  ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
+#'  ggally_density(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+#'  )
+#'  ggally_density(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+#'  ) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
 ggally_density <- function(data, mapping, ...){
   p <- ggplot(data = data, mapping)
 
@@ -81,13 +95,12 @@ ggally_density <- function(data, mapping, ...){
 }
 
 #' Correlation from the Scatter Plot
-#' 
+#'
 #' Estimate correlation from the given data.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param corAlignPercent right align position of numbers. Default is 60 percent across the horizontal
-#' @param corSize size of text
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @import plyr
@@ -97,9 +110,16 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #'  data(tips, package="reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red"))
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"), corSize = 5)
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
+#'  ggally_cor(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red")
+#'  )
+#'  ggally_cor(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+#'    size = 5
+#'  )
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -213,7 +233,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
       xrange  = xrange,
       yrange  = yrange,
       color   = "black",
-      size    = corSize,
       ...
     ) +
     #element_bw() +
@@ -234,7 +253,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
         color = labelp
       ),
       hjust = 1,
-      size = corSize,
       ...
 
     )
@@ -265,7 +283,6 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
       yP=0.5,
       xrange = xrange,
       yrange = yrange,
-      size = corSize,
       ...
     ) +
     #element_bw() +
@@ -279,7 +296,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 
 
 #' Plots the Box Plot
-#' 
+#'
 #' Make a box plot with a given data set
 #'
 #' @param data data set using
@@ -292,14 +309,20 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corSize = 3, ...){
 #'  data(tips, package="reshape")
 #'  ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
-#'  ggally_box(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"), outlier.colour = "red", outlier.shape = 13, outlier.size = 8)
+#'  ggally_box(
+#'    tips,
+#'    mapping        = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"),
+#'    outlier.colour = "red",
+#'    outlier.shape  = 13,
+#'    outlier.size   = 8
+#'  )
 ggally_box <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
 
 
 #' Plots the Box Plot with Dot
-#' 
+#'
 #' Add jittering with the box plot
 #'
 #' @param data data set using
@@ -312,17 +335,23 @@ ggally_box <- function(data, mapping, ...){
 #'  data(tips, package="reshape")
 #'  ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
-#'  ggally_dot(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
-#'  ggally_dot(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")) + scale_shape(solid=FALSE)
+#'  ggally_dot(
+#'    tips,
+#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+#'  )
+#'  ggally_dot(
+#'    tips,
+#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
+#'  ) + scale_shape(solid=FALSE)
 ggally_dot <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = FALSE)
 }
 
 
 #' Plots either Box Plot or Dot Plots
-#' 
+#'
 #' Place box plots or dot plots on the graph
-#' 
+#'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... parameters passed to either geom_jitter or geom_boxplot
@@ -332,7 +361,11 @@ ggally_dot <- function(data, mapping, ...){
 #' @export
 #' @examples
 #'  data(tips, package="reshape")
-#'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=TRUE)
+#'  ggally_dotAndBox(
+#'    tips,
+#'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+#'    boxPlot = TRUE
+#'  )
 #'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
@@ -426,7 +459,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
 
 #' Plots the Histograms by Faceting
-#' 
+#'
 #' Make histograms by displaying subsets of the data in different panels.
 #'
 #' @param data data set using
@@ -494,7 +527,7 @@ ggally_facethist <- function(data, mapping, ...){
 
 
 #' Plots the density plots by faceting
-#' 
+#'
 #' Make density plots by displaying subsets of the data in different panels.
 #'
 #' @param data data set using
@@ -506,13 +539,16 @@ ggally_facethist <- function(data, mapping, ...){
 #' @examples
 #'  data(tips, package="reshape")
 #'  ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
-#'  ggally_facetdensity(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
+#'  ggally_facetdensity(
+#'    tips,
+#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+#'  )
 ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
 
 #' Plots a tile plot with facets
-#' 
+#'
 #' Make Tile Plot as densely as possible.
 #'
 #' @param data data set using
@@ -524,13 +560,16 @@ ggally_facetdensity <- function(data, mapping, ...){
 #' @examples
 #'  ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
-#'  ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")) + scale_fill_gradient(low = "grey80", high = "black")
+#'  ggally_denstrip(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
+#'  ) + scale_fill_gradient(low = "grey80", high = "black")
 ggally_denstrip <- function(data,mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
 #' Plots a density plot with facets or a tile plot with facets
-#' 
+#'
 #' Make Tile Plot as densely as possible.
 #'
 #' @param data data set using
@@ -612,7 +651,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 }
 
 #' Plots a mosaic plots
-#' 
+#'
 #' Plots the mosaic plot by using fluctuation.
 #'
 #' Must send only two discrete columns in the data set.
@@ -626,7 +665,13 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' data(movies)
 #' ggally_ratio(movies[,c("mpaa","Action")])
 #' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
-#' ggally_ratio(movies[,c("Action","mpaa")]) + theme(aspect.ratio = (length(levels(movies[,"mpaa"])) ) / (length(levels(as.factor(movies[,"Action"]))) ) )
+#' nummpaa <- length(levels(movies[,"mpaa"]))
+#' numAction <- length(levels(as.factor(movies[,"Action"])))
+#' ggally_ratio(
+#'   movies[,c("Action","mpaa")]
+#' ) + theme(
+#'   aspect.ratio = nummpaa / numAction
+#' )
 ggally_ratio <- function(data){
   dataNames <- colnames(data)
   data <- data[, 2:1]
@@ -640,7 +685,7 @@ ggally_ratio <- function(data){
 }
 
 #' Plots the Density Plots by Using Diagonal
-#' 
+#'
 #' Plots the density plots by using Diagonal.
 #'
 #' @param data data set using
@@ -674,7 +719,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 }
 
 #' Plots the Bar Plots by Using Diagonal
-#' 
+#'
 #' Plots the bar plots by using Diagonal.
 #'
 #' @param data data set using
@@ -687,8 +732,8 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' library(ggplot2)
 #' data(movies)
 #' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
-#' ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
-#' ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
+#' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
+#' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
   mapping$y <- NULL
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
@@ -719,7 +764,7 @@ ggally_barDiag <- function(data, mapping, ...){
 }
 
 #' GGplot Text
-#' 
+#'
 #' Plot text for a plot.
 #'
 #' @param label text that you want to appear
@@ -782,7 +827,7 @@ ggally_text <- function(
 
 
 #' Get x axis labels
-#' 
+#'
 #' Retrieves x axis labels from the plot object directly.
 #'
 #' @importFrom gtable gtable_filter
@@ -846,7 +891,7 @@ get_x_axis_labels <- function(p, xRange) {
 
 
 #' Internal Axis Labeling Plot for ggpairs
-#' 
+#'
 #' This function is used when \code{axisLabels == "internal"}.
 #'
 #' @param data dataset being plotted
@@ -993,7 +1038,7 @@ ggally_facetbar <- function(data, mapping, ...){
 }
 
 #' Fluctuation plot
-#' 
+#'
 #' Create a fluctuation plot.
 #'
 #' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.
@@ -1103,7 +1148,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 }
 
 #' Blank
-#' 
+#'
 #' Draws nothing.
 #'
 #' Makes a "blank" ggplot object that will only draw white space
