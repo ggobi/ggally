@@ -3,7 +3,7 @@
 #   as an axis
 
 #' ggparcoord - A ggplot2 Parallel Coordinate Plot
-#' 
+#'
 #' A function for plotting static parallel coordinate plots, utilizing
 #' the \code{ggplot2} graphics package.
 #'
@@ -50,7 +50,7 @@
 #'     least skewed)}
 #'   \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
 #'     by the package \code{scagnostics}. Other scagnostic measures available to order
-#'     by are \code{Skewed, Clumpy, Sparse, Striated, Convex, Skinny, Stringy,} and
+#'     by are \code{Skewed}, \code{Clumpy}, \code{Sparse}, \code{Striated}, \code{Convex}, \code{Skinny}, \code{Stringy}, and
 #'     \code{Monotonic}. Note: To use these methods of ordering, you must have the \code{scagnostics}
 #'     package loaded.}
 #' }
@@ -84,10 +84,10 @@
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 #'
 #' # basic parallel coordinate plot, using default settings
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10))
+#' # ggparcoord(data = diamonds.samp,columns = c(1,5:10))
 #'
 #' # this time, color by diamond cut
-#' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+#' # ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
 #'
 #' # underlay univariate boxplots, add title, use uniminmax scaling
 #' ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
@@ -362,7 +362,7 @@ get.VarTypes <- function(df) {
 }
 
 #' Find order of variables
-#' 
+#'
 #' Find order of variables based on a specified scagnostic measure
 #' by maximizing the index values of that measure along the path.
 #'
@@ -395,7 +395,7 @@ scagOrder <- function(scag, vars, measure) {
 }
 
 #' Order axis variables
-#' 
+#'
 #' Order axis variables by separation between one class and the rest
 #' (most separation to least).
 #'
@@ -428,7 +428,7 @@ singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
 }
 
 #' Sample skewness
-#' 
+#'
 #' Calculate the sample skewness of a vector
 #' while ignoring missing values.
 #'

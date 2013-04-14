@@ -105,7 +105,7 @@ bad_plots <- ggpairs(
   upper = list(continuous = "wrongType1", combo = "wrongType2"),
   lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
 )
-bad_plots
+# bad_plots
 
 # Labels on the outside, grids won't line up
 pm <- ggpairs(tips[,1:3], axisLabels="none")
@@ -117,7 +117,10 @@ custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Cu
   plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars)))
   plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
 custom_car <- putPlot(custom_car, plot, 1, 2)
-custom_car <- putPlot(custom_car, ggally_text("ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"), 1, 3)
+personal_plot <- ggally_text(
+  "ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"
+)
+custom_car <- putPlot(custom_car, personal_plot, 1, 3)
 # custom_car
 }
 \author{
