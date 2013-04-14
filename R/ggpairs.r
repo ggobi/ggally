@@ -486,13 +486,16 @@ vplayout <- function(x, y) {
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @examples
-#' plotMatrix <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
+#' custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
 #'   plot <- ggplot(mtcars, aes(x=wt, y=mpg, label=rownames(mtcars)))
 #'   plot <- plot + geom_text(aes(colour=factor(cyl)), size = 3) + scale_colour_discrete(l=40)
-#' plotMatrix <- putPlot(plotMatrix, plot, 1, 2)
-#' plotMatrix <- putPlot(plotMatrix, ggally_text("ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"), 1, 3)
-#' plotMatrix
+#' custom_car <- putPlot(custom_car, plot, 1, 2)
+#' personal_plot <- ggally_text(
+#'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
+#' )
+#' custom_car <- putPlot(custom_car, personal_plot, 1, 3)
+#' # custom_car
 putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 
   pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
