@@ -363,7 +363,7 @@ ggally_dot <- function(data, mapping, ...){
 #'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
 #'    boxPlot = TRUE
 #'  )
-  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
+#'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
 #  print(horizontal)
