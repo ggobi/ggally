@@ -536,7 +536,10 @@ ggally_facethist <- function(data, mapping, ...){
 #' @examples
 #'  data(tips, package="reshape")
 #'  ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
-#'  ggally_facetdensity(tips, mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"))
+#'  ggally_facetdensity(
+#'    tips,
+#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+#'  )
 ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
