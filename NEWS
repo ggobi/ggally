@@ -1,0 +1,20 @@
+GGally 0.4.3
+-----------------
+
+NEW FUNCTION
+
+* `ggcorr` has been added to the main functions of GGally.  `ggcorr` is a
+  function for making a correlation plot starting from a data matrix, using
+  ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's
+  arm:corrplot function.
+
+ARGUMENTS
+
+* `ggally_cor` has a new argument of "corSize".
+
+* `ggparcoord` argument "alphaLines" can now point to a column or column number.
+
+DOCUMENTATION
+
+* tweaks were made to the roxygen comments to produce cleaner documentation
+
