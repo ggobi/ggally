@@ -20,7 +20,7 @@
   \item{palette}{a ColorBrewer palette to be used for
   correlation coefficients. Defaults to \code{"RdYlGn"}.}
 
-  \item{...}{other arguements supplied to geom_text for the
+  \item{...}{other arguments supplied to geom_text for the
   diagonal labels.  Arguments pertaining to the title or
   other items can be achieved through ggplot2 methods.}
 }
