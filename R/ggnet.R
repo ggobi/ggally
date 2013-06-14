@@ -23,6 +23,7 @@
 #' @seealso \code{\link{gplot}} in the \link{sna} package
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and François Briatte \email{f.briatte@@ed.ac.uk}
 #' @examples
+#' require(network)
 #' # random network
 #' rnd = network(10)
 #' ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
