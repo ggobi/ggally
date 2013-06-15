@@ -79,21 +79,27 @@ ggnet <- function(net, # an object of class network
   quartiles = quantize.weights
   labels = label.nodes
 
-  set.vertex.attribute(net, "elements", as.character(node.group))
   # get sociomatrix
   m <- as.matrix.network.adjacency(net)
+
   # get coordinates placement algorithm
   placement <- paste0("gplot.layout.", mode)
   if(!exists(placement)) stop("Unsupported placement method.")
   plotcord <- do.call(placement, list(m, NULL))
   plotcord <- data.frame(plotcord)
   colnames(plotcord) = c("X1", "X2")
+
   # get edgelist
   edglist <- as.matrix.network.edgelist(net)
   edges <- data.frame(plotcord[edglist[,1],], plotcord[edglist[,2],])
-  plotcord$group <- as.factor(get.vertex.attribute(net, "elements"))
   
-  # get weights
+  # get node groups
+  if(!is.null(node.group)) {
+    set.vertex.attribute(net, "elements", as.character(node.group))
+    plotcord$group <- as.factor(get.vertex.attribute(net, "elements"))
+  }
+  
+  # get node weights
   degrees <- data.frame(id = network.vertex.names(net), 
                         indegree  = sapply(net$iel, length), 
                         outdegree = sapply(net$oel, length))
