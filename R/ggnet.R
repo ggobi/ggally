@@ -30,6 +30,17 @@
 #' # adding groups
 #' cat = LETTERS[rbinom(10, 4, .5)]
 #' ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = cat)
+#' 
+#' # City and service firms data from the UCIrvine Network Data Repository.
+#' url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
+#' print(load(url))
+#' close(url)
+#' # Dummy to identify cities and firms.
+#' city = ifelse(get.vertex.attribute(cities, "type") == "City", "City", "Firm")
+#' # Flag a few nodes.
+#' flag = c("Paris", "Beijing", "Chicago")
+#' # Plot.
+#' ggnet(cities, mode = "kamadakawai", node.group = city, alpha = .2, label = flag)
 
 ggnet <- function(net, # an object of class network
   mode = "fruchtermanreingold", # placement algorithm
