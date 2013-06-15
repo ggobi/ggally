@@ -23,11 +23,10 @@
 #' @seealso \code{\link{gplot}} in the \link{sna} package
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and François Briatte \email{f.briatte@@ed.ac.uk}
 #' @examples
-#' require(ergm)
 #' # random network
-#' rnd = network(10)
+#' rnd = network::network.initialize(10)
 #' ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
-#' # adding groups
+#' # random groups
 #' cat = LETTERS[rbinom(10, 4, .5)]
 #' ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = cat)
 #' 
@@ -36,12 +35,12 @@
 #' url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
 #' print(load(url))
 #' close(url)
-#' # Dummy to identify cities and firms.
-#' city = ifelse(get.vertex.attribute(cities, "type") == "City", "City", "Firm")
-#' # Flag a few nodes.
-#' flag = c("Paris", "Beijing", "Chicago")
-#' # Plot.
-#' ggnet(cities, mode = "kamadakawai", node.group = city, alpha = .2, label = flag)
+#' # plot cities, firms and law firms
+#' type = network::get.vertex.attribute(cities, "type")
+#' type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
+#' ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
+#'       label = c("Paris", "Beijing", "Chicago"), color = "darkred")
+
 
 ggnet <- function(net, # an object of class network
   mode = "fruchtermanreingold", # placement algorithm
