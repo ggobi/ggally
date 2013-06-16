@@ -56,7 +56,7 @@
 }
 \examples{
 # Random network.
-rnd = network(10)
+rnd = network::network(10)
 ggnet(rnd, 
   label = TRUE,
   alpha = 1,
@@ -69,6 +69,19 @@ ggnet(rnd,
   node.group = cat,
   color = "white",
   segment.color = "grey10")
+# City and service firms data from the UCIrvine Network Data Repository.
+url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
+print(load(url))
+close(url)
+# plot cities, firms and law firms
+type = network::get.vertex.attribute(cities, "type")
+type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
+ggnet(cities, 
+  mode = "kamadakawai", 
+  alpha = .2, 
+  node.group = type,
+  label = c("Paris", "Beijing", "Chicago"), 
+  color = "darkred")
 }
 \author{
   Francois Briatte \email{f.briatte@ed.ac.uk} and

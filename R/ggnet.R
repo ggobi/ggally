@@ -24,13 +24,12 @@
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and François Briatte \email{f.briatte@@ed.ac.uk}
 #' @examples
 #' # random network
-#' rnd = network::network.initialize(10)
+#' rnd = network::network(10)
 #' ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
 #' # random groups
 #' cat = LETTERS[rbinom(10, 4, .5)]
 #' ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = cat)
 #' 
-#' require(network)
 #' # City and service firms data from the UCIrvine Network Data Repository.
 #' url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
 #' print(load(url))
