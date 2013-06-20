@@ -88,7 +88,9 @@ ggnet <- function(net, # an object of class network
   
   # subset
   if(subset.threshold > 0)
-    delete.vertices(net, which(degree(net, cmode = weight) < subset.threshold))
+    network::delete.vertices(net,
+                             which(degree(net, 
+                                          cmode = weight) < subset.threshold))
   
   # get sociomatrix
   m <- as.matrix.network.adjacency(net)
@@ -106,8 +108,8 @@ ggnet <- function(net, # an object of class network
   
   # get node groups
   if(!is.null(node.group)) {
-    set.vertex.attribute(net, "elements", as.character(node.group))
-    plotcord$group <- as.factor(get.vertex.attribute(net, "elements"))
+    network::set.vertex.attribute(net, "elements", as.character(node.group))
+    plotcord$group <- as.factor(network::get.vertex.attribute(net, "elements"))
   }
   
   # get node weights
@@ -155,7 +157,9 @@ ggnet <- function(net, # an object of class network
   
   # null weighting
   if(weight.method == "none") {
-    pnet <- pnet + geom_point(data = plotcord, alpha = inherit(node.alpha), size = size)
+    pnet <- pnet + geom_point(data = plotcord, 
+                              alpha = inherit(node.alpha), 
+                              size = size)
   }
   else {
     plotcord$weight <- degrees[, which(names(degrees) == weight)]
@@ -180,7 +184,9 @@ ggnet <- function(net, # an object of class network
     
     # add to plot
     pnet <- pnet + geom_point(aes(size = weight),
-                              data = plotcord, alpha = inherit(node.alpha)) + sizer
+                              data = plotcord, 
+                              alpha = inherit(node.alpha)) + 
+      sizer
   }
   
   # default colors
@@ -197,7 +203,7 @@ ggnet <- function(net, # an object of class network
                         guide = guide_legend(override.aes = list(size = sqrt(size)))) 
   
   # add text labels
-  pnet <- pnet + geom_text(aes(label = id), ...)
+  if(unique(plotcord$id) != "") pnet <- pnet + geom_text(aes(label = id), ...)
   
   # finalize: remove grid, axes and scales
   pnet <- pnet +
