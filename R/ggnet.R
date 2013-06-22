@@ -89,7 +89,7 @@ ggnet <- function(net, # an object of class network
   # subset
   if(subset.threshold > 0)
     network::delete.vertices(net,
-                             which(degree(net, 
+                             which(sna::degree(net, 
                                           cmode = weight) < subset.threshold))
   
   # get sociomatrix
@@ -127,7 +127,7 @@ ggnet <- function(net, # an object of class network
     top = degrees$id[order(all, decreasing = TRUE)[1:8]]
     top = which(degrees$id %in% top)
     plotcord$group = as.character(degrees$id)
-    plotcord$group[-top] = paste0("(", weight, " ≥ ", subset.threshold, ")")
+    plotcord$group[-top] = paste0("(", weight, " > ", subset.threshold - 1, ")")
     node.group = plotcord$group
     node.color = brewer.pal(9, "Set1")[c(9, 1:8)]
   }
