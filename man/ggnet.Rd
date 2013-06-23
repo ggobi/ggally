@@ -48,13 +48,13 @@
   	Experimental.}
   \item{quantize.weights}{Break node weights to quartiles. 
   	Might fail if quartiles do not uniquely identify nodes.}
-  \item{subset.threshold delete nodes prior to plotting, 
+  \item{subset.threshold}{delete nodes prior to plotting, 
     based on \code{weight.method} < \code{subset.threshold}. 
     If \code{weight.method} is unspecified, total degree (Freeman's measure) is used. 
     Defaults to 0 (no subsetting).}
-   \item{trim.labels removes '@', 'http://', 'www.' and the ending '/' from vertex names. 
-   Cleans up labels for website and Twitter networks. 
-   Defaults to \code{TRUE}.}
+  \item{trim.labels}{removes '@', 'http://', 'www.' and the ending '/' from vertex names. 
+    Cleans up labels for website and Twitter networks. 
+    Defaults to \code{TRUE}.}
   \item{legend.position}{location of the captions for node colors and weights. 
   	Accepts all positions supported by ggplot2 themes. 
   	Defaults to "right".}

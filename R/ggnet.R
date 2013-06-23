@@ -27,7 +27,7 @@
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and François Briatte \email{f.briatte@@ed.ac.uk}
 #' @examples
 #' # random network
-#' rnd = network::network(10)
+#' rnd = ergm::as.network.numeric(10)
 #' ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
 #' # random groups
 #' cat = LETTERS[rbinom(10, 4, .5)]
@@ -90,7 +90,7 @@ ggnet <- function(net, # an object of class network
   if(subset.threshold > 0)
     network::delete.vertices(net,
                              which(sna::degree(net, 
-                                          cmode = weight) < subset.threshold))
+                                               cmode = weight) < subset.threshold))
   
   # get sociomatrix
   m <- as.matrix.network.adjacency(net)
@@ -203,7 +203,8 @@ ggnet <- function(net, # an object of class network
                         guide = guide_legend(override.aes = list(size = sqrt(size)))) 
   
   # add text labels
-  if(unique(plotcord$id) != "") pnet <- pnet + geom_text(aes(label = id), ...)
+  if(length(unique(plotcord$id)) > 1 | unique(plotcord$id)[1] != "")
+    pnet <- pnet + geom_text(aes(label = id), ...)
   
   # finalize: remove grid, axes and scales
   pnet <- pnet +
