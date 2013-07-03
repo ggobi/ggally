@@ -45,25 +45,25 @@
 
 
 ggnet <- function(net, # an object of class network
-                  mode = "fruchtermanreingold", # placement algorithm
-                  size = 12,                # node size
-                  alpha = .75,              # transparency
-                  weight.method = "none",   # what to weight the nodes with: "freeman", "indegree", "outdegree"
-                  names = c("", ""),        # what to call the node color and node weight legends
-                  node.group = NULL,        # what to color the nodes with
-                  node.color = NULL,        # what colors to use for the node classes
-                  node.alpha = NULL,        # transparency for nodes (inherits from alpha)
-                  segment.alpha = NULL,     # transparency for links (inherits from alpha)
-                  segment.color = "grey",   # default links are rgb(190, 190, 190)
-                  segment.size  = .25,      # set to 0 to remove from plot
-                  arrow.size = 0,           # set to 0 to remove from plot
-                  label.nodes = FALSE,      # add vertex names in small print; can be a list of vertex names
-                  top8.nodes  = FALSE,      # color the top 8 nodes by weighting method with ColorBrewer Set1
-                  trim.labels = TRUE,       # clean vertex names
-                  quantize.weights = FALSE, # break weights to quartiles
-                  subset.threshold = 0,     # what nodes to exclude, based on weight.method ≥ subset
-                  legend.position = "right",# set to "none" to remove from plot
-                  ...)                      # passed to geom_text for node labels
+  mode = "fruchtermanreingold", # placement algorithm
+  size = 12,                # node size
+  alpha = .75,              # transparency
+  weight.method = "none",   # what to weight the nodes with: "freeman", "indegree", "outdegree"
+  names = c("", ""),        # what to call the node color and node weight legends
+  node.group = NULL,        # what to color the nodes with
+  node.color = NULL,        # what colors to use for the node classes
+  node.alpha = NULL,        # transparency for nodes (inherits from alpha)
+  segment.alpha = NULL,     # transparency for links (inherits from alpha)
+  segment.color = "grey",   # default links are rgb(190, 190, 190)
+  segment.size  = .25,      # set to 0 to remove from plot
+  arrow.size = 0,           # set to 0 to remove from plot
+  label.nodes = FALSE,      # add vertex names in small print; can be a list of vertex names
+  top8.nodes  = FALSE,      # color the top 8 nodes by weighting method with ColorBrewer Set1
+  trim.labels = TRUE,       # clean vertex names
+  quantize.weights = FALSE, # break weights to quartiles
+  subset.threshold = 0,     # what nodes to exclude, based on weight.method ≥ subset
+  legend.position = "right",# set to "none" to remove from plot
+  ...)                      # passed to geom_text for node labels
 {
   require(ggplot2)       # plot
   require(grid)          # arrows
@@ -90,7 +90,7 @@ ggnet <- function(net, # an object of class network
   if(subset.threshold > 0)
     network::delete.vertices(net,
                              which(sna::degree(net, 
-                                               cmode = weight) < subset.threshold))
+                                          cmode = weight) < subset.threshold))
   
   # get sociomatrix
   m <- as.matrix.network.adjacency(net)
@@ -190,7 +190,7 @@ ggnet <- function(net, # an object of class network
   }
   
   # default colors
-  n = length(unique(node.group))
+  n = length(na.omit(unique(node.group)))
   if(length(node.color) != n &!is.null(node.group)) {
     warning("Node groups and node colors are of unequal length; using default colors.")
     if(n > 0 & n < 10) node.color = brewer.pal(9, "Set1")[1:n]
