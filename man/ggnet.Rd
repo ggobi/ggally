@@ -15,12 +15,13 @@
 \arguments{
   \item{net}{an object of class \code{igraph} or
   \code{network}. If the object is of class \code{igraph},
-  the \link{intergraph} package is used to convert it to
-  class \code{network}.}
+  the \link[intergraph:asNetwork]{intergraph} package is
+  used to convert it to class \code{network}.}
 
   \item{mode}{a placement method from the list of modes
-  provided in the \link{sna} package. Defaults to the
-  Fruchterman-Reingold force-directed algorithm.}
+  provided in the \link[sna:gplot.layout]{sna} package.
+  Defaults to the Fruchterman-Reingold force-directed
+  algorithm.}
 
   \item{size}{size of the network nodes. Defaults to 12. If
   the nodes are weighted, their area is proportionally
@@ -99,7 +100,9 @@
 }
 \examples{
 # random network
-if(require(ergm)) {
+if(FALSE) {
+  # Nice simple example, but it takes a second to load the package ergm
+  require(ergm)
   rnd = ergm::as.network.numeric(10)
   ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
   # random groups
@@ -119,9 +122,10 @@ ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
 }
 \author{
   Moritz Marbach \email{mmarbach@mail.uni-mannheim.de} and
-  François Briatte \email{f.briatte@ed.ac.uk}
+  Francois Briatte \email{f.briatte@ed.ac.uk}
 }
 \seealso{
-  \code{\link{gplot}} in the \link{sna} package
+  \code{\link[sna]{gplot}} in the \link[sna:gplot]{sna}
+  package
 }
 
