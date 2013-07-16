@@ -31,3 +31,4 @@ Collate:
     'ggpairs.r'
     'ggparcoord.R'
     'ggcorr.R'
+    'ggnet.R'
