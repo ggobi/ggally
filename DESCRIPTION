@@ -24,7 +24,12 @@ Imports:
     plyr (>= 1.8),
     stringr (>= 0.6.2)
 Suggests:
-    scagnostics
+    scagnostics,
+    intergraph (>= 2.0-0),
+    network (>= 1.7.2),
+    RColorBrewer (>= 1.0-5),
+    sna (>= 2.3-1),
+    ergm (>= 3.1-0)
 Collate:
     'find-combo.r'
     'gg-plots.r'
