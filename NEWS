@@ -1,3 +1,21 @@
+GGally 0.4.4
+-----------------
+
+NEW FUNCTION
+
+* `ggnet` has been added to the main functions of GGally.  `ggnet` is a
+  function for making a network plot from an object of class `network` or
+  `igraph`, using ggplot2. To see a quick demo, check out Francois Briatte's
+  github page: https://github.com/briatte/ggnet
+
+DOCUMENTATION
+
+* merged some typo mistakes
+
+BUILD
+
+* Built under the lastest version of R (v3.0.1)
+
 GGally 0.4.3
 -----------------
 
