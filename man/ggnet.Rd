@@ -97,6 +97,8 @@
 \description{
   Function for making a network plot from an object of
   class \code{network} or \code{igraph}, using ggplot2.
+  Please visit \link{http://github.com/briatte/ggnet} for
+  the latest development and descriptions about ggnet.
 }
 \examples{
 # random network

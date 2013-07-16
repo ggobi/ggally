@@ -28,7 +28,9 @@
   Function for making a correlation plot starting from a
   data matrix, using ggplot2. The function is directly
   inspired by Tian Zheng and Yu-Sung Su's arm:corrplot
-  function.
+  function. Please visit
+  \link{http://github.com/briatte/ggcorr} for the latest
+  development and descriptions about ggcorr.
 }
 \examples{
 # Basketball statistics provided by Nathan Yau at Flowing Data.
