@@ -190,8 +190,8 @@ ggnet <- function(net, # an object of class network
   }
   
   # default colors
-  n = length(na.omit(unique(node.group)))
-  if(length(node.color) != n &!is.null(node.group)) {
+  n = length(unique(na.omit(node.group)))
+  if(length(node.color) != n & !is.null(node.group)) {
     warning("Node groups and node colors are of unequal length; using default colors.")
     if(n > 0 & n < 10) node.color = brewer.pal(9, "Set1")[1:n]
   }
@@ -200,11 +200,11 @@ ggnet <- function(net, # an object of class network
   if(!is.null(node.group)) pnet <- pnet + 
     aes(colour = group) +
     scale_colour_manual(names[1], values = node.color,
-                        guide = guide_legend(override.aes = list(size = sqrt(size)))) 
+                        guide = guide_legend(override.aes = list(size = 1 + sqrt(size)))) 
   
   # add text labels
   if(length(unique(plotcord$id)) > 1 | unique(plotcord$id)[1] != "")
-    pnet <- pnet + geom_text(aes(label = id), ...)
+    pnet <- pnet + geom_text(aes(label = id), size = 1 + sqrt(size), ...)
   
   # finalize: remove grid, axes and scales
   pnet <- pnet +
