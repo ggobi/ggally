@@ -27,16 +27,23 @@
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and Francois Briatte \email{f.briatte@@ed.ac.uk}
 #' @importFrom grid arrow
 #' @examples
+#' # make toy random network
+#' x                  <- 10
+#' ndyads             <- x * (x - 1)
+#' density            <- x / ndyads
+#' nw.mat             <- matrix(0, nrow = x, ncol = x)
+#' dimnames(nw.mat)   <- list(1:x, 1:x)
+#' nw.mat[row(nw.mat) != col(nw.mat)] <- runif(ndyads) < density
+#' nw.mat
+#' rnd <- network(nw.mat)
+#' rnd
+#'
 #' # random network
-#' if(FALSE) {
-#'   # Nice simple example, but it takes a second to load the package ergm
-#'   require(ergm)
-#'   rnd = ergm::as.network.numeric(10)
-#'   ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
-#'   # random groups
-#'   cat = LETTERS[rbinom(10, 4, .5)]
-#'   ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = cat)
-#' }
+#' ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
+#'
+#' # random groups
+#' category = LETTERS[rbinom(x, 4, .5)]
+#' ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = category)
 #'
 #' # City and service firms data from the UCIrvine Network Data Repository.
 #' url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
