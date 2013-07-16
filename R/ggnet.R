@@ -25,6 +25,7 @@
 #' @param ... other arguments supplied to geom_text for the node labels. Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link{gplot}} in the \link{sna} package
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and François Briatte \email{f.briatte@@ed.ac.uk}
+#' @importFrom grid arrow
 #' @examples
 #' # random network
 #' if(require(ergm)) {
@@ -68,7 +69,6 @@ ggnet <- function(
   legend.position  = "right",   # set to "none" to remove from plot
   ...                           # passed to geom_text for node labels
 ){
-  require(grid)          # arrows
   require(intergraph)    # igraph conversion
   require(network)       # vertex attributes
   require(RColorBrewer)  # default colors
