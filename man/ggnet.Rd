@@ -72,7 +72,9 @@
   colored with \code{"Set1"}. The rest of the network will
   be plotted as the ninth (grey) group. Experimental.}
 
-  \item{trim.labels}{removes '}
+  \item{trim.labels}{removes '@', 'http://', 'www.' and the
+  ending '/' from vertex names. Cleans up labels for
+  website and Twitter networks. Defaults to \code{TRUE}.}
 
   \item{quantize.weights}{break node weights to quartiles.
   Fails when quartiles do not uniquely identify nodes.}
@@ -97,11 +99,13 @@
 }
 \examples{
 # random network
-rnd = ergm::as.network.numeric(10)
-ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
-# random groups
-cat = LETTERS[rbinom(10, 4, .5)]
-ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = cat)
+if(require(ergm)) {
+  rnd = ergm::as.network.numeric(10)
+  ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
+  # random groups
+  cat = LETTERS[rbinom(10, 4, .5)]
+  ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = cat)
+}
 
 # City and service firms data from the UCIrvine Network Data Repository.
 url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
