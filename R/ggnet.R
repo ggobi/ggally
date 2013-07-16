@@ -28,7 +28,9 @@
 #' @importFrom grid arrow
 #' @examples
 #' # random network
-#' if(require(ergm)) {
+#' if(FALSE) {
+#'   # Nice simple example, but it takes a second to load the package ergm
+#'   require(ergm)
 #'   rnd = ergm::as.network.numeric(10)
 #'   ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
 #'   # random groups
