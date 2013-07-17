@@ -31,6 +31,7 @@ if(getRversion() >= "2.15.1") {
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and Francois Briatte \email{f.briatte@@ed.ac.uk}
 #' @importFrom grid arrow
 #' @examples
+#' require(network)
 #' # make toy random network
 #' x                  <- 10
 #' ndyads             <- x * (x - 1)
