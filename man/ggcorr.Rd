@@ -29,7 +29,7 @@
   data matrix, using ggplot2. The function is directly
   inspired by Tian Zheng and Yu-Sung Su's arm:corrplot
   function. Please visit
-  \link{http://github.com/briatte/ggcorr} for the latest
+  \url{http://github.com/briatte/ggcorr} for the latest
   development and descriptions about ggcorr.
 }
 \examples{

@@ -97,10 +97,11 @@
 \description{
   Function for making a network plot from an object of
   class \code{network} or \code{igraph}, using ggplot2.
-  Please visit \link{http://github.com/briatte/ggnet} for
+  Please visit \url{http://github.com/briatte/ggnet} for
   the latest development and descriptions about ggnet.
 }
 \examples{
+require(network)
 # make toy random network
 x                  <- 10
 ndyads             <- x * (x - 1)
