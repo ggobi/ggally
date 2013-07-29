@@ -22,6 +22,7 @@ Imports:
     grid (>= 3.0.0),
     gtable (>= 0.1.2),
     plyr (>= 1.8),
+    reshape2,
     stringr (>= 0.6.2)
 Suggests:
     scagnostics,
@@ -33,6 +34,9 @@ Collate:
     'find-combo.r'
     'gg-plots.r'
     'ggpairs.r'
-    'ggcorr.r'
-    'ggnet.r'
-    'ggparcoord.r'
+    'ggcorr.R'
+    'ggnet.R'
+    'ggparcoord.R'
+    'ggram.R'
+    'ngram.R'
+    'ngrami.R'
