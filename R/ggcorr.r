@@ -95,5 +95,5 @@ ggcorr <- function(
     coord_equal() +
     po.nopanel
 
-  return(p)
+  p
 }
