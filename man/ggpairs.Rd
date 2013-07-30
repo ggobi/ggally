@@ -70,7 +70,8 @@
 # Feel free to print the ggpair objects created in the examples
 
 data(tips, package="reshape")
-ggpairs(tips[,1:3])
+pm <- ggpairs(tips[,1:3])
+# pm
 pm <- ggpairs(tips)
 # pm
 pm <- ggpairs(tips, upper = "blank")

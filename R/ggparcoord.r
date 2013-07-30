@@ -1,3 +1,7 @@
+if(getRversion() >= "2.15.1") {
+  utils::globalVariables(c("variable", "value"))
+}
+
 ##### KNOWN BUGS #####
 # - It does not currently work to pass groupColumn one of the variables that is being plotted
 #   as an axis

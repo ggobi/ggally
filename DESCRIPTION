@@ -1,32 +1,38 @@
 Package: GGally
-Version: 0.4.3
-Date: 2013-03-11
+Version: 0.4.4
+Date: 2013-07-17
 Maintainer: Barret Schloerke <schloerke@gmail.com>
 License: GPL (>= 2.0)
 Title: Extension to ggplot2.
 Type: Package
 LazyLoad: yes
-Author: Barret Schloerke <schloerke@gmail.com>, Jason
-    Crowley <crowley.jason.s@gmail.com>, Di Cook
-    <dicook@iastate.edu>, Heike Hofmann
-    <hofmann@iastate.edu>, and Hadley Wickham
-    <h.wickham@iastate.edu>
-Description: Package contains templates for different plots
-    to be combined into a plot matrix, as well as a
-    parallel coordinate plot function.
+Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
+    <crowley.jason.s@gmail.com>, Di Cook <dicook@iastate.edu>, Heike Hofmann
+    <hofmann@iastate.edu>, Hadley Wickham <h.wickham@iastate.edu>, and Francois
+    Briatte <f.briatte@ed.ac.uk>, and Moritz Marbach
+    <mmarbach@mail.uni-mannheim.de>
+Description: GGally is designed to be a helper to ggplot2. It contains
+    templates for different plots to be combined into a plot matrix, a parallel
+    coordinate plot function, as well as a function for making a network plot.
 Depends:
-    R (>= 2.14),
-    ggplot2 (>= 0.9.2.1),
+    R (>= 3.0),
+    ggplot2 (>= 0.9.3.1),
     reshape (>= 0.8.4)
 Imports:
-    grid (>= 2.14.0),
-    gtable (>= 0.1.1),
-    plyr (>= 1.7.1),
-    stringr (>= 0.6)
+    grid (>= 3.0.0),
+    gtable (>= 0.1.2),
+    plyr (>= 1.8),
+    stringr (>= 0.6.2)
 Suggests:
-    scagnostics
+    scagnostics,
+    intergraph (>= 2.0-0),
+    network (>= 1.7.2),
+    RColorBrewer (>= 1.0-5),
+    sna (>= 2.3-1)
 Collate:
     'find-combo.r'
     'gg-plots.r'
     'ggpairs.r'
-    'ggparcoord.R'
+    'ggcorr.r'
+    'ggnet.r'
+    'ggparcoord.r'

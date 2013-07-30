@@ -1,3 +1,11 @@
+# add global variable
+agv <- function(...) {
+  if(getRversion() >= "2.15.1") {
+    utils::globalVariables(...)
+  }
+}
+
+
 #' Plots the Scatter Plot
 #'
 #' Make a scatter plot with a given data set.
@@ -94,6 +102,7 @@ ggally_density <- function(data, mapping, ...){
   p
 }
 
+agv("labelp")
 #' Correlation from the Scatter Plot
 #'
 #' Estimate correlation from the given data.
@@ -582,6 +591,7 @@ ggally_denstrip <- function(data,mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
+agv(c("..density..", "..scaled..", "x"))
 #' Plots a density plot with facets or a tile plot with facets
 #'
 #' Make Tile Plot as densely as possible.
@@ -698,6 +708,7 @@ ggally_ratio <- function(data){
   p
 }
 
+agv(c("..scaled..", "x"))
 #' Plots the Density Plots by Using Diagonal
 #'
 #' Plots the density plots by using Diagonal.
@@ -903,7 +914,7 @@ get_x_axis_labels <- function(p, xRange) {
   axisLabs
 }
 
-
+agv(c("x", "y", "lab"))
 #' Internal Axis Labeling Plot for ggpairs
 #'
 #' This function is used when \code{axisLabels == "internal"}.
@@ -1051,6 +1062,8 @@ ggally_facetbar <- function(data, mapping, ...){
   p
 }
 
+
+agv(c("x", "y", "result", "freq"))
 #' Fluctuation plot
 #'
 #' Create a fluctuation plot.
@@ -1161,6 +1174,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   p
 }
 
+agv(c("X", "Y"))
 #' Blank
 #'
 #' Draws nothing.
@@ -1177,25 +1191,25 @@ ggally_blank <- function(...){
 
   p <- ggplot(data = a, aes(x = X, y = Y)) + geom_point( colour = "transparent") +
     theme(
-      axis.line = element_blank(),
-      axis.text.x = element_blank(),
-      axis.text.y = element_blank(),
-      axis.ticks = element_blank(),
-      axis.title.x = element_blank(),
-      axis.title.y = element_blank(),
+      axis.line         = element_blank(),
+      axis.text.x       = element_blank(),
+      axis.text.y       = element_blank(),
+      axis.ticks        = element_blank(),
+      axis.title.x      = element_blank(),
+      axis.title.y      = element_blank(),
       legend.background = element_blank(),
-      legend.key = element_blank(),
-      legend.text = element_blank(),
-      legend.title = element_blank(),
-      panel.background = element_blank(),
-      panel.border = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      plot.background = element_blank(),
-      plot.title = element_blank(),
-      strip.background = element_blank(),
-      strip.text.x = element_blank(),
-      strip.text.y = element_blank()
+      legend.key        = element_blank(),
+      legend.text       = element_blank(),
+      legend.title      = element_blank(),
+      panel.background  = element_blank(),
+      panel.border      = element_blank(),
+      panel.grid.major  = element_blank(),
+      panel.grid.minor  = element_blank(),
+      plot.background   = element_blank(),
+      plot.title        = element_blank(),
+      strip.background  = element_blank(),
+      strip.text.x      = element_blank(),
+      strip.text.y      = element_blank()
     )
   p$subType <- p$type <- "blank"
   p
