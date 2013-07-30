@@ -25,7 +25,7 @@
   quintiles of correlation coefficients.}
 
   \item{geom}{the geom object to use. Accepts either
-  \code{tile} (the default) or \code{circle}, to plot
+  \code{tile} (the default) or \code{point}, to plot
   proportionally scaled circles.}
 
   \item{max_size}{the maximum size for circles, as passed
@@ -41,7 +41,7 @@
   data matrix, using ggplot2. The function is directly
   inspired by Tian Zheng and Yu-Sung Su's arm::corrplot
   function. Please visit
-  \link{http://github.com/briatte/ggcorr} for the latest
+  \url{http://github.com/briatte/ggcorr} for the latest
   development and descriptions about ggcorr.
 }
 \examples{
@@ -52,18 +52,18 @@ ggcorr(nba[-1])
 # Custom options.
 ggcorr(
   nba[-1],
-  geom = "circle",
+  geom     = "point",
   max_size = 6,
-  size = 3,
-  hjust = 0.75,
-  angle = -45,
-  palette = "PuOr" # colorblind safe, photocopy-able
+  size     = 3,
+  hjust    = 0.75,
+  angle    = -45,
+  palette  = "PuOr" # colorblind safe, photocopy-able
 ) + labs(title = "Points Per Game")
 }
 \author{
   Francois Briatte \email{f.briatte@ed.ac.uk}
 }
 \seealso{
-  \code{\link{cor}} and \code{\link[arm]{corrplot}}
+  \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
 }
 
