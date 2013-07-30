@@ -5,7 +5,7 @@ if(getRversion() >= "2.15.1") {
 
 #' ggcorr - Plot a correlation matrix with ggplot2
 #'
-#' Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \link{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
+#' Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \url{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
 #'
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
@@ -15,7 +15,7 @@ if(getRversion() >= "2.15.1") {
 #' @param geom the geom object to use. Accepts either \code{tile} (the default) or \code{point}, to plot proportionally scaled circles.
 #' @param max_size the maximum size for circles, as passed to \code{scale_size_area} for proportional scaling. Defaults to \code{6}.
 #' @param ... other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
-#' @seealso \code{\link{cor}} and \code{\link[arm]{corrplot}}
+#' @seealso \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
 #' @author Francois Briatte \email{f.briatte@@ed.ac.uk}
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -69,7 +69,7 @@ ggcorr <- function(data, method = "pairwise", palette = "RdYlGn", name = "Correl
       geom_tile(aes(fill = value), colour = "white")
   }
 
-  p = p  +
+  p = p +
     geom_text(data = diag, aes(label = variable), ...) +
     scale_x_discrete(breaks = NULL) +
     scale_y_discrete(breaks = NULL) +
