@@ -70,10 +70,10 @@ ggcorr <- function(
     axis.text.x      = element_text(angle = -90)
   ))
 
-  p = ggplot(M, aes(row, variable))
+  p <- ggplot(M, aes(row, variable))
 
-    p = p +
   if (identical(geom, "point")) {
+    p <- p +
       scale_colour_brewer(name, palette = palette) +
       scale_size_area(
         name,
@@ -81,13 +81,13 @@ ggcorr <- function(
         labels   = levels(M$value)[table(M$value) > 0]
       ) +
       geom_point(aes(size = num, colour = value))
-    p = p +
   } else {
+    p <- p +
       scale_fill_brewer(name, palette = palette) +
       geom_tile(aes(fill = value), colour = "white")
   }
 
-  p = p +
+  p <- p +
     geom_text(data = diag, aes(label = variable), ...) +
     scale_x_discrete(breaks = NULL) +
     scale_y_discrete(breaks = NULL) +
