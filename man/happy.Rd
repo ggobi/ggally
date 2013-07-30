@@ -26,5 +26,8 @@
     \item wtsall. probability weight. 0.43--6.43.
     }
 }
+\references{
+	Smith, Tom W., Peter V. Marsden, Michael Hout, Jibum Kim. \emph{General Social Surveys, 1972-2006}.[machine-readable data file]. Principal Investigator, Tom W. Smith; Co-Principal Investigators, Peter V. Marsden and Michael Hout, NORC ed. Chicago: National Opinion Research Center, producer, 2005; Storrs, CT: The Roper Center for Public Opinion Research, University of Connecticut, distributor. 1 data file (57,061 logical records) and 1 codebook (3,422 pp).
+}
 \keyword{datasets}
 
