@@ -25,46 +25,64 @@ if(getRversion() >= "2.15.1") {
 #' # Custom options.
 #' ggcorr(
 #'   nba[-1],
-#'   geom = "point",
+#'   geom     = "point",
 #'   max_size = 6,
-#'   size = 3,
-#'   hjust = 0.75,
-#'   angle = -45,
-#'   palette = "PuOr" # colorblind safe, photocopy-able
+#'   size     = 3,
+#'   hjust    = 0.75,
+#'   angle    = -45,
+#'   palette  = "PuOr" # colorblind safe, photocopy-able
 #' ) + labs(title = "Points Per Game")
-ggcorr <- function(data, method = "pairwise", palette = "RdYlGn", name = "Correlation\ncoefficient", geom = "tile", max_size = 6, ...) {
+ggcorr <- function(
+  data,
+  method   = "pairwise",
+  palette  = "RdYlGn",
+  name     = "Correlation\ncoefficient",
+  geom     = "tile",
+  max_size = 6,
+  ...
+) {
 
   M <- cor(data[1:ncol(data)], use = method)
   M <- M * lower.tri(M)
   M <- as.data.frame(M)
   M <- data.frame(row = names(data), M)
   M <- melt(M, id.vars = "row")
+
   M$value[M$value == 0] <- NA
+
   s <- seq(-1, 1, by = .25)
-  M$value <- cut(M$value, breaks = s, include.lowest = TRUE,
-                 label = cut(s, breaks = s)[-1])
+  M$value <- cut(
+    M$value,
+    breaks         = s,
+    include.lowest = TRUE,
+    label          = cut(s, breaks = s)[-1]
+  )
+
   M$row = factor(M$row, levels = (unique(as.character(M$variable))))
   M$num = as.numeric(M$value)
+
   diag <- subset(M, row == variable)
 
   po.nopanel <- list(theme(
     panel.background = element_blank(),
     panel.grid.minor = element_blank(),
     panel.grid.major = element_blank(),
-    axis.text.x = element_text(angle = -90))
-  )
+    axis.text.x      = element_text(angle = -90)
+  ))
 
   p = ggplot(M, aes(row, variable))
 
-  if(geom == "point") {
     p = p +
+  if (identical(geom, "point")) {
       scale_colour_brewer(name, palette = palette) +
-      scale_size_area(name, max_size= max_size,
-                      labels = levels(M$value)[table(M$value) > 0]) +
+      scale_size_area(
+        name,
+        max_size = max_size,
+        labels   = levels(M$value)[table(M$value) > 0]
+      ) +
       geom_point(aes(size = num, colour = value))
-  }
-  else {
     p = p +
+  } else {
       scale_fill_brewer(name, palette = palette) +
       geom_tile(aes(fill = value), colour = "white")
   }
