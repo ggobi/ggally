@@ -86,7 +86,7 @@ ggsurv <- function(
   main       = ''
 ){
 
-  library(ggplot2)
+  require(ggplot2)
 
   strata <- ifelse(is.null(s$strata) ==T, 1, length(s$strata))
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)
