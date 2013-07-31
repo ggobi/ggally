@@ -107,7 +107,7 @@ ggsurv <- function(
   pl
 }
 
-
+# survival function for single survival
 ggsurv_s <- function(
   s,
   CI         = 'def',
@@ -165,6 +165,7 @@ ggsurv_s <- function(
   pl
 }
 
+# survival function for multiple survivals
 ggsurv_m <- function(
   s,
   CI         = 'def',
