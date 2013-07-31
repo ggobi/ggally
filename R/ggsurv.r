@@ -1,3 +1,7 @@
+if(getRversion() >= "2.15.1") {
+  utils::globalVariables(c("cens", "surv", "up", "low"))
+}
+
 #' Plot \code{survfit} objects using \code{ggplot2}
 #'
 #' This function produces Kaplan-Meier plots using \code{ggplot2}.
@@ -26,15 +30,17 @@
 #' @param main the plot label.
 #' @return An object of class \code{ggplot}
 #' @author Edwin Thoen <edwinthoen@@gmail.com>
+#' @importFrom stringr str_c
 #' @examples
 #'
-#' library(survival); data(lung)
+#' require(survival); data(lung)
 #' sf.lung <- survfit(Surv(time, status) ~ 1, data = lung)
 #' ggsurv(sf.lung)
 #'
 #' # Multiple strata examples
 #' sf.sex <- survfit(Surv(time, status) ~ sex, data = lung)
-#' (pl.sex <- ggsurv(sf.sex))
+#' pl.sex <- ggsurv(sf.sex)
+#' pl.sex
 #'
 #' # Adjusting the legend of the ggsurv fit
 #' pl.sex +
@@ -48,13 +54,14 @@
 #' # We can still adjust the plot after fitting
 #' data(kidney)
 #' sf.kid <- survfit(Surv(time, status) ~ disease, data = kidney)
-#' (pl.kid <- ggsurv(sf.kid, plot.cens = FALSE))
+#' pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
+#' pl.kid
 #'
 #' # Zoom in to first 80 days
-#' (pl.kid <-  pl.kid + xlim(c(0, 80)) + ylim(c(0.45, 1)))
+#' pl.kid + coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 #'
 #' # Add the diseases names to the plot and remove legend
-#' col <- scales::hue_pal(
+#' col <- hue_pal(
 #'   h         = c(0, 360) + 15,
 #'   c         = 100,
 #'   l         = 65,
@@ -86,7 +93,11 @@ ggsurv <- function(
   main       = ''
 ){
 
-  require(ggplot2)
+  for (pkg in c("survival", "scales")) {
+    if (! require(pkg, character.only = TRUE)) {
+      stop(str_c("please install the package '", pkg, "'.  install.packages('", pkg, "') "))
+    }
+  }
 
   strata <- ifelse(is.null(s$strata) == TRUE, 1, length(s$strata))
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)
@@ -102,7 +113,7 @@ ggsurv <- function(
     s, CI , plot.cens, surv.col,
     cens.col, lty.est, lty.ci,
     cens.shape, back.white, xlab,
-    ylab, main
+    ylab, main, strata
   )
   pl
 }
@@ -120,7 +131,8 @@ ggsurv_s <- function(
   back.white = FALSE,
   xlab       = 'Time',
   ylab       = 'Survival',
-  main       = ''
+  main       = '',
+  strata     = 1
 ){
 
   dat <- data.frame(
@@ -178,7 +190,8 @@ ggsurv_m <- function(
   back.white = FALSE,
   xlab       = 'Time',
   ylab       = 'Survival',
-  main       = ''
+  main       = '',
+  strata     = length(s$strata)
 ) {
   n <- s$strata
 

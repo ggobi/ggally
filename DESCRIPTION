@@ -25,11 +25,13 @@ Imports:
     plyr (>= 1.8),
     stringr (>= 0.6.2)
 Suggests:
-    scagnostics,
     intergraph (>= 2.0-0),
     network (>= 1.7.2),
     RColorBrewer (>= 1.0-5),
-    sna (>= 2.3-1)
+    scales (>= 0.2.3),
+    scagnostics (>= 0.2-4),
+    sna (>= 2.3-1),
+    survival (>= 2.37-4)
 Collate:
     'find-combo.r'
     'gg-plots.r'
@@ -38,3 +40,4 @@ Collate:
     'ggnet.r'
     'ggparcoord.r'
     'data-happy.r'
+    'ggsurv.r'

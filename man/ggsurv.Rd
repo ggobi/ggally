@@ -1,0 +1,106 @@
+\name{ggsurv}
+\alias{ggsurv}
+\title{Plot \code{survfit} objects using \code{ggplot2}}
+\usage{
+  ggsurv(s, CI = "def", plot.cens = TRUE,
+    surv.col = "gg.def", cens.col = "red", lty.est = 1,
+    lty.ci = 2, cens.shape = 3, back.white = FALSE,
+    xlab = "Time", ylab = "Survival", main = "")
+}
+\arguments{
+  \item{s}{an object of class \code{survfit}}
+
+  \item{CI}{should a confidence interval be plotted?
+  Defaults to \code{TRUE} for single stratum objects and
+  \code{FALSE} for multiple strata objects.}
+
+  \item{plot.cens}{mark the censored observations?}
+
+  \item{surv.col}{colour of the survival estimate. Defaults
+  to black for one stratum, and to the default
+  \code{ggplot2} colours for multiple strata. Length of
+  vector with colour names should be either 1 or equal to
+  the number of strata.}
+
+  \item{cens.col}{colour of the points that mark censored
+  observations.}
+
+  \item{lty.est}{linetype of the survival curve(s). Vector
+  length should be either 1 or equal to the number of
+  strata.}
+
+  \item{lty.ci}{linetype of the bounds that mark the 95%
+  CI.}
+
+  \item{cens.shape}{shape of the points that mark censored
+  observations.}
+
+  \item{back.white}{if TRUE the background will not be the
+  default grey of \code{ggplot2} but will be white with
+  borders around the plot.}
+
+  \item{xlab}{the label of the x-axis.}
+
+  \item{ylab}{the label of the y-axis.}
+
+  \item{main}{the plot label.}
+}
+\value{
+  An object of class \code{ggplot}
+}
+\description{
+  This function produces Kaplan-Meier plots using
+  \code{ggplot2}. As a first argument it needs a
+  \code{survfit} object, created by the \code{survival}
+  package. Default settings differ for single stratum and
+  multiple strata objects.
+}
+\examples{
+require(survival); data(lung)
+sf.lung <- survfit(Surv(time, status) ~ 1, data = lung)
+ggsurv(sf.lung)
+
+# Multiple strata examples
+sf.sex <- survfit(Surv(time, status) ~ sex, data = lung)
+(pl.sex <- ggsurv(sf.sex))
+
+# Adjusting the legend of the ggsurv fit
+pl.sex +
+  guides(linetype = FALSE) +
+  scale_colour_discrete(
+    name   = 'Sex',
+    breaks = c(1,2),
+    labels = c('Male', 'Female')
+  )
+
+# We can still adjust the plot after fitting
+data(kidney)
+sf.kid <- survfit(Surv(time, status) ~ disease, data = kidney)
+(pl.kid <- ggsurv(sf.kid, plot.cens = FALSE))
+
+# Zoom in to first 80 days
+(pl.kid <-  pl.kid + xlim(c(0, 80)) + ylim(c(0.45, 1)))
+
+# Add the diseases names to the plot and remove legend
+col <- hue_pal(
+  h         = c(0, 360) + 15,
+  c         = 100,
+  l         = 65,
+  h.start   = 0,
+  direction = 1
+)(4)
+pl.kid +
+  annotate(
+    "text",
+    label  = c('AN', 'GN', 'Other', 'PKD'),
+    x      = c(50, 20, 50, 71),
+    y      = c(0.47, 0.55, 0.67, 0.8),
+    size   = 5,
+    colour = col
+  ) +
+  guides(color = FALSE, linetype = FALSE)
+}
+\author{
+  Edwin Thoen <edwinthoen@gmail.com>
+}
+
