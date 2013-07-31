@@ -81,7 +81,8 @@ pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
 pl.kid
 
 # Zoom in to first 80 days
-pl.kid + coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
+pl.kid <- pl.kid + coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
+pl.kid
 
 # Add the diseases names to the plot and remove legend
 col <- hue_pal(
