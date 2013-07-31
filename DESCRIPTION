@@ -6,6 +6,7 @@ License: GPL (>= 2.0)
 Title: Extension to ggplot2.
 Type: Package
 LazyLoad: yes
+LazyData: true
 Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
     <crowley.jason.s@gmail.com>, Di Cook <dicook@iastate.edu>, Heike Hofmann
     <hofmann@iastate.edu>, Hadley Wickham <h.wickham@iastate.edu>, and Francois
