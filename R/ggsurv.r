@@ -5,6 +5,7 @@
 #' \code{survival} package. Default settings differ for single stratum and
 #' multiple strata objects.
 #'
+#' @export
 #' @param s an object of class \code{survfit}
 #' @param CI should a confidence interval be plotted? Defaults to \code{TRUE}
 #'    for single stratum objects and \code{FALSE} for multiple strata objects.
@@ -23,11 +24,7 @@
 #' @param xlab the label of the x-axis.
 #' @param ylab the label of the y-axis.
 #' @param main the plot label.
-#'
-#' @export
-#'
 #' @return An object of class \code{ggplot}
-#'
 #' @author Edwin Thoen <edwinthoen@@gmail.com>
 #' @examples
 #'
