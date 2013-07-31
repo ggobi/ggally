@@ -7,19 +7,19 @@
 #'
 #' @param s an object of class \code{survfit}
 #' @param CI should a confidence interval be plotted? Defaults to \code{TRUE}
-#' for single stratum objects and \code{FALSE} for multiple strata objects.
+#'    for single stratum objects and \code{FALSE} for multiple strata objects.
 #' @param plot.cens mark the censored observations?
 #' @param surv.col colour of the survival estimate. Defaults to black for
-#' one stratum, and to the default \code{ggplot2} colours for multiple
-#' strata. Length of vector with colour names should be either 1 or equal
-#' to the number of strata.
+#'    one stratum, and to the default \code{ggplot2} colours for multiple
+#'    strata. Length of vector with colour names should be either 1 or equal
+#'    to the number of strata.
 #' @param cens.col colour of the points that mark censored observations.
 #' @param lty.est linetype of the survival curve(s). Vector length should be
-#' either 1 or equal to the number of strata.
+#'    either 1 or equal to the number of strata.
 #' @param lty.ci linetype of the bounds that mark the 95% CI.
 #' @param cens.shape shape of the points that mark censored observations.
 #' @param back.white if TRUE the background will not be the default
-#' grey of \code{ggplot2} but will be white with borders around the plot.
+#'    grey of \code{ggplot2} but will be white with borders around the plot.
 #' @param xlab the label of the x-axis.
 #' @param ylab the label of the y-axis.
 #' @param main the plot label.
