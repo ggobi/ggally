@@ -32,7 +32,7 @@
 #' sf.lung <- survfit(Surv(time, status) ~ 1, data = lung)
 #' ggsurv(sf.lung)
 #'
-# Multiple strata examples
+#' # Multiple strata examples
 #' sf.sex <- survfit(Surv(time, status) ~ sex, data = lung)
 #' (pl.sex <- ggsurv(sf.sex))
 #' # Adjusting the legend of the ggsurv fit
