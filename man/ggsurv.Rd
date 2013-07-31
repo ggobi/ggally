@@ -62,7 +62,8 @@ ggsurv(sf.lung)
 
 # Multiple strata examples
 sf.sex <- survfit(Surv(time, status) ~ sex, data = lung)
-(pl.sex <- ggsurv(sf.sex))
+pl.sex <- ggsurv(sf.sex)
+pl.sex
 
 # Adjusting the legend of the ggsurv fit
 pl.sex +
@@ -76,10 +77,11 @@ pl.sex +
 # We can still adjust the plot after fitting
 data(kidney)
 sf.kid <- survfit(Surv(time, status) ~ disease, data = kidney)
-(pl.kid <- ggsurv(sf.kid, plot.cens = FALSE))
+pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
+pl.kid
 
 # Zoom in to first 80 days
-(pl.kid <-  pl.kid + xlim(c(0, 80)) + ylim(c(0.45, 1)))
+pl.kid + coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 
 # Add the diseases names to the plot and remove legend
 col <- hue_pal(
@@ -101,6 +103,6 @@ pl.kid +
   guides(color = FALSE, linetype = FALSE)
 }
 \author{
-  Edwin Thoen <edwinthoen@gmail.com>
+  Edwin Thoen \email{edwinthoen@gmail.com}
 }
 
