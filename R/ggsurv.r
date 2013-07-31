@@ -93,9 +93,9 @@ ggsurv <- function(
   stopifnot(length(lty.est) == 1 | length(lty.est) == strata)
 
   if(strata == 1) {
-    fn <- ggsurv.s
+    fn <- ggsurv_s
   } else {
-    fn <- ggsurv.m
+    fn <- ggsurv_m
   }
 
   pl <- fn(
@@ -108,7 +108,7 @@ ggsurv <- function(
 }
 
 
-ggsurv.s <- function(s, CI = 'def', plot.cens = T, surv.col = 'gg.def',
+ggsurv_s <- function(s, CI = 'def', plot.cens = T, surv.col = 'gg.def',
                      cens.col = 'red', lty.est = 1, lty.ci = 2,
                      cens.shape = 3, back.white = F, xlab = 'Time',
                      ylab = 'Survival', main = ''){
@@ -143,7 +143,7 @@ ggsurv.s <- function(s, CI = 'def', plot.cens = T, surv.col = 'gg.def',
   pl
 }
 
-ggsurv.m <- function(s, CI = 'def', plot.cens = T, surv.col = 'gg.def',
+ggsurv_m <- function(s, CI = 'def', plot.cens = T, surv.col = 'gg.def',
                      cens.col = 'red', lty.est = 1, lty.ci = 2,
                      cens.shape = 3, back.white = F, xlab = 'Time',
                      ylab = 'Survival', main = '') {
