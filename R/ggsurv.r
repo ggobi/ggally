@@ -35,9 +35,15 @@
 #' # Multiple strata examples
 #' sf.sex <- survfit(Surv(time, status) ~ sex, data = lung)
 #' (pl.sex <- ggsurv(sf.sex))
+#'
 #' # Adjusting the legend of the ggsurv fit
-#' pl.sex + guides(linetype = F) + scale_colour_discrete(
-#'   name = 'Sex', breaks = c(1,2), labels=c('Male', 'Female'))
+#' pl.sex +
+#'   guides(linetype = F) +
+#'   scale_colour_discrete(
+#'     name   = 'Sex',
+#'     breaks = c(1,2),
+#'     labels = c('Male', 'Female')
+#'   )
 #'
 #' # We can still adjust the plot after fitting
 #' data(kidney)
@@ -48,12 +54,23 @@
 #' (pl.kid <-  pl.kid + xlim(c(0, 80)) + ylim(c(0.45, 1)))
 #'
 #' # Add the diseases names to the plot and remove legend
-#' col <- scales::hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0,
-#'                        direction = 1)(4)
-#' pl.kid + annotate("text", label = c('AN', 'GN', 'Other', 'PKD'),
-#'                   x = c(50, 20, 50, 71), y = c(.47, .55, .67, .8), size = 5, colour = col) +
+#' col <- scales::hue_pal(
+#'   h         = c(0, 360) + 15,
+#'   c         = 100,
+#'   l         = 65,
+#'   h.start   = 0,
+#'   direction = 1
+#' )(4)
+#' pl.kid +
+#'   annotate(
+#'     "text",
+#'     label  = c('AN', 'GN', 'Other', 'PKD'),
+#'     x      = c(50, 20, 50, 71),
+#'     y      = c(0.47, 0.55, 0.67, 0.8),
+#'     size   = 5,
+#'     colour = col
+#'   ) +
 #'   guides(color = F, linetype = F)
-
 ggsurv <- function(s, CI = 'def', plot.cens = T, surv.col = 'gg.def',
                    cens.col = 'red', lty.est = 1, lty.ci = 2,
                    cens.shape = 3, back.white = F, xlab = 'Time',
