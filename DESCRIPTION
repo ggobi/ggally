@@ -10,8 +10,8 @@ LazyData: true
 Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
     <crowley.jason.s@gmail.com>, Di Cook <dicook@iastate.edu>, Heike Hofmann
     <hofmann@iastate.edu>, Hadley Wickham <h.wickham@iastate.edu>, and Francois
-    Briatte <f.briatte@ed.ac.uk>, and Moritz Marbach
-    <mmarbach@mail.uni-mannheim.de>
+    Briatte <f.briatte@ed.ac.uk>, Moritz Marbach
+    <mmarbach@mail.uni-mannheim.de>, and Edwin Thoen <edwinthoen@@gmail.com>
 Description: GGally is designed to be a helper to ggplot2. It contains
     templates for different plots to be combined into a plot matrix, a parallel
     coordinate plot function, as well as a function for making a network plot.

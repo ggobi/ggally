@@ -29,7 +29,7 @@ if(getRversion() >= "2.15.1") {
 #' @param ylab the label of the y-axis.
 #' @param main the plot label.
 #' @return An object of class \code{ggplot}
-#' @author Edwin Thoen <edwinthoen@@gmail.com>
+#' @author Edwin Thoen \email{edwinthoen@@gmail.com}
 #' @importFrom stringr str_c
 #' @examples
 #'
