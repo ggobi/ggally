@@ -38,7 +38,7 @@
 #'
 #' # Adjusting the legend of the ggsurv fit
 #' pl.sex +
-#'   guides(linetype = F) +
+#'   guides(linetype = FALSE) +
 #'   scale_colour_discrete(
 #'     name   = 'Sex',
 #'     breaks = c(1,2),
@@ -48,7 +48,7 @@
 #' # We can still adjust the plot after fitting
 #' data(kidney)
 #' sf.kid <- survfit(Surv(time, status) ~ disease, data = kidney)
-#' (pl.kid <- ggsurv(sf.kid, plot.cens = F))
+#' (pl.kid <- ggsurv(sf.kid, plot.cens = FALSE))
 #'
 #' # Zoom in to first 80 days
 #' (pl.kid <-  pl.kid + xlim(c(0, 80)) + ylim(c(0.45, 1)))
@@ -70,17 +70,17 @@
 #'     size   = 5,
 #'     colour = col
 #'   ) +
-#'   guides(color = F, linetype = F)
+#'   guides(color = FALSE, linetype = FALSE)
 ggsurv <- function(
   s,
   CI         = 'def',
-  plot.cens  = T,
+  plot.cens  = TRUE,
   surv.col   = 'gg.def',
   cens.col   = 'red',
   lty.est    = 1,
   lty.ci     = 2,
   cens.shape = 3,
-  back.white = F,
+  back.white = FALSE,
   xlab       = 'Time',
   ylab       = 'Survival',
   main       = ''
@@ -88,7 +88,7 @@ ggsurv <- function(
 
   require(ggplot2)
 
-  strata <- ifelse(is.null(s$strata) ==T, 1, length(s$strata))
+  strata <- ifelse(is.null(s$strata) == TRUE, 1, length(s$strata))
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)
   stopifnot(length(lty.est) == 1 | length(lty.est) == strata)
 
