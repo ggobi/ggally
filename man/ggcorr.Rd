@@ -3,8 +3,9 @@
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
   ggcorr(data, method = "pairwise", palette = "RdYlGn",
-    name = "Correlation\ncoefficient", geom = "tile",
-    max_size = 6, ...)
+    name = "rho", geom = "tile", max_size = 6,
+    label = FALSE, label_alpha = FALSE,
+    label_color = "black", label_round = 1, ...)
 }
 \arguments{
   \item{data}{a data matrix. Should contain numerical
@@ -32,6 +33,20 @@
   to \code{scale_size_area} for proportional scaling.
   Defaults to \code{6}.}
 
+  \item{label}{whether to add correlation coefficients as
+  two-digit numbers over the plot. Defaults to
+  \code{FALSE}.}
+
+  \item{label_alpha}{whether to make the correlation
+  coefficients transparent as they come close to 0.
+  Defaults to \code{FALSE}.}
+
+  \item{label_color}{color for the correlation
+  coefficients. Defaults to \code{"black"}.}
+
+  \item{label_round}{decimal rounding of the correlation
+  coefficients. Defaults to \code{1}.}
+
   \item{...}{other arguments supplied to geom_text for the
   diagonal labels.  Arguments pertaining to the title or
   other items can be achieved through ggplot2 methods.}
@@ -48,10 +63,16 @@
 # Basketball statistics provided by Nathan Yau at Flowing Data.
 nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
 # Default output.
-ggcorr(nba[-1])
+ggcorr(nba[, -1])
+# Labelled output, with coefficient transparency.
+ggcorr(nba[, -1],
+       label = TRUE,
+       label_alpha = TRUE,
+       name = "") +
+  theme(legend.position = "bottom")
 # Custom options.
 ggcorr(
-  nba[-1],
+  nba[, -1],
   geom = "circle",
   max_size = 6,
   size = 3,
