@@ -2,15 +2,16 @@
 \alias{ggnet}
 \title{ggnet - Plot a network with ggplot2}
 \usage{
-  ggnet(net, mode = "fruchtermanreingold", size = 12,
-    alpha = 0.75, weight.method = "none",
-    names = c("", ""), node.group = NULL,
-    node.color = NULL, node.alpha = NULL,
-    segment.alpha = NULL, segment.color = "grey",
-    segment.size = 0.25, arrow.size = 0,
-    label.nodes = FALSE, top8.nodes = FALSE,
-    trim.labels = TRUE, quantize.weights = FALSE,
-    subset.threshold = 0, legend.position = "right", ...)
+  ggnet(net, mode = "fruchtermanreingold",
+    layout.par = NULL, size = 12, alpha = 0.75,
+    weight.method = "none", names = c("", ""),
+    node.group = NULL, node.color = NULL,
+    node.alpha = NULL, segment.alpha = NULL,
+    segment.color = "grey", segment.size = 0.25,
+    arrow.size = 0, label.nodes = FALSE,
+    top8.nodes = FALSE, trim.labels = TRUE,
+    quantize.weights = FALSE, subset.threshold = 0,
+    legend.position = "right", ...)
 }
 \arguments{
   \item{net}{an object of class \code{igraph} or
@@ -22,6 +23,9 @@
   provided in the \link[sna:gplot.layout]{sna} package.
   Defaults to the Fruchterman-Reingold force-directed
   algorithm.}
+
+  \item{layout.par}{options to the placement method, as
+  listed in \link[sna]{gplot.layout}.}
 
   \item{size}{size of the network nodes. Defaults to 12. If
   the nodes are weighted, their area is proportionally
@@ -58,16 +62,16 @@
   \item{segment.color}{color of the vertex links. Defaults
   to \code{"grey"}.}
 
-  \item{segment.size}{size of the vertex links. Defaults to
-  0.25.}
+  \item{segment.size}{size of the vertex links, as a vector
+  of values or as a single value. Defaults to 0.25.}
 
   \item{arrow.size}{size of the vertex arrows for directed
-  network plotting. Defaults to 0.}
+  network plotting, in centimeters. Defaults to 0.}
 
-  \item{label.nodes}{label nodes with their vertex
-  attributes. If set to \code{TRUE}, all nodes are
-  labelled. Also accepts a vector of character strings to
-  match with vertex names.}
+  \item{label.nodes}{label nodes with their vertex names
+  attribute. If set to \code{TRUE}, all nodes are labelled.
+  Also accepts a vector of character strings to match with
+  vertex names.}
 
   \item{top8.nodes}{use the top 8 nodes as node groups,
   colored with \code{"Set1"}. The rest of the network will
@@ -100,6 +104,13 @@
   Please visit \url{http://github.com/briatte/ggnet} for
   the latest development and descriptions about ggnet.
 }
+\details{
+  The \code{weight.method} argument produces visually
+  scaled nodes that are proportionally sized to their
+  unweighted degree. To compute weighted centrality or
+  degree measures, see Tore Opsahl's \code[tnet]{tnet}
+  package.
+}
 \examples{
 require(network)
 # make toy random network
@@ -120,10 +131,11 @@ ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
 category = LETTERS[rbinom(x, 4, .5)]
 ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = category)
 
-# City and service firms data from the UCIrvine Network Data Repository.
+# city and service firms data from the UCIrvine Network Data Repository
 url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
 print(load(url))
 close(url)
+
 # plot cities, firms and law firms
 type = network::get.vertex.attribute(cities, "type")
 type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
