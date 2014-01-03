@@ -1,3 +1,17 @@
+GGally 0.4.5
+-------------------------
+
+CRAN
+
+* updated to fix reshape imports in NAMESPACE
+
+* updated to add import for package depends 'ggplot2' and 'reshape'
+
+* updated to add import for package depends 'ggplot2' and 'reshape'
+
+
+
+
 GGally 0.4.4
 -----------------
 
