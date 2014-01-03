@@ -17,8 +17,8 @@
 }
 \examples{
 data(tips, package="reshape")
- ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
- ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
+ ggally_facethist(tips, mapping = aes(x = tip, y = sex))
+ ggally_facethist(tips, mapping = aes_string(x = "tip", y = "sex"), binwidth = 0.1)
 }
 \author{
   Barret Schloerke \email{schloerke@gmail.com}

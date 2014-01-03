@@ -16,15 +16,15 @@
 }
 \examples{
 data(tips, package="reshape")
- ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
- ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
+ ggally_dot(tips, mapping = aes(x = total_bill, y = sex))
+ ggally_dot(tips, mapping = aes_string(x = "total_bill", y = "sex"))
  ggally_dot(
    tips,
-   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+   mapping = aes_string(y = "total_bill", x = "sex", color = "sex")
  )
  ggally_dot(
    tips,
-   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
+   mapping = aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
  ) + scale_shape(solid=FALSE)
 }
 \author{

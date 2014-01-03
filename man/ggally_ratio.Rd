@@ -14,7 +14,6 @@
   Must send only two discrete columns in the data set.
 }
 \examples{
-library(ggplot2)
 data(movies)
 ggally_ratio(movies[,c("mpaa","Action")])
 ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()

@@ -22,15 +22,15 @@
 }
 \examples{
 data(tips, package="reshape")
- ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
- ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+ ggally_density(tips, mapping = aes(x = total_bill, y = tip))
+ ggally_density(tips, mapping = aes_string(x = "total_bill", y = "tip"))
  ggally_density(
    tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+   mapping = aes_string(x = "total_bill", y = "tip", fill = "..level..")
  )
  ggally_density(
    tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+   mapping = aes_string(x = "total_bill", y = "tip", fill = "..level..")
  ) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
 }
 \author{

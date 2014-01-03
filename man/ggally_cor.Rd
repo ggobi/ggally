@@ -19,14 +19,14 @@
 }
 \examples{
 data(tips, package="reshape")
- ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+ ggally_cor(tips, mapping = aes_string(x = "total_bill", y = "tip"))
  ggally_cor(
    tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red")
+   mapping = aes_string(x = "total_bill", y = "tip", size = 15, colour = "red")
  )
  ggally_cor(
    tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+   mapping = aes_string(x = "total_bill", y = "tip", color = "sex"),
    size = 5
  )
 }

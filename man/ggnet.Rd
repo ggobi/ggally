@@ -114,7 +114,8 @@ rnd <- network(nw.mat)
 rnd
 
 # random network
-ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
+pRnd <- ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
+# pRnd
 
 # random groups
 category = LETTERS[rbinom(x, 4, .5)]
@@ -127,8 +128,9 @@ close(url)
 # plot cities, firms and law firms
 type = network::get.vertex.attribute(cities, "type")
 type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
-ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
+pRnd <- ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
       label = c("Paris", "Beijing", "Chicago"), color = "darkred")
+# pRnd
 }
 \author{
   Moritz Marbach \email{mmarbach@mail.uni-mannheim.de} and

@@ -24,7 +24,6 @@
   Wickham.
 }
 \examples{
-library(ggplot2)
 data(movies)
 ggfluctuation2(table(movies$Action, movies$Comedy))
 ggfluctuation2(table(movies$Action, movies$mpaa))
