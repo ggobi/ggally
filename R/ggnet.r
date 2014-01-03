@@ -1,5 +1,5 @@
 if(getRversion() >= "2.15.1") {
-  utils::globalVariables(c("X1", "X2", "Y1", "Y2", "group"))
+  utils::globalVariables(c("X1", "X2", "Y1", "Y2", "group", "id"))
 }
 
 #' ggnet - Plot a network with ggplot2
