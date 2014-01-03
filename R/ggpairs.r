@@ -142,7 +142,6 @@ ggpairs <- function(
   legends = FALSE,
   verbose = FALSE
 ){
-  require(ggplot2)
   printInfo <- FALSE
 
   verbose = verbose || printInfo
