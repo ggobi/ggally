@@ -80,7 +80,10 @@ if(getRversion() >= "2.15.1") {
 #' @param title character string denoting the title of the plot
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggplot object that if called, will print
-#' @import plyr
+#' @importFrom plyr ddply summarize .
+# have to have this line of 'rename' and 'round_any' because of imports issue
+#' @importFrom plyr rename round_any
+#' @importFrom reshape rescaler
 #' @export
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes

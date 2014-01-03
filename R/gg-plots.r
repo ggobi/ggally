@@ -113,7 +113,7 @@ agv("labelp")
 #' @param corAlignPercent right align position of numbers. Default is 60 percent across the horizontal
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @import plyr
+#' @importFrom plyr ddply
 #' @importFrom stringr str_c
 #' @export
 #' @keywords hplot
@@ -673,7 +673,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @keywords hplot
 #' @export
 #' @examples
-#' library(ggplot2)
 #' data(movies)
 #' ggally_ratio(movies[,c("mpaa","Action")])
 #' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
@@ -708,6 +707,7 @@ agv(c("..scaled..", "x"))
 #' @keywords hplot
 #' @export
 #' @examples
+#'  data(tips, package="reshape")
 #'  ggally_densityDiag(tips, mapping = aes(x = total_bill))
 #'  #data(movies)
 #'  #ggally_densityDiag(movies, mapping = aes_string(x="rating"))
@@ -742,7 +742,6 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' library(ggplot2)
 #' data(movies)
 #' ggally_barDiag(movies, mapping = aes(x = mpaa))
 #' # ggally_barDiag(movies, mapping = aes_string(x = "mpaa"))
@@ -1064,10 +1063,8 @@ agv(c("x", "y", "result", "freq"))
 #' @param ceiling max value to compare to
 #' @author Hadley Wickham \email{h.wickham@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
-#' @import reshape
 #' @export
 #' @examples
-#' library(ggplot2)
 #' data(movies)
 #' ggfluctuation2(table(movies$Action, movies$Comedy))
 #' ggfluctuation2(table(movies$Action, movies$mpaa))
