@@ -9,6 +9,7 @@ if(getRversion() >= "2.15.1") {
 #' @export
 #' @param net an object of class \code{igraph} or \code{network}. If the object is of class \code{igraph}, the \link[intergraph:asNetwork]{intergraph} package is used to convert it to class \code{network}.
 #' @param mode a placement method from the list of modes provided in the \link[sna:gplot.layout]{sna} package. Defaults to the Fruchterman-Reingold force-directed algorithm.
+#' @param layout.par options to the placement method, as listed in \link[sna]{gplot.layout}.
 #' @param size size of the network nodes. Defaults to 12. If the nodes are weighted, their area is proportionally scaled up to the size set by \code{size}.
 #' @param alpha a level of transparency for nodes, vertices and arrows. Defaults to 0.75.
 #' @param weight.method a weighting method for the nodes. Accepts \code{"indegree"}, \code{"outdegree"} or \code{"degree"} (the default). Set to \code{"none"} to plot unweighted nodes.
@@ -18,9 +19,9 @@ if(getRversion() >= "2.15.1") {
 #' @param node.alpha transparency of the nodes. Inherits from \code{alpha}.
 #' @param segment.alpha transparency of the vertex links. Inherits from \code{alpha}.
 #' @param segment.color color of the vertex links. Defaults to \code{"grey"}.
-#' @param segment.size size of the vertex links. Defaults to 0.25.
-#' @param arrow.size size of the vertex arrows for directed network plotting. Defaults to 0.
-#' @param label.nodes label nodes with their vertex attributes. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
+#' @param segment.size size of the vertex links, as a vector of values or as a single value. Defaults to 0.25.
+#' @param arrow.size size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.
+#' @param label.nodes label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
 #' @param top8.nodes use the top 8 nodes as node groups, colored with \code{"Set1"}. The rest of the network will be plotted as the ninth (grey) group. Experimental.
 #' @param trim.labels removes '@@', 'http://', 'www.' and the ending '/' from vertex names. Cleans up labels for website and Twitter networks. Defaults to \code{TRUE}.
 #' @param quantize.weights break node weights to quartiles. Fails when quartiles do not uniquely identify nodes.
@@ -29,6 +30,7 @@ if(getRversion() >= "2.15.1") {
 #' @param ... other arguments supplied to geom_text for the node labels. Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link[sna]{gplot}} in the \link[sna:gplot]{sna} package
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and Francois Briatte \email{f.briatte@@ed.ac.uk}
+#' @details The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code[tnet]{tnet} package.
 #' @importFrom grid arrow
 #' @examples
 #' require(network)
@@ -50,20 +52,21 @@ if(getRversion() >= "2.15.1") {
 #' category = LETTERS[rbinom(x, 4, .5)]
 #' ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = category)
 #'
-#' # City and service firms data from the UCIrvine Network Data Repository.
+#' # city and service firms data from the UCIrvine Network Data Repository
 #' url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
 #' print(load(url))
 #' close(url)
+#'
 #' # plot cities, firms and law firms
 #' type = network::get.vertex.attribute(cities, "type")
 #' type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
 #' ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
 #'       label = c("Paris", "Beijing", "Chicago"), color = "darkred")
 
-
 ggnet <- function(
   net,                          # an object of class network
   mode             = "fruchtermanreingold", # placement algorithm
+  layout.par       = NULL,      # placement options
   size             = 12,        # node size
   alpha            = .75,       # transparency
   weight.method    = "none",    # what to weight the nodes with: "freeman", "indegree", "outdegree"
@@ -83,10 +86,10 @@ ggnet <- function(
   legend.position  = "right",   # set to "none" to remove from plot
   ...                           # passed to geom_text for node labels
 ){
-  require(intergraph)    # igraph conversion
-  require(network)       # vertex attributes
-  require(RColorBrewer)  # default colors
-  require(sna)           # placement algorithm
+  require(intergraph   , quietly = TRUE) # igraph conversion
+  require(network      , quietly = TRUE) # vertex attributes
+  require(RColorBrewer , quietly = TRUE) # default colors
+  require(sna          , quietly = TRUE) # placement algorithm
 
   # get arguments
   weight    = c("indegree", "outdegree")
@@ -118,7 +121,7 @@ ggnet <- function(
   placement <- paste0("gplot.layout.", mode)
   if(!exists(placement)) stop("Unsupported placement method.")
 
-  plotcord <- do.call(placement, list(m, NULL))
+  plotcord <- do.call(placement, list(m, layout.par))
   plotcord <- data.frame(plotcord)
   colnames(plotcord) = c("X1", "X2")
 
