@@ -59,7 +59,7 @@ if(getRversion() >= "2.15.1") {
 #' close(url)
 #'
 #' # plot cities, firms and law firms
-#' type = network::get.vertex.attribute(cities, "type")
+#' type = cities %v% "type"
 #' type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
 #' ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
 #'       label = c("Paris", "Beijing", "Chicago"), color = "darkred")
