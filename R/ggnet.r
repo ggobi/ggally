@@ -20,6 +20,7 @@ if(getRversion() >= "2.15.1") {
 #' @param segment.alpha transparency of the vertex links. Inherits from \code{alpha}.
 #' @param segment.color color of the vertex links. Defaults to \code{"grey"}.
 #' @param segment.size size of the vertex links, as a vector of values or as a single value. Defaults to 0.25.
+#' @param segment.label labels for the vertex links at mid-edges. Label size will be set to 1 / \code{segment.size}, and label alpha will inherit from \code{alpha}.
 #' @param arrow.size size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.
 #' @param label.nodes label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
 #' @param top8.nodes use the top 8 nodes as node groups, colored with \code{"Set1"}. The rest of the network will be plotted as the ninth (grey) group. Experimental.
@@ -76,6 +77,7 @@ ggnet <- function(
   node.alpha       = NULL,      # transparency for nodes (inherits from alpha)
   segment.alpha    = NULL,      # transparency for links (inherits from alpha)
   segment.color    = "grey",    # default links are rgb(190, 190, 190)
+  segment.label    = NULL,      # label network at mid-edges
   segment.size     = .25,       # set to 0 to remove from plot
   arrow.size       = 0,         # set to 0 to remove from plot
   label.nodes      = FALSE,     # add vertex names in small print; can be a list of vertex names
@@ -190,6 +192,18 @@ ggnet <- function(
       )
     )
 
+  # label mid-edges
+  if(!is.null(segment.label) & length(segment.label) == nrow(edges)) {
+    pnet <- pnet + geom_text(
+      aes(x = midX, y = midY),
+      data   = edges,
+      label = segment.label,
+      size = 1 / segment.size, # fixed setting
+      colour = segment.color,
+      alpha  = inherit(segment.alpha)
+      )
+  }
+  
   # null weighting
   if(weight.method == "none") {
     pnet <- pnet + geom_point(
