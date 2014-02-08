@@ -247,7 +247,7 @@ ggnet <- function(
   }
 
   # default colors
-  n = length(unique(na.omit(node.group)))
+  n = length(unique(suppressWarnings(na.omit(node.group))))
   if(length(node.color) != n & !is.null(node.group)) {
     warning("Node groups and node colors are of unequal length; using default colors.")
     if(n > 0 & n < 10) {
