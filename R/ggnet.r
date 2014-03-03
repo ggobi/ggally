@@ -8,7 +8,7 @@ if(getRversion() >= "2.15.1") {
 #'
 #' @export
 #' @param net an object of class \code{igraph} or \code{network}. If the object is of class \code{igraph}, the \link[intergraph:asNetwork]{intergraph} package is used to convert it to class \code{network}.
-#' @param mode a placement method from the list of modes provided in the \link[sna:gplot.layout]{sna} package. Defaults to the Fruchterman-Reingold force-directed algorithm.
+#' @param mode a placement method from the list of modes provided in the \link[sna:gplot.layout]{sna} package. Defaults to the Fruchterman-Reingold force-directed algorithm. If \code{net} contains two vertex attributes called \code{"lat"} and \code{"lon"}, these are used instead for geographic networks.
 #' @param layout.par options to the placement method, as listed in \link[sna]{gplot.layout}.
 #' @param size size of the network nodes. Defaults to 12. If the nodes are weighted, their area is proportionally scaled up to the size set by \code{size}.
 #' @param alpha a level of transparency for nodes, vertices and arrows. Defaults to 0.75.
@@ -123,9 +123,17 @@ ggnet <- function(
   placement <- paste0("gplot.layout.", mode)
   if(!exists(placement)) stop("Unsupported placement method.")
 
-  plotcord <- do.call(placement, list(m, layout.par))
-  plotcord <- data.frame(plotcord)
-  colnames(plotcord) = c("X1", "X2")
+  if(all(c("lat", "lon") %in% list.vertex.attributes(net))) {
+      plotcord = data.frame(X1 = as.numeric(net %v% "lon"), X2 = as.numeric(net %v% "lat"))
+      # remove outliers
+      plotcord$X1[ abs(plotcord$X1) > quantile(abs(plotcord$X1), .9, na.rm = TRUE) ] = NA
+      plotcord$X2[ is.na(plotcord$X1) | abs(plotcord$X2) > quantile(abs(plotcord$X2), .9, na.rm = TRUE) ] = NA
+      plotcord$X1[ is.na(plotcord$X2) ] = NA
+    } else {
+      plotcord <- do.call(placement, list(m, layout.par))
+      plotcord <- data.frame(plotcord)
+      colnames(plotcord) = c("X1", "X2")
+    }
 
   # get edgelist
   edglist <- as.matrix.network.edgelist(net)
