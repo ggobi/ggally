@@ -239,7 +239,6 @@ ggnet <- function(
   
   # null weighting
   if(weight.method == c("none")) {
-    message("nuuuul")
     pnet <- pnet + geom_point(
       data  = plotcord,
       alpha = inherit(node.alpha),
