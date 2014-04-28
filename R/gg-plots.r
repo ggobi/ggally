@@ -128,7 +128,7 @@ agv("labelp")
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", ...){
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -235,7 +235,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Cor : ", signif(cor(xVal,yVal),3)),
+      label   = str_c("Cor : ", signif(cor(xVal,yVal, method = corMethod),3)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
