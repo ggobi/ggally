@@ -128,7 +128,15 @@ agv("labelp")
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", ...){
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "everything", ...){
+
+  corMethod <- as.character(substitute(corMethod))
+  corUse <- as.character(substitute(corUse))
+
+  cor_fn <- function(x, y) {
+    # also do ddply below if fn is altered
+    cor(x,y, method = corMethod, use = corUse)
+  }
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -199,7 +207,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   # browser()
   if(colorCol != "ggally_NO_EXIST" && colorCol %in% colnames(data)) {
 
-    txt <- str_c("ddply(data, .(", colorCol, "), summarize, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
+    txt <- str_c("ddply(data, .(", colorCol, "), summarize, ggally_cor = cor(", xCol,", ", yCol,", method = \"", corMethod, "\", use = \"", corUse, "\"))[,c('", colorCol, "', 'ggally_cor')]")
 
     con <- textConnection(txt)
     on.exit(close(con))
@@ -235,7 +243,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
 
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Cor : ", signif(cor(xVal,yVal, method = corMethod),3)),
+      label   = str_c("Cor : ", signif(cor_fn(xVal,yVal),3)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
@@ -282,7 +290,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
       label = paste(
         "Corr:\n",
         signif(
-          cor(xVal,yVal),
+          cor_fn(xVal,yVal),
           3
         ),
         sep="",collapse=""
