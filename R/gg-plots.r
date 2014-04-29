@@ -233,11 +233,11 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
     cord$label <- str_c(cord[[colorCol]], ": ", cord$ggally_cor)
 
     # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal)
-    xmax <- max(xVal)
+    xmin <- min(xVal, na.rm = TRUE)
+    xmax <- max(xVal, na.rm = TRUE)
     xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
-    ymin <- min(yVal)
-    ymax <- max(yVal)
+    ymin <- min(yVal, na.rm = TRUE)
+    ymax <- max(yVal, na.rm = TRUE)
     yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
 
 
@@ -255,8 +255,8 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
     #element_bw() +
     theme(legend.position = "none")
 
-    xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange)
-    yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange)
+    xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
     # print(range(yVal))
     # print(yPos)
@@ -279,11 +279,11 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
     p
   } else {
     # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal)
-    xmax <- max(xVal)
+    xmin <- min(xVal, na.rm = TRUE)
+    xmax <- max(xVal, na.rm = TRUE)
     xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
-    ymin <- min(yVal)
-    ymax <- max(yVal)
+    ymin <- min(yVal, na.rm = TRUE)
+    ymax <- max(yVal, na.rm = TRUE)
     yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
 
     p <- ggally_text(
@@ -638,7 +638,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
     p <- p +
       stat_density(
       aes(
-          y = ..scaled.. * diff(range(x)) + min(x)
+          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
         ),
         position = "identity",
         geom = "line",
@@ -725,7 +725,7 @@ ggally_densityDiag <- function(data, mapping, ...){
     scale_y_continuous() +
     stat_density(
       aes(
-        y = ..scaled.. * diff(range(x)) + min(x)
+        y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
       ),
       position = "identity",
       geom = "line",
@@ -823,7 +823,7 @@ ggally_text <- function(
         panel.grid.major=element_line(colour="grey85")) +
       labs(x = NULL, y = NULL)
 
-  new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange), y = yP * diff(yrange) + min(yrange))
+  new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange, na.rm = TRUE), y = yP * diff(yrange) + min(yrange, na.rm = TRUE))
   if(is.null(mapping)) {
     mapping <- new_mapping
   } else {
@@ -943,8 +943,8 @@ ggally_diagAxis <- function(
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
 
   if(numer) {
-    xmin <- min(data[, as.character(mapping$x)])
-    xmax <- max(data[, as.character(mapping$x)])
+    xmin <- min(data[, as.character(mapping$x)], na.rm = TRUE)
+    xmax <- max(data[, as.character(mapping$x)], na.rm = TRUE)
 
     # add a lil fluff... it looks better
     xrange <- c(xmin - .01 * (xmax-xmin), xmax + .01 * (xmax - xmin))
@@ -1105,7 +1105,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   xNew <- as.numeric(table_data$x) + 1/2 * table_data$freq
   yNew <- as.numeric(table_data$y) + 1/2 * table_data$freq
 
-  maxLen <- max(diff(range(as.numeric(table_data$x))), diff(range(as.numeric(table_data$y))) )
+  maxLen <- max(diff(range(as.numeric(table_data$x), na.rm = TRUE)), diff(range(as.numeric(table_data$y), na.rm = TRUE)) )
 
 
   table_data <- cbind(table_data, xNew, yNew)
