@@ -128,7 +128,7 @@ agv("labelp")
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "everything", ...){
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...){
 
   corMethod <- as.character(substitute(corMethod))
   corUse <- as.character(substitute(corUse))
@@ -161,28 +161,30 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   yCol <- as.character(mapping$y)
   colorCol <- as.character(mapping$colour)
 
-  if(length(colorCol) > 0) {
-    if(colorCol %in% colnames(data)) {
-      rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+  if (corUse == "complete.obs") {
+    if(length(colorCol) > 0) {
+      if(colorCol %in% colnames(data)) {
+        rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+      } else {
+        rows <- complete.cases(data[,c(xCol,yCol)])
+      }
     } else {
       rows <- complete.cases(data[,c(xCol,yCol)])
     }
-  } else {
-    rows <- complete.cases(data[,c(xCol,yCol)])
+
+    if(any(!rows)) {
+      total <- sum(!rows)
+      if (total > 1) {
+        warning("Removed ", total, " rows containing missing values")
+      } else if (total == 1) {
+        warning("Removing 1 row that contained a missing value")
+      }
+    }
+    data <- data[rows, ]
   }
 
-  if(any(!rows)) {
-    total <- sum(!rows)
-    if (total > 1) {
-      warning("Removed ", total, " rows containing missing values")
-    } else if (total == 1) {
-      warning("Removing 1 row that contained a missing value")
-    }
-  }
-  data <- data[rows, ]
   xVal <- data[,xCol]
   yVal <- data[,yCol]
-
 
   if(length(names(mapping)) > 0){
     for(i in length(names(mapping)):1){
