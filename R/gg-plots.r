@@ -235,6 +235,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
         }
       }
     }
+
     # print(order(ord[ord >= 0]))
     # print(lev)
     cord <- cord[order(ord[ord >= 0]), ]
@@ -269,9 +270,14 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
     yPos <- yPos[-1]
     # print(range(yVal))
     # print(yPos)
+
     cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
+    cordf$labelp <- factor(cordf$labelp, levels = cordf$labelp)
+    # print(cordf)
+    # print(str(cordf))
+
     p <- p + geom_text(
-      data=cordf,
+      data = cordf,
       aes(
         x = xPos,
         y = yPos,
