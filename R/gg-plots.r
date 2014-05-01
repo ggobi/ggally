@@ -217,11 +217,10 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   # browser()
   if(colorCol != "ggally_NO_EXIST" && colorCol %in% colnames(data)) {
 
-    txt <- str_c("ddply(data, .(", colorCol, "), summarize, ggally_cor = cor(", xCol,", ", yCol,", method = \"", corMethod, "\", use = \"", corUse, "\"))[,c('", colorCol, "', 'ggally_cor')]")
-
-    con <- textConnection(txt)
-    on.exit(close(con))
-    cord <- eval(parse(con))
+    cord <- ddply(data, c(colorCol), function(x) {
+      cor_fn(x[, xCol], x[, yCol])
+    }, .parallel = FALSE)
+    colnames(cord)[2] <- "ggally_cor"
 
     # browser()
     cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
