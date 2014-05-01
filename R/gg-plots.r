@@ -133,7 +133,13 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   corMethod <- as.character(substitute(corMethod))
   corUse <- as.character(substitute(corUse))
 
-  corUse <-  pmatch(corUse, c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete"))
+  useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
+  corUse <-  pmatch(corUse, useOptions)
+  if (is.na(corUse)) {
+    corUse <- useOptions[1]
+  } else {
+    corUse <- useOptions[corUse]
+  }
 
   cor_fn <- function(x, y) {
     # also do ddply below if fn is altered
