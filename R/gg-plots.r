@@ -53,9 +53,17 @@ ggally_points <- function(data, mapping, ...){
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
 ggally_smooth <- function(data, mapping, ...){
-  p <- ggplot(data = data, mapping) +
-    geom_smooth(method="lm", colour = I("black")) +
-    geom_point(...)
+
+  p <- ggplot(data = data, mapping)
+
+  if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
+    p <- p + geom_smooth(method="lm")
+  } else {
+    p <- p + geom_smooth(method="lm", colour = I("black"))
+  }
+
+  p <- p + geom_point(...)
+
   p$type <- "continuous"
   p$subType <- "smooth"
   p

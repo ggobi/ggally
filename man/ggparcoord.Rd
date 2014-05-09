@@ -116,8 +116,7 @@ package loaded.} }
 \examples{
 # use sample of the diamonds data for illustrative purposes
 data(diamonds, package="ggplot2")
-set.seed(123)
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],1000),]
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 
 # basic parallel coordinate plot, using default settings
 # ggparcoord(data = diamonds.samp,columns = c(1,5:10))
