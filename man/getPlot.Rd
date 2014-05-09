@@ -2,7 +2,7 @@
 \alias{getPlot}
 \title{getPlot}
 \usage{
-  getPlot(plotMatrix, rowFromTop, columnFromLeft)
+getPlot(plotMatrix, rowFromTop, columnFromLeft)
 }
 \arguments{
   \item{plotMatrix}{ggpair object to select from}
@@ -12,15 +12,15 @@
   \item{columnFromLeft}{column from the left}
 }
 \description{
-  Retrieves the ggplot object at the desired location.
+Retrieves the ggplot object at the desired location.
 }
 \examples{
-data(tips, package="reshape")
+data(tips, package = "reshape")
  plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
  getPlot(plotMatrix2, 1, 2)
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

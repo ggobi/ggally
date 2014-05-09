@@ -2,7 +2,7 @@
 \alias{ggally_dot}
 \title{Plots the Box Plot with Dot}
 \usage{
-  ggally_dot(data, mapping, ...)
+ggally_dot(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -12,10 +12,10 @@
   \item{...}{other arguments being supplied to geom_jitter}
 }
 \description{
-  Add jittering with the box plot
+Add jittering with the box plot
 }
 \examples{
-data(tips, package="reshape")
+data(tips, package = "reshape")
  ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
  ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
  ggally_dot(
@@ -28,7 +28,7 @@ data(tips, package="reshape")
  ) + scale_shape(solid=FALSE)
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

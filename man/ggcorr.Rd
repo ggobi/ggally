@@ -2,9 +2,8 @@
 \alias{ggcorr}
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
-  ggcorr(data, method = "pairwise", palette = "RdYlGn",
-    name = "Correlation\ncoefficient", geom = "tile",
-    max_size = 6, ...)
+ggcorr(data, method = "pairwise", palette = "RdYlGn",
+  name = "Correlation\\ncoefficient", geom = "tile", max_size = 6, ...)
 }
 \arguments{
   \item{data}{a data matrix. Should contain numerical
@@ -37,12 +36,11 @@
   other items can be achieved through ggplot2 methods.}
 }
 \description{
-  Function for making a correlation plot starting from a
-  data matrix, using ggplot2. The function is directly
-  inspired by Tian Zheng and Yu-Sung Su's arm::corrplot
-  function. Please visit
-  \url{http://github.com/briatte/ggcorr} for the latest
-  development and descriptions about ggcorr.
+Function for making a correlation plot starting from a data
+matrix, using ggplot2. The function is directly inspired by
+Tian Zheng and Yu-Sung Su's arm::corrplot function. Please
+visit \url{http://github.com/briatte/ggcorr} for the latest
+development and descriptions about ggcorr.
 }
 \examples{
 # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -61,9 +59,9 @@ ggcorr(
 ) + labs(title = "Points Per Game")
 }
 \author{
-  Francois Briatte \email{f.briatte@ed.ac.uk}
+Francois Briatte \email{f.briatte@ed.ac.uk}
 }
 \seealso{
-  \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
+\code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
 }
 

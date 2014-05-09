@@ -2,10 +2,9 @@
 \alias{ggpairs}
 \title{ggpairs - A GGplot2 Matrix}
 \usage{
-  ggpairs(data, columns = 1:ncol(data), title = "",
-    upper = list(), lower = list(), diag = list(),
-    params = NULL, ..., axisLabels = "internal",
-    legends = FALSE, verbose = FALSE)
+ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
+  lower = list(), diag = list(), params = NULL, ...,
+  axisLabels = "internal", legends = FALSE, verbose = FALSE)
 }
 \arguments{
   \item{data}{data set using.  Can have both numerical and
@@ -40,36 +39,35 @@
   #1, Plot #2...."}
 }
 \value{
-  ggpair object that if called, will print
+ggpair object that if called, will print
 }
 \description{
-  Make a matrix of plots with a given data set
+Make a matrix of plots with a given data set
 }
 \details{
-  upper and lower are lists that may contain the variables
-  'continuous', 'combo' and 'discrete'. Each element of the
-  list is a string implementing the following options:
-  continuous = exactly one of ('points', 'smooth',
-  'density', 'cor', 'blank'); combo = exactly one of
-  ('box', 'dot', 'facethist', 'facetdensity', 'denstrip',
-  'blank'); discrete = exactly one of ('facetbar','ratio',
-  'blank').
+upper and lower are lists that may contain the variables
+'continuous', 'combo' and 'discrete'. Each element of the
+list is a string implementing the following options:
+continuous = exactly one of ('points', 'smooth', 'density',
+'cor', 'blank'); combo = exactly one of ('box', 'dot',
+'facethist', 'facetdensity', 'denstrip', 'blank'); discrete
+= exactly one of ('facetbar','ratio', 'blank').
 
-  diag is a list that may only contain the variables
-  'continuous' and 'discrete'. Each element of the diag
-  list is a string implmenting the following options:
-  continuous = exactly one of ('density', 'bar', 'blank');
-  discrete = exactly one of ('bar', 'blank').
+diag is a list that may only contain the variables
+'continuous' and 'discrete'. Each element of the diag list
+is a string implmenting the following options: continuous =
+exactly one of ('density', 'bar', 'blank'); discrete =
+exactly one of ('bar', 'blank').
 
-  If a list option it will be set to the function default.
-  If 'blank' is ever chosen as an option, then ggpairs will
-  produce a blank plot, as if nothing was printed there.
+If a list option it will be set to the function default.
+If 'blank' is ever chosen as an option, then ggpairs will
+produce a blank plot, as if nothing was printed there.
 }
 \examples{
 # plotting is reduced to the first couple of examples.
 # Feel free to print the ggpair objects created in the examples
 
-data(tips, package="reshape")
+data(tips, package = "reshape")
 pm <- ggpairs(tips[,1:3])
 # pm
 pm <- ggpairs(tips)
@@ -125,11 +123,11 @@ custom_car <- putPlot(custom_car, personal_plot, 1, 3)
 # custom_car
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}, Jason
-  Crowley \email{crowley.jason.s@gmail.com}, Di Cook
-  \email{dicook@iastate.edu}, Heike Hofmann
-  \email{hofmann@iastate.edu}, Hadley Wickham
-  \email{h.wickham@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley
+\email{crowley.jason.s@gmail.com}, Di Cook
+\email{dicook@iastate.edu}, Heike Hofmann
+\email{hofmann@iastate.edu}, Hadley Wickham
+\email{h.wickham@gmail.com}
 }
 \keyword{hplot}
 

@@ -2,8 +2,7 @@
 \alias{make_ggpair_text}
 \title{Generate GGally Function Text}
 \usage{
-  make_ggpair_text(func, mapping, params = NULL,
-    printInfo = FALSE)
+make_ggpair_text(func, mapping, params = NULL, printInfo = FALSE)
 }
 \arguments{
   \item{func}{identifier string in function name}
@@ -17,8 +16,8 @@
   executed function should be printed}
 }
 \description{
-  Generate GGally function text with data, mapping, and
-  parameters.
+Generate GGally function text with data, mapping, and
+parameters.
 }
 \keyword{internal}
 

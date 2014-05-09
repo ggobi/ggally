@@ -2,7 +2,7 @@
 \alias{ggally_smooth}
 \title{Plots the Scatter Plot with Smoothing}
 \usage{
-  ggally_smooth(data, mapping, ...)
+ggally_smooth(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -12,16 +12,16 @@
   \item{...}{other arguments to add to geom_point}
 }
 \description{
-  Add a smoothed condition mean with a given scatter plot.
+Add a smoothed condition mean with a given scatter plot.
 }
 \examples{
-data(tips, package="reshape")
+data(tips, package = "reshape")
  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

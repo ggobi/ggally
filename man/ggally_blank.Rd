@@ -2,20 +2,20 @@
 \alias{ggally_blank}
 \title{Blank}
 \usage{
-  ggally_blank(...)
+ggally_blank(...)
 }
 \arguments{
   \item{...}{other arguments ignored}
 }
 \description{
-  Draws nothing.
+Draws nothing.
 }
 \details{
-  Makes a "blank" ggplot object that will only draw white
-  space
+Makes a "blank" ggplot object that will only draw white
+space
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

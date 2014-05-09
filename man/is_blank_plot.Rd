@@ -3,10 +3,10 @@
 \title{Is Blank Plot?
 Find out if the plot equals a blank plot}
 \usage{
-  is_blank_plot(p)
+is_blank_plot(p)
 }
 \description{
-  Is Blank Plot? Find out if the plot equals a blank plot
+Is Blank Plot? Find out if the plot equals a blank plot
 }
 \examples{
 GGally:::is_blank_plot(ggally_blank())

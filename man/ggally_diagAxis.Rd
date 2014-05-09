@@ -2,10 +2,9 @@
 \alias{ggally_diagAxis}
 \title{Internal Axis Labeling Plot for ggpairs}
 \usage{
-  ggally_diagAxis(data, mapping, labelSize = 5,
-    labelXPercent = 0.5, labelYPercent = 0.55,
-    labelHJust = 0.5, labelVJust = 0.5, gridLabelSize = 4,
-    ...)
+ggally_diagAxis(data, mapping, labelSize = 5, labelXPercent = 0.5,
+  labelYPercent = 0.55, labelHJust = 0.5, labelVJust = 0.5,
+  gridLabelSize = 4, ...)
 }
 \arguments{
   \item{data}{dataset being plotted}
@@ -28,16 +27,15 @@
   \item{...}{other arguments for geom_text}
 }
 \description{
-  This function is used when \code{axisLabels ==
-  "internal"}.
+This function is used when \code{axisLabels == "internal"}.
 }
 \examples{
-data(tips, package="reshape")
+data(tips, package = "reshape")
  ggally_diagAxis(tips, aes(x=tip))
  ggally_diagAxis(tips,aes(x=sex))
 }
 \author{
-  Jason Crowley \email{crowley.jason.s@gmail.com} and
-  Barret Schloerke
+Jason Crowley \email{crowley.jason.s@gmail.com} and Barret
+Schloerke
 }
 

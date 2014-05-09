@@ -2,20 +2,19 @@
 \alias{ggally_ratio}
 \title{Plots a mosaic plots}
 \usage{
-  ggally_ratio(data)
+ggally_ratio(data)
 }
 \arguments{
   \item{data}{data set using}
 }
 \description{
-  Plots the mosaic plot by using fluctuation.
+Plots the mosaic plot by using fluctuation.
 }
 \details{
-  Must send only two discrete columns in the data set.
+Must send only two discrete columns in the data set.
 }
 \examples{
-library(ggplot2)
-data(movies)
+data(movies, package = "ggplot2")
 ggally_ratio(movies[,c("mpaa","Action")])
 ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
 nummpaa <- length(levels(movies[,"mpaa"]))
@@ -27,7 +26,7 @@ ggally_ratio(
 )
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

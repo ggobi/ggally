@@ -2,8 +2,7 @@
 \alias{ggally_facetdensitystrip}
 \title{Plots a density plot with facets or a tile plot with facets}
 \usage{
-  ggally_facetdensitystrip(data, mapping, ...,
-    den_strip = FALSE)
+ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
 \arguments{
   \item{data}{data set using}
@@ -18,14 +17,14 @@
   plot.}
 }
 \description{
-  Make Tile Plot as densely as possible.
+Make Tile Plot as densely as possible.
 }
 \examples{
 example(ggally_facetdensity)
 example(ggally_denstrip)
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

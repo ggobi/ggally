@@ -2,7 +2,7 @@
 \alias{putPlot}
 \title{Put Plot}
 \usage{
-  putPlot(plotMatrix, plotObj, rowFromTop, columnFromLeft)
+putPlot(plotMatrix, plotObj, rowFromTop, columnFromLeft)
 }
 \arguments{
   \item{plotMatrix}{ggally object to be altered}
@@ -14,7 +14,7 @@
   \item{columnFromLeft}{column from the left}
 }
 \description{
-  Function to place your own plot in the layout.
+Function to place your own plot in the layout.
 }
 \examples{
 custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
@@ -29,7 +29,7 @@ custom_car <- putPlot(custom_car, personal_plot, 1, 3)
 # custom_car
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

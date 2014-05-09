@@ -2,7 +2,7 @@
 \alias{ggally_cor}
 \title{Correlation from the Scatter Plot}
 \usage{
-  ggally_cor(data, mapping, corAlignPercent = 0.6, ...)
+ggally_cor(data, mapping, corAlignPercent = 0.6, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -15,10 +15,10 @@
   \item{...}{other arguments being supplied to geom_text}
 }
 \description{
-  Estimate correlation from the given data.
+Estimate correlation from the given data.
 }
 \examples{
-data(tips, package="reshape")
+data(tips, package = "reshape")
  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
  ggally_cor(
    tips,
@@ -31,7 +31,7 @@ data(tips, package="reshape")
  )
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

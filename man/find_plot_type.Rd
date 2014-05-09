@@ -2,7 +2,7 @@
 \alias{find_plot_type}
 \title{Find Plot Types}
 \usage{
-  find_plot_type(data, col1, col2)
+find_plot_type(data, col1, col2)
 }
 \arguments{
   \item{data}{data set to be used}
@@ -12,10 +12,10 @@
   \item{col2}{y column}
 }
 \description{
-  Retrieves the type of plot for the specific columns
+Retrieves the type of plot for the specific columns
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{internal}
 

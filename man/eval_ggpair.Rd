@@ -2,7 +2,7 @@
 \alias{eval_ggpair}
 \title{Evaluate a GGally Function}
 \usage{
-  eval_ggpair(txt, ggally_data)
+eval_ggpair(txt, ggally_data)
 }
 \arguments{
   \item{txt}{text that should be evaluated to create a
@@ -12,8 +12,8 @@
   evaluating the text}
 }
 \description{
-  Evaluate and GGally function with data, mapping, and
-  parameters.
+Evaluate and GGally function with data, mapping, and
+parameters.
 }
 \keyword{internal}
 

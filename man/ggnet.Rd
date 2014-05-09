@@ -2,15 +2,13 @@
 \alias{ggnet}
 \title{ggnet - Plot a network with ggplot2}
 \usage{
-  ggnet(net, mode = "fruchtermanreingold", size = 12,
-    alpha = 0.75, weight.method = "none",
-    names = c("", ""), node.group = NULL,
-    node.color = NULL, node.alpha = NULL,
-    segment.alpha = NULL, segment.color = "grey",
-    segment.size = 0.25, arrow.size = 0,
-    label.nodes = FALSE, top8.nodes = FALSE,
-    trim.labels = TRUE, quantize.weights = FALSE,
-    subset.threshold = 0, legend.position = "right", ...)
+ggnet(net, mode = "fruchtermanreingold", size = 12, alpha = 0.75,
+  weight.method = "none", names = c("", ""), node.group = NULL,
+  node.color = NULL, node.alpha = NULL, segment.alpha = NULL,
+  segment.color = "grey", segment.size = 0.25, arrow.size = 0,
+  label.nodes = FALSE, top8.nodes = FALSE, trim.labels = TRUE,
+  quantize.weights = FALSE, subset.threshold = 0,
+  legend.position = "right", ...)
 }
 \arguments{
   \item{net}{an object of class \code{igraph} or
@@ -95,10 +93,10 @@
   items can be achieved through ggplot2 methods.}
 }
 \description{
-  Function for making a network plot from an object of
-  class \code{network} or \code{igraph}, using ggplot2.
-  Please visit \url{http://github.com/briatte/ggnet} for
-  the latest development and descriptions about ggnet.
+Function for making a network plot from an object of class
+\code{network} or \code{igraph}, using ggplot2.  Please
+visit \url{http://github.com/briatte/ggnet} for the latest
+development and descriptions about ggnet.
 }
 \examples{
 require(network)
@@ -131,11 +129,11 @@ ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
       label = c("Paris", "Beijing", "Chicago"), color = "darkred")
 }
 \author{
-  Moritz Marbach \email{mmarbach@mail.uni-mannheim.de} and
-  Francois Briatte \email{f.briatte@ed.ac.uk}
+Moritz Marbach \email{mmarbach@mail.uni-mannheim.de} and
+Francois Briatte \email{f.briatte@ed.ac.uk}
 }
 \seealso{
-  \code{\link[sna]{gplot}} in the \link[sna:gplot]{sna}
-  package
+\code{\link[sna]{gplot}} in the \link[sna:gplot]{sna}
+package
 }
 

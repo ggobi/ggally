@@ -2,7 +2,7 @@
 \alias{ggally_points}
 \title{Plots the Scatter Plot}
 \usage{
-  ggally_points(data, mapping, ...)
+ggally_points(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -12,7 +12,7 @@
   \item{...}{other arguments are sent to geom_point}
 }
 \description{
-  Make a scatter plot with a given data set.
+Make a scatter plot with a given data set.
 }
 \examples{
 data(mtcars)
@@ -29,7 +29,7 @@ ggally_points(
 )
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

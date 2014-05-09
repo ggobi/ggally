@@ -2,7 +2,7 @@
 \alias{ggally_box}
 \title{Plots the Box Plot}
 \usage{
-  ggally_box(data, mapping, ...)
+ggally_box(data, mapping, ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -13,10 +13,10 @@
   geom_boxplot}
 }
 \description{
-  Make a box plot with a given data set
+Make a box plot with a given data set
 }
 \examples{
-data(tips, package="reshape")
+data(tips, package = "reshape")
  ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
  ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
  ggally_box(
@@ -28,7 +28,7 @@ data(tips, package="reshape")
  )
 }
 \author{
-  Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
 

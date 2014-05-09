@@ -2,13 +2,13 @@
 \alias{mapping_color_fill}
 \title{Aesthetic Mapping Color Fill}
 \usage{
-  mapping_color_fill(current)
+mapping_color_fill(current)
 }
 \arguments{
   \item{current}{the current aesthetics}
 }
 \description{
-  Replace the fill with the color and make color NULL.
+Replace the fill with the color and make color NULL.
 }
 \keyword{internal}
 
