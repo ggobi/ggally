@@ -247,22 +247,45 @@ ggparcoord <- function(
   data$anyMissing <- apply(data,1,function(x) { any(is.na(x)) })
   p <- c(dim(data)[2]-1,dim(data)[2])
 
+
+  inner_rescaler_default = function (x, type = "sd", ...) {
+    # copied directly from reshape because of import difficulties :-(
+    # rescaler.default
+    switch(type,
+      rank = rank(x, ...),
+      var = ,
+      sd = (x - mean(x,na.rm = TRUE)) / sd(x, na.rm = TRUE),
+      robust = (x - median(x,na.rm = TRUE)) / mad(x, na.rm = TRUE),
+      I = x,
+      range = (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+    )
+  }
+  inner_rescaler = function(x, type = "sd", ...) {
+    # copied directly from reshape because of import difficulties :-(
+    # rescaler.data.frame
+    continuous <- sapply(x, is.numeric)
+    if (any(continuous)) {
+      x[continuous] <- lapply(x[continuous], inner_rescaler_default, type = type, ...)
+    }
+    x
+  }
+
   ### Scaling ###
   if(tolower(scale) == "std") {
-    data <- rescaler(data, type = "sd")
+    data <- inner_rescaler(data, type = "sd")
   }
   else if(tolower(scale) == "robust") {
-    data <- rescaler(data,type="robust")
+    data <- inner_rescaler(data,type="robust")
   }
   else if(tolower(scale) == "uniminmax") {
-    data <- rescaler(data,type="range")
+    data <- inner_rescaler(data,type="range")
   }
   #else if(tolower(scale) == "globalminmax") {
   #  data[,-p] <- data[,-p] - min(data[,-p])
   #  data[,-p] <- data[,-p]/max(data[,-p])
   #}
   else if(tolower(scale) == "center") {
-    data <- rescaler(data,type="range")
+    data <- inner_rescaler(data,type="range")
     data[,-p] <- apply(data[,-p],2,function(x){
       x <- x - eval(parse(text=paste(scaleSummary,"(x,na.rm=TRUE)",sep="")))
     })
@@ -315,7 +338,7 @@ ggparcoord <- function(
   # Centering by observation needs to be done after handling missing values
   #   in case the observation to be centered on has missing values
   if(tolower(scale) == "centerobs") {
-    data <- rescaler(data,type="range")
+    data <- inner_rescaler(data,type="range")
     data[,-p] <- apply(data[,-p],2,function(x){
       x <- x - x[centerObsID]
     })
