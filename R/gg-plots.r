@@ -48,7 +48,7 @@ ggally_points <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
@@ -74,7 +74,7 @@ ggally_smooth <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
 #'  ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_density(
@@ -117,7 +117,7 @@ agv("labelp")
 #' @export
 #' @keywords hplot
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_cor(
 #'    tips,
@@ -315,7 +315,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
 #'  ggally_box(
@@ -341,7 +341,7 @@ ggally_box <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
 #'  ggally_dot(
@@ -369,7 +369,7 @@ ggally_dot <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_dotAndBox(
 #'    tips,
 #'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
@@ -478,7 +478,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
 #'  ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
 ggally_facethist <- function(data, mapping, ...){
@@ -546,7 +546,7 @@ ggally_facethist <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_facetdensity(
 #'    tips,
@@ -917,7 +917,7 @@ agv(c("x", "y", "lab"))
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com} and Barret Schloerke
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_diagAxis(tips, aes(x=tip))
 #'  ggally_diagAxis(tips,aes(x=sex))
 ggally_diagAxis <- function(
@@ -1030,7 +1030,7 @@ ggally_diagAxis <- function(
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
 #'  ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
 ggally_facetbar <- function(data, mapping, ...){

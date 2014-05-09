@@ -75,7 +75,7 @@
 #' # plotting is reduced to the first couple of examples.
 #' # Feel free to print the ggpair objects created in the examples
 #'
-#' data(tips, package="reshape")
+#' data(tips, package = "reshape")
 #' pm <- ggpairs(tips[,1:3])
 #' # pm
 #' pm <- ggpairs(tips)
@@ -519,7 +519,7 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
 #'  getPlot(plotMatrix2, 1, 2)
 getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
@@ -563,7 +563,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport
 #' @export
 #' @examples
-#'  data(tips, package="reshape")
+#'  data(tips, package = "reshape")
 #'  ggpairs(tips[,1:3])
 print.ggpairs <- function(x, ...){
   plotObj <- x
