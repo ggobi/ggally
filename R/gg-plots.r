@@ -567,6 +567,7 @@ ggally_facetdensity <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
+#'  data(tips, package = "reshape")
 #'  ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
 #'  ggally_denstrip(
@@ -716,6 +717,7 @@ agv(c("..scaled..", "x"))
 #' @keywords hplot
 #' @export
 #' @examples
+#'  data(tips, package = "reshape")
 #'  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
 #'  #data(movies)
 #'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
