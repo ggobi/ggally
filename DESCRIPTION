@@ -16,13 +16,13 @@ Description: GGally is designed to be a helper to ggplot2. It contains
     templates for different plots to be combined into a plot matrix, a parallel
     coordinate plot function, as well as a function for making a network plot.
 Depends:
-    R (>= 3.0),
-    ggplot2 (>= 0.9.3.1),
-    reshape (>= 0.8.4)
+    R (>= 3.0)
 Imports:
+    ggplot2 (>= 1.0.0),
     grid (>= 3.0.0),
     gtable (>= 0.1.2),
     plyr (>= 1.8),
+    reshape (>= 0.8.4),
     stringr (>= 0.6.2)
 Suggests:
     scagnostics,

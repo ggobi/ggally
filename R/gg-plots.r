@@ -671,8 +671,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @keywords hplot
 #' @export
 #' @examples
-#' library(ggplot2)
-#' data(movies)
+#' data(movies, package = "ggplot2")
 #' ggally_ratio(movies[,c("mpaa","Action")])
 #' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
 #' nummpaa <- length(levels(movies[,"mpaa"]))
@@ -740,8 +739,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#' library(ggplot2)
-#' data(movies)
+#' data(movies, package = "ggplot2")
 #' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
@@ -1065,8 +1063,7 @@ agv(c("x", "y", "result", "freq"))
 #' @import reshape
 #' @export
 #' @examples
-#' library(ggplot2)
-#' data(movies)
+#' data(movies, package = "ggplot2")
 #' ggfluctuation2(table(movies$Action, movies$Comedy))
 #' ggfluctuation2(table(movies$Action, movies$mpaa))
 #' ggfluctuation2(table(movies[,c("Action", "mpaa")]))

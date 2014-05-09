@@ -69,6 +69,7 @@
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
+#' @import ggplot2
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
 #' @examples
@@ -142,7 +143,6 @@ ggpairs <- function(
   legends = FALSE,
   verbose = FALSE
 ){
-  require(ggplot2)
   printInfo <- FALSE
 
   verbose = verbose || printInfo
@@ -862,6 +862,7 @@ is_blank_plot <- function(p){
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @return aes_string output
+#' @import ggplot2
 #' @examples
 #'  data(diamonds, package="ggplot2")
 #'  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]

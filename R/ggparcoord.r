@@ -81,6 +81,7 @@ if(getRversion() >= "2.15.1") {
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggplot object that if called, will print
 #' @import plyr
+#' @importFrom reshape melt rescaler
 #' @export
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes
