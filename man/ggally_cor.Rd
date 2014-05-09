@@ -2,7 +2,8 @@
 \alias{ggally_cor}
 \title{Correlation from the Scatter Plot}
 \usage{
-ggally_cor(data, mapping, corAlignPercent = 0.6, ...)
+ggally_cor(data, mapping, corAlignPercent = 0.6, corMethod = "pearson",
+  corUse = "complete.obs", ...)
 }
 \arguments{
   \item{data}{data set using}
@@ -11,6 +12,10 @@ ggally_cor(data, mapping, corAlignPercent = 0.6, ...)
 
   \item{corAlignPercent}{right align position of numbers.
   Default is 60 percent across the horizontal}
+
+  \item{corMethod}{\code{method} suppied to cor function}
+
+  \item{corUse}{\code{use} supplied to cor function}
 
   \item{...}{other arguments being supplied to geom_text}
 }
