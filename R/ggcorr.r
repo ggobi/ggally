@@ -18,7 +18,7 @@ if(getRversion() >= "2.15.1") {
 #' @param ... other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
 #' @author Francois Briatte \email{f.briatte@@ed.ac.uk}
-#' @importFrom reshape melt
+#' @importFrom reshape melt melt.data.frame melt.default
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
 #' nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
