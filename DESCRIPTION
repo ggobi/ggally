@@ -30,11 +30,3 @@ Suggests:
     network (>= 1.7.2),
     RColorBrewer (>= 1.0-5),
     sna (>= 2.3-1)
-Collate:
-    'find-combo.r'
-    'gg-plots.r'
-    'ggpairs.r'
-    'ggcorr.r'
-    'ggnet.r'
-    'ggparcoord.r'
-    'data-happy.r'
