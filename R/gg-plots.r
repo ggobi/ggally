@@ -351,7 +351,7 @@ ggally_box <- function(data, mapping, ...){
 #'  ggally_dot(
 #'    tips,
 #'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
-#'  ) + scale_shape(solid=FALSE)
+#'  ) + ggplot2::scale_shape(solid=FALSE)
 ggally_dot <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = FALSE)
 }
@@ -615,16 +615,27 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
   if (identical(den_strip, TRUE)) {
    # print("Density Strip")
+
     p <- p +
-      stat_bin(
-        aes(
-          y = 1,
-          fill = ..density..
-        ),
-        position = "identity",
-        geom = "tile",
-        ...
+      geom_bar(
+        mapping = aes(fill = ..density..)
+      ) +
+      coord_cartesian(
+        ylim = c(0,1)
+      ) +
+      scale_y_continuous(
+        breaks = c(0.5),
+        labels = c("1")
       )
+      # stat_bin(
+      #   aes(
+      #     # y = 1,
+      #     fill = ..density..
+      #   ),
+      #   # position = "identity",
+      #   geom = "tile",
+      #   ...
+      # )
     p$subType <- "denstrip"
   } else {
     p <- p +
@@ -673,12 +684,12 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @examples
 #' data(movies, package = "ggplot2")
 #' ggally_ratio(movies[,c("mpaa","Action")])
-#' ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
+#' ggally_ratio(movies[,c("mpaa","Action")]) + ggplot2::coord_equal()
 #' nummpaa <- length(levels(movies[,"mpaa"]))
 #' numAction <- length(levels(as.factor(movies[,"Action"])))
 #' ggally_ratio(
 #'   movies[,c("Action","mpaa")]
-#' ) + theme(
+#' ) + ggplot2::theme(
 #'   aspect.ratio = nummpaa / numAction
 #' )
 ggally_ratio <- function(data){
@@ -788,10 +799,10 @@ ggally_barDiag <- function(data, mapping, ...){
 #' @export
 #' @examples
 #' ggally_text("Example 1")
-#' ggally_text("Example\nTwo", mapping = aes_string(size = 15, color = "red"))
+#' ggally_text("Example\nTwo", mapping = ggplot2::aes_string(size = 15, color = "red"))
 ggally_text <- function(
   label,
-  mapping = aes(color = "black"),
+  mapping = ggplot2::aes(color = "black"),
   xP = 0.5,
   yP = 0.5,
   xrange = c(0,1),
@@ -916,8 +927,8 @@ agv(c("x", "y", "lab"))
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  ggally_diagAxis(tips, aes(x=tip))
-#'  ggally_diagAxis(tips,aes(x=sex))
+#'  ggally_diagAxis(tips, ggplot2::aes(x=tip))
+#'  ggally_diagAxis(tips, ggplot2::aes(x=sex))
 ggally_diagAxis <- function(
   data,
   mapping,
@@ -1029,8 +1040,8 @@ ggally_diagAxis <- function(
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
-#'  ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
+#'  ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time))
+#'  ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time))
 ggally_facetbar <- function(data, mapping, ...){
 
   # numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
