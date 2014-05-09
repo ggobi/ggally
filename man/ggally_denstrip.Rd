@@ -15,7 +15,8 @@ ggally_denstrip(data, mapping, ...)
 Make Tile Plot as densely as possible.
 }
 \examples{
-ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
+data(tips, package = "reshape")
+ ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
  ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
  ggally_denstrip(
    tips,
