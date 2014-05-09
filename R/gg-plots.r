@@ -136,7 +136,23 @@ agv("labelp")
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
+ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...){
+
+  corMethod <- as.character(substitute(corMethod))
+  corUse <- as.character(substitute(corUse))
+
+  useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
+  corUse <-  pmatch(corUse, useOptions)
+  if (is.na(corUse)) {
+    corUse <- useOptions[1]
+  } else {
+    corUse <- useOptions[corUse]
+  }
+
+  cor_fn <- function(x, y) {
+    # also do ddply below if fn is altered
+    cor(x,y, method = corMethod, use = corUse)
+  }
 
   # xVar <- data[,as.character(mapping$x)]
   # yVar <- data[,as.character(mapping$y)]
@@ -161,28 +177,30 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
   yCol <- as.character(mapping$y)
   colorCol <- as.character(mapping$colour)
 
-  if(length(colorCol) > 0) {
-    if(colorCol %in% colnames(data)) {
-      rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+  if (corUse %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
+    if(length(colorCol) > 0) {
+      if(colorCol %in% colnames(data)) {
+        rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+      } else {
+        rows <- complete.cases(data[,c(xCol,yCol)])
+      }
     } else {
       rows <- complete.cases(data[,c(xCol,yCol)])
     }
-  } else {
-    rows <- complete.cases(data[,c(xCol,yCol)])
+
+    if(any(!rows)) {
+      total <- sum(!rows)
+      if (total > 1) {
+        warning("Removed ", total, " rows containing missing values")
+      } else if (total == 1) {
+        warning("Removing 1 row that contained a missing value")
+      }
+    }
+    data <- data[rows, ]
   }
 
-  if(any(!rows)) {
-    total <- sum(!rows)
-    if (total > 1) {
-      warning("Removed ", total, " rows containing missing values")
-    } else if (total == 1) {
-      warning("Removing 1 row that contained a missing value")
-    }
-  }
-  data <- data[rows, ]
   xVal <- data[,xCol]
   yVal <- data[,yCol]
-
 
   if(length(names(mapping)) > 0){
     for(i in length(names(mapping)):1){
@@ -207,11 +225,10 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
   # browser()
   if(colorCol != "ggally_NO_EXIST" && colorCol %in% colnames(data)) {
 
-    txt <- str_c("ddply(data, .(", colorCol, "), summarize, ggally_cor = cor(", xCol,", ", yCol,"))[,c('", colorCol, "', 'ggally_cor')]")
-
-    con <- textConnection(txt)
-    on.exit(close(con))
-    cord <- eval(parse(con))
+    cord <- ddply(data, c(colorCol), function(x) {
+      cor_fn(x[, xCol], x[, yCol])
+    }, .parallel = FALSE)
+    colnames(cord)[2] <- "ggally_cor"
 
     # browser()
     cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
@@ -226,6 +243,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
         }
       }
     }
+
     # print(order(ord[ord >= 0]))
     # print(lev)
     cord <- cord[order(ord[ord >= 0]), ]
@@ -233,17 +251,17 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
     cord$label <- str_c(cord[[colorCol]], ": ", cord$ggally_cor)
 
     # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal)
-    xmax <- max(xVal)
+    xmin <- min(xVal, na.rm = TRUE)
+    xmax <- max(xVal, na.rm = TRUE)
     xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
-    ymin <- min(yVal)
-    ymax <- max(yVal)
+    ymin <- min(yVal, na.rm = TRUE)
+    ymax <- max(yVal, na.rm = TRUE)
     yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
 
 
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Cor : ", signif(cor(xVal,yVal),3)),
+      label   = str_c("Cor : ", signif(cor_fn(xVal,yVal),3)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
@@ -255,14 +273,19 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
     #element_bw() +
     theme(legend.position = "none")
 
-    xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange)
-    yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange)
+    xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
     # print(range(yVal))
     # print(yPos)
+
     cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
+    cordf$labelp <- factor(cordf$labelp, levels = cordf$labelp)
+    # print(cordf)
+    # print(str(cordf))
+
     p <- p + geom_text(
-      data=cordf,
+      data = cordf,
       aes(
         x = xPos,
         y = yPos,
@@ -279,18 +302,18 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, ...){
     p
   } else {
     # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal)
-    xmax <- max(xVal)
+    xmin <- min(xVal, na.rm = TRUE)
+    xmax <- max(xVal, na.rm = TRUE)
     xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
-    ymin <- min(yVal)
-    ymax <- max(yVal)
+    ymin <- min(yVal, na.rm = TRUE)
+    ymax <- max(yVal, na.rm = TRUE)
     yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
 
     p <- ggally_text(
       label = paste(
         "Corr:\n",
         signif(
-          cor(xVal,yVal),
+          cor_fn(xVal,yVal),
           3
         ),
         sep="",collapse=""
@@ -650,7 +673,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
     p <- p +
       stat_density(
       aes(
-          y = ..scaled.. * diff(range(x)) + min(x)
+          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
         ),
         position = "identity",
         geom = "line",
@@ -737,7 +760,7 @@ ggally_densityDiag <- function(data, mapping, ...){
     scale_y_continuous() +
     stat_density(
       aes(
-        y = ..scaled.. * diff(range(x)) + min(x)
+        y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
       ),
       position = "identity",
       geom = "line",
@@ -834,7 +857,7 @@ ggally_text <- function(
         panel.grid.major=element_line(colour="grey85")) +
       labs(x = NULL, y = NULL)
 
-  new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange), y = yP * diff(yrange) + min(yrange))
+  new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange, na.rm = TRUE), y = yP * diff(yrange) + min(yrange, na.rm = TRUE))
   if(is.null(mapping)) {
     mapping <- new_mapping
   } else {
@@ -954,8 +977,8 @@ ggally_diagAxis <- function(
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
 
   if(numer) {
-    xmin <- min(data[, as.character(mapping$x)])
-    xmax <- max(data[, as.character(mapping$x)])
+    xmin <- min(data[, as.character(mapping$x)], na.rm = TRUE)
+    xmax <- max(data[, as.character(mapping$x)], na.rm = TRUE)
 
     # add a lil fluff... it looks better
     xrange <- c(xmin - .01 * (xmax-xmin), xmax + .01 * (xmax - xmin))
@@ -1116,7 +1139,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   xNew <- as.numeric(table_data$x) + 1/2 * table_data$freq
   yNew <- as.numeric(table_data$y) + 1/2 * table_data$freq
 
-  maxLen <- max(diff(range(as.numeric(table_data$x))), diff(range(as.numeric(table_data$y))) )
+  maxLen <- max(diff(range(as.numeric(table_data$x), na.rm = TRUE)), diff(range(as.numeric(table_data$y), na.rm = TRUE)) )
 
 
   table_data <- cbind(table_data, xNew, yNew)
