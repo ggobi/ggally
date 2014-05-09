@@ -2,8 +2,8 @@
 \alias{ggally_text}
 \title{GGplot Text}
 \usage{
-ggally_text(label, mapping = aes(color = "black"), xP = 0.5, yP = 0.5,
-  xrange = c(0, 1), yrange = c(0, 1), ...)
+ggally_text(label, mapping = ggplot2::aes(color = "black"), xP = 0.5,
+  yP = 0.5, xrange = c(0, 1), yrange = c(0, 1), ...)
 }
 \arguments{
   \item{label}{text that you want to appear}
@@ -28,7 +28,7 @@ Plot text for a plot.
 }
 \examples{
 ggally_text("Example 1")
-ggally_text("Example\\nTwo", mapping = aes_string(size = 15, color = "red"))
+ggally_text("Example\\nTwo", mapping = ggplot2::aes_string(size = 15, color = "red"))
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

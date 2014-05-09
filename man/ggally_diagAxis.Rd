@@ -31,8 +31,8 @@ This function is used when \code{axisLabels == "internal"}.
 }
 \examples{
 data(tips, package = "reshape")
- ggally_diagAxis(tips, aes(x=tip))
- ggally_diagAxis(tips,aes(x=sex))
+ ggally_diagAxis(tips, ggplot2::aes(x=tip))
+ ggally_diagAxis(tips, ggplot2::aes(x=sex))
 }
 \author{
 Jason Crowley \email{crowley.jason.s@gmail.com} and Barret

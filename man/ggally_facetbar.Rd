@@ -17,8 +17,8 @@ by the Y variable.
 }
 \examples{
 data(tips, package = "reshape")
- ggally_facetbar(tips, aes(x = sex, y = smoker, fill = time))
- ggally_facetbar(tips, aes(x = smoker, y = sex, fill = time))
+ ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time))
+ ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time))
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

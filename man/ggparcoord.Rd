@@ -117,6 +117,7 @@ package loaded.} }
 # use sample of the diamonds data for illustrative purposes
 data(diamonds, package="ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
+str(diamonds.samp)
 
 # basic parallel coordinate plot, using default settings
 # ggparcoord(data = diamonds.samp,columns = c(1,5:10))
@@ -132,12 +133,13 @@ gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
 
 # utilize ggplot2 aes to switch to thicker lines
 gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
-  title="Parallel Coord. Plot of Diamonds Data",mapping = aes(size = 1))
+  title="Parallel Coord. Plot of Diamonds Data",mapping = ggplot2::aes(size = 1))
 # gpd
 
 # basic parallel coord plot of the msleep data, using 'random' imputation and
 # coloring by diet (can also use variable names in the columns and groupColumn
 # arguments)
+data(msleep, package="ggplot2")
 gpd <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
   "random", scale = "uniminmax")
 # gpd

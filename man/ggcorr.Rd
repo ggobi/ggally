@@ -56,7 +56,7 @@ ggcorr(
   hjust    = 0.75,
   angle    = -45,
   palette  = "PuOr" # colorblind safe, photocopy-able
-) + labs(title = "Points Per Game")
+) + ggplot2::labs(title = "Points Per Game")
 }
 \author{
 Francois Briatte \email{f.briatte@ed.ac.uk}

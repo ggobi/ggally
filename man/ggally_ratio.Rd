@@ -16,12 +16,12 @@ Must send only two discrete columns in the data set.
 \examples{
 data(movies, package = "ggplot2")
 ggally_ratio(movies[,c("mpaa","Action")])
-ggally_ratio(movies[,c("mpaa","Action")]) + coord_equal()
+ggally_ratio(movies[,c("mpaa","Action")]) + ggplot2::coord_equal()
 nummpaa <- length(levels(movies[,"mpaa"]))
 numAction <- length(levels(as.factor(movies[,"Action"])))
 ggally_ratio(
   movies[,c("Action","mpaa")]
-) + theme(
+) + ggplot2::theme(
   aspect.ratio = nummpaa / numAction
 )
 }

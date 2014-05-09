@@ -10,7 +10,7 @@ Is Blank Plot? Find out if the plot equals a blank plot
 }
 \examples{
 GGally:::is_blank_plot(ggally_blank())
- GGally:::is_blank_plot(ggally_points(mtcars, aes_string(x = "disp", y = "hp")))
+ GGally:::is_blank_plot(ggally_points(mtcars, ggplot2::aes_string(x = "disp", y = "hp")))
 }
 \keyword{internal}
 
