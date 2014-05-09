@@ -1,2 +1,7 @@
 TODO
 inst/
+..Rcheck
+.DS_Store
+.gitignore
+R/.DS_Store
+.git
