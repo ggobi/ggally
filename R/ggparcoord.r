@@ -82,6 +82,7 @@ if(getRversion() >= "2.15.1") {
 #' @return ggplot object that if called, will print
 #' @import plyr
 #' @importFrom reshape melt rescaler
+#' @importFrom reshape melt rescaler rescaler.data.frame  rescaler.default     rescaler.matrix
 #' @export
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes
@@ -102,12 +103,13 @@ if(getRversion() >= "2.15.1") {
 #'
 #' # utilize ggplot2 aes to switch to thicker lines
 #' gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
-#'   title="Parallel Coord. Plot of Diamonds Data",mapping = aes(size = 1))
+#'   title="Parallel Coord. Plot of Diamonds Data",mapping = ggplot2::aes(size = 1))
 #' # gpd
 #'
 #' # basic parallel coord plot of the msleep data, using 'random' imputation and
 #' # coloring by diet (can also use variable names in the columns and groupColumn
 #' # arguments)
+#' data(msleep, package="ggplot2")
 #' gpd <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
 #'   "random", scale = "uniminmax")
 #' # gpd
@@ -369,11 +371,19 @@ ggparcoord <- function(
   }
 
   if(!is.null(groupColumn)) {
-    mapcall <- paste("aes_string(x='variable',y='value',group='.ID',colour='",groupCol,"')",sep="")
+    mapping2 <- aes_string(
+      x = 'variable',
+      y = 'value',
+      group = '.ID',
+      colour = as.character(substitute(groupCol))
+    )
   } else {
-    mapcall <- paste("aes_string(x='variable',y='value',group='.ID')",sep="")
+    mapping2 <- aes_string(
+      x = 'variable',
+      y = 'value',
+      group = '.ID'
+    )
   }
-  mapping2 <- eval(parse(text=mapcall))
   mapping2 <- addAndOverwriteAes(mapping2,mapping)
   p <- ggplot(data=data.m,mapping=mapping2)
 
