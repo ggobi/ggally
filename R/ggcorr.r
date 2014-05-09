@@ -1,6 +1,7 @@
 
+
 if(getRversion() >= "2.15.1") {
-  utils::globalVariables(c("variable", "value"))
+  utils::globalVariables(c("variable", "value", "num"))
 }
 
 #' ggcorr - Plot a correlation matrix with ggplot2

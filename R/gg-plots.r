@@ -84,7 +84,7 @@ ggally_smooth <- function(data, mapping, ...){
 #'  ggally_density(
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
-#'  ) + scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
+#'  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
 ggally_density <- function(data, mapping, ...){
   p <- ggplot(data = data, mapping)
 
@@ -572,7 +572,7 @@ ggally_facetdensity <- function(data, mapping, ...){
 #'  ggally_denstrip(
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
-#'  ) + scale_fill_gradient(low = "grey80", high = "black")
+#'  ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
 ggally_denstrip <- function(data,mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
@@ -1047,6 +1047,7 @@ ggally_facetbar <- function(data, mapping, ...){
 }
 
 
+
 agv(c("x", "y", "result", "freq"))
 #' Fluctuation plot
 #'
@@ -1060,7 +1061,7 @@ agv(c("x", "y", "result", "freq"))
 #' @param ceiling max value to compare to
 #' @author Hadley Wickham \email{h.wickham@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
-#' @import reshape
+#' @importFrom reshape add.all.combinations
 #' @export
 #' @examples
 #' data(movies, package = "ggplot2")
