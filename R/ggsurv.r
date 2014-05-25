@@ -21,7 +21,7 @@ if(getRversion() >= "2.15.1") {
 #' @param cens.col colour of the points that mark censored observations.
 #' @param lty.est linetype of the survival curve(s). Vector length should be
 #'    either 1 or equal to the number of strata.
-#' @param lty.ci linetype of the bounds that mark the 95% CI.
+#' @param lty.ci linetype of the bounds that mark the 95\% CI.
 #' @param cens.shape shape of the points that mark censored observations.
 #' @param back.white if TRUE the background will not be the default
 #'    grey of \code{ggplot2} but will be white with borders around the plot.

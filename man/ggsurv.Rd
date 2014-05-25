@@ -25,7 +25,7 @@ to the number of strata.}
 \item{lty.est}{linetype of the survival curve(s). Vector length should be
 either 1 or equal to the number of strata.}
 
-\item{lty.ci}{linetype of the bounds that mark the 95% CI.}
+\item{lty.ci}{linetype of the bounds that mark the 95\% CI.}
 
 \item{cens.shape}{shape of the points that mark censored observations.}
 
