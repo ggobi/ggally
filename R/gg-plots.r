@@ -16,7 +16,6 @@ agv <- function(...) {
 #' @author Barret Schloerke  \email{schloerke@@gmail.com}
 #' @export
 #' @keywords hplot
-#' @importFrom ggplot2 ggplot
 #' @examples
 #' data(mtcars)
 #' ggally_points(mtcars, mapping = aes(x = disp, y = hp))
