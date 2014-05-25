@@ -1,6 +1,6 @@
 Package: GGally
 Version: 0.4.6
-Date: 2014-05-10
+Date: 2014-05-15
 Maintainer: Barret Schloerke <schloerke@gmail.com>
 License: GPL (>= 2.0)
 Title: Extension to ggplot2.
@@ -30,3 +30,4 @@ Suggests:
     network (>= 1.7.2),
     RColorBrewer (>= 1.0-5),
     sna (>= 2.3-1)
+Roxygen: list(wrap = FALSE)
