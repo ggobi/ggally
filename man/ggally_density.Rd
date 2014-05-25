@@ -24,7 +24,7 @@ data(tips, package = "reshape")
  ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
  ggally_density(
    tips,
-   mapping = aes_string(x = "total_bill", y = "tip", fill = "..level..")
+   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
  )
  ggally_density(
    tips,

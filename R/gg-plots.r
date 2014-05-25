@@ -18,11 +18,11 @@ agv <- function(...) {
 #' @keywords hplot
 #' @examples
 #' data(mtcars)
-#' ggally_points(mtcars, mapping = aes(x = disp, y = hp))
-#' ggally_points(mtcars, mapping = aes_string(x = "disp", y = "hp"))
+#' ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp))
+#' ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp"))
 #' ggally_points(
 #'   mtcars,
-#'   mapping = aes_string(
+#'   mapping = ggplot2::aes_string(
 #'     x     = "disp",
 #'     y     = "hp",
 #'     color = "as.factor(cyl)",
@@ -87,7 +87,7 @@ ggally_smooth <- function(data, mapping, ...){
 #'  ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_density(
 #'    tips,
-#'    mapping = aes_string(x = "total_bill", y = "tip", fill = "..level..")
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
 #'  )
 #'  ggally_density(
 #'    tips,
@@ -130,11 +130,11 @@ agv("labelp")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_cor(
 #'    tips,
-#'    mapping = aes_string(x = "total_bill", y = "tip", size = 15, colour = "red")
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red")
 #'  )
 #'  ggally_cor(
 #'    tips,
-#'    mapping = aes_string(x = "total_bill", y = "tip", color = "sex"),
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
 ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...){
@@ -352,7 +352,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
 #'  ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
 #'  ggally_box(
 #'    tips,
-#'    mapping        = aes_string(y = "total_bill", x = "sex", color = "sex"),
+#'    mapping        = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"),
 #'    outlier.colour = "red",
 #'    outlier.shape  = 13,
 #'    outlier.size   = 8
@@ -378,7 +378,7 @@ ggally_box <- function(data, mapping, ...){
 #'  ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
 #'  ggally_dot(
 #'    tips,
-#'    mapping = aes_string(y = "total_bill", x = "sex", color = "sex")
+#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
 #'  )
 #'  ggally_dot(
 #'    tips,
@@ -404,10 +404,10 @@ ggally_dot <- function(data, mapping, ...){
 #'  data(tips, package = "reshape")
 #'  ggally_dotAndBox(
 #'    tips,
-#'    mapping = aes(x = total_bill, y = sex, color = sex),
+#'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
 #'    boxPlot = TRUE
 #'  )
-#'  ggally_dotAndBox(tips, mapping = aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
+#'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
 #  print(horizontal)
@@ -582,7 +582,7 @@ ggally_facethist <- function(data, mapping, ...){
 #'  ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
 #'  ggally_facetdensity(
 #'    tips,
-#'    mapping = aes_string(y = "total_bill", x = "sex", color = "sex")
+#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
 #'  )
 ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
@@ -752,8 +752,8 @@ agv(c("..scaled..", "x"))
 #'  data(tips, package = "reshape")
 #'  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
 #'  #data(movies)
-#'  #ggally_densityDiag(movies, mapping = aes_string(x="rating"))
-#'  #ggally_densityDiag(movies, mapping = aes_string(x="rating", color = "mpaa"))
+#'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
+#'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
 ggally_densityDiag <- function(data, mapping, ...){
 
   p <- ggplot(data, mapping) +
