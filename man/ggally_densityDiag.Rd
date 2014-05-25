@@ -19,8 +19,8 @@ Plots the density plots by using Diagonal.
 data(tips, package = "reshape")
  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
  #data(movies)
- #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
- #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
+ #ggally_densityDiag(movies, mapping = aes_string(x="rating"))
+ #ggally_densityDiag(movies, mapping = aes_string(x="rating", color = "mpaa"))
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
