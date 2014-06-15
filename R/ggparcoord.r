@@ -71,6 +71,8 @@ if(getRversion() >= "2.15.1") {
 #' @param order method used to order the axes (see Details)
 #' @param showPoints logical operator indicating whether points should be
 #'   plotted or not
+#' @param useSplines logical operator indicating whether spline interpolation
+#'   should be used or not
 #' @param alphaLines value of alpha scaler for the lines of the parcoord plot or a column name of the data
 #' @param boxplot logical operator indicating whether or not boxplots should
 #'   underlay the distribution of each variable
@@ -146,6 +148,7 @@ ggparcoord <- function(
   missing      = "exclude",
   order        = columns,
   showPoints   = FALSE,
+  useSplines   = FALSE,
   alphaLines   = 1,
   boxplot      = FALSE,
   shadeBox     = NULL,
@@ -387,8 +390,14 @@ ggparcoord <- function(
   if (boxplot)
     p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
 
-  if (showPoints)
-    p <- p + geom_point()
+  linexvar <- 'variable'
+  lineyvar <- 'value'
+
+  if (useSplines) {
+    data.m <- ddply(data.m, '.ID', transform, spline=spline(variable, value, n=length(variable)*10))
+    linexvar <- 'spline.x'
+    lineyvar <- 'spline.y'
+  }
 
   if(!is.null(mapping2$size)) {
     lineSize <- mapping2$size
@@ -398,12 +407,16 @@ ggparcoord <- function(
 
   if (alphaLinesIsCharacter) {
     p <- p +
-      geom_line(aes_string(alpha = alphaLines), size = lineSize) +
+      geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize,
+                data=data.m) +
       scale_alpha(range = alphaRange)
 
   } else {
-    p <- p + geom_line(alpha = alphaLines, size = lineSize)
+    p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data=data.m)
   }
+
+  if (showPoints)
+    p <- p + geom_point(aes(x=as.numeric(variable), y=value))
 
   if (title != "") {
     p <- p + labs(title = title)
