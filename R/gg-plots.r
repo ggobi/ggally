@@ -122,7 +122,6 @@ agv("labelp")
 #' @param corUse \code{use} supplied to cor function
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @import plyr
 #' @importFrom stringr str_c
 #' @export
 #' @keywords hplot
