@@ -32,7 +32,7 @@ if(getRversion() >= "2.15.1") {
 #' @param ... other arguments supplied to geom_text for the node labels. Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link[sna]{gplot}} in the \link[sna:gplot]{sna} package
 #' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and Francois Briatte \email{f.briatte@@ed.ac.uk}
-#' @details The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code[tnet]{tnet} package.
+#' @details The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code{\link[tnet]{tnet}} package.
 #' @importFrom grid arrow
 #' @examples
 #' require(network)
@@ -96,7 +96,7 @@ ggnet <- function(
   require(network      , quietly = TRUE) # vertex attributes
   require(RColorBrewer , quietly = TRUE) # default colors
   require(sna          , quietly = TRUE) # placement algorithm
-  
+
   # support for igraph objects
   if(class(net) == "igraph") {
     net = asNetwork(net)
@@ -106,14 +106,14 @@ ggnet <- function(
 
   # vertex attributes for weight detection
   vattr = network::list.vertex.attributes(net)
-  
+
   # get arguments
   weight    = c("indegree", "outdegree", vattr)
   weight    = ifelse(weight.method %in% weight | length(weight.method) > 1,
                      weight.method, "freeman")
   quartiles = quantize.weights
   labels    = label.nodes
-  
+
   # alpha default
   inherit <- function(x) ifelse(is.null(x), alpha, x)
   # subset
@@ -122,14 +122,14 @@ ggnet <- function(
       net,
       which(sna::degree(net, cmode = weight) < subset.threshold))
   }
-    
+
   # get sociomatrix
   m <- as.matrix.network.adjacency(net)
-    
+
   if(mode == "geo" & all(c("lat", "lon") %in% vattr)) {
 
     plotcord = data.frame(
-      X1 = as.numeric(net %v% "lon"), 
+      X1 = as.numeric(net %v% "lon"),
       X2 = as.numeric(net %v% "lat")
       )
 
@@ -139,27 +139,27 @@ ggnet <- function(
     plotcord$X1[ is.na(plotcord$X2) ] = NA
 
   } else {
-    
+
     # get coordinates placement algorithm
     placement <- paste0("gplot.layout.", mode)
     if(!exists(placement)) stop("Unsupported placement method.")
-    
+
     plotcord <- do.call(placement, list(m, layout.par))
     plotcord <- data.frame(plotcord)
     colnames(plotcord) = c("X1", "X2")
-    
+
   }
-  
+
   # get edgelist
   edglist <- as.matrix.network.edgelist(net)
   edges   <- data.frame(plotcord[edglist[, 1], ], plotcord[edglist[, 2], ])
-  
+
   # get node groups
   if(!is.null(node.group)) {
     network::set.vertex.attribute(net, "elements", as.character(node.group))
     plotcord$group <- as.factor(network::get.vertex.attribute(net, "elements"))
   }
-  
+
   # get node weights
   degrees <- data.frame(
     id        = network.vertex.names(net),
@@ -167,7 +167,7 @@ ggnet <- function(
     outdegree = sapply(net$oel, length)
   )
   degrees$freeman <- with(degrees, indegree + outdegree)
-  
+
   # custom weights: vector of weights
   if(length(weight.method) == network.size(net)) {
     degrees$user = weight.method
@@ -180,12 +180,12 @@ ggnet <- function(
     names(degrees)[ ncol(degrees) ] = weight.method
     weight = weight.method
   }
-    
+
   # trim vertex names
   if(trim.labels) {
     degrees$id = gsub("@|http://|www.|/$", "", degrees$id)
   }
-  
+
   # set top 8 nodes as groups
   if(top8.nodes) {
     all                  = degrees[, weight]
@@ -196,9 +196,9 @@ ggnet <- function(
     node.group           = plotcord$group
     node.color           = brewer.pal(9, "Set1")[c(9, 1:8)]
   }
-  
+
   colnames(edges) <- c("X1", "Y1", "X2", "Y2")
-  
+
   # set vertex names
   plotcord$id <- as.character(degrees$id)
   if(is.logical(labels)) {
@@ -208,11 +208,11 @@ ggnet <- function(
   } else {
     plotcord$id[ -which(plotcord$id %in% labels) ] = ""
   }
-  
+
   # get vertice midpoints (not -yet- used later on)
   edges$midX  <- (edges$X1 + edges$X2) / 2
   edges$midY  <- (edges$Y1 + edges$Y2) / 2
-  
+
   # plot the network
   pnet <- ggplot(plotcord, aes(X1, X2)) +
     # plot vertices (links)
@@ -227,7 +227,7 @@ ggnet <- function(
         length = unit(arrow.size, "cm")
       )
     )
-  
+
   # label mid-edges
   if(!is.null(segment.label) & length(segment.label) == nrow(edges)) {
     pnet <- pnet + geom_text(
@@ -239,7 +239,7 @@ ggnet <- function(
       alpha  = inherit(segment.alpha)
     )
   }
-  
+
   # null weighting
   if(weight.method == c("none")) {
     pnet <- pnet + geom_point(
@@ -251,14 +251,14 @@ ggnet <- function(
   else {
 
     plotcord$weight <- degrees[, weight ]
-    
+
     # show top weights
     cat(nrow(plotcord), "nodes, weighted by", weight, "\n\n")
     print(head(degrees[ order( -degrees[weight] ), ]))
-    
+
     # proportional scaling
     sizer <- scale_size_area(names[2], max_size = size)
-    
+
     # quartiles
     if(quartiles) {
       plotcord$weight.label <- cut(
@@ -274,7 +274,7 @@ ggnet <- function(
         labels   = levels(plotcord$weight.label)
       )
     }
-    
+
     # add to plot
     pnet <- pnet + geom_point(
       aes(size = weight),
@@ -282,7 +282,7 @@ ggnet <- function(
       alpha = inherit(node.alpha)
     ) + sizer
   }
-  
+
   # default colors
   n = length(unique(suppressWarnings(na.omit(node.group))))
   if(length(node.color) != n & !is.null(node.group)) {
@@ -291,7 +291,7 @@ ggnet <- function(
       node.color = brewer.pal(9, "Set1")[1:n]
     }
   }
-  
+
   # color the nodes
   if(!is.null(node.group)) {
     pnet <- pnet +
@@ -302,12 +302,12 @@ ggnet <- function(
         guide  = guide_legend(override.aes = list(size = label.size))
       )
   }
-  
+
   # add text labels
   if(length(unique(plotcord$id)) > 1 | unique(plotcord$id)[1] != "") {
     pnet <- pnet + geom_text(aes(label = id), size = label.size, ...)
   }
-  
+
   # finalize: remove grid, axes and scales
   pnet <- pnet +
     scale_x_continuous(breaks = NULL) +
@@ -319,6 +319,6 @@ ggnet <- function(
       legend.key       = element_rect(colour = "white"),
       legend.position  = legend.position
     )
-  
+
   return(pnet)
 }

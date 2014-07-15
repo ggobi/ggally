@@ -61,7 +61,7 @@ ggnet(net, mode = "fruchtermanreingold", layout.par = NULL, size = 12,
 Function for making a network plot from an object of class \code{network} or \code{igraph}, using ggplot2.  Please visit \url{http://github.com/briatte/ggnet} for the latest development and descriptions about ggnet.
 }
 \details{
-The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code[tnet]{tnet} package.
+The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code{\link[tnet]{tnet}} package.
 }
 \examples{
 require(network)
