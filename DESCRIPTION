@@ -31,5 +31,6 @@ Suggests:
     scales (>= 0.2.3),
     scagnostics (>= 0.2-4),
     sna (>= 2.3-1),
-    survival (>= 2.37-4)
+    survival (>= 2.37-4),
+    roxygen2 (>= 4.0.1)
 Roxygen: list(wrap = FALSE)
