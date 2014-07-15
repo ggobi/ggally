@@ -6,6 +6,10 @@
 
 language: c
 
+env:
+  global:
+    - BOOTSTRAP_LATEX="1"
+
 before_install:
   - curl -OL http://raw.github.com/schloerke/r-travis/rev_deps/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
