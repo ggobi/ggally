@@ -1,6 +1,12 @@
 GGally 0.4.7
 -----------------
 
+UPDATES
+
+* ggcorr, ggnet updated with new/more parameters by Francois
+* ggally_bar will now scale the y axis to match regular y axis with continuous data
+* added travis-ci testing
+
 BUGS
 
 * Added missing ggsurv
