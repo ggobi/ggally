@@ -45,7 +45,7 @@ if(getRversion() >= "2.15.1") {
 #' dimnames(nw.mat)   <- list(1:x, 1:x)
 #' nw.mat[row(nw.mat) != col(nw.mat)] <- runif(ndyads) < density
 #' nw.mat
-#' rnd <- network(nw.mat)
+#' rnd <- network::network(nw.mat)
 #' rnd
 #'
 #' # random network

@@ -33,7 +33,7 @@ if(getRversion() >= "2.15.1") {
 #'        label = TRUE,
 #'        label_alpha = TRUE,
 #'        name = "") +
-#'   theme(legend.position = "bottom")
+#'   ggplot2::theme(legend.position = "bottom")
 #' # Custom options.
 #' ggcorr(
 #'   nba[, -1],
