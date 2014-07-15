@@ -3,8 +3,9 @@
 \alias{ggcorr}
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
-ggcorr(data, method = "pairwise", palette = "RdYlGn",
-  name = "Correlation\\ncoefficient", geom = "tile", max_size = 6, ...)
+ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
+  geom = "tile", max_size = 6, label = FALSE, label_alpha = FALSE,
+  label_color = "black", label_round = 1, ...)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -15,35 +16,49 @@ ggcorr(data, method = "pairwise", palette = "RdYlGn",
 
 \item{name}{a character string for the legend that shows quintiles of correlation coefficients.}
 
-\item{geom}{the geom object to use. Accepts either \code{tile} (the default) or \code{point}, to plot proportionally scaled circles.}
+\item{geom}{the geom object to use. Accepts either \code{tile} (the default) or \code{circle}, to plot proportionally scaled circles.}
 
 \item{max_size}{the maximum size for circles, as passed to \code{scale_size_area} for proportional scaling. Defaults to \code{6}.}
+
+\item{label}{whether to add correlation coefficients as two-digit numbers over the plot. Defaults to \code{FALSE}.}
+
+\item{label_alpha}{whether to make the correlation coefficients transparent as they come close to 0. Defaults to \code{FALSE}.}
+
+\item{label_color}{color for the correlation coefficients. Defaults to \code{"black"}.}
+
+\item{label_round}{decimal rounding of the correlation coefficients. Defaults to \code{1}.}
 
 \item{...}{other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.}
 }
 \description{
-Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \url{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
+Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \link{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
 }
 \examples{
 # Basketball statistics provided by Nathan Yau at Flowing Data.
 nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
 # Default output.
-ggcorr(nba[-1])
+ggcorr(nba[, -1])
+# Labelled output, with coefficient transparency.
+ggcorr(nba[, -1],
+       label = TRUE,
+       label_alpha = TRUE,
+       name = "") +
+  theme(legend.position = "bottom")
 # Custom options.
 ggcorr(
-  nba[-1],
-  geom     = "point",
+  nba[, -1],
+  geom = "circle",
   max_size = 6,
-  size     = 3,
-  hjust    = 0.75,
-  angle    = -45,
-  palette  = "PuOr" # colorblind safe, photocopy-able
+  size = 3,
+  hjust = 0.75,
+  angle = -45,
+  palette = "PuOr" # colorblind safe, photocopy-able
 ) + ggplot2::labs(title = "Points Per Game")
 }
 \author{
 Francois Briatte \email{f.briatte@ed.ac.uk}
 }
 \seealso{
-\code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
+\code{\link{cor}} and \code{\link[arm]{corrplot}}
 }
 

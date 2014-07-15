@@ -3,18 +3,21 @@
 \alias{ggnet}
 \title{ggnet - Plot a network with ggplot2}
 \usage{
-ggnet(net, mode = "fruchtermanreingold", size = 12, alpha = 0.75,
-  weight.method = "none", names = c("", ""), node.group = NULL,
-  node.color = NULL, node.alpha = NULL, segment.alpha = NULL,
-  segment.color = "grey", segment.size = 0.25, arrow.size = 0,
-  label.nodes = FALSE, top8.nodes = FALSE, trim.labels = TRUE,
+ggnet(net, mode = "fruchtermanreingold", layout.par = NULL, size = 12,
+  alpha = 0.75, weight.method = "none", names = c("", ""),
+  node.group = NULL, node.color = NULL, node.alpha = NULL,
+  segment.alpha = NULL, segment.color = "grey", segment.label = NULL,
+  segment.size = 0.25, arrow.size = 0, label.nodes = FALSE,
+  label.size = size/2, top8.nodes = FALSE, trim.labels = TRUE,
   quantize.weights = FALSE, subset.threshold = 0,
   legend.position = "right", ...)
 }
 \arguments{
 \item{net}{an object of class \code{igraph} or \code{network}. If the object is of class \code{igraph}, the \link[intergraph:asNetwork]{intergraph} package is used to convert it to class \code{network}.}
 
-\item{mode}{a placement method from the list of modes provided in the \link[sna:gplot.layout]{sna} package. Defaults to the Fruchterman-Reingold force-directed algorithm.}
+\item{mode}{a placement method from the list of modes provided in the \link[sna:gplot.layout]{sna} package. Defaults to the Fruchterman-Reingold force-directed algorithm. If \code{mode} is set to \code{"geo"} and \code{net} contains two vertex attributes called \code{"lat"} and \code{"lon"}, these are used instead for geographic networks.}
+
+\item{layout.par}{options to the placement method, as listed in \link[sna]{gplot.layout}.}
 
 \item{size}{size of the network nodes. Defaults to 12. If the nodes are weighted, their area is proportionally scaled up to the size set by \code{size}.}
 
@@ -34,11 +37,13 @@ ggnet(net, mode = "fruchtermanreingold", size = 12, alpha = 0.75,
 
 \item{segment.color}{color of the vertex links. Defaults to \code{"grey"}.}
 
-\item{segment.size}{size of the vertex links. Defaults to 0.25.}
+\item{segment.size}{size of the vertex links, as a vector of values or as a single value. Defaults to 0.25.}
 
-\item{arrow.size}{size of the vertex arrows for directed network plotting. Defaults to 0.}
+\item{segment.label}{labels for the vertex links at mid-edges. Label size will be set to 1 / \code{segment.size}, and label alpha will inherit from \code{alpha}.}
 
-\item{label.nodes}{label nodes with their vertex attributes. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.}
+\item{arrow.size}{size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.}
+
+\item{label.nodes}{label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.}
 
 \item{top8.nodes}{use the top 8 nodes as node groups, colored with \code{"Set1"}. The rest of the network will be plotted as the ninth (grey) group. Experimental.}
 
@@ -54,6 +59,9 @@ ggnet(net, mode = "fruchtermanreingold", size = 12, alpha = 0.75,
 }
 \description{
 Function for making a network plot from an object of class \code{network} or \code{igraph}, using ggplot2.  Please visit \url{http://github.com/briatte/ggnet} for the latest development and descriptions about ggnet.
+}
+\details{
+The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code[tnet]{tnet} package.
 }
 \examples{
 require(network)
@@ -76,12 +84,13 @@ pRnd <- ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "gr
 category = LETTERS[rbinom(x, 4, .5)]
 ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = category)
 
-# City and service firms data from the UCIrvine Network Data Repository.
+# city and service firms data from the UCIrvine Network Data Repository
 url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
 print(load(url))
 close(url)
+
 # plot cities, firms and law firms
-type = network::get.vertex.attribute(cities, "type")
+type = cities \%v\% "type"
 type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
 pRnd <- ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
       label = c("Paris", "Beijing", "Chicago"), color = "darkred")
