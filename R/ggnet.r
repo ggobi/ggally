@@ -24,6 +24,7 @@ if(getRversion() >= "2.15.1") {
 #' @param segment.label labels for the vertex links at mid-edges. Label size will be set to 1 / \code{segment.size}, and label alpha will inherit from \code{alpha}.
 #' @param arrow.size size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.
 #' @param label.nodes label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
+#' @param label.size size of the labels.  Defaults to \code{size / 2}.
 #' @param top8.nodes use the top 8 nodes as node groups, colored with \code{"Set1"}. The rest of the network will be plotted as the ninth (grey) group. Experimental.
 #' @param trim.labels removes '@@', 'http://', 'www.' and the ending '/' from vertex names. Cleans up labels for website and Twitter networks. Defaults to \code{TRUE}.
 #' @param quantize.weights break node weights to quartiles. Fails when quartiles do not uniquely identify nodes.
