@@ -5,3 +5,4 @@ inst/
 .gitignore
 R/.DS_Store
 .git
+.travis.yml
