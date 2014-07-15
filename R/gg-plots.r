@@ -792,10 +792,17 @@ ggally_barDiag <- function(data, mapping, ...){
   mapping$y <- NULL
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
 
-  p <- ggplot(data = data, mapping) + geom_bar(...)
+  p <- ggplot(data = data, mapping)
 
   if(numer){
     # message("is numeric")
+    p <- p + geom_bar(
+      aes(
+        y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+      ),
+      ...
+    ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
+
     p$subType <- "bar_num"
    } else {
     # message("is categorical")
@@ -811,11 +818,14 @@ ggally_barDiag <- function(data, mapping, ...){
     # mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
     # p <- ggplot(data = data, mapping) + geom_bar(...)
     # p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
+    p <- p + geom_bar(...)
+
     p$subType <- "bar_cat"
   }
   p$type <- "diag"
   p
 }
+
 
 #' GGplot Text
 #'
