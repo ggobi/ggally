@@ -1,6 +1,6 @@
 Package: GGally
-Version: 0.4.6
-Date: 2014-05-15
+Version: 0.4.7
+Date: 2014-06-15
 Maintainer: Barret Schloerke <schloerke@gmail.com>
 License: GPL (>= 2.0)
 Title: Extension to ggplot2.
