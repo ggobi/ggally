@@ -11,7 +11,7 @@ before_install:
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
 install:
-  - ./travis-tool.sh install_r_binary rJava igraph
+  - ./travis-tool.sh install_r_binary rJava igraph minqa nloptr RcppEigen colorspace reshape2 proto abind coda dichromat labeling brew gtable reshape network RColorBrewer scagnostics sna tnet lme4 munsell intergraph roxygen2 arm scales ggplot2
   - ./travis-tool.sh install_deps
 script:
   - ./travis-tool.sh run_tests
