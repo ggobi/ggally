@@ -48,12 +48,12 @@ if(getRversion() >= "2.15.1") {
 #' rnd
 #'
 #' # random network
-#' pRnd <- ggnet(rnd, label = TRUE, alpha = 1, color = "white", segment.color = "grey10")
+#' pRnd <- ggnet(rnd, label.nodes = TRUE, alpha = 1, color = "white", segment.color = "grey10")
 #' # pRnd
 #'
 #' # random groups
 #' category = LETTERS[rbinom(x, 4, .5)]
-#' ggnet(rnd, label = TRUE, color = "white", segment.color = "grey10", node.group = category)
+#' ggnet(rnd, label.nodes = TRUE, color = "white", segment.color = "grey10", node.group = category)
 #'
 #' # city and service firms data from the UCIrvine Network Data Repository
 #' url = url("http://networkdata.ics.uci.edu/netdata/data/cities.RData")
@@ -64,7 +64,7 @@ if(getRversion() >= "2.15.1") {
 #' type = cities %v% "type"
 #' type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
 #' pRnd <- ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
-#'       label = c("Paris", "Beijing", "Chicago"), color = "darkred")
+#'       label.nodes = c("Paris", "Beijing", "Chicago"), color = "darkred")
 #' # pRnd
 
 ggnet <- function(
