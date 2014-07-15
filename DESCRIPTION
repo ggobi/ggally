@@ -25,6 +25,7 @@ Imports:
     reshape (>= 0.8.4),
     stringr (>= 0.6.2)
 Suggests:
+    arm (>= 1.7),
     intergraph (>= 2.0-0),
     network (>= 1.7.2),
     RColorBrewer (>= 1.0-5),
