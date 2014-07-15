@@ -31,7 +31,7 @@ ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
 \item{...}{other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.}
 }
 \description{
-Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \link{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
+Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \url{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
 }
 \examples{
 # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -43,7 +43,7 @@ ggcorr(nba[, -1],
        label = TRUE,
        label_alpha = TRUE,
        name = "") +
-  theme(legend.position = "bottom")
+  ggplot2::theme(legend.position = "bottom")
 # Custom options.
 ggcorr(
   nba[, -1],
