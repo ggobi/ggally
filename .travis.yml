@@ -6,12 +6,17 @@
 
 language: c
 
+
 env:
-  # global:
-  #   - BOOTSTRAP_LATEX="1"
-  matrix:
-    - BOOTSTRAP_LATEX="1"
-    - BOOTSTRAP_LATEX="1" R_CHECK_REVDEP=1
+  - BOOTSTRAP_LATEX="1"
+  - BOOTSTRAP_LATEX="1" R_CHECK_REVDEP="1" # checks reverse depends
+
+matrix:
+  fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
+                    # allows the build to "pass" when the non-failure-able builds are done
+  allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
+    - env: BOOTSTRAP_LATEX="1" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
+
 
 
 before_install:
