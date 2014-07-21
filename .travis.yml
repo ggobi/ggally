@@ -4,7 +4,8 @@
 # see the wiki:
 #   https://github.com/craigcitro/r-travis/wiki
 
-language: c
+# language: c
+language: objective-c
 
 env:
   global:
