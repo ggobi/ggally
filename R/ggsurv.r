@@ -258,8 +258,8 @@ ggsurv_m <- function(
       surv.col
     }
     pl <- pl +
-      geom_step(aes(y = up, lty = group), col = stepLty) +
-      geom_step(aes(y = low,lty = group), col = stepLty)
+      geom_step(aes(y = up, lty = group), lty = stepLty) +
+      geom_step(aes(y = low,lty = group), lty = stepLty)
   }
 
   if (identical(plot.cens, TRUE) ){
