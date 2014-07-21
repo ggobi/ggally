@@ -18,7 +18,7 @@ install:
   - ./travis-tool.sh install_r_binary rJava igraph minqa nloptr RcppEigen colorspace reshape2 proto abind coda dichromat labeling brew gtable reshape network RColorBrewer scagnostics sna lme4 munsell arm scales ggplot2
   - ./travis-tool.sh install_deps
 script:
-  - ./travis-tool.sh run_tests
+  - R_CHECK_REVDEP=1 ./travis-tool.sh run_tests
 
 after_failure:
   - ./travis-tool.sh dump_logs
