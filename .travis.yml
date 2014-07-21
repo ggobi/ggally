@@ -14,9 +14,11 @@ before_install:
   - curl -OL http://raw.github.com/schloerke/r-travis/rev_deps/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
+
 install:
   - ./travis-tool.sh install_r_binary rJava igraph minqa nloptr RcppEigen colorspace reshape2 proto abind coda dichromat labeling brew gtable reshape network RColorBrewer scagnostics sna lme4 munsell arm scales ggplot2
   - ./travis-tool.sh install_deps
+
 script:
   - R_CHECK_REVDEP=1 ./travis-tool.sh run_tests
 
