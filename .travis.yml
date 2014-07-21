@@ -16,11 +16,8 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
-  - ./travis-tool.sh install_r_binary rJava igraph minqa nloptr RcppEigen colorspace reshape2 proto abind coda dichromat labeling brew gtable reshape network RColorBrewer scagnostics sna lme4 munsell arm scales ggplot2
+  - ./travis-tool.sh install_r_binary rJava igraph minqa nloptr RcppEigen colorspace reshape2 proto abind coda dichromat labeling brew gtable reshape network RColorBrewer scagnostics sna lme4 munsell arm scales ggplot2 cairoDevice
   - ./travis-tool.sh install_deps
-  - curl -OL http://cran.r-project.org/src/contrib/cairoDevice_2.20.tar.gz
-  - R CMD install --no-test-load cairoDevice_2.20.tar.gz
-  - rm cairoDevice_2.20.tar.gz
 
 script:
   - R_CHECK_REVDEP=1 ./travis-tool.sh run_tests
