@@ -132,7 +132,7 @@ ggnet(cities, mode = "kamadakawai", alpha = .2, node.group = type,
 }
 \author{
   Moritz Marbach \email{mmarbach@mail.uni-mannheim.de} and
-  Francois Briatte \email{f.briatte@ed.ac.uk}
+  Francois Briatte \email{f.briatte@gmail.com}
 }
 \seealso{
   \code{\link[sna]{gplot}} in the \link[sna:gplot]{sna}
