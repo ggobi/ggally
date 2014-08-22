@@ -26,11 +26,6 @@ before_install:
 
 install:
   - ./travis-tool.sh install_r_binary rJava igraph minqa nloptr RcppEigen colorspace reshape2 proto abind coda dichromat labeling brew gtable reshape network RColorBrewer scagnostics sna lme4 munsell arm scales ggplot2 cairoDevice RGtk2
-  -
-  - if [[ -n "$R_CHECK_REVDEP" ]]; then
-  -   ./travis-tool.sh install_r_binary cairoDevice RGtk2 FNN mvtnorm gWidgetsRGtk2 Hmisc norm mice mi psych pwr fBasics e1071 ltm MBESS knitr xtable lavaan XLConnect expm sfsmisc mime gWidgets Formula latticeExtra randomForest car R2WinBUGS timeDate timeSeries stabledist gss msm polycor formatR highr markdown mnormt pbivnorm quadprog
-  - fi
-  -
   - ./travis-tool.sh install_deps
 
 script:
