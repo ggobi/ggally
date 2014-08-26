@@ -91,10 +91,13 @@ ggnet <- function(
   legend.position  = "right",   # set to "none" to remove from plot
   ...                           # passed to geom_text for node labels
 ){
-  require(intergraph   , quietly = TRUE) # igraph conversion
-  require(network      , quietly = TRUE) # vertex attributes
-  require(RColorBrewer , quietly = TRUE) # default colors
-  require(sna          , quietly = TRUE) # placement algorithm
+
+
+  require_pkgs(c("intergraph", "network", "RColorBrewer", "sna"))
+  # intergraph   # igraph conversion
+  # network      # vertex attributes
+  # RColorBrewer # default colors
+  # sna          # placement algorithm
 
   # support for igraph objects
   if(class(net) == "igraph") {
