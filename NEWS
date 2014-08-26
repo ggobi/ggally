@@ -1,3 +1,17 @@
+GGally 0.4.8
+-----------------
+
+DATA
+
+* Added a dataset on city and service firms from the UCIrvine Network Data Repository. (Removes random connection error)
+
+BUGS
+
+* Fixed small bug in ggsurv with geom_step col to lty
+* Fixed namespace issues for R CMD check
+
+
+
 GGally 0.4.7
 -----------------
 
