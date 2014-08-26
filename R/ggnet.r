@@ -101,7 +101,7 @@ ggnet <- function(
 
   # support for igraph objects
   if(class(net) == "igraph") {
-    net = asNetwork(net)
+    net = intergraph::asNetwork(net)
   }
   if(class(net) != "network")
     stop("net must be a network object of class 'network' or 'igraph'")
@@ -126,13 +126,15 @@ ggnet <- function(
   }
 
   # get sociomatrix
-  m <- as.matrix.network.adjacency(net)
+  m <- network::as.matrix.network.adjacency(net)
+  v_function = get("%v%", envir = as.environment("package:network"))
 
   if(mode == "geo" & all(c("lat", "lon") %in% vattr)) {
 
+
     plotcord = data.frame(
-      X1 = as.numeric(net %v% "lon"),
-      X2 = as.numeric(net %v% "lat")
+      X1 = as.numeric(v_function(net, "lon")),
+      X2 = as.numeric(v_function(net, "lat"))
       )
 
     # remove outliers
@@ -153,7 +155,7 @@ ggnet <- function(
   }
 
   # get edgelist
-  edglist <- as.matrix.network.edgelist(net)
+  edglist <- network::as.matrix.network.edgelist(net)
   edges   <- data.frame(plotcord[edglist[, 1], ], plotcord[edglist[, 2], ])
 
   # get node groups
@@ -164,21 +166,21 @@ ggnet <- function(
 
   # get node weights
   degrees <- data.frame(
-    id        = network.vertex.names(net),
+    id        = network::network.vertex.names(net),
     indegree  = sapply(net$iel, length),
     outdegree = sapply(net$oel, length)
   )
   degrees$freeman <- with(degrees, indegree + outdegree)
 
   # custom weights: vector of weights
-  if(length(weight.method) == network.size(net)) {
+  if(length(weight.method) == network::network.size(net)) {
     degrees$user = weight.method
     weight = "user"
   }
 
   # custom weights: vertex attribute
   if(weight.method %in% vattr) {
-    degrees$user = net %v% weight.method
+    degrees$user = v_function(net, weight.method)
     names(degrees)[ ncol(degrees) ] = weight.method
     weight = weight.method
   }
@@ -196,7 +198,7 @@ ggnet <- function(
     plotcord$group       = as.character(degrees$id)
     plotcord$group[-top] = paste0("(", weight, " > ", subset.threshold - 1, ")")
     node.group           = plotcord$group
-    node.color           = brewer.pal(9, "Set1")[c(9, 1:8)]
+    node.color           = RColorBrewer::brewer.pal(9, "Set1")[c(9, 1:8)]
   }
 
   colnames(edges) <- c("X1", "Y1", "X2", "Y2")
@@ -290,7 +292,7 @@ ggnet <- function(
   if(length(node.color) != n & !is.null(node.group)) {
     warning("Node groups and node colors are of unequal length; using default colors.")
     if(n > 0 & n < 10) {
-      node.color = brewer.pal(9, "Set1")[1:n]
+      node.color = RColorBrewer::brewer.pal(9, "Set1")[1:n]
     }
   }
 

@@ -371,9 +371,9 @@ ggparcoord <- function(
   }
   else if(order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
     "Stringy","Monotonic")) {
-    scag <- scagnostics(saveData2)
 
     require_pkgs("scagnostics")
+    scag <- scagnostics::scagnostics(saveData2)
     data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(saveData2),order))
   }
   else if(tolower(order) == "skewness") {
