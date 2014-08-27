@@ -43,4 +43,3 @@ branches:
   only:
     - master
     - dev
-    - travis
