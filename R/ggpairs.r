@@ -569,6 +569,195 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @examples
 #'  data(tips, package = "reshape")
 #'  ggpairs(tips[,1:3])
+
+# pMat <- ggpairs(tips[,1:3], axisLabels="show")
+# print(pMat) # bad alignment
+# print_new(pMat) # good plot alignment, not aligned labels
+# print_new(pMat, leftWidthProportion = 0.3, bottomWidthProportion = 2.5)
+print_new <- function(
+  x,
+  leftWidthProportion = 0.1,
+  bottomWidthProportion = 0.1,
+  showStrips = FALSE,
+  ...
+) {
+
+  plotObj <- x
+
+  # If using internal axis labels, extend the plotting region out since
+  # variable names on the margins will not be used
+  if(identical(plotObj$axisLabels,"internal")) {
+    v1 <- viewport(
+      y = unit(0.5, "npc") - unit(0.5,"lines"),
+      width=unit(1, "npc") - unit(1,"lines"),
+      height=unit(1, "npc") - unit(2, "lines")
+    )
+  } else {
+    v1 <- viewport(
+      width=unit(1, "npc") - unit(3,"lines"),
+      height=unit(1, "npc") - unit(3, "lines")
+    )
+  }
+
+  numCol <- length(plotObj$columns)
+
+  spacing = 0.03
+  viewPortWidths <- c(leftWidthProportion, rep(c(spacing,1), numCol))
+  viewPortHeights <- c(rep(c(1,spacing), numCol), bottomWidthProportion)
+  viewPortCount <- length(viewPortWidths)
+
+  v2 <- viewport(
+    layout = grid.layout(
+      viewPortCount,
+      viewPortCount,
+      ## added left and bottom spacers for axis labels
+      widths = viewPortWidths,
+      heights = viewPortHeights
+  ))
+
+  grid.newpage()
+
+  if(plotObj$title != ""){
+    pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
+    grid.text(plotObj$title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=15))
+    popViewport()
+  }
+
+  # This plots the variable names on the margins, which is not needed if using internal
+  # axis labels
+  if(!identical(plotObj$axisLabels,"internal")) {
+    # viewport for Left Names
+    pushViewport(viewport(width=unit(1, "npc") - unit(2,"lines"), height=unit(1, "npc") - unit(3, "lines")))
+
+    ## new for axis spacing
+    # pushViewport(viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) )))
+    pushViewport(viewport(layout = grid.layout(
+      viewPortCount, viewPortCount,
+      widths = viewPortWidths, heights = viewPortHeights
+    )))
+
+    # Left Side
+    for(i in 1:numCol){
+      grid.text(names(plotObj$data[,plotObj$columns])[i],0,0.5,rot=90,just=c("centre","centre"), vp = vplayout(as.numeric(i) * 2 - 1 ,1))
+    }
+
+    popViewport()# layout
+    popViewport()# spacing
+
+    # viewport for Bottom Names
+    pushViewport(viewport(width=unit(1, "npc") - unit(3,"lines"), height=unit(1, "npc") - unit(2, "lines")))
+
+    ## new for axis spacing
+    # pushViewport(viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) )))
+    pushViewport(viewport(layout = grid.layout(
+      viewPortCount, viewPortCount,
+      widths = viewPortWidths, heights = viewPortHeights
+    )))
+
+
+    # Bottom Side
+    for(i in 1:numCol){
+      grid.text(names(plotObj$data[,plotObj$columns])[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol + numCol + 1, 2 * i + 1))
+    }
+
+    popViewport() #layout
+    popViewport() #spacing
+  }
+
+##############################################################
+####################  End Viewports  #########################
+##############################################################
+
+#####################  Plot Objects  #########################
+
+  pushViewport(v1) # labels on outside
+  pushViewport(v2) # layout of plots
+
+  for(rowPos in 1:numCol){
+    for(columnPos in 1:numCol){
+      p <- getPlot(plotObj, rowPos, columnPos)
+
+      ## New axis labels
+
+      # left axis
+      if (columnPos == 1) {
+        if (identical(plotObj$verbose, TRUE)) {
+          print("trying left axis")
+        }
+        pGtable     <- ggplot_gtable(ggplot_build(p))
+        pAxisLabels <- gtable_filter(pGtable, "axis-l")
+        pushViewport(vplayout(rowPos * 2 - 1, 1))
+
+          ## uncomment to see the 'viewport'
+          # grid.rect(
+          #   gp = gpar(fill = "white", lty = "solid"),
+          #   ## added another position for the labels
+          #   # vp = vplayout(rowPos, columnPos)
+          #   vp = vplayout(rowPos, columnPos + 1)
+          # )
+
+          # a <<- pAxisLabels
+          # pAxisLabels$vp <- viewport(x = 1, y = 0.5)
+          # grid.draw(pAxisLabels)
+
+          # pushViewport(viewport(x = 1, y = 0.5, clip = "on"))
+          #   suppressMessages(suppressWarnings(
+          #     grid.draw(pAxisLabels)
+          #   ))
+          # popViewport()
+          suppressMessages(suppressWarnings(
+            grid.draw(pAxisLabels)
+          ))
+        popViewport()
+      }
+      ## bottom axis
+      if (rowPos == numCol) {
+        if (identical(plotObj$verbose, TRUE)) {
+          print("trying bottom axis")
+        }
+        pGtable <- ggplot_gtable(ggplot_build(p))
+        pAxisLabels <- gtable_filter(pGtable, "axis-b")
+        pushViewport(vplayout(numCol + numCol + 1, 2 * columnPos + 1))
+
+        ## TODO copy from left axis setup...
+        suppressMessages(suppressWarnings(
+          grid.draw(pAxisLabels)
+        ))
+
+        popViewport()
+      }
+
+      ## get 'plot panel' grob to draw
+      pGtable <- ggplot_gtable(ggplot_build(p))
+      if (showStrips) {
+        layoutRows <- (pGtable$layout$name %in% c("panel", "strip-top", "strip-right"))
+      } else {
+        layoutRows <- (pGtable$layout$name %in% c("panel"))
+      }
+
+      layoutInfo <- pGtable$layout[layoutRows, ]
+      layoutTB <- layoutInfo[,c("t", "b")]
+      layoutLR <- layoutInfo[,c("l", "r")]
+
+      pPanel <- pGtable[
+        min(layoutTB):max(layoutTB),
+        min(layoutLR):max(layoutLR)
+      ]
+
+      ## Draw 'plot panel'
+      pushViewport(vplayout(2 * rowPos - 1, 2 * columnPos + 1))
+        suppressMessages(suppressWarnings(
+          grid.draw(pPanel)
+        ))
+      popViewport()
+
+    }# end cols
+  }# end rows
+
+  popViewport() #layout
+  popViewport() #spacing
+}
+
 print.ggpairs <- function(x, ...){
   plotObj <- x
 
