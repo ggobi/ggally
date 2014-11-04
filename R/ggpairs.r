@@ -149,10 +149,13 @@ ggpairs <- function(
 
   verbose = verbose || printInfo
 
-  if (! axisLabels %in% c("show", "internal", "none")) {
+  axisLabelChoices <- c("show", "internal", "none")
+  axisLabelChoice <- pmatch(axisLabels, axisLabelChoices)
+  if (is.na(axisLabelChoice)) {
     warning("axisLabels not in c('show', 'internal', 'none').  Reverting to 'show'")
-    axisLabels <- "show"
+    axisLabelChoice <- 1
   }
+  axisLabels <- axisLabelChoices[axisLabelChoice]
 
   if(!is.list(upper) && upper == "blank"){
     upper <- list()
