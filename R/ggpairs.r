@@ -730,10 +730,10 @@ print_new <- function(
         suppressMessages(suppressWarnings(
           grid.draw(pPanel)
         ))
-      popViewport()
+      popViewport() # 'plot panel' area
 
-    }# end cols
-  }# end rows
+    } # end cols
+  } # end rows
 
   popViewport() #layout
   popViewport() #spacing
