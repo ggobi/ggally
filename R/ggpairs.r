@@ -568,12 +568,8 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  ggpairs(tips[,1:3])
-
-# pMat <- ggpairs(tips[,1:3], axisLabels="show")
-# print(pMat) # bad alignment
-# print_new(pMat) # good plot alignment, not aligned labels
-# print_new(pMat, leftWidthProportion = 0.3, bottomWidthProportion = 2.5)
+#'  pMat <- ggpairs(tips[,1:3])
+#'  print_new(pMat)
 print_new <- function(
   x,
   leftWidthProportion = 0.1,
@@ -582,6 +578,10 @@ print_new <- function(
   spacing = 0.03,
   ...
 ) {
+# pMat <- ggpairs(tips[,1:3], axisLabels="show")
+# print(pMat) # bad alignment
+# print_new(pMat) # good plot alignment, not aligned labels
+# print_new(pMat, leftWidthProportion = 0.3, bottomWidthProportion = 2.5)
 
   plotObj <- x
 
