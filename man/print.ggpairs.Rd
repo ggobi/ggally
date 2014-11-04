@@ -3,7 +3,9 @@
 \alias{print.ggpairs}
 \title{Print ggpair object}
 \usage{
-\method{print}{ggpairs}(x, ...)
+\method{print}{ggpairs}(x, leftWidthProportion = 0.2,
+  bottomHeightProportion = 0.1, spacingProportion = 0.03,
+  showStrips = FALSE, ...)
 }
 \arguments{
 \item{x}{ggpair object to be plotted}
@@ -15,7 +17,9 @@ Specialized method to print the ggpair object-
 }
 \examples{
 data(tips, package = "reshape")
- ggpairs(tips[,1:3])
+ pMat <- ggpairs(tips, 1:3, color = "sex")
+ pMat
+ print(pMat, leftWidthProportion = 3, spacingProportion = 1, bottomHeightProportion = 1, showStrips = TRUE)
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

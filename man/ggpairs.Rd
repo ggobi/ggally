@@ -5,7 +5,7 @@
 \usage{
 ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
   lower = list(), diag = list(), params = NULL, ...,
-  axisLabels = "internal", legends = FALSE, verbose = FALSE)
+  axisLabels = "show", legends = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -24,7 +24,7 @@ ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
 
 \item{...}{other parameters being supplied to geom's aes, such as color}
 
-\item{axisLabels}{either "internal" for labels in the diagonal plots, "none" for no axis labels, or "show" to display axisLabels}
+\item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 
 \item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
 
@@ -96,7 +96,7 @@ bad_plots <- ggpairs(
 )
 # bad_plots
 
-# Labels on the outside, grids won't line up
+# Only Variable Labels on the outside (no axis labels)
 pm <- ggpairs(tips[,1:3], axisLabels="none")
 # pm
 
