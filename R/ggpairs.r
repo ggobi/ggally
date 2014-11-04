@@ -602,8 +602,8 @@ print_new <- function(
 
   numCol <- length(plotObj$columns)
 
-  viewPortWidths <- c(leftWidthProportion, rep(c(spacing,1), numCol))
-  viewPortHeights <- c(rep(c(1,spacing), numCol), bottomWidthProportion)
+  viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacing,1), numCol - 1))
+  viewPortHeights <- c(rep(c(1,spacing), numCol - 1), 1, bottomWidthProportion)
   viewPortCount <- length(viewPortWidths)
 
   v2 <- viewport(
@@ -686,27 +686,54 @@ print_new <- function(
           print("trying left axis")
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-l")
-        pushViewport(vplayout(rowPos * 2 - 1, 1))
 
-          suppressMessages(suppressWarnings(
-            grid.draw(pAxisLabels)
-          ))
-        popViewport()
+        # make a viewport that is chopped into numFacets parts vertically
+        grobLength <- length(pAxisLabels$grobs)
+        vpLAxis <- viewport(
+          layout = grid.layout(
+            grobLength, 1,
+            widths  = unit(1, "null"),
+            heights = unit(rep(1, grobLength), rep("null", grobLength))
+          )
+        )
+
+        pushViewport(vplayout(rowPos * 2 - 1, 1))
+        pushViewport(vpLAxis)
+          for (lAxisPos in 1:grobLength) {
+            pushViewport(vplayout(lAxisPos, 1))
+            grid.draw(pAxisLabels$grobs[[lAxisPos]])
+            popViewport()
+          }
+        popViewport() # vpLAxis
+        popViewport() # left Axis 'plot' area
       }
+
       ## bottom axis
       if (rowPos == numCol) {
         if (identical(plotObj$verbose, TRUE)) {
           print("trying bottom axis")
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-b")
+
+        grobLength <- length(pAxisLabels$grobs)
+        vpBAxis <- viewport(
+          layout = grid.layout(
+            grobLength, 1,
+            widths  = unit(rep(1, grobLength), rep("null", grobLength)),
+            heights = unit(1, "null")
+          )
+        )
+
         pushViewport(vplayout(numCol + numCol + 1, 2 * columnPos + 1))
+        pushViewport(vpLAxis)
+          for (bAxisPos in 1:grobLength) {
+            pushViewport(vplayout(1, bAxisPos))
+            grid.draw(pAxisLabels$grobs[[bAxisPos]])
+            popViewport()
+          }
+        popViewport() # vpBAxis
+        popViewport() # bottom Axis 'plot' area
 
-        ## TODO copy from left axis setup...
-        suppressMessages(suppressWarnings(
-          grid.draw(pAxisLabels)
-        ))
-
-        popViewport()
       }
 
       ## get 'plot panel' grob to draw
@@ -726,7 +753,7 @@ print_new <- function(
       ]
 
       ## Draw 'plot panel'
-      pushViewport(vplayout(2 * rowPos - 1, 2 * columnPos + 1))
+      pushViewport(vplayout(2 * rowPos - 1, 2 * columnPos))
         suppressMessages(suppressWarnings(
           grid.draw(pPanel)
         ))
