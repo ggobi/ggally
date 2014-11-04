@@ -582,10 +582,6 @@ print.ggpairs <- function(
   showStrips = FALSE,
   ...
 ) {
-# pMat <- ggpairs(tips[,1:3], axisLabels="show")
-# print(pMat) # bad alignment
-# print_new(pMat) # good plot alignment, not aligned labels
-# print_new(pMat, leftWidthProportion = 0.3, bottomWidthProportion = 2.5)
 
   plotObj <- x
 
@@ -640,8 +636,6 @@ print.ggpairs <- function(
     # viewport for Left Names
     pushViewport(viewport(width=unit(1, "npc") - unit(2,"lines"), height=unit(1, "npc") - unit(3, "lines")))
 
-    ## new for axis spacing
-    # pushViewport(viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) )))
     ## new for axis spacingProportion
     pushViewport(viewport(layout = grid.layout(
       viewPortCount, viewPortCount,
