@@ -574,10 +574,10 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #'  ggpairs(tips[,1:3])
 print.ggpairs <- function(
   x,
-  leftWidthProportion = 0.1,
-  bottomWidthProportion = 0.1,
+  leftWidthProportion = 0.2,
+  bottomHeightProportion = 0.1,
+  spacingProportion = 0.03,
   showStrips = FALSE,
-  spacing = 0.03,
   ...
 ) {
 # pMat <- ggpairs(tips[,1:3], axisLabels="show")
@@ -606,12 +606,12 @@ print.ggpairs <- function(
 
   if (identical(plotObj$axisLabels,"show")) {
     showLabels <- TRUE
-    viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacing,1), numCol - 1))
-    viewPortHeights <- c(rep(c(1,spacing), numCol - 1), 1, bottomWidthProportion)
+    viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacingProportion,1), numCol - 1))
+    viewPortHeights <- c(rep(c(1,spacingProportion), numCol - 1), 1, bottomHeightProportion)
   } else {
     showLabels <- FALSE
-    viewPortWidths <- c(1, rep(c(spacing,1), numCol - 1))
-    viewPortHeights <- c(rep(c(1,spacing), numCol - 1), 1)
+    viewPortWidths <- c(1, rep(c(spacingProportion,1), numCol - 1))
+    viewPortHeights <- c(rep(c(1,spacingProportion), numCol - 1), 1)
   }
   viewPortCount <- length(viewPortWidths)
 
@@ -640,6 +640,7 @@ print.ggpairs <- function(
 
     ## new for axis spacing
     # pushViewport(viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) )))
+    ## new for axis spacingProportion
     pushViewport(viewport(layout = grid.layout(
       viewPortCount, viewPortCount,
       widths = viewPortWidths, heights = viewPortHeights
@@ -657,7 +658,6 @@ print.ggpairs <- function(
     pushViewport(viewport(width=unit(1, "npc") - unit(3,"lines"), height=unit(1, "npc") - unit(2, "lines")))
 
     ## new for axis spacing
-    # pushViewport(viewport(layout = grid.layout(numCol, numCol, widths = rep(1,numCol), heights = rep(1,numCol) )))
     pushViewport(viewport(layout = grid.layout(
       viewPortCount, viewPortCount,
       widths = viewPortWidths, heights = viewPortHeights
