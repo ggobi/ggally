@@ -571,7 +571,9 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  ggpairs(tips[,1:3])
+#'  pMat <- ggpairs(tips[,1:3])
+#'  pMat
+#'  print(pMat, leftWidthProportion = 3, spacingProportion = 1, bottomHeightProportion = 1)
 print.ggpairs <- function(
   x,
   leftWidthProportion = 0.2,
