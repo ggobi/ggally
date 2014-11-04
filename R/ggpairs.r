@@ -65,7 +65,7 @@
 #' @param diag see Details
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
-#' @param axisLabels either "internal" for labels in the diagonal plots, "none" for no axis labels, or "show" to display axisLabels
+#' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
@@ -115,7 +115,7 @@
 #' )
 #' # bad_plots
 #'
-#' # Labels on the outside, grids won't line up
+#' # Only Variable Labels on the outside (no axis labels)
 #' pm <- ggpairs(tips[,1:3], axisLabels="none")
 #' # pm
 #'
@@ -141,7 +141,7 @@ ggpairs <- function(
   diag = list(),
   params = NULL,
   ...,
-  axisLabels = "internal",
+  axisLabels = "show",
   legends = FALSE,
   verbose = FALSE
 ){
@@ -149,9 +149,9 @@ ggpairs <- function(
 
   verbose = verbose || printInfo
 
-  if (! axisLabels %in% c("none", "show", "internal")) {
-    warning("axisLabels not in c('none', 'show', 'internal').  Reverting to 'internal'")
-    axisLabels <- "internal"
+  if (! axisLabels %in% c("show", "internal", "none")) {
+    warning("axisLabels not in c('show', 'internal', 'none').  Reverting to 'show'")
+    axisLabels <- "show"
   }
 
   if(!is.list(upper) && upper == "blank"){
