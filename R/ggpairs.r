@@ -676,6 +676,7 @@ print_new <- function(
   for(rowPos in 1:numCol){
     for(columnPos in 1:numCol){
       p <- getPlot(plotObj, rowPos, columnPos)
+      pGtable <- ggplot_gtable(ggplot_build(p))
 
       ## New axis labels
 
@@ -684,7 +685,6 @@ print_new <- function(
         if (identical(plotObj$verbose, TRUE)) {
           print("trying left axis")
         }
-        pGtable     <- ggplot_gtable(ggplot_build(p))
         pAxisLabels <- gtable_filter(pGtable, "axis-l")
         pushViewport(vplayout(rowPos * 2 - 1, 1))
 
@@ -715,7 +715,6 @@ print_new <- function(
         if (identical(plotObj$verbose, TRUE)) {
           print("trying bottom axis")
         }
-        pGtable <- ggplot_gtable(ggplot_build(p))
         pAxisLabels <- gtable_filter(pGtable, "axis-b")
         pushViewport(vplayout(numCol + numCol + 1, 2 * columnPos + 1))
 
@@ -728,7 +727,6 @@ print_new <- function(
       }
 
       ## get 'plot panel' grob to draw
-      pGtable <- ggplot_gtable(ggplot_build(p))
       if (showStrips) {
         layoutRows <- (pGtable$layout$name %in% c("panel", "strip-top", "strip-right"))
       } else {
