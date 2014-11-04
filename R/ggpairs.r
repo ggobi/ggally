@@ -579,6 +579,7 @@ print_new <- function(
   leftWidthProportion = 0.1,
   bottomWidthProportion = 0.1,
   showStrips = FALSE,
+  spacing = 0.03,
   ...
 ) {
 
@@ -601,7 +602,6 @@ print_new <- function(
 
   numCol <- length(plotObj$columns)
 
-  spacing = 0.03
   viewPortWidths <- c(leftWidthProportion, rep(c(spacing,1), numCol))
   viewPortHeights <- c(rep(c(1,spacing), numCol), bottomWidthProportion)
   viewPortCount <- length(viewPortWidths)
