@@ -602,8 +602,15 @@ print_new <- function(
 
   numCol <- length(plotObj$columns)
 
-  viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacing,1), numCol - 1))
-  viewPortHeights <- c(rep(c(1,spacing), numCol - 1), 1, bottomWidthProportion)
+  if (identical(plotObj$axisLabels,"show")) {
+    showLabels <- TRUE
+    viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacing,1), numCol - 1))
+    viewPortHeights <- c(rep(c(1,spacing), numCol - 1), 1, bottomWidthProportion)
+  } else {
+    showLabels <- FALSE
+    viewPortWidths <- c(1, rep(c(spacing,1), numCol - 1))
+    viewPortHeights <- c(rep(c(1,spacing), numCol - 1), 1)
+  }
   viewPortCount <- length(viewPortWidths)
 
   v2 <- viewport(
@@ -657,7 +664,16 @@ print_new <- function(
 
     # Bottom Side
     for(i in 1:numCol){
-      grid.text(names(plotObj$data[,plotObj$columns])[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol + numCol, 2 * i))
+      grid.text(
+        names(plotObj$data[,plotObj$columns])[i],
+        0.5,
+        0,
+        just = c("centre","centre"),
+        vp = vplayout(
+          ifelse(showLabels, 2*numCol, 2*numCol - 1),
+          ifelse(showLabels, 2*i, 2*i - 1)
+        )
+      )
     }
 
     popViewport() #layout
@@ -681,7 +697,7 @@ print_new <- function(
       ## New axis labels
 
       # left axis
-      if (columnPos == 1) {
+      if (columnPos == 1 && showLabels) {
         if (identical(plotObj$verbose, TRUE)) {
           print("trying left axis")
         }
@@ -709,7 +725,7 @@ print_new <- function(
       }
 
       ## bottom axis
-      if (rowPos == numCol) {
+      if (rowPos == numCol && showLabels) {
         if (identical(plotObj$verbose, TRUE)) {
           print("trying bottom axis")
         }
@@ -753,7 +769,7 @@ print_new <- function(
       ]
 
       ## Draw 'plot panel'
-      pushViewport(vplayout(2 * rowPos - 1, 2 * columnPos))
+      pushViewport(vplayout(2 * rowPos - 1, ifelse(showLabels, 2 * columnPos, 2*columnPos - 1)))
         suppressMessages(suppressWarnings(
           grid.draw(pPanel)
         ))
