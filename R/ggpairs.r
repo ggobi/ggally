@@ -564,7 +564,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @method print ggpairs
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport
+#' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport grid.draw
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
