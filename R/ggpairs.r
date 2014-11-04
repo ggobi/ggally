@@ -657,7 +657,7 @@ print_new <- function(
 
     # Bottom Side
     for(i in 1:numCol){
-      grid.text(names(plotObj$data[,plotObj$columns])[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol + numCol + 1, 2 * i + 1))
+      grid.text(names(plotObj$data[,plotObj$columns])[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol + numCol, 2 * i))
     }
 
     popViewport() #layout
@@ -724,7 +724,7 @@ print_new <- function(
           )
         )
 
-        pushViewport(vplayout(numCol + numCol + 1, 2 * columnPos + 1))
+        pushViewport(vplayout(numCol + numCol, 2 * columnPos))
         pushViewport(vpLAxis)
           for (bAxisPos in 1:grobLength) {
             pushViewport(vplayout(1, bAxisPos))
