@@ -688,23 +688,6 @@ print_new <- function(
         pAxisLabels <- gtable_filter(pGtable, "axis-l")
         pushViewport(vplayout(rowPos * 2 - 1, 1))
 
-          ## uncomment to see the 'viewport'
-          # grid.rect(
-          #   gp = gpar(fill = "white", lty = "solid"),
-          #   ## added another position for the labels
-          #   # vp = vplayout(rowPos, columnPos)
-          #   vp = vplayout(rowPos, columnPos + 1)
-          # )
-
-          # a <<- pAxisLabels
-          # pAxisLabels$vp <- viewport(x = 1, y = 0.5)
-          # grid.draw(pAxisLabels)
-
-          # pushViewport(viewport(x = 1, y = 0.5, clip = "on"))
-          #   suppressMessages(suppressWarnings(
-          #     grid.draw(pAxisLabels)
-          #   ))
-          # popViewport()
           suppressMessages(suppressWarnings(
             grid.draw(pAxisLabels)
           ))
