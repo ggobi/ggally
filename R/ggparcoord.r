@@ -453,6 +453,11 @@ ggparcoord <- function(
     p <- p + geom_point(aes(x=as.numeric(variable), y=value))
   }
 
+  if (useSplines) {
+    xAxisLabels <- levels(data.m$variable)
+    p <- p + scale_x_discrete(breaks = seq_along(xAxisLabels), labels = xAxisLabels)
+  }
+
   if (title != "") {
     p <- p + labs(title = title)
   }
