@@ -449,8 +449,9 @@ ggparcoord <- function(
     p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data=data.m)
   }
 
-  if (showPoints)
+  if (showPoints) {
     p <- p + geom_point(aes(x=as.numeric(variable), y=value))
+  }
 
   if (title != "") {
     p <- p + labs(title = title)
