@@ -912,6 +912,13 @@ addAndOverwriteAes <- function(current, new) {
       current[names(new)[i]] <- new[i]
     }
   }
+
+  for (curName in names(current)) {
+    if (is.null(current[[curName]])) {
+      current[[curName]] <- NULL
+    }
+  }
+
   current
 }
 
