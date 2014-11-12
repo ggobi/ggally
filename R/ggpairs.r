@@ -142,6 +142,7 @@ ggpairs <- function(
   params = NULL,
   ...,
   axisLabels = "internal",
+  columnLabels = colnames(data[,columns]),
   legends = FALSE,
   verbose = FALSE
 ){
@@ -392,6 +393,7 @@ ggpairs <- function(
     } else if(type == "label") {
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
       combo_params <- addAndOverwriteAes(params, diag$params)
+      combo_params <- addAndOverwriteAes(combo_params, c("label" = columnLabels[posX]))
 
       p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
     }
@@ -407,6 +409,7 @@ ggpairs <- function(
     verbose = verbose,
     printInfo = printInfo,
     axisLabels = axisLabels,
+    columnLabels = columnLabels,
     legends = legends
   )
 
@@ -630,7 +633,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
 
   # Left Side
   for(i in 1:numCol){
-    grid.text(names(plotObj$data[,plotObj$columns])[i],0,0.5,rot=90,just=c("centre","centre"), vp = vplayout(as.numeric(i),1))
+    grid.text(plotObj$columnLabels[i],0,0.5,rot=90,just=c("centre","centre"), vp = vplayout(as.numeric(i),1))
   }
 
   popViewport()# layout
@@ -644,7 +647,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
 
   # Bottom Side
   for(i in 1:numCol){
-    grid.text(names(plotObj$data[,plotObj$columns])[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol, i))
+    grid.text(plotObj$columnLabels[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol, i))
   }
 
   popViewport() #layout
