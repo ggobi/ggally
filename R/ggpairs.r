@@ -155,6 +155,20 @@ ggpairs <- function(
     axisLabels <- "internal"
   }
 
+  if (any(columns > ncol(data))) {
+    stop(paste("Make sure your 'columns' values are less than ", ncol(data), ".\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+  }
+  if (any(columns < 1)) {
+    stop(paste("Make sure your 'columns' values are positive.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+  }
+  if (any((columns %% 1) != 0)) {
+    stop(paste("Make sure your 'columns' values are integers.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+  }
+
+  if (length(columnLabels) != length(columns)) {
+    stop("The length of the 'columnLabels' does not match the length of the 'columns' being used.")
+  }
+
   if(!is.list(upper) && upper == "blank"){
     upper <- list()
     upper$continuous = "blank"
