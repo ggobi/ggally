@@ -429,7 +429,9 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
       "bad_function_name"
   )
 
-  if(identical(test_for_function, "bad_function_name")) return( ggally_text("Incorrect\nPlot",size=6))
+  if(identical(test_for_function, "bad_function_name")) {
+    return( ggally_text("Incorrect\nPlot",size=6))
+  }
 
 
   text <- paste(func_text, "(ggally_data, ggplot2::aes(", paste(names(mapping), " = ", as.character(mapping), sep = "", collapse = ", "), ")", sep = "", collapse = "")
