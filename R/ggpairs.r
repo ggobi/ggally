@@ -206,9 +206,12 @@ ggpairs <- function(
   }
 
   data <- as.data.frame(data)
-      for ( i in 1:dim(data)[2] ) {
-        if(is.character(data[,i])) data[,i] <- as.factor(data[,i])
-      }
+  for ( i in 1:dim(data)[2] ) {
+    if(is.character(data[,i])) {
+      data[,i] <- as.factor(data[,i])
+    }
+  }
+
   numCol <- length(columns)
   if(printInfo)
     cat("data col: ", numCol,"\n")
@@ -272,7 +275,7 @@ ggpairs <- function(
 
       combo_params <- addAndOverwriteAes(params, section_params)
 
-        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+      p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
 #      else if(subType == "smooth")
 #        p <- ggally_smooth(data, combo_aes, params)
 #      else if(subType == "density")
@@ -333,19 +336,21 @@ ggpairs <- function(
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
       combo_params <- addAndOverwriteAes(params, section_params)
 
-      if(subType == "ratio")
+      if(subType == "ratio") {
         p <- ggally_ratio(data[, c(yColName, xColName)])
-      else if(subType == "facetbar"){
-        if(!is.null(combo_aes$colour)){
+      } else if(subType == "facetbar") {
+        if(!is.null(combo_aes$colour)) {
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
         }
         p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
       }
-      else if(subType == "blank")
+      else if(subType == "blank") {
         p <- "ggally_blank('blank')"
-      else p <- ggally_text("Incorrect\nPlot",size=6)
+      } else {
+        p <- ggally_text("Incorrect\nPlot",size=6)
+      }
 
-    } else if(type == "stat_bin-num"){
+    } else if(type == "stat_bin-num") {
       if(printInfo)cat("stat_bin-num\n")
 
       subType <- diag$continuous
@@ -356,10 +361,11 @@ ggpairs <- function(
 
       combo_params <- addAndOverwriteAes(params, diag$params)
 
-      if(subType != "blank")
+      if(subType != "blank") {
         p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
-      else
+      } else {
         p <- "blank"
+      }
 #
 #        p <- ggally_densityDiag(data, combo_aes, params)
 #      else if(subType == "bar")
@@ -376,7 +382,6 @@ ggpairs <- function(
 
       combo_params <- addAndOverwriteAes(params, diag$params)
 
-
       p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params, printInfo)
 #      if(subType == "bar")
 #        p <- ggally_barDiag(data, combo_aes, params)
@@ -384,7 +389,7 @@ ggpairs <- function(
 #      #  p <- ggally_ratio(dataSelect)
 #      else if(subType == "blank")
 #        p <- ggally_blank()
-    } else if(type == "label"){
+    } else if(type == "label") {
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
       combo_params <- addAndOverwriteAes(params, diag$params)
 
@@ -392,7 +397,6 @@ ggpairs <- function(
     }
 
     ggpairsPlots[[length(ggpairsPlots)+1]] <- p
-
   }
 
   plotMatrix <- list(
