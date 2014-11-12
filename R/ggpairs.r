@@ -426,6 +426,12 @@ ggpairs <- function(
 #' @keywords internal
 make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 
+  nonSymbolLocs <- which(lapply(mapping, typeof) != "symbol")
+  if (length(nonSymbolLocs) > 0) {
+    nonSymbolNames <- names(mapping)[nonSymbolLocs]
+    stop(paste("variables: ", paste(shQuote(nonSymbolNames), sep = ", "), " have non standard format.  Please rename the columns and use labels instead.", sep = ""))
+  }
+
   func_text <- paste("ggally_", func, collapse = "", sep = "")
   test_for_function <- tryCatch(
     get(func_text, mode = "function"),
