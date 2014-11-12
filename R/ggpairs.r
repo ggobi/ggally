@@ -66,6 +66,7 @@
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param axisLabels either "internal" for labels in the diagonal plots, "none" for no axis labels, or "show" to display axisLabels
+#' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
