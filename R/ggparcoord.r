@@ -155,7 +155,7 @@ ggparcoord <- function(
   missing      = "exclude",
   order        = columns,
   showPoints   = FALSE,
-  useSplines   = FALSE,
+  splineFactor = FALSE,
   alphaLines   = 1,
   boxplot      = FALSE,
   shadeBox     = NULL,
@@ -217,6 +217,17 @@ ggparcoord <- function(
   if(!(is.logical(boxplot))) {
     stop("invalid value for boxplot; must be a logical operator")
   }
+
+  if(is.logical(splineFactor)) {
+    if (splineFactor) {
+      splineFactor = 3
+    } else {
+      splineFactor = 0
+    }
+  } else (! is.numeric(splineFactor)) {
+    splineFactor = 0
+  }
+
 
   ### Setup ###
   if(!is.null(groupColumn)) {
@@ -432,8 +443,12 @@ ggparcoord <- function(
   linexvar <- 'variable'
   lineyvar <- 'value'
 
-  if (useSplines) {
-    data.m <- ddply(data.m, '.ID', transform, spline=spline(variable, value, n=length(variable)*10))
+  if (splineFactor > 0) {
+    if (class(splineFactor) == "AsIs") {
+      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = length(variable) * splineFactor))
+    } else {
+      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = splineFactor))
+    }
     linexvar <- 'spline.x'
     lineyvar <- 'spline.y'
   }
@@ -458,8 +473,9 @@ ggparcoord <- function(
     p <- p + geom_point(aes(x=as.numeric(variable), y=value))
   }
 
-  if (useSplines) {
+  if (splineFactor > 0) {
     xAxisLabels <- levels(data.m$variable)
+    # while continuous data, this makes it present like it's discrete
     p <- p + scale_x_discrete(breaks = seq_along(xAxisLabels), labels = xAxisLabels)
   }
 
