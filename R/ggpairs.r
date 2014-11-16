@@ -787,11 +787,40 @@ print.ggpairs <- function(
       }
 
       ## get 'plot panel' grob to draw
-      if (showStrips) {
-        layoutRows <- (pGtable$layout$name %in% c("panel", "strip-top", "strip-right"))
-      } else {
-        layoutRows <- (pGtable$layout$name %in% c("panel"))
+
+      # ask about strips
+      layoutNames <- c("panel")
+      allLayoutNames <- c("panel", "strip-right", "strip-top")
+      if (is.null(showStrips)) {
+        # make sure it's a ggally plot
+        pShowStrips <- (!is.null(p$type)) && (!is.null(p$subType))
+
+        # make sure it's on the outer right and top edge
+        if (pShowStrips) {
+          if (columnPos == numCol) {
+            layoutNames <- c(layoutNames, "strip-right")
+          }
+          if (rowPos == 1) {
+            layoutNames <- c(layoutNames, "strip-top")
+          }
+        }
+
+      } else if (showStrips) {
+        layoutNames <- allLayoutNames
       }
+
+      # if they have a custom plot, make sure it shows up
+      if (! is.null(p$axisLabels)) {
+        # pShowStrips <- ! identical(p$axisLabels, FALSE)
+
+        # copied from old code.  want to replace it to something like above
+        if (p$axisLabels %in% c("internal", "none")) {
+          layoutNames <- allLayoutNames
+        }
+      }
+
+      # get correct panel (and strips)
+      layoutRows <- pGtable$layout$name %in% layoutNames
 
       layoutInfo <- pGtable$layout[layoutRows, ]
       layoutTB <- layoutInfo[,c("t", "b")]
