@@ -140,14 +140,14 @@ if(getRversion() >= "2.15.1") {
 #'   alphaLines = "alphaLevel")
 #' # gpd
 #'
-#' ## Use splines on values, rather than lines
-#' gpd <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), groupColumn = 2, splineFactor = TRUE)
-#' # gpd
-#' gpd <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), groupColumn = 2, splineFactor = 3)
-#' # gpd
+#' ## Use splines on values, rather than lines (all produce the same result)
 #' columns <- c(1, 5:10)
+#' gpd <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = TRUE)
+#' # gpd
+#' gpd <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = 3)
+#' # gpd
 #' splineFactor <- length(columns) * 3
-#' gpd <- ggparcoord(data = diamonds.samp, columns = columns, groupColumn = 2, splineFactor = I(splineFactor))
+#' gpd <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(splineFactor))
 #' # gpd
 ggparcoord <- function(
   data,
