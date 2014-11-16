@@ -5,7 +5,8 @@
 \usage{
 ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
   lower = list(), diag = list(), params = NULL, ...,
-  axisLabels = "show", legends = FALSE, verbose = FALSE)
+  axisLabels = "show", columnLabels = colnames(data[, columns]),
+  legends = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -25,6 +26,8 @@ ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
 \item{...}{other parameters being supplied to geom's aes, such as color}
 
 \item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
+
+\item{columnLabels}{label names to be displayed.  Defaults to names of columns being used.}
 
 \item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
 

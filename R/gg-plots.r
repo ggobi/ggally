@@ -960,6 +960,7 @@ agv(c("x", "y", "lab"))
 #'
 #' @param data dataset being plotted
 #' @param mapping aesthetics being used (x is the variable the plot will be made for)
+#' @param label title to be displayed in the middle.  Defaults to \code{mapping$x}
 #' @param labelSize size of variable label
 #' @param labelXPercent percent of horizontal range
 #' @param labelYPercent percent of vertical range

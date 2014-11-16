@@ -66,6 +66,7 @@
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
+#' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
@@ -449,7 +450,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
   nonSymbolLocs <- which(lapply(mapping, typeof) != "symbol")
   if (length(nonSymbolLocs) > 0) {
     nonSymbolNames <- names(mapping)[nonSymbolLocs]
-    stop(paste("variables: ", paste(shQuote(nonSymbolNames), sep = ", "), " have non standard format.  Please rename the columns and use labels instead.", sep = ""))
+    stop(paste("variables: ", paste(shQuote(nonSymbolNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonSymbolLocs])), collapse = ", "), ".  Please rename the columns and use labels instead.", sep = ""))
   }
 
   func_text <- paste("ggally_", func, collapse = "", sep = "")
@@ -849,6 +850,13 @@ addAndOverwriteAes <- function(current, new) {
       current[names(new)[i]] <- new[i]
     }
   }
+
+  for (curName in names(current)) {
+    if (is.null(current[[curName]])) {
+      current[[curName]] <- NULL
+    }
+  }
+
   current
 }
 
