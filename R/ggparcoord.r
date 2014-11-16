@@ -444,11 +444,13 @@ ggparcoord <- function(
   lineyvar <- 'value'
 
   if (splineFactor > 0) {
+    data.m$ggally_splineFactor <- splineFactor
     if (class(splineFactor) == "AsIs") {
-      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = length(variable) * splineFactor))
+      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = ggally_splineFactor[1]))
     } else {
-      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = splineFactor))
+      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1]))
     }
+
     linexvar <- 'spline.x'
     lineyvar <- 'spline.y'
   }
