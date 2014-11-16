@@ -604,8 +604,8 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #'  pMat <- ggpairs(tips, c(1,3,2), color = "sex")
 #'  pMat
 #'  # print(pMat, leftWidthProportion = 0.2, spacingProportion = 0.03, bottomHeightProportion = 0.1, showStrips = FALSE)
-#'  print(pMat, showStrips = FALSE)
-#'  print(pMat, leftWidthProportion = 3, spacingProportion = 1, bottomHeightProportion = 1, showStrips = TRUE)
+#'  # print(pMat, showStrips = FALSE)
+#'  # print(pMat, leftWidthProportion = 3, spacingProportion = 1, bottomHeightProportion = 1, showStrips = TRUE)
 print.ggpairs <- function(
   x,
   leftWidthProportion = 0.2,
