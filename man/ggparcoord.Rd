@@ -5,8 +5,9 @@
 \usage{
 ggparcoord(data, columns, groupColumn = NULL, scale = "std",
   scaleSummary = "mean", centerObsID = 1, missing = "exclude",
-  order = columns, showPoints = FALSE, alphaLines = 1, boxplot = FALSE,
-  shadeBox = NULL, mapping = NULL, title = "")
+  order = columns, showPoints = FALSE, splineFactor = FALSE,
+  alphaLines = 1, boxplot = FALSE, shadeBox = NULL, mapping = NULL,
+  title = "")
 }
 \arguments{
 \item{data}{the dataset to plot}
@@ -29,6 +30,8 @@ univariately be centered on}
 
 \item{showPoints}{logical operator indicating whether points should be
 plotted or not}
+
+\item{splineFactor}{logical or numeric operator indicating whether spline interpolation should be used.  Numeric values will multiplied by the number of columns, \code{TRUE} will default to cubic interpolation, \code{\link[base]{AsIs}} to set the knot count directly and \code{0}, \code{FALSE}, or non-numeric values will not use spline interpolation.}
 
 \item{alphaLines}{value of alpha scaler for the lines of the parcoord plot or a column name of the data}
 
@@ -152,6 +155,16 @@ iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2
 gpd <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, order = "anyClass",
   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
   alphaLines = "alphaLevel")
+# gpd
+
+## Use splines on values, rather than lines
+gpd <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), groupColumn = 2, splineFactor = TRUE)
+# gpd
+gpd <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), groupColumn = 2, splineFactor = 3)
+# gpd
+columns <- c(1, 5:10)
+splineFactor <- length(columns) * 3
+gpd <- ggparcoord(data = diamonds.samp, columns = columns, groupColumn = 2, splineFactor = I(splineFactor))
 # gpd
 }
 \author{
