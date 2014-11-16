@@ -601,7 +601,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  pMat <- ggpairs(tips, 1:3, color = "sex")
+#'  pMat <- ggpairs(tips, c(1,3,2), color = "sex")
 #'  pMat
 #'  print(pMat, leftWidthProportion = 3, spacingProportion = 1, bottomHeightProportion = 1, showStrips = TRUE)
 print.ggpairs <- function(
