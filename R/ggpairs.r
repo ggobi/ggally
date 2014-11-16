@@ -66,6 +66,7 @@
 #' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param axisLabels either "internal" for labels in the diagonal plots, "none" for no axis labels, or "show" to display axisLabels
+#' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
@@ -142,6 +143,7 @@ ggpairs <- function(
   params = NULL,
   ...,
   axisLabels = "internal",
+  columnLabels = colnames(data[,columns]),
   legends = FALSE,
   verbose = FALSE
 ){
@@ -152,6 +154,20 @@ ggpairs <- function(
   if (! axisLabels %in% c("none", "show", "internal")) {
     warning("axisLabels not in c('none', 'show', 'internal').  Reverting to 'internal'")
     axisLabels <- "internal"
+  }
+
+  if (any(columns > ncol(data))) {
+    stop(paste("Make sure your 'columns' values are less than ", ncol(data), ".\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+  }
+  if (any(columns < 1)) {
+    stop(paste("Make sure your 'columns' values are positive.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+  }
+  if (any((columns %% 1) != 0)) {
+    stop(paste("Make sure your 'columns' values are integers.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+  }
+
+  if (length(columnLabels) != length(columns)) {
+    stop("The length of the 'columnLabels' does not match the length of the 'columns' being used.")
   }
 
   if(!is.list(upper) && upper == "blank"){
@@ -206,9 +222,12 @@ ggpairs <- function(
   }
 
   data <- as.data.frame(data)
-      for ( i in 1:dim(data)[2] ) {
-        if(is.character(data[,i])) data[,i] <- as.factor(data[,i])
-      }
+  for ( i in 1:dim(data)[2] ) {
+    if(is.character(data[,i])) {
+      data[,i] <- as.factor(data[,i])
+    }
+  }
+
   numCol <- length(columns)
   if(printInfo)
     cat("data col: ", numCol,"\n")
@@ -272,7 +291,7 @@ ggpairs <- function(
 
       combo_params <- addAndOverwriteAes(params, section_params)
 
-        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+      p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
 #      else if(subType == "smooth")
 #        p <- ggally_smooth(data, combo_aes, params)
 #      else if(subType == "density")
@@ -333,19 +352,21 @@ ggpairs <- function(
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
       combo_params <- addAndOverwriteAes(params, section_params)
 
-      if(subType == "ratio")
+      if(subType == "ratio") {
         p <- ggally_ratio(data[, c(yColName, xColName)])
-      else if(subType == "facetbar"){
-        if(!is.null(combo_aes$colour)){
+      } else if(subType == "facetbar") {
+        if(!is.null(combo_aes$colour)) {
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
         }
         p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
       }
-      else if(subType == "blank")
+      else if(subType == "blank") {
         p <- "ggally_blank('blank')"
-      else p <- ggally_text("Incorrect\nPlot",size=6)
+      } else {
+        p <- ggally_text("Incorrect\nPlot",size=6)
+      }
 
-    } else if(type == "stat_bin-num"){
+    } else if(type == "stat_bin-num") {
       if(printInfo)cat("stat_bin-num\n")
 
       subType <- diag$continuous
@@ -356,10 +377,11 @@ ggpairs <- function(
 
       combo_params <- addAndOverwriteAes(params, diag$params)
 
-      if(subType != "blank")
+      if(subType != "blank") {
         p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
-      else
+      } else {
         p <- "blank"
+      }
 #
 #        p <- ggally_densityDiag(data, combo_aes, params)
 #      else if(subType == "bar")
@@ -376,7 +398,6 @@ ggpairs <- function(
 
       combo_params <- addAndOverwriteAes(params, diag$params)
 
-
       p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params, printInfo)
 #      if(subType == "bar")
 #        p <- ggally_barDiag(data, combo_aes, params)
@@ -384,15 +405,15 @@ ggpairs <- function(
 #      #  p <- ggally_ratio(dataSelect)
 #      else if(subType == "blank")
 #        p <- ggally_blank()
-    } else if(type == "label"){
+    } else if(type == "label") {
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
       combo_params <- addAndOverwriteAes(params, diag$params)
+      combo_params <- addAndOverwriteAes(combo_params, c("label" = columnLabels[posX]))
 
       p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
     }
 
     ggpairsPlots[[length(ggpairsPlots)+1]] <- p
-
   }
 
   plotMatrix <- list(
@@ -403,6 +424,7 @@ ggpairs <- function(
     verbose = verbose,
     printInfo = printInfo,
     axisLabels = axisLabels,
+    columnLabels = columnLabels,
     legends = legends
   )
 
@@ -422,6 +444,12 @@ ggpairs <- function(
 #' @keywords internal
 make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 
+  nonSymbolLocs <- which(lapply(mapping, typeof) != "symbol")
+  if (length(nonSymbolLocs) > 0) {
+    nonSymbolNames <- names(mapping)[nonSymbolLocs]
+    stop(paste("variables: ", paste(shQuote(nonSymbolNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonSymbolLocs])), collapse = ", "), ".  Please rename the columns and use labels instead.", sep = ""))
+  }
+
   func_text <- paste("ggally_", func, collapse = "", sep = "")
   test_for_function <- tryCatch(
     get(func_text, mode = "function"),
@@ -429,7 +457,9 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
       "bad_function_name"
   )
 
-  if(identical(test_for_function, "bad_function_name")) return( ggally_text("Incorrect\nPlot",size=6))
+  if(identical(test_for_function, "bad_function_name")) {
+    return( ggally_text("Incorrect\nPlot",size=6))
+  }
 
 
   text <- paste(func_text, "(ggally_data, ggplot2::aes(", paste(names(mapping), " = ", as.character(mapping), sep = "", collapse = ", "), ")", sep = "", collapse = "")
@@ -618,7 +648,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
 
   # Left Side
   for(i in 1:numCol){
-    grid.text(names(plotObj$data[,plotObj$columns])[i],0,0.5,rot=90,just=c("centre","centre"), vp = vplayout(as.numeric(i),1))
+    grid.text(plotObj$columnLabels[i],0,0.5,rot=90,just=c("centre","centre"), vp = vplayout(as.numeric(i),1))
   }
 
   popViewport()# layout
@@ -632,7 +662,7 @@ if(!identical(plotObj$axisLabels,"internal")) {
 
   # Bottom Side
   for(i in 1:numCol){
-    grid.text(names(plotObj$data[,plotObj$columns])[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol, i))
+    grid.text(plotObj$columnLabels[i],0.5,0,just=c("centre","centre"), vp = vplayout(numCol, i))
   }
 
   popViewport() #layout
@@ -882,6 +912,13 @@ addAndOverwriteAes <- function(current, new) {
       current[names(new)[i]] <- new[i]
     }
   }
+
+  for (curName in names(current)) {
+    if (is.null(current[[curName]])) {
+      current[[curName]] <- NULL
+    }
+  }
+
   current
 }
 

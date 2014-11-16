@@ -960,6 +960,7 @@ agv(c("x", "y", "lab"))
 #'
 #' @param data dataset being plotted
 #' @param mapping aesthetics being used (x is the variable the plot will be made for)
+#' @param label title to be displayed in the middle.  Defaults to \code{mapping$x}
 #' @param labelSize size of variable label
 #' @param labelXPercent percent of horizontal range
 #' @param labelYPercent percent of vertical range
@@ -976,6 +977,7 @@ agv(c("x", "y", "lab"))
 ggally_diagAxis <- function(
   data,
   mapping,
+  label = mapping$x,
   labelSize     = 5,
   labelXPercent = 0.5,
   labelYPercent = 0.55,
@@ -984,8 +986,15 @@ ggally_diagAxis <- function(
   gridLabelSize = 4,
   ...
 ) {
+  if (is.null(mapping$x)) {
+    stop("mapping$x is null.  There must be a column value in this location.")
+  }
   mapping$y <- NULL
   numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+
+  if (! is.character(label)) {
+    label <- as.character(mapping$x)
+  }
 
   if(numer) {
     xmin <- min(data[, as.character(mapping$x)], na.rm = TRUE)
@@ -996,7 +1005,7 @@ ggally_diagAxis <- function(
     # xrange <- c(xmin, xmax)
 
     p <- ggally_text(
-      label   = as.character(mapping$x),
+      label   = label,
       mapping = aes(col="grey50"),
       xrange  = xrange,
       yrange  = xrange,
@@ -1027,7 +1036,7 @@ ggally_diagAxis <- function(
     numLvls <- length(breakLabels)
 
     p <- ggally_text(
-      label   = as.character(mapping$x),
+      label   = label,
       mapping = aes(col="grey50"),
       xrange  = c(0,1),
       yrange  = c(0,1),
