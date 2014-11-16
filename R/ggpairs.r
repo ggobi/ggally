@@ -733,18 +733,21 @@ print.ggpairs <- function(
 
         # make a viewport that is chopped into numFacets parts vertically
         grobLength <- length(pAxisLabels$grobs)
+        leftAxisLayoutHeight <- rep(c(0.1, 1), grobLength)[-1]
+        leftAxisLayoutHeightUnits <- rep(c("lines", "null"), grobLength)[-1]
         vpLAxis <- viewport(
           layout = grid.layout(
-            grobLength, 1,
+            nrow = 2 * grobLength - 1,
+            ncol = 1,
             widths  = unit(1, "null"),
-            heights = unit(rep(1, grobLength), rep("null", grobLength))
+            heights = unit(leftAxisLayoutHeight, leftAxisLayoutHeightUnits)
           )
         )
 
         pushViewport(vplayout(rowPos * 2 - 1, 1))
         pushViewport(vpLAxis)
           for (lAxisPos in 1:grobLength) {
-            pushViewport(vplayout(lAxisPos, 1))
+            pushViewport(vplayout(lAxisPos*2 - 1, 1))
             grid.draw(pAxisLabels$grobs[[lAxisPos]])
             popViewport()
           }
@@ -758,21 +761,24 @@ print.ggpairs <- function(
           print("trying bottom axis")
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-b")
-
         grobLength <- length(pAxisLabels$grobs)
+
+        botAxisLayoutWidth <- rep(c(0.1, 1), grobLength)[-1]
+        botAxisLayoutWidthUnits <- rep(c("lines", "null"), grobLength)[-1]
         vpBAxis <- viewport(
           layout = grid.layout(
-            grobLength, 1,
-            widths  = unit(rep(1, grobLength), rep("null", grobLength)),
-            heights = unit(1, "null")
+            nrow = 1,
+            ncol = 2 * grobLength - 1,
+            heights = unit(1, "null"),
+            widths  = unit(botAxisLayoutWidth, botAxisLayoutWidthUnits)
           )
         )
 
-        pushViewport(vplayout(numCol + numCol, 2 * columnPos))
-        pushViewport(vpLAxis)
+        pushViewport(vplayout( 2 * numCol, 2 * columnPos))
+        pushViewport(vpBAxis)
           for (bAxisPos in 1:grobLength) {
-            pushViewport(vplayout(1, bAxisPos))
-            grid.draw(pAxisLabels$grobs[[bAxisPos]])
+            pushViewport(vplayout(1, bAxisPos * 2 - 1))
+              grid.draw(pAxisLabels$grobs[[bAxisPos]])
             popViewport()
           }
         popViewport() # vpBAxis
