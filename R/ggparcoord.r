@@ -71,8 +71,7 @@ if(getRversion() >= "2.15.1") {
 #' @param order method used to order the axes (see Details)
 #' @param showPoints logical operator indicating whether points should be
 #'   plotted or not
-#' @param useSplines logical operator indicating whether spline interpolation
-#'   should be used or not
+#' @param splineFactor logical or numeric operator indicating whether spline interpolation should be used.  Numeric values will multiplied by the number of columns, \code{TRUE} will default to cubic interpolation, \code{\link[base]{AsIs}} to set the knot count directly and \code{0}, \code{FALSE}, or non-numeric values will not use spline interpolation.
 #' @param alphaLines value of alpha scaler for the lines of the parcoord plot or a column name of the data
 #' @param boxplot logical operator indicating whether or not boxplots should
 #'   underlay the distribution of each variable
