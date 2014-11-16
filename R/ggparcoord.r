@@ -224,7 +224,7 @@ ggparcoord <- function(
     } else {
       splineFactor = 0
     }
-  } else (! is.numeric(splineFactor)) {
+  } else if (! is.numeric(splineFactor)) {
     splineFactor = 0
   }
 
