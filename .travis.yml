@@ -43,3 +43,4 @@ branches:
   only:
     - master
     - dev
+    - splines

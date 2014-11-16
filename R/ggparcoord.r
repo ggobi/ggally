@@ -71,6 +71,7 @@ if(getRversion() >= "2.15.1") {
 #' @param order method used to order the axes (see Details)
 #' @param showPoints logical operator indicating whether points should be
 #'   plotted or not
+#' @param splineFactor logical or numeric operator indicating whether spline interpolation should be used.  Numeric values will multiplied by the number of columns, \code{TRUE} will default to cubic interpolation, \code{\link[base]{AsIs}} to set the knot count directly and \code{0}, \code{FALSE}, or non-numeric values will not use spline interpolation.
 #' @param alphaLines value of alpha scaler for the lines of the parcoord plot or a column name of the data
 #' @param boxplot logical operator indicating whether or not boxplots should
 #'   underlay the distribution of each variable
@@ -138,6 +139,16 @@ if(getRversion() >= "2.15.1") {
 #'   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
 #'   alphaLines = "alphaLevel")
 #' # gpd
+#'
+#' ## Use splines on values, rather than lines (all produce the same result)
+#' columns <- c(1, 5:10)
+#' gpd <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = TRUE)
+#' # gpd
+#' gpd <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = 3)
+#' # gpd
+#' splineFactor <- length(columns) * 3
+#' gpd <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(splineFactor))
+#' # gpd
 ggparcoord <- function(
   data,
   columns,
@@ -148,6 +159,7 @@ ggparcoord <- function(
   missing      = "exclude",
   order        = columns,
   showPoints   = FALSE,
+  splineFactor = FALSE,
   alphaLines   = 1,
   boxplot      = FALSE,
   shadeBox     = NULL,
@@ -209,6 +221,17 @@ ggparcoord <- function(
   if(!(is.logical(boxplot))) {
     stop("invalid value for boxplot; must be a logical operator")
   }
+
+  if(is.logical(splineFactor)) {
+    if (splineFactor) {
+      splineFactor = 3
+    } else {
+      splineFactor = 0
+    }
+  } else if (! is.numeric(splineFactor)) {
+    splineFactor = 0
+  }
+
 
   ### Setup ###
   if(!is.null(groupColumn)) {
@@ -421,8 +444,20 @@ ggparcoord <- function(
   if (boxplot)
     p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
 
-  if (showPoints)
-    p <- p + geom_point()
+  linexvar <- 'variable'
+  lineyvar <- 'value'
+
+  if (splineFactor > 0) {
+    data.m$ggally_splineFactor <- splineFactor
+    if (class(splineFactor) == "AsIs") {
+      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = ggally_splineFactor[1]))
+    } else {
+      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1]))
+    }
+
+    linexvar <- 'spline.x'
+    lineyvar <- 'spline.y'
+  }
 
   if(!is.null(mapping2$size)) {
     lineSize <- mapping2$size
@@ -432,11 +467,21 @@ ggparcoord <- function(
 
   if (alphaLinesIsCharacter) {
     p <- p +
-      geom_line(aes_string(alpha = alphaLines), size = lineSize) +
+      geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize, data = data.m) +
       scale_alpha(range = alphaRange)
 
   } else {
-    p <- p + geom_line(alpha = alphaLines, size = lineSize)
+    p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data = data.m)
+  }
+
+  if (showPoints) {
+    p <- p + geom_point(aes(x = as.numeric(variable), y = value))
+  }
+
+  if (splineFactor > 0) {
+    xAxisLabels <- levels(data.m$variable)
+    # while continuous data, this makes it present like it's discrete
+    p <- p + scale_x_discrete(breaks = seq_along(xAxisLabels), labels = xAxisLabels)
   }
 
   if (title != "") {
