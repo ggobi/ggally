@@ -609,7 +609,7 @@ print.ggpairs <- function(
   leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1,
   spacingProportion = 0.03,
-  showStrips = FALSE,
+  showStrips = NULL,
   ...
 ) {
 
