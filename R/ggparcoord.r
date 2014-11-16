@@ -461,16 +461,15 @@ ggparcoord <- function(
 
   if (alphaLinesIsCharacter) {
     p <- p +
-      geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize,
-                data=data.m) +
+      geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize, data = data.m) +
       scale_alpha(range = alphaRange)
 
   } else {
-    p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data=data.m)
+    p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data = data.m)
   }
 
   if (showPoints) {
-    p <- p + geom_point(aes(x=as.numeric(variable), y=value))
+    p <- p + geom_point(aes(x = as.numeric(variable), y = value))
   }
 
   if (splineFactor > 0) {
