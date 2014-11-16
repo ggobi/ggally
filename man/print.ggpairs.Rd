@@ -5,7 +5,7 @@
 \usage{
 \method{print}{ggpairs}(x, leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1, spacingProportion = 0.03,
-  showStrips = FALSE, ...)
+  showStrips = NULL, ...)
 }
 \arguments{
 \item{x}{ggpair object to be plotted}
@@ -17,8 +17,10 @@ Specialized method to print the ggpair object-
 }
 \examples{
 data(tips, package = "reshape")
- pMat <- ggpairs(tips, 1:3, color = "sex")
+ pMat <- ggpairs(tips, c(1,3,2), color = "sex")
  pMat
+ # print(pMat, leftWidthProportion = 0.2, spacingProportion = 0.03, bottomHeightProportion = 0.1, showStrips = FALSE)
+ print(pMat, showStrips = FALSE)
  print(pMat, leftWidthProportion = 3, spacingProportion = 1, bottomHeightProportion = 1, showStrips = TRUE)
 }
 \author{
