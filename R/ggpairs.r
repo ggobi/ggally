@@ -722,6 +722,11 @@ print.ggpairs <- function(
   for(rowPos in 1:numCol){
     for(columnPos in 1:numCol){
       p <- getPlot(plotObj, rowPos, columnPos)
+
+      if (is_blank_plot(p)) {
+        next
+      }
+
       pGtable <- ggplot_gtable(ggplot_build(p))
 
       ## New axis labels
