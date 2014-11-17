@@ -1,3 +1,24 @@
+GGally 0.5.0
+-----------------
+
+GGPAIRS PRINT METHOD
+
+* restructured print method to align properly
+* prints only panels, not panels and axis labels in the same plotting area
+* prints axis labels in separate plotting area
+* may control the spacing between plots
+* may control the spacing for the left and bottom axis labels.  This is not perfect behavior, but this small loss is worth the major gain of alignment
+* may provide custom labels
+
+GGPARCOORD - splineFactor
+
+* added new splineFactor argument to fit a spline of the points
+* may take on TRUE, which defaults to 3 interpolated points
+* may take on integer, which interpolates n * length points
+* may take an AsIs integer, which interpolates n points
+
+
+
 GGally 0.4.8
 -----------------
 
