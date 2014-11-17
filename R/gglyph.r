@@ -183,9 +183,9 @@ rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
 #' @param color Set the color to draw in, default is "white"
 #' @param size Set the line size, default is 1.5
 #' @export
-add_ref_lines <- function(data, colour = "white", size = 1.5, ...){
+add_ref_lines <- function(data, color = "white", size = 1.5, ...){
   rl <- ref_lines(data)
-  geom_line(data = rl, colour = colour, size = size, ...)
+  geom_line(data = rl, color = color , size = size, ...)
 }
 
 #' Add reference boxes around each cell of the glyphmap.
@@ -195,15 +195,15 @@ add_ref_lines <- function(data, colour = "white", size = 1.5, ...){
 #' @param color Set the color to draw in, default is "white"
 #' @param size Set the line size, default is 0.5
 #' @export
-add_ref_boxes <- function(data, var_fill = NULL, colour = "white", size = 0.5, 
+add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
                           fill = NA, ...){
   rb <- ref_boxes(data, var_fill)
   if (!is.null(var_fill)){
     geom_rect(aes_all(names(rb)), data = rb,
-              colour = colour, size = size, inherit.aes = FALSE, ...)
+              color = color , size = size, inherit.aes = FALSE, ...)
   }
   else{
     geom_rect(aes_all(names(rb)), data = rb,
-              colour = colour, size = size, inherit.aes = FALSE, fill = fill, ...)
+              color = color , size = size, inherit.aes = FALSE, fill = fill, ...)
   }
 }
