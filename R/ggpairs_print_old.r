@@ -1,7 +1,7 @@
 #' Old plotting method
 #'
 #' @keywords internal
-print_old <- function(x, ...){
+print_ggpairs_old <- function(x, ...){
   plotObj <- x
 
   # If using internal axis labels, extend the plotting region out since
