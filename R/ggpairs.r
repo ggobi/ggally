@@ -88,7 +88,7 @@
 #'
 #' # Custom Example
 #' pm <- ggpairs(
-#'   tips[,1:4],
+#'   tips[,c(1,3,4,2)],
 #'   upper = list(continuous = "density", combo = "box"),
 #'   lower = list(continuous = "points", combo = "dot")
 #' )
@@ -100,7 +100,7 @@
 #'
 #' # Custom Example
 #' pm <- ggpairs(
-#'  diamonds.samp[,1:3],
+#'  diamonds.samp[,1:5],
 #'  upper = list(continuous = "density", combo = "box"),
 #'  lower = list(continuous = "points", combo = "dot"),
 #'  color = "cut",
@@ -116,6 +116,9 @@
 #' )
 #' # bad_plots
 #'
+#' # Only Variable Labels on the diagonal (no axis labels)
+#' pm <- ggpairs(tips[,1:3], axisLabels="internal")
+#' # pm
 #' # Only Variable Labels on the outside (no axis labels)
 #' pm <- ggpairs(tips[,1:3], axisLabels="none")
 #' # pm
