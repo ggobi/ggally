@@ -1,5 +1,5 @@
 if(getRversion() >= "2.15.1") {
-  utils::globalVariables(c("variable", "value"))
+  utils::globalVariables(c("variable", "value", "ggally_splineFactor"))
 }
 
 ##### KNOWN BUGS #####
