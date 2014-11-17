@@ -186,6 +186,7 @@ rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
 #' @param data A glyphmap structure.
 #' @param color Set the color to draw in, default is "white"
 #' @param size Set the line size, default is 1.5
+#' @param ... other arguments passed onto \code{\link[ggplot2]{geom_line}}
 #' @export
 add_ref_lines <- function(data, color = "white", size = 1.5, ...){
   rl <- ref_lines(data)
@@ -198,6 +199,8 @@ add_ref_lines <- function(data, color = "white", size = 1.5, ...){
 #' @param var_fill Variable name to use to set the fill color
 #' @param color Set the color to draw in, default is "white"
 #' @param size Set the line size, default is 0.5
+#' @param fill fill value used if \code{var_fill} is \code{NULL}
+#' @param ... other arguments passed onto \code{\link[ggplot2]{geom_rect}}
 #' @export
 add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
                           fill = NA, ...){
