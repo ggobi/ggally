@@ -63,7 +63,7 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, heig
     class = c("glyphplot", "data.frame"))
 }
 
-#' Create reference lines for a glyph plot
+# Create reference lines for a glyph plot
 ref_lines <- function(data) {
   stopifnot(is.glyphplot(data))
 
@@ -93,7 +93,7 @@ ref_lines <- function(data) {
   ddply(cells, "gid", ref_line)
 }
 
-#' Create reference boxes for a glyph plot
+# Create reference boxes for a glyph plot
 ref_boxes <- function(data, fill = NULL) {
   stopifnot(is.glyphplot(data))
   glyph <- attributes(data)
