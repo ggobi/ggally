@@ -605,10 +605,25 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @examples
 #'  data(tips, package = "reshape")
 #'  pMat <- ggpairs(tips, c(1,3,2), color = "sex")
-#'  pMat
-#'  # print(pMat, leftWidthProportion = 0.2, spacingProportion = 0.03, bottomHeightProportion = 0.1, showStrips = FALSE)
+#'  pMat # calls print(pMat), which calls print.ggpairs(pMat)
+#'
+#'  ## defaults; (prints strips on top and right edges of matrix)
+#'  # print(pMat, left = 0.2, spacing = 0.03, bottom = 0.1, showStrips = NULL)
+#'
+#'  ## show none of the strips
 #'  # print(pMat, showStrips = FALSE)
-#'  # print(pMat, leftWidthProportion = 3, spacingProportion = 1, bottomHeightProportion = 1, showStrips = TRUE)
+#'
+#'  ## show all of the strips
+#'  # print(pMat, showStrips = TRUE)
+#'
+#'  ## give the left axis labels area a proportion of 3 plot size
+#'  # print(pMat, leftWidthProportion = 3)
+#'
+#'  ## give the bottom axis labels area a proportion of 1 plot size
+#'  # print(pMat, bottomHeightProportion = 1)
+#'
+#'  ## give the spacing between plots a proportion of 1 plot size
+#'  # print(pMat, spacing = 1)
 print.ggpairs <- function(
   x,
   leftWidthProportion = 0.2,
