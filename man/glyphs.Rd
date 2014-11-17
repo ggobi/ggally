@@ -31,7 +31,11 @@ Create the data needed to generate a glyph plot.
 \examples{
 data(nasa)
  temp.gly <- glyphs(nasa, "long", "day", "lat", "surftemp", height=2.5)
- ggplot(temp.gly, aes(gx, gy, group = gid)) + add_ref_lines(temp.gly, colour="grey90") +
-   add_ref_boxes(temp.gly, colour="grey90") + geom_path() + theme_bw() + xlab("") + ylab("")
+ ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
+   add_ref_lines(temp.gly, color = "grey90") +
+   add_ref_boxes(temp.gly, color = "grey90") +
+   ggplot2::geom_path() +
+   ggplot2::theme_bw() +
+   ggplot2::labs(x = "", y = "")
 }
 

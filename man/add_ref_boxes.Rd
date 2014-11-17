@@ -3,7 +3,7 @@
 \alias{add_ref_boxes}
 \title{Add reference boxes around each cell of the glyphmap.}
 \usage{
-add_ref_boxes(data, var_fill = NULL, colour = "white", size = 0.5,
+add_ref_boxes(data, var_fill = NULL, color = "white", size = 0.5,
   fill = NA, ...)
 }
 \arguments{
@@ -11,9 +11,13 @@ add_ref_boxes(data, var_fill = NULL, colour = "white", size = 0.5,
 
 \item{var_fill}{Variable name to use to set the fill color}
 
+\item{color}{Set the color to draw in, default is "white"}
+
 \item{size}{Set the line size, default is 0.5}
 
-\item{color}{Set the color to draw in, default is "white"}
+\item{fill}{fill value used if \code{var_fill} is \code{NULL}}
+
+\item{...}{other arguments passed onto \code{\link[ggplot2]{geom_rect}}}
 }
 \description{
 Add reference boxes around each cell of the glyphmap.

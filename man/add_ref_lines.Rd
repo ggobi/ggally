@@ -3,14 +3,16 @@
 \alias{add_ref_lines}
 \title{Add reference lines for each cell of the glyphmap.}
 \usage{
-add_ref_lines(data, colour = "white", size = 1.5, ...)
+add_ref_lines(data, color = "white", size = 1.5, ...)
 }
 \arguments{
 \item{data}{A glyphmap structure.}
 
+\item{color}{Set the color to draw in, default is "white"}
+
 \item{size}{Set the line size, default is 1.5}
 
-\item{color}{Set the color to draw in, default is "white"}
+\item{...}{other arguments passed onto \code{\link[ggplot2]{geom_line}}}
 }
 \description{
 Add reference lines for each cell of the glyphmap.
