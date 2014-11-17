@@ -80,7 +80,7 @@
 #' data(tips, package = "reshape")
 #' pm <- ggpairs(tips[,1:3])
 #' # pm
-#' pm <- ggpairs(tips)
+#' pm <- ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"))
 #' # pm
 #' pm <- ggpairs(tips, upper = "blank")
 #' # pm
