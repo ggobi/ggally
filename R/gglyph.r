@@ -22,17 +22,17 @@
 #'    add_ref_boxes(temp.gly, colour="grey90") + geom_path() + theme_bw() + xlab("") + ylab("")
 glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, height = rel(0.95), width = rel(0.95), y_scale = identity, x_scale = identity) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
-  
+
   if (is.rel(width)) {
     width <- resolution(data[[x_major]], zero = FALSE) * unclass(width)
     message("Using width ", format(width, digits = 3))
   }
-    
+
   if (is.rel(height)) {
     height <- resolution(data[[y_major]], zero = FALSE) * unclass(height)
     message("Using height ", format(height, digits = 3))
   }
-  
+
   if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
     data <- ddply(data, "gid", function(df) {
       df[[x_minor]] <- x_scale(df[[x_minor]])
@@ -40,21 +40,21 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, heig
       df
     })
   }
-  
+
   if (polar) {
     theta <- 2 * pi * rescale01(data[[x_minor]])
     r <- rescale01(data[[y_minor]])
-    
-    data$gx <- data[[x_major]] + width  / 2 * r * sin(theta) 
+
+    data$gx <- data[[x_major]] + width  / 2 * r * sin(theta)
     data$gy <- data[[y_major]] + height / 2 * r * cos(theta)
-    data <- data[order(data[[x_major]], data[[x_minor]]), ] 
+    data <- data[order(data[[x_major]], data[[x_minor]]), ]
   } else {
     data$gx <- data[[x_major]] + rescale11(data[[x_minor]]) * width / 2
-    data$gy <- data[[y_major]] + rescale11(data[[y_minor]]) * height / 2 
+    data$gy <- data[[y_major]] + rescale11(data[[y_minor]]) * height / 2
   }
-  
-  structure(data, 
-    width = width, height = height, polar = polar, 
+
+  structure(data,
+    width = width, height = height, polar = polar,
     x_major = x_major, y_major = y_major,
     class = c("glyphplot", "data.frame"))
 }
@@ -62,9 +62,9 @@ glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, heig
 #' Create reference lines for a glyph plot
 ref_lines <- function(data) {
   stopifnot(is.glyphplot(data))
-  
+
   glyph <- attributes(data)
-  
+
   cells <- unique(data[c(glyph$x_major, glyph$y_major, "gid")])
 
   if (glyph$polar) {
@@ -75,7 +75,7 @@ ref_lines <- function(data) {
         gx = df[[glyph$x_major]] + glyph$width / 4 * sin(theta),
         gy = df[[glyph$y_major]] + glyph$height / 4 * cos(theta)
       )
-      
+
     }
   } else {
     ref_line <- function(df) {
@@ -94,11 +94,11 @@ ref_boxes <- function(data, fill = NULL) {
   stopifnot(is.glyphplot(data))
   glyph <- attributes(data)
   cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid", fill)]))
-  
-  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width/2, 
-      xmax = cells[[glyph$x_major]] + glyph$width/2, 
+
+  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width/2,
+      xmax = cells[[glyph$x_major]] + glyph$width/2,
       ymin = cells[[glyph$y_major]] - glyph$height/2,
-      ymax = cells[[glyph$y_major]] + glyph$height/2) 
+      ymax = cells[[glyph$y_major]] + glyph$height/2)
   if (!is.null(fill)){
     df$fill <- cells[[fill]]
   }
@@ -109,15 +109,15 @@ ref_boxes <- function(data, fill = NULL) {
 # Glyph plot class -----------------------------------------------------------
 
 glyphplot <- function(data, width, height, polar, x_major, y_major) {
-  structure(data, 
-    width = width, height = height, polar = polar, 
+  structure(data,
+    width = width, height = height, polar = polar,
     x_major = x_major, y_major = y_major,
-    class = c("glyphplot", "data.frame"))  
+    class = c("glyphplot", "data.frame"))
 }
 is.glyphplot <- function(x) inherits(x, "glyphplot")
 
 "[.glyphplot" <- function(x, ...) {
-  glyphplot(NextMethod(), 
+  glyphplot(NextMethod(),
     width = attr(x, "width"), height = attr(x, "height"),
     x_major = attr(x, "x_major"), y_major = attr(x, "y_major"),
     polar = attr(x, "polar"))
@@ -135,7 +135,7 @@ print.glyphplot <- function(x, ...) {
 
   cat("glyphplot: \n")
   cat("  Size: [", width, ", ", height,  "]\n", sep = "")
-  cat("  Major axes: ", attr(x, "x_major"), ", ", attr(x, "y_major"), "\n", 
+  cat("  Major axes: ", attr(x, "x_major"), ", ", attr(x, "y_major"), "\n",
     sep = "")
   # cat("\n")
 }
