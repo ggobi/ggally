@@ -39,8 +39,7 @@ notifications:
     on_success: change
     on_failure: change
 
-branches:
-  only:
-    - master
-    - dev
-    - print_align
+# branches:
+#   only:
+#     - master
+#     - dev
