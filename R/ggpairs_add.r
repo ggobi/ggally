@@ -36,7 +36,7 @@
 #' # change to linedraw theme
 #' pm + ggplot2::theme_linedraw()
 #' # change to custom theme
-#' pm + ggplot2::theme(panel.background = element_rect(fill = "lightblue"))
+#' pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue"))
 #'
 "+.gg" <- function(e1, e2) {
 
