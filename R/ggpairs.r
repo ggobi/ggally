@@ -431,7 +431,8 @@ ggpairs <- function(
     printInfo = printInfo,
     axisLabels = axisLabels,
     columnLabels = columnLabels,
-    legends = legends
+    legends = legends,
+    gg = NULL
   )
 
   attributes(plotMatrix)$class <- "ggpairs"
@@ -574,6 +575,9 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   if (is.character(plot_text)) {
     if (plot_text != "blank") {
       p <- eval_ggpair(plot_text, plotMatrix$data)
+      if (! is.null(plotMatrix$gg)) {
+        p <- p + plotMatrix$gg
+      }
       # attributes( p)$class <- "ggplot"
     } else {
       p <- ggally_blank()
