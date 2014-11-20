@@ -27,13 +27,13 @@ with elements from e2.
 }
 \examples{
 data(tips, package = "reshape")
-pm <- ggpairs(tips[,1:3])
-# change to black and white theme
+pm <- ggpairs(tips[,2:3])
+## change to black and white theme
 pm + ggplot2::theme_bw()
-# change to linedraw theme
-pm + ggplot2::theme_linedraw()
-# change to custom theme
-pm + ggplot2::theme(panel.background = element_rect(fill = "lightblue"))
+## change to linedraw theme
+# pm + ggplot2::theme_linedraw()
+## change to custom theme
+# pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue"))
 }
 \seealso{
 \code{\link[ggplot2]{+.gg}} and \code{\link[ggplot2]{theme}}
