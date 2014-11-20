@@ -25,7 +25,7 @@
 #' @param e2 A component to add to \code{e1}
 #'
 #' @export
-#' @seealso \code{\link[ggplot2]{+.gg}}  \code{\link[ggplot2]{theme}}
+#' @seealso \code{\link[ggplot2]{+.gg}} and \code{\link[ggplot2]{theme}}
 #' @method + gg
 #' @rdname gg-add
 #' @examples
