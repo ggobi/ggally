@@ -435,7 +435,7 @@ ggpairs <- function(
     gg = NULL
   )
 
-  attributes(plotMatrix)$class <- "ggpairs"
+  attributes(plotMatrix)$class <- c("gg", "ggpairs")
 
   plotMatrix
 }
