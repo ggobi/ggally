@@ -36,7 +36,7 @@ if(getRversion() >= "2.15.1") {
 #' @details The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code{\link[tnet]{tnet}} package.
 #' @importFrom grid arrow
 #' @examples
-#' require(network)
+#' if(require(network)){
 #' # make toy random network
 #' x                  <- 10
 #' ndyads             <- x * (x - 1)
@@ -65,6 +65,7 @@ if(getRversion() >= "2.15.1") {
 #' pRnd <- ggnet(cityServiceFirms, mode = "kamadakawai", alpha = .2, node.group = type,
 #'       label.nodes = c("Paris", "Beijing", "Chicago"), color = "darkred")
 #' # pRnd
+#' }
 
 ggnet <- function(
   net,                          # an object of class network
