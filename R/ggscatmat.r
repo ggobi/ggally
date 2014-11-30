@@ -161,10 +161,10 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL) {
       }))
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab==names(dn)[m])
-        r <- r + stat_density(aes(x = x, y = ..scaled.. * diff(range(x)) + min(x), colour=colorcolumn), data = j,
+        r <- r + stat_density(aes_string(x = "x", y = "..scaled.. * diff(range(x)) + min(x)", colour="colorcolumn"), data = j,
                               position = "identity", geom = "line")
       }
-      r <- r + geom_point(data=ltdata.new, aes(colour=colorcolumn), na.rm=TRUE)
+      r <- r + geom_point(data=ltdata.new, aes_string(colour="colorcolumn"), na.rm=TRUE)
       return(r)
     }
   }
@@ -195,7 +195,7 @@ ggscatmat <- function(data, columns=1:ncol(data), color=NULL){
 
   a <- uppertriangle(data, columns=columns, color=color)
   if (is.null(color)){
-    plot <- scatmat(data,column=columns) + geom_text(data=a, aes(label=r), colour="black")
+    plot <- scatmat(data,columns=columns) + geom_text(data=a, aes_string(label="r"), colour="black")
   } else {
     plot <- scatmat(data,columns=columns, color=color) +
       geom_text(data=a, aes_string(label="r", color="colorcolumn")) + labs(color = color)
