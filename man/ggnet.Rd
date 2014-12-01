@@ -66,7 +66,7 @@ Function for making a network plot from an object of class \code{network} or \co
 The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code{\link[tnet]{tnet}} package.
 }
 \examples{
-require(network)
+if(require(network)){
 # make toy random network
 x                  <- 10
 ndyads             <- x * (x - 1)
@@ -95,6 +95,7 @@ type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
 pRnd <- ggnet(cityServiceFirms, mode = "kamadakawai", alpha = .2, node.group = type,
       label.nodes = c("Paris", "Beijing", "Chicago"), color = "darkred")
 # pRnd
+}
 }
 \author{
 Moritz Marbach \email{mmarbach@mail.uni-mannheim.de} and Francois Briatte \email{f.briatte@gmail.com}
