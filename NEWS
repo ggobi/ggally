@@ -9,6 +9,7 @@ GGPAIRS
 * may control the spacing between plots in print method
 * may control the spacing for the left and bottom axis labels in print method.  This is not perfect behavior, but this small loss is worth the major gain of alignment
 * may provide custom labels to plot matrix
+* may add a theme to be applied to all subplots
 
 GGSCATMAT
 
