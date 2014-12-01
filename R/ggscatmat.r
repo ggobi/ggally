@@ -177,7 +177,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL) {
 
 #' ggscatmat - a traditional scatterplot matrix for purely quantitative variables
 #'
-#' This function makes scatterplot matrix for quantitative variables with density plots on the diagonal
+#' This function makes a scatterplot matrix for quantitative variables with density plots on the diagonal
 #' and correlation printed in the upper triangle.
 #'
 #' @export

@@ -12,10 +12,10 @@ GGPAIRS
 
 GGSCATMAT
 
-* New function!
-* This function makes scatterplot matrix for quantitative variables with density plots on the diagonal and correlation printed in the upper triangle.
-* Produces a legend when a color column is provided
-* Produces a ggplot2 object
+* new function!
+* this function makes a scatterplot matrix for quantitative variables with density plots on the diagonal and correlation printed in the upper triangle.
+* produces a legend when a color column is provided
+* produces a ggplot2 object
 
 
 GGPARCOORD - splineFactor
