@@ -87,6 +87,7 @@ pm <- ggpairs(
  upper = list(continuous = "density", combo = "box"),
  lower = list(continuous = "points", combo = "dot"),
  color = "cut",
+ alpha = 0.4,
  title = "Diamonds"
 )
 # pm

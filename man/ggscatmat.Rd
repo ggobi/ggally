@@ -13,7 +13,7 @@ ggscatmat(data, columns = 1:ncol(data), color = NULL)
 \item{color}{an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}}
 }
 \description{
-This function makes scatterplot matrix for quantitative variables with density plots on the diagonal
+This function makes a scatterplot matrix for quantitative variables with density plots on the diagonal
 and correlation printed in the upper triangle.
 }
 \examples{
