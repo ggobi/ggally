@@ -10,6 +10,14 @@ GGPAIRS
 * may control the spacing for the left and bottom axis labels in print method.  This is not perfect behavior, but this small loss is worth the major gain of alignment
 * may provide custom labels to plot matrix
 
+GGSCATMAT
+
+* New function!
+* This function makes scatterplot matrix for quantitative variables with density plots on the diagonal and correlation printed in the upper triangle.
+* Produces a legend when a color column is provided
+* Produces a ggplot2 object
+
+
 GGPARCOORD - splineFactor
 
 * added new splineFactor argument to fit a spline of the points
