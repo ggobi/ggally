@@ -104,6 +104,7 @@
 #'  upper = list(continuous = "density", combo = "box"),
 #'  lower = list(continuous = "points", combo = "dot"),
 #'  color = "cut",
+#'  alpha = 0.4,
 #'  title = "Diamonds"
 #' )
 #' # pm
@@ -451,10 +452,10 @@ ggpairs <- function(
 #' @keywords internal
 make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 
-  nonSymbolLocs <- which(lapply(mapping, typeof) != "symbol")
-  if (length(nonSymbolLocs) > 0) {
-    nonSymbolNames <- names(mapping)[nonSymbolLocs]
-    stop(paste("variables: ", paste(shQuote(nonSymbolNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonSymbolLocs])), collapse = ", "), ".  Please rename the columns and use labels instead.", sep = ""))
+  nonCallVals <- which(lapply(mapping, mode) == "call")
+  if (length(nonCallVals) > 0) {
+    nonCallNames <- names(mapping)[nonCallVals]
+    stop(paste("variables: ", paste(shQuote(nonCallNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "), ".  Please rename the columns and use labels instead.", sep = ""))
   }
 
   func_text <- paste("ggally_", func, collapse = "", sep = "")
