@@ -444,8 +444,11 @@ ggparcoord <- function(
   if (boxplot)
     p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
 
-  linexvar <- 'variable'
-  lineyvar <- 'value'
+  if(!is.null(mapping2$size)) {
+    lineSize <- mapping2$size
+  } else {
+    lineSize <- 0.5
+  }
 
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
@@ -457,31 +460,37 @@ ggparcoord <- function(
 
     linexvar <- 'spline.x'
     lineyvar <- 'spline.y'
-  }
 
-  if(!is.null(mapping2$size)) {
-    lineSize <- mapping2$size
-  } else {
-    lineSize <- 0.5
-  }
+    if (alphaLinesIsCharacter) {
+      p <- p +
+        geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize, data = data.m) +
+        scale_alpha(range = alphaRange)
 
-  if (alphaLinesIsCharacter) {
-    p <- p +
-      geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize, data = data.m) +
-      scale_alpha(range = alphaRange)
+    } else {
+      p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data = data.m)
+    }
 
-  } else {
-    p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data = data.m)
-  }
+    if (showPoints) {
+      p <- p + geom_point(aes(x = as.numeric(variable), y = value))
+    }
 
-  if (showPoints) {
-    p <- p + geom_point(aes(x = as.numeric(variable), y = value))
-  }
-
-  if (splineFactor > 0) {
     xAxisLabels <- levels(data.m$variable)
     # while continuous data, this makes it present like it's discrete
     p <- p + scale_x_discrete(breaks = seq_along(xAxisLabels), labels = xAxisLabels)
+
+  } else {
+    if (alphaLinesIsCharacter) {
+      p <- p +
+        geom_line(aes_string(alpha = alphaLines), size = lineSize, data = data.m) +
+        scale_alpha(range = alphaRange)
+
+    } else {
+      p <- p + geom_line(alpha = alphaLines, size = lineSize)
+    }
+
+    if (showPoints) {
+      p <- p + geom_point()
+    }
   }
 
   if (title != "") {
