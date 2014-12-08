@@ -362,10 +362,12 @@ ggparcoord <- function(
     })
   }
 
-  meltIDVars <- c(".ID", "anyMissing")
+  # meltIDVars <- c(".ID", "anyMissing")
+  meltIDVars <- colnames(data)[-columns]
+
   if(!is.null(groupColumn)) {
-    data <- cbind(data,groupVar)
-    names(data)[dim(data)[2]] <- groupCol
+    # data <- cbind(data,groupVar)
+    # names(data)[dim(data)[2]] <- groupCol
 
     meltIDVars <- c(groupCol, meltIDVars)
   }
@@ -376,8 +378,11 @@ ggparcoord <- function(
     meltIDVars <- c(meltIDVars, alphaLines)
   }
 
-  data.m <- melt(data,id.vars=meltIDVars)
+  if(is.list(mapping)) {
+    mappingNames <- names(mapping)
+  }
 
+  data.m <- melt(data,id.vars=meltIDVars, measure.vars = columns)
 
   ### Ordering ###
   if(length(order) > 1) {
