@@ -319,7 +319,7 @@ ggparcoord <- function(
 
   ### Imputation ###
   if(tolower(missing) == "exclude") {
-    dataCompleteCases <- complete.cases(data)
+    dataCompleteCases <- complete.cases(data[, columnsPlusTwo])
 
     if(!is.null(groupColumn)) {
       groupVar <- groupVar[dataCompleteCases]
@@ -329,43 +329,35 @@ ggparcoord <- function(
       alphaVar <- alphaVar[dataCompleteCases]
     }
 
-    data <- data[dataCompleteCases,]
+    data <- data[dataCompleteCases, ]
   }
-  else if(tolower(missing) == "mean") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) x[is.na(x)] <- mean(x,na.rm=TRUE)
-      return(x)
-    })
-  }
-  else if(tolower(missing) == "median") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) x[is.na(x)] <- median(x,na.rm=TRUE)
-      return(x)
-    })
-  }
-  else if(tolower(missing) == "min10") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) x[is.na(x)] <- .9*min(x,na.rm=TRUE)
-      return(x)
-    })
-  }
-  else if(tolower(missing) == "random") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) {
+  else if(tolower(missing) %in% c("mean", "median", "min10", "random")) {
+    missingFns <- list(
+      mean = function(x){mean(x, na.rm = TRUE)},
+      median = function(x){median(x, na.rm = TRUE)},
+      min10 = function(x){0.9 * min(x, na.rm = TRUE)},
+      random = function(x) {
         num <- sum(is.na(x))
         idx <- sample(which(!is.na(x)),num,replace=TRUE)
-        x[is.na(x)] <- x[idx]
+        x[idx]
+      }
+    )
+    missing_fn <- missingFns[[tolower(missing)]]
+    data[,columns] <- apply(data[,columns], 2, function(x) {
+      if(any(is.na(x))){
+        x[is.na(x)] <- missing_fn(x)
       }
       return(x)
     })
+
   }
 
   ### Scaling (round 2) ###
   # Centering by observation needs to be done after handling missing values
   #   in case the observation to be centered on has missing values
   if(tolower(scale) == "centerobs") {
-    data <- inner_rescaler(data,type="range")
-    data[,-p] <- apply(data[,-p],2,function(x){
+    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo],type="range")
+    data[, columns] <- apply(data[,columns],2,function(x){
       x <- x - x[centerObsID]
     })
   }
