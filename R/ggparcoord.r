@@ -242,7 +242,7 @@ ggparcoord <- function(
     }
     groupVar <- data[,groupCol]
   }
-  data <- data[,columns]
+  # data <- data[, columns]
 
   # Change character vars to factors
   vartypes <- get.VarTypes(data)
