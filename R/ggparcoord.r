@@ -382,6 +382,7 @@ ggparcoord <- function(
     mappingNames <- names(mapping)
   }
 
+  print(meltIDVars)
   data.m <- melt(data,id.vars=meltIDVars, measure.vars = columns)
 
   ### Ordering ###
@@ -431,6 +432,9 @@ ggparcoord <- function(
     )
   }
   mapping2 <- addAndOverwriteAes(mapping2,mapping)
+  # mapping2 <- addAndOverwriteAes(aes_string(size = I(0.5)), mapping2)
+  print(mapping2)
+  print(head(data.m))
   p <- ggplot(data=data.m,mapping=mapping2)
 
   if(!is.null(shadeBox)) {
@@ -441,6 +445,7 @@ ggparcoord <- function(
     p <- p + geom_linerange(data=d.sum,size=I(10),col=shadeBox,
       mapping=aes(y=NULL,ymin=min,ymax=max,group=variable))
   }
+
   if (boxplot)
     p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
 
@@ -485,7 +490,8 @@ ggparcoord <- function(
         scale_alpha(range = alphaRange)
 
     } else {
-      p <- p + geom_line(alpha = alphaLines, size = lineSize)
+      # p <- p + geom_line(alpha = alphaLines, size = lineSize)
+      p <- p + geom_line(alpha = alphaLines)
     }
 
     if (showPoints) {
