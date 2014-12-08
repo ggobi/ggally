@@ -300,24 +300,21 @@ ggparcoord <- function(
   }
 
   ### Scaling ###
-  if(tolower(scale) == "std") {
-    data <- inner_rescaler(data, type = "sd")
-  }
-  else if(tolower(scale) == "robust") {
-    data <- inner_rescaler(data,type="robust")
-  }
-  else if(tolower(scale) == "uniminmax") {
-    data <- inner_rescaler(data,type="range")
-  }
-  #else if(tolower(scale) == "globalminmax") {
-  #  data[,-p] <- data[,-p] - min(data[,-p])
-  #  data[,-p] <- data[,-p]/max(data[,-p])
-  #}
-  else if(tolower(scale) == "center") {
-    data <- inner_rescaler(data,type="range")
-    data[,-p] <- apply(data[,-p],2,function(x){
-      x <- x - eval(parse(text=paste(scaleSummary,"(x,na.rm=TRUE)",sep="")))
-    })
+  if(tolower(scale) %in% c("std", "robust", "uniminmax", "center")) {
+    rescalerType <- c(
+      "std" = "sd",
+      "robust" = "robust",
+      "uniminmax" = "range",
+      "center" = "range"
+    )[tolower(scale)]
+    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo], type = rescalerType)
+
+    if (tolower(scale) == "center") {
+      data[, columns] <- apply(data[, columns], 2, function(x){
+        x <- x - eval(parse(text=paste(scaleSummary,"(x,na.rm=TRUE)",sep="")))
+      })
+    }
+
   }
 
   ### Imputation ###
