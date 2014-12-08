@@ -250,7 +250,7 @@ ggparcoord <- function(
   # data <- data[, columns]
 
   # Change character vars to factors
-  vartypes <- get.VarTypes(data)
+  vartypes <- get.VarTypes(data[, columns])
   char.vars <- names(vartypes)[vartypes == "character"]
   if(length(char.vars) >= 1) {
     for(i in 1:length(char.vars)) {
@@ -259,7 +259,7 @@ ggparcoord <- function(
   }
 
   # Change factors to numeric
-  vartypes <- get.VarTypes(data)
+  vartypes <- get.VarTypes(data[, columns])
   fact.vars <- names(vartypes)[vartypes == "factor"]
   if(length(fact.vars) >= 1) {
     for(i in 1:length(fact.vars)) {
@@ -272,10 +272,10 @@ ggparcoord <- function(
   # being plotted as numeric)
   saveData2 <- data
 
-  data$.ID <- as.factor(1:dim(data)[1])
-  data$anyMissing <- apply(data,1,function(x) { any(is.na(x)) })
-  p <- c(dim(data)[2]-1,dim(data)[2])
-
+  p <- c(ncol(data) + 1, ncol(data) + 2)
+  data$.ID <- as.factor(1:nrow(data))
+  data$anyMissing <- apply(is.na(data[,columns]), 1, any)
+  columnsPlusTwo <- c(columns, p)
 
   inner_rescaler_default = function (x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
