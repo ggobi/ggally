@@ -151,7 +151,7 @@ if(getRversion() >= "2.15.1") {
 #' # gpd
 ggparcoord <- function(
   data,
-  columns,
+  columns      = 1:ncol(data),
   groupColumn  = NULL,
   scale        = "std",
   scaleSummary = "mean",
