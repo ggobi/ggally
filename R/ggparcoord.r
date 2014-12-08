@@ -242,6 +242,11 @@ ggparcoord <- function(
     }
     groupVar <- data[,groupCol]
   }
+  for (colPos in seq_along(columns)) {
+    if (is.character(columns[colPos])) {
+      columns[colPos] <- which(colnames(data) == columns[colPos])
+    }
+  }
   # data <- data[, columns]
 
   # Change character vars to factors
