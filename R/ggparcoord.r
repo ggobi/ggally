@@ -237,8 +237,9 @@ ggparcoord <- function(
   if(!is.null(groupColumn)) {
     if(is.numeric(groupColumn)) {
       groupCol <- names(data)[groupColumn]
-    } else
+    } else {
       groupCol <- groupColumn
+    }
     groupVar <- data[,groupCol]
   }
   data <- data[,columns]
