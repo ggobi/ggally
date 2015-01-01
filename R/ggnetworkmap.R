@@ -1,10 +1,13 @@
 if(getRversion() >= "2.15.1") {
-	utils::globalVariables(c("X1", "X2", "Y1", "Y2", "group", "id", "midX", "midY"))
+	utils::globalVariables(c("lon", "lat", "Y1", "Y2", "group", "id", "midX", "midY"))
 }
 
 #' ggmapnetwork - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot
 #'
-#' Function for making a network plot from an object of class \code{network} or \code{igraph}, using ggplot2.  Please visit \url{http://github.com/briatte/ggnet} for the latest development and descriptions about ggnet.
+#' This is a descendent of the original ggnet function.  ggnet added the innovation of plotting the network geographically
+#' However, ggnet needed to be the first object in the ggplot chain.  ggnetworkplot refuses to be the first object, and only plots
+#' networks geogrpahically.  ggnetwork plot must be passed a ggplot object, such as the output from ggmap::ggmap, as its first
+#' argument, and then draws the network as an overlay.
 #'
 #' @export
 #' @param net an object of class \code{igraph} or \code{network}. If the object is of class \code{igraph}, the \link[intergraph:asNetwork]{intergraph} package is used to convert it to class \code{network}.
@@ -24,47 +27,15 @@ if(getRversion() >= "2.15.1") {
 #' @param arrow.size size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.
 #' @param label.nodes label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
 #' @param label.size size of the labels.  Defaults to \code{size / 2}.
-#' @param top8.nodes use the top 8 nodes as node groups, colored with \code{"Set1"}. The rest of the network will be plotted as the ninth (grey) group. Experimental.
 #' @param trim.labels removes '@@', 'http://', 'www.' and the ending '/' from vertex names. Cleans up labels for website and Twitter networks. Defaults to \code{TRUE}.
 #' @param quantize.weights break node weights to quartiles. Fails when quartiles do not uniquely identify nodes.
 #' @param subset.threshold delete nodes prior to plotting, based on \code{weight.method} < \code{subset.threshold}. If \code{weight.method} is unspecified, total degree (Freeman's measure) is used. Defaults to 0 (no subsetting).
-#' @param legend.position location of the captions for node colors and weights. Accepts all positions supported by ggplot2 themes. Defaults to "right".
 #' @param ... other arguments supplied to geom_text for the node labels. Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link[sna]{gplot}} in the \link[sna:gplot]{sna} package
-#' @author Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de} and Francois Briatte \email{f.briatte@@gmail.com}
+#' @author Amos Elberg \email{amos.elberg@gmail.com}
+#' @author Original by Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de}, Francois Briatte \email{f.briatte@@gmail.com}
 #' @details The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code{\link[tnet]{tnet}} package.
 #' @importFrom grid arrow
-#' @examples
-#' if(require(network)){
-#' # make toy random network
-#' x                  <- 10
-#' ndyads             <- x * (x - 1)
-#' density            <- x / ndyads
-#' nw.mat             <- matrix(0, nrow = x, ncol = x)
-#' dimnames(nw.mat)   <- list(1:x, 1:x)
-#' nw.mat[row(nw.mat) != col(nw.mat)] <- runif(ndyads) < density
-#' nw.mat
-#' rnd <- network::network(nw.mat)
-#' rnd
-#'
-#' # random network
-#' pRnd <- ggnet(rnd, label.nodes = TRUE, alpha = 1, color = "white", segment.color = "grey10")
-#' # pRnd
-#'
-#' # random groups
-#' category = LETTERS[rbinom(x, 4, .5)]
-#' ggnet(rnd, label.nodes = TRUE, color = "white", segment.color = "grey10", node.group = category)
-#'
-#' # city and service firms data from the UCIrvine Network Data Repository
-#' data(cityServiceFirms, package = "GGally")
-#'
-#' # plot cities, firms and law firms
-#' type = cityServiceFirms %v% "type"
-#' type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
-#' pRnd <- ggnet(cityServiceFirms, mode = "kamadakawai", alpha = .2, node.group = type,
-#'       label.nodes = c("Paris", "Beijing", "Chicago"), color = "darkred")
-#' # pRnd
-#' }
 
 ggnetworkmap <- function (gg, net, layout.par = NULL,
 					size = 12, alpha = 0.75, weight.method = "none", names = c("",
@@ -72,116 +43,208 @@ ggnetworkmap <- function (gg, net, layout.par = NULL,
 					segment.alpha = NULL, segment.color = "grey", segment.label = NULL,
 					segment.size = 0.25, arrow.size = 0, label.nodes = FALSE,
 					label.size = size/2, trim.labels = TRUE,
-					quantize.weights = FALSE, subset.threshold = 0, legend.position = "right",
+					quantize.weights = FALSE, subset.threshold = 0,
 					...)
 {
-	GGally:::require_pkgs(c("intergraph", "network", "RColorBrewer", "sna","grid"))
-	if (class(net) == "igraph") {
+
+
+	require_pkgs(c("intergraph", "network", "RColorBrewer","grid"))
+	# intergraph   # igraph conversion
+	# network      # vertex attributes
+	# RColorBrewer # default colors
+
+	# support for igraph objects
+	if(class(net) == "igraph") {
 		net = intergraph::asNetwork(net)
 	}
-	if (class(net) != "network")
+	if(class(net) != "network")
 		stop("net must be a network object of class 'network' or 'igraph'")
+
+	# vertex attributes for weight detection
 	vattr = network::list.vertex.attributes(net)
-	weight = c("indegree", "outdegree", vattr)
-	weight = ifelse(weight.method %in% weight | length(weight.method) >
-										1, weight.method, "freeman")
+
+	# get arguments
+	weight    = c("indegree", "outdegree", vattr)
+	weight    = ifelse(weight.method %in% weight | length(weight.method) > 1,
+										 weight.method, "freeman")
 	quartiles = quantize.weights
-	labels = label.nodes
+	labels    = label.nodes
+
+	# alpha default
 	inherit <- function(x) ifelse(is.null(x), alpha, x)
-	if (subset.threshold > 0) {
-		network::delete.vertices(net, which(sna::degree(net,
-																										cmode = weight) < subset.threshold))
+	# subset
+	if(subset.threshold > 0) {
+		network::delete.vertices(
+			net,
+			which(sna::degree(net, cmode = weight) < subset.threshold))
 	}
+
+	# get sociomatrix
 	m <- network::as.matrix.network.adjacency(net)
 	v_function = get("%v%", envir = as.environment("package:network"))
-	plotcord = data.frame(lon = as.numeric(v_function(net,
-																										 "lon")), lat = as.numeric(v_function(net, "lat")))
-	plotcord$lon[abs(plotcord$lon) > quantile(abs(plotcord$lon),
-																						0.9, na.rm = TRUE)] = NA
-	plotcord$lat[is.na(plotcord$lon) | abs(plotcord$lat) > quantile(abs(plotcord$lat),
-																																 0.9, na.rm = TRUE)] = NA
-	plotcord$lon[is.na(plotcord$lat)] = NA
 
+	plotcord = data.frame(
+			lon = as.numeric(v_function(net, "lon")),
+			lat = as.numeric(v_function(net, "lat"))
+		)
+
+		# remove outliers
+		plotcord$lon[ abs(plotcord$lon) > quantile(abs(plotcord$lon), .9, na.rm = TRUE) ] = NA
+		plotcord$lat[ is.na(plotcord$lon) | abs(plotcord$lat) > quantile(abs(plotcord$lat), .9, na.rm = TRUE) ] = NA
+		plotcord$lon[ is.na(plotcord$lat) ] = NA
+
+
+
+	# get edgelist
 	edglist <- network::as.matrix.network.edgelist(net)
-	edges <- data.frame(plotcord[edglist[, 1], ], plotcord[edglist[,
-																																 2], ])
-	if (!is.null(node.group)) {
+	edges   <- data.frame(plotcord[edglist[, 1], ], plotcord[edglist[, 2], ])
+
+	# get node groups
+	if(!is.null(node.group)) {
 		network::set.vertex.attribute(net, "elements", as.character(node.group))
-		plotcord$group <- as.factor(network::get.vertex.attribute(net,
-																															"elements"))
+		plotcord$group <- as.factor(network::get.vertex.attribute(net, "elements"))
+	} else {
+		network::set.vertex.attribute(net, "elements", as.character("_nogroup"))
+		plotcord$group <- as.factor(network::get.vertex.attribute(net, "elements"))
 	}
-	degrees <- data.frame(id = network::network.vertex.names(net),
-												indegree = sapply(net$iel, length), outdegree = sapply(net$oel,
-																																							 length))
+
+	# get node weights
+	degrees <- data.frame(
+		id        = network::network.vertex.names(net),
+		indegree  = sapply(net$iel, length),
+		outdegree = sapply(net$oel, length)
+	)
 	degrees$freeman <- with(degrees, indegree + outdegree)
-	if (length(weight.method) == network::network.size(net)) {
+
+	# custom weights: vector of weights
+	if(length(weight.method) == network::network.size(net)) {
 		degrees$user = weight.method
 		weight = "user"
 	}
-	if (weight.method %in% vattr) {
+
+	# custom weights: vertex attribute
+	if(weight.method %in% vattr) {
 		degrees$user = v_function(net, weight.method)
-		names(degrees)[ncol(degrees)] = weight.method
+		names(degrees)[ ncol(degrees) ] = weight.method
 		weight = weight.method
 	}
-	if (trim.labels) {
+
+	# trim vertex names
+	if(trim.labels) {
 		degrees$id = gsub("@|http://|www.|/$", "", degrees$id)
 	}
 
+
 	colnames(edges) <- c("lon", "Y1", "lat", "Y2")
+
+	# set vertex names
 	plotcord$id <- as.character(degrees$id)
-	if (is.logical(labels)) {
-		if (!labels) {
+	if(is.logical(labels)) {
+		if(!labels) {
 			plotcord$id = ""
 		}
+	} else {
+		plotcord$id[ -which(plotcord$id %in% labels) ] = ""
+	}
+
+	# get vertice midpoints (not -yet- used later on)
+	edges$midX  <- (edges$lon + edges$lat) / 2
+	edges$midY  <- (edges$Y1 + edges$Y2) / 2
+
+	# plot the network
+	gg <- gg +
+		# plot vertices (links)
+		geom_segment(
+			aes(x = lon, y = Y1, xend = lat, yend = Y2),
+			data   = edges,
+			size   = segment.size,
+			colour = segment.color,
+			alpha  = inherit(segment.alpha),
+			arrow  = arrow(
+				type   = "closed",
+				length = unit(arrow.size, "cm")
+			)
+		)
+
+	# label mid-edges
+	if(!is.null(segment.label) & length(segment.label) == nrow(edges)) {
+		gg <- gg + geom_text(
+			aes(x = midX, y = midY),
+			data   = edges,
+			label = segment.label,
+			size = 1 / segment.size, # fixed setting
+			colour = segment.color,
+			alpha  = inherit(segment.alpha)
+		)
+	}
+
+	# null weighting
+	if(weight.method == c("none")) {
+		gg <- gg + geom_point(
+			aes(color = group),
+			data  = plotcord,
+			alpha = inherit(node.alpha),
+			size  = size
+		)
 	}
 	else {
-		plotcord$id[-which(plotcord$id %in% labels)] = ""
-	}
-	edges$midX <- (edges$lon + edges$lat)/2
-	edges$midY <- (edges$Y1 + edges$Y2)/2
-	gg <- gg + geom_segment(aes(x = lon, y = Y1, xend = lat, yend = Y2), data = edges, size = segment.size,
-																											 colour = segment.color, alpha = inherit(segment.alpha),
-																											 arrow = arrow(type = "closed", length = unit(arrow.size,
-																											 																						 "cm")))
-	if (!is.null(segment.label) & length(segment.label) == nrow(edges)) {
-		gg <- gg + geom_text(aes(x = midX, y = midY), data = edges,
-														 label = segment.label, size = 1/segment.size, colour = segment.color,
-														 alpha = inherit(segment.alpha))
-	}
-	if (weight.method == c("none")) {
-		gg <- gg + geom_point(data = plotcord, alpha = inherit(node.alpha),
-															size = size)
-	}
-	else {
-		plotcord$weight <- degrees[, weight]
+
+		plotcord$weight <- degrees[, weight ]
+
+		# show top weights
 		cat(nrow(plotcord), "nodes, weighted by", weight, "\n\n")
-		print(head(degrees[order(-degrees[weight]), ]))
+		print(head(degrees[ order( -degrees[weight] ), ]))
+
+		# proportional scaling
 		sizer <- scale_size_area(names[2], max_size = size)
-		if (quartiles) {
-			plotcord$weight.label <- cut(plotcord$weight, breaks = quantile(plotcord$weight),
-																	 include.lowest = TRUE, ordered = TRUE)
+
+		# quartiles
+		if(quartiles) {
+			plotcord$weight.label <- cut(
+				plotcord$weight,
+				breaks         = quantile(plotcord$weight),
+				include.lowest = TRUE,
+				ordered        = TRUE
+			)
 			plotcord$weight <- as.integer(plotcord$weight.label)
-			sizer <- scale_size_area(names[2], max_size = size,
-															 labels = levels(plotcord$weight.label))
+			sizer <- scale_size_area(
+				names[2],
+				max_size = size,
+				labels   = levels(plotcord$weight.label)
+			)
 		}
-		gg <- gg + geom_point(aes(size = weight), data = plotcord,
-															alpha = inherit(node.alpha)) + sizer
+
+		# add to plot
+		gg <- gg + geom_point(
+			aes(size = weight, color = group),
+			data  = plotcord,
+			alpha = inherit(node.alpha)
+		) + sizer
 	}
+
+	# default colors
 	n = length(unique(suppressWarnings(na.omit(node.group))))
-	if (length(node.color) != n & !is.null(node.group)) {
+	if(length(node.color) != n & !is.null(node.group)) {
 		warning("Node groups and node colors are of unequal length; using default colors.")
-		if (n > 0 & n < 10) {
+		if(n > 0 & n < 10) {
 			node.color = RColorBrewer::brewer.pal(9, "Set1")[1:n]
 		}
 	}
-	if (!is.null(node.group)) {
-		gg <- gg + aes(colour = node.group) + scale_colour_manual(names[1],
-																														 values = node.color, guide = guide_legend(override.aes = list(size = label.size)))
+
+	# color the nodes
+	if(!is.null(node.group)) {
+		gg <- gg +
+			scale_colour_manual(
+				names[1],
+				values = node.color,
+				guide  = guide_legend(override.aes = list(size = label.size))
+			)
 	}
-	if (length(unique(plotcord$id)) > 1 | unique(plotcord$id)[1] !=
-				"") {
-		gg <- gg + geom_text(aes(label = id), size = label.size,
-														 ...)
+
+	# add text labels
+	if(length(unique(plotcord$id)) > 1 | unique(plotcord$id)[1] != "") {
+		gg <- gg + geom_text(aes(label = id), size = label.size, ...)
 	}
+
 	return(gg)
 }
