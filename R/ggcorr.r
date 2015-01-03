@@ -19,9 +19,12 @@ if(getRversion() >= "2.15.1") {
 #' @param label_alpha whether to make the correlation coefficients transparent as they come close to 0. Defaults to \code{FALSE}.
 #' @param label_color color for the correlation coefficients. Defaults to \code{"black"}.
 #' @param label_round decimal rounding of the correlation coefficients. Defaults to \code{1}.
+#' @param nbreaks number of breaks to apply.  Defaults to \code{8}.
+#' @param latexify replaces the title of the legend with LaTeX for the Greek letter Rho.  This is intended for use with the \code{tikzDevice} graphics pacakge.  Defaults to \code{FALSE}.
 #' @param ... other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link{cor}} and \code{\link[arm]{corrplot}}
 #' @author Francois Briatte \email{f.briatte@@gmail.com}
+#' @author Amos B. Elberg \email{amos.elberg@@gmail.com}
 #' @importFrom reshape melt melt.data.frame melt.default
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -41,6 +44,7 @@ if(getRversion() >= "2.15.1") {
 #'   max_size = 6,
 #'   size = 3,
 #'   hjust = 0.75,
+#'   nbreaks = 6,
 #'   angle = -45,
 #'   palette = "PuOr" # colorblind safe, photocopy-able
 #' ) + ggplot2::labs(title = "Points Per Game")
@@ -54,6 +58,8 @@ ggcorr <- function(data,
   label_alpha = FALSE,
   label_color = "black",
   label_round = 1,
+  nbreaks = 8,
+  latexify = FALSE,
   ...) {
 
   M <- cor(data[1:ncol(data)], use = method)
@@ -71,9 +77,9 @@ ggcorr <- function(data,
   M <- data.frame(row = names(data), M)
   M <- melt(M, id.vars = "row")
   M$value[M$value == 0] <- NA
-  s <- seq(-1, 1, by = .25)
-  M$value <- cut(M$value, breaks = s, include.lowest = TRUE,
-                 label = cut(s, breaks = s)[-1])
+  s <- seq(-1, 1, length.out = nbreaks + 1)
+  M$value <- droplevels(cut(M$value, breaks = s, include.lowest = TRUE,
+                 label = cut(s, breaks = s)[-1]))
   M$row <- factor(M$row, levels = unique(as.character(M$variable)))
   M$num <- as.numeric(M$value)
   diag  <- subset(M, row == variable)
@@ -87,19 +93,21 @@ ggcorr <- function(data,
   )
 
   p = ggplot(M, aes(row, variable))
-
+  g <- ifelse(latexify, guide_legend("$\\rho$"), guide_legend("rho"))
   # apply main geom
   if(geom == "circle") {
     p = p +
       scale_colour_brewer(name, palette = palette) +
-      scale_size_area(name, max_size= max_size,
-                      labels = levels(M$value)[table(M$value) > 0]) +
-      geom_point(aes(size = num, colour = value))
+      scale_size_continuous(name, range = c(max_size/nlevels(M$value), max_size), labels =
+      												levels(M$value) ) +
+      geom_point(aes(size = num, colour = value)) +
+			guides(color = g, size = g)
   }
   else {
     p = p +
       scale_fill_brewer(name, palette = palette) +
-      geom_tile(aes(fill = value), colour = "white")
+      geom_tile(aes(fill = value), colour = "white") +
+    	guides(color = g, size = g)
   }
 
   # add coefficient text
