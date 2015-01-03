@@ -6,7 +6,8 @@
 \usage{
 ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
   geom = "tile", max_size = 6, label = FALSE, label_alpha = FALSE,
-  label_color = "black", label_round = 1, ...)
+  label_color = "black", label_round = 1, nbreaks = 8, latexify = FALSE,
+  ...)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -28,6 +29,10 @@ ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
 \item{label_color}{color for the correlation coefficients. Defaults to \code{"black"}.}
 
 \item{label_round}{decimal rounding of the correlation coefficients. Defaults to \code{1}.}
+
+\item{nbreaks}{number of breaks to apply.  Defaults to \code{8}.}
+
+\item{latexify}{replaces the title of the legend with LaTeX for the Greek letter Rho.  This is intended for use with the \code{tikzDevice} graphics pacakge.  Defaults to \code{FALSE}.}
 
 \item{...}{other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.}
 }
@@ -52,12 +57,15 @@ ggcorr(
   max_size = 6,
   size = 3,
   hjust = 0.75,
+  nbreaks = 6,
   angle = -45,
   palette = "PuOr" # colorblind safe, photocopy-able
 ) + ggplot2::labs(title = "Points Per Game")
 }
 \author{
 Francois Briatte \email{f.briatte@gmail.com}
+
+Amos B. Elberg \email{amos.elberg@gmail.com}
 }
 \seealso{
 \code{\link{cor}} and \code{\link[arm]{corrplot}}
