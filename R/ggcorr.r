@@ -23,8 +23,7 @@ if(getRversion() >= "2.15.1") {
 #' @param latexify replaces the title of the legend with LaTeX for the Greek letter Rho.  This is intended for use with the \code{tikzDevice} graphics pacakge.  Defaults to \code{FALSE}.
 #' @param ... other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link{cor}} and \code{\link[arm]{corrplot}}
-#' @author Francois Briatte \email{f.briatte@@gmail.com}
-#' @author Amos B. Elberg \email{amos.elberg@@gmail.com}
+#' @author Francois Briatte \email{f.briatte@@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@@gmail.com}
 #' @importFrom reshape melt melt.data.frame melt.default
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
