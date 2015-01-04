@@ -63,9 +63,7 @@ ggcorr(
 ) + ggplot2::labs(title = "Points Per Game")
 }
 \author{
-Francois Briatte \email{f.briatte@gmail.com}
-
-Amos B. Elberg \email{amos.elberg@gmail.com}
+Francois Briatte \email{f.briatte@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@gmail.com}
 }
 \seealso{
 \code{\link{cor}} and \code{\link[arm]{corrplot}}
