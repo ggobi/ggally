@@ -190,7 +190,8 @@ ggnetworkmap <- function (
 												 		p1 = x[,c("lon1", "lat1")],
 												 		p2 = x[,c("lon2", "lat2")],
 												 		n = pts,
-												 		addStartEnd = TRUE
+												 		addStartEnd = TRUE,
+												 		breakAtDateLine = TRUE
 												 	))
 
 												 	inter$group <- i
