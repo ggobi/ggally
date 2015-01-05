@@ -17,7 +17,7 @@ if(getRversion() >= "2.15.1") {
 #' @param data an object of class \code{igraph} or \code{network}. If the object is of class \code{igraph}, the \link[intergraph:asNetwork]{intergraph} package is used to convert it to class \code{network}.
 #' @param size size of the network nodes. Defaults to 3. If the nodes are weighted, their area is proportionally scaled up to the size set by \code{size}.
 #' @param alpha a level of transparency for nodes, vertices and arrows. Defaults to 0.75.
-#' @param weight either \code{NULL}, the default, for unweighted nodes, or the unquoted name of a vertex attribute in \code{data}
+#' @param weight if present, the unquoted name of a vertex attribute in \code{data}.  Otherwise nodes are unweighted.
 #' @param node.group \code{NULL}, the default, or the unquoted name of a vertex attribute that will be used to determine the color of each node.
 #' @param ring.group if not \code{NULL}, the default, the unquoted name of a vertex attribute that will be used to determine the color of each node border.
 #' @param node.color If \code{node.group} is null, a character string specifying a color.  Otherwise, an object produced by a \code{scale_fill_} function from the \code{ggplot2} package.
@@ -30,8 +30,6 @@ if(getRversion() >= "2.15.1") {
 #' @param arrow.size size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.
 #' @param label.nodes label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
 #' @param label.size size of the labels.  Defaults to \code{size / 2}.
-#' @param quantize.weights break node weights to quartiles. Fails when quartiles do not uniquely identify nodes.
-#' @param subset.threshold delete nodes prior to plotting, based on \code{weight.method} < \code{subset.threshold}. If \code{weight.method} is unspecified, total degree (Freeman's measure) is used. Defaults to 0 (no subsetting).
 #' @param ... other arguments supplied to geom_text for the node labels. Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @author Amos Elberg \email{amos.elberg@@gmail.com}
 #' @author Original by Moritz Marbach \email{mmarbach@@mail.uni-mannheim.de}, Francois Briatte \email{f.briatte@@gmail.com}
@@ -43,7 +41,7 @@ ggnetworkmap <- function (
 	data,
 	size = 3,
 	alpha = 0.75,
-	weight.method = NULL,
+	weight,
 	node.group,
 	node.color = NULL,
 	node.alpha = NULL,
@@ -57,8 +55,6 @@ ggnetworkmap <- function (
 	arrow.size = 0,
 	label.nodes = FALSE,
 	label.size = size/2,
-	quantize.weights = FALSE,
-	subset.threshold = 0,
 	...)
 {
 
@@ -81,17 +77,10 @@ ggnetworkmap <- function (
 	vattr = network::list.vertex.attributes(net)
 
 	# get arguments
-	quartiles = quantize.weights
 	labels    = label.nodes
 
 	# alpha default
 	inherit <- function(x) ifelse(is.null(x), alpha, x)
-	# subset
-	if(subset.threshold > 0) {
-		network::delete.vertices(
-			net,
-			which(sna::degree(net, cmode = weight) < subset.threshold))
-	}
 
 	# get sociomatrix
 	m <- network::as.matrix.network.adjacency(net)
@@ -126,21 +115,24 @@ ggnetworkmap <- function (
 
 	# get node groups
 	if(!missing(node.group)) {
-		plotcord$ngroup <-
+		plotcord$.ngroup <-
 			network::get.vertex.attribute(net, as.character(substitute(node.group)))
-		point_aes$fill = substitute(ngroup)
+		if (missing(ring.group)) {
+			point_aes$color = substitute(.ngroup)
+		} else {
+			point_aes$fill = substitute(.ngroup)
+		}
 	} else if (! missing(node.color)) {
 		point_args$color <- substitute(node.color)
 	} else {
-		point_args$clor <- substitute( "black")
+		point_args$color <- substitute( "black")
 	}
-
 
 	# rings
 	if(!missing(ring.group)) {
-		plotcord$rgroup <-
+		plotcord$.rgroup <-
 			network::get.vertex.attribute(net, as.character(substitute(ring.group)))
-		point_aes$color <- substitute(rgroup)
+		point_aes$color <- substitute(.rgroup)
 		point_args$pch <- substitute(21)
 	}
 
@@ -231,31 +223,19 @@ ggnetworkmap <- function (
 	# custom weights: vertex attribute
 	# null weighting
 	sizer <- NULL
-	if(missing(weight.method)) {
+	if(missing(weight)) {
 		point_args$size <- substitute(size)
 	} else {
 		# Setup weight-sizing
-		# quartiles
-		point_aes$size = substitute(weight)
-		if(quartiles) {
-			plotcord$weight.label <- cut(
-				plotcord$weight,
-				breaks         = quantile(plotcord$weight),
-				include.lowest = TRUE,
-				ordered        = TRUE
-			)
-			plotcord$weight <- as.integer(plotcord$weight.label)
-			sizer <- scale_size_area(
-				substitute(weight.method),
-				max_size = size,
-				labels   = levels(plotcord$weight.label)
-			)
-		} else {
-			plotcord$weight <-
-				network::get.vertex.attribute(net, as.character(substitute(weight.method)))
+			plotcord$.weight <-
+				network::get.vertex.attribute(net, as.character(substitute(weight)))
 			# proportional scaling
-			sizer <- scale_size_area(substitute(weight.method), max_size = size)
-		}
+			if (is.factor(plotcord$.weight)) {
+				sizer <- scale_size_discrete(name = substitute(weight), range = c(size/nlevels(plotcord$weight), size))
+			} else {
+				sizer <- scale_size_area(name = substitute(weight), max_size = size)
+			}
+			point_aes$size <- substitute(.weight)
 	}
 
 	#	Add points to plot
