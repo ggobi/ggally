@@ -98,11 +98,16 @@ ggnetworkmap <- function (
 			lat = as.numeric(v_function(net, "lat"))
 		)
 
-		# remove outliers
-		# NOTE THIS MAY CAUSE FAILURE IF PUTTING IN VECTOR OR AS NODE OR EDGE GROUP
-		plotcord$lon[ abs(plotcord$lon) > quantile(abs(plotcord$lon), .9, na.rm = TRUE) ] = NA
-		plotcord$lat[ is.na(plotcord$lon) | abs(plotcord$lat) > quantile(abs(plotcord$lat), .9, na.rm = TRUE) ] = NA
-		plotcord$lon[ is.na(plotcord$lat) ] = NA
+	}
+
+	# Correct vertex labels
+	if (! is.logical(labels)) {
+		stopifnot(length(labels) == nrow(plotcord))
+		plotcord$.label <- labels
+	} else if ("id" %in% network::list.vertex.attributes(net)) {
+		plotcord$.label <- as.character(network::get.vertex.attribute(net, "id"))
+	} else if ("vertex.names" %in% network::list.vertex.attributes(net)) {
+		plotcord$.label <- network::get.vertex.attribute(net, "vertex.names")
 	}
 
 	point_aes <- list(
@@ -136,15 +141,7 @@ ggnetworkmap <- function (
 		point_args$pch <- substitute(21)
 	}
 
-	# set vertex names
-	plotcord$id <- as.character(network::get.vertex.attribute(net, "id"))
-	if(is.logical(labels)) {
-		if(!labels) {
-			plotcord$id = ""
-		}
-	} else {
-		plotcord$id[ -which(plotcord$id %in% labels) ] = ""
-	}
+
 
 	#
 	#
@@ -249,8 +246,8 @@ ggnetworkmap <- function (
 	if ("scale" %in% class(ring.color)) gg <- gg + ring.color
 
 	# add text labels
-	if(length(unique(plotcord$id)) > 1 | unique(plotcord$id)[1] != "") {
-		gg <- gg + geom_text(aes(label = id), size = label.size, ...)
+	if(labels != FALSE) {
+		gg <- gg + geom_text(data = plotcord, aes(x = lon, y = lat, label = .label), size = label.size, ...)
 	}
 
 	return(gg)
