@@ -71,11 +71,12 @@ ggnetworkmap <- function (
 {
 
 
-	GGally:::require_pkgs(c("intergraph", "network", "geosphere","grid","sna"))
+	GGally:::require_pkgs(c("intergraph", "network", "geosphere","grid","sna","mapproj"))
 	# intergraph   # igraph conversion
 	# network      # vertex attributes
 	# geosphere 	 # great circles
 	# sna					 # layout graph if not fed a ggplot object
+	# mapproj			 # pulled in for unclear reason
 
 	# support for igraph objects
 	net <- data
