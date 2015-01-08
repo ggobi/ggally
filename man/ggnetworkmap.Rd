@@ -68,7 +68,7 @@ library(ggmap)
 us <- ggmap(ggmap = get_map(location = "United States", 5, color = "bw"))
 ggnetworkmap(us, graph, size = 2, great.circles = TRUE, node.group = mygroup,
 										ring.group = degree,
-										segment.color = "cornflowerblue", weight.method = "none")
+										segment.color = "cornflowerblue", weight = degree)
 }
 \author{
 Amos Elberg \email{amos.elberg@gmail.com}
