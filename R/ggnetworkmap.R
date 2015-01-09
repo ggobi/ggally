@@ -71,7 +71,7 @@ ggnetworkmap <- function (
 {
 
 
-	GGally:::require_pkgs(c("intergraph", "network", "geosphere","grid","sna","mapproj"))
+	require_pkgs(c("intergraph", "network", "geosphere","grid","sna","mapproj"))
 	# intergraph   # igraph conversion
 	# network      # vertex attributes
 	# geosphere 	 # great circles
