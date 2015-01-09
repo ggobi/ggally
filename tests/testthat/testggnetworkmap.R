@@ -7,8 +7,8 @@ flights <- data.frame(origin = sample(airports[200:400,]$iata, 200, replace = TR
 											destination = sample(airports[200:400,]$iata, 200, replace = TRUE))
 library(igraph)
 graph <- igraph::graph.data.frame(flights, airports, directed = TRUE)
-graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
-igraph::V(graph)$degree <- degree(graph, mode = "total")
+graph <- graph - V(graph)[igraph::degree(graph, mode = "total") < 2]
+igraph::V(graph)$degree <- igraph::degree(graph, mode = "total")
 igraph::V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
 library(ggmap)
 us <- ggmap(ggmap = get_map(location = "United States", 5, color = "bw"))
