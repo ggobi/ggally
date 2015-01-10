@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnetworkmap.R
 \name{ggnetworkmap}
 \alias{ggnetworkmap}
-\title{ggmapnetwork - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot}
+\title{ggnetworkmap - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot}
 \usage{
 ggnetworkmap(gg, data, size = 3, alpha = 0.75, weight, node.group,
   node.color = NULL, node.alpha = NULL, ring.group, segment.alpha = NULL,

@@ -5,7 +5,7 @@ if(getRversion() >= "2.15.1") {
 	))
 }
 
-#' ggmapnetwork - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot
+#' ggnetworkmap - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot
 #'
 #' This is a descendent of the original \code{ggnet} function.  \code{ggnet} added the innovation of plotting the network geographically.
 #' However, \code{ggnet} needed to be the first object in the ggplot chain.  \code{ggnetworkmap} does not.  If passed a \code{ggplot} object as its first argument,
