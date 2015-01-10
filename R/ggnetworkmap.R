@@ -200,16 +200,41 @@ ggnetworkmap <- function (
 
 		edges <- plyr::ddply(.data = edges, .variables = c("lat1","lat2","lon1","lon2"),
 												 .fun = function(x) {
-												 	i <<- i + 1
-												 	inter <- data.frame(geosphere::gcIntermediate(
+												 	inter <- geosphere::gcIntermediate(
 												 		p1 = x[,c("lon1", "lat1")],
 												 		p2 = x[,c("lon2", "lat2")],
 												 		n = pts,
 												 		addStartEnd = TRUE,
 												 		breakAtDateLine = TRUE
-												 	))
-												 	inter$group <- i
-												 	inter
+												 	)
+												 	if (!is.list(inter)) {
+												 		i <<- i + 1
+												 		inter <- data.frame(inter)
+												 		inter$group <- i
+												 		return(inter)
+												 	} else {
+												 		if (is.matrix(inter[[1]])) {
+												 			i <<- i + 1
+												 			ret <- data.frame(inter[[1]])
+												 			ret$group <- i
+												 			i <<- i + 1
+												 			ret2 <- data.frame(inter[[2]])
+												 			ret2$group <- i
+												 			return(rbind(ret, ret2))
+												 		} else {
+												 			ret <- data.frame(lon = numeric(0), lat = numeric(0), group = numeric(0))
+												 			for (j in 1: length(inter)) {
+												 				i <<- i + 1
+												 				ret1 <- data.frame(inter[[j]][[1]])
+												 				ret1$group <- i
+												 				i <<- i + 1
+												 				ret2 <- data.frame(inter[[j]][[2]])
+												 				ret2$group <- i
+												 				ret <- rbind(ret, ret1, ret2)
+												 			}
+												 			return(ret)
+												 		}
+												 	}
 												 })
 		edge_aes$x = substitute(lon)
 		edge_aes$y = substitute(lat)
