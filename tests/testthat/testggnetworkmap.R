@@ -10,9 +10,10 @@ graph <- igraph::graph.data.frame(flights, airports, directed = TRUE)
 graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
 igraph::V(graph)$degree <- degree(graph, mode = "total")
 igraph::V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
-library(ggmap)
-us <- ggmap(ggmap = get_map(location = "United States", 5, color = "bw"))
 
+us <- ggplot(ggplot2::map_data("usa"), aes(x = long, y = lat)) +
+	geom_polygon(aes(group = group), color = "grey65",
+							 fill = "#f9f9f9", size = 0.2)
 context("ggnetworkmap")
 
 test_that("basic drawing, no map", {
