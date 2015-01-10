@@ -58,9 +58,9 @@ if (require(ggplot2) && require(igraph) && require(maps)) {
 airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header=TRUE)
 airports$lon <- airports$long
 
-flights <- data.frame(origin = sample(airports[200:400,]$iata, 200,
-																	replace = TRUE),
-											destination = sample(airports[200:400,]$iata, 200,
+flights <- data.frame(origin =
+			sample(airports[200:400,]$iata, 200, replace = TRUE),
+			destination = sample(airports[200:400,]$iata, 200,
 																	replace = TRUE))
 graph <- graph.data.frame(flights, airports, directed = TRUE)
 graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
