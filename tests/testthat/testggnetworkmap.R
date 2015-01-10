@@ -1,12 +1,12 @@
-library(ggplot2)
-library(maps)
+#library(ggplot2)
+#library(maps)
 context("Building Example Data")
 airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header=TRUE)
 airports$lon <- airports$long
 
 flights <- data.frame(origin = sample(airports[200:400,]$iata, 200, replace = TRUE),
 											destination = sample(airports[200:400,]$iata, 200, replace = TRUE))
-library(igraph)
+#library(igraph)
 graph <- igraph::graph.data.frame(flights, airports, directed = TRUE)
 graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
 igraph::V(graph)$degree <- degree(graph, mode = "total")

@@ -1,6 +1,6 @@
 if(getRversion() >= "2.15.1") {
 	utils::globalVariables(c(
-		"lon", "lat", "Y1", "Y2", "group", "id", "midX", "midY",
+		"lon", "lat", "group", "id",
 		"lon1", "lat1", "lon2", "lat2"
 	))
 }
@@ -38,9 +38,9 @@ if(getRversion() >= "2.15.1") {
 #' airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header=TRUE)
 #' airports$lon <- airports$long
 #'
-#' flights <- data.frame(origin = sample(airports[200:400,]$iata, 200,
-#' 																	replace = TRUE),
-#' 											destination = sample(airports[200:400,]$iata, 200,
+#' flights <- data.frame(origin =
+#' 			sample(airports[200:400,]$iata, 200, replace = TRUE),
+#' 			destination = sample(airports[200:400,]$iata, 200,
 #' 																	replace = TRUE))
 #' graph <- graph.data.frame(flights, airports, directed = TRUE)
 #' graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
@@ -208,9 +208,7 @@ ggnetworkmap <- function (
 												 		addStartEnd = TRUE,
 												 		breakAtDateLine = TRUE
 												 	))
-
 												 	inter$group <- i
-												 	#												 	inter$sgroup <- x$sgroup
 												 	inter
 												 })
 		edge_aes$x = substitute(lon)
