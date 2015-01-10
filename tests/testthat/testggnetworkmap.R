@@ -1,4 +1,5 @@
 library(ggplot2)
+library(maps)
 context("Building Example Data")
 airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header=TRUE)
 airports$lon <- airports$long
