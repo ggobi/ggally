@@ -6,7 +6,7 @@ airports$lon <- airports$long
 
 flights <- data.frame(origin = sample(airports[200:400,]$iata, 200, replace = TRUE),
 											destination = sample(airports[200:400,]$iata, 200, replace = TRUE))
-#library(igraph)
+require(igraph)
 graph <- igraph::graph.data.frame(flights, airports, directed = TRUE)
 graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
 igraph::V(graph)$degree <- degree(graph, mode = "total")
