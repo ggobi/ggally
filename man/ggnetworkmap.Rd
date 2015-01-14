@@ -69,7 +69,7 @@ graph <- graph.data.frame(flights, airports, directed = TRUE)
 graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
 V(graph)$degree <- degree(graph, mode = "total")
 V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
-usa <- ggplot(ggplot2::map_data("usa"), aes(x = long, y = lat)) +
+usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
  geom_polygon(aes(group = group), color = "grey65",
               fill = "#f9f9f9", size = 0.2)
 ggnetworkmap(usa, graph, size = 2, great.circles = TRUE,
@@ -119,8 +119,6 @@ ggnetworkmap(data=twitter_spam_community,
 }
 }
 \author{
-Amos Elberg \email{amos.elberg@gmail.com}
-
-Original by Moritz Marbach \email{mmarbach@mail.uni-mannheim.de}, Francois Briatte \email{f.briatte@gmail.com}
+Amos Elberg \email{amos.elberg@gmail.com}. Original by Moritz Marbach \email{mmarbach@mail.uni-mannheim.de}, Francois Briatte \email{f.briatte@gmail.com}
 }
 
