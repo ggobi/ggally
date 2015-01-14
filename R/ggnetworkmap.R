@@ -1,8 +1,8 @@
 if(getRversion() >= "2.15.1") {
-	utils::globalVariables(c(
-		"lon", "lat", "group", "id",
-		"lon1", "lat1", "lon2", "lat2"
-	))
+  utils::globalVariables(c(
+    "lon", "lat", "group", "id",
+    "lon1", "lat1", "lon2", "lat2"
+  ))
 }
 
 #' ggnetworkmap - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot
@@ -42,28 +42,28 @@ if(getRversion() >= "2.15.1") {
 #' airports$lon <- airports$long
 #'
 #' flights <- data.frame(origin =
-#' 			sample(airports[200:400,]$iata, 200, replace = TRUE),
-#' 			destination = sample(airports[200:400,]$iata, 200,
-#' 																	replace = TRUE))
+#'      sample(airports[200:400,]$iata, 200, replace = TRUE),
+#'      destination = sample(airports[200:400,]$iata, 200,
+#'                                  replace = TRUE))
 #' graph <- graph.data.frame(flights, airports, directed = TRUE)
 #' graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
 #' V(graph)$degree <- degree(graph, mode = "total")
 #' V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
 #' usa <- ggplot(ggplot2::map_data("usa"), aes(x = long, y = lat)) +
-#' 	geom_polygon(aes(group = group), color = "grey65",
-#' 							 fill = "#f9f9f9", size = 0.2)
+#'  geom_polygon(aes(group = group), color = "grey65",
+#'               fill = "#f9f9f9", size = 0.2)
 #' ggnetworkmap(usa, graph, size = 2, great.circles = TRUE,
-#' 							 node.group = mygroup,
-#' 						 ring.group = degree,
-#' 						 segment.color = "cornflowerblue",
-#' 						 weight = degree)
+#'               node.group = mygroup,
+#'             ring.group = degree,
+#'             segment.color = "cornflowerblue",
+#'             weight = degree)
 #'
 #' # Exploring a community of spam-bots found on twitter
 #' data(twitter_spam_community)
 #' world <- fortify(map("world", plot = FALSE, fill = TRUE))
 #' gp <- ggplot(world, aes(x = long, y = lat)) +
 #' geom_polygon(aes(group = group), color = "grey65",
-#'						 fill = "#f9f9f9", size = 0.2)
+#'             fill = "#f9f9f9", size = 0.2)
 #' # View global structure
 #' ggnetworkmap(gp, twitter_spam_community)
 #'
@@ -78,23 +78,23 @@ if(getRversion() >= "2.15.1") {
 #' V(twitter_spam_community)$outdegree <- igraph::degree(twitter_spam_community, mode = "out")
 #'
 #' ggnetworkmap(data=twitter_spam_community,
-#' 						arrow.size = 0.5,
-#' 						node.group = indegree,
-#' 						ring.group = outdegree, size = 4) +
-#' 						scale_fill_continuous("Indegree", high = "red", low = "yellow") +
-#' 						labs(color = "Outdegree")
+#'            arrow.size = 0.5,
+#'            node.group = indegree,
+#'            ring.group = outdegree, size = 4) +
+#'            scale_fill_continuous("Indegree", high = "red", low = "yellow") +
+#'            labs(color = "Outdegree")
 #'
 #' # This graph is pre-loaded with some vertex attributes associated with the screen names
 #' ggnetworkmap(data=twitter_spam_community,
-#' 						arrow.size = 0.5,
-#' 						node.group = followersCount,
-#' 						ring.group = friendsCount,
-#' 						size = 4,
-#' 						weight = indegree,
-#' 						label.nodes = TRUE, vjust = -1.5) +
-#' 		scale_fill_continuous("followersCount", high = "red", low = "yellow") +
-#' 		labs(color = "friendsCount") +
-#' 		scale_color_continuous(low = "lightgreen", high = "darkgreen")
+#'            arrow.size = 0.5,
+#'            node.group = followersCount,
+#'            ring.group = friendsCount,
+#'            size = 4,
+#'            weight = indegree,
+#'            label.nodes = TRUE, vjust = -1.5) +
+#'    scale_fill_continuous("followersCount", high = "red", low = "yellow") +
+#'    labs(color = "friendsCount") +
+#'    scale_color_continuous(low = "lightgreen", high = "darkgreen")
 #' }
 
 ggnetworkmap <- function (
@@ -119,218 +119,218 @@ ggnetworkmap <- function (
 
 
 
-	require_pkgs(c("intergraph", "network", "geosphere","grid","sna","mapproj"))
-	# intergraph   # igraph conversion
-	# network      # vertex attributes
-	# geosphere 	 # great circles
-	# sna					 # layout graph if not fed a ggplot object
-	# mapproj			 # pulled in for unclear reason
+  require_pkgs(c("intergraph", "network", "geosphere","grid","sna","mapproj"))
+  # intergraph   # igraph conversion
+  # network      # vertex attributes
+  # geosphere    # great circles
+  # sna          # layout graph if not fed a ggplot object
+  # mapproj      # pulled in for unclear reason
 
-	# support for igraph objects
-	net <- data
-	if(class(net) == "igraph") {
-		net = intergraph::asNetwork(net)
-	}
-	if(class(net) != "network")
-		stop("net must be a network object of class 'network' or 'igraph'")
+  # support for igraph objects
+  net <- data
+  if(class(net) == "igraph") {
+    net = intergraph::asNetwork(net)
+  }
+  if(class(net) != "network")
+    stop("net must be a network object of class 'network' or 'igraph'")
 
-	# vertex attributes for weight detection
-	vattr = network::list.vertex.attributes(net)
+  # vertex attributes for weight detection
+  vattr = network::list.vertex.attributes(net)
 
-	# get arguments
-	labels    = label.nodes
+  # get arguments
+  labels    = label.nodes
 
-	# alpha default
-	inherit <- function(x) ifelse(is.null(x), alpha, x)
+  # alpha default
+  inherit <- function(x) ifelse(is.null(x), alpha, x)
 
-	# get sociomatrix
-	m <- network::as.matrix.network.adjacency(net)
-	v_function = get("%v%", envir = as.environment("package:network"))
+  # get sociomatrix
+  m <- network::as.matrix.network.adjacency(net)
+  v_function = get("%v%", envir = as.environment("package:network"))
 
-	if (missing(gg)) {
-		gg <- ggplot()
+  if (missing(gg)) {
+    gg <- ggplot()
 
-		plotcord <- do.call("gplot.layout.fruchtermanreingold", list(m,layout.par = NULL))
-		plotcord <- data.frame(plotcord)
-		colnames(plotcord) = c("lon", "lat")
-	} else {
-		plotcord = data.frame(
-			lon = as.numeric(v_function(net, "lon")),
-			lat = as.numeric(v_function(net, "lat"))
-		)
+    plotcord <- do.call("gplot.layout.fruchtermanreingold", list(m,layout.par = NULL))
+    plotcord <- data.frame(plotcord)
+    colnames(plotcord) = c("lon", "lat")
+  } else {
+    plotcord = data.frame(
+      lon = as.numeric(v_function(net, "lon")),
+      lat = as.numeric(v_function(net, "lat"))
+    )
 
-	}
+  }
 
-	# Correct vertex labels
-	if (! is.logical(labels)) {
-		stopifnot(length(labels) == nrow(plotcord))
-		plotcord$.label <- labels
-	} else if ("id" %in% network::list.vertex.attributes(net)) {
-		plotcord$.label <- as.character(network::get.vertex.attribute(net, "id"))
-	} else if ("vertex.names" %in% network::list.vertex.attributes(net)) {
-		plotcord$.label <- network::get.vertex.attribute(net, "vertex.names")
-	}
+  # Correct vertex labels
+  if (! is.logical(labels)) {
+    stopifnot(length(labels) == nrow(plotcord))
+    plotcord$.label <- labels
+  } else if ("id" %in% network::list.vertex.attributes(net)) {
+    plotcord$.label <- as.character(network::get.vertex.attribute(net, "id"))
+  } else if ("vertex.names" %in% network::list.vertex.attributes(net)) {
+    plotcord$.label <- network::get.vertex.attribute(net, "vertex.names")
+  }
 
-	point_aes <- list(
-		x = substitute(lon),
-		y = substitute(lat)
-	)
-	point_args <- list(
-		alpha = substitute(inherit(node.alpha))
-	)
+  point_aes <- list(
+    x = substitute(lon),
+    y = substitute(lat)
+  )
+  point_args <- list(
+    alpha = substitute(inherit(node.alpha))
+  )
 
-	# get node groups
-	if(!missing(node.group)) {
-		plotcord$.ngroup <-
-			network::get.vertex.attribute(net, as.character(substitute(node.group)))
-		if (missing(ring.group)) {
-			point_aes$color = substitute(.ngroup)
-		} else {
-			point_aes$fill = substitute(.ngroup)
-		}
-	} else if (! missing(node.color)) {
-		point_args$color <- substitute(node.color)
-	} else {
-		point_args$color <- substitute( "black")
-	}
+  # get node groups
+  if(!missing(node.group)) {
+    plotcord$.ngroup <-
+      network::get.vertex.attribute(net, as.character(substitute(node.group)))
+    if (missing(ring.group)) {
+      point_aes$color = substitute(.ngroup)
+    } else {
+      point_aes$fill = substitute(.ngroup)
+    }
+  } else if (! missing(node.color)) {
+    point_args$color <- substitute(node.color)
+  } else {
+    point_args$color <- substitute( "black")
+  }
 
-	# rings
-	if(!missing(ring.group)) {
-		plotcord$.rgroup <-
-			network::get.vertex.attribute(net, as.character(substitute(ring.group)))
-		point_aes$color <- substitute(.rgroup)
-		point_args$pch <- substitute(21)
-	}
-
-
-
-	#
-	#
-	# Plot edges
-	#
-	#
-
-	# get edgelist
-	edglist <- network::as.matrix.network.edgelist(net)
-	edges   <- data.frame(
-		lat1 = plotcord[edglist[, 1], "lat"],
-		lon1 = plotcord[edglist[, 1], "lon"],
-		lat2 =  plotcord[edglist[, 2], "lat"],
-		lon2 = plotcord[edglist[,2], "lon"])
-	edges <- subset(edges,
-									(! is.na(lat1)) &
-										(! is.na(lat2)) &
-										(! is.na(lon1)) &
-										(! is.na(lon2)) &
-										(! (lat1 == lat2 & lon2 == lon2))
-	)
-
-	edge_args <- list(size = substitute(segment.size),
-										alpha = substitute(inherit(segment.alpha)),
-										color = substitute(segment.color)
-	)
-	edge_aes <- list()
-
-	if (!missing(arrow.size) & arrow.size > 0) 	edge_args$arrow <- substitute(grid::arrow(
-		type   = "closed",
-		length = unit(arrow.size, "cm")
-	))
-
-	if (great.circles) {
-		pts <- 25  # number of intermediate points for drawing great circles
-		i <- 0 # used to keep track of groups when getting intermediate points for great circles
-
-		edges <- plyr::ddply(.data = edges, .variables = c("lat1","lat2","lon1","lon2"),
-												 .fun = function(x) {
-												 	inter <- geosphere::gcIntermediate(
-												 		p1 = x[,c("lon1", "lat1")],
-												 		p2 = x[,c("lon2", "lat2")],
-												 		n = pts,
-												 		addStartEnd = TRUE,
-												 		breakAtDateLine = TRUE
-												 	)
-												 	if (!is.list(inter)) {
-												 		i <<- i + 1
-												 		inter <- data.frame(inter)
-												 		inter$group <- i
-												 		return(inter)
-												 	} else {
-												 		if (is.matrix(inter[[1]])) {
-												 			i <<- i + 1
-												 			ret <- data.frame(inter[[1]])
-												 			ret$group <- i
-												 			i <<- i + 1
-												 			ret2 <- data.frame(inter[[2]])
-												 			ret2$group <- i
-												 			return(rbind(ret, ret2))
-												 		} else {
-												 			ret <- data.frame(lon = numeric(0), lat = numeric(0), group = numeric(0))
-												 			for (j in 1: length(inter)) {
-												 				i <<- i + 1
-												 				ret1 <- data.frame(inter[[j]][[1]])
-												 				ret1$group <- i
-												 				i <<- i + 1
-												 				ret2 <- data.frame(inter[[j]][[2]])
-												 				ret2$group <- i
-												 				ret <- rbind(ret, ret1, ret2)
-												 			}
-												 			return(ret)
-												 		}
-												 	}
-												 })
-		edge_aes$x = substitute(lon)
-		edge_aes$y = substitute(lat)
-		edge_aes$group = substitute(group)
-		edge_args$data = substitute(edges)
-		edge_args$mapping <- do.call(aes, edge_aes)
-		gg <- gg + do.call(geom_path, edge_args)
-	} else {
-		edge_aes$x = substitute(lon1)
-		edge_aes$y = substitute(lat1)
-		edge_aes$xend = substitute(lon2)
-		edge_aes$yend = substitute(lat2)
-		edge_args$data <- substitute(edges)
-		edge_args$mapping = do.call(aes, edge_aes)
-		gg <- gg + do.call(geom_segment, edge_args)
-	}
-
-	#
-	#
-	# Done drawing edges, time to draws nodes
-	#
-	#
+  # rings
+  if(!missing(ring.group)) {
+    plotcord$.rgroup <-
+      network::get.vertex.attribute(net, as.character(substitute(ring.group)))
+    point_aes$color <- substitute(.rgroup)
+    point_args$pch <- substitute(21)
+  }
 
 
-	# custom weights: vertex attribute
-	# null weighting
-	sizer <- NULL
-	if(missing(weight)) {
-		point_args$size <- substitute(size)
-	} else {
-		# Setup weight-sizing
-			plotcord$.weight <-
-				network::get.vertex.attribute(net, as.character(substitute(weight)))
-			# proportional scaling
-			if (is.factor(plotcord$.weight)) {
-				sizer <- scale_size_discrete(name = substitute(weight), range = c(size/nlevels(plotcord$weight), size))
-			} else {
-				sizer <- scale_size_area(name = substitute(weight), max_size = size)
-			}
-			point_aes$size <- substitute(.weight)
-	}
 
-	#	Add points to plot
+  #
+  #
+  # Plot edges
+  #
+  #
 
-	point_args$data <- substitute(plotcord)
-	point_args$mapping <- do.call(aes,point_aes	)
-	gg <- gg + do.call(geom_point, point_args)
-	if (!is.null(sizer)) gg <- gg + sizer
+  # get edgelist
+  edglist <- network::as.matrix.network.edgelist(net)
+  edges   <- data.frame(
+    lat1 = plotcord[edglist[, 1], "lat"],
+    lon1 = plotcord[edglist[, 1], "lon"],
+    lat2 =  plotcord[edglist[, 2], "lat"],
+    lon2 = plotcord[edglist[,2], "lon"])
+  edges <- subset(edges,
+                  (! is.na(lat1)) &
+                    (! is.na(lat2)) &
+                    (! is.na(lon1)) &
+                    (! is.na(lon2)) &
+                    (! (lat1 == lat2 & lon2 == lon2))
+  )
 
-	# add text labels
-	if(labels != FALSE) {
-		gg <- gg + geom_text(data = plotcord, aes(x = lon, y = lat, label = .label), size = label.size, ...)
-	}
-	gg <- gg + labs(color = "", fill = "")
+  edge_args <- list(size = substitute(segment.size),
+                    alpha = substitute(inherit(segment.alpha)),
+                    color = substitute(segment.color)
+  )
+  edge_aes <- list()
 
-	return(gg)
+  if (!missing(arrow.size) & arrow.size > 0)  edge_args$arrow <- substitute(grid::arrow(
+    type   = "closed",
+    length = unit(arrow.size, "cm")
+  ))
+
+  if (great.circles) {
+    pts <- 25  # number of intermediate points for drawing great circles
+    i <- 0 # used to keep track of groups when getting intermediate points for great circles
+
+    edges <- plyr::ddply(.data = edges, .variables = c("lat1","lat2","lon1","lon2"),
+                         .fun = function(x) {
+                          inter <- geosphere::gcIntermediate(
+                            p1 = x[,c("lon1", "lat1")],
+                            p2 = x[,c("lon2", "lat2")],
+                            n = pts,
+                            addStartEnd = TRUE,
+                            breakAtDateLine = TRUE
+                          )
+                          if (!is.list(inter)) {
+                            i <<- i + 1
+                            inter <- data.frame(inter)
+                            inter$group <- i
+                            return(inter)
+                          } else {
+                            if (is.matrix(inter[[1]])) {
+                              i <<- i + 1
+                              ret <- data.frame(inter[[1]])
+                              ret$group <- i
+                              i <<- i + 1
+                              ret2 <- data.frame(inter[[2]])
+                              ret2$group <- i
+                              return(rbind(ret, ret2))
+                            } else {
+                              ret <- data.frame(lon = numeric(0), lat = numeric(0), group = numeric(0))
+                              for (j in 1: length(inter)) {
+                                i <<- i + 1
+                                ret1 <- data.frame(inter[[j]][[1]])
+                                ret1$group <- i
+                                i <<- i + 1
+                                ret2 <- data.frame(inter[[j]][[2]])
+                                ret2$group <- i
+                                ret <- rbind(ret, ret1, ret2)
+                              }
+                              return(ret)
+                            }
+                          }
+                         })
+    edge_aes$x = substitute(lon)
+    edge_aes$y = substitute(lat)
+    edge_aes$group = substitute(group)
+    edge_args$data = substitute(edges)
+    edge_args$mapping <- do.call(aes, edge_aes)
+    gg <- gg + do.call(geom_path, edge_args)
+  } else {
+    edge_aes$x = substitute(lon1)
+    edge_aes$y = substitute(lat1)
+    edge_aes$xend = substitute(lon2)
+    edge_aes$yend = substitute(lat2)
+    edge_args$data <- substitute(edges)
+    edge_args$mapping = do.call(aes, edge_aes)
+    gg <- gg + do.call(geom_segment, edge_args)
+  }
+
+  #
+  #
+  # Done drawing edges, time to draws nodes
+  #
+  #
+
+
+  # custom weights: vertex attribute
+  # null weighting
+  sizer <- NULL
+  if(missing(weight)) {
+    point_args$size <- substitute(size)
+  } else {
+    # Setup weight-sizing
+      plotcord$.weight <-
+        network::get.vertex.attribute(net, as.character(substitute(weight)))
+      # proportional scaling
+      if (is.factor(plotcord$.weight)) {
+        sizer <- scale_size_discrete(name = substitute(weight), range = c(size/nlevels(plotcord$weight), size))
+      } else {
+        sizer <- scale_size_area(name = substitute(weight), max_size = size)
+      }
+      point_aes$size <- substitute(.weight)
+  }
+
+  # Add points to plot
+
+  point_args$data <- substitute(plotcord)
+  point_args$mapping <- do.call(aes,point_aes )
+  gg <- gg + do.call(geom_point, point_args)
+  if (!is.null(sizer)) gg <- gg + sizer
+
+  # add text labels
+  if(labels != FALSE) {
+    gg <- gg + geom_text(data = plotcord, aes(x = lon, y = lat, label = .label), size = label.size, ...)
+  }
+  gg <- gg + labs(color = "", fill = "")
+
+  return(gg)
 }
