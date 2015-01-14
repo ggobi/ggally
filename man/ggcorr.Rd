@@ -50,7 +50,7 @@ ggcorr(nba[, -1],
 # Custom options.
 ggcorr(
   nba[, -1],
-  name = expression(rho)
+  name = expression(rho),
   geom = "circle",
   max_size = 6,
   size = 3,
