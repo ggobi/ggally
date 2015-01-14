@@ -1,7 +1,6 @@
 Package: GGally
 Version: 0.5.1
 Date: 2014-12-01
-Maintainer: Barret Schloerke <schloerke@gmail.com>
 License: GPL (>= 2.0)
 Title: Extension to ggplot2
 Type: Package
@@ -9,11 +8,16 @@ LazyLoad: yes
 LazyData: true
 Url: https://github.com/ggobi/ggally
 BugReports: https://github.com/ggobi/ggally/issues
-Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
-    <crowley.jason.s@gmail.com>, Di Cook <dicook@iastate.edu>, Heike Hofmann
-    <hofmann@iastate.edu>, Hadley Wickham <h.wickham@iastate.edu>, and Francois
-    Briatte <f.briatte@gmail.com>, Moritz Marbach
-    <mmarbach@mail.uni-mannheim.de>, Edwin Thoen <edwinthoen@gmail.com>, and Amos Elberg <amos.elberg@gmail.com>
+Authors@R: c(
+    person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs and ggally_*.  contributor for all functions."),
+    person("Jason", "Crowley", role = "aut", email = "crowley.jason.s@gmail.com", comment = "ggparcoord"),
+    person("Di", "Cook", role = c("aut", "ths"), email = "dicook@iastate.edu", comment = "ggscatmat"),
+    person("Heike", "Hofmann", role = "ths", email = "hofmann@iastate.edu"),
+    person("Hadley", "Wickham", role = "ths", email = "h.wickham@iastate.edu"),
+    person("Francois", "Briatte", role = "aut", email = "f.briatte@gmail.com", comment = "ggcorr, ggnet"),
+    person("Moritz", "Marbach", role = "aut", email = "mmarbach@mail.uni-mannheim.de", comment = "ggnet"),
+    person("Edwin", "Thoen", role = "aut", email = "edwinthoen@gmail.com", comment = "ggsurv"),
+    person("Amos", "Elberg", role = "aut", email = "amos.elberg@gmail.com", comment = "ggnetworkmap"))
 Description: GGally is designed to be a helper to ggplot2. It contains
     templates for different plots to be combined into a plot matrix, a parallel
     coordinate plot function, as well as two functions for making network plots.
