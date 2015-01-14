@@ -2,7 +2,7 @@
 
 Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally)
 
-Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally)
+Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally) [![Coverage Status](https://coveralls.io/repos/ggobi/ggally/badge.svg)](https://coveralls.io/r/ggobi/ggally)
 
 GGally is designed to be a helper to [ggplot2](http://docs.ggplot2.org/current/). It contains templates for different plots to be combined into a plot matrix, a parallel coordinate plot function, as well as a function for making a network plot.
 
