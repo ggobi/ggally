@@ -104,7 +104,7 @@ ggcorr <- function(data,
   }
   else {
     p = p +
-      scale_fill_brewer(name, palette = palette) +
+      scale_fill_brewer(palette = palette) +
       geom_tile(aes(fill = value), colour = "white") +
     	guides(color = g, size = g)
   }
