@@ -62,28 +62,28 @@ airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv"
 airports$lon <- airports$long
 
 flights <- data.frame(origin =
-			sample(airports[200:400,]$iata, 200, replace = TRUE),
-			destination = sample(airports[200:400,]$iata, 200,
-																	replace = TRUE))
+     sample(airports[200:400,]$iata, 200, replace = TRUE),
+     destination = sample(airports[200:400,]$iata, 200,
+                                 replace = TRUE))
 graph <- graph.data.frame(flights, airports, directed = TRUE)
 graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
 V(graph)$degree <- degree(graph, mode = "total")
 V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
 usa <- ggplot(ggplot2::map_data("usa"), aes(x = long, y = lat)) +
-	geom_polygon(aes(group = group), color = "grey65",
-							 fill = "#f9f9f9", size = 0.2)
+ geom_polygon(aes(group = group), color = "grey65",
+              fill = "#f9f9f9", size = 0.2)
 ggnetworkmap(usa, graph, size = 2, great.circles = TRUE,
-							 node.group = mygroup,
-						 ring.group = degree,
-						 segment.color = "cornflowerblue",
-						 weight = degree)
+              node.group = mygroup,
+            ring.group = degree,
+            segment.color = "cornflowerblue",
+            weight = degree)
 
 # Exploring a community of spam-bots found on twitter
 data(twitter_spam_community)
 world <- fortify(map("world", plot = FALSE, fill = TRUE))
 gp <- ggplot(world, aes(x = long, y = lat)) +
 geom_polygon(aes(group = group), color = "grey65",
-						 fill = "#f9f9f9", size = 0.2)
+            fill = "#f9f9f9", size = 0.2)
 # View global structure
 ggnetworkmap(gp, twitter_spam_community)
 
@@ -93,28 +93,29 @@ ggnetworkmap(data=twitter_spam_community) + xlim(-130,-60)
 # Topology
 ggnetworkmap(data=twitter_spam_community, arrow.size = 0.5)
 # This graph was located by setting node.group to the results of a community detection function
-# Note that igraph:: does not currently allow the use of factors as vertex attributes (feature forthcoming)
+# Note that igraph:: does not currently allow the use of factors as vertex attributes
+## (feature forthcoming)
 V(twitter_spam_community)$indegree <- igraph::degree(twitter_spam_community, mode = "in")
 V(twitter_spam_community)$outdegree <- igraph::degree(twitter_spam_community, mode = "out")
 
 ggnetworkmap(data=twitter_spam_community,
-						arrow.size = 0.5,
-						node.group = indegree,
-						ring.group = outdegree, size = 4) +
-						scale_fill_continuous("Indegree", high = "red", low = "yellow") +
-						labs(color = "Outdegree")
+           arrow.size = 0.5,
+           node.group = indegree,
+           ring.group = outdegree, size = 4) +
+           scale_fill_continuous("Indegree", high = "red", low = "yellow") +
+           labs(color = "Outdegree")
 
 # This graph is pre-loaded with some vertex attributes associated with the screen names
 ggnetworkmap(data=twitter_spam_community,
-						arrow.size = 0.5,
-						node.group = followersCount,
-						ring.group = friendsCount,
-						size = 4,
-						weight = indegree,
-						label.nodes = TRUE, vjust = -1.5) +
-		scale_fill_continuous("followersCount", high = "red", low = "yellow") +
-		labs(color = "friendsCount") +
-		scale_color_continuous(low = "lightgreen", high = "darkgreen")
+           arrow.size = 0.5,
+           node.group = followersCount,
+           ring.group = friendsCount,
+           size = 4,
+           weight = indegree,
+           label.nodes = TRUE, vjust = -1.5) +
+   scale_fill_continuous("followersCount", high = "red", low = "yellow") +
+   labs(color = "friendsCount") +
+   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 }
 }
 \author{
