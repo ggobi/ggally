@@ -6,8 +6,7 @@
 \usage{
 ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
   geom = "tile", max_size = 6, label = FALSE, label_alpha = FALSE,
-  label_color = "black", label_round = 1, nbreaks = 8, latexify = FALSE,
-  ...)
+  label_color = "black", label_round = 1, nbreaks = 8, ...)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -32,8 +31,6 @@ ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
 
 \item{nbreaks}{number of breaks to apply.  Defaults to \code{8}.}
 
-\item{latexify}{replaces the title of the legend with LaTeX for the Greek letter Rho.  This is intended for use with the \code{tikzDevice} graphics pacakge.  Defaults to \code{FALSE}.}
-
 \item{...}{other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.}
 }
 \description{
@@ -53,6 +50,7 @@ ggcorr(nba[, -1],
 # Custom options.
 ggcorr(
   nba[, -1],
+  name = expression(rho)
   geom = "circle",
   max_size = 6,
   size = 3,
