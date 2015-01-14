@@ -6,3 +6,6 @@ inst/
 R/.DS_Store
 .git
 .travis.yml
+figure
+ggmapTemp.png
+README.html
