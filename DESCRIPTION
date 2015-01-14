@@ -7,6 +7,8 @@ Title: Extension to ggplot2
 Type: Package
 LazyLoad: yes
 LazyData: true
+Url: https://github.com/ggobi/ggally
+BugReports: https://github.com/ggobi/ggally/issues
 Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
     <crowley.jason.s@gmail.com>, Di Cook <dicook@iastate.edu>, Heike Hofmann
     <hofmann@iastate.edu>, Hadley Wickham <h.wickham@iastate.edu>, and Francois
@@ -14,7 +16,7 @@ Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
     <mmarbach@mail.uni-mannheim.de>, Edwin Thoen <edwinthoen@gmail.com>, and Amos Elberg <amos.elberg@gmail.com>
 Description: GGally is designed to be a helper to ggplot2. It contains
     templates for different plots to be combined into a plot matrix, a parallel
-    coordinate plot function, as well as a function for making a network plot.
+    coordinate plot function, as well as two functions for making network plots.
 Depends:
     R (>= 2.14)
 Imports:
@@ -26,15 +28,15 @@ Imports:
     stringr (>= 0.6.2)
 Suggests:
     arm (>= 1.7),
-    intergraph (>= 2.0-0),
-    ggmap (>= 2.3),
     geosphere (>= 1.3-11),
+    ggmap (>= 2.3),
     igraph (>= 0.7.1),
+    intergraph (>= 2.0-0),
     maps (>= 2.3-9),
     network (>= 1.7.2),
     RColorBrewer (>= 1.0-5),
-    scales (>= 0.2.3),
     scagnostics (>= 0.2-4),
+    scales (>= 0.2.3),
     sna (>= 2.3-1),
     survival (>= 2.37-4),
     tnet (>= 3.0),
