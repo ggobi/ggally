@@ -45,5 +45,5 @@ notifications:
 
 install:
   - ./travis-tool.sh github_package jimhester/covr
-  - Rscript -e 'pdb <- available.packages(); pkgDeps <- devtools:::pkg_deps("./", TRUE)$name; deps <- package_dependencies(packages = pkgDeps, pdb,which = c("Depends", "Imports", "LinkingTo"),recursive = TRUE, reverse = FALSE); allDeps <- unique(c(pkgDeps, unlist(deps))); system(paste("./travis-tool.sh install_r_binary", paste(allDeps, collapse = " "))'
+  - Rscript -e 'pdb <- available.packages("http://cran.r-project.org/src/contrib"); pkgDeps <- devtools:::pkg_deps("./", TRUE)$name; deps <- package_dependencies(packages = pkgDeps, pdb,which = c("Depends", "Imports", "LinkingTo"),recursive = TRUE, reverse = FALSE); allDeps <- unique(c(pkgDeps, unlist(deps))); system(paste("./travis-tool.sh install_r_binary", paste(allDeps, collapse = " "))'
   - ./travis-tool.sh install_deps
