@@ -20,7 +20,6 @@ if(getRversion() >= "2.15.1") {
 #' @param label_color color for the correlation coefficients. Defaults to \code{"black"}.
 #' @param label_round decimal rounding of the correlation coefficients. Defaults to \code{1}.
 #' @param nbreaks number of breaks to apply.  Defaults to \code{8}.
-#' @param latexify replaces the title of the legend with LaTeX for the Greek letter Rho.  This is intended for use with the \code{tikzDevice} graphics pacakge.  Defaults to \code{FALSE}.
 #' @param ... other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link{cor}} and \code{\link[arm]{corrplot}}
 #' @author Francois Briatte \email{f.briatte@@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@@gmail.com}
@@ -39,6 +38,7 @@ if(getRversion() >= "2.15.1") {
 #' # Custom options.
 #' ggcorr(
 #'   nba[, -1],
+#'   name = expression(rho)
 #'   geom = "circle",
 #'   max_size = 6,
 #'   size = 3,
@@ -58,7 +58,6 @@ ggcorr <- function(data,
   label_color = "black",
   label_round = 1,
   nbreaks = 8,
-  latexify = FALSE,
   ...) {
 
   M <- cor(data[1:ncol(data)], use = method)
@@ -92,7 +91,8 @@ ggcorr <- function(data,
   )
 
   p = ggplot(M, aes(row, variable))
-  g <- ifelse(latexify, guide_legend("$\\rho$"), guide_legend("rho"))
+  g <- guide_legend(name)
+
   # apply main geom
   if(geom == "circle") {
     p = p +
