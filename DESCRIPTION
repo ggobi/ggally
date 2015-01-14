@@ -7,6 +7,8 @@ Title: Extension to ggplot2
 Type: Package
 LazyLoad: yes
 LazyData: true
+Url: https://github.com/ggobi/ggally
+BugReports: https://github.com/ggobi/ggally/issues
 Author: Barret Schloerke <schloerke@gmail.com>, Jason Crowley
     <crowley.jason.s@gmail.com>, Di Cook <dicook@iastate.edu>, Heike Hofmann
     <hofmann@iastate.edu>, Hadley Wickham <h.wickham@iastate.edu>, and Francois
