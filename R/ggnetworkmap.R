@@ -73,7 +73,8 @@ if(getRversion() >= "2.15.1") {
 #' # Topology
 #' ggnetworkmap(data=twitter_spam_community, arrow.size = 0.5)
 #' # This graph was located by setting node.group to the results of a community detection function
-#' # Note that igraph:: does not currently allow the use of factors as vertex attributes (feature forthcoming)
+#' # Note that igraph:: does not currently allow the use of factors as vertex attributes
+#' ## (feature forthcoming)
 #' V(twitter_spam_community)$indegree <- igraph::degree(twitter_spam_community, mode = "in")
 #' V(twitter_spam_community)$outdegree <- igraph::degree(twitter_spam_community, mode = "out")
 #'
