@@ -1,5 +1,5 @@
 
-context("ggpairs-setup")
+# context("ggpairs-setup")
 data(tips, package = "reshape")
 
 context("ggpairs")
