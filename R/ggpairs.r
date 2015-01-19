@@ -221,6 +221,8 @@ ggpairs <- function(
     lower$discrete <- "facetbar"
   }
 
+  if(!is.list(diag))
+    stop("'diag' is not a list")
   if (is.null(diag$continuous)) {
     diag$continuous <- "density"
   }
