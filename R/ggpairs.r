@@ -177,6 +177,18 @@ ggpairs <- function(
     stop("The length of the 'columnLabels' does not match the length of the 'columns' being used.")
   }
 
+  nameIsOnlyNumber <- ! str_detect(colnames(data[, columns]), "[^0-9]")
+  if (any(nameIsOnlyNumber)) {
+    badColumns <- colnames(data[,columns])[nameIsOnlyNumber]
+    names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
+    warning(paste(
+      "Column name is numeric.  Behavior will not be as expected.\n\n",
+      "c(", paste("'", names(badColumns), "' = '", badColumns, "'", collapse = "", sep = ""), ")",
+      sep = ""
+    ))
+  }
+
+
   if(!is.list(upper) && upper == "blank"){
     upper <- list()
     upper$continuous = "blank"
