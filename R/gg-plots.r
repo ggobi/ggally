@@ -1262,3 +1262,9 @@ ggally_blank <- function(...){
   p$subType <- p$type <- "blank"
   p
 }
+
+#' @rdname ggally_blank
+#' @export
+ggally_blankDiag <- function(...) {
+  ggally_blank(...)
+}
