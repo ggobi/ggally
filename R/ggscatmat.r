@@ -208,9 +208,9 @@ ggscatmat <- function(data, columns=1:ncol(data), color=NULL){
       geom_text(data=a, aes_string(label="r", color="colorcolumn")) + labs(color = color)
   }
   factor <- data.choose[sapply(data.choose,is.factor)]
-  if (ncol(factor)==0){
+  if (ncol(factor) == 0){
     return(plot)
-  }else{
+  } else {
     warning("Factor variables are omitted in plot")
     return(plot)
   }
