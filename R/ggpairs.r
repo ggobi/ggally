@@ -158,13 +158,13 @@ ggpairs <- function(
   axisLabelChoices <- c("show", "internal", "none")
   axisLabelChoice <- pmatch(axisLabels, axisLabelChoices)
   if (is.na(axisLabelChoice)) {
-    warning("axisLabels not in c('show', 'internal', 'none').  Reverting to 'show'")
+    warning("'axisLabels' not in c('show', 'internal', 'none').  Reverting to 'show'")
     axisLabelChoice <- 1
   }
   axisLabels <- axisLabelChoices[axisLabelChoice]
 
   if (any(columns > ncol(data))) {
-    stop(paste("Make sure your 'columns' values are less than ", ncol(data), ".\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+    stop(paste("Make sure your 'columns' values are less than or equal to ", ncol(data), ".\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
   }
   if (any(columns < 1)) {
     stop(paste("Make sure your 'columns' values are positive.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
@@ -196,7 +196,7 @@ ggpairs <- function(
   }
 
   if(!is.list(upper))
-    stop("upper is not a list")
+    stop("'upper' is not a list")
 
   if (is.null(upper$continuous)) {
     upper$continuous <- "cor"
@@ -209,7 +209,7 @@ ggpairs <- function(
   }
 
   if(!is.list(lower))
-    stop("lower is not a list")
+    stop("'lower' is not a list")
 
   if (is.null(lower$continuous)) {
     lower$continuous <- "points"
