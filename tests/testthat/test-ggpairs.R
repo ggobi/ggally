@@ -87,9 +87,12 @@ test_that("stops", {
 
 })
 
-test_that("", {
+test_that("print", {
   columnsUsed <- 1:3
   au <- ggpairs(tips, columnsUsed, upper = "blank")
+  ad <- ggpairs(tips, columnsUsed, diag = "blank")
+  al <- ggpairs(tips, columnsUsed, lower = "blank")
+  print(au); print(ad); print(al)
 })
 
 
