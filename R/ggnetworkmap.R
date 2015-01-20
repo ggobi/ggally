@@ -244,9 +244,13 @@ ggnetworkmap <- function (
       .variables  = c("lat1","lat2","lon1","lon2"),
       .parallel   = FALSE,
       .fun = function(x) {
+        p1Mat <- x[,c("lon1", "lat1")]
+        colnames(p1Mat) <- NULL
+        p2Mat <- x[,c("lon2", "lat2")]
+        colnames(p2Mat) <- NULL
         inter <- geosphere::gcIntermediate(
-          p1 = x[,c("lon1", "lat1")],
-          p2 = x[,c("lon2", "lat2")],
+          p1 = p1Mat,
+          p2 = p2Mat,
           n = pts,
           addStartEnd = TRUE,
           breakAtDateLine = TRUE
