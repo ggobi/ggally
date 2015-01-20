@@ -788,7 +788,11 @@ print.ggpairs <- function(
           ifelse(showLabels, 2*numCol, 2*numCol - 1),
           ifelse(showLabels, 2*i, 2*i - 1)
         ),
-        gp = gpar(fontsize = axisLabelSize)
+        gp = gpar(fontsize = first_non_null(
+          get_theme_element(plotObj, "axis.title.x", "size"),
+          get_theme_element(plotObj, "axis.title", "size"),
+          12
+        ))
       )
     }
 
