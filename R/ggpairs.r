@@ -724,7 +724,16 @@ print.ggpairs <- function(
 
   if(plotObj$title != ""){
     pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
-    grid.text(plotObj$title,x = .5, y = 1, just = c(.5,1),gp=gpar(fontsize=15))
+    grid.text(
+      plotObj$title,
+      x = .5, y = 1,
+      just = c(.5,1),
+      gp = gpar(fontsize = first_non_null(
+        get_theme_element(plotObj, "title", "size"),
+        get_theme_element(plotObj, "plot.title", "size"),
+        15
+      ))
+    )
     popViewport()
   }
 
