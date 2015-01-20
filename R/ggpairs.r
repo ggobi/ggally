@@ -751,7 +751,17 @@ print.ggpairs <- function(
 
     # Left Side
     for(i in 1:numCol){
-      grid.text(plotObj$columnLabels[i],0,0.5,rot=90,just=c("centre","centre"), vp = vplayout(as.numeric(i) * 2 - 1 ,1), gp = gpar(fontsize = axisLabelSize))
+      grid.text(
+        plotObj$columnLabels[i],
+        0, 0.5, rot = 90,
+        just = c("centre","centre"),
+        vp = vplayout(as.numeric(i) * 2 - 1 ,1),
+        gp = gpar(fontsize = first_non_null(
+          get_theme_element(plotObj, "axis.title.y", "size"),
+          get_theme_element(plotObj, "axis.title", "size"),
+          12
+        ))
+      )
     }
 
     popViewport()# layout
