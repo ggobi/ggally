@@ -240,9 +240,9 @@ ggnetworkmap <- function (
     i <- 0 # used to keep track of groups when getting intermediate points for great circles
 
     edges <- ddply(
-      .data = edges,
-      .variables = c("lat1","lat2","lon1","lon2"),
-      .parallel = FALSE,
+      .data       = edges,
+      .variables  = c("lat1","lat2","lon1","lon2"),
+      .parallel   = FALSE,
       .fun = function(x) {
         inter <- geosphere::gcIntermediate(
           p1 = x[,c("lon1", "lat1")],
