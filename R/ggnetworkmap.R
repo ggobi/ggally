@@ -118,8 +118,6 @@ ggnetworkmap <- function (
   ...)
 {
 
-
-
   require_pkgs(c("intergraph", "network", "geosphere","grid","sna","mapproj"))
   # intergraph   # igraph conversion
   # network      # vertex attributes
@@ -253,6 +251,7 @@ ggnetworkmap <- function (
           addStartEnd = TRUE,
           breakAtDateLine = TRUE
         )
+
         if (!is.list(inter)) {
           i <<- i + 1
           inter <- data.frame(inter)
@@ -283,12 +282,14 @@ ggnetworkmap <- function (
         }
       }
     )
+
     edge_aes$x = substitute(lon)
     edge_aes$y = substitute(lat)
     edge_aes$group = substitute(group)
     edge_args$data = substitute(edges)
     edge_args$mapping <- do.call(aes, edge_aes)
     gg <- gg + do.call(geom_path, edge_args)
+
   } else {
     edge_aes$x = substitute(lon1)
     edge_aes$y = substitute(lat1)
