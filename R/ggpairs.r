@@ -596,6 +596,48 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   p
 }
 
+#' Get theme element
+#'
+#' Get the info from theme or a default value
+#' @param p ggplot2 object
+#' @param element first key
+#' @param elementKey key within element object
+#' @keywords internal
+get_theme_element = function(p, element, elementKey) {
+  themeObj <- if (is.ggpairs(p)) {
+    p$gg
+  } else {
+    p$theme
+  }
+
+  if(!is.null(themeObj)) {
+    elementObj <- themeObj[[element]]
+
+    if(!is.null(elementObj)) {
+      elementValue <- elementObj[[elementKey]]
+      if (!is.null(elementValue)) {
+        return(elementValue)
+      }
+    }
+  }
+  return(NULL)
+}
+
+#' Get first non null value
+#'
+#' @param ... args to be checked
+#' @keywords internal
+#' @examples
+#' p <- qplot(1:10, 1:10) + theme(plot.title = element_text(size = 13))
+#' first_non_null(get_theme_element(p, "plot.title", "size"), 15)
+#' first_non_null(get_theme_element(p, "plot.title", "BAD"), 15)
+first_non_null = function(...) {
+  vals <- c(...)
+  vals[which.min(is.null(vals))]
+}
+
+
+
 #' Print ggpair object
 #'
 #' Specialized method to print the ggpair object-
