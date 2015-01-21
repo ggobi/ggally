@@ -206,13 +206,13 @@ ggparcoord <- function(
 
   alphaLinesIsCharacter <- is.character(alphaLines)
   if(alphaLinesIsCharacter) {
+    if(!(alphaLines %in% names(data))) {
+      stop("alphaLines column is missing in data")
+    }
+
     alphaRange <- range(data[,alphaLines])
     if (any(is.na(alphaRange))) {
-      if(alphaLines %in% names(data)) {
-        stop("missing data in alphaLines column")
-      } else {
-        stop("alphaLines column is missing in data")
-      }
+      stop("missing data in alphaLines column")
     }
 
     if (alphaRange[1] < 0 || alphaRange[2] > 1) {
