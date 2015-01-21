@@ -189,8 +189,14 @@ ggparcoord <- function(
     stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
   }
 
-  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','allClass','anyClass',
-    'Outlying','Skewed','Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
+  if(!(
+    is.numeric(order) || (
+      is.character(order) &&
+      (order %in% c(
+        'skewness','allClass','anyClass', 'Outlying','Skewed','Clumpy',
+        'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'
+      ))
+    )) ) {
     stop("invalid value for order; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
   }
 
