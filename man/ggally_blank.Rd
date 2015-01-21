@@ -6,6 +6,8 @@
 \title{Blank}
 \usage{
 ggally_blank(...)
+
+ggally_blankDiag(...)
 }
 \arguments{
 \item{...}{other arguments ignored}
