@@ -250,20 +250,18 @@ ggparcoord <- function(
   data <- data[,columns]
 
   # Change character vars to factors
-  vartypes <- get.VarTypes(data)
-  char.vars <- names(vartypes)[vartypes == "character"]
+  char.vars <- column_is_character(data)
   if(length(char.vars) >= 1) {
-    for(i in 1:length(char.vars)) {
-      data[,char.vars[i]] <- factor(data[,char.vars[i]])
+    for(char.var in char.vars) {
+      data[,char.var] <- factor(data[,char.var])
     }
   }
 
   # Change factors to numeric
-  vartypes <- get.VarTypes(data)
-  fact.vars <- names(vartypes)[vartypes == "factor"]
+  fact.vars <- column_is_factor(data)
   if(length(fact.vars) >= 1) {
-    for(i in 1:length(fact.vars)) {
-      data[,fact.vars[i]] <- as.numeric(data[,fact.vars[i]])
+    for(fact.var in fact.vars) {
+      data[,fact.var] <- as.numeric(data[,fact.var])
     }
   }
 
@@ -508,12 +506,19 @@ ggparcoord <- function(
 
 #' Get vector of variable types from data frame
 #'
+#' @keywords internal
 #' @param df data frame to extract variable types from
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
 #' @return character vector with variable types, with names corresponding to
 #'   the variable names from df
-get.VarTypes <- function(df) {
-  return(unlist(lapply(unclass(df),class)))
+column_is_character <- function(df) {
+  x <- unlist(lapply(unclass(df),is.character))
+  names(x)[x]
+}
+#' @rdname column_is_character
+column_is_factor <- function(df) {
+  x <- unlist(lapply(unclass(df),is.factor))
+  names(x)[x]
 }
 
 #' Find order of variables
