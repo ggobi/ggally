@@ -334,19 +334,25 @@ ggparcoord <- function(
   }
   else if(tolower(missing) == "mean") {
      data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) x[is.na(x)] <- mean(x,na.rm=TRUE)
+      if(any(is.na(x))) {
+        x[is.na(x)] <- mean(x,na.rm=TRUE)
+      }
       return(x)
     })
   }
   else if(tolower(missing) == "median") {
      data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) x[is.na(x)] <- median(x,na.rm=TRUE)
+      if(any(is.na(x))) {
+        x[is.na(x)] <- median(x,na.rm=TRUE)
+      }
       return(x)
     })
   }
   else if(tolower(missing) == "min10") {
      data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) x[is.na(x)] <- .9*min(x,na.rm=TRUE)
+      if(any(is.na(x))) {
+        x[is.na(x)] <- .9*min(x,na.rm=TRUE)
+      }
       return(x)
     })
   }
