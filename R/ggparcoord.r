@@ -171,22 +171,22 @@ ggparcoord <- function(
   ### Error Checking ###
   if(is.null(groupColumn)) {
     if(any(tolower(order) %in% c("anyclass","allclass"))) {
-      stop("can't use the order methods anyClass or allClass without specifying groupColumn")
+      stop("can't use the 'order' methods anyClass or allClass without specifying groupColumn")
     }
   } else if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
-    stop("invalid value for groupColumn; must be a single numeric or character index")
+    stop("invalid value for 'groupColumn'; must be a single numeric or character index")
   }
 
   if(!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
-    stop("invalid value for scale; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
+    stop("invalid value for 'scale'; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
   }
 
   if(!(centerObsID %in% 1:dim(data)[1])) {
-    stop("invalid value for centerObsID; must be a single numeric row index")
+    stop("invalid value for 'centerObsID'; must be a single numeric row index")
   }
 
   if(!(tolower(missing) %in% c("exclude","mean","median","min10","random"))) {
-    stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
+    stop("invalid value for 'missing'; must be one of 'exclude','mean','median','min10','random'")
   }
 
   if(!(
@@ -197,35 +197,35 @@ ggparcoord <- function(
         'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'
       ))
     )) ) {
-    stop("invalid value for order; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+    stop("invalid value for 'order'; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
   }
 
   if(!(is.logical(showPoints))) {
-    stop("invalid value for showPoints; must be a logical operator")
+    stop("invalid value for 'showPoints'; must be a logical operator")
   }
 
   alphaLinesIsCharacter <- is.character(alphaLines)
   if(alphaLinesIsCharacter) {
     if(!(alphaLines %in% names(data))) {
-      stop("alphaLines column is missing in data")
+      stop("'alphaLines' column is missing in data")
     }
 
     alphaRange <- range(data[,alphaLines])
     if (any(is.na(alphaRange))) {
-      stop("missing data in alphaLines column")
+      stop("missing data in 'alphaLines' column")
     }
 
     if (alphaRange[1] < 0 || alphaRange[2] > 1) {
-      stop("invalid value for alphaLines column; max range must be from 0 to 1")
+      stop("invalid value for 'alphaLines' column; max range must be from 0 to 1")
     }
     alphaVar <- data[,alphaLines]
 
   } else if((alphaLines < 0) || (alphaLines > 1)) {
-    stop("invalid value for alphaLines; must be a scalar value between 0 and 1")
+    stop("invalid value for 'alphaLines'; must be a scalar value between 0 and 1")
   }
 
   if(!(is.logical(boxplot))) {
-    stop("invalid value for boxplot; must be a logical operator")
+    stop("invalid value for 'boxplot'; must be a logical operator")
   }
 
   if(is.logical(splineFactor)) {
