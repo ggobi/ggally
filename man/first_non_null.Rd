@@ -13,9 +13,9 @@ first_non_null(...)
 Get first non null value
 }
 \examples{
-p <- qplot(1:10, 1:10) + theme(plot.title = element_text(size = 13))
-first_non_null(get_theme_element(p, "plot.title", "size"), 15)
-first_non_null(get_theme_element(p, "plot.title", "BAD"), 15)
+p <- ggplot2::qplot(1:10, 1:10) + ggplot2::theme(plot.title = ggplot2::element_text(size = 13))
+GGally:::first_non_null(GGally:::get_theme_element(p, "plot.title", "size"), 15)
+GGally:::first_non_null(GGally:::get_theme_element(p, "plot.title", "BAD"), 15)
 }
 \keyword{internal}
 
