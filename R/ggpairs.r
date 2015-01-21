@@ -677,7 +677,6 @@ print.ggpairs <- function(
   bottomHeightProportion = 0.1,
   spacingProportion = 0.03,
   showStrips = NULL,
-  axisLabelSize = 12,
   ...
 ) {
 
