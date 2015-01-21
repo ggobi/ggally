@@ -235,7 +235,7 @@ ggparcoord <- function(
       splineFactor = 0
     }
   } else if (! is.numeric(splineFactor)) {
-    splineFactor = 0
+    stop("invalid value for 'splineFactor'; must be a logical or numeric value")
   }
 
 
