@@ -38,6 +38,7 @@ test_that("stops", {
 
   expect_error(ggparcoord(data = diamonds.samp,columns = c(1,5:10), groupColumn = 2, boxplot = 1), "invalid value for 'boxplot'")
 
+  expect_error(ggparcoord(diamonds.samp, columns = c(1,5:10), groupColumn = 2, splineFactor = NULL), "invalid value for 'splineFactor'")
 
 })
 
