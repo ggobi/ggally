@@ -50,7 +50,7 @@ test_that("node groups", {
     great.circles = TRUE,
     node.group = degree
   )
-  expect_equivalent(length(p2$layers), 3)
+  expect_equivalent(length(p$layers), 3)
   expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
   expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".ngroup")
 })
