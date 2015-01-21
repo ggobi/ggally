@@ -40,6 +40,71 @@ test_that("stops", {
 
   expect_error(ggparcoord(diamonds.samp, columns = c(1,5:10), groupColumn = 2, splineFactor = NULL), "invalid value for 'splineFactor'")
 
+
+})
+
+test_that("alphaLines", {
+  iris2 <- iris
+  iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
+  p <- ggparcoord(
+    data = iris2, columns = 1:4, groupColumn = 5,
+    order = "anyClass", showPoints = TRUE,
+    title = "Parallel Coordinate Plot for the Iris Data",
+    alphaLines = "alphaLevel"
+  )
+
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$alpha), "alphaLevel")
+
+})
+
+test_that("splineFactor", {
+  ## Use splines on values, rather than lines (all produce the same result)
+  columns <- c(1, 5:10)
+  p1 <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = TRUE)
+  p2 <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = 3)
+
+  splineFactor <- length(columns) * 3
+  p3 <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(splineFactor))
+
+  pList <- list(p1, p2, p3)
+  for (p in pList) {
+    expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$x), "spline.x")
+    expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$y), "spline.y")
+
+    tmp <- unique(as.numeric(get("data", envir = p$layers[[1]])$ggally_splineFactor))
+    expect_true((tmp == 3) || (tmp == 21))
+  }
+
+})
+
+test_that("basic", {
+
+  ds2 <- diamonds.samp
+  ds2$color <- as.character(ds2$color)
+
+  # column 3 has a character
+  # column 4 has a factor
+  p <- ggparcoord(data = ds2,columns = c(1,3:10), groupColumn = 2)
+  expect_true("color" %in% levels(p$data$variable))
+  expect_true("clarity" %in% levels(p$data$variable))
+  expect_true(is.numeric(p$data$value))
+})
+
+test_that("scale", {
+  for (scale in c("std", "robust", "uniminmax", "globalminmax", "center", "centerObs")) {
+    p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), groupColumn = 2, scale = scale)
+  }
+  expect_true(TRUE)
+})
+
+test_that("missing", {
+  ds2 <- diamonds.samp
+  ds2[3, 1] <- NA
+
+  for (missing in c("exclude", "mean", "median", "min10", "random")) {
+    p <- ggparcoord(data = ds2, columns = c(1,5:10), groupColumn = 2, missing = missing)
+  }
+  expect_true(TRUE)
 })
 
 test_that("basic", {
