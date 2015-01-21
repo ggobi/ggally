@@ -18,57 +18,132 @@ graph <- graph - V(graph)[igraph::degree(graph, mode = "total") < 2]
 igraph::V(graph)$degree <- igraph::degree(graph, mode = "total")
 igraph::V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
 
+
 us <- ggplot(ggplot2::map_data("usa"), aes(x = long, y = lat)) +
   geom_polygon(aes(group = group), color = "grey65",
                fill = "#f9f9f9", size = 0.2)
+
 context("ggnetworkmap")
 
-test_that("basic drawing, no map", {
-  throws_error(ggnetworkmap(data = graph, size = 2))
-  })
-test_that("basic drawing, map", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2))
+test_that("basic drawing", {
+  # no map
+  p <- ggnetworkmap(data = graph, size = 2)
+  expect_true(is.null(nrow(p$data)))
+
+  # map
+  p <- ggnetworkmap(us, data = graph, size = 2)
+  expect_false(is.null(nrow(p$data)))
 })
+
 test_that("great circles", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2,
-                            great.circles = TRUE))
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE
+  )
+  expect_equivalent(length(p$layers), 3)
+  expect_equivalent(get("geom_params", envir = p$layers[[3]])$colour, "black")
 })
+
 test_that("node groups", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2,
-                            great.circles = TRUE, node.group = degree))
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE,
+    node.group = degree
+  )
+  expect_equivalent(length(p2$layers), 3)
+  expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".ngroup")
 })
+
+
 test_that("ring groups", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2,
-                            great.circles = TRUE, node.group = degree,
-                            ring.group = mygroup))
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE, node.group = degree,
+    ring.group = mygroup
+  )
+  expect_equivalent(length(p$layers), 3)
+  expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+
 })
+
 test_that("segment color", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2,
-                            great.circles = TRUE, node.group = degree,
-                            ring.group = mygroup,
-                            segment.color = "cornflowerblue"))
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE, node.group = degree,
+    ring.group = mygroup,
+    segment.color = "cornflowerblue"
+  )
+  expect_equivalent(length(p$layers), 3)
+  expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equivalent(as.character(get("geom_params", envir = p$layers[[2]])$colour), "cornflowerblue")
+
 })
+
 test_that("weight", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2,
-                            great.circles = TRUE, node.group = degree,
-                            ring.group = mygroup,
-                            segment.color = "cornflowerblue",
-                            weight = degree))
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE, node.group = degree,
+    ring.group = mygroup,
+    segment.color = "cornflowerblue",
+    weight = degree
+  )
+
+  expect_equivalent(length(p$layers), 3)
+  expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equivalent(as.character(get("geom_params", envir = p$layers[[2]])$colour), "cornflowerblue")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$size), ".weight")
+
+
 })
+
+
 test_that("labels", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2,
-                            great.circles = TRUE, node.group = degree,
-                            ring.group = mygroup,
-                            segment.color = "cornflowerblue",
-                            weight = degree,
-                            label.nodes = TRUE))
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE, node.group = degree,
+    ring.group = mygroup,
+    segment.color = "cornflowerblue",
+    weight = degree,
+    label.nodes = TRUE
+  )
+
+  expect_equivalent(length(p$layers), 4)
+  expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equivalent(as.character(get("geom_params", envir = p$layers[[2]])$colour), "cornflowerblue")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$size), ".weight")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[4]])$label), ".label")
+
+  expect_true(is.null(get("geom_params", envir = p$layers[[2]])$arrow))
 })
+
 test_that("arrows", {
-  throws_error(ggnetworkmap(us, data = graph, size = 2,
-                            great.circles = TRUE, node.group = degree,
-                            ring.group = mygroup,
-                            segment.color = "cornflowerblue",
-                            weight = degree,
-                            label.nodes = TRUE,
-                            arrow.size = 0.2))
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE, node.group = degree,
+    ring.group = mygroup,
+    segment.color = "cornflowerblue",
+    weight = degree,
+    label.nodes = TRUE,
+    arrow.size = 0.2
+  )
+
+  expect_equivalent(length(p$layers), 4)
+  expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equivalent(as.character(get("geom_params", envir = p$layers[[2]])$colour), "cornflowerblue")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$size), ".weight")
+  expect_equivalent(as.character(get("mapping", envir = p$layers[[4]])$label), ".label")
+
+  expect_true(is.list(get("geom_params", envir = p$layers[[2]])$arrow))
+
 })
