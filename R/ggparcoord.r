@@ -395,12 +395,8 @@ ggparcoord <- function(
 
 
   ### Ordering ###
-  if(length(order) > 1) {
-     if(is.numeric(order)) {
-       data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
-     } else {
-       data.m$variable <- factor(data.m$variable,levels=order)
-     }
+  if(length(order) > 1 & is.numeric(order)) {
+     data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
   }
   else if(order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
     "Stringy","Monotonic")) {
