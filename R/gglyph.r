@@ -191,7 +191,7 @@ rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
 #' @export
 add_ref_lines <- function(data, color = "white", size = 1.5, ...){
   rl <- ref_lines(data)
-  geom_line(data = rl, color = color , size = size, ...)
+  geom_path(data = rl, color = color , size = size, ...)
 }
 
 #' Add reference boxes around each cell of the glyphmap.
