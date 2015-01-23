@@ -76,8 +76,7 @@ test_that("splineFactor", {
   }
 
   p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, splineFactor = 3, alphaLines = "alphaLevel")
-  expect_equal(p$mapping$alpha, "alphaLevel")
-  expect_equal(get("mapping", p$layers[[1]])$alpha, "alphaLevel")
+  expect_equal(as.character(get("mapping", p$layers[[1]])$alpha), "alphaLevel")
 
   p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, splineFactor = 3, showPoints = TRUE)
   expect_equal(length(p$layers), 2)
@@ -86,7 +85,7 @@ test_that("splineFactor", {
 
 })
 
-test_that("basic", {
+test_that("groupColumn", {
 
   ds2 <- diamonds.samp
   ds2$color <- as.character(ds2$color)
@@ -145,7 +144,7 @@ test_that("basic", {
   # title supplied
   ttl <- "Parallel Coord. Plot of Diamonds Data"
   p <- ggparcoord(data = diamonds.samp,columns = c(1,5:10), title = ttl)
-  expect_equal(p$mapping$title, ttl)
+  expect_equal(p$labels$title, ttl)
 
   col <- "blue"
   p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), shadeBox = col)
@@ -155,7 +154,7 @@ test_that("basic", {
   p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), mapping = ggplot2::aes(size = 1))
   expect_equal(length(p$layers), 1)
   expect_equal(get("geom_params", envir = p$layers[[1]])$size, 1)
-  expect_equal(get("mapping", envir = p$layers[[1]])$size, 1)
+  expect_equal(p$mapping$size, 1)
 
 
 
