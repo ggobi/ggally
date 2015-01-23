@@ -53,6 +53,15 @@ test_that("node groups", {
   expect_equivalent(length(p$layers), 3)
   expect_true(is.null(get("geom_params", envir = p$layers[[3]])$colour))
   expect_equivalent(as.character(get("mapping", envir = p$layers[[3]])$colour), ".ngroup")
+
+  p <- ggnetworkmap(
+    us, data = graph, size = 2,
+    great.circles = TRUE,
+    node.color = "red"
+  )
+  expect_equivalent(as.character(get("geom_params", envir = p$layers[[3]])$colour), "red")
+
+
 })
 
 
@@ -147,3 +156,26 @@ test_that("arrows", {
   expect_true(is.list(get("geom_params", envir = p$layers[[2]])$arrow))
 
 })
+
+
+test_that("labels", {
+  expect_error(ggnetworkmap(us, data = graph, label.nodes = c("A", "B")))
+
+  testLabels <- paste("L", 1:115, sep = "")
+
+  # does logical check
+  p <- ggnetworkmap(us, data = graph, label.nodes = testLabels)
+  expect_equal(get("data", p$layers[[4]])$.label, testLabels)
+
+  # does vertex.names check
+  p <- ggnetworkmap(us, data = graph, label.nodes = TRUE)
+  expect_true(!is.null(get("data", p$layers[[4]])$.label))
+
+  # does id check
+  graph2 <- graph
+  igraph::V(graph2)$id <- testLabels
+  p <- ggnetworkmap(us, data = graph2, label.nodes = TRUE)
+  expect_true(!is.null(get("data", p$layers[[4]])$.label))
+})
+
+
