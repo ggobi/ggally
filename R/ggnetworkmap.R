@@ -337,7 +337,7 @@ ggnetworkmap <- function (
   if (!is.null(sizer)) gg <- gg + sizer
 
   # add text labels
-  if(labels != FALSE) {
+  if(!identical(labels, FALSE)) {
     gg <- gg + geom_text(data = plotcord, aes(x = lon, y = lat, label = .label), size = label.size, ...)
   }
   gg <- gg + labs(color = "", fill = "")
