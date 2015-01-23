@@ -7,11 +7,11 @@ test_that("example", {
 
   expect_warning(p <- ggscatmat(flea, 1:3), "Factor variables are omitted in plot")
   expect_true(is.null(p$labels$colour))
-  print(p)
+  # print(p)
 
   p <- ggscatmat(flea, columns= 2:4, color="species")
   expect_true(!is.null(p$labels$colour))
-  print(p)
+  # print(p)
 
 
 })
