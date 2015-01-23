@@ -5,6 +5,9 @@ context("ggparcoord")
 data(diamonds, package="ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 
+iris2 <- iris
+iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
+
 test_that("stops", {
 
   # basic parallel coordinate plot, using default settings
@@ -44,17 +47,14 @@ test_that("stops", {
 })
 
 test_that("alphaLines", {
-  iris2 <- iris
-  iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
   p <- ggparcoord(
     data = iris2, columns = 1:4, groupColumn = 5,
     order = "anyClass", showPoints = TRUE,
     title = "Parallel Coordinate Plot for the Iris Data",
     alphaLines = "alphaLevel"
   )
-
+  expect_equal(length(p$layers), 2)
   expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$alpha), "alphaLevel")
-
 })
 
 test_that("splineFactor", {
@@ -74,6 +74,15 @@ test_that("splineFactor", {
     tmp <- unique(as.numeric(get("data", envir = p$layers[[1]])$ggally_splineFactor))
     expect_true((tmp == 3) || (tmp == 21))
   }
+
+  p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, splineFactor = 3, alphaLines = "alphaLevel")
+  expect_equal(p$mapping$alpha, "alphaLevel")
+  expect_equal(get("mapping", p$layers[[1]])$alpha, "alphaLevel")
+
+  p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, splineFactor = 3, showPoints = TRUE)
+  expect_equal(length(p$layers), 2)
+  expect_equal(as.character(get("mapping", p$layers[[1]])$x), "spline.x")
+  expect_equal(as.character(get("mapping", p$layers[[2]])$y), "value")
 
 })
 
@@ -125,16 +134,33 @@ test_that("order", {
 
 test_that("basic", {
 
-  # basic parallel coordinate plot, using default settings
-  # ggparcoord(data = diamonds.samp,columns = c(1,5:10))
-  # this time, color by diamond cut
-  gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10), groupColumn = 2)
-  # gpd
-  # underlay univariate boxplots, add title, use uniminmax scaling
-  gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
-    scale = "uniminmax",boxplot = TRUE,title = "Parallel Coord. Plot of Diamonds Data")
+  # no color supplied
+  p <- ggparcoord(data = diamonds.samp,columns = c(1,5:10))
+  expect_true(is.null(p$mapping$colour))
 
-  expect_true(TRUE)
+  # color supplied
+  p <- ggparcoord(data = diamonds.samp,columns = c(1,5:10), groupColumn = 2)
+  expect_false(is.null(p$mapping$colour))
+
+  # title supplied
+  ttl <- "Parallel Coord. Plot of Diamonds Data"
+  p <- ggparcoord(data = diamonds.samp,columns = c(1,5:10), title = ttl)
+  expect_equal(p$mapping$title, ttl)
+
+  col <- "blue"
+  p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), shadeBox = col)
+  expect_equal(length(p$layers), 2)
+  expect_equal(get("geom_params", envir = p$layers[[1]])$colour, col)
+
+  p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), mapping = ggplot2::aes(size = 1))
+  expect_equal(length(p$layers), 1)
+  expect_equal(get("geom_params", envir = p$layers[[1]])$size, 1)
+  expect_equal(get("mapping", envir = p$layers[[1]])$size, 1)
+
+
+
+
+
 })
 
 
