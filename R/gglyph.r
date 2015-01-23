@@ -119,14 +119,33 @@ ref_boxes <- function(data, fill = NULL) {
 
 # Glyph plot class -----------------------------------------------------------
 
+#' Glyph plot class
+#'
+#' @param data A data frame containing variables named in \code{x_major},
+#'   \code{x_minor}, \code{y_major} and \code{y_minor}.
+#' @param height,width The height and width of each glyph. Defaults to 95\% of
+#'  the \code{\link[ggplot2]{resolution}} of the data. Specify the width
+#'  absolutely by supplying a numeric vector of length 1, or relative to the
+#   resolution of the data by using \code{\link{rel}}.
+#' @param polar A logical of length 1, specifying whether the glyphs should
+#'   be drawn in polar coordinates.  Defaults to \code{FALSE}.
+#' @param x_major,y_major The name of the variable (as a
+#'   string) for the major x and y axes.  Together, the
+#    combination of \code{x_major} and \code{y_major} specifies a grid cell.
+#' @export
 glyphplot <- function(data, width, height, polar, x_major, y_major) {
   structure(data,
     width = width, height = height, polar = polar,
     x_major = x_major, y_major = y_major,
     class = c("glyphplot", "data.frame"))
 }
-is.glyphplot <- function(x) inherits(x, "glyphplot")
-
+#' @export
+#' @rdname glyphplot
+is.glyphplot <- function(x) {
+  inherits(x, "glyphplot")
+}
+#' @export
+#' @rdname glyphplot
 "[.glyphplot" <- function(x, ...) {
   glyphplot(NextMethod(),
     width = attr(x, "width"), height = attr(x, "height"),
@@ -134,6 +153,11 @@ is.glyphplot <- function(x) inherits(x, "glyphplot")
     polar = attr(x, "polar"))
 }
 
+#' @param x glyphplot to be printed
+#' @param ... ignored
+#' @export
+#' @rdname glyphplot
+#' @method print glyphplot
 print.glyphplot <- function(x, ...) {
   NextMethod()
   if (attr(x, "polar")) {
