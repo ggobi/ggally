@@ -202,22 +202,37 @@ is.rel <- function(x) {
 
 # Rescaling functions --------------------------------------------------------
 
+#' Rescaling functions
+#'
+#' @param x numeric vector
+#' @param xlim value used in \code{range}
+#' @name rescale01
+
+
+#' @export
+#' @rdname rescale01
 range01 <- function(x) {
   rng <- range(x, na.rm = TRUE)
   (x - rng[1]) / (rng[2] - rng[1])
 }
 
+#' @export
+#' @rdname rescale01
 max1 <- function(x) {
   x / max(x, na.rm = TRUE)
 }
+#' @export
+#' @rdname rescale01
 mean0 <- function(x) {
   x - mean(x, na.rm = TRUE)
 }
+#' @export
+#' @rdname rescale01
 min0 <- function(x) {
   x - min(x, na.rm = TRUE)
 }
-
-
+#' @export
+#' @rdname rescale01
 rescale01 <- function(x, xlim=NULL) {
   if (is.null(xlim)) {
 	  rng <- range(x, na.rm = TRUE)
@@ -226,7 +241,11 @@ rescale01 <- function(x, xlim=NULL) {
    }
    (x - rng[1]) / (rng[2] - rng[1])
 }
-rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
+#' @export
+#' @rdname rescale01
+rescale11 <- function(x, xlim=NULL) {
+  2 * rescale01(x, xlim) - 1
+}
 
 #' Add reference lines for each cell of the glyphmap.
 #'
