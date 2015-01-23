@@ -17,7 +17,13 @@
 #'  @export
 #'  @examples
 #'  data(nasa)
-#'  nasaLate <- nasa[nasa$date >= as.POSIXct("1998-01-01"), ]
+#'  nasaLate <- nasa[
+#'    nasa$date >= as.POSIXct("1998-01-01") &
+#'    nasa$lat >= 20 &
+#'    nasa$lat <= 40 &
+#'    nasa$long >= -80 &
+#'    nasa$long <= -60
+#'  , ]
 #'  temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height=2.5)
 #'  ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
 #'    add_ref_lines(temp.gly, color = "grey90") +
