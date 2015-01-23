@@ -178,11 +178,27 @@ print.glyphplot <- function(x, ...) {
 
 # Relative dimensions --------------------------------------------------------
 
+#' Relative dimensions
+#'
+#' @param x numeric value between 0 and 1
+#' @export
+#' @author Di Cook \email{dicook@@iastate.edu}
 rel <- function(x) {
   structure(x, class = "rel")
 }
-print.rel <- function(x, ...) print(noquote(paste(x, " *", sep = "")))
-is.rel <- function(x) inherits(x, "rel")
+
+#' @rdname rel
+#' @param ... ignored
+#' @export
+print.rel <- function(x, ...) {
+  print(noquote(paste(x, " *", sep = "")))
+}
+
+#' @rdname rel
+#' @export
+is.rel <- function(x) {
+  inherits(x, "rel")
+}
 
 # Rescaling functions --------------------------------------------------------
 
