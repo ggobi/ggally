@@ -562,8 +562,9 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
   pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
   plotMatrix$plots[[pos]] <- plotObj
 
-  if(plotMatrix$printInfo)
+  if(plotMatrix$printInfo) {
     cat("\n\nDone placing plot: ",pos,"\n")
+  }
 
   plotMatrix
 }
@@ -583,12 +584,15 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #'  plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
 #'  getPlot(plotMatrix2, 1, 2)
 getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
-  if(plotMatrix$printInfo)
+  if(plotMatrix$printInfo) {
     cat("rowFromTop: ",rowFromTop," columnFromLeft: ",columnFromLeft,"\n")
+  }
 
   pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
 
-  if(plotMatrix$printInfo) cat("Plot List Spot: ",pos,"\n")
+  if(plotMatrix$printInfo) {
+    cat("Plot List Spot: ",pos,"\n")
+  }
 
   plot_text <- plotMatrix$plots[[pos]]
   if (is.character(plot_text)) {
@@ -607,7 +611,11 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 
   if(plotMatrix$printInfo || plotMatrix$verbose){
     cat("Plot #",pos)
-    if (is.character(plot_text) ) { if (plot_text == "blank") cat(" - Blank")}
+    if (is.character(plot_text) ) {
+      if (plot_text == "blank"){
+        cat(" - Blank")
+      }
+    }
     cat("\n")
   }
 
