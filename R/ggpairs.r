@@ -386,11 +386,6 @@ ggpairs <- function(
         }
         p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
       }
-      else if(subType == "blank") {
-        p <- "ggally_blank('blank')"
-      } else {
-        p <- ggally_text("Incorrect\nPlot",size=6)
-      }
 
     } else if(type == "stat_bin-num") {
       if(printInfo)cat("stat_bin-num\n")
