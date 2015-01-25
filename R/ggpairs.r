@@ -484,7 +484,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
   )
 
   if(identical(test_for_function, "bad_function_name")) {
-    return( ggally_text("Incorrect\nPlot",size=6))
+    return( 'ggally_text("Incorrect\nPlot",size=6)')
   }
 
 
