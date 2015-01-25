@@ -1,8 +1,7 @@
 
-# context("ggpairs-setup")
+context("ggpairs")
 data(tips, package = "reshape")
 
-context("ggpairs")
 test_that("structure", {
   a <- ggpairs(tips)
   expect_is(a$data, "data.frame")
