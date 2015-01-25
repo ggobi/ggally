@@ -194,26 +194,27 @@ ggpairs <- function(
   }
 
 
-  if(!is.list(upper) && upper == "blank"){
+  if (!is.list(upper) && upper == "blank") {
     upper <- list()
     upper$continuous = "blank"
     upper$combo = "blank"
     upper$discrete = "blank"
   }
-  if(!is.list(lower) && lower == "blank"){
+  if (!is.list(lower) && lower == "blank") {
     lower <- list()
     lower$continuous = "blank"
     lower$combo = "blank"
     lower$discrete = "blank"
   }
-  if(!is.list(diag) && diag == "blank"){
+  if (!is.list(diag) && diag == "blank") {
     diag <- list()
     diag$continuous = "blank"
     diag$discrete = "blank"
   }
 
-  if(!is.list(upper))
+  if (!is.list(upper)) {
     stop("'upper' is not a list")
+  }
 
   if (is.null(upper$continuous)) {
     upper$continuous <- "cor"
@@ -225,8 +226,9 @@ ggpairs <- function(
     upper$discrete <- "facetbar"
   }
 
-  if(!is.list(lower))
+  if (!is.list(lower)) {
     stop("'lower' is not a list")
+  }
 
   if (is.null(lower$continuous)) {
     lower$continuous <- "points"
@@ -238,8 +240,9 @@ ggpairs <- function(
     lower$discrete <- "facetbar"
   }
 
-  if(!is.list(diag))
+  if (!is.list(diag)) {
     stop("'diag' is not a list")
+  }
   if (is.null(diag$continuous)) {
     diag$continuous <- "density"
   }
@@ -248,15 +251,16 @@ ggpairs <- function(
   }
 
   data <- as.data.frame(data)
-  for ( i in 1:dim(data)[2] ) {
-    if(is.character(data[,i])) {
+  for (i in 1:dim(data)[2] ) {
+    if (is.character(data[,i])) {
       data[,i] <- as.factor(data[,i])
     }
   }
 
   numCol <- length(columns)
-  if(printInfo)
+  if (printInfo) {
     cat("data col: ", numCol,"\n")
+  }
 
   ggpairsPlots <- list()
 
@@ -268,10 +272,14 @@ ggpairs <- function(
     data.frame(xvar = names(data[columns])[ycol], yvar = names(data[columns])[xcol])
   }))
 
-  if(printInfo){cat("\n\n\nALL\n");print(all)}
+  if (printInfo) {
+    cat("\n\n\nALL\n");print(all)
+  }
 
   dataTypes <- plot_types(data[columns])
-  if(printInfo){cat("\n\n\nDATA TYPES\n");print(dataTypes)}
+  if (printInfo) {
+    cat("\n\n\nDATA TYPES\n");print(dataTypes)
+  }
 
   if (identical(axisLabels,"internal")) {
     dataTypes$Type <- as.character(dataTypes$Type)
@@ -279,7 +287,7 @@ ggpairs <- function(
     dataTypes$Type <- as.factor(dataTypes$Type)
   }
 
-  for(i in 1:nrow(dataTypes)){
+  for (i in 1:nrow(dataTypes)) {
     p <- "blank"
     type <- dataTypes[i,"Type"]
 
@@ -291,15 +299,19 @@ ggpairs <- function(
 
     up <- posX > posY
 
-    if(printInfo) cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
+    if (printInfo) {
+      cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
+    }
 
     section_aes <- section_params <- NULL
 
-    if(type == "scatterplot"){
-      if(printInfo) cat("scatterplot\n")
+    if (type == "scatterplot") {
+      if (printInfo) {
+        cat("scatterplot\n")
+      }
 
       subType <- "points"
-      if(up){
+      if (up) {
         subType <- upper$continuous
         section_aes <- upper$aes_string
         section_params <- upper$params
@@ -310,7 +322,7 @@ ggpairs <- function(
       }
 
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      if(subType == "density") {
+      if (subType == "density") {
         combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
         combo_aes
       }
@@ -327,12 +339,14 @@ ggpairs <- function(
 #      else if(subType == "blank")
 #        p <- ggally_blank()
 
-    } else if(type == "box-hori" || type == "box-vert"){
-      if(printInfo)cat("box-hori-vert\n")
+    } else if (type == "box-hori" || type == "box-vert") {
+      if (printInfo) {
+        cat("box-hori-vert\n")
+      }
 
       subType <- "box"
       section_aes <- NULL
-      if(up){
+      if (up) {
         subType <- upper$combo
         section_aes <- upper$aes_string
         section_params <- upper$params
@@ -342,8 +356,9 @@ ggpairs <- function(
         section_params <- lower$params
       }
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      if(subType != "dot")
+      if (subType != "dot") {
         combo_aes <- mapping_color_fill(combo_aes)
+      }
       combo_params <- addAndOverwriteAes(params, section_params)
 
       p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
@@ -360,12 +375,14 @@ ggpairs <- function(
 #      else if(subType == "blank")
 #        p <- ggally_blank()
 
-    } else if(type == "mosaic"){
-      if(printInfo)cat("mosaic\n")
+    } else if (type == "mosaic") {
+      if (printInfo) {
+        cat("mosaic\n")
+      }
 
       subType <- "facetbar"
       section_aes <- NULL
-      if(up){
+      if (up) {
         subType <- upper$discrete
         section_aes <- upper$aes_string
         section_params <- upper$params
@@ -378,27 +395,30 @@ ggpairs <- function(
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
       combo_params <- addAndOverwriteAes(params, section_params)
 
-      if(subType == "ratio") {
+      if (subType == "ratio") {
         p <- ggally_ratio(data[, c(yColName, xColName)])
-      } else if(subType == "facetbar") {
-        if(!is.null(combo_aes$colour)) {
+      } else if (subType == "facetbar") {
+        if (!is.null(combo_aes$colour)) {
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
         }
         p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
       }
 
-    } else if(type == "stat_bin-num") {
-      if(printInfo)cat("stat_bin-num\n")
+    } else if (type == "stat_bin-num") {
+      if (printInfo) {
+        cat("stat_bin-num\n")
+      }
 
       subType <- diag$continuous
 
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-      if(subType != "density")
+      if (subType != "density") {
         combo_aes <- mapping_color_fill(combo_aes)
+      }
 
       combo_params <- addAndOverwriteAes(params, diag$params)
 
-      if(subType != "blank") {
+      if (subType != "blank") {
         p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
       } else {
         p <- "blank"
@@ -410,8 +430,10 @@ ggpairs <- function(
 #      else if(subType == "blank")
 #        p <- ggally_blank()
 
-    } else if(type == "stat_bin-cat"){
-      if(printInfo)cat("stat_bin-cat\n")
+    } else if (type == "stat_bin-cat") {
+      if (printInfo) {
+        cat("stat_bin-cat\n")
+      }
 
       subType <- diag$discrete
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
@@ -426,7 +448,7 @@ ggpairs <- function(
 #      #  p <- ggally_ratio(dataSelect)
 #      else if(subType == "blank")
 #        p <- ggally_blank()
-    } else if(type == "label") {
+    } else if (type == "label") {
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
       combo_params <- addAndOverwriteAes(params, diag$params)
       combo_params <- addAndOverwriteAes(combo_params, c("label" = columnLabels[posX]))
@@ -483,19 +505,19 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
       "bad_function_name"
   )
 
-  if(identical(test_for_function, "bad_function_name")) {
+  if (identical(test_for_function, "bad_function_name")) {
     return( 'ggally_text("Incorrect\nPlot",size=6)')
   }
 
 
   text <- paste(func_text, "(ggally_data, ggplot2::aes(", paste(names(mapping), " = ", as.character(mapping), sep = "", collapse = ", "), ")", sep = "", collapse = "")
 
-  if(!is.null(params)){
+  if (!is.null(params)) {
     params[is.character(params)] <- paste("\"", params[is.character(params)], "\"", sep = "")
     text <- paste(text, ", ", paste(names(params), "=", params, sep="", collapse=", "), sep="")
   }
   text <- paste(text, ")", sep = "", collapse = "")
-  if(printInfo){
+  if (printInfo) {
     print("")
     print(text)
     print(str(mapping))
@@ -562,7 +584,7 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
   pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
   plotMatrix$plots[[pos]] <- plotObj
 
-  if(plotMatrix$printInfo) {
+  if (plotMatrix$printInfo) {
     cat("\n\nDone placing plot: ",pos,"\n")
   }
 
@@ -584,13 +606,13 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #'  plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
 #'  getPlot(plotMatrix2, 1, 2)
 getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
-  if(plotMatrix$printInfo) {
+  if (plotMatrix$printInfo) {
     cat("rowFromTop: ",rowFromTop," columnFromLeft: ",columnFromLeft,"\n")
   }
 
   pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
 
-  if(plotMatrix$printInfo) {
+  if (plotMatrix$printInfo) {
     cat("Plot List Spot: ",pos,"\n")
   }
 
@@ -609,10 +631,10 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
     p <- plot_text
   }
 
-  if(plotMatrix$printInfo || plotMatrix$verbose){
+  if (plotMatrix$printInfo || plotMatrix$verbose) {
     cat("Plot #",pos)
     if (is.character(plot_text) ) {
-      if (plot_text == "blank"){
+      if (plot_text == "blank") {
         cat(" - Blank")
       }
     }
@@ -636,10 +658,10 @@ get_theme_element = function(p, element, elementKey) {
     p$theme
   }
 
-  if(!is.null(themeObj)) {
+  if (!is.null(themeObj)) {
     elementObj <- themeObj[[element]]
 
-    if(!is.null(elementObj)) {
+    if (!is.null(elementObj)) {
       elementValue <- elementObj[[elementKey]]
       if (!is.null(elementValue)) {
         return(elementValue)
@@ -710,7 +732,7 @@ print.ggpairs <- function(
 
   # If using internal axis labels, extend the plotting region out since
   # variable names on the margins will not be used
-  if(identical(plotObj$axisLabels,"internal")) {
+  if (identical(plotObj$axisLabels,"internal")) {
     v1 <- viewport(
       y = unit(0.5, "npc") - unit(0.5,"lines"),
       width=unit(1, "npc") - unit(1,"lines"),
@@ -747,7 +769,7 @@ print.ggpairs <- function(
 
   grid.newpage()
 
-  if(plotObj$title != ""){
+  if (plotObj$title != "") {
     pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
     grid.text(
       plotObj$title,
@@ -764,7 +786,7 @@ print.ggpairs <- function(
 
   # This plots the variable names on the margins, which is not needed if using internal
   # axis labels
-  if(!identical(plotObj$axisLabels,"internal")) {
+  if (!identical(plotObj$axisLabels,"internal")) {
     # viewport for Left Names
     pushViewport(viewport(width=unit(1, "npc") - unit(2,"lines"), height=unit(1, "npc") - unit(3, "lines")))
 
@@ -775,7 +797,7 @@ print.ggpairs <- function(
     )))
 
     # Left Side
-    for(i in 1:numCol){
+    for (i in 1:numCol) {
       grid.text(
         plotObj$columnLabels[i],
         0, 0.5, rot = 90,
@@ -803,7 +825,7 @@ print.ggpairs <- function(
 
 
     # Bottom Side
-    for(i in 1:numCol){
+    for (i in 1:numCol) {
       grid.text(
         plotObj$columnLabels[i],
         0.5,
@@ -834,8 +856,8 @@ print.ggpairs <- function(
   pushViewport(v1) # labels on outside
   pushViewport(v2) # layout of plots
 
-  for(rowPos in 1:numCol){
-    for(columnPos in 1:numCol){
+  for (rowPos in 1:numCol) {
+    for (columnPos in 1:numCol) {
       p <- getPlot(plotObj, rowPos, columnPos)
 
       if (is_blank_plot(p)) {
@@ -978,10 +1000,11 @@ print.ggpairs <- function(
 #'  GGally:::is_blank_plot(ggally_points(mtcars, ggplot2::aes_string(x = "disp", y = "hp")))
 #'
 is_blank_plot <- function(p){
-  if( !is.null(p$subType) && !is.null(p$type))
+  if ( !is.null(p$subType) && !is.null(p$type)) {
     p$subType == "blank" && p$type == "blank"
-  else
+  } else {
     FALSE
+  }
 }
 
 #' Add new aes
@@ -1028,9 +1051,9 @@ mapping_color_fill <- function(current) {
   currentNames <- names(current)
   color <- c("color", "colour")
 
-  if(any(color %in% currentNames) && "fill" %in% currentNames) {
+  if (any(color %in% currentNames) && "fill" %in% currentNames) {
     # do nothing
-  } else if(any(color %in% currentNames)) {
+  } else if (any(color %in% currentNames)) {
     # fill <- current[["fill" %in% currentNames]]
     # col <- current[[color %in% currentNames]]
     # current <- addAndOverwriteAes(current, aes_string(fill = col, color = NA))
