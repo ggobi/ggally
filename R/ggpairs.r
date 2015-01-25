@@ -151,7 +151,12 @@ ggpairs <- function(
   legends = FALSE,
   verbose = FALSE
 ){
-  printInfo <- FALSE
+  args <- list(...)
+  if ("printInfo" %in% names(args)) {
+    printInfo <- args[['printInfo']]
+  } else {
+    printInfo <- FALSE
+  }
 
   verbose = verbose || printInfo
 
