@@ -38,6 +38,20 @@ test_that("column labels", {
   expect_equivalent(a$columnLabels, columnTitles)
 })
 
+test_that("character", {
+  tips2 <- tips
+  tips2$sex <- as.character(tips2$sex)
+  tips2$smoker <- as.character(tips2$smoker)
+  a <- ggpairs(tips2)
+  expect_true(is.factor(a$data$sex))
+  expect_true(is.factor(a$data$smoker))
+})
+
+test_that("printInfo", {
+  txt <- capture.output({a <- ggpairs(tips, printInfo = TRUE)})
+  expect_true(length(txt) > 0)
+})
+
 test_that("blank plots", {
   columnsUsed <- 1:3
   au <- ggpairs(tips, columnsUsed, upper = "blank")
