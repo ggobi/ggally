@@ -472,6 +472,10 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
     stop(paste("variables: ", paste(shQuote(nonCallNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "), ".  Please rename the columns and use labels instead.", sep = ""))
   }
 
+  if (func %in% c("blank", "blankDiag")) {
+    return("blank")
+  }
+
   func_text <- paste("ggally_", func, collapse = "", sep = "")
   test_for_function <- tryCatch(
     get(func_text, mode = "function"),
