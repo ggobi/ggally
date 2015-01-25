@@ -93,6 +93,20 @@ test_that("print", {
   ad <- ggpairs(tips, columnsUsed, diag = "blank")
   al <- ggpairs(tips, columnsUsed, lower = "blank")
   print(au); print(ad); print(al)
+
+  fn <- function(axisLabels) {
+    a <- ggpairs(
+      tips, 1:4, upper = "blank", diag = "blank",
+      axisLabels = axisLabels
+    )
+    a
+  }
+  for (axisLabels in c("show", "internal", "none")) {
+    a <- fn(axisLabels)
+    print(a)
+  }
+
+  expect_true(TRUE)
 })
 
 
