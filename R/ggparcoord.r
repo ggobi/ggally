@@ -411,7 +411,7 @@ ggparcoord <- function(
   }
   else if(tolower(order) == "allclass") {
     f.stats <- rep(NA,length(columns))
-    names(f.stats) <- names(saveData2)
+    names(f.stats) <- names(saveData2[columns])
     for(i in 1:length(columns)) {
       f.stats[i] <- summary(lm(saveData2[,i] ~ groupVar))$fstatistic[1]
     }
