@@ -48,4 +48,5 @@ branches:
   only:
     - master
     - dev
+    - vignette_travis
 
