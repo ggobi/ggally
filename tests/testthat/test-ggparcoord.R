@@ -155,11 +155,16 @@ test_that("basic", {
   expect_equal(length(p$layers), 1)
   expect_equal(p$mapping$size, 1)
 
-
-
-
-
 })
 
+
+test_that("size", {
+  p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), mapping = ggplot2::aes(size = gear))
+  expect_equal(as.character(p$mapping$size), "gear")
+
+  p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10)) + ggplot2::aes(size = gear)
+  expect_equal(as.character(p$mapping$size), "gear")
+
+})
 
 
