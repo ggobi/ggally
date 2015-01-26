@@ -153,7 +153,6 @@ test_that("basic", {
 
   p <- ggparcoord(data = diamonds.samp, columns = c(1,5:10), mapping = ggplot2::aes(size = 1))
   expect_equal(length(p$layers), 1)
-  expect_equal(get("geom_params", envir = p$layers[[1]])$size, 1)
   expect_equal(p$mapping$size, 1)
 
 
