@@ -61,13 +61,13 @@ ggally_smooth <- function(data, mapping, ...){
 
   p <- ggplot(data = data, mapping)
 
+  p <- p + geom_point(...)
+
   if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
     p <- p + geom_smooth(method="lm")
   } else {
     p <- p + geom_smooth(method="lm", colour = I("black"))
   }
-
-  p <- p + geom_point(...)
 
   p$type <- "continuous"
   p$subType <- "smooth"
