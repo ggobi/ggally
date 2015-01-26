@@ -5,8 +5,9 @@
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
 ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
-  geom = "tile", max_size = 6, label = FALSE, label_alpha = FALSE,
-  label_color = "black", label_round = 1, ...)
+  geom = "tile", min_size = 2, max_size = 6, label = FALSE,
+  label_alpha = FALSE, label_color = "black", label_round = 1,
+  nbreaks = 8, ...)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -19,7 +20,9 @@ ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
 
 \item{geom}{the geom object to use. Accepts either \code{tile} (the default) or \code{circle}, to plot proportionally scaled circles.}
 
-\item{max_size}{the maximum size for circles, as passed to \code{scale_size_area} for proportional scaling. Defaults to \code{6}.}
+\item{min_size}{the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{2}.}
+
+\item{max_size}{the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{6}.}
 
 \item{label}{whether to add correlation coefficients as two-digit numbers over the plot. Defaults to \code{FALSE}.}
 
@@ -28,6 +31,8 @@ ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
 \item{label_color}{color for the correlation coefficients. Defaults to \code{"black"}.}
 
 \item{label_round}{decimal rounding of the correlation coefficients. Defaults to \code{1}.}
+
+\item{nbreaks}{number of breaks to apply.  Defaults to \code{8}.}
 
 \item{...}{other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.}
 }
@@ -48,16 +53,18 @@ ggcorr(nba[, -1],
 # Custom options.
 ggcorr(
   nba[, -1],
+  name = expression(rho),
   geom = "circle",
   max_size = 6,
   size = 3,
   hjust = 0.75,
+  nbreaks = 6,
   angle = -45,
   palette = "PuOr" # colorblind safe, photocopy-able
 ) + ggplot2::labs(title = "Points Per Game")
 }
 \author{
-Francois Briatte \email{f.briatte@gmail.com}
+Francois Briatte \email{f.briatte@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@gmail.com}
 }
 \seealso{
 \code{\link{cor}} and \code{\link[arm]{corrplot}}

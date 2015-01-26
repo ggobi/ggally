@@ -151,7 +151,7 @@ if(getRversion() >= "2.15.1") {
 #' # gpd
 ggparcoord <- function(
   data,
-  columns,
+  columns      = 1:ncol(data),
   groupColumn  = NULL,
   scale        = "std",
   scaleSummary = "mean",
@@ -243,11 +243,17 @@ ggparcoord <- function(
   if(!is.null(groupColumn)) {
     if(is.numeric(groupColumn)) {
       groupCol <- names(data)[groupColumn]
-    } else
+    } else {
       groupCol <- groupColumn
+    }
     groupVar <- data[,groupCol]
   }
-  data <- data[,columns]
+  for (colPos in seq_along(columns)) {
+    if (is.character(columns[colPos])) {
+      columns[colPos] <- which(colnames(data) == columns[colPos])
+    }
+  }
+  # data <- data[, columns]
 
   # Change character vars to factors
   char.vars <- column_is_character(data)
@@ -270,10 +276,10 @@ ggparcoord <- function(
   # being plotted as numeric)
   saveData2 <- data
 
-  data$.ID <- as.factor(1:dim(data)[1])
-  data$anyMissing <- apply(data,1,function(x) { any(is.na(x)) })
-  p <- c(dim(data)[2]-1,dim(data)[2])
-
+  p <- c(ncol(data) + 1, ncol(data) + 2)
+  data$.ID <- as.factor(1:nrow(data))
+  data$anyMissing <- apply(is.na(data[,columns]), 1, any)
+  columnsPlusTwo <- c(columns, p)
 
   inner_rescaler_default = function (x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
@@ -298,29 +304,26 @@ ggparcoord <- function(
   }
 
   ### Scaling ###
-  if(tolower(scale) == "std") {
-    data <- inner_rescaler(data, type = "sd")
-  }
-  else if(tolower(scale) == "robust") {
-    data <- inner_rescaler(data,type="robust")
-  }
-  else if(tolower(scale) == "uniminmax") {
-    data <- inner_rescaler(data,type="range")
-  }
-  #else if(tolower(scale) == "globalminmax") {
-  #  data[,-p] <- data[,-p] - min(data[,-p])
-  #  data[,-p] <- data[,-p]/max(data[,-p])
-  #}
-  else if(tolower(scale) == "center") {
-    data <- inner_rescaler(data,type="range")
-    data[,-p] <- apply(data[,-p],2,function(x){
-      x <- x - eval(parse(text=paste(scaleSummary,"(x,na.rm=TRUE)",sep="")))
-    })
+  if(tolower(scale) %in% c("std", "robust", "uniminmax", "center")) {
+    rescalerType <- c(
+      "std" = "sd",
+      "robust" = "robust",
+      "uniminmax" = "range",
+      "center" = "range"
+    )[tolower(scale)]
+    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo], type = rescalerType)
+
+    if (tolower(scale) == "center") {
+      data[, columns] <- apply(data[, columns], 2, function(x){
+        x <- x - eval(parse(text=paste(scaleSummary,"(x,na.rm=TRUE)",sep="")))
+      })
+    }
+
   }
 
   ### Imputation ###
   if(tolower(missing) == "exclude") {
-    dataCompleteCases <- complete.cases(data)
+    dataCompleteCases <- complete.cases(data[, columnsPlusTwo])
 
     if(!is.null(groupColumn)) {
       groupVar <- groupVar[dataCompleteCases]
@@ -330,57 +333,51 @@ ggparcoord <- function(
       alphaVar <- alphaVar[dataCompleteCases]
     }
 
-    data <- data[dataCompleteCases,]
+    data <- data[dataCompleteCases, ]
   }
-  else if(tolower(missing) == "mean") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) {
-        x[is.na(x)] <- mean(x,na.rm=TRUE)
-      }
-      return(x)
-    })
-  }
-  else if(tolower(missing) == "median") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) {
-        x[is.na(x)] <- median(x,na.rm=TRUE)
-      }
-      return(x)
-    })
-  }
-  else if(tolower(missing) == "min10") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) {
-        x[is.na(x)] <- .9*min(x,na.rm=TRUE)
-      }
-      return(x)
-    })
-  }
-  else if(tolower(missing) == "random") {
-     data[,-p] <- apply(data[,-p],2,function(x) {
-      if(any(is.na(x))) {
+  else if(tolower(missing) %in% c("mean", "median", "min10", "random")) {
+    missingFns <- list(
+      mean = function(x) {
+        mean(x, na.rm = TRUE)
+      },
+      median = function(x) {
+        median(x, na.rm = TRUE)
+      },
+      min10 = function(x){
+        0.9 * min(x, na.rm = TRUE)
+      },
+      random = function(x) {
         num <- sum(is.na(x))
         idx <- sample(which(!is.na(x)),num,replace=TRUE)
-        x[is.na(x)] <- x[idx]
+        x[idx]
+      }
+    )
+    missing_fn <- missingFns[[tolower(missing)]]
+    data[,columns] <- apply(data[,columns], 2, function(x) {
+      if(any(is.na(x))){
+        x[is.na(x)] <- missing_fn(x)
       }
       return(x)
     })
+
   }
 
   ### Scaling (round 2) ###
   # Centering by observation needs to be done after handling missing values
   #   in case the observation to be centered on has missing values
   if(tolower(scale) == "centerobs") {
-    data <- inner_rescaler(data,type="range")
-    data[,-p] <- apply(data[,-p],2,function(x){
+    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo],type="range")
+    data[, columns] <- apply(data[,columns],2,function(x){
       x <- x - x[centerObsID]
     })
   }
 
-  meltIDVars <- c(".ID", "anyMissing")
+  # meltIDVars <- c(".ID", "anyMissing")
+  meltIDVars <- colnames(data)[-columns]
+
   if(!is.null(groupColumn)) {
-    data <- cbind(data,groupVar)
-    names(data)[dim(data)[2]] <- groupCol
+    # data <- cbind(data,groupVar)
+    # names(data)[dim(data)[2]] <- groupCol
 
     meltIDVars <- c(groupCol, meltIDVars)
   }
@@ -391,8 +388,11 @@ ggparcoord <- function(
     meltIDVars <- c(meltIDVars, alphaLines)
   }
 
-  data.m <- melt(data,id.vars=meltIDVars)
+  if(is.list(mapping)) {
+    mappingNames <- names(mapping)
+  }
 
+  data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
 
   ### Ordering ###
   if(length(order) > 1 & is.numeric(order)) {
@@ -411,7 +411,7 @@ ggparcoord <- function(
   }
   else if(tolower(order) == "allclass") {
     f.stats <- rep(NA,length(columns))
-    names(f.stats) <- names(saveData2)
+    names(f.stats) <- names(saveData2[columns])
     for(i in 1:length(columns)) {
       f.stats[i] <- summary(lm(saveData2[,i] ~ groupVar))$fstatistic[1]
     }
@@ -437,6 +437,7 @@ ggparcoord <- function(
     )
   }
   mapping2 <- addAndOverwriteAes(mapping2,mapping)
+  # mapping2 <- addAndOverwriteAes(aes_string(size = I(0.5)), mapping2)
   p <- ggplot(data=data.m,mapping=mapping2)
 
   if(!is.null(shadeBox)) {
@@ -447,6 +448,7 @@ ggparcoord <- function(
     p <- p + geom_linerange(data=d.sum,size=I(10),col=shadeBox,
       mapping=aes(y=NULL,ymin=min,ymax=max,group=variable))
   }
+
   if (boxplot)
     p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
 
@@ -491,7 +493,8 @@ ggparcoord <- function(
         scale_alpha(range = alphaRange)
 
     } else {
-      p <- p + geom_line(alpha = alphaLines, size = lineSize)
+      # p <- p + geom_line(alpha = alphaLines, size = lineSize)
+      p <- p + geom_line(alpha = alphaLines)
     }
 
     if (showPoints) {
@@ -547,12 +550,17 @@ scagOrder <- function(scag, vars, measure) {
   a <- a[order(c(min(grep(a[1],rownames(d.scag))),min(grep(a[2],rownames(d.scag)))),
     decreasing=TRUE)]
   d.scag <- d.scag[-grep(a[1],rownames(d.scag)),]
-  while(length(a) < (p-1)) {
-    k <- length(a)
-    a[k+1] <- d.scag[1,1:2][!(a[k] == d.scag[1,1:2])]
-    d.scag <- d.scag[-grep(a[k],rownames(d.scag)),]
+
+  i = 1
+  while(length(a) < p) {
+    pNames <- d.scag[i, 1:2]
+    namesUsed <- pNames %in% a
+    if (! all(namesUsed)) {
+      a <- append(a, pNames[!namesUsed])
+    }
+    i = i + 1
   }
-  a[p] <- vars[!(vars %in% a)]
+
   return(a)
 }
 

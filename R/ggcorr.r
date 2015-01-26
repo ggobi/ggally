@@ -14,14 +14,16 @@ if(getRversion() >= "2.15.1") {
 #' @param palette a ColorBrewer palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.
 #' @param name a character string for the legend that shows quintiles of correlation coefficients.
 #' @param geom the geom object to use. Accepts either \code{tile} (the default) or \code{circle}, to plot proportionally scaled circles.
-#' @param max_size the maximum size for circles, as passed to \code{scale_size_area} for proportional scaling. Defaults to \code{6}.
+#' @param max_size the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{6}.
+#' @param min_size the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{2}.
 #' @param label whether to add correlation coefficients as two-digit numbers over the plot. Defaults to \code{FALSE}.
 #' @param label_alpha whether to make the correlation coefficients transparent as they come close to 0. Defaults to \code{FALSE}.
 #' @param label_color color for the correlation coefficients. Defaults to \code{"black"}.
 #' @param label_round decimal rounding of the correlation coefficients. Defaults to \code{1}.
+#' @param nbreaks number of breaks to apply.  Defaults to \code{8}.
 #' @param ... other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
 #' @seealso \code{\link{cor}} and \code{\link[arm]{corrplot}}
-#' @author Francois Briatte \email{f.briatte@@gmail.com}
+#' @author Francois Briatte \email{f.briatte@@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@@gmail.com}
 #' @importFrom reshape melt melt.data.frame melt.default
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -37,10 +39,12 @@ if(getRversion() >= "2.15.1") {
 #' # Custom options.
 #' ggcorr(
 #'   nba[, -1],
+#'   name = expression(rho),
 #'   geom = "circle",
 #'   max_size = 6,
 #'   size = 3,
 #'   hjust = 0.75,
+#'   nbreaks = 6,
 #'   angle = -45,
 #'   palette = "PuOr" # colorblind safe, photocopy-able
 #' ) + ggplot2::labs(title = "Points Per Game")
@@ -49,11 +53,13 @@ ggcorr <- function(data,
   palette = "RdYlGn",
   name = "rho",
   geom = "tile",
+  min_size = 2,
   max_size = 6,
   label = FALSE,
   label_alpha = FALSE,
   label_color = "black",
   label_round = 1,
+  nbreaks = 8,
   ...) {
 
   M <- cor(data[1:ncol(data)], use = method)
@@ -71,12 +77,15 @@ ggcorr <- function(data,
   M <- data.frame(row = names(data), M)
   M <- melt(M, id.vars = "row")
   M$value[M$value == 0] <- NA
-  s <- seq(-1, 1, by = .25)
-  M$value <- cut(M$value, breaks = s, include.lowest = TRUE,
-                 label = cut(s, breaks = s)[-1])
+  s <- seq(-1, 1, length.out = nbreaks + 1)
+  M$value <- droplevels(cut(M$value, breaks = s, include.lowest = TRUE,
+                 label = cut(s, breaks = s)[-1]))
   M$row <- factor(M$row, levels = unique(as.character(M$variable)))
   M$num <- as.numeric(M$value)
+  M$num <- abs(M$num - (nbreaks - 1)/2) / (nbreaks/2) * (max_size - min_size) + min_size
+
   diag  <- subset(M, row == variable)
+  M <- M[complete.cases(M),]
 
   # clean plot panel
   po.nopanel <- list(theme(
@@ -86,20 +95,23 @@ ggcorr <- function(data,
     axis.text.x = element_text(angle = -90))
   )
 
-  p = ggplot(M, aes(row, variable))
+  p = ggplot(M, aes(x = row, y = variable))
+  g <- guide_legend(name)
 
   # apply main geom
   if(geom == "circle") {
     p = p +
+      geom_point(aes(size = num + 0.25), color = "grey50") +
+      geom_point(aes(size = num, color = value)) +
       scale_colour_brewer(name, palette = palette) +
-      scale_size_area(name, max_size= max_size,
-                      labels = levels(M$value)[table(M$value) > 0]) +
-      geom_point(aes(size = num, colour = value))
+      scale_size_identity(name) +
+			guides(colour = g, size = g)
   }
   else {
     p = p +
-      scale_fill_brewer(name, palette = palette) +
-      geom_tile(aes(fill = value), colour = "white")
+      scale_fill_brewer(palette = palette) +
+      geom_tile(aes(fill = value), colour = "white") +
+      guides(fill = g)
   }
 
   # add coefficient text
@@ -121,8 +133,8 @@ ggcorr <- function(data,
   # add diagonal and options
   p = p  +
     geom_text(data = diag, aes(label = variable), ...) +
-    scale_x_discrete(breaks = NULL) +
-    scale_y_discrete(breaks = NULL) +
+    scale_x_discrete(breaks = NULL, limits = levels(M$row)) +
+    scale_y_discrete(breaks = NULL, limits = levels(M$variable)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +
     po.nopanel
