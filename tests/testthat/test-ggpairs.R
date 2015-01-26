@@ -162,7 +162,11 @@ test_that("subtypes", {
 #   blank
 
   fn1 <- function(title, upper, diag, ...) {
+    if (upper$continuous == "density") {
+      params <- NULL
+    } else {
       params <- c(binwidth = 1)
+    }
     ggpairs(
       tips, 1:4,
       axisLabels = "show",
@@ -179,7 +183,8 @@ test_that("subtypes", {
     fn1(..., color = "day")
   }
 
-  conSubs = c("points", "smooth", "density", "cor", "blank")
+  # re ordered the subs so that density can have no binwidth param
+  conSubs = c("density", "points", "smooth", "cor", "blank")
   comSubs = c("box", "dot", "facethist", "facetdensity", "denstrip", "blank")
   disSubs = c("ratio", "facetbar", "blank")
 
