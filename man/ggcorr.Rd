@@ -5,8 +5,9 @@
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
 ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
-  geom = "tile", max_size = 6, label = FALSE, label_alpha = FALSE,
-  label_color = "black", label_round = 1, nbreaks = 8, ...)
+  geom = "tile", min_size = 2, max_size = 6, label = FALSE,
+  label_alpha = FALSE, label_color = "black", label_round = 1,
+  nbreaks = 8, ...)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -19,7 +20,9 @@ ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
 
 \item{geom}{the geom object to use. Accepts either \code{tile} (the default) or \code{circle}, to plot proportionally scaled circles.}
 
-\item{max_size}{the maximum size for circles, as passed to \code{scale_size_area} for proportional scaling. Defaults to \code{6}.}
+\item{min_size}{the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{2}.}
+
+\item{max_size}{the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{6}.}
 
 \item{label}{whether to add correlation coefficients as two-digit numbers over the plot. Defaults to \code{FALSE}.}
 

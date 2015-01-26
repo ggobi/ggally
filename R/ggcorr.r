@@ -14,7 +14,8 @@ if(getRversion() >= "2.15.1") {
 #' @param palette a ColorBrewer palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.
 #' @param name a character string for the legend that shows quintiles of correlation coefficients.
 #' @param geom the geom object to use. Accepts either \code{tile} (the default) or \code{circle}, to plot proportionally scaled circles.
-#' @param max_size the maximum size for circles, as passed to \code{scale_size_area} for proportional scaling. Defaults to \code{6}.
+#' @param max_size the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{6}.
+#' @param min_size the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{2}.
 #' @param label whether to add correlation coefficients as two-digit numbers over the plot. Defaults to \code{FALSE}.
 #' @param label_alpha whether to make the correlation coefficients transparent as they come close to 0. Defaults to \code{FALSE}.
 #' @param label_color color for the correlation coefficients. Defaults to \code{"black"}.
