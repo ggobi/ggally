@@ -550,12 +550,17 @@ scagOrder <- function(scag, vars, measure) {
   a <- a[order(c(min(grep(a[1],rownames(d.scag))),min(grep(a[2],rownames(d.scag)))),
     decreasing=TRUE)]
   d.scag <- d.scag[-grep(a[1],rownames(d.scag)),]
-  while(length(a) < (p-1)) {
-    k <- length(a)
-    a[k+1] <- d.scag[1,1:2][!(a[k] == d.scag[1,1:2])]
-    d.scag <- d.scag[-grep(a[k],rownames(d.scag)),]
+
+  i = 1
+  while(length(a) < p) {
+    pNames <- d.scag[i, 1:2]
+    namesUsed <- pNames %in% a
+    if (! all(namesUsed)) {
+      a <- append(a, pNames[!namesUsed])
+    }
+    i = i + 1
   }
-  a[p] <- vars[!(vars %in% a)]
+
   return(a)
 }
 
