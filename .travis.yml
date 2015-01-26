@@ -7,9 +7,11 @@
 language: c
 
 
+## default R_*_ARGS
+# R_BUILD_ARGS="--no-build-vignettes" R_CHECK_ARGS="--no-manual --as-cran"
 env:
-  - BOOTSTRAP_LATEX="1"
-  - BOOTSTRAP_LATEX="1" R_CHECK_REVDEP="1" # checks reverse depends
+  - R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" BOOTSTRAP_LATEX="1"
+  - R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" BOOTSTRAP_LATEX="1" R_CHECK_REVDEP="1" # checks reverse depends
 
 matrix:
   fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
