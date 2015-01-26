@@ -1236,7 +1236,7 @@ ggally_blank <- function(...){
   ignored <- aes(...)
   a <- data.frame(X=1:2, Y=1:2)
 
-  p <- ggplot(data = a, aes(x = X, y = Y)) + geom_point( colour = "transparent") +
+  p <- ggplot(data = a, aes_string(x = "X", y = "Y")) + geom_point( colour = "transparent") +
     theme(
       axis.line         = element_blank(),
       axis.text.x       = element_blank(),
