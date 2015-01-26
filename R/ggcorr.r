@@ -100,11 +100,10 @@ ggcorr <- function(data,
   # apply main geom
   if(geom == "circle") {
     p = p +
+      geom_point(aes(size = num, color = value)) +
       scale_colour_brewer(name, palette = palette) +
-      scale_size_continuous(name, range = c(max_size/nlevels(M$value), max_size), labels =
-      												levels(M$value) ) +
-      geom_point(aes(size = num, colour = value)) +
-			guides(color = g, size = g)
+      scale_size_identity(name) +
+			guides(colour = g, size = g)
   }
   else {
     p = p +
