@@ -1,8 +1,9 @@
 
+context("ggcorr")
+
 nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
 
 
-context("ggcorr")
 
 test_that("examples", {
   # Default output.
