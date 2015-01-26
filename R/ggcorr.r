@@ -52,6 +52,7 @@ ggcorr <- function(data,
   palette = "RdYlGn",
   name = "rho",
   geom = "tile",
+  min_size = 2,
   max_size = 6,
   label = FALSE,
   label_alpha = FALSE,
@@ -80,6 +81,8 @@ ggcorr <- function(data,
                  label = cut(s, breaks = s)[-1]))
   M$row <- factor(M$row, levels = unique(as.character(M$variable)))
   M$num <- as.numeric(M$value)
+  M$num <- abs(M$num - (nbreaks - 1)/2) / (nbreaks/2) * (max_size - min_size) + min_size
+
   diag  <- subset(M, row == variable)
 
   # clean plot panel
