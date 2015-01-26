@@ -101,9 +101,10 @@ test_that("groupColumn", {
     data = ds2,
     columns = c(
       "carat", "color", "clarity",
-      "depth", "table  ", "price",
+      "depth", "table", "price",
       "x", "y", "z"
     ),
+    order = c(1,3:10),
     groupColumn = "cut"
   )
   expect_true("color" %in% levels(p$data$variable))
