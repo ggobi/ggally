@@ -652,11 +652,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
 #' @param elementKey key within element object
 #' @keywords internal
 get_theme_element = function(p, element, elementKey) {
-  themeObj <- if (is.ggpairs(p)) {
-    p$gg
-  } else {
-    p$theme
-  }
+  themeObj <- p$gg
 
   if (!is.null(themeObj)) {
     elementObj <- themeObj[[element]]
