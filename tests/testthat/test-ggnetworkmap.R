@@ -1,5 +1,5 @@
 
-context("Building Example Data")
+context("ggnetworkmap")
 
 require(igraph)
 require(maps)
@@ -23,7 +23,6 @@ us <- ggplot(ggplot2::map_data("usa"), aes(x = long, y = lat)) +
   geom_polygon(aes(group = group), color = "grey65",
                fill = "#f9f9f9", size = 0.2)
 
-context("ggnetworkmap")
 
 test_that("basic drawing", {
   # no map

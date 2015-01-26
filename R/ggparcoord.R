@@ -248,10 +248,13 @@ ggparcoord <- function(
     }
     groupVar <- data[,groupCol]
   }
-  for (colPos in seq_along(columns)) {
-    if (is.character(columns[colPos])) {
-      columns[colPos] <- which(colnames(data) == columns[colPos])
+
+  if (is.character(columns)) {
+    columns_ <- c()
+    for (colPos in seq_along(columns)) {
+      columns_[colPos] <- which(colnames(data) == columns[colPos])
     }
+    columns <- columns_
   }
   # data <- data[, columns]
 

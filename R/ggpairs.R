@@ -158,6 +158,10 @@ ggpairs <- function(
     printInfo <- FALSE
   }
 
+  if (! identical(class(data),"data.frame")) {
+    data <- as.data.frame(data)
+  }
+
   verbose = verbose || printInfo
 
   axisLabelChoices <- c("show", "internal", "none")

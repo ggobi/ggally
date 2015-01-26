@@ -61,13 +61,13 @@ ggally_smooth <- function(data, mapping, ...){
 
   p <- ggplot(data = data, mapping)
 
+  p <- p + geom_point(...)
+
   if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
     p <- p + geom_smooth(method="lm")
   } else {
     p <- p + geom_smooth(method="lm", colour = I("black"))
   }
-
-  p <- p + geom_point(...)
 
   p$type <- "continuous"
   p$subType <- "smooth"
@@ -180,6 +180,12 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
 
   xCol <- as.character(mapping$x)
   yCol <- as.character(mapping$y)
+
+  if (is_date(data[,xCol]) || is_date(data[,yCol])) {
+    message("Can not calculate correlation of 'Date' variables.  Returning a 'blank' plot")
+    return(ggally_blank())
+  }
+
   colorCol <- as.character(mapping$colour)
 
   if (corUse %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
@@ -654,7 +660,8 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
     p <- p +
       geom_bar(
-        mapping = aes(fill = ..density..)
+        mapping = aes(fill = ..density..),
+        ...
       ) +
       coord_cartesian(
         ylim = c(0,1)
@@ -759,7 +766,7 @@ ggally_ratio <- function(data){
 ggally_densityDiag <- function(data, mapping, ...){
 
   p <- ggplot(data, mapping) +
-    scale_x_continuous() +
+    # scale_x_continuous() +
     scale_y_continuous() +
     stat_density(
       aes(
@@ -792,11 +799,13 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
   mapping$y <- NULL
-  numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+  numer <- ("continuous" == plotting_data_type(data[, as.character(mapping$x)]))
 
   p <- ggplot(data = data, mapping)
 
-  if(numer){
+  if (is_date(data[,as.character(mapping$x)])) {
+    p <- p + geom_bar()
+  } else if(numer){
     # message("is numeric")
     p <- p + geom_bar(
       aes(
