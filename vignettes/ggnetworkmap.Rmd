@@ -64,7 +64,7 @@ ggnetworkmap(
 )
 ```
 
-This next example uses data from a spam community I identified on twitter while exploring and trying to clear-up a group of tweets. After coloring the nodes based on igraph’s information centrality community detection function, the odd structure stood out clearly.
+This next example uses data from a spam community I identified on twitter while exploring and trying to clear-up a group of tweets. After coloring the nodes based on igraph's information centrality community detection function, the odd structure stood out clearly.
 
 ```{r}
 data(twitter_spam_community)
@@ -77,13 +77,13 @@ ggnetworkmap(gp, twitter_spam_community)
 
 Is the network really concentrated in the U.S.? Probably not. One of the odd things about the network, is a much higher proportion of the users gave locations that could be geocoded, than twitter users generally.
 
-Let’s see the network topology
+Let's see the network topology
 
 ```{r}
 ggnetworkmap(data=twitter_spam_community)
 ```
 
-That’s an odd structure, let’s see who’s following who.
+That's an odd structure, let's see who's following who.
 
 ```{r}
 ggnetworkmap(data=twitter_spam_community, arrow.size = 0.5)
@@ -122,3 +122,4 @@ ggnetworkmap(
   labs(color = "friendsCount") +
   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 ```
+
