@@ -392,7 +392,7 @@ ggparcoord <- function(
     mappingNames <- names(mapping)
   }
 
-  data.m <- melt(data,id.vars=meltIDVars, measure.vars = columns)
+  data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
 
   ### Ordering ###
   if(length(order) > 1 & is.numeric(order)) {
