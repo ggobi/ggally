@@ -84,6 +84,7 @@ ggcorr <- function(data,
   M$num <- abs(M$num - (nbreaks - 1)/2) / (nbreaks/2) * (max_size - min_size) + min_size
 
   diag  <- subset(M, row == variable)
+  M <- M[complete.cases(M),]
 
   # clean plot panel
   po.nopanel <- list(theme(
