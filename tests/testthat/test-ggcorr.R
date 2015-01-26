@@ -26,7 +26,7 @@ test_that("examples", {
     angle = -45,
     palette = "PuOr" # colorblind safe, photocopy-able
   )
-  expect_equal(length(p$layers), 2)
+  expect_equal(length(p$layers), 3)
 
 
   p <- ggcorr(nba[, -1],
