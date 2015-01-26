@@ -47,8 +47,8 @@ if(getRversion() >= "2.15.1") {
 #'      destination = sample(airports[200:400,]$iata, 200,
 #'                                  replace = TRUE))
 #' graph <- graph.data.frame(flights, airports, directed = TRUE)
-#' graph <- graph - V(graph)[degree(graph, mode = "total") < 2]
-#' V(graph)$degree <- degree(graph, mode = "total")
+#' graph <- graph - V(graph)[igraph::degree(graph, mode = "total") < 2]
+#' V(graph)$degree <- igraph::degree(graph, mode = "total")
 #' V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
 #' usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
 #'  geom_polygon(aes(group = group), color = "grey65",
