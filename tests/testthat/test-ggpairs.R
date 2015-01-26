@@ -20,7 +20,7 @@ test_that("structure", {
 
 test_that("columns", {
   columnsUsed <- 1:3
-  a <- ggpairs(tips, columns = columnsUsed)
+  a <- ggpairs(tips, columns = columnsUsed, params = c(binwidth = 1))
   expect_equivalent(length(a$plots), length(columnsUsed)^2)
   expect_equivalent(a$columnLabels, names(tips)[columnsUsed])
 })
@@ -28,12 +28,12 @@ test_that("columns", {
 test_that("column labels", {
   columnsUsed <- 1:3
   columnTitles <- c("A", "B", "C")
-  a <- ggpairs(tips, columnsUsed, columnLabels = columnTitles)
+  a <- ggpairs(tips, columnsUsed, columnLabels = columnTitles, params = c(binwidth = 1))
   expect_equivalent(a$columnLabels, columnTitles)
 
 
   columnTitles <- c("Total Bill %", "Tip 123456", "Sex ( /a asdf)")
-  a <- ggpairs(tips, columnsUsed, columnLabels = columnTitles)
+  a <- ggpairs(tips, columnsUsed, columnLabels = columnTitles, params = c(binwidth = 1))
   expect_equivalent(a$columnLabels, columnTitles)
 })
 
@@ -41,14 +41,14 @@ test_that("character", {
   tips2 <- tips
   tips2$sex <- as.character(tips2$sex)
   tips2$smoker <- as.character(tips2$smoker)
-  a <- ggpairs(tips2)
+  a <- ggpairs(tips2, params = c(binwidth = 1))
   expect_true(is.factor(a$data$sex))
   expect_true(is.factor(a$data$smoker))
 })
 
 test_that("printInfo", {
   txt <- capture.output({
-    a <- ggpairs(tips, printInfo = TRUE);
+    a <- ggpairs(tips, printInfo = TRUE, params = c(binwidth = 1))
   })
   expect_true(length(txt) > 0)
   expect_false(is.list(a$plots[[2]]))
@@ -68,8 +68,8 @@ test_that("printInfo", {
 
 test_that("blank plots", {
   columnsUsed <- 1:3
-  au <- ggpairs(tips, columnsUsed, upper = "blank")
-  ad <- ggpairs(tips, columnsUsed, diag = "blank")
+  au <- ggpairs(tips, columnsUsed, upper = "blank", params = c(binwidth = 1))
+  ad <- ggpairs(tips, columnsUsed, diag = "blank", params = c(binwidth = 1))
   al <- ggpairs(tips, columnsUsed, lower = "blank")
   for (i in 1:3) {
     for (j in 1:3) {
@@ -117,15 +117,16 @@ test_that("stops", {
 
 test_that("print", {
   columnsUsed <- 1:3
-  au <- ggpairs(tips, columnsUsed, upper = "blank")
-  ad <- ggpairs(tips, columnsUsed, diag = "blank")
+  au <- ggpairs(tips, columnsUsed, upper = "blank", params = c(binwidth = 1))
+  ad <- ggpairs(tips, columnsUsed, diag = "blank", params = c(binwidth = 1))
   al <- ggpairs(tips, columnsUsed, lower = "blank")
   print(au); print(ad); print(al)
 
   fn <- function(axisLabels) {
     a <- ggpairs(
       tips, 1:4,
-      axisLabels = axisLabels
+      axisLabels = axisLabels,
+      params = c(binwidth = 1)
     )
     p <- getPlot(a, 2, 1)
     a <- putPlot(a, p, 2, 1)
@@ -163,6 +164,11 @@ test_that("subtypes", {
 #   blank
 
   fn1 <- function(title, upper, diag, ...) {
+    if (upper$continuous == "density") {
+      params <- NULL
+    } else {
+      params <- c(binwidth = 1)
+    }
     ggpairs(
       tips, 1:4,
       axisLabels = "show",
@@ -170,6 +176,7 @@ test_that("subtypes", {
       upper = upper,
       lower = upper,
       diag = diag,
+      params = params,
       ...
     ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
   }
@@ -178,7 +185,8 @@ test_that("subtypes", {
     fn1(..., color = "day")
   }
 
-  conSubs = c("points", "smooth", "density", "cor", "blank")
+  # re ordered the subs so that density can have no binwidth param
+  conSubs = c("density", "points", "smooth", "cor", "blank")
   comSubs = c("box", "dot", "facethist", "facetdensity", "denstrip", "blank")
   disSubs = c("ratio", "facetbar", "blank")
 
@@ -225,7 +233,8 @@ test_that("subtypes", {
     }
   }
 
-  a <- ggpairs(tips, 1:2, lower = "blank", diag = "blank", upper = list(continuous = "BAD_TYPE"))
+  a <- ggpairs(tips, 1:2, lower = "blank", diag = "blank", upper = list(continuous = "BAD_TYPE"), params = c(binwidth = 1))
+  expect_true(TRUE)
 
 
 
