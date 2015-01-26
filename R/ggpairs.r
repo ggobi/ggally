@@ -866,7 +866,7 @@ print.ggpairs <- function(
 
       # left axis
       if (columnPos == 1 && showLabels) {
-        if (identical(plotObj$verbose, TRUE)) {
+        if (identical(plotObj$printInfo, TRUE)) {
           print("trying left axis")
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-l")
@@ -897,7 +897,7 @@ print.ggpairs <- function(
 
       ## bottom axis
       if (rowPos == numCol && showLabels) {
-        if (identical(plotObj$verbose, TRUE)) {
+        if (identical(plotObj$printInfo, TRUE)) {
           print("trying bottom axis")
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-b")
