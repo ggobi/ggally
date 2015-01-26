@@ -798,11 +798,13 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
 ggally_barDiag <- function(data, mapping, ...){
   mapping$y <- NULL
-  numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+  numer <- ("continuous" == plotting_data_type(data[, as.character(mapping$x)]))
 
   p <- ggplot(data = data, mapping)
 
-  if(numer){
+  if (is_date(data[,as.character(mapping$x)])) {
+    p <- p + geom_bar()
+  } else if(numer){
     # message("is numeric")
     p <- p + geom_bar(
       aes(
