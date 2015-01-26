@@ -131,8 +131,8 @@ ggcorr <- function(data,
   # add diagonal and options
   p = p  +
     geom_text(data = diag, aes(label = variable), ...) +
-    scale_x_discrete(breaks = NULL) +
-    scale_y_discrete(breaks = NULL) +
+    scale_x_discrete(breaks = NULL, limits = levels(M$row)) +
+    scale_y_discrete(breaks = NULL, limits = levels(M$variable)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +
     po.nopanel
