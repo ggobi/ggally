@@ -31,48 +31,53 @@ plot_types <- function(data)
 #' @param col2 y column
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-find_plot_type <- function(data,col1,col2)
-{
+find_plot_type <- function(data, col1, col2) {
 
-  y1Type <- "numeric"
-  y2Type <- "numeric"
-  
-  if(!is.null(attributes(data[,col1])) || all(is.character(data[,col1])))
-    y1Type <- "category"
-  if(!is.null(attributes(data[,col2])) || all(is.character(data[,col2])))
-    y2Type <- "category"
-  
-  if(col1 == col2)
-  {
-    if(y1Type == "numeric")
+  y1Type <- plotting_data_type(data[, col1])
+
+  # diag calculations
+  if (col1 == col2) {
+    if (y1Type == "continuous") {
       return("stat_bin-num")
-    else
+    } else {
       return("stat_bin-cat")
+    }
   }
-  
-  #cat(names(data)[col2],": ", y2Type,"\t",names(data)[col1],": ",y1Type,"\n")
-  return(get_plot_type(y1Type,y2Type))
-}
 
-#' Get Plot Type
-#' 
-#' Retrieves the type of plot for specific info
-#' 
-#' @param y1_type x type.  Either numeric or category
-#' @param y2_type y type.  Either numeric or category
-#' @keywords internal
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
-get_plot_type <- function(y1_type,y2_type)
-{
-  cats <- c(y1_type, y2_type) %in% "category"
-  if(TRUE %in% cats)
-  {
-    if(all(cats))
+  y2Type <- plotting_data_type(data[, col2])
+
+  #cat(names(data)[col2],": ", y2Type,"\t",names(data)[col1],": ",y1Type,"\n")
+  isCats <- c(y1Type, y2Type) %in% "category"
+  if (any(isCats)) {
+    if (all(isCats)) {
       return("mosaic")
-    if(cats[1])
+    }
+
+    if (isCats[1]) {
       return("box-hori")
-    return("box-vert")
+    } else {
+      return("box-vert")
+    }
   }
 
   return("scatterplot")
+
 }
+
+is_date <- function(x) {
+  is.POSIXt(x)
+}
+
+#' Get plotting data type
+#'
+#' @keywords internal
+plotting_data_type <- function(x) {
+  if (is_date(x)) {
+    "continuous"
+  } else if(!is.null(attributes(x)) || all(is.character(x))) {
+    "category"
+  } else {
+    "continuous"
+  }
+}
+
