@@ -47,8 +47,23 @@ test_that("character", {
 })
 
 test_that("printInfo", {
-  txt <- capture.output({a <- ggpairs(tips, printInfo = TRUE)})
+  txt <- capture.output({
+    a <- ggpairs(tips, printInfo = TRUE);
+  })
   expect_true(length(txt) > 0)
+  expect_false(is.list(a$plots[[2]]))
+  expect_false(is.list(a$plots[[8]]))
+
+  txt <- capture.output({
+    p1 <- getPlot(a, 1, 2)
+    p2 <- getPlot(a, 2, 1)
+    a <- putPlot(a, p1, 2, 1)
+    a <- putPlot(a, "blank", 1, 2)
+    print(a)
+  })
+  expect_true(length(txt) > 0)
+  expect_true(is.character(a$plots[[2]]))
+  expect_true(is.list(a$plots[[8]]))
 })
 
 test_that("blank plots", {
@@ -109,7 +124,7 @@ test_that("print", {
 
   fn <- function(axisLabels) {
     a <- ggpairs(
-      tips, 1:4, upper = "blank", diag = "blank",
+      tips, 1:4,
       axisLabels = axisLabels
     )
     a
@@ -122,6 +137,97 @@ test_that("print", {
   expect_true(TRUE)
 })
 
+test_that("subtypes", {
+
+# list of the different plot types to check
+# continuous
+#    points
+#    smooth
+#    density
+#    cor
+#   blank
+
+# combo
+#   box
+#   dot plot
+#   facethist
+#   facetdensity
+#   denstrip
+#   blank
+
+# discrete
+#   ratio
+#   facetbar
+#   blank
+
+  fn1 <- function(title, upper, diag, ...) {
+    ggpairs(
+      tips, 1:4,
+      axisLabels = "show",
+      title = title,
+      upper = upper,
+      lower = upper,
+      diag = diag,
+      ...
+    ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
+  }
+
+  fn2 <- function(...) {
+    fn1(..., color = "day")
+  }
+
+  conSubs = c("points", "smooth", "density", "cor", "blank")
+  comSubs = c("box", "dot", "facethist", "facetdensity", "denstrip", "blank")
+  disSubs = c("ratio", "facetbar", "blank")
+
+  conDiagSubs = c("density", "bar", "blank")
+  disDiagSubs = c("bar", "blank")
+
+  printShowStrips = c(TRUE, FALSE)
+
+  for(fn in list(fn1, fn2)){
+    for (i in 1:6) {
+      conSub <- ifelse(i <= length(conSubs), conSubs[i], "blank")
+      comSub <- ifelse(i <= length(comSubs), comSubs[i], "blank")
+      disSub <- ifelse(i <= length(disSubs), disSubs[i], "blank")
+
+      diagConSub <- ifelse(i <= length(conDiagSubs), conDiagSubs[i], "blank")
+      diagDisSub <- ifelse(i <= length(disDiagSubs), disDiagSubs[i], "blank")
+
+      if (i <= length(printShowStrips)) {
+        printShowStrip <- printShowStrips[i]
+      } else {
+        printShowStrip <- NULL
+      }
+
+      a <- fn(
+        title = paste(
+          "upper_lower = c(cont = ", conSub,
+            ", combo = ", comSub,
+            ", discrete = ", disSub,
+          "); diag = c(cont = ", diagConSub,
+            ", discrete = ", diagDisSub,
+          ")", sep = ""),
+        upper = list(
+          continuous = conSub,
+          combo = comSub,
+          discrete = disSub
+        ),
+        diag = list(
+          continuous = diagConSub,
+          discrete = diagDisSub
+        )
+      )
+
+      print(a, showStrips = printShowStrip)
+    }
+  }
+
+  a <- ggpairs(tips, 1:2, lower = "blank", diag = "blank", upper = list(continuous = "BAD_TYPE"))
+
+
+
+})
 
 
 
