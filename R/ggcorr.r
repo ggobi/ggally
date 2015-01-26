@@ -94,7 +94,7 @@ ggcorr <- function(data,
     axis.text.x = element_text(angle = -90))
   )
 
-  p = ggplot(M, aes(row, variable))
+  p = ggplot(M, aes(x = row, y = variable))
   g <- guide_legend(name)
 
   # apply main geom
