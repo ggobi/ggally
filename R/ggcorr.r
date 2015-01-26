@@ -109,7 +109,7 @@ ggcorr <- function(data,
     p = p +
       scale_fill_brewer(palette = palette) +
       geom_tile(aes(fill = value), colour = "white") +
-      guides(color = g)
+      guides(fill = g)
   }
 
   # add coefficient text
