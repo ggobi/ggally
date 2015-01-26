@@ -127,6 +127,8 @@ test_that("print", {
       tips, 1:4,
       axisLabels = axisLabels
     )
+    p <- getPlot(a, 2, 1)
+    a <- putPlot(a, p, 2, 1)
     a
   }
   for (axisLabels in c("show", "internal", "none")) {
