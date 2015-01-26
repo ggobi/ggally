@@ -64,13 +64,18 @@ find_plot_type <- function(data, col1, col2) {
 
 }
 
+#' Check if object is a date
+#'
+#' @keywords internal
+#' @param x vector
 is_date <- function(x) {
-  is.POSIXt(x)
+  inherits(x, c("POSIXt", "POSIXct", "POSIXlt", "Date"))
 }
 
 #' Get plotting data type
 #'
 #' @keywords internal
+#' @param x vector
 plotting_data_type <- function(x) {
   if (is_date(x)) {
     "continuous"
