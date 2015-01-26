@@ -17,7 +17,13 @@
 #'  @export
 #'  @examples
 #'  data(nasa)
-#'  nasaLate <- nasa[nasa$date >= as.POSIXct("1998-01-01"), ]
+#'  nasaLate <- nasa[
+#'    nasa$date >= as.POSIXct("1998-01-01") &
+#'    nasa$lat >= 20 &
+#'    nasa$lat <= 40 &
+#'    nasa$long >= -80 &
+#'    nasa$long <= -60
+#'  , ]
 #'  temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height=2.5)
 #'  ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
 #'    add_ref_lines(temp.gly, color = "grey90") +
@@ -113,14 +119,33 @@ ref_boxes <- function(data, fill = NULL) {
 
 # Glyph plot class -----------------------------------------------------------
 
+#' Glyph plot class
+#'
+#' @param data A data frame containing variables named in \code{x_major},
+#'   \code{x_minor}, \code{y_major} and \code{y_minor}.
+#' @param height,width The height and width of each glyph. Defaults to 95\% of
+#'  the \code{\link[ggplot2]{resolution}} of the data. Specify the width
+#'  absolutely by supplying a numeric vector of length 1, or relative to the
+#   resolution of the data by using \code{\link{rel}}.
+#' @param polar A logical of length 1, specifying whether the glyphs should
+#'   be drawn in polar coordinates.  Defaults to \code{FALSE}.
+#' @param x_major,y_major The name of the variable (as a
+#'   string) for the major x and y axes.  Together, the
+#    combination of \code{x_major} and \code{y_major} specifies a grid cell.
+#' @export
 glyphplot <- function(data, width, height, polar, x_major, y_major) {
   structure(data,
     width = width, height = height, polar = polar,
     x_major = x_major, y_major = y_major,
     class = c("glyphplot", "data.frame"))
 }
-is.glyphplot <- function(x) inherits(x, "glyphplot")
-
+#' @export
+#' @rdname glyphplot
+is.glyphplot <- function(x) {
+  inherits(x, "glyphplot")
+}
+#' @export
+#' @rdname glyphplot
 "[.glyphplot" <- function(x, ...) {
   glyphplot(NextMethod(),
     width = attr(x, "width"), height = attr(x, "height"),
@@ -128,6 +153,11 @@ is.glyphplot <- function(x) inherits(x, "glyphplot")
     polar = attr(x, "polar"))
 }
 
+#' @param x glyphplot to be printed
+#' @param ... ignored
+#' @export
+#' @rdname glyphplot
+#' @method print glyphplot
 print.glyphplot <- function(x, ...) {
   NextMethod()
   if (attr(x, "polar")) {
@@ -148,30 +178,61 @@ print.glyphplot <- function(x, ...) {
 
 # Relative dimensions --------------------------------------------------------
 
+#' Relative dimensions
+#'
+#' @param x numeric value between 0 and 1
+#' @export
+#' @author Di Cook \email{dicook@@iastate.edu}
 rel <- function(x) {
   structure(x, class = "rel")
 }
-print.rel <- function(x, ...) print(noquote(paste(x, " *", sep = "")))
-is.rel <- function(x) inherits(x, "rel")
+
+#' @rdname rel
+#' @param ... ignored
+#' @export
+print.rel <- function(x, ...) {
+  print(noquote(paste(x, " *", sep = "")))
+}
+
+#' @rdname rel
+#' @export
+is.rel <- function(x) {
+  inherits(x, "rel")
+}
 
 # Rescaling functions --------------------------------------------------------
 
+#' Rescaling functions
+#'
+#' @param x numeric vector
+#' @param xlim value used in \code{range}
+#' @name rescale01
+
+
+#' @export
+#' @rdname rescale01
 range01 <- function(x) {
   rng <- range(x, na.rm = TRUE)
   (x - rng[1]) / (rng[2] - rng[1])
 }
 
+#' @export
+#' @rdname rescale01
 max1 <- function(x) {
   x / max(x, na.rm = TRUE)
 }
+#' @export
+#' @rdname rescale01
 mean0 <- function(x) {
   x - mean(x, na.rm = TRUE)
 }
+#' @export
+#' @rdname rescale01
 min0 <- function(x) {
   x - min(x, na.rm = TRUE)
 }
-
-
+#' @export
+#' @rdname rescale01
 rescale01 <- function(x, xlim=NULL) {
   if (is.null(xlim)) {
 	  rng <- range(x, na.rm = TRUE)
@@ -180,7 +241,11 @@ rescale01 <- function(x, xlim=NULL) {
    }
    (x - rng[1]) / (rng[2] - rng[1])
 }
-rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
+#' @export
+#' @rdname rescale01
+rescale11 <- function(x, xlim=NULL) {
+  2 * rescale01(x, xlim) - 1
+}
 
 #' Add reference lines for each cell of the glyphmap.
 #'
@@ -191,7 +256,7 @@ rescale11 <- function(x, xlim=NULL) 2 * rescale01(x, xlim) - 1
 #' @export
 add_ref_lines <- function(data, color = "white", size = 1.5, ...){
   rl <- ref_lines(data)
-  geom_line(data = rl, color = color , size = size, ...)
+  geom_path(data = rl, color = color , size = size, ...)
 }
 
 #' Add reference boxes around each cell of the glyphmap.

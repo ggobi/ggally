@@ -11,7 +11,7 @@ BugReports: https://github.com/ggobi/ggally/issues
 Authors@R: c(
     person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs and ggally_*.  contributor for all functions."),
     person("Jason", "Crowley", role = "aut", email = "crowley.jason.s@gmail.com", comment = "ggparcoord"),
-    person("Di", "Cook", role = c("aut", "ths"), email = "dicook@iastate.edu", comment = "ggscatmat"),
+    person("Di", "Cook", role = c("aut", "ths"), email = "dicook@iastate.edu", comment = "ggscatmat, gglyph"),
     person("Heike", "Hofmann", role = "ths", email = "hofmann@iastate.edu"),
     person("Hadley", "Wickham", role = "ths", email = "h.wickham@iastate.edu"),
     person("Francois", "Briatte", role = "aut", email = "f.briatte@gmail.com", comment = "ggcorr, ggnet"),

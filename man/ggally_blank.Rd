@@ -2,9 +2,12 @@
 % Please edit documentation in R/gg-plots.r
 \name{ggally_blank}
 \alias{ggally_blank}
+\alias{ggally_blankDiag}
 \title{Blank}
 \usage{
 ggally_blank(...)
+
+ggally_blankDiag(...)
 }
 \arguments{
 \item{...}{other arguments ignored}
