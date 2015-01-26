@@ -1,7 +1,7 @@
 #' Plot Types
-#' 
+#'
 #' Retrieves the type of plot that should be used for all combinations
-#' 
+#'
 #' @param data data set to be used
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords internal
@@ -9,21 +9,23 @@ plot_types <- function(data)
 {
   namesD <- names(data)
   dataInfo <- array("", c(ncol(data)^2,5))
-  
+
   #horizontal then vertical
-  for(j in 1:ncol(data))
-    for(i in 1:ncol(data))
+  for (j in 1:ncol(data)) {
+    for (i in 1:ncol(data)) {
       dataInfo[(i-1)*ncol(data)+j,] <- c(find_plot_type(data,i,j),namesD[j],namesD[i],j,i)
-      
+    }
+  }
+
   dataInfo <- as.data.frame(dataInfo)
   colnames(dataInfo) <- c("Type", "xvar", "yvar","posx","posy")
   dataInfo
 }
 
 #' Find Plot Types
-#' 
+#'
 #' Retrieves the type of plot for the specific columns
-#' 
+#'
 #' @param data data set to be used
 #' @param col1 x column
 #' @param col2 y column
