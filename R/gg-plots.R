@@ -765,7 +765,7 @@ ggally_ratio <- function(data){
 ggally_densityDiag <- function(data, mapping, ...){
 
   p <- ggplot(data, mapping) +
-    scale_x_continuous() +
+    # scale_x_continuous() +
     scale_y_continuous() +
     stat_density(
       aes(
