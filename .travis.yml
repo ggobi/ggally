@@ -44,9 +44,8 @@ notifications:
     on_success: change
     on_failure: change
 
-branches:
-  only:
-    - master
-    - dev
-    - vignette_travis
+# branches:
+#   only:
+#     - master
+#     - dev
 
