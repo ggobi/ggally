@@ -158,7 +158,7 @@ ggsurv_s <- function(
   }
 
   if (identical(plot.cens, TRUE) ) {
-    if (length(dat.cens) == 0){
+    if (nrow(dat.cens) == 0){
       stop('There are no censored observations')
     }
     pl <- pl + geom_point(
@@ -225,7 +225,7 @@ ggsurv_m <- function(
     ggtitle(main)
 
   pl <- if(surv.col[1] != 'gg.def'){
-    scaleValues <- if (length(surv.col == 1)) {
+    scaleValues <- if (length(surv.col) == 1) {
       rep(surv.col, strata)
     } else{
       surv.col
@@ -244,13 +244,13 @@ ggsurv_m <- function(
   pl <- pl + scale_linetype_manual(name = gr.name, values = lineScaleValues)
 
   if(identical(CI,TRUE)) {
-    if(length(surv.col) > 1 && length(lty.est) > 1){
+    if(length(surv.col) > 1 || length(lty.est) > 1){
       stop('Either surv.col or lty.est should be of length 1 in order to plot 95% CI with multiple strata')
     }
 
     stepLty <- if ((length(surv.col) > 1 | surv.col == 'gg.def')[1]) {
       lty.ci
-    } else{
+    } else {
       surv.col
     }
     pl <- pl +
@@ -259,8 +259,8 @@ ggsurv_m <- function(
   }
 
   if (identical(plot.cens, TRUE) ){
-    if (length(dat.cens) == 0) {
-      stop ('There are no censored observations')
+    if (nrow(dat.cens) == 0) {
+      stop('There are no censored observations')
     }
     pl <- pl + geom_point(
       data    = dat.cens,

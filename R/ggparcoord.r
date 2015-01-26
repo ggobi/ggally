@@ -171,55 +171,61 @@ ggparcoord <- function(
   ### Error Checking ###
   if(is.null(groupColumn)) {
     if(any(tolower(order) %in% c("anyclass","allclass"))) {
-      stop("can't use the order methods anyClass or allClass without specifying groupColumn")
+      stop("can't use the 'order' methods anyClass or allClass without specifying groupColumn")
     }
   } else if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
-    stop("invalid value for groupColumn; must be a single numeric or character index")
+    stop("invalid value for 'groupColumn'; must be a single numeric or character index")
   }
 
   if(!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
-    stop("invalid value for scale; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
+    stop("invalid value for 'scale'; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
   }
 
   if(!(centerObsID %in% 1:dim(data)[1])) {
-    stop("invalid value for centerObsID; must be a single numeric row index")
+    stop("invalid value for 'centerObsID'; must be a single numeric row index")
   }
 
   if(!(tolower(missing) %in% c("exclude","mean","median","min10","random"))) {
-    stop("invalid value for missing; must be one of 'exclude','mean','median','min10','random'")
+    stop("invalid value for 'missing'; must be one of 'exclude','mean','median','min10','random'")
   }
 
-  if(!(is.numeric(order) || (is.character(order) && (order %in% c('skewness','allClass','anyClass',
-    'Outlying','Skewed','Clumpy', 'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'))))) {
-    stop("invalid value for order; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+  if(!(
+    is.numeric(order) || (
+      is.character(order) &&
+      (order %in% c(
+        'skewness','allClass','anyClass', 'Outlying','Skewed','Clumpy',
+        'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'
+      ))
+    )) ) {
+    stop("invalid value for 'order'; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
   }
 
   if(!(is.logical(showPoints))) {
-    stop("invalid value for showPoints; must be a logical operator")
+    stop("invalid value for 'showPoints'; must be a logical operator")
   }
 
   alphaLinesIsCharacter <- is.character(alphaLines)
   if(alphaLinesIsCharacter) {
+    if(!(alphaLines %in% names(data))) {
+      stop("'alphaLines' column is missing in data")
+    }
+
     alphaRange <- range(data[,alphaLines])
     if (any(is.na(alphaRange))) {
-      if(alphaLines %in% names(data)) {
-        stop("missing data in alphaLines column")
-      } else {
-        stop("alphaLines column is missing in data")
-      }
+      stop("missing data in 'alphaLines' column")
     }
 
     if (alphaRange[1] < 0 || alphaRange[2] > 1) {
-      stop("invalid value for alphaLines column; max range must be from 0 to 1")
+      stop("invalid value for 'alphaLines' column; max range must be from 0 to 1")
     }
     alphaVar <- data[,alphaLines]
 
   } else if((alphaLines < 0) || (alphaLines > 1)) {
-    stop("invalid value for alphaLines; must be a scalar value between 0 and 1")
+    stop("invalid value for 'alphaLines'; must be a scalar value between 0 and 1")
   }
 
   if(!(is.logical(boxplot))) {
-    stop("invalid value for boxplot; must be a logical operator")
+    stop("invalid value for 'boxplot'; must be a logical operator")
   }
 
   if(is.logical(splineFactor)) {
@@ -229,7 +235,7 @@ ggparcoord <- function(
       splineFactor = 0
     }
   } else if (! is.numeric(splineFactor)) {
-    splineFactor = 0
+    stop("invalid value for 'splineFactor'; must be a logical or numeric value")
   }
 
 
@@ -250,20 +256,18 @@ ggparcoord <- function(
   # data <- data[, columns]
 
   # Change character vars to factors
-  vartypes <- get.VarTypes(data[, columns])
-  char.vars <- names(vartypes)[vartypes == "character"]
+  char.vars <- column_is_character(data)
   if(length(char.vars) >= 1) {
-    for(i in 1:length(char.vars)) {
-      data[,char.vars[i]] <- factor(data[,char.vars[i]])
+    for(char.var in char.vars) {
+      data[,char.var] <- factor(data[,char.var])
     }
   }
 
   # Change factors to numeric
-  vartypes <- get.VarTypes(data[, columns])
-  fact.vars <- names(vartypes)[vartypes == "factor"]
+  fact.vars <- column_is_factor(data)
   if(length(fact.vars) >= 1) {
-    for(i in 1:length(fact.vars)) {
-      data[,fact.vars[i]] <- as.numeric(data[,fact.vars[i]])
+    for(fact.var in fact.vars) {
+      data[,fact.var] <- as.numeric(data[,fact.var])
     }
   }
 
@@ -386,12 +390,8 @@ ggparcoord <- function(
   data.m <- melt(data,id.vars=meltIDVars, measure.vars = columns)
 
   ### Ordering ###
-  if(length(order) > 1) {
-     if(is.numeric(order)) {
-       data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
-     } else {
-       data.m$variable <- factor(data.m$variable,levels=order)
-     }
+  if(length(order) > 1 & is.numeric(order)) {
+     data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
   }
   else if(order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
     "Stringy","Monotonic")) {
@@ -508,12 +508,19 @@ ggparcoord <- function(
 
 #' Get vector of variable types from data frame
 #'
+#' @keywords internal
 #' @param df data frame to extract variable types from
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
 #' @return character vector with variable types, with names corresponding to
 #'   the variable names from df
-get.VarTypes <- function(df) {
-  return(unlist(lapply(unclass(df),class)))
+column_is_character <- function(df) {
+  x <- unlist(lapply(unclass(df),is.character))
+  names(x)[x]
+}
+#' @rdname column_is_character
+column_is_factor <- function(df) {
+  x <- unlist(lapply(unclass(df),is.factor))
+  names(x)[x]
 }
 
 #' Find order of variables

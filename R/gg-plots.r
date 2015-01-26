@@ -1,9 +1,14 @@
 # add global variable
-agv <- function(...) {
-  if(getRversion() >= "2.15.1") {
-    utils::globalVariables(...)
-  }
+if(getRversion() >= "2.15.1") {
+  utils::globalVariables(unique(c(
+    "labelp", # cor plot
+    c("..density..", "..scaled..", "x"), # facetdensitystrip plot
+    c("..scaled..", "x"), #density diagonal plot
+    c("x", "y", "lab"), # internal axis plot
+    c("x", "y", "result", "freq") # fluctuation plot
+  )))
 }
+
 
 
 #' Plots the Scatter Plot
@@ -110,7 +115,6 @@ ggally_density <- function(data, mapping, ...){
   p
 }
 
-agv("labelp")
 #' Correlation from the Scatter Plot
 #'
 #' Estimate correlation from the given data.
@@ -610,7 +614,6 @@ ggally_denstrip <- function(data,mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
-agv(c("..density..", "..scaled..", "x"))
 #' Plots a density plot with facets or a tile plot with facets
 #'
 #' Make Tile Plot as densely as possible.
@@ -737,7 +740,6 @@ ggally_ratio <- function(data){
   p
 }
 
-agv(c("..scaled..", "x"))
 #' Plots the Density Plots by Using Diagonal
 #'
 #' Plots the density plots by using Diagonal.
@@ -953,7 +955,6 @@ get_x_axis_labels <- function(p, xRange) {
   axisLabs
 }
 
-agv(c("x", "y", "lab"))
 #' Internal Axis Labeling Plot for ggpairs
 #'
 #' This function is used when \code{axisLabels == "internal"}.
@@ -1112,7 +1113,6 @@ ggally_facetbar <- function(data, mapping, ...){
 
 
 
-agv(c("x", "y", "result", "freq"))
 #' Fluctuation plot
 #'
 #' Create a fluctuation plot.
@@ -1222,7 +1222,6 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   p
 }
 
-agv(c("X", "Y"))
 #' Blank
 #'
 #' Draws nothing.
@@ -1237,7 +1236,7 @@ ggally_blank <- function(...){
   ignored <- aes(...)
   a <- data.frame(X=1:2, Y=1:2)
 
-  p <- ggplot(data = a, aes(x = X, y = Y)) + geom_point( colour = "transparent") +
+  p <- ggplot(data = a, aes_string(x = "X", y = "Y")) + geom_point( colour = "transparent") +
     theme(
       axis.line         = element_blank(),
       axis.text.x       = element_blank(),
@@ -1261,4 +1260,10 @@ ggally_blank <- function(...){
     )
   p$subType <- p$type <- "blank"
   p
+}
+
+#' @rdname ggally_blank
+#' @export
+ggally_blankDiag <- function(...) {
+  ggally_blank(...)
 }
