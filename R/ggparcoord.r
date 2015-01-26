@@ -337,9 +337,15 @@ ggparcoord <- function(
   }
   else if(tolower(missing) %in% c("mean", "median", "min10", "random")) {
     missingFns <- list(
-      mean = function(x){mean(x, na.rm = TRUE)},
-      median = function(x){median(x, na.rm = TRUE)},
-      min10 = function(x){0.9 * min(x, na.rm = TRUE)},
+      mean = function(x) {
+        mean(x, na.rm = TRUE)
+      },
+      median = function(x) {
+        median(x, na.rm = TRUE)
+      },
+      min10 = function(x){
+        0.9 * min(x, na.rm = TRUE)
+      },
       random = function(x) {
         num <- sum(is.na(x))
         idx <- sample(which(!is.na(x)),num,replace=TRUE)
