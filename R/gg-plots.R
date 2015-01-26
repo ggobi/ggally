@@ -182,7 +182,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   yCol <- as.character(mapping$y)
 
   if (is_date(data[,xCol]) || is_date(data[,yCol])) {
-    message("Can not find correlation of 'Date' variables.  Returning a 'blank' plot")
+    message("Can not calculate correlation of 'Date' variables.  Returning a 'blank' plot")
     return(ggally_blank())
   }
 
