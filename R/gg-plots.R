@@ -180,6 +180,12 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
 
   xCol <- as.character(mapping$x)
   yCol <- as.character(mapping$y)
+
+  if (is_date(data[,xCol]) || is_date(data[,yCol])) {
+    message("Can not find correlation of 'Date' variables.  Returning a 'blank' plot")
+    return(ggally_blank())
+  }
+
   colorCol <- as.character(mapping$colour)
 
   if (corUse %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
