@@ -660,7 +660,8 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
     p <- p +
       geom_bar(
-        mapping = aes(fill = ..density..)
+        mapping = aes(fill = ..density..),
+        ...
       ) +
       coord_cartesian(
         ylim = c(0,1)
