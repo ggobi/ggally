@@ -392,7 +392,6 @@ ggparcoord <- function(
     mappingNames <- names(mapping)
   }
 
-  print(meltIDVars)
   data.m <- melt(data,id.vars=meltIDVars, measure.vars = columns)
 
   ### Ordering ###
@@ -439,8 +438,6 @@ ggparcoord <- function(
   }
   mapping2 <- addAndOverwriteAes(mapping2,mapping)
   # mapping2 <- addAndOverwriteAes(aes_string(size = I(0.5)), mapping2)
-  print(mapping2)
-  print(head(data.m))
   p <- ggplot(data=data.m,mapping=mapping2)
 
   if(!is.null(shadeBox)) {
