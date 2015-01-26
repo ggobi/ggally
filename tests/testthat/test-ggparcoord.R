@@ -92,7 +92,21 @@ test_that("groupColumn", {
 
   # column 3 has a character
   # column 4 has a factor
-  p <- ggparcoord(data = ds2,columns = c(1,3:10), groupColumn = 2)
+  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 2)
+  expect_true("color" %in% levels(p$data$variable))
+  expect_true("clarity" %in% levels(p$data$variable))
+  expect_true(is.numeric(p$data$value))
+
+  p <- ggparcoord(
+    data = ds2,
+    columns = c(
+      "carat", "color", "clarity",
+      "depth", "table", "price",
+      "x", "y", "z"
+    ),
+    order = c(1,3:10),
+    groupColumn = "cut"
+  )
   expect_true("color" %in% levels(p$data$variable))
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
