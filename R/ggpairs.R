@@ -1001,10 +1001,11 @@ print.ggpairs <- function(
 #'
 is_blank_plot <- function(p){
   if ( !is.null(p$subType) && !is.null(p$type)) {
-    p$subType == "blank" && p$type == "blank"
+    ans <- p$subType == "blank" && p$type == "blank"
   } else {
-    FALSE
+    ans <- FALSE
   }
+  ans
 }
 
 #' Add new aes
