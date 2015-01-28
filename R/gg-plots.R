@@ -182,8 +182,17 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   yCol <- as.character(mapping$y)
 
   if (is_date(data[,xCol]) || is_date(data[,yCol])) {
-    message("Can not calculate correlation of 'Date' variables.  Returning a 'blank' plot")
-    return(ggally_blank())
+
+    # make sure it's a data.frame, as data.tables don't work well
+    if (! identical(class(data),"data.frame")) {
+      data <- as.data.frame(data)
+    }
+
+    for (col in c(xCol, yCol)) {
+      if (is_date(data[,col])) {
+        data[, col] <- as.numeric(data[, col])
+      }
+    }
   }
 
   colorCol <- as.character(mapping$colour)
