@@ -648,6 +648,27 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   p
 }
 
+#' @rdname getPlot
+#' @usage \method{[}{ggpairs}(x, i, j, ...)
+#' @export
+`[.ggpairs` <- function(x, i, j, ...) {
+  getPlot(x, i, j)
+}
+
+#' @rdname putPlot
+#' @usage \method{[}{ggpairs}(x, i, j, ...) <- value
+#' @export
+`[<-.ggpairs` <- function(x, i, j, ..., value) {
+  # x = matrix
+  # i = first subset
+  # j = second subset
+  # y = value
+  xNew <- putPlot(x, value, i, j)
+  xNew
+}
+
+
+
 #' Get theme element
 #'
 #' Get the info from theme or a default value
