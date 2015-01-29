@@ -143,9 +143,6 @@ ggally_density <- function(data, mapping, ...){
 #'  )
 ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...){
 
-  corMethod <- as.character(substitute(corMethod))
-  corUse <- as.character(substitute(corUse))
-
   useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
   corUse <-  pmatch(corUse, useOptions)
   if (is.na(corUse)) {
