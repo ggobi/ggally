@@ -592,6 +592,10 @@ singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
       list(class.names,var.names))
     for(i in 1:length(class.names)) {
       f.stats[i,] <- apply(axisVars,2,function(x) {
+        print(classVar)
+        print(class.names[i])
+        print(classVar == class.names[i])
+        print(as.factor(classVar == class.names[i]))
         return(summary(lm(x ~ as.factor(classVar == class.names[i])))$fstatistic[1])
       })
     }
