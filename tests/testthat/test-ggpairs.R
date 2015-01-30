@@ -48,7 +48,7 @@ test_that("character", {
 
 test_that("printInfo", {
   txt <- capture.output({
-    a <- ggpairs(tips, printInfo = TRUE, params = c(binwidth = 1))
+    a <- ggpairs(tips, 1:2, printInfo = TRUE, params = c(binwidth = 1))
   })
   expect_true(length(txt) > 0)
   expect_false(is.list(a$plots[[2]]))
