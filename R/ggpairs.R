@@ -648,10 +648,22 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   p
 }
 
+do_i_j_check <- function(i,j) {
+  if (length(i) > 1) {
+    stop("'i' may only be a single numeric value")
+  }
+  if (length(j) > 1) {
+    stop("'j' may only be a single numeric value")
+  }
+  NULL
+}
+
 #' @rdname getPlot
 #' @usage \method{[}{ggpairs}(x, i, j, ...)
 #' @export
 `[.ggpairs` <- function(x, i, j, ...) {
+  do_i_j_check(i,j)
+
   getPlot(x, i, j)
 }
 
@@ -663,6 +675,8 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
   # i = first subset
   # j = second subset
   # y = value
+  do_i_j_check(i,j)
+
   xNew <- putPlot(x, value, i, j)
   xNew
 }
