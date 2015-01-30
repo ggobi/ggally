@@ -91,6 +91,10 @@ test_that("blank plots", {
     }
   }
 
+  a <- ggpairs(tips, columnsUsed)
+  a[1,1] <- qplot(total_bill, data = tips)
+  expect_false(is_blank_plot(a[1,1]))
+
 })
 
 test_that("stops", {
