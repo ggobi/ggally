@@ -473,7 +473,9 @@ ggpairs <- function(
     axisLabels = axisLabels,
     columnLabels = columnLabels,
     legends = legends,
-    gg = NULL
+    gg = NULL,
+    nrow = length(columns),
+    ncol = length(columns)
   )
 
   attributes(plotMatrix)$class <- c("gg", "ggpairs")

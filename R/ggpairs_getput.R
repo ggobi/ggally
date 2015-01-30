@@ -39,7 +39,7 @@ eval_ggpair <- function(txt, ggally_data) {
 #' # custom_car
 putPlot <- function(x, value, i, j){
 
-  pos <- j + (length(x$columns)) * (i - 1)
+  pos <- j + (x$ncol * (i - 1))
   x$plots[[pos]] <- value
 
   if (x$printInfo) {
