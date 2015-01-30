@@ -52,7 +52,7 @@ test_that("printInfo", {
   })
   expect_true(length(txt) > 0)
   expect_false(is.list(a$plots[[2]]))
-  expect_false(is.list(a$plots[[8]]))
+  expect_false(is.list(a$plots[[3]]))
 
   txt <- capture.output({
     p1 <- a[1, 2]
@@ -63,7 +63,7 @@ test_that("printInfo", {
   })
   expect_true(length(txt) > 0)
   expect_true(is.character(a$plots[[2]]))
-  expect_true(is.list(a$plots[[8]]))
+  expect_true(is.list(a$plots[[3]]))
 })
 
 test_that("blank plots", {
