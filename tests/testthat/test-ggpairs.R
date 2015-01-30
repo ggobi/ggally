@@ -55,10 +55,10 @@ test_that("printInfo", {
   expect_false(is.list(a$plots[[8]]))
 
   txt <- capture.output({
-    p1 <- getPlot(a, 1, 2)
-    p2 <- getPlot(a, 2, 1)
-    a <- putPlot(a, p1, 2, 1)
-    a <- putPlot(a, "blank", 1, 2)
+    p1 <- a[1, 2]
+    p2 <- a[2, 1]
+    a[2,1] <- p1
+    a[1,2] <- "blank"
     print(a)
   })
   expect_true(length(txt) > 0)
@@ -74,19 +74,19 @@ test_that("blank plots", {
   for (i in 1:3) {
     for (j in 1:3) {
       if(i < j) {
-        expect_true(is_blank_plot(getPlot(au, i, j)))
-        expect_false(is_blank_plot(getPlot(ad, i, j)))
-        expect_false(is_blank_plot(getPlot(al, i, j)))
+        expect_true(  is_blank_plot(au[i, j]))
+        expect_false( is_blank_plot(ad[i, j]))
+        expect_false( is_blank_plot(al[i, j]))
       }
       if(i > j) {
-        expect_false(is_blank_plot(getPlot(au, i, j)))
-        expect_false(is_blank_plot(getPlot(ad, i, j)))
-        expect_true(is_blank_plot(getPlot(al, i, j)))
+        expect_false( is_blank_plot(au[i, j]))
+        expect_false( is_blank_plot(ad[i, j]))
+        expect_true(  is_blank_plot(al[i, j]))
       }
       if(i == j) {
-        expect_false(is_blank_plot(getPlot(au, i, j)))
-        expect_true(is_blank_plot(getPlot(ad, i, j)))
-        expect_false(is_blank_plot(getPlot(al, i, j)))
+        expect_false( is_blank_plot(au[i, j]))
+        expect_true(  is_blank_plot(ad[i, j]))
+        expect_false( is_blank_plot(al[i, j]))
       }
     }
   }
@@ -113,6 +113,14 @@ test_that("stops", {
   #  variables: 'colour' have non standard format: 'total_bill + tip'.
   expect_error(ggpairs(tips, color = "total_bill + tip"))
 
+  a <- ggpairs(tips)
+  p <- ggally_blankDiag()
+  expect_error(a["total_bill", 1], "'i' may only be")
+  expect_error(a[1, "total_bill"], "'j' may only be")
+  expect_error(a["total_bill", 1] <- p, "'i' may only be")
+  expect_error(a[1, "total_bill"] <- p, "'j' may only be")
+
+
 })
 
 test_that("print", {
@@ -128,8 +136,8 @@ test_that("print", {
       axisLabels = axisLabels,
       params = c(binwidth = 1)
     )
-    p <- getPlot(a, 2, 1)
-    a <- putPlot(a, p, 2, 1)
+    p <- a[2, 1]
+    a[2,1] <- p
     a
   }
   for (axisLabels in c("show", "internal", "none")) {
@@ -253,11 +261,13 @@ test_that("dates", {
   class(x) <- c("NOT_data.frame", "data.frame")
 
   a <- ggpairs(x, c(2,1,4,3), color = "cat", lower = "blank", upper = list(continuous = "cor"))
-  p <- getPlot(a, 1, 2)
+  p <- a[1, 2]
   expect_equal(p$type, "continuous")
   expect_equal(p$subType, "cor")
 
 })
+
+
 
 
 
