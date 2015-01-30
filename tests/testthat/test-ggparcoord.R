@@ -2,6 +2,7 @@
 
 context("ggparcoord")
 
+set.seed(123)
 data(diamonds, package="ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
 
