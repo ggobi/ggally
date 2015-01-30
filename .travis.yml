@@ -32,7 +32,6 @@ install:
   - ./travis-tool.sh install_deps
 
 script:
-  - Rscript -e 'library(covr);coveralls()'
   - ./travis-tool.sh run_tests
 
 after_success:
