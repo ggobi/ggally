@@ -102,7 +102,9 @@ getPlot <- function(x, i, j){
   p
 }
 
-do_i_j_check <- function(i,j) {
+
+
+check_i_j <- function(i,j) {
   if ((length(i) > 1) || (mode(i) != "numeric")) {
     stop("'i' may only be a single numeric value")
   }
@@ -117,7 +119,7 @@ do_i_j_check <- function(i,j) {
 #' @param ... ignored
 #' @export
 `[.ggpairs` <- function(x, i, j, ...) {
-  do_i_j_check(i,j)
+  check_i_j(i,j)
 
   getPlot(x, i, j)
 }
@@ -131,7 +133,7 @@ do_i_j_check <- function(i,j) {
   # i = first subset
   # j = second subset
   # y = value
-  do_i_j_check(i,j)
+  check_i_j(i,j)
 
   xNew <- putPlot(x, value, i, j)
   xNew
