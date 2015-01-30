@@ -68,7 +68,7 @@ getPlot <- function(x, i, j){
     cat("i: ",i," j: ",j,"\n")
   }
 
-  pos <- j + (length(x$columns)) * (i - 1)
+  pos <- j + (x$ncol * (i - 1))
 
   if (x$printInfo) {
     cat("Plot List Spot: ",pos,"\n")
