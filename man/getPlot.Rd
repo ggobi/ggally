@@ -5,16 +5,18 @@
 \alias{getPlot}
 \title{getPlot}
 \usage{
-getPlot(plotMatrix, rowFromTop, columnFromLeft)
+getPlot(x, i, j)
 
 \method{[}{ggpairs}(x, i, j, ...)
 }
 \arguments{
-\item{plotMatrix}{ggpair object to select from}
+\item{x}{ggpair object to select from}
 
-\item{rowFromTop}{row from the top}
+\item{i}{row from the top}
 
-\item{columnFromLeft}{column from the left}
+\item{j}{column from the left}
+
+\item{...}{ignored}
 }
 \description{
 Retrieves the ggplot object at the desired location.

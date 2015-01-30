@@ -5,18 +5,20 @@
 \alias{putPlot}
 \title{Put Plot}
 \usage{
-putPlot(plotMatrix, plotObj, rowFromTop, columnFromLeft)
+putPlot(x, value, i, j)
 
 \method{[}{ggpairs}(x, i, j, ...) <- value
 }
 \arguments{
-\item{plotMatrix}{ggally object to be altered}
+\item{x}{ggally object to be altered}
 
-\item{plotObj}{ggplot object to be placed}
+\item{value}{ggplot object to be placed}
 
-\item{rowFromTop}{row from the top}
+\item{i}{row from the top}
 
-\item{columnFromLeft}{column from the left}
+\item{j}{column from the left}
+
+\item{...}{ignored}
 }
 \description{
 Function to place your own plot in the layout.
@@ -28,7 +30,7 @@ custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Cu
   plot <- plot +
     ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
     ggplot2::scale_colour_discrete(l=40)
-custom_car[1,2] <- plot, 1, 2
+custom_car[1,2] <- plot
 personal_plot <- ggally_text(
   "ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"
 )

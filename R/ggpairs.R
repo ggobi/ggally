@@ -563,10 +563,10 @@ vplayout <- function(x, y) {
 #'
 #' Function to place your own plot in the layout.
 #'
-#' @param plotMatrix ggally object to be altered
-#' @param plotObj ggplot object to be placed
-#' @param rowFromTop row from the top
-#' @param columnFromLeft column from the left
+#' @param x ggally object to be altered
+#' @param value ggplot object to be placed
+#' @param i row from the top
+#' @param j column from the left
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
@@ -577,31 +577,31 @@ vplayout <- function(x, y) {
 #'   plot <- plot +
 #'     ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
 #'     ggplot2::scale_colour_discrete(l=40)
-#' custom_car[1,2] <- plot, 1, 2
+#' custom_car[1,2] <- plot
 #' personal_plot <- ggally_text(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
 #' )
 #' custom_car[1,3] <- personal_plot
 #' # custom_car
-putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
+putPlot <- function(x, value, i, j){
 
-  pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
-  plotMatrix$plots[[pos]] <- plotObj
+  pos <- j + (length(x$columns)) * (i - 1)
+  x$plots[[pos]] <- value
 
-  if (plotMatrix$printInfo) {
+  if (x$printInfo) {
     cat("\n\nDone placing plot: ",pos,"\n")
   }
 
-  plotMatrix
+  x
 }
 
 #' getPlot
 #'
 #' Retrieves the ggplot object at the desired location.
 #'
-#' @param plotMatrix ggpair object to select from
-#' @param rowFromTop row from the top
-#' @param columnFromLeft column from the left
+#' @param x ggpair object to select from
+#' @param i row from the top
+#' @param j column from the left
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
@@ -609,23 +609,23 @@ putPlot <- function(plotMatrix, plotObj, rowFromTop, columnFromLeft){
 #'  data(tips, package = "reshape")
 #'  plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
 #'  plotMatrix2[1, 2]
-getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
-  if (plotMatrix$printInfo) {
-    cat("rowFromTop: ",rowFromTop," columnFromLeft: ",columnFromLeft,"\n")
+getPlot <- function(x, i, j){
+  if (x$printInfo) {
+    cat("i: ",i," j: ",j,"\n")
   }
 
-  pos <- columnFromLeft + (length(plotMatrix$columns)) * (rowFromTop - 1)
+  pos <- j + (length(x$columns)) * (i - 1)
 
-  if (plotMatrix$printInfo) {
+  if (x$printInfo) {
     cat("Plot List Spot: ",pos,"\n")
   }
 
-  plot_text <- plotMatrix$plots[[pos]]
+  plot_text <- x$plots[[pos]]
   if (is.character(plot_text)) {
     if (plot_text != "blank") {
-      p <- eval_ggpair(plot_text, plotMatrix$data)
-      if (! is.null(plotMatrix$gg)) {
-        p <- p + plotMatrix$gg
+      p <- eval_ggpair(plot_text, x$data)
+      if (! is.null(x$gg)) {
+        p <- p + x$gg
       }
       # attributes( p)$class <- "ggplot"
     } else {
@@ -635,7 +635,7 @@ getPlot <- function(plotMatrix, rowFromTop, columnFromLeft){
     p <- plot_text
   }
 
-  if (plotMatrix$printInfo || plotMatrix$verbose) {
+  if (x$printInfo || x$verbose) {
     cat("Plot #",pos)
     if (is.character(plot_text) ) {
       if (plot_text == "blank") {
@@ -660,6 +660,7 @@ do_i_j_check <- function(i,j) {
 
 #' @rdname getPlot
 #' @usage \method{[}{ggpairs}(x, i, j, ...)
+#' @param ... ignored
 #' @export
 `[.ggpairs` <- function(x, i, j, ...) {
   do_i_j_check(i,j)
@@ -669,6 +670,7 @@ do_i_j_check <- function(i,j) {
 
 #' @rdname putPlot
 #' @usage \method{[}{ggpairs}(x, i, j, ...) <- value
+#' @param ... ignored
 #' @export
 `[<-.ggpairs` <- function(x, i, j, ..., value) {
   # x = matrix
