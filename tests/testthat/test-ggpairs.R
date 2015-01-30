@@ -236,7 +236,26 @@ test_that("subtypes", {
   a <- ggpairs(tips, 1:2, lower = "blank", diag = "blank", upper = list(continuous = "BAD_TYPE"), params = c(binwidth = 1))
   expect_true(TRUE)
 
+})
 
+test_that("dates", {
+  startDt <- as.POSIXct("2000-01-01", tz = "UTC")
+  endDt   <- as.POSIXct("2000-04-01", tz = "UTC")
+
+  dts <- seq(startDt, endDt, 86400) # 86400 = as.numeric(ddays(1))
+  x <- data.frame(
+    date = dts,
+    x1 = rnorm(length(dts)),
+    x2 = rnorm(length(dts)),
+    cat = sample(c("a", "b", "c"), length(dts), replace = TRUE)
+  )
+
+  class(x) <- c("NOT_data.frame", "data.frame")
+
+  a <- ggpairs(x, c(2,1,4,3), color = "cat", lower = "blank", upper = list(continuous = "cor"))
+  p <- getPlot(a, 1, 2)
+  expect_equal(p$type, "continuous")
+  expect_equal(p$subType, "cor")
 
 })
 
