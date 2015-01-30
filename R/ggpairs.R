@@ -649,10 +649,10 @@ getPlot <- function(x, i, j){
 }
 
 do_i_j_check <- function(i,j) {
-  if (length(i) > 1) {
+  if ((length(i) > 1) || (mode(i) != "numeric")) {
     stop("'i' may only be a single numeric value")
   }
-  if (length(j) > 1) {
+  if ((length(j) > 1) || (mode(j) != "numeric")) {
     stop("'j' may only be a single numeric value")
   }
   NULL
