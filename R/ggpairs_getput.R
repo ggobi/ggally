@@ -8,7 +8,7 @@
 eval_ggpair <- function(txt, ggally_data) {
   con <- textConnection(txt)
   on.exit(close(con))
-  output <- eval(parse(con))
+  output <- eval(parse(con), envir = list(ggally_data = ggally_data))
   output
 }
 
