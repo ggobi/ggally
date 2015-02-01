@@ -39,7 +39,7 @@ eval_ggpair <- function(txt, ggally_data) {
 #' # custom_car
 putPlot <- function(x, value, i, j){
 
-  pos <- j + (x$ncol * (i - 1))
+  pos <- get_pos(x,i,j)
   x$plots[[pos]] <- value
 
   if (x$printInfo) {
@@ -68,7 +68,7 @@ getPlot <- function(x, i, j){
     cat("i: ",i," j: ",j,"\n")
   }
 
-  pos <- j + (x$ncol * (i - 1))
+  pos <- get_pos(x,i,j)
 
   if (x$printInfo) {
     cat("Plot List Spot: ",pos,"\n")
@@ -102,6 +102,15 @@ getPlot <- function(x, i, j){
   p
 }
 
+
+get_pos <- function(x,i,j) {
+  if (!identical(x$byrow, TRUE)) {
+    pos <- i + (x$nrow * (j - 1))
+  } else {
+    pos <- j + (x$ncol * (i - 1))
+  }
+  pos
+}
 
 
 check_i_j <- function(i,j) {

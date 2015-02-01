@@ -58,10 +58,6 @@ ggmatrix <- function(
   check_nrow_ncol(nrow, "nrow")
   check_nrow_ncol(ncol, "ncol")
 
-  if (! byrow) {
-    plots <- plots[c(t(matrix(1:(nrow * ncol), byrow = FALSE, ncol = ncol)))]
-  }
-
   plotMatrix <- list(
     data = data,
     plots = plots,
@@ -74,7 +70,8 @@ ggmatrix <- function(
     legends = legends,
     gg = gg,
     nrow = nrow,
-    ncol = ncol
+    ncol = ncol,
+    byrow = byrow
   )
 
   attributes(plotMatrix)$class <- c("gg", "ggmatrix")

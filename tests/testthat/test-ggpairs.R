@@ -14,6 +14,7 @@ test_that("structure", {
   expect_is(a$xAxisLabels, "character")
   expect_is(a$yAxisLabels, "character")
   expect_is(a$legends, "logical")
+  expect_is(a$byrow, "logical")
   expect_true(is.null(a$gg))
   expect_true("gg" %in% names(a))
 })

@@ -465,13 +465,13 @@ ggpairs <- function(
 
   plotMatrix <- ggmatrix(
     plots = ggpairsPlots,
+    byrow = TRUE,
     nrow = length(columns),
     ncol = length(columns),
     axisLabels = axisLabels,
     xAxisLabels = columnLabels,
     yAxisLabels = columnLabels,
     title = title,
-    byrow = TRUE,
     verbose = verbose,
     data = data,
     gg = NULL,
