@@ -34,6 +34,9 @@ ggmatrix <- function(
   check_nrow_ncol(nrow, "nrow")
   check_nrow_ncol(ncol, "ncol")
 
+  if (! byrow) {
+    plots <- plots[c(t(matrix(1:(nrow * ncol), byrow = FALSE, ncol = ncol)))]
+  }
 
   plotMatrix <- list(
     data = data,
