@@ -5,7 +5,6 @@ data(tips, package = "reshape")
 test_that("structure", {
   a <- ggpairs(tips)
   expect_is(a$data, "data.frame")
-  expect_is(a$columns, "integer")
   expect_is(a$plots, "list")
   expect_equivalent(length(a$plots), ncol(tips)^2)
   expect_is(a$title, "character")
@@ -96,7 +95,7 @@ test_that("blank plots", {
   }
 
   a <- ggpairs(tips, columnsUsed)
-  a[1,1] <- qplot(total_bill, data = tips)
+  a[1,1] <- ggplot2::qplot(total_bill, data = tips)
   expect_false(is_blank_plot(a[1,1]))
 
 })

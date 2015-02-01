@@ -75,7 +75,7 @@ first_non_null = function(...) {
 #'
 #' @param x ggpair object to be plotted
 #' @param ... not used
-#' @method print ggpairs
+#' @method print ggmatrix
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport grid.draw
@@ -83,7 +83,7 @@ first_non_null = function(...) {
 #' @examples
 #'  data(tips, package = "reshape")
 #'  pMat <- ggpairs(tips, c(1,3,2), color = "sex")
-#'  pMat # calls print(pMat), which calls print.ggpairs(pMat)
+#'  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
 #'
 #'  ## defaults; (prints strips on top and right edges of matrix)
 #'  # print(pMat, left = 0.2, spacing = 0.03, bottom = 0.1, showStrips = NULL)
@@ -102,7 +102,7 @@ first_non_null = function(...) {
 #'
 #'  ## give the spacing between plots a proportion of 1 plot size
 #'  # print(pMat, spacing = 1)
-print.ggpairs <- function(
+print.ggmatrix <- function(
   x,
   leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1,
@@ -112,6 +112,14 @@ print.ggpairs <- function(
 ) {
 
   plotObj <- x
+
+  args <- list(...)
+  if ("printInfo" %in% names(args)) {
+    printInfo <- args[['printInfo']]
+  } else {
+    printInfo <- FALSE
+  }
+
 
   # If using internal axis labels, extend the plotting region out since
   # variable names on the margins will not be used
@@ -251,7 +259,7 @@ print.ggpairs <- function(
 
       # left axis
       if (columnPos == 1 && showLabels) {
-        if (identical(plotObj$printInfo, TRUE)) {
+        if (identical(printInfo, TRUE)) {
           print("trying left axis")
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-l")
@@ -282,7 +290,7 @@ print.ggpairs <- function(
 
       ## bottom axis
       if (rowPos == (x$nrow) && showLabels) {
-        if (identical(plotObj$printInfo, TRUE)) {
+        if (identical(printInfo, TRUE)) {
           print("trying bottom axis")
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-b")

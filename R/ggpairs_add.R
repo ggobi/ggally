@@ -1,9 +1,9 @@
 
-#' Modify a ggpairs object by adding an ggplot2 object to all plots
+#' Modify a ggmatrix object by adding an ggplot2 object to all plots
 #'
-#' This operator allows you to add ggplot2 objects to a ggpairs object.
+#' This operator allows you to add ggplot2 objects to a ggmatrix object.
 #'
-#' If the first object is an object of class \code{ggpairs}, you can add
+#' If the first object is an object of class \code{ggmatrix}, you can add
 #' the following types of objects, and it will return a modified ggplot
 #' object.
 #'
@@ -40,7 +40,7 @@
 #'
 "+.gg" <- function(e1, e2) {
 
-  if (is.ggpairs(e1)) {
+  if (is.ggmatrix(e1)) {
     if (is.theme(e2)) {
       # Get the name of what was passed in as e2, and pass along so that it
       # can be displayed in error messages
@@ -54,7 +54,7 @@
       e1
 
     } else {
-      stop("'ggpairs' does not know how to add objects that do not have class 'theme'")
+      stop("'ggmatrix' does not know how to add objects that do not have class 'theme'")
     }
 
   } else {
@@ -64,6 +64,6 @@
 }
 
 
-is.ggpairs <- function(x) {
-  "ggpairs" %in% class(x)
+is.ggmatrix <- function(x) {
+  "ggmatrix" %in% class(x)
 }

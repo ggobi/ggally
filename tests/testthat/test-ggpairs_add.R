@@ -1,5 +1,5 @@
 
-context("ggpairs_add")
+context("ggmatrix_add")
 
 data(tips, package = "reshape")
 
@@ -18,6 +18,6 @@ test_that("add", {
   expect_true(! is.null(a2$gg))
 
   # badd add
-  expect_error(a + ggplot2::geom_abline(), "'ggpairs' does not know how to add")
+  expect_error(a + ggplot2::geom_abline(), "'ggmatrix' does not know how to add")
 
 })

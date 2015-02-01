@@ -463,23 +463,20 @@ ggpairs <- function(
     ggpairsPlots[[length(ggpairsPlots)+1]] <- p
   }
 
-  plotMatrix <- list(
-    data = data,
-    columns = columns,
+  plotMatrix <- ggmatrix(
     plots = ggpairsPlots,
-    title = title,
-    verbose = verbose,
-    printInfo = printInfo,
+    nrow = length(columns),
+    ncol = length(columns),
     axisLabels = axisLabels,
     xAxisLabels = columnLabels,
     yAxisLabels = columnLabels,
-    legends = legends,
+    title = title,
+    byrow = TRUE,
+    verbose = verbose,
+    data = data,
     gg = NULL,
-    nrow = length(columns),
-    ncol = length(columns)
+    legends = legends
   )
-
-  attributes(plotMatrix)$class <- c("gg", "ggpairs")
 
   plotMatrix
 }

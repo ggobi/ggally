@@ -115,20 +115,20 @@ check_i_j <- function(i,j) {
 }
 
 #' @rdname getPlot
-#' @usage \method{[}{ggpairs}(x, i, j, ...)
+#' @usage \method{[}{ggmatrix}(x, i, j, ...)
 #' @param ... ignored
 #' @export
-`[.ggpairs` <- function(x, i, j, ...) {
+`[.ggmatrix` <- function(x, i, j, ...) {
   check_i_j(i,j)
 
   getPlot(x, i, j)
 }
 
 #' @rdname putPlot
-#' @usage \method{[}{ggpairs}(x, i, j, ...) <- value
+#' @usage \method{[}{ggmatrix}(x, i, j, ...) <- value
 #' @param ... ignored
 #' @export
-`[<-.ggpairs` <- function(x, i, j, ..., value) {
+`[<-.ggmatrix` <- function(x, i, j, ..., value) {
   # x = matrix
   # i = first subset
   # j = second subset
