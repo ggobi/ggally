@@ -31,6 +31,29 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = rep("", length(plots)),
 \description{
 Make a matrix of ggplot2 plots
 }
+\examples{
+plotList <- list()
+for (i in 1:6) {
+  plotList[[i]] <- ggally_text(paste("Plot #", i, sep = ""))
+}
+a <- ggmatrix(
+  plotList,
+  2, 3,
+  c("A", "B", "C"),
+  c("D", "E"),
+  byrow = TRUE
+)
+#a
+
+a <- ggmatrix(
+  plotList,
+  2, 3,
+  c("A", "B", "C"),
+  c("D", "E"),
+  byrow = FALSE
+)
+#a
+}
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
 }

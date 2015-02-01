@@ -1,3 +1,4 @@
+
 #' ggpairs - A ggplot2 Matrix
 #'
 #' Make a matrix of ggplot2 plots
@@ -13,6 +14,7 @@
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
+#' @examples
 #' plotList <- list()
 #' for (i in 1:6) {
 #'   plotList[[i]] <- ggally_text(paste("Plot #", i, sep = ""))
