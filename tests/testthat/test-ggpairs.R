@@ -120,14 +120,6 @@ test_that("stops", {
   #  variables: 'colour' have non standard format: 'total_bill + tip'.
   expect_error(ggpairs(tips, color = "total_bill + tip"))
 
-  a <- ggpairs(tips)
-  p <- ggally_blankDiag()
-  expect_error(a["total_bill", 1], "'i' may only be")
-  expect_error(a[1, "total_bill"], "'j' may only be")
-  expect_error(a["total_bill", 1] <- p, "'i' may only be")
-  expect_error(a[1, "total_bill"] <- p, "'j' may only be")
-
-
 })
 
 test_that("print", {
@@ -143,8 +135,6 @@ test_that("print", {
       axisLabels = axisLabels,
       params = c(binwidth = 1)
     )
-    p <- a[2, 1]
-    a[2,1] <- p
     a
   }
   for (axisLabels in c("show", "internal", "none")) {
