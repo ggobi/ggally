@@ -13,6 +13,28 @@
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
+#' plotList <- list()
+#' for (i in 1:6) {
+#'   plotList[[i]] <- ggally_text(paste("Plot #", i, sep = ""))
+#' }
+#' a <- ggmatrix(
+#'   plotList,
+#'   2, 3,
+#'   c("A", "B", "C"),
+#'   c("D", "E"),
+#'   byrow = TRUE
+#' )
+#' #a
+#'
+#' a <- ggmatrix(
+#'   plotList,
+#'   2, 3,
+#'   c("A", "B", "C"),
+#'   c("D", "E"),
+#'   byrow = FALSE
+#' )
+#' #a
+
 ggmatrix <- function(
   plots,
   nrow,
