@@ -4,6 +4,7 @@
 #' @param plots list of plots to be put into matrix
 #' @param nrow,ncol number of rows and columns
 #' @param xAxisLabels,yAxisLabels,title labels for plot
+#' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param byrow boolean that determines whether the plots should be ordered by row or by column
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @param data data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time

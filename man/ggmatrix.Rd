@@ -5,8 +5,9 @@
 \title{ggpairs - A ggplot2 Matrix}
 \usage{
 ggmatrix(plots, nrow, ncol, xAxisLabels = rep("", length(plots)),
-  yAxisLabels = rep("", length(plots)), title = NULL, byrow = TRUE,
-  verbose = FALSE, data = NULL, gg = NULL, legends = FALSE)
+  yAxisLabels = rep("", length(plots)), axisLabels = "show", title = NULL,
+  byrow = TRUE, verbose = FALSE, data = NULL, gg = NULL,
+  legends = FALSE)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
@@ -14,6 +15,8 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = rep("", length(plots)),
 \item{nrow,ncol}{number of rows and columns}
 
 \item{xAxisLabels,yAxisLabels,title}{labels for plot}
+
+\item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 
 \item{byrow}{boolean that determines whether the plots should be ordered by row or by column}
 
