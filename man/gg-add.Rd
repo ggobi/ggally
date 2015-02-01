@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggpairs_add.R
 \name{+.gg}
 \alias{+.gg}
-\title{Modify a ggpairs object by adding an ggplot2 object to all plots}
+\title{Modify a ggmatrix object by adding an ggplot2 object to all plots}
 \usage{
 \method{+}{gg}(e1, e2)
 }
@@ -12,10 +12,10 @@
 \item{e2}{A component to add to \code{e1}}
 }
 \description{
-This operator allows you to add ggplot2 objects to a ggpairs object.
+This operator allows you to add ggplot2 objects to a ggmatrix object.
 }
 \details{
-If the first object is an object of class \code{ggpairs}, you can add
+If the first object is an object of class \code{ggmatrix}, you can add
 the following types of objects, and it will return a modified ggplot
 object.
 
