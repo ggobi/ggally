@@ -63,8 +63,8 @@ check_nrow_ncol <- function(x, title) {
   if(!is.numeric(x)) {
     stop(paste("'", title, "' must be a numeric value"))
   }
-  if (length(nrow) != 1) {
     stop(paste("'", title, "' must be a single numeric value"))
+  if (length(x) != 1) {
   }
 
 }
