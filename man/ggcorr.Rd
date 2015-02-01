@@ -41,27 +41,31 @@ Function for making a correlation plot starting from a data matrix, using ggplot
 }
 \examples{
 # Basketball statistics provided by Nathan Yau at Flowing Data.
-nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
+dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
+
 # Default output.
-ggcorr(nba[, -1])
+ggcorr(dt[, -1])
+
 # Labelled output, with coefficient transparency.
-ggcorr(nba[, -1],
+ggcorr(dt[, -1],
        label = TRUE,
        label_alpha = TRUE,
        name = "") +
   ggplot2::theme(legend.position = "bottom")
+
 # Custom options.
 ggcorr(
-  nba[, -1],
+  dt[, -1],
   name = expression(rho),
   geom = "circle",
-  max_size = 6,
+  max_size = 10,
+  min_size = 2,
   size = 3,
   hjust = 0.75,
   nbreaks = 6,
   angle = -45,
   palette = "PuOr" # colorblind safe, photocopy-able
-) + ggplot2::labs(title = "Points Per Game")
+) + ggplot2::labs(title = "Correlation Matrix")
 }
 \author{
 Francois Briatte \email{f.briatte@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@gmail.com}
