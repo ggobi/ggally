@@ -145,12 +145,11 @@ print.ggmatrix <- function(
     viewPortWidths <- c(1, rep(c(spacingProportion,1), x$ncol - 1))
     viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1)
   }
-  viewPortCount <- length(viewPortWidths)
 
   v2 <- viewport(
     layout = grid.layout(
-      viewPortCount,
-      viewPortCount,
+      length(viewPortHeights),
+      length(viewPortWidths),
       ## added left and bottom spacers for axis labels
       widths = viewPortWidths,
       heights = viewPortHeights
@@ -183,7 +182,7 @@ print.ggmatrix <- function(
 
     ## new for axis spacingProportion
     pushViewport(viewport(layout = grid.layout(
-      viewPortCount, viewPortCount,
+      length(viewPortHeights), length(viewPortWidths),
       widths = viewPortWidths, heights = viewPortHeights
     )))
 
@@ -210,7 +209,7 @@ print.ggmatrix <- function(
 
     ## new for axis spacing
     pushViewport(viewport(layout = grid.layout(
-      viewPortCount, viewPortCount,
+      length(viewPortHeights), length(viewPortWidths),
       widths = viewPortWidths, heights = viewPortHeights
     )))
 
@@ -223,7 +222,7 @@ print.ggmatrix <- function(
         0,
         just = c("centre","centre"),
         vp = vplayout(
-          ifelse(showLabels, 2*(x$ncol), 2*(x$ncol) - 1),
+          ifelse(showLabels, 2*(x$nrow), 2*(x$nrow) - 1),
           ifelse(showLabels, 2*i, 2*i - 1)
         ),
         gp = gpar(fontsize = first_non_null(
