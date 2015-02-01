@@ -158,19 +158,21 @@ print.ggmatrix <- function(
 
   grid.newpage()
 
-  if (plotObj$title != "") {
-    pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
-    grid.text(
-      plotObj$title,
-      x = .5, y = 1,
-      just = c(.5,1),
-      gp = gpar(fontsize = first_non_null(
-        get_theme_element(plotObj, "title", "size"),
-        get_theme_element(plotObj, "plot.title", "size"),
-        15
-      ))
-    )
-    popViewport()
+  if(! is.null(plotObj$title)) {
+    if (plotObj$title != "") {
+      pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
+      grid.text(
+        plotObj$title,
+        x = .5, y = 1,
+        just = c(.5,1),
+        gp = gpar(fontsize = first_non_null(
+          get_theme_element(plotObj, "title", "size"),
+          get_theme_element(plotObj, "plot.title", "size"),
+          15
+        ))
+      )
+      popViewport()
+    }
   }
 
   # This plots the variable names on the margins, which is not needed if using internal
