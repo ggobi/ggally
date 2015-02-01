@@ -12,7 +12,8 @@ test_that("structure", {
   expect_is(a$verbose, "logical")
   expect_is(a$printInfo, "logical")
   expect_is(a$axisLabels, "character")
-  expect_is(a$columnLabels, "character")
+  expect_is(a$xAxisLabels, "character")
+  expect_is(a$yAxisLabels, "character")
   expect_is(a$legends, "logical")
   expect_true(is.null(a$gg))
   expect_true("gg" %in% names(a))
@@ -22,19 +23,22 @@ test_that("columns", {
   columnsUsed <- 1:3
   a <- ggpairs(tips, columns = columnsUsed, params = c(binwidth = 1))
   expect_equivalent(length(a$plots), length(columnsUsed)^2)
-  expect_equivalent(a$columnLabels, names(tips)[columnsUsed])
+  expect_equivalent(a$xAxisLabels, names(tips)[columnsUsed])
+  expect_equivalent(a$yAxisLabels, names(tips)[columnsUsed])
 })
 
 test_that("column labels", {
   columnsUsed <- 1:3
   columnTitles <- c("A", "B", "C")
   a <- ggpairs(tips, columnsUsed, columnLabels = columnTitles, params = c(binwidth = 1))
-  expect_equivalent(a$columnLabels, columnTitles)
+  expect_equivalent(a$xAxisLabels, columnTitles)
+  expect_equivalent(a$yAxisLabels, columnTitles)
 
 
   columnTitles <- c("Total Bill %", "Tip 123456", "Sex ( /a asdf)")
   a <- ggpairs(tips, columnsUsed, columnLabels = columnTitles, params = c(binwidth = 1))
-  expect_equivalent(a$columnLabels, columnTitles)
+  expect_equivalent(a$xAxisLabels, columnTitles)
+  expect_equivalent(a$yAxisLabels, columnTitles)
 })
 
 test_that("character", {

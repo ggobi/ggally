@@ -128,16 +128,14 @@ print.ggpairs <- function(
     )
   }
 
-  numCol <- length(plotObj$columns)
-
   if (identical(plotObj$axisLabels,"show")) {
     showLabels <- TRUE
-    viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacingProportion,1), numCol - 1))
-    viewPortHeights <- c(rep(c(1,spacingProportion), numCol - 1), 1, bottomHeightProportion)
+    viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacingProportion,1), x$ncol - 1))
+    viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1, bottomHeightProportion)
   } else {
     showLabels <- FALSE
-    viewPortWidths <- c(1, rep(c(spacingProportion,1), numCol - 1))
-    viewPortHeights <- c(rep(c(1,spacingProportion), numCol - 1), 1)
+    viewPortWidths <- c(1, rep(c(spacingProportion,1), x$ncol - 1))
+    viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1)
   }
   viewPortCount <- length(viewPortWidths)
 
@@ -180,9 +178,9 @@ print.ggpairs <- function(
     )))
 
     # Left Side
-    for (i in 1:numCol) {
+    for (i in 1:(x$nrow)) {
       grid.text(
-        plotObj$columnLabels[i],
+        plotObj$yAxisLabels[i],
         0, 0.5, rot = 90,
         just = c("centre","centre"),
         vp = vplayout(as.numeric(i) * 2 - 1 ,1),
@@ -208,14 +206,14 @@ print.ggpairs <- function(
 
 
     # Bottom Side
-    for (i in 1:numCol) {
+    for (i in 1:(x$ncol)) {
       grid.text(
-        plotObj$columnLabels[i],
+        plotObj$xAxisLabels[i],
         0.5,
         0,
         just = c("centre","centre"),
         vp = vplayout(
-          ifelse(showLabels, 2*numCol, 2*numCol - 1),
+          ifelse(showLabels, 2*(x$ncol), 2*(x$ncol) - 1),
           ifelse(showLabels, 2*i, 2*i - 1)
         ),
         gp = gpar(fontsize = first_non_null(
@@ -239,8 +237,8 @@ print.ggpairs <- function(
   pushViewport(v1) # labels on outside
   pushViewport(v2) # layout of plots
 
-  for (rowPos in 1:numCol) {
-    for (columnPos in 1:numCol) {
+  for (rowPos in 1:(x$nrow)) {
+    for (columnPos in 1:(x$ncol)) {
       p <- plotObj[rowPos, columnPos]
 
       if (is_blank_plot(p)) {
@@ -283,7 +281,7 @@ print.ggpairs <- function(
       }
 
       ## bottom axis
-      if (rowPos == numCol && showLabels) {
+      if (rowPos == (x$nrow) && showLabels) {
         if (identical(plotObj$printInfo, TRUE)) {
           print("trying bottom axis")
         }
@@ -301,7 +299,7 @@ print.ggpairs <- function(
           )
         )
 
-        pushViewport(vplayout( 2 * numCol, 2 * columnPos))
+        pushViewport(vplayout( 2 * (x$nrow), 2 * columnPos))
         pushViewport(vpBAxis)
           for (bAxisPos in 1:grobLength) {
             pushViewport(vplayout(1, bAxisPos * 2 - 1))
@@ -324,7 +322,7 @@ print.ggpairs <- function(
 
         # make sure it's on the outer right and top edge
         if (pShowStrips) {
-          if (columnPos == numCol) {
+          if (columnPos == (x$ncol)) {
             layoutNames <- c(layoutNames, "strip-right")
           }
           if (rowPos == 1) {
