@@ -1,17 +1,19 @@
 
 context("ggcorr")
 
-nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
+# nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
+
+data(flea)
 
 
 
 test_that("examples", {
   # Default output.
-  p <- ggcorr(nba[, -1])
+  p <- ggcorr(flea[, -1])
   expect_equal(length(p$layers), 2)
 
   # Labelled output, with coefficient transparency.
-  p <- ggcorr(nba[, -1],
+  p <- ggcorr(flea[, -1],
          label = TRUE,
          label_alpha = TRUE,
          name = "")
@@ -19,7 +21,7 @@ test_that("examples", {
 
   # Custom options.
   p <- ggcorr(
-    nba[, -1],
+    flea[, -1],
     geom = "circle",
     max_size = 6,
     size = 3,
@@ -30,7 +32,7 @@ test_that("examples", {
   expect_equal(length(p$layers), 3)
 
 
-  p <- ggcorr(nba[, -1],
+  p <- ggcorr(flea[, -1],
          label = TRUE,
          name = "")
   expect_equal(length(p$layers), 3)
