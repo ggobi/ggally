@@ -55,3 +55,27 @@ test_that("byrow", {
   a
 
 })
+
+test_that("missing plot", {
+  plotList <- list()
+  for (i in c(1,3,5)) {
+    p <- ggally_text(paste("Plot #", i, sep = ""))
+    p$ggally_check_val <- i
+    plotList[[i]] <- p
+  }
+  a <- ggmatrix(
+    plotList,
+    2, 3,
+    c("A", "B", "C"),
+    c("D", "E"),
+    byrow = TRUE
+  )
+  # reaches code where there are more cells than plots
+  print(a)
+
+  expect_equal(a[1,1]$ggally_check_val, 1)
+  expect_equal(a[1,3]$ggally_check_val, 3)
+  expect_equal(a[2,2]$ggally_check_val, 5)
+
+
+})

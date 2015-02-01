@@ -8,7 +8,9 @@
 #'  GGally:::is_blank_plot(ggally_points(mtcars, ggplot2::aes_string(x = "disp", y = "hp")))
 #'
 is_blank_plot <- function(p){
-  if ( !is.null(p$subType) && !is.null(p$type)) {
+  if (is.null(p)) {
+    TRUE
+  } else if ( !is.null(p$subType) && !is.null(p$type)) {
     (p$subType == "blank") && (p$type == "blank")
   } else {
     FALSE

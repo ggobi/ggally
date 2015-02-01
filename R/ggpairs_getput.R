@@ -74,7 +74,12 @@ getPlot <- function(x, i, j){
     cat("Plot List Spot: ",pos,"\n")
   }
 
-  plot_text <- x$plots[[pos]]
+  if (pos > length(x$plots)) {
+    plot_text <- "blank"
+  } else {
+    plot_text <- x$plots[[pos]]
+  }
+
   if (is.character(plot_text)) {
     if (plot_text != "blank") {
       p <- eval_ggpair(plot_text, x$data)
