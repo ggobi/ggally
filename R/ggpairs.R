@@ -385,11 +385,7 @@ ggpairs <- function(
 
         combo_params <- addAndOverwriteAes(params, diag$params)
 
-        if (subType != "blank") {
-          p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
-        } else {
-          p <- "blank"
-        }
+        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
 
       } else if (type == "stat_bin-cat") {
         if (printInfo) {
