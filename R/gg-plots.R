@@ -812,6 +812,12 @@ ggally_barDiag <- function(data, mapping, ...){
 
   if (is_date(data[,as.character(mapping$x)])) {
     p <- p + geom_bar()
+    #TODO make y axis lines match date positions
+    # buildInfo <- ggplot_build(p + geom_bar(...))
+    # histBarPerc <- buildInfo$data[[1]]$ncount
+
+    p$subType <- "bar_num"
+
   } else if(numer){
     # message("is numeric")
     p <- p + geom_bar(
