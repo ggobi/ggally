@@ -321,54 +321,50 @@ ggpairs <- function(
         section_params <- lower$params
       }
 
+      if (printInfo) {
+        cat("scatterplot\n")
+      }
       if (type == "scatterplot") {
-        if (printInfo) {
-          cat("scatterplot\n")
-        }
         subType <- "points"
+      } else if (type == "box-hori" || type == "box-vert") {
+        subType <- "box"
+      }
 
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+
+      if (type == "scatterplot") {
         if (subType == "density") {
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
-          combo_aes
+
         }
-
-        combo_params <- addAndOverwriteAes(params, section_params)
-
-        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
-
-      } else if (type == "box-hori" || type == "box-vert") {
-        if (printInfo) {
-          cat("box-hori-vert\n")
-        }
-        subType <- "box"
-
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+      } else if(type == "box-hori" || type == "box-vert") {
         if (subType != "dot") {
           combo_aes <- mapping_color_fill(combo_aes)
         }
-        combo_params <- addAndOverwriteAes(params, section_params)
-
-        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
-
-      } else if (type == "mosaic") {
-        if (printInfo) {
-          cat("mosaic\n")
-        }
-        subType <- "facetbar"
-
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-        combo_params <- addAndOverwriteAes(params, section_params)
-
-        if (subType == "ratio") {
-          p <- ggally_ratio(data[, c(yColName, xColName)])
-        } else if (subType == "facetbar") {
-          if (!is.null(combo_aes$colour)) {
-            combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
-          }
-          p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
-        }
       }
+
+      combo_params <- addAndOverwriteAes(params, section_params)
+
+      p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+
+    } else if (type == "mosaic") {
+      if (printInfo) {
+        cat("mosaic\n")
+      }
+      subType <- "facetbar"
+
+      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+      combo_params <- addAndOverwriteAes(params, section_params)
+
+      if (subType == "ratio") {
+        p <- ggally_ratio(data[, c(yColName, xColName)])
+      } else if (subType == "facetbar") {
+        if (!is.null(combo_aes$colour)) {
+          combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
+        }
+        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+      }
+
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
 
       if (type == "stat_bin-num" || type == "stat_bin-cat") {
