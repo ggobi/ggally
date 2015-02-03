@@ -194,10 +194,11 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   }
 
   colorCol <- as.character(mapping$colour)
+  singleColorCol <- paste(colorCol, collapse = "")
 
   if (corUse %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
     if(length(colorCol) > 0) {
-      if(colorCol %in% colnames(data)) {
+      if(singleColorCol %in% colnames(data)) {
         rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
       } else {
         rows <- complete.cases(data[,c(xCol,yCol)])
@@ -238,10 +239,14 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   # splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
   # splits <- str_c(colorCol, sep = ", ", collapse = ", ")
   final_text <- ""
-  if(length(colorCol) < 1)
+  if (length(colorCol) < 1) {
     colorCol <- "ggally_NO_EXIST"
-  # browser()
-  if(colorCol != "ggally_NO_EXIST" && colorCol %in% colnames(data)) {
+  }
+
+  if (
+    (singleColorCol != "ggally_NO_EXIST") &&
+    (singleColorCol %in% colnames(data))
+  ) {
 
     cord <- ddply(data, c(colorCol), function(x) {
       cor_fn(x[, xCol], x[, yCol])
@@ -898,9 +903,12 @@ ggally_text <- function(
   } else {
     mapping <- addAndOverwriteAes(mapping, new_mapping)
   }
-  colour <- as.character(mapping$colour)
-  if(is.null(colour) || length(colour) < 1)
+
+  if(is.null(mapping$colour)) {
     colour <- "grey50"
+  } else {
+    colour <- mapping$colour
+  }
 
   # remove colour from the aesthetics
   mapping$colour <- NULL
