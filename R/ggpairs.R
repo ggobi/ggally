@@ -172,6 +172,10 @@ ggpairs <- function(
   }
   axisLabels <- axisLabelChoices[axisLabelChoice]
 
+  if(is.character(columns)) {
+    columns <- which(colnames(data) %in% columns)
+  }
+
   if (any(columns > ncol(data))) {
     stop(paste("Make sure your 'columns' values are less than or equal to ", ncol(data), ".\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
   }
