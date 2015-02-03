@@ -134,7 +134,7 @@ ggally_density <- function(data, mapping, ...){
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_cor(
 #'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "red")
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "I(\"red\")")
 #'  )
 #'  ggally_cor(
 #'    tips,
@@ -872,7 +872,7 @@ ggally_barDiag <- function(data, mapping, ...){
 #' @export
 #' @examples
 #' ggally_text("Example 1")
-#' ggally_text("Example\nTwo", mapping = ggplot2::aes_string(size = 15, color = "red"))
+#' ggally_text("Example\nTwo", mapping = ggplot2::aes_string(size = 15, color = "I(\"red\")"))
 ggally_text <- function(
   label,
   mapping = ggplot2::aes(color = "black"),
