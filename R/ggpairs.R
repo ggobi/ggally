@@ -371,34 +371,29 @@ ggpairs <- function(
       }
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
 
-      if (type == "stat_bin-num") {
+      if (type == "stat_bin-num" || type == "stat_bin-cat") {
         if (printInfo) {
-          cat("stat_bin-num\n")
+          cat(paste(type, "\n", sep = ""))
         }
 
-        subType <- diag$continuous
+        if (type == "stat_bin-num") {
+          subType <- diag$continuous
+        } else if (type == "stat_bin-cat") {
+          subType <- diag$discrete
+        }
 
         combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-        if (subType != "density") {
+
+        if (
+          (subType != "density" && type == "stat_bin-num") ||
+          (type == "stat_bin-num")
+        ) {
           combo_aes <- mapping_color_fill(combo_aes)
         }
 
         combo_params <- addAndOverwriteAes(params, diag$params)
 
         p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
-
-      } else if (type == "stat_bin-cat") {
-        if (printInfo) {
-          cat("stat_bin-cat\n")
-        }
-
-        subType <- diag$discrete
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-        combo_aes <- mapping_color_fill(combo_aes)
-
-        combo_params <- addAndOverwriteAes(params, diag$params)
-
-        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params, printInfo)
 
       } else if (type == "label") {
         combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
