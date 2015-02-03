@@ -311,21 +311,21 @@ ggpairs <- function(
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
 
+      if (up) {
+        subType <- upper$continuous
+        section_aes <- upper$aes_string
+        section_params <- upper$params
+      } else {
+        subType <- lower$continuous
+        section_aes <- lower$aes_string
+        section_params <- lower$params
+      }
+
       if (type == "scatterplot") {
         if (printInfo) {
           cat("scatterplot\n")
         }
-
         subType <- "points"
-        if (up) {
-          subType <- upper$continuous
-          section_aes <- upper$aes_string
-          section_params <- upper$params
-        } else {
-          subType <- lower$continuous
-          section_aes <- lower$aes_string
-          section_params <- lower$params
-        }
 
         combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
         if (subType == "density") {
@@ -341,18 +341,8 @@ ggpairs <- function(
         if (printInfo) {
           cat("box-hori-vert\n")
         }
-
         subType <- "box"
-        section_aes <- NULL
-        if (up) {
-          subType <- upper$combo
-          section_aes <- upper$aes_string
-          section_params <- upper$params
-        } else {
-          subType <- lower$combo
-          section_aes <- lower$aes_string
-          section_params <- lower$params
-        }
+
         combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
         if (subType != "dot") {
           combo_aes <- mapping_color_fill(combo_aes)
@@ -365,18 +355,7 @@ ggpairs <- function(
         if (printInfo) {
           cat("mosaic\n")
         }
-
         subType <- "facetbar"
-        section_aes <- NULL
-        if (up) {
-          subType <- upper$discrete
-          section_aes <- upper$aes_string
-          section_params <- upper$params
-        } else {
-          subType <- lower$discrete
-          section_aes <- lower$aes_string
-          section_params <- lower$params
-        }
 
         combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
         combo_params <- addAndOverwriteAes(params, section_params)
@@ -391,6 +370,7 @@ ggpairs <- function(
         }
       }
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
+
       if (type == "stat_bin-num") {
         if (printInfo) {
           cat("stat_bin-num\n")
