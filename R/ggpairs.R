@@ -343,8 +343,9 @@ ggpairs <- function(
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
 
         }
-      } else if(type == "box-hori" || type == "box-vert") {
-        if (subType != "dot") {
+      } else {
+        # isCombo
+        if (! subType %in% c("dot", "facetdensity")) {
           combo_aes <- mapping_color_fill(combo_aes)
         }
       }
