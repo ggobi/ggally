@@ -309,155 +309,159 @@ ggpairs <- function(
 
     section_aes <- section_params <- NULL
 
-    if (type == "scatterplot") {
-      if (printInfo) {
-        cat("scatterplot\n")
-      }
+    if (type %in% c("scatterplot", "box-hori", "box-vert")) {
 
-      subType <- "points"
-      if (up) {
-        subType <- upper$continuous
-        section_aes <- upper$aes_string
-        section_params <- upper$params
-      } else {
-        subType <- lower$continuous
-        section_aes <- lower$aes_string
-        section_params <- lower$params
-      }
-
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      if (subType == "density") {
-        combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
-        combo_aes
-      }
-
-      combo_params <- addAndOverwriteAes(params, section_params)
-
-      p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
-#      else if(subType == "smooth")
-#        p <- ggally_smooth(data, combo_aes, params)
-#      else if(subType == "density")
-#          p <- ggally_density(data, combo_aes, params )
-#      else if(subType == "cor")
-#        p <- ggally_cor(data, combo_aes, params)
-#      else if(subType == "blank")
-#        p <- ggally_blank()
-
-    } else if (type == "box-hori" || type == "box-vert") {
-      if (printInfo) {
-        cat("box-hori-vert\n")
-      }
-
-      subType <- "box"
-      section_aes <- NULL
-      if (up) {
-        subType <- upper$combo
-        section_aes <- upper$aes_string
-        section_params <- upper$params
-      } else {
-        subType <- lower$combo
-        section_aes <- lower$aes_string
-        section_params <- lower$params
-      }
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      if (subType != "dot") {
-        combo_aes <- mapping_color_fill(combo_aes)
-      }
-      combo_params <- addAndOverwriteAes(params, section_params)
-
-      p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
-#      if(subType == "box")
-#        p <- ggally_box(data, combo_aes, params)
-#      else if(subType == "dot")
-#        p <- ggally_dot(data, combo_aes, params)
-#      else if(subType == "facethist")
-#        p <- ggally_facethist(data, combo_aes, params)
-#      else if(subType == "facetdensity")
-#        p <- ggally_facetdensity(data, combo_aes, params)
-#      else if(subType == "denstrip")
-#        p <- ggally_denstrip(data, combo_aes, params)
-#      else if(subType == "blank")
-#        p <- ggally_blank()
-
-    } else if (type == "mosaic") {
-      if (printInfo) {
-        cat("mosaic\n")
-      }
-
-      subType <- "facetbar"
-      section_aes <- NULL
-      if (up) {
-        subType <- upper$discrete
-        section_aes <- upper$aes_string
-        section_params <- upper$params
-      } else {
-        subType <- lower$discrete
-        section_aes <- lower$aes_string
-        section_params <- lower$params
-      }
-
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      combo_params <- addAndOverwriteAes(params, section_params)
-
-      if (subType == "ratio") {
-        p <- ggally_ratio(data[, c(yColName, xColName)])
-      } else if (subType == "facetbar") {
-        if (!is.null(combo_aes$colour)) {
-          combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
+      if (type == "scatterplot") {
+        if (printInfo) {
+          cat("scatterplot\n")
         }
+
+        subType <- "points"
+        if (up) {
+          subType <- upper$continuous
+          section_aes <- upper$aes_string
+          section_params <- upper$params
+        } else {
+          subType <- lower$continuous
+          section_aes <- lower$aes_string
+          section_params <- lower$params
+        }
+
+        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+        if (subType == "density") {
+          combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
+          combo_aes
+        }
+
+        combo_params <- addAndOverwriteAes(params, section_params)
+
         p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+  #      else if(subType == "smooth")
+  #        p <- ggally_smooth(data, combo_aes, params)
+  #      else if(subType == "density")
+  #          p <- ggally_density(data, combo_aes, params )
+  #      else if(subType == "cor")
+  #        p <- ggally_cor(data, combo_aes, params)
+  #      else if(subType == "blank")
+  #        p <- ggally_blank()
+
+      } else if (type == "box-hori" || type == "box-vert") {
+        if (printInfo) {
+          cat("box-hori-vert\n")
+        }
+
+        subType <- "box"
+        section_aes <- NULL
+        if (up) {
+          subType <- upper$combo
+          section_aes <- upper$aes_string
+          section_params <- upper$params
+        } else {
+          subType <- lower$combo
+          section_aes <- lower$aes_string
+          section_params <- lower$params
+        }
+        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+        if (subType != "dot") {
+          combo_aes <- mapping_color_fill(combo_aes)
+        }
+        combo_params <- addAndOverwriteAes(params, section_params)
+
+        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+  #      if(subType == "box")
+  #        p <- ggally_box(data, combo_aes, params)
+  #      else if(subType == "dot")
+  #        p <- ggally_dot(data, combo_aes, params)
+  #      else if(subType == "facethist")
+  #        p <- ggally_facethist(data, combo_aes, params)
+  #      else if(subType == "facetdensity")
+  #        p <- ggally_facetdensity(data, combo_aes, params)
+  #      else if(subType == "denstrip")
+  #        p <- ggally_denstrip(data, combo_aes, params)
+  #      else if(subType == "blank")
+  #        p <- ggally_blank()
+
+      } else if (type == "mosaic") {
+        if (printInfo) {
+          cat("mosaic\n")
+        }
+
+        subType <- "facetbar"
+        section_aes <- NULL
+        if (up) {
+          subType <- upper$discrete
+          section_aes <- upper$aes_string
+          section_params <- upper$params
+        } else {
+          subType <- lower$discrete
+          section_aes <- lower$aes_string
+          section_params <- lower$params
+        }
+
+        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+        combo_params <- addAndOverwriteAes(params, section_params)
+
+        if (subType == "ratio") {
+          p <- ggally_ratio(data[, c(yColName, xColName)])
+        } else if (subType == "facetbar") {
+          if (!is.null(combo_aes$colour)) {
+            combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
+          }
+          p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+        }
       }
+    } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
+      if (type == "stat_bin-num") {
+        if (printInfo) {
+          cat("stat_bin-num\n")
+        }
 
-    } else if (type == "stat_bin-num") {
-      if (printInfo) {
-        cat("stat_bin-num\n")
-      }
+        subType <- diag$continuous
 
-      subType <- diag$continuous
+        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+        if (subType != "density") {
+          combo_aes <- mapping_color_fill(combo_aes)
+        }
 
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-      if (subType != "density") {
+        combo_params <- addAndOverwriteAes(params, diag$params)
+
+        if (subType != "blank") {
+          p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
+        } else {
+          p <- "blank"
+        }
+  #
+  #        p <- ggally_densityDiag(data, combo_aes, params)
+  #      else if(subType == "bar")
+  #        p <- ggally_barDiag(data, combo_aes, params)
+  #      else if(subType == "blank")
+  #        p <- ggally_blank()
+
+      } else if (type == "stat_bin-cat") {
+        if (printInfo) {
+          cat("stat_bin-cat\n")
+        }
+
+        subType <- diag$discrete
+        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
         combo_aes <- mapping_color_fill(combo_aes)
+
+        combo_params <- addAndOverwriteAes(params, diag$params)
+
+        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params, printInfo)
+  #      if(subType == "bar")
+  #        p <- ggally_barDiag(data, combo_aes, params)
+  #      #else if(subType == "ratio")
+  #      #  p <- ggally_ratio(dataSelect)
+  #      else if(subType == "blank")
+  #        p <- ggally_blank()
+      } else if (type == "label") {
+        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+        combo_params <- addAndOverwriteAes(params, diag$params)
+        combo_params <- addAndOverwriteAes(combo_params, c("label" = columnLabels[posX]))
+
+        p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
       }
-
-      combo_params <- addAndOverwriteAes(params, diag$params)
-
-      if (subType != "blank") {
-        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
-      } else {
-        p <- "blank"
-      }
-#
-#        p <- ggally_densityDiag(data, combo_aes, params)
-#      else if(subType == "bar")
-#        p <- ggally_barDiag(data, combo_aes, params)
-#      else if(subType == "blank")
-#        p <- ggally_blank()
-
-    } else if (type == "stat_bin-cat") {
-      if (printInfo) {
-        cat("stat_bin-cat\n")
-      }
-
-      subType <- diag$discrete
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-      combo_aes <- mapping_color_fill(combo_aes)
-
-      combo_params <- addAndOverwriteAes(params, diag$params)
-
-      p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params, printInfo)
-#      if(subType == "bar")
-#        p <- ggally_barDiag(data, combo_aes, params)
-#      #else if(subType == "ratio")
-#      #  p <- ggally_ratio(dataSelect)
-#      else if(subType == "blank")
-#        p <- ggally_blank()
-    } else if (type == "label") {
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-      combo_params <- addAndOverwriteAes(params, diag$params)
-      combo_params <- addAndOverwriteAes(combo_params, c("label" = columnLabels[posX]))
-
-      p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
     }
 
     ggpairsPlots[[length(ggpairsPlots)+1]] <- p
