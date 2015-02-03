@@ -388,7 +388,7 @@ ggpairs <- function(
 
         if (
           (subType != "density" && type == "stat_bin-num") ||
-          (type == "stat_bin-num")
+          (type == "stat_bin-cat")
         ) {
           combo_aes <- mapping_color_fill(combo_aes)
         }
