@@ -20,11 +20,11 @@ test_that("structure", {
 })
 
 test_that("columns", {
-  columnsUsed <- 1:3
+  columnsUsed <- c("total_bill", "tip", "sex")
   a <- ggpairs(tips, columns = columnsUsed, params = c(binwidth = 1))
   expect_equivalent(length(a$plots), length(columnsUsed)^2)
-  expect_equivalent(a$xAxisLabels, names(tips)[columnsUsed])
-  expect_equivalent(a$yAxisLabels, names(tips)[columnsUsed])
+  expect_equivalent(a$xAxisLabels, columnsUsed)
+  expect_equivalent(a$yAxisLabels, columnsUsed)
 })
 
 test_that("column labels", {
@@ -52,7 +52,7 @@ test_that("character", {
 
 test_that("printInfo", {
   txt <- capture.output({
-    a <- ggpairs(tips, 1:2, printInfo = TRUE, params = c(binwidth = 1))
+    a <- ggpairs(tips, 1:4, printInfo = TRUE, params = c(binwidth = 1))
   })
   expect_true(length(txt) > 0)
   expect_false(is.list(a$plots[[2]]))
@@ -67,7 +67,7 @@ test_that("printInfo", {
   })
   expect_true(length(txt) > 0)
   expect_true(is.character(a$plots[[2]]))
-  expect_true(is.list(a$plots[[3]]))
+  expect_true(is.list(a$plots[[4 + 1]]))
 })
 
 test_that("blank plots", {
