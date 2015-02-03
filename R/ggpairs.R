@@ -310,6 +310,15 @@ ggpairs <- function(
     section_aes <- section_params <- NULL
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
+      isContinuous = (type == "scatterplot")
+      isCombo = (type == "box-hori" || type == "box-vert")
+      if (printInfo) {
+        if (isContinuous) {
+          cat("continuous\n")
+        } else {
+          cat("combo\n")
+        }
+      }
 
       if (up) {
         subType <- ifelse(isContinuous, upper$continuous, upper$combo)
@@ -321,9 +330,6 @@ ggpairs <- function(
         section_params <- lower$params
       }
 
-      if (printInfo) {
-        cat("scatterplot\n")
-      }
       # if (type == "scatterplot") {
       #   subType <- "points"
       # } else if (type == "box-hori" || type == "box-vert") {
@@ -332,7 +338,7 @@ ggpairs <- function(
 
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
 
-      if (type == "scatterplot") {
+      if (isContinuous) {
         if (subType == "density") {
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
 
