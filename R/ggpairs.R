@@ -356,13 +356,14 @@ ggpairs <- function(
       if (printInfo) {
         cat("mosaic\n")
       }
-      subType <- "facetbar"
+      subType <- ifelse(up, upper$discrete, lower$discrete)
 
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
       combo_params <- addAndOverwriteAes(params, section_params)
 
       if (subType == "ratio") {
         p <- ggally_ratio(data[, c(yColName, xColName)])
+
       } else if (subType == "facetbar") {
         if (!is.null(combo_aes$colour)) {
           combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
