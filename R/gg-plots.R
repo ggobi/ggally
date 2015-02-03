@@ -146,6 +146,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
   corUse <-  pmatch(corUse, useOptions)
   if (is.na(corUse)) {
+    warning("correlation 'use' not found.  Using default value of 'all.obs'")
     corUse <- useOptions[1]
   } else {
     corUse <- useOptions[corUse]
