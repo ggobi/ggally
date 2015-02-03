@@ -324,11 +324,11 @@ ggpairs <- function(
       if (printInfo) {
         cat("scatterplot\n")
       }
-      if (type == "scatterplot") {
-        subType <- "points"
-      } else if (type == "box-hori" || type == "box-vert") {
-        subType <- "box"
-      }
+      # if (type == "scatterplot") {
+      #   subType <- "points"
+      # } else if (type == "box-hori" || type == "box-vert") {
+      #   subType <- "box"
+      # }
 
       combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
 
