@@ -312,11 +312,11 @@ ggpairs <- function(
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
 
       if (up) {
-        subType <- upper$continuous
+        subType <- ifelse(isContinuous, upper$continuous, upper$combo)
         section_aes <- upper$aes_string
         section_params <- upper$params
       } else {
-        subType <- lower$continuous
+        subType <- ifelse(isContinuous, lower$continuous, lower$combo)
         section_aes <- lower$aes_string
         section_params <- lower$params
       }
