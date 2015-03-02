@@ -11,6 +11,7 @@ if(getRversion() >= "2.15.1") {
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param method a character string giving a method for computing covariances in the presence of missing values. This must be (an abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"}, \code{"complete.obs"}, \code{"na.or.complete"}, or \code{"pairwise.complete.obs"}. Defaults to \code{"pairwise"}.
+#' @param cor_matrix the named correlation matrix to use for calculations
 #' @param palette a ColorBrewer palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.
 #' @param name a character string for the legend that shows quintiles of correlation coefficients.
 #' @param geom the geom object to use. Accepts either \code{tile} (the default) or \code{circle}, to plot proportionally scaled circles.
