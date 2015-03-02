@@ -4,15 +4,17 @@
 \alias{ggcorr}
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
-ggcorr(data, method = "pairwise", palette = "RdYlGn", name = "rho",
-  geom = "tile", min_size = 2, max_size = 6, label = FALSE,
-  label_alpha = FALSE, label_color = "black", label_round = 1,
-  nbreaks = 8, ...)
+ggcorr(data, method = "pairwise", cor_matrix = cor(data, use = method),
+  palette = "RdYlGn", name = "rho", geom = "tile", min_size = 2,
+  max_size = 6, label = FALSE, label_alpha = FALSE,
+  label_color = "black", label_round = 1, nbreaks = 8, ...)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
 
 \item{method}{a character string giving a method for computing covariances in the presence of missing values. This must be (an abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"}, \code{"complete.obs"}, \code{"na.or.complete"}, or \code{"pairwise.complete.obs"}. Defaults to \code{"pairwise"}.}
+
+\item{cor_matrix}{the named correlation matrix to use for calculations}
 
 \item{palette}{a ColorBrewer palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.}
 
