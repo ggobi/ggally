@@ -53,6 +53,13 @@ if(getRversion() >= "2.15.1") {
 #'   angle = -45,
 #'   palette = "PuOr" # colorblind safe, photocopy-able
 #' ) + ggplot2::labs(title = "Correlation Matrix")
+#'
+#' # Supply your own correlation matrix
+#' ggcorr(
+#'   data = NULL,
+#'   cor_matrix = cor(dt[,-1], use = "pairwise")
+#' )
+
 ggcorr <- function(
   data,
   method = "pairwise",
