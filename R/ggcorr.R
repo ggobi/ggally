@@ -52,7 +52,8 @@ if(getRversion() >= "2.15.1") {
 #'   angle = -45,
 #'   palette = "PuOr" # colorblind safe, photocopy-able
 #' ) + ggplot2::labs(title = "Correlation Matrix")
-ggcorr <- function(data,
+ggcorr <- function(
+  data,
   method = "pairwise",
   palette = "RdYlGn",
   name = "rho",
