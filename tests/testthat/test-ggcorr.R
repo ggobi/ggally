@@ -40,7 +40,12 @@ test_that("examples", {
 
 
 test_that("data.matrix", {
-  # Default output.
   p <- ggcorr(data.matrix(flea[, -1]))
+  expect_equal(length(p$layers), 2)
+})
+
+
+test_that("cor_matrix", {
+  p <- ggcorr(corMatrix = cor(flea[, -1], use = "pairwise"))
   expect_equal(length(p$layers), 2)
 })
