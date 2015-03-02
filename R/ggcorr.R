@@ -55,6 +55,7 @@ if(getRversion() >= "2.15.1") {
 ggcorr <- function(
   data,
   method = "pairwise",
+  cor_matrix = cor(data, use = method),
   palette = "RdYlGn",
   name = "rho",
   geom = "tile",
@@ -67,7 +68,7 @@ ggcorr <- function(
   nbreaks = 8,
   ...) {
 
-  M <- cor(data, use = method)
+  M <- cor_matrix
 
   # correlation coefficients
   D <- round(M, label_round)
