@@ -68,6 +68,12 @@ ggcorr(
   angle = -45,
   palette = "PuOr" # colorblind safe, photocopy-able
 ) + ggplot2::labs(title = "Correlation Matrix")
+
+# Supply your own correlation matrix
+ggcorr(
+  data = NULL,
+  cor_matrix = cor(dt[,-1], use = "pairwise")
+)
 }
 \author{
 Francois Briatte \email{f.briatte@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@gmail.com}
