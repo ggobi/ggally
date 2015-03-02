@@ -71,15 +71,18 @@ ggcorr <- function(
 
   # correlation coefficients
   D <- round(M, label_round)
+
   D <- D * lower.tri(D)
   D <- as.data.frame(D)
-  D <- data.frame(row = names(data), D)
+
+  rowNames <- names(D)
+  D <- data.frame(row = rowNames, D)
   D <- melt(D, id.vars = "row")
 
   # correlation quantiles
   M <- M * lower.tri(M)
   M <- as.data.frame(M)
-  M <- data.frame(row = names(data), M)
+  M <- data.frame(row = rowNames, M)
   M <- melt(M, id.vars = "row")
   M$value[M$value == 0] <- NA
   s <- seq(-1, 1, length.out = nbreaks + 1)
