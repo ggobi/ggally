@@ -46,6 +46,6 @@ test_that("data.matrix", {
 
 
 test_that("cor_matrix", {
-  p <- ggcorr(corMatrix = cor(flea[, -1], use = "pairwise"))
+  p <- ggcorr(data = NULL, cor_matrix = cor(flea[, -1], use = "pairwise"))
   expect_equal(length(p$layers), 2)
 })
