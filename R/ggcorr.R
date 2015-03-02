@@ -67,7 +67,7 @@ ggcorr <- function(
   nbreaks = 8,
   ...) {
 
-  M <- cor(data[1:ncol(data)], use = method)
+  M <- cor(data, use = method)
 
   # correlation coefficients
   D <- round(M, label_round)
