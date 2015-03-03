@@ -5,41 +5,86 @@
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
 ggcorr(data, method = "pairwise", cor_matrix = cor(data, use = method),
-  palette = "RdYlGn", name = "rho", geom = "tile", min_size = 2,
+  palette = "RdYlGn", name = "", geom = "tile", min_size = 2,
   max_size = 6, label = FALSE, label_alpha = FALSE,
-  label_color = "black", label_round = 1, nbreaks = 8, ...)
+  label_color = "black", label_round = 1, nbreaks = NULL, digits = 2,
+  drop = FALSE, low = "#d73027", mid = "#ffffbf", high = "#1a9850",
+  midpoint = 0, limits = TRUE, ...)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
 
-\item{method}{a character string giving a method for computing covariances in the presence of missing values. This must be (an abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"}, \code{"complete.obs"}, \code{"na.or.complete"}, or \code{"pairwise.complete.obs"}. Defaults to \code{"pairwise"}.}
+\item{method}{a character string giving a method for computing covariances in the presence of missing values. This must be (an abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"}, \code{"complete.obs"}, \code{"na.or.complete"}, or \code{"pairwise.complete.obs"}.
+Defaults to \code{"pairwise"}.}
 
-\item{cor_matrix}{the named correlation matrix to use for calculations}
+\item{cor_matrix}{the named correlation matrix to use for calculations.}
 
-\item{palette}{a ColorBrewer palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.}
+\item{palette}{if \code{nbreaks} has been set to something, a ColorBrewer
+palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.}
 
-\item{name}{a character string for the legend that shows quintiles of correlation coefficients.}
+\item{name}{a character string for the legend that shows quintiles of
+correlation coefficients. Defaults to nothing.}
 
-\item{geom}{the geom object to use. Accepts either \code{tile} (the default) or \code{circle}, to plot proportionally scaled circles.}
+\item{geom}{the geom object to use. Accepts either \code{tile} (the default)
+or \code{circle}, to plot proportionally scaled circles.}
 
-\item{min_size}{the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{2}.}
+\item{min_size}{the maximum size for circles, as passed to \code{scale_size_identity}
+for proportional scaling. Defaults to \code{2}.}
 
-\item{max_size}{the maximum size for circles, as passed to \code{scale_size_identity} for proportional scaling. Defaults to \code{6}.}
+\item{max_size}{the maximum size for circles, as passed to \code{scale_size_identity}
+for proportional scaling. Defaults to \code{6}.}
 
-\item{label}{whether to add correlation coefficients as two-digit numbers over the plot. Defaults to \code{FALSE}.}
+\item{label}{whether to add correlation coefficients as two-digit numbers
+over the plot. Defaults to \code{FALSE}.}
 
-\item{label_alpha}{whether to make the correlation coefficients transparent as they come close to 0. Defaults to \code{FALSE}.}
+\item{label_alpha}{whether to make the correlation coefficients transparent
+as they come close to 0. Defaults to \code{FALSE}.}
 
 \item{label_color}{color for the correlation coefficients. Defaults to \code{"black"}.}
 
-\item{label_round}{decimal rounding of the correlation coefficients. Defaults to \code{1}.}
+\item{label_round}{decimal rounding of the correlation coefficients.
+Defaults to \code{1}.}
 
-\item{nbreaks}{number of breaks to apply.  Defaults to \code{8}.}
+\item{nbreaks}{number of breaks to apply to categorize the correlation
+coefficients. Defaults to \code{NULL} (continuous scaling).}
 
-\item{...}{other arguments supplied to geom_text for the diagonal labels.  Arguments pertaining to the title or other items can be achieved through ggplot2 methods.}
+\item{digits}{number of digits to show in the breaks of the correlation
+coefficients. Defaults to \code{2}.}
+
+\item{drop}{use the empirical range of correlation coefficients for their categorization,
+which is \emph{not} recommended (see 'Details'). Defaults to \code{FALSE}.}
+
+\item{low}{lower color of the gradient for continuous scaling of the correlation
+coefficients. Defaults to \code{d73027} (red).}
+
+\item{mid}{mid color of the gradient for continuous scaling of the correlation
+coefficients. Defaults to \code{d73027} (yellow).}
+
+\item{high}{upper color of the gradient for continuous scaling of the correlation
+coefficients. Defaults to \code{1a9850} (red).}
+
+\item{midpoint}{the midpoint value for continuous scaling of the correlation
+coefficients. Defaults to \code{0}.}
+
+\item{limits}{whether to bound the continuous color scaling of the correlation
+coefficients between -1 and +1. Defaults to \code{TRUE}.}
+
+\item{...}{other arguments supplied to geom_text for the diagonal labels.
+Arguments pertaining to the title or other items can be achieved through ggplot2 methods.}
 }
 \description{
 Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \url{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
+}
+\details{
+The \code{nbreaks} argument tries to break up the correlation
+coefficients into an ordinal color scale. Recommended values for the numbers
+of breaks are 3 to 11, as values above 11 are visually difficult to separate
+and are not supported by diverging ColorBrewer palettes.
+
+The breaks will range from -1 to +1, unless drop is set to \code{FALSE}, in
+which case the empirical range of the correlation coefficients is used. The
+latter is not recommended, as it creates a disbalance between the colors of
+negative and positive coefficients.
 }
 \examples{
 # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -51,9 +96,7 @@ ggcorr(dt[, -1])
 # Labelled output, with coefficient transparency.
 ggcorr(dt[, -1],
        label = TRUE,
-       label_alpha = TRUE,
-       name = "") +
-  ggplot2::theme(legend.position = "bottom")
+       label_alpha = TRUE)
 
 # Custom options.
 ggcorr(
@@ -76,7 +119,8 @@ ggcorr(
 )
 }
 \author{
-Francois Briatte \email{f.briatte@gmail.com} with contributions from Amos B. Elberg \email{amos.elberg@gmail.com}
+Francois Briatte \email{f.briatte@gmail.com} with contributions from
+Amos B. Elberg \email{amos.elberg@gmail.com} and Barret Schloerke \email{schloerke@gmail.com}
 }
 \seealso{
 \code{\link{cor}} and \code{\link[arm]{corrplot}}
