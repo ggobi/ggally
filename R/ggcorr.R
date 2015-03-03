@@ -192,7 +192,7 @@ ggcorr <- function(
       p = p +
         scale_size_continuous(range = c(min_size, max_size)) +
         scale_fill_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint) +
-        guide(size = FALSE)
+        guides(size = FALSE)
     else
       p = p +
         scale_size_identity(name) +
