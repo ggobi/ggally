@@ -198,7 +198,8 @@ ggsurv_m <- function(
 
   strataEqualNames <- unlist(strsplit(names(s$strata), '='))
   groups <- factor(
-    strataEqualNames[seq(2, 2 * strata, by = 2)]
+    strataEqualNames[seq(2, 2 * strata, by = 2)],
+    levels = strataEqualNames[seq(2, 2 * strata, by = 2)]
   )
 
   gr.name <-  strataEqualNames[1]
@@ -274,8 +275,7 @@ ggsurv_m <- function(
       )
     }
     else if(!identical(cens.col,surv.col)) {
-      warning ("Color scales for survival curves and censored points don't match.
-              Only one color scale can be used. Defaulting to surv.col")
+      warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
       
       pl <- pl + geom_point(
         data = dat.cens,
