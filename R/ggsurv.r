@@ -274,8 +274,10 @@ ggsurv_m <- function(
         col     = col
       )
     }
-    else if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
-      warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
+    else {
+      if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
+        warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
+      }
       
       pl <- pl + geom_point(
         data = dat.cens,
