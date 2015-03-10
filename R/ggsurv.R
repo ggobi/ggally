@@ -86,7 +86,7 @@ ggsurv <- function(
   CI         = 'def',
   plot.cens  = TRUE,
   surv.col   = 'gg.def',
-  cens.col   = 'red',
+  cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
   cens.shape = 3,
@@ -123,7 +123,7 @@ ggsurv_s <- function(
   CI         = 'def',
   plot.cens  = TRUE,
   surv.col   = 'gg.def',
-  cens.col   = 'red',
+  cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
   cens.shape = 3,
@@ -161,11 +161,13 @@ ggsurv_s <- function(
     if (nrow(dat.cens) == 0){
       stop('There are no censored observations')
     }
+    col <- ifelse(cens.col == 'gg.def', 'red', cens.col)
+    
     pl <- pl + geom_point(
       data    = dat.cens,
       mapping = aes(y = surv),
       shape   = cens.shape,
-      col     = cens.col
+      col     = col
     )
   }
 
@@ -182,7 +184,7 @@ ggsurv_m <- function(
   CI         = 'def',
   plot.cens  = TRUE,
   surv.col   = 'gg.def',
-  cens.col   = 'red',
+  cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
   cens.shape = 3,
@@ -196,7 +198,8 @@ ggsurv_m <- function(
 
   strataEqualNames <- unlist(strsplit(names(s$strata), '='))
   groups <- factor(
-    strataEqualNames[seq(2, 2 * strata, by = 2)]
+    strataEqualNames[seq(2, 2 * strata, by = 2)],
+    levels = strataEqualNames[seq(2, 2 * strata, by = 2)]
   )
 
   gr.name <-  strataEqualNames[1]
@@ -262,12 +265,27 @@ ggsurv_m <- function(
     if (nrow(dat.cens) == 0) {
       stop('There are no censored observations')
     }
-    pl <- pl + geom_point(
-      data    = dat.cens,
-      mapping = aes(y = surv),
-      shape   = cens.shape,
-      col     = cens.col
-    )
+    if (length(cens.col) == 1) {
+      col <- ifelse(cens.col == 'gg.def', 'red', cens.col)
+      pl <- pl + geom_point(
+        data    = dat.cens,
+        mapping = aes(y = surv),
+        shape   = cens.shape,
+        col     = col
+      )
+    }
+    else {
+      if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
+        warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
+      }
+      
+      pl <- pl + geom_point(
+        data = dat.cens,
+        mapping = aes(y=surv, col = group),
+        shape = cens.shape,
+        show_guide = FALSE
+      )
+    }
   }
 
   if(identical(back.white, TRUE)) {
