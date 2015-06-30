@@ -117,6 +117,9 @@ ggcorr <- function(
 
   M <- cor_matrix
 
+  # protect against spaces in variable names
+  colnames(M) = rownames(M) = gsub(" ", "_", colnames(M))
+
   # correlation coefficients
   D <- round(M, label_round)
 
