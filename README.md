@@ -1,6 +1,7 @@
 # GGally: Ally to ggplot2
 
-Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally) [![Coverage Status](https://coveralls.io/repos/ggobi/ggally/badge.svg?branch=master)](https://coveralls.io/r/ggobi/ggally?branch=master)
+Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally) [![Coverage Status](https://coveralls.io/repos/ggobi/ggally/badge.svg?branch=master)](https://coveralls.io/r/ggobi/ggally?branch=master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](http://cran.r-project.org/package=GGally)
+
 
 Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally) [![Coverage Status](https://coveralls.io/repos/ggobi/ggally/badge.svg?branch=dev)](https://coveralls.io/r/ggobi/ggally?branch=dev)
 

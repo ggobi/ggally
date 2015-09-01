@@ -1,5 +1,4 @@
 
-
 if(getRversion() >= "2.15.1") {
   utils::globalVariables(c("variable", "value", "num"))
 }
@@ -59,7 +58,7 @@ if(getRversion() >= "2.15.1") {
 #' negative and positive coefficients.
 #' @seealso \code{\link{cor}} and \code{\link[arm]{corrplot}}
 #' @author Francois Briatte \email{f.briatte@@gmail.com} with contributions from
-#' Amos B. Elberg \email{amos.elberg@@gmail.com} and Barret Schloerke \email{schloerke@gmail.com}
+#' Amos B. Elberg \email{amos.elberg@@gmail.com} and Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom reshape melt melt.data.frame melt.default
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -117,7 +116,7 @@ ggcorr <- function(
   ...) {
 
   M <- cor_matrix
-  
+
   # protect against spaces in variable names
   colnames(M) = rownames(M) = gsub(" ", "_", colnames(M))
 
@@ -186,35 +185,36 @@ ggcorr <- function(
       geom_point(aes(size = num + 0.25), color = "grey50") +
       geom_point(aes(size = num, color = value))
 
-    if(is.null(nbreaks) & limits)
+    if(is.null(nbreaks) & limits) {
       p = p +
         scale_size_continuous(range = c(min_size, max_size)) +
         scale_color_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint,
                               limits = c(-1, 1)) +
         guides(size = FALSE)
-    else if(is.null(nbreaks))
+    } else if(is.null(nbreaks)) {
       p = p +
         scale_size_continuous(range = c(min_size, max_size)) +
         scale_fill_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint) +
-        guide(size = FALSE)
-    else
+        guides(size = FALSE)
+    } else {
       p = p +
         scale_size_identity(name) +
         scale_color_brewer(name, palette = palette, drop = drop) +
         guides(colour = guide_legend(name, override.aes = list(size = (min_size + max_size) / 2)))
+    }
 
-  }
-  else {
+  } else {
 
     p = p + geom_tile(aes(fill = value), colour = "white")
 
-    if(is.null(nbreaks) & limits)
+    if(is.null(nbreaks) & limits) {
       p = p + scale_fill_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint,
                                    limits = c(-1, 1))
-    else if(is.null(nbreaks))
+    } else if(is.null(nbreaks)) {
       p = p + scale_fill_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint)
-    else
+    } else {
       p = p + scale_fill_brewer(name, palette = palette, drop = drop)
+    }
 
   }
 
@@ -225,8 +225,7 @@ ggcorr <- function(
         geom_text(data = subset(D, value != 0),
                   aes(row, variable, label = value, alpha = abs(as.numeric(value))),
                   color = label_color, show_guide = FALSE)
-    }
-    else {
+    } else {
       p = p +
         geom_text(data = subset(D, value != 0),
                   aes(row, variable, label = value),

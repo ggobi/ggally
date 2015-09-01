@@ -5,7 +5,7 @@
 \title{Plot \code{survfit} objects using \code{ggplot2}}
 \usage{
 ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
-  cens.col = "red", lty.est = 1, lty.ci = 2, cens.shape = 3,
+  cens.col = "gg.def", lty.est = 1, lty.ci = 2, cens.shape = 3,
   back.white = FALSE, xlab = "Time", ylab = "Survival", main = "")
 }
 \arguments{
