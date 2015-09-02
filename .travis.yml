@@ -28,6 +28,24 @@ r_github_packages:
   # - jimhester/covr@ec4baaa0d892273498f4e66edf73a060b43e33ad
   - jimhester/covr
 # r_binary_packages: [rJava, igraph, minqa, nloptr, RcppEigen, colorspace, reshape2, proto, abind, coda, dichromat, labeling, brew, gtable, reshape, network, RColorBrewer, scagnostics, sna, lme4, munsell, arm, scales, ggplot2, cairoDevice, RGtk2, knitr]
+r_binary_packages: 
+  - arm
+  - geosphere
+  - ggmap
+  - igraph
+  - intergraph
+  - knitr
+  - maps
+  - network
+  - RColorBrewer
+  - scagnostics
+  - scales
+  - sna
+  - survival
+  - tnet
+  - roxygen2
+  - testthat
+
 
 # script:
 #   - ./travis-tool.sh run_tests
