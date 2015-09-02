@@ -6,7 +6,7 @@ Title: Extension to ggplot2
 Type: Package
 LazyLoad: yes
 LazyData: true
-Url: https://github.com/ggobi/ggally
+URL: https://github.com/ggobi/ggally
 BugReports: https://github.com/ggobi/ggally/issues
 Authors@R: c(
     person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs and ggally_*.  contributor for all functions."),
