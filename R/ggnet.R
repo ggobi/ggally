@@ -88,7 +88,7 @@ ggnet <- function(
   top8.nodes       = FALSE,     # color the top 8 nodes by weighting method with ColorBrewer Set1
   trim.labels      = TRUE,      # clean vertex names
   quantize.weights = FALSE,     # break weights to quartiles
-  subset.threshold = 0,         # what nodes to exclude, based on weight.method ≥ subset
+  subset.threshold = 0,         # what nodes to exclude, based on weight.method >= subset
   legend.position  = "right",   # set to "none" to remove from plot
   ...                           # passed to geom_text for node labels
 ){
