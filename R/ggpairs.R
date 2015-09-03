@@ -352,7 +352,7 @@ ggpairs <- function(
         }
       }
 
-      combo_params <- add_and_overwrite_aes(params, section_params)
+      combo_params <- add_and_overwrite_params(params, section_params)
 
       p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
 
@@ -363,7 +363,7 @@ ggpairs <- function(
       subType <- ifelse(up, upper$discrete, lower$discrete)
 
       combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      combo_params <- add_and_overwrite_aes(params, section_params)
+      combo_params <- add_and_overwrite_params(params, section_params)
 
       if (subType == "ratio") {
         p <- ggally_ratio(data[, c(yColName, xColName)])
@@ -397,14 +397,14 @@ ggpairs <- function(
           combo_aes <- mapping_color_fill(combo_aes)
         }
 
-        combo_params <- add_and_overwrite_aes(params, diag$params)
+        combo_params <- add_and_overwrite_params(params, diag$params)
 
         p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
 
       } else if (type == "label") {
         combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
-        combo_params <- add_and_overwrite_aes(params, diag$params)
-        combo_params <- add_and_overwrite_aes(combo_params, c("label" = columnLabels[posX]))
+        combo_params <- add_and_overwrite_params(params, diag$params)
+        combo_params <- add_and_overwrite_params(combo_params, c("label" = columnLabels[posX]))
 
         p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
       }
