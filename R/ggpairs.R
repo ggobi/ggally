@@ -492,6 +492,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @return aes_string output
 #' @import ggplot2
+#' @rdname add_and_overwrite_aes
 #' @examples
 #'  data(diamonds, package="ggplot2")
 #'  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],1000),]
@@ -517,6 +518,7 @@ add_and_overwrite_aes <- function(current, new) {
   current
 }
 
+#' @rdname add_and_overwrite_aes
 add_and_overwrite_params <- function(current, new) {
   add_and_overwrite_aes(current, new)
 }
