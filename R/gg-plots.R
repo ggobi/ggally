@@ -836,15 +836,15 @@ ggally_barDiag <- function(data, mapping, ...){
    } else {
     # message("is categorical")
     # xVal <- mapping$x
-    # mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
+    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
     # # p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
     # p <- ggplot(data, mapping) + geom_bar(...)
     # # p <- p + scale_x_continuous(NULL, labels ="",breaks = 1)
 
     # xVal <- mapping$x
-    # mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
-    # mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
-    # mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
+    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
+    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
+    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
     # p <- ggplot(data = data, mapping) + geom_bar(...)
     # p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
     p <- p + geom_bar(...)
@@ -901,7 +901,7 @@ ggally_text <- function(
   if(is.null(mapping)) {
     mapping <- new_mapping
   } else {
-    mapping <- addAndOverwriteAes(mapping, new_mapping)
+    mapping <- add_and_overwrite_aes(mapping, new_mapping)
   }
 
   if(is.null(mapping$colour)) {

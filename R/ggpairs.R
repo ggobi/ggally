@@ -338,11 +338,11 @@ ggpairs <- function(
         subType <- ifelse(isContinuous, lower$continuous, lower$combo)
       }
 
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+      combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), section_aes)
 
       if (isContinuous) {
         if (subType == "density") {
-          combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
+          combo_aes <- add_and_overwrite_aes(combo_aes, aes_string(group = combo_aes$colour))
 
         }
       } else {
@@ -352,7 +352,7 @@ ggpairs <- function(
         }
       }
 
-      combo_params <- addAndOverwriteAes(params, section_params)
+      combo_params <- add_and_overwrite_aes(params, section_params)
 
       p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
 
@@ -362,15 +362,15 @@ ggpairs <- function(
       }
       subType <- ifelse(up, upper$discrete, lower$discrete)
 
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      combo_params <- addAndOverwriteAes(params, section_params)
+      combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), section_aes)
+      combo_params <- add_and_overwrite_aes(params, section_params)
 
       if (subType == "ratio") {
         p <- ggally_ratio(data[, c(yColName, xColName)])
 
       } else if (subType == "facetbar") {
         if (!is.null(combo_aes$colour)) {
-          combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
+          combo_aes <- add_and_overwrite_aes(combo_aes, aes_string(fill = combo_aes$colour))
         }
         p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
       }
@@ -388,7 +388,7 @@ ggpairs <- function(
           subType <- diag$discrete
         }
 
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+        combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
 
         if (
           (subType != "density" && type == "stat_bin-num") ||
@@ -397,14 +397,14 @@ ggpairs <- function(
           combo_aes <- mapping_color_fill(combo_aes)
         }
 
-        combo_params <- addAndOverwriteAes(params, diag$params)
+        combo_params <- add_and_overwrite_aes(params, diag$params)
 
         p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
 
       } else if (type == "label") {
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-        combo_params <- addAndOverwriteAes(params, diag$params)
-        combo_params <- addAndOverwriteAes(combo_params, c("label" = columnLabels[posX]))
+        combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
+        combo_params <- add_and_overwrite_aes(params, diag$params)
+        combo_params <- add_and_overwrite_aes(combo_params, c("label" = columnLabels[posX]))
 
         p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
       }
@@ -501,7 +501,7 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 #'   color = "color",
 #'   title = "Diamonds Sample")
 #'
-addAndOverwriteAes <- function(current, new) {
+add_and_overwrite_aes <- function(current, new) {
   if (length(new) >= 1) {
     for (i in 1:length(new)) {
       current[names(new)[i]] <- new[i]
@@ -515,6 +515,10 @@ addAndOverwriteAes <- function(current, new) {
   }
 
   current
+}
+
+add_and_overwrite_params <- function(current, new) {
+  add_and_overwrite_aes(current, new)
 }
 
 
@@ -533,7 +537,7 @@ mapping_color_fill <- function(current) {
   } else if (any(color %in% currentNames)) {
     # fill <- current[["fill" %in% currentNames]]
     # col <- current[[color %in% currentNames]]
-    # current <- addAndOverwriteAes(current, aes_string(fill = col, color = NA))
+    # current <- add_and_overwrite_aes(current, aes_string(fill = col, color = NA))
     current$fill <- current$colour
     current$colour <- NULL
   }
