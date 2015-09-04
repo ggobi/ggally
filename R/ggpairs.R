@@ -533,13 +533,13 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
   }
 
   if (is.null(obj$continuous) && (!is.null(continuous))) {
-    obj$continuous <- "cor"
+    obj$continuous <- continuous
   }
   if (is.null(obj$combo) && (!is.null(combo))) {
-    obj$combo <- "box"
+    obj$combo <- combo
   }
   if (is.null(obj$discrete) && (!is.null(discrete))) {
-    obj$discrete <- "facetbar"
+    obj$discrete <- discrete
   }
   obj
 }
