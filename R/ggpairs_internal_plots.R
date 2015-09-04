@@ -1,7 +1,5 @@
-wrap_fn_with_params <- function(funcVal, ...) {
-
-  params <- list(...)
-
+#' @export
+wrap_fn_with_param_arg <- function(funcVal, params = NULL) {
   ret <- list()
   funcArgName <- substitute(funcVal)
 
@@ -38,6 +36,11 @@ wrap_fn_with_params <- function(funcVal, ...) {
   ret$params <- params
   class(ret) <- "ggmatrix_fn_with_params"
   ret
+
+}
+#' @export
+wrap_fn_with_params <- function(funcVal, ...) {
+  wrap_fn_with_param_arg(funcVal, params = list(...))
 }
 
 print.ggmatrix_fn_with_params <- function(x, ...) {
