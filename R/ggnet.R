@@ -55,16 +55,6 @@ if(getRversion() >= "2.15.1") {
 #' # random groups
 #' category = LETTERS[rbinom(x, 4, .5)]
 #' ggnet(rnd, label.nodes = TRUE, color = "white", segment.color = "grey10", node.group = category)
-#'
-#' # city and service firms data from the UCIrvine Network Data Repository
-#' data(cityServiceFirms, package = "GGally")
-#'
-#' # plot cities, firms and law firms
-#' type = cityServiceFirms %v% "type"
-#' type = ifelse(grepl("City|Law", type), gsub("I+", "", type), "Firm")
-#' pRnd <- ggnet(cityServiceFirms, mode = "kamadakawai", alpha = .2, node.group = type,
-#'       label.nodes = c("Paris", "Beijing", "Chicago"), color = "darkred")
-#' # pRnd
 #' }
 
 ggnet <- function(
