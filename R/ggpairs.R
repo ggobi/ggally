@@ -201,62 +201,13 @@ ggpairs <- function(
     ))
   }
 
+  upper <- set_to_blank_list_if_blank(upper)
+  lower <- set_to_blank_list_if_blank(lower)
+  diag  <- set_to_blank_list_if_blank(diag, combo = FALSE)
 
-  if (!is.list(upper) && upper == "blank") {
-    upper <- list()
-    upper$continuous = "blank"
-    upper$combo = "blank"
-    upper$discrete = "blank"
-  }
-  if (!is.list(lower) && lower == "blank") {
-    lower <- list()
-    lower$continuous = "blank"
-    lower$combo = "blank"
-    lower$discrete = "blank"
-  }
-  if (!is.list(diag) && diag == "blank") {
-    diag <- list()
-    diag$continuous = "blank"
-    diag$discrete = "blank"
-  }
-
-  if (!is.list(upper)) {
-    stop("'upper' is not a list")
-  }
-
-  if (is.null(upper$continuous)) {
-    upper$continuous <- "cor"
-  }
-  if (is.null(upper$combo)) {
-    upper$combo <- "box"
-  }
-  if (is.null(upper$discrete)) {
-    upper$discrete <- "facetbar"
-  }
-
-  if (!is.list(lower)) {
-    stop("'lower' is not a list")
-  }
-
-  if (is.null(lower$continuous)) {
-    lower$continuous <- "points"
-  }
-  if (is.null(lower$combo)) {
-    lower$combo <- "facethist"
-  }
-  if (is.null(lower$discrete)) {
-    lower$discrete <- "facetbar"
-  }
-
-  if (!is.list(diag)) {
-    stop("'diag' is not a list")
-  }
-  if (is.null(diag$continuous)) {
-    diag$continuous <- "density"
-  }
-  if (is.null(diag$discrete)) {
-    diag$discrete <- "bar"
-  }
+  upper <- check_and_set_defaults("upper", upper, continuous = "cor", combo = "box", discrete = "facetbar")
+  lower <- check_and_set_defaults("lower", lower, continuous = "points", combo = "facethist", discrete = "facetbar")
+  diag <- check_and_set_defaults("diag", diag, continuous = "density", discrete = "bar")
 
   data <- as.data.frame(data)
   for (i in 1:dim(data)[2] ) {
@@ -554,6 +505,43 @@ mapping_color_fill <- function(current) {
   # } else if(!is.null(mapping$colour)) {
   # }
   current
+}
+
+
+#' Aesthetic Mapping Color Fill
+#'
+#' Replace the fill with the color and make color NULL.
+#'
+#' @param current the current aesthetics
+#' @keywords internal
+set_to_blank_list_if_blank <- function(val, combo = TRUE) {
+  if (!is.list(val) && val == "blank") {
+    val <- list()
+    val$continuous = "blank"
+    if (combo) {
+      val$combo = "blank"
+    }
+    val$discrete = "blank"
+  }
+
+  val
+}
+
+check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, discrete = NULL) {
+  if (!is.list(obj)) {
+    stop(str_c("'", name, "' is not a list"))
+  }
+
+  if (is.null(obj$continuous) && (!is.null(continuous))) {
+    obj$continuous <- "cor"
+  }
+  if (is.null(obj$combo) && (!is.null(combo))) {
+    obj$combo <- "box"
+  }
+  if (is.null(obj$discrete) && (!is.null(discrete))) {
+    obj$discrete <- "facetbar"
+  }
+  obj
 }
 
 
