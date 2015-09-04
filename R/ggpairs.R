@@ -382,6 +382,7 @@ ggpairs <- function(
   plotMatrix
 }
 
+
 #' Generate GGally Function Text
 #'
 #' Generate GGally function text with data, mapping, and parameters.
