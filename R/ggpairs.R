@@ -311,14 +311,14 @@ ggpairs <- function(
       cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
     }
 
-    section_aes <- section_params <- NULL
+    sectionAes <- sectionParams <- NULL
 
     if (up) {
-      section_aes <- upper$aes_string
-      section_params <- upper$params
+      sectionAes <- upper$aes_string
+      sectionParams <- upper$params
     } else {
-      section_aes <- lower$aes_string
-      section_params <- lower$params
+      sectionAes <- lower$aes_string
+      sectionParams <- lower$params
     }
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
@@ -338,23 +338,23 @@ ggpairs <- function(
         subType <- ifelse(isContinuous, lower$continuous, lower$combo)
       }
 
-      combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), section_aes)
+      comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), sectionAes)
 
       if (isContinuous) {
         if (subType == "density") {
-          combo_aes <- add_and_overwrite_aes(combo_aes, aes_string(group = combo_aes$colour))
+          comboAes <- add_and_overwrite_aes(comboAes, aes_string(group = comboAes$colour))
 
         }
       } else {
         # isCombo
         if (! subType %in% c("dot", "facetdensity")) {
-          combo_aes <- mapping_color_fill(combo_aes)
+          comboAes <- mapping_color_fill(comboAes)
         }
       }
 
-      combo_params <- add_and_overwrite_params(params, section_params)
+      comboParams <- add_and_overwrite_params(params, sectionParams)
 
-      p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+      p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
 
     } else if (type == "mosaic") {
       if (printInfo) {
@@ -362,17 +362,17 @@ ggpairs <- function(
       }
       subType <- ifelse(up, upper$discrete, lower$discrete)
 
-      combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      combo_params <- add_and_overwrite_params(params, section_params)
+      comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), sectionAes)
+      comboParams <- add_and_overwrite_params(params, sectionParams)
 
       if (subType == "ratio") {
         p <- ggally_ratio(data[, c(yColName, xColName)])
 
       } else if (subType == "facetbar") {
-        if (!is.null(combo_aes$colour)) {
-          combo_aes <- add_and_overwrite_aes(combo_aes, aes_string(fill = combo_aes$colour))
+        if (!is.null(comboAes$colour)) {
+          comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
         }
-        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+        p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
       }
 
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
@@ -388,25 +388,25 @@ ggpairs <- function(
           subType <- diag$discrete
         }
 
-        combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
+        comboAes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
 
         if (
           (subType != "density" && type == "stat_bin-num") ||
           (type == "stat_bin-cat")
         ) {
-          combo_aes <- mapping_color_fill(combo_aes)
+          comboAes <- mapping_color_fill(comboAes)
         }
 
-        combo_params <- add_and_overwrite_params(params, diag$params)
+        comboParams <- add_and_overwrite_params(params, diag$params)
 
-        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
+        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), comboAes, comboParams, printInfo)
 
       } else if (type == "label") {
-        combo_aes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
-        combo_params <- add_and_overwrite_params(params, diag$params)
-        combo_params <- add_and_overwrite_params(combo_params, c("label" = columnLabels[posX]))
+        comboAes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
+        comboParams <- add_and_overwrite_params(params, diag$params)
+        comboParams <- add_and_overwrite_params(comboParams, c("label" = columnLabels[posX]))
 
-        p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
+        p <- make_ggpair_text("diagAxis", comboAes, comboParams, printInfo)
       }
     }
 
@@ -522,6 +522,11 @@ add_and_overwrite_aes <- function(current, new) {
 add_and_overwrite_params <- function(current, new) {
   add_and_overwrite_aes(current, new)
 }
+
+section_params <- function(current, new) {
+  add_and_overwrite_aes(current, new)
+}
+
 
 
 #' Aesthetic Mapping Color Fill
