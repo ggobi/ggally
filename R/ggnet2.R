@@ -396,11 +396,11 @@ ggnet2 <- function(
   }
   
   if (network::is.hyper(net)) {
-    stop("ggnet2 does not know how to handle hyper graphs")
+    stop("ggnet2 cannot plot hyper graphs")
   }
   
   if (network::is.multiplex(net)) {
-    stop("ggnet2 does not know how to handle multiplex graphs")
+    stop("ggnet2 cannot plot multiplex graphs")
   }
   
   if (network::has.loops(net)) {
