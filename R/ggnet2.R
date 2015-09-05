@@ -1,170 +1,243 @@
 #' ggnet2 - Plot a network with ggplot2
 #'
-#' Function for making a network plot from an object of class \code{network} or
-#' \code{igraph}, using ggplot2, with additional control over graphical
-#' parameters that are not supported by the \link{ggnet} function.
-#' Please visit \url{http://github.com/briatte/ggnet} for the latest development
-#' and descriptions about ggnet2, and \url{https://briatte.github.io/ggnet} for
-#' a vignette that contains many examples and explanations.
+#' Function for plotting network objects using ggplot2, with additional control
+#' over graphical parameters that are not supported by the \code{\link{ggnet}}
+#' function. Please visit \url{http://github.com/briatte/ggnet} for the latest
+#' version of ggnet2, and \url{https://briatte.github.io/ggnet} for a vignette
+#' that contains many examples and explanations.
 #'
 #' @export
-#' @param net an object of class \code{igraph} or \code{network}, or any object
-#' that can be coerced to the \code{network} class, such as an adjacency or
-#' incidence matrix, or an edge list.
-#' See \link[network:edgeset.constructors]{edgeset.constructors} and
-#' \link[network:network]{network} for details.
-#' If the object is of class \code{igraph}, the
-#' \link[intergraph:asNetwork]{intergraph} package is used to convert it to
-#' class \code{network}.
+#' @param net an object of class \code{\link[network]{network}}, or any object
+#' that can be coerced to this class, such as an adjacency or incidence matrix,
+#' or an edge list: see \link[network]{edgeset.constructors} and
+#' \link[network]{network} for details. If the object is of class
+#' \code{\link[igraph:igraph-package]{igraph}} and the
+#' \code{\link[intergraph:intergraph-package]{intergraph}} package is installed,
+#' it will be used to convert the object: see
+#' \code{\link[intergraph]{asNetwork}} for details.
 #' @param mode a placement method from those provided in the
-#' \link[sna:gplot.layout]{sna} package. Defaults to the Fruchterman-Reingold
-#' force-directed algorithm.
-#' If \code{mode} is set to two numeric vertex attributes of \code{net},
-#' these are used instead.
-#' @param layout.par options to the placement method, as listed in
+#' \code{\link[sna]{sna}} package: see \link[sna:gplot.layout]{gplot.layout} for
+#' details. Also accepts the names of two numeric vertex attributes of
+#' \code{net}, or a matrix of numeric coordinates, in which case the first two
+#' columns of the matrix are used.
+#' Defaults to the Fruchterman-Reingold force-directed algorithm.
+#' @param layout.par options to be passed to the placement method, as listed in
 #' \link[sna]{gplot.layout}.
-#' @param alpha the level of transparency for the edges and nodes.
-#' Defaults to \code{1}.
-#' @param color the color for the nodes, which might be a single value, a vertex
+#' Defaults to \code{NULL}.
+#' @param layout.exp a multiplier to expand the horizontal axis if node labels
+#' get clipped: see \link[scales]{expand_range} for details.
+#' Defaults to \code{0} (no expansion).
+#' @param alpha the level of transparency of the edges and nodes.
+#' Defaults to \code{1} (no transparency).
+#' @param color the color of the nodes, which might be a single value, a vertex
 #' attribute, or a vector of values.
 #' Defaults to \code{grey75}.
-#' @param palette the palette to color the nodes, when \code{color} is not a
-#' color value or a vector of color values. Accepts named vectors of color
-#' values, or any ColorBrewer palette name available through
-#' \link[RColorBrewer:brewer.pal]{brewer.pal}.
-#' Defaults to \code{NULL}.
-#' @param color.palette see \code{palette}
-#' @param color.legend the name to assign to the legend created by
-#' \code{palette}.
-#' Defaults to \code{""} (no name).
 #' @param shape the shape of the nodes, which might be a single value, a vertex
 #' attribute, or a vector of values.
 #' Defaults to \code{19} (solid circle).
-#' @param size the size of the nodes, which might be a single value, a vertex
-#' attribute, or a vector of values. Also accepts \code{"indegree"},
+#' @param size the size of the nodes, in points, which might be a single value,
+#' a vertex attribute, or a vector of values. Also accepts \code{"indegree"},
 #' \code{"outdegree"}, \code{"degree"} or \code{"freeman"} to size the nodes by
 #' their unweighted degree centrality (\code{"degree"} and \code{"freeman"} are
-#' equivalent). See \link[sna:degree]{degree} for details.
+#' equivalent): see \code{\link[sna]{degree}} for details. All node sizes must
+#' be positive.
 #' Defaults to \code{9}.
 #' @param max_size the \emph{maximum} size of the node when \code{size} produces
-#' nodes of different sizes.
+#' nodes of different sizes, in points.
 #' Defaults to \code{9}.
+#' @param na.rm whether to subset the network to nodes that are \emph{not}
+#' missing a given vertex attribute. If set to any vertex attribute of
+#' \code{net}, the nodes for which this attribute is \code{NA} will be removed.
+#' Defaults to \code{NA} (does nothing).
+#' @param palette the palette to color the nodes, when \code{color} is not a
+#' color value or a vector of color values. Accepts named vectors of color
+#' values, or if \code{\link[RColorBrewer]{RColorBrewer}} is installed, any
+#' ColorBrewer palette name: see \code{\link[RColorBrewer]{brewer.pal}} and
+#' \url{http://colorbrewer2.org/} for details.
+#' Defaults to \code{NULL}, which will create an array of grayscale color values
+#' if \code{color} is not a color value or a vector of color values.
+#' @param alpha.palette the palette to control the transparency levels of the
+#' nodes set by \code{alpha} when the levels are not numeric values.
+#' Defaults to \code{NULL}, which will create an array of alpha transparency
+#' values if \code{alpha} is not a numeric value or a vector of numeric values.
+#' @param alpha.legend the name to assign to the legend created by
+#' \code{alpha} when its levels are not numeric values.
+#' Defaults to \code{NA} (no name).
+#' @param color.palette see \code{palette}
+#' @param color.legend the name to assign to the legend created by
+#' \code{palette}.
+#' Defaults to \code{NA} (no name).
+#' @param shape.palette the palette to control the shapes of the nodes set by
+#' \code{shape} when the shapes are not numeric values.
+#' Defaults to \code{NULL}, which will create an array of shape values if
+#' \code{shape} is not a numeric value or a vector of numeric values.
+#' @param shape.legend the name to assign to the legend created by
+#' \code{shape} when its levels are not numeric values.
+#' Defaults to \code{NA} (no name).
+#' @param size.palette the palette to control the sizes of the nodes set by
+#' \code{size} when the sizes are not numeric values.
+#' @param size.legend the name to assign to the legend created by
+#' \code{size}.
+#' Defaults to \code{NA} (no name).
+#' @param size.zero whether to accept zero-sized nodes based on the value(s) of
+#' \code{size}.
+#' Defaults to \code{FALSE}, which ensures that zero-sized nodes are still
+#' shown in the plot and its size legend.
 #' @param size.cut whether to cut the size of the nodes into a certain number of
 #' quantiles. Accepts \code{TRUE}, which tries to cut the sizes into quartiles,
-#' or any positive numeric value. If the size of the nodes do not contain the
-#' specified number of quantiles, the largest possible number is used. See
-#' \link[stats:quantile]{quantile} and \link[base:cut]{cut} for details.
+#' or any positive numeric value, which tries to cut the sizes into that many
+#' quantiles. If the size of the nodes do not contain the specified number of
+#' distinct quantiles, the largest possible number is used.
+#' See \code{\link[stats]{quantile}} and \code{\link[base]{cut}} for details.
 #' Defaults to \code{FALSE} (does nothing).
 #' @param size.min whether to subset the network to nodes with a minimum size,
 #' based on the values of \code{size}.
-#' Defaults to \code{0} (preserves all nodes).
+#' Defaults to \code{NA} (preserves all nodes).
 #' @param size.max whether to subset the network to nodes with a maximum size,
 #' based on the values of \code{size}.
-#' Defaults to \code{0} (preserves all nodes).
-#' @param size.legend the name to assign to the legend created by
-#' \code{size}.
-#' Defaults to \code{""} (no name).
+#' Defaults to \code{NA} (preserves all nodes).
 #' @param label whether to label the nodes. If set to \code{TRUE}, nodes are
 #' labeled with their vertex names. If set to a vector that contains as many
 #' elements as there are nodes in \code{net}, nodes are labeled with these. If
-#' set to any other vector of values, the nodes are labeled only if their
-#' vertex names match one of these values.
+#' set to any other vector of values, the nodes are labeled only when their
+#' vertex name matches one of these values.
 #' Defaults to \code{FALSE} (no labels).
-#' @param label.color the color for the node labels.
+#' @param label.alpha the level of transparency of the node labels.
+#' Defaults to \code{1} (no transparency).
+#' @param label.color the color of the node labels.
 #' Defaults to \code{"black"}.
-#' @param label.size the size for the node labels.
-#' Defaults to \code{max_size / 2} (half the node size or maximum node size),
-#' which defaults to \code{4.5}.
-#' @param label.trim whether to trim the node labels to a fixed-length
-#' substring. See \link[base:substr]{substr} for details.
+#' @param label.size the size of the node labels.
+#' Defaults to \code{max_size / 2} (half the maximum node size), which defaults
+#' to \code{4.5}.
+#' @param label.trim whether to apply some trimming to the node labels. Accepts
+#' any function that can process a character vector, or a strictly positive 
+#' value, in which case the labels are trimmed to a fixed-length substring: see 
+#' \code{\link[base]{substr}} for details.
 #' Defaults to \code{FALSE} (does nothing).
 #' @param node.alpha see \code{alpha}
 #' @param node.color see \code{color}
 #' @param node.label see \code{label}
 #' @param node.shape see \code{shape}
 #' @param node.size see \code{size}
-#' @param na.rm whether to subset the network to nodes that are not missing a
-#' given vertex attribute. If set to any vertex attribute of \code{net}, the
-#' nodes for which this attribute is \code{NA} will be removed.
-#' Defaults to \code{NA} (does nothing).
 #' @param edge.alpha the level of transparency of the edges.
 #' Defaults to the value of \code{alpha}, which defaults to \code{1}.
 #' @param edge.color the color of the edges, as a color value, a vector of color
-#' values, or an edge attribute.
+#' values, or as an edge attribute containing color values.
 #' Defaults to \code{"grey50"}.
 #' @param edge.lty the linetype of the edges, as a linetype value, a vector of
-#' linetype values, or an edge attribute.
+#' linetype values, or as an edge attribute containing linetype values.
 #' Defaults to \code{"solid"}.
-#' @param edge.size the size of the edges, as a numeric value, a vector of
-#' numeric values, or an edge attribute.
+#' @param edge.size the size of the edges, in points, as a numeric value, a
+#' vector of numeric values, or as an edge attribute containing numeric values.
+#' All edge sizes must be strictly positive.
 #' Defaults to \code{0.25}.
-#' @param edge.label a vector of labels to plot at the middle of the edges.
+#' @param edge.label the labels to plot at the middle of the edges, as a single
+#' value, a vector of values, or as an edge attribute.
 #' Defaults to \code{NULL} (no edge labels).
-#' @param edge.label.color the color of the edge labels.
+#' @param edge.label.color the color of the edge labels, as a color value, a
+#' vector of color values, or as an edge attribute containing color values.
 #' Defaults to \code{label.color}, which defaults to \code{"black"}.
 #' @param edge.label.fill the background color of the edge labels.
 #' Defaults to \code{"white"}.
-#' @param edge.label.size the size of the edge labels.
-#' Defaults to \code{max_size / 2}, which defaults to \code{4.5}.
+#' @param edge.label.size the size of the edge labels, in points, as a numeric
+#' value, a vector of numeric values, or as an edge attribute containing numeric
+#' values. All edge label sizes must be strictly positive.
+#' Defaults to \code{max_size / 2} (half the maximum node size), which defaults
+#' to \code{4.5}.
 #' @param arrow.size the size of the arrows for directed network edges, in
-#' points. See \link[grid:arrow]{arrow} for details.
+#' points. See \code{\link[grid]{arrow}} for details.
 #' Defaults to \code{0} (no arrows).
 #' @param arrow.type the type of the arrows for directed network edges. See
-#' \link[grid:arrow]{arrow} for details.
+#' \code{\link[grid]{arrow}} for details.
 #' @param legend.size the size of the legend symbols and text.
 #' Defaults to \code{9}.
 #' @param legend.position the location of the plot legend(s). Accepts all
-#' \code{legend.position} values supported by \link[ggplot2:theme]{theme}.
+#' \code{legend.position} values supported by \code{\link[ggplot2]{theme}}.
 #' Defaults to \code{"right"}.
 #' @param ... other arguments passed to the \code{geom_text} object that sets
-#' the node labels. See \link[ggplot2:geom_text]{geom_text} for details.
-#' @seealso \link{ggnet} in this package,
-#' \link[sna:gplot]{gplot} in the \link[sna]{sna} package,
-#' \link[network:plot.network]{plot.network} in the \link[network]{network} package
+#' the node labels: see \code{\link[ggplot2]{geom_text}} for details.
+#' @seealso \code{\link{ggnet}} in this package,
+#' \code{\link[sna]{gplot}} in the \code{\link[sna]{sna}} package, and
+#' \code{\link[network]{plot.network}} in the \code{\link[network]{network}}
+#' package
 #' @author Moritz Marbach and Francois Briatte
 #' @details The degree centrality measures that can be produced through the
 #' \code{size} argument will take the directedness of the network into account,
 #' but will be unweighted. To compute weighted network measures, see the
-#' \link[tnet]{tnet} package by Tore Opsahl.
+#' \code{\link[tnet:tnet-package]{tnet}} package by Tore Opsahl.
 #' @importFrom grid arrow
 #' @examples
-#' if(require(network)){
-#' # make toy random network
-#' x                  <- 10
-#' ndyads             <- x * (x - 1)
-#' density            <- x / ndyads
-#' nw.mat             <- matrix(0, nrow = x, ncol = x)
-#' dimnames(nw.mat)   <- list(1:x, 1:x)
-#' nw.mat[row(nw.mat) != col(nw.mat)] <- runif(ndyads) < density
-#' nw.mat
-#' rnd <- network::network(nw.mat)
-#' rnd
+#' if(require(network)) {
 #'
-#' # random network
-#' ggnet2(rnd, label = TRUE)
+#'   # random adjacency matrix
+#'   x           <- 10
+#'   ndyads      <- x * (x - 1)
+#'   density     <- x / ndyads
+#'   m           <- matrix(0, nrow = x, ncol = x)
+#'   dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
+#'   m[ row(m) != col(m) ] <- runif(ndyads) < density
+#'   m
 #'
-#' # random groups
-#' rnd %v% "group" <- sample(LETTERS[1:3], 10, replace = TRUE)
-#' ggnet2(rnd, color = "group", palette = "Set2")
+#'   # random undirected network
+#'   n <- network::network(m, directed = FALSE)
+#'   n
+#'
+#'   ggnet2(n, label = TRUE)
+#'   ggnet2(n, label = TRUE, shape = 15)
+#'   ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white")
+#'
+#'   # add vertex attribute
+#'   x = network.vertex.names(n)
+#'   x = ifelse(x %in% c("a", "e", "i"), "vowel", "consonant")
+#'   n %v% "phono" = x
+#'
+#'   ggnet2(n, color = "phono")
+#'   ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey"))
+#'   ggnet2(n, shape = "phono", color = "phono")
+#'
+#'   # random groups
+#'   n %v% "group" <- sample(LETTERS[1:3], 10, replace = TRUE)
+#'   ggnet2(n, color = "group", palette = "Set2")
+#'
+#'   # random weights
+#'   n %e% "weight" <- sample(1:3, network.edgecount(n), replace = TRUE)
+#'   ggnet2(n, edge.size = "weight", edge.label = "weight")
+#'
+#'   # Padgett's Florentine wedding data
+#'   data(flo, package = "network")
+#'   flo
+#'
+#'   ggnet2(flo, label = TRUE)
+#'   ggnet2(flo, label = TRUE, label.trim = 4, vjust = -1, size = 3, color = 1)
+#'   ggnet2(flo, label = TRUE, size = 12, color = "white")
+#'
 #' }
-
 ggnet2 <- function(
   net,
   mode             = "fruchtermanreingold",
   layout.par       = NULL,
+  layout.exp       = 0,
   alpha            = 1,
   color            = "grey75",
-  palette          = NULL,
-  color.palette    = palette,
-  color.legend     = NA,
   shape            = 19,
   size             = 9,
   max_size         = 9,
+  na.rm            = NA,
+  palette          = NULL,
+  alpha.palette    = NULL,
+  alpha.legend     = NA,
+  color.palette    = palette,
+  color.legend     = NA,
+  shape.palette    = NULL,
+  shape.legend     = NA,
+  size.palette     = NULL,
+  size.legend      = NA,
+  size.zero        = FALSE,
   size.cut         = FALSE,
   size.min         = NA,
   size.max         = NA,
-  size.legend      = NA,
   label            = FALSE,
+  label.alpha      = 1,
   label.color      = "black",
   label.size       = max_size / 2,
   label.trim       = FALSE,
@@ -173,7 +246,6 @@ ggnet2 <- function(
   node.label       = label,
   node.shape       = shape,
   node.size        = size,
-  na.rm            = NA,
   edge.alpha       = 1,
   edge.color       = "grey50",
   edge.lty         = "solid",
@@ -188,254 +260,315 @@ ggnet2 <- function(
   legend.position  = "right",
   ...
 ){
-
+  
   # -- packages ----------------------------------------------------------------
-
-  require_pkgs(c("network", "sna"))
+  
+  require_pkgs(c("network", "sna", "scales"))
   
   # -- conversion to network class ---------------------------------------------
-
-  if (class(net) == "igraph" & "intergraph" %in% rownames(installed.packages())) {
+  
+  if (class(net) == "igraph" && "intergraph" %in% rownames(installed.packages())) {
     net = intergraph::asNetwork(net)
   } else if (class("net") == "igraph") {
     stop("install the 'intergraph' package to use igraph objects with ggnet2")
   }
-
+  
   if (!network::is.network(net)) {
-    net = network::network(net)
+    net = try(network::network(net), silent = TRUE)
   }
-
+  
   if (!network::is.network(net)) {
     stop("could not coerce net to a network object")
   }
-
+  
   # -- network functions -------------------------------------------------------
-
+  
   get_v = get("%v%", envir = as.environment("package:network"))
   get_e = get("%e%", envir = as.environment("package:network"))
-
+  
   set_mode = function(x, mode = network::get.network.attribute(x, "bipartite")) {
     c(rep("actor", mode), rep("event", network::network.size(x) - mode))
   }
-
-  set_attr = function(x, value) {
-
-    if (is.null(x) || is.na(x)) {
+  
+  set_node = function(x, value) {
+    
+    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+      stop(paste("incorrect", value, "value"))
+    } else if (is.numeric(x) && any(x < 0)) {
       stop(paste("incorrect", value, "value"))
     } else if (length(x) == n_nodes) {
-      data$alpha = x
+      x
     } else if (length(x) > 1) {
       stop(paste("incorrect", value, "length"))
     } else if (x %in% v_attr) {
-      data$alpha = get_v(net, x)
+      get_v(net, x)
     } else if (x == "mode" & is_bip) {
-      data$alpha = set_mode(net)
+      set_mode(net)
     } else {
-      data$alpha = x
+      x
     }
-
+    
   }
-
+  
+  set_edge = function(x, value) {
+    
+    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+      stop(paste("incorrect", value, "value"))
+    } else if (is.numeric(x) && any(x < 0)) {
+      stop(paste("incorrect", value, "value"))
+    } else if (length(x) == n_edges) {
+      x
+    } else if (length(x) > 1) {
+      stop(paste("incorrect", value, "length"))
+    } else if (x %in% e_attr) {
+      get_e(net, x)
+    } else {
+      x
+    }
+    
+  }
+  
+  set_attr = function(x) {
+    
+    if (length(x) == n_nodes) {
+      x
+    } else if (length(x) > 1) {
+      stop(paste("incorrect coordinates length"))
+    } else if (!x %in% v_attr) {
+      stop(paste("vertex attribute", x, "was not found"))
+    } else if (!is.numeric(get_v(net, x))) {
+      stop(paste("vertex attribute", x, "is not numeric"))
+    } else {
+      get_v(net, x)
+    }
+    
+  }
+  
+  set_name = function(x, y) {
+    
+    z = length(x) == 1 && x %in% v_attr
+    z = ifelse(is.na(y), z, y)
+    z = ifelse(isTRUE(z), x, z)
+    ifelse(is.logical(z), "", z)
+    
+  }
+  
+  set_size = function(x) {
+    
+    y = x + (0 %in% x) * !size.zero
+    y = scales::rescale_max(y)
+    y = scales::abs_area(max_size)(y)
+    if (is.null(names(x))) names(y) = x else names(y) = names(x)
+    y
+    
+  }
+  
+  is_one = function(x) length(unique(x)) == 1
+  is_col = function(x) all(is.numeric(x)) | all(network::is.color(x))
+  
   # -- network structure -------------------------------------------------------
-
+  
   n_nodes = network::network.size(net)
   n_edges = network::network.edgecount(net)
-
+  
+  v_attr = network::list.vertex.attributes(net)
+  e_attr = network::list.edge.attributes(net)
+  
   is_bip = network::is.bipartite(net)
   is_dir = ifelse(network::is.directed(net), "digraph", "graph")
-  is_col = network::is.color
-
+  
   if (!is.numeric(arrow.size) || arrow.size < 0) {
     stop("incorrect arrow.size value")
   } else if (arrow.size > 0 & is_dir == "graph") {
     warning("network is undirected; arrow.size ignored")
     arrow.size = 0
   }
-
+  
   if (network::is.hyper(net)) {
-    warning("ggnet2 does not know how to handle hyper graphs")
+    stop("ggnet2 does not know how to handle hyper graphs")
   }
-
+  
   if (network::is.multiplex(net)) {
-    warning("ggnet2 does not know how to handle multiplex graphs")
+    stop("ggnet2 does not know how to handle multiplex graphs")
   }
-
+  
   if (network::has.loops(net)) {
     warning("ggnet2 does not know how to handle self-loops")
   }
-
-  # vertex attributes
-  v_attr = network::list.vertex.attributes(net)
-
-  # edge attributes
-  e_attr = network::list.edge.attributes(net)
-
+  
+  # -- check max_size ----------------------------------------------------------
+  
+  x = max_size
+  
+  if (!is.numeric(x) || is.infinite(x) || is.nan(x) || x < 0) {
+    stop("incorrect max_size value")
+  }
+  
   # -- initialize dataset ------------------------------------------------------
-
+  
   data = data.frame(label = get_v(net, "vertex.names"), stringsAsFactors = FALSE)
-
-  data$alpha = set_attr(node.alpha , "node.alpha")
-  data$color = set_attr(node.color , "node.color")
-  data$shape = set_attr(node.shape , "node.shape")
-  data$size  = set_attr(node.size  , "node.size")
-
+  
+  data$alpha = set_node(node.alpha , "node.alpha")
+  data$color = set_node(node.color , "node.color")
+  data$shape = set_node(node.shape , "node.shape")
+  data$size  = set_node(node.size  , "node.size")
+  
   # -- node removal ------------------------------------------------------------
-
-  if (!is.na(na.rm)) {
-
-    if (length(na.rm) > 1) {
-
-      stop("incorrect na.rm value")
-
-    } else if (!na.rm %in% v_attr) {
-
+  
+  if (length(na.rm) > 1) {
+    stop("incorrect na.rm value")
+  } else if (!is.na(na.rm)) {
+    
+    if (!na.rm %in% v_attr) {
+      
       stop(paste("vertex attribute", na.rm, "was not found"))
-
+      
     }
-
+    
     x = which(is.na(get_v(net, na.rm)))
     message(paste("na.rm removed", length(x), "nodes out of", nrow(data)))
-
+    
     if (length(x) > 0) {
-
+      
       data = data[ -x, ]
       network::delete.vertices(net, x)
-
+      
+      if (!nrow(data)) {
+        
+        warning("na.rm removed all nodes; nothing left to plot")
+        return(invisible(NULL))
+        
+      }
+      
     }
-
+    
   }
-
-  if (!nrow(data)) {
-
-    warning("na.rm removed all nodes; nothing left to plot")
-    return(invisible(NULL))
-
+  
+  # -- weight methods ----------------------------------------------------------
+  
+  x = size
+  
+  if (length(x) == 1 && x %in% c("indegree", "outdegree", "degree", "freeman")) {
+    
+    data$size = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
+    size.legend = ifelse(is.na(size.legend), x, size.legend)
+    
   }
-
-  # -- weight method -----------------------------------------------------------
-
-  if (length(size) == 1 && size %in% c("indegree", "outdegree", "degree", "freeman")) {
-    data$size = sna::degree(net, gmode = is_dir, cmode = ifelse(size == "degree", "freeman", size))
-    size.legend = ifelse(is.na(size.legend), size, size.legend)
-  }
-
+  
   # -- weight thresholds -------------------------------------------------------
-
+  
   x = ifelse(is.na(size.min), 0, size.min)
-
-  if (length(x) > 1 || !is.numeric(x) || is.infinite(x)) {
+  
+  if (length(x) > 1 || !is.numeric(x) || is.infinite(x) || is.nan(x) || x < 0) {
     stop("incorrect size.min value")
-  }
-
-  if (x < 0) {
-    stop("incorrect size.min value")
-  }
-
-  if (x > 0 && !is.numeric(data$size)) {
-
-    warning("node.size is not numeric; ignoring size.min")
-    x = 0
-
-  }
-
-  if (x > 0) {
-
+  } else if (x > 0 && !is.numeric(data$size)) {
+    warning("node.size is not numeric; size.min ignored")
+  } else if (x > 0) {
+    
     x = which(data$size < x)
     message(paste("size.min removed", length(x), "nodes out of", nrow(data)))
-
+    
     if (length(x) > 0) {
-
+      
       data = data[ -x, ]
       network::delete.vertices(net, x)
-
+      
+      if (!nrow(data)) {
+        
+        warning("size.min removed all nodes; nothing left to plot")
+        return(invisible(NULL))
+        
+      }
+      
     }
-
+    
   }
-
-  if (!nrow(data)) {
-
-    warning("size.min removed all nodes; nothing left to plot")
-    return(invisible(NULL))
-
-  }
-
+  
   x = ifelse(is.na(size.max), 0, size.max)
-
-  if (length(x) > 1 || !is.numeric(x) || is.infinite(x)) {
+  
+  if (length(x) > 1 || !is.numeric(x) || is.infinite(x) || is.nan(x) || x < 0) {
     stop("incorrect size.max value")
-  }
-
-  if (x < 0) {
-    stop("incorrect size.max value")
-  }
-
-  if (x > 0 && !is.numeric(data$size)) {
-
-    warning("node.size is not numeric; ignoring size.min")
-    x = 0
-
-  }
-
-  if (x > 0) {
-
+  } else if (x > 0 && !is.numeric(data$size)) {
+    warning("node.size is not numeric; size.max ignored")
+  } else if (x > 0) {
+    
     x = which(data$size > x)
     message(paste("size.max removed", length(x), "nodes out of", nrow(data)))
-
+    
     if (length(x) > 0) {
-
+      
       data = data[ -x, ]
       network::delete.vertices(net, x)
-
+      
+      if (!nrow(data)) {
+        
+        warning("size.max removed all nodes; nothing left to plot")
+        return(invisible(NULL))
+        
+      }
+      
     }
-
+    
   }
-
-  if (!nrow(data)) {
-
-    warning("size.max removed all nodes; nothing left to plot")
-    return(invisible(NULL))
-
-  }
-
+  
   # -- weight quantiles --------------------------------------------------------
-
+  
   x = size.cut
-
-  if (length(x) > 1 || is.na(x)) {
+  
+  if (length(x) > 1 || is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
     stop("incorrect size.cut value")
-  }
-
-  # if TRUE, default to quartiles
-  if (isTRUE(x)) {
+  } else if (isTRUE(x)) {
     x = 4
-  }
-
-  # if FALSE, do not do anything
-  if (!x) {
+  } else if (is.logical(x) && !x) {
     x = 0
-  }
-
-  if (!is.numeric(x) || is.infinite(x)) {
+  } else if (!is.numeric(x)) {
     stop("incorrect size.cut value")
   }
-
-  if (!is.integer(x)) {
-    x = as.integer(x)
+  
+  if (x >= 1 && !is.numeric(data$size)) {
+    warning("node.size is not numeric; size.cut ignored")
+  } else if (x >= 1) {
+    
+    x = unique(quantile(data$size, probs = seq(0, 1, by = 1 / as.integer(x))))
+    
+    if (length(x) > 1) {
+      data$size = cut(data$size, unique(x), include.lowest = TRUE)
+    } else {
+      warning("node.size is invariant; size.cut ignored")
+    }
+    
   }
-
-  # cut weights to intervals
-  if (x > 1) {
-    x = unique(quantile(data$size, probs = seq(0, 1, by = 1 / x)))
+  
+  # -- alpha palette -----------------------------------------------------------
+  
+  if (!is.null(alpha.palette)) {
+    x = alpha.palette
+  } else if (is.factor(data$alpha)) {
+    x = levels(data$alpha)
+  } else {
+    x = unique(data$alpha)
   }
-
-  if (length(x) > 1) {
-    data$size = cut(data$size, unique(x), include.lowest = TRUE)
-  } else if (x != 0) {
-    warning("all nodes are identically weighted; size.cut ignored")
+  
+  if (!is.null(names(x))) {
+    
+    y = unique(na.omit(data$alpha[ !data$alpha %in% names(x) ]))
+    
+    if (length(y) > 0) {
+      stop(paste("no alpha.palette value for", paste0(y, collapse = ", ")))
+    }
+    
+  } else if (is.factor(data$alpha) || !is.numeric(x)) {
+    
+    data$alpha = factor(data$alpha)
+    x = scales::rescale_max(1:length(levels(data$alpha)))
+    names(x) = levels(data$alpha)
+    
   }
-
-  # -- color palettes ----------------------------------------------------------
-
+  
+  alpha.palette = x
+  
+  # -- color palette -----------------------------------------------------------
+  
   if (!is.null(color.palette)) {
     x = color.palette
   } else if (is.factor(data$color)) {
@@ -443,369 +576,415 @@ ggnet2 <- function(
   } else {
     x = unique(data$color)
   }
-
-  # support ColorBrewer palettes
+  
   if (length(x) == 1 && "RColorBrewer" %in% rownames(installed.packages()) &&
-    x %in% rownames(RColorBrewer::brewer.pal.info)) {
-
+      x %in% rownames(RColorBrewer::brewer.pal.info)) {
+    
     data$color = factor(data$color)
-
+    
     n_groups = length(levels(data$color))
     n_colors = RColorBrewer::brewer.pal.info[ x, "maxcolors" ]
-
+    
     if (n_groups > n_colors) {
+      
       stop(paste0("too many node groups (", n_groups, ") for ",
-                  "color palette ", x, "(max: ", n_colors, ")"))
+                  "ColorBrewer palette ", x, " (max: ", n_colors, ")"))
+      
     } else if (n_groups < 3) {
       n_groups = 3
     }
-
+    
     x = RColorBrewer::brewer.pal(n_groups, x)[ 1:length(levels(data$color)) ]
     names(x) = levels(data$color)
-
+    
   }
-
-  # check manual color palettes
+  
   if (!is.null(names(x))) {
-
+    
     y = unique(na.omit(data$color[ !data$color %in% names(x) ]))
-
-    if (length(y) > 1) {
-      stop(paste("no color for groups", paste0(y, collapse = ", ")))
-    } else if (length(y) == 1) {
-      stop(paste("no color for group", y))
+    
+    if (length(y) > 0) {
+      stop(paste("no color.palette value for", paste0(y, collapse = ", ")))
     }
-
-  }
-
-  if (!is.numeric(x) && !all(is_col(x))) {
-
+    
+  } else if (is.factor(data$color) || !is_col(x)) {
+    
     data$color = factor(data$color)
-
+    
     x = gray.colors(length(x))
     names(x) = levels(data$color)
-
+    
   }
-
+  
   color.palette = x
-
+  
+  # -- shape palette -----------------------------------------------------------
+  
+  if (!is.null(shape.palette)) {
+    x = shape.palette
+  } else if (is.factor(data$shape)) {
+    x = levels(data$shape)
+  } else {
+    x = unique(data$shape)
+  }
+  
+  if (!is.null(names(x))) {
+    
+    y = unique(na.omit(data$shape[ !data$shape %in% names(x) ]))
+    
+    if (length(y) > 0) {
+      stop(paste("no shape.palette value for", paste0(y, collapse = ", ")))
+    }
+    
+  } else if (is.factor(data$shape) || !is.numeric(x)) {
+    
+    data$shape = factor(data$shape)
+    x = scales::shape_pal()(length(levels(data$shape)))
+    names(x) = levels(data$shape)
+    
+  }
+  
+  shape.palette = x
+  
+  # -- size palette ------------------------------------------------------------
+  
+  if (!is.null(size.palette)) {
+    x = size.palette
+  } else if (is.factor(data$size)) {
+    x = levels(data$size)
+  } else {
+    x = unique(data$size)
+  }
+  
+  if (!is.null(names(x))) {
+    
+    y = unique(na.omit(data$size[ !data$size %in% names(x) ]))
+    
+    if (length(y) > 0) {
+      stop(paste("no size.palette value for", paste0(y, collapse = ", ")))
+    }
+    
+  } else if (is.factor(data$size) || !is.numeric(x)) {
+    
+    data$size = factor(data$size)
+    x = 1:length(levels(data$size))
+    names(x) = levels(data$size)
+    
+  }
+  
+  size.palette = x
+  
   # -- node labels -------------------------------------------------------------
-
+  
   l = node.label
-
+  
   if (isTRUE(l)) {
     l = data$label
-  } else if (length(l) == n_nodes) {
+  } else if (length(l) > 1 & length(l) == n_nodes) {
     data$label = l
   } else if (length(l) == 1 && l %in% v_attr) {
     l = get_v(net, l)
   } else {
     l = ifelse(data$label %in% l, data$label, "")
   }
-
+  
   # -- node labels: trimming ---------------------------------------------------
-
+  
   x = label.trim
-
-  if (is.logical(x) && !x) {
-    x = 0
-  }
-
-  if (length(x) > 1 || !is.numeric(x)) {
+  
+  if (length(x) > 1 || (!is.logical(x) & !is.numeric(x) & !is.function(x))) {
     stop("incorrect label.trim value")
+  } else if (is.numeric(x) && x > 0) {
+    l = substr(l, 1, x)
+  } else if (is.function(x)) {
+    l = x(l)
   }
-
-  if (x > 0) {
-    l[ nchar(l) > x ] = substr(l[ nchar(l) > x ], 1, x)
-  }
-
+  
   # -- node placement ----------------------------------------------------------
-
-  if (length(mode) > 2) {
-    stop("incorrect mode value")
-  }
-
-  if (length(mode) == 2) {
-
-    if (!mode[1] %in% v_attr) {
-      stop(paste("vertex attribute", mode[1], "was not found"))
-    }
-
-    if (!is.numeric(get_v(net, mode[1]))) {
-      stop(paste("vertex attribute", mode[1], "is not numeric"))
-    }
-
-    if (!mode[2] %in% v_attr) {
-      stop(paste("vertex attribute", mode[1], "was not found"))
-    }
-
-    if (!is.numeric(get_v(net, mode[2]))) {
-      stop(paste("vertex attribute", mode[1], "is not numeric"))
-    }
-
-    xy = data.frame(x = get_v(net, mode[1]), y = get_v(net, mode[2]))
-
-  } else {
-
-    # find placement algorithm
+  
+  if (is.character(mode) && length(mode) == 1) {
+    
     mode = paste0("gplot.layout.", mode)
     if (!exists(mode)) {
       stop(paste("unsupported placement method:", mode))
     }
-
+    
+    # sna placement algorithm
     xy = network::as.matrix.network.adjacency(net)
     xy = do.call(mode, list(xy, layout.par))
     xy = data.frame(x = xy[, 1], y = xy[, 2])
-
+    
+  } else if (is.character(mode) && length(mode) == 2) {
+    
+    # fixed coordinates from vertex attributes
+    xy = data.frame(x = set_attr(mode[1]), y = set_attr(mode[2]))
+    
+  } else if (is.numeric(mode) && is.matrix(mode)) {
+    
+    # fixed coordinates from matrix
+    xy = data.frame(x = set_attr(mode[, 1]), y = set_attr(mode[, 2]))
+    
+  } else {
+    
+    stop("incorrect mode value")
+    
   }
-
+  
   data = cbind(data, xy)
-
+  
   # -- edge colors -------------------------------------------------------------
-
+  
   edges = network::as.matrix.network.edgelist(net)
-  x = edge.color
-
-  if (length(x) == 2 & x[1] == "color") {
-
-    # edge colors [2]: color from source and target
+  
+  if (edge.color[1] == "color" && length(edge.color) == 2) {
+    
+    # edge colors from node source and target
     edge.color = ifelse(data$color[ edges[, 1]] == data$color[ edges[, 2]],
-                        as.character(data$color[ edges[, 1]]), x[2])
-
+                        as.character(data$color[ edges[, 1]]), edge.color[2])
+    
     if (!is.null(names(color.palette))) {
-      y = which(edge.color %in% names(color.palette))
-      edge.color[ y ] = color.palette[ edge.color[ y ] ]
+      x = which(edge.color %in% names(color.palette))
+      edge.color[x] = color.palette[ edge.color[x] ]
     }
-
-    edge.color[ is.na(edge.color) ] = x[2]
-
-  } else if (length(x) == 1 && x %in% e_attr) {
-
-    # edge colors [3]: edge attribute
-    edge.color = get_e(net, x)
-
-  } else if (length(x) > 1 && length(x) != n_edges) {
-
-    stop("incorrect edge.color length")
-
+    
+    edge.color[ is.na(edge.color) ] = edge.color[2]
+    
   }
-
-  if (!all(is_col(edge.color)) & !all(is.numeric(edge.color))) {
-
-    stop("incorrect edge.color value(s)")
-
+  
+  edge.color = set_edge(edge.color, "edge.color")
+  
+  if (!is_col(edge.color)) {
+    stop("incorrect edge.color value")
   }
-
+  
   # -- edge list ---------------------------------------------------------------
-
+  
   edges = data.frame(xy[ edges[, 1], ], xy[ edges[, 2], ])
   names(edges) = c("X1", "Y1", "X2", "Y2")
-
-  # get edge midpoints
-  edges$midX = (edges$X1 + edges$X2) / 2
-  edges$midY = (edges$Y1 + edges$Y2) / 2
-
-  # -- edge labels -------------------------------------------------------------
-
-  x = edge.label
-
-  if (is.null(x)) {
-    x = ""
-  }
-
-  if (length(x) == n_edges) {
-
-    # custom edge labels [1]: vector of labels
-    edges$label = x
-
-  } else if (length(x) > 1) {
-
-    stop("incorrect edge.label length")
-
-  } else if (x %in% e_attr) {
-
-    # custom edge labels [2]: vertex attribute
-    edges$label = get_e(net, x)
-
-  } else {
-
-    # custom edge labels [3]: single value
-    edges$label = x
-
-  }
-
-  # -- edge linetype -----------------------------------------------------------
-
-  x = edge.lty
-
-  if (length(x) > 1 && length(x) != n_edges) {
-
-    stop("incorrect edge.lty length")
-
-  } else if (x %in% e_attr) {
-
-    # custom edge linetype: edge attribute
-    edge.lty = get_e(net, x)
-
-  }
-
-  # -- edge size ---------------------------------------------------------------
-
-  x = edge.size
-
-  if (length(x) > 1 && length(x) != n_edges) {
-
-    stop("incorrect edge.size length")
-
-  } else if (length(x) > 1) {
-
-    edge.size = x
-
-  } else if (x %in% e_attr) {
-
-    # custom edge size: edge attribute
-    edge.size = get_e(net, x)
-
-  }
-
-  if (!is.numeric(edge.size)) {
-
-    stop("incorrect edge.size value")
-
-  }
-
-  # -- plot edges --------------------------------------------------------------
-
-  p = ggplot(data, aes(x = x, y = y)) +
-    geom_segment(
-      data = edges,
-      aes(x = X1, y = Y1, xend = X2, yend = Y2),
-      size   = edge.size,
-      color  = edge.color,
-      alpha  = edge.alpha,
-      lty    = edge.lty,
-      arrow  = arrow(
-        type   = arrow.type,
-        length = unit(arrow.size, "cm")
-      )
-    )
-
+  
+  
+  # -- edge labels, colors and sizes -------------------------------------------
+  
   if (!is.null(edge.label)) {
-
-   p = p +
+    
+    edges$midX = (edges$X1 + edges$X2) / 2
+    edges$midY = (edges$Y1 + edges$Y2) / 2
+    edges$label = set_edge(edge.label, "edge.label")
+    
+    edge.label.color = set_edge(edge.label.color, "edge.label.color")
+    
+    if (!is_col(edge.label.color)) {
+      stop("incorrect edge.label.color value")
+    }
+    
+    edge.label.size = set_edge(edge.label.size, "edge.label.size")
+    
+    if (!is.numeric(edge.label.size) || any(edge.label.size < 0)) {
+      stop("incorrect edge.label.size value")
+    }
+    
+  }
+  
+  # -- edge linetype -----------------------------------------------------------
+  
+  edge.lty = set_edge(edge.lty, "edge.lty")
+  
+  # -- edge size ---------------------------------------------------------------
+  
+  edge.size = set_edge(edge.size, "edge.size")
+  
+  if (!is.numeric(edge.size) || any(edge.size <= 0)) {
+    stop("incorrect edge.size value")
+  }
+  
+  # -- plot edges --------------------------------------------------------------
+  
+  p = ggplot(data, aes(x = x, y = y))
+  
+  if (nrow(edges) > 0) {
+    
+    p = p +
+      geom_segment(
+        data = edges,
+        aes(x = X1, y = Y1, xend = X2, yend = Y2),
+        size   = edge.size,
+        color  = edge.color,
+        alpha  = edge.alpha,
+        lty    = edge.lty,
+        arrow  = grid::arrow(
+          type   = arrow.type,
+          length = grid::unit(arrow.size, "pt")
+        )
+      )
+    
+  }
+  
+  if (nrow(edges) > 0 & !is.null(edge.label)) {
+    
+    p = p +
       geom_point(
         data = edges,
         aes(x = midX, y = midY),
-        size   = edge.label.size,
+        alpha  = edge.alpha,
         colour = edge.label.fill,
-        alpha  = edge.alpha
+        size   = edge.label.size * 1.5
       ) +
       geom_text(
         data = edges,
         aes(x = midX, y = midY, label = label),
-        size   = edge.label.size,
-        colour = edge.label.color
+        colour = edge.label.color,
+        size   = edge.label.size
       )
-
+    
   }
-
+  
   # -- plot nodes --------------------------------------------------------------
-
+  
   x = list()
-
-  if (is.numeric(data$size) && length(unique(data$size)) == 1) {
-    x = c(x, size = legend.size)
+  
+  if (is.numeric(data$alpha) && is_one(data$alpha)) {
+    x = c(x, alpha = unique(data$alpha))
   }
-
-  if (is.numeric(data$alpha) && length(unique(data$alpha)) == 1) {
-    x = c(x, alpha = node.alpha)
+  
+  if (!is.factor(data$color) && is_one(data$color)) {
+    x = c(x, colour = unique(data$color)) # must be English spelling
   }
-
-  if ((is.character(data$color) || is.numeric(data$color)) &&
-      length(unique(data$color)) == 1) {
-    x = c(x, colour = node.color) # must be English spelling
+  
+  if (is.numeric(data$shape) && is_one(data$shape)) {
+    x = c(x, shape = unique(data$shape))
   }
-
-  if (is.numeric(data$shape) && length(unique(data$shape)) == 1) {
-    x = c(x, shape = node.shape)
+  
+  if (is.numeric(data$size) && is_one(data$size)) {
+    x = c(x, size = unique(data$size))
+  } else {
+    x = c(x, size = max_size)
   }
-
-  p = p + geom_point(aes(alpha = factor(alpha), color = factor(color),
-                         shape = factor(shape), size = factor(size)))
-
+  
+  p = p +
+    geom_point(aes(alpha = factor(alpha), color = factor(color),
+                   shape = factor(shape), size = factor(size)))
+  
+  # -- legend: alpha -----------------------------------------------------------
+  
   if (is.numeric(data$alpha)) {
+    
     v_alpha = unique(data$alpha)
     names(v_alpha) = unique(data$alpha)
-    p = p + scale_alpha_manual("", values = v_alpha) + guides(alpha = FALSE)
-  } else {
-    p = p + scale_alpha_discrete(alpha, guide = guide_legend(override.aes = x))
-  }
-
-  if (!is.null(names(color.palette))) {
-
+    
     p = p +
-      scale_color_manual(ifelse(!is.na(color.legend), color.legend, node.color),
-                         values = color.palette, guide = guide_legend(override.aes = x))
-
-  } else if (is.numeric(data$color) | is.character(data$color)) {
-
+      scale_alpha_manual("", values = v_alpha) + guides(alpha = FALSE)
+    
+  } else {
+    
+    p = p +
+      scale_alpha_manual(set_name(node.alpha, alpha.legend),
+                         values = alpha.palette,
+                         breaks = names(alpha.palette),
+                         guide = guide_legend(override.aes = x))
+    
+  }
+  
+  # -- legend: color -----------------------------------------------------------
+  
+  if (!is.null(names(color.palette))) {
+    
+    p = p +
+      scale_color_manual(set_name(node.color, color.legend),
+                         values = color.palette,
+                         breaks = names(color.palette),
+                         guide = guide_legend(override.aes = x))
+    
+  } else {
+    
     v_color = unique(data$color)
     names(v_color) = unique(data$color)
-    p = p + scale_color_manual(values = v_color) + guides(color = FALSE)
-
+    
+    p = p +
+      scale_color_manual("", values = v_color) + guides(color = FALSE)
+    
   }
-
+  
+  # -- legend: shape -----------------------------------------------------------
+  
   if (is.numeric(data$shape)) {
-
+    
     v_shape = unique(data$shape)
     names(v_shape) = unique(data$shape)
-    p = p + scale_shape_manual("", values = v_shape, guide = guide_legend(override.aes = x))
-
-    if (length(v_shape) == 1) {
-      p = p + guides(shape = FALSE)
-    }
-
+    
+    p = p +
+      scale_shape_manual("", values = v_shape) + guides(shape = FALSE)
+    
   } else {
-    p = p + scale_shape_discrete(shape, guide = guide_legend(override.aes = x))
+    
+    p = p +
+      scale_shape_manual(set_name(node.shape, shape.legend),
+                         values = shape.palette,
+                         breaks = names(shape.palette),
+                         guide = guide_legend(override.aes = x))
   }
-
+  
+  # -- legend: size ------------------------------------------------------------
+  
+  x = x[ names(x) != "size" ]
+  
   if (is.numeric(data$size)) {
-
-    v_size = scales::rescale_max(unique(data$size))
-    v_size = scales::abs_area(max_size)(v_size)
-    names(v_size) = unique(data$size)
-
+    
+    v_size = set_size(unique(data$size))
+    
     if (length(v_size) == 1) {
-      v_size = size
-      p = p + scale_size_manual(values = v_size) + guides(size = FALSE)
+      
+      v_size = as.numeric(names(v_size))
+      p = p +
+        scale_size_manual("", values = v_size) + guides(size = FALSE)
+      
     } else {
-      p = p + scale_size_manual(ifelse(is.na(size.legend), "", size.legend),
-                                values = v_size,
-                                guide = guide_legend(override.aes = x))
+      
+      p = p +
+        scale_size_manual(set_name(node.size, size.legend),
+                          values = v_size,
+                          guide = guide_legend(override.aes = x))
+      
     }
-
+    
   } else {
-    p = p + scale_size_discrete(size,
-                                range = c(max_size / length(unique(data$size)),
-                                          max_size))
+    
+    p = p +
+      scale_size_manual(set_name(node.size, size.legend),
+                        values = set_size(size.palette),
+                        guide = guide_legend(override.aes = x))
+    
   }
-
+  
   # -- plot node labels --------------------------------------------------------
-
-  if (length(l) == n_nodes)
+  
+  if (length(l) == n_nodes) {
+    
     p = p +
       geom_text(
         label = l,
+        alpha = label.alpha,
         color = label.color,
         size  = label.size,
         ...
       )
-
-  # finalize: remove grid, axes and scales
+    
+  }
+  
+  # -- horizontal scale expansion ----------------------------------------------
+  
+  x = range(data$x)
+  
+  if (!is.numeric(layout.exp) || layout.exp < 0) {
+    stop("incorrect layout.exp value")
+  } else if (layout.exp > 0) {
+    x = scales::expand_range(x, layout.exp / 2)
+  }
+  
+  # -- finalize ----------------------------------------------------------------
+  
   p = p +
-    scale_x_continuous(breaks = NULL) +
+    scale_x_continuous(breaks = NULL, limits = x) +
     scale_y_continuous(breaks = NULL) +
-    coord_equal() +
     theme(
       panel.background = element_blank(),
       panel.grid       = element_blank(),
@@ -815,7 +994,7 @@ ggnet2 <- function(
       legend.text      = element_text(size = legend.size),
       legend.title     = element_text(size = legend.size)
     )
-
+  
   return(p)
-
+  
 }
