@@ -102,11 +102,16 @@
 #' set to any other vector of values, the nodes are labeled only when their
 #' vertex name matches one of these values.
 #' Defaults to \code{FALSE} (no labels).
-#' @param label.alpha the level of transparency of the node labels.
+#' @param label.alpha the level of transparency of the node labels, as a
+#' numeric value, a vector of numeric values, or as a vertex attribute
+#' containing numeric values.
 #' Defaults to \code{1} (no transparency).
-#' @param label.color the color of the node labels.
+#' @param label.color the color of the node labels, as a color value, a vector
+#' of color values, or as a vertex attribute containing color values.
 #' Defaults to \code{"black"}.
-#' @param label.size the size of the node labels.
+#' @param label.size the size of the node labels, in points, as a numeric value,
+#' a vector of numeric values, or as a vertex attribute containing numeric
+#' values.
 #' Defaults to \code{max_size / 2} (half the maximum node size), which defaults
 #' to \code{4.5}.
 #' @param label.trim whether to apply some trimming to the node labels. Accepts
@@ -134,6 +139,10 @@
 #' @param edge.label the labels to plot at the middle of the edges, as a single
 #' value, a vector of values, or as an edge attribute.
 #' Defaults to \code{NULL} (no edge labels).
+#' @param edge.label.alpha the level of transparency of the edge labels, as a
+#' numeric value, a vector of numeric values, or as an edge attribute
+#' containing numeric values.
+#' Defaults to \code{1} (no transparency).
 #' @param edge.label.color the color of the edge labels, as a color value, a
 #' vector of color values, or as an edge attribute containing color values.
 #' Defaults to \code{label.color}, which defaults to \code{"black"}.
@@ -251,6 +260,7 @@ ggnet2 <- function(
   edge.lty         = "solid",
   edge.size        = .25,
   edge.label       = NULL,
+  edge.label.alpha = 1,
   edge.label.color = label.color,
   edge.label.fill  = "white",
   edge.label.size  = max_size / 2,
@@ -688,18 +698,6 @@ ggnet2 <- function(
     l = ifelse(data$label %in% l, data$label, "")
   }
   
-  # -- node labels: trimming ---------------------------------------------------
-  
-  x = label.trim
-  
-  if (length(x) > 1 || (!is.logical(x) & !is.numeric(x) & !is.function(x))) {
-    stop("incorrect label.trim value")
-  } else if (is.numeric(x) && x > 0) {
-    l = substr(l, 1, x)
-  } else if (is.function(x)) {
-    l = x(l)
-  }
-  
   # -- node placement ----------------------------------------------------------
   
   if (is.character(mode) && length(mode) == 1) {
@@ -771,6 +769,12 @@ ggnet2 <- function(
     edges$midY = (edges$Y1 + edges$Y2) / 2
     edges$label = set_edge(edge.label, "edge.label")
     
+    edge.label.alpha = set_edge(edge.label.alpha, "edge.label.alpha")
+    
+    if (!is.numeric(edge.label.alpha)) {
+      stop("incorrect edge.label.alpha value")
+    }
+    
     edge.label.color = set_edge(edge.label.color, "edge.label.color")
     
     if (!is_col(edge.label.color)) {
@@ -779,7 +783,7 @@ ggnet2 <- function(
     
     edge.label.size = set_edge(edge.label.size, "edge.label.size")
     
-    if (!is.numeric(edge.label.size) || any(edge.label.size < 0)) {
+    if (!is.numeric(edge.label.size)) {
       stop("incorrect edge.label.size value")
     }
     
@@ -832,6 +836,7 @@ ggnet2 <- function(
       geom_text(
         data = edges,
         aes(x = midX, y = midY, label = label),
+        alpha  = edge.label.alpha,
         colour = edge.label.color,
         size   = edge.label.size
       )
@@ -957,7 +962,35 @@ ggnet2 <- function(
   
   # -- plot node labels --------------------------------------------------------
   
-  if (length(l) == n_nodes) {
+  if (!is_one(l) || unique(l) != "") {
+    
+    label.alpha = set_node(label.alpha, "label.alpha")
+    
+    if (!is.numeric(label.alpha)) {
+      stop("incorrect label.alpha value")
+    }
+    
+    label.color = set_node(label.color, "label.color")
+    
+    if (!is_col(label.color)) {
+      stop("incorrect label.color value")
+    }
+    
+    label.size = set_node(label.size, "label.size")
+    
+    if (!is.numeric(label.size)) {
+      stop("incorrect label.size value")
+    }
+    
+    x = label.trim
+    
+    if (length(x) > 1 || (!is.logical(x) & !is.numeric(x) & !is.function(x))) {
+      stop("incorrect label.trim value")
+    } else if (is.numeric(x) && x > 0) {
+      l = substr(l, 1, x)
+    } else if (is.function(x)) {
+      l = x(l)
+    }
     
     p = p +
       geom_text(

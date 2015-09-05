@@ -151,9 +151,18 @@ test_that("examples", {
   ggnet2(n, label = sample(letters, 10))
   ggnet2(n, label = "phono")
   
+  # test label.alpha
+  expect_error(ggnet2(n, label = TRUE, label.alpha = "xyz"), "incorrect label.alpha")
+  
+  # test label.color
+  expect_error(ggnet2(n, label = TRUE, label.color = "xyz"), "incorrect label.color")
+  
+  # test label.size
+  expect_error(ggnet2(n, label = TRUE, label.size = "xyz"), "incorrect label.size")
+  
   # test label.trim
-  expect_error(ggnet2(n, label.trim = "xyz"), "incorrect label.trim")
-  ggnet2(n, label.trim = toupper)
+  expect_error(ggnet2(n, label = TRUE, label.trim = "xyz"), "incorrect label.trim")
+  ggnet2(n, label = TRUE, label.trim = toupper)
   
   # test mode
   expect_error(ggnet2(n, mode = "xyz"), "unsupported")
@@ -164,6 +173,9 @@ test_that("examples", {
   
   # test edge.color
   expect_error(ggnet2(n, edge.color = "xyz"), "incorrect edge.color")
+  
+  # test edge.label.alpha
+  expect_error(ggnet2(n, edge.label = "xyz", edge.label.alpha = "xyz"), "incorrect edge.label.alpha")
   
   # test edge.label.color
   expect_error(ggnet2(n, edge.label = "xyz", edge.label.color = "xyz"), "incorrect edge.label.color")
