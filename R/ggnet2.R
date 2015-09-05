@@ -175,7 +175,7 @@
 #' \code{size} argument will take the directedness of the network into account,
 #' but will be unweighted. To compute weighted network measures, see the
 #' \code{\link[tnet:tnet-package]{tnet}} package by Tore Opsahl.
-#' @importFrom grid arrow
+#' @importFrom grid arrow unit
 #' @examples
 #' if(require(network)) {
 #'
