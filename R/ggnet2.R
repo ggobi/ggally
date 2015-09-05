@@ -158,6 +158,7 @@
 #' Defaults to \code{0} (no arrows).
 #' @param arrow.type the type of the arrows for directed network edges. See
 #' \code{\link[grid]{arrow}} for details.
+#' Defaults to \code{"closed"}.
 #' @param legend.size the size of the legend symbols and text.
 #' Defaults to \code{9}.
 #' @param legend.position the location of the plot legend(s). Accepts all
