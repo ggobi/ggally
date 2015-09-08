@@ -305,7 +305,11 @@ ggpairs <- function(
 
       comboParams <- add_and_overwrite_params(params, sectionParams)
 
-      p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
+      # p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
+      p <- make_ggmatrix_plot_obj(
+        wrap_fn_with_param_arg(subType, params = comboParams),
+        mapping = comboAes
+      )
 
     } else if (type == "mosaic") {
       if (printInfo) {
@@ -323,7 +327,12 @@ ggpairs <- function(
         if (!is.null(comboAes$colour)) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
         }
-        p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
+        # p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
+        p <- make_ggmatrix_plot_obj(
+          wrap_fn_with_param_arg(subType, params = comboParams),
+          mapping = comboAes
+        )
+
       }
 
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
@@ -350,14 +359,26 @@ ggpairs <- function(
 
         comboParams <- add_and_overwrite_params(params, diag$params)
 
-        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), comboAes, comboParams, printInfo)
+        # p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), comboAes, comboParams, printInfo)
+        p <- make_ggmatrix_plot_obj(
+          wrap_fn_with_param_arg(
+            paste(subType, "Diag", sep = "", collapse = ""),
+            params = comboParams
+          ),
+          mapping = comboAes
+        )
 
       } else if (type == "label") {
         comboAes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
         comboParams <- add_and_overwrite_params(params, diag$params)
         comboParams <- add_and_overwrite_params(comboParams, c("label" = columnLabels[posX]))
 
-        p <- make_ggpair_text("diagAxis", comboAes, comboParams, printInfo)
+        # p <- make_ggpair_text("diagAxis", comboAes, comboParams, printInfo)
+        p <- make_ggmatrix_plot_obj(
+          wrap_fn_with_param_arg("diagAxis", params = comboParams),
+          mapping = comboAes
+        )
+
       }
     }
 
