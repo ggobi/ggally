@@ -64,6 +64,12 @@ wrap_fn_with_params <- function(funcVal, ...) {
   wrap_fn_with_param_arg(funcVal, params = list(...))
 }
 
+#' @export
+wrapp <- wrap_fn_with_param_arg
+#' @export
+wrap <- wrap_fn_with_params
+
+
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
   params <- attr(x, "params")
   paramTxt <- mapping_as_string(params)
