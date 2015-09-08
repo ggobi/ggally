@@ -59,7 +59,7 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL) {
 
 #' @export
 #' @rdname wrap_fn_with_param_arg
-#' @params ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
+#' @param ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
 wrap_fn_with_params <- function(funcVal, ...) {
   wrap_fn_with_param_arg(funcVal, params = list(...))
 }

@@ -2,9 +2,12 @@
 % Please edit documentation in R/ggpairs.R
 \name{add_and_overwrite_aes}
 \alias{add_and_overwrite_aes}
+\alias{add_and_overwrite_params}
 \title{Add new aes}
 \usage{
 add_and_overwrite_aes(current, new)
+
+add_and_overwrite_params(current, new)
 }
 \value{
 aes_string output
