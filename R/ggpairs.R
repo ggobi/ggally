@@ -63,7 +63,7 @@
 #' @param upper see Details
 #' @param lower see Details
 #' @param diag see Details
-#' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
+#' @param params depricated.  Please see \code{\link{wrap_fn_with_param_arg}}
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
@@ -151,6 +151,11 @@ ggpairs <- function(
   legends = FALSE,
   verbose = FALSE
 ){
+
+  if (! is.null(params)) {
+    stop("'params' is a depricated argument.  Please 'wrap' the function to supply arguments. help(\"wrap\", package = \"GGally\")")
+  }
+
   args <- list(...)
   if ("printInfo" %in% names(args)) {
     printInfo <- args[['printInfo']]
@@ -266,10 +271,8 @@ ggpairs <- function(
 
     if (up) {
       sectionAes <- upper$aes_string
-      sectionParams <- upper$params
     } else {
       sectionAes <- lower$aes_string
-      sectionParams <- lower$params
     }
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
@@ -304,11 +307,8 @@ ggpairs <- function(
         }
       }
 
-      comboParams <- add_and_overwrite_params(params, sectionParams)
-
-      # p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
       p <- make_ggmatrix_plot_obj(
-        wrap_fn_with_param_arg(subType, params = comboParams),
+        wrap_fn_with_param_arg(subType, params = c()),
         mapping = comboAes
       )
 
@@ -319,7 +319,6 @@ ggpairs <- function(
       subType <- if (up) upper$discrete else lower$discrete
 
       comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), sectionAes)
-      comboParams <- add_and_overwrite_params(params, sectionParams)
 
       if (identical(subType, "ratio")) {
         p <- ggally_ratio(data[, c(yColName, xColName)])
@@ -328,9 +327,8 @@ ggpairs <- function(
         if (!is.null(comboAes$colour)) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
         }
-        # p <- make_ggpair_text(subType, comboAes, comboParams, printInfo)
         p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(subType, params = comboParams),
+          wrap_fn_with_param_arg(subType, params = c()),
           mapping = comboAes
         )
 
@@ -358,28 +356,21 @@ ggpairs <- function(
           comboAes <- mapping_color_fill(comboAes)
         }
 
-        comboParams <- add_and_overwrite_params(params, diag$params)
-
-        # p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), comboAes, comboParams, printInfo)
-
         if (mode(subType) == "character") {
           fn_to_wrap <- paste(subType, "Diag", sep = "", collapse = "")
         } else {
           fn_to_wrap <- subType
         }
         p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(fn_to_wrap, params = comboParams),
+          wrap_fn_with_param_arg(fn_to_wrap, params = c()),
           mapping = comboAes
         )
 
       } else if (type == "label") {
         comboAes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
-        comboParams <- add_and_overwrite_params(params, diag$params)
-        comboParams <- add_and_overwrite_params(comboParams, c("label" = columnLabels[posX]))
 
-        # p <- make_ggpair_text("diagAxis", comboAes, comboParams, printInfo)
         p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg("diagAxis", params = comboParams),
+          wrap_fn_with_param_arg("diagAxis", params = c("label" = columnLabels[posX])),
           mapping = comboAes
         )
 
@@ -406,59 +397,6 @@ ggpairs <- function(
 
   plotMatrix
 }
-
-
-#' Generate GGally Function Text
-#'
-#' Generate GGally function text with data, mapping, and parameters.
-#'
-#' @param func identifier string in function name
-#' @param mapping mapping supplied to the function
-#' @param params parameters applied to the geom in the function
-#' @param printInfo boolean to determine whether or not the executed function should be printed
-#' @keywords internal
-make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
-
-  nonCallVals <- which(lapply(mapping, mode) == "call")
-  if (length(nonCallVals) > 0) {
-    nonCallNames <- names(mapping)[nonCallVals]
-    stop(paste("variables: ", paste(shQuote(nonCallNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "), ".  Please rename the columns and use labels instead.", sep = ""))
-  }
-
-  if (func %in% c("blank", "blankDiag")) {
-    return("blank")
-  }
-
-  func_text <- paste("ggally_", func, collapse = "", sep = "")
-  test_for_function <- tryCatch(
-    get(func_text, mode = "function"),
-    error = function(e)
-      "bad_function_name"
-  )
-
-  if (identical(test_for_function, "bad_function_name")) {
-    return( 'ggally_text("Incorrect\nPlot",size=6)')
-  }
-
-
-  text <- paste(func_text, "(ggally_data, ggplot2::aes(", paste(names(mapping), " = ", as.character(mapping), sep = "", collapse = ", "), ")", sep = "", collapse = "")
-
-  if (!is.null(params)) {
-    params[is.character(params)] <- paste("\"", params[is.character(params)], "\"", sep = "")
-    text <- paste(text, ", ", paste(names(params), "=", params, sep="", collapse=", "), sep="")
-  }
-  text <- paste(text, ")", sep = "", collapse = "")
-  if (printInfo) {
-    print("")
-    print(text)
-    print(str(mapping))
-  }
-  text
-}
-
-
-
-
 
 
 #' Add new aes
@@ -495,14 +433,6 @@ add_and_overwrite_aes <- function(current, new) {
   current
 }
 
-#' @rdname add_and_overwrite_aes
-add_and_overwrite_params <- function(current, new) {
-  add_and_overwrite_aes(current, new)
-}
-
-section_params <- function(current, new) {
-  add_and_overwrite_aes(current, new)
-}
 
 
 
@@ -567,6 +497,11 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
   if (is.null(obj$discrete) && (!is.null(discrete))) {
     obj$discrete <- discrete
   }
+
+  if (! is.null(obj$params)) {
+    stop(str_c("'", name, "$params' is a depricated argument.  Please 'wrap' the function to supply arguments"))
+  }
+
   obj
 }
 
