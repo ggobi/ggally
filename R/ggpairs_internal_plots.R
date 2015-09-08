@@ -43,17 +43,11 @@ wrap_fn_with_params <- function(funcVal, ...) {
   wrap_fn_with_param_arg(funcVal, params = list(...))
 }
 
-print.ggmatrix_fn_with_params <- function(x, ...) {
+as.character.ggmatrix_fn_with_params <- function(x, ...) {
   params <- x$params
-  if (length(params) > 0) {
-    paramTxt <- str_c("params = c(",
-      stringr::str_c(names(params), unlist(params), sep = " = ", collapse = ", "),
-    ")")
-  } else {
-    paramTxt <- "(no params)"
-  }
+  paramTxt <- mapping_as_string(params)
   txt <- stringr::str_c("wrapper fn; fn: ", x$fnName, "; with params: ", paramTxt)
-  print(txt)
+  txt
 }
 
 
@@ -72,34 +66,57 @@ ggpairs_ggplot2_internal_plot <- function(p) {
   class(p) <- unique(c("ggmatrix_ggplot2", class(p)))
   p
 }
-print.ggmatrix_ggplot2 <- function(x, ...) {
-  print("ggmatrix plot; ggplot2 object")
+as.character.ggmatrix_ggplot2 <- function(x, ...) {
+  "PM; ggplot2 object"
 }
 
 
 
 
-
-
-
-
-make_ggpair_plot_obj <- function(fn, mapping, dataPos = 1, gg = NULL) {
+make_ggmatrix_plot_obj <- function(fn, mapping, dataPos = 1, gg = NULL) {
   ret <- list(
     fn = fn,
     mapping = mapping,
     dataPos = dataPos,
     gg = gg
   )
-  class(ret) <- "ggpair_plot_obj"
+  class(ret) <- "ggmatrix_plot_obj"
   ret
 }
 
-print.ggpair_plot_obj <- function(x, ...) {
+
+mapping_as_string <- function(mapping) {
+  str_c("c(",str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
+}
+
+as.character.ggmatrix_plot_obj <- function(x, ...) {
   hasGg <- (!is.null(x$gg))
-  mappingTxt = str_c(names(x$mapping), as.character(x$mapping), sep = " = ", collapse = ", ")
-  print(str_c(
-    "ggmatrix plot; dataPos: ", x$dataPos,
-    "; mapping: ", mappingTxt,
+  mappingTxt = mapping_as_string(x$mapping)
+  fnTxt <- ifelse(inherits(x$fn, "ggmatrix_fn_with_params"), as.character(x$fn), "custom_function")
+  str_c(
+    "PM",
+    "; aes: ", mappingTxt,
+    "; fn: {", fnTxt, "}",
+    # "; dataPos: ", x$dataPos,
     "; gg: ", as.character(hasGg)
-    ))
+  )
+}
+
+
+
+#' @export
+str.ggmatrix <- function(object, ...) {
+  obj <- object
+  obj$plots <- lapply(obj$plots, function(plotObj) {
+    if (ggplot2::is.ggplot(plotObj)) {
+      str_c("ggmatrix plot; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
+    } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+      as.character(plotObj)
+    } else {
+      plotObj
+    }
+  })
+  attr(obj, "_class") <- attr(obj, "class")
+  class(obj) <- NULL
+  str(obj)
 }
