@@ -160,7 +160,9 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
   if (identical(raw, FALSE)) {
     cat(str_c("\nCustom str.ggmatrix output: \nTo view original object use 'str(", objName, ", raw = TRUE)'\n\n"))
     obj$plots <- lapply(obj$plots, function(plotObj) {
-      if (ggplot2::is.ggplot(plotObj)) {
+      if (is_blank_plot(plotObj)) {
+        "(blank)"
+      } else if (ggplot2::is.ggplot(plotObj)) {
         str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
       } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
         as.character(plotObj)

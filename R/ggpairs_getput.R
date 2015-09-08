@@ -38,16 +38,16 @@ eval_ggpair <- function(txt, ggally_data) {
 #' custom_car[1,3] <- personal_plot
 #' # custom_car
 putPlot <- function(x, value, i, j){
-
   pos <- get_pos(x,i,j)
   if (mode(value) == "character") {
     if (value == "blank") {
-      x$plots[[pos]] <- NULL
+      x$plots[[pos]] <- ggally_blank()
     } else {
       stop("character values (besides 'blank') are not allowed to be stored as plot values.")
     }
+  } else {
+    x$plots[[pos]] <- value
   }
-  x$plots[[pos]] <- value
 
   if (x$printInfo) {
     cat("\n\nDone placing plot: ",pos,"\n")
@@ -106,9 +106,9 @@ getPlot <- function(x, i, j){
     }
 
   } else {
-    cat("Position: i = ", i,", j = ", j, "\n", sep = "")
+    cat("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
     print(str(plotObj))
-    stop("unknown plotObj")
+    stop("unknown plot object type.")
   }
   # stop("fix this")
   # if (is.character(plot_text)) {
