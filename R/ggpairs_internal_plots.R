@@ -110,6 +110,12 @@ as.character.ggmatrix_ggplot2 <- function(x, ...) {
 
 
 make_ggmatrix_plot_obj <- function(fn, mapping, dataPos = 1, gg = NULL) {
+  nonCallVals <- which(lapply(mapping, mode) == "call")
+  if (length(nonCallVals) > 0) {
+    nonCallNames <- names(mapping)[nonCallVals]
+    stop(paste("variables: ", paste(shQuote(nonCallNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "), ".  Please rename the columns or make a new column.", sep = ""))
+  }
+
   ret <- list(
     fn = fn,
     mapping = mapping,
