@@ -139,6 +139,7 @@
 #' # custom_car
 ggpairs <- function(
   data,
+  mapping = NULL,
   columns = 1:ncol(data),
   title = "",
   upper = list(),
@@ -159,9 +160,21 @@ ggpairs <- function(
   args <- list(...)
   if ("printInfo" %in% names(args)) {
     printInfo <- args[['printInfo']]
+    args[['printInfo']] <- NULL
   } else {
     printInfo <- FALSE
   }
+
+  if (length(args) > 0) {
+    argNames <- names(args)
+    warning(str_c("Extra arguments: ", str_c(shQuote(argNames), collapse = ", "), " are being ignored.  If these are suppose to be aesthetics, submit them using the 'mapping' variable.\n\n", "mapping = c(", str_c(shQuote(argNames), " = ", shQuote(unlist(args)) , collapse = ", "),")"))
+  }
+
+  if (is.numeric(mapping)) {
+    columns = mapping
+    mapping = aes()
+  }
+
 
   if (! identical(class(data),"data.frame")) {
     data <- as.data.frame(data)
@@ -251,6 +264,7 @@ ggpairs <- function(
     dataTypes$Type <- as.factor(dataTypes$Type)
   }
 
+
   for (i in 1:nrow(dataTypes)) {
     p <- "blank"
     type <- dataTypes[i,"Type"]
@@ -260,6 +274,7 @@ ggpairs <- function(
     xColName <- as.character(dataTypes[i,"xvar"])
     yColName <- as.character(dataTypes[i,"yvar"])
 
+    plotAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), mapping)
 
     up <- posX > posY
 
@@ -292,12 +307,12 @@ ggpairs <- function(
         subType <-  if (isContinuous) lower$continuous else lower$combo
       }
 
-      comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), sectionAes)
+      # comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), sectionAes)
+      comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
       if (isContinuous) {
         if (identical(subType, "density")) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(group = comboAes$colour))
-
         }
       } else {
         # isCombo
@@ -318,7 +333,7 @@ ggpairs <- function(
       }
       subType <- if (up) upper$discrete else lower$discrete
 
-      comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), sectionAes)
+      comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
       if (identical(subType, "ratio")) {
         p <- ggally_ratio(data[, c(yColName, xColName)])
@@ -335,6 +350,7 @@ ggpairs <- function(
       }
 
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
+      plotAes$y <- NULL
 
       if (type == "stat_bin-num" || type == "stat_bin-cat") {
         if (printInfo) {
@@ -347,7 +363,7 @@ ggpairs <- function(
           subType <- diag$discrete
         }
 
-        comboAes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
+        comboAes <- add_and_overwrite_aes(plotAes, diag$aes_string)
 
         if (
           ((!identical(subType, "density")) && type == "stat_bin-num") ||
@@ -367,7 +383,7 @@ ggpairs <- function(
         )
 
       } else if (type == "label") {
-        comboAes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
+        comboAes <- add_and_overwrite_aes(plotAes, diag$aes_string)
 
         p <- make_ggmatrix_plot_obj(
           wrap_fn_with_param_arg("diagAxis", params = c("label" = columnLabels[posX])),
