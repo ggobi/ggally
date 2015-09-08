@@ -74,25 +74,52 @@ getPlot <- function(x, i, j){
     cat("Plot List Spot: ",pos,"\n")
   }
 
+  # if (pos > length(x$plots)) {
+  #   plot_text <- "blank"
+  # } else {
+  #   plot_text <- x$plots[[pos]]
+  # }
   if (pos > length(x$plots)) {
-    plot_text <- "blank"
+    plotObj <- NULL
   } else {
-    plot_text <- x$plots[[pos]]
+    plotObj <- x$plots[[pos]]
   }
 
-  if (is.character(plot_text)) {
-    if (plot_text != "blank") {
-      p <- eval_ggpair(plot_text, x$data)
-      if (! is.null(x$gg)) {
-        p <- p + x$gg
-      }
-      # attributes( p)$class <- "ggplot"
-    } else {
-      p <- ggally_blank()
+  if (is.null(plotObj)) {
+    p <- ggally_blank()
+  } else if (ggplot2::is.ggplot(plotObj)) {
+    p <- plotObj
+  } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+
+    fn <- plotObj$fn
+    if (inherits(fn, "ggmatrix_fn_with_params")) {
+      fn <- fn$fn
     }
+    p <- fn(x$data, plotObj$mapping)
+
+    if (!is.null(plotObj$gg)) {
+      p <- p + plotObj$gg
+    }
+
   } else {
-    p <- plot_text
+    cat("Position: i = ", i,", j = ", j, "\n", sep = "")
+    print(str(plotObj))
+    stop("unknown plotObj")
   }
+  # stop("fix this")
+  # if (is.character(plot_text)) {
+  #   if (plot_text != "blank") {
+  #     p <- eval_ggpair(plot_text, x$data)
+  #     if (! is.null(x$gg)) {
+  #       p <- p + x$gg
+  #     }
+  #     # attributes( p)$class <- "ggplot"
+  #   } else {
+  #     p <- ggally_blank()
+  #   }
+  # } else {
+  #   p <- plot_text
+  # }
 
   if (x$printInfo || x$verbose) {
     cat("Plot #",pos)
@@ -152,6 +179,3 @@ check_i_j <- function(i,j) {
   xNew <- putPlot(x, value, i, j)
   xNew
 }
-
-
-
