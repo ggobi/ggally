@@ -1,3 +1,17 @@
+#' @export
+#' @rdname wrap_fn_with_param_arg
+wrap  <- function(funcVal, ...) {
+  wrap_fn_with_param_arg(funcVal, params = list(...))
+}
+
+#' @export
+#' @rdname wrap_fn_with_param_arg
+#' @param ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
+wrap_fn_with_params <- function(funcVal, ...) {
+  wrap_fn_with_param_arg(funcVal, params = list(...))
+}
+
+
 #' Wrap a function with parameters
 #'
 #' Wraps a function with the given parameters.  This allows for very specific parameter arguements to be applied to each specific function.
@@ -59,15 +73,7 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL) {
 
 #' @export
 #' @rdname wrap_fn_with_param_arg
-#' @param ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
-wrap_fn_with_params <- function(funcVal, ...) {
-  wrap_fn_with_param_arg(funcVal, params = list(...))
-}
-
-#' @export
 wrapp <- wrap_fn_with_param_arg
-#' @export
-wrap <- wrap_fn_with_params
 
 
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
