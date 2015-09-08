@@ -284,21 +284,22 @@ ggpairs <- function(
       }
 
       if (up) {
-        subType <- ifelse(isContinuous, upper$continuous, upper$combo)
+        subType <- if (isContinuous) upper$continuous else upper$combo
       } else {
-        subType <- ifelse(isContinuous, lower$continuous, lower$combo)
+        subType <-  if (isContinuous) lower$continuous else lower$combo
       }
 
       comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), sectionAes)
 
       if (isContinuous) {
-        if (subType == "density") {
+        if (identical(subType, "density")) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(group = comboAes$colour))
 
         }
       } else {
         # isCombo
-        if (! subType %in% c("dot", "facetdensity")) {
+
+        if (! (identical(subType, "dot") || identical(subType, "facetdensity"))) {
           comboAes <- mapping_color_fill(comboAes)
         }
       }
@@ -315,15 +316,15 @@ ggpairs <- function(
       if (printInfo) {
         cat("mosaic\n")
       }
-      subType <- ifelse(up, upper$discrete, lower$discrete)
+      subType <- if (up) upper$discrete else lower$discrete
 
       comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName, ...), sectionAes)
       comboParams <- add_and_overwrite_params(params, sectionParams)
 
-      if (subType == "ratio") {
+      if (identical(subType, "ratio")) {
         p <- ggally_ratio(data[, c(yColName, xColName)])
 
-      } else if (subType == "facetbar") {
+      } else if (identical(subType, "facetbar")) {
         if (!is.null(comboAes$colour)) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
         }
@@ -351,7 +352,7 @@ ggpairs <- function(
         comboAes <- add_and_overwrite_aes(aes_string(x = xColName, ...), diag$aes_string)
 
         if (
-          (subType != "density" && type == "stat_bin-num") ||
+          ((!identical(subType, "density")) && type == "stat_bin-num") ||
           (type == "stat_bin-cat")
         ) {
           comboAes <- mapping_color_fill(comboAes)
@@ -360,11 +361,14 @@ ggpairs <- function(
         comboParams <- add_and_overwrite_params(params, diag$params)
 
         # p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), comboAes, comboParams, printInfo)
+
+        if (mode(subType) == "character") {
+          fn_to_wrap <- paste(subType, "Diag", sep = "", collapse = "")
+        } else {
+          fn_to_wrap <- subType
+        }
         p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(
-            paste(subType, "Diag", sep = "", collapse = ""),
-            params = comboParams
-          ),
+          wrap_fn_with_param_arg(fn_to_wrap, params = comboParams),
           mapping = comboAes
         )
 
