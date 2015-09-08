@@ -14,6 +14,6 @@
 \item{raw}{boolean to determine if the plots should be converted to text or kept as original objects}
 }
 \description{
-View the condensed version of the ggmatrix object. The attribute "class" is altered to "_class" to avoid recursion.
+View the condensed version of the ggmatrix object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
 }
 

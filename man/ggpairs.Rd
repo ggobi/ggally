@@ -4,8 +4,8 @@
 \alias{ggpairs}
 \title{ggpairs - A GGplot2 Matrix}
 \usage{
-ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
-  lower = list(), diag = list(), params = NULL, ...,
+ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
+  upper = list(), lower = list(), diag = list(), params = NULL, ...,
   axisLabels = "show", columnLabels = colnames(data[, columns]),
   legends = FALSE, verbose = FALSE)
 }
