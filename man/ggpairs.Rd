@@ -22,7 +22,7 @@ ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
 
 \item{diag}{see Details}
 
-\item{params}{vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.}
+\item{params}{depricated.  Please see \code{\link{wrap_fn_with_param_arg}}}
 
 \item{...}{other parameters being supplied to geom's aes, such as color}
 
