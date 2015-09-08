@@ -41,6 +41,9 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL) {
 
   } else if (mode(funcVal) == "function") {
     fnName <- as.character(funcArgName)
+    if (identical(fnName, "subType")) {
+      fnName <- "custom_function"
+    }
     fn <- funcVal
   }
 
@@ -79,7 +82,7 @@ wrapp <- wrap_fn_with_param_arg
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
   params <- attr(x, "params")
   paramTxt <- mapping_as_string(params)
-  txt <- stringr::str_c("wrapper fn; fn: ", attr(x, "fnName"), "; with params: ", paramTxt)
+  txt <- stringr::str_c("wrap; fn: '", attr(x, "fnName"), "'; with params: ", paramTxt)
   txt
 }
 
@@ -137,19 +140,30 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 
 
 
+#' ggmatrix structure
+#'
+#' View the condensed version of the ggmatrix object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
+#'
+#' @param object ggmatrix object to be viewed
+#' @param ... passed on to the default str method
+#' @param raw boolean to determine if the plots should be converted to text or kept as original objects
 #' @export
-str.ggmatrix <- function(object, ...) {
+str.ggmatrix <- function(object, ..., raw = FALSE) {
+  objName <- as.character(substitute(object))
   obj <- object
-  obj$plots <- lapply(obj$plots, function(plotObj) {
-    if (ggplot2::is.ggplot(plotObj)) {
-      str_c("ggmatrix plot; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
-    } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
-      as.character(plotObj)
-    } else {
-      plotObj
-    }
-  })
+  if (identical(raw, FALSE)) {
+    cat(str_c("\nCustom str.ggmatrix output: \nTo view original object use 'str(", objName, ", raw = TRUE)'\n\n"))
+    obj$plots <- lapply(obj$plots, function(plotObj) {
+      if (ggplot2::is.ggplot(plotObj)) {
+        str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
+      } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+        as.character(plotObj)
+      } else {
+        plotObj
+      }
+    })
+  }
   attr(obj, "_class") <- attr(obj, "class")
   class(obj) <- NULL
-  str(obj)
+  str(obj, ...)
 }
