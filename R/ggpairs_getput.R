@@ -92,9 +92,6 @@ getPlot <- function(x, i, j){
   } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
 
     fn <- plotObj$fn
-    if (inherits(fn, "ggmatrix_fn_with_params")) {
-      fn <- fn$fn
-    }
     p <- fn(x$data, plotObj$mapping)
 
     if (!is.null(plotObj$gg)) {
