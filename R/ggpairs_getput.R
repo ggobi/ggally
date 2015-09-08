@@ -40,6 +40,13 @@ eval_ggpair <- function(txt, ggally_data) {
 putPlot <- function(x, value, i, j){
 
   pos <- get_pos(x,i,j)
+  if (mode(value) == "character") {
+    if (value == "blank") {
+      x$plots[[pos]] <- NULL
+    } else {
+      stop("character values (besides 'blank') are not allowed to be stored as plot values.")
+    }
+  }
   x$plots[[pos]] <- value
 
   if (x$printInfo) {
@@ -120,10 +127,8 @@ getPlot <- function(x, i, j){
 
   if (x$printInfo || x$verbose) {
     cat("Plot #",pos)
-    if (is.character(plot_text) ) {
-      if (plot_text == "blank") {
-        cat(" - Blank")
-      }
+    if (is_blank_plot(p)) {
+      cat(" - Blank")
     }
     cat("\n")
   }
