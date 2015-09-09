@@ -1,6 +1,5 @@
-
-if(getRversion() >= "2.15.1") {
-  utils::globalVariables(c("variable", "value", "num"))
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(c(".row.names.", "x", "y", "c", "b"))
 }
 
 #' ggcorr - Plot a correlation matrix with ggplot2
@@ -12,7 +11,9 @@ if(getRversion() >= "2.15.1") {
 #' of \code{ggcorr}.
 #'
 #' @export
-#' @param data a data frame or matrix containing numeric (continuous) data.
+#' @param data a data frame or matrix containing numeric (continuous) data. If
+#' any of the columns contain non-numeric data, they will be dropped with a
+#' warning.
 #' @param method a vector of two character strings. The first value gives the
 #' method for computing covariances in the presence of missing values, and must
 #' be (an abbreviation of) one of \code{"everything"}, \code{"all.obs"},
@@ -29,24 +30,23 @@ if(getRversion() >= "2.15.1") {
 #' palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.
 #' @param name a character string for the legend that shows quintiles of
 #' correlation coefficients. Defaults to nothing.
-#' @param geom the geom object to use. Accepts either \code{tile} (the default)
-#' or \code{circle}, to plot proportionally scaled circles.
-#' @param max_size when \code{geom} has been set to \code{"circle"}, the maximum
-#' size of the circles, as passed to \code{scale_size_identity} for proportional
-#' scaling.
-#' Defaults to \code{6}.
+#' @param geom the geom object to use. Accepts either \code{"tile"},
+#' \code{"circle"}, \code{"text"} or \code{"blank"}.
 #' @param min_size when \code{geom} has been set to \code{"circle"}, the minimum
-#' size of the circles, as passed to \code{scale_size_identity} for proportional
-#' scaling.
+#' size of the circles.
 #' Defaults to \code{2}.
-#' @param label whether to add correlation coefficients as two-digit numbers
-#' over the plot.
+#' @param max_size when \code{geom} has been set to \code{"circle"}, the maximum
+#' size of the circles.
+#' Defaults to \code{6}.
+#' @param label whether to add correlation coefficients to the plot.
 #' Defaults to \code{FALSE}.
 #' @param label_alpha whether to make the correlation coefficients increasingly
-#' transparent as they come close to 0.
-#' Defaults to \code{FALSE}.
+#' transparent as they come close to 0. Also accepts any numeric value between
+#' \code{0} and \code{1}, in which case the level of transparency is set to that
+#' fixed value.
+#' Defaults to \code{FALSE} (no transparency).
 #' @param label_color the color of the correlation coefficients.
-#' Defaults to \code{"black"}.
+#' Defaults to \code{"grey75"}.
 #' @param label_round the decimal rounding of the correlation coefficients.
 #' Defaults to \code{1}.
 #' @param nbreaks the number of breaks to apply to the correlation coefficients.
@@ -63,7 +63,7 @@ if(getRversion() >= "2.15.1") {
 #' Defaults to \code{"#3B9AB2"} (blue).
 #' @param mid the midpoint color of the gradient for continuous scaling of the
 #' correlation coefficients.
-#' Defaults to \code{"#FFFFFF} (white).
+#' Defaults to \code{"#EEEEEE} (very light grey).
 #' @param high the upper color of the gradient for continuous scaling of the
 #' correlation coefficients.
 #' Defaults to \code{"#F21A00"} (red).
@@ -73,6 +73,10 @@ if(getRversion() >= "2.15.1") {
 #' @param limits whether to bound the continuous color scaling of the
 #' correlation coefficients between -1 and +1.
 #' Defaults to \code{TRUE} (recommended).
+#' @param legend.position where to put the legend of the correlation
+#' coefficients: see \code{\link[ggplot2]{theme}} for details.
+#' @param legend.size the size of the legend title and labels, in points: see
+#' \code{\link[ggplot2]{theme}} for details.
 #' @param ... other arguments supplied to \code{\link[ggplot2]{geom_text}} for
 #' the diagonal labels.
 #' @details The \code{nbreaks} argument tries to break up the correlation
@@ -81,10 +85,10 @@ if(getRversion() >= "2.15.1") {
 #' difficult to separate and are not supported by diverging ColorBrewer
 #' palettes.
 #'
-#' The breaks will range from -1 to +1, unless drop is set to \code{FALSE}, in
-#' which case the empirical range of the correlation coefficients is used. The
-#' latter is not recommended, as it creates a disbalance between the colors of
-#' negative and positive coefficients.
+#' The breaks will range from \code{-1} to \code{+1}, unless \code{drop} is set
+#' to \code{FALSE}, in which case the empirical range of the correlation
+#' coefficients is used. The latter is not recommended, as it creates a
+#' disbalance between the colors of negative and positive coefficients.
 #' @seealso \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
 #' @author Francois Briatte, with contributions from Amos B. Elberg and
 #' Barret Schloerke
@@ -124,7 +128,8 @@ ggcorr <- function(
   data,
   method = c("pairwise", "pearson"),
   cor_matrix = NULL,
-  palette = "RdYlGn",
+  nbreaks = NULL,
+  digits = 2,
   name = "",
   geom = "tile",
   min_size = 2,
@@ -133,145 +138,138 @@ ggcorr <- function(
   label_alpha = FALSE,
   label_color = "black",
   label_round = 1,
-  nbreaks = NULL,
-  digits = 2,
   drop = FALSE,
   low = "#3B9AB2",  # (blue)  replaces "#d73027" (red)
-  mid = "#FFFFFF",  # (white) replaces "#ffffbf" (light yellow)
+  mid = "#EEEEEE",  # (grey) replaces "#ffffbf" (light yellow)
   high = "#F21A00", # (red)   replaces "#1a9850" (green)
   midpoint = 0,
+  palette = NULL,
   limits = TRUE,
+  legend.position = "right",
+  legend.size = 9,
   ...) {
 
-  # for backwards compatibility
-  if (length(method) == 1) {
-    method = c(method, "pearson")
+  # -- packages ----------------------------------------------------------------
+
+  # require_pkgs("reshape2")
+
+  # -- check geom argument -----------------------------------------------------
+
+  if (length(geom) > 1 || !geom %in% c("blank", "circle", "text", "tile")) {
+    stop("incorrect geom value")
   }
+
+  # -- correlation method ------------------------------------------------------
+
+  if (length(method) == 1) {
+    method = c(method, "pearson") # for backwards compatibility
+  }
+
+  # -- check data columns ------------------------------------------------------
+
+  if (!is.null(data)) {
+
+    if (!is.data.frame(data)) {
+      data = as.data.frame(data)
+    }
+
+    x = which(!sapply(data, is.numeric))
+
+    if (length(x) > 0) {
+
+      warning(paste("data in column(s)",
+                    paste0(paste0("'", names(data)[x], "'"), collapse = ", "),
+                    "are not numeric and were ignored"))
+
+      data = data[, -x ]
+
+    }
+
+  }
+
+  # -- correlation matrix ------------------------------------------------------
 
   if (is.null(cor_matrix)) {
     cor_matrix = cor(data, use = method[1], method = method[2])
   }
 
-  if (!is.null(data) && "data.frame" %in% class(data)) {
-    r = names(data)[ !sapply(data, is.numeric) ]
-  } else if (!is.null(data) && !is.null(colnames(data))) {
-    r = colnames(data)[ !apply(data, 2, is.numeric) ]
-  } else {
-    r = which(!apply(data, 2, is.numeric))
-  }
+  m = cor_matrix
+  colnames(m) = rownames(m) = gsub(" ", "_", colnames(m)) # protect spaces
 
-  if (length(r) > 0) {
-    stop(paste("column(s)", paste0(r, collapse = ", "), "are not numeric"))
-  }
+  # -- correlation data.frame --------------------------------------------------
 
-  M = cor_matrix
+  m = data.frame(m * lower.tri(m))
+  m$.row.names. = rownames(m)
+  m = melt(m, id.vars = ".row.names.")
+  names(m) = c("x", "y", "c")
+  m$c[ m$c == 0 ] = NA
 
-  # protect against spaces in variable names
-  colnames(M) = rownames(M) = gsub(" ", "_", colnames(M))
+  # -- correlation quantiles ---------------------------------------------------
 
-  # correlation coefficients
-  D = round(M, label_round)
-
-  D = D * lower.tri(D)
-  D = as.data.frame(D)
-
-  r = names(D)
-  D = data.frame(row = r, D)
-  D = melt(D, id.vars = "row")
-
-  # correlation quantiles
-  M = M * lower.tri(M)
-  M = as.data.frame(M)
-  M = data.frame(row = r, M)
-  M = melt(M, id.vars = "row")
-  M$value[ M$value == 0 ] = NA
-
-  if(!is.null(nbreaks)) {
+  if (!is.null(nbreaks)) {
 
     s = seq(-1, 1, length.out = nbreaks + 1)
 
-    if(!nbreaks %% 2)
+    if (!nbreaks %% 2) {
       s = unique(sort(c(s, 0)))
+    }
 
-    M$value = cut(M$value, breaks = s, include.lowest = TRUE, dig.lab = digits)
-    M$value = droplevels(M$value)
-    M$value = factor(M$value, levels = unique(cut(s, breaks = s, dig.lab = digits, include.lowest = TRUE)))
+    m$b = cut(m$c, breaks = s, include.lowest = TRUE, dig.lab = digits)
 
   }
 
-  if(is.null(midpoint)) {
+  # -- gradient midpoint -------------------------------------------------------
 
-    midpoint = median(M$value, na.rm = TRUE)
+  if (is.null(midpoint)) {
+
+    midpoint = median(m$c, na.rm = TRUE)
     message(paste("Color gradient midpoint set at median correlation to",
                   round(midpoint, 2)))
 
   }
 
-  M$row = factor(M$row, levels = unique(as.character(M$variable)))
+  # -- plot structure ----------------------------------------------------------
 
-  if (geom == "circle") {
+  p = ggplot(na.omit(m), aes(x, y))
 
-    M$num = as.numeric(M$value)
-    M$num = abs(M$num - median(unique(M$num), na.rm = TRUE))
-    M$num = as.numeric(factor(M$num))
-    M$num = seq(min_size, max_size, length.out = length(na.omit(unique(M$num))))[ M$num ]
+  if (geom == "tile") {
 
-  }
+    if (is.null(m$b)) {
 
-  diag  = subset(M, row == variable)
-  M = M[ complete.cases(M), ]
-
-  p = ggplot(M, aes(x = row, y = variable))
-
-  # apply main geom
-  if (geom == "circle") {
-
-    p = p +
-      #geom_point(aes(size = num + 0.25), color = "grey50") +
-      geom_point(aes(size = num, color = value))
-
-    if (is.null(nbreaks) && limits) {
+      # -- tiles, continuous ---------------------------------------------------
 
       p = p +
-        scale_size_continuous(range = c(min_size, max_size)) +
-        scale_color_gradient2(name, low = low, mid = mid, high = high,
-                              midpoint = midpoint, limits = c(-1, 1)) +
-        guides(size = FALSE)
-
-    } else if (is.null(nbreaks)) {
-
-      p = p +
-        scale_size_continuous(range = c(min_size, max_size)) +
-        scale_fill_gradient2(name, low = low, mid = mid, high = high,
-                             midpoint = midpoint) +
-        guides(size = FALSE)
+        geom_tile(aes(fill = c), color = "white")
 
     } else {
 
-      r = list(size = (min_size + max_size) / 2)
+      # -- tiles, ordinal ------------------------------------------------------
+
       p = p +
-        scale_size_identity(name) +
-        scale_color_brewer(name, palette = palette, drop = drop) +
-        guides(colour = guide_legend(name, override.aes = r))
+        geom_tile(aes(fill = b), color = "white")
 
     }
 
-  } else {
+    # -- tiles, color scale ----------------------------------------------------
 
-    p = p +
-      geom_tile(aes(fill = value), colour = "white")
-
-    if (is.null(nbreaks) & limits) {
+    if (is.null(m$b) && limits) {
 
       p = p +
         scale_fill_gradient2(name, low = low, mid = mid, high = high,
                              midpoint = midpoint, limits = c(-1, 1))
 
-    } else if (is.null(nbreaks)) {
+    } else if (is.null(m$b)) {
 
       p = p +
         scale_fill_gradient2(name, low = low, mid = mid, high = high,
                              midpoint = midpoint)
+
+    } else if (is.null(palette)) {
+
+      x = colorRampPalette(c(low, mid, high))(length(levels(m$b)))
+
+      p = p +
+        scale_fill_manual(name, values = x, drop = drop)
 
     } else {
 
@@ -280,40 +278,157 @@ ggcorr <- function(
 
     }
 
-  }
+  } else if (geom == "circle") {
 
-  # add coefficient text
-  if(label) {
+    p = p +
+      geom_point(aes(size = abs(c) * 1.25), color = "grey50") # grey border
 
-    if(label_alpha) {
+    if (is.null(m$b)) {
+
+      # -- circles, continuous -------------------------------------------------
 
       p = p +
-        geom_text(data = subset(D, value != 0),
-                  aes(row, variable, label = value, alpha = abs(as.numeric(value))),
-                  color = label_color, show_guide = FALSE)
+        geom_point(aes(size = abs(c), color = c))
+
+    } else {
+
+      # -- circles, ordinal ----------------------------------------------------
+
+      p = p +
+        geom_point(aes(size = abs(c), color = b))
+
+    }
+
+    p = p +
+      scale_size_continuous(range = c(min_size, max_size)) +
+      guides(size = FALSE)
+
+    r = list(size = (min_size + max_size) / 2)
+
+    # -- circles, color scale --------------------------------------------------
+
+    if (is.null(m$b) && limits) {
+
+      p = p +
+        scale_color_gradient2(name, low = low, mid = mid, high = high,
+                              midpoint = midpoint, limits = c(-1, 1))
+
+    } else if (is.null(m$b)) {
+
+      p = p +
+        scale_color_gradient2(name, low = low, mid = mid, high = high,
+                              midpoint = midpoint)
+
+    } else if (is.null(palette)) {
+
+      x = colorRampPalette(c(low, mid, high))(length(levels(m$b)))
+
+      p = p +
+        scale_color_manual(name, values = x, drop = drop) +
+        guides(color = guide_legend(override.aes = r))
 
     } else {
 
       p = p +
-        geom_text(data = subset(D, value != 0),
-                  aes(row, variable, label = value),
+        scale_color_brewer(name, palette = palette, drop = drop) +
+        guides(color = guide_legend(override.aes = r))
+
+    }
+
+  } else if (geom == "text") {
+
+    if (is.null(m$b)) {
+
+      # -- text, continuous ----------------------------------------------------
+
+      p = p +
+        geom_text(aes(label = round(c, label_round), color = c))
+
+    } else {
+
+      # -- text, ordinal -------------------------------------------------------
+
+      p = p +
+        geom_text(aes(label = round(c, label_round), color = b))
+
+    }
+
+    # -- text, color scale ----------------------------------------------------
+
+    if (is.null(m$b) && limits) {
+
+      p = p +
+        scale_color_gradient2(name, low = low, mid = mid, high = high,
+                              midpoint = midpoint, limits = c(-1, 1))
+
+    } else if (is.null(m$b)) {
+
+      p = p +
+        scale_color_gradient2(name, low = low, mid = mid, high = high,
+                              midpoint = midpoint)
+
+    } else if (is.null(palette)) {
+
+      x = colorRampPalette(c(low, mid, high))(length(levels(m$b)))
+
+      p = p +
+        scale_color_manual(name, values = x, drop = drop)
+
+    } else {
+
+      p = p +
+        scale_color_brewer(name, palette = palette, drop = drop)
+
+    }
+
+  }
+
+  # -- coefficient labels ------------------------------------------------------
+
+  if (label) {
+
+    m = na.omit(m)
+    m$c = round(m$c, label_round)
+
+    if (isTRUE(label_alpha)) {
+
+      p = p +
+        geom_text(data = m,
+                  aes(x, y, label = c, alpha = abs(c)),
+                  color = label_color,
+                  show_guide = FALSE)
+
+    } else if (label_alpha > 0) {
+
+      p = p +
+        geom_text(data = m,
+                  aes(x, y, label = c,
+                      alpha = label_alpha, color = label_color,
+                      show_guide = FALSE))
+
+    } else {
+
+      p = p +
+        geom_text(data = m,
+                  aes(x, y, label = c),
                   color = label_color)
 
     }
+
   }
 
-  # add diagonal and options
   p = p  +
-    geom_text(data = diag, aes(label = variable), ...) +
-    scale_x_discrete(breaks = NULL, limits = levels(M$row)) +
-    scale_y_discrete(breaks = NULL, limits = levels(M$variable)) +
+    geom_text(data = m[ m$x == m$y & is.na(m$c), ], aes(label = x), ...) +
+    scale_x_discrete(breaks = NULL, limits = levels(m$y)) +
+    scale_y_discrete(breaks = NULL, limits = levels(m$y)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +
     theme(
       panel.background = element_blank(),
-      panel.grid = element_blank(),
-      legend.key = element_blank()#,
-      #axis.text.x = element_text(angle = -90)
+      legend.key = element_blank(),
+      legend.position = legend.position,
+      legend.title = element_text(size = legend.size),
+      legend.text = element_text(size = legend.size)
     )
 
   return(p)
