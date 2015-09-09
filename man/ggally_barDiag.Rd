@@ -4,7 +4,7 @@
 \alias{ggally_barDiag}
 \title{Plots the Bar Plots by Using Diagonal}
 \usage{
-ggally_barDiag(data, mapping, ...)
+ggally_barDiag(data, mapping, ..., rescale = TRUE)
 }
 \arguments{
 \item{data}{data set using}
@@ -12,6 +12,8 @@ ggally_barDiag(data, mapping, ...)
 \item{mapping}{aesthetics being used}
 
 \item{...}{other arguements are sent to geom_bar}
+
+\item{rescale}{boolean to decide whether or not to rescale the count output}
 }
 \description{
 Plots the bar plots by using Diagonal.

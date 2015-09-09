@@ -4,7 +4,7 @@
 \alias{ggally_densityDiag}
 \title{Plots the Density Plots by Using Diagonal}
 \usage{
-ggally_densityDiag(data, mapping, ...)
+ggally_densityDiag(data, mapping, ..., rescale = TRUE)
 }
 \arguments{
 \item{data}{data set using}
@@ -12,6 +12,8 @@ ggally_densityDiag(data, mapping, ...)
 \item{mapping}{aesthetics being used.}
 
 \item{...}{other arguments sent to stat_density}
+
+\item{rescale}{boolean to decide whether or not to rescale the count output}
 }
 \description{
 Plots the density plots by using Diagonal.

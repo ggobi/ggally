@@ -13,7 +13,7 @@ ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 
 \item{...}{other arguments being sent to either stat_bin or stat_density}
 
-\item{den_strip}{boolean to deceide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.}
+\item{den_strip}{boolean to decide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.}
 }
 \description{
 Make Tile Plot as densely as possible.
