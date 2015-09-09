@@ -192,8 +192,8 @@ test_that("subtypes", {
   comSubs = list("box", "dot", wrap("facethist", binwidth = 1), "facetdensity", wrap("denstrip", binwidth = 1), "blank")
   disSubs = list("ratio", "facetbar", "blank")
 
-  conDiagSubs = c("density", wrap("barDiag", binwidth = 1), "blank")
-  disDiagSubs = c("bar", "blank")
+  conDiagSubs = c("densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
+  disDiagSubs = c("barDiag", "blankDiag")
 
   printShowStrips = c(TRUE, FALSE)
 
