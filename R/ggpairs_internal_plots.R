@@ -45,8 +45,23 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
     fn <- attr(funcVal, "original_fn")
 
   } else if (mode(funcVal) == "character") {
+
     fnName <- str_c("ggally_", funcVal)
-    fn <- get(fnName, mode = "function")
+    tryCatch({
+      fn <- get(fnName, mode = "function")
+    }, error = function(e) {
+      stop(str_c(
+        "The following ggally functions are readily available: \n",
+        "\tcontinuous: c('points', 'smooth', 'density', 'cor', 'blank')\n",
+        "\tcombo: c('box', 'dot plot', 'facethist', 'facetdensity', 'denstrip', 'blank')\n",
+        "\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
+        "\n",
+        "You may also provide your own function that follows the api of function(data, mapping, ...){ . . . }\n",
+        "\n",
+        "Function provided: '", funcVal, "'"
+      ))
+    })
+
 
   } else if (mode(funcVal) == "function") {
     fnName <- as.character(funcArgName)
