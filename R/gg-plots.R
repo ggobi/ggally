@@ -779,6 +779,7 @@ ggally_ratio <- function(data){
 #' @param data data set using
 #' @param mapping aesthetics being used.
 #' @param ... other arguments sent to stat_density
+#' @param rescale boolean to decide whether or not to rescale the count output
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export
@@ -788,19 +789,26 @@ ggally_ratio <- function(data){
 #'  #data(movies)
 #'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
 #'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
-ggally_densityDiag <- function(data, mapping, ...){
+ggally_densityDiag <- function(data, mapping, ..., rescale = TRUE){
 
   p <- ggplot(data, mapping) +
     # scale_x_continuous() +
-    scale_y_continuous() +
-    stat_density(
-      aes(
-        y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
-      ),
-      position = "identity",
-      geom = "line",
-      ...
-    )
+    scale_y_continuous()
+
+  if (identical(rescale, TRUE)) {
+    p <- p +
+      stat_density(
+        aes(
+          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+        ),
+        position = "identity",
+        geom = "line",
+        ...
+      )
+  } else {
+    p <- p + geom_density()
+  }
+
   p$type <- "diag"
   p$subType <- "density"
   p
@@ -814,6 +822,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguements are sent to geom_bar
+#' @param rescale boolean to decide whether or not to rescale the count output
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export
@@ -822,7 +831,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
-ggally_barDiag <- function(data, mapping, ...){
+ggally_barDiag <- function(data, mapping, ..., rescale = TRUE){
   mapping$y <- NULL
   numer <- ("continuous" == plotting_data_type(data[, as.character(mapping$x)]))
 
@@ -838,12 +847,17 @@ ggally_barDiag <- function(data, mapping, ...){
 
   } else if(numer){
     # message("is numeric")
-    p <- p + geom_bar(
-      aes(
-        y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
-      ),
-      ...
-    ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
+    if (identical(rescale, TRUE)) {
+      p <- p + geom_bar(
+        aes(
+          y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+        ),
+        ...
+      ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
+    } else {
+      p <- p + geom_bar()
+
+    }
 
     p$subType <- "bar_num"
    } else {
