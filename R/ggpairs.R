@@ -58,6 +58,7 @@
 #'
 #' @export
 #' @param data data set using.  Can have both numerical and categorical data.
+#' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}
 #' @param columns which columns are used to make plots.  Defaults to all columns.
 #' @param title title for the graph
 #' @param upper see Details
