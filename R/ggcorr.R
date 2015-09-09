@@ -199,8 +199,8 @@ ggcorr <- function(
   # -- correlation data.frame --------------------------------------------------
 
   m = data.frame(m * lower.tri(m))
-  m$.row.names. = rownames(m)
-  m = melt(m, id.vars = ".row.names.")
+  m$.ggally_ggcorr_row_names = rownames(m)
+  m = melt(m, id.vars = ".ggally_ggcorr_row_names")
   names(m) = c("x", "y", "c")
   m$c[ m$c == 0 ] = NA
 
