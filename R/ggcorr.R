@@ -108,34 +108,34 @@ ggcorr <- function(
   nbreaks = NULL,
   digits = 2,
   drop = FALSE,
-  low = "#d73027",
-  mid = "#ffffbf",
-  high = "#1a9850",
+  low = "#3B9AB2",  # (blue) replaces "#d73027" (red)
+  mid = "#FFFFFF",  # (yellow) replaces "#ffffbf" (light yellow)
+  high = "#F21A00", # (red) replaces "#1a9850" (green)
   midpoint = 0,
   limits = TRUE,
   ...) {
 
-  M <- cor_matrix
+  M = cor_matrix
 
   # protect against spaces in variable names
   colnames(M) = rownames(M) = gsub(" ", "_", colnames(M))
 
   # correlation coefficients
-  D <- round(M, label_round)
+  D = round(M, label_round)
 
-  D <- D * lower.tri(D)
-  D <- as.data.frame(D)
+  D = D * lower.tri(D)
+  D = as.data.frame(D)
 
-  rowNames <- names(D)
-  D <- data.frame(row = rowNames, D)
-  D <- melt(D, id.vars = "row")
+  r = names(D)
+  D = data.frame(row = r, D)
+  D = melt(D, id.vars = "row")
 
   # correlation quantiles
-  M <- M * lower.tri(M)
-  M <- as.data.frame(M)
-  M <- data.frame(row = rowNames, M)
-  M <- melt(M, id.vars = "row")
-  M$value[M$value == 0] <- NA
+  M = M * lower.tri(M)
+  M = as.data.frame(M)
+  M = data.frame(row = r, M)
+  M = melt(M, id.vars = "row")
+  M$value[ M$value == 0 ] = NA
 
   if(!is.null(nbreaks)) {
 
@@ -144,7 +144,8 @@ ggcorr <- function(
     if(!nbreaks %% 2)
       s = unique(sort(c(s, 0)))
 
-    M$value = droplevels(cut(M$value, breaks = s, include.lowest = TRUE, dig.lab = digits))
+    M$value = cut(M$value, breaks = s, include.lowest = TRUE, dig.lab = digits)
+    M$value = droplevels(M$value)
     M$value = factor(M$value, levels = unique(cut(s, breaks = s, dig.lab = digits, include.lowest = TRUE)))
 
   }
@@ -156,80 +157,98 @@ ggcorr <- function(
 
   }
 
-  M$row <- factor(M$row, levels = unique(as.character(M$variable)))
+  M$row = factor(M$row, levels = unique(as.character(M$variable)))
 
-  # for circles
-  M$num = as.numeric(M$value)
-  M$num = abs(M$num - median(unique(M$num), na.rm = TRUE))
-  M$num = as.numeric(factor(M$num))
-  M$num = seq(min_size, max_size, length.out = length(na.omit(unique(M$num))))[ M$num ]
+  if (geom == "circle") {
 
-  diag  <- subset(M, row == variable)
-  M <- M[complete.cases(M), ]
+    M$num = as.numeric(M$value)
+    M$num = abs(M$num - median(unique(M$num), na.rm = TRUE))
+    M$num = as.numeric(factor(M$num))
+    M$num = seq(min_size, max_size, length.out = length(na.omit(unique(M$num))))[ M$num ]
 
-  # clean plot panel
-  po.nopanel <- list(theme(
-    panel.background = element_blank(),
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
-    legend.key = element_blank(),
-    axis.text.x = element_text(angle = -90))
-  )
+  }
+
+  diag  = subset(M, row == variable)
+  M = M[ complete.cases(M), ]
 
   p = ggplot(M, aes(x = row, y = variable))
 
   # apply main geom
-  if(geom == "circle") {
+  if (geom == "circle") {
 
     p = p +
       geom_point(aes(size = num + 0.25), color = "grey50") +
       geom_point(aes(size = num, color = value))
 
-    if(is.null(nbreaks) & limits) {
+    if (is.null(nbreaks) && limits) {
+
       p = p +
         scale_size_continuous(range = c(min_size, max_size)) +
-        scale_color_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint,
-                              limits = c(-1, 1)) +
+        scale_color_gradient2(name, low = low, mid = mid, high = high,
+                              midpoint = midpoint, limits = c(-1, 1)) +
         guides(size = FALSE)
-    } else if(is.null(nbreaks)) {
+
+    } else if (is.null(nbreaks)) {
+
       p = p +
         scale_size_continuous(range = c(min_size, max_size)) +
-        scale_fill_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint) +
+        scale_fill_gradient2(name, low = low, mid = mid, high = high,
+                             midpoint = midpoint) +
         guides(size = FALSE)
+
     } else {
+
+      r = list(size = (min_size + max_size) / 2)
       p = p +
         scale_size_identity(name) +
         scale_color_brewer(name, palette = palette, drop = drop) +
-        guides(colour = guide_legend(name, override.aes = list(size = (min_size + max_size) / 2)))
+        guides(colour = guide_legend(name, override.aes = r))
+
     }
 
   } else {
 
-    p = p + geom_tile(aes(fill = value), colour = "white")
+    p = p +
+      geom_tile(aes(fill = value), colour = "white")
 
-    if(is.null(nbreaks) & limits) {
-      p = p + scale_fill_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint,
-                                   limits = c(-1, 1))
-    } else if(is.null(nbreaks)) {
-      p = p + scale_fill_gradient2(name, low = low, mid = mid, high = high, midpoint = midpoint)
+    if (is.null(nbreaks) & limits) {
+
+      p = p +
+        scale_fill_gradient2(name, low = low, mid = mid, high = high,
+                             midpoint = midpoint, limits = c(-1, 1))
+
+    } else if (is.null(nbreaks)) {
+
+      p = p +
+        scale_fill_gradient2(name, low = low, mid = mid, high = high,
+                             midpoint = midpoint)
+
     } else {
-      p = p + scale_fill_brewer(name, palette = palette, drop = drop)
+
+      p = p +
+        scale_fill_brewer(name, palette = palette, drop = drop)
+
     }
 
   }
 
   # add coefficient text
   if(label) {
+
     if(label_alpha) {
+
       p = p +
         geom_text(data = subset(D, value != 0),
                   aes(row, variable, label = value, alpha = abs(as.numeric(value))),
                   color = label_color, show_guide = FALSE)
+
     } else {
+
       p = p +
         geom_text(data = subset(D, value != 0),
                   aes(row, variable, label = value),
                   color = label_color)
+
     }
   }
 
@@ -240,7 +259,13 @@ ggcorr <- function(
     scale_y_discrete(breaks = NULL, limits = levels(M$variable)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +
-    po.nopanel
+    theme(
+      panel.background = element_blank(),
+      panel.grid = element_blank(),
+      legend.key = element_blank()#,
+      #axis.text.x = element_text(angle = -90)
+    )
 
   return(p)
+
 }
