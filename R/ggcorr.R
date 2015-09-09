@@ -26,10 +26,12 @@ if (getRversion() >= "2.15.1") {
 #' @param cor_matrix the named correlation matrix to use for calculations.
 #' Defaults to the correlation matrix of \code{data} when \code{data} is
 #' supplied.
-#' @param palette if \code{nbreaks} has been set to something, a ColorBrewer
-#' palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.
-#' @param name a character string for the legend that shows quintiles of
-#' correlation coefficients. Defaults to nothing.
+#' @param palette if \code{nbreaks} is used, a ColorBrewer palette to use
+#' instead of the colors specified by \code{low}, \code{mid} and \code{high}.
+#' Defaults to \code{NULL}.
+#' @param name a character string for the legend that shows the colors of the
+#' correlation coefficients.
+#' Defaults to \code{""} (no legend name).
 #' @param geom the geom object to use. Accepts either \code{"tile"},
 #' \code{"circle"}, \code{"text"} or \code{"blank"}.
 #' @param min_size when \code{geom} has been set to \code{"circle"}, the minimum
@@ -54,10 +56,6 @@ if (getRversion() >= "2.15.1") {
 #' @param digits the number of digits to show in the breaks of the correlation
 #' coefficients: see \code{\link[base]{cut}} for details.
 #' Defaults to \code{2}.
-#' @param drop whether to use the empirical range of the correlation
-#' coefficients in the color scale, which is \emph{not} recommended (see
-#' 'Details').
-#' Defaults to \code{FALSE}.
 #' @param low the lower color of the gradient for continuous scaling of the
 #' correlation coefficients.
 #' Defaults to \code{"#3B9AB2"} (blue).
@@ -70,13 +68,19 @@ if (getRversion() >= "2.15.1") {
 #' @param midpoint the midpoint value for continuous scaling of the
 #' correlation coefficients.
 #' Defaults to \code{0}.
-#' @param limits whether to bound the continuous color scaling of the
-#' correlation coefficients between -1 and +1.
+#' @param limits whether to bound the color scaling of the correlation
+#' coefficients between -1 and +1.
 #' Defaults to \code{TRUE} (recommended).
+#' @param drop whether to use the empirical range of the correlation
+#' coefficients in the color scale, which is \emph{not} recommended (see
+#' 'Details').
+#' Defaults to \code{FALSE}.
 #' @param legend.position where to put the legend of the correlation
 #' coefficients: see \code{\link[ggplot2]{theme}} for details.
+#' Defaults to \code{"bottom"}.
 #' @param legend.size the size of the legend title and labels, in points: see
 #' \code{\link[ggplot2]{theme}} for details.
+#' Defaults to \code{9}.
 #' @param ... other arguments supplied to \code{\link[ggplot2]{geom_text}} for
 #' the diagonal labels.
 #' @details The \code{nbreaks} argument tries to break up the correlation
@@ -148,10 +152,6 @@ ggcorr <- function(
   legend.position = "right",
   legend.size = 9,
   ...) {
-
-  # -- packages ----------------------------------------------------------------
-
-  # require_pkgs("reshape2")
 
   # -- check geom argument -----------------------------------------------------
 
