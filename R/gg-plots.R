@@ -652,7 +652,7 @@ ggally_denstrip <- function(data,mapping, ...){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments being sent to either stat_bin or stat_density
-#' @param den_strip boolean to deceide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
+#' @param den_strip boolean to decide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export
