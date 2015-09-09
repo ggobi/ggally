@@ -7,18 +7,21 @@
 \alias{wrapp}
 \title{Wrap a function with parameters}
 \usage{
-wrap(funcVal, ...)
+wrap(funcVal, ..., funcArgName = substitute(funcVal))
 
-wrap_fn_with_params(funcVal, ...)
+wrap_fn_with_params(funcVal, ..., funcArgName = substitute(funcVal))
 
-wrap_fn_with_param_arg(funcVal, params = NULL)
+wrap_fn_with_param_arg(funcVal, params = NULL,
+  funcArgName = substitute(funcVal))
 
-wrapp(funcVal, params = NULL)
+wrapp(funcVal, params = NULL, funcArgName = substitute(funcVal))
 }
 \arguments{
 \item{funcVal}{function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}}
 
 \item{...}{named parameters to be supplied to \code{wrap_fn_with_param_arg}}
+
+\item{funcArgName}{name of function to be displayed}
 
 \item{params}{named vector of parameters to be applied to the \code{funcVal}}
 }
