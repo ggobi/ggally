@@ -102,21 +102,12 @@
 #' # Custom Example
 #' pm <- ggpairs(
 #'  diamonds.samp[,1:5],
-#'  upper = list(continuous = "density", combo = "box"),
-#'  lower = list(continuous = "points", combo = "dot"),
-#'  color = "cut",
-#'  alpha = 0.4,
+#'  mapping = ggplot2::aes(color = cut),
+#'  upper = list(continuous = wrap("density", alpha = 0.5), combo = "box"),
+#'  lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot", alpha = 0.4)),
 #'  title = "Diamonds"
 #' )
 #' # pm
-#'
-#' # Will plot four "Incorrect Plots"
-#' bad_plots <- ggpairs(
-#'   tips[,1:3],
-#'   upper = list(continuous = "wrongType1", combo = "wrongType2"),
-#'   lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
-#' )
-#' # bad_plots
 #'
 #' # Only Variable Labels on the diagonal (no axis labels)
 #' pm <- ggpairs(tips[,1:3], axisLabels="internal")
