@@ -4,19 +4,26 @@
 \alias{ggally_cor}
 \title{Correlation from the Scatter Plot}
 \usage{
-ggally_cor(data, mapping, corAlignPercent = 0.6, corMethod = "pearson",
-  corUse = "complete.obs", ...)
+ggally_cor(data, mapping, alignPercent = 0.6, method = "pearson",
+  use = "complete.obs", corAlignPercent = NULL, corMethod = NULL,
+  corUse = NULL, ...)
 }
 \arguments{
 \item{data}{data set using}
 
 \item{mapping}{aesthetics being used}
 
-\item{corAlignPercent}{right align position of numbers. Default is 60 percent across the horizontal}
+\item{alignPercent}{right align position of numbers. Default is 60 percent across the horizontal}
 
-\item{corMethod}{\code{method} suppied to cor function}
+\item{method}{\code{method} suppied to cor function}
 
-\item{corUse}{\code{use} supplied to cor function}
+\item{use}{\code{use} supplied to cor function}
+
+\item{corAlignPercent}{deprecated. Use parameter \code{alignPercent}}
+
+\item{corMethod}{deprecated. Use parameter \code{method}}
+
+\item{corUse}{deprecated. Use parameter \code{use}}
 
 \item{...}{other arguments being supplied to geom_text}
 }

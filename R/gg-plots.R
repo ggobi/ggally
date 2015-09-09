@@ -121,9 +121,12 @@ ggally_density <- function(data, mapping, ...){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param corAlignPercent right align position of numbers. Default is 60 percent across the horizontal
-#' @param corMethod \code{method} suppied to cor function
-#' @param corUse \code{use} supplied to cor function
+#' @param alignPercent right align position of numbers. Default is 60 percent across the horizontal
+#' @param method \code{method} suppied to cor function
+#' @param use \code{use} supplied to cor function
+#' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
+#' @param corMethod deprecated. Use parameter \code{method}
+#' @param corUse deprecated. Use parameter \code{use}
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom stringr str_c
@@ -141,20 +144,30 @@ ggally_density <- function(data, mapping, ...){
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...){
+ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", use = "complete.obs", corAlignPercent = NULL, corMethod = NULL, corUse = NULL, ...){
+
+  if (! is.null(corAlignPercent)) {
+    stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
+  }
+  if (! is.null(corMethod)) {
+    stop("'corMethod' is deprecated.  Please use argument 'method'")
+  }
+  if (! is.null(corUse)) {
+    stop("'corUse' is deprecated.  Please use argument 'use'")
+  }
 
   useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
-  corUse <-  pmatch(corUse, useOptions)
-  if (is.na(corUse)) {
+  use <-  pmatch(use, useOptions)
+  if (is.na(use)) {
     warning("correlation 'use' not found.  Using default value of 'all.obs'")
-    corUse <- useOptions[1]
+    use <- useOptions[1]
   } else {
-    corUse <- useOptions[corUse]
+    use <- useOptions[use]
   }
 
   cor_fn <- function(x, y) {
     # also do ddply below if fn is altered
-    cor(x,y, method = corMethod, use = corUse)
+    cor(x,y, method = method, use = use)
   }
 
   # xVar <- data[,as.character(mapping$x)]
@@ -196,7 +209,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   colorCol <- as.character(mapping$colour)
   singleColorCol <- paste(colorCol, collapse = "")
 
-  if (corUse %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
+  if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
     if(length(colorCol) > 0) {
       if(singleColorCol %in% colnames(data)) {
         rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
@@ -296,7 +309,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
     #element_bw() +
     theme(legend.position = "none")
 
-    xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
     yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
     # print(range(yVal))
@@ -836,15 +849,15 @@ ggally_barDiag <- function(data, mapping, ...){
    } else {
     # message("is categorical")
     # xVal <- mapping$x
-    # mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
+    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
     # # p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
     # p <- ggplot(data, mapping) + geom_bar(...)
     # # p <- p + scale_x_continuous(NULL, labels ="",breaks = 1)
 
     # xVal <- mapping$x
-    # mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
-    # mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
-    # mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
+    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
+    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
+    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
     # p <- ggplot(data = data, mapping) + geom_bar(...)
     # p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
     p <- p + geom_bar(...)
@@ -901,7 +914,7 @@ ggally_text <- function(
   if(is.null(mapping)) {
     mapping <- new_mapping
   } else {
-    mapping <- addAndOverwriteAes(mapping, new_mapping)
+    mapping <- add_and_overwrite_aes(mapping, new_mapping)
   }
 
   if(is.null(mapping$colour)) {
