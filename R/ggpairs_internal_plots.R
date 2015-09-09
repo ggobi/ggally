@@ -1,14 +1,14 @@
 #' @export
 #' @rdname wrap_fn_with_param_arg
-wrap  <- function(funcVal, ...) {
-  wrap_fn_with_param_arg(funcVal, params = list(...))
+wrap  <- function(funcVal, ..., funcArgName = substitute(funcVal)) {
+  wrap_fn_with_param_arg(funcVal, params = list(...), funcArgName = funcArgName)
 }
 
 #' @export
 #' @rdname wrap_fn_with_param_arg
 #' @param ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
-wrap_fn_with_params <- function(funcVal, ...) {
-  wrap_fn_with_param_arg(funcVal, params = list(...))
+wrap_fn_with_params <- function(funcVal, ..., funcArgName = substitute(funcVal)) {
+  wrap_fn_with_param_arg(funcVal, params = list(...), funcArgName = funcArgName)
 }
 
 
@@ -22,6 +22,7 @@ wrap_fn_with_params <- function(funcVal, ...) {
 #'
 #' @param funcVal function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}
 #' @param params named vector of parameters to be applied to the \code{funcVal}
+#' @param funcArgName name of function to be displayed
 #' @return a \code{function(data, mapping, ...)\{\}} that will wrap the original function with the parameters applied as arguements
 #' @export
 #' @rdname wrap_fn_with_param_arg
@@ -32,8 +33,7 @@ wrap_fn_with_params <- function(funcVal, ...) {
 #' fn(NULL, NULL) # 2
 #' wrapped_fn <- wrap_fn_with_param_arg(fn, params = c(val = 5))
 #' wrapped_fn(NULL, NULL) # 5
-wrap_fn_with_param_arg <- function(funcVal, params = NULL) {
-  funcArgName <- substitute(funcVal)
+wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substitute(funcVal)) {
 
   if (inherits(funcVal, "ggmatrix_fn_with_params")) {
     fnName <- attr(funcVal, "fnName")
