@@ -19,6 +19,15 @@
 #   facetbar
 #   blank
 
+# diag
+#   continuous
+#     densityDiag
+#     barDiag
+#     blankDiag
+#   discrete
+#     barDiag
+#     blankDiag
+
 ### Example removed due to not using facet labels anymore
 # #Sequence to show how to change label size
 # make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
@@ -49,8 +58,8 @@
 #'
 #' diag is a list that may only contain the variables 'continuous' and 'discrete'.
 #' Each element of the diag list is a string implmenting the following options:
-#' continuous = exactly one of ('density', 'bar', 'blank'); discrete = exactly one
-#' of ('bar', 'blank').
+#' continuous = exactly one of ('densityDiag', 'barDiag', 'blankDiag'); discrete = exactly one
+#' of ('barDiag', 'blankDiag').
 #'
 #' If a list option it will be set to the function default.  If 'blank' is ever
 #' chosen as an option, then ggpairs will produce a blank plot, as if nothing was
@@ -218,7 +227,7 @@ ggpairs <- function(
 
   upper <- check_and_set_defaults("upper", upper, continuous = "cor", combo = "box", discrete = "facetbar")
   lower <- check_and_set_defaults("lower", lower, continuous = "points", combo = "facethist", discrete = "facetbar")
-  diag <- check_and_set_defaults("diag", diag, continuous = "density", discrete = "bar")
+  diag <- check_and_set_defaults("diag", diag, continuous = "densityDiag", discrete = "barDiag")
 
   data <- as.data.frame(data)
   for (i in 1:dim(data)[2] ) {
@@ -372,11 +381,7 @@ ggpairs <- function(
           comboAes <- mapping_color_fill(comboAes)
         }
 
-        if (mode(subType) == "character") {
-          fn_to_wrap <- paste(subType, "Diag", sep = "", collapse = "")
-        } else {
-          fn_to_wrap <- subType
-        }
+        fn_to_wrap <- subType
 
         p <- make_ggmatrix_plot_obj(
           wrap_fn_with_param_arg(fn_to_wrap, params = c()),

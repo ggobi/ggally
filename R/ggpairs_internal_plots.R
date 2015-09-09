@@ -56,6 +56,9 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
         "\tcombo: c('box', 'dot plot', 'facethist', 'facetdensity', 'denstrip', 'blank')\n",
         "\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
         "\n",
+        "\tdiag continuous: c('densityDiag', 'barDiag', 'blankDiag')\n",
+        "\tdiag discrete: c('barDiag', 'blankDiag')\n",
+        "\n",
         "You may also provide your own function that follows the api of function(data, mapping, ...){ . . . }\n",
         "\n",
         "Function provided: '", funcVal, "'"
