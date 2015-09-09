@@ -61,7 +61,7 @@ if (getRversion() >= "2.15.1") {
 #' Defaults to \code{"#3B9AB2"} (blue).
 #' @param mid the midpoint color of the gradient for continuous scaling of the
 #' correlation coefficients.
-#' Defaults to \code{"#EEEEEE} (very light grey).
+#' Defaults to \code{"#EEEEEE"} (very light grey).
 #' @param high the upper color of the gradient for continuous scaling of the
 #' correlation coefficients.
 #' Defaults to \code{"#F21A00"} (red).
@@ -143,9 +143,9 @@ ggcorr <- function(
   label_color = "black",
   label_round = 1,
   drop = FALSE,
-  low = "#3B9AB2",  # (blue)  replaces "#d73027" (red)
+  low = "#3B9AB2",  # (blue) replaces "#d73027" (red)
   mid = "#EEEEEE",  # (grey) replaces "#ffffbf" (light yellow)
-  high = "#F21A00", # (red)   replaces "#1a9850" (green)
+  high = "#F21A00", # (red)  replaces "#1a9850" (green)
   midpoint = 0,
   palette = NULL,
   limits = TRUE,
