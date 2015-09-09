@@ -84,12 +84,12 @@ if(getRversion() >= "2.15.1") {
 #'   nbreaks = 6,
 #'   angle = -45,
 #'   palette = "PuOr" # colorblind safe, photocopy-able
-#' ) + ggplot2::labs(title = "Correlation Matrix")
+#' )
 #'
 #' # Supply your own correlation matrix
 #' ggcorr(
 #'   data = NULL,
-#'   cor_matrix = cor(dt[,-1], use = "pairwise")
+#'   cor_matrix = cor(dt[, -1], use = "pairwise")
 #' )
 
 ggcorr <- function(
@@ -153,7 +153,8 @@ ggcorr <- function(
   if(is.null(midpoint)) {
 
     midpoint = median(M$value, na.rm = TRUE)
-    message("Color gradient midpoint set at median correlation to ", round(midpoint, 2))
+    message(paste("Color gradient midpoint set at median correlation to",
+                  round(midpoint, 2)))
 
   }
 
