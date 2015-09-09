@@ -5,60 +5,89 @@ if(getRversion() >= "2.15.1") {
 
 #' ggcorr - Plot a correlation matrix with ggplot2
 #'
-#' Function for making a correlation plot starting from a data matrix, using ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's arm::corrplot function. Please visit \url{http://github.com/briatte/ggcorr} for the latest development and descriptions about ggcorr.
+#' Function for making a correlation matrix plot, using ggplot2.
+#' The function is directly inspired by Tian Zheng and Yu-Sung Su's
+#' \code{\link[arm]{corrplot}} function.
+#' Please visit \url{http://github.com/briatte/ggcorr} for the latest version
+#' of \code{ggcorr}.
 #'
 #' @export
-#' @param data a data matrix. Should contain numerical (continuous) data.
-#' @param method a character string giving a method for computing covariances in the presence of missing values. This must be (an abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"}, \code{"complete.obs"}, \code{"na.or.complete"}, or \code{"pairwise.complete.obs"}.
-#' Defaults to \code{"pairwise"}.
+#' @param data a data frame or matrix containing numeric (continuous) data.
+#' @param method a vector of two character strings. The first value gives the
+#' method for computing covariances in the presence of missing values, and must
+#' be (an abbreviation of) one of \code{"everything"}, \code{"all.obs"},
+#' \code{"complete.obs"}, \code{"na.or.complete"} or
+#' \code{"pairwise.complete.obs"}. The second value gives the type of
+#' correlation coefficient to compute, and must be one of \code{"pearson"},
+#' \code{"kendall"} or \code{"spearman"}.
+#' See \code{\link[stats]{cor}} for details.
+#' Defaults to \code{c("pairwise", "pearson")}.
 #' @param cor_matrix the named correlation matrix to use for calculations.
+#' Defaults to the correlation matrix of \code{data} when \code{data} is
+#' supplied.
 #' @param palette if \code{nbreaks} has been set to something, a ColorBrewer
 #' palette to be used for correlation coefficients. Defaults to \code{"RdYlGn"}.
 #' @param name a character string for the legend that shows quintiles of
 #' correlation coefficients. Defaults to nothing.
 #' @param geom the geom object to use. Accepts either \code{tile} (the default)
 #' or \code{circle}, to plot proportionally scaled circles.
-#' @param max_size the maximum size for circles, as passed to \code{scale_size_identity}
-#' for proportional scaling. Defaults to \code{6}.
-#' @param min_size the maximum size for circles, as passed to \code{scale_size_identity}
-#' for proportional scaling. Defaults to \code{2}.
+#' @param max_size when \code{geom} has been set to \code{"circle"}, the maximum
+#' size of the circles, as passed to \code{scale_size_identity} for proportional
+#' scaling.
+#' Defaults to \code{6}.
+#' @param min_size when \code{geom} has been set to \code{"circle"}, the minimum
+#' size of the circles, as passed to \code{scale_size_identity} for proportional
+#' scaling.
+#' Defaults to \code{2}.
 #' @param label whether to add correlation coefficients as two-digit numbers
-#' over the plot. Defaults to \code{FALSE}.
-#' @param label_alpha whether to make the correlation coefficients transparent
-#' as they come close to 0. Defaults to \code{FALSE}.
-#' @param label_color color for the correlation coefficients. Defaults to \code{"black"}.
-#' @param label_round decimal rounding of the correlation coefficients.
+#' over the plot.
+#' Defaults to \code{FALSE}.
+#' @param label_alpha whether to make the correlation coefficients increasingly
+#' transparent as they come close to 0.
+#' Defaults to \code{FALSE}.
+#' @param label_color the color of the correlation coefficients.
+#' Defaults to \code{"black"}.
+#' @param label_round the decimal rounding of the correlation coefficients.
 #' Defaults to \code{1}.
-#' @param nbreaks number of breaks to apply to categorize the correlation
-#' coefficients. Defaults to \code{NULL} (continuous scaling).
-#' @param digits number of digits to show in the breaks of the correlation
-#' coefficients. Defaults to \code{2}.
-#' @param drop use the empirical range of correlation coefficients for their categorization,
-#' which is \emph{not} recommended (see 'Details'). Defaults to \code{FALSE}.
-#' @param low lower color of the gradient for continuous scaling of the correlation
-#' coefficients. Defaults to \code{d73027} (red).
-#' @param mid mid color of the gradient for continuous scaling of the correlation
-#' coefficients. Defaults to \code{d73027} (yellow).
-#' @param high upper color of the gradient for continuous scaling of the correlation
-#' coefficients. Defaults to \code{1a9850} (red).
-#' @param midpoint the midpoint value for continuous scaling of the correlation
-#' coefficients. Defaults to \code{0}.
-#' @param limits whether to bound the continuous color scaling of the correlation
-#' coefficients between -1 and +1. Defaults to \code{TRUE}.
-#' @param ... other arguments supplied to geom_text for the diagonal labels.
-#' Arguments pertaining to the title or other items can be achieved through ggplot2 methods.
+#' @param nbreaks the number of breaks to apply to the correlation coefficients.
+#' Defaults to \code{NULL} (no breaks, continuous scaling).
+#' @param digits the number of digits to show in the breaks of the correlation
+#' coefficients: see \code{\link[base]{cut}} for details.
+#' Defaults to \code{2}.
+#' @param drop whether to use the empirical range of the correlation
+#' coefficients in the color scale, which is \emph{not} recommended (see
+#' 'Details').
+#' Defaults to \code{FALSE}.
+#' @param low the lower color of the gradient for continuous scaling of the
+#' correlation coefficients.
+#' Defaults to \code{"#3B9AB2"} (blue).
+#' @param mid the midpoint color of the gradient for continuous scaling of the
+#' correlation coefficients.
+#' Defaults to \code{"#FFFFFF} (white).
+#' @param high the upper color of the gradient for continuous scaling of the
+#' correlation coefficients.
+#' Defaults to \code{"#F21A00"} (red).
+#' @param midpoint the midpoint value for continuous scaling of the
+#' correlation coefficients.
+#' Defaults to \code{0}.
+#' @param limits whether to bound the continuous color scaling of the
+#' correlation coefficients between -1 and +1.
+#' Defaults to \code{TRUE} (recommended).
+#' @param ... other arguments supplied to \code{\link[ggplot2]{geom_text}} for
+#' the diagonal labels.
 #' @details The \code{nbreaks} argument tries to break up the correlation
 #' coefficients into an ordinal color scale. Recommended values for the numbers
-#' of breaks are 3 to 11, as values above 11 are visually difficult to separate
-#' and are not supported by diverging ColorBrewer palettes.
+#' of breaks are \code{3} to \code{11}, as values above 11 are visually
+#' difficult to separate and are not supported by diverging ColorBrewer
+#' palettes.
 #'
 #' The breaks will range from -1 to +1, unless drop is set to \code{FALSE}, in
 #' which case the empirical range of the correlation coefficients is used. The
 #' latter is not recommended, as it creates a disbalance between the colors of
 #' negative and positive coefficients.
-#' @seealso \code{\link{cor}} and \code{\link[arm]{corrplot}}
-#' @author Francois Briatte \email{f.briatte@@gmail.com} with contributions from
-#' Amos B. Elberg \email{amos.elberg@@gmail.com} and Barret Schloerke \email{schloerke@@gmail.com}
+#' @seealso \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
+#' @author Francois Briatte, with contributions from Amos B. Elberg and
+#' Barret Schloerke
 #' @importFrom reshape melt melt.data.frame melt.default
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -91,11 +120,10 @@ if(getRversion() >= "2.15.1") {
 #'   data = NULL,
 #'   cor_matrix = cor(dt[, -1], use = "pairwise")
 #' )
-
 ggcorr <- function(
   data,
-  method = "pairwise",
-  cor_matrix = cor(data, use = method),
+  method = c("pairwise", "pearson"),
+  cor_matrix = NULL,
   palette = "RdYlGn",
   name = "",
   geom = "tile",
@@ -108,12 +136,33 @@ ggcorr <- function(
   nbreaks = NULL,
   digits = 2,
   drop = FALSE,
-  low = "#3B9AB2",  # (blue) replaces "#d73027" (red)
-  mid = "#FFFFFF",  # (yellow) replaces "#ffffbf" (light yellow)
-  high = "#F21A00", # (red) replaces "#1a9850" (green)
+  low = "#3B9AB2",  # (blue)  replaces "#d73027" (red)
+  mid = "#FFFFFF",  # (white) replaces "#ffffbf" (light yellow)
+  high = "#F21A00", # (red)   replaces "#1a9850" (green)
   midpoint = 0,
   limits = TRUE,
   ...) {
+
+  # for backwards compatibility
+  if (length(method) == 1) {
+    method = c(method, "pearson")
+  }
+
+  if (is.null(cor_matrix)) {
+    cor_matrix = cor(data, use = method[1], method = method[2])
+  }
+
+  if (!is.null(data) && "data.frame" %in% class(data)) {
+    r = names(data)[ !sapply(data, is.numeric) ]
+  } else if (!is.null(data) && !is.null(colnames(data))) {
+    r = colnames(data)[ !apply(data, 2, is.numeric) ]
+  } else {
+    r = which(!apply(data, 2, is.numeric))
+  }
+
+  if (length(r) > 0) {
+    stop(paste("column(s)", paste0(r, collapse = ", "), "are not numeric"))
+  }
 
   M = cor_matrix
 
@@ -178,7 +227,7 @@ ggcorr <- function(
   if (geom == "circle") {
 
     p = p +
-      geom_point(aes(size = num + 0.25), color = "grey50") +
+      #geom_point(aes(size = num + 0.25), color = "grey50") +
       geom_point(aes(size = num, color = value))
 
     if (is.null(nbreaks) && limits) {

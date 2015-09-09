@@ -5,8 +5,6 @@ context("ggcorr")
 
 data(flea)
 
-
-
 test_that("examples", {
   # Default output.
   p <- ggcorr(flea[, -1])
@@ -26,11 +24,11 @@ test_that("examples", {
     max_size = 6,
     size = 3,
     hjust = 0.75,
+    nbreaks = 6,
     angle = -45,
     palette = "PuOr" # colorblind safe, photocopy-able
   )
   expect_equal(length(p$layers), 3)
-
 
   p <- ggcorr(flea[, -1],
          label = TRUE,
@@ -38,6 +36,16 @@ test_that("examples", {
   expect_equal(length(p$layers), 3)
 })
 
+test_that("null midpoint", {
+  expect_message(ggcorr(flea[, -1], midpoint = NULL), "Color gradient")
+})
+
+test_that("further options", {
+  ggcorr(flea[, -1], geom = "circle")
+  ggcorr(flea[, -1], geom = "circle", limits = FALSE)
+  ggcorr(flea[, -1], geom = "tile", nbreaks = 3)
+  ggcorr(flea[, -1], geom = "tile", limits = FALSE)
+})
 
 test_that("data.matrix", {
   p <- ggcorr(data.matrix(flea[, -1]))
