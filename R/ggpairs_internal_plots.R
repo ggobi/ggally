@@ -35,7 +35,16 @@ wrap_fn_with_params <- function(funcVal, ...) {
 wrap_fn_with_param_arg <- function(funcVal, params = NULL) {
   funcArgName <- substitute(funcVal)
 
-  if (mode(funcVal) == "character") {
+  if (inherits(funcVal, "ggmatrix_fn_with_params")) {
+    fnName <- attr(funcVal, "fnName")
+    oParams <- params
+    params <- attr(funcVal, "params")
+    for (paramName in names(oParams)) {
+      params[paramName] <- oParams[paramName]
+    }
+    fn <- attr(funcVal, "original_fn")
+
+  } else if (mode(funcVal) == "character") {
     fnName <- str_c("ggally_", funcVal)
     fn <- get(fnName, mode = "function")
 
