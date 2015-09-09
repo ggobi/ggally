@@ -135,6 +135,11 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
   hasGg <- (!is.null(x$gg))
   mappingTxt = mapping_as_string(x$mapping)
   fnTxt <- ifelse(inherits(x$fn, "ggmatrix_fn_with_params"), as.character(x$fn), "custom_function")
+  if (inherits(x$fn, "ggmatrix_fn_with_params")) {
+    if (attr(x$fn, "fnName") %in% c("ggally_blank", "ggally_blankDiag")) {
+      return("(blank)")
+    }
+  }
   str_c(
     "PM",
     "; aes: ", mappingTxt,
