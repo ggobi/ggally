@@ -74,6 +74,7 @@
 #' @import ggplot2
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
+#' @importFrom stringr str_replace
 #' @examples
 #' # plotting is reduced to the first couple of examples.
 #' # Feel free to print the ggpair objects created in the examples
@@ -302,16 +303,21 @@ ggpairs <- function(
       # comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), sectionAes)
       comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
+      subTypeName <- get_subtype_name(subType)
       if (isContinuous) {
-        if (identical(subType, "density")) {
+        if (identical(subTypeName, "density")) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(group = comboAes$colour))
         }
       } else {
         # isCombo
 
-        if (! (identical(subType, "dot") || identical(subType, "facetdensity"))) {
+        # ! subType %in% c("dot", "facetdensity")
+        # subType %in% c("box", "facethist", denstrip)
+
+        if (! (identical(subTypeName, "dot") || identical(subTypeName, "facetdensity"))) {
           comboAes <- mapping_color_fill(comboAes)
         }
+
       }
 
       p <- make_ggmatrix_plot_obj(
@@ -324,13 +330,14 @@ ggpairs <- function(
         cat("mosaic\n")
       }
       subType <- if (up) upper$discrete else lower$discrete
+      subTypeName <- get_subtype_name(subType)
 
       comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
-      if (identical(subType, "ratio")) {
+      if (identical(subTypeName, "ratio")) {
         p <- ggally_ratio(data[, c(yColName, xColName)])
 
-      } else if (identical(subType, "facetbar")) {
+      } else if (identical(subTypeName, "facetbar")) {
         if (!is.null(comboAes$colour)) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
         }
@@ -354,11 +361,12 @@ ggpairs <- function(
         } else if (type == "stat_bin-cat") {
           subType <- diag$discrete
         }
+        subTypeName <- get_subtype_name(subType)
 
         comboAes <- add_and_overwrite_aes(plotAes, diag$aes_string)
 
         if (
-          ((!identical(subType, "density")) && type == "stat_bin-num") ||
+          ((!identical(subTypeName, "density")) && type == "stat_bin-num") ||
           (type == "stat_bin-cat")
         ) {
           comboAes <- mapping_color_fill(comboAes)
@@ -369,6 +377,7 @@ ggpairs <- function(
         } else {
           fn_to_wrap <- subType
         }
+
         p <- make_ggmatrix_plot_obj(
           wrap_fn_with_param_arg(fn_to_wrap, params = c()),
           mapping = comboAes
@@ -513,6 +522,23 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
   obj
 }
 
+
+get_subtype_name <- function(subType) {
+  if (inherits(subType, "ggmatrix_fn_with_params")) {
+    name <- attr(subType, "fnName")
+    if (str_detect(name, "^ggally_")) {
+      str_replace(name, "^ggally_", "")
+    } else {
+      name
+    }
+  } else {
+    if (mode(subType) == "character") {
+      subType
+    } else {
+      "custom_function"
+    }
+  }
+}
 
 
 #diamondMatrix <- ggpairs(
