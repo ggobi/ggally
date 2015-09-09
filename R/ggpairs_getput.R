@@ -106,9 +106,9 @@ getPlot <- function(x, i, j){
     }
 
   } else {
-    cat("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
-    print(str(plotObj))
-    stop("unknown plot object type.")
+    firstNote <- str_c("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
+    strObj <- capture.output({print(str(plotObj))})
+    stop(str_c("unknown plot object type.\n", firstNote, strObj))
   }
   # stop("fix this")
   # if (is.character(plot_text)) {
