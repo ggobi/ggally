@@ -6,6 +6,7 @@ context("ggcorr")
 data(flea)
 
 test_that("examples", {
+
   # Default output.
   p <- ggcorr(flea[, -1])
   expect_equal(length(p$layers), 2)
@@ -34,6 +35,21 @@ test_that("examples", {
          label = TRUE,
          name = "")
   expect_equal(length(p$layers), 3)
+
+  # test other combinations of geoms + color scales
+  ggcorr(flea[, -1], nbreaks = 4, palette = "PuOr")
+  ggcorr(flea[, -1], nbreaks = 4, geom = "circle")
+  ggcorr(flea[, -1], geom = "text")
+  ggcorr(flea[, -1], geom = "text", limits = FALSE)
+  ggcorr(flea[, -1], nbreaks = 4, geom = "text")
+  ggcorr(flea[, -1], nbreaks = 4, palette = "PuOr", geom = "text")
+
+  ggcorr(flea[, -1], label = TRUE, label_alpha = 0.5)
+
+})
+
+test_that("non-numeric data", {
+  expect_warning(ggcorr(flea), "not numeric")
 })
 
 test_that("null midpoint", {
@@ -56,4 +72,13 @@ test_that("data.matrix", {
 test_that("cor_matrix", {
   p <- ggcorr(data = NULL, cor_matrix = cor(flea[, -1], use = "pairwise"))
   expect_equal(length(p$layers), 2)
+})
+
+test_that("other geoms", {
+  expect_error(ggcorr(flea[, -1], geom = "hexbin"), "incorrect geom")
+  ggcorr(flea[, -1], geom = "blank")
+})
+
+test_that("backwards compatibility", {
+  ggcorr(flea[, -1], method = "everything")
 })
