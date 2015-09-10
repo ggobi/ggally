@@ -16,7 +16,7 @@ require_pkgs = function(pkgs) {
 
 
 str_c <- function (..., sep = "", collapse = NULL) {
-  paste(..., sep = "", collapse = NULL)
+  paste(..., sep = sep, collapse = collapse)
 }
 
 str_detect <- function(string, pattern, ...) {
