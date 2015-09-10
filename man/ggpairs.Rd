@@ -52,8 +52,8 @@ of ('facetbar','ratio', 'blank').
 
 diag is a list that may only contain the variables 'continuous' and 'discrete'.
 Each element of the diag list is a string implmenting the following options:
-continuous = exactly one of ('density', 'bar', 'blank'); discrete = exactly one
-of ('bar', 'blank').
+continuous = exactly one of ('densityDiag', 'barDiag', 'blankDiag'); discrete = exactly one
+of ('barDiag', 'blankDiag').
 
 If a list option it will be set to the function default.  If 'blank' is ever
 chosen as an option, then ggpairs will produce a blank plot, as if nothing was

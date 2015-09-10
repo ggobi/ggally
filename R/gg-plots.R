@@ -953,7 +953,6 @@ ggally_text <- function(
 #' Retrieves x axis labels from the plot object directly.
 #'
 #' @importFrom gtable gtable_filter
-#' @importFrom stringr str_detect
 #' @param p plot object
 #' @param xRange range of x values
 #' @keywords internal
