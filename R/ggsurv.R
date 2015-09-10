@@ -30,7 +30,6 @@ if(getRversion() >= "2.15.1") {
 #' @param main the plot label.
 #' @return An object of class \code{ggplot}
 #' @author Edwin Thoen \email{edwinthoen@@gmail.com}
-#' @importFrom stringr str_c
 #' @examples
 #'
 #' if (require(survival) && require(scales)) {
@@ -162,7 +161,7 @@ ggsurv_s <- function(
       stop('There are no censored observations')
     }
     col <- ifelse(cens.col == 'gg.def', 'red', cens.col)
-    
+
     pl <- pl + geom_point(
       data    = dat.cens,
       mapping = aes(y = surv),
@@ -278,7 +277,7 @@ ggsurv_m <- function(
       if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
         warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
       }
-      
+
       pl <- pl + geom_point(
         data = dat.cens,
         mapping = aes(y=surv, col = group),
