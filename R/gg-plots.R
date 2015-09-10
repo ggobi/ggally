@@ -129,7 +129,6 @@ ggally_density <- function(data, mapping, ...){
 #' @param corUse deprecated. Use parameter \code{use}
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @importFrom stringr str_c
 #' @export
 #' @keywords hplot
 #' @examples

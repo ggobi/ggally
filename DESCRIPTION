@@ -29,8 +29,7 @@ Imports:
     grid (>= 3.0.0),
     gtable (>= 0.1.2),
     plyr (>= 1.8),
-    reshape (>= 0.8.4),
-    stringr (>= 0.6.2)
+    reshape (>= 0.8.4)
 Suggests:
     arm (>= 1.7),
     geosphere (>= 1.3-11),
