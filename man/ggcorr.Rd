@@ -5,11 +5,12 @@
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
 ggcorr(data, method = c("pairwise", "pearson"), cor_matrix = NULL,
-  nbreaks = NULL, digits = 2, name = "", geom = "tile", min_size = 2,
-  max_size = 6, label = FALSE, label_alpha = FALSE,
-  label_color = "black", label_round = 1, drop = FALSE, low = "#3B9AB2",
+  nbreaks = NULL, digits = 2, name = "", low = "#3B9AB2",
   mid = "#EEEEEE", high = "#F21A00", midpoint = 0, palette = NULL,
-  limits = TRUE, legend.position = "right", legend.size = 9, ...)
+  geom = "tile", min_size = 2, max_size = 6, label = FALSE,
+  label_alpha = FALSE, label_color = "black", label_round = 1,
+  label_size = 4, limits = TRUE, drop = !limits, layout.exp = 0,
+  legend.position = "right", legend.size = 9, ...)
 }
 \arguments{
 \item{data}{a data frame or matrix containing numeric (continuous) data. If
@@ -30,7 +31,8 @@ Defaults to \code{c("pairwise", "pearson")}.}
 Defaults to the correlation matrix of \code{data} when \code{data} is
 supplied.}
 
-\item{nbreaks}{the number of breaks to apply to the correlation coefficients.
+\item{nbreaks}{the number of breaks to apply to the correlation coefficients,
+which results in a categorical color scale. See 'Note'.
 Defaults to \code{NULL} (no breaks, continuous scaling).}
 
 \item{digits}{the number of digits to show in the breaks of the correlation
@@ -40,6 +42,26 @@ Defaults to \code{2}.}
 \item{name}{a character string for the legend that shows the colors of the
 correlation coefficients.
 Defaults to \code{""} (no legend name).}
+
+\item{low}{the lower color of the gradient for continuous scaling of the
+correlation coefficients.
+Defaults to \code{"#3B9AB2"} (blue).}
+
+\item{mid}{the midpoint color of the gradient for continuous scaling of the
+correlation coefficients.
+Defaults to \code{"#EEEEEE"} (very light grey).}
+
+\item{high}{the upper color of the gradient for continuous scaling of the
+correlation coefficients.
+Defaults to \code{"#F21A00"} (red).}
+
+\item{midpoint}{the midpoint value for continuous scaling of the
+correlation coefficients.
+Defaults to \code{0}.}
+
+\item{palette}{if \code{nbreaks} is used, a ColorBrewer palette to use
+instead of the colors specified by \code{low}, \code{mid} and \code{high}.
+Defaults to \code{NULL}.}
 
 \item{geom}{the geom object to use. Accepts either \code{"tile"},
 \code{"circle"}, \code{"text"} or \code{"blank"}.}
@@ -67,34 +89,20 @@ Defaults to \code{"grey75"}.}
 \item{label_round}{the decimal rounding of the correlation coefficients.
 Defaults to \code{1}.}
 
-\item{drop}{whether to use the empirical range of the correlation
-coefficients in the color scale, which is \emph{not} recommended (see
-'Details').
-Defaults to \code{FALSE}.}
-
-\item{low}{the lower color of the gradient for continuous scaling of the
-correlation coefficients.
-Defaults to \code{"#3B9AB2"} (blue).}
-
-\item{mid}{the midpoint color of the gradient for continuous scaling of the
-correlation coefficients.
-Defaults to \code{"#EEEEEE"} (very light grey).}
-
-\item{high}{the upper color of the gradient for continuous scaling of the
-correlation coefficients.
-Defaults to \code{"#F21A00"} (red).}
-
-\item{midpoint}{the midpoint value for continuous scaling of the
-correlation coefficients.
-Defaults to \code{0}.}
-
-\item{palette}{if \code{nbreaks} is used, a ColorBrewer palette to use
-instead of the colors specified by \code{low}, \code{mid} and \code{high}.
-Defaults to \code{NULL}.}
+\item{label_size}{the size of the correlation coefficients.
+Defaults to \code{4}.}
 
 \item{limits}{whether to bound the color scaling of the correlation
 coefficients between -1 and +1.
 Defaults to \code{TRUE} (recommended).}
+
+\item{drop}{if using \code{nbreaks}, whether to drop unused breaks from the
+color scale.
+Defaults to \code{FALSE} (recommended).}
+
+\item{layout.exp}{a multiplier to expand the horizontal axis to the left if
+variable names get clipped.
+Defaults to \code{0} (no expansion).}
 
 \item{legend.position}{where to put the legend of the correlation
 coefficients: see \code{\link[ggplot2]{theme}} for details.
@@ -112,19 +120,13 @@ Function for making a correlation matrix plot, using ggplot2.
 The function is directly inspired by Tian Zheng and Yu-Sung Su's
 \code{\link[arm]{corrplot}} function.
 Please visit \url{http://github.com/briatte/ggcorr} for the latest version
-of \code{ggcorr}.
+of \code{ggcorr}, and see the vignette at
+\url{https://briatte.github.io/ggcorr/} for many examples of how to use it.
 }
-\details{
-The \code{nbreaks} argument tries to break up the correlation
-coefficients into an ordinal color scale. Recommended values for the numbers
-of breaks are \code{3} to \code{11}, as values above 11 are visually
-difficult to separate and are not supported by diverging ColorBrewer
-palettes.
-
-The breaks will range from \code{-1} to \code{+1}, unless \code{drop} is set
-to \code{FALSE}, in which case the empirical range of the correlation
-coefficients is used. The latter is not recommended, as it creates a
-disbalance between the colors of negative and positive coefficients.
+\note{
+Recommended values for the \code{nbreaks} argument are \code{3} to
+\code{11}, as values above 11 are visually difficult to separate and are not
+supported by diverging ColorBrewer palettes.
 }
 \examples{
 # Basketball statistics provided by Nathan Yau at Flowing Data.
@@ -163,6 +165,7 @@ Francois Briatte, with contributions from Amos B. Elberg and
 Barret Schloerke
 }
 \seealso{
-\code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
+\code{\link[stats]{cor}} and \code{\link[arm]{corrplot}} in the
+\code{arm} package.
 }
 
