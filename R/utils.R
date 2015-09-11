@@ -24,5 +24,5 @@ str_detect <- function(string, pattern, ...) {
 }
 
 str_replace <- function(string, pattern, replacement) {
-  sub(patter, replacement, string)
+  sub(pattern, replacement, string)
 }
