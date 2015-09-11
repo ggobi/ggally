@@ -109,7 +109,7 @@ wrapp <- wrap_fn_with_param_arg
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
   params <- attr(x, "params")
   paramTxt <- mapping_as_string(params)
-  txt <- stringr::str_c("wrap; fn: '", attr(x, "fnName"), "'; with params: ", paramTxt)
+  txt <- str_c("wrap; fn: '", attr(x, "fnName"), "'; with params: ", paramTxt)
   txt
 }
 
