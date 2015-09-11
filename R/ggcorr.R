@@ -1,5 +1,5 @@
 if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c(".row.names.", "x", "y", "c", "b"))
+  utils::globalVariables(c("x", "y", "coefficient", "breaks", "label"))
 }
 
 #' ggcorr - Plot a correlation matrix with ggplot2
@@ -8,7 +8,8 @@ if (getRversion() >= "2.15.1") {
 #' The function is directly inspired by Tian Zheng and Yu-Sung Su's
 #' \code{\link[arm]{corrplot}} function.
 #' Please visit \url{http://github.com/briatte/ggcorr} for the latest version
-#' of \code{ggcorr}.
+#' of \code{ggcorr}, and see the vignette at
+#' \url{https://briatte.github.io/ggcorr/} for many examples of how to use it.
 #'
 #' @export
 #' @param data a data frame or matrix containing numeric (continuous) data. If
@@ -51,7 +52,10 @@ if (getRversion() >= "2.15.1") {
 #' Defaults to \code{"grey75"}.
 #' @param label_round the decimal rounding of the correlation coefficients.
 #' Defaults to \code{1}.
-#' @param nbreaks the number of breaks to apply to the correlation coefficients.
+#' @param label_size the size of the correlation coefficients.
+#' Defaults to \code{4}.
+#' @param nbreaks the number of breaks to apply to the correlation coefficients,
+#' which results in a categorical color scale. See 'Note'.
 #' Defaults to \code{NULL} (no breaks, continuous scaling).
 #' @param digits the number of digits to show in the breaks of the correlation
 #' coefficients: see \code{\link[base]{cut}} for details.
@@ -71,10 +75,12 @@ if (getRversion() >= "2.15.1") {
 #' @param limits whether to bound the color scaling of the correlation
 #' coefficients between -1 and +1.
 #' Defaults to \code{TRUE} (recommended).
-#' @param drop whether to use the empirical range of the correlation
-#' coefficients in the color scale, which is \emph{not} recommended (see
-#' 'Details').
-#' Defaults to \code{FALSE}.
+#' @param drop if using \code{nbreaks}, whether to drop unused breaks from the
+#' color scale.
+#' Defaults to \code{FALSE} (recommended).
+#' @param layout.exp a multiplier to expand the horizontal axis to the left if
+#' variable names get clipped.
+#' Defaults to \code{0} (no expansion).
 #' @param legend.position where to put the legend of the correlation
 #' coefficients: see \code{\link[ggplot2]{theme}} for details.
 #' Defaults to \code{"bottom"}.
@@ -83,17 +89,12 @@ if (getRversion() >= "2.15.1") {
 #' Defaults to \code{9}.
 #' @param ... other arguments supplied to \code{\link[ggplot2]{geom_text}} for
 #' the diagonal labels.
-#' @details The \code{nbreaks} argument tries to break up the correlation
-#' coefficients into an ordinal color scale. Recommended values for the numbers
-#' of breaks are \code{3} to \code{11}, as values above 11 are visually
-#' difficult to separate and are not supported by diverging ColorBrewer
-#' palettes.
+#' @note Recommended values for the \code{nbreaks} argument are \code{3} to
+#' \code{11}, as values above 11 are visually difficult to separate and are not
+#' supported by diverging ColorBrewer palettes.
 #'
-#' The breaks will range from \code{-1} to \code{+1}, unless \code{drop} is set
-#' to \code{FALSE}, in which case the empirical range of the correlation
-#' coefficients is used. The latter is not recommended, as it creates a
-#' disbalance between the colors of negative and positive coefficients.
-#' @seealso \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}}
+#' @seealso \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}} in the
+#' \code{arm} package.
 #' @author Francois Briatte, with contributions from Amos B. Elberg and
 #' Barret Schloerke
 #' @importFrom reshape melt melt.data.frame melt.default
@@ -135,6 +136,11 @@ ggcorr <- function(
   nbreaks = NULL,
   digits = 2,
   name = "",
+  low = "#3B9AB2",
+  mid = "#EEEEEE",
+  high = "#F21A00",
+  midpoint = 0,
+  palette = NULL,
   geom = "tile",
   min_size = 2,
   max_size = 6,
@@ -142,13 +148,10 @@ ggcorr <- function(
   label_alpha = FALSE,
   label_color = "black",
   label_round = 1,
-  drop = FALSE,
-  low = "#3B9AB2",  # (blue) replaces "#d73027" (red)
-  mid = "#EEEEEE",  # (grey) replaces "#ffffbf" (light yellow)
-  high = "#F21A00", # (red)  replaces "#1a9850" (green)
-  midpoint = 0,
-  palette = NULL,
+  label_size = 4,
   limits = TRUE,
+  drop = !limits,
+  layout.exp = 0,
   legend.position = "right",
   legend.size = 9,
   ...) {
@@ -200,21 +203,22 @@ ggcorr <- function(
 
   m = data.frame(m * lower.tri(m))
   m$.ggally_ggcorr_row_names = rownames(m)
-  m = melt(m, id.vars = ".ggally_ggcorr_row_names")
-  names(m) = c("x", "y", "c")
-  m$c[ m$c == 0 ] = NA
+  m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
+  names(m) = c("x", "y", "coefficient")
+  m$coefficient[ m$coefficient == 0 ] = NA
 
   # -- correlation quantiles ---------------------------------------------------
 
   if (!is.null(nbreaks)) {
 
-    s = seq(-1, 1, length.out = nbreaks + 1)
+    x = seq(-1, 1, length.out = nbreaks + 1)
 
     if (!nbreaks %% 2) {
-      s = unique(sort(c(s, 0)))
+      x = sort(c(x, 0))
     }
 
-    m$b = cut(m$c, breaks = s, include.lowest = TRUE, dig.lab = digits)
+    m$breaks = cut(m$coefficient, breaks = unique(x), include.lowest = TRUE,
+                   dig.lab = digits)
 
   }
 
@@ -222,7 +226,7 @@ ggcorr <- function(
 
   if (is.null(midpoint)) {
 
-    midpoint = median(m$c, na.rm = TRUE)
+    midpoint = median(m$coefficient, na.rm = TRUE)
     message(paste("Color gradient midpoint set at median correlation to",
                   round(midpoint, 2)))
 
@@ -230,35 +234,36 @@ ggcorr <- function(
 
   # -- plot structure ----------------------------------------------------------
 
+  m$label = round(m$coefficient, label_round)
   p = ggplot(na.omit(m), aes(x, y))
 
   if (geom == "tile") {
 
-    if (is.null(m$b)) {
+    if (is.null(nbreaks)) {
 
       # -- tiles, continuous ---------------------------------------------------
 
       p = p +
-        geom_tile(aes(fill = c), color = "white")
+        geom_tile(aes(fill = coefficient), color = "white")
 
     } else {
 
       # -- tiles, ordinal ------------------------------------------------------
 
       p = p +
-        geom_tile(aes(fill = b), color = "white")
+        geom_tile(aes(fill = breaks), color = "white")
 
     }
 
     # -- tiles, color scale ----------------------------------------------------
 
-    if (is.null(m$b) && limits) {
+    if (is.null(nbreaks) && limits) {
 
       p = p +
         scale_fill_gradient2(name, low = low, mid = mid, high = high,
                              midpoint = midpoint, limits = c(-1, 1))
 
-    } else if (is.null(m$b)) {
+    } else if (is.null(nbreaks)) {
 
       p = p +
         scale_fill_gradient2(name, low = low, mid = mid, high = high,
@@ -266,7 +271,7 @@ ggcorr <- function(
 
     } else if (is.null(palette)) {
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$b)))
+      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
 
       p = p +
         scale_fill_manual(name, values = x, drop = drop)
@@ -281,21 +286,21 @@ ggcorr <- function(
   } else if (geom == "circle") {
 
     p = p +
-      geom_point(aes(size = abs(c) * 1.25), color = "grey50") # grey border
+      geom_point(aes(size = abs(coefficient) * 1.25), color = "grey50") # border
 
-    if (is.null(m$b)) {
+    if (is.null(nbreaks)) {
 
       # -- circles, continuous -------------------------------------------------
 
       p = p +
-        geom_point(aes(size = abs(c), color = c))
+        geom_point(aes(size = abs(coefficient), color = coefficient))
 
     } else {
 
       # -- circles, ordinal ----------------------------------------------------
 
       p = p +
-        geom_point(aes(size = abs(c), color = b))
+        geom_point(aes(size = abs(coefficient), color = breaks))
 
     }
 
@@ -307,13 +312,13 @@ ggcorr <- function(
 
     # -- circles, color scale --------------------------------------------------
 
-    if (is.null(m$b) && limits) {
+    if (is.null(nbreaks) && limits) {
 
       p = p +
         scale_color_gradient2(name, low = low, mid = mid, high = high,
                               midpoint = midpoint, limits = c(-1, 1))
 
-    } else if (is.null(m$b)) {
+    } else if (is.null(nbreaks)) {
 
       p = p +
         scale_color_gradient2(name, low = low, mid = mid, high = high,
@@ -321,7 +326,7 @@ ggcorr <- function(
 
     } else if (is.null(palette)) {
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$b)))
+      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
 
       p = p +
         scale_color_manual(name, values = x, drop = drop) +
@@ -337,31 +342,31 @@ ggcorr <- function(
 
   } else if (geom == "text") {
 
-    if (is.null(m$b)) {
+    if (is.null(nbreaks)) {
 
       # -- text, continuous ----------------------------------------------------
 
       p = p +
-        geom_text(aes(label = round(c, label_round), color = c))
+        geom_text(aes(label = label, color = coefficient), size = label_size)
 
     } else {
 
       # -- text, ordinal -------------------------------------------------------
 
       p = p +
-        geom_text(aes(label = round(c, label_round), color = b))
+        geom_text(aes(label = label, color = breaks), size = label_size)
 
     }
 
     # -- text, color scale ----------------------------------------------------
 
-    if (is.null(m$b) && limits) {
+    if (is.null(nbreaks) && limits) {
 
       p = p +
         scale_color_gradient2(name, low = low, mid = mid, high = high,
                               midpoint = midpoint, limits = c(-1, 1))
 
-    } else if (is.null(m$b)) {
+    } else if (is.null(nbreaks)) {
 
       p = p +
         scale_color_gradient2(name, low = low, mid = mid, high = high,
@@ -369,7 +374,7 @@ ggcorr <- function(
 
     } else if (is.null(palette)) {
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$b)))
+      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
 
       p = p +
         scale_color_manual(name, values = x, drop = drop)
@@ -387,39 +392,43 @@ ggcorr <- function(
 
   if (label) {
 
-    m = na.omit(m)
-    m$c = round(m$c, label_round)
-
     if (isTRUE(label_alpha)) {
 
       p = p +
-        geom_text(data = m,
-                  aes(x, y, label = c, alpha = abs(c)),
-                  color = label_color,
+        geom_text(aes(x, y, label = label, alpha = abs(coefficient)),
+                  color = label_color, size = label_size,
                   show_guide = FALSE)
 
     } else if (label_alpha > 0) {
 
       p = p +
-        geom_text(data = m,
-                  aes(x, y, label = c,
-                      alpha = label_alpha, color = label_color,
-                      show_guide = FALSE))
+        geom_text(aes(x, y, label = label, show_guide = FALSE),
+                      alpha = label_alpha, color = label_color, size = label_size)
 
     } else {
 
       p = p +
-        geom_text(data = m,
-                  aes(x, y, label = c),
-                  color = label_color)
+        geom_text(aes(x, y, label = label),
+                  color = label_color, size = label_size)
 
     }
 
   }
 
+  # -- horizontal scale expansion ----------------------------------------------
+
+  l = levels(m$y)
+
+  if (!is.numeric(layout.exp) || layout.exp < 0) {
+    stop("incorrect layout.exp value")
+  } else if (layout.exp > 0) {
+    l = c(rep(NA, as.integer(layout.exp)), l)
+  }
+
   p = p  +
-    geom_text(data = m[ m$x == m$y & is.na(m$c), ], aes(label = x), ...) +
-    scale_x_discrete(breaks = NULL, limits = levels(m$y)) +
+    geom_text(data = m[ m$x == m$y & is.na(m$coefficient), ],
+              aes(label = x), ...) +
+    scale_x_discrete(breaks = NULL, limits = l) +
     scale_y_discrete(breaks = NULL, limits = levels(m$y)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +
