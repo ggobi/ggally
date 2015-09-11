@@ -1,6 +1,10 @@
 
 context("ggnet2")
 
+if ("package:igraph" %in% search()) {
+  detach("package:igraph")
+}
+
 require(network      , quietly = TRUE) # network objects
 require(sna          , quietly = TRUE) # placement and centrality
 
@@ -139,7 +143,7 @@ test_that("examples", {
   
   # test shape.palette
   ggnet2(n, shape = "phono", shape.palette = c("vowel" = 15, "consonant" = 19))
-  ggnet2(n, shape = factor(1:10))
+  expect_warning(ggnet2(n, shape = factor(1:10)), "discrete values")
   expect_error(ggnet2(n, shape = "phono", shape.palette = c("vowel" = 1)), "no shape.palette value")
   
   # test size.palette

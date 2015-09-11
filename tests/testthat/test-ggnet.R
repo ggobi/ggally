@@ -1,6 +1,10 @@
 
 context("ggnet")
 
+if ("package:igraph" %in% search()) {
+  detach("package:igraph")
+}
+
 require(network      , quietly = TRUE) # network objects
 require(sna          , quietly = TRUE) # placement and centrality
 
