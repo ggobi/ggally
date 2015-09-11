@@ -272,18 +272,53 @@ ggsurv_m <- function(
         shape   = cens.shape,
         col     = col
       )
-    }
-    else {
-      if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
-        warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
+
+    } else if (length(cens.col) > 0) {
+      # if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
+      #   warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
+      # }
+
+
+      if (! identical(cens.col, "gg.def")) {
+        if (length(cens.col) != strata) {
+          warning("Color scales for censored points don't match the number of groups. Defaulting to ggplot2 default color scale")
+          cens.col <- "gg.def"
+        }
       }
 
-      pl <- pl + geom_point(
-        data = dat.cens,
-        mapping = aes(y=surv, col = group),
-        shape = cens.shape,
-        show_guide = FALSE
-      )
+      if (identical(cens.col, "gg.def")) {
+        pl <- pl + geom_point(
+          data = dat.cens,
+          mapping = aes(y=surv, col = group),
+          shape = cens.shape,
+          show_guide = FALSE
+        )
+      } else {
+
+        uniqueGroupVals = unique(dat.cens$group)
+        if (length(cens.shape) == 1) {
+          cens.shape = rep(cens.shape, strata)
+        }
+
+        if (length(cens.shape) != strata) {
+          warning("The length of the censored shapes does not match the number of groups (or 1). Defaulting shape = 3 (+)")
+          cens.shape = rep(3, strata)
+        }
+        for (i in seq_along(uniqueGroupVals)) {
+          groupVal = uniqueGroupVals[i]
+          dtGroup <- subset(dat.cens, group == groupVal)
+
+          pl <- pl + geom_point(
+            data = dtGroup,
+            mapping = aes(y=surv),
+            color = I(cens.col[i]),
+            shape = cens.shape[i],
+            show_guide = FALSE
+          )
+
+        }
+      }
+
     }
   }
 
