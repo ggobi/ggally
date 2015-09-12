@@ -1,125 +1,126 @@
+---
+title: "ggnetworkmap: network maps with ggplot2"
+output:
+  html_document:
+    highlight: default
+    toc: true
+    theme: united
+---
+
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{ggnetworkmap}
 -->
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  error = FALSE,
-  tidy = FALSE,
-  fig.height = 7,
-  fig.width = 9.3333,
-  out.height = "600px",
-  out.width = "800px"
-)
+```{r echo=FALSE, message=FALSE}
+library(ggplot2)
+library(maps)
+library(network)
+library(sna)
+source("../R/utils.R")
+source("../R/ggnetworkmap.R")
+load("../data/twitter_spambots.rda")
 ```
 
-# ggnetworkmap
-#### Amos Elberg
-#### January 10, 2015
+# Introduction
 
-This is the homepage for ``ggnetworkmap``, a function for plotting elegant maps using ``ggplot2``. ``ggnetworkmap`` is under consideration for inclusion in ``GGally``.
+`ggnetworkmap` is a function for plotting elegant maps using `ggplot2`. It builds on `ggnet` by allowing to draw a network over a map, and is particularly intended for use with `ggmap`.
 
-``ggnetworkmap`` builds on ``ggnet``, first by fixing the issue with ``ggnet`` that caused me to develop ``ggmapnetwork``: ``ggnet`` does not allow drawing the network over a map. ``ggnetworkmap`` does, and is particularly intended for use with ``ggmap``. Some examples appear below:
+# Example: US airports
 
-```{r echo = FALSE}
-suppressMessages({require(ggplot2); require(igraph); require(maps); require(GGally)})
-```
+This example is based on a [tutorial by Nathan Yau at Flowing Data](http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/).
 
 ```{r}
-require(ggplot2); require(igraph); require(maps); require(GGally)
-set.seed(124)
-airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header=TRUE)
+airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
+rownames(airports) <- airports$iata
 
-airports$lon <- airports$long
-
+# select some random flights
+set.seed(1234)
 flights <- data.frame(
-  origin      = sample(airports[200:400,]$iata, 200, replace = TRUE),
-  destination = sample(airports[200:400,]$iata, 200, replace = TRUE)
+  origin = sample(airports[200:400, ]$iata, 200, replace = TRUE),
+  destination = sample(airports[200:400, ]$iata, 200, replace = TRUE)
 )
 
-graph <- graph.data.frame(flights, airports, directed = TRUE)
+# convert to network
+flights <- network(flights, directed = TRUE)
 
-# Subset the graph
-graph <- graph - V(graph)[igraph::degree(graph, mode = "total") < 2]
+# add geographic coordinates
+flights %v% "lat" <- airports[ network.vertex.names(flights), "lat" ]
+flights %v% "lon" <- airports[ network.vertex.names(flights), "long" ]
 
-# Add vertex attributes that will be used to color nodes
-V(graph)$degree <- igraph::degree(graph, mode = "total")
-V(graph)$mygroup <- sample(1:4, length(V(graph)), replace = TRUE)
+# drop isolated airports
+delete.vertices(flights, which(degree(flights) < 2))
 
-# Create the map
-usa <- ggplot(ggplot2::map_data("usa"), aes(x = long, y = lat)) +
-  geom_polygon(aes(group = group), color = "grey65", fill = "#f9f9f9", size = 0.2)
+# compute degree centrality
+flights %v% "degree" <- degree(flights, gmode = "digraph")
 
-# Draw the plot
-ggnetworkmap(
-  usa,
-  graph,
-  size = 2,
-  great.circles = TRUE,
-  node.group = mygroup,
-  ring.group = degree,
-  segment.color = "cornflowerblue",
-  weight = degree
-)
+# add random groups
+flights %v% "mygroup" <- sample(letters[1:4], network.size(flights), replace = TRUE)
+
+# create a map of the USA
+usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
+  geom_polygon(aes(group = group), color = "grey65",
+               fill = "#f9f9f9", size = 0.2)
+
+# overlay network data to map
+ggnetworkmap(usa, flights, size = 4, great.circles = TRUE,
+             node.group = mygroup, segment.color = "steelblue",
+             ring.group = degree, weight = degree)
 ```
 
-This next example uses data from a spam community I identified on twitter while exploring and trying to clear-up a group of tweets. After coloring the nodes based on igraph's information centrality community detection function, the odd structure stood out clearly.
+# Example: Twitter spambots
 
+This next example uses data from a Twitter spam community identified while exploring and trying to clear-up a group of tweets. After coloring the nodes based on their centrality, the odd structure stood out clearly.
+
+```{r, eval=FALSE}
+data(twitter_spambots)
+```
 ```{r}
-data(twitter_spam_community)
+# create a world map
 world <- fortify(map("world", plot = FALSE, fill = TRUE))
-gp <- ggplot(world, aes(x = long, y = lat)) +
-  geom_polygon(aes(group = group), color = "grey65", fill = "#f9f9f9", size = 0.2)
+world <- ggplot(world, aes(x = long, y = lat)) +
+  geom_polygon(aes(group = group), color = "grey65",
+               fill = "#f9f9f9", size = 0.2)
 
-ggnetworkmap(gp, twitter_spam_community)
+# view global structure
+ggnetworkmap(world, twitter_spambots)
 ```
 
-Is the network really concentrated in the U.S.? Probably not. One of the odd things about the network, is a much higher proportion of the users gave locations that could be geocoded, than twitter users generally.
+Is the network really concentrated in the U.S.? Probably not. One of the odd things about the network, is a much higher proportion of the users gave locations that could be geocoded, than Twitter users generally.
 
 Let's see the network topology
 
 ```{r}
-ggnetworkmap(data=twitter_spam_community)
+ggnetworkmap(net = twitter_spambots, arrow.size = 0.5)
 ```
 
-That's an odd structure, let's see who's following who.
+Coloring nodes according to degree centrality can highlight network structures.
 
 ```{r}
-ggnetworkmap(data=twitter_spam_community, arrow.size = 0.5)
-```
+# compute indegree and outdegree centrality
+twitter_spambots %v% "indegree" <- degree(twitter_spambots, cmode = "indegree")
+twitter_spambots %v% "outdegree" <- degree(twitter_spambots, cmode = "outdegree")
 
-Coloring nodes according to vertex attributes can highlight network structures.
-
-```{r}
-V(twitter_spam_community)$indegree <- igraph::degree(twitter_spam_community, mode = "in")
-V(twitter_spam_community)$outdegree <- igraph::degree(twitter_spam_community, mode = "out")
-
-ggnetworkmap(
-  data = twitter_spam_community,
-  arrow.size = 0.5,
-  node.group = indegree,
-  ring.group = outdegree, size = 4
-) +
+ggnetworkmap(net = twitter_spambots,
+             arrow.size = 0.5,
+             node.group = indegree,
+             ring.group = outdegree, size = 4) +
   scale_fill_continuous("Indegree", high = "red", low = "yellow") +
   labs(color = "Outdegree")
 ```
 
-Some of the twitter data is already contained as vertex attributes
+Some Twitter attributes have been included as vertex attributes.
 
 ```{r}
-ggnetworkmap(
-  data = twitter_spam_community,
-  arrow.size = 0.5,
-  node.group = followersCount,
-  ring.group = friendsCount,
-  size = 4,
-  weight = indegree,
-  label.nodes = TRUE,
-  vjust = -1.5
-) +
-  scale_fill_continuous("followersCount", high = "red", low = "yellow") +
-  labs(color = "friendsCount") +
+# show some vertex attributes associated with each account
+ggnetworkmap(net = twitter_spambots,
+             arrow.size = 0.5,
+             node.group = followers,
+             ring.group = friends,
+             size = 4,
+             weight = indegree,
+             label.nodes = TRUE, vjust = -1.5) +
+  scale_fill_continuous("Followers", high = "red", low = "yellow") +
+  labs(color = "Friends") +
   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 ```
-
