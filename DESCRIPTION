@@ -6,7 +6,7 @@ Title: Extension to ggplot2
 Type: Package
 LazyLoad: yes
 LazyData: true
-URL: https://github.com/ggobi/ggally
+URL: https://ggobi.github.io/ggally, https://github.com/ggobi/ggally
 BugReports: https://github.com/ggobi/ggally/issues
 Authors@R: c(
     person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs and ggally_*.  contributor for all functions."),
@@ -14,8 +14,8 @@ Authors@R: c(
     person("Di", "Cook", role = c("aut", "ths"), email = "dicook@iastate.edu", comment = "ggscatmat, gglyph"),
     person("Heike", "Hofmann", role = "ths", email = "hofmann@iastate.edu"),
     person("Hadley", "Wickham", role = "ths", email = "h.wickham@iastate.edu"),
-    person("Francois", "Briatte", role = "aut", email = "f.briatte@gmail.com", comment = "ggcorr, ggnet"),
-    person("Moritz", "Marbach", role = "aut", email = "mmarbach@mail.uni-mannheim.de", comment = "ggnet"),
+    person("Francois", "Briatte", role = "aut", email = "f.briatte@gmail.com", comment = "ggcorr, ggnet, ggnet2"),
+    person("Moritz", "Marbach", role = "aut", email = "mmarbach@mail.uni-mannheim.de", comment = "ggnet, ggnet2"),
     person("Edwin", "Thoen", role = "aut", email = "edwinthoen@gmail.com", comment = "ggsurv"),
     person("Amos", "Elberg", role = "aut", email = "amos.elberg@gmail.com", comment = "ggnetworkmap"))
 Description: GGally is designed to be a helper to ggplot2. It contains
