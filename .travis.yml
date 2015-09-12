@@ -4,42 +4,63 @@
 # see the wiki:
 #   https://github.com/craigcitro/r-travis/wiki
 
-language: c
+language: r
+sudo: required
+
+## default R_*_ARGS
+# R_BUILD_ARGS="--no-build-vignettes" R_CHECK_ARGS="--no-manual --as-cran"
+# env:
+#   - ""
+#   - r_check_revdep:true # checks reverse depends
+
+# matrix:
+#   fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
+#                     # allows the build to "pass" when the non-failure-able builds are done
+#   allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
+#     - env: R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
+
+# before_install:
+#   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+#   - chmod 755 ./travis-tool.sh
+#   - ./travis-tool.sh bootstrap
+
+r_github_packages:
+  # - jimhester/covr@ec4baaa0d892273498f4e66edf73a060b43e33ad
+  - jimhester/covr
+# r_binary_packages: [rJava, igraph, minqa, nloptr, RcppEigen, colorspace, reshape2, proto, abind, coda, dichromat, labeling, brew, gtable, reshape, network, RColorBrewer, scagnostics, sna, lme4, munsell, arm, scales, ggplot2, cairoDevice, RGtk2, knitr]
+r_binary_packages:
+  - arm
+  - geosphere
+  - ggmap
+  - igraph
+  # - intergraph
+  - knitr
+  - maps
+  - network
+  - RColorBrewer
+  - scagnostics
+  - scales
+  - sna
+  - survival
+  # - tnet
+  - roxygen2
+  - testthat
 
 
-env:
-  - BOOTSTRAP_LATEX="1"
-  - BOOTSTRAP_LATEX="1" R_CHECK_REVDEP="1" # checks reverse depends
+# script:
+#   - ./travis-tool.sh run_tests
 
-matrix:
-  fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
-                    # allows the build to "pass" when the non-failure-able builds are done
-  allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
-    - env: BOOTSTRAP_LATEX="1" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
-
-
-
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-
-install:
-  - ./travis-tool.sh install_r_binary rJava igraph minqa nloptr RcppEigen colorspace reshape2 proto abind coda dichromat labeling brew gtable reshape network RColorBrewer scagnostics sna lme4 munsell arm scales ggplot2 cairoDevice RGtk2
-  - ./travis-tool.sh install_deps
-
-script:
-  - ./travis-tool.sh run_tests
-
-after_failure:
-  - ./travis-tool.sh dump_logs
+after_success:
+  - Rscript -e 'covr::codecov()'
+# after_failure:
+#   - ./travis-tool.sh dump_logs
 
 notifications:
   email:
     on_success: change
     on_failure: change
 
-# branches:
-#   only:
-#     - master
-#     - dev
+branches:
+  only:
+    - master
+    - dev

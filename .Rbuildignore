@@ -1,8 +1,11 @@
 TODO
-inst/
 ..Rcheck
 .DS_Store
 .gitignore
 R/.DS_Store
 .git
 .travis.yml
+figure
+ggmapTemp.png
+README.html
+notes/
