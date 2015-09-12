@@ -18,9 +18,9 @@ Authors@R: c(
     person("Moritz", "Marbach", role = "aut", email = "mmarbach@mail.uni-mannheim.de", comment = "ggnet, ggnet2"),
     person("Edwin", "Thoen", role = "aut", email = "edwinthoen@gmail.com", comment = "ggsurv"),
     person("Amos", "Elberg", role = "aut", email = "amos.elberg@gmail.com", comment = "ggnetworkmap"))
-Description: GGally is designed to be a helper to ggplot2. It contains
-    templates for different plots to be combined into a plot matrix, a parallel
-    coordinate plot function, as well as two functions for making network plots.
+Description: GGally extends ggplot2 by adding several functions to it, including
+    templates to combine plots into a plot matrix, a parallel coordinates plot 
+    function, and several functions to plot networks.
 VignetteBuilder: knitr
 Depends:
     R (>= 2.14)
