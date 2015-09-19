@@ -1,20 +1,17 @@
 linters: with_defaults(
-    camel_case_linter = NULL, # ignore camel case linting
-    snake_case_linter = NULL, # ignore snake case linting
-    assignment_linter = NULL, # 351
-    line_length_linter = NULL, # 247
-    commented_code_linter = NULL, # 204
-    infix_spaces_linter = NULL, # 112
-    single_quotes_linter = NULL, # 56
+    camel_case_linter = NULL, # 922
+    line_length_linter = NULL, # 237
+    commented_code_linter = NULL, # 217
+    infix_spaces_linter = NULL, # 108
+    assignment_linter = NULL, # 53
     trailing_whitespace_linter = NULL, # 52
-    spaces_left_parentheses_linter = NULL, # 34
-    multiple_dots_linter = NULL, # 27
-    trailing_blank_lines_linter = NULL, # 15
+    spaces_left_parentheses_linter = NULL, # 33
+    single_quotes_linter = NULL, # 25
     commas_linter = NULL, # 13
-    object_usage_linter = NULL, # 13
-    spaces_inside_linter = NULL, # 3
+    object_usage_linter = NULL, # 10
+    multiple_dots_linter = NULL, # 9
+    trailing_blank_lines_linter = NULL, # 8
     no_tab_linter = NULL, # 2
-    open_curly_linter = NULL, # 2
     NULL
   )
 exclusions:
