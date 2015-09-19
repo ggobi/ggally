@@ -26,7 +26,9 @@ sudo: required
 
 r_github_packages:
   # - jimhester/covr@ec4baaa0d892273498f4e66edf73a060b43e33ad
-  - jimhester/covr
+  - jimhester/covr  # code coverage check
+  - jimhester/lintr # code lint check
+
 # r_binary_packages: [rJava, igraph, minqa, nloptr, RcppEigen, colorspace, reshape2, proto, abind, coda, dichromat, labeling, brew, gtable, reshape, network, RColorBrewer, scagnostics, sna, lme4, munsell, arm, scales, ggplot2, cairoDevice, RGtk2, knitr]
 r_binary_packages:
   - arm
