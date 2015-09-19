@@ -65,5 +65,5 @@
 
 
 is.ggmatrix <- function(x) {
-  "ggmatrix" %in% class(x)
+  inherits(x, "ggmatrix")
 }

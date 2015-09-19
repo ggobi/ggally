@@ -23,17 +23,17 @@ test_that("density", {
 test_that("cor", {
 
   expect_warning(
-    ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"), corUse = "NOTFOUND"),
+    ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"), use = "NOTFOUND"),
     "correlation 'use' not found"
   )
 
 
   ti <- tips
   class(ti) <- c("NOTFOUND", "data.frame")
-  p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), corUse = "complete.obs")
+  p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), use = "complete.obs")
   expect_equal(as.character(get("mapping", envir = p$layers[[2]])$colour), "labelp")
 
-  p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = I("blue")), corUse = "complete.obs")
+  p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = I("blue")), use = "complete.obs")
   expect_equal(as.character(get("geom_params", envir = p$layers[[1]])$colour), "blue")
 
 })

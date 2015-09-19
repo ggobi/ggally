@@ -4,13 +4,15 @@
 \alias{ggpairs}
 \title{ggpairs - A GGplot2 Matrix}
 \usage{
-ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
-  lower = list(), diag = list(), params = NULL, ...,
+ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
+  upper = list(), lower = list(), diag = list(), params = NULL, ...,
   axisLabels = "show", columnLabels = colnames(data[, columns]),
   legends = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
+
+\item{mapping}{aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}}
 
 \item{columns}{which columns are used to make plots.  Defaults to all columns.}
 
@@ -22,7 +24,7 @@ ggpairs(data, columns = 1:ncol(data), title = "", upper = list(),
 
 \item{diag}{see Details}
 
-\item{params}{vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.}
+\item{params}{depricated.  Please see \code{\link{wrap_fn_with_param_arg}}}
 
 \item{...}{other parameters being supplied to geom's aes, such as color}
 
@@ -50,8 +52,8 @@ of ('facetbar','ratio', 'blank').
 
 diag is a list that may only contain the variables 'continuous' and 'discrete'.
 Each element of the diag list is a string implmenting the following options:
-continuous = exactly one of ('density', 'bar', 'blank'); discrete = exactly one
-of ('bar', 'blank').
+continuous = exactly one of ('densityDiag', 'barDiag', 'blankDiag'); discrete = exactly one
+of ('barDiag', 'blankDiag').
 
 If a list option it will be set to the function default.  If 'blank' is ever
 chosen as an option, then ggpairs will produce a blank plot, as if nothing was
@@ -85,21 +87,12 @@ diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
 # Custom Example
 pm <- ggpairs(
  diamonds.samp[,1:5],
- upper = list(continuous = "density", combo = "box"),
- lower = list(continuous = "points", combo = "dot"),
- color = "cut",
- alpha = 0.4,
+ mapping = ggplot2::aes(color = cut),
+ upper = list(continuous = wrap("density", alpha = 0.5), combo = "box"),
+ lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot", alpha = 0.4)),
  title = "Diamonds"
 )
 # pm
-
-# Will plot four "Incorrect Plots"
-bad_plots <- ggpairs(
-  tips[,1:3],
-  upper = list(continuous = "wrongType1", combo = "wrongType2"),
-  lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
-)
-# bad_plots
 
 # Only Variable Labels on the diagonal (no axis labels)
 pm <- ggpairs(tips[,1:3], axisLabels="internal")

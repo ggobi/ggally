@@ -18,8 +18,7 @@ test_that("stops", {
 test_that("get", {
   a <- ggpairs(
     tips, 1:4,
-    axisLabels = "show",
-    params = c(binwidth = 1)
+    axisLabels = "show"
   )
   p <- a[2, 1]
   expect_equal(p$labels$x, "total_bill")
@@ -30,8 +29,7 @@ test_that("get", {
 test_that("put", {
   a <- ggpairs(
     tips, 1:4,
-    axisLabels = "show",
-    params = c(binwidth = 1)
+    axisLabels = "show"
   )
   txt <- "My Custom Plot"
   a[2, 1] <- ggally_text(txt)

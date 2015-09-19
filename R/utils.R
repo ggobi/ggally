@@ -22,3 +22,7 @@ str_c <- function (..., sep = "", collapse = NULL) {
 str_detect <- function(string, pattern, ...) {
   grepl(pattern, string, ...)
 }
+
+str_replace <- function(string, pattern, replacement) {
+  sub(pattern, replacement, string)
+}

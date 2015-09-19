@@ -121,9 +121,12 @@ ggally_density <- function(data, mapping, ...){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param corAlignPercent right align position of numbers. Default is 60 percent across the horizontal
-#' @param corMethod \code{method} suppied to cor function
-#' @param corUse \code{use} supplied to cor function
+#' @param alignPercent right align position of numbers. Default is 60 percent across the horizontal
+#' @param method \code{method} suppied to cor function
+#' @param use \code{use} supplied to cor function
+#' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
+#' @param corMethod deprecated. Use parameter \code{method}
+#' @param corUse deprecated. Use parameter \code{use}
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
@@ -140,20 +143,30 @@ ggally_density <- function(data, mapping, ...){
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...){
+ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", use = "complete.obs", corAlignPercent = NULL, corMethod = NULL, corUse = NULL, ...){
+
+  if (! is.null(corAlignPercent)) {
+    stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
+  }
+  if (! is.null(corMethod)) {
+    stop("'corMethod' is deprecated.  Please use argument 'method'")
+  }
+  if (! is.null(corUse)) {
+    stop("'corUse' is deprecated.  Please use argument 'use'")
+  }
 
   useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
-  corUse <-  pmatch(corUse, useOptions)
-  if (is.na(corUse)) {
+  use <-  pmatch(use, useOptions)
+  if (is.na(use)) {
     warning("correlation 'use' not found.  Using default value of 'all.obs'")
-    corUse <- useOptions[1]
+    use <- useOptions[1]
   } else {
-    corUse <- useOptions[corUse]
+    use <- useOptions[use]
   }
 
   cor_fn <- function(x, y) {
     # also do ddply below if fn is altered
-    cor(x,y, method = corMethod, use = corUse)
+    cor(x,y, method = method, use = use)
   }
 
   # xVar <- data[,as.character(mapping$x)]
@@ -195,7 +208,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
   colorCol <- as.character(mapping$colour)
   singleColorCol <- paste(colorCol, collapse = "")
 
-  if (corUse %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
+  if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
     if(length(colorCol) > 0) {
       if(singleColorCol %in% colnames(data)) {
         rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
@@ -295,7 +308,7 @@ ggally_cor <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearso
     #element_bw() +
     theme(legend.position = "none")
 
-    xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
     yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
     # print(range(yVal))
@@ -638,7 +651,7 @@ ggally_denstrip <- function(data,mapping, ...){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments being sent to either stat_bin or stat_density
-#' @param den_strip boolean to deceide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
+#' @param den_strip boolean to decide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export
@@ -765,6 +778,7 @@ ggally_ratio <- function(data){
 #' @param data data set using
 #' @param mapping aesthetics being used.
 #' @param ... other arguments sent to stat_density
+#' @param rescale boolean to decide whether or not to rescale the count output
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export
@@ -774,19 +788,26 @@ ggally_ratio <- function(data){
 #'  #data(movies)
 #'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
 #'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
-ggally_densityDiag <- function(data, mapping, ...){
+ggally_densityDiag <- function(data, mapping, ..., rescale = TRUE){
 
   p <- ggplot(data, mapping) +
     # scale_x_continuous() +
-    scale_y_continuous() +
-    stat_density(
-      aes(
-        y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
-      ),
-      position = "identity",
-      geom = "line",
-      ...
-    )
+    scale_y_continuous()
+
+  if (identical(rescale, TRUE)) {
+    p <- p +
+      stat_density(
+        aes(
+          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+        ),
+        position = "identity",
+        geom = "line",
+        ...
+      )
+  } else {
+    p <- p + geom_density()
+  }
+
   p$type <- "diag"
   p$subType <- "density"
   p
@@ -800,6 +821,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguements are sent to geom_bar
+#' @param rescale boolean to decide whether or not to rescale the count output
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export
@@ -808,7 +830,7 @@ ggally_densityDiag <- function(data, mapping, ...){
 #' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
-ggally_barDiag <- function(data, mapping, ...){
+ggally_barDiag <- function(data, mapping, ..., rescale = TRUE){
   mapping$y <- NULL
   numer <- ("continuous" == plotting_data_type(data[, as.character(mapping$x)]))
 
@@ -824,26 +846,31 @@ ggally_barDiag <- function(data, mapping, ...){
 
   } else if(numer){
     # message("is numeric")
-    p <- p + geom_bar(
-      aes(
-        y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
-      ),
-      ...
-    ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
+    if (identical(rescale, TRUE)) {
+      p <- p + geom_bar(
+        aes(
+          y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+        ),
+        ...
+      ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
+    } else {
+      p <- p + geom_bar()
+
+    }
 
     p$subType <- "bar_num"
    } else {
     # message("is categorical")
     # xVal <- mapping$x
-    # mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
+    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
     # # p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
     # p <- ggplot(data, mapping) + geom_bar(...)
     # # p <- p + scale_x_continuous(NULL, labels ="",breaks = 1)
 
     # xVal <- mapping$x
-    # mapping <- addAndOverwriteAes(mapping, aes(x = 1L))
-    # mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
-    # mapping <- addAndOverwriteAes(mapping, aes_string(weight = xVal))
+    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
+    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
+    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
     # p <- ggplot(data = data, mapping) + geom_bar(...)
     # p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
     p <- p + geom_bar(...)
@@ -900,7 +927,7 @@ ggally_text <- function(
   if(is.null(mapping)) {
     mapping <- new_mapping
   } else {
-    mapping <- addAndOverwriteAes(mapping, new_mapping)
+    mapping <- add_and_overwrite_aes(mapping, new_mapping)
   }
 
   if(is.null(mapping$colour)) {

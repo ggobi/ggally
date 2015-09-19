@@ -439,8 +439,8 @@ ggparcoord <- function(
       group = '.ID'
     )
   }
-  mapping2 <- addAndOverwriteAes(mapping2,mapping)
-  # mapping2 <- addAndOverwriteAes(aes_string(size = I(0.5)), mapping2)
+  mapping2 <- add_and_overwrite_aes(mapping2,mapping)
+  # mapping2 <- add_and_overwrite_aes(aes_string(size = I(0.5)), mapping2)
   p <- ggplot(data=data.m,mapping=mapping2)
 
   if(!is.null(shadeBox)) {
