@@ -250,7 +250,6 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
 
   # splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
   # splits <- str_c(colorCol, sep = ", ", collapse = ", ")
-  final_text <- ""
   if (length(colorCol) < 1) {
     colorCol <- "ggally_NO_EXIST"
   }
@@ -760,7 +759,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #'   aspect.ratio = nummpaa / numAction
 #' )
 ggally_ratio <- function(data){
-  dataNames <- colnames(data)
+  # dataNames <- colnames(data)
   data <- data[, 2:1]
   tmpData <- table(data)
   tmpData <- tmpData[rev(seq_len(nrow(tmpData))),]
@@ -1154,7 +1153,7 @@ ggally_diagAxis <- function(
 ggally_facetbar <- function(data, mapping, ...){
 
   # numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
-  xVal <- mapping$x
+  # xVal <- mapping$x
   yVal <- mapping$y
   mapping$y <- NULL
   p <- ggplot(data, mapping) + geom_bar(...)
@@ -1214,7 +1213,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   xNew <- as.numeric(table_data$x) + 1/2 * table_data$freq
   yNew <- as.numeric(table_data$y) + 1/2 * table_data$freq
 
-  maxLen <- max(diff(range(as.numeric(table_data$x), na.rm = TRUE)), diff(range(as.numeric(table_data$y), na.rm = TRUE)) )
+  # maxLen <- max(diff(range(as.numeric(table_data$x), na.rm = TRUE)), diff(range(as.numeric(table_data$y), na.rm = TRUE)) )
 
 
   table_data <- cbind(table_data, xNew, yNew)
@@ -1288,7 +1287,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #' @export
 #' @keywords hplot
 ggally_blank <- function(...){
-  ignored <- aes(...)
+  aes(...) # ignored
   a <- data.frame(X=1:2, Y=1:2)
 
   p <- ggplot(data = a, aes_string(x = "X", y = "Y")) + geom_point( colour = "transparent") +

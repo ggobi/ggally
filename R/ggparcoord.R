@@ -391,9 +391,9 @@ ggparcoord <- function(
     meltIDVars <- c(meltIDVars, alphaLines)
   }
 
-  if(is.list(mapping)) {
-    mappingNames <- names(mapping)
-  }
+  # if(is.list(mapping)) {
+  #   mappingNames <- names(mapping)
+  # }
 
   data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
 

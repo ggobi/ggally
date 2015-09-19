@@ -283,7 +283,7 @@ ggpairs <- function(
       cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
     }
 
-    sectionAes <- sectionParams <- NULL
+    sectionAes <- NULL
 
     if (up) {
       sectionAes <- upper$aes_string
@@ -293,7 +293,6 @@ ggpairs <- function(
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
       isContinuous = (type == "scatterplot")
-      isCombo = (type == "box-hori" || type == "box-vert")
       if (printInfo) {
         if (isContinuous) {
           cat("continuous\n")

@@ -11,7 +11,10 @@ nasaLate <- nasa[
 , ]
 
 do_glyph <- function(...) {
-  glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 2.37, width = 2.38, ...)
+  glyphs(
+    nasaLate, # no lint
+    "long", "day", "lat", "surftemp", height = 2.37, width = 2.38, ...
+  )
 }
 
 
