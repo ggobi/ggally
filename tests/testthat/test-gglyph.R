@@ -136,5 +136,3 @@ test_that("print", {
   expect_equal(txt, "[1] 0.95 *")
 
 })
-
-

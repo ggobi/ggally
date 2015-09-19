@@ -181,5 +181,3 @@ test_that("size", {
   expect_equal(as.character(p$mapping$size), "gear")
 
 })
-
-

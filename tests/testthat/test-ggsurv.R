@@ -135,5 +135,3 @@ test_that("CI", {
 # 889            R/ggsurv.r        256       258     0
 # 890            R/ggsurv.r        263       263     0
 # 891            R/ggsurv.r        274       274     0
-
-

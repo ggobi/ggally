@@ -176,5 +176,3 @@ test_that("labels", {
   p <- ggnetworkmap(us, data = graph2, label.nodes = TRUE)
   expect_true(!is.null(get("data", p$layers[[4]])$.label))
 })
-
-
