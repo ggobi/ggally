@@ -17,6 +17,14 @@ linters: with_defaults(
     open_curly_linter = NULL, # 2
     NULL
   )
+exclusions:
+  list(
+    "R/ggnetworkmap.R",
+    "R/ggcorr.R",
+    "R/ggsurv.R",
+    "R/ggnet.R",
+    "R/ggnet2.R"
+  )
 procedure:
   Remove a line from above. Each line is considered a "cancelation" of the linters.
   Fix all the errors.
