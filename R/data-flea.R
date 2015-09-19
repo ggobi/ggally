@@ -1,6 +1,6 @@
 #' Historical data used for classification examples.
 #'
-#' This data contains physical measurements on three species of flea beetles. 
+#' This data contains physical measurements on three species of flea beetles.
 #'
 #' @details \itemize{
 #'   \item species Ch. concinna, Ch. heptapotamica, Ch. heikertingeri
@@ -18,7 +18,6 @@
 #' @usage data(flea)
 #' @format A data frame with 74 rows and 7 variables
 #' @references
-#' Lubischew, A. A. (1962), On the Use of Discriminant Functions in 
+#' Lubischew, A. A. (1962), On the Use of Discriminant Functions in
 #' Taxonomy, Biometrics 18:455-477.
 NULL
-

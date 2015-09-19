@@ -18,4 +18,3 @@
 #' @usage data(twitter_spam_community)
 #' @format An igraph network with 120 edges, 94 nodes, and 6 items of metadata per node
 NULL
-

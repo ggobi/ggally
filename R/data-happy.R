@@ -34,4 +34,3 @@
 #'   Storrs, CT: The Roper Center for Public Opinion Research, University of Connecticut, distributor.
 #'   1 data file (57,061 logical records) and 1 codebook (3,422 pp).
 NULL
-
