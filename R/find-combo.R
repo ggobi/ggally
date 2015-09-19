@@ -5,8 +5,7 @@
 #' @param data data set to be used
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords internal
-plot_types <- function(data)
-{
+plot_types <- function(data) {
   namesD <- names(data)
   dataInfo <- array("", c(ncol(data)^2,5))
 
@@ -85,4 +84,3 @@ plotting_data_type <- function(x) {
     "continuous"
   }
 }
-
