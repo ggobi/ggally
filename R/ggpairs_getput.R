@@ -107,7 +107,9 @@ getPlot <- function(x, i, j){
 
   } else {
     firstNote <- str_c("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
-    strObj <- capture.output({print(str(plotObj))})
+    strObj <- capture.output({
+      print(str(plotObj))
+    })
     stop(str_c("unknown plot object type.\n", firstNote, strObj))
   }
   # stop("fix this")

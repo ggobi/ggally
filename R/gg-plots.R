@@ -262,7 +262,7 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
 
     cord <- ddply(data, c(colorCol), function(x) {
       cor_fn(x[, xCol], x[, yCol])
-    }, .parallel = FALSE)
+    })
     colnames(cord)[2] <- "ggally_cor"
 
     # browser()

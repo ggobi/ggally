@@ -48,22 +48,24 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
 
     fnName <- str_c("ggally_", funcVal)
     tryCatch({
-      fn <- get(fnName, mode = "function")
-    }, error = function(e) {
-      stop(str_c(
-        "The following ggally functions are readily available: \n",
-        "\tcontinuous: c('points', 'smooth', 'density', 'cor', 'blank')\n",
-        "\tcombo: c('box', 'dot plot', 'facethist', 'facetdensity', 'denstrip', 'blank')\n",
-        "\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
-        "\n",
-        "\tdiag continuous: c('densityDiag', 'barDiag', 'blankDiag')\n",
-        "\tdiag discrete: c('barDiag', 'blankDiag')\n",
-        "\n",
-        "You may also provide your own function that follows the api of function(data, mapping, ...){ . . . }\n",
-        "\n",
-        "Function provided: '", funcVal, "'"
-      ))
-    })
+        fn <- get(fnName, mode = "function")
+      },
+      error = function(e) {
+        stop(str_c(
+          "The following ggally functions are readily available: \n",
+          "\tcontinuous: c('points', 'smooth', 'density', 'cor', 'blank')\n",
+          "\tcombo: c('box', 'dot plot', 'facethist', 'facetdensity', 'denstrip', 'blank')\n",
+          "\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
+          "\n",
+          "\tdiag continuous: c('densityDiag', 'barDiag', 'blankDiag')\n",
+          "\tdiag discrete: c('barDiag', 'blankDiag')\n",
+          "\n",
+          "You may also provide your own function that follows the api of function(data, mapping, ...){ . . . }\n",
+          "\n",
+          "Function provided: '", funcVal, "'"
+        ))
+      }
+    )
 
 
   } else if (mode(funcVal) == "function") {
