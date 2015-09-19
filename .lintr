@@ -20,10 +20,8 @@ exclusions:
     "R/ggnet.R",
     "R/ggnet2.R"
   )
-procedure:
-  Remove a line from above. Each line is considered a "cancelation" of the linters.
-  Fix all the errors.
-code_to_lint_with:
+code_to_lint:
+  # remove line in "linters:" above
   lintr::lint_package("./")
   # fix errors,
   # repeat until no errors
