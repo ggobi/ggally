@@ -154,8 +154,12 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL) {
       }))
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab==names(dn)[m])
-        r <- r + stat_density(aes(x = x, y = ..scaled.. * diff(range(x)) + min(x)), data = j,
-                              position = "identity", geom = "line", color = "black")
+        r <- r + stat_density(
+          aes(
+            x = x,
+            y = ..scaled.. * diff(range(x)) + min(x) # nolint
+          ),
+          data = j, position = "identity", geom = "line", color = "black")
       }
       r <- r + geom_point(na.rm=TRUE)
       return(r)

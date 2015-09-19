@@ -684,7 +684,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
     p <- p +
       geom_bar(
-        mapping = aes(fill = ..density..),
+        mapping = aes(fill = ..density..), # nolint
         ...
       ) +
       coord_cartesian(
@@ -708,7 +708,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
     p <- p +
       stat_density(
       aes(
-          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -798,7 +798,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = TRUE){
     p <- p +
       stat_density(
         aes(
-          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -849,7 +849,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = TRUE){
     if (identical(rescale, TRUE)) {
       p <- p + geom_bar(
         aes(
-          y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE)
+          y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         ...
       ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
@@ -1201,7 +1201,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
     oldnames <- c("X","Y")
 
   names(table_data) <- c("x", "y", "result")
-  table_data <- add.all.combinations(table_data, list("x", "y"))
+  table_data <- add.all.combinations(table_data, list("x", "y")) # nolint
   table_data <- transform(table_data, x = as.factor(x), y = as.factor(y),
     freq = result)
 

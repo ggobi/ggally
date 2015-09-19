@@ -48,7 +48,7 @@ test_that("examples", {
   ### --- test deprecations
 
   # test mode = "geo"
-  xy = gplot.layout.circle(n)
+  xy = gplot.layout.circle(n) # nolint
   n %v% "lon" = xy[, 1]
   n %v% "lat" = xy[, 2]
   expect_warning(ggnet(n, mode = "geo"), "deprecated")

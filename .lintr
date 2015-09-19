@@ -9,7 +9,6 @@ linters: with_defaults(
     single_quotes_linter = NULL, # 25
     commas_linter = NULL, # 13
     object_usage_linter = NULL, # 10
-    multiple_dots_linter = NULL, # 9
     NULL
   )
 exclusions:
