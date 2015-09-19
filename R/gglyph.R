@@ -235,11 +235,11 @@ min0 <- function(x) {
 #' @rdname rescale01
 rescale01 <- function(x, xlim=NULL) {
   if (is.null(xlim)) {
-	  rng <- range(x, na.rm = TRUE)
-   } else {
-   	  rng <- xlim
-   }
-   (x - rng[1]) / (rng[2] - rng[1])
+    rng <- range(x, na.rm = TRUE)
+  } else {
+    rng <- xlim
+  }
+  (x - rng[1]) / (rng[2] - rng[1])
 }
 #' @export
 #' @rdname rescale01

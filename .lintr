@@ -11,7 +11,6 @@ linters: with_defaults(
     object_usage_linter = NULL, # 10
     multiple_dots_linter = NULL, # 9
     trailing_blank_lines_linter = NULL, # 8
-    no_tab_linter = NULL, # 2
     NULL
   )
 exclusions:
