@@ -35,4 +35,5 @@ code_to_create:
     group_by(linter) %>%
     tally(sort = TRUE) %$%
     sprintf("linters: with_defaults(\n    %s\n    NULL\n  )\n",
-            paste0(linter, " = NULL, # ", n, collapse="\n    "))
+            paste0(linter, " = NULL, # ", n, collapse="\n    ")) %>%
+    cat()
