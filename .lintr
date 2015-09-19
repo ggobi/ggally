@@ -26,6 +26,8 @@ procedure:
   Fix all the errors.
 code_to_lint_with:
   lintr::lint_package("./")
+  # fix errors,
+  # repeat until no errors
 code_to_create:
   library(magrittr)
   library(dplyr)
