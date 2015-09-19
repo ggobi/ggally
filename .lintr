@@ -1,0 +1,34 @@
+linters: with_defaults(
+    camel_case_linter = NULL, # ignore camel case linting
+    snake_case_linter = NULL, # ignore snake case linting
+    assignment_linter = NULL, # 351
+    line_length_linter = NULL, # 247
+    commented_code_linter = NULL, # 204
+    infix_spaces_linter = NULL, # 112
+    single_quotes_linter = NULL, # 56
+    trailing_whitespace_linter = NULL, # 52
+    spaces_left_parentheses_linter = NULL, # 34
+    multiple_dots_linter = NULL, # 27
+    trailing_blank_lines_linter = NULL, # 15
+    commas_linter = NULL, # 13
+    object_usage_linter = NULL, # 13
+    spaces_inside_linter = NULL, # 3
+    no_tab_linter = NULL, # 2
+    open_curly_linter = NULL, # 2
+    closed_curly_linter = NULL, # 1
+    NULL
+  )
+procedure:
+  Remove a line from above. Each line is considered a "cancelation" of the linters.
+  Fix all the errors.
+code_to_lint_with:
+  lintr::lint_package("./")
+code_to_create:
+  library(magrittr)
+  library(dplyr)
+  lintr::lint_package() %>%
+    as.data.frame %>%
+    group_by(linter) %>%
+    tally(sort = TRUE) %$%
+    sprintf("linters: with_defaults(\n    %s\n    NULL\n  )\n",
+            paste0(linter, " = NULL, # ", n, collapse="\n    "))
