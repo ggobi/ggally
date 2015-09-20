@@ -31,7 +31,15 @@
 #'    ggplot2::geom_path() +
 #'    ggplot2::theme_bw() +
 #'    ggplot2::labs(x = "", y = "")
-glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, height = rel(0.95), width = rel(0.95), y_scale = identity, x_scale = identity) {
+glyphs <- function(
+  data,
+  x_major, x_minor,
+  y_major, y_minor,
+  polar = FALSE,
+  height = rel(0.95), width = rel(0.95),
+  y_scale = identity,
+  x_scale = identity
+) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
 
   if (is.rel(width)) {

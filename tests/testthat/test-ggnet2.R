@@ -132,19 +132,28 @@ test_that("examples", {
   # test alpha.palette
   ggnet2(n, alpha = "phono", alpha.palette = c("vowel" = 1, "consonant" = 0.5))
   ggnet2(n, alpha = factor(1:10))
-  expect_error(ggnet2(n, alpha = "phono", alpha.palette = c("vowel" = 1)), "no alpha.palette value")
+  expect_error(
+    ggnet2(n, alpha = "phono", alpha.palette = c("vowel" = 1)),
+    "no alpha.palette value"
+  )
 
   # test color.palette
   # ggnet2(n, color = "phono", color.palette = c("vowel" = 1, "consonant" = 2))
   ggnet2(n, color = factor(1:10))
   ggnet2(n, color = "phono", palette = "Set1") # only 2 groups, palette has min. 3
   expect_error(ggnet2(n, color = factor(1:10), palette = "Set1"), "too many node groups")
-  expect_error(ggnet2(n, color = "phono", color.palette = c("vowel" = 1)), "no color.palette value")
+  expect_error(
+    ggnet2(n, color = "phono", color.palette = c("vowel" = 1)),
+    "no color.palette value"
+  )
 
   # test shape.palette
   ggnet2(n, shape = "phono", shape.palette = c("vowel" = 15, "consonant" = 19))
   expect_warning(ggnet2(n, shape = factor(1:10)), "discrete values")
-  expect_error(ggnet2(n, shape = "phono", shape.palette = c("vowel" = 1)), "no shape.palette value")
+  expect_error(
+    ggnet2(n, shape = "phono", shape.palette = c("vowel" = 1)),
+    "no shape.palette value"
+  )
 
   # test size.palette
   ggnet2(n, size = "phono", size.palette = c("vowel" = 1, "consonant" = 2))
@@ -179,10 +188,16 @@ test_that("examples", {
   expect_error(ggnet2(n, edge.color = "xyz"), "incorrect edge.color")
 
   # test edge.label.alpha
-  expect_error(ggnet2(n, edge.label = "xyz", edge.label.alpha = "xyz"), "incorrect edge.label.alpha")
+  expect_error(
+    ggnet2(n, edge.label = "xyz", edge.label.alpha = "xyz"),
+    "incorrect edge.label.alpha"
+  )
 
   # test edge.label.color
-  expect_error(ggnet2(n, edge.label = "xyz", edge.label.color = "xyz"), "incorrect edge.label.color")
+  expect_error(
+    ggnet2(n, edge.label = "xyz", edge.label.color = "xyz"),
+    "incorrect edge.label.color"
+  )
 
   # test edge.label.size
   expect_error(ggnet2(n, edge.label = "xyz", edge.label.size = "xyz"), "incorrect edge.label.size")

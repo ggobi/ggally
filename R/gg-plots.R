@@ -143,7 +143,14 @@ ggally_density <- function(data, mapping, ...){
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", use = "complete.obs", corAlignPercent = NULL, corMethod = NULL, corUse = NULL, ...){
+ggally_cor <- function(
+  data,
+  mapping,
+  alignPercent = 0.6,
+  method = "pearson", use = "complete.obs",
+  corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
+  ...
+){
 
   if (! is.null(corAlignPercent)) {
     stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
@@ -155,7 +162,13 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
     stop("'corUse' is deprecated.  Please use argument 'use'")
   }
 
-  useOptions <- c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
+  useOptions <- c(
+    "all.obs",
+    "complete.obs",
+    "pairwise.complete.obs",
+    "everything",
+    "na.or.complete"
+  )
   use <- pmatch(use, useOptions)
   if (is.na(use)) {
     warning("correlation 'use' not found.  Using default value of 'all.obs'")
@@ -248,7 +261,10 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
   }
 
 
-  # splits <- str_c(as.character(mapping$group), as.character(mapping$colour), sep = ", ", collapse = ", ")
+  # splits <- str_c(
+  #   as.character(mapping$group), as.character(mapping$colour),
+  #   sep = ", ", collapse = ", "
+  # )
   # splits <- str_c(colorCol, sep = ", ", collapse = ", ")
   if (length(colorCol) < 1) {
     colorCol <- "ggally_NO_EXIST"
@@ -308,7 +324,11 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
     theme(legend.position = "none")
 
     xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
-    yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange, na.rm = TRUE)
+    yPos <- seq(
+      from = 0.9,
+      to = 0.2,
+      length.out = nrow(cord) + 1)
+    yPos <- yPos * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
     # print(range(yVal))
     # print(yPos)
@@ -442,7 +462,9 @@ ggally_dot <- function(data, mapping, ...){
 #'  )
 #'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
-  horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
+  horizontal <-
+    (is.factor(data[, as.character(mapping$y)])) ||
+    (is.character(data[, as.character(mapping$y)]))
 #  print(horizontal)
 
   #print(mapping$x[1])
@@ -551,7 +573,9 @@ ggally_facethist <- function(data, mapping, ...){
   #aesString <- aes_string(mapping)
   #cat("\naesString\n");print(str(aesString))
 
-  horizontal <- (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
+  horizontal <-
+    (is.factor(data[, as.character(mapping$y)])) ||
+    (is.character(data[, as.character(mapping$y)]))
 
   if (!horizontal) {
     mapping$tmp <- mapping$x
@@ -583,11 +607,15 @@ ggally_facethist <- function(data, mapping, ...){
 
   if (horizontal) {
     # facet_grid(list(".", yVal))
-    p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = "")) + theme(panel.margin = unit(0.1, "lines"))
+    p <- p +
+      facet_grid(paste(as.character(yVal), " ~ .", sep = "")) +
+      theme(panel.margin = unit(0.1, "lines"))
 #    p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
   } else {
-    p <- p + facet_grid(paste(". ~", as.character(yVal), sep = "")) + theme(panel.margin = unit(0.1, "lines"))
-    p <- p + coord_flip()
+    p <- p +
+      facet_grid(paste(". ~", as.character(yVal), sep = "")) +
+      theme(panel.margin = unit(0.1, "lines")) +
+      coord_flip()
 #    p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
   }
   p <- p + ylab(as.character(yVal)) + xlab(as.character(xVal))
@@ -658,7 +686,10 @@ ggally_denstrip <- function(data,mapping, ...){
 #' example(ggally_facetdensity)
 #' example(ggally_denstrip)
 ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
-  horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
+  horizontal <-
+    (is.factor(data[, as.character(mapping$y)])) ||
+    (is.character(data[, as.character(mapping$y)]))
+
   if (!horizontal) {
     mapping$tmp <- mapping$x
     mapping$x <- mapping$y
@@ -922,7 +953,10 @@ ggally_text <- function(
         panel.grid.major=element_line(colour="grey85")) +
       labs(x = NULL, y = NULL)
 
-  new_mapping <- aes_string(x = xP * diff(xrange) + min(xrange, na.rm = TRUE), y = yP * diff(yrange) + min(yrange, na.rm = TRUE))
+  new_mapping <- aes_string(
+    x = xP * diff(xrange) + min(xrange, na.rm = TRUE),
+    y = yP * diff(yrange) + min(yrange, na.rm = TRUE)
+  )
   if(is.null(mapping)) {
     mapping <- new_mapping
   } else {
@@ -1045,7 +1079,10 @@ ggally_diagAxis <- function(
     stop("mapping$x is null.  There must be a column value in this location.")
   }
   mapping$y <- NULL
-  numer <- !((is.factor(data[, as.character(mapping$x)])) || (is.character(data[, as.character(mapping$x)])))
+  numer <- !(
+    (is.factor(data[, as.character(mapping$x)])) ||
+    (is.character(data[, as.character(mapping$x)]))
+  )
 
   if (! is.character(label)) {
     label <- as.character(mapping$x)
@@ -1213,7 +1250,10 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   xNew <- as.numeric(table_data$x) + (1 / 2) * table_data$freq
   yNew <- as.numeric(table_data$y) + (1 / 2) * table_data$freq
 
-  # maxLen <- max(diff(range(as.numeric(table_data$x), na.rm = TRUE)), diff(range(as.numeric(table_data$y), na.rm = TRUE)) )
+  # maxLen <- max(
+  #   diff(range(as.numeric(table_data$x), na.rm = TRUE)),
+  #   diff(range(as.numeric(table_data$y), na.rm = TRUE))
+  # )
 
 
   table_data <- cbind(table_data, xNew, yNew)
@@ -1290,7 +1330,8 @@ ggally_blank <- function(...){
   aes(...) # ignored
   a <- data.frame(X=1:2, Y=1:2)
 
-  p <- ggplot(data = a, aes_string(x = "X", y = "Y")) + geom_point( colour = "transparent") +
+  p <- ggplot(data = a, aes_string(x = "X", y = "Y")) +
+    geom_point( colour = "transparent") +
     theme(
       axis.line         = element_blank(),
       axis.text.x       = element_blank(),

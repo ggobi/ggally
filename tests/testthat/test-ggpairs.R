@@ -105,12 +105,21 @@ test_that("blank plots", {
 })
 
 test_that("stops", {
-  expect_warning(ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1), "'axisLabels' not in ")
+  expect_warning(
+    ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1),
+    "'axisLabels' not in "
+  )
 
-  expect_error(ggpairs(tips, columns = 1:10), "Make sure your 'columns' values are less than or equal to")
+  expect_error(
+    ggpairs(tips, columns = 1:10),
+    "Make sure your 'columns' values are less than or equal to"
+  )
   expect_error(ggpairs(tips, columns = -5:5), "Make sure your 'columns' values are positive")
   expect_error(ggpairs(tips, columns = (2:10) / 2), "Make sure your 'columns' values are integers")
-  expect_error(ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra")), "The length of the 'columnLabels' does not match the length of")
+  expect_error(
+    ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra")),
+    "The length of the 'columnLabels' does not match the length of"
+  )
 
   dt <- tips
   colnames(dt)[3] <- "1"
@@ -189,7 +198,10 @@ test_that("subtypes", {
 
   # re ordered the subs so that density can have no binwidth param
   conSubs <- list("density", "points", "smooth", "cor", "blank")
-  comSubs <- list("box", "dot", wrap("facethist", binwidth = 1), "facetdensity", wrap("denstrip", binwidth = 1), "blank")
+  comSubs <- list(
+    "box", "dot", wrap("facethist", binwidth = 1),
+    "facetdensity", wrap("denstrip", binwidth = 1), "blank"
+  )
   disSubs <- list("ratio", "facetbar", "blank")
 
   conDiagSubs <- c("densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
@@ -265,7 +277,12 @@ test_that("dates", {
 
   class(x) <- c("NOT_data.frame", "data.frame")
 
-  a <- ggpairs(x, c(2,1,4,3), mapping = aes(color = cat), lower = "blank", upper = list(continuous = "cor"))
+  a <- ggpairs(
+    x, c(2,1,4,3),
+    mapping = aes(color = cat),
+    lower = "blank",
+    upper = list(continuous = "cor")
+  )
   p <- a[1, 2]
   expect_equal(p$type, "continuous")
   expect_equal(p$subType, "cor")

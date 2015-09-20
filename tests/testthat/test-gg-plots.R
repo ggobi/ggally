@@ -33,7 +33,11 @@ test_that("cor", {
   p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), use = "complete.obs")
   expect_equal(as.character(get("mapping", envir = p$layers[[2]])$colour), "labelp")
 
-  p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = I("blue")), use = "complete.obs")
+  p <- ggally_cor(
+    ti,
+    ggplot2::aes(x = total_bill, y = tip, color = I("blue")),
+    use = "complete.obs"
+  )
   expect_equal(as.character(get("geom_params", envir = p$layers[[1]])$colour), "blue")
 
 })

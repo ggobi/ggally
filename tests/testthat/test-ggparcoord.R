@@ -14,35 +14,95 @@ test_that("stops", {
   # basic parallel coordinate plot, using default settings
   # ggparcoord(data = diamonds.samp,columns = c(1, 5:10))
   # this time, color by diamond cut
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = NULL, order = "anyClass"), "can't use the 'order' methods ")
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = NULL, order = "allClass"), "can't use the 'order' methods ")
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = NULL, order = "anyClass"),
+    "can't use the 'order' methods "
+  )
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = NULL, order = "allClass"),
+    "can't use the 'order' methods "
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = c(1,2)), "invalid value for 'groupColumn'")
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 1i), "invalid value for 'groupColumn'")
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = c(1,2)),
+    "invalid value for 'groupColumn'"
+  )
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 1i),
+    "invalid value for 'groupColumn'"
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, scale = "notValid"), "invalid value for 'scale'")
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, scale = "notValid"),
+    "invalid value for 'scale'"
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, centerObsID = nrow(diamonds.samp) + 10), "invalid value for 'centerObsID'")
+  expect_error(
+    ggparcoord(
+      data = diamonds.samp, columns = c(1, 5:10),
+      groupColumn = 2, centerObsID = nrow(diamonds.samp) + 10
+    ),
+    "invalid value for 'centerObsID'"
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, missing = "notValid"), "invalid value for 'missing'")
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, missing = "notValid"),
+    "invalid value for 'missing'"
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = "notValid"), "invalid value for 'order'")
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = 1i), "invalid value for 'order'")
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = "notValid"),
+    "invalid value for 'order'"
+  )
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = 1i),
+    "invalid value for 'order'"
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, showPoints = 1), "invalid value for 'showPoints'")
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, showPoints = 1),
+    "invalid value for 'showPoints'"
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = "notAColumn"), "'alphaLines' column is missing in data")
+  expect_error(
+    ggparcoord(
+      data = diamonds.samp, columns = c(1, 5:10),
+      groupColumn = 2, alphaLines = "notAColumn"
+    ),
+    "'alphaLines' column is missing in data"
+  )
   tmpDt <- diamonds.samp
   tmpDt$price[1] <- NA
   range(tmpDt$price)
-  expect_error(ggparcoord(data = tmpDt,columns = c(1, 5:10), groupColumn = 2, alphaLines = "price"), "missing data in 'alphaLines' column")
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = "price"), "invalid value for 'alphaLines' column; max range ")
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = -0.1), "invalid value for 'alphaLines'; must be a scalar value")
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = 1.1), "invalid value for 'alphaLines'; must be a scalar value")
+  expect_error(
+    ggparcoord(
+      data = tmpDt, columns = c(1, 5:10),
+      groupColumn = 2, alphaLines = "price"
+    ),
+    "missing data in 'alphaLines' column"
+  )
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = "price"),
+    "invalid value for 'alphaLines' column; max range "
+  )
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = -0.1),
+    "invalid value for 'alphaLines'; must be a scalar value"
+  )
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = 1.1),
+    "invalid value for 'alphaLines'; must be a scalar value"
+  )
 
-  expect_error(ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, boxplot = 1), "invalid value for 'boxplot'")
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, boxplot = 1),
+    "invalid value for 'boxplot'"
+  )
 
-  expect_error(ggparcoord(diamonds.samp, columns = c(1, 5:10), groupColumn = 2, splineFactor = NULL), "invalid value for 'splineFactor'")
+  expect_error(
+    ggparcoord(diamonds.samp, columns = c(1, 5:10), groupColumn = 2, splineFactor = NULL),
+    "invalid value for 'splineFactor'"
+  )
 
 
 })
@@ -76,10 +136,18 @@ test_that("splineFactor", {
     expect_true( (tmp == 3) || (tmp == 21) )
   }
 
-  p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, splineFactor = 3, alphaLines = "alphaLevel")
+  p <- ggparcoord(
+    data = iris2, columns = 1:4,
+    groupColumn = 5, splineFactor = 3,
+    alphaLines = "alphaLevel"
+  )
   expect_equal(as.character(get("mapping", p$layers[[1]])$alpha), "alphaLevel")
 
-  p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, splineFactor = 3, showPoints = TRUE)
+  p <- ggparcoord(
+    data = iris2, columns = 1:4,
+    groupColumn = 5, splineFactor = 3,
+    showPoints = TRUE
+  )
   expect_equal(length(p$layers), 2)
   expect_equal(as.character(get("mapping", p$layers[[1]])$x), "spline.x")
   expect_equal(as.character(get("mapping", p$layers[[2]])$y), "value")

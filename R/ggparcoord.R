@@ -173,12 +173,17 @@ ggparcoord <- function(
     if(any(tolower(order) %in% c("anyclass","allclass"))) {
       stop("can't use the 'order' methods anyClass or allClass without specifying groupColumn")
     }
-  } else if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
+  } else if(
+    !((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))
+  ) {
     stop("invalid value for 'groupColumn'; must be a single numeric or character index")
   }
 
   if(!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
-    stop("invalid value for 'scale'; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
+    stop(str_c(
+      "invalid value for 'scale'; must be one of ",
+      "'std','robust','uniminmax','globalminmax','center', or 'centerObs'"
+    ))
   }
 
   if(!(centerObsID %in% 1:dim(data)[1])) {
@@ -197,7 +202,11 @@ ggparcoord <- function(
         "Sparse", "Striated", "Convex", "Skinny", "Stringy","Monotonic"
       ))
     )) ) {
-    stop("invalid value for 'order'; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+    stop(str_c(
+      "invalid value for 'order'; must either be a vector of column indices or one of ",
+      "'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated',",
+      "'Convex','Skinny','Stringy','Monotonic'"
+    ))
   }
 
   if(!(is.logical(showPoints))) {
@@ -410,7 +419,10 @@ ggparcoord <- function(
   }
   else if (tolower(order) == "skewness") {
     abs.skew <- abs(apply(saveData2,2,skewness))
-    data.m$variable <- factor(data.m$variable,levels=names(abs.skew)[order(abs.skew,decreasing=TRUE)])
+    data.m$variable <- factor(
+      data.m$variable,
+      levels = names(abs.skew)[order(abs.skew,decreasing=TRUE)]
+    )
   }
   else if (tolower(order) == "allclass") {
     f.stats <- rep(NA,length(columns))
@@ -418,7 +430,10 @@ ggparcoord <- function(
     for(i in 1:length(columns)) {
       f.stats[i] <- summary(lm(saveData2[,i] ~ groupVar))$fstatistic[1]
     }
-    data.m$variable <- factor(data.m$variable,levels=names(f.stats)[order(f.stats,decreasing=TRUE)])
+    data.m$variable <- factor(
+      data.m$variable,
+      levels = names(f.stats)[order(f.stats,decreasing=TRUE)]
+    )
   }
   else if (tolower(order) == "anyclass") {
     axis.order <- singleClassOrder(groupVar,saveData2)
@@ -464,9 +479,15 @@ ggparcoord <- function(
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
     if (class(splineFactor) == "AsIs") {
-      data.m <- ddply(data.m, ".ID", transform, spline = spline(variable, value, n = ggally_splineFactor[1]))
+      data.m <- ddply(
+        data.m, ".ID", transform,
+        spline = spline(variable, value, n = ggally_splineFactor[1])
+      )
     } else {
-      data.m <- ddply(data.m, ".ID", transform, spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1]))
+      data.m <- ddply(
+        data.m, ".ID", transform,
+        spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1])
+      )
     }
 
     linexvar <- "spline.x"
@@ -474,11 +495,21 @@ ggparcoord <- function(
 
     if (alphaLinesIsCharacter) {
       p <- p +
-        geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize, data = data.m) +
+        geom_line(
+          aes_string(x = linexvar, y = lineyvar, alpha = alphaLines),
+          size = lineSize,
+          data = data.m
+        ) +
         scale_alpha(range = alphaRange)
 
     } else {
-      p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data = data.m)
+      p <- p +
+        geom_line(
+          aes_string(x = linexvar, y = lineyvar),
+          alpha = alphaLines,
+          size = lineSize,
+          data = data.m
+        )
     }
 
     if (showPoints) {
@@ -546,7 +577,11 @@ scagOrder <- function(scag, vars, measure) {
   d.scag <- data.frame(var1=NA,var2=NA,val=scag)
   for (i in 1:dim(d.scag)[1]) {
     d.scag$var1[i] <- substr(names(scag)[i], 1, regexpr(" * ", names(scag)[i]) - 1)
-    d.scag$var2[i] <- substr(names(scag)[i], regexpr(" * ", names(scag)[i]) + 3, nchar(names(scag)[i]))
+    d.scag$var2[i] <- substr(
+      names(scag)[i],
+      regexpr(" * ", names(scag)[i]) + 3,
+      nchar(names(scag)[i])
+    )
   }
   a <- c(d.scag$var1[1],d.scag$var2[1])
   d.scag <- d.scag[-1,]

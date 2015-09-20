@@ -10,8 +10,14 @@ test_that("stops", {
   expect_error(ggmatrix(plots = list(), nrow = "2", ncol = 3), "'nrow' must be a numeric value")
   expect_error(ggmatrix(plots = list(), nrow = 2, ncol = "3"), "'ncol' must be a numeric value")
 
-  expect_error(ggmatrix(plots = list(), nrow = c(2,3), ncol = 3), "'nrow' must be a single numeric value")
-  expect_error(ggmatrix(plots = list(), nrow = 2, ncol = c(2,3)), "'ncol' must be a single numeric value")
+  expect_error(
+    ggmatrix(plots = list(), nrow = c(2,3), ncol = 3),
+    "'nrow' must be a single numeric value"
+  )
+  expect_error(
+    ggmatrix(plots = list(), nrow = 2, ncol = c(2,3)),
+    "'ncol' must be a single numeric value"
+  )
 
 })
 

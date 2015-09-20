@@ -77,7 +77,13 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
       )
     }
   }
-  colnames(newdata) <- c("xvalue","yvalue","xslot","yslot","xlab","ylab","xcenter","ycenter",colnames(factor))
+  colnames(newdata) <- c(
+    "xvalue","yvalue",
+    "xslot","yslot",
+    "xlab","ylab",
+    "xcenter","ycenter",
+    colnames(factor)
+  )
 
   rp <- data.frame(newdata)
   rp[, 2][rp[, 3] <= rp[, 4]] <- "NA"
@@ -170,8 +176,16 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL) {
       }))
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab == names(dn)[m])
-        r <- r + stat_density(aes_string(x = "x", y = "..scaled.. * diff(range(x)) + min(x)", colour="colorcolumn"), data = j,
-                              position = "identity", geom = "line")
+        r <- r +
+          stat_density(
+            aes_string(
+              x = "x", y = "..scaled.. * diff(range(x)) + min(x)",
+              colour = "colorcolumn"
+            ),
+            data = j,
+            position = "identity",
+            geom = "line"
+          )
       }
       r <- r + geom_point(data=ltdata.new, aes_string(colour="colorcolumn"), na.rm=TRUE)
       return(r)
@@ -206,7 +220,8 @@ ggscatmat <- function(data, columns=1:ncol(data), color=NULL){
 
   a <- uppertriangle(data, columns = columns, color = color)
   if (is.null(color)){
-    plot <- scatmat(data, columns = columns) + geom_text(data = a, aes_string(label = "r"), colour = "black")
+    plot <- scatmat(data, columns = columns) +
+      geom_text(data = a, aes_string(label = "r"), colour = "black")
   } else {
     plot <- scatmat(data, columns = columns, color = color) +
       geom_text(data = a, aes_string(label = "r", color = "colorcolumn")) + labs(color = color)

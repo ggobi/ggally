@@ -60,7 +60,8 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
           "\tdiag continuous: c('densityDiag', 'barDiag', 'blankDiag')\n",
           "\tdiag discrete: c('barDiag', 'blankDiag')\n",
           "\n",
-          "You may also provide your own function that follows the api of function(data, mapping, ...){ . . . }\n",
+          "You may also provide your own function that follows the api of ",
+            "function(data, mapping, ...){ . . . }\n",
           "\n",
           "Function provided: '", funcVal, "'"
         ))
@@ -142,7 +143,16 @@ make_ggmatrix_plot_obj <- function(fn, mapping, dataPos = 1, gg = NULL) {
   nonCallVals <- which(lapply(mapping, mode) == "call")
   if (length(nonCallVals) > 0) {
     nonCallNames <- names(mapping)[nonCallVals]
-    stop(paste("variables: ", paste(shQuote(nonCallNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "), ".  Please rename the columns or make a new column.", sep = ""))
+    stop(
+      paste(
+        "variables: ",
+        paste(shQuote(nonCallNames), sep = ", "),
+        " have non standard format: ",
+        paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "),
+        ".  Please rename the columns or make a new column.",
+        sep = ""
+      )
+    )
   }
 
   ret <- list(
@@ -192,7 +202,10 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
   objName <- as.character(substitute(object))
   obj <- object
   if (identical(raw, FALSE)) {
-    cat(str_c("\nCustom str.ggmatrix output: \nTo view original object use 'str(", objName, ", raw = TRUE)'\n\n"))
+    cat(str_c(
+      "\nCustom str.ggmatrix output: \nTo view original object use ",
+      "'str(", objName, ", raw = TRUE)'\n\n"
+    ))
     obj$plots <- lapply(obj$plots, function(plotObj) {
       if (is_blank_plot(plotObj)) {
         "(blank)"

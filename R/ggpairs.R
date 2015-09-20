@@ -155,7 +155,10 @@ ggpairs <- function(
 ){
 
   if (! is.null(params)) {
-    stop("'params' is a depricated argument.  Please 'wrap' the function to supply arguments. help(\"wrap\", package = \"GGally\")")
+    stop(str_c(
+      "'params' is a depricated argument.  ",
+      "Please 'wrap' the function to supply arguments. help(\"wrap\", package = \"GGally\")"
+    ))
   }
 
   args <- list(...)
@@ -168,7 +171,11 @@ ggpairs <- function(
 
   if (length(args) > 0) {
     argNames <- names(args)
-    warning(str_c("Extra arguments: ", str_c(shQuote(argNames), collapse = ", "), " are being ignored.  If these are suppose to be aesthetics, submit them using the 'mapping' variable.\n\n", "mapping = c(", str_c(shQuote(argNames), " = ", shQuote(unlist(args)) , collapse = ", "),")"))
+    warning(str_c(
+      "Extra arguments: ", str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
+      "  If these are meant to be aesthetics, submit them using the 'mapping' variable.\n\n",
+      "mapping = c(", str_c(shQuote(argNames), " = ", shQuote(unlist(args)) , collapse = ", "),")"
+    ))
   }
 
   if (is.numeric(mapping)) {
@@ -196,13 +203,22 @@ ggpairs <- function(
   }
 
   if (any(columns > ncol(data))) {
-    stop(paste("Make sure your 'columns' values are less than or equal to ", ncol(data), ".\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+    stop(str_c(
+      "Make sure your 'columns' values are less than or equal to ", ncol(data), ".\n",
+      "\tcolumns = c(", str_c(columns, collapse = ", "), ")"
+    ))
   }
   if (any(columns < 1)) {
-    stop(paste("Make sure your 'columns' values are positive.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+    stop(str_c(
+      "Make sure your 'columns' values are positive.", "\n",
+      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
+    ))
   }
   if (any( (columns %% 1) != 0)) {
-    stop(paste("Make sure your 'columns' values are integers.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+    stop(str_c(
+      "Make sure your 'columns' values are integers.", "\n",
+      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
+    ))
   }
 
   if (length(columnLabels) != length(columns)) {
@@ -224,9 +240,18 @@ ggpairs <- function(
   lower <- set_to_blank_list_if_blank(lower)
   diag  <- set_to_blank_list_if_blank(diag, combo = FALSE)
 
-  upper <- check_and_set_defaults("upper", upper, continuous = "cor", combo = "box", discrete = "facetbar")
-  lower <- check_and_set_defaults("lower", lower, continuous = "points", combo = "facethist", discrete = "facetbar")
-  diag <- check_and_set_defaults("diag", diag, continuous = "densityDiag", discrete = "barDiag")
+  upper <- check_and_set_defaults(
+    "upper", upper,
+    continuous = "cor", combo = "box", discrete = "facetbar"
+  )
+  lower <- check_and_set_defaults(
+    "lower", lower,
+    continuous = "points", combo = "facethist", discrete = "facetbar"
+  )
+  diag <- check_and_set_defaults(
+    "diag", diag,
+    continuous = "densityDiag", discrete = "barDiag"
+  )
 
   data <- as.data.frame(data)
   for (i in 1:dim(data)[2] ) {
@@ -519,7 +544,10 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
   }
 
   if (! is.null(obj$params)) {
-    stop(str_c("'", name, "$params' is a depricated argument.  Please 'wrap' the function to supply arguments"))
+    stop(str_c(
+      "'", name, "$params' is a depricated argument.  ",
+      "Please 'wrap' the function to supply arguments"
+    ))
   }
 
   obj

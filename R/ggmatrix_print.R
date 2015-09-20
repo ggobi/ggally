@@ -180,13 +180,22 @@ print.ggmatrix <- function(
   # axis labels
   if (!identical(plotObj$axisLabels,"internal")) {
     # viewport for Left Names
-    pushViewport(viewport(width=unit(1, "npc") - unit(2,"lines"), height=unit(1, "npc") - unit(3, "lines")))
+    pushViewport(
+      viewport(
+        width = unit(1, "npc") - unit(2,"lines"),
+        height = unit(1, "npc") - unit(3, "lines")
+      )
+    )
 
     ## new for axis spacingProportion
-    pushViewport(viewport(layout = grid.layout(
-      length(viewPortHeights), length(viewPortWidths),
-      widths = viewPortWidths, heights = viewPortHeights
-    )))
+    pushViewport(
+      viewport(
+        layout = grid.layout(
+          length(viewPortHeights), length(viewPortWidths),
+          widths = viewPortWidths, heights = viewPortHeights
+        )
+      )
+    )
 
     # Left Side
     for (i in 1:(x$nrow)) {
@@ -207,13 +216,22 @@ print.ggmatrix <- function(
     popViewport()# spacing
 
     # viewport for Bottom Names
-    pushViewport(viewport(width=unit(1, "npc") - unit(3,"lines"), height=unit(1, "npc") - unit(2, "lines")))
+    pushViewport(
+      viewport(
+        width = unit(1, "npc") - unit(3,"lines"),
+        height = unit(1, "npc") - unit(2, "lines")
+      )
+    )
 
     ## new for axis spacing
-    pushViewport(viewport(layout = grid.layout(
-      length(viewPortHeights), length(viewPortWidths),
-      widths = viewPortWidths, heights = viewPortHeights
-    )))
+    pushViewport(
+      viewport(
+        layout = grid.layout(
+          length(viewPortHeights), length(viewPortWidths),
+          widths = viewPortWidths, heights = viewPortHeights
+        )
+      )
+    )
 
 
     # Bottom Side
@@ -368,7 +386,12 @@ print.ggmatrix <- function(
       ]
 
       ## Draw 'plot panel'
-      pushViewport(vplayout( (2 * rowPos) - 1, ifelse(showLabels, 2 * columnPos, (2 * columnPos) - 1)))
+      pushViewport(
+        vplayout(
+          (2 * rowPos) - 1,
+          ifelse(showLabels, 2 * columnPos, (2 * columnPos) - 1)
+        )
+      )
         suppressMessages(suppressWarnings(
           grid.draw(pPanel)
         ))
