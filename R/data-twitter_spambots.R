@@ -20,4 +20,3 @@
 #' @usage data(twitter_spambots)
 #' @format An object of class \code{network} with 120 edges and 94 vertices.
 NULL
-

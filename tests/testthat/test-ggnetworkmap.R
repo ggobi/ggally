@@ -22,8 +22,8 @@ flights <- data.frame(
 flights <- network(flights, directed = TRUE)
 
 # add geographic coordinates
-flights %v% "lat" <- airports[ network.vertex.names(flights), "lat" ]
-flights %v% "lon" <- airports[ network.vertex.names(flights), "long" ]
+flights %v% "lat" <- airports[ network.vertex.names(flights), "lat" ] # nolint
+flights %v% "lon" <- airports[ network.vertex.names(flights), "long" ] # nolint
 
 # drop isolated airports
 delete.vertices(flights, which(degree(flights) < 2))
@@ -174,18 +174,24 @@ test_that("arrow.size", {
 ### --- test network coercion
 
 test_that("network coercion", {
-  expect_warning(ggnetworkmap(net = network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)), "self-loops")
+  expect_warning(
+    ggnetworkmap(net = network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)),
+    "self-loops"
+  )
 
   expect_error(ggnetworkmap(net = 1:2), "network object")
   expect_error(ggnetworkmap(net = network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper graphs")
-  expect_error(ggnetworkmap(net = network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
+  expect_error(
+    ggnetworkmap(net = network(data.frame(1:2, 3:4), multiple = TRUE)),
+    "multiplex graphs"
+  )
 })
 
 ### --- test igraph functionality
 
 test_that("igraph conversion", {
-  n = asIgraph(flights)
-  p = ggnetworkmap(net = n)
+  n <- asIgraph(flights)
+  p <- ggnetworkmap(net = n)
   expect_equal(length(p$layers), 2)
 })
 
