@@ -155,8 +155,8 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
     stop("'corUse' is deprecated.  Please use argument 'use'")
   }
 
-  useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
-  use <-  pmatch(use, useOptions)
+  useOptions <- c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
+  use <- pmatch(use, useOptions)
   if (is.na(use)) {
     warning("correlation 'use' not found.  Using default value of 'all.obs'")
     use <- useOptions[1]
@@ -1130,8 +1130,8 @@ ggally_diagAxis <- function(
     #   scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
   }
 
-  pLabs$subType = "internal"
-  pLabs$type = "label"
+  pLabs$subType <- "internal"
+  pLabs$type <- "label"
   pLabs
 
 }

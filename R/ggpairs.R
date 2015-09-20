@@ -172,8 +172,8 @@ ggpairs <- function(
   }
 
   if (is.numeric(mapping)) {
-    columns = mapping
-    mapping = aes()
+    columns <- mapping
+    mapping <- aes()
   }
 
 
@@ -181,7 +181,7 @@ ggpairs <- function(
     data <- as.data.frame(data)
   }
 
-  verbose = verbose || printInfo
+  verbose <- verbose || printInfo
 
   axisLabelChoices <- c("show", "internal", "none")
   axisLabelChoice <- pmatch(axisLabels, axisLabelChoices)
@@ -292,7 +292,7 @@ ggpairs <- function(
     }
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
-      isContinuous = (type == "scatterplot")
+      isContinuous <- (type == "scatterplot")
       if (printInfo) {
         if (isContinuous) {
           cat("continuous\n")
@@ -493,11 +493,11 @@ mapping_color_fill <- function(current) {
 set_to_blank_list_if_blank <- function(val, combo = TRUE) {
   if (!is.list(val) && val == "blank") {
     val <- list()
-    val$continuous = "blank"
+    val$continuous <- "blank"
     if (combo) {
-      val$combo = "blank"
+      val$combo <- "blank"
     }
-    val$discrete = "blank"
+    val$discrete <- "blank"
   }
 
   val

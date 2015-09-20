@@ -2,7 +2,7 @@
 context("ggpairs")
 data(tips, package = "reshape")
 
-facethistBindwidth1 = list(combo = wrap("facethist", binwidth = 1))
+facethistBindwidth1 <- list(combo = wrap("facethist", binwidth = 1))
 
 test_that("structure", {
   a <- ggpairs(tips)
@@ -188,14 +188,14 @@ test_that("subtypes", {
   }
 
   # re ordered the subs so that density can have no binwidth param
-  conSubs = list("density", "points", "smooth", "cor", "blank")
-  comSubs = list("box", "dot", wrap("facethist", binwidth = 1), "facetdensity", wrap("denstrip", binwidth = 1), "blank")
-  disSubs = list("ratio", "facetbar", "blank")
+  conSubs <- list("density", "points", "smooth", "cor", "blank")
+  comSubs <- list("box", "dot", wrap("facethist", binwidth = 1), "facetdensity", wrap("denstrip", binwidth = 1), "blank")
+  disSubs <- list("ratio", "facetbar", "blank")
 
-  conDiagSubs = c("densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
-  disDiagSubs = c("barDiag", "blankDiag")
+  conDiagSubs <- c("densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
+  disDiagSubs <- c("barDiag", "blankDiag")
 
-  printShowStrips = c(TRUE, FALSE)
+  printShowStrips <- c(TRUE, FALSE)
 
   gn <- function(x) {
     fnName <- attr(x, "fnName")

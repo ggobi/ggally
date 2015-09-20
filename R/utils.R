@@ -6,7 +6,7 @@
 #' @param pkgs vector of character values
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords internal
-require_pkgs = function(pkgs) {
+require_pkgs <- function(pkgs) {
   for (pkg in pkgs) {
     if (! require(pkg, character.only = TRUE)) {
       stop(str_c("please install the package '", pkg, "'.  install.packages('", pkg, "') "))

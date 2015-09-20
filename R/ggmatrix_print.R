@@ -40,7 +40,7 @@ vplayout <- function(x, y) {
 #' @param element first key
 #' @param elementKey key within element object
 #' @keywords internal
-get_theme_element = function(p, element, elementKey) {
+get_theme_element <- function(p, element, elementKey) {
   themeObj <- p$gg
 
   if (!is.null(themeObj)) {
@@ -64,7 +64,7 @@ get_theme_element = function(p, element, elementKey) {
 #' p <- ggplot2::qplot(1:10, 1:10) + ggplot2::theme(plot.title = ggplot2::element_text(size = 13))
 #' GGally:::first_non_null(GGally:::get_theme_element(p, "plot.title", "size"), 15)
 #' GGally:::first_non_null(GGally:::get_theme_element(p, "plot.title", "BAD"), 15)
-first_non_null = function(...) {
+first_non_null <- function(...) {
   vals <- c(...)
   vals[which.min(is.null(vals))]
 }
@@ -128,13 +128,13 @@ print.ggmatrix <- function(
   if (identical(plotObj$axisLabels,"internal")) {
     v1 <- viewport(
       y = unit(0.5, "npc") - unit(0.5,"lines"),
-      width=unit(1, "npc") - unit(1,"lines"),
-      height=unit(1, "npc") - unit(2, "lines")
+      width = unit(1, "npc") - unit(1,"lines"),
+      height = unit(1, "npc") - unit(2, "lines")
     )
   } else {
     v1 <- viewport(
-      width=unit(1, "npc") - unit(3,"lines"),
-      height=unit(1, "npc") - unit(3, "lines")
+      width = unit(1, "npc") - unit(3,"lines"),
+      height = unit(1, "npc") - unit(3, "lines")
     )
   }
 

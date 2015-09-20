@@ -81,8 +81,8 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
     ret_fn <- function(data, mapping, ...) {
       argsList <- list(...)
 
-      argsList$data = data
-      argsList$mapping = mapping
+      argsList$data <- data
+      argsList$mapping <- mapping
 
       for (pName in names(params)) {
         argsList[[pName]] <- params[[pName]]
@@ -162,7 +162,7 @@ mapping_as_string <- function(mapping) {
 
 as.character.ggmatrix_plot_obj <- function(x, ...) {
   hasGg <- (!is.null(x$gg))
-  mappingTxt = mapping_as_string(x$mapping)
+  mappingTxt <- mapping_as_string(x$mapping)
   fnTxt <- ifelse(inherits(x$fn, "ggmatrix_fn_with_params"), as.character(x$fn), "custom_function")
   if (inherits(x$fn, "ggmatrix_fn_with_params")) {
     if (attr(x$fn, "fnName") %in% c("ggally_blank", "ggally_blankDiag")) {

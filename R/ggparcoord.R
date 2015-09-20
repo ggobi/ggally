@@ -230,9 +230,9 @@ ggparcoord <- function(
 
   if (is.logical(splineFactor)) {
     if (splineFactor) {
-      splineFactor = 3
+      splineFactor <- 3
     } else {
-      splineFactor = 0
+      splineFactor <- 0
     }
   } else if (! is.numeric(splineFactor)) {
     stop("invalid value for 'splineFactor'; must be a logical or numeric value")
@@ -284,7 +284,7 @@ ggparcoord <- function(
   data$anyMissing <- apply(is.na(data[,columns]), 1, any)
   columnsPlusTwo <- c(columns, p)
 
-  inner_rescaler_default = function (x, type = "sd", ...) {
+  inner_rescaler_default <- function (x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
     # rescaler.default
     switch(type,
@@ -296,7 +296,7 @@ ggparcoord <- function(
       range = (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
     )
   }
-  inner_rescaler = function(x, type = "sd", ...) {
+  inner_rescaler <- function(x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
     # rescaler.data.frame
     continuous <- sapply(x, is.numeric)
@@ -554,14 +554,14 @@ scagOrder <- function(scag, vars, measure) {
     decreasing=TRUE)]
   d.scag <- d.scag[-grep(a[1],rownames(d.scag)),]
 
-  i = 1
+  i <- 1
   while(length(a) < p) {
     pNames <- d.scag[i, 1:2]
     namesUsed <- pNames %in% a
     if (! all(namesUsed)) {
       a <- append(a, pNames[!namesUsed])
     }
-    i = i + 1
+    i <- i + 1
   }
 
   return(a)
