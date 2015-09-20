@@ -94,21 +94,25 @@ getPlot <- function(x, i, j){
 
   if (is.null(plotObj) || identical(plotObj, "blank")) {
     p <- ggally_blank()
-  } else if (ggplot2::is.ggplot(plotObj)) {
-    p <- plotObj
-  } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+  } else {
+    if (ggplot2::is.ggplot(plotObj)) {
+      p <- plotObj
+    } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
 
-    fn <- plotObj$fn
-    p <- fn(x$data, plotObj$mapping)
+      fn <- plotObj$fn
+      p <- fn(x$data, plotObj$mapping)
 
-    if (!is.null(plotObj$gg)) {
-      p <- p + plotObj$gg
+    } else {
+      firstNote <- str_c("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
+      strObj <- capture.output({print(str(plotObj))})
+      stop(str_c("unknown plot object type.\n", firstNote, strObj))
     }
 
-  } else {
-    firstNote <- str_c("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
-    strObj <- capture.output({print(str(plotObj))})
-    stop(str_c("unknown plot object type.\n", firstNote, strObj))
+    if (!is.null(x$gg)) {
+      print("adding custom gg")
+      p <- p + x$gg
+    }
+
   }
   # stop("fix this")
   # if (is.character(plot_text)) {
