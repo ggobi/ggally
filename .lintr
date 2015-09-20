@@ -4,7 +4,6 @@ linters: with_defaults(
     commented_code_linter = NULL, # 217
     infix_spaces_linter = NULL, # 108
     assignment_linter = NULL, # 53
-    trailing_whitespace_linter = NULL, # 52
     NULL
   )
 exclusions:
