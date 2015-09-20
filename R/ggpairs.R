@@ -397,7 +397,7 @@ ggpairs <- function(
       }
     }
 
-    ggpairsPlots[[length(ggpairsPlots)+1]] <- p
+    ggpairsPlots[[length(ggpairsPlots) + 1]] <- p
   }
 
   plotMatrix <- ggmatrix(

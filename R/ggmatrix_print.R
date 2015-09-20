@@ -283,7 +283,7 @@ print.ggmatrix <- function(
         pushViewport(vplayout(rowPos * 2 - 1, 1))
         pushViewport(vpLAxis)
           for (lAxisPos in 1:grobLength) {
-            pushViewport(vplayout(lAxisPos*2 - 1, 1))
+            pushViewport(vplayout(lAxisPos * 2 - 1, 1))
             grid.draw(pAxisLabels$grobs[[lAxisPos]])
             popViewport()
           }
@@ -368,7 +368,7 @@ print.ggmatrix <- function(
       ]
 
       ## Draw 'plot panel'
-      pushViewport(vplayout(2 * rowPos - 1, ifelse(showLabels, 2 * columnPos, 2*columnPos - 1)))
+      pushViewport(vplayout( (2 * rowPos) - 1, ifelse(showLabels, 2 * columnPos, (2 * columnPos) - 1)))
         suppressMessages(suppressWarnings(
           grid.draw(pPanel)
         ))

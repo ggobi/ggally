@@ -64,9 +64,9 @@ ggally_smooth <- function(data, mapping, ...){
   p <- p + geom_point(...)
 
   if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
-    p <- p + geom_smooth(method="lm")
+    p <- p + geom_smooth(method = "lm")
   } else {
-    p <- p + geom_smooth(method="lm", colour = I("black"))
+    p <- p + geom_smooth(method = "lm", colour = I("black"))
   }
 
   p$type <- "continuous"
@@ -102,7 +102,7 @@ ggally_density <- function(data, mapping, ...){
   p <- ggplot(data = data, mapping)
 
   if(!is.null(mapping$fill)) {
-    p <- p + stat_density2d(geom="polygon", ...)
+    p <- p + stat_density2d(geom = "polygon", ...)
   } else {
     p <- p + geom_density2d(...)
   }
@@ -166,7 +166,7 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
 
   cor_fn <- function(x, y) {
     # also do ddply below if fn is altered
-    cor(x,y, method = method, use = use)
+    cor(x, y, method = method, use = use)
   }
 
   # xVar <- data[,as.character(mapping$x)]
@@ -191,15 +191,15 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
   xCol <- as.character(mapping$x)
   yCol <- as.character(mapping$y)
 
-  if (is_date(data[,xCol]) || is_date(data[,yCol])) {
+  if (is_date(data[, xCol]) || is_date(data[, yCol])) {
 
     # make sure it's a data.frame, as data.tables don't work well
-    if (! identical(class(data),"data.frame")) {
+    if (! identical(class(data), "data.frame")) {
       data <- as.data.frame(data)
     }
 
     for (col in c(xCol, yCol)) {
-      if (is_date(data[,col])) {
+      if (is_date(data[, col])) {
         data[, col] <- as.numeric(data[, col])
       }
     }
@@ -211,12 +211,12 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
     if(length(colorCol) > 0) {
       if(singleColorCol %in% colnames(data)) {
-        rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+        rows <- complete.cases(data[, c(xCol, yCol, colorCol)])
       } else {
-        rows <- complete.cases(data[,c(xCol,yCol)])
+        rows <- complete.cases(data[, c(xCol, yCol)])
       }
     } else {
-      rows <- complete.cases(data[,c(xCol,yCol)])
+      rows <- complete.cases(data[,c(xCol, yCol)])
     }
 
     if(any(!rows)) {
@@ -1056,7 +1056,7 @@ ggally_diagAxis <- function(
     xmax <- max(data[, as.character(mapping$x)], na.rm = TRUE)
 
     # add a lil fluff... it looks better
-    xrange <- c(xmin - .01 * (xmax-xmin), xmax + .01 * (xmax - xmin))
+    xrange <- c(xmin - .01 * (xmax - xmin), xmax + .01 * (xmax - xmin))
     # xrange <- c(xmin, xmax)
 
     p <- ggally_text(
@@ -1204,14 +1204,14 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   table_data <- transform(table_data, x = as.factor(x), y = as.factor(y),
     freq = result)
 
-  table_data <- transform(table_data, freq = sqrt(pmin(freq * .95, ceiling)/ceiling),
+  table_data <- transform(table_data, freq = sqrt(pmin(freq * .95, ceiling) / ceiling),
     border = ifelse(is.na(freq), "grey90", ifelse(freq >
       ceiling, "grey30", "grey50")))
   table_data[is.na(table_data$freq), "freq"] <- 1
   table_data <- subset(table_data, freq * ceiling >= floor)
 
-  xNew <- as.numeric(table_data$x) + 1/2 * table_data$freq
-  yNew <- as.numeric(table_data$y) + 1/2 * table_data$freq
+  xNew <- as.numeric(table_data$x) + (1 / 2) * table_data$freq
+  yNew <- as.numeric(table_data$y) + (1 / 2) * table_data$freq
 
   # maxLen <- max(diff(range(as.numeric(table_data$x), na.rm = TRUE)), diff(range(as.numeric(table_data$y), na.rm = TRUE)) )
 

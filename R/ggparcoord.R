@@ -545,8 +545,8 @@ scagOrder <- function(scag, vars, measure) {
   scag <- sort(scag[measure,],decreasing=TRUE)
   d.scag <- data.frame(var1=NA,var2=NA,val=scag)
   for (i in 1:dim(d.scag)[1]) {
-    d.scag$var1[i] <- substr(names(scag)[i],1,regexpr(" * ",names(scag)[i])-1)
-    d.scag$var2[i] <- substr(names(scag)[i],regexpr(" * ",names(scag)[i])+3,nchar(names(scag)[i]))
+    d.scag$var1[i] <- substr(names(scag)[i], 1, regexpr(" * ", names(scag)[i]) - 1)
+    d.scag$var2[i] <- substr(names(scag)[i], regexpr(" * ", names(scag)[i]) + 3, nchar(names(scag)[i]))
   }
   a <- c(d.scag$var1[1],d.scag$var2[1])
   d.scag <- d.scag[-1,]
@@ -612,6 +612,6 @@ skewness <- function(x) {
   x <- x[!is.na(x)]
   xbar <- mean(x)
   n <- length(x)
-  skewness <- (1/n) * sum((x-xbar)^3) / ((1/n)*sum((x-xbar)^2))^(3/2) # nolint
+  skewness <- (1 / n) * sum( (x - xbar) ^ 3) / ( (1 / n) * sum( (x - xbar) ^ 2)) ^ (3 / 2)
   return(skewness)
 }

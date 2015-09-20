@@ -8,7 +8,7 @@ test_that("structure", {
   a <- ggpairs(tips)
   expect_is(a$data, "data.frame")
   expect_is(a$plots, "list")
-  expect_equivalent(length(a$plots), ncol(tips)^2)
+  expect_equivalent(length(a$plots), ncol(tips) ^ 2)
   expect_is(a$title, "character")
   expect_is(a$verbose, "logical")
   expect_is(a$printInfo, "logical")
@@ -24,7 +24,7 @@ test_that("structure", {
 test_that("columns", {
   columnsUsed <- c("total_bill", "tip", "sex")
   a <- ggpairs(tips, columns = columnsUsed)
-  expect_equivalent(length(a$plots), length(columnsUsed)^2)
+  expect_equivalent(length(a$plots), length(columnsUsed) ^ 2)
   expect_equivalent(a$xAxisLabels, columnsUsed)
   expect_equivalent(a$yAxisLabels, columnsUsed)
 })
@@ -109,7 +109,7 @@ test_that("stops", {
 
   expect_error(ggpairs(tips, columns = 1:10), "Make sure your 'columns' values are less than or equal to")
   expect_error(ggpairs(tips, columns = -5:5), "Make sure your 'columns' values are positive")
-  expect_error(ggpairs(tips, columns = (2:10)/2), "Make sure your 'columns' values are integers")
+  expect_error(ggpairs(tips, columns = (2:10) / 2), "Make sure your 'columns' values are integers")
   expect_error(ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra")), "The length of the 'columnLabels' does not match the length of")
 
   dt <- tips

@@ -76,7 +76,7 @@ test_that("scales", {
 
   for (scale_fn in c(rescale01, rescale11)) {
     scale_fn2 <- function(x) {
-      scale_fn(x, xlim = c(1/4,3/4))
+      scale_fn(x, xlim = c(1 / 4, 3 / 4))
     }
     dt <- do_glyph(y_scale = scale_fn2)
     dt$surftempScaled <- dt$surftemp

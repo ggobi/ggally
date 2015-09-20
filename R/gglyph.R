@@ -106,10 +106,10 @@ ref_boxes <- function(data, fill = NULL) {
   glyph <- attributes(data)
   cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid", fill)]))
 
-  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width/2,
-      xmax = cells[[glyph$x_major]] + glyph$width/2,
-      ymin = cells[[glyph$y_major]] - glyph$height/2,
-      ymax = cells[[glyph$y_major]] + glyph$height/2)
+  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width / 2,
+      xmax = cells[[glyph$x_major]] + glyph$width / 2,
+      ymin = cells[[glyph$y_major]] - glyph$height / 2,
+      ymax = cells[[glyph$y_major]] + glyph$height / 2)
   if (!is.null(fill)){
     df$fill <- cells[[fill]]
   }
