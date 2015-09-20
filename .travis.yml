@@ -5,6 +5,8 @@
 #   https://github.com/craigcitro/r-travis/wiki
 
 language: r
+# sudo is required even though they want us to upgrade. :-/
+# http://docs.travis-ci.com/user/migrating-from-legacy/?utm_source=legacy-notice&utm_medium=banner&utm_campaign=legacy-upgrade
 sudo: required
 
 ## default R_*_ARGS
