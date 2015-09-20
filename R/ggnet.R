@@ -360,7 +360,18 @@ ggnet <- function(
   x = weight.method
 
   if (length(x) == 1 && x %in% c("indegree", "outdegree", "degree", "freeman")) {
-    data$weight = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
+
+    # prevent namespace conflict with igraph
+    if ("package:igraph" %in% search()) {
+      
+      y = ifelse(is_dir == "digraph", "directed", "undirected")
+      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[ x ]
+      data$weight = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
+      
+    } else {
+      data$weight = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
+    }
+
   } else if (length(x) > 1 && length(x) == n_nodes) {
     data$weight = x
   } else if (length(x) == 1 && x %in% v_attr) {
