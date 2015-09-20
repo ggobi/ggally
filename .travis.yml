@@ -5,6 +5,7 @@
 #   https://github.com/craigcitro/r-travis/wiki
 
 language: r
+sudo: false
 
 ## default R_*_ARGS
 # R_BUILD_ARGS="--no-build-vignettes" R_CHECK_ARGS="--no-manual --as-cran"
