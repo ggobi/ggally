@@ -73,7 +73,7 @@ test_that("splineFactor", {
     expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$y), "spline.y")
 
     tmp <- unique(as.numeric(get("data", envir = p$layers[[1]])$ggally_splineFactor))
-    expect_true((tmp == 3) || (tmp == 21))
+    expect_true( (tmp == 3) || (tmp == 21) )
   }
 
   p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, splineFactor = 3, alphaLines = "alphaLevel")

@@ -201,7 +201,7 @@ ggpairs <- function(
   if (any(columns < 1)) {
     stop(paste("Make sure your 'columns' values are positive.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
   }
-  if (any((columns %% 1) != 0)) {
+  if (any( (columns %% 1) != 0)) {
     stop(paste("Make sure your 'columns' values are integers.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
   }
 

@@ -287,15 +287,15 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
     xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
     ymin <- min(yVal, na.rm = TRUE)
     ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
+    yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
 
 
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Cor : ", signif(cor_fn(xVal,yVal),3)),
+      label   = str_c("Cor : ", signif(cor_fn(xVal, yVal),3)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
@@ -338,10 +338,10 @@ ggally_cor <- function(data, mapping, alignPercent = 0.6, method = "pearson", us
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
     xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
     ymin <- min(yVal, na.rm = TRUE)
     ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
+    yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
 
     p <- ggally_text(
       label = paste(
@@ -659,7 +659,7 @@ ggally_denstrip <- function(data,mapping, ...){
 #' example(ggally_denstrip)
 ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   horizontal <-  (is.factor(data[, as.character(mapping$y)])) || (is.character(data[, as.character(mapping$y)]))
-  if(!horizontal) {
+  if (!horizontal) {
     mapping$tmp <- mapping$x
     mapping$x <- mapping$y
     mapping$y <- mapping$tmp
@@ -1102,8 +1102,8 @@ ggally_diagAxis <- function(
       vjust   = labelVJust
     )
     #axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
-    axisBreaks <- 0:(numLvls-1)*(.125 + (1-.125*(numLvls-1))/numLvls) +
-      (1-.125*(numLvls-1))/(2*numLvls)
+    axisBreaks <- 0:(numLvls - 1) * (0.125 + (1 - 0.125 * (numLvls - 1)) / numLvls) +
+      (1 - 0.125 * (numLvls - 1)) / (2 * numLvls)
 
     axisLabs <- data.frame(
       x   = axisBreaks[1:numLvls],

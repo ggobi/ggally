@@ -220,15 +220,15 @@ ggparcoord <- function(
     }
     alphaVar <- data[,alphaLines]
 
-  } else if((alphaLines < 0) || (alphaLines > 1)) {
+  } else if ((alphaLines < 0) || (alphaLines > 1)) { # nolint
     stop("invalid value for 'alphaLines'; must be a scalar value between 0 and 1")
   }
 
-  if(!(is.logical(boxplot))) {
+  if (!(is.logical(boxplot))) {
     stop("invalid value for 'boxplot'; must be a logical operator")
   }
 
-  if(is.logical(splineFactor)) {
+  if (is.logical(splineFactor)) {
     if (splineFactor) {
       splineFactor = 3
     } else {
@@ -260,16 +260,16 @@ ggparcoord <- function(
 
   # Change character vars to factors
   char.vars <- column_is_character(data)
-  if(length(char.vars) >= 1) {
-    for(char.var in char.vars) {
+  if (length(char.vars) >= 1) {
+    for (char.var in char.vars) {
       data[,char.var] <- factor(data[,char.var])
     }
   }
 
   # Change factors to numeric
   fact.vars <- column_is_factor(data)
-  if(length(fact.vars) >= 1) {
-    for(fact.var in fact.vars) {
+  if (length(fact.vars) >= 1) {
+    for (fact.var in fact.vars) {
       data[,fact.var] <- as.numeric(data[,fact.var])
     }
   }
@@ -307,7 +307,7 @@ ggparcoord <- function(
   }
 
   ### Scaling ###
-  if(tolower(scale) %in% c("std", "robust", "uniminmax", "center")) {
+  if (tolower(scale) %in% c("std", "robust", "uniminmax", "center")) {
     rescalerType <- c(
       "std" = "sd",
       "robust" = "robust",
@@ -325,20 +325,20 @@ ggparcoord <- function(
   }
 
   ### Imputation ###
-  if(tolower(missing) == "exclude") {
+  if (tolower(missing) == "exclude") {
     dataCompleteCases <- complete.cases(data[, columnsPlusTwo])
 
-    if(!is.null(groupColumn)) {
+    if (!is.null(groupColumn)) {
       groupVar <- groupVar[dataCompleteCases]
     }
 
-    if(alphaLinesIsCharacter) {
+    if (alphaLinesIsCharacter) {
       alphaVar <- alphaVar[dataCompleteCases]
     }
 
     data <- data[dataCompleteCases, ]
   }
-  else if(tolower(missing) %in% c("mean", "median", "min10", "random")) {
+  else if (tolower(missing) %in% c("mean", "median", "min10", "random")) {
     missingFns <- list(
       mean = function(x) {
         mean(x, na.rm = TRUE)
@@ -357,7 +357,7 @@ ggparcoord <- function(
     )
     missing_fn <- missingFns[[tolower(missing)]]
     data[,columns] <- apply(data[,columns], 2, function(x) {
-      if(any(is.na(x))){
+      if (any(is.na(x))){
         x[is.na(x)] <- missing_fn(x)
       }
       return(x)
@@ -368,7 +368,7 @@ ggparcoord <- function(
   ### Scaling (round 2) ###
   # Centering by observation needs to be done after handling missing values
   #   in case the observation to be centered on has missing values
-  if(tolower(scale) == "centerobs") {
+  if (tolower(scale) == "centerobs") {
     data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo],type="range")
     data[, columns] <- apply(data[,columns],2,function(x){
       x <- x - x[centerObsID]
@@ -378,14 +378,14 @@ ggparcoord <- function(
   # meltIDVars <- c(".ID", "anyMissing")
   meltIDVars <- colnames(data)[-columns]
 
-  if(!is.null(groupColumn)) {
+  if (!is.null(groupColumn)) {
     # data <- cbind(data,groupVar)
     # names(data)[dim(data)[2]] <- groupCol
 
     meltIDVars <- c(groupCol, meltIDVars)
   }
 
-  if(alphaLinesIsCharacter) {
+  if (alphaLinesIsCharacter) {
     data <- cbind(data, alphaVar)
     names(data)[dim(data)[2]] <- alphaLines
     meltIDVars <- c(meltIDVars, alphaLines)
@@ -398,21 +398,21 @@ ggparcoord <- function(
   data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
 
   ### Ordering ###
-  if(length(order) > 1 & is.numeric(order)) {
+  if (length(order) > 1 & is.numeric(order)) {
      data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
   }
-  else if(order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
+  else if (order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
     "Stringy","Monotonic")) {
 
     require_pkgs("scagnostics")
     scag <- scagnostics::scagnostics(saveData2)
     data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(saveData2),order))
   }
-  else if(tolower(order) == "skewness") {
+  else if (tolower(order) == "skewness") {
     abs.skew <- abs(apply(saveData2,2,skewness))
     data.m$variable <- factor(data.m$variable,levels=names(abs.skew)[order(abs.skew,decreasing=TRUE)])
   }
-  else if(tolower(order) == "allclass") {
+  else if (tolower(order) == "allclass") {
     f.stats <- rep(NA,length(columns))
     names(f.stats) <- names(saveData2[columns])
     for(i in 1:length(columns)) {
@@ -420,12 +420,12 @@ ggparcoord <- function(
     }
     data.m$variable <- factor(data.m$variable,levels=names(f.stats)[order(f.stats,decreasing=TRUE)])
   }
-  else if(tolower(order) == "anyclass") {
+  else if (tolower(order) == "anyclass") {
     axis.order <- singleClassOrder(groupVar,saveData2)
     data.m$variable <- factor(data.m$variable,levels=axis.order)
   }
 
-  if(!is.null(groupColumn)) {
+  if (!is.null(groupColumn)) {
     mapping2 <- aes_string(
       x = "variable",
       y = "value",
@@ -443,7 +443,7 @@ ggparcoord <- function(
   # mapping2 <- add_and_overwrite_aes(aes_string(size = I(0.5)), mapping2)
   p <- ggplot(data=data.m,mapping=mapping2)
 
-  if(!is.null(shadeBox)) {
+  if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
     d.sum <- ddply(data.m,.(variable),summarize,
       min = min(value),
@@ -455,7 +455,7 @@ ggparcoord <- function(
   if (boxplot)
     p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
 
-  if(!is.null(mapping2$size)) {
+  if (!is.null(mapping2$size)) {
     lineSize <- mapping2$size
   } else {
     lineSize <- 0.5
@@ -612,6 +612,6 @@ skewness <- function(x) {
   x <- x[!is.na(x)]
   xbar <- mean(x)
   n <- length(x)
-  skewness <- (1/n)*sum((x-xbar)^3)/((1/n)*sum((x-xbar)^2))^(3/2)
+  skewness <- (1/n) * sum((x-xbar)^3) / ((1/n)*sum((x-xbar)^2))^(3/2) # nolint
   return(skewness)
 }

@@ -224,8 +224,8 @@ print.ggmatrix <- function(
         0,
         just = c("centre","centre"),
         vp = vplayout(
-          ifelse(showLabels, 2*(x$nrow), 2*(x$nrow) - 1),
-          ifelse(showLabels, 2*i, 2*i - 1)
+          ifelse(showLabels, 2 * (x$nrow), 2 * (x$nrow) - 1),
+          ifelse(showLabels, 2 * i, (2 * i) - 1)
         ),
         gp = gpar(fontsize = first_non_null(
           get_theme_element(plotObj, "axis.title.x", "size"),

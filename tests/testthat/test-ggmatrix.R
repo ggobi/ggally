@@ -31,8 +31,8 @@ test_that("byrow", {
   )
 
   k <- 1
-  for(i in 1:2) {
-    for(j in 1:3) {
+  for (i in 1:2) {
+    for (j in 1:3) {
       expect_equal(a[i,j]$ggally_check_val, k)
       k <- k + 1
     }
@@ -46,8 +46,8 @@ test_that("byrow", {
     byrow = FALSE
   )
   k <- 1
-  for(j in 1:3) {
-    for(i in 1:2) {
+  for (j in 1:3) {
+    for (i in 1:2) {
       expect_equal(a[i,j]$ggally_check_val, k)
       k <- k + 1
     }

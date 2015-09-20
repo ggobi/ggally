@@ -20,7 +20,7 @@ if(getRversion() >= "2.15.1") {
 lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   data.choose <- data[,columns]
   dn <- data.choose[sapply(data.choose,is.numeric)]
-  factor <- data[sapply(data,is.factor)]
+  factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   newdata <- NULL
   for (i in 1:p) {
@@ -62,10 +62,10 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' head(uppertriangle(flea, columns=2:4))
 #' head(uppertriangle(flea))
 #' head(uppertriangle(flea, color="species"))
-uppertriangle <- function(data,columns=1:ncol(data), color=NULL) {
+uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   data.choose <- data[,columns]
   dn <- data.choose[sapply(data.choose,is.numeric)]
-  factor <- data[sapply(data,is.factor)]
+  factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   newdata <- NULL
   for (i in 1:p) {
@@ -93,7 +93,7 @@ uppertriangle <- function(data,columns=1:ncol(data), color=NULL) {
     rp.new <- cbind(rp[,1:8],  colorcolumn)
   }
   a <- rp.new
-  b <- subset(a,(a$yvalue!="NA")&(a$xvalue!="NA"))
+  b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
   if (is.null(color)){
     data.cor <- ddply(b, .(ylab, xlab), summarise,
                       r = paste(round(cor(xvalue, yvalue, use="pairwise.complete.obs"), digits=2)),
@@ -114,7 +114,7 @@ uppertriangle <- function(data,columns=1:ncol(data), color=NULL) {
     for (i in 1:nrow(position)){
       for (j in 1:n){
         row <- position[i,]
-        df <- rbind(df, cbind(row[,3],(row[,4]+row[,6]*j/(n+1))))
+        df <- rbind(df, cbind(row[, 3], (row[, 4] + row[, 6] * j / (n + 1))))
       }
     }
     data.cor <- cbind(data.cor1, df)
@@ -204,14 +204,14 @@ ggscatmat <- function(data, columns=1:ncol(data), color=NULL){
     stop ("Not enough numeric variables to make a scatter plot matrix")
   }
 
-  a <- uppertriangle(data, columns=columns, color=color)
+  a <- uppertriangle(data, columns = columns, color = color)
   if (is.null(color)){
-    plot <- scatmat(data,columns=columns) + geom_text(data=a, aes_string(label="r"), colour="black")
+    plot <- scatmat(data, columns = columns) + geom_text(data = a, aes_string(label = "r"), colour = "black")
   } else {
-    plot <- scatmat(data,columns=columns, color=color) +
-      geom_text(data=a, aes_string(label="r", color="colorcolumn")) + labs(color = color)
+    plot <- scatmat(data, columns = columns, color = color) +
+      geom_text(data = a, aes_string(label = "r", color = "colorcolumn")) + labs(color = color)
   }
-  factor <- data.choose[sapply(data.choose,is.factor)]
+  factor <- data.choose[sapply(data.choose, is.factor)]
   if (ncol(factor) == 0){
     return(plot)
   } else {
