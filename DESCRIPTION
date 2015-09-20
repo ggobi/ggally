@@ -19,7 +19,7 @@ Authors@R: c(
     person("Edwin", "Thoen", role = "aut", email = "edwinthoen@gmail.com", comment = "ggsurv"),
     person("Amos", "Elberg", role = "aut", email = "amos.elberg@gmail.com", comment = "ggnetworkmap"))
 Description: GGally extends ggplot2 by adding several functions to it, including
-    templates to combine plots into a plot matrix, a parallel coordinates plot 
+    templates to combine plots into a plot matrix, a parallel coordinates plot
     function, and several functions to plot networks.
 VignetteBuilder: knitr
 Depends:
@@ -34,6 +34,7 @@ Suggests:
     arm (>= 1.7),
     geosphere (>= 1.3-11),
     ggmap (>= 2.3),
+    igraph (>= 1.0.0),
     intergraph (>= 2.0-0),
     knitr (>= 1.9),
     maps (>= 2.3-9),
