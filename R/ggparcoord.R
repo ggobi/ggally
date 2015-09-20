@@ -193,8 +193,8 @@ ggparcoord <- function(
     is.numeric(order) || (
       is.character(order) &&
       (order %in% c(
-        'skewness','allClass','anyClass', 'Outlying','Skewed','Clumpy',
-        'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'
+        "skewness","allClass","anyClass", "Outlying","Skewed","Clumpy",
+        "Sparse", "Striated", "Convex", "Skinny", "Stringy","Monotonic"
       ))
     )) ) {
     stop("invalid value for 'order'; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
@@ -427,16 +427,16 @@ ggparcoord <- function(
 
   if(!is.null(groupColumn)) {
     mapping2 <- aes_string(
-      x = 'variable',
-      y = 'value',
-      group = '.ID',
+      x = "variable",
+      y = "value",
+      group = ".ID",
       colour = as.character(substitute(groupCol))
     )
   } else {
     mapping2 <- aes_string(
-      x = 'variable',
-      y = 'value',
-      group = '.ID'
+      x = "variable",
+      y = "value",
+      group = ".ID"
     )
   }
   mapping2 <- add_and_overwrite_aes(mapping2,mapping)
@@ -464,13 +464,13 @@ ggparcoord <- function(
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
     if (class(splineFactor) == "AsIs") {
-      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = ggally_splineFactor[1]))
+      data.m <- ddply(data.m, ".ID", transform, spline = spline(variable, value, n = ggally_splineFactor[1]))
     } else {
-      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1]))
+      data.m <- ddply(data.m, ".ID", transform, spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1]))
     }
 
-    linexvar <- 'spline.x'
-    lineyvar <- 'spline.y'
+    linexvar <- "spline.x"
+    lineyvar <- "spline.y"
 
     if (alphaLinesIsCharacter) {
       p <- p +

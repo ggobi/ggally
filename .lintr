@@ -6,7 +6,6 @@ linters: with_defaults(
     assignment_linter = NULL, # 53
     trailing_whitespace_linter = NULL, # 52
     spaces_left_parentheses_linter = NULL, # 33
-    single_quotes_linter = NULL, # 25
     NULL
   )
 exclusions:

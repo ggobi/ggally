@@ -160,8 +160,8 @@ ggpairs <- function(
 
   args <- list(...)
   if ("printInfo" %in% names(args)) {
-    printInfo <- args[['printInfo']]
-    args[['printInfo']] <- NULL
+    printInfo <- args[["printInfo"]]
+    args[["printInfo"]] <- NULL
   } else {
     printInfo <- FALSE
   }
