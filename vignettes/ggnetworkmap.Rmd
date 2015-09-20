@@ -1,5 +1,7 @@
 ---
 title: "ggnetworkmap: network maps with ggplot2"
+author: Amos Elberg
+date: January 10, 2015
 output:
   html_document:
     highlight: default
@@ -61,6 +63,11 @@ flights %v% "mygroup" <- sample(letters[1:4], network.size(flights), replace = T
 usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
   geom_polygon(aes(group = group), color = "grey65",
                fill = "#f9f9f9", size = 0.2)
+
+delete.vertices(flights, which(flights %v% "lon" < min(usa$data$long)))
+delete.vertices(flights, which(flights %v% "lon" > max(usa$data$long)))
+delete.vertices(flights, which(flights %v% "lat" < min(usa$data$lat)))
+delete.vertices(flights, which(flights %v% "lat" > max(usa$data$lat)))
 
 # overlay network data to map
 ggnetworkmap(usa, flights, size = 4, great.circles = TRUE,
