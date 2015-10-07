@@ -128,6 +128,14 @@ test_that("examples", {
   expect_error(ggnet(n, arrow.size = -1), "incorrect arrow.size")
   expect_warning(ggnet(n, arrow.size = 1), "arrow.size ignored")
 
+  ### --- test arrow.gap
+
+  expect_error(ggnet(n, arrow.size = 12, arrow.gap = -1), "incorrect arrow.gap")
+  expect_warning(ggnet(n, arrow.size = 12, arrow.gap = 0.1), "arrow.gap ignored")
+
+  m <- network::network(m, directed = TRUE)
+  ggnet(m, arrow.size = 12, arrow.gap = 0.1)
+
   ### --- test degree centrality
 
   ggnet(n, weight = "degree")

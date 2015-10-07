@@ -84,6 +84,10 @@ if(getRversion() >= "2.15.1") {
 #' @param arrow.size the size of the arrows for directed network edges, in
 #' points. See \code{\link[grid]{arrow}} for details.
 #' Defaults to \code{0} (no arrows).
+#' @param arrow.gap the size of the gap to leave between the end of the edges
+#' and the receiving nodes of a directed network, as a fraction of edge length.
+#' This setting aims at improving the display of edge arrows.
+#' Defaults to \code{0} (no gap).
 #' @param arrow.type the type of the arrows for directed network edges. See
 #' \code{\link[grid]{arrow}} for details.
 #' Defaults to \code{"closed"}.
@@ -177,6 +181,7 @@ ggnet <- function(
   segment.label    = NULL,
   segment.size     = 0.25,
   arrow.size       = 0,
+  arrow.gap        = 0,
   arrow.type       = "closed",
   label            = FALSE,
   label.nodes      = label,
@@ -331,6 +336,13 @@ ggnet <- function(
     arrow.size = 0
   }
 
+  if (!is.numeric(arrow.gap) || arrow.gap < 0) {
+    stop("incorrect arrow.gap value")
+  } else if (arrow.gap > 0 & is_dir == "graph") {
+    warning("network is undirected; arrow.gap ignored")
+    arrow.gap = 0
+  }
+
   if (network::is.hyper(net)) {
     stop("ggnet cannot plot hyper graphs")
   }
@@ -363,11 +375,11 @@ ggnet <- function(
 
     # prevent namespace conflict with igraph
     if ("package:igraph" %in% search()) {
-      
+
       y = ifelse(is_dir == "digraph", "directed", "undirected")
       z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[ x ]
       data$weight = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
-      
+
     } else {
       data$weight = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
     }
@@ -546,6 +558,9 @@ ggnet <- function(
 
   }
 
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))
+
   data = cbind(data, xy)
 
   # -- edge list ---------------------------------------------------------------
@@ -569,6 +584,12 @@ ggnet <- function(
   p = ggplot(data, aes(x = x, y = y))
 
   if (nrow(edges) > 0) {
+
+    if (arrow.gap > 0) {
+      edges = transform(edges,
+                        X2 = X1 + (1 - arrow.gap) * (X2 - X1),
+                        Y2 = Y1 + (1 - arrow.gap) * (Y2 - Y1))
+    }
 
     p = p +
       geom_segment(
