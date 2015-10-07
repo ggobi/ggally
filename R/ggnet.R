@@ -586,9 +586,12 @@ ggnet <- function(
   if (nrow(edges) > 0) {
 
     if (arrow.gap > 0) {
+
+      arrow.gap = with(edges, arrow.gap / sqrt((X2 - X1)^2 + (Y2 - Y1)^2))
       edges = transform(edges,
                         X2 = X1 + (1 - arrow.gap) * (X2 - X1),
                         Y2 = Y1 + (1 - arrow.gap) * (Y2 - Y1))
+
     }
 
     p = p +
