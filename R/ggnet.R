@@ -1,4 +1,4 @@
-if(getRversion() >= "2.15.1") {
+if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("X1", "X2", "Y1", "Y2", "midX", "midY"))
 }
 
@@ -84,10 +84,11 @@ if(getRversion() >= "2.15.1") {
 #' @param arrow.size the size of the arrows for directed network edges, in
 #' points. See \code{\link[grid]{arrow}} for details.
 #' Defaults to \code{0} (no arrows).
-#' @param arrow.gap the size of the gap to leave between the end of the edges
-#' and the receiving nodes of a directed network, as a fraction of edge length.
-#' This setting aims at improving the display of edge arrows.
-#' Defaults to \code{0} (no gap).
+#' @param arrow.gap a setting aimed at improving the display of edge arrows by
+#' plotting slightly shorter edges. Accepts any value between \code{0} and
+#' \code{1}, where values close to \code{0.95} will generally achieve good
+#' results if the size of the nodes is small.
+#' Defaults to \code{0} (no shortening).
 #' @param arrow.type the type of the arrows for directed network edges. See
 #' \code{\link[grid]{arrow}} for details.
 #' Defaults to \code{"closed"}.
@@ -156,6 +157,9 @@ if(getRversion() >= "2.15.1") {
 #'   p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
 #'
 #'   ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
+#'
+#'   # edge arrows on a directed network
+#'   ggnet(network(m, directed = TRUE), arrow.gap = 0.9, arrow.size = 10)
 #'
 #' }
 ggnet <- function(
@@ -336,7 +340,7 @@ ggnet <- function(
     arrow.size = 0
   }
 
-  if (!is.numeric(arrow.gap) || arrow.gap < 0) {
+  if (!is.numeric(arrow.gap) || arrow.gap < 0 || arrow.gap > 1) {
     stop("incorrect arrow.gap value")
   } else if (arrow.gap > 0 & is_dir == "graph") {
     warning("network is undirected; arrow.gap ignored")
@@ -587,10 +591,22 @@ ggnet <- function(
 
     if (arrow.gap > 0) {
 
-      arrow.gap = with(edges, arrow.gap / sqrt((X2 - X1)^2 + (Y2 - Y1)^2))
+      x.length = with(edges, abs(X2 - X1))
+      y.length = with(edges, abs(Y2 - Y1))
+
+      k = 10
+      x.length = cut_interval(x.length, k, labels = 1:k)
+      y.length = cut_interval(y.length, k, labels = 1:k)
+
+      arrow.gap = rev(seq(arrow.gap - 0.05, arrow.gap, length.out = k))
+      x.length = arrow.gap[ x.length ]
+      y.length = arrow.gap[ y.length ]
+
       edges = transform(edges,
-                        X2 = X1 + (1 - arrow.gap) * (X2 - X1),
-                        Y2 = Y1 + (1 - arrow.gap) * (Y2 - Y1))
+                        X2 = X1 + x.length * (X2 - X1),
+                        Y2 = Y1 + y.length * (Y2 - Y1),
+                        X1 = X2 + x.length * (X1 - X2),
+                        Y1 = Y2 + y.length * (Y1 - Y2))
 
     }
 

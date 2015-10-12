@@ -134,7 +134,7 @@ test_that("examples", {
   expect_warning(ggnet(n, arrow.size = 12, arrow.gap = 0.1), "arrow.gap ignored")
 
   m <- network::network(m, directed = TRUE)
-  ggnet(m, arrow.size = 12, arrow.gap = 0.1)
+  ggnet(m, arrow.size = 12, arrow.gap = 0.9)
 
   ### --- test degree centrality
 
