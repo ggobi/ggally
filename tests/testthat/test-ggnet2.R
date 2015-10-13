@@ -99,7 +99,7 @@ test_that("examples", {
   expect_warning(ggnet2(n, arrow.size = 12, arrow.gap = 0.1), "arrow.gap ignored")
 
   m <- network::network(m, directed = TRUE)
-  ggnet2(m, arrow.size = 12, arrow.gap = 0.9)
+  ggnet2(m, arrow.size = 12, arrow.gap = 0.05)
 
   # test max_size
   expect_error(ggnet2(n, max_size = NA), "incorrect max_size")

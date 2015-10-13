@@ -86,8 +86,8 @@ if (getRversion() >= "2.15.1") {
 #' Defaults to \code{0} (no arrows).
 #' @param arrow.gap a setting aimed at improving the display of edge arrows by
 #' plotting slightly shorter edges. Accepts any value between \code{0} and
-#' \code{1}, where values close to \code{0.95} will generally achieve good
-#' results if the size of the nodes is small.
+#' \code{1}, where a value of \code{0.05} will generally achieve good results
+#' when the size of the nodes is reasonably small.
 #' Defaults to \code{0} (no shortening).
 #' @param arrow.type the type of the arrows for directed network edges. See
 #' \code{\link[grid]{arrow}} for details.
@@ -160,7 +160,7 @@ if (getRversion() >= "2.15.1") {
 #'   ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
 #'
 #'   # edge arrows on a directed network
-#'   ggnet(network(m, directed = TRUE), arrow.gap = 0.9, arrow.size = 10)
+#'   ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
 #'
 #' }
 ggnet <- function(
@@ -595,19 +595,13 @@ ggnet <- function(
       x.length = with(edges, abs(X2 - X1))
       y.length = with(edges, abs(Y2 - Y1))
 
-      k = 10
-      x.length = cut_interval(x.length, k, labels = 1:k)
-      y.length = cut_interval(y.length, k, labels = 1:k)
-
-      arrow.gap = rev(seq(arrow.gap - 0.05, arrow.gap, length.out = k))
-      x.length = arrow.gap[ x.length ]
-      y.length = arrow.gap[ y.length ]
+      arrow.gap = with(edges, arrow.gap / sqrt(x.length ^ 2 + y.length ^ 2))
 
       edges = transform(edges,
-                        X2 = X1 + x.length * (X2 - X1),
-                        Y2 = Y1 + y.length * (Y2 - Y1),
-                        X1 = X2 + x.length * (X1 - X2),
-                        Y1 = Y2 + y.length * (Y1 - Y2))
+                        X1 = X1 + arrow.gap * x.length,
+                        Y1 = Y1 + arrow.gap * y.length,
+                        X2 = X1 + (1 - arrow.gap) * x.length,
+                        Y2 = Y1 + (1 - arrow.gap) * y.length)
 
     }
 
