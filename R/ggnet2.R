@@ -1037,9 +1037,9 @@ ggnet2 <- function(
 
     label.color = set_node(label.color, "label.color", mode = FALSE)
 
-    # if (!is_col(label.color)) {
-    #   stop("incorrect label.color value")
-    # }
+    if (!is_col(label.color)) {
+      stop("incorrect label.color value")
+    }
 
     label.size = set_node(label.size, "label.size", mode = FALSE)
 
