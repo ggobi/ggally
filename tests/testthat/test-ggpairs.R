@@ -291,6 +291,35 @@ test_that("dates", {
 })
 
 
+test_that("mapping", {
+  pm <- ggpairs(tips, mapping = 1:3)
+  expect_equal(pm$xAxisLabels, names(tips)[1:3])
+
+  pm <- ggpairs(tips, columns = 1:3)
+  expect_equal(pm$xAxisLabels, names(tips)[1:3])
+
+  expect_error(
+    {
+      ggpairs(tips, columns = 1:3, mapping = 1:3)
+    },
+    "'mapping' should not be numeric"
+  )
+})
+
+test_that("user functions", {
+
+  p0 <- ggally_points(tips, ggplot2::aes(x = total_bill, y = tip))
+
+  pm1 <- ggpairs(tips, 1:2, lower = list(continuous = "points"))
+  p1 <- pm1[2,1]
+  expect_equivalent(p0, p1)
+
+  pm2 <- ggpairs(tips, 1:2, lower = list(continuous = ggally_points))
+  p2 <- pm2[2,1]
+  expect_equivalent(p0, p2)
+})
+
+
 
 
 
