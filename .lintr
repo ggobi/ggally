@@ -12,18 +12,3 @@ exclusions:
     "R/ggnet.R",
     "R/ggnet2.R"
   )
-code_to_lint:
-  # remove line in "linters:" above
-  lintr::lint_package("./")
-  # fix errors,
-  # repeat until no errors
-code_to_create:
-  library(magrittr)
-  library(dplyr)
-  lintr::lint_package() %>%
-    as.data.frame %>%
-    group_by(linter) %>%
-    tally(sort = TRUE) %$%
-    sprintf("linters: with_defaults(\n    %s\n    NULL\n  )\n",
-            paste0(linter, " = NULL, # ", n, collapse="\n    ")) %>%
-    cat()
