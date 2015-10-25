@@ -23,15 +23,16 @@ lintr_code_to_create_lintr:
             paste0(linter, " = NULL, # ", n, collapse="\n    ")) %>%
     cat()
 test_package:
-  tp <- function(package = "./", ...) {
+  tp <- function(..., package = "./") {
     devtools::document(package)
     devtools::load_all(package)
     testthat::test_package(devtools::as.package(package)$package, ...)
   }
   tp()
 test_file:
-  tf <- function(file = "gg-plots") {
-    testthat::test_file(file.path("tests", "testthat", paste0("test-", file, ".R")))
+  tf <- function(file = "gg-plots", package = "./") {
+    devtools::load_all(package)
+    testthat::test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
   }
   tf("gg-plots")
   tf("ggpairs")
