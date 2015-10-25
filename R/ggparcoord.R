@@ -572,7 +572,7 @@ column_is_factor <- function(df) {
 #' @return character vector of variable ordered according to the given
 #'   scagnostic measure
 scag_order <- function(scag, vars, measure) {
-  n <- length(vars)
+
   scag <- sort(scag[measure, ], decreasing = TRUE)
   scagNames <- names(scag)
 

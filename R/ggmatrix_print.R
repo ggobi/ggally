@@ -119,7 +119,6 @@ print.ggmatrix <- function(
 
   displayXAxisLabels <- !is.null(x$xAxisLabels)
   displayYAxisLabels <- !is.null(x$yAxisLabels)
-  displayTitle <- !is.null(x$title)
 
   # If using internal axis labels, extend the plotting region out since
   # variable names on the margins will not be used
