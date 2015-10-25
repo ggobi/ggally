@@ -112,7 +112,7 @@ getPlot <- function(x, i, j){
       # print("adding custom gg")
       p <- p + x$gg
     }
-
+  }
   # stop("fix this")
   # if (is.character(plot_text)) {
   #   if (plot_text != "blank") {
