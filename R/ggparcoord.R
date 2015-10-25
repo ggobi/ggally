@@ -406,7 +406,7 @@ ggparcoord <- function(
 
     require_pkgs("scagnostics")
     scag <- scagnostics::scagnostics(saveData2)
-    data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(saveData2),order))
+    data.m$variable <- factor(data.m$variable, levels = scag_order(scag, names(saveData2), order))
   }
   else if(tolower(order) == "skewness") {
     abs.skew <- abs(apply(saveData2,2,skewness))
@@ -516,7 +516,7 @@ ggparcoord <- function(
 #'
 #' @keywords internal
 #' @param df data frame to extract variable types from
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @author Barret Schloerke
 #' @return character vector with variable types, with names corresponding to
 #'   the variable names from df
 column_is_character <- function(df) {
@@ -529,43 +529,60 @@ column_is_factor <- function(df) {
   names(x)[x]
 }
 
-#' Find order of variables
-#'
-#' Find order of variables based on a specified scagnostic measure
-#' by maximizing the index values of that measure along the path.
-#'
-#' @param scag \code{scagnostics} object
-#' @param vars character vector of the variables to be ordered
-#' @param measure scagnostics measure to order according to
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
-#' @return character vector of variable ordered according to the given
-#'   scagnostic measure
-scagOrder <- function(scag, vars, measure) {
-  p <- length(vars)
-  scag <- sort(scag[measure,],decreasing=TRUE)
-  d.scag <- data.frame(var1=NA,var2=NA,val=scag)
-  for (i in 1:dim(d.scag)[1]) {
-    d.scag$var1[i] <- substr(names(scag)[i],1,regexpr(" * ",names(scag)[i])-1)
-    d.scag$var2[i] <- substr(names(scag)[i],regexpr(" * ",names(scag)[i])+3,nchar(names(scag)[i]))
-  }
-  a <- c(d.scag$var1[1],d.scag$var2[1])
-  d.scag <- d.scag[-1,]
-  a <- a[order(c(min(grep(a[1],rownames(d.scag))),min(grep(a[2],rownames(d.scag)))),
-    decreasing=TRUE)]
-  d.scag <- d.scag[-grep(a[1],rownames(d.scag)),]
+scag_order <- function(scag, vars, measure) {
+  n <- length(vars)
+  scag <- sort(scag[measure, ], decreasing = TRUE)
+  scagNames <- names(scag)
 
-  i = 1
-  while(length(a) < p) {
-    pNames <- d.scag[i, 1:2]
-    namesUsed <- pNames %in% a
-    if (! all(namesUsed)) {
-      a <- append(a, pNames[!namesUsed])
+  # retrieve all names.  assume name doesn't contain a space
+  nameLocs <- regexec("^([^ ]+) \\* ([^ ]+)$", scagNames)
+
+  colNames <- lapply(seq_along(nameLocs), function(i) {
+    nameLoc <- nameLocs[[i]]
+    scagName <- scagNames[[i]]
+    # retrieve the column name from "FIRSTNAME * SECONDNAME"
+    substr(rep(scagName, 2), nameLoc[-1], nameLoc[-1] + attr(nameLoc, "match.length")[-1] - 1)
+  })
+
+  ret <- c()
+  colNamesLength <- length(colNames)
+  colNameValues <- unlist(colNames)
+  for (i in seq_along(colNames)) {
+    cols <- colNames[[i]]
+    colsUsed <- cols %in% ret
+    # if none of the columns have been added...
+    if (colsUsed[1] == FALSE && colsUsed[2] == FALSE) {
+      # find out which column comes next in the set, append that one first
+      if (i < colNamesLength) {
+        remainingColumns = colNameValues[(2 * (i + 1)):(2 * colNamesLength)]
+        col1Pos <- which.min(cols[1] == remainingColumns)
+        col2Pos <- which.min(cols[2] == remainingColumns)
+        if (col2Pos < col1Pos) {
+          cols <- rev(cols)
+        }
+        ret <- append(ret, cols)
+      } else {
+        # nothing left in set, append both
+        ret <- append(ret, cols)
+      }
+
+    # if only the first hasn't been added...
+    } else if (colsUsed[1] == FALSE) {
+      ret <- append(ret, cols[1])
+
+    # if only the second hasn't been added...
+    } else if (colsUsed[2] == FALSE) {
+      ret <- append(ret, cols[2])
     }
-    i = i + 1
   }
 
-  return(a)
+  if (length(ret) != length(vars)) {
+    stop(paste0("Could not compute a correct ordering: ", length(vars) - length(ret), " values are missing. Missing: ", paste0(vars[! (vars %in% ret)], collapse = ", ")))
+  }
+
+  return(ret)
 }
+
 
 #' Order axis variables
 #'
