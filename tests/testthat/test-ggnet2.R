@@ -108,10 +108,10 @@ test_that("examples", {
   expect_error(ggnet2(n, na.rm = 1:2), "incorrect na.rm")
   expect_error(ggnet2(n, na.rm = "xyz"), "not found")
 
-  n %v% "missing" = ifelse(n %v% "phono" == "vowel", NA, n %v% "phono")
+  n %v% "missing" <- ifelse(n %v% "phono" == "vowel", NA, n %v% "phono")
   expect_message(ggnet2(n, na.rm = "missing"), "removed")
 
-  n %v% "missing" = NA
+  n %v% "missing" <- NA
   expect_warning(ggnet2(n, na.rm = "missing"), "removed all nodes")
 
   # test size = "degree"
@@ -249,7 +249,7 @@ test_that("examples", {
   ### --- test igraph functionality
 
   # test igraph conversion
-  p = ggnet2(asIgraph(n), color = "group")
+  p <- ggnet2(asIgraph(n), color = "group")
   expect_null(p$guides$colour)
 
   # test igraph degree

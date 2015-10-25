@@ -215,7 +215,7 @@ test_that("examples", {
   ### --- test igraph functionality
 
   # test igraph conversion
-  p = ggnet(asIgraph(n))
+  p <- ggnet(asIgraph(n))
   expect_null(p$guides$colour)
   expect_equal(length(p$layers), 2)
 
