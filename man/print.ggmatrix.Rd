@@ -5,8 +5,7 @@
 \title{Print ggpair object}
 \usage{
 \method{print}{ggmatrix}(x, leftWidthProportion = 0.2,
-  bottomHeightProportion = 0.1, spacingProportion = 0.03,
-  showStrips = NULL, ...)
+  bottomHeightProportion = 0.1, spacingProportion = 0.03, ...)
 }
 \arguments{
 \item{x}{ggpair object to be plotted}
@@ -17,7 +16,7 @@
 
 \item{spacingProportion}{proportion of a plot area devoted to the space between plots}
 
-\item{...}{not used}
+\item{...}{ignored}
 }
 \description{
 Specialized method to print the ggpair object-

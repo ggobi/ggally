@@ -12,7 +12,7 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
 
-\item{mapping}{aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}}
+\item{mapping}{aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.}
 
 \item{columns}{which columns are used to make plots.  Defaults to all columns.}
 
@@ -36,7 +36,7 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
 
 \item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
 
-\item{verbose}{boolean to determine the printing of "Plot #1, Plot #2...."}
+\item{verbose}{boolean to determine the printing of "Plot #1, Plot #2..."}
 }
 \value{
 ggpair object that if called, will print
