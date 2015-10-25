@@ -77,6 +77,7 @@
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
+#' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
 #' @keywords hplot
@@ -150,15 +151,13 @@ ggpairs <- function(
   ...,
   axisLabels = "show",
   columnLabels = colnames(data[,columns]),
+  showStrips = NULL,
   legends = FALSE,
   verbose = FALSE
 ){
 
   if (! is.null(params)) {
-    stop(str_c(
-      "'params' is a depricated argument.  ",
-      "Please 'wrap' the function to supply arguments. help(\"wrap\", package = \"GGally\")"
-    ))
+    display_param_error()
   }
 
   args <- list(...)
@@ -430,9 +429,11 @@ ggpairs <- function(
     byrow = TRUE,
     nrow = length(columns),
     ncol = length(columns),
-    axisLabels = axisLabels,
-    xAxisLabels = columnLabels,
-    yAxisLabels = columnLabels,
+    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    showStrips = showStrips,
+    showXAxisPlotLabels = identical(axisLabels, "show"),
+    showYAxisPlotLabels = identical(axisLabels, "show"),
     title = title,
     verbose = verbose,
     data = data,
@@ -544,10 +545,7 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
   }
 
   if (! is.null(obj$params)) {
-    stop(str_c(
-      "'", name, "$params' is a depricated argument.  ",
-      "Please 'wrap' the function to supply arguments"
-    ))
+    display_param_error()
   }
 
   obj
@@ -570,6 +568,16 @@ get_subtype_name <- function(subType) {
     }
   }
 }
+
+
+display_param_error <- function() {
+  stop(str_c(
+    "'params' is a depricated argument.  ",
+    "Please 'wrap' the function to supply arguments. ",
+    "help(\"wrap\", package = \"GGally\")"
+  ))
+}
+
 
 
 #diamondMatrix <- ggpairs(

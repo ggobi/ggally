@@ -5,20 +5,21 @@
 \title{ggpairs - A ggplot2 Matrix}
 \usage{
 ggmatrix(plots, nrow, ncol, xAxisLabels = rep("", length(plots)),
-  yAxisLabels = rep("", length(plots)), axisLabels = "show", title = NULL,
-  byrow = TRUE, verbose = FALSE, data = NULL, gg = NULL,
-  legends = FALSE)
+  yAxisLabels = rep("", length(plots)), title = NULL, byrow = TRUE,
+  showStrips = NULL, showAxisPlotLabels = TRUE,
+  showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, verbose = FALSE,
+  data = NULL, gg = NULL, legends = FALSE)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
 
 \item{nrow,ncol}{number of rows and columns}
 
-\item{xAxisLabels,yAxisLabels,title}{labels for plot}
-
-\item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
+\item{xAxisLabels,yAxisLabels,title}{labels for plot. Set the variable to \code{NULL} to not be displayed}
 
 \item{byrow}{boolean that determines whether the plots should be ordered by row or by column}
+
+\item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
 \item{verbose}{boolean to determine the printing of "Plot #1, Plot #2...."}
 

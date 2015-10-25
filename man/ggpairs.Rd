@@ -7,7 +7,7 @@
 ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
   upper = list(), lower = list(), diag = list(), params = NULL, ...,
   axisLabels = "show", columnLabels = colnames(data[, columns]),
-  legends = FALSE, verbose = FALSE)
+  showStrips = NULL, legends = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -31,6 +31,8 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
 \item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 
 \item{columnLabels}{label names to be displayed.  Defaults to names of columns being used.}
+
+\item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
 \item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
 
