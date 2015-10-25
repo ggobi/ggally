@@ -998,7 +998,7 @@ get_x_axis_labels <- function(p, xRange) {
   get_raw_grob_by_name <- function(g, name) {
     for (item in g$grobs) {
       if (str_detect(item$name, name) ) {
-        return(item)
+        return(item$children[[1]])
       }
     }
     NULL
