@@ -4,7 +4,7 @@
 \alias{str.ggmatrix}
 \title{ggmatrix structure}
 \usage{
-\method{str}{ggmatrix}(object, ..., raw = FALSE)
+str.ggmatrix(object, ..., raw = FALSE)
 }
 \arguments{
 \item{object}{ggmatrix object to be viewed}
