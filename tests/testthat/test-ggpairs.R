@@ -298,8 +298,7 @@ test_that("mapping", {
   pm <- ggpairs(tips, columns = 1:3)
   expect_equal(pm$xAxisLabels, names(tips)[1:3])
 
-  expect_error(
-    {
+  expect_error({
       ggpairs(tips, columns = 1:3, mapping = 1:3)
     },
     "'mapping' should not be numeric"
