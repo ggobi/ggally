@@ -38,7 +38,7 @@ test_that("cor", {
     ggplot2::aes(x = total_bill, y = tip, color = I("blue")),
     use = "complete.obs"
   )
-  expect_equal(as.character(get("geom_params", envir = p$layers[[1]])$colour), "blue")
+  expect_equal(deparse(get("aes_params", envir = p$layers[[1]])$colour), "I(\"blue\")")
 
 })
 
@@ -73,9 +73,9 @@ test_that("dates", {
 
   class(nas) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(nas, ggplot2::aes(x = "date", y = "ozone"))
-  expect_equal(get("geom_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
+  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
   p <- ggally_cor(nas, ggplot2::aes(y = "date", x = "ozone"))
-  expect_equal(get("geom_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
+  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
 
   p <- ggally_barDiag(nas, ggplot2::aes(x = date))
   expect_equal(as.character(p$mapping$x), "date")

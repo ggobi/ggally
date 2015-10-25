@@ -232,7 +232,7 @@ test_that("basic", {
   col <- "blue"
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), shadeBox = col)
   expect_equal(length(p$layers), 2)
-  expect_equal(get("geom_params", envir = p$layers[[1]])$colour, col)
+  expect_equal(get("aes_params", envir = p$layers[[1]])$colour, col)
 
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), mapping = ggplot2::aes(size = 1))
   expect_equal(length(p$layers), 1)

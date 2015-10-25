@@ -39,8 +39,8 @@ test_that("examples", {
   p <- do_gg(dt)
 
   expect_equal(length(p$layers), 3)
-  expect_equal(as.character(get("geom_params", envir = p$layers[[1]])$colour), "red")
-  expect_equal(as.character(get("geom_params", envir = p$layers[[2]])$colour), "blue")
+  expect_equal(as.character(get("aes_params", envir = p$layers[[1]])$colour), "red")
+  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$colour), "blue")
 
 })
 
@@ -115,7 +115,7 @@ test_that("fill", {
   }
 
   p <- do_gg_fill(fill = "green")
-  expect_equal(as.character(get("geom_params", envir = p$layers[[2]])$fill), "green")
+  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$fill), "green")
   p <- do_gg_fill(var_fill = "gid")
   expect_equal(as.character(get("mapping", envir = p$layers[[2]])$fill), "fill")
 
