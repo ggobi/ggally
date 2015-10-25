@@ -284,9 +284,9 @@ ggnetworkmap <- function (
   # -- edge arrows -------------------------------------------------------------
 
   if (!missing(arrow.size) & arrow.size > 0) {
-    edge_args$arrow <- substitute(grid::arrow(
+    edge_args$arrow <- substitute(arrow(
       type   = "closed",
-      length = grid::unit(arrow.size, "cm")
+      length = unit(arrow.size, "cm")
     ))
   }
 

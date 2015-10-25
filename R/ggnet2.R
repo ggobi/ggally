@@ -196,7 +196,6 @@ if (getRversion() >= "2.15.1") {
 #' \code{size}, in which case the nodes of the primary mode will be mapped as
 #' \code{"actor"}, and the nodes of the secondary mode will be mapped as
 #' \code{"event"}.
-#' @importFrom grid arrow unit
 #' @examples
 #' if(require(network)) {
 #'
@@ -880,9 +879,9 @@ ggnet2 <- function(
         color  = edge.color,
         alpha  = edge.alpha,
         lty    = edge.lty,
-        arrow  = grid::arrow(
+        arrow  = arrow(
           type   = arrow.type,
-          length = grid::unit(arrow.size, "pt")
+          length = unit(arrow.size, "pt")
         )
       )
 

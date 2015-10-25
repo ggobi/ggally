@@ -17,7 +17,8 @@ ggnet2(net, mode = "fruchtermanreingold", layout.par = NULL,
   edge.lty = "solid", edge.size = 0.25, edge.label = NULL,
   edge.label.alpha = 1, edge.label.color = label.color,
   edge.label.fill = "white", edge.label.size = max_size/2, arrow.size = 0,
-  arrow.type = "closed", legend.size = 9, legend.position = "right", ...)
+  arrow.gap = 0, arrow.type = "closed", legend.size = 9,
+  legend.position = "right", ...)
 }
 \arguments{
 \item{net}{an object of class \code{\link[network]{network}}, or any object
@@ -217,6 +218,12 @@ to \code{4.5}.}
 points. See \code{\link[grid]{arrow}} for details.
 Defaults to \code{0} (no arrows).}
 
+\item{arrow.gap}{a setting aimed at improving the display of edge arrows by
+plotting slightly shorter edges. Accepts any value between \code{0} and
+\code{1}, where a value of \code{0.05} will generally achieve good results
+when the size of the nodes is reasonably small.
+Defaults to \code{0} (no shortening).}
+
 \item{arrow.type}{the type of the arrows for directed network edges. See
 \code{\link[grid]{arrow}} for details.
 Defaults to \code{"closed"}.}
@@ -292,6 +299,9 @@ if(require(network)) {
   n \%e\% "weight" <- sample(1:3, network.edgecount(n), replace = TRUE)
   ggnet2(n, edge.size = "weight", edge.label = "weight")
 
+  # edge arrows on a directed network
+  ggnet2(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+
   # Padgett's Florentine wedding data
   data(flo, package = "network")
   flo
@@ -303,7 +313,8 @@ if(require(network)) {
 }
 }
 \author{
-Moritz Marbach and Francois Briatte
+Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+Pedro Jordano and Ming-Yu Liu
 }
 \seealso{
 \code{\link{ggnet}} in this package,

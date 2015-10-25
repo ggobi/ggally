@@ -10,11 +10,11 @@ ggnet(net, mode = "fruchtermanreingold", layout.par = NULL,
   weight.max = NA, weight.cut = FALSE, group = NULL, group.legend = NA,
   node.group = group, node.color = NULL, node.alpha = alpha,
   segment.alpha = alpha, segment.color = "grey50", segment.label = NULL,
-  segment.size = 0.25, arrow.size = 0, arrow.type = "closed",
-  label = FALSE, label.nodes = label, label.size = size/2,
-  label.trim = FALSE, legend.size = 9, legend.position = "right",
-  names = c("", ""), quantize.weights = FALSE, subset.threshold = 0,
-  top8.nodes = FALSE, trim.labels = FALSE, ...)
+  segment.size = 0.25, arrow.size = 0, arrow.gap = 0,
+  arrow.type = "closed", label = FALSE, label.nodes = label,
+  label.size = size/2, label.trim = FALSE, legend.size = 9,
+  legend.position = "right", names = c("", ""), quantize.weights = FALSE,
+  subset.threshold = 0, top8.nodes = FALSE, trim.labels = FALSE, ...)
 }
 \arguments{
 \item{net}{an object of class \code{\link[network]{network}}, or any object
@@ -112,6 +112,12 @@ Defaults to \code{0.25}.}
 points. See \code{\link[grid]{arrow}} for details.
 Defaults to \code{0} (no arrows).}
 
+\item{arrow.gap}{a setting aimed at improving the display of edge arrows by
+plotting slightly shorter edges. Accepts any value between \code{0} and
+\code{1}, where a value of \code{0.05} will generally achieve good results
+when the size of the nodes is reasonably small.
+Defaults to \code{0} (no shortening).}
+
 \item{arrow.type}{the type of the arrows for directed network edges. See
 \code{\link[grid]{arrow}} for details.
 Defaults to \code{"closed"}.}
@@ -197,10 +203,14 @@ if (require(network)){
 
   ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
 
+  # edge arrows on a directed network
+  ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+
 }
 }
 \author{
-Moritz Marbach and Francois Briatte
+Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+Pedro Jordano and Ming-Yu Liu
 }
 \seealso{
 \code{\link{ggnet2}} in this package,

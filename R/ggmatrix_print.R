@@ -82,7 +82,7 @@ first_non_null <- function(...) {
 #' @param ... ignored
 #' @method print ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport grid.draw
+#' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
