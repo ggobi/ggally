@@ -547,7 +547,7 @@ ggparcoord <- function(
 #'
 #' @keywords internal
 #' @param df data frame to extract variable types from
-#' @author Jason Crowley \email{crowley.jason.s@gmail.com}
+#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
 #' @return character vector with variable types, with names corresponding to
 #'   the variable names from df
 column_is_character <- function(df) {
