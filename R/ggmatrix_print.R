@@ -347,7 +347,16 @@ print.ggmatrix <- function(
           )
         )
 
-        pushViewport(vplayout( 2 * (x$nrow), ifelse(x$showYAxisPlotLabels, 2 * columnPos, 2 * columnPos - 1)))
+        pushViewport(
+          vplayout(
+            2 * (x$nrow),
+            ifelse(
+              x$showYAxisPlotLabels,
+              2 * columnPos,
+              2 * columnPos - 1
+            )
+          )
+        )
         pushViewport(vpBAxis)
           for (bAxisPos in 1:grobLength) {
             pushViewport(vplayout(1, bAxisPos * 2 - 1))

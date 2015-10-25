@@ -596,7 +596,7 @@ scag_order <- function(scag, vars, measure) {
     if (colsUsed[1] == FALSE && colsUsed[2] == FALSE) {
       # find out which column comes next in the set, append that one first
       if (i < colNamesLength) {
-        remainingColumns = colNameValues[(2 * (i + 1)):(2 * colNamesLength)]
+        remainingColumns <- colNameValues[(2 * (i + 1)):(2 * colNamesLength)]
         col1Pos <- which.min(cols[1] == remainingColumns)
         col2Pos <- which.min(cols[2] == remainingColumns)
         if (col2Pos < col1Pos) {
@@ -619,7 +619,11 @@ scag_order <- function(scag, vars, measure) {
   }
 
   if (length(ret) != length(vars)) {
-    stop(paste0("Could not compute a correct ordering: ", length(vars) - length(ret), " values are missing. Missing: ", paste0(vars[! (vars %in% ret)], collapse = ", ")))
+    stop(str_c(
+      "Could not compute a correct ordering: ",
+      length(vars) - length(ret), " values are missing. ",
+      "Missing: ", paste0(vars[! (vars %in% ret)], collapse = ", ")
+    ))
   }
 
   return(ret)
