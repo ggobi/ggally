@@ -29,3 +29,9 @@ test_package:
     testthat::test_package(devtools::as.package(package)$package, ...)
   }
   tp()
+test_file:
+  tf <- function(file = "gg-plots") {
+    testthat::test_file(file.path("tests", "testthat", paste0("test-", file, ".R")))
+  }
+  tf("gg-plots")
+  tf("ggpairs")
