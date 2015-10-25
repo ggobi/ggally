@@ -5,6 +5,7 @@ TODO
 R/.DS_Store
 .git
 .travis.yml
+.covr
 figure
 ggmapTemp.png
 README.html
