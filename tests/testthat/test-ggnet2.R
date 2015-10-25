@@ -93,6 +93,14 @@ test_that("examples", {
   expect_error(ggnet2(n, arrow.size = -1), "incorrect arrow.size")
   expect_warning(ggnet2(n, arrow.size = 1), "arrow.size ignored")
 
+  # test arrow.gap
+
+  expect_error(ggnet2(n, arrow.size = 12, arrow.gap = -1), "incorrect arrow.gap")
+  expect_warning(ggnet2(n, arrow.size = 12, arrow.gap = 0.1), "arrow.gap ignored")
+
+  m <- network::network(m, directed = TRUE)
+  ggnet2(m, arrow.size = 12, arrow.gap = 0.05)
+
   # test max_size
   expect_error(ggnet2(n, max_size = NA), "incorrect max_size")
 
@@ -100,10 +108,10 @@ test_that("examples", {
   expect_error(ggnet2(n, na.rm = 1:2), "incorrect na.rm")
   expect_error(ggnet2(n, na.rm = "xyz"), "not found")
 
-  n %v% "missing" <- ifelse(n %v% "phono" == "vowel", NA, n %v% "phono")
+  n %v% "missing" = ifelse(n %v% "phono" == "vowel", NA, n %v% "phono")
   expect_message(ggnet2(n, na.rm = "missing"), "removed")
 
-  n %v% "missing" <- NA
+  n %v% "missing" = NA
   expect_warning(ggnet2(n, na.rm = "missing"), "removed all nodes")
 
   # test size = "degree"
@@ -241,9 +249,12 @@ test_that("examples", {
   ### --- test igraph functionality
 
   # test igraph conversion
-  n <- asIgraph(n)
-  p <- ggnet2(n, color = "group")
+  p = ggnet2(asIgraph(n), color = "group")
   expect_null(p$guides$colour)
+
+  # test igraph degree
+  library(igraph)
+  ggnet2(n, size = "degree")
 
   expect_true(TRUE)
 

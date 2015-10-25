@@ -1,6 +1,10 @@
 
 context("ggnetworkmap")
 
+if ("package:igraph" %in% search()) {
+  detach("package:igraph")
+}
+
 require(network)
 require(sna)
 require(maps)

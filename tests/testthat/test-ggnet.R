@@ -128,6 +128,14 @@ test_that("examples", {
   expect_error(ggnet(n, arrow.size = -1), "incorrect arrow.size")
   expect_warning(ggnet(n, arrow.size = 1), "arrow.size ignored")
 
+  ### --- test arrow.gap
+
+  expect_error(ggnet(n, arrow.size = 12, arrow.gap = -1), "incorrect arrow.gap")
+  expect_warning(ggnet(n, arrow.size = 12, arrow.gap = 0.1), "arrow.gap ignored")
+
+  m <- network::network(m, directed = TRUE)
+  ggnet(m, arrow.size = 12, arrow.gap = 0.05)
+
   ### --- test degree centrality
 
   ggnet(n, weight = "degree")
@@ -207,10 +215,13 @@ test_that("examples", {
   ### --- test igraph functionality
 
   # test igraph conversion
-  n <- asIgraph(n)
-  p <- ggnet(n)
+  p = ggnet(asIgraph(n))
   expect_null(p$guides$colour)
   expect_equal(length(p$layers), 2)
+
+  # test igraph degree
+  library(igraph)
+  ggnet(n, weight = "degree")
 
   expect_true(TRUE)
 
