@@ -160,6 +160,18 @@ ggpairs <- function(
     display_param_error()
   }
 
+  if (is.numeric(mapping) & missing(columns)) {
+      columns <- mapping
+      mapping <- NULL
+  }
+
+  if (is.numeric(mapping)) {
+    stop(str_c(
+      "'mapping' should not be numeric",
+      " unless 'columns' is missing from function call."
+    ))
+  }
+
   args <- list(...)
   if ("printInfo" %in% names(args)) {
     printInfo <- args[["printInfo"]]
@@ -171,17 +183,12 @@ ggpairs <- function(
   if (length(args) > 0) {
     argNames <- names(args)
     warning(str_c(
-      "Extra arguments: ", str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
-      "  If these are meant to be aesthetics, submit them using the 'mapping' variable.\n\n",
-      "mapping = c(", str_c(shQuote(argNames), " = ", shQuote(unlist(args)) , collapse = ", "),")"
+      "Extra arguments: ",
+      str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
+      "  If these are meant to be aesthetics, submit them using the",
+      "'mapping' variable with ggplot2::aes or ggplot2::aes_string."
     ))
   }
-
-  if (is.numeric(mapping)) {
-    columns <- mapping
-    mapping <- aes()
-  }
-
 
   if (! identical(class(data),"data.frame")) {
     data <- as.data.frame(data)
