@@ -79,7 +79,7 @@ first_non_null <- function(...) {
 #' @param leftWidthProportion proportion of a plot area devoted to left axis labels
 #' @param bottomHeightProportion proportion of a plot area devoted to bottom axis labels
 #' @param spacingProportion proportion of a plot area devoted to the space between plots
-#' @param ... not used
+#' @param ... ignored
 #' @method print ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport grid.draw
@@ -105,7 +105,6 @@ print.ggmatrix <- function(
   leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1,
   spacingProportion = 0.03,
-  showStrips = NULL,
   ...
 ) {
 

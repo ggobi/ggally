@@ -67,7 +67,7 @@
 #'
 #' @export
 #' @param data data set using.  Can have both numerical and categorical data.
-#' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}
+#' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.
 #' @param columns which columns are used to make plots.  Defaults to all columns.
 #' @param title title for the graph
 #' @param upper see Details
@@ -79,7 +79,7 @@
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
-#' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
+#' @param verbose boolean to determine the printing of "Plot #1, Plot #2..."
 #' @keywords hplot
 #' @import ggplot2
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
