@@ -76,9 +76,11 @@ first_non_null = function(...) {
 #' Specialized method to print the ggpair object-
 #'
 #' @param x ggpair object to be plotted
+#' @param leftWidthProportion proportion of a plot area devoted to left axis labels
+#' @param bottomHeightProportion proportion of a plot area devoted to bottom axis labels
+#' @param spacingProportion proportion of a plot area devoted to the space between plots
 #' @param ... not used
 #' @method print ggmatrix
-#' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport unit viewport grid.draw
 #' @export
@@ -88,13 +90,7 @@ first_non_null = function(...) {
 #'  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
 #'
 #'  ## defaults; (prints strips on top and right edges of matrix)
-#'  # print(pMat, left = 0.2, spacing = 0.03, bottom = 0.1, showStrips = NULL)
-#'
-#'  ## show none of the strips
-#'  # print(pMat, showStrips = FALSE)
-#'
-#'  ## show all of the strips
-#'  # print(pMat, showStrips = TRUE)
+#'  # print(pMat, left = 0.2, spacing = 0.03, bottom = 0.1)
 #'
 #'  ## give the left axis labels area a proportion of 3 plot size
 #'  # print(pMat, leftWidthProportion = 3)
@@ -113,8 +109,6 @@ print.ggmatrix <- function(
   ...
 ) {
 
-  plotObj <- x
-
   args <- list(...)
   if ("printInfo" %in% names(args)) {
     printInfo <- args[['printInfo']]
@@ -123,29 +117,43 @@ print.ggmatrix <- function(
   }
 
 
+  displayXAxisLabels <- !is.null(x$xAxisLabels)
+  displayYAxisLabels <- !is.null(x$yAxisLabels)
+  displayTitle <- !is.null(x$title)
+
   # If using internal axis labels, extend the plotting region out since
   # variable names on the margins will not be used
-  if (identical(plotObj$axisLabels,"internal")) {
+
+  # determine if space should be given for Y text labels
+  v1XWidth <- unit(1,"npc") - unit(ifelse(displayYAxisLabels, 3, 1), "lines")
+  if (displayXAxisLabels) {
+    # make room for X text labels
     v1 <- viewport(
-      y = unit(0.5, "npc") - unit(0.5,"lines"),
-      width=unit(1, "npc") - unit(1,"lines"),
-      height=unit(1, "npc") - unit(2, "lines")
+      width  = v1XWidth,
+      height = unit(1, "npc") - unit(3, "lines")
     )
   } else {
+    # plot fully to left side (no Y labels)
     v1 <- viewport(
-      width=unit(1, "npc") - unit(3,"lines"),
-      height=unit(1, "npc") - unit(3, "lines")
+      y = unit(0.5, "npc") - unit(0.5,"lines"),
+      width  = v1XWidth,
+      height = unit(1, "npc") - unit(2, "lines")
     )
   }
 
-  if (identical(plotObj$axisLabels,"show")) {
-    showLabels <- TRUE
-    viewPortWidths <- c(leftWidthProportion, 1, rep(c(spacingProportion,1), x$ncol - 1))
-    viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1, bottomHeightProportion)
-  } else {
-    showLabels <- FALSE
-    viewPortWidths <- c(1, rep(c(spacingProportion,1), x$ncol - 1))
-    viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1)
+  viewPortWidths <- c(1, rep(c(spacingProportion,1), x$ncol - 1))
+  viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1)
+
+
+  x$showXAxisPlotLabels <- identical(x$showXAxisPlotLabels, TRUE)
+  x$showYAxisPlotLabels <- identical(x$showYAxisPlotLabels, TRUE)
+  if (x$showXAxisPlotLabels) {
+    # x plot axis are displayed
+    viewPortHeights <- c(viewPortHeights, bottomHeightProportion)
+  }
+  if (x$showYAxisPlotLabels) {
+    # y plot axis are displayed
+    viewPortWidths <- c(leftWidthProportion, viewPortWidths)
   }
 
   v2 <- viewport(
@@ -157,18 +165,21 @@ print.ggmatrix <- function(
       heights = viewPortHeights
   ))
 
+
+
+
   grid.newpage()
 
-  if(! is.null(plotObj$title)) {
-    if (plotObj$title != "") {
+  if(! is.null(x$title)) {
+    if (x$title != "") {
       pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
       grid.text(
-        plotObj$title,
+        x$title,
         x = .5, y = 1,
         just = c(.5,1),
         gp = gpar(fontsize = first_non_null(
-          get_theme_element(plotObj, "title", "size"),
-          get_theme_element(plotObj, "plot.title", "size"),
+          get_theme_element(x, "title", "size"),
+          get_theme_element(x, "plot.title", "size"),
           15
         ))
       )
@@ -176,9 +187,15 @@ print.ggmatrix <- function(
     }
   }
 
-  # This plots the variable names on the margins, which is not needed if using internal
-  # axis labels
-  if (!identical(plotObj$axisLabels,"internal")) {
+##############################################################
+####################  End Viewports  #########################
+##############################################################
+
+####################  Start Labels  #########################
+
+  # plot the y text axis labels
+  if (displayYAxisLabels) {
+
     # viewport for Left Names
     pushViewport(viewport(width=unit(1, "npc") - unit(2,"lines"), height=unit(1, "npc") - unit(3, "lines")))
 
@@ -191,13 +208,13 @@ print.ggmatrix <- function(
     # Left Side
     for (i in 1:(x$nrow)) {
       grid.text(
-        plotObj$yAxisLabels[i],
+        x$yAxisLabels[i],
         0, 0.5, rot = 90,
         just = c("centre","centre"),
         vp = vplayout(as.numeric(i) * 2 - 1 ,1),
         gp = gpar(fontsize = first_non_null(
-          get_theme_element(plotObj, "axis.title.y", "size"),
-          get_theme_element(plotObj, "axis.title", "size"),
+          get_theme_element(x, "axis.title.y", "size"),
+          get_theme_element(x, "axis.title", "size"),
           12
         ))
       )
@@ -205,6 +222,10 @@ print.ggmatrix <- function(
 
     popViewport()# layout
     popViewport()# spacing
+  }
+
+  # plot the x text labels
+  if (displayXAxisLabels) {
 
     # viewport for Bottom Names
     pushViewport(viewport(width=unit(1, "npc") - unit(3,"lines"), height=unit(1, "npc") - unit(2, "lines")))
@@ -215,21 +236,20 @@ print.ggmatrix <- function(
       widths = viewPortWidths, heights = viewPortHeights
     )))
 
-
     # Bottom Side
     for (i in 1:(x$ncol)) {
       grid.text(
-        plotObj$xAxisLabels[i],
+        x$xAxisLabels[i],
         0.5,
         0,
         just = c("centre","centre"),
         vp = vplayout(
-          ifelse(showLabels, 2*(x$nrow), 2*(x$nrow) - 1),
-          ifelse(showLabels, 2*i, 2*i - 1)
+          ifelse(x$showXAxisPlotLabels, 2*(x$nrow), 2*(x$nrow) - 1),
+          ifelse(x$showYAxisPlotLabels, 2*i, 2*i - 1)
         ),
         gp = gpar(fontsize = first_non_null(
-          get_theme_element(plotObj, "axis.title.x", "size"),
-          get_theme_element(plotObj, "axis.title", "size"),
+          get_theme_element(x, "axis.title.x", "size"),
+          get_theme_element(x, "axis.title", "size"),
           12
         ))
       )
@@ -240,7 +260,7 @@ print.ggmatrix <- function(
   }
 
 ##############################################################
-####################  End Viewports  #########################
+######################  End Labels  ##########################
 ##############################################################
 
 #####################  Plot Objects  #########################
@@ -250,7 +270,7 @@ print.ggmatrix <- function(
 
   for (rowPos in 1:(x$nrow)) {
     for (columnPos in 1:(x$ncol)) {
-      p <- plotObj[rowPos, columnPos]
+      p <- x[rowPos, columnPos]
 
       if (is_blank_plot(p)) {
         next
@@ -261,7 +281,7 @@ print.ggmatrix <- function(
       ## New axis labels
 
       # left axis
-      if (columnPos == 1 && showLabels) {
+      if (columnPos == 1 && x$showYAxisPlotLabels) {
         if (identical(printInfo, TRUE)) {
           print("trying left axis")
         }
@@ -292,7 +312,7 @@ print.ggmatrix <- function(
       }
 
       ## bottom axis
-      if (rowPos == (x$nrow) && showLabels) {
+      if (rowPos == (x$nrow) && x$showXAxisPlotLabels) {
         if (identical(printInfo, TRUE)) {
           print("trying bottom axis")
         }
@@ -310,7 +330,7 @@ print.ggmatrix <- function(
           )
         )
 
-        pushViewport(vplayout( 2 * (x$nrow), 2 * columnPos))
+        pushViewport(vplayout( 2 * (x$nrow), ifelse(x$showYAxisPlotLabels, 2 * columnPos, 2 * columnPos - 1)))
         pushViewport(vpBAxis)
           for (bAxisPos in 1:grobLength) {
             pushViewport(vplayout(1, bAxisPos * 2 - 1))
@@ -327,7 +347,7 @@ print.ggmatrix <- function(
       # ask about strips
       layoutNames <- c("panel")
       allLayoutNames <- c("panel", "strip-right", "strip-top")
-      if (is.null(showStrips)) {
+      if (is.null(x$showStrips)) {
         # make sure it's a ggally plot
         pShowStrips <- (!is.null(p$type)) && (!is.null(p$subType))
 
@@ -341,7 +361,7 @@ print.ggmatrix <- function(
           }
         }
 
-      } else if (showStrips) {
+      } else if (x$showStrips) {
         layoutNames <- allLayoutNames
       }
 
@@ -368,7 +388,7 @@ print.ggmatrix <- function(
       ]
 
       ## Draw 'plot panel'
-      pushViewport(vplayout(2 * rowPos - 1, ifelse(showLabels, 2 * columnPos, 2*columnPos - 1)))
+      pushViewport(vplayout(2 * rowPos - 1, ifelse(x$showYAxisPlotLabels, 2 * columnPos, 2*columnPos - 1)))
         suppressMessages(suppressWarnings(
           grid.draw(pPanel)
         ))

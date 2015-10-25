@@ -11,6 +11,12 @@
 \arguments{
 \item{x}{ggpair object to be plotted}
 
+\item{leftWidthProportion}{proportion of a plot area devoted to left axis labels}
+
+\item{bottomHeightProportion}{proportion of a plot area devoted to bottom axis labels}
+
+\item{spacingProportion}{proportion of a plot area devoted to the space between plots}
+
 \item{...}{not used}
 }
 \description{
@@ -22,13 +28,7 @@ data(tips, package = "reshape")
  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
 
  ## defaults; (prints strips on top and right edges of matrix)
- # print(pMat, left = 0.2, spacing = 0.03, bottom = 0.1, showStrips = NULL)
-
- ## show none of the strips
- # print(pMat, showStrips = FALSE)
-
- ## show all of the strips
- # print(pMat, showStrips = TRUE)
+ # print(pMat, left = 0.2, spacing = 0.03, bottom = 0.1)
 
  ## give the left axis labels area a proportion of 3 plot size
  # print(pMat, leftWidthProportion = 3)
@@ -42,5 +42,4 @@ data(tips, package = "reshape")
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
 }
-\keyword{internal}
 
