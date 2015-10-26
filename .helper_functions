@@ -3,6 +3,8 @@ covr_shiny_app:
   covr::shine(cov)
 covr_zero_coverage:
   zero <- function(...) {
+    # check out the link below to work most efficiently
+    # https://codecov.io/github/ggobi/ggally/features/suggestions?ref=dev
     cov <- covr::package_coverage(...)
     covr::zero_coverage(cov)
   }
