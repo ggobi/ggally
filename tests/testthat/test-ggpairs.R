@@ -132,7 +132,7 @@ test_that("stops", {
 
   # couldn't get correct error message
   #  variables: 'colour' have non standard format: 'total_bill + tip'.
-  expect_error(ggpairs(tips, mapping = aes(color = total_bill + tip)))
+  expect_error(ggpairs(tips, mapping = ggplot2::aes(color = total_bill + tip)))
 
 })
 
@@ -194,7 +194,7 @@ test_that("subtypes", {
   }
 
   fn2 <- function(...) {
-    fn1(..., mapping = aes(color = day))
+    fn1(..., mapping = ggplot2::aes(color = day))
   }
 
   # re ordered the subs so that density can have no binwidth param
@@ -280,13 +280,27 @@ test_that("dates", {
 
   a <- ggpairs(
     x, c(2,1,4,3),
-    mapping = aes(color = cat),
+    mapping = ggplot2::aes(color = cat),
     lower = "blank",
+    diag = list(continuous = "densityDiag"),
     upper = list(continuous = "cor")
   )
   p <- a[1, 2]
   expect_equal(p$type, "continuous")
   expect_equal(p$subType, "cor")
+
+
+  a <- ggpairs(
+    x, c(2,1,4,3),
+    mapping = ggplot2::aes(color = cat),
+    lower = "blank",
+    diag = list(continuous = "barDiag"),
+    upper = list(continuous = "cor")
+  )
+  p <- a[1,1]
+  expect_equal(p$type, "diag")
+  expect_equal(p$subType, "bar_num")
+
 
 })
 
