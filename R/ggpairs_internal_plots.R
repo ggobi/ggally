@@ -52,7 +52,7 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
       },
       error = function(e) {
         stop(str_c(
-          "The following ggally functions are readily available: \n",
+          "The following GGally functions are readily available: \n",
           "\tcontinuous: c('points', 'smooth', 'density', 'cor', 'blank')\n",
           "\tcombo: c('box', 'dot plot', 'facethist', 'facetdensity', 'denstrip', 'blank')\n",
           "\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
@@ -62,8 +62,14 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
           "\n",
           "You may also provide your own function that follows the api of ",
             "function(data, mapping, ...){ . . . }\n",
+            "\tEx:\n",
+            "\tmy_fn <- function(data, mapping, ...){\n",
+            "\t  ggplot(data = data, mapping = mapping) + \n",
+            "\t  geom_point(...)\n",
+            "\t}\n",
+            "\tggpairs(data, lower = list(continuous = my_fn))\n",
           "\n",
-          "Function provided: '", funcVal, "'"
+          "Function provided: ", funcVal
         ))
       }
     )
@@ -197,6 +203,7 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #' @param object ggmatrix object to be viewed
 #' @param ... passed on to the default str method
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
+#' @method str ggmatrix
 #' @export
 str.ggmatrix <- function(object, ..., raw = FALSE) {
   objName <- as.character(substitute(object))
