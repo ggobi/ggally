@@ -22,11 +22,9 @@ A fluctutation diagram is a graphical representation of a contingency table. Thi
 The function was adopted from experiemntal functions within GGplot2 developed by Hadley Wickham.
 }
 \examples{
-data(movies, package = "ggplot2")
-ggfluctuation2(table(movies$Action, movies$Comedy))
-ggfluctuation2(table(movies$Action, movies$mpaa))
-ggfluctuation2(table(movies[,c("Action", "mpaa")]))
-ggfluctuation2(table(warpbreaks$breaks, warpbreaks$tension))
+data(tips, package = "reshape")
+ggfluctuation2(table(tips$sex, tips$day))
+ggfluctuation2(table(tips[,c("sex", "day")]))
 }
 \author{
 Hadley Wickham \email{h.wickham@gmail.com}, Barret Schloerke \email{schloerke@gmail.com}

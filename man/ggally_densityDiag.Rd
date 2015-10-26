@@ -4,7 +4,7 @@
 \alias{ggally_densityDiag}
 \title{Plots the Density Plots by Using Diagonal}
 \usage{
-ggally_densityDiag(data, mapping, ..., rescale = TRUE)
+ggally_densityDiag(data, mapping, ..., rescale = FALSE)
 }
 \arguments{
 \item{data}{data set using}
@@ -21,9 +21,7 @@ Plots the density plots by using Diagonal.
 \examples{
 data(tips, package = "reshape")
  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
- #data(movies)
- #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
- #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
+ ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day))
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

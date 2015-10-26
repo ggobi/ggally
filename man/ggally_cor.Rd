@@ -35,7 +35,9 @@ data(tips, package = "reshape")
  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
  ggally_cor(
    tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "I(\\"red\\")")
+   mapping = ggplot2::aes(x = total_bill, y = tip),
+   size = 15,
+   colour = I("red")
  )
  ggally_cor(
    tips,

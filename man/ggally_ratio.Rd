@@ -16,16 +16,12 @@ Plots the mosaic plot by using fluctuation.
 Must send only two discrete columns in the data set.
 }
 \examples{
-data(movies, package = "ggplot2")
-ggally_ratio(movies[,c("mpaa","Action")])
-ggally_ratio(movies[,c("mpaa","Action")]) + ggplot2::coord_equal()
-nummpaa <- length(levels(movies[,"mpaa"]))
-numAction <- length(levels(as.factor(movies[,"Action"])))
+data(tips, package = "reshape")
+ggally_ratio(tips[,c("sex", "smoker")])
+ggally_ratio(tips[,c("sex", "smoker")]) + ggplot2::coord_equal()
 ggally_ratio(
-  movies[,c("Action","mpaa")]
-) + ggplot2::theme(
-  aspect.ratio = nummpaa / numAction
-)
+  tips[,c("sex", "day")]
+) + ggplot2::theme( aspect.ratio = 4/2)
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

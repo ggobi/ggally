@@ -4,7 +4,7 @@
 \alias{ggally_barDiag}
 \title{Plots the Bar Plots by Using Diagonal}
 \usage{
-ggally_barDiag(data, mapping, ..., rescale = TRUE)
+ggally_barDiag(data, mapping, ..., rescale = FALSE)
 }
 \arguments{
 \item{data}{data set using}
@@ -19,10 +19,9 @@ ggally_barDiag(data, mapping, ..., rescale = TRUE)
 Plots the bar plots by using Diagonal.
 }
 \examples{
-data(movies, package = "ggplot2")
-ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
-# ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
-# ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
+data(tips, package = "reshape")
+ggally_barDiag(tips, mapping = ggplot2::aes(x = day))
+ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
