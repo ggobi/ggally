@@ -1,9 +1,12 @@
 # GGally: Ally to ggplot2
 
-Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally) [![Coverage Status](https://coveralls.io/repos/ggobi/ggally/badge.svg?branch=master)](https://coveralls.io/r/ggobi/ggally?branch=master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](http://cran.r-project.org/package=GGally)
+Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](http://cran.r-project.org/package=GGally)
 
 
-Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally) [![Coverage Status](https://coveralls.io/repos/ggobi/ggally/badge.svg?branch=dev)](https://coveralls.io/r/ggobi/ggally?branch=dev)
+
+
+Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=dev)
+
 
 GGally is designed to be a helper to [ggplot2](http://docs.ggplot2.org/current/). It contains templates for different plots to be combined into a plot matrix, a parallel coordinate plot function, as well as a function for making a network plot.
 
