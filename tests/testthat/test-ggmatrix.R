@@ -85,3 +85,19 @@ test_that("missing plot", {
 
 
 })
+
+
+test_that("str.ggmatrix", {
+  pm <- ggpairs(tips, 1:3, upper = "blank")
+  pm[1,1] <- pm[1,1]
+  txt <- capture.output({
+    str(pm)
+  })
+
+  expect_true(any(str_detect(txt, "Custom str.ggmatrix output:")))
+
+  txt <- capture.output({
+    str(pm, raw = TRUE)
+  })
+  expect_false(any(str_detect(txt, "Custom str.ggmatrix output:")))
+})
