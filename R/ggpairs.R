@@ -462,13 +462,15 @@ ggpairs <- function(
 #' @import ggplot2
 #' @rdname add_and_overwrite_aes
 #' @examples
-#'  data(diamonds, package="ggplot2")
-#'  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],1000),]
-#'  ggpairs(diamonds.samp, columns = 5:7,
+#' data(diamonds, package="ggplot2")
+#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],1000),]
+#' pm <- ggpairs(diamonds.samp, columns = 5:7,
+#'   mapping = ggplot2::aes(color = color),
 #'   upper = list(continuous = "cor", aes_string = ggplot2::aes_string(color = "clarity")),
 #'   lower = list(continuous = "cor", aes_string = ggplot2::aes_string(color = "cut")),
-#'   color = "color",
-#'   title = "Diamonds Sample")
+#'   title = "Diamonds Sample"
+#' )
+#' str(pm)
 #'
 add_and_overwrite_aes <- function(current, new) {
   if (length(new) >= 1) {

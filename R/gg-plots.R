@@ -136,7 +136,9 @@ ggally_density <- function(data, mapping, ...){
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_cor(
 #'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "I(\"red\")")
+#'    mapping = ggplot2::aes(x = total_bill, y = tip),
+#'    size = 15,
+#'    colour = I("red")
 #'  )
 #'  ggally_cor(
 #'    tips,
@@ -218,7 +220,7 @@ ggally_cor <- function(
     }
   }
 
-  colorCol <- as.character(mapping$colour)
+  colorCol <- deparse(mapping$colour)
   singleColorCol <- paste(colorCol, collapse = "")
 
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
@@ -280,7 +282,6 @@ ggally_cor <- function(
     })
     colnames(cord)[2] <- "ggally_cor"
 
-    # browser()
     cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
 
     # put in correct order
@@ -761,16 +762,12 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @keywords hplot
 #' @export
 #' @examples
-#' data(movies, package = "ggplot2")
-#' ggally_ratio(movies[,c("mpaa","Action")])
-#' ggally_ratio(movies[,c("mpaa","Action")]) + ggplot2::coord_equal()
-#' nummpaa <- length(levels(movies[,"mpaa"]))
-#' numAction <- length(levels(as.factor(movies[,"Action"])))
+#' data(tips, package = "reshape")
+#' ggally_ratio(tips[,c("sex", "smoker")])
+#' ggally_ratio(tips[,c("sex", "smoker")]) + ggplot2::coord_equal()
 #' ggally_ratio(
-#'   movies[,c("Action","mpaa")]
-#' ) + ggplot2::theme(
-#'   aspect.ratio = nummpaa / numAction
-#' )
+#'   tips[,c("sex", "day")]
+#' ) + ggplot2::theme( aspect.ratio = 4/2)
 ggally_ratio <- function(data){
   # dataNames <- colnames(data)
   data <- data[, 2:1]
@@ -797,10 +794,8 @@ ggally_ratio <- function(data){
 #' @examples
 #'  data(tips, package = "reshape")
 #'  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
-#'  #data(movies)
-#'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating"))
-#'  #ggally_densityDiag(movies, mapping = ggplot2::aes_string(x="rating", color = "mpaa"))
-ggally_densityDiag <- function(data, mapping, ..., rescale = TRUE){
+#'  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day))
+ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 
   p <- ggplot(data, mapping) +
     # scale_x_continuous() +
@@ -838,10 +833,9 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = TRUE){
 #' @keywords hplot
 #' @export
 #' @examples
-#' data(movies, package = "ggplot2")
-#' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
-#' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
-#' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
+#' data(tips, package = "reshape")
+#' ggally_barDiag(tips, mapping = ggplot2::aes(x = day))
+#' ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
 ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
   mapping$y <- NULL
   numer <- ("continuous" == plotting_data_type(data[, as.character(mapping$x)]))
@@ -910,7 +904,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 #' @export
 #' @examples
 #' ggally_text("Example 1")
-#' ggally_text("Example\nTwo", mapping = ggplot2::aes_string(size = 15, color = "I(\"red\")"))
+#' ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red"))
 ggally_text <- function(
   label,
   mapping = ggplot2::aes(color = "black"),
@@ -945,18 +939,23 @@ ggally_text <- function(
     mapping <- add_and_overwrite_aes(mapping, new_mapping)
   }
 
-  if(is.null(mapping$colour)) {
-    colour <- "grey50"
-  } else {
+  # dont mess with color if it's already there
+  if(!is.null(mapping$colour)) {
     colour <- mapping$colour
+    # remove colour from the aesthetics, so legend isn't printed
+    mapping$colour <- NULL
+    p <- p +
+       geom_text( label = label, mapping = mapping, colour = colour, ...)
+  } else if ("colour" %in% names(aes(...))) {
+    p <- p +
+       geom_text( label = label, mapping = mapping, ...)
+  } else {
+    colour <- "grey50"
+    p <- p +
+       geom_text( label = label, mapping = mapping, colour = colour, ...)
   }
 
-  # remove colour from the aesthetics
-  mapping$colour <- NULL
-
-  p <- p +
-     geom_text( label = label, mapping = mapping, colour = colour, ...) +
-     theme(legend.position = "none")
+  p <- p + theme(legend.position = "none")
 
   p
 
@@ -1201,11 +1200,9 @@ ggally_facetbar <- function(data, mapping, ...){
 #' @importFrom reshape add.all.combinations
 #' @export
 #' @examples
-#' data(movies, package = "ggplot2")
-#' ggfluctuation2(table(movies$Action, movies$Comedy))
-#' ggfluctuation2(table(movies$Action, movies$mpaa))
-#' ggfluctuation2(table(movies[,c("Action", "mpaa")]))
-#' ggfluctuation2(table(warpbreaks$breaks, warpbreaks$tension))
+#' data(tips, package = "reshape")
+#' ggfluctuation2(table(tips$sex, tips$day))
+#' ggfluctuation2(table(tips[,c("sex", "day")]))
 ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq, na.rm = TRUE)) {
 
   yNames <- rownames(table_data)
