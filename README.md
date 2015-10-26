@@ -7,7 +7,7 @@ Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](
 
 Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=dev)](https://codecov.io/github/ggobi/ggally?branch=dev)
 
-[![Public Slack Discussion](https://graphql-slack.herokuapp.com/badge.svg)](https://graphql-slack.herokuapp.com/)
+[![Public Slack Discussion](https://ggally-slack.herokuapp.com/badge.svg)](https://ggally-slack.herokuapp.com/)
 
 
 
