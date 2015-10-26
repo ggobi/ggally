@@ -677,7 +677,7 @@ ggally_denstrip <- function(data,mapping, ...){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param ... other arguments being sent to either stat_bin or stat_density
+#' @param ... other arguments being sent to either geom_histogram or stat_density
 #' @param den_strip boolean to decide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
@@ -696,11 +696,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
     mapping$y <- mapping$tmp
     mapping$tmp <- NULL
 
-  } else {
-    # horizontal
-    # re-order levels to match all other plots
-#    cat("horizontal facet-density-string\n")
-#    levels(data[,as.character(mapping$y)]) <- rev(levels(data[,as.character(mapping$y)]))
   }
 
   xVal <- mapping$x
@@ -710,30 +705,19 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
 
   if (identical(den_strip, TRUE)) {
-   # print("Density Strip")
 
     p <- p +
-      geom_bar(
+      geom_histogram(
         mapping = aes(fill = ..density..), # nolint
+        position = "fill",
         ...
-      ) +
-      coord_cartesian(
-        ylim = c(0,1)
       ) +
       scale_y_continuous(
         breaks = c(0.5),
-        labels = c("1")
+        labels = "1"
       )
-      # stat_bin(
-      #   aes(
-      #     # y = 1,
-      #     fill = ..density..
-      #   ),
-      #   # position = "identity",
-      #   geom = "tile",
-      #   ...
-      # )
     p$subType <- "denstrip"
+
   } else {
     p <- p +
       stat_density(
@@ -750,14 +734,12 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
   if (horizontal) {
     p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = ""))
-    #p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
 
     if(identical(den_strip, TRUE))
       p <- p + theme(axis.text.y = element_blank())
   } else {
     p <- p + coord_flip()
     p <- p + facet_grid(paste(". ~ ", as.character(yVal), sep = ""))
-    #p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
 
     if(identical(den_strip, TRUE))
       p <- p + theme(axis.text.x = element_blank())
@@ -860,14 +842,14 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = TRUE){
 #' ggally_barDiag(movies, mapping = ggplot2::aes(x = mpaa))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x = "mpaa"))
 #' # ggally_barDiag(movies, mapping = ggplot2::aes_string(x ="rating", binwidth = ".1"))
-ggally_barDiag <- function(data, mapping, ..., rescale = TRUE){
+ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
   mapping$y <- NULL
   numer <- ("continuous" == plotting_data_type(data[, as.character(mapping$x)]))
 
   p <- ggplot(data = data, mapping)
 
   if (is_date(data[,as.character(mapping$x)])) {
-    p <- p + geom_bar()
+    p <- p + geom_histogram(...)
     #TODO make y axis lines match date positions
     # buildInfo <- ggplot_build(p + geom_bar(...))
     # histBarPerc <- buildInfo$data[[1]]$ncount
@@ -877,14 +859,14 @@ ggally_barDiag <- function(data, mapping, ..., rescale = TRUE){
   } else if(numer){
     # message("is numeric")
     if (identical(rescale, TRUE)) {
-      p <- p + geom_bar(
+      p <- p + geom_histogram(
         aes(
           y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         ...
       ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
     } else {
-      p <- p + geom_bar()
+      p <- p + geom_histogram(...)
 
     }
 
