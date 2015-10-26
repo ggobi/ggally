@@ -31,8 +31,8 @@ test_package:
   tp()
 test_file:
   tf <- function(file = "gg-plots", package = "./") {
-    devtools::load_all(package)
-    testthat::test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
+    require(devtools); require(testthat)
+    load_all(package)
+    test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
   }
-  tf("gg-plots")
   tf("ggpairs")
