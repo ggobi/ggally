@@ -32,9 +32,10 @@
 #' a <- ggmatrix(
 #'   plotList,
 #'   2, 3,
-#'   c("A", "B", "C"),
-#'   c("D", "E"),
-#'   byrow = FALSE
+#'   xAxisLabels = c("A", "B", "C"),
+#'   yAxisLabels = NULL,
+#'   byrow = FALSE,
+#'   showXAxisPlotLabels = FALSE
 #' )
 #' #a
 
