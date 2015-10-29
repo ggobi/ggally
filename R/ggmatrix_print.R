@@ -301,6 +301,26 @@ print.ggmatrix <- function(
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-l")
 
+        hasTopStrips <- FALSE
+        if (rowPos == 1 || identical(x$showStrips, TRUE)) {
+          # worry about top strips
+          if (is.null(x$showStrips) || identical(x$showStrips, TRUE)) {
+            if ("strip-top" %in% pGtable$layout$name) {
+              hasTopStrips <- TRUE
+              stripHeight <- gtable_filter(pGtable, "strip-top")$heights[1]
+              stripViewport <- viewport(layout = grid.layout(
+                nrow = 2,
+                ncol = 1,
+                widths = unit(1, "null"),
+                heights = unit(
+                  c(stripHeight, 1),
+                  units = c(attr(stripHeight, "unit"), "null")
+                )
+              ))
+            }
+          }
+        }
+
         # make a viewport that is chopped into numFacets parts vertically
         grobLength <- length(pAxisLabels$grobs)
         leftAxisLayoutHeight <- rep(c(5.5, 1), grobLength)[-1]
@@ -315,6 +335,10 @@ print.ggmatrix <- function(
         )
 
         pushViewport(vplayout(rowPos * 2 - 1, 1))
+        if (hasTopStrips) {
+          pushViewport(stripViewport)
+          pushViewport(vplayout(2, 1))
+        }
         pushViewport(vpLAxis)
           for (lAxisPos in 1:grobLength) {
             pushViewport(vplayout(lAxisPos * 2 - 1, 1))
@@ -322,6 +346,10 @@ print.ggmatrix <- function(
             popViewport()
           }
         popViewport() # vpLAxis
+        if (hasTopStrips) {
+          popViewport()
+          popViewport()
+        }
         popViewport() # left Axis 'plot' area
       }
 
@@ -332,6 +360,26 @@ print.ggmatrix <- function(
         }
         pAxisLabels <- gtable_filter(pGtable, "axis-b")
         grobLength <- length(pAxisLabels$grobs)
+
+        hasRightStrips <- FALSE
+        if (columnPos == (x$ncol) || identical(x$showStrips, TRUE)) {
+          # worry about top strips
+          if (is.null(x$showStrips) || identical(x$showStrips, TRUE)) {
+            if ("strip-right" %in% pGtable$layout$name) {
+              hasRightStrips <- TRUE
+              stripWidth <- gtable_filter(pGtable, "strip-right")$widths[1]
+              stripViewport <- viewport(layout = grid.layout(
+                nrow = 1,
+                ncol = 2,
+                heights = unit(1, "null"),
+                widths = unit(
+                  c(1, stripWidth),
+                  units = c("null", attr(stripWidth, "unit"))
+                )
+              ))
+            }
+          }
+        }
 
         botAxisLayoutWidth <- rep(c(5.5, 1), grobLength)[-1]
         botAxisLayoutWidthUnits <- rep(c("pt", "null"), grobLength)[-1]
@@ -354,6 +402,10 @@ print.ggmatrix <- function(
             )
           )
         )
+        if (hasRightStrips) {
+          pushViewport(stripViewport)
+          pushViewport(vplayout(1, 1))
+        }
         pushViewport(vpBAxis)
           for (bAxisPos in 1:grobLength) {
             pushViewport(vplayout(1, bAxisPos * 2 - 1))
@@ -361,6 +413,10 @@ print.ggmatrix <- function(
             popViewport()
           }
         popViewport() # vpBAxis
+        if (hasRightStrips) {
+          popViewport()
+          popViewport()
+        }
         popViewport() # bottom Axis 'plot' area
 
       }
