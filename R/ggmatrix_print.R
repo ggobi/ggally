@@ -303,8 +303,8 @@ print.ggmatrix <- function(
 
         # make a viewport that is chopped into numFacets parts vertically
         grobLength <- length(pAxisLabels$grobs)
-        leftAxisLayoutHeight <- rep(c(0.1, 1), grobLength)[-1]
-        leftAxisLayoutHeightUnits <- rep(c("lines", "null"), grobLength)[-1]
+        leftAxisLayoutHeight <- rep(c(5.5, 1), grobLength)[-1]
+        leftAxisLayoutHeightUnits <- rep(c("pt", "null"), grobLength)[-1]
         vpLAxis <- viewport(
           layout = grid.layout(
             nrow = 2 * grobLength - 1,
@@ -333,8 +333,8 @@ print.ggmatrix <- function(
         pAxisLabels <- gtable_filter(pGtable, "axis-b")
         grobLength <- length(pAxisLabels$grobs)
 
-        botAxisLayoutWidth <- rep(c(0.1, 1), grobLength)[-1]
-        botAxisLayoutWidthUnits <- rep(c("lines", "null"), grobLength)[-1]
+        botAxisLayoutWidth <- rep(c(5.5, 1), grobLength)[-1]
+        botAxisLayoutWidthUnits <- rep(c("pt", "null"), grobLength)[-1]
         vpBAxis <- viewport(
           layout = grid.layout(
             nrow = 1,
