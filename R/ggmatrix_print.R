@@ -369,7 +369,11 @@ print.ggmatrix <- function(
 
       # ask about strips
       layoutNames <- c("panel")
-      allLayoutNames <- c("panel", "strip-right", "strip-top")
+      layoutPlusLegend <- c("panel", "strip-right", "strip-top")
+      stripRightName <- "strip-right"
+      stripTopName <- "strip-top"
+      legendName <- "guide-box"
+
       if (is.null(x$showStrips)) {
         # make sure it's a ggally plot
         pShowStrips <- (!is.null(p$type)) && (!is.null(p$subType))
@@ -377,15 +381,15 @@ print.ggmatrix <- function(
         # make sure it's on the outer right and top edge
         if (pShowStrips) {
           if (columnPos == (x$ncol)) {
-            layoutNames <- c(layoutNames, "strip-right")
+            layoutNames <- c(layoutNames, stripRightName)
           }
           if (rowPos == 1) {
-            layoutNames <- c(layoutNames, "strip-top")
+            layoutNames <- c(layoutNames, stripTopName)
           }
         }
 
       } else if (x$showStrips) {
-        layoutNames <- allLayoutNames
+        layoutNames <- c(layoutNames, stripRightName, stripTopName)
       }
 
       # if they have a custom plot, make sure it shows up
@@ -396,6 +400,10 @@ print.ggmatrix <- function(
         if (p$axisLabels %in% c("internal", "none")) {
           layoutNames <- allLayoutNames
         }
+      }
+
+      if (identical(x$legends, TRUE)) {
+        layoutNames <- c(layoutNames, legendName)
       }
 
       # get correct panel (and strips)
