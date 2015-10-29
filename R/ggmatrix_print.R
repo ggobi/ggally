@@ -124,20 +124,16 @@ print.ggmatrix <- function(
 
   # determine if space should be given for Y text labels
   v1XWidth <- unit(1,"npc") - unit(ifelse(displayYAxisLabels, 3, 1), "lines")
-  if (displayXAxisLabels) {
-    # make room for X text labels
-    v1 <- viewport(
-      width  = v1XWidth,
-      height = unit(1, "npc") - unit(3, "lines")
-    )
-  } else {
-    # plot fully to left side (no Y labels)
-    v1 <- viewport(
-      y = unit(0.5, "npc") - unit(0.5,"lines"),
-      width  = v1XWidth,
-      height = unit(1, "npc") - unit(2, "lines")
-    )
+  v1YHeight <- unit(1,"npc") - unit(ifelse(displayXAxisLabels, 3, 2), "lines")
+  v1YVal <- unit(0.5, "npc")
+  if (!displayXAxisLabels) {
+    v1YVal <- v1YVal - unit(0.5, "lines")
   }
+  v1 <- viewport(
+    y = v1YVal,
+    width  = v1XWidth,
+    height = v1YHeight
+  )
 
   viewPortWidths <- c(1, rep(c(spacingProportion,1), x$ncol - 1))
   viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1)
@@ -164,7 +160,11 @@ print.ggmatrix <- function(
   ))
 
 
+##############################################################
+####################  End Viewports  #########################
+##############################################################
 
+####################  Start Labels  #########################
 
   grid.newpage()
 
@@ -185,22 +185,18 @@ print.ggmatrix <- function(
     }
   }
 
-##############################################################
-####################  End Viewports  #########################
-##############################################################
-
-####################  Start Labels  #########################
-
   # plot the y text axis labels
   if (displayYAxisLabels) {
 
     # viewport for Left Names
-    pushViewport(
-      viewport(
-        width = unit(1, "npc") - unit(2,"lines"),
-        height = unit(1, "npc") - unit(3, "lines")
-      )
-    )
+    leftViewPort <- v1
+    leftViewPort$width <- leftViewPort$width + unit(1, "lines")
+    pushViewport(leftViewPort)
+    #   viewport(
+    #     width = unit(1, "npc") - unit(2,"lines"),
+    #     height = unit(1, "npc") - unit(3, "lines")
+    #   )
+    # )
 
     ## new for axis spacingProportion
     pushViewport(
@@ -235,12 +231,14 @@ print.ggmatrix <- function(
   if (displayXAxisLabels) {
 
     # viewport for Bottom Names
-    pushViewport(
-      viewport(
-        width = unit(1, "npc") - unit(3,"lines"),
-        height = unit(1, "npc") - unit(2, "lines")
-      )
-    )
+    bottomViewPort <- v1
+    bottomViewPort$height <- bottomViewPort$height + unit(1, "lines")
+    pushViewport(bottomViewPort)
+    #   viewport(
+    #     width = unit(1, "npc") - unit(3,"lines"),
+    #     height = unit(1, "npc") - unit(2, "lines")
+    #   )
+    # )
 
     ## new for axis spacing
     pushViewport(
