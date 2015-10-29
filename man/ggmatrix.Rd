@@ -4,11 +4,11 @@
 \alias{ggmatrix}
 \title{ggpairs - A ggplot2 Matrix}
 \usage{
-ggmatrix(plots, nrow, ncol, xAxisLabels = rep("", length(plots)),
-  yAxisLabels = rep("", length(plots)), title = NULL, byrow = TRUE,
-  showStrips = NULL, showAxisPlotLabels = TRUE,
-  showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, verbose = FALSE,
-  data = NULL, gg = NULL, legends = FALSE)
+ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
+  title = NULL, byrow = TRUE, showStrips = NULL,
+  showAxisPlotLabels = TRUE, showXAxisPlotLabels = TRUE,
+  showYAxisPlotLabels = TRUE, verbose = FALSE, data = NULL, gg = NULL,
+  legends = FALSE)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
@@ -51,9 +51,10 @@ a <- ggmatrix(
 a <- ggmatrix(
   plotList,
   2, 3,
-  c("A", "B", "C"),
-  c("D", "E"),
-  byrow = FALSE
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = NULL,
+  byrow = FALSE,
+  showXAxisPlotLabels = FALSE
 )
 #a
 }
