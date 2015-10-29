@@ -38,3 +38,21 @@ test_file:
     test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
   }
   tf("ggpairs")
+knit_vignettes:
+  devtools::build_vignettes("./")
+knit_vignette:
+  kv <- function(file = "ggmatrix") {
+    require(knitr)
+    setwd("vignettes")
+    tryCatch({
+      knit2html(paste0(file, ".Rmd"))
+      file.remove(paste0(file, ".md"))
+      if (dir.exists(file.path("vignettes", "figure"))) {
+        unlink(file.path("vignettes", "figure"), recursive = TRUE)
+      }
+    }, finally = {
+      setwd("../")
+    })
+    invisible(TRUE)
+  }
+  kv("ggmatrix")
