@@ -369,23 +369,17 @@ print.ggmatrix <- function(
 
       # ask about strips
       layoutNames <- c("panel")
-      layoutPlusLegend <- c("panel", "strip-right", "strip-top")
       stripRightName <- "strip-right"
       stripTopName <- "strip-top"
       legendName <- "guide-box"
 
       if (is.null(x$showStrips)) {
-        # make sure it's a ggally plot
-        pShowStrips <- (!is.null(p$type)) && (!is.null(p$subType))
-
         # make sure it's on the outer right and top edge
-        if (pShowStrips) {
-          if (columnPos == (x$ncol)) {
-            layoutNames <- c(layoutNames, stripRightName)
-          }
-          if (rowPos == 1) {
-            layoutNames <- c(layoutNames, stripTopName)
-          }
+        if (columnPos == (x$ncol)) {
+          layoutNames <- c(layoutNames, stripRightName)
+        }
+        if (rowPos == 1) {
+          layoutNames <- c(layoutNames, stripTopName)
         }
 
       } else if (x$showStrips) {
