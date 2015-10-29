@@ -186,7 +186,7 @@ ggpairs <- function(
       "Extra arguments: ",
       str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
       "  If these are meant to be aesthetics, submit them using the",
-      "'mapping' variable with ggplot2::aes or ggplot2::aes_string."
+      " 'mapping' variable within ggpairs with ggplot2::aes or ggplot2::aes_string."
     ))
   }
 
