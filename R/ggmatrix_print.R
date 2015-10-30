@@ -428,6 +428,7 @@ print.ggmatrix <- function(
       stripRightName <- "strip-right"
       stripTopName <- "strip-top"
       legendName <- "guide-box"
+      allLayoutNames <- c(layoutNames, stripRightName, stripTopName, legendName)
 
       if (is.null(x$showStrips)) {
         # make sure it's on the outer right and top edge
