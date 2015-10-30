@@ -74,10 +74,17 @@ pm <- ggmatrix(
   nrow = 2, ncol = 3,
   xAxisLabels = c("A", "B", "C"),
   yAxisLabels = c("D", "E"),
-  title = "Matrix Title",
-  byrow = FALSE
+  title = "Matrix Title"
 )
 pm
+p2 <- pm[1,2]
+p3 <- pm[1,3]
+p2
+p3
+pm[1,2] <- p3
+pm[1,3] <- p2
+pm
+
 ```
 
 ## Themes
