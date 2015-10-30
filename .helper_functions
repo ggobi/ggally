@@ -41,7 +41,7 @@ test_file:
 knit_vignettes:
   devtools::build_vignettes("./")
 knit_vignette:
-  kv <- function(file = "ggmatrix") {
+  kv <- function(file = "ggmatrix", openFile = interactive()) {
     require(knitr)
     setwd("vignettes")
     tryCatch({
@@ -50,9 +50,11 @@ knit_vignette:
       if (dir.exists(file.path("vignettes", "figure"))) {
         unlink(file.path("vignettes", "figure"), recursive = TRUE)
       }
+      if(openFile) browseURL(paste0(file, ".html"))
     }, finally = {
       setwd("../")
     })
+
     invisible(TRUE)
   }
   kv("ggmatrix")
