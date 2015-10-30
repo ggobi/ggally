@@ -180,4 +180,4 @@ pmBW
 
 John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham.
 **[The Generalized Pairs Plot](http://vita.had.co.nz/papers/gpp.html)**.
-*Journal of Computational and Graphical Statistics*, vol. 22, no. 1, pp. 79–91, 2012.
+*Journal of Computational and Graphical Statistics*, vol. 22, no. 1, pp. 79-91, 2012.
