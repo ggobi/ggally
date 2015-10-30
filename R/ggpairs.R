@@ -528,7 +528,11 @@ mapping_color_fill <- function(current) {
 #' @param current the current aesthetics
 #' @keywords internal
 set_to_blank_list_if_blank <- function(val, combo = TRUE) {
-  if (!is.list(val) && val == "blank") {
+  isBlank <- is.null(val)
+  if (!isBlank) {
+    isBlank <- (!is.list(val) && val == "blank")
+  }
+  if (isBlank) {
     val <- list()
     val$continuous <- "blank"
     if (combo) {
