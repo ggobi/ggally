@@ -319,9 +319,9 @@ ggpairs <- function(
     sectionAes <- NULL
 
     if (up) {
-      sectionAes <- upper$aes_string
+      sectionAes <- upper$mapping
     } else {
-      sectionAes <- lower$aes_string
+      sectionAes <- lower$mapping
     }
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
@@ -403,7 +403,7 @@ ggpairs <- function(
         }
         subTypeName <- get_subtype_name(subType)
 
-        comboAes <- add_and_overwrite_aes(plotAes, diag$aes_string)
+        comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
 
         if (
           ((!identical(subTypeName, "density")) && type == "stat_bin-num") ||
@@ -420,7 +420,7 @@ ggpairs <- function(
         )
 
       } else if (type == "label") {
-        comboAes <- add_and_overwrite_aes(plotAes, diag$aes_string)
+        comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
 
         p <- make_ggmatrix_plot_obj(
           wrap_fn_with_param_arg("diagAxis", params = c("label" = columnLabels[posX])),
@@ -561,6 +561,13 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
 
   if (! is.null(obj$params)) {
     display_param_error()
+  }
+
+  if (! is.null(obj$aes_string)) {
+    stop(str_c(
+      "'aes_string' is a depricated element for the section ", name, "."
+      "Please use 'mapping' instead. "
+    ))
   }
 
   obj
