@@ -64,6 +64,38 @@ pm <- ggmatrix(
 pm
 ```
 
+## Matrix Subsetting
+
+Individual plots may be retrieved from the plot matrix and can be placed in the plot matrix.
+
+```{r ggmatrix_place}
+pm <- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "Matrix Title",
+  byrow = FALSE
+)
+pm
+```
+
+## Themes
+
+```{r ggmatrix_place}
+pm <- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "Matrix Title",
+  byrow = FALSE
+)
+pm <- pm + theme_bw()
+pm
+```
+
+
 
 ## Axis Control
 
