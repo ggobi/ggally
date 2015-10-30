@@ -89,7 +89,7 @@ pm
 
 ## Themes
 
-```{r ggmatrix_place}
+```{r ggmatrix_theme}
 pm <- ggmatrix(
   plotList,
   nrow = 2, ncol = 3,
