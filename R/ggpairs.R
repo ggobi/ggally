@@ -565,7 +565,7 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
 
   if (! is.null(obj$aes_string)) {
     stop(str_c(
-      "'aes_string' is a depricated element for the section ", name, "."
+      "'aes_string' is a depricated element for the section ", name, ".",
       "Please use 'mapping' instead. "
     ))
   }
