@@ -205,7 +205,9 @@ ggpairs <- function(
   axisLabels <- axisLabelChoices[axisLabelChoice]
 
   if(is.character(columns)) {
-    columns <- which(colnames(data) %in% columns)
+    columns <- unlist(lapply(columns, function(colName){
+      which(colnames(data) == colName)
+    }))
   }
 
   if (any(columns > ncol(data))) {
