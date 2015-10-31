@@ -6,6 +6,9 @@ linters: with_defaults(
   )
 exclusions:
   list(
+    "inst/doc/ggpairs.R",
+    "inst/doc/ggmatrix.R",
+    "inst/doc/ggnetworkmap.R",
     "R/ggnetworkmap.R",
     "R/ggcorr.R",
     "R/ggsurv.R",
