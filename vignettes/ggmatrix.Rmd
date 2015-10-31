@@ -186,7 +186,7 @@ Since ggmatrix is not a "true" ggplot2 object, spacing between the plot axis lab
 ```{r ggmatrix_customPrinting}
 data(presidential, package = "ggplot2")
 plotList <- list(
-  qplot(name, data = presidential, geom = "bar", fill = party) +ylim(c(0,6))+ coord_flip(),
+  qplot(name, data = presidential, geom = "bar", fill = party) + ylim(c(0,6)) + coord_flip(),
   qplot(party, data = presidential, geom = "bar", fill = party) + coord_flip()
 )
 pm <- ggmatrix(
