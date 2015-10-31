@@ -58,3 +58,16 @@ knit_vignette:
     invisible(TRUE)
   }
   kv("ggmatrix")
+reverse_depends:
+  check_rev_deps = function() {
+    curPkgType <- getOption("pkgType")
+    on.exit({options(pkgType = curPkgType)})
+    options(pkgType = "mac.binary")
+
+    res <- devtools::revdep_check(type = "mac.binary")
+    dir.create("revdep", showWarnings = FALSE)
+    devtools::revdep_check_save_logs(res)
+    devtools::revdep_check_save_summary(res)
+    invisible(res)
+  }
+  res <- check_rev_deps()
