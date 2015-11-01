@@ -1,4 +1,4 @@
-# GGally: Ally to ggplot2
+# GGally: ggplot2 extension
 
 Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](http://cran.r-project.org/package=GGally) [![](http://cranlogs.r-pkg.org/badges/GGally)](http://cran.rstudio.com/web/packages/GGally/index.html)
 
@@ -8,8 +8,7 @@ Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https:
 [![Public Slack Discussion](https://ggally-slack.herokuapp.com/badge.svg)](https://ggally-slack.herokuapp.com/)
 
 
-
-GGally is designed to be a helper to [ggplot2](http://docs.ggplot2.org/current/). It contains templates for different plots to be combined into a plot matrix, a parallel coordinate plot function, as well as a function for making a network plot.
+[ggplot2](http://docs.ggplot2.org/current/) is a plotting system for R based on the grammar of graphics. [GGally](https://ggobi.github.io/ggally) extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data.  Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.
 
 ## Installation
 
@@ -19,7 +18,9 @@ To install this package from Github or [CRAN](http://cran.r-project.org/web/pack
 # Github
 library(devtools)
 install_github("ggobi/ggally")
+```
 
+```r
 # CRAN
 install.packages("GGally")
 ```

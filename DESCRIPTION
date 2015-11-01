@@ -18,9 +18,12 @@ Authors@R: c(
     person("Moritz", "Marbach", role = "aut", email = "mmarbach@mail.uni-mannheim.de", comment = "ggnet, ggnet2"),
     person("Edwin", "Thoen", role = "aut", email = "edwinthoen@gmail.com", comment = "ggsurv"),
     person("Amos", "Elberg", role = "aut", email = "amos.elberg@gmail.com", comment = "ggnetworkmap"))
-Description: GGally extends ggplot2 by adding several functions to it, including
-    templates to combine plots into a plot matrix, a parallel coordinates plot
-    function, and several functions to plot networks.
+Description: \href{http://docs.ggplot2.org/current/}{ggplot2} is a plotting system for R
+    based on the grammar of graphics. \href{https://ggobi.github.io/ggally}{GGally}
+    extends ggplot2 by adding several functions to reduce the complexity of combining
+    geoms with transformed data.  Some of these functions include a pairwise plot matrix,
+    a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several
+    functions to plot networks.
 VignetteBuilder: knitr
 Depends:
     R (>= 2.14)
