@@ -291,7 +291,7 @@ ggsurv_m <- function(
           data = dat.cens,
           mapping = aes(y=surv, col = group),
           shape = cens.shape,
-          show_guide = FALSE
+          show.legend = FALSE
         )
       } else {
 
@@ -313,7 +313,7 @@ ggsurv_m <- function(
             mapping = aes(y=surv),
             color = I(cens.col[i]),
             shape = cens.shape[i],
-            show_guide = FALSE
+            show.legend = FALSE
           )
 
         }
