@@ -83,6 +83,7 @@ if(getRversion() >= "2.15.1") {
 #' @return ggplot object that if called, will print
 #' @import plyr
 #' @importFrom reshape melt melt.data.frame
+#' @importFrom stats complete.cases sd median mad lm spline
 #' @export
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes
@@ -641,6 +642,7 @@ scag_order <- function(scag, vars, measure) {
 #'   of looking for separation between any class and the rest, will only look for
 #'   separation between this class and the rest
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @importFrom stats lm
 #' @return character vector of names of axisVars ordered such that the first
 #'   variable has the most separation between one of the classes and the rest, and
 #'   the last variable has the least (as measured by F-statistics from an ANOVA)

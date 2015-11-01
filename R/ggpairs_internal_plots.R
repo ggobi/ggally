@@ -205,6 +205,7 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #' @param ... passed on to the default str method
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
 #' @method str ggmatrix
+#' @importFrom utils str
 #' @export
 str.ggmatrix <- function(object, ..., raw = FALSE) {
   objName <- as.character(substitute(object))

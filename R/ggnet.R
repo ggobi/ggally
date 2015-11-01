@@ -132,6 +132,8 @@ if (getRversion() >= "2.15.1") {
 #' \code{weight} argument will take the directedness of the network into account,
 #' but will be unweighted. To compute weighted network measures, see the
 #' \code{\link[tnet:tnet-package]{tnet}} package by Tore Opsahl.
+#' @importFrom stats quantile na.omit
+#' @importFrom utils head
 #' @examples
 #' if (require(network)){
 #'

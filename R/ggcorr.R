@@ -98,6 +98,7 @@ if (getRversion() >= "2.15.1") {
 #' @author Francois Briatte, with contributions from Amos B. Elberg and
 #' Barret Schloerke
 #' @importFrom reshape melt melt.data.frame melt.default
+#' @importFrom stats cor
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
 #' dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")

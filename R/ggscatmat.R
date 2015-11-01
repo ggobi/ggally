@@ -57,6 +57,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to choose a factor variable to be grouped with. Defaults to \code{(NULL)}
 #' @author Mengjia Ni, Di Cook \email{dicook@@iastate.edu}
+#' @importFrom stats cor
 #' @examples
 #' data(flea)
 #' head(uppertriangle(flea, columns=2:4))

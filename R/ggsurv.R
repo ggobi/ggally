@@ -30,6 +30,7 @@ if(getRversion() >= "2.15.1") {
 #' @param main the plot label.
 #' @return An object of class \code{ggplot}
 #' @author Edwin Thoen \email{edwinthoen@@gmail.com}
+#' @importFrom stats time
 #' @examples
 #'
 #' if (require(survival) && require(scales)) {
