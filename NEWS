@@ -1,123 +1,56 @@
-GGally 0.5.0
+GGally 1.0.0
 -----------------
 
-GGPAIRS
+GGally has been upgraded to run on the latest ggplot2 v1.1.0. PR#109
 
-* restructured print method to align properly
-* prints only panels, not panels and axis labels in the same plotting area
-* prints axis labels in separate plotting area
-* may control the spacing between plots in print method
-* may control the spacing for the left and bottom axis labels in print method.  This is not perfect behavior, but this small loss is worth the major gain of alignment
-* may provide custom labels to plot matrix.  'illegal' variable names are now NOT allowed as custom labels may be provided.
-* may add a theme to be applied to all subplots
+New functions
 
-GGSCATMAT
-
-* new function!
-* this function makes a scatterplot matrix for quantitative variables with density plots on the diagonal and correlation printed in the upper triangle.
-* produces a legend when a color column is provided
-* produces a ggplot2 object
+* ggmatrix. Make a generic matrix of ggplot2 plots
+* ggnetworkmap. Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot
+* ggnet2. Function for plotting network objects using ggplot2, with additional control over graphical parameters that are not supported by the ggnet function
 
 
-GGPARCOORD - splineFactor
+Vignettes
 
-* added new splineFactor argument to fit a spline of the points
-* may take on TRUE, which defaults to 3 interpolated points
-* may take on integer, which interpolates n * length points
-* may take an AsIs integer, which interpolates n points
+* ggpairs - new!
+* ggmatrix - new!
+* ggnetworkmap - new!
 
+ggmatrix
 
+* allows for bracket notation when getting or setting plots. PR#61
+* full control over axis labels and axis text. PR#107, PR#111
 
-GGally 0.4.8
------------------
+ggpairs
 
-DATA
+* is now wrapper to ggmatrix
+* takes in 'wrapped' functions.  This better handles the case of many different parameters being supplied to different plot types. PR#90
+* dates are better handled in ggpairs.  Still room for improvement for default behavior, but they do not cause errors. PR#58, PR#59
 
-* Added a dataset on city and service firms from the UCIrvine Network Data Repository. (Removes random connection error)
+ggcorr
 
-BUGS
+* legend title expressions may be used. PR#55
+* handles objects that may be coerced into a data.frame PR#70
 
-* Fixed small bug in ggsurv with geom_step col to lty
-* Fixed namespace issues for R CMD check
+gglyph
 
+* changed geom_line to geom_path in gglyph. Fixes ordering issue. PR#51
 
+ggparcoord
 
-GGally 0.4.7
------------------
+* remaining columns are passed through so aesthetics may be added later. PR#54
+* fix parcoord ordering issues with odd names. PR#106
 
-UPDATES
+ggsurv
 
-* ggcorr, ggnet updated with new/more parameters by Francois
-* ggally_bar will now scale the y axis to match regular y axis with continuous data
-* added travis-ci testing
+* color censored marks the same color as the line. PR#74
+* allow for different censored color marks. PR#113
 
-BUGS
+ggally_density
 
-* Added missing ggsurv
+* add fake data points to extend the limits of the stat_density2d. PR#114
 
+Data
 
-GGally 0.4.6
------------------
-
-BUGS
-
-* Fixed ggally_smooth color issue
-* Moved ggplot2 and reshape into Imports and not Depends.
-
-
-GGPLOT2
-
-* Now requires version 1.0.0
-
-
-GGally 0.4.5
-------------
-
-CRAN
-
-* updated to fix reshape imports in NAMESPACE
-* updated to add import for package depends 'ggplot2' and 'reshape'
-
-EXAMPLES
-
-* removed 'ggplot::' from examples
-
-
-GGally 0.4.4
------------------
-
-NEW FUNCTION
-
-* `ggnet` has been added to the main functions of GGally.  `ggnet` is a
-  function for making a network plot from an object of class `network` or
-  `igraph`, using ggplot2. To see a quick demo, check out Francois Briatte's
-  github page: https://github.com/briatte/ggnet
-
-DOCUMENTATION
-
-* merged some typo mistakes
-
-BUILD
-
-* Built under the lastest version of R (v3.0.1)
-
-GGally 0.4.3
------------------
-
-NEW FUNCTION
-
-* `ggcorr` has been added to the main functions of GGally.  `ggcorr` is a
-  function for making a correlation plot starting from a data matrix, using
-  ggplot2. The function is directly inspired by Tian Zheng and Yu-Sung Su's
-  arm:corrplot function.
-
-ARGUMENTS
-
-* `ggally_cor` has a new argument of "corSize".
-
-* `ggparcoord` argument "alphaLines" can now point to a column or column number.
-
-DOCUMENTATION
-
-* tweaks were made to the roxygen comments to produce cleaner documentation
-
+* removed cityServiceFirms
+* added twitter_spambots
