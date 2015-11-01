@@ -1,0 +1,17 @@
+linters: with_defaults(
+    camel_case_linter = NULL,
+    commented_code_linter = NULL,
+    line_length_linter(100),
+    NULL
+  )
+exclusions:
+  list(
+    "inst/doc/ggpairs.R",
+    "inst/doc/ggmatrix.R",
+    "inst/doc/ggnetworkmap.R",
+    "R/ggnetworkmap.R",
+    "R/ggcorr.R",
+    "R/ggsurv.R",
+    "R/ggnet.R",
+    "R/ggnet2.R"
+  )

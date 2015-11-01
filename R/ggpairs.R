@@ -19,6 +19,15 @@
 #   facetbar
 #   blank
 
+# diag
+#   continuous
+#     densityDiag
+#     barDiag
+#     blankDiag
+#   discrete
+#     barDiag
+#     blankDiag
+
 ### Example removed due to not using facet labels anymore
 # #Sequence to show how to change label size
 # make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
@@ -49,8 +58,8 @@
 #'
 #' diag is a list that may only contain the variables 'continuous' and 'discrete'.
 #' Each element of the diag list is a string implmenting the following options:
-#' continuous = exactly one of ('density', 'bar', 'blank'); discrete = exactly one
-#' of ('bar', 'blank').
+#' continuous = exactly one of ('densityDiag', 'barDiag', 'blankDiag'); discrete = exactly one
+#' of ('barDiag', 'blankDiag').
 #'
 #' If a list option it will be set to the function default.  If 'blank' is ever
 #' chosen as an option, then ggpairs will produce a blank plot, as if nothing was
@@ -58,17 +67,19 @@
 #'
 #' @export
 #' @param data data set using.  Can have both numerical and categorical data.
+#' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.
 #' @param columns which columns are used to make plots.  Defaults to all columns.
 #' @param title title for the graph
 #' @param upper see Details
 #' @param lower see Details
 #' @param diag see Details
-#' @param params vector of parameters to be applied to geoms.  Each value must have a corresponding name, such as \code{c(binwidth = 0.1)}.
+#' @param params depricated.  Please see \code{\link{wrap_fn_with_param_arg}}
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
+#' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
-#' @param verbose boolean to determine the printing of "Plot #1, Plot #2...."
+#' @param verbose boolean to determine the printing of "Plot #1, Plot #2..."
 #' @keywords hplot
 #' @import ggplot2
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
@@ -101,21 +112,12 @@
 #' # Custom Example
 #' pm <- ggpairs(
 #'  diamonds.samp[,1:5],
-#'  upper = list(continuous = "density", combo = "box"),
-#'  lower = list(continuous = "points", combo = "dot"),
-#'  color = "cut",
-#'  alpha = 0.4,
+#'  mapping = ggplot2::aes(color = cut),
+#'  upper = list(continuous = wrap("density", alpha = 0.5), combo = "box"),
+#'  lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot", alpha = 0.4)),
 #'  title = "Diamonds"
 #' )
 #' # pm
-#'
-#' # Will plot four "Incorrect Plots"
-#' bad_plots <- ggpairs(
-#'   tips[,1:3],
-#'   upper = list(continuous = "wrongType1", combo = "wrongType2"),
-#'   lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
-#' )
-#' # bad_plots
 #'
 #' # Only Variable Labels on the diagonal (no axis labels)
 #' pm <- ggpairs(tips[,1:3], axisLabels="internal")
@@ -139,6 +141,7 @@
 #' # custom_car
 ggpairs <- function(
   data,
+  mapping = NULL,
   columns = 1:ncol(data),
   title = "",
   upper = list(),
@@ -148,21 +151,50 @@ ggpairs <- function(
   ...,
   axisLabels = "show",
   columnLabels = colnames(data[,columns]),
+  showStrips = NULL,
   legends = FALSE,
   verbose = FALSE
 ){
+
+  if (! is.null(params)) {
+    display_param_error()
+  }
+
+  if (is.numeric(mapping) & missing(columns)) {
+      columns <- mapping
+      mapping <- NULL
+  }
+
+  if (is.numeric(mapping)) {
+    stop(str_c(
+      "'mapping' should not be numeric",
+      " unless 'columns' is missing from function call."
+    ))
+  }
+
   args <- list(...)
   if ("printInfo" %in% names(args)) {
-    printInfo <- args[['printInfo']]
+    printInfo <- args[["printInfo"]]
+    args[["printInfo"]] <- NULL
   } else {
     printInfo <- FALSE
+  }
+
+  if (length(args) > 0) {
+    argNames <- names(args)
+    warning(str_c(
+      "Extra arguments: ",
+      str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
+      "  If these are meant to be aesthetics, submit them using the",
+      " 'mapping' variable within ggpairs with ggplot2::aes or ggplot2::aes_string."
+    ))
   }
 
   if (! identical(class(data),"data.frame")) {
     data <- as.data.frame(data)
   }
 
-  verbose = verbose || printInfo
+  verbose <- verbose || printInfo
 
   axisLabelChoices <- c("show", "internal", "none")
   axisLabelChoice <- pmatch(axisLabels, axisLabelChoices)
@@ -173,17 +205,28 @@ ggpairs <- function(
   axisLabels <- axisLabelChoices[axisLabelChoice]
 
   if(is.character(columns)) {
-    columns <- which(colnames(data) %in% columns)
+    columns <- unlist(lapply(columns, function(colName){
+      which(colnames(data) == colName)
+    }))
   }
 
   if (any(columns > ncol(data))) {
-    stop(paste("Make sure your 'columns' values are less than or equal to ", ncol(data), ".\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+    stop(str_c(
+      "Make sure your 'columns' values are less than or equal to ", ncol(data), ".\n",
+      "\tcolumns = c(", str_c(columns, collapse = ", "), ")"
+    ))
   }
   if (any(columns < 1)) {
-    stop(paste("Make sure your 'columns' values are positive.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+    stop(str_c(
+      "Make sure your 'columns' values are positive.", "\n",
+      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
+    ))
   }
-  if (any((columns %% 1) != 0)) {
-    stop(paste("Make sure your 'columns' values are integers.", "\n\tcolumns = c(", paste(columns, collapse = ", "), ")", sep = ""))
+  if (any( (columns %% 1) != 0)) {
+    stop(str_c(
+      "Make sure your 'columns' values are integers.", "\n",
+      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
+    ))
   }
 
   if (length(columnLabels) != length(columns)) {
@@ -201,62 +244,22 @@ ggpairs <- function(
     ))
   }
 
+  upper <- set_to_blank_list_if_blank(upper)
+  lower <- set_to_blank_list_if_blank(lower)
+  diag  <- set_to_blank_list_if_blank(diag, combo = FALSE)
 
-  if (!is.list(upper) && upper == "blank") {
-    upper <- list()
-    upper$continuous = "blank"
-    upper$combo = "blank"
-    upper$discrete = "blank"
-  }
-  if (!is.list(lower) && lower == "blank") {
-    lower <- list()
-    lower$continuous = "blank"
-    lower$combo = "blank"
-    lower$discrete = "blank"
-  }
-  if (!is.list(diag) && diag == "blank") {
-    diag <- list()
-    diag$continuous = "blank"
-    diag$discrete = "blank"
-  }
-
-  if (!is.list(upper)) {
-    stop("'upper' is not a list")
-  }
-
-  if (is.null(upper$continuous)) {
-    upper$continuous <- "cor"
-  }
-  if (is.null(upper$combo)) {
-    upper$combo <- "box"
-  }
-  if (is.null(upper$discrete)) {
-    upper$discrete <- "facetbar"
-  }
-
-  if (!is.list(lower)) {
-    stop("'lower' is not a list")
-  }
-
-  if (is.null(lower$continuous)) {
-    lower$continuous <- "points"
-  }
-  if (is.null(lower$combo)) {
-    lower$combo <- "facethist"
-  }
-  if (is.null(lower$discrete)) {
-    lower$discrete <- "facetbar"
-  }
-
-  if (!is.list(diag)) {
-    stop("'diag' is not a list")
-  }
-  if (is.null(diag$continuous)) {
-    diag$continuous <- "density"
-  }
-  if (is.null(diag$discrete)) {
-    diag$discrete <- "bar"
-  }
+  upper <- check_and_set_defaults(
+    "upper", upper,
+    continuous = "cor", combo = "box", discrete = "facetbar"
+  )
+  lower <- check_and_set_defaults(
+    "lower", lower,
+    continuous = "points", combo = "facethist", discrete = "facetbar"
+  )
+  diag <- check_and_set_defaults(
+    "diag", diag,
+    continuous = "densityDiag", discrete = "barDiag"
+  )
 
   data <- as.data.frame(data)
   for (i in 1:dim(data)[2] ) {
@@ -295,6 +298,7 @@ ggpairs <- function(
     dataTypes$Type <- as.factor(dataTypes$Type)
   }
 
+
   for (i in 1:nrow(dataTypes)) {
     p <- "blank"
     type <- dataTypes[i,"Type"]
@@ -304,6 +308,7 @@ ggpairs <- function(
     xColName <- as.character(dataTypes[i,"xvar"])
     yColName <- as.character(dataTypes[i,"yvar"])
 
+    plotAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), mapping)
 
     up <- posX > posY
 
@@ -311,19 +316,16 @@ ggpairs <- function(
       cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
     }
 
-    section_aes <- section_params <- NULL
+    sectionAes <- NULL
 
     if (up) {
-      section_aes <- upper$aes_string
-      section_params <- upper$params
+      sectionAes <- upper$mapping
     } else {
-      section_aes <- lower$aes_string
-      section_params <- lower$params
+      sectionAes <- lower$mapping
     }
 
     if (type %in% c("scatterplot", "box-hori", "box-vert")) {
-      isContinuous = (type == "scatterplot")
-      isCombo = (type == "box-hori" || type == "box-vert")
+      isContinuous <- (type == "scatterplot")
       if (printInfo) {
         if (isContinuous) {
           cat("continuous\n")
@@ -333,49 +335,61 @@ ggpairs <- function(
       }
 
       if (up) {
-        subType <- ifelse(isContinuous, upper$continuous, upper$combo)
+        subType <- if (isContinuous) upper$continuous else upper$combo
       } else {
-        subType <- ifelse(isContinuous, lower$continuous, lower$combo)
+        subType <-  if (isContinuous) lower$continuous else lower$combo
       }
 
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
+      # comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), sectionAes)
+      comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
+      subTypeName <- get_subtype_name(subType)
       if (isContinuous) {
-        if (subType == "density") {
-          combo_aes <- addAndOverwriteAes(combo_aes, aes_string(group = combo_aes$colour))
-
+        if (identical(subTypeName, "density")) {
+          comboAes <- add_and_overwrite_aes(comboAes, aes_string(group = comboAes$colour))
         }
       } else {
         # isCombo
-        if (! subType %in% c("dot", "facetdensity")) {
-          combo_aes <- mapping_color_fill(combo_aes)
+
+        # ! subType %in% c("dot", "facetdensity")
+        # subType %in% c("box", "facethist", denstrip)
+
+        if (! (identical(subTypeName, "dot") || identical(subTypeName, "facetdensity"))) {
+          comboAes <- mapping_color_fill(comboAes)
         }
+
       }
 
-      combo_params <- addAndOverwriteAes(params, section_params)
-
-      p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+      p <- make_ggmatrix_plot_obj(
+        wrap_fn_with_param_arg(subType, params = c()),
+        mapping = comboAes
+      )
 
     } else if (type == "mosaic") {
       if (printInfo) {
         cat("mosaic\n")
       }
-      subType <- ifelse(up, upper$discrete, lower$discrete)
+      subType <- if (up) upper$discrete else lower$discrete
+      subTypeName <- get_subtype_name(subType)
 
-      combo_aes <- addAndOverwriteAes(aes_string(x = xColName, y = yColName, ...), section_aes)
-      combo_params <- addAndOverwriteAes(params, section_params)
+      comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
-      if (subType == "ratio") {
+      if (identical(subTypeName, "ratio")) {
         p <- ggally_ratio(data[, c(yColName, xColName)])
 
-      } else if (subType == "facetbar") {
-        if (!is.null(combo_aes$colour)) {
-          combo_aes <- addAndOverwriteAes(combo_aes, aes_string(fill = combo_aes$colour))
+      } else if (identical(subTypeName, "facetbar")) {
+        if (!is.null(comboAes$colour)) {
+          comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
         }
-        p <- make_ggpair_text(subType, combo_aes, combo_params, printInfo)
+        p <- make_ggmatrix_plot_obj(
+          wrap_fn_with_param_arg(subType, params = c()),
+          mapping = comboAes
+        )
+
       }
 
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
+      plotAes$y <- NULL
 
       if (type == "stat_bin-num" || type == "stat_bin-cat") {
         if (printInfo) {
@@ -387,30 +401,36 @@ ggpairs <- function(
         } else if (type == "stat_bin-cat") {
           subType <- diag$discrete
         }
+        subTypeName <- get_subtype_name(subType)
 
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
+        comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
 
         if (
-          (subType != "density" && type == "stat_bin-num") ||
+          ((!identical(subTypeName, "density")) && type == "stat_bin-num") ||
           (type == "stat_bin-cat")
         ) {
-          combo_aes <- mapping_color_fill(combo_aes)
+          comboAes <- mapping_color_fill(comboAes)
         }
 
-        combo_params <- addAndOverwriteAes(params, diag$params)
+        fn_to_wrap <- subType
 
-        p <- make_ggpair_text(paste(subType, "Diag", sep = "", collapse = ""), combo_aes, combo_params,printInfo)
+        p <- make_ggmatrix_plot_obj(
+          wrap_fn_with_param_arg(fn_to_wrap, params = c()),
+          mapping = comboAes
+        )
 
       } else if (type == "label") {
-        combo_aes <- addAndOverwriteAes(aes_string(x = xColName, ...), diag$aes_string)
-        combo_params <- addAndOverwriteAes(params, diag$params)
-        combo_params <- addAndOverwriteAes(combo_params, c("label" = columnLabels[posX]))
+        comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
 
-        p <- make_ggpair_text("diagAxis", combo_aes, combo_params, printInfo)
+        p <- make_ggmatrix_plot_obj(
+          wrap_fn_with_param_arg("diagAxis", params = c("label" = columnLabels[posX])),
+          mapping = comboAes
+        )
+
       }
     }
 
-    ggpairsPlots[[length(ggpairsPlots)+1]] <- p
+    ggpairsPlots[[length(ggpairsPlots) + 1]] <- p
   }
 
   plotMatrix <- ggmatrix(
@@ -418,9 +438,11 @@ ggpairs <- function(
     byrow = TRUE,
     nrow = length(columns),
     ncol = length(columns),
-    axisLabels = axisLabels,
-    xAxisLabels = columnLabels,
-    yAxisLabels = columnLabels,
+    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    showStrips = showStrips,
+    showXAxisPlotLabels = identical(axisLabels, "show"),
+    showYAxisPlotLabels = identical(axisLabels, "show"),
     title = title,
     verbose = verbose,
     data = data,
@@ -431,58 +453,6 @@ ggpairs <- function(
   plotMatrix
 }
 
-#' Generate GGally Function Text
-#'
-#' Generate GGally function text with data, mapping, and parameters.
-#'
-#' @param func identifier string in function name
-#' @param mapping mapping supplied to the function
-#' @param params parameters applied to the geom in the function
-#' @param printInfo boolean to determine whether or not the executed function should be printed
-#' @keywords internal
-make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
-
-  nonCallVals <- which(lapply(mapping, mode) == "call")
-  if (length(nonCallVals) > 0) {
-    nonCallNames <- names(mapping)[nonCallVals]
-    stop(paste("variables: ", paste(shQuote(nonCallNames), sep = ", "), " have non standard format: ", paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "), ".  Please rename the columns and use labels instead.", sep = ""))
-  }
-
-  if (func %in% c("blank", "blankDiag")) {
-    return("blank")
-  }
-
-  func_text <- paste("ggally_", func, collapse = "", sep = "")
-  test_for_function <- tryCatch(
-    get(func_text, mode = "function"),
-    error = function(e)
-      "bad_function_name"
-  )
-
-  if (identical(test_for_function, "bad_function_name")) {
-    return( 'ggally_text("Incorrect\nPlot",size=6)')
-  }
-
-
-  text <- paste(func_text, "(ggally_data, ggplot2::aes(", paste(names(mapping), " = ", as.character(mapping), sep = "", collapse = ", "), ")", sep = "", collapse = "")
-
-  if (!is.null(params)) {
-    params[is.character(params)] <- paste("\"", params[is.character(params)], "\"", sep = "")
-    text <- paste(text, ", ", paste(names(params), "=", params, sep="", collapse=", "), sep="")
-  }
-  text <- paste(text, ")", sep = "", collapse = "")
-  if (printInfo) {
-    print("")
-    print(text)
-    print(str(mapping))
-  }
-  text
-}
-
-
-
-
-
 
 #' Add new aes
 #'
@@ -492,16 +462,19 @@ make_ggpair_text <- function(func, mapping, params=NULL, printInfo = FALSE){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @return aes_string output
 #' @import ggplot2
+#' @rdname add_and_overwrite_aes
 #' @examples
-#'  data(diamonds, package="ggplot2")
-#'  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],1000),]
-#'  ggpairs(diamonds.samp, columns = 5:7,
-#'   upper = list(continuous = "cor", aes_string = ggplot2::aes_string(color = "clarity")),
-#'   lower = list(continuous = "cor", aes_string = ggplot2::aes_string(color = "cut")),
-#'   color = "color",
-#'   title = "Diamonds Sample")
+#' data(diamonds, package="ggplot2")
+#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],1000),]
+#' pm <- ggpairs(diamonds.samp, columns = 5:7,
+#'   mapping = ggplot2::aes(color = color),
+#'   upper = list(continuous = "cor", mapping = ggplot2::aes_string(color = "clarity")),
+#'   lower = list(continuous = "cor", mapping = ggplot2::aes_string(color = "cut")),
+#'   title = "Diamonds Sample"
+#' )
+#' str(pm)
 #'
-addAndOverwriteAes <- function(current, new) {
+add_and_overwrite_aes <- function(current, new) {
   if (length(new) >= 1) {
     for (i in 1:length(new)) {
       current[names(new)[i]] <- new[i]
@@ -516,6 +489,8 @@ addAndOverwriteAes <- function(current, new) {
 
   current
 }
+
+
 
 
 #' Aesthetic Mapping Color Fill
@@ -533,7 +508,7 @@ mapping_color_fill <- function(current) {
   } else if (any(color %in% currentNames)) {
     # fill <- current[["fill" %in% currentNames]]
     # col <- current[[color %in% currentNames]]
-    # current <- addAndOverwriteAes(current, aes_string(fill = col, color = NA))
+    # current <- add_and_overwrite_aes(current, aes_string(fill = col, color = NA))
     current$fill <- current$colour
     current$colour <- NULL
   }
@@ -543,6 +518,86 @@ mapping_color_fill <- function(current) {
   # } else if(!is.null(mapping$colour)) {
   # }
   current
+}
+
+
+#' Aesthetic Mapping Color Fill
+#'
+#' Replace the fill with the color and make color NULL.
+#'
+#' @param current the current aesthetics
+#' @keywords internal
+set_to_blank_list_if_blank <- function(val, combo = TRUE) {
+  isBlank <- is.null(val)
+  if (!isBlank) {
+    isBlank <- (!is.list(val) && val == "blank")
+  }
+  if (isBlank) {
+    val <- list()
+    val$continuous <- "blank"
+    if (combo) {
+      val$combo <- "blank"
+    }
+    val$discrete <- "blank"
+  }
+
+  val
+}
+
+check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, discrete = NULL) {
+  if (!is.list(obj)) {
+    stop(str_c("'", name, "' is not a list"))
+  }
+
+  if (is.null(obj$continuous) && (!is.null(continuous))) {
+    obj$continuous <- continuous
+  }
+  if (is.null(obj$combo) && (!is.null(combo))) {
+    obj$combo <- combo
+  }
+  if (is.null(obj$discrete) && (!is.null(discrete))) {
+    obj$discrete <- discrete
+  }
+
+  if (! is.null(obj$params)) {
+    display_param_error()
+  }
+
+  if (! is.null(obj$aes_string)) {
+    stop(str_c(
+      "'aes_string' is a depricated element for the section ", name, ".",
+      "Please use 'mapping' instead. "
+    ))
+  }
+
+  obj
+}
+
+
+get_subtype_name <- function(subType) {
+  if (inherits(subType, "ggmatrix_fn_with_params")) {
+    name <- attr(subType, "fnName")
+    if (str_detect(name, "^ggally_")) {
+      str_replace(name, "^ggally_", "")
+    } else {
+      name
+    }
+  } else {
+    if (mode(subType) == "character") {
+      subType
+    } else {
+      "custom_function"
+    }
+  }
+}
+
+
+display_param_error <- function() {
+  stop(str_c(
+    "'params' is a depricated argument.  ",
+    "Please 'wrap' the function to supply arguments. ",
+    "help(\"wrap\", package = \"GGally\")"
+  ))
 }
 
 

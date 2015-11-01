@@ -5,7 +5,11 @@ TODO
 R/.DS_Store
 .git
 .travis.yml
+.helper_functions
+.lintr
 figure
 ggmapTemp.png
 README.html
 notes/
+tests/testthat/Rplots.pdf
+revdep

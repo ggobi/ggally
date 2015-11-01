@@ -31,7 +31,15 @@
 #'    ggplot2::geom_path() +
 #'    ggplot2::theme_bw() +
 #'    ggplot2::labs(x = "", y = "")
-glyphs <- function(data, x_major, x_minor, y_major, y_minor, polar = FALSE, height = rel(0.95), width = rel(0.95), y_scale = identity, x_scale = identity) {
+glyphs <- function(
+  data,
+  x_major, x_minor,
+  y_major, y_minor,
+  polar = FALSE,
+  height = rel(0.95), width = rel(0.95),
+  y_scale = identity,
+  x_scale = identity
+) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
 
   if (is.rel(width)) {
@@ -106,10 +114,10 @@ ref_boxes <- function(data, fill = NULL) {
   glyph <- attributes(data)
   cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid", fill)]))
 
-  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width/2,
-      xmax = cells[[glyph$x_major]] + glyph$width/2,
-      ymin = cells[[glyph$y_major]] - glyph$height/2,
-      ymax = cells[[glyph$y_major]] + glyph$height/2)
+  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width / 2,
+      xmax = cells[[glyph$x_major]] + glyph$width / 2,
+      ymin = cells[[glyph$y_major]] - glyph$height / 2,
+      ymax = cells[[glyph$y_major]] + glyph$height / 2)
   if (!is.null(fill)){
     df$fill <- cells[[fill]]
   }
@@ -235,11 +243,11 @@ min0 <- function(x) {
 #' @rdname rescale01
 rescale01 <- function(x, xlim=NULL) {
   if (is.null(xlim)) {
-	  rng <- range(x, na.rm = TRUE)
-   } else {
-   	  rng <- xlim
-   }
-   (x - rng[1]) / (rng[2] - rng[1])
+    rng <- range(x, na.rm = TRUE)
+  } else {
+    rng <- xlim
+  }
+  (x - rng[1]) / (rng[2] - rng[1])
 }
 #' @export
 #' @rdname rescale01

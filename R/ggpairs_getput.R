@@ -38,9 +38,16 @@ eval_ggpair <- function(txt, ggally_data) {
 #' custom_car[1,3] <- personal_plot
 #' # custom_car
 putPlot <- function(x, value, i, j){
-
   pos <- get_pos(x,i,j)
-  x$plots[[pos]] <- value
+  if (mode(value) == "character") {
+    if (value == "blank") {
+      x$plots[[pos]] <- ggally_blank()
+    } else {
+      stop("character values (besides 'blank') are not allowed to be stored as plot values.")
+    }
+  } else {
+    x$plots[[pos]] <- value
+  }
 
   if (x$printInfo) {
     cat("\n\nDone placing plot: ",pos,"\n")
@@ -74,32 +81,59 @@ getPlot <- function(x, i, j){
     cat("Plot List Spot: ",pos,"\n")
   }
 
+  # if (pos > length(x$plots)) {
+  #   plot_text <- "blank"
+  # } else {
+  #   plot_text <- x$plots[[pos]]
+  # }
   if (pos > length(x$plots)) {
-    plot_text <- "blank"
+    plotObj <- NULL
   } else {
-    plot_text <- x$plots[[pos]]
+    plotObj <- x$plots[[pos]]
   }
 
-  if (is.character(plot_text)) {
-    if (plot_text != "blank") {
-      p <- eval_ggpair(plot_text, x$data)
-      if (! is.null(x$gg)) {
-        p <- p + x$gg
-      }
-      # attributes( p)$class <- "ggplot"
-    } else {
-      p <- ggally_blank()
-    }
+  if (is.null(plotObj) || identical(plotObj, "blank")) {
+    p <- ggally_blank()
   } else {
-    p <- plot_text
+    if (ggplot2::is.ggplot(plotObj)) {
+      p <- plotObj
+    } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+
+      fn <- plotObj$fn
+      p <- fn(x$data, plotObj$mapping)
+
+    } else {
+      firstNote <- str_c("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
+      strObj <- capture.output({
+        print(str(plotObj))
+      })
+      stop(str_c("unknown plot object type.\n", firstNote, strObj))
+    }
+
+    if (!is.null(x$gg)) {
+      # print("adding custom gg")
+      p <- p + x$gg
+    }
   }
+  # stop("fix this")
+  # if (is.character(plot_text)) {
+  #   if (plot_text != "blank") {
+  #     p <- eval_ggpair(plot_text, x$data)
+  #     if (! is.null(x$gg)) {
+  #       p <- p + x$gg
+  #     }
+  #     # attributes( p)$class <- "ggplot"
+  #   } else {
+  #     p <- ggally_blank()
+  #   }
+  # } else {
+  #   p <- plot_text
+  # }
 
   if (x$printInfo || x$verbose) {
     cat("Plot #",pos)
-    if (is.character(plot_text) ) {
-      if (plot_text == "blank") {
-        cat(" - Blank")
-      }
+    if (is_blank_plot(p)) {
+      cat(" - Blank")
     }
     cat("\n")
   }
@@ -152,6 +186,3 @@ check_i_j <- function(i,j) {
   xNew <- putPlot(x, value, i, j)
   xNew
 }
-
-
-

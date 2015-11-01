@@ -1,4 +1,4 @@
-if(getRversion() >= "2.15.1") {
+if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("X1", "X2", "Y1", "Y2", "midX", "midY"))
 }
 
@@ -84,6 +84,11 @@ if(getRversion() >= "2.15.1") {
 #' @param arrow.size the size of the arrows for directed network edges, in
 #' points. See \code{\link[grid]{arrow}} for details.
 #' Defaults to \code{0} (no arrows).
+#' @param arrow.gap a setting aimed at improving the display of edge arrows by
+#' plotting slightly shorter edges. Accepts any value between \code{0} and
+#' \code{1}, where a value of \code{0.05} will generally achieve good results
+#' when the size of the nodes is reasonably small.
+#' Defaults to \code{0} (no shortening).
 #' @param arrow.type the type of the arrows for directed network edges. See
 #' \code{\link[grid]{arrow}} for details.
 #' Defaults to \code{"closed"}.
@@ -121,12 +126,12 @@ if(getRversion() >= "2.15.1") {
 #' \code{\link[sna]{gplot}} in the \code{\link[sna]{sna}} package, and
 #' \code{\link[network]{plot.network}} in the \code{\link[network]{network}}
 #' package
-#' @author Moritz Marbach and Francois Briatte
+#' @author Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+#' Pedro Jordano and Ming-Yu Liu
 #' @details The degree centrality measures that can be produced through the
 #' \code{weight} argument will take the directedness of the network into account,
 #' but will be unweighted. To compute weighted network measures, see the
 #' \code{\link[tnet:tnet-package]{tnet}} package by Tore Opsahl.
-#' @importFrom grid arrow unit
 #' @examples
 #' if (require(network)){
 #'
@@ -153,6 +158,9 @@ if(getRversion() >= "2.15.1") {
 #'
 #'   ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
 #'
+#'   # edge arrows on a directed network
+#'   ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+#'
 #' }
 ggnet <- function(
   net,
@@ -177,6 +185,7 @@ ggnet <- function(
   segment.label    = NULL,
   segment.size     = 0.25,
   arrow.size       = 0,
+  arrow.gap        = 0,
   arrow.type       = "closed",
   label            = FALSE,
   label.nodes      = label,
@@ -331,6 +340,13 @@ ggnet <- function(
     arrow.size = 0
   }
 
+  if (!is.numeric(arrow.gap) || arrow.gap < 0 || arrow.gap > 1) {
+    stop("incorrect arrow.gap value")
+  } else if (arrow.gap > 0 & is_dir == "graph") {
+    warning("network is undirected; arrow.gap ignored")
+    arrow.gap = 0
+  }
+
   if (network::is.hyper(net)) {
     stop("ggnet cannot plot hyper graphs")
   }
@@ -360,7 +376,18 @@ ggnet <- function(
   x = weight.method
 
   if (length(x) == 1 && x %in% c("indegree", "outdegree", "degree", "freeman")) {
-    data$weight = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
+
+    # prevent namespace conflict with igraph
+    if ("package:igraph" %in% search()) {
+
+      y = ifelse(is_dir == "digraph", "directed", "undirected")
+      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[ x ]
+      data$weight = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
+
+    } else {
+      data$weight = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
+    }
+
   } else if (length(x) > 1 && length(x) == n_nodes) {
     data$weight = x
   } else if (length(x) == 1 && x %in% v_attr) {
@@ -535,6 +562,9 @@ ggnet <- function(
 
   }
 
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))
+
   data = cbind(data, xy)
 
   # -- edge list ---------------------------------------------------------------
@@ -559,6 +589,21 @@ ggnet <- function(
 
   if (nrow(edges) > 0) {
 
+    if (arrow.gap > 0) {
+
+      x.length = with(edges, abs(X2 - X1))
+      y.length = with(edges, abs(Y2 - Y1))
+
+      arrow.gap = with(edges, arrow.gap / sqrt(x.length ^ 2 + y.length ^ 2))
+
+      edges = transform(edges,
+                        X1 = X1 + arrow.gap * x.length,
+                        Y1 = Y1 + arrow.gap * y.length,
+                        X2 = X1 + (1 - arrow.gap) * x.length,
+                        Y2 = Y1 + (1 - arrow.gap) * y.length)
+
+    }
+
     p = p +
       geom_segment(
         data = edges,
@@ -566,9 +611,9 @@ ggnet <- function(
         alpha  = segment.alpha,
         size   = segment.size,
         color  = segment.color,
-        arrow  = grid::arrow(
+        arrow  = arrow(
           type   = arrow.type,
-          length = grid::unit(arrow.size, "pt")
+          length = unit(arrow.size, "pt")
         )
       )
 
@@ -651,6 +696,7 @@ ggnet <- function(
       geom_text(
         label = l,
         size  = label.size,
+        show.legend = FALSE, # required by ggplot2 >= 1.0.1.9003
         ...
       )
 

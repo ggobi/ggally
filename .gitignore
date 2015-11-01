@@ -4,3 +4,6 @@
 ..Rcheck
 *ggmapTemp.png
 inst/*
+tests/testthat/Rplots.pdf
+vignettes/figure
+vignettes/*.html

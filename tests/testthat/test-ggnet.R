@@ -39,7 +39,7 @@ test_that("examples", {
   # color palette
   p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
 
-  p = ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
+  p <- ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
   expect_equal(length(p$layers), 3)
   expect_true(!is.null(p$mapping$colour))
 
@@ -48,9 +48,9 @@ test_that("examples", {
   ### --- test deprecations
 
   # test mode = "geo"
-  xy = gplot.layout.circle(n)
-  n %v% "lon" = xy[, 1]
-  n %v% "lat" = xy[, 2]
+  xy <- gplot.layout.circle(n) # nolint
+  n %v% "lon" <- xy[, 1]
+  n %v% "lat" <- xy[, 2]
   expect_warning(ggnet(n, mode = "geo"), "deprecated")
 
   # test names = c(x, y)
@@ -85,13 +85,13 @@ test_that("examples", {
   ggnet(n, weight = sample(1:2, 10, replace = TRUE))
 
   # test segment.label
-  x = sample(letters, network.edgecount(n))
+  x <- sample(letters, network.edgecount(n))
   p <- ggnet(n, segment.label = x)
   expect_true(p$layers[[2]]$mapping$x == "midX")
   expect_true(p$layers[[2]]$mapping$y == "midY")
 
   # test weight.cut
-  n %v% "weights" = 1:10
+  n %v% "weights" <- 1:10
   ggnet(n, weight.method = "weights", weight.cut = TRUE)
 
   ### --- test errors in set_node
@@ -110,7 +110,7 @@ test_that("examples", {
   expect_error(ggnet(n, segment.label = -11:-1), "incorrect") # unnecessary
   # expect_error(ggnet(n, size = "phono"), "incorrect")
 
-  n %e% "weights" = sample(1:2, network.edgecount(n), replace = TRUE)
+  n %e% "weights" <- sample(1:2, network.edgecount(n), replace = TRUE)
   ggnet(n, segment.label = "weights")
   ggnet(n, segment.label = "a")
 
@@ -119,7 +119,7 @@ test_that("examples", {
   ggnet(n, mode = matrix(1, ncol = 2, nrow = 10))
   ggnet(n, mode = c("lon", "lat"))
   expect_error(ggnet(n, mode = c("xx", "yy")), "not found")
-  n %v% "abc" = "abc"
+  n %v% "abc" <- "abc"
   expect_error(ggnet(n, mode = c("abc", "abc")), "not numeric")
   expect_error(ggnet(n, mode = matrix(1, ncol = 2, nrow = 9)), "coordinates length")
 
@@ -127,6 +127,14 @@ test_that("examples", {
 
   expect_error(ggnet(n, arrow.size = -1), "incorrect arrow.size")
   expect_warning(ggnet(n, arrow.size = 1), "arrow.size ignored")
+
+  ### --- test arrow.gap
+
+  expect_error(ggnet(n, arrow.size = 12, arrow.gap = -1), "incorrect arrow.gap")
+  expect_warning(ggnet(n, arrow.size = 12, arrow.gap = 0.1), "arrow.gap ignored")
+
+  m <- network::network(m, directed = TRUE)
+  ggnet(m, arrow.size = 12, arrow.gap = 0.05)
 
   ### --- test degree centrality
 
@@ -178,16 +186,20 @@ test_that("examples", {
   ### --- test bipartite functionality
 
   # weighted adjacency matrix
-  bip = data.frame(event1 = c(1, 2, 1, 0),
-                   event2 = c(0, 0, 3, 0),
-                   event3 = c(1, 1, 0, 4),
-                   row.names = letters[1:4])
+  bip <- data.frame(
+    event1 = c(1, 2, 1, 0),
+    event2 = c(0, 0, 3, 0),
+    event3 = c(1, 1, 0, 4),
+    row.names = letters[1:4]
+  )
 
   # weighted bipartite network
-  bip = network(bip,
-                matrix.type = "bipartite",
-                ignore.eval = FALSE,
-                names.eval = "weights")
+  bip <- network(
+    bip,
+    matrix.type = "bipartite",
+    ignore.eval = FALSE,
+    names.eval = "weights"
+  )
 
   # test bipartite mode
   ggnet(bip, group = "mode")
@@ -203,10 +215,13 @@ test_that("examples", {
   ### --- test igraph functionality
 
   # test igraph conversion
-  n = asIgraph(n)
-  p = ggnet(n)
+  p <- ggnet(asIgraph(n))
   expect_null(p$guides$colour)
   expect_equal(length(p$layers), 2)
+
+  # test igraph degree
+  library(igraph)
+  ggnet(n, weight = "degree")
 
   expect_true(TRUE)
 

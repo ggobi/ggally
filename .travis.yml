@@ -5,6 +5,8 @@
 #   https://github.com/craigcitro/r-travis/wiki
 
 language: r
+# sudo is required even though they want us to upgrade. :-/
+# http://docs.travis-ci.com/user/migrating-from-legacy/?utm_source=legacy-notice&utm_medium=banner&utm_campaign=legacy-upgrade
 sudo: required
 
 ## default R_*_ARGS
@@ -25,8 +27,9 @@ sudo: required
 #   - ./travis-tool.sh bootstrap
 
 r_github_packages:
-  # - jimhester/covr@ec4baaa0d892273498f4e66edf73a060b43e33ad
-  - jimhester/covr
+  - hadley/ggplot2  # tmp until released
+  - jimhester/covr  # code coverage check
+
 # r_binary_packages: [rJava, igraph, minqa, nloptr, RcppEigen, colorspace, reshape2, proto, abind, coda, dichromat, labeling, brew, gtable, reshape, network, RColorBrewer, scagnostics, sna, lme4, munsell, arm, scales, ggplot2, cairoDevice, RGtk2, knitr]
 r_binary_packages:
   - arm
@@ -59,8 +62,11 @@ notifications:
   email:
     on_success: change
     on_failure: change
+  slack:
+    secure: CBwdJj/j8K/o2Mv9iIhG/BtbIECU0ZA8BODtWA2YmDzja8BJOFKdFCtp1t+KeNV4BAZ1oUaDK4ETNgRirh/YZwobxsfK+AzQwZWzBI4WY6WAnBZpUteKNrsTCyTD0vZKYwWc7IFtEAUQBdsWr4PU+kGGKQ3aUhwsZ85QF9x/nHY=
 
 branches:
   only:
     - master
     - dev
+    - travis

@@ -1,0 +1,78 @@
+covr_shiny_app:
+  cov <- covr::package_coverage()
+  covr::shine(cov)
+covr_zero_coverage:
+  zero <- function(...) {
+    # check out the link below to work most efficiently
+    # https://codecov.io/github/ggobi/ggally/features/suggestions?ref=dev
+    cov <- covr::package_coverage(...)
+    covr::zero_coverage(cov)
+  }
+  zero()
+lintr_package:
+  # remove line in "linters:" above
+  lintr::lint_package("./")
+  # fix errors,
+  # repeat until no errors
+lintr_code_to_create_lintr:
+  library(magrittr)
+  library(dplyr)
+  lintr::lint_package() %>%
+    as.data.frame %>%
+    group_by(linter) %>%
+    tally(sort = TRUE) %$%
+    sprintf("linters: with_defaults(\n    %s\n    NULL\n  )\n",
+            paste0(linter, " = NULL, # ", n, collapse="\n    ")) %>%
+    cat()
+test_package:
+  tp <- function(..., package = "./") {
+    devtools::document(package)
+    devtools::load_all(package)
+    testthat::test_package(devtools::as.package(package)$package, ...)
+  }
+  tp()
+test_file:
+  tf <- function(file = "gg-plots", package = "./") {
+    require(devtools); require(testthat)
+    load_all(package)
+    test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
+  }
+  tf("ggpairs")
+knit_vignettes:
+  devtools::build_vignettes("./")
+knit_vignette:
+  kv <- function(file = "ggmatrix", openFile = interactive()) {
+    require(knitr)
+    setwd("vignettes")
+    tryCatch({
+      knit2html(paste0(file, ".Rmd"))
+      file.remove(paste0(file, ".md"))
+      if (dir.exists(file.path("vignettes", "figure"))) {
+        unlink(file.path("vignettes", "figure"), recursive = TRUE)
+      }
+      if(openFile) browseURL(paste0(file, ".html"))
+    }, finally = {
+      setwd("../")
+    })
+
+    invisible(TRUE)
+  }
+  kv("ggmatrix")
+reverse_depends:
+  check_rev_deps = function() {
+    curPkgType <- getOption("pkgType")
+    on.exit({options(pkgType = curPkgType)})
+    options(pkgType = "mac.binary")
+
+    # locally check the packages and install mac.binaries
+    res <- devtools::revdep_check(
+      type = "mac.binary",
+      libpath = .libPaths()[1]
+    )
+    outputFolder <- "revdep"
+    dir.create(outputFolder, showWarnings = FALSE)
+    devtools::revdep_check_save_logs(res, outputFolder)
+    devtools::revdep_check_save_summary(res, outputFolder)
+    invisible(res)
+  }
+  res <- check_rev_deps()

@@ -67,7 +67,10 @@ test_that("stops", {
   expect_error(ggsurv(kidneyNoCensor, plot.cens = TRUE))
 
   # must have censor to plot
-  expect_error(ggsurv(sf.kid, CI = TRUE, surv.col = c("black", "red", "blue", "green")), "Either surv.col or lty.est should be")
+  expect_error(
+    ggsurv(sf.kid, CI = TRUE, surv.col = c("black", "red", "blue", "green")),
+    "Either surv.col or lty.est should be"
+  )
   expect_error(ggsurv(sf.kid, CI = TRUE, lty.est = 1:4), "Either surv.col or lty.est should be")
 
   ggsurv(sf.kid, CI = TRUE, surv.col = "red")
@@ -135,5 +138,3 @@ test_that("CI", {
 # 889            R/ggsurv.r        256       258     0
 # 890            R/ggsurv.r        263       263     0
 # 891            R/ggsurv.r        274       274     0
-
-

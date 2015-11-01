@@ -1,0 +1,202 @@
+---
+title: "ggmatrix: plot matrix for ggplot2"
+author: Barret Schloerke
+date: Oct 29, 2015
+output:
+  html_document:
+    highlight: default
+    toc: true
+    theme: united
+---
+
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{ggmatrix}
+-->
+
+```{r echo=FALSE, message=FALSE}
+ignore <- suppressMessages(library(ggplot2))
+ignore <- suppressMessages(library(grid))
+ignore <- suppressMessages(library(gtable))
+ignore <- lapply(dir(file.path("..", "R"), full.names = TRUE), source)
+knitr::opts_chunk$set(fig.width = 9, fig.height = 7, fig.retina = 2)
+```
+
+# ggmatrix
+
+## Introduction
+
+`ggmatrix` is a function for managing multiple plots in a matrix-like layout.  It was designed to adapt to any number of columns and rows.  This allows for very customized plot matrices.
+
+## Generic Example
+
+The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.  
+
+```{r ggmatrix_genExample}
+plotList <- list()
+for (i in 1:6) {
+  plotList[[i]] <- ggally_text(paste("Plot #", i, sep = ""))
+}
+
+# bare minimum of plotList, nrow, and ncol
+pm <- ggmatrix(plotList, 2, 3)
+pm
+
+# provide more information
+pm <- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "Matrix Title"
+)
+pm
+
+# display plots in column order
+pm <- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "Matrix Title",
+  byrow = FALSE
+)
+pm
+```
+
+## Matrix Subsetting
+
+Individual plots may be retrieved from the plot matrix and can be placed in the plot matrix.
+
+```{r ggmatrix_place}
+pm <- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "Matrix Title"
+)
+pm
+p2 <- pm[1,2]
+p3 <- pm[1,3]
+p2
+p3
+pm[1,2] <- p3
+pm[1,3] <- p2
+pm
+
+```
+
+## Themes
+
+```{r ggmatrix_theme}
+pm <- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "Matrix Title",
+  byrow = FALSE
+)
+pm <- pm + theme_bw()
+pm
+```
+
+
+
+## Axis Control
+
+The X and Y axis have booleans to turn on/off the individual plot's axes on the bottom and left sides of the plot matrix.  To save time, `showAxisPlotLabels` can be set to override `showXAxisPlotLabels` and `showYAxisPlotLabels`.
+
+```{r ggmatrix_axisControl}
+pm <- ggmatrix(
+  plotList, nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "No Left Plot Axis",
+  showYAxisPlotLabels = FALSE
+)
+pm
+pm <- ggmatrix(
+  plotList, nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "No Bottom Plot Axis",
+  showXAxisPlotLabels = FALSE
+)
+pm
+pm <- ggmatrix(
+  plotList, nrow = 2, ncol = 3,
+  xAxisLabels = c("A", "B", "C"),
+  yAxisLabels = c("D", "E"),
+  title = "No Plot Axes",
+  showAxisPlotLabels = FALSE
+)
+pm
+```
+
+## Strips Control
+
+By default, the plots in the top row and the right most column will display top-side and right-side strips respectively (`showStrips = NULL`).  If all strips need to appear in each plot, `showStrips` may be set to `TRUE`. If all strips should not be displayed, `showStrips` may be set to `FALSE`.
+
+```{r ggmatrix_stripControl}
+data(tips, package = "reshape")
+plotList <- list(
+  qplot(total_bill, tip, data = subset(tips, smoker == "No" & sex == "Female")) +
+    facet_grid(time ~ day),
+  qplot(total_bill, tip, data = subset(tips, smoker == "Yes" & sex == "Female")) +
+    facet_grid(time ~ day),
+  qplot(total_bill, tip, data = subset(tips, smoker == "No" & sex == "Male")) +
+    facet_grid(time ~ day),
+  qplot(total_bill, tip, data = subset(tips, smoker == "Yes" & sex == "Male")) +
+    facet_grid(time ~ day)
+)
+
+
+pm <- ggmatrix(
+  plotList, nrow = 2, ncol = 2,
+  yAxisLabels = c("Female", "Male"),
+  xAxisLabels = c("Non Smoker", "Smoker"),
+  title = "Total Bill vs Tip",
+  showStrips = NULL # default
+)
+pm
+pm <- ggmatrix(
+  plotList, nrow = 2, ncol = 2,
+  yAxisLabels = c("Female", "Male"),
+  xAxisLabels = c("Non Smoker", "Smoker"),
+  title = "Total Bill vs Tip",
+  showStrips = TRUE
+)
+pm
+pm <- ggmatrix(
+  plotList, nrow = 2, ncol = 2,
+  yAxisLabels = c("Female", "Male"),
+  xAxisLabels = c("Non Smoker", "Smoker"),
+  title = "Total Bill vs Tip",
+  showStrips = FALSE
+)
+pm
+```
+
+## Custom Printing
+
+Since ggmatrix is not a "true" ggplot2 object, spacing between the plot axis labels and the matrix labels is not perfect.  There are a few `print.ggmatrix` parameters to help with this: `leftWidthProportion`, `bottomHeightProportion`, and `spacingProportion`.  Each parameter refers to the proportional size of 'left plot axis label area', 'bottom plot axis label area', and 'spacing between plots' relative to a single plotting area.  So, if a single plot is 2 inches wide and `spacingProportion = 0.03`, then the horizontal space between each plot will be 0.06 inches.
+
+```{r ggmatrix_customPrinting}
+data(presidential, package = "ggplot2")
+plotList <- list(
+  qplot(name, data = presidential, geom = "bar", fill = party) + ylim(c(0,6)) + coord_flip(),
+  qplot(party, data = presidential, geom = "bar", fill = party) + coord_flip()
+)
+pm <- ggmatrix(
+  plotList,
+  2, 1,
+  yAxisLabels = c("Presidents", "Party"),
+  xAxisLabels = c("Count"),
+  title = "President Term Length"
+)
+pm # default spacing
+# use print.ggmatrix parameters
+print(pm, leftWidthProportion = 0.12, spacingProportion = 0.05)
+```

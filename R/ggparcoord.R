@@ -173,12 +173,17 @@ ggparcoord <- function(
     if(any(tolower(order) %in% c("anyclass","allclass"))) {
       stop("can't use the 'order' methods anyClass or allClass without specifying groupColumn")
     }
-  } else if(!((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))) {
+  } else if(
+    !((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))
+  ) {
     stop("invalid value for 'groupColumn'; must be a single numeric or character index")
   }
 
   if(!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
-    stop("invalid value for 'scale'; must be one of 'std','robust','uniminmax','globalminmax','center', or 'centerObs'")
+    stop(str_c(
+      "invalid value for 'scale'; must be one of ",
+      "'std','robust','uniminmax','globalminmax','center', or 'centerObs'"
+    ))
   }
 
   if(!(centerObsID %in% 1:dim(data)[1])) {
@@ -193,11 +198,15 @@ ggparcoord <- function(
     is.numeric(order) || (
       is.character(order) &&
       (order %in% c(
-        'skewness','allClass','anyClass', 'Outlying','Skewed','Clumpy',
-        'Sparse', 'Striated', 'Convex', 'Skinny', 'Stringy','Monotonic'
+        "skewness","allClass","anyClass", "Outlying","Skewed","Clumpy",
+        "Sparse", "Striated", "Convex", "Skinny", "Stringy","Monotonic"
       ))
     )) ) {
-    stop("invalid value for 'order'; must either be a vector of column indices or one of 'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated','Convex','Skinny','Stringy','Monotonic'")
+    stop(str_c(
+      "invalid value for 'order'; must either be a vector of column indices or one of ",
+      "'skewness','allClass','anyClass','Outlying','Skewed','Clumpy','Sparse','Striated',",
+      "'Convex','Skinny','Stringy','Monotonic'"
+    ))
   }
 
   if(!(is.logical(showPoints))) {
@@ -220,19 +229,19 @@ ggparcoord <- function(
     }
     alphaVar <- data[,alphaLines]
 
-  } else if((alphaLines < 0) || (alphaLines > 1)) {
+  } else if ((alphaLines < 0) || (alphaLines > 1)) { # nolint
     stop("invalid value for 'alphaLines'; must be a scalar value between 0 and 1")
   }
 
-  if(!(is.logical(boxplot))) {
+  if (!(is.logical(boxplot))) {
     stop("invalid value for 'boxplot'; must be a logical operator")
   }
 
-  if(is.logical(splineFactor)) {
+  if (is.logical(splineFactor)) {
     if (splineFactor) {
-      splineFactor = 3
+      splineFactor <- 3
     } else {
-      splineFactor = 0
+      splineFactor <- 0
     }
   } else if (! is.numeric(splineFactor)) {
     stop("invalid value for 'splineFactor'; must be a logical or numeric value")
@@ -260,16 +269,16 @@ ggparcoord <- function(
 
   # Change character vars to factors
   char.vars <- column_is_character(data)
-  if(length(char.vars) >= 1) {
-    for(char.var in char.vars) {
+  if (length(char.vars) >= 1) {
+    for (char.var in char.vars) {
       data[,char.var] <- factor(data[,char.var])
     }
   }
 
   # Change factors to numeric
   fact.vars <- column_is_factor(data)
-  if(length(fact.vars) >= 1) {
-    for(fact.var in fact.vars) {
+  if (length(fact.vars) >= 1) {
+    for (fact.var in fact.vars) {
       data[,fact.var] <- as.numeric(data[,fact.var])
     }
   }
@@ -284,7 +293,7 @@ ggparcoord <- function(
   data$anyMissing <- apply(is.na(data[,columns]), 1, any)
   columnsPlusTwo <- c(columns, p)
 
-  inner_rescaler_default = function (x, type = "sd", ...) {
+  inner_rescaler_default <- function (x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
     # rescaler.default
     switch(type,
@@ -296,7 +305,7 @@ ggparcoord <- function(
       range = (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
     )
   }
-  inner_rescaler = function(x, type = "sd", ...) {
+  inner_rescaler <- function(x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
     # rescaler.data.frame
     continuous <- sapply(x, is.numeric)
@@ -307,7 +316,7 @@ ggparcoord <- function(
   }
 
   ### Scaling ###
-  if(tolower(scale) %in% c("std", "robust", "uniminmax", "center")) {
+  if (tolower(scale) %in% c("std", "robust", "uniminmax", "center")) {
     rescalerType <- c(
       "std" = "sd",
       "robust" = "robust",
@@ -325,20 +334,20 @@ ggparcoord <- function(
   }
 
   ### Imputation ###
-  if(tolower(missing) == "exclude") {
+  if (tolower(missing) == "exclude") {
     dataCompleteCases <- complete.cases(data[, columnsPlusTwo])
 
-    if(!is.null(groupColumn)) {
+    if (!is.null(groupColumn)) {
       groupVar <- groupVar[dataCompleteCases]
     }
 
-    if(alphaLinesIsCharacter) {
+    if (alphaLinesIsCharacter) {
       alphaVar <- alphaVar[dataCompleteCases]
     }
 
     data <- data[dataCompleteCases, ]
   }
-  else if(tolower(missing) %in% c("mean", "median", "min10", "random")) {
+  else if (tolower(missing) %in% c("mean", "median", "min10", "random")) {
     missingFns <- list(
       mean = function(x) {
         mean(x, na.rm = TRUE)
@@ -357,7 +366,7 @@ ggparcoord <- function(
     )
     missing_fn <- missingFns[[tolower(missing)]]
     data[,columns] <- apply(data[,columns], 2, function(x) {
-      if(any(is.na(x))){
+      if (any(is.na(x))){
         x[is.na(x)] <- missing_fn(x)
       }
       return(x)
@@ -368,7 +377,7 @@ ggparcoord <- function(
   ### Scaling (round 2) ###
   # Centering by observation needs to be done after handling missing values
   #   in case the observation to be centered on has missing values
-  if(tolower(scale) == "centerobs") {
+  if (tolower(scale) == "centerobs") {
     data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo],type="range")
     data[, columns] <- apply(data[,columns],2,function(x){
       x <- x - x[centerObsID]
@@ -378,72 +387,78 @@ ggparcoord <- function(
   # meltIDVars <- c(".ID", "anyMissing")
   meltIDVars <- colnames(data)[-columns]
 
-  if(!is.null(groupColumn)) {
+  if (!is.null(groupColumn)) {
     # data <- cbind(data,groupVar)
     # names(data)[dim(data)[2]] <- groupCol
 
     meltIDVars <- c(groupCol, meltIDVars)
   }
 
-  if(alphaLinesIsCharacter) {
+  if (alphaLinesIsCharacter) {
     data <- cbind(data, alphaVar)
     names(data)[dim(data)[2]] <- alphaLines
     meltIDVars <- c(meltIDVars, alphaLines)
   }
 
-  if(is.list(mapping)) {
-    mappingNames <- names(mapping)
-  }
+  # if(is.list(mapping)) {
+  #   mappingNames <- names(mapping)
+  # }
 
   data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
 
   ### Ordering ###
-  if(length(order) > 1 & is.numeric(order)) {
+  if (length(order) > 1 & is.numeric(order)) {
      data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
   }
-  else if(order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
+  else if (order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
     "Stringy","Monotonic")) {
 
     require_pkgs("scagnostics")
     scag <- scagnostics::scagnostics(saveData2)
-    data.m$variable <- factor(data.m$variable,levels=scagOrder(scag,names(saveData2),order))
+    data.m$variable <- factor(data.m$variable, levels = scag_order(scag, names(saveData2), order))
   }
-  else if(tolower(order) == "skewness") {
+  else if (tolower(order) == "skewness") {
     abs.skew <- abs(apply(saveData2,2,skewness))
-    data.m$variable <- factor(data.m$variable,levels=names(abs.skew)[order(abs.skew,decreasing=TRUE)])
+    data.m$variable <- factor(
+      data.m$variable,
+      levels = names(abs.skew)[order(abs.skew,decreasing=TRUE)]
+    )
   }
-  else if(tolower(order) == "allclass") {
+  else if (tolower(order) == "allclass") {
     f.stats <- rep(NA,length(columns))
     names(f.stats) <- names(saveData2[columns])
     for(i in 1:length(columns)) {
       f.stats[i] <- summary(lm(saveData2[,i] ~ groupVar))$fstatistic[1]
     }
-    data.m$variable <- factor(data.m$variable,levels=names(f.stats)[order(f.stats,decreasing=TRUE)])
+    data.m$variable <- factor(
+      data.m$variable,
+      levels = names(f.stats)[order(f.stats,decreasing=TRUE)]
+    )
   }
-  else if(tolower(order) == "anyclass") {
+  else if (tolower(order) == "anyclass") {
     axis.order <- singleClassOrder(groupVar,saveData2)
     data.m$variable <- factor(data.m$variable,levels=axis.order)
   }
 
-  if(!is.null(groupColumn)) {
+  if (!is.null(groupColumn)) {
     mapping2 <- aes_string(
-      x = 'variable',
-      y = 'value',
-      group = '.ID',
+      x = "variable",
+      y = "value",
+      group = ".ID",
       colour = as.character(substitute(groupCol))
     )
   } else {
     mapping2 <- aes_string(
-      x = 'variable',
-      y = 'value',
-      group = '.ID'
+      x = "variable",
+      y = "value",
+      group = ".ID"
     )
   }
-  mapping2 <- addAndOverwriteAes(mapping2,mapping)
-  # mapping2 <- addAndOverwriteAes(aes_string(size = I(0.5)), mapping2)
+  mapping2 <- add_and_overwrite_aes(mapping2,mapping)
+  # mapping2 <- add_and_overwrite_aes(aes_string(size = I(0.5)), mapping2)
   p <- ggplot(data=data.m,mapping=mapping2)
 
-  if(!is.null(shadeBox)) {
+  if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
     d.sum <- ddply(data.m,.(variable),summarize,
       min = min(value),
@@ -455,7 +470,7 @@ ggparcoord <- function(
   if (boxplot)
     p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
 
-  if(!is.null(mapping2$size)) {
+  if (!is.null(mapping2$size)) {
     lineSize <- mapping2$size
   } else {
     lineSize <- 0.5
@@ -464,21 +479,37 @@ ggparcoord <- function(
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
     if (class(splineFactor) == "AsIs") {
-      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = ggally_splineFactor[1]))
+      data.m <- ddply(
+        data.m, ".ID", transform,
+        spline = spline(variable, value, n = ggally_splineFactor[1])
+      )
     } else {
-      data.m <- ddply(data.m, '.ID', transform, spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1]))
+      data.m <- ddply(
+        data.m, ".ID", transform,
+        spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1])
+      )
     }
 
-    linexvar <- 'spline.x'
-    lineyvar <- 'spline.y'
+    linexvar <- "spline.x"
+    lineyvar <- "spline.y"
 
     if (alphaLinesIsCharacter) {
       p <- p +
-        geom_line(aes_string(x = linexvar, y = lineyvar, alpha = alphaLines), size = lineSize, data = data.m) +
+        geom_line(
+          aes_string(x = linexvar, y = lineyvar, alpha = alphaLines),
+          size = lineSize,
+          data = data.m
+        ) +
         scale_alpha(range = alphaRange)
 
     } else {
-      p <- p + geom_line(aes_string(x = linexvar, y = lineyvar), alpha = alphaLines, size = lineSize, data = data.m)
+      p <- p +
+        geom_line(
+          aes_string(x = linexvar, y = lineyvar),
+          alpha = alphaLines,
+          size = lineSize,
+          data = data.m
+        )
     }
 
     if (showPoints) {
@@ -537,35 +568,67 @@ column_is_factor <- function(df) {
 #' @param scag \code{scagnostics} object
 #' @param vars character vector of the variables to be ordered
 #' @param measure scagnostics measure to order according to
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @author Barret Schloerke
 #' @return character vector of variable ordered according to the given
 #'   scagnostic measure
-scagOrder <- function(scag, vars, measure) {
-  p <- length(vars)
-  scag <- sort(scag[measure,],decreasing=TRUE)
-  d.scag <- data.frame(var1=NA,var2=NA,val=scag)
-  for (i in 1:dim(d.scag)[1]) {
-    d.scag$var1[i] <- substr(names(scag)[i],1,regexpr(" * ",names(scag)[i])-1)
-    d.scag$var2[i] <- substr(names(scag)[i],regexpr(" * ",names(scag)[i])+3,nchar(names(scag)[i]))
-  }
-  a <- c(d.scag$var1[1],d.scag$var2[1])
-  d.scag <- d.scag[-1,]
-  a <- a[order(c(min(grep(a[1],rownames(d.scag))),min(grep(a[2],rownames(d.scag)))),
-    decreasing=TRUE)]
-  d.scag <- d.scag[-grep(a[1],rownames(d.scag)),]
+scag_order <- function(scag, vars, measure) {
 
-  i = 1
-  while(length(a) < p) {
-    pNames <- d.scag[i, 1:2]
-    namesUsed <- pNames %in% a
-    if (! all(namesUsed)) {
-      a <- append(a, pNames[!namesUsed])
+  scag <- sort(scag[measure, ], decreasing = TRUE)
+  scagNames <- names(scag)
+
+  # retrieve all names.  assume name doesn't contain a space
+  nameLocs <- regexec("^([^ ]+) \\* ([^ ]+)$", scagNames)
+
+  colNames <- lapply(seq_along(nameLocs), function(i) {
+    nameLoc <- nameLocs[[i]]
+    scagName <- scagNames[[i]]
+    # retrieve the column name from "FIRSTNAME * SECONDNAME"
+    substr(rep(scagName, 2), nameLoc[-1], nameLoc[-1] + attr(nameLoc, "match.length")[-1] - 1)
+  })
+
+  ret <- c()
+  colNamesLength <- length(colNames)
+  colNameValues <- unlist(colNames)
+  for (i in seq_along(colNames)) {
+    cols <- colNames[[i]]
+    colsUsed <- cols %in% ret
+    # if none of the columns have been added...
+    if (colsUsed[1] == FALSE && colsUsed[2] == FALSE) {
+      # find out which column comes next in the set, append that one first
+      if (i < colNamesLength) {
+        remainingColumns <- colNameValues[(2 * (i + 1)):(2 * colNamesLength)]
+        col1Pos <- which.min(cols[1] == remainingColumns)
+        col2Pos <- which.min(cols[2] == remainingColumns)
+        if (col2Pos < col1Pos) {
+          cols <- rev(cols)
+        }
+        ret <- append(ret, cols)
+      } else {
+        # nothing left in set, append both
+        ret <- append(ret, cols)
+      }
+
+    # if only the first hasn't been added...
+    } else if (colsUsed[1] == FALSE) {
+      ret <- append(ret, cols[1])
+
+    # if only the second hasn't been added...
+    } else if (colsUsed[2] == FALSE) {
+      ret <- append(ret, cols[2])
     }
-    i = i + 1
   }
 
-  return(a)
+  if (length(ret) != length(vars)) {
+    stop(str_c(
+      "Could not compute a correct ordering: ",
+      length(vars) - length(ret), " values are missing. ",
+      "Missing: ", paste0(vars[! (vars %in% ret)], collapse = ", ")
+    ))
+  }
+
+  return(ret)
 }
+
 
 #' Order axis variables
 #'
@@ -612,6 +675,6 @@ skewness <- function(x) {
   x <- x[!is.na(x)]
   xbar <- mean(x)
   n <- length(x)
-  skewness <- (1/n)*sum((x-xbar)^3)/((1/n)*sum((x-xbar)^2))^(3/2)
+  skewness <- (1 / n) * sum( (x - xbar) ^ 3) / ( (1 / n) * sum( (x - xbar) ^ 2)) ^ (3 / 2)
   return(skewness)
 }
