@@ -69,7 +69,7 @@ reverse_depends:
       type = "mac.binary",
       libpath = .libPaths()[1]
     )
-    outputFolder <- "z_revdep"
+    outputFolder <- "revdep"
     dir.create(outputFolder, showWarnings = FALSE)
     devtools::revdep_check_save_logs(res, outputFolder)
     devtools::revdep_check_save_summary(res, outputFolder)
