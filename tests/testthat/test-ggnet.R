@@ -130,8 +130,18 @@ test_that("examples", {
 
   ### --- test arrow.gap
 
-  expect_error(ggnet(n, arrow.size = 12, arrow.gap = -1), "incorrect arrow.gap")
-  expect_warning(ggnet(n, arrow.size = 12, arrow.gap = 0.1), "arrow.gap ignored")
+  suppressWarnings(expect_error(
+    ggnet(n, arrow.size = 12, arrow.gap = -1),
+    "incorrect arrow.gap"
+  ))
+  suppressWarnings(expect_warning(
+    ggnet(n, arrow.size = 12, arrow.gap = 0.1),
+    "arrow.gap ignored" # network is undirected; arrow.gap ignored
+  ))
+  suppressWarnings(expect_warning(
+    ggnet(n, arrow.size = 12, arrow.gap = 0.1),
+    "arrow.size ignored" # network is undirected; arrow.size ignored
+  ))
 
   m <- network::network(m, directed = TRUE)
   ggnet(m, arrow.size = 12, arrow.gap = 0.05)
