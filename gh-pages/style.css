@@ -1,0 +1,95 @@
+/* -- page structure ------------------------------------------------------ */
+
+body {
+  font-family: "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  line-height: 1.1;
+  color: #333;
+}
+
+footer {
+  padding: 1em 0;
+  border-top: 1px solid #ccc;
+  font-size: 66%;
+}
+
+footer, header, section {
+  width: 600px;
+  margin: 1em auto;
+}
+
+/* -- links --------------------------------------------------------------- */
+
+/*
+    matches the colors of the Bootswatch United theme used in the vignettes
+    https://bootswatch.com/united/
+*/
+
+a, a:visited {
+  color: #dd4814;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #97310e;
+  text-decoration: underline;
+}
+
+/* -- headers ------------------------------------------------------------- */
+
+h1, h2, h3 { font-weight: 400; }
+
+h1 {
+  font-size: 150%;
+  margin: 40px 0 20px;
+}
+
+h2 {
+  font-size: 100%;
+  margin: 0 0 40px;
+  color: #666;
+}
+
+h3 {
+  font-size: 100%;
+  margin: 0 6px;
+  color: #666;
+}
+
+/* -- sidelinks ----------------------------------------------------------- */
+
+aside {
+  position: fixed;
+  margin: 0 12px;
+}
+
+aside ul {
+  margin: 0;
+  padding: 0;
+}
+
+aside li, h3 {
+  list-style-type: none;
+  padding: 12px;
+  margin: 6px;
+}
+
+/* -- vignettes ----------------------------------------------------------- */
+
+#vignettes a {
+  display: block;
+  border: 1px solid white;
+  padding: 12px;
+  margin: 6px;
+}
+
+#vignettes a:hover {
+  border-color: #ccc;
+  text-decoration: none;
+}
+
+#vignettes img {
+  display: block;
+  padding: 1em 0;
+  width: 100%;
+}
