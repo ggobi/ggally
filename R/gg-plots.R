@@ -99,26 +99,24 @@ ggally_smooth <- function(data, mapping, ...){
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
 #'  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
 ggally_density <- function(data, mapping, ...){
-  p <- ggplot(data = data, mapping) +
   rangeX <- range(eval(mapping$x, data), na.rm = TRUE)
   rangeY <- range(eval(mapping$y, data), na.rm = TRUE)
 
+  p <- ggplot(data = data) +
     geom_point(
-      data = data.frame(x = rangeX, y = rangeY),
-      mapping = aes(x = x, y = y),
+      data = data.frame(rangeX = rangeX, rangeY = rangeY),
+      mapping = aes(x = rangeX, y = rangeY),
       alpha = 0
     )
 
   if(!is.null(mapping$fill)) {
-    p <- p + stat_density2d(geom = "polygon", ...)
+    p <- p + stat_density2d(mapping = mapping, geom = "polygon", ...)
   } else {
-    p <- p + geom_density2d(...)
+    p <- p + geom_density2d(mapping = mapping, ...)
   }
 
   p$type <- "continuous"
   p$subType <- "density"
-  p
-
 
   p
 }
