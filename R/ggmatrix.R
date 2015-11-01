@@ -1,7 +1,7 @@
 
 #' ggpairs - A ggplot2 Matrix
 #'
-#' Make a matrix of ggplot2 plots
+#' Make a generic matrix of ggplot2 plots
 #' @param plots list of plots to be put into matrix
 #' @param nrow,ncol number of rows and columns
 #' @param xAxisLabels,yAxisLabels,title labels for plot. Set the variable to \code{NULL} to not be displayed
