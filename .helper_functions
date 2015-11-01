@@ -26,9 +26,10 @@ lintr_code_to_create_lintr:
     cat()
 test_package:
   tp <- function(..., package = "./") {
-    devtools::document(package)
-    devtools::load_all(package)
-    testthat::test_package(devtools::as.package(package)$package, ...)
+    require(devtools); require(testthat)
+    document(package)
+    load_all(package)
+    test_package(devtools::as.package(package)$package, ...)
   }
   tp()
 test_file:
