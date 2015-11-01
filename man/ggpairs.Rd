@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggpairs.R
 \name{ggpairs}
 \alias{ggpairs}
-\title{ggpairs - A GGplot2 Matrix}
+\title{ggpairs - A ggplot2 generalized pairs plot}
 \usage{
 ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
   upper = list(), lower = list(), diag = list(), params = NULL, ...,
@@ -119,6 +119,9 @@ custom_car[1,3] <- personal_plot
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason.s@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
+}
+\references{
+John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. \textbf{The Generalized Pairs Plot.} \emph{Journal of Computational and Graphical Statistics}, vol. 22, no. 1, pp. 79–91, 2012.
 }
 \keyword{hplot}
 
