@@ -64,10 +64,15 @@ reverse_depends:
     on.exit({options(pkgType = curPkgType)})
     options(pkgType = "mac.binary")
 
-    res <- devtools::revdep_check(type = "mac.binary")
-    dir.create("revdep", showWarnings = FALSE)
-    devtools::revdep_check_save_logs(res)
-    devtools::revdep_check_save_summary(res)
+    # locally check the packages and install mac.binaries
+    res <- devtools::revdep_check(
+      type = "mac.binary",
+      libpath = .libPaths()[1]
+    )
+    outputFolder <- "z_revdep"
+    dir.create(outputFolder, showWarnings = FALSE)
+    devtools::revdep_check_save_logs(res, outputFolder)
+    devtools::revdep_check_save_summary(res, outputFolder)
     invisible(res)
   }
   res <- check_rev_deps()
