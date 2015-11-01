@@ -15,10 +15,10 @@ output:
 -->
 
 ```{r echo=FALSE, message=FALSE}
-library(ggplot2)
-library(maps)
-library(network)
-library(sna)
+ignore <- suppressMessages(library(ggplot2))
+ignore <- suppressMessages(library(maps))
+ignore <- suppressMessages(library(network))
+ignore <- suppressMessages(library(sna))
 source("../R/utils.R")
 source("../R/ggnetworkmap.R")
 load("../data/twitter_spambots.rda")
