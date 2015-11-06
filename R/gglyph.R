@@ -14,7 +14,8 @@
 #' @param y_scale,x_scale The scaling function to be applied to each set of
 #'  minor values within a grid cell.  Defaults to \code{\link{identity}} so
 #'  that no scaling is performed.
-#'  @export
+#' @export
+#' @author Di Cook \email{dicook@@monash.edu}, Heike Hofmann, Hadley Wickham
 #'  @examples
 #'  data(nasa)
 #'  nasaLate <- nasa[
@@ -141,6 +142,7 @@ ref_boxes <- function(data, fill = NULL) {
 #'   string) for the major x and y axes.  Together, the
 #    combination of \code{x_major} and \code{y_major} specifies a grid cell.
 #' @export
+#' @author Di Cook \email{dicook@@monash.edu}, Heike Hofmann, Hadley Wickham
 glyphplot <- function(data, width, height, polar, x_major, y_major) {
   structure(data,
     width = width, height = height, polar = polar,
@@ -190,7 +192,6 @@ print.glyphplot <- function(x, ...) {
 #'
 #' @param x numeric value between 0 and 1
 #' @export
-#' @author Di Cook \email{dicook@@iastate.edu}
 rel <- function(x) {
   structure(x, class = "rel")
 }

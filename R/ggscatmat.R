@@ -11,7 +11,7 @@ if(getRversion() >= "2.15.1") {
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to choose a factor variable to be grouped with. Defaults to \code{(NULL)}
-#' @author Mengjia Ni, Di Cook \email{dicook@@iastate.edu}
+#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
 #' @examples
 #' data(flea)
 #' head(lowertriangle(flea, columns= 2:4))
@@ -56,7 +56,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to choose a factor variable to be grouped with. Defaults to \code{(NULL)}
-#' @author Mengjia Ni, Di Cook \email{dicook@@iastate.edu}
+#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
 #' @importFrom stats cor
 #' @examples
 #' data(flea)
@@ -138,12 +138,12 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}
-#' @author Mengjia Ni, Di Cook \email{dicook@@iastate.edu}
+#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
 #' @examples
 #' data(flea)
 #' scatmat(flea, columns=2:4)
 #' scatmat(flea, columns= 2:4, color="species")
-scatmat <- function(data, columns=1:ncol(data), color=NULL) {
+scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose,is.numeric)]
   if (ncol(dn) == 0) {
@@ -188,7 +188,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL) {
             geom = "line"
           )
       }
-      r <- r + geom_point(data=ltdata.new, aes_string(colour="colorcolumn"), na.rm=TRUE)
+      r <- r + geom_point(data=ltdata.new, aes_string(colour="colorcolumn"), alpha=alpha, na.rm=TRUE)
       return(r)
     }
   }
@@ -201,14 +201,15 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL) {
 #'
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
-#' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
-#' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}
-#' @author Mengjia Ni, Di Cook \email{dicook@@iastate.edu}
+#' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}.
+#' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}.
+#' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
+#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
 #' @examples
 #' data(flea)
 #' ggscatmat(flea, columns = 2:4)
 #' ggscatmat(flea, columns = 2:4, color="species")
-ggscatmat <- function(data, columns=1:ncol(data), color=NULL){
+ggscatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1){
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose,is.numeric)]
 
@@ -221,10 +222,10 @@ ggscatmat <- function(data, columns=1:ncol(data), color=NULL){
 
   a <- uppertriangle(data, columns = columns, color = color)
   if (is.null(color)){
-    plot <- scatmat(data, columns = columns) +
+    plot <- scatmat(data, columns = columns, alpha=alpha) +
       geom_text(data = a, aes_string(label = "r"), colour = "black")
   } else {
-    plot <- scatmat(data, columns = columns, color = color) +
+    plot <- scatmat(data, columns = columns, color = color, alpha=alpha) +
       geom_text(data = a, aes_string(label = "r", color = "colorcolumn")) + labs(color = color)
   }
   factor <- data.choose[sapply(data.choose, is.factor)]
