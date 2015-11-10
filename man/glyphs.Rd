@@ -5,8 +5,8 @@
 \title{Create the data needed to generate a glyph plot.}
 \usage{
 glyphs(data, x_major, x_minor, y_major, y_minor, polar = FALSE,
-  height = rel(0.95), width = rel(0.95), y_scale = identity,
-  x_scale = identity)
+  height = ggplot2::rel(0.95), width = ggplot2::rel(0.95),
+  y_scale = identity, x_scale = identity)
 }
 \arguments{
 \item{data}{A data frame containing variables named in \code{x_major},

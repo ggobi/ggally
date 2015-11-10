@@ -10,7 +10,7 @@
 #' @param height,width The height and width of each glyph. Defaults to 95\% of
 #'  the \code{\link[ggplot2]{resolution}} of the data. Specify the width
 #'  absolutely by supplying a numeric vector of length 1, or relative to the
-#   resolution of the data by using \code{\link{rel}}.
+#   resolution of the data by using \code{\link[ggplot2]{rel}}.
 #' @param y_scale,x_scale The scaling function to be applied to each set of
 #'  minor values within a grid cell.  Defaults to \code{\link{identity}} so
 #'  that no scaling is performed.
@@ -37,7 +37,7 @@ glyphs <- function(
   x_major, x_minor,
   y_major, y_minor,
   polar = FALSE,
-  height = rel(0.95), width = rel(0.95),
+  height = ggplot2::rel(0.95), width = ggplot2::rel(0.95),
   y_scale = identity,
   x_scale = identity
 ) {
@@ -135,7 +135,7 @@ ref_boxes <- function(data, fill = NULL) {
 #' @param height,width The height and width of each glyph. Defaults to 95\% of
 #'  the \code{\link[ggplot2]{resolution}} of the data. Specify the width
 #'  absolutely by supplying a numeric vector of length 1, or relative to the
-#   resolution of the data by using \code{\link{rel}}.
+#   resolution of the data by using \code{\link[ggplot2]{rel}}.
 #' @param polar A logical of length 1, specifying whether the glyphs should
 #'   be drawn in polar coordinates.  Defaults to \code{FALSE}.
 #' @param x_major,y_major The name of the variable (as a
@@ -188,26 +188,32 @@ print.glyphplot <- function(x, ...) {
 
 # Relative dimensions --------------------------------------------------------
 
-#' Relative dimensions
-#'
-#' @param x numeric value between 0 and 1
-#' @export
-rel <- function(x) {
-  structure(x, class = "rel")
-}
+# Relative dimensions
+#
+# @param x numeric value between 0 and 1
+# rel <- function(x) {
+#   structure(x, class = "rel")
+# }
+# @export
+# rel <- ggplot2::rel
 
-#' @rdname rel
-#' @param ... ignored
-#' @export
-print.rel <- function(x, ...) {
-  print(noquote(paste(x, " *", sep = "")))
-}
+# @rdname rel
+# @param ... ignored
+# print.rel <- function(x, ...) {
+#   print(noquote(paste(x, " *", sep = "")))
+# }
+## works even though it is not exported
+# @export
+# ggplot2::print.rel
 
-#' @rdname rel
-#' @export
-is.rel <- function(x) {
-  inherits(x, "rel")
-}
+# @rdname rel
+# is.rel <- function(x) {
+#   inherits(x, "rel")
+# }
+## only used internally.  and ggplot2 has this exported
+# @export
+# ggplot2:::is.rel
+is.rel <- ggplot2:::is.rel
 
 # Rescaling functions --------------------------------------------------------
 
