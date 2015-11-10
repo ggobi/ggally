@@ -60,14 +60,14 @@ knit_vignette:
   }
   kv("ggmatrix")
 reverse_depends:
-  check_rev_deps = function() {
+  check_rev_deps = function(pkgType = "mac.binary") {
     curPkgType <- getOption("pkgType")
     on.exit({options(pkgType = curPkgType)})
-    options(pkgType = "mac.binary")
+    options(pkgType = pkgType)
 
     # locally check the packages and install mac.binaries
     res <- devtools::revdep_check(
-      type = "mac.binary",
+      type = pkgType,
       libpath = .libPaths()[1]
     )
     outputFolder <- "revdep"
