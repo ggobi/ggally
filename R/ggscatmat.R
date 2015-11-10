@@ -138,6 +138,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}
+#' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
 #' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
 #' @examples
 #' data(flea)

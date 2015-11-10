@@ -12,6 +12,8 @@ scatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1)
 \item{columns}{an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}}
 
 \item{color}{an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}}
+
+\item{alpha}{an option to set the transparency in scatterplots for large data. Defaults to \code{1}.}
 }
 \description{
 function for making scatterplots in the lower triangle and diagonal density plots.
