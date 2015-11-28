@@ -249,3 +249,19 @@ test_that("size", {
   expect_equal(as.character(p$mapping$size), "gear")
 
 })
+
+
+test_that("columns containing only a single value do not cause an scaling error", {
+   df <- data.frame(obs = 1:5, var1 = sample(10,5), var2 = rep(3, 5))
+
+   # no scaling
+   expect_that(ggparcoord(data = df, columns = 1:3, scale = "globalminmax"), not(throws_error()))
+   # requires scaling, must not throw an errror due to scaling the single values (to NaN)
+   expect_that(ggparcoord(data = df, columns = 1:3, scale = "uniminmax"), not(throws_error()))
+
+
+   df <- data.frame(df, var3 = factor(c("a","b","c","a","c")))
+   # requires scaling, must not throw an errror due to scaling the single values (to NaN)
+   expect_that(ggparcoord(data = df, columns = 1:4, scale = "uniminmax"), not(throws_error()))
+})
+

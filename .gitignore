@@ -7,3 +7,6 @@ inst/*
 tests/testthat/Rplots.pdf
 vignettes/figure
 vignettes/*.html
+.Rproj.user
+.RData
+ggally_.Rproj

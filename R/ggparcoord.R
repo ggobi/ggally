@@ -309,9 +309,18 @@ ggparcoord <- function(
   inner_rescaler <- function(x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
     # rescaler.data.frame
-    continuous <- sapply(x, is.numeric)
+    continuous    <- sapply(x, is.numeric)
     if (any(continuous)) {
-      x[continuous] <- lapply(x[continuous], inner_rescaler_default, type = type, ...)
+      if (type %in% c("sd", "robust", "range")) {
+        singleVal    <- sapply(x, function(col){if(length(unique(col)) == 1) TRUE else FALSE}) # indicating columns containing only one single value
+        isFactor     <- as.vector(sapply(x, is.factor))
+        ind          <- continuous & !singleVal & !isFactor
+        x[ind]       <- lapply(x[ind], inner_rescaler_default, type = type, ...)
+        x[singleVal] <- 1
+      }
+      else {
+         x[continuous] <- lapply(x[continuous], inner_rescaler_default, type = type, ...)
+       }
     }
     x
   }
