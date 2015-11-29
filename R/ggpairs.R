@@ -325,7 +325,14 @@ ggpairs <- function(
       sectionAes <- lower$mapping
     }
 
-    if (type %in% c("scatterplot", "box-hori", "box-vert")) {
+    if (type %in% c("NA")) {
+      p <- make_ggmatrix_plot_obj(
+        wrap_fn_with_param_arg("na", params = c()),
+        mapping = aes()
+      )
+
+
+    } else if (type %in% c("scatterplot", "box-hori", "box-vert")) {
       isContinuous <- (type == "scatterplot")
       if (printInfo) {
         if (isContinuous) {

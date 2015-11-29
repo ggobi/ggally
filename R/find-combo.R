@@ -65,10 +65,11 @@ find_plot_type <- function(data, col1, col2) {
     }
   }
 
-  if (all(is.na(data[,col1]) | is.na(data[,col2])))
-      return("blank")
-  return("scatterplot")
+  if (all(is.na(data[,col1]) | is.na(data[,col2]))) {
+    return("NA")
+  }
 
+  return("scatterplot")
 }
 
 #' Check if object is a date
