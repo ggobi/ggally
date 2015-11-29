@@ -188,8 +188,11 @@ ggally_cor <- function(
 
   cor_fn <- function(x, y) {
     # also do ddply below if fn is altered
-      if (all(is.na(x) | is.na(y))) NA else    
-      cor(x, y, method = method, use = use)
+      if (all(is.na(x) | is.na(y))) {
+        NA
+      } else {
+        cor(x, y, method = method, use = use)
+      }
   }
 
   # xVar <- data[,as.character(mapping$x)]
