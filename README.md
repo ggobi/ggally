@@ -1,6 +1,6 @@
 # [GGally](http://ggobi.github.io/ggally): Extension to [ggplot2](http://docs.ggplot2.org/current/)
 
-Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](http://cran.r-project.org/package=GGally) [![](http://cranlogs.r-pkg.org/badges/GGally)](http://cran.rstudio.com/web/packages/GGally/index.html)
+Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](http://cran.rstudio.com/web/packages/GGally/index.html) [![](http://cranlogs.r-pkg.org/badges/GGally)](http://cran.rstudio.com/web/packages/GGally/index.html)
 
 
 Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=dev)](https://codecov.io/github/ggobi/ggally?branch=dev)
