@@ -188,7 +188,11 @@ ggally_cor <- function(
 
   cor_fn <- function(x, y) {
     # also do ddply below if fn is altered
-    cor(x, y, method = method, use = use)
+      if (all(is.na(x) | is.na(y))) {
+        NA
+      } else {
+        cor(x, y, method = method, use = use)
+      }
   }
 
   # xVar <- data[,as.character(mapping$x)]
@@ -1347,4 +1351,36 @@ ggally_blank <- function(...){
 #' @export
 ggally_blankDiag <- function(...) {
   ggally_blank(...)
+}
+
+
+
+#' @rdname ggally_blank
+#' @export
+ggally_na <- function(data, mapping, size = 10, ...) {
+  a <- data.frame(x=1, y=1, label = "NA")
+
+  ggplot(data = a, aes_string(x = "x", y = "y", label = "label")) +
+    geom_text(colour = "grey20", size = size, ...) +
+    theme(
+      axis.line         = element_blank(),
+      axis.text.x       = element_blank(),
+      axis.text.y       = element_blank(),
+      axis.ticks        = element_blank(),
+      axis.title.x      = element_blank(),
+      axis.title.y      = element_blank(),
+      legend.background = element_blank(),
+      legend.key        = element_blank(),
+      legend.text       = element_blank(),
+      legend.title      = element_blank(),
+      panel.background  = element_blank(),
+      panel.border      = element_blank(),
+      panel.grid.major  = element_blank(),
+      panel.grid.minor  = element_blank(),
+      plot.background   = element_blank(),
+      plot.title        = element_blank(),
+      strip.background  = element_blank(),
+      strip.text.x      = element_blank(),
+      strip.text.y      = element_blank()
+    )
 }

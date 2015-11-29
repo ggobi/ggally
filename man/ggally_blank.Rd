@@ -3,11 +3,14 @@
 \name{ggally_blank}
 \alias{ggally_blank}
 \alias{ggally_blankDiag}
+\alias{ggally_na}
 \title{Blank}
 \usage{
 ggally_blank(...)
 
 ggally_blankDiag(...)
+
+ggally_na(data, mapping, size = 10, ...)
 }
 \arguments{
 \item{...}{other arguments ignored}
