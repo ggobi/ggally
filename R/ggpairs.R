@@ -563,7 +563,13 @@ set_to_blank_list_if_blank <- function(val, combo = TRUE) {
   val
 }
 
-check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, discrete = NULL, na = NULL) {
+check_and_set_defaults <- function(
+  name, obj,
+  continuous = NULL,
+  combo = NULL,
+  discrete = NULL,
+  na = NULL
+) {
   if (!is.list(obj)) {
     stop(str_c("'", name, "' is not a list"))
   }

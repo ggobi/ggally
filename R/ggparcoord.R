@@ -311,7 +311,13 @@ ggparcoord <- function(
     if (any(continuous)) {
       if (type %in% c("sd", "robust", "range")) {
         # indicating columns containing only one single value
-        singleVal    <- sapply(x, function(col){if(length(unique(col)) == 1) TRUE else FALSE})
+        singleVal <- sapply(x, function(col){
+          if (length(unique(col)) == 1) {
+            TRUE
+          } else {
+            FALSE
+          }
+        })
         ind          <- continuous & !singleVal
         x[ind]       <- lapply(x[ind], inner_rescaler_default, type = type, ...)
         x[singleVal] <- 1

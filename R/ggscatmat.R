@@ -189,7 +189,13 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
             geom = "line"
           )
       }
-      r <- r + geom_point(data=ltdata.new, aes_string(colour="colorcolumn"), alpha=alpha, na.rm=TRUE)
+      r <- r +
+        geom_point(
+          data = ltdata.new,
+          aes_string(colour = "colorcolumn"),
+          alpha = alpha,
+          na.rm = TRUE
+        )
       return(r)
     }
   }
