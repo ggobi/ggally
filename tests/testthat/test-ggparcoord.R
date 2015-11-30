@@ -179,6 +179,20 @@ test_that("groupColumn", {
   expect_true("color" %in% levels(p$data$variable))
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
+
+
+  # group column is a regular column
+  ## factor
+  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 4)
+  expect_true("clarity" %in% levels(p$data$variable))
+  ## character
+  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 3)
+  expect_true("color" %in% levels(p$data$variable))
+  ## numeric
+  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 1)
+  expect_true("carat" %in% levels(p$data$variable))
+
+
 })
 
 test_that("scale", {
@@ -248,4 +262,25 @@ test_that("size", {
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10)) + ggplot2::aes(size = gear)
   expect_equal(as.character(p$mapping$size), "gear")
 
+})
+
+
+test_that("columns containing only a single value do not cause an scaling error", {
+  df <- data.frame(obs = 1:5, var1 = sample(10,5), var2 = rep(3, 5))
+
+  # no scaling
+  expect_that(ggparcoord(data = df, columns = 1:3, scale = "globalminmax"), not(throws_error()))
+  # requires scaling, must not throw an errror due to scaling the single values (to NaN)
+  expect_that(ggparcoord(data = df, columns = 1:3, scale = "uniminmax"), not(throws_error()))
+
+
+  df2 <- data.frame(df, var3 = factor(c("a","b","c","a","c")))
+  # requires scaling, must not throw an errror due to scaling the single values (to NaN)
+  expect_that(ggparcoord(data = df2, columns = 1:4, scale = "uniminmax"), not(throws_error()))
+
+
+  df3 <- data.frame(df2, var4 = factor(c("d","d","d","d","d")))
+  expect_that(ggparcoord(data = df3, columns = 1:4, scale = "uniminmax"), not(throws_error()))
+  expect_that(ggparcoord(data = df3, columns = 1:4, scale = "robust"), not(throws_error()))
+  expect_that(ggparcoord(data = df3, columns = 1:4, scale = "std"), not(throws_error()))
 })

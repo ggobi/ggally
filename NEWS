@@ -39,7 +39,8 @@ gglyph
 ggparcoord
 
 * remaining columns are passed through so aesthetics may be added later. PR#54
-* fix parcoord ordering issues with odd names. PR#106
+* fixed parcoord ordering issues with odd names. PR#106
+* fixed scaling when unique length equals 1. PR#122
 
 ggsurv
 
