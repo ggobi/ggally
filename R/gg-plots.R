@@ -1386,3 +1386,9 @@ ggally_na <- function(data, mapping, size = 10, ...) {
   p$subType <- p$type <- "na"
   p
 }
+
+#' @rdname ggally_blank
+#' @export
+ggally_naDiag <- function(...) {
+  ggally_na(...)
+}
