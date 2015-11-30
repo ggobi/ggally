@@ -2,9 +2,7 @@ if(getRversion() >= "2.15.1") {
   utils::globalVariables(c("variable", "value", "ggally_splineFactor"))
 }
 
-##### KNOWN BUGS #####
-# - It does not currently work to pass groupColumn one of the variables that is being plotted
-#   as an axis
+
 
 #' ggparcoord - A ggplot2 Parallel Coordinate Plot
 #'
@@ -309,12 +307,11 @@ ggparcoord <- function(
   inner_rescaler <- function(x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
     # rescaler.data.frame
-    continuous    <- sapply(x, is.numeric)
+    continuous <- sapply(x, is.numeric)
     if (any(continuous)) {
       if (type %in% c("sd", "robust", "range")) {
         singleVal    <- sapply(x, function(col){if(length(unique(col)) == 1) TRUE else FALSE}) # indicating columns containing only one single value
-        isFactor     <- as.vector(sapply(x, is.factor))
-        ind          <- continuous & !singleVal & !isFactor
+        ind          <- continuous & !singleVal
         x[ind]       <- lapply(x[ind], inner_rescaler_default, type = type, ...)
         x[singleVal] <- 1
       }
