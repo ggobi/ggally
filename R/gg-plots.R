@@ -1360,7 +1360,7 @@ ggally_blankDiag <- function(...) {
 ggally_na <- function(data, mapping, size = 10, ...) {
   a <- data.frame(x=1, y=1, label = "NA")
 
-  ggplot(data = a, aes_string(x = "x", y = "y", label = "label")) +
+  p <- ggplot(data = a, aes_string(x = "x", y = "y", label = "label")) +
     geom_text(colour = "grey20", size = size, ...) +
     theme(
       axis.line         = element_blank(),
@@ -1383,4 +1383,6 @@ ggally_na <- function(data, mapping, size = 10, ...) {
       strip.text.x      = element_blank(),
       strip.text.y      = element_blank()
     )
+  p$subType <- p$type <- "na"
+  p
 }
