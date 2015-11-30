@@ -251,15 +251,15 @@ ggpairs <- function(
 
   upper <- check_and_set_defaults(
     "upper", upper,
-    continuous = "cor", combo = "box", discrete = "facetbar"
+    continuous = "cor", combo = "box", discrete = "facetbar", na = "na"
   )
   lower <- check_and_set_defaults(
     "lower", lower,
-    continuous = "points", combo = "facethist", discrete = "facetbar"
+    continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"
   )
   diag <- check_and_set_defaults(
     "diag", diag,
-    continuous = "densityDiag", discrete = "barDiag"
+    continuous = "densityDiag", discrete = "barDiag", na = "na"
   )
 
   data <- as.data.frame(data)
@@ -325,12 +325,22 @@ ggpairs <- function(
       sectionAes <- lower$mapping
     }
 
-    if (type %in% c("NA")) {
+    if (type %in% c("NA", "NA-diag")) {
+
+      subType <- if (type == "NA-diag") {
+        diag$na
+      } else {
+        # type is "NA"
+        if (up) {
+          upper$na
+        } else {
+          lower$na
+        }
+      }
       p <- make_ggmatrix_plot_obj(
-        wrap_fn_with_param_arg("na", params = c()),
+        wrap_fn_with_param_arg(subType, params = c()),
         mapping = aes()
       )
-
 
     } else if (type %in% c("scatterplot", "box-hori", "box-vert")) {
       isContinuous <- (type == "scatterplot")
@@ -547,12 +557,13 @@ set_to_blank_list_if_blank <- function(val, combo = TRUE) {
       val$combo <- "blank"
     }
     val$discrete <- "blank"
+    val$na <- "blank"
   }
 
   val
 }
 
-check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, discrete = NULL) {
+check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, discrete = NULL, na = NULL) {
   if (!is.list(obj)) {
     stop(str_c("'", name, "' is not a list"))
   }
@@ -565,6 +576,9 @@ check_and_set_defaults <- function(name, obj, continuous = NULL, combo = NULL, d
   }
   if (is.null(obj$discrete) && (!is.null(discrete))) {
     obj$discrete <- discrete
+  }
+  if (is.null(obj$na) && (!is.null(na))) {
+    obj$na <- na
   }
 
   if (! is.null(obj$params)) {
