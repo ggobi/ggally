@@ -332,6 +332,30 @@ test_that("user functions", {
   expect_equivalent(p0, p2)
 })
 
+test_that("NA data", {
+  dd <- data.frame(x=c(1:5,rep(NA,5)),y=c(rep(NA,5),2:6),z=1:10, w = NA)
+  pm <- ggpairs(dd)
+  expect_equivalent(pm[1,2]$subType, "na")
+  expect_equivalent(pm[2,1]$subType, "na")
+  expect_equivalent(pm[1,4]$subType, "na")
+  expect_equivalent(pm[4,4]$subType, "na")
+
+  pm <- ggpairs(dd, upper = list(na = "blank"))
+  expect_equivalent(pm[1,2]$subType, "blank")
+  expect_equivalent(pm[2,1]$subType, "na")
+  expect_equivalent(pm[4,4]$subType, "na")
+
+  pm <- ggpairs(dd, lower = list(na = "blank"))
+  expect_equivalent(pm[1,2]$subType, "na")
+  expect_equivalent(pm[2,1]$subType, "blank")
+  expect_equivalent(pm[4,4]$subType, "na")
+
+  pm <- ggpairs(dd, diag = list(na = "blank"))
+  expect_equivalent(pm[1,2]$subType, "na")
+  expect_equivalent(pm[2,1]$subType, "na")
+  expect_equivalent(pm[4,4]$subType, "blank")
+
+})
 
 
 
