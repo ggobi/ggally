@@ -42,7 +42,9 @@ find_plot_type <- function(data, col1, col2) {
 
   # diag calculations
   if (col1 == col2) {
-    if (y1Type == "continuous") {
+    if (y1Type == "na") {
+      return("NA-diag")
+    } else if (y1Type == "continuous") {
       return("stat_bin-num")
     } else {
       return("stat_bin-cat")
@@ -50,6 +52,10 @@ find_plot_type <- function(data, col1, col2) {
   }
 
   y2Type <- plotting_data_type(data[, col2])
+
+  if (y1Type == "na" | y2Type == "na") {
+    return("NA")
+  }
 
   #cat(names(data)[col2],": ", y2Type,"\t",names(data)[col1],": ",y1Type,"\n")
   isCats <- c(y1Type, y2Type) %in% "category"
@@ -65,6 +71,7 @@ find_plot_type <- function(data, col1, col2) {
     }
   }
 
+  # check if any combo of the two columns is all na
   if (all(is.na(data[,col1]) | is.na(data[,col2]))) {
     return("NA")
   }
@@ -85,6 +92,9 @@ is_date <- function(x) {
 #' @keywords internal
 #' @param x vector
 plotting_data_type <- function(x) {
+  if (all(is.na(x))) {
+    return("na")
+  }
   if (is_date(x)) {
     "continuous"
   } else if(!is.null(attributes(x)) || all(is.character(x))) {
