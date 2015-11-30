@@ -179,6 +179,20 @@ test_that("groupColumn", {
   expect_true("color" %in% levels(p$data$variable))
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
+
+
+  # group column is a regular column
+  ## factor
+  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 4)
+  expect_true("clarity" %in% levels(p$data$variable))
+  ## character
+  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 3)
+  expect_true("color" %in% levels(p$data$variable))
+  ## numeric
+  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 1)
+  expect_true("carat" %in% levels(p$data$variable))
+
+
 })
 
 test_that("scale", {
@@ -270,4 +284,3 @@ test_that("columns containing only a single value do not cause an scaling error"
   expect_that(ggparcoord(data = df3, columns = 1:4, scale = "robust"), not(throws_error()))
   expect_that(ggparcoord(data = df3, columns = 1:4, scale = "std"), not(throws_error()))
 })
-
