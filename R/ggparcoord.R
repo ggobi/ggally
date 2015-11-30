@@ -310,14 +310,14 @@ ggparcoord <- function(
     continuous <- sapply(x, is.numeric)
     if (any(continuous)) {
       if (type %in% c("sd", "robust", "range")) {
-        singleVal    <- sapply(x, function(col){if(length(unique(col)) == 1) TRUE else FALSE}) # indicating columns containing only one single value
+        # indicating columns containing only one single value
+        singleVal    <- sapply(x, function(col){if(length(unique(col)) == 1) TRUE else FALSE})
         ind          <- continuous & !singleVal
         x[ind]       <- lapply(x[ind], inner_rescaler_default, type = type, ...)
         x[singleVal] <- 1
+      } else {
+        x[continuous] <- lapply(x[continuous], inner_rescaler_default, type = type, ...)
       }
-      else {
-         x[continuous] <- lapply(x[continuous], inner_rescaler_default, type = type, ...)
-       }
     }
     x
   }
