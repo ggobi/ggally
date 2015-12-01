@@ -1359,6 +1359,7 @@ ggally_blankDiag <- function(...) {
 #' @param data ignored
 #' @param mapping ignored
 #' @param size size of the geom_text 'NA'
+#' @param color color of the geom_text 'NA'
 #' @param ... other arguments sent to geom_text
 #' @export
 #' @keywords hplot

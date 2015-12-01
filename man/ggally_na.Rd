@@ -16,6 +16,8 @@ ggally_naDiag(...)
 
 \item{size}{size of the geom_text 'NA'}
 
+\item{color}{color of the geom_text 'NA'}
+
 \item{...}{other arguments sent to geom_text}
 }
 \description{
