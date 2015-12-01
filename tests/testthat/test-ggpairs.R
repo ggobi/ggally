@@ -350,7 +350,7 @@ test_that("NA data", {
   expect_equivalent(pm[2,1]$subType, "blank")
   expect_equivalent(pm[4,4]$subType, "na")
 
-  pm <- ggpairs(dd, diag = list(na = "blank"))
+  pm <- ggpairs(dd, diag = list(na = "blankDiag"))
   expect_equivalent(pm[1,2]$subType, "na")
   expect_equivalent(pm[2,1]$subType, "na")
   expect_equivalent(pm[4,4]$subType, "blank")
