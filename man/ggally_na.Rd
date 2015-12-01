@@ -5,14 +5,18 @@
 \alias{ggally_naDiag}
 \title{NA plot}
 \usage{
-ggally_na(..., size = 10)
+ggally_na(data = NULL, mapping = NULL, size = 10, color = "grey20", ...)
 
 ggally_naDiag(...)
 }
 \arguments{
-\item{...}{other arguments ignored}
+\item{data}{ignored}
+
+\item{mapping}{ignored}
 
 \item{size}{size of the geom_text 'NA'}
+
+\item{...}{other arguments sent to geom_text}
 }
 \description{
 Draws a large \code{NA} in the middle of the plotting area.  This plot is useful when all X or Y data is \code{NA}

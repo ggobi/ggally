@@ -45,21 +45,25 @@ ggpair object that if called, will print
 Make a matrix of plots with a given data set
 }
 \details{
-upper and lower are lists that may contain the variables 'continuous',
-'combo' and 'discrete'. Each element of the list is a string implementing
-the following options: continuous = exactly one of ('points', 'smooth',
-'density', 'cor', 'blank'); combo = exactly one of ('box', 'dot',
-'facethist', 'facetdensity', 'denstrip', 'blank'); discrete = exactly one
-of ('facetbar','ratio', 'blank').
+\code{upper} and \code{lower} are lists that may contain the variables
+'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
+\describe{
+ \item{continuous}{exactly one of ('points', 'smooth', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
+ \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+ \item{discrete}{exactly one of ('facetbar','ratio', 'blank'). This option is used for categorical X and Y data.}
+ \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+}
 
-diag is a list that may only contain the variables 'continuous' and 'discrete'.
-Each element of the diag list is a string implmenting the following options:
-continuous = exactly one of ('densityDiag', 'barDiag', 'blankDiag'); discrete = exactly one
-of ('barDiag', 'blankDiag').
+\code{diag} is a list that may only contain the variables 'continuous', 'discrete', and 'na'. Each element of the diag list is a string implementing the following options:
+\describe{
+ \item{continuous}{exactly one of ('densityDiag', 'barDiag', 'blankDiag'). This option is used for continuous X data.}
+ \item{discrete}{exactly one of ('barDiag', 'blankDiag'). This option is used for categorical X and Y data.}
+ \item{na}{exactly one of ('naDiag', 'blankDiag').  This option is used when all X data is \code{NA}.}
+}
 
-If a list option it will be set to the function default.  If 'blank' is ever
-chosen as an option, then ggpairs will produce a blank plot, as if nothing was
-printed there.
+If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
+
+If a function is supplied to an upper, lower, or diag, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}()} the function with its parameters.
 }
 \examples{
 # plotting is reduced to the first couple of examples.
@@ -122,6 +126,9 @@ Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason
 }
 \references{
 John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
+}
+\seealso{
+wrap
 }
 \keyword{hplot}
 
