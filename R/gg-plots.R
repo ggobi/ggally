@@ -1355,10 +1355,17 @@ ggally_blankDiag <- function(...) {
 
 
 
-#' @rdname ggally_blank
+#' NA plot
+#'
+#' Draws a large \code{NA} in the middle of the plotting area.  This plot is useful when all X or Y data is \code{NA}
+#'
+#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @param ... other arguments ignored
+#' @param size size of the geom_text 'NA'
 #' @export
-ggally_na <- function(data, mapping, size = 10, ...) {
-  a <- data.frame(x=1, y=1, label = "NA")
+#' @keywords hplot
+ggally_na <- function(..., size = 10) {
+  a <- data.frame(x = 1, y = 1, label = "NA")
 
   p <- ggplot(data = a, aes_string(x = "x", y = "y", label = "label")) +
     geom_text(colour = "grey20", size = size, ...) +
@@ -1387,7 +1394,7 @@ ggally_na <- function(data, mapping, size = 10, ...) {
   p
 }
 
-#' @rdname ggally_blank
+#' @rdname ggally_na
 #' @export
 ggally_naDiag <- function(...) {
   ggally_na(...)
