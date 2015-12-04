@@ -169,7 +169,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
           ),
           data = j, position = "identity", geom = "line", color = "black")
       }
-      r <- r + geom_point(na.rm=TRUE)
+      r <- r + geom_point(alpha = alpha, na.rm=TRUE)
       return(r)
     } else {
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
