@@ -393,6 +393,22 @@ test_that("stip-top and strip-right", {
 
 })
 
+test_that("densityDiag rescale", {
+  pm <- ggpairs(
+    tips, 2:4,
+    upper = "blank", lower = "blank",
+    diag = list(continuous = "densityDiag")
+  )
+  expect_true(pm[1,1]$labels$y == "density")
+
+  pm <- ggpairs(
+    tips, 2:4,
+    upper = "blank", lower = "blank",
+    diag = list(continuous = wrap("densityDiag", rescale = TRUE))
+  )
+  expect_true(pm[1,1]$labels$y != "density")
+})
+
 
 # pm <- ggpairs(tips, upper = "blank")
 # # pm
