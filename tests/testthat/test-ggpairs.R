@@ -107,7 +107,7 @@ test_that("blank plots", {
 
 test_that("stops", {
   expect_warning(
-    ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1),
+    pm <- ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1),
     "'axisLabels' not in "
   )
 
