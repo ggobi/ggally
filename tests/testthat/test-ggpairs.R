@@ -110,6 +110,10 @@ test_that("stops", {
     pm <- ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1),
     "'axisLabels' not in "
   )
+  expect_warning(
+    pm <- ggpairs(tips, color = "sex"),
+    "Extra arguments: "
+  )
 
   expect_error(
     ggpairs(tips, columns = 1:10),
