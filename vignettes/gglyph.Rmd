@@ -37,7 +37,7 @@ ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
   labs(x = "", y = "")
 ```
 
-This shows a glyphplot of monthly surface temperature for 6 years over Central America. You can see differences from one location to another, that in large areas temperature doesn't change much. There are large seasonal trends in the top left over land. 
+This shows a glyphplot of monthly surface temperature for 6 years over Central America. You can see differences from one location to another, that in large areas temperature doesn't change much. There are large seasonal trends in the top left over land.
 
 Rescaling in different ways puts emphasis on different components, see the examples in the referenced paper. And with ggplot2 you can make a map of the geographic area underlying the glyphs.
 
@@ -45,4 +45,3 @@ Rescaling in different ways puts emphasis on different components, see the examp
 
  Wickham, H., Hofmann, H., Wickham, C. and Cook, D. (2012)
  Glyph-maps for Visually Exploring Temporal Patterns in Climate Data and Models, **Environmetrics**, *23*(5):151-182.
-
