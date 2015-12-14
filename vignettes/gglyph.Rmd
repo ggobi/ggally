@@ -19,7 +19,7 @@ ignore <- suppressMessages(library(ggplot2))
 ignore <- suppressMessages(library(plyr))
 ignore <- suppressMessages(library(GGally))
 ignore <- lapply(dir(file.path("..", "R"), full.names = TRUE), source)
-knitr::opts_chunk$set(fig.width = 9, fig.height = 7, fig.retina = 2)
+knitr::opts_chunk$set(fig.width = 9, fig.height = 7, fig.retina = 1)
 ```
 
 # glyphs
