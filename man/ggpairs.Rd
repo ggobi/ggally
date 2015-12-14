@@ -24,7 +24,7 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
 
 \item{diag}{see Details}
 
-\item{params}{depricated.  Please see \code{\link{wrap_fn_with_param_arg}}}
+\item{params}{deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}}
 
 \item{...}{other parameters being supplied to geom's aes, such as color}
 
@@ -131,4 +131,3 @@ John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, He
 wrap
 }
 \keyword{hplot}
-

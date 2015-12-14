@@ -79,7 +79,7 @@
 #' @param upper see Details
 #' @param lower see Details
 #' @param diag see Details
-#' @param params depricated.  Please see \code{\link{wrap_fn_with_param_arg}}
+#' @param params deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}
 #' @param ... other parameters being supplied to geom's aes, such as color
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
@@ -602,7 +602,7 @@ check_and_set_defaults <- function(
 
   if (! is.null(obj$aes_string)) {
     stop(str_c(
-      "'aes_string' is a depricated element for the section ", name, ".",
+      "'aes_string' is a deprecated element for the section ", name, ".",
       "Please use 'mapping' instead. "
     ))
   }
@@ -631,7 +631,7 @@ get_subtype_name <- function(subType) {
 
 display_param_error <- function() {
   stop(str_c(
-    "'params' is a depricated argument.  ",
+    "'params' is a deprecated argument.  ",
     "Please 'wrap' the function to supply arguments. ",
     "help(\"wrap\", package = \"GGally\")"
   ))
