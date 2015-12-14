@@ -265,7 +265,8 @@ ggpairs <- function(
   )
   diag <- check_and_set_defaults(
     "diag", diag,
-    continuous = "densityDiag", discrete = "barDiag", na = "na"
+    continuous = "densityDiag", discrete = "barDiag", na = "naDiag",
+    isDiag = TRUE
   )
 
   data <- as.data.frame(data)
@@ -577,7 +578,8 @@ check_and_set_defaults <- function(
   continuous = NULL,
   combo = NULL,
   discrete = NULL,
-  na = NULL
+  na = NULL,
+  isDiag = FALSE
 ) {
   if (!is.list(obj)) {
     stop(str_c("'", name, "' is not a list"))
@@ -605,6 +607,22 @@ check_and_set_defaults <- function(
       "'aes_string' is a deprecated element for the section ", name, ".",
       "Please use 'mapping' instead. "
     ))
+  }
+
+  if (isDiag) {
+    for (key in c("continuous", "discrete", "na")) {
+      val <- obj[[key]]
+      if (is.character(val)) {
+        if (! str_detect(val, "Diag$")) {
+          newVal <- paste(val, "Diag", sep = "")
+          warning(paste(
+            "changing diag$", key, " from '", val, "' to '", newVal, "'",
+            sep = ""
+          ))
+          obj[[key]] <- newVal
+        }
+      }
+    }
   }
 
   obj
