@@ -12,7 +12,7 @@ Public Slack Discussion: [![Public Slack Discussion](https://ggally-slack.heroku
 
 ## Installation
 
-To install this package from Github or [CRAN](http://cran.r-project.org/web/packages/GGally/index.html), do the following from the R console:
+To install this package from Github or [CRAN](http://cran.r-project.org/package=GGally), do the following from the R console:
 
 ```r
 # Github
