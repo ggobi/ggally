@@ -255,15 +255,15 @@ ggpairs <- function(
   lower <- set_to_blank_list_if_blank(lower)
   diag  <- set_to_blank_list_if_blank(diag, combo = FALSE)
 
-  upper <- check_and_set_defaults(
+  upper <- check_and_set_ggpairs_defaults(
     "upper", upper,
     continuous = "cor", combo = "box", discrete = "facetbar", na = "na"
   )
-  lower <- check_and_set_defaults(
+  lower <- check_and_set_ggpairs_defaults(
     "lower", lower,
     continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"
   )
-  diag <- check_and_set_defaults(
+  diag <- check_and_set_ggpairs_defaults(
     "diag", diag,
     continuous = "densityDiag", discrete = "barDiag", na = "naDiag",
     isDiag = TRUE
@@ -573,7 +573,7 @@ set_to_blank_list_if_blank <- function(val, combo = TRUE) {
   val
 }
 
-check_and_set_defaults <- function(
+check_and_set_ggpairs_defaults <- function(
   name, obj,
   continuous = NULL,
   combo = NULL,
