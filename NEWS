@@ -1,7 +1,9 @@
 GGally 1.0.0
 -----------------
 
-GGally has been upgraded to run on the latest ggplot2 v1.1.0. PR#109
+ggplot2
+
+* GGally has been upgraded to run on the latest ggplot2 v1.1.0. PR#109
 
 New functions
 
