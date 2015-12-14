@@ -6,15 +6,17 @@ GGally has been upgraded to run on the latest ggplot2 v1.1.0. PR#109
 New functions
 
 * ggmatrix. Make a generic matrix of ggplot2 plots
-* ggnetworkmap. Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot
+* ggnetworkmap. Plot a network with ggplot2 suitable for overlay on a ggmap::map ggplot, or other ggplot
 * ggnet2. Function for plotting network objects using ggplot2, with additional control over graphical parameters that are not supported by the ggnet function
 
 
 Vignettes
 
-* ggpairs - new!
+* glyph - new!
 * ggmatrix - new!
 * ggnetworkmap - new!
+* ggpairs - new!
+* ggscatmat - new!
 
 ggmatrix
 
@@ -26,6 +28,7 @@ ggpairs
 * is now wrapper to ggmatrix
 * takes in 'wrapped' functions.  This better handles the case of many different parameters being supplied to different plot types. PR#90
 * dates are better handled in ggpairs.  Still room for improvement for default behavior, but they do not cause errors. PR#58, PR#59
+* displays a 'NA' plot when all or a combination of the data is NA. PR#119
 
 ggcorr
 
@@ -50,6 +53,10 @@ ggsurv
 ggally_density
 
 * add fake data points to extend the limits of the stat_density2d. PR#114
+
+ggally_na
+
+* new plot type!
 
 Data
 
