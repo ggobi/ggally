@@ -65,6 +65,7 @@ putPlot <- function(x, value, i, j){
 #' @param j column from the left
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @importFrom utils capture.output
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")

@@ -99,6 +99,7 @@ if (getRversion() >= "2.15.1") {
 #' Barret Schloerke
 #' @importFrom reshape melt melt.data.frame melt.default
 #' @importFrom stats cor
+#' @importFrom grDevices colorRampPalette
 #' @examples
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
 #' dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")

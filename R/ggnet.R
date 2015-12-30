@@ -133,7 +133,8 @@ if (getRversion() >= "2.15.1") {
 #' but will be unweighted. To compute weighted network measures, see the
 #' \code{\link[tnet:tnet-package]{tnet}} package by Tore Opsahl.
 #' @importFrom stats quantile na.omit
-#' @importFrom utils head
+#' @importFrom utils head installed.packages
+#' @importFrom grDevices gray.colors
 #' @examples
 #' if (require(network)){
 #'

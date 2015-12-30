@@ -196,6 +196,8 @@ if (getRversion() >= "2.15.1") {
 #' \code{size}, in which case the nodes of the primary mode will be mapped as
 #' \code{"actor"}, and the nodes of the secondary mode will be mapped as
 #' \code{"event"}.
+#' @importFrom utils installed.packages
+#' @importFrom grDevices gray.colors
 #' @examples
 #' if(require(network)) {
 #'
