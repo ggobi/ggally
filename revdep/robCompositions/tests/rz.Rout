@@ -1,0 +1,627 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> require(robCompositions)
+Loading required package: robCompositions
+Loading required package: robustbase
+sROC 0.1-2 loaded
+> require(MASS)
+Loading required package: MASS
+> require(robustbase)
+> crnorm <- function(n, mu, Sigma){ 
++   constSum(data.frame(exp(mvrnorm(n, mu, Sigma))))
++ }
+> sigGen <- function(p, d){
++   x <- diag(p)
++   x[upper.tri(x)] <- x[lower.tri(x)] <- d
++   x
++ }
+> set.seed(1234)
+> x <- crnorm(50, rep(10,10), Sigma=sigGen(10,0.9))
+> x <- x+rnorm(ncol(x)*nrow(x), 10, 1)
+> lim <- quantile(as.numeric(as.matrix(x)), 0.05)
+> x[x < lim] <- 0
+> w <- x==0
+> dl <- rep(lim, ncol(x))
+> 
+> res1 <- impRZilr(x, dl=dl, method="lm")
+  X2   X4   X9  X10   X1   X3   X5   X8   X6   X7 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+> res2 <- impRZilr(x, dl=dl, method="MM")
+  X2   X4   X9  X10   X1   X3   X5   X8   X6   X7 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+> res3 <- impRZilr(x, dl=dl, method="pls", nComp="boot", verbose=TRUE)
+variables with decreasing number of missings: 2 4 9 10 1 3 5 8 6 7  X2   X4   X9  X10   X1   X3   X5   X8   X6   X7 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+
+ start the iteration:
+ iteration 1 ; criteria = 1e+08
+ replacement on part 1   ;   ncomp: 1
+ replacement on part 2   ;   ncomp: 1
+ replacement on part 3   ;   ncomp: 1
+ replacement on part 4   ;   ncomp: 1
+ replacement on part 5   ;   ncomp: 1
+ replacement on part 6   ;   ncomp: 1
+ replacement on part 7   ;   ncomp: 2
+ replacement on part 8   ;   ncomp: 1
+ replacement on part 9   ;   ncomp: 1
+ replacement on part 10   ;   ncomp: 1
+ iteration 2 ; criteria = 1.6146
+ iteration 2 ; criteria = 1.6146
+ replacement on part 1   ;   ncomp: 1
+ replacement on part 2   ;   ncomp: 1
+ replacement on part 3   ;   ncomp: 1
+ replacement on part 4   ;   ncomp: 1
+ replacement on part 5   ;   ncomp: 1
+ replacement on part 6   ;   ncomp: 1
+ replacement on part 7   ;   ncomp: 2
+ replacement on part 8   ;   ncomp: 1
+ replacement on part 9   ;   ncomp: 1
+ replacement on part 10   ;   ncomp: 1
+ iteration 3 ; criteria = 0.1003427
+ iteration 3 ; criteria = 0.1003427
+ replacement on part 1   ;   ncomp: 1
+ replacement on part 2   ;   ncomp: 1
+ replacement on part 3   ;   ncomp: 1
+ replacement on part 4   ;   ncomp: 1
+ replacement on part 5   ;   ncomp: 1
+ replacement on part 6   ;   ncomp: 1
+ replacement on part 7   ;   ncomp: 2
+ replacement on part 8   ;   ncomp: 1
+ replacement on part 9   ;   ncomp: 1
+ replacement on part 10   ;   ncomp: 1
+ iteration 4 ; criteria = 0.005784053> res4 <- impRZilr(x, dl=dl, method="pls", nComp=rep(5,ncol(x)), verbose=TRUE)
+variables with decreasing number of missings: 2 4 9 10 1 3 5 8 6 7  X2   X4   X9  X10   X1   X3   X5   X8   X6   X7 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+
+ start the iteration:
+ iteration 1 ; criteria = 1e+08
+ replacement on part 1   ;   ncomp: 5
+ replacement on part 2   ;   ncomp: 5
+ replacement on part 3   ;   ncomp: 5
+ replacement on part 4   ;   ncomp: 5
+ replacement on part 5   ;   ncomp: 5
+ replacement on part 6   ;   ncomp: 5
+ replacement on part 7   ;   ncomp: 5
+ replacement on part 8   ;   ncomp: 5
+ replacement on part 9   ;   ncomp: 5
+ replacement on part 10   ;   ncomp: 5
+ iteration 2 ; criteria = 0.5164887
+ iteration 2 ; criteria = 0.5164887
+ replacement on part 1   ;   ncomp: 5
+ replacement on part 2   ;   ncomp: 5
+ replacement on part 3   ;   ncomp: 5
+ replacement on part 4   ;   ncomp: 5
+ replacement on part 5   ;   ncomp: 5
+ replacement on part 6   ;   ncomp: 5
+ replacement on part 7   ;   ncomp: 5
+ replacement on part 8   ;   ncomp: 5
+ replacement on part 9   ;   ncomp: 5
+ replacement on part 10   ;   ncomp: 5
+ iteration 3 ; criteria = 0.08053609Warning message:
+In if (nComp == "boot") { :
+  the condition has length > 1 and only the first element will be used
+> 
+> epsilon <- 55*.Machine$double.eps
+> if(any(!c(isTRUE(is.logical((x[1,3]/x[1,4] - res1$x[1,3]/res1$x[1,4]) < epsilon)),
++ isTRUE(is.logical((x[1,3]/x[1,4] - res2$x[1,3]/res2$x[1,4]) < epsilon)),
++ isTRUE(is.logical((x[1,3]/x[1,4] - res3$x[1,3]/res3$x[1,4]) < epsilon)),
++ isTRUE(is.logical((x[1,3]/x[1,4] - res4$x[1,3]/res4$x[1,4]) < epsilon))))){
++   stop("ratios are not preserved.")
++ }
+> 
+> check1 <- function(x, w, dl){
++   check <- logical(ncol(x))
++   for(i in 1:ncol(x)){
++     check[i] <- any(x[w[,i],i] > dl[i])
++   }
++   if(any(check)){
++     res <- FALSE
++     stop("values are over detection limit")
++   } else {
++     res <- TRUE
++     message("imputed data passed check below detection limit")
++   }
++   invisible(res)
++ }
+> 
+> if(all(!c(check1(res1$x, w, dl=dl),
++ check1(res2$x, w, dl=dl),
++ check1(res3$x, w, dl=dl),
++ check1(res4$x, w, dl=dl)))){
++   stop("one method imputed above detection limit")
++ }
+imputed data passed check below detection limit
+imputed data passed check below detection limit
+imputed data passed check below detection limit
+imputed data passed check below detection limit
+> 
+> ## HD data:
+> set.seed(1234)
+> x <- crnorm(50, rep(10,60), Sigma=sigGen(60,0.9))
+> lim <- 0.01
+> x[x < lim] <- 0
+> w <- x==0
+> dl <- rep(lim, ncol(x))
+> 
+> resHD1 <- impRZilr(x, dl=dl, method="pls", nComp="boot", verbose=TRUE)
+variables with decreasing number of missings: 49 41 1 8 10 12 22 31 32 42 9 13 15 34 36 39 43 46 11 19 20 21 23 28 29 38 44 45 47 48 52 55 57 59 3 6 17 26 30 35 37 50 54 2 7 14 24 25 27 33 40 51 53 56 4 5 16 18 58 60 X49  X41   X1   X8  X10  X12  X22  X31  X32  X42   X9  X13  X15  X34  X36  X39 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+ X43  X46  X11  X19  X20  X21  X23  X28  X29  X38  X44  X45  X47  X48  X52  X55 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+ X57  X59   X3   X6  X17  X26  X30  X35  X37  X50  X54   X2   X7  X14  X24  X25 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+ X27  X33  X40  X51  X53  X56   X4   X5  X16  X18  X58  X60 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+
+ start the iteration:
+ iteration 1 ; criteria = 1e+08
+ replacement on part 1   ;   ncomp: 1
+ replacement on part 2   ;   ncomp: 1
+ replacement on part 3   ;   ncomp: 1
+ replacement on part 4   ;   ncomp: 1
+ replacement on part 5   ;   ncomp: 1
+ replacement on part 6   ;   ncomp: 1
+ replacement on part 7   ;   ncomp: 1
+ replacement on part 8   ;   ncomp: 1
+ replacement on part 9   ;   ncomp: 1
+ replacement on part 10   ;   ncomp: 1
+ replacement on part 11   ;   ncomp: 1
+ replacement on part 12   ;   ncomp: 1
+ replacement on part 13   ;   ncomp: 2
+ replacement on part 14   ;   ncomp: 1
+ replacement on part 15   ;   ncomp: 1
+ replacement on part 16   ;   ncomp: 2
+ replacement on part 17   ;   ncomp: 4
+ replacement on part 18   ;   ncomp: 1
+ replacement on part 19   ;   ncomp: 1
+ replacement on part 20   ;   ncomp: 1
+ replacement on part 21   ;   ncomp: 1
+ replacement on part 22   ;   ncomp: 1
+ replacement on part 23   ;   ncomp: 1
+ replacement on part 24   ;   ncomp: 1
+ replacement on part 25   ;   ncomp: 1
+ replacement on part 26   ;   ncomp: 2
+ replacement on part 27   ;   ncomp: 1
+ replacement on part 28   ;   ncomp: 1
+ replacement on part 29   ;   ncomp: 1
+ replacement on part 30   ;   ncomp: 1
+ replacement on part 31   ;   ncomp: 1
+ replacement on part 32   ;   ncomp: 1
+ replacement on part 33   ;   ncomp: 1
+ replacement on part 34   ;   ncomp: 1
+ replacement on part 35   ;   ncomp: 1
+ replacement on part 36   ;   ncomp: 1
+ replacement on part 37   ;   ncomp: 1
+ replacement on part 38   ;   ncomp: 1
+ replacement on part 39   ;   ncomp: 1
+ replacement on part 40   ;   ncomp: 1
+ replacement on part 41   ;   ncomp: 1
+ replacement on part 42   ;   ncomp: 1
+ replacement on part 43   ;   ncomp: 1
+ replacement on part 44   ;   ncomp: 1
+ replacement on part 45   ;   ncomp: 1
+ replacement on part 46   ;   ncomp: 1
+ replacement on part 47   ;   ncomp: 1
+ replacement on part 48   ;   ncomp: 1
+ replacement on part 49   ;   ncomp: 1
+ replacement on part 50   ;   ncomp: 1
+ replacement on part 51   ;   ncomp: 1
+ replacement on part 52   ;   ncomp: 1
+ replacement on part 53   ;   ncomp: 1
+ replacement on part 54   ;   ncomp: 1
+ replacement on part 55   ;   ncomp: 1
+ replacement on part 56   ;   ncomp: 1
+ replacement on part 57   ;   ncomp: 1
+ replacement on part 58   ;   ncomp: 1
+ replacement on part 59   ;   ncomp: 1
+ replacement on part 60   ;   ncomp: 1
+ iteration 2 ; criteria = 6.920363
+ iteration 2 ; criteria = 6.920363
+ replacement on part 1   ;   ncomp: 1
+ replacement on part 2   ;   ncomp: 1
+ replacement on part 3   ;   ncomp: 1
+ replacement on part 4   ;   ncomp: 1
+ replacement on part 5   ;   ncomp: 1
+ replacement on part 6   ;   ncomp: 1
+ replacement on part 7   ;   ncomp: 1
+ replacement on part 8   ;   ncomp: 1
+ replacement on part 9   ;   ncomp: 1
+ replacement on part 10   ;   ncomp: 1
+ replacement on part 11   ;   ncomp: 1
+ replacement on part 12   ;   ncomp: 1
+ replacement on part 13   ;   ncomp: 2
+ replacement on part 14   ;   ncomp: 1
+ replacement on part 15   ;   ncomp: 1
+ replacement on part 16   ;   ncomp: 2
+ replacement on part 17   ;   ncomp: 4
+ replacement on part 18   ;   ncomp: 1
+ replacement on part 19   ;   ncomp: 1
+ replacement on part 20   ;   ncomp: 1
+ replacement on part 21   ;   ncomp: 1
+ replacement on part 22   ;   ncomp: 1
+ replacement on part 23   ;   ncomp: 1
+ replacement on part 24   ;   ncomp: 1
+ replacement on part 25   ;   ncomp: 1
+ replacement on part 26   ;   ncomp: 2
+ replacement on part 27   ;   ncomp: 1
+ replacement on part 28   ;   ncomp: 1
+ replacement on part 29   ;   ncomp: 1
+ replacement on part 30   ;   ncomp: 1
+ replacement on part 31   ;   ncomp: 1
+ replacement on part 32   ;   ncomp: 1
+ replacement on part 33   ;   ncomp: 1
+ replacement on part 34   ;   ncomp: 1
+ replacement on part 35   ;   ncomp: 1
+ replacement on part 36   ;   ncomp: 1
+ replacement on part 37   ;   ncomp: 1
+ replacement on part 38   ;   ncomp: 1
+ replacement on part 39   ;   ncomp: 1
+ replacement on part 40   ;   ncomp: 1
+ replacement on part 41   ;   ncomp: 1
+ replacement on part 42   ;   ncomp: 1
+ replacement on part 43   ;   ncomp: 1
+ replacement on part 44   ;   ncomp: 1
+ replacement on part 45   ;   ncomp: 1
+ replacement on part 46   ;   ncomp: 1
+ replacement on part 47   ;   ncomp: 1
+ replacement on part 48   ;   ncomp: 1
+ replacement on part 49   ;   ncomp: 1
+ replacement on part 50   ;   ncomp: 1
+ replacement on part 51   ;   ncomp: 1
+ replacement on part 52   ;   ncomp: 1
+ replacement on part 53   ;   ncomp: 1
+ replacement on part 54   ;   ncomp: 1
+ replacement on part 55   ;   ncomp: 1
+ replacement on part 56   ;   ncomp: 1
+ replacement on part 57   ;   ncomp: 1
+ replacement on part 58   ;   ncomp: 1
+ replacement on part 59   ;   ncomp: 1
+ replacement on part 60   ;   ncomp: 1
+ iteration 3 ; criteria = 0.6168014
+ iteration 3 ; criteria = 0.6168014
+ replacement on part 1   ;   ncomp: 1
+ replacement on part 2   ;   ncomp: 1
+ replacement on part 3   ;   ncomp: 1
+ replacement on part 4   ;   ncomp: 1
+ replacement on part 5   ;   ncomp: 1
+ replacement on part 6   ;   ncomp: 1
+ replacement on part 7   ;   ncomp: 1
+ replacement on part 8   ;   ncomp: 1
+ replacement on part 9   ;   ncomp: 1
+ replacement on part 10   ;   ncomp: 1
+ replacement on part 11   ;   ncomp: 1
+ replacement on part 12   ;   ncomp: 1
+ replacement on part 13   ;   ncomp: 2
+ replacement on part 14   ;   ncomp: 1
+ replacement on part 15   ;   ncomp: 1
+ replacement on part 16   ;   ncomp: 2
+ replacement on part 17   ;   ncomp: 4
+ replacement on part 18   ;   ncomp: 1
+ replacement on part 19   ;   ncomp: 1
+ replacement on part 20   ;   ncomp: 1
+ replacement on part 21   ;   ncomp: 1
+ replacement on part 22   ;   ncomp: 1
+ replacement on part 23   ;   ncomp: 1
+ replacement on part 24   ;   ncomp: 1
+ replacement on part 25   ;   ncomp: 1
+ replacement on part 26   ;   ncomp: 2
+ replacement on part 27   ;   ncomp: 1
+ replacement on part 28   ;   ncomp: 1
+ replacement on part 29   ;   ncomp: 1
+ replacement on part 30   ;   ncomp: 1
+ replacement on part 31   ;   ncomp: 1
+ replacement on part 32   ;   ncomp: 1
+ replacement on part 33   ;   ncomp: 1
+ replacement on part 34   ;   ncomp: 1
+ replacement on part 35   ;   ncomp: 1
+ replacement on part 36   ;   ncomp: 1
+ replacement on part 37   ;   ncomp: 1
+ replacement on part 38   ;   ncomp: 1
+ replacement on part 39   ;   ncomp: 1
+ replacement on part 40   ;   ncomp: 1
+ replacement on part 41   ;   ncomp: 1
+ replacement on part 42   ;   ncomp: 1
+ replacement on part 43   ;   ncomp: 1
+ replacement on part 44   ;   ncomp: 1
+ replacement on part 45   ;   ncomp: 1
+ replacement on part 46   ;   ncomp: 1
+ replacement on part 47   ;   ncomp: 1
+ replacement on part 48   ;   ncomp: 1
+ replacement on part 49   ;   ncomp: 1
+ replacement on part 50   ;   ncomp: 1
+ replacement on part 51   ;   ncomp: 1
+ replacement on part 52   ;   ncomp: 1
+ replacement on part 53   ;   ncomp: 1
+ replacement on part 54   ;   ncomp: 1
+ replacement on part 55   ;   ncomp: 1
+ replacement on part 56   ;   ncomp: 1
+ replacement on part 57   ;   ncomp: 1
+ replacement on part 58   ;   ncomp: 1
+ replacement on part 59   ;   ncomp: 1
+ replacement on part 60   ;   ncomp: 1
+ iteration 4 ; criteria = 0.1001542
+ iteration 4 ; criteria = 0.1001542
+ replacement on part 1   ;   ncomp: 1
+ replacement on part 2   ;   ncomp: 1
+ replacement on part 3   ;   ncomp: 1
+ replacement on part 4   ;   ncomp: 1
+ replacement on part 5   ;   ncomp: 1
+ replacement on part 6   ;   ncomp: 1
+ replacement on part 7   ;   ncomp: 1
+ replacement on part 8   ;   ncomp: 1
+ replacement on part 9   ;   ncomp: 1
+ replacement on part 10   ;   ncomp: 1
+ replacement on part 11   ;   ncomp: 1
+ replacement on part 12   ;   ncomp: 1
+ replacement on part 13   ;   ncomp: 2
+ replacement on part 14   ;   ncomp: 1
+ replacement on part 15   ;   ncomp: 1
+ replacement on part 16   ;   ncomp: 2
+ replacement on part 17   ;   ncomp: 4
+ replacement on part 18   ;   ncomp: 1
+ replacement on part 19   ;   ncomp: 1
+ replacement on part 20   ;   ncomp: 1
+ replacement on part 21   ;   ncomp: 1
+ replacement on part 22   ;   ncomp: 1
+ replacement on part 23   ;   ncomp: 1
+ replacement on part 24   ;   ncomp: 1
+ replacement on part 25   ;   ncomp: 1
+ replacement on part 26   ;   ncomp: 2
+ replacement on part 27   ;   ncomp: 1
+ replacement on part 28   ;   ncomp: 1
+ replacement on part 29   ;   ncomp: 1
+ replacement on part 30   ;   ncomp: 1
+ replacement on part 31   ;   ncomp: 1
+ replacement on part 32   ;   ncomp: 1
+ replacement on part 33   ;   ncomp: 1
+ replacement on part 34   ;   ncomp: 1
+ replacement on part 35   ;   ncomp: 1
+ replacement on part 36   ;   ncomp: 1
+ replacement on part 37   ;   ncomp: 1
+ replacement on part 38   ;   ncomp: 1
+ replacement on part 39   ;   ncomp: 1
+ replacement on part 40   ;   ncomp: 1
+ replacement on part 41   ;   ncomp: 1
+ replacement on part 42   ;   ncomp: 1
+ replacement on part 43   ;   ncomp: 1
+ replacement on part 44   ;   ncomp: 1
+ replacement on part 45   ;   ncomp: 1
+ replacement on part 46   ;   ncomp: 1
+ replacement on part 47   ;   ncomp: 1
+ replacement on part 48   ;   ncomp: 1
+ replacement on part 49   ;   ncomp: 1
+ replacement on part 50   ;   ncomp: 1
+ replacement on part 51   ;   ncomp: 1
+ replacement on part 52   ;   ncomp: 1
+ replacement on part 53   ;   ncomp: 1
+ replacement on part 54   ;   ncomp: 1
+ replacement on part 55   ;   ncomp: 1
+ replacement on part 56   ;   ncomp: 1
+ replacement on part 57   ;   ncomp: 1
+ replacement on part 58   ;   ncomp: 1
+ replacement on part 59   ;   ncomp: 1
+ replacement on part 60   ;   ncomp: 1
+ iteration 5 ; criteria = 0.04939877> resHD2 <- impRZilr(x, dl=dl, method="pls", nComp=rep(5,ncol(x)), verbose=TRUE, maxit=2)
+variables with decreasing number of missings: 49 41 1 8 10 12 22 31 32 42 9 13 15 34 36 39 43 46 11 19 20 21 23 28 29 38 44 45 47 48 52 55 57 59 3 6 17 26 30 35 37 50 54 2 7 14 24 25 27 33 40 51 53 56 4 5 16 18 58 60 X49  X41   X1   X8  X10  X12  X22  X31  X32  X42   X9  X13  X15  X34  X36  X39 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+ X43  X46  X11  X19  X20  X21  X23  X28  X29  X38  X44  X45  X47  X48  X52  X55 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+ X57  X59   X3   X6  X17  X26  X30  X35  X37  X50  X54   X2   X7  X14  X24  X25 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+ X27  X33  X40  X51  X53  X56   X4   X5  X16  X18  X58  X60 
+TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+
+ start the iteration:
+ iteration 1 ; criteria = 1e+08
+ replacement on part 1   ;   ncomp: 5
+ replacement on part 2   ;   ncomp: 5
+ replacement on part 3   ;   ncomp: 5
+ replacement on part 4   ;   ncomp: 5
+ replacement on part 5   ;   ncomp: 5
+ replacement on part 6   ;   ncomp: 5
+ replacement on part 7   ;   ncomp: 5
+ replacement on part 8   ;   ncomp: 5
+ replacement on part 9   ;   ncomp: 5
+ replacement on part 10   ;   ncomp: 5
+ replacement on part 11   ;   ncomp: 5
+ replacement on part 12   ;   ncomp: 5
+ replacement on part 13   ;   ncomp: 5
+ replacement on part 14   ;   ncomp: 5
+ replacement on part 15   ;   ncomp: 5
+ replacement on part 16   ;   ncomp: 5
+ replacement on part 17   ;   ncomp: 5
+ replacement on part 18   ;   ncomp: 5
+ replacement on part 19   ;   ncomp: 5
+ replacement on part 20   ;   ncomp: 5
+ replacement on part 21   ;   ncomp: 5
+ replacement on part 22   ;   ncomp: 5
+ replacement on part 23   ;   ncomp: 5
+ replacement on part 24   ;   ncomp: 5
+ replacement on part 25   ;   ncomp: 5
+ replacement on part 26   ;   ncomp: 5
+ replacement on part 27   ;   ncomp: 5
+ replacement on part 28   ;   ncomp: 5
+ replacement on part 29   ;   ncomp: 5
+ replacement on part 30   ;   ncomp: 5
+ replacement on part 31   ;   ncomp: 5
+ replacement on part 32   ;   ncomp: 5
+ replacement on part 33   ;   ncomp: 5
+ replacement on part 34   ;   ncomp: 5
+ replacement on part 35   ;   ncomp: 5
+ replacement on part 36   ;   ncomp: 5
+ replacement on part 37   ;   ncomp: 5
+ replacement on part 38   ;   ncomp: 5
+ replacement on part 39   ;   ncomp: 5
+ replacement on part 40   ;   ncomp: 5
+ replacement on part 41   ;   ncomp: 5
+ replacement on part 42   ;   ncomp: 5
+ replacement on part 43   ;   ncomp: 5
+ replacement on part 44   ;   ncomp: 5
+ replacement on part 45   ;   ncomp: 5
+ replacement on part 46   ;   ncomp: 5
+ replacement on part 47   ;   ncomp: 5
+ replacement on part 48   ;   ncomp: 5
+ replacement on part 49   ;   ncomp: 5
+ replacement on part 50   ;   ncomp: 5
+ replacement on part 51   ;   ncomp: 5
+ replacement on part 52   ;   ncomp: 5
+ replacement on part 53   ;   ncomp: 5
+ replacement on part 54   ;   ncomp: 5
+ replacement on part 55   ;   ncomp: 5
+ replacement on part 56   ;   ncomp: 5
+ replacement on part 57   ;   ncomp: 5
+ replacement on part 58   ;   ncomp: 5
+ replacement on part 59   ;   ncomp: 5
+ replacement on part 60   ;   ncomp: 5
+ iteration 2 ; criteria = 2.451755
+ iteration 2 ; criteria = 2.451755
+ replacement on part 1   ;   ncomp: 5
+ replacement on part 2   ;   ncomp: 5
+ replacement on part 3   ;   ncomp: 5
+ replacement on part 4   ;   ncomp: 5
+ replacement on part 5   ;   ncomp: 5
+ replacement on part 6   ;   ncomp: 5
+ replacement on part 7   ;   ncomp: 5
+ replacement on part 8   ;   ncomp: 5
+ replacement on part 9   ;   ncomp: 5
+ replacement on part 10   ;   ncomp: 5
+ replacement on part 11   ;   ncomp: 5
+ replacement on part 12   ;   ncomp: 5
+ replacement on part 13   ;   ncomp: 5
+ replacement on part 14   ;   ncomp: 5
+ replacement on part 15   ;   ncomp: 5
+ replacement on part 16   ;   ncomp: 5
+ replacement on part 17   ;   ncomp: 5
+ replacement on part 18   ;   ncomp: 5
+ replacement on part 19   ;   ncomp: 5
+ replacement on part 20   ;   ncomp: 5
+ replacement on part 21   ;   ncomp: 5
+ replacement on part 22   ;   ncomp: 5
+ replacement on part 23   ;   ncomp: 5
+ replacement on part 24   ;   ncomp: 5
+ replacement on part 25   ;   ncomp: 5
+ replacement on part 26   ;   ncomp: 5
+ replacement on part 27   ;   ncomp: 5
+ replacement on part 28   ;   ncomp: 5
+ replacement on part 29   ;   ncomp: 5
+ replacement on part 30   ;   ncomp: 5
+ replacement on part 31   ;   ncomp: 5
+ replacement on part 32   ;   ncomp: 5
+ replacement on part 33   ;   ncomp: 5
+ replacement on part 34   ;   ncomp: 5
+ replacement on part 35   ;   ncomp: 5
+ replacement on part 36   ;   ncomp: 5
+ replacement on part 37   ;   ncomp: 5
+ replacement on part 38   ;   ncomp: 5
+ replacement on part 39   ;   ncomp: 5
+ replacement on part 40   ;   ncomp: 5
+ replacement on part 41   ;   ncomp: 5
+ replacement on part 42   ;   ncomp: 5
+ replacement on part 43   ;   ncomp: 5
+ replacement on part 44   ;   ncomp: 5
+ replacement on part 45   ;   ncomp: 5
+ replacement on part 46   ;   ncomp: 5
+ replacement on part 47   ;   ncomp: 5
+ replacement on part 48   ;   ncomp: 5
+ replacement on part 49   ;   ncomp: 5
+ replacement on part 50   ;   ncomp: 5
+ replacement on part 51   ;   ncomp: 5
+ replacement on part 52   ;   ncomp: 5
+ replacement on part 53   ;   ncomp: 5
+ replacement on part 54   ;   ncomp: 5
+ replacement on part 55   ;   ncomp: 5
+ replacement on part 56   ;   ncomp: 5
+ replacement on part 57   ;   ncomp: 5
+ replacement on part 58   ;   ncomp: 5
+ replacement on part 59   ;   ncomp: 5
+ replacement on part 60   ;   ncomp: 5
+ iteration 3 ; criteria = 1.154843Warning message:
+In if (nComp == "boot") { :
+  the condition has length > 1 and only the first element will be used
+> 
+> 
+> data(arcticLake)
+> x <- arcticLake
+> ## generate rounded zeros artificially:
+> x[x[,1] < 10, 1] <- 0
+> xia <- impRZilr(x, dl=c(10,44,0), eps=0.01, method="MM")
+ sand  silt  clay 
+ TRUE  TRUE FALSE 
+> xia$x
+             sand      silt clay
+ [1,] 77.50000000  8.202497  3.0
+ [2,] 71.90000000  8.625098  3.2
+ [3,] 50.70000000 25.735966 13.2
+ [4,] 52.20000000 15.798487  6.6
+ [5,] 70.00000000  9.320844  3.5
+ [6,] 66.50000000  3.811481  1.3
+ [7,] 43.10000000 55.300000  1.6
+ [8,] 53.40000000 21.499024  9.8
+ [9,] 15.50000000 54.400000 30.1
+[10,] 31.70000000 33.005426 26.8
+[11,] 65.70000000 15.943034  6.5
+[12,] 70.40000000  1.914666  0.6
+[13,] 17.40000000 53.600000 29.0
+[14,] 10.60000000 69.800000 19.6
+[15,] 38.20000000 29.721216 18.7
+[16,] 10.80000000 52.700000 36.5
+[17,] 18.40000000 50.700000 30.9
+[18,]  0.06433159 47.400000 48.0
+[19,] 15.60000000 50.400000 34.0
+[20,] 31.90000000 45.100000 23.0
+[21,]  0.33506899 53.500000 37.0
+[22,] 17.10000000 48.000000 34.9
+[23,] 10.50000000 55.400000 34.1
+[24,]  0.25620248 54.700000 41.0
+[25,]  0.03085121 45.200000 52.2
+[26,] 11.40000000 52.700000 35.9
+[27,]  0.07173731 46.900000 46.4
+[28,]  0.13264738 49.700000 43.4
+[29,]  0.03331887 44.900000 51.1
+[30,]  0.20167213 51.600000 40.9
+[31,]  0.10321664 49.500000 45.7
+[32,]  0.08112148 48.500000 47.0
+[33,]  0.20262126 52.100000 41.3
+[34,]  0.07928483 47.300000 45.9
+[35,]  0.05790235 45.600000 46.9
+[36,]  0.10292348 48.900000 45.1
+[37,]  0.26405110 53.800000 39.9
+[38,]  0.05917086 48.000000 49.5
+[39,]  0.05372026 47.800000 50.2
+> 
+> 
+> #data(expenditures)
+> #xOrig <- x <- expenditures
+> 
+> ## DL as negative values
+> #x[x < 350] <- - 350
+> 
+> #impCoda2(x)
+> 
+> ## DL given:
+> #impCoda2(xOrig, dl=c(0, 350, 350, 350, 350))
+> 
+> 
+> #imp <- impCoda(x, method='roundedZero')
+> #imp2 <- alrEM(x, pos=2, dl=rep(5,3))$xImp
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+185.576   2.050 191.209 

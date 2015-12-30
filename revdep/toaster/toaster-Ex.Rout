@@ -1,0 +1,1402 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "toaster"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "toaster-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('toaster')
+Loading required package: RODBC
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("computeAggregates")
+> ### * computeAggregates
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeAggregates
+> ### Title: Compute aggregate values.
+> ### Aliases: computeAggregates
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # compute average team rank and attendance by decade
++ data = computeAggregates(channel = conn, tableName = "teams_enh",
++                by = c("name || ', ' || park teamname", "lgid", "teamid", "decadeid"),
++                aggregates = c("min(name) name", "min(park) park", "avg(rank) rank", 
++                               "avg(attendance) attendance"))
++                
++ # compute total strike-outs for each team in decades starting with 1980
++ # and also percent (share) of team strikeouts within a decade
++ data = computeAggregates(channel = conn, "pitching_enh",
++                by = c("teamid", "decadeid"), 
++                aggregates = c("sum(so) so", 
++                               "sum(so)/(sum(sum(so)) over (partition by decadeid)) percent"),
++                where = "decadeid >= 1980")
++ }
+>   
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeAggregates", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeBarchart")
+> ### * computeBarchart
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeBarchart
+> ### Title: Compute one or more aggregates across single class.
+> ### Aliases: computeBarchart
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # Compute average team season era, walks, and hits for each decade starting with 1980
++ computeBarchart(channel=conn, "teams_enh", "teamid team", 
++                 aggregates=c("avg(era) era", "avg(bb) bb", "avg(h) h"), 
++                 where="yearid >=1980", by=c("decadeid"))
++                 
++ # multipe aggregates in the same bar chart (with melt)
++ bc = computeBarchart(channel=conn, tableName="pitching_enh", category="teamid",
++                     aggregates=c("AVG(era) era", "AVG(whip) whip"), withMelt=TRUE,
++                     where="yearid >= 2000 and lgid='AL'")
++         
++ # adding facets by decadeid          
++ bc = computeBarchart(channel=conn, tablelName="pitching_enh", category="teamid", 
++                      aggregates=c("AVG(era) era", "AVG(whip) whip", "AVG(ktobb) ktobb"),
++                      where="yearid >= 1990 and lgid='AL'", by="decadeid", withMelt=TRUE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeBarchart", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeClusterSample")
+> ### * computeClusterSample
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeClusterSample
+> ### Title: Random sample of clustered data
+> ### Aliases: computeClusterSample
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++                          
++ km = computeKmeans(conn, "batting", centers=5, iterMax = 25,
++                    aggregates = c("COUNT(*) cnt", "AVG(g) avg_g", "AVG(r) avg_r", "AVG(h) avg_h"),
++                    id="playerid || '-' || stint || '-' || teamid || '-' || yearid", 
++                    include=c('g','r','h'), scaledTableName='kmeans_test_scaled', 
++                    centroidTableName='kmeans_test_centroids',
++                    where="yearid > 2000")
++ km = computeClusterSample(conn, km, 0.01)
++ km
++ createClusterPairsPlot(km, title="Batters Clustered by G, H, R", ticks=FALSE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeClusterSample", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeCorrelations")
+> ### * computeCorrelations
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeCorrelations
+> ### Title: Compute correlation between pairs of columns.
+> ### Aliases: computeCorrelations
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ cormat = computeCorrelations(channel=conn, "pitching_enh", sqlColumns(conn, "pitching_enh"), 
++                              include = c('w','l','cg','sho','sv','ipouts','h','er','hr','bb',
++                                          'so','baopp','era','whip','ktobb','fip'),
++                              where = "decadeid = 2000", test=FALSE)
++ # remove duplicate correlation values (no symmetry)
++ cormat = cormat[cormat$metric1 < cormat$metric2, ]
++ createBubblechart(cormat, "metric1", "metric2", "value", label=NULL, fill="sign")
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeCorrelations", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeHeatmap")
+> ### * computeHeatmap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeHeatmap
+> ### Title: Compute 2-dimensional multi-layered matrix for heat map
+> ###   visualizations.
+> ### Aliases: computeHeatmap
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ hm = computeHeatmap(conn, "teams_enh", 'franchid', 'decadeid', 'avg(w) w', 
++                     where="decadeid >= 1950")
++ hm$decadeid = factor(hm$decadeid)
++ createHeatmap(hm, 'decadeid', 'franchid', 'w')
++ 
++ # with diverging color gradient
++ hm = computeHeatmap(conn, "teams_enh", 'franchid', 'decadeid', 'avg(w-l) wl', 
++                     where="decadeid >= 1950")
++ hm$decadeid = factor(hm$decadeid)
++ createHeatmap(hm, 'decadeid', 'franchid', 'wl', divergingColourGradient = TRUE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeHeatmap", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeHistogram")
+> ### * computeHistogram
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeHistogram
+> ### Title: Compute histogram distribution of the column.
+> ### Aliases: computeHistogram
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # Histogram of team ERA distribution: Rangers vs. Yankees in 2000s
++ h2000s = computeHistogram(channel=conn, tableName='pitching_enh', columnName='era',
++                           binsize=0.2, startvalue=0, endvalue=10, by='teamid',
++                           where="yearID between 2000 and 2012 and teamid in ('NYA','TEX')")
++ createHistogram(h2000s, fill='teamid', facet='teamid', 
++                 title='TEX vs. NYY 2000-2012', xlab='ERA', ylab='count',
++                 legendPosition='none') 
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeHistogram", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeKmeans")
+> ### * computeKmeans
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeKmeans
+> ### Title: Perform k-means clustering on the table.
+> ### Aliases: computeKmeans
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++                          
++ km = computeKmeans(conn, "batting", centers=5, iterMax = 25,
++                    aggregates = c("COUNT(*) cnt", "AVG(g) avg_g", "AVG(r) avg_r", "AVG(h) avg_h"),
++                    id="playerid || '-' || stint || '-' || teamid || '-' || yearid", 
++                    include=c('g','r','h'), scaledTableName='kmeans_test_scaled', 
++                    centroidTableName='kmeans_test_centroids',
++                    where="yearid > 2000")
++ km
++ createCentroidPlot(km)
++ createClusterPlot(km)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeKmeans", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeLm")
+> ### * computeLm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeLm
+> ### Title: Fit Linear Model and return its coefficients.
+> ### Aliases: computeLm
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # batting average explained by rbi, bb, so 
++ lm1 = computeLm(channel=conn, tableName="batting_enh", formula= ba ~ rbi + bb + so)
++ summary(lm1)
++ 
++ # with category predictor league and explicit sample size
++ lm2 = computeLm(channel=conn, tableName="batting_enh", formula= ba ~ rbi + bb + so + lgid,
++                 , sampleSize=10000, where="lgid in ('AL','NL') and ab > 30") 
++ summary(lm2)
++ }
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeLm", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computePercentiles")
+> ### * computePercentiles
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computePercentiles
+> ### Title: Compute percentiles of column values.
+> ### Aliases: computePercentiles
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # ipouts percentiles for pitching ipouts for AL in 2000s
++ ipop = computePercentiles(conn, "pitching", "ipouts",
++                           where = "lgid = 'AL' and yearid >= 2000")
++ 
++ # ipouts percentiles by league
++ ipopLg = computePercentiles(conn, "pitching", "ipouts", by="lgid")
++ 
++ # percentiles on temporal columns
++ playerAllDates = computePercentiles(conn, "master_enh", 
++                     columns=c('debut','finalgame','birthdate','deathdate'),
++                     temporal=TRUE, percentiles=c(0))
++ createBoxplot(playerAllDates, x='column', value='epoch', useIQR=TRUE, 
++               title="Boxplots for Date columns (epoch values)", 
++               legendPosition="none")
++ 
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computePercentiles", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeSample")
+> ### * computeSample
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeSample
+> ### Title: Randomly sample data from the table.
+> ### Aliases: computeSample
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ batters = computeSample(conn, "batting", sampleFraction=0.01)
++ dim(batters)
++ 
++ pitchersAL = computeSample(conn, "pitching", sampleSize=1000,
++                            where="lgid = 'AL'")
++ dim(ptichersAL)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeSample", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeSilhouette")
+> ### * computeSilhouette
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeSilhouette
+> ### Title: Compute Silhouette (k-means clustering).
+> ### Aliases: computeSilhouette
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++                          
++ km = computeKmeans(conn, "batting", centers=5, iterMax = 25,
++                    aggregates = c("COUNT(*) cnt", "AVG(g) avg_g", "AVG(r) avg_r", "AVG(h) avg_h"),
++                    id="playerid || '-' || stint || '-' || teamid || '-' || yearid", 
++                    include=c('g','r','h'), scaledTableName='kmeans_test_scaled', 
++                    centroidTableName='kmeans_test_centroids',
++                    where="yearid > 2000")
++ km = computeSilhouette(conn, km)
++ km$sil
++ createSilhouetteProfile(km, title="Cluster Silhouette Histograms (Profiles)")
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeSilhouette", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeTf")
+> ### * computeTf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeTf
+> ### Title: Compute term frequencies on a corpus.
+> ### Aliases: computeTf
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Dallas database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # compute term-document-matrix of all 2-word Ngrams of Dallas police open crime reports
++ tdm1 = computeTf(channel=conn, tableName="public.dallaspoliceall", docId="offensestatus",
++                  textColumns=c("offensedescription", "offensenarrative"),
++                  parser=nGram(2),
++                  where="offensestatus NOT IN ('System.Xml.XmlElement', 'C')")
++ 
++ # compute term-document-matrix of all 2-word combinations of Dallas police crime reports
++ # by time of day (4 documents corresponding to 4 parts of day)
++ tdm2 = computeTf(channel=conn, tableName="public.dallaspoliceall",
++                  docId="(extract('hour' from offensestarttime)/6)::int%4",
++                  textColumns=c("offensedescription", "offensenarrative"),
++                  parser=token(2, punctuation="[-.,?\\!:;~()]+", stopWords=TRUE),
++                  where="offensenarrative IS NOT NULL")
++ 
++ # include only top 100 ranked 2-word ngrams for each offense status
++ # into resulting term-document-matrix using dense rank function
++ tdm3 = computeTf(channel=NULL, tableName="public.dallaspoliceall", docId="offensestatus",
++                  textColumns=c("offensedescription", "offensenarrative"),
++                  parser=nGram(2), top=100, rankFunction="denserank",
++                  where="offensestatus NOT IN ('System.Xml.XmlElement', 'C')")
++ 
++ }
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeTf", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("computeTfIdf")
+> ### * computeTfIdf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: computeTfIdf
+> ### Title: Compute Term Frequency - Inverse Document Frequency on a corpus.
+> ### Aliases: computeTfIdf
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Dallas database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # compute term-document-matrix of all 2-word Ngrams of Dallas police crime reports
++ # for each 4-digit zip
++ tdm1 = computeTfIdf(channel=conn, tableName="public.dallaspoliceall", 
++                     docId="substr(offensezip, 1, 4)", 
++                     textColumns=c("offensedescription", "offensenarrative"),
++                     parser=nGram(2, ignoreCase=TRUE, 
++                                  punctuation="[-.,?\\!:;~()]+"))
++                     
++ # compute term-document-matrix of all 2-word combinations of Dallas police crime reports
++ # for each type of offense status
++ tdm2 = computeTfIdf(channel=NULL, tableName="public.dallaspoliceall", docId="offensestatus", 
++                     textColumns=c("offensedescription", "offensenarrative", "offenseweather"),
++                     parser=token(2), 
++                     where="offensestatus NOT IN ('System.Xml.XmlElement', 'C')")
++                     
++ # include only top 100 ranked 2-word ngrams for each 4-digit zip into resulting 
++ # term-document-matrix using rank function  
++ tdm3 = computeTfIdf(channel=NULL, tableName="public.dallaspoliceall", 
++                     docId="substr(offensezip, 1, 4)", 
++                     textColumns=c("offensedescription", "offensenarrative"),
++                     parser=nGram(2), top=100)
++                     
++ # same but get top 10% ranked terms using percent rank function
++ tdm4 = computeTfIdf(channel=NULL, tableName="public.dallaspoliceall", 
++                     docId="substr(offensezip, 1, 4)", 
++                     textColumns=c("offensedescription", "offensenarrative"),
++                     parser=nGram(1), top=0.10, rankFunction="percentrank")
++ 
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("computeTfIdf", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createBoxplot")
+> ### * createBoxplot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createBoxplot
+> ### Title: Create box plot.
+> ### Aliases: createBoxplot
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # boxplot of pitching ipouts for AL in 2000s
++ ipop = computePercentiles(conn, "pitching", columns="ipouts")
++ createBoxplot(ipop)
++                           
++ # boxplots by the league of pitching ipouts
++ ipopLg = computePercentiles(conn, "pitching", columns="ipouts", by="lgid")
++ createBoxplot(ipopLg, x="lgid")
++ 
++ # boxplots by the league with facet yearid of pitching ipouts in 2010s
++ ipopLgYear = computePercentiles(conn, "pitching", columns="ipouts", by=c("lgid", "yearid"),
++                                 where = "yearid >= 2010")
++ createBoxplot(ipopLgYear, x="lgid", facet="yearid", ncol=3)
++ 
++ # boxplot with facets only
++ bapLgDec = computePercentiles(conn, "pitching_enh", columns="era", by=c("lgid", "decadeid"),
++                               where = "lgid in ('AL','NL')")
++ createBoxplot(bapLgDec, facet=c("lgid", "decadeid"))
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createBoxplot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createBubblechart")
+> ### * createBubblechart
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createBubblechart
+> ### Title: Create Bubble Chart type of plot.
+> ### Aliases: createBubblechart
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ cormat = computeCorrelations(channel=conn, "pitching_enh", sqlColumns(conn, "pitching_enh"), 
++                              include = c('w','l','cg','sho','sv','ipouts','h','er','hr','bb',
++                                          'so','baopp','era','whip','ktobb','fip'),
++                              where = "decadeid = 2000", test=FALSE)
++ # remove duplicate correlation values (no symmetry)
++ cormat = cormat[cormat$metric1 < cormat$metric2, ]
++ createBubblechart(cormat, "metric1", "metric2", "value", label=NULL, fill="sign")
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createBubblechart", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createCentroidPlot")
+> ### * createCentroidPlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createCentroidPlot
+> ### Title: Create plot of cluster centroids.
+> ### Aliases: createCentroidPlot
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++                          
++ km = computeKmeans(conn, "batting", centers=5, iterMax = 25,
++                    aggregates = c("COUNT(*) cnt", "AVG(g) avg_g", "AVG(r) avg_r", "AVG(h) avg_h"),
++                    id="playerid || '-' || stint || '-' || teamid || '-' || yearid", 
++                    include=c('g','r','h'), scaledTableName='kmeans_test_scaled', 
++                    centroidTableName='kmeans_test_centroids',
++                    where="yearid > 2000")
++ createCentroidPlot(km)
++ createCentroidPlot(km, format="bar_dodge")
++ createCentroidPlot(km, format="heatmap", coordFlip=TRUE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createCentroidPlot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createClusterPairsPlot")
+> ### * createClusterPairsPlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createClusterPairsPlot
+> ### Title: Create cluster variable plot.
+> ### Aliases: createClusterPairsPlot
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++                          
++ km = computeKmeans(conn, "batting", centers=5, iterMax = 25,
++                    aggregates = c("COUNT(*) cnt", "AVG(g) avg_g", "AVG(r) avg_r", "AVG(h) avg_h"),
++                    id="playerid || '-' || stint || '-' || teamid || '-' || yearid", 
++                    include=c('g','r','h'), scaledTableName='kmeans_test_scaled', 
++                    centroidTableName='kmeans_test_centroids',
++                    where="yearid > 2000")
++ km = computeClusterSample(conn, km, 0.01)
++ createClusterPairsPlot(km, title="Batters Clustered by G, H, R", ticks=FALSE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createClusterPairsPlot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createClusterPlot")
+> ### * createClusterPlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createClusterPlot
+> ### Title: Create clusters' properties plot.
+> ### Aliases: createClusterPlot
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++                          
++ km = computeKmeans(conn, "batting", centers=5, iterMax = 25,
++                    aggregates = c("COUNT(*) cnt", "AVG(g) avg_g", "AVG(r) avg_r", "AVG(h) avg_h"),
++                    id="playerid || '-' || stint || '-' || teamid || '-' || yearid", 
++                    include=c('g','r','h'), scaledTableName='kmeans_test_scaled', 
++                    centroidTableName='kmeans_test_centroids',
++                    where="yearid > 2000")
++ createClusterPlot(km)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createClusterPlot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createHeatmap")
+> ### * createHeatmap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createHeatmap
+> ### Title: Create Heat Map type of plot.
+> ### Aliases: createHeatmap
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ hm = computeHeatmap(conn, "teams_enh", 'franchid', 'decadeid', 'avg(w) w', 
++                     where="decadeid >= 1950")
++ hm$decadeid = factor(hm$decadeid)
++ createHeatmap(hm, 'decadeid', 'franchid', 'w')
++ 
++ # with diverging color gradient
++ hm = computeHeatmap(conn, "teams_enh", 'franchid', 'decadeid', 'avg(w-l) wl', 
++                     where="decadeid >= 1950")
++ hm$decadeid = factor(hm$decadeid)
++ createHeatmap(hm, 'decadeid', 'franchid', 'wl', divergingColourGradient = TRUE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createHeatmap", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createHistogram")
+> ### * createHistogram
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createHistogram
+> ### Title: Create histogram type of plot.
+> ### Aliases: createHistogram
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # AL teams pitching stats by decade
++ bc = computeBarchart(channel=conn, tableName="pitching_enh", category="teamid", 
++                      aggregates=c("AVG(era) era", "AVG(whip) whip", "AVG(ktobb) ktobb"),
++                      where="yearid >= 1990 and lgid='AL'", by="decadeid", withMelt=TRUE)
++ 
++ createHistogram(bc, "teamid", "value", fill="teamid", 
++                 facet=c("variable", "decadeid"), 
++                 legendPosition="bottom",
++                 title = "AL Teams Pitching Stats by decades (1990-2012)",
++                 themeExtra = guides(fill=guide_legend(nrow=2)))
++ 
++ # AL Teams Average Win-Loss Difference by Decade 
++ franchwl = computeBarchart(conn, "teams_enh", "franchid",
++                            aggregates=c("AVG(w) w", "AVG(l) l", "AVG(w-l) wl"),
++                            by="decadeid",
++                            where="yearid >=1960 and lgid = 'AL'")
++ 
++ createHistogram(franchwl, "decadeid", "wl", fill="franchid",
++                 facet="franchid", ncol=5, facetScales="fixed",
++                 legendPosition="none",
++                 trend=TRUE,
++                 title="Average W-L difference by decade per team (AL)",
++                 ylab="Average W-L")  
++                 
++ # Histogram of team ERA distribution: Rangers vs. Yankees in 2000s
++ h2000s = computeHistogram(channel=conn, tableName='pitching_enh', columnName='era',
++                           binsize=0.2, startvalue=0, endvalue=10, by='teamid',
++                           where="yearID between 2000 and 2012 and teamid in ('NYA','TEX')")
++ createHistogram(h2000s, fill='teamid', facet='teamid', 
++                 title='TEX vs. NYY 2000-2012', xlab='ERA', ylab='count',
++                 legendPosition='none')                
++                 
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createHistogram", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createMap")
+> ### * createMap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createMap
+> ### Title: Locate map, geocode data, then plot both.
+> ### Aliases: createMap
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ data = computeAggregates(asterConn, "pitching",
++                columns = c("name || ', ' || park teamname", "lgid", "teamid", "decadeid"),
++                aggregates = c("min(name) name", "min(park) park", "avg(rank) rank", 
++                               "avg(attendance) attendance")
++                )
++                
++ geocodeMem = memoise(geocode)
++ 
++ createMap(data=data[data$decadeid>=2000,], 
++           source = "stamen", maptype = "watercolor", zoom=4, 
++           facet=c("lgid", "decadeid"),
++           locationName='teamname', locationNameBak='park', metricName='attendance', 
++           labelName='name', shapeColour="blue", scaleRange = c(2,12), textColour="black",
++           title='Game Attendance by Decade and League (yearly, 2000-2012)',
++           geocodeFun=geocodeMem)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createMap", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createPopPyramid")
+> ### * createPopPyramid
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createPopPyramid
+> ### Title: Create Population Pyramid type of histogram plot.
+> ### Aliases: createPopPyramid
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ pitchingInfo = getTableSummary(asterConn, tableName='pitching', 
++                                where='yearid between 2000 and 2013')
++ battingInfo = getTableSummary(asterConn, tableName='batting', 
++                               where='yearid between 2000 and 2013')
++ 
++ salaryHistAll = computeHistogram(asterConn, tableName='public.salaries', columnName='salary',
++                                  binsize=200000, startvalue=0, 
++                                  by='lgid', where='yearID between 2000 and 2013')
++ createPopPyramid(data=salaryHistAll, bin='bin_start', count='bin_count', divideBy='lgid', 
++                  values=c('NL','AL'),
++                  title="Salary Pyramid by MLB Leagues", 
++                  xlab='Salary', ylab='Player Count')
++ 
++ salaryHist5Mil = computeHistogram(asterConn, tableName='salaries', columnName='salary', 
++                                   binsize=100000, startvalue=0, endvalue=5000000,
++                                   by='lgid', where='yearID between 2000 and 2013')
++ createPopPyramid(data=salaryHist5Mil, divideBy='lgid', values=c('NL','AL'),
++                  title="Salary Pyramid by MLB Leagues (less 5M only)", 
++                  xlab='Salary', ylab='Player Count')
++ 
++ eraHist = computeHistogram(asterConn, tableName='pitching', columnName='era', 
++                            binsize=.1, startvalue=0, endvalue=10,
++                            by='lgid', where='yearid between 2000 and 2013')
++ createPopPyramid(data=eraHist, divideBy='lgid', values=c('NL','AL'),
++                  title="ERA Pyramid by MLB Leagues", xlab='ERA', ylab='Player Count')
++ 
++ # Log ERA
++ eraLogHist = computeHistogram(asterConn, tableName='pitching', columnName='era_log', 
++                               binsize=.02, startvalue=-0.42021640338318984325, 
++                               endvalue=2.2764618041732441,
++                               by='lgid', where='yearid between 2000 and 2013 and era > 0')
++ createPopPyramid(data=eraLogHist, divideBy='lgid', values=c('NL','AL'),
++                  title="log(ERA) Pyramid by MLB Leagues", 
++                  xlab='log(ERA)', ylab='Player Count')
++ 
++ # Batting (BA)
++ battingHist = computeHistogram(asterConn, tableName='batting_enh', columnName='ba', 
++                                binsize=.01, startvalue=0.01, endvalue=0.51,
++                                by='lgid', where='yearid between 2000 and 2013')
++ createPopPyramid(data=battingHist, divideBy='lgid', values=c('NL','AL'),
++                  title="Batting BA Pyramid by MLB Leages", xlab='BA', ylab='Player Count')
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createPopPyramid", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createSilhouetteProfile")
+> ### * createSilhouetteProfile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createSilhouetteProfile
+> ### Title: Create cluster silhouette profile plot.
+> ### Aliases: createSilhouetteProfile
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++                          
++ km = computeKmeans(conn, "batting", centers=5, iterMax = 25,
++                    aggregates = c("COUNT(*) cnt", "AVG(g) avg_g", "AVG(r) avg_r", "AVG(h) avg_h"),
++                    id="playerid || '-' || stint || '-' || teamid || '-' || yearid", 
++                    include=c('g','r','h'), scaledTableName='kmeans_test_scaled', 
++                    centroidTableName='kmeans_test_centroids',
++                    where="yearid > 2000")
++ km = computeSilhouette(conn, km)
++ createSilhouetteProfile(km, title="Cluster Silhouette Histograms (Profiles)")
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createSilhouetteProfile", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("createWordcloud")
+> ### * createWordcloud
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: createWordcloud
+> ### Title: Create Word Cloud Visualization.
+> ### Aliases: createWordcloud
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Dallas database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ stopwords = c("a", "an", "the", "with")
++ 
++ # 2-gram tf-idf on offense table
++ daypart_tfidf_2gram = computeTfIdf(conn, "public.dallaspoliceall", 
++                                    docId="extract('hour' from offensestarttime)::int/6",  
++                                    textColumns=c('offensedescription','offensenarrative'),
++                                    parser=nGram(2, delimiter='[  \\t\\b\\f\\r:\"]+'),
++                                    stopwords=stopwords)
++ 
++ toRace <- function(ch) {
++   switch(as.character(ch),
++          "M" = "Male",
++          "F" = "Female",
++          "0" = "Night",
++          "1" = "Morning",
++          "2" = "Day",
++          "3" = "Evening",
++          "C" = "C",
++          "Unknown")
++ }
++                                   
++ createDallasWordcloud <- function(tf_df, metric, slice, n, maxWords=25, size=750) {
++   words=with(tf_df$rs, tf_df$rs[docid==slice,])
++   
++   ## palette 
++   pal = rev(brewer.pal(8, "Set1"))[c(-3,-1)]
++   
++   createWordcloud(words$term, words[, metric], maxWords=maxWords, scale=c(4, 0.5), palette=pal, 
++                   title=paste("Top ", metric, "Offense", n, "- grams for", toRace(race)),
++                   file=paste0('wordclouds/',metric,'_offense_',n,'gram_',toRace(slice),'.png'), 
++                   width=size, height=size)
++ }
++ 
++ createDallasWordcloud(daypart_tfidf_2gram, 'tf_idf', 0, n=2, maxWords=200, size=1300)
++ 
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("createWordcloud", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getCharacterColumns")
+> ### * getCharacterColumns
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getCharacterColumns
+> ### Title: Filter character columns.
+> ### Aliases: getCharacterColumns
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ pitchingInfo = getTableSummary(channel=conn, 'pitching_enh')
++ getCharacterColumns(pitchingInfo)
++ char_cols_df = getCharacterColumns(pitchingInfo, names.only=FALSE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getCharacterColumns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getCharacterTypes")
+> ### * getCharacterTypes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getCharacterTypes
+> ### Title: List Aster character data types.
+> ### Aliases: getCharacterTypes
+> 
+> ### ** Examples
+> 
+> getCharacterTypes()
+[1] "varchar"   "char"      "character"
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getCharacterTypes", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getDiscretePaletteFactory")
+> ### * getDiscretePaletteFactory
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getDiscretePaletteFactory
+> ### Title: Generate discrete palette maker
+> ### Aliases: getDiscretePaletteFactory
+> 
+> ### ** Examples
+> 
+> paletteMaker = getDiscretePaletteFactory("PuOr")
+> myPalette = paletteMaker(25)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getDiscretePaletteFactory", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getGradientPaletteFactory")
+> ### * getGradientPaletteFactory
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getGradientPaletteFactory
+> ### Title: Generate gradient palette maker
+> ### Aliases: getGradientPaletteFactory
+> 
+> ### ** Examples
+> 
+> paletteMaker = getGradientPaletteFactory(c("yellow","red"))
+> myPalette = paletteMaker(10)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getGradientPaletteFactory", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getNullCounts")
+> ### * getNullCounts
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getNullCounts
+> ### Title: Counts nulls per column in the table.
+> ### Aliases: getNullCounts
+> 
+> ### ** Examples
+> 
+> if (interactive()) {
++ # initialize connection to Dallas database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ null_counts = getNullCounts(conn, "baseball.batting", 
++                             include=c('g','ab','r','h','so','bb','cs'), 
++                             where='yearid > 2000')
++ 
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getNullCounts", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getNumericColumns")
+> ### * getNumericColumns
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getNumericColumns
+> ### Title: Filter numeric columns.
+> ### Aliases: getNumericColumns
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ pitchingInfo = getTableSummary(channel=conn, 'pitching_enh')
++ getNumericColumns(pitchingInfo)
++ num_cols_df = getNumericColumns(pitchingInfo, names.only=FALSE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getNumericColumns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getNumericTypes")
+> ### * getNumericTypes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getNumericTypes
+> ### Title: List Aster numeric data types.
+> ### Aliases: getNumericTypes
+> 
+> ### ** Examples
+> 
+> getNumericTypes()
+ [1] "integer"          "numeric"          "bigint"           "smallint"        
+ [5] "real"             "double precision" "serial"           "bigserial"       
+ [9] "float"            "decimal"         
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getNumericTypes", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getTableSummary")
+> ### * getTableSummary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getTableSummary
+> ### Title: Compute columnwise statistics on Aster table.
+> ### Aliases: getTableSummary
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ pitchingInfo = getTableSummary(channel=conn, 'pitching_enh')
++ # list all table columns
++ pitchingInfo$COLUMN_NAME
++ 
++ # compute statistics on subset of baseball data after 1999
++ battingInfo = getTableSummary(channel=conn, 'batting_enh', 
++                               where='yearid between 2000 and 2013')
++                               
++ # compute statistics for certain columns including each percentile from 1 to 99
++ pitchingInfo = getTableSummary(channel=conn, 'pitching_enh',
++                               include=c('h', 'er', 'hr', 'bb', 'so'),
++                               percentiles=seq(1,99))
++ # list data frame column names to see all computed statistics
++ names(pitchingInfo)
++                              
++ # compute statitics on all numeric columns except certain columns
++ teamInfo = getTableSummary(channel=conn, 'teams_enh', 
++                    include=getNumericColumns(sqlColumns(conn, 'teams_enh')),
++                    except=c('lgid', 'teamid', 'playerid', 'yearid', 'decadeid'))
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getTableSummary", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getTemporalColumns")
+> ### * getTemporalColumns
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getTemporalColumns
+> ### Title: Filter Date and Time Table Columns.
+> ### Aliases: getTemporalColumns
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ masterInfo = getTableSummary(channel=conn, 'master')
++ getTemporalColumns(masterInfo)
++ date_cols_df = getTemporalColumns(masterInfo, names.only=FALSE)
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getTemporalColumns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("getTemporalTypes")
+> ### * getTemporalTypes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: getTemporalTypes
+> ### Title: List Aster temporal data types.
+> ### Aliases: getTemporalTypes
+> 
+> ### ** Examples
+> 
+> getTemporalTypes()
+[1] "date"                        "timestamp without time zone"
+[3] "timestamp with time zone"    "time without time zone"     
+[5] "time with time zone"        
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("getTemporalTypes", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("isTable")
+> ### * isTable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: isTable
+> ### Title: Test if table present in the database.
+> ### Aliases: isTable
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ isTable(conn, "pitching")        # TRUE 
++ isTable(conn, "pitch%")          # TRUE
++ isTable(conn, "public.pitching") # FALSE
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("isTable", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("makeTempTableName")
+> ### * makeTempTableName
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: makeTempTableName
+> ### Title: Make Aster temporary table name.
+> ### Aliases: makeTempTableName
+> 
+> ### ** Examples
+> 
+> tempTableName = makeTempTableName("centroids", 20)
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("makeTempTableName", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("showData")
+> ### * showData
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: showData
+> ### Title: Plot table level statistics, histograms, correlations and
+> ###   scatterplots in one go.
+> ### Aliases: showData
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ # get summaries to save time
++ pitchingInfo = getTableSummary(conn, 'pitching_enh')
++ battingInfo = getTableSummary(conn, 'batting_enh')
++ 
++ # Boxplots
++ # all numerical attributes
++ showData(conn, tableInfo=pitchingInfo, format='boxplot', 
++          title='Boxplots of numeric columns')
++ # select certain attributes only
++ showData(conn, tableInfo=pitchingInfo, format='boxplot', 
++          include=c('wp','whip', 'w', 'sv', 'sho', 'l', 'ktobb', 'ibb', 'hbp', 'fip', 
++                    'era', 'cg', 'bk', 'baopp'), 
++          useIQR=TRUE, title='Boxplots of Pitching Stats')
++ # exclude certain attributes
++ showData(conn, tableInfo=pitchingInfo, format='boxplot', 
++          except=c('item_id','ingredient_item_id','facility_id','rownum','decadeid','yearid',
++                   'bfp','ipouts'),
++          useIQR=TRUE, title='Boxplots of Pitching Stats')
++ # flip coordinates
++ showData(conn, tableInfo=pitchingInfo, format='boxplot', 
++          except=c('item_id','ingredient_item_id','facility_id','rownum','decadeid','yearid',
++                   'bfp','ipouts'),
++          useIQR=TRUE, coordFlip=TRUE, title='Boxplots of Pitching Stats')
++ 
++ # boxplot with facet (facet_wrap)
++ showData(conn, tableInfo=pitchingInfo, format='boxplot',
++          include=c('bfp','er','h','ipouts','r','so'), facet=TRUE, scales='free',
++          useIQR=TRUE, title='Boxplots Pitching Stats: bfp, er, h, ipouts, r, so')
++ 
++ # Correlation matrix
++ # on all numerical attributes
++ showData(conn, tableName='pitching_enh', tableInfo=pitchingInfo, 
++          format='corr')
++ 
++ # correlation matrix on selected attributes
++ # with labeling by attribute pair name and
++ # controlling size of correlation bubbles
++ showData(conn, tableName='pitching', tableInfo=pitchingInfo, 
++          include=c('era','h','hr','gs','g','sv'), 
++          format='corr', corrLabel='pair', shapeSizeRange=c(5,25))
++ 
++ # Histogram on all numeric attributes
++ showData(conn, tableName='pitching', tableInfo=pitchingInfo, include=c('hr'), 
++          format='histogram')
++ 
++ # Overview is a histogram of statistical measures across attributes
++ showData(conn, tableName='pitching', tableInfo=pitchingInfo, 
++          format='overview', type='numeric', scales="free_y")
++ 
++ # Scatterplots
++ # Scatterplot on pair of numerical attributes
++ # sample by size with 1d facet (see \code{facet_wrap})
++ showData(conn, 'pitching_enh', format='scatterplot', 
++          include=c('so', 'er'), facetName="lgid", pointColour="lgid", 
++          sampleSize=10000, regressionLine=TRUE,
++          title="SO vs ER by League 1980-2000",
++          where='yearid between 1980 and 2000')
++ 
++ # sample by fraction with 2d facet (see \code{facet_grid})
++ showData(conn, 'pitching_enh', format='scatterplot', 
++          include=c('so','er'), facetName=c('lgid','decadeid'), pointColour="lgid",
++          sampleFraction=0.1, regressionLine=TRUE,
++          title="SO vs ER by League by Decade 1980 - 2012",
++          where='yearid between 1980 and 2012')
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("showData", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("viewTableSummary")
+> ### * viewTableSummary
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: viewTableSummary
+> ### Title: Invoke a Data Viewer on table statistics.
+> ### Aliases: viewTableSummary
+> 
+> ### ** Examples
+> 
+> if(interactive()){
++ # initialize connection to Lahman baseball database in Aster 
++ conn = odbcDriverConnect(connection="driver={Aster ODBC Driver};
++                          server=<dbhost>;port=2406;database=<dbname>;uid=<user>;pwd=<pw>")
++ 
++ pitchingInfo = getTableSummary(channel=conn, 'pitching_enh')
++ viewTableSummary(pitchingInfo, percentiles=TRUE)
++ 
++ viewTableSummary(pitchingInfo, types=c("numeric", "temporal"))
++ }
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("viewTableSummary", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.132 0.059 1.199 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

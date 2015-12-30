@@ -1,0 +1,410 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> require("robustbase")
+Loading required package: robustbase
+> 
+> ##---> ./poisson-ex.R
+> ##     ~~~~~~~~~~~~~~  for more glmrobMT() tests
+> 
+> source(system.file("test-tools-1.R", package="Matrix", mustWork=TRUE))
+Loading required package: tools
+> ## -> assertError(), showSys.time(), ...
+> source(system.file("xtraR/ex-funs.R", package = "robustbase"))
+> ## -> newer assert.EQ()  {TODO: no longer needed in 2015}
+> 
+> if(!require("sfsmisc")) {
++     eaxis <- axis  # so we can use  eaxis() below
++ }
+Loading required package: sfsmisc
+> 
+> 
+> (doExtras <- robustbase:::doExtras())
+[1] FALSE
+> 
+> ## Explore the espRho() function: ---------------------------------------------
+> if(!dev.interactive(orNone=TRUE)) pdf("MT-E_rho.pdf")
+> E.rho <- robustbase:::espRho
+> lambdas <- ((1:10)/2)^2
+> cws <- c(1, 1.5, 1.75, 2, 2.25, 3)
+> (gr <- expand.grid(lam = lambdas, cw = cws))
+     lam   cw
+1   0.25 1.00
+2   1.00 1.00
+3   2.25 1.00
+4   4.00 1.00
+5   6.25 1.00
+6   9.00 1.00
+7  12.25 1.00
+8  16.00 1.00
+9  20.25 1.00
+10 25.00 1.00
+11  0.25 1.50
+12  1.00 1.50
+13  2.25 1.50
+14  4.00 1.50
+15  6.25 1.50
+16  9.00 1.50
+17 12.25 1.50
+18 16.00 1.50
+19 20.25 1.50
+20 25.00 1.50
+21  0.25 1.75
+22  1.00 1.75
+23  2.25 1.75
+24  4.00 1.75
+25  6.25 1.75
+26  9.00 1.75
+27 12.25 1.75
+28 16.00 1.75
+29 20.25 1.75
+30 25.00 1.75
+31  0.25 2.00
+32  1.00 2.00
+33  2.25 2.00
+34  4.00 2.00
+35  6.25 2.00
+36  9.00 2.00
+37 12.25 2.00
+38 16.00 2.00
+39 20.25 2.00
+40 25.00 2.00
+41  0.25 2.25
+42  1.00 2.25
+43  2.25 2.25
+44  4.00 2.25
+45  6.25 2.25
+46  9.00 2.25
+47 12.25 2.25
+48 16.00 2.25
+49 20.25 2.25
+50 25.00 2.25
+51  0.25 3.00
+52  1.00 3.00
+53  2.25 3.00
+54  4.00 3.00
+55  6.25 3.00
+56  9.00 3.00
+57 12.25 3.00
+58 16.00 3.00
+59 20.25 3.00
+60 25.00 3.00
+> 
+> Egr <- apply(gr, 1, function(r) {
++     lam <- r[["lam"]]; cw <- r[["cw"]]; sL <- sqrt(lam)
++     xx <- seq(lam - 2*sL, lam + 2*sL, length=17)
++     vapply(xx, function(X) E.rho(lam, xx=X, cw=cw), NA_real_)
++ })
+> str(Egr)# 17 x 60
+ num [1:17, 1:60] 0.935 0.824 0.671 0.506 0.358 ...
+> mLeg <- function(pos, type="o")
++     legend(pos, legend=paste("lambda = ", format(lambdas, digits=2)),
++            lty=1:5, col=1:6, pch= c(1:9, 0, letters, LETTERS), bty="n")
+> matplot(Egr[, gr[,"cw"]== 1.0 ], type="o",main="c_w = 1.0" ); mLeg("bottomright")
+> matplot(Egr[, gr[,"cw"]== 1.5 ], type="o",main="c_w = 1.5" ); mLeg("bottomright")
+> matplot(Egr[, gr[,"cw"]== 1.75], type="o",main="c_w = 1.75"); mLeg("bottomright")
+> matplot(Egr[, gr[,"cw"]== 2.0 ], type="o",main="c_w = 2.0" ); mLeg("bottomright")
+> matplot(Egr[, gr[,"cw"]== 2.25], type="o",main="c_w = 2.25"); mLeg("bottomright")
+> matplot(Egr[, gr[,"cw"]== 3.0 ], type="o",main="c_w = 3.0" ); mLeg("bottomright")
+> 
+> dev.off()
+null device 
+          1 
+> 
+> 
+> ## Explore the m() function: ---------------------------------------------
+> if(!dev.interactive(orNone=TRUE)) pdf("MT-m_rho.pdf")
+> 
+> mkM <- robustbase:::mk.m_rho # itself calling splinefun(*, "monoH.FC")
+> getSpline.xy <- function(splfun) {
++     ## Depending on the version of R, the
++     ## environment of splinefun() slightly changes:
++     stopifnot(is.function(splfun), length(e <- environment(splfun)) > 0)
++     if("x0" %in% ls(e))
++ 	list(x = e$x0, y = e$y0)
++     else list(x = e$x, y = e$y)
++ }
+> 
+> m21 <- mkM(2.1, recompute=TRUE)# the default 'cw = 2.1'
+> m16 <- mkM(1.6, recompute=TRUE)
+> p.m2 <- function(mrho, from = 0, to, col=2, addKnots=TRUE, pchK=4, cexK=1.5, ...) {
++     stopifnot(is.function(mrho))
++     curve(mrho, from, to, col=col, ...)
++     curve(sqrt(x), add=TRUE, col=adjustcolor("gray",.5), lwd=2)
++     if(addKnots) points(getSpline.xy(mrho), pch=pchK, cex=cexK)
++ }
+> p.m.diff <- function(mrho, from = 0, to, col=2, addKnots=TRUE, pchK=4, cexK=1.5, ...) {
++     stopifnot(is.function(mrho))
++     curve(mrho(x) - sqrt(x), from=from, to=to, n=512, col=col, ...)
++     abline(h=0,lty=3)
++     if(addKnots) {
++ 	xy <- getSpline.xy(mrho)
++ 	if(is.numeric(x <- xy$x))
++ 	    points(x, xy$y - sqrt(x), pch=pchK, cex=cexK)
++         else warning("'addKnots' not available: No knots in function's environment")
++     }
++ }
+> 
+> p.m2(m21, to=10)
+> p.m2(m16, to=10)
+> p.m2(m21, to=50)
+> p.m2(m21, to=120, cexK=.8)
+> p.m.diff(m21, to=120, cex=.5)# pchK="."
+> p.m.diff(m16, to=120, cex=.5)# pchK="."
+> 
+> mm21 <- function(.) robustbase:::mm(., m21)
+> environment(mm21) <- environment(m21)# <- for p.m()
+> p.m2(mm21, to=120, cexK=.8)
+> p.m.diff(mm21, to=120, cexK=.8)#-- discontinuity at 100 !!
+> ## TODO: ways to improve!
+> 
+> ## Here: look at "larger lambda" (and more cw)
+> 
+> la2 <- 5*2^seq(0, 10, by = 0.25)
+> c.s <- .25*c(1:10, 15, 50)
+> mL <- lapply(c.s, function(cc) mkM(cc, lambda = la2, recompute=TRUE))
+> str(mL, max=1) # a list of functions..
+List of 12
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+ $ :function (x, deriv = 0, extrapol = c("linear", "cubic"))  
+> assert.EQ(la2, getSpline.xy(mL[[1]])$x)
+> mmL <- sapply(mL, function(F) getSpline.xy(F)$y)
+> matplot(la2, mmL, type ="l") # "all the same" from very far ...
+> mm.d. <- mmL - sqrt(la2)
+> matplot(la2, mm.d., type ="l", xlab=quote(lambda)); abline(h=0, lty=3)
+> legend("bottom", legend= paste("cw=",c.s), col=1:6, lty=1:5, ncol = 3, bty="n")
+> 
+> matplot(la2, -mm.d., type ="l", xlab=quote(lambda), log = "xy", axes=FALSE)
+Warning messages:
+1: In xy.coords(x, y, xlabel, ylabel, log = log) :
+  24 y values <= 0 omitted from logarithmic plot
+2: In xy.coords(x, y, xlabel, ylabel, log) :
+  18 y values <= 0 omitted from logarithmic plot
+> eaxis(1); eaxis(2)
+> legend("bottom", legend= paste("cw=",c.s), col=1:6, lty=1:5, ncol = 3, bty="n")
+> ## ok, that's the correct scale
+> c.s2  <- c.s  [c.s >= .75]
+> mm.d2 <- mm.d.[, c.s >= .75]
+> 
+> matplot(la2, -mm.d2, type ="l", xlab=quote(lambda), log = "xy", axes=FALSE)
+> eaxis(1); eaxis(2)
+> legend("bottomleft", legend= paste("cw=",c.s2), col=1:6, lty=1:5, ncol = 3, bty="n")
+> 
+> ##->   log (sqrt(lam) - m(lam)) = a[c] - beta * log(lam) :
+> dd2 <- data.frame(m.d = c(mm.d2),
++                   cw = rep(c.s2, each = length(la2)),
++                   lambda = rep(la2, length(c.s2)))
+> 
+> ## gives a pretty nice picture:
+> summary(fm <- lm(log(-m.d) ~ 0+factor(cw) + log(lambda),
++                  data = dd2, subset = lambda >= 50))
+
+Call:
+lm(formula = log(-m.d) ~ 0 + factor(cw) + log(lambda), data = dd2, 
+    subset = lambda >= 50)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.030289 -0.001044  0.000263  0.001135  0.007586 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+factor(cw)0.75 -3.6132962  0.0010781   -3352   <2e-16 ***
+factor(cw)1    -3.1413997  0.0010781   -2914   <2e-16 ***
+factor(cw)1.25 -2.8260458  0.0010781   -2621   <2e-16 ***
+factor(cw)1.5  -2.6136507  0.0010781   -2424   <2e-16 ***
+factor(cw)1.75 -2.4707266  0.0010781   -2292   <2e-16 ***
+factor(cw)2    -2.3742377  0.0010781   -2202   <2e-16 ***
+factor(cw)2.25 -2.3081348  0.0010781   -2141   <2e-16 ***
+factor(cw)2.5  -2.2617280  0.0010781   -2098   <2e-16 ***
+factor(cw)3.75 -2.1576558  0.0010781   -2001   <2e-16 ***
+factor(cw)12.5 -2.0887256  0.0010781   -1937   <2e-16 ***
+log(lambda)    -0.4992666  0.0001419   -3520   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.003146 on 259 degrees of freedom
+Multiple R-squared:      1,	Adjusted R-squared:      1 
+F-statistic: 8.293e+07 on 11 and 259 DF,  p-value: < 2.2e-16
+
+> ##=> slope of log(lambda) = -1/2
+> dd3 <- within(dd2, { ld2 <- log(-m.d) + 1/2 * log(lambda) })[dd2[,"lambda"] >= 50,]
+> plot(ld2 ~ cw, data = dd3, type = "b")
+> plot(ld2 ~ cw, data = dd3, type = "b", log="x")
+> coplot(ld2 ~ cw|lambda, data = dd3)
+> coplot(ld2 ~ cw|log(lambda), data = dd3)
+> coplot(ld2 ~ log10(cw) | log10(lambda), data = dd3)
+> 
+> dev.off()
+null device 
+          1 
+> ##-------------------------------------------------------- end m(.) -------------
+> 
+> 
+> ## The simple intercept example from  ./glmrob-1.R
+> set.seed(113)
+> y <- rpois(17, lambda = 4)
+> y[1:2] <- 99:100 # outliers
+> y.1 <- y
+> x.1 <- cbind(rep(1, length(y)))
+> 
+> options("robustbase:m_rho_recompute" = TRUE)#-> recompute in any case:
+> showSys.time( r <- glmrob(y ~ 1, family = poisson, method = "MT", nsubm=100) )# some output
+Time    user  system elapsed 
+Time   0.590   0.014   0.611 
+> str(r)
+List of 29
+ $ coefficients     : Named num 1.29
+  ..- attr(*, "names")= chr "(Intercept)"
+ $ initial          : Named num 1.31
+  ..- attr(*, "names")= chr "(Intercept)"
+ $ family           :List of 12
+  ..$ family    : chr "poisson"
+  ..$ link      : chr "log"
+  ..$ linkfun   :function (mu)  
+  ..$ linkinv   :function (eta)  
+  ..$ variance  :function (mu)  
+  ..$ dev.resids:function (y, mu, wt)  
+  ..$ aic       :function (y, n, mu, wt, dev)  
+  ..$ mu.eta    :function (eta)  
+  ..$ initialize:  expression({     if (any(y < 0))          stop("negative values not allowed for the 'Poisson' family")     n <- rep.int(1, nobs)     mustart <- y + 0.1 })
+  ..$ validmu   :function (mu)  
+  ..$ valideta  :function (eta)  
+  ..$ simulate  :function (object, nsim)  
+  ..- attr(*, "class")= chr "family"
+ $ coefficients     : Named num 1.29
+  ..- attr(*, "names")= chr "(Intercept)"
+ $ residuals        : Named num [1:17] 49.936 50.46 1.756 -0.338 0.709 ...
+  ..- attr(*, "names")= chr [1:17] "1" "2" "3" "4" ...
+ $ fitted.values    : Named num [1:17] 3.65 3.65 3.65 3.65 3.65 ...
+  ..- attr(*, "names")= chr [1:17] "1" "2" "3" "4" ...
+ $ linear.predictors: Named num [1:17] 1.29 1.29 1.29 1.29 1.29 ...
+  ..- attr(*, "names")= chr [1:17] "1" "2" "3" "4" ...
+ $ cov              : num [1, 1] 0.0145
+ $ nsubm            : num 100
+ $ nOksub           : num 100
+ $ converged        : logi TRUE
+ $ iter             : int 15
+ $ optim.counts     : Named int [1:2] 15 15
+  ..- attr(*, "names")= chr [1:2] "function" "gradient"
+ $ optim.control    :List of 4
+  ..$ trace: num 0
+  ..$ maxit: num 200
+  ..$ lmm  : num 9
+  ..$ factr: num 1e+05
+ $ cw               : num 2.1
+ $ weights.on.x     : chr "none"
+ $ w.x              : num [1:17] 1 1 1 1 1 1 1 1 1 1 ...
+ $ w.r              : Named num [1:17] 0 0 0.745 0.992 0.94 ...
+  ..- attr(*, "names")= chr [1:17] "1" "2" "3" "4" ...
+ $ model            :'data.frame':	17 obs. of  1 variable:
+  ..$ y: int [1:17] 99 100 7 3 5 3 2 5 3 5 ...
+  ..- attr(*, "terms")=Classes 'terms', 'formula' length 3 y ~ 1
+  .. .. ..- attr(*, "variables")= language list(y)
+  .. .. ..- attr(*, "factors")= int(0) 
+  .. .. ..- attr(*, "term.labels")= chr(0) 
+  .. .. ..- attr(*, "order")= int(0) 
+  .. .. ..- attr(*, "intercept")= int 1
+  .. .. ..- attr(*, "response")= int 1
+  .. .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+  .. .. ..- attr(*, "predvars")= language list(y)
+  .. .. ..- attr(*, "dataClasses")= Named chr "numeric"
+  .. .. .. ..- attr(*, "names")= chr "y"
+ $ call             : language glmrob(formula = y ~ 1, family = poisson, method = "MT", nsubm = 100)
+ $ formula          :Class 'formula' length 3 y ~ 1
+  .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+ $ terms            :Classes 'terms', 'formula' length 3 y ~ 1
+  .. ..- attr(*, "variables")= language list(y)
+  .. ..- attr(*, "factors")= int(0) 
+  .. ..- attr(*, "term.labels")= chr(0) 
+  .. ..- attr(*, "order")= int(0) 
+  .. ..- attr(*, "intercept")= int 1
+  .. ..- attr(*, "response")= int 1
+  .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+  .. ..- attr(*, "predvars")= language list(y)
+  .. ..- attr(*, "dataClasses")= Named chr "numeric"
+  .. .. ..- attr(*, "names")= chr "y"
+ $ data             :<environment: R_GlobalEnv> 
+ $ offset           : NULL
+ $ control          :List of 4
+  ..$ cw   : num 2.1
+  ..$ nsubm: num 100
+  ..$ acc  : num 1e-06
+  ..$ maxit: num 200
+ $ method           : chr "MT"
+ $ prior.weights    : num [1:17] 1 1 1 1 1 1 1 1 1 1 ...
+ $ contrasts        : NULL
+ $ xlevels          : NULL
+ - attr(*, "class")= chr [1:2] "glmrob" "glm"
+> 
+> ## was   c(ini = 1.30833281965018, est = 1.29369680430613)
+> ## then  c(ini = 1.30833281965018, est = 1.29369680422799)
+> ##       c(ini = 1.30833281965018, est = 1.29369680430627)
+> r.64b <- c(ini = 1.30833281965018, est = 1.29369680452016)
+> stopifnot(r$converged)
+> assert.EQ(r$initial,      r.64b[["ini"]], check.attributes=FALSE, tol = 1e-13)# rel.diff: 3.394.e-16
+> assert.EQ(r$coefficients, r.64b[["est"]], check.attributes=FALSE, tol = 1e-09)# as long we use different optim())
+> 
+> 
+> ## now, as the algorithm has a random start:
+> set.seed(7)
+> nSim <- if(doExtras) 20 else 2
+> showSys.time(LL <- replicate(nSim,
++      glmrob(y ~ 1, family = poisson, method = "MT"),
++                              simplify=FALSE))
+Time    user  system elapsed 
+Time   4.075   0.033   4.227 
+> ini <- sapply(LL, `[[`, "initial")
+> est <- sapply(LL, `[[`, "coefficients")
+> ## surprise:  all the 20 initial estimators are identical:
+> stopifnot(diff(range(ini)) == 0,
++           diff(range(est)) == 0)
+> ## probably too accurate ... but ok, for now
+> assert.EQ(est[1], r.64b[["est"]], check.attributes=FALSE, tol = 1e-10)# Winbuilder needed ~ 2e-11
+> assert.EQ(ini[1], r.64b[["ini"]], check.attributes=FALSE, tol = 1e-10)
+> 
+> ccvv <- sapply(LL, `[[`, "cov")
+> stopifnot(ccvv[1] == ccvv)
+> assert.EQ(print(ccvv[1]), 0.0145309081924157, tol = 1e-7, giveRE=TRUE)
+[1] 0.01453091
+Mean relative difference: 2.507014e-15
+> 
+> cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
+Time elapsed:  9 0.244 9.421 0.004 0.009 
+> ## "Platform" info
+> (SysI <- Sys.info()[c("sysname", "release", "nodename", "machine")])
+           sysname            release           nodename            machine 
+          "Darwin"           "15.0.0" "Cali-Devil.local"           "x86_64" 
+> if(require("sfsmisc") && SysI[["sysname"]] == "Linux")
++     ## not on the Mac (yet)
++     c(SysI, MIPS=Sys.MIPS(), Sys.sizes()) else SysI
+           sysname            release           nodename            machine 
+          "Darwin"           "15.0.0" "Cali-Devil.local"           "x86_64" 
+> 
+> proc.time()
+   user  system elapsed 
+  9.005   0.253   9.422 

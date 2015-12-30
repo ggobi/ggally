@@ -1,0 +1,126 @@
+* using log directory ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpbPiubW/check_cran12f4445b08432/robustbase.Rcheck’
+* using R version 3.2.3 (2015-12-10)
+* using platform: x86_64-apple-darwin13.4.0 (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-codoc --no-manual --as-cran’
+* checking for file ‘robustbase/DESCRIPTION’ ... OK
+* this is package ‘robustbase’ version ‘0.92-5’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘robustbase’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... SKIPPED
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking compiled code ... OK
+* checking sizes of PDF files under ‘inst/doc’ ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+** found \donttest examples: check also with --run-donttest
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘LTS-specials.R’
+  Running ‘MCD-specials.R’
+  Comparing ‘MCD-specials.Rout’ to ‘MCD-specials.Rout.save’ ... OK
+  Running ‘MT-tst.R’
+  Running ‘NAcoef.R’
+  Comparing ‘NAcoef.Rout’ to ‘NAcoef.Rout.save’ ... OK
+  Running ‘OGK-ex.R’
+  Comparing ‘OGK-ex.Rout’ to ‘OGK-ex.Rout.save’ ... OK
+  Running ‘Rsquared.R’
+  Comparing ‘Rsquared.Rout’ to ‘Rsquared.Rout.save’ ... OK
+  Running ‘binom-ni-small.R’
+  Comparing ‘binom-ni-small.Rout’ to ‘binom-ni-small.Rout.save’ ...135c135
+<   ..- attr(*, "terms")=Classes 'terms', 'formula' length 3 cbind(k, ni - k) ~ x
+---
+>   ..- attr(*, "terms")=Classes 'terms', 'formula'  language cbind(k, ni - k) ~ x
+150c150
+<  $ formula          :Class 'formula' length 3 cbind(k, ni - k) ~ x
+---
+>  $ formula          :Class 'formula'  language cbind(k, ni - k) ~ x
+152c152
+<  $ terms            :Classes 'terms', 'formula' length 3 cbind(k, ni - k) ~ x
+---
+>  $ terms            :Classes 'terms', 'formula'  language cbind(k, ni - k) ~ x
+  Running ‘binom-no-x.R’
+  Running ‘comedian-tst.R’
+  Running ‘exact-fit-categorical.R’
+  Running ‘glmrob-1.R’ [10s/10s]
+  Running ‘glmrob-specials.R’
+  Running ‘huber-etc.R’
+  Comparing ‘huber-etc.Rout’ to ‘huber-etc.Rout.save’ ... OK
+  Running ‘lmrob-data.R’
+  Comparing ‘lmrob-data.Rout’ to ‘lmrob-data.Rout.save’ ... OK
+  Running ‘lmrob-ex12.R’
+  Running ‘lmrob-methods.R’
+  Comparing ‘lmrob-methods.Rout’ to ‘lmrob-methods.Rout.save’ ... OK
+  Running ‘lmrob-outlierStats.R’
+  Running ‘lmrob-psifns.R’
+  Comparing ‘lmrob-psifns.Rout’ to ‘lmrob-psifns.Rout.save’ ... OK
+  Running ‘m-s-estimator.R’
+  Running ‘mc-etc.R’
+  Running ‘mc-strict.R’
+  Running ‘nlregrob-tst.R’ [26s/27s]
+  Running ‘nlrob-tst.R’
+  Running ‘plot-ex.R’
+  Running ‘poisson-ex.R’
+  Running ‘psi-rho-etc.R’
+  Comparing ‘psi-rho-etc.Rout’ to ‘psi-rho-etc.Rout.save’ ... OK
+  Running ‘small-sample.R’
+  Comparing ‘small-sample.Rout’ to ‘small-sample.Rout.save’ ... OK
+  Running ‘subsample.R’
+  Running ‘tlts.R’
+  Comparing ‘tlts.Rout’ to ‘tlts.Rout.save’ ... OK
+  Running ‘tmcd.R’
+  Running ‘weights.R’
+  Comparing ‘weights.Rout’ to ‘weights.Rout.save’ ... OK
+  Running ‘wgt-himed-xtra.R’
+  Running ‘wgt-himed.R’
+  Comparing ‘wgt-himed.Rout’ to ‘wgt-himed.Rout.save’ ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: OK

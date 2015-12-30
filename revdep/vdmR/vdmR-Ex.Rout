@@ -1,0 +1,164 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "vdmR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "vdmR-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('vdmR')
+Loading required package: maptools
+Loading required package: sp
+Checking rgeos availability: TRUE
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("vcmap")
+> ### * vcmap
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: vcmap
+> ### Title: Generate choropleth map with interactive functions
+> ### Aliases: vcmap
+> 
+> ### ** Examples
+> 
+> data(vsfuk2012)
+> shp.path <- file.path(system.file(package="vdmR"), "etc/shapes/kitakyu2012.shp")
+> kk2012 <- dplyr::filter(vsfuk2012, CityCode<40110&CityCode>40100)
+> vcmap(shp.path, kk2012, "CityCode", "CityCode", "map1", "kk2012")
+> vlaunch(kk2012, "main", "kk2012", browse=FALSE)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("vcmap", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("vhist")
+> ### * vhist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: vhist
+> ### Title: Generate histogram with interactive functions
+> ### Aliases: vhist
+> 
+> ### ** Examples
+> 
+> data(vsfuk2012)
+> vhist(FertilityRate, vsfuk2012, "hist1", "vsfuk2012", fill=Type)
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+> vlaunch(vsfuk2012, "main", "vsfuk2012", browse=FALSE)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("vhist", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("vlaunch")
+> ### * vlaunch
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: vlaunch
+> ### Title: Generate main window for interactive plot windows
+> ### Aliases: vlaunch
+> 
+> ### ** Examples
+> 
+> data(vsfuk2012)
+> vscat(MarriageRate, DivorceRate, vsfuk2012, "scat1", "vsfuk2012", colour=Type)
+> vhist(FertilityRate, vsfuk2012, "hist1", "vsfuk2012", fill=Type)
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+> vlaunch(vsfuk2012, "main", "vsfuk2012", browse=FALSE)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("vlaunch", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("vpcp")
+> ### * vpcp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: vpcp
+> ### Title: Generate prallel coordinate plot with interactive functions
+> ### Aliases: vpcp
+> 
+> ### ** Examples
+> 
+> data(vsfuk2012)
+> vpcp(vsfuk2012, 4:17, "pcp1", "vsfuk2012", scale="uniminmax")
+> vlaunch(vsfuk2012, "main", "vsfuk2012", browse=FALSE)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("vpcp", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("vscat")
+> ### * vscat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: vscat
+> ### Title: Generate scatter plot with interactive functions
+> ### Aliases: vscat
+> 
+> ### ** Examples
+> 
+> data(vsfuk2012)
+> vscat(MarriageRate, DivorceRate, vsfuk2012, "scat1", "vsfuk2012", colour=Type)
+> vlaunch(vsfuk2012, "main", "vsfuk2012", browse=FALSE)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("vscat", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  16.805 0.215 17.204 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

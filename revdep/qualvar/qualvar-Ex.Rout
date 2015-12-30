@@ -1,0 +1,221 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "qualvar"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "qualvar-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('qualvar')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("ADA")
+> ### * ADA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ADA
+> ### Title: Average Deviation Analog (ADA)
+> ### Aliases: ADA
+> 
+> ### ** Examples
+> 
+> x <- rmultinom(1, 100, rep_len(0.25, 4))
+> x <- as.vector(t(x))
+> ADA(x)
+[1] 0.96
+> 
+> df <- rmultinom(10, 100, rep_len(0.25, 4))
+> df <- as.data.frame(t(df))
+> apply(df, 1, ADA)
+ [1] 0.8666667 0.9066667 0.8933333 0.9333333 0.8800000 0.9066667 0.9066667
+ [8] 0.8666667 0.9333333 0.9866667
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ADA", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("B")
+> ### * B
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: B
+> ### Title: B (modified geometric mean)
+> ### Aliases: B
+> 
+> ### ** Examples
+> 
+> x <- rmultinom(1, 100, rep_len(0.25, 4))
+> x <- as.vector(t(x))
+> B(x)
+[1] 0.923784
+> 
+> df <- rmultinom(10, 100, rep_len(0.25, 4))
+> df <- as.data.frame(t(df))
+> apply(df, 1, B)
+ [1] 0.7986707 0.8402588 0.7883114 0.8979800 0.7562872 0.8375182 0.8585221
+ [8] 0.7588113 0.8838702 0.9717101
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("B", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("DM")
+> ### * DM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: DM
+> ### Title: Deviation from the mode (DM)
+> ### Aliases: DM
+> 
+> ### ** Examples
+> 
+> x <- rmultinom(1, 100, rep_len(0.25, 4))
+> x <- as.vector(t(x))
+> names(x) <- c("a", "b", "c", "d")
+> DM(x)
+[1] 0.9733333
+> 
+> df <- rmultinom(10, 100, rep_len(0.25, 4))
+> df <- as.data.frame(t(df))
+> names(df) <- c("a", "b", "c", "d")
+> apply(df, 1, DM)
+ [1] 0.9200000 0.9066667 0.8933333 0.9600000 0.9066667 0.9466667 0.9466667
+ [8] 0.8666667 0.9333333 0.9866667
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("DM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("HREL")
+> ### * HREL
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: HREL
+> ### Title: HREL
+> ### Aliases: HREL
+> 
+> ### ** Examples
+> 
+> x <- rmultinom(1, 100, rep_len(0.25, 4))
+> x <- as.vector(t(x))
+> HREL(x)
+[1] 0.9979416
+> 
+> df <- rmultinom(10, 100, rep_len(0.25, 4))
+> df <- as.data.frame(t(df))
+> apply(df, 1, HREL)
+ [1] 0.9852348 0.9903296 0.9836323 0.9962415 0.9795363 0.9907425 0.9927604
+ [8] 0.9779908 0.9949660 0.9997114
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("HREL", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("MDA")
+> ### * MDA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: MDA
+> ### Title: Mean Difference Analog (MDA)
+> ### Aliases: MDA
+> 
+> ### ** Examples
+> 
+> x <- rmultinom(1, 100, rep_len(0.25, 4))
+> x <- as.vector(t(x))
+> MDA(x)
+[1] 0.9466667
+> 
+> df <- rmultinom(10, 100, rep_len(0.25, 4))
+> df <- as.data.frame(t(df))
+> apply(df, 1, MDA)
+ [1] 0.8600000 0.8866667 0.8466667 0.9266667 0.8333333 0.8866667 0.9000000
+ [8] 0.8200000 0.9200000 0.9800000
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MDA", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("VA")
+> ### * VA
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: VA
+> ### Title: Variance Analog (VA)
+> ### Aliases: VA
+> 
+> ### ** Examples
+> 
+> x <- rmultinom(1, 100, rep_len(0.25, 4))
+> x <- as.vector(t(x))
+> VA(x)
+[1] 0.9981333
+> 
+> df <- rmultinom(10, 100, rep_len(0.25, 4))
+> df <- as.data.frame(t(df))
+> apply(df, 1, VA)
+ [1] 0.9864000 0.9906667 0.9848000 0.9965333 0.9821333 0.9917333 0.9933333
+ [8] 0.9789333 0.9952000 0.9997333
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("VA", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.084 0.004 0.089 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

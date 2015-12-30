@@ -1,0 +1,779 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> #### Testing  medcouple  and related functions
+> 
+> ### Strict (and timing) tests are in ./mc-strict.R
+> ###                                   ~~~~~~~~~~~~
+> ### Here, we produce output which is *compared* with ./mc-etc.Rout.save
+> 
+> library(robustbase)
+> source(system.file("xtraR/mcnaive.R", package = "robustbase"))# mcNaive()
+> 
+> ## This is somewhat interesting {diff the output !}
+> ## particularly since *most* give  the  'not found' diagnostic
+> set.seed(17)
+> for(n in 1:100) {
++     cat(sprintf("n =%3d:\n------\n", n))
++     mcval <- mc(rlnorm(n), trace=TRUE, doRefl=FALSE)
++     cat(sprintf(" --> mc(rlnorm(%d)) = %.6f\n", n, mcval))
++ }
+n =  1:
+------
+ --> mc(rlnorm(1)) = 0.000000
+n =  2:
+------
+ --> mc(rlnorm(2)) = 0.000000
+n =  3:
+------
+mc_C_d(z[1:3], trace_lev=1): Median = 0.847375 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=2 each:
+ --> mc(rlnorm(3)) = 0.000000
+n =  4:
+------
+mc_C_d(z[1:4], trace_lev=1): Median = 2.04417 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=2 each:
+  not found [it=0,  (nr,nl) = (4,0)], -> (knew-nl, j) = (3,4)
+ --> mc(rlnorm(4)) = 0.000000
+n =  5:
+------
+mc_C_d(z[1:5], trace_lev=1): Median = 3.25694 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=3 each:
+  not found [it=1,  (nr,nl) = (5,0)], -> (knew-nl, j) = (5,5)
+ --> mc(rlnorm(5)) = -0.107345
+n =  6:
+------
+mc_C_d(z[1:6], trace_lev=1): Median = 1.87719 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=3 each:
+  not found [it=1,  (nr,nl) = (5,0)], -> (knew-nl, j) = (5,5)
+ --> mc(rlnorm(6)) = -0.362411
+n =  7:
+------
+mc_C_d(z[1:7], trace_lev=1): Median = 1.12459 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=4 each:
+  not found [it=2,  (nr,nl) = (10,7)], -> (knew-nl, j) = (2,3)
+ --> mc(rlnorm(7)) = 0.527099
+n =  8:
+------
+mc_C_d(z[1:8], trace_lev=1): Median = 0.399023 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=4 each:
+ --> mc(rlnorm(8)) = 0.004898
+n =  9:
+------
+mc_C_d(z[1:9], trace_lev=1): Median = 0.813573 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=5 each:
+  not found [it=2,  (nr,nl) = (14,11)], -> (knew-nl, j) = (2,3)
+ --> mc(rlnorm(9)) = 0.665152
+n = 10:
+------
+mc_C_d(z[1:10], trace_lev=1): Median = 1.224 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=5 each:
+  not found [it=2,  (nr,nl) = (14,11)], -> (knew-nl, j) = (2,3)
+ --> mc(rlnorm(10)) = 0.336027
+n = 11:
+------
+mc_C_d(z[1:11], trace_lev=1): Median = 1.16303 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=6 each:
+  not found [it=2,  (nr,nl) = (23,13)], -> (knew-nl, j) = (6,10)
+ --> mc(rlnorm(11)) = 0.335301
+n = 12:
+------
+mc_C_d(z[1:12], trace_lev=1): Median = 0.701877 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=6 each:
+  not found [it=2,  (nr,nl) = (22,12)], -> (knew-nl, j) = (7,10)
+ --> mc(rlnorm(12)) = 0.360765
+n = 13:
+------
+mc_C_d(z[1:13], trace_lev=1): Median = 1.14961 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=7 each:
+  not found [it=2,  (nr,nl) = (27,18)], -> (knew-nl, j) = (7,9)
+ --> mc(rlnorm(13)) = 0.403639
+n = 14:
+------
+mc_C_d(z[1:14], trace_lev=1): Median = 0.693278 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=7 each:
+ --> mc(rlnorm(14)) = 0.700385
+n = 15:
+------
+mc_C_d(z[1:15], trace_lev=1): Median = 1.39603 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=8 each:
+  not found [it=2,  (nr,nl) = (35,23)], -> (knew-nl, j) = (10,12)
+ --> mc(rlnorm(15)) = 0.471475
+n = 16:
+------
+mc_C_d(z[1:16], trace_lev=1): Median = 0.993696 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=8 each:
+  not found [it=3,  (nr,nl) = (40,29)], -> (knew-nl, j) = (4,11)
+ --> mc(rlnorm(16)) = 0.316894
+n = 17:
+------
+mc_C_d(z[1:17], trace_lev=1): Median = 1.06594 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=9 each:
+  not found [it=2,  (nr,nl) = (43,26)], -> (knew-nl, j) = (15,17)
+ --> mc(rlnorm(17)) = 0.496123
+n = 18:
+------
+mc_C_d(z[1:18], trace_lev=1): Median = 0.752636 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=9 each:
+ --> mc(rlnorm(18)) = 0.412646
+n = 19:
+------
+mc_C_d(z[1:19], trace_lev=1): Median = 0.607121 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=10 each:
+  not found [it=3,  (nr,nl) = (61,49)], -> (knew-nl, j) = (2,12)
+ --> mc(rlnorm(19)) = 0.707461
+n = 20:
+------
+mc_C_d(z[1:20], trace_lev=1): Median = 0.734745 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=10 each:
+  not found [it=3,  (nr,nl) = (51,34)], -> (knew-nl, j) = (17,17)
+ --> mc(rlnorm(20)) = 0.741001
+n = 21:
+------
+mc_C_d(z[1:21], trace_lev=1): Median = 0.962639 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=11 each:
+  not found [it=3,  (nr,nl) = (78,58)], -> (knew-nl, j) = (3,20)
+ --> mc(rlnorm(21)) = 0.713546
+n = 22:
+------
+mc_C_d(z[1:22], trace_lev=1): Median = 0.623584 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=11 each:
+ --> mc(rlnorm(22)) = 0.624709
+n = 23:
+------
+mc_C_d(z[1:23], trace_lev=1): Median = 1.27168 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=12 each:
+  not found [it=3,  (nr,nl) = (80,60)], -> (knew-nl, j) = (13,20)
+ --> mc(rlnorm(23)) = 0.488602
+n = 24:
+------
+mc_C_d(z[1:24], trace_lev=1): Median = 1.1221 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=12 each:
+  not found [it=3,  (nr,nl) = (85,63)], -> (knew-nl, j) = (10,22)
+ --> mc(rlnorm(24)) = 0.310879
+n = 25:
+------
+mc_C_d(z[1:25], trace_lev=1): Median = 1.07368 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=13 each:
+  not found [it=4,  (nr,nl) = (85,78)], -> (knew-nl, j) = (7,7)
+ --> mc(rlnorm(25)) = 0.455712
+n = 26:
+------
+mc_C_d(z[1:26], trace_lev=1): Median = 0.838229 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=13 each:
+  not found [it=3,  (nr,nl) = (85,62)], -> (knew-nl, j) = (23,23)
+ --> mc(rlnorm(26)) = 0.269868
+n = 27:
+------
+mc_C_d(z[1:27], trace_lev=1): Median = 1.07424 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=14 each:
+ --> mc(rlnorm(27)) = 0.510525
+n = 28:
+------
+mc_C_d(z[1:28], trace_lev=1): Median = 1.03498 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=14 each:
+  not found [it=3,  (nr,nl) = (102,82)], -> (knew-nl, j) = (17,20)
+ --> mc(rlnorm(28)) = 0.423608
+n = 29:
+------
+mc_C_d(z[1:29], trace_lev=1): Median = 0.567121 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=15 each:
+  not found [it=3,  (nr,nl) = (123,107)], -> (knew-nl, j) = (6,16)
+ --> mc(rlnorm(29)) = 0.615190
+n = 30:
+------
+mc_C_d(z[1:30], trace_lev=1): Median = 1.19017 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=15 each:
+  not found [it=3,  (nr,nl) = (129,110)], -> (knew-nl, j) = (3,19)
+ --> mc(rlnorm(30)) = 0.128611
+n = 31:
+------
+mc_C_d(z[1:31], trace_lev=1): Median = 1.01222 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=16 each:
+  not found [it=4,  (nr,nl) = (131,114)], -> (knew-nl, j) = (15,17)
+ --> mc(rlnorm(31)) = 0.383694
+n = 32:
+------
+mc_C_d(z[1:32], trace_lev=1): Median = 1.49663 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=16 each:
+  not found [it=3,  (nr,nl) = (138,112)], -> (knew-nl, j) = (17,26)
+ --> mc(rlnorm(32)) = 0.352154
+n = 33:
+------
+mc_C_d(z[1:33], trace_lev=1): Median = 0.889278 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=17 each:
+  not found [it=4,  (nr,nl) = (168,144)], -> (knew-nl, j) = (1,24)
+ --> mc(rlnorm(33)) = 0.517069
+n = 34:
+------
+mc_C_d(z[1:34], trace_lev=1): Median = 0.918038 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=17 each:
+  not found [it=3,  (nr,nl) = (156,132)], -> (knew-nl, j) = (13,24)
+ --> mc(rlnorm(34)) = 0.190217
+n = 35:
+------
+mc_C_d(z[1:35], trace_lev=1): Median = 1.13929 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=18 each:
+  not found [it=3,  (nr,nl) = (165,132)], -> (knew-nl, j) = (31,33)
+ --> mc(rlnorm(35)) = 0.271650
+n = 36:
+------
+mc_C_d(z[1:36], trace_lev=1): Median = 0.889333 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=18 each:
+  not found [it=3,  (nr,nl) = (177,148)], -> (knew-nl, j) = (15,29)
+ --> mc(rlnorm(36)) = 0.423678
+n = 37:
+------
+mc_C_d(z[1:37], trace_lev=1): Median = 1.05539 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=19 each:
+  not found [it=4,  (nr,nl) = (204,178)], -> (knew-nl, j) = (3,26)
+ --> mc(rlnorm(37)) = 0.250077
+n = 38:
+------
+mc_C_d(z[1:38], trace_lev=1): Median = 1.12551 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=19 each:
+  not found [it=3,  (nr,nl) = (191,161)], -> (knew-nl, j) = (20,30)
+ --> mc(rlnorm(38)) = 0.140248
+n = 39:
+------
+mc_C_d(z[1:39], trace_lev=1): Median = 1.03316 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=20 each:
+  not found [it=4,  (nr,nl) = (221,193)], -> (knew-nl, j) = (8,28)
+ --> mc(rlnorm(39)) = 0.561994
+n = 40:
+------
+mc_C_d(z[1:40], trace_lev=1): Median = 1.39283 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=20 each:
+  not found [it=4,  (nr,nl) = (217,195)], -> (knew-nl, j) = (6,22)
+ --> mc(rlnorm(40)) = 0.262729
+n = 41:
+------
+mc_C_d(z[1:41], trace_lev=1): Median = 1.04459 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=21 each:
+  not found [it=4,  (nr,nl) = (229,199)], -> (knew-nl, j) = (22,30)
+ --> mc(rlnorm(41)) = 0.416359
+n = 42:
+------
+mc_C_d(z[1:42], trace_lev=1): Median = 1.03596 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=21 each:
+  not found [it=4,  (nr,nl) = (228,198)], -> (knew-nl, j) = (23,30)
+ --> mc(rlnorm(42)) = 0.115782
+n = 43:
+------
+mc_C_d(z[1:43], trace_lev=1): Median = 0.938235 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=22 each:
+  not found [it=4,  (nr,nl) = (270,238)], -> (knew-nl, j) = (5,32)
+ --> mc(rlnorm(43)) = 0.491648
+n = 44:
+------
+mc_C_d(z[1:44], trace_lev=1): Median = 1.03247 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=22 each:
+  not found [it=4,  (nr,nl) = (258,222)], -> (knew-nl, j) = (21,36)
+ --> mc(rlnorm(44)) = 0.402930
+n = 45:
+------
+mc_C_d(z[1:45], trace_lev=1): Median = 1.19818 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=23 each:
+  not found [it=4,  (nr,nl) = (292,256)], -> (knew-nl, j) = (9,36)
+ --> mc(rlnorm(45)) = 0.178041
+n = 46:
+------
+mc_C_d(z[1:46], trace_lev=1): Median = 0.823748 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=23 each:
+  not found [it=4,  (nr,nl) = (274,242)], -> (knew-nl, j) = (23,32)
+ --> mc(rlnorm(46)) = 0.550296
+n = 47:
+------
+mc_C_d(z[1:47], trace_lev=1): Median = 0.850011 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=24 each:
+  not found [it=5,  (nr,nl) = (301,282)], -> (knew-nl, j) = (7,19)
+ --> mc(rlnorm(47)) = 0.523371
+n = 48:
+------
+mc_C_d(z[1:48], trace_lev=1): Median = 0.984916 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=24 each:
+  not found [it=4,  (nr,nl) = (327,284)], -> (knew-nl, j) = (5,43)
+ --> mc(rlnorm(48)) = 0.372149
+n = 49:
+------
+mc_C_d(z[1:49], trace_lev=1): Median = 0.977565 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=25 each:
+  not found [it=4,  (nr,nl) = (342,306)], -> (knew-nl, j) = (7,36)
+ --> mc(rlnorm(49)) = 0.359081
+n = 50:
+------
+mc_C_d(z[1:50], trace_lev=1): Median = 1.321 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=25 each:
+  not found [it=4,  (nr,nl) = (333,305)], -> (knew-nl, j) = (8,28)
+ --> mc(rlnorm(50)) = 0.270815
+n = 51:
+------
+mc_C_d(z[1:51], trace_lev=1): Median = 0.663719 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=26 each:
+  not found [it=3,  (nr,nl) = (361,314)], -> (knew-nl, j) = (25,47)
+ --> mc(rlnorm(51)) = 0.809476
+n = 52:
+------
+mc_C_d(z[1:52], trace_lev=1): Median = 0.863617 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=26 each:
+  not found [it=4,  (nr,nl) = (350,298)], -> (knew-nl, j) = (41,52)
+ --> mc(rlnorm(52)) = 0.453604
+n = 53:
+------
+mc_C_d(z[1:53], trace_lev=1): Median = 0.869323 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=27 each:
+  not found [it=4,  (nr,nl) = (401,355)], -> (knew-nl, j) = (10,46)
+ --> mc(rlnorm(53)) = 0.463112
+n = 54:
+------
+mc_C_d(z[1:54], trace_lev=1): Median = 0.874467 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=27 each:
+  not found [it=4,  (nr,nl) = (391,361)], -> (knew-nl, j) = (4,30)
+ --> mc(rlnorm(54)) = 0.550312
+n = 55:
+------
+mc_C_d(z[1:55], trace_lev=1): Median = 1.2832 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=28 each:
+  not found [it=4,  (nr,nl) = (398,365)], -> (knew-nl, j) = (28,33)
+ --> mc(rlnorm(55)) = 0.292664
+n = 56:
+------
+mc_C_d(z[1:56], trace_lev=1): Median = 0.944194 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=28 each:
+  not found [it=4,  (nr,nl) = (423,369)], -> (knew-nl, j) = (24,54)
+ --> mc(rlnorm(56)) = 0.573530
+n = 57:
+------
+mc_C_d(z[1:57], trace_lev=1): Median = 0.834438 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=29 each:
+  not found [it=4,  (nr,nl) = (423,377)], -> (knew-nl, j) = (44,46)
+ --> mc(rlnorm(57)) = 0.559266
+n = 58:
+------
+mc_C_d(z[1:58], trace_lev=1): Median = 1.3469 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=29 each:
+  not found [it=4,  (nr,nl) = (437,399)], -> (knew-nl, j) = (22,38)
+ --> mc(rlnorm(58)) = 0.214333
+n = 59:
+------
+mc_C_d(z[1:59], trace_lev=1): Median = 1.13765 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=30 each:
+  not found [it=4,  (nr,nl) = (507,449)], -> (knew-nl, j) = (2,58)
+ --> mc(rlnorm(59)) = 0.424859
+n = 60:
+------
+mc_C_d(z[1:60], trace_lev=1): Median = 0.74878 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=30 each:
+  not found [it=4,  (nr,nl) = (475,422)], -> (knew-nl, j) = (29,53)
+ --> mc(rlnorm(60)) = 0.351161
+n = 61:
+------
+mc_C_d(z[1:61], trace_lev=1): Median = 1.18794 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=31 each:
+  not found [it=4,  (nr,nl) = (530,476)], -> (knew-nl, j) = (5,54)
+ --> mc(rlnorm(61)) = 0.249025
+n = 62:
+------
+mc_C_d(z[1:62], trace_lev=1): Median = 0.764012 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=31 each:
+  not found [it=4,  (nr,nl) = (514,468)], -> (knew-nl, j) = (13,46)
+ --> mc(rlnorm(62)) = 0.456371
+n = 63:
+------
+mc_C_d(z[1:63], trace_lev=1): Median = 1.0835 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=32 each:
+  not found [it=5,  (nr,nl) = (523,496)], -> (knew-nl, j) = (17,27)
+ --> mc(rlnorm(63)) = 0.504061
+n = 64:
+------
+mc_C_d(z[1:64], trace_lev=1): Median = 1.07216 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=32 each:
+  not found [it=4,  (nr,nl) = (545,491)], -> (knew-nl, j) = (22,54)
+ --> mc(rlnorm(64)) = 0.352580
+n = 65:
+------
+mc_C_d(z[1:65], trace_lev=1): Median = 0.98628 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=33 each:
+  not found [it=4,  (nr,nl) = (573,511)], -> (knew-nl, j) = (34,62)
+ --> mc(rlnorm(65)) = 0.534033
+n = 66:
+------
+mc_C_d(z[1:66], trace_lev=1): Median = 1.0057 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=33 each:
+  not found [it=4,  (nr,nl) = (563,505)], -> (knew-nl, j) = (40,58)
+ --> mc(rlnorm(66)) = 0.170391
+n = 67:
+------
+mc_C_d(z[1:67], trace_lev=1): Median = 1.10488 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=34 each:
+  not found [it=5,  (nr,nl) = (602,566)], -> (knew-nl, j) = (13,36)
+ --> mc(rlnorm(67)) = 0.273404
+n = 68:
+------
+mc_C_d(z[1:68], trace_lev=1): Median = 1.03721 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=34 each:
+  not found [it=4,  (nr,nl) = (600,547)], -> (knew-nl, j) = (32,53)
+ --> mc(rlnorm(68)) = 0.445825
+n = 69:
+------
+mc_C_d(z[1:69], trace_lev=1): Median = 1.04214 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=35 each:
+  not found [it=4,  (nr,nl) = (625,557)], -> (knew-nl, j) = (56,68)
+ --> mc(rlnorm(69)) = 0.426994
+n = 70:
+------
+mc_C_d(z[1:70], trace_lev=1): Median = 1.2122 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=35 each:
+  not found [it=4,  (nr,nl) = (657,597)], -> (knew-nl, j) = (16,60)
+ --> mc(rlnorm(70)) = 0.086907
+n = 71:
+------
+mc_C_d(z[1:71], trace_lev=1): Median = 0.75431 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=36 each:
+  not found [it=5,  (nr,nl) = (652,625)], -> (knew-nl, j) = (24,27)
+ --> mc(rlnorm(71)) = 0.586925
+n = 72:
+------
+mc_C_d(z[1:72], trace_lev=1): Median = 0.881605 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=36 each:
+  not found [it=4,  (nr,nl) = (691,629)], -> (knew-nl, j) = (20,62)
+ --> mc(rlnorm(72)) = 0.493531
+n = 73:
+------
+mc_C_d(z[1:73], trace_lev=1): Median = 1.36469 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=37 each:
+  not found [it=5,  (nr,nl) = (686,647)], -> (knew-nl, j) = (38,39)
+ --> mc(rlnorm(73)) = 0.072463
+n = 74:
+------
+mc_C_d(z[1:74], trace_lev=1): Median = 1.19573 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=37 each:
+  not found [it=5,  (nr,nl) = (718,666)], -> (knew-nl, j) = (19,52)
+ --> mc(rlnorm(74)) = 0.255581
+n = 75:
+------
+mc_C_d(z[1:75], trace_lev=1): Median = 0.95989 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=38 each:
+  not found [it=4,  (nr,nl) = (729,675)], -> (knew-nl, j) = (48,54)
+ --> mc(rlnorm(75)) = 0.366647
+n = 76:
+------
+mc_C_d(z[1:76], trace_lev=1): Median = 1.02703 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=38 each:
+  not found [it=5,  (nr,nl) = (745,713)], -> (knew-nl, j) = (10,32)
+ --> mc(rlnorm(76)) = 0.387911
+n = 77:
+------
+mc_C_d(z[1:77], trace_lev=1): Median = 0.924149 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=39 each:
+  not found [it=5,  (nr,nl) = (777,716)], -> (knew-nl, j) = (45,61)
+ --> mc(rlnorm(77)) = 0.415842
+n = 78:
+------
+mc_C_d(z[1:78], trace_lev=1): Median = 0.73153 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=39 each:
+  not found [it=4,  (nr,nl) = (811,740)], -> (knew-nl, j) = (21,71)
+ --> mc(rlnorm(78)) = 0.404619
+n = 79:
+------
+mc_C_d(z[1:79], trace_lev=1): Median = 0.836524 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=40 each:
+  not found [it=5,  (nr,nl) = (822,774)], -> (knew-nl, j) = (27,48)
+ --> mc(rlnorm(79)) = 0.396704
+n = 80:
+------
+mc_C_d(z[1:80], trace_lev=1): Median = 0.875466 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=40 each:
+  not found [it=5,  (nr,nl) = (820,768)], -> (knew-nl, j) = (33,52)
+ --> mc(rlnorm(80)) = 0.437883
+n = 81:
+------
+mc_C_d(z[1:81], trace_lev=1): Median = 0.949946 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=41 each:
+  not found [it=5,  (nr,nl) = (851,787)], -> (knew-nl, j) = (54,64)
+ --> mc(rlnorm(81)) = 0.482383
+n = 82:
+------
+mc_C_d(z[1:82], trace_lev=1): Median = 0.793115 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=41 each:
+  not found [it=4,  (nr,nl) = (866,792)], -> (knew-nl, j) = (49,74)
+ --> mc(rlnorm(82)) = 0.601821
+n = 83:
+------
+mc_C_d(z[1:83], trace_lev=1): Median = 0.777859 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=42 each:
+  not found [it=5,  (nr,nl) = (910,861)], -> (knew-nl, j) = (22,49)
+ --> mc(rlnorm(83)) = 0.522930
+n = 84:
+------
+mc_C_d(z[1:84], trace_lev=1): Median = 1.02484 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=42 each:
+  not found [it=5,  (nr,nl) = (891,840)], -> (knew-nl, j) = (43,51)
+ --> mc(rlnorm(84)) = 0.254919
+n = 85:
+------
+mc_C_d(z[1:85], trace_lev=1): Median = 0.733753 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=43 each:
+  not found [it=5,  (nr,nl) = (956,919)], -> (knew-nl, j) = (6,37)
+ --> mc(rlnorm(85)) = 0.591770
+n = 86:
+------
+mc_C_d(z[1:86], trace_lev=1): Median = 1.19888 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=43 each:
+  not found [it=5,  (nr,nl) = (936,887)], -> (knew-nl, j) = (38,49)
+ --> mc(rlnorm(86)) = 0.382632
+n = 87:
+------
+mc_C_d(z[1:87], trace_lev=1): Median = 0.973207 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=44 each:
+  not found [it=5,  (nr,nl) = (1012,962)], -> (knew-nl, j) = (7,50)
+ --> mc(rlnorm(87)) = 0.333662
+n = 88:
+------
+mc_C_d(z[1:88], trace_lev=1): Median = 0.931138 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=44 each:
+  not found [it=4,  (nr,nl) = (1017,942)], -> (knew-nl, j) = (27,75)
+ --> mc(rlnorm(88)) = 0.443169
+n = 89:
+------
+mc_C_d(z[1:89], trace_lev=1): Median = 0.785364 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=45 each:
+  not found [it=5,  (nr,nl) = (1015,974)], -> (knew-nl, j) = (39,41)
+ --> mc(rlnorm(89)) = 0.468986
+n = 90:
+------
+mc_C_d(z[1:90], trace_lev=1): Median = 1.08882 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=45 each:
+ --> mc(rlnorm(90)) = 0.186779
+n = 91:
+------
+mc_C_d(z[1:91], trace_lev=1): Median = 0.904577 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=46 each:
+  not found [it=5,  (nr,nl) = (1064,1025)], -> (knew-nl, j) = (34,39)
+ --> mc(rlnorm(91)) = 0.452084
+n = 92:
+------
+mc_C_d(z[1:92], trace_lev=1): Median = 0.903908 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=46 each:
+  not found [it=5,  (nr,nl) = (1083,1045)], -> (knew-nl, j) = (14,38)
+ --> mc(rlnorm(92)) = 0.321309
+n = 93:
+------
+mc_C_d(z[1:93], trace_lev=1): Median = 1.10834 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=47 each:
+  not found [it=5,  (nr,nl) = (1121,1077)], -> (knew-nl, j) = (28,44)
+ --> mc(rlnorm(93)) = 0.172696
+n = 94:
+------
+mc_C_d(z[1:94], trace_lev=1): Median = 1.10373 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=47 each:
+  not found [it=5,  (nr,nl) = (1105,1050)], -> (knew-nl, j) = (55,55)
+ --> mc(rlnorm(94)) = 0.309923
+n = 95:
+------
+mc_C_d(z[1:95], trace_lev=1): Median = 1.26121 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=48 each:
+  not found [it=5,  (nr,nl) = (1182,1115)], -> (knew-nl, j) = (38,67)
+ --> mc(rlnorm(95)) = 0.118623
+n = 96:
+------
+mc_C_d(z[1:96], trace_lev=1): Median = 1.02721 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=48 each:
+  not found [it=5,  (nr,nl) = (1155,1110)], -> (knew-nl, j) = (43,45)
+ --> mc(rlnorm(96)) = 0.357886
+n = 97:
+------
+mc_C_d(z[1:97], trace_lev=1): Median = 0.74626 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=49 each:
+  not found [it=5,  (nr,nl) = (1272,1196)], -> (knew-nl, j) = (5,76)
+ --> mc(rlnorm(97)) = 0.606728
+n = 98:
+------
+mc_C_d(z[1:98], trace_lev=1): Median = 1.182 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=49 each:
+  not found [it=5,  (nr,nl) = (1266,1199)], -> (knew-nl, j) = (2,67)
+ --> mc(rlnorm(98)) = 0.027223
+n = 99:
+------
+mc_C_d(z[1:99], trace_lev=1): Median = 1.1647 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=50 each:
+  not found [it=5,  (nr,nl) = (1265,1199)], -> (knew-nl, j) = (52,66)
+ --> mc(rlnorm(99)) = 0.418596
+n =100:
+------
+mc_C_d(z[1:100], trace_lev=1): Median = 0.921319 (not at the border)
+  now allocating 2+5 work arrays of size (1+) h2=50 each:
+  not found [it=5,  (nr,nl) = (1312,1236)], -> (knew-nl, j) = (15,76)
+ --> mc(rlnorm(100)) = 0.457971
+> 
+> allEQ <- function(x,y) all.equal(x,y, tolerance = 1e-12)
+> 
+> x3 <- c(-2, rep(-1,4), rep(0,6), 2, 2, 2:4)
+> mcNaive(x3,"h.use") # 1/3
+[1] 0.3333333
+> mcNaive(x3,"simple")#  0
+[1] 0
+> 
+> try( mc(x3, doRefl = FALSE, maxit = 15, trace = 3)) ## "non-convergence" (32-bit)
+mc_C_d(z[1:16], trace_lev=3): Median = 0 (not at the border)
+ x[] has been rescaled (* 1/s) with s = 8
+   x1[] := {x | x_j > x_eps = 4.93038e-32}    has 5 (='j-1') entries
+'median-x' {x | -eps < x_i <= eps} has 6 (= 'k') entries
+  now allocating 2+5 work arrays of size (1+) h2=11 each:
+ (h1,h2, nr, knew) = (11,11, 121, 61)
+   it= 1, whimed(*, n=    11)=        0 sum_(p,q)= (67,76); sum_p >= kn
+   it= 2, whimed(*, n=    11)=        1 sum_(p,q)= (0,45); s_p < kn ?<=? s_q: no
+   it= 3, whimed(*, n=     5)= 0.333333 sum_(p,q)= (53,66); s_p < kn ?<=? s_q: TRUE
+converged in 3 iterations
+[1] 0.3333333
+> str(robustbase:::mcComp(-x3, doRefl = FALSE, maxit = 15, trace = 4))
+mc_C_d(z[1:16], trace_lev=4): Median = -0 (not at the border)
+ x[] has been rescaled (* 1/s) with s = 8
+   x1[] := {x | x_j > x_eps = 1e-26}    has 5 (='j-1') entries
+'median-x' {x | -eps < x_i <= eps} has 6 (= 'k') entries
+  now allocating 2+5 work arrays of size (1+) h2=11 each:
+ (h1,h2, nr, knew) = (11,11, 121, 61)
+ before whimed(): work and iwt, each [0:(11-1)]:
+        1        1        1        1        1        0       -1       -1       -1       -1       -1
+       11       11       11       11       11       11       11       11       11       11       11
+   it= 1, whimed(*, n=    11)=        0 
+    p[1:11]: 10  9  8  7  6  5  0  0  0  0  0 sum=  45
+    q[1:11]: 12 11 10  9  8  7  2  2  2  1  1 sum=  54
+; s_p < kn ?<=? s_q: no
+ before whimed(): work and iwt, each [0:(10-1)]:
+       -1       -1       -1       -1       -1       -1       -1       -1       -1       -1
+        1        2        3        4        5       10       10       10       11       11
+   it= 2, whimed(*, n=    10)=       -1 
+    p[1:11]: 11 10  9  8  7  6  5  5  5  5  5 sum=  76
+    q[1:11]: 12 12 12 12 12 12 12 12 12 12 12 sum= 121
+; sum_p >= kn
+ before whimed(): work and iwt, each [0:(5-1)]:
+ -0.333333 -0.333333 -0.333333     -0.5     -0.6
+        4        4        4        5        5
+   it= 3, whimed(*, n=     5)= -0.333333 
+    p[1:11]: 11 10  9  8  7  6  1  1  1  1  0 sum=  55
+    q[1:11]: 12 11 10  9  8  7  6  6  6  2  2 sum=  68
+; s_p < kn ?<=? s_q: TRUE
+converged in 3 iterations
+List of 4
+ $ medc     : num -0.333
+ $ eps      : num [1:2] 1e-13 1e-13
+ $ iter     : int 3
+ $ converged: logi TRUE
+> 
+> ### And here is the "real" problem of the whole 'eps' idea:
+> 
+> x4 <- c(1:5,7,10,15,25, 1e15) ## this is also in mc-strict.R (but differently)
+> mcNaive(x4,"h.use") # 0.5833333
+[1] 0.5833333
+> mcNaive(x4,"simple")# == " == 7/12
+[1] 0.5833333
+> try( mc(x4) )# not converged  !!
+[1] 0.5833333
+> str(robustbase:::mcComp( x4, doRefl= FALSE, maxit = 15, trace= 3))## = 0: conv.quickly
+mc_C_d(z[1:10], trace_lev=3): Median = 6 (not at the border)
+ x[] has been rescaled (* 1/s) with s = 2e+15
+   x1[] := {x | x_j > x_eps = 1.03e-26}    has 5 (='j-1') entries
+'median-x' {x | -eps < x_i <= eps} has 0 (= 'k') entries
+  now allocating 2+5 work arrays of size (1+) h2=5 each:
+ (h1,h2, nr, knew) = (5,5, 25, 13)
+   it= 1, whimed(*, n=     5)=        0 sum_(p,q)= (11,15); s_p < kn ?<=? s_q: TRUE
+converged in 1 iterations
+List of 4
+ $ medc     : num 0
+ $ eps      : num [1:2] 1e-13 1e-13
+ $ iter     : int 1
+ $ converged: logi TRUE
+> str(robustbase:::mcComp(-x4, doRefl= FALSE, maxit = 15, trace= 3)) # *not* conv!
+mc_C_d(z[1:10], trace_lev=3): Median = -6 (not at the border)
+ x[] has been rescaled (* 1/s) with s = 2e+15
+   x1[] := {x | x_j > x_eps = 1.03e-26}    has 5 (='j-1') entries
+'median-x' {x | -eps < x_i <= eps} has 0 (= 'k') entries
+  now allocating 2+5 work arrays of size (1+) h2=5 each:
+ (h1,h2, nr, knew) = (5,5, 25, 13)
+   it= 1, whimed(*, n=     5)=        0 sum_(p,q)= (10,14); s_p < kn ?<=? s_q: TRUE
+converged in 1 iterations
+List of 4
+ $ medc     : num 0
+ $ eps      : num [1:2] 1e-13 1e-13
+ $ iter     : int 1
+ $ converged: logi TRUE
+> 
+> ## ## a much more extreme eps seems the cure:
+> ## str(robustbase:::mcComp( x4, doRefl= FALSE, eps1=.Machine$double.xmin))
+> ## str(robustbase:::mcComp(-x4, doRefl= FALSE, eps1=.Machine$double.xmin))
+> 
+> ### Examples "like x3" (non-convergence on 32-bit)
+> xClist <- list(## length 5 :
++                c(0,0, 1, 3,3),
++                c(0,0, 1, 3:4),
++                ##
++                ## length 6 :
++                c(0,0, 2, 4:6),    c(0,0, 2, 3, 4, 6), c(0,0, 4, 5, 7, 8),
++                c(0, 1,1, 2, 6,6), c(0, 3,3, 4, 6,6),
++                c(0,0, 1, 3, 5,5),
++                c(0,0, 1, 4,4, 6), c(0,0, 1, 4,4, 7),  c(0,0, 1, 5,5, 6),
++ 
++                ## n = 9 :
++                c(-2,-2,-2, -1,-1, 1,1,1, 3),
++                c(-3,-1,-1,  0, 1, 2,2,2,2)
++                )
+> 
+> rlis <- lapply(xClist, function(x)
++                try(mc(x, maxit=9), silent=TRUE))
+> table(sapply(rlis, class))
+
+numeric 
+     13 
+> ## if(R.version$arch == "x86_64") {
+>     print(unlist(rlis))
+ [1]  0.3333333  0.3333333  0.0000000  0.0000000 -0.1250000  0.5000000
+ [7]  0.0000000  0.2000000  0.0000000  0.0000000  0.0000000  0.3333333
+[13] -0.3333333
+>     rl2 <- lapply(xClist, mc, maxit=9) ##, eps1= 1e-10)
+>     stopifnot(allEQ(rlis, rl2),
++               allEQ(unlist(rlis), sapply(xClist, mcNaive)))
+> ##}
+> 
+> 
+> set.seed(47)
+> for(n in 3:60) {
++     cat(" ")
++     x <- round(2 * rnorm(n)) # many ties, often at median -- not converging
++     ## if(R.version$arch == "x86_64") {
++         ## non-convergence BUG  rarely and only on 32-bit (solved, MK)
++         mc1 <- mc(x)
++         mc2 <- mcNaive(x, method = "simple")
++         mc3 <- mcNaive(x, method = "h.use")
++         stopifnot(allEQ(mc1, mc3))
++         if(mc2 != mc3) {
++             cat("d"); if(!isTRUE(allEQ(mc2, mc3))) cat("!!")
++         }
++     ## }
++     cat(".")
++ };  cat("\n")
+ . . . . d!!. . . . d!!. d!!. . . . d!!. . d!!. . . . d!!. . . . . d!!. d!!. d!!. . . d!!. . d!!. d!!. . . . . . d!!. . d!!. . d!!. . . . d!!. d!!. . . . . . d!!. d!!. . . .
+> 
+> 
+> cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
+Time elapsed:  0.409 0.042 0.447 0.002 0.005 
+> 
+> quit('no')
+> proc.time()
+   user  system elapsed 
+  0.411   0.047   0.447 

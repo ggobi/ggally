@@ -1,0 +1,2339 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "robCompositions"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "robCompositions-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('robCompositions')
+Loading required package: robustbase
+sROC 0.1-2 loaded
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("aDist")
+> ### * aDist
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: aDist
+> ### Title: Aitchison distance
+> ### Aliases: aDist
+> ### Keywords: math arith
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> x <- xOrig <- expenditures
+> ## Aitchison distance between the first 2 observations:
+> aDist(x[,1], x[,2])
+[1] 1.377048
+> 
+> ## set some missing values:
+> x[1,3] <- x[3,5] <- x[2,4] <- x[5,3] <- x[8,3] <- NA
+> 
+> ## impute them:
+> xImp <- impCoda(x, method="ltsReg")$xImp
+> 
+> ## calculate the relative Aitchsion distance between xOrig and xImp:
+> aDist(xOrig, xImp)
+[1] 0.1585852
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("aDist", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("addLR")
+> ### * addLR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: addLR
+> ### Title: Additive log-ratio transformation
+> ### Aliases: addLR
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> data(arcticLake)
+> x <- arcticLake
+> x.alr <- addLR(x, 2)
+> y <- addLRinv(x.alr)
+> ## This exactly fulfills:
+> addLRinv(addLR(x, 3))
+   sand silt clay
+1  77.5 19.5  3.0
+2  71.9 24.9  3.2
+3  50.7 36.1 13.2
+4  52.2 40.9  6.6
+5  70.0 26.5  3.5
+6  66.5 32.2  1.3
+7  43.1 55.3  1.6
+8  53.4 36.8  9.8
+9  15.5 54.4 30.1
+10 31.7 41.5 26.8
+11 65.7 27.8  6.5
+12 70.4 29.0  0.6
+13 17.4 53.6 29.0
+14 10.6 69.8 19.6
+15 38.2 43.1 18.7
+16 10.8 52.7 36.5
+17 18.4 50.7 30.9
+18  4.6 47.4 48.0
+19 15.6 50.4 34.0
+20 31.9 45.1 23.0
+21  9.5 53.5 37.0
+22 17.1 48.0 34.9
+23 10.5 55.4 34.1
+24  4.8 54.7 41.0
+25  2.6 45.2 52.2
+26 11.4 52.7 35.9
+27  6.7 46.9 46.4
+28  6.9 49.7 43.4
+29  4.0 44.9 51.1
+30  7.4 51.6 40.9
+31  4.8 49.5 45.7
+32  4.5 48.5 47.0
+33  6.6 52.1 41.3
+34  6.7 47.3 45.9
+35  7.4 45.6 46.9
+36  6.0 48.9 45.1
+37  6.3 53.8 39.9
+38  2.5 48.0 49.5
+39  2.0 47.8 50.2
+> data(expenditures)
+> x <- expenditures
+> y <- addLRinv(addLR(x, 5))
+> head(x)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(y)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> ## --> absolute values are preserved as well.
+> 
+> ## preserve only the ratios:
+> addLRinv(x.alr, ivar=2, useClassInfo=FALSE)
+            [,1]      [,2]      [,3]
+ [1,] 0.77500000 0.1950000 0.0300000
+ [2,] 0.71900000 0.2490000 0.0320000
+ [3,] 0.50700000 0.3610000 0.1320000
+ [4,] 0.52357071 0.4102307 0.0661986
+ [5,] 0.70000000 0.2650000 0.0350000
+ [6,] 0.66500000 0.3220000 0.0130000
+ [7,] 0.43100000 0.5530000 0.0160000
+ [8,] 0.53400000 0.3680000 0.0980000
+ [9,] 0.15500000 0.5440000 0.3010000
+[10,] 0.31700000 0.4150000 0.2680000
+[11,] 0.65700000 0.2780000 0.0650000
+[12,] 0.70400000 0.2900000 0.0060000
+[13,] 0.17400000 0.5360000 0.2900000
+[14,] 0.10600000 0.6980000 0.1960000
+[15,] 0.38200000 0.4310000 0.1870000
+[16,] 0.10800000 0.5270000 0.3650000
+[17,] 0.18400000 0.5070000 0.3090000
+[18,] 0.04600000 0.4740000 0.4800000
+[19,] 0.15600000 0.5040000 0.3400000
+[20,] 0.31900000 0.4510000 0.2300000
+[21,] 0.09500000 0.5350000 0.3700000
+[22,] 0.17100000 0.4800000 0.3490000
+[23,] 0.10500000 0.5540000 0.3410000
+[24,] 0.04776119 0.5442786 0.4079602
+[25,] 0.02600000 0.4520000 0.5220000
+[26,] 0.11400000 0.5270000 0.3590000
+[27,] 0.06700000 0.4690000 0.4640000
+[28,] 0.06900000 0.4970000 0.4340000
+[29,] 0.04000000 0.4490000 0.5110000
+[30,] 0.07407407 0.5165165 0.4094094
+[31,] 0.04800000 0.4950000 0.4570000
+[32,] 0.04500000 0.4850000 0.4700000
+[33,] 0.06600000 0.5210000 0.4130000
+[34,] 0.06706707 0.4734735 0.4594595
+[35,] 0.07407407 0.4564565 0.4694695
+[36,] 0.06000000 0.4890000 0.4510000
+[37,] 0.06300000 0.5380000 0.3990000
+[38,] 0.02500000 0.4800000 0.4950000
+[39,] 0.02000000 0.4780000 0.5020000
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("addLR", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("addLRinv")
+> ### * addLRinv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: addLRinv
+> ### Title: Additive logistic transformaton
+> ### Aliases: addLRinv
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> data(arcticLake)
+> x <- arcticLake
+> x.alr <- addLR(x, 2)
+> y <- addLRinv(x.alr)
+> ## This exactly fulfills:
+> addLRinv(addLR(x, 3))
+   sand silt clay
+1  77.5 19.5  3.0
+2  71.9 24.9  3.2
+3  50.7 36.1 13.2
+4  52.2 40.9  6.6
+5  70.0 26.5  3.5
+6  66.5 32.2  1.3
+7  43.1 55.3  1.6
+8  53.4 36.8  9.8
+9  15.5 54.4 30.1
+10 31.7 41.5 26.8
+11 65.7 27.8  6.5
+12 70.4 29.0  0.6
+13 17.4 53.6 29.0
+14 10.6 69.8 19.6
+15 38.2 43.1 18.7
+16 10.8 52.7 36.5
+17 18.4 50.7 30.9
+18  4.6 47.4 48.0
+19 15.6 50.4 34.0
+20 31.9 45.1 23.0
+21  9.5 53.5 37.0
+22 17.1 48.0 34.9
+23 10.5 55.4 34.1
+24  4.8 54.7 41.0
+25  2.6 45.2 52.2
+26 11.4 52.7 35.9
+27  6.7 46.9 46.4
+28  6.9 49.7 43.4
+29  4.0 44.9 51.1
+30  7.4 51.6 40.9
+31  4.8 49.5 45.7
+32  4.5 48.5 47.0
+33  6.6 52.1 41.3
+34  6.7 47.3 45.9
+35  7.4 45.6 46.9
+36  6.0 48.9 45.1
+37  6.3 53.8 39.9
+38  2.5 48.0 49.5
+39  2.0 47.8 50.2
+> data(expenditures)
+> x <- expenditures
+> y <- addLRinv(addLR(x, 5))
+> head(x)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(y)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> ## --> absolute values are preserved as well.
+> 
+> ## preserve only the ratios:
+> addLRinv(x.alr, ivar=2, useClassInfo=FALSE)
+            [,1]      [,2]      [,3]
+ [1,] 0.77500000 0.1950000 0.0300000
+ [2,] 0.71900000 0.2490000 0.0320000
+ [3,] 0.50700000 0.3610000 0.1320000
+ [4,] 0.52357071 0.4102307 0.0661986
+ [5,] 0.70000000 0.2650000 0.0350000
+ [6,] 0.66500000 0.3220000 0.0130000
+ [7,] 0.43100000 0.5530000 0.0160000
+ [8,] 0.53400000 0.3680000 0.0980000
+ [9,] 0.15500000 0.5440000 0.3010000
+[10,] 0.31700000 0.4150000 0.2680000
+[11,] 0.65700000 0.2780000 0.0650000
+[12,] 0.70400000 0.2900000 0.0060000
+[13,] 0.17400000 0.5360000 0.2900000
+[14,] 0.10600000 0.6980000 0.1960000
+[15,] 0.38200000 0.4310000 0.1870000
+[16,] 0.10800000 0.5270000 0.3650000
+[17,] 0.18400000 0.5070000 0.3090000
+[18,] 0.04600000 0.4740000 0.4800000
+[19,] 0.15600000 0.5040000 0.3400000
+[20,] 0.31900000 0.4510000 0.2300000
+[21,] 0.09500000 0.5350000 0.3700000
+[22,] 0.17100000 0.4800000 0.3490000
+[23,] 0.10500000 0.5540000 0.3410000
+[24,] 0.04776119 0.5442786 0.4079602
+[25,] 0.02600000 0.4520000 0.5220000
+[26,] 0.11400000 0.5270000 0.3590000
+[27,] 0.06700000 0.4690000 0.4640000
+[28,] 0.06900000 0.4970000 0.4340000
+[29,] 0.04000000 0.4490000 0.5110000
+[30,] 0.07407407 0.5165165 0.4094094
+[31,] 0.04800000 0.4950000 0.4570000
+[32,] 0.04500000 0.4850000 0.4700000
+[33,] 0.06600000 0.5210000 0.4130000
+[34,] 0.06706707 0.4734735 0.4594595
+[35,] 0.07407407 0.4564565 0.4694695
+[36,] 0.06000000 0.4890000 0.4510000
+[37,] 0.06300000 0.5380000 0.3990000
+[38,] 0.02500000 0.4800000 0.4950000
+[39,] 0.02000000 0.4780000 0.5020000
+> 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("addLRinv", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("adjust")
+> ### * adjust
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: adjust
+> ### Title: Adjusting for original scale
+> ### Aliases: adjust
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> x <- expenditures
+> x[1,3] <- x[2,4] <- x[3,3] <- x[3,4] <- NA
+> xi <- impCoda(x)
+> x
+   housing foodstuffs alcohol other services
+1      640        328      NA   169      196
+2     1800        484     515    NA      912
+3     2085        445      NA    NA     1732
+4      616        331     126   117      149
+5      875        368     191   290      275
+6      770        364     196   242      236
+7      990        415     284   588      420
+8      414        305      94    68      112
+9     1394        440     393  1161      636
+10    1285        374     363   785      487
+11    1102        469     243   496      388
+12    1717        452     452  1977      832
+13    1549        454     424  1345      676
+14     838        386     155   208      222
+15     845        386     211   317      280
+16    1130        394     271   490      386
+17    1765        466     524  2133      822
+18    1195        443     329   974      523
+19    2180        521     553  2781     1010
+20    1017        410     225   419      345
+> xi$xImp
+        housing foodstuffs    alcohol      other  services
+ [1,] 0.4314285 0.22110710 0.10141534 0.11392409 0.1321250
+ [2,] 0.3023816 0.08130704 0.08651473 0.37659000 0.1532067
+ [3,] 0.1623090 0.03464148 0.06945810 0.59876214 0.1348293
+ [4,] 0.4600448 0.24719940 0.09410007 0.08737864 0.1112771
+ [5,] 0.4377189 0.18409205 0.09554777 0.14507254 0.1375688
+ [6,] 0.4258850 0.20132743 0.10840708 0.13384956 0.1305310
+ [7,] 0.3670745 0.15387468 0.10530219 0.21802002 0.1557286
+ [8,] 0.4169184 0.30715005 0.09466264 0.06847936 0.1127895
+ [9,] 0.3464215 0.10934394 0.09766402 0.28851889 0.1580517
+[10,] 0.3901032 0.11353977 0.11020036 0.23831208 0.1478446
+[11,] 0.4084507 0.17383247 0.09006672 0.18383988 0.1438102
+[12,] 0.3162063 0.08324125 0.08324125 0.36408840 0.1532228
+[13,] 0.3482464 0.10206835 0.09532374 0.30238309 0.1519784
+[14,] 0.4632394 0.21337756 0.08568270 0.11498065 0.1227197
+[15,] 0.4144188 0.18930848 0.10348210 0.15546837 0.1373222
+[16,] 0.4230625 0.14751030 0.10146013 0.18345189 0.1445152
+[17,] 0.3091068 0.08161121 0.09176883 0.37355517 0.1439580
+[18,] 0.3449769 0.12788684 0.09497691 0.28117783 0.1509815
+[19,] 0.3094393 0.07395316 0.07849539 0.39474805 0.1433641
+[20,] 0.4209437 0.16970199 0.09312914 0.17342715 0.1427980
+> adjust(xi)$xImp
+      housing foodstuffs  alcohol    other services
+ [1,]     640        328 150.4440  169.000      196
+ [2,]    1800        484 515.0000 2241.744      912
+ [3,]    2085        445 892.2499 7691.621     1732
+ [4,]     616        331 126.0000  117.000      149
+ [5,]     875        368 191.0000  290.000      275
+ [6,]     770        364 196.0000  242.000      236
+ [7,]     990        415 284.0000  588.000      420
+ [8,]     414        305  94.0000   68.000      112
+ [9,]    1394        440 393.0000 1161.000      636
+[10,]    1285        374 363.0000  785.000      487
+[11,]    1102        469 243.0000  496.000      388
+[12,]    1717        452 452.0000 1977.000      832
+[13,]    1549        454 424.0000 1345.000      676
+[14,]     838        386 155.0000  208.000      222
+[15,]     845        386 211.0000  317.000      280
+[16,]    1130        394 271.0000  490.000      386
+[17,]    1765        466 524.0000 2133.000      822
+[18,]    1195        443 329.0000  974.000      523
+[19,]    2180        521 553.0000 2781.000     1010
+[20,]    1017        410 225.0000  419.000      345
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("adjust", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("adtest")
+> ### * adtest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: adtest
+> ### Title: Anderson-Darling Normality Tests
+> ### Aliases: adtest
+> ### Keywords: htest
+> 
+> ### ** Examples
+> 
+> adtest(rnorm(100))
+
+	A-D univariate normality test
+
+data:  
+A = 0.16621, p-value = 0.96
+
+> data(machineOperators)
+> x <- machineOperators
+> adtest(isomLR(x[,1:2]))
+
+	A-D radius test
+
+data:  
+= 0.19528, p-value = 0.971
+
+> adtest(isomLR(x[,1:3]))
+
+	A-D bivariate normality test
+
+data:  
+A = 0.95555, p-value = 0.106
+
+> adtest(isomLR(x))
+
+	A-D radius test
+
+data:  
+= 0.78874, p-value = 0.178
+
+> adtest(isomLR(x[,1:2]), locscatt="robust")
+
+	A-D radius test
+
+data:  
+= 3.5644, p-value = 0.509
+
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("adtest", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("adtestWrapper")
+> ### * adtestWrapper
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: adtestWrapper
+> ### Title: Wrapper for Anderson-Darling tests
+> ### Aliases: adtestWrapper
+> ### Keywords: htest
+> 
+> ### ** Examples
+> 
+> data(machineOperators)
+> a <- adtestWrapper(machineOperators, R=50) # choose higher value of R
+> a
+[1] "The data do not follow the normal distribution on the simplex (alpha =0.05)"
+> summary(a)
+
+  -----------------------------------------------
+  Anderson-Darling test results ( alpha = 0.05 ):
+  ----------------
+  ilrVars                      testName  testStat pvalue check
+1       1 A-D univariate normality test 0.4417233   0.28  TRUE
+2       2 A-D univariate normality test 1.2276586   0.00 FALSE
+3       3 A-D univariate normality test 0.7479878   0.02 FALSE
+4     1 2  A-D bivariate normality test 0.4765520   0.36  TRUE
+5     1 3  A-D bivariate normality test 0.5753107   0.24  TRUE
+6     2 3  A-D bivariate normality test 0.7909727   0.16  TRUE
+7     all               A-D radius test 0.7887404   0.18  TRUE
+
+  -----------------------------------------------
+
+  --> p-values and tests are obtained from standard estimates.
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("adtestWrapper", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("arcticLake")
+> ### * arcticLake
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: arcticLake
+> ### Title: Artic lake sediment data
+> ### Aliases: arcticLake
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(arcticLake)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("arcticLake", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("bootnComp")
+> ### * bootnComp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: bootnComp
+> ### Title: Bootstrap to find optimal number of components
+> ### Aliases: bootnComp
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> ## we refer to impRZilr()
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("bootnComp", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("cenLR")
+> ### * cenLR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: cenLR
+> ### Title: Centred log-ratio transformation
+> ### Aliases: cenLR
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> eclr <- cenLR(expenditures)
+> inveclr <- cenLRinv(eclr)
+> head(expenditures)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(inveclr)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(isomLRinv(eclr$x.clr))
+           [,1]      [,2]      [,3]       [,4]      [,5]       [,6]
+[1,] 0.06363255 0.1395096 0.2986651 0.22201997 0.1624795 0.11369328
+[2,] 0.08273793 0.3022404 0.2393289 0.05677501 0.1683792 0.15053857
+[3,] 0.09376600 0.3947792 0.1880618 0.01961512 0.1418382 0.16193974
+[4,] 0.05401872 0.1164544 0.3000524 0.26652402 0.1643788 0.09857163
+[5,] 0.06449204 0.1687105 0.3025417 0.17609723 0.1670565 0.12110206
+[6,] 0.06745001 0.1577060 0.2794125 0.20019805 0.1775753 0.11765804
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("cenLR", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("cenLRinv")
+> ### * cenLRinv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: cenLRinv
+> ### Title: Inverse centred log-ratio transformation
+> ### Aliases: cenLRinv
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> eclr <- cenLR(expenditures)
+> inveclr <- cenLRinv(eclr)
+> head(expenditures)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(inveclr)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(cenLRinv(eclr$x.clr))
+Warning in cenLRinv(eclr$x.clr) :
+  useClassInfo was set to FALSE, because x is not from class clr
+   housing foodstuffs   alcohol     other  services
+1 2.536747  1.3000829 0.5826591 0.6698598 0.7768788
+2 1.823407  0.4902937 0.5216969 2.3207913 0.9238593
+3 1.322085  0.2821717 0.4597179 5.3092659 1.0982502
+4 2.879721  1.5473826 0.5890339 0.5469600 0.6965559
+5 2.534452  1.0659181 0.5532347 0.8399898 0.7965421
+6 2.438797  1.1528858 0.6207846 0.7664790 0.7474754
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("cenLRinv", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("coffee")
+> ### * coffee
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: coffee
+> ### Title: Coffee data
+> ### Aliases: coffee
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(coffee)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("coffee", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("constSum")
+> ### * constSum
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: constSum
+> ### Title: Constant sum
+> ### Aliases: constSum
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> constSum(expenditures)
+     housing foodstuffs    alcohol      other  services
+1  0.4324324 0.22162162 0.09932432 0.11418919 0.1324324
+2  0.2999000 0.08063979 0.08580473 0.38170610 0.1519494
+3  0.1560629 0.03330838 0.05426647 0.62672156 0.1296407
+4  0.4600448 0.24719940 0.09410007 0.08737864 0.1112771
+5  0.4377189 0.18409205 0.09554777 0.14507254 0.1375688
+6  0.4258850 0.20132743 0.10840708 0.13384956 0.1305310
+7  0.3670745 0.15387468 0.10530219 0.21802002 0.1557286
+8  0.4169184 0.30715005 0.09466264 0.06847936 0.1127895
+9  0.3464215 0.10934394 0.09766402 0.28851889 0.1580517
+10 0.3901032 0.11353977 0.11020036 0.23831208 0.1478446
+11 0.4084507 0.17383247 0.09006672 0.18383988 0.1438102
+12 0.3162063 0.08324125 0.08324125 0.36408840 0.1532228
+13 0.3482464 0.10206835 0.09532374 0.30238309 0.1519784
+14 0.4632394 0.21337756 0.08568270 0.11498065 0.1227197
+15 0.4144188 0.18930848 0.10348210 0.15546837 0.1373222
+16 0.4230625 0.14751030 0.10146013 0.18345189 0.1445152
+17 0.3091068 0.08161121 0.09176883 0.37355517 0.1439580
+18 0.3449769 0.12788684 0.09497691 0.28117783 0.1509815
+19 0.3094393 0.07395316 0.07849539 0.39474805 0.1433641
+20 0.4209437 0.16970199 0.09312914 0.17342715 0.1427980
+> constSum(expenditures, 100)
+    housing foodstuffs   alcohol     other services
+1  43.24324  22.162162  9.932432 11.418919 13.24324
+2  29.99000   8.063979  8.580473 38.170610 15.19494
+3  15.60629   3.330838  5.426647 62.672156 12.96407
+4  46.00448  24.719940  9.410007  8.737864 11.12771
+5  43.77189  18.409205  9.554777 14.507254 13.75688
+6  42.58850  20.132743 10.840708 13.384956 13.05310
+7  36.70745  15.387468 10.530219 21.802002 15.57286
+8  41.69184  30.715005  9.466264  6.847936 11.27895
+9  34.64215  10.934394  9.766402 28.851889 15.80517
+10 39.01032  11.353977 11.020036 23.831208 14.78446
+11 40.84507  17.383247  9.006672 18.383988 14.38102
+12 31.62063   8.324125  8.324125 36.408840 15.32228
+13 34.82464  10.206835  9.532374 30.238309 15.19784
+14 46.32394  21.337756  8.568270 11.498065 12.27197
+15 41.44188  18.930848 10.348210 15.546837 13.73222
+16 42.30625  14.751030 10.146013 18.345189 14.45152
+17 30.91068   8.161121  9.176883 37.355517 14.39580
+18 34.49769  12.788684  9.497691 28.117783 15.09815
+19 30.94393   7.395316  7.849539 39.474805 14.33641
+20 42.09437  16.970199  9.312914 17.342715 14.27980
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("constSum", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("daFisher")
+> ### * daFisher
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: daFisher
+> ### Title: Discriminant analysis by Fisher Rule.
+> ### Aliases: daFisher
+> ### Keywords: multivariate
+> 
+> ### ** Examples
+> 
+> require(MASS)
+Loading required package: MASS
+> x1 <- mvrnorm(20,c(0,0,0),diag(3))
+> x2 <- mvrnorm(30,c(3,0,0),diag(3))
+> x3 <- mvrnorm(40,c(0,3,0),diag(3))
+> X <- rbind(x1,x2,x3)
+> grp=c(rep(1,20),rep(2,30),rep(3,40))
+> 
+> #par(mfrow=c(1,2))
+> d1 <- daFisher(X,grp=grp,method="classical",coda=FALSE)
+> d2 <- daFisher(X,grp=grp,method="robust",coda=FALSE)
+> d2
+--------------------------------------
+Results from Fishers discriminant analysis, coda == FALSE
+- Variance between the classes: 
+            [,1]        [,2]         [,3]
+[1,]  1.59366978 -1.17723665 -0.045770443
+[2,] -1.17723665  2.10206197  0.058904750
+[3,] -0.04577044  0.05890475  0.001825491
+
+- Variance within the classes: 
+            [,1]       [,2]        [,3]
+[1,]  1.06691540  0.1394367 -0.03051297
+[2,]  0.13943673  1.0069078 -0.07427810
+[3,] -0.03051297 -0.0742781  0.94919281
+
+- Loadings matrix: 
+            [,1]       [,2]        [,3]
+[1,] -0.62331161 0.77766333  0.01367512
+[2,]  0.77936125 0.62402914 -0.02035534
+[3,]  0.06386455 0.07633728  0.99969928
+--------------------------------------
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("daFisher", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching ‘package:MASS’
+
+> nameEx("expenditures")
+> ### * expenditures
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: expenditures
+> ### Title: Household expenditures data
+> ### Aliases: expenditures
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> ## imputing a missing value in the data set using k-nearest neighbor imputation:
+> expenditures[1,3]
+[1] 147
+> expenditures[1,3] <- NA
+> impKNNa(expenditures)$xImp[1,3]
+ alcohol 
+152.1033 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("expenditures", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("expendituresEU")
+> ### * expendituresEU
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: expendituresEU
+> ### Title: Mean consumption expenditures data.
+> ### Aliases: expendituresEU
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(expendituresEU)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("expendituresEU", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("gm")
+> ### * gm
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: gm
+> ### Title: geometric mean
+> ### Aliases: gm
+> ### Keywords: math
+> 
+> ### ** Examples
+> 
+> gm(runif(100))
+[1] 0.41532
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("gm", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("haplogroups")
+> ### * haplogroups
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: haplogroups
+> ### Title: Haplogroups data.
+> ### Aliases: haplogroups
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(haplogroups)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("haplogroups", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("impAll")
+> ### * impAll
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: impAll
+> ### Title: Replacement of rounded zeros and missing values.
+> ### Aliases: impAll
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> ## see the compositionsGUI
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("impAll", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("impCoda")
+> ### * impCoda
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: impCoda
+> ### Title: Imputation of missing values in compositional data
+> ### Aliases: impCoda
+> ### Keywords: robust multivariate iteration
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> x <- expenditures
+> x[1,3]
+[1] 147
+> x[1,3] <- NA
+> xi <- impCoda(x)$xImp
+> xi[1,3]
+  alcohol 
+0.1016139 
+> s1 <- sum(x[1,-3])
+> impS <- sum(xi[1,-3])
+> xi[,3] * s1/impS
+ [1] 150.77178 127.31464  80.51905 139.62303 141.77109 160.85137 156.24441
+ [8] 140.45775 144.91111 163.51219 133.63845 123.51102 141.43868 127.13357
+[15] 153.54382 150.54367 136.16399 140.92405 116.46924 138.18239
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("impCoda", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("impKNNa")
+> ### * impKNNa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: impKNNa
+> ### Title: Imputation of missing values in compositional data using knn
+> ###   methods
+> ### Aliases: impKNNa
+> ### Keywords: manip multivariate
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> x <- expenditures
+> x[1,3]
+[1] 147
+> x[1,3] <- NA
+> xi <- impKNNa(x)$xImp
+> xi[1,3]
+ alcohol 
+152.1033 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("impKNNa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("impRZalr")
+> ### * impRZalr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: impRZalr
+> ### Title: alr EM-based Imputation for Rounded Zeros
+> ### Aliases: impRZalr
+> ### Keywords: manip multivariate
+> 
+> ### ** Examples
+> 
+> data(arcticLake)
+> x <- arcticLake
+> ## generate rounded zeros artificially:
+> x[x[,1] < 5, 1] <- 0
+> x[x[,2] < 47, 2] <- 0
+> xia <- impRZalr(x, pos=3, dl=c(5,47), eps=0.05)
+> xia$xImp
+NULL
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("impRZalr", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("impRZilr")
+> ### * impRZilr
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: impRZilr
+> ### Title: EM-based replacement of rounded zeros in compositional data
+> ### Aliases: impRZilr
+> ### Keywords: manip multivariate
+> 
+> ### ** Examples
+> 
+> data(arcticLake)
+> x <- arcticLake
+> ## generate rounded zeros artificially:
+> #x[x[,1] < 5, 1] <- 0
+> x[x[,2] < 44, 2] <- 0
+> xia <- impRZilr(x, dl=c(5,44,0), eps=0.01, method="lm")
+ silt  sand  clay 
+ TRUE  TRUE FALSE 
+> xia$x
+           sand      silt clay
+ [1,] 77.500000 23.847954  3.0
+ [2,] 71.900000 24.100338  3.2
+ [3,] 50.700000 36.082421 13.2
+ [4,] 52.200000 30.546534  6.6
+ [5,] 70.000000 25.042549  3.5
+ [6,] 66.500000 13.659519  1.3
+ [7,] 43.100000 55.300000  1.6
+ [8,] 53.400000 34.296766  9.8
+ [9,] 15.500000 54.400000 30.1
+[10,] 31.700000 38.097775 26.8
+[11,] 65.700000 31.801429  6.5
+[12,] 70.400000  8.601459  0.6
+[13,] 17.400000 53.600000 29.0
+[14,] 10.600000 69.800000 19.6
+[15,] 38.200000 37.035728 18.7
+[16,] 10.800000 52.700000 36.5
+[17,] 18.400000 50.700000 30.9
+[18,]  2.761275 47.400000 48.0
+[19,] 15.600000 50.400000 34.0
+[20,] 31.900000 45.100000 23.0
+[21,]  9.500000 53.500000 37.0
+[22,] 17.100000 48.000000 34.9
+[23,] 10.500000 55.400000 34.1
+[24,]  3.199845 54.700000 41.0
+[25,]  2.548452 45.200000 52.2
+[26,] 11.400000 52.700000 35.9
+[27,]  6.700000 46.900000 46.4
+[28,]  6.900000 49.700000 43.4
+[29,]  2.561289 44.900000 51.1
+[30,]  7.400000 51.600000 40.9
+[31,]  2.907894 49.500000 45.7
+[32,]  2.834446 48.500000 47.0
+[33,]  6.600000 52.100000 41.3
+[34,]  6.700000 47.300000 45.9
+[35,]  7.400000 45.600000 46.9
+[36,]  6.000000 48.900000 45.1
+[37,]  6.300000 53.800000 39.9
+[38,]  2.750510 48.000000 49.5
+[39,]  2.724222 47.800000 50.2
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("impRZilr", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("isomLR")
+> ### * isomLR
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: isomLR
+> ### Title: Isometric log-ratio transformation
+> ### Aliases: isomLR
+> ### Keywords: math
+> 
+> ### ** Examples
+> 
+> require(MASS)
+Loading required package: MASS
+> Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
+> z <- isomLRinv(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
+> 
+> data(expenditures)
+> isomLR(expenditures)
+            [,1]         [,2]        [,3]        [,4]
+ [1,] -1.0407584 -0.571748489  0.17438252  0.10480450
+ [2,] -0.6716102  0.649604458  0.84264483 -0.65131867
+ [3,] -0.3121665  1.380371869  1.35434586 -1.11421321
+ [4,] -1.1825372 -0.809431503  0.03819425  0.17095888
+ [5,] -1.0397464 -0.342173382  0.31929310 -0.03755432
+ [6,] -0.9967327 -0.421632381  0.16188686 -0.01775257
+ [7,] -0.7818603 -0.005450089  0.45684338 -0.23792180
+ [8,] -1.0960872 -1.062218832 -0.06065875  0.35284004
+ [9,] -0.7573362  0.353835168  0.63875194 -0.42556403
+[10,] -0.8858070  0.281626635  0.43484247 -0.33758663
+[11,] -0.9410006 -0.228389835  0.48232836 -0.17364463
+[12,] -0.7273488  0.602119723  0.85152588 -0.61200331
+[13,] -0.7811226  0.408701703  0.66171963 -0.48645851
+[14,] -1.1593106 -0.601561894  0.26673524  0.04606044
+[15,] -0.9516615 -0.323882704  0.28168116 -0.08776056
+[16,] -0.9818975 -0.051006340  0.38620497 -0.16869307
+[17,] -0.6978593  0.636805770  0.75690937 -0.67425766
+[18,] -0.7408061  0.189469387  0.63232650 -0.43970010
+[19,] -0.7443739  0.691775129  0.90531323 -0.71620035
+[20,] -0.9804659 -0.216782249  0.42834004 -0.13740959
+> 
+> x <- exp(mvrnorm(2000, mu=rep(1,10), diag(10)))
+> system.time(isomLR(x))
+   user  system elapsed 
+  0.507   0.006   0.516 
+> system.time(isomLR(x, fast=TRUE))
+   user  system elapsed 
+  0.050   0.002   0.053 
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("isomLR", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching ‘package:MASS’
+
+> nameEx("isomLRinv")
+> ### * isomLRinv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: isomLRinv
+> ### Title: Inverse isometric log-ratio transformation
+> ### Aliases: isomLRinv
+> ### Keywords: math
+> 
+> ### ** Examples
+> 
+> require(MASS)
+Loading required package: MASS
+> Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
+> set.seed(123)
+> z <- mvrnorm(100, mu=c(0,2), Sigma=Sigma)
+> x <- isomLRinv(z)
+> head(x)
+             [,1]         [,2]      [,3]
+[1,] 0.6371932293 0.1100573304 0.2527494
+[2,] 0.3782255862 0.0630473110 0.5587271
+[3,] 0.0002811159 0.0004618696 0.9992570
+[4,] 0.1405825011 0.0430913529 0.8163261
+[5,] 0.1057836754 0.0450559666 0.8491604
+[6,] 0.0001464991 0.0002643833 0.9995891
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("isomLRinv", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching ‘package:MASS’
+
+> nameEx("lmCoDaX")
+> ### * lmCoDaX
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: lmCoDaX
+> ### Title: Classical and robust regression of non-compositional response on
+> ###   compositional predictors
+> ### Aliases: lmCoDaX ilrregression robilrregression
+> ### Keywords: models
+> 
+> ### ** Examples
+> 
+> ## How the total household expenditures in EU Member
+> ## States depend on relative contributions of 
+> ## single household expenditures:
+> data(expendituresEU)
+> y <- as.numeric(apply(expendituresEU,1,sum))
+> lmCoDaX(y, expendituresEU, method="classical")
+Warning in summary.lm(lmcla) :
+  essentially perfect fit: summary may be unreliable
+$lm
+
+Call:
+lm(formula = y ~ ., data = d)
+
+Coefficients:
+     (Intercept)            X.Food         X.Alcohol        X.Clothing  
+               0                 1                 1                 1  
+       X.Housing     X.Furnishings          X.Health       X.Transport  
+               1                 1                 1                 1  
+X.Communications      X.Recreation       X.Education     X.Restaurants  
+               1                 1                 1                 1  
+         X.Other  
+               1  
+
+
+$lm
+
+Call:
+lm(formula = y ~ ., data = d)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-7.443e-12 -5.193e-13  1.477e-13  1.145e-12  2.386e-12 
+
+Coefficients:
+                  Estimate Std. Error   t value Pr(>|t|)    
+(Intercept)      0.000e+00  4.346e-12 0.000e+00        1    
+X.Food           1.000e+00  1.752e-15 5.707e+14   <2e-16 ***
+X.Alcohol        1.000e+00  3.137e-15 3.187e+14   <2e-16 ***
+X.Clothing       1.000e+00  4.985e-15 2.006e+14   <2e-16 ***
+X.Housing        1.000e+00  4.945e-16 2.022e+15   <2e-16 ***
+X.Furnishings    1.000e+00  3.091e-15 3.235e+14   <2e-16 ***
+X.Health         1.000e+00  2.533e-15 3.948e+14   <2e-16 ***
+X.Transport      1.000e+00  1.474e-15 6.784e+14   <2e-16 ***
+X.Communications 1.000e+00  5.817e-15 1.719e+14   <2e-16 ***
+X.Recreation     1.000e+00  1.555e-15 6.430e+14   <2e-16 ***
+X.Education      1.000e+00  3.926e-15 2.547e+14   <2e-16 ***
+X.Restaurants    1.000e+00  1.521e-15 6.576e+14   <2e-16 ***
+X.Other          1.000e+00  9.735e-16 1.027e+15   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.613e-12 on 14 degrees of freedom
+Multiple R-squared:      1,	Adjusted R-squared:      1 
+F-statistic: 3.898e+31 on 12 and 14 DF,  p-value: < 2.2e-16
+
+
+$ilr
+
+Call:
+lm(formula = y ~ ., data = d)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7806.5 -1718.3   433.9  1462.7  8388.8 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)   
+(Intercept)       35824.8    12587.4   2.846  0.01226 * 
+X.Food           -19167.7     5702.6  -3.361  0.00429 **
+X.Alcohol          5025.0     3881.6   1.295  0.21505   
+X.Clothing         8806.2     6457.0   1.364  0.19275   
+X.Housing          4708.9     2891.3   1.629  0.12421   
+X.Furnishings     13868.5     7546.6   1.838  0.08599 . 
+X.Health            929.6     3265.1   0.285  0.77975   
+X.Transport        6740.5     8176.4   0.824  0.42264   
+X.Communications -10471.3     4983.4  -2.101  0.05293 . 
+X.Recreation      -9793.2     6440.4  -1.521  0.14916   
+X.Education         576.5     1331.4   0.433  0.67120   
+X.Restaurants      -281.6     2659.6  -0.106  0.91708   
+X.Other            -941.4     4051.1  -0.232  0.81939   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4369 on 14 degrees of freedom
+Multiple R-squared:  0.9103,	Adjusted R-squared:  0.8446 
+F-statistic: 13.84 on 11 and 15 DF,  p-value: 6.288e-06
+
+
+> lmCoDaX(y, expendituresEU, method="robust")
+$lm
+
+Call:
+ltsReg.formula(formula = y ~ ., data = d)
+
+Coefficients:
+       Intercept            X.Food         X.Alcohol        X.Clothing  
+        1.48e-12          1.00e+00          1.00e+00          1.00e+00  
+       X.Housing     X.Furnishings          X.Health       X.Transport  
+        1.00e+00          1.00e+00          1.00e+00          1.00e+00  
+X.Communications      X.Recreation       X.Education     X.Restaurants  
+        1.00e+00          1.00e+00          1.00e+00          1.00e+00  
+         X.Other  
+        1.00e+00  
+
+Scale estimate 0 
+
+
+$lm
+
+Call:
+ltsReg.formula(formula = y ~ ., data = d)
+
+Residuals (from reweighted LS):
+       Min         1Q     Median         3Q        Max 
+-1.000e-11 -7.276e-12 -6.366e-12 -3.638e-12  7.276e-12 
+
+Coefficients:
+                  Estimate Std. Error   t value Pr(>|t|)    
+Intercept        1.480e-12  1.448e-11 1.020e-01     0.92    
+X.Food           1.000e+00  5.837e-15 1.713e+14   <2e-16 ***
+X.Alcohol        1.000e+00  1.045e-14 9.568e+13   <2e-16 ***
+X.Clothing       1.000e+00  1.660e-14 6.022e+13   <2e-16 ***
+X.Housing        1.000e+00  1.647e-15 6.071e+14   <2e-16 ***
+X.Furnishings    1.000e+00  1.030e-14 9.711e+13   <2e-16 ***
+X.Health         1.000e+00  8.437e-15 1.185e+14   <2e-16 ***
+X.Transport      1.000e+00  4.910e-15 2.037e+14   <2e-16 ***
+X.Communications 1.000e+00  1.938e-14 5.161e+13   <2e-16 ***
+X.Recreation     1.000e+00  5.180e-15 1.930e+14   <2e-16 ***
+X.Education      1.000e+00  1.308e-14 7.648e+13   <2e-16 ***
+X.Restaurants    1.000e+00  5.065e-15 1.974e+14   <2e-16 ***
+X.Other          1.000e+00  3.243e-15 3.084e+14   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.703e-12 on 14 degrees of freedom
+Multiple R-Squared:     1,	Adjusted R-squared:     1 
+F-statistic: 3.513e+30 on 12 and 14 DF,  p-value: < 2.2e-16 
+
+
+$ilr
+
+Call:
+ltsReg.formula(formula = y ~ ., data = d)
+
+Residuals (from reweighted LS):
+    Min      1Q  Median      3Q     Max 
+-6065.3 -1185.8   122.9  1345.0  4359.8 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)  
+Intercept         33795.8    12007.2   2.815   0.0146 *
+X.Food           -11463.5     7250.2  -1.581   0.1379  
+X.Alcohol          5315.6     3121.9   1.703   0.1124  
+X.Clothing         4800.9     6498.5   0.739   0.4732  
+X.Housing          1437.5     2644.1   0.544   0.5959  
+X.Furnishings      5461.2     7002.8   0.780   0.4494  
+X.Health           1209.6     3041.5   0.398   0.6973  
+X.Transport        3931.5     7448.5   0.528   0.6065  
+X.Communications -14803.1     5488.3  -2.697   0.0183 *
+X.Recreation      -4311.5     5844.0  -0.738   0.4738  
+X.Education        3533.1     2324.4   1.520   0.1525  
+X.Restaurants       116.1     2196.3   0.053   0.9587  
+X.Other            4772.7     5459.6   0.874   0.3979  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3492 on 14 degrees of freedom
+Multiple R-Squared: 0.9314,	Adjusted R-squared: 0.8733 
+F-statistic: 16.04 on 11 and 13 DF,  p-value: 8.468e-06 
+
+
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("lmCoDaX", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("machineOperators")
+> ### * machineOperators
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: machineOperators
+> ### Title: Machine operators data set
+> ### Aliases: machineOperators
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> ## maybe str(machineOperators) ; plot(machineOperators) ...
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("machineOperators", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("missPatterns")
+> ### * missPatterns
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: missPatterns
+> ### Title: missing or zero pattern structure.
+> ### Aliases: missPatterns zeroPatterns
+> ### Keywords: multivariate
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> ## set NA's artificial:
+> expenditures[expenditures < 300] <- NA
+> ## detect the NA structure:
+> missPatterns(expenditures)
+$groups
+$groups$`0:0:0:0:0`
+[1]  2  3  9 10 12 13 17 18 19
+
+$groups$`0:0:1:0:0`
+[1]  7 11 16 20
+
+$groups$`0:0:1:0:1`
+[1] 15
+
+$groups$`0:0:1:1:1`
+[1]  1  4  5  6  8 14
+
+
+$cn
+[1] "0:0:0:0:0" "0:0:1:0:0" "0:0:1:0:1" "0:0:1:1:1"
+
+$tabcomb
+     [,1] [,2]  [,3]  [,4]  [,5]
+[1,] TRUE TRUE  TRUE  TRUE  TRUE
+[2,] TRUE TRUE FALSE  TRUE  TRUE
+[3,] TRUE TRUE FALSE  TRUE FALSE
+[4,] TRUE TRUE FALSE FALSE FALSE
+
+$tabcombPlus
+    X1   X2    X3    X4    X5 csum
+1 TRUE TRUE  TRUE  TRUE  TRUE    9
+2 TRUE TRUE FALSE  TRUE  TRUE    4
+3 TRUE TRUE FALSE  TRUE FALSE    1
+4 TRUE TRUE FALSE FALSE FALSE    6
+
+$rsum
+ [1] 3 0 0 3 3 3 1 3 0 0 1 0 0 3 2 1 0 0 0 1
+
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("missPatterns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("orthbasis")
+> ### * orthbasis
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: orthbasis
+> ### Title: Orthonormal basis
+> ### Aliases: orthbasis
+> ### Keywords: manip
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> V <- orthbasis(ncol(expenditures))
+> xcen <- cenLR(expenditures)$x.clr
+> xi <- as.matrix(xcen) 
+> xi2 <- isomLR(expenditures)
+> all.equal(xi, xi2)
+[1] "Attributes: < Length mismatch: comparison on first 1 components >"
+[2] "Attributes: < Component “dim”: Mean relative difference: 0.2 >"   
+[3] "Numeric: lengths (100, 80) differ"                                
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("orthbasis", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("outCoDa")
+> ### * outCoDa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: outCoDa
+> ### Title: Outlier detection for compositional data
+> ### Aliases: outCoDa
+> ### Keywords: multivariate
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> oD <- outCoDa(expenditures)
+> oD
+
+ --------------------
+[1] "1 out of 20 observations are detected as outliers."
+
+ --------------------
+
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("outCoDa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("pcaCoDa")
+> ### * pcaCoDa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: pcaCoDa
+> ### Title: Robust principal component analysis for compositional data
+> ### Aliases: pcaCoDa
+> ### Keywords: multivariate
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> p1 <- pcaCoDa(expenditures)
+> p1
+
+-------------------
+ Percentages of explained variability for compositional data after clr transformation 
+[1] 0.9855776 0.9946223 0.9983986 1.0000000
+
+-------------------
+
+> plot(p1)
+> 
+> ## just for illustration how to set the mult_comp argument
+> p1 <- pcaCoDa(expenditures, mult_comp=list(c(1,2,3),c(4,5)))
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("pcaCoDa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("pfa")
+> ### * pfa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: pfa
+> ### Title: Factor analysis for compositional data
+> ### Aliases: pfa
+> ### Keywords: multivariate
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> x <- expenditures
+> res0 <- pfa(x, factors=1, covmat="cov")
+> 
+> ## the following produce always the same result:
+> res1 <- pfa(x, factors=1, covmat="covMcd")
+> res2 <- pfa(x, factors=1, covmat=covMcd(isomLR(x))$cov)
+> res3 <- pfa(x, factors=1, covmat=covMcd(isomLR(x)))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("pfa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("phd")
+> ### * phd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: phd
+> ### Title: PhD Students in the EU
+> ### Aliases: phd
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(phd)
+> phdImputed <- impCoda(phd)$xOrig
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("phd", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("plot.imp")
+> ### * plot.imp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: plot.imp
+> ### Title: Plot method for objects of class imp
+> ### Aliases: plot.imp
+> ### Keywords: aplot hplot
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> expenditures[1,3]
+[1] 147
+> expenditures[1,3] <- NA
+> xi <- impKNNa(expenditures)
+> xi
+
+ --------------------------------------- 
+[1] "1 missing value was imputed"
+ --------------------------------------- 
+> summary(xi)
+
+ geometric mean of the original data and the imputed data: 
+                orig       imp
+housing    1109.7511 1109.7511
+foodstuffs  407.8955  407.8955
+alcohol     289.5827  280.4083
+other       630.9773  630.9773
+services    423.3600  423.3600
+> ## Not run: plot(xi, which=1)
+> plot(xi, which=2)
+> plot(xi, which=3)
+Warning in plot.imp(xi, which = 3) :
+  tenary plot is only visible for 3 variables, you have 5 
+ only the first three variables are selected for plotting
+> plot(xi, which=3, seg1=FALSE)
+Warning in plot.imp(xi, which = 3, seg1 = FALSE) :
+  tenary plot is only visible for 3 variables, you have 5 
+ only the first three variables are selected for plotting
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("plot.imp", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("plot.outCoDa")
+> ### * plot.outCoDa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: plot.outCoDa
+> ### Title: plot method for outCoDa objects
+> ### Aliases: plot.outCoDa
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> oD <- outCoDa(expenditures)
+> oD
+
+ --------------------
+[1] "1 out of 20 observations are detected as outliers."
+
+ --------------------
+
+> plot(oD)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("plot.outCoDa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("plot.pcaCoDa")
+> ### * plot.pcaCoDa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: plot.pcaCoDa
+> ### Title: Plot method
+> ### Aliases: plot.pcaCoDa
+> ### Keywords: aplot
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> p1 <- pcaCoDa(expenditures)
+> p1
+
+-------------------
+ Percentages of explained variability for compositional data after clr transformation 
+[1] 0.9855776 0.9946223 0.9983986 1.0000000
+
+-------------------
+
+> plot(p1)
+> 
+> 
+> ## with labels for the scores:
+> data(arcticLake)
+> rownames(arcticLake) <- paste(sample(letters[1:26],nrow(arcticLake), replace=TRUE), 
++                               1:nrow(arcticLake), sep="")
+> pc <- pcaCoDa(arcticLake, method="standard")
+> plot(pc, xlabs=rownames(arcticLake))
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("plot.pcaCoDa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("print.adtestWrapper")
+> ### * print.adtestWrapper
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: print.adtestWrapper
+> ### Title: print method for objects of class adtestWrapper
+> ### Aliases: print.adtestWrapper
+> ### Keywords: print
+> 
+> ### ** Examples
+> 
+> data(machineOperators)
+> a <- adtestWrapper(machineOperators, R=50) # choose higher value of R
+> a
+[1] "The data do not follow the normal distribution on the simplex (alpha =0.05)"
+> summary(a)
+
+  -----------------------------------------------
+  Anderson-Darling test results ( alpha = 0.05 ):
+  ----------------
+  ilrVars                      testName  testStat pvalue check
+1       1 A-D univariate normality test 0.4417233   0.28  TRUE
+2       2 A-D univariate normality test 1.2276586   0.00 FALSE
+3       3 A-D univariate normality test 0.7479878   0.02 FALSE
+4     1 2  A-D bivariate normality test 0.4765520   0.36  TRUE
+5     1 3  A-D bivariate normality test 0.5753107   0.24  TRUE
+6     2 3  A-D bivariate normality test 0.7909727   0.16  TRUE
+7     all               A-D radius test 0.7887404   0.18  TRUE
+
+  -----------------------------------------------
+
+  --> p-values and tests are obtained from standard estimates.
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("print.adtestWrapper", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("print.daFisher")
+> ### * print.daFisher
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: print.daFisher
+> ### Title: print method for objects of class daFisher
+> ### Aliases: print.daFisher
+> ### Keywords: print
+> 
+> ### ** Examples
+> 
+> require(MASS)
+Loading required package: MASS
+> x1 <- mvrnorm(20,c(0,0,0),diag(3))
+> x2 <- mvrnorm(30,c(3,0,0),diag(3))
+> x3 <- mvrnorm(40,c(0,3,0),diag(3))
+> X <- rbind(x1,x2,x3)
+> grp=c(rep(1,20),rep(2,30),rep(3,40))
+> 
+> d1 <- daFisher(X,grp=grp,method="classical",coda=FALSE)
+> d2 <- daFisher(X,grp=grp,method="robust",coda=FALSE)
+> d2
+--------------------------------------
+Results from Fishers discriminant analysis, coda == FALSE
+- Variance between the classes: 
+            [,1]        [,2]         [,3]
+[1,]  1.59366978 -1.17723665 -0.045770443
+[2,] -1.17723665  2.10206197  0.058904750
+[3,] -0.04577044  0.05890475  0.001825491
+
+- Variance within the classes: 
+            [,1]       [,2]        [,3]
+[1,]  1.06691540  0.1394367 -0.03051297
+[2,]  0.13943673  1.0069078 -0.07427810
+[3,] -0.03051297 -0.0742781  0.94919281
+
+- Loadings matrix: 
+            [,1]       [,2]        [,3]
+[1,] -0.62331161 0.77766333  0.01367512
+[2,]  0.77936125 0.62402914 -0.02035534
+[3,]  0.06386455 0.07633728  0.99969928
+--------------------------------------
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("print.daFisher", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching ‘package:MASS’
+
+> nameEx("print.imp")
+> ### * print.imp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: print.imp
+> ### Title: Print method for objects of class imp
+> ### Aliases: print.imp
+> ### Keywords: print
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> expenditures[1,3]
+[1] 147
+> expenditures[1,3] <- NA
+> ## Not run: 
+> ##D xi <- impCoda(expenditures)
+> ##D xi
+> ##D summary(xi)
+> ##D plot(xi, which=1:2)
+> ## End(Not run)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("print.imp", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("print.outCoDa")
+> ### * print.outCoDa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: print.outCoDa
+> ### Title: print method for outCoDa objects
+> ### Aliases: print.outCoDa
+> ### Keywords: print
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> oD <- outCoDa(expenditures)
+> oD
+
+ --------------------
+[1] "1 out of 20 observations are detected as outliers."
+
+ --------------------
+
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("print.outCoDa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("print.pcaCoDa")
+> ### * print.pcaCoDa
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: print.pcaCoDa
+> ### Title: Print method for pcaCoDa objects
+> ### Aliases: print.pcaCoDa
+> ### Keywords: print
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> p1 <- pcaCoDa(expenditures)
+> p1
+
+-------------------
+ Percentages of explained variability for compositional data after clr transformation 
+[1] 0.9855776 0.9946223 0.9983986 1.0000000
+
+-------------------
+
+> plot(p1)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("print.pcaCoDa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("robCompositions-package")
+> ### * robCompositions-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: robCompositions-package
+> ### Title: Robust Estimation for Compositional Data.
+> ### Aliases: robCompositions-package robCompositions
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> ## k nearest neighbor imputation
+> data(expenditures)
+> expenditures[1,3]
+[1] 147
+> expenditures[1,3] <- NA
+> impKNNa(expenditures)$xImp[1,3]
+ alcohol 
+152.1033 
+> 
+> ## iterative model based imputation
+> data(expenditures)
+> x <- expenditures
+> x[1,3]
+[1] 147
+> x[1,3] <- NA
+> xi <- impCoda(x)$xImp
+> xi[1,3]
+  alcohol 
+0.1016139 
+> s1 <- sum(x[1,-3])
+> impS <- sum(xi[1,-3])
+> xi[,3] * s1/impS
+ [1] 150.77178 127.31464  80.51905 139.62303 141.77109 160.85137 156.24441
+ [8] 140.45775 144.91111 163.51219 133.63845 123.51102 141.43868 127.13357
+[15] 153.54382 150.54367 136.16399 140.92405 116.46924 138.18239
+> 
+> xi <- impKNNa(expenditures)
+> xi
+
+ --------------------------------------- 
+[1] "0 missing value was imputed"
+ --------------------------------------- 
+> summary(xi)
+
+ geometric mean of the original data and the imputed data: 
+                orig       imp
+housing    1109.7511 1109.7511
+foodstuffs  407.8955  407.8955
+alcohol     279.9303  279.9303
+other       630.9773  630.9773
+services    423.3600  423.3600
+> ## Not run: plot(xi, which=1)
+> plot(xi, which=2)
+> plot(xi, which=3)
+Warning in plot.imp(xi, which = 3) :
+  tenary plot is only visible for 3 variables, you have 5 
+ only the first three variables are selected for plotting
+> 
+> ## pca
+> data(expenditures)
+> p1 <- pcaCoDa(expenditures)
+> p1
+
+-------------------
+ Percentages of explained variability for compositional data after clr transformation 
+[1] 0.9855776 0.9946223 0.9983986 1.0000000
+
+-------------------
+
+> plot(p1)
+> 
+> ## outlier detection
+> data(expenditures)
+> oD <- outCoDa(expenditures)
+> oD
+
+ --------------------
+[1] "1 out of 20 observations are detected as outliers."
+
+ --------------------
+
+> plot(oD)
+> 
+> ## transformations
+> data(arcticLake)
+> x <- arcticLake
+> x.alr <- addLR(x, 2)
+> y <- addLRinv(x.alr)
+> addLRinv(addLR(x, 3))
+   sand silt clay
+1  77.5 19.5  3.0
+2  71.9 24.9  3.2
+3  50.7 36.1 13.2
+4  52.2 40.9  6.6
+5  70.0 26.5  3.5
+6  66.5 32.2  1.3
+7  43.1 55.3  1.6
+8  53.4 36.8  9.8
+9  15.5 54.4 30.1
+10 31.7 41.5 26.8
+11 65.7 27.8  6.5
+12 70.4 29.0  0.6
+13 17.4 53.6 29.0
+14 10.6 69.8 19.6
+15 38.2 43.1 18.7
+16 10.8 52.7 36.5
+17 18.4 50.7 30.9
+18  4.6 47.4 48.0
+19 15.6 50.4 34.0
+20 31.9 45.1 23.0
+21  9.5 53.5 37.0
+22 17.1 48.0 34.9
+23 10.5 55.4 34.1
+24  4.8 54.7 41.0
+25  2.6 45.2 52.2
+26 11.4 52.7 35.9
+27  6.7 46.9 46.4
+28  6.9 49.7 43.4
+29  4.0 44.9 51.1
+30  7.4 51.6 40.9
+31  4.8 49.5 45.7
+32  4.5 48.5 47.0
+33  6.6 52.1 41.3
+34  6.7 47.3 45.9
+35  7.4 45.6 46.9
+36  6.0 48.9 45.1
+37  6.3 53.8 39.9
+38  2.5 48.0 49.5
+39  2.0 47.8 50.2
+> data(expenditures)
+> x <- expenditures
+> y <- addLRinv(addLR(x, 5))
+> head(x)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(y)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> addLRinv(x.alr, ivar=2, useClassInfo=FALSE)
+            [,1]      [,2]      [,3]
+ [1,] 0.77500000 0.1950000 0.0300000
+ [2,] 0.71900000 0.2490000 0.0320000
+ [3,] 0.50700000 0.3610000 0.1320000
+ [4,] 0.52357071 0.4102307 0.0661986
+ [5,] 0.70000000 0.2650000 0.0350000
+ [6,] 0.66500000 0.3220000 0.0130000
+ [7,] 0.43100000 0.5530000 0.0160000
+ [8,] 0.53400000 0.3680000 0.0980000
+ [9,] 0.15500000 0.5440000 0.3010000
+[10,] 0.31700000 0.4150000 0.2680000
+[11,] 0.65700000 0.2780000 0.0650000
+[12,] 0.70400000 0.2900000 0.0060000
+[13,] 0.17400000 0.5360000 0.2900000
+[14,] 0.10600000 0.6980000 0.1960000
+[15,] 0.38200000 0.4310000 0.1870000
+[16,] 0.10800000 0.5270000 0.3650000
+[17,] 0.18400000 0.5070000 0.3090000
+[18,] 0.04600000 0.4740000 0.4800000
+[19,] 0.15600000 0.5040000 0.3400000
+[20,] 0.31900000 0.4510000 0.2300000
+[21,] 0.09500000 0.5350000 0.3700000
+[22,] 0.17100000 0.4800000 0.3490000
+[23,] 0.10500000 0.5540000 0.3410000
+[24,] 0.04776119 0.5442786 0.4079602
+[25,] 0.02600000 0.4520000 0.5220000
+[26,] 0.11400000 0.5270000 0.3590000
+[27,] 0.06700000 0.4690000 0.4640000
+[28,] 0.06900000 0.4970000 0.4340000
+[29,] 0.04000000 0.4490000 0.5110000
+[30,] 0.07407407 0.5165165 0.4094094
+[31,] 0.04800000 0.4950000 0.4570000
+[32,] 0.04500000 0.4850000 0.4700000
+[33,] 0.06600000 0.5210000 0.4130000
+[34,] 0.06706707 0.4734735 0.4594595
+[35,] 0.07407407 0.4564565 0.4694695
+[36,] 0.06000000 0.4890000 0.4510000
+[37,] 0.06300000 0.5380000 0.3990000
+[38,] 0.02500000 0.4800000 0.4950000
+[39,] 0.02000000 0.4780000 0.5020000
+> 
+> data(expenditures)
+> eclr <- cenLR(expenditures)
+> inveclr <- cenLRinv(eclr)
+> head(expenditures)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(inveclr)
+  housing foodstuffs alcohol other services
+1     640        328     147   169      196
+2    1800        484     515  2291      912
+3    2085        445     725  8373     1732
+4     616        331     126   117      149
+5     875        368     191   290      275
+6     770        364     196   242      236
+> head(cenLRinv(eclr$x.clr))
+Warning in cenLRinv(eclr$x.clr) :
+  useClassInfo was set to FALSE, because x is not from class clr
+   housing foodstuffs   alcohol     other  services
+1 2.536747  1.3000829 0.5826591 0.6698598 0.7768788
+2 1.823407  0.4902937 0.5216969 2.3207913 0.9238593
+3 1.322085  0.2821717 0.4597179 5.3092659 1.0982502
+4 2.879721  1.5473826 0.5890339 0.5469600 0.6965559
+5 2.534452  1.0659181 0.5532347 0.8399898 0.7965421
+6 2.438797  1.1528858 0.6207846 0.7664790 0.7474754
+> 
+> require(MASS)
+Loading required package: MASS
+> Sigma <- matrix(c(5.05,4.95,4.95,5.05), ncol=2, byrow=TRUE)
+> z <- isomLRinv(mvrnorm(100, mu=c(0,2), Sigma=Sigma))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("robCompositions-package", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching ‘package:MASS’
+
+> nameEx("robVariation")
+> ### * robVariation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: robVariation
+> ### Title: Robust variation matrix
+> ### Aliases: robVariation
+> ### Keywords: multivariate robust
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> robVariation(expenditures)
+           [,1]      [,2]       [,3]      [,4]       [,5]
+[1,] 0.00000000 0.1264201 0.02622599 0.5675161 0.07067938
+[2,] 0.12642012 0.0000000 0.23599043 1.2270016 0.37986282
+[3,] 0.02622599 0.2359904 0.00000000 0.4067155 0.01932496
+[4,] 0.56751613 1.2270016 0.40671552 0.0000000 0.25933579
+[5,] 0.07067938 0.3798628 0.01932496 0.2593358 0.00000000
+> robVariation(expenditures, robust=FALSE)
+           [,1]       [,2]       [,3]      [,4]       [,5]
+[1,] 0.00000000 0.09980328 0.02222911 0.6167794 0.08135997
+[2,] 0.09980328 0.00000000 0.18846969 1.1790121 0.33675531
+[3,] 0.02222911 0.18846969 0.00000000 0.4429465 0.02887377
+[4,] 0.61677941 1.17901206 0.44294654 0.0000000 0.25798093
+[5,] 0.08135997 0.33675531 0.02887377 0.2579809 0.00000000
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("robVariation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("skyeLavas")
+> ### * skyeLavas
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: skyeLavas
+> ### Title: Aphyric skye lavas data
+> ### Aliases: skyeLavas
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(skyeLavas)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("skyeLavas", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("summary.adtestWrapper")
+> ### * summary.adtestWrapper
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: summary.adtestWrapper
+> ### Title: summary method for objects of class adtestWrapper
+> ### Aliases: summary.adtestWrapper
+> ### Keywords: print
+> 
+> ### ** Examples
+> 
+> data(machineOperators)
+> a <- adtestWrapper(machineOperators, R=50) # choose higher value of R
+> a
+[1] "The data do not follow the normal distribution on the simplex (alpha =0.05)"
+> summary(a)
+
+  -----------------------------------------------
+  Anderson-Darling test results ( alpha = 0.05 ):
+  ----------------
+  ilrVars                      testName  testStat pvalue check
+1       1 A-D univariate normality test 0.4417233   0.28  TRUE
+2       2 A-D univariate normality test 1.2276586   0.00 FALSE
+3       3 A-D univariate normality test 0.7479878   0.02 FALSE
+4     1 2  A-D bivariate normality test 0.4765520   0.36  TRUE
+5     1 3  A-D bivariate normality test 0.5753107   0.24  TRUE
+6     2 3  A-D bivariate normality test 0.7909727   0.16  TRUE
+7     all               A-D radius test 0.7887404   0.18  TRUE
+
+  -----------------------------------------------
+
+  --> p-values and tests are obtained from standard estimates.
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("summary.adtestWrapper", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("summary.imp")
+> ### * summary.imp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: summary.imp
+> ### Title: Summary method for objects of class imp
+> ### Aliases: summary.imp
+> ### Keywords: print
+> 
+> ### ** Examples
+> 
+> data(expenditures)
+> expenditures[1,3]
+[1] 147
+> expenditures[1,3] <- NA
+> xi <- impKNNa(expenditures)
+> xi
+
+ --------------------------------------- 
+[1] "1 missing value was imputed"
+ --------------------------------------- 
+> summary(xi)
+
+ geometric mean of the original data and the imputed data: 
+                orig       imp
+housing    1109.7511 1109.7511
+foodstuffs  407.8955  407.8955
+alcohol     289.5827  280.4083
+other       630.9773  630.9773
+services    423.3600  423.3600
+> # plot(xi, which=1:2)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("summary.imp", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ternaryDiag")
+> ### * ternaryDiag
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ternaryDiag
+> ### Title: Ternary diagram
+> ### Aliases: ternaryDiag
+> ### Keywords: multivariate aplot
+> 
+> ### ** Examples
+> 
+> data(arcticLake)
+> ternaryDiag(arcticLake)
+> 
+> data(coffee)
+> x <- coffee[,1:3]
+> grp <- as.integer(factor(coffee[,4]))
+> ternaryDiag(x, col=grp, pch=grp)
+> ternaryDiag(x, grid=FALSE, col=grp, pch=grp)
+> legend("topright", legend=unique(coffee[,4]), pch=1:2, col=1:2)
+> 
+> ternaryDiag(x, grid=FALSE, col=grp, pch=grp, line="ellipse", tol=c(0.975,0.9), lty=2)
+> ternaryDiag(x, grid=FALSE, line="pca")
+> ternaryDiag(x, grid=FALSE, col=grp, pch=grp, line="pca", lty=2, lwd=2)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ternaryDiag", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ternaryDiagAbline")
+> ### * ternaryDiagAbline
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ternaryDiagAbline
+> ### Title: Adds a line to a ternary diagram.
+> ### Aliases: ternaryDiagAbline
+> ### Keywords: aplot
+> 
+> ### ** Examples
+> 
+> data(coffee)
+> x <- coffee[,1:3]
+> ternaryDiag(x, grid=FALSE)
+> ternaryDiagAbline(data.frame(z1=c(0.01,0.5), z2=c(0.4,0.8)), col="red")
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ternaryDiagAbline", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ternaryDiagEllipse")
+> ### * ternaryDiagEllipse
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ternaryDiagEllipse
+> ### Title: Adds tolerance ellipses to a ternary diagram.
+> ### Aliases: ternaryDiagEllipse
+> ### Keywords: aplot
+> 
+> ### ** Examples
+> 
+> data(coffee)
+> x <- coffee[,1:3]
+> ternaryDiag(x, grid=FALSE)
+> ternaryDiagEllipse(x)
+> ## or directly:
+> ternaryDiag(x, grid=FALSE, line="ellipse")
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ternaryDiagEllipse", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ternaryDiagPoints")
+> ### * ternaryDiagPoints
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ternaryDiagPoints
+> ### Title: Add points or lines to a given ternary diagram.
+> ### Aliases: ternaryDiagPoints ternaryDiagLines
+> ### Keywords: aplot
+> 
+> ### ** Examples
+> 
+> data(coffee)
+> x <- coffee[,1:3]
+> ternaryDiag(x, grid=FALSE)
+> ternaryDiagPoints(x+1, col="red", pch=2)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ternaryDiagPoints", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  8.182 0.198 8.444 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

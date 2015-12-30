@@ -1,0 +1,175 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(robustbase)
+> 
+> ## Model without coefficients [ print.glmrob() tests for this ..]
+> 
+> ### very simple model [with outliers]
+> set.seed(1)
+> y <- rpois(1000, lambda = 4)
+> 
+> ## without outliers
+> m0o <- glm(y ~ 0, family = poisson, epsilon = 1e-12)
+> m1o <- glm(y ~ 1, family = poisson, epsilon = 1e-12)
+> 
+> y[1:3] <- 99:101 # outliers
+> 
+> m0 <- glm(y ~ 0, family = poisson, epsilon = 1e-12)
+> m1 <- glm(y ~ 1, family = poisson, epsilon = 1e-12)
+> 
+> ## these both failed in version 0.1-2:
+> rm0 <- glmrob(y ~ 0, family = poisson, acc = 1e-12)
+> rm1 <- glmrob(y ~ 1, family = poisson, acc = 1e-12)
+> 
+> rm0
+
+Call:  glmrob(formula = y ~ 0, family = poisson, acc = 1e-12) 
+
+No coefficients
+
+
+Number of observations: 1000 
+Fitted by method  'Mqle' 
+> rm1
+
+Call:  glmrob(formula = y ~ 1, family = poisson, acc = 1e-12) 
+
+Coefficients:
+(Intercept)  
+      1.391  
+
+Number of observations: 1000 
+Fitted by method  'Mqle' 
+> (s0 <- summary(rm0))
+
+Call:  glmrob(formula = y ~ 0, family = poisson, acc = 1e-12) 
+
+No coefficients
+
+
+Number of observations: 1000 
+Fitted by method 'Mqle'  (in 0 iterations)
+
+(Dispersion parameter for poisson family taken to be 1)
+
+No deviance values available 
+Algorithmic parameters: 
+      acc       tcc 
+1.000e-12 1.345e+00 
+maxit 
+   50 
+test.acc 
+  "coef" 
+
+> (s1 <- summary(rm1))
+
+Call:  glmrob(formula = y ~ 1, family = poisson, acc = 1e-12) 
+
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  1.39067    0.01621   85.77   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Robustness weights w.r * w.x: 
+ 791 weights are ~= 1. The remaining 209 ones are summarized as
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0278  0.6769  0.8934  0.7906  0.9039  0.9039 
+
+Number of observations: 1000 
+Fitted by method 'Mqle'  (in 7 iterations)
+
+(Dispersion parameter for poisson family taken to be 1)
+
+No deviance values available 
+Algorithmic parameters: 
+      acc       tcc 
+1.000e-12 1.345e+00 
+maxit 
+   50 
+test.acc 
+  "coef" 
+
+> str(s1)
+List of 19
+ $ call         : language glmrob(formula = y ~ 1, family = poisson, acc = 1e-12)
+ $ terms        :Classes 'terms', 'formula' length 3 y ~ 1
+  .. ..- attr(*, "variables")= language list(y)
+  .. ..- attr(*, "factors")= int(0) 
+  .. ..- attr(*, "term.labels")= chr(0) 
+  .. ..- attr(*, "order")= int(0) 
+  .. ..- attr(*, "intercept")= int 1
+  .. ..- attr(*, "response")= int 1
+  .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+  .. ..- attr(*, "predvars")= language list(y)
+  .. ..- attr(*, "dataClasses")= Named chr "numeric"
+  .. .. ..- attr(*, "names")= chr "y"
+ $ family       :List of 12
+  ..$ family    : chr "poisson"
+  ..$ link      : chr "log"
+  ..$ linkfun   :function (mu)  
+  ..$ linkinv   :function (eta)  
+  ..$ variance  :function (mu)  
+  ..$ dev.resids:function (y, mu, wt)  
+  ..$ aic       :function (y, n, mu, wt, dev)  
+  ..$ mu.eta    :function (eta)  
+  ..$ initialize:  expression({     if (any(y < 0))          stop("negative values not allowed for the 'Poisson' family")     n <- rep.int(1, nobs)     mustart <- y + 0.1 })
+  ..$ validmu   :function (mu)  
+  ..$ valideta  :function (eta)  
+  ..$ simulate  :function (object, nsim)  
+  ..- attr(*, "class")= chr "family"
+ $ iter         : int 7
+ $ control      :List of 4
+  ..$ acc     : num 1e-12
+  ..$ test.acc: chr "coef"
+  ..$ maxit   : num 50
+  ..$ tcc     : num 1.34
+ $ method       : chr "Mqle"
+ $ residuals    : Named num [1:1000] 47.39 47.89 48.39 1.49 -1.01 ...
+  ..- attr(*, "names")= chr [1:1000] "1" "2" "3" "4" ...
+ $ fitted.values: Named num [1:1000] 4.02 4.02 4.02 4.02 4.02 ...
+  ..- attr(*, "names")= chr [1:1000] "1" "2" "3" "4" ...
+ $ w.r          : num [1:1000] 0.0284 0.0281 0.0278 0.9039 1 ...
+ $ w.x          : num [1:1000] 1 1 1 1 1 1 1 1 1 1 ...
+ $ deviance     : NULL
+ $ df.residual  : NULL
+ $ null.deviance: NULL
+ $ df.null      : NULL
+ $ df           : NULL
+ $ aliased      : Named logi FALSE
+  ..- attr(*, "names")= chr "(Intercept)"
+ $ coefficients : num [1, 1:4] 1.3907 0.0162 85.7719 0
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr "(Intercept)"
+  .. ..$ : chr [1:4] "Estimate" "Std. Error" "z value" "Pr(>|z|)"
+ $ dispersion   : num 1
+ $ cov.scaled   : num [1, 1] 0.000263
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr "(Intercept)"
+  .. ..$ : chr "(Intercept)"
+ - attr(*, "class")= chr "summary.glmrob"
+> stopifnot(all.equal(c(coef(s1)),
++ 		    c(1.390672035557, 0.016213613600955,
++ 		      85.77187478275, 0), tolerance = 1e-13))# 32-b: 4.7e-15
+> 
+> cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
+Time elapsed:  0.47 0.05 0.523 0.003 0.007 
+> 
+> proc.time()
+   user  system elapsed 
+  0.473   0.057   0.523 

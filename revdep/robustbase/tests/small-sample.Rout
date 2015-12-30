@@ -1,0 +1,174 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(robustbase)
+> ## testing functions:
+> source(system.file("xtraR/ex-funs.R", package = "robustbase"))
+> 
+> set.seed(152)
+> 
+> Nmax <- 12
+> nn <- length(nset <- c(2:Nmax, 20, 50))## NOTA BENE: n == 1 etc are NOT YET TREATED!
+> Sim <- 2^9 # = 512
+> 
+> sn <- qn <- numeric(Sim)
+> cpu <- numeric(nn)
+> names(cpu) <- as.character(nset)
+> 
+> for(n in nset) {
++     nS <- Sim ## if(n < 20) Sim else round(10*Sim/n)
++     cat("\nn = ",n,"\n------\nno.Sim. = ",nS,"\n")
++     cpu[as.character(n)] <- system.time(for(i in 1:nS) {
++         x <- rnorm(n)
++         sn[i] <- Sn0R(x)
++         qn[i] <- Qn0R(x)
++         Sn.x <- Sn(x, const = 1)
++         Qn.x <- Qn(x, const = 1)
++         if(!is.all.equal(Sn.x, sn[i], tol = 1e-5))
++             cat("i=",i," Sn() != Sn0R():  ", Sn.x, "!=", sn[i],"\n")
++         if(!is.all.equal(Qn.x, qn[i], tol = 1e-5))
++             cat("i=",i," Qn() != Qn0R():  ", Qn.x, "!=", qn[i],"\n")
++     })[1]
++     cat("Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):\n")
++     print(c(mean(sn), sd(sn)/sqrt(nS), quantile(sn, p = (1:3)/4)))
++     print(c(mean(qn), sd(qn)/sqrt(nS), quantile(qn, p = (1:3)/4)))
++ }
+
+n =  2 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+1.17177829 0.03695327 0.52951343 1.05306039 1.62748640 
+                             25%        50%        75% 
+1.17177829 0.03695327 0.52951343 1.05306039 1.62748640 
+
+n =  3 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.46255834 0.01739738 0.15475882 0.36551414 0.65869811 
+                             25%        50%        75% 
+0.46255834 0.01739738 0.15475882 0.36551414 0.65869811 
+
+n =  4 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.84170614 0.02015695 0.51981874 0.77630479 1.12005284 
+                             25%        50%        75% 
+0.84170614 0.02015695 0.51981874 0.77630479 1.12005284 
+
+n =  5 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.64309841 0.01561957 0.35812751 0.60223019 0.87200727 
+                          25%       50%       75% 
+0.5591093 0.0133655 0.3273456 0.5337290 0.7412843 
+
+n =  6 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.81292713 0.01603854 0.54635157 0.78437781 1.03135301 
+                             25%        50%        75% 
+0.70787958 0.01251911 0.47540581 0.70464628 0.88664634 
+
+n =  7 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.71007470 0.01209913 0.52623935 0.69253904 0.88255673 
+                                25%         50%         75% 
+0.533802144 0.009128141 0.376988927 0.520001355 0.663751417 
+
+n =  8 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.82650425 0.01419433 0.58883395 0.79562656 1.00574823 
+                          25%       50%       75% 
+0.6645775 0.0103031 0.4938057 0.6323886 0.8027008 
+
+n =  9 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.75759768 0.01136142 0.57868634 0.74677447 0.91852270 
+                             25%        50%        75% 
+0.52259364 0.00736039 0.39618164 0.51826059 0.63137960 
+
+n =  10 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.83182112 0.01239199 0.62462885 0.80885273 1.01920116 
+                                25%         50%         75% 
+0.623637627 0.008403906 0.474993989 0.613887533 0.750270402 
+
+n =  11 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.76832479 0.01118554 0.59020462 0.76690177 0.93425844 
+                                25%         50%         75% 
+0.512979423 0.007139196 0.388824484 0.506239908 0.621525112 
+
+n =  12 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.85538366 0.01139366 0.66084900 0.84512561 1.01552717 
+                                25%         50%         75% 
+0.607337007 0.007056424 0.496338090 0.596697510 0.703213097 
+
+n =  20 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                             25%        50%        75% 
+0.84113700 0.00812507 0.71508462 0.82864901 0.94684680 
+                                25%         50%         75% 
+0.542464499 0.004534141 0.473622699 0.541929347 0.612841843 
+
+n =  50 
+------
+no.Sim. =  512 
+Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
+                                25%         50%         75% 
+0.846902031 0.004784579 0.780334229 0.846165240 0.917926909 
+                          25%       50%       75% 
+0.4860477 0.0023965 0.4492734 0.4853898 0.5220596 
+> 
+> rbind("Time (CPU) used:" = summary(cpu))
+                  Min. 1st Qu. Median   Mean 3rd Qu.  Max.
+Time (CPU) used: 0.218   0.258  0.292 0.3473   0.325 1.009
+> 
+> proc.time()
+   user  system elapsed 
+  5.334   0.101   5.498 

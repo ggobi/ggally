@@ -1,0 +1,2341 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> library(robustbase)
+> source(system.file("test-tools-1.R", package="Matrix", mustWork=TRUE))
+Loading required package: tools
+> ##-> assertError(), etc
+> 
+> set.seed(1) # since now .Random.seed is used by default!
+> 
+> ## EX 1
+> data(coleman)
+> ## "empty model" (not really a lot of sense)
+> (m0 <- lmrob(Y ~ 0, data = coleman))
+
+Call:
+lmrob(formula = Y ~ 0, data = coleman)
+ \--> method = ""
+No coefficients
+
+> summary(m0)
+
+Call:
+lmrob(formula = Y ~ 0, data = coleman)
+ \--> method = ""
+Residuals:
+   Min     1Q Median     3Q    Max 
+ 22.70  32.78  35.86  39.95  43.10 
+
+No Coefficients
+> ## "Intercept" only: robust mean
+> (m1 <- lmrob(Y ~ 1, data = coleman))
+
+Call:
+lmrob(formula = Y ~ 1, data = coleman)
+ \--> method = "MM"
+Coefficients:
+(Intercept)  
+      35.56  
+
+> summary(m1)
+
+Call:
+lmrob(formula = Y ~ 1, data = coleman)
+ \--> method = "MM"
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-12.8605  -2.7855   0.2945   4.3895   7.5395 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   35.560      1.342    26.5   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Robust residual standard error: 5.48 
+Convergence in 9 IRWLS iterations
+
+Robustness weights: 
+ one weight is ~= 1. The remaining 19 ones are summarized as
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.5611  0.8986  0.9553  0.9044  0.9918  0.9987 
+Algorithmic parameters: 
+       tuning.chi                bb        tuning.psi        refine.tol 
+        1.548e+00         5.000e-01         4.685e+00         1.000e-07 
+          rel.tol         solve.tol       eps.outlier             eps.x 
+        1.000e-07         1.000e-07         5.000e-03         1.819e-12 
+warn.limit.reject warn.limit.meanrw 
+        5.000e-01         5.000e-01 
+     nResample         max.it       best.r.s       k.fast.s          k.max 
+           500             50              2              1            200 
+   maxit.scale      trace.lev            mts     compute.rd fast.s.large.n 
+           200              0           1000              0           2000 
+                  psi           subsampling                   cov 
+           "bisquare"         "nonsingular"         ".vcov.avar1" 
+compute.outlier.stats 
+                 "SM" 
+seed : int(0) 
+> 
+> 
+> (mC <- lmrob(Y ~ ., data = coleman,
++ 	     control = lmrob.control(refine.tol = 1e-8, rel.tol = 1e-9)))
+
+Call:
+lmrob(formula = Y ~ ., data = coleman, control = lmrob.control(refine.tol = 1e-08,     rel.tol = 1e-09))
+ \--> method = "MM"
+Coefficients:
+(Intercept)      salaryP     fatherWc      sstatus    teacherSc    motherLev  
+   30.50232     -1.66615      0.08425      0.66774      1.16778     -4.13657  
+
+> summary(mC)
+
+Call:
+lmrob(formula = Y ~ ., data = coleman, control = lmrob.control(refine.tol = 1e-08, 
+    rel.tol = 1e-09))
+ \--> method = "MM"
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-4.16181 -0.39226  0.01611  0.55619  7.22766 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 30.50232    6.71260   4.544 0.000459 ***
+salaryP     -1.66615    0.43129  -3.863 0.001722 ** 
+fatherWc     0.08425    0.01467   5.741 5.10e-05 ***
+sstatus      0.66774    0.03385  19.726 1.30e-11 ***
+teacherSc    1.16778    0.10983  10.632 4.35e-08 ***
+motherLev   -4.13657    0.92084  -4.492 0.000507 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Robust residual standard error: 1.134 
+Multiple R-squared:  0.9814,	Adjusted R-squared:  0.9747 
+Convergence in 14 IRWLS iterations
+
+Robustness weights: 
+ observation 18 is an outlier with |weight| = 0 ( < 0.005); 
+ The remaining 19 ones are summarized as
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1491  0.9412  0.9847  0.9279  0.9947  0.9982 
+Algorithmic parameters: 
+       tuning.chi                bb        tuning.psi        refine.tol 
+        1.548e+00         5.000e-01         4.685e+00         1.000e-08 
+          rel.tol         solve.tol       eps.outlier             eps.x 
+        1.000e-09         1.000e-07         5.000e-03         1.569e-10 
+warn.limit.reject warn.limit.meanrw 
+        5.000e-01         5.000e-01 
+     nResample         max.it       best.r.s       k.fast.s          k.max 
+           500             50              2              1            200 
+   maxit.scale      trace.lev            mts     compute.rd fast.s.large.n 
+           200              0           1000              0           2000 
+                  psi           subsampling                   cov 
+           "bisquare"         "nonsingular"         ".vcov.avar1" 
+compute.outlier.stats 
+                 "SM" 
+seed : int(0) 
+> ## Values will change once we use R's random number generator !
+> stopifnot(
++ all.equal(unname(coef(mC)),
++ 	  c(30.50232, -1.666147, 0.08425381, 0.6677366, 1.167777, -4.136569),
++ 	  tolerance = 2e-7)# 6.112 e-8 (32-b)
++ )
+> dput(signif(unname(coef(mC)), 7))
+c(30.50232, -1.666147, 0.08425381, 0.6677366, 1.167777, -4.136569
+)
+> ## 64b(0.2-0): c(30.50232, -1.666147, 0.08425381, 0.6677366, 1.167777, -4.136569)
+> ## 32b(0.2-0):	 "exactly" same !
+> ## Full precision:
+> dput(unname(coef(mC)))
+c(30.5023184450148, -1.66614687548008, 0.0842538074792178, 0.667736590070332, 
+1.16777744029117, -4.13656885405814)
+> ## 2012-06-04:
+> ## 32-bit:c(30.5023184450149, -1.66614687548007, 0.0842538074792178, 0.667736590070332, 1.16777744029117, -4.13656885405815)
+> ## 64-bit:c(30.5023184450148, -1.66614687548008, 0.0842538074792178, 0.667736590070332, 1.16777744029117, -4.13656885405814)
+> ##
+> ## 32-bit:c(30.5023183940104, -1.66614687550933, 0.0842538074635567, 0.667736589938547, 1.16777744089398, -4.13656884777543)
+> ## 64-bit:c(30.5023184150851, -1.66614687537736, 0.0842538074722959, 0.667736589980183, 1.16777744061092, -4.1365688503035)
+> 
+> str(mC)
+List of 22
+ $ coefficients  : Named num [1:6] 30.5023 -1.6661 0.0843 0.6677 1.1678 ...
+  ..- attr(*, "names")= chr [1:6] "(Intercept)" "salaryP" "fatherWc" "sstatus" ...
+ $ scale         : num 1.13
+ $ residuals     : Named num [1:20] 0.191 -0.159 -4.162 -0.625 0.768 ...
+  ..- attr(*, "names")= chr [1:20] "1" "2" "3" "4" ...
+ $ loss          : num 0.135
+ $ converged     : logi TRUE
+ $ iter          : int 14
+ $ fitted.values : Named num [1:20] 36.8 26.7 40.7 41.3 36.3 ...
+  ..- attr(*, "names")= chr [1:20] "1" "2" "3" "4" ...
+ $ rweights      : Named num [1:20] 0.997 0.998 0.149 0.973 0.959 ...
+  ..- attr(*, "names")= chr [1:20] "1" "2" "3" "4" ...
+ $ control       :List of 32
+  ..$ setting              : NULL
+  ..$ seed                 : int(0) 
+  ..$ nResample            : num 500
+  ..$ psi                  : chr "bisquare"
+  ..$ tuning.chi           : num 1.55
+  ..$ bb                   : num 0.5
+  ..$ tuning.psi           : num 4.69
+  ..$ max.it               : num 50
+  ..$ groups               : num 5
+  ..$ n.group              : num 400
+  ..$ best.r.s             : num 2
+  ..$ k.fast.s             : num 1
+  ..$ k.max                : num 200
+  ..$ maxit.scale          : num 200
+  ..$ k.m_s                : num 20
+  ..$ refine.tol           : num 1e-08
+  ..$ rel.tol              : num 1e-09
+  ..$ solve.tol            : num 1e-07
+  ..$ trace.lev            : num 0
+  ..$ mts                  : num 1000
+  ..$ subsampling          : chr "nonsingular"
+  ..$ compute.rd           : logi FALSE
+  ..$ method               : chr "SM"
+  ..$ numpoints            : num 10
+  ..$ cov                  : chr ".vcov.avar1"
+  ..$ split.type           : chr "f"
+  ..$ fast.s.large.n       : num 2000
+  ..$ eps.outlier          :function (nobs)  
+  ..$ eps.x                : num 1.57e-10
+  ..$ compute.outlier.stats: chr "SM"
+  ..$ warn.limit.reject    : num 0.5
+  ..$ warn.limit.meanrw    : num 0.5
+ $ init.S        :List of 8
+  ..$ coefficients : Named num [1:6] 21.2662 -1.2448 0.0676 0.6297 1.176 ...
+  .. ..- attr(*, "names")= chr [1:6] "(Intercept)" "salaryP" "fatherWc" "sstatus" ...
+  ..$ scale        : num 1.13
+  ..$ k.iter       : int 48
+  ..$ converged    : logi TRUE
+  ..$ fitted.values: num [1:20, 1] 37.4 26.2 41.1 41.9 36.5 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:20] "1" "2" "3" "4" ...
+  .. .. ..$ : NULL
+  ..$ residuals    : Named num [1:20] -0.357 0.275 -4.626 -1.185 0.588 ...
+  .. ..- attr(*, "names")= chr [1:20] "1" "2" "3" "4" ...
+  ..$ rweights     : Named num [1:20] 0.919 0.951 0 0.296 0.788 ...
+  .. ..- attr(*, "names")= chr [1:20] "1" "2" "3" "4" ...
+  ..$ control      :List of 32
+  .. ..$ setting              : NULL
+  .. ..$ seed                 : int(0) 
+  .. ..$ nResample            : num 500
+  .. ..$ psi                  : chr "bisquare"
+  .. ..$ tuning.chi           : num 1.55
+  .. ..$ bb                   : num 0.5
+  .. ..$ tuning.psi           : num 4.69
+  .. ..$ max.it               : num 50
+  .. ..$ groups               : num 5
+  .. ..$ n.group              : num 400
+  .. ..$ best.r.s             : num 2
+  .. ..$ k.fast.s             : num 1
+  .. ..$ k.max                : num 200
+  .. ..$ maxit.scale          : num 200
+  .. ..$ k.m_s                : num 20
+  .. ..$ refine.tol           : num 1e-08
+  .. ..$ rel.tol              : num 1e-09
+  .. ..$ solve.tol            : num 1e-07
+  .. ..$ trace.lev            : num 0
+  .. ..$ mts                  : num 1000
+  .. ..$ subsampling          : chr "nonsingular"
+  .. ..$ compute.rd           : logi FALSE
+  .. ..$ method               : chr "S"
+  .. ..$ numpoints            : num 10
+  .. ..$ cov                  : chr ".vcov.avar1"
+  .. ..$ split.type           : chr "f"
+  .. ..$ fast.s.large.n       : num 2000
+  .. ..$ eps.outlier          :function (nobs)  
+  .. ..$ eps.x                : num 1.57e-10
+  .. ..$ compute.outlier.stats: chr "SM"
+  .. ..$ warn.limit.reject    : num 0.5
+  .. ..$ warn.limit.meanrw    : num 0.5
+  ..- attr(*, "class")= chr "lmrob.S"
+ $ qr            :List of 4
+  ..$ qr   : num [1:20, 1:6] -4.199 0.238 0.092 0.235 0.233 ...
+  .. ..- attr(*, "assign")= int [1:6] 0 1 2 3 4 5
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:20] "1" "2" "3" "4" ...
+  .. .. ..$ : chr [1:6] "(Intercept)" "salaryP" "fatherWc" "sstatus" ...
+  ..$ rank : int 6
+  ..$ qraux: num [1:6] 1.24 1.03 1.12 1.11 1.09 ...
+  ..$ pivot: int [1:6] 1 2 3 4 5 6
+  ..- attr(*, "class")= chr "qr"
+ $ rank          : int 6
+ $ ostats        : num [1, 1:4] 20 1 0.05 0.882
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr "Overall"
+  .. ..$ : chr [1:4] "N.nonzero" "N.rejected" "Ratio" "Mean.RobWeight"
+ $ cov           : num [1:6, 1:6] 45.059 -0.0774 0.0405 0.1712 -0.4575 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:6] "(Intercept)" "salaryP" "fatherWc" "sstatus" ...
+  .. ..$ : chr [1:6] "(Intercept)" "salaryP" "fatherWc" "sstatus" ...
+  ..- attr(*, "weights")= Named num [1:20] 0.997 0.998 0.149 0.973 0.959 ...
+  .. ..- attr(*, "names")= chr [1:20] "1" "2" "3" "4" ...
+  ..- attr(*, "eigen")=List of 2
+  .. ..$ values : num [1:6] 4.58e+01 2.04e-01 8.48e-02 5.29e-04 5.22e-05 ...
+  .. ..$ vectors: num [1:6, 1:6] 0.99167 -0.00181 0.0009 0.00376 -0.01001 ...
+ $ df.residual   : int 14
+ $ degree.freedom: int 14
+ $ xlevels       : Named list()
+ $ call          : language lmrob(formula = Y ~ ., data = coleman, control = lmrob.control(refine.tol = 1e-08,      rel.tol = 1e-09))
+ $ terms         :Classes 'terms', 'formula' length 3 Y ~ salaryP + fatherWc + sstatus + teacherSc + motherLev
+  .. ..- attr(*, "variables")= language list(Y, salaryP, fatherWc, sstatus, teacherSc, motherLev)
+  .. ..- attr(*, "factors")= int [1:6, 1:5] 0 1 0 0 0 0 0 0 1 0 ...
+  .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. ..$ : chr [1:6] "Y" "salaryP" "fatherWc" "sstatus" ...
+  .. .. .. ..$ : chr [1:5] "salaryP" "fatherWc" "sstatus" "teacherSc" ...
+  .. ..- attr(*, "term.labels")= chr [1:5] "salaryP" "fatherWc" "sstatus" "teacherSc" ...
+  .. ..- attr(*, "order")= int [1:5] 1 1 1 1 1
+  .. ..- attr(*, "intercept")= int 1
+  .. ..- attr(*, "response")= int 1
+  .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+  .. ..- attr(*, "predvars")= language list(Y, salaryP, fatherWc, sstatus, teacherSc, motherLev)
+  .. ..- attr(*, "dataClasses")= Named chr [1:6] "numeric" "numeric" "numeric" "numeric" ...
+  .. .. ..- attr(*, "names")= chr [1:6] "Y" "salaryP" "fatherWc" "sstatus" ...
+ $ assign        : int [1:6] 0 1 2 3 4 5
+ $ model         :'data.frame':	20 obs. of  6 variables:
+  ..$ Y        : num [1:20] 37 26.5 36.5 40.7 37.1 ...
+  ..$ salaryP  : num [1:20] 3.83 2.89 2.86 2.92 3.06 2.07 2.52 2.45 3.13 2.44 ...
+  ..$ fatherWc : num [1:20] 28.9 20.1 69 65.4 29.6 ...
+  ..$ sstatus  : num [1:20] 7.2 -11.71 12.32 14.28 6.31 ...
+  ..$ teacherSc: num [1:20] 26.6 24.4 25.7 25.7 25.4 ...
+  ..$ motherLev: num [1:20] 6.19 5.17 7.04 7.1 6.15 6.41 6.86 5.78 6.51 5.57 ...
+  ..- attr(*, "terms")=Classes 'terms', 'formula' length 3 Y ~ salaryP + fatherWc + sstatus + teacherSc + motherLev
+  .. .. ..- attr(*, "variables")= language list(Y, salaryP, fatherWc, sstatus, teacherSc, motherLev)
+  .. .. ..- attr(*, "factors")= int [1:6, 1:5] 0 1 0 0 0 0 0 0 1 0 ...
+  .. .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. .. ..$ : chr [1:6] "Y" "salaryP" "fatherWc" "sstatus" ...
+  .. .. .. .. ..$ : chr [1:5] "salaryP" "fatherWc" "sstatus" "teacherSc" ...
+  .. .. ..- attr(*, "term.labels")= chr [1:5] "salaryP" "fatherWc" "sstatus" "teacherSc" ...
+  .. .. ..- attr(*, "order")= int [1:5] 1 1 1 1 1
+  .. .. ..- attr(*, "intercept")= int 1
+  .. .. ..- attr(*, "response")= int 1
+  .. .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+  .. .. ..- attr(*, "predvars")= language list(Y, salaryP, fatherWc, sstatus, teacherSc, motherLev)
+  .. .. ..- attr(*, "dataClasses")= Named chr [1:6] "numeric" "numeric" "numeric" "numeric" ...
+  .. .. .. ..- attr(*, "names")= chr [1:6] "Y" "salaryP" "fatherWc" "sstatus" ...
+ $ x             : num [1:20, 1:6] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:20] "1" "2" "3" "4" ...
+  .. ..$ : chr [1:6] "(Intercept)" "salaryP" "fatherWc" "sstatus" ...
+  ..- attr(*, "assign")= int [1:6] 0 1 2 3 4 5
+ - attr(*, "class")= chr "lmrob"
+> 
+> ## EX 2
+> gen <- function(n,p, n0, y0, x0, beta = rep(1, p))
++ {
++     stopifnot(n >= 1, p >= 1, n0 >= 0, length(beta) == p)
++     x <- matrix(rnorm(n*p),n,p) # iid x's
++     y <- x %*% beta + rnorm(n)
++     xc <- matrix(0,n0,p)
++     xc[,1] <- x0
++     xc <- xc + 0.1*matrix(rnorm(n0*p),n0,p)
++     x[1:n0,] <- xc
++     y[1:n0] <- y0 + .001*rnorm(n0)
++     list(x=x, y=y)
++ }
+> 
+> ## generate --a sample of  n  observations with	 p  variables
+> ## and 10% of outliers near (x1,y) = (10,10)
+> n <- 500 ; n0 <- n %/% 10
+> p <- 7 ## p = 20 is more impressive but too slow for "standard test"
+> set.seed(17)
+> a <- gen(n=n, p=p, n0= n0, y0=10, x0=10)
+> plot(a$x[,1], a$y, col = c(rep(2, n0), rep(1, n-n0)))
+> system.time( m1 <- lmrob(y~x, data = a,
++                          control = lmrob.control(compute.rd = TRUE)))
+   user  system elapsed 
+  0.219   0.001   0.220 
+> plot(m1, ask=FALSE)
+> ##-> currently 5 plots; MM:I  don't like #3 (Response vs fitted)
+> 
+> ## don't compute robust distances --> faster by factor of two:
+> system.time(m2 <- lmrob(y~x, data = a,
++ 			control = lmrob.control(compute.rd = FALSE)))
+   user  system elapsed 
+  0.094   0.000   0.094 
+> ## ==> half of the CPU time is spent in covMcd()!
+> (sm2 <- summary(m2))
+
+Call:
+lmrob(formula = y ~ x, data = a, control = lmrob.control(compute.rd = FALSE))
+ \--> method = "MM"
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.23227 -0.57482 -0.02026  0.58538  3.05713 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.069695   0.048978  -1.423    0.155    
+x1           1.010165   0.006207 162.745   <2e-16 ***
+x2           1.002256   0.055672  18.003   <2e-16 ***
+x3           1.046361   0.042791  24.453   <2e-16 ***
+x4           0.981888   0.051171  19.189   <2e-16 ***
+x5           0.982896   0.048832  20.128   <2e-16 ***
+x6           0.965502   0.052049  18.550   <2e-16 ***
+x7           0.955451   0.047380  20.166   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Robust residual standard error: 0.8586 
+Multiple R-squared:  0.9505,	Adjusted R-squared:  0.9498 
+Convergence in 11 IRWLS iterations
+
+Robustness weights: 
+ 53 weights are ~= 1. The remaining 447 ones are summarized as
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1256  0.8434  0.9480  0.8902  0.9834  0.9988 
+Algorithmic parameters: 
+       tuning.chi                bb        tuning.psi        refine.tol 
+        1.548e+00         5.000e-01         4.685e+00         1.000e-07 
+          rel.tol         solve.tol       eps.outlier             eps.x 
+        1.000e-07         1.000e-07         2.000e-04         1.849e-11 
+warn.limit.reject warn.limit.meanrw 
+        5.000e-01         5.000e-01 
+     nResample         max.it       best.r.s       k.fast.s          k.max 
+           500             50              2              1            200 
+   maxit.scale      trace.lev            mts     compute.rd fast.s.large.n 
+           200              0           1000              0           2000 
+                  psi           subsampling                   cov 
+           "bisquare"         "nonsingular"         ".vcov.avar1" 
+compute.outlier.stats 
+                 "SM" 
+seed : int(0) 
+> l1 <- lm(y~x, data = a)
+> cbind(robust = coef(sm2)[,1:2],
++       lm = coef(summary(l1))[,1:2])
+              Estimate  Std. Error    Estimate Std. Error
+(Intercept) -0.0696951 0.048978295 -0.06133801 0.04454719
+x1           1.0101652 0.006207058  1.01097178 0.01331056
+x2           1.0022557 0.055672376  1.00599464 0.04711466
+x3           1.0463613 0.042790946  1.05389472 0.04345721
+x4           0.9818880 0.051170606  0.97464149 0.04589748
+x5           0.9828961 0.048831700  0.97651308 0.04520877
+x6           0.9655017 0.052048981  0.96406829 0.04649292
+x7           0.9554508 0.047379550  0.97035222 0.04833233
+> 
+> m2.S1 <- with(a, lmrob.S(cbind(1,x), y, trace.lev = 2,
++ 			 ## trace.lev = 2 : quite a bit of output
++ 			 control= lmrob.control(seed = .Random.seed,
++ 			 nRes = 80, k.max = 20, refine.tol = 1e-4)))
+lmrob_S(n = 500, nRes = 80): fast_s() [non-large n]:
+ Subsampling to find candidate betas:
+  Sample[  0]: found new candidate with scale 1.161317
+               worst scale is now 1e+20
+  Sample[  1]: found new candidate with scale 1.065397
+               worst scale is now 1.161317
+  Sample[  2]: found new candidate with scale 1.075149
+               worst scale is now 1.075149
+  Sample[  5]: found new candidate with scale 1.06581
+               worst scale is now 1.06581
+  Sample[  7]: found new candidate with scale 0.9309233
+               worst scale is now 1.065397
+  Sample[  8]: found new candidate with scale 0.9191822
+               worst scale is now 0.9309233
+  Sample[ 11]: found new candidate with scale 0.8915193
+               worst scale is now 0.9191822
+  Sample[ 35]: found new candidate with scale 0.9027488
+               worst scale is now 0.9027488
+  Sample[ 37]: found new candidate with scale 0.8852276
+               worst scale is now 0.8915193
+  Sample[ 43]: found new candidate with scale 0.8866425
+               worst scale is now 0.8866425
+ Now refine() to convergence for 2 very best ones:
+  Best[0]: NON convergence (20 iter.): -> improved scale to 0.858703595730513
+  Best[1]: NON convergence (20 iter.): -> improved scale to 0.858699565787582
+Warning messages:
+1: In lmrob.S(cbind(1, x), y, trace.lev = 2, control = lmrob.control(seed = .Random.seed,  :
+  S refinements did not converge (to refine.tol=0.0001) in 20 (= k.max) steps
+2: In lmrob.S(cbind(1, x), y, trace.lev = 2, control = lmrob.control(seed = .Random.seed,  :
+  S refinements did not converge (to refine.tol=0.0001) in 20 (= k.max) steps
+> S.ctrl <- lmrob.control(seed = .Random.seed,## << keeps .Random.seed unchanged
++ 			nResample = 1000, best.r.s = 15, refine.tol = 1e-9)
+> m2.S <- with(a, lmrob.S(cbind(1,x), y, control = S.ctrl, trace.lev = 1))
+lmrob_S(n = 500, nRes = 1000): fast_s() [non-large n]:
+ Subsampling to find candidate betas:
+ Now refine() to convergence for 15 very best ones:
+  Best[0]: convergence (71 iter.): -> improved scale to 0.858631320237634
+  Best[1]: convergence (74 iter.): -> improved scale to 0.858631320237628
+  Best[2]: convergence (74 iter.)
+  Best[3]: convergence (67 iter.)
+  Best[4]: convergence (71 iter.)
+  Best[5]: convergence (73 iter.)
+  Best[6]: convergence (74 iter.)
+  Best[7]: convergence (72 iter.)
+  Best[8]: convergence (73 iter.)
+  Best[9]: convergence (72 iter.)
+  Best[10]: convergence (71 iter.)
+  Best[11]: convergence (74 iter.)
+  Best[12]: convergence (73 iter.)
+  Best[13]: convergence (73 iter.)
+  Best[14]: convergence (72 iter.)
+> str(m2.S)
+List of 8
+ $ coefficients : num [1:8] -0.259 1.028 1.014 1.055 1.035 ...
+ $ scale        : num 0.859
+ $ k.iter       : int 74
+ $ converged    : logi TRUE
+ $ fitted.values: num [1:500, 1] 10.42 10.18 10.08 10.04 9.79 ...
+ $ residuals    : num [1:500] -0.4212 -0.1786 -0.0814 -0.0419 0.2086 ...
+ $ rweights     : num [1:500] 0.809 0.964 0.993 0.998 0.951 ...
+ $ control      :List of 32
+  ..$ setting              : NULL
+  ..$ seed                 : int [1:626] 403 509 -1283519226 636186973 -330156094 1300154068 -1830358209 319137397 -2123499503 -1237584607 ...
+  ..$ nResample            : num 1000
+  ..$ psi                  : chr "bisquare"
+  ..$ tuning.chi           : num 1.55
+  ..$ bb                   : num 0.5
+  ..$ tuning.psi           : num 4.69
+  ..$ max.it               : num 50
+  ..$ groups               : num 5
+  ..$ n.group              : num 400
+  ..$ best.r.s             : num 15
+  ..$ k.fast.s             : num 1
+  ..$ k.max                : num 200
+  ..$ maxit.scale          : num 200
+  ..$ k.m_s                : num 20
+  ..$ refine.tol           : num 1e-09
+  ..$ rel.tol              : num 1e-07
+  ..$ solve.tol            : num 1e-07
+  ..$ trace.lev            : num 0
+  ..$ mts                  : num 1000
+  ..$ subsampling          : chr "nonsingular"
+  ..$ compute.rd           : logi FALSE
+  ..$ method               : chr "S"
+  ..$ numpoints            : num 10
+  ..$ cov                  : chr ".vcov.avar1"
+  ..$ split.type           : chr "f"
+  ..$ fast.s.large.n       : num 2000
+  ..$ eps.outlier          :function (nobs)  
+  ..$ eps.x                :function (maxx)  
+  ..$ compute.outlier.stats: chr "SM"
+  ..$ warn.limit.reject    : num 0.5
+  ..$ warn.limit.meanrw    : num 0.5
+ - attr(*, "class")= chr "lmrob.S"
+> 
+> ##--- Now use n > 2000 --> so we use C internal fast_s_large_n(...)
+> n <- 2500 ; n0 <- n %/% 10
+> a2 <- gen(n=n, p = 3, n0= n0, y0=10, x0=10)
+> plot(a2$x[,1], a2$y, col = c(rep(2, n0), rep(1, n-n0)))
+> rs <- .Random.seed
+> system.time( m3 <- lmrob(y~x, data = a2) )
+   user  system elapsed 
+  0.252   0.002   0.255 
+> m3
+
+Call:
+lmrob(formula = y ~ x, data = a2)
+ \--> method = "MM"
+Coefficients:
+(Intercept)           x1           x2           x3  
+   -0.05109      1.00597      1.00320      0.98333  
+
+> nrs <- .Random.seed # <-- to check that using 'seed' keeps .Random.seed
+> system.time( m4 <- lmrob(y~x, data = a2, seed = rs, compute.rd = FALSE))
+   user  system elapsed 
+  0.247   0.001   0.249 
+> (sm4 <- summary(m4))
+
+Call:
+lmrob(formula = y ~ x, data = a2, seed = rs, compute.rd = FALSE)
+ \--> method = "MM"
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-3.273922 -0.609079  0.004044  0.599186  3.756129 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.051089   0.022138  -2.308   0.0211 *  
+x1           1.005971   0.002865 351.164   <2e-16 ***
+x2           1.003201   0.022023  45.552   <2e-16 ***
+x3           0.983326   0.021809  45.088   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Robust residual standard error: 0.8909 
+Multiple R-squared:  0.9372,	Adjusted R-squared:  0.9371 
+Convergence in 9 IRWLS iterations
+
+Robustness weights: 
+ 254 weights are ~= 1. The remaining 2246 ones are summarized as
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.03617 0.85010 0.94580 0.89450 0.98780 0.99900 
+Algorithmic parameters: 
+       tuning.chi                bb        tuning.psi        refine.tol 
+        1.548e+00         5.000e-01         4.685e+00         1.000e-07 
+          rel.tol         solve.tol       eps.outlier             eps.x 
+        1.000e-07         1.000e-07         4.000e-05         1.866e-11 
+warn.limit.reject warn.limit.meanrw 
+        5.000e-01         5.000e-01 
+     nResample         max.it       best.r.s       k.fast.s          k.max 
+           500             50              2              1            200 
+   maxit.scale      trace.lev            mts     compute.rd fast.s.large.n 
+           200              0           1000              0           2000 
+                  psi           subsampling                   cov 
+           "bisquare"         "nonsingular"         ".vcov.avar1" 
+compute.outlier.stats 
+                 "SM" 
+seed : int [1:626] 403 45 298829980 1661850913 385685865 ...
+> 
+> ## random seed must be the same because we used	 'seed = *' :
+> stopifnot(nrs == .Random.seed, identical(coef(m3), coef(m4)))
+> 
+> dput(signif(cf <- unname(coef(m3)), 7))
+c(-0.05108914, 1.005971, 1.003201, 0.9833263)
+> ## 2012-06-04:c(-0.05108914, 1.005971, 1.003201, 0.9833263) - 32 AND 64 bit
+> ##
+> ## 0.2-0: c(0.007446546, 1.000712, 1.027921, 0.9896527)
+> ## 0.2-1: c(0.03148659, 0.9980933, 1.016364, 1.03243)
+> ## both for 32 and 64 bit
+> 
+> dput(signif(100 * (sd <- unname(coef(sm4)[, "Std. Error"])), 7))
+c(2.213815, 0.2864678, 2.202318, 2.180886)
+> ## 2012-06-04:c(2.213815, 0.2864678, 2.202318, 2.180886) - 32 AND 64 bit
+> ##
+> ## 0.2-0: c(2.219388, 0.274644,  2.196982, 2.26253)
+> ## 0.2-1: c(2.194914, 0.2737579, 2.371728, 2.206261)
+> ## both for 32 and 64 bit
+> 
+> stopifnot(
++ 	  all.equal(cf, c(-0.05108914, 1.00597115, 1.00320052, 0.98332632), tolerance= 7e-7)
++ 	  , # ... e-7	 needed on 64b
++ 	  all.equal(100*sd,c(2.2138147, 0.2864678, 2.2023182, 2.1808862),tolerance= 7e-7)
++ 	  ) # 1.334 e-7	 needed on 64b
+> 
+> cat('Time elapsed: ', proc.time(),'\n') # "stats"
+Time elapsed:  4.029 0.127 4.171 0.002 0.004 
+> 
+> ## rm(a,m1, m2, m3, m4, sm2, l1)
+> 
+> ## Small examples from R-SIG-robust
+> 
+> ## First example from René Locher :
+> dat1 <- data.frame(lconc= log(c(21.8, 23.7, 12.2, 38.5, 21, 38.9)),
++                    dist =     c( 100, 180,  280,  30,  220,  6))
+> m5 <- lmrob(lconc ~ dist, data = dat1)
+Warning messages:
+1: In lmrob.S(x, y, control = control, mf = mf) :
+  S refinements did not converge (to refine.tol=1e-07) in 200 (= k.max) steps
+2: In lmrob.S(x, y, control = control, mf = mf) :
+  S refinements did not converge (to refine.tol=1e-07) in 200 (= k.max) steps
+> ## Warning messages:
+> ## ... S refinements did not converge (to tol=1e-07) in 200 iterations
+> ##  "  "     "
+> m5$init.S$converged # FALSE
+NULL
+> m5. <- lmrob(lconc ~ dist, data = dat1,
++              control = lmrob.control(refine.tol = 1e-5))
+> m5.$init.S$converged # TRUE
+[1] TRUE
+> ## gives TRUE as the IRWLS iterations after the lmrob.S() have converged.
+> 
+> ## 2nd example from René Locher , 6 Jun 2007
+> 
+> dat2 <- data.frame(lconc=log(c(29.5,40.1,21.1,25.3,27.3,25.2,26.9,19.1,16.4)),
++                      dist =    c(520, 1480,1780, 740, 540,1050,1100,1640,1860))
+> 
+> res2 <- lmrob(lconc~dist, data = dat2)
+> 
+> ## Used to give Warning messages:
+> ## 1: rwls(): not converged in 1000 lambda iterations
+> ## ...
+> ## 4: rwls(): ............
+> 
+> res2 <- lmrob(lconc~dist, data = dat2, trace.lev = 3)
+lmrob_S(n = 9, nRes = 500): fast_s() [non-large n]:
+ Subsampling to find candidate betas:
+  Sample[  0]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[  0]: found new candidate with scale 0.344467
+               worst scale is now 1e+20
+  Sample[  1]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[  1]: found new candidate with scale 0.3332609
+               worst scale is now 0.344467
+  Sample[  2]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[  2]: found new candidate with scale 0.1482924
+               worst scale is now 0.3332609
+  Sample[  3]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[  3]: found new candidate with scale 0.1406855
+               worst scale is now 0.1482924
+  Sample[  4]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[  4]: found new candidate with scale 0.139334
+               worst scale is now 0.1406855
+  Sample[  5]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[  5]: found new candidate with scale 0.1396233
+               worst scale is now 0.1396233
+  Sample[  6]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[  7]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[  8]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[  9]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352799
+  Sample[ 10]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[ 11]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[ 12]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[ 13]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[ 14]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936193
+  Sample[ 15]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670877
+  Sample[ 16]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[ 17]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286354
+  Sample[ 18]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[ 19]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[ 20]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575616
+  Sample[ 21]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[ 22]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[ 23]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[ 24]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[ 25]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[ 26]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[ 27]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352799
+  Sample[ 28]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286351
+  Sample[ 29]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[ 30]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347803
+  Sample[ 31]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670878
+  Sample[ 32]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[ 33]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[ 34]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[ 34]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[ 35]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11783529164527
+  Sample[ 36]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 37]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[ 38]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[ 39]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[ 40]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[ 41]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[ 42]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[ 42]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[ 43]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335158
+  Sample[ 44]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[ 45]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[ 46]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670878
+  Sample[ 47]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 48]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[ 49]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 50]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[ 51]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 52]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[ 53]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[ 54]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747765
+  Sample[ 55]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936193
+  Sample[ 56]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[ 56]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[ 57]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[ 58]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 59]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[ 60]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[ 61]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407237
+  Sample[ 62]: after refine_(*, conv=FALSE):
+   beta_ref : 3.464117 -0.000223 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.19816510114644
+  Sample[ 63]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[ 64]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 65]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[ 66]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670878
+  Sample[ 67]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[ 68]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[ 68]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[ 69]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 70]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[ 71]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[ 72]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[ 73]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[ 74]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335159
+  Sample[ 75]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[ 76]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[ 77]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[ 78]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[ 79]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[ 80]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[ 81]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[ 82]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670878
+  Sample[ 83]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[ 84]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[ 85]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352799
+  Sample[ 86]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347803
+  Sample[ 87]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[ 88]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[ 89]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[ 90]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[ 91]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[ 92]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347803
+  Sample[ 93]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[ 94]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747765
+  Sample[ 95]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[ 96]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575615
+  Sample[ 97]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[ 98]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[ 99]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[ 99]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[100]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[101]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670878
+  Sample[102]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[103]: after refine_(*, conv=FALSE):
+   beta_ref : 3.464117 -0.000223 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.19816510114644
+  Sample[104]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[105]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[106]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524694
+  Sample[107]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[108]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[109]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575615
+  Sample[110]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[111]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[112]: after refine_(*, conv=FALSE):
+   beta_ref : 3.464117 -0.000223 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.19816510114644
+  Sample[113]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[114]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[115]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[116]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[116]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[117]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[118]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524694
+  Sample[119]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936193
+  Sample[120]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[121]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335158
+  Sample[122]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11783529164527
+  Sample[123]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747765
+  Sample[124]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[125]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[126]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[127]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[128]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[129]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[130]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[131]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[132]: after refine_(*, conv=FALSE):
+   beta_ref : 3.464117 -0.000223 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.19816510114644
+  Sample[133]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[134]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[135]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[136]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[136]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[137]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[138]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286351
+  Sample[139]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[140]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[141]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[142]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[143]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[144]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[145]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936193
+  Sample[146]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[147]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[147]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[148]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670877
+  Sample[149]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335158
+  Sample[150]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524693
+  Sample[151]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[151]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[152]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[153]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[154]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[155]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[156]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[157]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[158]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[159]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[160]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[161]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[162]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[163]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[164]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[165]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[166]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[167]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[168]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[169]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[170]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335158
+  Sample[171]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524693
+  Sample[172]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[173]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[174]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[175]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[176]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[177]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[178]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[179]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[179]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[180]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[181]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[182]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407237
+  Sample[183]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[184]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[185]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[186]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[187]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[188]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[189]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[190]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[191]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[192]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335159
+  Sample[193]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[194]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[195]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352799
+  Sample[196]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[197]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[198]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[199]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[200]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[201]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[202]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[203]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[204]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[205]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[205]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[206]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[207]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524694
+  Sample[208]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[209]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[210]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[211]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[212]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[213]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747765
+  Sample[214]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[215]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[216]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524693
+  Sample[217]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[218]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[219]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[220]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[221]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[222]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[223]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[224]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[225]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[226]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[227]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575616
+  Sample[228]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347803
+  Sample[229]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[230]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286351
+  Sample[231]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[232]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[233]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[234]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[235]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[236]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[237]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575616
+  Sample[238]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[239]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[240]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347803
+  Sample[241]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936193
+  Sample[242]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[243]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[244]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[245]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[246]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[247]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335158
+  Sample[248]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[249]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286354
+  Sample[250]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[251]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[252]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[253]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[254]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[255]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[256]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[257]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347803
+  Sample[258]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[259]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[260]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[261]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[262]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[263]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[264]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[265]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[266]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[267]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[268]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[269]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[270]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[271]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[272]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[273]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[274]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[275]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[276]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[277]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[278]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[279]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[280]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[281]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575616
+  Sample[282]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[283]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936193
+  Sample[284]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[285]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[286]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[287]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11783529164527
+  Sample[288]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[289]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286354
+  Sample[290]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[291]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[292]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[293]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[294]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670877
+  Sample[295]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[296]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[297]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[298]: after refine_(*, conv=FALSE):
+   beta_ref : 3.464117 -0.000223 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.19816510114644
+  Sample[299]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[300]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[301]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[302]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[303]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770978
+  Sample[304]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[305]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[306]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11783529164527
+  Sample[307]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[308]: after refine_(*, conv=FALSE):
+   beta_ref : 3.533736 -0.000356 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.133070945020384
+  Sample[309]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[310]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[311]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[312]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[313]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[314]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[315]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524694
+  Sample[316]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[316]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[317]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[318]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[319]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747765
+  Sample[320]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770978
+  Sample[321]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[322]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[323]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[324]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[325]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[326]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[327]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936193
+  Sample[328]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[329]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524693
+  Sample[330]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524694
+  Sample[331]: after refine_(*, conv=FALSE):
+   beta_ref : 3.636283 -0.000399 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.332491263936194
+  Sample[332]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335159
+  Sample[333]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[334]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[335]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[336]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[337]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[338]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286354
+  Sample[339]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[340]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[341]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[342]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[343]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[344]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[345]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[346]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[347]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[348]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[348]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[349]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[350]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670878
+  Sample[351]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[352]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[353]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286351
+  Sample[354]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[355]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[355]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[356]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[357]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524693
+  Sample[358]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[359]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[360]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[361]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[362]: after refine_(*, conv=FALSE):
+   beta_ref : 3.533736 -0.000356 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.133070945020384
+  Sample[363]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[364]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[365]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[366]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575615
+  Sample[367]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335159
+  Sample[368]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[369]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[370]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[371]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[371]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[372]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[373]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[374]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[375]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[376]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286354
+  Sample[377]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[378]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[379]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286351
+  Sample[380]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[381]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[382]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[383]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[384]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335159
+  Sample[385]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[386]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[387]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[388]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[389]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[390]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[391]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[392]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[393]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[394]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[395]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[396]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[397]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[398]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[399]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[400]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[401]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335158
+  Sample[402]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[403]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575616
+  Sample[404]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256255
+  Sample[405]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347805
+  Sample[406]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286354
+  Sample[407]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[408]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[409]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[410]: after refine_(*, conv=FALSE):
+   beta_ref : 3.464117 -0.000223 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.19816510114644
+  Sample[411]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[412]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[412]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[413]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[414]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670877
+  Sample[415]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[416]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[417]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352798
+  Sample[418]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770978
+  Sample[419]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770978
+  Sample[420]: after refine_(*, conv=FALSE):
+   beta_ref : 3.388063 -0.000125 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.139721694670877
+  Sample[421]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[422]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[423]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[424]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[425]: after refine_(*, conv=FALSE):
+   beta_ref : 3.773408 -0.000409 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.48307163299276
+  Sample[426]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[427]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[428]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[429]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[430]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[431]: after refine_(*, conv=FALSE):
+   beta_ref : 3.615081 -0.000386 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.305322195350865
+  Sample[432]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[433]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[434]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[435]: after refine_(*, conv=FALSE):
+   beta_ref : 3.111399 0.000293 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.464112043352799
+  Sample[436]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[437]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[438]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575616
+  Sample[439]: after refine_(*, conv=FALSE):
+   beta_ref : 3.563851 -0.000379 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116488540165413
+  Sample[440]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[441]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[442]: after refine_(*, conv=FALSE):
+   beta_ref : 3.610966 -0.000384 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.320662217347803
+  Sample[443]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[443]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[444]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286354
+  Sample[445]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770978
+  Sample[446]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[447]: after refine_(*, conv=FALSE):
+   beta_ref : 3.041807 0.000340 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.356675422140901
+  Sample[448]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335158
+  Sample[449]: after refine_(*, conv=FALSE):
+   beta_ref : 3.533736 -0.000356 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.133070945020384
+  Sample[450]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[451]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[452]: after refine_(*, conv=FALSE):
+   beta_ref : 3.564934 -0.000393 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.117835291645271
+  Sample[453]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575615
+  Sample[454]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[455]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[456]: after refine_(*, conv=FALSE):
+   beta_ref : 3.337515 -0.000032 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.14824462812187
+  Sample[457]: after refine_(*, conv=FALSE):
+   beta_ref : 3.481389 -0.000245 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121738787335159
+  Sample[458]: after refine_(*, conv=FALSE):
+   beta_ref : 3.106538 0.000297 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.40357348878187
+  Sample[459]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[460]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575616
+  Sample[461]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[462]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[463]: after refine_(*, conv=FALSE):
+   beta_ref : 3.432132 -0.000177 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 3.74570294286351
+  Sample[464]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645834
+  Sample[465]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407237
+  Sample[466]: after refine_(*, conv=FALSE):
+   beta_ref : 3.692743 -0.000361 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.9749683192758
+  Sample[467]: after refine_(*, conv=FALSE):
+   beta_ref : 3.444725 -0.000210 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.123125596770977
+  Sample[468]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[469]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[470]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[471]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[472]: after refine_(*, conv=FALSE):
+   beta_ref : 3.709124 -0.000370 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.91452667528465
+  Sample[473]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[474]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[475]: after refine_(*, conv=FALSE):
+   beta_ref : 3.545942 -0.000350 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.480502647256254
+  Sample[476]: after refine_(*, conv=FALSE):
+   beta_ref : 3.492704 -0.000266 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.130143082552614
+  Sample[477]: after refine_(*, conv=FALSE):
+   beta_ref : 3.470386 -0.000238 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.116747746524693
+  Sample[478]: after refine_(*, conv=FALSE):
+   beta_ref : 3.458969 -0.000236 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120959536153626
+  Sample[479]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[479]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[480]: after refine_(*, conv=FALSE):
+   beta_ref : 3.600226 -0.000389 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.201240726019571
+  Sample[481]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[482]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575615
+  Sample[483]: after refine_(*, conv=FALSE):
+   beta_ref : 3.538557 -0.000314 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.238641191575615
+  Sample[484]: after refine_(*, conv=FALSE):
+   beta_ref : 3.721733 -0.000378 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 2.04182763972269
+  Sample[485]: after refine_(*, conv=FALSE):
+   beta_ref : 3.460379 -0.000230 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.244797602645835
+  Sample[486]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544856 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.11918982437089
+  Sample[487]: after refine_(*, conv=FALSE):
+   beta_ref : 3.323747 -0.000016 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.976715960674785
+  Sample[488]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[489]: after refine_(*, conv=FALSE):
+   beta_ref : 3.530024 -0.000351 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.140681149005818
+  Sample[490]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[491]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544864 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.120473709407238
+  Sample[492]: after refine_(*, conv=FALSE):
+   beta_ref : 3.533736 -0.000356 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.133070945020384
+  Sample[493]: after refine_(*, conv=FALSE):
+   beta_ref : 3.307274 0.000004 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.941601727511272
+  Sample[494]: after refine_(*, conv=FALSE):
+   beta_ref : 3.476473 -0.000261 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.175333907830266
+  Sample[494]: found new candidate with scale 0.139334
+               worst scale is now 0.139334
+  Sample[495]: after refine_(*, conv=FALSE):
+   beta_ref : 3.544964 -0.000385 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.121287470523952
+  Sample[496]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747766
+  Sample[497]: after refine_(*, conv=FALSE):
+   beta_ref : 3.578952 -0.000315 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 1.15529626402084
+  Sample[498]: after refine_(*, conv=FALSE):
+   beta_ref : 3.328713 -0.000041 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.324267727125527
+  Sample[499]: after refine_(*, conv=FALSE):
+   beta_ref : 3.603612 -0.000391 
+   with ||beta_ref - beta_cand|| = 0, --> sc = 0.158407465747765
+ Now refine() to convergence for 2 very best ones:
+  Best[0]: convergence (38 iter.): -> improved scale to 0.139029300617593
+  Best[1]: convergence (38 iter.)
+lmrob_MM(): rwls():
+  it    1: L(b1) = 0.149600261053  ||b0 - b1||_1 = 0.051216
+  it    2: L(b1) = 0.149351500476  ||b0 - b1||_1 = 0.00526939
+  it    3: L(b1) = 0.149348312406  ||b0 - b1||_1 = 0.000586739
+  it    4: L(b1) = 0.149348277661  ||b0 - b1||_1 = 6.27255e-05
+  it    5: L(b1) = 0.149348277289  ||b0 - b1||_1 = 6.55271e-06
+  it    6: L(b1) = 0.149348277285  ||b0 - b1||_1 = 6.79128e-07
+  it    7: L(b1) = 0.149348277285  ||b0 - b1||_1 = 7.02146e-08
+ rwls() used 7 it.; last ||b0 - b1||_1 = 7.02146e-08; convergence
+> ##                                     -------------
+> summary(res2)
+
+Call:
+lmrob(formula = lconc ~ dist, data = dat2, trace.lev = 3)
+ \--> method = "MM"
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.12000 -0.05328  0.01751  0.10515  0.64659 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  3.541e+00  5.832e-02  60.719 8.63e-11 ***
+dist        -3.355e-04  5.926e-05  -5.662 0.000765 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Robust residual standard error: 0.139 
+Multiple R-squared:  0.7992,	Adjusted R-squared:  0.7705 
+Convergence in 7 IRWLS iterations
+
+Robustness weights: 
+        1         2         3         4         5         6         7         8 
+0.9985547 0.0002126 0.9485630 0.9818111 0.9866628 0.9932793 0.9334365 0.9919324 
+        9 
+0.9332658 
+Algorithmic parameters: 
+       tuning.chi                bb        tuning.psi        refine.tol 
+        1.548e+00         5.000e-01         4.685e+00         1.000e-07 
+          rel.tol         solve.tol       eps.outlier             eps.x 
+        1.000e-07         1.000e-07         1.111e-02         3.383e-09 
+warn.limit.reject warn.limit.meanrw 
+        5.000e-01         5.000e-01 
+     nResample         max.it       best.r.s       k.fast.s          k.max 
+           500             50              2              1            200 
+   maxit.scale      trace.lev            mts     compute.rd fast.s.large.n 
+           200              3           1000              0           2000 
+                  psi           subsampling                   cov 
+           "bisquare"         "nonsingular"         ".vcov.avar1" 
+compute.outlier.stats 
+                 "SM" 
+seed : int(0) 
+> stopifnot(dim(model.matrix(res2)) == c(9,2))
+> 
+> ## Check predict():
+> dd <- seq(300, 2000, by = 50)
+> with(dat2, plot(dist, lconc, pch=20, cex=2, xlim = range(dd)))
+> new.d <- data.frame(dist=dd)
+> fit.dd <- predict(res2, new.d)
+> lines(dd, fit.dd, col=2, type="o")
+> predict(res2, new.d, se=TRUE)$se.fit
+         1          2          3          4          5          6          7 
+0.04288955 0.04050449 0.03820038 0.03599279 0.03390056 0.03194638 0.03015709 
+         8          9         10         11         12         13         14 
+0.02856371 0.02720067 0.02610408 0.02530860 0.02484319 0.02472647 0.02496334 
+        15         16         17         18         19         20         21 
+0.02554397 0.02644572 0.02763719 0.02908277 0.03074666 0.03259544 0.03459947 
+        22         23         24         25         26         27         28 
+0.03673337 0.03897581 0.04130911 0.04371873 0.04619272 0.04872129 0.05129636 
+        29         30         31         32         33         34         35 
+0.05391126 0.05656048 0.05923941 0.06194420 0.06467160 0.06741886 0.07018366 
+> matlines(dd, predict(res2, new.d, interval="confidence")[, 2:3], col=3)
+> 
+> ## Check handling of X of not full rank
+> test <- function(n, ...) {
++     X <- matrix(c(rep(1:3, length.out = n), rnorm(2*n)), n, 4)
++     y <- rnorm(n)
++     X[,4] <- X[,2] + X[,3]
++     X <- data.frame(X)
++     X$X1 <- factor(X$X1)
++     fail <- suppressWarnings(try(lmrob(y ~ ., X, ...), silent=TRUE))
++     stopifnot(is(fail, "lmrob"))
++ }
+> set.seed(0)
+> test(12) ## fast_S()
+> test(2500) ## fast_S_large_n()
+> test(200, trace.lev = TRUE)
+lmrob_S(n = 200, nRes = 500): fast_s() [non-large n]:
+ Subsampling to find candidate betas:
+ Now refine() to convergence for 2 very best ones:
+  Best[0]: convergence (133 iter.): -> improved scale to 1.09164246979446
+  Best[1]: convergence (138 iter.): -> improved scale to 1.09164246979446
+lmrob_MM(): rwls():
+ rwls() used 11 it.; last ||b0 - b1||_1 = 3.40169e-08; convergence
+> 
+> ## Check a case, where cov() matrix needs "posdefify":
+> 
+> coleman16 <- coleman[ -c(2, 7, 16, 19),]
+> (m16 <- lmrob(Y ~ ., data = coleman16, tuning.psi = 3.44, trace.lev = TRUE))
+lmrob_S(n = 16, nRes = 500): fast_s() [non-large n]:
+ Subsampling to find candidate betas:
+ Now refine() to convergence for 2 very best ones:
+  Best[0]: convergence (21 iter.): -> improved scale to 1.14564991376911
+  Best[1]: convergence (20 iter.)
+lmrob_MM(): rwls():
+ rwls() used 9 it.; last ||b0 - b1||_1 = 2.67338e-06; convergence
+fixing 1 negative eigen([6])values
+
+Call:
+lmrob(formula = Y ~ ., data = coleman16, tuning.psi = 3.44, trace.lev = TRUE)
+ \--> method = "MM"
+Coefficients:
+(Intercept)      salaryP     fatherWc      sstatus    teacherSc    motherLev  
+   35.44786     -1.61002      0.08702      0.68195      1.14811     -4.92306  
+
+> ## failed in 0.9_0
+> 
+> assertWarning(
++  lmrob(Y ~ ., data = coleman, setting = "KS2011", control = lmrob.control())
++ )
+> 
+> cat('Time elapsed: ', proc.time(),'\n') # "stats"
+Time elapsed:  4.472 0.143 4.636 0.002 0.004 
+> 
+> proc.time()
+   user  system elapsed 
+  4.474   0.147   4.636 

@@ -1,0 +1,541 @@
+
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "userfriendlyscience"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "userfriendlyscience-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('userfriendlyscience')
+Loading required package: ggplot2
+Note: the specification for S3 class “family” in package ‘MatrixModels’ seems equivalent to one from package ‘lme4’: not turning on duplicate class definitions for this class.
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("userfriendlyscience-associationMatrix")
+> ### * userfriendlyscience-associationMatrix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: associationMatrix
+> ### Title: associationMatrix
+> ### Aliases: associationMatrix
+> ### Keywords: utilities univar
+> 
+> ### ** Examples
+> 
+> 
+> ### Generate a simple association matrix using all three variables in the
+> ### Orange tree dataframe
+> associationMatrix(Orange);
+                 1.             2.             3.
+1. Tree                                          
+                                                 
+2. age           e=[0; NA]                       
+                 e=0, p=1                        
+3. circumference e=[0; 0.19]    r=[0.83; 0.96]   
+                 e=0.11, p=.728 r=0.91, p<.001   
+> 
+> ### Or four variables from infert:
+> associationMatrix(infert, c("education", "parity",
++                             "induced", "case"), colNames=TRUE);
+          education      parity          induced         case
+education                                                    
+                                                             
+parity    e=[0.09; 0.23]                                     
+          e=0.16, p<.001                                     
+induced   e=[0.01; 0.08] r=[0.34; 0.54]                      
+          e=0.04, p=.011 r=0.45, p<.001                      
+case      e=[0; NA]      r=[-0.12; 0.13] r=[-0.11; 0.14]     
+          e=0, p=.999    r=0.01, p=.999  r=0.02, p=.999      
+> 
+> ### Use variable names in the columns and generate html
+> associationMatrix(Orange, colNames=TRUE, type='html');
+<!-- html table generated in R 3.2.3 by xtable 1.8-0 package -->
+<!-- Tue Dec 29 21:55:45 2015 -->
+<table cellpadding='5' style='border=0 solid;'>
+<tr> <th>  </th> <th> Tree </th> <th> age </th> <th> circumference </th>  </tr>
+  <tr> <td> Tree </td> <td align="center">  </td> <td align="center">  </td> <td align="center">  </td> </tr>
+  <tr> <td> <!-- Variable 1 --> </td> <td align="center">  </td> <td align="center">  </td> <td align="center">  </td> </tr>
+  <tr> <td> age </td> <td align="center"> e=[0; NA] </td> <td align="center">  </td> <td align="center">  </td> </tr>
+  <tr> <td> <!-- Variable 2 --> </td> <td align="center"> e=0, p=1 </td> <td align="center">  </td> <td align="center">  </td> </tr>
+  <tr> <td> circumference </td> <td align="center"> e=[0; 0.19] </td> <td align="center"> r=[0.83; 0.96] </td> <td align="center">  </td> </tr>
+  <tr> <td> <!-- Variable 3 --> </td> <td align="center"> e=0.11, p=.728 </td> <td align="center"> r=0.91, p<.001 </td> <td align="center">  </td> </tr>
+   </table>
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-associationMatrix", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-associationMatrixHelperFunctions")
+> ### * userfriendlyscience-associationMatrixHelperFunctions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: associationMatrix Helper Functions
+> ### Title: associationMatrix Helper Functions
+> ### Aliases: computeStatistic_t computeStatistic_r computeStatistic_f
+> ###   computeStatistic_chisq computeEffectSize_d computeEffectSize_r
+> ###   computeEffectSize_etasq computeEffectSize_v
+> ###   associationMatrixESDefaults associationMatrixStatDefaults
+> ### Keywords: utilities bivar
+> 
+> ### ** Examples
+> 
+> 
+> computeStatistic_f(Orange$Tree, Orange$circumference)
+$object
+Call:
+   aov(formula = dependent ~ factor)
+
+Terms:
+                   factor Residuals
+Sum of Squares   11840.86 100525.43
+Deg. of Freedom         4        30
+
+Residual standard error: 57.88651
+Estimated effects are balanced
+
+$statistic
+[1] 0.8834225
+
+$statistic.type
+[1] "f"
+
+$parameter
+[1]  4 30
+
+$p.raw
+[1] 0.4856567
+
+> computeEffectSize_etasq(Orange$Tree, Orange$circumference)
+$realConfidence
+[1] 0.9
+
+$object.aov
+Call:
+   aov(formula = dependent ~ factor)
+
+Terms:
+                   factor Residuals
+Sum of Squares   11840.86 100525.43
+Deg. of Freedom         4        30
+
+Residual standard error: 57.88651
+Estimated effects are balanced
+
+$es
+[1] 0.1053773
+
+$es.type
+[1] "etasq"
+
+$object
+$object$Lower.Limit.Proportion.of.Variance.Accounted.for
+[1] 0
+
+$object$Probability.Less.Lower.Limit
+[1] 0
+
+$object$Upper.Limit.Proportion.of.Variance.Accounted.for
+[1] 0.1947565
+
+$object$Probability.Greater.Upper.Limit
+[1] 0.05
+
+$object$Actual.Coverage
+[1] 0.95
+
+
+$ci
+[1] 0.0000000 0.1947565
+
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-associationMatrixHelperFunctions", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-basicSPSStranslationFunctions")
+> ### * userfriendlyscience-basicSPSStranslationFunctions
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: basicSPSStranslationFunctions
+> ### Title: Basic SPSS translation functions
+> ### Aliases: basicSPSStranslationFunctions getData getDat filterBy useAll
+> ###   mediaan modus
+> ### Keywords: utilities file univar
+> 
+> ### ** Examples
+> 
+> 
+> ### Open a dialogue to read an SPSS file
+> ### (wrapped in 'if (interactive())' to prevent execution during
+> ###  the testing of the examples when building the package)
+> if (interactive()) {
++   getData();
++ }
+> 
+> ### Get a median and a mode
+> mediaan(c(1,2,2,3,4,4,5,6,6,6,7));
+[1] 4
+> modus(c(1,2,2,3,4,4,5,6,6,6,7));
+[1] 6
+> 
+> ### Create an example dataframe
+> (exampleDat <- data.frame(x=rep(8, 8), y=rep(c(0,1), each=4)));
+  x y
+1 8 0
+2 8 0
+3 8 0
+4 8 0
+5 8 1
+6 8 1
+7 8 1
+8 8 1
+> ### Filter it, replacing the original dataframe
+> (filterBy(exampleDat, "y=0"));
+Filtered 4 rows (records, cases, participants, or datapoints) from dataframe 'exampleDat'; result has 4 rows.
+  x y
+1 8 0
+2 8 0
+3 8 0
+4 8 0
+> ### Restore the old dataframe
+> (useAll(exampleDat));
+Removed last applied filter to dataframe 'exampleDat', which was applied at 2015-12-29 21:55:45 and removed (filtered) 4 rows (records, cases, participants, or datapoints) from the dataframe that was originally called 'exampleDat'. Restored dataframe has 8 rows.
+Replaced filtered dataframe 'exampleDat'.
+  x y
+1 8 0
+2 8 0
+3 8 0
+4 8 0
+5 8 1
+6 8 1
+7 8 1
+8 8 1
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-basicSPSStranslationFunctions", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-confIntV")
+> ### * userfriendlyscience-confIntV
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: confIntV
+> ### Title: crossTab, confIntV and cramersV
+> ### Aliases: confIntV cramersV crossTab
+> ### Keywords: bivar
+> 
+> ### ** Examples
+> 
+> 
+> ### Get confidence interval for Cramer's V
+> ### Note that removing the 'table', and so providing raw data, would enable
+> ### bootstrapping, which can take a while.
+> confIntV(table(infert$education, infert$induced));
+Cramér's V 95% confidence interval (point estimate = 0.1826):
+Using Fisher's z: [0.05934, 0.3003]
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-confIntV", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-convert")
+> ### * userfriendlyscience-convert
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: convert
+> ### Title: convert functions
+> ### Aliases: convert convert.r.to.t convert.t.to.r convert.b.to.t
+> ###   convert.t.to.p convert.f.to.p convert.f.to.d convert.chisq.to.p
+> ###   convert.chisq.to.V
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> 
+> convert.t.to.r(t=-6.46, n=200);
+[1] -0.4172246
+> convert.r.to.t(r=-.41, n=200);
+[1] -6.325297
+> 
+> ### Compute some p-values
+> convert.t.to.p(4.2, 197);
+[1] 4.041281e-05
+> convert.chisq.to.p(5.2, 3);
+[1] 0.3154489
+> convert.f.to.p(8.93, 3, 644);
+[1] 1.6762e-05
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-convert", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-didacticPlot")
+> ### * userfriendlyscience-didacticPlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: didacticPlot
+> ### Title: didacticPlot
+> ### Aliases: didacticPlot didacticPlotTheme
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> didacticPlot(1, statistic='chisq', df1=2);
+> 
+> didacticPlot(1, statistic='t', df1=40);
+> 
+> didacticPlot(2.02, statistic='t', df1=40, textMarginFactor=25);
+> 
+> ### Two sample t-test for n1 = n2 = 250, showing
+> ### p-value of 5%
+> # a<-didacticPlot(1.96, statistic='t', df1=498);
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-didacticPlot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-dlvPlot")
+> ### * userfriendlyscience-dlvPlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: dlvPlot
+> ### Title: dlvPlot
+> ### Aliases: dlvPlot dlvTheme
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> ### Note: the 'not run' is simply because running takes a lot of time,
+> ###       but these examples are all safe to run!
+> ## Not run: 
+> ##D ### Create simple dataset
+> ##D dat <- data.frame(x1 = factor(rep(c(0,1), 20)),
+> ##D                   x2 = factor(c(rep(0, 20), rep(1, 20))),
+> ##D                   y=rep(c(4,5), 20) + rnorm(40));
+> ##D ### Generate a simple dlvPlot of y
+> ##D dlvPlot(dat, y='y');
+> ##D ### Now add a predictor
+> ##D dlvPlot(dat, x='x1', y='y');
+> ##D ### And finally also a moderator:
+> ##D dlvPlot(dat, x='x1', y='y', z='x2');
+> ##D ### The number of datapoints might be a bit clearer if we jitter
+> ##D dlvPlot(dat, x='x1', y='y', z='x2', jitter=TRUE);
+> ##D ### Although just dodging the density-sized dots might work better
+> ##D dlvPlot(dat, x='x1', y='y', z='x2', posDodge=.3);
+> ## End(Not run)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-dlvPlot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-freq")
+> ### * userfriendlyscience-freq
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: freq
+> ### Title: Freq
+> ### Aliases: freq
+> ### Keywords: univar
+> 
+> ### ** Examples
+> 
+> 
+> ### Create factor vector
+> ourFactor <- factor(mtcars$gear, levels=c(3,4,5),
++                     labels=c("three", "four", "five"));
+> ### Add some missing values
+> factorWithMissings <- ourFactor;
+> factorWithMissings[10] <- factorWithMissings[20] <- NA;
+> 
+> ### Show frequencies
+> freq(ourFactor);
+            Frequencies Perc.Total Perc.Valid Cumulative
+three                15       46.9       46.9       46.9
+four                 12       37.5       37.5       84.4
+five                  5       15.6       15.6      100.0
+Total valid          32      100.0      100.0           
+> freq(factorWithMissings);
+             Frequencies Perc.Total Perc.Valid Cumulative
+three                 15       46.9       50.0       50.0
+four                  10       31.2       33.3       83.3
+five                   5       15.6       16.7      100.0
+Total valid           30       93.8      100.0           
+NA (missing)           2        6.2                      
+Total                 32      100.0                      
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-freq", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-itemInspection")
+> ### * userfriendlyscience-itemInspection
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: itemInspection
+> ### Title: itemInspection
+> ### Aliases: itemInspection
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: 
+> ##D itemInspection(mtcars, items=c('disp', 'hp', 'drat'), pdfLaTexPath="valid/path/here");
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-itemInspection", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-meanDiff")
+> ### * userfriendlyscience-meanDiff
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: meanDiff
+> ### Title: meanDiff
+> ### Aliases: meanDiff
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> ### Create simple dataset
+> dat <- PlantGrowth[1:20,];
+> ### Remove third level from group factor
+> dat$group <- factor(dat$group);
+> ### Compute mean difference and show it
+> meanDiff(dat$weight ~ dat$group);
+Input variables:
+
+  dat$group (grouping variable)
+  dat$weight (dependent variable)
+  Mean 1 (ctrl) = 5.03, sd = 0.58, n = 10
+  Mean 2 (trt1)= 4.66, sd = 0.79, n = 10
+
+Independent samples t-test (tested for equal variances, p = .372, so equal variances)
+  (pooled standard deviation used, 0.7)
+
+95% confidence intervals:
+  Absolute mean difference: [-0.28, 1.03] (Absolute mean difference: 0.37)
+  Cohen's d for difference: [-0.36, 1.42] (Cohen's d point estimate: 0.53)
+  Hedges g for difference:  [-0.34, 1.36] (Hedges g point estimate:  0.51)
+
+Achieved power for d=0.53: 0.2038 (for small: 0.0708; medium: 0.1851; large: 0.3951)
+
+(secondary information (NHST): t[18] = 1.19, p = .249)
+> 
+> ### Look at second treatment
+> dat <- rbind(PlantGrowth[1:10,], PlantGrowth[21:30,]);
+> ### Remove third level from group factor
+> dat$group <- factor(dat$group);
+> ### Compute mean difference and show it
+> meanDiff(x=dat$group, y=dat$weight);
+Input variables:
+
+  dat$group (grouping variable)
+  dat$weight (dependent variable)
+  Mean 1 (ctrl) = 5.03, sd = 0.58, n = 10
+  Mean 2 (trt2)= 5.53, sd = 0.44, n = 10
+
+Independent samples t-test (tested for equal variances, p = .424, so equal variances)
+  (pooled standard deviation used, 0.52)
+
+95% confidence intervals:
+  Absolute mean difference: [-0.98, -0.01] (Absolute mean difference: -0.49)
+  Cohen's d for difference: [-1.88, -0.03] (Cohen's d point estimate: -0.95)
+  Hedges g for difference:  [-1.8, -0.03] (Hedges g point estimate:  -0.91)
+
+Achieved power for d=-0.95: 0.5238 (for small: 0.0708; medium: 0.1851; large: 0.3951)
+
+(secondary information (NHST): t[18] = -2.13, p = .047)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("userfriendlyscience-meanDiff", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("userfriendlyscience-meanDiff.multi")
+> ### * userfriendlyscience-meanDiff.multi
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: meanDiff.multi
+> ### Title: meanDiff.multi
+> ### Aliases: meanDiff.multi
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> ### Create simple dataset
+> dat <- data.frame(x1 = factor(rep(c(0,1), 20)),
++                   x2 = factor(c(rep(0, 20), rep(1, 20))),
++                   y=rep(c(4,5), 20) + rnorm(40));
+> ### Compute mean difference and show it
+> meanDiff.multi(dat, x=c('x1', 'x2'), y='y', var.equal="yes");
+Warning: `show_guide` has been deprecated. Please use `show.legend` instead.
+Error: Unknown parameters: size
+Execution halted
