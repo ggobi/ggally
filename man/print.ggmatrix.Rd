@@ -5,7 +5,8 @@
 \title{Print ggpair object}
 \usage{
 \method{print}{ggmatrix}(x, leftWidthProportion = 0.2,
-  bottomHeightProportion = 0.1, spacingProportion = 0.03, ...)
+  bottomHeightProportion = 0.1, spacingProportion = 0.03,
+  gridNewPage = TRUE, ...)
 }
 \arguments{
 \item{x}{ggpair object to be plotted}
@@ -15,6 +16,8 @@
 \item{bottomHeightProportion}{proportion of a plot area devoted to bottom axis labels}
 
 \item{spacingProportion}{proportion of a plot area devoted to the space between plots}
+
+\item{gridNewPage}{boolean that determines if a \code{grid.\link[grid]{newpage}()} should be executed before printing. Defaults to \code{TRUE}}
 
 \item{...}{ignored}
 }

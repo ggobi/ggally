@@ -79,6 +79,7 @@ first_non_null <- function(...) {
 #' @param leftWidthProportion proportion of a plot area devoted to left axis labels
 #' @param bottomHeightProportion proportion of a plot area devoted to bottom axis labels
 #' @param spacingProportion proportion of a plot area devoted to the space between plots
+#' @param gridNewPage boolean that determines if a \code{grid.\link[grid]{newpage}()} should be executed before printing. Defaults to \code{TRUE}
 #' @param ... ignored
 #' @method print ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -105,6 +106,7 @@ print.ggmatrix <- function(
   leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1,
   spacingProportion = 0.03,
+  gridNewPage = TRUE,
   ...
 ) {
 
@@ -166,7 +168,9 @@ print.ggmatrix <- function(
 
 ####################  Start Labels  #########################
 
-  grid.newpage()
+  if (identical(gridNewPage, TRUE)) {
+    grid.newpage()
+  }
 
   if(! is.null(x$title)) {
     if (x$title != "") {
