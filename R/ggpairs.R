@@ -549,12 +549,6 @@ mapping_color_fill <- function(current) {
 }
 
 
-#' Aesthetic Mapping Color Fill
-#'
-#' Replace the fill with the color and make color NULL.
-#'
-#' @param current the current aesthetics
-#' @keywords internal
 set_to_blank_list_if_blank <- function(val, combo = TRUE) {
   isBlank <- is.null(val)
   if (!isBlank) {
