@@ -17,7 +17,7 @@
 
 \item{spacingProportion}{proportion of a plot area devoted to the space between plots}
 
-\item{gridNewPage}{boolean that determines if a \code{grid.\link[grid]{newpage}()} should be executed before printing. Defaults to \code{TRUE}}
+\item{gridNewPage}{boolean that determines if a \code{\link[grid]{grid.newpage}()} should be executed before printing. Defaults to \code{TRUE}}
 
 \item{...}{ignored}
 }

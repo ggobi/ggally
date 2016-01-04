@@ -79,7 +79,7 @@ first_non_null <- function(...) {
 #' @param leftWidthProportion proportion of a plot area devoted to left axis labels
 #' @param bottomHeightProportion proportion of a plot area devoted to bottom axis labels
 #' @param spacingProportion proportion of a plot area devoted to the space between plots
-#' @param gridNewPage boolean that determines if a \code{grid.\link[grid]{newpage}()} should be executed before printing. Defaults to \code{TRUE}
+#' @param gridNewPage boolean that determines if a \code{\link[grid]{grid.newpage}()} should be executed before printing. Defaults to \code{TRUE}
 #' @param ... ignored
 #' @method print ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
