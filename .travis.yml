@@ -27,7 +27,6 @@ sudo: required
 #   - ./travis-tool.sh bootstrap
 
 r_github_packages:
-  - hadley/ggplot2  # tmp until released
   - jimhester/covr  # code coverage check
 
 # r_binary_packages: [rJava, igraph, minqa, nloptr, RcppEigen, colorspace, reshape2, proto, abind, coda, dichromat, labeling, brew, gtable, reshape, network, RColorBrewer, scagnostics, sna, lme4, munsell, arm, scales, ggplot2, cairoDevice, RGtk2, knitr]
