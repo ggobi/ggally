@@ -253,7 +253,7 @@ ggpairs <- function(
 
   upper <- set_to_blank_list_if_blank(upper)
   lower <- set_to_blank_list_if_blank(lower)
-  diag  <- set_to_blank_list_if_blank(diag, combo = FALSE)
+  diag  <- set_to_blank_list_if_blank(diag, combo = FALSE, blank = "blankDiag")
 
   upper <- check_and_set_ggpairs_defaults(
     "upper", upper,
@@ -549,25 +549,19 @@ mapping_color_fill <- function(current) {
 }
 
 
-#' Aesthetic Mapping Color Fill
-#'
-#' Replace the fill with the color and make color NULL.
-#'
-#' @param current the current aesthetics
-#' @keywords internal
-set_to_blank_list_if_blank <- function(val, combo = TRUE) {
+set_to_blank_list_if_blank <- function(val, combo = TRUE, blank = "blank") {
   isBlank <- is.null(val)
   if (!isBlank) {
-    isBlank <- (!is.list(val) && val == "blank")
+    isBlank <- (!is.list(val) && (val == blank || val == "blank"))
   }
   if (isBlank) {
     val <- list()
-    val$continuous <- "blank"
+    val$continuous <- blank
     if (combo) {
-      val$combo <- "blank"
+      val$combo <- blank
     }
-    val$discrete <- "blank"
-    val$na <- "blank"
+    val$discrete <- blank
+    val$na <- blank
   }
 
   val

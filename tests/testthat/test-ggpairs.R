@@ -229,8 +229,8 @@ test_that("subtypes", {
       comSub <- if(i <= length(comSubs)) comSubs[[i]] else "blank"
       disSub <- if(i <= length(disSubs)) disSubs[[i]] else "blank"
 
-      diagConSub <- if(i <= length(conDiagSubs)) conDiagSubs[[i]] else "blank"
-      diagDisSub <- if(i <= length(disDiagSubs)) disDiagSubs[[i]] else "blank"
+      diagConSub <- if(i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
+      diagDisSub <- if(i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
 
       if (i <= length(printShowStrips)) {
         printShowStrip <- printShowStrips[i]

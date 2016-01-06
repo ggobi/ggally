@@ -276,6 +276,9 @@ ggparcoord <- function(
 
   # Change factors to numeric
   fact.vars <- column_is_factor(data)
+  if(!is.null(groupColumn)) {
+    fact.vars <- fact.vars[fact.vars != groupCol]
+  }
   if (length(fact.vars) >= 1) {
     for (fact.var in fact.vars) {
       data[,fact.var] <- as.numeric(data[,fact.var])
