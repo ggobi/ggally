@@ -16,7 +16,7 @@
 #'  that no scaling is performed.
 #' @export
 #' @author Di Cook \email{dicook@@monash.edu}, Heike Hofmann, Hadley Wickham
-#'  @examples
+#' @examples
 #'  data(nasa)
 #'  nasaLate <- nasa[
 #'    nasa$date >= as.POSIXct("1998-01-01") &

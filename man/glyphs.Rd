@@ -29,9 +29,7 @@ that no scaling is performed.}
 \description{
 Create the data needed to generate a glyph plot.
 }
-\author{
-Di Cook \email{dicook@monash.edu}, Heike Hofmann, Hadley Wickham
- @examples
+\examples{
  data(nasa)
  nasaLate <- nasa[
    nasa$date >= as.POSIXct("1998-01-01") &
@@ -47,5 +45,8 @@ Di Cook \email{dicook@monash.edu}, Heike Hofmann, Hadley Wickham
    ggplot2::geom_path() +
    ggplot2::theme_bw() +
    ggplot2::labs(x = "", y = "")
+}
+\author{
+Di Cook \email{dicook@monash.edu}, Heike Hofmann, Hadley Wickham
 }
 
