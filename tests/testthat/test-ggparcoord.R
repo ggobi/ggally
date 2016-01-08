@@ -165,6 +165,7 @@ test_that("groupColumn", {
   expect_true("color" %in% levels(p$data$variable))
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
+  expect_equal(as.character(p$mapping$colour), colnames(ds2)[2])
 
   p <- ggparcoord(
     data = ds2,
@@ -179,6 +180,7 @@ test_that("groupColumn", {
   expect_true("color" %in% levels(p$data$variable))
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
+  expect_equal(levels(p$data$cut), levels(ds2$cut))
 
 
   # group column is a regular column
