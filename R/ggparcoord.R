@@ -248,13 +248,11 @@ ggparcoord <- function(
 
 
   ### Setup ###
+  if(is.numeric(groupColumn)) {
+    groupColumn <- names(data)[groupColumn]
+  }
   if(!is.null(groupColumn)) {
-    if(is.numeric(groupColumn)) {
-      groupCol <- names(data)[groupColumn]
-    } else {
-      groupCol <- groupColumn
-    }
-    groupVar <- data[,groupCol]
+    groupVar <- data[,groupColumn]
   }
 
   if (is.character(columns)) {
@@ -273,19 +271,19 @@ ggparcoord <- function(
       data[,char.var] <- factor(data[,char.var])
     }
   }
-
   # Change factors to numeric
   fact.vars <- column_is_factor(data)
+  fact.vars <- setdiff(fact.vars, groupColumn)
   if (length(fact.vars) >= 1) {
     for (fact.var in fact.vars) {
       data[,fact.var] <- as.numeric(data[,fact.var])
     }
   }
-
   # Save this form of the data for order calculations (don't want imputed
   # missing values affecting order, but do want any factor/character vars
   # being plotted as numeric)
   saveData2 <- data
+  saveData2[,groupColumn] <- as.numeric(saveData2[,groupColumn])
 
   p <- c(ncol(data) + 1, ncol(data) + 2)
   data$.ID <- as.factor(1:nrow(data))
@@ -404,19 +402,18 @@ ggparcoord <- function(
     # data <- cbind(data,groupVar)
     # names(data)[dim(data)[2]] <- groupCol
 
-    meltIDVars <- c(groupCol, meltIDVars)
+    meltIDVars <- union(groupColumn, meltIDVars)
   }
 
   if (alphaLinesIsCharacter) {
     data <- cbind(data, alphaVar)
     names(data)[dim(data)[2]] <- alphaLines
-    meltIDVars <- c(meltIDVars, alphaLines)
+    meltIDVars <- union(meltIDVars, alphaLines)
   }
 
   # if(is.list(mapping)) {
   #   mappingNames <- names(mapping)
   # }
-
   data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
 
   ### Ordering ###
@@ -458,7 +455,7 @@ ggparcoord <- function(
       x = "variable",
       y = "value",
       group = ".ID",
-      colour = as.character(substitute(groupCol))
+      colour = groupColumn
     )
   } else {
     mapping2 <- aes_string(
