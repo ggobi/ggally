@@ -39,7 +39,6 @@ Suggests:
     ggmap (>= 2.3),
     igraph (>= 1.0.0),
     intergraph (>= 2.0-0),
-    knitr (>= 1.9),
     lintr (>= 0.3.3),
     maps (>= 2.3-9),
     network (>= 1.7.2),
@@ -49,6 +48,7 @@ Suggests:
     sna (>= 2.3-1),
     survival (>= 2.37-4),
     tnet (>= 3.0),
+    rmarkdown (>= 0.9),
     roxygen2 (>= 5.0.0),
     testthat
 Roxygen: list(wrap = FALSE)

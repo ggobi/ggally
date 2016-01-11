@@ -10,8 +10,8 @@ output:
 ---
 
 <!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{ggscatmat}
+%\VignetteEngine{rmarkdown::render}
+%\VignetteIndexEntry{gglyph}
 -->
 
 ```{r echo=FALSE, message=FALSE}

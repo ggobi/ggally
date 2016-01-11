@@ -10,7 +10,7 @@ output:
 ---
 
 <!--
-%\VignetteEngine{knitr::knitr}
+%\VignetteEngine{rmarkdown::render}
 %\VignetteIndexEntry{ggnetworkmap}
 -->
 
