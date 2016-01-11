@@ -18,6 +18,7 @@ if (getRversion() >= "2.15.1") {
 #' head(lowertriangle(flea))
 #' head(lowertriangle(flea, color="species"))
 lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
+  data <- upgrade_scatmat_data(data)
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
@@ -64,6 +65,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' head(uppertriangle(flea))
 #' head(uppertriangle(flea, color="species"))
 uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
+  data <- upgrade_scatmat_data(data)
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
@@ -152,6 +154,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' scatmat(flea, columns=2:4)
 #' scatmat(flea, columns= 2:4, color="species")
 scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
+  data <- upgrade_scatmat_data(data)
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
   if (ncol(dn) == 0) {
@@ -225,13 +228,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' ggscatmat(flea, columns = 2:4, color = "species")
 ggscatmat <- function(data, columns=1:ncol(data), color = NULL, alpha = 1){
 
-  dataIsCharacter <- sapply(data, is.character)
-  if (any(dataIsCharacter)) {
-    dataCharacterColumns <- names(dataIsCharacter[dataIsCharacter])
-    for (dataCol in dataCharacterColumns) {
-      data[dataCol] <- as.factor(data[,dataCol])
-    }
-  }
+  data <- upgrade_scatmat_data(data)
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
 
@@ -257,4 +254,17 @@ ggscatmat <- function(data, columns=1:ncol(data), color = NULL, alpha = 1){
     warning("Factor variables are omitted in plot")
     return(plot)
   }
+}
+
+
+upgrade_scatmat_data <- function(data) {
+  dataIsCharacter <- sapply(data, is.character)
+  if (any(dataIsCharacter)) {
+    dataCharacterColumns <- names(dataIsCharacter[dataIsCharacter])
+    for (dataCol in dataCharacterColumns) {
+      data[dataCol] <- as.factor(data[,dataCol])
+    }
+  }
+
+  data
 }
