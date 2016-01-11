@@ -39,7 +39,6 @@ Suggests:
     ggmap (>= 2.3),
     igraph (>= 1.0.0),
     intergraph (>= 2.0-0),
-    lintr (>= 0.3.3),
     maps (>= 2.3-9),
     network (>= 1.7.2),
     RColorBrewer (>= 1.0-5),
