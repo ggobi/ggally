@@ -262,7 +262,7 @@ upgrade_scatmat_data <- function(data) {
   if (any(dataIsCharacter)) {
     dataCharacterColumns <- names(dataIsCharacter[dataIsCharacter])
     for (dataCol in dataCharacterColumns) {
-      data[dataCol] <- as.factor(data[,dataCol])
+      data[dataCol] <- as.factor(data[, dataCol])
     }
   }
 

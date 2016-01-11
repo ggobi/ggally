@@ -2,14 +2,14 @@
 * local OS X install (x86_64-apple-darwin13.4.0), R 3.2.3
   * There were no ERRORs, WARNINGs, or NOTEs.
 
-* ubuntu 12.04 (on travis-ci, precise), R 3.2.3
+* ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.2.3
   * There were no ERRORs, WARNINGs.  There are two NOTEs, but they are false positives.
     * checking CRAN incoming feasibility ... NOTE
     Maintainer: ‘Barret Schloerke <schloerke@gmail.com>’
     Checking URLs requires 'libcurl' support in the R build
 
-    * checking package dependencies ... NOTE
-      No repository set, so cyclic dependency check skipped
+    * Package has a VignetteBuilder field but no prebuilt vignette index.
+
 
 * win-builder (devel and release)
   * There were no ERRORs, WARNINGs.  There is one NOTE.
