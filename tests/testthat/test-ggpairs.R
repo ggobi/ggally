@@ -64,8 +64,8 @@ test_that("printInfo", {
   txt <- capture.output({
     p1 <- a[1, 2]
     p2 <- a[2, 1]
-    a[2,1] <- p1
-    a[1,2] <- "blank"
+    a[2, 1] <- p1
+    a[1, 2] <- "blank"
 
     print(a)
   })
@@ -100,8 +100,8 @@ test_that("blank plots", {
   }
 
   a <- ggpairs(tips, columnsUsed)
-  a[1,1] <- ggplot2::qplot(total_bill, data = tips)
-  expect_false(is_blank_plot(a[1,1]))
+  a[1, 1] <- ggplot2::qplot(total_bill, data = tips)
+  expect_false(is_blank_plot(a[1, 1]))
 
 })
 
@@ -283,7 +283,7 @@ test_that("dates", {
   class(x) <- c("NOT_data.frame", "data.frame")
 
   a <- ggpairs(
-    x, c(2,1,4,3),
+    x, c(2, 1, 4, 3),
     mapping = ggplot2::aes(color = cat),
     lower = "blank",
     diag = list(continuous = "densityDiag"),
@@ -295,13 +295,13 @@ test_that("dates", {
 
 
   a <- ggpairs(
-    x, c(2,1,4,3),
+    x, c(2, 1, 4, 3),
     mapping = ggplot2::aes(color = cat),
     lower = "blank",
     diag = list(continuous = "barDiag"),
     upper = list(continuous = "cor")
   )
-  p <- a[1,1]
+  p <- a[1, 1]
   expect_equal(p$type, "diag")
   expect_equal(p$subType, "bar_num")
 
@@ -328,36 +328,36 @@ test_that("user functions", {
   p0 <- ggally_points(tips, ggplot2::aes(x = total_bill, y = tip))
 
   pm1 <- ggpairs(tips, 1:2, lower = list(continuous = "points"))
-  p1 <- pm1[2,1]
+  p1 <- pm1[2, 1]
   expect_equivalent(p0, p1)
 
   pm2 <- ggpairs(tips, 1:2, lower = list(continuous = ggally_points))
-  p2 <- pm2[2,1]
+  p2 <- pm2[2, 1]
   expect_equivalent(p0, p2)
 })
 
 test_that("NA data", {
   dd <- data.frame(x = c(1:5, rep(NA, 5)), y = c(rep(NA, 5), 2:6), z = 1:10, w = NA)
   pm <- ggpairs(dd)
-  expect_equivalent(pm[1,2]$subType, "na")
-  expect_equivalent(pm[2,1]$subType, "na")
-  expect_equivalent(pm[1,4]$subType, "na")
-  expect_equivalent(pm[4,4]$subType, "na")
+  expect_equivalent(pm[1, 2]$subType, "na")
+  expect_equivalent(pm[2, 1]$subType, "na")
+  expect_equivalent(pm[1, 4]$subType, "na")
+  expect_equivalent(pm[4, 4]$subType, "na")
 
   pm <- ggpairs(dd, upper = list(na = "blank"))
-  expect_equivalent(pm[1,2]$subType, "blank")
-  expect_equivalent(pm[2,1]$subType, "na")
-  expect_equivalent(pm[4,4]$subType, "na")
+  expect_equivalent(pm[1, 2]$subType, "blank")
+  expect_equivalent(pm[2, 1]$subType, "na")
+  expect_equivalent(pm[4, 4]$subType, "na")
 
   pm <- ggpairs(dd, lower = list(na = "blank"))
-  expect_equivalent(pm[1,2]$subType, "na")
-  expect_equivalent(pm[2,1]$subType, "blank")
-  expect_equivalent(pm[4,4]$subType, "na")
+  expect_equivalent(pm[1, 2]$subType, "na")
+  expect_equivalent(pm[2, 1]$subType, "blank")
+  expect_equivalent(pm[4, 4]$subType, "na")
 
   pm <- ggpairs(dd, diag = list(na = "blankDiag"))
-  expect_equivalent(pm[1,2]$subType, "na")
-  expect_equivalent(pm[2,1]$subType, "na")
-  expect_equivalent(pm[4,4]$subType, "blank")
+  expect_equivalent(pm[1, 2]$subType, "na")
+  expect_equivalent(pm[2, 1]$subType, "na")
+  expect_equivalent(pm[4, 4]$subType, "blank")
 
 })
 
@@ -399,14 +399,14 @@ test_that("densityDiag rescale", {
     upper = "blank", lower = "blank",
     diag = list(continuous = "densityDiag")
   )
-  expect_true(pm[1,1]$labels$y == "density")
+  expect_true(pm[1, 1]$labels$y == "density")
 
   pm <- ggpairs(
     tips, 2:4,
     upper = "blank", lower = "blank",
     diag = list(continuous = wrap("densityDiag", rescale = TRUE))
   )
-  expect_true(pm[1,1]$labels$y != "density")
+  expect_true(pm[1, 1]$labels$y != "density")
 })
 
 
@@ -416,7 +416,7 @@ test_that("densityDiag rescale", {
 
 #  # Custom Example
 #  pm <- ggpairs(
-#    tips[,c(1,3,4,2)],
+#    tips[, c(1, 3, 4, 2)],
 #    upper = list(continuous = "density", combo = "box"),
 #    lower = list(continuous = "points", combo = "dot")
 #  )
@@ -424,11 +424,11 @@ test_that("densityDiag rescale", {
 
 #  # Use sample of the diamonds data
 #  data(diamonds, package="ggplot2")
-#  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
+#  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 200), ]
 
 #  # Custom Example
 #  pm <- ggpairs(
-#   diamonds.samp[,1:5],
+#   diamonds.samp[, 1:5],
 #   upper = list(continuous = "density", combo = "box"),
 #   lower = list(continuous = "points", combo = "dot"),
 #   color = "cut",
@@ -439,21 +439,21 @@ test_that("densityDiag rescale", {
 
 #  # Will plot four "Incorrect Plots"
 #  bad_plots <- ggpairs(
-#    tips[,1:3],
+#    tips[, 1:3],
 #    upper = list(continuous = "wrongType1", combo = "wrongType2"),
 #    lower = list(continuous = "IDK1", combo = "IDK2", discrete = "mosaic"),
 #  )
 #  # bad_plots
 
 #  # Only Variable Labels on the diagonal (no axis labels)
-#  pm <- ggpairs(tips[,1:3], axisLabels="internal")
+#  pm <- ggpairs(tips[, 1:3], axisLabels="internal")
 #  # pm
 #  # Only Variable Labels on the outside (no axis labels)
-#  pm <- ggpairs(tips[,1:3], axisLabels="none")
+#  pm <- ggpairs(tips[, 1:3], axisLabels="none")
 #  # pm
 
 #  # Custom Examples
-#  custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
+#  custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 # #' # ggplot example taken from example(geom_text)
 # #'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
 # #'   plot <- plot +

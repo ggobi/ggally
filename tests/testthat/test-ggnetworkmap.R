@@ -5,12 +5,15 @@ if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-require(network)
-require(sna)
-require(maps)
-require(ggplot2)
+rq <- function(...) {
+  require(..., quietly = TRUE)
+}
+rq(network)
+rq(sna)
+rq(maps)
+rq(ggplot2)
 
-require(intergraph   , quietly = TRUE) # test igraph conversion
+rq(intergraph) # test igraph conversion
 
 airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
 rownames(airports) <- airports$iata

@@ -97,7 +97,7 @@ ggally_smooth <- function(data, mapping, ...){
 #'  ggally_density(
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
-#'  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
+#'  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
 ggally_density <- function(data, mapping, ...){
   rangeX <- range(eval(mapping$x, data), na.rm = TRUE)
   rangeY <- range(eval(mapping$y, data), na.rm = TRUE)
@@ -238,7 +238,7 @@ ggally_cor <- function(
         rows <- complete.cases(data[, c(xCol, yCol)])
       }
     } else {
-      rows <- complete.cases(data[,c(xCol, yCol)])
+      rows <- complete.cases(data[, c(xCol, yCol)])
     }
 
     if (any(!rows)) {
@@ -252,8 +252,8 @@ ggally_cor <- function(
     data <- data[rows, ]
   }
 
-  xVal <- data[,xCol]
-  yVal <- data[,yCol]
+  xVal <- data[, xCol]
+  yVal <- data[, yCol]
 
   if (length(names(mapping)) > 0){
     for (i in length(names(mapping)):1){
@@ -319,7 +319,7 @@ ggally_cor <- function(
 
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Cor : ", signif(cor_fn(xVal, yVal),3)),
+      label   = str_c("Cor : ", signif(cor_fn(xVal, yVal), 3)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
@@ -375,10 +375,10 @@ ggally_cor <- function(
       label = paste(
         "Corr:\n",
         signif(
-          cor_fn(xVal,yVal),
+          cor_fn(xVal, yVal),
           3
         ),
-        sep = "",collapse = ""
+        sep = "", collapse = ""
       ),
       mapping,
       xP = 0.5,
@@ -675,7 +675,7 @@ ggally_facetdensity <- function(data, mapping, ...){
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
 #'  ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
-ggally_denstrip <- function(data,mapping, ...){
+ggally_denstrip <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
@@ -770,16 +770,16 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @export
 #' @examples
 #' data(tips, package = "reshape")
-#' ggally_ratio(tips[,c("sex", "smoker")])
-#' ggally_ratio(tips[,c("sex", "smoker")]) + ggplot2::coord_equal()
+#' ggally_ratio(tips[, c("sex", "smoker")])
+#' ggally_ratio(tips[, c("sex", "smoker")]) + ggplot2::coord_equal()
 #' ggally_ratio(
-#'   tips[,c("sex", "day")]
+#'   tips[, c("sex", "day")]
 #' ) + ggplot2::theme( aspect.ratio = 4/2)
 ggally_ratio <- function(data){
   # dataNames <- colnames(data)
   data <- data[, 2:1]
   tmpData <- table(data)
-  tmpData <- tmpData[rev(seq_len(nrow(tmpData))),]
+  tmpData <- tmpData[rev(seq_len(nrow(tmpData))), ]
   tmpData <- as.table(tmpData)
   p <- ggfluctuation2(tmpData)# + labs(x = dataNames[1], y = dataNames[2])
   p$type <- "discrete"
@@ -849,7 +849,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 
   p <- ggplot(data = data, mapping)
 
-  if (is_date(data[,as.character(mapping$x)])) {
+  if (is_date(data[, as.character(mapping$x)])) {
     p <- p + geom_histogram(...)
     #TODO make y axis lines match date positions
     # buildInfo <- ggplot_build(p + geom_bar(...))
@@ -917,8 +917,8 @@ ggally_text <- function(
   mapping = ggplot2::aes(color = "black"),
   xP = 0.5,
   yP = 0.5,
-  xrange = c(0,1),
-  yrange = c(0,1),
+  xrange = c(0, 1),
+  yrange = c(0, 1),
   ...
 ){
 
@@ -998,18 +998,18 @@ get_x_axis_labels <- function(p, xRange) {
   axisLabs <- rbind(
     expand.grid(xPos = axisBreaks[1], yPos = axisBreaks),
     expand.grid(xPos = axisBreaks,    yPos = axisBreaks[1])
-  )[-1,]
+  )[-1, ]
 
   axisLabs <- as.data.frame(axisLabs)
-  axisLabs$lab <- as.character(apply(axisLabs,1,max))
+  axisLabs$lab <- as.character(apply(axisLabs, 1, max))
   axisLabs$hjust <- 0.5
   axisLabs$vjust <- 0.5
 
   minPos <- xRange[1]
   maxPos <- xRange[2]
   for (i in seq_len(nrow(axisLabs))) {
-    xPos <- axisLabs[i,"xPos"]
-    yPos <- axisLabs[i,"yPos"]
+    xPos <- axisLabs[i, "xPos"]
+    yPos <- axisLabs[i, "yPos"]
 
     if (yPos < minPos) {
       axisLabs[i, "yPos"] <- minPos
@@ -1102,7 +1102,7 @@ ggally_diagAxis <- function(
       data    = axisBreaks,
       mapping = aes_string(
         x     = "xPos",
-        y     = "yPos" ,
+        y     = "yPos",
         label = "lab",
         hjust = "hjust",
         vjust = "vjust"
@@ -1112,14 +1112,14 @@ ggally_diagAxis <- function(
     )
 
   } else {
-    breakLabels <- levels(as.factor(data[,as.character(mapping$x)]))
+    breakLabels <- levels(as.factor(data[, as.character(mapping$x)]))
     numLvls <- length(breakLabels)
 
     p <- ggally_text(
       label   = label,
       mapping = aes(col = "grey50"),
-      xrange  = c(0,1),
-      yrange  = c(0,1),
+      xrange  = c(0, 1),
+      yrange  = c(0, 1),
       size    = labelSize,
       yP      = labelYPercent,
       xP      = labelXPercent,
@@ -1209,7 +1209,7 @@ ggally_facetbar <- function(data, mapping, ...){
 #' @examples
 #' data(tips, package = "reshape")
 #' ggfluctuation2(table(tips$sex, tips$day))
-#' ggfluctuation2(table(tips[,c("sex", "day")]))
+#' ggfluctuation2(table(tips[, c("sex", "day")]))
 ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq, na.rm = TRUE)) {
 
   yNames <- rownames(table_data)
@@ -1221,7 +1221,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   }
 
   if (all(oldnames == "")) {
-    oldnames <- c("X","Y")
+    oldnames <- c("X", "Y")
   }
 
   names(table_data) <- c("x", "y", "result")
@@ -1271,7 +1271,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #      labels=c(xNames,rep("",maxLen - length(xNames) + 2)),
       limits = c(0.9999, length(xNames) + 1),
       breaks = 1:(length(xNames) + 1),
-      labels = c(xNames,""),
+      labels = c(xNames, ""),
       minor_breaks = FALSE
     ) +
     scale_y_continuous(
@@ -1279,7 +1279,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #      limits=c(1,maxLen + 2),
 #      breaks=1:(maxLen + 2),
 #      labels=c(yNames,rep("",maxLen - length(yNames) + 2)),
-      limits = c(0.9999,length(yNames) + 1),
+      limits = c(0.9999, length(yNames) + 1),
       breaks = 1:(length(yNames) + 1),
       labels = c(yNames, ""),
       minor_breaks = FALSE

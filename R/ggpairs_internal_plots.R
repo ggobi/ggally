@@ -176,7 +176,7 @@ make_ggmatrix_plot_obj <- function(fn, mapping, dataPos = 1, gg = NULL) {
 
 
 mapping_as_string <- function(mapping) {
-  str_c("c(",str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
+  str_c("c(", str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
 }
 
 as.character.ggmatrix_plot_obj <- function(x, ...) {

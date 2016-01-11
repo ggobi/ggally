@@ -26,7 +26,7 @@ do_gg <- function(dt) {
     ggplot2::geom_path() +
     ggplot2::theme_bw() +
     ggplot2::labs(x = "", y = "") +
-    ggplot2::xlim(-80, -60) + ggplot2::ylim(20,40)
+    ggplot2::xlim(-80, -60) + ggplot2::ylim(20, 40)
 }
 
 test_that("examples", {
@@ -111,7 +111,7 @@ test_that("fill", {
       ggplot2::geom_path() +
       ggplot2::theme_bw() +
       ggplot2::labs(x = "", y = "") +
-      ggplot2::xlim(-80, -60) + ggplot2::ylim(20,40)
+      ggplot2::xlim(-80, -60) + ggplot2::ylim(20, 40)
   }
 
   p <- do_gg_fill(fill = "green")

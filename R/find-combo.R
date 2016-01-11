@@ -23,7 +23,7 @@ plot_types <- function(data) {
   }
 
   dataInfo <- as.data.frame(dataInfo)
-  colnames(dataInfo) <- c("Type", "xvar", "yvar","posx","posy")
+  colnames(dataInfo) <- c("Type", "xvar", "yvar", "posx", "posy")
   dataInfo
 }
 
@@ -72,7 +72,7 @@ find_plot_type <- function(data, col1, col2) {
   }
 
   # check if any combo of the two columns is all na
-  if (all(is.na(data[,col1]) | is.na(data[,col2]))) {
+  if (all(is.na(data[, col1]) | is.na(data[, col2]))) {
     return("NA")
   }
 

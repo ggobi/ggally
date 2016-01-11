@@ -5,15 +5,18 @@ if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-require(network      , quietly = TRUE) # network objects
-require(sna          , quietly = TRUE) # placement and centrality
+rq <- function(...) {
+  require(..., quietly = TRUE)
+}
+rq(network) # network objects
+rq(sna)     # placement and centrality
 
-require(ggplot2      , quietly = TRUE) # grammar of graphics
-require(grid         , quietly = TRUE) # arrows
-require(scales       , quietly = TRUE) # sizing
+rq(ggplot2) # grammar of graphics
+rq(grid)    # arrows
+rq(scales)  # sizing
 
-require(intergraph   , quietly = TRUE) # test igraph conversion
-require(RColorBrewer , quietly = TRUE) # test ColorBrewer palettes
+rq(intergraph)   # test igraph conversion
+rq(RColorBrewer) # test ColorBrewer palettes
 
 test_that("examples", {
 

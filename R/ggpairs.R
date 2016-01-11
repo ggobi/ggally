@@ -55,7 +55,7 @@
 #'\describe{
 #'  \item{continuous}{exactly one of ('points', 'smooth', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
 #'  \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
-#'  \item{discrete}{exactly one of ('facetbar','ratio', 'blank'). This option is used for categorical X and Y data.}
+#'  \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
 #'  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 #'}
 #'
@@ -96,7 +96,7 @@
 #' # Feel free to print the ggpair objects created in the examples
 #'
 #' data(tips, package = "reshape")
-#' pm <- ggpairs(tips[,1:3])
+#' pm <- ggpairs(tips[, 1:3])
 #' # pm
 #' pm <- ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"))
 #' # pm
@@ -106,7 +106,7 @@
 #'
 #' # Custom Example
 #' pm <- ggpairs(
-#'   tips[,c(1,3,4,2)],
+#'   tips[, c(1, 3, 4, 2)],
 #'   upper = list(continuous = "density", combo = "box"),
 #'   lower = list(continuous = "points", combo = "dot")
 #' )
@@ -114,11 +114,11 @@
 #'
 #' # Use sample of the diamonds data
 #' data(diamonds, package="ggplot2")
-#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
+#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 200), ]
 #'
 #' # Custom Example
 #' pm <- ggpairs(
-#'  diamonds.samp[,1:5],
+#'  diamonds.samp[, 1:5],
 #'  mapping = ggplot2::aes(color = cut),
 #'  upper = list(continuous = wrap("density", alpha = 0.5), combo = "box"),
 #'  lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot", alpha = 0.4)),
@@ -127,24 +127,24 @@
 #' # pm
 #'
 #' # Only Variable Labels on the diagonal (no axis labels)
-#' pm <- ggpairs(tips[,1:3], axisLabels="internal")
+#' pm <- ggpairs(tips[, 1:3], axisLabels="internal")
 #' # pm
 #' # Only Variable Labels on the outside (no axis labels)
-#' pm <- ggpairs(tips[,1:3], axisLabels="none")
+#' pm <- ggpairs(tips[, 1:3], axisLabels="none")
 #' # pm
 #'
 #' # Custom Examples
-#' custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
+#' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
 #'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
 #'   plot <- plot +
 #'     ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
 #'     ggplot2::scale_colour_discrete(l=40)
-#' custom_car[1,2] <- plot
+#' custom_car[1, 2] <- plot
 #' personal_plot <- ggally_text(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
 #' )
-#' custom_car[1,3] <- personal_plot
+#' custom_car[1, 3] <- personal_plot
 #' # custom_car
 ggpairs <- function(
   data,
@@ -157,7 +157,7 @@ ggpairs <- function(
   params = NULL,
   ...,
   axisLabels = "show",
-  columnLabels = colnames(data[,columns]),
+  columnLabels = colnames(data[, columns]),
   showStrips = NULL,
   legends = FALSE,
   verbose = FALSE
@@ -197,7 +197,7 @@ ggpairs <- function(
     ))
   }
 
-  if (! identical(class(data),"data.frame")) {
+  if (! identical(class(data), "data.frame")) {
     data <- as.data.frame(data)
   }
 
@@ -242,7 +242,7 @@ ggpairs <- function(
 
   nameIsOnlyNumber <- ! str_detect(colnames(data[, columns]), "[^0-9]")
   if (any(nameIsOnlyNumber)) {
-    badColumns <- colnames(data[,columns])[nameIsOnlyNumber]
+    badColumns <- colnames(data[, columns])[nameIsOnlyNumber]
     names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
     warning(paste(
       "Column name is numeric.  Behavior will not be as expected.\n\n",
@@ -271,14 +271,14 @@ ggpairs <- function(
 
   data <- as.data.frame(data)
   for (i in 1:dim(data)[2] ) {
-    if (is.character(data[,i])) {
-      data[,i] <- as.factor(data[,i])
+    if (is.character(data[, i])) {
+      data[, i] <- as.factor(data[, i])
     }
   }
 
   numCol <- length(columns)
   if (printInfo) {
-    cat("data col: ", numCol,"\n")
+    cat("data col: ", numCol, "\n")
   }
 
   ggpairsPlots <- list()
@@ -300,7 +300,7 @@ ggpairs <- function(
     cat("\n\n\nDATA TYPES\n");print(dataTypes)
   }
 
-  if (identical(axisLabels,"internal")) {
+  if (identical(axisLabels, "internal")) {
     dataTypes$Type <- as.character(dataTypes$Type)
     dataTypes$Type[dataTypes$posx == dataTypes$posy] <- "label"
     dataTypes$Type <- as.factor(dataTypes$Type)
@@ -309,19 +309,19 @@ ggpairs <- function(
 
   for (i in 1:nrow(dataTypes)) {
     p <- "blank"
-    type <- dataTypes[i,"Type"]
+    type <- dataTypes[i, "Type"]
 
-    posX <- as.numeric(as.character(dataTypes[i,"posx"]))
-    posY <- as.numeric(as.character(dataTypes[i,"posy"]))
-    xColName <- as.character(dataTypes[i,"xvar"])
-    yColName <- as.character(dataTypes[i,"yvar"])
+    posX <- as.numeric(as.character(dataTypes[i, "posx"]))
+    posY <- as.numeric(as.character(dataTypes[i, "posy"]))
+    xColName <- as.character(dataTypes[i, "xvar"])
+    yColName <- as.character(dataTypes[i, "yvar"])
 
     plotAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), mapping)
 
     up <- posX > posY
 
     if (printInfo) {
-      cat("Pos #", i, "\t(", posX, ",", posY, ")\t type: ")
+      cat("Pos #", i, "\t(", posX, ", ", posY, ")\t type: ")
     }
 
     sectionAes <- NULL
@@ -493,7 +493,7 @@ ggpairs <- function(
 #' @rdname add_and_overwrite_aes
 #' @examples
 #' data(diamonds, package="ggplot2")
-#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],1000),]
+#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
 #' pm <- ggpairs(diamonds.samp, columns = 5:7,
 #'   mapping = ggplot2::aes(color = color),
 #'   upper = list(continuous = "cor", mapping = ggplot2::aes_string(color = "clarity")),
@@ -663,13 +663,13 @@ display_param_error <- function() {
 #if(TRUE)
 #{
 #
-#d <- diamonds[runif(floor(nrow(diamonds)/10),0,nrow(diamonds)),]
+#d <- diamonds[runif(floor(nrow(diamonds)/10), 0, nrow(diamonds)), ]
 #
 #diamondMatrix <- ggpairs(
 #  d,
 #  columns = 8:10,
-#  upper = list(continuous = "points",aes_string = aes_string(color = "clarity")),
-#  lower = list(continuous = "points",aes_string = aes_string(color = "cut")),
+#  upper = list(continuous = "points", aes_string = aes_string(color = "clarity")),
+#  lower = list(continuous = "points", aes_string = aes_string(color = "cut")),
 #  diag = "blank",
 ##  color = "color",
 #  title = "Diamonds"
@@ -682,9 +682,9 @@ display_param_error <- function() {
 ##m$qsec <- as.factor(m$qsec)
 #carsMatrix <- ggpairs(
 #  mtcars,
-#  columns = c(1,3,4),
-#  upper = list(continuous = "points",aes_string = aes_string(shape = "cyl", size = 5)),
-#  lower = list(continuous = "points",aes_string = aes_string(size = "cyl")),
+#  columns = c(1, 3, 4),
+#  upper = list(continuous = "points", aes_string = aes_string(shape = "cyl", size = 5)),
+#  lower = list(continuous = "points", aes_string = aes_string(size = "cyl")),
 #  diag = "blank",
 #  color = "cyl",
 #  title = "mtcars",
@@ -694,7 +694,7 @@ display_param_error <- function() {
 #
 # carsMatrix <- ggpairs(
 #   mtcars,
-#   columns = c(1,3,4),
+#   columns = c(1, 3, 4),
 #   upper = list(aes_string = aes_string(shape = "as.factor(cyl)", size = 5)),
 #   lower = list(aes_string = aes_string(size = "as.factor(cyl)")),
 #   diag = "blank",

@@ -25,20 +25,20 @@ eval_ggpair <- function(txt, ggally_data) {
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @examples
-#' custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
+#' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
 #'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
 #'   plot <- plot +
 #'     ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
 #'     ggplot2::scale_colour_discrete(l=40)
-#' custom_car[1,2] <- plot
+#' custom_car[1, 2] <- plot
 #' personal_plot <- ggally_text(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
 #' )
-#' custom_car[1,3] <- personal_plot
+#' custom_car[1, 3] <- personal_plot
 #' # custom_car
 putPlot <- function(x, value, i, j){
-  pos <- get_pos(x,i,j)
+  pos <- get_pos(x, i, j)
   if (mode(value) == "character") {
     if (value == "blank") {
       x$plots[[pos]] <- ggally_blank()
@@ -50,7 +50,7 @@ putPlot <- function(x, value, i, j){
   }
 
   if (x$printInfo) {
-    cat("\n\nDone placing plot: ",pos,"\n")
+    cat("\n\nDone placing plot: ", pos, "\n")
   }
 
   x
@@ -69,17 +69,17 @@ putPlot <- function(x, value, i, j){
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
+#'  plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
 #'  plotMatrix2[1, 2]
 getPlot <- function(x, i, j){
   if (x$printInfo) {
-    cat("i: ",i," j: ",j,"\n")
+    cat("i: ", i, " j: ", j, "\n")
   }
 
-  pos <- get_pos(x,i,j)
+  pos <- get_pos(x, i, j)
 
   if (x$printInfo) {
-    cat("Plot List Spot: ",pos,"\n")
+    cat("Plot List Spot: ", pos, "\n")
   }
 
   # if (pos > length(x$plots)) {
@@ -104,7 +104,7 @@ getPlot <- function(x, i, j){
       p <- fn(x$data, plotObj$mapping)
 
     } else {
-      firstNote <- str_c("Position: i = ", i,", j = ", j, "\nstr(plotObj):\n", sep = "")
+      firstNote <- str_c("Position: i = ", i, ", j = ", j, "\nstr(plotObj):\n", sep = "")
       strObj <- capture.output({
         print(str(plotObj))
       })
@@ -132,7 +132,7 @@ getPlot <- function(x, i, j){
   # }
 
   if (x$printInfo || x$verbose) {
-    cat("Plot #",pos)
+    cat("Plot #", pos)
     if (is_blank_plot(p)) {
       cat(" - Blank")
     }
@@ -143,7 +143,7 @@ getPlot <- function(x, i, j){
 }
 
 
-get_pos <- function(x,i,j) {
+get_pos <- function(x, i, j) {
   if (!identical(x$byrow, TRUE)) {
     pos <- i + (x$nrow * (j - 1))
   } else {
@@ -153,7 +153,7 @@ get_pos <- function(x,i,j) {
 }
 
 
-check_i_j <- function(i,j) {
+check_i_j <- function(i, j) {
   if ( (length(i) > 1) || (mode(i) != "numeric")) {
     stop("'i' may only be a single numeric value")
   }
@@ -168,7 +168,7 @@ check_i_j <- function(i,j) {
 #' @param ... ignored
 #' @export
 `[.ggmatrix` <- function(x, i, j, ...) {
-  check_i_j(i,j)
+  check_i_j(i, j)
 
   getPlot(x, i, j)
 }
@@ -182,7 +182,7 @@ check_i_j <- function(i,j) {
   # i = first subset
   # j = second subset
   # y = value
-  check_i_j(i,j)
+  check_i_j(i, j)
 
   xNew <- putPlot(x, value, i, j)
   xNew

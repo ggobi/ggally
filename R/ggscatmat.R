@@ -18,23 +18,23 @@ if (getRversion() >= "2.15.1") {
 #' head(lowertriangle(flea))
 #' head(lowertriangle(flea, color="species"))
 lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
-  data.choose <- data[,columns]
-  dn <- data.choose[sapply(data.choose,is.numeric)]
+  data.choose <- data[, columns]
+  dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   newdata <- NULL
   for (i in 1:p) {
     for (j in 1:p) {
       newdata <- rbind(newdata,
-                       cbind(dn[,i], dn[,j], i, j, colnames(dn)[i], colnames(dn)[j], factor)
+                       cbind(dn[, i], dn[, j], i, j, colnames(dn)[i], colnames(dn)[j], factor)
       )
     }
   }
-  colnames(newdata) <- c("xvalue","yvalue","xslot","yslot","xlab","ylab",colnames(factor))
+  colnames(newdata) <- c("xvalue", "yvalue", "xslot", "yslot", "xlab", "ylab", colnames(factor))
 
   rp <- data.frame(newdata)
-  rp[,2][rp[,3] >= rp[,4]] <- "NA"
-  rp[,1][rp[,3] > rp[,4]] <- "NA"
+  rp[, 2][rp[, 3] >= rp[, 4]] <- "NA"
+  rp[, 1][rp[, 3] > rp[, 4]] <- "NA"
 
   rp$xvalue <- suppressWarnings(as.numeric(as.character(rp$xvalue)))
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
@@ -43,7 +43,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
     rp.new <- rp[, 1:6]
   } else {
     colorcolumn <- rp[, which(colnames(rp) == color)]
-    rp.new <- cbind(rp[,1:6], colorcolumn)
+    rp.new <- cbind(rp[, 1:6], colorcolumn)
   }
   return(rp.new)
 }
@@ -64,8 +64,8 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' head(uppertriangle(flea))
 #' head(uppertriangle(flea, color="species"))
 uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
-  data.choose <- data[,columns]
-  dn <- data.choose[sapply(data.choose,is.numeric)]
+  data.choose <- data[, columns]
+  dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   newdata <- NULL
@@ -79,10 +79,10 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
     }
   }
   colnames(newdata) <- c(
-    "xvalue","yvalue",
-    "xslot","yslot",
-    "xlab","ylab",
-    "xcenter","ycenter",
+    "xvalue", "yvalue",
+    "xslot", "yslot",
+    "xlab", "ylab",
+    "xcenter", "ycenter",
     colnames(factor)
   )
 
@@ -94,10 +94,10 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
 
   if (is.null(color)){
-    rp.new <- rp[,1:8]
+    rp.new <- rp[, 1:8]
   }else{
     colorcolumn <- rp[, which(colnames(rp) == color)]
-    rp.new <- cbind(rp[,1:8],  colorcolumn)
+    rp.new <- cbind(rp[, 1:8],  colorcolumn)
   }
   a <- rp.new
   b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
@@ -127,7 +127,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
     df <- data.frame()
     for (i in 1:nrow(position)) {
       for (j in 1:n){
-        row <- position[i,]
+        row <- position[i, ]
         df <- rbind(df, cbind(row[, 3], (row[, 4] + row[, 6] * j / (n + 1))))
       }
     }
@@ -153,7 +153,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' scatmat(flea, columns= 2:4, color="species")
 scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
   data.choose <- data[, columns]
-  dn <- data.choose[sapply(data.choose,is.numeric)]
+  dn <- data.choose[sapply(data.choose, is.numeric)]
   if (ncol(dn) == 0) {
     stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
   } else {
@@ -225,7 +225,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' ggscatmat(flea, columns = 2:4, color="species")
 ggscatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1){
   data.choose <- data[, columns]
-  dn <- data.choose[sapply(data.choose,is.numeric)]
+  dn <- data.choose[sapply(data.choose, is.numeric)]
 
   if (ncol(dn) == 0) {
     stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")

@@ -4,7 +4,7 @@ context("ggparcoord")
 
 set.seed(123)
 data(diamonds, package = "ggplot2")
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 
 iris2 <- iris
 iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
@@ -12,7 +12,7 @@ iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2
 test_that("stops", {
 
   # basic parallel coordinate plot, using default settings
-  # ggparcoord(data = diamonds.samp,columns = c(1, 5:10))
+  # ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
   # this time, color by diamond cut
   expect_error(
     ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = NULL, order = "anyClass"),
@@ -24,7 +24,7 @@ test_that("stops", {
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = c(1,2)),
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = c(1, 2)),
     "invalid value for 'groupColumn'"
   )
   expect_error(
@@ -161,7 +161,7 @@ test_that("groupColumn", {
 
   # column 3 has a character
   # column 4 has a factor
-  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 2)
+  p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 2)
   expect_true("color" %in% levels(p$data$variable))
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
@@ -174,7 +174,7 @@ test_that("groupColumn", {
       "depth", "table", "price",
       "x", "y", "z"
     ),
-    order = c(1,3:10),
+    order = c(1, 3:10),
     groupColumn = "cut"
   )
   expect_true("color" %in% levels(p$data$variable))
@@ -185,13 +185,13 @@ test_that("groupColumn", {
 
   # group column is a regular column
   ## factor
-  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 4)
+  p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 4)
   expect_true("clarity" %in% levels(p$data$variable))
   ## character
-  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 3)
+  p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 3)
   expect_true("color" %in% levels(p$data$variable))
   ## numeric
-  p <- ggparcoord(data = ds2, columns = c(1,3:10), groupColumn = 1)
+  p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 1)
   expect_true("carat" %in% levels(p$data$variable))
 
 
@@ -217,8 +217,8 @@ test_that("missing", {
 test_that("order", {
 
 
-  for (ordering in c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
-    "Stringy","Monotonic")) {
+  for (ordering in c("Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
+    "Stringy", "Monotonic")) {
     p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = ordering)
     expect_true(all(levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")))
   }
@@ -268,7 +268,7 @@ test_that("size", {
 
 
 test_that("columns containing only a single value do not cause an scaling error", {
-  df <- data.frame(obs = 1:5, var1 = sample(10,5), var2 = rep(3, 5))
+  df <- data.frame(obs = 1:5, var1 = sample(10, 5), var2 = rep(3, 5))
 
   # no scaling
   expect_that(ggparcoord(data = df, columns = 1:3, scale = "globalminmax"), not(throws_error()))
@@ -276,12 +276,12 @@ test_that("columns containing only a single value do not cause an scaling error"
   expect_that(ggparcoord(data = df, columns = 1:3, scale = "uniminmax"), not(throws_error()))
 
 
-  df2 <- data.frame(df, var3 = factor(c("a","b","c","a","c")))
+  df2 <- data.frame(df, var3 = factor(c("a", "b", "c", "a", "c")))
   # requires scaling, must not throw an errror due to scaling the single values (to NaN)
   expect_that(ggparcoord(data = df2, columns = 1:4, scale = "uniminmax"), not(throws_error()))
 
 
-  df3 <- data.frame(df2, var4 = factor(c("d","d","d","d","d")))
+  df3 <- data.frame(df2, var4 = factor(c("d", "d", "d", "d", "d")))
   expect_that(ggparcoord(data = df3, columns = 1:4, scale = "uniminmax"), not(throws_error()))
   expect_that(ggparcoord(data = df3, columns = 1:4, scale = "robust"), not(throws_error()))
   expect_that(ggparcoord(data = df3, columns = 1:4, scale = "std"), not(throws_error()))

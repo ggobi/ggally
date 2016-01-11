@@ -125,8 +125,8 @@ print.ggmatrix <- function(
   # variable names on the margins will not be used
 
   # determine if space should be given for Y text labels
-  v1XWidth <- unit(1,"npc") - unit(ifelse(displayYAxisLabels, 3, 1), "lines")
-  v1YHeight <- unit(1,"npc") - unit(ifelse(displayXAxisLabels, 3, 2), "lines")
+  v1XWidth <- unit(1, "npc") - unit(ifelse(displayYAxisLabels, 3, 1), "lines")
+  v1YHeight <- unit(1, "npc") - unit(ifelse(displayXAxisLabels, 3, 2), "lines")
   v1YVal <- unit(0.5, "npc")
   if (!displayXAxisLabels) {
     v1YVal <- v1YVal - unit(0.5, "lines")
@@ -137,8 +137,8 @@ print.ggmatrix <- function(
     height = v1YHeight
   )
 
-  viewPortWidths <- c(1, rep(c(spacingProportion,1), x$ncol - 1))
-  viewPortHeights <- c(rep(c(1,spacingProportion), x$nrow - 1), 1)
+  viewPortWidths <- c(1, rep(c(spacingProportion, 1), x$ncol - 1))
+  viewPortHeights <- c(rep(c(1, spacingProportion), x$nrow - 1), 1)
 
 
   x$showXAxisPlotLabels <- identical(x$showXAxisPlotLabels, TRUE)
@@ -174,11 +174,11 @@ print.ggmatrix <- function(
 
   if (! is.null(x$title)) {
     if (x$title != "") {
-      pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
+      pushViewport(viewport(height = unit(1, "npc") - unit(.4, "lines")))
       grid.text(
         x$title,
         x = .5, y = 1,
-        just = c(.5,1),
+        just = c(.5, 1),
         gp = gpar(fontsize = first_non_null(
           get_theme_element(x, "title", "size"),
           get_theme_element(x, "plot.title", "size"),
@@ -217,8 +217,8 @@ print.ggmatrix <- function(
       grid.text(
         x$yAxisLabels[i],
         0, 0.5, rot = 90,
-        just = c("centre","centre"),
-        vp = vplayout(as.numeric(i) * 2 - 1 ,1),
+        just = c("centre", "centre"),
+        vp = vplayout(as.numeric(i) * 2 - 1, 1),
         gp = gpar(fontsize = first_non_null(
           get_theme_element(x, "axis.title.y", "size"),
           get_theme_element(x, "axis.title", "size"),
@@ -260,7 +260,7 @@ print.ggmatrix <- function(
         x$xAxisLabels[i],
         0.5,
         0,
-        just = c("centre","centre"),
+        just = c("centre", "centre"),
         vp = vplayout(
           ifelse(x$showXAxisPlotLabels, 2 * (x$nrow), 2 * (x$nrow) - 1),
           ifelse(x$showYAxisPlotLabels, 2 * i, 2 * i - 1)
@@ -465,8 +465,8 @@ print.ggmatrix <- function(
       layoutRows <- pGtable$layout$name %in% layoutNames
 
       layoutInfo <- pGtable$layout[layoutRows, ]
-      layoutTB <- layoutInfo[,c("t", "b")]
-      layoutLR <- layoutInfo[,c("l", "r")]
+      layoutTB <- layoutInfo[, c("t", "b")]
+      layoutLR <- layoutInfo[, c("l", "r")]
 
       pPanel <- pGtable[
         min(layoutTB):max(layoutTB),

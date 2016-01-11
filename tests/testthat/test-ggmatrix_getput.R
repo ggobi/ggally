@@ -33,7 +33,7 @@ test_that("put", {
   )
   txt <- "My Custom Plot"
   a[2, 1] <- ggally_text(txt)
-  p <- a[2,1]
+  p <- a[2, 1]
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, txt)
 
 })

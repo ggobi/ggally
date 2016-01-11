@@ -17,7 +17,7 @@ test_that("example", {
 })
 
 test_that("stops", {
-  expect_error(ggscatmat(flea, columns = c(1,2)), "Not enough numeric variables to")
-  expect_error(ggscatmat(flea, columns = c(1,1,1)), "All of your variables are factors")
-  expect_error(scatmat(flea, columns = c(1,1,1)), "All of your variables are factors")
+  expect_error(ggscatmat(flea, columns = c(1, 2)), "Not enough numeric variables to")
+  expect_error(ggscatmat(flea, columns = c(1, 1, 1)), "All of your variables are factors")
+  expect_error(scatmat(flea, columns = c(1, 1, 1)), "All of your variables are factors")
 })
