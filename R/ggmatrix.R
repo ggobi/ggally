@@ -57,7 +57,7 @@ ggmatrix <- function(
   legends = FALSE
 ) {
 
-  if(!is.list(plots)) {
+  if (!is.list(plots)) {
     stop("'plots' must be a list()")
   }
   check_nrow_ncol(nrow, "nrow")
@@ -93,7 +93,7 @@ ggmatrix <- function(
 
 
 check_nrow_ncol <- function(x, title) {
-  if(!is.numeric(x)) {
+  if (!is.numeric(x)) {
     stop(paste("'", title, "' must be a numeric value", sep = ""))
   }
   if (length(x) != 1) {

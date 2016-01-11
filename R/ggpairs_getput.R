@@ -154,10 +154,10 @@ get_pos <- function(x,i,j) {
 
 
 check_i_j <- function(i,j) {
-  if ((length(i) > 1) || (mode(i) != "numeric")) {
+  if ( (length(i) > 1) || (mode(i) != "numeric")) {
     stop("'i' may only be a single numeric value")
   }
-  if ((length(j) > 1) || (mode(j) != "numeric")) {
+  if ( (length(j) > 1) || (mode(j) != "numeric")) {
     stop("'j' may only be a single numeric value")
   }
   NULL

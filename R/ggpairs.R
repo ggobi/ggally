@@ -211,7 +211,7 @@ ggpairs <- function(
   }
   axisLabels <- axisLabelChoices[axisLabelChoice]
 
-  if(is.character(columns)) {
+  if (is.character(columns)) {
     columns <- unlist(lapply(columns, function(colName){
       which(colnames(data) == colName)
     }))
@@ -434,7 +434,7 @@ ggpairs <- function(
         comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
 
         if (
-          ((!identical(subTypeName, "density")) && type == "stat_bin-num") ||
+          ( (!identical(subTypeName, "density")) && type == "stat_bin-num") ||
           (type == "stat_bin-cat")
         ) {
           comboAes <- mapping_color_fill(comboAes)

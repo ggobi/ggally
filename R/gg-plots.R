@@ -1,5 +1,5 @@
 # add global variable
-if(getRversion() >= "2.15.1") {
+if (getRversion() >= "2.15.1") {
   utils::globalVariables(unique(c(
     "labelp", # cor plot
     c("..density..", "..scaled..", "x"), # facetdensitystrip plot
@@ -109,7 +109,7 @@ ggally_density <- function(data, mapping, ...){
       alpha = 0
     )
 
-  if(!is.null(mapping$fill)) {
+  if (!is.null(mapping$fill)) {
     p <- p + stat_density2d(mapping = mapping, geom = "polygon", ...)
   } else {
     p <- p + geom_density2d(mapping = mapping, ...)
@@ -231,8 +231,8 @@ ggally_cor <- function(
   singleColorCol <- paste(colorCol, collapse = "")
 
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
-    if(length(colorCol) > 0) {
-      if(singleColorCol %in% colnames(data)) {
+    if (length(colorCol) > 0) {
+      if (singleColorCol %in% colnames(data)) {
         rows <- complete.cases(data[, c(xCol, yCol, colorCol)])
       } else {
         rows <- complete.cases(data[, c(xCol, yCol)])
@@ -241,7 +241,7 @@ ggally_cor <- function(
       rows <- complete.cases(data[,c(xCol, yCol)])
     }
 
-    if(any(!rows)) {
+    if (any(!rows)) {
       total <- sum(!rows)
       if (total > 1) {
         warning("Removed ", total, " rows containing missing values")
@@ -255,14 +255,14 @@ ggally_cor <- function(
   xVal <- data[,xCol]
   yVal <- data[,yCol]
 
-  if(length(names(mapping)) > 0){
-    for(i in length(names(mapping)):1){
+  if (length(names(mapping)) > 0){
+    for (i in length(names(mapping)):1){
       # find the last value of the aes, such as cyl of as.factor(cyl)
       tmp_map_val <- as.character(mapping[names(mapping)[i]][[1]])
-      if(tmp_map_val[length(tmp_map_val)] %in% colnames(data))
+      if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
         mapping[names(mapping)[i]] <- NULL
 
-      if(length(names(mapping)) < 1){
+      if (length(names(mapping)) < 1){
         mapping <- NULL
         break;
       }
@@ -294,9 +294,9 @@ ggally_cor <- function(
     # put in correct order
     lev <- levels(data[[colorCol]])
     ord <- rep(-1, nrow(cord))
-    for(i in 1:nrow(cord)) {
-      for(j in seq_along(lev)){
-        if(identical(as.character(cord[i, colorCol]), as.character(lev[j]))) {
+    for (i in 1:nrow(cord)) {
+      for (j in seq_along(lev)){
+        if (identical(as.character(cord[i, colorCol]), as.character(lev[j]))) {
           ord[i] <- j
         }
       }
@@ -743,13 +743,13 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   if (horizontal) {
     p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = ""))
 
-    if(identical(den_strip, TRUE))
+    if (identical(den_strip, TRUE))
       p <- p + theme(axis.text.y = element_blank())
   } else {
     p <- p + coord_flip()
     p <- p + facet_grid(paste(". ~ ", as.character(yVal), sep = ""))
 
-    if(identical(den_strip, TRUE))
+    if (identical(den_strip, TRUE))
       p <- p + theme(axis.text.x = element_blank())
   }
   p$type <- "combo"
@@ -857,7 +857,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 
     p$subType <- "bar_num"
 
-  } else if(numer){
+  } else if (numer) {
     # message("is numeric")
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
@@ -940,14 +940,14 @@ ggally_text <- function(
     x = xP * diff(xrange) + min(xrange, na.rm = TRUE),
     y = yP * diff(yrange) + min(yrange, na.rm = TRUE)
   )
-  if(is.null(mapping)) {
+  if (is.null(mapping)) {
     mapping <- new_mapping
   } else {
     mapping <- add_and_overwrite_aes(mapping, new_mapping)
   }
 
   # dont mess with color if it's already there
-  if(!is.null(mapping$colour)) {
+  if (!is.null(mapping$colour)) {
     colour <- mapping$colour
     # remove colour from the aesthetics, so legend isn't printed
     mapping$colour <- NULL
@@ -1076,7 +1076,7 @@ ggally_diagAxis <- function(
     label <- as.character(mapping$x)
   }
 
-  if(numer) {
+  if (numer) {
     xmin <- min(data[, as.character(mapping$x)], na.rm = TRUE)
     xmax <- max(data[, as.character(mapping$x)], na.rm = TRUE)
 
@@ -1216,11 +1216,13 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   xNames <- colnames(table_data)
   oldnames <- rev(names(dimnames(table_data)))
 
-  if (is.table(table_data))
+  if (is.table(table_data)) {
     table_data <- as.data.frame(t(table_data))
+  }
 
-  if(all(oldnames == ""))
+  if (all(oldnames == "")) {
     oldnames <- c("X","Y")
+  }
 
   names(table_data) <- c("x", "y", "result")
   table_data <- add.all.combinations(table_data, list("x", "y")) # nolint

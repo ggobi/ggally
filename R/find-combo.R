@@ -97,7 +97,7 @@ plotting_data_type <- function(x) {
   }
   if (is_date(x)) {
     "continuous"
-  } else if(!is.null(attributes(x)) || all(is.character(x))) {
+  } else if (!is.null(attributes(x)) || all(is.character(x))) {
     "category"
   } else {
     "continuous"

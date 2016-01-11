@@ -81,17 +81,17 @@ test_that("blank plots", {
   al <- ggpairs(tips, columnsUsed, lower = "blank")
   for (i in 1:3) {
     for (j in 1:3) {
-      if(i < j) {
+      if (i < j) {
         expect_true(  is_blank_plot(au[i, j]))
         expect_false( is_blank_plot(ad[i, j]))
         expect_false( is_blank_plot(al[i, j]))
       }
-      if(i > j) {
+      if (i > j) {
         expect_false( is_blank_plot(au[i, j]))
         expect_false( is_blank_plot(ad[i, j]))
         expect_true(  is_blank_plot(al[i, j]))
       }
-      if(i == j) {
+      if (i == j) {
         expect_false( is_blank_plot(au[i, j]))
         expect_true(  is_blank_plot(ad[i, j]))
         expect_false( is_blank_plot(al[i, j]))
@@ -223,14 +223,14 @@ test_that("subtypes", {
     }
   }
 
-  for(fn in list(fn1, fn2)){
+  for (fn in list(fn1, fn2)){
     for (i in 1:6) {
-      conSub <- if(i <= length(conSubs)) conSubs[[i]] else "blank"
-      comSub <- if(i <= length(comSubs)) comSubs[[i]] else "blank"
-      disSub <- if(i <= length(disSubs)) disSubs[[i]] else "blank"
+      conSub <- if (i <= length(conSubs)) conSubs[[i]] else "blank"
+      comSub <- if (i <= length(comSubs)) comSubs[[i]] else "blank"
+      disSub <- if (i <= length(disSubs)) disSubs[[i]] else "blank"
 
-      diagConSub <- if(i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
-      diagDisSub <- if(i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
+      diagConSub <- if (i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
+      diagDisSub <- if (i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
 
       if (i <= length(printShowStrips)) {
         printShowStrip <- printShowStrips[i]

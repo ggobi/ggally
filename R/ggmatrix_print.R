@@ -172,7 +172,7 @@ print.ggmatrix <- function(
     grid.newpage()
   }
 
-  if(! is.null(x$title)) {
+  if (! is.null(x$title)) {
     if (x$title != "") {
       pushViewport(viewport(height = unit(1,"npc") - unit(.4,"lines")))
       grid.text(

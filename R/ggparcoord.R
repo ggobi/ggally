@@ -1,4 +1,4 @@
-if(getRversion() >= "2.15.1") {
+if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("variable", "value", "ggally_splineFactor"))
 }
 
@@ -168,32 +168,32 @@ ggparcoord <- function(
   saveData <- data
 
   ### Error Checking ###
-  if(is.null(groupColumn)) {
-    if(any(tolower(order) %in% c("anyclass","allclass"))) {
+  if (is.null(groupColumn)) {
+    if (any(tolower(order) %in% c("anyclass","allclass"))) {
       stop("can't use the 'order' methods anyClass or allClass without specifying groupColumn")
     }
-  } else if(
-    !((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))
+  } else if (
+    !( (length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))
   ) {
     stop("invalid value for 'groupColumn'; must be a single numeric or character index")
   }
 
-  if(!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
+  if (!(tolower(scale) %in% c("std","robust","uniminmax","globalminmax","center","centerobs"))) {
     stop(str_c(
       "invalid value for 'scale'; must be one of ",
       "'std','robust','uniminmax','globalminmax','center', or 'centerObs'"
     ))
   }
 
-  if(!(centerObsID %in% 1:dim(data)[1])) {
+  if (!(centerObsID %in% 1:dim(data)[1])) {
     stop("invalid value for 'centerObsID'; must be a single numeric row index")
   }
 
-  if(!(tolower(missing) %in% c("exclude","mean","median","min10","random"))) {
+  if (!(tolower(missing) %in% c("exclude","mean","median","min10","random"))) {
     stop("invalid value for 'missing'; must be one of 'exclude','mean','median','min10','random'")
   }
 
-  if(!(
+  if (!(
     is.numeric(order) || (
       is.character(order) &&
       (order %in% c(
@@ -208,13 +208,13 @@ ggparcoord <- function(
     ))
   }
 
-  if(!(is.logical(showPoints))) {
+  if (!(is.logical(showPoints))) {
     stop("invalid value for 'showPoints'; must be a logical operator")
   }
 
   alphaLinesIsCharacter <- is.character(alphaLines)
-  if(alphaLinesIsCharacter) {
-    if(!(alphaLines %in% names(data))) {
+  if (alphaLinesIsCharacter) {
+    if (!(alphaLines %in% names(data))) {
       stop("'alphaLines' column is missing in data")
     }
 
@@ -248,10 +248,10 @@ ggparcoord <- function(
 
 
   ### Setup ###
-  if(is.numeric(groupColumn)) {
+  if (is.numeric(groupColumn)) {
     groupColumn <- names(data)[groupColumn]
   }
-  if(!is.null(groupColumn)) {
+  if (!is.null(groupColumn)) {
     groupVar <- data[,groupColumn]
   }
 
@@ -437,7 +437,7 @@ ggparcoord <- function(
   else if (tolower(order) == "allclass") {
     f.stats <- rep(NA,length(columns))
     names(f.stats) <- names(saveData2[columns])
-    for(i in 1:length(columns)) {
+    for (i in 1:length(columns)) {
       f.stats[i] <- summary(lm(saveData2[,i] ~ groupVar))$fstatistic[1]
     }
     data.m$variable <- factor(
@@ -656,7 +656,7 @@ scag_order <- function(scag, vars, measure) {
 #'   variable has the most separation between one of the classes and the rest, and
 #'   the last variable has the least (as measured by F-statistics from an ANOVA)
 singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
-  if(!is.null(specClass)) {
+  if (!is.null(specClass)) {
     # for when user is interested in ordering by variation between one class and
     # the rest...will add this later
   } else {
@@ -664,7 +664,7 @@ singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
     class.names <- levels(classVar)
     f.stats <- matrix(NA,nrow=length(class.names),ncol=length(var.names),dimnames=
       list(class.names,var.names))
-    for(i in 1:length(class.names)) {
+    for (i in 1:length(class.names)) {
       f.stats[i,] <- apply(axisVars,2,function(x) {
         return(summary(lm(x ~ as.factor(classVar == class.names[i])))$fstatistic[1])
       })
