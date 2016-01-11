@@ -10,7 +10,7 @@ output:
 ---
 
 <!--
-%\VignetteEngine{rmarkdown::render}
+%\VignetteEngine{knitr::rmarkdown}
 %\VignetteIndexEntry{gglyph}
 -->
 
