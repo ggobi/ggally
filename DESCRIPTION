@@ -24,7 +24,7 @@ Description: The R package \href{http://docs.ggplot2.org/current/}{ggplot2}
     reduce the complexity of combining geoms with transformed data. Some of these
     functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel
     coordinates plot, a survival plot, and several functions to plot networks.
-VignetteBuilder: knitr
+VignetteBuilder: rmarkdown
 Depends:
     R (>= 2.14)
 Imports:
