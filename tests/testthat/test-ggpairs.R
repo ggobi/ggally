@@ -337,7 +337,7 @@ test_that("user functions", {
 })
 
 test_that("NA data", {
-  dd <- data.frame(x=c(1:5,rep(NA,5)),y=c(rep(NA,5),2:6),z=1:10, w = NA)
+  dd <- data.frame(x = c(1:5, rep(NA, 5)), y = c(rep(NA, 5), 2:6), z = 1:10, w = NA)
   pm <- ggpairs(dd)
   expect_equivalent(pm[1,2]$subType, "na")
   expect_equivalent(pm[2,1]$subType, "na")

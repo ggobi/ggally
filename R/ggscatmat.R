@@ -103,14 +103,21 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
   if (is.null(color)){
     data.cor <- ddply(b, .(ylab, xlab), summarise,
-                      r = paste(round(cor(xvalue, yvalue, use="pairwise.complete.obs"), digits=2)),
+                      r = paste(round(
+                        cor(xvalue, yvalue, use = "pairwise.complete.obs"),
+                        digits = 2
+                      )),
                       xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
                       yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue)))
     return(data.cor)
   }else{
     c <- b
     data.cor1 <- ddply(c, .(ylab, xlab, colorcolumn), summarise,
-                       r = paste(round(cor(xvalue, yvalue, use="pairwise.complete.obs"), digits=2)))
+                      r = paste(round(
+                        cor(xvalue, yvalue, use = "pairwise.complete.obs"),
+                        digits = 2
+                      ))
+                    )
     n <- nrow(data.frame(unique(b$colorcolumn)))
     position <- ddply(b, .(ylab, xlab), summarise,
                       xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
@@ -150,9 +157,9 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
   if (ncol(dn) == 0) {
     stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
   } else {
-    ltdata.new <- lowertriangle(data, columns=columns, color=color)
-    r <- ggplot(ltdata.new, mapping=aes_string(x="xvalue", y="yvalue")) +
-      theme(axis.title.x=element_blank(), axis.title.y=element_blank()) +
+    ltdata.new <- lowertriangle(data, columns = columns, color = color)
+    r <- ggplot(ltdata.new, mapping = aes_string(x = "xvalue", y = "yvalue")) +
+      theme(axis.title.x = element_blank(), axis.title.y = element_blank()) +
       facet_grid(ylab ~ xlab, scales = "free") +
       theme(aspect.ratio = 1)
     if (is.null(color)) {
@@ -169,7 +176,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
           ),
           data = j, position = "identity", geom = "line", color = "black")
       }
-      r <- r + geom_point(alpha = alpha, na.rm=TRUE)
+      r <- r + geom_point(alpha = alpha, na.rm = TRUE)
       return(r)
     } else {
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
@@ -229,10 +236,10 @@ ggscatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1){
 
   a <- uppertriangle(data, columns = columns, color = color)
   if (is.null(color)){
-    plot <- scatmat(data, columns = columns, alpha=alpha) +
+    plot <- scatmat(data, columns = columns, alpha = alpha) +
       geom_text(data = a, aes_string(label = "r"), colour = "black")
   } else {
-    plot <- scatmat(data, columns = columns, color = color, alpha=alpha) +
+    plot <- scatmat(data, columns = columns, color = color, alpha = alpha) +
       geom_text(data = a, aes_string(label = "r", color = "colorcolumn")) + labs(color = color)
   }
   factor <- data.choose[sapply(data.choose, is.factor)]

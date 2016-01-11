@@ -337,8 +337,14 @@ ggparcoord <- function(
     data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo], type = rescalerType)
 
     if (tolower(scale) == "center") {
-      data[, columns] <- apply(data[, columns], 2, function(x){
-        x <- x - eval(parse(text=paste(scaleSummary,"(x,na.rm=TRUE)",sep="")))
+      data[, columns] <- apply(data[, columns], 2, function(x) {
+        x <- x - eval(
+          parse(text = paste(
+            scaleSummary,
+            "(x, na.rm=TRUE)",
+            sep = ""
+          ))
+        )
       })
     }
 
@@ -371,7 +377,7 @@ ggparcoord <- function(
       },
       random = function(x) {
         num <- sum(is.na(x))
-        idx <- sample(which(!is.na(x)),num,replace=TRUE)
+        idx <- sample(which(!is.na(x)),num,replace = TRUE)
         x[idx]
       }
     )
@@ -389,7 +395,7 @@ ggparcoord <- function(
   # Centering by observation needs to be done after handling missing values
   #   in case the observation to be centered on has missing values
   if (tolower(scale) == "centerobs") {
-    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo],type="range")
+    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo],type = "range")
     data[, columns] <- apply(data[,columns],2,function(x){
       x <- x - x[centerObsID]
     })
@@ -418,7 +424,7 @@ ggparcoord <- function(
 
   ### Ordering ###
   if (length(order) > 1 & is.numeric(order)) {
-     data.m$variable <- factor(data.m$variable,levels=names(saveData)[order])
+     data.m$variable <- factor(data.m$variable,levels = names(saveData)[order])
   }
   else if (order %in% c("Outlying","Skewed","Clumpy","Sparse","Striated","Convex","Skinny",
     "Stringy","Monotonic")) {
@@ -431,7 +437,7 @@ ggparcoord <- function(
     abs.skew <- abs(apply(saveData2,2,skewness))
     data.m$variable <- factor(
       data.m$variable,
-      levels = names(abs.skew)[order(abs.skew,decreasing=TRUE)]
+      levels = names(abs.skew)[order(abs.skew, decreasing = TRUE)]
     )
   }
   else if (tolower(order) == "allclass") {
@@ -442,12 +448,12 @@ ggparcoord <- function(
     }
     data.m$variable <- factor(
       data.m$variable,
-      levels = names(f.stats)[order(f.stats,decreasing=TRUE)]
+      levels = names(f.stats)[order(f.stats, decreasing = TRUE)]
     )
   }
   else if (tolower(order) == "anyclass") {
     axis.order <- singleClassOrder(groupVar,saveData2)
-    data.m$variable <- factor(data.m$variable,levels=axis.order)
+    data.m$variable <- factor(data.m$variable, levels = axis.order)
   }
 
   if (!is.null(groupColumn)) {
@@ -466,19 +472,19 @@ ggparcoord <- function(
   }
   mapping2 <- add_and_overwrite_aes(mapping2,mapping)
   # mapping2 <- add_and_overwrite_aes(aes_string(size = I(0.5)), mapping2)
-  p <- ggplot(data=data.m,mapping=mapping2)
+  p <- ggplot(data = data.m, mapping = mapping2)
 
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
     d.sum <- ddply(data.m,.(variable),summarize,
       min = min(value),
       max = max(value))
-    p <- p + geom_linerange(data=d.sum,size=I(10),col=shadeBox,
-      mapping=aes(y=NULL,ymin=min,ymax=max,group=variable))
+    p <- p + geom_linerange(data = d.sum, size = I(10), col = shadeBox,
+      mapping = aes(y = NULL, ymin = min, ymax = max, group = variable))
   }
 
   if (boxplot)
-    p <- p + geom_boxplot(mapping=aes(group=variable),alpha=0.8)
+    p <- p + geom_boxplot(mapping = aes(group = variable), alpha = 0.8)
 
   if (!is.null(mapping2$size)) {
     lineSize <- mapping2$size
@@ -662,7 +668,7 @@ singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
   } else {
     var.names <- colnames(axisVars)
     class.names <- levels(classVar)
-    f.stats <- matrix(NA,nrow=length(class.names),ncol=length(var.names),dimnames=
+    f.stats <- matrix(NA, nrow = length(class.names), ncol = length(var.names), dimnames =
       list(class.names,var.names))
     for (i in 1:length(class.names)) {
       f.stats[i,] <- apply(axisVars,2,function(x) {
@@ -670,7 +676,7 @@ singleClassOrder <- function(classVar,axisVars,specClass=NULL) {
       })
     }
     var.maxF <- apply(f.stats,2,max)
-    return(names(var.maxF)[order(var.maxF,decreasing=TRUE)])
+    return(names(var.maxF)[order(var.maxF, decreasing = TRUE)])
   }
 }
 

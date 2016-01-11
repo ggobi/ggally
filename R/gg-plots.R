@@ -378,11 +378,11 @@ ggally_cor <- function(
           cor_fn(xVal,yVal),
           3
         ),
-        sep="",collapse=""
+        sep = "",collapse = ""
       ),
       mapping,
-      xP=0.5,
-      yP=0.5,
+      xP = 0.5,
+      yP = 0.5,
       xrange = xrange,
       yrange = yrange,
       ...
@@ -519,7 +519,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #    print(p$facet$facets)
   }
 
-  p <- p + scale_x_continuous(xVal, labels="", breaks=1)
+  p <- p + scale_x_continuous(xVal, labels = "", breaks = 1)
 
   p$type <- "combo"
   p$horizontal <- horizontal
@@ -931,9 +931,9 @@ ggally_text <- function(
   # print(rectData)
 
   p <- ggplot() + xlim(xrange) + ylim(yrange) +
-      theme(panel.background=element_blank(),
-        panel.grid.minor=element_blank(),
-        panel.grid.major=element_line(colour="grey85")) +
+      theme(panel.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_line(colour = "grey85")) +
       labs(x = NULL, y = NULL)
 
   new_mapping <- aes_string(
@@ -1086,7 +1086,7 @@ ggally_diagAxis <- function(
 
     p <- ggally_text(
       label   = label,
-      mapping = aes(col="grey50"),
+      mapping = aes(col = "grey50"),
       xrange  = xrange,
       yrange  = xrange,
       size    = labelSize,
@@ -1117,7 +1117,7 @@ ggally_diagAxis <- function(
 
     p <- ggally_text(
       label   = label,
-      mapping = aes(col="grey50"),
+      mapping = aes(col = "grey50"),
       xrange  = c(0,1),
       yrange  = c(0,1),
       size    = labelSize,
@@ -1265,24 +1265,24 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
     geom_tile(colour = "white") +
     scale_fill_identity() +
     scale_x_continuous(
-      name=oldnames[1],
+      name = oldnames[1],
 #      limits=c(1,maxLen + 2),
 #      breaks=1:(maxLen + 2),
 #      labels=c(xNames,rep("",maxLen - length(xNames) + 2)),
-      limits=c(0.9999,length(xNames) + 1),
-      breaks=1:(length(xNames) + 1),
-      labels=c(xNames,""),
-      minor_breaks=FALSE
+      limits = c(0.9999, length(xNames) + 1),
+      breaks = 1:(length(xNames) + 1),
+      labels = c(xNames,""),
+      minor_breaks = FALSE
     ) +
     scale_y_continuous(
-      name=oldnames[2],
+      name = oldnames[2],
 #      limits=c(1,maxLen + 2),
 #      breaks=1:(maxLen + 2),
 #      labels=c(yNames,rep("",maxLen - length(yNames) + 2)),
-      limits=c(0.9999,length(yNames) + 1),
-      breaks=1:(length(yNames) + 1),
-      labels=c(yNames,""),
-      minor_breaks=FALSE
+      limits = c(0.9999,length(yNames) + 1),
+      breaks = 1:(length(yNames) + 1),
+      labels = c(yNames, ""),
+      minor_breaks = FALSE
     ) +
 #    coord_equal() +
     theme(
@@ -1316,7 +1316,7 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
 #' @keywords hplot
 ggally_blank <- function(...){
   aes(...) # ignored
-  a <- data.frame(X=1:2, Y=1:2)
+  a <- data.frame(X = 1:2, Y = 1:2)
 
   p <- ggplot(data = a, aes_string(x = "X", y = "Y")) +
     geom_point( colour = "transparent") +
