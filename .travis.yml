@@ -11,6 +11,8 @@ sudo: required
 
 ## default R_*_ARGS
 # R_BUILD_ARGS="--no-build-vignettes" R_CHECK_ARGS="--no-manual --as-cran"
+env:
+  - WARNINGS_ARE_ERRORS=1
 # env:
 #   - ""
 #   - r_check_revdep:true # checks reverse depends
