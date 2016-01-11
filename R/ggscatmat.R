@@ -222,8 +222,16 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' @examples
 #' data(flea)
 #' ggscatmat(flea, columns = 2:4)
-#' ggscatmat(flea, columns = 2:4, color="species")
-ggscatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1){
+#' ggscatmat(flea, columns = 2:4, color = "species")
+ggscatmat <- function(data, columns=1:ncol(data), color = NULL, alpha = 1){
+
+  dataIsCharacter <- sapply(data, is.character)
+  if (any(dataIsCharacter)) {
+    dataCharacterColumns <- names(dataIsCharacter[dataIsCharacter])
+    for (dataCol in dataCharacterColumns) {
+      data[dataCol] <- as.factor(data[,dataCol])
+    }
+  }
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
 
