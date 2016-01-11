@@ -24,7 +24,7 @@ The function was adopted from experiemntal functions within GGplot2 developed by
 \examples{
 data(tips, package = "reshape")
 ggfluctuation2(table(tips$sex, tips$day))
-ggfluctuation2(table(tips[,c("sex", "day")]))
+ggfluctuation2(table(tips[, c("sex", "day")]))
 }
 \author{
 Hadley Wickham \email{h.wickham@gmail.com}, Barret Schloerke \email{schloerke@gmail.com}

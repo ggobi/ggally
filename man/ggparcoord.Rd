@@ -105,23 +105,23 @@ in the parallel coordinate plot. Options:
 \examples{
 # use sample of the diamonds data for illustrative purposes
 data(diamonds, package="ggplot2")
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],100),]
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 
 # basic parallel coordinate plot, using default settings
-# ggparcoord(data = diamonds.samp,columns = c(1,5:10))
+# ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
 
 # this time, color by diamond cut
-gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2)
+gpd <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2)
 # gpd
 
 # underlay univariate boxplots, add title, use uniminmax scaling
-gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
-  scale = "uniminmax",boxplot = TRUE,title = "Parallel Coord. Plot of Diamonds Data")
+gpd <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
+  scale = "uniminmax", boxplot = TRUE, title = "Parallel Coord. Plot of Diamonds Data")
 # gpd
 
 # utilize ggplot2 aes to switch to thicker lines
-gpd <- ggparcoord(data = diamonds.samp,columns = c(1,5:10),groupColumn = 2,
-  title="Parallel Coord. Plot of Diamonds Data",mapping = ggplot2::aes(size = 1))
+gpd <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
+  title="Parallel Coord. Plot of Diamonds Data", mapping = ggplot2::aes(size = 1))
 # gpd
 
 # basic parallel coord plot of the msleep data, using 'random' imputation and

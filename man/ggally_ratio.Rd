@@ -17,10 +17,10 @@ Must send only two discrete columns in the data set.
 }
 \examples{
 data(tips, package = "reshape")
-ggally_ratio(tips[,c("sex", "smoker")])
-ggally_ratio(tips[,c("sex", "smoker")]) + ggplot2::coord_equal()
+ggally_ratio(tips[, c("sex", "smoker")])
+ggally_ratio(tips[, c("sex", "smoker")]) + ggplot2::coord_equal()
 ggally_ratio(
-  tips[,c("sex", "day")]
+  tips[, c("sex", "day")]
 ) + ggplot2::theme( aspect.ratio = 4/2)
 }
 \author{

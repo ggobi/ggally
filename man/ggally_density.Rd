@@ -30,7 +30,7 @@ The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_d
  ggally_density(
    tips,
    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
- ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1,0.15,0.2))
+ ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

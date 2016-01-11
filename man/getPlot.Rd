@@ -23,7 +23,7 @@ Retrieves the ggplot object at the desired location.
 }
 \examples{
  data(tips, package = "reshape")
- plotMatrix2 <- ggpairs(tips[,3:2], upper = list(combo = "denstrip"))
+ plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
  plotMatrix2[1, 2]
 }
 \author{

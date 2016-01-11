@@ -50,7 +50,7 @@ Make a matrix of plots with a given data set
 \describe{
  \item{continuous}{exactly one of ('points', 'smooth', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
  \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
- \item{discrete}{exactly one of ('facetbar','ratio', 'blank'). This option is used for categorical X and Y data.}
+ \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 }
 
@@ -70,7 +70,7 @@ If a function is supplied to an upper, lower, or diag, it should implement the f
 # Feel free to print the ggpair objects created in the examples
 
 data(tips, package = "reshape")
-pm <- ggpairs(tips[,1:3])
+pm <- ggpairs(tips[, 1:3])
 # pm
 pm <- ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"))
 # pm
@@ -80,7 +80,7 @@ pm <- ggpairs(tips, upper = "blank")
 
 # Custom Example
 pm <- ggpairs(
-  tips[,c(1,3,4,2)],
+  tips[, c(1, 3, 4, 2)],
   upper = list(continuous = "density", combo = "box"),
   lower = list(continuous = "points", combo = "dot")
 )
@@ -88,11 +88,11 @@ pm <- ggpairs(
 
 # Use sample of the diamonds data
 data(diamonds, package="ggplot2")
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1],200),]
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 200), ]
 
 # Custom Example
 pm <- ggpairs(
- diamonds.samp[,1:5],
+ diamonds.samp[, 1:5],
  mapping = ggplot2::aes(color = cut),
  upper = list(continuous = wrap("density", alpha = 0.5), combo = "box"),
  lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot", alpha = 0.4)),
@@ -101,24 +101,24 @@ pm <- ggpairs(
 # pm
 
 # Only Variable Labels on the diagonal (no axis labels)
-pm <- ggpairs(tips[,1:3], axisLabels="internal")
+pm <- ggpairs(tips[, 1:3], axisLabels="internal")
 # pm
 # Only Variable Labels on the outside (no axis labels)
-pm <- ggpairs(tips[,1:3], axisLabels="none")
+pm <- ggpairs(tips[, 1:3], axisLabels="none")
 # pm
 
 # Custom Examples
-custom_car <- ggpairs(mtcars[,c("mpg","wt","cyl")], upper = "blank", title = "Custom Example")
+custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 # ggplot example taken from example(geom_text)
   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
   plot <- plot +
     ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
     ggplot2::scale_colour_discrete(l=40)
-custom_car[1,2] <- plot
+custom_car[1, 2] <- plot
 personal_plot <- ggally_text(
   "ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"
 )
-custom_car[1,3] <- personal_plot
+custom_car[1, 3] <- personal_plot
 # custom_car
 }
 \author{

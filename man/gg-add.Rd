@@ -28,7 +28,7 @@ with elements from e2.
 }
 \examples{
 data(tips, package = "reshape")
-pm <- ggpairs(tips[,2:3])
+pm <- ggpairs(tips[, 2:3])
 ## change to black and white theme
 pm + ggplot2::theme_bw()
 ## change to linedraw theme
