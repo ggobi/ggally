@@ -166,9 +166,9 @@ Mean and its. std.err;  Quartiles of Sn(x_1 .. x_n) and Qn(...):
 0.4860477 0.0023965 0.4492734 0.4853898 0.5220596 
 > 
 > rbind("Time (CPU) used:" = summary(cpu))
-                  Min. 1st Qu. Median   Mean 3rd Qu.  Max.
-Time (CPU) used: 0.218   0.258  0.292 0.3473   0.325 1.009
+                  Min. 1st Qu. Median  Mean 3rd Qu.  Max.
+Time (CPU) used: 0.224   0.277  0.293 0.384   0.375 1.015
 > 
 > proc.time()
    user  system elapsed 
-  5.334   0.101   5.498 
+  5.914   0.141   6.363 

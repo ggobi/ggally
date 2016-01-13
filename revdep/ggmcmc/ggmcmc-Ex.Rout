@@ -47,14 +47,6 @@ The following objects are masked from ‘package:base’:
 
 Loading required package: tidyr
 Loading required package: ggplot2
-Loading required package: GGally
-
-Attaching package: ‘GGally’
-
-The following object is masked from ‘package:dplyr’:
-
-    nasa
-
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
@@ -135,7 +127,6 @@ Plotting autocorrelation plots
 Plotting crosscorrelation plot
 Plotting Potential Scale Reduction Factors
 Plotting Geweke Diagnostic
-Warning: `show_guide` has been deprecated. Please use `show.legend` instead.
 Plotting caterpillar plot
 pdf 
   2 
@@ -307,7 +298,6 @@ pdf
 > 
 > data(linear)
 > ggs_geweke(ggs(s))
-Warning: `show_guide` has been deprecated. Please use `show.legend` instead.
 > 
 > 
 > 
@@ -346,14 +336,181 @@ Warning: `show_guide` has been deprecated. Please use `show.legend` instead.
 > 
 > ### ** Examples
 > 
+> library(GGally)
+
+Attaching package: ‘GGally’
+
+The following object is masked from ‘package:dplyr’:
+
+    nasa
+
 > data(linear)
 > 
 > # default ggpairs plot
 > ggs_pairs(ggs(s))
 > 
 > # change alpha transparency of points
-> ggs_pairs(ggs(s), lower=list(params=c(alpha=.2)))
-Error in display_param_error() : 
-  'params' is a deprecated argument.  Please 'wrap' the function to supply arguments. help("wrap", package = "GGally")
-Calls: ggs_pairs ... check_and_set_ggpairs_defaults -> display_param_error
-Execution halted
+> ggs_pairs(ggs(s), lower=list(continuous = wrap("points", alpha = 0.2)))
+> 
+> # with too many points, try contours instead
+> ggs_pairs(ggs(s), lower=list(continuous="density"))
+> 
+> # histograms instead of univariate densities on diagonal
+> ggs_pairs(ggs(s), diag=list(continuous="barDiag"))
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+> 
+> # coloring results according to chains
+> ggs_pairs(ggs(s), mapping = aes(color = Chain))
+> 
+> # custom points on lower panels, black contours on upper panels
+> ggs_pairs(ggs(s),
++   upper=list(continuous = wrap("density", color = "black")),
++   lower=list(continuous = wrap("points", alpha = 0.2, shape = 1)))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ggs_pairs", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching ‘package:GGally’
+
+> nameEx("ggs_ppmean")
+> ### * ggs_ppmean
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ggs_ppmean
+> ### Title: Posterior predictive plot comparing the outcome mean vs the
+> ###   distribution of the predicted posterior means.
+> ### Aliases: ggs_ppmean
+> 
+> ### ** Examples
+> 
+> data(linear)
+> ggs_ppmean(ggs(s.y.rep), outcome=y)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ggs_ppmean", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ggs_ppsd")
+> ### * ggs_ppsd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ggs_ppsd
+> ### Title: Posterior predictive plot comparing the outcome standard
+> ###   deviation vs the distribution of the predicted posterior standard
+> ###   deviations.
+> ### Aliases: ggs_ppsd
+> 
+> ### ** Examples
+> 
+> data(linear)
+> ggs_ppsd(ggs(s.y.rep), outcome=y)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ggs_ppsd", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ggs_rocplot")
+> ### * ggs_rocplot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ggs_rocplot
+> ### Title: Receiver-Operator Characteristic (ROC) plot for models with
+> ###   binary outcomes
+> ### Aliases: ggs_rocplot
+> 
+> ### ** Examples
+> 
+> data(binary)
+> ggs_rocplot(ggs(s.binary, family="mu"), outcome=y.binary)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ggs_rocplot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ggs_running")
+> ### * ggs_running
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ggs_running
+> ### Title: Running means of the chains
+> ### Aliases: ggs_running
+> 
+> ### ** Examples
+> 
+> data(linear)
+> ggs_running(ggs(s))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ggs_running", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ggs_separation")
+> ### * ggs_separation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ggs_separation
+> ### Title: Separation plot for models with binary response variables
+> ### Aliases: ggs_separation
+> 
+> ### ** Examples
+> 
+> data(binary)
+> ggs_separation(ggs(s.binary, family="mu"), outcome=y.binary)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ggs_separation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("ggs_traceplot")
+> ### * ggs_traceplot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ggs_traceplot
+> ### Title: Traceplot of the chains
+> ### Aliases: ggs_traceplot
+> 
+> ### ** Examples
+> 
+> data(linear)
+> ggs_traceplot(ggs(s))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ggs_traceplot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  23.057 0.51 25.035 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

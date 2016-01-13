@@ -1,4 +1,4 @@
-* using log directory ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpbPiubW/check_cran12f4445b08432/robustbase.Rcheck’
+* using log directory ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpAWJpHl/check_cran32366c23ed51/robustbase.Rcheck’
 * using R version 3.2.3 (2015-12-10)
 * using platform: x86_64-apple-darwin13.4.0 (64-bit)
 * using session charset: UTF-8
@@ -63,7 +63,7 @@
   Running ‘LTS-specials.R’
   Running ‘MCD-specials.R’
   Comparing ‘MCD-specials.Rout’ to ‘MCD-specials.Rout.save’ ... OK
-  Running ‘MT-tst.R’
+  Running ‘MT-tst.R’ [10s/10s]
   Running ‘NAcoef.R’
   Comparing ‘NAcoef.Rout’ to ‘NAcoef.Rout.save’ ... OK
   Running ‘OGK-ex.R’
@@ -86,7 +86,7 @@
   Running ‘binom-no-x.R’
   Running ‘comedian-tst.R’
   Running ‘exact-fit-categorical.R’
-  Running ‘glmrob-1.R’ [10s/10s]
+  Running ‘glmrob-1.R’ [11s/11s]
   Running ‘glmrob-specials.R’
   Running ‘huber-etc.R’
   Comparing ‘huber-etc.Rout’ to ‘huber-etc.Rout.save’ ... OK
@@ -101,7 +101,7 @@
   Running ‘m-s-estimator.R’
   Running ‘mc-etc.R’
   Running ‘mc-strict.R’
-  Running ‘nlregrob-tst.R’ [26s/27s]
+  Running ‘nlregrob-tst.R’ [28s/30s]
   Running ‘nlrob-tst.R’
   Running ‘plot-ex.R’
   Running ‘poisson-ex.R’

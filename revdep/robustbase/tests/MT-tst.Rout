@@ -275,7 +275,7 @@ null device
 > options("robustbase:m_rho_recompute" = TRUE)#-> recompute in any case:
 > showSys.time( r <- glmrob(y ~ 1, family = poisson, method = "MT", nsubm=100) )# some output
 Time    user  system elapsed 
-Time   0.590   0.014   0.611 
+Time   0.598   0.014   0.618 
 > str(r)
 List of 29
  $ coefficients     : Named num 1.29
@@ -377,7 +377,7 @@ List of 29
 +      glmrob(y ~ 1, family = poisson, method = "MT"),
 +                              simplify=FALSE))
 Time    user  system elapsed 
-Time   4.075   0.033   4.227 
+Time   4.056   0.069   4.204 
 > ini <- sapply(LL, `[[`, "initial")
 > est <- sapply(LL, `[[`, "coefficients")
 > ## surprise:  all the 20 initial estimators are identical:
@@ -394,7 +394,7 @@ Time   4.075   0.033   4.227
 Mean relative difference: 2.507014e-15
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  9 0.244 9.421 0.004 0.009 
+Time elapsed:  9.345 0.321 10.228 0.003 0.005 
 > ## "Platform" info
 > (SysI <- Sys.info()[c("sysname", "release", "nodename", "machine")])
            sysname            release           nodename            machine 
@@ -407,4 +407,4 @@ Time elapsed:  9 0.244 9.421 0.004 0.009
 > 
 > proc.time()
    user  system elapsed 
-  9.005   0.253   9.422 
+  9.349   0.326  10.230 

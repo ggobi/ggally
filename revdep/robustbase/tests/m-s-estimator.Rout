@@ -89,7 +89,7 @@ Loading required package: tools
 +     res[[i]] <- unlist(within(tmp, b1 <- drop(t1 + b1 - T2 %*% b2)))
 + })
 > cat('Time elapsed in subsampling: ', time,'\n')
-Time elapsed in subsampling:  0.47 0.003 0.523 0 0 
+Time elapsed in subsampling:  0.482 0.003 0.492 0 0 
 > ## show a summary of the results  {"FIXME": output is platform dependent}
 > summary(res1 <- do.call(rbind, res))
       b11               b12              b13                b14       
@@ -134,7 +134,7 @@ Time elapsed in subsampling:  0.47 0.003 0.523 0 0
 + 				    ri[1:4], ri[5:7], ri[8]))
 + })
 > cat('Time elapsed in descent proc: ', time,'\n')
-Time elapsed in descent proc:  0.102 0.001 0.103 0 0 
+Time elapsed in descent proc:  0.108 0.001 0.114 0 0 
 > 
 > ## show a summary of the results   {"FIXME": output is platform dependent}
 > res4 <- do.call(rbind, res3)
@@ -395,4 +395,4 @@ In lmrob.M.S(x, y, control, mf) :
 > 
 > proc.time()
    user  system elapsed 
-  3.069   0.119   3.237 
+  3.625   0.167   3.990 

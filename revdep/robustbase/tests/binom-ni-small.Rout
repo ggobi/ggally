@@ -351,8 +351,8 @@ test.acc
 +                     rg3.15  [no.comp], tol = 1e-13))
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  0.545 0.05 0.592 0.003 0.006 
+Time elapsed:  0.659 0.072 0.848 0.003 0.008 
 > 
 > proc.time()
    user  system elapsed 
-  0.548   0.056   0.592 
+  0.662   0.080   0.848 

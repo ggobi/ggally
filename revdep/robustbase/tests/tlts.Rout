@@ -533,8 +533,8 @@ Scale estimate 19.3
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  0.589 0.062 0.67 0.003 0.006 
+Time elapsed:  0.667 0.076 0.791 0.003 0.007 
 > 
 > proc.time()
    user  system elapsed 
-  0.592   0.068   0.670 
+  0.670   0.083   0.791 

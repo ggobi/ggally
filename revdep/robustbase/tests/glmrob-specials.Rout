@@ -168,8 +168,8 @@ List of 19
 + 		      85.77187478275, 0), tolerance = 1e-13))# 32-b: 4.7e-15
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  0.47 0.05 0.523 0.003 0.007 
+Time elapsed:  0.45 0.049 0.489 0.003 0.008 
 > 
 > proc.time()
    user  system elapsed 
-  0.473   0.057   0.523 
+  0.453   0.057   0.489 

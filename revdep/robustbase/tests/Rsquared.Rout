@@ -255,4 +255,4 @@ seed : int(0)
 > 
 > proc.time()
    user  system elapsed 
-  0.613   0.052   0.658 
+  0.667   0.079   0.767 

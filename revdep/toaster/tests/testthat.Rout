@@ -25,4 +25,4 @@ OK: 272 SKIPPED: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-  2.551   0.106   2.656 
+  2.538   0.114   2.662 

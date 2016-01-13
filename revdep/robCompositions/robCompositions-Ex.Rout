@@ -1099,10 +1099,10 @@ Loading required package: MASS
 > x <- exp(mvrnorm(2000, mu=rep(1,10), diag(10)))
 > system.time(isomLR(x))
    user  system elapsed 
-  0.507   0.006   0.516 
+  0.582   0.016   0.695 
 > system.time(isomLR(x, fast=TRUE))
    user  system elapsed 
-  0.050   0.002   0.053 
+  0.050   0.001   0.051 
 > 
 > 
 > 
@@ -2327,7 +2327,7 @@ services    423.3600  423.3600
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  8.182 0.198 8.444 0 0 
+Time elapsed:  8.881 0.285 9.654 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -1887,8 +1887,8 @@ CT :
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  3.476 0.183 3.681 0.002 0.005 
+Time elapsed:  4.097 0.249 4.702 0.002 0.005 
 > 
 > proc.time()
    user  system elapsed 
-  3.478   0.188   3.681 
+  4.100   0.254   4.702 

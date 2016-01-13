@@ -21,7 +21,7 @@ Type 'q()' to quit R.
 > 
 > ## Platform - and other such info -- so we find it in old saved outputs
 > .libPaths()
-[1] "/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/Rtmp27iQjp/RLIBS_13d90a904fae"
+[1] "/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/Rtmp8sNMdu/RLIBS_41035bb7f8c7"
 [2] "/Library/Frameworks/R.framework/Versions/3.2/Resources/library"                        
 > SysI <- Sys.info()
 > structure(Sys.info()[c(4,5,1:3)], class="simple.list")
@@ -50,7 +50,7 @@ loaded via a namespace (and not attached):
 > c(robustbase = packageDescription("robustbase")$Built,
 +   DEoptimR   = packageDescription("DEoptimR")$Built)
                                                          robustbase 
-"R 3.2.3; x86_64-apple-darwin13.4.0; 2015-12-30 02:47:56 UTC; unix" 
+"R 3.2.3; x86_64-apple-darwin13.4.0; 2016-01-13 21:39:24 UTC; unix" 
                                                            DEoptimR 
                          "R 3.2.2; ; 2015-11-10 15:42:53 UTC; unix" 
 > if(SysI[["sysname"]] == "Linux" && require("sfsmisc")) local({
@@ -250,8 +250,8 @@ Residual standard error: 0 on 11 degrees of freedom
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  0.458 0.043 0.506 0.007 0.011 
+Time elapsed:  0.53 0.053 0.619 0.009 0.017 
 > 
 > proc.time()
    user  system elapsed 
-  0.465   0.054   0.506 
+  0.539   0.070   0.619 

@@ -546,7 +546,7 @@ locus6A/locus6B locus7A/locus7B locus8A/locus8B locus9A/locus9B
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  6.964 0.27 7.304 0 0 
+Time elapsed:  7.307 0.338 7.972 0 0 
 > grDevices::dev.off()
 null device 
           1 

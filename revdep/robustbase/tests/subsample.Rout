@@ -28,7 +28,7 @@ Loading required package: Matrix
 > cat("doExtras:", doExtras <- robustbase:::doExtras(),"\n")
 doExtras: FALSE 
 > showProc.time()
-Time elapsed:  1.528 0.055 1.588 
+Time elapsed:  1.679 0.069 1.778 
 > 
 > A <- matrix(c(0.001, 1, 1, 2), 2)
 > set.seed(11)
@@ -103,7 +103,7 @@ kappa before equilibration = 5e+09, after = 1.15762
 > tstSubsample(X, y)
 kappa before equilibration = 2.01e+14, after = 3.33338
 > showProc.time()
-Time elapsed:  0.209 0.004 0.221 
+Time elapsed:  0.208 0.003 0.213 
 > 
 > 
 > ## test real data example
@@ -161,13 +161,13 @@ kappa before equilibration = 16194.6, after = 736.342
 > stopifnot(all.equal(s1[nm], s2[nm], tolerance=1e-10),
 + 	  all.equal(s1[nm], s3[nm], tolerance=1e-10))
 > showProc.time()
-Time elapsed:  0.132 0.008 0.166 
+Time elapsed:  0.102 0.007 0.11 
 > 
 > set.seed(10)
 > nsing <- sum(replicate(if(doExtras) 200 else 20, tstSubsampleSing(X, y)))
 > stopifnot(nsing == 0)
 > showProc.time()
-Time elapsed:  0.315 0.006 0.324 
+Time elapsed:  0.292 0.006 0.298 
 > 
 > ## test example with many categorical predictors
 > set.seed(10)
@@ -176,7 +176,7 @@ Time elapsed:  0.315 0.006 0.324
 > set.seed(108)
 > r2 <- lmrob(Diversity ~ .^2 , data = possumDiv, cov="none") #, trace=4)
 > showProc.time()
-Time elapsed:  1.631 0.005 1.642 
+Time elapsed:  1.667 0.009 1.693 
 > 
 > ## investigate problematic subsample:
 > idc <- 1 + c(140, 60, 12, 13, 89, 90, 118, 80, 17, 134, 59, 94, 36,
@@ -216,7 +216,7 @@ In Rsubsample(X, y) : subsample(): could not find non-singular subsample.
 > image(as(round(zc$lu -      (lu$L + lu$U - diag(nrow(lu$U))), 10), "Matrix"))
 > image(as( sign(zc$lu) - sign(lu$L + lu$U - diag(nrow(lu$U))),      "Matrix"))
 > showProc.time()
-Time elapsed:  0.322 0.007 0.333 
+Time elapsed:  0.339 0.007 0.366 
 > 
 > ## test equilibration
 > ## colequ only
@@ -237,7 +237,7 @@ kappa before equilibration = 5e+09, after = 1.15762
 > tstSubsample(X, y)
 kappa before equilibration = 2.01e+14, after = 3.33338
 > showProc.time()
-Time elapsed:  0.009 0 0.009 
+Time elapsed:  0.009 0.001 0.01 
 > 
 > ### real data, see MM's ~/R/MM/Pkg-ex/robustbase/hedlmrob.R
 > ##  close to singular cov():
@@ -259,7 +259,7 @@ lmrob_S(n = 1000, nRes = 500): fast_s() [non-large n]:
 lmrob_MM(): rwls():
  rwls() used 22 it.; last ||b0 - b1||_1 = 9.29659e-07; convergence
 > showProc.time()# 2.77
-Time elapsed:  2.309 0.01 2.328 
+Time elapsed:  2.417 0.02 2.492 
 > 
 > if(doExtras) {##-----------------------------------------------------------------
 + 
@@ -358,12 +358,12 @@ $fast.s.large.n
 $eps.outlier
 function (nobs) 
 0.1/nobs
-<environment: 0x7fd36a0b2388>
+<environment: 0x7fa97d583988>
 
 $eps.x
 function (maxx) 
 .Machine$double.eps^(0.75) * maxx
-<environment: 0x7fd36a0b2388>
+<environment: 0x7fa97d583988>
 
                   psi           subsampling                   cov 
            "bisquare"         "nonsingular"         ".vcov.avar1" 
@@ -428,9 +428,9 @@ seed : int(0)
 > 
 > 
 > showProc.time()
-Time elapsed:  0.021 0.001 0.023 
+Time elapsed:  0.024 0.001 0.027 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  6.778   0.140   6.963 
+  7.091   0.181   7.380 

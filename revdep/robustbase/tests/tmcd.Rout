@@ -23,7 +23,7 @@ Type 'q()' to quit R.
 Loading required package: tools
 > ## -> assertError(), relErr(), and:
 > showProc.time()
-Time elapsed:  1.616 0.058 1.68 
+Time elapsed:  1.833 0.087 2.008 
 > 
 > ## -- now do it:
 > options(digits = 5)
@@ -3123,7 +3123,7 @@ Error in solve.default(cov, ...) :
   system is computationally singular: reciprocal condition number = 2.71945e-11
 > 
 > showProc.time()
-Time elapsed:  3.641 0.127 3.779 
+Time elapsed:  3.978 0.177 4.353 
 > 
 > ## "large" examples using different algo branches {seg.fault in version 0.4-4}:
 > 
@@ -3190,7 +3190,7 @@ Robustness weights:
 > stopifnot(cXo$raw.only, all.equal(cX[i], cXo[i], tol = 1e-15),
 +           c("best", "mah") %in% setdiff(names(cX), names(cXo)))
 > showProc.time()
-Time elapsed:  0.352 0.01 0.362 
+Time elapsed:  0.464 0.02 0.557 
 > 
 > ## Now, some small sample cases:
 > 
@@ -3360,16 +3360,16 @@ In covMcd(X, use.correction = FALSE) :
 +           all.equal(c(mcc$cov / cc$raw.cov), rep(0.7528695976179, p*p)))
 > 
 > showProc.time()
-Time elapsed:  0.047 0.003 0.05 
+Time elapsed:  0.056 0.004 0.059 
 > 
 > ## nsamp = "exact" -- here for p=7
 > coleman.x <- data.matrix(coleman[, 1:6])
 > showSys.time(CcX <- covMcd(coleman.x, nsamp= "exact"))
 Time    user  system elapsed 
-Time   0.835   0.002   0.838 
+Time   0.859   0.003   0.872 
 > showSys.time(Ccd <- covMcd(coleman.x, nsamp= "deterministic"))
 Time    user  system elapsed 
-Time   0.018   0.000   0.019 
+Time    0.02    0.00    0.02 
 > stopifnot(all.equal(CcX$best,
 + 		    c(2, 5:9, 11,13, 14:16, 19:20), tolerance=0),
 + 	  intersect(CcX$best, Ccd$best) == c(2,5,7,8,13,14,16,19,20),
@@ -4440,8 +4440,8 @@ the hyperplane with equation a_1*(x_i1 - m_1) + ... + a_p*(x_ip - m_p)
 coefficients a_i from the vector a <- c(0, 0, 0, 1)
 > 
 > showProc.time()
-Time elapsed:  1.998 0.042 2.045 
+Time elapsed:  2.072 0.05 2.153 
 > if(!robustbase:::doExtras()) quit()
 > proc.time()
    user  system elapsed 
-  7.976   0.289   8.269 
+  8.746   0.387   9.512 

@@ -361,7 +361,7 @@ List of 22
 > system.time( m1 <- lmrob(y~x, data = a,
 +                          control = lmrob.control(compute.rd = TRUE)))
    user  system elapsed 
-  0.219   0.001   0.220 
+  0.223   0.001   0.232 
 > plot(m1, ask=FALSE)
 > ##-> currently 5 plots; MM:I  don't like #3 (Response vs fitted)
 > 
@@ -369,7 +369,7 @@ List of 22
 > system.time(m2 <- lmrob(y~x, data = a,
 + 			control = lmrob.control(compute.rd = FALSE)))
    user  system elapsed 
-  0.094   0.000   0.094 
+  0.089   0.001   0.091 
 > ## ==> half of the CPU time is spent in covMcd()!
 > (sm2 <- summary(m2))
 
@@ -536,7 +536,7 @@ List of 8
 > rs <- .Random.seed
 > system.time( m3 <- lmrob(y~x, data = a2) )
    user  system elapsed 
-  0.252   0.002   0.255 
+  0.230   0.002   0.238 
 > m3
 
 Call:
@@ -549,7 +549,7 @@ Coefficients:
 > nrs <- .Random.seed # <-- to check that using 'seed' keeps .Random.seed
 > system.time( m4 <- lmrob(y~x, data = a2, seed = rs, compute.rd = FALSE))
    user  system elapsed 
-  0.247   0.001   0.249 
+  0.237   0.003   0.246 
 > (sm4 <- summary(m4))
 
 Call:
@@ -619,7 +619,7 @@ c(2.213815, 0.2864678, 2.202318, 2.180886)
 + 	  ) # 1.334 e-7	 needed on 64b
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # "stats"
-Time elapsed:  4.029 0.127 4.171 0.002 0.004 
+Time elapsed:  3.992 0.152 4.299 0.003 0.006 
 > 
 > ## rm(a,m1, m2, m3, m4, sm2, l1)
 > 
@@ -2334,8 +2334,8 @@ Coefficients:
 + )
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # "stats"
-Time elapsed:  4.472 0.143 4.636 0.002 0.004 
+Time elapsed:  4.408 0.17 4.741 0.003 0.006 
 > 
 > proc.time()
    user  system elapsed 
-  4.474   0.147   4.636 
+  4.411   0.176   4.742 

@@ -771,9 +771,9 @@ numeric
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  0.409 0.042 0.447 0.002 0.005 
+Time elapsed:  0.507 0.059 0.589 0.003 0.007 
 > 
 > quit('no')
 > proc.time()
    user  system elapsed 
-  0.411   0.047   0.447 
+  0.510   0.066   0.589 

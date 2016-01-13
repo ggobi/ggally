@@ -89,4 +89,4 @@ Use lmrob argument 'setting="KS2014"' to avoid this problem.
 > 
 > proc.time()
    user  system elapsed 
-  2.572   0.059   2.648 
+  2.939   0.092   3.473 

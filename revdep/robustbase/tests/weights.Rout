@@ -446,4 +446,4 @@ Coefficients:
 > 
 > proc.time()
    user  system elapsed 
-  0.636   0.051   0.672 
+  0.817   0.077   0.904 

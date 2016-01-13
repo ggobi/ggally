@@ -74,7 +74,7 @@ Loading required package: tools
   It.   3, fac=           1, eval (no.,total): ( 1,  3): new dev = 19.4745
   It.   4, fac=           1, eval (no.,total): ( 1,  4): new dev = 19.4745
 > showProc.time()#                        ---- OS X needing 6e-8
-Time elapsed:  0.07 0.001 0.073 
+Time elapsed:  0.087 0.004 0.096 
 > 
 > ## robust
 > Rfit.MM.S.bisquare <-
@@ -87,27 +87,27 @@ Time elapsed:  0.07 0.001 0.073
 + Rfit.MM.S.hampel     <- update(Rfit.MM.S.bisquare, psi = "hampel")
 + }
 > showProc.time()
-Time elapsed:  1.097 0.023 1.121 
+Time elapsed:  1.191 0.025 1.24 
 > Rfit.MM.lts.bisquare <- update(Rfit.MM.S.bisquare, init = "lts")
 > Rfit.MM.lts.lqq      <- update(Rfit.MM.S.bisquare, init = "lts", psi = "lqq")
 > Rfit.MM.lts.optimal  <- update(Rfit.MM.S.bisquare, init = "lts", psi = "optimal")
 > Rfit.MM.lts.hampel   <- update(Rfit.MM.S.bisquare, init = "lts", psi = "hampel")
 > showProc.time()
-Time elapsed:  0.915 0.015 0.932 
+Time elapsed:  1.001 0.024 1.225 
 > 
 > S.time(Rfit.tau.bisquare <-
 +     nlrob.tau( y ~ Expo(x, a, b), data = d.exp30,
 +                lower = c(a = -10, b = -2), upper = c(10, 2),
 +                NP = NP, add_to_init_pop = init_p ))
-Time elapsed:  0.984 0.009 0.996 0 0 
+Time elapsed:  0.995 0.022 1.045 0 0 
 > S.time(Rfit.tau.optimal <- update(Rfit.tau.bisquare, psi = "optimal"))
-Time elapsed:  0.721 0.009 0.731 0 0 
+Time elapsed:  0.759 0.01 0.783 0 0 
 > 
 > S.time(Rfit.CM <- nlrob.CM( y ~ Expo(x, a, b), data = d.exp30,
 + 			    lower = c(a = -10, b = -2, sigma = 0),
 + 			    upper = c(	   10,	    2,	      10),
 +                             NP = NP, add_to_init_pop = init_p_sigma ))
-Time elapsed:  0.635 0.012 0.648 0 0 
+Time elapsed:  0.653 0.01 0.68 0 0 
 > S.time(Rfit.mtl <- nlrob.mtl(y ~ Expo(x, a, b), data = d.exp30,
 + 			     lower = c(a = -10, b = -2, sigma = 0),
 + 			     upper = c(	    10,	     2,		3),
@@ -325,9 +325,9 @@ Time elapsed:  0.635 0.012 0.648 0 0
 208 : < 1.340663e-07 > ( 8.806177 ) 0.9986676 0.199924 0.279079
 209 : < 1.340663e-07 > ( 8.806177 ) 0.9986676 0.199924 0.279079
 210 : < 9.675004e-08 > ( 8.806176 ) 0.9988367 0.1999053 0.2791298
-Time elapsed:  1.185 0.018 1.206 0 0 
+Time elapsed:  1.219 0.028 1.278 0 0 
 > showProc.time()
-Time elapsed:  4.126 0.053 4.189 
+Time elapsed:  4.246 0.078 4.428 
 > 
 > plot(y ~ x, d.exp30, main = "Data = d.exp30")
 > cTr <- adjustcolor("red4", 0.5)
@@ -340,7 +340,7 @@ Time elapsed:  4.126 0.053 4.189
 +        lwd=c(2,3, rep(1,ll)), lty=c(2,1, rep(1,ll)),
 +        col=c(cTr,cLS, rep(par("fg"),ll)), bty="n", inset=.01)
 > showProc.time()
-Time elapsed:  0.01 0.001 0.01 
+Time elapsed:  0.012 0.001 0.013 
 > 
 > ## 40% outliers present {use different data name: seen in print(<fitted model>)
 > d.exp40out <- within(d.exp30, y[15:27] <- y[15:27] + 100)
@@ -360,7 +360,7 @@ Time elapsed:  0.01 0.001 0.01
 > Rf.out.MM.lts.optimal  <- update(Rf.out.MM.lts.bisquare, psi= "optimal")
 > Rf.out.MM.lts.hampel   <- update(Rf.out.MM.lts.bisquare, psi= "hampel")
 > showProc.time()
-Time elapsed:  0.692 0.004 0.7 
+Time elapsed:  0.852 0.012 0.98 
 > 
 > Rf.out.tau.bisquare <- update(Rfit.tau.bisquare, data=d.exp40out)
 > Rf.out.tau.optimal  <- update(Rfit.tau.bisquare, data=d.exp40out, psi = "optimal")
@@ -493,7 +493,7 @@ Time elapsed:  0.692 0.004 0.7
 125 : < 1.076948e-07 > ( 40.07765 ) 0.9827752 0.1992413 0.7852453
 126 : < 9.502174e-08 > ( 40.07765 ) 0.9827752 0.1992413 0.7852453
 > showProc.time()
-Time elapsed:  3.885 0.041 4.023 
+Time elapsed:  3.956 0.051 4.08 
 > 
 > plot(y ~ x, d.exp40out, main = "Data = d.exp40out")
 > cE <- curve(Expo(x, a=1, b=0.2), 0, 10, n=1+2^9, col=cTr, lwd=2, lty=2, add=TRUE)
@@ -506,7 +506,7 @@ Time elapsed:  3.885 0.041 4.023
 +        lwd=c(2,3, rep(1,1+ll)), lty=c(2,1,2, rep(1,ll)),
 +        col=c(cTr,cLS,cLS, rep(par("fg"),ll)), bty="n", inset=.01)
 > showProc.time()
-Time elapsed:  0.007 0 0.008 
+Time elapsed:  0.012 0.002 0.017 
 > 
 > ## presence of high leverage point outliers
 > d.exp.Hlev <- within(d.exp40out, {
@@ -517,7 +517,7 @@ Time elapsed:  0.007 0 0.008
 > Cfit.Hlev <- update(Cfit.40out, data = d.exp.Hlev)
 > Cfit.no.Hlev <- update(Cfit.Hlev, subset = -(28:30))
 > showProc.time()
-Time elapsed:  0.01 0 0.01 
+Time elapsed:  0.011 0 0.013 
 > 
 > if(doExtras) {
 + Rf.Hlev.MM.S.bisquare   <- update(Rfit.MM.S.bisquare, data = d.exp.Hlev)
@@ -531,7 +531,7 @@ Time elapsed:  0.01 0 0.01
 > Rf.Hlev.MM.lts.optimal  <- update(Rf.Hlev.MM.lts.bisquare, psi="optimal")
 > Rf.Hlev.MM.lts.hampel   <- update(Rf.Hlev.MM.lts.bisquare, psi= "hampel")
 > showProc.time()
-Time elapsed:  0.566 0.004 0.572 
+Time elapsed:  0.564 0.007 0.58 
 > 
 > Rf.Hlev.tau.bisquare <- update(Rfit.tau.bisquare, data = d.exp.Hlev)
 > Rf.Hlev.tau.optimal  <- update(Rf.Hlev.tau.bisquare, psi = "optimal")
@@ -680,7 +680,7 @@ Time elapsed:  0.566 0.004 0.572
 141 : < 1.012376e-07 > ( 13.50483 ) 0.8801867 0.2293926 0.3458295
 142 : < 9.729146e-08 > ( 13.50483 ) 0.8801867 0.2293926 0.3458295
 > showProc.time()
-Time elapsed:  2.471 0.02 2.501 
+Time elapsed:  2.52 0.033 2.587 
 > 
 > plot(y ~ x, d.exp.Hlev, main = "Data = d.exp.Hlev")
 > cE <- curve(Expo(x, a=1, b=0.2), 0, par("usr")[2], n=1+2^9, col=cTr, lwd=2, lty=2, add=TRUE)
@@ -693,7 +693,7 @@ Time elapsed:  2.471 0.02 2.501
 +        lwd=c(2,3, rep(1,1+ll)), lty=c(2,1,2, rep(1,ll)),
 +        col=c(cTr, cLS,cLS, rep(par("fg"),ll)), bty="n", inset=.01)
 > showProc.time()
-Time elapsed:  0.014 0.001 0.015 
+Time elapsed:  0.013 0.001 0.014 
 > 
 > 				        cfcl <- coef(Cfit)
 > 				        cfcl.n.o <- coef(Cfit.no.out)
@@ -854,7 +854,7 @@ Rfit.tau.optimal        0.9963417 0.2010482 0.8332127
 +      adj= -1/5, srt=75, xpd=NA)
 > points(rbind(cfcl), col=adjustcolor("tomato",.5), cex=2, pch=3, lwd=5)
 > showProc.time()
-Time elapsed:  0.032 0.003 0.034 
+Time elapsed:  0.028 0.002 0.032 
 > 
 > 
 > ###------- Extended Tests for the DNase1 example from >>>> ../man/nlrob-algos.Rd <<<<
@@ -967,7 +967,7 @@ iter   10 value 732.941462
 final  value 732.397073 
 converged
 > showProc.time()
-Time elapsed:  2.144 0.021 2.174 
+Time elapsed:  2.42 0.052 2.682 
 > 
 > ## for comparisons, later:
 > all.eq.mod <- function(m1, m2, sub=FALSE, excl = c("call", "ctrl"), ...) {
@@ -1110,7 +1110,7 @@ MM 2.561138 1.730322 1.112787
 > ## ) # had 3.26e-5
 > ## FIXME:  nlrob( "M")  should allow to keep specify an initial sigma *and* keep that fixed
 > showProc.time()
-Time elapsed:  0.075 0.004 0.079 
+Time elapsed:  0.075 0.004 0.082 
 > 
 > 
 > ### Now call the above methods via nlrob():
@@ -1126,7 +1126,7 @@ Time elapsed:  0.075 0.004 0.079
 > gmtl  <- nlrob(form, data = DNase1, method = "mtl",
 +               lower = setNames(c(0,0,0,0), psNms), upper = 3)
 > showProc.time()
-Time elapsed:  7.957 0.051 8.092 
+Time elapsed:  8.451 0.084 8.902 
 > 
 > ## list {and test print(<nlrob>) for these}:
 > (mod2 <- list(MM=gMM, tau=gtau, CM=gCM, MTL=gmtl))
@@ -1169,4 +1169,4 @@ Robustly fitted nonlinear regression model (method mtl)
 > 
 > proc.time()
    user  system elapsed 
- 25.962   0.340  26.512 
+ 27.691   0.532  29.690 

@@ -431,7 +431,7 @@ Mean relative difference: 9.409394e-16
 +     cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
 +     quit()
 + }
-Time elapsed:  2.145 0.112 2.258 0.002 0.005 
+Time elapsed:  2.31 0.129 2.505 0.003 0.006 
 > proc.time()
    user  system elapsed 
-  2.147   0.117   2.258 
+  2.313   0.135   2.505 

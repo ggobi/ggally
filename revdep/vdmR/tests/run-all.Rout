@@ -28,4 +28,4 @@ Placing tests in `inst/tests/` is deprecated. Please use `tests/testthat/` inste
 > 
 > proc.time()
    user  system elapsed 
- 15.008   0.238  15.399 
+ 14.939   0.277  15.508 

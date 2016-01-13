@@ -133,8 +133,8 @@ X8 -0.003  0.392  0.488  0.412  0.353  0.380  0.439
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  0.538 0.056 0.603 0.003 0.006 
+Time elapsed:  0.533 0.069 0.618 0.003 0.006 
 > 
 > proc.time()
    user  system elapsed 
-  0.541   0.062   0.603 
+  0.536   0.075   0.618 

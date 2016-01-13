@@ -195,7 +195,7 @@ Warning in check_and_set_ggpairs_defaults("diag", diag, continuous = "densityDia
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.485 0.055 2.579 0 0 
+Time elapsed:  2.491 0.07 2.664 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -61,7 +61,7 @@ Loading required package: tools
 +                   lmrob.control(psi = "ggw", tuning.psi = cc)$tuning.psi)
 + )
 > cat('Time for constants computation of tuning.psi: ', st,'\n')
-Time for constants computation of tuning.psi:  0.363 0.013 0.381 0 0 
+Time for constants computation of tuning.psi:  0.42 0.019 0.507 0 0 
 > cGct <- t(sapply(cG.cnst, attr, "constants"))[,-1]
 > colnames(cGct) <- c("a","b","c", "rhoInf")
 > signif(cGct, 4)
@@ -740,8 +740,8 @@ seed : int(0)
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-Time elapsed:  5.262 0.265 5.585 0.002 0.005 
+Time elapsed:  6.195 0.381 7.927 0.003 0.007 
 > 
 > proc.time()
    user  system elapsed 
-  5.264   0.271   5.585 
+  6.198   0.388   7.927 

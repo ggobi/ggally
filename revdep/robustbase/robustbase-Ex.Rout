@@ -3299,11 +3299,11 @@ F-statistic: 359.3 on 1 and 17 DF,  p-value: 7.182e-13
 > R2 <- system.time(r2 <- apply(x, 1, median, na.rm=TRUE))
 > C2 <- system.time(y2 <- apply(x, 2, median, na.rm=TRUE))
 > R2 / R1 # speedup factor: ~= 4   {platform dependent}
-   user  system elapsed 
-    5.5     NaN     5.5 
+     user    system   elapsed 
+ 8.333333       Inf 13.500000 
 > C2 / C1 # speedup factor: ~= 5.8 {platform dependent}
-   user  system elapsed 
-     18     Inf      18 
+    user   system  elapsed 
+10.66667      Inf  8.25000 
 > stopifnot(all.equal(y1, y2, tol=1e-15),
 +           all.equal(r1, r2, tol=1e-15))
 > 
@@ -3556,8 +3556,8 @@ $raw.mah
 $wgtFUN
 function (d) 
 as.numeric(d < median(d) * cMah)
-<bytecode: 0x7fd94ca87260>
-<environment: 0x7fd94cad8c00>
+<bytecode: 0x7fef42a02e60>
+<environment: 0x7fef42ea1000>
 
 $cov
           X1        X2        X3
@@ -3686,8 +3686,8 @@ $raw.mah
 $wgtFUN
 function (d) 
 as.numeric(d < median(d) * cMah)
-<bytecode: 0x7fd94ca87260>
-<environment: 0x7fd94ca33468>
+<bytecode: 0x7fef42a02e60>
+<environment: 0x7fef461e8268>
 
 $cov
           X1        X2        X3
@@ -7997,7 +7997,7 @@ attr(,"legend")
 > set.seed(1)
 > system.time(cc.ri <- covMcd(radarImage))# ~ 0.1 sec
    user  system elapsed 
-  0.105   0.000   0.106 
+  0.097   0.001   0.100 
 > ## check for covMcd() consistency:
 > iiO <- as.integer(
 +  c(262, 450:451, 480:481, 509, 535, 542, 597, 643, 669, 697, 803:804, 832:834,
@@ -8045,7 +8045,7 @@ function (A, tol = NULL, sv = svd(A, 0, 0)$d)
     else stopifnot(is.numeric(tol), tol >= 0)
     sum(sv >= tol)
 }
-<bytecode: 0x7fd94c1c8990>
+<bytecode: 0x7fef458074a0>
 <environment: namespace:robustbase>
 > 
 > hilbert <- function(n) { i <- seq_len(n); 1/outer(i - 1L, i, "+") }
@@ -9414,7 +9414,7 @@ x5  -0.0024503   3.554e-05   0.0005297   2.748e-03   4.160e-03
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  15.397 0.385 15.951 0 0 
+Time elapsed:  15.825 0.509 17.084 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Indiana/Indianapolis |
-|date     |2015-12-29                   |
+|date     |2016-01-13                   |
 
 ## Packages
 
@@ -23,13 +23,13 @@
 |gtable       |   |0.1.2   |2012-12-05 |CRAN (R 3.0.0) |
 |igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.2.0) |
 |intergraph   |   |2.0-2   |2015-06-30 |CRAN (R 3.2.0) |
-|knitr        |   |1.11    |2015-08-14 |CRAN (R 3.2.2) |
-|lintr        |   |0.3.3   |2015-09-15 |CRAN (R 3.2.3) |
-|maps         |   |3.0.1   |2015-12-04 |CRAN (R 3.2.3) |
+|knitr        |   |1.12    |2016-01-07 |CRAN (R 3.2.3) |
+|maps         |   |3.0.2   |2016-01-04 |CRAN (R 3.2.3) |
 |network      |   |1.12.0  |2015-04-07 |CRAN (R 3.2.0) |
 |plyr         |   |1.8.3   |2015-06-12 |CRAN (R 3.2.0) |
 |RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.2.0) |
 |reshape      |   |0.8.5   |2014-04-23 |CRAN (R 3.0.2) |
+|rmarkdown    |   |0.9.2   |2016-01-01 |CRAN (R 3.2.3) |
 |roxygen2     |   |5.0.1   |2015-11-11 |CRAN (R 3.2.2) |
 |scagnostics  |   |0.2-4   |2012-11-05 |CRAN (R 3.1.0) |
 |scales       |   |0.3.0   |2015-08-25 |CRAN (R 3.2.0) |
@@ -47,7 +47,7 @@ Maintainer: Di Cook <dicook@iastate.edu>
 ```
 checking whether package ‘DescribeDisplay’ can be installed ... ERROR
 Installation failed.
-See ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpbPiubW/check_cran12f4445b08432/DescribeDisplay.Rcheck/00install.out’ for details.
+See ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpAWJpHl/check_cran32366c23ed51/DescribeDisplay.Rcheck/00install.out’ for details.
 ```
 ```
 DONE
@@ -100,38 +100,11 @@ DONE
 Status: 1 ERROR, 2 NOTEs
 ```
 
-## ggmcmc (0.7.2)
+## ggmcmc (0.7.3)
 Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>  
 Bug reports: https://github.com/xfim/ggmcmc/issues
 
-```
-checking examples ... ERROR
-Running examples in ‘ggmcmc-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: ggs_pairs
-> ### Title: Create a plot matrix of posterior simulations
-> ### Aliases: ggs_pairs
-> 
-> ### ** Examples
-> 
-> data(linear)
-> 
-> # default ggpairs plot
-> ggs_pairs(ggs(s))
-> 
-> # change alpha transparency of points
-> ggs_pairs(ggs(s), lower=list(params=c(alpha=.2)))
-Error in display_param_error() : 
-  'params' is a deprecated argument.  Please 'wrap' the function to supply arguments. help("wrap", package = "GGally")
-Calls: ggs_pairs ... check_and_set_ggpairs_defaults -> display_param_error
-Execution halted
-```
-```
-DONE
-Status: 1 ERROR
-```
+__OK__
 
 ## LANDD (1.0.0)
 Maintainer: Shangzhao Qiu <qsz1328@gmail.com>
@@ -154,7 +127,7 @@ Maintainer: Xiaoyue Cheng <xycheng@unomaha.edu>
 ```
 checking whether package ‘MissingDataGUI’ can be installed ... ERROR
 Installation failed.
-See ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpbPiubW/check_cran12f4445b08432/MissingDataGUI.Rcheck/00install.out’ for details.
+See ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpAWJpHl/check_cran32366c23ed51/MissingDataGUI.Rcheck/00install.out’ for details.
 ```
 ```
 DONE

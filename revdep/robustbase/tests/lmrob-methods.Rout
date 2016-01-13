@@ -359,4 +359,4 @@ Error in lmrob.S(model.matrix(model, NOxEmissions)[1:682, ], NOxEmissions$LNOx[1
 > 
 > proc.time()
    user  system elapsed 
-  0.683   0.080   0.750 
+  0.744   0.094   0.934 

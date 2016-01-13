@@ -37,4 +37,4 @@ Error : .onAttach failed in attachNamespace() for 'gWidgetsRGtk2', details:
   error: "S_gtk_icon_factory_new" not available for .Call() for package "RGtk2"
 Error : package ‘gWidgetsRGtk2’ could not be loaded
 ERROR: lazy loading failed for package ‘MissingDataGUI’
-* removing ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpbPiubW/check_cran12f4445b08432/MissingDataGUI.Rcheck/MissingDataGUI’
+* removing ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpAWJpHl/check_cran32366c23ed51/MissingDataGUI.Rcheck/MissingDataGUI’

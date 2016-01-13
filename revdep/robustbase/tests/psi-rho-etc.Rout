@@ -96,7 +96,7 @@ function (u, k)
     y[not0] <- (Dpsi(u, k) - psi(u, k)/u)/u
     y
 }
-<environment: 0x7f8f432a3b80>
+<environment: 0x7f9ea3d23d80>
 > stopifnot(is.function(ddd), names(formals(ddd)) == c("u","k"),
 + 	  EQ(ddd(x, 1.345), huberPsi@Dwgt(x)))
 > 
@@ -226,4 +226,4 @@ function (u, k)
 > 
 > proc.time()
    user  system elapsed 
-  0.702   0.058   0.751 
+  0.740   0.064   0.794 

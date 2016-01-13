@@ -384,8 +384,8 @@ seed : int(0)
 > 
 > 
 > cat('Time elapsed: ', proc.time(),'\n') # "stats"
-Time elapsed:  0.534 0.051 0.579 0.002 0.005 
+Time elapsed:  0.523 0.053 0.57 0.003 0.006 
 > 
 > proc.time()
    user  system elapsed 
-  0.536   0.056   0.579 
+  0.526   0.059   0.570 

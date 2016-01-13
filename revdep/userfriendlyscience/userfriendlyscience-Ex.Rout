@@ -79,7 +79,7 @@ case      e=[0; NA]      r=[-0.12; 0.13] r=[-0.11; 0.14]
 > ### Use variable names in the columns and generate html
 > associationMatrix(Orange, colNames=TRUE, type='html');
 <!-- html table generated in R 3.2.3 by xtable 1.8-0 package -->
-<!-- Tue Dec 29 21:55:45 2015 -->
+<!-- Wed Jan 13 16:48:07 2016 -->
 <table cellpadding='5' style='border=0 solid;'>
 <tr> <th>  </th> <th> Tree </th> <th> age </th> <th> circumference </th>  </tr>
   <tr> <td> Tree </td> <td align="center">  </td> <td align="center">  </td> <td align="center">  </td> </tr>
@@ -236,7 +236,7 @@ Filtered 4 rows (records, cases, participants, or datapoints) from dataframe 'ex
 4 8 0
 > ### Restore the old dataframe
 > (useAll(exampleDat));
-Removed last applied filter to dataframe 'exampleDat', which was applied at 2015-12-29 21:55:45 and removed (filtered) 4 rows (records, cases, participants, or datapoints) from the dataframe that was originally called 'exampleDat'. Restored dataframe has 8 rows.
+Removed last applied filter to dataframe 'exampleDat', which was applied at 2016-01-13 16:48:07 and removed (filtered) 4 rows (records, cases, participants, or datapoints) from the dataframe that was originally called 'exampleDat'. Restored dataframe has 8 rows.
 Replaced filtered dataframe 'exampleDat'.
   x y
 1 8 0

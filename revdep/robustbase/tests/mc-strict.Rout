@@ -35,14 +35,14 @@ Loading required package: tools
 > 
 > n.set <- c(1:99, 1e5L+ 0:1) # large n gave integer overflow in earlier versions
 > DO(0 == sapply(n.set, function(n) mc(seq_len(n))))
-Time elapsed:  0.036 0.002 0.038 0 0 
+Time elapsed:  0.032 0.003 0.035 0 0 
 > DO(0 == sapply(n.set, function(n) mc(seq_len(n), doRefl=FALSE)))
-Time elapsed:  0.029 0 0.029 0 0 
+Time elapsed:  0.029 0.001 0.03 0 0 
 > 
 > DO(0 == sapply(1:100, function(n) mcNaive(seq_len(n), "simple")))
-Time elapsed:  0.034 0.001 0.036 0 0 
+Time elapsed:  0.032 0.003 0.034 0 0 
 > DO(0 == sapply(1:100, function(n) mcNaive(seq_len(n), "h.use" )))
-Time elapsed:  0.033 0.003 0.036 0 0 
+Time elapsed:  0.037 0.001 0.041 0 0 
 > 
 > 
 > x1 <- c(1, 2, 7, 9, 10)
@@ -87,20 +87,20 @@ Time elapsed:  0.033 0.003 0.036 0 0
 > ###                      ================= changed after long-standing bug fix in Oct.2014
 > 
 > set.seed(1);  S.time(a1.1 <- adjOutlyingness(longley))
-Time elapsed:  0.092 0.001 0.093 0 0 
+Time elapsed:  0.1 0.004 0.115 0 0 
 > set.seed(11); S.time(a1.2 <- adjOutlyingness(longley))
-Time elapsed:  0.092 0.001 0.094 0 0 
+Time elapsed:  0.087 0.001 0.089 0 0 
 > ##
 > set.seed(2); S.time(a2 <- adjOutlyingness(hbk))
-Time elapsed:  0.107 0.003 0.111 0 0 
+Time elapsed:  0.13 0.006 0.165 0 0 
 > set.seed(3); S.time(a3 <- adjOutlyingness(hbk[, 1:3]))# the 'X' space
-Time elapsed:  0.111 0.002 0.114 0 0 
+Time elapsed:  0.122 0.004 0.155 0 0 
 > set.seed(4); S.time(a4 <- adjOutlyingness(milk)) # obs.63 = obs.64
-Time elapsed:  0.115 0.003 0.118 0 0 
+Time elapsed:  0.15 0.006 0.204 0 0 
 > set.seed(5); S.time(a5 <- adjOutlyingness(wood))
-Time elapsed:  0.084 0 0.083 0 0 
+Time elapsed:  0.127 0.003 0.167 0 0 
 > set.seed(6); S.time(a6 <- adjOutlyingness(wood[, 1:5]))# the 'X' space
-Time elapsed:  0.093 0.001 0.095 0 0 
+Time elapsed:  0.11 0.004 0.152 0 0 
 > 
 > ## 32-bit <-> 64-bit different results {tested on Linux only}
 > is32 <- .Machine$sizeof.pointer == 4 ## <- should work for Linux/MacOS/Windows
@@ -809,8 +809,8 @@ Warning messages:
 > 
 > 
 > c.time(proc.time())
-Time elapsed:  7.554 0.182 7.759 0.002 0.005 
+Time elapsed:  8.58 0.305 9.874 0.003 0.007 
 > 
 > proc.time()
    user  system elapsed 
-  7.557   0.187   7.759 
+  8.583   0.312   9.874 

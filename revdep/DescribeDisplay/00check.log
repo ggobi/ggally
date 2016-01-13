@@ -1,4 +1,4 @@
-* using log directory ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpbPiubW/check_cran12f4445b08432/DescribeDisplay.Rcheck’
+* using log directory ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpAWJpHl/check_cran32366c23ed51/DescribeDisplay.Rcheck’
 * using R version 3.2.3 (2015-12-10)
 * using platform: x86_64-apple-darwin13.4.0 (64-bit)
 * using session charset: UTF-8
@@ -15,6 +15,6 @@
 * checking for sufficient/correct file permissions ... OK
 * checking whether package ‘DescribeDisplay’ can be installed ... ERROR
 Installation failed.
-See ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpbPiubW/check_cran12f4445b08432/DescribeDisplay.Rcheck/00install.out’ for details.
+See ‘/private/var/folders/b_/p70ksf2n01n6bjj3zs47s8rc0000gn/T/RtmpAWJpHl/check_cran32366c23ed51/DescribeDisplay.Rcheck/00install.out’ for details.
 * DONE
 Status: 1 ERROR
