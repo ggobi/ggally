@@ -1,28 +1,53 @@
 ## Test environments and R CMD check results
+
+I did update from knitr::knit to installing rmarkdown and using knitr::rmarkdown as per request of knitr.  This has increased my vignette file sizes.
+
+
 * local OS X install (x86_64-apple-darwin13.4.0), R 3.2.3
-  * There were no ERRORs, WARNINGs, or NOTEs.
+  * There were no ERRORs or WARNINGs.
+  * There is one NOTE.
+    * checking installed package size ... NOTE
+      installed size is  7.6Mb
+      sub-directories of 1Mb or more:
+        doc   6.8Mb
 
 * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.2.3
-  * There were no ERRORs, WARNINGs.  There are two NOTEs, but they are false positives.
+  * There were no ERRORs, WARNINGs.  
+  * There are two NOTEs. The libcurl NOTE is a false positive.
     * checking CRAN incoming feasibility ... NOTE
     Maintainer: ‘Barret Schloerke <schloerke@gmail.com>’
     Checking URLs requires 'libcurl' support in the R build
 
-    * Package has a VignetteBuilder field but no prebuilt vignette index.
+    * checking installed package size ... NOTE
+    installed size is  7.5Mb
+    sub-directories of 1Mb or more:
+      doc   6.7Mb
 
 
 * win-builder (devel and release)
-  * There were no ERRORs, WARNINGs.  There is one NOTE.
-    * Note: Two examples take longer than 5 seconds
-      ** running examples for arch 'i386' ... OK
-      Examples with CPU or elapsed time > 5s
-                 user system elapsed
-      ggnetworkmap 3.76   0.37    5.62
+  * There were no ERRORs, WARNINGs.  
+  * There are two NOTEs.
+    * checking installed package size ... NOTE
+    installed size is  7.6Mb
+    sub-directories of 1Mb or more:
+      doc   6.8Mb
 
-      ** running examples for arch 'x64' ... OK
-      Examples with CPU or elapsed time > 5s
+    * checking CRAN incoming feasibility ... NOTE
+    Possibly mis-spelled words in DESCRIPTION:
+      geoms (24:40)
+      ggplot (5:21, 23:45)
+      scatterplot (25:49)
+
+  * a couple examples take more than five seconds. But it is not user time.
+    ** running examples for arch 'i386' ... [43s] OK
+    Examples with CPU or elapsed time > 5s
                  user system elapsed
-      ggnetworkmap 3.74   0.31    6.31
+    ggnetworkmap 3.79   0.36    5.89
+    ggcorr       1.24   0.08    6.10
+    ** running examples for arch 'x64' ... [41s] OK
+    Examples with CPU or elapsed time > 5s
+                 user system elapsed
+    ggnetworkmap  3.7   0.41    5.77
 
 
 ## Downstream dependencies
@@ -30,12 +55,8 @@ I have run R CMD check on downstream dependencies of GGally on my local machine.
 * Summary - https://github.com/ggobi/ggally/blob/master/revdep/summary.md
 * Check result folders - https://github.com/ggobi/ggally/blob/master/revdep/
 
+All downstream authors were not contacted as the update is minor.  Only in contact with authors who requested minor update.
 
-* GGally update related errors
-  * ggmcmc (0.7.2) - ERROR
-    * Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>  
-    * Submitted working PR to ggmcmc
-    * !! Xavier is waiting until GGally and ggplot2 are updated to submit his updated package !!
 
 * Non-GGally error
   * freqparcoord (1.0.0) - Maintainer: Norm Matloff <normmatloff@gmail.com>
@@ -54,6 +75,7 @@ I have run R CMD check on downstream dependencies of GGally on my local machine.
     * Packages required but not available: ‘xcms’ ‘MAIT’ ‘genefilter’ ‘impute’
 
 * No error (Works!)
+  * ggmcmc (0.7.3) - Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>  
   * ParamHelpers (1.6) - Maintainer: Bernd Bischl <bernd_bischl@gmx.net>  
   * PopGenReport (2.2) - Maintainer: Bernd Gruber <bernd.gruber@canberra.edu.au>
   * qualvar (0.1.0) - Maintainer: Joel Gombin <joel.gombin@gmail.com>
