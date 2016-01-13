@@ -7,12 +7,12 @@ output:
     highlight: default
     toc: true
     theme: united
+vignette: >
+  %\VignetteIndexEntry{ggmatrix}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
-<!--
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{ggmatrix}
--->
 
 ```{r echo=FALSE, message=FALSE}
 ignore <- suppressMessages(library(ggplot2))
