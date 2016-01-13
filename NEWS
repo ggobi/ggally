@@ -1,3 +1,19 @@
+GGally 1.0.1
+-----------------
+
+ggparcoord
+
+* fix handling of factor group variable PR#131
+
+ggscatmat
+
+* force all char columns to factors PR#134
+
+print.ggmatrix
+
+* add boolean for grid.newpage ggmatrix print method PR#126
+
+
 GGally 1.0.0
 -----------------
 
