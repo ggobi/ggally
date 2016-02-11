@@ -204,6 +204,7 @@ ggcorr <- function(
   # -- correlation data.frame --------------------------------------------------
 
   m = data.frame(m * lower.tri(m))
+  rownames(m) = names(m)
   m$.ggally_ggcorr_row_names = rownames(m)
   m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
   names(m) = c("x", "y", "coefficient")
