@@ -106,7 +106,10 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   if (is.null(color)){
     data.cor <- ddply(b, .(ylab, xlab), summarise,
                       r = paste(round(
-                        cor(xvalue, yvalue, use = "pairwise.complete.obs"),
+                      if(corr = "rsquare") {
+                      cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "pearson")^2
+                      }else{
+                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "corr")},
                         digits = 2
                       )),
                       xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
@@ -116,7 +119,10 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
     c <- b
     data.cor1 <- ddply(c, .(ylab, xlab, colorcolumn), summarise,
                       r = paste(round(
-                        cor(xvalue, yvalue, use = "pairwise.complete.obs"),
+                      if(corr = "rsquare") {
+                      cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "pearson")^2
+                      }else{
+                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "corr")},
                         digits = 2
                       ))
                     )
@@ -226,7 +232,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' data(flea)
 #' ggscatmat(flea, columns = 2:4)
 #' ggscatmat(flea, columns = 2:4, color = "species")
-ggscatmat <- function(data, columns=1:ncol(data), color = NULL, alpha = 1){
+ggscatmat <- function(data, columns=1:ncol(data), color = NULL, alpha = 1, corr = "pearson"){
 
   data <- upgrade_scatmat_data(data)
   data.choose <- data[, columns]
