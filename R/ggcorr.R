@@ -72,9 +72,7 @@ if (getRversion() >= "2.15.1") {
 #' @param midpoint the midpoint value for continuous scaling of the
 #' correlation coefficients.
 #' Defaults to \code{0}.
-#' @param limits whether to bound the color scaling of the correlation
-#' coefficients between -1 and +1.
-#' Defaults to \code{TRUE} (recommended).
+#' @param limits bounding of color scaling for correlations, set \code{limits = NULL} to remove
 #' @param drop if using \code{nbreaks}, whether to drop unused breaks from the
 #' color scale.
 #' Defaults to \code{FALSE} (recommended).
@@ -151,7 +149,7 @@ ggcorr <- function(
   label_color = "black",
   label_round = 1,
   label_size = 4,
-  limits = TRUE,
+  limits = c(-1, 1),
   drop = !limits,
   layout.exp = 0,
   legend.position = "right",
@@ -204,6 +202,7 @@ ggcorr <- function(
   # -- correlation data.frame --------------------------------------------------
 
   m = data.frame(m * lower.tri(m))
+  rownames(m) = names(m)
   m$.ggally_ggcorr_row_names = rownames(m)
   m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
   names(m) = c("x", "y", "coefficient")
@@ -259,17 +258,17 @@ ggcorr <- function(
 
     # -- tiles, color scale ----------------------------------------------------
 
-    if (is.null(nbreaks) && limits) {
+    if (is.null(nbreaks) && !is.null(limits)) {
 
       p = p +
         scale_fill_gradient2(name, low = low, mid = mid, high = high,
-                             midpoint = midpoint, limits = c(-1, 1))
+                             midpoint = midpoint, limits = limits)
 
     } else if (is.null(nbreaks)) {
 
-      p = p +
-        scale_fill_gradient2(name, low = low, mid = mid, high = high,
-                             midpoint = midpoint)
+        p = p +
+          scale_fill_gradient2(name, low = low, mid = mid, high = high,
+                               midpoint = midpoint)
 
     } else if (is.null(palette)) {
 
@@ -314,11 +313,11 @@ ggcorr <- function(
 
     # -- circles, color scale --------------------------------------------------
 
-    if (is.null(nbreaks) && limits) {
+    if (is.null(nbreaks) && !is.null(limits)) {
 
       p = p +
         scale_color_gradient2(name, low = low, mid = mid, high = high,
-                              midpoint = midpoint, limits = c(-1, 1))
+                              midpoint = midpoint, limits = limits)
 
     } else if (is.null(nbreaks)) {
 
@@ -362,11 +361,11 @@ ggcorr <- function(
 
     # -- text, color scale ----------------------------------------------------
 
-    if (is.null(nbreaks) && limits) {
+    if (is.null(nbreaks) && !is.null(limits)) {
 
       p = p +
         scale_color_gradient2(name, low = low, mid = mid, high = high,
-                              midpoint = midpoint, limits = c(-1, 1))
+                              midpoint = midpoint, limits = limits)
 
     } else if (is.null(nbreaks)) {
 
