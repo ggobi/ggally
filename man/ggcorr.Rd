@@ -9,7 +9,7 @@ ggcorr(data, method = c("pairwise", "pearson"), cor_matrix = NULL,
   mid = "#EEEEEE", high = "#F21A00", midpoint = 0, palette = NULL,
   geom = "tile", min_size = 2, max_size = 6, label = FALSE,
   label_alpha = FALSE, label_color = "black", label_round = 1,
-  label_size = 4, limits = TRUE, drop = !limits, layout.exp = 0,
+  label_size = 4, limits = c(-1, 1), drop = !limits, layout.exp = 0,
   legend.position = "right", legend.size = 9, ...)
 }
 \arguments{
@@ -92,9 +92,7 @@ Defaults to \code{1}.}
 \item{label_size}{the size of the correlation coefficients.
 Defaults to \code{4}.}
 
-\item{limits}{whether to bound the color scaling of the correlation
-coefficients between -1 and +1.
-Defaults to \code{TRUE} (recommended).}
+\item{limits}{bounding of color scaling for correlations, set \code{limits = NULL} to remove}
 
 \item{drop}{if using \code{nbreaks}, whether to drop unused breaks from the
 color scale.
