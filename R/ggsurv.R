@@ -207,6 +207,7 @@ ggsurv_m <- function(
     }
     return(res)
   }
+  
   lastv = ugroups[order(getlast(s),decreasing=T)]
   groups = factor(ugroups,levels = lastv)
   gr.name <-  strataEqualNames[1]
