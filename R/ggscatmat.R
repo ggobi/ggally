@@ -109,7 +109,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
                       if(corr = "rsquare") {
                       cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "pearson")^2
                       }else{
-                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "corr")},
+                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = corr)},
                         digits = 2
                       )),
                       xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
@@ -122,7 +122,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
                       if(corr = "rsquare") {
                       cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "pearson")^2
                       }else{
-                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "corr")},
+                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = corr)},
                         digits = 2
                       ))
                     )
