@@ -104,28 +104,33 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   a <- rp.new
   b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
   if (is.null(color)){
-    data.cor <- ddply(b, .(ylab, xlab), summarise,
-                      r = paste(round(
-                      if(corr = "rsquare") {
-                      cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "pearson")^2
-                      }else{
-                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = corr)},
-                        digits = 2
-                      )),
-                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-                      yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue)))
+    data.cor <- ddply(
+      b, .(ylab, xlab), summarise,
+      r = paste(round(
+        if (identical(corMethod, "rsquare")) {
+          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = "pearson")^2
+        } else {
+          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = corMethod)
+        },
+        digits = 2
+      )),
+      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+      yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
+    )
     return(data.cor)
   }else{
     c <- b
-    data.cor1 <- ddply(c, .(ylab, xlab, colorcolumn), summarise,
-                      r = paste(round(
-                      if(corr = "rsquare") {
-                      cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = "pearson")^2
-                      }else{
-                        cor(xvalue, yvalue, use = "pairwise.complete.obs",  corr = corr)},
-                        digits = 2
-                      ))
-                    )
+    data.cor1 <- ddply(
+      c, .(ylab, xlab, colorcolumn), summarise,
+      r = paste(round(
+        if (identical(corMethod, "rsquare")) {
+          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = "pearson")^2
+        } else {
+          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = corMethod)
+        },
+        digits = 2
+      ))
+    )
     n <- nrow(data.frame(unique(b$colorcolumn)))
     position <- ddply(b, .(ylab, xlab), summarise,
                       xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
@@ -227,12 +232,13 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}.
 #' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}.
 #' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
+#' @param corMethod method argument supplied to \code{\link[stats]{cor}}
 #' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
 #' @examples
 #' data(flea)
 #' ggscatmat(flea, columns = 2:4)
 #' ggscatmat(flea, columns = 2:4, color = "species")
-ggscatmat <- function(data, columns=1:ncol(data), color = NULL, alpha = 1, corr = "pearson"){
+ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson"){
 
   data <- upgrade_scatmat_data(data)
   data.choose <- data[, columns]
@@ -245,7 +251,7 @@ ggscatmat <- function(data, columns=1:ncol(data), color = NULL, alpha = 1, corr 
     stop ("Not enough numeric variables to make a scatter plot matrix")
   }
 
-  a <- uppertriangle(data, columns = columns, color = color)
+  a <- uppertriangle(data, columns = columns, color = color, corMethod = corMethod)
   if (is.null(color)){
     plot <- scatmat(data, columns = columns, alpha = alpha) +
       geom_text(data = a, aes_string(label = "r"), colour = "black")
