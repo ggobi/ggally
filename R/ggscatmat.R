@@ -57,6 +57,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to choose a factor variable to be grouped with. Defaults to \code{(NULL)}
+#' @param corMethod method argument supplied to \code{\link[stats]{cor}}
 #' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
 #' @importFrom stats cor
 #' @examples
@@ -64,7 +65,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' head(uppertriangle(flea, columns=2:4))
 #' head(uppertriangle(flea))
 #' head(uppertriangle(flea, color="species"))
-uppertriangle <- function(data, columns=1:ncol(data), color=NULL) {
+uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "pearson") {
   data <- upgrade_scatmat_data(data)
   data.choose <- data[, columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
