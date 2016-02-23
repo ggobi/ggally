@@ -197,11 +197,19 @@ ggsurv_m <- function(
   n <- s$strata
 
   strataEqualNames <- unlist(strsplit(names(s$strata), '='))
-  groups <- factor(
-    strataEqualNames[seq(2, 2 * strata, by = 2)],
-    levels = strataEqualNames[seq(2, 2 * strata, by = 2)]
-  )
-
+  ugroups <- unlist(strsplit(names(s$strata), '='))[seq(2, 2*strata, by = 2)]
+  getlast = function(x) {
+    res=NULL
+    for (mo in names(x$strata)) {
+      sur = x[mo]$surv
+      n = length(sur)
+      res = append(res,sur[n])
+    }
+    return(res)
+  }
+  
+  lastv = ugroups[order(getlast(s),decreasing=T)]
+  groups = factor(ugroups,levels = lastv)
   gr.name <-  strataEqualNames[1]
   gr.df   <- vector('list', strata)
   n.ind   <- cumsum(c(0,n))
