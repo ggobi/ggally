@@ -150,7 +150,7 @@ ggcorr <- function(
   label_round = 1,
   label_size = 4,
   limits = c(-1, 1),
-  drop = !limits,
+  drop = is.null(limits) || identical(limits, FALSE),
   layout.exp = 0,
   legend.position = "right",
   legend.size = 9,
