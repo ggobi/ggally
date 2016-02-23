@@ -4,7 +4,8 @@
 \alias{ggscatmat}
 \title{ggscatmat - a traditional scatterplot matrix for purely quantitative variables}
 \usage{
-ggscatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1)
+ggscatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1,
+  corMethod = "pearson")
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -14,6 +15,8 @@ ggscatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1)
 \item{color}{an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}.}
 
 \item{alpha}{an option to set the transparency in scatterplots for large data. Defaults to \code{1}.}
+
+\item{corMethod}{method argument supplied to \code{\link[stats]{cor}}}
 }
 \description{
 This function makes a scatterplot matrix for quantitative variables with density plots on the diagonal
