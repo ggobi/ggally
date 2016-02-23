@@ -4,7 +4,8 @@
 \alias{uppertriangle}
 \title{uppertriangle - rearrange dataset as the preparation of ggscatmat function}
 \usage{
-uppertriangle(data, columns = 1:ncol(data), color = NULL)
+uppertriangle(data, columns = 1:ncol(data), color = NULL,
+  corMethod = "pearson")
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -12,6 +13,8 @@ uppertriangle(data, columns = 1:ncol(data), color = NULL)
 \item{columns}{an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}}
 
 \item{color}{an option to choose a factor variable to be grouped with. Defaults to \code{(NULL)}}
+
+\item{corMethod}{method argument supplied to \code{\link[stats]{cor}}}
 }
 \description{
 function for making the dataset used to plot the uppertriangle plots.
