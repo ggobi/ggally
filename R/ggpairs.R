@@ -91,6 +91,7 @@
 #' @references John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
+#' @alias ggpairs
 #' @examples
 #' # plotting is reduced to the first couple of examples.
 #' # Feel free to print the ggpair objects created in the examples
@@ -161,21 +162,58 @@ ggpairs <- function(
   showStrips = NULL,
   legends = FALSE,
   verbose = FALSE
-){
-
-  if (! is.null(params)) {
-    display_param_error()
-  }
+) {
 
   if (is.numeric(mapping) & missing(columns)) {
       columns <- mapping
       mapping <- NULL
   }
 
+  ggpairs2(
+    x = data, y = data,
+    mapping = mapping,
+    columnsX = columns, columnsY = columns,
+    title = title,
+    upper = upper,
+    lower = lower,
+    diag = diag,
+    params = params,
+    ...,
+    axisLabels = axisLabels,
+    columnLabelsX = columnLabels, columnLabelsY = columnLabels,
+    showStrips = showStrips,
+    legends = legends,
+    verbose = verbose
+  )
+}
+
+#' @export
+#' @alias ggpairs
+ggpairs2 <- function(
+  x, y,
+  mapping = NULL,
+  columnsX = 1:ncol(x), columnsY = 1:ncol(y)
+  title = "",
+  upper = list(),
+  lower = list(),
+  diag = list(),
+  params = NULL,
+  ...,
+  axisLabels = "show",
+  columnLabelsX = colnames(x[, columnsX]), columnLabelsY = colnames(y[, columnsY]),
+  showStrips = NULL,
+  legends = FALSE,
+  verbose = FALSE
+){
+
+  if (! is.null(params)) {
+    display_param_error()
+  }
+
   if (is.numeric(mapping)) {
     stop(str_c(
       "'mapping' should not be numeric",
-      " unless 'columns' is missing from function call."
+      " unless 'columnsX' is missing from function call."
     ))
   }
 
@@ -211,45 +249,8 @@ ggpairs <- function(
   }
   axisLabels <- axisLabelChoices[axisLabelChoice]
 
-  if (is.character(columns)) {
-    columns <- unlist(lapply(columns, function(colName){
-      which(colnames(data) == colName)
-    }))
-  }
-
-  if (any(columns > ncol(data))) {
-    stop(str_c(
-      "Make sure your 'columns' values are less than or equal to ", ncol(data), ".\n",
-      "\tcolumns = c(", str_c(columns, collapse = ", "), ")"
-    ))
-  }
-  if (any(columns < 1)) {
-    stop(str_c(
-      "Make sure your 'columns' values are positive.", "\n",
-      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
-    ))
-  }
-  if (any( (columns %% 1) != 0)) {
-    stop(str_c(
-      "Make sure your 'columns' values are integers.", "\n",
-      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
-    ))
-  }
-
-  if (length(columnLabels) != length(columns)) {
-    stop("The length of the 'columnLabels' does not match the length of the 'columns' being used.")
-  }
-
-  nameIsOnlyNumber <- ! str_detect(colnames(data[, columns]), "[^0-9]")
-  if (any(nameIsOnlyNumber)) {
-    badColumns <- colnames(data[, columns])[nameIsOnlyNumber]
-    names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
-    warning(paste(
-      "Column name is numeric.  Behavior will not be as expected.\n\n",
-      "c(", paste("'", names(badColumns), "' = '", badColumns, "'", collapse = "", sep = ""), ")",
-      sep = ""
-    ))
-  }
+  columnsX <- fix_pairs2_columns(columnsX, columnLabelsX, x, "columnsX")
+  columnsY <- fix_pairs2_columns(columnsY, columnLabelsY, y, "columnsY")
 
   upper <- set_to_blank_list_if_blank(upper)
   lower <- set_to_blank_list_if_blank(lower)
@@ -269,26 +270,19 @@ ggpairs <- function(
     isDiag = TRUE
   )
 
-  data <- as.data.frame(data)
-  for (i in 1:dim(data)[2] ) {
-    if (is.character(data[, i])) {
-      data[, i] <- as.factor(data[, i])
-    }
-  }
-
-  numCol <- length(columns)
-  if (printInfo) {
-    cat("data col: ", numCol, "\n")
-  }
+  x <- fix_pairs2_data(x)
+  y <- fix_pairs2_data(y)
 
   ggpairsPlots <- list()
 
-  grid <- rev(expand.grid(y = 1:ncol(data[columns]), x = 1:ncol(data[columns])))
+  grid <- rev(expand.grid(y = 1:ncol(y[columnsY]), x = 1:ncol(x[columnsX])))
+
+  browser()
 
   all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
     xcol <- grid[i, "x"]
     ycol <- grid[i, "y"]
-    data.frame(xvar = names(data[columns])[ycol], yvar = names(data[columns])[xcol])
+    data.frame(xvar = names(y[columns])[ycol], yvar = names(data[columns])[xcol])
   }))
 
   if (printInfo) {
@@ -519,6 +513,62 @@ add_and_overwrite_aes <- function(current, new) {
 }
 
 
+fix_pairs2_columns <- function(columns, columnLabels, data, printName) {
+  if (is.character(columns)) {
+    columns <- unlist(lapply(columns, function(colName){
+      which(colnames(data) == colName)
+    }))
+  }
+
+  if (any(columns > ncol(data))) {
+    stop(str_c(
+      "Make sure your '", printName, "' values are less than or equal to ", ncol(data), ".\n",
+      "\tcolumns = c(", str_c(columns, collapse = ", "), ")"
+    ))
+  }
+  if (any(columns < 1)) {
+    stop(str_c(
+      "Make sure your '", printName, "' values are positive.", "\n",
+      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
+    ))
+  }
+  if (any( (columns %% 1) != 0)) {
+    stop(str_c(
+      "Make sure your '", printName, "' values are integers.", "\n",
+      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
+    ))
+  }
+
+  if (length(columnLabels) != length(columns)) {
+    stop(str_c(
+      "The length of the 'columnLabels' does not match the length of the '",
+      printName, "' being used."
+    ))
+  }
+
+  nameIsOnlyNumber <- ! str_detect(colnames(data[, columns]), "[^0-9]")
+  if (any(nameIsOnlyNumber)) {
+    badColumns <- colnames(data[, columns])[nameIsOnlyNumber]
+    names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
+    warning(paste(
+      "Column name is numeric.  Behavior will not be as expected.\n\n",
+      "c(", paste("'", names(badColumns), "' = '", badColumns, "'", collapse = "", sep = ""), ")",
+      sep = ""
+    ))
+  }
+
+  columns
+}
+
+fix_pairs2_data <- function(data) {
+  data <- as.data.frame(data)
+  for (i in 1:dim(data)[2] ) {
+    if (is.character(data[, i])) {
+      data[, i] <- as.factor(data[, i])
+    }
+  }
+  data
+}
 
 
 #' Aesthetic Mapping Color Fill
