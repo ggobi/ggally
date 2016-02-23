@@ -156,6 +156,19 @@ ggcorr <- function(
   legend.size = 9,
   ...) {
 
+  if (is.numeric(limits)) {
+    if (length(limits) != 2) {
+      stop("'limits' must be of length 2 if numeric")
+    }
+  }
+  if (is.logical(limits)) {
+    if (limits) {
+      limits <- c(-1, 1)
+    } else {
+      limits <- NULL
+    }
+  }
+
   # -- check geom argument -----------------------------------------------------
 
   if (length(geom) > 1 || !geom %in% c("blank", "circle", "text", "tile")) {
