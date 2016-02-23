@@ -73,9 +73,9 @@ if(getRversion() >= "2.15.1") {
 #'   pl.kid +
 #'     ggplot2::annotate(
 #'       "text",
-#'       label  = c('AN', 'GN', 'Other', 'PKD'),
-#'       x      = c(50, 20, 50, 71),
-#'       y      = c(0.47, 0.55, 0.67, 0.8),
+#'       label  = c("PKD", "Other", "GN", "AN"),
+#'       x      = c(71, 50, 20, 50),
+#'       y      = c(0.8, 0.67, 0.55, 0.47),
 #'       size   = 5,
 #'       colour = col
 #'     ) +
@@ -197,14 +197,31 @@ ggsurv_m <- function(
   n <- s$strata
 
   strataEqualNames <- unlist(strsplit(names(s$strata), '='))
-  groups <- factor(
-    strataEqualNames[seq(2, 2 * strata, by = 2)],
-    levels = strataEqualNames[seq(2, 2 * strata, by = 2)]
-  )
+  ugroups <- unlist(strsplit(names(s$strata), '='))[seq(2, 2*strata, by = 2)]
+  getlast <- function(x) {
+    res <- NULL
+    maxTime <- max(x$time)
+    for (mo in names(x$strata)) {
+      sur <- x[mo]$surv
+      n <- length(sur)
+      # grab the last survival value
+      surValue <- sur[n]
+      if (isTRUE(all.equal(surValue, 0))) {
+        # if they die, order by percent complete of max observation.
+        # tie value of 0 if the last person dies at the last time
+        surTime <- x[mo]$time[n]
+        surValue <- (surTime / maxTime) - 1
+      }
+      res <- append(res, surValue)
+    }
+    return(res)
+  }
 
-  gr.name <-  strataEqualNames[1]
-  gr.df   <- vector('list', strata)
-  n.ind   <- cumsum(c(0,n))
+  lastv <- ugroups[order(getlast(s), decreasing = TRUE)]
+  groups <- factor(ugroups, levels = lastv)
+  gr.name <- strataEqualNames[1]
+  gr.df <- vector('list', strata)
+  n.ind <- cumsum(c(0, n))
 
   for (i in 1:strata) {
     indI <- (n.ind[i]+1):n.ind[i+1]

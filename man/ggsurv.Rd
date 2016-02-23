@@ -90,9 +90,9 @@ if (require(survival) && require(scales)) {
   pl.kid +
     ggplot2::annotate(
       "text",
-      label  = c('AN', 'GN', 'Other', 'PKD'),
-      x      = c(50, 20, 50, 71),
-      y      = c(0.47, 0.55, 0.67, 0.8),
+      label  = c("PKD", "Other", "GN", "AN"),
+      x      = c(71, 50, 20, 50),
+      y      = c(0.8, 0.67, 0.55, 0.47),
       size   = 5,
       colour = col
     ) +
