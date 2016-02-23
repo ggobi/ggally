@@ -9,4 +9,4 @@ vignettes/figure
 vignettes/*.html
 .Rproj.user
 .RData
-ggally_.Rproj
+*.Rproj
