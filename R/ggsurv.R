@@ -73,9 +73,9 @@ if(getRversion() >= "2.15.1") {
 #'   pl.kid +
 #'     ggplot2::annotate(
 #'       "text",
-#'       label  = c('AN', 'GN', 'Other', 'PKD'),
-#'       x      = c(50, 20, 50, 71),
-#'       y      = c(0.47, 0.55, 0.67, 0.8),
+#'       label  = c("PKD", "Other", "GN", "AN"),
+#'       x      = c(71, 50, 20, 50),
+#'       y      = c(0.8, 0.67, 0.55, 0.47),
 #'       size   = 5,
 #'       colour = col
 #'     ) +
@@ -206,7 +206,7 @@ ggsurv_m <- function(
       n <- length(sur)
       # grab the last survival value
       surValue <- sur[n]
-      if (all.equal(surValue, 0)) {
+      if (isTRUE(all.equal(surValue, 0))) {
         # if they die, order by percent complete of max observation.
         # tie value of 0 if the last person dies at the last time
         surTime <- x[mo]$time[n]
