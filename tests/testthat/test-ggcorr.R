@@ -5,6 +5,16 @@ context("ggcorr")
 
 data(flea)
 
+test_that("limits", {
+  print(ggcorr(flea[, -1]))
+  print(ggcorr(flea[, -1], limits = TRUE))
+  print(ggcorr(flea[, -1], limits = FALSE))
+  print(ggcorr(flea[, -1], limits = NULL))
+  print(ggcorr(flea[, -1], limits = c(-5, 5)))
+  print(ggcorr(flea[, -1], limits = c(-0.5, 0.5)))
+  expect_true(TRUE)
+})
+
 test_that("examples", {
 
   # Default output.
