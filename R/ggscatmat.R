@@ -106,32 +106,70 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
   b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
   if (is.null(color)){
     data.cor <- ddply(
-      b, .(ylab, xlab), summarise,
-      r = paste(round(
+      b, .(ylab, xlab),
+      function(subsetDt) {
+        xlab = subsetDt$xlab
+        ylab = subsetDt$ylab
+        xvalue = subsetDt$xvalue
+        yvalue = subsetDt$yvalue
+
         if (identical(corMethod, "rsquare")) {
-          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = "pearson")^2
+          r = cor(
+            xvalue, yvalue,
+            use = "pairwise.complete.obs",
+            method = "pearson"
+          )^2
         } else {
-          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = corMethod)
-        },
-        digits = 2
-      )),
-      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-      yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
+          r = cor(
+            xvalue, yvalue,
+            use = "pairwise.complete.obs",
+            method = corMethod
+          )
+        }
+        r = paste(round(r, digits = 2))
+
+        data.frame(
+          xlab = unique(xlab), ylab = unique(ylab),
+          r = r,
+          xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+          yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
+        )
+      }
     )
     return(data.cor)
+
   }else{
     c <- b
     data.cor1 <- ddply(
-      c, .(ylab, xlab, colorcolumn), summarise,
-      r = paste(round(
+      c, .(ylab, xlab, colorcolumn),
+      function(subsetDt) {
+        xlab = subsetDt$xlab
+        ylab = subsetDt$ylab
+        colorcolumn = subsetDt$colorcolumn
+        xvalue = subsetDt$xvalue
+        yvalue = subsetDt$yvalue
+
         if (identical(corMethod, "rsquare")) {
-          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = "pearson")^2
+          r = cor(
+            xvalue, yvalue,
+            use = "pairwise.complete.obs",
+            method = "pearson"
+          )^2
         } else {
-          cor(xvalue, yvalue, use = "pairwise.complete.obs", method = corMethod)
-        },
-        digits = 2
-      ))
+          r = cor(
+            xvalue, yvalue,
+            use = "pairwise.complete.obs",
+            method = corMethod
+          )
+        }
+        r = paste(round(r, digits = 2))
+        data.frame(
+          ylab = unique(ylab), xlab = unique(xlab), colorcolumn = unique(colorcolumn),
+          r = r
+        )
+      }
     )
+
     n <- nrow(data.frame(unique(b$colorcolumn)))
     position <- ddply(b, .(ylab, xlab), summarise,
                       xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
