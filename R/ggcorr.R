@@ -72,7 +72,7 @@ if (getRversion() >= "2.15.1") {
 #' @param midpoint the midpoint value for continuous scaling of the
 #' correlation coefficients.
 #' Defaults to \code{0}.
-#' @param limits bounding of color scaling for correlations, set \code{limits = NULL} to remove
+#' @param limits bounding of color scaling for correlations, set \code{limits = NULL} or \code{FALSE} to remove
 #' @param drop if using \code{nbreaks}, whether to drop unused breaks from the
 #' color scale.
 #' Defaults to \code{FALSE} (recommended).
