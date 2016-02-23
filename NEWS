@@ -1,3 +1,24 @@
+GGally 1.0.1.9999
+-----------------
+
+ggally_smooth
+
+* added method parameter (411213c)
+
+ggcorr
+
+* fixed issue with unnamed correlation matrix used as input PR#146
+
+ggscatmat
+
+* added corMethod parameter for use in upper triangle PR#145
+
+ggsurv
+
+* ordering changed to reflect survival time PR#147
+
+
+
 GGally 1.0.1
 -----------------
 
