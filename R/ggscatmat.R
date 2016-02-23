@@ -108,25 +108,26 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
     data.cor <- ddply(
       b, .(ylab, xlab),
       function(subsetDt) {
-        xlab = subsetDt$xlab
-        ylab = subsetDt$ylab
-        xvalue = subsetDt$xvalue
-        yvalue = subsetDt$yvalue
+        xlab <- subsetDt$xlab
+        ylab <- subsetDt$ylab
+        xvalue <- subsetDt$xvalue
+        yvalue <- subsetDt$yvalue
 
         if (identical(corMethod, "rsquare")) {
-          r = cor(
+          r <- cor(
             xvalue, yvalue,
             use = "pairwise.complete.obs",
             method = "pearson"
-          )^2
+          )
+          r <- r ^ 2
         } else {
-          r = cor(
+          r <- cor(
             xvalue, yvalue,
             use = "pairwise.complete.obs",
             method = corMethod
           )
         }
-        r = paste(round(r, digits = 2))
+        r <- paste(round(r, digits = 2))
 
         data.frame(
           xlab = unique(xlab), ylab = unique(ylab),
@@ -143,26 +144,27 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
     data.cor1 <- ddply(
       c, .(ylab, xlab, colorcolumn),
       function(subsetDt) {
-        xlab = subsetDt$xlab
-        ylab = subsetDt$ylab
-        colorcolumn = subsetDt$colorcolumn
-        xvalue = subsetDt$xvalue
-        yvalue = subsetDt$yvalue
+        xlab <- subsetDt$xlab
+        ylab <- subsetDt$ylab
+        colorcolumn <- subsetDt$colorcolumn
+        xvalue <- subsetDt$xvalue
+        yvalue <- subsetDt$yvalue
 
         if (identical(corMethod, "rsquare")) {
-          r = cor(
+          r <- cor(
             xvalue, yvalue,
             use = "pairwise.complete.obs",
             method = "pearson"
-          )^2
+          )
+          r <- r ^ 2
         } else {
-          r = cor(
+          r <- cor(
             xvalue, yvalue,
             use = "pairwise.complete.obs",
             method = corMethod
           )
         }
-        r = paste(round(r, digits = 2))
+        r <- paste(round(r, digits = 2))
         data.frame(
           ylab = unique(ylab), xlab = unique(xlab), colorcolumn = unique(colorcolumn),
           r = r
