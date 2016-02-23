@@ -4,7 +4,7 @@
 \alias{ggally_smooth}
 \title{Plots the Scatter Plot with Smoothing}
 \usage{
-ggally_smooth(data, mapping, ...)
+ggally_smooth(data, mapping, ..., method = "lm")
 }
 \arguments{
 \item{data}{data set using}
@@ -12,6 +12,8 @@ ggally_smooth(data, mapping, ...)
 \item{mapping}{aesthetics being used}
 
 \item{...}{other arguments to add to geom_point}
+
+\item{method}{\code{method} parameter supplied to \code{\link[ggplot2]{geom_smooth}}}
 }
 \description{
 Add a smoothed condition mean with a given scatter plot.

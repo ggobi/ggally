@@ -49,6 +49,7 @@ ggally_points <- function(data, mapping, ...){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments to add to geom_point
+#' @param method \code{method} parameter supplied to \code{\link[ggplot2]{geom_smooth}}
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @keywords hplot
@@ -57,16 +58,16 @@ ggally_points <- function(data, mapping, ...){
 #'  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
-ggally_smooth <- function(data, mapping, ...){
+ggally_smooth <- function(data, mapping, ..., method = "lm"){
 
   p <- ggplot(data = data, mapping)
 
   p <- p + geom_point(...)
 
   if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
-    p <- p + geom_smooth(method = "lm")
+    p <- p + geom_smooth(method = method)
   } else {
-    p <- p + geom_smooth(method = "lm", colour = I("black"))
+    p <- p + geom_smooth(method = method, colour = I("black"))
   }
 
   p$type <- "continuous"
