@@ -198,30 +198,30 @@ ggsurv_m <- function(
 
   strataEqualNames <- unlist(strsplit(names(s$strata), '='))
   ugroups <- unlist(strsplit(names(s$strata), '='))[seq(2, 2*strata, by = 2)]
-  getlast = function(x) {
-    res=NULL
+  getlast <- function(x) {
+    res <- NULL
     maxTime <- max(x$time)
     for (mo in names(x$strata)) {
-      sur = x[mo]$surv
-      n = length(sur)
+      sur <- x[mo]$surv
+      n <- length(sur)
       # grab the last survival value
       surValue <- sur[n]
-      if (all.equal(surValue,0)) {
+      if (all.equal(surValue, 0)) {
         # if they die, order by percent complete of max observation.
         # tie value of 0 if the last person dies at the last time
         surTime <- x[mo]$time[n]
         surValue <- (surTime / maxTime) - 1
       }
-      res = append(res, surValue)
+      res <- append(res, surValue)
     }
     return(res)
   }
 
-  lastv = ugroups[order(getlast(s),decreasing=T)]
-  groups = factor(ugroups,levels = lastv)
-  gr.name <-  strataEqualNames[1]
-  gr.df   <- vector('list', strata)
-  n.ind   <- cumsum(c(0,n))
+  lastv <- ugroups[order(getlast(s), decreasing = TRUE)]
+  groups <- factor(ugroups, levels = lastv)
+  gr.name <- strataEqualNames[1]
+  gr.df <- vector('list', strata)
+  n.ind <- cumsum(c(0, n))
 
   for (i in 1:strata) {
     indI <- (n.ind[i]+1):n.ind[i+1]
