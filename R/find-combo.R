@@ -5,25 +5,43 @@
 #' @param data data set to be used
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords internal
-plot_types <- function(data) {
-  namesD <- names(data)
-  dataInfo <- array("", c(ncol(data) ^ 2, 5))
+plot_types <- function(data, columnsX, columnsY) {
+
+
+  plotTypesX <- lapply(data[columnsX], plotting_data_type)
+  plotTypesY <- lapply(data[columnsY], plotting_data_type)
+
+  columnNamesX <- names(data)[columnsX]
+  columnNamesY <- names(data)[columnsY]
+
+  isNaData <- is.na(data)
+
+  lenX <- length(plotTypesX)
+  lenY <- length(plotTypesY)
+
+  dataInfo <- array("", c(lenX * lenY, 5))
 
   #horizontal then vertical
-  for (j in 1:ncol(data)) {
-    for (i in 1:ncol(data)) {
-      dataInfo[(i - 1) * ncol(data) + j, ] <- c(
-        find_plot_type(data, i, j),
-        namesD[j],
-        namesD[i],
-        j,
-        i
+  for (yI in seq_len(lenY)) {
+    yColName <- columnNamesY[yI]
+    for (xI in seq_len(lenX)) {
+      xColName <- columnNamesX[xI]
+      yvar <- ifelse(xColName == yColName, NA, yColName)
+      dataInfo[(yI - 1) * lenX + xI, ] <- c(
+        find_plot_type(
+          xColName, yColName,
+          plotTypesX[xI], plotTypesY[yI],
+          isAllNa = all(isNaData[, xColName] | isNaData[, yColName])
+        ),
+        xColName, yvar,
+        xI, yI
       )
     }
   }
 
   dataInfo <- as.data.frame(dataInfo)
   colnames(dataInfo) <- c("Type", "xvar", "yvar", "posx", "posy")
+
   dataInfo
 }
 
@@ -31,34 +49,31 @@ plot_types <- function(data) {
 #'
 #' Retrieves the type of plot for the specific columns
 #'
-#' @param data data set to be used
-#' @param col1 x column
-#' @param col2 y column
-#' @keywords internal
+#' @param col1Name x column name
+#' @param col2Name y column name
+#' @param type1 x column type
+#' @param type2 y column type
+#' @param isNaData is.na(data)
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-find_plot_type <- function(data, col1, col2) {
-
-  y1Type <- plotting_data_type(data[, col1])
+find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa) {
 
   # diag calculations
-  if (col1 == col2) {
-    if (y1Type == "na") {
+  if (col1Name == col2Name) {
+    if (type1 == "na") {
       return("NA-diag")
-    } else if (y1Type == "continuous") {
+    } else if (type1 == "continuous") {
       return("stat_bin-num")
     } else {
       return("stat_bin-cat")
     }
   }
 
-  y2Type <- plotting_data_type(data[, col2])
-
-  if (y1Type == "na" | y2Type == "na") {
+  if (type1 == "na" | type2 == "na") {
     return("NA")
   }
 
-  #cat(names(data)[col2],": ", y2Type,"\t",names(data)[col1],": ",y1Type,"\n")
-  isCats <- c(y1Type, y2Type) %in% "category"
+  #cat(names(data)[col2Name],": ", type2,"\t",names(data)[col1Name],": ",type1,"\n")
+  isCats <- c(type1, type2) %in% "category"
   if (any(isCats)) {
     if (all(isCats)) {
       return("mosaic")
@@ -72,7 +87,7 @@ find_plot_type <- function(data, col1, col2) {
   }
 
   # check if any combo of the two columns is all na
-  if (all(is.na(data[, col1]) | is.na(data[, col2]))) {
+  if (isAllNa) {
     return("NA")
   }
 
