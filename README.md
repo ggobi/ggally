@@ -5,7 +5,7 @@ Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](
 
 Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https://travis-ci.org/ggobi/ggally) [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=dev)](https://codecov.io/github/ggobi/ggally?branch=dev)
 
-Public Slack Discussion: [![Public Slack Discussion](https://ggally-slack.herokuapp.com/badge.svg)](https://ggally-slack.herokuapp.com/)
+Public Slack Discussion: [![Public Slack Discussion](https://ggally-slack.herokuapp.com/badge.svg)](https://ggally-slack.herokuapp.com/) (Click icon to join group. Displaying active users / total users)
 
 
 [ggplot2](http://docs.ggplot2.org/current/) is a plotting system for R based on the grammar of graphics. [GGally](https://ggobi.github.io/ggally) extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data.  Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.
