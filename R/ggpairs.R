@@ -28,6 +28,198 @@
 #     barDiag
 #     blankDiag
 
+
+fix_data <- function(data) {
+  data <- as.data.frame(data)
+  for (i in 1:dim(data)[2] ) {
+    if (is.character(data[, i])) {
+      data[, i] <- as.factor(data[, i])
+    }
+  }
+  data
+}
+
+
+fix_column_values <- function(data, columns, columnLabels, columnsName, columnLabelsName) {
+  colnamesData <- colnames(data)
+  if (is.character(columns)) {
+    colNumValues <- lapply(columns, function(colName){
+      which(colnamesData == colName)
+    })
+    isFound <- as.logical(unlist(lapply(colNumValues, length)))
+    if (any(!isFound)) {
+      stop(str_c(
+        "Columns not found in data: c(",
+        str_c(str_c("'", columns[!isFound], "'"), collapse = ", "),
+        ")"
+      ))
+    }
+    columns <- unlist(colNumValues)
+  }
+
+  if (any(columns > ncol(data))) {
+    stop(str_c(
+      "Make sure your '", columnsName, "' values are less than or equal to ", ncol(data), ".\n",
+      "\t", columnsName, " = c(", str_c(columns, collapse = ", "), ")"
+    ))
+  }
+  if (any(columns < 1)) {
+    stop(str_c(
+      "Make sure your '", columnsName, "' values are positive.", "\n",
+      "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
+    ))
+  }
+  if (any( (columns %% 1) != 0)) {
+    stop(str_c(
+      "Make sure your '", columnsName, "' values are integers.", "\n",
+      "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
+    ))
+  }
+
+  if (length(columnLabels) != length(columns)) {
+    stop("The length of the '", columnLabelsName, "' does not match the length of the '", columnsName, "' being used.")
+  }
+
+  colnamesUsed <- colnamesData[columns]
+  nameIsOnlyNumber <- ! str_detect(colnamesUsed, "[^0-9]")
+  if (any(nameIsOnlyNumber)) {
+    badColumns <- colnamesUsed[nameIsOnlyNumber]
+    names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
+    warning(paste(
+      "Column name is numeric.  Behavior will not be as expected.\n\n",
+      "c(", paste("'", names(badColumns), "' = '", badColumns, "'", collapse = "", sep = ""), ")",
+      sep = ""
+    ))
+  }
+
+  columns
+}
+
+stop_if_bad_mapping <- function(mapping) {
+  if (is.numeric(mapping)) {
+    stop(str_c(
+      "'mapping' should not be numeric",
+      " unless 'columns' is missing from function call."
+    ))
+  }
+}
+
+stop_if_args_exist <- function(args) {
+  # if ("printInfo" %in% names(args)) {
+  #   printInfo <- args[["printInfo"]]
+  #   args[["printInfo"]] <- NULL
+  # } else {
+  #   printInfo <- FALSE
+  # }
+
+  if (length(args) > 0) {
+    argNames <- names(args)
+    warning(str_c(
+      "Extra arguments: ",
+      str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
+      "  If these are meant to be aesthetics, submit them using the",
+      " 'mapping' variable within ggpairs with ggplot2::aes or ggplot2::aes_string."
+    ))
+  }
+}
+
+fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
+  if (length(axisLabels) > 1) {
+    axisLabels <- axisLabels[1]
+  }
+  axisLabelChoice <- pmatch(axisLabels, axisLabelChoices)
+  if (is.na(axisLabelChoice)) {
+    warning(str_c(
+      "'axisLabels' not in c(",
+      str_c(str_c("'", axisLabelChoices, "'"), collapse = ", "),
+      ").  Reverting to '", axisLabelChoices[1], "'"
+    ))
+    axisLabelChoice <- 1
+  }
+  axisLabels <- axisLabelChoices[axisLabelChoice]
+}
+
+
+
+#' ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame
+#'
+#' Make a matrix of plots with a given data set with two different column sets
+#' @export
+#' @param data data set using.  Can have both numerical and categorical data.
+#' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.
+#' @param columnsX,columnsY which columns are used to make plots.  Defaults to all columns.
+#' @param title title for the graph
+#' @param upper see Details
+#' @param lower see Details
+#' @param diag see Details
+#' @param params deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}
+#' @param ... other parameters being supplied to geom's aes, such as color
+#' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
+#' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
+#' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
+#' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
+#' @param verbose boolean to determine the printing of "Plot #1, Plot #2..."
+#' @export
+ggduo <- function(
+  data,
+  mapping = NULL,
+  columnsX = 1:ncol(data),
+  columnsY = 1:ncol(data),
+  types = list(continuous = "points", combo = "facethist", discrete = "ratio"),
+  axisLabels = c("show", "internal"),
+  columnLabelsX = colnames(data[, columnsX]),
+  columnLabelsY = colnames(data[, columnsY]),
+  showStrips = NULL,
+  legends = FALSE,
+  verbose = FALSE
+) {
+
+  data <- fix_data(data)
+
+  if (is.numeric(mapping) & missing(columnsY)) {
+      columnsY <- columnsX
+      columnsX <- mapping
+      mapping <- NULL
+  }
+
+  stop_if_bad_mapping(mapping)
+
+  columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
+  columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
+
+  types <- set_to_blank_list_if_blank(types)
+  types <- check_and_set_ggpairs_defaults(
+    "types", types,
+    continuous = "points", combo = "facethist", discrete = "ratio", na = "na"
+  )
+
+  axisLabels <- fix_axis_label_choice(axisLabels, c("show", "none"))
+
+
+
+
+
+
+  # columnsGroup <- unique(c(columnsX, columnsY))
+  #
+  # postColumnGroup <- seq_along(columnsGroup)
+  # names(postColumnGroup) <- columnsGroup
+  # xColPos <- unname(postColumnGroup[as.character(columnsX)])
+  # yColPos <- unname(postColumnGroup[as.character(columnsY)])
+
+
+
+  pm <- ggpairs(
+    data = data,
+    mapping = mapping,
+    columns = columnsGroup,
+    ...
+  )
+
+  pm[xColPos, yColPos]
+}
+
+
 ### Example removed due to not using facet labels anymore
 # #Sequence to show how to change label size
 # make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
@@ -80,7 +272,7 @@
 #' @param lower see Details
 #' @param diag see Details
 #' @param params deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}
-#' @param ... other parameters being supplied to geom's aes, such as color
+#' @param ... deprecated. Please use \code{mapping}
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
@@ -91,7 +283,6 @@
 #' @references John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
-#' @alias ggpairs
 #' @examples
 #' # plotting is reduced to the first couple of examples.
 #' # Feel free to print the ggpair objects created in the examples
@@ -157,100 +348,29 @@ ggpairs <- function(
   diag = list(),
   params = NULL,
   ...,
-  axisLabels = "show",
-  columnLabels = colnames(data[, columns]),
+  axisLabels = c("show", "internal", "none"),
+  columnLabels = (if (is.character(columns)) { columns } else { colnames(data)[columns] }),
   showStrips = NULL,
   legends = FALSE,
   verbose = FALSE
-) {
+){
+
+  data <- fix_data(data)
+
+  stop_if_params_exist(params)
 
   if (is.numeric(mapping) & missing(columns)) {
       columns <- mapping
       mapping <- NULL
   }
 
-  ggpairs2(
-    x = data, y = data,
-    mapping = mapping,
-    columnsX = columns, columnsY = columns,
-    title = title,
-    upper = upper,
-    lower = lower,
-    diag = diag,
-    params = params,
-    ...,
-    axisLabels = axisLabels,
-    columnLabelsX = columnLabels, columnLabelsY = columnLabels,
-    showStrips = showStrips,
-    legends = legends,
-    verbose = verbose
-  )
-}
+  stop_if_bad_mapping(mapping)
 
-#' @export
-#' @alias ggpairs
-ggpairs2 <- function(
-  x, y,
-  mapping = NULL,
-  columnsX = 1:ncol(x), columnsY = 1:ncol(y)
-  title = "",
-  upper = list(),
-  lower = list(),
-  diag = list(),
-  params = NULL,
-  ...,
-  axisLabels = "show",
-  columnLabelsX = colnames(x[, columnsX]), columnLabelsY = colnames(y[, columnsY]),
-  showStrips = NULL,
-  legends = FALSE,
-  verbose = FALSE
-){
+  stop_if_args_exist(list(...))
 
-  if (! is.null(params)) {
-    display_param_error()
-  }
+  # verbose <- verbose || printInfo
 
-  if (is.numeric(mapping)) {
-    stop(str_c(
-      "'mapping' should not be numeric",
-      " unless 'columnsX' is missing from function call."
-    ))
-  }
-
-  args <- list(...)
-  if ("printInfo" %in% names(args)) {
-    printInfo <- args[["printInfo"]]
-    args[["printInfo"]] <- NULL
-  } else {
-    printInfo <- FALSE
-  }
-
-  if (length(args) > 0) {
-    argNames <- names(args)
-    warning(str_c(
-      "Extra arguments: ",
-      str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
-      "  If these are meant to be aesthetics, submit them using the",
-      " 'mapping' variable within ggpairs with ggplot2::aes or ggplot2::aes_string."
-    ))
-  }
-
-  if (! identical(class(data), "data.frame")) {
-    data <- as.data.frame(data)
-  }
-
-  verbose <- verbose || printInfo
-
-  axisLabelChoices <- c("show", "internal", "none")
-  axisLabelChoice <- pmatch(axisLabels, axisLabelChoices)
-  if (is.na(axisLabelChoice)) {
-    warning("'axisLabels' not in c('show', 'internal', 'none').  Reverting to 'show'")
-    axisLabelChoice <- 1
-  }
-  axisLabels <- axisLabelChoices[axisLabelChoice]
-
-  columnsX <- fix_pairs2_columns(columnsX, columnLabelsX, x, "columnsX")
-  columnsY <- fix_pairs2_columns(columnsY, columnLabelsY, y, "columnsY")
+  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
 
   upper <- set_to_blank_list_if_blank(upper)
   lower <- set_to_blank_list_if_blank(lower)
@@ -270,29 +390,32 @@ ggpairs2 <- function(
     isDiag = TRUE
   )
 
-  x <- fix_pairs2_data(x)
-  y <- fix_pairs2_data(y)
+  axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
+
+
+  # numCol <- length(columns)
+  # if (printInfo) {
+  #   cat("data col: ", numCol, "\n")
+  # }
 
   ggpairsPlots <- list()
 
-  grid <- rev(expand.grid(y = 1:ncol(y[columnsY]), x = 1:ncol(x[columnsX])))
+  # grid <- rev(expand.grid(y = 1:ncol(data[columns]), x = 1:ncol(data[columns])))
+  #
+  # all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
+  #   xcol <- grid[i, "x"]
+  #   ycol <- grid[i, "y"]
+  #   data.frame(xvar = names(data[columns])[ycol], yvar = names(data[columns])[xcol])
+  # }))
+  #
+  # if (printInfo) {
+  #   cat("\n\n\nALL\n");print(all)
+  # }
 
-  browser()
-
-  all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
-    xcol <- grid[i, "x"]
-    ycol <- grid[i, "y"]
-    data.frame(xvar = names(y[columns])[ycol], yvar = names(data[columns])[xcol])
-  }))
-
-  if (printInfo) {
-    cat("\n\n\nALL\n");print(all)
-  }
-
-  dataTypes <- plot_types(data[columns])
-  if (printInfo) {
-    cat("\n\n\nDATA TYPES\n");print(dataTypes)
-  }
+  dataTypes <- plot_types(data, columns, columns)
+  # if (printInfo) {
+  #   cat("\n\n\nDATA TYPES\n");print(dataTypes)
+  # }
 
   if (identical(axisLabels, "internal")) {
     dataTypes$Type <- as.character(dataTypes$Type)
@@ -314,9 +437,9 @@ ggpairs2 <- function(
 
     up <- posX > posY
 
-    if (printInfo) {
-      cat("Pos #", i, "\t(", posX, ", ", posY, ")\t type: ")
-    }
+    # if (printInfo) {
+    #   cat("Pos #", i, "\t(", posX, ", ", posY, ")\t type: ")
+    # }
 
     sectionAes <- NULL
 
@@ -345,13 +468,13 @@ ggpairs2 <- function(
 
     } else if (type %in% c("scatterplot", "box-hori", "box-vert")) {
       isContinuous <- (type == "scatterplot")
-      if (printInfo) {
-        if (isContinuous) {
-          cat("continuous\n")
-        } else {
-          cat("combo\n")
-        }
-      }
+      # if (printInfo) {
+      #   if (isContinuous) {
+      #     cat("continuous\n")
+      #   } else {
+      #     cat("combo\n")
+      #   }
+      # }
 
       if (up) {
         subType <- if (isContinuous) upper$continuous else upper$combo
@@ -385,9 +508,9 @@ ggpairs2 <- function(
       )
 
     } else if (type == "mosaic") {
-      if (printInfo) {
-        cat("mosaic\n")
-      }
+      # if (printInfo) {
+      #   cat("mosaic\n")
+      # }
       subType <- if (up) upper$discrete else lower$discrete
       subTypeName <- get_subtype_name(subType)
 
@@ -414,9 +537,9 @@ ggpairs2 <- function(
       plotAes$y <- NULL
 
       if (type == "stat_bin-num" || type == "stat_bin-cat") {
-        if (printInfo) {
-          cat(paste(type, "\n", sep = ""))
-        }
+        # if (printInfo) {
+        #   cat(paste(type, "\n", sep = ""))
+        # }
 
         if (type == "stat_bin-num") {
           subType <- diag$continuous
@@ -513,62 +636,6 @@ add_and_overwrite_aes <- function(current, new) {
 }
 
 
-fix_pairs2_columns <- function(columns, columnLabels, data, printName) {
-  if (is.character(columns)) {
-    columns <- unlist(lapply(columns, function(colName){
-      which(colnames(data) == colName)
-    }))
-  }
-
-  if (any(columns > ncol(data))) {
-    stop(str_c(
-      "Make sure your '", printName, "' values are less than or equal to ", ncol(data), ".\n",
-      "\tcolumns = c(", str_c(columns, collapse = ", "), ")"
-    ))
-  }
-  if (any(columns < 1)) {
-    stop(str_c(
-      "Make sure your '", printName, "' values are positive.", "\n",
-      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
-    ))
-  }
-  if (any( (columns %% 1) != 0)) {
-    stop(str_c(
-      "Make sure your '", printName, "' values are integers.", "\n",
-      "\tcolumns = c(", paste(columns, collapse = ", "), ")"
-    ))
-  }
-
-  if (length(columnLabels) != length(columns)) {
-    stop(str_c(
-      "The length of the 'columnLabels' does not match the length of the '",
-      printName, "' being used."
-    ))
-  }
-
-  nameIsOnlyNumber <- ! str_detect(colnames(data[, columns]), "[^0-9]")
-  if (any(nameIsOnlyNumber)) {
-    badColumns <- colnames(data[, columns])[nameIsOnlyNumber]
-    names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
-    warning(paste(
-      "Column name is numeric.  Behavior will not be as expected.\n\n",
-      "c(", paste("'", names(badColumns), "' = '", badColumns, "'", collapse = "", sep = ""), ")",
-      sep = ""
-    ))
-  }
-
-  columns
-}
-
-fix_pairs2_data <- function(data) {
-  data <- as.data.frame(data)
-  for (i in 1:dim(data)[2] ) {
-    if (is.character(data[, i])) {
-      data[, i] <- as.factor(data[, i])
-    }
-  }
-  data
-}
 
 
 #' Aesthetic Mapping Color Fill
@@ -628,6 +695,7 @@ check_and_set_ggpairs_defaults <- function(
   if (!is.list(obj)) {
     stop(str_c("'", name, "' is not a list"))
   }
+  stop_if_params_exist(obj$params)
 
   if (is.null(obj$continuous) && (!is.null(continuous))) {
     obj$continuous <- continuous
@@ -640,10 +708,6 @@ check_and_set_ggpairs_defaults <- function(
   }
   if (is.null(obj$na) && (!is.null(na))) {
     obj$na <- na
-  }
-
-  if (! is.null(obj$params)) {
-    display_param_error()
   }
 
   if (! is.null(obj$aes_string)) {
@@ -691,12 +755,14 @@ get_subtype_name <- function(subType) {
 }
 
 
-display_param_error <- function() {
-  stop(str_c(
-    "'params' is a deprecated argument.  ",
-    "Please 'wrap' the function to supply arguments. ",
-    "help(\"wrap\", package = \"GGally\")"
-  ))
+stop_if_params_exist <- function(params) {
+  if (! is.null(params)) {
+      stop(str_c(
+        "'params' is a deprecated argument.  ",
+        "Please 'wrap' the function to supply arguments. ",
+        "help(\"wrap\", package = \"GGally\")"
+      ))
+  }
 }
 
 
