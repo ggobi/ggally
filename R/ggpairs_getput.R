@@ -168,6 +168,7 @@ check_i_j <- function(i, j) {
 #' @param ... ignored
 #' @export
 `[.ggmatrix` <- function(x, i, j, ...) {
+  str(list(x = i, y = j))
   check_i_j(i, j)
 
   getPlot(x, i, j)
