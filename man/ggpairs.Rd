@@ -6,8 +6,8 @@
 \usage{
 ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
   upper = list(), lower = list(), diag = list(), params = NULL, ...,
-  axisLabels = "show", columnLabels = colnames(data[, columns]),
-  showStrips = NULL, legends = FALSE, verbose = FALSE)
+  axisLabels = c("show", "internal", "none"), columnLabels = colnames(data[,
+  columns]), showStrips = NULL, legends = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -26,7 +26,7 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
 
 \item{params}{deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}}
 
-\item{...}{other parameters being supplied to geom's aes, such as color}
+\item{...}{deprecated. Please use \code{mapping}}
 
 \item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 

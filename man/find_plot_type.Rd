@@ -4,14 +4,18 @@
 \alias{find_plot_type}
 \title{Find Plot Types}
 \usage{
-find_plot_type(data, col1, col2)
+find_plot_type(col1Name, col2Name, type1, type2, isNaData)
 }
 \arguments{
-\item{data}{data set to be used}
+\item{col1Name}{x column name}
 
-\item{col1}{x column}
+\item{col2Name}{y column name}
 
-\item{col2}{y column}
+\item{type1}{x column type}
+
+\item{type2}{y column type}
+
+\item{isNaData}{is.na(data)}
 }
 \description{
 Retrieves the type of plot for the specific columns
@@ -19,5 +23,4 @@ Retrieves the type of plot for the specific columns
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
 }
-\keyword{internal}
 
