@@ -22,6 +22,7 @@ if(getRversion() >= "2.15.1") {
 #' @param lty.est linetype of the survival curve(s). Vector length should be
 #'    either 1 or equal to the number of strata.
 #' @param lty.ci linetype of the bounds that mark the 95\% CI.
+#' @param lty.size line width of the survival curve
 #' @param cens.shape shape of the points that mark censored observations.
 #' @param back.white if TRUE the background will not be the default
 #'    grey of \code{ggplot2} but will be white with borders around the plot.
@@ -89,6 +90,7 @@ ggsurv <- function(
   cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
+  lty.size   = 0.5,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -110,7 +112,7 @@ ggsurv <- function(
 
   pl <- fn(
     s, CI , plot.cens, surv.col,
-    cens.col, lty.est, lty.ci,
+    cens.col, lty.est, lty.ci, lty.size, 
     cens.shape, back.white, xlab,
     ylab, main, strata
   )
@@ -126,6 +128,7 @@ ggsurv_s <- function(
   cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
+  lty.size   = 0.5,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -153,8 +156,8 @@ ggsurv_s <- function(
 
   if(identical(CI, TRUE) | identical(CI, 'def')) {
     pl <- pl +
-      geom_step(aes(y = up), color = col, lty = lty.ci) +
-      geom_step(aes(y = low), color = col, lty = lty.ci)
+      geom_step(aes(y = up), color = col, lty = lty.ci, size = lty.size) +
+      geom_step(aes(y = low), color = col, lty = lty.ci, size = lty.size)
   }
 
   if (identical(plot.cens, TRUE) ) {
@@ -187,6 +190,7 @@ ggsurv_m <- function(
   cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
+  lty.size   = 0.5,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -222,7 +226,7 @@ ggsurv_m <- function(
   dat.cens <- subset(dat, cens != 0)
 
   pl <- ggplot(dat, aes(x = time, y = surv, group = group)) +
-    geom_step(aes(col = group, lty = group)) +
+    geom_step(aes(col = group, lty = group), size = lty.size) +
     xlab(xlab) +
     ylab(ylab) +
     ggtitle(main)
@@ -257,8 +261,8 @@ ggsurv_m <- function(
       surv.col
     }
     pl <- pl +
-      geom_step(aes(y = up, lty = group), lty = stepLty) +
-      geom_step(aes(y = low,lty = group), lty = stepLty)
+      geom_step(aes(y = up, lty = group), lty = stepLty, size = lty.size) +
+      geom_step(aes(y = low,lty = group), lty = stepLty, size = lty.size)
   }
 
   if (identical(plot.cens, TRUE) ){
