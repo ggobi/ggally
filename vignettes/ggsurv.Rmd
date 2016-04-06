@@ -1,5 +1,5 @@
 ---
-title: "Pairwise scatterplot matrix of numeric data with ggplot2"
+title: "ggsurv: survival curves with ggplot2"
 author: "Original author: Edwin Thoen; Created by Barret Schloerke"
 date: April, 4, 2016
 output:
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(fig.width = 9, fig.height = 7, fig.retina = 1)
 # ggsurv
 
 This function produces Kaplan-Meier plots using `ggplot2`.
-As a first argument it needs a `survfit` object, created by the
+As a first argument, `ggsurv` needs a `survfit` object, created by the
 `survival` package. Default settings differ for single stratum and
 multiple strata objects.  
 
@@ -71,8 +71,7 @@ pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
 pl.kid
 
 # Zoom in to first 80 days
-pl.kid <- pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
-pl.kid
+pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 ```
 
 ### Add text and remove the legend

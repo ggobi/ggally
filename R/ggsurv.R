@@ -2,7 +2,7 @@ if(getRversion() >= "2.15.1") {
   utils::globalVariables(c("cens", "surv", "up", "low"))
 }
 
-#' Plot \code{survfit} objects using \code{ggplot2}
+#' Survival curves with ggplot2
 #'
 #' This function produces Kaplan-Meier plots using \code{ggplot2}.
 #' As a first argument it needs a \code{survfit} object, created by the
@@ -61,8 +61,7 @@ if(getRversion() >= "2.15.1") {
 #'   pl.kid
 #'
 #'   # Zoom in to first 80 days
-#'   pl.kid <- pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
-#'   pl.kid
+#'   pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 #'
 #'   # Add the diseases names to the plot and remove legend
 #'   pl.kid +

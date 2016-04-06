@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggsurv.R
 \name{ggsurv}
 \alias{ggsurv}
-\title{Plot \code{survfit} objects using \code{ggplot2}}
+\title{Plot Survival Curves}
 \usage{
 ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
   cens.col = "gg.def", lty.est = 1, lty.ci = 2, size.est = 0.5,
@@ -81,8 +81,7 @@ if (require(survival) && require(scales)) {
   pl.kid
 
   # Zoom in to first 80 days
-  pl.kid <- pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
-  pl.kid
+  pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 
   # Add the diseases names to the plot and remove legend
   pl.kid +
