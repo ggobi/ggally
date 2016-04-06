@@ -15,7 +15,12 @@ ggscatmat
 
 ggsurv
 
+* size.est and size.ci parameters added PR#153
 * ordering changed to reflect survival time PR#147
+
+wrap
+
+* documentation updated PR#152
 
 
 
