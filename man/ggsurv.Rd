@@ -85,21 +85,20 @@ if (require(survival) && require(scales)) {
   pl.kid
 
   # Add the diseases names to the plot and remove legend
-  col <- scales::hue_pal(
-    h         = c(0, 360) + 15,
-    c         = 100,
-    l         = 65,
-    h.start   = 0,
-    direction = 1
-  )(4)
   pl.kid +
     ggplot2::annotate(
       "text",
       label  = c("PKD", "Other", "GN", "AN"),
-      x      = c(71, 50, 20, 50),
-      y      = c(0.8, 0.67, 0.55, 0.47),
+      x      = c(90, 125, 5, 60),
+      y      = c(0.8, 0.65, 0.55, 0.30),
       size   = 5,
-      colour = col
+      colour = scales::hue_pal(
+        h         = c(0, 360) + 15,
+        c         = 100,
+        l         = 65,
+        h.start   = 0,
+        direction = 1
+      )(4)
     ) +
     ggplot2::guides(color = FALSE, linetype = FALSE)
 }
