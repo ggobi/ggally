@@ -5,11 +5,18 @@ test_that("errors", {
 
   fn <- ggally_points
 
-  expect_error(wrap(fn, NA))
-  expect_error(wrap(fn, NA, y = TRUE))
-  expect_error(wrapp(fn, list(5)))
-  expect_error(wrapp(fn, table(1:10, 1:10)))
-  expect_error(wrapp(fn, list(A = 4, 5)))
+  # named params
+  expect_error(wrap(fn, NA), "all parameters")
+  expect_error(wrap(fn, y = TRUE, 5), "all parameters")
+
+  # named params to wrapp
+  expect_error(wrapp(fn, list(5)), "'params' must")
+  expect_error(wrapp(fn, table(1:10, 1:10)), "'params' must")
+  expect_error(wrapp(fn, list(A = 4, 5)), "'params' must")
+
+  # if the character fn doesn't exist
+  expect_error(wrap("does not exist", A = 5), "The following")
+  expect_error(wrapp("does not exist", list(A = 5)), "The following")
 })
 
 test_that("wrap", {
