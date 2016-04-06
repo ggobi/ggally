@@ -35,5 +35,10 @@ custom_legend <- wrap(gglegend("points"), size = 6)
 custom_legend(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species))
 
 # Use within ggpairs
+pm <- ggpairs(
+  iris, 1:2,
+  mapping = ggplot2::aes(color = Species),
+  upper = list(continuous = gglegend("points"))
+)
 }
 

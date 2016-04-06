@@ -61,6 +61,7 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #'
 #' @param fn this value is passed directly to an empty \code{\link{wrap}} call.  Please see \code{?\link{wrap}} for more details.
 #' @return a function that when called with arguements will produce the legend of the plotting function supplied.
+#' @export
 #' @examples
 #' # display regular plot
 #' ggally_points(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species))
@@ -81,11 +82,11 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #' custom_legend(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species))
 #'
 #' # Use within ggpairs
-# pm <- ggpairs(
-#   iris, 1:2,
-#   mapping = ggplot2::aes(color = Species),
-#   upper = list(continuous = gglegend("points"))
-# )
+#' pm <- ggpairs(
+#'   iris, 1:2,
+#'   mapping = ggplot2::aes(color = Species),
+#'   upper = list(continuous = gglegend("points"))
+#' )
 gglegend <- function(fn) {
 
   # allows users to supply a character just like in ggpairs
