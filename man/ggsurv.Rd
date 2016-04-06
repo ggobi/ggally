@@ -5,9 +5,9 @@
 \title{Plot \code{survfit} objects using \code{ggplot2}}
 \usage{
 ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
-  cens.col = "gg.def", lty.est = 1, lty.ci = 2, lty.size = 0.5,
-  cens.shape = 3, back.white = FALSE, xlab = "Time", ylab = "Survival",
-  main = "")
+  cens.col = "gg.def", lty.est = 1, lty.ci = 2, size.est = 0.5,
+  size.ci = size.est, cens.shape = 3, back.white = FALSE, xlab = "Time",
+  ylab = "Survival", main = "")
 }
 \arguments{
 \item{s}{an object of class \code{survfit}}
@@ -29,7 +29,9 @@ either 1 or equal to the number of strata.}
 
 \item{lty.ci}{linetype of the bounds that mark the 95\% CI.}
 
-\item{lty.size}{line width of the survival curve}
+\item{size.est}{line width of the survival curve}
+
+\item{size.ci}{line width of the 95\% CI}
 
 \item{cens.shape}{shape of the points that mark censored observations.}
 
