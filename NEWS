@@ -1,6 +1,10 @@
 GGally 1.0.1.9999
 -----------------
 
+gglegend - New!
+
+* pull out the legend of a plot which can also be used in ggpairs PR#155
+
 ggally_smooth
 
 * added method parameter (411213c)
