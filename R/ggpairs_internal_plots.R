@@ -1,46 +1,85 @@
-#' @export
-#' @rdname wrap_fn_with_param_arg
-wrap  <- function(funcVal, ..., funcArgName = substitute(funcVal)) {
-  wrap_fn_with_param_arg(funcVal, params = list(...), funcArgName = funcArgName)
-}
 
-#' @export
-#' @rdname wrap_fn_with_param_arg
-#' @param ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
-wrap_fn_with_params <- function(funcVal, ..., funcArgName = substitute(funcVal)) {
-  wrap_fn_with_param_arg(funcVal, params = list(...), funcArgName = funcArgName)
-}
-
-
-#' Wrap a function with parameters
+#' Wrap a function with different parameter values
 #'
-#' Wraps a function with the given parameters.  This allows for very specific parameter arguements to be applied to each specific function.
+#' Wraps a function with the supplied parameters to force different behavior.  This is useful for functions that are supplied to ggpairs.  It allows you to change the behavior of one function, rather than creating multiple functions with different parameter settings.
 #'
-#' \code{wrap == wrap_fn_with_params}
+#' \code{wrap} is identical to \code{wrap_fn_with_params}.  These function take the new parameters as arguements.
 #'
-#' \code{wrapp == wrap_fn_with_param_arg}
+#' \code{wrapp} is identical to \code{wrap_fn_with_param_arg}.  These functions take the new parameters as a single list.
 #'
 #' @param funcVal function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}
+#' @param ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
 #' @param params named vector of parameters to be applied to the \code{funcVal}
 #' @param funcArgName name of function to be displayed
 #' @return a \code{function(data, mapping, ...)\{\}} that will wrap the original function with the parameters applied as arguements
 #' @export
-#' @rdname wrap_fn_with_param_arg
+#' @rdname wrap
 #' @examples
+#' # example function that prints 'val'
 #' fn <- function(data, mapping, val = 2) {
 #'   print(val)
 #' }
 #' fn(NULL, NULL) # 2
-#' wrapped_fn <- wrap_fn_with_param_arg(fn, params = c(val = 5))
-#' wrapped_fn(NULL, NULL) # 5
-wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substitute(funcVal)) {
+#'
+#' # wrap function to change 'val' to 5 instead of 2
+#' wrapped_fn1 <- wrap(fn, val = 5)
+#' wrapped_fn1(NULL, NULL) # 5
+#'
+#' # wrap function to change 'val' to 5 using the arg list
+#' wrapped_fn2 <- wrap_fn_with_param_arg(fn, params = list(val = 5))
+#' wrapped_fn2(NULL, NULL) # 5
+#'
+#' # change parameter settings in ggpairs for a particular function
+#' ## Goal output:
+#' (regularPlot <- ggally_points(
+#'   iris,
+#'   ggplot2::aes(Sepal.Length, Sepal.Width),
+#'   size = 5, color = "red"
+#' ))
+#' # Wrap ggally_points to have parameter values size = 5 and color = 'red'
+#' w_ggally_points <- wrap(ggally_points, size = 5, color = "red")
+#' (wrappedPlot <- w_ggally_points(
+#'   iris,
+#'   ggplot2::aes(Sepal.Length, Sepal.Width)
+#' ))
+#'
+#' # Double check the aes parameters are the same for the geom_point layer
+#' identical(regularPlot$layers[[1]]$aes_params, wrappedPlot$layers[[1]]$aes_params)
+#'
+#' # Use a wrapped function in ggpairs
+#' ggpairs(iris, 1:3, lower = list(continuous = wrap(ggally_points, size = 5, color = "red")))
+#' ggpairs(iris, 1:3, lower = list(continuous = w_ggally_points))
+wrap_fn_with_param_arg <- function(
+  funcVal,
+  params = NULL,
+  funcArgName = substitute(funcVal)
+) {
+
+  if (!is.null(params)) {
+    if (is.vector(params)) {
+      params <- as.list(params)
+    }
+
+    if (length(params) > 0) {
+      if (!is.list(params)) {
+        stop("'params' must be a named list, named vector, or NULL")
+      }
+      if (is.null(names(params))) {
+        stop("'params' must be a named list, named vector, or NULL")
+      }
+      if (any(nchar(names(params)) == 0)) {
+        stop("'params' must be a named list, named vector, or NULL")
+      }
+    }
+  }
 
   if (inherits(funcVal, "ggmatrix_fn_with_params")) {
     fnName <- attr(funcVal, "fnName")
     oParams <- params
     params <- attr(funcVal, "params")
-    for (paramName in names(oParams)) {
-      params[paramName] <- oParams[paramName]
+
+    if (length(oParams) > 0) {
+      params[names(oParams)] <- oParams
     }
     fn <- attr(funcVal, "original_fn")
 
@@ -86,7 +125,6 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
     fn <- funcVal
   }
 
-  original_fn <- fn
   if (length(params) > 0) {
     ret_fn <- function(data, mapping, ...) {
       argsList <- list(...)
@@ -107,15 +145,33 @@ wrap_fn_with_param_arg <- function(funcVal, params = NULL, funcArgName = substit
   }
 
   attr(ret_fn, "params") <- params
-  attr(ret_fn, "original_fn") <- original_fn
+  attr(ret_fn, "original_fn") <- fn
   attr(ret_fn, "fnName") <- fnName
   class(ret_fn) <- "ggmatrix_fn_with_params"
   ret_fn
 }
 
 #' @export
-#' @rdname wrap_fn_with_param_arg
+#' @rdname wrap
 wrapp <- wrap_fn_with_param_arg
+
+#' @export
+#' @rdname wrap
+wrap  <- function(funcVal, ..., funcArgName = substitute(funcVal)) {
+  params <- list(...)
+  if (length(params) > 0) {
+    if (is.null(names(params))) {
+      stop("all parameters must be named arguements")
+    }
+    if (any(nchar(names(params)) == 0)) {
+      stop("all parameters must be named arguements")
+    }
+  }
+  wrap_fn_with_param_arg(funcVal, params = params, funcArgName = funcArgName)
+}
+#' @export
+#' @rdname wrap
+wrap_fn_with_params <- wrap
 
 
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
