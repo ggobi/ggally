@@ -294,6 +294,24 @@ print.ggmatrix <- function(
         next
       }
 
+      if (!is.ggplot(p)) {
+        pushViewport(
+          vplayout(
+            2 * rowPos - 1,
+            ifelse(
+              x$showYAxisPlotLabels,
+              2 * columnPos,
+              (2 * columnPos) - 1
+            )
+          )
+        )
+          suppressMessages(suppressWarnings(
+            print(p)
+          ))
+        popViewport() # 'plot panel' area
+        next
+      }
+
       pGtable <- ggplot_gtable(ggplot_build(p))
 
       ## New axis labels
