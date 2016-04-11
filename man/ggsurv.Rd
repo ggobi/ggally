@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggsurv.R
 \name{ggsurv}
 \alias{ggsurv}
-\title{Plot Survival Curves}
+\title{Survival curves with ggplot2}
 \usage{
 ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
   cens.col = "gg.def", lty.est = 1, lty.ci = 2, size.est = 0.5,
