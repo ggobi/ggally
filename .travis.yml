@@ -19,24 +19,6 @@ Remotes:
   - jimhester/covr  # code coverage check
   - jimhester/lintr # code lint
 
-# r_binary_packages:
-#   - arm
-#   - geosphere
-#   - ggmap
-#   - igraph
-#   # - intergraph
-#   - knitr
-#   - maps
-#   - network
-#   - RColorBrewer
-#   - scagnostics
-#   - scales
-#   - sna
-#   - survival
-#   # - tnet
-#   - roxygen2
-#   - testthat
-
 after_success:
   - Rscript -e 'covr::codecov()'
 
