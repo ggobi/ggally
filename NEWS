@@ -26,6 +26,9 @@ wrap
 
 * documentation updated PR#152
 
+travis-ci
+
+* cache packages for faster checking
 
 
 GGally 1.0.1
