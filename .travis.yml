@@ -1,14 +1,5 @@
-# Sample .travis.yml for R projects.
-#
-# See README.md for instructions, or for more configuration options,
-# see the wiki:
-#   https://github.com/craigcitro/r-travis/wiki
 
 language: r
-# sudo is required even though they want us to upgrade. :-/
-# http://docs.travis-ci.com/user/migrating-from-legacy/?utm_source=legacy-notice&utm_medium=banner&utm_campaign=legacy-upgrade
-# sudo: required
-
 # https://blog.rstudio.org/2016/03/09/r-on-travis-ci/
 sudo: false
 cache: packages
