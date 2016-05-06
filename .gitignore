@@ -10,3 +10,4 @@ vignettes/*.html
 .Rproj.user
 .RData
 *.Rproj
+.lintr_cache

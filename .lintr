@@ -1,3 +1,4 @@
+cache_directory: ".lintr_cache"
 linters: with_defaults(
     camel_case_linter = NULL,
     commented_code_linter = NULL,
@@ -11,6 +12,7 @@ exclusions:
     "inst/doc/ggnetworkmap.R",
     "inst/doc/ggpairs.R",
     "inst/doc/ggscatmat.R",
+    "inst/doc/ggsurv.R",
     "R/ggnetworkmap.R",
     "R/ggcorr.R",
     "R/ggsurv.R",
