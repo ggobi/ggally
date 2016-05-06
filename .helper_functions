@@ -11,7 +11,7 @@ covr_zero_coverage:
   zero()
 lintr_package:
   # remove line in "linters:" above
-  lintr::lint_package("./")
+  devtools::lint()
   # fix errors,
   # repeat until no errors
 lintr_code_to_create_lintr:
