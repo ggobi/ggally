@@ -25,18 +25,15 @@ lintr_code_to_create_lintr:
             paste0(linter, " = NULL, # ", n, collapse="\n    ")) %>%
     cat()
 test_package:
-  tp <- function(..., package = "./") {
-    require(devtools); require(testthat)
-    document(package)
-    load_all(package)
-    test_package(devtools::as.package(package)$package, ...)
+  tp <- function(package = "./", ...) {
+    devtools::document(package)
+    devtools::test(package, ...)
   }
   tp()
 test_file:
   tf <- function(file = "gg-plots", package = "./") {
-    require(devtools); require(testthat)
-    load_all(package)
-    test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
+    devtools::load_all(package)
+    testthat::test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
   }
   tf("ggpairs")
 knit_vignettes:
