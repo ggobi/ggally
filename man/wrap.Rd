@@ -8,18 +8,18 @@
 \title{Wrap a function with different parameter values}
 \usage{
 wrap_fn_with_param_arg(funcVal, params = NULL,
-  funcArgName = substitute(funcVal))
+  funcArgName = deparse(substitute(funcVal)))
 
-wrapp(funcVal, params = NULL, funcArgName = substitute(funcVal))
+wrapp(funcVal, params = NULL, funcArgName = deparse(substitute(funcVal)))
 
-wrap(funcVal, ..., funcArgName = substitute(funcVal))
+wrap(funcVal, ..., funcArgName = deparse(substitute(funcVal)))
 
-wrap_fn_with_params(funcVal, ..., funcArgName = substitute(funcVal))
+wrap_fn_with_params(funcVal, ..., funcArgName = deparse(substitute(funcVal)))
 }
 \arguments{
-\item{funcVal}{function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}}
+\item{funcVal}{function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}. \code{funcVal} is allowed to be a string of one of the \code{ggally_NAME} functions, such as \code{"points"} or \code{"facetdensity"}.}
 
-\item{params}{named vector of parameters to be applied to the \code{funcVal}}
+\item{params}{named vector or list of parameters to be applied to the \code{funcVal}}
 
 \item{funcArgName}{name of function to be displayed}
 
@@ -29,27 +29,31 @@ wrap_fn_with_params(funcVal, ..., funcArgName = substitute(funcVal))
 a \code{function(data, mapping, ...)\{\}} that will wrap the original function with the parameters applied as arguements
 }
 \description{
-Wraps a function with the supplied parameters to force different behavior.  This is useful for functions that are supplied to ggpairs.  It allows you to change the behavior of one function, rather than creating multiple functions with different parameter settings.
+Wraps a function with the supplied parameters to force different default behavior.  This is useful for functions that are supplied to ggpairs.  It allows you to change the behavior of one function, rather than creating multiple functions with different parameter settings.
 }
 \details{
 \code{wrap} is identical to \code{wrap_fn_with_params}.  These function take the new parameters as arguements.
 
 \code{wrapp} is identical to \code{wrap_fn_with_param_arg}.  These functions take the new parameters as a single list.
+
+The \code{params} and \code{fn} attributes are there for debugging purposes.  If either attribute is altered, the function must be re-wrapped to have the changes take effect.
 }
 \examples{
 # example function that prints 'val'
 fn <- function(data, mapping, val = 2) {
   print(val)
 }
-fn(NULL, NULL) # 2
+fn(data = NULL, mapping = NULL) # 2
 
-# wrap function to change 'val' to 5 instead of 2
+# wrap function to change default value 'val' to 5 instead of 2
 wrapped_fn1 <- wrap(fn, val = 5)
-wrapped_fn1(NULL, NULL) # 5
+wrapped_fn1(data = NULL, mapping = NULL) # 5
+# you may still supply regular values
+wrapped_fn1(data = NULL, mapping = NULL, val = 3) # 3
 
 # wrap function to change 'val' to 5 using the arg list
 wrapped_fn2 <- wrap_fn_with_param_arg(fn, params = list(val = 5))
-wrapped_fn2(NULL, NULL) # 5
+wrapped_fn2(data = NULL, mapping = NULL) # 5
 
 # change parameter settings in ggpairs for a particular function
 ## Goal output:
