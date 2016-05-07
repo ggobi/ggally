@@ -370,7 +370,7 @@ ggpairs <- function(
 
       subTypeName <- get_subtype_name(subType)
       if (isContinuous) {
-        if (identical(subTypeName, "density")) {
+        if (identical(subTypeName, "ggally_density")) {
           comboAes <- add_and_overwrite_aes(comboAes, aes_string(group = comboAes$colour))
         }
       } else {
@@ -379,7 +379,10 @@ ggpairs <- function(
         # ! subType %in% c("dot", "facetdensity")
         # subType %in% c("box", "facethist", denstrip)
 
-        if (! (identical(subTypeName, "dot") || identical(subTypeName, "facetdensity"))) {
+        if ( ! (
+          identical(subTypeName, "ggally_dot") ||
+          identical(subTypeName, "ggally_facetdensity")
+        ) ) {
           comboAes <- mapping_color_fill(comboAes)
         }
 
@@ -399,12 +402,12 @@ ggpairs <- function(
 
       comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
-      if (identical(subTypeName, "ratio")) {
+      if (identical(subTypeName, "ggally_ratio")) {
         p <- ggally_ratio(data[, c(yColName, xColName)])
 
       } else {
 
-        if (identical(subTypeName, "facetbar")) {
+        if (identical(subTypeName, "ggally_facetbar")) {
           if (!is.null(comboAes$colour)) {
             comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
           }
@@ -624,20 +627,12 @@ check_and_set_ggpairs_defaults <- function(
 
 
 get_subtype_name <- function(subType) {
-  if (inherits(subType, "ggmatrix_fn_with_params")) {
-    name <- attr(subType, "fnName")
-    if (str_detect(name, "^ggally_")) {
-      str_replace(name, "^ggally_", "")
-    } else {
-      name
-    }
-  } else {
-    if (mode(subType) == "character") {
-      subType
-    } else {
-      "custom_function"
-    }
+  fn <- wrap_fn_with_param_arg(subType)
+  ret <- attr(fn, "name")
+  if (ret == "subType") {
+    ret <- "custom_function"
   }
+  ret
 }
 
 
