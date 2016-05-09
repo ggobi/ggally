@@ -15,9 +15,9 @@ env:
 #   allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
 #     - env: R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
 
-Remotes:
-  - jimhester/covr  # code coverage check
-  - jimhester/lintr # code lint
+r_packages:
+  - covr # code coverage check
+  - lintr # code lint
 
 after_success:
   - Rscript -e 'covr::codecov()'
