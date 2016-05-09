@@ -145,7 +145,9 @@ test_that("print", {
   au <- ggpairs(tips, columnsUsed, upper = "blank", lower = facethistBindwidth1)
   ad <- ggpairs(tips, columnsUsed, diag = "blank", lower = facethistBindwidth1)
   al <- ggpairs(tips, columnsUsed, lower = "blank")
-  print(au); print(ad); print(al)
+  expect_silent({print(au)})
+  expect_silent({print(ad)})
+  expect_silent({print(al)})
 
   fn <- function(axisLabels) {
     a <- ggpairs(
@@ -155,11 +157,11 @@ test_that("print", {
     a
   }
   for (axisLabels in c("show", "internal", "none")) {
-    a <- fn(axisLabels)
-    print(a)
+    expect_silent({
+      a <- fn(axisLabels)
+      print(a)
+    })
   }
-
-  expect_true(TRUE)
 })
 
 test_that("subtypes", {
@@ -215,12 +217,8 @@ test_that("subtypes", {
   printShowStrips <- c(TRUE, FALSE)
 
   gn <- function(x) {
-    fnName <- attr(x, "fnName")
-    if (is.null(fnName)) {
-      x
-    } else {
-      fnName
-    }
+    fnName <- attr(x, "name")
+    ifnull(fnName, x)
   }
 
   for (fn in list(fn1, fn2)){
@@ -238,26 +236,28 @@ test_that("subtypes", {
         printShowStrip <- NULL
       }
 
-      a <- fn(
-        title = paste(
-          "upper_lower = c(cont = ", gn(conSub),
-            ", combo = ", gn(comSub),
-            ", discrete = ", gn(disSub),
-          "); diag = c(cont = ", gn(diagConSub),
-            ", discrete = ", gn(diagDisSub),
-          ")", sep = ""),
-        upper = list(
-          continuous = conSub,
-          combo = comSub,
-          discrete = disSub
-        ),
-        diag = list(
-          continuous = diagConSub,
-          discrete = diagDisSub
+      expect_silent({
+        a <- fn(
+          title = paste(
+            "upper_lower = c(cont = ", gn(conSub),
+              ", combo = ", gn(comSub),
+              ", discrete = ", gn(disSub),
+            "); diag = c(cont = ", gn(diagConSub),
+              ", discrete = ", gn(diagDisSub),
+            ")", sep = ""),
+          upper = list(
+            continuous = conSub,
+            combo = comSub,
+            discrete = disSub
+          ),
+          diag = list(
+            continuous = diagConSub,
+            discrete = diagDisSub
+          )
         )
-      )
+        print(a, showStrips = printShowStrip)
+      })
 
-      print(a, showStrips = printShowStrip)
     }
   }
 
