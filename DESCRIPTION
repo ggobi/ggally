@@ -50,7 +50,8 @@ Suggests:
     knitr (>= 1.12),
     rmarkdown (>= 0.9.2),
     roxygen2 (>= 5.0.0),
-    testthat (>= 1.0.2)
+    testthat (>= 1.0.2),
+    broom
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr

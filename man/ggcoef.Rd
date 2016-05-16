@@ -4,7 +4,7 @@
 \alias{ggcoef}
 \title{ggcoef - Plot Model Coefficients with broom and ggplot2}
 \usage{
-ggcoef(x, mapping = aes(y = term, x = estimate), conf.int = TRUE,
+ggcoef(x, mapping = aes_string(y = "term", x = "estimate"), conf.int = TRUE,
   conf.level = 0.95, exponentiate = FALSE, exclude_intercept = FALSE,
   vline = TRUE, vline_intercept = "auto", vline_color = "gray50",
   vline_linetype = "dotted", vline_size = 1, errorbar_color = "gray25",
@@ -44,17 +44,21 @@ if \code{x} is not a data frame)}
 \item{errorbar_linetype}{line type of the error bars}
 
 \item{errorbar_size}{size of the error bars}
+
+\item{...}{additional arguments sent to \code{\link[ggplot2]{geom_point}}}
 }
 \description{
 Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
 }
 \examples{
-reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
-ggcoef(reg)
+if (require(broom)) {
+  reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
+  ggcoef(reg)
 
-d <- as.data.frame(Titanic)
-reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
-ggcoef(reg2, exponentiate = TRUE)
-ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue") 
+  d <- as.data.frame(Titanic)
+  reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
+  ggcoef(reg2, exponentiate = TRUE)
+  ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue") 
+}
 }
 

@@ -20,25 +20,27 @@
 #' @param errorbar_height height of the error bars
 #' @param errorbar_linetype line type of the error bars
 #' @param errorbar_size size of the error bars
+#' @param ... additional arguments sent to \code{\link[ggplot2]{geom_point}}
 #' @examples 
-#' reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
-#' ggcoef(reg)
+#' if (require(broom)) {
+#'   reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
+#'   ggcoef(reg)
 #' 
-#' d <- as.data.frame(Titanic)
-#' reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
-#' ggcoef(reg2, exponentiate = TRUE)
-#' ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue") 
+#'   d <- as.data.frame(Titanic)
+#'   reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
+#'   ggcoef(reg2, exponentiate = TRUE)
+#'   ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue") 
+#' }
 #' @export
 ggcoef <- function(
-  x, mapping = aes(y = term, x = estimate),
+  x, mapping = aes_string(y = "term", x = "estimate"),
   conf.int = TRUE, conf.level = 0.95, exponentiate = FALSE, exclude_intercept = FALSE,
   vline = TRUE, vline_intercept = "auto", vline_color = "gray50", vline_linetype = "dotted", vline_size = 1,
   errorbar_color = "gray25", errorbar_height = 0, errorbar_linetype = "solid", errorbar_size = .5,
   ...
 ) {
   if (!is.data.frame(x)) {
-    if (!requireNamespace("broom", quietly = TRUE))
-      stop("broom package is required to tidy data")
+    require_pkgs("broom")
     x <- broom::tidy(x, conf.int = conf.int, conf.level = conf.level, exponentiate = exponentiate)
   }
   if (!("term" %in% names(x)))
@@ -65,7 +67,7 @@ ggcoef <- function(
   }
   if (conf.int & "conf.low" %in% names(x) & "conf.high" %in% names(x))
     p <- p + geom_errorbarh(
-      aes(xmin = conf.low, xmax = conf.high), 
+      aes_string(xmin = "conf.low", xmax = "conf.high"), 
       color = errorbar_color,
       height = errorbar_height,
       linetype = errorbar_linetype, 
