@@ -389,7 +389,7 @@ ggpairs <- function(
       }
 
       p <- make_ggmatrix_plot_obj(
-        wrap_fn_with_param_arg(subType, params = c()),
+        wrap_fn_with_param_arg(subType, params = c(), funcArgName = subTypeName),
         mapping = comboAes
       )
 
@@ -413,7 +413,7 @@ ggpairs <- function(
           }
         }
         p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(subType, params = c()),
+          wrap_fn_with_param_arg(subType, params = c(), funcArgName = subTypeName),
           mapping = comboAes
         )
 
@@ -446,7 +446,7 @@ ggpairs <- function(
         fn_to_wrap <- subType
 
         p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(fn_to_wrap, params = c()),
+          wrap_fn_with_param_arg(fn_to_wrap, params = c(), funcArgName = subTypeName),
           mapping = comboAes
         )
 
@@ -454,7 +454,11 @@ ggpairs <- function(
         comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
 
         p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg("diagAxis", params = c("label" = columnLabels[posX])),
+          wrap_fn_with_param_arg(
+            "diagAxis",
+            params = c("label" = columnLabels[posX]),
+            funcArgName = "ggally_diagAxis"
+          ),
           mapping = comboAes
         )
 
