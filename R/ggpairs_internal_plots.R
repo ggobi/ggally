@@ -124,7 +124,7 @@ wrap_fn_with_param_arg <- function(
   allParams <- ifnull(attr(funcVal, "params"), list())
   allParams[names(params)] <- params
 
-  original_fn <- ifnull(attr(funcVal, "fn"), funcVal)
+  original_fn <- funcVal
 
   ret_fn <- function(data, mapping, ...) {
     allParams$data <- data
