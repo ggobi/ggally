@@ -86,7 +86,6 @@ if (getRversion() >= "2.15.1") {
 #' @examples
 #' # use sample of the diamonds data for illustrative purposes
 #' data(diamonds, package="ggplot2")
-#' set.seed(100) # consistent sample
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 #'
 #' # basic parallel coordinate plot, using default settings
@@ -166,6 +165,10 @@ ggparcoord <- function(
   mapping      = NULL,
   title        = ""
 ) {
+
+  if (! identical(class(data), "data.frame")) {
+    data <- as.data.frame(data)
+  }
   saveData <- data
 
   ### Error Checking ###
