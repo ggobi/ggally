@@ -91,9 +91,9 @@ gglegend <- function(fn) {
 
   # allows users to supply a character just like in ggpairs
   fn <- wrapp(fn, list())
+  fn <- attr(fn, "fn")
 
   ret <- function(...) {
-    fn <- attr(ret, "fn")
     p <- fn(...)
     grab_legend(p)
   }
