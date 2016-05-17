@@ -105,7 +105,6 @@ in the parallel coordinate plot. Options:
 \examples{
 # use sample of the diamonds data for illustrative purposes
 data(diamonds, package="ggplot2")
-set.seed(100) # consistent sample
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 
 # basic parallel coordinate plot, using default settings
