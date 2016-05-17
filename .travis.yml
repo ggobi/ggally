@@ -16,9 +16,9 @@ env:
 #     - env: R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
 
 # install locally to avoid rev dep
-r_packages:
-  - covr # code coverage check
-  - lintr # code lint
+r_github_packages:
+  - jimhester/covr # code coverage check
+  - jimhester/lintr # code lint
 
 after_success:
   - Rscript -e 'covr::codecov()'
