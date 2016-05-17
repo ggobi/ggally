@@ -7,3 +7,4 @@ inst/*
 tests/
 vignettes/
 revdep/
+.lintr_cache
