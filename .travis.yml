@@ -17,8 +17,8 @@ env:
 
 # install locally to avoid rev dep
 r_github_packages:
-  - covr # code coverage check
-  - lintr # code lint
+  - jimhester/covr # code coverage check
+  - jimhester/lintr # code lint
 
 after_success:
   - Rscript -e 'covr::codecov()'
