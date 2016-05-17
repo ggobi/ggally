@@ -860,16 +860,16 @@ ggnet2 <- function(
 
     if (arrow.gap > 0) {
 
-      x.length = with(edges, abs(X2 - X1))
-      y.length = with(edges, abs(Y2 - Y1))
+      x.dir = with(edges, (X2 - X1)) # do not use absolute value
+      y.dir = with(edges, (Y2 - Y1))
 
-      arrow.gap = with(edges, arrow.gap / sqrt(x.length ^ 2 + y.length ^ 2))
+      arrow.gap = with(edges, arrow.gap / sqrt(x.dir ^ 2 + y.dir ^ 2))
 
       edges = transform(edges,
-                        X1 = X1 + arrow.gap * x.length,
-                        Y1 = Y1 + arrow.gap * y.length,
-                        X2 = X1 + (1 - arrow.gap) * x.length,
-                        Y2 = Y1 + (1 - arrow.gap) * y.length)
+                        X1 = X1 + arrow.gap * x.dir,
+                        Y1 = Y1 + arrow.gap * y.dir,
+                        X2 = X1 + (1 - arrow.gap) * x.dir,
+                        Y2 = Y1 + (1 - arrow.gap) * y.dir)
 
     }
 
