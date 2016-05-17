@@ -630,10 +630,10 @@ check_and_set_ggpairs_defaults <- function(
 }
 
 
-get_subtype_name <- function(subType) {
-  fn <- wrap_fn_with_param_arg(subType)
+get_subtype_name <- function(.subType) {
+  fn <- wrap_fn_with_param_arg(.subType)
   ret <- attr(fn, "name")
-  if (ret == "subType") {
+  if (ret == ".subType") {
     ret <- "custom_function"
   }
   ret
