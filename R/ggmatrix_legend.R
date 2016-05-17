@@ -100,5 +100,6 @@ gglegend <- function(fn) {
 
   # attach function so people can see what it is
   attr(ret, "fn") <- fn
+  attr(ret, "name") <- "gglegend"
   ret
 }
