@@ -402,22 +402,15 @@ ggpairs <- function(
 
       comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
 
-      if (identical(subTypeName, "ggally_ratio")) {
-        p <- ggally_ratio(data[, c(yColName, xColName)])
-
-      } else {
-
-        if (identical(subTypeName, "ggally_facetbar")) {
-          if (!is.null(comboAes$colour)) {
-            comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
-          }
+      if (identical(subTypeName, "ggally_facetbar")) {
+        if (!is.null(comboAes$colour)) {
+          comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
         }
-        p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(subType, params = c(), funcArgName = subTypeName),
-          mapping = comboAes
-        )
-
       }
+      p <- make_ggmatrix_plot_obj(
+        wrap_fn_with_param_arg(subType, params = c(), funcArgName = subTypeName),
+        mapping = comboAes
+      )
 
     } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
       plotAes$y <- NULL
