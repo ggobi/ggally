@@ -13,13 +13,25 @@ ggally_smooth
 
 * added 'method' parameter (411213c)
 
-ggnetworkmap
+ggally_ratio
 
-* fixed issue with overlaying network on a world map PR#157
+* Does not call ggfluctuation2 anymore. PR#165
 
 ggcorr
 
 * fixed issue with unnamed correlation matrix used as input PR#146
+
+ggfluctuation2
+
+* is being deprecated. Please use ggally_ratio instead PR#165
+
+ggnetworkmap
+
+* fixed issue with overlaying network on a world map PR#157
+
+ggpairs
+
+* Fixed improperly rotated axes with ggally_ratio PR#165
 
 ggscatmat
 
