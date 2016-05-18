@@ -1199,6 +1199,7 @@ ggally_facetbar <- function(data, mapping, ...){
 #'
 #' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.
 #' The function was adopted from experiemntal functions within GGplot2 developed by Hadley Wickham.
+#' Fluctuation plot - deprecated
 #'
 #' @param table_data a table of values, or a data frame with three columns, the last column being frequency
 #' @param floor don't display cells smaller than this value
@@ -1212,6 +1213,8 @@ ggally_facetbar <- function(data, mapping, ...){
 #' ggfluctuation2(table(tips$sex, tips$day))
 #' ggfluctuation2(table(tips[, c("sex", "day")]))
 ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq, na.rm = TRUE)) {
+
+  warning("'ggfluctuation2' is being depricated and will be removed in future versions.  Please migrate to ggally_ratio")
 
   yNames <- rownames(table_data)
   xNames <- colnames(table_data)
@@ -1251,7 +1254,6 @@ ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq
   # print(yNames)
   #
   # cat("\nmaxLen");print(maxLen)
-
 
   p <- ggplot(
       table_data,
