@@ -759,34 +759,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   p
 }
 
-#' Plots a mosaic plots
-#'
-#' Plots the mosaic plot by using fluctuation.
-#'
-#' Must send only two discrete columns in the data set.
-#'
-#' @param data data set using
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @keywords hplot
-#' @export
-#' @examples
-#' data(tips, package = "reshape")
-#' ggally_ratio(tips[, c("sex", "smoker")])
-#' ggally_ratio(tips[, c("sex", "smoker")]) + ggplot2::coord_equal()
-#' ggally_ratio(
-#'   tips[, c("sex", "day")]
-#' ) + ggplot2::theme( aspect.ratio = 4/2)
-ggally_ratio <- function(data){
-  # dataNames <- colnames(data)
-  data <- data[, 2:1]
-  tmpData <- table(data)
-  tmpData <- tmpData[rev(seq_len(nrow(tmpData))), ]
-  tmpData <- as.table(tmpData)
-  p <- ggfluctuation2(tmpData)# + labs(x = dataNames[1], y = dataNames[2])
-  p$type <- "discrete"
-  p$subType <- "ratio"
-  p
-}
 
 #' Plots the Density Plots by Using Diagonal
 #'
@@ -1192,13 +1164,106 @@ ggally_facetbar <- function(data, mapping, ...){
 }
 
 
+#' Plots a mosaic plot
+#'
+#' Plots the mosaic plot by using fluctuation.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used. Only x and y will used and both are required
+#' @param ... ignored
+#' @param floor don't display cells smaller than this value
+#' @param ceiling max value to scale frequencies.  If any frequency is larger than the ceiling, the fill color is displayed darker than other rectangles
+#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_ratio(tips, ggplot2::aes(sex, day))
+#' ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal()
+#' # only plot tiles greater or equal to 20 and scale to a max of 50
+#' ggally_ratio(
+#'   tips, ggplot2::aes(sex, day),
+#'   floor = 20, ceiling = 50
+#' ) + ggplot2::theme(aspect.ratio = 4/2)
+ggally_ratio <- function(
+  data,
+  mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
+  ...,
+  floor = 0,
+  ceiling = NULL
+) {
 
-#' Fluctuation plot
-#'
-#' Create a fluctuation plot.
-#'
-#' A fluctutation diagram is a graphical representation of a contingency table. This fuction currently only supports 2D contingency tables.
-#' The function was adopted from experiemntal functions within GGplot2 developed by Hadley Wickham.
+  # capture the original names
+  xName <- as.character(mapping$x)
+  yName <- as.character(mapping$y)
+
+  countData <- plyr::count(data, vars = c(xName, yName))
+
+  # overwrite names so name clashes don't happen
+  colnames(countData)[1:2] <- c("x", "y")
+
+  xNames <- levels(countData[["x"]])
+  yNames <- levels(countData[["y"]])
+
+  countData <- subset(countData, freq >= floor)
+
+  if (is.null(ceiling)) {
+    ceiling <- max(countData$freq)
+  }
+
+  countData[["freqSize"]] <- sqrt(pmin(countData[["freq"]], ceiling) / ceiling)
+  countData[["col"]] <- ifelse(countData[["freq"]] > ceiling, "grey30", "grey50")
+
+  countData[["xPos"]] <- as.numeric(countData[["x"]]) + (1 / 2) * countData[["freqSize"]]
+  countData[["yPos"]] <- as.numeric(countData[["y"]]) + (1 / 2) * countData[["freqSize"]]
+
+  p <- ggplot(
+      data = countData,
+      mapping = aes_string(
+        x = "xPos",
+        y = "yPos",
+        height = "freqSize",
+        width = "freqSize",
+        fill = "col"
+      )
+    ) +
+    geom_tile() +
+    scale_fill_identity() +
+    scale_x_continuous(
+      name = xName,
+      limits = c(0.9999, length(xNames) + 1),
+      breaks = 1:(length(xNames) + 1),
+      labels = c(xNames, ""),
+      minor_breaks = FALSE
+    ) +
+    scale_y_continuous(
+      name = yName,
+      limits = c(0.9999, length(yNames) + 1),
+      breaks = 1:(length(yNames) + 1),
+      labels = c(yNames, ""),
+      minor_breaks = FALSE
+    ) +
+    theme(
+      axis.text.x = element_text(
+        hjust = 0,
+        vjust = 1,
+        colour = "grey50"
+      ),
+      axis.text.y = element_text(
+        hjust = 0,
+        vjust = 0,
+        angle = 90,
+        colour = "grey50"
+      )
+    )
+
+  p$type <- "discrete"
+  p$subType <- "ratio"
+  p
+}
+
+
+
 #' Fluctuation plot - deprecated
 #'
 #' @param table_data a table of values, or a data frame with three columns, the last column being frequency
