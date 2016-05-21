@@ -792,7 +792,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
         ...
       )
   } else {
-    p <- p + geom_density()
+    p <- p + geom_density(...)
   }
 
   p$type <- "diag"
