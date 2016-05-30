@@ -27,8 +27,6 @@ notifications:
   email:
     on_success: change
     on_failure: change
-  slack:
-    secure: CBwdJj/j8K/o2Mv9iIhG/BtbIECU0ZA8BODtWA2YmDzja8BJOFKdFCtp1t+KeNV4BAZ1oUaDK4ETNgRirh/YZwobxsfK+AzQwZWzBI4WY6WAnBZpUteKNrsTCyTD0vZKYwWc7IFtEAUQBdsWr4PU+kGGKQ3aUhwsZ85QF9x/nHY=
 
 branches:
   only:
