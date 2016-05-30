@@ -16,3 +16,4 @@ revdep
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^cran-comments\.md$
+^codecov\.yml$
