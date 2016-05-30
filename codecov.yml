@@ -1,3 +1,6 @@
+codecov:
+  bot: ggobi
+
 coverage:
   range: "70...95"
   status:
