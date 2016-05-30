@@ -121,7 +121,8 @@ gpd <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
 
 # utilize ggplot2 aes to switch to thicker lines
 gpd <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
-  title="Parallel Coord. Plot of Diamonds Data", mapping = ggplot2::aes(size = 1))
+  title ="Parallel Coord. Plot of Diamonds Data", mapping = ggplot2::aes(size = 1)) +
+  ggplot2::scale_size_identity()
 # gpd
 
 # basic parallel coord plot of the msleep data, using 'random' imputation and
