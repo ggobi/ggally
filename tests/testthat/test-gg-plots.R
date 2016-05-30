@@ -5,6 +5,11 @@ data(tips, package = "reshape")
 data(nasa)
 nas <- subset(nasa, x <= 2 & y == 1)
 
+expect_print <- function(x) {
+  expect_silent(print(x))
+}
+
+
 test_that("density", {
 
   p <- ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
@@ -40,6 +45,37 @@ test_that("cor", {
   )
   expect_equal(deparse(get("aes_params", envir = p$layers[[1]])$colour), "I(\"blue\")")
 
+  expect_err <- function(..., msg = NULL) {
+    expect_error(
+      ggally_cor(
+        ti, ggplot2::aes(x = total_bill, y = tip),
+        ...
+      ),
+      msg
+    )
+  }
+  expect_err(corAlignPercent = 0.9, "'corAlignPercent' is deprecated")
+  expect_err(corMethod = "pearson", "'corMethod' is deprecated")
+  expect_err(corUse = "complete.obs", "'corUse' is deprecated")
+
+  expect_print(ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = "green")))
+
+  ti3 <- ti2 <- ti
+  ti2[2,"total_bill"] <- NA
+
+  ti3[2,"total_bill"] <- NA
+  ti3[3,"tip"] <- NA
+  ti3[4,"total_bill"] <- NA
+  ti3[4,"tip"] <- NA
+
+  expect_warn <- function(data, msg) {
+    expect_warning(
+      ggally_cor(data, ggplot2::aes(x = total_bill, y = tip)),
+      msg
+    )
+  }
+  expect_warn(ti2, "Removing 1 row that")
+  expect_warn(ti3, "Removed 3 rows containing")
 })
 
 test_that("diagAxis", {
@@ -81,4 +117,10 @@ test_that("dates", {
   expect_equal(as.character(p$mapping$x), "date")
   expect_equal(p$labels$y, "count")
 
+})
+
+
+test_that("ggfluctuation2", {
+  expect_warning(ggfluctuation2(table(tips$sex, tips$day)), "'ggfluctuation2' is being deprecated")
+  expect_warning(ggfluctuation2(table(tips[, c("sex", "day")])), "'ggfluctuation2' is being deprecated")
 })

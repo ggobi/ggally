@@ -164,6 +164,23 @@ test_that("print", {
   }
 })
 
+
+test_that("strips and axis", {
+
+  # axis should line up with left side strips
+  expect_silent({
+    pm <- ggpairs(tips, c(3,1,4), showStrips = TRUE, title = "Axis should line up even if strips are present", lower = list(combo = wrap("facethist", binwidth = 1)))
+    print(pm)
+  })
+  # default behavior. tested in other places
+  # expect_silent({
+  #   pm <- ggpairs(tips, c(3,1,4), showStrips = FALSE)
+  #   print(pm)
+  # })
+
+})
+
+
 test_that("subtypes", {
 
 # list of the different plot types to check
