@@ -70,11 +70,23 @@ test_that("legend", {
   expect_true(inherits(p, "grob"))
 
   # Use within ggpairs
-  pm <- ggpairs(
-   iris, 1:2,
-   mapping = ggplot2::aes(color = Species),
-   upper = list(continuous = gglegend("points"))
-  )
-  ex_print(pm)
+  expect_silent({
+    pm <- ggpairs(
+     iris, 1:2,
+     mapping = ggplot2::aes(color = Species),
+     upper = list(continuous = gglegend("points"))
+    )
+    print(pm)
+  })
+
+  # Use within ggpairs
+  expect_silent({
+    pm <- ggpairs(
+     iris, 1:2,
+     mapping = ggplot2::aes(color = Species)
+    )
+    pm[1,2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
+    print(pm)
+  })
 
 })
