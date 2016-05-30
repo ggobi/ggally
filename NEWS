@@ -4,6 +4,7 @@ GGally 1.0.1.9999
 ggcoef - New!
 
 * plot model coefficients with broom and ggplot2 PR#162
+* Plotting model coefficients (http://www.r-statistics.com/2010/07/visualization-of-regression-coefficients-in-r/)
 
 gglegend - New!
 
@@ -32,6 +33,10 @@ ggfluctuation2
 ggnetworkmap
 
 * fixed issue with overlaying network on a world map PR#157
+
+ggparcoord
+
+* Fixed odd bug where a list was trying to be forced as a double PR#162
 
 ggpairs
 
