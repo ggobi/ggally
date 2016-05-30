@@ -1279,7 +1279,7 @@ ggally_ratio <- function(
 #' ggfluctuation2(table(tips[, c("sex", "day")]))
 ggfluctuation2 <- function (table_data, floor = 0, ceiling = max(table_data$freq, na.rm = TRUE)) {
 
-  warning("'ggfluctuation2' is being depricated and will be removed in future versions.  Please migrate to ggally_ratio")
+  warning("'ggfluctuation2' is being deprecated and will be removed in future versions.  Please migrate to ggally_ratio")
 
   yNames <- rownames(table_data)
   xNames <- colnames(table_data)
