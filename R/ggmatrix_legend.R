@@ -87,6 +87,13 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #'   mapping = ggplot2::aes(color = Species),
 #'   upper = list(continuous = gglegend("points"))
 #' )
+#' # pm
+#'
+#' # Place a legend in a specific location
+#' pm <- ggpairs(iris, 1:2, mapping = ggplot2::aes(color = Species))
+#' # Make the legend
+#' pm[1,2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
+#' pm
 gglegend <- function(fn) {
 
   # allows users to supply a character just like in ggpairs
