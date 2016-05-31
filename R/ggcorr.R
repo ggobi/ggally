@@ -450,7 +450,7 @@ ggcorr <- function(
   }
 
   p = p  +
-    geom_text(data = textData, aes(label = diagLabel), ..., na.rm = TRUE) +
+    geom_text(data = textData, aes_string(label = "diagLabel"), ..., na.rm = TRUE) +
     scale_x_discrete(breaks = NULL, limits = xLimits) +
     scale_y_discrete(breaks = NULL, limits = levels(m$y)) +
     labs(x = NULL, y = NULL) +
