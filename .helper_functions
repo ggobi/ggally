@@ -57,7 +57,7 @@ knit_vignette:
   }
   kv("ggmatrix")
 reverse_depends:
-  check_rev_deps = function(pkgType = "mac.binary", ignore = NULL) {
+  check_rev_deps = function(pkgType = "mac.binary", ignore = NULL, bioconductor = FALSE) {
     curPkgType <- getOption("pkgType")
     on.exit({options(pkgType = curPkgType)})
     options(pkgType = pkgType)
@@ -66,10 +66,10 @@ reverse_depends:
     res <- devtools::revdep_check(
       type = pkgType,
       libpath = .libPaths()[1],
-      bioconductor = TRUE,
-      threads = 1,
+      bioconductor = bioconductor,
       ignore = ignore
     )
+
     devtools::revdep_check_save_summary()
     devtools::revdep_check_print_problems()
     cat("\n\n")
