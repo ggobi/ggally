@@ -4,11 +4,6 @@ language: r
 sudo: false
 cache: packages
 
-## default R_*_ARGS
-# R_BUILD_ARGS="--no-build-vignettes" R_CHECK_ARGS="--no-manual --as-cran"
-env:
-  - WARNINGS_ARE_ERRORS=1
-
 # matrix:
 #   fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
 #                     # allows the build to "pass" when the non-failure-able builds are done
