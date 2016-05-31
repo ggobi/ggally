@@ -8,7 +8,7 @@ ggcoef - New!
 
 gglegend - New!
 
-* pull out the legend of a plot which can also be used in ggpairs PR#155
+* pull out the legend of a plot which can also be used in ggpairs PR#155, PR#169
 
 ggally_densityDiag
 
@@ -25,6 +25,7 @@ ggally_ratio
 ggcorr
 
 * fixed issue with unnamed correlation matrix used as input PR#146
+* fixed issue undesired shifting when layout.exp was > 0 PR#171
 
 ggfluctuation2
 
