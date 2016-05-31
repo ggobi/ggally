@@ -41,23 +41,7 @@
 |tnet         |   |3.0.14  |2015-11-18 |cran (@3.0.14)       |
 
 # Check results
-21 packages
-
-## DescribeDisplay (0.2.5)
-Maintainer: Di Cook <dicook@monash.edu>  
-Bug reports: https://github.com/ggobi/DescribeDisplay/issues
-
-0 errors | 0 warnings | 0 notes
-
-## eechidna (0.1)
-Maintainer: Ben Marwick <benmarwick@gmail.com>
-
-0 errors | 0 warnings | 0 notes
-
-## freqparcoord (1.0.1)
-Maintainer: Norm Matloff <normmatloff@gmail.com>
-
-0 errors | 0 warnings | 0 notes
+7 packages with problems
 
 ## ggbio (1.20.1)
 Maintainer: Michael Lawrence <lawrence.michael@gene.com>  
@@ -162,17 +146,6 @@ Rd file 'plotSingleChrom.Rd':
 These lines will be truncated in the PDF manual.
 ```
 
-## ggmcmc (1.0)
-Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>  
-Bug reports: https://github.com/xfim/ggmcmc/issues
-
-0 errors | 0 warnings | 0 notes
-
-## imageData (0.1-21)
-Maintainer: Chris Brien <Chris.Brien@unisa.edu.au>
-
-0 errors | 0 warnings | 0 notes
-
 ## isomiRs (1.0.2)
 Maintainer: Lorena Pantano <lorena.pantano@gmail.com>
 
@@ -185,11 +158,6 @@ Packages required but not available: ‘DiscriMiner’ ‘DESeq2’
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
-
-## LANDD (1.0.0)
-Maintainer: Shangzhao Qiu <qsz1328@gmail.com>
-
-0 errors | 0 warnings | 0 notes
 
 ## MissingDataGUI (0.2-5)
 Maintainer: Xiaoyue Cheng <xycheng@unomaha.edu>
@@ -227,32 +195,6 @@ Last 13 lines of output:
   Execution halted
 ```
 
-## plotly (3.6.0)
-Maintainer: Carson Sievert <cpsievert1@gmail.com>  
-Bug reports: https://github.com/ropensci/plotly/issues
-
-0 errors | 0 warnings | 0 notes
-
-## PopGenReport (2.2.2)
-Maintainer: Bernd Gruber <bernd.gruber@canberra.edu.au>
-
-0 errors | 0 warnings | 0 notes
-
-## qualvar (0.1.0)
-Maintainer: Joel Gombin <joel.gombin@gmail.com>
-
-0 errors | 0 warnings | 0 notes
-
-## robCompositions (2.0.0)
-Maintainer: Matthias Templ <templ@tuwien.ac.at>
-
-0 errors | 0 warnings | 0 notes
-
-## robustbase (0.92-6)
-Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
-
-0 errors | 0 warnings | 0 notes
-
 ## specmine (1.0)
 Maintainer: Christopher Costa <chrisbcl@hotmail.com>
 
@@ -263,11 +205,6 @@ checking whether package ‘specmine’ can be installed ... ERROR
 Installation failed.
 See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/specmine.Rcheck/00install.out’ for details.
 ```
-
-## svdvis (0.1)
-Maintainer: Neo Christopher Chung <nchchung@gmail.com>
-
-0 errors | 0 warnings | 0 notes
 
 ## TCGAbiolinks (1.2.4)
 Maintainer: Antonio Colaprico <antonio.colaprico@ulb.ac.be>,
@@ -282,12 +219,6 @@ Installation failed.
 See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/TCGAbiolinks.Rcheck/00install.out’ for details.
 ```
 
-## toaster (0.5.1)
-Maintainer: Gregory Kanevsky <gregory.kanevsky@teradata.com>  
-Bug reports: https://github.com/teradata-aster-field/toaster/issues
-
-0 errors | 0 warnings | 0 notes
-
 ## userfriendlyscience (0.4-1)
 Maintainer: Gjalt-Jorn Peters <gjalt-jorn@userfriendlyscience.com>
 
@@ -298,9 +229,4 @@ checking whether package ‘userfriendlyscience’ can be installed ... ERROR
 Installation failed.
 See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/userfriendlyscience.Rcheck/00install.out’ for details.
 ```
-
-## vdmR (0.2.2)
-Maintainer: Tomokazu Fujino <fujino@fwu.ac.jp>
-
-0 errors | 0 warnings | 0 notes
 
