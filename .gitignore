@@ -11,3 +11,4 @@ vignettes/*.html
 .RData
 *.Rproj
 .lintr_cache
+revdep/checks\.rds
