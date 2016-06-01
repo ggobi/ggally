@@ -24,6 +24,7 @@ if(getRversion() >= "2.15.1") {
 #' @param lty.ci linetype of the bounds that mark the 95\% CI.
 #' @param size.est line width of the survival curve
 #' @param size.ci line width of the 95\% CI
+#' @param size.cens point size of the censoring points
 #' @param cens.shape shape of the points that mark censored observations.
 #' @param back.white if TRUE the background will not be the default
 #'    grey of \code{ggplot2} but will be white with borders around the plot.
@@ -91,6 +92,7 @@ ggsurv <- function(
   lty.ci     = 2,
   size.est   = 0.5,
   size.ci    = size.est,
+  size.cens  = 2,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -112,7 +114,7 @@ ggsurv <- function(
 
   pl <- fn(
     s, CI , plot.cens, surv.col,
-    cens.col, lty.est, lty.ci, size.est, size.ci,
+    cens.col, lty.est, lty.ci, size.est, size.ci, size.cens,
     cens.shape, back.white, xlab,
     ylab, main, strata
   )
@@ -130,6 +132,7 @@ ggsurv_s <- function(
   lty.ci     = 2,
   size.est   = 0.5,
   size.ci    = size.est,
+  size.cens  = 2,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -171,7 +174,8 @@ ggsurv_s <- function(
       data    = dat.cens,
       mapping = aes(y = surv),
       shape   = cens.shape,
-      col     = col
+      col     = col,
+      size    = size.cens
     )
   }
 
@@ -193,6 +197,7 @@ ggsurv_m <- function(
   lty.ci     = 2,
   size.est   = 0.5,
   size.ci    = size.est,
+  size.cens  = 2,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -294,8 +299,10 @@ ggsurv_m <- function(
         data    = dat.cens,
         mapping = aes(y = surv),
         shape   = cens.shape,
-        col     = col
+        col     = col,
+        size    = size.cens
       )
+      
 
     } else if (length(cens.col) > 0) {
       # if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
@@ -315,7 +322,8 @@ ggsurv_m <- function(
           data = dat.cens,
           mapping = aes(y=surv, col = group),
           shape = cens.shape,
-          show.legend = FALSE
+          show.legend = FALSE,
+          size = size.cens
         )
       } else {
 
@@ -337,7 +345,8 @@ ggsurv_m <- function(
             mapping = aes(y=surv),
             color = I(cens.col[i]),
             shape = cens.shape[i],
-            show.legend = FALSE
+            show.legend = FALSE,
+            size = size.cens
           )
 
         }
