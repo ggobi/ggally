@@ -207,7 +207,7 @@ as.character.ggmatrix_ggplot2 <- function(x, ...) {
 
 
 
-make_ggmatrix_plot_obj <- function(fn, mapping, dataPos = 1, gg = NULL) {
+make_ggmatrix_plot_obj <- function(fn, mapping = ggplot2::aes(), dataPos = 1, gg = NULL) {
   nonCallVals <- which(lapply(mapping, mode) == "call")
   if (length(nonCallVals) > 0) {
     nonCallNames <- names(mapping)[nonCallVals]
