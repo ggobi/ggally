@@ -35,7 +35,7 @@ test_file:
     devtools::load_all(package)
     testthat::test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
   }
-  tf("ggpairs")
+  tf("zzz_ggpairs")
 knit_vignettes:
   devtools::build_vignettes("./")
 knit_vignette:
