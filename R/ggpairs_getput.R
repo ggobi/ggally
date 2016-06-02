@@ -80,13 +80,13 @@ getPlot <- function(x, i, j){
     } else {
       firstNote <- str_c("Position: i = ", i, ", j = ", j, "\nstr(plotObj):\n", sep = "")
       strObj <- capture.output({
-        print(str(plotObj))
+        str(plotObj)
       })
       stop(str_c("unknown plot object type.\n", firstNote, strObj))
     }
 
     if (!is.null(x$gg)) {
-      # print("adding custom gg")
+      # adding custom gg
       p <- p + x$gg
     }
   }
