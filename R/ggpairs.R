@@ -160,8 +160,8 @@ ggduo <- function(
   columnsY = 1:ncol(data),
   types = list(continuous = "points", combo = "facethist", discrete = "ratio"),
   axisLabels = c("show", "internal"),
-  columnLabelsX = colnames(data[, columnsX]),
-  columnLabelsY = colnames(data[, columnsY]),
+  columnLabelsX = colnames(data[columnsX]),
+  columnLabelsY = colnames(data[columnsY]),
   showStrips = NULL,
   legends = FALSE,
   verbose = FALSE
@@ -342,7 +342,7 @@ ggpairs <- function(
   params = NULL,
   ...,
   axisLabels = c("show", "internal", "none"),
-  columnLabels = (if (is.character(columns)) { columns } else { colnames(data)[columns] }),
+  columnLabels = colnames(data[columns]),
   showStrips = NULL,
   legends = FALSE,
   verbose = FALSE
