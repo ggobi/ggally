@@ -383,170 +383,54 @@ ggpairs <- function(
 
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
 
-  ggpairsPlots <- list()
-
+  # get plot type information
   dataTypes <- plot_types(data, columns, columns)
 
+  # make internal labels on the diag axis
   if (identical(axisLabels, "internal")) {
-    dataTypes$Type <- as.character(dataTypes$Type)
-    dataTypes$Type[dataTypes$posx == dataTypes$posy] <- "label"
-    dataTypes$Type <- as.factor(dataTypes$Type)
+    dataTypes$plotType[dataTypes$posX == dataTypes$posY] <- "label"
   }
 
+  ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
 
-  for (i in 1:nrow(dataTypes)) {
-    p <- "blank"
-    type <- dataTypes[i, "Type"]
+    plotType <- dataTypes[i, "plotType"]
 
-    posX <- as.numeric(as.character(dataTypes[i, "posx"]))
-    posY <- as.numeric(as.character(dataTypes[i, "posy"]))
-    xColName <- as.character(dataTypes[i, "xvar"])
-    yColName <- as.character(dataTypes[i, "yvar"])
+    posX <- dataTypes[i, "posX"]
+    posY <- dataTypes[i, "posY"]
+    xColName <- dataTypes[i, "xVar"]
+    yColName <- dataTypes[i, "yVar"]
 
-    plotAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), mapping)
-
-    up <- posX > posY
-
-    # if (printInfo) {
-    #   cat("Pos #", i, "\t(", posX, ", ", posY, ")\t type: ")
-    # }
-
-    sectionAes <- NULL
-
-    if (up) {
-      sectionAes <- upper$mapping
+    if (posX > posY) {
+      types <- upper
+    } else if (posX < posY) {
+      types <- lower
     } else {
-      sectionAes <- lower$mapping
+      types <- diag
     }
 
-    if (type %in% c("NA", "NA-diag")) {
+    sectionAes <- add_and_overwrite_aes(
+      add_and_overwrite_aes(
+        aes_string(x = xColName, y = yColName),
+        mapping
+      ),
+      types$mapping
+    )
 
-      subType <- if (type == "NA-diag") {
-        diag$na
-      } else {
-        # type is "NA"
-        if (up) {
-          upper$na
-        } else {
-          lower$na
-        }
-      }
-      p <- make_ggmatrix_plot_obj(
-        wrap_fn_with_param_arg(subType, params = c()),
-        mapping = aes()
-      )
-
-    } else if (type %in% c("scatterplot", "box-hori", "box-vert")) {
-      isContinuous <- (type == "scatterplot")
-      # if (printInfo) {
-      #   if (isContinuous) {
-      #     cat("continuous\n")
-      #   } else {
-      #     cat("combo\n")
-      #   }
-      # }
-
-      if (up) {
-        subType <- if (isContinuous) upper$continuous else upper$combo
-      } else {
-        subType <-  if (isContinuous) lower$continuous else lower$combo
-      }
-
-      # comboAes <- add_and_overwrite_aes(aes_string(x = xColName, y = yColName), sectionAes)
-      comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
-
-      subTypeName <- get_subtype_name(subType)
-      if (isContinuous) {
-        if (identical(subTypeName, "ggally_density")) {
-          comboAes <- add_and_overwrite_aes(comboAes, aes_string(group = comboAes$colour))
-        }
-      } else {
-        # isCombo
-
-        # ! subType %in% c("dot", "facetdensity")
-        # subType %in% c("box", "facethist", denstrip)
-
-        if ( ! (
-          identical(subTypeName, "ggally_dot") ||
-          identical(subTypeName, "ggally_facetdensity")
-        ) ) {
-          comboAes <- mapping_color_fill(comboAes)
-        }
-
-      }
-
-      p <- make_ggmatrix_plot_obj(
-        wrap_fn_with_param_arg(subType, params = c(), funcArgName = subTypeName),
-        mapping = comboAes
-      )
-
-    } else if (type == "mosaic") {
-      # if (printInfo) {
-      #   cat("mosaic\n")
-      # }
-      subType <- if (up) upper$discrete else lower$discrete
-      subTypeName <- get_subtype_name(subType)
-
-      comboAes <- add_and_overwrite_aes(plotAes, sectionAes)
-
-      if (identical(subTypeName, "ggally_facetbar")) {
-        if (!is.null(comboAes$colour)) {
-          comboAes <- add_and_overwrite_aes(comboAes, aes_string(fill = comboAes$colour))
-        }
-      }
-      p <- make_ggmatrix_plot_obj(
-        wrap_fn_with_param_arg(subType, params = c(), funcArgName = subTypeName),
-        mapping = comboAes
-      )
-
-    } else if (type %in% c("stat_bin-num", "stat_bin-cat", "label")) {
-      plotAes$y <- NULL
-
-      if (type == "stat_bin-num" || type == "stat_bin-cat") {
-        # if (printInfo) {
-        #   cat(paste(type, "\n", sep = ""))
-        # }
-
-        if (type == "stat_bin-num") {
-          subType <- diag$continuous
-        } else if (type == "stat_bin-cat") {
-          subType <- diag$discrete
-        }
-        subTypeName <- get_subtype_name(subType)
-
-        comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
-
-        if (
-          ( (!identical(subTypeName, "density")) && type == "stat_bin-num") ||
-          (type == "stat_bin-cat")
-        ) {
-          comboAes <- mapping_color_fill(comboAes)
-        }
-
-        fn_to_wrap <- subType
-
-        p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(fn_to_wrap, params = c(), funcArgName = subTypeName),
-          mapping = comboAes
-        )
-
-      } else if (type == "label") {
-        comboAes <- add_and_overwrite_aes(plotAes, diag$mapping)
-
-        p <- make_ggmatrix_plot_obj(
-          wrap_fn_with_param_arg(
-            "diagAxis",
-            params = c("label" = columnLabels[posX]),
-            funcArgName = "ggally_diagAxis"
-          ),
-          mapping = comboAes
-        )
-
-      }
+    args <- list(plotType = plotType, types = types, sectionAes = sectionAes)
+    if (plotType == "label") {
+      args$label <- columnLabels[posX]
     }
 
-    ggpairsPlots[[length(ggpairsPlots) + 1]] <- p
-  }
+    plot_fn <- ggmatrixPlotList[[plotType]]
+
+    if (is.function(plot_fn)) {
+      p <- do.call(plot_fn, args)
+    } else {
+      p <- "blank"
+    }
+    return(p)
+
+  })
 
   plotMatrix <- ggmatrix(
     plots = ggpairsPlots,
