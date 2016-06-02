@@ -33,4 +33,47 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 \description{
 Make a matrix of plots with a given data set with two different column sets
 }
+\details{
+\code{types} is a list that may contain the variables
+'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
+\describe{
+ \item{continuous}{exactly one of ('points', 'smooth', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
+ \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+ \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
+ \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+}
+
+If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
+
+If a function is supplied as an option, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
+}
+\examples{
+# plotting is reduced to the first couple of examples.
+# Feel free to print the ggpair objects created in the examples
+
+data(tips, package = "reshape")
+pm <- ggduo(tips, 1:2, c(2, 5, 6))
+pm
+# same example
+pm <- ggduo(tips, c("total_bill", "tip"), c("tip", "day", "time"))
+# pm
+
+# add color to smoker
+pm <- ggduo(
+ tips, 1:2, c(2, 5, 6),
+ mapping = ggplot2::aes(color = smoker),
+ title = "Tip and Total Bill vs Tip, Day, and Time by Smoker",
+ columnLabelsX = c("Total Bill", "Tip"),
+ columnLabelsY = c("Tip", "Day", "Time"),
+ types = list(continuous = "smooth")
+)
+# pm
+
+# Add legend in top right corner plot area
+points_legend <- gglegend(ggally_smooth)
+pm[1,2] <- points_legend(tips, ggplot2::aes(tip, tip, color = smoker))
+# pm
+# reduce the amount of space needed for the left axis
+print(pm, leftWidthProportion = 0.15)
+}
 

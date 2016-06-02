@@ -66,7 +66,7 @@ Make a matrix of plots with a given data set
 
 If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
 
-If a function is supplied to an upper, lower, or diag, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}()} the function with its parameters.
+If a function is supplied as an option to \code{upper}, \code{lower}, or \code{diag}, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
 # plotting is reduced to the first couple of examples.
