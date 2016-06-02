@@ -159,7 +159,7 @@ ggduo <- function(
   columnsX = 1:ncol(data),
   columnsY = 1:ncol(data),
   types = list(continuous = "points", combo = "facethist", discrete = "ratio"),
-  axisLabels = c("show", "internal"),
+  axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
   showStrips = NULL,
