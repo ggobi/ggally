@@ -4,7 +4,7 @@
 \alias{find_plot_type}
 \title{Find Plot Types}
 \usage{
-find_plot_type(col1Name, col2Name, type1, type2, isAllNa)
+find_plot_type(col1Name, col2Name, type1, type2, isAllNa, allowDiag)
 }
 \arguments{
 \item{col1Name}{x column name}
@@ -14,6 +14,8 @@ find_plot_type(col1Name, col2Name, type1, type2, isAllNa)
 \item{type1}{x column type}
 
 \item{type2}{y column type}
+
+\item{allowDiag}{allow for diag values to be returned}
 
 \item{isNaData}{is.na(data)}
 }

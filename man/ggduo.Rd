@@ -5,9 +5,9 @@
 \title{ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame}
 \usage{
 ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data), types = list(continuous = "points", combo =
-  "facethist", discrete = "ratio"), axisLabels = c("show", "none"),
-  columnLabelsX = colnames(data[columnsX]),
+  columnsY = 1:ncol(data), title = NULL, types = list(continuous =
+  "points", combo = "facethist", discrete = "ratio"), axisLabels = c("show",
+  "none"), columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]), showStrips = NULL,
   legends = FALSE)
 }
@@ -18,6 +18,10 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 
 \item{columnsX, columnsY}{which columns are used to make plots.  Defaults to all columns.}
 
+\item{title}{title for the graph}
+
+\item{types}{see Details}
+
 \item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 
 \item{columnLabelsX, columnLabelsY}{label names to be displayed.  Defaults to names of columns being used.}
@@ -25,18 +29,6 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 \item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
 \item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
-
-\item{title}{title for the graph}
-
-\item{upper}{see Details}
-
-\item{lower}{see Details}
-
-\item{diag}{see Details}
-
-\item{params}{deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}}
-
-\item{...}{other parameters being supplied to geom's aes, such as color}
 }
 \description{
 Make a matrix of plots with a given data set with two different column sets
