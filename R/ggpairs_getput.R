@@ -1,18 +1,3 @@
-#' Evaluate a GGally Function
-#'
-#' Evaluate and GGally function with data, mapping, and parameters.
-#'
-#' @param txt text that should be evaluated to create a plot
-#' @param ggally_data data that should be used when evaluating the text
-#' @keywords internal
-eval_ggpair <- function(txt, ggally_data) {
-  con <- textConnection(txt)
-  on.exit(close(con))
-  output <- eval(parse(con), envir = list(ggally_data = ggally_data))
-  output
-}
-
-
 #' Put Plot
 #'
 #' Function to place your own plot in the layout.
