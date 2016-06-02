@@ -95,6 +95,14 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
   columns
 }
 
+warn_verbose_deprecated <- function(verboseIsSupplied) {
+  if (verboseIsSupplied) {
+    warning(
+      "'verbose' will be deprecated in future versions.  Please remove it from your code",
+    )
+  }
+}
+
 stop_if_bad_mapping <- function(mapping) {
   if (is.numeric(mapping)) {
     stop(str_c(
@@ -151,7 +159,6 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
-#' @param verbose boolean to determine the printing of "Plot #1, Plot #2..."
 #' @export
 ggduo <- function(
   data,
@@ -163,8 +170,7 @@ ggduo <- function(
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
   showStrips = NULL,
-  legends = FALSE,
-  verbose = FALSE
+  legends = FALSE
 ) {
 
   data <- fix_data(data)
@@ -269,7 +275,7 @@ ggduo <- function(
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
-#' @param verbose boolean to determine the printing of "Plot #1, Plot #2..."
+#' @param verbose deprecated
 #' @keywords hplot
 #' @import ggplot2
 #' @references John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
@@ -344,7 +350,7 @@ ggpairs <- function(
   columnLabels = colnames(data[columns]),
   showStrips = NULL,
   legends = FALSE,
-  verbose = FALSE
+  verbose = NULL
 ){
 
   data <- fix_data(data)
@@ -356,6 +362,7 @@ ggpairs <- function(
       mapping <- NULL
   }
 
+  warn_verbose_deprecated(!missing(verbose))
   stop_if_bad_mapping(mapping)
 
   stop_if_args_exist(list(...))
@@ -438,7 +445,6 @@ ggpairs <- function(
     showXAxisPlotLabels = identical(axisLabels, "show"),
     showYAxisPlotLabels = identical(axisLabels, "show"),
     title = title,
-    verbose = verbose,
     data = data,
     gg = NULL,
     legends = legends
@@ -650,7 +656,6 @@ stop_if_params_exist <- function(params) {
 #  diag = "blank",
 #  color = "cyl",
 #  title = "mtcars",
-#  verbose = FALSE
 #)
 #
 #
