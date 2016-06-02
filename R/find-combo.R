@@ -18,29 +18,42 @@ plot_types <- function(data, columnsX, columnsY) {
 
   lenX <- length(plotTypesX)
   lenY <- length(plotTypesY)
+  n <- lenX * lenY
 
-  dataInfo <- array("", c(lenX * lenY, 5))
+  plotType = character(n)
+  xVar = character(n)
+  yVar = character(n)
+  posX = integer(n)
+  posY = integer(n)
 
   #horizontal then vertical
   for (yI in seq_len(lenY)) {
     yColName <- columnNamesY[yI]
     for (xI in seq_len(lenX)) {
       xColName <- columnNamesX[xI]
-      yvar <- ifelse(xColName == yColName, NA, yColName)
-      dataInfo[(yI - 1) * lenX + xI, ] <- c(
-        find_plot_type(
-          xColName, yColName,
-          plotTypesX[xI], plotTypesY[yI],
-          isAllNa = all(isNaData[, xColName] | isNaData[, yColName])
-        ),
-        xColName, yvar,
-        xI, yI
+      yVarVal <- ifelse(xColName == yColName, NA, yColName)
+      pos <- (yI - 1) * lenX + xI
+
+      plotType[pos] <- find_plot_type(
+        xColName, yColName,
+        plotTypesX[xI], plotTypesY[yI],
+        isAllNa = all(isNaData[, xColName] | isNaData[, yColName])
       )
+      xVar[pos] <- xColName
+      yVar[pos] <- yVarVal
+      posX[pos] <- xI
+      posY[pos] <- yI
     }
   }
 
-  dataInfo <- as.data.frame(dataInfo)
-  colnames(dataInfo) <- c("Type", "xvar", "yvar", "posx", "posy")
+  dataInfo <- data.frame(
+    plotType = plotType,
+    xVar = xVar,
+    yVar = yVar,
+    posX = posX,
+    posY = posY,
+    stringsAsFactors = FALSE
+  )
 
   dataInfo
 }
@@ -60,38 +73,34 @@ find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa) {
   # diag calculations
   if (col1Name == col2Name) {
     if (type1 == "na") {
-      return("NA-diag")
+      return("na-diag")
     } else if (type1 == "continuous") {
-      return("stat_bin-num")
+      return("continuous-diag")
     } else {
-      return("stat_bin-cat")
+      return("discrete-diag")
     }
   }
 
   if (type1 == "na" | type2 == "na") {
-    return("NA")
+    return("na")
   }
 
   #cat(names(data)[col2Name],": ", type2,"\t",names(data)[col1Name],": ",type1,"\n")
-  isCats <- c(type1, type2) %in% "category"
+  isCats <- c(type1, type2) %in% "discrete"
   if (any(isCats)) {
     if (all(isCats)) {
-      return("mosaic")
+      return("discrete")
     }
 
-    if (isCats[1]) {
-      return("box-hori")
-    } else {
-      return("box-vert")
-    }
+    return("combo")
   }
 
   # check if any combo of the two columns is all na
   if (isAllNa) {
-    return("NA")
+    return("na")
   }
 
-  return("scatterplot")
+  return("continuous")
 }
 
 #' Check if object is a date
@@ -113,7 +122,7 @@ plotting_data_type <- function(x) {
   if (is_date(x)) {
     "continuous"
   } else if (!is.null(attributes(x)) || all(is.character(x))) {
-    "category"
+    "discrete"
   } else {
     "continuous"
   }
