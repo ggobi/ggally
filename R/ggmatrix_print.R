@@ -111,12 +111,6 @@ print.ggmatrix <- function(
 ) {
 
   args <- list(...)
-  if ("printInfo" %in% names(args)) {
-    printInfo <- args[["printInfo"]]
-  } else {
-    printInfo <- FALSE
-  }
-
 
   displayXAxisLabels <- !is.null(x$xAxisLabels)
   displayYAxisLabels <- !is.null(x$yAxisLabels)
@@ -318,9 +312,6 @@ print.ggmatrix <- function(
 
       # left axis
       if (columnPos == 1 && x$showYAxisPlotLabels) {
-        if (identical(printInfo, TRUE)) {
-          print("trying left axis")
-        }
         pAxisLabels <- gtable_filter(pGtable, "axis-l")
 
         hasTopStrips <- FALSE
@@ -377,9 +368,6 @@ print.ggmatrix <- function(
 
       ## bottom axis
       if (rowPos == (x$nrow) && x$showXAxisPlotLabels) {
-        if (identical(printInfo, TRUE)) {
-          print("trying bottom axis")
-        }
         pAxisLabels <- gtable_filter(pGtable, "axis-b")
         grobLength <- length(pAxisLabels$grobs)
 

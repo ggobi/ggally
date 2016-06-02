@@ -11,7 +11,6 @@ test_that("structure", {
   expect_equivalent(length(a$plots), ncol(tips) ^ 2)
   expect_is(a$title, "character")
   expect_is(a$verbose, "logical")
-  expect_is(a$printInfo, "logical")
   expect_is(a$xAxisLabels, "character")
   expect_is(a$yAxisLabels, "character")
   expect_is(a$showXAxisPlotLabels, "logical")
@@ -53,26 +52,26 @@ test_that("character", {
   expect_true(is.factor(a$data$smoker))
 })
 
-test_that("printInfo", {
-  txt <- capture.output({
-    a <- ggpairs(tips, 1:4, lower = facethistBindwidth1, printInfo = TRUE)
-  })
-  expect_true(length(txt) > 0)
-  expect_true(inherits(a$plots[[2]], "ggmatrix_plot_obj"))
-  expect_true(inherits(a$plots[[3]], "ggmatrix_plot_obj"))
-
-  txt <- capture.output({
-    p1 <- a[1, 2]
-    p2 <- a[2, 1]
-    a[2, 1] <- p1
-    a[1, 2] <- "blank"
-
-    print(a)
-  })
-  expect_true(length(txt) > 0)
-  expect_true(is_blank_plot(a$plots[[2]]))
-  expect_true(is.list(a$plots[[4 + 1]]))
-})
+# test_that("printInfo", {
+#   txt <- capture.output({
+#     a <- ggpairs(tips, 1:4, lower = facethistBindwidth1)
+#   })
+#   expect_true(length(txt) > 0)
+#   expect_true(inherits(a$plots[[2]], "ggmatrix_plot_obj"))
+#   expect_true(inherits(a$plots[[3]], "ggmatrix_plot_obj"))
+#
+#   txt <- capture.output({
+#     p1 <- a[1, 2]
+#     p2 <- a[2, 1]
+#     a[2, 1] <- p1
+#     a[1, 2] <- "blank"
+#
+#     print(a)
+#   })
+#   expect_true(length(txt) > 0)
+#   expect_true(is_blank_plot(a$plots[[2]]))
+#   expect_true(is.list(a$plots[[4 + 1]]))
+# })
 
 test_that("blank plots", {
   columnsUsed <- 1:3

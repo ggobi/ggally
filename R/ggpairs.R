@@ -105,13 +105,6 @@ stop_if_bad_mapping <- function(mapping) {
 }
 
 stop_if_args_exist <- function(args) {
-  # if ("printInfo" %in% names(args)) {
-  #   printInfo <- args[["printInfo"]]
-  #   args[["printInfo"]] <- NULL
-  # } else {
-  #   printInfo <- FALSE
-  # }
-
   if (length(args) > 0) {
     argNames <- names(args)
     warning(str_c(
@@ -368,8 +361,6 @@ ggpairs <- function(
 
   stop_if_args_exist(list(...))
 
-  # verbose <- verbose || printInfo
-
   columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
 
   upper <- set_to_blank_list_if_blank(upper)
@@ -392,30 +383,9 @@ ggpairs <- function(
 
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
 
-
-  # numCol <- length(columns)
-  # if (printInfo) {
-  #   cat("data col: ", numCol, "\n")
-  # }
-
   ggpairsPlots <- list()
 
-  # grid <- rev(expand.grid(y = 1:ncol(data[columns]), x = 1:ncol(data[columns])))
-  #
-  # all <- do.call("rbind", lapply(1:nrow(grid), function(i) {
-  #   xcol <- grid[i, "x"]
-  #   ycol <- grid[i, "y"]
-  #   data.frame(xvar = names(data[columns])[ycol], yvar = names(data[columns])[xcol])
-  # }))
-  #
-  # if (printInfo) {
-  #   cat("\n\n\nALL\n");print(all)
-  # }
-
   dataTypes <- plot_types(data, columns, columns)
-  # if (printInfo) {
-  #   cat("\n\n\nDATA TYPES\n");print(dataTypes)
-  # }
 
   if (identical(axisLabels, "internal")) {
     dataTypes$Type <- as.character(dataTypes$Type)

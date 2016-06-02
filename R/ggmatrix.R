@@ -73,7 +73,6 @@ ggmatrix <- function(
     plots = plots,
     title = title,
     verbose = verbose,
-    printInfo = verbose,
     showStrips = showStrips,
     xAxisLabels = xAxisLabels,
     yAxisLabels = yAxisLabels,

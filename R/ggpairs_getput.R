@@ -49,10 +49,6 @@ putPlot <- function(x, value, i, j){
     x$plots[[pos]] <- value
   }
 
-  if (x$printInfo) {
-    cat("\n\nDone placing plot: ", pos, "\n")
-  }
-
   x
 }
 
@@ -72,21 +68,12 @@ putPlot <- function(x, value, i, j){
 #'  plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
 #'  plotMatrix2[1, 2]
 getPlot <- function(x, i, j){
-  if (x$printInfo) {
+  if (FALSE) {
     cat("i: ", i, " j: ", j, "\n")
   }
 
   pos <- get_pos(x, i, j)
 
-  if (x$printInfo) {
-    cat("Plot List Spot: ", pos, "\n")
-  }
-
-  # if (pos > length(x$plots)) {
-  #   plot_text <- "blank"
-  # } else {
-  #   plot_text <- x$plots[[pos]]
-  # }
   if (pos > length(x$plots)) {
     plotObj <- NULL
   } else {
@@ -117,28 +104,6 @@ getPlot <- function(x, i, j){
       # print("adding custom gg")
       p <- p + x$gg
     }
-  }
-  # stop("fix this")
-  # if (is.character(plot_text)) {
-  #   if (plot_text != "blank") {
-  #     p <- eval_ggpair(plot_text, x$data)
-  #     if (! is.null(x$gg)) {
-  #       p <- p + x$gg
-  #     }
-  #     # attributes( p)$class <- "ggplot"
-  #   } else {
-  #     p <- ggally_blank()
-  #   }
-  # } else {
-  #   p <- plot_text
-  # }
-
-  if (x$printInfo || x$verbose) {
-    cat("Plot #", pos)
-    if (is_blank_plot(p)) {
-      cat(" - Blank")
-    }
-    cat("\n")
   }
 
   p
