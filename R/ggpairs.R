@@ -180,7 +180,6 @@ ggduo <- function(
   columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
   columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
 
-  types <- set_to_blank_list_if_blank(types)
   types <- check_and_set_ggpairs_defaults(
     "types", types,
     continuous = "points", combo = "facethist", discrete = "ratio", na = "na"
@@ -363,10 +362,6 @@ ggpairs <- function(
 
   columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
 
-  upper <- set_to_blank_list_if_blank(upper)
-  lower <- set_to_blank_list_if_blank(lower)
-  diag  <- set_to_blank_list_if_blank(diag, combo = FALSE, blank = "blankDiag")
-
   upper <- check_and_set_ggpairs_defaults(
     "upper", upper,
     continuous = "cor", combo = "box", discrete = "facetbar", na = "na"
@@ -546,6 +541,11 @@ check_and_set_ggpairs_defaults <- function(
   na = NULL,
   isDiag = FALSE
 ) {
+
+  blankVal <- ifelse(isDiag, "blankDiag", "blank")
+
+  obj <- set_to_blank_list_if_blank(obj, combo = ! isDiag, blank = blankVal)
+
   if (!is.list(obj)) {
     stop(str_c("'", name, "' is not a list"))
   }
