@@ -493,7 +493,7 @@ add_and_overwrite_aes <- function(current, new) {
 #'
 #' @param current the current aesthetics
 #' @keywords internal
-mapping_color_fill <- function(current) {
+mapping_color_to_fill <- function(current) {
   currentNames <- names(current)
   color <- c("color", "colour")
 
@@ -592,7 +592,7 @@ check_and_set_ggpairs_defaults <- function(
 
 
 get_subtype_name <- function(.subType) {
-  fn <- wrap_fn_with_param_arg(.subType)
+  fn <- wrapp(.subType)
   ret <- attr(fn, "name")
   if (ret == ".subType") {
     ret <- "custom_function"
