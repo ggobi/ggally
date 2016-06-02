@@ -379,7 +379,7 @@ ggpairs <- function(
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
 
   # get plot type information
-  dataTypes <- plot_types(data, columns, columns)
+  dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
 
   # make internal labels on the diag axis
   if (identical(axisLabels, "internal")) {

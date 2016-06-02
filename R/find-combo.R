@@ -5,7 +5,7 @@
 #' @param data data set to be used
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords internal
-plot_types <- function(data, columnsX, columnsY) {
+plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
 
 
   plotTypesX <- lapply(data[columnsX], plotting_data_type)
@@ -31,13 +31,14 @@ plot_types <- function(data, columnsX, columnsY) {
     yColName <- columnNamesY[yI]
     for (xI in seq_len(lenX)) {
       xColName <- columnNamesX[xI]
-      yVarVal <- ifelse(xColName == yColName, NA, yColName)
+      yVarVal <- ifelse(xColName == yColName && allowDiag, NA, yColName)
       pos <- (yI - 1) * lenX + xI
 
       plotType[pos] <- find_plot_type(
         xColName, yColName,
         plotTypesX[xI], plotTypesY[yI],
-        isAllNa = all(isNaData[, xColName] | isNaData[, yColName])
+        isAllNa = all(isNaData[, xColName] | isNaData[, yColName]),
+        allowDiag = allowDiag
       )
       xVar[pos] <- xColName
       yVar[pos] <- yVarVal
@@ -67,11 +68,12 @@ plot_types <- function(data, columnsX, columnsY) {
 #' @param type1 x column type
 #' @param type2 y column type
 #' @param isNaData is.na(data)
+#' @param allowDiag allow for diag values to be returned
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa) {
+find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa, allowDiag) {
 
   # diag calculations
-  if (col1Name == col2Name) {
+  if (col1Name == col2Name && allowDiag) {
     if (type1 == "na") {
       return("na-diag")
     } else if (type1 == "continuous") {
