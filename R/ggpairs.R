@@ -150,11 +150,7 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.
 #' @param columnsX,columnsY which columns are used to make plots.  Defaults to all columns.
 #' @param title title for the graph
-#' @param upper see Details
-#' @param lower see Details
-#' @param diag see Details
-#' @param params deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}
-#' @param ... other parameters being supplied to geom's aes, such as color
+#' @param types see Details
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
@@ -165,6 +161,7 @@ ggduo <- function(
   mapping = NULL,
   columnsX = 1:ncol(data),
   columnsY = 1:ncol(data),
+  title = NULL,
   types = list(continuous = "points", combo = "facethist", discrete = "ratio"),
   axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
@@ -175,6 +172,7 @@ ggduo <- function(
 
   data <- fix_data(data)
 
+  # fix args
   if (is.numeric(mapping) & missing(columnsY)) {
       columnsY <- columnsX
       columnsX <- mapping
@@ -193,28 +191,56 @@ ggduo <- function(
 
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "none"))
 
+  # get plot type information
+  dataTypes <- plot_types(data, columnsX, columnsY, allowDiag = FALSE)
+
+  ggduoPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
+
+    plotType <- dataTypes[i, "plotType"]
+
+    posX <- dataTypes[i, "posX"]
+    posY <- dataTypes[i, "posY"]
+    xColName <- dataTypes[i, "xVar"]
+    yColName <- dataTypes[i, "yVar"]
+
+    sectionAes <- add_and_overwrite_aes(
+      add_and_overwrite_aes(
+        aes_string(x = xColName, y = yColName),
+        mapping
+      ),
+      types$mapping
+    )
+
+    args <- list(plotType = plotType, types = types, sectionAes = sectionAes)
+    plot_fn <- ggmatrixPlotList[[plotType]]
+
+    if (is.function(plot_fn)) {
+      p <- do.call(plot_fn, args)
+    } else {
+      p <- "blank"
+    }
+    return(p)
+
+  })
 
 
-
-
-
-  # columnsGroup <- unique(c(columnsX, columnsY))
-  #
-  # postColumnGroup <- seq_along(columnsGroup)
-  # names(postColumnGroup) <- columnsGroup
-  # xColPos <- unname(postColumnGroup[as.character(columnsX)])
-  # yColPos <- unname(postColumnGroup[as.character(columnsY)])
-
-
-
-  pm <- ggpairs(
+  plotMatrix <- ggmatrix(
+    plots = ggduoPlots,
+    byrow = TRUE,
+    nrow = length(columnsX),
+    ncol = length(columnsY),
+    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabelsX),
+    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabelsY),
+    showStrips = showStrips,
+    showXAxisPlotLabels = identical(axisLabels, "show"),
+    showYAxisPlotLabels = identical(axisLabels, "show"),
+    title = title,
     data = data,
-    mapping = mapping,
-    columns = columnsGroup,
-    ...
+    gg = NULL,
+    legends = legends
   )
 
-  pm[xColPos, yColPos]
+  plotMatrix
 }
 
 
@@ -340,7 +366,7 @@ ggpairs <- function(
   data,
   mapping = NULL,
   columns = 1:ncol(data),
-  title = "",
+  title = NULL,
   upper = list(continuous = "cor", combo = "box", discrete = "facetbar", na = "na"),
   lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
   diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
