@@ -15,9 +15,9 @@ find_plot_type(col1Name, col2Name, type1, type2, isAllNa, allowDiag)
 
 \item{type2}{y column type}
 
-\item{allowDiag}{allow for diag values to be returned}
+\item{isAllNa}{is.na(data)}
 
-\item{isNaData}{is.na(data)}
+\item{allowDiag}{allow for diag values to be returned}
 }
 \description{
 Retrieves the type of plot for the specific columns
