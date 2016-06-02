@@ -2,11 +2,12 @@
 % Please edit documentation in R/ggsurv.R
 \name{ggsurv}
 \alias{ggsurv}
-\title{Plot \code{survfit} objects using \code{ggplot2}}
+\title{Survival curves with ggplot2}
 \usage{
 ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
-  cens.col = "gg.def", lty.est = 1, lty.ci = 2, cens.shape = 3,
-  back.white = FALSE, xlab = "Time", ylab = "Survival", main = "")
+  cens.col = "gg.def", lty.est = 1, lty.ci = 2, size.est = 0.5,
+  size.ci = size.est, cens.shape = 3, back.white = FALSE, xlab = "Time",
+  ylab = "Survival", main = "")
 }
 \arguments{
 \item{s}{an object of class \code{survfit}}
@@ -27,6 +28,10 @@ to the number of strata.}
 either 1 or equal to the number of strata.}
 
 \item{lty.ci}{linetype of the bounds that mark the 95\% CI.}
+
+\item{size.est}{line width of the survival curve}
+
+\item{size.ci}{line width of the 95\% CI}
 
 \item{cens.shape}{shape of the points that mark censored observations.}
 
@@ -76,25 +81,23 @@ if (require(survival) && require(scales)) {
   pl.kid
 
   # Zoom in to first 80 days
-  pl.kid <- pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
-  pl.kid
+  pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 
   # Add the diseases names to the plot and remove legend
-  col <- scales::hue_pal(
-    h         = c(0, 360) + 15,
-    c         = 100,
-    l         = 65,
-    h.start   = 0,
-    direction = 1
-  )(4)
   pl.kid +
     ggplot2::annotate(
       "text",
       label  = c("PKD", "Other", "GN", "AN"),
-      x      = c(71, 50, 20, 50),
-      y      = c(0.8, 0.67, 0.55, 0.47),
+      x      = c(90, 125, 5, 60),
+      y      = c(0.8, 0.65, 0.55, 0.30),
       size   = 5,
-      colour = col
+      colour = scales::hue_pal(
+        h         = c(0, 360) + 15,
+        c         = 100,
+        l         = 65,
+        h.start   = 0,
+        direction = 1
+      )(4)
     ) +
     ggplot2::guides(color = FALSE, linetype = FALSE)
 }

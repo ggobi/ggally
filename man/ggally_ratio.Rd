@@ -2,26 +2,34 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_ratio}
 \alias{ggally_ratio}
-\title{Plots a mosaic plots}
+\title{Plots a mosaic plot}
 \usage{
-ggally_ratio(data)
+ggally_ratio(data, mapping = do.call(ggplot2::aes_string,
+  as.list(colnames(data)[1:2])), ..., floor = 0, ceiling = NULL)
 }
 \arguments{
 \item{data}{data set using}
+
+\item{mapping}{aesthetics being used. Only x and y will used and both are required}
+
+\item{...}{ignored}
+
+\item{floor}{don't display cells smaller than this value}
+
+\item{ceiling}{max value to scale frequencies.  If any frequency is larger than the ceiling, the fill color is displayed darker than other rectangles}
 }
 \description{
 Plots the mosaic plot by using fluctuation.
 }
-\details{
-Must send only two discrete columns in the data set.
-}
 \examples{
 data(tips, package = "reshape")
-ggally_ratio(tips[, c("sex", "smoker")])
-ggally_ratio(tips[, c("sex", "smoker")]) + ggplot2::coord_equal()
+ggally_ratio(tips, ggplot2::aes(sex, day))
+ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal()
+# only plot tiles greater or equal to 20 and scale to a max of 50
 ggally_ratio(
-  tips[, c("sex", "day")]
-) + ggplot2::theme( aspect.ratio = 4/2)
+  tips, ggplot2::aes(sex, day),
+  floor = 20, ceiling = 50
+) + ggplot2::theme(aspect.ratio = 4/2)
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

@@ -1,21 +1,8 @@
-# Sample .travis.yml for R projects.
-#
-# See README.md for instructions, or for more configuration options,
-# see the wiki:
-#   https://github.com/craigcitro/r-travis/wiki
 
 language: r
-# sudo is required even though they want us to upgrade. :-/
-# http://docs.travis-ci.com/user/migrating-from-legacy/?utm_source=legacy-notice&utm_medium=banner&utm_campaign=legacy-upgrade
-sudo: required
-
-## default R_*_ARGS
-# R_BUILD_ARGS="--no-build-vignettes" R_CHECK_ARGS="--no-manual --as-cran"
-env:
-  - WARNINGS_ARE_ERRORS=1
-# env:
-#   - ""
-#   - r_check_revdep:true # checks reverse depends
+# https://blog.rstudio.org/2016/03/09/r-on-travis-ci/
+sudo: false
+cache: packages
 
 # matrix:
 #   fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
@@ -23,49 +10,18 @@ env:
 #   allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
 #     - env: R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
 
-# before_install:
-#   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-#   - chmod 755 ./travis-tool.sh
-#   - ./travis-tool.sh bootstrap
-
+# install locally to avoid rev dep
 r_github_packages:
-  - jimhester/covr  # code coverage check
+  - jimhester/covr # code coverage check
   - jimhester/lintr # code lint
-
-# r_binary_packages: [rJava, igraph, minqa, nloptr, RcppEigen, colorspace, reshape2, proto, abind, coda, dichromat, labeling, brew, gtable, reshape, network, RColorBrewer, scagnostics, sna, lme4, munsell, arm, scales, ggplot2, cairoDevice, RGtk2, knitr]
-r_binary_packages:
-  - arm
-  - geosphere
-  - ggmap
-  - igraph
-  # - intergraph
-  - knitr
-  - maps
-  - network
-  - RColorBrewer
-  - scagnostics
-  - scales
-  - sna
-  - survival
-  # - tnet
-  - roxygen2
-  - testthat
-
-
-# script:
-#   - ./travis-tool.sh run_tests
 
 after_success:
   - Rscript -e 'covr::codecov()'
-# after_failure:
-#   - ./travis-tool.sh dump_logs
 
 notifications:
   email:
     on_success: change
     on_failure: change
-  slack:
-    secure: CBwdJj/j8K/o2Mv9iIhG/BtbIECU0ZA8BODtWA2YmDzja8BJOFKdFCtp1t+KeNV4BAZ1oUaDK4ETNgRirh/YZwobxsfK+AzQwZWzBI4WY6WAnBZpUteKNrsTCyTD0vZKYwWc7IFtEAUQBdsWr4PU+kGGKQ3aUhwsZ85QF9x/nHY=
 
 branches:
   only:

@@ -1,22 +1,78 @@
-GGally 1.0.1.9999
+GGally 1.1.0.9999
 -----------------
+
+NAME
+
+* item (#123)
+
+GGally 1.1.0
+-----------------
+
+ggcoef - New!
+
+* plot model coefficients with broom and ggplot2 PR#162
+* Plotting model coefficients (http://www.r-statistics.com/2010/07/visualization-of-regression-coefficients-in-r/)
+
+gglegend - New!
+
+* pull out the legend of a plot which can also be used in ggpairs PR#155, PR#169
+
+ggally_densityDiag
+
+* fixed bug where '...' was not respected (d0fe633)
 
 ggally_smooth
 
-* added method parameter (411213c)
+* added 'method' parameter (411213c)
+
+ggally_ratio
+
+* Does not call ggfluctuation2 anymore. PR#165
 
 ggcorr
 
 * fixed issue with unnamed correlation matrix used as input PR#146
+* fixed issue undesired shifting when layout.exp was > 0 PR#171
+
+ggfluctuation2
+
+* is being deprecated. Please use ggally_ratio instead PR#165
+
+ggnetworkmap
+
+* fixed issue with overlaying network on a world map PR#157
+
+ggparcoord
+
+* Fixed odd bug where a list was trying to be forced as a double PR#162
+
+ggpairs
+
+* Fixed improperly rotated axes with ggally_ratio PR#165
 
 ggscatmat
 
-* added corMethod parameter for use in upper triangle PR#145
+* added 'corMethod' parameter for use in upper triangle PR#145
 
 ggsurv
 
+* size.est and size.ci parameters added PR#153
 * ordering changed to reflect survival time PR#147
+* added a vignette PR#154
 
+wrap
+
+* documentation updated PR#152
+* changes default behavior only. If an argument is supplied, the argument will take precedence
+
+github chat
+
+* https://gitter.im/ggobi/ggally is the place to visit for general questions.
+
+travis-ci
+
+* cache packages for faster checking
+* install covr and lintr from github for testing purposes
 
 
 GGally 1.0.1

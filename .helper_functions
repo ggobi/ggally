@@ -11,7 +11,7 @@ covr_zero_coverage:
   zero()
 lintr_package:
   # remove line in "linters:" above
-  lintr::lint_package("./")
+  devtools::lint()
   # fix errors,
   # repeat until no errors
 lintr_code_to_create_lintr:
@@ -25,18 +25,15 @@ lintr_code_to_create_lintr:
             paste0(linter, " = NULL, # ", n, collapse="\n    ")) %>%
     cat()
 test_package:
-  tp <- function(..., package = "./") {
-    require(devtools); require(testthat)
-    document(package)
-    load_all(package)
-    test_package(devtools::as.package(package)$package, ...)
+  tp <- function(package = "./", ...) {
+    devtools::document(package)
+    devtools::test(package, ...)
   }
   tp()
 test_file:
   tf <- function(file = "gg-plots", package = "./") {
-    require(devtools); require(testthat)
-    load_all(package)
-    test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
+    devtools::load_all(package)
+    testthat::test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
   }
   tf("ggpairs")
 knit_vignettes:
@@ -59,8 +56,10 @@ knit_vignette:
     invisible(TRUE)
   }
   kv("ggmatrix")
+build_win:
+  devtools::build_win(version = c("R-release", "R-devel"))
 reverse_depends:
-  check_rev_deps = function(pkgType = "mac.binary") {
+  check_rev_deps = function(pkgType = "mac.binary", ignore = NULL, bioconductor = FALSE) {
     curPkgType <- getOption("pkgType")
     on.exit({options(pkgType = curPkgType)})
     options(pkgType = pkgType)
@@ -68,12 +67,15 @@ reverse_depends:
     # locally check the packages and install mac.binaries
     res <- devtools::revdep_check(
       type = pkgType,
-      libpath = .libPaths()[1]
+      libpath = .libPaths()[1],
+      bioconductor = bioconductor,
+      ignore = ignore
     )
-    outputFolder <- "revdep"
-    dir.create(outputFolder, showWarnings = FALSE)
-    devtools::revdep_check_save_logs(res, outputFolder)
-    devtools::revdep_check_save_summary(res, outputFolder)
+
+    devtools::revdep_check_save_summary()
+    devtools::revdep_check_print_problems()
+    cat("\n\n")
+    devtools::revdep_maintainers()
     invisible(res)
   }
   res <- check_rev_deps()

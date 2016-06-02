@@ -1,0 +1,17 @@
+codecov:
+  bot: ggobi
+
+coverage:
+  range: "70...95"
+  status:
+    patch:
+      default:
+        branches:
+        - master
+        - dev
+        target: '80'
+    project:
+      default:
+        branches:
+        - master
+        - dev

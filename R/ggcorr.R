@@ -431,18 +431,27 @@ ggcorr <- function(
 
   # -- horizontal scale expansion ----------------------------------------------
 
-  l = levels(m$y)
+  textData <- m[ m$x == m$y & is.na(m$coefficient), ]
+  xLimits <- levels(textData$y)
+  textData$diagLabel <- textData$x
 
   if (!is.numeric(layout.exp) || layout.exp < 0) {
     stop("incorrect layout.exp value")
   } else if (layout.exp > 0) {
-    l = c(rep(NA, as.integer(layout.exp)), l)
+    layout.exp <- as.integer(layout.exp)
+    # copy to fill in spacer info
+    textData <- rbind(textData[1:layout.exp, ], textData)
+
+    spacer <- paste(".ggally_ggcorr_spacer_value", 1:layout.exp, sep = "")
+
+    textData$x[1:layout.exp] <- spacer
+    textData$diagLabel[1:layout.exp] <- NA
+    xLimits <- c(spacer, levels(m$y))
   }
 
   p = p  +
-    geom_text(data = m[ m$x == m$y & is.na(m$coefficient), ],
-              aes(label = x), ...) +
-    scale_x_discrete(breaks = NULL, limits = l) +
+    geom_text(data = textData, aes_string(label = "diagLabel"), ..., na.rm = TRUE) +
+    scale_x_discrete(breaks = NULL, limits = xLimits) +
     scale_y_discrete(breaks = NULL, limits = levels(m$y)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +

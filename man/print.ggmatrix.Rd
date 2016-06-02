@@ -26,7 +26,7 @@ Specialized method to print the ggpair object-
 }
 \examples{
  data(tips, package = "reshape")
- pMat <- ggpairs(tips, c(1,3,2), color = "sex")
+ pMat <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
 
  ## defaults; (prints strips on top and right edges of matrix)

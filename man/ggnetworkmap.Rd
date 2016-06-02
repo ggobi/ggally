@@ -117,7 +117,7 @@ world <- ggplot(world, aes(x = long, y = lat)) +
 ggnetworkmap(world, twitter_spambots)
 
 # domestic distribution
-ggnetworkmap(net = twitter_spambots) + xlim(-130,-60)
+ggnetworkmap(net = twitter_spambots)
 
 # topology
 ggnetworkmap(net = twitter_spambots, arrow.size = 0.5)

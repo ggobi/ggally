@@ -2,7 +2,7 @@ if(getRversion() >= "2.15.1") {
   utils::globalVariables(c("cens", "surv", "up", "low"))
 }
 
-#' Plot \code{survfit} objects using \code{ggplot2}
+#' Survival curves with ggplot2
 #'
 #' This function produces Kaplan-Meier plots using \code{ggplot2}.
 #' As a first argument it needs a \code{survfit} object, created by the
@@ -22,6 +22,8 @@ if(getRversion() >= "2.15.1") {
 #' @param lty.est linetype of the survival curve(s). Vector length should be
 #'    either 1 or equal to the number of strata.
 #' @param lty.ci linetype of the bounds that mark the 95\% CI.
+#' @param size.est line width of the survival curve
+#' @param size.ci line width of the 95\% CI
 #' @param cens.shape shape of the points that mark censored observations.
 #' @param back.white if TRUE the background will not be the default
 #'    grey of \code{ggplot2} but will be white with borders around the plot.
@@ -59,25 +61,23 @@ if(getRversion() >= "2.15.1") {
 #'   pl.kid
 #'
 #'   # Zoom in to first 80 days
-#'   pl.kid <- pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
-#'   pl.kid
+#'   pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 #'
 #'   # Add the diseases names to the plot and remove legend
-#'   col <- scales::hue_pal(
-#'     h         = c(0, 360) + 15,
-#'     c         = 100,
-#'     l         = 65,
-#'     h.start   = 0,
-#'     direction = 1
-#'   )(4)
 #'   pl.kid +
 #'     ggplot2::annotate(
 #'       "text",
 #'       label  = c("PKD", "Other", "GN", "AN"),
-#'       x      = c(71, 50, 20, 50),
-#'       y      = c(0.8, 0.67, 0.55, 0.47),
+#'       x      = c(90, 125, 5, 60),
+#'       y      = c(0.8, 0.65, 0.55, 0.30),
 #'       size   = 5,
-#'       colour = col
+#'       colour = scales::hue_pal(
+#'         h         = c(0, 360) + 15,
+#'         c         = 100,
+#'         l         = 65,
+#'         h.start   = 0,
+#'         direction = 1
+#'       )(4)
 #'     ) +
 #'     ggplot2::guides(color = FALSE, linetype = FALSE)
 #' }
@@ -89,6 +89,8 @@ ggsurv <- function(
   cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
+  size.est   = 0.5,
+  size.ci    = size.est,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -110,7 +112,7 @@ ggsurv <- function(
 
   pl <- fn(
     s, CI , plot.cens, surv.col,
-    cens.col, lty.est, lty.ci,
+    cens.col, lty.est, lty.ci, size.est, size.ci,
     cens.shape, back.white, xlab,
     ylab, main, strata
   )
@@ -126,6 +128,8 @@ ggsurv_s <- function(
   cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
+  size.est   = 0.5,
+  size.ci    = size.est,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -146,15 +150,15 @@ ggsurv_s <- function(
   col <- ifelse(surv.col == 'gg.def', 'black', surv.col)
 
   pl <- ggplot(dat, aes(x = time, y = surv)) +
-    geom_step(col = col, lty = lty.est) +
+    geom_step(col = col, lty = lty.est, size = size.est) +
     xlab(xlab) +
     ylab(ylab) +
     ggtitle(main)
 
   if(identical(CI, TRUE) | identical(CI, 'def')) {
     pl <- pl +
-      geom_step(aes(y = up), color = col, lty = lty.ci) +
-      geom_step(aes(y = low), color = col, lty = lty.ci)
+      geom_step(aes(y = up), color = col, lty = lty.ci, size = size.ci) +
+      geom_step(aes(y = low), color = col, lty = lty.ci, size = size.ci)
   }
 
   if (identical(plot.cens, TRUE) ) {
@@ -187,6 +191,8 @@ ggsurv_m <- function(
   cens.col   = 'gg.def',
   lty.est    = 1,
   lty.ci     = 2,
+  size.est   = 0.5,
+  size.ci    = size.est,
   cens.shape = 3,
   back.white = FALSE,
   xlab       = 'Time',
@@ -239,7 +245,7 @@ ggsurv_m <- function(
   dat.cens <- subset(dat, cens != 0)
 
   pl <- ggplot(dat, aes(x = time, y = surv, group = group)) +
-    geom_step(aes(col = group, lty = group)) +
+    geom_step(aes(col = group, lty = group), size = size.est) +
     xlab(xlab) +
     ylab(ylab) +
     ggtitle(main)
@@ -274,8 +280,8 @@ ggsurv_m <- function(
       surv.col
     }
     pl <- pl +
-      geom_step(aes(y = up, lty = group), lty = stepLty) +
-      geom_step(aes(y = low,lty = group), lty = stepLty)
+      geom_step(aes(y = up, lty = group, col = group), lty = stepLty, size = size.ci) +
+      geom_step(aes(y = low,lty = group, col = group), lty = stepLty, size = size.ci)
   }
 
   if (identical(plot.cens, TRUE) ){

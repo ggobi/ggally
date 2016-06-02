@@ -6,7 +6,7 @@ R/.DS_Store
 .git
 .travis.yml
 .helper_functions
-.lintr
+.lintr.*
 figure
 ggmapTemp.png
 README.html
@@ -16,3 +16,4 @@ revdep
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^cran-comments\.md$
+^codecov\.yml$

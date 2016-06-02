@@ -103,6 +103,8 @@ getPlot <- function(x, i, j){
       fn <- plotObj$fn
       p <- fn(x$data, plotObj$mapping)
 
+    } else if (inherits(plotObj, "legend_guide_box")) {
+      p <- plotObj
     } else {
       firstNote <- str_c("Position: i = ", i, ", j = ", j, "\nstr(plotObj):\n", sep = "")
       strObj <- capture.output({

@@ -271,18 +271,18 @@ test_that("columns containing only a single value do not cause an scaling error"
   df <- data.frame(obs = 1:5, var1 = sample(10, 5), var2 = rep(3, 5))
 
   # no scaling
-  expect_that(ggparcoord(data = df, columns = 1:3, scale = "globalminmax"), not(throws_error()))
+  expect_silent(ggparcoord(data = df, columns = 1:3, scale = "globalminmax"))
   # requires scaling, must not throw an errror due to scaling the single values (to NaN)
-  expect_that(ggparcoord(data = df, columns = 1:3, scale = "uniminmax"), not(throws_error()))
+  expect_silent(ggparcoord(data = df, columns = 1:3, scale = "uniminmax"))
 
 
   df2 <- data.frame(df, var3 = factor(c("a", "b", "c", "a", "c")))
   # requires scaling, must not throw an errror due to scaling the single values (to NaN)
-  expect_that(ggparcoord(data = df2, columns = 1:4, scale = "uniminmax"), not(throws_error()))
+  expect_silent(ggparcoord(data = df2, columns = 1:4, scale = "uniminmax"))
 
 
   df3 <- data.frame(df2, var4 = factor(c("d", "d", "d", "d", "d")))
-  expect_that(ggparcoord(data = df3, columns = 1:4, scale = "uniminmax"), not(throws_error()))
-  expect_that(ggparcoord(data = df3, columns = 1:4, scale = "robust"), not(throws_error()))
-  expect_that(ggparcoord(data = df3, columns = 1:4, scale = "std"), not(throws_error()))
+  expect_silent(ggparcoord(data = df3, columns = 1:4, scale = "uniminmax"))
+  expect_silent(ggparcoord(data = df3, columns = 1:4, scale = "robust"))
+  expect_silent(ggparcoord(data = df3, columns = 1:4, scale = "std"))
 })

@@ -98,7 +98,7 @@ if(getRversion() >= "2.15.1") {
 #' ggnetworkmap(world, twitter_spambots)
 #'
 #' # domestic distribution
-#' ggnetworkmap(net = twitter_spambots) + xlim(-130,-60)
+#' ggnetworkmap(net = twitter_spambots)
 #'
 #' # topology
 #' ggnetworkmap(net = twitter_spambots, arrow.size = 0.5)
@@ -209,7 +209,7 @@ ggnetworkmap <- function (
   m <- network::as.matrix.network.adjacency(net)
 
   if (missing(gg)) {
-    gg <- ggplot()
+    gg <- ggplot() + coord_map()
 
     plotcord <- sna::gplot.layout.fruchtermanreingold(net, list(m,layout.par = NULL))
     plotcord <- data.frame(plotcord)
@@ -422,7 +422,6 @@ ggnetworkmap <- function (
   gg = gg +
     scale_x_continuous(breaks = NULL) +
     scale_y_continuous(breaks = NULL) +
-    coord_map() +
     labs(color = "", fill = "", size = "", y = NULL, x = NULL) +
     theme(panel.background = element_blank(),
           legend.key = element_blank())

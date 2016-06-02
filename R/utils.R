@@ -26,3 +26,11 @@ str_detect <- function(string, pattern, ...) {
 str_replace <- function(string, pattern, replacement) {
   sub(pattern, replacement, string)
 }
+
+ifnull <- function(a, b) {
+  if (!is.null(a)) {
+    a
+  } else {
+    b
+  }
+}
