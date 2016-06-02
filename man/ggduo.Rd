@@ -9,7 +9,7 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
   "facethist", discrete = "ratio"), axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]), showStrips = NULL,
-  legends = FALSE, verbose = FALSE)
+  legends = FALSE)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -25,8 +25,6 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 \item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
 \item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
-
-\item{verbose}{boolean to determine the printing of "Plot #1, Plot #2..."}
 
 \item{title}{title for the graph}
 

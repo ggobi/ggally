@@ -10,7 +10,7 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
   "facetbar", na = "na"), diag = list(continuous = "densityDiag", discrete =
   "barDiag", na = "naDiag"), params = NULL, ..., axisLabels = c("show",
   "internal", "none"), columnLabels = colnames(data[columns]),
-  showStrips = NULL, legends = FALSE, verbose = FALSE)
+  showStrips = NULL, legends = FALSE, verbose = NULL)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -39,7 +39,7 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
 
 \item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
 
-\item{verbose}{boolean to determine the printing of "Plot #1, Plot #2..."}
+\item{verbose}{deprecated}
 }
 \value{
 ggpair object that if called, will print
