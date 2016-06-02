@@ -6,9 +6,9 @@
 \usage{
 ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
   columnsY = 1:ncol(data), types = list(continuous = "points", combo =
-  "facethist", discrete = "ratio"), axisLabels = c("show", "internal"),
-  columnLabelsX = colnames(data[, columnsX]),
-  columnLabelsY = colnames(data[, columnsY]), showStrips = NULL,
+  "facethist", discrete = "ratio"), axisLabels = c("show", "none"),
+  columnLabelsX = colnames(data[columnsX]),
+  columnLabelsY = colnames(data[columnsY]), showStrips = NULL,
   legends = FALSE, verbose = FALSE)
 }
 \arguments{

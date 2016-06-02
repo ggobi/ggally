@@ -5,9 +5,12 @@
 \title{ggpairs - A ggplot2 generalized pairs plot}
 \usage{
 ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
-  upper = list(), lower = list(), diag = list(), params = NULL, ...,
-  axisLabels = c("show", "internal", "none"), columnLabels = colnames(data[,
-  columns]), showStrips = NULL, legends = FALSE, verbose = FALSE)
+  upper = list(continuous = "cor", combo = "box", discrete = "facetbar", na =
+  "na"), lower = list(continuous = "points", combo = "facethist", discrete =
+  "facetbar", na = "na"), diag = list(continuous = "densityDiag", discrete =
+  "barDiag", na = "naDiag"), params = NULL, ..., axisLabels = c("show",
+  "internal", "none"), columnLabels = colnames(data[columns]),
+  showStrips = NULL, legends = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}

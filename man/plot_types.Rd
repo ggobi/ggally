@@ -4,7 +4,7 @@
 \alias{plot_types}
 \title{Plot Types}
 \usage{
-plot_types(data, columns)
+plot_types(data, columnsX, columnsY)
 }
 \arguments{
 \item{data}{data set to be used}

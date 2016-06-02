@@ -4,7 +4,7 @@
 \alias{find_plot_type}
 \title{Find Plot Types}
 \usage{
-find_plot_type(col1Name, col2Name, type1, type2, isNaData)
+find_plot_type(col1Name, col2Name, type1, type2, isAllNa)
 }
 \arguments{
 \item{col1Name}{x column name}
