@@ -238,6 +238,10 @@ make_ggmatrix_plot_obj <- function(fn, mapping = ggplot2::aes(), dataPos = 1, gg
 }
 
 
+blank_plot_string <- function() {
+  "PM; (blank)"
+}
+
 mapping_as_string <- function(mapping) {
   str_c("c(", str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
 }
@@ -248,7 +252,7 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
   fnTxt <- ifelse(inherits(x$fn, "ggmatrix_fn_with_params"), as.character(x$fn), "custom_function")
   if (inherits(x$fn, "ggmatrix_fn_with_params")) {
     if (attr(x$fn, "name") %in% c("ggally_blank", "ggally_blankDiag")) {
-      return("(blank)")
+      return(blank_plot_string())
     }
   }
   str_c(
@@ -282,7 +286,7 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
     ))
     obj$plots <- lapply(obj$plots, function(plotObj) {
       if (is_blank_plot(plotObj)) {
-        "(blank)"
+        blank_plot_string()
       } else if (ggplot2::is.ggplot(plotObj)) {
         str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
       } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
