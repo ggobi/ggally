@@ -73,7 +73,7 @@ getPlot <- function(x, i, j){
     plotObj <- x$plots[[pos]]
   }
 
-  if (is.null(plotObj) || identical(plotObj, "blank")) {
+  if (is.null(plotObj)) {
     p <- ggally_blank()
   } else {
     if (ggplot2::is.ggplot(plotObj)) {
