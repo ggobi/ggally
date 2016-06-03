@@ -24,6 +24,12 @@ test_that("get", {
   expect_equal(p$labels$x, "total_bill")
   expect_equal(p$labels$y, "tip")
 
+  # test odd input and retrieve it
+  a[2,1] <- 1:4
+  expect_error({
+    a[2,1]
+  }, "unknown plot object type")
+
 })
 
 test_that("put", {
