@@ -18,17 +18,17 @@ ggcoef(x, mapping = aes_string(y = "term", x = "estimate"), conf.int = TRUE,
 
 \item{conf.int}{display confidence intervals as error bars?}
 
-\item{conf.level}{level of confidence intervals (passed to \code{\link[broom]{tidy}} 
+\item{conf.level}{level of confidence intervals (passed to \code{\link[broom]{tidy}}
 if \code{x} is not a data frame)}
 
-\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom]{tidy}} 
+\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom]{tidy}}
 if \code{x} is not a data frame)}
 
 \item{exclude_intercept}{should the intercept be excluded from the plot?}
 
 \item{vline}{print a vertical line?}
 
-\item{vline_intercept}{\code{xintercept} for the vertical line. 
+\item{vline_intercept}{\code{xintercept} for the vertical line.
 \code{"auto"} for \code{x = 0} (or \code{x = 1} if {exponentiate} is \code{TRUE})}
 
 \item{vline_color}{color of the vertical line}
@@ -58,7 +58,7 @@ if (require(broom)) {
   d <- as.data.frame(Titanic)
   reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
   ggcoef(reg2, exponentiate = TRUE)
-  ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue") 
+  ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue")
 }
 }
 
