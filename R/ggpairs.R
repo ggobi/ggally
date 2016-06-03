@@ -101,7 +101,7 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
 warn_verbose_deprecated <- function(verboseIsSupplied) {
   if (verboseIsSupplied) {
     warning(
-      "'verbose' will be deprecated in future versions.  Please remove it from your code",
+      "'verbose' will be deprecated in future versions.  Please remove it from your code"
     )
   }
 }

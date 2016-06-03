@@ -118,6 +118,18 @@ test_that("stops", {
     "Extra arguments: "
   )
 
+  expect_error({
+    pm <- ggpairs(tips, columns = c("tip", "day", "not in tips"))
+  }, "Columns not found in data")
+
+  expect_warning({
+    pm <- ggpairs(tips, verbose = TRUE)
+  }, "'verbose' will be deprecated")
+
+  expect_error({
+    pm <- ggpairs(tips, params = c(size = 2))
+  }, "'params' is a deprecated")
+
   expect_error(
     ggpairs(tips, columns = 1:10),
     "Make sure your 'columns' values are less than or equal to"
