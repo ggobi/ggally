@@ -23,9 +23,9 @@ str_detect <- function(string, pattern, ...) {
   grepl(pattern, string, ...)
 }
 
-str_replace <- function(string, pattern, replacement) {
-  sub(pattern, replacement, string)
-}
+# str_replace <- function(string, pattern, replacement) {
+#   sub(pattern, replacement, string)
+# }
 
 ifnull <- function(a, b) {
   if (!is.null(a)) {
