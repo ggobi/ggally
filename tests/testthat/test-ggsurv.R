@@ -8,6 +8,11 @@ data(kidney, package = "survival")
 sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
 sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
 
+expect_print <- function(x) {
+  testthat::expect_silent(print(x))
+}
+
+
 test_that("single", {
 
   a <- ggsurv(sf.lung)
@@ -122,6 +127,36 @@ test_that("CI", {
 
 })
 
+test_that("multiple colors", {
+  expect_print(ggsurv(sf.kid, plot.cens = TRUE))
+  expect_warning({
+    ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue"))
+  }, "Color scales for censored points")
+
+  expect_silent({
+    print(
+      ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue", "orange", "green"))
+    )
+  })
+
+  expect_warning({
+    ggsurv(
+      sf.kid, plot.cens = TRUE,
+      cens.col = c("red", "blue", "orange", "green"),
+      cens.shape = c(1,2)
+    )
+  }, "The length of the censored shapes")
+  expect_silent({
+    print(
+      ggsurv(
+        sf.kid, plot.cens = TRUE,
+        cens.col = c("red", "blue", "orange", "green"),
+        cens.shape = c(1,2,3,4)
+      )
+    )
+  })
+
+})
 
 
 
