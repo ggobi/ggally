@@ -9,7 +9,7 @@ test_that("structure", {
   expect_is(a$data, "data.frame")
   expect_is(a$plots, "list")
   expect_equivalent(length(a$plots), ncol(tips) ^ 2)
-  expect_is(a$title, "character")
+  expect_true(is.null(a$title))
   expect_is(a$verbose, "logical")
   expect_is(a$xAxisLabels, "character")
   expect_is(a$yAxisLabels, "character")
