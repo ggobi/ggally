@@ -13,7 +13,7 @@ ggally_barDiag(data, mapping, ..., rescale = FALSE)
 
 \item{...}{other arguements are sent to geom_bar}
 
-\item{rescale}{boolean to decide whether or not to rescale the count output}
+\item{rescale}{boolean to decide whether or not to rescale the count output. Only applies to numeric data}
 }
 \description{
 Plots the bar plots by using Diagonal.

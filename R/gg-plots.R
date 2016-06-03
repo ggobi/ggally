@@ -808,7 +808,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguements are sent to geom_bar
-#' @param rescale boolean to decide whether or not to rescale the count output
+#' @param rescale boolean to decide whether or not to rescale the count output. Only applies to numeric data
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export
@@ -980,6 +980,7 @@ get_x_axis_labels <- function(p, xRange) {
 
   minPos <- xRange[1]
   maxPos <- xRange[2]
+
   for (i in seq_len(nrow(axisLabs))) {
     xPos <- axisLabs[i, "xPos"]
     yPos <- axisLabs[i, "yPos"]
