@@ -219,7 +219,7 @@ ggduo <- function(
   data <- fix_data(data)
 
   # fix args
-  if (is.numeric(mapping) & missing(columnsY)) {
+  if (!is.list(mapping) & missing(columnsY)) {
       columnsY <- columnsX
       columnsX <- mapping
       mapping <- NULL
