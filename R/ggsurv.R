@@ -289,13 +289,24 @@ ggsurv_m <- function(
       stop('There are no censored observations')
     }
     if (length(cens.col) == 1) {
-      col <- ifelse(cens.col == 'gg.def', 'red', cens.col)
-      pl <- pl + geom_point(
-        data    = dat.cens,
-        mapping = aes(y = surv),
-        shape   = cens.shape,
-        col     = col
-      )
+
+      if (identical(cens.col, "gg.def")) {
+        # match the colors of the lines
+        pl <- pl + geom_point(
+          data = dat.cens,
+          mapping = aes(y = surv, col = group),
+          shape = cens.shape,
+          show.legend = FALSE
+        )
+      } else {
+        # supply the raw color value
+        pl <- pl + geom_point(
+          data    = dat.cens,
+          mapping = aes(y = surv),
+          shape   = cens.shape,
+          color   = col
+        )
+      }
 
     } else if (length(cens.col) > 0) {
       # if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
@@ -311,14 +322,16 @@ ggsurv_m <- function(
       }
 
       if (identical(cens.col, "gg.def")) {
+        # match the group color value
         pl <- pl + geom_point(
           data = dat.cens,
-          mapping = aes(y=surv, col = group),
+          mapping = aes(y = surv, col = group),
           shape = cens.shape,
           show.legend = FALSE
         )
       } else {
 
+        # custom colors and maybe custom shape
         uniqueGroupVals = unique(dat.cens$group)
         if (length(cens.shape) == 1) {
           cens.shape = rep(cens.shape, strata)

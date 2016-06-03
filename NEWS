@@ -1,9 +1,13 @@
 GGally 1.1.0.9999
 -----------------
 
-NAME
+ggduo - New!
 
-* item (#123)
+* plot two grouped data in a plot matrix (#)
+
+ggsurv
+
+* changed default of plotting multiple censored data color to match the survival line
 
 GGally 1.1.0
 -----------------
