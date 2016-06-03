@@ -492,14 +492,9 @@ ggpairs <- function(
     }
 
     plot_fn <- ggmatrix_plot_list(plotType)
+    p <- do.call(plot_fn, args)
 
-    if (is.function(plot_fn)) {
-      p <- do.call(plot_fn, args)
-    } else {
-      p <- "blank"
-    }
     return(p)
-
   })
 
   plotMatrix <- ggmatrix(
