@@ -20,11 +20,11 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
   lenY <- length(plotTypesY)
   n <- lenX * lenY
 
-  plotType = character(n)
-  xVar = character(n)
-  yVar = character(n)
-  posX = integer(n)
-  posY = integer(n)
+  plotType <- character(n)
+  xVar <- character(n)
+  yVar <- character(n)
+  posX <- integer(n)
+  posY <- integer(n)
 
   #horizontal then vertical
   for (yI in seq_len(lenY)) {

@@ -110,8 +110,6 @@ print.ggmatrix <- function(
   ...
 ) {
 
-  args <- list(...)
-
   displayXAxisLabels <- !is.null(x$xAxisLabels)
   displayYAxisLabels <- !is.null(x$yAxisLabels)
 

@@ -90,7 +90,11 @@ wrap_fn_with_param_arg <- function(
       funcArgName <- str_c("ggally_", funcVal)
     }
     tryCatch({
-        funcVal <- get(str_c("ggally_", funcVal), mode = "function", envir = loadNamespace("GGally"))
+        funcVal <- get(
+          str_c("ggally_", funcVal),
+          mode = "function",
+          envir = loadNamespace("GGally")
+        )
       },
       error = function(e) {
         stop(str_c(

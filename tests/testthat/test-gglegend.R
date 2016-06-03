@@ -3,7 +3,7 @@
 context("gglegend")
 
 ex_print <- function(p) {
-  expect_silent(print(p))
+  testthat::expect_silent(print(p))
 }
 
 test_that("examples", {
@@ -14,7 +14,7 @@ test_that("examples", {
     data = iris,
     fill = Species,
     geom = "histogram",
-    binwidth = 1/4
+    binwidth = 1 / 4
   )
 
   (right <- histPlot)
@@ -85,7 +85,7 @@ test_that("legend", {
      iris, 1:2,
      mapping = ggplot2::aes(color = Species)
     )
-    pm[1,2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
+    pm[1, 2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
     print(pm)
   })
 

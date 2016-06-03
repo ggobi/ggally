@@ -47,7 +47,14 @@ ggcoef(reg, vline = FALSE, conf.int = FALSE, exclude_intercept = TRUE)
 See the help page of `ggcoef` for the full list of arguments that could be used to personalize how error bars and the vertical line are plotted.
 
 ```{r}
-ggcoef(log.reg, exponentiate = TRUE, vline_color = "red", vline_linetype =  "solid", errorbar_color = "blue", errorbar_height = .25)
+ggcoef(
+  log.reg,
+  exponentiate = TRUE,
+  vline_color = "red",
+  vline_linetype =  "solid",
+  errorbar_color = "blue",
+  errorbar_height = .25
+)
 ```
 
 Additional parameters will be passed to `geom_point`.
@@ -81,7 +88,10 @@ cust <- data.frame(
 )
 cust$term <- factor(cust$term, cust$term)
 ggcoef(cust, exponentiate = TRUE)
-ggcoef(cust, exponentiate = TRUE, mapping = aes(x = estimate, y = term, colour = variable), size = 5)
+ggcoef(
+  cust,
+  exponentiate = TRUE,
+  mapping = aes(x = estimate, y = term, colour = variable),
+  size = 5
+)
 ```
-
-

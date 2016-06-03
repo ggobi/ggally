@@ -144,9 +144,15 @@ test_that("print", {
   au <- ggpairs(tips, columnsUsed, upper = "blank", lower = facethistBindwidth1)
   ad <- ggpairs(tips, columnsUsed, diag = "blank", lower = facethistBindwidth1)
   al <- ggpairs(tips, columnsUsed, lower = "blank")
-  expect_silent({print(au)})
-  expect_silent({print(ad)})
-  expect_silent({print(al)})
+  expect_silent({
+    print(au)
+  })
+  expect_silent({
+    print(ad)
+  })
+  expect_silent({
+    print(al)
+  })
 
   fn <- function(axisLabels) {
     a <- ggpairs(
@@ -168,12 +174,17 @@ test_that("strips and axis", {
 
   # axis should line up with left side strips
   expect_silent({
-    pm <- ggpairs(tips, c(3,1,4), showStrips = TRUE, title = "Axis should line up even if strips are present", lower = list(combo = wrap("facethist", binwidth = 1)))
+    pm <- ggpairs(
+      tips, c(3, 1, 4),
+      showStrips = TRUE,
+      title = "Axis should line up even if strips are present",
+      lower = list(combo = wrap("facethist", binwidth = 1))
+    )
     print(pm)
   })
   # default behavior. tested in other places
   # expect_silent({
-  #   pm <- ggpairs(tips, c(3,1,4), showStrips = FALSE)
+  #   pm <- ggpairs(tips, c(3, 1, 4), showStrips = FALSE)
   #   print(pm)
   # })
 

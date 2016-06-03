@@ -77,7 +77,10 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
   }
 
   if (length(columnLabels) != length(columns)) {
-    stop("The length of the '", columnLabelsName, "' does not match the length of the '", columnsName, "' being used.")
+    stop(
+      "The length of the '", columnLabelsName, "'",
+      " does not match the length of the '", columnsName, "' being used."
+    )
   }
 
   colnamesUsed <- colnamesData[columns]
@@ -242,8 +245,8 @@ ggduo <- function(
 
     plotType <- dataTypes[i, "plotType"]
 
-    posX <- dataTypes[i, "posX"]
-    posY <- dataTypes[i, "posY"]
+    # posX <- dataTypes[i, "posX"]
+    # posY <- dataTypes[i, "posY"]
     xColName <- dataTypes[i, "xVar"]
     yColName <- dataTypes[i, "yVar"]
 
