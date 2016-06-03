@@ -1,5 +1,5 @@
 codecov:
-  bot: ggobi
+  bot: schloerke
 
 coverage:
   range: "70...95"
