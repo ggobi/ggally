@@ -261,13 +261,8 @@ ggduo <- function(
     args <- list(plotType = plotType, types = types, sectionAes = sectionAes)
     plot_fn <- ggmatrix_plot_list(plotType)
 
-    if (is.function(plot_fn)) {
-      p <- do.call(plot_fn, args)
-    } else {
-      p <- "blank"
-    }
-    return(p)
-
+    plotObj <- do.call(plot_fn, args)
+    return(plotObj)
   })
 
 
