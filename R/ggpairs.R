@@ -239,7 +239,7 @@ ggduo <- function(
 
   # get plot type information
   dataTypes <- plot_types(data, columnsX, columnsY, allowDiag = FALSE)
-  print(dataTypes)
+  # print(dataTypes)
 
   ggduoPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
 
