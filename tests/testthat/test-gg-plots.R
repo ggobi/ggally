@@ -103,6 +103,8 @@ test_that("diagAxis", {
   )
   expect_equal(pDat2, testDt2)
 
+
+  expect_error(ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length)), "mapping$x is null.")
 })
 
 test_that("dates", {
