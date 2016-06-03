@@ -60,12 +60,12 @@ pm <- ggduo(tips, c("total_bill", "tip"), c("tip", "day", "time"))
 
 # add color to smoker
 pm <- ggduo(
- tips, 1:2, c(2, 5, 6),
- mapping = ggplot2::aes(color = smoker),
- title = "Tip and Total Bill vs Tip, Day, and Time by Smoker",
- columnLabelsX = c("Total Bill", "Tip"),
- columnLabelsY = c("Tip", "Day", "Time"),
- types = list(continuous = "smooth")
+  tips, 1:2, c(2, 5, 6),
+  mapping = ggplot2::aes(color = smoker),
+  title = "Tip and Total Bill vs Tip, Day, and Time by Smoker",
+  columnLabelsX = c("Total Bill", "Tip"),
+  columnLabelsY = c("Tip", "Day", "Time"),
+  types = list(continuous = "smooth")
 )
 # pm
 
