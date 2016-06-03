@@ -838,7 +838,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
           y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         ...
-      ) + coord_cartesian(ylim = range(data[, as.character(mapping$x)], na.rm = TRUE))
+      ) + coord_cartesian(ylim = range(eval(mapping$x, envir = data), na.rm = TRUE))
     } else {
       p <- p + geom_histogram(...)
 
