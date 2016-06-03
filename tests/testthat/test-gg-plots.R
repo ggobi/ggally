@@ -119,6 +119,28 @@ test_that("dates", {
 
 })
 
+test_that("rescale", {
+  p <- ggally_densityDiag(tips, mapping = ggplot2::aes(x = day), rescale = FALSE)
+  expect_true(p$labels$y == "density")
+  expect_print(p)
+
+  p <- ggally_densityDiag(tips, mapping = ggplot2::aes(x = day), rescale = TRUE)
+  expect_true(p$labels$y != "density")
+  expect_print(p)
+
+
+  p <- ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25, rescale = FALSE)
+  expect_true(p$labels$y == "count")
+  expect_print(p)
+
+  p <- ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25, rescale = TRUE)
+  expect_true(p$labels$y != "count")
+  expect_print(p)
+
+
+
+})
+
 
 test_that("ggfluctuation2", {
   expect_warning(
