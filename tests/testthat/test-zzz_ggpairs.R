@@ -2,6 +2,10 @@
 context("ggpairs")
 data(tips, package = "reshape")
 
+expect_print <- function(p) {
+  testthat::expect_silent(print(p))
+}
+
 facethistBindwidth1 <- list(combo = wrap("facethist", binwidth = 1))
 
 test_that("structure", {
@@ -139,33 +143,30 @@ test_that("stops", {
 
 })
 
-test_that("print", {
+test_that("blank", {
   columnsUsed <- 1:3
   au <- ggpairs(tips, columnsUsed, upper = "blank", lower = facethistBindwidth1)
   ad <- ggpairs(tips, columnsUsed, diag = "blank", lower = facethistBindwidth1)
   al <- ggpairs(tips, columnsUsed, lower = "blank")
-  expect_silent({
-    print(au)
-  })
-  expect_silent({
-    print(ad)
-  })
-  expect_silent({
-    print(al)
-  })
+  expect_print(au)
+  expect_print(ad)
+  expect_print(al)
+})
 
+test_that("axisLabels", {
   fn <- function(axisLabels) {
     a <- ggpairs(
-      tips, 1:4, lower = facethistBindwidth1,
-      axisLabels = axisLabels
+      iris, c(3,4,5,1),
+      upper = "blank",
+      lower = facethistBindwidth1,
+      axisLabels = axisLabels,
+      title = str_c("axisLabels = ", axisLabels)
     )
     a
   }
   for (axisLabels in c("show", "internal", "none")) {
-    expect_silent({
-      a <- fn(axisLabels)
-      print(a)
-    })
+    a <- fn(axisLabels)
+    expect_print(a)
   }
 })
 
