@@ -104,7 +104,7 @@ test_that("diagAxis", {
   expect_equal(pDat2, testDt2)
 
 
-  expect_error(ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length)), "mapping$x is null.")
+  expect_error(ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length)), "mapping\\$x is null.")
 })
 
 test_that("dates", {
@@ -127,7 +127,7 @@ test_that("rescale", {
   expect_print(p)
 
   p <- ggally_densityDiag(tips, mapping = ggplot2::aes(x = day), rescale = TRUE)
-  expect_true(p$labels$y != "density")
+  expect_true(! identical(p$labels$y, "density"))
   expect_print(p)
 
 
@@ -136,7 +136,7 @@ test_that("rescale", {
   expect_print(p)
 
   p <- ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25, rescale = TRUE)
-  expect_true(p$labels$y != "count")
+  expect_true(! identical(p$labels$y, "count"))
   expect_print(p)
 
 
