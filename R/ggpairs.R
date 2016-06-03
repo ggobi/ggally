@@ -259,7 +259,7 @@ ggduo <- function(
     )
 
     args <- list(plotType = plotType, types = types, sectionAes = sectionAes)
-    plot_fn <- ggmatrixPlotList[[plotType]]
+    plot_fn <- ggmatrix_plot_list(plotType)
 
     if (is.function(plot_fn)) {
       p <- do.call(plot_fn, args)
@@ -496,7 +496,7 @@ ggpairs <- function(
       args$label <- columnLabels[posX]
     }
 
-    plot_fn <- ggmatrixPlotList[[plotType]]
+    plot_fn <- ggmatrix_plot_list(plotType)
 
     if (is.function(plot_fn)) {
       p <- do.call(plot_fn, args)

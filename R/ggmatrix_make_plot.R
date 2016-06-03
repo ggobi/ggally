@@ -112,13 +112,15 @@ ggmatrix_label_plot <- function(plotType, types, sectionAes, label) {
 }
 
 
-ggmatrixPlotList <- list(
-  "na" = ggmatrix_na_plot,
-  "na-diag" = ggmatrix_na_plot,
-  "continuous" = ggmatrix_continuous_plot,
-  "combo" = ggmatrix_combo_plot,
-  "discrete" = ggmatrix_discrete_plot,
-  "continuous-diag" = ggmatrix_continuous_diag_plot,
-  "discrete-diag" = ggmatrix_discrete_diag_plot,
-  "label" = ggmatrix_label_plot
-)
+ggmatrix_plot_list <- function(type) {
+  switch(type,
+    "na" = ggmatrix_na_plot,
+    "na-diag" = ggmatrix_na_plot,
+    "continuous" = ggmatrix_continuous_plot,
+    "combo" = ggmatrix_combo_plot,
+    "discrete" = ggmatrix_discrete_plot,
+    "continuous-diag" = ggmatrix_continuous_diag_plot,
+    "discrete-diag" = ggmatrix_discrete_diag_plot,
+    "label" = ggmatrix_label_plot
+  )
+}
