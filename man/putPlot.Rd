@@ -36,6 +36,12 @@ personal_plot <- ggally_text(
 )
 custom_car[1, 3] <- personal_plot
 # custom_car
+
+# remove plots after creating a plot matrix
+custom_car[2,1] <- NULL
+custom_car[3,1] <- "blank" # the same as storing null
+custom_car[3,2] <- NULL
+custom_car
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

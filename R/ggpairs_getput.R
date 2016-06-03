@@ -22,11 +22,19 @@
 #' )
 #' custom_car[1, 3] <- personal_plot
 #' # custom_car
+#'
+#' # remove plots after creating a plot matrix
+#' custom_car[2,1] <- NULL
+#' custom_car[3,1] <- "blank" # the same as storing null
+#' custom_car[3,2] <- NULL
+#' custom_car
 putPlot <- function(x, value, i, j){
   pos <- get_pos(x, i, j)
-  if (mode(value) == "character") {
+  if (is.null(value)) {
+    x$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
+  } else if (mode(value) == "character") {
     if (value == "blank") {
-      x$plots[[pos]] <- ggally_blank()
+      x$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
     } else {
       stop("character values (besides 'blank') are not allowed to be stored as plot values.")
     }

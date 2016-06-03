@@ -2,8 +2,11 @@
 context("ggmatrix")
 data(tips, package = "reshape")
 
-test_that("stops", {
+expect_print <- function(x) {
+  testthat::expect_silent(print(x))
+}
 
+test_that("stops", {
 
   expect_error(ggmatrix(plots = matrix(), nrow = 2, ncol = 3), "'plots' must be a list()")
 
@@ -100,4 +103,20 @@ test_that("str.ggmatrix", {
     str(pm, raw = TRUE)
   })
   expect_false(any(str_detect(txt, "Custom str.ggmatrix output:")))
+})
+
+
+test_that("blank", {
+  pm <- ggpairs(tips, 1:2)
+  pm[1,2] <- "blank"
+  expect_print(pm)
+
+  pm[2,1] <- NULL
+  expect_print(pm)
+
+  expect_equal(length(pm$plots), 4)
+
+  expect_error({
+    pm[2,2] <- "not blank"
+  }, "character values \\(besides 'blank'\\)")
 })
