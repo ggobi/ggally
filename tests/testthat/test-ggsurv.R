@@ -135,7 +135,7 @@ test_that("multiple colors", {
 
   expect_silent({
     print(
-      ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("blue"))
+      ggsurv(sf.kid, plot.cens = TRUE, cens.col = "blue")
     )
   })
   expect_silent({

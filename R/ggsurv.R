@@ -304,7 +304,7 @@ ggsurv_m <- function(
           data    = dat.cens,
           mapping = aes(y = surv),
           shape   = cens.shape,
-          color   = col
+          color   = cens.col
         )
       }
 
