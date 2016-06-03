@@ -229,7 +229,7 @@ ggally_cor <- function(
   }
 
   colorCol <- deparse(mapping$colour)
-  singleColorCol <- paste(colorCol, collapse = "")
+  singleColorCol <- ifelse(is.null(colorCol), NULL, paste(colorCol, collapse = ""))
 
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
     if (length(colorCol) > 0) {
