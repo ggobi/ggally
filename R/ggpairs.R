@@ -220,10 +220,13 @@ ggduo <- function(
   data <- fix_data(data)
 
   # fix args
-  if (!is.list(mapping) & missing(columnsY)) {
-      columnsY <- columnsX
-      columnsX <- mapping
-      mapping <- NULL
+  if (
+    !missing(mapping) & !is.list(mapping) &
+    !missing(columnsX) & missing(columnsY)
+  ) {
+    columnsY <- columnsX
+    columnsX <- mapping
+    mapping <- NULL
   }
 
   stop_if_bad_mapping(mapping)
