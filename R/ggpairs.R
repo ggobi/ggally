@@ -49,7 +49,7 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
     isFound <- as.logical(unlist(lapply(colNumValues, length)))
     if (any(!isFound)) {
       stop(str_c(
-        "Columns not found in data: c(",
+        "Columns in '", columnsName, "' not found in data: c(",
         str_c(str_c("'", columns[!isFound], "'"), collapse = ", "),
         ")"
       ))
@@ -59,19 +59,20 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
 
   if (any(columns > ncol(data))) {
     stop(str_c(
-      "Make sure your '", columnsName, "' values are less than or equal to ", ncol(data), ".\n",
+      "Make sure your numeric '", columnsName, "'",
+      " values are less than or equal to ", ncol(data), ".\n",
       "\t", columnsName, " = c(", str_c(columns, collapse = ", "), ")"
     ))
   }
   if (any(columns < 1)) {
     stop(str_c(
-      "Make sure your '", columnsName, "' values are positive.", "\n",
+      "Make sure your numeric '", columnsName, "' values are positive.", "\n",
       "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
     ))
   }
   if (any( (columns %% 1) != 0)) {
     stop(str_c(
-      "Make sure your '", columnsName, "' values are integers.", "\n",
+      "Make sure your numeric '", columnsName, "' values are integers.", "\n",
       "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
     ))
   }
@@ -89,7 +90,7 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
     badColumns <- colnamesUsed[nameIsOnlyNumber]
     names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
     warning(paste(
-      "Column name is numeric.  Behavior will not be as expected.\n\n",
+      "Data column name is numeric.  Desired behavior may not be as expected.\n\n",
       "c(", paste("'", names(badColumns), "' = '", badColumns, "'", collapse = "", sep = ""), ")",
       sep = ""
     ))
@@ -115,7 +116,7 @@ stop_if_bad_mapping <- function(mapping) {
   }
 }
 
-stop_if_args_exist <- function(args) {
+warn_if_args_exist <- function(args) {
   if (length(args) > 0) {
     argNames <- names(args)
     warning(str_c(
@@ -433,7 +434,7 @@ ggpairs <- function(
   warn_verbose_deprecated(!missing(verbose))
   stop_if_bad_mapping(mapping)
 
-  stop_if_args_exist(list(...))
+  warn_if_args_exist(list(...))
 
   columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
 
