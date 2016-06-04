@@ -31,10 +31,13 @@ ggmatrix_combo_plot <- function(plotType, types, sectionAes) {
   subTypeName <- get_subtype_name(subType)
 
   # isCombo
-  if ( ! (
-    identical(subTypeName, "ggally_dot") ||
-    identical(subTypeName, "ggally_facetdensity")
-  ) ) {
+  if (
+    identical(subTypeName, "ggally_box") ||
+    # identical(subTypeName, "ggally_dot") ||
+    identical(subTypeName, "ggally_facethist") ||
+    # identical(subTypeName, "ggally_facetdensity") ||
+    identical(subTypeName, "ggally_denstrip")
+  ) {
     sectionAes <- mapping_color_to_fill(sectionAes)
   }
 
@@ -69,7 +72,7 @@ ggmatrix_continuous_diag_plot <- function(plotType, types, sectionAes) {
   subType <- types$continuous
   subTypeName <- get_subtype_name(subType)
 
-  if (! identical(subTypeName, "ggally_density")) {
+  if (identical(subTypeName, "ggally_barDiag")) {
     sectionAes <- mapping_color_to_fill(sectionAes)
   }
 
