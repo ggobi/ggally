@@ -123,103 +123,103 @@ test_that("stops", {
 
   expect_warning({
     pm <- ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1)
-  }, "'axisLabels' not in ")
+  }, "'axisLabels' not in ") # nolint
   expect_warning({
     pm <- ggduo(tips, axisLabels = "not_a_chosen", types = facethistBindwidth1)
-  }, "'axisLabels' not in ")
+  }, "'axisLabels' not in ") # nolint
 
   expect_warning({
     pm <- ggpairs(tips, color = "sex")
-  }, "Extra arguments: ")
+  }, "Extra arguments: ") # nolint
 
   expect_error({
     ggpairs(tips, columns = c("tip", "day", "not in tips"))
-  }, "Columns in 'columns' not found in data")
+  }, "Columns in 'columns' not found in data") # nolint
   expect_error({
     ggduo(tips, columnsX = c("tip", "day", "not in tips"), columnsY = "smoker")
-  }, "Columns in 'columnsX' not found in data")
+  }, "Columns in 'columnsX' not found in data") # nolint
   expect_error({
     ggduo(tips, columnsX = c("tip", "day", "smoker"), columnsY = "not in tips")
-  }, "Columns in 'columnsY' not found in data")
+  }, "Columns in 'columnsY' not found in data") # nolint
 
   expect_warning({
     pm <- ggpairs(tips, verbose = TRUE)
-  }, "'verbose' will be deprecated")
+  }, "'verbose' will be deprecated") # nolint
 
   expect_error({
     ggpairs(tips, params = c(size = 2))
-  }, "'params' is a deprecated")
+  }, "'params' is a deprecated") # nolint
 
   expect_error( {
     ggpairs(tips, columns = 1:10)
-  }, "Make sure your numeric 'columns' values are less than or equal to")
+  }, "Make sure your numeric 'columns' values are less than or equal to") # nolint
   expect_error( {
     ggduo(tips, columnsX = 1:10)
-  }, "Make sure your numeric 'columnsX' values are less than or equal to")
+  }, "Make sure your numeric 'columnsX' values are less than or equal to") # nolint
   expect_error( {
     ggduo(tips, columnsY = 1:10)
-  }, "Make sure your numeric 'columnsY' values are less than or equal to")
+  }, "Make sure your numeric 'columnsY' values are less than or equal to") # nolint
 
   expect_error({
     ggpairs(tips, columns = -5:5)
-  }, "Make sure your numeric 'columns' values are positive")
+  }, "Make sure your numeric 'columns' values are positive") # nolint
   expect_error({
     ggduo(tips, columnsX = -5:5)
-  }, "Make sure your numeric 'columnsX' values are positive")
+  }, "Make sure your numeric 'columnsX' values are positive") # nolint
   expect_error({
     ggduo(tips, columnsY = -5:5)
-  }, "Make sure your numeric 'columnsY' values are positive")
+  }, "Make sure your numeric 'columnsY' values are positive") # nolint
 
   expect_error({
     ggpairs(tips, columns = (2:10) / 2)
-  }, "Make sure your numeric 'columns' values are integers")
+  }, "Make sure your numeric 'columns' values are integers") # nolint
   expect_error({
     ggduo(tips, columnsX = (2:10) / 2)
-  }, "Make sure your numeric 'columnsX' values are integers")
+  }, "Make sure your numeric 'columnsX' values are integers") # nolint
   expect_error({
     ggduo(tips, columnsY = (2:10) / 2)
-  }, "Make sure your numeric 'columnsY' values are integers")
+  }, "Make sure your numeric 'columnsY' values are integers") # nolint
 
   expect_error({
     ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra"))
-  }, "The length of the 'columnLabels' does not match the length of the 'columns'")
+  }, "The length of the 'columnLabels' does not match the length of the 'columns'") # nolint
   expect_error({
     ggduo(tips, columnsX = 1:3, columnLabelsX = c("A", "B", "C", "Extra"))
-  }, "The length of the 'columnLabelsX' does not match the length of the 'columnsX'")
+  }, "The length of the 'columnLabelsX' does not match the length of the 'columnsX'") # nolint
   expect_error({
     ggduo(tips, columnsY = 1:3, columnLabelsY = c("A", "B", "C", "Extra"))
-  }, "The length of the 'columnLabelsY' does not match the length of the 'columnsY'")
+  }, "The length of the 'columnLabelsY' does not match the length of the 'columnsY'") # nolint
 
   dt <- tips
   colnames(dt)[3] <- "1"
   expect_warning({
     pm <- ggpairs(dt, lower = facethistBindwidth1)
-  }, "Data column name is numeric")
+  }, "Data column name is numeric") # nolint
   expect_warning({
     pm <- ggduo(dt, types = facethistBindwidth1)
-  }, "Data column name is numeric")
+  }, "Data column name is numeric") # nolint
 
   expect_error({
     ggpairs(tips, upper = c("not_a_list"))
-  }, "'upper' is not a list")
+  }, "'upper' is not a list") # nolint
   expect_error({
     ggpairs(tips, diag = c("not_a_list"))
-  }, "'diag' is not a list")
+  }, "'diag' is not a list") # nolint
   expect_error({
     ggpairs(tips, lower = c("not_a_list"))
-  }, "'lower' is not a list")
+  }, "'lower' is not a list") # nolint
   expect_error({
     ggduo(tips, types = c("not_a_list"))
-  }, "'types' is not a list")
+  }, "'types' is not a list") # nolint
 
   # couldn't get correct error message
   #  variables: 'colour' have non standard format: 'total_bill + tip'.
   expect_error({
     ggpairs(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  }, "variables\\: 'colour' have non standard format")
+  }, "variables\\: 'colour' have non standard format") # nolint
   expect_error({
     ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  }, "variables\\: 'colour' have non standard format")
+  }, "variables\\: 'colour' have non standard format") # nolint
 })
 
 test_that("blank types", {
@@ -232,21 +232,21 @@ test_that("blank types", {
     for (j in columnsUsed) {
       if (i < j) {
         # upper
-        expect_true(is_blank_plot(pmUpper[i,j]))
-        expect_false(is_blank_plot(pmDiag[i,j]))
-        expect_false(is_blank_plot(pmLower[i,j]))
+        expect_true(is_blank_plot(pmUpper[i, j]))
+        expect_false(is_blank_plot(pmDiag[i, j]))
+        expect_false(is_blank_plot(pmLower[i, j]))
 
       } else if ( i > j) {
         # lower
-        expect_false(is_blank_plot(pmUpper[i,j]))
-        expect_false(is_blank_plot(pmDiag[i,j]))
-        expect_true(is_blank_plot(pmLower[i,j]))
+        expect_false(is_blank_plot(pmUpper[i, j]))
+        expect_false(is_blank_plot(pmDiag[i, j]))
+        expect_true(is_blank_plot(pmLower[i, j]))
 
       } else {
         # diag
-        expect_false(is_blank_plot(pmUpper[i,j]))
-        expect_true(is_blank_plot(pmDiag[i,j]))
-        expect_false(is_blank_plot(pmLower[i,j]))
+        expect_false(is_blank_plot(pmUpper[i, j]))
+        expect_true(is_blank_plot(pmDiag[i, j]))
+        expect_false(is_blank_plot(pmLower[i, j]))
 
       }
     }
@@ -257,7 +257,7 @@ test_that("blank types", {
   pmDuo <- ggduo(tips, columnsUsedX, columnsUsedY, types = "blank")
   for (i in columnsUsedX) {
     for (j in columnsUsedY) {
-      expect_true(is_blank_plot(pmDuo[i,j]))
+      expect_true(is_blank_plot(pmDuo[i, j]))
     }
   }
 })
@@ -272,8 +272,8 @@ test_that("axisLabels", {
       expect_false(is.null(pm$yAxisLabels))
     } else if (axisLabel == "internal") {
       for (i in 1:(pm$ncol)) {
-        expect_equivalent(pm[i,i]$subType, "internal")
-        expect_equivalent(pm[i,i]$type, "label")
+        expect_equivalent(pm[i, i]$subType, "internal")
+        expect_equivalent(pm[i, i]$type, "label")
       }
       expect_false(pm$showXAxisPlotLabels)
       expect_false(pm$showYAxisPlotLabels)
@@ -290,7 +290,7 @@ test_that("axisLabels", {
 
   fn <- function(axisLabels) {
     pm <- ggpairs(
-      iris, c(3,4,5,1),
+      iris, c(3, 4, 5, 1),
       upper = "blank",
       lower = facethistBindwidth1,
       axisLabels = axisLabels,
@@ -305,7 +305,7 @@ test_that("axisLabels", {
 
   fn <- function(axisLabels) {
     a <- ggduo(
-      iris, c(4,5), c(5,1),
+      iris, c(4, 5), c(5, 1),
       types = facethistBindwidth1,
       axisLabels = axisLabels,
       title = str_c("axisLabels = ", axisLabels)
@@ -388,10 +388,8 @@ test_that("mapping", {
   expect_equal(pm$xAxisLabels, names(tips)[1:3])
 
   expect_error({
-      ggpairs(tips, columns = 1:3, mapping = 1:3)
-    },
-    "'mapping' should not be numeric"
-  )
+    ggpairs(tips, columns = 1:3, mapping = 1:3)
+  }, "'mapping' should not be numeric") # nolint
 })
 
 test_that("user functions", {

@@ -108,15 +108,15 @@ test_that("str.ggmatrix", {
 
 test_that("blank", {
   pm <- ggpairs(tips, 1:2)
-  pm[1,2] <- "blank"
+  pm[1, 2] <- "blank"
   expect_print(pm)
 
-  pm[2,1] <- NULL
+  pm[2, 1] <- NULL
   expect_print(pm)
 
   expect_equal(length(pm$plots), 4)
 
   expect_error({
-    pm[2,2] <- "not blank"
-  }, "character values \\(besides 'blank'\\)")
+    pm[2, 2] <- "not blank"
+  }, "character values \\(besides 'blank'\\)") # nolint
 })

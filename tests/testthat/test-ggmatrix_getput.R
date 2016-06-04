@@ -25,10 +25,10 @@ test_that("get", {
   expect_equal(p$labels$y, "tip")
 
   # test odd input and retrieve it
-  a[2,1] <- 1:4
+  a[2, 1] <- 1:4
   expect_error({
-    a[2,1]
-  }, "unknown plot object type")
+    a[2, 1]
+  }, "unknown plot object type") # nolint
 
 })
 

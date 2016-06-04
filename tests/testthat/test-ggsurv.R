@@ -131,7 +131,7 @@ test_that("multiple colors", {
   expect_print(ggsurv(sf.kid, plot.cens = TRUE))
   expect_warning({
     ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue"))
-  }, "Color scales for censored points")
+  }, "Color scales for censored points") # nolint
 
   expect_silent({
     print(
@@ -148,15 +148,15 @@ test_that("multiple colors", {
     ggsurv(
       sf.kid, plot.cens = TRUE,
       cens.col = c("red", "blue", "orange", "green"),
-      cens.shape = c(1,2)
+      cens.shape = c(1, 2)
     )
-  }, "The length of the censored shapes")
+  }, "The length of the censored shapes") # nolint
   expect_silent({
     print(
       ggsurv(
         sf.kid, plot.cens = TRUE,
         cens.col = c("red", "blue", "orange", "green"),
-        cens.shape = c(1,2,3,4)
+        cens.shape = c(1, 2, 3, 4)
       )
     )
   })
