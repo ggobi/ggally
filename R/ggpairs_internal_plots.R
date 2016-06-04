@@ -89,6 +89,7 @@ wrap_fn_with_param_arg <- function(
     if (missing(funcArgName)) {
       funcArgName <- str_c("ggally_", funcVal)
     }
+
     tryCatch({
         funcVal <- get(
           str_c("ggally_", funcVal),
@@ -156,6 +157,8 @@ wrap  <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {
       funcArgName <- fnName
+    } else if (is.character(funcVal)) {
+      funcArgName <- str_c("ggally_", funcVal)
     }
   }
 
