@@ -496,6 +496,7 @@ ggpairs <- function(
     }
 
     plot_fn <- ggmatrix_plot_list(plotType)
+
     p <- do.call(plot_fn, args)
 
     return(p)
