@@ -9,6 +9,10 @@ ggsurv
 
 * changed default of plotting multiple censored data color to match the survival line
 
+ggnetworkmap
+
+* fixed bug where checking for the package 'intergraph' couldn't be reached
+
 GGally 1.1.0
 -----------------
 
