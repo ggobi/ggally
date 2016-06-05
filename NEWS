@@ -13,6 +13,10 @@ ggnetworkmap
 
 * fixed bug where checking for the package 'intergraph' couldn't be reached
 
+package testing
+
+* added many more tests!
+
 GGally 1.1.0
 -----------------
 
