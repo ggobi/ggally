@@ -238,10 +238,9 @@ test_that("stops", {
 
   expect_diag_warn <- function(key, value) {
     warnString <- str_c("Changing diag\\$", key, " from '", value, "' to '", value, "Diag'")
-    diagObj = list()
+    diagObj <- list()
     diagObj[[key]] <- value
-    expect_warning(
-      {
+    expect_warning({
         pm <- ggpairs(tips, diag = diagObj)
       },
       warnString
@@ -296,9 +295,9 @@ test_that("blank types", {
   columnsUsedX <- 1:3
   columnsUsedY <- 4:5
   pmDuo <- ggduo(tips, columnsUsedX, columnsUsedY, types = "blank")
-  for (i in columnsUsedX) {
-    for (j in columnsUsedY) {
-      expect_true(is_blank_plot(pmDuo[i, j]))
+  for (i in seq_along(columnsUsedX)) {
+    for (j in seq_along(columnsUsedY)) {
+      expect_true(is_blank_plot(pmDuo[j, i]))
     }
   }
 })

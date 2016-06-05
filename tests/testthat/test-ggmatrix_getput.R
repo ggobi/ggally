@@ -21,7 +21,7 @@ test_that("stops", {
   for (i in 1:4) {
     for (j in 1:3) {
       expect_silent({
-        p <- pm[i,j]
+        p <- pm[i, j]
       })
     }
   }
