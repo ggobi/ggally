@@ -640,7 +640,7 @@ check_and_set_ggpairs_defaults <- function(
 
   if (! is.null(obj$aes_string)) {
     stop(str_c(
-      "'aes_string' is a deprecated element for the section ", name, ".",
+      "'aes_string' is a deprecated element for the section ", name, ".\n",
       "Please use 'mapping' instead. "
     ))
   }
