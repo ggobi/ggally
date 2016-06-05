@@ -10,11 +10,11 @@ getPlot(x, i, j)
 \method{[}{ggmatrix}(pm, i, j, ...)
 }
 \arguments{
-\item{x}{ggpair object to select from}
-
 \item{i}{row from the top}
 
 \item{j}{column from the left}
+
+\item{pm}{ggpair object to select from}
 
 \item{...}{ignored}
 }
