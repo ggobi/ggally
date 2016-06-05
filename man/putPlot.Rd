@@ -5,12 +5,12 @@
 \alias{putPlot}
 \title{Put Plot}
 \usage{
-putPlot(x, value, i, j)
+putPlot(pm, value, i, j)
 
 \method{[}{ggmatrix}(pm, i, j, ...) <- value
 }
 \arguments{
-\item{x}{ggally object to be altered}
+\item{pm}{ggally object to be altered}
 
 \item{value}{ggplot object to be placed}
 

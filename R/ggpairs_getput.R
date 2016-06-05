@@ -2,7 +2,7 @@
 #'
 #' Function to place your own plot in the layout.
 #'
-#' @param x ggally object to be altered
+#' @param pm ggally object to be altered
 #' @param value ggplot object to be placed
 #' @param i row from the top
 #' @param j column from the left
@@ -28,21 +28,21 @@
 #' custom_car[3,1] <- "blank" # the same as storing null
 #' custom_car[3,2] <- NULL
 #' custom_car
-putPlot <- function(x, value, i, j){
-  pos <- get_pos(x, i, j)
+putPlot <- function(pm, value, i, j){
+  pos <- get_pos(pm, i, j)
   if (is.null(value)) {
-    x$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
+    pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
   } else if (mode(value) == "character") {
     if (value == "blank") {
-      x$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
+      pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
     } else {
       stop("character values (besides 'blank') are not allowed to be stored as plot values.")
     }
   } else {
-    x$plots[[pos]] <- value
+    pm$plots[[pos]] <- value
   }
 
-  x
+  pm
 }
 
 #' getPlot
