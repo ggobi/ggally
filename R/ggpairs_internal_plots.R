@@ -196,24 +196,6 @@ as.character.ggmatrix_fn_with_params <- function(x, ...) {
 
 
 
-
-
-
-
-
-
-
-ggpairs_ggplot2_internal_plot <- function(p) {
-  class(p) <- unique(c("ggmatrix_ggplot2", class(p)))
-  p
-}
-as.character.ggmatrix_ggplot2 <- function(x, ...) {
-  "PM; ggplot2 object"
-}
-
-
-
-
 make_ggmatrix_plot_obj <- function(fn, mapping = ggplot2::aes(), dataPos = 1, gg = NULL) {
   nonCallVals <- which(lapply(mapping, mode) == "call")
   if (length(nonCallVals) > 0) {
@@ -288,9 +270,7 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
       "'str(", objName, ", raw = TRUE)'\n\n"
     ))
     obj$plots <- lapply(obj$plots, function(plotObj) {
-      if (is_blank_plot(plotObj)) {
-        blank_plot_string()
-      } else if (ggplot2::is.ggplot(plotObj)) {
+      if (ggplot2::is.ggplot(plotObj)) {
         str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
       } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
         as.character(plotObj)
