@@ -2,7 +2,7 @@
 
 context("gglegend")
 
-expect_print <- function(p) {
+expect_print <- function(p, ...) {
   testthat::expect_silent(print(p))
 }
 
@@ -89,4 +89,14 @@ test_that("legend", {
     print(pm)
   })
 
+})
+
+test_that("plotNew", {
+  points_legend <- gglegend(ggally_points)
+  expect_print(points_legend(
+    iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species)
+  ))
+  expect_print(points_legend(
+    iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species)
+), plotNew = TRUE)
 })
