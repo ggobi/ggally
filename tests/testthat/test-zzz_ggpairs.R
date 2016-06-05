@@ -220,6 +220,47 @@ test_that("stops", {
   expect_error({
     ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
   }, "variables\\: 'colour' have non standard format") # nolint
+
+  errorString <- "'aes_string' is a deprecated element"
+  expect_error({
+    ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = day)))
+  }, errorString) # nolint
+  expect_error({
+    ggpairs(tips, lower = list(aes_string = ggplot2::aes(color = day)))
+  }, errorString) # nolint
+  expect_error({
+    ggpairs(tips, diag = list(aes_string = ggplot2::aes(color = day)))
+  }, errorString) # nolint
+  expect_error({
+    ggduo(tips, types = list(aes_string = ggplot2::aes(color = day)))
+  }, errorString) # nolint
+
+
+  expect_diag_warn <- function(key, value) {
+    warnString <- str_c("Changing diag\\$", key, " from '", value, "' to '", value, "Diag'")
+    diagObj = list()
+    diagObj[[key]] <- value
+    expect_warning(
+      {
+        pm <- ggpairs(tips, diag = diagObj)
+      },
+      warnString
+    )
+  }
+  # diag
+  #   continuous
+  #     densityDiag
+  #     barDiag
+  #     blankDiag
+  #   discrete
+  #     barDiag
+  #     blankDiag
+  expect_diag_warn("continuous", "density")
+  expect_diag_warn("continuous", "bar")
+  expect_diag_warn("continuous", "blank")
+  expect_diag_warn("discrete", "bar")
+  expect_diag_warn("discrete", "blank")
+
 })
 
 test_that("blank types", {

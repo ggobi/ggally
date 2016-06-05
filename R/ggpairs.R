@@ -652,7 +652,7 @@ check_and_set_ggpairs_defaults <- function(
         if (! str_detect(val, "Diag$")) {
           newVal <- paste(val, "Diag", sep = "")
           warning(paste(
-            "changing diag$", key, " from '", val, "' to '", newVal, "'",
+            "Changing diag$", key, " from '", val, "' to '", newVal, "'",
             sep = ""
           ))
           obj[[key]] <- newVal
