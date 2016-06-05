@@ -114,38 +114,45 @@ get_pos <- function(x, i, j) {
 }
 
 
-check_i_j <- function(i, j) {
+check_i_j <- function(pm, i, j) {
   if ( (length(i) > 1) || (mode(i) != "numeric")) {
     stop("'i' may only be a single numeric value")
   }
   if ( (length(j) > 1) || (mode(j) != "numeric")) {
     stop("'j' may only be a single numeric value")
   }
-  NULL
+
+  if (i > pm$nrow || i < 1) {
+    stop("'i' may only be in the range from 1:", pm$nrow)
+  }
+  if (j > pm$ncol || j < 1) {
+    stop("'j' may only be in the range from 1:", pm$ncol)
+  }
+
+  invisible()
 }
 
 #' @rdname getPlot
-#' @usage \method{[}{ggmatrix}(x, i, j, ...)
+#' @usage \method{[}{ggmatrix}(pm, i, j, ...)
 #' @param ... ignored
 #' @export
-`[.ggmatrix` <- function(x, i, j, ...) {
+`[.ggmatrix` <- function(pm, i, j, ...) {
   # print(list(x = i, y = j))
-  check_i_j(i, j)
+  check_i_j(pm, i, j)
 
-  getPlot(x, i, j)
+  getPlot(pm, i, j)
 }
 
 #' @rdname putPlot
-#' @usage \method{[}{ggmatrix}(x, i, j, ...) <- value
+#' @usage \method{[}{ggmatrix}(pm, i, j, ...) <- value
 #' @param ... ignored
 #' @export
-`[<-.ggmatrix` <- function(x, i, j, ..., value) {
+`[<-.ggmatrix` <- function(pm, i, j, ..., value) {
   # x = matrix
   # i = first subset
   # j = second subset
   # y = value
-  check_i_j(i, j)
+  check_i_j(pm, i, j)
 
-  xNew <- putPlot(x, value, i, j)
-  xNew
+  putPlot(pm, value, i, j)
 }

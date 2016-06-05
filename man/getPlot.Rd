@@ -7,7 +7,7 @@
 \usage{
 getPlot(x, i, j)
 
-\method{[}{ggmatrix}(x, i, j, ...)
+\method{[}{ggmatrix}(pm, i, j, ...)
 }
 \arguments{
 \item{x}{ggpair object to select from}

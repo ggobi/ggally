@@ -7,7 +7,7 @@
 \usage{
 putPlot(x, value, i, j)
 
-\method{[}{ggmatrix}(x, i, j, ...) <- value
+\method{[}{ggmatrix}(pm, i, j, ...) <- value
 }
 \arguments{
 \item{x}{ggally object to be altered}
