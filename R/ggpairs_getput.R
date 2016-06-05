@@ -60,17 +60,17 @@ putPlot <- function(x, value, i, j){
 #'  data(tips, package = "reshape")
 #'  plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
 #'  plotMatrix2[1, 2]
-getPlot <- function(x, i, j){
+getPlot <- function(pm, i, j){
   if (FALSE) {
     cat("i: ", i, " j: ", j, "\n")
   }
 
-  pos <- get_pos(x, i, j)
+  pos <- get_pos(pm, i, j)
 
-  if (pos > length(x$plots)) {
+  if (pos > length(pm$plots)) {
     plotObj <- NULL
   } else {
-    plotObj <- x$plots[[pos]]
+    plotObj <- pm$plots[[pos]]
   }
 
   if (is.null(plotObj)) {
@@ -81,7 +81,7 @@ getPlot <- function(x, i, j){
 
     } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
       fn <- plotObj$fn
-      p <- fn(x$data, plotObj$mapping)
+      p <- fn(pm$data, plotObj$mapping)
 
     } else if (inherits(plotObj, "legend_guide_box")) {
       p <- plotObj
@@ -94,9 +94,9 @@ getPlot <- function(x, i, j){
       stop(str_c("unknown plot object type.\n", firstNote, strObj))
     }
 
-    if (!is.null(x$gg)) {
+    if (!is.null(pm$gg)) {
       # adding custom gg
-      p <- p + x$gg
+      p <- p + pm$gg
     }
   }
 
@@ -104,11 +104,11 @@ getPlot <- function(x, i, j){
 }
 
 
-get_pos <- function(x, i, j) {
-  if (!identical(x$byrow, TRUE)) {
-    pos <- i + (x$nrow * (j - 1))
+get_pos <- function(pm, i, j) {
+  if (!identical(pm$byrow, TRUE)) {
+    pos <- i + (pm$nrow * (j - 1))
   } else {
-    pos <- j + (x$ncol * (i - 1))
+    pos <- j + (pm$ncol * (i - 1))
   }
   pos
 }
