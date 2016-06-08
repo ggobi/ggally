@@ -203,6 +203,32 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' # pm
 #' # reduce the amount of space needed for the left axis
 #' print(pm, leftWidthProportion = 0.15)
+#
+# ggduo(
+#   australia_PISA2012,
+#   c("gender", "age", "homework", "possessions"),
+#   c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#   types = list(
+#     continuous = "points",
+#     combo = "box",
+#     discrete = "ratio"
+#   )
+# )
+#
+# ggduo(
+#   australia_PISA2012,
+#   c("gender", "age", "homework", "possessions"),
+#   c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#   mapping = ggplot2::aes(color = gender),
+#   types = list(
+#     continuous = wrap("smooth", alpha = 0.25, method = "loess"),
+#     combo = "box",
+#     discrete = "ratio"
+#   )
+# )
+#
+# ggduo(australia_PISA2012, c("gender", "age", "homework", "possessions"), c("PV1MATH", "PV1READ", "PV1SCIE"), types = list(continuous = "points", combo = "box", discrete = "ratio"))
+
 ggduo <- function(
   data,
   mapping = NULL,
