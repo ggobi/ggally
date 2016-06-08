@@ -123,8 +123,6 @@ test_that("CI", {
   a <- ggsurv(sf.kid, CI = FALSE)
   b <- ggsurv(sf.kid, CI = TRUE)
   expect_equivalent(length(b$layers) - length(a$layers), 2)
-
-
 })
 
 test_that("multiple colors", {
@@ -163,6 +161,17 @@ test_that("multiple colors", {
 
 })
 
+test_that('cens.size',{
+  a <- ggsurv(sf.lung)
+  b <- ggsurv(sf.lung, cens.size = 5)
+  expect_true(a$layers[[4]]$aes_params$size == 2)
+  expect_true(b$layers[[4]]$aes_params$size != 2)
+
+  a <- ggsurv(sf.kid)
+  b <- ggsurv(sf.lung, cens.size = 5)
+  expect_true(a$layers[[2]]$aes_params$size == 2)
+  expect_true(b$layers[[2]]$aes_params$size != 2)
+})
 
 
 
