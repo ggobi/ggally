@@ -318,7 +318,7 @@ print.ggmatrix <- function(
           if (is.null(x$showStrips) || identical(x$showStrips, TRUE)) {
             if ("strip-top" %in% pGtable$layout$name) {
               hasTopStrips <- TRUE
-              stripHeight <- gtable_filter(pGtable, "strip-top")$heights[1]
+              stripHeight <- gtable_filter(pGtable, "strip-top")$heights[[1]]
               stripViewport <- viewport(layout = grid.layout(
                 nrow = 2,
                 ncol = 1,
@@ -371,11 +371,11 @@ print.ggmatrix <- function(
 
         hasRightStrips <- FALSE
         if (columnPos == (x$ncol) || identical(x$showStrips, TRUE)) {
-          # worry about top strips
+          # worry about right strips
           if (is.null(x$showStrips) || identical(x$showStrips, TRUE)) {
             if ("strip-right" %in% pGtable$layout$name) {
               hasRightStrips <- TRUE
-              stripWidth <- gtable_filter(pGtable, "strip-right")$widths[1]
+              stripWidth <- gtable_filter(pGtable, "strip-right")$widths[[1]]
               stripViewport <- viewport(layout = grid.layout(
                 nrow = 1,
                 ncol = 2,
