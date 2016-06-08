@@ -1,17 +1,25 @@
 GGally 1.1.0.9999
 -----------------
 
+install
+
+* relaxed install requirements on grid (9a41b5c)
+
 ggduo - New!
 
-* plot two grouped data in a plot matrix (#)
+* plot two grouped data in a plot matrix (#173)
 
-ggsurv
+ggmatrix.print
 
-* changed default of plotting multiple censored data color to match the survival line
+* fixed bug strips where causing spacing issue when printing axis labels (174630d)
 
 ggnetworkmap
 
 * fixed bug where checking for the package 'intergraph' couldn't be reached
+
+ggsurv
+
+* changed default of plotting multiple censored data color to match the survival line
 
 package testing
 
