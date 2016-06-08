@@ -6,7 +6,7 @@
 \usage{
 ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
   cens.col = "gg.def", lty.est = 1, lty.ci = 2, size.est = 0.5,
-  size.ci = size.est, size.cens = 2, cens.shape = 3, back.white = FALSE,
+  size.ci = size.est, cens.size = 2, cens.shape = 3, back.white = FALSE,
   xlab = "Time", ylab = "Survival", main = "")
 }
 \arguments{
@@ -33,7 +33,7 @@ either 1 or equal to the number of strata.}
 
 \item{size.ci}{line width of the 95\% CI}
 
-\item{size.cens}{point size of the censoring points}
+\item{cens.size}{point size of the censoring points}
 
 \item{cens.shape}{shape of the points that mark censored observations.}
 
