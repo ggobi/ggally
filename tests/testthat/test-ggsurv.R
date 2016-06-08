@@ -122,7 +122,17 @@ test_that("CI", {
 
 })
 
-
+test_that('size.cens',{
+  a <- ggsurv(sf.lung)
+  b <- ggsurv(sf.lung, size.cens = 5)
+  expect_true(a$layers[[4]]$geom_params$size == 2)
+  expect_true(b$layers[[4]]$geom_params$size != 2)
+  
+  a <- ggsurv(sf.kid)
+  b <- ggsurv(sf.lung, size.cens = 5)
+  expect_true(a$layers[[2]]$geom_params$size == 2)
+  expect_true(b$layers[[2]]$geom_params$size != 2)
+})
 
 
 
