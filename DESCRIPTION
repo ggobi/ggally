@@ -53,5 +53,5 @@ Suggests:
     roxygen2 (>= 5.0.1),
     testthat (>= 1.0.2)
 Roxygen: list(wrap = FALSE)
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 5.0.1
 VignetteBuilder: knitr
