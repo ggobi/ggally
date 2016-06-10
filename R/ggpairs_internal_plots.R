@@ -100,7 +100,7 @@ wrap_fn_with_param_arg <- function(
       error = function(e) {
         stop(str_c(
           "The following ggpair plot functions are readily available: \n",
-          "\tcontinuous: c('points', 'smooth', 'density', 'cor', 'blank')\n",
+          "\tcontinuous: c('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank')\n",
           "\tcombo: c('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank')\n",
           "\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
           "\tna: c('na', 'blank')\n",

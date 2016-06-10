@@ -53,6 +53,7 @@ ggally_points <- function(data, mapping, ...){
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @keywords hplot
+#' @rdname ggally_smooth
 #' @examples
 #'  data(tips, package = "reshape")
 #'  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
@@ -73,6 +74,12 @@ ggally_smooth <- function(data, mapping, ..., method = "lm"){
   p$type <- "continuous"
   p$subType <- "smooth"
   p
+}
+
+#' @export
+#' @rdname ggally_smooth
+ggally_smooth_loess <- function(data, mapping, ..., method = "loess") {
+  ggally_smooth(data = data, mapping = mapping, ..., method = method)
 }
 
 #' Plots the Scatter Density Plot
