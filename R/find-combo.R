@@ -53,8 +53,14 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
     yVar = yVar,
     posX = posX,
     posY = posY,
+    isVertical = NA,
     stringsAsFactors = FALSE
   )
+
+  isCombo <- dataInfo$plotType == "combo"
+  if (any(isCombo)) {
+    dataInfo$isVertical[isCombo] <- unlist(plotTypesX[xVar[isCombo]]) == "discrete"
+  }
 
   dataInfo
 }
