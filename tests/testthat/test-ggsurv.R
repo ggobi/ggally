@@ -161,7 +161,7 @@ test_that("multiple colors", {
 
 })
 
-test_that('cens.size',{
+test_that("cens.size", {
   a <- ggsurv(sf.lung)
   b <- ggsurv(sf.lung, cens.size = 5)
   expect_true(a$layers[[4]]$aes_params$size == 2)
