@@ -156,7 +156,8 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
 #'\describe{
 #'  \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
-#'  \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+#'  \item{comboHorizontal}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+#'  \item{comboVertical}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
 #'  \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
 #'  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 #'}
@@ -193,8 +194,7 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #'   mapping = ggplot2::aes(color = smoker),
 #'   title = "Tip and Total Bill vs Tip, Day, and Time by Smoker",
 #'   columnLabelsX = c("Total Bill", "Tip"),
-#'   columnLabelsY = c("Tip", "Day", "Time"),
-#'   types = list(continuous = "smooth")
+#'   columnLabelsY = c("Tip", "Day", "Time")
 #' )
 #' # pm
 #'
@@ -229,6 +229,7 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 # )
 #
 # ggduo(australia_PISA2012, c("gender", "age", "homework", "possessions"), c("PV1MATH", "PV1READ", "PV1SCIE"), types = list(continuous = "points", combo = "box", discrete = "ratio"))
+# ggduo(australia_PISA2012, c("gender", "age", "homework", "possessions"), c("PV1MATH", "PV1READ", "PV1SCIE"), types = list(continuous = wrap("smooth", alpha = 0.25, method = "loess"), combo = "box", discrete = "ratio"), mapping = ggplot2::aes(color = gender))
 
 ggduo <- function(
   data,
@@ -236,7 +237,12 @@ ggduo <- function(
   columnsX = 1:ncol(data),
   columnsY = 1:ncol(data),
   title = NULL,
-  types = list(continuous = "points", combo = "facethist", discrete = "ratio"),
+  types = list(
+    continuous = "smooth_loess",
+    comboVertical = "box",
+    comboHorizontal = "facethist",
+    discrete = "ratio"
+  ),
   axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
@@ -263,14 +269,31 @@ ggduo <- function(
 
   types <- check_and_set_ggpairs_defaults(
     "types", types,
-    continuous = "points", combo = "facethist", discrete = "ratio", na = "na"
+    continuous = "smooth_loess", discrete = "ratio", na = "na",
+    isDuo = TRUE
   )
+
+  if (!is.null(types$combo)) {
+    warning(str_c(
+      "\nSetting:\n",
+      "\ttypes$comboHorizontal <- types$combo\n",
+      "\ttypes$comboVertical <- types$combo"
+    ))
+    types$comboHorizontal <- types$combo
+    types$comboVertical <- types$combo
+    types$combo <- NULL
+  }
+  if (is.null(types$comboVertical)) {
+    types$comboVertical <- "box"
+  }
+  if (is.null(types$comboHorizontal)) {
+    types$comboHorizontal <- "facethist"
+  }
 
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "none"))
 
   # get plot type information
   dataTypes <- plot_types(data, columnsX, columnsY, allowDiag = FALSE)
-  # print(dataTypes)
 
   ggduoPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
 
@@ -289,7 +312,16 @@ ggduo <- function(
       types$mapping
     )
 
-    args <- list(plotType = plotType, types = types, sectionAes = sectionAes)
+    if (plotType == "combo") {
+      if (dataTypes[i, "isVertical"]) {
+        plotTypesList <- list(combo = types$comboVertical)
+      } else {
+        plotTypesList <- list(combo = types$comboHorizontal)
+      }
+    } else {
+      plotTypesList <- types
+    }
+    args <- list(plotType = plotType, types = plotTypesList, sectionAes = sectionAes)
     plot_fn <- ggmatrix_plot_list(plotType)
 
     plotObj <- do.call(plot_fn, args)
@@ -342,7 +374,7 @@ ggduo <- function(
 #' \code{upper} and \code{lower} are lists that may contain the variables
 #' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
 #'\describe{
-#'  \item{continuous}{exactly one of ('points', 'smooth', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
+#'  \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
 #'  \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
 #'  \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
 #'  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
@@ -616,7 +648,12 @@ mapping_color_to_fill <- function(current) {
 }
 
 
-set_to_blank_list_if_blank <- function(val, combo = TRUE, blank = "blank") {
+set_to_blank_list_if_blank <- function(
+  val,
+  combo = TRUE,
+  blank = "blank",
+  isDuo = FALSE
+) {
   isBlank <- is.null(val)
   if (!isBlank) {
     isBlank <- (!is.list(val) && (val == blank || val == "blank"))
@@ -626,6 +663,10 @@ set_to_blank_list_if_blank <- function(val, combo = TRUE, blank = "blank") {
     val$continuous <- blank
     if (combo) {
       val$combo <- blank
+    }
+    if (isDuo) {
+      val$comboVertical <- blank
+      val$comboHorizontal <- blank
     }
     val$discrete <- blank
     val$na <- blank
@@ -640,12 +681,18 @@ check_and_set_ggpairs_defaults <- function(
   combo = NULL,
   discrete = NULL,
   na = NULL,
-  isDiag = FALSE
+  isDiag = FALSE,
+  isDuo = FALSE
 ) {
 
   blankVal <- ifelse(isDiag, "blankDiag", "blank")
 
-  obj <- set_to_blank_list_if_blank(obj, combo = ! isDiag, blank = blankVal)
+  obj <- set_to_blank_list_if_blank(
+    obj,
+    combo = ! isDiag & ! isDuo,
+    blank = blankVal,
+    isDuo = isDuo
+  )
 
   if (!is.list(obj)) {
     stop(str_c("'", name, "' is not a list"))

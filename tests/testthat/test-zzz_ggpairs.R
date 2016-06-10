@@ -7,6 +7,10 @@ expect_print <- function(p) {
 }
 
 facethistBindwidth1 <- list(combo = wrap("facethist", binwidth = 1))
+facethistBindwidth1Duo <- list(
+  comboHorizontal = wrap("facethist", binwidth = 1),
+  comboVertical = wrap("facethist", binwidth = 1)
+)
 
 test_that("structure", {
 
@@ -125,12 +129,16 @@ test_that("stops", {
     pm <- ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1)
   }, "'axisLabels' not in ") # nolint
   expect_warning({
-    pm <- ggduo(tips, axisLabels = "not_a_chosen", types = facethistBindwidth1)
+    pm <- ggduo(tips, axisLabels = "not_a_chosen", types = facethistBindwidth1Duo)
   }, "'axisLabels' not in ") # nolint
 
   expect_warning({
     pm <- ggpairs(tips, color = "sex")
   }, "Extra arguments: ") # nolint
+
+  expect_warning({
+    pm <- ggduo(tips, 2:3, 2:3, types = list(combo = "facetdensity"))
+  }, "Setting:\n\ttypes") # nolint
 
   expect_error({
     ggpairs(tips, columns = c("tip", "day", "not in tips"))
@@ -196,7 +204,7 @@ test_that("stops", {
     pm <- ggpairs(dt, lower = facethistBindwidth1)
   }, "Data column name is numeric") # nolint
   expect_warning({
-    pm <- ggduo(dt, types = facethistBindwidth1)
+    pm <- ggduo(dt, types = facethistBindwidth1Duo)
   }, "Data column name is numeric") # nolint
 
   expect_error({
@@ -346,7 +354,7 @@ test_that("axisLabels", {
   fn <- function(axisLabels) {
     a <- ggduo(
       iris, c(4, 5), c(5, 1),
-      types = facethistBindwidth1,
+      types = facethistBindwidth1Duo,
       axisLabels = axisLabels,
       title = str_c("axisLabels = ", axisLabels)
     )
@@ -509,6 +517,7 @@ test_that("subtypes", {
 # continuous
 #    points
 #    smooth
+#    smooth_loess
 #    density
 #    cor
 #   blank
@@ -554,12 +563,15 @@ test_that("subtypes", {
   }
 
   ggduo_fn1 <- function(title, types, diag, ...) {
+    types$comboHorizontal <- types$combo
+    types$comboVertical <- types$combo
+    types$combo <- NULL
     ggduo(
       tips, 1:3, 1:4,
       axisLabels = "show",
       title = paste(
         "types = c(cont = ", gn(types$continuous),
-          ", combo = ", gn(types$combo),
+          ", combo = ", gn(types$comboHorizontal),
           ", discrete = ", gn(types$discrete),
         ")", sep = ""),
       types = types,
@@ -572,7 +584,7 @@ test_that("subtypes", {
   }
 
   # re ordered the subs so that density can have no binwidth param
-  conSubs <- list("density", "points", "smooth", "cor", "blank")
+  conSubs <- list("density", "points", "smooth", "smooth_loess", "cor", "blank")
   comSubs <- list(
     "box", "dot", wrap("facethist", binwidth = 1),
     "facetdensity", wrap("denstrip", binwidth = 1), "blank"

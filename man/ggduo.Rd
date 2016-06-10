@@ -39,7 +39,8 @@ Make a matrix of plots with a given data set with two different column sets
 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
 \describe{
  \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
- \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+ \item{comboHorizontal}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+ \item{comboVertical}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
  \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 }
@@ -65,8 +66,7 @@ pm <- ggduo(
   mapping = ggplot2::aes(color = smoker),
   title = "Tip and Total Bill vs Tip, Day, and Time by Smoker",
   columnLabelsX = c("Total Bill", "Tip"),
-  columnLabelsY = c("Tip", "Day", "Time"),
-  types = list(continuous = "smooth")
+  columnLabelsY = c("Tip", "Day", "Time")
 )
 # pm
 
