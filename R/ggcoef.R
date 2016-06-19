@@ -49,7 +49,7 @@ ggcoef <- function(
     stop("x doesn't contain a column names 'estimate'.")
   if (exclude_intercept)
     x <- x[x$term != "(Intercept)", ]
-  p <- ggplot(x) + mapping
+  p <- ggplot(x, mapping = mapping)
   if (vline) {
     if (exponentiate) {
       if (vline_intercept == "auto")
