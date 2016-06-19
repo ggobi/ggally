@@ -9,6 +9,5 @@ vignettes/figure
 vignettes/*.html
 .Rproj.user
 .RData
-*.Rproj
 .lintr_cache
 revdep/checks\.rds
