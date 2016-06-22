@@ -1178,7 +1178,7 @@ ggally_facetbar <- function(data, mapping, ...){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used. Only x and y will used and both are required
-#' @param ... ignored
+#' @param ... passed to \code{\link[ggplot2]{geom_tile}(...)}
 #' @param floor don't display cells smaller than this value
 #' @param ceiling max value to scale frequencies.  If any frequency is larger than the ceiling, the fill color is displayed darker than other rectangles
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -1235,7 +1235,7 @@ ggally_ratio <- function(
         fill = "col"
       )
     ) +
-    geom_tile() +
+    geom_tile(...) +
     scale_fill_identity() +
     scale_x_continuous(
       name = xName,
