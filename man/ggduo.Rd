@@ -50,7 +50,12 @@ If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
 If a function is supplied as an option, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
- # plotting is reduced to the first couple of examples.
+ p_ <- function(pm) {
+   if (interactive()) {
+     print(pm)
+   }
+   invisible()
+ }
 
  data(baseball, package = "plyr")
 
@@ -80,11 +85,11 @@ If a function is supplied as an option, it should implement the function api of 
    c("batting_avg", "slug", "on_base"),
    mapping = ggplot2::aes(color = lg)
  )
- ## Prints, but
- ##   there is severe over plotting in the continuous plots
- ##   the labels could be better
- ##   want to add more hitting information
- # pm
+ # Prints, but
+ #   there is severe over plotting in the continuous plots
+ #   the labels could be better
+ #   want to add more hitting information
+ p_(pm)
 
 
  # Make a fake column that will be calculated when printing
@@ -165,7 +170,7 @@ If a function is supplied as an option, it should implement the function api of 
    showStrips = FALSE
  );
 
- pm
+ p_(pm)
 
 
 
@@ -185,8 +190,8 @@ psych_variables <- c("Control", "Concept", "Motivation")
 academic_variables <- c("Read", "Write", "Math", "Science", "Sex")
 
 ## Within correlation
-# ggpairs(mm, psych_variables)
-# ggpairs(mm, academic_variables)
+p_(ggpairs(mm, psych_variables))
+p_(ggpairs(mm, academic_variables))
 
 ## Between correlation
 loess_with_cor <- function(data, mapping, ..., method = "pearson") {
@@ -205,7 +210,8 @@ loess_with_cor <- function(data, mapping, ..., method = "pearson") {
       size = 5, fontface = "bold"
     )
 }
-ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
+pm <- ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
+p_(pm)
 
 }
 

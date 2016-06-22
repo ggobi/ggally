@@ -178,7 +178,12 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.
 #' @export
 #' @examples
-#'  # plotting is reduced to the first couple of examples.
+#'  p_ <- function(pm) {
+#'    if (interactive()) {
+#'      print(pm)
+#'    }
+#'    invisible()
+#'  }
 #'
 #'  data(baseball, package = "plyr")
 #'
@@ -208,11 +213,11 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #'    c("batting_avg", "slug", "on_base"),
 #'    mapping = ggplot2::aes(color = lg)
 #'  )
-#'  ## Prints, but
-#'  ##   there is severe over plotting in the continuous plots
-#'  ##   the labels could be better
-#'  ##   want to add more hitting information
-#'  # pm
+#'  # Prints, but
+#'  #   there is severe over plotting in the continuous plots
+#'  #   the labels could be better
+#'  #   want to add more hitting information
+#'  p_(pm)
 #'
 #'
 #'  # Make a fake column that will be calculated when printing
@@ -295,8 +300,8 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #'    showStrips = FALSE
 #'  );
 #'
-#'  pm
-#' 
+#'  p_(pm)
+#'
 #'
 #'
 #' # Example derived from http://www.ats.ucla.edu/stat/r/dae/canonical.htm
@@ -315,8 +320,8 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' academic_variables <- c("Read", "Write", "Math", "Science", "Sex")
 #'
 #' ## Within correlation
-#' # ggpairs(mm, psych_variables)
-#' # ggpairs(mm, academic_variables)
+#' p_(ggpairs(mm, psych_variables))
+#' p_(ggpairs(mm, academic_variables))
 #'
 #' ## Between correlation
 #' loess_with_cor <- function(data, mapping, ..., method = "pearson") {
@@ -335,7 +340,8 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #'       size = 5, fontface = "bold"
 #'     )
 #' }
-#' ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
+#' pm <- ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
+#' p_(pm)
 #'
 #
 #
