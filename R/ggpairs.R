@@ -626,6 +626,7 @@ add_and_overwrite_aes <- function(current, new) {
 #'
 #' @param current the current aesthetics
 #' @keywords internal
+#' @export
 mapping_color_to_fill <- function(current) {
   currentNames <- names(current)
   color <- c("color", "colour")
