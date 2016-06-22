@@ -320,8 +320,8 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' academic_variables <- c("Read", "Write", "Math", "Science", "Sex")
 #'
 #' ## Within correlation
-#' p_(ggpairs(mm, psych_variables))
-#' p_(ggpairs(mm, academic_variables))
+#' p_(ggpairs(mm, columns = psych_variables))
+#' p_(ggpairs(mm, columns = academic_variables))
 #'
 #' ## Between correlation
 #' loess_with_cor <- function(data, mapping, ..., method = "pearson") {
