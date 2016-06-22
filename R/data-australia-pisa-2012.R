@@ -46,8 +46,5 @@
 #' @name australia_PISA2012
 #' @usage data(australia_PISA2012)
 #' @format A data frame with 8247 rows and 32 variables
-#' @url http://www.oecd.org/pisa/pisaproducts/database-cbapisa2012.htm
-# @references
-# Lubischew, A. A. (1962), On the Use of Discriminant Functions in
-# Taxonomy, Biometrics 18:455-477.
+#' @source \url{http://www.oecd.org/pisa/pisaproducts/database-cbapisa2012.htm}
 NULL
