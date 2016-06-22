@@ -273,7 +273,7 @@ ggduo <- function(
     isDuo = TRUE
   )
 
-  if (!is.null(types$combo)) {
+  if (!is.null(types[["combo"]])) {
     warning(str_c(
       "\nSetting:\n",
       "\ttypes$comboHorizontal <- types$combo\n",
@@ -283,10 +283,10 @@ ggduo <- function(
     types$comboVertical <- types$combo
     types$combo <- NULL
   }
-  if (is.null(types$comboVertical)) {
+  if (is.null(types[["comboVertical"]])) {
     types$comboVertical <- "box"
   }
-  if (is.null(types$comboHorizontal)) {
+  if (is.null(types[["comboHorizontal"]])) {
     types$comboHorizontal <- "facethist"
   }
 
