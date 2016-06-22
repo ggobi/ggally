@@ -1,4 +1,4 @@
-GGally 1.1.0.9999
+GGally 1.2.0
 -----------------
 
 install
@@ -8,6 +8,7 @@ install
 ggduo - New!
 
 * plot two grouped data in a plot matrix (#173)
+* helpful for plotting two sets of columns, multivariate analysis, and canonical correlation analysis
 
 ggmatrix.print
 
