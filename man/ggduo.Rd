@@ -50,31 +50,162 @@ If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
 If a function is supplied as an option, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
-# plotting is reduced to the first couple of examples.
-# Feel free to print the ggpair objects created in the examples
+ # plotting is reduced to the first couple of examples.
 
-data(tips, package = "reshape")
-pm <- ggduo(tips, 1:2, c(2, 5, 6))
-pm
-# same example
-pm <- ggduo(tips, c("total_bill", "tip"), c("tip", "day", "time"))
-# pm
+ data(baseball, package = "plyr")
 
-# add color to smoker
-pm <- ggduo(
-  tips, 1:2, c(2, 5, 6),
-  mapping = ggplot2::aes(color = smoker),
-  title = "Tip and Total Bill vs Tip, Day, and Time by Smoker",
-  columnLabelsX = c("Total Bill", "Tip"),
-  columnLabelsY = c("Tip", "Day", "Time")
-)
-# pm
+ # Add how many singles a player hit
+ # (must do in two steps as X1b is used in calculations)
+ dt <- transform(
+   subset(baseball, year >= 1990 & year <= 1995),
+   X1b = h - X2b - X3b - hr
+ )
+ # Add
+ #  the player's batting average,
+ #  the player's slugging percentage,
+ #  and the player's on base percentage
+ # Make factor a year, as each season is discrete
+ dt <- transform(
+   dt,
+   batting_avg = h / ab,
+   slug = (X1b + 2*X2b + 3*X3b + 4*hr) / ab,
+   on_base = (h + bb + hbp) / (ab + bb + hbp),
+   year = as.factor(year)
+ )
 
-# Add legend in top right corner plot area
-points_legend <- gglegend(ggally_smooth)
-pm[1,2] <- points_legend(tips, ggplot2::aes(tip, tip, color = smoker))
-# pm
-# reduce the amount of space needed for the left axis
-print(pm, leftWidthProportion = 0.15)
+
+ pm <- ggduo(
+   dt,
+   c("year", "g", "ab", "lg"),
+   c("batting_avg", "slug", "on_base"),
+   mapping = ggplot2::aes(color = lg)
+ )
+ ## Prints, but
+ ##   there is severe over plotting in the continuous plots
+ ##   the labels could be better
+ ##   want to add more hitting information
+ # pm
+
+
+ # Make a fake column that will be calculated when printing
+ dt$hit_type <- paste("hit_type:", seq_len(nrow(dt)))
+
+ display_hit_type <- function(plot_fn, is_ratio) {
+   function(data, mapping, ...) {
+     # change the color aesthetic to fill aesthetic
+     mapping <- mapping_color_to_fill(mapping)
+
+     # If the y varaible is not 'hit_type', continue like normal
+     if (deparse(mapping$y) != "hit_type") {
+       p <- plot_fn(data, mapping, ...)
+       return(p)
+     }
+
+     # Capture any extra column names needed
+     extra_columns <- unname(unlist(lapply(
+       mapping[! names(mapping) \%in\% c("x", "y")],
+       deparse
+     )))
+     extra_columns <- extra_columns[extra_columns \%in\% colnames(data)]
+
+     x_name <- deparse(mapping$x)
+
+     # get the types of hits
+     hit_types <- c("X1b", "X2b", "X3b", "hr")
+     hit_names <- c("single", "double", "tripple", "home\\nrun")
+     if (is_ratio) {
+       hit_types <- rev(hit_types)
+       hit_names <- rev(hit_names)
+     }
+
+     # retrieve the columns and rename them
+     data <- data[, c(x_name, hit_types, extra_columns)]
+     colnames(data) <- c(x_name, hit_names, extra_columns)
+
+     # melt the data to get the counts of the unique hit occurances
+     dt_melt <- reshape::melt.data.frame(data, id = c(x_name, extra_columns))
+     dt_value <- dt_melt$value
+
+     # Make a new data.frame with all the necessary variables repeated
+     dt_ratio <- data.frame(variable = logical(sum(dt_value)))
+     for (col in c(x_name, "variable", extra_columns)) {
+       dt_ratio[[col]] <- rep(dt_melt[[col]], dt_value)
+     }
+
+     # copy the old mapping and overwrite the x and y values
+     mapping_ratio <- mapping
+     mapping_ratio[c("x", "y")] <- ggplot2::aes_string(x = x_name, y = "variable")
+
+     # make ggplot2 object!
+     plot_fn(dt_ratio, mapping_ratio, ...)
+   }
+ }
+
+
+ display_hit_type_combo <- display_hit_type(ggally_facethist, FALSE)
+ display_hit_type_discrete <- display_hit_type(ggally_ratio, TRUE)
+
+ # remove the strips, as the same information is displayed in the bottom axis area
+ pm <- ggduo(
+   dt,
+   c("year", "g", "ab", "lg"),
+   c("batting_avg", "slug", "on_base", "hit_type"),
+   columnLabelsX = c("year", "player game count", "player at bat count", "league"),
+   columnLabelsY = c("batting avg", "slug \%", "on base \%", "hit type"),
+   title = "Baseball Hitting Stats from 1990-1995",
+   mapping = ggplot2::aes(color = lg),
+   types = list(
+     # change the shape and add some transparency to the points
+     continuous = wrap("smooth_loess", alpha = 0.50, shape = "+"),
+     # all combinations that are continuous horizontally should have a binwidth of 15
+     comboHorizontal = wrap(display_hit_type_combo, binwidth = 15),
+     # the ratio plot should have a black border around the rects of size 0.15
+     discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
+   ),
+   showStrips = FALSE
+ );
+
+ pm
+
+
+
+# Example derived from http://www.ats.ucla.edu/stat/r/dae/canonical.htm
+# "Example 1. A researcher has collected data on three psychological variables, four
+#  academic variables (standardized test scores) and gender for 600 college freshman.
+#  She is interested in how the set of psychological variables relates to the academic
+#  variables and gender. In particular, the researcher is interested in how many
+#  dimensions (canonical variables) are necessary to understand the association between
+#  the two sets of variables."
+mm <- read.csv("http://www.ats.ucla.edu/stat/data/mmreg.csv")
+colnames(mm) <- c("Control", "Concept", "Motivation", "Read", "Write", "Math",
+    "Science", "Sex")
+summary(mm)
+
+psych_variables <- c("Control", "Concept", "Motivation")
+academic_variables <- c("Read", "Write", "Math", "Science", "Sex")
+
+## Within correlation
+# ggpairs(mm, psych_variables)
+# ggpairs(mm, academic_variables)
+
+## Between correlation
+loess_with_cor <- function(data, mapping, ..., method = "pearson") {
+  x <- data[[deparse(mapping$x)]]
+  y <- data[[deparse(mapping$y)]]
+  cor <- cor(x, y, method = method)
+  ggally_smooth_loess(data, mapping, ...) +
+    ggplot2::geom_label(
+      data = data.frame(
+        x = min(x, na.rm = TRUE),
+        y = max(y, na.rm = TRUE),
+        lab = round(cor, digits = 3)
+      ),
+      mapping = ggplot2::aes(x = x, y = y, label = lab),
+      hjust = 0, vjust = 1,
+      size = 5, fontface = "bold"
+    )
+}
+ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
+
 }
 

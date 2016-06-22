@@ -12,7 +12,7 @@ ggally_ratio(data, mapping = do.call(ggplot2::aes_string,
 
 \item{mapping}{aesthetics being used. Only x and y will used and both are required}
 
-\item{...}{ignored}
+\item{...}{passed to \code{\link[ggplot2]{geom_tile}(...)}}
 
 \item{floor}{don't display cells smaller than this value}
 
