@@ -577,16 +577,20 @@ ggduo <- function(
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
 #' @examples
-#' # plotting is reduced to the first couple of examples.
-#' # Feel free to print the ggpair objects created in the examples
+#' p_ <- function(pm) {
+#'   if (interactive()) {
+#'     print(pm)
+#'   }
+#'   invisible()
+#' }
 #'
 #' data(tips, package = "reshape")
 #' pm <- ggpairs(tips[, 1:3])
-#' # pm
+#' p_(pm)
 #' pm <- ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"))
-#' # pm
+#' p_(pm)
 #' pm <- ggpairs(tips, upper = "blank")
-#' # pm
+#' p_(pm)
 #'
 #'
 #' # Custom Example
@@ -595,7 +599,7 @@ ggduo <- function(
 #'   upper = list(continuous = "density", combo = "box"),
 #'   lower = list(continuous = "points", combo = "dot")
 #' )
-#' # pm
+#' p_(pm)
 #'
 #' # Use sample of the diamonds data
 #' data(diamonds, package="ggplot2")
@@ -609,14 +613,14 @@ ggduo <- function(
 #'  lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot", alpha = 0.4)),
 #'  title = "Diamonds"
 #' )
-#' # pm
+#' p_(pm)
 #'
 #' # Only Variable Labels on the diagonal (no axis labels)
 #' pm <- ggpairs(tips[, 1:3], axisLabels="internal")
-#' # pm
+#' p_(pm)
 #' # Only Variable Labels on the outside (no axis labels)
 #' pm <- ggpairs(tips[, 1:3], axisLabels="none")
-#' # pm
+#' p_(pm)
 #'
 #' # Custom Examples
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
@@ -630,7 +634,7 @@ ggduo <- function(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
 #' )
 #' custom_car[1, 3] <- personal_plot
-#' # custom_car
+#' p_(custom_car)
 ggpairs <- function(
   data,
   mapping = NULL,
