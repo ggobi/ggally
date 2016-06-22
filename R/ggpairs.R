@@ -296,6 +296,47 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #'  );
 #'
 #'  pm
+#' 
+#'
+#'
+#' # Example derived from http://www.ats.ucla.edu/stat/r/dae/canonical.htm
+#' # "Example 1. A researcher has collected data on three psychological variables, four
+#' #  academic variables (standardized test scores) and gender for 600 college freshman.
+#' #  She is interested in how the set of psychological variables relates to the academic
+#' #  variables and gender. In particular, the researcher is interested in how many
+#' #  dimensions (canonical variables) are necessary to understand the association between
+#' #  the two sets of variables."
+#' mm <- read.csv("http://www.ats.ucla.edu/stat/data/mmreg.csv")
+#' colnames(mm) <- c("Control", "Concept", "Motivation", "Read", "Write", "Math",
+#'     "Science", "Sex")
+#' summary(mm)
+#'
+#' psych_variables <- c("Control", "Concept", "Motivation")
+#' academic_variables <- c("Read", "Write", "Math", "Science", "Sex")
+#'
+#' ## Within correlation
+#' # ggpairs(mm, psych_variables)
+#' # ggpairs(mm, academic_variables)
+#'
+#' ## Between correlation
+#' loess_with_cor <- function(data, mapping, ..., method = "pearson") {
+#'   x <- data[[deparse(mapping$x)]]
+#'   y <- data[[deparse(mapping$y)]]
+#'   cor <- cor(x, y, method = method)
+#'   ggally_smooth_loess(data, mapping, ...) +
+#'     ggplot2::geom_label(
+#'       data = data.frame(
+#'         x = min(x, na.rm = TRUE),
+#'         y = max(y, na.rm = TRUE),
+#'         lab = round(cor, digits = 3)
+#'       ),
+#'       mapping = ggplot2::aes(x = x, y = y, label = lab),
+#'       hjust = 0, vjust = 1,
+#'       size = 5, fontface = "bold"
+#'     )
+#' }
+#' ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
+#'
 #
 #
 #
