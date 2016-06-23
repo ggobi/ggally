@@ -19,6 +19,7 @@ cache: packages
 r_binary_packages:
   - arm
   - lme4
+  - survival
 
 # install locally to avoid rev dep
 r_github_packages:
