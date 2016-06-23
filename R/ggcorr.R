@@ -6,7 +6,7 @@ if (getRversion() >= "2.15.1") {
 #'
 #' Function for making a correlation matrix plot, using ggplot2.
 #' The function is directly inspired by Tian Zheng and Yu-Sung Su's
-#' \code{\link[arm]{corrplot}} function.
+#' \code{corrplot} function in the 'arm' package.
 #' Please visit \url{http://github.com/briatte/ggcorr} for the latest version
 #' of \code{ggcorr}, and see the vignette at
 #' \url{https://briatte.github.io/ggcorr/} for many examples of how to use it.

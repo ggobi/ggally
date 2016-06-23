@@ -189,7 +189,7 @@ if (getRversion() >= "2.15.1") {
 #' @details The degree centrality measures that can be produced through the
 #' \code{size} argument will take the directedness of the network into account,
 #' but will be unweighted. To compute weighted network measures, see the
-#' \code{\link[tnet:tnet-package]{tnet}} package by Tore Opsahl.
+#' \code{tnet} package by Tore Opsahl (\code{help("tnet", package = "tnet")}).
 #'
 #' The nodes of bipartite networks can be mapped to their mode by passing the
 #' \code{"mode"} argument to any of \code{alpha}, \code{color}, \code{shape} and

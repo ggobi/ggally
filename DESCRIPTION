@@ -34,7 +34,6 @@ Imports:
     plyr (>= 1.8.3),
     reshape (>= 0.8.5)
 Suggests:
-    arm (>= 1.8-6),
     broom (>= 0.4.0),
     geosphere (>= 1.5-1),
     ggmap (>= 2.6.1),
@@ -47,7 +46,6 @@ Suggests:
     scales (>= 0.4.0),
     sna (>= 2.3-2),
     survival (>= 2.38-3),
-    tnet (>= 3.0.11),
     knitr (>= 1.13),
     rmarkdown (>= 0.9.5),
     roxygen2 (>= 5.0.1),
