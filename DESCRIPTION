@@ -39,6 +39,7 @@ Suggests:
     igraph (>= 1.0.1),
     intergraph (>= 2.0-2),
     maps (>= 3.1.0),
+    mapproj,
     network (>= 1.12.0),
     RColorBrewer,
     scagnostics,

@@ -208,6 +208,11 @@ ggnetworkmap <- function (
   m <- network::as.matrix.network.adjacency(net)
 
   if (missing(gg)) {
+    # mapproj doesn't need to be loaded, but
+    # it needs to exist for ggplot2::coord_map() to work properly
+    if (! ("mapproj" %in% installed.packages())) {
+      require_pkgs("mapproj")
+    }
     gg <- ggplot() + coord_map()
 
     plotcord <- sna::gplot.layout.fruchtermanreingold(net, list(m,layout.par = NULL))
