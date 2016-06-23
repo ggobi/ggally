@@ -31,18 +31,18 @@ Barret
 * win-builder (devel and release)
   * There were no ERRORs or WARNINGs.  
   * There are two NOTEs.
-    * checking installed package size ... NOTE
-      installed size is 10.5Mb
-      sub-directories of 1Mb or more:
-        doc   9.7Mb
-
     * checking CRAN incoming feasibility ... NOTE
       Maintainer: 'Barret Schloerke <schloerke@gmail.com>'
 
       Possibly mis-spelled words in DESCRIPTION:
-        geoms (25:40)
+        geoms (25:43)
         ggplot (5:21)
         scatterplot (26:49)
+
+    * checking installed package size ... NOTE
+      installed size is 10.9Mb
+      sub-directories of 1Mb or more:
+        doc   9.7Mb
 
 
 ## Reverse dependencies

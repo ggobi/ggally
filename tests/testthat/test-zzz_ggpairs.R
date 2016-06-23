@@ -224,10 +224,10 @@ test_that("stops", {
   #  variables: 'colour' have non standard format: 'total_bill + tip'.
   expect_error({
     ggpairs(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  }, "variables\\: 'colour' have non standard format") # nolint
+  }, "variables\\: \"colour\" have non standard format") # nolint
   expect_error({
     ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  }, "variables\\: 'colour' have non standard format") # nolint
+  }, "variables\\: \"colour\" have non standard format") # nolint
 
   errorString <- "'aes_string' is a deprecated element"
   expect_error({

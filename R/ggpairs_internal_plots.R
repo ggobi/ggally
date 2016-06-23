@@ -203,9 +203,9 @@ make_ggmatrix_plot_obj <- function(fn, mapping = ggplot2::aes(), dataPos = 1, gg
     stop(
       paste(
         "variables: ",
-        paste(shQuote(nonCallNames), sep = ", "),
+        paste(shQuote(nonCallNames, type = "cmd"), sep = ", "),
         " have non standard format: ",
-        paste(shQuote(unlist(mapping[nonCallVals])), collapse = ", "),
+        paste(shQuote(unlist(mapping[nonCallVals]), type = "cmd"), collapse = ", "),
         ".  Please rename the columns or make a new column.",
         sep = ""
       )
