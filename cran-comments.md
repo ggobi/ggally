@@ -1,11 +1,9 @@
 
 ## Comments
 
-I know my vignettes are getting larger.  Any idea on how to reduce the pdf size, even though they are visualization vignettes?  Otherwise, if it's not a big deal, I'll keep them as is.
-
 All three environments have the same NOTE on package size.  Linux has a NOTE on mis-spelled words, it is a false positive.
 
-All downstream authors were not contacted as the update is minor.  Only in contact with authors who requested minor update.
+All downstream authors were not contacted as only new functions where added.  Only in contact with authors who requested minor updates.
 
 Thank you for your time,
 Barret
@@ -20,7 +18,10 @@ Barret
       installed size is 10.9Mb
       sub-directories of 1Mb or more:
         doc   9.7Mb
-* ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.3.0
+* travis-ci
+  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.1.3
+  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.3.0
+  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R Under development (unstable) (2016-06-23 r70826)
   * There were no ERRORs or WARNINGs.  
   * There is one NOTE
     * checking installed package size ... NOTE
