@@ -40,15 +40,15 @@ Suggests:
     intergraph (>= 2.0-2),
     maps (>= 3.1.0),
     network (>= 1.12.0),
-    RColorBrewer (>= 1.1-2),
-    scagnostics (>= 0.2-4),
+    RColorBrewer,
+    scagnostics,
     scales (>= 0.4.0),
     sna (>= 2.3-2),
-    survival (>= 2.38-3),
-    knitr (>= 1.13),
-    rmarkdown (>= 0.9.5),
-    roxygen2 (>= 5.0.1),
-    testthat (>= 1.0.2)
+    survival,
+    knitr,
+    rmarkdown,
+    roxygen2,
+    testthat
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
