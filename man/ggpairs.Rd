@@ -4,7 +4,7 @@
 \alias{ggpairs}
 \title{ggpairs - A ggplot2 generalized pairs plot}
 \usage{
-ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
+ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = "",
   upper = list(continuous = "cor", combo = "box", discrete = "facetbar", na =
   "na"), lower = list(continuous = "points", combo = "facethist", discrete =
   "facetbar", na = "na"), diag = list(continuous = "densityDiag", discrete =

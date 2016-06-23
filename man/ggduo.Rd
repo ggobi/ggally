@@ -5,7 +5,7 @@
 \title{ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame}
 \usage{
 ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data), title = NULL, types = list(continuous =
+  columnsY = 1:ncol(data), title = "", types = list(continuous =
   "smooth_loess", comboVertical = "box", comboHorizontal = "facethist", discrete
   = "ratio"), axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
