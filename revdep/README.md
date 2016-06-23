@@ -10,25 +10,24 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Indiana/Indianapolis |
-|date     |2016-05-31                   |
+|date     |2016-06-23                   |
 
 ## Packages
 
 |package      |*  |version |date       |source               |
 |:------------|:--|:-------|:----------|:--------------------|
-|arm          |   |1.8-6   |2015-07-11 |CRAN (R 3.2.2)       |
 |broom        |   |0.4.0   |2015-11-30 |CRAN (R 3.2.3)       |
 |geosphere    |   |1.5-1   |2015-12-18 |CRAN (R 3.2.3)       |
-|GGally       |*  |1.1.0   |2016-05-31 |local (ggobi/ggally) |
-|ggmap        |   |2.6.1   |2016-01-23 |CRAN (R 3.2.3)       |
-|ggplot2      |*  |2.1.0   |2016-03-01 |CRAN (R 3.3.0)       |
+|GGally       |*  |1.2.0   |2016-06-23 |local (ggobi/ggally) |
+|ggplot2      |   |2.1.0   |2016-03-01 |CRAN (R 3.3.0)       |
 |gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.2.3)       |
 |igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.2.0)       |
 |intergraph   |   |2.0-2   |2015-06-30 |CRAN (R 3.2.0)       |
 |knitr        |   |1.13    |2016-05-09 |cran (@1.13)         |
+|mapproj      |   |1.2-4   |2015-08-03 |CRAN (R 3.3.0)       |
 |maps         |   |3.1.0   |2016-02-13 |CRAN (R 3.2.3)       |
 |network      |   |1.13.0  |2015-09-19 |cran (@1.13.0)       |
-|plyr         |   |1.8.3   |2015-06-12 |CRAN (R 3.2.0)       |
+|plyr         |   |1.8.4   |2016-06-08 |CRAN (R 3.3.0)       |
 |RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.2.0)       |
 |reshape      |   |0.8.5   |2014-04-23 |CRAN (R 3.0.2)       |
 |rmarkdown    |   |0.9.6   |2016-05-01 |cran (@0.9.6)        |
@@ -38,10 +37,9 @@
 |sna          |   |2.3-2   |2014-01-14 |CRAN (R 3.2.2)       |
 |survival     |   |2.39-4  |2016-05-11 |cran (@2.39-4)       |
 |testthat     |   |1.0.2   |2016-04-23 |CRAN (R 3.3.0)       |
-|tnet         |   |3.0.14  |2015-11-18 |cran (@3.0.14)       |
 
 # Check results
-21 packages
+22 packages
 
 ## DescribeDisplay (0.2.5)
 Maintainer: Di Cook <dicook@monash.edu>  
@@ -166,14 +164,33 @@ These lines will be truncated in the PDF manual.
 Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>  
 Bug reports: https://github.com/xfim/ggmcmc/issues
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking examples ... ERROR
+Running examples in ‘ggmcmc-Ex.R’ failed
+The error most likely occurred in:
+
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ggs_caterpillar
+> ### Title: Caterpillar plot with thick and thin CI
+> ### Aliases: ggs_caterpillar
+> 
+> ### ** Examples
+> 
+> data(linear)
+> ggs_caterpillar(ggs(s))
+> ggs_caterpillar(list(A=ggs(s), B=ggs(s))) # silly example duplicating the same model
+Error: Unknown column 'description'
+Execution halted
+```
 
 ## imageData (0.1-21)
 Maintainer: Chris Brien <Chris.Brien@unisa.edu.au>
 
 0 errors | 0 warnings | 0 notes
 
-## isomiRs (1.0.2)
+## isomiRs (1.0.3)
 Maintainer: Lorena Pantano <lorena.pantano@gmail.com>
 
 1 error  | 0 warnings | 0 notes
@@ -253,6 +270,19 @@ Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
 
 0 errors | 0 warnings | 0 notes
 
+## rwty (1.0.1)
+Maintainer: Dan Warren <dan.l.warren@gmail.com>
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking package dependencies ... ERROR
+Package required but not available: ‘phangorn’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+```
+
 ## specmine (1.0)
 Maintainer: Christopher Costa <chrisbcl@hotmail.com>
 
@@ -269,7 +299,7 @@ Maintainer: Neo Christopher Chung <nchchung@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## TCGAbiolinks (1.2.4)
+## TCGAbiolinks (1.2.5)
 Maintainer: Antonio Colaprico <antonio.colaprico@ulb.ac.be>,
  Tiago Chedraoui Silva <tiagochst@usp.br>  
 Bug reports: https://github.com/BioinformaticsFMRP/TCGAbiolinks/issues
