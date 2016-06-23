@@ -400,7 +400,7 @@ ggduo <- function(
   mapping = NULL,
   columnsX = 1:ncol(data),
   columnsY = 1:ncol(data),
-  title = NULL,
+  title = "",
   types = list(
     continuous = "smooth_loess",
     comboVertical = "box",
@@ -639,7 +639,7 @@ ggpairs <- function(
   data,
   mapping = NULL,
   columns = 1:ncol(data),
-  title = NULL,
+  title = "",
   upper = list(continuous = "cor", combo = "box", discrete = "facetbar", na = "na"),
   lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
   diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
