@@ -50,6 +50,7 @@ If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
 If a function is supplied as an option, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
+ # small function to display plots only if it's interactive
  p_ <- function(pm) {
    if (interactive()) {
      print(pm)
