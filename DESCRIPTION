@@ -36,7 +36,6 @@ Imports:
 Suggests:
     broom (>= 0.4.0),
     geosphere (>= 1.5-1),
-    ggmap (>= 2.6.1),
     igraph (>= 1.0.1),
     intergraph (>= 2.0-2),
     maps (>= 3.1.0),
