@@ -305,7 +305,10 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #'
 #'
 #'
-#' # Example derived from http://www.ats.ucla.edu/stat/r/dae/canonical.htm
+#' # Example derived from:
+#' ## R Data Analysis Examples: Canonical Correlation Analysis.  UCLA: Statistical
+#' ##   Consulting Group. from http://www.ats.ucla.edu/stat/r/dae/canonical.htm
+#' ##   (accessed June 23, 2016).
 #' # "Example 1. A researcher has collected data on three psychological variables, four
 #' #  academic variables (standardized test scores) and gender for 600 college freshman.
 #' #  She is interested in how the set of psychological variables relates to the academic
