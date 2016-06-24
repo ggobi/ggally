@@ -1,14 +1,24 @@
 GGally 1.2.0
 -----------------
 
-install
+install requirements
 
-* relaxed install requirements on grid (9a41b5c)
+* relaxed install requirements on grid (5d06dfc, d57469a, 933bb14, 73b314d)
 
 ggduo - New!
 
 * plot two grouped data in a plot matrix (#173)
 * helpful for plotting two sets of columns, multivariate analysis, and canonical correlation analysis
+* be sure to check out the examples!
+
+ggally_smooth_loess - New!
+
+* uses the loess method with drawing a line (1552f96)
+
+ggally_smooth_lm - New!
+
+* uses the lm method with drawing a line (1552f96)
+* alias of ggally_smooth
 
 ggmatrix.print
 
