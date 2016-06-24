@@ -4,16 +4,17 @@ language: r
 # https://docs.travis-ci.com/user/languages/r#R-Versions
 r:
   - release
-  - devel
+  # - devel
   - 3.1
 # https://blog.rstudio.org/2016/03/09/r-on-travis-ci/
 sudo: false
 cache: packages
 
-# matrix:
-#   fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
-#                     # allows the build to "pass" when the non-failure-able builds are done
-#   allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
+matrix:
+  fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
+                    # allows the build to "pass" when the non-failure-able builds are done
+  allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
+    - r: 3.1
 #     - env: R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
 
 
