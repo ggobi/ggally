@@ -78,8 +78,13 @@ ggally_smooth <- function(data, mapping, ..., method = "lm"){
 
 #' @export
 #' @rdname ggally_smooth
-ggally_smooth_loess <- function(data, mapping, ..., method = "loess") {
-  ggally_smooth(data = data, mapping = mapping, ..., method = method)
+ggally_smooth_loess <- function(data, mapping, ...) {
+  ggally_smooth(data = data, mapping = mapping, ..., method = "loess")
+}
+#' @export
+#' @rdname ggally_smooth
+ggally_smooth_lm <- function(data, mapping, ...) {
+  ggally_smooth(data = data, mapping = mapping, ..., method = "lm")
 }
 
 #' Plots the Scatter Density Plot

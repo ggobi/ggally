@@ -2,12 +2,15 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_smooth}
 \alias{ggally_smooth}
+\alias{ggally_smooth_lm}
 \alias{ggally_smooth_loess}
 \title{Plots the Scatter Plot with Smoothing}
 \usage{
 ggally_smooth(data, mapping, ..., method = "lm")
 
-ggally_smooth_loess(data, mapping, ..., method = "loess")
+ggally_smooth_loess(data, mapping, ...)
+
+ggally_smooth_lm(data, mapping, ...)
 }
 \arguments{
 \item{data}{data set using}
