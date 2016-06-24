@@ -172,7 +172,7 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' @param columnsX,columnsY which columns are used to make plots.  Defaults to all columns.
 #' @param title title for the graph
 #' @param types see Details
-#' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
+#' @param axisLabels either "show" to display axisLabels or "none" for no axis labels
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @param legends boolean to determine the printing of the legend in each plot. Not recommended.

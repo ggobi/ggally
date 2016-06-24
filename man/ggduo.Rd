@@ -23,7 +23,7 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 
 \item{types}{see Details}
 
-\item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
+\item{axisLabels}{either "show" to display axisLabels or "none" for no axis labels}
 
 \item{columnLabelsX, columnLabelsY}{label names to be displayed.  Defaults to names of columns being used.}
 
