@@ -13,7 +13,11 @@ Barret
 
 * local OS X install (x86_64-apple-darwin13.4.0), R 3.3.0
   * There were no ERRORs or WARNINGs.
-  * There is one NOTE.
+  * There are two NOTEs.
+    * checking CRAN incoming feasibility ... NOTE
+    Maintainer: ‘Barret Schloerke <schloerke@gmail.com>’
+
+    Size of tarball: 5972829 bytes
     * checking installed package size ... NOTE
       installed size is 10.9Mb
       sub-directories of 1Mb or more:
