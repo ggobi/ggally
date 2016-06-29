@@ -2,7 +2,7 @@ Package: GGally
 Version: 1.2.0
 Date: 2016-06-24
 License: GPL (>= 2.0)
-Title: Extension to ggplot2
+Title: Extension to 'ggplot2'
 Type: Package
 LazyLoad: yes
 LazyData: true
@@ -22,9 +22,9 @@ Authors@R: c(
 Description: The R package '\href{http://docs.ggplot2.org/current/}{ggplot2}'
     is a plotting system based on the grammar of graphics. '\href{https://
     ggobi.github.io/ggally}{GGally}' extends 'ggplot2' by adding several functions
-    to reduce the complexity of combining geoms with transformed data. Some of these
-    functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel
-    coordinates plot, a survival plot, and several functions to plot networks.
+    to reduce the complexity of combining geometric objects with transformed data.
+    Some of these functions include a pairwise plot matrix, a scatterplot plot matrix,
+    a parallel coordinates plot, a survival plot, and several functions to plot networks.
 Depends:
     R (>= 3.1)
 Imports:
