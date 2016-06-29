@@ -1,12 +1,42 @@
 
 ## Comments
+### 2016-6-29
+> Thanks, we see:
+> > Possibly mis-spelled words in DESCRIPTION:
+> >    geoms (25:43)
+> >    ggplot (5:21)
+>
+> can you please write functions as foo() and packages/software single
+> quoted, please.
+>
+>
+> Size of tarball: 5972840 bytes
+>
+> Can this be reduced?
+>
+> Best,
+> Uwe Ligges
 
+Fixed the description issues.  (Spelled out geoms to geometric objects and I was missing the quotes for ggplot2 in the title. Thank you!)
+
+The size of the tarball is mainly attributed to (the pictures within) the vignettes.  This problem would still exist if I had a separate "docs/vignette" R package.  I'm still working with Di Cook and the other authors to come up with a feasible solution that everyone is satisfied with.  The next release should have this problem solved.  
+
+Will this be ok?
+
+Thank you!
+Barret
+
+
+### 2016-6-24
 All three environments have the same NOTE on package size.  Linux has a NOTE on mis-spelled words, it is a false positive.
 
 All downstream authors were not contacted as only new functions where added.  Only in contact with authors who requested minor updates.
 
 Thank you for your time,
 Barret
+
+
+
 
 
 ## Test environments and R CMD check results
