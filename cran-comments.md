@@ -1,5 +1,21 @@
 
 ## Comments
+### 2016-6-30
+Paraphrasing answer to having a >= 5Mb pkg: no.
+
+Found a way to reduce my vignettes.  Thank you for your patience!! Much appreciated!!
+
+I'm including the updated R CMD checks in this section.
+
+* local OS X install (x86_64-apple-darwin13.4.0), R 3.3.1
+  * There were no ERRORs, WARNINGs or NOTEs.
+* travis-ci
+  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.3.1
+  * There were no ERRORs, WARNINGs or NOTEs.
+* win-builder (devel and release)
+  * There were no ERRORs, WARNINGs or NOTEs.
+
+
 ### 2016-6-29
 > Thanks, we see:
 > > Possibly mis-spelled words in DESCRIPTION:
@@ -35,11 +51,7 @@ All downstream authors were not contacted as only new functions where added.  On
 Thank you for your time,
 Barret
 
-
-
-
-
-## Test environments and R CMD check results
+#### Test environments and R CMD check results
 
 * local OS X install (x86_64-apple-darwin13.4.0), R 3.3.0
   * There were no ERRORs or WARNINGs.
