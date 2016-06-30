@@ -3,7 +3,7 @@ title: "ggmatrix: plot matrix for ggplot2"
 author: Barret Schloerke
 date: Oct 29, 2015
 output:
-  html_document:
+  rmarkdown::html_vignette:
     highlight: default
     toc: true
     theme: united

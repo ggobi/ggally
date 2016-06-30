@@ -3,7 +3,7 @@ title: "Create glyph plots"
 author: Hadley Wickham, Charlotte Wickham, Di Cook, Heike Hofmann
 date: Nov 6, 2015
 output:
-  html_document:
+  rmarkdown::html_vignette:
     highlight: default
     toc: true
     theme: united

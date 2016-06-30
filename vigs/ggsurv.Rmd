@@ -3,7 +3,7 @@ title: "ggsurv: survival curves with ggplot2"
 author: "Original author: Edwin Thoen; Created by Barret Schloerke"
 date: April, 4, 2016
 output:
-  html_document:
+  rmarkdown::html_vignette:
     highlight: default
     toc: true
     theme: united

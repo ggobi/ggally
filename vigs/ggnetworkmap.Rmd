@@ -3,7 +3,7 @@ title: "ggnetworkmap: network maps with ggplot2"
 author: Amos Elberg
 date: January 10, 2015
 output:
-  html_document:
+  rmarkdown::html_vignette:
     highlight: default
     toc: true
     theme: united

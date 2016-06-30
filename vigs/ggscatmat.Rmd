@@ -3,7 +3,7 @@ title: "Pairwise scatterplot matrix of numeric data with ggplot2"
 author: Di Cook, Mengjia Ni
 date: Nov 6, 2015
 output:
-  html_document:
+  rmarkdown::html_vignette:
     highlight: default
     toc: true
     theme: united
