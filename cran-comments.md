@@ -15,6 +15,9 @@ I'm including the updated R CMD checks in this section.
 * win-builder (devel and release)
   * There were no ERRORs, WARNINGs or NOTEs.
 
+Thank you!
+Barret
+
 
 ### 2016-6-29
 > Thanks, we see:
