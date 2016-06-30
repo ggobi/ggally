@@ -1,0 +1,19 @@
+---
+title: "ggsurv: survival curves with ggplot2"
+author: "Original author: Edwin Thoen; Created by Barret Schloerke"
+date: April, 4, 2016
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggsurv}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+<meta
+  http-equiv="refresh"
+  content="0; URL='http://ggobi.github.io/ggally/gh-pages/ggsurv.html'"
+/>
+
+# ggsurv
+
+If not automatically redirected, please visit [http://ggobi.github.io/ggally/gh-pages/ggsurv.html] for the latest vignette.

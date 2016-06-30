@@ -1,0 +1,19 @@
+---
+title: "Pairwise scatterplot matrix of numeric data with ggplot2"
+author: Di Cook, Mengjia Ni
+date: Nov 6, 2015
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggscatmat}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+<meta
+  http-equiv="refresh"
+  content="0; URL='http://ggobi.github.io/ggally/gh-pages/ggscatmat.html'"
+/>
+
+# ggscatmat
+
+If not automatically redirected, please visit [http://ggobi.github.io/ggally/gh-pages/ggscatmat.html] for the latest vignette.

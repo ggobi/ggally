@@ -1,0 +1,18 @@
+---
+title: "ggcoef: Plot Model Coefficients with broom and ggplot2"
+author: Joseph Larmarange
+date: May 16, 2016
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggcoef}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+<meta
+  http-equiv="refresh"
+  content="0; URL='http://ggobi.github.io/ggally/gh-pages/ggcoef.html'"
+/>
+
+# ggcoef
+
+If not automatically redirected, please visit (http://ggobi.github.io/ggally/gh-pages/ggcoef.html) for the latest vignette.
