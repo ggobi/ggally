@@ -10,9 +10,9 @@ vignette: >
 
   <meta
 http-equiv="refresh"
-content="0; URL='http://ggobi.github.io/ggally/gh-pages/ggudo.html'"
+content="0; URL='http://ggobi.github.io/ggally/ggudo.html'"
 />
 
   # ggduo
 
-  If not automatically redirected, please visit (http://ggobi.github.io/ggally/gh-pages/ggduo.html) for the latest vignette.
+  If not automatically redirected, please visit (http://ggobi.github.io/ggally/ggduo.html) for the latest vignette.

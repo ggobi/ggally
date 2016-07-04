@@ -11,9 +11,9 @@ vignette: >
 
 <meta
   http-equiv="refresh"
-  content="0; URL='http://ggobi.github.io/ggally/gh-pages/ggscatmat.html'"
+  content="0; URL='http://ggobi.github.io/ggally/ggscatmat.html'"
 />
 
 # ggscatmat
 
-If not automatically redirected, please visit [http://ggobi.github.io/ggally/gh-pages/ggscatmat.html] for the latest vignette.
+If not automatically redirected, please visit [http://ggobi.github.io/ggally/ggscatmat.html] for the latest vignette.

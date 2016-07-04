@@ -10,9 +10,9 @@ vignette: >
 
 <meta
   http-equiv="refresh"
-  content="0; URL='http://ggobi.github.io/ggally/gh-pages/ggcoef.html'"
+  content="0; URL='http://ggobi.github.io/ggally/ggcoef.html'"
 />
 
 # ggcoef
 
-If not automatically redirected, please visit (http://ggobi.github.io/ggally/gh-pages/ggcoef.html) for the latest vignette.
+If not automatically redirected, please visit (http://ggobi.github.io/ggally/ggcoef.html) for the latest vignette.
