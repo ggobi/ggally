@@ -28,12 +28,12 @@ The purpose of this function is to display two grouped data in a plot matrix.  T
 
 # Canonical Correlation Analysis
 
-This example is derived from 
+This example is derived from
 
 ```
 R Data Analysis Examples: Canonical Correlation Analysis.  UCLA: Statistical Consulting Group. from http://www.ats.ucla.edu/stat/r/dae/canonical.htm (accessed June 23, 2016).
 ```
-Example: 
+Example:
 ```
 Example 1. A researcher has collected data on three psychological variables, four academic variables (standardized test scores) and gender for 600 college freshman. She is interested in how the set of psychological variables relates to the academic variables and gender. In particular, the researcher is interested in how many dimensions (canonical variables) are necessary to understand the association between the two sets of variables."
 ```
@@ -100,10 +100,10 @@ library(ggplot2)
 econ <- economics
 econ$random.group <- sample(1:3, nrow(econ), replace = TRUE)
 qplot(
-  date, value, 
-  data = reshape::melt.data.frame(econ, "date"), 
+  date, value,
+  data = reshape::melt.data.frame(econ, "date"),
   geom = c("smooth", "point")
-) + 
+) +
   facet_grid(variable ~ ., scales = "free_y")
 ```
 
@@ -121,7 +121,7 @@ pm <- ggduo(
   econ, 1, 2:7,
   columnLabelsX = "date",
   columnLabelsY = c("personal consumption\nexpenditures (B)", "total\npopulation (K)", "personal savings\nrate %", "median duration of\nunemployment (week)", "number of\nunemployed (K)", "random\ngroup")
-) + 
+) +
   theme(
     axis.title.y = element_text(size = 8.5)
   )
@@ -132,7 +132,7 @@ print(pm, leftWidthProportion = 0.08)
 
 # Regression Analysis
 
-Since ``ggduo`` may take custom functions just like ``ggpairs``, we will make a custom function that displays the residuals with a red line at 0 and all other y variables will receive a simple linear regression plot. 
+Since ``ggduo`` may take custom functions just like ``ggpairs``, we will make a custom function that displays the residuals with a red line at 0 and all other y variables will receive a simple linear regression plot.
 
 Note: the marginal residuals are calculated before plotting and the y_range is found to display all residuals on the same scale.
 
@@ -154,7 +154,7 @@ lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
   if (as.character(mapping$y) != "Residual") {
     return(ggally_smooth_lm(data, mapping, ...))
   }
-  
+
   # make residual data to display
   resid_data <- data.frame(
     x = data[[as.character(mapping$x)]],
@@ -170,19 +170,19 @@ lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
 
 # plot the data
 ggduo(
-  swiss, 
-  2:6, c(1,7), 
+  swiss,
+  2:6, c(1,7),
   types = list(continuous = lm_or_resid)
 )
 
 # change line to be thicker and blue and the points to be slightly transparent
 ggduo(
-  swiss, 
-  2:6, c(1,7), 
+  swiss,
+  2:6, c(1,7),
   types = list(
-    continuous = wrap(lm_or_resid, 
+    continuous = wrap(lm_or_resid,
       alpha = 0.7,
-      line_color = "blue", 
+      line_color = "blue",
       line_size = 3
     )
   )
