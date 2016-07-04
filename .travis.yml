@@ -19,9 +19,6 @@ matrix:
 
 
 r_binary_packages:
-  - arm
-  - lme4
-  - survival
   # install locally to avoid rev dep
   - covr # code coverage check
   - lintr # code lint
