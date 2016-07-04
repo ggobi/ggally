@@ -13,6 +13,15 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+knitr::read_chunk("_cache.R")
+```
+```{r cache, echo=FALSE, message=FALSE, cache=FALSE}
+```
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+cache_wd("ggcoef")
+```
+
 # ggcoef
 
 The purpose of this function is to quickly plot the coefficients of a model.
@@ -22,8 +31,6 @@ The purpose of this function is to quickly plot the coefficients of a model.
 To work automatically, this function requires the `broom` package. Simply call `ggcoef` with a model object. It could be the result of `lm`, `glm` or any other model covered by `broom` and its `tidy` method^[See http://www.rdocumentation.org/packages/broom.].
 
 ```{r}
-library(GGally)
-library(ggplot2)
 reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
 ggcoef(reg)
 ```
@@ -66,6 +73,7 @@ ggcoef(log.reg, exponentiate = TRUE, color = "purple", size = 5, shape = 18)
 Finally, you can also customize the aesthetic mapping of the points.
 
 ```{r}
+library(ggplot2)
 ggcoef(log.reg, exponentiate = TRUE, mapping = aes(x = estimate, y = term, size = p.value)) +
   scale_size_continuous(trans = "reverse")
 ```

@@ -3,7 +3,7 @@ title: "ggnetworkmap: network maps with ggplot2"
 author: Amos Elberg
 date: January 10, 2015
 output:
-  rmarkdown::html_vignette:
+  html_document:
     highlight: default
     toc: true
     theme: united
@@ -13,15 +13,13 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r echo=FALSE, message=FALSE}
-ignore <- suppressMessages(library(ggplot2))
-ignore <- suppressMessages(library(maps))
-ignore <- suppressMessages(library(network))
-ignore <- suppressMessages(library(sna))
-source("../R/utils.R")
-source("../R/ggnetworkmap.R")
-load("../data/twitter_spambots.rda")
-knitr::opts_chunk$set(fig.width = 9, fig.height = 7, fig.retina = 1)
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+knitr::read_chunk("_cache.R")
+```
+```{r cache, echo=FALSE, message=FALSE, cache=FALSE}
+```
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+cache_wd("ggnetworkmap")
 ```
 
 # Introduction
@@ -33,6 +31,10 @@ knitr::opts_chunk$set(fig.width = 9, fig.height = 7, fig.retina = 1)
 This example is based on a [tutorial by Nathan Yau at Flowing Data](http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/).
 
 ```{r}
+suppressMessages(library(network))
+suppressMessages(library(sna))
+suppressMessages(library(maps))
+suppressMessages(library(ggplot2))
 airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
 rownames(airports) <- airports$iata
 
