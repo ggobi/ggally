@@ -97,7 +97,7 @@ While displaying multiple time series vertically over time, such as ``+ facet_gr
 ```{r}
 library(ggplot2)
 
-econ <- economics
+econ <- as.data.frame(economics)
 econ$random.group <- sample(1:3, nrow(econ), replace = TRUE)
 qplot(
   date, value,
