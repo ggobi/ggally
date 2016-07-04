@@ -1,0 +1,18 @@
+---
+title: "ggduo: Pairwise plot matrices for two group data"
+author: Barret Schloerke
+date: July 4, 2016
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggduo}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+  <meta
+http-equiv="refresh"
+content="0; URL='http://ggobi.github.io/ggally/gh-pages/ggudo.html'"
+/>
+
+  # ggduo
+
+  If not automatically redirected, please visit (http://ggobi.github.io/ggally/gh-pages/ggduo.html) for the latest vignette.
