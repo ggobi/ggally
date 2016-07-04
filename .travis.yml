@@ -11,9 +11,9 @@ sudo: false
 cache: packages
 
 before_install:
-  - Rscript -e 'install.packages("devtools")'
   # install fix for devtools
-  - Rscript -e 'devtools::install_github("schloerke/devtools@fix-capabilities");'
+  - wget https://api.github.com/repos/schloerke/devtools/zipball/fix-capabilities -O devtools.zip
+  - Rscript -e 'install.packages("devtools.zip");'
 
 
 matrix:
