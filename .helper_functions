@@ -59,7 +59,7 @@ reverse_depends:
     curPkgType <- getOption("pkgType")
     on.exit({options(pkgType = curPkgType)})
     options(pkgType = pkgType)
-
+    #
     # locally check the packages and install mac.binaries
     res <- devtools::revdep_check(
       type = pkgType,
@@ -67,7 +67,7 @@ reverse_depends:
       bioconductor = bioconductor,
       ignore = ignore
     )
-
+    #
     devtools::revdep_check_save_summary()
     devtools::revdep_check_print_problems()
     cat("\n\n")
