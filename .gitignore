@@ -11,3 +11,5 @@ vignettes/*.html
 .RData
 .lintr_cache
 revdep/checks\.rds
+vigs/cache
+vigs/*.html
