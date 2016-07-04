@@ -12,9 +12,7 @@ cache: packages
 
 before_install:
   - Rscript -e 'install.packages("devtools")'
-  - Rscript -e 'deps <- devtools::dev_package_deps(dependencies = TRUE); cat(deps, "\n")'
   - Rscript -e 'devtools::install_deps(dependencies = TRUE);'
-  - Rscript -e 'deps <- devtools::dev_package_deps(dependencies = TRUE); cat(deps$package[! (deps$package %in% install.packages())], "\n");'
 
 
 matrix:
