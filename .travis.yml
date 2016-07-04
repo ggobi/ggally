@@ -10,11 +10,10 @@ r:
 sudo: false
 cache: packages
 
-before_install:
-  - Rscript -e 'capabilities()'
-  - Rscript -e 'capabilities()["libcurl"]'
+before_script:
   - Rscript -e 'install.packages("devtools")'
-  - Rscript -e 'devtools::install_deps(dependencies = TRUE);'
+  # install fix for devtools
+  - Rscript -e 'devtools::install_github("schloerke/devtools@fix-capabilities");'
 
 
 matrix:
