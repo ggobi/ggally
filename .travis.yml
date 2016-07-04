@@ -10,14 +10,6 @@ r:
 sudo: false
 cache: packages
 
-before_install:
-  # install fix for devtools
-  - wget https://api.github.com/repos/schloerke/devtools/zipball/fix-capabilities -O devtools.zip
-  - unzip devtools.zip
-  - Rscript -e 'install.packages("devtools"); remove.packages("devtools")'
-  - Rscript -e 'install.packages("schloerke-devtools-9f1b588", repos = NULL)'
-
-
 matrix:
   fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
                     # allows the build to "pass" when the non-failure-able builds are done
