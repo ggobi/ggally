@@ -11,6 +11,8 @@ sudo: false
 cache: packages
 
 before_install:
+  - Rscript -e 'capabilities()'
+  - Rscript -e 'capabilities()["libcurl"]'
   - Rscript -e 'install.packages("devtools")'
   - Rscript -e 'devtools::install_deps(dependencies = TRUE);'
 
