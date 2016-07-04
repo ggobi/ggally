@@ -1,0 +1,192 @@
+---
+title: "ggduo: Pairwise plot matrices for two group data"
+author: Barret Schloerke
+date: July 4, 2016
+output:
+  html_document:
+    highlight: default
+    toc: true
+    theme: united
+vignette: >
+  %\VignetteIndexEntry{ggduo}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+knitr::read_chunk("_cache.R")
+```
+```{r cache, echo=FALSE, message=FALSE, cache=FALSE}
+```
+```{r, echo=FALSE, message=FALSE, cache=FALSE}
+cache_wd("ggduo")
+```
+
+# ggduo
+
+The purpose of this function is to display two grouped data in a plot matrix.  This is useful for canonical correlation analysis, multiple time series analysis, and regression analysis.
+
+# Canonical Correlation Analysis
+
+This example is derived from 
+
+```
+R Data Analysis Examples: Canonical Correlation Analysis.  UCLA: Statistical Consulting Group. from http://www.ats.ucla.edu/stat/r/dae/canonical.htm (accessed June 23, 2016).
+```
+Example: 
+```
+Example 1. A researcher has collected data on three psychological variables, four academic variables (standardized test scores) and gender for 600 college freshman. She is interested in how the set of psychological variables relates to the academic variables and gender. In particular, the researcher is interested in how many dimensions (canonical variables) are necessary to understand the association between the two sets of variables."
+```
+
+```{r}
+psych <- read.csv("http://www.ats.ucla.edu/stat/data/mmreg.csv")
+colnames(psych) <- c("Control", "Concept", "Motivation", "Read", "Write", "Math", "Science", "Sex")
+psych <- data.frame(
+  Motivation = psych$Motivation,
+  Self.Concept = psych$Concept,
+  Locus.of.Control = psych$Control,
+  Read = psych$Read,
+  Write = psych$Write,
+  Math = psych$Math,
+  Science = psych$Science,
+  Sex = c("0" = "Male", "1" = "Female")[as.character(psych$Sex)]
+)
+```
+
+First, look at the within correlation using ``ggpairs``.
+
+```{r}
+ggpairs(psych, 1:3)
+ggpairs(psych, 4:8)
+```
+
+Next, look at the between correlation using ``ggduo``.
+
+```{r}
+ggduo(psych, 1:3, 4:8, types = list(continuous = "smooth_lm"))
+```
+
+Since ggduo does not have a upper section to display the correlation values, we may use a custom function to add the information in the continuous plots.  The strips may be removed as each group name may be recovered in the outer axis labels.
+
+```{r}
+lm_with_cor <- function(data, mapping, ..., method = "pearson") {
+  x <- data[[deparse(mapping$x)]]
+  y <- data[[deparse(mapping$y)]]
+  cor <- cor(x, y, method = method)
+  ggally_smooth_lm(data, mapping, ...) +
+    ggplot2::geom_label(
+      data = data.frame(
+        x = min(x, na.rm = TRUE),
+        y = max(y, na.rm = TRUE),
+        lab = round(cor, digits = 3)
+      ),
+      mapping = ggplot2::aes(x = x, y = y, label = lab),
+      hjust = 0, vjust = 1,
+      size = 5, fontface = "bold"
+    )
+}
+ggduo(psych, 1:3, 4:8, types = list(continuous = lm_with_cor), showStrips = FALSE)
+```
+
+
+# Multiple Time Series Analysis
+
+While displaying multiple time series vertically over time, such as ``+ facet_grid(time ~ .)``, ggduo can handle both continuous and discrete data.  `ggplot2` does not mix discrete and continuous data on the same axis.
+
+
+```{r}
+library(ggplot2)
+
+econ <- economics
+econ$random.group <- sample(1:3, nrow(econ), replace = TRUE)
+qplot(
+  date, value, 
+  data = reshape::melt.data.frame(econ, "date"), 
+  geom = c("smooth", "point")
+) + 
+  facet_grid(variable ~ ., scales = "free_y")
+```
+
+Instead, we may use ggduo to display the data.
+
+```{r}
+econ$random.group <- c("A", "B", "C")[econ$random.group]
+ggduo(econ, "date", 2:7)
+```
+
+Since the labels do not fit well, we will adjust them.
+
+```{r}
+pm <- ggduo(
+  econ, 1, 2:7,
+  columnLabelsX = "date",
+  columnLabelsY = c("personal consumption\nexpenditures (B)", "total\npopulation (K)", "personal savings\nrate %", "median duration of\nunemployment (week)", "number of\nunemployed (K)", "random\ngroup")
+) + 
+  theme(
+    axis.title.y = element_text(size = 8.5)
+  )
+
+print(pm, leftWidthProportion = 0.08)
+```
+
+
+# Regression Analysis
+
+Since ``ggduo`` may take custom functions just like ``ggpairs``, we will make a custom function that displays the residuals with a red line at 0 and all other y variables will receive a simple linear regression plot. 
+
+Note: the marginal residuals are calculated before plotting and the y_range is found to display all residuals on the same scale.
+
+```{r}
+swiss <- datasets::swiss
+
+# add a 'fake' column
+swiss$Residual <- seq_len(nrow(swiss))
+
+# calculate all residuals prior to display
+residuals <- lapply(swiss[2:6], function(x) {
+  summary(lm(Fertility ~ x, data = swiss))$residuals
+})
+# calculate a consistent y range for all residuals
+y_range <- range(unlist(residuals))
+
+# custom function to display continuous data. If the y variable is "Residual", do custom work.
+lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
+  if (as.character(mapping$y) != "Residual") {
+    return(ggally_smooth_lm(data, mapping, ...))
+  }
+  
+  # make residual data to display
+  resid_data <- data.frame(
+    x = data[[as.character(mapping$x)]],
+    y = residuals[[as.character(mapping$x)]]
+  )
+
+  ggplot(data = data, mapping = mapping) +
+    geom_hline(yintercept = 0, color = line_color, size = line_size) +
+    ylim(y_range) +
+    geom_point(data = resid_data, mapping = aes(x = x, y = y), ...)
+
+}
+
+# plot the data
+ggduo(
+  swiss, 
+  2:6, c(1,7), 
+  types = list(continuous = lm_or_resid)
+)
+
+# change line to be thicker and blue and the points to be slightly transparent
+ggduo(
+  swiss, 
+  2:6, c(1,7), 
+  types = list(
+    continuous = wrap(lm_or_resid, 
+      alpha = 0.7,
+      line_color = "blue", 
+      line_size = 3
+    )
+  )
+)
+
+
+```
