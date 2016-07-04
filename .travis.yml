@@ -24,6 +24,7 @@ r_binary_packages:
   - lintr # code lint
 
 after_success:
+  - Rscript -e 'eval(parse(text = read.dcf(".helper_functions", fields = "knit_vignettes")))'
   - Rscript -e 'covr::codecov()'
 
 notifications:
