@@ -13,7 +13,8 @@ cache: packages
 before_install:
   # install fix for devtools
   - wget https://api.github.com/repos/schloerke/devtools/zipball/fix-capabilities -O devtools.zip
-  - Rscript -e 'install.packages("devtools.zip");'
+  - unzip devtools.zip
+  - Rscript -e 'install.packages("schloerke-devtools-9f1b588", repos = NULL)'
 
 
 matrix:
