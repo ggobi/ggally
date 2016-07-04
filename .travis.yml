@@ -10,9 +10,8 @@ r:
 sudo: false
 cache: packages
 
-before_install:
-  - Rscript -e 'install.packages("devtools");'
-  - Rscript -e 'deps <- devtools::dev_package_deps(dependencies = TRUE);'
+after_failure:
+  - Rscript -e 'deps <- devtools::dev_package_deps(dependencies = TRUE); cat(deps, "\n")'
   - Rscript -e 'devtools::install_deps(dependencies = TRUE);'
   - Rscript -e "deps <- devtools::dev_package_deps(dependencies = TRUE); cat(deps$package[! (deps$package %in% install.packages())], '\n');"
   - Rscript -e "deps <- devtools::dev_package_deps(dependencies = TRUE); if (!all(deps$package %in% installed.packages())) { message('missing: ', paste(setdiff(deps$package, installed.packages()), collapse=', ')); q(status = 1, save = 'no')}"
