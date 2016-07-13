@@ -581,7 +581,14 @@ ggduo <- function(
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
 #' @examples
-#'  # small function to display plots only if it's interactive
+#' Basic example, with and without colour
+#' data(flea)
+#' ggpairs(flea, columns = 2:4)
+#' ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
+#' # Note: colour should be categorical, else you will need to reset
+#' the uppertriangle to use points instead of trying to compute corr
+#'
+#' # small function to display plots only if it's interactive
 #' p_ <- function(pm) {
 #'   if (interactive()) {
 #'     print(pm)
