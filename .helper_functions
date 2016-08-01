@@ -31,9 +31,9 @@ test_package:
   }
   tp()
 test_file:
-  tf <- function(file = "gg-plots", package = "./") {
+  tf <- function(file = "gg-plots", package = "./", spacer = "-") {
     devtools::load_all(package)
-    testthat::test_file(file.path(package, "tests", "testthat", paste0("test-", file, ".R")))
+    testthat::test_file(file.path(package, "tests", "testthat", paste0("test", spacer, file, ".R")))
   }
   tf("zzz_ggpairs")
 knit_vignettes:
