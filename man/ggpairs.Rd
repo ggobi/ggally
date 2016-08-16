@@ -69,13 +69,21 @@ If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
 If a function is supplied as an option to \code{upper}, \code{lower}, or \code{diag}, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
- # small function to display plots only if it's interactive
+# small function to display plots only if it's interactive
 p_ <- function(pm) {
   if (interactive()) {
     print(pm)
   }
   invisible()
 }
+
+
+## Quick example, with and without colour
+data(flea)
+ggpairs(flea, columns = 2:4)
+ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
+# Note: colour should be categorical, else you will need to reset
+# the upper triangle to use points instead of trying to compute corr
 
 data(tips, package = "reshape")
 pm <- ggpairs(tips[, 1:3])
@@ -85,20 +93,27 @@ p_(pm)
 pm <- ggpairs(tips, upper = "blank")
 p_(pm)
 
-
-# Custom Example
+## Plot Types
+# Change default plot behavior
 pm <- ggpairs(
   tips[, c(1, 3, 4, 2)],
   upper = list(continuous = "density", combo = "box"),
   lower = list(continuous = "points", combo = "dot")
 )
 p_(pm)
+# Supply Raw Functions (may be user defined functions!)
+pm <- ggpairs(
+  tips[, c(1, 3, 4, 2)],
+  upper = list(continuous = ggally_density, combo = ggally_box),
+  lower = list(continuous = ggally_points, combo = ggally_dot)
+)
+p_(pm)
 
 # Use sample of the diamonds data
 data(diamonds, package="ggplot2")
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 200), ]
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
 
-# Custom Example
+# Different aesthetics for different plot sections and plot types
 pm <- ggpairs(
  diamonds.samp[, 1:5],
  mapping = ggplot2::aes(color = cut),
@@ -108,6 +123,7 @@ pm <- ggpairs(
 )
 p_(pm)
 
+## Axis Label Variations
 # Only Variable Labels on the diagonal (no axis labels)
 pm <- ggpairs(tips[, 1:3], axisLabels="internal")
 p_(pm)
@@ -115,7 +131,7 @@ p_(pm)
 pm <- ggpairs(tips[, 1:3], axisLabels="none")
 p_(pm)
 
-# Custom Examples
+## Plot Insertion Example
 custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 # ggplot example taken from example(geom_text)
   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
@@ -128,6 +144,17 @@ personal_plot <- ggally_text(
 )
 custom_car[1, 3] <- personal_plot
 p_(custom_car)
+
+## Remove binwidth warning from ggplot2
+# displays warning about picking a better binwidth
+pm <- ggpairs(tips, 2:3)
+p_(pm)
+# no warning displayed
+pm <- ggpairs(tips, 2:3, lower = list(combo = wrap("facethist", binwidth = 0.5)))
+p_(pm)
+# no warning displayed with user supplied function
+pm <- ggpairs(tips, 2:3, lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
+p_(pm)
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason.s@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
