@@ -247,6 +247,10 @@ ggally_cor <- function(
     }
   }
 
+  if (is.numeric(eval(mapping$colour, data))) {
+    stop("ggally_cor: mapping color column must be categorical, not numeric")
+  }
+
   colorCol <- deparse(mapping$colour)
   singleColorCol <- ifelse(is.null(colorCol), NULL, paste(colorCol, collapse = ""))
 
