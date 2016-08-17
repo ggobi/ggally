@@ -34,8 +34,8 @@ fix_data <- function(data) {
   data <- fortify(data)
   data <- as.data.frame(data)
   for (i in 1:dim(data)[2] ) {
-    if (is.character(data[, i])) {
-      data[, i] <- as.factor(data[, i])
+    if (is.character(data[[i]])) {
+      data[[i]] <- as.factor(data[[i]])
     }
   }
   data

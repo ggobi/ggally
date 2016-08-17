@@ -61,8 +61,8 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
 
 
 
-  # xVar <- data[,as.character(mapping$x)]
-  # yVar <- data[,as.character(mapping$y)]
+  # xVar <- data[[as.character(mapping$x)]]
+  # yVar <- data[[as.character(mapping$y)]]
   # x_bad_rows <- is.na(xVar)
   # y_bad_rows <- is.na(yVar)
   # bad_rows <- x_bad_rows | y_bad_rows

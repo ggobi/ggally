@@ -14,7 +14,7 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
   columnNamesX <- names(data)[columnsX]
   columnNamesY <- names(data)[columnsY]
 
-  isNaData <- is.na(data)
+  isNaData <- as.data.frame(is.na(data))
 
   lenX <- length(plotTypesX)
   lenY <- length(plotTypesY)
@@ -37,7 +37,7 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
       plotType[pos] <- find_plot_type(
         xColName, yColName,
         plotTypesX[xI], plotTypesY[yI],
-        isAllNa = all(isNaData[, xColName] | isNaData[, yColName]),
+        isAllNa = all(isNaData[[xColName]] | isNaData[[yColName]]),
         allowDiag = allowDiag
       )
       xVar[pos] <- xColName

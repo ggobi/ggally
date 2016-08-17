@@ -10,6 +10,13 @@ if (getRversion() >= "2.15.1") {
 }
 
 
+is_horizontal <- function(data, mapping, val = "y") {
+  yData <- eval(mapping[[val]], data)
+
+  is.factor(yData) || is.character(yData)
+}
+
+
 
 #' Plots the Scatter Plot
 #'
@@ -204,8 +211,8 @@ ggally_cor <- function(
     cor(x, y, method = method, use = use)
   }
 
-  # xVar <- data[,as.character(mapping$x)]
-  # yVar <- data[,as.character(mapping$y)]
+  # xVar <- data[[as.character(mapping$x)]]
+  # yVar <- data[[as.character(mapping$y)]]
   # x_bad_rows <- is.na(xVar)
   # y_bad_rows <- is.na(yVar)
   # bad_rows <- x_bad_rows | y_bad_rows
@@ -226,7 +233,7 @@ ggally_cor <- function(
   xCol <- as.character(mapping$x)
   yCol <- as.character(mapping$y)
 
-  if (is_date(data[, xCol]) || is_date(data[, yCol])) {
+  if (is_date(data[[xCol]]) || is_date(data[[yCol]])) {
 
     # make sure it's a data.frame, as data.tables don't work well
     if (! identical(class(data), "data.frame")) {
@@ -234,8 +241,8 @@ ggally_cor <- function(
     }
 
     for (col in c(xCol, yCol)) {
-      if (is_date(data[, col])) {
-        data[, col] <- as.numeric(data[, col])
+      if (is_date(data[[col]])) {
+        data[[col]] <- as.numeric(data[[col]])
       }
     }
   }
@@ -246,12 +253,12 @@ ggally_cor <- function(
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
     if (length(colorCol) > 0) {
       if (singleColorCol %in% colnames(data)) {
-        rows <- complete.cases(data[, c(xCol, yCol, colorCol)])
+        rows <- complete.cases(data[c(xCol, yCol, colorCol)])
       } else {
-        rows <- complete.cases(data[, c(xCol, yCol)])
+        rows <- complete.cases(data[c(xCol, yCol)])
       }
     } else {
-      rows <- complete.cases(data[, c(xCol, yCol)])
+      rows <- complete.cases(data[c(xCol, yCol)])
     }
 
     if (any(!rows)) {
@@ -265,15 +272,15 @@ ggally_cor <- function(
     data <- data[rows, ]
   }
 
-  xVal <- data[, xCol]
-  yVal <- data[, yCol]
+  xVal <- data[[xCol]]
+  yVal <- data[[yCol]]
 
   if (length(names(mapping)) > 0){
     for (i in length(names(mapping)):1){
       # find the last value of the aes, such as cyl of as.factor(cyl)
       tmp_map_val <- as.character(mapping[names(mapping)[i]][[1]])
       if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
-        mapping[names(mapping)[i]] <- NULL
+        mapping[[names(mapping)[i]]] <- NULL
 
       if (length(names(mapping)) < 1){
         mapping <- NULL
@@ -298,7 +305,7 @@ ggally_cor <- function(
   ) {
 
     cord <- ddply(data, c(colorCol), function(x) {
-      cor_fn(x[, xCol], x[, yCol])
+      cor_fn(x[[xCol]], x[[yCol]])
     })
     colnames(cord)[2] <- "ggally_cor"
 
@@ -483,10 +490,8 @@ ggally_dot <- function(data, mapping, ...){
 #'  )
 #'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
-  horizontal <-
-    (is.factor(data[, as.character(mapping$y)])) ||
-    (is.character(data[, as.character(mapping$y)]))
-#  print(horizontal)
+
+  horizontal <- is_horizontal(data, mapping)
 
   #print(mapping$x[1])
   if (horizontal) {
@@ -594,9 +599,7 @@ ggally_facethist <- function(data, mapping, ...){
   #aesString <- aes_string(mapping)
   #cat("\naesString\n");print(str(aesString))
 
-  horizontal <-
-    (is.factor(data[, as.character(mapping$y)])) ||
-    (is.character(data[, as.character(mapping$y)]))
+  horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
     mapping$tmp <- mapping$x
@@ -707,16 +710,13 @@ ggally_denstrip <- function(data, mapping, ...){
 #' example(ggally_facetdensity)
 #' example(ggally_denstrip)
 ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
-  horizontal <-
-    (is.factor(data[, as.character(mapping$y)])) ||
-    (is.character(data[, as.character(mapping$y)]))
+  horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
     mapping$tmp <- mapping$x
     mapping$x <- mapping$y
     mapping$y <- mapping$tmp
     mapping$tmp <- NULL
-
   }
 
   xVal <- mapping$x
@@ -1053,18 +1053,17 @@ ggally_diagAxis <- function(
     stop("mapping$x is null.  There must be a column value in this location.")
   }
   mapping$y <- NULL
-  numer <- !(
-    (is.factor(data[, as.character(mapping$x)])) ||
-    (is.character(data[, as.character(mapping$x)]))
-  )
+  numer <- ! is_horizontal(data, mapping, "x")
 
   if (! is.character(label)) {
     label <- as.character(mapping$x)
   }
 
+  xData <- eval(mapping[["x"]], data)
+
   if (numer) {
-    xmin <- min(data[, as.character(mapping$x)], na.rm = TRUE)
-    xmax <- max(data[, as.character(mapping$x)], na.rm = TRUE)
+    xmin <- min(xData, na.rm = TRUE)
+    xmax <- max(xData, na.rm = TRUE)
 
     # add a lil fluff... it looks better
     xrange <- c(xmin - .01 * (xmax - xmin), xmax + .01 * (xmax - xmin))
@@ -1098,7 +1097,7 @@ ggally_diagAxis <- function(
     )
 
   } else {
-    breakLabels <- levels(as.factor(data[, as.character(mapping$x)]))
+    breakLabels <- levels(as.factor(xData))
     numLvls <- length(breakLabels)
 
     p <- ggally_text(

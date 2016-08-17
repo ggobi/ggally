@@ -236,7 +236,8 @@ ggparcoord <- function(
       stop("'alphaLines' column is missing in data")
     }
 
-    alphaRange <- range(data[, alphaLines])
+    alphaVar <- data[[alphaLines]]
+    alphaRange <- range(alphaVar)
     if (any(is.na(alphaRange))) {
       stop("missing data in 'alphaLines' column")
     }
@@ -244,7 +245,6 @@ ggparcoord <- function(
     if (alphaRange[1] < 0 || alphaRange[2] > 1) {
       stop("invalid value for 'alphaLines' column; max range must be from 0 to 1")
     }
-    alphaVar <- data[, alphaLines]
 
   } else if ((alphaLines < 0) || (alphaLines > 1)) { # nolint
     stop("invalid value for 'alphaLines'; must be a scalar value between 0 and 1")
@@ -270,7 +270,7 @@ ggparcoord <- function(
     groupColumn <- names(data)[groupColumn]
   }
   if (!is.null(groupColumn)) {
-    groupVar <- data[, groupColumn]
+    groupVar <- data[[groupColumn]]
   }
 
   if (is.character(columns)) {
@@ -280,13 +280,13 @@ ggparcoord <- function(
     }
     columns <- columns_
   }
-  # data <- data[, columns]
+  # data <- data[columns]
 
   # Change character vars to factors
   char.vars <- column_is_character(data)
   if (length(char.vars) >= 1) {
     for (char.var in char.vars) {
-      data[, char.var] <- factor(data[, char.var])
+      data[[char.var]] <- factor(data[[char.var]])
     }
   }
   # Change factors to numeric
@@ -294,14 +294,16 @@ ggparcoord <- function(
   fact.vars <- setdiff(fact.vars, groupColumn)
   if (length(fact.vars) >= 1) {
     for (fact.var in fact.vars) {
-      data[, fact.var] <- as.numeric(data[, fact.var])
+      data[[fact.var]] <- as.numeric(data[[fact.var]])
     }
   }
   # Save this form of the data for order calculations (don't want imputed
   # missing values affecting order, but do want any factor/character vars
   # being plotted as numeric)
   saveData2 <- data
-  saveData2[, groupColumn] <- as.numeric(saveData2[, groupColumn])
+  if (!is.null(groupColumn)) {
+    saveData2[[groupColumn]] <- as.numeric(saveData2[[groupColumn]])
+  }
 
   p <- c(ncol(data) + 1, ncol(data) + 2)
   data$.ID <- as.factor(1:nrow(data))
@@ -352,10 +354,10 @@ ggparcoord <- function(
       "uniminmax" = "range",
       "center" = "range"
     )[tolower(scale)]
-    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo], type = rescalerType)
+    data[columnsPlusTwo] <- inner_rescaler(data[columnsPlusTwo], type = rescalerType)
 
     if (tolower(scale) == "center") {
-      data[, columns] <- apply(data[, columns], 2, function(x) {
+      data[columns] <- apply(data[columns], 2, function(x) {
         x <- x - eval(
           parse(text = paste(
             scaleSummary,
@@ -370,7 +372,7 @@ ggparcoord <- function(
 
   ### Imputation ###
   if (tolower(missing) == "exclude") {
-    dataCompleteCases <- complete.cases(data[, columnsPlusTwo])
+    dataCompleteCases <- complete.cases(data[columnsPlusTwo])
 
     if (!is.null(groupColumn)) {
       groupVar <- groupVar[dataCompleteCases]
@@ -400,7 +402,7 @@ ggparcoord <- function(
       }
     )
     missing_fn <- missingFns[[tolower(missing)]]
-    data[, columns] <- apply(data[, columns], 2, function(x) {
+    data[columns] <- apply(data[columns], 2, function(x) {
       if (any(is.na(x))){
         x[is.na(x)] <- missing_fn(x)
       }
@@ -413,8 +415,8 @@ ggparcoord <- function(
   # Centering by observation needs to be done after handling missing values
   #   in case the observation to be centered on has missing values
   if (tolower(scale) == "centerobs") {
-    data[, columnsPlusTwo] <- inner_rescaler(data[, columnsPlusTwo], type = "range")
-    data[, columns] <- apply(data[, columns], 2, function(x){
+    data[columnsPlusTwo] <- inner_rescaler(data[columnsPlusTwo], type = "range")
+    data[columns] <- apply(data[columns], 2, function(x){
       x <- x - x[centerObsID]
     })
   }

@@ -69,7 +69,14 @@ If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
 If a function is supplied as an option to \code{upper}, \code{lower}, or \code{diag}, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
- # small function to display plots only if it's interactive
+Basic example, with and without colour
+data(flea)
+ggpairs(flea, columns = 2:4)
+ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
+# Note: colour should be categorical, else you will need to reset
+the uppertriangle to use points instead of trying to compute corr
+
+# small function to display plots only if it's interactive
 p_ <- function(pm) {
   if (interactive()) {
     print(pm)
