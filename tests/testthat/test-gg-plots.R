@@ -76,6 +76,20 @@ test_that("cor", {
   }
   expect_warn(ti2, "Removing 1 row that")
   expect_warn(ti3, "Removed 3 rows containing")
+
+  expect_error(
+    ggally_cor(
+      ti,
+      ggplot2::aes(x = total_bill, y = tip, color = size)
+    ),
+    "ggally_cor: mapping color column"
+  )
+  expect_silent(
+    ggally_cor(
+      ti,
+      ggplot2::aes(x = total_bill, y = tip, color = as.factor(size))
+    )
+  )
 })
 
 test_that("diagAxis", {

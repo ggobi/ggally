@@ -34,3 +34,8 @@ ifnull <- function(a, b) {
     b
   }
 }
+
+
+hf <- function(field) {
+  eval(parse(text = read.dcf(".helper_functions", fields = field)))
+}
