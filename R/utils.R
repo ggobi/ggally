@@ -1,23 +1,12 @@
 
-allow_example_printing <- (function(){
-  can_print <- FALSE
-
-  function(x) {
-    if (!missing(x)) {
-      can_print <<- x
-    }
-    can_print
-  }
-})()
-
 #' Print if not CRAN
 #'
-#' Small function to print a plot if the R session is interactive or if it's not in a travis check.
+#' Small function to print a plot if the R session is interactive or in a travis build
 #'
 #' @param p plot to be displayed
 #' @export
 print_if_interactive <- function(p) {
-  if (interactive() || allow_example_printing()) {
+  if (interactive() || nzchar(Sys.getenv("CI"))) {
     print(p)
   }
 }
