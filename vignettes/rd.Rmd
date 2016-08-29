@@ -1,0 +1,16 @@
+---
+title: "GGally"
+subtitle: "Extension to 'ggplot2'"
+author: "Barret Schloerke"
+copyright: "Barret Schloerke"
+output:
+  packagedocs:
+    toc: true
+vignette: |
+  %\VignetteIndexEntry{GGally_rd}
+  %\VignetteEngine{packagedocs::rd}
+navpills: |
+  <li><a href='index.html'>Docs</a></li>
+  <li class="active"><a href='rd.html'>Package Ref</a></li>
+  <li><a href='https://github.com/ggobi/ggally'>Github <i class='fa fa-github'></i></a></li>
+---
