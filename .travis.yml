@@ -5,7 +5,7 @@ language: r
 r:
   - release
   # - devel
-  - 3.1
+  # - 3.1
 # https://blog.rstudio.org/2016/03/09/r-on-travis-ci/
 sudo: false
 cache: packages
