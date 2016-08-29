@@ -84,13 +84,8 @@ if (getRversion() >= "2.15.1") {
 #' @importFrom stats complete.cases sd median mad lm spline
 #' @export
 #' @examples
-#'  # small function to display plots only if it's interactive
-#' p_ <- function(pm) {
-#'   if (interactive()) {
-#'     print(pm)
-#'   }
-#'   invisible()
-#' }
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
 #' # use sample of the diamonds data for illustrative purposes
 #' data(diamonds, package="ggplot2")

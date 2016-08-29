@@ -180,12 +180,7 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' @export
 #' @examples
 #'  # small function to display plots only if it's interactive
-#'  p_ <- function(pm) {
-#'    if (interactive()) {
-#'      print(pm)
-#'    }
-#'    invisible()
-#'  }
+#'  p_ <- GGally::print_if_interactive
 #'
 #'  data(baseball, package = "plyr")
 #'
@@ -582,13 +577,8 @@ ggduo <- function(
 #' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
 #' @return ggpair object that if called, will print
 #' @examples
-#' # small function to display plots only if it's interactive
-#' p_ <- function(pm) {
-#'   if (interactive()) {
-#'     print(pm)
-#'   }
-#'   invisible()
-#' }
+#'  # small function to display plots only if it's interactive
+#'  p_ <- GGally::print_if_interactive
 #'
 #'
 #' ## Quick example, with and without colour

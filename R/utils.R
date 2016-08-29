@@ -1,4 +1,23 @@
 
+#' Print if not CRAN
+#'
+#' Small function to print a plot if the R session is interactive or if it's not in a travis check.
+#'
+#' @param p plot to be displayed
+#' @export
+print_if_interactive <- function(p) {
+  if (
+    interactive() ||
+    (
+      Sys.getenv("CI") != "" &&
+      Sys.getenv("TRAVIS_TEST_RESULT") == "0"
+    )
+  ) {
+    print(p)
+  }
+}
+
+
 #' Require packages
 #'
 #' Requires packages or yells at user... loudly
