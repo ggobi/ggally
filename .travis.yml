@@ -27,8 +27,9 @@ r_github_packages:
   - schloerke/travisDrat
 
 after_success:
-  - Rscript -e 'eval(parse(text = read.dcf(".helper_functions", fields = "knit_vignettes")))'
   - Rscript -e 'covr::codecov()'
+  - Rscript -e "library(GGally); GGally:::allow_example_printing(TRUE); packagedocs::deploy_travis(valid_branches = 'dev', push_branch = 'gh-pages-dev')"
+  - Rscript -e "library(GGally); GGally:::allow_example_printing(TRUE); packagedocs::deploy_travis(valid_branches = 'master')"
   - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master')"
 
 
