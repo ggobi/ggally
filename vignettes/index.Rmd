@@ -20,8 +20,8 @@ navpills: |
 knitr::opts_chunk$set(
   comment = NA,
   cache = TRUE,
-  fig.height: 8
-  fig.width: 10
+  fig.height = 8,
+  fig.width = 10
 )
 suppressMessages(suppressWarnings(library(GGally)))
 
