@@ -29,6 +29,7 @@ r_github_packages:
   - schloerke/travisDrat
 
 after_success:
+  - Rscript -e "devtools::install()" # install GGally, as it's removed after the script
   - Rscript -e 'if (nzchar(Sys.getenv("GITHUB_PAT"))) { covr::codecov() }'
   - Rscript -e "library(GGally); GGally:::allow_example_printing(TRUE); packagedocs::deploy_travis(valid_branches = 'dev', push_branch = 'gh-pages-dev')"
   - Rscript -e "library(GGally); GGally:::allow_example_printing(TRUE); packagedocs::deploy_travis(valid_branches = 'master')"
