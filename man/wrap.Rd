@@ -17,7 +17,7 @@ wrap(funcVal, ..., funcArgName = deparse(substitute(funcVal)))
 wrap_fn_with_params(funcVal, ..., funcArgName = deparse(substitute(funcVal)))
 }
 \arguments{
-\item{funcVal}{function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}. \code{funcVal} is allowed to be a string of one of the \code{ggally_NAME} functions, such as \code{"points"} or \code{"facetdensity"}.}
+\item{funcVal}{function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}. \code{funcVal} is allowed to be a string of one of the \code{ggally_NAME} functions, such as \code{"points"} for \code{ggally_points} or \code{"facetdensity"} for \code{ggally_facetdensity}.}
 
 \item{params}{named vector or list of parameters to be applied to the \code{funcVal}}
 

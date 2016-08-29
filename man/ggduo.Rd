@@ -55,10 +55,11 @@ If a function is supplied as an option, it should implement the function api of 
 
  data(baseball, package = "plyr")
 
+ # Keep players from 1990-1995 with at least one at bat
  # Add how many singles a player hit
  # (must do in two steps as X1b is used in calculations)
  dt <- transform(
-   subset(baseball, year >= 1990 & year <= 1995),
+   subset(baseball, year >= 1990 & year <= 1995 & ab > 0),
    X1b = h - X2b - X3b - hr
  )
  # Add
@@ -210,7 +211,7 @@ loess_with_cor <- function(data, mapping, ..., method = "pearson") {
     )
 }
 pm <- ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
-p_(pm)
+suppressWarnings(p_(pm)) # ignore warnings from loess
 
 }
 
