@@ -47,10 +47,13 @@ Suggests:
     scales (>= 0.4.0),
     sna (>= 2.3-2),
     survival,
+    packagedocs,
     knitr,
     rmarkdown,
     roxygen2,
     testthat
+Remotes:
+  schloerke/packagedocs
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
-VignetteBuilder: knitr
+VignetteBuilder: packagedocs

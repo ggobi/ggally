@@ -37,21 +37,7 @@ test_file:
   }
   tf("zzz_ggpairs")
 knit_vignettes:
-  kvs <- function() {
-    library(magrittr)
-    dir("vigs", full.names = TRUE) %>%
-    subset(., GGally:::str_detect(., ".Rmd")) %>%
-    lapply(rmarkdown::render) %>%
-    unlist()
-  }
-  kvs()
-knit_vignette:
-  kv <- function(file = "ggmatrix", openFile = interactive()) {
-    rmarkdown::render(file.path("vigs", paste(file, ".Rmd", sep = "")))
-    if(openFile) browseURL(file.path("vigs", paste(file, ".Rmd")))
-    invisible()
-  }
-  kv("ggmatrix")
+  packagedocs::build_vignettes()
 build_win:
   devtools::build_win(version = c("R-release", "R-devel"))
 reverse_depends:
