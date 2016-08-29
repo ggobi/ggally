@@ -51,12 +51,7 @@ If a function is supplied as an option, it should implement the function api of 
 }
 \examples{
  # small function to display plots only if it's interactive
- p_ <- function(pm) {
-   if (interactive()) {
-     print(pm)
-   }
-   invisible()
- }
+ p_ <- GGally::print_if_interactive
 
  data(baseball, package = "plyr")
 

@@ -35,20 +35,23 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 Make a generic matrix of ggplot2 plots
 }
 \examples{
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 plotList <- list()
 for (i in 1:6) {
   plotList[[i]] <- ggally_text(paste("Plot #", i, sep = ""))
 }
-a <- ggmatrix(
+pm <- ggmatrix(
   plotList,
   2, 3,
   c("A", "B", "C"),
   c("D", "E"),
   byrow = TRUE
 )
-#a
+p_(pm)
 
-a <- ggmatrix(
+pm <- ggmatrix(
   plotList,
   2, 3,
   xAxisLabels = c("A", "B", "C"),
@@ -56,7 +59,7 @@ a <- ggmatrix(
   byrow = FALSE,
   showXAxisPlotLabels = FALSE
 )
-#a
+p_(pm)
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
