@@ -18,3 +18,10 @@ revdep
 ^cran-comments\.md$
 ^codecov\.yml$
 vigs/
+vignettes/_rd_cache
+vignettes/rd_files
+vignettes/index_files
+vignettes/assets
+vignettes/z_old
+_gh-pages
+ggduo_paper.txt
