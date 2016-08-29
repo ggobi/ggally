@@ -13,3 +13,4 @@ vignettes/*.html
 revdep/checks\.rds
 vigs/cache
 vigs/*.html
+_gh-pages
