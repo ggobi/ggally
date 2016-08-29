@@ -9,7 +9,7 @@
 #'
 #' The \code{params} and \code{fn} attributes are there for debugging purposes.  If either attribute is altered, the function must be re-wrapped to have the changes take effect.
 #'
-#' @param funcVal function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}. \code{funcVal} is allowed to be a string of one of the \code{ggally_NAME} functions, such as \code{"points"} or \code{"facetdensity"}.
+#' @param funcVal function that the \code{params} will be applied to.  The function should follow the api of \code{function(data, mapping, ...)\{\}}. \code{funcVal} is allowed to be a string of one of the \code{ggally_NAME} functions, such as \code{"points"} for \code{ggally_points} or \code{"facetdensity"} for \code{ggally_facetdensity}.
 #' @param ... named parameters to be supplied to \code{wrap_fn_with_param_arg}
 #' @param params named vector or list of parameters to be applied to the \code{funcVal}
 #' @param funcArgName name of function to be displayed
