@@ -23,9 +23,14 @@ r_binary_packages:
   - covr # code coverage check
   - lintr # code lint
 
+r_github_packages:
+  - schloerke/travisDrat
+
 after_success:
   - Rscript -e 'eval(parse(text = read.dcf(".helper_functions", fields = "knit_vignettes")))'
   - Rscript -e 'covr::codecov()'
+  - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master')"
+
 
 notifications:
   email:
@@ -37,3 +42,7 @@ branches:
     - master
     - dev
     - travis
+
+env:
+  global:
+    secure: "QIlD/M810vKuXF9HwtCXoJy9FszK1EMS1NMdulEp6HXCO75eWTauDz64k8lPnMya1eu7965P54JF/IjU67rwmAi2svTQrmGwCihFlPN4h1KfcoIOXHh9XE2Am/uwn4wa5lJcDob7bm2NzDYDBEzMy6iSpURABDp6zHRaMFF7ELw="
