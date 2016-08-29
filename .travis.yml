@@ -16,7 +16,7 @@ matrix:
       env:
         # secret key to allow for packagedocs and travisDrat (and set to codecov)
         secure: "QIlD/M810vKuXF9HwtCXoJy9FszK1EMS1NMdulEp6HXCO75eWTauDz64k8lPnMya1eu7965P54JF/IjU67rwmAi2svTQrmGwCihFlPN4h1KfcoIOXHh9XE2Am/uwn4wa5lJcDob7bm2NzDYDBEzMy6iSpURABDp6zHRaMFF7ELw="
-    - r: 3.1
+    # - r: 3.1
     # - r: devel
 
 
