@@ -1,12 +1,5 @@
 
 language: r
-# test on older versions and devel
-# https://docs.travis-ci.com/user/languages/r#R-Versions
-r:
-  - release
-  # - devel
-  # - 3.1
-# https://blog.rstudio.org/2016/03/09/r-on-travis-ci/
 sudo: false
 cache: packages
 
@@ -15,7 +8,16 @@ matrix:
                     # allows the build to "pass" when the non-failure-able builds are done
   allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
     - r: 3.1
-#     - env: R_BUILD_ARGS="" R_CHECK_ARGS="--as-cran" R_CHECK_REVDEP="1" # allows the reverse depends to fail :-\
+    - r: devel
+  # test on older versions and devel
+  # https://docs.travis-ci.com/user/languages/r#R-Versions
+  include:
+    - r: release
+      env:
+        # secret key to allow for packagedocs and travisDrat (and set to codecov)
+        secure: "QIlD/M810vKuXF9HwtCXoJy9FszK1EMS1NMdulEp6HXCO75eWTauDz64k8lPnMya1eu7965P54JF/IjU67rwmAi2svTQrmGwCihFlPN4h1KfcoIOXHh9XE2Am/uwn4wa5lJcDob7bm2NzDYDBEzMy6iSpURABDp6zHRaMFF7ELw="
+    - r: devel
+    - r: 3.1
 
 
 r_binary_packages:
@@ -27,7 +29,7 @@ r_github_packages:
   - schloerke/travisDrat
 
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'if (nzchar(Sys.getenv("GITHUB_PAT"))) { covr::codecov() }'
   - Rscript -e "library(GGally); GGally:::allow_example_printing(TRUE); packagedocs::deploy_travis(valid_branches = 'dev', push_branch = 'gh-pages-dev')"
   - Rscript -e "library(GGally); GGally:::allow_example_printing(TRUE); packagedocs::deploy_travis(valid_branches = 'master')"
   - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master')"
@@ -43,7 +45,3 @@ branches:
     - master
     - dev
     - travis
-
-env:
-  global:
-    secure: "QIlD/M810vKuXF9HwtCXoJy9FszK1EMS1NMdulEp6HXCO75eWTauDz64k8lPnMya1eu7965P54JF/IjU67rwmAi2svTQrmGwCihFlPN4h1KfcoIOXHh9XE2Am/uwn4wa5lJcDob7bm2NzDYDBEzMy6iSpURABDp6zHRaMFF7ELw="
