@@ -6,6 +6,7 @@
 \usage{
 \method{print}{ggmatrix}(x, leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1, spacingProportion = 0.03,
+  xProportions = rep(1, x$ncol), yProportions = rep(1, x$nrow),
   gridNewPage = TRUE, ...)
 }
 \arguments{
@@ -16,6 +17,10 @@
 \item{bottomHeightProportion}{proportion of a plot area devoted to bottom axis labels}
 
 \item{spacingProportion}{proportion of a plot area devoted to the space between plots}
+
+\item{xProportions}{proportion of a plot's horizontal space. This size defaults to 1}
+
+\item{yProportions}{proportion of a plot's vertical space. This size defaults to 1}
 
 \item{gridNewPage}{boolean that determines if a \code{\link[grid]{grid.newpage}()} should be executed before printing. Defaults to \code{TRUE}}
 

@@ -79,6 +79,8 @@ first_non_null <- function(...) {
 #' @param leftWidthProportion proportion of a plot area devoted to left axis labels
 #' @param bottomHeightProportion proportion of a plot area devoted to bottom axis labels
 #' @param spacingProportion proportion of a plot area devoted to the space between plots
+#' @param xProportions proportion of a plot's horizontal space. This size defaults to 1
+#' @param yProportions proportion of a plot's vertical space. This size defaults to 1
 #' @param gridNewPage boolean that determines if a \code{\link[grid]{grid.newpage}()} should be executed before printing. Defaults to \code{TRUE}
 #' @param ... ignored
 #' @method print ggmatrix
@@ -106,6 +108,8 @@ print.ggmatrix <- function(
   leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1,
   spacingProportion = 0.03,
+  xProportions = rep(1, x$ncol),
+  yProportions = rep(1, x$nrow),
   gridNewPage = TRUE,
   ...
 ) {
@@ -129,9 +133,17 @@ print.ggmatrix <- function(
     height = v1YHeight
   )
 
-  viewPortWidths <- c(1, rep(c(spacingProportion, 1), x$ncol - 1))
-  viewPortHeights <- c(rep(c(1, spacingProportion), x$nrow - 1), 1)
+  if (length(xProportions) != x$ncol) {
+    stop("xProportion length must match the number of columns")
+  }
+  if (length(yProportions) != x$nrow) {
+    stop("yProportion length must match the number of rows")
+  }
 
+  viewPortWidths <- rep(spacingProportion, x$ncol * 2 - 1)
+  viewPortHeights <- rep(spacingProportion, x$nrow * 2 - 1)
+  viewPortWidths[seq(1, length(viewPortWidths), by = 2)] <- xProportions
+  viewPortHeights[seq(1, length(viewPortHeights), by = 2)] <- yProportions
 
   x$showXAxisPlotLabels <- identical(x$showXAxisPlotLabels, TRUE)
   x$showYAxisPlotLabels <- identical(x$showYAxisPlotLabels, TRUE)
