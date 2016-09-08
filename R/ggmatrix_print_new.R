@@ -68,8 +68,7 @@ ggprint <- function(
   }
 
   # make a gtable of the plot matrix (to be filled in)
-  pm_fake_build <- ggplot2::ggplot_build(pm_fake)
-  pmg <- ggplot2::ggplot_gtable(pm_fake_build)
+  pmg <- plot_gtable(pm_fake)
 
   ###############
   ## Everything beyond this point is only to fill in the correct information.
@@ -107,7 +106,7 @@ ggprint <- function(
     class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
     pmg$grobs[[legend_layout$grob_pos]] <- legend_obj
 
-    legend_position <- ifnull(pm_fake_build$plot$theme$legend.position, "right")
+    legend_position <- ifnull(pm_fake$theme$legend.position, "right")
 
     if (legend_position %in% c("right", "left")) {
       pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
