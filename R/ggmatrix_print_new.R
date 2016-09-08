@@ -40,7 +40,6 @@ ggprint <- function(
   pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
     geom_point() +
     facet_grid(Var2 ~ Var1) + # make the 'fake' strips for x and y titles
-    labs(title = pm$title) + # add title in
     labs(x = NULL, y = NULL) # remove both x and y titles
 
   # add all custom ggplot2 things
@@ -48,6 +47,12 @@ ggprint <- function(
     pm_fake <- pm_fake + pm$gg
   }
 
+  # add the title or remove the location completely
+  if (is.null(pm$title)) {
+    pm_fake <- pm_fake + theme(plot.title = element_blank())
+  } else {
+    pm_fake <- pm_fake + labs(title = pm$title)
+  }
 
   # if there are no labels, then there should be no strips
   if (is.null(pm$xAxisLabels)) {
