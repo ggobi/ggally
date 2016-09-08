@@ -142,7 +142,7 @@ ggprint <- function(
   for (j in seq_len(pm$ncol)) {
     for (i in seq_len(pm$nrow)) {
       plot_number <- plot_number + 1
-      grob_pos <- panel_locations[plot_number]
+      grob_pos_panel <- panel_locations[plot_number]
 
       # update the progress bar is possible
       if (isTRUE(progress) && (Sys.time() - start_time > progress_wait)) {
@@ -163,7 +163,7 @@ ggprint <- function(
 
       # if it's not a ggplot2 obj, insert it and pray it works
       if (!is.ggplot(p)) {
-        pmg$grobs[[grob_pos]] <- p
+        pmg$grobs[[grob_pos_panel]] <- p
         next
       }
 
@@ -192,7 +192,7 @@ ggprint <- function(
       }
 
       # grab plot panel and insert
-      pmg$grobs[[grob_pos]] <- plot_panel(
+      pmg$grobs[[grob_pos_panel]] <- plot_panel(
         pg = pg,
         row_pos = i, col_pos = j,
         matrix_show_strips = pm$showStrips,
