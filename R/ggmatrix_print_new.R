@@ -40,7 +40,7 @@ ggprint <- function(
   pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
     geom_point() +
     facet_grid(Var2 ~ Var1) + # make the 'fake' strips for x and y titles
-    labs(x = NULL, y = NULL) # remove both x and y titles
+    labs(x = pm$xlab, y = pm$ylab) # remove both x and y titles
 
   # add all custom ggplot2 things
   if (!is.null(pm$gg)) {
