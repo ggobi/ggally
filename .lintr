@@ -7,14 +7,6 @@ linters: with_defaults(
   )
 exclusions:
   list(
-    "inst/doc/ggduo.R",
-    "inst/doc/gglyph.R",
-    "inst/doc/ggcoef.R",
-    "inst/doc/ggmatrix.R",
-    "inst/doc/ggnetworkmap.R",
-    "inst/doc/ggpairs.R",
-    "inst/doc/ggscatmat.R",
-    "inst/doc/ggsurv.R",
     "R/ggnetworkmap.R",
     "R/ggcorr.R",
     "R/ggsurv.R",
