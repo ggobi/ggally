@@ -172,16 +172,16 @@ ggprint <- function(
     axis_sizes = left_axis_sizes,
     layout_name = "axis-l",
     layout_cols = c("l", "r"),
-    pmg_key = "widths",
-    stop_msg = "left axis width issue!! Fix!"
+    pmg_key = "widths"
+    #stop_msg = "left axis width issue!! Fix!"
   )
   pmg <- set_max_axis_size(
     pmg,
     axis_sizes = bottom_axis_sizes,
     layout_name = "axis-b",
     layout_cols = c("t", "b"),
-    pmg_key = "heights",
-    stop_msg = "bottom axis height issue!! Fix!"
+    pmg_key = "heights"
+    #stop_msg = "bottom axis height issue!! Fix!"
   )
 
   # close the progress bar

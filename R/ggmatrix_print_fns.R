@@ -131,14 +131,14 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
 
 
 
-set_max_axis_size <- function(pmg, axis_sizes, layout_name, layout_cols, pmg_key, stop_msg) {
+set_max_axis_size <- function(pmg, axis_sizes, layout_name, layout_cols, pmg_key) {
   m_axis_size <- max(axis_sizes, na.rm = TRUE)
   grob_pos_vals <- which(pmg$layout$name == layout_name)
   val_pos <- pmg$layout[grob_pos_vals, layout_cols]
   val_pos <- unique(unlist(val_pos))
-  if (length(val_pos) > 1) {
-    stop(stop_msg)
-  }
+  # if (length(val_pos) > 1) {
+  #   stop(stop_msg)
+  # }
 
   pmg[[pmg_key]][[val_pos]] <- unit(m_axis_size, "cm")
   pmg
