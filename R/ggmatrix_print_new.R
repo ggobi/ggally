@@ -22,18 +22,25 @@ ggprint <- function(
   progress_wait = 5
 ) {
 
-  pm <- x
+  pm <- x # pm is for "plot matrix"
+  pb <- NULL # init progress bar handle
+  start_time <- Sys.time() # init start time
+  plot_count <- pm$ncol * pm$nrow # how many plots are produced
+
 
   # make a fake facet grid to fill in with proper plot panels
   fake_data <- expand.grid(Var1 = pm$xAxisLabels, Var2 = pm$yAxisLabels)
   fake_data$x <- 1
   fake_data$y <- 1
+
+  # make the smallest plot possible so the guts may be replaced
   pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
     geom_point() +
     facet_grid(Var2 ~ Var1) + # make the 'fake' strips for x and y titles
     labs(title = pm$title) + # add title in
     labs(x = NULL, y = NULL) # remove both x and y titles
 
+  # add all custom ggplot2 things
   if (!is.null(pm$gg)) {
     pm_fake <- pm_fake + pm$gg
   }
@@ -46,16 +53,22 @@ ggprint <- function(
   pm_fake_build <- ggplot2::ggplot_build(pm_fake)
   pmg <- ggplot2::ggplot_gtable(pm_fake_build)
 
+  ###############
+  ## Everything beyond this point is only to fill in the correct information.
+  ## No grobs should be appended or removed.  It should be done with themes or geoms above
+  ###############
+
   # help with grob positions
   pmg$layout$grob_pos <- seq_along(pmg$grobs)
 
-  # zero out rest of the plotting area
+  # zero out rest of the plotting area (just in case it is not replaced)
   zero_pos_vals <- pmg$layout$grob_pos[pmg$layout$name %in% c("panel", "axis-l", "axis-b", "guide-box")]
   for (zero_pos in zero_pos_vals) {
     pmg$grobs[[zero_pos]] <- ggplot2::zeroGrob()
   }
   pmg
 
+  # insert legend
   if (!is.null(pm$legend)) {
     legend <- pm$legend
     if (is.numeric(legend)) {
@@ -101,10 +114,8 @@ ggprint <- function(
   axis_l_grob_pos <- subset(pmg$layout, name == "axis-l", "grob_pos")$grob_pos
   axis_b_grob_pos <- subset(pmg$layout, name == "axis-b", "grob_pos")$grob_pos
 
-  pb <- NULL
-  start_time <- Sys.time()
-  plot_count <- pm$ncol * pm$nrow
 
+  # build and insert all plots and axis labels
   plot_number <- 0
   for (j in seq_len(pm$ncol)) {
     for (i in seq_len(pm$nrow)) {
@@ -120,10 +131,11 @@ ggprint <- function(
         }
       }
 
+      # retrieve plot
       p <- pm[i,j]
 
+      # ignore all blank plots.  all blank plots do not draw anything else
       if (is_blank_plot(p)) {
-        # ignore all blank plots.  all blank plots to not draw anything else
         next
       }
 
@@ -133,9 +145,10 @@ ggprint <- function(
         next
       }
 
+      # get the plot's gtable to slice and dice
       pg <- plot_gtable(p)
 
-      # if the axis
+      # if the left axis should be added
       if (j == 1 && pm$showYAxisPlotLabels) {
         left_axis_sizes[i] <- axis_size_left(pg)
 
@@ -145,6 +158,7 @@ ggprint <- function(
           grob_pos = axis_l_grob_pos[i]
         )
       }
+      # if the bottom axis should be added
       if (i == pm$nrow && pm$showXAxisPlotLabels) {
         bottom_axis_sizes[j] <- axis_size_bottom(pg)
 
@@ -167,6 +181,7 @@ ggprint <- function(
     }
   }
 
+  # make sure the axes have enough room
   pmg <- set_max_axis_size(
     pmg,
     axis_sizes = left_axis_sizes,
@@ -186,11 +201,12 @@ ggprint <- function(
 
   # close the progress bar
   if (!is.null(pb)) {
-    # pb$term()
     close(pb)
   }
 
+  # draw the giant gtable obj
   grid.draw(pmg)
+  # returns nothing
 
-  invisible()
+  invisible(pm)
 }
