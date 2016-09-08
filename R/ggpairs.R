@@ -680,6 +680,7 @@ ggpairs <- function(
   axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]),
   showStrips = NULL,
+  legend = NULL,
   legends = FALSE,
   verbose = NULL
 ){
@@ -776,6 +777,7 @@ ggpairs <- function(
     ylab = ylab,
     data = data,
     gg = NULL,
+    legend = legend,
     legends = legends
   )
 
