@@ -41,7 +41,21 @@
 "+.gg" <- function(e1, e2) {
 
   if (is.ggmatrix(e1)) {
-    if (is.theme(e2)) {
+    if (inherits(e2, "labels")) {
+      label_names <- names(e2)
+      if (!all(label_names %in% c("x", "y", "title"))) {
+        stop("'ggmatrix' does not know how to add any label other than c('x', 'y', 'title')")
+      }
+
+      for (from_to in list(c("x", "xlab"), c("y", "ylab"), c("title", "title"))) {
+        if (from_to[1] %in% label_names) {
+          e1[[from_to[2]]] <- e2[[from_to[1]]]
+        }
+      }
+
+      return(e1)
+
+    } else if (is.theme(e2)) {
       # Get the name of what was passed in as e2, and pass along so that it
       # can be displayed in error messages
       # e2name <- deparse(substitute(e2))
