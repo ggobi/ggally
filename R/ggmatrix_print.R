@@ -1,4 +1,47 @@
 
+ggplot2_set_last_plot <- getFromNamespace("set_last_plot", "ggplot2")
+
+#' Print ggpair object
+#'
+#' Print method taken from \code{ggplot2:::print.ggplot} and altered for a ggmatrix object
+#'
+#' @param x plot to display
+#' @param newpage draw new (empty) page first?
+#' @param vp viewport to draw plot in
+#' @param ... other arguments not used by this method
+#' @method print ggmatrix
+#' @author Barret Schloerke
+#' @importFrom grid grid.newpage grid.draw seekViewport pushViewport upViewport
+#' @export
+#' @examples
+#'  data(tips, package = "reshape")
+#'  pMat <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
+#'  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
+print.ggmatrix <- function (x, newpage = is.null(vp), vp = NULL, ...) {
+  ggplot2_set_last_plot(x)
+  if (newpage) {
+    grid.newpage()
+  }
+  grDevices::recordGraphics(requireNamespace("GGally", quietly = TRUE),
+      list(), getNamespace("GGally"))
+  gtable <- ggmatrix_gtable(x, ...)
+  if (is.null(vp)) {
+    grid.draw(gtable)
+  } else {
+    if (is.character(vp)) {
+      seekViewport(vp)
+    } else {
+      pushViewport(vp)
+    }
+    grid.draw(gtable)
+    upViewport()
+  }
+  invisible(data)
+}
+
+
+
+
 #' Is Blank Plot?
 #' Find out if the plot equals a blank plot
 #'
@@ -103,7 +146,7 @@ first_non_null <- function(...) {
 #'
 #'  ## give the spacing between plots a proportion of 1 plot size
 #'  # print(pMat, spacing = 1)
-print.ggmatrix <- function(
+print.ggmatrix2 <- function(
   x,
   leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1,
@@ -113,6 +156,8 @@ print.ggmatrix <- function(
   gridNewPage = TRUE,
   ...
 ) {
+
+  return(ggprint(x, ...))
 
   displayXAxisLabels <- !is.null(x$xAxisLabels)
   displayYAxisLabels <- !is.null(x$yAxisLabels)
