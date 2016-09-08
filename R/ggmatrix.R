@@ -12,7 +12,6 @@
 #' @param data data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time
 #' @param gg ggplot2 theme objects to be applied to every plot
 #' @template ggmatrix-legend-param
-#' @param legends deprecated
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export

@@ -127,7 +127,7 @@ first_non_null <- function(...) {
 #' @param yProportions proportion of a plot's vertical space. This size defaults to 1
 #' @param gridNewPage boolean that determines if a \code{\link[grid]{grid.newpage}()} should be executed before printing. Defaults to \code{TRUE}
 #' @param ... ignored
-#' @method print ggmatrix
+#' @method print ggmatrix2
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
