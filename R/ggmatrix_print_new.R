@@ -140,7 +140,7 @@ ggprint <- function(
       grob_pos <- panel_locations[plot_number]
 
       # update the progress bar is possible
-      if (isTRUE(progress) && (Sys.time() - start_time > 5)) {
+      if (isTRUE(progress) && (Sys.time() - start_time > progress_wait)) {
         if (is.null(pb)) {
           pb <- utils::txtProgressBar(initial = plot_number / plot_count, style = 3)
         } else {
