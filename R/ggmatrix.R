@@ -79,7 +79,6 @@ ggmatrix <- function(
     title = title,
     xlab = xlab,
     ylab = ylab,
-    verbose = verbose,
     showStrips = showStrips,
     xAxisLabels = xAxisLabels,
     yAxisLabels = yAxisLabels,
