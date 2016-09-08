@@ -607,21 +607,19 @@ test_that("subtypes", {
       diagConSub <- if (i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
       diagDisSub <- if (i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
 
-      print(list(
-        fn_num = fn_num,
-        types = list(
-          continuous = conSub,
-          combo = comSub,
-          discrete = disSub
-        ),
-        diag = list(
-          continuous = diagConSub,
-          discrete = diagDisSub
-        )
-      ))
-      
-      print(a, progress = FALSE)
-
+      # print(list(
+      #   fn_num = fn_num,
+      #   types = list(
+      #     continuous = conSub,
+      #     combo = comSub,
+      #     discrete = disSub
+      #   ),
+      #   diag = list(
+      #     continuous = diagConSub,
+      #     discrete = diagDisSub
+      #   )
+      # ))
+      #
       pm <- fn(
         types = list(
           continuous = conSub,
