@@ -48,6 +48,16 @@ ggprint <- function(
     pm_fake <- pm_fake + pm$gg
   }
 
+
+  # if there are no labels, then there should be no strips
+  if (is.null(pm$xAxisLabels)) {
+    pm_fake <- pm_fake + theme(strip.text.x = element_blank())
+  }
+  if (is.null(pm$yAxisLabels)) {
+    pm_fake <- pm_fake + theme(strip.text.y = element_blank())
+  }
+
+  # if there is a legend, make a fake legend that will be replaced later
   if (!is.null(pm$legend)) {
     pm_fake <- pm_fake + geom_point(mapping = aes(color = Var1))
   }
