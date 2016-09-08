@@ -7,6 +7,8 @@
 #'
 #' @param x ggpair object to be plotted
 #' @param ... ignored
+#' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only
+#' @param progress_wait how many seconds the progress bar will wait until appearing. Defaults to 5 seconds.
 # ' @method ggprint ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
