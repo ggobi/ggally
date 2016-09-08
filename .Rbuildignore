@@ -25,3 +25,4 @@ vignettes/assets
 vignettes/z_old
 _gh-pages
 ggduo_paper.txt
+^man-roxygen
