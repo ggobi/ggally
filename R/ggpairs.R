@@ -412,6 +412,7 @@ ggduo <- function(
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
   showStrips = NULL,
+  legend = NULL,
   legends = FALSE
 ) {
 
@@ -507,6 +508,7 @@ ggduo <- function(
     title = title,
     data = data,
     gg = NULL,
+    legend = legend,
     legends = legends
   )
 

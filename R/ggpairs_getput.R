@@ -105,12 +105,23 @@ getPlot <- function(pm, i, j){
 
 
 get_pos <- function(pm, i, j) {
-  if (!identical(pm$byrow, TRUE)) {
-    pos <- i + (pm$nrow * (j - 1))
-  } else {
+  if (isTRUE(pm$byrow)) {
     pos <- j + (pm$ncol * (i - 1))
+  } else {
+    pos <- i + (pm$nrow * (j - 1))
   }
   pos
+}
+
+get_pos_rev <- function(pm, pos) {
+  if (isTRUE(pm$byrow)) {
+    i <- ceiling(pos / pm$ncol)
+    j <- (pos - 1) %% pm$ncol + 1
+  } else {
+    i <- (pos - 1) %% pm$nrow + 1
+    j <- ceiling(pos / pm$nrow)
+  }
+  c(i,j)
 }
 
 

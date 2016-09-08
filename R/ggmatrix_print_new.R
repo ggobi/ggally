@@ -34,18 +34,61 @@ ggprint <- function(
     labs(title = pm$title) + # add title in
     labs(x = NULL, y = NULL) # remove both x and y titles
 
+  if (!is.null(pm$gg)) {
+    pm_fake <- pm_fake + pm$gg
+  }
+
+  if (!is.null(pm$legend)) {
+    pm_fake <- pm_fake + geom_point(mapping = aes(color = Var1))
+  }
+
   # make a gtable of the plot matrix (to be filled in)
-  pmg <- plot_gtable(pm_fake)
+  pm_fake_build <- ggplot2::ggplot_build(pm_fake)
+  pmg <- ggplot2::ggplot_gtable(pm_fake_build)
 
   # help with grob positions
   pmg$layout$grob_pos <- seq_along(pmg$grobs)
 
   # zero out rest of the plotting area
-  zero_pos_vals <- pmg$layout$grob_pos[pmg$layout$name %in% c("panel", "axis-l", "axis-b")]
+  zero_pos_vals <- pmg$layout$grob_pos[pmg$layout$name %in% c("panel", "axis-l", "axis-b", "guide-box")]
   for (zero_pos in zero_pos_vals) {
     pmg$grobs[[zero_pos]] <- ggplot2::zeroGrob()
   }
   pmg
+
+  if (!is.null(pm$legend)) {
+    legend <- pm$legend
+    if (is.numeric(legend)) {
+      if (length(legend) == 1) {
+        legend <- get_pos_rev(pm, legend)
+      } else if (length(legend) > 2) {
+        stop("'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'")
+      }
+
+      legend_obj <- grab_legend(pm[legend[1], legend[2]])
+
+    } else if (inherits(legend, "legend_guide_box")) {
+      legend_obj <- legend
+    }
+
+
+    legend_layout <- subset(pmg$layout, name == "guide-box")[1, ]
+    class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
+    pmg$grobs[[legend_layout$grob_pos]] <- legend_obj
+
+    legend_position <- ifnull(pm_fake_build$plot$theme$legend.position, "right")
+
+    if (legend_position %in% c("right", "left")) {
+      pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
+    } else if (legend_position %in% c("top", "bottom")) {
+      pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
+    } else {
+      message("funny legend position")
+      browser()
+    }
+  }
+
+
 
   # Get all 'panel' grob_pos in the pmg
   panel_locations <- subset(pmg$layout, name == "panel")
@@ -98,7 +141,7 @@ ggprint <- function(
 
         pmg <- add_left_axis(
           pmg, pg,
-          show_strips = i == 1 || is.null(pm$showStrips) || isTRUE(pm$showStrips),
+          show_strips = ((i == 1) && is.null(pm$showStrips)) || isTRUE(pm$showStrips),
           grob_pos = axis_l_grob_pos[i]
         )
       }
@@ -107,7 +150,7 @@ ggprint <- function(
 
         pmg <- add_bottom_axis(
           pmg, pg,
-          show_strips = j == pm$ncol || is.null(pm$showStrips) || isTRUE(pm$showStrips),
+          show_strips = ((j == pm$ncol) && is.null(pm$showStrips)) || isTRUE(pm$showStrips),
           grob_pos = axis_b_grob_pos[j]
         )
       }
@@ -149,4 +192,5 @@ ggprint <- function(
 
   grid.draw(pmg)
 
+  invisible()
 }

@@ -140,6 +140,6 @@ set_max_axis_size <- function(pmg, axis_sizes, layout_name, layout_cols, pmg_key
     stop(stop_msg)
   }
 
-  pmg[[pmg_key]][val_pos] <- unit(m_axis_size, "cm")
+  pmg[[pmg_key]][[val_pos]] <- unit(m_axis_size, "cm")
   pmg
 }

@@ -57,6 +57,7 @@ ggmatrix <- function(
   verbose = FALSE,
   data = NULL,
   gg = NULL,
+  legend = NULL,
   legends = FALSE
 ) {
 
@@ -81,6 +82,7 @@ ggmatrix <- function(
     yAxisLabels = yAxisLabels,
     showXAxisPlotLabels = showXAxisPlotLabels,
     showYAxisPlotLabels = showYAxisPlotLabels,
+    legend = legend,
     legends = legends,
     gg = gg,
     nrow = nrow,
