@@ -4,7 +4,7 @@
 \alias{print.ggmatrix2}
 \title{Print ggpair object}
 \usage{
-\method{print}{ggmatrix}(x, leftWidthProportion = 0.2,
+\method{print}{ggmatrix2}(x, leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1, spacingProportion = 0.03,
   xProportions = rep(1, x$ncol), yProportions = rep(1, x$nrow),
   gridNewPage = TRUE, ...)
