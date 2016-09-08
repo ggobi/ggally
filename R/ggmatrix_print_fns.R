@@ -19,8 +19,7 @@ axis_label_size_wrapper <- function(is_width) {
     filter_val <- "axis-b"
     select_val <- "heights"
   }
-  function(p) {
-    pg <- plot_gtable(p)
+  function(pg) {
     pg_axis <- gtable::gtable_filter(pg, filter_val)
     max(fn(pg_axis[[select_val]]))
   }
@@ -89,11 +88,11 @@ plot_panel <- function(pg, row_pos, col_pos, matrix_show_strips, matrix_ncol, ma
 
 
 
-add_left_axis <- function(pmg, pg, i, show_strips, grob_pos) {
+add_left_axis <- function(pmg, pg, show_strips, grob_pos) {
   # axis layout info
   al <- subset(pg$layout, name == "axis-l")
 
-  if (i == 1 || show_strips) {
+  if (show_strips) {
     alx <- subset(pg$layout, name %in% c("axis-l", "strip-top"))
   } else {
     alx <- al
@@ -110,11 +109,11 @@ add_left_axis <- function(pmg, pg, i, show_strips, grob_pos) {
 }
 
 
-add_bottom_axis <- function(pmg, pg, j, show_strips, grob_pos) {
+add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
   # axis layout info
   al <- subset(pg$layout, name == "axis-b")
 
-  if (j == pm$ncol || show_strips) {
+  if (show_strips) {
     alx <- subset(pg$layout, name %in% c("axis-b", "strip-right"))
   } else {
     alx <- al
@@ -127,5 +126,20 @@ add_bottom_axis <- function(pmg, pg, j, show_strips, grob_pos) {
   axis_panel <- gtable::gtable_add_rows(axis_panel, grid::unit(1, "null"), 1)
   pmg$grobs[[grob_pos]] <- axis_panel
 
+  pmg
+}
+
+
+
+set_max_axis_size <- function(pmg, axis_sizes, layout_name, layout_cols, pmg_key, stop_msg) {
+  m_axis_size <- max(axis_sizes, na.rm = TRUE)
+  grob_pos_vals <- which(pmg$layout$name == layout_name)
+  val_pos <- pmg$layout[grob_pos_vals, layout_cols]
+  val_pos <- unique(unlist(val_pos))
+  if (length(val_pos) > 1) {
+    stop(stop_msg)
+  }
+
+  pmg[[pmg_key]][val_pos] <- unit(m_axis_size, "cm")
   pmg
 }

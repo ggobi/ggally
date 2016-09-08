@@ -103,7 +103,7 @@ first_non_null <- function(...) {
 #'
 #'  ## give the spacing between plots a proportion of 1 plot size
 #'  # print(pMat, spacing = 1)
-print2.ggmatrix <- function(
+print.ggmatrix <- function(
   x,
   leftWidthProportion = 0.2,
   bottomHeightProportion = 0.1,
