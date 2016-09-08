@@ -101,11 +101,12 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
   columns
 }
 
-warn_verbose_deprecated <- function(verboseIsSupplied) {
-  if (verboseIsSupplied) {
-    warning(
-      "'verbose' will be deprecated in future versions.  Please remove it from your code"
-    )
+warn_deprecated <- function(is_supplied, title) {
+  if (is_supplied) {
+    warning(paste(
+      "'", title, "' will be deprecated in future versions.  Please remove it from your code",
+      sep = ""
+    ))
   }
 }
 
@@ -418,6 +419,8 @@ ggduo <- function(
   legends = FALSE
 ) {
 
+  warn_deprecated(!missing(legends), "legends")
+
   data <- fix_data(data)
 
   # fix args
@@ -685,19 +688,17 @@ ggpairs <- function(
   verbose = NULL
 ){
 
-  data <- fix_data(data)
-
+  warn_deprecated(!missing(legends), "legends")
+  warn_if_args_exist(list(...))
   stop_if_params_exist(params)
+
+  data <- fix_data(data)
 
   if (is.numeric(mapping) & missing(columns)) {
       columns <- mapping
       mapping <- NULL
   }
-
-  warn_verbose_deprecated(!missing(verbose))
   stop_if_bad_mapping(mapping)
-
-  warn_if_args_exist(list(...))
 
   columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
 
