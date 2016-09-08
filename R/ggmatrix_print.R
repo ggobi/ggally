@@ -1,5 +1,5 @@
 
-ggplot2_set_last_plot <- getFromNamespace("set_last_plot", "ggplot2")
+ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 
 #' Print ggpair object
 #'
@@ -11,6 +11,7 @@ ggplot2_set_last_plot <- getFromNamespace("set_last_plot", "ggplot2")
 #' @param ... other arguments not used by this method
 #' @method print ggmatrix
 #' @author Barret Schloerke
+#' @import utils
 #' @importFrom grid grid.newpage grid.draw seekViewport pushViewport upViewport
 #' @export
 #' @examples

@@ -20,7 +20,7 @@ Authors@R: c(
     person("Amos", "Elberg", role = "aut", email = "amos.elberg@gmail.com", comment = "ggnetworkmap"),
     person("Joseph", "Larmarange", role = "aut", email = "joseph@larmarange.net", comment = "ggcoef"))
 Description:
-    The R package 'ggplot2' is a plotting system based on the grammar of graphics. 
+    The R package 'ggplot2' is a plotting system based on the grammar of graphics.
     'GGally' extends 'ggplot2' by adding several functions
     to reduce the complexity of combining geometric objects with transformed data.
     Some of these functions include a pairwise plot matrix, a two group pairwise plot
@@ -33,7 +33,8 @@ Imports:
     grid,
     gtable (>= 0.2.0),
     plyr (>= 1.8.3),
-    reshape (>= 0.8.5)
+    reshape (>= 0.8.5),
+    utils
 Suggests:
     broom (>= 0.4.0),
     geosphere (>= 1.5-1),
