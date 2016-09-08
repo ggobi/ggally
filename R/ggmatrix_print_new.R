@@ -29,7 +29,10 @@ ggprint <- function(
 
 
   # make a fake facet grid to fill in with proper plot panels
-  fake_data <- expand.grid(Var1 = pm$xAxisLabels, Var2 = pm$yAxisLabels)
+  fake_data <- expand.grid(
+    Var1 = ifnull(pm$xAxisLabels, as.character(seq_len(pm$ncol))),
+    Var2 = ifnull(pm$yAxisLabels, as.character(seq_len(pm$nrow)))
+  )
   fake_data$x <- 1
   fake_data$y <- 1
 
