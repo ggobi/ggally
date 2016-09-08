@@ -120,3 +120,13 @@ test_that("blank", {
     pm[2, 2] <- "not blank"
   }, "character values \\(besides 'blank'\\)") # nolint
 })
+
+
+# 
+# printShowStrips <- c(TRUE, FALSE)
+# if (i <= length(printShowStrips)) {
+#   printShowStrip <- printShowStrips[i]
+# } else {
+#   printShowStrip <- NULL
+# }
+#

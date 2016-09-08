@@ -3,7 +3,7 @@ context("ggpairs")
 data(tips, package = "reshape")
 
 expect_print <- function(p) {
-  testthat::expect_silent(print(p))
+  testthat::expect_silent(print(p, progress = FALSE))
 }
 
 facethistBindwidth1 <- list(combo = wrap("facethist", binwidth = 1))
@@ -13,20 +13,24 @@ facethistBindwidth1Duo <- list(
 )
 
 test_that("structure", {
+  expect_null <- function(x) {
+    expect_true(is.null(x))
+  }
 
   expect_obj <- function(x) {
     expect_is(x$data, "data.frame")
     expect_is(x$plots, "list")
     expect_equivalent(length(x$plots), ncol(tips) ^ 2)
-    expect_is(x$title, "character")
-    expect_is(x$verbose, "logical")
+    expect_null(x$title)
+    expect_null(x$xlab)
+    expect_null(x$ylab)
     expect_is(x$xAxisLabels, "character")
     expect_is(x$yAxisLabels, "character")
     expect_is(x$showXAxisPlotLabels, "logical")
     expect_is(x$showYAxisPlotLabels, "logical")
-    expect_is(x$legends, "logical")
+    expect_null(x$legend)
     expect_is(x$byrow, "logical")
-    expect_true(is.null(x$gg))
+    expect_null(x$gg)
     expect_true("gg" %in% names(x))
   }
 
@@ -151,8 +155,8 @@ test_that("stops", {
   }, "Columns in 'columnsY' not found in data") # nolint
 
   expect_warning({
-    pm <- ggpairs(tips, verbose = TRUE)
-  }, "'verbose' will be deprecated") # nolint
+    pm <- ggpairs(tips, legends = TRUE)
+  }, "'legends' will be deprecated") # nolint
 
   expect_error({
     ggpairs(tips, params = c(size = 2))
@@ -370,15 +374,13 @@ test_that("axisLabels", {
 test_that("strips and axis", {
 
   # axis should line up with left side strips
-  expect_silent({
-    pm <- ggpairs(
-      tips, c(3, 1, 4),
-      showStrips = TRUE,
-      title = "Axis should line up even if strips are present",
-      lower = list(combo = wrap("facethist", binwidth = 1))
-    )
-    print(pm)
-  })
+  pm <- ggpairs(
+    tips, c(3, 1, 4),
+    showStrips = TRUE,
+    title = "Axis should line up even if strips are present",
+    lower = list(combo = wrap("facethist", binwidth = 1))
+  )
+  expect_print(pm)
   # default behavior. tested in other places
   # expect_silent({
   #   pm <- ggpairs(tips, c(3, 1, 4), showStrips = FALSE)
@@ -594,9 +596,9 @@ test_that("subtypes", {
   conDiagSubs <- c("densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
   disDiagSubs <- c("barDiag", "blankDiag")
 
-  printShowStrips <- c(TRUE, FALSE)
-
-  for (fn in list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)) {
+  # for (fn in list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)) {
+  for (fn_num in 1:4) {
+    fn <- list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)[[fn_num]]
     for (i in 1:6) {
       conSub <- if (i <= length(conSubs)) conSubs[[i]] else "blank"
       comSub <- if (i <= length(comSubs)) comSubs[[i]] else "blank"
@@ -605,27 +607,33 @@ test_that("subtypes", {
       diagConSub <- if (i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
       diagDisSub <- if (i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
 
-      if (i <= length(printShowStrips)) {
-        printShowStrip <- printShowStrips[i]
-      } else {
-        printShowStrip <- NULL
-      }
-
-      expect_silent({
-        a <- fn(
-          types = list(
-            continuous = conSub,
-            combo = comSub,
-            discrete = disSub
-          ),
-          diag = list(
-            continuous = diagConSub,
-            discrete = diagDisSub
-          )
+      print(list(
+        fn_num = fn_num,
+        types = list(
+          continuous = conSub,
+          combo = comSub,
+          discrete = disSub
+        ),
+        diag = list(
+          continuous = diagConSub,
+          discrete = diagDisSub
         )
-        print(a, showStrips = printShowStrip)
-      })
+      ))
+      
+      print(a, progress = FALSE)
 
+      pm <- fn(
+        types = list(
+          continuous = conSub,
+          combo = comSub,
+          discrete = disSub
+        ),
+        diag = list(
+          continuous = diagConSub,
+          discrete = diagDisSub
+        )
+      )
+      expect_print(pm)
     }
   }
 
