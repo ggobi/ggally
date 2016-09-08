@@ -1,5 +1,9 @@
 
 
+ggmatrix_gtable <- function(x, ...) {
+  ggprint(x, ..., plot = FALSE)
+}
+
 
 #' Print ggpair object
 #'
@@ -9,6 +13,7 @@
 #' @param ... ignored
 #' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only
 #' @param progress_wait how many seconds the progress bar will wait until appearing. Defaults to 5 seconds.
+#' @param plot boolean to determine if the gtable should be drawn or returned
 # ' @method ggprint ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
@@ -21,7 +26,8 @@ ggprint <- function(
   x,
   ...,
   progress = interactive(),
-  progress_wait = 5
+  progress_wait = 5,
+  plot = TRUE
 ) {
 
   pm <- x # pm is for "plot matrix"
@@ -226,8 +232,10 @@ ggprint <- function(
   }
 
   # draw the giant gtable obj
-  grid.draw(pmg)
+  if (isTRUE(plot)) {
+    grid.draw(pmg)
+  }
   # returns nothing
 
-  invisible(pm)
+  invisible(pmg)
 }
