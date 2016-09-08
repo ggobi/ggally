@@ -59,8 +59,7 @@ ggmatrix <- function(
   verbose = FALSE,
   data = NULL,
   gg = NULL,
-  legend = NULL,
-  legends = FALSE
+  legend = NULL
 ) {
 
   if (!is.list(plots)) {
@@ -87,7 +86,6 @@ ggmatrix <- function(
     showXAxisPlotLabels = showXAxisPlotLabels,
     showYAxisPlotLabels = showYAxisPlotLabels,
     legend = legend,
-    legends = legends,
     gg = gg,
     nrow = nrow,
     ncol = ncol,

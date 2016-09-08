@@ -416,7 +416,7 @@ ggduo <- function(
   ylab = NULL,
   showStrips = NULL,
   legend = NULL,
-  legends = FALSE
+  legends = stop("deprecated")
 ) {
 
   warn_deprecated(!missing(legends), "legends")
@@ -515,8 +515,7 @@ ggduo <- function(
     ylab = ylab,
     data = data,
     gg = NULL,
-    legend = legend,
-    legends = legends
+    legend = legend
   )
 
   plotMatrix
@@ -684,8 +683,7 @@ ggpairs <- function(
   columnLabels = colnames(data[columns]),
   showStrips = NULL,
   legend = NULL,
-  legends = FALSE,
-  verbose = NULL
+  legends = stop("deprecated")
 ){
 
   warn_deprecated(!missing(legends), "legends")
@@ -778,8 +776,7 @@ ggpairs <- function(
     ylab = ylab,
     data = data,
     gg = NULL,
-    legend = legend,
-    legends = legends
+    legend = legend
   )
 
   plotMatrix
