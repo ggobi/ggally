@@ -32,7 +32,7 @@ axis_size_bottom <- axis_label_size_wrapper(FALSE)
 
 
 
-plot_panel <- function(pg, row_pos, col_pos, matrix_show_strips, matrix_ncol, maxtrix_show_legends, plot_show_axis_labels) {
+plot_panel <- function(pg, row_pos, col_pos, matrix_show_strips, matrix_ncol, plot_show_axis_labels) {
 
   # ask about strips
   layout_names <- c("panel")
@@ -62,10 +62,6 @@ plot_panel <- function(pg, row_pos, col_pos, matrix_show_strips, matrix_ncol, ma
     if (plot_show_axis_labels %in% c("internal", "none")) {
       layout_names <- all_layout_names
     }
-  }
-
-  if (isTRUE(maxtrix_show_legends)) {
-    layout_names <- c(layout_names, legend_name)
   }
 
   # get correct panel (and strips)

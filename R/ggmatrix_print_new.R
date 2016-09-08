@@ -197,7 +197,6 @@ ggprint <- function(
         row_pos = i, col_pos = j,
         matrix_show_strips = pm$showStrips,
         matrix_ncol = pm$ncol,
-        maxtrix_show_legends = pm$showLegends,
         plot_show_axis_labels = p$showLabels
       )
     }
