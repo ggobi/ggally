@@ -4,12 +4,18 @@
 \alias{ggprint}
 \title{Print ggpair object}
 \usage{
-ggprint(x, ..., progress = interactive(), progress_wait = 5)
+ggprint(x, ..., progress = interactive(), progress_wait = 5, plot = TRUE)
 }
 \arguments{
 \item{x}{ggpair object to be plotted}
 
 \item{...}{ignored}
+
+\item{progress}{boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only}
+
+\item{progress_wait}{how many seconds the progress bar will wait until appearing. Defaults to 5 seconds.}
+
+\item{plot}{boolean to determine if the gtable should be drawn or returned}
 }
 \description{
 Specialized method to print the ggpair object-

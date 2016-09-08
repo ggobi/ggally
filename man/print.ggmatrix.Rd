@@ -4,49 +4,26 @@
 \alias{print.ggmatrix}
 \title{Print ggpair object}
 \usage{
-\method{print}{ggmatrix}(x, leftWidthProportion = 0.2,
-  bottomHeightProportion = 0.1, spacingProportion = 0.03,
-  xProportions = rep(1, x$ncol), yProportions = rep(1, x$nrow),
-  gridNewPage = TRUE, ...)
+\method{print}{ggmatrix}(x, newpage = is.null(vp), vp = NULL, ...)
 }
 \arguments{
-\item{x}{ggpair object to be plotted}
+\item{x}{plot to display}
 
-\item{leftWidthProportion}{proportion of a plot area devoted to left axis labels}
+\item{newpage}{draw new (empty) page first?}
 
-\item{bottomHeightProportion}{proportion of a plot area devoted to bottom axis labels}
+\item{vp}{viewport to draw plot in}
 
-\item{spacingProportion}{proportion of a plot area devoted to the space between plots}
-
-\item{xProportions}{proportion of a plot's horizontal space. This size defaults to 1}
-
-\item{yProportions}{proportion of a plot's vertical space. This size defaults to 1}
-
-\item{gridNewPage}{boolean that determines if a \code{\link[grid]{grid.newpage}()} should be executed before printing. Defaults to \code{TRUE}}
-
-\item{...}{ignored}
+\item{...}{other arguments not used by this method}
 }
 \description{
-Specialized method to print the ggpair object-
+Print method taken from \code{ggplot2:::print.ggplot} and altered for a ggmatrix object
 }
 \examples{
  data(tips, package = "reshape")
  pMat <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
-
- ## defaults; (prints strips on top and right edges of matrix)
- # print(pMat, left = 0.2, spacing = 0.03, bottom = 0.1)
-
- ## give the left axis labels area a proportion of 3 plot size
- # print(pMat, leftWidthProportion = 3)
-
- ## give the bottom axis labels area a proportion of 1 plot size
- # print(pMat, bottomHeightProportion = 1)
-
- ## give the spacing between plots a proportion of 1 plot size
- # print(pMat, spacing = 1)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 

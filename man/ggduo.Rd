@@ -5,12 +5,12 @@
 \title{ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame}
 \usage{
 ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data), title = "", types = list(continuous =
+  columnsY = 1:ncol(data), title = NULL, types = list(continuous =
   "smooth_loess", comboVertical = "box", comboHorizontal = "facethist", discrete
   = "ratio"), axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
-  columnLabelsY = colnames(data[columnsY]), showStrips = NULL,
-  legends = FALSE)
+  columnLabelsY = colnames(data[columnsY]), xlab = NULL, ylab = NULL,
+  showStrips = NULL, legend = NULL, legends = stop("deprecated"))
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -19,7 +19,7 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 
 \item{columnsX, columnsY}{which columns are used to make plots.  Defaults to all columns.}
 
-\item{title}{title for the graph}
+\item{title, xlab, ylab}{title, x label, and y label for the graph}
 
 \item{types}{see Details}
 
@@ -29,7 +29,9 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 
 \item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
-\item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
+\item{legend}{Either \describe{\item{length 2 numeric value}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legned = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{length 1 numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a plot legend that will be displayed directly}} Do not forget that the legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")}}
+
+\item{legends}{deprecated}
 }
 \description{
 Make a matrix of plots with a given data set with two different column sets

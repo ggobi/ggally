@@ -5,17 +5,19 @@
 \title{ggpairs - A ggplot2 Matrix}
 \usage{
 ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
-  title = NULL, byrow = TRUE, showStrips = NULL,
-  showAxisPlotLabels = TRUE, showXAxisPlotLabels = TRUE,
-  showYAxisPlotLabels = TRUE, verbose = FALSE, data = NULL, gg = NULL,
-  legends = FALSE)
+  title = NULL, xlab = NULL, ylab = NULL, byrow = TRUE,
+  showStrips = NULL, showAxisPlotLabels = TRUE,
+  showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, data = NULL,
+  gg = NULL, legend = NULL)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
 
 \item{nrow, ncol}{number of rows and columns}
 
-\item{xAxisLabels, yAxisLabels, title}{labels for plot. Set the variable to \code{NULL} to not be displayed}
+\item{xAxisLabels, yAxisLabels}{strip titles for the x and y axis respectively. Set to \code{NULL} to not be displayed}
+
+\item{title, xlab, ylab}{title, x label, and y label for the graph. Set to \code{NULL} to not be displayed}
 
 \item{byrow}{boolean that determines whether the plots should be ordered by row or by column}
 
@@ -23,13 +25,13 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 
 \item{showAxisPlotLabels, showXAxisPlotLabels, showYAxisPlotLabels}{booleans that determine if the plots axis labels are printed on the X (bottom) or Y (left) part of the plot matrix. If \code{showAxisPlotLabels} is set, both \code{showXAxisPlotLabels} and \code{showYAxisPlotLabels} will be set to the given value.}
 
-\item{verbose}{boolean to determine the printing of "Plot #1, Plot #2...."}
-
 \item{data}{data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time}
 
 \item{gg}{ggplot2 theme objects to be applied to every plot}
 
-\item{legends}{boolean to determine the printing of the legend in each plot. Not recommended.}
+\item{legend}{Either \describe{\item{length 2 numeric value}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legned = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{length 1 numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a plot legend that will be displayed directly}} Do not forget that the legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")}}
+
+\item{legends}{deprecated}
 }
 \description{
 Make a generic matrix of ggplot2 plots
