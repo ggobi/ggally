@@ -59,8 +59,8 @@ plot_panel <- function(pg, row_pos, col_pos, matrix_show_strips, matrix_ncol, ma
     # pShowStrips <- ! identical(p$axisLabels, FALSE)
 
     # copied from old code.  want to replace it to something like above
-    if (p_axis_labels %in% c("internal", "none")) {
-      layout_names <- alllayout_names
+    if (plot_show_axis_labels %in% c("internal", "none")) {
+      layout_names <- all_layout_names
     }
   }
 
@@ -89,11 +89,14 @@ plot_panel <- function(pg, row_pos, col_pos, matrix_show_strips, matrix_ncol, ma
 
 
 add_left_axis <- function(pmg, pg, show_strips, grob_pos) {
+  layout <- pg$layout
+  layout_name <- layout$name
+
   # axis layout info
-  al <- subset(pg$layout, name == "axis-l")
+  al <- layout[layout_name == "axis-l", ]
 
   if (show_strips) {
-    alx <- subset(pg$layout, name %in% c("axis-l", "strip-top"))
+    alx <- layout[layout_name %in% c("axis-l", "strip-top"), ]
   } else {
     alx <- al
   }
@@ -110,11 +113,13 @@ add_left_axis <- function(pmg, pg, show_strips, grob_pos) {
 
 
 add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
+  layout <- pg$layout
+  layout_name <- layout$name
   # axis layout info
-  al <- subset(pg$layout, name == "axis-b")
+  al <- layout[layout_name == "axis-b", ]
 
   if (show_strips) {
-    alx <- subset(pg$layout, name %in% c("axis-b", "strip-right"))
+    alx <- layout[layout_name %in% c("axis-b", "strip-right"), ]
   } else {
     alx <- al
   }

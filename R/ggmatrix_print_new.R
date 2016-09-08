@@ -66,7 +66,7 @@ ggprint <- function(
 
   # if there is a legend, make a fake legend that will be replaced later
   if (!is.null(pm$legend)) {
-    pm_fake <- pm_fake + geom_point(mapping = aes(color = Var1))
+    pm_fake <- pm_fake + geom_point(mapping = aes_(color = "Var1"))
   }
 
   # make a gtable of the plot matrix (to be filled in)
@@ -79,9 +79,12 @@ ggprint <- function(
 
   # help with grob positions
   pmg$layout$grob_pos <- seq_along(pmg$grobs)
+  pmg_layout <- pmg$layout
+  pmg_layout_name <- pmg_layout$name
+  pmg_layout_grob_pos <- pmg_layout$grob_pos
 
   # zero out rest of the plotting area (just in case it is not replaced)
-  zero_pos_vals <- pmg$layout$grob_pos[pmg$layout$name %in% c("panel", "axis-l", "axis-b", "guide-box")]
+  zero_pos_vals <- pmg_layout_grob_pos[pmg_layout_name %in% c("panel", "axis-l", "axis-b", "guide-box")]
   for (zero_pos in zero_pos_vals) {
     pmg$grobs[[zero_pos]] <- ggplot2::zeroGrob()
   }
@@ -104,7 +107,7 @@ ggprint <- function(
     }
 
 
-    legend_layout <- subset(pmg$layout, name == "guide-box")[1, ]
+    legend_layout <- (pmg_layout[pmg_layout_name == "guide-box", ])[1, ]
     class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
     pmg$grobs[[legend_layout$grob_pos]] <- legend_obj
 
@@ -123,15 +126,15 @@ ggprint <- function(
 
 
   # Get all 'panel' grob_pos in the pmg
-  panel_locations <- subset(pmg$layout, name == "panel")
+  panel_locations <- pmg_layout[pmg_layout_name  == "panel", ]
   panel_locations_order <- order(panel_locations$l, panel_locations$t, decreasing = FALSE)
   panel_locations <- panel_locations[panel_locations_order, "grob_pos"]
 
   # init the axis sizes
   left_axis_sizes <- numeric(pm$nrow + 1)
   bottom_axis_sizes <- numeric(pm$ncol + 1)
-  axis_l_grob_pos <- subset(pmg$layout, name == "axis-l", "grob_pos")$grob_pos
-  axis_b_grob_pos <- subset(pmg$layout, name == "axis-b", "grob_pos")$grob_pos
+  axis_l_grob_pos <- pmg_layout_grob_pos[pmg_layout_name == "axis-l"]
+  axis_b_grob_pos <- pmg_layout_grob_pos[pmg_layout_name == "axis-b"]
 
 
   # build and insert all plots and axis labels
