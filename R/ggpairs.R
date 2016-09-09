@@ -149,6 +149,31 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
   axisLabels <- axisLabelChoices[axisLabelChoice]
 }
 
+stop_if_high_cardinality <- function(data, columns, threshold) {
+  if (is.null(threshold)) {
+    return()
+  }
+  if (identical(threshold, FALSE)) {
+    return()
+  }
+  if (!is.numeric(threshold)) {
+    stop("'cardinality_threshold' should be a numeric or NULL")
+  }
+  for (col in names(data[columns])) {
+    data_col <- data[[col]]
+    if (!is.numeric(data_col)) {
+      level_length <- length(levels(data_col))
+      if (level_length > threshold) {
+        stop(str_c(
+          "Column '", col, "' has more levels (", level_length,")"
+          ," than the threshold (", threshold, ") allowed.\n",
+          "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times"
+        ))
+      }
+    }
+  }
+}
+
 
 
 #' ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame
@@ -180,6 +205,7 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
+#' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @param legends deprecated
 #' @export
 #' @examples
@@ -419,6 +445,7 @@ ggduo <- function(
   ylab = NULL,
   showStrips = NULL,
   legend = NULL,
+  cardinality_threshold = 15,
   legends = stop("deprecated")
 ) {
 
@@ -440,6 +467,9 @@ ggduo <- function(
 
   columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
   columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
+
+  stop_if_high_cardinality(data, columnsX, cardinality_threshold)
+  stop_if_high_cardinality(data, columnsY, cardinality_threshold)
 
   types <- check_and_set_ggpairs_defaults(
     "types", types,
@@ -582,6 +612,7 @@ ggduo <- function(
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
+#' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @param legends deprecated
 #' @keywords hplot
 #' @import ggplot2
@@ -686,6 +717,7 @@ ggpairs <- function(
   columnLabels = colnames(data[columns]),
   showStrips = NULL,
   legend = NULL,
+  cardinality_threshold = 15,
   legends = stop("deprecated")
 ){
 
@@ -702,6 +734,8 @@ ggpairs <- function(
   stop_if_bad_mapping(mapping)
 
   columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
+
+  stop_if_high_cardinality(data, columns, cardinality_threshold)
 
   upper <- check_and_set_ggpairs_defaults(
     "upper", upper,
