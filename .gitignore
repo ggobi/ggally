@@ -7,6 +7,9 @@ inst/*
 tests/testthat/Rplots.pdf
 vignettes/figure
 vignettes/*.html
+vignettes/rd_combined_cache/
+vignettes/index_cache/
+vignettes/rd_combined.Rmd
 .Rproj.user
 .RData
 .lintr_cache
