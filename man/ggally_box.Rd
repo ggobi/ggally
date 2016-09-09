@@ -2,9 +2,12 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_box}
 \alias{ggally_box}
+\alias{ggally_box_no_facet}
 \title{Plots the Box Plot}
 \usage{
 ggally_box(data, mapping, ...)
+
+ggally_box_no_facet(data, mapping, ...)
 }
 \arguments{
 \item{data}{data set using}
@@ -14,7 +17,7 @@ ggally_box(data, mapping, ...)
 \item{...}{other arguments being supplied to geom_boxplot}
 }
 \description{
-Make a box plot with a given data set
+Make a box plot with a given data set. \code{ggally_box_no_facet} will be a single panel plot, while \code{ggally_box} will be a faceted plot
 }
 \examples{
  data(tips, package = "reshape")

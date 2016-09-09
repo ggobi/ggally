@@ -2,9 +2,12 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_dot}
 \alias{ggally_dot}
+\alias{ggally_dot_no_facet}
 \title{Plots the Box Plot with Dot}
 \usage{
 ggally_dot(data, mapping, ...)
+
+ggally_dot_no_facet(data, mapping, ...)
 }
 \arguments{
 \item{data}{data set using}
@@ -14,7 +17,7 @@ ggally_dot(data, mapping, ...)
 \item{...}{other arguments being supplied to geom_jitter}
 }
 \description{
-Add jittering with the box plot
+Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single panel plot, while \code{ggally_dot} will be a faceted plot
 }
 \examples{
  data(tips, package = "reshape")

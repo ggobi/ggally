@@ -22,9 +22,9 @@ ggmatrix_gtable(x, ..., progress = interactive() && (x$ncol * x$nrow) > 15,
 Specialized method to print the ggpair object-
 }
 \examples{
- data(tips, package = "reshape")
- pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
- ggprint(pm) # calls print(pm), which calls ggprint.ggmatrix(pm)
+data(tips, package = "reshape")
+pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
+ggmatrix_gtable(pm)
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}

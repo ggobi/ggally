@@ -5,11 +5,11 @@
 \title{ggpairs - A ggplot2 generalized pairs plot}
 \usage{
 ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
-  upper = list(continuous = "cor", combo = "box", discrete = "facetbar", na =
-  "na"), lower = list(continuous = "points", combo = "facethist", discrete =
-  "facetbar", na = "na"), diag = list(continuous = "densityDiag", discrete =
-  "barDiag", na = "naDiag"), params = NULL, ..., xlab = NULL, ylab = NULL,
-  axisLabels = c("show", "internal", "none"),
+  upper = list(continuous = "cor", combo = "box_no_facet", discrete =
+  "facetbar", na = "na"), lower = list(continuous = "points", combo =
+  "facethist", discrete = "facetbar", na = "na"), diag = list(continuous =
+  "densityDiag", discrete = "barDiag", na = "naDiag"), params = NULL, ...,
+  xlab = NULL, ylab = NULL, axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]), showStrips = NULL,
   legend = NULL, legends = stop("deprecated"))
 }
@@ -53,7 +53,7 @@ Make a matrix of plots with a given data set
 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
 \describe{
  \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
- \item{combo}{exactly one of ('box', 'dot', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+ \item{combo}{exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
  \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 }
@@ -93,15 +93,15 @@ p_(pm)
 # Change default plot behavior
 pm <- ggpairs(
   tips[, c(1, 3, 4, 2)],
-  upper = list(continuous = "density", combo = "box"),
-  lower = list(continuous = "points", combo = "dot")
+  upper = list(continuous = "density", combo = "box_no_facet"),
+  lower = list(continuous = "points", combo = "dot_no_facet")
 )
 p_(pm)
 # Supply Raw Functions (may be user defined functions!)
 pm <- ggpairs(
   tips[, c(1, 3, 4, 2)],
-  upper = list(continuous = ggally_density, combo = ggally_box),
-  lower = list(continuous = ggally_points, combo = ggally_dot)
+  upper = list(continuous = ggally_density, combo = ggally_box_no_facet),
+  lower = list(continuous = ggally_points, combo = ggally_dot_no_facet)
 )
 p_(pm)
 
@@ -113,8 +113,8 @@ diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
 pm <- ggpairs(
  diamonds.samp[, 1:5],
  mapping = ggplot2::aes(color = cut),
- upper = list(continuous = wrap("density", alpha = 0.5), combo = "box"),
- lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot", alpha = 0.4)),
+ upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
+ lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
  title = "Diamonds"
 )
 p_(pm)
