@@ -1,10 +1,5 @@
 
 
-ggmatrix_gtable <- function(x, ...) {
-  ggprint(x, ..., plot = FALSE)
-}
-
-
 #' Print ggpair object
 #'
 #' Specialized method to print the ggpair object-
@@ -22,12 +17,11 @@ ggmatrix_gtable <- function(x, ...) {
 #'  data(tips, package = "reshape")
 #'  pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
 #'  ggprint(pm) # calls print(pm), which calls ggprint.ggmatrix(pm)
-ggprint <- function(
+ggmatrix_gtable <- function(
   x,
   ...,
   progress = interactive() && (x$ncol * x$nrow) > 15,
-  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta\n",
-  plot = TRUE
+  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta\n"
 ) {
 
   # pm is for "plot matrix"
@@ -120,7 +114,6 @@ ggprint <- function(
     } else if (inherits(legend, "legend_guide_box")) {
       legend_obj <- legend
     }
-
 
     legend_layout <- (pmg_layout[pmg_layout_name == "guide-box", ])[1, ]
     class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
@@ -230,11 +223,5 @@ ggprint <- function(
     #stop_msg = "bottom axis height issue!! Fix!"
   )
 
-  # draw the giant gtable obj
-  if (isTRUE(plot)) {
-    grid.draw(pmg)
-  }
-  # returns nothing
-
-  invisible(pmg)
+  pmg
 }
