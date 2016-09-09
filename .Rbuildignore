@@ -18,6 +18,7 @@ revdep
 ^cran-comments\.md$
 ^codecov\.yml$
 vigs/
+vignettes/rd_combined_cache
 vignettes/_rd_cache
 vignettes/rd_files
 vignettes/index_files
