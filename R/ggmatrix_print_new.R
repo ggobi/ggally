@@ -14,9 +14,9 @@
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
-#'  ggprint(pm) # calls print(pm), which calls ggprint.ggmatrix(pm)
+#' data(tips, package = "reshape")
+#' pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
+#' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
   x,
   ...,
