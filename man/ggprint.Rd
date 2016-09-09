@@ -4,7 +4,9 @@
 \alias{ggprint}
 \title{Print ggpair object}
 \usage{
-ggprint(x, ..., progress = interactive(), progress_wait = 5, plot = TRUE)
+ggprint(x, ..., progress = interactive() && (x$ncol * x$nrow) > 15,
+  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta\\n",
+  plot = TRUE)
 }
 \arguments{
 \item{x}{ggpair object to be plotted}
@@ -13,7 +15,7 @@ ggprint(x, ..., progress = interactive(), progress_wait = 5, plot = TRUE)
 
 \item{progress}{boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only}
 
-\item{progress_wait}{how many seconds the progress bar will wait until appearing. Defaults to 5 seconds.}
+\item{progress_format}{string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.}
 
 \item{plot}{boolean to determine if the gtable should be drawn or returned}
 }
