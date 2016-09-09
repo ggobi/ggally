@@ -126,9 +126,9 @@ test_that("diagAxis", {
 test_that("dates", {
 
   class(nas) <- c("NOTFOUND", "data.frame")
-  p <- ggally_cor(nas, ggplot2::aes(x = "date", y = "ozone"))
+  p <- ggally_cor(nas, ggplot2::aes(x = date, y = ozone))
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
-  p <- ggally_cor(nas, ggplot2::aes(y = "date", x = "ozone"))
+  p <- ggally_cor(nas, ggplot2::aes(y = date, x = ozone))
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
 
   p <- ggally_barDiag(nas, ggplot2::aes(x = date))
