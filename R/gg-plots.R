@@ -10,8 +10,14 @@ if (getRversion() >= "2.15.1") {
 }
 
 
+# retrieve the evaulated data column given the aes (which could possibly do operations)
+eval_data_col <- function(data, aes_col) {
+  eval(aes_col, data)
+}
+
+# is categories on the left?
 is_horizontal <- function(data, mapping, val = "y") {
-  yData <- eval(mapping[[val]], data)
+  yData <- eval_data_col(data, mapping[[val]])
 
   is.factor(yData) || is.character(yData)
 }
@@ -119,8 +125,8 @@ ggally_smooth_lm <- function(data, mapping, ...) {
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
 #'  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
 ggally_density <- function(data, mapping, ...){
-  rangeX <- range(eval(mapping$x, data), na.rm = TRUE)
-  rangeY <- range(eval(mapping$y, data), na.rm = TRUE)
+  rangeX <- range(eval_data_col(data, mapping$x), na.rm = TRUE)
+  rangeY <- range(eval_data_col(data, mapping$y), na.rm = TRUE)
 
   p <- ggplot(data = data) +
     geom_point(
@@ -230,14 +236,14 @@ ggally_cor <- function(
 
   # mapping$x <- mapping$y <- NULL
 
-  xCol <- as.character(mapping$x)
-  yCol <- as.character(mapping$y)
+  xCol <- deparse(mapping$x)
+  yCol <- deparse(mapping$y)
 
   if (is_date(data[[xCol]]) || is_date(data[[yCol]])) {
 
     # make sure it's a data.frame, as data.tables don't work well
     if (! identical(class(data), "data.frame")) {
-      data <- as.data.frame(data)
+      data <- fix_data(data)
     }
 
     for (col in c(xCol, yCol)) {
@@ -247,7 +253,7 @@ ggally_cor <- function(
     }
   }
 
-  if (is.numeric(eval(mapping$colour, data))) {
+  if (is.numeric(eval_data_col(data, mapping$colour))) {
     stop("ggally_cor: mapping color column must be categorical, not numeric")
   }
 
@@ -282,7 +288,7 @@ ggally_cor <- function(
   if (length(names(mapping)) > 0){
     for (i in length(names(mapping)):1){
       # find the last value of the aes, such as cyl of as.factor(cyl)
-      tmp_map_val <- as.character(mapping[names(mapping)[i]][[1]])
+      tmp_map_val <- deparse(mapping[names(mapping)[i]][[1]])
       if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
         mapping[[names(mapping)[i]]] <- NULL
 
@@ -423,7 +429,8 @@ ggally_cor <- function(
 
 #' Plots the Box Plot
 #'
-#' Make a box plot with a given data set
+#' Make a box plot with a given data set. \code{ggally_box_no_facet} will be a single panel plot, while \code{ggally_box} will be a faceted plot
+
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -445,11 +452,16 @@ ggally_cor <- function(
 ggally_box <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
+#' @export
+#' @rdname ggally_box
+ggally_box_no_facet <- function(data, mapping, ...) {
+  ggally_dot_and_box_no_facet(data, mapping, ..., boxPlot = TRUE)
+}
 
 
 #' Plots the Box Plot with Dot
 #'
-#' Add jittering with the box plot
+#' Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single panel plot, while \code{ggally_dot} will be a faceted plot
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -471,6 +483,11 @@ ggally_box <- function(data, mapping, ...){
 #'  ) + ggplot2::scale_shape(solid=FALSE)
 ggally_dot <- function(data, mapping, ...){
   ggally_dotAndBox(data, mapping, ..., boxPlot = FALSE)
+}
+#' @export
+#' @rdname ggally_dot
+ggally_dot_no_facet <- function(data, mapping, ...) {
+  ggally_dot_and_box_no_facet(data, mapping, ..., boxPlot = FALSE)
 }
 
 
@@ -497,20 +514,13 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
   horizontal <- is_horizontal(data, mapping)
 
-  #print(mapping$x[1])
   if (horizontal) {
-    mapping$tmp <- mapping$x
+    tmp <- mapping$x
     mapping$x <- mapping$y
-    mapping$y <- mapping$tmp
-    mapping$tmp <- NULL
-#    levels(data[,as.character(mapping$x)]) <- rev(levels(data[,as.character(mapping$x)]))
+    mapping$y <- tmp
   }
 
-#  print(as.character(mapping$x))
-#  print(levels(data[,as.character(mapping$x)]))
-#  print(is.factor(data[,as.character(mapping$x)]))
-  xVal <- as.character(mapping$x)
-  yVal <- as.character(mapping$x)
+  xVal <- deparse(mapping$x)
   mapping$x <- 1
 
   p <- ggplot(data = data)
@@ -524,21 +534,22 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   }
 
   if (!horizontal) {
-    p <- p + facet_grid(paste(". ~ ", yVal, sep = "")) + theme(panel.margin = unit(0.1, "lines"))
-#    p$facet$facets <- paste(". ~ ", yVal, sep = "")
+    p <- p +
+      facet_grid(paste(". ~ ", xVal, sep = ""), scales = "free_x") +
+      theme(panel.margin = unit(0.1, "lines"))
+
   } else {
-#    print(xVal)
-#    print(yVal)
-    p <- p + coord_flip() + theme(
+    p <- p +
+      coord_flip() +
+      theme(
         axis.text.y = element_text(
           angle = 90,
           vjust = 0,
           colour = "grey50"
         )
-      )
-    p <- p + facet_grid(paste(yVal, " ~ .", sep = "")) + theme(panel.margin = unit(0.1, "lines"))
-#    p$facet$facets <- paste(yVal, " ~ .", sep = "")
-#    print(p$facet$facets)
+      ) +
+      facet_grid(paste(xVal, " ~ .", sep = "")) +
+      theme(panel.margin = unit(0.1, "lines"))
   }
 
   p <- p + scale_x_continuous(xVal, labels = "", breaks = 1)
@@ -547,41 +558,40 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   p$horizontal <- horizontal
   p
 }
-# This is done with side by side and not facets
-#ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE)
-#{
-#  horizontal <-  is.factor(data[,as.character(mapping$y)]) || is.character(data[,as.character(mapping$y)])
-#
-#  if(horizontal) {
-#    cat("horizontal dot-box\n")
-#    mapping$tmp <- mapping$x
-#    mapping$x <- mapping$y
-#    mapping$y <- mapping$tmp
-#    mapping$tmp <- NULL
-#    levels(data[,as.character(mapping$x)]) <- rev(levels(data[,as.character(mapping$x)]))
-#  }
-#print(str(mapping))
-#
-#  p <- ggplot(data = data, mapping)
-#
-#
-#  if(boxPlot)
-#    p <- p + geom_boxplot(...)
-#  else
-#    p <- p + geom_jitter(...)
-#
-#  if(horizontal){
-#    p <- p + coord_flip() + theme(
-#        axis.text.y = element_text(
-#          angle = 90,
-#          vjust = 0,
-#          colour = "grey50"
-#        )
-#      )
-#  }
-#
-#  p
-#}
+
+ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
+
+  horizontal <- is_horizontal(data, mapping)
+
+  if (horizontal) {
+    tmp <- mapping$x
+    mapping$x <- mapping$y
+    mapping$y <- tmp
+  }
+
+  p <- ggplot(data = data)
+
+  if (boxPlot) {
+    p <- p + geom_boxplot(mapping, ...)
+    p$subType <- "box"
+  } else {
+    p <- p + geom_jitter(mapping, ...)
+    p$subType <- "dot"
+  }
+
+  if (horizontal) {
+    p <- p +
+      scale_x_discrete(
+        breaks = rev(levels(eval_data_col(data, mapping$x)))
+      ) +
+      coord_flip()
+  }
+
+  p$type <- "combo"
+  p$horizontal <- horizontal
+  p
+}
+
 
 
 #' Plots the Histograms by Faceting
@@ -599,54 +609,33 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 #'  ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
 #'  ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
 ggally_facethist <- function(data, mapping, ...){
-#  str(mapping)
-  #aesString <- aes_string(mapping)
-  #cat("\naesString\n");print(str(aesString))
 
   horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
-    mapping$tmp <- mapping$x
+    tmp <- mapping$x
     mapping$x <- mapping$y
-    mapping$y <- mapping$tmp
-    mapping$tmp <- NULL
-  } #else {
-     # horizontal
-     # re-order levels to match all other plots
-#     levels(data[,as.character(mapping$y)]) <- rev(levels(data[,as.character(mapping$y)]))
-  #}
+    mapping$y <- tmp
+  }
 
-#cat("Horizontal: ", horizontal, "\n")
-#cat("\nmapping\n");print(str(mapping))
-#cat("\ndata\n");print(head(data))
-
-  xVal <- as.character(mapping$x)
-  yVal <- as.character(mapping$y)
+  xVal <- deparse(mapping$x)
+  yVal <- deparse(mapping$y)
   mapping$y <- NULL
-#  yVal <- as.character(mapping$x)
-#  mapping$x <- 1
-#str(mapping)
-#str(xVal)
-#str(yVal)
 
   p <- ggplot(data = data, mapping)
-#  mapping$x <- NULL
   p <- p + stat_bin(...)
 
   if (horizontal) {
-    # facet_grid(list(".", yVal))
     p <- p +
-      facet_grid(paste(as.character(yVal), " ~ .", sep = "")) +
+      facet_grid(paste(yVal, " ~ .", sep = "")) +
       theme(panel.margin = unit(0.1, "lines"))
-#    p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
   } else {
     p <- p +
-      facet_grid(paste(". ~", as.character(yVal), sep = "")) +
+      facet_grid(paste(". ~", yVal, sep = "")) +
       theme(panel.margin = unit(0.1, "lines")) +
       coord_flip()
-#    p$facet$facets <- paste(". ~ ", as.character(yVal), sep = "")
   }
-  p <- p + ylab(as.character(yVal)) + xlab(as.character(xVal))
+  p <- p + labs(x = xVal, y = yVal)
 
   p$type <- "combo"
   p$subType <- "facethist"
@@ -717,15 +706,14 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
-    mapping$tmp <- mapping$x
+    tmp <- mapping$x
     mapping$x <- mapping$y
-    mapping$y <- mapping$tmp
-    mapping$tmp <- NULL
+    mapping$y <- tmp
   }
 
-  xVal <- mapping$x
-  yVal <- mapping$y
-  mapping$y <- NULL
+  xVal <- deparse(mapping$x)
+  yVal <- deparse(mapping$y)
+  mapping$y <- NULL # will be faceted
 
   p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
 
@@ -758,16 +746,18 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
 
   if (horizontal) {
-    p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = ""))
+    p <- p + facet_grid(paste(yVal, " ~ .", sep = ""))
 
-    if (identical(den_strip, TRUE))
+    if (identical(den_strip, TRUE)) {
       p <- p + theme(axis.text.y = element_blank())
+    }
   } else {
     p <- p + coord_flip()
-    p <- p + facet_grid(paste(". ~ ", as.character(yVal), sep = ""))
+    p <- p + facet_grid(paste(". ~ ", yVal, sep = ""))
 
-    if (identical(den_strip, TRUE))
+    if (identical(den_strip, TRUE)) {
       p <- p + theme(axis.text.x = element_blank())
+    }
   }
   p$type <- "combo"
   p$horizontal <- horizontal
@@ -794,7 +784,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 
   p <- ggplot(data, mapping) +
-    # scale_x_continuous() +
     scale_y_continuous()
 
   if (identical(rescale, TRUE)) {
@@ -834,11 +823,12 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 #' ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
 ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
   mapping$y <- NULL
-  numer <- ("continuous" == plotting_data_type(data[, as.character(mapping$x)]))
+  x_data <- eval_data_col(data, mapping$x)
+  numer <- ("continuous" == plotting_data_type(x_data))
 
   p <- ggplot(data = data, mapping)
 
-  if (is_date(data[, as.character(mapping$x)])) {
+  if (is_date(x_data)) {
     p <- p + geom_histogram(...)
     #TODO make y axis lines match date positions
     # buildInfo <- ggplot_build(p + geom_bar(...))
@@ -847,14 +837,14 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
     p$subType <- "bar_num"
 
   } else if (numer) {
-    # message("is numeric")
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
         aes(
           y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         ...
-      ) + coord_cartesian(ylim = range(eval(mapping$x, envir = data), na.rm = TRUE))
+      ) + coord_cartesian(ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE))
+
     } else {
       p <- p + geom_histogram(...)
 
@@ -862,19 +852,6 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 
     p$subType <- "bar_num"
    } else {
-    # message("is categorical")
-    # xVal <- mapping$x
-    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
-    # # p <- ggplot(m, mapping) + geom_bar(aes(weight = Freq), binwidth = 1, ...)
-    # p <- ggplot(data, mapping) + geom_bar(...)
-    # # p <- p + scale_x_continuous(NULL, labels ="",breaks = 1)
-
-    # xVal <- mapping$x
-    # mapping <- add_and_overwrite_aes(mapping, aes(x = 1L))
-    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
-    # mapping <- add_and_overwrite_aes(mapping, aes_string(weight = xVal))
-    # p <- ggplot(data = data, mapping) + geom_bar(...)
-    # p$facet$facets <- paste(". ~ ", as.character(xVal), sep = "")
     p <- p + geom_bar(...)
 
     p$subType <- "bar_cat"
@@ -911,19 +888,15 @@ ggally_text <- function(
   ...
 ){
 
-  #rectData <- data.frame(
-  #  x1 = xrange[1],
-  #  x2 = xrange[2],
-  #  y1 = yrange[1],
-  #  y2 = yrange[2]
-  #)
-  # print(rectData)
-
-  p <- ggplot() + xlim(xrange) + ylim(yrange) +
-      theme(panel.background = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.grid.major = element_line(colour = "grey85")) +
-      labs(x = NULL, y = NULL)
+  p <- ggplot() +
+    xlim(xrange) +
+    ylim(yrange) +
+    theme(
+      panel.background = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.grid.major = element_line(colour = "grey85")
+    ) +
+    labs(x = NULL, y = NULL)
 
   new_mapping <- aes_string(
     x = xP * diff(xrange) + min(xrange, na.rm = TRUE),
@@ -1060,10 +1033,10 @@ ggally_diagAxis <- function(
   numer <- ! is_horizontal(data, mapping, "x")
 
   if (! is.character(label)) {
-    label <- as.character(mapping$x)
+    label <- deparse(mapping$x)
   }
 
-  xData <- eval(mapping[["x"]], data)
+  xData <- eval_data_col(data, mapping$x)
 
   if (numer) {
     xmin <- min(xData, na.rm = TRUE)
@@ -1168,11 +1141,11 @@ ggally_facetbar <- function(data, mapping, ...){
 
   # numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
   # xVal <- mapping$x
-  yVal <- mapping$y
+  yVal <- deparse(mapping$y)
   mapping$y <- NULL
-  p <- ggplot(data, mapping) + geom_bar(...)
-  p <- p + facet_grid(paste(as.character(yVal), " ~ .", sep = ""))
-  #p$facet$facets <- paste(as.character(yVal), " ~ .", sep = "")
+  p <- ggplot(data, mapping) +
+    geom_bar(...) +
+    facet_grid(paste(yVal, " ~ .", sep = ""))
   p$subType <- "facetbar"
   p$type <- "diag"
 
@@ -1210,8 +1183,8 @@ ggally_ratio <- function(
 ) {
 
   # capture the original names
-  xName <- as.character(mapping$x)
-  yName <- as.character(mapping$y)
+  xName <- deparse(mapping$x)
+  yName <- deparse(mapping$y)
 
   countData <- plyr::count(data, vars = c(xName, yName))
 
