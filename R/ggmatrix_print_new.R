@@ -126,8 +126,7 @@ ggmatrix_gtable <- function(
     } else if (legend_position %in% c("top", "bottom")) {
       pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
     } else {
-      message("funny legend position")
-      browser()
+      stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
     }
   }
 
