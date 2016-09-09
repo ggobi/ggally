@@ -158,15 +158,3 @@ test_that("rescale", {
 
 
 })
-
-
-test_that("ggfluctuation2", {
-  expect_warning(
-    ggfluctuation2(table(tips$sex, tips$day)),
-    "'ggfluctuation2' is being deprecated"
-  )
-  expect_warning(
-    ggfluctuation2(table(tips[, c("sex", "day")])),
-    "'ggfluctuation2' is being deprecated"
-  )
-})
