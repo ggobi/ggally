@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggmatrix.R
 \name{ggmatrix}
 \alias{ggmatrix}
-\title{ggpairs - A ggplot2 Matrix}
+\title{ggmatrix - A ggplot2 Matrix}
 \usage{
 ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
   title = NULL, xlab = NULL, ylab = NULL, byrow = TRUE,
@@ -32,7 +32,11 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 \item{legend}{Either \describe{\item{length 2 numeric value}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legned = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{length 1 numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a plot legend that will be displayed directly}} Do not forget that the legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")}}
 }
 \description{
-Make a generic matrix of ggplot2 plots
+Make a generic matrix of ggplot2 plots.
+}
+\section{Memory usage}{
+
+Now that the print.ggmatrix method uses a large gtable object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the ggplot2 format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
 }
 \examples{
 # small function to display plots only if it's interactive
