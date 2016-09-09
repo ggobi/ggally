@@ -43,14 +43,17 @@
   if (is.ggmatrix(e1)) {
     if (inherits(e2, "labels")) {
       label_names <- names(e2)
-      if (!all(label_names %in% c("x", "y", "title"))) {
-        stop("'ggmatrix' does not know how to add any label other than c('x', 'y', 'title')")
-      }
+      # if (!all(label_names %in% c("x", "y", "title"))) {
+      #   stop("'ggmatrix' does not know how to add any label other than c('x', 'y', 'title')")
+      # }
 
-      for (from_to in list(c("x", "xlab"), c("y", "ylab"), c("title", "title"))) {
-        if (from_to[1] %in% label_names) {
-          e1[[from_to[2]]] <- e2[[from_to[1]]]
-        }
+      for (label_name in label_names) {
+        label_to <- switch(label_name,
+          x = "xlab",
+          y = "ylab",
+          label_name
+        )
+        e1[[label_to]] <- e2[[label_name]]
       }
 
       return(e1)
@@ -66,7 +69,7 @@
         # calls ggplot2 add method and stores the result in gg
         e1$gg <- e1$gg %+% e2
       }
-      e1
+      return(e1)
 
     } else {
       stop("'ggmatrix' does not know how to add objects that do not have class 'theme'")
@@ -74,7 +77,7 @@
 
   } else {
     # calls ggplot2 add method
-    e1 %+% e2
+    return(e1 %+% e2)
   }
 }
 
