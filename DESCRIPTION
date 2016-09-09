@@ -33,6 +33,7 @@ Imports:
     grid,
     gtable (>= 0.2.0),
     plyr (>= 1.8.3),
+    progress,
     reshape (>= 0.8.5),
     utils
 Suggests:

@@ -12,7 +12,7 @@ ggmatrix_gtable <- function(x, ...) {
 #' @param x ggpair object to be plotted
 #' @param ... ignored
 #' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only
-#' @param progress_wait how many seconds the progress bar will wait until appearing. Defaults to 5 seconds.
+#' @param progress_format string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.
 #' @param plot boolean to determine if the gtable should be drawn or returned
 # ' @method ggprint ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -25,15 +25,24 @@ ggmatrix_gtable <- function(x, ...) {
 ggprint <- function(
   x,
   ...,
-  progress = interactive(),
-  progress_wait = 5,
+  progress = interactive() && (x$ncol * x$nrow) > 15,
+  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta\n",
   plot = TRUE
 ) {
 
-  pm <- x # pm is for "plot matrix"
-  pb <- NULL # init progress bar handle
-  start_time <- Sys.time() # init start time
-  plot_count <- pm$ncol * pm$nrow # how many plots are produced
+  # pm is for "plot matrix"
+  pm <- x
+
+  # init progress bar handle
+  if (isTRUE(progress)) {
+    pb <- progress::progress_bar$new(
+      format = progress_format,
+      clear = TRUE,
+      show_after = 0,
+      total = pm$ncol * pm$nrow
+    )
+    # pb$tick(tokens = list(plot_i = 1, plot_j = 1))
+  }
 
 
   # make a fake facet grid to fill in with proper plot panels
@@ -130,10 +139,9 @@ ggprint <- function(
   }
 
 
-
   # Get all 'panel' grob_pos in the pmg
   panel_locations <- pmg_layout[pmg_layout_name  == "panel", ]
-  panel_locations_order <- order(panel_locations$l, panel_locations$t, decreasing = FALSE)
+  panel_locations_order <- order(panel_locations$t, panel_locations$l, decreasing = FALSE)
   panel_locations <- panel_locations[panel_locations_order, "grob_pos"]
 
   # init the axis sizes
@@ -145,18 +153,14 @@ ggprint <- function(
 
   # build and insert all plots and axis labels
   plot_number <- 0
-  for (j in seq_len(pm$ncol)) {
-    for (i in seq_len(pm$nrow)) {
+  for (i in seq_len(pm$nrow)) {
+    for (j in seq_len(pm$ncol)) {
       plot_number <- plot_number + 1
       grob_pos_panel <- panel_locations[plot_number]
 
       # update the progress bar is possible
-      if (isTRUE(progress) && (Sys.time() - start_time > progress_wait)) {
-        if (is.null(pb)) {
-          pb <- utils::txtProgressBar(initial = plot_number / plot_count, style = 3)
-        } else {
-          utils::setTxtProgressBar(pb, plot_number / plot_count)
-        }
+      if (isTRUE(progress)) {
+        pb$tick(tokens = list(plot_i = i, plot_j = j))
       }
 
       # retrieve plot
@@ -225,11 +229,6 @@ ggprint <- function(
     pmg_key = "heights"
     #stop_msg = "bottom axis height issue!! Fix!"
   )
-
-  # close the progress bar
-  if (!is.null(pb)) {
-    close(pb)
-  }
 
   # draw the giant gtable obj
   if (isTRUE(plot)) {
