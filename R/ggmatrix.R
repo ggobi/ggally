@@ -1,7 +1,11 @@
 
-#' ggpairs - A ggplot2 Matrix
+#' ggmatrix - A ggplot2 Matrix
 #'
-#' Make a generic matrix of ggplot2 plots
+#' Make a generic matrix of ggplot2 plots.
+#'
+#' @section Memory usage:
+#' Now that the print.ggmatrix method uses a large gtable object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the ggplot2 format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
+#'
 #' @param plots list of plots to be put into matrix
 #' @param nrow,ncol number of rows and columns
 #' @param xAxisLabels,yAxisLabels strip titles for the x and y axis respectively. Set to \code{NULL} to not be displayed
