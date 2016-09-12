@@ -13,7 +13,7 @@ ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 #' @author Barret Schloerke
 #' @import utils
 #' @importFrom grid grid.newpage grid.draw seekViewport pushViewport upViewport
-#' @export
+# ' @export
 #' @examples
 #'  data(tips, package = "reshape")
 #'  pMat <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
