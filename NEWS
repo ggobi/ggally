@@ -1,7 +1,58 @@
 GGally 1.2.0.9999
 -----------------
 
-* feature
+`ggmatrix.print` - massive update!
+
+* Now prints with a ggplot2 facet'ed structure
+* Column titles are now placed in the strip of a plot matrix
+* If there are 16 plots or more, a progress bar is displayed automatically.  This is helpful since all plot are pre-rendered, then displayed all at once. Please look at the documentation for `ggmatrix_gtable` more details.
+
+`ggmatrix` legend
+
+* A legend may be added with the `legend` parameter in `ggduo`, `ggpairs`, and `ggmatrix`
+* May specify a (length two) numeric plot coordinate
+* May specify a (length one) numeric plot position
+* May specify a legned object retrieved from `grab_legend`
+
+`ggmatrix` and ggplot2 labels
+
+* `ggplot2::labs` `+`'ed to a ggmatrix object
+* `ggplot2::xlab` and `ggplot2::ylab` may be `+`'ed to a ggmatrix object
+* `ggplot2::ggtitle` `+`'ed to a ggmatrix object
+* (anything that returns a class of "labels" may be added to a ggmatrix object)
+
+`ggmatrix` and `ggplot2::last_plot()`
+
+* If a `ggmatrix` object is printed, `ggplot2::last_plot()` will return the plot matrix
+
+`ggmatrix` and `ggplot2::ggsave()`
+
+* `ggsave` now works with `ggmatrix` objects
+
+`ggpairs` and `ggduo` check for cardinality (#197)
+
+* Before creating a ggmatrix object, a check is made for character/factor columns
+* If there are more than 15 (default) unique combinations, an error is thrown.
+* Setting `cardinality_threshold` parameter to a higher value can fix the problem (knowing single cell plots may take more time to produce)
+* Setting `cardinality_threshold` parameter to `NULL` can stop the check
+
+`ggmatrix` plot proportions
+
+* `ggmatrix` can set the plot proportions with the parameters `xProportions` and `yProportions`
+* These will change the relative size of the plots produced.
+
+`ggally_cor` colour aesthetic
+
+* color must be a non-numeric value
+
+Vignettes
+
+* vignettes are now displayed using `packagedocs`.  Check it out at github.com/schloerke/packagedocs !
+
+`ggally_box_no_facet` and `ggally_dot_no_facet`
+
+* New methods added as defaults to pair with new ggmatrix print method
+
 
 GGally 1.2.0
 -----------------
