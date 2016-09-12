@@ -8,7 +8,6 @@
 #' @param ... ignored
 #' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only
 #' @param progress_format string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.
-#' @param plot boolean to determine if the gtable should be drawn or returned
 # ' @method ggprint ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
@@ -18,14 +17,12 @@
 #' pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
-  x,
+  pm,
   ...,
-  progress = interactive() && (x$ncol * x$nrow) > 15,
+  progress = interactive() && (pm$ncol * pm$nrow) > 15,
   progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta"
 ) {
-
   # pm is for "plot matrix"
-  pm <- x
 
   # init progress bar handle
   if (isTRUE(progress)) {
