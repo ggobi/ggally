@@ -88,7 +88,6 @@ sections:
       title: "ggally_dot, ggally_dot_no_facet"
     - ggally_facetbar
     - ggally_facetdensity
-    - ggally_facetdensitystrip
     - ggally_facethist
     - ggally_points
     - ggally_ratio
