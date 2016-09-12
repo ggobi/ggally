@@ -7,8 +7,9 @@
 ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
   title = NULL, xlab = NULL, ylab = NULL, byrow = TRUE,
   showStrips = NULL, showAxisPlotLabels = TRUE,
-  showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, data = NULL,
-  gg = NULL, legend = NULL)
+  showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE,
+  xProportions = NULL, yProportions = NULL, data = NULL, gg = NULL,
+  legend = NULL)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
@@ -24,6 +25,8 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 \item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
 \item{showAxisPlotLabels, showXAxisPlotLabels, showYAxisPlotLabels}{booleans that determine if the plots axis labels are printed on the X (bottom) or Y (left) part of the plot matrix. If \code{showAxisPlotLabels} is set, both \code{showXAxisPlotLabels} and \code{showYAxisPlotLabels} will be set to the given value.}
+
+\item{xProportions, yProportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, or \code{grid\link[grid]{unit}} object with matching respective length}
 
 \item{data}{data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time}
 
