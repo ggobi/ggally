@@ -129,15 +129,33 @@ ggmatrix_gtable <- function(
 
 
   # Get all 'panel' grob_pos in the pmg
-  panel_locations <- pmg_layout[pmg_layout_name  == "panel", ]
-  panel_locations_order <- order(panel_locations$t, panel_locations$l, decreasing = FALSE)
-  panel_locations <- panel_locations[panel_locations_order, "grob_pos"]
+  panel_layout <- pmg_layout[pmg_layout_name  == "panel", ]
+  panel_locations_order <- order(panel_layout$t, panel_layout$l, decreasing = FALSE)
+  panel_locations <- panel_layout[panel_locations_order, "grob_pos"]
 
   # init the axis sizes
   left_axis_sizes <- numeric(pm$nrow + 1)
   bottom_axis_sizes <- numeric(pm$ncol + 1)
   axis_l_grob_pos <- pmg_layout_grob_pos[pmg_layout_name == "axis-l"]
   axis_b_grob_pos <- pmg_layout_grob_pos[pmg_layout_name == "axis-b"]
+
+  # change the plot size ratios
+  x_proportions <- pm$xProportions
+  if (!is.null(x_proportions)) {
+    panel_width_pos <- sort(unique(panel_layout$l))
+    if (!inherits(x_proportions, "unit")) {
+      x_proportions <- grid::unit(x_proportions, "null")
+    }
+    pmg$widths[panel_width_pos] <- x_proportions
+  }
+  y_proportions <- pm$yProportions
+  if (!is.null(y_proportions)) {
+    panel_height_pos <- sort(unique(panel_layout$t))
+    if (!inherits(y_proportions, "unit")) {
+      y_proportions <- grid::unit(y_proportions, "null")
+    }
+    pmg$heights[panel_height_pos] <- y_proportions
+  }
 
 
   # build and insert all plots and axis labels
