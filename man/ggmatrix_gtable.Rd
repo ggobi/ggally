@@ -8,13 +8,13 @@ ggmatrix_gtable(pm, ..., progress = interactive() && (pm$ncol * pm$nrow) > 15,
   progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta")
 }
 \arguments{
+\item{pm}{ggpair object to be plotted}
+
 \item{...}{ignored}
 
 \item{progress}{boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only}
 
 \item{progress_format}{string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.}
-
-\item{x}{ggpair object to be plotted}
 }
 \description{
 Specialized method to print the ggpair object-
