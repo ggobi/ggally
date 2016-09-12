@@ -325,7 +325,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'      # the ratio plot should have a black border around the rects of size 0.15
 #'      discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
 #'    ),
-#'    showStrips = FALSE
+#'    showStrips = FALSE, cardinality_threshold = NULL
 #'  );
 #'
 #'  p_(pm)

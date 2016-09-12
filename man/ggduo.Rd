@@ -169,7 +169,7 @@ If a function is supplied as an option, it should implement the function api of 
      # the ratio plot should have a black border around the rects of size 0.15
      discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
    ),
-   showStrips = FALSE
+   showStrips = FALSE, cardinality_threshold = NULL
  );
 
  p_(pm)
