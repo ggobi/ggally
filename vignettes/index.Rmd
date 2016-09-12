@@ -19,7 +19,7 @@ navpills: |
 # R output pre blocks are styled by default to indicate output
 knitr::opts_chunk$set(
   comment = NA,
-  cache = TRUE,
+  # cache = TRUE,
   fig.height = 8,
   fig.width = 10
 )

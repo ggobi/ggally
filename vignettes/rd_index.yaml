@@ -10,7 +10,7 @@
 # cat(paste(setdiff(topics, cur), collapse = "\n"))
 knitr:
   eval: true
-  cache: true
+  # cache: true
   fig.height: 8
   fig.width: 10
 
