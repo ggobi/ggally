@@ -188,14 +188,20 @@ psych <- data.frame(
 First, look at the within correlation using `r rdl(ggpairs)`.
 
 ```{r ggduo-within}
-ggpairs(psych, 1:3)
-ggpairs(psych, 4:8)
+ggpairs(psych, 1:3, title = "Within Psychological Variables")
+ggpairs(psych, 4:8, title = "Within Academic Variables")
 ```
 
 Next, look at the between correlation using `r rdl(ggduo)`.
 
 ```{r ggduo-between}
-ggduo(psych, 1:3, 4:8, types = list(continuous = "smooth_lm"))
+ggduo(
+  psych, 1:3, 4:8,
+  types = list(continuous = "smooth_lm"),
+  title = "Between Academic and Psychological Variable Correlation",
+  xlab = "Psychological",
+  ylab = "Academic"
+)
 ```
 
 Since ggduo does not have a upper section to display the correlation values, we may use a custom function to add the information in the continuous plots.  The strips may be removed as each group name may be recovered in the outer axis labels.
@@ -212,12 +218,22 @@ lm_with_cor <- function(data, mapping, ..., method = "pearson") {
         y = max(y, na.rm = TRUE),
         lab = round(cor, digits = 3)
       ),
-      mapping = ggplot2::aes(x = x, y = y, label = lab),
+      mapping = ggplot2::aes(x = x, y = y, label = lab, color = NULL),
       hjust = 0, vjust = 1,
       size = 5, fontface = "bold"
     )
 }
-ggduo(psych, 1:3, 4:8, types = list(continuous = lm_with_cor), showStrips = FALSE)
+ggduo(
+  psych, 1:3, 4:8,
+  mapping = aes(color = Sex),
+  types = list(continuous = wrap(lm_with_cor, alpha = 0.25)),
+  showStrips = FALSE,
+  title = "Between Academic and Psychological Variable Correlation",
+  xlab = "Psychological",
+  ylab = "Academic",
+  legend = c(5,2)
+) +
+  theme(legend.position = "bottom")
 ```
 
 
