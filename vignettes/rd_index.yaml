@@ -57,10 +57,11 @@ sections:
       file: wrap.Rd
       title: "wrap"
     - print.ggmatrix
-    - gglegend
+    - ggmatrix_gtable
     -
       file: grab_legend.Rd
       title: "grab_legend"
+    - gglegend
     -
       file: putPlot.Rd
       title: "[<-.ggmatrix"
@@ -75,13 +76,16 @@ sections:
   section_name: High-Level Plots
   topics:
     - ggally_barDiag
-    - ggally_box
+    -
+      file: ggally_box.Rd
+      title: "ggally_box, ggally_box_no_facet"
     - ggally_cor
     - ggally_density
     - ggally_densityDiag
     - ggally_denstrip
-    - ggally_dot
-    - ggally_dotAndBox
+    -
+      file: ggally_dot.Rd
+      title: "ggally_dot, ggally_dot_no_facet"
     - ggally_facetbar
     - ggally_facetdensity
     - ggally_facetdensitystrip
@@ -90,14 +94,14 @@ sections:
     - ggally_ratio
     -
       file: ggally_smooth.Rd
-      title: "ggally_smooth: ggally_smooth, ggally_smooth_lm, ggally_smooth_loess"
+      title: "ggally_smooth, ggally_smooth_lm, ggally_smooth_loess"
     - ggally_text
     -
       file: ggally_blank.Rd
-      title: "ggally_blank: ggally_blank, ggally_blankDiag"
+      title: "ggally_blank, ggally_blankDiag"
     -
       file: ggally_na.Rd
-      title: "ggally_na: ggally_na, ggally_naDiag"
+      title: "ggally_na, ggally_naDiag"
     - ggally_diagAxis
 
 -
