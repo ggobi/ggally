@@ -32,7 +32,7 @@ broom_columns <- function() {
 #' @import RColorBrewer
 #' @export
 brew_colors <- function(col) {
-  brew_cols <- RColorBrewer::brewer.pal(n = 4, "Set1")
+  brew_cols <- RColorBrewer::brewer.pal(n = 9, "Set1")
   names(brew_cols) <- c("red", "blue", "green", "purple", "orange", "yellow", "brown", "pink", "grey")
   brew_cols <- as.list(brew_cols)
   ret <- brew_cols[[col]]
@@ -401,7 +401,7 @@ ggnostic <- function(
   ),
   xlab = "coefficients",
   ylab = "diagnostics",
-  title = deparse(mod$call),
+  title = deparse(model$call),
   data = broomify(model)
 ) {
 
