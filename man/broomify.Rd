@@ -10,9 +10,9 @@ broomify(model)
 \item{model}{model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}}
 }
 \value{
-augmented data frame with the glance data.frame and tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively
+broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
 }
 \description{
-broom::augment a model and add broom::glance and broom::tidy output as attributes
+broom::augment a model and add broom::glance and broom::tidy output as attributes. X and Y variables are also added.
 }
 

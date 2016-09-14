@@ -8,7 +8,7 @@ ggally_nostic_resid(data, mapping, ..., linePosition = 0,
   lineColor = brew_colors("red"), lineSize = 0.5, lineAlpha = 1,
   lineType = 1, lineConfColor = lineColor, lineConfSize = lineSize,
   lineConfAlpha = lineAlpha, lineConfType = 2, pVal = c(0.025, 0.975),
-  sigma = attr(data, "broom_glance")$sigma)
+  sigma = attr(data, "broom_glance")$sigma, se = TRUE)
 }
 \arguments{
 \item{data, mapping, ...}{parameters supplied to \code{\link{ggally_nostic_line}}}
@@ -20,6 +20,8 @@ ggally_nostic_resid(data, mapping, ..., linePosition = 0,
 \item{pVal}{percentiles of a N(0, sigma) distribution to be drawn}
 
 \item{sigma}{sigma value for the \code{pVal} percentiles}
+
+\item{se}{boolen to determine if the confidence intervals should be displayed}
 }
 \value{
 ggplot2 plot object
