@@ -447,7 +447,7 @@ ggnostic <- function(
 
   broom_extra_args <- broom_columns()
 
-  model_vars <- setdiff(names(data), broom_extra_args)
+  model_vars <- setdiff(names(data), c(".rownames", broom_extra_args))
   y_var <- model_vars[1]
   x_vars <- model_vars[-1]
 
