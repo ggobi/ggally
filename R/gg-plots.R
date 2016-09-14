@@ -1039,7 +1039,7 @@ ggally_diagAxis <- function(
 
     axisBreaks <- get_x_axis_labels(p, xrange)
     # print(axisBreaks)
-    pLabs <- p + geom_text(
+    p <- p + geom_text(
       data    = axisBreaks,
       mapping = aes_string(
         x     = "xPos",
@@ -1077,7 +1077,7 @@ ggally_diagAxis <- function(
       lab = breakLabels
     )
 
-    pLabs <- p + geom_text(
+    p <- p + geom_text(
       data = axisLabs,
       mapping = aes(
         x     = x,
@@ -1089,8 +1089,8 @@ ggally_diagAxis <- function(
     )
 
     # hack to remove warning message... cuz it doesn't listen to suppress messages
-    pLabs$scales$scales[[1]]$breaks <- axisBreaks
-    pLabs$scales$scales[[2]]$breaks <- axisBreaks
+    p$scales$scales[[1]]$breaks <- axisBreaks
+    p$scales$scales[[2]]$breaks <- axisBreaks
     # pLabs <- pLabs +
     #   scale_x_continuous(breaks=axisBreaks,limits=c(0,1)) +
     #   scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
