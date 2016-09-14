@@ -57,8 +57,7 @@ mapping_swap_x_y <- function(mapping) {
 ggally_points <- function(data, mapping, ...){
 
   p <- ggplot(data = data, mapping = mapping) + geom_point(...)
-  p$type <- "continuous"
-  p$subType <- "points"
+
   p
 }
 
@@ -91,8 +90,6 @@ ggally_smooth <- function(data, mapping, ..., method = "lm"){
     p <- p + geom_smooth(method = method, colour = I("black"))
   }
 
-  p$type <- "continuous"
-  p$subType <- "smooth"
   p
 }
 
@@ -147,9 +144,6 @@ ggally_density <- function(data, mapping, ...){
   } else {
     p <- p + geom_density2d(mapping = mapping, ...)
   }
-
-  p$type <- "continuous"
-  p$subType <- "density"
 
   p
 }
@@ -396,8 +390,6 @@ ggally_cor <- function(
 
     )
 
-    p$type <- "continuous"
-    p$subType <- "cor"
     p
   } else {
     # calculate variable ranges so the gridlines line up
@@ -427,8 +419,6 @@ ggally_cor <- function(
     #element_bw() +
     theme(legend.position = "none")
 
-    p$type <- "continuous"
-    p$subType <- "cor"
     p
   }
 }
@@ -536,10 +526,8 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
   if (boxPlot) {
     p <- p + geom_boxplot(mapping, ...)
-    p$subType <- "box"
   } else {
     p <- p + geom_jitter(mapping, ...)
-    p$subType <- "dot"
   }
 
   if (!horizontal) {
@@ -563,8 +551,6 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
   p <- p + scale_x_continuous(xVal, labels = "", breaks = 1)
 
-  p$type <- "combo"
-  p$horizontal <- horizontal
   p
 }
 
@@ -584,10 +570,8 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
 
   if (boxPlot) {
     p <- p + geom_boxplot(mapping, ...)
-    p$subType <- "box"
   } else {
     p <- p + geom_jitter(mapping, ...)
-    p$subType <- "dot"
   }
 
   if (horizontal) {
@@ -598,8 +582,6 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
       coord_flip()
   }
 
-  p$type <- "combo"
-  p$horizontal <- horizontal
   p
 }
 
@@ -649,10 +631,6 @@ ggally_facethist <- function(data, mapping, ...){
       coord_flip()
   }
   p <- p + labs(x = xVal, y = yVal)
-
-  p$type <- "combo"
-  p$subType <- "facethist"
-  p$horizontal <- horizontal
 
   p
 }
@@ -742,7 +720,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
         breaks = c(0.5),
         labels = "1"
       )
-    p$subType <- "denstrip"
 
   } else {
     p <- p +
@@ -754,7 +731,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
         geom = "line",
         ...
       )
-    p$subType <- "facetdensity"
   }
 
 
@@ -772,8 +748,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
       p <- p + theme(axis.text.x = element_blank())
     }
   }
-  p$type <- "combo"
-  p$horizontal <- horizontal
 
   p
 }
@@ -815,10 +789,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
     p <- p + geom_density(...)
   }
 
-  p$type <- "diag"
-  p$subType <- "density"
   p
-
 }
 
 #' Plots the Bar Plots by Using Diagonal
@@ -852,8 +823,6 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
     # buildInfo <- ggplot_build(p + geom_bar(...))
     # histBarPerc <- buildInfo$data[[1]]$ncount
 
-    p$subType <- "bar_num"
-
   } else if (numer) {
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
@@ -868,13 +837,11 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 
     }
 
-    p$subType <- "bar_num"
    } else {
     p <- p + geom_bar(...)
 
-    p$subType <- "bar_cat"
   }
-  p$type <- "diag"
+
   p
 }
 
@@ -1135,9 +1102,7 @@ ggally_diagAxis <- function(
     #   scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
   }
 
-  pLabs$subType <- "internal"
-  pLabs$type <- "label"
-  pLabs
+  p
 
 }
 
@@ -1166,8 +1131,6 @@ ggally_facetbar <- function(data, mapping, ...){
   p <- ggplot(data, mapping) +
     geom_bar(...) +
     facet_grid(paste(yVal, " ~ .", sep = ""))
-  p$subType <- "facetbar"
-  p$type <- "diag"
 
   p
 }
@@ -1266,8 +1229,6 @@ ggally_ratio <- function(
       )
     )
 
-  p$type <- "discrete"
-  p$subType <- "ratio"
   p
 }
 
@@ -1310,7 +1271,7 @@ ggally_blank <- function(...){
       strip.text.x      = element_blank(),
       strip.text.y      = element_blank()
     )
-  p$subType <- p$type <- "blank"
+
   p
 }
 
@@ -1360,7 +1321,7 @@ ggally_na <- function(data = NULL, mapping = NULL, size = 10, color = "grey20", 
       strip.text.x      = element_blank(),
       strip.text.y      = element_blank()
     )
-  p$subType <- p$type <- "na"
+
   p
 }
 
