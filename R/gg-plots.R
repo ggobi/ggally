@@ -514,9 +514,7 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <- is_horizontal(data, mapping)
 
   if (horizontal) {
-    tmp <- mapping$x
-    mapping$x <- mapping$y
-    mapping$y <- tmp
+    mapping <- mapping_swap_x_y(mapping)
   }
 
   xVal <- deparse(mapping$x)
@@ -561,9 +559,7 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
   horizontal <- is_horizontal(data, mapping)
 
   if (horizontal) {
-    tmp <- mapping$x
-    mapping$x <- mapping$y
-    mapping$y <- tmp
+    mapping <- mapping_swap_x_y(mapping)
   }
 
   p <- ggplot(data = data)
@@ -608,9 +604,7 @@ ggally_facethist <- function(data, mapping, ...){
   horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
-    tmp <- mapping$x
-    mapping$x <- mapping$y
-    mapping$y <- tmp
+    mapping <- mapping_swap_x_y(mapping)
   }
 
   xVal <- deparse(mapping$x)
@@ -697,9 +691,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
   horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
-    tmp <- mapping$x
-    mapping$x <- mapping$y
-    mapping$y <- tmp
+    mapping <- mapping_swap_x_y(mapping)
   }
 
   xVal <- deparse(mapping$x)
