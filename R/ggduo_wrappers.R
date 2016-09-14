@@ -29,15 +29,18 @@ broomify <- function(model) {
 broom_columns <- function() {
   c(".fitted", ".se.fit", ".resid", ".hat", ".sigma", ".cooksd", ".std.resid")
 }
-brew_colors <- (function() {
-  brew_colors <- RColorBrewer::brewer.pal(n = 4, "Set1")
-  list(
-    blue = brew_colors[2],
-    green = brew_colors[3],
-    red = brew_colors[1],
-    purple = brew_colors[4]
-  )
-})()
+#' @import RColorBrewer
+#' @export
+brew_colors <- function(col) {
+  brew_cols <- RColorBrewer::brewer.pal(n = 4, "Set1")
+  names(brew_cols) <- c("red", "blue", "green", "purple", "orange", "yellow", "brown", "pink", "grey")
+  brew_cols <- as.list(brew_cols)
+  ret <- brew_cols[[col]]
+  if (is.null(ret)) {
+    stop(paste("color '", col, "' not found in: c(", paste(names(brew_cols), collapse = ", "), ")", sep = ""))
+  }
+  ret
+}
 
 
 
@@ -110,7 +113,7 @@ ggally_nostic_line <- function(
 ggally_nostic_resid <- function(
   data, mapping, ...,
   linePosition = 0,
-  lineColor = brew_colors$red,
+  lineColor = brew_colors("red"),
   lineSize = 0.5, lineAlpha = 1,
   lineType = 1,
   lineConfColor = lineColor,
@@ -182,7 +185,7 @@ ggally_nostic_std_resid <- function(
 #' @export
 ggally_nostic_se_fit <- function(
   data, mapping, ...,
-  lineColor = brew_colors$green,
+  lineColor = brew_colors("green"),
   linePosition = 0
 ) {
   ggally_nostic_line(
@@ -208,7 +211,7 @@ ggally_nostic_se_fit <- function(
 #' @export
 ggally_nostic_sigma <- function(
   data, mapping, ...,
-  lineColor = brew_colors$red,
+  lineColor = brew_colors("red"),
   linePosition = attr(data, "broom_glance")$sigma
 ) {
   ggally_nostic_line(
@@ -235,7 +238,7 @@ ggally_nostic_sigma <- function(
 ggally_nostic_cooksd <- function(
   data, mapping, ...,
   linePosition = 1,
-  lineColor = brew_colors$purple
+  lineColor = brew_colors("purple")
 ) {
   ggally_nostic_line(
     data, mapping, ...,
@@ -267,11 +270,11 @@ ggally_nostic_cooksd <- function(
 ggally_nostic_hat <- function(
   data, mapping, ...,
   linePosition = 2 * sum(data[[deparse(mapping$y)]]) / nrow(data),
-  lineColor = brew_colors$purple,
+  lineColor = brew_colors("purple"),
   lineSize = 0.5, lineAlpha = 1,
   lineType = 1,
   avgLinePosition = sum(data[[deparse(mapping$y)]]) / nrow(data),
-  avgLineColor = brew_colors$red,
+  avgLineColor = brew_colors("red"),
   avgLineSize = lineSize, avgLineAlpha = lineAlpha,
   avgLineType = lineType
 ) {

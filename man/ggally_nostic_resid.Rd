@@ -5,7 +5,7 @@
 \title{ggnostic function to display residuals}
 \usage{
 ggally_nostic_resid(data, mapping, ..., linePosition = 0,
-  lineColor = brew_colors$red, lineSize = 0.5, lineAlpha = 1,
+  lineColor = brew_colors("red"), lineSize = 0.5, lineAlpha = 1,
   lineType = 1, lineConfColor = lineColor, lineConfSize = lineSize,
   lineConfAlpha = lineAlpha, lineConfType = 2, pVal = c(0.025, 0.975),
   sigma = attr(data, "broom_glance")$sigma)

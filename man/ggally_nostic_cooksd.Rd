@@ -5,7 +5,7 @@
 \title{ggnostic function to display stats::cooks.distance}
 \usage{
 ggally_nostic_cooksd(data, mapping, ..., linePosition = 1,
-  lineColor = brew_colors$purple)
+  lineColor = brew_colors("purple"))
 }
 \arguments{
 \item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}

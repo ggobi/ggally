@@ -4,7 +4,7 @@
 \alias{ggally_nostic_sigma}
 \title{ggnostic function to display stats::influence's sigma}
 \usage{
-ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors$red,
+ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors("red"),
   linePosition = attr(data, "broom_glance")$sigma)
 }
 \arguments{

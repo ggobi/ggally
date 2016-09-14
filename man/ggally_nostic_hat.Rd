@@ -5,10 +5,11 @@
 \title{ggnostic function to display stats::influence's hat information}
 \usage{
 ggally_nostic_hat(data, mapping, ..., linePosition = 2 *
-  sum(data[[deparse(mapping$y)]])/nrow(data), lineColor = brew_colors$purple,
-  lineSize = 0.5, lineAlpha = 1, lineType = 1,
+  sum(data[[deparse(mapping$y)]])/nrow(data),
+  lineColor = brew_colors("purple"), lineSize = 0.5, lineAlpha = 1,
+  lineType = 1,
   avgLinePosition = sum(data[[deparse(mapping$y)]])/nrow(data),
-  avgLineColor = brew_colors$red, avgLineSize = lineSize,
+  avgLineColor = brew_colors("red"), avgLineSize = lineSize,
   avgLineAlpha = lineAlpha, avgLineType = lineType)
 }
 \arguments{

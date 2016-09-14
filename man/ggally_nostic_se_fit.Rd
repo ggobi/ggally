@@ -4,7 +4,7 @@
 \alias{ggally_nostic_se_fit}
 \title{ggnostic function to display stats::predict's standard errors}
 \usage{
-ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors$green,
+ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("green"),
   linePosition = 0)
 }
 \arguments{
