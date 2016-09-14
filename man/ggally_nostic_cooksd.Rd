@@ -11,8 +11,6 @@ ggally_nostic_cooksd(data, mapping, ..., linePosition = 1,
 \item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}
 
 \item{linePosition}{1 is the general cutoff point for Cook's Distance}
-
-\item{sigma}{linePosition that is drawn in the background of the plot. Defaults to the overall model's sigma value.}
 }
 \value{
 ggplot2 plot object

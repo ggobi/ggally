@@ -2,10 +2,10 @@
 ## .hat: Diagonal of the hat matrix
 ## .sigma: Estimate of residual standard deviation when corresponding observation is dropped from model
 ## .fitted: Fitted values of model
-## .cooksd: Cooks distance, ‘cooks.distance’
+## .cooksd: Cooks distance, 'cooks.distance'
 ## .se.fit: Standard errors of fitted values
 ## .resid: Residuals
-## .std.resid: Standardised residuals (Some unusual "lm" objects, such as "rlm" from MASS, may omit ‘.cooksd’ and ‘.std.resid’. "gam" from mgcv omits ‘.sigma’)
+## .std.resid: Standardised residuals (Some unusual "lm" objects, such as "rlm" from MASS, may omit '.cooksd' and '.std.resid'. "gam" from mgcv omits '.sigma')
 
 #' Broomify a model
 #'
@@ -37,6 +37,7 @@ broomify <- function(model) {
 #' @return character vector of names
 #' @rdname model_terms
 #' @export
+#' @importFrom stats terms
 model_response_variables <- function(model) {
   model_terms <- terms(model)
 
@@ -63,6 +64,7 @@ model_beta_variables <- function(model) {
 }
 
 
+#' @importFrom stats symnum
 beta_stars <- function(p_val) {
   unclass(symnum(
     p_val,
@@ -75,6 +77,7 @@ beta_stars <- function(p_val) {
 
 #' @export
 #' @rdname model_terms
+#' @importFrom stats anova
 model_beta_label <- function(model) {
   beta_vars <- model_beta_variables(model)
 
@@ -96,6 +99,10 @@ model_beta_label <- function(model) {
 broom_columns <- function() {
   c(".fitted", ".se.fit", ".resid", ".hat", ".sigma", ".cooksd", ".std.resid")
 }
+
+#' RColorBrewer Set1 colors
+#'
+#' @param col standard color name used to retrieve hex color value
 #' @import RColorBrewer
 #' @export
 brew_colors <- function(col) {
@@ -117,7 +124,7 @@ brew_colors <- function(col) {
 #'
 #' Functions with a color in their name have different default color behavior.
 #'
-#' @param data,mapping supplied directly to \code{ggplot2::\link[ggplo2]{ggplot(data, mapping)}}
+#' @param data,mapping supplied directly to \code{ggplot2::\link[ggplot2]{ggplot(data, mapping)}}
 #' @param ... parameters supplied to \code{continuous_geom} or \code{combo_geom}
 #' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}
 #' @param continuous_geom ggplot2 geom that is executed after the line is (possibly) added and if the x data is continous
@@ -170,7 +177,7 @@ ggally_nostic_line <- function(
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} percentiles of a N(0, sigma) distribution.
 #'
 #' @param data,mapping,... parameters supplied to \code{\link{ggally_nostic_line}}
-#' @param linePosition,lineColor,lineSize,lineAlpha parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}
+#' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}
 #' @param lineConfColor,lineConfSize,lineConfAlpha,lineConfType parameters supplied to the confidence interval lines
 #' @param pVal percentiles of a N(0, sigma) distribution to be drawn
 #' @param sigma sigma value for the \code{pVal} percentiles
@@ -178,6 +185,7 @@ ggally_nostic_line <- function(
 #' @return ggplot2 plot object
 #' @seealso \code{stats::\link[stats]{residuals}}
 #' @export
+#' @importFrom stats qnorm
 ggally_nostic_resid <- function(
   data, mapping, ...,
   linePosition = 0,
@@ -247,7 +255,7 @@ ggally_nostic_std_resid <- function(
 #'
 #' As stated in \code{stats::\link[stats]{predict}} documentation:
 #'
-#'  If the logical ‘se.fit’ is ‘TRUE’, standard errors of the predictions are calculated.  If the numeric argument ‘scale’ is set (with optional ‘df’), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
+#'  If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
 #'
 #' Since the se.fit is \code{TRUE} and scale is unset by default, the standard errors are extracted from the model fit.
 #'
@@ -275,12 +283,12 @@ ggally_nostic_se_fit <- function(
 #'
 #' As stated in \code{stats::\link[stats]{influence}} documentation:
 #'
-#' sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being ‘NaN’.)
+#' sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being 'NaN'.)
 #'
 #' A line is added to display the overall model's sigma value. This gives a baseline for comparison
 #'
 #' @param data,mapping,...,lineColor parameters supplied to \code{\link{ggally_nostic_line}}
-#' @param sigma linePosition that is drawn in the background of the plot. Defaults to the overall model's sigma value.
+#' @param linePosition line that is drawn in the background of the plot. Defaults to the overall model's sigma value.
 #' @seealso \code{stats::\link[stats]{influence}}
 #' @return ggplot2 plot object
 #' @export
@@ -305,7 +313,6 @@ ggally_nostic_sigma <- function(
 #'
 #' @param data,mapping,...,lineColor parameters supplied to \code{\link{ggally_nostic_line}}
 #' @param linePosition 1 is the general cutoff point for Cook's Distance
-#' @param sigma linePosition that is drawn in the background of the plot. Defaults to the overall model's sigma value.
 #' @seealso \code{stats::\link[stats]{cooks.distance}}
 #' @return ggplot2 plot object
 #' @rdname ggally_nostic_cooksd
@@ -328,7 +335,7 @@ ggally_nostic_cooksd <- function(
 #'
 #' As stated in \code{stats::\link[stats]{influence}} documentation:
 #'
-#' hat: a vector containing the diagonal of the ‘hat’ matrix.
+#' hat: a vector containing the diagonal of the 'hat' matrix.
 #'
 #' The diagonal elements of the 'hat' matrix describe the influence each response value has on the fitted value for that same observation.
 #'
@@ -409,6 +416,8 @@ check_and_set_nostic_types <- function(
   hat,
   cooksd
 ) {
+
+  types_names <- names(types)
 
   set_type_value <- function(name, value) {
     if (is.null(types[[name]])) {

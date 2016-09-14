@@ -10,7 +10,7 @@ ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors("red"),
 \arguments{
 \item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}
 
-\item{sigma}{linePosition that is drawn in the background of the plot. Defaults to the overall model's sigma value.}
+\item{linePosition}{line that is drawn in the background of the plot. Defaults to the overall model's sigma value.}
 }
 \value{
 ggplot2 plot object
@@ -19,7 +19,7 @@ ggplot2 plot object
 As stated in \code{stats::\link[stats]{influence}} documentation:
 }
 \details{
-sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being ‘NaN’.)
+sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being 'NaN'.)
 
 A line is added to display the overall model's sigma value. This gives a baseline for comparison
 }

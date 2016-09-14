@@ -13,7 +13,7 @@ ggally_nostic_resid(data, mapping, ..., linePosition = 0,
 \arguments{
 \item{data, mapping, ...}{parameters supplied to \code{\link{ggally_nostic_line}}}
 
-\item{linePosition, lineColor, lineSize, lineAlpha}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}}
+\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}}
 
 \item{lineConfColor, lineConfSize, lineConfAlpha, lineConfType}{parameters supplied to the confidence interval lines}
 

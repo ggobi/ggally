@@ -10,7 +10,7 @@ ggally_nostic_line(data, mapping, ..., linePosition = NULL,
   mapColorToFill = TRUE)
 }
 \arguments{
-\item{data, mapping}{supplied directly to \code{ggplot2::\link[ggplo2]{ggplot(data, mapping)}}}
+\item{data, mapping}{supplied directly to \code{ggplot2::\link[ggplot2]{ggplot(data, mapping)}}}
 
 \item{...}{parameters supplied to \code{continuous_geom} or \code{combo_geom}}
 

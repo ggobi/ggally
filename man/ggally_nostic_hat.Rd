@@ -26,7 +26,7 @@ ggplot2 plot object
 As stated in \code{stats::\link[stats]{influence}} documentation:
 }
 \details{
-hat: a vector containing the diagonal of the ‘hat’ matrix.
+hat: a vector containing the diagonal of the 'hat' matrix.
 
 The diagonal elements of the 'hat' matrix describe the influence each response value has on the fitted value for that same observation.
 
