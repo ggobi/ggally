@@ -9,10 +9,10 @@
 
 #' Broomify a model
 #'
-#' broom::augment a model and add broom::glance and broom::tidy output as attributes
+#' broom::augment a model and add broom::glance and broom::tidy output as attributes. X and Y variables are also added.
 #'
 #' @param model model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}
-#' @return augmented data frame with the glance data.frame and tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively
+#' @return broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
 #' @export
 broomify <- function(model) {
   require_pkgs("broom")
@@ -22,8 +22,75 @@ broomify <- function(model) {
   broom_augment_rows <- broom::augment(model)
   attr(broom_augment_rows, "broom_glance") <- broom_glance_info
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
+  attr(broom_augment_rows, "var_x") <- model_beta_variables(model)
+  attr(broom_augment_rows, "var_y") <- model_response_variables(model)
+  attr(broom_augment_rows, "var_x_label") <- model_beta_label(model)
 
   return(broom_augment_rows)
+}
+
+#' Model term names
+#'
+#' Retrieve either the response variable names, the beta variable names, or beta variable names with signifigance stars.
+#'
+#' @param model model in question
+#' @return character vector of names
+#' @rdname model_terms
+#' @export
+model_response_variables <- function(model) {
+  model_terms <- terms(model)
+
+  model_variables <- attr(model_terms, "variables")
+  # convert to character vector
+  model_variables <- as.character(model_variables)[-1]
+
+  model_response_pos <- attr(model_terms, "response")
+
+  model_variables[model_response_pos]
+}
+#' @rdname model_terms
+#' @export
+model_beta_variables <- function(model) {
+  model_terms <- terms(model)
+
+  model_variables <- attr(model_terms, "variables")
+  # convert to character vector
+  model_variables <- as.character(model_variables)[-1]
+
+  model_response_pos <- attr(model_terms, "response")
+
+  model_variables[- model_response_pos]
+}
+
+
+beta_stars <- function(p_val) {
+  unclass(symnum(
+    p_val,
+    corr = FALSE,
+    na = FALSE,
+    cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+    symbols = c("***", "**", "*", ".", " ")
+  ))
+}
+
+#' @export
+#' @rdname model_terms
+model_beta_label <- function(model) {
+  beta_vars <- model_beta_variables(model)
+
+  if (! inherits(model, "lm")) {
+    return(beta_vars)
+  }
+
+  # for lm models only
+  tidy_anova <- broom::tidy(anova(model))
+  tidy_anova <- tidy_anova[tidy_anova$term %in% beta_vars, ]
+  p_vals <- tidy_anova$p.value
+  names(p_vals) <- tidy_anova$term
+  p_vals <- p_vals[beta_vars]
+
+  x_labs <- paste(beta_vars, beta_stars(p_vals), sep = "")
+  gsub("\\s+$", "", x_labs)
 }
 
 broom_columns <- function() {
@@ -374,8 +441,10 @@ check_and_set_nostic_types <- function(
 ggnostic <- function(
   model,
   ...,
-  # columnsY = c(".fitted", ".resid", ".std.resid", ".sigma", ".se.fit", ".hat", ".cooksd"),
-  columnsY = c(".resid", ".sigma", ".se.fit", ".hat", ".cooksd"),
+  columnsX = attr(data, "var_x"),
+  columnsY = c(".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
+  # columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
+  columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\.", " ", gsub("^\\.", "", columnsY)),
   continuous = list(
     default = ggally_nostic_line,
@@ -452,30 +521,17 @@ ggnostic <- function(
   combo_fn <- nostic_switch(combo_types)
   discrete_fn <- nostic_switch(discrete_types)
 
-
-  broom_extra_args <- broom_columns()
-
-  model_vars <- setdiff(names(data), c(".rownames", broom_extra_args))
-  y_var <- model_vars[1]
-  x_vars <- model_vars[-1]
-
-  all_extra_args <- c(y_var, broom_extra_args)
-  column_matches <- pmatch(columnsY, all_extra_args, nomatch = NA, duplicates.ok = TRUE)
-  if (any(is.na(column_matches))) {
-    stop(paste(
-      "Could not match 'columnsY': c(",
-      paste("'", columnsY[is.na(column_matches)], "'", collapse = ", ", sep = ""),
-      ") to choices: c(",
-      paste("'", all_extra_args, "'", collapse = ", ", sep = ""),
-      ")",
-      sep = ""
-    ))
-  }
-  columnsY <- all_extra_args[column_matches]
+  columnsX <- match_nostic_columns(columnsX, attr(data, "var_x"), "columnsX")
+  columnsY <- match_nostic_columns(
+    columnsY,
+    c(attr(data, "var_y"), broom_columns()),
+    "columnsY"
+  )
 
   ggduo(
     data = data,
-    columnsX = x_vars, columnsY = columnsY,
+    columnsX = columnsX, columnsY = columnsY,
+    columnLabelsX = columnLabelsX,
     columnLabelsY = columnLabelsY,
     types = list(
       continuous = continuous_fn,
@@ -572,3 +628,20 @@ ggts <- function(data, mapping, columnsX, columnsY, ...) {
 #     ret
 #   }
 # )
+
+
+match_nostic_columns <- function(columns, choices, name) {
+  column_matches <- pmatch(columns, choices, nomatch = NA, duplicates.ok = TRUE)
+  if (any(is.na(column_matches))) {
+    stop(paste(
+      "Could not match '", name, "': c(",
+      paste("'", columns[is.na(column_matches)], "'", collapse = ", ", sep = ""),
+      ") to choices: c(",
+      paste("'", choices, "'", collapse = ", ", sep = ""),
+      ")",
+      sep = ""
+    ))
+  }
+  columnsY <- choices[column_matches]
+
+}
