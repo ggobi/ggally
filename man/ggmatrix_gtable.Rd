@@ -5,7 +5,7 @@
 \title{Print ggpair object}
 \usage{
 ggmatrix_gtable(pm, ..., progress = interactive() && (pm$ncol * pm$nrow) > 15,
-  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta")
+  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ")
 }
 \arguments{
 \item{pm}{ggpair object to be plotted}
