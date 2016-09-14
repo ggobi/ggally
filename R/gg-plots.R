@@ -16,10 +16,17 @@ eval_data_col <- function(data, aes_col) {
 }
 
 # is categories on the left?
-is_horizontal <- function(data, mapping, val = "y") {
+is_character_column <- is_horizontal <- function(data, mapping, val = "y") {
   yData <- eval_data_col(data, mapping[[val]])
 
   is.factor(yData) || is.character(yData)
+}
+
+mapping_swap_x_y <- function(mapping) {
+  tmp <- mapping$x
+  mapping$x <- mapping$y
+  mapping$y <- tmp
+  mapping
 }
 
 
