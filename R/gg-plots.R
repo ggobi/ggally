@@ -670,6 +670,8 @@ ggally_facetdensity <- function(data, mapping, ...){
 #'    mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
 #'  ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
 ggally_denstrip <- function(data, mapping, ...){
+  mapping <- mapping_color_to_fill(mapping)
+
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
