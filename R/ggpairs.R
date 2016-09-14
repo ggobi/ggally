@@ -525,7 +525,7 @@ ggduo <- function(
     } else {
       plotTypesList <- types
     }
-    args <- list(plotType = plotType, types = plotTypesList, sectionAes = sectionAes)
+    args <- list(types = plotTypesList, sectionAes = sectionAes)
     plot_fn <- ggmatrix_plot_list(plotType)
 
     plotObj <- do.call(plot_fn, args)
@@ -786,7 +786,7 @@ ggpairs <- function(
       types$mapping
     )
 
-    args <- list(plotType = plotType, types = types, sectionAes = sectionAes)
+    args <- list(types = types, sectionAes = sectionAes)
     if (plotType == "label") {
       args$label <- columnLabels[posX]
     }
