@@ -512,6 +512,8 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
+  mapping <- mapping_color_to_fill(mapping)
+
   horizontal <- is_horizontal(data, mapping)
 
   if (horizontal) {
@@ -561,6 +563,8 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
 ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
 
+  mapping <- mapping_color_to_fill(mapping)
+
   horizontal <- is_horizontal(data, mapping)
 
   if (horizontal) {
@@ -609,6 +613,8 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
 #'  ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
 #'  ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
 ggally_facethist <- function(data, mapping, ...){
+
+  mapping <- mapping_color_to_fill(mapping)
 
   horizontal <- is_horizontal(data, mapping)
 
@@ -783,6 +789,8 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #'  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day))
 ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 
+  mapping <- mapping_color_to_fill(mapping)
+
   p <- ggplot(data, mapping) +
     scale_y_continuous()
 
@@ -822,6 +830,9 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 #' ggally_barDiag(tips, mapping = ggplot2::aes(x = day))
 #' ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
 ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
+
+  mapping <- mapping_color_to_fill(mapping)
+
   mapping$y <- NULL
   x_data <- eval_data_col(data, mapping$x)
   numer <- ("continuous" == plotting_data_type(x_data))
@@ -1138,6 +1149,8 @@ ggally_diagAxis <- function(
 #'  ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time))
 #'  ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time))
 ggally_facetbar <- function(data, mapping, ...){
+
+  mapping <- mapping_color_to_fill(mapping)
 
   # numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
   # xVal <- mapping$x
