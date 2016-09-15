@@ -12,11 +12,6 @@ expect_print <- function(x) {
 
 test_that("density", {
 
-  p <- ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
-  expect_equal(p$type, "continuous")
-  expect_equal(p$subType, "density")
-
-
   p <- ggally_density(
     tips,
     mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
