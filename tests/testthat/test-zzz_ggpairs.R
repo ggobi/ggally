@@ -324,8 +324,10 @@ test_that("axisLabels", {
       expect_false(is.null(pm$yAxisLabels))
     } else if (axisLabel == "internal") {
       for (i in 1:(pm$ncol)) {
-        expect_equivalent(pm[i, i]$subType, "internal")
-        expect_equivalent(pm[i, i]$type, "label")
+        p <- pm[i,i]
+        expect_true(inherits(p$layers[[1]]$geom, "GeomText"))
+        expect_true(inherits(p$layers[[2]]$geom, "GeomText"))
+        expect_equal(length(p$layers), 2)
       }
       expect_false(pm$showXAxisPlotLabels)
       expect_false(pm$showYAxisPlotLabels)
@@ -411,8 +413,9 @@ test_that("dates", {
     upper = list(continuous = "cor")
   )
   p <- a[1, 2]
-  expect_equal(p$type, "continuous")
-  expect_equal(p$subType, "cor")
+  expect_true(inherits(p$layers[[1]]$geom, "GeomText"))
+  expect_true(inherits(p$layers[[2]]$geom, "GeomText"))
+  expect_equal(length(p$layers), 2)
 
 
   a <- ggpairs(
@@ -423,8 +426,8 @@ test_that("dates", {
     upper = list(continuous = "cor")
   )
   p <- a[1, 1]
-  expect_equal(p$type, "diag")
-  expect_equal(p$subType, "bar_num")
+  expect_true(inherits(p$layers[[1]]$geom, "GeomBar"))
+  expect_equal(length(p$layers), 1)
 
 
 })
@@ -456,27 +459,44 @@ test_that("user functions", {
 })
 
 test_that("NA data", {
+  expect_is_na_plot <- function(p) {
+    expect_true(identical(as.character(p$data$label), "NA"))
+    expect_true(inherits(p$layers[[1]]$geom, "GeomText"))
+    expect_equivalent(length(p$layers), 1)
+  }
+  expect_not_na_plot <- function(p) {
+    expect_false(identical(as.character(p$data$label), "NA"))
+  }
+  expect_is_blank <- function(p) {
+    expect_true(is_blank_plot(p))
+  }
+
   dd <- data.frame(x = c(1:5, rep(NA, 5)), y = c(rep(NA, 5), 2:6), z = 1:10, w = NA)
   pm <- ggpairs(dd)
-  expect_equivalent(pm[1, 2]$subType, "na")
-  expect_equivalent(pm[2, 1]$subType, "na")
-  expect_equivalent(pm[1, 4]$subType, "na")
-  expect_equivalent(pm[4, 4]$subType, "na")
 
-  pm <- ggpairs(dd, upper = list(na = "blank"))
-  expect_equivalent(pm[1, 2]$subType, "blank")
-  expect_equivalent(pm[2, 1]$subType, "na")
-  expect_equivalent(pm[4, 4]$subType, "na")
+  test_pm <- function(pm, na_mat) {
+    for(i in 1:4) {
+      for (j in 1:4) {
+        if (na_mat[i,j]) {
+          expect_is_na_plot(pm[i,j])
+        } else {
+          if (j == 3 & i < 3) {
+            expect_warning({p <- pm[i,j]}, "Removed 5 rows")
+          } else {
+            p <- pm[i,j]
+          }
+          expect_not_na_plot(p)
+        }
+      }
+    }
+  }
 
-  pm <- ggpairs(dd, lower = list(na = "blank"))
-  expect_equivalent(pm[1, 2]$subType, "na")
-  expect_equivalent(pm[2, 1]$subType, "blank")
-  expect_equivalent(pm[4, 4]$subType, "na")
-
-  pm <- ggpairs(dd, diag = list(na = "blankDiag"))
-  expect_equivalent(pm[1, 2]$subType, "na")
-  expect_equivalent(pm[2, 1]$subType, "na")
-  expect_equivalent(pm[4, 4]$subType, "blank")
+  na_mat <- matrix(FALSE, ncol = 4, nrow = 4)
+  na_mat[1, 2] <- TRUE
+  na_mat[2, 1] <- TRUE
+  na_mat[1:4, 4] <- TRUE
+  na_mat[4, 1:4] <- TRUE
+  test_pm(pm, na_mat)
 
 })
 
