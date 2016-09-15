@@ -1266,6 +1266,7 @@ ggally_blank <- function(...){
       strip.text.y      = element_blank()
     )
 
+  class(p) <- c(class(p), "ggmatrix_blank")
   p
 }
 
