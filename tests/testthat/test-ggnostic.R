@@ -22,10 +22,23 @@ test_that("ggnostic mtcars", {
 
 
 test_that("error checking", {
-  data(tips, package = "reshape2")
-  mod <- lm(tip ~ total_bill + size + day, data = tips)
-  # mod <- lm(tip ~ total_bill + size, data = tips)
-  broom_augment_rows <- broomify(mod)
-  ggnostic(mod)
+
+  get_cols <- function(cols) {
+    match_nostic_columns(
+      cols,
+      c("mpg", broom_columns()),
+      "columnsY"
+    )
+  }
+
+  expect_equivalent(get_cols(c(".resid", ".sig", ".hat", ".c")), c(".resid", ".sigma", ".hat", ".cooksd"))
+
+  expect_error(
+    get_cols(c(
+      "not_there", ".fitted", ".se.fit", ".resid",
+      ".std.resid", ".sigma", ".hat", ".cooksd"
+    )),
+    "Could not match 'columnsY'"
+  )
 
 })

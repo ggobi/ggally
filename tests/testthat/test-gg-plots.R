@@ -9,6 +9,17 @@ expect_print <- function(x) {
   testthat::expect_silent(print(x))
 }
 
+test_that("denstrip", {
+  expect_warning(
+    print(ggally_denstrip(tips, mapping = aes_string("sex", "tip"))),
+    "`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+  )
+  expect_warning(
+    print(ggally_denstrip(tips, mapping = aes_string("tip", "sex"))),
+    "`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+  )
+})
+
 
 test_that("density", {
 
