@@ -10,13 +10,13 @@ expect_print <- function(x) {
 }
 
 test_that("denstrip", {
-  expect_warning(
+  expect_message(
     print(ggally_denstrip(tips, mapping = aes_string("sex", "tip"))),
-    "`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+    "`stat_bin()` using `bins = 30`", fixed = TRUE
   )
-  expect_warning(
+  expect_message(
     print(ggally_denstrip(tips, mapping = aes_string("tip", "sex"))),
-    "`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+    "`stat_bin()` using `bins = 30`", fixed = TRUE
   )
 })
 
