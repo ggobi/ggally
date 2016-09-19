@@ -513,8 +513,6 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
 ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 
-  mapping <- mapping_color_to_fill(mapping)
-
   horizontal <- is_horizontal(data, mapping)
 
   if (horizontal) {
