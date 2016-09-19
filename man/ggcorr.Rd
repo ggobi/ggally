@@ -164,7 +164,7 @@ Francois Briatte, with contributions from Amos B. Elberg and
 Barret Schloerke
 }
 \seealso{
-\code{\link[stats]{cor}} and \code{\link[arm]{corrplot}} in the
+\code{\link[stats]{cor}} and \code{corrplot} in the
 \code{arm} package.
 }
 

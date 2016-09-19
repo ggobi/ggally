@@ -25,7 +25,11 @@ Place box plots or dot plots on the graph
    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
    boxPlot = TRUE
  )
- ggally_dot_and_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
+ ggally_dot_and_box(
+   tips,
+   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+   boxPlot = FALSE
+ )
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
