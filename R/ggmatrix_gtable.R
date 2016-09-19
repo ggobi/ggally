@@ -90,7 +90,9 @@ ggmatrix_gtable <- function(
   pmg_layout_grob_pos <- pmg_layout$grob_pos
 
   # zero out rest of the plotting area (just in case it is not replaced)
-  zero_pos_vals <- pmg_layout_grob_pos[pmg_layout_name %in% c("panel", "axis-l", "axis-b", "guide-box")]
+  zero_pos_vals <- pmg_layout_grob_pos[
+    pmg_layout_name %in% c("panel", "axis-l", "axis-b", "guide-box")
+  ]
   for (zero_pos in zero_pos_vals) {
     pmg$grobs[[zero_pos]] <- ggplot2::zeroGrob()
   }
@@ -103,7 +105,7 @@ ggmatrix_gtable <- function(
       if (length(legend) == 1) {
         legend <- get_pos_rev(pm, legend)
       } else if (length(legend) > 2) {
-        stop("'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'")
+        stop("'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'") # nolint
       }
 
       legend_obj <- grab_legend(pm[legend[1], legend[2]])
@@ -171,7 +173,7 @@ ggmatrix_gtable <- function(
       }
 
       # retrieve plot
-      p <- pm[i,j]
+      p <- pm[i, j]
 
       # ignore all blank plots.  all blank plots do not draw anything else
       if (is_blank_plot(p)) {
@@ -193,7 +195,9 @@ ggmatrix_gtable <- function(
 
         pmg <- add_left_axis(
           pmg, pg,
-          show_strips = ((i == 1) && is.null(pm$showStrips)) || isTRUE(pm$showStrips),
+          show_strips = (
+            (i == 1) && is.null(pm$showStrips)
+          ) || isTRUE(pm$showStrips),
           grob_pos = axis_l_grob_pos[i]
         )
       }
@@ -203,7 +207,9 @@ ggmatrix_gtable <- function(
 
         pmg <- add_bottom_axis(
           pmg, pg,
-          show_strips = ((j == pm$ncol) && is.null(pm$showStrips)) || isTRUE(pm$showStrips),
+          show_strips = (
+            (j == pm$ncol) && is.null(pm$showStrips)
+          ) || isTRUE(pm$showStrips),
           grob_pos = axis_b_grob_pos[j]
         )
       }

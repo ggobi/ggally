@@ -121,7 +121,7 @@ get_pos_rev <- function(pm, pos) {
     i <- (pos - 1) %% pm$nrow + 1
     j <- ceiling(pos / pm$nrow)
   }
-  c(i,j)
+  c(i, j)
 }
 
 

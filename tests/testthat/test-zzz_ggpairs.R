@@ -324,7 +324,7 @@ test_that("axisLabels", {
       expect_false(is.null(pm$yAxisLabels))
     } else if (axisLabel == "internal") {
       for (i in 1:(pm$ncol)) {
-        p <- pm[i,i]
+        p <- pm[i, i]
         expect_true(inherits(p$layers[[1]]$geom, "GeomText"))
         expect_true(inherits(p$layers[[2]]$geom, "GeomText"))
         expect_equal(length(p$layers), 2)
@@ -475,15 +475,19 @@ test_that("NA data", {
   pm <- ggpairs(dd)
 
   test_pm <- function(pm, na_mat) {
-    for(i in 1:4) {
+    for (i in 1:4) {
       for (j in 1:4) {
-        if (na_mat[i,j]) {
-          expect_is_na_plot(pm[i,j])
+        if (na_mat[i, j]) {
+          expect_is_na_plot(pm[i, j])
         } else {
           if (j == 3 & i < 3) {
-            expect_warning({p <- pm[i,j]}, "Removed 5 rows")
+            expect_warning({
+                p <- pm[i, j]
+              },
+              "Removed 5 rows"
+            )
           } else {
-            p <- pm[i,j]
+            p <- pm[i, j]
           }
           expect_not_na_plot(p)
         }

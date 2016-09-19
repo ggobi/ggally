@@ -32,7 +32,13 @@ axis_size_bottom <- axis_label_size_wrapper(FALSE)
 
 
 
-plot_panel <- function(pg, row_pos, col_pos, matrix_show_strips, matrix_ncol, plot_show_axis_labels) {
+plot_panel <- function(
+  pg,
+  row_pos, col_pos,
+  matrix_show_strips,
+  matrix_ncol,
+  plot_show_axis_labels
+) {
 
   # ask about strips
   layout_names <- c("panel")

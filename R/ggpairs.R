@@ -165,9 +165,9 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
       level_length <- length(levels(data_col))
       if (level_length > threshold) {
         stop(str_c(
-          "Column '", col, "' has more levels (", level_length,")"
-          ," than the threshold (", threshold, ") allowed.\n",
-          "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times"
+          "Column '", col, "' has more levels (", level_length, ")",
+          " than the threshold (", threshold, ") allowed.\n",
+          "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times" # nolint
         ))
       }
     }
@@ -867,6 +867,9 @@ add_and_overwrite_aes <- function(current, new) {
 #' @keywords internal
 #' @export
 mapping_color_to_fill <- function(current) {
+  if (is.null(current)) {
+    return(aes())
+  }
   currentNames <- names(current)
   color <- c("color", "colour")
 

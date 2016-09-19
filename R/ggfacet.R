@@ -38,7 +38,7 @@ ggfacet <- function(
   data, mapping = NULL,
   columnsX = 1:ncol(data),
   columnsY = 1:ncol(data),
-  fn = 'points', ...,
+  fn = "points", ...,
   columnLabelsX = names(data[columnsX]),
   columnLabelsY = names(data[columnsY]),
   xlab = NULL,

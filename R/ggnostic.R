@@ -121,11 +121,16 @@ broom_columns <- function() {
 #' @export
 brew_colors <- function(col) {
   brew_cols <- RColorBrewer::brewer.pal(n = 9, "Set1")
-  names(brew_cols) <- c("red", "blue", "green", "purple", "orange", "yellow", "brown", "pink", "grey")
+  names(brew_cols) <- c(
+    "red", "blue", "green", "purple", "orange",
+    "yellow", "brown", "pink", "grey"
+  )
   brew_cols <- as.list(brew_cols)
   ret <- brew_cols[[col]]
   if (is.null(ret)) {
-    stop(paste("color '", col, "' not found in: c(", paste(names(brew_cols), collapse = ", "), ")", sep = ""))
+    stop(paste("color '", col, "' not found in: c(",
+      paste(names(brew_cols), collapse = ", "),
+    ")", sep = ""))
   }
   ret
 }
@@ -405,13 +410,13 @@ nostic_switch <- function(
     y_var <- deparse(mapping$y)
 
     fn <- switch(y_var,
-      .fitted = types$.fitted,
-      .se.fit = types$.se.fit,
-      .resid = types$.resid,
-      .hat = types$.hat,
-      .sigma = types$.sigma,
-      .cooksd = types$.cooksd,
-      .std.resid = types$.std.resid,
+      .fitted = types$.fitted, # nolint
+      .se.fit = types$.se.fit, # nolint
+      .resid = types$.resid, # nolint
+      .hat = types$.hat, # nolint
+      .sigma = types$.sigma, # nolint
+      .cooksd = types$.cooksd, # nolint
+      .std.resid = types$.std.resid, # nolint
       types$default
     )
 
@@ -425,9 +430,9 @@ check_and_set_nostic_types <- function(
   default,
   .fitted,
   .resid,
-  .std.resid,
+  .std.resid, # nolint
   .sigma,
-  .se.fit,
+  .se.fit, # nolint
   .hat,
   .cooksd
 ) {
@@ -450,9 +455,9 @@ check_and_set_nostic_types <- function(
   set_type_value("default", default)
   set_type_value(".fitted", .fitted)
   set_type_value(".resid", .resid)
-  set_type_value(".std.resid", .std.resid)
+  set_type_value(".std.resid", .std.resid) # nolint
   set_type_value(".sigma", .sigma)
-  set_type_value(".se.fit", .se.fit)
+  set_type_value(".se.fit", .se.fit) # nolint
   set_type_value(".hat", .hat)
   set_type_value(".cooksd", .cooksd)
 
@@ -714,6 +719,6 @@ match_nostic_columns <- function(columns, choices, name) {
       sep = ""
     ))
   }
-  columnsY <- choices[column_matches]
-
+  columns <- choices[column_matches]
+  columns
 }
