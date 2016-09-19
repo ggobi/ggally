@@ -35,25 +35,28 @@ ggfacet - single ggplot2 plot matrix with facet_grid
 \examples{
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
-data(mtcars)
+library(chemometrics)
+data(NIR)
+NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[,1:3])
+str(NIR_sub)
 
-small_mtcars <- mtcars[c(1,3:6)]
+# using ggduo directly
+p <- ggduo(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), types = list(continuous = "points"))
+p_(p)
 
-# Basic plot of all column pair combinations
-p_(ggfacet(small_mtcars))
+# using ggfacet
+p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"))
+p_(p)
 
-# Change scales to 'fixed' to display each plot on the same scale
-p_(ggfacet(small_mtcars, scales = "fixed"))
+# add a smoother
+p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), fn = 'loess')
+p_(p)
+# same output
+p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), fn = ggally_smooth_loess)
+p_(p)
 
-# Change to ggally_smooth as plotting function
-p_(ggfacet(small_mtcars, fn = 'smooth'))
-# Same output
-p_(ggfacet(small_mtcars, fn = ggally_smooth))
-
-# Change ggally_smooth's smoothing method to 'loess'
-p_(ggfacet(small_mtcars, fn = "smooth", method = "loess"))
-
-# Look at different response variables in mtcars
-p_(ggfacet(mtcars, columnsX = 3:6, columnsY = c("mpg", "qsec"), fn = "smooth", method = "loess"))
+Alter scales to be the same in for every row and for every column
+p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), scales = "fixed")
+p_(p)
 }
 

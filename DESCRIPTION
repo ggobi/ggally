@@ -39,6 +39,7 @@ Imports:
     utils
 Suggests:
     broom (>= 0.4.0),
+    chemometrics,
     geosphere (>= 1.5-1),
     igraph (>= 1.0.1),
     intergraph (>= 2.0-2),
