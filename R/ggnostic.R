@@ -124,7 +124,7 @@ brew_colors <- function(col) {
 #'
 #' Functions with a color in their name have different default color behavior.
 #'
-#' @param data,mapping supplied directly to \code{ggplot2::\link[ggplot2]{ggplot(data, mapping)}}
+#' @param data,mapping supplied directly to \code{ggplot2::\link[ggplot2]{ggplot}(data, mapping)}
 #' @param ... parameters supplied to \code{continuous_geom} or \code{combo_geom}
 #' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}
 #' @param continuous_geom ggplot2 geom that is executed after the line is (possibly) added and if the x data is continous
@@ -322,6 +322,7 @@ ggally_nostic_cooksd <- function(
   linePosition = 4 / nrow(data),
   lineColor = brew_colors("purple")
 ) {
+
   ggally_nostic_line(
     data, mapping, ...,
     linePosition = linePosition,
@@ -390,13 +391,13 @@ nostic_switch <- function(
     y_var <- deparse(mapping$y)
 
     fn <- switch(y_var,
-      .fitted = types$fitted,
-      .se.fit = types$se_fit,
-      .resid = types$resid,
-      .hat = types$hat,
-      .sigma = types$sigma,
-      .cooksd = types$cooksd,
-      .std.resid = types$std_resid,
+      .fitted = types$.fitted,
+      .se.fit = types$.se.fit,
+      .resid = types$.resid,
+      .hat = types$.hat,
+      .sigma = types$.sigma,
+      .cooksd = types$.cooksd,
+      .std.resid = types$.std.resid,
       types$default
     )
 
@@ -408,86 +409,134 @@ nostic_switch <- function(
 check_and_set_nostic_types <- function(
   types,
   default,
-  fitted,
-  resid,
-  std_resid,
-  sigma,
-  se_fit,
-  hat,
-  cooksd
+  .fitted,
+  .resid,
+  .std.resid,
+  .sigma,
+  .se.fit,
+  .hat,
+  .cooksd
 ) {
 
   types_names <- names(types)
-
   set_type_value <- function(name, value) {
     if (is.null(types[[name]])) {
       # value is not set
 
       if (! (name %in% types_names)) {
         # set suggested fn
-        types[[name]] <- value
+        types[[name]] <<- value
       } else {
         # does not plot displayed
-        types[[name]] <- ggally_blank
+        types[[name]] <<- ggally_blank
       }
     }
   }
 
   set_type_value("default", default)
-  set_type_value("fitted", fitted)
-  set_type_value("resid", resid)
-  set_type_value("std_resid", std_resid)
-  set_type_value("sigma", sigma)
-  set_type_value("se_fit", se_fit)
-  set_type_value("hat", hat)
-  set_type_value("cooksd", cooksd)
+  set_type_value(".fitted", .fitted)
+  set_type_value(".resid", .resid)
+  set_type_value(".std.resid", .std.resid)
+  set_type_value(".sigma", .sigma)
+  set_type_value(".se.fit", .se.fit)
+  set_type_value(".hat", .hat)
+  set_type_value(".cooksd", .cooksd)
 
   types
 }
 
-# TODO document
+#' ggnostic - Statistical model diagnostics displayed in a plot matrix
+#'
+#'
+#' @section \code{columnsY}:
+#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken direclty from broom documentation).  These columns are the allowed values in the \code{columnsY} parameter to \code{ggnostic}.
+#'
+#' \describe{
+#'   \item{.hat}{Diagonal of the hat matrix}
+#'   \item{.sigma}{Estimate of residual standard deviation when
+#'     corresponding observation is dropped from model}
+#'   \item{.cooksd}{Cooks distance, \code{\link[stats]{cooks.distance}}}
+#'   \item{.fitted}{Fitted values of model}
+#'   \item{.se.fit}{Standard errors of fitted values}
+#'   \item{.resid}{Residuals}
+#'   \item{.std.resid}{Standardised residuals}
+#' }
+#'
+#' @section \code{continuous}, \code{combo}, \code{discrete} types:
+#' Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{broom::\link[broom]{augment}()} output: ".fitted", ".resid", ".std.resid", ".sigma", ".se.fit", ".hat", ".cooksd". An extra key, \code{default}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly into \code{\link{ggduo}}'s \code{types} parameter.
+#'
+#' @param model statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}
+#' @param ... arguments passed directly to \code{\link{ggduo}}
+#' @param columnsX columns to be displayed in the plot matrix. Defaults to the predictor columns of the \code{model}
+#' @param columnsY rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columnsm provided by \code{broom::\link[broom]{augment}(model)}
+#' @param columnLabelsX,columnLabelsY column and row labels to display in the plot matrix
+#' @param xlab,ylab,title plot matrix labels passed directly to \code{\link{ggmatrix}}
+#' @param continuous,combo,discrete list of functions for each y varaible.  please see Details
+#' @param data data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information
 #' @export
+#' @examples
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#' data(mtcars)
+#'
+#' # use mtcars dataset and alter the 'am' column to display actual name values
+#' mtc <- mtcars
+#' mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)]
+#'
+#' # step the complete model down to a smaller model
+#' mod <- stats::step(stats::lm(mpg ~ ., data = mtc), direction = "backward")
+#'
+#' # display using defaults
+#' pm <- ggnostic(mod)
+#' p_(pm)
+#'
+#' # color by am value
+#' pm <- ggnostic(mod, mapping = ggplot2::aes(color = am))
+#' p_(pm)
+#'
+#' # turn resid smooth error ribbon off
+#' pm <- ggnostic(mod, continuous = list(.resid = wrap("nostic_resid", se = FALSE)))
 ggnostic <- function(
   model,
   ...,
   columnsX = attr(data, "var_x"),
-  columnsY = c(".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
-  # columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
+  # columnsY = c(".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
+  columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
   columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\.", " ", gsub("^\\.", "", columnsY)),
-  continuous = list(
-    default = ggally_nostic_line,
-    fitted = ggally_nostic_line,
-    se_fit = ggally_nostic_se_fit,
-    resid = ggally_nostic_resid,
-    hat = ggally_nostic_hat,
-    sigma = ggally_nostic_sigma,
-    cooksd = ggally_nostic_cooksd,
-    std_resid = ggally_nostic_std_resid
-  ),
-  combo = list(
-    default = ggally_nostic_line,
-    fitted = ggally_nostic_line,
-    se_fit = ggally_nostic_se_fit,
-    resid = ggally_nostic_resid,
-    hat = ggally_nostic_hat,
-    sigma = ggally_nostic_sigma,
-    cooksd = ggally_nostic_cooksd,
-    std_resid = ggally_nostic_std_resid
-  ),
-  discrete = list(
-    default = ggally_ratio,
-    fitted = ggally_ratio,
-    se_fit = ggally_ratio,
-    resid = ggally_ratio,
-    hat = ggally_ratio,
-    sigma = ggally_ratio,
-    cooksd = ggally_ratio,
-    std_resid = ggally_ratio
-  ),
   xlab = "coefficients",
   ylab = "diagnostics",
   title = deparse(model$call),
+  continuous = list(
+    default = ggally_points,
+    .fitted = ggally_points,
+    .se.fit = ggally_nostic_se_fit,
+    .resid = ggally_nostic_resid,
+    .hat = ggally_nostic_hat,
+    .sigma = ggally_nostic_sigma,
+    .cooksd = ggally_nostic_cooksd,
+    .std.resid = ggally_nostic_std_resid
+  ),
+  combo = list(
+    default = ggally_box_no_facet,
+    fitted = ggally_box_no_facet,
+    .se.fit = ggally_nostic_se_fit,
+    .resid = ggally_nostic_resid,
+    .hat = ggally_nostic_hat,
+    .sigma = ggally_nostic_sigma,
+    .cooksd = ggally_nostic_cooksd,
+    .std.resid = ggally_nostic_std_resid
+  ),
+  discrete = list(
+    default = ggally_ratio,
+    .fitted = ggally_ratio,
+    .se.fit = ggally_ratio,
+    .resid = ggally_ratio,
+    .hat = ggally_ratio,
+    .sigma = ggally_ratio,
+    .cooksd = ggally_ratio,
+    .std.resid = ggally_ratio
+  ),
   data = broomify(model)
 ) {
 
@@ -495,35 +544,35 @@ ggnostic <- function(
   continuous_types <- check_and_set_nostic_types(
     continuous,
     default = ggally_nostic_line,
-    fitted = ggally_nostic_line,
-    se_fit = ggally_nostic_se_fit,
-    resid = ggally_nostic_resid,
-    hat = ggally_nostic_hat,
-    sigma = ggally_nostic_sigma,
-    cooksd = ggally_nostic_cooksd,
-    std_resid = ggally_nostic_std_resid
+    .fitted = ggally_nostic_line,
+    .se.fit = ggally_nostic_se_fit,
+    .resid = ggally_nostic_resid,
+    .hat = ggally_nostic_hat,
+    .sigma = ggally_nostic_sigma,
+    .cooksd = ggally_nostic_cooksd,
+    .std.resid = ggally_nostic_std_resid
   )
   combo_types <- check_and_set_nostic_types(
     combo,
     default = ggally_nostic_line,
-    fitted = ggally_nostic_line,
-    se_fit = ggally_nostic_se_fit,
-    resid = ggally_nostic_resid,
-    hat = ggally_nostic_hat,
-    sigma = ggally_nostic_sigma,
-    cooksd = ggally_nostic_cooksd,
-    std_resid = ggally_nostic_std_resid
+    .fitted = ggally_nostic_line,
+    .se.fit = ggally_nostic_se_fit,
+    .resid = ggally_nostic_resid,
+    .hat = ggally_nostic_hat,
+    .sigma = ggally_nostic_sigma,
+    .cooksd = ggally_nostic_cooksd,
+    .std.resid = ggally_nostic_std_resid
   )
   discrete_types <- check_and_set_nostic_types(
     discrete,
     default = ggally_ratio,
-    fitted = ggally_ratio,
-    se_fit = ggally_ratio,
-    resid = ggally_ratio,
-    hat = ggally_ratio,
-    sigma = ggally_ratio,
-    cooksd = ggally_ratio,
-    std_resid = ggally_ratio
+    .fitted = ggally_ratio,
+    .se.fit = ggally_ratio,
+    .resid = ggally_ratio,
+    .hat = ggally_ratio,
+    .sigma = ggally_ratio,
+    .cooksd = ggally_ratio,
+    .std.resid = ggally_ratio
   )
 
   continuous_fn <- nostic_switch(continuous_types)
