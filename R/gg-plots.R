@@ -447,11 +447,15 @@ ggally_cor <- function(
 #'    outlier.size   = 8
 #'  )
 ggally_box <- function(data, mapping, ...){
+  mapping <- mapping_color_to_fill(mapping)
+
   ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
 }
 #' @export
 #' @rdname ggally_box
 ggally_box_no_facet <- function(data, mapping, ...) {
+  mapping <- mapping_color_to_fill(mapping)
+
   ggally_dot_and_box_no_facet(data, mapping, ..., boxPlot = TRUE)
 }
 
@@ -553,8 +557,6 @@ ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
 }
 
 ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
-
-  mapping <- mapping_color_to_fill(mapping)
 
   horizontal <- is_horizontal(data, mapping)
 
