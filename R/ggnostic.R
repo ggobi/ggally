@@ -1,3 +1,10 @@
+# cooksd
+# on all predicted values
+# important to prediction
+
+# sigma
+# how much of a problem it is to the model
+
 
 ## .hat: Diagonal of the hat matrix
 ## .sigma: Estimate of residual standard deviation when corresponding observation is dropped from model
