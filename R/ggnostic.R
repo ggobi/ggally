@@ -269,7 +269,7 @@ ggally_nostic_std_resid <- function(
 ggally_nostic_se_fit <- function(
   data, mapping, ...,
   lineColor = brew_colors("green"),
-  linePosition = 0
+  linePosition = NULL
 ) {
   ggally_nostic_line(
     data, mapping, ...,
