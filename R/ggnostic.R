@@ -15,6 +15,11 @@
 #' @return broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
 #' @export
 broomify <- function(model) {
+
+  if (inherits(model, "broomify")) {
+    return(model)
+  }
+
   require_pkgs("broom")
 
   broom_glance_info  <- broom::glance(model)
@@ -25,6 +30,8 @@ broomify <- function(model) {
   attr(broom_augment_rows, "var_x") <- model_beta_variables(model)
   attr(broom_augment_rows, "var_y") <- model_response_variables(model)
   attr(broom_augment_rows, "var_x_label") <- model_beta_label(model)
+
+  class(broom_augment_rows) <- c(class(broom_augment_rows), "broomify")
 
   return(broom_augment_rows)
 }
