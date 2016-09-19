@@ -13,7 +13,7 @@ ggts(data, mapping, columnsX, columnsY, ...)
 ggmatrix object
 }
 \description{
-GGally implementation of ts.plot
+GGally implementation of ts.plot. Wraps around the ggduo function and removes the column strips
 }
 \examples{
 pigs <- read.table("http://lib.stat.cmu.edu/datasets/Andrews/T62.1")

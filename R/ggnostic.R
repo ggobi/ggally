@@ -630,7 +630,7 @@ ggnostic <- function(
 # https://github.com/ggobi/ggobi/blob/master/data/pigs.xml
 #' Multiple Time Series
 #'
-#' GGally implementation of ts.plot
+#' GGally implementation of ts.plot. Wraps around the ggduo function and removes the column strips
 #' @param data,mapping,columnsX,columnsY,... supplied directly to \code{\link{ggduo}}
 #' @return ggmatrix object
 #' @export
