@@ -18,24 +18,26 @@
 #' data(NIR)
 #' NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[,1:3])
 #' str(NIR_sub)
+#' x_cols <- c("X1115.0", "X1120.0", "X1125.0")
+#' y_cols <- c("Glucose", "Ethanol")
 #'
 #' # using ggduo directly
-#' p <- ggduo(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), types = list(continuous = "points"))
+#' p <- ggduo(NIR_sub, x_cols, y_cols, types = list(continuous = "points"))
 #' p_(p)
 #'
 #' # using ggfacet
-#' p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"))
+#' p <- ggfacet(NIR_sub, x_cols, y_cols)
 #' p_(p)
 #'
 #' # add a smoother
-#' p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), fn = 'smooth_loess')
+#' p <- ggfacet(NIR_sub, x_cols, y_cols, fn = 'smooth_loess')
 #' p_(p)
 #' # same output
-#' p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), fn = ggally_smooth_loess)
+#' p <- ggfacet(NIR_sub, x_cols, y_cols, fn = ggally_smooth_loess)
 #' p_(p)
 #'
-#' Alter scales to be the same in for every row and for every column
-#' p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), scales = "fixed")
+#' # Change scales to be the same in for every row and for every column
+#' p <- ggfacet(NIR_sub, x_cols, y_cols, scales = "fixed")
 #' p_(p)
 ggfacet <- function(
   data, mapping = NULL,

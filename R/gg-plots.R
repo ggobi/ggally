@@ -510,7 +510,11 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
 #'    boxPlot = TRUE
 #'  )
-#'  ggally_dot_and_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
+#'  ggally_dot_and_box(
+#'    tips,
+#'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+#'    boxPlot = FALSE
+#'  )
 ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
 
   horizontal <- is_horizontal(data, mapping)
@@ -554,7 +558,7 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
   p
 }
 
-ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE){
+ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 
   horizontal <- is_horizontal(data, mapping)
 

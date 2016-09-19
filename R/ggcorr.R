@@ -91,7 +91,7 @@ if (getRversion() >= "2.15.1") {
 #' \code{11}, as values above 11 are visually difficult to separate and are not
 #' supported by diverging ColorBrewer palettes.
 #'
-#' @seealso \code{\link[stats]{cor}} and \code{\link[arm]{corrplot}} in the
+#' @seealso \code{\link[stats]{cor}} and \code{corrplot} in the
 #' \code{arm} package.
 #' @author Francois Briatte, with contributions from Amos B. Elberg and
 #' Barret Schloerke
