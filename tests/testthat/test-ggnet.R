@@ -6,7 +6,7 @@ if ("package:igraph" %in% search()) {
 }
 
 rq <- function(...) {
-  require(..., quietly = TRUE)
+  suppressMessages(require(..., quietly = TRUE))
 }
 rq(network) # network objects
 rq(sna)     # placement and centrality

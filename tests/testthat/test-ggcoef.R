@@ -1,7 +1,7 @@
 
 context("ggcoef")
 
-require(broom)
+suppressMessages(require(broom))
 
 test_that("example", {
   expect_print <- function(x) {

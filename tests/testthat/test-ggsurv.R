@@ -1,7 +1,7 @@
 
 context("ggsurv")
-require(survival)
-require(scales)
+suppressMessages(require(survival))
+suppressMessages(require(scales))
 data(lung, package = "survival")
 data(kidney, package = "survival")
 
