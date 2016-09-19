@@ -274,6 +274,20 @@ test_that("stops", {
 
 })
 
+
+test_that("cardinality", {
+  expect_silent(stop_if_high_cardinality(tips, 1:ncol(tips), NULL))
+  expect_silent(stop_if_high_cardinality(tips, 1:ncol(tips), FALSE))
+  expect_error(
+    stop_if_high_cardinality(tips, 1:ncol(tips), "not numeric"),
+    "'cardinality_threshold' should"
+  )
+  expect_error(
+    stop_if_high_cardinality(tips, 1:ncol(tips), 2),
+    "Column 'day' has more levels"
+  )
+})
+
 test_that("blank types", {
   columnsUsed <- 1:3
   pmUpper <- ggpairs(tips, columnsUsed, upper = "blank", lower = facethistBindwidth1)
