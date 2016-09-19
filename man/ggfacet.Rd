@@ -49,7 +49,7 @@ p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"
 p_(p)
 
 # add a smoother
-p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), fn = 'loess')
+p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), fn = 'smooth_loess')
 p_(p)
 # same output
 p <- ggfacet(NIR_sub, c("X1115.0", "X1120.0", "X1125.0"), c("Glucose", "Ethanol"), fn = ggally_smooth_loess)
