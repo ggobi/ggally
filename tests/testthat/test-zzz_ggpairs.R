@@ -606,7 +606,7 @@ test_that("subtypes", {
   }
 
   ggduo_fn2 <- function(...) {
-    ggduo_fn1(..., mapping = ggplot2::aes(color = day), legend = c(1, 3)) +
+    ggduo_fn1(..., mapping = ggplot2::aes(color = day), legend = 3) +
       theme(legend.position = "bottom")
   }
 
