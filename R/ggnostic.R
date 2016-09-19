@@ -319,7 +319,7 @@ ggally_nostic_sigma <- function(
 #' @export
 ggally_nostic_cooksd <- function(
   data, mapping, ...,
-  linePosition = 1,
+  linePosition = 4 / nrow(data),
   lineColor = brew_colors("purple")
 ) {
   ggally_nostic_line(
