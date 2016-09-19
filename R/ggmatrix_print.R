@@ -8,7 +8,7 @@ ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 #' @param x plot to display
 #' @param newpage draw new (empty) page first?
 #' @param vp viewport to draw plot in
-#' @param ... other arguments not used by this method
+#' @param ... arguments passed onto ggmatrix_gtable
 #' @method print ggmatrix
 #' @author Barret Schloerke
 #' @import utils

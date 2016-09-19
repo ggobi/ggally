@@ -9,23 +9,29 @@ plot_gtable <- function(p) {
 # axis_size_bottom(p)
 # axis_size_left(g)
 # axis_size_bottom(g)
-axis_label_size_wrapper <- function(is_width) {
-  if (isTRUE(is_width)) {
-    fn <- utils::getFromNamespace("width_cm", "ggplot2")
-    filter_val <- "axis-l"
-    select_val <- "widths"
-  } else {
-    fn <- utils::getFromNamespace("height_cm", "ggplot2")
-    filter_val <- "axis-b"
-    select_val <- "heights"
+axis_list <- (function(){
+  axis_label_size_wrapper <- function(fn, filter_val, select_val) {
+    function(pg) {
+      pg_axis <- gtable::gtable_filter(pg, filter_val)
+      max(fn(pg_axis[[select_val]]))
+    }
   }
-  function(pg) {
-    pg_axis <- gtable::gtable_filter(pg, filter_val)
-    max(fn(pg_axis[[select_val]]))
-  }
-}
-axis_size_left <- axis_label_size_wrapper(TRUE)
-axis_size_bottom <- axis_label_size_wrapper(FALSE)
+  
+  axis_size_left <- axis_label_size_wrapper(
+    utils::getFromNamespace("width_cm", "ggplot2"),
+    "axis-l",
+    "widths"
+  )
+  axis_size_bottom <- axis_label_size_wrapper(
+    utils::getFromNamespace("height_cm", "ggplot2"),
+    "axis-b",
+    "heights"
+  )
+
+  list(axis_size_left, axis_size_bottom)
+})()
+axis_size_left <- axis_list[[1]]
+axis_size_bottom <- axis_list[[2]]
 
 
 # add_correct_label <- function(pmg, pm,

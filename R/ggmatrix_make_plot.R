@@ -15,30 +15,30 @@ make_label_plot <- function(types, sectionAes, label) {
 }
 
 
-make_diag_plot_wrapper <- function(sub_type_val) {
-  plot_fn <- make_plot_wrapper(sub_type_val)
-
-  function(types, sectionAes) {
-    sectionAes$y <- NULL
-    plot_fn(types, sectionAes)
-  }
-}
-
-
-make_plot_wrapper <- function(sub_type_val) {
-  function(types, sectionAes) {
-    sub_type <- types[[sub_type_val]]
-    sub_type_name <- get_subtype_name(sub_type)
-
-    p <- make_ggmatrix_plot_obj(
-      wrapp(sub_type, funcArgName = sub_type_name),
-      mapping = sectionAes
-    )
-    return(p)
-  }
-}
 
 ggmatrix_plot_list <- (function(){
+  make_diag_plot_wrapper <- function(sub_type_val) {
+    plot_fn <- make_plot_wrapper(sub_type_val)
+
+    function(types, sectionAes) {
+      sectionAes$y <- NULL
+      plot_fn(types, sectionAes)
+    }
+  }
+
+  make_plot_wrapper <- function(sub_type_val) {
+    function(types, sectionAes) {
+      sub_type <- types[[sub_type_val]]
+      sub_type_name <- get_subtype_name(sub_type)
+
+      p <- make_ggmatrix_plot_obj(
+        wrapp(sub_type, funcArgName = sub_type_name),
+        mapping = sectionAes
+      )
+      return(p)
+    }
+  }
+
   na_fn <- make_plot_wrapper("na")
   na_diag_fn <- make_plot_wrapper("na")
   continuous_fn <- make_plot_wrapper("continuous")

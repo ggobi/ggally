@@ -5,19 +5,27 @@ data(tips, package = "reshape")
 
 test_that("add", {
 
-  a <- ggpairs(tips)
+  pm <- ggpairs(tips)
 
-  expect_true(is.null(a$gg))
+  expect_true(is.null(pm$title))
+  expect_true(is.null(pm$xlab))
+  expect_true(is.null(pm$ylab))
+  pm1 <- pm + labs(title = "my title", x = "x label", y = "y label")
+  expect_equivalent(pm1$title, "my title")
+  expect_equivalent(pm1$xlab, "x label")
+  expect_equivalent(pm1$ylab, "y label")
+
+  expect_true(is.null(pm$gg))
 
   # first add
-  a1 <- a + ggplot2::theme_bw()
-  expect_true(! is.null(a1$gg))
+  pm2 <- pm + ggplot2::theme_bw()
+  expect_true(! is.null(pm2$gg))
 
   # second to nth add
-  a2 <- a1 + ggplot2::theme_bw()
-  expect_true(! is.null(a2$gg))
+  pm3 <- pm + ggplot2::theme_bw()
+  expect_true(! is.null(pm3$gg))
 
   # badd add
-  expect_error(a + ggplot2::geom_abline(), "'ggmatrix' does not know how to add")
+  expect_error(pm + ggplot2::geom_abline(), "'ggmatrix' does not know how to add")
 
 })

@@ -121,8 +121,29 @@ test_that("blank", {
   }, "character values \\(besides 'blank'\\)") # nolint
 })
 
+test_that("proportions", {
+  pm <- ggpairs(iris, 1:2, mapping = ggplot2::aes(color = Species))
+  pm[2,2] <- pm[2,2] + ggplot2::coord_flip()
 
-# 
+
+  pm2 <- ggmatrix(
+    data = iris,
+    pm$plots,
+    ncol = 2,
+    nrow = 2,
+    xProportions = c(2,1),
+    yProportions = c(1,2),
+    title = "big plot, small marginals"
+  )
+
+  expect_print(pm2)
+
+  # turn on progress for a quick plot
+  expect_silent(print(pm2, progress = TRUE))
+})
+
+
+#
 # printShowStrips <- c(TRUE, FALSE)
 # if (i <= length(printShowStrips)) {
 #   printShowStrip <- printShowStrips[i]

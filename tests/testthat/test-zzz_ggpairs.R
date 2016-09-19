@@ -585,7 +585,7 @@ test_that("subtypes", {
   }
 
   ggpairs_fn2 <- function(...) {
-    ggpairs_fn1(..., mapping = ggplot2::aes(color = day))
+    ggpairs_fn1(..., mapping = ggplot2::aes(color = day), legend = c(1, 3))
   }
 
   ggduo_fn1 <- function(title, types, diag, ...) {
@@ -606,7 +606,8 @@ test_that("subtypes", {
   }
 
   ggduo_fn2 <- function(...) {
-    ggduo_fn1(..., mapping = ggplot2::aes(color = day))
+    ggduo_fn1(..., mapping = ggplot2::aes(color = day), legend = c(1, 3)) +
+      theme(legend.position = "bottom")
   }
 
   # re ordered the subs so that density can have no binwidth param
