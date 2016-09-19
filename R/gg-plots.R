@@ -449,7 +449,7 @@ ggally_cor <- function(
 ggally_box <- function(data, mapping, ...){
   mapping <- mapping_color_to_fill(mapping)
 
-  ggally_dotAndBox(data, mapping, ..., boxPlot = TRUE)
+  ggally_dot_and_box(data, mapping, ..., boxPlot = TRUE)
 }
 #' @export
 #' @rdname ggally_box
@@ -483,7 +483,7 @@ ggally_box_no_facet <- function(data, mapping, ...) {
 #'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
 #'  ) + ggplot2::scale_shape(solid=FALSE)
 ggally_dot <- function(data, mapping, ...){
-  ggally_dotAndBox(data, mapping, ..., boxPlot = FALSE)
+  ggally_dot_and_box(data, mapping, ..., boxPlot = FALSE)
 }
 #' @export
 #' @rdname ggally_dot
@@ -505,13 +505,13 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  ggally_dotAndBox(
+#'  ggally_dot_and_box(
 #'    tips,
 #'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
 #'    boxPlot = TRUE
 #'  )
-#'  ggally_dotAndBox(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
-ggally_dotAndBox <- function(data, mapping, ..., boxPlot = TRUE){
+#'  ggally_dot_and_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex, color = sex), boxPlot=FALSE)
+ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
 
   horizontal <- is_horizontal(data, mapping)
 
