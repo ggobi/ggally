@@ -8,6 +8,7 @@
 # cur <- yaml::yaml.load_file("rd_index.yaml")
 # cur <- unlist(lapply(cur, function(x) x$topics))
 # cat(paste(setdiff(topics, cur), collapse = "\n"))
+
 knitr:
   eval: true
   # cache: true
@@ -22,7 +23,10 @@ sections:
     - ggmatrix
     - ggpairs
     - ggduo
+    - ggts
     - ggscatmat
+    - ggfacet
+
 
 -
   section_name: ggmatrix helpers
@@ -43,8 +47,22 @@ sections:
       file: getPlot.Rd
       title: "[.ggmatrix"
     - gg-add
+    - mapping_color_to_fill
     - str.ggmatrix
     - print_if_interactive
+-
+  section_name: Model Diagnostics
+  topics:
+    - ggnostic
+    - broomify
+    - ggally_nostic_cooksd
+    - ggally_nostic_hat
+    - ggally_nostic_line
+    - ggally_nostic_resid
+    - ggally_nostic_se_fit
+    - ggally_nostic_sigma
+    - ggally_nostic_std_resid
+
 
 -
   section_name: Major Plotting Functions
