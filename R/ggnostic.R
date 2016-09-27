@@ -199,7 +199,7 @@ ggally_nostic_line <- function(
 ggally_nostic_resid <- function(
   data, mapping, ...,
   linePosition = 0,
-  lineColor = brew_colors("red"),
+  lineColor = ifelse(is.null(mapping$colour), brew_colors("red"), I("black")),
   lineSize = 0.5, lineAlpha = 1,
   lineType = 1,
   lineConfColor = lineColor,
