@@ -34,47 +34,37 @@ broomify <- function(model) {
   broom_augment_rows <- broom::augment(model)
   attr(broom_augment_rows, "broom_glance") <- broom_glance_info
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
-  attr(broom_augment_rows, "var_x") <- model_beta_variables(model)
-  attr(broom_augment_rows, "var_y") <- model_response_variables(model)
-  attr(broom_augment_rows, "var_x_label") <- model_beta_label(model)
+  attr(broom_augment_rows, "var_x") <- model_beta_variables(data = broom_augment_rows)
+  attr(broom_augment_rows, "var_y") <- model_response_variables(data = broom_augment_rows)
+  attr(broom_augment_rows, "var_x_label") <- model_beta_label(model, data = broom_augment_rows)
 
   class(broom_augment_rows) <- c(class(broom_augment_rows), "broomify")
 
   return(broom_augment_rows)
 }
 
+
+model_variables <- function(model, data = broom::augment(model)) {
+  augment_names <- names(data)
+  augment_names <- augment_names[!grepl("^\\.", augment_names)]
+}
 #' Model term names
 #'
 #' Retrieve either the response variable names, the beta variable names, or beta variable names with signifigance stars.
 #'
 #' @param model model in question
+#' @param data equivalent to \code{broom::augment(model)}
 #' @return character vector of names
 #' @rdname model_terms
 #' @export
 #' @importFrom stats terms
-model_response_variables <- function(model) {
-  model_terms <- terms(model)
-
-  model_variables <- attr(model_terms, "variables")
-  # convert to character vector
-  model_variables <- as.character(model_variables)[-1]
-
-  model_response_pos <- attr(model_terms, "response")
-
-  model_variables[model_response_pos]
+model_response_variables <- function(model, data = broom::augment(model)) {
+  model_variables(model = model, data = data)[1]
 }
 #' @rdname model_terms
 #' @export
-model_beta_variables <- function(model) {
-  model_terms <- terms(model)
-
-  model_variables <- attr(model_terms, "variables")
-  # convert to character vector
-  model_variables <- as.character(model_variables)[-1]
-
-  model_response_pos <- attr(model_terms, "response")
-
-  model_variables[- model_response_pos]
+model_beta_variables <- function(model, data = broom::augment(model)) {
+  model_variables(model = model, data = data)[-1]
 }
 
 
@@ -92,8 +82,8 @@ beta_stars <- function(p_val) {
 #' @export
 #' @rdname model_terms
 #' @importFrom stats anova
-model_beta_label <- function(model) {
-  beta_vars <- model_beta_variables(model)
+model_beta_label <- function(model, data = broom::augment(model)) {
+  beta_vars <- model_beta_variables(model, data = data)
 
   if (! inherits(model, "lm")) {
     return(beta_vars)
@@ -300,6 +290,7 @@ ggally_nostic_se_fit <- function(
 
 #' ggnostic function to display stats::influence's sigma
 #'
+#' @details
 #' As stated in \code{stats::\link[stats]{influence}} documentation:
 #'
 #' sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being 'NaN'.)
@@ -525,7 +516,7 @@ ggnostic <- function(
   columnLabelsY = gsub("\\.", " ", gsub("^\\.", "", columnsY)),
   xlab = "coefficients",
   ylab = "diagnostics",
-  title = deparse(model$call),
+  title = paste(deparse(model$call), collapse = "\n"),
   continuous = list(
     default = ggally_points,
     .fitted = ggally_points,
