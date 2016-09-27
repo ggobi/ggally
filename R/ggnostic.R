@@ -127,7 +127,7 @@ brew_colors <- function(col) {
 
 
 
-#' ggnostic plot function to add a background line to a geom
+#' ggnostic -background line with geom
 #'
 #' If a non-null \code{linePosition} value is given, a line will be drawn before the given \code{continuous_geom} or \code{combo_geom} is added to the plot.
 #'
@@ -181,7 +181,8 @@ ggally_nostic_line <- function(
 }
 
 
-#' ggnostic function to display residuals
+
+#' ggnostic - residuals
 #'
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} percentiles of a N(0, sigma) distribution.
 #'
@@ -239,7 +240,7 @@ ggally_nostic_resid <- function(
 
 
 
-#' ggnostic function to display standardized residuals
+#' ggnostic - standardized residuals
 #'
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} locations of a N(0, 1) distribution.
 #'
@@ -260,8 +261,11 @@ ggally_nostic_std_resid <- function(
 }
 
 
-#' ggnostic function to display stats::predict's standard errors
+#' ggnostic - fitted value standard error
 #'
+#' A function to display \code{stats::\link[stats]{predict}}'s standard errors
+#'
+#' @details
 #' As stated in \code{stats::\link[stats]{predict}} documentation:
 #'
 #'  If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
@@ -288,7 +292,9 @@ ggally_nostic_se_fit <- function(
 }
 
 
-#' ggnostic function to display stats::influence's sigma
+#' ggnostic - leave one out model sigma
+#'
+#' A function to display \code{stats::\link[stats]{influence}}'s sigma value.
 #'
 #' @details
 #' As stated in \code{stats::\link[stats]{influence}} documentation:
@@ -315,8 +321,11 @@ ggally_nostic_sigma <- function(
 }
 
 
-#' ggnostic function to display stats::cooks.distance
+#' ggnostic - Cook's distance
 #'
+#' A function to display \code{stats::\link[stats]{cooks.distance}}.
+#'
+#' @details
 #' A line is added at 1 to display the general cutoff point for Cook's Distance.
 #'
 #' Reference: Cook, R. Dennis; Weisberg, Sanford (1982). Residuals and Influence in Regression. New York, NY: Chapman & Hall. ISBN 0-412-24280-X
@@ -342,8 +351,11 @@ ggally_nostic_cooksd <- function(
 
 
 
-#' ggnostic function to display stats::influence's hat information
+#' ggnostic - leverage points
 #'
+#' A function to display stats::influence's hat information against a given explanatory variable.
+#'
+#' @details
 #' As stated in \code{stats::\link[stats]{influence}} documentation:
 #'
 #' hat: a vector containing the diagonal of the 'hat' matrix.
@@ -455,20 +467,20 @@ check_and_set_nostic_types <- function(
   types
 }
 
-#' ggnostic - Statistical model diagnostics displayed in a plot matrix
+#' ggnostic - Plot matrix of statistical model diagnostics
 #'
 #'
 #' @section \code{columnsY}:
-#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken direclty from broom documentation).  These columns are the allowed values in the \code{columnsY} parameter to \code{ggnostic}.
+#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken direclty from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
 #'
 #' \describe{
+#'   \item{.resid}{Residuals}
 #'   \item{.hat}{Diagonal of the hat matrix}
 #'   \item{.sigma}{Estimate of residual standard deviation when
 #'     corresponding observation is dropped from model}
 #'   \item{.cooksd}{Cooks distance, \code{\link[stats]{cooks.distance}}}
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.resid}{Residuals}
 #'   \item{.std.resid}{Standardised residuals}
 #' }
 #'
@@ -478,10 +490,10 @@ check_and_set_nostic_types <- function(
 #' @param model statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}
 #' @param ... arguments passed directly to \code{\link{ggduo}}
 #' @param columnsX columns to be displayed in the plot matrix. Defaults to the predictor columns of the \code{model}
-#' @param columnsY rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columnsm provided by \code{broom::\link[broom]{augment}(model)}
+#' @param columnsY rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columnsm provided by \code{broom::\link[broom]{augment}(model)}. See details for more information.
 #' @param columnLabelsX,columnLabelsY column and row labels to display in the plot matrix
 #' @param xlab,ylab,title plot matrix labels passed directly to \code{\link{ggmatrix}}
-#' @param continuous,combo,discrete list of functions for each y varaible.  please see Details
+#' @param continuous,combo,discrete list of functions for each y varaible.  See details for more information.
 #' @param data data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information
 #' @export
 #' @examples
