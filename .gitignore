@@ -9,6 +9,8 @@ vignettes/figure
 vignettes/*.html
 vignettes/rd_combined_cache/
 vignettes/index_cache/
+vignettes/index_files/
+vignettes/assets/
 vignettes/rd_combined.Rmd
 .Rproj.user
 .RData
