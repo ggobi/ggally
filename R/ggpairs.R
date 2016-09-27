@@ -55,6 +55,7 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
       stop(
         "Columns in '", columnsName, "' not found in data: c(",
         str_c(str_c("'", columns[!isFound], "'"), collapse = ", "),
+        "). Choices: c('", paste(colnamesData, collapse = "', '"),"')"
       )
     }
     columns <- unlist(colNumValues)
@@ -83,7 +84,9 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
   if (length(columnLabels) != length(columns)) {
     stop(
       "The length of the '", columnLabelsName, "'",
-      " does not match the length of the '", columnsName, "' being used."
+      " does not match the length of the '", columnsName, "' being used.",
+      " Labels: c('", paste(columnLabels, collapse = ", "), "')\n",
+      " Columns: c('", paste(columns, collapse = ", "), "')"
     )
   }
 
