@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_hat}
 \alias{ggally_nostic_hat}
-\title{ggnostic function to display stats::influence's hat information}
+\title{ggnostic - leverage points}
 \usage{
 ggally_nostic_hat(data, mapping, ..., linePosition = 2 *
   sum(data[[deparse(mapping$y)]])/nrow(data),
@@ -23,9 +23,11 @@ ggally_nostic_hat(data, mapping, ..., linePosition = 2 *
 ggplot2 plot object
 }
 \description{
-As stated in \code{stats::\link[stats]{influence}} documentation:
+A function to display stats::influence's hat information against a given explanatory variable.
 }
 \details{
+As stated in \code{stats::\link[stats]{influence}} documentation:
+
 hat: a vector containing the diagonal of the 'hat' matrix.
 
 The diagonal elements of the 'hat' matrix describe the influence each response value has on the fitted value for that same observation.

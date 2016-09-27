@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_se_fit}
 \alias{ggally_nostic_se_fit}
-\title{ggnostic function to display stats::predict's standard errors}
+\title{ggnostic - fitted value standard error}
 \usage{
 ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("green"),
   linePosition = NULL)
@@ -16,10 +16,12 @@ ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("green"),
 ggplot2 plot object
 }
 \description{
-As stated in \code{stats::\link[stats]{predict}} documentation:
+A function to display \code{stats::\link[stats]{predict}}'s standard errors
 }
 \details{
-If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
+As stated in \code{stats::\link[stats]{predict}} documentation:
+
+ If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
 
 Since the se.fit is \code{TRUE} and scale is unset by default, the standard errors are extracted from the model fit.
 

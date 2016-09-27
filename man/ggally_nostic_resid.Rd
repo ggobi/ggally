@@ -2,11 +2,12 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_resid}
 \alias{ggally_nostic_resid}
-\title{ggnostic function to display residuals}
+\title{ggnostic - residuals}
 \usage{
 ggally_nostic_resid(data, mapping, ..., linePosition = 0,
-  lineColor = brew_colors("red"), lineSize = 0.5, lineAlpha = 1,
-  lineType = 1, lineConfColor = lineColor, lineConfSize = lineSize,
+  lineColor = ifelse(is.null(mapping$colour), brew_colors("red"), I("black")),
+  lineSize = 0.5, lineAlpha = 1, lineType = 1,
+  lineConfColor = lineColor, lineConfSize = lineSize,
   lineConfAlpha = lineAlpha, lineConfType = 2, pVal = c(0.025, 0.975),
   sigma = attr(data, "broom_glance")$sigma, se = TRUE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_cooksd}
 \alias{ggally_nostic_cooksd}
-\title{ggnostic function to display stats::cooks.distance}
+\title{ggnostic - Cook's distance}
 \usage{
 ggally_nostic_cooksd(data, mapping, ..., linePosition = 4/nrow(data),
   lineColor = brew_colors("purple"))
@@ -16,9 +16,11 @@ ggally_nostic_cooksd(data, mapping, ..., linePosition = 4/nrow(data),
 ggplot2 plot object
 }
 \description{
-A line is added at 1 to display the general cutoff point for Cook's Distance.
+A function to display \code{stats::\link[stats]{cooks.distance}}.
 }
 \details{
+A line is added at 1 to display the general cutoff point for Cook's Distance.
+
 Reference: Cook, R. Dennis; Weisberg, Sanford (1982). Residuals and Influence in Regression. New York, NY: Chapman & Hall. ISBN 0-412-24280-X
 }
 \seealso{

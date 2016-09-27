@@ -6,14 +6,16 @@
 \alias{model_response_variables}
 \title{Model term names}
 \usage{
-model_response_variables(model)
+model_response_variables(model, data = broom::augment(model))
 
-model_beta_variables(model)
+model_beta_variables(model, data = broom::augment(model))
 
-model_beta_label(model)
+model_beta_label(model, data = broom::augment(model))
 }
 \arguments{
 \item{model}{model in question}
+
+\item{data}{equivalent to \code{broom::augment(model)}}
 }
 \value{
 character vector of names

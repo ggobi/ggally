@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_line}
 \alias{ggally_nostic_line}
-\title{ggnostic plot function to add a background line to a geom}
+\title{ggnostic -background line with geom}
 \usage{
 ggally_nostic_line(data, mapping, ..., linePosition = NULL,
   lineColor = "red", lineSize = 0.5, lineAlpha = 1, lineType = 1,

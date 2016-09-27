@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_sigma}
 \alias{ggally_nostic_sigma}
-\title{ggnostic function to display stats::influence's sigma}
+\title{ggnostic - leave one out model sigma}
 \usage{
 ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors("red"),
   linePosition = attr(data, "broom_glance")$sigma)
@@ -16,9 +16,11 @@ ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors("red"),
 ggplot2 plot object
 }
 \description{
-As stated in \code{stats::\link[stats]{influence}} documentation:
+A function to display \code{stats::\link[stats]{influence}}'s sigma value.
 }
 \details{
+As stated in \code{stats::\link[stats]{influence}} documentation:
+
 sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being 'NaN'.)
 
 A line is added to display the overall model's sigma value. This gives a baseline for comparison
