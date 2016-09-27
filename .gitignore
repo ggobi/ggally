@@ -11,7 +11,9 @@ vignettes/rd_combined_cache/
 vignettes/index_cache/
 vignettes/index_files/
 vignettes/assets/
-vignettes/rd_combined.Rmd
+vignettes/_rd_cache/
+vignettes/rd_files/
+vignettes/_rd.Rmd
 .Rproj.user
 .RData
 .lintr_cache
