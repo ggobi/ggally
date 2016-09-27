@@ -52,33 +52,32 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
     })
     isFound <- as.logical(unlist(lapply(colNumValues, length)))
     if (any(!isFound)) {
-      stop(str_c(
+      stop(
         "Columns in '", columnsName, "' not found in data: c(",
         str_c(str_c("'", columns[!isFound], "'"), collapse = ", "),
-        ")"
-      ))
+      )
     }
     columns <- unlist(colNumValues)
   }
 
   if (any(columns > ncol(data))) {
-    stop(str_c(
+    stop(
       "Make sure your numeric '", columnsName, "'",
       " values are less than or equal to ", ncol(data), ".\n",
       "\t", columnsName, " = c(", str_c(columns, collapse = ", "), ")"
-    ))
+    )
   }
   if (any(columns < 1)) {
-    stop(str_c(
+    stop(
       "Make sure your numeric '", columnsName, "' values are positive.", "\n",
       "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
-    ))
+    )
   }
   if (any( (columns %% 1) != 0)) {
-    stop(str_c(
+    stop(
       "Make sure your numeric '", columnsName, "' values are integers.", "\n",
       "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
-    ))
+    )
   }
 
   if (length(columnLabels) != length(columns)) {
@@ -114,10 +113,10 @@ warn_deprecated <- function(is_supplied, title) {
 
 stop_if_bad_mapping <- function(mapping) {
   if (is.numeric(mapping)) {
-    stop(str_c(
+    stop(
       "'mapping' should not be numeric",
       " unless 'columns' is missing from function call."
-    ))
+    )
   }
 }
 
@@ -164,11 +163,11 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
     if (!is.numeric(data_col)) {
       level_length <- length(levels(data_col))
       if (level_length > threshold) {
-        stop(str_c(
+        stop(
           "Column '", col, "' has more levels (", level_length, ")",
           " than the threshold (", threshold, ") allowed.\n",
           "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times" # nolint
-        ))
+        )
       }
     }
   }
@@ -938,7 +937,7 @@ check_and_set_ggpairs_defaults <- function(
   )
 
   if (!is.list(obj)) {
-    stop(str_c("'", name, "' is not a list"))
+    stop("'", name, "' is not a list")
   }
   stop_if_params_exist(obj$params)
 
@@ -956,10 +955,10 @@ check_and_set_ggpairs_defaults <- function(
   }
 
   if (! is.null(obj$aes_string)) {
-    stop(str_c(
+    stop(
       "'aes_string' is a deprecated element for the section ", name, ".\n",
       "Please use 'mapping' instead. "
-    ))
+    )
   }
 
   if (isDiag) {
@@ -994,11 +993,11 @@ get_subtype_name <- function(.subType) {
 
 stop_if_params_exist <- function(params) {
   if (! is.null(params)) {
-      stop(str_c(
+      stop(
         "'params' is a deprecated argument.  ",
         "Please 'wrap' the function to supply arguments. ",
         "help(\"wrap\", package = \"GGally\")"
-      ))
+      )
   }
 }
 
