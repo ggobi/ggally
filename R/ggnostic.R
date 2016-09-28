@@ -21,6 +21,11 @@
 #' @param model model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}
 #' @return broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
 #' @export
+#' @examples
+#' data(mtcars)
+#' model <- stats::lm(mpg ~ wt + qsec + am, data = mtcars)
+#' broomified_model <- broomify(model)
+#' str(broomified_model)
 broomify <- function(model) {
 
   if (inherits(model, "broomify")) {
@@ -196,6 +201,9 @@ ggally_nostic_line <- function(
 #' @seealso \code{stats::\link[stats]{residuals}}
 #' @export
 #' @importFrom stats qnorm
+#' @examples
+#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#' ggally_nostic_resid(dt, ggplot2::aes(wt, .resid))
 ggally_nostic_resid <- function(
   data, mapping, ...,
   linePosition = 0,
@@ -250,6 +258,9 @@ ggally_nostic_resid <- function(
 #' @return ggplot2 plot object
 #' @rdname ggally_nostic_std_resid
 #' @export
+#' @examples
+#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#' ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid))
 ggally_nostic_std_resid <- function(
   data, mapping, ...,
   sigma = 1
@@ -279,6 +290,9 @@ ggally_nostic_std_resid <- function(
 #' @seealso \code{stats::\link[stats]{influence}}
 #' @return ggplot2 plot object
 #' @export
+#' @examples
+#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#' ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit))
 ggally_nostic_se_fit <- function(
   data, mapping, ...,
   lineColor = brew_colors("green"),
@@ -308,6 +322,9 @@ ggally_nostic_se_fit <- function(
 #' @seealso \code{stats::\link[stats]{influence}}
 #' @return ggplot2 plot object
 #' @export
+#' @examples
+#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#' ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma))
 ggally_nostic_sigma <- function(
   data, mapping, ...,
   lineColor = brew_colors("red"),
@@ -336,6 +353,9 @@ ggally_nostic_sigma <- function(
 #' @return ggplot2 plot object
 #' @rdname ggally_nostic_cooksd
 #' @export
+#' @examples
+#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#' ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd))
 ggally_nostic_cooksd <- function(
   data, mapping, ...,
   linePosition = 4 / nrow(data),
@@ -372,6 +392,9 @@ ggally_nostic_cooksd <- function(
 #' @seealso \code{stats::\link[stats]{influence}}
 #' @return ggplot2 plot object
 #' @export
+#' @examples
+#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#' ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
 ggally_nostic_hat <- function(
   data, mapping, ...,
   linePosition = 2 * sum(data[[deparse(mapping$y)]]) / nrow(data),
