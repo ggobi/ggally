@@ -207,10 +207,10 @@ ggally_nostic_line <- function(
 ggally_nostic_resid <- function(
   data, mapping, ...,
   linePosition = 0,
-  lineColor = ifelse(is.null(mapping$colour), brew_colors("red"), I("black")),
+  lineColor = brew_colors("grey"),
   lineSize = 0.5, lineAlpha = 1,
   lineType = 1,
-  lineConfColor = lineColor,
+  lineConfColor = brew_colors("grey"),
   lineConfSize = lineSize, lineConfAlpha = lineAlpha,
   lineConfType = 2,
   pVal = c(0.025, 0.975),
@@ -295,7 +295,7 @@ ggally_nostic_std_resid <- function(
 #' ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit))
 ggally_nostic_se_fit <- function(
   data, mapping, ...,
-  lineColor = brew_colors("green"),
+  lineColor = brew_colors("grey"),
   linePosition = NULL
 ) {
   ggally_nostic_line(
@@ -327,7 +327,7 @@ ggally_nostic_se_fit <- function(
 #' ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma))
 ggally_nostic_sigma <- function(
   data, mapping, ...,
-  lineColor = brew_colors("red"),
+  lineColor = brew_colors("grey"),
   linePosition = attr(data, "broom_glance")$sigma
 ) {
   ggally_nostic_line(
@@ -359,13 +359,15 @@ ggally_nostic_sigma <- function(
 ggally_nostic_cooksd <- function(
   data, mapping, ...,
   linePosition = 4 / nrow(data),
-  lineColor = brew_colors("purple")
+  lineColor = brew_colors("grey"),
+  lineType = 2
 ) {
 
   ggally_nostic_line(
     data, mapping, ...,
     linePosition = linePosition,
-    lineColor = lineColor
+    lineColor = lineColor,
+    lineType = lineType
   )
 }
 
@@ -398,13 +400,13 @@ ggally_nostic_cooksd <- function(
 ggally_nostic_hat <- function(
   data, mapping, ...,
   linePosition = 2 * sum(data[[deparse(mapping$y)]]) / nrow(data),
-  lineColor = brew_colors("purple"),
+  lineColor = brew_colors("grey"),
   lineSize = 0.5, lineAlpha = 1,
-  lineType = 1,
+  lineType = 2,
   avgLinePosition = sum(data[[deparse(mapping$y)]]) / nrow(data),
-  avgLineColor = brew_colors("red"),
+  avgLineColor = brew_colors("grey"),
   avgLineSize = lineSize, avgLineAlpha = lineAlpha,
-  avgLineType = lineType
+  avgLineType = 1
 ) {
 
   if (is.null(linePosition)) {
@@ -542,6 +544,7 @@ check_and_set_nostic_types <- function(
 #'
 #' # turn resid smooth error ribbon off
 #' pm <- ggnostic(mod, continuous = list(.resid = wrap("nostic_resid", se = FALSE)))
+#' p_(pm)
 ggnostic <- function(
   model,
   ...,
