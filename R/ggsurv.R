@@ -31,6 +31,7 @@ if(getRversion() >= "2.15.1") {
 #' @param xlab the label of the x-axis.
 #' @param ylab the label of the y-axis.
 #' @param main the plot label.
+#' @param order.legend boolean to determine if the legend display should be ordered by final survival time
 #' @return An object of class \code{ggplot}
 #' @author Edwin Thoen \email{edwinthoen@@gmail.com}
 #' @importFrom stats time
@@ -97,7 +98,8 @@ ggsurv <- function(
   back.white = FALSE,
   xlab       = 'Time',
   ylab       = 'Survival',
-  main       = ''
+  main       = '',
+  order.legend = TRUE
 ){
 
   require_pkgs(c("survival", "scales"))
@@ -116,7 +118,7 @@ ggsurv <- function(
     s, CI , plot.cens, surv.col,
     cens.col, lty.est, lty.ci, size.est, size.ci, cens.size,
     cens.shape, back.white, xlab,
-    ylab, main, strata
+    ylab, main, strata, order.legend
   )
   pl
 }
@@ -138,7 +140,8 @@ ggsurv_s <- function(
   xlab       = 'Time',
   ylab       = 'Survival',
   main       = '',
-  strata     = 1
+  strata     = 1,
+  order.legend = TRUE
 ){
 
   dat <- data.frame(
@@ -203,12 +206,14 @@ ggsurv_m <- function(
   xlab       = 'Time',
   ylab       = 'Survival',
   main       = '',
-  strata     = length(s$strata)
+  strata     = length(s$strata),
+  order.legend = TRUE
 ) {
   n <- s$strata
 
+
   strataEqualNames <- unlist(strsplit(names(s$strata), '='))
-  ugroups <- unlist(strsplit(names(s$strata), '='))[seq(2, 2*strata, by = 2)]
+  ugroups <- strataEqualNames[seq(2, 2*strata, by = 2)]
   getlast <- function(x) {
     res <- NULL
     maxTime <- max(x$time)
@@ -228,7 +233,12 @@ ggsurv_m <- function(
     return(res)
   }
 
-  lastv <- ugroups[order(getlast(s), decreasing = TRUE)]
+
+  if (isTRUE(order.legend)) {
+    lastv <- ugroups[order(getlast(s), decreasing = TRUE)]
+  } else {
+    lastv <- ugroups
+  }
   groups <- factor(ugroups, levels = lastv)
   gr.name <- strataEqualNames[1]
   gr.df <- vector('list', strata)
@@ -247,7 +257,6 @@ ggsurv_m <- function(
   }
 
   dat      <- do.call(rbind, gr.df)
-  dat.cens <- subset(dat, cens != 0)
 
   pl <- ggplot(dat, aes(x = time, y = surv, group = group)) +
     geom_step(aes(col = group, lty = group), size = size.est) +
@@ -290,6 +299,9 @@ ggsurv_m <- function(
   }
 
   if (identical(plot.cens, TRUE) ){
+    dat.cens <- subset(dat, cens != 0)
+    dat.cens <- subset(dat.cens, group != "PKD")
+
     if (nrow(dat.cens) == 0) {
       stop('There are no censored observations')
     }
@@ -341,7 +353,7 @@ ggsurv_m <- function(
       } else {
 
         # custom colors and maybe custom shape
-        uniqueGroupVals = unique(dat.cens$group)
+        uniqueGroupVals = levels(dat.cens$group)
         if (length(cens.shape) == 1) {
           cens.shape = rep(cens.shape, strata)
         }
@@ -353,6 +365,9 @@ ggsurv_m <- function(
         for (i in seq_along(uniqueGroupVals)) {
           groupVal = uniqueGroupVals[i]
           dtGroup <- subset(dat.cens, group == groupVal)
+          if (nrow(dtGroup) == 0) {
+            next
+          }
 
           pl <- pl + geom_point(
             data = dtGroup,
