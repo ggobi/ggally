@@ -470,7 +470,7 @@ check_and_set_nostic_types <- function(
 #' ggnostic - Plot matrix of statistical model diagnostics
 #'
 #'
-#' @section \code{columnsY}:
+#' @section `columnsY`:
 #' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken direclty from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
 #'
 #' \describe{
@@ -482,10 +482,11 @@ check_and_set_nostic_types <- function(
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
 #'   \item{.std.resid}{Standardised residuals}
+#'   \item{response variable name}{The response variable in the model may be added. Such as \code{"mpg"} in the model \code{lm(mpg ~ ., data = mtcars)}}
 #' }
 #'
-#' @section \code{continuous}, \code{combo}, \code{discrete} types:
-#' Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{broom::\link[broom]{augment}()} output: ".fitted", ".resid", ".std.resid", ".sigma", ".se.fit", ".hat", ".cooksd". An extra key, \code{default}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly into \code{\link{ggduo}}'s \code{types} parameter.
+#' @section `continuous`, `combo`, `discrete` types:
+#' Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{broom::\link[broom]{augment}()} output: \code{".fitted"}, \code{".resid"}, \code{".std.resid"}, \code{".sigma"}, \code{".se.fit"}, \code{".hat"}, \code{".cooksd"}. An extra key, \code{"default"}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the \code{types} parameter in \code{\link{ggduo}}.
 #'
 #' @param model statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}
 #' @param ... arguments passed directly to \code{\link{ggduo}}
@@ -506,7 +507,7 @@ check_and_set_nostic_types <- function(
 #' mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)]
 #'
 #' # step the complete model down to a smaller model
-#' mod <- stats::step(stats::lm(mpg ~ ., data = mtc), direction = "backward")
+#' mod <- stats::step(stats::lm(mpg ~ ., data = mtc), trace = FALSE)
 #'
 #' # display using defaults
 #' pm <- ggnostic(mod)
