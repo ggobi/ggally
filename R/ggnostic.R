@@ -343,12 +343,12 @@ ggally_nostic_sigma <- function(
 #' A function to display \code{stats::\link[stats]{cooks.distance}}.
 #'
 #' @details
-#' A line is added at 1 to display the general cutoff point for Cook's Distance.
+#' A line is added at 4 / n to display the general cutoff point for Cook's Distance.
 #'
 #' Reference: Cook, R. Dennis; Weisberg, Sanford (1982). Residuals and Influence in Regression. New York, NY: Chapman & Hall. ISBN 0-412-24280-X
 #'
-#' @param data,mapping,...,lineColor parameters supplied to \code{\link{ggally_nostic_line}}
-#' @param linePosition 1 is the general cutoff point for Cook's Distance
+#' @param data,mapping,...,lineColor,lineType parameters supplied to \code{\link{ggally_nostic_line}}
+#' @param linePosition 4 / n is the general cutoff point for Cook's Distance
 #' @seealso \code{stats::\link[stats]{cooks.distance}}
 #' @return ggplot2 plot object
 #' @rdname ggally_nostic_cooksd

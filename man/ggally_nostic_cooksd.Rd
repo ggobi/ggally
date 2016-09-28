@@ -8,9 +8,9 @@ ggally_nostic_cooksd(data, mapping, ..., linePosition = 4/nrow(data),
   lineColor = brew_colors("grey"), lineType = 2)
 }
 \arguments{
-\item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}
+\item{data, mapping, ..., lineColor, lineType}{parameters supplied to \code{\link{ggally_nostic_line}}}
 
-\item{linePosition}{1 is the general cutoff point for Cook's Distance}
+\item{linePosition}{4 / n is the general cutoff point for Cook's Distance}
 }
 \value{
 ggplot2 plot object
@@ -19,7 +19,7 @@ ggplot2 plot object
 A function to display \code{stats::\link[stats]{cooks.distance}}.
 }
 \details{
-A line is added at 1 to display the general cutoff point for Cook's Distance.
+A line is added at 4 / n to display the general cutoff point for Cook's Distance.
 
 Reference: Cook, R. Dennis; Weisberg, Sanford (1982). Residuals and Influence in Regression. New York, NY: Chapman & Hall. ISBN 0-412-24280-X
 }
