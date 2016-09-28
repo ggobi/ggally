@@ -18,7 +18,5 @@ vignettes/_rd.Rmd
 .RData
 .lintr_cache
 revdep/checks\.rds
-vigs/cache
-vigs/*.html
 _gh-pages
 ggduo_paper.txt
