@@ -65,6 +65,11 @@ GGally 1.2.0.9999
 
 * color must be a non-numeric value
 
+`ggsurv`
+
+* added boolean to allow for legend to not be sorted
+* fixed bug where censored points with custom color didn't match properly (#185)
+
 
 Vignettes
 
