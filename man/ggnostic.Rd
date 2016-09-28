@@ -7,7 +7,7 @@
 ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
   ".sigma", ".hat", ".cooksd"), columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\\\.", " ", gsub("^\\\\.", "", columnsY)),
-  xlab = "coefficients", ylab = "diagnostics",
+  xlab = "explanatory variables", ylab = "diagnostics",
   title = paste(deparse(model$call), collapse = "\\n"),
   continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit
   = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
@@ -85,5 +85,6 @@ p_(pm)
 
 # turn resid smooth error ribbon off
 pm <- ggnostic(mod, continuous = list(.resid = wrap("nostic_resid", se = FALSE)))
+p_(pm)
 }
 

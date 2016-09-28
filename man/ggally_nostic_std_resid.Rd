@@ -17,6 +17,10 @@ ggplot2 plot object
 \description{
 If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} locations of a N(0, 1) distribution.
 }
+\examples{
+dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid))
+}
 \seealso{
 \code{stats::\link[stats]{rstandard}}
 }

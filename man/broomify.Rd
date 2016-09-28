@@ -15,4 +15,10 @@ broom::augmented data frame with the broom::glance data.frame and broom::tidy da
 \description{
 broom::augment a model and add broom::glance and broom::tidy output as attributes. X and Y variables are also added.
 }
+\examples{
+data(mtcars)
+model <- stats::lm(mpg ~ wt + qsec + am, data = mtcars)
+broomified_model <- broomify(model)
+str(broomified_model)
+}
 

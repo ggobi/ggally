@@ -4,7 +4,7 @@
 \alias{ggally_nostic_sigma}
 \title{ggnostic - leave one out model sigma}
 \usage{
-ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors("red"),
+ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors("grey"),
   linePosition = attr(data, "broom_glance")$sigma)
 }
 \arguments{
@@ -24,6 +24,10 @@ As stated in \code{stats::\link[stats]{influence}} documentation:
 sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being 'NaN'.)
 
 A line is added to display the overall model's sigma value. This gives a baseline for comparison
+}
+\examples{
+dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma))
 }
 \seealso{
 \code{stats::\link[stats]{influence}}

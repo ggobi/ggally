@@ -5,12 +5,11 @@
 \title{ggnostic - leverage points}
 \usage{
 ggally_nostic_hat(data, mapping, ..., linePosition = 2 *
-  sum(data[[deparse(mapping$y)]])/nrow(data),
-  lineColor = brew_colors("purple"), lineSize = 0.5, lineAlpha = 1,
-  lineType = 1,
+  sum(data[[deparse(mapping$y)]])/nrow(data), lineColor = brew_colors("grey"),
+  lineSize = 0.5, lineAlpha = 1, lineType = 2,
   avgLinePosition = sum(data[[deparse(mapping$y)]])/nrow(data),
-  avgLineColor = brew_colors("red"), avgLineSize = lineSize,
-  avgLineAlpha = lineAlpha, avgLineType = lineType)
+  avgLineColor = brew_colors("grey"), avgLineSize = lineSize,
+  avgLineAlpha = lineAlpha, avgLineType = 1)
 }
 \arguments{
 \item{data, mapping, ...}{supplied directly to \code{\link{ggally_nostic_line}}}
@@ -34,6 +33,10 @@ The diagonal elements of the 'hat' matrix describe the influence each response v
 
 A suggested "cutoff" line is added to the plot at a height of 2 * p / n and an expected line at a height of p / n.
 If either \code{linePosition} or \code{avgLinePosition} is \code{NULL}, the respective line will not be drawn.
+}
+\examples{
+dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
 }
 \seealso{
 \code{stats::\link[stats]{influence}}

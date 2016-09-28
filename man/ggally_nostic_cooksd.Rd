@@ -5,7 +5,7 @@
 \title{ggnostic - Cook's distance}
 \usage{
 ggally_nostic_cooksd(data, mapping, ..., linePosition = 4/nrow(data),
-  lineColor = brew_colors("purple"))
+  lineColor = brew_colors("grey"), lineType = 2)
 }
 \arguments{
 \item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}
@@ -22,6 +22,10 @@ A function to display \code{stats::\link[stats]{cooks.distance}}.
 A line is added at 1 to display the general cutoff point for Cook's Distance.
 
 Reference: Cook, R. Dennis; Weisberg, Sanford (1982). Residuals and Influence in Regression. New York, NY: Chapman & Hall. ISBN 0-412-24280-X
+}
+\examples{
+dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd))
 }
 \seealso{
 \code{stats::\link[stats]{cooks.distance}}

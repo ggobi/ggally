@@ -4,7 +4,7 @@
 \alias{ggally_nostic_se_fit}
 \title{ggnostic - fitted value standard error}
 \usage{
-ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("green"),
+ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("grey"),
   linePosition = NULL)
 }
 \arguments{
@@ -26,6 +26,10 @@ As stated in \code{stats::\link[stats]{predict}} documentation:
 Since the se.fit is \code{TRUE} and scale is unset by default, the standard errors are extracted from the model fit.
 
 A base line of 0 is added to give reference to a perfect fit.
+}
+\examples{
+dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit))
 }
 \seealso{
 \code{stats::\link[stats]{influence}}
