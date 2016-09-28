@@ -550,7 +550,7 @@ ggnostic <- function(
   columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
   columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\.", " ", gsub("^\\.", "", columnsY)),
-  xlab = "coefficients",
+  xlab = "explanatory variables",
   ylab = "diagnostics",
   title = paste(deparse(model$call), collapse = "\n"),
   continuous = list(
