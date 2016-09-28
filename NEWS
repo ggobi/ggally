@@ -68,7 +68,7 @@ GGally 1.2.0.9999
 
 Vignettes
 
-* vignettes are now displayed using `packagedocs`.  Check it out at github.com/schloerke/packagedocs !
+* vignettes are now displayed using `packagedocs`.  More info at https://schloerke.github.io/packagedocs/
 
 `ggally_box_no_facet` and `ggally_dot_no_facet`
 
