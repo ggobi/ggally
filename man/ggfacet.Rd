@@ -5,7 +5,7 @@
 \title{ggfacet - single ggplot2 plot matrix with facet_grid}
 \usage{
 ggfacet(data, mapping = NULL, columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data), fn = "points", ...,
+  columnsY = 1:ncol(data), fn = ggally_points, ...,
   columnLabelsX = names(data[columnsX]),
   columnLabelsY = names(data[columnsY]), xlab = NULL, ylab = NULL,
   title = NULL, scales = "free")

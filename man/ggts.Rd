@@ -16,12 +16,6 @@ ggmatrix object
 GGally implementation of ts.plot. Wraps around the ggduo function and removes the column strips
 }
 \examples{
-pigs <- read.table("http://lib.stat.cmu.edu/datasets/Andrews/T62.1")
-pigs <- pigs[,-(1:3)]
-colnames(pigs) <- c("year", "quarter", "gilts", "profit", "s_per_herdsz", "production", "herdsz")
-
-pigs$time <- pigs$year + (pigs$quarter - 1) / 4
-
 ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
 }
 

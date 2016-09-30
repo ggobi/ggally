@@ -1,6 +1,6 @@
 #' United Kingdom Pig Production
 #'
-#' This data contains about the United Kingdom Pig Production from the book 'Data' by Andrews and Herzberg.  There original data can be on Statlib: http://lib.stat.cmu.edu/datasets/Andrews/T62.1
+#' This data contains about the United Kingdom Pig Production from the book 'Data' by Andrews and Herzberg. The original data can be on Statlib: http://lib.stat.cmu.edu/datasets/Andrews/T62.1
 #'
 #' The time variable has been added from a combination of year and quarter
 #'
