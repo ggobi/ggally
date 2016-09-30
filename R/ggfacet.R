@@ -43,7 +43,7 @@ ggfacet <- function(
   data, mapping = NULL,
   columnsX = 1:ncol(data),
   columnsY = 1:ncol(data),
-  fn = "points", ...,
+  fn = ggally_points, ...,
   columnLabelsX = names(data[columnsX]),
   columnLabelsY = names(data[columnsY]),
   xlab = NULL,
@@ -70,6 +70,11 @@ ggfacet <- function(
   columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
   columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
 
+  # could theoretically work like
+  # mtc <- mtcars
+  # mtc$am <- as.factor(mtc$am)
+  # mtc$cyl <- as.factor(mtc$cyl)
+  # ggfacet(mtc, columnsY = c(1,3,4,5), columnsX = c("am", "cyl"), fn = function(data, mapping){ggplot(data, mapping) + geom_boxplot()})
   is_factor_x <- sapply(data[columnsX], is.factor)
   if (sum(is_factor_x) != 0) {
     warning(paste(sum(is_factor_x), " factor variables are being removed from X columns", sep = ""))
