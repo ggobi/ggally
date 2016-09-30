@@ -242,7 +242,7 @@ ggduo(
 
 ## Multiple Time Series Analysis
 
-While displaying multiple time series vertically over time, such as ``+ facet_grid(time ~ .)``, ggduo can handle both continuous and discrete data.  `r rdl(ggplot2)` does not mix discrete and continuous data on the same axis.
+While displaying multiple time series vertically over time, such as ``+ facet_grid(time ~ .)``, `r rdl(ggduo)` can handle both continuous and discrete data.  `r rdl(ggplot2)` does not mix discrete and continuous data on the same axis.
 
 
 ```{r ggduo-mtsa}
