@@ -9,7 +9,7 @@ ggally_nostic_resid(data, mapping, ..., linePosition = 0,
   lineType = 1, lineConfColor = brew_colors("grey"),
   lineConfSize = lineSize, lineConfAlpha = lineAlpha, lineConfType = 2,
   pVal = c(0.025, 0.975), sigma = attr(data, "broom_glance")$sigma,
-  se = TRUE)
+  se = TRUE, method = "auto")
 }
 \arguments{
 \item{data, mapping, ...}{parameters supplied to \code{\link{ggally_nostic_line}}}
@@ -23,6 +23,8 @@ ggally_nostic_resid(data, mapping, ..., linePosition = 0,
 \item{sigma}{sigma value for the \code{pVal} percentiles}
 
 \item{se}{boolen to determine if the confidence intervals should be displayed}
+
+\item{method}{parameter supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"}}
 }
 \value{
 ggplot2 plot object

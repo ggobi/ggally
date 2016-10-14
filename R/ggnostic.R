@@ -197,6 +197,7 @@ ggally_nostic_line <- function(
 #' @param pVal percentiles of a N(0, sigma) distribution to be drawn
 #' @param sigma sigma value for the \code{pVal} percentiles
 #' @param se boolen to determine if the confidence intervals should be displayed
+#' @param method parameter supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"}
 #' @return ggplot2 plot object
 #' @seealso \code{stats::\link[stats]{residuals}}
 #' @export
@@ -215,7 +216,8 @@ ggally_nostic_resid <- function(
   lineConfType = 2,
   pVal = c(0.025, 0.975),
   sigma = attr(data, "broom_glance")$sigma,
-  se = TRUE
+  se = TRUE,
+  method = "auto"
 ) {
 
   if (!is.null(linePosition) & !is.null(pVal) & !is.null(sigma)) {
@@ -228,15 +230,20 @@ ggally_nostic_resid <- function(
     lineAlpha <- c(lineAlpha, lineConfAlpha, lineConfAlpha)
   }
 
-  ggally_nostic_line(
+  p <- ggally_nostic_line(
     data, mapping, ...,
     linePosition = linePosition,
     lineColor = lineColor,
     lineType = lineType,
     lineSize = lineSize,
     lineAlpha = lineAlpha
-  ) +
-    geom_smooth(se = se) +
+  )
+
+  if (! is_character_column(data, mapping, "x")) {
+    p <- p + geom_smooth(se = se, method = method)
+  }
+
+  p +
     coord_cartesian(
       ylim = range(
         c(linePosition, eval_data_col(data, mapping$y)),
