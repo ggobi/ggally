@@ -11,11 +11,25 @@ test_that("ggnostic mtcars", {
   mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)];
 
   mod <- lm(mpg ~ wt + qsec + am, data = mtc);
+  continuous_type <- list(
+    .resid = wrap(ggally_nostic_resid, method = "loess"),
+    .std.resid = wrap(ggally_nostic_std_resid, method = "loess")
+  )
 
-  pm <- ggnostic(mod, mapping = ggplot2::aes(), columnsY = c("mpg", ".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"))
+  pm <- ggnostic(
+    mod,
+    mapping = ggplot2::aes(),
+    columnsY = c("mpg", ".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
+    continuous = continuous_type
+  )
   expect_print(pm)
 
-  pm <- ggnostic(mod, mapping = ggplot2::aes(color = am), legend = c(1, 3))
+  pm <- ggnostic(
+    mod,
+    mapping = ggplot2::aes(color = am),
+    legend = c(1, 3),
+    continuous = continuous_type
+  )
   expect_print(pm)
 })
 
