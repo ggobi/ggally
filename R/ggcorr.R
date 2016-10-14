@@ -416,8 +416,11 @@ ggcorr <- function(
     } else if (label_alpha > 0) {
 
       p = p +
-        geom_text(aes(x, y, label = label, show_guide = FALSE),
-                      alpha = label_alpha, color = label_color, size = label_size)
+        geom_text(
+          aes(x, y, label = label),
+          show.legend = FALSE,
+          alpha = label_alpha, color = label_color, size = label_size
+        )
 
     } else {
 
