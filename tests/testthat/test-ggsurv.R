@@ -136,16 +136,18 @@ test_that("multiple colors", {
       ggsurv(sf.kid, plot.cens = TRUE, cens.col = "blue")
     )
   })
+
+  cusotm_color <- c("green", "blue", "purple", "orange")
   expect_silent({
     print(
-      ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue", "orange", "green"))
+      ggsurv(sf.kid, plot.cens = TRUE, cens.col = cusotm_color)
     )
   })
 
   expect_warning({
     ggsurv(
       sf.kid, plot.cens = TRUE,
-      cens.col = c("red", "blue", "orange", "green"),
+      cens.col = cusotm_color,
       cens.shape = c(1, 2)
     )
   }, "The length of the censored shapes") # nolint
@@ -153,7 +155,7 @@ test_that("multiple colors", {
     print(
       ggsurv(
         sf.kid, plot.cens = TRUE,
-        cens.col = c("red", "blue", "orange", "green"),
+        cens.col = cusotm_color,
         cens.shape = c(1, 2, 3, 4)
       )
     )
