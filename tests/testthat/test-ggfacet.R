@@ -6,7 +6,7 @@ expect_print <- function(p) {
 
 suppressMessages(library(chemometrics, quietly = TRUE))
 data(NIR)
-NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[,1:3])
+NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[, 1:3])
 
 test_that("warnings", {
   expect_warning(
@@ -29,11 +29,6 @@ test_that("generally works", {
   # factor variables
   expect_print(ggfacet(NIR_sub, columnsY = 1:2, columnsX = 3:5, fn = ggally_smooth_loess))
 
-
-  pigs <- read.table("http://lib.stat.cmu.edu/datasets/Andrews/T62.1")
-  pigs <- pigs[,-(1:3)]
-  colnames(pigs) <- c("year", "quarter", "gilts", "profit", "s_per_herdsz", "production", "herdsz")
-  pigs$time <- pigs$year + (pigs$quarter - 1) / 4
 
   expect_print(
     ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))

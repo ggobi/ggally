@@ -123,7 +123,7 @@ test_that("blank", {
 
 test_that("proportions", {
   pm <- ggpairs(iris, 1:2, mapping = ggplot2::aes(color = Species))
-  pm[2,2] <- pm[2,2] + ggplot2::coord_flip()
+  pm[2, 2] <- pm[2, 2] + ggplot2::coord_flip()
 
 
   pm2 <- ggmatrix(
@@ -131,8 +131,8 @@ test_that("proportions", {
     pm$plots,
     ncol = 2,
     nrow = 2,
-    xProportions = c(2,1),
-    yProportions = c(1,2),
+    xProportions = c(2, 1),
+    yProportions = c(1, 2),
     title = "big plot, small marginals"
   )
 

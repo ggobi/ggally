@@ -55,7 +55,7 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
       stop(
         "Columns in '", columnsName, "' not found in data: c(",
         str_c(str_c("'", columns[!isFound], "'"), collapse = ", "),
-        "). Choices: c('", paste(colnamesData, collapse = "', '"),"')"
+        "). Choices: c('", paste(colnamesData, collapse = "', '"), "')"
       )
     }
     columns <- unlist(colNumValues)
