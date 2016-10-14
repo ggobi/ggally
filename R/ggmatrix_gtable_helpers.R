@@ -10,22 +10,30 @@ plot_gtable <- function(p) {
 # axis_size_left(g)
 # axis_size_bottom(g)
 axis_list <- (function(){
-  axis_label_size_wrapper <- function(fn, filter_val, select_val) {
+  axis_label_size_wrapper <- function(fn, filter_val, select_val, ...) {
     function(pg) {
       pg_axis <- gtable::gtable_filter(pg, filter_val)
-      max(fn(pg_axis[[select_val]]))
+      items <- pg_axis[[select_val]]
+      if (!inherits(items, "unit.list")) {
+        ret <- fn(items, ...)
+      } else {
+        ret <- vapply(items, fn, numeric(1), ...)
+      }
+      max(ret)
     }
   }
-  
+
   axis_size_left <- axis_label_size_wrapper(
-    utils::getFromNamespace("width_cm", "ggplot2"),
+    grid::convertWidth,
     "axis-l",
-    "widths"
+    "widths",
+    unitTo = "cm", valueOnly = TRUE
   )
   axis_size_bottom <- axis_label_size_wrapper(
-    utils::getFromNamespace("height_cm", "ggplot2"),
+    grid::convertHeight,
     "axis-b",
-    "heights"
+    "heights",
+    unitTo = "cm", valueOnly = TRUE
   )
 
   list(axis_size_left, axis_size_bottom)
