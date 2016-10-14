@@ -235,7 +235,14 @@ ggsurv_m <- function(
 
 
   if (isTRUE(order.legend)) {
-    lastv <- ugroups[order(getlast(s), decreasing = TRUE)]
+    group_order <- order(getlast(s), decreasing = TRUE)
+    lastv <- ugroups[group_order]
+    if (length(surv.col) == length(n)) {
+      surv.col <- surv.col[group_order]
+    }
+    if (length(cens.col) == length(n)) {
+      cens.col <- cens.col[group_order]
+    }
   } else {
     lastv <- ugroups
   }
