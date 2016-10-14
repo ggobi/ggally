@@ -85,7 +85,7 @@ plot_panel <- function(
   }
 
   # get correct panel (and strips)
-  layout_rows <- pg$layout$name %in% layout_names
+  layout_rows <- str_detect(pg$layout$name, paste(layout_names, collapse = "|"))
 
   layout_info <- pg$layout[layout_rows, ]
   top_bottom <- layout_info[, c("t", "b")]
@@ -154,6 +154,7 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
 
 set_max_axis_size <- function(pmg, axis_sizes, layout_name, layout_cols, pmg_key) {
   m_axis_size <- max(axis_sizes, na.rm = TRUE)
+  grob_pos_vals <- which(str_detect(pmg$layout$name, layout_name))
   val_pos <- pmg$layout[grob_pos_vals, layout_cols]
   val_pos <- unique(unlist(val_pos))
   # if (length(val_pos) > 1) {
