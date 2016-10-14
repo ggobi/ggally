@@ -56,7 +56,7 @@ Suggests:
     roxygen2,
     testthat
 Remotes:
-  schloerke/packagedocs
+  hafen/packagedocs@dev,
   hadley/ggplot2
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
