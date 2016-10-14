@@ -48,8 +48,8 @@ plot_panel <- function(
 
   # ask about strips
   layout_names <- c("panel")
-  strip_right_name <- "strip-right"
-  strip_top_name <- "strip-top"
+  strip_right_name <- "strip-r"
+  strip_top_name <- "strip-t"
   legend_name <- "guide-box"
   all_layout_names <- c(layout_names, strip_right_name, strip_top_name, legend_name)
 
@@ -101,10 +101,10 @@ add_left_axis <- function(pmg, pg, show_strips, grob_pos) {
   layout_name <- layout$name
 
   # axis layout info
-  al <- layout[layout_name == "axis-l", ]
+  al <- layout[str_detect(layout_name, "axis-l"), ]
 
   if (show_strips) {
-    alx <- layout[layout_name %in% c("axis-l", "strip-top"), ]
+    alx <- layout[str_detect(layout_name, "axis-l|strip-t"), ]
   } else {
     alx <- al
   }
@@ -124,10 +124,10 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
   layout <- pg$layout
   layout_name <- layout$name
   # axis layout info
-  al <- layout[layout_name == "axis-b", ]
+  al <- layout[str_detect(layout_name, "axis-b"), ]
 
   if (show_strips) {
-    alx <- layout[layout_name %in% c("axis-b", "strip-right"), ]
+    alx <- layout[str_detect(layout_name, "axis-b|strip-right"), ]
   } else {
     alx <- al
   }
@@ -146,7 +146,6 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
 
 set_max_axis_size <- function(pmg, axis_sizes, layout_name, layout_cols, pmg_key) {
   m_axis_size <- max(axis_sizes, na.rm = TRUE)
-  grob_pos_vals <- which(pmg$layout$name == layout_name)
   val_pos <- pmg$layout[grob_pos_vals, layout_cols]
   val_pos <- unique(unlist(val_pos))
   # if (length(val_pos) > 1) {

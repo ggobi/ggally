@@ -91,7 +91,10 @@ ggmatrix_gtable <- function(
 
   # zero out rest of the plotting area (just in case it is not replaced)
   zero_pos_vals <- pmg_layout_grob_pos[
-    pmg_layout_name %in% c("panel", "axis-l", "axis-b", "guide-box")
+    str_detect(
+      pmg_layout_name,
+      paste(c("panel", "axis-l", "axis-b", "guide-box"), collapse = "|")
+    )
   ]
   for (zero_pos in zero_pos_vals) {
     pmg$grobs[[zero_pos]] <- ggplot2::zeroGrob()
@@ -131,15 +134,15 @@ ggmatrix_gtable <- function(
 
 
   # Get all 'panel' grob_pos in the pmg
-  panel_layout <- pmg_layout[pmg_layout_name  == "panel", ]
+  panel_layout <- pmg_layout[str_detect(pmg_layout_name, "panel"), ]
   panel_locations_order <- order(panel_layout$t, panel_layout$l, decreasing = FALSE)
   panel_locations <- panel_layout[panel_locations_order, "grob_pos"]
 
   # init the axis sizes
   left_axis_sizes <- numeric(pm$nrow + 1)
   bottom_axis_sizes <- numeric(pm$ncol + 1)
-  axis_l_grob_pos <- pmg_layout_grob_pos[pmg_layout_name == "axis-l"]
-  axis_b_grob_pos <- pmg_layout_grob_pos[pmg_layout_name == "axis-b"]
+  axis_l_grob_pos <- pmg_layout_grob_pos[str_detect(pmg_layout_name, "axis-l")]
+  axis_b_grob_pos <- pmg_layout_grob_pos[str_detect(pmg_layout_name, "axis-b")]
 
   # change the plot size ratios
   x_proportions <- pm$xProportions
@@ -226,6 +229,7 @@ ggmatrix_gtable <- function(
   }
 
   # make sure the axes have enough room
+
   pmg <- set_max_axis_size(
     pmg,
     axis_sizes = left_axis_sizes,

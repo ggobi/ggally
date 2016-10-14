@@ -537,7 +537,7 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
   if (!horizontal) {
     p <- p +
       facet_grid(paste(". ~ ", xVal, sep = ""), scales = "free_x") +
-      theme(panel.margin = unit(0.1, "lines"))
+      theme(panel.spacing = unit(0.1, "lines"))
 
   } else {
     p <- p +
@@ -550,7 +550,7 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
         )
       ) +
       facet_grid(paste(xVal, " ~ .", sep = "")) +
-      theme(panel.margin = unit(0.1, "lines"))
+      theme(panel.spacing = unit(0.1, "lines"))
   }
 
   p <- p + scale_x_continuous(xVal, labels = "", breaks = 1)
@@ -621,11 +621,11 @@ ggally_facethist <- function(data, mapping, ...){
   if (horizontal) {
     p <- p +
       facet_grid(paste(yVal, " ~ .", sep = "")) +
-      theme(panel.margin = unit(0.1, "lines"))
+      theme(panel.spacing = unit(0.1, "lines"))
   } else {
     p <- p +
       facet_grid(paste(". ~", yVal, sep = "")) +
-      theme(panel.margin = unit(0.1, "lines")) +
+      theme(panel.spacing = unit(0.1, "lines")) +
       coord_flip()
   }
   p <- p + labs(x = xVal, y = yVal)
