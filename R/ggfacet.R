@@ -115,7 +115,6 @@ ggfacet <- function(
       vals[[".x_col"]] <- columnLabelsX[as.character(vals[[".x_col"]])]
     }
     if (".y_col" %in% val_names) {
-      # browser()
       vals[[".y_col"]] <- columnLabelsY[as.character(vals[[".y_col"]])]
     }
     vals
