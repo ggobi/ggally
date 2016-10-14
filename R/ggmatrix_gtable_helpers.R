@@ -10,14 +10,14 @@ plot_gtable <- function(p) {
 # axis_size_left(g)
 # axis_size_bottom(g)
 axis_list <- (function(){
-  axis_label_size_wrapper <- function(fn, filter_val, select_val, ...) {
+  axis_label_size_wrapper <- function(fn, filter_val, select_val, unitTo, valueOnly) {
     function(pg) {
       pg_axis <- gtable::gtable_filter(pg, filter_val)
       items <- pg_axis[[select_val]]
       if (!inherits(items, "unit.list")) {
-        ret <- fn(items, ...)
+        ret <- fn(items, unitTo = unitTo, valueOnly = valueOnly)
       } else {
-        ret <- vapply(items, fn, numeric(1), ...)
+        ret <- vapply(items, fn, numeric(1), unitTo = unitTo, valueOnly = valueOnly)
       }
       max(ret)
     }
