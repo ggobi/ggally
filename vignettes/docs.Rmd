@@ -4,11 +4,13 @@ subtitle: "Extension to 'ggplot2'"
 author: Barret Schloerke
 copyright: Barret Schloerke
 output:
-  packagedocs:
+  packagedocs::package_docs:
     toc: true
+    toc_collapse: true
+redirect: http://ggobi.github.io/ggally
 vignette: >
   %\VignetteIndexEntry{GGally}
-  %\VignetteEngine{packagedocs::index}
+  %\VignetteEngine{packagedocs::redirect}
 navpills: |
   <li class="active"><a href='index.html'>Docs</a></li>
   <li><a href='rd.html'>Package Ref</a></li>
