@@ -6,7 +6,8 @@
 inst/*
 tests/testthat/Rplots.pdf
 vignettes/figure
-vignettes/*.html
+vignettes/docs.html
+vignettes/rd.html
 vignettes/docs_cache/
 vignettes/docs_files/
 vignettes/assets/
