@@ -16,11 +16,11 @@
 
 |package      |*  |version    |date       |source                             |
 |:------------|:--|:----------|:----------|:----------------------------------|
-|broom        |   |0.4.1      |2016-06-24 |cran (@0.4.1)                      |
+|broom        |*  |0.4.1      |2016-06-24 |cran (@0.4.1)                      |
 |chemometrics |   |1.4.1      |2016-08-03 |cran (@1.4.1)                      |
 |geosphere    |   |1.5-5      |2016-06-15 |cran (@1.5-5)                      |
-|GGally       |*  |1.3.0      |2016-10-17 |local (ggobi/ggally@NA)            |
-|ggplot2      |   |2.1.0.9001 |2016-10-17 |Github (hadley/ggplot2@1709196)    |
+|GGally       |*  |1.2.9.9999 |2016-10-17 |local (ggobi/ggally@NA)            |
+|ggplot2      |*  |2.1.0.9001 |2016-10-17 |Github (hadley/ggplot2@1709196)    |
 |gtable       |   |0.2.0      |2016-02-26 |cran (@0.2.0)                      |
 |igraph       |   |1.0.1      |2015-06-26 |cran (@1.0.1)                      |
 |intergraph   |   |2.0-2      |2015-06-30 |cran (@2.0-2)                      |
@@ -43,11 +43,10 @@
 
 # Check results
 
-10 packages with problems
+9 packages with problems
 
 |package             |version | errors| warnings| notes|
 |:-------------------|:-------|------:|--------:|-----:|
-|ggbio               |1.20.2  |      1|        2|     5|
 |MissingDataGUI      |0.2-5   |      1|        0|     0|
 |ParamHelpers        |1.9     |      1|        0|     0|
 |plotly              |4.5.2   |      2|        0|     1|
@@ -57,104 +56,6 @@
 |toaster             |0.5.2   |      1|        0|     0|
 |userfriendlyscience |0.4-1   |      1|        0|     0|
 |vdmR                |0.2.2   |      2|        1|     0|
-
-## ggbio (1.20.2)
-Maintainer: Michael Lawrence <lawrence.michael@gene.com>  
-Bug reports: https://github.com/tengfei/ggbio/issues
-
-1 error  | 2 warnings | 5 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘ggbio-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: autoplot
-> ### Title: Generic autoplot function
-> ### Aliases: autoplot autoplot,GRanges-method autoplot,GRangesList-method
-> ###   autoplot,IRanges-method autoplot,Seqinfo-method
-> ###   autoplot,BSgenome-method autoplot,GAlignments-method
-... 92 lines ...
-  no non-missing arguments to min; returning Inf
-Warning in max(g$layout[idx, ]$r) :
-  no non-missing arguments to max; returning -Inf
-Warning in min(g$layout[idx, ]$l) :
-  no non-missing arguments to min; returning Inf
-Warning in max(g$layout[idx, ]$r) :
-  no non-missing arguments to max; returning -Inf
-Error in mapply(child_vp, vp_name = vpname(x$layout), t = x$layout$t,  : 
-  zero-length inputs cannot be mixed with those of non-zero length
-Calls: <Anonymous> ... drawGTree -> makeContent -> makeContent.gtable -> mapply
-Execution halted
-
-checking whether package ‘ggbio’ can be installed ... WARNING
-Found the following significant warnings:
-  Warning: subclass "ExonrankFilter" of class "BasicFilter" is not local and cannot be updated for new inheritance information; consider setClassUnion()
-  Warning: replacing previous import ‘ggplot2::Position’ by ‘BiocGenerics::Position’ when loading ‘ggbio’
-See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/ggbio.Rcheck/00install.out’ for details.
-
-checking for missing documentation entries ... WARNING
-Undocumented S4 methods:
-  generic '[' and siglist 'PlotList,numeric,missing,ANY'
-  generic '[' and siglist 'Tracks,numeric,missing,ANY'
-All user-level objects in a package (including S4 classes and methods)
-should have documentation entries.
-See chapter ‘Writing R documentation files’ in the ‘Writing R
-Extensions’ manual.
-
-checking DESCRIPTION meta-information ... NOTE
-Malformed Title field: should not end in a period.
-
-checking top-level files ... NOTE
-Non-standard file/directory found at top level:
-  ‘TODO.org’
-
-checking dependencies in R code ... NOTE
-Unexported objects imported by ':::' calls:
-  'S4Vectors:::top_prenv' 'ggplot2:::add_ggplot' 'ggplot2:::cunion'
-  'ggplot2:::rename_aes' 'ggplot2:::rescale01'
-  'ggplot2:::set_last_plot'
-  See the note in ?`:::` about the use of this operator.
-
-checking R code for possible problems ... NOTE
-autoplot,matrix: warning in scale_x_continuous(breaks = x, label =
-  x.lab, expand = c(0, 0)): partial argument match of 'label' to
-  'labels'
-autoplot,matrix: warning in scale_x_continuous(breaks = NULL, label =
-  NULL, expand = c(0, 0)): partial argument match of 'label' to
-  'labels'
-print,Ideogram: warning in scale_y_continuous(breaks = 5, label =
-  subchr): partial argument match of 'label' to 'labels'
-.combineNames: no visible binding for global variable
-... 53 lines ...
-  .fragLength .layout_circle.stats .x breaks coefs cytobands data eds
-  fe fl gieStain ideoCyto indexProbesProcessed midpoint mt name read se
-  stepping sts value variable x xend y y.text y2 yend yend2
-Consider adding
-  importFrom("utils", "data")
-to your NAMESPACE file.
-
-Found the following calls to data() loading into the global environment:
-File ‘ggbio/R/ideogram.R’:
-  data(ideoCyto, package = "biovizBase")
-See section ‘Good practice’ in ‘?data’.
-
-checking Rd line widths ... NOTE
-Rd file 'autoplot-method.Rd':
-  \usage lines wider than 90 characters:
-     autoplot(object, ..., type = c("heatmap", "link", "pcp", "boxplot", "scatterplot.matrix"), pheno.plot = FALSE,
-
-Rd file 'geom_arrowrect-method.Rd':
-  \examples lines wider than 100 characters:
-     ggplot(gr) + geom_arrowrect(gr, stat = "stepping", aes(y = value, group = pair), group.selfish = FALSE)
-
-Rd file 'plotSingleChrom.Rd':
-  \usage lines wider than 90 characters:
-     plotIdeogram(obj, subchr = NULL, zoom.region = NULL, which = NULL, xlab, ylab, main, xlabel =
-
-These lines will be truncated in the PDF manual.
-```
 
 ## MissingDataGUI (0.2-5)
 Maintainer: Xiaoyue Cheng <xycheng@unomaha.edu>
@@ -305,8 +206,6 @@ Bug reports: https://github.com/teradata-aster-field/toaster/issues
 ```
 checking package dependencies ... ERROR
 Package required but not available: ‘RODBC’
-
-Package suggested but not available for checking: ‘ggnetwork’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
