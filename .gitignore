@@ -17,5 +17,6 @@ vignettes/rd_files/
 .RData
 .lintr_cache
 revdep/checks\.rds
+revdep/lib
 _gh-pages
 ggduo_paper.txt
