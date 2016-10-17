@@ -1,58 +1,16 @@
 
 ## Comments
-### 2016-6-30
-Paraphrasing answer to having a >= 5Mb pkg: no.
 
-Found a way to reduce my vignettes.  Thank you for your patience!! Much appreciated!!
+### 2016-11-04
+Linux has a NOTE on mis-spelled words, it is a false positive.
 
-I'm including the updated R CMD checks in this section.
+All downstream authors were emailed on 2016-10-17. Have only been in contact with the authors of 'plotly'.
 
-* local OS X install (x86_64-apple-darwin13.4.0), R 3.3.1
-  * There were no ERRORs, WARNINGs or NOTEs.
-* travis-ci
-  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.3.1
-  * There were no ERRORs, WARNINGs or NOTEs.
-* win-builder (devel and release)
-  * There were no ERRORs, WARNINGs or NOTEs.
+Thank you for your time.
 
-Thank you!
+Best,
 Barret
 
-
-### 2016-6-29
-> Thanks, we see:
-> > Possibly mis-spelled words in DESCRIPTION:
-> >    geoms (25:43)
-> >    ggplot (5:21)
->
-> can you please write functions as foo() and packages/software single
-> quoted, please.
->
->
-> Size of tarball: 5972840 bytes
->
-> Can this be reduced?
->
-> Best,
-> Uwe Ligges
-
-Fixed the description issues.  (Spelled out geoms to geometric objects and I was missing the quotes for ggplot2 in the title. Thank you!)
-
-The size of the tarball is mainly attributed to (the pictures within) the vignettes.  This problem would still exist if I had a separate "docs/vignette" R package.  I'm still working with Di Cook and the other authors to come up with a feasible solution that everyone is satisfied with.  The next release should have this problem solved.  
-
-Will this be ok?
-
-Thank you!
-Barret
-
-
-### 2016-6-24
-All three environments have the same NOTE on package size.  Linux has a NOTE on mis-spelled words, it is a false positive.
-
-All downstream authors were not contacted as only new functions where added.  Only in contact with authors who requested minor updates.
-
-Thank you for your time,
-Barret
 
 #### Test environments and R CMD check results
 
@@ -99,76 +57,17 @@ Barret
 I have run R CMD check on downstream dependencies of GGally on my local machine.
 * Summary - https://github.com/ggobi/ggally/blob/master/revdep/README.md
 
-### Quick RevDep Table
-Checked DescribeDisplay    : 0 errors | 0 warnings | 0 notes
-Checked eechidna           : 0 errors | 0 warnings | 0 notes
-Checked freqparcoord       : 0 errors | 0 warnings | 0 notes
-Checked ggbio              : 1 error  | 2 warnings | 6 notes
-Checked ggmcmc             : 1 error  | 0 warnings | 0 notes
-Checked imageData          : 0 errors | 0 warnings | 0 notes
-Checked isomiRs            : 1 error  | 0 warnings | 0 notes
-Checked LANDD              : 0 errors | 0 warnings | 0 notes
-Checked MissingDataGUI     : 1 error  | 0 warnings | 0 notes
-Checked ParamHelpers       : 1 error  | 0 warnings | 0 notes
-Checked 10/22. Elapsed 00:15. Remaining ~00:18
-Checked plotly             : 0 errors | 0 warnings | 0 notes
-Checked PopGenReport       : 0 errors | 0 warnings | 0 notes
-Checked qualvar            : 0 errors | 0 warnings | 0 notes
-Checked robCompositions    : 0 errors | 0 warnings | 0 notes
-Checked robustbase         : 0 errors | 0 warnings | 0 notes
-Checked rwty               : 1 error  | 0 warnings | 0 notes
-Checked specmine           : 1 error  | 0 warnings | 0 notes
-Checked svdvis             : 0 errors | 0 warnings | 0 notes
-Checked TCGAbiolinks       : 1 error  | 0 warnings | 0 notes
-Checked toaster            : 0 errors | 0 warnings | 0 notes
-Checked 20/22. Elapsed 00:30. Remaining ~00:03
-Checked userfriendlyscience: 1 error  | 0 warnings | 0 notes
-Checked vdmR               : 0 errors | 0 warnings | 0 notes
-Saving check results to `revdep/check.rds` -------------------------------------
-Cleaning up --------------------------------------------------------------------
-* Failed to install dependencies for: isomiRs, rwty
-* Failed to install: MissingDataGUI, specmine, TCGAbiolinks, userfriendlyscience
-* ggbio: checking examples ... ERROR
-* ggmcmc: checking examples ... ERROR
-* ParamHelpers: checking tests ... ERROR
-
-
 ### RevDep Notes
 
-* Can install, but non-GGally error
-  * ggmcmc (1.0) - Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>  
-    * Failed with example(ggs_caterpillar). Issue not related to GGally
-  * ggbio (1.20.1) - Maintainer: Michael Lawrence <lawrence.michael@gene.com>  
-    * Can install, but there are all sorts of issues in the check that are not related to GGally
+* Failed to install dependencies for: MissingDataGUI, specmine, toaster, userfriendlyscience
 
-* Can not install
-  * isomiRs (1.0.2) - Maintainer: Lorena Pantano <lorena.pantano@gmail.com>
-    * Packages required but not available: ‘DiscriMiner’ ‘DESeq2’
-  * MissingDataGUI (0.2-2) - Maintainer: Xiaoyue Cheng <xycheng@iastate.edu>
-    * difficulty installing RGtk2. Can't find any solutions for El Capitan / my computer
-  * ParamHelpers (1.7) - Maintainer: Bernd Bischl <bernd_bischl@gmx.net>  
-    * failed unit tests. Not related to GGally
-  * rwty (1.0.1) - Maintainer: Dan Warren <dan.l.warren@gmail.com>
-    * Packages required but not available: ‘phangorn’
-  * specmine (1.0) - Maintainer: Christopher Costa <chrisbcl@hotmail.com>
-    * Trouble installing some BioConductor deps
-  * TCGAbiolinks (1.2.4) - Maintainer: Antonio Colaprico <antonio.colaprico@ulb.ac.be>,
-   Tiago Chedraoui Silva <tiagochst@usp.br>  
-    * Trouble installing some BioConductor deps
-  * userfriendlyscience (0.4-1) - Maintainer: Gjalt-Jorn Peters <gjalt-jorn@userfriendlyscience.com>
-    * Can't figure out why it will not install
+* In contact with author and have resolved issues.
+  * plotly: checking examples ... ERROR
 
-* No error (Works!)
-  * DescribeDisplay (0.2.5) - Maintainer: Di Cook <dicook@monash.edu>  
-  * eechidna (0.1) - Maintainer: Ben Marwick <benmarwick@gmail.com>
-  * freqparcoord (1.0.1) - Maintainer: Norm Matloff <normmatloff@gmail.com>
-  * imageData (0.1-21) - Maintainer: Chris Brien <Chris.Brien@unisa.edu.au>
-  * LANDD (1.0.0) - Maintainer: Shangzhao Qiu <qsz1328@gmail.com>
-  * plotly (3.6.0) - Maintainer: Carson Sievert <cpsievert1@gmail.com>  
-  * PopGenReport (2.2.2) - Maintainer: Bernd Gruber <bernd.gruber@canberra.edu.au>
-  * qualvar (0.1.0) - Maintainer: Joel Gombin <joel.gombin@gmail.com>
-  * robCompositions (2.0.0) - Maintainer: Matthias Templ <templ@tuwien.ac.at>
-  * robustbase (0.92-6) - Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
-  * svdvis (0.1) - Maintainer: Neo Christopher Chung <nchchung@gmail.com>
-  * toaster (0.5.1) - Maintainer: Gregory Kanevsky <gregory.kanevsky@teradata.com>  
-  * vdmR (0.2.2) - Maintainer: Tomokazu Fujino <fujino@fwu.ac.jp>
+* Does not appear to be a GGally issue.
+  * ParamHelpers: checking tests ... ERROR
+  * SHELF: checking re-building of vignette outputs ... WARNING
+
+* Does not appear to be a GGally issue. Seems like ggplot2 issue
+  * robustbase: checking re-building of vignette outputs ... WARNING
+  * vdmR: checking examples ... ERROR
