@@ -54,3 +54,5 @@ reverse_depends:
   # devtools::revdep_check_reset()
   devtools::revdep_check_save_summary()
   devtools::revdep_check_print_problems()
+reverse_depends_email:
+  devtools:::revdep_email(date = "Nov 4th alongside ggplot2's release", version = "1.3.0", author = "Barret", draft = TRUE, only_problems = FALSE)
