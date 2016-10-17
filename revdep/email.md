@@ -22,15 +22,14 @@ To get the development version of {{{my_package}}} so you can run the checks you
     ## if you need plotly to work with ggplot2
     devtools::install_github("ropensci/plotly")
 
-To see what's changed visit <https://github.com/{{{my_github}}}/blob/master/NEWS.md>.  To see a list all reverse dependency checks for {{{my_package}}} visit <https://github.com/{{{my_github}}}/blob/master/revdep/README.md>.
+To see what's changed visit <https://github.com/{{{my_github}}}/blob/master/NEWS.md>.  To see a list of all reverse dependency checks for {{{my_package}}} visit <https://github.com/{{{my_github}}}/blob/master/revdep/README.md>.
 
 {{/you_have_problems}}
-{{^you_have_problems}}It looks like everything is ok, so you don't need to take any action, but you might want to read the NEWS, <https://github.com/{{{my_github}}}/blob/master/NEWS.md>, to see what's changed.  To see a list all reverse dependency checks for {{{my_package}}} visit <https://github.com/{{{my_github}}}/blob/master/revdep/README.md>.
+{{^you_have_problems}}It looks like everything is ok, so you don't need to take any action, but you might want to read the NEWS, <https://github.com/{{{my_github}}}/blob/master/NEWS.md>, to see what's changed.  To see a list of all reverse dependency checks for {{{my_package}}} visit <https://github.com/{{{my_github}}}/blob/master/revdep/README.md>.
 
 {{/you_have_problems}}
 
 If you have any questions about this email, please feel free to respond directly.
 
-Regards,
-
+Best,
 {{{ me }}}
