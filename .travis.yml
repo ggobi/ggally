@@ -33,7 +33,7 @@ after_success:
   - Rscript -e 'if (nzchar(Sys.getenv("GITHUB_PAT"))) { covr::codecov() }'
   - CAN_PRINT=TRUE Rscript -e "packagedocs::deploy_travis(valid_branches = 'dev', push_branch = 'gh-pages-dev')"
   - CAN_PRINT=TRUE Rscript -e "packagedocs::deploy_travis(valid_branches = 'master')"
-  - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master')"
+  - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master', drat_repo = 'schloerke/drat')"
 
 
 notifications:
