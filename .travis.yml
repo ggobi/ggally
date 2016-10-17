@@ -30,6 +30,8 @@ matrix:
         - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master', drat_repo = 'schloerke/drat')"
 
     - r: 3.1
+      before_install:
+        - Rscript -e "install.packages('devtools'); library(devtools); devtools::install_github('hadley/devtools')"
     - r: devel
 
 
