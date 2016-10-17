@@ -1,4 +1,3 @@
-
 .DS_Store
 .Rhistory
 ..Rcheck
@@ -20,3 +19,4 @@ revdep/checks\.rds
 revdep/lib
 _gh-pages
 ggduo_paper.txt
+.httr-oauth
