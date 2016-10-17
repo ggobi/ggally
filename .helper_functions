@@ -45,23 +45,11 @@ knit_rd:
 build_win:
   devtools::build_win(version = c("R-release", "R-devel"))
 reverse_depends:
-  check_rev_deps = function(pkgType = "mac.binary", ignore = NULL, bioconductor = FALSE) {
-    curPkgType <- getOption("pkgType")
-    on.exit({options(pkgType = curPkgType)})
-    options(pkgType = pkgType)
-    #
-    # locally check the packages and install mac.binaries
-    res <- devtools::revdep_check(
-      type = pkgType,
-      libpath = .libPaths()[1],
-      bioconductor = bioconductor,
-      ignore = ignore
-    )
-    #
-    devtools::revdep_check_save_summary()
-    devtools::revdep_check_print_problems()
-    cat("\n\n")
-    devtools::revdep_maintainers()
-    invisible(res)
-  }
-  res <- check_rev_deps()
+  source("https://bioconductor.org/biocLite.R")
+  dir.create(file.path("revdep", "lib"), recursive = TRUE, showWarnings = FALSE)
+  options("Ncpus" = 4, "devtools.revdep.libpath" = normalizePath(file.path("revdep", "lib")))
+  devtools::revdep_check()
+  # devtools::revdep_check_resume()
+  # devtools::revdep_check_reset()
+  devtools::revdep_check_save_summary()
+  devtools::revdep_check_print_problems()
