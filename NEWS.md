@@ -1,4 +1,4 @@
-GGally 1.3.0
+GGally 1.2.9.9999
 -----------------
 
 `ggmatrix.print` - massive update!
