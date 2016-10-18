@@ -1,8 +1,8 @@
-Hi,
+Hi {{{your_package}}} Maintainer,
 
 This is an automated email to let you know about the upcoming release of {{{my_package}}} version {{{my_version}}}, which will be submitted to CRAN on {{{date}}}.
 
-To check for potential problems, I ran `R CMD check` on your package {{{your_package}}} (version {{{your_version}}}) with the development version of ggplot2 and plotly. I found {{{your_summary}}}.
+To check for potential problems, I ran `R CMD check` on your package {{{your_package}}} (version {{{your_version}}}) with the development version of ggplot2 and plotly on my personal machine. I found {{{your_summary}}}.
 
 {{#you_have_problems}}
 {{{your_results}}}
@@ -17,9 +17,11 @@ To check for potential problems, I ran `R CMD check` on your package {{{your_pac
 To get the development version of {{{my_package}}} so you can run the checks yourself, you can run:
 
     # install.packages("devtools")
-    ## installs development of ggplot2
+
+    ## installs ggplot2 as well
     devtools::install_github("{{my_github}}")
-    ## if you need plotly to work with ggplot2
+
+    ## and if you need plotly to work with ggplot2
     devtools::install_github("ropensci/plotly")
 
 To see what's changed visit <https://github.com/{{{my_github}}}/blob/master/NEWS.md>.  To see a list of all reverse dependency checks for {{{my_package}}} visit <https://github.com/{{{my_github}}}/blob/master/revdep/README.md>.
@@ -29,7 +31,7 @@ To see what's changed visit <https://github.com/{{{my_github}}}/blob/master/NEWS
 
 {{/you_have_problems}}
 
-If you have any questions about this email, please feel free to respond directly.
+If you have any questions, please feel free to respond directly to this email.
 
 Best,
 {{{ me }}}
