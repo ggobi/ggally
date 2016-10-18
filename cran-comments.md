@@ -4,7 +4,7 @@
 ### 2016-11-04
 Linux has a NOTE on mis-spelled words, it is a false positive.
 
-All downstream authors were emailed on 2016-10-17. Have only been in contact with the authors of 'plotly'.
+All revdep authors were emailed on 2016-10-17. Have only been in contact with the authors of 'plotly' about changes.
 
 Thank you for your time.
 
@@ -16,29 +16,19 @@ Barret
 
 * local OS X install (x86_64-apple-darwin13.4.0), R 3.3.0
   * There were no ERRORs or WARNINGs.
-  * There are two NOTEs.
+  * There is one NOTE.
     * checking CRAN incoming feasibility ... NOTE
     Maintainer: ‘Barret Schloerke <schloerke@gmail.com>’
-
-    Size of tarball: 5972829 bytes
-    * checking installed package size ... NOTE
-      installed size is 10.9Mb
-      sub-directories of 1Mb or more:
-        doc   9.7Mb
 * travis-ci
-  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.1.3
-  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R 3.3.0
-  * ubuntu 12.04 (on travis-ci, x86_64-pc-linux-gnu), R Under development (unstable) (2016-06-23 r70826)
-  * There were no ERRORs or WARNINGs.  
-  * There is one NOTE
-    * checking installed package size ... NOTE
-      installed size is 10.2Mb
-      sub-directories of 1Mb or more:
-        data   1.9Mb
-        doc    7.9Mb
+  * Platform: x86_64-pc-linux-gnu (64-bit)
+  * Running under: Ubuntu precise (12.04.5 LTS)
+  * R
+    * version 3.3.1 (2016-06-21)
+    * R Under development (unstable) (2016-10-17 r71530)
+  * There were no ERRORs, WARNINGs, or NOTEs.
 * win-builder (devel and release)
   * There were no ERRORs or WARNINGs.  
-  * There are two NOTEs.
+  * There are one NOTE.
     * checking CRAN incoming feasibility ... NOTE
       Maintainer: 'Barret Schloerke <schloerke@gmail.com>'
 
@@ -46,11 +36,6 @@ Barret
         geoms (25:43)
         ggplot (5:21)
         scatterplot (26:49)
-
-    * checking installed package size ... NOTE
-      installed size is 10.9Mb
-      sub-directories of 1Mb or more:
-        doc   9.7Mb
 
 
 ## Reverse dependencies
