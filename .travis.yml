@@ -31,8 +31,13 @@ matrix:
 
     - r: 3.1
       before_install:
+        - ls -lth
         - curl https://api.github.com/repos/hadley/devtools/zipball/master > devtools_tar
-        - Rscript -e "unzip('devtools_tar'); install.packages(dir()[which(grepl('hadley-devtools', dir()))], repos = NULL);"
+        - ls -lth
+        - Rscript -e "unzip('devtools_tar');"
+        - ls -lth
+        - Rscript -e " install.packages(dir()[which(grepl('hadley-devtools', dir()))], repos = NULL);"
+        - ls -lth
     - r: devel
 
 
