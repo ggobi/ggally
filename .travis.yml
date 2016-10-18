@@ -29,13 +29,7 @@ matrix:
         - CAN_PRINT=TRUE Rscript -e "packagedocs::deploy_travis(valid_branches = 'master')"
         - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master', drat_repo = 'schloerke/drat')"
 
-    - r: 3.1
-      before_install:
-        - Rscript -e "install.packages('devtools')"
-        - wget https://api.github.com/repos/hadley/devtools/zipball/master -O devtools_zip
-        - Rscript -e "unzip('devtools_zip');"
-        - Rscript -e " install.packages(dir()[which(grepl('hadley-devtools', dir()))], repos = NULL);"
-        - ls -lth
+    # - r: 3.1
     - r: devel
 
 
