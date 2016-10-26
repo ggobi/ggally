@@ -565,29 +565,6 @@ pm <- ggmatrix(
 pm
 ```
 
-## Custom Printing
-
-Since `r rdl(ggmatrix)` is not a "true" ggplot2 object, spacing between the plot axis labels and the matrix labels is not perfect.  There are a few `r rdl(print.ggmatrix)` parameters to help with this: `leftWidthProportion`, `bottomHeightProportion`, and `spacingProportion`.  Each parameter refers to the proportional size of 'left plot axis label area', 'bottom plot axis label area', and 'spacing between plots' relative to a single plotting area.  So, if a single plot is 2 inches wide and `spacingProportion = 0.03`, then the horizontal space between each plot will be 0.06 inches.
-
-```{r ggmatrix_customPrinting}
-data(presidential, package = "ggplot2")
-plotList <- list(
-  qplot(name, data = presidential, geom = "bar", fill = party) + ylim(c(0,6)) + coord_flip(),
-  qplot(party, data = presidential, geom = "bar", fill = party) + coord_flip()
-)
-pm <- ggmatrix(
-  plotList,
-  2, 1,
-  yAxisLabels = c("Presidents", "Party"),
-  xAxisLabels = c("Count"),
-  title = "President Term Length"
-)
-pm # default spacing
-# use print.ggmatrix parameters
-print(pm, leftWidthProportion = 0.12, spacingProportion = 0.05)
-```
-
-
 
 
 
