@@ -81,13 +81,15 @@ fix_column_values <- function(data, columns, columnLabels, columnsName, columnLa
     )
   }
 
-  if (length(columnLabels) != length(columns)) {
-    stop(
-      "The length of the '", columnLabelsName, "'",
-      " does not match the length of the '", columnsName, "' being used.",
-      " Labels: c('", paste(columnLabels, collapse = ", "), "')\n",
-      " Columns: c('", paste(columns, collapse = ", "), "')"
-    )
+  if (!is.null(columnLabels)) {
+    if (length(columnLabels) != length(columns)) {
+      stop(
+        "The length of the '", columnLabelsName, "'",
+        " does not match the length of the '", columnsName, "' being used.",
+        " Labels: c('", paste(columnLabels, collapse = ", "), "')\n",
+        " Columns: c('", paste(columns, collapse = ", "), "')"
+      )
+    }
   }
 
   colnamesUsed <- colnamesData[columns]
