@@ -41,19 +41,30 @@
 "+.gg" <- function(e1, e2) {
 
   if (is.ggmatrix(e1)) {
+    if (is.null(e1$gg)) {
+      e1$gg <- list()
+    }
+
     if (inherits(e2, "labels")) {
       label_names <- names(e2)
-      # if (!all(label_names %in% c("x", "y", "title"))) {
-      #   stop("'ggmatrix' does not know how to add any label other than c('x', 'y', 'title')")
-      # }
 
-      for (label_name in label_names) {
-        label_to <- switch(label_name,
-          x = "xlab",
-          y = "ylab",
-          label_name
-        )
-        e1[[label_to]] <- e2[[label_name]]
+      if ("x" %in% label_names) {
+        e1$xlab <- e2$x
+      }
+      if ("y" %in% label_names) {
+        e1$ylab <- e2$y
+      }
+      if ("title" %in% label_names) {
+        e1$title <- e2$title
+      }
+
+      non_ggmatrix_labels <- label_names[!label_names %in% c("x", "y", "title")]
+
+      if (length(non_ggmatrix_labels) > 0) {
+        if (is.null(e1$gg$labs)) {
+          e1$gg$labs <- structure(list(), class = "labels")
+        }
+        e1$gg$labs[non_ggmatrix_labels] <- e2[non_ggmatrix_labels]
       }
 
       return(e1)
@@ -63,22 +74,35 @@
       # can be displayed in error messages
       # e2name <- deparse(substitute(e2))
 
-      if (is.null(e1$gg)) {
-        e1$gg <- e2
+      if (is.null(e1$gg$theme)) {
+        e1$gg$theme <- e2
       } else {
         # calls ggplot2 add method and stores the result in gg
-        e1$gg <- e1$gg %+% e2
+        e1$gg$theme <- e1$gg$theme %+% e2
       }
       return(e1)
 
     } else {
-      stop("'ggmatrix' does not know how to add objects that do not have class 'theme'")
+      stop("'ggmatrix' does not know how to add objects that do not have class 'theme' or 'labels'")
     }
 
   } else {
     # calls ggplot2 add method
     return(e1 %+% e2)
   }
+}
+
+
+add_gg_info <- function(p, gg) {
+  if (!is.null(gg)) {
+    if(!is.null(gg$theme)) {
+      p <- p + gg$theme
+    }
+    if (!is.null(gg$labs)) {
+      p <- p + gg$labs
+    }
+  }
+  p
 }
 
 

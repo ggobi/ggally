@@ -51,9 +51,7 @@ ggmatrix_gtable <- function(
     labs(x = pm$xlab, y = pm$ylab) # remove both x and y titles
 
   # add all custom ggplot2 things
-  if (!is.null(pm$gg)) {
-    pm_fake <- pm_fake + pm$gg
-  }
+  pm_fake <- add_gg_info(pm_fake, pm$gg)
 
   # add the title or remove the location completely
   if (is.null(pm$title)) {

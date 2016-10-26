@@ -94,10 +94,7 @@ getPlot <- function(pm, i, j){
       stop(str_c("unknown plot object type.\n", firstNote, strObj))
     }
 
-    if (!is.null(pm$gg)) {
-      # adding custom gg
-      p <- p + pm$gg
-    }
+    p <- add_gg_info(p, pm$gg)
   }
 
   p
