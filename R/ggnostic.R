@@ -668,22 +668,21 @@ ggnostic <- function(
 #' Multiple Time Series
 #'
 #' GGally implementation of ts.plot. Wraps around the ggduo function and removes the column strips
-#' @param data,mapping,columnsX,columnsY,... supplied directly to \code{\link{ggduo}}
+#' @param ... supplied directly to \code{\link{ggduo}}
+#' @param columnLabelsX remove top strips for the X axis by default
 #' @return ggmatrix object
 #' @export
 #' @examples
 #' ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
-ggts <- function(data, mapping, columnsX, columnsY, ...) {
+ggts <- function(
+  ...,
+  columnLabelsX = NULL
+) {
   pm <- ggduo(
-    data = data,
-    mapping = mapping,
-    columnsX = columnsX, columnsY = columnsY,
-    ...
+    ...,
+    # remove the "time" strip
+    columnLabelsX = columnLabelsX
   )
-
-  # remove the "time" strip
-  pm$xAxisLabels <- NULL
-
   pm
 }
 
