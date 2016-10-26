@@ -250,36 +250,66 @@ While displaying multiple time series vertically over time, such as ``+ facet_gr
 ```{r ggduo-mtsa}
 library(ggplot2)
 
-econ <- as.data.frame(economics)
-econ$random.group <- sample(1:3, nrow(econ), replace = TRUE)
+data(pigs)
+pigs_dt <- pigs[-(2:3)] # remove year and quarter
+pigs_dt$profit_group <- as.numeric(pigs_dt$profit > mean(pigs_dt$profit))
 qplot(
-  date, value,
-  data = reshape::melt.data.frame(econ, "date"),
+  time, value,
+  data = reshape::melt.data.frame(pigs_dt, "time"),
   geom = c("smooth", "point")
 ) +
   facet_grid(variable ~ ., scales = "free_y")
 ```
 
-Instead, we may use ggduo to display the data.
+Instead, we may use `ggts` to display the data.  `ggts` changes the default behavior of ggduo of `columnLabelsX` to equal `NULL` and allows for mixed variable types.
 
 ```{r ggduo-mtsa-group}
-econ$random.group <- c("A", "B", "C")[econ$random.group]
-ggduo(econ, "date", 2:7)
+# make the profit group as a factor value
+profit_groups <- c(
+  "1" = "high",
+  "0" = "low"
+)
+pigs_dt$profit_group <- factor(
+  profit_groups[as.character(pigs_dt$profit_group)],
+  levels = unname(profit_groups),
+  ordered = TRUE
+)
+ggts(pigs_dt, "time", 2:7)
+# remove the binwidth warning
+pigs_types <- list(
+  comboHorizontal = wrap(ggally_facethist, binwidth = 1)
+)
+ggts(pigs_dt, "time", 2:7, types = pigs_types)
+# add color and legend
+pigs_mapping <- aes(color = profit_group)
+ggts(pigs_dt, pigs_mapping, "time", 2:7, types = pigs_types, legend = c(6,1))
 ```
 
-Since the labels do not fit well, we will adjust them.
+Produce more meaningful labels, add a legend, and remove profit group strips.
 
 ```{r ggduo-mtsa-pretty}
-pm <- ggduo(
-  econ, 1, 2:7,
-  columnLabelsX = "date",
-  columnLabelsY = c("personal consumption\nexpenditures (B)", "total\npopulation (K)", "personal savings\nrate %", "median duration of\nunemployment (week)", "number of\nunemployed (K)", "random\ngroup")
+pm <- ggts(
+  pigs_dt, pigs_mapping,
+  1, 2:7,
+  types = pigs_types,
+  legend = c(6,1),
+  columnLabelsY = c(
+    "number of\nfirst birth sows",
+    "sell price over\nfeed cost",
+    "sell count over\nheard size",
+    "meat head count",
+    "breading\nheard size",
+    "profit\ngroup"
+  ),
+  showStrips = FALSE
 ) +
+  labs(fill = "profit group") +
   theme(
-    axis.title.y = element_text(size = 8.5)
+    legend.position = "bottom",
+    strip.background = element_rect(
+      fill = "transparent", color = "grey80"
+    )
   )
-
-print(pm, leftWidthProportion = 0.08)
 ```
 
 
