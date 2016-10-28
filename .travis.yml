@@ -23,7 +23,6 @@ matrix:
       r_github_packages:
         - schloerke/travisDrat
       after_success:
-        - Rscript -e "devtools::install()" # install GGally, as it's removed after the script
         - Rscript -e 'covr::codecov()'
         - CAN_PRINT=TRUE Rscript -e "packagedocs::deploy_travis(valid_branches = 'dev', push_branch = 'gh-pages-dev')"
         - CAN_PRINT=TRUE Rscript -e "packagedocs::deploy_travis(valid_branches = 'master')"
