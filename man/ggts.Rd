@@ -4,12 +4,14 @@
 \alias{ggts}
 \title{Multiple Time Series}
 \usage{
-ggts(..., columnLabelsX = NULL)
+ggts(..., columnLabelsX = NULL, xlab = "time")
 }
 \arguments{
 \item{...}{supplied directly to \code{\link{ggduo}}}
 
 \item{columnLabelsX}{remove top strips for the X axis by default}
+
+\item{xlab}{defaults to "time"}
 }
 \value{
 ggmatrix object

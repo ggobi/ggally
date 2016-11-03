@@ -670,19 +670,25 @@ ggnostic <- function(
 #' GGally implementation of ts.plot. Wraps around the ggduo function and removes the column strips
 #' @param ... supplied directly to \code{\link{ggduo}}
 #' @param columnLabelsX remove top strips for the X axis by default
+#' @param xlab defaults to "time"
 #' @return ggmatrix object
 #' @export
 #' @examples
 #' ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
 ggts <- function(
   ...,
-  columnLabelsX = NULL
+  columnLabelsX = NULL,
+  xlab = "time"
 ) {
   pm <- ggduo(
     ...,
     # remove the "time" strip
-    columnLabelsX = columnLabelsX
+    columnLabelsX = columnLabelsX,
+    xlab = xlab
   )
+
+
+
   pm
 }
 
