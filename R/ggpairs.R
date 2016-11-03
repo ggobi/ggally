@@ -687,7 +687,9 @@ ggduo <- function(
 #'
 #' ## Facet Label Variations
 #' #  Default:
-#' df <- data.frame(x = rnorm(100), y = x + rnorm(100, 0, 0.1), c = sqrt(x^2 +  y^2))
+#' df_x <- rnorm(100)
+#' df_y <- df_x + rnorm(100, 0, 0.1)
+#' df <- data.frame(x = df_x, y = df_y, c = sqrt(df_x^2 + df_y^2))
 #' pm <- ggpairs(
 #'   df,
 #'   columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)")
