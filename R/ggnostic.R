@@ -562,7 +562,7 @@ ggnostic <- function(
   columnLabelsY = gsub("\\.", " ", gsub("^\\.", "", columnsY)),
   xlab = "explanatory variables",
   ylab = "diagnostics",
-  title = paste(deparse(model$call), collapse = "\n"),
+  title = paste(deparse(model$call, cutoff.width = 500L), collapse = "\n"),
   continuous = list(
     default = ggally_points,
     .fitted = ggally_points,
