@@ -11,11 +11,11 @@ expect_print <- function(x) {
 
 test_that("denstrip", {
   expect_message(
-    print(ggally_denstrip(tips, mapping = aes_string("sex", "tip"))),
+    suppressWarnings(print(ggally_denstrip(tips, mapping = aes_string("sex", "tip")))),
     "`stat_bin()` using `bins = 30`", fixed = TRUE
   )
   expect_message(
-    print(ggally_denstrip(tips, mapping = aes_string("tip", "sex"))),
+    suppressWarnings(print(ggally_denstrip(tips, mapping = aes_string("tip", "sex")))),
     "`stat_bin()` using `bins = 30`", fixed = TRUE
   )
 })
