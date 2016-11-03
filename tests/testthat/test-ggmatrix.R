@@ -24,6 +24,17 @@ test_that("stops", {
 
 })
 
+
+test_that("expression labels", {
+  chars <- c("col1", "col2")
+  exprs <- expression(alpha, beta)
+
+  expect_print(ggduo(tips, 1:2, 1:2, columnLabelsX = chars, columnLabelsY = exprs))
+  expect_print(ggduo(tips, 1:2, 1:2, columnLabelsX = exprs, columnLabelsY = chars))
+  expect_print(ggpairs(tips, 1:2, columnLabels = exprs))
+})
+
+
 test_that("byrow", {
   plotList <- list()
   for (i in 1:6) {
