@@ -7,9 +7,9 @@
 ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
   title = NULL, xlab = NULL, ylab = NULL, byrow = TRUE,
   showStrips = NULL, showAxisPlotLabels = TRUE,
-  showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE,
+  showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, labeller = NULL,
   xProportions = NULL, yProportions = NULL, data = NULL, gg = NULL,
-  legend = NULL, labeller = "label_value")
+  legend = NULL)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
@@ -26,6 +26,8 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 
 \item{showAxisPlotLabels, showXAxisPlotLabels, showYAxisPlotLabels}{booleans that determine if the plots axis labels are printed on the X (bottom) or Y (left) part of the plot matrix. If \code{showAxisPlotLabels} is set, both \code{showXAxisPlotLabels} and \code{showYAxisPlotLabels} will be set to the given value.}
 
+\item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
+
 \item{xProportions, yProportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, or \code{grid::\link[grid]{unit}} object with matching respective length}
 
 \item{data}{data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time}
@@ -33,8 +35,6 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 \item{gg}{ggplot2 theme objects to be applied to every plot}
 
 \item{legend}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
-
-\item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
 }
 \description{
 Make a generic matrix of ggplot2 plots.

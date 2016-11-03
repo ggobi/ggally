@@ -10,9 +10,9 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
   "facethist", discrete = "facetbar", na = "na"), diag = list(continuous =
   "densityDiag", discrete = "barDiag", na = "naDiag"), params = NULL, ...,
   xlab = NULL, ylab = NULL, axisLabels = c("show", "internal", "none"),
-  columnLabels = colnames(data[columns]), showStrips = NULL,
-  legend = NULL, cardinality_threshold = 15, legends = stop("deprecated"),
-  labeller = "label_value")
+  columnLabels = colnames(data[columns]), labeller = "label_value",
+  showStrips = NULL, legend = NULL, cardinality_threshold = 15,
+  legends = stop("deprecated"))
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -37,6 +37,8 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 
 \item{columnLabels}{label names to be displayed.  Defaults to names of columns being used.}
 
+\item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
+
 \item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
 \item{legend}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
@@ -44,8 +46,6 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 \item{cardinality_threshold}{maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15}
 
 \item{legends}{deprecated}
-
-\item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
 }
 \value{
 ggpair object that if called, will print
@@ -134,10 +134,19 @@ p_(pm)
 
 ## Facet Label Variations
 #  Default:
-df <- tibble::data_frame(x = rnorm(100), y = a + rnorm(100, 0, 0.1), c = sqrt(x^2 +  y^2))
-ggpairs(df, columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"))
+df <- data.frame(x = rnorm(100), y = x + rnorm(100, 0, 0.1), c = sqrt(x^2 +  y^2))
+pm <- ggpairs(
+  df,
+  columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)")
+)
+p_(pm)
 #  Parsed labels:
-ggpairs(df, columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"), labeller = "label_parsed")
+pm <- ggpairs(
+  df,
+  columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"),
+  labeller = "label_parsed"
+)
+p_(pm)
 
 ## Plot Insertion Example
 custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")

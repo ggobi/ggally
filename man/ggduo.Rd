@@ -9,9 +9,9 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
   "smooth_loess", comboVertical = "box_no_facet", comboHorizontal = "facethist",
   discrete = "ratio"), axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
-  columnLabelsY = colnames(data[columnsY]), xlab = NULL, ylab = NULL,
-  showStrips = NULL, legend = NULL, cardinality_threshold = 15,
-  legends = stop("deprecated"))
+  columnLabelsY = colnames(data[columnsY]), labeller = "label_value",
+  xlab = NULL, ylab = NULL, showStrips = NULL, legend = NULL,
+  cardinality_threshold = 15, legends = stop("deprecated"))
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -27,6 +27,8 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 \item{axisLabels}{either "show" to display axisLabels or "none" for no axis labels}
 
 \item{columnLabelsX, columnLabelsY}{label names to be displayed.  Defaults to names of columns being used.}
+
+\item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
 
 \item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
