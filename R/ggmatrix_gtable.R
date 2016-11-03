@@ -35,6 +35,8 @@ ggmatrix_gtable <- function(
     # pb$tick(tokens = list(plot_i = 1, plot_j = 1))
   }
 
+  labeller <-  pm$labeller
+  if (is.null(labeller)) labeller <-  'label_value'
 
   # make a fake facet grid to fill in with proper plot panels
   fake_data <- expand.grid(
@@ -47,7 +49,7 @@ ggmatrix_gtable <- function(
   # make the smallest plot possible so the guts may be replaced
   pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
     geom_point() +
-    facet_grid(Var2 ~ Var1) + # make the 'fake' strips for x and y titles
+    facet_grid(Var2 ~ Var1, labeller = labeller) + # make the 'fake' strips for x and y titles
     labs(x = pm$xlab, y = pm$ylab) # remove both x and y titles
 
   # add all custom ggplot2 things

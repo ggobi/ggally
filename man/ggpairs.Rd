@@ -11,7 +11,8 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
   "densityDiag", discrete = "barDiag", na = "naDiag"), params = NULL, ...,
   xlab = NULL, ylab = NULL, axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]), showStrips = NULL,
-  legend = NULL, cardinality_threshold = 15, legends = stop("deprecated"))
+  legend = NULL, cardinality_threshold = 15, legends = stop("deprecated"),
+  labeller = "label_value")
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -43,6 +44,8 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 \item{cardinality_threshold}{maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15}
 
 \item{legends}{deprecated}
+
+\item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
 }
 \value{
 ggpair object that if called, will print
@@ -128,6 +131,13 @@ p_(pm)
 # Only Variable Labels on the outside (no axis labels)
 pm <- ggpairs(tips[, 1:3], axisLabels="none")
 p_(pm)
+
+## Facet Label Variations
+#  Default:
+df <- tibble::data_frame(x = rnorm(100), y = a + rnorm(100, 0, 0.1), c = sqrt(x^2 +  y^2))
+ggpairs(df, columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"))
+#  Parsed labels:
+ggpairs(df, columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"), labeller = "label_parsed")
 
 ## Plot Insertion Example
 custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")

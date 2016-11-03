@@ -16,6 +16,7 @@
 #' @param byrow boolean that determines whether the plots should be ordered by row or by column
 #' @param data data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time
 #' @param gg ggplot2 theme objects to be applied to every plot
+#' @param labeller labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.
 #' @template ggmatrix-legend-param
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -65,7 +66,8 @@ ggmatrix <- function(
   yProportions = NULL,
   data = NULL,
   gg = NULL,
-  legend = NULL
+  legend = NULL,
+  labeller = 'label_value'
 ) {
 
   if (!is.list(plots)) {
@@ -93,6 +95,7 @@ ggmatrix <- function(
     xProportions = xProportions,
     yProportions = yProportions,
     legend = legend,
+    labeller = labeller,
     gg = gg,
     nrow = nrow,
     ncol = ncol,

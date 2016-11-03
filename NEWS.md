@@ -1,6 +1,10 @@
 GGally 1.2.9.9999
 -----------------
 
+`ggmatrix` and `ggpairs` - allow custom labellers for facet labels.
+
+* Allow `labeller = "label_parsed"` to label pairs plots with plotmath expressions.
+
 `ggmatrix.print` - massive update!
 
 * Now prints with a ggplot2 facet'ed structure
