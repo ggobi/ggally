@@ -95,7 +95,7 @@
 
 add_gg_info <- function(p, gg) {
   if (!is.null(gg)) {
-    if(!is.null(gg$theme)) {
+    if (!is.null(gg$theme)) {
       p <- p + gg$theme
     }
     if (!is.null(gg$labs)) {
