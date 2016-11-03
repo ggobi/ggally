@@ -43,7 +43,7 @@ ggmatrix_gtable <- function(
       as.character(seq_len(length_out))
     } else if (is.expression(labels)) {
       # expressions supplied. must be paired with ggplot2::label_parsed
-      unlist(lapply(as.list(labels), as.character))
+      unlist(lapply(as.list(labels), deparse, width.cutoff = 500L))
     } else {
       labels
     }

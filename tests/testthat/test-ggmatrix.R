@@ -27,7 +27,7 @@ test_that("stops", {
 
 test_that("expression labels", {
   chars <- c("col1", "col2")
-  exprs <- expression(alpha, beta)
+  exprs <- expression(alpha[0], gamma[x + y^z])
 
   expect_print(ggduo(tips, 1:2, 1:2, columnLabelsX = chars, columnLabelsY = exprs))
   expect_print(ggduo(tips, 1:2, 1:2, columnLabelsX = exprs, columnLabelsY = chars))
