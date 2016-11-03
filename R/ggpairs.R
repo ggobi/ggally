@@ -687,10 +687,19 @@ ggduo <- function(
 #'
 #' ## Facet Label Variations
 #' #  Default:
-#' df <- tibble::data_frame(x = rnorm(100), y = x + rnorm(100, 0, 0.1), c = sqrt(x^2 +  y^2))
-#' ggpairs(df, columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"))
+#' df <- data.frame(x = rnorm(100), y = x + rnorm(100, 0, 0.1), c = sqrt(x^2 +  y^2))
+#' pm <- ggpairs(
+#'   df,
+#'   columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)")
+#' )
+#' p_(pm)
 #' #  Parsed labels:
-#' ggpairs(df, columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"), labeller = "label_parsed")
+#' pm <- ggpairs(
+#'   df,
+#'   columnLabels = c("alpha[foo]", "alpha[bar]", "sqrt(alpha[foo]^2 + alpha[bar]^2)"),
+#'   labeller = "label_parsed"
+#' )
+#' p_(pm)
 #'
 #' ## Plot Insertion Example
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
