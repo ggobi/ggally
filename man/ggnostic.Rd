@@ -8,7 +8,7 @@ ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
   ".sigma", ".hat", ".cooksd"), columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\\\.", " ", gsub("^\\\\.", "", columnsY)),
   xlab = "explanatory variables", ylab = "diagnostics",
-  title = paste(deparse(model$call, cutoff.width = 500L), collapse = "\\n"),
+  title = paste(deparse(model$call, width.cutoff = 500L), collapse = "\\n"),
   continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit
   = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
   ggally_nostic_hat, .sigma = ggally_nostic_sigma, .cooksd =
