@@ -207,6 +207,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param types see Details
 #' @param axisLabels either "show" to display axisLabels or "none" for no axis labels
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
+#' @template ggmatrix-labeller-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
@@ -445,6 +446,7 @@ ggduo <- function(
   axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
+  labeller = "label_value",
   xlab = NULL,
   ylab = NULL,
   showStrips = NULL,
@@ -544,6 +546,7 @@ ggduo <- function(
     ncol = length(columnsX),
     xAxisLabels = columnLabelsX,
     yAxisLabels = columnLabelsY,
+    labeller = labeller,
     showStrips = showStrips,
     showXAxisPlotLabels = identical(axisLabels, "show"),
     showYAxisPlotLabels = identical(axisLabels, "show"),
@@ -614,11 +617,11 @@ ggduo <- function(
 #' @param ... deprecated. Please use \code{mapping}
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
+#' @template ggmatrix-labeller-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @param legends deprecated
-#' @param labeller labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.
 #' @keywords hplot
 #' @import ggplot2
 #' @references John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
@@ -727,11 +730,11 @@ ggpairs <- function(
   ylab = NULL,
   axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]),
+  labeller = "label_value",
   showStrips = NULL,
   legend = NULL,
   cardinality_threshold = 15,
-  legends = stop("deprecated"),
-  labeller = 'label_value'
+  legends = stop("deprecated")
 ){
 
   warn_deprecated(!missing(legends), "legends")
@@ -818,6 +821,7 @@ ggpairs <- function(
     ncol = length(columns),
     xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
     yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    labeller = labeller,
     showStrips = showStrips,
     showXAxisPlotLabels = identical(axisLabels, "show"),
     showYAxisPlotLabels = identical(axisLabels, "show"),
@@ -826,8 +830,7 @@ ggpairs <- function(
     ylab = ylab,
     data = data,
     gg = NULL,
-    legend = legend,
-    labeller = labeller
+    legend = legend
   )
 
   plotMatrix

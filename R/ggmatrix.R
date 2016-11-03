@@ -12,11 +12,11 @@
 #' @param title,xlab,ylab title, x label, and y label for the graph. Set to \code{NULL} to not be displayed
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @param showAxisPlotLabels,showXAxisPlotLabels,showYAxisPlotLabels booleans that determine if the plots axis labels are printed on the X (bottom) or Y (left) part of the plot matrix. If \code{showAxisPlotLabels} is set, both \code{showXAxisPlotLabels} and \code{showYAxisPlotLabels} will be set to the given value.
+#' @template ggmatrix-labeller-param
 #' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, or \code{grid::\link[grid]{unit}} object with matching respective length
 #' @param byrow boolean that determines whether the plots should be ordered by row or by column
 #' @param data data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time
 #' @param gg ggplot2 theme objects to be applied to every plot
-#' @param labeller labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.
 #' @template ggmatrix-legend-param
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -62,12 +62,12 @@ ggmatrix <- function(
   showAxisPlotLabels = TRUE,
   showXAxisPlotLabels = TRUE,
   showYAxisPlotLabels = TRUE,
+  labeller = NULL,
   xProportions = NULL,
   yProportions = NULL,
   data = NULL,
   gg = NULL,
-  legend = NULL,
-  labeller = 'label_value'
+  legend = NULL
 ) {
 
   if (!is.list(plots)) {
@@ -92,10 +92,10 @@ ggmatrix <- function(
     yAxisLabels = yAxisLabels,
     showXAxisPlotLabels = showXAxisPlotLabels,
     showYAxisPlotLabels = showYAxisPlotLabels,
+    labeller = labeller,
     xProportions = xProportions,
     yProportions = yProportions,
     legend = legend,
-    labeller = labeller,
     gg = gg,
     nrow = nrow,
     ncol = ncol,
