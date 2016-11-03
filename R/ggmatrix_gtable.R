@@ -35,43 +35,27 @@ ggmatrix_gtable <- function(
     # pb$tick(tokens = list(plot_i = 1, plot_j = 1))
   }
 
-  labeller <-  pm$labeller
-  if (is.null(labeller)) labeller <-  'label_value'
-
   # make a fake facet grid to fill in with proper plot panels
-  get_labels <- function(labels, length_out) {
-    if (is.null(labels)) {
-      # no labels supplied
-      as.character(seq_len(length_out))
-    } else if (is.expression(labels)) {
-      # expressions supplied. must be paired with ggplot2::label_parsed
-      unlist(lapply(as.list(labels), deparse, width.cutoff = 500L))
-    } else {
-      labels
+  get_labels <- function(labels, length_out, name) {
+    if (is.expression(labels)) {
+      stop("'", name, "' can only be a character vector or NULL")
     }
+    ifnull(labels, as.character(seq_len(length_out)))
   }
   fake_data <- expand.grid(
-    Var1 = get_labels(pm$xAxisLabels, pm$ncol),
-    Var2 = get_labels(pm$yAxisLabels, pm$nrow)
+    Var1 = get_labels(pm$xAxisLabels, pm$ncol, "xAxisLabels"),
+    Var2 = get_labels(pm$yAxisLabels, pm$nrow, "yAxisLabels")
   )
   fake_data$x <- 1
   fake_data$y <- 1
 
-  if (
-    (is.expression(pm$xAxisLabels) || is.expression(pm$yAxisLabels))
-  ) {
-    # works with expressions
-    labeller <- ggplot2::label_parsed
-  } else {
-    # works with raw characters
-    labeller <- ggplot2::label_value
-  }
-
   # make the smallest plot possible so the guts may be replaced
   pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
     geom_point() +
-    facet_grid(Var2 ~ Var1, labeller = labeller) + # make the 'fake' strips for x and y titles
-    labs(x = pm$xlab, y = pm$ylab) # remove both x and y titles
+    # make the 'fake' strips for x and y titles
+    facet_grid(Var2 ~ Var1, labeller = ifnull(pm$labeller, "label_value")) +
+    # remove both x and y titles
+    labs(x = pm$xlab, y = pm$ylab)
 
   # add all custom ggplot2 things
   pm_fake <- add_gg_info(pm_fake, pm$gg)
