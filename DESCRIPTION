@@ -49,13 +49,11 @@ Suggests:
     scales (>= 0.4.0),
     sna (>= 2.3-2),
     survival,
-    packagedocs,
-    knitr,
+    packagedocs (>= 0.4.0),
     rmarkdown,
     roxygen2,
     testthat
 Remotes:
-  hafen/packagedocs,
   hadley/ggplot2
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
