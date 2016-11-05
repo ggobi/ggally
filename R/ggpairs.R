@@ -752,7 +752,14 @@ ggpairs <- function(
   warn_if_args_exist(list(...))
   stop_if_params_exist(params)
 
+  isSD <- inherits(data, "SharedData")
+
   data <- fix_data(data)
+
+  # pass plotly's "crosstalk key" to ggplot_build(), but don't plot it
+  if (isSD) {
+    columns <- setdiff(columns, which(names(data) == ".crossTalkKey"))
+  }
 
   if (is.numeric(mapping) & missing(columns)) {
       columns <- mapping
