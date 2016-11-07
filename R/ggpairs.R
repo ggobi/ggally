@@ -31,21 +31,54 @@
 #     barDiag
 #     blankDiag
 
+crosstalk_key <- function() {
+  ".crossTalkKey"
+}
+
+fortify_SharedData <- function(model, data, ...) {
+  key <- model$key()
+  set <- model$groupName()
+  data <- model$origData()
+  # need a consistent name so we know how to access it in ggplotly()
+  data[[crosstalk_key()]] <- key
+  structure(data, set = set)
+}
 
 fix_data <- function(data) {
+
+  if (inherits(data, "SharedData")) {
+    data <- fortify_SharedData(data)
+  }
+
   data <- fortify(data)
   data <- as.data.frame(data)
+
   for (i in 1:dim(data)[2] ) {
     if (is.character(data[[i]])) {
       data[[i]] <- as.factor(data[[i]])
     }
   }
+
   data
 }
 
 
-fix_column_values <- function(data, columns, columnLabels, columnsName, columnLabelsName) {
+fix_column_values <- function(
+  data,
+  columns,
+  columnLabels,
+  columnsName,
+  columnLabelsName,
+  isSharedData = FALSE
+) {
+
   colnamesData <- colnames(data)
+
+  # pass plotly's "crosstalk key" to ggplot_build(), but don't plot it
+  if (isTRUE(isSharedData)) {
+    colnamesData <- setdiff(colnamesData, which(colnamesData == crosstalk_key()))
+  }
+
   if (is.character(columns)) {
     colNumValues <- lapply(columns, function(colName){
       which(colnamesData == colName)
@@ -457,6 +490,7 @@ ggduo <- function(
 
   warn_deprecated(!missing(legends), "legends")
 
+  isSharedData <- inherits(data, "SharedData")
   data <- fix_data(data)
 
   # fix args
@@ -471,8 +505,12 @@ ggduo <- function(
 
   stop_if_bad_mapping(mapping)
 
-  columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
-  columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
+  columnsX <- fix_column_values(
+    data, columnsX, columnLabelsX, "columnsX", "columnLabelsX", isSharedData
+  )
+  columnsY <- fix_column_values(
+    data, columnsY, columnLabelsY, "columnsY", "columnLabelsY", isSharedData
+  )
 
   stop_if_high_cardinality(data, columnsX, cardinality_threshold)
   stop_if_high_cardinality(data, columnsY, cardinality_threshold)
@@ -752,14 +790,9 @@ ggpairs <- function(
   warn_if_args_exist(list(...))
   stop_if_params_exist(params)
 
-  isSD <- inherits(data, "SharedData")
+  isSharedData <- inherits(data, "SharedData")
 
   data <- fix_data(data)
-
-  # pass plotly's "crosstalk key" to ggplot_build(), but don't plot it
-  if (isSD) {
-    columns <- setdiff(columns, which(names(data) == ".crossTalkKey"))
-  }
 
   if (is.numeric(mapping) & missing(columns)) {
       columns <- mapping
@@ -767,7 +800,7 @@ ggpairs <- function(
   }
   stop_if_bad_mapping(mapping)
 
-  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
+  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels", isSharedData)
 
   stop_if_high_cardinality(data, columns, cardinality_threshold)
 
