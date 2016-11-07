@@ -61,6 +61,12 @@ fix_data <- function(data) {
 
   data
 }
+fix_data_slim <- function(data, isSharedData) {
+  if (isSharedData) {
+    data[[crosstalk_key()]] <- NULL
+  }
+  data
+}
 
 
 fix_column_values <- function(
@@ -73,11 +79,6 @@ fix_column_values <- function(
 ) {
 
   colnamesData <- colnames(data)
-
-  # pass plotly's "crosstalk key" to ggplot_build(), but don't plot it
-  if (isTRUE(isSharedData)) {
-    colnamesData <- setdiff(colnamesData, which(colnamesData == crosstalk_key()))
-  }
 
   if (is.character(columns)) {
     colNumValues <- lapply(columns, function(colName){
@@ -491,7 +492,8 @@ ggduo <- function(
   warn_deprecated(!missing(legends), "legends")
 
   isSharedData <- inherits(data, "SharedData")
-  data <- fix_data(data)
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
 
   # fix args
   if (
@@ -505,12 +507,8 @@ ggduo <- function(
 
   stop_if_bad_mapping(mapping)
 
-  columnsX <- fix_column_values(
-    data, columnsX, columnLabelsX, "columnsX", "columnLabelsX", isSharedData
-  )
-  columnsY <- fix_column_values(
-    data, columnsY, columnLabelsY, "columnsY", "columnLabelsY", isSharedData
-  )
+  columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
+  columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
 
   stop_if_high_cardinality(data, columnsX, cardinality_threshold)
   stop_if_high_cardinality(data, columnsY, cardinality_threshold)
@@ -591,7 +589,7 @@ ggduo <- function(
     title = title,
     xlab = xlab,
     ylab = ylab,
-    data = data,
+    data = data_,
     gg = NULL,
     legend = legend
   )
@@ -792,7 +790,8 @@ ggpairs <- function(
 
   isSharedData <- inherits(data, "SharedData")
 
-  data <- fix_data(data)
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
 
   if (is.numeric(mapping) & missing(columns)) {
       columns <- mapping
@@ -800,7 +799,7 @@ ggpairs <- function(
   }
   stop_if_bad_mapping(mapping)
 
-  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels", isSharedData)
+  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
 
   stop_if_high_cardinality(data, columns, cardinality_threshold)
 
@@ -879,7 +878,7 @@ ggpairs <- function(
     title = title,
     xlab = xlab,
     ylab = ylab,
-    data = data,
+    data = data_,
     gg = NULL,
     legend = legend
   )
