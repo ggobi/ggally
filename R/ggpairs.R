@@ -40,6 +40,7 @@ fortify_SharedData <- function(model, data, ...) {
   set <- model$groupName()
   data <- model$origData()
   # need a consistent name so we know how to access it in ggplotly()
+  # MUST be added last. can NOT be done first
   data[[crosstalk_key()]] <- key
   structure(data, set = set)
 }
