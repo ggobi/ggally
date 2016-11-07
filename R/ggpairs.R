@@ -31,21 +31,56 @@
 #     barDiag
 #     blankDiag
 
+crosstalk_key <- function() {
+  ".crossTalkKey"
+}
+
+fortify_SharedData <- function(model, data, ...) {
+  key <- model$key()
+  set <- model$groupName()
+  data <- model$origData()
+  # need a consistent name so we know how to access it in ggplotly()
+  # MUST be added last. can NOT be done first
+  data[[crosstalk_key()]] <- key
+  structure(data, set = set)
+}
 
 fix_data <- function(data) {
+
+  if (inherits(data, "SharedData")) {
+    data <- fortify_SharedData(data)
+  }
+
   data <- fortify(data)
   data <- as.data.frame(data)
+
   for (i in 1:dim(data)[2] ) {
     if (is.character(data[[i]])) {
       data[[i]] <- as.factor(data[[i]])
     }
   }
+
+  data
+}
+fix_data_slim <- function(data, isSharedData) {
+  if (isSharedData) {
+    data[[crosstalk_key()]] <- NULL
+  }
   data
 }
 
 
-fix_column_values <- function(data, columns, columnLabels, columnsName, columnLabelsName) {
+fix_column_values <- function(
+  data,
+  columns,
+  columnLabels,
+  columnsName,
+  columnLabelsName,
+  isSharedData = FALSE
+) {
+
   colnamesData <- colnames(data)
+
   if (is.character(columns)) {
     colNumValues <- lapply(columns, function(colName){
       which(colnamesData == colName)
@@ -457,7 +492,9 @@ ggduo <- function(
 
   warn_deprecated(!missing(legends), "legends")
 
-  data <- fix_data(data)
+  isSharedData <- inherits(data, "SharedData")
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
 
   # fix args
   if (
@@ -553,7 +590,7 @@ ggduo <- function(
     title = title,
     xlab = xlab,
     ylab = ylab,
-    data = data,
+    data = data_,
     gg = NULL,
     legend = legend
   )
@@ -752,9 +789,15 @@ ggpairs <- function(
   warn_if_args_exist(list(...))
   stop_if_params_exist(params)
 
-  data <- fix_data(data)
+  isSharedData <- inherits(data, "SharedData")
 
-  if (is.numeric(mapping) & missing(columns)) {
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
+
+  if (
+    !missing(mapping) & !is.list(mapping) &
+    missing(columns)
+  ) {
       columns <- mapping
       mapping <- NULL
   }
@@ -839,7 +882,7 @@ ggpairs <- function(
     title = title,
     xlab = xlab,
     ylab = ylab,
-    data = data,
+    data = data_,
     gg = NULL,
     legend = legend
   )
