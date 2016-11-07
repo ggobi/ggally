@@ -794,7 +794,10 @@ ggpairs <- function(
   data_ <- fix_data(data)
   data <- fix_data_slim(data_, isSharedData)
 
-  if (is.numeric(mapping) & missing(columns)) {
+  if (
+    !missing(mapping) & !is.list(mapping) &
+    missing(columns)
+  ) {
       columns <- mapping
       mapping <- NULL
   }
