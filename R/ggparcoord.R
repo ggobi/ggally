@@ -491,11 +491,18 @@ ggparcoord <- function(
 
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
-    d.sum <- ddply(data.m, .(variable), summarize,
+    d.sum <- ddply(data.m, c("variable"), summarize,
       min = min(value),
       max = max(value))
-    p <- p + geom_linerange(data = d.sum, size = I(10), col = shadeBox,
-      mapping = aes(y = NULL, ymin = min, ymax = max, group = variable))
+    p <- p + geom_linerange(
+        data = d.sum, size = I(10), col = shadeBox,
+        inherit.aes = FALSE,
+        mapping = aes_string(
+          ymin = "min",
+          ymax = "max",
+          group = "variable"
+        )
+      )
   }
 
   if (boxplot) {
