@@ -48,8 +48,12 @@ reverse_depends:
   if (packageVersion("devtools") <= "1.12.0") devtools::install_github("hadley/devtools")
   source("https://bioconductor.org/biocLite.R")
   dir.create(file.path("revdep", "lib"), recursive = TRUE, showWarnings = FALSE)
-  options("Ncpus" = 4, "devtools.revdep.libpath" = normalizePath(file.path("revdep", "lib")))
-  devtools::revdep_check()
+  options(
+    "Ncpus" = 4,
+    "devtools.revdep.libpath" = normalizePath(file.path("revdep", "lib")),
+    pkgType = "mac.binary"
+  )
+  devtools::revdep_check(bioconductor=TRUE)
   # devtools::revdep_check_resume()
   # devtools::revdep_check_reset()
   devtools::revdep_check_save_summary()
