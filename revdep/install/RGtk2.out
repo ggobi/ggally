@@ -1,9 +1,0 @@
-* installing *source* package ‘RGtk2’ ...
-** package ‘RGtk2’ successfully unpacked and MD5 sums checked
-checking for pkg-config... /usr/local/bin/pkg-config
-checking pkg-config is at least version 0.9.0... yes
-checking for INTROSPECTION... no
-checking for GTK... no
-configure: error: GTK version 2.8.0 required
-ERROR: configuration failed for package ‘RGtk2’
-* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/lib/RGtk2’

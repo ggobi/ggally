@@ -1,6 +1,0 @@
-* installing *source* package ‘gsl’ ...
-** package ‘gsl’ successfully unpacked and MD5 sums checked
-checking for gsl-config... no
-configure: error: gsl-config not found, is GSL installed?
-ERROR: configuration failed for package ‘gsl’
-* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/lib/gsl’
