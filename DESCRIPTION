@@ -8,7 +8,7 @@ LazyData: true
 URL: https://ggobi.github.io/ggally, https://github.com/ggobi/ggally
 BugReports: https://github.com/ggobi/ggally/issues
 Authors@R: c(
-    person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs, ggduo, and ggally_*.  contributor for all functions."),
+    person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs, ggduo, ggnostic, ggts, ggfacet, and ggally_*.  Contributor for all functions."),
     person("Jason", "Crowley", role = "aut", email = "crowley.jason.s@gmail.com", comment = "ggparcoord"),
     person("Di", "Cook", role = c("aut", "ths"), email = "dicook@monash.edu", comment = "ggscatmat, gglyph"),
     person("Heike", "Hofmann", role = "ths", email = "hofmann@iastate.edu"),
