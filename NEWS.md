@@ -29,6 +29,13 @@ GGally 1.2.9.9999
 * interface is very similar to `ggduo` and `ggpairs`
 
 
+`fn_switch` - New function!
+
+* Provide many functions in a list but only call one function at run time according to a mapping value
+* Useful for `ggnostic` for different behavior depending on the y variable
+* Allows for a 'default' value for the default switch case
+
+
 `ggmatrix` - allow custom labellers for facet labels
 
 * Added labeller parameter which is supplied to `ggplot2::facet_grid()`

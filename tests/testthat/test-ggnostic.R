@@ -5,6 +5,49 @@ expect_print <- function(p) {
 }
 
 
+test_that("fn_switch", {
+  fn1 <- function(data, mapping, ...) {
+    return(1)
+  }
+  fn2 <- function(data, mapping, ...) {
+    return(2)
+  }
+  fn3 <- function(data, mapping, ...) {
+    return(3)
+  }
+  fn5 <- function(data, mapping, ...) {
+    return(5)
+  }
+
+  fn <- fn_switch(list(A = fn1, B = fn2, C = fn3), "value")
+
+  dummy_dt <- data.frame(A = rnorm(100), B = rnorm(100), C = rnorm(100))
+
+  chars <- c("A", "B", "C")
+  for (i in 1:3) {
+    mapping <- ggplot2::aes_string(value = chars[i])
+    expect_equal(fn(dummy_dt, mapping), i)
+  }
+
+
+  fn <- fn_switch(list(A = fn1, default = fn5), "value")
+  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "A")), 1)
+  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "B")), 5)
+  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "C")), 5)
+
+  fn <- fn_switch(list(A = fn1), "value")
+  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "A")), 1)
+  expect_error(fn(dummy_dt, ggplot2::aes_string(value = "B")), "function could not be found")
+
+})
+
+test_that("model_beta_label", {
+  mod <- lm(mpg ~ wt + qsec + am, mtcars)
+
+  expect_equal(model_beta_label(mod), c("wt***", "qsec***", "am*"))
+  expect_equal(model_beta_label(mod, lmStars = FALSE), c("wt", "qsec", "am"))
+})
+
 test_that("ggnostic mtcars", {
 
   mtc <- mtcars;

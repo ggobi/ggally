@@ -19,6 +19,7 @@
 #' broom::augment a model and add broom::glance and broom::tidy output as attributes. X and Y variables are also added.
 #'
 #' @param model model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}
+#' @param lmStars boolean that determines if stars are added to labels
 #' @return broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
 #' @export
 #' @examples
@@ -26,7 +27,7 @@
 #' model <- stats::lm(mpg ~ wt + qsec + am, data = mtcars)
 #' broomified_model <- broomify(model)
 #' str(broomified_model)
-broomify <- function(model) {
+broomify <- function(model, lmStars = TRUE) {
 
   if (inherits(model, "broomify")) {
     return(model)
@@ -41,7 +42,9 @@ broomify <- function(model) {
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
   attr(broom_augment_rows, "var_x") <- model_beta_variables(data = broom_augment_rows)
   attr(broom_augment_rows, "var_y") <- model_response_variables(data = broom_augment_rows)
-  attr(broom_augment_rows, "var_x_label") <- model_beta_label(model, data = broom_augment_rows)
+  attr(broom_augment_rows, "var_x_label") <- model_beta_label(
+    model, data = broom_augment_rows, lmStars
+  )
 
   class(broom_augment_rows) <- c(class(broom_augment_rows), "broomify")
 
@@ -55,10 +58,11 @@ model_variables <- function(model, data = broom::augment(model)) {
 }
 #' Model term names
 #'
-#' Retrieve either the response variable names, the beta variable names, or beta variable names with signifigance stars.
+#' Retrieve either the response variable names, the beta variable names, or beta variable names.  If the model is an object of class 'lm', by default, the beta variable names will include anova signifigance stars.
 #'
 #' @param model model in question
 #' @param data equivalent to \code{broom::augment(model)}
+#' @param lmStars boolean that determines if stars are added to labels
 #' @return character vector of names
 #' @rdname model_terms
 #' @export
@@ -87,10 +91,10 @@ beta_stars <- function(p_val) {
 #' @export
 #' @rdname model_terms
 #' @importFrom stats anova
-model_beta_label <- function(model, data = broom::augment(model)) {
+model_beta_label <- function(model, data = broom::augment(model), lmStars = TRUE) {
   beta_vars <- model_beta_variables(model, data = data)
 
-  if (! inherits(model, "lm")) {
+  if ( (! identical(class(model), "lm")) || (!isTRUE(lmStars))) {
     return(beta_vars)
   }
 
@@ -436,24 +440,51 @@ ggally_nostic_hat <- function(
 
 
 
-
-nostic_switch <- function(
-  types
+#' Function switch
+#'
+#' Function that allows you to call different functions based upon an aesthetic variable value.
+#'
+#' @param types list of functions that follow the ggmatrix function standard: \code{function(data, mapping, ...){ #make ggplot2 object }}.  One key should be a 'default' key for a default switch case.
+#' @param mapping_val mapping value to switch on.  Defautls to the 'y' varaible of the aesthetics list.
+#' @export
+#' @examples
+#' ggnostic_continuous_fn <- fn_switch(list(
+#'   default = ggally_points,
+#'   .fitted = ggally_points,
+#'   .se.fit = ggally_nostic_se_fit,
+#'   .resid = ggally_nostic_resid,
+#'   .hat = ggally_nostic_hat,
+#'   .sigma = ggally_nostic_sigma,
+#'   .cooksd = ggally_nostic_cooksd,
+#'   .std.resid = ggally_nostic_std_resid
+#' ))
+#'
+#' ggnostic_combo_fn <- fn_switch(list(
+#'   default = ggally_box_no_facet,
+#'   fitted = ggally_box_no_facet,
+#'   .se.fit = ggally_nostic_se_fit,
+#'   .resid = ggally_nostic_resid,
+#'   .hat = ggally_nostic_hat,
+#'   .sigma = ggally_nostic_sigma,
+#'   .cooksd = ggally_nostic_cooksd,
+#'   .std.resid = ggally_nostic_std_resid
+#' ))
+fn_switch <- function(
+  types,
+  mapping_val = "y"
 ) {
 
   function(data, mapping, ...) {
-    y_var <- deparse(mapping$y)
+    var <- deparse(mapping[[mapping_val]], 500L)
 
-    fn <- switch(y_var,
-      .fitted = types$.fitted, # nolint
-      .se.fit = types$.se.fit, # nolint
-      .resid = types$.resid, # nolint
-      .hat = types$.hat, # nolint
-      .sigma = types$.sigma, # nolint
-      .cooksd = types$.cooksd, # nolint
-      .std.resid = types$.std.resid, # nolint
-      types$default
-    )
+    fn <- ifnull(types[[var]], types[["default"]])
+
+    if (is.null(fn)) {
+      stop(str_c(
+        "function could not be found for ", mapping_val, " or 'default'.  ",
+        "Please include one of these two keys as a function."
+      ))
+    }
 
     fn(data = data, mapping = mapping, ...)
   }
@@ -552,6 +583,16 @@ check_and_set_nostic_types <- function(
 #' # turn resid smooth error ribbon off
 #' pm <- ggnostic(mod, continuous = list(.resid = wrap("nostic_resid", se = FALSE)))
 #' p_(pm)
+#'
+#'
+#' ## plot residuals vs fitted in a ggpairs plot matrix
+#' dt <- broomify(mod)
+#' pm <- ggpairs(
+#'   dt, c(".fitted", ".resid"),
+#'   columnLabels = c("fitted", "residuals"),
+#'   lower = list(continuous = ggally_nostic_resid)
+#' )
+#' p_(pm)
 ggnostic <- function(
   model,
   ...,
@@ -631,9 +672,9 @@ ggnostic <- function(
     .std.resid = ggally_ratio
   )
 
-  continuous_fn <- nostic_switch(continuous_types)
-  combo_fn <- nostic_switch(combo_types)
-  discrete_fn <- nostic_switch(discrete_types)
+  continuous_fn <- fn_switch(continuous_types, "y")
+  combo_fn <- fn_switch(combo_types, "y")
+  discrete_fn <- fn_switch(discrete_types, "y")
 
   columnsX <- match_nostic_columns(columnsX, attr(data, "var_x"), "columnsX")
   columnsY <- match_nostic_columns(
