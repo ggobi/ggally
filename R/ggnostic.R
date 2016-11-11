@@ -446,6 +446,7 @@ ggally_nostic_hat <- function(
 #'
 #' @param types list of functions that follow the ggmatrix function standard: \code{function(data, mapping, ...){ #make ggplot2 object }}.  One key should be a 'default' key for a default switch case.
 #' @param mapping_val mapping value to switch on.  Defautls to the 'y' varaible of the aesthetics list.
+#' @export
 #' @examples
 #' ggnostic_continuous_fn <- fn_switch(list(
 #'   default = ggally_points,
