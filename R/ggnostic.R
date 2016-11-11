@@ -91,7 +91,7 @@ beta_stars <- function(p_val) {
 model_beta_label <- function(model, data = broom::augment(model), lmStars = TRUE) {
   beta_vars <- model_beta_variables(model, data = data)
 
-  if ((! identical(class(model), "lm")) || (!isTRUE(addLmStars))) {
+  if ((! identical(class(model), "lm")) || (!isTRUE(lmStars))) {
     return(beta_vars)
   }
 
