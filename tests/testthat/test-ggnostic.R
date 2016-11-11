@@ -33,6 +33,13 @@ test_that("fn_switch", {
 
 })
 
+test_that("model_beta_label", {
+  mod <- lm(mpg ~ wt + qsec + am, mtcars)
+
+  expect_equal(model_beta_label(mod), c("wt***", "qsec***", "am*"))
+  expect_equal(model_beta_label(mod, addLmStars = FALSE), c("wt", "qsec", "am"))
+})
+
 test_that("ggnostic mtcars", {
 
   mtc <- mtcars;

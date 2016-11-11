@@ -26,7 +26,7 @@
 #' model <- stats::lm(mpg ~ wt + qsec + am, data = mtcars)
 #' broomified_model <- broomify(model)
 #' str(broomified_model)
-broomify <- function(model) {
+broomify <- function(model, lmStars = TRUE) {
 
   if (inherits(model, "broomify")) {
     return(model)
@@ -41,7 +41,7 @@ broomify <- function(model) {
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
   attr(broom_augment_rows, "var_x") <- model_beta_variables(data = broom_augment_rows)
   attr(broom_augment_rows, "var_y") <- model_response_variables(data = broom_augment_rows)
-  attr(broom_augment_rows, "var_x_label") <- model_beta_label(model, data = broom_augment_rows)
+  attr(broom_augment_rows, "var_x_label") <- model_beta_label(model, data = broom_augment_rows, lmStars)
 
   class(broom_augment_rows) <- c(class(broom_augment_rows), "broomify")
 
@@ -55,10 +55,11 @@ model_variables <- function(model, data = broom::augment(model)) {
 }
 #' Model term names
 #'
-#' Retrieve either the response variable names, the beta variable names, or beta variable names with signifigance stars.
+#' Retrieve either the response variable names, the beta variable names, or beta variable names.  If the model is an object of class 'lm', by default, the beta variable names will include anova signifigance stars.
 #'
 #' @param model model in question
 #' @param data equivalent to \code{broom::augment(model)}
+#' @param lmStars boolean that determines if stars are added to labels
 #' @return character vector of names
 #' @rdname model_terms
 #' @export
@@ -87,10 +88,10 @@ beta_stars <- function(p_val) {
 #' @export
 #' @rdname model_terms
 #' @importFrom stats anova
-model_beta_label <- function(model, data = broom::augment(model)) {
+model_beta_label <- function(model, data = broom::augment(model), lmStars = TRUE) {
   beta_vars <- model_beta_variables(model, data = data)
 
-  if (! inherits(model, "lm")) {
+  if ((! identical(class(model), "lm")) || (!isTRUE(addLmStars))) {
     return(beta_vars)
   }
 

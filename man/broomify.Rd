@@ -4,7 +4,7 @@
 \alias{broomify}
 \title{Broomify a model}
 \usage{
-broomify(model)
+broomify(model, lmStars = TRUE)
 }
 \arguments{
 \item{model}{model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}}
