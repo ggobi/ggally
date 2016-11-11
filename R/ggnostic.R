@@ -436,24 +436,28 @@ ggally_nostic_hat <- function(
 
 
 
-
-nostic_switch <- function(
-  types
+#' Function switch
+#'
+#' Function that allows you to call different functions based upon an aesthetic variable value.
+#'
+#' @param types list of functions that follow the ggmatrix function standard: \code{function(data, mapping, ...){ #make ggplot2 object }}.  One key should be a 'default' key for a default switch case.
+#' @param mapping_val mapping value to switch on.  Defautls to the 'y' varaible of the aesthetics list.
+fn_switch <- function(
+  types,
+  mapping_val = "y"
 ) {
 
   function(data, mapping, ...) {
-    y_var <- deparse(mapping$y)
+    var <- deparse(mapping[[mapping_val]], 500L)
 
-    fn <- switch(y_var,
-      .fitted = types$.fitted, # nolint
-      .se.fit = types$.se.fit, # nolint
-      .resid = types$.resid, # nolint
-      .hat = types$.hat, # nolint
-      .sigma = types$.sigma, # nolint
-      .cooksd = types$.cooksd, # nolint
-      .std.resid = types$.std.resid, # nolint
-      types$default
-    )
+    fn <- ifnull(types[[var]], types[["default"]])
+
+    if (is.null(fn)) {
+      stop(str_c(
+        "function could not be found for ", mapping_val, " or 'default'.  ",
+        "Please include one of these two keys as a function."
+      ))
+    }
 
     fn(data = data, mapping = mapping, ...)
   }
@@ -641,9 +645,9 @@ ggnostic <- function(
     .std.resid = ggally_ratio
   )
 
-  continuous_fn <- nostic_switch(continuous_types)
-  combo_fn <- nostic_switch(combo_types)
-  discrete_fn <- nostic_switch(discrete_types)
+  continuous_fn <- fn_switch(continuous_types, "y")
+  combo_fn <- fn_switch(combo_types, "y")
+  discrete_fn <- fn_switch(discrete_types, "y")
 
   columnsX <- match_nostic_columns(columnsX, attr(data, "var_x"), "columnsX")
   columnsY <- match_nostic_columns(
