@@ -47,6 +47,7 @@ sections:
       title: "[.ggmatrix"
     - gg-add
     - mapping_color_to_fill
+    - fn_switch
     - str.ggmatrix
     - print_if_interactive
 -
