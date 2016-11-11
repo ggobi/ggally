@@ -1,0 +1,15 @@
+* installing *source* package ‘gsl’ ...
+** package ‘gsl’ successfully unpacked and MD5 sums checked
+checking for gsl-config... /usr/local/bin/gsl-config
+checking if GSL version >= 1.12... checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+configure: error: Need GSL version >= 1.12
+ERROR: configuration failed for package ‘gsl’
+* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/lib/gsl’

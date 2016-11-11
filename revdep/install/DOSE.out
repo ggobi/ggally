@@ -1,0 +1,10 @@
+* installing *source* package ‘DOSE’ ...
+** R
+** data
+** inst
+** tests
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  namespace ‘GOSemSim’ 1.30.3 is being loaded, but >= 2.0.0 is required
+ERROR: lazy loading failed for package ‘DOSE’
+* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/lib/DOSE’
