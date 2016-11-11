@@ -42,7 +42,9 @@ broomify <- function(model, lmStars = TRUE) {
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
   attr(broom_augment_rows, "var_x") <- model_beta_variables(data = broom_augment_rows)
   attr(broom_augment_rows, "var_y") <- model_response_variables(data = broom_augment_rows)
-  attr(broom_augment_rows, "var_x_label") <- model_beta_label(model, data = broom_augment_rows, lmStars)
+  attr(broom_augment_rows, "var_x_label") <- model_beta_label(
+    model, data = broom_augment_rows, lmStars
+  )
 
   class(broom_augment_rows) <- c(class(broom_augment_rows), "broomify")
 
@@ -92,7 +94,7 @@ beta_stars <- function(p_val) {
 model_beta_label <- function(model, data = broom::augment(model), lmStars = TRUE) {
   beta_vars <- model_beta_variables(model, data = data)
 
-  if ((! identical(class(model), "lm")) || (!isTRUE(lmStars))) {
+  if ( (! identical(class(model), "lm")) || (!isTRUE(lmStars))) {
     return(beta_vars)
   }
 

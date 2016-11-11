@@ -6,16 +6,24 @@ expect_print <- function(p) {
 
 
 test_that("fn_switch", {
-  fn1 <- function(data, mapping, ...) { return(1) }
-  fn2 <- function(data, mapping, ...) { return(2) }
-  fn3 <- function(data, mapping, ...) { return(3) }
-  fn5 <- function(data, mapping, ...) { return(5) }
+  fn1 <- function(data, mapping, ...) {
+    return(1)
+  }
+  fn2 <- function(data, mapping, ...) {
+    return(2)
+  }
+  fn3 <- function(data, mapping, ...) {
+    return(3)
+  }
+  fn5 <- function(data, mapping, ...) {
+    return(5)
+  }
 
   fn <- fn_switch(list(A = fn1, B = fn2, C = fn3), "value")
 
   dummy_dt <- data.frame(A = rnorm(100), B = rnorm(100), C = rnorm(100))
 
-  chars = c("A", "B", "C")
+  chars <- c("A", "B", "C")
   for (i in 1:3) {
     mapping <- ggplot2::aes_string(value = chars[i])
     expect_equal(fn(dummy_dt, mapping), i)
