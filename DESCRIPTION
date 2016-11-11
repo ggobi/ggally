@@ -28,7 +28,7 @@ Description:
 Depends:
     R (>= 3.1)
 Imports:
-    ggplot2 (> 2.1.0),
+    ggplot2 (>= 2.2.0),
     grid,
     gtable (>= 0.2.0),
     plyr (>= 1.8.3),
@@ -53,8 +53,6 @@ Suggests:
     rmarkdown,
     roxygen2,
     testthat
-Remotes:
-  hadley/ggplot2
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
 VignetteBuilder: packagedocs
