@@ -19,6 +19,7 @@
 #' broom::augment a model and add broom::glance and broom::tidy output as attributes. X and Y variables are also added.
 #'
 #' @param model model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}
+#' @param lmStars boolean that determines if stars are added to labels
 #' @return broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
 #' @export
 #' @examples

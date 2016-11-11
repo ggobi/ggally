@@ -8,6 +8,8 @@ broomify(model, lmStars = TRUE)
 }
 \arguments{
 \item{model}{model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}}
+
+\item{lmStars}{boolean that determines if stars are added to labels}
 }
 \value{
 broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
