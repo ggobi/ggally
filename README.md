@@ -3,8 +3,8 @@
 
 Master: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=master)](https://travis-ci.org/ggobi/ggally)
 [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](http://cran.r-project.org/package=GGally)
-[![](http://cranlogs.r-pkg.org/badges/GGally)](http://cran.r-project.org/package=GGally)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](https://cran.r-project.org/package=GGally)
+[![](http://cranlogs.r-pkg.org/badges/GGally)](https://cran.r-project.org/package=GGally)
 [![DOI](https://zenodo.org/badge/22529/ggobi/ggally.svg)](https://zenodo.org/badge/latestdoi/22529/ggobi/ggally)
 
 
@@ -18,7 +18,7 @@ Dev: [![Build Status](https://travis-ci.org/ggobi/ggally.png?branch=dev)](https:
 
 ## Installation
 
-To install this package from Github or [CRAN](http://cran.r-project.org/package=GGally), do the following from the R console:
+To install this package from Github or [CRAN](https://cran.r-project.org/package=GGally), do the following from the R console:
 
 ```r
 # Github

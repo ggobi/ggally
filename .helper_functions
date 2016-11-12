@@ -38,24 +38,20 @@ test_file:
   tf("zzz_ggpairs")
 knit_vignettes:
   devtools::document(); packagedocs::build_vignettes()
-knit_index:
-  devtools::document(); packagedocs::index_render()
-knit_rd:
-  devtools::document(); packagedocs::rd_render()
 build_win:
   devtools::build_win(version = c("R-release", "R-devel"))
 reverse_depends:
   if (packageVersion("devtools") <= "1.12.0") devtools::install_github("hadley/devtools")
+  # devtools::revdep_check_resume()
+  # devtools::revdep_check_reset()
   source("https://bioconductor.org/biocLite.R")
   dir.create(file.path("revdep", "lib"), recursive = TRUE, showWarnings = FALSE)
   options(
     "Ncpus" = 4,
     "devtools.revdep.libpath" = normalizePath(file.path("revdep", "lib")),
-    pkgType = "mac.binary"
+    pkgType = "source"
   )
   devtools::revdep_check(bioconductor=TRUE)
-  # devtools::revdep_check_resume()
-  # devtools::revdep_check_reset()
   devtools::revdep_check_save_summary()
   devtools::revdep_check_print_problems()
 reverse_depends_email:

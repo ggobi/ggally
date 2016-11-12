@@ -10,56 +10,58 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Indiana/Indianapolis |
-|date     |2016-11-06                   |
+|date     |2016-11-11                   |
 
 ## Packages
 
-|package      |*  |version    |date       |source                             |
-|:------------|:--|:----------|:----------|:----------------------------------|
-|broom        |   |0.4.1      |2016-06-24 |cran (@0.4.1)                      |
-|chemometrics |   |1.4.1      |2016-08-03 |cran (@1.4.1)                      |
-|geosphere    |   |1.5-5      |2016-06-15 |cran (@1.5-5)                      |
-|GGally       |*  |1.2.9.9999 |2016-11-06 |local (ggobi/ggally@NA)            |
-|ggplot2      |   |2.1.0.9001 |2016-11-06 |Github (hadley/ggplot2@5317eaf)    |
-|gtable       |   |0.2.0      |2016-02-26 |cran (@0.2.0)                      |
-|igraph       |   |1.0.1      |2015-06-26 |cran (@1.0.1)                      |
-|intergraph   |   |2.0-2      |2015-06-30 |cran (@2.0-2)                      |
-|mapproj      |   |1.2-4      |2015-08-03 |cran (@1.2-4)                      |
-|maps         |   |3.1.1      |2016-07-27 |cran (@3.1.1)                      |
-|network      |   |1.13.0     |2015-09-19 |CRAN (R 3.3.1)                     |
-|packagedocs  |   |0.4.0      |2016-11-06 |Github (hafen/packagedocs@9284f46) |
-|plyr         |   |1.8.4      |2016-06-08 |cran (@1.8.4)                      |
-|progress     |   |1.0.2      |2015-06-05 |cran (@1.0.2)                      |
-|RColorBrewer |   |1.1-2      |2014-12-07 |cran (@1.1-2)                      |
-|reshape      |   |0.8.6      |2016-10-21 |cran (@0.8.6)                      |
-|rmarkdown    |   |1.1        |2016-10-16 |cran (@1.1)                        |
-|roxygen2     |   |5.0.1      |2015-11-11 |cran (@5.0.1)                      |
-|scagnostics  |   |0.2-4      |2012-11-05 |cran (@0.2-4)                      |
-|scales       |   |0.4.0.9003 |2016-10-17 |Github (hadley/scales@d58d83a)     |
-|sna          |   |2.4        |2016-08-08 |cran (@2.4)                        |
-|survival     |   |2.40-1     |2016-10-30 |CRAN (R 3.3.2)                     |
-|testthat     |   |1.0.2      |2016-04-23 |cran (@1.0.2)                      |
+|package      |*  |version |date       |source                  |
+|:------------|:--|:-------|:----------|:-----------------------|
+|broom        |   |0.4.1   |2016-06-24 |cran (@0.4.1)           |
+|chemometrics |   |1.4.1   |2016-08-03 |cran (@1.4.1)           |
+|geosphere    |   |1.5-5   |2016-06-15 |cran (@1.5-5)           |
+|GGally       |*  |1.3.0   |2016-11-11 |local (ggobi/ggally@NA) |
+|ggplot2      |   |2.2.0   |2016-11-11 |CRAN (R 3.3.2)          |
+|gtable       |   |0.2.0   |2016-02-26 |cran (@0.2.0)           |
+|igraph       |   |1.0.1   |2015-06-26 |cran (@1.0.1)           |
+|intergraph   |   |2.0-2   |2015-06-30 |cran (@2.0-2)           |
+|mapproj      |   |1.2-4   |2015-08-03 |cran (@1.2-4)           |
+|maps         |   |3.1.1   |2016-07-27 |cran (@3.1.1)           |
+|network      |   |1.13.0  |2015-09-19 |CRAN (R 3.3.1)          |
+|packagedocs  |   |0.4.0   |2016-11-04 |CRAN (R 3.3.2)          |
+|plyr         |   |1.8.4   |2016-06-08 |cran (@1.8.4)           |
+|progress     |   |1.0.2   |2015-06-05 |cran (@1.0.2)           |
+|RColorBrewer |   |1.1-2   |2014-12-07 |cran (@1.1-2)           |
+|reshape      |   |0.8.6   |2016-10-21 |cran (@0.8.6)           |
+|rmarkdown    |   |1.1     |2016-10-16 |cran (@1.1)             |
+|roxygen2     |   |5.0.1   |2015-11-11 |cran (@5.0.1)           |
+|scagnostics  |   |0.2-4   |2012-11-05 |cran (@0.2-4)           |
+|scales       |   |0.4.1   |2016-11-09 |cran (@0.4.1)           |
+|sna          |   |2.4     |2016-08-08 |cran (@2.4)             |
+|survival     |   |2.40-1  |2016-10-30 |CRAN (R 3.3.2)          |
+|testthat     |   |1.0.2   |2016-04-23 |cran (@1.0.2)           |
 
 # Check results
 
-27 packages
+29 packages
 
 |package             |version | errors| warnings| notes|
 |:-------------------|:-------|------:|--------:|-----:|
 |BAS                 |1.4.2   |      0|        0|     0|
-|clustrd             |1.0.2   |      0|        0|     0|
+|clustrd             |1.0.9   |      0|        0|     0|
 |DescribeDisplay     |0.2.5   |      0|        0|     0|
 |eechidna            |0.1     |      0|        0|     0|
 |freqparcoord        |1.0.1   |      0|        0|     0|
-|ggbio               |1.20.2  |      1|        2|     5|
+|ggbio               |1.22.0  |      1|        1|     5|
 |ggmcmc              |1.1     |      0|        0|     0|
 |heatmaply           |0.6.0   |      0|        0|     1|
-|imageData           |0.1-26  |      1|        0|     0|
-|isomiRs             |1.0.3   |      0|        0|     2|
+|imageData           |0.1-26  |      0|        0|     0|
+|isomiRs             |1.2.0   |      1|        0|     4|
 |LANDD               |1.1.0   |      0|        0|     0|
+|MAST                |1.0.0   |      1|        1|     2|
 |MissingDataGUI      |0.2-5   |      1|        0|     0|
 |nzelect             |0.2.0   |      0|        0|     0|
 |ParamHelpers        |1.9     |      1|        0|     0|
+|Pi                  |1.0.0   |      1|        0|     0|
 |plotly              |4.5.2   |      2|        0|     1|
 |PopGenReport        |2.2.2   |      0|        0|     1|
 |qualvar             |0.1.0   |      0|        0|     0|
@@ -69,9 +71,9 @@
 |SHELF               |1.2.1   |      0|        1|     0|
 |specmine            |1.0     |      1|        0|     0|
 |svdvis              |0.1     |      0|        0|     0|
-|TCGAbiolinks        |2.0.13  |      0|        0|     0|
-|toaster             |0.5.2   |      1|        0|     0|
-|userfriendlyscience |0.4-1   |      1|        0|     0|
+|TCGAbiolinks        |2.2.5   |      0|        0|     4|
+|toaster             |0.5.4   |      1|        0|     0|
+|userfriendlyscience |0.5-1   |      1|        0|     0|
 |vdmR                |0.2.2   |      2|        1|     0|
 
 ## BAS (1.4.2)
@@ -79,7 +81,7 @@ Maintainer: Merlise Clyde <clyde@stat.duke.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## clustrd (1.0.2)
+## clustrd (1.0.9)
 Maintainer: Angelos Markos <amarkos@gmail.com>
 
 0 errors | 0 warnings | 0 notes
@@ -100,11 +102,11 @@ Maintainer: Norm Matloff <normmatloff@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## ggbio (1.20.2)
+## ggbio (1.22.0)
 Maintainer: Michael Lawrence <lawrence.michael@gene.com>  
 Bug reports: https://github.com/tengfei/ggbio/issues
 
-1 error  | 2 warnings | 5 notes
+1 error  | 1 warning  | 5 notes
 
 ```
 checking examples ... ERROR
@@ -129,12 +131,6 @@ Error in mapply(child_vp, vp_name = vpname(x$layout), t = x$layout$t,  :
   zero-length inputs cannot be mixed with those of non-zero length
 Calls: <Anonymous> ... drawGTree -> makeContent -> makeContent.gtable -> mapply
 Execution halted
-
-checking whether package ‘ggbio’ can be installed ... WARNING
-Found the following significant warnings:
-  Warning: subclass "ExonrankFilter" of class "BasicFilter" is not local and cannot be updated for new inheritance information; consider setClassUnion()
-  Warning: replacing previous import ‘ggplot2::Position’ by ‘BiocGenerics::Position’ when loading ‘ggbio’
-See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/ggbio.Rcheck/00install.out’ for details.
 
 checking for missing documentation entries ... WARNING
 Undocumented S4 methods:
@@ -218,25 +214,48 @@ Package unavailable to check Rd xrefs: ‘d3heatmap’
 ## imageData (0.1-26)
 Maintainer: Chris Brien <Chris.Brien@unisa.edu.au>
 
-1 error  | 0 warnings | 0 notes
+0 errors | 0 warnings | 0 notes
 
-```
-checking whether package ‘imageData’ can be installed ... ERROR
-Installation failed.
-See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/imageData.Rcheck/00install.out’ for details.
-```
-
-## isomiRs (1.0.3)
+## isomiRs (1.2.0)
 Maintainer: Lorena Pantano <lorena.pantano@gmail.com>
 
-0 errors | 0 warnings | 2 notes
+1 error  | 0 warnings | 4 notes
 
 ```
+checking examples ... ERROR
+Running examples in ‘isomiRs-Ex.R’ failed
+The error most likely occurred in:
+
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: isoNetwork
+> ### Title: Clustering miRNAs-genes pairs in similar pattern expression
+> ### Aliases: isoNetwork
+> 
+> ### ** Examples
+> 
+> 
+> library(org.Mm.eg.db)
+Error in library(org.Mm.eg.db) : 
+  there is no package called ‘org.Mm.eg.db’
+Execution halted
+
+checking package dependencies ... NOTE
+Packages suggested but not available for checking:
+  ‘org.Mm.eg.db’ ‘clusterProfiler’
+
+checking for hidden files and directories ... NOTE
+Found the following hidden files and directories:
+  .travis.yml
+These were most likely included in error. See section ‘Package
+structure’ in the ‘Writing R Extensions’ manual.
+
 checking top-level files ... NOTE
 Non-standard file/directory found at top level:
   ‘TODO.md’
 
 checking R code for possible problems ... NOTE
+.apply_median: no visible global function definition for ‘rowMax’
+.apply_median: no visible global function definition for ‘rowMin’
 .clean_low_rate_changes: no visible binding for global variable ‘subs’
 .clean_low_rate_changes: no visible binding for global variable ‘mir’
 .clean_low_rate_changes: no visible binding for global variable ‘freq’
@@ -244,26 +263,84 @@ checking R code for possible problems ... NOTE
   ‘total_subs’
 .clean_low_rate_changes: no visible binding for global variable
   ‘total_mir’
-.clean_low_rate_changes: no visible binding for global variable ‘add’
-.clean_low_rate_changes: no visible binding for global variable ‘t5’
-... 12 lines ...
+... 43 lines ...
+isoPlotPosition: no visible binding for global variable ‘change’
 isoPlotPosition: no visible global function definition for ‘n’
 isoSelect.IsomirDataSeq : <anonymous>: no visible binding for global
   variable ‘mir’
 isoSelect,IsomirDataSeq : <anonymous>: no visible binding for global
   variable ‘mir’
 Undefined global functions or variables:
-  DB add ambiguity change condition current freq mir n read.table
-  reference subs t3 t5 total_mir total_subs
-Consider adding
-  importFrom("utils", "read.table")
-to your NAMESPACE file.
+  Count DB X1 X2 add ambiguity average change condition current
+  enrichGO error freq gene go group mir n ngene reference rowMax rowMin
+  sel_genes subs t3 t5 term term_short total_mir total_subs type value
+  y
 ```
 
 ## LANDD (1.1.0)
 Maintainer: Shangzhao Qiu <qsz1328@gmail.com>
 
 0 errors | 0 warnings | 0 notes
+
+## MAST (1.0.0)
+Maintainer: Andrew McDavid <Andrew_McDavid@urmc.rochester.edu>
+
+1 error  | 1 warning  | 2 notes
+
+```
+checking examples ... ERROR
+Running examples in ‘MAST-Ex.R’ failed
+The error most likely occurred in:
+
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: impute
+> ### Title: impute missing continuous expression for plotting
+> ### Aliases: impute
+> 
+> ### ** Examples
+... 16 lines ...
+
+stt_ll> plt <- ggplot(predicted)+aes(x=invlogit(muD),y=muC,xse=seD,yse=seC,col=sample)+
+stt_ll+    facet_wrap(~primerid,scales="free_y")+theme_linedraw()+
+stt_ll+    geom_point(size=0.5)+scale_x_continuous("Proportion expression")+
+stt_ll+    scale_y_continuous("Estimated Mean")+
+stt_ll+    stat_ell(aes(x=muD,y=muC),level=0.95, invert='x')
+
+stt_ll> ## plot with inverse logit transformed x-axis
+stt_ll> print(plt)
+Error: stat_ell requires the following missing aesthetics: alpha
+Execution halted
+
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+'select()' returned many:many mapping between keys and columns
+........................................................................................................................
+Done!
+Combining coefficients and standard errors
+Calculating log-fold changes
+Calculating likelihood ratio tests
+Quitting from lines 252-269 (MAITAnalysis.Rmd) 
+Error: processing vignette 'MAITAnalysis.Rmd' failed with diagnostics:
+stat_ell requires the following missing aesthetics: alpha
+Execution halted
+
+
+checking installed package size ... NOTE
+  installed size is  6.2Mb
+  sub-directories of 1Mb or more:
+    data   3.7Mb
+    doc    1.9Mb
+
+checking Rd line widths ... NOTE
+Rd file 'ZlmFit-class.Rd':
+  \examples lines wider than 100 characters:
+     #Note that because we parse the expression, that the columns must be enclosed in backquotes to protect the \quote{+} and \quote{-} char ... [TRUNCATED]
+     lrTest(zlmVbeta, Hypothesis('`PopulationCD154+VbetaUnresponsive` - `PopulationCD154-VbetaUnresponsive`'))
+     waldTest(zlmVbeta, Hypothesis('`PopulationCD154+VbetaUnresponsive` - `PopulationCD154-VbetaUnresponsive`'))
+
+These lines will be truncated in the PDF manual.
+```
 
 ## MissingDataGUI (0.2-5)
 Maintainer: Xiaoyue Cheng <xycheng@unomaha.edu>
@@ -306,6 +383,19 @@ Last 13 lines of output:
   
   Error: testthat unit tests failed
   Execution halted
+```
+
+## Pi (1.0.0)
+Maintainer: Hai Fang <hfang@well.ox.ac.uk>
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking package dependencies ... ERROR
+Package required but not available: ‘glmnet’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
 ```
 
 ## plotly (4.5.2)
@@ -444,14 +534,45 @@ Maintainer: Neo Christopher Chung <nchchung@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## TCGAbiolinks (2.0.13)
+## TCGAbiolinks (2.2.5)
 Maintainer: Antonio Colaprico <antonio.colaprico@ulb.ac.be>,
  Tiago Chedraoui Silva <tiagochst@usp.br>  
 Bug reports: https://github.com/BioinformaticsFMRP/TCGAbiolinks/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 4 notes
 
-## toaster (0.5.2)
+```
+checking installed package size ... NOTE
+  installed size is 19.6Mb
+  sub-directories of 1Mb or more:
+    R      1.1Mb
+    data   6.2Mb
+    doc   12.1Mb
+
+checking dependencies in R code ... NOTE
+Missing or unexported object: ‘TCGAbiolinks::TCGAquery’
+
+checking R code for possible problems ... NOTE
+GDCquery_clinic: no visible binding for global variable ‘portions’
+TCGAanalyze_Preprocessing: no visible global function definition for
+  ‘assays’
+TCGAvisualize_oncoprint: no visible binding for global variable ‘value’
+checkTumorInput: no visible binding for global variable ‘project’
+get.mutation.matrix: no visible binding for global variable ‘Tumor’
+update.clinical.with.last.followup: no visible binding for global
+  variable ‘bcr_patient_barcode’
+Undefined global functions or variables:
+  Tumor assays bcr_patient_barcode portions project value
+
+checking Rd line widths ... NOTE
+Rd file 'TCGAvisualize_starburst.Rd':
+  \examples lines wider than 100 characters:
+     SummarizedExperiment::rowRanges(met)$diffmean.g2.g1 <- -1*(SummarizedExperiment::rowRanges(met)$diffmean.g1.g2)
+
+These lines will be truncated in the PDF manual.
+```
+
+## toaster (0.5.4)
 Maintainer: Gregory Kanevsky <gregory.kanevsky@teradata.com>  
 Bug reports: https://github.com/teradata-aster-field/toaster/issues
 
@@ -465,7 +586,7 @@ See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
 
-## userfriendlyscience (0.4-1)
+## userfriendlyscience (0.5-1)
 Maintainer: Gjalt-Jorn Peters <gjalt-jorn@userfriendlyscience.com>
 
 1 error  | 0 warnings | 0 notes

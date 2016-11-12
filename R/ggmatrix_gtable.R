@@ -38,7 +38,8 @@ ggmatrix_gtable <- function(
   # make a fake facet grid to fill in with proper plot panels
   get_labels <- function(labels, length_out, name) {
     if (is.expression(labels)) {
-      stop("'", name, "' can only be a character vector or NULL")
+      stop("'", name, "' can only be a character vector or NULL.",
+      "  Character values can be parsed using the 'labeller' parameter.")
     }
     ifnull(labels, as.character(seq_len(length_out)))
   }
