@@ -672,7 +672,8 @@ ggduo <- function(
 #' ## Quick example, with and without colour
 #' data(flea)
 #' ggpairs(flea, columns = 2:4)
-#' ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
+#' pm <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
+#' p_(pm)
 #' # Note: colour should be categorical, else you will need to reset
 #' # the upper triangle to use points instead of trying to compute corr
 #'

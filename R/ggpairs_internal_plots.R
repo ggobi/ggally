@@ -17,6 +17,9 @@
 #' @export
 #' @rdname wrap
 #' @examples
+#'  # small function to display plots only if it's interactive
+#'  p_ <- GGally::print_if_interactive
+#'
 #' # example function that prints 'val'
 #' fn <- function(data, mapping, val = 2) {
 #'   print(val)
@@ -35,24 +38,29 @@
 #'
 #' # change parameter settings in ggpairs for a particular function
 #' ## Goal output:
-#' (regularPlot <- ggally_points(
+#' regularPlot <- ggally_points(
 #'   iris,
 #'   ggplot2::aes(Sepal.Length, Sepal.Width),
 #'   size = 5, color = "red"
-#' ))
+#' )
+#' p_(regularPlot)
+#'
 #' # Wrap ggally_points to have parameter values size = 5 and color = 'red'
 #' w_ggally_points <- wrap(ggally_points, size = 5, color = "red")
-#' (wrappedPlot <- w_ggally_points(
+#' wrappedPlot <- w_ggally_points(
 #'   iris,
 #'   ggplot2::aes(Sepal.Length, Sepal.Width)
-#' ))
+#' )
+#' p_(wrappedPlot)
 #'
 #' # Double check the aes parameters are the same for the geom_point layer
 #' identical(regularPlot$layers[[1]]$aes_params, wrappedPlot$layers[[1]]$aes_params)
 #'
 #' # Use a wrapped function in ggpairs
-#' ggpairs(iris, 1:3, lower = list(continuous = wrap(ggally_points, size = 5, color = "red")))
-#' ggpairs(iris, 1:3, lower = list(continuous = w_ggally_points))
+#' pm <- ggpairs(iris, 1:3, lower = list(continuous = wrap(ggally_points, size = 5, color = "red")))
+#' p_(pm)
+#' pm <- ggpairs(iris, 1:3, lower = list(continuous = w_ggally_points))
+#' p_(pm)
 wrap_fn_with_param_arg <- function(
   funcVal,
   params = NULL,
