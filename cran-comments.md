@@ -27,15 +27,13 @@ Barret
     * R Under development (unstable) (2016-10-17 r71530)
   * There were no ERRORs, WARNINGs, or NOTEs.
 * win-builder (devel and release)
-  * There were no ERRORs or WARNINGs.  
-  * There are one NOTE.
-    * checking CRAN incoming feasibility ... NOTE
-      Maintainer: 'Barret Schloerke <schloerke@gmail.com>'
-
-      Possibly mis-spelled words in DESCRIPTION:
-        geoms (25:43)
-        ggplot (5:21)
-        scatterplot (26:49)
+  * release
+    * There were no ERRORs, WARNINGs, or NOTEs
+  * devel
+    * 1 NOTE
+      * checking files in 'vignettes' ... WARNING
+      Files in the 'vignettes' directory newer than same file in 'inst/doc':
+        'rd_index.yaml'
 
 
 ## Reverse dependencies
