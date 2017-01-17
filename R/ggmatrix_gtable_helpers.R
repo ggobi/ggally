@@ -135,7 +135,7 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
   al <- layout[str_detect(layout_name, "axis-b"), ]
 
   if (show_strips) {
-    alx <- layout[str_detect(layout_name, "axis-b|strip-right"), ]
+    alx <- layout[str_detect(layout_name, "axis-b|strip-r"), ]
   } else {
     alx <- al
   }
