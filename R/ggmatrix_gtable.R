@@ -54,7 +54,7 @@ ggmatrix_gtable <- function(
   pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
     geom_point() +
     # make the 'fake' strips for x and y titles
-    facet_grid(Var2 ~ Var1, labeller = ifnull(pm$labeller, "label_value")) +
+    facet_grid(Var2 ~ Var1, labeller = ifnull(pm$labeller, "label_value"), switch = pm$switch) +
     # remove both x and y titles
     labs(x = pm$xlab, y = pm$ylab)
 
