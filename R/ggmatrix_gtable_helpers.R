@@ -56,8 +56,8 @@ plot_panel <- function(
 
   # ask about strips
   layout_names <- c("panel")
-  strip_right_name <- "strip-r"
-  strip_top_name <- "strip-t"
+  strip_right_name <- "strip-r|strip-l"
+  strip_top_name <- "strip-t|strip-b"
   legend_name <- "guide-box"
   all_layout_names <- c(layout_names, strip_right_name, strip_top_name, legend_name)
 
@@ -112,7 +112,7 @@ add_left_axis <- function(pmg, pg, show_strips, grob_pos) {
   al <- layout[str_detect(layout_name, "axis-l"), ]
 
   if (show_strips) {
-    alx <- layout[str_detect(layout_name, "axis-l|strip-t"), ]
+    alx <- layout[str_detect(layout_name, "axis-l|strip-t|strip-b"), ]
   } else {
     alx <- al
   }
@@ -135,7 +135,7 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
   al <- layout[str_detect(layout_name, "axis-b"), ]
 
   if (show_strips) {
-    alx <- layout[str_detect(layout_name, "axis-b|strip-r"), ]
+    alx <- layout[str_detect(layout_name, "axis-b|strip-r|strip-l"), ]
   } else {
     alx <- al
   }
