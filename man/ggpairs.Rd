@@ -11,8 +11,8 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
   "densityDiag", discrete = "barDiag", na = "naDiag"), params = NULL, ...,
   xlab = NULL, ylab = NULL, axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]), labeller = "label_value",
-  showStrips = NULL, legend = NULL, cardinality_threshold = 15,
-  legends = stop("deprecated"))
+  switch = NULL, showStrips = NULL, legend = NULL,
+  cardinality_threshold = 15, legends = stop("deprecated"))
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -38,6 +38,8 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 \item{columnLabels}{label names to be displayed.  Defaults to names of columns being used.}
 
 \item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
+
+\item{switch}{switch parameter for facet_grid. See \code{ggplot2::\link[ggplot2]{facet_grid}}.  By default, the labels are displayed on the top and right of the plot. If \code{"x"}, the top labels will be displayed to the bottom. If \code{"y"}, the right-hand side labels will be displayed to the left. Can also be set to \code{"both"}}
 
 \item{showStrips}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
 
