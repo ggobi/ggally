@@ -206,14 +206,13 @@ ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
 # edge arrows on a directed network
 ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
 }
-\author{
-Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
-Pedro Jordano and Ming-Yu Liu
-}
 \seealso{
 \code{\link{ggnet2}} in this package,
 \code{\link[sna]{gplot}} in the \code{\link[sna]{sna}} package, and
 \code{\link[network]{plot.network}} in the \code{\link[network]{network}}
 package
 }
-
+\author{
+Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+Pedro Jordano and Ming-Yu Liu
+}

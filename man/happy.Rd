@@ -40,4 +40,3 @@ Smith, Tom W., Peter V. Marsden, Michael Hout, Jibum Kim. \emph{General Social S
   1 data file (57,061 logical records) and 1 codebook (3,422 pp).
 }
 \keyword{datasets}
-

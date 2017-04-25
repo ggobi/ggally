@@ -39,4 +39,3 @@ ggally_nostic_resid(dt, ggplot2::aes(wt, .resid))
 \seealso{
 \code{stats::\link[stats]{residuals}}
 }
-

@@ -16,4 +16,3 @@ Requires packages or yells at user... loudly
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{internal}
-

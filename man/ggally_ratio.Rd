@@ -35,4 +35,3 @@ ggally_ratio(
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

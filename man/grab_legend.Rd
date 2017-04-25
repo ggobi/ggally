@@ -40,4 +40,3 @@ grab_legend(bottom)
 grab_legend(top)
 grab_legend(left)
 }
-

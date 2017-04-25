@@ -40,4 +40,3 @@ This function is used when \code{axisLabels == "internal"}.
 \author{
 Jason Crowley \email{crowley.jason.s@gmail.com} and Barret Schloerke
 }
-

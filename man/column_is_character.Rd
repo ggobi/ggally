@@ -23,4 +23,3 @@ Get vector of variable types from data frame
 Jason Crowley \email{crowley.jason.s@gmail.com}
 }
 \keyword{internal}
-

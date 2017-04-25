@@ -27,4 +27,3 @@ Draws a large \code{NA} in the middle of the plotting area.  This plot is useful
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

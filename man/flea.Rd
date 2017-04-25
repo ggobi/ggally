@@ -27,4 +27,3 @@ Lubischew, A. A. (1962), On the Use of Discriminant Functions in
 Taxonomy, Biometrics 18:455-477.
 }
 \keyword{datasets}
-

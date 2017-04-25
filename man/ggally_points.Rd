@@ -34,4 +34,3 @@ ggally_points(
 Barret Schloerke  \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

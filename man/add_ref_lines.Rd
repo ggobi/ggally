@@ -18,4 +18,3 @@ add_ref_lines(data, color = "white", size = 1.5, ...)
 \description{
 Add reference lines for each cell of the glyphmap.
 }
-

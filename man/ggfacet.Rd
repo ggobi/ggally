@@ -61,4 +61,3 @@ p_(p)
 p <- ggfacet(NIR_sub, x_cols, y_cols, scales = "fixed")
 p_(p)
 }
-

@@ -26,4 +26,3 @@ Print method taken from \code{ggplot2:::print.ggplot} and altered for a ggmatrix
 \author{
 Barret Schloerke
 }
-

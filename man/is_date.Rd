@@ -13,4 +13,3 @@ is_date(x)
 Check if object is a date
 }
 \keyword{internal}
-

@@ -36,4 +36,3 @@ Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single pan
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

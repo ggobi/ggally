@@ -22,4 +22,3 @@ Makes a "blank" ggplot object that will only draw white space
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

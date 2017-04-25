@@ -13,4 +13,3 @@ plotting_data_type(x)
 Get plotting data type
 }
 \keyword{internal}
-

@@ -12,4 +12,3 @@ brew_colors(col)
 \description{
 RColorBrewer Set1 colors
 }
-

@@ -22,4 +22,3 @@ GGally implementation of ts.plot. Wraps around the ggduo function and removes th
 \examples{
 ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
 }
-

@@ -109,4 +109,3 @@ if (require(survival) && require(scales)) {
 \author{
 Edwin Thoen \email{edwinthoen@gmail.com}
 }
-

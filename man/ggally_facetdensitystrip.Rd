@@ -26,4 +26,3 @@ example(ggally_denstrip)
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

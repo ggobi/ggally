@@ -35,4 +35,3 @@ Place box plots or dot plots on the graph
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

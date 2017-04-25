@@ -12,4 +12,3 @@ print_if_interactive(p)
 \description{
 Small function to print a plot if the R session is interactive or in a travis build
 }
-

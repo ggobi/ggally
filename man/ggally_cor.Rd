@@ -49,4 +49,3 @@ Estimate correlation from the given data.
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

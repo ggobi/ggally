@@ -30,4 +30,3 @@ ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd))
 \seealso{
 \code{stats::\link[stats]{cooks.distance}}
 }
-

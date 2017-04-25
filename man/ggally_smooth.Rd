@@ -2,8 +2,8 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_smooth}
 \alias{ggally_smooth}
-\alias{ggally_smooth_lm}
 \alias{ggally_smooth_loess}
+\alias{ggally_smooth_lm}
 \title{Plots the Scatter Plot with Smoothing}
 \usage{
 ggally_smooth(data, mapping, ..., method = "lm")
@@ -34,4 +34,3 @@ Add a smoothed condition mean with a given scatter plot.
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

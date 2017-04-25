@@ -27,4 +27,3 @@ ggmatrix_gtable(pm)
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
 }
-

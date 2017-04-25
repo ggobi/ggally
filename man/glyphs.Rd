@@ -49,4 +49,3 @@ Create the data needed to generate a glyph plot.
 \author{
 Di Cook \email{dicook@monash.edu}, Heike Hofmann, Hadley Wickham
 }
-

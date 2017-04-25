@@ -27,4 +27,3 @@ Order axis variables by separation between one class and the rest
 \author{
 Jason Crowley \email{crowley.jason.s@gmail.com}
 }
-

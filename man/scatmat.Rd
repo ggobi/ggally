@@ -26,4 +26,3 @@ scatmat(flea, columns= 2:4, color="species")
 \author{
 Mengjia Ni, Di Cook \email{dicook@monash.edu}
 }
-

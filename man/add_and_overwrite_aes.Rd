@@ -28,4 +28,3 @@ str(pm)
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{internal}
-

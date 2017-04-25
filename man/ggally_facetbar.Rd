@@ -25,4 +25,3 @@ X variables are plotted using \code{geom_bar} and faceted by the Y variable.
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

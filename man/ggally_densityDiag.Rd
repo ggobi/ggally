@@ -27,4 +27,3 @@ Plots the density plots by using Diagonal.
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

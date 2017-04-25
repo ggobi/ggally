@@ -63,6 +63,7 @@ ggnostic - Plot matrix of statistical model diagnostics
 
 Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{broom::\link[broom]{augment}()} output: \code{".fitted"}, \code{".resid"}, \code{".std.resid"}, \code{".sigma"}, \code{".se.fit"}, \code{".hat"}, \code{".cooksd"}. An extra key, \code{"default"}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the \code{types} parameter in \code{\link{ggduo}}.
 }
+
 \examples{
 # small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
@@ -97,4 +98,3 @@ pm <- ggpairs(
 )
 p_(pm)
 }
-

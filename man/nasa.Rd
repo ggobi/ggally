@@ -29,4 +29,3 @@ Murrell, P. (2010) The 2006 Data Expo of the American Statistical Association.
   Computational Statistics, 25:551-554.
 }
 \keyword{datasets}
-

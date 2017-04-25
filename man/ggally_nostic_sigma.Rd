@@ -32,4 +32,3 @@ ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma))
 \seealso{
 \code{stats::\link[stats]{influence}}
 }
-

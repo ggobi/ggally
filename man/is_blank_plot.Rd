@@ -17,4 +17,3 @@ Find out if the plot equals a blank plot
 
 }
 \keyword{internal}
-

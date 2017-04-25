@@ -34,4 +34,3 @@ ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit))
 \seealso{
 \code{stats::\link[stats]{influence}}
 }
-

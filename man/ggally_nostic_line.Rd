@@ -31,4 +31,3 @@ If a non-null \code{linePosition} value is given, a line will be drawn before th
 \details{
 Functions with a color in their name have different default color behavior.
 }
-

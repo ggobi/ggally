@@ -41,4 +41,3 @@ ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
 \seealso{
 \code{stats::\link[stats]{influence}}
 }
-

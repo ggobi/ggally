@@ -55,4 +55,3 @@ While 65 economies took part in the 2012 study, this data set only contains info
 }
 }
 \keyword{datasets}
-

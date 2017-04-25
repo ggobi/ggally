@@ -159,12 +159,11 @@ ggcorr(
   cor_matrix = cor(dt[, -1], use = "pairwise")
 )
 }
-\author{
-Francois Briatte, with contributions from Amos B. Elberg and
-Barret Schloerke
-}
 \seealso{
 \code{\link[stats]{cor}} and \code{corrplot} in the
 \code{arm} package.
 }
-
+\author{
+Francois Briatte, with contributions from Amos B. Elberg and
+Barret Schloerke
+}

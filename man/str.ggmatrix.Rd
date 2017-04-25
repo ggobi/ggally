@@ -16,4 +16,3 @@
 \description{
 View the condensed version of the ggmatrix object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
 }
-

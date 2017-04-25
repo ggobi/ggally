@@ -35,9 +35,10 @@ pm + ggplot2::theme_bw()
 # pm + ggplot2::theme_linedraw()
 ## change to custom theme
 # pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue"))
-
+## add a list of information
+extra <- list(ggplot2::theme_bw(), ggplot2::labs(caption = "My caption!"))
+pm + extra
 }
 \seealso{
 \code{\link[ggplot2]{+.gg}} and \code{\link[ggplot2]{theme}}
 }
-

@@ -176,4 +176,3 @@ p_(p)
 \author{
 Jason Crowley \email{crowley.jason.s@gmail.com}, Barret Schloerke \email{schloerke@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
 }
-

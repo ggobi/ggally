@@ -36,4 +36,3 @@ The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_d
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

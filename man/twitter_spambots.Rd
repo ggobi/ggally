@@ -27,4 +27,3 @@ account and further carries five vertex attributes:
 Amos Elberg
 }
 \keyword{datasets}
-

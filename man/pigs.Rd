@@ -29,4 +29,3 @@ The time variable has been added from a combination of year and quarter
 Andrews, David F., and Agnes M. Herzberg. Data: a collection of problems from many fields for the student and research worker. Springer Science & Business Media, 2012.
 }
 \keyword{datasets}
-

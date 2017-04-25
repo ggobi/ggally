@@ -15,4 +15,3 @@ get_x_axis_labels(p, xRange)
 Retrieves x axis labels from the plot object directly.
 }
 \keyword{internal}
-

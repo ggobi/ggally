@@ -28,4 +28,3 @@ Make density plots by displaying subsets of the data in different panels.
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

@@ -164,4 +164,3 @@ p_(p)
 \author{
 Amos Elberg \email{amos.elberg@gmail.com}. Original by Moritz Marbach \email{mmarbach@mail.uni-mannheim.de}, Francois Briatte \email{f.briatte@gmail.com}
 }
-

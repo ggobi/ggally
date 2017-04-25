@@ -23,4 +23,3 @@ add_ref_boxes(data, var_fill = NULL, color = "white", size = 0.5,
 \description{
 Add reference boxes around each cell of the glyphmap.
 }
-

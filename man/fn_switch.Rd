@@ -37,4 +37,3 @@ ggnostic_combo_fn <- fn_switch(list(
   .std.resid = ggally_nostic_std_resid
 ))
 }
-

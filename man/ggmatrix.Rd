@@ -43,6 +43,7 @@ Make a generic matrix of ggplot2 plots.
 
 Now that the print.ggmatrix method uses a large gtable object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the ggplot2 format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
 }
+
 \examples{
 # small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
@@ -74,4 +75,3 @@ p_(pm)
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

@@ -176,14 +176,13 @@ p_(pm)
 pm <- ggpairs(tips, 2:3, lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
 p_(pm)
 }
-\author{
-Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason.s@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
-}
 \references{
 John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
 }
 \seealso{
 wrap
 }
+\author{
+Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason.s@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
+}
 \keyword{hplot}
-

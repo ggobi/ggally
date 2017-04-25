@@ -24,4 +24,3 @@ by maximizing the index values of that measure along the path.
 \author{
 Barret Schloerke
 }
-

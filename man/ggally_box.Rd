@@ -35,4 +35,3 @@ Make a box plot with a given data set. \code{ggally_box_no_facet} will be a sing
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

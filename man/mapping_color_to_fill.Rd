@@ -13,4 +13,3 @@ mapping_color_to_fill(current)
 Replace the fill with the color and make color NULL.
 }
 \keyword{internal}
-

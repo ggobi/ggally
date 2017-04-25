@@ -221,4 +221,3 @@ pm <- ggduo(mm, psych_variables, academic_variables, types = list(continuous = l
 suppressWarnings(p_(pm)) # ignore warnings from loess
 
 }
-

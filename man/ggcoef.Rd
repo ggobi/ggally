@@ -60,4 +60,3 @@ reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights =
 ggcoef(reg2, exponentiate = TRUE)
 ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue")
 }
-

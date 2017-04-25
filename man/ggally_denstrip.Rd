@@ -29,4 +29,3 @@ Make Tile Plot as densely as possible.
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

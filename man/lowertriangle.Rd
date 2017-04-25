@@ -25,4 +25,3 @@ head(lowertriangle(flea, color="species"))
 \author{
 Mengjia Ni, Di Cook \email{dicook@monash.edu}
 }
-

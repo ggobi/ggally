@@ -25,4 +25,3 @@ Retrieves the type of plot for the specific columns
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
 }
-

@@ -27,4 +27,3 @@ ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
 Barret Schloerke \email{schloerke@gmail.com}
 }
 \keyword{hplot}
-

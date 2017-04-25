@@ -24,4 +24,3 @@ ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid))
 \seealso{
 \code{stats::\link[stats]{rstandard}}
 }
-
