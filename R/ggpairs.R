@@ -287,85 +287,20 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'  #   want to add more hitting information
 #'  p_(pm)
 #'
-#'
-#'  # Make a fake column that will be calculated when printing
-#'  dt$hit_type <- paste("hit_type:", seq_len(nrow(dt)))
-#'
-# Returns a function that will call the provided plotting function after the data has been #'  transformed
-# The plotting function returned will count the number of singles, doubles, tripples, and #'  home runs a player hits given a particular grouping
-#'  display_hit_type <- function(plot_fn, is_ratio) {
-#'    function(data, mapping, ...) {
-#'      # change the color aesthetic to fill aesthetic
-#'      mapping <- mapping_color_to_fill(mapping)
-#'
-#'      # If the y varaible is not 'hit_type', continue like normal
-#'      if (deparse(mapping$y) != "hit_type") {
-#'        p <- plot_fn(data, mapping, ...)
-#'        return(p)
-#'      }
-#'
-#'      # Capture any extra column names needed
-#'      extra_columns <- unname(unlist(lapply(
-#'        mapping[! names(mapping) %in% c("x", "y")],
-#'        deparse
-#'      )))
-#'      extra_columns <- extra_columns[extra_columns %in% colnames(data)]
-#'
-#'      x_name <- deparse(mapping$x)
-#'
-#'      # get the types of hits
-#'      hit_types <- c("X1b", "X2b", "X3b", "hr")
-#'      hit_names <- c("single", "double", "tripple", "home\nrun")
-#'      if (is_ratio) {
-#'        hit_types <- rev(hit_types)
-#'        hit_names <- rev(hit_names)
-#'      }
-#'
-#'      # retrieve the columns and rename them
-#'      data <- data[, c(x_name, hit_types, extra_columns)]
-#'      colnames(data) <- c(x_name, hit_names, extra_columns)
-#'
-#'      # melt the data to get the counts of the unique hit occurances
-#'      dt_melt <- reshape::melt.data.frame(data, id = c(x_name, extra_columns))
-#'      dt_value <- dt_melt$value
-#'
-#'      # Make a new data.frame with all the necessary variables repeated
-#'      dt_ratio <- data.frame(variable = logical(sum(dt_value)))
-#'      for (col in c(x_name, "variable", extra_columns)) {
-#'        dt_ratio[[col]] <- rep(dt_melt[[col]], dt_value)
-#'      }
-#'
-#'      # copy the old mapping and overwrite the x and y values
-#'      mapping_ratio <- mapping
-#'      mapping_ratio[c("x", "y")] <- ggplot2::aes_string(x = x_name, y = "variable")
-#'
-#'      # make ggplot2 object!
-#'      plot_fn(dt_ratio, mapping_ratio, ...)
-#'    }
-#'  }
-#'
-#'
-#'  display_hit_type_combo <- display_hit_type(ggally_facethist, FALSE)
-#'  display_hit_type_discrete <- display_hit_type(ggally_ratio, TRUE)
-#'
-#'  # remove the strips, as the same information is displayed in the bottom axis area
+#'  # address overplotting issues and add a title
 #'  pm <- ggduo(
 #'    dt,
 #'    c("year", "g", "ab", "lg"),
-#'    c("batting_avg", "slug", "on_base", "hit_type"),
+#'    c("batting_avg", "slug", "on_base"),
 #'    columnLabelsX = c("year", "player game count", "player at bat count", "league"),
-#'    columnLabelsY = c("batting avg", "slug %", "on base %", "hit type"),
+#'    columnLabelsY = c("batting avg", "slug %", "on base %"),
 #'    title = "Baseball Hitting Stats from 1990-1995",
 #'    mapping = ggplot2::aes(color = lg),
 #'    types = list(
 #'      # change the shape and add some transparency to the points
-#'      continuous = wrap("smooth_loess", alpha = 0.50, shape = "+"),
-#'      # all combinations that are continuous horizontally should have a binwidth of 15
-#'      comboHorizontal = wrap(display_hit_type_combo, binwidth = 15),
-#'      # the ratio plot should have a black border around the rects of size 0.15
-#'      discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
+#'      continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
 #'    ),
-#'    showStrips = FALSE, cardinality_threshold = NULL
+#'    showStrips = FALSE
 #'  );
 #'
 #'  p_(pm)
@@ -373,31 +308,30 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'
 #'
 #' # Example derived from:
-#' ## R Data Analysis Examples: Canonical Correlation Analysis.  UCLA: Statistical
-#' ##   Consulting Group. from http://www.ats.ucla.edu/stat/r/dae/canonical.htm
-#' ##   (accessed June 23, 2016).
+#' ## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital
+#' ##   Research and Education.
+#' ##   from http://www.stats.idre.ucla.edu/r/dae/canonical-correlation-analysis
+#' ##   (accessed May 22, 2017).
 #' # "Example 1. A researcher has collected data on three psychological variables, four
 #' #  academic variables (standardized test scores) and gender for 600 college freshman.
 #' #  She is interested in how the set of psychological variables relates to the academic
 #' #  variables and gender. In particular, the researcher is interested in how many
 #' #  dimensions (canonical variables) are necessary to understand the association between
 #' #  the two sets of variables."
-#' mm <- read.csv("http://www.ats.ucla.edu/stat/data/mmreg.csv")
-#' colnames(mm) <- c("Control", "Concept", "Motivation", "Read", "Write", "Math",
-#'     "Science", "Sex")
-#' summary(mm)
+#' data(psychademic)
+#' summary(psychademic)
 #'
-#' psych_variables <- c("Control", "Concept", "Motivation")
-#' academic_variables <- c("Read", "Write", "Math", "Science", "Sex")
+#' (psych_variables <- attr(psychademic, "psychology"))
+#' (academic_variables <- attr(psychademic, "academic"))
 #'
 #' ## Within correlation
-#' p_(ggpairs(mm, columns = psych_variables))
-#' p_(ggpairs(mm, columns = academic_variables))
+#' p_(ggpairs(psychademic, columns = psych_variables))
+#' p_(ggpairs(psychademic, columns = academic_variables))
 #'
 #' ## Between correlation
 #' loess_with_cor <- function(data, mapping, ..., method = "pearson") {
-#'   x <- data[[deparse(mapping$x)]]
-#'   y <- data[[deparse(mapping$y)]]
+#'   x <- eval(mapping$x, data)
+#'   y <- eval(mapping$y, data)
 #'   cor <- cor(x, y, method = method)
 #'   ggally_smooth_loess(data, mapping, ...) +
 #'     ggplot2::geom_label(
@@ -408,12 +342,41 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'       ),
 #'       mapping = ggplot2::aes(x = x, y = y, label = lab),
 #'       hjust = 0, vjust = 1,
-#'       size = 5, fontface = "bold"
+#'       size = 5, fontface = "bold",
+#'       inherit.aes = FALSE # do not inherit anything from the ...
 #'     )
 #' }
-#' pm <- ggduo(mm, psych_variables, academic_variables, types = list(continuous = loess_with_cor))
+#' pm <- ggduo(
+#'   psychademic,
+#'   rev(psych_variables), academic_variables,
+#'   types = list(continuous = loess_with_cor),
+#'   showStrips = FALSE
+#' )
 #' suppressWarnings(p_(pm)) # ignore warnings from loess
 #'
+#' # add color according to sex
+#' pm <- ggduo(
+#'   psychademic,
+#'   mapping = ggplot2::aes(color = sex),
+#'   rev(psych_variables), academic_variables,
+#'   types = list(continuous = loess_with_cor),
+#'   showStrips = FALSE,
+#'   legend = c(5,2)
+#' )
+#' suppressWarnings(p_(pm))
+#'
+#'
+#' # add color according to sex
+#' pm <- ggduo(
+#'   psychademic,
+#'   mapping = ggplot2::aes(color = motivation),
+#'   rev(psych_variables), academic_variables,
+#'   types = list(continuous = loess_with_cor),
+#'   showStrips = FALSE,
+#'   legend = c(5,2)
+#' ) +
+#'   ggplot2::theme(legend.position = "bottom")
+#' suppressWarnings(p_(pm))
 #
 #
 #
