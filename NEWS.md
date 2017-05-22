@@ -1,5 +1,33 @@
 # GGally 1.3.0.9000
 
+GGally 1.3.1
+-----------------
+
+Added new dataset `psychademic`
+
+* See `?psychademic` for more details
+* (And updated the broken UCLA links)
+
+Added original ggmatrix theme
+
+* added function to set theme to have clear strip background and rearrange the strip positions
+* added parameter `switch` to ggmatrix (and friends) to allow for strip repositioning.  See `?ggplot::facet_grid` for more documentation on `switch` (#223, #224)
+
+`ggsurv` error reporting
+
+* removed a one error check that is covered in other places (#222)
+
+`+.gg`
+
+* allow to add a list of items to a ggmatrix (#228)
+
+`ggmatrix.print`
+
+* fix strip issues with ggplot2 name update
+
+
+
+
 GGally 1.3.0
 -----------------
 
