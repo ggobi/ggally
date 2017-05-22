@@ -28,3 +28,4 @@ _gh-pages
 ggduo_paper.txt
 ^man-roxygen
 ^\.httr-oauth$
+^scripts/
