@@ -243,6 +243,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param axisLabels either "show" to display axisLabels or "none" for no axis labels
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
 #' @template ggmatrix-labeller-param
+#' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
@@ -445,6 +446,7 @@ ggduo <- function(
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
   labeller = "label_value",
+  switch = NULL,
   xlab = NULL,
   ylab = NULL,
   showStrips = NULL,
@@ -547,6 +549,7 @@ ggduo <- function(
     xAxisLabels = columnLabelsX,
     yAxisLabels = columnLabelsY,
     labeller = labeller,
+    switch = switch,
     showStrips = showStrips,
     showXAxisPlotLabels = identical(axisLabels, "show"),
     showYAxisPlotLabels = identical(axisLabels, "show"),
@@ -618,6 +621,7 @@ ggduo <- function(
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @template ggmatrix-labeller-param
+#' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
@@ -743,6 +747,7 @@ ggpairs <- function(
   axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]),
   labeller = "label_value",
+  switch = NULL,
   showStrips = NULL,
   legend = NULL,
   cardinality_threshold = 15,
@@ -840,6 +845,7 @@ ggpairs <- function(
     xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
     yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
     labeller = labeller,
+    switch = switch,
     showStrips = showStrips,
     showXAxisPlotLabels = identical(axisLabels, "show"),
     showYAxisPlotLabels = identical(axisLabels, "show"),

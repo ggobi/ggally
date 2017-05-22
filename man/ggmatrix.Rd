@@ -8,8 +8,8 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
   title = NULL, xlab = NULL, ylab = NULL, byrow = TRUE,
   showStrips = NULL, showAxisPlotLabels = TRUE,
   showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, labeller = NULL,
-  xProportions = NULL, yProportions = NULL, data = NULL, gg = NULL,
-  legend = NULL)
+  switch = NULL, xProportions = NULL, yProportions = NULL, data = NULL,
+  gg = NULL, legend = NULL)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
@@ -27,6 +27,8 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 \item{showAxisPlotLabels, showXAxisPlotLabels, showYAxisPlotLabels}{booleans that determine if the plots axis labels are printed on the X (bottom) or Y (left) part of the plot matrix. If \code{showAxisPlotLabels} is set, both \code{showXAxisPlotLabels} and \code{showYAxisPlotLabels} will be set to the given value.}
 
 \item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
+
+\item{switch}{switch parameter for facet_grid. See \code{ggplot2::\link[ggplot2]{facet_grid}}.  By default, the labels are displayed on the top and right of the plot. If \code{"x"}, the top labels will be displayed to the bottom. If \code{"y"}, the right-hand side labels will be displayed to the left. Can also be set to \code{"both"}}
 
 \item{xProportions, yProportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, or \code{grid::\link[grid]{unit}} object with matching respective length}
 
