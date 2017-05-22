@@ -116,3 +116,20 @@ add_gg_info <- function(p, gg) {
 is.ggmatrix <- function(x) {
   inherits(x, "ggmatrix")
 }
+
+
+
+#' Modify a ggmatrix object by adding an ggplot2 object to all plots
+#'
+#' @export
+#' @examples
+#'
+#' ggpairs(iris, 1:2) + v1_ggmatrix_theme()
+#' # move the column names to the left and bottom
+#' ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme()
+v1_ggmatrix_theme <- function() {
+  theme(
+    strip.background = element_rect(fill = "white"),
+    strip.placement = "outside"
+  )
+}

@@ -608,7 +608,7 @@ ggduo <- function(
 #' If a function is supplied as an option to \code{upper}, \code{lower}, or \code{diag}, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 #'
 #' @export
-#' @seealso wrap
+#' @seealso wrap v1_ggmatrix_theme
 #' @param data data set using.  Can have both numerical and categorical data.
 #' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.
 #' @param columns which columns are used to make plots.  Defaults to all columns.
