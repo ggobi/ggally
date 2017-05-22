@@ -291,10 +291,6 @@ ggsurv_m <- function(
   pl <- pl + scale_linetype_manual(name = gr.name, values = lineScaleValues)
 
   if(identical(CI,TRUE)) {
-    if(length(surv.col) > 1 || length(lty.est) > 1){
-      stop('Either surv.col or lty.est should be of length 1 in order to plot 95% CI with multiple strata')
-    }
-
     stepLty <- if ((length(surv.col) > 1 | surv.col == 'gg.def')[1]) {
       lty.ci
     } else {
