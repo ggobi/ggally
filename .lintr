@@ -1,4 +1,3 @@
-cache_directory: ".lintr_cache"
 linters: with_defaults(
     camel_case_linter = NULL,
     commented_code_linter = NULL,
