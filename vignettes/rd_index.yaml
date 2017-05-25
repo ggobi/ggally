@@ -48,6 +48,7 @@ sections:
     - gg-add
     - mapping_color_to_fill
     - fn_switch
+    - v1_ggmatrix_theme
     - str.ggmatrix
     - print_if_interactive
 -
