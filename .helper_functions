@@ -51,7 +51,7 @@ reverse_depends:
     "devtools.revdep.libpath" = normalizePath(file.path("revdep", "lib")),
     pkgType = "source"
   )
-  devtools::revdep_check(bioconductor=TRUE)
+  devtools::revdep_check(bioconductor=FALSE)
   devtools::revdep_check_save_summary()
   devtools::revdep_check_print_problems()
 reverse_depends_email:
