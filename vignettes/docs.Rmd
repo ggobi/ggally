@@ -168,7 +168,7 @@ The purpose of this function is to display two grouped data in a plot matrix.  T
 This example is derived from
 
 ``
-R Data Analysis Examples: Canonical Correlation Analysis.  UCLA: Statistical Consulting Group. from http://www.ats.ucla.edu/stat/r/dae/canonical.htm (accessed June 23, 2016).
+R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital Research and Education. from http://www.stats.idre.ucla.edu/r/dae/canonical-correlation-analysis (accessed May 22, 2017).
 ``
 
 ``
@@ -176,32 +176,25 @@ Example 1. A researcher has collected data on three psychological variables, fou
 ``
 
 ```{r ggduo-cca}
-psych <- read.csv("http://www.ats.ucla.edu/stat/data/mmreg.csv")
-colnames(psych) <- c("Control", "Concept", "Motivation", "Read", "Write", "Math", "Science", "Sex")
-psych <- data.frame(
-  Motivation = psych$Motivation,
-  Self.Concept = psych$Concept,
-  Locus.of.Control = psych$Control,
-  Read = psych$Read,
-  Write = psych$Write,
-  Math = psych$Math,
-  Science = psych$Science,
-  Sex = c("0" = "Male", "1" = "Female")[as.character(psych$Sex)]
-)
+data(psychademic)
+str(psychademic)
+(psych_variables <- attr(psychademic, "psychology"))
+(academic_variables <- attr(psychademic, "academic"))
+
 ```
 
 First, look at the within correlation using `r rdl(ggpairs)`.
 
 ```{r ggduo-within}
-ggpairs(psych, 1:3, title = "Within Psychological Variables")
-ggpairs(psych, 4:8, title = "Within Academic Variables")
+ggpairs(psychademic, psych_variables, title = "Within Psychological Variables")
+ggpairs(psychademic, academic_variables, title = "Within Academic Variables")
 ```
 
 Next, look at the between correlation using `r rdl(ggduo)`.
 
 ```{r ggduo-between}
 ggduo(
-  psych, 1:3, 4:8,
+  psychademic, psych_variables, academic_variables,
   types = list(continuous = "smooth_lm"),
   title = "Between Academic and Psychological Variable Correlation",
   xlab = "Psychological",
@@ -213,8 +206,8 @@ Since ggduo does not have a upper section to display the correlation values, we 
 
 ```{r ggduo-lm}
 lm_with_cor <- function(data, mapping, ..., method = "pearson") {
-  x <- data[[deparse(mapping$x)]]
-  y <- data[[deparse(mapping$y)]]
+  x <- eval(mapping$x, data)
+  y <- eval(mapping$y, data)
   cor <- cor(x, y, method = method)
   ggally_smooth_lm(data, mapping, ...) +
     ggplot2::geom_label(
@@ -223,14 +216,15 @@ lm_with_cor <- function(data, mapping, ..., method = "pearson") {
         y = max(y, na.rm = TRUE),
         lab = round(cor, digits = 3)
       ),
-      mapping = ggplot2::aes(x = x, y = y, label = lab, color = NULL),
+      mapping = ggplot2::aes(x = x, y = y, label = lab),
       hjust = 0, vjust = 1,
-      size = 5, fontface = "bold"
+      size = 5, fontface = "bold",
+      inherit.aes = FALSE # do not inherit anything from the ...
     )
 }
 ggduo(
-  psych, 1:3, 4:8,
-  mapping = aes(color = Sex),
+  psychademic, rev(psych_variables), academic_variables,
+  mapping = aes(color = sex),
   types = list(continuous = wrap(lm_with_cor, alpha = 0.25)),
   showStrips = FALSE,
   title = "Between Academic and Psychological Variable Correlation",
@@ -446,7 +440,7 @@ Rescaling in different ways puts emphasis on different components, see the examp
 
 ## Generic Example
 
-The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.  
+The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.
 
 ```{r ggmatrix_genExample}
 plotList <- list()
@@ -904,13 +898,13 @@ There are many hidden features within ggpairs.  Please take a look at the exampl
 
 ## Columns and Mapping
 
-The `columns` displayed default to all columns of the provided `data`.  To subset to only a few columns, use the `columns` parameter.  
+The `columns` displayed default to all columns of the provided `data`.  To subset to only a few columns, use the `columns` parameter.
 
 ```{r ggpairs_columns}
 data(tips, package = "reshape")
 pm <- ggpairs(tips)
 pm
-## too many plots for this example.  
+## too many plots for this example.
 
 ## reduce the columns being displayed
 ## these two lines of code produce the same plot matrix
@@ -919,7 +913,7 @@ pm <- ggpairs(tips, columns = c("total_bill", "time", "tip"), columnLabels = c("
 pm
 ```
 
-Aesthetics can be applied to every subplot with the `mapping` parameter.  
+Aesthetics can be applied to every subplot with the `mapping` parameter.
 
 ```{r ggpairs_mapping}
 library(ggplot2)
@@ -931,7 +925,7 @@ Since the plots are default plots (or are helper functions from GGally), the aes
 
 ## Matrix Sections
 
-There are three major sections of the pairwise matrix: `lower`, `upper`, and `diag`.  The `lower` and `upper` may contain three plot types: `continuous`, `combo`, and `discrete`.  The 'diag' only contains either `continuous` or `discrete`.  
+There are three major sections of the pairwise matrix: `lower`, `upper`, and `diag`.  The `lower` and `upper` may contain three plot types: `continuous`, `combo`, and `discrete`.  The 'diag' only contains either `continuous` or `discrete`.
 
 * `continuous`: both X and Y are continuous variables
 * `combo`: one X and Y variable is discrete while the other is continuous
@@ -1007,7 +1001,7 @@ pm
 
 ## Function Wrapping
 
-The examples above use default parameters to each of the subplots.  One of the immediate parameters to be set it `binwidth`.  This parameters is only needed in the lower, combination plots where one variable is continuous while the other variable is discrete.  
+The examples above use default parameters to each of the subplots.  One of the immediate parameters to be set it `binwidth`.  This parameters is only needed in the lower, combination plots where one variable is continuous while the other variable is discrete.
 
 To change the default parameter `binwidth` setting, we will `r rdl(wrap)` the function.  `r rdl(wrap)` first parameter should be a character string or a custom function.  The remaining parameters supplied to wrap will be supplied to the function at run time.
 
@@ -1139,7 +1133,7 @@ John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, He
 This function produces Kaplan-Meier plots using `r rdl(ggplot2)`.
 As a first argument, `r rdl(ggsurv)` needs a `r rdl(survfit)` object, created by the
 `r rdl(survival)` package. Default settings differ for single stratum and
-multiple strata objects.  
+multiple strata objects.
 
 ## Single Stratum
 ```{r basic-usage, fig.height=7, fig.width=7}
