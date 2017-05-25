@@ -14,24 +14,28 @@ Barret
 #### Test environments and R CMD check results
 
 * local OS X install (x86_64-apple-darwin13.4.0), R 3.3.0
-  * using R version 3.4.0 (2017-04-21)
-  * using platform: x86_64-apple-darwin15.6.0 (64-bit)
-  * 0 errors | 0 warnings | 0 notes
+  * R version 3.4.0 (2017-04-21)
+    Platform: x86_64-apple-darwin15.6.0 (64-bit)
+    Running under: macOS Sierra 10.12.4
+    * 0 errors | 0 warnings | 0 notes
 
 * travis-ci
-  * Platform: x86_64-pc-linux-gnu (64-bit)
-  * Running under: Ubuntu precise (12.04.5 LTS)
-  * R
-    * R version 3.3.1 (2016-06-21)
-    * R Under development (unstable) (2016-11-12 r71649)
-  * There were no ERRORs, WARNINGs, or NOTEs.
+  * R version 3.4.0 (2017-04-21)
+    Platform: x86_64-pc-linux-gnu (64-bit)
+    Running under: Ubuntu precise (12.04.5 LTS)
+    * 0 errors | 0 warnings | 0 notes
+
+  * R Under development (unstable) (2017-05-24 r72734)
+    Platform: x86_64-pc-linux-gnu (64-bit)
+    Running under: Ubuntu precise (12.04.5 LTS)
+    * 0 errors | 0 warnings | 0 notes
 
 * win-builder (devel and release)
-  * release
-    * There were no ERRORs, WARNINGs, or NOTEs
-  * devel
-    * There were no ERRORs, WARNINGs, or NOTEs
+  * R version 3.4.0 (2017-04-21)
+    * 0 errors | 0 warnings | 0 notes
+  * R Under development (unstable) (2017-05-23 r72721)
+    * 0 errors | 0 warnings | 0 notes
 
 
 ## Reverse dependencies
-I did not run against reverse dependencies as they were small, corrective bug fixes or documentation changes.
+I did not run against reverse dependencies as the changes were small, corrective bug fixes or documentation changes requested by CRAN.
