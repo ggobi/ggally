@@ -48,10 +48,14 @@ reverse_depends:
   dir.create(file.path("revdep", "lib"), recursive = TRUE, showWarnings = FALSE)
   options(
     "Ncpus" = 4,
-    "devtools.revdep.libpath" = normalizePath(file.path("revdep", "lib")),
     pkgType = "source"
   )
-  devtools::revdep_check(bioconductor=FALSE)
+  devtools::revdep_check(
+    bioconductor = TRUE,
+    ignore = c("nzelect"),
+    libpath = .libPaths()[1],
+    srcpath = normalizePath(file.path("revdep", "lib"))
+  )
   devtools::revdep_check_save_summary()
   devtools::revdep_check_print_problems()
 reverse_depends_email:
