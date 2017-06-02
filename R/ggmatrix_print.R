@@ -1,7 +1,7 @@
 
 ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 
-#' Print ggpair object
+#' Print ggmatrix object
 #'
 #' Print method taken from \code{ggplot2:::print.ggplot} and altered for a ggmatrix object
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggmatrix_print.R
 \name{print.ggmatrix}
 \alias{print.ggmatrix}
-\title{Print ggpair object}
+\title{Print ggmatrix object}
 \usage{
 \method{print}{ggmatrix}(x, newpage = is.null(vp), vp = NULL, ...)
 }

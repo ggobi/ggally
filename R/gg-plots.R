@@ -796,7 +796,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param ... other arguements are sent to geom_bar
+#' @param ... other arguments are sent to geom_bar
 #' @param rescale boolean to decide whether or not to rescale the count output. Only applies to numeric data
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
@@ -1110,7 +1110,7 @@ ggally_diagAxis <- function(
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param ... other arguements are sent to geom_bar
+#' @param ... other arguments are sent to geom_bar
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @keywords hplot
 #' @export

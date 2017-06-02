@@ -50,7 +50,7 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 \item{legends}{deprecated}
 }
 \value{
-ggpair object that if called, will print
+ggmatrix object that if called, will print
 }
 \description{
 Make a matrix of plots with a given data set

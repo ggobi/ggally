@@ -26,13 +26,13 @@ wrap_fn_with_params(funcVal, ..., funcArgName = deparse(substitute(funcVal)))
 \item{...}{named parameters to be supplied to \code{wrap_fn_with_param_arg}}
 }
 \value{
-a \code{function(data, mapping, ...)\{\}} that will wrap the original function with the parameters applied as arguements
+a \code{function(data, mapping, ...)\{\}} that will wrap the original function with the parameters applied as arguments
 }
 \description{
 Wraps a function with the supplied parameters to force different default behavior.  This is useful for functions that are supplied to ggpairs.  It allows you to change the behavior of one function, rather than creating multiple functions with different parameter settings.
 }
 \details{
-\code{wrap} is identical to \code{wrap_fn_with_params}.  These function take the new parameters as arguements.
+\code{wrap} is identical to \code{wrap_fn_with_params}.  These function take the new parameters as arguments.
 
 \code{wrapp} is identical to \code{wrap_fn_with_param_arg}.  These functions take the new parameters as a single list.
 

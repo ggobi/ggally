@@ -10,7 +10,7 @@ getPlot(pm, i, j)
 \method{[}{ggmatrix}(pm, i, j, ...)
 }
 \arguments{
-\item{pm}{ggpair object to select from}
+\item{pm}{ggmatrix object to select from}
 
 \item{i}{row from the top}
 

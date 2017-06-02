@@ -2,13 +2,13 @@
 % Please edit documentation in R/ggmatrix_gtable.R
 \name{ggmatrix_gtable}
 \alias{ggmatrix_gtable}
-\title{Print ggpair object}
+\title{Print ggmatrix object}
 \usage{
 ggmatrix_gtable(pm, ..., progress = interactive() && (pm$ncol * pm$nrow) > 15,
   progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ")
 }
 \arguments{
-\item{pm}{ggpair object to be plotted}
+\item{pm}{ggmatrix object to be plotted}
 
 \item{...}{ignored}
 
@@ -17,7 +17,7 @@ ggmatrix_gtable(pm, ..., progress = interactive() && (pm$ncol * pm$nrow) > 15,
 \item{progress_format}{string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.}
 }
 \description{
-Specialized method to print the ggpair object-
+Specialized method to print the ggmatrix object-
 }
 \examples{
 data(tips, package = "reshape")

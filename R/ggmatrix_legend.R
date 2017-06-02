@@ -60,7 +60,7 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #' Plot only legend of plot function
 #'
 #' @param fn this value is passed directly to an empty \code{\link{wrap}} call.  Please see \code{?\link{wrap}} for more details.
-#' @return a function that when called with arguements will produce the legend of the plotting function supplied.
+#' @return a function that when called with arguments will produce the legend of the plotting function supplied.
 #' @export
 #' @examples
 #' # display regular plot

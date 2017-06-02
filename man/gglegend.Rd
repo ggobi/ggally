@@ -10,7 +10,7 @@ gglegend(fn)
 \item{fn}{this value is passed directly to an empty \code{\link{wrap}} call.  Please see \code{?\link{wrap}} for more details.}
 }
 \value{
-a function that when called with arguements will produce the legend of the plotting function supplied.
+a function that when called with arguments will produce the legend of the plotting function supplied.
 }
 \description{
 Plot only legend of plot function

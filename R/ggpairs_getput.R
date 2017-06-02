@@ -49,7 +49,7 @@ putPlot <- function(pm, value, i, j){
 #'
 #' Retrieves the ggplot object at the desired location.
 #'
-#' @param pm ggpair object to select from
+#' @param pm ggmatrix object to select from
 #' @param i row from the top
 #' @param j column from the left
 #' @keywords hplot

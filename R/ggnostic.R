@@ -200,7 +200,7 @@ ggally_nostic_line <- function(
 #' @param lineConfColor,lineConfSize,lineConfAlpha,lineConfType parameters supplied to the confidence interval lines
 #' @param pVal percentiles of a N(0, sigma) distribution to be drawn
 #' @param sigma sigma value for the \code{pVal} percentiles
-#' @param se boolen to determine if the confidence intervals should be displayed
+#' @param se boolean to determine if the confidence intervals should be displayed
 #' @param method parameter supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"}
 #' @return ggplot2 plot object
 #' @seealso \code{stats::\link[stats]{residuals}}
@@ -534,7 +534,7 @@ check_and_set_nostic_types <- function(
 #'
 #'
 #' @section `columnsY`:
-#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken direclty from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
+#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
 #'
 #' \describe{
 #'   \item{.resid}{Residuals}

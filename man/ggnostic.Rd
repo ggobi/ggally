@@ -44,7 +44,7 @@ ggnostic - Plot matrix of statistical model diagnostics
 }
 \section{`columnsY`}{
 
-\code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken direclty from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
+\code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
 
 \describe{
   \item{.resid}{Residuals}
