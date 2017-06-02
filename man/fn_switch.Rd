@@ -9,7 +9,7 @@ fn_switch(types, mapping_val = "y")
 \arguments{
 \item{types}{list of functions that follow the ggmatrix function standard: \code{function(data, mapping, ...){ #make ggplot2 object }}.  One key should be a 'default' key for a default switch case.}
 
-\item{mapping_val}{mapping value to switch on.  Defautls to the 'y' varaible of the aesthetics list.}
+\item{mapping_val}{mapping value to switch on.  Defaults to the 'y' variable of the aesthetics list.}
 }
 \description{
 Function that allows you to call different functions based upon an aesthetic variable value.

@@ -155,7 +155,7 @@ ggally_density <- function(data, mapping, ...){
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param alignPercent right align position of numbers. Default is 60 percent across the horizontal
-#' @param method \code{method} suppied to cor function
+#' @param method \code{method} supplied to cor function
 #' @param use \code{use} supplied to cor function
 #' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
 #' @param corMethod deprecated. Use parameter \code{method}

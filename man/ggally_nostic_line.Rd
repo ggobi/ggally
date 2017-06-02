@@ -16,7 +16,7 @@ ggally_nostic_line(data, mapping, ..., linePosition = NULL,
 
 \item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}}
 
-\item{continuous_geom}{ggplot2 geom that is executed after the line is (possibly) added and if the x data is continous}
+\item{continuous_geom}{ggplot2 geom that is executed after the line is (possibly) added and if the x data is continuous}
 
 \item{combo_geom}{ggplot2 geom that is executed after the line is (possibly) added and if the x data is discrete}
 

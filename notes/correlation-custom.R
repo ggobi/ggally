@@ -6,7 +6,7 @@
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param corAlignPercent right align position of numbers. Default is 60 percent across the horizontal
-#' @param corMethod \code{method} suppied to cor function
+#' @param corMethod \code{method} supplied to cor function
 #' @param corUse \code{use} supplied to cor function
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}

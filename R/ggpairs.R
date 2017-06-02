@@ -246,7 +246,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
-#' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
+#' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @param legends deprecated
 #' @export
 #' @examples
@@ -624,7 +624,7 @@ ggduo <- function(
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
-#' @param cardinality_threshold maximum number of levels allowed in a charcter / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
+#' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @param legends deprecated
 #' @keywords hplot
 #' @import ggplot2

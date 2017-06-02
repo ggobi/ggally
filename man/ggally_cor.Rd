@@ -15,7 +15,7 @@ ggally_cor(data, mapping, alignPercent = 0.6, method = "pearson",
 
 \item{alignPercent}{right align position of numbers. Default is 60 percent across the horizontal}
 
-\item{method}{\code{method} suppied to cor function}
+\item{method}{\code{method} supplied to cor function}
 
 \item{use}{\code{use} supplied to cor function}
 

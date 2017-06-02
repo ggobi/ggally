@@ -1,4 +1,4 @@
-#' UCLA canonicial correlation analysis data
+#' UCLA canonical correlation analysis data
 #'
 #' This data contains 600 observations on eight variables
 #'

@@ -3,7 +3,7 @@
 \docType{data}
 \name{psychademic}
 \alias{psychademic}
-\title{UCLA canonicial correlation analysis data}
+\title{UCLA canonical correlation analysis data}
 \format{A data frame with 600 rows and 8 variables}
 \usage{
 data(psychademic)

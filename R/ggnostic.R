@@ -12,7 +12,7 @@
 ## .cooksd: Cooks distance, 'cooks.distance'
 ## .se.fit: Standard errors of fitted values
 ## .resid: Residuals
-## .std.resid: Standardised residuals (Some unusual "lm" objects, such as "rlm" from MASS, may omit '.cooksd' and '.std.resid'. "gam" from mgcv omits '.sigma')
+## .std.resid: Standardized residuals (Some unusual "lm" objects, such as "rlm" from MASS, may omit '.cooksd' and '.std.resid'. "gam" from mgcv omits '.sigma')
 
 #' Broomify a model
 #'
@@ -58,7 +58,7 @@ model_variables <- function(model, data = broom::augment(model)) {
 }
 #' Model term names
 #'
-#' Retrieve either the response variable names, the beta variable names, or beta variable names.  If the model is an object of class 'lm', by default, the beta variable names will include anova signifigance stars.
+#' Retrieve either the response variable names, the beta variable names, or beta variable names.  If the model is an object of class 'lm', by default, the beta variable names will include anova significance stars.
 #'
 #' @param model model in question
 #' @param data equivalent to \code{broom::augment(model)}
@@ -145,7 +145,7 @@ brew_colors <- function(col) {
 #' @param data,mapping supplied directly to \code{ggplot2::\link[ggplot2]{ggplot}(data, mapping)}
 #' @param ... parameters supplied to \code{continuous_geom} or \code{combo_geom}
 #' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}
-#' @param continuous_geom ggplot2 geom that is executed after the line is (possibly) added and if the x data is continous
+#' @param continuous_geom ggplot2 geom that is executed after the line is (possibly) added and if the x data is continuous
 #' @param combo_geom ggplot2 geom that is executed after the line is (possibly) added and if the x data is discrete
 #' @param mapColorToFill boolean to determine if combo plots should cut the color mapping to the fill mapping
 #' @return ggplot2 plot object
@@ -445,7 +445,7 @@ ggally_nostic_hat <- function(
 #' Function that allows you to call different functions based upon an aesthetic variable value.
 #'
 #' @param types list of functions that follow the ggmatrix function standard: \code{function(data, mapping, ...){ #make ggplot2 object }}.  One key should be a 'default' key for a default switch case.
-#' @param mapping_val mapping value to switch on.  Defautls to the 'y' varaible of the aesthetics list.
+#' @param mapping_val mapping value to switch on.  Defaults to the 'y' variable of the aesthetics list.
 #' @export
 #' @examples
 #' ggnostic_continuous_fn <- fn_switch(list(
@@ -544,7 +544,7 @@ check_and_set_nostic_types <- function(
 #'   \item{.cooksd}{Cooks distance, \code{\link[stats]{cooks.distance}}}
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
-#'   \item{.std.resid}{Standardised residuals}
+#'   \item{.std.resid}{Standardized residuals}
 #'   \item{response variable name}{The response variable in the model may be added. Such as \code{"mpg"} in the model \code{lm(mpg ~ ., data = mtcars)}}
 #' }
 #'
@@ -554,10 +554,10 @@ check_and_set_nostic_types <- function(
 #' @param model statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}
 #' @param ... arguments passed directly to \code{\link{ggduo}}
 #' @param columnsX columns to be displayed in the plot matrix. Defaults to the predictor columns of the \code{model}
-#' @param columnsY rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columnsm provided by \code{broom::\link[broom]{augment}(model)}. See details for more information.
+#' @param columnsY rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by \code{broom::\link[broom]{augment}(model)}. See details for more information.
 #' @param columnLabelsX,columnLabelsY column and row labels to display in the plot matrix
 #' @param xlab,ylab,title plot matrix labels passed directly to \code{\link{ggmatrix}}
-#' @param continuous,combo,discrete list of functions for each y varaible.  See details for more information.
+#' @param continuous,combo,discrete list of functions for each y variable.  See details for more information.
 #' @param data data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information
 #' @export
 #' @examples
