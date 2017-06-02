@@ -1,2 +1,2 @@
 ERROR: dependencies ‘gWidgetsRGtk2’, ‘cairoDevice’ are not available for package ‘MissingDataGUI’
-* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/lib/MissingDataGUI’
+* removing ‘/Users/barret/R/MissingDataGUI’

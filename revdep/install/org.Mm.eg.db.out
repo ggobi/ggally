@@ -1,8 +1,0 @@
-* installing *source* package ‘org.Mm.eg.db’ ...
-** R
-** inst
-** tests
-** preparing package for lazy loading
-Error : package ‘AnnotationDbi’ 1.34.4 was found, but >= 1.35.4 is required by ‘org.Mm.eg.db’
-ERROR: lazy loading failed for package ‘org.Mm.eg.db’
-* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/lib/org.Mm.eg.db’
