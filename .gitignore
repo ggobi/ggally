@@ -17,7 +17,6 @@ vignettes/rd_files/
 .lintr_cache
 revdep/checks\.rds
 revdep/checks
-revdep/install
 revdep/\.cache\.rds
 revdep/lib
 _gh-pages
