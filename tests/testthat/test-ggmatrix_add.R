@@ -42,5 +42,16 @@ test_that("add_list", {
 
   expect_equal(pm1$xlab, "x title")
   expect_equal(pm1$title, "list title")
-  
+
+})
+
+test_that("v1_ggmatrix_theme", {
+
+  pm <- ggpairs(tips, 1:2)
+
+  pm1 <- pm + v1_ggmatrix_theme()
+
+  expect_true(is.null(pm$gg))
+  expect_true(!is.null(pm1$gg))
+
 })
