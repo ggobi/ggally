@@ -4,6 +4,7 @@ TODO
 .gitignore
 R/.DS_Store
 .git
+^\.github
 .travis.yml
 .helper_functions
 .lintr.*
