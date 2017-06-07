@@ -10,38 +10,38 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Indiana/Indianapolis |
-|date     |2017-06-02                   |
+|date     |2017-06-07                   |
 
 ## Packages
 
-|package      |*  |version |date       |source                  |
-|:------------|:--|:-------|:----------|:-----------------------|
-|broom        |   |0.4.2   |2017-02-13 |CRAN (R 3.4.0)          |
-|chemometrics |   |1.4.2   |2017-03-17 |CRAN (R 3.4.0)          |
-|geosphere    |   |1.5-5   |2016-06-15 |CRAN (R 3.4.0)          |
-|GGally       |*  |1.3.1   |2017-06-02 |local (ggobi/ggally@NA) |
-|ggplot2      |   |2.2.1   |2016-12-30 |CRAN (R 3.4.0)          |
-|gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.4.0)          |
-|igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.4.0)          |
-|intergraph   |   |2.0-2   |2016-12-05 |CRAN (R 3.4.0)          |
-|mapproj      |   |1.2-4   |2015-08-03 |CRAN (R 3.4.0)          |
-|maps         |   |3.1.1   |2016-07-27 |CRAN (R 3.4.0)          |
-|network      |   |1.13.0  |2015-09-19 |CRAN (R 3.4.0)          |
-|packagedocs  |   |0.4.0   |2016-11-04 |CRAN (R 3.4.0)          |
-|plyr         |   |1.8.4   |2016-06-08 |CRAN (R 3.4.0)          |
-|progress     |   |1.1.2   |2016-12-14 |CRAN (R 3.4.0)          |
-|RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.4.0)          |
-|reshape      |   |0.8.6   |2016-10-21 |CRAN (R 3.4.0)          |
-|rmarkdown    |   |1.5     |2017-04-26 |CRAN (R 3.4.0)          |
-|roxygen2     |   |6.0.1   |2017-02-06 |CRAN (R 3.4.0)          |
-|scagnostics  |   |0.2-4   |2012-11-05 |CRAN (R 3.4.0)          |
-|scales       |   |0.4.1   |2016-11-09 |CRAN (R 3.4.0)          |
-|sna          |   |2.4     |2016-08-08 |CRAN (R 3.4.0)          |
-|testthat     |   |1.0.2   |2016-04-23 |CRAN (R 3.4.0)          |
+|package      |*  |version |date       |source         |
+|:------------|:--|:-------|:----------|:--------------|
+|broom        |   |0.4.2   |2017-02-13 |CRAN (R 3.4.0) |
+|chemometrics |   |1.4.2   |2017-03-17 |CRAN (R 3.4.0) |
+|geosphere    |   |1.5-5   |2016-06-15 |CRAN (R 3.4.0) |
+|GGally       |*  |1.3.0   |2016-11-13 |cran (@1.3.0)  |
+|ggplot2      |   |2.2.1   |2016-12-30 |CRAN (R 3.4.0) |
+|gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.4.0) |
+|igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.4.0) |
+|intergraph   |   |2.0-2   |2016-12-05 |CRAN (R 3.4.0) |
+|mapproj      |   |1.2-4   |2015-08-03 |CRAN (R 3.4.0) |
+|maps         |   |3.1.1   |2016-07-27 |CRAN (R 3.4.0) |
+|network      |   |1.13.0  |2015-09-19 |CRAN (R 3.4.0) |
+|packagedocs  |   |0.4.0   |2016-11-04 |CRAN (R 3.4.0) |
+|plyr         |   |1.8.4   |2016-06-08 |CRAN (R 3.4.0) |
+|progress     |   |1.1.2   |2016-12-14 |CRAN (R 3.4.0) |
+|RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.4.0) |
+|reshape      |   |0.8.6   |2016-10-21 |CRAN (R 3.4.0) |
+|rmarkdown    |   |1.5     |2017-04-26 |CRAN (R 3.4.0) |
+|roxygen2     |   |6.0.1   |2017-02-06 |CRAN (R 3.4.0) |
+|scagnostics  |   |0.2-4   |2012-11-05 |CRAN (R 3.4.0) |
+|scales       |   |0.4.1   |2016-11-09 |CRAN (R 3.4.0) |
+|sna          |   |2.4     |2016-08-08 |CRAN (R 3.4.0) |
+|testthat     |   |1.0.2   |2016-04-23 |CRAN (R 3.4.0) |
 
 # Check results
 
-6 packages with problems
+5 packages with problems
 
 |package        |version | errors| warnings| notes|
 |:--------------|:-------|------:|--------:|-----:|
@@ -50,10 +50,9 @@
 |POUMM          |1.2.2   |      0|        1|     0|
 |specmine       |1.0     |      1|        0|     0|
 |TVTB           |1.2.0   |      1|        1|     1|
-|vortexR        |1.0.3   |      1|        0|     0|
 
 ## ggbio (1.24.0)
-Maintainer: Michael Lawrence <lawrence.michael@gene.com>  
+Maintainer: Michael Lawrence <lawrence.michael@gene.com>
 Bug reports: https://github.com/tengfei/ggbio/issues
 
 1 error  | 0 warnings | 5 notes
@@ -71,14 +70,14 @@ The error most likely occurred in:
 > ###   autoplot,BSgenome-method autoplot,GAlignments-method
 ... 416 lines ...
 reduce alignemnts...
-> 
-> 
+>
+>
 > ###################################################
 > ### EnsDb
 > ###################################################
 > ## Fetching gene models from an EnsDb object.
 > library(EnsDb.Hsapiens.v75)
-Error in library(EnsDb.Hsapiens.v75) : 
+Error in library(EnsDb.Hsapiens.v75) :
   there is no package called 'EnsDb.Hsapiens.v75'
 Execution halted
 
@@ -173,7 +172,7 @@ Warning in FUN(X[[i]], ...) : end value not changed
 Warning in FUN(X[[i]], ...) : end value not changed
 Warning in FUN(X[[i]], ...) : end value not changed
 Warning in FUN(X[[i]], ...) : end value not changed
-Quitting from lines 393-404 (UserGuide.Rmd) 
+Quitting from lines 393-404 (UserGuide.Rmd)
 Error: processing vignette 'UserGuide.Rmd' failed with diagnostics:
 package 'adaptMCMC' not found
 Execution halted
@@ -193,29 +192,29 @@ manual.
 ```
 
 ## TVTB (1.2.0)
-Maintainer: Kevin Rue-Albrecht <kevinrue67@gmail.com>  
+Maintainer: Kevin Rue-Albrecht <kevinrue67@gmail.com>
 Bug reports: https://github.com/kevinrue/TVTB/issues
 
-1 error  | 1 warning  | 1 note 
+1 error  | 1 warning  | 1 note
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [18s/19s]
+  Running ‘testthat.R’ [15s/15s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
-    rs1426654 rs150379789 rs570906312 rs538198029 rs553496066 rs574775672 
-         TRUE        TRUE       FALSE       FALSE        TRUE       FALSE 
-  rs140666229 rs556950130 rs575303689 rs147513140 rs187525777 rs192454382 
-         TRUE       FALSE        TRUE        TRUE       FALSE       FALSE 
-  rs184818838 rs566886499 rs199924625 rs555872528 rs531820822 rs201353600 
-        FALSE       FALSE       FALSE       FALSE       FALSE       FALSE 
-  rs550201688 rs565338261 rs201239799 rs200461129 rs146726548 
-        FALSE       FALSE       FALSE       FALSE        TRUE 
+    rs1426654 rs150379789 rs570906312 rs538198029 rs553496066 rs574775672
+         TRUE        TRUE       FALSE       FALSE        TRUE       FALSE
+  rs140666229 rs556950130 rs575303689 rs147513140 rs187525777 rs192454382
+         TRUE       FALSE        TRUE        TRUE       FALSE       FALSE
+  rs184818838 rs566886499 rs199924625 rs555872528 rs531820822 rs201353600
+        FALSE       FALSE       FALSE       FALSE       FALSE       FALSE
+  rs550201688 rs565338261 rs201239799 rs200461129 rs146726548
+        FALSE       FALSE       FALSE       FALSE        TRUE
   testthat results ================================================================
   OK: 229 SKIPPED: 0 FAILED: 2
-  1. Error: all signatures work to completion (@test_plotInfo-methods.R#25) 
-  2. Error: invalid metric/phenotype combination is detected (@test_plotInfo-methods.R#50) 
-  
+  1. Error: all signatures work to completion (@test_plotInfo-methods.R#25)
+  2. Error: invalid metric/phenotype combination is detected (@test_plotInfo-methods.R#50)
+
   Error: testthat unit tests failed
   Execution halted
 
@@ -234,7 +233,7 @@ Overwriting INFO keys in header:
 - ALT
 - AAF
 - MAF
-Quitting from lines 570-577 (Introduction.Rmd) 
+Quitting from lines 570-577 (Introduction.Rmd)
 Error: processing vignette 'Introduction.Rmd' failed with diagnostics:
 there is no package called 'EnsDb.Hsapiens.v75'
 Execution halted
@@ -243,32 +242,3 @@ Execution halted
 checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘EnsDb.Hsapiens.v75’
 ```
-
-## vortexR (1.0.3)
-Maintainer: Carlo Pacioni <C.Pacioni@Murdoch.edu.au>  
-Bug reports: https://github.com/carlopacioni/vortexR/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Improvements in best and average IC have bebingo en below the specified goals.
-  Algorithm is declared to have converged.
-  Completed.
-     user  system elapsed 
-    0.789   0.032   0.666 
-  1. Failure: test m_scatter (@test-plot.R#65) -----------------------------------
-  `scatter.plot` has length 19, not length 18.
-  
-  
-  testthat results ================================================================
-  OK: 28 SKIPPED: 0 FAILED: 1
-  1. Failure: test m_scatter (@test-plot.R#65) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
-
