@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Indiana/Indianapolis |
-|date     |2017-06-02                   |
+|date     |2017-06-07                   |
 
 ## Packages
 
@@ -19,7 +19,7 @@
 |broom        |   |0.4.2   |2017-02-13 |CRAN (R 3.4.0)          |
 |chemometrics |   |1.4.2   |2017-03-17 |CRAN (R 3.4.0)          |
 |geosphere    |   |1.5-5   |2016-06-15 |CRAN (R 3.4.0)          |
-|GGally       |*  |1.3.1   |2017-06-02 |local (ggobi/ggally@NA) |
+|GGally       |*  |1.3.1   |2017-06-07 |local (ggobi/ggally@NA) |
 |ggplot2      |   |2.2.1   |2016-12-30 |CRAN (R 3.4.0)          |
 |gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.4.0)          |
 |igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.4.0)          |
@@ -59,7 +59,7 @@
 |ICtest              |0.2     |      0|        0|     2|
 |imageData           |0.1-26  |      0|        0|     0|
 |isomiRs             |1.4.0   |      0|        0|     2|
-|jmv                 |0.7.3.1 |      0|        0|     0|
+|jmv                 |0.7.3.5 |      0|        0|     0|
 |LANDD               |1.1.0   |      0|        0|     2|
 |MAST                |1.2.1   |      0|        0|     2|
 |mbgraphic           |1.0.0   |      0|        0|     0|
@@ -85,7 +85,7 @@
 |TVTB                |1.2.0   |      1|        1|     1|
 |userfriendlyscience |0.6-1   |      0|        0|     0|
 |vdmR                |0.2.3   |      0|        0|     0|
-|vortexR             |1.0.3   |      1|        0|     0|
+|vortexR             |1.1.4   |      0|        0|     0|
 
 ## BANFF (2.0)
 Maintainer: Tianwei Yu <tianwei.yu@emory.edu>
@@ -305,7 +305,7 @@ Undefined global functions or variables:
   t3 t5 term term_short type value y
 ```
 
-## jmv (0.7.3.1)
+## jmv (0.7.3.5)
 Maintainer: Jonathon Love <jon@thon.cc>
 
 0 errors | 0 warnings | 0 notes
@@ -575,7 +575,7 @@ Bug reports: https://github.com/kevinrue/TVTB/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [18s/19s]
+  Running ‘testthat.R’ [14s/15s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
     rs1426654 rs150379789 rs570906312 rs538198029 rs553496066 rs574775672 
@@ -629,31 +629,9 @@ Maintainer: Tomokazu Fujino <fujino@fwu.ac.jp>
 
 0 errors | 0 warnings | 0 notes
 
-## vortexR (1.0.3)
+## vortexR (1.1.4)
 Maintainer: Carlo Pacioni <C.Pacioni@Murdoch.edu.au>  
 Bug reports: https://github.com/carlopacioni/vortexR/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Improvements in best and average IC have bebingo en below the specified goals.
-  Algorithm is declared to have converged.
-  Completed.
-     user  system elapsed 
-    0.789   0.032   0.666 
-  1. Failure: test m_scatter (@test-plot.R#65) -----------------------------------
-  `scatter.plot` has length 19, not length 18.
-  
-  
-  testthat results ================================================================
-  OK: 28 SKIPPED: 0 FAILED: 1
-  1. Failure: test m_scatter (@test-plot.R#65) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 

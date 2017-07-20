@@ -14,30 +14,30 @@
 
 ## Packages
 
-|package      |*  |version |date       |source                  |
-|:------------|:--|:-------|:----------|:-----------------------|
-|broom        |   |0.4.2   |2017-02-13 |CRAN (R 3.4.0)          |
-|chemometrics |   |1.4.2   |2017-03-17 |CRAN (R 3.4.0)          |
-|geosphere    |   |1.5-5   |2016-06-15 |CRAN (R 3.4.0)          |
-|GGally       |*  |1.3.1   |2017-06-07 |local (ggobi/ggally@NA) |
-|ggplot2      |   |2.2.1   |2016-12-30 |CRAN (R 3.4.0)          |
-|gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.4.0)          |
-|igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.4.0)          |
-|intergraph   |   |2.0-2   |2016-12-05 |CRAN (R 3.4.0)          |
-|mapproj      |   |1.2-4   |2015-08-03 |CRAN (R 3.4.0)          |
-|maps         |   |3.1.1   |2016-07-27 |CRAN (R 3.4.0)          |
-|network      |   |1.13.0  |2015-09-19 |CRAN (R 3.4.0)          |
-|packagedocs  |   |0.4.0   |2016-11-04 |CRAN (R 3.4.0)          |
-|plyr         |   |1.8.4   |2016-06-08 |CRAN (R 3.4.0)          |
-|progress     |   |1.1.2   |2016-12-14 |CRAN (R 3.4.0)          |
-|RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.4.0)          |
-|reshape      |   |0.8.6   |2016-10-21 |CRAN (R 3.4.0)          |
-|rmarkdown    |   |1.5     |2017-04-26 |CRAN (R 3.4.0)          |
-|roxygen2     |   |6.0.1   |2017-02-06 |CRAN (R 3.4.0)          |
-|scagnostics  |   |0.2-4   |2012-11-05 |CRAN (R 3.4.0)          |
-|scales       |   |0.4.1   |2016-11-09 |CRAN (R 3.4.0)          |
-|sna          |   |2.4     |2016-08-08 |CRAN (R 3.4.0)          |
-|testthat     |   |1.0.2   |2016-04-23 |CRAN (R 3.4.0)          |
+|package      |*  |version |date       |source         |
+|:------------|:--|:-------|:----------|:--------------|
+|broom        |   |0.4.2   |2017-02-13 |CRAN (R 3.4.0) |
+|chemometrics |   |1.4.2   |2017-03-17 |CRAN (R 3.4.0) |
+|geosphere    |   |1.5-5   |2016-06-15 |CRAN (R 3.4.0) |
+|GGally       |*  |1.3.0   |2016-11-13 |cran (@1.3.0)  |
+|ggplot2      |   |2.2.1   |2016-12-30 |CRAN (R 3.4.0) |
+|gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.4.0) |
+|igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.4.0) |
+|intergraph   |   |2.0-2   |2016-12-05 |CRAN (R 3.4.0) |
+|mapproj      |   |1.2-4   |2015-08-03 |CRAN (R 3.4.0) |
+|maps         |   |3.1.1   |2016-07-27 |CRAN (R 3.4.0) |
+|network      |   |1.13.0  |2015-09-19 |CRAN (R 3.4.0) |
+|packagedocs  |   |0.4.0   |2016-11-04 |CRAN (R 3.4.0) |
+|plyr         |   |1.8.4   |2016-06-08 |CRAN (R 3.4.0) |
+|progress     |   |1.1.2   |2016-12-14 |CRAN (R 3.4.0) |
+|RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.4.0) |
+|reshape      |   |0.8.6   |2016-10-21 |CRAN (R 3.4.0) |
+|rmarkdown    |   |1.5     |2017-04-26 |CRAN (R 3.4.0) |
+|roxygen2     |   |6.0.1   |2017-02-06 |CRAN (R 3.4.0) |
+|scagnostics  |   |0.2-4   |2012-11-05 |CRAN (R 3.4.0) |
+|scales       |   |0.4.1   |2016-11-09 |CRAN (R 3.4.0) |
+|sna          |   |2.4     |2016-08-08 |CRAN (R 3.4.0) |
+|testthat     |   |1.0.2   |2016-04-23 |CRAN (R 3.4.0) |
 
 # Check results
 
@@ -199,7 +199,7 @@ Bug reports: https://github.com/kevinrue/TVTB/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [14s/15s]
+  Running ‘testthat.R’ [15s/15s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
     rs1426654 rs150379789 rs570906312 rs538198029 rs553496066 rs574775672

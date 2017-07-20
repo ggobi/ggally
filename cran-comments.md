@@ -1,6 +1,31 @@
 
 ## Comments
 
+### 2017-6-7
+
+vortexR has been updated to handle the new version of GGally.  From my reverse dependency checks, there were no other affected packages.  <https://github.com/ggobi/ggally/blob/master/revdep/problem-diff.txt>
+
+Best,
+Barret
+
+
+### 2017-6-7
+
+On CRAN
+- @carlopacioni vortexR maintainer
+
+
+### 2017-6-4
+
+vortexR maintainer contacted.
+
+
+### 2017-6-4
+
+~ Please give two weeks notice to affected packages.
+- Uwe
+
+
 ### 2017-6-2
 
 No revdep authors were emailed as it is only small bug fixes, url link fixes, and new functions.
@@ -44,21 +69,14 @@ Checked on
     Platform: x86_64-apple-darwin15.6.0 (64-bit)
     Running under: macOS Sierra 10.12.4
 
-
-* Related to GGally
-  * vortexR: checking tests ... ERROR
-    * created Github issue to solve test errors
-      * https://github.com/carlopacioni/vortexR/issues/38
+No difference in test results due to GGally upgrade: <https://github.com/ggobi/ggally/blob/master/revdep/problem-diff.txt>
 
 
+Errors not related to GGally upgrade:
 * Failed to install dependencies for: MissingDataGUI, specmine
-
-* Failed to install dependencies:
-  * ggbio: checking examples ... ERROR
-  * POUMM: checking re-building of vignette outputs ... WARNING
-
-* Test errors not related to GGally:
-  * TVTB: checking tests ... ERROR
+* ggbio: checking examples ... ERROR
+* POUMM: checking re-building of vignette outputs ... WARNING
+* TVTB: checking tests ... ERROR
 
 * Check failed to finish in 20 minutes, so ignored
   * nzelect
