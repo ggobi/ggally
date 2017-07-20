@@ -100,6 +100,15 @@ test_that("stops", {
   )
 
   expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, shadeBox = c(1, 2)),
+    "invalid value for 'shadeBox'; must be a single color"
+  )
+  expect_error(
+    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, shadeBox = "notacolor"),
+    "invalid value for 'shadeBox'; must be a valid R color"
+  )
+
+  expect_error(
     ggparcoord(diamonds.samp, columns = c(1, 5:10), groupColumn = 2, splineFactor = NULL),
     "invalid value for 'splineFactor'"
   )
