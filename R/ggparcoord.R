@@ -509,6 +509,7 @@ ggparcoord <- function(
         data = d.sum, size = I(10), col = shadeBox,
         inherit.aes = FALSE,
         mapping = aes_string(
+          x = "variable",
           ymin = "min",
           ymax = "max",
           group = "variable"
