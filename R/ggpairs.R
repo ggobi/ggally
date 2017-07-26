@@ -518,7 +518,7 @@ ggduo <- function(
 
     sectionAes <- add_and_overwrite_aes(
       add_and_overwrite_aes(
-        aes_string(x = xColName, y = yColName),
+        aes_(x = as.name(xColName), y = as.name(yColName)),
         mapping
       ),
       types$mapping
@@ -819,7 +819,7 @@ ggpairs <- function(
 
     sectionAes <- add_and_overwrite_aes(
       add_and_overwrite_aes(
-        aes_string(x = xColName, y = yColName),
+        aes_(x = as.name(xColName), y = as.name(yColName)),
         mapping
       ),
       types$mapping
@@ -867,7 +867,7 @@ ggpairs <- function(
 #'
 #' @keywords internal
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @return aes_string output
+#' @return aes_ output
 #' @import ggplot2
 #' @rdname add_and_overwrite_aes
 #' @examples
