@@ -260,15 +260,15 @@ test_that("examples", {
   expect_error(ggnet2(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
+  if (requireNamespace("igraph")) {
+    # test igraph conversion
+    p <- ggnet2(asIgraph(n), color = "group")
+    expect_null(p$guides$colour)
 
-  # test igraph conversion
-  p <- ggnet2(asIgraph(n), color = "group")
-  expect_null(p$guides$colour)
+    # test igraph degree
+    ggnet2(n, size = "degree")
 
-  # test igraph degree
-  library(igraph)
-  ggnet2(n, size = "degree")
-
-  expect_true(TRUE)
+    expect_true(TRUE)
+  }
 
 })

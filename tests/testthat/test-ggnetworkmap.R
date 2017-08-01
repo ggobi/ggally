@@ -198,9 +198,12 @@ test_that("network coercion", {
 ### --- test igraph functionality
 
 test_that("igraph conversion", {
-  n <- asIgraph(flights)
-  p <- ggnetworkmap(net = n)
-  expect_equal(length(p$layers), 2)
+
+  if (requireNamespace("igraph")) {
+    n <- asIgraph(flights)
+    p <- ggnetworkmap(net = n)
+    expect_equal(length(p$layers), 2)
+  }
 })
 
 expect_true(TRUE)

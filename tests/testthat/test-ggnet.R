@@ -226,16 +226,15 @@ test_that("examples", {
   expect_error(ggnet(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
+  if (requireNamespace("igraph")) {
+      # test igraph conversion
+      p <- ggnet(asIgraph(n))
+      expect_null(p$guides$colour)
+      expect_equal(length(p$layers), 2)
 
-  # test igraph conversion
-  p <- ggnet(asIgraph(n))
-  expect_null(p$guides$colour)
-  expect_equal(length(p$layers), 2)
-
-  # test igraph degree
-  library(igraph)
-  ggnet(n, weight = "degree")
-
-  expect_true(TRUE)
+      # test igraph degree
+      ggnet(n, weight = "degree")
+      expect_true(TRUE)
+  }
 
 })
