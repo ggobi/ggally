@@ -202,15 +202,6 @@ test_that("stops", {
     ggduo(tips, columnsY = 1:3, columnLabelsY = c("A", "B", "C", "Extra"))
   }, "The length of the 'columnLabelsY' does not match the length of the 'columnsY'") # nolint
 
-  dt <- tips
-  colnames(dt)[3] <- "1"
-  expect_warning({
-    pm <- ggpairs(dt, lower = facethistBindwidth1)
-  }, "Data column name is numeric") # nolint
-  expect_warning({
-    pm <- ggduo(dt, types = facethistBindwidth1Duo)
-  }, "Data column name is numeric") # nolint
-
   expect_error({
     ggpairs(tips, upper = c("not_a_list"))
   }, "'upper' is not a list") # nolint
