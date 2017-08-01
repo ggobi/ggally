@@ -1,4 +1,15 @@
-# GGally 1.3.1.9000
+GGally 1.3.2
+-----------------
+
+`ggpairs` and `ggduo`
+
+*  Removed warning where pure numeric names gave a warning (#238, @lepennec)
+
+`ggparcoord`
+
+* Fixed missing `x` aes requirement when shadebox is provided (#237, @treysp)
+
+
 
 GGally 1.3.1
 -----------------
