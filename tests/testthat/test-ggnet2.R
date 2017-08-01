@@ -261,6 +261,7 @@ test_that("examples", {
 
   ### --- test igraph functionality
   if (requireNamespace("igraph", quietly = TRUE)) {
+    library(igraph)
     # test igraph conversion
     p <- ggnet2(asIgraph(n), color = "group")
     expect_null(p$guides$colour)

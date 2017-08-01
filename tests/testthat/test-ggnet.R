@@ -227,14 +227,15 @@ test_that("examples", {
 
   ### --- test igraph functionality
   if (requireNamespace("igraph", quietly = TRUE)) {
-      # test igraph conversion
-      p <- ggnet(asIgraph(n))
-      expect_null(p$guides$colour)
-      expect_equal(length(p$layers), 2)
+    library(igraph)
+    # test igraph conversion
+    p <- ggnet(asIgraph(n))
+    expect_null(p$guides$colour)
+    expect_equal(length(p$layers), 2)
 
-      # test igraph degree
-      ggnet(n, weight = "degree")
-      expect_true(TRUE)
+    # test igraph degree
+    ggnet(n, weight = "degree")
+    expect_true(TRUE)
   }
 
 })
