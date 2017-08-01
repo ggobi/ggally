@@ -226,7 +226,7 @@ test_that("examples", {
   expect_error(ggnet(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
-  if (requireNamespace("igraph")) {
+  if (requireNamespace("igraph", quietly = TRUE)) {
       # test igraph conversion
       p <- ggnet(asIgraph(n))
       expect_null(p$guides$colour)

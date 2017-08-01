@@ -199,7 +199,7 @@ test_that("network coercion", {
 
 test_that("igraph conversion", {
 
-  if (requireNamespace("igraph")) {
+  if (requireNamespace("igraph", quietly = TRUE)) {
     n <- asIgraph(flights)
     p <- ggnetworkmap(net = n)
     expect_equal(length(p$layers), 2)
