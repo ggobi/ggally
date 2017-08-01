@@ -127,18 +127,6 @@ fix_column_values <- function(
     }
   }
 
-  colnamesUsed <- colnamesData[columns]
-  nameIsOnlyNumber <- ! str_detect(colnamesUsed, "[^0-9]")
-  if (any(nameIsOnlyNumber)) {
-    badColumns <- colnamesUsed[nameIsOnlyNumber]
-    names(badColumns) <- paste("column =", columns[nameIsOnlyNumber])
-    warning(paste(
-      "Data column name is numeric.  Desired behavior may not be as expected.\n\n",
-      "c(", paste("'", names(badColumns), "' = '", badColumns, "'", collapse = "", sep = ""), ")",
-      sep = ""
-    ))
-  }
-
   columns
 }
 
