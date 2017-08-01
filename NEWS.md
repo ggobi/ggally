@@ -10,6 +10,10 @@ GGally 1.3.2
 
 * Fixed missing `x` aes requirement when shadebox is provided (#237, @treysp)
 
+Package
+
+* Made igraph a non required dependency for tests (#240)
+
 
 GGally 1.3.1
 -----------------
