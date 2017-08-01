@@ -252,7 +252,7 @@ ggparcoord <- function(
   if (!is.null(shadeBox) && length(shadeBox) != 1) {
     stop("invalid value for 'shadeBox'; must be a single color")
   } else {
-    valid_color <- tryCatch(is.matrix(col2rgb(shadeBox)),
+    valid_color <- tryCatch(is.matrix(grDevices::col2rgb(shadeBox)),
                             error = function(e) FALSE)
 
     if (!valid_color) {
