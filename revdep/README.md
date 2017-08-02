@@ -4,88 +4,91 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.4.0 (2017-04-21) |
+|version  |R version 3.4.1 (2017-06-30) |
 |system   |x86_64, darwin15.6.0         |
 |ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Indiana/Indianapolis |
-|date     |2017-06-07                   |
+|date     |2017-08-02                   |
 
 ## Packages
 
-|package      |*  |version |date       |source                  |
-|:------------|:--|:-------|:----------|:-----------------------|
-|broom        |   |0.4.2   |2017-02-13 |CRAN (R 3.4.0)          |
-|chemometrics |   |1.4.2   |2017-03-17 |CRAN (R 3.4.0)          |
-|geosphere    |   |1.5-5   |2016-06-15 |CRAN (R 3.4.0)          |
-|GGally       |*  |1.3.1   |2017-06-07 |local (ggobi/ggally@NA) |
-|ggplot2      |   |2.2.1   |2016-12-30 |CRAN (R 3.4.0)          |
-|gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.4.0)          |
-|igraph       |   |1.0.1   |2015-06-26 |CRAN (R 3.4.0)          |
-|intergraph   |   |2.0-2   |2016-12-05 |CRAN (R 3.4.0)          |
-|mapproj      |   |1.2-4   |2015-08-03 |CRAN (R 3.4.0)          |
-|maps         |   |3.1.1   |2016-07-27 |CRAN (R 3.4.0)          |
-|network      |   |1.13.0  |2015-09-19 |CRAN (R 3.4.0)          |
-|packagedocs  |   |0.4.0   |2016-11-04 |CRAN (R 3.4.0)          |
-|plyr         |   |1.8.4   |2016-06-08 |CRAN (R 3.4.0)          |
-|progress     |   |1.1.2   |2016-12-14 |CRAN (R 3.4.0)          |
-|RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.4.0)          |
-|reshape      |   |0.8.6   |2016-10-21 |CRAN (R 3.4.0)          |
-|rmarkdown    |   |1.5     |2017-04-26 |CRAN (R 3.4.0)          |
-|roxygen2     |   |6.0.1   |2017-02-06 |CRAN (R 3.4.0)          |
-|scagnostics  |   |0.2-4   |2012-11-05 |CRAN (R 3.4.0)          |
-|scales       |   |0.4.1   |2016-11-09 |CRAN (R 3.4.0)          |
-|sna          |   |2.4     |2016-08-08 |CRAN (R 3.4.0)          |
-|testthat     |   |1.0.2   |2016-04-23 |CRAN (R 3.4.0)          |
+|package      |*  |version |date       |source         |
+|:------------|:--|:-------|:----------|:--------------|
+|broom        |   |0.4.2   |2017-02-13 |CRAN (R 3.4.0) |
+|chemometrics |   |1.4.2   |2017-03-17 |CRAN (R 3.4.0) |
+|geosphere    |   |1.5-5   |2016-06-15 |CRAN (R 3.4.0) |
+|GGally       |*  |1.3.1   |2017-06-08 |CRAN (R 3.4.1) |
+|ggplot2      |   |2.2.1   |2016-12-30 |CRAN (R 3.4.0) |
+|gtable       |   |0.2.0   |2016-02-26 |CRAN (R 3.4.0) |
+|igraph       |   |1.1.2   |2017-07-21 |cran (@1.1.2)  |
+|intergraph   |   |2.0-2   |2016-12-05 |CRAN (R 3.4.0) |
+|mapproj      |   |1.2-5   |2017-06-08 |CRAN (R 3.4.0) |
+|maps         |   |3.2.0   |2017-06-08 |cran (@3.2.0)  |
+|network      |   |1.13.0  |2015-09-19 |CRAN (R 3.4.0) |
+|packagedocs  |   |0.4.0   |2016-11-04 |CRAN (R 3.4.0) |
+|plyr         |   |1.8.4   |2016-06-08 |CRAN (R 3.4.0) |
+|progress     |   |1.1.2   |2016-12-14 |CRAN (R 3.4.0) |
+|RColorBrewer |   |1.1-2   |2014-12-07 |CRAN (R 3.4.0) |
+|reshape      |   |0.8.6   |2016-10-21 |CRAN (R 3.4.0) |
+|rmarkdown    |   |1.6     |2017-06-15 |CRAN (R 3.4.0) |
+|roxygen2     |   |6.0.1   |2017-02-06 |CRAN (R 3.4.0) |
+|scagnostics  |   |0.2-4   |2012-11-05 |CRAN (R 3.4.0) |
+|scales       |   |0.4.1   |2016-11-09 |CRAN (R 3.4.0) |
+|sna          |   |2.4     |2016-08-08 |CRAN (R 3.4.0) |
+|testthat     |   |1.0.2   |2016-04-23 |CRAN (R 3.4.0) |
 
 # Check results
 
-41 packages
+44 packages
 
-|package             |version | errors| warnings| notes|
-|:-------------------|:-------|------:|--------:|-----:|
-|BANFF               |2.0     |      0|        0|     0|
-|BAS                 |1.4.6   |      0|        0|     0|
-|clustrd             |1.2.0   |      0|        0|     0|
-|DescribeDisplay     |0.2.5   |      0|        0|     0|
-|eechidna            |1.1     |      0|        0|     1|
-|freqparcoord        |1.0.1   |      0|        0|     0|
-|ggbio               |1.24.0  |      1|        0|     5|
-|ggCompNet           |0.1.0   |      0|        0|     1|
-|ggmcmc              |1.1     |      0|        0|     0|
-|gsynth              |1.0.3   |      0|        0|     0|
-|httk                |1.5     |      0|        0|     1|
-|ICtest              |0.2     |      0|        0|     2|
-|imageData           |0.1-26  |      0|        0|     0|
-|isomiRs             |1.4.0   |      0|        0|     2|
-|jmv                 |0.7.3.5 |      0|        0|     0|
-|LANDD               |1.1.0   |      0|        0|     2|
-|MAST                |1.2.1   |      0|        0|     2|
-|mbgraphic           |1.0.0   |      0|        0|     0|
-|MCbiclust           |1.0.1   |      0|        0|     2|
-|MissingDataGUI      |0.2-5   |      1|        0|     0|
-|mlrMBO              |1.1.0   |      0|        0|     0|
-|ParamHelpers        |1.10    |      0|        0|     1|
-|Pi                  |1.4.0   |      0|        0|     1|
-|plotly              |4.7.0   |      0|        0|     0|
-|PopGenReport        |3.0.0   |      0|        0|     1|
-|POUMM               |1.2.2   |      0|        1|     0|
-|qualvar             |0.1.0   |      0|        0|     0|
-|robCompositions     |2.0.3   |      0|        0|     2|
-|robustbase          |0.92-7  |      0|        0|     1|
-|rrr                 |1.0.0   |      0|        0|     0|
-|rwty                |1.0.1   |      0|        0|     0|
-|SHELF               |1.2.3   |      0|        0|     0|
-|specmine            |1.0     |      1|        0|     0|
-|spup                |0.1-0   |      0|        0|     0|
-|svdvis              |0.1     |      0|        0|     0|
-|texmex              |2.3     |      0|        0|     1|
-|toaster             |0.5.5   |      0|        0|     0|
-|TVTB                |1.2.0   |      1|        1|     1|
-|userfriendlyscience |0.6-1   |      0|        0|     0|
-|vdmR                |0.2.3   |      0|        0|     0|
-|vortexR             |1.1.4   |      0|        0|     0|
+|package               |version | errors| warnings| notes|
+|:---------------------|:-------|------:|--------:|-----:|
+|BANFF                 |2.0     |      0|        0|     0|
+|BAS                   |1.4.6   |      0|        0|     0|
+|CINNA                 |1.0.0   |      0|        0|     0|
+|clustrd               |1.2.0   |      0|        0|     0|
+|DescribeDisplay       |0.2.5   |      0|        0|     0|
+|eechidna              |1.1     |      0|        1|     1|
+|freqparcoord          |1.0.1   |      0|        0|     0|
+|ggbio                 |1.24.1  |      0|        0|     4|
+|ggCompNet             |0.1.0   |      0|        0|     1|
+|ggmcmc                |1.1     |      0|        0|     0|
+|gsynth                |1.0.3   |      0|        0|     0|
+|httk                  |1.7     |      0|        0|     1|
+|ICtest                |0.3     |      0|        0|     1|
+|imageData             |0.1-26  |      0|        0|     0|
+|isomiRs               |1.4.0   |      0|        0|     2|
+|jmv                   |0.7.3.5 |      0|        0|     0|
+|LANDD                 |1.1.0   |      0|        0|     2|
+|MAST                  |1.2.1   |      0|        0|     2|
+|mbgraphic             |1.0.0   |      0|        0|     0|
+|MCbiclust             |1.0.1   |      0|        0|     2|
+|MissingDataGUI        |0.2-5   |      1|        0|     0|
+|mlrMBO                |1.1.0   |      0|        0|     0|
+|nzelect               |0.3.3   |      0|        1|     0|
+|ParamHelpers          |1.10    |      0|        0|     1|
+|Pi                    |1.4.0   |      0|        0|     1|
+|plotly                |4.7.1   |      0|        0|     0|
+|PopGenReport          |3.0.0   |      0|        1|     1|
+|POUMM                 |1.3.2   |      1|        0|     0|
+|qualvar               |0.1.0   |      0|        0|     0|
+|randomForestExplainer |0.9     |      0|        0|     0|
+|robCompositions       |2.0.5   |      0|        0|     1|
+|robustbase            |0.92-7  |      0|        0|     1|
+|rrr                   |1.0.0   |      0|        0|     0|
+|rwty                  |1.0.1   |      0|        0|     0|
+|SHELF                 |1.2.3   |      0|        0|     0|
+|specmine              |1.0     |      1|        0|     0|
+|spup                  |0.1-1   |      0|        0|     0|
+|svdvis                |0.1     |      0|        0|     0|
+|texmex                |2.3     |      0|        0|     1|
+|toaster               |0.5.5   |      0|        0|     0|
+|TVTB                  |1.2.0   |      0|        0|     0|
+|userfriendlyscience   |0.6-1   |      0|        0|     0|
+|vdmR                  |0.2.4   |      0|        0|     0|
+|vortexR               |1.1.4   |      0|        0|     0|
 
 ## BANFF (2.0)
 Maintainer: Tianwei Yu <tianwei.yu@emory.edu>
@@ -94,6 +97,11 @@ Maintainer: Tianwei Yu <tianwei.yu@emory.edu>
 
 ## BAS (1.4.6)
 Maintainer: Merlise Clyde <clyde@stat.duke.edu>
+
+0 errors | 0 warnings | 0 notes
+
+## CINNA (1.0.0)
+Maintainer: Minoo Ashtiani <m_ashtiani@pasteur.ac.ir>
 
 0 errors | 0 warnings | 0 notes
 
@@ -111,9 +119,32 @@ Bug reports: https://github.com/ggobi/DescribeDisplay/issues
 ## eechidna (1.1)
 Maintainer: Ben Marwick <benmarwick@gmail.com>
 
-0 errors | 0 warnings | 1 note 
+0 errors | 1 warning  | 1 note 
 
 ```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+
+    nasa
+
+Warning: Removed 10 rows containing non-finite values (stat_smooth).
+Warning: Removed 10 rows containing missing values (geom_point).
+
+Attaching package: 'readr'
+... 8 lines ...
+  StateAb = col_character(),
+  GivenNm = col_character(),
+  Surname = col_character(),
+  PartyNm = col_character(),
+  PartyAb = col_character(),
+  ElectedOrder = col_integer()
+)
+Quitting from lines 154-171 (exploring-election-data2016.Rmd) 
+Error: processing vignette 'exploring-election-data2016.Rmd' failed with diagnostics:
+Value of SET_STRING_ELT() must be a 'CHARSXP' not a 'integer'
+Execution halted
+
 checking installed package size ... NOTE
   installed size is  6.3Mb
   sub-directories of 1Mb or more:
@@ -126,40 +157,13 @@ Maintainer: Norm Matloff <normmatloff@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## ggbio (1.24.0)
+## ggbio (1.24.1)
 Maintainer: Michael Lawrence <lawrence.michael@gene.com>  
 Bug reports: https://github.com/tengfei/ggbio/issues
 
-1 error  | 0 warnings | 5 notes
+0 errors | 0 warnings | 4 notes
 
 ```
-checking examples ... ERROR
-Running examples in ‘ggbio-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: autoplot
-> ### Title: Generic autoplot function
-> ### Aliases: autoplot autoplot,GRanges-method autoplot,GRangesList-method
-> ###   autoplot,IRanges-method autoplot,Seqinfo-method
-> ###   autoplot,BSgenome-method autoplot,GAlignments-method
-... 416 lines ...
-reduce alignemnts...
-> 
-> 
-> ###################################################
-> ### EnsDb
-> ###################################################
-> ## Fetching gene models from an EnsDb object.
-> library(EnsDb.Hsapiens.v75)
-Error in library(EnsDb.Hsapiens.v75) : 
-  there is no package called 'EnsDb.Hsapiens.v75'
-Execution halted
-
-checking package dependencies ... NOTE
-Packages suggested but not available for checking:
-  ‘BSgenome.Hsapiens.UCSC.hg19’ ‘EnsDb.Hsapiens.v75’
-
 checking top-level files ... NOTE
 Non-standard file/directory found at top level:
   ‘TODO.org’
@@ -234,36 +238,27 @@ Maintainer: Yiqing Xu <yiqingxu@ucsd.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## httk (1.5)
+## httk (1.7)
 Maintainer: John Wambaugh <wambaugh.john@epa.gov>
 
 0 errors | 0 warnings | 1 note 
 
 ```
 checking installed package size ... NOTE
-  installed size is 13.9Mb
+  installed size is 13.7Mb
   sub-directories of 1Mb or more:
     data  12.2Mb
-    doc    1.3Mb
+    doc    1.0Mb
 ```
 
-## ICtest (0.2)
-Maintainer: Klaus Nordhausen <klaus.nordhausen@utu.fi>
+## ICtest (0.3)
+Maintainer: Klaus Nordhausen <klaus.nordhausen@tuwien.ac.at>
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note 
 
 ```
 checking Rd cross-references ... NOTE
 Package unavailable to check Rd xrefs: ‘fICA’
-
-checking compiled code ... NOTE
-File ‘ICtest/libs/ICtest.so’:
-  Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
-
-It is good practice to register native routines and to disable symbol
-search.
-
-See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
 ```
 
 ## imageData (0.1-26)
@@ -396,6 +391,22 @@ Bug reports: https://github.com/mlr-org/mlrMBO/issues
 
 0 errors | 0 warnings | 0 notes
 
+## nzelect (0.3.3)
+Maintainer: Peter Ellis <peter.ellis2013nz@gmail.com>
+
+0 errors | 1 warning  | 0 notes
+
+```
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+Quitting from lines 208-225 (README.Rmd) 
+Error: processing vignette 'README.Rmd' failed with diagnostics:
+Evaluation error: votes, parties, and electorates should all be vectors of the same length.
+Execution halted
+
+```
+
 ## ParamHelpers (1.10)
 Maintainer: Bernd Bischl <bernd_bischl@gmx.net>  
 Bug reports: https://github.com/berndbischl/ParamHelpers/issues
@@ -426,7 +437,7 @@ checking installed package size ... NOTE
     doc   5.2Mb
 ```
 
-## plotly (4.7.0)
+## plotly (4.7.1)
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
 Bug reports: https://github.com/ropensci/plotly/issues
 
@@ -435,41 +446,27 @@ Bug reports: https://github.com/ropensci/plotly/issues
 ## PopGenReport (3.0.0)
 Maintainer: Bernd Gruber <bernd.gruber@canberra.edu.au>
 
-0 errors | 0 warnings | 1 note 
+0 errors | 1 warning  | 1 note 
 
 ```
+checking whether package ‘PopGenReport’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: namespace ‘DBI’ is not available and has been replaced
+See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/PopGenReport.Rcheck/00install.out’ for details.
+
 checking Rd cross-references ... NOTE
 Package unavailable to check Rd xrefs: ‘ecodist’
 ```
 
-## POUMM (1.2.2)
+## POUMM (1.3.2)
 Maintainer: Venelin Mitov <vmitov@gmail.com>
 
-0 errors | 1 warning  | 0 notes
+1 error  | 0 warnings | 0 notes
 
 ```
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-  the condition has length > 1 and only the first element will be used
-Warning in if (alpha == 0) { :
-  the condition has length > 1 and only the first element will be used
-Warning in window.mcmc(mc$mcmc, start = start, end = end, thin = thinMCMC) :
-  end value not changed
-Warning in if (alpha == 0) { :
-  the condition has length > 1 and only the first element will be used
-... 8 lines ...
-  the condition has length > 1 and only the first element will be used
-Warning in FUN(X[[i]], ...) : end value not changed
-Warning in FUN(X[[i]], ...) : end value not changed
-Warning in FUN(X[[i]], ...) : end value not changed
-Warning in FUN(X[[i]], ...) : end value not changed
-Warning in FUN(X[[i]], ...) : end value not changed
-Warning in FUN(X[[i]], ...) : end value not changed
-Quitting from lines 393-404 (UserGuide.Rmd) 
-Error: processing vignette 'UserGuide.Rmd' failed with diagnostics:
-package 'adaptMCMC' not found
-Execution halted
+checking whether package ‘POUMM’ can be installed ... ERROR
+Installation failed.
+See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks/POUMM.Rcheck/00install.out’ for details.
 ```
 
 ## qualvar (0.1.0)
@@ -477,23 +474,19 @@ Maintainer: Joel Gombin <joel.gombin@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## robCompositions (2.0.3)
-Maintainer: Matthias Templ <templ@tuwien.ac.at>
+## randomForestExplainer (0.9)
+Maintainer: Aleksandra Paluszynska <ola.paluszynska@gmail.com>
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 0 notes
+
+## robCompositions (2.0.5)
+Maintainer: Matthias Templ <matthias.templ@gmail.com>
+
+0 errors | 0 warnings | 1 note 
 
 ```
 checking Rd cross-references ... NOTE
-Package unavailable to check Rd xrefs: ‘StatDA’
-
-checking compiled code ... NOTE
-File ‘robCompositions/libs/robCompositions.so’:
-  Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
-
-It is good practice to register native routines and to disable symbol
-search.
-
-See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+Packages unavailable to check Rd xrefs: ‘mvoutlier’, ‘StatDA’
 ```
 
 ## robustbase (0.92-7)
@@ -535,8 +528,8 @@ See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
 
-## spup (0.1-0)
-Maintainer: Kasia Sawicka <kasia.sawicka@wur.nl>
+## spup (0.1-1)
+Maintainer: Kasia Sawicka <kasia.sawicka@ed.ac.uk>
 
 0 errors | 0 warnings | 0 notes
 
@@ -571,60 +564,14 @@ Bug reports: https://github.com/teradata-aster-field/toaster/issues
 Maintainer: Kevin Rue-Albrecht <kevinrue67@gmail.com>  
 Bug reports: https://github.com/kevinrue/TVTB/issues
 
-1 error  | 1 warning  | 1 note 
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’ [14s/15s]
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-    rs1426654 rs150379789 rs570906312 rs538198029 rs553496066 rs574775672 
-         TRUE        TRUE       FALSE       FALSE        TRUE       FALSE 
-  rs140666229 rs556950130 rs575303689 rs147513140 rs187525777 rs192454382 
-         TRUE       FALSE        TRUE        TRUE       FALSE       FALSE 
-  rs184818838 rs566886499 rs199924625 rs555872528 rs531820822 rs201353600 
-        FALSE       FALSE       FALSE       FALSE       FALSE       FALSE 
-  rs550201688 rs565338261 rs201239799 rs200461129 rs146726548 
-        FALSE       FALSE       FALSE       FALSE        TRUE 
-  testthat results ================================================================
-  OK: 229 SKIPPED: 0 FAILED: 2
-  1. Error: all signatures work to completion (@test_plotInfo-methods.R#25) 
-  2. Error: invalid metric/phenotype combination is detected (@test_plotInfo-methods.R#50) 
-  
-  Error: testthat unit tests failed
-  Execution halted
-
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-Overwriting INFO keys in data:
-- REF
-- HET
-- ALT
-- AAF
-- MAF
-Overwriting INFO keys in header:
-- REF
-- HET
-- ALT
-- AAF
-- MAF
-Quitting from lines 570-577 (Introduction.Rmd) 
-Error: processing vignette 'Introduction.Rmd' failed with diagnostics:
-there is no package called 'EnsDb.Hsapiens.v75'
-Execution halted
-
-
-checking package dependencies ... NOTE
-Package suggested but not available for checking: ‘EnsDb.Hsapiens.v75’
-```
+0 errors | 0 warnings | 0 notes
 
 ## userfriendlyscience (0.6-1)
 Maintainer: Gjalt-Jorn Peters <gjalt-jorn@userfriendlyscience.com>
 
 0 errors | 0 warnings | 0 notes
 
-## vdmR (0.2.3)
+## vdmR (0.2.4)
 Maintainer: Tomokazu Fujino <fujino@fwu.ac.jp>
 
 0 errors | 0 warnings | 0 notes

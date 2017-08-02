@@ -1,9 +1,0 @@
-* installing *source* package ‘EnsDb.Hsapiens.v75’ ...
-** R
-** inst
-** preparing package for lazy loading
-Error: package or namespace load failed for ‘GenomeInfoDb’ in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):
- there is no package called ‘GenomeInfoDbData’
-Error : package ‘GenomeInfoDb’ could not be loaded
-ERROR: lazy loading failed for package ‘EnsDb.Hsapiens.v75’
-* removing ‘/Users/barret/R/EnsDb.Hsapiens.v75’

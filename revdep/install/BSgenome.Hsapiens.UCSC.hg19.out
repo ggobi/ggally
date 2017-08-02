@@ -1,9 +1,0 @@
-* installing *source* package ‘BSgenome.Hsapiens.UCSC.hg19’ ...
-** R
-** inst
-** preparing package for lazy loading
-Error: package or namespace load failed for ‘GenomeInfoDb’ in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):
- there is no package called ‘GenomeInfoDbData’
-Error : package ‘GenomeInfoDb’ could not be loaded
-ERROR: lazy loading failed for package ‘BSgenome.Hsapiens.UCSC.hg19’
-* removing ‘/Users/barret/R/BSgenome.Hsapiens.UCSC.hg19’
