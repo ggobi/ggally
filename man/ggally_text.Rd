@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_text}
 \alias{ggally_text}
-\title{GGplot Text}
+\title{Text Plot}
 \usage{
 ggally_text(label, mapping = ggplot2::aes(color = "black"), xP = 0.5,
   yP = 0.5, xrange = c(0, 1), yrange = c(0, 1), ...)

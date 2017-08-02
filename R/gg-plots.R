@@ -844,7 +844,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 }
 
 
-#' GGplot Text
+#' Text Plot
 #'
 #' Plot text for a plot.
 #'
