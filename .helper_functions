@@ -50,7 +50,8 @@ reverse_depends:
   do_check <- function() {
     devtools::revdep_check(
       bioconductor = TRUE,
-      ignore = c("nzelect"),
+      # ignore = c("nzelect"),
+      ignore = c(),
       libpath = .libPaths()[1],
       srcpath = normalizePath(file.path("revdep", "lib"))
     )
