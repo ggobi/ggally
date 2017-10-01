@@ -56,7 +56,10 @@
   } else if (is.list(e2)) {
     add_list_to_ggmatrix(e1, e2)
   } else {
-    stop("'ggmatrix' does not know how to add objects that do not have class 'theme' or 'labels'. Received object with class: '", paste(class(e2), collapse = ", "), "'")
+    stop(
+      "'ggmatrix' does not know how to add objects that do not have class 'theme' or 'labels'.",
+      " Received object with class: '", paste(class(e2), collapse = ", "), "'"
+    )
   }
 }
 
