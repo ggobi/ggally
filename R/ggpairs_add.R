@@ -42,6 +42,10 @@
 #' pm + extra
 "+.gg" <- function(e1, e2) {
 
+  if (!is.ggmatrix(e1)) {
+    return(e1 %+% e2)
+  }
+
   if (is.null(e1$gg)) {
     e1$gg <- list()
   }
