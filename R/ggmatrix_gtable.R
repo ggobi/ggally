@@ -6,7 +6,7 @@
 #'
 #' @param pm ggmatrix object to be plotted
 #' @param ... ignored
-#' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only
+#' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only with more than 15 panels.
 #' @param progress_format string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.
 # ' @method ggprint ggmatrix
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -19,7 +19,7 @@
 ggmatrix_gtable <- function(
   pm,
   ...,
-  progress = interactive() && (pm$ncol * pm$nrow) > 15,
+  progress = pm$progress %||% (interactive() && (pm$ncol * pm$nrow) > 15),
   progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta "
 ) {
   # pm is for "plot matrix"

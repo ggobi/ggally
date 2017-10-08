@@ -36,7 +36,8 @@ Imports:
     progress,
     RColorBrewer,
     reshape (>= 0.8.5),
-    utils
+    utils,
+    rlang
 Suggests:
     broom (>= 0.4.0),
     chemometrics,
