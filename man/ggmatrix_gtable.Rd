@@ -4,7 +4,8 @@
 \alias{ggmatrix_gtable}
 \title{Print ggmatrix object}
 \usage{
-ggmatrix_gtable(pm, ..., progress = interactive() && (pm$ncol * pm$nrow) > 15,
+ggmatrix_gtable(pm, ..., progress = pm$progress \%||\% (interactive() &&
+  (pm$ncol * pm$nrow) > 15),
   progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ")
 }
 \arguments{
@@ -12,7 +13,7 @@ ggmatrix_gtable(pm, ..., progress = interactive() && (pm$ncol * pm$nrow) > 15,
 
 \item{...}{ignored}
 
-\item{progress}{boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only}
+\item{progress}{boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only with more than 15 panels.}
 
 \item{progress_format}{string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.}
 }
