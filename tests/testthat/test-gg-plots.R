@@ -164,3 +164,25 @@ test_that("rescale", {
 
 
 })
+
+
+
+test_that("shrink", {
+  p <- ggally_smooth_loess(iris, mapping = ggplot2::aes(Sepal.Width, Petal.Length))
+  expect_true(!is.null(p$coordinates$limits$y))
+  expect_print(p)
+
+  p <- ggally_smooth_loess(iris, mapping = ggplot2::aes(Sepal.Width, Petal.Length), shrink = FALSE)
+  expect_true(is.null(p$coordinates$limits$y))
+  expect_print(p)
+})
+
+test_that("smooth_se", {
+  p <- ggally_smooth_loess(iris, mapping = ggplot2::aes(Sepal.Width, Petal.Length), se = TRUE)
+  expect_equal(p$layers[[2]]$stat_params$se, TRUE)
+  expect_print(p)
+
+  p <- ggally_smooth_loess(iris, mapping = ggplot2::aes(Sepal.Width, Petal.Length), se = FALSE)
+  expect_equal(p$layers[[2]]$stat_params$se, FALSE)
+  expect_print(p)
+})

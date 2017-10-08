@@ -6,7 +6,7 @@
 \alias{ggally_smooth_lm}
 \title{Plots the Scatter Plot with Smoothing}
 \usage{
-ggally_smooth(data, mapping, ..., method = "lm")
+ggally_smooth(data, mapping, ..., method = "lm", se = TRUE, shrink = TRUE)
 
 ggally_smooth_loess(data, mapping, ...)
 
@@ -19,10 +19,15 @@ ggally_smooth_lm(data, mapping, ...)
 
 \item{...}{other arguments to add to geom_point}
 
-\item{method}{\code{method} parameter supplied to \code{\link[ggplot2]{geom_smooth}}}
+\item{method, se}{parameters supplied to \code{\link[ggplot2]{geom_smooth}}}
+
+\item{shrink}{boolean to determine if y range is reduced to range of points or points and error ribbon}
 }
 \description{
 Add a smoothed condition mean with a given scatter plot.
+}
+\details{
+Y limits are reduced to match original Y range with the goal of keeping the Y axis the same across plots.
 }
 \examples{
  data(tips, package = "reshape")
