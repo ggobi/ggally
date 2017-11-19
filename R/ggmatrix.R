@@ -18,7 +18,6 @@
 #' @param byrow boolean that determines whether the plots should be ordered by row or by column
 #' @param data data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time
 #' @param gg ggplot2 theme objects to be applied to every plot
-#' @template ggmatrix-progress-param
 #' @template ggmatrix-legend-param
 #' @keywords hplot
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -71,8 +70,7 @@ ggmatrix <- function(
   yProportions = NULL,
   data = NULL,
   gg = NULL,
-  legend = NULL,
-  progress = NULL
+  legend = NULL
 ) {
 
   if (!is.list(plots)) {
@@ -105,8 +103,7 @@ ggmatrix <- function(
     gg = gg,
     nrow = nrow,
     ncol = ncol,
-    byrow = byrow,
-    progress = progress
+    byrow = byrow
   )
 
   attributes(plotMatrix)$class <- c("gg", "ggmatrix")

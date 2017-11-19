@@ -9,7 +9,7 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
   showStrips = NULL, showAxisPlotLabels = TRUE,
   showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, labeller = NULL,
   switch = NULL, xProportions = NULL, yProportions = NULL, data = NULL,
-  gg = NULL, legend = NULL, progress = NULL)
+  gg = NULL, legend = NULL)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
@@ -37,8 +37,6 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 \item{gg}{ggplot2 theme objects to be applied to every plot}
 
 \item{legend}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
-
-\item{progress}{boolean to determine if progress bars should be displayed.  A \code{NULL} value uses \code{\link{ggmatrix_gtable}}'s \code{progress} logic.}
 }
 \description{
 Make a generic matrix of ggplot2 plots.

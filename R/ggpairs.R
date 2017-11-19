@@ -230,7 +230,6 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param types see Details
 #' @param axisLabels either "show" to display axisLabels or "none" for no axis labels
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
-#' @template ggmatrix-progress-param
 #' @template ggmatrix-labeller-param
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
@@ -434,7 +433,6 @@ ggduo <- function(
   axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
-  progress = NULL,
   labeller = "label_value",
   switch = NULL,
   xlab = NULL,
@@ -538,7 +536,6 @@ ggduo <- function(
     ncol = length(columnsX),
     xAxisLabels = columnLabelsX,
     yAxisLabels = columnLabelsY,
-    progress = progress,
     labeller = labeller,
     switch = switch,
     showStrips = showStrips,
@@ -611,7 +608,6 @@ ggduo <- function(
 #' @param ... deprecated. Please use \code{mapping}
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
-#' @template ggmatrix-progress-param
 #' @template ggmatrix-labeller-param
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
@@ -738,7 +734,6 @@ ggpairs <- function(
   ylab = NULL,
   axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]),
-  progress = NULL,
   labeller = "label_value",
   switch = NULL,
   showStrips = NULL,
@@ -837,7 +832,6 @@ ggpairs <- function(
     ncol = length(columns),
     xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
     yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
-    progress = progress,
     labeller = labeller,
     switch = switch,
     showStrips = showStrips,

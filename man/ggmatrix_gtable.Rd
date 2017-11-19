@@ -4,9 +4,9 @@
 \alias{ggmatrix_gtable}
 \title{Print ggmatrix object}
 \usage{
-ggmatrix_gtable(pm, ..., progress = pm$progress \%||\% (interactive() &&
-  (pm$ncol * pm$nrow) > 15),
-  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ")
+ggmatrix_gtable(pm, ..., progress = getOption("GGally.ggmatrix.progress"),
+  progress_clear = getOption("GGally.ggmatrix.progress_clear"),
+  progress_format = getOption("GGally.ggmatrix.progress_format"))
 }
 \arguments{
 \item{pm}{ggmatrix object to be plotted}
@@ -15,7 +15,9 @@ ggmatrix_gtable(pm, ..., progress = pm$progress \%||\% (interactive() &&
 
 \item{progress}{boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only with more than 15 panels.}
 
-\item{progress_format}{string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.}
+\item{progress_clear}{boolean supplied directly to \code{progress::\link[progress]{progress_bar}(clear = progress_clear)}. Defaults clear the latest progress bar.}
+
+\item{progress_format}{string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish: \code{" plot: [:plot_i,:plot_j] [:bar]:percent est::eta "}}
 }
 \description{
 Specialized method to print the ggmatrix object-
