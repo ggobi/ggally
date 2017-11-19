@@ -364,7 +364,7 @@ test_that("axisLabels", {
   plots <- ggpairs(iris, 1:3)$plots
   for (val in c(TRUE, FALSE)) {
     pm <- ggmatrix(
-      plots,
+      plots, 3, 3,
       showAxisPlotLabels = val
     )
     expect_equal(pm$showXAxisPlotLabels, val)
