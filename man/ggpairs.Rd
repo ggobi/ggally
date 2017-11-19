@@ -10,9 +10,9 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
   "facethist", discrete = "facetbar", na = "na"), diag = list(continuous =
   "densityDiag", discrete = "barDiag", na = "naDiag"), params = NULL, ...,
   xlab = NULL, ylab = NULL, axisLabels = c("show", "internal", "none"),
-  columnLabels = colnames(data[columns]), progress = NULL,
-  labeller = "label_value", switch = NULL, showStrips = NULL,
-  legend = NULL, cardinality_threshold = 15, legends = stop("deprecated"))
+  columnLabels = colnames(data[columns]), labeller = "label_value",
+  switch = NULL, showStrips = NULL, legend = NULL,
+  cardinality_threshold = 15, legends = stop("deprecated"))
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -36,8 +36,6 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 \item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 
 \item{columnLabels}{label names to be displayed.  Defaults to names of columns being used.}
-
-\item{progress}{boolean to determine if progress bars should be displayed.  A \code{NULL} value uses \code{\link{ggmatrix_gtable}}'s \code{progress} logic.}
 
 \item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
 

@@ -1,5 +1,9 @@
 # GGally 1.3.2.9000
 
+`ggmatrix_gtable`
+
+* Use new default `options()` parameters for displaying `ggmatrix` progress information: "GGally.ggmatrix.progress", "GGally.ggmatrix.progress_format", and "GGally.ggmatrix.progress_clear".
+
 GGally 1.3.2
 -----------------
 
