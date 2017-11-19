@@ -361,6 +361,16 @@ test_that("axisLabels", {
     expect_obj(fn(axisLabels), axisLabels)
   }
 
+  plots <- ggpairs(iris, 1:3)$plots
+  for (val in c(TRUE, FALSE)) {
+    pm <- ggmatrix(
+      plots,
+      showAxisPlotLabels = val
+    )
+    expect_equal(pm$showXAxisPlotLabels, val)
+    expect_equal(pm$showYAxisPlotLabels, val)
+  }
+
 
   fn <- function(axisLabels) {
     a <- ggduo(
