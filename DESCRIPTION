@@ -53,7 +53,8 @@ Suggests:
     packagedocs (>= 0.4.0),
     rmarkdown,
     roxygen2,
-    testthat
+    testthat,
+    ggridges
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 6.0.1
 VignetteBuilder: packagedocs
