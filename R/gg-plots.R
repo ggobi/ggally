@@ -1348,13 +1348,13 @@ ggally_naDiag <- function(...) {
 #' @export
 ggally_density_ridges <- function(data, mapping, ...) {
   require_pkgs("ggridges")
-  horizontal <- GGally:::is_horizontal(data, mapping)
+  horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
-    mapping <- GGally:::mapping_swap_x_y(mapping)
+    mapping <- mapping_swap_x_y(mapping)
   }
 
-  mapping <- GGally:::mapping_color_to_fill(mapping)
+  mapping <- mapping_color_to_fill(mapping)
 
   ggplot2::ggplot(data) +
     ggridges::geom_density_ridges2(mapping, ...)
