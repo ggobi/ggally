@@ -750,8 +750,10 @@ ggnet2 <- function(
   if (is.character(mode) && length(mode) == 1) {
 
     mode = paste0("gplot.layout.", mode)
-    if (!exists(mode)) {
+    if (!exists(mode, where=getNamespace("sna"))) {
       stop(paste("unsupported placement method:", mode))
+    } else {
+      mode <- get(mode, getNamespace("sna"))
     }
 
     # sna placement algorithm
