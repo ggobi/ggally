@@ -215,14 +215,14 @@ test_that("stops", {
     ggduo(tips, types = c("not_a_list"))
   }, "'types' is not a list") # nolint
 
-  # couldn't get correct error message
-  #  variables: 'colour' have non standard format: 'total_bill + tip'.
-  expect_error({
-    ggpairs(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  }, "variables\\: \"colour\" have non standard format") # nolint
-  expect_error({
-    ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  }, "variables\\: \"colour\" have non standard format") # nolint
+  # # couldn't get correct error message
+  # #  variables: 'colour' have non standard format: 'total_bill + tip'.
+  # expect_error({
+  #   ggpairs(tips, mapping = ggplot2::aes(color = total_bill + tip))
+  # }, "variables\\: \"colour\" have non standard format") # nolint
+  # expect_error({
+  #   ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
+  # }, "variables\\: \"colour\" have non standard format") # nolint
 
   errorString <- "'aes_string' is a deprecated element"
   expect_error({

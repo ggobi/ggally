@@ -149,7 +149,7 @@ test_that("proportions", {
   expect_print(pm2)
 
   # turn on progress for a quick plot
-  expect_silent(print(pm2, progress = TRUE))
+  testthat::expect_message(print(pm2, progress = TRUE))
 })
 
 

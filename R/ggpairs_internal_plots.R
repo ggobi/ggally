@@ -206,20 +206,21 @@ as.character.ggmatrix_fn_with_params <- function(x, ...) {
 
 
 make_ggmatrix_plot_obj <- function(fn, mapping = ggplot2::aes(), dataPos = 1, gg = NULL) {
-  nonCallVals <- which(lapply(mapping, mode) == "call")
-  if (length(nonCallVals) > 0) {
-    nonCallNames <- names(mapping)[nonCallVals]
-    stop(
-      paste(
-        "variables: ",
-        paste(shQuote(nonCallNames, type = "cmd"), sep = ", "),
-        " have non standard format: ",
-        paste(shQuote(unlist(mapping[nonCallVals]), type = "cmd"), collapse = ", "),
-        ".  Please rename the columns or make a new column.",
-        sep = ""
-      )
-    )
-  }
+  # nonCallVals <- which(lapply(mapping, mode) == "call")
+  # if (length(nonCallVals) > 0) {
+  #   nonCallNames <- names(mapping)[nonCallVals]
+  #   browser()
+  #   stop(
+  #     paste(
+  #       "variables: ",
+  #       paste(shQuote(nonCallNames, type = "cmd"), sep = ", "),
+  #       " have non standard format: ",
+  #       paste(shQuote(unlist(mapping[nonCallVals]), type = "cmd"), collapse = ", "),
+  #       ".  Please rename the columns or make a new column.",
+  #       sep = ""
+  #     )
+  #   )
+  # }
 
   ret <- list(
     fn = fn,
