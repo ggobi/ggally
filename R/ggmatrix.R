@@ -82,8 +82,12 @@ ggmatrix <- function(
   check_nrow_ncol(ncol, "ncol")
 
   if (!missing(showAxisPlotLabels)) {
-    showXAxisPlotLabels <- showAxisPlotLabels
-    showYAxisPlotLabels <- showAxisPlotLabels
+    if (missing(showXAxisPlotLabels)) {
+      showXAxisPlotLabels <- showAxisPlotLabels
+    }
+    if (missing(showYAxisPlotLabels)) {
+      showYAxisPlotLabels <- showAxisPlotLabels
+    }
   }
 
   plotMatrix <- list(
@@ -108,6 +112,18 @@ ggmatrix <- function(
     byrow = byrow,
     progress = progress
   )
+
+  if (!is.null(legend)) {
+    if (!inherits(legend, "legend_guide_box")) {
+      if (!is.numeric(legend) || length(legend) > 2) {
+        stop("'legend' must be a single or double numeric value.  Or 'legend' must be an object produced from 'grab_legend()'") # nolint
+      }
+      if (length(legend) == 1) {
+        plotMatrix$legend <- get_pos_rev(plotMatrix, legend)
+      }
+    }
+  }
+
 
   attributes(plotMatrix)$class <- c("gg", "ggmatrix")
 

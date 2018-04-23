@@ -287,6 +287,9 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
         plotObj
       }
     })
+    if (inherits(obj$legend, "legend_guide_box")) {
+      obj$legend <- str_c("PM; legend_guide_box;")
+    }
   }
   attr(obj, "_class") <- attr(obj, "class")
   class(obj) <- NULL

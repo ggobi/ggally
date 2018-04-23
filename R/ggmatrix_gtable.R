@@ -36,16 +36,20 @@ ggmatrix_gtable <- function(
   }
 
   # make a fake facet grid to fill in with proper plot panels
-  get_labels <- function(labels, length_out, name) {
+  get_labels <- function(labels, length_out, name, column) {
     if (is.expression(labels)) {
       stop("'", name, "' can only be a character vector or NULL.",
       "  Character values can be parsed using the 'labeller' parameter.")
     }
-    ifnull(labels, as.character(seq_len(length_out)))
+    if (is.null(labels)) {
+      paste0(column, seq_len(length_out))
+    } else {
+      make.unique(labels)
+    }
   }
   fake_data <- expand.grid(
-    Var1 = get_labels(pm$xAxisLabels, pm$ncol, "xAxisLabels"),
-    Var2 = get_labels(pm$yAxisLabels, pm$nrow, "yAxisLabels")
+    Var1 = get_labels(pm$xAxisLabels, pm$ncol, "xAxisLabels", "x"),
+    Var2 = get_labels(pm$yAxisLabels, pm$nrow, "yAxisLabels", "y")
   )
   fake_data$x <- 1
   fake_data$y <- 1
@@ -113,28 +117,28 @@ ggmatrix_gtable <- function(
     if (is.numeric(legend)) {
       if (length(legend) == 1) {
         legend <- get_pos_rev(pm, legend)
-      } else if (length(legend) > 2) {
-        stop("'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'") # nolint
       }
-
       legend_obj <- grab_legend(pm[legend[1], legend[2]])
-
     } else if (inherits(legend, "legend_guide_box")) {
       legend_obj <- legend
     }
 
-    legend_layout <- (pmg_layout[pmg_layout_name == "guide-box", ])[1, ]
-    class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
-    pmg$grobs[[legend_layout$grob_pos]] <- legend_obj
-
-    legend_position <- ifnull(pm_fake$theme$legend.position, "right")
-
-    if (legend_position %in% c("right", "left")) {
-      pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
-    } else if (legend_position %in% c("top", "bottom")) {
-      pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
+    if (inherits(legend_obj, "zeroGrob")) {
+      message("No plot legend to display")
     } else {
-      stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
+      legend_layout <- (pmg_layout[pmg_layout_name == "guide-box", ])[1, ]
+      class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
+      pmg$grobs[[legend_layout$grob_pos]] <- legend_obj
+
+      legend_position <- ifnull(pm_fake$theme$legend.position, "right")
+
+      if (legend_position %in% c("right", "left")) {
+        pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
+      } else if (legend_position %in% c("top", "bottom")) {
+        pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
+      } else {
+        stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
+      }
     }
   }
 

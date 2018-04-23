@@ -124,11 +124,6 @@ add_list_to_ggmatrix <- function(e1, e2) {
 }
 
 
-is.ggmatrix <- function(x) {
-  inherits(x, "ggmatrix")
-}
-
-
 
 #' Modify a ggmatrix object by adding an ggplot2 object to all plots
 #'
