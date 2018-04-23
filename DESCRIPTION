@@ -26,9 +26,9 @@ Description:
     matrix, a parallel coordinates plot, a survival plot, and several functions to
     plot networks.
 Depends:
-    R (>= 3.1)
+    R (>= 3.1),
+    ggplot2 (> 2.2.0)
 Imports:
-    ggplot2 (>= 2.2.0),
     grDevices,
     grid,
     gtable (>= 0.2.0),
@@ -54,6 +54,8 @@ Suggests:
     rmarkdown,
     roxygen2,
     testthat
+Remotes:
+    tidyverse/ggplot2
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 6.0.1
 VignetteBuilder: packagedocs
