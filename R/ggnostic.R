@@ -410,11 +410,11 @@ ggally_nostic_cooksd <- function(
 #' ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
 ggally_nostic_hat <- function(
   data, mapping, ...,
-  linePosition = 2 * sum(data[[deparse(mapping$y)]]) / nrow(data),
+  linePosition = 2 * sum(eval_data_col(data, mapping$y)) / nrow(data),
   lineColor = brew_colors("grey"),
   lineSize = 0.5, lineAlpha = 1,
   lineType = 2,
-  avgLinePosition = sum(data[[deparse(mapping$y)]]) / nrow(data),
+  avgLinePosition = sum(eval_data_col(data, mapping$y)) / nrow(data),
   avgLineColor = brew_colors("grey"),
   avgLineSize = lineSize, avgLineAlpha = lineAlpha,
   avgLineType = 1
@@ -475,7 +475,7 @@ fn_switch <- function(
 ) {
 
   function(data, mapping, ...) {
-    var <- deparse(mapping[[mapping_val]], 500L)
+    var <- mapping_string(mapping[[mapping_val]])
 
     fn <- ifnull(types[[var]], types[["default"]])
 

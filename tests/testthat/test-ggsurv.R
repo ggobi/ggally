@@ -17,8 +17,8 @@ test_that("single", {
 
   a <- ggsurv(sf.lung)
 
-  expect_equivalent(as.character(a$mapping$x), "time")
-  expect_equivalent(as.character(a$mapping$y), "surv")
+  expect_equivalent(mapping_string(a$mapping$x), "time")
+  expect_equivalent(mapping_string(a$mapping$y), "surv")
 
   expect_true(is.null(a$labels$group))
   expect_true(is.null(a$labels$colour))
@@ -29,8 +29,8 @@ test_that("multiple", {
 
   a <- ggsurv(sf.kid)
 
-  expect_equivalent(as.character(a$mapping$x), "time")
-  expect_equivalent(as.character(a$mapping$y), "surv")
+  expect_equivalent(mapping_string(a$mapping$x), "time")
+  expect_equivalent(mapping_string(a$mapping$y), "surv")
 
   expect_true(!is.null(a$labels$group))
   expect_true(!is.null(a$labels$colour))

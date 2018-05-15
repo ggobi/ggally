@@ -9,13 +9,8 @@ expect_print <- function(p, ...) {
 test_that("examples", {
   library(ggplot2)
 
-  histPlot <- qplot(
-    x = Sepal.Length,
-    data = iris,
-    fill = Species,
-    geom = "histogram",
-    binwidth = 1 / 4
-  )
+  histPlot <- ggplot(diamonds, aes(price, fill = cut)) +
+  geom_histogram(binwidth = 500)
 
   (right <- histPlot)
   (bottom <- histPlot + theme(legend.position = "bottom"))

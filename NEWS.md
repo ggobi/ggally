@@ -1,3 +1,12 @@
+GGally 1.3.3
+----------------
+
+`ggpairs` and `ggduo`
+
+* Become ggplot2 v2.2.2 compliant (#266)
+
+
+
 GGally 1.3.2
 -----------------
 
