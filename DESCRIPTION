@@ -54,8 +54,6 @@ Suggests:
     rmarkdown,
     roxygen2,
     testthat
-Remotes:
-    tidyverse/ggplot2
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 6.0.1
 VignetteBuilder: packagedocs
