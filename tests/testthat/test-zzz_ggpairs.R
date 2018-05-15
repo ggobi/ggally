@@ -509,7 +509,7 @@ test_that("NA data", {
 
 })
 
-test_that("stip-top and strip-right", {
+test_that("strip-top and strip-right", {
 
 
   data(tips, package = "reshape")
@@ -530,14 +530,14 @@ test_that("stip-top and strip-right", {
     lower = "blank", diag = "blank",
     upper = list(discrete = double_strips)
   )
-  pm
+  expect_print(pm)
   pm <- ggpairs(
     tips, 3:6,
     lower = "blank", diag = "blank",
     upper = list(discrete = double_strips),
     showStrips = TRUE
   )
-  pm
+  expect_print(pm)
 
 })
 
