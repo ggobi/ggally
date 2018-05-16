@@ -102,7 +102,7 @@ ggsurv <- function(
   order.legend = TRUE
 ){
 
-  require_pkgs(c("survival", "scales"))
+  require_namespaces(c("survival", "scales"))
 
   strata <- ifelse(is.null(s$strata) == TRUE, 1, length(s$strata))
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)

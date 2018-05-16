@@ -162,7 +162,7 @@ ggnetworkmap <- function (
   ...)
 {
 
-  require_pkgs(c("network", "sna"))
+  require_namespaces(c("network", "sna"))
   # sna          # node placement if there is no ggplot object in function call
 
   # -- conversion to network class ---------------------------------------------
@@ -225,7 +225,7 @@ ggnetworkmap <- function (
     # mapproj doesn't need to be loaded, but
     # it needs to exist for ggplot2::coord_map() to work properly
     if (! ("mapproj" %in% installed.packages())) {
-      require_pkgs("mapproj")
+      require_namespaces("mapproj")
     }
     gg <- ggplot() + coord_map()
 
@@ -314,7 +314,7 @@ ggnetworkmap <- function (
   if (great.circles) {
 
     # geosphere    # great circles
-    require_pkgs("geosphere")
+    require_namespaces("geosphere")
 
     pts <- 25  # number of intermediate points for drawing great circles
     i <- 0 # used to keep track of groups when getting intermediate points for great circles
