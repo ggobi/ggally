@@ -22,12 +22,7 @@ ggmatrix_gtable <- function(
   # init progress bar handle
   hasProgressBar <- !isFALSE(pm$progress)
   if (hasProgressBar) {
-    pb <- progress::progress_bar$new(
-      format = progress_format,
-      clear = progress_clear,
-      show_after = 0,
-      total = pm$ncol * pm$nrow
-    )
+    pb <- pm$progress(pm)
     # pb$tick(tokens = list(plot_i = 1, plot_j = 1))
   }
 
