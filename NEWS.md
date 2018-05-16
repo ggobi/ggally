@@ -21,6 +21,9 @@ GGally 1.3.3
 
 * Added `shrink` and `se` parameters to `ggally_smooth` (#247)
 
+`ggcoef`
+
+* Added `sort` parameter to sort by beta values (#273)
 
 
 
