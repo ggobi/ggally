@@ -27,7 +27,7 @@ ggmatrix_progress <- function(
 }
 
 
-as_ggmatrix_progress = function(x, pm) {
+as_ggmatrix_progress = function(x, total) {
   if (isFALSE(x)) {
     return(FALSE)
   }
@@ -35,7 +35,7 @@ as_ggmatrix_progress = function(x, pm) {
     return(ggmatrix_progress())
   }
   if (is.null(x)) {
-    shouldDisplay <- interactive() && (pm$ncol * pm$nrow) > 15
+    shouldDisplay <- interactive() && total > 15
     if (!shouldDisplay) {
       return(FALSE)
     } else {

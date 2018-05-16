@@ -86,7 +86,7 @@ ggmatrix <- function(
     showYAxisPlotLabels <- showAxisPlotLabels
   }
 
-  progress <- as_ggmatrix_progress(progress)
+  progress <- as_ggmatrix_progress(progress, nrow * ncol)
 
   plotMatrix <- list(
     data = data,
