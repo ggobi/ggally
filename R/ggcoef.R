@@ -50,7 +50,7 @@ ggcoef <- function(
   ...
 ) {
   if (!is.data.frame(x)) {
-    require_pkgs("broom")
+    require_namespaces("broom")
     x <- broom::tidy(
       x,
       conf.int = conf.int,

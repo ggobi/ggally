@@ -750,7 +750,7 @@ ggnet2 <- function(
   if (is.character(mode) && length(mode) == 1) {
 
     mode = paste0("gplot.layout.", mode)
-    if (!exists(mode, where=getNamespace("sna"))) {
+    if (!exists(mode, where = getNamespace("sna"))) {
       stop(paste("unsupported placement method:", mode))
     } else {
       mode <- get(mode, getNamespace("sna"))
@@ -777,8 +777,8 @@ ggnet2 <- function(
 
   }
 
-  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))
-  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[,1]
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[,1]
 
   data = cbind(data, xy)
 
