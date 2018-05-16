@@ -124,7 +124,7 @@ test_that("alphaLines", {
     alphaLines = "alphaLevel"
   )
   expect_equal(length(p$layers), 2)
-  expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$alpha), "alphaLevel")
+  expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$alpha), "alphaLevel")
 })
 
 test_that("splineFactor", {
@@ -138,8 +138,8 @@ test_that("splineFactor", {
 
   pList <- list(p1, p2, p3)
   for (p in pList) {
-    expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$x), "spline.x")
-    expect_equivalent(as.character(get("mapping", envir = p$layers[[1]])$y), "spline.y")
+    expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$x), "spline.x")
+    expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$y), "spline.y")
 
     tmp <- unique(as.numeric(get("data", envir = p$layers[[1]])$ggally_splineFactor))
     expect_true( (tmp == 3) || (tmp == 21) )
@@ -150,7 +150,7 @@ test_that("splineFactor", {
     groupColumn = 5, splineFactor = 3,
     alphaLines = "alphaLevel"
   )
-  expect_equal(as.character(get("mapping", p$layers[[1]])$alpha), "alphaLevel")
+  expect_equal(mapping_string(get("mapping", p$layers[[1]])$alpha), "alphaLevel")
 
   p <- ggparcoord(
     data = iris2, columns = 1:4,
@@ -158,15 +158,15 @@ test_that("splineFactor", {
     showPoints = TRUE
   )
   expect_equal(length(p$layers), 2)
-  expect_equal(as.character(get("mapping", p$layers[[1]])$x), "spline.x")
-  expect_equal(as.character(get("mapping", p$layers[[2]])$y), "value")
+  expect_equal(mapping_string(get("mapping", p$layers[[1]])$x), "spline.x")
+  expect_equal(mapping_string(get("mapping", p$layers[[2]])$y), "value")
 
 })
 
 test_that("groupColumn", {
 
   ds2 <- diamonds.samp
-  ds2$color <- as.character(ds2$color)
+  ds2$color <- mapping_string(ds2$color)
 
   # column 3 has a character
   # column 4 has a factor
@@ -174,7 +174,7 @@ test_that("groupColumn", {
   expect_true("color" %in% levels(p$data$variable))
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
-  expect_equal(as.character(p$mapping$colour), colnames(ds2)[2])
+  expect_equal(mapping_string(p$mapping$colour), colnames(ds2)[2])
 
   p <- ggparcoord(
     data = ds2,
@@ -268,10 +268,10 @@ test_that("basic", {
 
 test_that("size", {
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), mapping = ggplot2::aes(size = gear))
-  expect_equal(as.character(p$mapping$size), "gear")
+  expect_equal(mapping_string(p$mapping$size), "gear")
 
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10)) + ggplot2::aes(size = gear)
-  expect_equal(as.character(p$mapping$size), "gear")
+  expect_equal(mapping_string(p$mapping$size), "gear")
 
 })
 

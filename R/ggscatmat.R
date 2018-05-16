@@ -311,6 +311,7 @@ ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, cor
 
 
 upgrade_scatmat_data <- function(data) {
+  data <- as.data.frame(data)
   dataIsCharacter <- sapply(data, is.character)
   if (any(dataIsCharacter)) {
     dataCharacterColumns <- names(dataIsCharacter[dataIsCharacter])

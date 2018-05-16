@@ -455,7 +455,7 @@ ggparcoord <- function(
   else if (order %in% c("Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
     "Stringy", "Monotonic")) {
 
-    require_pkgs("scagnostics")
+    require_namespaces("scagnostics")
     scag <- scagnostics::scagnostics(saveData2)
     data.m$variable <- factor(data.m$variable, levels = scag_order(scag, names(saveData2), order))
   }

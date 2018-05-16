@@ -90,8 +90,8 @@ test_that("examples", {
   # test segment.label
   x <- sample(letters, network.edgecount(n))
   p <- ggnet(n, segment.label = x)
-  expect_true(p$layers[[2]]$mapping$x == "midX")
-  expect_true(p$layers[[2]]$mapping$y == "midY")
+  expect_true(mapping_string(p$layers[[2]]$mapping$x) == "midX")
+  expect_true(mapping_string(p$layers[[2]]$mapping$y) == "midY")
 
   # test weight.cut
   n %v% "weights" <- 1:10

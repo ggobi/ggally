@@ -303,7 +303,7 @@ ggnet2 <- function(
 
   # -- packages ----------------------------------------------------------------
 
-  require_pkgs(c("network", "sna", "scales"))
+  require_namespaces(c("network", "sna", "scales"))
 
   # -- conversion to network class ---------------------------------------------
 
@@ -323,8 +323,8 @@ ggnet2 <- function(
 
   # -- network functions -------------------------------------------------------
 
-  get_v = get("%v%", envir = as.environment("package:network"))
-  get_e = get("%e%", envir = as.environment("package:network"))
+  get_v = get("%v%", envir = getNamespace("network"))
+  get_e = get("%e%", envir = getNamespace("network"))
 
   set_mode = function(x, mode = network::get.network.attribute(x, "bipartite")) {
     c(rep("actor", mode), rep("event", n_nodes - mode))
@@ -750,8 +750,10 @@ ggnet2 <- function(
   if (is.character(mode) && length(mode) == 1) {
 
     mode = paste0("gplot.layout.", mode)
-    if (!exists(mode)) {
+    if (!exists(mode, where = getNamespace("sna"))) {
       stop(paste("unsupported placement method:", mode))
+    } else {
+      mode <- get(mode, getNamespace("sna"))
     }
 
     # sna placement algorithm
@@ -775,8 +777,8 @@ ggnet2 <- function(
 
   }
 
-  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))
-  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[,1]
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[,1]
 
   data = cbind(data, xy)
 

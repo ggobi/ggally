@@ -5,11 +5,11 @@
 \title{ggnostic - leverage points}
 \usage{
 ggally_nostic_hat(data, mapping, ..., linePosition = 2 *
-  sum(data[[deparse(mapping$y)]])/nrow(data), lineColor = brew_colors("grey"),
-  lineSize = 0.5, lineAlpha = 1, lineType = 2,
-  avgLinePosition = sum(data[[deparse(mapping$y)]])/nrow(data),
-  avgLineColor = brew_colors("grey"), avgLineSize = lineSize,
-  avgLineAlpha = lineAlpha, avgLineType = 1)
+  sum(eval_data_col(data, mapping$y))/nrow(data),
+  lineColor = brew_colors("grey"), lineSize = 0.5, lineAlpha = 1,
+  lineType = 2, avgLinePosition = sum(eval_data_col(data,
+  mapping$y))/nrow(data), avgLineColor = brew_colors("grey"),
+  avgLineSize = lineSize, avgLineAlpha = lineAlpha, avgLineType = 1)
 }
 \arguments{
 \item{data, mapping, ...}{supplied directly to \code{\link{ggally_nostic_line}}}
