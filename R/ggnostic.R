@@ -558,6 +558,7 @@ check_and_set_nostic_types <- function(
 #' @param columnLabelsX,columnLabelsY column and row labels to display in the plot matrix
 #' @param xlab,ylab,title plot matrix labels passed directly to \code{\link{ggmatrix}}
 #' @param continuous,combo,discrete list of functions for each y variable.  See details for more information.
+#' @template ggmatrix-progress
 #' @param data data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information
 #' @export
 #' @examples
@@ -634,6 +635,7 @@ ggnostic <- function(
     .cooksd = ggally_ratio,
     .std.resid = ggally_ratio
   ),
+  progress = NULL,
   data = broomify(model)
 ) {
 
