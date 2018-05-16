@@ -15,10 +15,6 @@ vignettes/rd_files/
 .Rproj.user
 .RData
 .lintr_cache
-revdep/checks\.rds
-revdep/checks
-revdep/\.cache\.rds
-revdep/lib
 _gh-pages
 ggduo_paper.txt
 .httr-oauth
