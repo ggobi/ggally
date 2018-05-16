@@ -4,6 +4,14 @@ GGally 1.3.3
 `ggpairs` and `ggduo`
 
 * Become ggplot2 v2.2.2 compliant (#266)
+* Exported `eval_data_col`, `mapping_string`, and `mapping_swap_x_y`
+
+
+`ggnet2`
+
+* Replace loading packages with loading namespaces(#262)
+
+
 
 
 

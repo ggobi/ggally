@@ -11,11 +11,26 @@ if (getRversion() >= "2.15.1") {
 
 
 # retrieve the evaulated data column given the aes (which could possibly do operations)
+#' Evaluate data column
+#' @param data data set to evaluate the data with
+#' @param aes_col Single value from an \code{ggplot2::\link[ggplot2]{aes}(...)} object
+#' @return Aes mapping with the x and y values switched
+#' @export
+#' @examples
+#' mapping <- ggplot2::aes(Petal.Length)
+#' eval_data_col(iris, mapping$x)
 eval_data_col <- function(data, aes_col) {
   rlang::eval_tidy(aes_col, data)
 }
-mapping_string <- function(x) {
-  gsub("^~", "", deparse(x, 500L))
+#' Aes name
+#' @param aes_col Single value from \code{ggplot2::\link[ggplot2]{aes}(...)}
+#' @return character string
+#' @export
+#' @examples
+#' mapping <- ggplot2::aes(Petal.Length)
+#' mapping_string(mapping$x)
+mapping_string <- function(aes_col) {
+  gsub("^~", "", deparse(aes_col, 500L))
 }
 
 # is categories on the left?
@@ -25,6 +40,14 @@ is_character_column <- is_horizontal <- function(data, mapping, val = "y") {
   is.factor(yData) || is.character(yData)
 }
 
+#' Swap x and y mapping
+#' @param mapping output of \code{ggplot2::\link[ggplot2]{aes}(...)}
+#' @return Aes mapping with the x and y values switched
+#' @export
+#' @examples
+#' mapping <- ggplot2::aes(Petal.Length, Sepal.Width)
+#' mapping
+#' mapping_swap_x_y(mapping)
 mapping_swap_x_y <- function(mapping) {
   tmp <- mapping$x
   mapping$x <- mapping$y
