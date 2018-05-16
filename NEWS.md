@@ -1,16 +1,16 @@
 GGally 1.3.3
 ----------------
 
-`ggmatrix_gtable`
-
-* Use new default `options()` parameters for displaying `ggmatrix` progress information: "GGally.ggmatrix.progress", "GGally.ggmatrix.progress_format", and "GGally.ggmatrix.progress_clear".
-
 `ggpairs` and `ggduo`
 
 * Become ggplot2 v2.2.2 compliant (#266)
 * When retrieving functions with wrap, `ggally_*` functions do not require the GGally namespace (#269)
 * Exported `eval_data_col`, `mapping_string`, and `mapping_swap_x_y` (5d157f6)
 * Exported `is_horizontal` and `is_character_column` (#270)
+
+`ggmatrix`
+
+* `progress` parameter added to ggmatrix (and appropriate parent functions). Allows for `TRUE`, `FALSE`, `NULL`, and `function(pm){...}` (#271)
 
 `ggnet2`
 

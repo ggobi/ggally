@@ -6,9 +6,6 @@
 #'
 #' @param pm ggmatrix object to be plotted
 #' @param ... ignored
-#' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only with more than 15 panels.
-#' @param progress_format string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish: \code{" plot: [:plot_i,:plot_j] [:bar]:percent est::eta "}
-#' @param progress_clear boolean supplied directly to \code{progress::\link[progress]{progress_bar}(clear = progress_clear)}. Defaults clear the latest progress bar.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
@@ -18,24 +15,14 @@
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
   pm,
-  ...,
-  progress = getOption("GGally.ggmatrix.progress"),
-  progress_clear = getOption("GGally.ggmatrix.progress_clear"),
-  progress_format = getOption("GGally.ggmatrix.progress_format")
+  ...
 ) {
   # pm is for "plot matrix"
 
   # init progress bar handle
-  if (is.null(progress)) {
-    progress <- pm$progress %||% (interactive() && (pm$ncol * pm$nrow) > 15)
-  }
-  if (isTRUE(progress)) {
-    pb <- progress::progress_bar$new(
-      format = progress_format,
-      clear = progress_clear,
-      show_after = 0,
-      total = pm$ncol * pm$nrow
-    )
+  hasProgressBar <- !isFALSE(pm$progress)
+  if (hasProgressBar) {
+    pb <- pm$progress(pm)
     # pb$tick(tokens = list(plot_i = 1, plot_j = 1))
   }
 
@@ -181,7 +168,7 @@ ggmatrix_gtable <- function(
       grob_pos_panel <- panel_locations[plot_number]
 
       # update the progress bar is possible
-      if (isTRUE(progress)) {
+      if (hasProgressBar) {
         pb$tick(tokens = list(plot_i = i, plot_j = j))
       }
 
