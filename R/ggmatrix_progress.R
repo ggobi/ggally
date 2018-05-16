@@ -32,7 +32,7 @@ ggmatrix_progress <- function(
 }
 
 
-as_ggmatrix_progress = function(x, total) {
+as_ggmatrix_progress <- function(x, total) {
   if (isFALSE(x)) {
     return(FALSE)
   }
@@ -51,7 +51,10 @@ as_ggmatrix_progress = function(x, total) {
     return(x)
   }
 
-  stop("as_ggmatrix_progress only knows how to handle TRUE, FALSE, NULL, or a function.  If a function, it must return a new progress_bar")
+  stop(
+    "as_ggmatrix_progress only knows how to handle TRUE, FALSE, NULL, or a function.",
+    "  If a function, it must return a new progress_bar"
+  )
 }
 
 isFALSE <- function(x) {

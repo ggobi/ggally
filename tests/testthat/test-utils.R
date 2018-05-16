@@ -12,5 +12,9 @@ test_that("require_namespaces", {
 
   expect_false(is.null(getNamespace("survival")))
 
-  expect_error(suppressWarnings(suppressMessages(require_namespaces("DOES_NOT_EXIST_qweqweqweqwe"))))
+  expect_error(
+    suppressWarnings(suppressMessages(
+      require_namespaces("DOES_NOT_EXIST_qweqweqweqwe")
+    ))
+  )
 })

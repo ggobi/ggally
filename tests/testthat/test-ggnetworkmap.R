@@ -92,7 +92,10 @@ test_that("segment color", {
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(mapping_string(get("aes_params", envir = p$layers[[2]])$colour), "\"cornflowerblue\"")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
 
 })
 
@@ -107,7 +110,10 @@ test_that("weight", {
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(mapping_string(get("aes_params", envir = p$layers[[2]])$colour), "\"cornflowerblue\"")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
 
 
@@ -124,7 +130,10 @@ test_that("labels", {
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(mapping_string(get("aes_params", envir = p$layers[[2]])$colour), "\"cornflowerblue\"")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
   expect_equal(mapping_string(get("mapping", envir = p$layers[[4]])$label), ".label")
 
@@ -141,7 +150,10 @@ test_that("arrows", {
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(mapping_string(get("aes_params", envir = p$layers[[2]])$colour), "\"cornflowerblue\"")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
   expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
   expect_equal(mapping_string(get("mapping", envir = p$layers[[4]])$label), ".label")
 

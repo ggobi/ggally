@@ -329,7 +329,6 @@ ggally_cor <- function(
   yVal <- yData
 
   # if the mapping has to deal with the data, remove it
-  mappingCopy <- mapping
   if (packageVersion("ggplot2") > "2.2.1") {
     for (mappingName in names(mapping)) {
       itemData <- eval_data_col(data, mapping[[mappingName]])
@@ -748,7 +747,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
   xVal <- mapping_string(mapping$x)
   yVal <- mapping_string(mapping$y)
-  mappingY <- mapping$y
+  mappingY <- mapping$y # nolint
   mapping$y <- NULL # will be faceted
 
   p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
