@@ -34,11 +34,26 @@ mapping_string <- function(aes_col) {
 }
 
 # is categories on the left?
-is_character_column <- is_horizontal <- function(data, mapping, val = "y") {
+#' Check if plot is horizontal
+#'
+#' @param data data used in ggplot2 plot
+#' @param mapping ggplot2 \code{aes()} mapping
+#' @param val key to retrieve from \code{mapping}
+#' @return Boolean determining if the data is a character-like data
+#' @export
+#' @rdname is_horizontal
+#' @examples
+#' is_horizontal(iris, ggplot2::aes(Sepal.Length, Species)) # TRUE
+#' is_horizontal(iris, ggplot2::aes(Sepal.Length, Species), "x") # FALSE
+#' is_horizontal(iris, ggplot2::aes(Sepal.Length, Sepal.Width)) # FALSE
+is_horizontal <- function(data, mapping, val = "y") {
   yData <- eval_data_col(data, mapping[[val]])
 
   is.factor(yData) || is.character(yData)
 }
+#' @export
+#' @rdname is_horizontal
+is_character_column <- is_horizontal
 
 #' Swap x and y mapping
 #' @param mapping output of \code{ggplot2::\link[ggplot2]{aes}(...)}
