@@ -9,7 +9,7 @@ ggcoef(x, mapping = aes_string(y = "term", x = "estimate"), conf.int = TRUE,
   vline = TRUE, vline_intercept = "auto", vline_color = "gray50",
   vline_linetype = "dotted", vline_size = 1, errorbar_color = "gray25",
   errorbar_height = 0, errorbar_linetype = "solid", errorbar_size = 0.5,
-  ...)
+  sort = c("none", "ascending", "decending"), ...)
 }
 \arguments{
 \item{x}{a model object to be tidied with \code{\link[broom]{tidy}} or a data frame (see Details)}
@@ -44,6 +44,8 @@ if \code{x} is not a data frame)}
 \item{errorbar_linetype}{line type of the error bars}
 
 \item{errorbar_size}{size of the error bars}
+
+\item{sort}{\code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"decending"} sort by decreasing coefficient value}
 
 \item{...}{additional arguments sent to \code{\link[ggplot2]{geom_point}}}
 }
