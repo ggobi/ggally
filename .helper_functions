@@ -41,6 +41,6 @@ knit_vignettes:
 build_win:
   devtools::build_win(version = c("R-release", "R-devel"))
 reverse_depends:
-  revdepcheck::revdep_check(num_workers = 4)
+  revdepcheck::revdep_check(num_workers = 4, timeout = as.difftime(30, units = "mins"))
 reverse_depends_email:
   devtools:::revdep_email(date = "Nov 4th alongside ggplot2's release", version = "1.3.0", author = "Barret", draft = TRUE, only_problems = FALSE)
