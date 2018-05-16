@@ -5,7 +5,7 @@ GGally 1.3.3
 
 * Become ggplot2 v2.2.2 compliant (#266)
 * Exported `eval_data_col`, `mapping_string`, and `mapping_swap_x_y`
-
+* When retrieving functions with wrap, `ggally_*` functions do not require the GGally namespace (#269)
 
 `ggnet2`
 
