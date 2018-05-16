@@ -7,6 +7,7 @@ GGally 1.3.3
 * When retrieving functions with wrap, `ggally_*` functions do not require the GGally namespace (#269)
 * Exported `eval_data_col`, `mapping_string`, and `mapping_swap_x_y` (5d157f6)
 * Exported `is_horizontal` and `is_character_column` (#270)
+* Logical values are now treated as discrete (#272)
 
 `ggmatrix`
 
