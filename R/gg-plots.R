@@ -49,7 +49,7 @@ mapping_string <- function(aes_col) {
 is_horizontal <- function(data, mapping, val = "y") {
   yData <- eval_data_col(data, mapping[[val]])
 
-  is.factor(yData) || is.character(yData)
+  is.factor(yData) || is.character(yData) || is.logical(yData)
 }
 #' @export
 #' @rdname is_horizontal
