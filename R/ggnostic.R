@@ -364,6 +364,7 @@ ggally_nostic_sigma <- function(
 #' @return ggplot2 plot object
 #' @rdname ggally_nostic_cooksd
 #' @export
+#' @importFrom stats pf
 #' @examples
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd))
