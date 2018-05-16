@@ -13,6 +13,10 @@ GGally 1.3.3
 
 * `progress` parameter added to ggmatrix (and appropriate parent functions). Allows for `TRUE`, `FALSE`, `NULL`, and `function(pm){...}` (#271)
 
+`ggnostic`
+
+* Cooks distance cutoff is now at F_{p, n - p}(0.5) (#274)
+
 `ggnet2`
 
 * Replaced loading packages with loading namespaces(#262)
