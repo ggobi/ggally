@@ -4,9 +4,14 @@
 #' @return function that accepts a plot matrix as the first argument and \code{...} for future expansion. Internally, the plot matrix is used to determine the total number of plots for the progress bar.
 #' @export
 #' @examples
-#' ggpairs(iris, 1:2, progress = ggmatrix_progress())
+#' p_ <- GGally::print_if_interactive
+#'
+#' pm <- ggpairs(iris, 1:2, progress = ggmatrix_progress())
+#' p_(pm)
+#'
 #' # does not clear after finishing
-#' ggpairs(iris, 1:2, progress = ggmatrix_progress(clear = FALSE))
+#' pm <- ggpairs(iris, 1:2, progress = ggmatrix_progress(clear = FALSE))
+#' p_(pm)
 ggmatrix_progress <- function(
   format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ",
   clear = TRUE,
