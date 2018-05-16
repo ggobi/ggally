@@ -14,8 +14,11 @@ GGally 1.3.3
 
 `ggnet2`
 
-* Replace loading packages with loading namespaces(#262)
+* Replaced loading packages with loading namespaces(#262)
 
+`ggally_smooth`
+
+* Added `shrink` and `se` parameters to `ggally_smooth` (#247)
 
 
 
