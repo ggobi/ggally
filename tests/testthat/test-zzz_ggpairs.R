@@ -515,13 +515,13 @@ test_that("strip-top and strip-right", {
   data(tips, package = "reshape")
 
   double_strips <- function(data, mapping, ...) {
-    dt <- count(data, as.character(c(mapping$x, mapping$y)))
+    dt <- count(data, c(mapping_string(mapping$x), mapping_string(mapping$y)))
     ggplot2::qplot(
       xmin = 0.25, xmax = 0.75,
       ymin = 1, ymax = freq,
       data = dt, geom = "rect"
     ) +
-      ggplot2::facet_grid(paste0(mapping$y, " ~ ", mapping$x)) +
+      ggplot2::facet_grid(paste0(mapping_string(mapping$y), " ~ ", mapping_string(mapping$x))) +
       ggplot2::scale_x_continuous(breaks = 0.5, labels = NULL)
   }
 
