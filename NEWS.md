@@ -29,6 +29,10 @@ GGally 1.3.3
 
 * Added `sort` parameter to sort by beta values (#273)
 
+`ggparcoord`
+
+* Fixed bug where x axis breaks and labels did not appear when `splineFactor = TRUE` (#279)
+
 
 
 GGally 1.3.2
