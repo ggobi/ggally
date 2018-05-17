@@ -32,19 +32,19 @@ ggmatrix_progress <- function(
 }
 
 
-as_ggmatrix_progress <- function(x, total) {
+as_ggmatrix_progress <- function(x, total, ...) {
   if (isFALSE(x)) {
     return(FALSE)
   }
   if (isTRUE(x)) {
-    return(ggmatrix_progress())
+    return(ggmatrix_progress(...))
   }
   if (is.null(x)) {
     shouldDisplay <- interactive() && total > 15
     if (!shouldDisplay) {
       return(FALSE)
     } else {
-      return(ggmatrix_progress())
+      return(ggmatrix_progress(...))
     }
   }
   if (is.function(x)) {

@@ -698,6 +698,7 @@ ggnostic <- function(
       discrete = discrete_fn
     ),
     ...,
+    progress = progress,
     title = title,
     xlab = xlab,
     ylab = ylab

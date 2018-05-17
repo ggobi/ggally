@@ -1,75 +1,73 @@
 
 ## Comments
 
-### 2017-8-2
+### 2017-5-17
 
-No revdep authors were emailed as it is only small bug fixes or 'Suggest' dependency change for Brian.
+Please let me know if there is anything else I can do!
 
-Please let me know if there is anything I can do.  Thank you for your time.
+Thank you for your time.
 
-Best,
-Barret
-
-
-### 2017-7-18
-
-As §1.1.3.1 of the manual told you, packages in Suggests: should be used
-conditionally.  The latest version of igraph will not install on Solaris
-(hence packages strictly depending on it), and as you can see from its
-CRAN checks page, your package now fails its check.
-
-Please correct ASAP and definitely within a month.
-
---
-Brian D. Ripley,
-
+- Barret
 
 
 #### Test environments and R CMD check results
 
 * local OS X install
-  * R version 3.4.1 (2017-06-30)
-    Platform: x86_64-apple-darwin15.6.0 (64-bit)
-    Running under: macOS Sierra 10.12.5
+  * R version 3.5.0 (2018-04-23)
+    Platform:  system   x86_64, darwin15.6.0
+    Running under: macOS High ierra 10.13.4
     * 0 errors | 0 warnings | 0 notes
 
 * travis-ci
-  * R version 3.4.1 (2017-06-30)
-    Platform: x86_64-pc-linux-gnu (64-bit)
-    Running under: Ubuntu precise (12.04.5 LTS)
-    * 0 errors | 0 warnings | 0 notes
+  * Known travis issue of setting a _JAVA_OPTIONS value.  **These _JAVA_OPTIONS notes are false positives**
 
-  * R Under development (unstable) (2017-08-01 r73010)
+  * R version 3.5.0 (2017-01-27)
     Platform: x86_64-pc-linux-gnu (64-bit)
-    Running under: Ubuntu precise (12.04.5 LTS)
-    * 0 errors | 0 warnings | 0 notes
+    Running under: Ubuntu 14.04.5 LTS
+    * 0 errors | 0 warnings | 1 note
+    * checking dependencies in R code ... NOTE
+      Picked up _JAVA_OPTIONS: -Xmx2048m -Xms512m
+
+  * R Under development (unstable) (2018-05-16 r74730)
+    Platform: x86_64-pc-linux-gnu (64-bit)
+    Running under: Ubuntu 14.04.5 LTS
+    * 0 errors | 0 warnings | 1 note
+    * checking dependencies in R code ... NOTE
+      Picked up _JAVA_OPTIONS: -Xmx2048m -Xms512m
+
+* rhub
+  * fedora-clang-devel
+    * http://builder.r-hub.io/status/GGally_1.3.3.tar.gz-9e96854baee648a5a65df453919ea45f
+    * 0 errors | 0 warnings | 1 note
+    * checking package dependencies ... NOTE
+      Package suggested but not available for checking: ‘scagnostics’
+
 
 * win-builder (devel and release)
-  * R version 3.4.1 (2017-06-30)
+  * R version 3.5.0 (2018-04-23)
     * 0 errors | 0 warnings | 0 notes
-  * R Under development (unstable) (2017-07-31 r73003)
+  * R Under development (unstable) (2018-05-15 r74727)
     * 0 errors | 0 warnings | 0 notes
 
 
 ## Reverse dependencies
 
-Checked on
-  * R version 3.4.1 (2017-06-30)
-    Platform: x86_64-apple-darwin15.6.0 (64-bit)
-    Running under: macOS Sierra 10.12.5
+### Checked on
+|field    |value                        |
+|:--------|:----------------------------|
+|version  |R version 3.5.0 (2018-04-23) |
+|os       |macOS High Sierra 10.13.4    |
+|system   |x86_64, darwin15.6.0         |
 
-No difference in test results due to GGally upgrade: <https://github.com/ggobi/ggally/blob/master/revdep/problem-diff.txt>
+No difference in test results from GGally upgrade: https://github.com/ggobi/ggally/blob/master/revdep/
+
+### Couldn't check (1)
+
+|package                    |version |error |warning |note |
+|:--------------------------|:-------|:-----|:-------|:----|
+|[LANDD](problems.md#landd) |1.1.0   |1     |        |     |
 
 
-Errors not related to GGally upgrade:
+### Revdep Maintainers
 
-|package        |version | errors| warnings| notes|
-|:--------------|:-------|------:|--------:|-----:|
-|eechidna       |1.1     |      0|        1|     1| - vignette building
-|nzelect        |0.3.3   |      0|        1|     0| - vignette building
-|PopGenReport   |3.0.0   |      0|        1|     1| - due to missing package dependencies
-|POUMM          |1.3.2   |      1|        0|     0| - can not install source package
-|MissingDataGUI |0.2-5   |      1|        0|     0| - can not install dependencies
-|specmine       |1.0     |      1|        0|     0| - can not install dependencies
-
-* Side note, package 'Pi' took over 4 hours to check.
+Reverse dependency maintainers were not notified as no breaking changes occured.

@@ -49,7 +49,7 @@ if(getRversion() >= "2.15.1") {
 #'
 #' ## Example showing great circles on a simple map of the USA
 #' ## http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/
-#'
+#' \donttest{
 #' airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
 #' rownames(airports) <- airports$iata
 #'
@@ -140,6 +140,7 @@ if(getRversion() >= "2.15.1") {
 #'   labs(color = "Friends") +
 #'   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 #' p_(p)
+#'}
 #'
 
 ggnetworkmap <- function (
