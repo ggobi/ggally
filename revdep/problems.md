@@ -29,9 +29,9 @@ Version: 1.1
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.5Mb
+      installed size is  6.8Mb
       sub-directories of 1Mb or more:
-        data   5.1Mb
+        data   5.4Mb
         doc    1.2Mb
     ```
 
@@ -147,7 +147,7 @@ Version: 1.8
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 15.1Mb
+      installed size is 15.0Mb
       sub-directories of 1Mb or more:
         data  13.1Mb
         doc    1.3Mb
@@ -329,10 +329,10 @@ Version: 1.6.1
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  9.1Mb
+      installed size is  8.7Mb
       sub-directories of 1Mb or more:
         R      1.0Mb
-        data   4.1Mb
+        data   3.7Mb
         doc    3.7Mb
     ```
 
@@ -579,7 +579,7 @@ Version: 1.2.0
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.5Mb
+      installed size is  5.6Mb
       sub-directories of 1Mb or more:
         doc       1.9Mb
         extdata   3.3Mb
