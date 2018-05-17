@@ -13,7 +13,6 @@ ggmapTemp.png
 README.html
 notes/
 tests/testthat/Rplots.pdf
-revdep
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^cran-comments\.md$
@@ -30,3 +29,4 @@ ggduo_paper.txt
 ^man-roxygen
 ^\.httr-oauth$
 ^scripts/
+^revdep$

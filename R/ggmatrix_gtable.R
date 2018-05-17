@@ -6,9 +6,7 @@
 #'
 #' @param pm ggmatrix object to be plotted
 #' @param ... ignored
-#' @param progress boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only
-#' @param progress_format string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.
-# ' @method ggprint ggmatrix
+#' @param progress,progress_format Please use the 'progress' parameter in your ggmatrix-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
@@ -19,19 +17,35 @@
 ggmatrix_gtable <- function(
   pm,
   ...,
-  progress = interactive() && (pm$ncol * pm$nrow) > 15,
-  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta "
+  progress = NULL,
+  progress_format = formals(ggmatrix_progress)$format
 ) {
   # pm is for "plot matrix"
 
   # init progress bar handle
-  if (isTRUE(progress)) {
-    pb <- progress::progress_bar$new(
-      format = progress_format,
-      clear = TRUE,
-      show_after = 0,
-      total = pm$ncol * pm$nrow
-    )
+  if (missing(progress) && missing(progress_format)) {
+    # only look at plot matrix for progress bar
+    hasProgressBar <- !isFALSE(pm$progress)
+    progress_fn <- pm$progress
+  } else {
+    warning("Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples.  ggmatrix_gtable 'progress' and 'progress_format' will soon be deprecated.", immediate = TRUE)
+    
+    # has progress variable defined
+    # overrides pm$progress
+    if (missing(progress_format)) {
+      progress_fn <- as_ggmatrix_progress(progress)
+    } else {
+      progress_fn <- as_ggmatrix_progress(
+        progress,
+        pm$ncol * pm$nrow,
+        format = progress_format
+      )
+    }
+    hasProgressBar <- !isFALSE(progress_fn)
+    ggmatrix_progress
+  }
+  if (hasProgressBar) {
+    pb <- progress_fn(pm)
     # pb$tick(tokens = list(plot_i = 1, plot_j = 1))
   }
 
@@ -177,7 +191,7 @@ ggmatrix_gtable <- function(
       grob_pos_panel <- panel_locations[plot_number]
 
       # update the progress bar is possible
-      if (isTRUE(progress)) {
+      if (hasProgressBar) {
         pb$tick(tokens = list(plot_i = i, plot_j = j))
       }
 

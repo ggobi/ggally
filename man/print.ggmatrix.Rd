@@ -13,7 +13,7 @@
 
 \item{vp}{viewport to draw plot in}
 
-\item{...}{arguments passed onto ggmatrix_gtable}
+\item{...}{arguments passed onto \code{\link{ggmatrix_gtable}}}
 }
 \description{
 Print method taken from \code{ggplot2:::print.ggplot} and altered for a ggmatrix object

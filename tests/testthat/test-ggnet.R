@@ -20,6 +20,7 @@ rq(intergraph) # test igraph conversion
 test_that("examples", {
 
   ### --- start: documented examples
+  set.seed(54321)
 
   # random adjacency matrix
   x           <- 10

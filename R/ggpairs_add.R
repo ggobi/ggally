@@ -42,60 +42,24 @@
 #' pm + extra
 "+.gg" <- function(e1, e2) {
 
-  if (is.ggmatrix(e1)) {
-    if (is.null(e1$gg)) {
-      e1$gg <- list()
-    }
-
-    if (inherits(e2, "labels")) {
-      label_names <- names(e2)
-
-      if ("x" %in% label_names) {
-        e1$xlab <- e2$x
-      }
-      if ("y" %in% label_names) {
-        e1$ylab <- e2$y
-      }
-      if ("title" %in% label_names) {
-        e1$title <- e2$title
-      }
-
-      non_ggmatrix_labels <- label_names[!label_names %in% c("x", "y", "title")]
-
-      if (length(non_ggmatrix_labels) > 0) {
-        if (is.null(e1$gg$labs)) {
-          e1$gg$labs <- structure(list(), class = "labels")
-        }
-        e1$gg$labs[non_ggmatrix_labels] <- e2[non_ggmatrix_labels]
-      }
-
-      return(e1)
-
-    } else if (is.theme(e2)) {
-      # Get the name of what was passed in as e2, and pass along so that it
-      # can be displayed in error messages
-      # e2name <- deparse(substitute(e2))
-
-      if (is.null(e1$gg$theme)) {
-        e1$gg$theme <- e2
-      } else {
-        # calls ggplot2 add method and stores the result in gg
-        e1$gg$theme <- e1$gg$theme %+% e2
-      }
-      return(e1)
-
-    } else if (is.list(e2)) {
-      for (item in e2) {
-        e1 <- e1 + item
-      }
-      return(e1)
-    } else {
-      stop("'ggmatrix' does not know how to add objects that do not have class 'theme' or 'labels'")
-    }
-
-  } else {
-    # calls ggplot2 add method
+  if (!is.ggmatrix(e1)) {
     return(e1 %+% e2)
+  }
+
+  if (is.null(e1$gg)) {
+    e1$gg <- list()
+  }
+  if (inherits(e2, "labels")) {
+    add_labels_to_ggmatrix(e1, e2)
+  } else if (is.theme(e2)) {
+    add_theme_to_ggmatrix(e1, e2)
+  } else if (is.list(e2)) {
+    add_list_to_ggmatrix(e1, e2)
+  } else {
+    stop(
+      "'ggmatrix' does not know how to add objects that do not have class 'theme' or 'labels'.",
+      " Received object with class: '", paste(class(e2), collapse = ", "), "'"
+    )
   }
 }
 
@@ -110,6 +74,53 @@ add_gg_info <- function(p, gg) {
     }
   }
   p
+}
+
+
+add_labels_to_ggmatrix <- function(e1, e2) {
+  label_names <- names(e2)
+
+  if ("x" %in% label_names) {
+    e1$xlab <- e2$x
+  }
+  if ("y" %in% label_names) {
+    e1$ylab <- e2$y
+  }
+  if ("title" %in% label_names) {
+    e1$title <- e2$title
+  }
+
+  non_ggmatrix_labels <- label_names[!label_names %in% c("x", "y", "title")]
+
+  if (length(non_ggmatrix_labels) > 0) {
+    if (is.null(e1$gg$labs)) {
+      e1$gg$labs <- structure(list(), class = "labels")
+    }
+    e1$gg$labs[non_ggmatrix_labels] <- e2[non_ggmatrix_labels]
+  }
+
+  e1
+}
+
+add_theme_to_ggmatrix <- function(e1, e2) {
+  # Get the name of what was passed in as e2, and pass along so that it
+  # can be displayed in error messages
+  # e2name <- deparse(substitute(e2))
+
+  if (is.null(e1$gg$theme)) {
+    e1$gg$theme <- e2
+  } else {
+    # calls ggplot2 add method and stores the result in gg
+    e1$gg$theme <- e1$gg$theme %+% e2
+  }
+  e1
+}
+
+add_list_to_ggmatrix <- function(e1, e2) {
+  for (item in e2) {
+    e1 <- e1 + item
+  }
+  e1
 }
 
 

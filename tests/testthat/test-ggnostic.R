@@ -1,7 +1,9 @@
 context("ggnostic")
 
 expect_print <- function(p) {
-  testthat::expect_silent(print(p, progress = FALSE))
+  testthat::expect_silent({
+    print(p)
+  })
 }
 
 
@@ -63,7 +65,8 @@ test_that("ggnostic mtcars", {
     mod,
     mapping = ggplot2::aes(),
     columnsY = c("mpg", ".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
-    continuous = continuous_type
+    continuous = continuous_type,
+    progress = FALSE
   )
   expect_print(pm)
 
@@ -71,7 +74,8 @@ test_that("ggnostic mtcars", {
     mod,
     mapping = ggplot2::aes(color = am),
     legend = c(1, 3),
-    continuous = continuous_type
+    continuous = continuous_type,
+    progress = FALSE
   )
   expect_print(pm)
 })

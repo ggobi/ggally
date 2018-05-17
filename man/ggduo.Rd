@@ -11,7 +11,8 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]), labeller = "label_value",
   switch = NULL, xlab = NULL, ylab = NULL, showStrips = NULL,
-  legend = NULL, cardinality_threshold = 15, legends = stop("deprecated"))
+  legend = NULL, cardinality_threshold = 15, progress = NULL,
+  legends = stop("deprecated"))
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -37,6 +38,8 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 \item{legend}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
 
 \item{cardinality_threshold}{maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15}
+
+\item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
 \item{legends}{deprecated}
 }

@@ -49,7 +49,7 @@ mapping_string <- function(aes_col) {
 is_horizontal <- function(data, mapping, val = "y") {
   yData <- eval_data_col(data, mapping[[val]])
 
-  is.factor(yData) || is.character(yData)
+  is.factor(yData) || is.character(yData) || is.logical(yData)
 }
 #' @export
 #' @rdname is_horizontal
@@ -106,10 +106,13 @@ ggally_points <- function(data, mapping, ...){
 #'
 #' Add a smoothed condition mean with a given scatter plot.
 #'
+#' Y limits are reduced to match original Y range with the goal of keeping the Y axis the same across plots.
+#'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments to add to geom_point
-#' @param method \code{method} parameter supplied to \code{\link[ggplot2]{geom_smooth}}
+#' @param method,se parameters supplied to \code{\link[ggplot2]{geom_smooth}}
+#' @param shrink boolean to determine if y range is reduced to range of points or points and error ribbon
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @export
 #' @keywords hplot
@@ -119,16 +122,23 @@ ggally_points <- function(data, mapping, ...){
 #'  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
-ggally_smooth <- function(data, mapping, ..., method = "lm"){
+ggally_smooth <- function(data, mapping, ..., method = "lm", se = TRUE, shrink = TRUE) {
 
   p <- ggplot(data = data, mapping)
 
   p <- p + geom_point(...)
 
   if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
-    p <- p + geom_smooth(method = method)
+    p <- p + geom_smooth(method = method, se = se)
   } else {
-    p <- p + geom_smooth(method = method, colour = I("black"))
+    p <- p + geom_smooth(method = method, se = se, colour = I("black"))
+  }
+
+  if (isTRUE(shrink)) {
+    p <- p +
+      coord_cartesian(
+        ylim = range(eval_data_col(data, mapping$y), na.rm = TRUE)
+      )
   }
 
   p
@@ -319,7 +329,6 @@ ggally_cor <- function(
   yVal <- yData
 
   # if the mapping has to deal with the data, remove it
-  mappingCopy <- mapping
   if (packageVersion("ggplot2") > "2.2.1") {
     for (mappingName in names(mapping)) {
       itemData <- eval_data_col(data, mapping[[mappingName]])
@@ -738,7 +747,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 
   xVal <- mapping_string(mapping$x)
   yVal <- mapping_string(mapping$y)
-  mappingY <- mapping$y
+  mappingY <- mapping$y # nolint
   mapping$y <- NULL # will be faceted
 
   p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)

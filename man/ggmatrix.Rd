@@ -8,8 +8,8 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
   title = NULL, xlab = NULL, ylab = NULL, byrow = TRUE,
   showStrips = NULL, showAxisPlotLabels = TRUE,
   showXAxisPlotLabels = TRUE, showYAxisPlotLabels = TRUE, labeller = NULL,
-  switch = NULL, xProportions = NULL, yProportions = NULL, data = NULL,
-  gg = NULL, legend = NULL)
+  switch = NULL, xProportions = NULL, yProportions = NULL,
+  progress = NULL, data = NULL, gg = NULL, legend = NULL)
 }
 \arguments{
 \item{plots}{list of plots to be put into matrix}
@@ -31,6 +31,8 @@ ggmatrix(plots, nrow, ncol, xAxisLabels = NULL, yAxisLabels = NULL,
 \item{switch}{switch parameter for facet_grid. See \code{ggplot2::\link[ggplot2]{facet_grid}}.  By default, the labels are displayed on the top and right of the plot. If \code{"x"}, the top labels will be displayed to the bottom. If \code{"y"}, the right-hand side labels will be displayed to the left. Can also be set to \code{"both"}}
 
 \item{xProportions, yProportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, or \code{grid::\link[grid]{unit}} object with matching respective length}
+
+\item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
 \item{data}{data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time}
 

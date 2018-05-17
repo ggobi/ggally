@@ -7,12 +7,27 @@ GGally 1.3.3
 * When retrieving functions with wrap, `ggally_*` functions do not require the GGally namespace (#269)
 * Exported `eval_data_col`, `mapping_string`, and `mapping_swap_x_y` (5d157f6)
 * Exported `is_horizontal` and `is_character_column` (#270)
+* Logical values are now treated as discrete (#272)
+
+`ggmatrix`
+
+* `progress` parameter added to ggmatrix (and appropriate parent functions). Allows for `TRUE`, `FALSE`, `NULL`, and `function(pm){...}` (#271)
+
+`ggnostic`
+
+* Cooks distance cutoff is now at F_{p, n - p}(0.5) (#274)
 
 `ggnet2`
 
-* Replace loading packages with loading namespaces(#262)
+* Replaced loading packages with loading namespaces(#262)
 
+`ggally_smooth`
 
+* Added `shrink` and `se` parameters to `ggally_smooth` (#247)
+
+`ggcoef`
+
+* Added `sort` parameter to sort by beta values (#273)
 
 
 
