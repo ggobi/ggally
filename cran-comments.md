@@ -3,6 +3,21 @@
 
 ### 2017-5-17
 
+Altered test and added crosstalk as a suggests.  Passes on travis, local mac, and against plotly (reason for test).
+
+- Barret
+
+
+### 2017-5-17
+
+$GGally
+'::' or ':::' import not declared from: ‘crosstalk’
+'library' or 'require' call not declared from: ‘crosstalk’
+
+- Kurt
+
+### 2017-5-17
+
 Please let me know if there is anything else I can do!
 
 Thank you for your time.
