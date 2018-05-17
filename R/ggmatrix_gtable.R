@@ -28,7 +28,8 @@ ggmatrix_gtable <- function(
     hasProgressBar <- !isFALSE(pm$progress)
     progress_fn <- pm$progress
   } else {
-    message("Please use the 'progress' parameter in your ggmatrix-like function.  See ?ggmatrix_progress for a few examples.  These parameters will soon be deprecated.")
+    warning("Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples.  ggmatrix_gtable 'progress' and 'progress_format' will soon be deprecated.", immediate = TRUE)
+    
     # has progress variable defined
     # overrides pm$progress
     if (missing(progress_format)) {

@@ -154,6 +154,19 @@ test_that("proportions", {
 })
 
 
+test_that("ggmatrix_gtable progress", {
+  pm <- ggpairs(iris, 1:2)
+  expect_silent({
+    pg <- ggmatrix_gtable(pm)
+  })
+  expect_warning({
+    ggmatrix_gtable(pm, progress = TRUE)
+  })
+  expect_warning({
+    ggmatrix_gtable(pm, progress_format = "asdfasdf :plot_i")
+  })
+})
+
 #
 # printShowStrips <- c(TRUE, FALSE)
 # if (i <= length(printShowStrips)) {
