@@ -3,7 +3,7 @@ context("ggpairs")
 data(tips, package = "reshape")
 
 expect_print <- function(p) {
-  testthat::expect_silent(print(p, progress = FALSE))
+  testthat::expect_silent(print(p))
 }
 
 facethistBindwidth1 <- list(combo = wrap("facethist", binwidth = 1))
@@ -353,7 +353,8 @@ test_that("axisLabels", {
       upper = "blank",
       lower = facethistBindwidth1,
       axisLabels = axisLabels,
-      title = str_c("axisLabels = ", axisLabels)
+      title = str_c("axisLabels = ", axisLabels),
+      progress = FALSE
     )
     pm
   }
@@ -538,14 +539,16 @@ test_that("strip-top and strip-right", {
   pm <- ggpairs(
     tips, 3:6,
     lower = "blank", diag = "blank",
-    upper = list(discrete = double_strips)
+    upper = list(discrete = double_strips),
+    progress = FALSE
   )
   expect_print(pm)
   pm <- ggpairs(
     tips, 3:6,
     lower = "blank", diag = "blank",
     upper = list(discrete = double_strips),
-    showStrips = TRUE
+    showStrips = TRUE,
+    progress = FALSE
   )
   expect_print(pm)
 
@@ -595,6 +598,7 @@ test_that("subtypes", {
       upper = types,
       lower = types,
       diag = diag,
+      progress = FALSE,
       ...
     ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
   }
@@ -616,6 +620,7 @@ test_that("subtypes", {
           ", discrete = ", gn(types$discrete),
         ")", sep = ""),
       types = types,
+      progress = FALSE,
       ...
     ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
   }
@@ -662,18 +667,24 @@ test_that("subtypes", {
       #   )
       # ))
       #
-      pm <- fn(
-        types = list(
-          continuous = conSub,
-          combo = comSub,
-          discrete = disSub
-        ),
-        diag = list(
-          continuous = diagConSub,
-          discrete = diagDisSub
+      expect_silent({
+        pm <- fn(
+          types = list(
+            continuous = conSub,
+            combo = comSub,
+            discrete = disSub
+          ),
+          diag = list(
+            continuous = diagConSub,
+            discrete = diagDisSub
+          )
         )
-      )
-      expect_print(pm)
+      })
+
+      if (grepl("/Users/barret/", getwd(), fixed = TRUE)) {
+        # only if on personal machine, do viz test
+        expect_print(pm)
+      }
     }
   }
 

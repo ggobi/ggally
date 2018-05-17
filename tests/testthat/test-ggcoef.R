@@ -12,12 +12,14 @@ test_that("example", {
 
   d <- as.data.frame(Titanic)
   reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
-  expect_print(ggcoef(reg2, exponentiate = TRUE))
-  expect_print(ggcoef(
-    reg2,
-    exponentiate = TRUE,
-    exclude_intercept = TRUE,
-    errorbar_height = .2,
-    color = "blue"
-  ))
+  if (requireNamespace("MASS", quietly = TRUE)) {
+    expect_print(ggcoef(reg2, exponentiate = TRUE))
+    expect_print(ggcoef(
+      reg2,
+      exponentiate = TRUE,
+      exclude_intercept = TRUE,
+      errorbar_height = .2,
+      color = "blue"
+    ))
+  }
 })

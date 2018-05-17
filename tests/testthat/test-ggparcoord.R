@@ -225,11 +225,12 @@ test_that("missing", {
 
 test_that("order", {
 
-
-  for (ordering in c("Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
-    "Stringy", "Monotonic")) {
-    p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = ordering)
-    expect_true(all(levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")))
+  if (requireNamespace("scagnostics", quietly = TRUE)) {
+    for (ordering in c("Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
+      "Stringy", "Monotonic")) {
+      p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = ordering)
+      expect_true(all(levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")))
+    }
   }
 
   for (ordering in c("skewness", "allClass", "anyClass")) {

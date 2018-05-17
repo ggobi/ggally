@@ -15,7 +15,9 @@ rq(ggplot2)
 
 rq(intergraph) # test igraph conversion
 
-airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
+# first 500 rows of http://datasets.flowingdata.com/tuts/maparcs/airports.csv
+# avoids downloading the dataset to test the package
+airports <- read.csv("data/airports.csv", header = TRUE)
 rownames(airports) <- airports$iata
 
 # select some random flights
