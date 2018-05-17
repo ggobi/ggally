@@ -68,7 +68,7 @@ invisible(lapply(c("ggplot2", "maps", "network", "sna"), base::library, characte
 
 ## Example showing great circles on a simple map of the USA
 ## http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/
-
+\donttest{
 airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
 rownames(airports) <- airports$iata
 
@@ -159,6 +159,7 @@ p <- ggnetworkmap(
   labs(color = "Friends") +
   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 p_(p)
+}
 
 }
 \author{
