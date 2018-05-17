@@ -1,0 +1,1233 @@
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc" />
+
+    <meta name="author" content="Barret Schloerke" />
+  
+  
+  <title>GGally</title>
+
+    <script src="index_files/jquery-1.11.3/jquery.min.js"></script>
+  <link href="index_files/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="index_files/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+  <script src="index_files/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
+  <script src="index_files/bootstrap-3.3.2/shim/respond.min.js"></script>
+  <link href="index_files/highlight-8.4/tomorrow.css" rel="stylesheet" />
+  <script src="index_files/highlight-8.4/highlight.pack.js"></script>
+  <link href="index_files/fontawesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script src="index_files/stickykit-1.1.1/sticky-kit.min.js"></script>
+  <script src="index_files/jqueryeasing-1.3/jquery.easing.min.js"></script>
+  <link href="index_files/recliner-0.2.2/recliner.css" rel="stylesheet" />
+  <script src="index_files/recliner-0.2.2/recliner.min.js"></script>
+  <script src="index_files/recliner-0.2.2/onload.js"></script>
+  <link href="index_files/packagedocs-0.0.1/pd.css" rel="stylesheet" />
+  <script src="index_files/packagedocs-0.0.1/pd.js"></script>
+  <script src="index_files/packagedocs-0.0.1/pd-collapse-toc.js"></script>
+  
+  
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+
+  
+  <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <a href="index.html" class="navbar-brand page-scroll">
+        GGally - Extension to ‘ggplot2’
+        </a>
+      </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav nav-pills pull-right">
+<li class="active">
+<a href='index.html'>Docs</a>
+</li>
+<li>
+<a href='rd.html'>Package Ref</a>
+</li>
+<li>
+<a href='https://github.com/ggobi/ggally'>Github <i class='fa fa-github'></i></a>
+</li>
+        </ul>
+      </nav>
+          </div>
+  </header>
+
+  <!-- Begin Body -->
+  <div class="container">
+    <div class="row">
+            <div class="col-md-3" id="sidebar-col">
+        <div id="toc">
+          <ul>
+          <li><a href="#ggally">GGally</a></li>
+          <li><a href="#ggallyggcoef">GGally::ggcoef</a><ul>
+          <li><a href="#quick-coefficients-plot">Quick coefficients plot</a></li>
+          <li><a href="#customizing-the-plot">Customizing the plot</a></li>
+          <li><a href="#custom-data-frame">Custom data frame</a></li>
+          </ul></li>
+          <li><a href="#ggallyggduo">GGally::ggduo</a><ul>
+          <li><a href="#canonical-correlation-analysis">Canonical Correlation Analysis</a></li>
+          <li><a href="#multiple-time-series-analysis">Multiple Time Series Analysis</a></li>
+          <li><a href="#regression-analysis">Regression Analysis</a></li>
+          </ul></li>
+          <li><a href="#ggallyglyphs">GGally::glyphs</a><ul>
+          <li><a href="#references">References</a></li>
+          </ul></li>
+          <li><a href="#ggallyggmatrix">GGally::ggmatrix</a><ul>
+          <li><a href="#generic-example">Generic Example</a></li>
+          <li><a href="#matrix-subsetting">Matrix Subsetting</a></li>
+          <li><a href="#themes">Themes</a></li>
+          <li><a href="#axis-control">Axis Control</a></li>
+          <li><a href="#strips-control">Strips Control</a></li>
+          </ul></li>
+          <li><a href="#ggallyggnetworkmap">GGally::ggnetworkmap</a><ul>
+          <li><a href="#example-us-airports">Example: US airports</a></li>
+          <li><a href="#example-twitter-spambots">Example: Twitter spambots</a></li>
+          </ul></li>
+          <li><a href="#ggallyggnostic">GGally::ggnostic</a><ul>
+          <li><a href="#life-expectancy-model-fitting">Life Expectancy Model Fitting</a></li>
+          <li><a href="#full-diagnostic-plot-matrix-example">Full diagnostic plot matrix example</a></li>
+          </ul></li>
+          <li><a href="#ggallyggpairs">GGally::ggpairs</a><ul>
+          <li><a href="#columns-and-mapping">Columns and Mapping</a></li>
+          <li><a href="#matrix-sections">Matrix Sections</a></li>
+          <li><a href="#custom-functions">Custom Functions</a></li>
+          <li><a href="#function-wrapping">Function Wrapping</a></li>
+          <li><a href="#plot-matrix-subsetting">Plot Matrix Subsetting</a></li>
+          <li><a href="#themes-1">Themes</a></li>
+          <li><a href="#references-1">References</a></li>
+          </ul></li>
+          <li><a href="#ggallyggscatmat">GGally::ggscatmat</a><ul>
+          <li><a href="#references-2">References</a></li>
+          </ul></li>
+          <li><a href="#ggallyggsurv">GGally::ggsurv</a><ul>
+          <li><a href="#single-stratum">Single Stratum</a></li>
+          <li><a href="#multiple-stratum">Multiple Stratum</a></li>
+          <li><a href="#alterations">Alterations</a></li>
+          </ul></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9" id="content-col">
+      
+<div id="content-top"></div>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<div id="ggally" class="section level1">
+<h1>GGally</h1>
+<p>Welcome to the GGally documentation page.</p>
+<p>The following topic sections are alphabetically sorted.</p>
+</div>
+<div id="ggallyggcoef" class="section level1">
+<h1>GGally::ggcoef</h1>
+<p>The purpose of this function is to quickly plot the coefficients of a model.</p>
+<div id="joseph-larmarange" class="section level4">
+<h4><em>Joseph Larmarange</em></h4>
+</div>
+<div id="may-16-2016" class="section level4">
+<h4><em>May 16, 2016</em></h4>
+</div>
+<div id="quick-coefficients-plot" class="section level2">
+<h2>Quick coefficients plot</h2>
+<p>To work automatically, this function requires the <code><a href='http://www.rdocumentation.org/packages/broom/topics/broom'>broom</a></code> package. Simply call <code><a href='rd.html#ggcoef_alias'>ggcoef</a></code> with a model object. It could be the result of <code><a href='http://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></code>, <code><a href='http://www.rdocumentation.org/packages/stats/topics/glm'>glm</a></code> or any other model covered by <code><a href='http://www.rdocumentation.org/packages/broom/topics/broom'>broom</a></code> and its <code><a href='http://www.rdocumentation.org/packages/broom/topics/tidy'>tidy</a></code> method<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<pre class="r"><code>reg &lt;- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
+ggcoef(reg)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-reg-1.png" width="960" /></p>
+<p>In the case of a logistic regression (or any other model for which coefficients are usually exponentiated), simply indicated <code>exponentiate = TRUE</code>. Note that a logarithmic scale will be used for the x-axis.</p>
+<pre class="r"><code>d &lt;- as.data.frame(Titanic)
+log.reg &lt;- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
+ggcoef(log.reg, exponentiate = TRUE)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-titanic-1.png" width="960" /></p>
+</div>
+<div id="customizing-the-plot" class="section level2">
+<h2>Customizing the plot</h2>
+<p>You can use <code>conf.int</code>, <code>vline</code> and <code>exclude_intercept</code> to display or not confidence intervals as error bars, a vertical line for <code>x = 0</code> (or <code>x = 1</code> if coeffcients are exponentiated) and the intercept.</p>
+<pre class="r"><code>ggcoef(reg, vline = FALSE, conf.int = FALSE, exclude_intercept = TRUE)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-reg-custom-1.png" width="960" /></p>
+<p>See the help page of <code><a href='rd.html#ggcoef_alias'>ggcoef</a></code> for the full list of arguments that could be used to personalize how error bars and the vertical line are plotted.</p>
+<pre class="r"><code>ggcoef(
+  log.reg,
+  exponentiate = TRUE,
+  vline_color = &quot;red&quot;,
+  vline_linetype =  &quot;solid&quot;,
+  errorbar_color = &quot;blue&quot;,
+  errorbar_height = .25
+)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-full-args-1.png" width="960" /></p>
+<p>Additional parameters will be passed to <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></code>.</p>
+<pre class="r"><code>ggcoef(log.reg, exponentiate = TRUE, color = &quot;purple&quot;, size = 5, shape = 18)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-log.reg-1.png" width="960" /></p>
+<p>Finally, you can also customize the aesthetic mapping of the points.</p>
+<pre class="r"><code>library(ggplot2)
+ggcoef(log.reg, exponentiate = TRUE, mapping = aes(x = estimate, y = term, size = p.value)) +
+  scale_size_continuous(trans = &quot;reverse&quot;)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-aes-1.png" width="960" /></p>
+</div>
+<div id="custom-data-frame" class="section level2">
+<h2>Custom data frame</h2>
+<p>You can also pass a custom data frame to <code><a href='rd.html#ggcoef_alias'>ggcoef</a></code>. The following variables are expected:</p>
+<ul>
+<li><code>term</code> (except if you customize the mapping)</li>
+<li><code>estimate</code> (except if you customize the mapping)</li>
+<li><code>conf.low</code> and <code>conf.high</code> (only if you want to display error bars)</li>
+</ul>
+<pre class="r"><code>cust &lt;- data.frame(
+  term = c(&quot;male vs. female&quot;, &quot;30-49 vs. 18-29&quot;, &quot;50+ vs. 18-29&quot;, &quot;urban vs. rural&quot;),
+  estimate = c(.456, 1.234, 1.897, 1.003),
+  conf.low = c(.411, 1.042, 1.765, 0.678),
+  conf.high = c(.498, 1.564, 2.034, 1.476),
+  variable = c(&quot;sex&quot;, &quot;age&quot;, &quot;age&quot;, &quot;residence&quot;)
+)
+cust$term &lt;- factor(cust$term, cust$term)
+ggcoef(cust, exponentiate = TRUE)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-data-frame-1.png" width="960" /></p>
+<pre class="r"><code>ggcoef(
+  cust,
+  exponentiate = TRUE,
+  mapping = aes(x = estimate, y = term, colour = variable),
+  size = 5
+)</code></pre>
+<p><img src="index_files/figure-html/ggcoef-data-frame-2.png" width="960" /></p>
+</div>
+</div>
+<div id="ggallyggduo" class="section level1">
+<h1>GGally::ggduo</h1>
+<div id="barret-schloerke" class="section level4">
+<h4><em>Barret Schloerke</em></h4>
+</div>
+<div id="july-4-2016" class="section level4">
+<h4><em>July 4, 2016</em></h4>
+<p>The purpose of this function is to display two grouped data in a plot matrix. This is useful for canonical correlation analysis, multiple time series analysis, and regression analysis.</p>
+</div>
+<div id="canonical-correlation-analysis" class="section level2">
+<h2>Canonical Correlation Analysis</h2>
+<p>This example is derived from</p>
+<p><code>R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital Research and Education. from http://www.stats.idre.ucla.edu/r/dae/canonical-correlation-analysis (accessed May 22, 2017).</code></p>
+<p><code>Example 1. A researcher has collected data on three psychological variables, four academic variables (standardized test scores) and gender for 600 college freshman. She is interested in how the set of psychological variables relates to the academic variables and gender. In particular, the researcher is interested in how many dimensions (canonical variables) are necessary to understand the association between the two sets of variables.&quot;</code></p>
+<pre class="r"><code>data(psychademic)
+str(psychademic)</code></pre>
+<pre><code>&#39;data.frame&#39;:   600 obs. of  8 variables:
+ $ locus_of_control: num  -0.84 -0.38 0.89 0.71 -0.64 1.11 0.06 -0.91 0.45 0 ...
+ $ self_concept    : num  -0.24 -0.47 0.59 0.28 0.03 0.9 0.03 -0.59 0.03 0.03 ...
+ $ motivation      : chr  &quot;4&quot; &quot;3&quot; &quot;3&quot; &quot;3&quot; ...
+ $ read            : num  54.8 62.7 60.6 62.7 41.6 62.7 41.6 44.2 62.7 62.7 ...
+ $ write           : num  64.5 43.7 56.7 56.7 46.3 64.5 39.1 39.1 51.5 64.5 ...
+ $ math            : num  44.5 44.7 70.5 54.7 38.4 61.4 56.3 46.3 54.4 38.3 ...
+ $ science         : num  52.6 52.6 58 58 36.3 58 45 36.3 49.8 55.8 ...
+ $ sex             : chr  &quot;female&quot; &quot;female&quot; &quot;male&quot; &quot;male&quot; ...
+ - attr(*, &quot;academic&quot;)= chr  &quot;read&quot; &quot;write&quot; &quot;math&quot; &quot;science&quot; ...
+ - attr(*, &quot;psychology&quot;)= chr  &quot;locus_of_control&quot; &quot;self_concept&quot; &quot;motivation&quot;</code></pre>
+<pre class="r"><code>(psych_variables &lt;- attr(psychademic, &quot;psychology&quot;))</code></pre>
+<pre><code>[1] &quot;locus_of_control&quot; &quot;self_concept&quot;     &quot;motivation&quot;      </code></pre>
+<pre class="r"><code>(academic_variables &lt;- attr(psychademic, &quot;academic&quot;))</code></pre>
+<pre><code>[1] &quot;read&quot;    &quot;write&quot;   &quot;math&quot;    &quot;science&quot; &quot;sex&quot;    </code></pre>
+<p>First, look at the within correlation using <code><a href='rd.html#ggpairs_alias'>ggpairs</a></code>.</p>
+<pre class="r"><code>ggpairs(psychademic, psych_variables, title = &quot;Within Psychological Variables&quot;)</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggduo-within-1.png" width="960" /></p>
+<pre class="r"><code>ggpairs(psychademic, academic_variables, title = &quot;Within Academic Variables&quot;)</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggduo-within-2.png" width="960" /></p>
+<p>Next, look at the between correlation using <code><a href='rd.html#ggduo_alias'>ggduo</a></code>.</p>
+<pre class="r"><code>ggduo(
+  psychademic, psych_variables, academic_variables,
+  types = list(continuous = &quot;smooth_lm&quot;),
+  title = &quot;Between Academic and Psychological Variable Correlation&quot;,
+  xlab = &quot;Psychological&quot;,
+  ylab = &quot;Academic&quot;
+)</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggduo-between-1.png" width="960" /></p>
+<p>Since ggduo does not have a upper section to display the correlation values, we may use a custom function to add the information in the continuous plots. The strips may be removed as each group name may be recovered in the outer axis labels.</p>
+<pre class="r"><code>lm_with_cor &lt;- function(data, mapping, ..., method = &quot;pearson&quot;) {
+  x &lt;- eval(mapping$x, data)
+  y &lt;- eval(mapping$y, data)
+  cor &lt;- cor(x, y, method = method)
+  ggally_smooth_lm(data, mapping, ...) +
+    ggplot2::geom_label(
+      data = data.frame(
+        x = min(x, na.rm = TRUE),
+        y = max(y, na.rm = TRUE),
+        lab = round(cor, digits = 3)
+      ),
+      mapping = ggplot2::aes(x = x, y = y, label = lab),
+      hjust = 0, vjust = 1,
+      size = 5, fontface = &quot;bold&quot;,
+      inherit.aes = FALSE # do not inherit anything from the ...
+    )
+}
+ggduo(
+  psychademic, rev(psych_variables), academic_variables,
+  mapping = aes(color = sex),
+  types = list(continuous = wrap(lm_with_cor, alpha = 0.25)),
+  showStrips = FALSE,
+  title = &quot;Between Academic and Psychological Variable Correlation&quot;,
+  xlab = &quot;Psychological&quot;,
+  ylab = &quot;Academic&quot;,
+  legend = c(5,2)
+) +
+  theme(legend.position = &quot;bottom&quot;)</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggduo-lm-1.png" width="960" /></p>
+</div>
+<div id="multiple-time-series-analysis" class="section level2">
+<h2>Multiple Time Series Analysis</h2>
+<p>While displaying multiple time series vertically over time, such as <code>+ facet_grid(time ~ .)</code>, <code><a href='rd.html#ggduo_alias'>ggduo</a></code> can handle both continuous and discrete data. <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot2-package'>ggplot2</a></code> does not mix discrete and continuous data on the same axis.</p>
+<pre class="r"><code>library(ggplot2)
+
+data(pigs)
+pigs_dt &lt;- pigs[-(2:3)] # remove year and quarter
+pigs_dt$profit_group &lt;- as.numeric(pigs_dt$profit &gt; mean(pigs_dt$profit))
+qplot(
+  time, value,
+  data = reshape::melt.data.frame(pigs_dt, &quot;time&quot;),
+  geom = c(&quot;smooth&quot;, &quot;point&quot;)
+) +
+  facet_grid(variable ~ ., scales = &quot;free_y&quot;)</code></pre>
+<pre><code>`geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="index_files/figure-html/ggduo-mtsa-1.png" width="960" /></p>
+<p>Instead, we may use <code>ggts</code> to display the data. <code>ggts</code> changes the default behavior of ggduo of <code>columnLabelsX</code> to equal <code>NULL</code> and allows for mixed variable types.</p>
+<pre class="r"><code># make the profit group as a factor value
+profit_groups &lt;- c(
+  &quot;1&quot; = &quot;high&quot;,
+  &quot;0&quot; = &quot;low&quot;
+)
+pigs_dt$profit_group &lt;- factor(
+  profit_groups[as.character(pigs_dt$profit_group)],
+  levels = unname(profit_groups),
+  ordered = TRUE
+)
+ggts(pigs_dt, &quot;time&quot;, 2:7)</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggduo-mtsa-group-1.png" width="960" /></p>
+<pre class="r"><code># remove the binwidth warning
+pigs_types &lt;- list(
+  comboHorizontal = wrap(ggally_facethist, binwidth = 1)
+)
+ggts(pigs_dt, &quot;time&quot;, 2:7, types = pigs_types)</code></pre>
+<p><img src="index_files/figure-html/ggduo-mtsa-group-2.png" width="960" /></p>
+<pre class="r"><code># add color and legend
+pigs_mapping &lt;- aes(color = profit_group)
+ggts(pigs_dt, pigs_mapping, &quot;time&quot;, 2:7, types = pigs_types, legend = c(6,1))</code></pre>
+<p><img src="index_files/figure-html/ggduo-mtsa-group-3.png" width="960" /></p>
+<p>Produce more meaningful labels, add a legend, and remove profit group strips.</p>
+<pre class="r"><code>pm &lt;- ggts(
+  pigs_dt, pigs_mapping,
+  1, 2:7,
+  types = pigs_types,
+  legend = c(6,1),
+  columnLabelsY = c(
+    &quot;number of\nfirst birth sows&quot;,
+    &quot;sell price over\nfeed cost&quot;,
+    &quot;sell count over\nheard size&quot;,
+    &quot;meat head count&quot;,
+    &quot;breading\nheard size&quot;,
+    &quot;profit\ngroup&quot;
+  ),
+  showStrips = FALSE
+) +
+  labs(fill = &quot;profit group&quot;) +
+  theme(
+    legend.position = &quot;bottom&quot;,
+    strip.background = element_rect(
+      fill = &quot;transparent&quot;, color = &quot;grey80&quot;
+    )
+  )
+pm</code></pre>
+<p><img src="index_files/figure-html/ggduo-mtsa-pretty-1.png" width="960" /></p>
+</div>
+<div id="regression-analysis" class="section level2">
+<h2>Regression Analysis</h2>
+<p>Since <code><a href='rd.html#ggduo_alias'>ggduo</a></code> may take custom functions just like <code><a href='rd.html#ggpairs_alias'>ggpairs</a></code>, we will make a custom function that displays the residuals with a red line at 0 and all other y variables will receive a simple linear regression plot.</p>
+<p>Note: the marginal residuals are calculated before plotting and the y_range is found to display all residuals on the same scale.</p>
+<pre class="r"><code>swiss &lt;- datasets::swiss
+
+# add a &#39;fake&#39; column
+swiss$Residual &lt;- seq_len(nrow(swiss))
+
+# calculate all residuals prior to display
+residuals &lt;- lapply(swiss[2:6], function(x) {
+  summary(lm(Fertility ~ x, data = swiss))$residuals
+})
+# calculate a consistent y range for all residuals
+y_range &lt;- range(unlist(residuals))
+
+# custom function to display continuous data. If the y variable is &quot;Residual&quot;, do custom work.
+lm_or_resid &lt;- function(data, mapping, ..., line_color = &quot;red&quot;, line_size = 1) {
+  if (as.character(mapping$y) != &quot;Residual&quot;) {
+    return(ggally_smooth_lm(data, mapping, ...))
+  }
+
+  # make residual data to display
+  resid_data &lt;- data.frame(
+    x = data[[as.character(mapping$x)]],
+    y = residuals[[as.character(mapping$x)]]
+  )
+
+  ggplot(data = data, mapping = mapping) +
+    geom_hline(yintercept = 0, color = line_color, size = line_size) +
+    ylim(y_range) +
+    geom_point(data = resid_data, mapping = aes(x = x, y = y), ...)
+
+}
+
+# plot the data
+ggduo(
+  swiss,
+  2:6, c(1,7),
+  types = list(continuous = lm_or_resid)
+)</code></pre>
+<p><img src="index_files/figure-html/ggduo-reg-swiss-1.png" width="960" /></p>
+<pre class="r"><code># change line to be thicker and blue and the points to be slightly transparent
+ggduo(
+  swiss,
+  2:6, c(1,7),
+  types = list(
+    continuous = wrap(lm_or_resid,
+      alpha = 0.7,
+      line_color = &quot;blue&quot;,
+      line_size = 3
+    )
+  )
+)</code></pre>
+<p><img src="index_files/figure-html/ggduo-reg-swiss-2.png" width="960" /></p>
+</div>
+</div>
+<div id="ggallyglyphs" class="section level1">
+<h1>GGally::glyphs</h1>
+<div id="hadley-wickham-charlotte-wickham-di-cook-heike-hofmann" class="section level4">
+<h4><em>Hadley Wickham, Charlotte Wickham, Di Cook, Heike Hofmann</em></h4>
+</div>
+<div id="nov-6-2015" class="section level4">
+<h4><em>Nov 6, 2015</em></h4>
+<p>This function rearranges data to be able to construct a glyph plot</p>
+<pre class="r"><code>library(ggplot2)
+data(nasa)
+temp.gly &lt;- glyphs(nasa, &quot;long&quot;, &quot;day&quot;, &quot;lat&quot;, &quot;surftemp&quot;, height=2.5)</code></pre>
+<pre><code>Using width 2.38</code></pre>
+<pre class="r"><code>ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
+  add_ref_lines(temp.gly, color = &quot;grey90&quot;) +
+  add_ref_boxes(temp.gly, color = &quot;grey90&quot;) +
+  geom_path() +
+  theme_bw() +
+  labs(x = &quot;&quot;, y = &quot;&quot;)</code></pre>
+<p><img src="index_files/figure-html/glyphs-basic-usage-1.png" width="672" /></p>
+<p>This shows a glyphplot of monthly surface temperature for 6 years over Central America. You can see differences from one location to another, that in large areas temperature doesn’t change much. There are large seasonal trends in the top left over land.</p>
+<p>Rescaling in different ways puts emphasis on different components, see the examples in the referenced paper. And with ggplot2 you can make a map of the geographic area underlying the glyphs.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Wickham, H., Hofmann, H., Wickham, C. and Cook, D. (2012) Glyph-maps for Visually Exploring Temporal Patterns in Climate Data and Models, <strong>Environmetrics</strong>, <em>23</em>(5):151-182.</p>
+</div>
+</div>
+<div id="ggallyggmatrix" class="section level1">
+<h1>GGally::ggmatrix</h1>
+<div id="barret-schloerke-1" class="section level4">
+<h4><em>Barret Schloerke</em></h4>
+</div>
+<div id="oct-29-2015" class="section level4">
+<h4><em>Oct 29, 2015</em></h4>
+<p><code><a href='rd.html#ggmatrix_alias'>ggmatrix</a></code> is a function for managing multiple plots in a matrix-like layout. It was designed to adapt to any number of columns and rows. This allows for very customized plot matrices.</p>
+</div>
+<div id="generic-example" class="section level2">
+<h2>Generic Example</h2>
+<p>The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.</p>
+<pre class="r"><code>plotList &lt;- list()
+for (i in 1:6) {
+  plotList[[i]] &lt;- ggally_text(paste(&quot;Plot #&quot;, i, sep = &quot;&quot;))
+}
+
+# bare minimum of plotList, nrow, and ncol
+pm &lt;- ggmatrix(plotList, 2, 3)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_genExample-1.png" width="960" /></p>
+<pre class="r"><code># provide more information
+pm &lt;- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+  yAxisLabels = c(&quot;D&quot;, &quot;E&quot;),
+  title = &quot;Matrix Title&quot;
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_genExample-2.png" width="960" /></p>
+<pre class="r"><code># display plots in column order
+pm &lt;- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+  yAxisLabels = c(&quot;D&quot;, &quot;E&quot;),
+  title = &quot;Matrix Title&quot;,
+  byrow = FALSE
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_genExample-3.png" width="960" /></p>
+</div>
+<div id="matrix-subsetting" class="section level2">
+<h2>Matrix Subsetting</h2>
+<p>Individual plots may be retrieved from the plot matrix and can be placed in the plot matrix.</p>
+<pre class="r"><code>pm &lt;- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+  yAxisLabels = c(&quot;D&quot;, &quot;E&quot;),
+  title = &quot;Matrix Title&quot;
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_place-1.png" width="960" /></p>
+<pre class="r"><code>p2 &lt;- pm[1,2]
+p3 &lt;- pm[1,3]
+p2</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_place-2.png" width="960" /></p>
+<pre class="r"><code>p3</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_place-3.png" width="960" /></p>
+<pre class="r"><code>pm[1,2] &lt;- p3
+pm[1,3] &lt;- p2
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_place-4.png" width="960" /></p>
+</div>
+<div id="themes" class="section level2">
+<h2>Themes</h2>
+<pre class="r"><code>library(ggplot2)
+pm &lt;- ggmatrix(
+  plotList,
+  nrow = 2, ncol = 3,
+  xAxisLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+  yAxisLabels = c(&quot;D&quot;, &quot;E&quot;),
+  title = &quot;Matrix Title&quot;,
+  byrow = FALSE
+)
+pm &lt;- pm + theme_bw()
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_theme-1.png" width="960" /></p>
+</div>
+<div id="axis-control" class="section level2">
+<h2>Axis Control</h2>
+<p>The X and Y axis have booleans to turn on/off the individual plot’s axes on the bottom and left sides of the plot matrix. To save time, <code>showAxisPlotLabels</code> can be set to override <code>showXAxisPlotLabels</code> and <code>showYAxisPlotLabels</code>.</p>
+<pre class="r"><code>pm &lt;- ggmatrix(
+  plotList, nrow = 2, ncol = 3,
+  xAxisLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+  yAxisLabels = c(&quot;D&quot;, &quot;E&quot;),
+  title = &quot;No Left Plot Axis&quot;,
+  showYAxisPlotLabels = FALSE
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_axisControl-1.png" width="960" /></p>
+<pre class="r"><code>pm &lt;- ggmatrix(
+  plotList, nrow = 2, ncol = 3,
+  xAxisLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+  yAxisLabels = c(&quot;D&quot;, &quot;E&quot;),
+  title = &quot;No Bottom Plot Axis&quot;,
+  showXAxisPlotLabels = FALSE
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_axisControl-2.png" width="960" /></p>
+<pre class="r"><code>pm &lt;- ggmatrix(
+  plotList, nrow = 2, ncol = 3,
+  xAxisLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+  yAxisLabels = c(&quot;D&quot;, &quot;E&quot;),
+  title = &quot;No Plot Axes&quot;,
+  showAxisPlotLabels = FALSE
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_axisControl-3.png" width="960" /></p>
+</div>
+<div id="strips-control" class="section level2">
+<h2>Strips Control</h2>
+<p>By default, the plots in the top row and the right most column will display top-side and right-side strips respectively (<code>showStrips = NULL</code>). If all strips need to appear in each plot, <code>showStrips</code> may be set to <code>TRUE</code>. If all strips should not be displayed, <code>showStrips</code> may be set to <code>FALSE</code>.</p>
+<pre class="r"><code>data(tips, package = &quot;reshape&quot;)
+plotList &lt;- list(
+  qplot(total_bill, tip, data = subset(tips, smoker == &quot;No&quot; &amp; sex == &quot;Female&quot;)) +
+    facet_grid(time ~ day),
+  qplot(total_bill, tip, data = subset(tips, smoker == &quot;Yes&quot; &amp; sex == &quot;Female&quot;)) +
+    facet_grid(time ~ day),
+  qplot(total_bill, tip, data = subset(tips, smoker == &quot;No&quot; &amp; sex == &quot;Male&quot;)) +
+    facet_grid(time ~ day),
+  qplot(total_bill, tip, data = subset(tips, smoker == &quot;Yes&quot; &amp; sex == &quot;Male&quot;)) +
+    facet_grid(time ~ day)
+)
+
+
+pm &lt;- ggmatrix(
+  plotList, nrow = 2, ncol = 2,
+  yAxisLabels = c(&quot;Female&quot;, &quot;Male&quot;),
+  xAxisLabels = c(&quot;Non Smoker&quot;, &quot;Smoker&quot;),
+  title = &quot;Total Bill vs Tip&quot;,
+  showStrips = NULL # default
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_stripControl-1.png" width="960" /></p>
+<pre class="r"><code>pm &lt;- ggmatrix(
+  plotList, nrow = 2, ncol = 2,
+  yAxisLabels = c(&quot;Female&quot;, &quot;Male&quot;),
+  xAxisLabels = c(&quot;Non Smoker&quot;, &quot;Smoker&quot;),
+  title = &quot;Total Bill vs Tip&quot;,
+  showStrips = TRUE
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_stripControl-2.png" width="960" /></p>
+<pre class="r"><code>pm &lt;- ggmatrix(
+  plotList, nrow = 2, ncol = 2,
+  yAxisLabels = c(&quot;Female&quot;, &quot;Male&quot;),
+  xAxisLabels = c(&quot;Non Smoker&quot;, &quot;Smoker&quot;),
+  title = &quot;Total Bill vs Tip&quot;,
+  showStrips = FALSE
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggmatrix_stripControl-3.png" width="960" /></p>
+</div>
+</div>
+<div id="ggallyggnetworkmap" class="section level1">
+<h1>GGally::ggnetworkmap</h1>
+<div id="amos-elberg" class="section level4">
+<h4><em>Amos Elberg</em></h4>
+</div>
+<div id="january-10-2015" class="section level4">
+<h4><em>January 10, 2015</em></h4>
+<p><code><a href='rd.html#ggnetworkmap_alias'>ggnetworkmap</a></code> is a function for plotting elegant maps using <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot2-package'>ggplot2</a></code>. It builds on <code><a href='rd.html#ggnet_alias'>ggnet</a></code> by allowing to draw a network over a map, and is particularly intended for use with <code>ggmap</code>.</p>
+</div>
+<div id="example-us-airports" class="section level2">
+<h2>Example: US airports</h2>
+<p>This example is based on a <a href="http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/">tutorial by Nathan Yau at Flowing Data</a>.</p>
+<pre class="r"><code>suppressMessages(library(network))
+suppressMessages(library(sna))
+suppressMessages(library(maps))
+suppressMessages(library(ggplot2))
+airports &lt;- read.csv(&quot;http://datasets.flowingdata.com/tuts/maparcs/airports.csv&quot;, header = TRUE)
+rownames(airports) &lt;- airports$iata
+
+# select some random flights
+set.seed(1234)
+flights &lt;- data.frame(
+  origin = sample(airports[200:400, ]$iata, 200, replace = TRUE),
+  destination = sample(airports[200:400, ]$iata, 200, replace = TRUE)
+)
+
+# convert to network
+flights &lt;- network(flights, directed = TRUE)
+
+# add geographic coordinates
+flights %v% &quot;lat&quot; &lt;- airports[ network.vertex.names(flights), &quot;lat&quot; ]
+flights %v% &quot;lon&quot; &lt;- airports[ network.vertex.names(flights), &quot;long&quot; ]
+
+# drop isolated airports
+delete.vertices(flights, which(degree(flights) &lt; 2))
+
+# compute degree centrality
+flights %v% &quot;degree&quot; &lt;- degree(flights, gmode = &quot;digraph&quot;)
+
+# add random groups
+flights %v% &quot;mygroup&quot; &lt;- sample(letters[1:4], network.size(flights), replace = TRUE)
+
+# create a map of the USA
+usa &lt;- ggplot(map_data(&quot;usa&quot;), aes(x = long, y = lat)) +
+  geom_polygon(aes(group = group), color = &quot;grey65&quot;,
+               fill = &quot;#f9f9f9&quot;, size = 0.2)
+
+delete.vertices(flights, which(flights %v% &quot;lon&quot; &lt; min(usa$data$long)))
+delete.vertices(flights, which(flights %v% &quot;lon&quot; &gt; max(usa$data$long)))
+delete.vertices(flights, which(flights %v% &quot;lat&quot; &lt; min(usa$data$lat)))
+delete.vertices(flights, which(flights %v% &quot;lat&quot; &gt; max(usa$data$lat)))
+
+# overlay network data to map
+ggnetworkmap(usa, flights, size = 4, great.circles = TRUE,
+             node.group = mygroup, segment.color = &quot;steelblue&quot;,
+             ring.group = degree, weight = degree)</code></pre>
+<p><img src="index_files/figure-html/ggnetworkmap-init-1.png" width="960" /></p>
+</div>
+<div id="example-twitter-spambots" class="section level2">
+<h2>Example: Twitter spambots</h2>
+<p>This next example uses data from a Twitter spam community identified while exploring and trying to clear-up a group of tweets. After coloring the nodes based on their centrality, the odd structure stood out clearly.</p>
+<pre class="r"><code>data(twitter_spambots)</code></pre>
+<pre class="r"><code># create a world map
+world &lt;- fortify(map(&quot;world&quot;, plot = FALSE, fill = TRUE))
+world &lt;- ggplot(world, aes(x = long, y = lat)) +
+  geom_polygon(aes(group = group), color = &quot;grey65&quot;,
+               fill = &quot;#f9f9f9&quot;, size = 0.2)
+
+# view global structure
+ggnetworkmap(world, twitter_spambots)</code></pre>
+<p><img src="index_files/figure-html/ggnetworkmap-world-1.png" width="960" /></p>
+<p>Is the network really concentrated in the U.S.? Probably not. One of the odd things about the network, is a much higher proportion of the users gave locations that could be geocoded, than Twitter users generally.</p>
+<p>Let’s see the network topology</p>
+<pre class="r"><code>ggnetworkmap(net = twitter_spambots, arrow.size = 0.5)</code></pre>
+<p><img src="index_files/figure-html/ggnetworkmap-topology-1.png" width="960" /></p>
+<p>Coloring nodes according to degree centrality can highlight network structures.</p>
+<pre class="r"><code># compute indegree and outdegree centrality
+twitter_spambots %v% &quot;indegree&quot; &lt;- degree(twitter_spambots, cmode = &quot;indegree&quot;)
+twitter_spambots %v% &quot;outdegree&quot; &lt;- degree(twitter_spambots, cmode = &quot;outdegree&quot;)
+
+ggnetworkmap(net = twitter_spambots,
+             arrow.size = 0.5,
+             node.group = indegree,
+             ring.group = outdegree, size = 4) +
+  scale_fill_continuous(&quot;Indegree&quot;, high = &quot;red&quot;, low = &quot;yellow&quot;) +
+  labs(color = &quot;Outdegree&quot;)</code></pre>
+<p><img src="index_files/figure-html/ggnetworkmap-color-1.png" width="960" /></p>
+<p>Some Twitter attributes have been included as vertex attributes.</p>
+<pre class="r"><code># show some vertex attributes associated with each account
+ggnetworkmap(net = twitter_spambots,
+             arrow.size = 0.5,
+             node.group = followers,
+             ring.group = friends,
+             size = 4,
+             weight = indegree,
+             label.nodes = TRUE, vjust = -1.5) +
+  scale_fill_continuous(&quot;Followers&quot;, high = &quot;red&quot;, low = &quot;yellow&quot;) +
+  labs(color = &quot;Friends&quot;) +
+  scale_color_continuous(low = &quot;lightgreen&quot;, high = &quot;darkgreen&quot;)</code></pre>
+<p><img src="index_files/figure-html/ggnetworkmap-twitter-attr-1.png" width="960" /></p>
+</div>
+</div>
+<div id="ggallyggnostic" class="section level1">
+<h1>GGally::ggnostic</h1>
+<div id="barret-schloerke-2" class="section level4">
+<h4><em>Barret Schloerke</em></h4>
+</div>
+<div id="oct-1-2016" class="section level4">
+<h4><em>Oct 1, 2016</em></h4>
+<p><code><a href='rd.html#ggnostic_alias'>ggnostic</a></code> is a display wrapper to <code><a href='rd.html#ggduo_alias'>ggduo</a></code> that displays full model diagnostics for each given explanatory variable. By default, <code><a href='rd.html#ggduo_alias'>ggduo</a></code> displays the residuals, leave-one-out model sigma value, leverage points, and Cook’s distance against each explanatory variable. The rows of the plot matrix can be expanded to include fitted values, standard error of the fitted values, standardized residuals, and any of the response variables. If the model is a linear model, stars are added according to the anova significance of each explanatory variable.</p>
+<p>Most diagnostic plots contain reference line(s) to help determine if the model is fitting properly</p>
+<ul>
+<li><strong>residuals:</strong>
+<ul>
+<li>Type key: <code>&quot;.resid&quot;</code></li>
+<li>A solid line is located at the expected value of 0 with dashed lines at the 95% confidence interval. (<span class="math inline">0 ± 1.96 * <em>σ</em></span>)</li>
+<li>Plot function: <code><a href='rd.html#ggally_nostic_resid_alias'>ggally_nostic_resid</a></code>.</li>
+<li>See also <code>stats::<a href='http://www.rdocumentation.org/packages/stats/topics/residuals'>residuals</a></code></li>
+</ul></li>
+<li><strong>standardized residuals:</strong>
+<ul>
+<li>Type key: <code>&quot;.std.resid&quot;</code></li>
+<li>Same as residuals, except the standardized residuals equal the regular residuals divided by sigma. The dashed lines are located at <span class="math inline">0 ± 1.96 * 1</span>.</li>
+<li>Plot function: <code><a href='rd.html#ggally_nostic_std_resid_alias'>ggally_nostic_std_resid</a></code>.</li>
+<li>See also <code>stats::<a href='http://www.rdocumentation.org/packages/stats/topics/influence.measures'>rstandard</a></code></li>
+</ul></li>
+<li><strong>leave-one-out model sigma:</strong>
+<ul>
+<li>Type key: <code>&quot;.sigma&quot;</code></li>
+<li>A solid line is located at the full model’s sigma value.</li>
+<li>Plot function: <code><a href='rd.html#ggally_nostic_sigma_alias'>ggally_nostic_sigma</a></code>.</li>
+<li>See also <code>stats::<a href='http://www.rdocumentation.org/packages/stats/topics/lm.influence'>influence</a></code>’s value on <code>sigma</code></li>
+</ul></li>
+<li><strong>leverage points:</strong>
+<ul>
+<li>Type key: <code>&quot;.hat&quot;</code></li>
+<li>The expected value for the diagonal of a hat matrix is <span class="math inline"><em>p</em>/<em>n</em></span>. Points are considered leverage points if they are large than <span class="math inline">2 * <em>p</em>/<em>n</em></span>, where the higher line is drawn.</li>
+<li>Plot function: <code><a href='rd.html#ggally_nostic_hat_alias'>ggally_nostic_hat</a></code>.</li>
+<li>See also <code>stats::<a href='http://www.rdocumentation.org/packages/stats/topics/lm.influence'>influence</a></code>’s value on <code>hat</code></li>
+</ul></li>
+<li><strong>Cook’s distance:</strong>
+<ul>
+<li>Type key: <code>&quot;.cooksd&quot;</code></li>
+<li>Points that are larger than <span class="math inline">4/<em>n</em></span> line are considered highly influential points. Plot function: <code><a href='rd.html#ggally_nostic_cooksd_alias'>ggally_nostic_cooksd</a></code>. See also <code>stats::<a href='http://www.rdocumentation.org/packages/stats/topics/influence.measures'>cooks.distance</a></code></li>
+</ul></li>
+<li><strong>fitted points:</strong>
+<ul>
+<li>Type key: <code>&quot;.fitted&quot;</code></li>
+<li>No reference lines by default.</li>
+<li>Default plot function: <code><a href='rd.html#ggally_points_alias'>ggally_points</a></code>.</li>
+<li>See also <code>stats::<a href='http://www.rdocumentation.org/packages/stats/topics/predict'>predict</a></code></li>
+</ul></li>
+<li><strong>standard error of fitted points</strong>:
+<ul>
+<li>Type key: <code>&quot;.se.fit&quot;</code></li>
+<li>No reference lines by default.</li>
+<li>Plot function: <code><a href='rd.html#ggally_nostic_se_fit_alias'>ggally_nostic_se_fit</a></code>.</li>
+<li>See also <code>stats::<a href='http://www.rdocumentation.org/packages/stats/topics/fitted.values'>fitted</a></code></li>
+</ul></li>
+<li><strong>response variables:</strong>
+<ul>
+<li>Type key: (response name in data.frame)</li>
+<li>No reference lines by default.</li>
+<li>Default plot function: <code><a href='rd.html#ggally_points_alias'>ggally_points</a></code>.</li>
+</ul></li>
+</ul>
+</div>
+<div id="life-expectancy-model-fitting" class="section level2">
+<h2>Life Expectancy Model Fitting</h2>
+<p>Looking at the dataset <code>datasets::<a href='http://www.rdocumentation.org/packages/datasets/topics/state'>state.x77</a></code>, we will fit a multiple regression model for Life Expectancy.</p>
+<pre class="r"><code># make a data.frame and fix column names
+state &lt;- as.data.frame(state.x77)
+colnames(state)[c(4, 6)] &lt;- c(&quot;Life.Exp&quot;, &quot;HS.Grad&quot;)
+str(state)</code></pre>
+<pre><code>&#39;data.frame&#39;:   50 obs. of  8 variables:
+ $ Population: num  3615 365 2212 2110 21198 ...
+ $ Income    : num  3624 6315 4530 3378 5114 ...
+ $ Illiteracy: num  2.1 1.5 1.8 1.9 1.1 0.7 1.1 0.9 1.3 2 ...
+ $ Life.Exp  : num  69 69.3 70.5 70.7 71.7 ...
+ $ Murder    : num  15.1 11.3 7.8 10.1 10.3 6.8 3.1 6.2 10.7 13.9 ...
+ $ HS.Grad   : num  41.3 66.7 58.1 39.9 62.6 63.9 56 54.6 52.6 40.6 ...
+ $ Frost     : num  20 152 15 65 20 166 139 103 11 60 ...
+ $ Area      : num  50708 566432 113417 51945 156361 ...</code></pre>
+<pre class="r"><code># fit full model
+model &lt;- lm(Life.Exp ~ ., data = state)
+# reduce to &quot;best fit&quot; model with
+model &lt;- step(model, trace = FALSE)
+summary(model)</code></pre>
+<pre><code>
+Call:
+lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, 
+    data = state)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.47095 -0.53464 -0.03701  0.57621  1.50683 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***
+Population   5.014e-05  2.512e-05   1.996  0.05201 .  
+Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***
+HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** 
+Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.7197 on 45 degrees of freedom
+Multiple R-squared:  0.736, Adjusted R-squared:  0.7126 
+F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</code></pre>
+<p>Next, we look at the variables for any high (|value| &gt; 0.8) correlation values and general interaction behavior.</p>
+<pre class="r"><code># look at variables for high correlation (none)
+ggscatmat(state, columns = c(&quot;Population&quot;, &quot;Murder&quot;, &quot;HS.Grad&quot;, &quot;Frost&quot;))</code></pre>
+<p><img src="index_files/figure-html/nostic_scatmat-1.png" width="960" /></p>
+<p>All variables appear to be ok. Next, we look at the model diagnostics.</p>
+<pre class="r"><code># look at model diagnostics
+ggnostic(model)</code></pre>
+<pre><code>`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="index_files/figure-html/nostic_diag-1.png" width="960" /></p>
+<ul>
+<li>The residuals appear to be normally distributed. There are a couple residual outliers, but 2.5 outliers are expected.</li>
+<li>There are 5 leverage points according the diagonal of the hat matrix</li>
+<li>There are 2 leverage points according to Cook’s distance. One is <strong>much</strong> larger than the other.</li>
+</ul>
+<p>Let’s remove the largest data point first to try and define a better model.</p>
+<pre class="r"><code># very high life expectancy
+state[11, ]</code></pre>
+<pre><code>       Population Income Illiteracy Life.Exp Murder HS.Grad Frost Area
+Hawaii        868   4963        1.9     73.6    6.2    61.9     0 6425</code></pre>
+<pre class="r"><code>state_no_hawaii &lt;- state[-11, ]
+model_no_hawaii &lt;- lm(Life.Exp ~ Population + Murder + HS.Grad + Frost, data = state_no_hawaii)
+ggnostic(model_no_hawaii)</code></pre>
+<pre><code>`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="index_files/figure-html/nostic_no_hawaii-1.png" width="960" /></p>
+<p>There are no more outrageous Cook’s distance values. The model without Hawaii appears to be a good fitting model.</p>
+<pre class="r"><code>summary(model)</code></pre>
+<pre><code>
+Call:
+lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, 
+    data = state)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.47095 -0.53464 -0.03701  0.57621  1.50683 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***
+Population   5.014e-05  2.512e-05   1.996  0.05201 .  
+Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***
+HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** 
+Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.7197 on 45 degrees of freedom
+Multiple R-squared:  0.736, Adjusted R-squared:  0.7126 
+F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</code></pre>
+<pre class="r"><code>summary(model_no_hawaii)</code></pre>
+<pre><code>
+Call:
+lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, 
+    data = state_no_hawaii)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.48967 -0.50158  0.01999  0.54355  1.11810 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  7.106e+01  8.998e-01  78.966  &lt; 2e-16 ***
+Population   6.363e-05  2.431e-05   2.618   0.0121 *  
+Murder      -2.906e-01  3.477e-02  -8.357 1.24e-10 ***
+HS.Grad      3.728e-02  1.447e-02   2.576   0.0134 *  
+Frost       -3.099e-03  2.545e-03  -1.218   0.2297    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.6796 on 44 degrees of freedom
+Multiple R-squared:  0.7483,    Adjusted R-squared:  0.7254 
+F-statistic: 32.71 on 4 and 44 DF,  p-value: 1.15e-12</code></pre>
+<p>Since there is only a marginal improvement by removing Hawaii, the original model should be used to explain life expectancy.</p>
+</div>
+<div id="full-diagnostic-plot-matrix-example" class="section level2">
+<h2>Full diagnostic plot matrix example</h2>
+<p>The following lines of code will display different modle diagnostic plot matrices for the same statistical model. The first one is of the default settings. The second adds color according to the <code>species</code>. Finally, the third displays all possible columns and uses <code><a href='rd.html#ggally_smooth_alias'>ggally_smooth</a></code> to display the fitted points and response variables.</p>
+<pre class="r"><code>flea_model &lt;- step(lm(head ~ ., data = flea), trace = FALSE)
+summary(flea_model)</code></pre>
+<pre><code>
+Call:
+lm(formula = head ~ species + tars1 + tars2 + aede1, data = flea)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.0152 -1.2315 -0.0048  1.1490  3.6068 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       0.63693    6.09162   0.105 0.917034    
+speciesHeikert.   1.13651    1.25452   0.906 0.368171    
+speciesHeptapot.  5.22207    0.92110   5.669 3.18e-07 ***
+tars1             0.06815    0.01989   3.426 0.001043 ** 
+tars2             0.10160    0.03297   3.081 0.002974 ** 
+aede1             0.17069    0.04275   3.993 0.000163 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.6 on 68 degrees of freedom
+Multiple R-squared:  0.685, Adjusted R-squared:  0.6618 
+F-statistic: 29.57 on 5 and 68 DF,  p-value: 7.997e-16</code></pre>
+<pre class="r"><code># default output
+ggnostic(flea_model)</code></pre>
+<pre><code>`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="index_files/figure-html/nostic_flea-1.png" width="960" /></p>
+<pre class="r"><code># color&#39;ed output
+ggnostic(flea_model, mapping = ggplot2::aes(color = species))</code></pre>
+<pre><code>`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="index_files/figure-html/nostic_flea-2.png" width="960" /></p>
+<pre class="r"><code># full color&#39;ed output
+ggnostic(
+  flea_model,
+  mapping = ggplot2::aes(color = species),
+  columnsY = c(&quot;head&quot;, &quot;.fitted&quot;, &quot;.se.fit&quot;, &quot;.resid&quot;, &quot;.std.resid&quot;, &quot;.hat&quot;, &quot;.sigma&quot;, &quot;.cooksd&quot;),
+  continuous = list(default = ggally_smooth, .fitted = ggally_smooth)
+)</code></pre>
+<pre><code>`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;
+`geom_smooth()` using method = &#39;loess&#39;</code></pre>
+<p><img src="index_files/figure-html/nostic_flea-3.png" width="960" /></p>
+</div>
+</div>
+<div id="ggallyggpairs" class="section level1">
+<h1>GGally::ggpairs</h1>
+<div id="barret-schloerke-3" class="section level4">
+<h4><em>Barret Schloerke</em></h4>
+</div>
+<div id="oct-29-2015-1" class="section level4">
+<h4><em>Oct 29, 2015</em></h4>
+<p><code><a href='rd.html#ggpairs_alias'>ggpairs</a></code> is a special form of a <code><a href='rd.html#ggmatrix_alias'>ggmatrix</a></code> that produces a pairwise comparison of multivariate data. By default, <code><a href='rd.html#ggpairs_alias'>ggpairs</a></code> provides two different comparisons of each pair of columns and displays either the density or count of the respective variable along the diagonal. With different parameter settings, the diagonal can be replaced with the axis values and variable labels.</p>
+<p>There are many hidden features within ggpairs. Please take a look at the examples below to get the most out of ggpairs.</p>
+</div>
+<div id="columns-and-mapping" class="section level2">
+<h2>Columns and Mapping</h2>
+<p>The <code>columns</code> displayed default to all columns of the provided <code>data</code>. To subset to only a few columns, use the <code>columns</code> parameter.</p>
+<pre class="r"><code>data(tips, package = &quot;reshape&quot;)
+pm &lt;- ggpairs(tips)
+pm</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggpairs_columns-1.png" width="960" /></p>
+<pre class="r"><code>## too many plots for this example.
+
+## reduce the columns being displayed
+## these two lines of code produce the same plot matrix
+pm &lt;- ggpairs(tips, columns = c(1, 6, 2))
+pm &lt;- ggpairs(tips, columns = c(&quot;total_bill&quot;, &quot;time&quot;, &quot;tip&quot;), columnLabels = c(&quot;Total Bill&quot;, &quot;Time of Day&quot;, &quot;Tip&quot;))
+pm</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggpairs_columns-2.png" width="960" /></p>
+<p>Aesthetics can be applied to every subplot with the <code>mapping</code> parameter.</p>
+<pre class="r"><code>library(ggplot2)
+pm &lt;- ggpairs(tips, mapping = aes(color = sex), columns = c(&quot;total_bill&quot;, &quot;time&quot;, &quot;tip&quot;))
+pm</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggpairs_mapping-1.png" width="960" /></p>
+<p>Since the plots are default plots (or are helper functions from GGally), the aesthetic color is altered to be appropriate. Looking at the example above, ‘tip’ vs ‘total_bill’ (pm[3,1]) needs the <code>color</code> aesthetic, while ‘time’ vs ‘total_bill’ needs the <code>fill</code> aesthetic. If custom functions are supplied, no aesthetic alterations will be done.</p>
+</div>
+<div id="matrix-sections" class="section level2">
+<h2>Matrix Sections</h2>
+<p>There are three major sections of the pairwise matrix: <code>lower</code>, <code>upper</code>, and <code>diag</code>. The <code>lower</code> and <code>upper</code> may contain three plot types: <code>continuous</code>, <code>combo</code>, and <code>discrete</code>. The ‘diag’ only contains either <code>continuous</code> or <code>discrete</code>.</p>
+<ul>
+<li><code>continuous</code>: both X and Y are continuous variables</li>
+<li><code>combo</code>: one X and Y variable is discrete while the other is continuous</li>
+<li><code>discrete</code>: both X and Y are discrete variables</li>
+</ul>
+<p>To make adjustments to each section, a list of information may be supplied. The list can be comprised of the following elements:</p>
+<ul>
+<li><code>continuous</code>:
+<ul>
+<li>a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function</li>
+<li>current valid <code>upper$continuous</code> and <code>lower$continuous</code> character strings: <code>'points'</code>, <code>'smooth'</code>, <code>'density'</code>, <code>'cor'</code>, <code>'blank'</code></li>
+<li>current valid <code>diag$continuous</code> character strings: <code>'densityDiag'</code>, <code>'barDiag'</code>, <code>'blankDiag'</code></li>
+</ul></li>
+<li><code>combo</code>:
+<ul>
+<li>a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function. (not applicable for a <code>diag</code> list)</li>
+<li>current valid <code>upper$combo</code> and <code>lower$combo</code> character strings: <code>'box'</code>, <code>'dot'</code>, <code>'facethist'</code>, <code>'facetdensity'</code>, <code>'denstrip'</code>, <code>'blank'</code></li>
+</ul></li>
+<li><code>discrete</code>:
+<ul>
+<li>a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function</li>
+<li>current valid <code>upper$discrete</code> and <code>lower$discrete</code> character strings: <code>'ratio'</code>, <code>'facetbar'</code>, <code>'blank'</code></li>
+<li>current valid <code>diag$discrete</code> character strings: <code>'barDiag'</code>, <code>'blankDiag'</code></li>
+</ul></li>
+<li><code>mapping</code>: if mapping is provided, only the section’s mapping will be overwritten</li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+pm &lt;- ggpairs(
+  tips, columns = c(&quot;total_bill&quot;, &quot;time&quot;, &quot;tip&quot;),
+  lower = list(
+    continuous = &quot;smooth&quot;,
+    combo = &quot;facetdensity&quot;,
+    mapping = aes(color = time)
+  )
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggpairs_section-1.png" width="960" /></p>
+<p>A section list may be set to the character string <code>&quot;blank&quot;</code> or <code>NULL</code> if the section should be skipped when printed.</p>
+<pre class="r"><code>pm &lt;- ggpairs(
+  tips, columns = c(&quot;total_bill&quot;, &quot;time&quot;, &quot;tip&quot;),
+  upper = &quot;blank&quot;,
+  diag = NULL
+)
+pm</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggpairs_blank-1.png" width="960" /></p>
+</div>
+<div id="custom-functions" class="section level2">
+<h2>Custom Functions</h2>
+<p>The <code>ggally_NAME</code> functions do not provide all graphical options. Instead of supplying a character string to a <code>continuous</code>, <code>combo</code>, or <code>discrete</code> element within <code>upper</code>, <code>lower</code>, or <code>diag</code>, a custom function may be given.</p>
+<p>The custom function should follow the api of</p>
+<pre class="r"><code>custom_function &lt;- function(data, mapping, ...){
+  # produce ggplot2 object here
+}</code></pre>
+<p>There is no requirement to what happens within the function, as long as a ggplot2 object is returned.</p>
+<pre class="r"><code>my_bin &lt;- function(data, mapping, ..., low = &quot;#132B43&quot;, high = &quot;#56B1F7&quot;) {
+  ggplot(data = data, mapping = mapping) +
+    geom_bin2d(...) +
+    scale_fill_gradient(low = low, high = high)
+}
+pm &lt;- ggpairs(
+  tips, columns = c(&quot;total_bill&quot;, &quot;time&quot;, &quot;tip&quot;),
+  lower = list(
+    continuous = my_bin
+  )
+)
+pm</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggpairs_custom_function-1.png" width="960" /></p>
+</div>
+<div id="function-wrapping" class="section level2">
+<h2>Function Wrapping</h2>
+<p>The examples above use default parameters to each of the subplots. One of the immediate parameters to be set it <code>binwidth</code>. This parameters is only needed in the lower, combination plots where one variable is continuous while the other variable is discrete.</p>
+<p>To change the default parameter <code>binwidth</code> setting, we will <code><a href='rd.html#wrap_alias'>wrap</a></code> the function. <code><a href='rd.html#wrap_alias'>wrap</a></code> first parameter should be a character string or a custom function. The remaining parameters supplied to wrap will be supplied to the function at run time.</p>
+<pre class="r"><code>pm &lt;- ggpairs(
+  tips, columns = c(&quot;total_bill&quot;, &quot;time&quot;, &quot;tip&quot;),
+  lower = list(
+    combo = wrap(&quot;facethist&quot;, binwidth = 1),
+    continuous = wrap(my_bin, binwidth = c(5, 0.5), high = &quot;red&quot;)
+  )
+)
+pm</code></pre>
+<p><img src="index_files/figure-html/ggpairs_wrap-1.png" width="960" /></p>
+<p>To get finer control over parameters, please look into custom functions.</p>
+</div>
+<div id="plot-matrix-subsetting" class="section level2">
+<h2>Plot Matrix Subsetting</h2>
+<p>Please look at the <a href="#ggallyggmatrix">vignette for ggmatrix</a> on plot matrix manipulations.</p>
+<p>Small ggpairs example:</p>
+<pre class="r"><code>pm &lt;- ggpairs(tips, columns = c(&quot;total_bill&quot;, &quot;time&quot;, &quot;tip&quot;))
+# retrieve the third row, first column plot
+p &lt;- pm[3,1]
+p &lt;- p + aes(color = time)
+p</code></pre>
+<p><img src="index_files/figure-html/ggpairs_matrix-1.png" width="960" /></p>
+<pre class="r"><code>pm[3,1] &lt;- p
+pm</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggpairs_matrix-2.png" width="960" /></p>
+</div>
+<div id="themes-1" class="section level2">
+<h2>Themes</h2>
+<p>Please look at the <a href="#ggallyggmatrix">vignette for ggmatrix</a> on plot matrix manipulations.</p>
+<p>Small ggpairs example:</p>
+<pre class="r"><code>pmBW &lt;- pm + theme_bw()
+pmBW</code></pre>
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/ggpairs_theme-1.png" width="960" /></p>
+</div>
+<div id="references-1" class="section level2">
+<h2>References</h2>
+<p>John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. <strong><a href="http://vita.had.co.nz/papers/gpp.html">The Generalized Pairs Plot</a></strong>. <em>Journal of Computational and Graphical Statistics</em>, vol. 22, no. 1, pp. 79-91, 2012.</p>
+</div>
+</div>
+<div id="ggallyggscatmat" class="section level1">
+<h1>GGally::ggscatmat</h1>
+<div id="di-cook-mengjia-ni" class="section level4">
+<h4><em>Di Cook, Mengjia Ni</em></h4>
+</div>
+<div id="nov-6-2015-1" class="section level4">
+<h4><em>Nov 6, 2015</em></h4>
+<p>The primary function is <code><a href='rd.html#ggscatmat_alias'>ggscatmat</a></code>. It is similar to <code><a href='rd.html#ggpairs_alias'>ggpairs</a></code> but only works for purely numeric multivariate data. It is faster than ggpairs, because less choices need to be made. It creates a matrix with scatterplots in the lower diagonal, densities on the diagonal and correlations written in the upper diagonal. Syntax is to enter the dataset, the columns that you want to plot, a color column, and an alpha level.</p>
+<pre class="r"><code>data(flea)
+ggscatmat(flea, columns = 2:4, color=&quot;species&quot;, alpha=0.8)</code></pre>
+<p><img src="index_files/figure-html/ggscatmat-basic-usage-1.png" width="672" /></p>
+<p>In this plot, you can see that the three different species vary a little from each other in these three variables. Heptapot (blue) has smaller values on the variable “tars1” than the other two. The correlation between the three variables is similar for all species.</p>
+</div>
+<div id="references-2" class="section level2">
+<h2>References</h2>
+<p>John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. <strong><a href="http://vita.had.co.nz/papers/gpp.html">The Generalized Pairs Plot</a></strong>. <em>Journal of Computational and Graphical Statistics</em>, vol. 22, no. 1, pp. 79-91, 2012.</p>
+</div>
+</div>
+<div id="ggallyggsurv" class="section level1">
+<h1>GGally::ggsurv</h1>
+<div id="edwin-thoen" class="section level4">
+<h4><em>Edwin Thoen</em></h4>
+</div>
+<div id="april-4-2016" class="section level4">
+<h4><em>April, 4, 2016</em></h4>
+<p>This function produces Kaplan-Meier plots using <code><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot2-package'>ggplot2</a></code>. As a first argument, <code><a href='rd.html#ggsurv_alias'>ggsurv</a></code> needs a <code><a href='http://www.rdocumentation.org/packages/survival/topics/survfit'>survfit</a></code> object, created by the <code><a href='http://www.rdocumentation.org/packages/boot/topics/survival'>survival</a></code> package. Default settings differ for single stratum and multiple strata objects.</p>
+</div>
+<div id="single-stratum" class="section level2">
+<h2>Single Stratum</h2>
+<pre class="r"><code>require(ggplot2)
+require(survival)</code></pre>
+<pre><code>Loading required package: survival</code></pre>
+<pre class="r"><code>require(scales)</code></pre>
+<pre><code>Loading required package: scales</code></pre>
+<pre class="r"><code>data(lung, package = &quot;survival&quot;)
+sf.lung &lt;- survival::survfit(Surv(time, status) ~ 1, data = lung)
+ggsurv(sf.lung)</code></pre>
+<p><img src="index_files/figure-html/basic-usage-1.png" width="672" /></p>
+</div>
+<div id="multiple-stratum" class="section level2">
+<h2>Multiple Stratum</h2>
+<p>The legend color positions matches the survival order or each stratum, where the stratums that end at a lower value or time have a position that is lower in the legend.</p>
+<pre class="r"><code>sf.sex &lt;- survival::survfit(Surv(time, status) ~ sex, data = lung)
+pl.sex &lt;- ggsurv(sf.sex)
+pl.sex</code></pre>
+<p><img src="index_files/figure-html/ggsurv-multiple-1.png" width="960" /></p>
+</div>
+<div id="alterations" class="section level2">
+<h2>Alterations</h2>
+<p>Since a ggplot2 object is returned, plot objects may be altered after the original creation.</p>
+<div id="adjusting-the-legend" class="section level3">
+<h3>Adjusting the legend</h3>
+<pre class="r"><code>pl.sex +
+  ggplot2::guides(linetype = FALSE) +
+  ggplot2::scale_colour_discrete(
+    name   = &#39;Sex&#39;,
+    breaks = c(1, 2),
+    labels = c(&#39;Male&#39;, &#39;Female&#39;)
+  )</code></pre>
+<pre><code>Scale for &#39;colour&#39; is already present. Adding another scale for
+&#39;colour&#39;, which will replace the existing scale.</code></pre>
+<p><img src="index_files/figure-html/ggsurv-legend-1.png" width="960" /></p>
+</div>
+<div id="adjust-the-limits" class="section level3">
+<h3>Adjust the limits</h3>
+<pre class="r"><code>data(kidney, package = &quot;survival&quot;)
+sf.kid &lt;- survival::survfit(Surv(time, status) ~ disease, data = kidney)
+pl.kid &lt;- ggsurv(sf.kid, plot.cens = FALSE)
+pl.kid</code></pre>
+<p><img src="index_files/figure-html/ggsurv-limits-1.png" width="960" /></p>
+<pre class="r"><code># Zoom in to first 80 days
+pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))</code></pre>
+<p><img src="index_files/figure-html/ggsurv-limits-2.png" width="960" /></p>
+</div>
+<div id="add-text-and-remove-the-legend" class="section level3">
+<h3>Add text and remove the legend</h3>
+<pre class="r"><code>pl.kid +
+  ggplot2::annotate(
+    &quot;text&quot;,
+    label  = c(&quot;PKD&quot;, &quot;Other&quot;, &quot;GN&quot;, &quot;AN&quot;),
+    x      = c(90, 125, 5, 60),
+    y      = c(0.8, 0.65, 0.55, 0.30),
+    size   = 5,
+    colour = scales::hue_pal(
+      h         = c(0, 360) + 15,
+      c         = 100,
+      l         = 65,
+      h.start   = 0,
+      direction = 1
+    )(4)
+  ) +
+  ggplot2::guides(color = FALSE, linetype = FALSE)</code></pre>
+<p><img src="index_files/figure-html/ggsurv-text-1.png" width="960" /></p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See <a href="http://www.rdocumentation.org/packages/broom" class="uri">http://www.rdocumentation.org/packages/broom</a>.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <div class="col-md-6">
+                <p>&copy; Barret Schloerke, 2018</p>
+              </div>
+      <div class="col-md-6">
+        <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a>
+                  </p>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>
