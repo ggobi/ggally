@@ -6,6 +6,7 @@
 #'
 #' @param pm ggmatrix object to be plotted
 #' @param ... ignored
+#' @param progress,progress_format Please use the 'progress' parameter in your ggmatrix-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
@@ -15,14 +16,35 @@
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
   pm,
-  ...
+  ...,
+  progress = NULL,
+  progress_format = formals(ggmatrix_progress)$format
 ) {
   # pm is for "plot matrix"
 
   # init progress bar handle
-  hasProgressBar <- !isFALSE(pm$progress)
+  if (missing(progress) && missing(progress_format)) {
+    # only look at plot matrix for progress bar
+    hasProgressBar <- !isFALSE(pm$progress)
+    progress_fn <- pm$progress
+  } else {
+    message("Please use the 'progress' parameter in your ggmatrix-like function.  See ?ggmatrix_progress for a few examples.  These parameters will soon be deprecated.")
+    # has progress variable defined
+    # overrides pm$progress
+    if (missing(progress_format)) {
+      progress_fn <- as_ggmatrix_progress(progress)
+    } else {
+      progress_fn <- as_ggmatrix_progress(
+        progress,
+        pm$ncol * pm$nrow,
+        format = progress_format
+      )
+    }
+    hasProgressBar <- !isFALSE(progress_fn)
+    ggmatrix_progress
+  }
   if (hasProgressBar) {
-    pb <- pm$progress(pm)
+    pb <- progress_fn(pm)
     # pb$tick(tokens = list(plot_i = 1, plot_j = 1))
   }
 
