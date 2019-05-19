@@ -1,3 +1,11 @@
+GGally v1.4.0.9000
+-------------
+
+`ggmatrix`
+
+* Added support for secondary axes. (#300)
+
+
 GGally 1.3.3
 ----------------
 

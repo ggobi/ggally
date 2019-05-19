@@ -29,7 +29,7 @@ ggmatrix_gtable <- function(
     progress_fn <- pm$progress
   } else {
     warning("Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples.  ggmatrix_gtable 'progress' and 'progress_format' will soon be deprecated.", immediate = TRUE)
-    
+
     # has progress variable defined
     # overrides pm$progress
     if (missing(progress_format)) {
@@ -161,8 +161,12 @@ ggmatrix_gtable <- function(
   # init the axis sizes
   left_axis_sizes <- numeric(pm$nrow + 1)
   bottom_axis_sizes <- numeric(pm$ncol + 1)
+  right_axis_sizes <- numeric(pm$nrow + 1)
+  top_axis_sizes <- numeric(pm$ncol + 1)
   axis_l_grob_pos <- pmg_layout_grob_pos[str_detect(pmg_layout_name, "axis-l")]
   axis_b_grob_pos <- pmg_layout_grob_pos[str_detect(pmg_layout_name, "axis-b")]
+  axis_r_grob_pos <- pmg_layout_grob_pos[str_detect(pmg_layout_name, "axis-r")]
+  axis_t_grob_pos <- pmg_layout_grob_pos[str_detect(pmg_layout_name, "axis-t")]
 
   # change the plot size ratios
   x_proportions <- pm$xProportions
@@ -213,28 +217,52 @@ ggmatrix_gtable <- function(
       pg <- plot_gtable(p)
 
       # if the left axis should be added
-      if (j == 1 && pm$showYAxisPlotLabels) {
-        left_axis_sizes[i] <- axis_size_left(pg)
+      if (pm$showYAxisPlotLabels) {
+        if (j == 1) {
+          left_axis_sizes[i] <- axis_size_left(pg)
 
-        pmg <- add_left_axis(
-          pmg, pg,
-          show_strips = (
-            (i == 1) && is.null(pm$showStrips)
-          ) || isTRUE(pm$showStrips),
-          grob_pos = axis_l_grob_pos[i]
-        )
+          pmg <- add_left_axis(
+            pmg, pg,
+            show_strips = (
+              (i == 1) && is.null(pm$showStrips)
+            ) || isTRUE(pm$showStrips),
+            grob_pos = axis_l_grob_pos[i]
+          )
+        } else if (j == pm$ncol) {
+          right_axis_sizes[i] <- axis_size_right(pg)
+
+          pmg <- add_right_axis(
+            pmg, pg,
+            show_strips = (
+              (i == 1) && is.null(pm$showStrips)
+            ) || isTRUE(pm$showStrips),
+            grob_pos = axis_r_grob_pos[i]
+          )
+        }
       }
       # if the bottom axis should be added
-      if (i == pm$nrow && pm$showXAxisPlotLabels) {
-        bottom_axis_sizes[j] <- axis_size_bottom(pg)
+      if (pm$showXAxisPlotLabels) {
+        if (i == pm$nrow) {
+          bottom_axis_sizes[j] <- axis_size_bottom(pg)
 
-        pmg <- add_bottom_axis(
-          pmg, pg,
-          show_strips = (
-            (j == pm$ncol) && is.null(pm$showStrips)
-          ) || isTRUE(pm$showStrips),
-          grob_pos = axis_b_grob_pos[j]
-        )
+          pmg <- add_bottom_axis(
+            pmg, pg,
+            show_strips = (
+              (j == pm$ncol) && is.null(pm$showStrips)
+            ) || isTRUE(pm$showStrips),
+            grob_pos = axis_b_grob_pos[j]
+          )
+        } else if (i == 1) {
+          top_axis_sizes[j] <- axis_size_top(pg)
+
+          pmg <- add_top_axis(
+            pmg, pg,
+            show_strips = (
+              (j == pm$ncol) && is.null(pm$showStrips)
+            ) || isTRUE(pm$showStrips),
+            grob_pos = axis_t_grob_pos[j]
+          )
+        }
       }
 
       # grab plot panel and insert
@@ -262,6 +290,22 @@ ggmatrix_gtable <- function(
     pmg,
     axis_sizes = bottom_axis_sizes,
     layout_name = "axis-b",
+    layout_cols = c("t", "b"),
+    pmg_key = "heights"
+    #stop_msg = "bottom axis height issue!! Fix!"
+  )
+  pmg <- set_max_axis_size(
+    pmg,
+    axis_sizes = right_axis_sizes,
+    layout_name = "axis-r",
+    layout_cols = c("l", "r"),
+    pmg_key = "widths"
+    #stop_msg = "left axis width issue!! Fix!"
+  )
+  pmg <- set_max_axis_size(
+    pmg,
+    axis_sizes = top_axis_sizes,
+    layout_name = "axis-t",
     layout_cols = c("t", "b"),
     pmg_key = "heights"
     #stop_msg = "bottom axis height issue!! Fix!"
