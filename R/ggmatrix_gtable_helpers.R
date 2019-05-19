@@ -35,11 +35,28 @@ axis_list <- (function(){
     "heights",
     unitTo = "cm", valueOnly = TRUE
   )
+  axis_size_right <- axis_label_size_wrapper(
+    grid::convertWidth,
+    "axis-r",
+    "widths",
+    unitTo = "cm", valueOnly = TRUE
+  )
+  axis_size_top <- axis_label_size_wrapper(
+    grid::convertHeight,
+    "axis-t",
+    "heights",
+    unitTo = "cm", valueOnly = TRUE
+  )
 
-  list(axis_size_left, axis_size_bottom)
+  list(
+    axis_size_left, axis_size_bottom,
+    axis_size_right, axis_size_top
+  )
 })()
 axis_size_left <- axis_list[[1]]
 axis_size_bottom <- axis_list[[2]]
+axis_size_right <- axis_list[[3]]
+axis_size_top <- axis_list[[4]]
 
 
 # add_correct_label <- function(pmg, pm,
@@ -145,6 +162,51 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
 
   # force to align top
   axis_panel <- gtable::gtable_add_rows(axis_panel, grid::unit(1, "null"), 1)
+  pmg$grobs[[grob_pos]] <- axis_panel
+
+  pmg
+}
+add_right_axis <- function(pmg, pg, show_strips, grob_pos) {
+  layout <- pg$layout
+  layout_name <- layout$name
+
+  # axis layout info
+  al <- layout[str_detect(layout_name, "axis-r"), ]
+
+  if (show_strips) {
+    alx <- layout[str_detect(layout_name, "axis-r|strip-t|strip-b"), ]
+  } else {
+    alx <- al
+  }
+
+  # get only the axis right objects (and maybe strip top spacer)
+  axis_panel <- pg[min(alx$b):max(alx$t), min(al$l)]
+
+  # force to align right
+  axis_panel <- gtable::gtable_add_cols(axis_panel, grid::unit(1, "null"), 1)
+  pmg$grobs[[grob_pos]] <- axis_panel
+
+  pmg
+}
+
+
+add_top_axis <- function(pmg, pg, show_strips, grob_pos) {
+  layout <- pg$layout
+  layout_name <- layout$name
+  # axis layout info
+  al <- layout[str_detect(layout_name, "axis-t"), ]
+
+  if (show_strips) {
+    alx <- layout[str_detect(layout_name, "axis-t|strip-r|strip-l"), ]
+  } else {
+    alx <- al
+  }
+
+  # get only the axis left objects (and maybe strip top spacer)
+  axis_panel <- pg[min(al$t), min(alx$l):max(alx$r)]
+
+  # force to align top
+  axis_panel <- gtable::gtable_add_rows(axis_panel, grid::unit(1, "null"), 0)
   pmg$grobs[[grob_pos]] <- axis_panel
 
   pmg
