@@ -184,7 +184,7 @@ ggnetworkmap <- function (
 
   # -- network functions -------------------------------------------------------
 
-  get_v = get("%v%", envir = as.environment("package:network"))
+  get_v = utils::getFromNamespace("%v%", ns = "network")
 
   # -- network structure -------------------------------------------------------
 
