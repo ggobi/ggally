@@ -275,7 +275,7 @@ ggnet <- function(
       stop(paste("incorrect", value, "length"))
     } else if (x %in% v_attr) {
       get_v(net, x)
-    } else if (mode && x == "mode" & is_bip) {
+    } else if (mode && x == "mode" && is_bip) {
       set_mode(net)
     } else {
       x
