@@ -155,8 +155,8 @@ p_(ggpairs(psychademic, columns = academic_variables))
 
 ## Between correlation
 loess_with_cor <- function(data, mapping, ..., method = "pearson") {
-  x <- eval(mapping$x, data)
-  y <- eval(mapping$y, data)
+  x <- eval_data_col(data, mapping$x)
+  y <- eval_data_col(data, mapping$y)
   cor <- cor(x, y, method = method)
   ggally_smooth_loess(data, mapping, ...) +
     ggplot2::geom_label(

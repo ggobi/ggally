@@ -224,6 +224,7 @@ ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
 
 # random groups
 g <- sample(letters[ 1:3 ], 10, replace = TRUE)
+g
 
 # color palette
 p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
