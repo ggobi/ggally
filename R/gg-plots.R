@@ -1376,11 +1376,11 @@ ggally_naDiag <- function(...) {
 
 #' Create a ridgeline plot.
 #'
-#' `ggally_density_ridges` arranges multiple density plots in a staggered fashion, as in the cover of the famous Joy Division album Unknown Pleasures.
+#' `ggally_density_ridges` generates a ridgeline plot with partially overlapping line plots that create the impression of a mountain range. They can be quite useful for visualizing changes in distributions over time or space.
 #'
 #' @param data The data set used.
 #' @param mapping The aesthetics used.
-#' @param ... Other parameters passed on to \code{\link[ggridges]{geom_density_ridges}}.
+#' @param ... Other parameters passed on to \code{\link[ggridges]{geom_density_ridges2}}.
 #'
 #' @examples
 #'   data(iris)
@@ -1390,8 +1390,8 @@ ggally_naDiag <- function(...) {
 #'
 #' @author Jens Preussner \email{jens.preussner@@mpi-bn.mpg.de}
 #' @export
-ggally_density_ridges <- function(data, mapping, ...) {
-  require_pkgs("ggridges")
+ggally_density_ridges <- function(data, mapping, ..., scale = 1) {
+  require_namespaces("ggridges")
   horizontal <- GGally:::is_horizontal(data, mapping)
 
   if (!horizontal) {
@@ -1401,5 +1401,5 @@ ggally_density_ridges <- function(data, mapping, ...) {
   mapping <- GGally:::mapping_color_to_fill(mapping)
 
   ggplot2::ggplot(data) +
-    ggridges::geom_density_ridges2(mapping, ...)
+    ggridges::geom_density_ridges2(mapping, ..., scale = scale)
 }
