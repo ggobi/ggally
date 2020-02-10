@@ -212,12 +212,14 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
   if (ncol(dn) == 0) {
     stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
   } else {
-    ltdata.new <- lowertriangle(data, columns = columns, color = color)
+     ltdata.new <- lowertriangle(data, columns = columns, color = color)
+     ## set up the plot
     r <- ggplot(ltdata.new, mapping = aes_string(x = "xvalue", y = "yvalue")) +
       theme(axis.title.x = element_blank(), axis.title.y = element_blank()) +
       facet_grid(ylab ~ xlab, scales = "free") +
       theme(aspect.ratio = 1)
     if (is.null(color)) {
+       ## b/w version
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
         data.frame(xlab = names(dn)[i], ylab = names(dn)[i],
                    x = dn[, i])
@@ -231,9 +233,11 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
           ),
           data = j, position = "identity", geom = "line", color = "black")
       }
+       ## add b/w points
       r <- r + geom_point(alpha = alpha, na.rm = TRUE)
       return(r)
     } else {
+       ## do the colored version
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
         data.frame(xlab = names(dn)[i], ylab = names(dn)[i],
                    x = dn[, i], colorcolumn = data[, which(colnames(data) == color)])
@@ -241,6 +245,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab == names(dn)[m])
         r <- r +
+                           # r is the facet grid plot
           stat_density(
             aes_string(
               x = "x", y = "..scaled.. * diff(range(x)) + min(x)",
@@ -251,6 +256,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
             geom = "line"
           )
       }
+      ## add color points
       r <- r +
         geom_point(
           data = ltdata.new,
@@ -271,7 +277,8 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}.
-#' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}.
+#' @param color an option to group the dataset by the factor variable and color them by different colors. 
+#'   Defaults to \code{NULL}, i.e. no coloring. If supplied, it will be converted to a factor.
 #' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
 #' @param corMethod method argument supplied to \code{\link[stats]{cor}}
 #' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
@@ -280,7 +287,14 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' ggscatmat(flea, columns = 2:4)
 #' ggscatmat(flea, columns = 2:4, color = "species")
 ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson"){
-
+  ## if 'color' is not a factor, mold it into one
+  if (!is.null(color)) {
+     if (is.null(data[[color]])) {
+        stop(paste0("Non-existent column <", color, "> requested"))
+     }
+     data[[color]] <- as.factor(data[[color]])
+  }
+  ##
   data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
