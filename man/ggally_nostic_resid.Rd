@@ -4,12 +4,24 @@
 \alias{ggally_nostic_resid}
 \title{ggnostic - residuals}
 \usage{
-ggally_nostic_resid(data, mapping, ..., linePosition = 0,
-  lineColor = brew_colors("grey"), lineSize = 0.5, lineAlpha = 1,
-  lineType = 1, lineConfColor = brew_colors("grey"),
-  lineConfSize = lineSize, lineConfAlpha = lineAlpha, lineConfType = 2,
-  pVal = c(0.025, 0.975), sigma = attr(data, "broom_glance")$sigma,
-  se = TRUE, method = "auto")
+ggally_nostic_resid(
+  data,
+  mapping,
+  ...,
+  linePosition = 0,
+  lineColor = brew_colors("grey"),
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 1,
+  lineConfColor = brew_colors("grey"),
+  lineConfSize = lineSize,
+  lineConfAlpha = lineAlpha,
+  lineConfType = 2,
+  pVal = c(0.025, 0.975),
+  sigma = attr(data, "broom_glance")$sigma,
+  se = TRUE,
+  method = "auto"
+)
 }
 \arguments{
 \item{data, mapping, ...}{parameters supplied to \code{\link{ggally_nostic_line}}}

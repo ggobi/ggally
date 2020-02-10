@@ -4,14 +4,33 @@
 \alias{ggcorr}
 \title{ggcorr - Plot a correlation matrix with ggplot2}
 \usage{
-ggcorr(data, method = c("pairwise", "pearson"), cor_matrix = NULL,
-  nbreaks = NULL, digits = 2, name = "", low = "#3B9AB2",
-  mid = "#EEEEEE", high = "#F21A00", midpoint = 0, palette = NULL,
-  geom = "tile", min_size = 2, max_size = 6, label = FALSE,
-  label_alpha = FALSE, label_color = "black", label_round = 1,
-  label_size = 4, limits = c(-1, 1), drop = is.null(limits) ||
-  identical(limits, FALSE), layout.exp = 0, legend.position = "right",
-  legend.size = 9, ...)
+ggcorr(
+  data,
+  method = c("pairwise", "pearson"),
+  cor_matrix = NULL,
+  nbreaks = NULL,
+  digits = 2,
+  name = "",
+  low = "#3B9AB2",
+  mid = "#EEEEEE",
+  high = "#F21A00",
+  midpoint = 0,
+  palette = NULL,
+  geom = "tile",
+  min_size = 2,
+  max_size = 6,
+  label = FALSE,
+  label_alpha = FALSE,
+  label_color = "black",
+  label_round = 1,
+  label_size = 4,
+  limits = c(-1, 1),
+  drop = is.null(limits) || identical(limits, FALSE),
+  layout.exp = 0,
+  legend.position = "right",
+  legend.size = 9,
+  ...
+)
 }
 \arguments{
 \item{data}{a data frame or matrix containing numeric (continuous) data. If

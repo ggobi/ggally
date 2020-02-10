@@ -4,9 +4,15 @@
 \alias{ggally_nostic_cooksd}
 \title{ggnostic - Cook's distance}
 \usage{
-ggally_nostic_cooksd(data, mapping, ..., linePosition = pf(0.5,
-  length(attr(data, "var_x")), nrow(data) - length(attr(data, "var_x"))),
-  lineColor = brew_colors("grey"), lineType = 2)
+ggally_nostic_cooksd(
+  data,
+  mapping,
+  ...,
+  linePosition = pf(0.5, length(attr(data, "var_x")), nrow(data) - length(attr(data,
+    "var_x"))),
+  lineColor = brew_colors("grey"),
+  lineType = 2
+)
 }
 \arguments{
 \item{data, mapping, ..., lineColor, lineType}{parameters supplied to \code{\link{ggally_nostic_line}}}

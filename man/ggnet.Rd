@@ -4,17 +4,44 @@
 \alias{ggnet}
 \title{ggnet - Plot a network with ggplot2}
 \usage{
-ggnet(net, mode = "fruchtermanreingold", layout.par = NULL,
-  layout.exp = 0, size = 9, alpha = 1, weight = "none",
-  weight.legend = NA, weight.method = weight, weight.min = NA,
-  weight.max = NA, weight.cut = FALSE, group = NULL, group.legend = NA,
-  node.group = group, node.color = NULL, node.alpha = alpha,
-  segment.alpha = alpha, segment.color = "grey50", segment.label = NULL,
-  segment.size = 0.25, arrow.size = 0, arrow.gap = 0,
-  arrow.type = "closed", label = FALSE, label.nodes = label,
-  label.size = size/2, label.trim = FALSE, legend.size = 9,
-  legend.position = "right", names = c("", ""), quantize.weights = FALSE,
-  subset.threshold = 0, top8.nodes = FALSE, trim.labels = FALSE, ...)
+ggnet(
+  net,
+  mode = "fruchtermanreingold",
+  layout.par = NULL,
+  layout.exp = 0,
+  size = 9,
+  alpha = 1,
+  weight = "none",
+  weight.legend = NA,
+  weight.method = weight,
+  weight.min = NA,
+  weight.max = NA,
+  weight.cut = FALSE,
+  group = NULL,
+  group.legend = NA,
+  node.group = group,
+  node.color = NULL,
+  node.alpha = alpha,
+  segment.alpha = alpha,
+  segment.color = "grey50",
+  segment.label = NULL,
+  segment.size = 0.25,
+  arrow.size = 0,
+  arrow.gap = 0,
+  arrow.type = "closed",
+  label = FALSE,
+  label.nodes = label,
+  label.size = size/2,
+  label.trim = FALSE,
+  legend.size = 9,
+  legend.position = "right",
+  names = c("", ""),
+  quantize.weights = FALSE,
+  subset.threshold = 0,
+  top8.nodes = FALSE,
+  trim.labels = FALSE,
+  ...
+)
 }
 \arguments{
 \item{net}{an object of class \code{\link[network]{network}}, or any object

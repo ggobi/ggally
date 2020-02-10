@@ -7,8 +7,11 @@
 \alias{wrap_fn_with_params}
 \title{Wrap a function with different parameter values}
 \usage{
-wrap_fn_with_param_arg(funcVal, params = NULL,
-  funcArgName = deparse(substitute(funcVal)))
+wrap_fn_with_param_arg(
+  funcVal,
+  params = NULL,
+  funcArgName = deparse(substitute(funcVal))
+)
 
 wrapp(funcVal, params = NULL, funcArgName = deparse(substitute(funcVal)))
 

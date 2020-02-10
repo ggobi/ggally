@@ -4,8 +4,13 @@
 \alias{ggally_nostic_sigma}
 \title{ggnostic - leave one out model sigma}
 \usage{
-ggally_nostic_sigma(data, mapping, ..., lineColor = brew_colors("grey"),
-  linePosition = attr(data, "broom_glance")$sigma)
+ggally_nostic_sigma(
+  data,
+  mapping,
+  ...,
+  lineColor = brew_colors("grey"),
+  linePosition = attr(data, "broom_glance")$sigma
+)
 }
 \arguments{
 \item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}

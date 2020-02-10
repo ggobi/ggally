@@ -4,9 +4,18 @@
 \alias{ggally_diagAxis}
 \title{Internal Axis Labeling Plot for ggpairs}
 \usage{
-ggally_diagAxis(data, mapping, label = mapping$x, labelSize = 5,
-  labelXPercent = 0.5, labelYPercent = 0.55, labelHJust = 0.5,
-  labelVJust = 0.5, gridLabelSize = 4, ...)
+ggally_diagAxis(
+  data,
+  mapping,
+  label = mapping$x,
+  labelSize = 5,
+  labelXPercent = 0.5,
+  labelYPercent = 0.55,
+  labelHJust = 0.5,
+  labelVJust = 0.5,
+  gridLabelSize = 4,
+  ...
+)
 }
 \arguments{
 \item{data}{dataset being plotted}

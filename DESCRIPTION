@@ -56,7 +56,8 @@ Suggests:
     roxygen2,
     testthat,
     crosstalk
-Roxygen: list(wrap = FALSE)
-RoxygenNote: 6.0.1
+Roxygen: list(markdown = FALSE)
+RoxygenNote: 7.0.2
 VignetteBuilder: packagedocs
 SystemRequirements: openssl
+Encoding: UTF-8

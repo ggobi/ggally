@@ -4,8 +4,12 @@
 \alias{ggmatrix_gtable}
 \title{Print ggmatrix object}
 \usage{
-ggmatrix_gtable(pm, ..., progress = NULL,
-  progress_format = formals(ggmatrix_progress)$format)
+ggmatrix_gtable(
+  pm,
+  ...,
+  progress = NULL,
+  progress_format = formals(ggmatrix_progress)$format
+)
 }
 \arguments{
 \item{pm}{ggmatrix object to be plotted}

@@ -4,8 +4,13 @@
 \alias{ggscatmat}
 \title{ggscatmat - a traditional scatterplot matrix for purely quantitative variables}
 \usage{
-ggscatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1,
-  corMethod = "pearson")
+ggscatmat(
+  data,
+  columns = 1:ncol(data),
+  color = NULL,
+  alpha = 1,
+  corMethod = "pearson"
+)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
