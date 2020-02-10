@@ -256,8 +256,8 @@ ggnet <- function(
 
   # -- network functions -------------------------------------------------------
 
-  get_v = get("%v%", envir = as.environment("package:network"))
-  get_e = get("%e%", envir = as.environment("package:network"))
+  get_v = utils::getFromNamespace("%v%", ns = "network")
+  get_e = utils::getFromNamespace("%e%", ns = "network")
 
   set_mode = function(x, mode = network::get.network.attribute(x, "bipartite")) {
     c(rep("actor", mode), rep("event", n_nodes - mode))
