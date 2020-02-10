@@ -20,7 +20,8 @@ ggally_nostic_resid(
   pVal = c(0.025, 0.975),
   sigma = attr(data, "broom_glance")$sigma,
   se = TRUE,
-  method = "auto"
+  method = "auto",
+  formula = y ~ x
 )
 }
 \arguments{
@@ -36,7 +37,7 @@ ggally_nostic_resid(
 
 \item{se}{boolean to determine if the confidence intervals should be displayed}
 
-\item{method}{parameter supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"}}
+\item{method, formula}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"} and \code{"y ~ x"}}
 }
 \value{
 ggplot2 plot object
