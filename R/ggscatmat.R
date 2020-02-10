@@ -225,7 +225,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
                    x = dn[, i])
       }))
       for (m in 1:ncol(dn)) {
-         j <- subset(densities, xlab == names(dn)[m])
+        j <- subset(densities, xlab == names(dn)[m])
         r <- r + stat_density(
           aes(
             x = x,
@@ -243,20 +243,20 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
                    x = dn[, i], colorcolumn = data[, which(colnames(data) == color)])
       }))
       for (m in 1:ncol(dn)) {
-         j <- subset(densities, xlab == names(dn)[m])
+        j <- subset(densities, xlab == names(dn)[m])
         r <- r +
                            # r is the facet grid plot
           stat_density(
             aes_string(
-               x = "x", y = "..scaled.. * diff(range(x)) + min(x)",
-               colour = "colorcolumn"
+              x = "x", y = "..scaled.. * diff(range(x)) + min(x)",
+              colour = "colorcolumn"
             ),
             data = j,
             position = "identity",
             geom = "line"
           )
       }
-       ## add color points
+      ## add color points
       r <- r +
         geom_point(
           data = ltdata.new,
@@ -277,8 +277,8 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}.
-#' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}, i.e. no coloring.
-#'    Converted to a factor.
+#' @param color an option to group the dataset by the factor variable and color them by different colors. 
+#'   Defaults to \code{NULL}, i.e. no coloring. If supplied, it will be converted to a factor.
 #' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
 #' @param corMethod method argument supplied to \code{\link[stats]{cor}}
 #' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
@@ -288,11 +288,11 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' ggscatmat(flea, columns = 2:4, color = "species")
 ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson"){
   ## if 'color' is not a factor, mold it into one
-  if(!is.null(color)) {
-     if(is.null(data[[color]])) {
+  if (!is.null(color)) {
+     if (is.null(data[[color]])) {
         stop(paste0("Non-existent column <", color, "> requested"))
      }
-     data[[color]] <- factor(data[[color]])
+     data[[color]] <- as.factor(data[[color]])
   }
   ##
   data <- upgrade_scatmat_data(data)
