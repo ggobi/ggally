@@ -56,6 +56,15 @@ if(getRversion() >= "2.15.1") {
 #'       labels = c('Male', 'Female')
 #'     )
 #'
+#'   # Multiple factors
+#'   lung2 <- lung %>% plyr::mutate(older = as.factor(age > 60))
+#'   sf.sex2 <- survival::survfit(Surv(time, status) ~ sex + older, data = lung2)
+#'   pl.sex2 <- ggsurv(sf.sex2)
+#'   pl.sex2
+#'
+#'   # Change legend title
+#'   pl.sex2 + labs(color = "New Title", linetype = "New Title")
+#'
 #'   # We can still adjust the plot after fitting
 #'   data(kidney, package = "survival")
 #'   sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
@@ -211,9 +220,17 @@ ggsurv_m <- function(
 ) {
   n <- s$strata
 
+  has_many <- all(grepl(",", names(s$strata)))
+  if (has_many) {
+    gr.name <- "combination"
+    ugroups <- names(s$strata)
+  } else {
+    # singular
+    strataEqualNames <- strsplit(names(s$strata), "=")
+    gr.name <- strataEqualNames[[1]][[1]]
+    ugroups <- vapply(strataEqualNames, `[[`, character(1), 2)
+  }
 
-  strataEqualNames <- unlist(strsplit(names(s$strata), '='))
-  ugroups <- strataEqualNames[seq(2, 2*strata, by = 2)]
   getlast <- function(x) {
     res <- NULL
     maxTime <- max(x$time)
@@ -233,7 +250,6 @@ ggsurv_m <- function(
     return(res)
   }
 
-
   if (isTRUE(order.legend)) {
     group_order <- order(getlast(s), decreasing = TRUE)
     lastv <- ugroups[group_order]
@@ -247,7 +263,6 @@ ggsurv_m <- function(
     lastv <- ugroups
   }
   groups <- factor(ugroups, levels = lastv)
-  gr.name <- strataEqualNames[1]
   gr.df <- vector('list', strata)
   n.ind <- cumsum(c(0, n))
 
@@ -277,10 +292,10 @@ ggsurv_m <- function(
     } else{
       surv.col
     }
-    pl + scale_colour_manual(name = gr.name, values = scaleValues)
+    pl + scale_colour_manual(values = scaleValues)
 
   } else {
-    pl + scale_colour_discrete(name = gr.name)
+    pl + scale_colour_discrete()
   }
 
   lineScaleValues <- if (length(lty.est) == 1) {
@@ -288,7 +303,7 @@ ggsurv_m <- function(
   } else {
     lty.est
   }
-  pl <- pl + scale_linetype_manual(name = gr.name, values = lineScaleValues)
+  pl <- pl + scale_linetype_manual(values = lineScaleValues)
 
   if(identical(CI,TRUE)) {
     stepLty <- if ((length(surv.col) > 1 | surv.col == 'gg.def')[1]) {
@@ -390,6 +405,11 @@ ggsurv_m <- function(
   if(identical(back.white, TRUE)) {
     pl <- pl + theme_bw()
   }
+
+  pl <- pl + labs(
+    color = gr.name,
+    linetype = gr.name
+  )
 
   pl
 }
