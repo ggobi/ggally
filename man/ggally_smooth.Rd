@@ -6,7 +6,15 @@
 \alias{ggally_smooth_lm}
 \title{Plots the Scatter Plot with Smoothing}
 \usage{
-ggally_smooth(data, mapping, ..., method = "lm", se = TRUE, shrink = TRUE)
+ggally_smooth(
+  data,
+  mapping,
+  ...,
+  method = "lm",
+  formula = y ~ x,
+  se = TRUE,
+  shrink = TRUE
+)
 
 ggally_smooth_loess(data, mapping, ...)
 
@@ -17,9 +25,9 @@ ggally_smooth_lm(data, mapping, ...)
 
 \item{mapping}{aesthetics being used}
 
-\item{...}{other arguments to add to geom_point}
-
 \item{method, se}{parameters supplied to \code{\link[ggplot2]{geom_smooth}}}
+
+\item{formula, ...}{other arguments to add to geom_smooth}
 
 \item{shrink}{boolean to determine if y range is reduced to range of points or points and error ribbon}
 }

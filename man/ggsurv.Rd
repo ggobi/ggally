@@ -4,10 +4,24 @@
 \alias{ggsurv}
 \title{Survival curves with ggplot2}
 \usage{
-ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
-  cens.col = "gg.def", lty.est = 1, lty.ci = 2, size.est = 0.5,
-  size.ci = size.est, cens.size = 2, cens.shape = 3, back.white = FALSE,
-  xlab = "Time", ylab = "Survival", main = "", order.legend = TRUE)
+ggsurv(
+  s,
+  CI = "def",
+  plot.cens = TRUE,
+  surv.col = "gg.def",
+  cens.col = "gg.def",
+  lty.est = 1,
+  lty.ci = 2,
+  size.est = 0.5,
+  size.ci = size.est,
+  cens.size = 2,
+  cens.shape = 3,
+  back.white = FALSE,
+  xlab = "Time",
+  ylab = "Survival",
+  main = "",
+  order.legend = TRUE
+)
 }
 \arguments{
 \item{s}{an object of class \code{survfit}}

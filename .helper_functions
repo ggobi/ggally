@@ -41,28 +41,7 @@ knit_vignettes:
 build_win:
   devtools::build_win(version = c("R-release", "R-devel"))
 reverse_depends:
-  if (packageVersion("devtools") <= "1.13.1") devtools::install_github("hadley/devtools")
-  # devtools::revdep_check_resume()
-  # devtools::revdep_check_reset()
-  source("https://bioconductor.org/biocLite.R")
-  dir.create("revdep/lib", recursive = TRUE, showWarnings = FALSE)
-  options("Ncpus" = 4, pkgType = "source")
-  do_check <- function() {
-    devtools::revdep_check(
-      bioconductor = TRUE,
-      # ignore = c("nzelect"),
-      ignore = c(),
-      libpath = .libPaths()[1],
-      srcpath = normalizePath(file.path("revdep", "lib"))
-    )
-    devtools::revdep_check_save_summary()
-    devtools::revdep_check_print_problems()
-  }
-  install.packages("GGally")
-  do_check()
-  file.rename("revdep/problems.md", "revdep/problems-cran.md")
-  load_all()
-  do_check()
-  system("diff --ignore-space-change 'revdep/problems.md' 'revdep/problems-cran.md' > revdep/problem-diff.txt")
+  # revdepcheck::revdep_reset()
+  revdepcheck::revdep_check(num_workers = 4, timeout = as.difftime(30, units = "mins"), quiet = FALSE)
 reverse_depends_email:
   devtools:::revdep_email(date = "Nov 4th alongside ggplot2's release", version = "1.3.0", author = "Barret", draft = TRUE, only_problems = FALSE)

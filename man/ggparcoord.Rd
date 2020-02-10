@@ -4,11 +4,23 @@
 \alias{ggparcoord}
 \title{ggparcoord - A ggplot2 Parallel Coordinate Plot}
 \usage{
-ggparcoord(data, columns = 1:ncol(data), groupColumn = NULL,
-  scale = "std", scaleSummary = "mean", centerObsID = 1,
-  missing = "exclude", order = columns, showPoints = FALSE,
-  splineFactor = FALSE, alphaLines = 1, boxplot = FALSE,
-  shadeBox = NULL, mapping = NULL, title = "")
+ggparcoord(
+  data,
+  columns = 1:ncol(data),
+  groupColumn = NULL,
+  scale = "std",
+  scaleSummary = "mean",
+  centerObsID = 1,
+  missing = "exclude",
+  order = columns,
+  showPoints = FALSE,
+  splineFactor = FALSE,
+  alphaLines = 1,
+  boxplot = FALSE,
+  shadeBox = NULL,
+  mapping = NULL,
+  title = ""
+)
 }
 \arguments{
 \item{data}{the dataset to plot}

@@ -49,7 +49,7 @@ if(getRversion() >= "2.15.1") {
 #'
 #' ## Example showing great circles on a simple map of the USA
 #' ## http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/
-#'
+#' \donttest{
 #' airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
 #' rownames(airports) <- airports$iata
 #'
@@ -140,6 +140,7 @@ if(getRversion() >= "2.15.1") {
 #'   labs(color = "Friends") +
 #'   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 #' p_(p)
+#'}
 #'
 
 ggnetworkmap <- function (
@@ -162,7 +163,7 @@ ggnetworkmap <- function (
   ...)
 {
 
-  require_pkgs(c("network", "sna"))
+  require_namespaces(c("network", "sna"))
   # sna          # node placement if there is no ggplot object in function call
 
   # -- conversion to network class ---------------------------------------------
@@ -183,7 +184,7 @@ ggnetworkmap <- function (
 
   # -- network functions -------------------------------------------------------
 
-  get_v = get("%v%", envir = as.environment("package:network"))
+  get_v = utils::getFromNamespace("%v%", ns = "network")
 
   # -- network structure -------------------------------------------------------
 
@@ -225,7 +226,7 @@ ggnetworkmap <- function (
     # mapproj doesn't need to be loaded, but
     # it needs to exist for ggplot2::coord_map() to work properly
     if (! ("mapproj" %in% installed.packages())) {
-      require_pkgs("mapproj")
+      require_namespaces("mapproj")
     }
     gg <- ggplot() + coord_map()
 
@@ -314,7 +315,7 @@ ggnetworkmap <- function (
   if (great.circles) {
 
     # geosphere    # great circles
-    require_pkgs("geosphere")
+    require_namespaces("geosphere")
 
     pts <- 25  # number of intermediate points for drawing great circles
     i <- 0 # used to keep track of groups when getting intermediate points for great circles

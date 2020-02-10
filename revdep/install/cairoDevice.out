@@ -1,6 +1,0 @@
-* installing *source* package ‘cairoDevice’ ...
-** package ‘cairoDevice’ successfully unpacked and MD5 sums checked
-checking for pkg-config... pkg-config
-ERROR: gtk+2.0 not found by pkg-config.
-ERROR: configuration failed for package ‘cairoDevice’
-* removing ‘/Users/barret/R/cairoDevice’

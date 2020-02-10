@@ -72,7 +72,9 @@ test_that("further options", {
   ggcorr(flea[, -1], geom = "tile", nbreaks = 3)
   ggcorr(flea[, -1], geom = "tile", limits = FALSE)
   expect_error(ggcorr(flea[, -1], layout.exp = "a"), "incorrect layout.exp")
-  ggcorr(flea[, -1], layout.exp = 1)
+  expect_silent({
+    ggcorr(flea[, -1], layout.exp = 1)
+  })
 })
 
 test_that("data.matrix", {
@@ -88,9 +90,13 @@ test_that("cor_matrix", {
 
 test_that("other geoms", {
   expect_error(ggcorr(flea[, -1], geom = "hexbin"), "incorrect geom")
-  ggcorr(flea[, -1], geom = "blank")
+  expect_silent({
+    ggcorr(flea[, -1], geom = "blank")
+  })
 })
 
 test_that("backwards compatibility", {
-  ggcorr(flea[, -1], method = "everything")
+  expect_silent({
+    ggcorr(flea[, -1], method = "everything")
+  })
 })

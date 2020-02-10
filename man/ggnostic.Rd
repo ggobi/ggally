@@ -4,23 +4,30 @@
 \alias{ggnostic}
 \title{ggnostic - Plot matrix of statistical model diagnostics}
 \usage{
-ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
-  ".sigma", ".hat", ".cooksd"), columnLabelsX = attr(data, "var_x_label"),
+ggnostic(
+  model,
+  ...,
+  columnsX = attr(data, "var_x"),
+  columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
+  columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\\\.", " ", gsub("^\\\\.", "", columnsY)),
-  xlab = "explanatory variables", ylab = "diagnostics",
+  xlab = "explanatory variables",
+  ylab = "diagnostics",
   title = paste(deparse(model$call, width.cutoff = 500L), collapse = "\\n"),
-  continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit
-  = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
-  ggally_nostic_hat, .sigma = ggally_nostic_sigma, .cooksd =
-  ggally_nostic_cooksd, .std.resid = ggally_nostic_std_resid),
-  combo = list(default = ggally_box_no_facet, fitted = ggally_box_no_facet,
-  .se.fit = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
-  ggally_nostic_hat, .sigma = ggally_nostic_sigma, .cooksd =
-  ggally_nostic_cooksd, .std.resid = ggally_nostic_std_resid),
+  continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit =
+    ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat = ggally_nostic_hat, .sigma =
+    ggally_nostic_sigma, .cooksd = ggally_nostic_cooksd, .std.resid =
+    ggally_nostic_std_resid),
+  combo = list(default = ggally_box_no_facet, fitted = ggally_box_no_facet, .se.fit =
+    ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat = ggally_nostic_hat, .sigma =
+    ggally_nostic_sigma, .cooksd = ggally_nostic_cooksd, .std.resid =
+    ggally_nostic_std_resid),
   discrete = list(default = ggally_ratio, .fitted = ggally_ratio, .se.fit =
-  ggally_ratio, .resid = ggally_ratio, .hat = ggally_ratio, .sigma =
-  ggally_ratio, .cooksd = ggally_ratio, .std.resid = ggally_ratio),
-  data = broomify(model))
+    ggally_ratio, .resid = ggally_ratio, .hat = ggally_ratio, .sigma = ggally_ratio,
+    .cooksd = ggally_ratio, .std.resid = ggally_ratio),
+  progress = NULL,
+  data = broomify(model)
+)
 }
 \arguments{
 \item{model}{statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}}
@@ -36,6 +43,8 @@ ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
 \item{xlab, ylab, title}{plot matrix labels passed directly to \code{\link{ggmatrix}}}
 
 \item{continuous, combo, discrete}{list of functions for each y variable.  See details for more information.}
+
+\item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
 \item{data}{data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information}
 }

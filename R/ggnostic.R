@@ -33,7 +33,7 @@ broomify <- function(model, lmStars = TRUE) {
     return(model)
   }
 
-  require_pkgs("broom")
+  require_namespaces("broom")
 
   broom_glance_info  <- broom::glance(model)
   broom_tidy_coef    <- broom::tidy(model)
@@ -201,7 +201,7 @@ ggally_nostic_line <- function(
 #' @param pVal percentiles of a N(0, sigma) distribution to be drawn
 #' @param sigma sigma value for the \code{pVal} percentiles
 #' @param se boolean to determine if the confidence intervals should be displayed
-#' @param method parameter supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"}
+#' @param method,formula parameters supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"} and \code{"y ~ x"}
 #' @return ggplot2 plot object
 #' @seealso \code{stats::\link[stats]{residuals}}
 #' @export
@@ -221,7 +221,8 @@ ggally_nostic_resid <- function(
   pVal = c(0.025, 0.975),
   sigma = attr(data, "broom_glance")$sigma,
   se = TRUE,
-  method = "auto"
+  method = "auto",
+  formula = y ~ x
 ) {
 
   if (!is.null(linePosition) & !is.null(pVal) & !is.null(sigma)) {
@@ -244,7 +245,7 @@ ggally_nostic_resid <- function(
   )
 
   if (! is_character_column(data, mapping, "x")) {
-    p <- p + geom_smooth(se = se, method = method)
+    p <- p + geom_smooth(se = se, method = method, formula = formula)
   }
 
   p +
@@ -354,9 +355,9 @@ ggally_nostic_sigma <- function(
 #' A function to display \code{stats::\link[stats]{cooks.distance}}.
 #'
 #' @details
-#' A line is added at 4 / n to display the general cutoff point for Cook's Distance.
+#' A line is added at F_{p, n - p}(0.5) to display the general cutoff point for Cook's Distance.
 #'
-#' Reference: Cook, R. Dennis; Weisberg, Sanford (1982). Residuals and Influence in Regression. New York, NY: Chapman & Hall. ISBN 0-412-24280-X
+#' Reference: Michael H. Kutner, Christopher J. Nachtsheim, John Neter, and William Li. Applied linear statistical models. The McGraw-Hill / Irwin series operations and decision sciences. McGraw-Hill Irwin, 2005, p. 403
 #'
 #' @param data,mapping,...,lineColor,lineType parameters supplied to \code{\link{ggally_nostic_line}}
 #' @param linePosition 4 / n is the general cutoff point for Cook's Distance
@@ -364,12 +365,13 @@ ggally_nostic_sigma <- function(
 #' @return ggplot2 plot object
 #' @rdname ggally_nostic_cooksd
 #' @export
+#' @importFrom stats pf
 #' @examples
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd))
 ggally_nostic_cooksd <- function(
   data, mapping, ...,
-  linePosition = 4 / nrow(data),
+  linePosition = pf(0.5, length(attr(data, "var_x")), nrow(data) - length(attr(data, "var_x"))),
   lineColor = brew_colors("grey"),
   lineType = 2
 ) {
@@ -410,11 +412,11 @@ ggally_nostic_cooksd <- function(
 #' ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
 ggally_nostic_hat <- function(
   data, mapping, ...,
-  linePosition = 2 * sum(data[[deparse(mapping$y)]]) / nrow(data),
+  linePosition = 2 * sum(eval_data_col(data, mapping$y)) / nrow(data),
   lineColor = brew_colors("grey"),
   lineSize = 0.5, lineAlpha = 1,
   lineType = 2,
-  avgLinePosition = sum(data[[deparse(mapping$y)]]) / nrow(data),
+  avgLinePosition = sum(eval_data_col(data, mapping$y)) / nrow(data),
   avgLineColor = brew_colors("grey"),
   avgLineSize = lineSize, avgLineAlpha = lineAlpha,
   avgLineType = 1
@@ -475,7 +477,7 @@ fn_switch <- function(
 ) {
 
   function(data, mapping, ...) {
-    var <- deparse(mapping[[mapping_val]], 500L)
+    var <- mapping_string(mapping[[mapping_val]])
 
     fn <- ifnull(types[[var]], types[["default"]])
 
@@ -558,6 +560,7 @@ check_and_set_nostic_types <- function(
 #' @param columnLabelsX,columnLabelsY column and row labels to display in the plot matrix
 #' @param xlab,ylab,title plot matrix labels passed directly to \code{\link{ggmatrix}}
 #' @param continuous,combo,discrete list of functions for each y variable.  See details for more information.
+#' @template ggmatrix-progress
 #' @param data data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information
 #' @export
 #' @examples
@@ -634,6 +637,7 @@ ggnostic <- function(
     .cooksd = ggally_ratio,
     .std.resid = ggally_ratio
   ),
+  progress = NULL,
   data = broomify(model)
 ) {
 
@@ -695,6 +699,7 @@ ggnostic <- function(
       discrete = discrete_fn
     ),
     ...,
+    progress = progress,
     title = title,
     xlab = xlab,
     ylab = ylab

@@ -149,9 +149,23 @@ test_that("proportions", {
   expect_print(pm2)
 
   # turn on progress for a quick plot
-  expect_silent(print(pm2, progress = TRUE))
+  # TODO - turn test back on when it uses message properly
+  # testthat::expect_message(print(pm2, progress = TRUE))
 })
 
+
+test_that("ggmatrix_gtable progress", {
+  pm <- ggpairs(iris, 1:2)
+  expect_silent({
+    pg <- ggmatrix_gtable(pm)
+  })
+  expect_warning({
+    ggmatrix_gtable(pm, progress = TRUE)
+  })
+  expect_warning({
+    ggmatrix_gtable(pm, progress_format = "asdfasdf :plot_i")
+  })
+})
 
 #
 # printShowStrips <- c(TRUE, FALSE)

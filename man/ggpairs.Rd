@@ -4,15 +4,30 @@
 \alias{ggpairs}
 \title{ggpairs - A ggplot2 generalized pairs plot}
 \usage{
-ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
-  upper = list(continuous = "cor", combo = "box_no_facet", discrete =
-  "facetbar", na = "na"), lower = list(continuous = "points", combo =
-  "facethist", discrete = "facetbar", na = "na"), diag = list(continuous =
-  "densityDiag", discrete = "barDiag", na = "naDiag"), params = NULL, ...,
-  xlab = NULL, ylab = NULL, axisLabels = c("show", "internal", "none"),
-  columnLabels = colnames(data[columns]), progress = NULL,
-  labeller = "label_value", switch = NULL, showStrips = NULL,
-  legend = NULL, cardinality_threshold = 15, legends = stop("deprecated"))
+ggpairs(
+  data,
+  mapping = NULL,
+  columns = 1:ncol(data),
+  title = NULL,
+  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "facetbar", na =
+    "na"),
+  lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na =
+    "na"),
+  diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+  params = NULL,
+  ...,
+  xlab = NULL,
+  ylab = NULL,
+  axisLabels = c("show", "internal", "none"),
+  columnLabels = colnames(data[columns]),
+  labeller = "label_value",
+  switch = NULL,
+  showStrips = NULL,
+  legend = NULL,
+  cardinality_threshold = 15,
+  progress = NULL,
+  legends = stop("deprecated")
+)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -37,8 +52,6 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 
 \item{columnLabels}{label names to be displayed.  Defaults to names of columns being used.}
 
-\item{progress}{boolean to determine if progress bars should be displayed.  A \code{NULL} value uses \code{\link{ggmatrix_gtable}}'s \code{progress} logic.}
-
 \item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
 
 \item{switch}{switch parameter for facet_grid. See \code{ggplot2::\link[ggplot2]{facet_grid}}.  By default, the labels are displayed on the top and right of the plot. If \code{"x"}, the top labels will be displayed to the bottom. If \code{"y"}, the right-hand side labels will be displayed to the left. Can also be set to \code{"both"}}
@@ -48,6 +61,8 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 \item{legend}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
 
 \item{cardinality_threshold}{maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15}
+
+\item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
 \item{legends}{deprecated}
 }
@@ -164,7 +179,7 @@ custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = 
     ggplot2::scale_colour_discrete(l=40)
 custom_car[1, 2] <- plot
 personal_plot <- ggally_text(
-  "ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"
+  "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
 )
 custom_car[1, 3] <- personal_plot
 p_(custom_car)

@@ -4,12 +4,25 @@
 \alias{ggally_nostic_resid}
 \title{ggnostic - residuals}
 \usage{
-ggally_nostic_resid(data, mapping, ..., linePosition = 0,
-  lineColor = brew_colors("grey"), lineSize = 0.5, lineAlpha = 1,
-  lineType = 1, lineConfColor = brew_colors("grey"),
-  lineConfSize = lineSize, lineConfAlpha = lineAlpha, lineConfType = 2,
-  pVal = c(0.025, 0.975), sigma = attr(data, "broom_glance")$sigma,
-  se = TRUE, method = "auto")
+ggally_nostic_resid(
+  data,
+  mapping,
+  ...,
+  linePosition = 0,
+  lineColor = brew_colors("grey"),
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 1,
+  lineConfColor = brew_colors("grey"),
+  lineConfSize = lineSize,
+  lineConfAlpha = lineAlpha,
+  lineConfType = 2,
+  pVal = c(0.025, 0.975),
+  sigma = attr(data, "broom_glance")$sigma,
+  se = TRUE,
+  method = "auto",
+  formula = y ~ x
+)
 }
 \arguments{
 \item{data, mapping, ...}{parameters supplied to \code{\link{ggally_nostic_line}}}
@@ -24,7 +37,7 @@ ggally_nostic_resid(data, mapping, ..., linePosition = 0,
 
 \item{se}{boolean to determine if the confidence intervals should be displayed}
 
-\item{method}{parameter supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"}}
+\item{method, formula}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"} and \code{"y ~ x"}}
 }
 \value{
 ggplot2 plot object

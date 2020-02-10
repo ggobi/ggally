@@ -1,0 +1,500 @@
+"iata","airport","city","state","country","lat","long"
+"00M","Thigpen ","Bay Springs","MS","USA",31.95376472,-89.23450472
+"00R","Livingston Municipal","Livingston","TX","USA",30.68586111,-95.01792778
+"00V","Meadow Lake","Colorado Springs","CO","USA",38.94574889,-104.5698933
+"01G","Perry-Warsaw","Perry","NY","USA",42.74134667,-78.05208056
+"01J","Hilliard Airpark","Hilliard","FL","USA",30.6880125,-81.90594389
+"01M","Tishomingo County","Belmont","MS","USA",34.49166667,-88.20111111
+"02A","Gragg-Wade ","Clanton","AL","USA",32.85048667,-86.61145333
+"02C","Capitol","Brookfield","WI","USA",43.08751,-88.17786917
+"02G","Columbiana County","East Liverpool","OH","USA",40.67331278,-80.64140639
+"03D","Memphis Memorial","Memphis","MO","USA",40.44725889,-92.22696056
+"04M","Calhoun County","Pittsboro","MS","USA",33.93011222,-89.34285194
+"04Y","Hawley Municipal","Hawley","MN","USA",46.88384889,-96.35089861
+"05C","Griffith-Merrillville ","Griffith","IN","USA",41.51961917,-87.40109333
+"05F","Gatesville - City/County","Gatesville","TX","USA",31.42127556,-97.79696778
+"05U","Eureka","Eureka","NV","USA",39.60416667,-116.0050597
+"06A","Moton  Municipal","Tuskegee","AL","USA",32.46047167,-85.68003611
+"06C","Schaumburg","Chicago/Schaumburg","IL","USA",41.98934083,-88.10124278
+"06D","Rolla Municipal","Rolla","ND","USA",48.88434111,-99.62087694
+"06M","Eupora Municipal","Eupora","MS","USA",33.53456583,-89.31256917
+"06N","Randall ","Middletown","NY","USA",41.43156583,-74.39191722
+"06U","Jackpot/Hayden ","Jackpot","NV","USA",41.97602222,-114.6580911
+"07C","Dekalb County","Auburn","IN","USA",41.30716667,-85.06433333
+"07F","Gladewater Municipal","Gladewater","TX","USA",32.52883861,-94.97174556
+"07G","Fitch H Beach","Charlotte","MI","USA",42.57450861,-84.81143139
+"07K","Central City Municipal","Central City","NE","USA",41.11668056,-98.05033639
+"08A","Wetumpka Municipal","Wetumpka","AL","USA",32.52943944,-86.32822139
+"08D","Stanley Municipal","Stanley","ND","USA",48.30079861,-102.4063514
+"08K","Harvard State","Harvard","NE","USA",40.65138528,-98.07978667
+"08M","Carthage-Leake County","Carthage","MS","USA",32.76124611,-89.53007139
+"09A","Butler-Choctaw County","Butler","AL","USA",32.11931306,-88.1274625
+"09J","Jekyll Island","Jekyll Island","GA","USA",31.07447222,-81.42777778
+"09K","Sargent Municipal","Sargent","NE","USA",41.63695083,-99.34038139
+"09M","Charleston Municipal","Charleston","MS","USA",33.99150222,-90.078145
+"09W","South Capitol Street","Washington","DC","USA",38.86872333,-77.00747583
+"0A3","Smithville Municipal","Smithville","TN","USA",35.98531194,-85.80931806
+"0A8","Bibb County","Centreville","AL","USA",32.93679056,-87.08888306
+"0A9","Elizabethton Municipal","Elizabethton","TN","USA",36.37094306,-82.17374111
+"0AK","Pilot Station","Pilot Station","AK","USA",61.93396417,-162.8929358
+"0B1","Col. Dyke ","Bethel","ME","USA",44.42506444,-70.80784778
+"0B4","Hartington Municipal","Hartington","NE","USA",42.60355556,-97.25263889
+"0B5","Turners Falls","Montague","MA","USA",42.59136361,-72.52275472
+"0B7","Warren-Sugar Bush","Warren","VT","USA",44.11672722,-72.82705806
+"0B8","Elizabeth ","Fishers Island","NY","USA",41.25130806,-72.03161139
+"0C0","Dacy","Chicago/Harvard","IL","USA",42.40418556,-88.63343222
+"0C4","Pender Municipal","Pender","NE","USA",42.11388722,-96.72892556
+"0D1","South Haven Municipal","South Haven","MI","USA",42.35083333,-86.25613889
+"0D8","Gettysburg Municipal","Gettysburg","SD","USA",44.98730556,-99.9535
+"0E0","Moriarty","Moriarty","NM","USA",34.98560639,-106.0094661
+"0E8","Crownpoint","Crownpoint","NM","USA",35.71765889,-108.2015961
+"0F2","Bowie Municipal","Bowie","TX","USA",33.60166667,-97.77556
+"0F4","Loup City Municipal","Loup City","NE","USA",41.29028694,-98.99064278
+"0F7","Fountainhead Lodge Airpark","Eufaula","OK","USA",35.38898833,-95.60165111
+"0F8","William R Pogue Municipal","Sand Springs","OK","USA",36.17528,-96.15181028
+"0F9","Tishomingo Airpark","Tishomingo","OK","USA",34.19592833,-96.67555694
+"0G0","North Buffalo Suburban","Lockport","NY","USA",43.10318389,-78.70334583
+"0G3","Tecumseh Municipal","Tecumseh","NE","USA",40.39944417,-96.17139694
+"0G6","Williams County","Bryan","OH","USA",41.46736111,-84.50655556
+"0G7","Finger Lakes Regional","Seneca Falls","NY","USA",42.88062278,-76.78162028
+"0H1","Trego Wakeeney ","Wakeeney","KS","USA",39.0044525,-99.89289917
+"0I8","Cynthiana-Harrison County","Cynthiana","KY","USA",38.36674167,-84.28410056
+"0J0","Abbeville Municipal","Abbeville","AL","USA",31.60016778,-85.23882222
+"0J4","Florala Municipal","Florala","AL","USA",31.04247361,-86.31156111
+"0J6","Headland Municipal","Headland","AL","USA",31.364895,-85.30965556
+"0K7","Humboldt Municipal","Humboldt","IA","USA",42.7360825,-94.24524167
+"0L5","Goldfield","Goldfield","NV","USA",37.71798833,-117.2384119
+"0L7","Jean","Jean","NV","USA",35.76827222,-115.3296378
+"0L9","Echo Bay","Overton","NV","USA",36.31108972,-114.4638672
+"0M0","Dumas Municipal","Dumas","AR","USA",33.8845475,-91.53429111
+"0M1","Scott ","Parsons","TN","USA",35.63778,-88.127995
+"0M4","Benton County","Camden","TN","USA",36.01122694,-88.12328833
+"0M5","Humphreys County","Waverly","TN","USA",36.11659972,-87.73815889
+"0M6","Panola County","Batesville","MS","USA",34.36677444,-89.90008917
+"0M8","Byerley","Lake Providence","LA","USA",32.82587917,-91.187665
+"0O3","Calaveras Co-Maury Rasmussen ","San Andreas","CA","USA",38.14611639,-120.6481733
+"0O4","Corning Municipal","Corning","CA","USA",39.94376806,-122.1713781
+"0O5","University","Davis","CA","USA",38.53146222,-121.7864906
+"0Q5","Shelter Cove","Shelter Cove","CA","USA",40.02764333,-124.0733639
+"0Q6","Shingletown","Shingletown","CA","USA",40.52210111,-121.8177683
+"0R0","Columbia-Marion County","Columbia","MS","USA",31.29700806,-89.81282944
+"0R1","Atmore Municipal","Atmore","AL","USA",31.01621528,-87.44675972
+"0R3","Abbeville Chris Crusta Memorial","Abbeville","LA","USA",29.97576083,-92.08415167
+"0R4","Concordia Parish","Vidalia","LA","USA",31.56683278,-91.50011889
+"0R5","David G Joyce","Winnfield","LA","USA",31.96366222,-92.66026056
+"0R7","Red River","Coushatta","LA","USA",31.99071694,-93.30739306
+"0S7","Dorothy Scott","Oroville","WA","USA",48.958965,-119.4119622
+"0S9","Jefferson County International","Port Townsend","WA","USA",48.04981361,-122.8012792
+"0V2","Harriet Alexander ","Salida","CO","USA",38.53916389,-106.0458483
+"0V3","Pioneer Village ","Minden","NE","USA",40.5149125,-98.94565083
+"0V4","Brookneal/Campbell County","Brookneal","VA","USA",37.14172222,-79.01638889
+"0V6","Mission Sioux","Mission","SD","USA",43.30694778,-100.6281936
+"0V7","Kayenta","Kayenta","AZ","USA",36.70972139,-110.2367978
+"10C","Galt","Chicago/Greenwood/Wonderlake","IL","USA",42.40266472,-88.37588917
+"10D","Winsted Municipal","Winsted","MN","USA",44.94996278,-94.0669175
+"10G","Holmes County","Millersburg","OH","USA",40.53716667,-81.95436111
+"10N","Wallkill","Wallkill","NY","USA",41.62787111,-74.13375583
+"10U","Owyhee","Owyhee","NV","USA",41.95323306,-116.1876014
+"11A","Clayton Municipal","Clayton","AL","USA",31.88329917,-85.48491361
+"11D","Clarion Cty","Clarion","PA","USA",41.22581222,-79.44098972
+"11IS","Schaumburg Heliport","Chicago/Schaumburg","IL","USA",42.04808278,-88.05257194
+"11J","Early County","Blakely","GA","USA",31.39698611,-84.89525694
+"11R","Brenham Municipal","Brenham","TX","USA",30.219,-96.37427778
+"12C","Rochelle Municipal","Rochelle","IL","USA",41.89300139,-89.07829
+"12D","Tower Municipal","Tower","MN","USA",47.81833333,-92.29166667
+"12J","Brewton Municipal","Brewton","AL","USA",31.05126306,-87.06796833
+"12K","Superior Municipal","Superior","NE","USA",40.04636111,-98.06011111
+"12Y","Le Sueur Municipal","Le Sueur","MN","USA",44.43746472,-93.91274083
+"13C","Lakeview","Lakeview","MI","USA",43.45213722,-85.26480333
+"13K","Eureka Municipal","Eureka","KS","USA",37.8515825,-96.29169806
+"13N","Trinca","Andover","NJ","USA",40.96676444,-74.78016556
+"14J","Carl Folsom","Elba","AL","USA",31.40988861,-86.08883583
+"14M","Hollandale Municipal","Hollandale","MS","USA",33.18262167,-90.83065444
+"14Y","Todd Field ","Long Prairie","MN","USA",45.89857556,-94.87391
+"15F","Haskell Municipal","Haskell","TX","USA",33.19155556,-99.71793056
+"15J","Cook County","Adel","GA","USA",31.13780556,-83.45308333
+"15M","Luka ","Luka","MS","USA",34.7723125,-88.16587444
+"15Z","McCarthy 2","McCarthy","AK","USA",61.43706083,-142.9037372
+"16A","Nunapitchuk","Nunapitchuk","AK","USA",60.90582833,-162.4391158
+"16G","Seneca County","Tiffin","OH","USA",41.09405556,-83.2125
+"16J","Dawson Municipal","Dawson","GA","USA",31.74328472,-84.419285
+"16S","Myrtle Creek Municipal","Myrtle Creek","OR","USA",42.99845056,-123.3095092
+"17G","Port Bucyrus-Crawford County","Bucyrus","OH","USA",40.78141667,-82.97469444
+"17J","Donalsonville Municipal","Donalsonville","GA","USA",31.00694444,-84.87761111
+"17K","Boise City","Boise City","OK","USA",36.77430028,-102.5104364
+"17M","Magee Municipal","Magee","MS","USA",31.86127139,-89.80285361
+"17N","Cross Keys","Cross Keys","NJ","USA",39.70547583,-75.03300306
+"17Z","Manokotak","Manokotak","AK","USA",58.98896583,-159.0499739
+"18A","Franklin County","Canon","GA","USA",34.34010472,-83.13348333
+"18I","McCreary County ","Pine Knot","KY","USA",36.69591306,-84.39160389
+"19A","Jackson County","Jefferson","GA","USA",34.17402472,-83.56066528
+"19M","C A Moore","Lexington","MS","USA",33.12546111,-90.02555694
+"19N","Camden","Berlin","NJ","USA",39.77842056,-74.94780389
+"19P","Port Protection SPB","Port Protection","AK","USA",56.32880417,-133.6100844
+"1A3","Martin Campbell ","Copperhill","TN","USA",35.01619111,-84.34631083
+"1A5","Macon County","Franklin","NC","USA",35.222595,-83.41904389
+"1A6","Middlesboro-Bell County","Middlesboro","KY","USA",36.6106375,-83.73741611
+"1A7","Jackson County","Gainesboro","TN","USA",36.39728139,-85.64164278
+"1A9","Autauga County","Prattville","AL","USA",32.438775,-86.51044778
+"1B0","Dexter Regional","Dexter","ME","USA",45.00839444,-69.23976722
+"1B1","Columbia Cty","Hudson","NY","USA",42.29130028,-73.71031944
+"1B3","Fair Haven","Fair Haven","VT","USA",43.61534389,-73.27455556
+"1B9","Mansfield Municipal","Mansfield","MA","USA",42.00013306,-71.19677139
+"1C5","Clow","Chicago/Plainfield","IL","USA",41.69597444,-88.12923056
+"1D1","Milbank Municipal","Milbank","SD","USA",45.23053806,-96.56596556
+"1D2","Canton -Plymouth -  Mettetal","Plymouth","MI","USA",42.35003667,-83.45826833
+"1D3","Platte Municipal","Platte","SD","USA",43.40332833,-98.82952972
+"1D6","Hector Municipal","Hector","MN","USA",44.73107278,-94.71471333
+"1D7","Webster Municipal","Webster","SD","USA",45.29329111,-97.51369889
+"1D8","Redfield Municipal","Redfield","SD","USA",44.86247611,-98.52953972
+"1F0","Downtown Ardmore","Ardmore","OK","USA",34.14698917,-97.12265194
+"1F1","Lake Murray State Park","Overbrook","OK","USA",34.07509694,-97.10667917
+"1F4","Madill Municipal","Madill","OK","USA",34.14040194,-96.81203222
+"1F9","Bridgeport Municipal","Bridgeport","TX","USA",33.17533333,-97.82838889
+"1G0","Wood County","Bowling Green","OH","USA",41.391,-83.63013889
+"1G3","Kent State University","Kent","OH","USA",41.15186167,-81.41658306
+"1G4","Grand Canyon West","Peach Springs","AZ","USA",35.99221,-113.8166164
+"1G5","Freedom ","Medina","OH","USA",41.13144444,-81.76491667
+"1G6","Michael ","Cicero","NY","USA",43.18166667,-76.12777778
+"1H0","Creve Coeur","St Louis","MO","USA",38.72752,-90.50830417
+"1H2","Effingham County Memorial","Effingham","IL","USA",39.07045083,-88.53351972
+"1H3","Linn State Tech. College","Linn","MO","USA",38.47149444,-91.81531667
+"1H8","Casey Municipal","Casey","IL","USA",39.30250917,-88.00406194
+"1I5","Freehold","Freehold","NY","USA",42.36425,-74.06596806
+"1I9","Delphi Municipal","Delphi","IN","USA",40.54281417,-86.68167194
+"1J0","Tri-County","Bonifay","FL","USA",30.84577778,-85.60138889
+"1K2","Lindsay Municipal","Lindsay","OK","USA",34.85007333,-97.58642028
+"1K4","David J. Perry","Goldsby","OK","USA",35.1550675,-97.47039389
+"1K5","Waynoka Municipal","Waynoka","OK","USA",36.56670028,-98.85231333
+"1K9","Satanta Municipal","Satanta","KS","USA",37.45419111,-100.9921119
+"1L0","St. John the Baptist Parish","Reserve","LA","USA",30.08720833,-90.58266528
+"1L1","Lincoln Co","Panaca","NV","USA",37.78746444,-114.4216567
+"1L7","Escalante Municipal","Escalante","UT","USA",37.74532639,-111.5701653
+"1L9","Parowan","Parowan","UT","USA",37.85969694,-112.816055
+"1M1","North Little Rock Municipal","No Lit Rock","AR","USA",34.83398056,-92.25792778
+"1M2","Belzoni Municipal","Belzoni","MS","USA",33.14518056,-90.51528472
+"1M4","Posey ","Haleyville","AL","USA",34.28034806,-87.60044139
+"1M5","Portland Municipal","Portland","TN","USA",36.59287528,-86.47691028
+"1M7","Fulton","Fulton","KY","USA",36.52589417,-88.91561611
+"1MO","Mountain Grove Memorial","Mountain Grove","MO","USA",37.12071889,-92.311245
+"1N2","Spadaro ","East Moriches","NY","USA",40.82787639,-72.74871083
+"1N4","Woodbine Muni ","Woodbine","NJ","USA",39.21915,-74.794765
+"1N7","Blairstown","Blairstown","NJ","USA",40.97114556,-74.99747556
+"1N9","Allentown Queen City Muni","Allentown","PA","USA",40.57027778,-75.48830556
+"1ND3","Hamry ","Kindred","ND","USA",46.6485775,-97.00564306
+"1O1","Grandfield Municipal","Grandfield","OK","USA",34.23758944,-98.74200917
+"1O2","Lampson ","Lakeport","CA","USA",38.99017472,-122.8997175
+"1O3","Lodi","Lodi","CA","USA",38.20241667,-121.2684167
+"1O4","Thomas Municipal","Thomas","OK","USA",35.73338222,-98.73063833
+"1O6","Dunsmuir Municipal-Mott","Dunsmuir","CA","USA",41.26320889,-122.2719528
+"1R1","Jena","Jena","LA","USA",31.671005,-92.15846722
+"1R7","Brookhaven-Lincoln County","Brookhaven","MS","USA",31.6058475,-90.40931583
+"1R8","Bay Minette Municipal","Bay Minette","AL","USA",30.87046278,-87.81738167
+"1S0","Pierce County ","Puyallup","WA","USA",47.10391667,-122.2871944
+"1S3","Tillitt ","Forsyth","MT","USA",46.27110639,-106.6239206
+"1S5","Sunnyside Municipal","Sunnyside","WA","USA",46.32763139,-119.9705964
+"1S6","Priest River Muni","Priest River","ID","USA",48.19018611,-116.9093644
+"1U7","Bear Lake County","Paris","ID","USA",42.24714972,-111.33826
+"1V0","Navajo State Park ","Navajo Dam","NM","USA",36.80833833,-107.6514444
+"1V2","Grant County ","Hyannis","NE","USA",42.00942944,-101.7693439
+"1V5","Boulder Muni","Boulder","CO","USA",40.03942972,-105.2258217
+"1V6","Fremont County","Canon City","CO","USA",38.42838111,-105.1054994
+"1V9","Blake ","Delta","CO","USA",38.78539722,-108.0636611
+"20A","Robbins ","Oneonta","AL","USA",33.97231972,-86.37942722
+"20M","Macon Municipal","Macon","MS","USA",33.13345889,-88.53559806
+"20N","Kingston-Ulster","Kingston","NY","USA",41.9852525,-73.96409722
+"20U","Beach","Beach","ND","USA",46.92362444,-103.9785389
+"20V","McElroy Airfield","Kremmling","CO","USA",40.05367972,-106.3689467
+"21D","Lake Elmo","St Paul","MN","USA",44.99748861,-92.85568111
+"21F","Jacksboro Municipal","Jacksboro","TX","USA",33.228725,-98.14671083
+"22B","Mountain Meadow Airstrip","Burlington","CT","USA",41.77287528,-73.01121667
+"22I","Vinton County","McArthur","OH","USA",39.328125,-82.44182167
+"22M","Pontotoc County","Pontotoc","MS","USA",34.27593833,-89.03839694
+"22N","Carbon Cty-Jake Arner Memorial","Lehighton","PA","USA",40.80950889,-75.76149639
+"23J","Herlong","Jacksonville","FL","USA",30.27778889,-81.80594722
+"23M","Clarke County","Quitman","MS","USA",32.08487111,-88.73893389
+"23N","Bayport Aerodrome","Bayport","NY","USA",40.75843139,-73.05372083
+"23R","Devine Municipal","Devine","TX","USA",29.1384075,-98.94189028
+"24A","Jackson County","Sylva","NC","USA",35.3168625,-83.20936806
+"24J","Suwannee County","Live Oak","FL","USA",30.30105583,-83.02318778
+"24N","Jicarilla Apache Nation","Dulce","NM","USA",36.828535,-106.8841914
+"25J","Cuthbert-Randolph","Cuthbert","GA","USA",31.70016583,-84.82492194
+"25M","Ripley ","Ripley","MS","USA",34.72226778,-89.01504944
+"25R","International","Edinburg","TX","USA",26.44201083,-98.12945306
+"26A","Ashland/Lineville","Ashland/Lineville","AL","USA",33.28761417,-85.80412861
+"26N","Ocean City Muni cipal","Ocean City","NJ","USA",39.26347222,-74.60747222
+"26R","Jackson County","Edna/Ganado","TX","USA",29.00101,-96.58194667
+"26U","McDermitt State","McDermitt","OR","USA",42.00211083,-117.7231972
+"27A","Elbert County-Patz ","Elberton","GA","USA",34.09519722,-82.81586417
+"27D","Myers ","Canby","MN","USA",44.72801889,-96.26309972
+"27J","Newberry Municipal","Newberry","SC","USA",34.30927778,-81.63972222
+"27K","Georgetown-Scott County","Georgetown","KY","USA",38.23442528,-84.43468667
+"28J","Kay Larkin","Palatka","FL","USA",29.65863889,-81.68855556
+"29D","Grove City","Grove City","PA","USA",41.14597611,-80.16592194
+"29G","Portage County","Ravenna","OH","USA",41.210195,-81.25163083
+"29S","Gardiner","Gardiner","MT","USA",45.04993556,-110.7466008
+"2A0","Mark Anton","Dayton","TN","USA",35.48624611,-84.93109722
+"2A1","Jamestown Municipal","Jamestown","TN","USA",36.34970833,-84.94664472
+"2A3","Larsen Bay","Larsen Bay","AK","USA",57.53510667,-153.9784169
+"2A9","Kotlik","Kotlik","AK","USA",63.03116111,-163.5299278
+"2AK","Lime Village","Lime Village","AK","USA",61.35848528,-155.4403508
+"2B3","Parlin ","Newport","NH","USA",43.38812944,-72.18925417
+"2B7","Pittsfield Municipal","Pittsfield","ME","USA",44.76852778,-69.37441667
+"2B9","Post Mills","Post Mills","VT","USA",43.884235,-72.25370333
+"2D1","Barber","Alliance","OH","USA",40.97089139,-81.09981889
+"2D5","Oakes Municipal","Oakes","ND","USA",46.17301972,-98.07987556
+"2F5","Lamesa Municipal","Lamesa","TX","USA",32.75627778,-101.9194722
+"2F6","Skiatook Municipal","Skiatook","OK","USA",36.357035,-96.01138556
+"2F7","Commerce Municipal","Commerce","TX","USA",33.29288889,-95.89641806
+"2F8","Morehouse Memorial","Bastrop","LA","USA",32.75607944,-91.88057194
+"2G2","Jefferson County Airpark","Steubenville","OH","USA",40.35944306,-80.70007806
+"2G3","Connellsville","Connellsville","PA","USA",39.95893667,-79.65713306
+"2G4","Garrett County","Oakland","MD","USA",39.58027778,-79.33941667
+"2G9","Somerset County","Somerset","PA","USA",40.03911111,-79.01455556
+"2H0","Shelby County","Shelbyville","IL","USA",39.41042861,-88.8454325
+"2H2","Aurora Memorial Municipal","Aurora","MO","USA",36.96230778,-93.69531111
+"2I0","Madisonville Municipal","Madisonville","KY","USA",37.35502778,-87.39963889
+"2I5","Chanute","Rantoul","IL","USA",40.29355556,-88.14236111
+"2IS","Airglades","Clewiston","FL","USA",26.74200972,-81.04978917
+"2J2","Liberty County","Hinesville","GA","USA",31.78461111,-81.64116667
+"2J3","Louisville Municipal","Louisville","GA","USA",32.98654083,-82.38568139
+"2J5","Millen","Millen","GA","USA",32.89376972,-81.96511583
+"2J9","Quincy Municipal","Quincy","FL","USA",30.59786111,-84.55741667
+"2K3","Stanton County Municipal","Johnson","KS","USA",37.58271111,-101.73281
+"2K4","Scott ","Mangum","OK","USA",34.89172583,-99.52675667
+"2K5","Telida","Telida","AK","USA",63.39387278,-153.2689733
+"2M0","Princeton-Caldwell County","Princeton","KY","USA",37.11560444,-87.85556944
+"2M2","Lawrenceburg Municipal","Lawrenceburg","TN","USA",35.2343025,-87.25793222
+"2M3","Sallisaw Municipal","Sallisaw","OK","USA",35.43816667,-94.80277778
+"2M4","G. V. Montgomery","Forest","MS","USA",32.35347778,-89.48867944
+"2M8","Charles W. Baker","Millington","TN","USA",35.27897583,-89.93147611
+"2O1","Gansner ","Quincy","CA","USA",39.94378056,-120.9468983
+"2O3","Angwin-Parrett ","Angwin","CA","USA",38.57851778,-122.4352572
+"2O6","Chowchilla","Chowchilla","CA","USA",37.11244417,-120.2468406
+"2O7","Independence","Independence","CA","USA",36.81382111,-118.2050956
+"2O8","Hinton Municipal","Hinton","OK","USA",35.50592472,-98.34236111
+"2P2","Washington Island","Washington Island","WI","USA",45.38620833,-86.92448056
+"2Q3","Yolo Co-Davis/Woodland/Winters","Davis/Woodland/Winters","CA","USA",38.5790725,-121.8566322
+"2R0","Waynesboro Municipal","Waynesboro","MS","USA",31.64599472,-88.63475667
+"2R4","Peter Prince ","Milton","FL","USA",30.63762083,-86.99365278
+"2R5","St Elmo","St Elmo","AL","USA",30.50190833,-88.27511667
+"2R9","Karnes County","Kenedy","TX","USA",28.8250075,-97.86558333
+"2S1","Vashon Municipal","Vashon","WA","USA",47.45815333,-122.4773506
+"2S6","Sportsman Airpark","Newberg","OR","USA",45.29567333,-122.9553783
+"2S7","Chiloquin State","Chiloquin","OR","USA",42.58319167,-121.8761261
+"2S8","Wilbur","Wilbur","WA","USA",47.75320639,-118.7438936
+"2T1","Muleshoe Municipal","Muleshoe","TX","USA",34.18513639,-102.6410981
+"2V1","Stevens ","Pagosa Springs","CO","USA",37.277505,-107.0558742
+"2V2","Vance Brand","Longmont","CO","USA",40.16367139,-105.1630369
+"2V5","Wray Municipal","Wray","CO","USA",40.10032333,-102.24096
+"2V6","Yuma Municipal","Yuma","CO","USA",40.10415306,-102.7129869
+"2W5","Maryland","Indian Head","MD","USA",38.60053667,-77.07296917
+"2W6","Captain Walter Francis Duke Regional ","Leonardtown","MD","USA",38.31536111,-76.55011111
+"2Y3","Yakutat SPB","Yakutat","AK","USA",59.5624775,-139.7410994
+"2Y4","Rockwell City Municipal","Rockwell City","IA","USA",42.38748056,-94.61803333
+"31F","Gaines County","Seminole","TX","USA",32.67535389,-102.652685
+"32M","Norfolk","Norfolk","MA","USA",42.12787528,-71.37033556
+"32S","Stevensville","Stevensville","MT","USA",46.52511111,-114.0528056
+"33J","Geneva Municipal","Geneva","AL","USA",31.05527778,-85.88033333
+"33M","Water Valley ","Water Valley","MS","USA",34.16677639,-89.68619722
+"33N","Delaware Airpark","Dover","DE","USA",39.21837556,-75.59642667
+"33S","Pru ","Ritzville","WA","USA",47.12487194,-118.3927539
+"34A","Laurens County","Laurens","SC","USA",34.50705556,-81.94719444
+"35A","Union County, Troy Shelton ","Union","SC","USA",34.68680111,-81.64121167
+"35D","Padgham ","Allegan","MI","USA",42.53098278,-85.82513556
+"35S","Wasco State","Wasco","OR","USA",45.58944444,-120.6741667
+"36K","Lakin","Lakin","KS","USA",37.96946389,-101.2554472
+"36S","Happy Camp","Happy Camp","CA","USA",41.79067944,-123.3889444
+"36U","Heber City Municipal/Russ McDonald ","Heber","UT","USA",40.48180556,-111.4288056
+"37T","Calico Rock-Izard County","Calico Rock","AR","USA",36.16565278,-92.14523611
+"37W","Harnett County","Erwin","NC","USA",35.37880028,-78.73362917
+"38A","Shaktoolik","Shaktoolik","AK","USA",64.36263194,-161.2025369
+"38S","Deer Lodge-City-County","Deer Lodge","MT","USA",46.38881583,-112.7669842
+"38U","Wayne Wonderland","Loa","UT","USA",38.36247972,-111.5960164
+"39N","Princeton","Princeton","NJ","USA",40.39834833,-74.65760361
+"3A0","Grove Hill Municipal","Grove Hill","AL","USA",31.68932389,-87.7613875
+"3A1","Folsom ","Cullman","AL","USA",34.26870833,-86.85833611
+"3A2","New Tazewell Municipal","Tazewell","TN","USA",36.41008417,-83.55546167
+"3A3","Anson County","Wadesboro","NC","USA",35.02397611,-80.08127333
+"3AU","Augusta Municipal","Augusta","KS","USA",37.67162778,-97.07787222
+"3B0","Southbridge Municipal","Southbridge","MA","USA",42.10092806,-72.03840833
+"3B1","Greenville Municipal","Greenville","ME","USA",45.46302778,-69.55161111
+"3B2","Marshfield","Marshfield","MA","USA",42.09824111,-70.67212083
+"3B9","Chester","Chester","CT","USA",41.38390472,-72.50589444
+"3BS","Jack Barstow","Midland","MI","USA",43.66291528,-84.261325
+"3CK","Lake In The Hills","Lake In The Hills","IL","USA",42.20680306,-88.32304028
+"3CM","James Clements Municipal","Bay City","MI","USA",43.54691667,-83.89550222
+"3CU","Cable Union","Cable","WI","USA",46.19424889,-91.24640972
+"3D2","Ephraim/Gibraltar","Ephraim","WI","USA",45.13535778,-87.18586556
+"3D4","Frankfort Dow Memorial","Frankfort","MI","USA",44.62506389,-86.20061944
+"3F3","De Soto Parish","Mansfield","LA","USA",32.07345972,-93.76551889
+"3F4","Vivian","Vivian","LA","USA",32.86133333,-94.01015361
+"3F7","Jones Memorial","Bristow","OK","USA",35.80685278,-96.42185556
+"3FM","Fremont Municipal","Fremont","MI","USA",43.43890528,-85.99478
+"3FU","Faulkton Municipal","Faulkton","SD","USA",45.03191861,-99.11566417
+"3G3","Wadsworth Municipal","Wadsworth","OH","USA",41.00158222,-81.75513111
+"3G4","Ashland County","Ashland","OH","USA",40.90297222,-82.25563889
+"3G7","Williamson/Sodus","Williamson","NY","USA",43.23472222,-77.12097222
+"3GM","Grand Haven Memorial Airpark","Grand Haven","MI","USA",43.03404639,-86.1981625
+"3I2","Mason County","Point Pleasant","WV","USA",38.91463889,-82.09858333
+"3I7","Phillipsburg","Phillipsburg","OH","USA",39.91344194,-84.40030889
+"3J1","Ridgeland","Ridgeland","SC","USA",32.49268694,-80.99233028
+"3J7","Greene County Airpark","Greensboro","GA","USA",33.59766667,-83.139
+"3JC","Freeman ","Junction City","KS","USA",39.04327556,-96.84328694
+"3K3","Syracuse-Hamilton County Municipal","Syracuse","KS","USA",37.99167972,-101.7462822
+"3K6","St Louis-Metro East","Troy/Marine/St. Louis","IL","USA",38.73290861,-89.80656722
+"3K7","Mark Hoard Memorial","Leoti","KS","USA",38.45696333,-101.3532161
+"3LC","Logan County","Lincoln","IL","USA",40.15847222,-89.33497222
+"3LF","Litchfield Municipal","Litchfield","IL","USA",39.16635306,-89.67489694
+"3M7","Lafayette Municipal","Lafayette","TN","USA",36.518375,-86.05828083
+"3M8","North Pickens ","Reform","AL","USA",33.38900611,-88.00557806
+"3M9","Warren Municipal","Warren","AR","USA",33.56044333,-92.08538861
+"3MY","Mt. Hawley Auxiliary","Peoria","IL","USA",40.79525917,-89.6134025
+"3N6","Old Bridge","Old Bridge","NJ","USA",40.32988667,-74.34678694
+"3N8","Mahnomen County ","Mahnomen","MN","USA",47.25996056,-95.92809778
+"3ND0","Northwood Municipal","Northwood","ND","USA",47.72423333,-97.59042222
+"3O1","Gustine","Gustine","CA","USA",37.26271722,-120.9632586
+"3O3","Municipal","Purcell","OK","USA",34.97979444,-97.38586167
+"3O4","Sayre Municipal","Sayre","OK","USA",35.16755222,-99.65787361
+"3O5","Walters Municipal","Walters","OK","USA",34.37258444,-98.40588583
+"3O7","Hollister Municipal","Hollister","CA","USA",36.89334528,-121.4102706
+"3O9","Grand Lake Regional","Afton","OK","USA",36.5775775,-94.86190028
+"3R0","Beeville Municipal","Beeville","TX","USA",28.36455528,-97.79208194
+"3R1","Bay City Municipal","Bay City","TX","USA",28.973255,-95.86345528
+"3R2","Le Gros Memorial","Crowley","LA","USA",30.16173611,-92.48396111
+"3R4","Hart","Many","LA","USA",31.54489667,-93.48645306
+"3R7","Jennings","Jennings","LA","USA",30.24269333,-92.67344778
+"3S4","Illinois Valley","Illinois Valley (Cave Junction)","OR","USA",42.10372417,-123.6822911
+"3S8","Grants Pass","Grants Pass","OR","USA",42.51011722,-123.3879894
+"3S9","Condon State-Pauling ","Condon","OR","USA",45.24651889,-120.1664233
+"3SG","Harry W Browne","Saginaw - H.Browne","MI","USA",43.43341028,-83.86245833
+"3SQ","St Charles","St Charles","MO","USA",38.84866139,-90.50011833
+"3T3","Boyceville Municipal ","Boyceville","WI","USA",45.042185,-92.0293475
+"3T5","Fayette Regional Air Center","La Grange","TX","USA",29.90930556,-96.9505
+"3TR","Jerry Tyler Memorial","Niles","MI","USA",41.83590806,-86.22517611
+"3U3","Bowman ","Anaconda","MT","USA",46.15313278,-112.86784
+"3U7","Benchmark","Benchmark","MT","USA",47.48133194,-112.8697678
+"3U8","Big Sandy","Big Sandy","MT","USA",48.16247972,-110.1132631
+"3V4","Fort Morgan Municipal","Fort Morgan","CO","USA",40.33423194,-103.8039508
+"3WO","Shawano Municipal","Shawano","WI","USA",44.78777778,-88.56152444
+"3Y2","George L Scott Municipal","West Union","IA","USA",42.98508917,-91.79060417
+"3Y3","Winterset Madison County","Winterset","IA","USA",41.36276778,-94.02106194
+"3Z9","Haines SPB","Haines","AK","USA",59.23495111,-135.4407181
+"40J","Perry-Foley","Perry","FL","USA",30.06927778,-83.58058333
+"40N","Chester Cty-G O Carlson","Coatesville","PA","USA",39.97897222,-75.86547222
+"40U","Manila","Manila","UT","USA",40.98607,-109.6784811
+"41U","Manti-Ephraim","Manti","UT","USA",39.32912833,-111.6146397
+"42A","Melbourne Municipal","Melbourne","AR","USA",36.07079222,-91.82914667
+"42C","White Cloud","White Cloud","MI","USA",43.55974139,-85.77421944
+"42J","Keystone Airpark","Keystone Heights","FL","USA",29.84475,-82.04752778
+"42S","Poplar","Poplar","MT","USA",48.11595861,-105.1821928
+"43A","Montgomery County","Star","NC","USA",35.38819528,-79.79281667
+"44B","Dover/Foxcroft","Dover-Foxcroft","ME","USA",45.18338806,-69.2328225
+"44N","Sky Acres","Millbrook","NY","USA",41.70742861,-73.73802889
+"45J","Rockingham-Hamlet","Rockingham","NC","USA",34.89107083,-79.75905806
+"45OH","North Bass Island","North Bass Island","OH","USA",41.71932528,-82.82196917
+"45R","Kountz - Hawthorne ","Kountze/Silsbee","TX","USA",30.33633806,-94.25754361
+"46A","Blairsville","Blairsville","GA","USA",34.85508722,-83.996855
+"46D","Carrington Municipal","Carrington","ND","USA",47.45111111,-99.15111111
+"46N","Sky Park","Red Hook","NY","USA",41.98458333,-73.83596556
+"47A","Cherokee County","Canton","GA","USA",34.31058333,-84.42391667
+"47J","Cheraw Municipal","Cheraw","SC","USA",34.71258333,-79.95794444
+"47N","Central Jersey Regional","Manville","NJ","USA",40.52438417,-74.59839194
+"47V","Curtis Municipal","Curtis","NE","USA",40.63750778,-100.4712539
+"48A","Cochran","Cochran","GA","USA",32.39936111,-83.27591667
+"48D","Clare Municipal","Clare","MI","USA",43.83111111,-84.74133333
+"48I","Braxton County","Sutton","WV","USA",38.68704444,-80.65176083
+"48K","Ness City Municipal","Ness City","KS","USA",38.47110278,-99.90806667
+"48S","Harlem","Harlem","MT","USA",48.56666472,-108.7729339
+"48V","Tri-County","Erie","CO","USA",40.010225,-105.047975
+"49A","Gilmer County","Ellijay","GA","USA",34.62786417,-84.52492889
+"49T","Downtown Heliport","Dallas","TX","USA",32.77333333,-96.80027778
+"49X","Chemehuevi Valley","Chemehuevi Valley","CA","USA",34.52751083,-114.4310697
+"49Y","Fillmore County","Preston","MN","USA",43.67676,-92.17973444
+"4A2","Atmautluak","Atmautluak","AK","USA",60.86674556,-162.2731389
+"4A4","Cornelius-Moore ","Cedartown","GA","USA",34.01869444,-85.14647222
+"4A5","Marshall-Searcy County","Marshall","AR","USA",35.89893667,-92.65588611
+"4A6","Scottsboro Municipal","Scottsboro","AL","USA",34.68897278,-86.0058125
+"4A7","Clayton County","Hampton","GA","USA",33.38911111,-84.33236111
+"4A9","Isbell ","Fort Payne","AL","USA",34.4728925,-85.72221722
+"4B0","South Albany","South Bethlehem","NY","USA",42.56072611,-73.83395639
+"4B1","Duanesburg","Duanesburg","NY","USA",42.75840889,-74.13290472
+"4B6","Ticonderoga Muni","Ticonderoga","NY","USA",43.87700278,-73.41317639
+"4B7","Schroon Lake","Schroon Lake","NY","USA",43.86256083,-73.74262972
+"4B8","Robertson ","Plainville","CT","USA",41.69037667,-72.8648225
+"4B9","Simsbury Tri-Town","Simsbury","CT","USA",41.91676389,-72.77731778
+"4C8","Albia Municipal","Albia","IA","USA",40.99445361,-92.76297194
+"4D0","Abrams Municipal","Grandledge","MI","USA",42.77420167,-84.73309806
+"4D9","Alma Municipal","Alma","NE","USA",40.11389972,-99.34565306
+"4F2","Panola County-Sharpe ","Carthage","TX","USA",32.17608333,-94.29880556
+"4F4","Gilmer-Upshur County","Gilmer","TX","USA",32.699,-94.94886111
+"4G1","Greenville Muni","Greenville","PA","USA",41.44683167,-80.39126167
+"4G2","Hamburg Inc.","Hamburg","NY","USA",42.7008925,-78.91475694
+"4G5","Monroe County","Woodsfield","OH","USA",39.77904472,-81.10277222
+"4G6","Hornell Muni","Hornell","NY","USA",42.38214444,-77.6821125
+"4G7","Fairmont Muni","Fairmont","WV","USA",39.44816667,-80.16702778
+"4I0","Mingo County","Williamson","WV","USA",37.68760139,-82.26097306
+"4I3","Knox County","Mount Vernon","OH","USA",40.32872222,-82.52377778
+"4I7","Putnam County","Greencastle","IN","USA",39.63359556,-86.8138325
+"4I9","Morrow County","Mt. Gilead","OH","USA",40.52452778,-82.85005556
+"4J1","Brantley County","Nahunta","GA","USA",31.21272417,-81.90539083
+"4J2","Berrien County","Nashville","GA","USA",31.21255556,-83.22627778
+"4J5","Quitman-Brooks County","Quitman","GA","USA",30.80575139,-83.58654889
+"4J6","St Marys","St Marys","GA","USA",30.75468028,-81.55731917
+"4K0","Pedro Bay","Pedro Bay","AK","USA",59.78960972,-154.1238331
+"4K5","Ouzinkie","Ouzinkie","AK","USA",57.92287611,-152.5005111
+"4K6","Bloomfield Municipal","Bloomfield","IA","USA",40.73210556,-92.42826889
+"4KA","Tununak","Tununak","AK","USA",60.57559667,-165.2731272
+"4M1","Carroll County","Berryville","AR","USA",36.38340333,-93.61685667
+"4M3","Carlisle Municipal","Carlisle","AR","USA",34.80823,-91.71205083
+"4M4","Clinton Municipal","Clinton","AR","USA",35.59785528,-92.45182472
+"4M7","Russellville-Logan County","Russellville","KY","USA",36.79991667,-86.81016667
+"4M8","Clarendon Municipal","Clarendon","AR","USA",34.64870694,-91.39457111
+"4M9","Corning Municipal","Corning","AR","USA",36.40423139,-90.64792639
+"4N1","Greenwood Lake","West Milford","NJ","USA",41.12854806,-74.34584611
+"4O3","Blackwell-Tonkawa Municipal","Blackwell-Tonkawa","OK","USA",36.74511583,-97.34959972
+"4O4","McCurtain County Regional","Idabel","OK","USA",33.909325,-94.85835278
+"4O5","Cherokee Municipal","Cherokee","OK","USA",36.78336306,-98.35035083
+"4PH","Polacca","Polacca","AZ","USA",35.79167222,-110.4234653
+"4R1","I H Bass Jr Memorial","Lumberton","MS","USA",31.01546028,-89.48256556
+"4R3","Jackson Municipal","Jackson","AL","USA",31.47210861,-87.89472083
+"4R4","Fairhope Municipal","Fairhope","AL","USA",30.4621125,-87.87801972
+"4R5","Madeline Island","La Pointe","WI","USA",46.78865556,-90.75866944
+"4R7","Eunice","Eunice","LA","USA",30.46628389,-92.42379917
+"4R9","Dauphin Island","Dauphin Island","AL","USA",30.26048083,-88.12749972
+"4S1","Gold Beach Muni","Gold Beach","OR","USA",42.41344444,-124.4242742
+"4S2","Hood River","Hood River","OR","USA",45.67261833,-121.5364625
+"4S3","Joseph State","Joseph","OR","USA",45.35709583,-117.2532244
+"4S9","Portland-Mulino","Mulino (Portland)","OR","USA",45.21632417,-122.5900839
+"4SD","Reno/Stead","Reno","NV","USA",39.66738111,-119.8754169
+"4T6","Mid-Way","Midlothian-Waxahachie","TX","USA",32.45609722,-96.91240972
+"4U3","Liberty County","Chester","MT","USA",48.51072222,-110.9908639
+"4U6","Circle Town County","Circle","MT","USA",47.41861972,-105.5619431
+"4V0","Rangely","Rangely","CO","USA",40.09469917,-108.7612172
+"4V1","Johnson ","Walsenburg","CO","USA",37.69640056,-104.7838747
+"4V9","Antelope County","Neligh","NE","USA",42.11222889,-98.0386775
+"4W1","Elizabethtown Municipal","Elizabethtown","NC","USA",34.60183722,-78.57973306
+"4Z4","Holy Cross","Holy Cross","AK","USA",62.18829583,-159.7749503
+"4Z7","Hyder SPB","Hyder","AK","USA",55.90331972,-130.0067031
+"50I","Kentland Municipal","Kentland","IN","USA",40.75873222,-87.42821917
+"50J","Berkeley County","Moncks Corner","SC","USA",33.18605556,-80.03563889
+"50K","Pawnee City Municipal","Pawnee City","NE","USA",40.11611111,-96.19445278
+"50R","Lockhart Municipal","Lockhart","TX","USA",29.85033333,-97.67241667
+"51D","Edgeley Municipal ","Edgeley","ND","USA",46.34858333,-98.73555556
+"51Z","Minto (New)","Minto","AK","USA",65.14370889,-149.3699647
+"52A","Madison Municipal","Madison","GA","USA",33.61212528,-83.46044333
+"52E","Timberon ","Timberon","NM","USA",32.63388889,-105.6863889
+"52J","Lee County","Bishopville","SC","USA",34.24459889,-80.23729333
+"53A","Dr. C.P. Savage, Sr.","Montezuma","GA","USA",32.302,-84.00747222
+"53K","Osage City Municipal","Osage City","KS","USA",38.63334222,-95.80859806
+"54J","Defuniak Springs","Defuniak Springs","FL","USA",30.7313,-86.15160833
+"55D","Grayling Army Airfield","Grayling","MI","USA",44.68032028,-84.72886278
+"55J","Fernandina Beach Municipal","Fernandina Beach","FL","USA",30.61170083,-81.462345
+"55S","Packwood","Packwood","WA","USA",46.60400083,-121.6778664
+"56D","Wyandot County","Upper Sandusky","OH","USA",40.88336139,-83.3145325
+"56M","Warsaw Municipal","Warsaw","MO","USA",38.34688889,-93.345425
+"56S","Seaside Municipal","Seaside","OR","USA",46.01649694,-123.9054167
+"57B","Islesboro","Islesboro","ME","USA",44.30285556,-68.91058722
+"57C","East Troy Municipal","East Troy","WI","USA",42.79711111,-88.3725
+"59B","Newton ","Jackman","ME","USA",45.63199111,-70.24728944
+"5A4","Okolona Mun.-Richard M. Stovall ","Okolona","MS","USA",34.01580528,-88.72618944

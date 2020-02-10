@@ -4,15 +4,27 @@
 \alias{ggduo}
 \title{ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame}
 \usage{
-ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data), title = NULL, types = list(continuous =
-  "smooth_loess", comboVertical = "box_no_facet", comboHorizontal = "facethist",
-  discrete = "ratio"), axisLabels = c("show", "none"),
+ggduo(
+  data,
+  mapping = NULL,
+  columnsX = 1:ncol(data),
+  columnsY = 1:ncol(data),
+  title = NULL,
+  types = list(continuous = "smooth_loess", comboVertical = "box_no_facet",
+    comboHorizontal = "facethist", discrete = "ratio"),
+  axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
-  columnLabelsY = colnames(data[columnsY]), progress = NULL,
-  labeller = "label_value", switch = NULL, xlab = NULL, ylab = NULL,
-  showStrips = NULL, legend = NULL, cardinality_threshold = 15,
-  legends = stop("deprecated"))
+  columnLabelsY = colnames(data[columnsY]),
+  labeller = "label_value",
+  switch = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  showStrips = NULL,
+  legend = NULL,
+  cardinality_threshold = 15,
+  progress = NULL,
+  legends = stop("deprecated")
+)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -29,8 +41,6 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 
 \item{columnLabelsX, columnLabelsY}{label names to be displayed.  Defaults to names of columns being used.}
 
-\item{progress}{boolean to determine if progress bars should be displayed.  A \code{NULL} value uses \code{\link{ggmatrix_gtable}}'s \code{progress} logic.}
-
 \item{labeller}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
 
 \item{switch}{switch parameter for facet_grid. See \code{ggplot2::\link[ggplot2]{facet_grid}}.  By default, the labels are displayed on the top and right of the plot. If \code{"x"}, the top labels will be displayed to the bottom. If \code{"y"}, the right-hand side labels will be displayed to the left. Can also be set to \code{"both"}}
@@ -40,6 +50,8 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 \item{legend}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
 
 \item{cardinality_threshold}{maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15}
+
+\item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
 \item{legends}{deprecated}
 }
@@ -143,8 +155,8 @@ p_(ggpairs(psychademic, columns = academic_variables))
 
 ## Between correlation
 loess_with_cor <- function(data, mapping, ..., method = "pearson") {
-  x <- eval(mapping$x, data)
-  y <- eval(mapping$y, data)
+  x <- eval_data_col(data, mapping$x)
+  y <- eval_data_col(data, mapping$y)
   cor <- cor(x, y, method = method)
   ggally_smooth_loess(data, mapping, ...) +
     ggplot2::geom_label(

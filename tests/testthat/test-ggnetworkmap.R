@@ -15,7 +15,9 @@ rq(ggplot2)
 
 rq(intergraph) # test igraph conversion
 
-airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
+# first 500 rows of http://datasets.flowingdata.com/tuts/maparcs/airports.csv
+# avoids downloading the dataset to test the package
+airports <- read.csv("data/airports.csv", header = TRUE)
 rownames(airports) <- airports$iata
 
 # select some random flights
@@ -67,10 +69,10 @@ test_that("node groups", {
                     node.group = degree)
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$colour), ".ngroup")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".ngroup")
 
   p <- ggnetworkmap(usa, flights, size = 2, great.circles = TRUE, node.color = "red")
-  expect_equal(as.character(get("aes_params", envir = p$layers[[3]])$colour), "red")
+  expect_equal(mapping_string(get("aes_params", envir = p$layers[[3]])$colour), "\"red\"")
 })
 
 test_that("ring groups", {
@@ -78,8 +80,8 @@ test_that("ring groups", {
                     node.group = degree, ring.group = mygroup)
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
 })
 
 test_that("segment color", {
@@ -90,9 +92,12 @@ test_that("segment color", {
   )
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$colour), "cornflowerblue")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
 
 })
 
@@ -105,10 +110,13 @@ test_that("weight", {
 
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$colour), "cornflowerblue")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$size), ".weight")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
 
 
 })
@@ -122,11 +130,14 @@ test_that("labels", {
 
   expect_equal(length(p$layers), 4)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$colour), "cornflowerblue")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$size), ".weight")
-  expect_equal(as.character(get("mapping", envir = p$layers[[4]])$label), ".label")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[4]])$label), ".label")
 
   expect_true(is.null(get("aes_params", envir = p$layers[[2]])$arrow))
 })
@@ -139,11 +150,14 @@ test_that("arrows", {
 
   expect_equal(length(p$layers), 4)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
-  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$colour), "cornflowerblue")
-  expect_equal(as.character(get("mapping", envir = p$layers[[3]])$size), ".weight")
-  expect_equal(as.character(get("mapping", envir = p$layers[[4]])$label), ".label")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
+    "\"cornflowerblue\""
+  )
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[4]])$label), ".label")
 
   # look at geom_params for arrow info
   expect_true(is.list(get("geom_params", envir = p$layers[[2]])$arrow))

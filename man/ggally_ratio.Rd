@@ -4,8 +4,13 @@
 \alias{ggally_ratio}
 \title{Plots a mosaic plot}
 \usage{
-ggally_ratio(data, mapping = do.call(ggplot2::aes_string,
-  as.list(colnames(data)[1:2])), ..., floor = 0, ceiling = NULL)
+ggally_ratio(
+  data,
+  mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
+  ...,
+  floor = 0,
+  ceiling = NULL
+)
 }
 \arguments{
 \item{data}{data set using}

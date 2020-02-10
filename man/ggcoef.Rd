@@ -4,12 +4,25 @@
 \alias{ggcoef}
 \title{ggcoef - Plot Model Coefficients with broom and ggplot2}
 \usage{
-ggcoef(x, mapping = aes_string(y = "term", x = "estimate"), conf.int = TRUE,
-  conf.level = 0.95, exponentiate = FALSE, exclude_intercept = FALSE,
-  vline = TRUE, vline_intercept = "auto", vline_color = "gray50",
-  vline_linetype = "dotted", vline_size = 1, errorbar_color = "gray25",
-  errorbar_height = 0, errorbar_linetype = "solid", errorbar_size = 0.5,
-  ...)
+ggcoef(
+  x,
+  mapping = aes_string(y = "term", x = "estimate"),
+  conf.int = TRUE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  exclude_intercept = FALSE,
+  vline = TRUE,
+  vline_intercept = "auto",
+  vline_color = "gray50",
+  vline_linetype = "dotted",
+  vline_size = 1,
+  errorbar_color = "gray25",
+  errorbar_height = 0,
+  errorbar_linetype = "solid",
+  errorbar_size = 0.5,
+  sort = c("none", "ascending", "decending"),
+  ...
+)
 }
 \arguments{
 \item{x}{a model object to be tidied with \code{\link[broom]{tidy}} or a data frame (see Details)}
@@ -45,6 +58,8 @@ if \code{x} is not a data frame)}
 
 \item{errorbar_size}{size of the error bars}
 
+\item{sort}{\code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"decending"} sort by decreasing coefficient value}
+
 \item{...}{additional arguments sent to \code{\link[ggplot2]{geom_point}}}
 }
 \description{
@@ -54,9 +69,11 @@ Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
 library(broom)
 reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
 ggcoef(reg)
-
-d <- as.data.frame(Titanic)
+\donttest{d <- as.data.frame(Titanic)
 reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
 ggcoef(reg2, exponentiate = TRUE)
-ggcoef(reg2, exponentiate = TRUE, exclude_intercept = TRUE, errorbar_height = .2, color = "blue")
+ggcoef(
+  reg2, exponentiate = TRUE, exclude_intercept = TRUE,
+  errorbar_height = .2, color = "blue", sort = "ascending"
+)}
 }

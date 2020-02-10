@@ -230,12 +230,12 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param types see Details
 #' @param axisLabels either "show" to display axisLabels or "none" for no axis labels
 #' @param columnLabelsX,columnLabelsY label names to be displayed.  Defaults to names of columns being used.
-#' @template ggmatrix-progress-param
 #' @template ggmatrix-labeller-param
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
+#' @template ggmatrix-progress
 #' @param legends deprecated
 #' @export
 #' @examples
@@ -320,8 +320,8 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'
 #' ## Between correlation
 #' loess_with_cor <- function(data, mapping, ..., method = "pearson") {
-#'   x <- eval(mapping$x, data)
-#'   y <- eval(mapping$y, data)
+#'   x <- eval_data_col(data, mapping$x)
+#'   y <- eval_data_col(data, mapping$y)
 #'   cor <- cor(x, y, method = method)
 #'   ggally_smooth_loess(data, mapping, ...) +
 #'     ggplot2::geom_label(
@@ -434,7 +434,6 @@ ggduo <- function(
   axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),
-  progress = NULL,
   labeller = "label_value",
   switch = NULL,
   xlab = NULL,
@@ -442,6 +441,7 @@ ggduo <- function(
   showStrips = NULL,
   legend = NULL,
   cardinality_threshold = 15,
+  progress = NULL,
   legends = stop("deprecated")
 ) {
 
@@ -538,7 +538,6 @@ ggduo <- function(
     ncol = length(columnsX),
     xAxisLabels = columnLabelsX,
     yAxisLabels = columnLabelsY,
-    progress = progress,
     labeller = labeller,
     switch = switch,
     showStrips = showStrips,
@@ -549,6 +548,7 @@ ggduo <- function(
     ylab = ylab,
     data = data_,
     gg = NULL,
+    progress = progress,
     legend = legend
   )
 
@@ -611,12 +611,12 @@ ggduo <- function(
 #' @param ... deprecated. Please use \code{mapping}
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
-#' @template ggmatrix-progress-param
 #' @template ggmatrix-labeller-param
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
+#' @template ggmatrix-progress
 #' @param legends deprecated
 #' @keywords hplot
 #' @import ggplot2
@@ -738,12 +738,12 @@ ggpairs <- function(
   ylab = NULL,
   axisLabels = c("show", "internal", "none"),
   columnLabels = colnames(data[columns]),
-  progress = NULL,
   labeller = "label_value",
   switch = NULL,
   showStrips = NULL,
   legend = NULL,
   cardinality_threshold = 15,
+  progress = NULL,
   legends = stop("deprecated")
 ){
 
@@ -837,7 +837,6 @@ ggpairs <- function(
     ncol = length(columns),
     xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
     yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
-    progress = progress,
     labeller = labeller,
     switch = switch,
     showStrips = showStrips,
@@ -848,6 +847,7 @@ ggpairs <- function(
     ylab = ylab,
     data = data_,
     gg = NULL,
+    progress = progress,
     legend = legend
   )
 

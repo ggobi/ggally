@@ -155,6 +155,7 @@ if (getRversion() >= "2.15.1") {
 #'
 #' # random groups
 #' g <- sample(letters[ 1:3 ], 10, replace = TRUE)
+#' g
 #'
 #' # color palette
 #' p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
@@ -205,8 +206,7 @@ ggnet <- function(
 
   # -- packages ----------------------------------------------------------------
 
-  require_pkgs(c("network", "sna", "scales"))
-
+  require_namespaces(c("network", "sna", "scales"))
   # -- deprecations ------------------------------------------------------------
 
   if (length(mode) == 1 && mode == "geo") {
@@ -241,9 +241,9 @@ ggnet <- function(
 
   # -- conversion to network class ---------------------------------------------
 
-  if (class(net) == "igraph" && "intergraph" %in% rownames(installed.packages())) {
+  if (inherits(net, "igraph") && "intergraph" %in% rownames(installed.packages())) {
     net = intergraph::asNetwork(net)
-  } else if (class("net") == "igraph") {
+  } else if (inherits(net, "igraph")) {
     stop("install the 'intergraph' package to use igraph objects with ggnet")
   }
 
@@ -257,8 +257,8 @@ ggnet <- function(
 
   # -- network functions -------------------------------------------------------
 
-  get_v = get("%v%", envir = as.environment("package:network"))
-  get_e = get("%e%", envir = as.environment("package:network"))
+  get_v = utils::getFromNamespace("%v%", ns = "network")
+  get_e = utils::getFromNamespace("%e%", ns = "network")
 
   set_mode = function(x, mode = network::get.network.attribute(x, "bipartite")) {
     c(rep("actor", mode), rep("event", n_nodes - mode))
@@ -266,7 +266,7 @@ ggnet <- function(
 
   set_node = function(x, value, mode = TRUE) {
 
-    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+    if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
       stop(paste("incorrect", value, "value"))
     } else if (is.numeric(x) && any(x < 0)) {
       stop(paste("incorrect", value, "value"))
@@ -274,9 +274,9 @@ ggnet <- function(
       x
     } else if (length(x) > 1) {
       stop(paste("incorrect", value, "length"))
-    } else if (x %in% v_attr) {
+    } else if (any(x %in% v_attr)) {
       get_v(net, x)
-    } else if (mode && x == "mode" & is_bip) {
+    } else if (mode && identical(x, "mode") && is_bip) {
       set_mode(net)
     } else {
       x
@@ -286,7 +286,7 @@ ggnet <- function(
 
   set_edge = function(x, value) {
 
-    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+    if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
       stop(paste("incorrect", value, "value"))
     } else if (is.numeric(x) && any(x < 0)) {
       stop(paste("incorrect", value, "value"))
@@ -294,7 +294,7 @@ ggnet <- function(
       x
     } else if (length(x) > 1) {
       stop(paste("incorrect", value, "length"))
-    } else if (x %in% e_attr) {
+    } else if (any(x %in% e_attr)) {
       get_e(net, x)
     } else {
       x
@@ -536,11 +536,13 @@ ggnet <- function(
   # -- node placement ----------------------------------------------------------
 
   if (is.character(mode) && length(mode) == 1) {
-
     mode = paste0("gplot.layout.", mode)
-    if (!exists(mode)) {
+
+    snaNamespace = asNamespace("sna")
+    if (!exists(mode, envir = snaNamespace)) {
       stop(paste("unsupported placement method:", mode))
     }
+    mode = get(mode, envir = snaNamespace)
 
     # sna placement algorithm
     xy = network::as.matrix.network.adjacency(net)
@@ -563,8 +565,8 @@ ggnet <- function(
 
   }
 
-  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))
-  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[,1]
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[,1]
 
   data = cbind(data, xy)
 

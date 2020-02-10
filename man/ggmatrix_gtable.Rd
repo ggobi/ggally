@@ -4,18 +4,19 @@
 \alias{ggmatrix_gtable}
 \title{Print ggmatrix object}
 \usage{
-ggmatrix_gtable(pm, ..., progress = pm$progress \%||\% (interactive() &&
-  (pm$ncol * pm$nrow) > 15),
-  progress_format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ")
+ggmatrix_gtable(
+  pm,
+  ...,
+  progress = NULL,
+  progress_format = formals(ggmatrix_progress)$format
+)
 }
 \arguments{
 \item{pm}{ggmatrix object to be plotted}
 
 \item{...}{ignored}
 
-\item{progress}{boolean to determine if a progress bar should be displayed. This defaults to interactive sessions only with more than 15 panels.}
-
-\item{progress_format}{string supplied directly to \code{progress::\link[progress]{progress_bar}(format = progress_format)}. Defaults to display the plot number, progress bar, percent complete, and estimated time to finish.}
+\item{progress, progress_format}{Please use the 'progress' parameter in your ggmatrix-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.}
 }
 \description{
 Specialized method to print the ggmatrix object-

@@ -11,17 +11,58 @@ if (getRversion() >= "2.15.1") {
 
 
 # retrieve the evaulated data column given the aes (which could possibly do operations)
+#' Evaluate data column
+#' @param data data set to evaluate the data with
+#' @param aes_col Single value from an \code{ggplot2::\link[ggplot2]{aes}(...)} object
+#' @return Aes mapping with the x and y values switched
+#' @export
+#' @examples
+#' mapping <- ggplot2::aes(Petal.Length)
+#' eval_data_col(iris, mapping$x)
 eval_data_col <- function(data, aes_col) {
-  eval(aes_col, data)
+  rlang::eval_tidy(aes_col, data)
+}
+#' Aes name
+#' @param aes_col Single value from \code{ggplot2::\link[ggplot2]{aes}(...)}
+#' @return character string
+#' @export
+#' @examples
+#' mapping <- ggplot2::aes(Petal.Length)
+#' mapping_string(mapping$x)
+mapping_string <- function(aes_col) {
+  gsub("^~", "", deparse(aes_col, 500L))
 }
 
 # is categories on the left?
-is_character_column <- is_horizontal <- function(data, mapping, val = "y") {
+#' Check if plot is horizontal
+#'
+#' @param data data used in ggplot2 plot
+#' @param mapping ggplot2 \code{aes()} mapping
+#' @param val key to retrieve from \code{mapping}
+#' @return Boolean determining if the data is a character-like data
+#' @export
+#' @rdname is_horizontal
+#' @examples
+#' is_horizontal(iris, ggplot2::aes(Sepal.Length, Species)) # TRUE
+#' is_horizontal(iris, ggplot2::aes(Sepal.Length, Species), "x") # FALSE
+#' is_horizontal(iris, ggplot2::aes(Sepal.Length, Sepal.Width)) # FALSE
+is_horizontal <- function(data, mapping, val = "y") {
   yData <- eval_data_col(data, mapping[[val]])
 
-  is.factor(yData) || is.character(yData)
+  is.factor(yData) || is.character(yData) || is.logical(yData)
 }
+#' @export
+#' @rdname is_horizontal
+is_character_column <- is_horizontal
 
+#' Swap x and y mapping
+#' @param mapping output of \code{ggplot2::\link[ggplot2]{aes}(...)}
+#' @return Aes mapping with the x and y values switched
+#' @export
+#' @examples
+#' mapping <- ggplot2::aes(Petal.Length, Sepal.Width)
+#' mapping
+#' mapping_swap_x_y(mapping)
 mapping_swap_x_y <- function(mapping) {
   tmp <- mapping$x
   mapping$x <- mapping$y
@@ -69,7 +110,7 @@ ggally_points <- function(data, mapping, ...){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param ... other arguments to add to geom_point
+#' @param formula,... other arguments to add to geom_smooth
 #' @param method,se parameters supplied to \code{\link[ggplot2]{geom_smooth}}
 #' @param shrink boolean to determine if y range is reduced to range of points or points and error ribbon
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -81,16 +122,16 @@ ggally_points <- function(data, mapping, ...){
 #'  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
-ggally_smooth <- function(data, mapping, ..., method = "lm", se = TRUE, shrink = TRUE) {
+ggally_smooth <- function(data, mapping, ..., method = "lm", formula = y ~ x, se = TRUE, shrink = TRUE) {
 
   p <- ggplot(data = data, mapping)
 
   p <- p + geom_point(...)
 
   if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
-    p <- p + geom_smooth(method = method, se = se)
+    p <- p + geom_smooth(method = method, se = se, formula = formula)
   } else {
-    p <- p + geom_smooth(method = method, se = se, colour = I("black"))
+    p <- p + geom_smooth(method = method, se = se, formula = formula, colour = I("black"))
   }
 
   if (isTRUE(shrink)) {
@@ -247,39 +288,25 @@ ggally_cor <- function(
 
   # mapping$x <- mapping$y <- NULL
 
-  xCol <- deparse(mapping$x)
-  yCol <- deparse(mapping$y)
+  xData <- eval_data_col(data, mapping$x)
+  yData <- eval_data_col(data, mapping$y)
 
-  if (is_date(data[[xCol]]) || is_date(data[[yCol]])) {
-
-    # make sure it's a data.frame, as data.tables don't work well
-    if (! identical(class(data), "data.frame")) {
-      data <- fix_data(data)
-    }
-
-    for (col in c(xCol, yCol)) {
-      if (is_date(data[[col]])) {
-        data[[col]] <- as.numeric(data[[col]])
-      }
-    }
+  if (is_date(xData)) {
+    xData <- as.numeric(xData)
   }
-
-  if (is.numeric(eval_data_col(data, mapping$colour))) {
+  if (is_date(yData)) {
+    yData <- as.numeric(yData)
+  }
+  colorData <- eval_data_col(data, mapping$colour)
+  if (is.numeric(colorData)) {
     stop("ggally_cor: mapping color column must be categorical, not numeric")
   }
 
-  colorCol <- deparse(mapping$colour)
-  singleColorCol <- ifelse(is.null(colorCol), NULL, paste(colorCol, collapse = ""))
-
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
-    if (length(colorCol) > 0) {
-      if (singleColorCol %in% colnames(data)) {
-        rows <- complete.cases(data[c(xCol, yCol, colorCol)])
-      } else {
-        rows <- complete.cases(data[c(xCol, yCol)])
-      }
+    if (!is.null(colorData) && (length(colorData) == length(xData))) {
+      rows <- complete.cases(xData, yData, colorData)
     } else {
-      rows <- complete.cases(data[c(xCol, yCol)])
+      rows <- complete.cases(xData, yData)
     }
 
     if (any(!rows)) {
@@ -290,54 +317,63 @@ ggally_cor <- function(
         warning("Removing 1 row that contained a missing value")
       }
     }
-    data <- data[rows, ]
+
+    if (!is.null(colorData) && (length(colorData) == length(xData))) {
+      colorData <- colorData[rows]
+    }
+    xData <- xData[rows]
+    yData <- yData[rows]
   }
 
-  xVal <- data[[xCol]]
-  yVal <- data[[yCol]]
+  xVal <- xData
+  yVal <- yData
 
-  if (length(names(mapping)) > 0){
-    for (i in length(names(mapping)):1){
-      # find the last value of the aes, such as cyl of as.factor(cyl)
-      tmp_map_val <- deparse(mapping[names(mapping)[i]][[1]])
-      if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
-        mapping[[names(mapping)[i]]] <- NULL
+  # if the mapping has to deal with the data, remove it
+  if (packageVersion("ggplot2") > "2.2.1") {
+    for (mappingName in names(mapping)) {
+      itemData <- eval_data_col(data, mapping[[mappingName]])
+      if (!inherits(itemData, "AsIs")) {
+        mapping[[mappingName]] <- NULL
+      }
+    }
+  } else {
+    if (length(names(mapping)) > 0){
+      for (i in length(names(mapping)):1){
+        # find the last value of the aes, such as cyl of as.factor(cyl)
+        tmp_map_val <- deparse(mapping[names(mapping)[i]][[1]])
+        if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
+          mapping[[names(mapping)[i]]] <- NULL
 
-      if (length(names(mapping)) < 1){
-        mapping <- NULL
-        break;
+        if (length(names(mapping)) < 1){
+          mapping <- NULL
+          break;
+        }
       }
     }
   }
 
-
-  # splits <- str_c(
-  #   as.character(mapping$group), as.character(mapping$colour),
-  #   sep = ", ", collapse = ", "
-  # )
-  # splits <- str_c(colorCol, sep = ", ", collapse = ", ")
-  if (length(colorCol) < 1) {
-    colorCol <- "ggally_NO_EXIST"
-  }
-
   if (
-    (singleColorCol != "ggally_NO_EXIST") &&
-    (singleColorCol %in% colnames(data))
+    !is.null(colorData) &&
+    !inherits(colorData, "AsIs")
   ) {
 
-    cord <- ddply(data, c(colorCol), function(x) {
-      cor_fn(x[[xCol]], x[[yCol]])
-    })
-    colnames(cord)[2] <- "ggally_cor"
+    cord <- ddply(
+      data.frame(x = xData, y = yData, color = colorData),
+      "color",
+      function(dt) {
+        cor_fn(dt$x, dt$y)
+      }
+    )
+    colnames(cord)[2] <- "correlation"
 
-    cord$ggally_cor <- signif(as.numeric(cord$ggally_cor), 3)
+    cord$correlation <- signif(as.numeric(cord$correlation), 3)
 
     # put in correct order
-    lev <- levels(data[[colorCol]])
+    lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
     for (i in 1:nrow(cord)) {
       for (j in seq_along(lev)){
-        if (identical(as.character(cord[i, colorCol]), as.character(lev[j]))) {
+        if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
         }
       }
@@ -346,8 +382,7 @@ ggally_cor <- function(
     # print(order(ord[ord >= 0]))
     # print(lev)
     cord <- cord[order(ord[ord >= 0]), ]
-
-    cord$label <- str_c(cord[[colorCol]], ": ", cord$ggally_cor)
+    cord$label <- str_c(cord$color, ": ", cord$correlation)
 
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
@@ -533,8 +568,7 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
     mapping <- mapping_swap_x_y(mapping)
   }
 
-  xVal <- deparse(mapping$x)
-  mapping$x <- 1
+  xVal <- mapping_string(mapping$x)
 
   p <- ggplot(data = data)
 
@@ -552,18 +586,9 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
   } else {
     p <- p +
       coord_flip() +
-      theme(
-        axis.text.y = element_text(
-          angle = 90,
-          vjust = 0,
-          colour = "grey50"
-        )
-      ) +
-      facet_grid(paste(xVal, " ~ .", sep = "")) +
+      facet_grid(paste(xVal, " ~ .", sep = ""), scales = "free_y") +
       theme(panel.spacing = unit(0.1, "lines"))
   }
-
-  p <- p + scale_x_continuous(xVal, labels = "", breaks = 1)
 
   p
 }
@@ -621,8 +646,8 @@ ggally_facethist <- function(data, mapping, ...){
     mapping <- mapping_swap_x_y(mapping)
   }
 
-  xVal <- deparse(mapping$x)
-  yVal <- deparse(mapping$y)
+  xVal <- mapping_string(mapping$x)
+  yVal <- mapping_string(mapping$y)
   mapping$y <- NULL
 
   p <- ggplot(data = data, mapping)
@@ -710,8 +735,9 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
     mapping <- mapping_swap_x_y(mapping)
   }
 
-  xVal <- deparse(mapping$x)
-  yVal <- deparse(mapping$y)
+  xVal <- mapping_string(mapping$x)
+  yVal <- mapping_string(mapping$y)
+  mappingY <- mapping$y # nolint
   mapping$y <- NULL # will be faceted
 
   p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
@@ -903,11 +929,9 @@ ggally_text <- function(
 
   # dont mess with color if it's already there
   if (!is.null(mapping$colour)) {
-    colour <- mapping$colour
-    # remove colour from the aesthetics, so legend isn't printed
-    mapping$colour <- NULL
     p <- p +
-       geom_text( label = label, mapping = mapping, colour = colour, ...)
+       geom_text( label = label, mapping = mapping, ...) +
+       guides(colour = FALSE)
   } else if ("colour" %in% names(aes(...))) {
     p <- p +
        geom_text( label = label, mapping = mapping, ...)
@@ -946,7 +970,14 @@ get_x_axis_labels <- function(p, xRange) {
     }
     NULL
   }
-  xAxisGrob <- get_raw_grob_by_name(axisTable, "axis.text.x")
+  name <-
+    if (packageVersion("ggplot2") >= 3.3) {
+      "title"
+    } else {
+      "axis.text.x"
+    }
+
+  xAxisGrob <- get_raw_grob_by_name(axisTable, name)
 
   axisBreaks <- as.numeric(xAxisGrob$label)
 
@@ -1026,7 +1057,7 @@ ggally_diagAxis <- function(
   numer <- ! is_horizontal(data, mapping, "x")
 
   if (! is.character(label)) {
-    label <- deparse(mapping$x)
+    label <- mapping_string(mapping$x)
   }
 
   xData <- eval_data_col(data, mapping$x)
@@ -1134,7 +1165,7 @@ ggally_facetbar <- function(data, mapping, ...){
 
   # numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
   # xVal <- mapping$x
-  yVal <- deparse(mapping$y)
+  yVal <- mapping_string(mapping$y)
   mapping$y <- NULL
   p <- ggplot(data, mapping) +
     geom_bar(...) +
@@ -1174,8 +1205,8 @@ ggally_ratio <- function(
 ) {
 
   # capture the original names
-  xName <- deparse(mapping$x)
-  yName <- deparse(mapping$y)
+  xName <- mapping_string(mapping$x)
+  yName <- mapping_string(mapping$y)
 
   countData <- plyr::count(data, vars = c(xName, yName))
 

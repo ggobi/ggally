@@ -4,10 +4,19 @@
 \alias{ggally_nostic_line}
 \title{ggnostic -background line with geom}
 \usage{
-ggally_nostic_line(data, mapping, ..., linePosition = NULL,
-  lineColor = "red", lineSize = 0.5, lineAlpha = 1, lineType = 1,
-  continuous_geom = ggplot2::geom_point, combo_geom = ggplot2::geom_boxplot,
-  mapColorToFill = TRUE)
+ggally_nostic_line(
+  data,
+  mapping,
+  ...,
+  linePosition = NULL,
+  lineColor = "red",
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 1,
+  continuous_geom = ggplot2::geom_point,
+  combo_geom = ggplot2::geom_boxplot,
+  mapColorToFill = TRUE
+)
 }
 \arguments{
 \item{data, mapping}{supplied directly to \code{ggplot2::\link[ggplot2]{ggplot}(data, mapping)}}

@@ -4,10 +4,25 @@
 \alias{ggnetworkmap}
 \title{ggnetworkmap - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot}
 \usage{
-ggnetworkmap(gg, net, size = 3, alpha = 0.75, weight, node.group,
-  node.color = NULL, node.alpha = NULL, ring.group, segment.alpha = NULL,
-  segment.color = "grey", great.circles = FALSE, segment.size = 0.25,
-  arrow.size = 0, label.nodes = FALSE, label.size = size/2, ...)
+ggnetworkmap(
+  gg,
+  net,
+  size = 3,
+  alpha = 0.75,
+  weight,
+  node.group,
+  node.color = NULL,
+  node.alpha = NULL,
+  ring.group,
+  segment.alpha = NULL,
+  segment.color = "grey",
+  great.circles = FALSE,
+  segment.size = 0.25,
+  arrow.size = 0,
+  label.nodes = FALSE,
+  label.size = size/2,
+  ...
+)
 }
 \arguments{
 \item{gg}{an object of class \code{ggplot}.}
@@ -68,7 +83,7 @@ invisible(lapply(c("ggplot2", "maps", "network", "sna"), base::library, characte
 
 ## Example showing great circles on a simple map of the USA
 ## http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/
-
+\donttest{
 airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
 rownames(airports) <- airports$iata
 
@@ -159,6 +174,7 @@ p <- ggnetworkmap(
   labs(color = "Friends") +
   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 p_(p)
+}
 
 }
 \author{

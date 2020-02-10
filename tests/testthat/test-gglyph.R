@@ -115,9 +115,9 @@ test_that("fill", {
   }
 
   p <- do_gg_fill(fill = "green")
-  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$fill), "green")
+  expect_equal(mapping_string(get("aes_params", envir = p$layers[[2]])$fill), "\"green\"")
   p <- do_gg_fill(var_fill = "gid")
-  expect_equal(as.character(get("mapping", envir = p$layers[[2]])$fill), "fill")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[2]])$fill), "fill")
 
 })
 
