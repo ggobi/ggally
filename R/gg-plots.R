@@ -569,7 +569,6 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
   }
 
   xVal <- mapping_string(mapping$x)
-  mapping$x <- 1
 
   p <- ggplot(data = data)
 
@@ -587,18 +586,9 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
   } else {
     p <- p +
       coord_flip() +
-      theme(
-        axis.text.y = element_text(
-          angle = 90,
-          vjust = 0,
-          colour = "grey50"
-        )
-      ) +
-      facet_grid(paste(xVal, " ~ .", sep = "")) +
+      facet_grid(paste(xVal, " ~ .", sep = ""), scales = "free_y") +
       theme(panel.spacing = unit(0.1, "lines"))
   }
-
-  p <- p + scale_x_continuous(xVal, labels = "", breaks = 1)
 
   p
 }
