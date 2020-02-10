@@ -30,3 +30,4 @@ ggduo_paper.txt
 ^\.httr-oauth$
 ^scripts/
 ^revdep$
+^\.github/

@@ -4,15 +4,21 @@
 \alias{ggscatmat}
 \title{ggscatmat - a traditional scatterplot matrix for purely quantitative variables}
 \usage{
-ggscatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1,
-  corMethod = "pearson")
+ggscatmat(
+  data,
+  columns = 1:ncol(data),
+  color = NULL,
+  alpha = 1,
+  corMethod = "pearson"
+)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
 
 \item{columns}{an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}.}
 
-\item{color}{an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}.}
+\item{color}{an option to group the dataset by the factor variable and color them by different colors. 
+Defaults to \code{NULL}, i.e. no coloring. If supplied, it will be converted to a factor.}
 
 \item{alpha}{an option to set the transparency in scatterplots for large data. Defaults to \code{1}.}
 

@@ -4,23 +4,30 @@
 \alias{ggnostic}
 \title{ggnostic - Plot matrix of statistical model diagnostics}
 \usage{
-ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
-  ".sigma", ".hat", ".cooksd"), columnLabelsX = attr(data, "var_x_label"),
+ggnostic(
+  model,
+  ...,
+  columnsX = attr(data, "var_x"),
+  columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
+  columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\\\.", " ", gsub("^\\\\.", "", columnsY)),
-  xlab = "explanatory variables", ylab = "diagnostics",
+  xlab = "explanatory variables",
+  ylab = "diagnostics",
   title = paste(deparse(model$call, width.cutoff = 500L), collapse = "\\n"),
-  continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit
-  = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
-  ggally_nostic_hat, .sigma = ggally_nostic_sigma, .cooksd =
-  ggally_nostic_cooksd, .std.resid = ggally_nostic_std_resid),
-  combo = list(default = ggally_box_no_facet, fitted = ggally_box_no_facet,
-  .se.fit = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
-  ggally_nostic_hat, .sigma = ggally_nostic_sigma, .cooksd =
-  ggally_nostic_cooksd, .std.resid = ggally_nostic_std_resid),
+  continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit =
+    ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat = ggally_nostic_hat, .sigma =
+    ggally_nostic_sigma, .cooksd = ggally_nostic_cooksd, .std.resid =
+    ggally_nostic_std_resid),
+  combo = list(default = ggally_box_no_facet, fitted = ggally_box_no_facet, .se.fit =
+    ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat = ggally_nostic_hat, .sigma =
+    ggally_nostic_sigma, .cooksd = ggally_nostic_cooksd, .std.resid =
+    ggally_nostic_std_resid),
   discrete = list(default = ggally_ratio, .fitted = ggally_ratio, .se.fit =
-  ggally_ratio, .resid = ggally_ratio, .hat = ggally_ratio, .sigma =
-  ggally_ratio, .cooksd = ggally_ratio, .std.resid = ggally_ratio),
-  progress = NULL, data = broomify(model))
+    ggally_ratio, .resid = ggally_ratio, .hat = ggally_ratio, .sigma = ggally_ratio,
+    .cooksd = ggally_ratio, .std.resid = ggally_ratio),
+  progress = NULL,
+  data = broomify(model)
+)
 }
 \arguments{
 \item{model}{statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}}

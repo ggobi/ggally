@@ -4,10 +4,25 @@
 \alias{ggnetworkmap}
 \title{ggnetworkmap - Plot a network with ggplot2 suitable for overlay on a ggmap:: map ggplot, or other ggplot}
 \usage{
-ggnetworkmap(gg, net, size = 3, alpha = 0.75, weight, node.group,
-  node.color = NULL, node.alpha = NULL, ring.group, segment.alpha = NULL,
-  segment.color = "grey", great.circles = FALSE, segment.size = 0.25,
-  arrow.size = 0, label.nodes = FALSE, label.size = size/2, ...)
+ggnetworkmap(
+  gg,
+  net,
+  size = 3,
+  alpha = 0.75,
+  weight,
+  node.group,
+  node.color = NULL,
+  node.alpha = NULL,
+  ring.group,
+  segment.alpha = NULL,
+  segment.color = "grey",
+  great.circles = FALSE,
+  segment.size = 0.25,
+  arrow.size = 0,
+  label.nodes = FALSE,
+  label.size = size/2,
+  ...
+)
 }
 \arguments{
 \item{gg}{an object of class \code{ggplot}.}

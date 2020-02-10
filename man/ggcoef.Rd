@@ -4,12 +4,25 @@
 \alias{ggcoef}
 \title{ggcoef - Plot Model Coefficients with broom and ggplot2}
 \usage{
-ggcoef(x, mapping = aes_string(y = "term", x = "estimate"), conf.int = TRUE,
-  conf.level = 0.95, exponentiate = FALSE, exclude_intercept = FALSE,
-  vline = TRUE, vline_intercept = "auto", vline_color = "gray50",
-  vline_linetype = "dotted", vline_size = 1, errorbar_color = "gray25",
-  errorbar_height = 0, errorbar_linetype = "solid", errorbar_size = 0.5,
-  sort = c("none", "ascending", "decending"), ...)
+ggcoef(
+  x,
+  mapping = aes_string(y = "term", x = "estimate"),
+  conf.int = TRUE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  exclude_intercept = FALSE,
+  vline = TRUE,
+  vline_intercept = "auto",
+  vline_color = "gray50",
+  vline_linetype = "dotted",
+  vline_size = 1,
+  errorbar_color = "gray25",
+  errorbar_height = 0,
+  errorbar_linetype = "solid",
+  errorbar_size = 0.5,
+  sort = c("none", "ascending", "decending"),
+  ...
+)
 }
 \arguments{
 \item{x}{a model object to be tidied with \code{\link[broom]{tidy}} or a data frame (see Details)}

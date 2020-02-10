@@ -4,8 +4,13 @@
 \alias{ggally_nostic_se_fit}
 \title{ggnostic - fitted value standard error}
 \usage{
-ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("grey"),
-  linePosition = NULL)
+ggally_nostic_se_fit(
+  data,
+  mapping,
+  ...,
+  lineColor = brew_colors("grey"),
+  linePosition = NULL
+)
 }
 \arguments{
 \item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}

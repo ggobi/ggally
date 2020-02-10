@@ -1,3 +1,14 @@
+GGally 1.4.0
+---------------------
+
+* Updated to work with ggplot2 v3.3.0 (#308)
+
+`ggnet` and `ggnet2`
+* Fixed some logic bugs from newer R versions
+
+`ggally_box` and `ggally_dot`
+* Label now appears axis and is displayed in a plot matrix. (#253)
+
 GGally 1.3.3
 ----------------
 

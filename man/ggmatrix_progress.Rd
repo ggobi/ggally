@@ -4,9 +4,12 @@
 \alias{ggmatrix_progress}
 \title{ggmatrix default progress bar}
 \usage{
-
-  ggmatrix_progress(format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ",
-  clear = TRUE, show_after = 0, ...)
+ggmatrix_progress(
+  format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ",
+  clear = TRUE,
+  show_after = 0,
+  ...
+)
 }
 \arguments{
 \item{format, clear, show_after, ...}{parameters supplied directly to \code{progress::\link[progress]{progress_bar}$new()}}

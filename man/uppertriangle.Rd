@@ -4,8 +4,12 @@
 \alias{uppertriangle}
 \title{uppertriangle - rearrange dataset as the preparation of ggscatmat function}
 \usage{
-uppertriangle(data, columns = 1:ncol(data), color = NULL,
-  corMethod = "pearson")
+uppertriangle(
+  data,
+  columns = 1:ncol(data),
+  color = NULL,
+  corMethod = "pearson"
+)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}

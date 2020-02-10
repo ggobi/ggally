@@ -110,7 +110,7 @@ ggally_points <- function(data, mapping, ...){
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param ... other arguments to add to geom_point
+#' @param formula,... other arguments to add to geom_smooth
 #' @param method,se parameters supplied to \code{\link[ggplot2]{geom_smooth}}
 #' @param shrink boolean to determine if y range is reduced to range of points or points and error ribbon
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
@@ -122,16 +122,16 @@ ggally_points <- function(data, mapping, ...){
 #'  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
 #'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
-ggally_smooth <- function(data, mapping, ..., method = "lm", se = TRUE, shrink = TRUE) {
+ggally_smooth <- function(data, mapping, ..., method = "lm", formula = y ~ x, se = TRUE, shrink = TRUE) {
 
   p <- ggplot(data = data, mapping)
 
   p <- p + geom_point(...)
 
   if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
-    p <- p + geom_smooth(method = method, se = se)
+    p <- p + geom_smooth(method = method, se = se, formula = formula)
   } else {
-    p <- p + geom_smooth(method = method, se = se, colour = I("black"))
+    p <- p + geom_smooth(method = method, se = se, formula = formula, colour = I("black"))
   }
 
   if (isTRUE(shrink)) {
@@ -569,7 +569,6 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
   }
 
   xVal <- mapping_string(mapping$x)
-  mapping$x <- 1
 
   p <- ggplot(data = data)
 
@@ -587,18 +586,9 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
   } else {
     p <- p +
       coord_flip() +
-      theme(
-        axis.text.y = element_text(
-          angle = 90,
-          vjust = 0,
-          colour = "grey50"
-        )
-      ) +
-      facet_grid(paste(xVal, " ~ .", sep = "")) +
+      facet_grid(paste(xVal, " ~ .", sep = ""), scales = "free_y") +
       theme(panel.spacing = unit(0.1, "lines"))
   }
-
-  p <- p + scale_x_continuous(xVal, labels = "", breaks = 1)
 
   p
 }
@@ -980,7 +970,14 @@ get_x_axis_labels <- function(p, xRange) {
     }
     NULL
   }
-  xAxisGrob <- get_raw_grob_by_name(axisTable, "axis.text.x")
+  name <-
+    if (packageVersion("ggplot2") >= 3.3) {
+      "title"
+    } else {
+      "axis.text.x"
+    }
+
+  xAxisGrob <- get_raw_grob_by_name(axisTable, name)
 
   axisBreaks <- as.numeric(xAxisGrob$label)
 

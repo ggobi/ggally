@@ -6,7 +6,6 @@
 \alias{max1}
 \alias{mean0}
 \alias{min0}
-\alias{rescale01}
 \alias{rescale11}
 \title{Rescaling functions}
 \usage{

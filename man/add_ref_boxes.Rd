@@ -4,8 +4,14 @@
 \alias{add_ref_boxes}
 \title{Add reference boxes around each cell of the glyphmap.}
 \usage{
-add_ref_boxes(data, var_fill = NULL, color = "white", size = 0.5,
-  fill = NA, ...)
+add_ref_boxes(
+  data,
+  var_fill = NULL,
+  color = "white",
+  size = 0.5,
+  fill = NA,
+  ...
+)
 }
 \arguments{
 \item{data}{A glyphmap structure.}

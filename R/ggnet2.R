@@ -307,9 +307,9 @@ ggnet2 <- function(
 
   # -- conversion to network class ---------------------------------------------
 
-  if (class(net) == "igraph" && "intergraph" %in% rownames(installed.packages())) {
+  if (inherits(net, "igraph") && "intergraph" %in% rownames(installed.packages())) {
     net = intergraph::asNetwork(net)
-  } else if (class("net") == "igraph") {
+  } else if (inherits(net, "igraph")) {
     stop("install the 'intergraph' package to use igraph objects with ggnet2")
   }
 
@@ -332,7 +332,7 @@ ggnet2 <- function(
 
   set_node = function(x, value, mode = TRUE) {
 
-    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+    if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
       stop(paste("incorrect", value, "value"))
     } else if (is.numeric(x) && any(x < 0)) {
       stop(paste("incorrect", value, "value"))
@@ -340,9 +340,9 @@ ggnet2 <- function(
       x
     } else if (length(x) > 1) {
       stop(paste("incorrect", value, "length"))
-    } else if (x %in% v_attr) {
+    } else if (any(x %in% v_attr)) {
       get_v(net, x)
-    } else if (mode && x == "mode" & is_bip) {
+    } else if (mode && identical(x, "mode") && is_bip) {
       set_mode(net)
     } else {
       x
@@ -352,7 +352,7 @@ ggnet2 <- function(
 
   set_edge = function(x, value) {
 
-    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+    if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
       stop(paste("incorrect", value, "value"))
     } else if (is.numeric(x) && any(x < 0)) {
       stop(paste("incorrect", value, "value"))
@@ -360,7 +360,7 @@ ggnet2 <- function(
       x
     } else if (length(x) > 1) {
       stop(paste("incorrect", value, "length"))
-    } else if (x %in% e_attr) {
+    } else if (any(x %in% e_attr)) {
       get_e(net, x)
     } else {
       x

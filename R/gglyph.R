@@ -89,7 +89,7 @@ ref_lines <- function(data) {
 
   if (glyph$polar) {
     ref_line <- function(df) {
-      theta <- seq(0, 2 * pi, length = 30)
+      theta <- seq(0, 2 * pi, length.out = 30)
       data.frame(
         gid = df$gid,
         gx = df[[glyph$x_major]] + glyph$width / 4 * sin(theta),

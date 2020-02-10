@@ -4,9 +4,17 @@
 \alias{ggally_cor}
 \title{Correlation from the Scatter Plot}
 \usage{
-ggally_cor(data, mapping, alignPercent = 0.6, method = "pearson",
-  use = "complete.obs", corAlignPercent = NULL, corMethod = NULL,
-  corUse = NULL, ...)
+ggally_cor(
+  data,
+  mapping,
+  alignPercent = 0.6,
+  method = "pearson",
+  use = "complete.obs",
+  corAlignPercent = NULL,
+  corMethod = NULL,
+  corUse = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{data set using}
