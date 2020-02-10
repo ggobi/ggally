@@ -633,7 +633,7 @@ test_that("subtypes", {
   # re ordered the subs so that density can have no binwidth param
   conSubs <- list("density", "points", "smooth", "smooth_loess", "cor", "blank")
   comSubs <- list(
-    "box", "dot", "box_no_facet", "dot_no_facet",
+    "box", "dot", "box_no_facet", "dot_no_facet", "density_ridges",
     wrap("facethist", binwidth = 1),
     "facetdensity", wrap("denstrip", binwidth = 1),
     "blank"
