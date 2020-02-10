@@ -68,7 +68,7 @@ jobs:
         run: >
           Rscript
           -e "library(remotes)"
-          -e "remotes::install_cran(c('sna', 'mvtnorm'), type = 'source')"
+          -e "remotes::install_cran(c('statnet.common', 'mvtnorm'), repos = c(CRAN = 'https://cloud.r-project.org/'))"
           -e "update(readRDS('depends.Rds'))"
           -e "remotes::install_cran('rcmdcheck')"
 
