@@ -3,16 +3,17 @@ language: r
 sudo: false
 cache: packages
 
-matrix:
-  fast_finish: true # http://docs.travis-ci.com/user/build-configuration/#Fast-finishing
-                    # allows the build to "pass" when the non-failure-able builds are done
-  allow_failures: # http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
-    - r: 3.1
-    - r: devel
-  # test on older versions and devel
-  # https://docs.travis-ci.com/user/languages/r#R-Versions
+r:
+  - oldrel
+  - release
+  - devel
+
+jobs:
   include:
-    - r: release
+    - stage: "Deploy"
+      name: "Deploy tutorials"
+      if: branch IN (master, travis) AND repo = ggobi/GGally AND type = push
+      r: release
       env:
         - LINTR_COMMENT_BOT=false
         # secret key to allow for packagedocs and travisDrat
@@ -23,23 +24,14 @@ matrix:
       r_github_packages:
         - schloerke/travisDrat
         - rstudio/crosstalk
-      after_success:
+      script:
+        - Rscript -e 'remotes::install_local()'
         - Rscript -e 'covr::codecov()'
         - CAN_PRINT=TRUE Rscript -e "packagedocs::deploy_travis(valid_branches = 'dev', push_branch = 'gh-pages-dev')"
         - CAN_PRINT=TRUE Rscript -e "packagedocs::deploy_travis(valid_branches = 'master')"
         - Rscript -e "travisDrat::deploy_drat(valid_branches = 'master', drat_repo = 'schloerke/drat')"
 
-    # - r: 3.1
-    - r: devel
-
-
 notifications:
   email:
     on_success: change
     on_failure: change
-
-branches:
-  only:
-    - master
-    - dev
-    - travis
