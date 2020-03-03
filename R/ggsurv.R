@@ -57,7 +57,7 @@ if(getRversion() >= "2.15.1") {
 #'     )
 #'
 #'   # Multiple factors
-#'   lung2 <- lung %>% plyr::mutate(older = as.factor(age > 60))
+#'   lung2 <- plyr::mutate(lung, older = as.factor(age > 60))
 #'   sf.sex2 <- survival::survfit(Surv(time, status) ~ sex + older, data = lung2)
 #'   pl.sex2 <- ggsurv(sf.sex2)
 #'   pl.sex2
