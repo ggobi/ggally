@@ -92,6 +92,15 @@ if (require(survival) && require(scales)) {
       labels = c('Male', 'Female')
     )
 
+  # Multiple factors
+  lung2 <- plyr::mutate(lung, older = as.factor(age > 60))
+  sf.sex2 <- survival::survfit(Surv(time, status) ~ sex + older, data = lung2)
+  pl.sex2 <- ggsurv(sf.sex2)
+  pl.sex2
+
+  # Change legend title
+  pl.sex2 + labs(color = "New Title", linetype = "New Title")
+
   # We can still adjust the plot after fitting
   data(kidney, package = "survival")
   sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)

@@ -9,6 +9,12 @@ GGally 1.4.0
 `ggally_box` and `ggally_dot`
 * Label now appears axis and is displayed in a plot matrix. (#253)
 
+`ggsurv`
+* Provide sensible legend values when multiple factors are present. (#310)
+
+
+
+
 GGally 1.3.3
 ----------------
 
