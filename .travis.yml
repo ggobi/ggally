@@ -12,7 +12,7 @@ jobs:
   include:
     - stage: "Deploy"
       name: "Deploy tutorials"
-      if: branch IN (master, travis) AND repo = ggobi/GGally AND type = push
+      if: branch IN (master, travis) AND repo = ggobi/ggally AND type = push
       r: release
       env:
         - LINTR_COMMENT_BOT=false
