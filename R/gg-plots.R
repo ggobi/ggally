@@ -211,7 +211,6 @@ ggally_density <- function(data, mapping, ...){
 #' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
 #' @param corMethod deprecated. Use parameter \code{method}
 #' @param corUse deprecated. Use parameter \code{use}
-#' @param themeVoid void theme, removes grid lines and axes from plot if TRUE
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom stats complete.cases cor
@@ -232,19 +231,12 @@ ggally_density <- function(data, mapping, ...){
 #'    size = 5
 #'  )
 #'
-#'  ggally_cor(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
-#'    size = 5,
-#'    themeVoid=TRUE
-#'  )
 ggally_cor <- function(
   data,
   mapping,
   alignPercent = 0.6,
   method = "pearson", use = "complete.obs",
   corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
-  themeVoid=FALSE,
   ...
 ){
 
@@ -467,11 +459,11 @@ ggally_cor <- function(
       ...
     )
   }
-  if(themeVoid) {
-    p <- p + theme_void()
-  }
   p +
-    theme(legend.position = "none")
+    theme(legend.position = "none",
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()
+          )
 }
 
 
