@@ -13,6 +13,7 @@ ggally_cor(
   corAlignPercent = NULL,
   corMethod = NULL,
   corUse = NULL,
+  themeVoid = FALSE,
   ...
 )
 }
@@ -33,6 +34,8 @@ ggally_cor(
 
 \item{corUse}{deprecated. Use parameter \code{use}}
 
+\item{themeVoid}{void theme, removes grid lines and axes from plot if TRUE}
+
 \item{...}{other arguments being supplied to geom_text}
 }
 \description{
@@ -51,6 +54,13 @@ Estimate correlation from the given data.
    tips,
    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
    size = 5
+ )
+
+ ggally_cor(
+   tips,
+   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+   size = 5,
+   themeVoid=TRUE
  )
 }
 \author{

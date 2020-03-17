@@ -194,6 +194,10 @@ p_(pm)
 # no warning displayed with user supplied function
 pm <- ggpairs(tips, 2:3, lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
 p_(pm)
+
+## Remove panel grid lines from correlation plots
+ggpairs(flea, columns = 2:4,
+        upper=list(continuous=wrap(ggally_cor,themeVoid=TRUE)))
 }
 \references{
 John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
