@@ -211,6 +211,7 @@ ggally_density <- function(data, mapping, ...){
 #' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
 #' @param corMethod deprecated. Use parameter \code{method}
 #' @param corUse deprecated. Use parameter \code{use}
+#' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom stats complete.cases cor
@@ -219,6 +220,8 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #'  data(tips, package = "reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+#'             displayGrid=FALSE)
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes(x = total_bill, y = tip),
@@ -237,6 +240,7 @@ ggally_cor <- function(
   alignPercent = 0.6,
   method = "pearson", use = "complete.obs",
   corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
+  displayGrid = TRUE,
   ...
 ){
 
@@ -459,11 +463,13 @@ ggally_cor <- function(
       ...
     )
   }
-  p +
-    theme(legend.position = "none",
-          panel.grid.major = element_blank(),
+  if (!displayGrid) {
+    p <- p +
+    theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank()
           )
+  }
+  p + theme(legend.position = "none")
 }
 
 
