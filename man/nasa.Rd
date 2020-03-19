@@ -4,7 +4,9 @@
 \name{nasa}
 \alias{nasa}
 \title{Data from the Data Expo JSM 2006.}
-\format{A data frame with 41472 rows and 17 variables}
+\format{
+A data frame with 41472 rows and 17 variables
+}
 \usage{
 data(nasa)
 }

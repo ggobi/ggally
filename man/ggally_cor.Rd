@@ -44,20 +44,25 @@ Estimate correlation from the given data.
 \examples{
  data(tips, package = "reshape")
  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
- ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-            displayGrid=FALSE)
+ # display with no grid
+ ggally_cor(
+   tips,
+   mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+   displayGrid = FALSE
+ )
+ # change text attributes
  ggally_cor(
    tips,
    mapping = ggplot2::aes(x = total_bill, y = tip),
    size = 15,
    colour = I("red")
  )
+ # split by a variable
  ggally_cor(
    tips,
    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
    size = 5
  )
-
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
