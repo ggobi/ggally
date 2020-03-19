@@ -220,20 +220,25 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #'  data(tips, package = "reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-#'             displayGrid=FALSE)
+#'  # display with no grid
+#'  ggally_cor(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+#'    displayGrid = FALSE
+#'  )
+#'  # change text attributes
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes(x = total_bill, y = tip),
 #'    size = 15,
 #'    colour = I("red")
 #'  )
+#'  # split by a variable
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-#'
 ggally_cor <- function(
   data,
   mapping,
@@ -463,12 +468,15 @@ ggally_cor <- function(
       ...
     )
   }
-  if (!displayGrid) {
+
+  if (!isTRUE(displayGrid)) {
     p <- p +
-    theme(panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank()
-          )
+      theme(
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()
+      )
   }
+
   p + theme(legend.position = "none")
 }
 
