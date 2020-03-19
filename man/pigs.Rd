@@ -4,7 +4,9 @@
 \name{pigs}
 \alias{pigs}
 \title{United Kingdom Pig Production}
-\format{A data frame with 48 rows and 8 variables}
+\format{
+A data frame with 48 rows and 8 variables
+}
 \usage{
 data(pigs)
 }
