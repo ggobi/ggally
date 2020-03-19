@@ -724,6 +724,13 @@ ggduo <- function(
 #' # no warning displayed with user supplied function
 #' pm <- ggpairs(tips, 2:3, lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
 #' p_(pm)
+#'
+#' ## Remove panel grid lines from correlation plots
+#' pm <- ggpairs(
+#'   flea, columns = 2:4,
+#'   upper = list(continuous = wrap(ggally_cor, displayGrid = FALSE))
+#' )
+#' p_(pm)
 ggpairs <- function(
   data,
   mapping = NULL,

@@ -4,7 +4,9 @@
 \name{twitter_spambots}
 \alias{twitter_spambots}
 \title{Twitter spambots}
-\format{An object of class \code{network} with 120 edges and 94 vertices.}
+\format{
+An object of class \code{network} with 120 edges and 94 vertices.
+}
 \usage{
 data(twitter_spambots)
 }

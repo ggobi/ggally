@@ -4,7 +4,9 @@
 \name{flea}
 \alias{flea}
 \title{Historical data used for classification examples.}
-\format{A data frame with 74 rows and 7 variables}
+\format{
+A data frame with 74 rows and 7 variables
+}
 \usage{
 data(flea)
 }

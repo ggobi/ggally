@@ -211,6 +211,7 @@ ggally_density <- function(data, mapping, ...){
 #' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
 #' @param corMethod deprecated. Use parameter \code{method}
 #' @param corUse deprecated. Use parameter \code{use}
+#' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom stats complete.cases cor
@@ -219,12 +220,20 @@ ggally_density <- function(data, mapping, ...){
 #' @examples
 #'  data(tips, package = "reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
+#'  # display with no grid
+#'  ggally_cor(
+#'    tips,
+#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+#'    displayGrid = FALSE
+#'  )
+#'  # change text attributes
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes(x = total_bill, y = tip),
 #'    size = 15,
 #'    colour = I("red")
 #'  )
+#'  # split by a variable
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
@@ -236,6 +245,7 @@ ggally_cor <- function(
   alignPercent = 0.6,
   method = "pearson", use = "complete.obs",
   corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
+  displayGrid = TRUE,
   ...
 ){
 
@@ -403,9 +413,7 @@ ggally_cor <- function(
       yrange  = yrange,
       color   = "black",
       ...
-    ) +
-    #element_bw() +
-    theme(legend.position = "none")
+    )
 
     xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
     yPos <- seq(
@@ -434,8 +442,6 @@ ggally_cor <- function(
       ...
 
     )
-
-    p
   } else {
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
@@ -460,12 +466,18 @@ ggally_cor <- function(
       xrange = xrange,
       yrange = yrange,
       ...
-    ) +
-    #element_bw() +
-    theme(legend.position = "none")
-
-    p
+    )
   }
+
+  if (!isTRUE(displayGrid)) {
+    p <- p +
+      theme(
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()
+      )
+  }
+
+  p + theme(legend.position = "none")
 }
 
 
