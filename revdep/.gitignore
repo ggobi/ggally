@@ -6,3 +6,5 @@ data.sqlite
 *.html
 *.rds
 lib
+*.nosync*
+failures.md
