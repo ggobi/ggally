@@ -1,4 +1,4 @@
-GGally 1.4.0
+GGally 1.5.0
 ---------------------
 
 * Updated to work with ggplot2 v3.3.0 (#308)
@@ -11,6 +11,9 @@ GGally 1.4.0
 
 `ggsurv`
 * Provide sensible legend values when multiple factors are present. (#310)
+
+`ggally_cor`
+* Added `displayGrid` argument to turn of the background grid. (#312)
 
 
 
