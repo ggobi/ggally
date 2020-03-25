@@ -82,7 +82,7 @@ ggcoef(log.reg, exponentiate = TRUE)
 
 ## Customizing the plot
 
-You can use `conf.int`, `vline` and `exclude_intercept` to display or not confidence intervals as error bars, a vertical line for `x = 0` (or `x = 1` if coeffcients are exponentiated) and the intercept.
+You can use `conf.int`, `vline` and `exclude_intercept` to display or not confidence intervals as error bars, a vertical line for `x = 0` (or `x = 1` if coefficients are exponentiated) and the intercept.
 
 ```{r ggcoef-reg-custom}
 ggcoef(reg, vline = FALSE, conf.int = FALSE, exclude_intercept = TRUE)

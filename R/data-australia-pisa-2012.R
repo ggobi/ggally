@@ -1,4 +1,4 @@
-#' Programme for International Student Assesment (PISA) 2012 Data for Australia
+#' Programme for International Student Assessment (PISA) 2012 Data for Australia
 #'
 #' About PISA
 #'

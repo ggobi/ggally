@@ -1,88 +1,65 @@
 
 ## Comments
 
-### 2017-5-17
+### 2020-3-19
 
-Altered test and added crosstalk as a suggests.  Passes on travis, local mac, and against plotly (reason for test).
+I've fixed the tests and the package now works with the latest (and prior) ggplot2 versions.
 
-- Barret
+Please let me know if there is anything else I can do.
+
+Best,
+Barret
 
 
-### 2017-5-17
+### 2020-3-6
 
-$GGally
-'::' or ':::' import not declared from: ‘crosstalk’
-'library' or 'require' call not declared from: ‘crosstalk’
+Dear maintainer,
 
-- Kurt
+Please see the problems shown on
+<https://cran.r-project.org/web/checks/check_results_GGally.html>.
 
-### 2017-5-17
+Please correct before 2020-03-20 to safely retain your package on CRAN.
 
-Please let me know if there is anything else I can do!
-
-Thank you for your time.
-
-- Barret
+Best,
+-k
 
 
 #### Test environments and R CMD check results
 
-* local OS X install
-  * R version 3.5.0 (2018-04-23)
-    Platform:  system   x86_64, darwin15.6.0
-    Running under: macOS High ierra 10.13.4
-    * 0 errors | 0 warnings | 0 notes
-
-* travis-ci
-  * Known travis issue of setting a _JAVA_OPTIONS value.  **These _JAVA_OPTIONS notes are false positives**
-
-  * R version 3.5.0 (2017-01-27)
-    Platform: x86_64-pc-linux-gnu (64-bit)
-    Running under: Ubuntu 14.04.5 LTS
-    * 0 errors | 0 warnings | 1 note
-    * checking dependencies in R code ... NOTE
-      Picked up _JAVA_OPTIONS: -Xmx2048m -Xms512m
-
-  * R Under development (unstable) (2018-05-16 r74730)
-    Platform: x86_64-pc-linux-gnu (64-bit)
-    Running under: Ubuntu 14.04.5 LTS
-    * 0 errors | 0 warnings | 1 note
-    * checking dependencies in R code ... NOTE
-      Picked up _JAVA_OPTIONS: -Xmx2048m -Xms512m
+* local macOS install 10.15.3
+  * R 3.6.3
+* travis-ci ubuntu
+  * oldrelease, R version 3.5.3 (2017-01-27)
+  * release, R version 3.6.2 (2017-01-27)
+  * devel, R Under development (unstable) (2020-03-13 r77948)
 
 * rhub
-  * fedora-clang-devel
-    * http://builder.r-hub.io/status/GGally_1.3.3.tar.gz-9e96854baee648a5a65df453919ea45f
-    * 0 errors | 0 warnings | 1 note
-    * checking package dependencies ... NOTE
-      Package suggested but not available for checking: ‘scagnostics’
+  * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
+  * Ubuntu Linux 16.04 LTS, R-release, GCC
+  * Fedora Linux, R-devel, clang, gfortran
+
+* win-builder
+  * oldrelease
+  * release
+  * devel
 
 
-* win-builder (devel and release)
-  * R version 3.5.0 (2018-04-23)
-    * 0 errors | 0 warnings | 0 notes
-  * R Under development (unstable) (2018-05-15 r74727)
-    * 0 errors | 0 warnings | 0 notes
+
+#### R CMD check results
+
+rhub - Fedora R-devel
+* 0 errors | 0 warnings | 1 note
+* checking package dependencies ... NOTE
+  Package suggested but not available for checking: ‘scagnostics’
+
+Everything else
+* 0 errors | 0 warnings | 0 notes
 
 
-## Reverse dependencies
 
-### Checked on
-|field    |value                        |
-|:--------|:----------------------------|
-|version  |R version 3.5.0 (2018-04-23) |
-|os       |macOS High Sierra 10.13.4    |
-|system   |x86_64, darwin15.6.0         |
+## revdepcheck results
 
-No difference in test results from GGally upgrade: https://github.com/ggobi/ggally/blob/master/revdep/
+We checked 89 reverse dependencies (72 from CRAN + 17 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
 
-### Couldn't check (1)
-
-|package                    |version |error |warning |note |
-|:--------------------------|:-------|:-----|:-------|:----|
-|[LANDD](problems.md#landd) |1.1.0   |1     |        |     |
-
-
-### Revdep Maintainers
-
-Reverse dependency maintainers were not notified as no breaking changes occured.
+ * We saw 0 new problems
+ * We failed to check 0 packages
