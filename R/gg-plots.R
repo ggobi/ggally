@@ -405,13 +405,12 @@ ggally_cor <- function(
 
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Cor : ", signif(cor_fn(xVal, yVal), 3)),
+      label   = str_c("Corr: ", signif(cor_fn(xVal, yVal), 3)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
       xrange  = xrange,
       yrange  = yrange,
-      color   = "black",
       ...
     )
 
@@ -919,13 +918,19 @@ ggally_text <- function(
   ...
 ){
 
+  theme <- theme_get()
+
   p <- ggplot() +
     xlim(xrange) +
     ylim(yrange) +
     theme(
-      panel.background = element_blank(),
       panel.grid.minor = element_blank(),
-      panel.grid.major = element_line(colour = "grey85")
+      panel.grid.major = element_line(
+        colour = ifnull(theme$panel.background$fill, NA)
+      ),
+      panel.background = element_rect(
+        fill = ifnull(theme$panel.grid.major$colour, NA)
+      )
     ) +
     labs(x = NULL, y = NULL)
 
@@ -948,7 +953,9 @@ ggally_text <- function(
     p <- p +
        geom_text( label = label, mapping = mapping, ...)
   } else {
-    colour <- "grey50"
+    bg <- ifnull(theme$panel.background$fill, "grey92")
+    fg <- ifnull(theme$axis.text$colour, "gray30")
+    colour <- scales::colour_ramp(c(bg, fg))(0.75)
     p <- p +
        geom_text( label = label, mapping = mapping, colour = colour, ...)
   }
