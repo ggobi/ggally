@@ -16,7 +16,7 @@ add_ggproto_to_ggmatrix(
 )
 }
 \arguments{
-\item{e1}{An object of class \code{ggmatrix}}
+\item{e1}{An object of class \code{ggmatrix} or \code{ggplot}}
 
 \item{e2}{A component to add to \code{e1}}
 
