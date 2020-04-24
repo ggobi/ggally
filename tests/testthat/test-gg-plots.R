@@ -186,3 +186,32 @@ test_that("smooth_se", {
   expect_equal(p$layers[[2]]$stat_params$se, FALSE)
   expect_print(p)
 })
+
+
+test_that("ggally_count", {
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq),
+    fill = "red"
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Sex)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+})

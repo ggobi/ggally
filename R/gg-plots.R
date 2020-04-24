@@ -1292,6 +1292,96 @@ ggally_ratio <- function(
 
 
 
+#' Plots the number of observations
+#'
+#' Plot the number of observations by using rectangles
+#' with proportional areas.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param ... other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
+#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex))
+#'
+#' ggally_count(
+#'   as.data.frame(Titanic),
+#'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
+#' )
+ggally_count <- function(data, mapping, ...) {
+
+  mapping <- mapping_color_to_fill(mapping)
+  vars <- unlist(lapply(mapping, mapping_string))
+  x_var <- vars["x"]
+  y_var <- vars["y"]
+  if (is.na(x_var)) stop("'x' aesthetic is required.")
+  if (is.na(y_var)) stop("'y' aesthetic is required.")
+
+  if (is.na(vars["weight"])) {
+    data$.weight <- 1
+  } else {
+    data$.weight <- data[[vars["weight"]]]
+  }
+
+  # compute formula for aggregation
+  # exclude weight and do not double count a var mapped to several aesthetics
+  f <- stats::as.formula(paste(
+    ".weight ~",
+    paste(unique(vars[names(vars) != "weight"]), collapse = "+")
+  ))
+
+  d <- stats::aggregate(f, data, sum, na.rm = TRUE)
+  names(d)[which(names(d) == ".weight")] <- ".n"
+
+  d$.x <- d[[x_var]] # keep original x &nd y
+  d$.y <- d[[y_var]]
+  d[[x_var]] <- as.numeric(d$.x)
+  # count total n for each combinaison of x and y
+  d$.n_xy <- stats::ave(d$.n, d$.x, d$.y, FUN = function(x) sum(x, na.rm = TRUE))
+  # proportion within a combinaison of x and y
+  d$.prop <- d$.n / d$.n_xy
+  d$.width <- sqrt(d$.n_xy) / max(sqrt(d$.n_xy)) * .9
+  d$.height <- d$.width * d$.prop
+  d$.cum_height <- stats::ave(d$.height, d$.x, d$.y, FUN = cumsum)
+  d[[y_var]] <- as.numeric(d$.y) + d$.cum_height - d$.height / 2 - d$.width / 2
+
+  # mapp height and width
+  # use aes_string() to avoid "no visible binding for global variable" NOTES
+  mapping$height <- aes_string(height = ".height")$height
+  mapping$width <- aes_string(width = ".width")$width
+
+  # remove weight aesthetic
+  mapping$weight <- NULL
+
+  # if fill corresponds to x or y, map to original factor
+  if (!is.na(vars["fill"]) & vars["fill"] == vars["x"])
+    mapping$fill <- aes_string(fill = ".x")$fill
+  else if (!is.na(vars["fill"]) & vars["fill"] == vars["y"])
+    mapping$fill <- aes_string(fill = ".y")$fill
+
+  p <- ggplot(data = d, mapping)
+
+  if ("fill" %in% names(list(...)) | !is.null(mapping$fill))
+    p <- p + geom_tile(...)
+  else
+    p <- p + geom_tile(fill = "grey50", ...)
+
+  p +
+    scale_x_continuous(
+      breaks = 1:length(levels(d$.x)),
+      labels = levels(d$.x)
+    ) +
+    scale_y_continuous(
+      breaks = 1:length(levels(d$.y)),
+      labels = levels(d$.y)
+    ) +
+    theme(panel.grid.minor = element_blank())
+}
+
+
 #' Blank
 #'
 #' Draws nothing.
