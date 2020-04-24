@@ -2,9 +2,12 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_count}
 \alias{ggally_count}
+\alias{ggally_countDiag}
 \title{Plots the number of observations}
 \usage{
 ggally_count(data, mapping, ...)
+
+ggally_countDiag(data, mapping, ...)
 }
 \arguments{
 \item{data}{data set using}
@@ -25,6 +28,9 @@ ggally_count(
   as.data.frame(Titanic),
   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
 )
+
+ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
+ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
 }
 \author{
 Joseph Larmarange \email{joseph@larmarange.net}

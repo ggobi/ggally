@@ -1381,6 +1381,18 @@ ggally_count <- function(data, mapping, ...) {
     theme(panel.grid.minor = element_blank())
 }
 
+#' @rdname ggally_count
+#' @export
+#' @examples
+#'
+#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
+#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
+ggally_countDiag <- function(data, mapping, ...) {
+  data$.x_copy <- data[[mapping_string(mapping$x)]]
+  mapping$y <- aes_string(y = ".x_copy")$y
+  ggally_count(data = data, mapping = mapping, ...) +
+    ylab("")
+}
 
 #' Blank
 #'
