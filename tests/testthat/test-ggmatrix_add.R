@@ -26,7 +26,17 @@ test_that("add", {
   expect_true(! is.null(pm3$gg))
 
   # badd add
-  expect_error(pm + ggplot2::geom_abline(), "'ggmatrix' does not know how to add")
+  expect_error(pm + 3, "'ggmatrix' does not know how to add")
+
+  # adding scale
+  pm4 <- pm + ggplot2::scale_fill_brewer()
+  expect_false(identical(pm$plots[[1]], pm4$plots[[1]]))
+  expect_false(identical(pm$plots[[2]], pm4$plots[[2]]))
+
+  # change only some subplots
+  pm5 <- add_ggproto_to_ggmatrix(pm, ggplot2::coord_equal(), cols = 1)
+  expect_false(identical(pm$plots[[1]], pm5$plots[[1]]))
+  expect_true(identical(pm$plots[[2]], pm5$plots[[2]]))
 
 })
 
