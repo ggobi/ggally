@@ -2,14 +2,30 @@
 % Please edit documentation in R/ggpairs_add.R
 \name{+.gg}
 \alias{+.gg}
+\alias{add_ggproto_to_ggmatrix}
 \title{Modify a ggmatrix object by adding an ggplot2 object to all plots}
 \usage{
 \method{+}{gg}(e1, e2)
+
+add_ggproto_to_ggmatrix(
+  e1,
+  e2,
+  rows = 1:e1$nrow,
+  cols = 1:e1$ncol,
+  only_fn = NULL
+)
 }
 \arguments{
-\item{e1}{An object of class \code{ggplot} or \code{theme}}
+\item{e1}{An object of class \code{ggmatrix}}
 
 \item{e2}{A component to add to \code{e1}}
+
+\item{rows}{Integer vector. Rows to modify}
+
+\item{cols}{Integer vector. Cols to modify}
+
+\item{only_fn}{Character vector. If specified, only subplots
+of that type will be modified (see examples).}
 }
 \description{
 This operator allows you to add ggplot2 objects to a ggmatrix object.
@@ -21,10 +37,15 @@ object.
 
 \itemize{
   \item \code{theme}: update plot theme
+  \item \code{scale}: replace current scale
+  \item \code{coord}: override current coordinate system
 }
 
 The \code{+} operator completely replaces elements
 with elements from e2.
+
+\code{add_ggproto_to_ggmatrix} gives you more control to modify
+  only some subplots.
 }
 \examples{
 data(tips, package = "reshape")
@@ -38,6 +59,15 @@ pm + ggplot2::theme_bw()
 ## add a list of information
 extra <- list(ggplot2::theme_bw(), ggplot2::labs(caption = "My caption!"))
 pm + extra
+## modify scale
+pm + scale_fill_brewer()
+## only first row
+add_ggproto_to_ggmatrix(pm, scale_fill_brewer(), rows = 1)
+## only certain types of subplots
+add_ggproto_to_ggmatrix(
+  pm, scale_fill_brewer(),
+  only_fn = c("ggally_box_no_facet", "ggally_barDiag")
+)
 }
 \seealso{
 \code{\link[ggplot2]{+.gg}} and \code{\link[ggplot2]{theme}}
