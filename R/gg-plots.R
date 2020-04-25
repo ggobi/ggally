@@ -1323,14 +1323,13 @@ ggally_count <- function(data, mapping, ...) {
   mapping$base_y <- aes_string(base_y = ".y")$base_y
   mapping$y <- NULL
 
-  p <- ggplot(data, mapping)
+  # default values
+  args <- list(...)
+  if (!"fill" %in% names(args) & is.null(mapping$fill))
+    args$fill <- "grey50"
 
-  if ("fill" %in% names(list(...)) | !is.null(mapping$fill))
-    p <- p + stat_ggally_count(...)
-  else
-    p <- p + stat_ggally_count(fill = "grey50", ...)
-
-  p +
+  ggplot(data, mapping) +
+    do.call(stat_ggally_count, args) +
     scale_y_continuous(
       breaks = 1:length(levels(data$.y)),
       labels = levels(data$.y)
