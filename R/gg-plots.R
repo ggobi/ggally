@@ -1306,80 +1306,111 @@ ggally_ratio <- function(
 #' @examples
 #' data(tips, package = "reshape")
 #' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex))
+#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day))
 #'
 #' ggally_count(
 #'   as.data.frame(Titanic),
 #'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
 #' )
 ggally_count <- function(data, mapping, ...) {
-
   mapping <- mapping_color_to_fill(mapping)
-  vars <- unlist(lapply(mapping, mapping_string))
-  x_var <- vars["x"]
-  y_var <- vars["y"]
-  if (is.na(x_var)) stop("'x' aesthetic is required.")
-  if (is.na(y_var)) stop("'y' aesthetic is required.")
+  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
+  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  # for stat_ggally_count(), y should be mapped to base_y
+  # and always be a factor
+  data$.y <- as.factor(eval_data_col(data, mapping$y))
+  ylabel <- mapping_string(mapping$y)
+  mapping$base_y <- aes_string(base_y = ".y")$base_y
+  mapping$y <- NULL
 
-  if (is.na(vars["weight"])) {
-    data$.weight <- 1
-  } else {
-    data$.weight <- data[[vars["weight"]]]
-  }
-
-  # compute formula for aggregation
-  # exclude weight and do not double count a var mapped to several aesthetics
-  f <- stats::as.formula(paste(
-    ".weight ~",
-    paste(unique(vars[names(vars) != "weight"]), collapse = "+")
-  ))
-
-  d <- stats::aggregate(f, data, sum, na.rm = TRUE)
-  names(d)[which(names(d) == ".weight")] <- ".n"
-
-  d$.x <- d[[x_var]] # keep original x &nd y
-  d$.y <- d[[y_var]]
-  d[[x_var]] <- as.numeric(d$.x)
-  # count total n for each combinaison of x and y
-  d$.n_xy <- stats::ave(d$.n, d$.x, d$.y, FUN = function(x) sum(x, na.rm = TRUE))
-  # proportion within a combinaison of x and y
-  d$.prop <- d$.n / d$.n_xy
-  d$.width <- sqrt(d$.n_xy) / max(sqrt(d$.n_xy)) * .9
-  d$.height <- d$.width * d$.prop
-  d$.cum_height <- stats::ave(d$.height, d$.x, d$.y, FUN = cumsum)
-  d[[y_var]] <- as.numeric(d$.y) + d$.cum_height - d$.height / 2 - d$.width / 2
-
-  # mapp height and width
-  # use aes_string() to avoid "no visible binding for global variable" NOTES
-  mapping$height <- aes_string(height = ".height")$height
-  mapping$width <- aes_string(width = ".width")$width
-
-  # remove weight aesthetic
-  mapping$weight <- NULL
-
-  # if fill corresponds to x or y, map to original factor
-  if (!is.na(vars["fill"]) & vars["fill"] == vars["x"])
-    mapping$fill <- aes_string(fill = ".x")$fill
-  else if (!is.na(vars["fill"]) & vars["fill"] == vars["y"])
-    mapping$fill <- aes_string(fill = ".y")$fill
-
-  p <- ggplot(data = d, mapping)
+  p <- ggplot(data, mapping)
 
   if ("fill" %in% names(list(...)) | !is.null(mapping$fill))
-    p <- p + geom_tile(...)
+    p <- p + stat_ggally_count(...)
   else
-    p <- p + geom_tile(fill = "grey50", ...)
+    p <- p + stat_ggally_count(fill = "grey50", ...)
 
   p +
-    scale_x_continuous(
-      breaks = 1:length(levels(d$.x)),
-      labels = levels(d$.x)
-    ) +
     scale_y_continuous(
-      breaks = 1:length(levels(d$.y)),
-      labels = levels(d$.y)
+      breaks = 1:length(levels(data$.y)),
+      labels = levels(data$.y)
     ) +
-    theme(panel.grid.minor = element_blank())
+    theme(panel.grid.minor = element_blank()) +
+    ylab(ylabel)
 }
+
+#' @export
+#' @rdname ggally_count
+#' @format NULL
+#' @usage NULL
+#' @export
+stat_ggally_count <- function(mapping = NULL, data = NULL,
+                      geom = "tile", position = "identity",
+                      ...,
+                      show.legend = NA,
+                      inherit.aes = TRUE) {
+
+  params <- list(
+    ...
+  )
+  if (!is.null(params$y)) {
+    stop("stat_ggally_count() must not be used with a y aesthetic,
+         but with a base_y aesthetic instead.", call. = FALSE)
+  }
+
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatGgallyCount,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params
+  )
+}
+
+#' @rdname ggally_count
+#' @format NULL
+#' @usage NULL
+#' @export
+StatGgallyCount <- ggproto("StatGgallyCount", Stat,
+  required_aes = c("x", "base_y"),
+  default_aes = aes(
+    weight = 1,
+    width = after_stat(width),
+    height = after_stat(height),
+    y = after_stat(y)
+  ),
+
+  setup_params = function(data, params) {
+    params
+  },
+
+  compute_panel = function(self, data, scales, width = NULL) {
+    if (is.null(data$weight))
+      data$weight <- rep(1, nrow(data))
+
+    # sum weights for each combination of aesthetics
+    # the use of . allows to consider all aesthetics defined in data
+    panel <- stats::aggregate(weight ~ ., data = data, sum, na.rm = TRUE)
+
+    names(panel)[which(names(panel) == "weight")] <- "n"
+
+    # compute proportions by x and y
+    f <- function(n) {sum(abs(n), na.rm = TRUE)}
+    panel$n_xy <- stats::ave(panel$n, panel$x, panel$base_y, FUN = f)
+    panel$prop <- panel$n / panel$n_xy
+    panel$width <- sqrt(panel$n_xy) / max(sqrt(panel$n_xy)) * .9
+    panel$height <- panel$width * panel$prop
+    panel$cum_height <- stats::ave(panel$height, panel$x, panel$base_y, FUN = cumsum)
+    panel$y <- as.numeric(panel$base_y) + panel$cum_height -
+      panel$height / 2 - panel$width / 2
+
+    panel
+  }
+)
+
 
 #' @rdname ggally_count
 #' @export
@@ -1388,10 +1419,8 @@ ggally_count <- function(data, mapping, ...) {
 #' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
 #' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
 ggally_countDiag <- function(data, mapping, ...) {
-  data$.x_copy <- data[[mapping_string(mapping$x)]]
-  mapping$y <- aes_string(y = ".x_copy")$y
-  ggally_count(data = data, mapping = mapping, ...) +
-    ylab("")
+  mapping$y <- mapping$x
+  ggally_count(data = data, mapping = mapping, ...)
 }
 
 #' Blank
