@@ -23,6 +23,9 @@ ggally_countDiag(data, mapping, ...)
 Plot the number of observations by using rectangles
 with proportional areas.
 }
+\details{
+You can adjust the size of rectangles with the \code{x.width} argument.
+}
 \examples{
 data(tips, package = "reshape")
 ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex))
@@ -31,6 +34,11 @@ ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day))
 ggally_count(
   as.data.frame(Titanic),
   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
+)
+ggally_count(
+  as.data.frame(Titanic),
+  mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq),
+  x.width = 0.5
 )
 
 ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))

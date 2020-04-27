@@ -1300,6 +1300,8 @@ ggally_ratio <- function(
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
+#' @details
+#'   You can adjust the size of rectangles with the \code{x.width} argument.
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @keywords hplot
 #' @export
@@ -1311,6 +1313,11 @@ ggally_ratio <- function(
 #' ggally_count(
 #'   as.data.frame(Titanic),
 #'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
+#' )
+#' ggally_count(
+#'   as.data.frame(Titanic),
+#'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq),
+#'   x.width = 0.5
 #' )
 ggally_count <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
@@ -1343,13 +1350,19 @@ ggally_count <- function(data, mapping, ...) {
 #' @format NULL
 #' @usage NULL
 #' @export
+# na.rm = TRUE to remove warnings if NA (cf. stat_count)
+# x.width to control size of tiles
 stat_ggally_count <- function(mapping = NULL, data = NULL,
                       geom = "tile", position = "identity",
                       ...,
+                      x.width = .9,
+                      na.rm = FALSE,
                       show.legend = NA,
                       inherit.aes = TRUE) {
 
   params <- list(
+    x.width = x.width,
+    na.rm = na.rm,
     ...
   )
   if (!is.null(params$y)) {
@@ -1386,9 +1399,14 @@ StatGgallyCount <- ggproto("StatGgallyCount", Stat,
     params
   },
 
-  compute_panel = function(self, data, scales, width = NULL) {
+  extra_params = c("na.rm"),
+
+  compute_panel = function(self, data, scales, x.width = NULL) {
     if (is.null(data$weight))
       data$weight <- rep(1, nrow(data))
+
+    if(is.null(x.width))
+      x.width <- .9
 
     # sum weights for each combination of aesthetics
     # the use of . allows to consider all aesthetics defined in data
@@ -1400,7 +1418,7 @@ StatGgallyCount <- ggproto("StatGgallyCount", Stat,
     f <- function(n) {sum(abs(n), na.rm = TRUE)}
     panel$n_xy <- stats::ave(panel$n, panel$x, panel$base_y, FUN = f)
     panel$prop <- panel$n / panel$n_xy
-    panel$width <- sqrt(panel$n_xy) / max(sqrt(panel$n_xy)) * .9
+    panel$width <- sqrt(panel$n_xy) / max(sqrt(panel$n_xy)) * x.width
     panel$height <- panel$width * panel$prop
     panel$cum_height <- stats::ave(panel$height, panel$x, panel$base_y, FUN = cumsum)
     panel$y <- as.numeric(panel$base_y) + panel$cum_height -
