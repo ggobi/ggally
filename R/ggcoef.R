@@ -20,7 +20,7 @@
 #' @param errorbar_height height of the error bars
 #' @param errorbar_linetype line type of the error bars
 #' @param errorbar_size size of the error bars
-#' @param sort \code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"decending"} sort by decreasing coefficient value
+#' @param sort \code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"descending"} sort by decreasing coefficient value
 #' @param ... additional arguments sent to \code{\link[ggplot2]{geom_point}}
 #' @examples
 #' library(broom)
@@ -50,7 +50,7 @@ ggcoef <- function(
   errorbar_height = 0,
   errorbar_linetype = "solid",
   errorbar_size = .5,
-  sort = c("none", "ascending", "decending"),
+  sort = c("none", "ascending", "descending"),
   ...
 ) {
   if (!is.data.frame(x)) {
