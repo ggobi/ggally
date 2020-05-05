@@ -20,6 +20,7 @@
 #'
 #' @import ggplot2
 #' @importFrom scales percent
+#' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @export
 #' @examples
 #'
@@ -95,7 +96,7 @@ StatProp <- ggproto("StatProp", Stat,
     }
     # there is an unresolved bug when by is a character vector. To be explored.
     if (is.character(data$by)) {
-      stop("The by aesthetic should be a factor instead of a character vector.", call. = FALSE)
+      stop("The by aesthetic should be a factor instead of a character.", call. = FALSE)
     }
     params
   },
@@ -126,4 +127,120 @@ StatProp <- ggproto("StatProp", Stat,
 "%||%" <- function(a, b) {
   if (!is.null(a)) a else b
 }
+
+#' Column and Row bar plots
+#'
+#' Plot colum or row percentage using bar plots.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param remove_y_axis should y-axis be removed?
+#' @param remove_x_axis should x-axis be removed?
+#' @param label_format formatter function for displaying proportions
+#' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
+#' @param geom_bar_args other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}
+#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex))
+#' ggally_rowbar(tips, mapping = aes(x = smoker, y = sex))
+#'
+#' # change labels' size
+#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8)
+#'
+#' # change labels' colour and use bold
+#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
+#'               colour = "white", fontface = "bold")
+#'
+#' # custom bar width
+#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5))
+#'
+#' # change format of labels
+#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
+#'               label_format = scales::label_percent(accuracy = .01, decimal.mark = ","))
+#'
+#' ggduo(
+#'   data = as.data.frame(Titanic),
+#'   mapping = aes(weight = Freq),
+#'   columnsX = "Survived",
+#'   columnsY = c("Sex", "Class", "Age"),
+#'   types = list(discrete = "rowbar"),
+#'   legend = 1
+#' )
+#' @importFrom scales label_percent
+ggally_colbar <- function(data, mapping,
+                          label_format = scales::label_percent(accuracy = .1),
+                          remove_y_axis = TRUE, ...,
+                          geom_bar_args = NULL) {
+  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
+  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+
+  x_var <- mapping_string(mapping$x)
+  y_var <- mapping_string(mapping$y)
+
+  # x should be a factor
+  if (!is.factor(data[[x_var]]))
+    data[[x_var]] <- factor(data[[x_var]])
+
+  # y should be mapped to fill and x to by
+  mapping$fill <- mapping$y
+  mapping$y <- NULL
+  mapping$by <- mapping$x
+
+  # colour should not be mapped in aes
+  if (!is.null(mapping$colour))
+    mapping$colour <- NULL
+
+  # position for geom_bar
+  geom_bar_args$position <- "fill"
+
+  p <- ggplot(data, mapping) +
+    do.call(geom_bar, geom_bar_args) +
+    geom_text(
+      aes_string(label = "label_format(after_stat(prop))"),
+      stat = "prop",
+      position = position_fill(.5),
+      ...
+    ) +
+    ylab("") +
+    scale_y_reverse(expand = c(0, 0)) +
+    theme(
+      panel.background = element_blank(),
+      panel.grid = element_blank()
+    )
+
+  if (remove_y_axis)
+    p <- p +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank()
+    )
+  p
+}
+
+#' @rdname ggally_colbar
+#' @export
+ggally_rowbar <- function(data, mapping,
+                          label_format = scales::label_percent(accuracy = .1),
+                          remove_x_axis = TRUE, ...,
+                          geom_bar_args = NULL) {
+  mapping <- mapping_swap_x_y(mapping)
+  p <- ggally_colbar(
+    data = data, mapping = mapping,
+    label_format = label_format,
+    remove_y_axis = FALSE, ...,
+    geom_bar_args = geom_bar_args) +
+    coord_flip()
+
+  if (remove_x_axis)
+    p <- p +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank()
+    )
+  p
+}
+
 
