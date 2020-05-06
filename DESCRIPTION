@@ -37,6 +37,7 @@ Imports:
     progress,
     RColorBrewer,
     reshape (>= 0.8.5),
+    scales (>= 1.1.0),
     utils,
     rlang
 Suggests:
@@ -50,7 +51,6 @@ Suggests:
     mapproj,
     network (>= 1.12.0),
     scagnostics,
-    scales (>= 0.4.0),
     sna (>= 2.3-2),
     survival,
     packagedocs (>= 0.4.0),
