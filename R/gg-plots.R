@@ -10,6 +10,8 @@ if (getRversion() >= "2.15.1") {
 }
 
 
+
+
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
 #' @param data data set to evaluate the data with
@@ -199,22 +201,33 @@ ggally_density <- function(data, mapping, ...){
   p
 }
 
+
 #' Correlation from the Scatter Plot
 #'
 #' Estimate correlation from the given data.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param alignPercent right align position of numbers. Default is 60 percent across the horizontal
+#' @param ... other arguments being supplied to \code{\link[ggplot2]{geom_text}()} for the title and groups
+#' @param stars logical value which determines if the significance stars should be displayed.  Given the \code{\link[stats]{cor.test}} p-values, display \describe{
+#'   \item{\code{"***"}}{if the p-value is \verb{< 0.001}}
+#'   \item{\code{"**"}}{if the p-value is \verb{< 0.01}}
+#'   \item{\code{"*"}}{if the p-value is \verb{< 0.05}}
+#'   \item{\code{"."}}{if the p-value is \verb{< 0.10}}
+#'   \item{\code{""}}{otherwise}
+#' }
 #' @param method \code{method} supplied to cor function
-#' @param use \code{use} supplied to cor function
-#' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
-#' @param corMethod deprecated. Use parameter \code{method}
-#' @param corUse deprecated. Use parameter \code{use}
-#' @param displayGrid if TRUE, display aligned panel gridlines
-#' @param ... other arguments being supplied to geom_text
+#' @param use \code{use} supplied to \code{\link[stats]{cor}} function
+#' @param displayGrid if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.
+#' @param digits number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.
+#' @param title_args arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}
+#' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
+#' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
+#' @param alignPercent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
+#' @param title title text to be displayed
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom stats complete.cases cor
+#' @seealso \code{\link{ggally_exec_text}}, \code{\link{ggally_cor_v1_5}}
 #' @export
 #' @keywords hplot
 #' @examples
@@ -224,14 +237,15 @@ ggally_density <- function(data, mapping, ...){
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-#'    displayGrid = FALSE
+#'    displayGrid = TRUE
 #'  )
 #'  # change text attributes
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes(x = total_bill, y = tip),
 #'    size = 15,
-#'    colour = I("red")
+#'    colour = I("red"),
+#'    title = "Correlation"
 #'  )
 #'  # split by a variable
 #'  ggally_cor(
@@ -242,74 +256,128 @@ ggally_density <- function(data, mapping, ...){
 ggally_cor <- function(
   data,
   mapping,
-  alignPercent = 0.6,
-  method = "pearson", use = "complete.obs",
-  corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
-  displayGrid = TRUE,
-  ...
-){
+  ...,
+  stars = TRUE,
+  method = "pearson",
+  use = "complete.obs",
+  displayGrid = FALSE,
+  digits = 3,
+  title_args = list(...),
+  group_args = list(...),
+  justify_labels = "right",
+  alignPercent = 0.5,
+  title = "Corr"
+) {
+  ggally_exec_text(
+    data = data,
+    mapping = mapping,
+    alignPercent = alignPercent,
+    use = use,
+    displayGrid = displayGrid,
+    title_args = title_args,
+    group_args = group_args,
+    justify_labels = justify_labels,
+    justify_text = "left",
+    sep = if ("colour" %in% names(mapping)) ": " else ":\n",
+    title = title,
+    text_fn = function(x, y) {
+      if (is_date(x)) {
+        x <- as.numeric(x)
+      }
+      if (is_date(y)) {
+        y <- as.numeric(y)
+      }
 
-  if (! is.null(corAlignPercent)) {
-    stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
-  }
-  if (! is.null(corMethod)) {
-    stop("'corMethod' is deprecated.  Please use argument 'method'")
-  }
-  if (! is.null(corUse)) {
-    stop("'corUse' is deprecated.  Please use argument 'use'")
-  }
+      corObj <- stats::cor.test(x, y, method = method, use = use)
 
-  useOptions <- c(
-    "all.obs",
-    "complete.obs",
-    "pairwise.complete.obs",
-    "everything",
-    "na.or.complete"
+      # make sure all values have X-many decimal places
+      cor_est <- as.numeric(corObj$estimate)
+      cor_txt <- formatC(cor_est, digits = digits, format = "f")
+
+      # if stars should be added
+      if (isTRUE(stars)) {
+        cor_stars <- function(pValue) {
+          if (pValue < 0.001) {
+            " ***"
+          } else if (pValue < 0.01) {
+            " **"
+          } else if (pValue < 0.05) {
+            " *"
+          } else if (pValue < 0.10) {
+            " ."
+          } else {
+            ""
+          }
+        }
+        cor_txt <- str_c(
+          cor_txt,
+          cor_stars(corObj$p.value)
+        )
+      }
+
+      cor_txt
+    }
   )
-  use <- pmatch(use, useOptions)
-  if (is.na(use)) {
-    warning("correlation 'use' not found.  Using default value of 'all.obs'")
-    use <- useOptions[1]
-  } else {
-    use <- useOptions[use]
+}
+
+
+#' Generalized Text Display
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param title title text to be displayed
+#' @param text_fn function that takes in \code{x} and \code{y} and returns a text string
+#' @param use \code{use} supplied to \code{\link[stats]{cor}} function
+#' @param displayGrid if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.
+#' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
+#' @param justify_text \code{justify} argument supplied when \code{\link[base]{format}}ting the returned \code{text_fn(x, y)} values
+#' @param sep separation value to be placed between the labels and text
+#' @param family font family used when displaying all text.  This value will be set in \code{title_args} or \code{group_args} if no \code{family} value exists.  By using \code{"mono"}, groups will align with each other.
+#' @param title_args arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}
+#' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
+#' @param alignPercent relative align position of the text. When \code{title_hjust = 0.5} and \code{group_hjust = 0.5}, this should not be needed to be set.
+#' @param title_hjust,group_hjust \code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.
+#' @seealso \code{\link{ggally_cor}}
+#' @export
+ggally_exec_text <- function(
+  data,
+  mapping,
+  text_fn,
+  title,
+  use = c("everything", "complete.obs", "all.obs", "pairwise.complete.obs", "na.or.complete"),
+  displayGrid = FALSE,
+  justify_labels = "right",
+  justify_text = "left",
+  sep = ": ",
+  family = "mono",
+  title_args = list(),
+  group_args = list(),
+  alignPercent = 0.5,
+  title_hjust = 0.5,
+  group_hjust = 0.5
+) {
+  set_if_not_there <- function(obj, key, value) {
+    obj <- as.list(obj)
+    if (! "family" %in% rlang::names2(obj)) {
+      obj$family <- family
+    }
+    obj
   }
 
-  cor_fn <- function(x, y) {
-    # also do ddply below if fn is altered
-    cor(x, y, method = method, use = use)
-  }
+  title_args <- set_if_not_there(title_args, "family", family)
+  group_args <- set_if_not_there(group_args, "family", family)
 
-  # xVar <- data[[as.character(mapping$x)]]
-  # yVar <- data[[as.character(mapping$y)]]
-  # x_bad_rows <- is.na(xVar)
-  # y_bad_rows <- is.na(yVar)
-  # bad_rows <- x_bad_rows | y_bad_rows
-  # if (any(bad_rows)) {
-  #   total <- sum(bad_rows)
-  #   if (total > 1) {
-  #     warning("Removed ", total, " rows containing missing values")
-  #   } else if (total == 1) {
-  #     warning("Removing 1 row that contained a missing value")
-  #   }
-  #
-  #   xVar <- xVar[!bad_rows]
-  #   yVar <- yVar[!bad_rows]
-  # }
+  title_args <- set_if_not_there(title_args, "hjust", title_hjust)
+  group_args <- set_if_not_there(group_args, "hjust", group_hjust)
 
-  # mapping$x <- mapping$y <- NULL
+  use <- match.arg(use)
 
   xData <- eval_data_col(data, mapping$x)
   yData <- eval_data_col(data, mapping$y)
-
-  if (is_date(xData)) {
-    xData <- as.numeric(xData)
-  }
-  if (is_date(yData)) {
-    yData <- as.numeric(yData)
-  }
   colorData <- eval_data_col(data, mapping$colour)
+
   if (is.numeric(colorData)) {
-    stop("ggally_cor: mapping color column must be categorical, not numeric")
+    stop("`mapping` color column must be categorical, not numeric")
   }
 
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
@@ -320,6 +388,12 @@ ggally_cor <- function(
     }
 
     if (any(!rows)) {
+      if (!is.null(colorData) && (length(colorData) == length(xData))) {
+        colorData <- colorData[rows]
+      }
+      xData <- xData[rows]
+      yData <- yData[rows]
+
       total <- sum(!rows)
       if (total > 1) {
         warning("Removed ", total, " rows containing missing values")
@@ -327,18 +401,13 @@ ggally_cor <- function(
         warning("Removing 1 row that contained a missing value")
       }
     }
-
-    if (!is.null(colorData) && (length(colorData) == length(xData))) {
-      colorData <- colorData[rows]
-    }
-    xData <- xData[rows]
-    yData <- yData[rows]
   }
 
   xVal <- xData
   yVal <- yData
 
   # if the mapping has to deal with the data, remove it
+  ### IDK what this does
   if (packageVersion("ggplot2") > "2.2.1") {
     for (mappingName in names(mapping)) {
       itemData <- eval_data_col(data, mapping[[mappingName]])
@@ -361,7 +430,17 @@ ggally_cor <- function(
       }
     }
   }
+  ### END IDK
 
+  # calculate variable ranges so the gridlines line up
+  xmin <- min(xVal, na.rm = TRUE)
+  xmax <- max(xVal, na.rm = TRUE)
+  xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
+  ymin <- min(yVal, na.rm = TRUE)
+  ymax <- max(yVal, na.rm = TRUE)
+  yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
+
+  # if there is a color grouping...
   if (
     !is.null(colorData) &&
     !inherits(colorData, "AsIs")
@@ -371,12 +450,11 @@ ggally_cor <- function(
       data.frame(x = xData, y = yData, color = colorData),
       "color",
       function(dt) {
-        cor_fn(dt$x, dt$y)
+        text_fn(dt$x, dt$y)
       }
     )
-    colnames(cord)[2] <- "correlation"
+    colnames(cord)[2] <- "text"
 
-    cord$correlation <- signif(as.numeric(cord$correlation), 3)
 
     # put in correct order
     lev <- levels(as.factor(colorData))
@@ -388,31 +466,28 @@ ggally_cor <- function(
         }
       }
     }
-
-    # print(order(ord[ord >= 0]))
-    # print(lev)
     cord <- cord[order(ord[ord >= 0]), ]
-    cord$label <- str_c(cord$color, ": ", cord$correlation)
 
-    # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal, na.rm = TRUE)
-    xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
-    ymin <- min(yVal, na.rm = TRUE)
-    ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
-
-
-    # print(cord)
-    p <- ggally_text(
-      label   = str_c("Corr: ", signif(cor_fn(xVal, yVal), 3)),
-      mapping = mapping,
-      xP      = 0.5,
-      yP      = 0.9,
-      xrange  = xrange,
-      yrange  = yrange,
-      ...
+        # make labels align together
+    cord$label <- str_c(
+      format(cord$color, justify = justify_labels),
+      sep,
+      format(cord$text, justify = justify_text)
     )
+
+    # title
+    ggally_text_args <- append(
+      list(
+        label   = str_c(title, sep, text_fn(xVal, yVal)),
+        mapping = mapping,
+        xP      = 0.5,
+        yP      = 0.9,
+        xrange  = xrange,
+        yrange  = yrange
+      ),
+      title_args
+    )
+    p <- do.call(ggally_text, ggally_text_args)
 
     xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
     yPos <- seq(
@@ -421,63 +496,60 @@ ggally_cor <- function(
       length.out = nrow(cord) + 1)
     yPos <- yPos * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
-    # print(range(yVal))
-    # print(yPos)
 
     cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
     cordf$labelp <- factor(cordf$labelp, levels = cordf$labelp)
-    # print(cordf)
-    # print(str(cordf))
 
-    p <- p + geom_text(
-      data = cordf,
-      aes(
-        x = xPos,
-        y = yPos,
-        label = labelp,
-        color = labelp
+    # group text values
+    geom_text_args <- append(
+      list(
+        data = cordf,
+        aes(
+          x = xPos,
+          y = yPos,
+          label = labelp,
+          color = labelp
+        )
       ),
-      hjust = 1,
-      ...
-
+      group_args
     )
+    p <- p + do.call(geom_text, geom_text_args)
   } else {
-    # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal, na.rm = TRUE)
-    xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
-    ymin <- min(yVal, na.rm = TRUE)
-    ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
 
-    p <- ggally_text(
-      label = paste(
-        "Corr:\n",
-        signif(
-          cor_fn(xVal, yVal),
-          3
-        ),
-        sep = "", collapse = ""
+    ggally_text_args <- append(
+      list(
+        label = paste0(title, sep, text_fn(xVal, yVal), collapse = ""),
+        mapping,
+        xP = 0.5,
+        yP = 0.5,
+        xrange = xrange,
+        yrange = yrange
       ),
-      mapping,
-      xP = 0.5,
-      yP = 0.5,
-      xrange = xrange,
-      yrange = yrange,
-      ...
+      title_args
     )
+
+    p <- do.call(ggally_text, ggally_text_args)
   }
 
   if (!isTRUE(displayGrid)) {
     p <- p +
       theme(
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(
+          linetype = "solid",
+          color = theme_get()$panel.background$fill,
+          fill = "transparent"
+        )
       )
   }
 
   p + theme(legend.position = "none")
+
 }
+
+
+
 
 
 #' Plots the Box Plot
