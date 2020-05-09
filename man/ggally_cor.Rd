@@ -7,14 +7,17 @@
 ggally_cor(
   data,
   mapping,
-  alignPercent = 0.6,
+  ...,
+  stars = TRUE,
   method = "pearson",
   use = "complete.obs",
-  corAlignPercent = NULL,
-  corMethod = NULL,
-  corUse = NULL,
-  displayGrid = TRUE,
-  ...
+  displayGrid = FALSE,
+  digits = 3,
+  title_args = list(...),
+  group_args = list(...),
+  justify_labels = "right",
+  alignPercent = 0.5,
+  title = "Corr"
 )
 }
 \arguments{
@@ -22,21 +25,33 @@ ggally_cor(
 
 \item{mapping}{aesthetics being used}
 
-\item{alignPercent}{right align position of numbers. Default is 60 percent across the horizontal}
+\item{...}{other arguments being supplied to \code{\link[ggplot2]{geom_text}()} for the title and groups}
+
+\item{stars}{logical value which determines if the significance stars should be displayed.  Given the \code{\link[stats]{cor.test}} p-values, display \describe{
+  \item{\code{"***"}}{if the p-value is \verb{< 0.001}}
+  \item{\code{"**"}}{if the p-value is \verb{< 0.01}}
+  \item{\code{"*"}}{if the p-value is \verb{< 0.05}}
+  \item{\code{"."}}{if the p-value is \verb{< 0.10}}
+  \item{\code{""}}{otherwise}
+}}
 
 \item{method}{\code{method} supplied to cor function}
 
-\item{use}{\code{use} supplied to cor function}
+\item{use}{\code{use} supplied to \code{\link[stats]{cor}} function}
 
-\item{corAlignPercent}{deprecated. Use parameter \code{alignPercent}}
+\item{displayGrid}{if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.}
 
-\item{corMethod}{deprecated. Use parameter \code{method}}
+\item{digits}{number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.}
 
-\item{corUse}{deprecated. Use parameter \code{use}}
+\item{title_args}{arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}}
 
-\item{displayGrid}{if TRUE, display aligned panel gridlines}
+\item{group_args}{arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}}
 
-\item{...}{other arguments being supplied to geom_text}
+\item{justify_labels}{\code{justify} argument supplied when \code{\link[base]{format}}ting the labels}
+
+\item{alignPercent}{relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.}
+
+\item{title}{title text to be displayed}
 }
 \description{
 Estimate correlation from the given data.
@@ -48,14 +63,15 @@ Estimate correlation from the given data.
  ggally_cor(
    tips,
    mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-   displayGrid = FALSE
+   displayGrid = TRUE
  )
  # change text attributes
  ggally_cor(
    tips,
    mapping = ggplot2::aes(x = total_bill, y = tip),
    size = 15,
-   colour = I("red")
+   colour = I("red"),
+   title = "Correlation"
  )
  # split by a variable
  ggally_cor(
@@ -63,6 +79,9 @@ Estimate correlation from the given data.
    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
    size = 5
  )
+}
+\seealso{
+\code{\link{ggally_exec_text}}, \code{\link{ggally_cor_v1_5}}
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
