@@ -2,7 +2,7 @@ GGally (development version)
 ---------------------
 
 
-`ggally_cor`
+`ggally_cor` (#327)
 * New implementation using `ggally_exec_text()`
 * Will now hide the grid by default and add a border (`displayGrid = FALSE`)
 * Deprecated parameters have been removed
@@ -12,7 +12,7 @@ GGally (development version)
 * Digits now represents the total number of digits after the decimal place.
 * To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
 
-`ggally_exec_text`
+`ggally_exec_text` (#327)
 * New function which is a generialized version of `ggally_cor()`
 * Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
 
