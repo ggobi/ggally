@@ -296,22 +296,9 @@ ggally_cor <- function(
 
       # if stars should be added
       if (isTRUE(stars)) {
-        cor_stars <- function(pValue) {
-          if (pValue < 0.001) {
-            " ***"
-          } else if (pValue < 0.01) {
-            " **"
-          } else if (pValue < 0.05) {
-            " *"
-          } else if (pValue < 0.10) {
-            " ."
-          } else {
-            ""
-          }
-        }
         cor_txt <- str_c(
           cor_txt,
-          cor_stars(corObj$p.value)
+          signif_stars(corObj$p.value)
         )
       }
 
