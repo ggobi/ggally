@@ -23,14 +23,19 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
-  newdata <- NULL
+  q <- nrow(dn)
+  newdata      <- as.data.frame(matrix(NA, nrow = q*p*p, ncol = 6+ncol(factor)))
+  newdata[5:6] <- as.data.frame(matrix("", nrow = q*p*p, ncol = 2), stringsAsFactors = F)
+
+  r <-1
   for (i in 1:p) {
     for (j in 1:p) {
-      newdata <- rbind(newdata,
-                       cbind(dn[[i]], dn[[j]], i, j, colnames(dn)[i], colnames(dn)[j], factor)
-      )
+      newdata[r:(r+q-1), 1:6] <- cbind(dn[[i]], dn[[j]], i, j, colnames(dn)[i], colnames(dn)[j])
+      r <- r+q
     }
   }
+
+  if (ncol(newdata) > 6){newdata[7:ncol(newdata)] <- factor}
   colnames(newdata) <- c("xvalue", "yvalue", "xslot", "yslot", "xlab", "ylab", colnames(factor))
 
   rp <- data.frame(newdata)
@@ -39,6 +44,10 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 
   rp$xvalue <- suppressWarnings(as.numeric(as.character(rp$xvalue)))
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
+  rp$xslot  <- suppressWarnings(as.numeric(as.character(rp$xslot)))
+  rp$yslot  <- suppressWarnings(as.numeric(as.character(rp$yslot)))
+  rp$xlab <- factor(rp$xlab, levels = unique(rp$xlab))
+  rp$ylab <- factor(rp$ylab, levels = unique(rp$ylab))
 
   if (is.null(color)){
     rp.new <- rp[1:6]
