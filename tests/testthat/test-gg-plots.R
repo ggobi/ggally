@@ -33,12 +33,6 @@ test_that("density", {
 
 test_that("cor", {
 
-  expect_error(
-    ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"), use = "NOTFOUND"),
-    "should be one of"
-  )
-
-
   ti <- tips
   class(ti) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), use = "complete.obs")
@@ -130,14 +124,30 @@ test_that("dates", {
 
   class(nas) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(nas, ggplot2::aes(x = date, y = ozone))
-  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278 ***")
-  p <- ggally_cor(nas, ggplot2::aes(y = date, x = ozone))
-  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278 ***")
-
+  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278***")
   p <- ggally_barDiag(nas, ggplot2::aes(x = date))
   expect_equal(mapping_string(p$mapping$x), "date")
   expect_equal(p$labels$y, "count")
 
+})
+
+test_that("cor stars are aligned", {
+  p <- ggally_cor(iris, ggplot2::aes(x = Sepal.Length, y = Petal.Width, color = as.factor(Species)))
+  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr: 0.818***")
+  expect_equal(get("aes_params", envir = p$layers[[1]])$family, "mono")
+
+  labels <- eval_data_col(p$layers[[2]]$data, p$layers[[2]]$mapping$label)
+  expect_equal(as.character(labels), c("    setosa: 0.278.  ", "versicolor: 0.546***", " virginica: 0.281*  "))
+})
+
+test_that("ggally_statistic handles factors", {
+
+  simple_chisq <- function(x, y){
+    scales::number(chisq.test(x,y)$p.value, accuracy=.001)
+  }
+  expect_silent({
+    p <- ggally_statistic(reshape::tips, aes(x=sex, y=day), text_fn = simple_chisq, title = "Chi^2")
+  })
 })
 
 test_that("rescale", {

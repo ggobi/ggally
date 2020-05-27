@@ -11,13 +11,15 @@ ggally_cor(
   stars = TRUE,
   method = "pearson",
   use = "complete.obs",
-  displayGrid = FALSE,
+  display_grid = FALSE,
   digits = 3,
   title_args = list(...),
   group_args = list(...),
   justify_labels = "right",
-  alignPercent = 0.5,
-  title = "Corr"
+  align_percent = 0.5,
+  title = "Corr",
+  alignPercent = warning("deprecated. Use `align_percent`"),
+  displayGrid = warning("deprecated. Use `display_grid`")
 )
 }
 \arguments{
@@ -39,7 +41,7 @@ ggally_cor(
 
 \item{use}{\code{use} supplied to \code{\link[stats]{cor}} function}
 
-\item{displayGrid}{if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.}
+\item{display_grid}{if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.}
 
 \item{digits}{number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.}
 
@@ -49,9 +51,11 @@ ggally_cor(
 
 \item{justify_labels}{\code{justify} argument supplied when \code{\link[base]{format}}ting the labels}
 
-\item{alignPercent}{relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.}
+\item{align_percent}{relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.}
 
 \item{title}{title text to be displayed}
+
+\item{alignPercent, displayGrid}{deprecated. Please use their snake-case counterparts.}
 }
 \description{
 Estimate correlation from the given data.
@@ -59,11 +63,11 @@ Estimate correlation from the given data.
 \examples{
  data(tips, package = "reshape")
  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
- # display with no grid
+ # display with grid
  ggally_cor(
    tips,
    mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-   displayGrid = TRUE
+   display_grid = TRUE
  )
  # change text attributes
  ggally_cor(
@@ -81,7 +85,7 @@ Estimate correlation from the given data.
  )
 }
 \seealso{
-\code{\link{ggally_exec_text}}, \code{\link{ggally_cor_v1_5}}
+\code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 }
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
