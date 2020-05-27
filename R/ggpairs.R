@@ -237,7 +237,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @template ggmatrix-progress
 #' @param legends deprecated
-#' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables
+#' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.
 #' @export
 #' @examples
 #'  # small function to display plots only if it's interactive
@@ -666,6 +666,7 @@ ggduo <- function(
 #' @param ... deprecated. Please use \code{mapping}
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
+#' @param proportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.
 #' @template ggmatrix-labeller-param
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
@@ -786,6 +787,17 @@ ggduo <- function(
 #'   upper = list(continuous = wrap(ggally_cor, displayGrid = FALSE))
 #' )
 #' p_(pm)
+#'
+#' ## Custom with/height of subplots
+#' pm <- ggpairs(tips, columns = c(2, 3, 5))
+#' p_(pm)
+#'
+#' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = "auto")
+#' p_(pm)
+#'
+#' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
+#' p_(pm)
+#'
 ggpairs <- function(
   data,
   mapping = NULL,
@@ -806,7 +818,8 @@ ggpairs <- function(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
-  legends = stop("deprecated")
+  legends = stop("deprecated"),
+  proportions = NULL
 ){
 
   warn_deprecated(!missing(legends), "legends")
@@ -892,6 +905,21 @@ ggpairs <- function(
     return(p)
   })
 
+  # relative proportions if "auto"
+  if (length(proportions) == 1 && proportions == "auto") {
+    proportions <- c()
+    for (v in columns) {
+      if (is.numeric(data[[v]]))
+        proportions <- c(proportions, NA)
+      else
+        proportions <- c(proportions, length(levels(as.factor(data[[v]]))))
+    }
+    # for numeric variables, the average
+    proportions[is.na(proportions)] <- mean(proportions, na.rm = TRUE)
+    proportions[is.na(proportions)] <- 1 # in case all are numeric
+  }
+
+
   plotMatrix <- ggmatrix(
     plots = ggpairsPlots,
     byrow = TRUE,
@@ -910,7 +938,9 @@ ggpairs <- function(
     data = data_,
     gg = NULL,
     progress = progress,
-    legend = legend
+    legend = legend,
+    xProportions = proportions,
+    yProportions = proportions
   )
 
   plotMatrix
