@@ -14,6 +14,9 @@ GGally (development version)
 
 ### New functions:
 
+`ggally_autopoint`, `ggally_autopointDiag` (#325)
+* Make scatterplots compatible with both continuous and catgeorical variables using `ggforce::geom_autopoint()`.
+
 `ggally_statistic` (#327)
 * New function which is a generialized version of `ggally_cor()`
 * Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data

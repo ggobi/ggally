@@ -38,4 +38,7 @@ ggpairs(
 )
 }
 }
+\author{
+Joseph Larmarange
+}
 \keyword{hplot}

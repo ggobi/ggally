@@ -1469,6 +1469,7 @@ ggally_naDiag <- function(...) {
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments passed to \code{\link[ggforce]{geom_autopoint}(...)}
+#' @author Joseph Larmarange
 #' @keywords hplot
 #' @export
 #' @examples
