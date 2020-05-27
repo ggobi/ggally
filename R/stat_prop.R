@@ -177,13 +177,6 @@ ggally_colbar <- function(data, mapping,
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
-  x_var <- mapping_string(mapping$x)
-  y_var <- mapping_string(mapping$y)
-
-  # x should be a factor
-  if (!is.factor(data[[x_var]]))
-    data[[x_var]] <- factor(data[[x_var]])
-
   # y should be mapped to fill and x to by
   mapping$fill <- mapping$y
   mapping$y <- NULL
