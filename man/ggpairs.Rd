@@ -26,7 +26,8 @@ ggpairs(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
-  legends = stop("deprecated")
+  legends = stop("deprecated"),
+  proportions = NULL
 )
 }
 \arguments{
@@ -65,6 +66,8 @@ ggpairs(
 \item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
 \item{legends}{deprecated}
+
+\item{proportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
 }
 \value{
 ggmatrix object that if called, will print
@@ -201,6 +204,17 @@ pm <- ggpairs(
   upper = list(continuous = wrap(ggally_cor, displayGrid = FALSE))
 )
 p_(pm)
+
+## Custom with/height of subplots
+pm <- ggpairs(tips, columns = c(2, 3, 5))
+p_(pm)
+
+pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = "auto")
+p_(pm)
+
+pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
+p_(pm)
+
 }
 \references{
 John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
