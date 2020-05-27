@@ -20,7 +20,7 @@ ggcoef(
   errorbar_height = 0,
   errorbar_linetype = "solid",
   errorbar_size = 0.5,
-  sort = c("none", "ascending", "decending"),
+  sort = c("none", "ascending", "descending"),
   ...
 )
 }
@@ -58,7 +58,7 @@ if \code{x} is not a data frame)}
 
 \item{errorbar_size}{size of the error bars}
 
-\item{sort}{\code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"decending"} sort by decreasing coefficient value}
+\item{sort}{\code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"descending"} sort by decreasing coefficient value}
 
 \item{...}{additional arguments sent to \code{\link[ggplot2]{geom_point}}}
 }
