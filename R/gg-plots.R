@@ -1389,3 +1389,52 @@ ggally_na <- function(data = NULL, mapping = NULL, size = 10, color = "grey20", 
 ggally_naDiag <- function(...) {
   ggally_na(...)
 }
+
+
+
+#' Scatterplot for continuous and categorial variables
+#'
+#' Make scatterplots compatible with both continuous and catgeorical variables
+#' using \code{\link[ggforce]{geom_autopoint}} from package \pkg{ggforce}.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param ... other arguments passed to \code{\link[ggforce]{geom_autopoint}(...)}
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill))
+#' ggally_autopoint(tips, mapping = aes(x = tip, y = sex))
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex))
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day))
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8)
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9)
+#'
+#' \dontrun{
+#' ggpairs(
+#'   tips,
+#'   mapping = aes(colour = sex),
+#'   upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
+#'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
+#' )
+#' }
+ggally_autopoint <- function(data, mapping, ...) {
+  require_namespaces("ggforce")
+
+  args <- list(...)
+  if (!"alpha" %in% names(args) & is.null(mapping$alpha))
+    args$alpha <- .5
+  # mapping needs to be sent directly to geom_autopoint
+  args$mapping <- mapping
+
+  ggplot(data, mapping) +
+    do.call(ggforce::geom_autopoint, args)
+}
+
+#' @rdname ggally_autopoint
+#' @export
+ggally_autopointDiag <- function(data, mapping, ...) {
+  mapping$y <- mapping$x
+  ggally_autopoint(data = data, mapping = mapping, ...)
+}
