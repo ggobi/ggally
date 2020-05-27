@@ -8,12 +8,15 @@ if ("package:igraph" %in% search()) {
 rq <- function(...) {
   require(..., quietly = TRUE)
 }
-rq(network)
-rq(sna)
-rq(maps)
-rq(ggplot2)
+skip_if(!rq(network))
+skip_if(!rq(sna))
+skip_if(!rq(maps))
+skip_if(!rq(ggplot2))
 
-rq(intergraph) # test igraph conversion
+skip_if(!rq(intergraph)) # test igraph conversion
+
+skip_if_not_installed("geosphere")
+
 
 # first 500 rows of http://datasets.flowingdata.com/tuts/maparcs/airports.csv
 # avoids downloading the dataset to test the package

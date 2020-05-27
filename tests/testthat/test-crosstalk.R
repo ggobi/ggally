@@ -7,7 +7,10 @@ test_that("crosstalk works with ggduo and ggpairs", {
 
   skip_if_not_installed("crosstalk")
 
-  sd <- crosstalk::SharedData$new(iris[1:4])
+  sd <- try(crosstalk::SharedData$new(iris[1:4]), silent = TRUE)
+  if (inherits(sd, "try-error")) {
+    skip("crosstalk data can not be initialized")
+  }
 
   expect_silent({
     pm <- ggpairs(sd)

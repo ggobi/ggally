@@ -1,3 +1,27 @@
+GGally (development version)
+---------------------
+
+
+`ggally_cor` (#327)
+* New implementation using `ggally_statistic()`
+* Will now hide the grid by default and add a border (`displayGrid = FALSE`)
+* Added the ability to display significance stars (`stars = TRUE`)
+* Alignment has been fixed so both short and long names should be displayed within view. `alignPercent` now corresponds to the center of the text.
+* Added the ability to separate the arguments sent to the title and the groups (`title_args` and `group_args`)
+* Digits now represents the total number of digits after the decimal place.
+* To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
+* Previously deprecated parameters have been removed
+
+### New functions:
+
+`ggally_statistic` (#327)
+* New function which is a generialized version of `ggally_cor()`
+* Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
+
+`signif_stars()` (#327)
+* Return the appropriate number of significance stars as a character vector for the provided numeric input values.
+
+
 GGally 1.5.0
 ---------------------
 
