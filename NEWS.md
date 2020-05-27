@@ -12,9 +12,14 @@ GGally (development version)
 * To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
 * Previously deprecated parameters have been removed
 
+### New functions:
+
 `ggally_statistic` (#327)
 * New function which is a generialized version of `ggally_cor()`
 * Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
+
+`signif_stars()` (#327)
+* Return the appropriate number of significance stars as a character vector for the provided numeric input values.
 
 
 GGally 1.5.0
