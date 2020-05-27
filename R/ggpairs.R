@@ -237,6 +237,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @template ggmatrix-progress
 #' @param legends deprecated
+#' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables
 #' @export
 #' @examples
 #'  # small function to display plots only if it's interactive
@@ -295,7 +296,28 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'
 #'  p_(pm)
 #'
+#' # Use "auto" to adapt width of the sub-plots
+#'  pm <- ggduo(
+#'    dt,
+#'    c("year", "g", "ab", "lg"),
+#'    c("batting_avg", "slug", "on_base"),
+#'    mapping = ggplot2::aes(color = lg),
+#'    xProportions = "auto"
+#'  )
 #'
+#'  p_(pm)
+#'
+#'  # Custom widths & heights of the sub-plots
+#'  pm <- ggduo(
+#'    dt,
+#'    c("year", "g", "ab", "lg"),
+#'    c("batting_avg", "slug", "on_base"),
+#'    mapping = ggplot2::aes(color = lg),
+#'    xProportions = c(6, 4, 3, 2),
+#'    yProportions = c(1, 2, 1)
+#'  )
+#'
+#'  p_(pm)
 #'
 #' # Example derived from:
 #' ## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital
@@ -442,7 +464,9 @@ ggduo <- function(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
-  legends = stop("deprecated")
+  legends = stop("deprecated"),
+  xProportions = NULL,
+  yProportions = NULL
 ) {
 
   warn_deprecated(!missing(legends), "legends")
@@ -530,6 +554,35 @@ ggduo <- function(
     return(plotObj)
   })
 
+  # relative proportions if "auto"
+
+  # xProportions
+  if (length(xProportions) == 1 && xProportions == "auto") {
+    xProportions <- c()
+    for (v in columnsX) {
+      if (is.numeric(data[[v]]))
+        xProportions <- c(xProportions, NA)
+      else
+        xProportions <- c(xProportions, length(levels(as.factor(data[[v]]))))
+    }
+    # for numeric variables, the average
+    xProportions[is.na(xProportions)] <- mean(xProportions, na.rm = TRUE)
+    xProportions[is.na(xProportions)] <- 1 # in case all are numeric
+  }
+
+  # yProportions
+  if (length(yProportions) == 1 && yProportions == "auto") {
+    yProportions <- c()
+    for (v in columnsY) {
+      if (is.numeric(data[[v]]))
+        yProportions <- c(yProportions, NA)
+      else
+        yProportions <- c(yProportions, length(levels(as.factor(data[[v]]))))
+    }
+    # for numeric variables, the average
+    yProportions[is.na(yProportions)] <- mean(yProportions, na.rm = TRUE)
+    yProportions[is.na(yProportions)] <- 1 # in case all are numeric
+  }
 
   plotMatrix <- ggmatrix(
     plots = ggduoPlots,
@@ -549,7 +602,9 @@ ggduo <- function(
     data = data_,
     gg = NULL,
     progress = progress,
-    legend = legend
+    legend = legend,
+    xProportions = xProportions,
+    yProportions = yProportions
   )
 
   plotMatrix

@@ -23,7 +23,9 @@ ggduo(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
-  legends = stop("deprecated")
+  legends = stop("deprecated"),
+  xProportions = NULL,
+  yProportions = NULL
 )
 }
 \arguments{
@@ -54,6 +56,8 @@ ggduo(
 \item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
 \item{legends}{deprecated}
+
+\item{xProportions, yProportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables}
 }
 \description{
 Make a matrix of plots with a given data set with two different column sets
@@ -130,7 +134,28 @@ If a function is supplied as an option, it should implement the function api of 
 
  p_(pm)
 
+# Use "auto" to adapt width of the sub-plots
+ pm <- ggduo(
+   dt,
+   c("year", "g", "ab", "lg"),
+   c("batting_avg", "slug", "on_base"),
+   mapping = ggplot2::aes(color = lg),
+   xProportions = "auto"
+ )
 
+ p_(pm)
+
+ # Custom widths & heights of the sub-plots
+ pm <- ggduo(
+   dt,
+   c("year", "g", "ab", "lg"),
+   c("batting_avg", "slug", "on_base"),
+   mapping = ggplot2::aes(color = lg),
+   xProportions = c(6, 4, 3, 2),
+   yProportions = c(1, 2, 1)
+ )
+
+ p_(pm)
 
 # Example derived from:
 ## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital
