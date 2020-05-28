@@ -34,3 +34,4 @@ ggduo_paper.txt
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^\.github$
