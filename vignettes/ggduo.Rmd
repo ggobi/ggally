@@ -228,3 +228,16 @@ ggduo(
   )
 )
 ```
+
+## Types of plots
+
+You can customize the type of plots to display with the `types` argument. `types` is a list that may contain the variables 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string. If a string is supplied, it must be a character string representing the tail end of a `ggally_NAME` function.
+
+* `continuous`: when both x and y variables are continuous
+* `comboHorizontal`: when x is continuous and y is discrete
+* `comboVorizontal`: when x is discrete and y is continuous
+* `discrete`: when both x and y variables are discrete
+* `na`: when all x data and all y data is `NA`
+
+The list of current valid `ggally_NAME` functions is visible in `vignette("ggally_plots")`.
+

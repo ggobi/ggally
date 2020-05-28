@@ -66,18 +66,12 @@ There are three major sections of the pairwise matrix: `lower`, `upper`, and `di
 
 To make adjustments to each section, a list of information may be supplied.  The list can be comprised of the following elements:
 
-* `continuous`:
-    * a character string representing the tail end of a `ggally_NAME` function, or a custom function
-    * current valid `upper$continuous` and `lower$continuous` character strings: `'points'`, `'smooth'`, `'density'`, `'cor'`, `'blank'`
-    * current valid `diag$continuous` character strings: `'densityDiag'`, `'barDiag'`, `'blankDiag'`
-* `combo`:
-    * a character string representing the tail end of a `ggally_NAME` function, or a custom function. (not applicable for a `diag` list)
-    * current valid `upper$combo` and `lower$combo` character strings: `'box'`, `'dot'`, `'facethist'`, `'facetdensity'`, `'denstrip'`, `'blank'`
-* `discrete`:
-    * a character string representing the tail end of a `ggally_NAME` function, or a custom function
-    * current valid `upper$discrete` and `lower$discrete` character strings: `'ratio'`, `'facetbar'`, `'blank'`
-    * current valid `diag$discrete` character strings: `'barDiag'`, `'blankDiag'`
+* `continuous`: a character string representing the tail end of a `ggally_NAME` function, or a custom function
+* `combo`: a character string representing the tail end of a `ggally_NAME` function, or a custom function. (not applicable for a `diag` list)
+* `discrete`: a character string representing the tail end of a `ggally_NAME` function, or a custom function
 * `mapping`:  if mapping is provided, only the section's mapping will be overwritten
+
+The list of current valid `ggally_NAME` functions is visible in `vignette("ggally_plots")`.
 
 ```{r ggpairs_section}
 library(ggplot2)
