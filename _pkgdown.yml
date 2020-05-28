@@ -1,0 +1,150 @@
+url: https://ggobi.github.io/ggally
+
+# template:
+#   params:
+#     docsearch:
+#       api_key: API_KEY
+#       index_name: INDEX_NAME
+
+
+reference:
+- title: Plot Matrix
+  # desc: >
+  #   here
+  #   here
+  #   here
+  contents:
+  - '`ggmatrix`'
+  - '`ggpairs`'
+  - '`ggduo`'
+  - '`ggscatmat`'
+  - '`ggfacet`'
+  - '`ggts`'
+
+- title: "`ggmatrix()` helpers"
+  contents:
+  - '`wrap_fn_with_param_arg`'
+  - '`eval_data_col`'
+  - '`print.ggmatrix`'
+  - '`ggmatrix_gtable`'
+  - '`grab_legend`'
+  - '`putPlot`'
+  - '`getPlot`'
+  - '`+.gg`'
+  - '`mapping_color_to_fill`'
+  - '`mapping_swap_x_y`'
+  - '`fn_switch`'
+  - '`str.ggmatrix`'
+  - '`print_if_interactive`'
+  - '`ggmatrix_progress`'
+
+- title: Modeling Diagnostics
+  contents:
+  - '`ggnostic`'
+  - '`broomify`'
+  - '`ggally_nostic_cooksd`'
+  - '`ggally_nostic_hat`'
+  - '`ggally_nostic_line`'
+  - '`ggally_nostic_resid`'
+  - '`ggally_nostic_se_fit`'
+  - '`ggally_nostic_sigma`'
+  - '`ggally_nostic_std_resid`'
+
+- title: Major Plotting Functions
+  contents:
+  - '`ggcoef`'
+  - '`ggcorr`'
+  - '`ggparcoord`'
+  - '`ggsurv`'
+
+- title: High-Level Plots (Bivariate - Continuous)
+  contents:
+  - '`ggally_autopoint`'
+  - '`ggally_cor`'
+  - '`ggally_density`'
+  - '`ggally_points`'
+  - '`ggally_smooth`'
+
+- title: High-Level Plots (Bivariate - Combination)
+  contents:
+  - '`ggally_autopoint`'
+  - '`ggally_box`'
+  - '`ggally_denstrip`'
+  - '`ggally_dot`'
+  - '`ggally_dot_and_box`'
+  - '`ggally_facetdensity`'
+  - '`ggally_facethist`'
+
+- title: High-Level Plots (Bivariate - Discrete)
+  contents:
+  - '`ggally_autopoint`'
+  - '`ggally_facetbar`'
+  - '`ggally_ratio`'
+
+- title: High-Level Plots (Univariate - Continuous)
+  contents:
+  - '`ggally_barDiag`'
+  - '`ggally_densityDiag`'
+
+- title: High-Level Plots (Univariate - Discrete)
+  contents:
+  - '`ggally_barDiag`'
+  - '`ggally_densityDiag`'
+  - '`ggally_barDiag`'
+
+- title: High-Level Plots (Text)
+  contents:
+  - '`ggally_statistic`'
+  - '`ggally_text`'
+  - '`signif_stars`'
+
+- title: High-Level Plots Misc.
+  contents:
+  - '`ggally_blank`'
+  - '`ggally_diagAxis`'
+  - '`ggally_na`'
+  - '`gglegend`'
+
+- title: Glyph Plots
+  contents:
+  - '`glyphs`'
+  - '`add_ref_boxes`'
+  - '`add_ref_lines`'
+  - '`glyphplot`'
+  # - '`rescale01`'
+
+- title: Network Plots
+  contents:
+  - '`ggnet`'
+  - '`ggnet2`'
+  - '`ggnetworkmap`'
+
+- title: Datasets
+  contents:
+  - '`australia_PISA2012`'
+  - '`flea`'
+  - '`happy`'
+  - '`nasa`'
+  - '`pigs`'
+  - '`psychademic`'
+  - '`twitter_spambots`'
+
+- title: Plot utilities
+  contents:
+  - '`brew_colors`'
+  - '`find_plot_type`'
+  - '`is_horizontal`'
+  - '`lowertriangle`'
+  - '`mapping_string`'
+  - '`model_response_variables`'
+  - '`scag_order`'
+  - '`scatmat`'
+  - '`singleClassOrder`'
+  - '`skewness`'
+  - '`uppertriangle`'
+
+- title: Legacy
+  contents:
+  - '`v1_ggmatrix_theme`'
+  - '`ggally_cor_v1_5`'
+

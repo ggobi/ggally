@@ -906,7 +906,6 @@ add_and_overwrite_aes <- function(current, new) {
 #' Replace the fill with the color and make color NULL.
 #'
 #' @param current the current aesthetics
-#' @keywords internal
 #' @export
 mapping_color_to_fill <- function(current) {
   if (is.null(current)) {

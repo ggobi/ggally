@@ -31,3 +31,6 @@ ggduo_paper.txt
 ^scripts/
 ^revdep$
 ^\.github/
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
