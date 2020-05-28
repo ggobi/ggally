@@ -21,7 +21,7 @@ reference:
   - '`ggfacet`'
   - '`ggts`'
 
-- title: "`ggmatrix()` helpers"
+- title: "ggmatrix() Helpers"
   contents:
   - '`wrap_fn_with_param_arg`'
   - '`eval_data_col`'
@@ -98,14 +98,14 @@ reference:
   - '`ggally_text`'
   - '`signif_stars`'
 
-- title: High-Level Plots Misc.
+- title: High-Level Plots (Misc.)
   contents:
   - '`ggally_blank`'
   - '`ggally_diagAxis`'
   - '`ggally_na`'
   - '`gglegend`'
 
-- title: Glyph Plots
+- title: Glyph Plot
   contents:
   - '`glyphs`'
   - '`add_ref_boxes`'
@@ -129,7 +129,7 @@ reference:
   - '`psychademic`'
   - '`twitter_spambots`'
 
-- title: Plot utilities
+- title: Plot Utilities
   contents:
   - '`brew_colors`'
   - '`find_plot_type`'
