@@ -1,0 +1,210 @@
+---
+title: "List of available high-level plots"
+output: rmarkdown::html_vignette
+author: GGally team
+date: May 28, 2020
+vignette: >
+  %\VignetteIndexEntry{List of available high-level plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The purpose of this vignette is to display all high-level plots available in `GGally` to be used in particular with `ggduo()` and `ggpairs()`. The name of all the corresponding functions are of the form `ggally_*()`. Most of them accept a discrete variables to be passed to the **colour** aesthetic.
+
+We can distinct **bivariate plots** requiring two variables for **x** and **y** axis respectively and **diagonal plots** when the same variable is plotted on **x** and **y** axis.
+
+```{r}
+library(GGally, quietly = TRUE)
+data(tips, package = "reshape")
+```
+
+
+## Bivariate plots
+
+### with 2 continuous variables
+
+#### `ggally_autopoint()`
+
+```{r}
+ggally_autopoint(tips, aes(x = total_bill, y = tip))
+ggally_autopoint(tips, aes(x = total_bill, y = tip, colour = time))
+```
+
+#### `ggally_cor()`
+
+```{r}
+ggally_cor(tips, aes(x = total_bill, y = tip))
+ggally_cor(tips, aes(x = total_bill, y = tip, colour = time))
+```
+
+See also `ggally_statistic()`.
+
+#### `ggally_density()`
+
+```{r}
+ggally_density(tips, aes(x = total_bill, y = tip))
+ggally_density(tips, aes(x = total_bill, y = tip, colour = time))
+```
+
+#### `ggally_points()`
+
+```{r}
+ggally_points(tips, aes(x = total_bill, y = tip))
+ggally_points(tips, aes(x = total_bill, y = tip, colour = time))
+```
+
+
+#### `ggally_smooth()`, `ggally_smooth_lm()` & `ggally_smooth_loess()`
+
+```{r}
+ggally_smooth_lm(tips, aes(x = total_bill, y = tip))
+ggally_smooth_lm(tips, aes(x = total_bill, y = tip, colour = time))
+
+ggally_smooth_loess(tips, aes(x = total_bill, y = tip))
+ggally_smooth_loess(tips, aes(x = total_bill, y = tip, colour = time))
+```
+
+See also `ggally_smooth()` for more options.
+
+### with 2 discrete variables
+
+
+#### `ggally_autopoint()`
+
+```{r}
+ggally_autopoint(tips, aes(x = day, y = smoker))
+ggally_autopoint(tips, aes(x = day, y = smoker, colour = time))
+```
+
+#### `ggally_facetbar()`
+
+```{r}
+ggally_facetbar(tips, aes(x = day, y = smoker))
+ggally_facetbar(tips, aes(x = day, y = smoker, colour = time))
+```
+
+#### `ggally_ratio()`
+
+```{r}
+ggally_ratio(tips, aes(x = day, y = smoker))
+ggally_ratio(tips, aes(x = day, y = smoker, colour = time))
+```
+
+### with one continuous and one discrete variables
+
+
+#### `ggally_autopoint()`
+
+```{r}
+ggally_autopoint(tips, aes(x = total_bill, y = day))
+ggally_autopoint(tips, aes(x = total_bill, y = day, colour = time))
+```
+
+
+#### `ggally_box()` & `ggally_box_no_facet()`
+
+```{r}
+ggally_box(tips, aes(x = total_bill, y = day))
+ggally_box(tips, aes(x = total_bill, y = day, colour = time))
+ggally_box_no_facet(tips, aes(x = total_bill, y = day))
+ggally_box_no_facet(tips, aes(x = total_bill, y = day, colour = time))
+```
+
+See also `ggally_dot_and_box()`.
+
+#### `ggally_denstrip()`
+
+```{r}
+ggally_denstrip(tips, aes(x = total_bill, y = day))
+ggally_denstrip(tips, aes(x = total_bill, y = day, colour = time))
+```
+
+#### `ggally_dot()` & `ggally_dot_no_facet()`
+
+```{r}
+ggally_dot(tips, aes(x = total_bill, y = day))
+ggally_dot(tips, aes(x = total_bill, y = day, colour = time))
+ggally_dot_no_facet(tips, aes(x = total_bill, y = day))
+ggally_dot_no_facet(tips, aes(x = total_bill, y = day, colour = time))
+```
+
+See also `ggally_dot_and_box()`.
+
+#### `ggally_facetdensity()`
+
+```{r}
+ggally_facetdensity(tips, aes(x = total_bill, y = day))
+ggally_facetdensity(tips, aes(x = total_bill, y = day, colour = time))
+```
+
+#### `ggally_facethist()`
+
+```{r}
+ggally_facethist(tips, aes(x = total_bill, y = day))
+ggally_facethist(tips, aes(x = total_bill, y = day, colour = time))
+```
+
+
+
+## Diagonal plots
+
+### with a continuous variable
+
+
+#### `ggally_autopointDiag()`
+
+```{r}
+ggally_autopointDiag(tips, aes(x = total_bill))
+ggally_autopointDiag(tips, aes(x = total_bill, colour = time))
+```
+
+#### `ggally_barDiag()`
+
+```{r}
+ggally_barDiag(tips, aes(x = total_bill))
+ggally_barDiag(tips, aes(x = total_bill, colour = time))
+```
+
+#### `ggally_densityDiag()`
+
+```{r}
+ggally_densityDiag(tips, aes(x = total_bill))
+ggally_densityDiag(tips, aes(x = total_bill, colour = time))
+```
+
+### with a discrete variable
+
+#### `ggally_autopointDiag()`
+
+```{r}
+ggally_autopointDiag(tips, aes(x = day))
+ggally_autopointDiag(tips, aes(x = day, colour = time))
+```
+
+#### `ggally_barDiag()`
+
+```{r}
+ggally_barDiag(tips, aes(x = day))
+ggally_barDiag(tips, aes(x = day, colour = time))
+```
+
+
+#### `ggally_densityDiag()`
+
+```{r}
+ggally_densityDiag(tips, aes(x = day))
+ggally_densityDiag(tips, aes(x = day, colour = time))
+```
+
+## Additional plots
+
+- `ggally_statistic()` and `ggally_text()` to display custom text
+- `ggally_blank()` and `ggally_blankDiag()` for blank plot
+- `ggally_na()` and `ggally_naDiag()` to display a large `NA`
