@@ -181,8 +181,8 @@
   <span class='kw'>legend</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>cardinality_threshold</span> <span class='kw'>=</span> <span class='fl'>15</span>,
   <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>legends</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>),
-  <span class='kw'>proportions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>proportions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>legends</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -259,12 +259,12 @@
       <td><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress_bar</a></code>.  See <code><a href='ggmatrix_progress.html'>ggmatrix_progress</a></code>.</p></td>
     </tr>
     <tr>
-      <th>legends</th>
-      <td><p>deprecated</p></td>
-    </tr>
-    <tr>
       <th>proportions</th>
       <td><p>Value to change how much area is given for each plot. Either <code>NULL</code> (default), numeric value matching respective length, <code>grid::<a href='https://rdrr.io/r/grid/unit.html'>unit</a></code> object with matching respective length or <code>"auto"</code> for automatic relative proportions based on the number of levels for categorical variables.</p></td>
+    </tr>
+    <tr>
+      <th>legends</th>
+      <td><p>deprecated</p></td>
     </tr>
     </table>
 
