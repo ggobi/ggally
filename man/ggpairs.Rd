@@ -26,8 +26,8 @@ ggpairs(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
-  legends = stop("deprecated"),
-  proportions = NULL
+  proportions = NULL,
+  legends = stop("deprecated")
 )
 }
 \arguments{
@@ -65,9 +65,9 @@ ggpairs(
 
 \item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
-\item{legends}{deprecated}
-
 \item{proportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
+
+\item{legends}{deprecated}
 }
 \value{
 ggmatrix object that if called, will print

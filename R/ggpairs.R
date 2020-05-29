@@ -464,9 +464,9 @@ ggduo <- function(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
-  legends = stop("deprecated"),
   xProportions = NULL,
-  yProportions = NULL
+  yProportions = NULL,
+  legends = stop("deprecated")
 ) {
 
   warn_deprecated(!missing(legends), "legends")
@@ -492,6 +492,9 @@ ggduo <- function(
 
   stop_if_high_cardinality(data, columnsX, cardinality_threshold)
   stop_if_high_cardinality(data, columnsY, cardinality_threshold)
+
+  xProportions <- ggmatrix_proportions(xProportions, data, columnsX)
+  yProportions <- ggmatrix_proportions(yProportions, data, columnsY)
 
   types <- check_and_set_ggpairs_defaults(
     "types", types,
@@ -554,35 +557,6 @@ ggduo <- function(
     return(plotObj)
   })
 
-  # relative proportions if "auto"
-
-  # xProportions
-  if (length(xProportions) == 1 && xProportions == "auto") {
-    xProportions <- c()
-    for (v in columnsX) {
-      if (is.numeric(data[[v]]))
-        xProportions <- c(xProportions, NA)
-      else
-        xProportions <- c(xProportions, length(levels(as.factor(data[[v]]))))
-    }
-    # for numeric variables, the average
-    xProportions[is.na(xProportions)] <- mean(xProportions, na.rm = TRUE)
-    xProportions[is.na(xProportions)] <- 1 # in case all are numeric
-  }
-
-  # yProportions
-  if (length(yProportions) == 1 && yProportions == "auto") {
-    yProportions <- c()
-    for (v in columnsY) {
-      if (is.numeric(data[[v]]))
-        yProportions <- c(yProportions, NA)
-      else
-        yProportions <- c(yProportions, length(levels(as.factor(data[[v]]))))
-    }
-    # for numeric variables, the average
-    yProportions[is.na(yProportions)] <- mean(yProportions, na.rm = TRUE)
-    yProportions[is.na(yProportions)] <- 1 # in case all are numeric
-  }
 
   plotMatrix <- ggmatrix(
     plots = ggduoPlots,
@@ -818,8 +792,8 @@ ggpairs <- function(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
-  legends = stop("deprecated"),
-  proportions = NULL
+  proportions = NULL,
+  legends = stop("deprecated")
 ){
 
   warn_deprecated(!missing(legends), "legends")
@@ -859,6 +833,8 @@ ggpairs <- function(
   )
 
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
+
+  proportions <- ggmatrix_proportions(proportions, data, columns)
 
   # get plot type information
   dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
@@ -904,21 +880,6 @@ ggpairs <- function(
 
     return(p)
   })
-
-  # relative proportions if "auto"
-  if (length(proportions) == 1 && proportions == "auto") {
-    proportions <- c()
-    for (v in columns) {
-      if (is.numeric(data[[v]]))
-        proportions <- c(proportions, NA)
-      else
-        proportions <- c(proportions, length(levels(as.factor(data[[v]]))))
-    }
-    # for numeric variables, the average
-    proportions[is.na(proportions)] <- mean(proportions, na.rm = TRUE)
-    proportions[is.na(proportions)] <- 1 # in case all are numeric
-  }
-
 
   plotMatrix <- ggmatrix(
     plots = ggpairsPlots,
@@ -1129,6 +1090,53 @@ stop_if_params_exist <- function(params) {
 }
 
 
+ggmatrix_proportions <- function(proportions, data, columns) {
+
+  if (is.null(proportions)) {
+    return(proportions)
+  }
+
+  # relative proportions if "auto"
+  # wrap in isTRUE for safe guarding
+  if (isTRUE(length(proportions) == 1 && proportions == "auto")) {
+    proportions <- c()
+    for (v in columns) {
+      if (is.numeric(data[[v]]))
+        proportions <- c(proportions, NA)
+      else
+        proportions <- c(proportions, length(levels(as.factor(data[[v]]))))
+    }
+    # for numeric variables, the average
+    proportions[is.na(proportions)] <- mean(proportions, na.rm = TRUE)
+    proportions[is.na(proportions)] <- 1 # in case all are numeric
+  } else {
+    is_valid_type <- vapply(proportions, function(x) {
+      (!is.na(x)) &&
+        (
+          grid::is.unit(x) || is.numeric(x)
+        )
+    }, logical(1))
+    if (!all(is_valid_type)) {
+      stop("proportions need to be non-NA numeric values or 'auto'. proportions: ", dput_val(proportions))
+    }
+  }
+
+  if (length(proportions) == 1 && length(columns) > 1) {
+    proportions <- replicate(length(columns), proportions)
+  }
+
+  proportions
+}
+
+dput_val <- function(x) {
+  f <- file()
+  on.exit({
+    close(f)
+  })
+  dput(x, f)
+  ret <- paste0(readLines(f), collapse = "\n")
+  ret
+}
 
 #diamondMatrix <- ggpairs(
 #  diamonds,
