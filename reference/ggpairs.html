@@ -181,7 +181,8 @@
   <span class='kw'>legend</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>cardinality_threshold</span> <span class='kw'>=</span> <span class='fl'>15</span>,
   <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>legends</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>)
+  <span class='kw'>legends</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>),
+  <span class='kw'>proportions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -260,6 +261,10 @@
     <tr>
       <th>legends</th>
       <td><p>deprecated</p></td>
+    </tr>
+    <tr>
+      <th>proportions</th>
+      <td><p>Value to change how much area is given for each plot. Either <code>NULL</code> (default), numeric value matching respective length, <code>grid::<a href='https://rdrr.io/r/grid/unit.html'>unit</a></code> object with matching respective length or <code>"auto"</code> for automatic relative proportions based on the number of levels for categorical variables.</p></td>
     </tr>
     </table>
 
@@ -402,6 +407,16 @@
   <span class='no'>flea</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>,
   <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='no'>ggally_cor</span>, <span class='kw'>displayGrid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
 )
+<span class='fu'>p_</span>(<span class='no'>pm</span>)
+
+<span class='co'>## Custom with/height of subplots</span>
+<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
+<span class='fu'>p_</span>(<span class='no'>pm</span>)
+
+<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>), <span class='kw'>proportions</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)
+<span class='fu'>p_</span>(<span class='no'>pm</span>)
+
+<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>), <span class='kw'>proportions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
 <span class='fu'>p_</span>(<span class='no'>pm</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

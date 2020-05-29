@@ -178,7 +178,9 @@
   <span class='kw'>legend</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>cardinality_threshold</span> <span class='kw'>=</span> <span class='fl'>15</span>,
   <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>legends</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>)
+  <span class='kw'>legends</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>),
+  <span class='kw'>xProportions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>yProportions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -241,6 +243,10 @@
     <tr>
       <th>legends</th>
       <td><p>deprecated</p></td>
+    </tr>
+    <tr>
+      <th>xProportions, yProportions</th>
+      <td><p>Value to change how much area is given for each plot. Either <code>NULL</code> (default), numeric value matching respective length, <code>grid::<a href='https://rdrr.io/r/grid/unit.html'>unit</a></code> object with matching respective length or <code>"auto"</code> for automatic relative proportions based on the number of levels for categorical variables.</p></td>
     </tr>
     </table>
 
@@ -316,7 +322,28 @@
 
  <span class='fu'>p_</span>(<span class='no'>pm</span>)
 
+<span class='co'># Use "auto" to adapt width of the sub-plots</span>
+ <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
+   <span class='no'>dt</span>,
+   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"g"</span>, <span class='st'>"ab"</span>, <span class='st'>"lg"</span>),
+   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting_avg"</span>, <span class='st'>"slug"</span>, <span class='st'>"on_base"</span>),
+   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>lg</span>),
+   <span class='kw'>xProportions</span> <span class='kw'>=</span> <span class='st'>"auto"</span>
+ )
 
+ <span class='fu'>p_</span>(<span class='no'>pm</span>)
+
+ <span class='co'># Custom widths &amp; heights of the sub-plots</span>
+ <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
+   <span class='no'>dt</span>,
+   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"g"</span>, <span class='st'>"ab"</span>, <span class='st'>"lg"</span>),
+   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting_avg"</span>, <span class='st'>"slug"</span>, <span class='st'>"on_base"</span>),
+   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>lg</span>),
+   <span class='kw'>xProportions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>),
+   <span class='kw'>yProportions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>)
+ )
+
+ <span class='fu'>p_</span>(<span class='no'>pm</span>)
 
 <span class='co'># Example derived from:</span>
 <span class='co'>## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital</span>
