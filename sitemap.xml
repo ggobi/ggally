@@ -280,13 +280,13 @@
     <loc>https://ggobi.github.io/ggally/reference/wrap.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggally_plots.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/articles/ggcoef.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/articles/ggduo.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/gglyph.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/articles/ggmatrix.html</loc>
@@ -305,5 +305,8 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/articles/ggsurv.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/glyph.html</loc>
   </url>
 </urlset>

@@ -95,13 +95,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/ggally_plots.html">List of available high-level plots</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
       <a href="../articles/ggduo.html">ggduo(): Two-grouped plot matrix</a>
-    </li>
-    <li>
-      <a href="../articles/gglyph.html">glyphs(): Glyph plot</a>
     </li>
     <li>
       <a href="../articles/ggmatrix.html">ggmatrix(): Plot matrix</a>
@@ -120,6 +120,9 @@
     </li>
     <li>
       <a href="../articles/ggsurv.html">ggsurv(): Survival curves</a>
+    </li>
+    <li>
+      <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
     </li>
   </ul>
 </li>
@@ -244,12 +247,12 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>types</code> is a list that may contain the variables
-'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:</p><dl>
- <dt>continuous</dt><dd><p>exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.</p></dd>
- <dt>comboHorizontal</dt><dd><p>exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.</p></dd>
- <dt>comboVertical</dt><dd><p>exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.</p></dd>
- <dt>discrete</dt><dd><p>exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.</p></dd>
- <dt>na</dt><dd><p>exactly one of ('na', 'blank').  This option is used when all X data is <code>NA</code>, all Y data is <code>NA</code>, or either all X or Y data is <code>NA</code>.</p></dd>
+'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, If a string is supplied, it must be a character string representing the tail end of a <code>ggally_NAME</code> function. The list of current valid <code>ggally_NAME</code> functions is visible in a dedicated vignette.</p><dl>
+ <dt>continuous</dt><dd><p>This option is used for continuous X and Y data.</p></dd>
+ <dt>comboHorizontal</dt><dd><p>This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.</p></dd>
+ <dt>comboVertical</dt><dd><p>This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.</p></dd>
+ <dt>discrete</dt><dd><p>This option is used for categorical X and Y data.</p></dd>
+ <dt>na</dt><dd><p>This option is used when all X data is <code>NA</code>, all Y data is <code>NA</code>, or either all X or Y data is <code>NA</code>.</p></dd>
 
 </dl>
 

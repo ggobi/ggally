@@ -94,13 +94,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/ggally_plots.html">List of available high-level plots</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
       <a href="../articles/ggduo.html">ggduo(): Two-grouped plot matrix</a>
-    </li>
-    <li>
-      <a href="../articles/gglyph.html">glyphs(): Glyph plot</a>
     </li>
     <li>
       <a href="../articles/ggmatrix.html">ggmatrix(): Plot matrix</a>
@@ -119,6 +119,9 @@
     </li>
     <li>
       <a href="../articles/ggsurv.html">ggsurv(): Survival curves</a>
+    </li>
+    <li>
+      <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
     </li>
   </ul>
 </li>
@@ -161,7 +164,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-plot-matrix" class="hasAnchor"><a href="#section-plot-matrix" class="anchor"></a>Plot Matrix</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>More details in <code><a href="../articles/ggpairs.html">vignette("ggpairs")</a></code>, <code><a href="../articles/ggmatrix.html">vignette("ggmatrix")</a></code> and <code><a href="../articles/ggscatmat.html">vignette("ggscatmat")</a></code></p></p>
         </th>
       </tr>
       
@@ -209,8 +212,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-ggmatrix-helpers" class="hasAnchor"><a href="#section-ggmatrix-helpers" class="anchor"></a>ggmatrix() Helpers</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-high-level-plots" class="hasAnchor"><a href="#section-high-level-plots" class="anchor"></a>High-Level Plots</h2>
+          <p class="section-desc"><p>See <code><a href="../articles/ggally_plots.html">vignette("ggally_plots")</a></code> for a list with examples of all high-level plots.</p></p>
         </th>
       </tr>
       
@@ -221,93 +224,166 @@
       <tr>
         
         <td>
-          <p><code><a href="wrap.html">wrap_fn_with_param_arg()</a></code> <code><a href="wrap.html">wrapp()</a></code> <code><a href="wrap.html">wrap()</a></code> <code><a href="wrap.html">wrap_fn_with_params()</a></code> </p>
+          <p><code><a href="ggally_autopoint.html">ggally_autopoint()</a></code> <code><a href="ggally_autopoint.html">ggally_autopointDiag()</a></code> </p>
         </td>
-        <td><p>Wrap a function with different parameter values</p></td>
+        <td><p>Scatterplot for continuous and categorial variables</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="eval_data_col.html">eval_data_col()</a></code> </p>
+          <p><code><a href="ggally_barDiag.html">ggally_barDiag()</a></code> </p>
         </td>
-        <td><p>Evaluate data column</p></td>
+        <td><p>Plots the Bar Plots by Using Diagonal</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="print.ggmatrix.html">print(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
+          <p><code><a href="ggally_blank.html">ggally_blank()</a></code> <code><a href="ggally_blank.html">ggally_blankDiag()</a></code> </p>
         </td>
-        <td><p>Print ggmatrix object</p></td>
+        <td><p>Blank</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="ggmatrix_gtable.html">ggmatrix_gtable()</a></code> </p>
+          <p><code><a href="ggally_box.html">ggally_box()</a></code> <code><a href="ggally_box.html">ggally_box_no_facet()</a></code> </p>
         </td>
-        <td><p>Print ggmatrix object</p></td>
+        <td><p>Plots the Box Plot</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="grab_legend.html">grab_legend()</a></code> <code><a href="grab_legend.html">print(<i>&lt;legend_guide_box&gt;</i>)</a></code> </p>
+          <p><code><a href="ggally_cor.html">ggally_cor()</a></code> </p>
         </td>
-        <td><p>Grab the legend and print it as a plot</p></td>
+        <td><p>Correlation from the Scatter Plot</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="putPlot.html">putPlot()</a></code> <code><a href="putPlot.html">`[&lt;-`(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
+          <p><code><a href="ggally_density.html">ggally_density()</a></code> </p>
         </td>
-        <td><p>Put Plot</p></td>
+        <td><p>Plots the Scatter Density Plot</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="getPlot.html">getPlot()</a></code> <code><a href="getPlot.html">`[`(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
+          <p><code><a href="ggally_densityDiag.html">ggally_densityDiag()</a></code> </p>
         </td>
-        <td><p>getPlot</p></td>
+        <td><p>Plots the Density Plots by Using Diagonal</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gg-add.html">`+`(<i>&lt;gg&gt;</i>)</a></code> <code><a href="gg-add.html">add_ggproto_to_ggmatrix()</a></code> </p>
+          <p><code><a href="ggally_denstrip.html">ggally_denstrip()</a></code> </p>
         </td>
-        <td><p>Modify a ggmatrix object by adding an ggplot2 object to all plots</p></td>
+        <td><p>Plots a tile plot with facets</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="mapping_color_to_fill.html">mapping_color_to_fill()</a></code> </p>
+          <p><code><a href="ggally_diagAxis.html">ggally_diagAxis()</a></code> </p>
         </td>
-        <td><p>Aesthetic Mapping Color Fill</p></td>
+        <td><p>Internal Axis Labeling Plot for ggpairs</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="mapping_swap_x_y.html">mapping_swap_x_y()</a></code> </p>
+          <p><code><a href="ggally_dot.html">ggally_dot()</a></code> <code><a href="ggally_dot.html">ggally_dot_no_facet()</a></code> </p>
         </td>
-        <td><p>Swap x and y mapping</p></td>
+        <td><p>Plots the Box Plot with Dot</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="fn_switch.html">fn_switch()</a></code> </p>
+          <p><code><a href="ggally_dot_and_box.html">ggally_dot_and_box()</a></code> </p>
         </td>
-        <td><p>Function switch</p></td>
+        <td><p>Plots either Box Plot or Dot Plots</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="str.ggmatrix.html">str(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
+          <p><code><a href="ggally_facetbar.html">ggally_facetbar()</a></code> </p>
         </td>
-        <td><p>ggmatrix structure</p></td>
+        <td><p>Plots the Bar Plots Faceted by Conditional Variable</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="print_if_interactive.html">print_if_interactive()</a></code> </p>
+          <p><code><a href="ggally_facetdensity.html">ggally_facetdensity()</a></code> </p>
         </td>
-        <td><p>Print if not CRAN</p></td>
+        <td><p>Plots the density plots by faceting</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="ggmatrix_progress.html">ggmatrix_progress()</a></code> </p>
+          <p><code><a href="ggally_facethist.html">ggally_facethist()</a></code> </p>
         </td>
-        <td><p>ggmatrix default progress bar</p></td>
+        <td><p>Plots the Histograms by Faceting</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggally_na.html">ggally_na()</a></code> <code><a href="ggally_na.html">ggally_naDiag()</a></code> </p>
+        </td>
+        <td><p>NA plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggally_points.html">ggally_points()</a></code> </p>
+        </td>
+        <td><p>Plots the Scatter Plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggally_ratio.html">ggally_ratio()</a></code> </p>
+        </td>
+        <td><p>Plots a mosaic plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggally_smooth.html">ggally_smooth()</a></code> <code><a href="ggally_smooth.html">ggally_smooth_loess()</a></code> <code><a href="ggally_smooth.html">ggally_smooth_lm()</a></code> </p>
+        </td>
+        <td><p>Plots the Scatter Plot with Smoothing</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggally_statistic.html">ggally_statistic()</a></code> </p>
+        </td>
+        <td><p>Generalized Text Display</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggally_text.html">ggally_text()</a></code> </p>
+        </td>
+        <td><p>Text Plot</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-major-plotting-functions" class="hasAnchor"><a href="#section-major-plotting-functions" class="anchor"></a>Major Plotting Functions</h2>
+          <p class="section-desc"><p>More details in <code><a href="../articles/ggcoef.html">vignette("ggcoef")</a></code> and <code><a href="../articles/ggsurv.html">vignette("ggsurv")</a></code></p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="ggcoef.html">ggcoef()</a></code> </p>
+        </td>
+        <td><p>ggcoef - Plot Model Coefficients with broom and ggplot2</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggcorr.html">ggcorr()</a></code> </p>
+        </td>
+        <td><p>ggcorr - Plot a correlation matrix with ggplot2</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggparcoord.html">ggparcoord()</a></code> </p>
+        </td>
+        <td><p>ggparcoord - A ggplot2 Parallel Coordinate Plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggsurv.html">ggsurv()</a></code> </p>
+        </td>
+        <td><p>Survival curves with ggplot2</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-modeling-diagnostics" class="hasAnchor"><a href="#section-modeling-diagnostics" class="anchor"></a>Modeling Diagnostics</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>More details in <code><a href="../articles/ggnostic.html">vignette("ggnostic")</a></code></p></p>
         </th>
       </tr>
       
@@ -373,292 +449,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-major-plotting-functions" class="hasAnchor"><a href="#section-major-plotting-functions" class="anchor"></a>Major Plotting Functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggcoef.html">ggcoef()</a></code> </p>
-        </td>
-        <td><p>ggcoef - Plot Model Coefficients with broom and ggplot2</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggcorr.html">ggcorr()</a></code> </p>
-        </td>
-        <td><p>ggcorr - Plot a correlation matrix with ggplot2</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggparcoord.html">ggparcoord()</a></code> </p>
-        </td>
-        <td><p>ggparcoord - A ggplot2 Parallel Coordinate Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggsurv.html">ggsurv()</a></code> </p>
-        </td>
-        <td><p>Survival curves with ggplot2</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-high-level-plots-bivariate-continuous-" class="hasAnchor"><a href="#section-high-level-plots-bivariate-continuous-" class="anchor"></a>High-Level Plots (Bivariate - Continuous)</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggally_autopoint.html">ggally_autopoint()</a></code> <code><a href="ggally_autopoint.html">ggally_autopointDiag()</a></code> </p>
-        </td>
-        <td><p>Scatterplot for continuous and categorial variables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_cor.html">ggally_cor()</a></code> </p>
-        </td>
-        <td><p>Correlation from the Scatter Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_density.html">ggally_density()</a></code> </p>
-        </td>
-        <td><p>Plots the Scatter Density Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_points.html">ggally_points()</a></code> </p>
-        </td>
-        <td><p>Plots the Scatter Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_smooth.html">ggally_smooth()</a></code> <code><a href="ggally_smooth.html">ggally_smooth_loess()</a></code> <code><a href="ggally_smooth.html">ggally_smooth_lm()</a></code> </p>
-        </td>
-        <td><p>Plots the Scatter Plot with Smoothing</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-high-level-plots-bivariate-combination-" class="hasAnchor"><a href="#section-high-level-plots-bivariate-combination-" class="anchor"></a>High-Level Plots (Bivariate - Combination)</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggally_autopoint.html">ggally_autopoint()</a></code> <code><a href="ggally_autopoint.html">ggally_autopointDiag()</a></code> </p>
-        </td>
-        <td><p>Scatterplot for continuous and categorial variables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_box.html">ggally_box()</a></code> <code><a href="ggally_box.html">ggally_box_no_facet()</a></code> </p>
-        </td>
-        <td><p>Plots the Box Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_denstrip.html">ggally_denstrip()</a></code> </p>
-        </td>
-        <td><p>Plots a tile plot with facets</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_dot.html">ggally_dot()</a></code> <code><a href="ggally_dot.html">ggally_dot_no_facet()</a></code> </p>
-        </td>
-        <td><p>Plots the Box Plot with Dot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_dot_and_box.html">ggally_dot_and_box()</a></code> </p>
-        </td>
-        <td><p>Plots either Box Plot or Dot Plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_facetdensity.html">ggally_facetdensity()</a></code> </p>
-        </td>
-        <td><p>Plots the density plots by faceting</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_facethist.html">ggally_facethist()</a></code> </p>
-        </td>
-        <td><p>Plots the Histograms by Faceting</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-high-level-plots-bivariate-discrete-" class="hasAnchor"><a href="#section-high-level-plots-bivariate-discrete-" class="anchor"></a>High-Level Plots (Bivariate - Discrete)</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggally_autopoint.html">ggally_autopoint()</a></code> <code><a href="ggally_autopoint.html">ggally_autopointDiag()</a></code> </p>
-        </td>
-        <td><p>Scatterplot for continuous and categorial variables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_facetbar.html">ggally_facetbar()</a></code> </p>
-        </td>
-        <td><p>Plots the Bar Plots Faceted by Conditional Variable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_ratio.html">ggally_ratio()</a></code> </p>
-        </td>
-        <td><p>Plots a mosaic plot</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-high-level-plots-univariate-continuous-" class="hasAnchor"><a href="#section-high-level-plots-univariate-continuous-" class="anchor"></a>High-Level Plots (Univariate - Continuous)</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggally_barDiag.html">ggally_barDiag()</a></code> </p>
-        </td>
-        <td><p>Plots the Bar Plots by Using Diagonal</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_densityDiag.html">ggally_densityDiag()</a></code> </p>
-        </td>
-        <td><p>Plots the Density Plots by Using Diagonal</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-high-level-plots-univariate-discrete-" class="hasAnchor"><a href="#section-high-level-plots-univariate-discrete-" class="anchor"></a>High-Level Plots (Univariate - Discrete)</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggally_barDiag.html">ggally_barDiag()</a></code> </p>
-        </td>
-        <td><p>Plots the Bar Plots by Using Diagonal</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_densityDiag.html">ggally_densityDiag()</a></code> </p>
-        </td>
-        <td><p>Plots the Density Plots by Using Diagonal</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-high-level-plots-text-" class="hasAnchor"><a href="#section-high-level-plots-text-" class="anchor"></a>High-Level Plots (Text)</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggally_statistic.html">ggally_statistic()</a></code> </p>
-        </td>
-        <td><p>Generalized Text Display</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_text.html">ggally_text()</a></code> </p>
-        </td>
-        <td><p>Text Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="signif_stars.html">signif_stars()</a></code> </p>
-        </td>
-        <td><p>Significance Stars</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-high-level-plots-misc-" class="hasAnchor"><a href="#section-high-level-plots-misc-" class="anchor"></a>High-Level Plots (Misc.)</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ggally_blank.html">ggally_blank()</a></code> <code><a href="ggally_blank.html">ggally_blankDiag()</a></code> </p>
-        </td>
-        <td><p>Blank</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_diagAxis.html">ggally_diagAxis()</a></code> </p>
-        </td>
-        <td><p>Internal Axis Labeling Plot for ggpairs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggally_na.html">ggally_na()</a></code> <code><a href="ggally_na.html">ggally_naDiag()</a></code> </p>
-        </td>
-        <td><p>NA plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gglegend.html">gglegend()</a></code> </p>
-        </td>
-        <td><p>Plot only legend of plot function</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-glyph-plot" class="hasAnchor"><a href="#section-glyph-plot" class="anchor"></a>Glyph Plot</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>More details in <code><a href="../articles/glyph.html">vignette("glyph")</a></code></p></p>
         </th>
       </tr>
       
@@ -695,7 +487,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-network-plots" class="hasAnchor"><a href="#section-network-plots" class="anchor"></a>Network Plots</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>More details in <code><a href="../articles/ggnetworkmap.html">vignette("ggnetworkmap")</a></code></p></p>
         </th>
       </tr>
       
@@ -725,7 +517,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
+          <h2 id="section-ggmatrix-helpers" class="hasAnchor"><a href="#section-ggmatrix-helpers" class="anchor"></a>ggmatrix() Helpers</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -737,50 +529,98 @@
       <tr>
         
         <td>
-          <p><code><a href="australia_PISA2012.html">australia_PISA2012</a></code> </p>
+          <p><code><a href="wrap.html">wrap_fn_with_param_arg()</a></code> <code><a href="wrap.html">wrapp()</a></code> <code><a href="wrap.html">wrap()</a></code> <code><a href="wrap.html">wrap_fn_with_params()</a></code> </p>
         </td>
-        <td><p>Programme for International Student Assessment (PISA) 2012 Data for Australia</p></td>
+        <td><p>Wrap a function with different parameter values</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="flea.html">flea</a></code> </p>
+          <p><code><a href="eval_data_col.html">eval_data_col()</a></code> </p>
         </td>
-        <td><p>Historical data used for classification examples.</p></td>
+        <td><p>Evaluate data column</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="happy.html">happy</a></code> </p>
+          <p><code><a href="print.ggmatrix.html">print(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Data related to happiness from the General Social Survey, 1972-2006.</p></td>
+        <td><p>Print ggmatrix object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="nasa.html">nasa</a></code> </p>
+          <p><code><a href="ggmatrix_gtable.html">ggmatrix_gtable()</a></code> </p>
         </td>
-        <td><p>Data from the Data Expo JSM 2006.</p></td>
+        <td><p>Print ggmatrix object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="pigs.html">pigs</a></code> </p>
+          <p><code><a href="grab_legend.html">grab_legend()</a></code> <code><a href="grab_legend.html">print(<i>&lt;legend_guide_box&gt;</i>)</a></code> </p>
         </td>
-        <td><p>United Kingdom Pig Production</p></td>
+        <td><p>Grab the legend and print it as a plot</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="psychademic.html">psychademic</a></code> </p>
+          <p><code><a href="gglegend.html">gglegend()</a></code> </p>
         </td>
-        <td><p>UCLA canonical correlation analysis data</p></td>
+        <td><p>Plot only legend of plot function</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="twitter_spambots.html">twitter_spambots</a></code> </p>
+          <p><code><a href="putPlot.html">putPlot()</a></code> <code><a href="putPlot.html">`[&lt;-`(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Twitter spambots</p></td>
+        <td><p>Put Plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="getPlot.html">getPlot()</a></code> <code><a href="getPlot.html">`[`(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>getPlot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gg-add.html">`+`(<i>&lt;gg&gt;</i>)</a></code> <code><a href="gg-add.html">add_ggproto_to_ggmatrix()</a></code> </p>
+        </td>
+        <td><p>Modify a ggmatrix object by adding an ggplot2 object to all plots</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mapping_color_to_fill.html">mapping_color_to_fill()</a></code> </p>
+        </td>
+        <td><p>Aesthetic Mapping Color Fill</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mapping_swap_x_y.html">mapping_swap_x_y()</a></code> </p>
+        </td>
+        <td><p>Swap x and y mapping</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fn_switch.html">fn_switch()</a></code> </p>
+        </td>
+        <td><p>Function switch</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="str.ggmatrix.html">str(<i>&lt;ggmatrix&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>ggmatrix structure</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print_if_interactive.html">print_if_interactive()</a></code> </p>
+        </td>
+        <td><p>Print if not CRAN</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggmatrix_progress.html">ggmatrix_progress()</a></code> </p>
+        </td>
+        <td><p>ggmatrix default progress bar</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-plot-utilities" class="hasAnchor"><a href="#section-plot-utilities" class="anchor"></a>Plot Utilities</h2>
+          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -852,9 +692,70 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="signif_stars.html">signif_stars()</a></code> </p>
+        </td>
+        <td><p>Significance Stars</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="uppertriangle.html">uppertriangle()</a></code> </p>
         </td>
         <td><p>uppertriangle - rearrange dataset as the preparation of ggscatmat function</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="australia_PISA2012.html">australia_PISA2012</a></code> </p>
+        </td>
+        <td><p>Programme for International Student Assessment (PISA) 2012 Data for Australia</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="flea.html">flea</a></code> </p>
+        </td>
+        <td><p>Historical data used for classification examples.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="happy.html">happy</a></code> </p>
+        </td>
+        <td><p>Data related to happiness from the General Social Survey, 1972-2006.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nasa.html">nasa</a></code> </p>
+        </td>
+        <td><p>Data from the Data Expo JSM 2006.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pigs.html">pigs</a></code> </p>
+        </td>
+        <td><p>United Kingdom Pig Production</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="psychademic.html">psychademic</a></code> </p>
+        </td>
+        <td><p>UCLA canonical correlation analysis data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="twitter_spambots.html">twitter_spambots</a></code> </p>
+        </td>
+        <td><p>Twitter spambots</p></td>
       </tr>
     </tbody><tbody>
       <tr>

@@ -54,13 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/ggally_plots.html">List of available high-level plots</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
       <a href="../articles/ggduo.html">ggduo(): Two-grouped plot matrix</a>
-    </li>
-    <li>
-      <a href="../articles/gglyph.html">glyphs(): Glyph plot</a>
     </li>
     <li>
       <a href="../articles/ggmatrix.html">ggmatrix(): Plot matrix</a>
@@ -79,6 +79,9 @@
     </li>
     <li>
       <a href="../articles/ggsurv.html">ggsurv(): Survival curves</a>
+    </li>
+    <li>
+      <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
     </li>
   </ul>
 </li>
@@ -183,36 +186,15 @@
 <p>To make adjustments to each section, a list of information may be supplied. The list can be comprised of the following elements:</p>
 <ul>
 <li>
-<code>continuous</code>:
-<ul>
-<li>a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function</li>
-<li>current valid <code>upper$continuous</code> and <code>lower$continuous</code> character strings: <code>'points'</code>, <code>'smooth'</code>, <code>'density'</code>, <code>'cor'</code>, <code>'blank'</code>
-</li>
-<li>current valid <code>diag$continuous</code> character strings: <code>'densityDiag'</code>, <code>'barDiag'</code>, <code>'blankDiag'</code>
-</li>
-</ul>
-</li>
+<code>continuous</code>: a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function</li>
 <li>
-<code>combo</code>:
-<ul>
-<li>a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function. (not applicable for a <code>diag</code> list)</li>
-<li>current valid <code>upper$combo</code> and <code>lower$combo</code> character strings: <code>'box'</code>, <code>'dot'</code>, <code>'facethist'</code>, <code>'facetdensity'</code>, <code>'denstrip'</code>, <code>'blank'</code>
-</li>
-</ul>
-</li>
+<code>combo</code>: a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function. (not applicable for a <code>diag</code> list)</li>
 <li>
-<code>discrete</code>:
-<ul>
-<li>a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function</li>
-<li>current valid <code>upper$discrete</code> and <code>lower$discrete</code> character strings: <code>'ratio'</code>, <code>'facetbar'</code>, <code>'blank'</code>
-</li>
-<li>current valid <code>diag$discrete</code> character strings: <code>'barDiag'</code>, <code>'blankDiag'</code>
-</li>
-</ul>
-</li>
+<code>discrete</code>: a character string representing the tail end of a <code>ggally_NAME</code> function, or a custom function</li>
 <li>
 <code>mapping</code>: if mapping is provided, only the section’s mapping will be overwritten</li>
 </ul>
+<p>The list of current valid <code>ggally_NAME</code> functions is visible in <code><a href="../articles/ggally_plots.html">vignette("ggally_plots")</a></code>.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
 <span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
   <span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),

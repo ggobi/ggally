@@ -95,13 +95,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/ggally_plots.html">List of available high-level plots</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
       <a href="../articles/ggduo.html">ggduo(): Two-grouped plot matrix</a>
-    </li>
-    <li>
-      <a href="../articles/gglyph.html">glyphs(): Glyph plot</a>
     </li>
     <li>
       <a href="../articles/ggmatrix.html">ggmatrix(): Plot matrix</a>
@@ -120,6 +120,9 @@
     </li>
     <li>
       <a href="../articles/ggsurv.html">ggsurv(): Survival curves</a>
+    </li>
+    <li>
+      <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
     </li>
   </ul>
 </li>
@@ -248,6 +251,9 @@
     
 
 <p>Now that the print.ggmatrix method uses a large gtable object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around <code>object.size(data) * 0.3 * length(plots)</code>.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the ggplot2 format greatly outweigh the price of about 20<!-- % increase in memory usage from the prior ad-hoc print method. --></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Barret Schloerke <a href='mailto:schloerke@gmail.com'>schloerke@gmail.com</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># small function to display plots only if it's interactive</span>
