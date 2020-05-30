@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print ggmatrix object — ggmatrix_gtable • GGally</title>
+<title>Plot an outcome with several potential explanotory variables — ggbivariate • GGally</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Print ggmatrix object — ggmatrix_gtable" />
-<meta property="og:description" content="Specialized method to print the ggmatrix object-" />
+<meta property="og:title" content="Plot an outcome with several potential explanotory variables — ggbivariate" />
+<meta property="og:description" content="ggbivariate is a variant of ggduo for plotting
+an outcome variable with several potential explonatory variables." />
 
 
 
@@ -150,84 +151,104 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print ggmatrix object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggmatrix_gtable.R'><code>R/ggmatrix_gtable.R</code></a></small>
-    <div class="hidden name"><code>ggmatrix_gtable.Rd</code></div>
+    <h1>Plot an outcome with several potential explanotory variables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggbivariate.R'><code>R/ggbivariate.R</code></a></small>
+    <div class="hidden name"><code>ggbivariate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Specialized method to print the ggmatrix object-</p>
+    <p><code>ggbivariate</code> is a variant of <code><a href='ggduo.html'>ggduo</a></code> for plotting
+an outcome variable with several potential explonatory variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggmatrix_gtable</span>(
-  <span class='no'>pm</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>progress_format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/formals.html'>formals</a></span>(<span class='no'>ggmatrix_progress</span>)$<span class='no'>format</span>
+    <pre class="usage"><span class='fu'>ggbivariate</span>(
+  <span class='no'>data</span>,
+  <span class='no'>outcome</span>,
+  <span class='kw'>explanatory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>rowbar_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pm</th>
-      <td><p>ggmatrix object to be plotted</p></td>
+      <th>data</th>
+      <td><p>dataset to be used, can have both categorical and
+numerical variables</p></td>
+    </tr>
+    <tr>
+      <th>outcome</th>
+      <td><p>name or position of the outcome variable (one variable only)</p></td>
+    </tr>
+    <tr>
+      <th>explanatory</th>
+      <td><p>names or positions of the explanatory variables (if <code>NULL</code>,
+will take all variables other than <code>outcome</code>)</p></td>
+    </tr>
+    <tr>
+      <th>mapping</th>
+      <td><p>additional aesthetic to be used, for example to indicate
+weights (see examples)</p></td>
+    </tr>
+    <tr>
+      <th>types</th>
+      <td><p>custom types of plots to use, see <code><a href='ggduo.html'>ggduo</a></code></p></td>
+    </tr>
+    <tr>
+      <th>rowbar_args</th>
+      <td><p>additional arguments passed to <code><a href='ggally_colbar.html'>ggally_rowbar</a></code>
+(see examples)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>ignored</p></td>
-    </tr>
-    <tr>
-      <th>progress, progress_format</th>
-      <td><p>Please use the 'progress' parameter in your ggmatrix-like function.  See <code><a href='ggmatrix_progress.html'>ggmatrix_progress</a></code> for a few examples.  These parameters will soon be deprecated.</p></td>
+      <td><p>additional arguments passed to <code><a href='ggduo.html'>ggduo</a></code> (see examples)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Barret Schloerke <a href='mailto:schloerke@gmail.com'>schloerke@gmail.com</a></p>
+    <p>Joseph Larmarange <a href='mailto:joseph@larmarange.net'>joseph@larmarange.net</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tips</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"reshape"</span>)
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>tips</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>2</span>), <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"sex"</span>))
-<span class='fu'>ggmatrix_gtable</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; TableGrob (17 x 14) "layout": 36 grobs
-#&gt;     z         cells       name                                   grob
-#&gt; 1   0 ( 1-17, 1-14) background       rect[plot.background..rect.9197]
-#&gt; 2   1 ( 8- 8, 5- 5)  panel-1-1                         gtable[layout]
-#&gt; 3   1 (10-10, 5- 5)  panel-2-1                         gtable[layout]
-#&gt; 4   1 (12-12, 5- 5)  panel-3-1                         gtable[layout]
-#&gt; 5   1 ( 8- 8, 7- 7)  panel-1-2                         gtable[layout]
-#&gt; 6   1 (10-10, 7- 7)  panel-2-2                         gtable[layout]
-#&gt; 7   1 (12-12, 7- 7)  panel-3-2                         gtable[layout]
-#&gt; 8   1 ( 8- 8, 9- 9)  panel-1-3                         gtable[layout]
-#&gt; 9   1 (10-10, 9- 9)  panel-2-3                         gtable[layout]
-#&gt; 10  1 (12-12, 9- 9)  panel-3-3                         gtable[layout]
-#&gt; 11  3 ( 6- 6, 5- 5)   axis-t-1                         zeroGrob[NULL]
-#&gt; 12  3 ( 6- 6, 7- 7)   axis-t-2                         zeroGrob[NULL]
-#&gt; 13  3 ( 6- 6, 9- 9)   axis-t-3                         zeroGrob[NULL]
-#&gt; 14  3 (13-13, 5- 5)   axis-b-1                         gtable[layout]
-#&gt; 15  3 (13-13, 7- 7)   axis-b-2                         gtable[layout]
-#&gt; 16  3 (13-13, 9- 9)   axis-b-3                         gtable[layout]
-#&gt; 17  3 ( 8- 8, 4- 4)   axis-l-1                         gtable[layout]
-#&gt; 18  3 (10-10, 4- 4)   axis-l-2                         gtable[layout]
-#&gt; 19  3 (12-12, 4- 4)   axis-l-3                         gtable[layout]
-#&gt; 20  3 ( 8- 8,11-11)   axis-r-1                         zeroGrob[NULL]
-#&gt; 21  3 (10-10,11-11)   axis-r-2                         zeroGrob[NULL]
-#&gt; 22  3 (12-12,11-11)   axis-r-3                         zeroGrob[NULL]
-#&gt; 23  2 ( 7- 7, 5- 5)  strip-t-1                          gtable[strip]
-#&gt; 24  2 ( 7- 7, 7- 7)  strip-t-2                          gtable[strip]
-#&gt; 25  2 ( 7- 7, 9- 9)  strip-t-3                          gtable[strip]
-#&gt; 26  2 ( 8- 8,10-10)  strip-r-1                          gtable[strip]
-#&gt; 27  2 (10-10,10-10)  strip-r-2                          gtable[strip]
-#&gt; 28  2 (12-12,10-10)  strip-r-3                          gtable[strip]
-#&gt; 29  4 ( 5- 5, 5- 9)     xlab-t                         zeroGrob[NULL]
-#&gt; 30  5 (14-14, 5- 9)     xlab-b                         zeroGrob[NULL]
-#&gt; 31  6 ( 8-12, 3- 3)     ylab-l                         zeroGrob[NULL]
-#&gt; 32  7 ( 8-12,12-12)     ylab-r                         zeroGrob[NULL]
-#&gt; 33  8 ( 4- 4, 5- 9)   subtitle zeroGrob[plot.subtitle..zeroGrob.9193]
-#&gt; 34  9 ( 3- 3, 5- 9)      title    zeroGrob[plot.title..zeroGrob.9192]
-#&gt; 35 10 (15-15, 5- 9)    caption  zeroGrob[plot.caption..zeroGrob.9195]
-#&gt; 36 11 ( 2- 2, 2- 2)        tag      zeroGrob[plot.tag..zeroGrob.9194]</div></pre>
+<span class='fu'>ggbivariate</span>(<span class='no'>tips</span>, <span class='st'>"smoker"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"day"</span>, <span class='st'>"time"</span>, <span class='st'>"sex"</span>, <span class='st'>"tip"</span>))</div><div class='img'><img src='ggbivariate-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Personalize plot title and legend title</span>
+<span class='fu'>ggbivariate</span>(
+  <span class='no'>tips</span>, <span class='st'>"smoker"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"day"</span>, <span class='st'>"time"</span>, <span class='st'>"sex"</span>, <span class='st'>"tip"</span>),
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Custom title"</span>
+) +
+  <span class='fu'>labs</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"Smoker ?"</span>)
+
+<span class='co'># Customize fill colour scale</span>
+<span class='fu'>ggbivariate</span>(<span class='no'>tips</span>, <span class='st'>"smoker"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"day"</span>, <span class='st'>"time"</span>, <span class='st'>"sex"</span>, <span class='st'>"tip"</span>)) +
+  <span class='fu'>scale_fill_brewer</span>()
+
+<span class='co'># Customize labels</span>
+<span class='fu'>ggbivariate</span>(
+  <span class='no'>tips</span>, <span class='st'>"smoker"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"day"</span>, <span class='st'>"time"</span>, <span class='st'>"sex"</span>, <span class='st'>"tip"</span>),
+  <span class='kw'>rowbar_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+    <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+    <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+    <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>,
+    <span class='kw'>label_format</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>label_percent</a></span>(<span class='kw'>accurary</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+  )
+)
+
+<span class='co'># Choose the sub-plot from which get legend</span>
+<span class='fu'>ggbivariate</span>(<span class='no'>tips</span>, <span class='st'>"smoker"</span>)
+<span class='fu'>ggbivariate</span>(<span class='no'>tips</span>, <span class='st'>"smoker"</span>, <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+
+<span class='co'># Use mapping to indicate weights</span>
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>Titanic</span>)
+<span class='fu'>ggbivariate</span>(<span class='no'>d</span>, <span class='st'>"Survived"</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>weight</span> <span class='kw'>=</span> <span class='no'>Freq</span>))
+
+<span class='co'># outcome can be numerical</span>
+<span class='fu'>ggbivariate</span>(<span class='no'>tips</span>, <span class='kw'>outcome</span> <span class='kw'>=</span> <span class='st'>"tip"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"tip"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
