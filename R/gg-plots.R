@@ -1361,6 +1361,154 @@ ggally_ratio <- function(
 
 
 
+#' Plots the number of observations
+#'
+#' Plot the number of observations by using rectangles
+#' with proportional areas.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param ... other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
+#' @details
+#'   You can adjust the size of rectangles with the \code{x.width} argument.
+#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex))
+#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day))
+#'
+#' ggally_count(
+#'   as.data.frame(Titanic),
+#'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
+#' )
+#' ggally_count(
+#'   as.data.frame(Titanic),
+#'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq),
+#'   x.width = 0.5
+#' )
+ggally_count <- function(data, mapping, ...) {
+  mapping <- mapping_color_to_fill(mapping)
+  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
+  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  # for stat_ggally_count(), y should be mapped to base_y
+  # and always be a factor
+  data$.y <- as.factor(eval_data_col(data, mapping$y))
+  ylabel <- mapping_string(mapping$y)
+  mapping$base_y <- aes_string(base_y = ".y")$base_y
+  mapping$y <- NULL
+
+  # default values
+  args <- list(...)
+  if (!"fill" %in% names(args) & is.null(mapping$fill))
+    args$fill <- "grey50"
+
+  ggplot(data, mapping) +
+    do.call(stat_ggally_count, args) +
+    scale_y_continuous(
+      breaks = 1:length(levels(data$.y)),
+      labels = levels(data$.y)
+    ) +
+    theme(panel.grid.minor = element_blank()) +
+    ylab(ylabel)
+}
+
+#' @export
+#' @rdname ggally_count
+#' @format NULL
+#' @usage NULL
+#' @export
+# na.rm = TRUE to remove warnings if NA (cf. stat_count)
+# x.width to control size of tiles
+stat_ggally_count <- function(mapping = NULL, data = NULL,
+                      geom = "tile", position = "identity",
+                      ...,
+                      x.width = .9,
+                      na.rm = FALSE,
+                      show.legend = NA,
+                      inherit.aes = TRUE) {
+
+  params <- list(
+    x.width = x.width,
+    na.rm = na.rm,
+    ...
+  )
+  if (!is.null(params$y)) {
+    stop("stat_ggally_count() must not be used with a y aesthetic,
+         but with a base_y aesthetic instead.", call. = FALSE)
+  }
+
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatGgallyCount,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params
+  )
+}
+
+#' @rdname ggally_count
+#' @format NULL
+#' @usage NULL
+#' @export
+StatGgallyCount <- ggproto("StatGgallyCount", Stat,
+  required_aes = c("x", "base_y"),
+  default_aes = aes(
+    weight = 1,
+    width = after_stat(width),
+    height = after_stat(height),
+    y = after_stat(y)
+  ),
+
+  setup_params = function(data, params) {
+    params
+  },
+
+  extra_params = c("na.rm"),
+
+  compute_panel = function(self, data, scales, x.width = NULL) {
+    if (is.null(data$weight))
+      data$weight <- rep(1, nrow(data))
+
+    if(is.null(x.width))
+      x.width <- .9
+
+    # sum weights for each combination of aesthetics
+    # the use of . allows to consider all aesthetics defined in data
+    panel <- stats::aggregate(weight ~ ., data = data, sum, na.rm = TRUE)
+
+    names(panel)[which(names(panel) == "weight")] <- "n"
+
+    # compute proportions by x and y
+    f <- function(n) {sum(abs(n), na.rm = TRUE)}
+    panel$n_xy <- stats::ave(panel$n, panel$x, panel$base_y, FUN = f)
+    panel$prop <- panel$n / panel$n_xy
+    panel$width <- sqrt(panel$n_xy) / max(sqrt(panel$n_xy)) * x.width
+    panel$height <- panel$width * panel$prop
+    panel$cum_height <- stats::ave(panel$height, panel$x, panel$base_y, FUN = cumsum)
+    panel$y <- as.numeric(panel$base_y) + panel$cum_height -
+      panel$height / 2 - panel$width / 2
+
+    panel
+  }
+)
+
+
+#' @rdname ggally_count
+#' @export
+#' @examples
+#'
+#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
+#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
+ggally_countDiag <- function(data, mapping, ...) {
+  mapping$y <- mapping$x
+  ggally_count(data = data, mapping = mapping, ...)
+}
+
 #' Blank
 #'
 #' Draws nothing.
