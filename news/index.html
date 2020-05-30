@@ -97,6 +97,9 @@
       <a href="../articles/ggally_plots.html">List of available high-level plots</a>
     </li>
     <li>
+      <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
@@ -122,9 +125,6 @@
     </li>
     <li>
       <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
-    </li>
-    <li>
-      <a href="../articles/new_stats.html">Additional statistics for ggplot2</a>
     </li>
   </ul>
 </li>
@@ -159,7 +159,56 @@
     <div id="ggally-development-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ggally-development-version" class="anchor"></a>GGally (development version)</h2>
-<p><code>ggally_cor</code> (<a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
+<div id="new-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New Functions:</h3>
+<p><code><a href="../reference/ggally_autopoint.html">ggally_autopoint()</a></code>, <code><a href="../reference/ggally_autopoint.html">ggally_autopointDiag()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/325'>#325</a>)</p>
+<ul>
+<li>Make scatterplots compatible with both continuous and catgeorical variables using <code><a href="https://ggforce.data-imaginist.com/reference/geom_autopoint.html">ggforce::geom_autopoint()</a></code>.</li>
+</ul>
+<p><code><a href="../reference/ggally_count.html">ggally_count()</a></code>, <code><a href="../reference/ggally_count.html">ggally_countDiag()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/321'>#321</a>)</p>
+<ul>
+<li>Plot the number of observations by using rectangles with proportional areas.</li>
+</ul>
+<p><code><a href="../reference/ggally_cross.html">ggally_cross()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/326'>#326</a>)</p>
+<ul>
+<li>Plot the number of observations by using square points with proportional areas.</li>
+</ul>
+<p><code><a href="../reference/ggally_statistic.html">ggally_statistic()</a></code> (<a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
+<ul>
+<li>A generialized version of <code><a href="../reference/ggally_cor.html">ggally_cor()</a></code>
+</li>
+<li>Use this method to create functions similar to <code><a href="../reference/ggally_cor.html">ggally_cor()</a></code> that return any text value given and <code>x</code> and <code>y</code> vector of data</li>
+</ul>
+<p><code><a href="../reference/ggally_table.html">ggally_table()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/326'>#326</a>)</p>
+<ul>
+<li>Plot the number of observations as a table.</li>
+</ul>
+<p><code><a href="../reference/ggally_trends.html">ggally_trends()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/333'>#333</a>)</p>
+<ul>
+<li>Plot trends using line plots.</li>
+</ul>
+<p><code><a href="../reference/signif_stars.html">signif_stars()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
+<ul>
+<li>Return the appropriate number of significance stars as a character vector for the provided numeric input values.</li>
+</ul>
+</div>
+<div id="new-ggplot2-plot-statistics" class="section level3">
+<h3 class="hasAnchor">
+<a href="#new-ggplot2-plot-statistics" class="anchor"></a>New <code>ggplot2</code> plot statistics:</h3>
+<p><code>stat_cross</code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/326'>#326</a>)</p>
+<ul>
+<li>Computes statistics of a 2-dimensional matrix using <code><a href="https://rdrr.io/pkg/broom/man/augment.htest.html">broom::augment.htest</a></code>.</li>
+</ul>
+<p><code>stat_weighted_mean</code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/333'>#333</a>)</p>
+<ul>
+<li>Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.</li>
+</ul>
+</div>
+<div id="features-and-bug-fixes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#features-and-bug-fixes" class="anchor"></a>Features and Bug Fixes:</h3>
+<p><code><a href="../reference/ggally_cor.html">ggally_cor()</a></code> (<a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
 <ul>
 <li>New implementation using <code><a href="../reference/ggally_statistic.html">ggally_statistic()</a></code>
 </li>
@@ -171,60 +220,24 @@
 <li>To use the old version, change your <code>ggally_cor</code> function calls to <code>ggally_cor_v1_5</code>.</li>
 <li>Previously deprecated parameters have been removed</li>
 </ul>
-<p><code>ggpairs</code> (<a href='https://github.com/ggobi/ggally/issues/331'>#331</a>)</p>
+<p><code><a href="../reference/ggpairs.html">ggpairs()</a></code> (<a href='https://github.com/ggobi/ggally/issues/331'>#331</a>)</p>
 <ul>
 <li>new <code>proportion</code> argument to control relative size of sub-plots</li>
 <li>option <code>proportion = "auto"</code> for automatic guess based on the number of levels for discrete variables</li>
 </ul>
-<p><code>ggduo</code> (<a href='https://github.com/ggobi/ggally/issues/331'>#331</a>)</p>
+<p><code><a href="../reference/ggduo.html">ggduo()</a></code> (<a href='https://github.com/ggobi/ggally/issues/331'>#331</a>)</p>
 <ul>
 <li>new <code>xProportion</code> and <code>yProportion</code> arguments to control relative size of sub-plots</li>
 <li>option <code>xproportion = "auto"</code> and <code>yproportion = "auto"</code> for automatic guess based on the number of levels for discrete variables</li>
 </ul>
-<div id="new-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#new-functions" class="anchor"></a>New functions:</h3>
-<p><code>ggally_autopoint</code>, <code>ggally_autopointDiag</code> (<a href='https://github.com/ggobi/ggally/issues/325'>#325</a>)</p>
+<p><code><a href="../reference/ggscatmat.html">ggscatmat()</a></code></p>
 <ul>
-<li>Make scatterplots compatible with both continuous and catgeorical variables using <code><a href="https://ggforce.data-imaginist.com/reference/geom_autopoint.html">ggforce::geom_autopoint()</a></code>.</li>
+<li>
+<code><a href="../reference/lowertriangle.html">lowertriangle()</a></code> now preallocates it’s memory usage for a 2-5x speed improvement. (<a href='https://github.com/vlepori'>@vlepori</a>, <a href='https://github.com/ggobi/ggally/issues/328'>#328</a>)</li>
 </ul>
-<p><code>ggally_count</code>, <code>ggally_countDiag</code> (<a href='https://github.com/ggobi/ggally/issues/321'>#321</a>)</p>
+<p>Website</p>
 <ul>
-<li>Plot the number of observations by using rectangles with proportional areas.</li>
-</ul>
-<p><code>ggally_cross</code> (<a href='https://github.com/ggobi/ggally/issues/326'>#326</a>)</p>
-<ul>
-<li>Plot the number of observations by using square points with proportional areas.</li>
-</ul>
-<p><code>ggally_statistic</code> (<a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
-<ul>
-<li>New function which is a generialized version of <code><a href="../reference/ggally_cor.html">ggally_cor()</a></code>
-</li>
-<li>Use this method to create functions similar to <code><a href="../reference/ggally_cor.html">ggally_cor()</a></code> that return any text value given and <code>x</code> and <code>y</code> vector of data</li>
-</ul>
-<p><code>ggally_table</code> (<a href='https://github.com/ggobi/ggally/issues/326'>#326</a>)</p>
-<ul>
-<li>Plot the number of observations as a table.</li>
-</ul>
-<p><code>ggally_trends</code> (<a href='https://github.com/ggobi/ggally/issues/333'>#333</a>)</p>
-<ul>
-<li>Plot trends using line plots.</li>
-</ul>
-<p><code><a href="../reference/signif_stars.html">signif_stars()</a></code> (<a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
-<ul>
-<li>Return the appropriate number of significance stars as a character vector for the provided numeric input values.</li>
-</ul>
-</div>
-<div id="new-statistics" class="section level3">
-<h3 class="hasAnchor">
-<a href="#new-statistics" class="anchor"></a>New statistics:</h3>
-<p><code>stat_cross</code> (<a href='https://github.com/ggobi/ggally/issues/326'>#326</a>)</p>
-<ul>
-<li>Computes statistics of a 2-dimensional matrix using <code><a href="https://rdrr.io/pkg/broom/man/augment.htest.html">broom::augment.htest</a></code>.</li>
-</ul>
-<p><code>stat_weighted_mean</code> (<a href='https://github.com/ggobi/ggally/issues/333'>#333</a>)</p>
-<ul>
-<li>Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.</li>
+<li>Updated to use <code>pkgdown</code> (<a href='https://github.com/ggobi/ggally/issues/335'>#335</a>)</li>
 </ul>
 </div>
 </div>
