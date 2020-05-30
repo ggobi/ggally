@@ -136,7 +136,7 @@ StatCross <- ggproto("StatCross", Stat,
 
 #' Plots the number of observations
 #'
-#' Plot the number of observations by using squares points
+#' Plot the number of observations by using square points
 #' with proportional areas. Could be filled according to chi-squared
 #' statistics computed by \code{\link{stat_cross}}. Labels could also
 #' be added (see examples).
