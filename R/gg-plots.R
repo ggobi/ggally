@@ -73,6 +73,26 @@ mapping_swap_x_y <- function(mapping) {
 }
 
 
+#' Keep colour mapping only if same as x or y
+#' @param mapping output of \code{ggplot2::\link[ggplot2]{aes}(...)}
+#' @return Aes mapping with colour mapping kept only if equal to
+#' mapping to x or to y.
+#' @export
+#' @examples
+#' mapping <- aes(x = sex, y = age, colour = sex)
+#' keep_colour_if_in_x_or_y(mapping)
+#'
+#' mapping <- aes(x = sex, y = age, colour = region)
+#' keep_colour_if_in_x_or_y(mapping)
+keep_colour_if_in_x_or_y <- function(mapping) {
+  if (
+    !is.null(mapping_string(mapping$colour)) &
+    mapping_string(mapping$colour) != mapping_string(mapping$x) &
+    mapping_string(mapping$colour) != mapping_string(mapping$y)
+  ) mapping <- mapping[names(mapping) != "colour"]
+  mapping
+}
+
 
 #' Plots the Scatter Plot
 #'
