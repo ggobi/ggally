@@ -209,13 +209,13 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'
 #' @details
 #' \code{types} is a list that may contain the variables
-#' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
+#' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
 #'\describe{
-#'  \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
-#'  \item{comboHorizontal}{exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
-#'  \item{comboVertical}{exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
-#'  \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
-#'  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+#'  \item{continuous}{This option is used for continuous X and Y data.}
+#'  \item{comboHorizontal}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+#'  \item{comboVertical}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+#'  \item{discrete}{This option is used for categorical X and Y data.}
+#'  \item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 #'}
 #'
 #' If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
@@ -237,6 +237,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @template ggmatrix-progress
 #' @param legends deprecated
+#' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.
 #' @export
 #' @examples
 #'  # small function to display plots only if it's interactive
@@ -295,7 +296,28 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'
 #'  p_(pm)
 #'
+#' # Use "auto" to adapt width of the sub-plots
+#'  pm <- ggduo(
+#'    dt,
+#'    c("year", "g", "ab", "lg"),
+#'    c("batting_avg", "slug", "on_base"),
+#'    mapping = ggplot2::aes(color = lg),
+#'    xProportions = "auto"
+#'  )
 #'
+#'  p_(pm)
+#'
+#'  # Custom widths & heights of the sub-plots
+#'  pm <- ggduo(
+#'    dt,
+#'    c("year", "g", "ab", "lg"),
+#'    c("batting_avg", "slug", "on_base"),
+#'    mapping = ggplot2::aes(color = lg),
+#'    xProportions = c(6, 4, 3, 2),
+#'    yProportions = c(1, 2, 1)
+#'  )
+#'
+#'  p_(pm)
 #'
 #' # Example derived from:
 #' ## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital
@@ -442,6 +464,8 @@ ggduo <- function(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
+  xProportions = NULL,
+  yProportions = NULL,
   legends = stop("deprecated")
 ) {
 
@@ -468,6 +492,9 @@ ggduo <- function(
 
   stop_if_high_cardinality(data, columnsX, cardinality_threshold)
   stop_if_high_cardinality(data, columnsY, cardinality_threshold)
+
+  xProportions <- ggmatrix_proportions(xProportions, data, columnsX)
+  yProportions <- ggmatrix_proportions(yProportions, data, columnsY)
 
   types <- check_and_set_ggpairs_defaults(
     "types", types,
@@ -549,7 +576,9 @@ ggduo <- function(
     data = data_,
     gg = NULL,
     progress = progress,
-    legend = legend
+    legend = legend,
+    xProportions = xProportions,
+    yProportions = yProportions
   )
 
   plotMatrix
@@ -579,12 +608,12 @@ ggduo <- function(
 #'
 #' @details
 #' \code{upper} and \code{lower} are lists that may contain the variables
-#' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
+#' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
 #'\describe{
-#'  \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
-#'  \item{combo}{exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
-#'  \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
-#'  \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+#'  \item{continuous}{This option is used for continuous X and Y data.}
+#'  \item{combo}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+#'  \item{discrete}{This option is used for categorical X and Y data.}
+#'  \item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 #'}
 #'
 #' \code{diag} is a list that may only contain the variables 'continuous', 'discrete', and 'na'. Each element of the diag list is a string implementing the following options:
@@ -611,6 +640,7 @@ ggduo <- function(
 #' @param ... deprecated. Please use \code{mapping}
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
+#' @param proportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.
 #' @template ggmatrix-labeller-param
 #' @template ggmatrix-switch-param
 #' @param showStrips boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.
@@ -731,6 +761,17 @@ ggduo <- function(
 #'   upper = list(continuous = wrap(ggally_cor, displayGrid = FALSE))
 #' )
 #' p_(pm)
+#'
+#' ## Custom with/height of subplots
+#' pm <- ggpairs(tips, columns = c(2, 3, 5))
+#' p_(pm)
+#'
+#' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = "auto")
+#' p_(pm)
+#'
+#' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
+#' p_(pm)
+#'
 ggpairs <- function(
   data,
   mapping = NULL,
@@ -751,6 +792,7 @@ ggpairs <- function(
   legend = NULL,
   cardinality_threshold = 15,
   progress = NULL,
+  proportions = NULL,
   legends = stop("deprecated")
 ){
 
@@ -791,6 +833,8 @@ ggpairs <- function(
   )
 
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
+
+  proportions <- ggmatrix_proportions(proportions, data, columns)
 
   # get plot type information
   dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
@@ -855,7 +899,9 @@ ggpairs <- function(
     data = data_,
     gg = NULL,
     progress = progress,
-    legend = legend
+    legend = legend,
+    xProportions = proportions,
+    yProportions = proportions
   )
 
   plotMatrix
@@ -906,7 +952,6 @@ add_and_overwrite_aes <- function(current, new) {
 #' Replace the fill with the color and make color NULL.
 #'
 #' @param current the current aesthetics
-#' @keywords internal
 #' @export
 mapping_color_to_fill <- function(current) {
   if (is.null(current)) {
@@ -1045,6 +1090,53 @@ stop_if_params_exist <- function(params) {
 }
 
 
+ggmatrix_proportions <- function(proportions, data, columns) {
+
+  if (is.null(proportions)) {
+    return(proportions)
+  }
+
+  # relative proportions if "auto"
+  # wrap in isTRUE for safe guarding
+  if (isTRUE(length(proportions) == 1 && proportions == "auto")) {
+    proportions <- c()
+    for (v in columns) {
+      if (is.numeric(data[[v]]))
+        proportions <- c(proportions, NA)
+      else
+        proportions <- c(proportions, length(levels(as.factor(data[[v]]))))
+    }
+    # for numeric variables, the average
+    proportions[is.na(proportions)] <- mean(proportions, na.rm = TRUE)
+    proportions[is.na(proportions)] <- 1 # in case all are numeric
+  } else {
+    is_valid_type <- vapply(proportions, function(x) {
+      (!is.na(x)) &&
+        (
+          grid::is.unit(x) || is.numeric(x)
+        )
+    }, logical(1))
+    if (!all(is_valid_type)) {
+      stop("proportions need to be non-NA numeric values or 'auto'. proportions: ", dput_val(proportions))
+    }
+  }
+
+  if (length(proportions) == 1 && length(columns) > 1) {
+    proportions <- replicate(length(columns), proportions)
+  }
+
+  proportions
+}
+
+dput_val <- function(x) {
+  f <- file()
+  on.exit({
+    close(f)
+  })
+  dput(x, f)
+  ret <- paste0(readLines(f), collapse = "\n")
+  ret
+}
 
 #diamondMatrix <- ggpairs(
 #  diamonds,

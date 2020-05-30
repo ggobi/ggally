@@ -37,7 +37,7 @@ broomify <- function(model, lmStars = TRUE) {
 
   broom_glance_info  <- broom::glance(model)
   broom_tidy_coef    <- broom::tidy(model)
-  broom_augment_rows <- broom::augment(model)
+  broom_augment_rows <- broom::augment(model, se_fit = TRUE)
   attr(broom_augment_rows, "broom_glance") <- broom_glance_info
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
   attr(broom_augment_rows, "var_x") <- model_beta_variables(data = broom_augment_rows)
