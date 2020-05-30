@@ -296,6 +296,7 @@ ggally_table <- function(data, mapping, ..., geom_tile_args = NULL){
 }
 
 #' @export
+#' @rdname ggally_table
 ggally_tableDiag <- function(data, mapping, ..., geom_tile_args = NULL) {
   mapping$y <- mapping$x
   ggally_table(data = data, mapping = mapping, ..., geom_tile_args = geom_tile_args)
