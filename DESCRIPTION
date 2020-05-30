@@ -1,5 +1,5 @@
 Package: GGally
-Version: 1.5.0
+Version: 1.5.0.9000
 License: GPL (>= 2.0)
 Title: Extension to 'ggplot2'
 Type: Package
@@ -8,7 +8,7 @@ LazyData: true
 URL: https://ggobi.github.io/ggally, https://github.com/ggobi/ggally
 BugReports: https://github.com/ggobi/ggally/issues
 Authors@R: c(
-    person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs, ggduo, ggnostic, ggts, ggfacet, and ggally_*.  Contributor for all functions."),
+    person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com", comment = "author for ggpairs, ggduo, ggnostic, ggts, ggfacet, and ggally_*"),
     person("Jason", "Crowley", role = "aut", email = "crowley.jason.s@gmail.com", comment = "ggparcoord"),
     person("Di", "Cook", role = c("aut", "ths"), email = "dicook@monash.edu", comment = "ggscatmat, gglyph"),
     person("Heike", "Hofmann", role = "ths", email = "hofmann@iastate.edu"),
@@ -28,7 +28,7 @@ Description:
     plot networks.
 Depends:
     R (>= 3.1),
-    ggplot2 (> 2.2.0)
+    ggplot2 (>= 3.3.0)
 Imports:
     grDevices,
     grid,
@@ -43,6 +43,7 @@ Suggests:
     broom (>= 0.4.0),
     chemometrics,
     geosphere (>= 1.5-1),
+    ggforce,
     igraph (>= 1.0.1),
     intergraph (>= 2.0-2),
     maps (>= 3.1.0),
@@ -56,9 +57,10 @@ Suggests:
     rmarkdown,
     roxygen2,
     testthat,
-    crosstalk
+    crosstalk,
+    knitr
 Roxygen: list(markdown = FALSE)
 RoxygenNote: 7.1.0
-VignetteBuilder: packagedocs
+VignetteBuilder: knitr
 SystemRequirements: openssl
 Encoding: UTF-8

@@ -33,12 +33,6 @@ test_that("density", {
 
 test_that("cor", {
 
-  expect_warning(
-    ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"), use = "NOTFOUND"),
-    "correlation 'use' not found"
-  )
-
-
   ti <- tips
   class(ti) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), use = "complete.obs")
@@ -60,9 +54,6 @@ test_that("cor", {
       msg
     )
   }
-  expect_err(corAlignPercent = 0.9, "'corAlignPercent' is deprecated")
-  expect_err(corMethod = "pearson", "'corMethod' is deprecated")
-  expect_err(corUse = "complete.obs", "'corUse' is deprecated")
 
   expect_print(ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = I("green"))))
 
@@ -88,7 +79,7 @@ test_that("cor", {
       ti,
       ggplot2::aes(x = total_bill, y = tip, color = size)
     ),
-    "ggally_cor: mapping color column"
+    "must be categorical"
   )
   expect_silent(
     ggally_cor(
@@ -133,14 +124,30 @@ test_that("dates", {
 
   class(nas) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(nas, ggplot2::aes(x = date, y = ozone))
-  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
-  p <- ggally_cor(nas, ggplot2::aes(y = date, x = ozone))
-  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278")
-
+  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278***")
   p <- ggally_barDiag(nas, ggplot2::aes(x = date))
   expect_equal(mapping_string(p$mapping$x), "date")
   expect_equal(p$labels$y, "count")
 
+})
+
+test_that("cor stars are aligned", {
+  p <- ggally_cor(iris, ggplot2::aes(x = Sepal.Length, y = Petal.Width, color = as.factor(Species)))
+  expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr: 0.818***")
+  expect_equal(get("aes_params", envir = p$layers[[1]])$family, "mono")
+
+  labels <- eval_data_col(p$layers[[2]]$data, p$layers[[2]]$mapping$label)
+  expect_equal(as.character(labels), c("    setosa: 0.278.  ", "versicolor: 0.546***", " virginica: 0.281*  "))
+})
+
+test_that("ggally_statistic handles factors", {
+
+  simple_chisq <- function(x, y){
+    scales::number(chisq.test(x,y)$p.value, accuracy=.001)
+  }
+  expect_silent({
+    p <- ggally_statistic(reshape::tips, aes(x=sex, y=day), text_fn = simple_chisq, title = "Chi^2")
+  })
 })
 
 test_that("rescale", {
@@ -185,4 +192,69 @@ test_that("smooth_se", {
   p <- ggally_smooth_loess(iris, mapping = ggplot2::aes(Sepal.Width, Petal.Length), se = FALSE)
   expect_equal(p$layers[[2]]$stat_params$se, FALSE)
   expect_print(p)
+})
+
+
+test_that("ggally_count", {
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq),
+    fill = "red"
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Sex)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Survived, y = interaction(Sex, Age), weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  # check that y character vectors are rendering
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = toupper(Survived), weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  # check countDiag
+  p <- ggally_countDiag(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Survived, weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  # change size of tiles
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Class),
+    x.width = .5
+  )
+  expect_print(p)
+
+  # no warnings expected if na.rm = TRUE
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = interaction(Class, Age), y = Survived, weight = Freq, fill = Class),
+    na.rm = TRUE
+  )
+  expect_print(p)
+
 })

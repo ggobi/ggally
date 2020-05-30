@@ -10,6 +10,8 @@ if (getRversion() >= "2.15.1") {
 }
 
 
+
+
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
 #' @param data data set to evaluate the data with
@@ -219,39 +221,52 @@ ggally_density <- function(data, mapping, ...){
   p
 }
 
+
 #' Correlation from the Scatter Plot
 #'
 #' Estimate correlation from the given data.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param alignPercent right align position of numbers. Default is 60 percent across the horizontal
+#' @param ... other arguments being supplied to \code{\link[ggplot2]{geom_text}()} for the title and groups
+#' @param stars logical value which determines if the significance stars should be displayed.  Given the \code{\link[stats]{cor.test}} p-values, display \describe{
+#'   \item{\code{"***"}}{if the p-value is \verb{< 0.001}}
+#'   \item{\code{"**"}}{if the p-value is \verb{< 0.01}}
+#'   \item{\code{"*"}}{if the p-value is \verb{< 0.05}}
+#'   \item{\code{"."}}{if the p-value is \verb{< 0.10}}
+#'   \item{\code{""}}{otherwise}
+#' }
 #' @param method \code{method} supplied to cor function
-#' @param use \code{use} supplied to cor function
-#' @param corAlignPercent deprecated. Use parameter \code{alignPercent}
-#' @param corMethod deprecated. Use parameter \code{method}
-#' @param corUse deprecated. Use parameter \code{use}
-#' @param displayGrid if TRUE, display aligned panel gridlines
-#' @param ... other arguments being supplied to geom_text
+#' @param use \code{use} supplied to \code{\link[stats]{cor}} function
+#' @param display_grid if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.
+#' @param digits number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.
+#' @param title_args arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}
+#' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
+#' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
+#' @param align_percent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
+#' @param alignPercent,displayGrid deprecated. Please use their snake-case counterparts.
+#' @param title title text to be displayed
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @importFrom stats complete.cases cor
+#' @seealso \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 #' @export
 #' @keywords hplot
 #' @examples
 #'  data(tips, package = "reshape")
 #'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  # display with no grid
+#'  # display with grid
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-#'    displayGrid = FALSE
+#'    display_grid = TRUE
 #'  )
 #'  # change text attributes
 #'  ggally_cor(
 #'    tips,
 #'    mapping = ggplot2::aes(x = total_bill, y = tip),
 #'    size = 15,
-#'    colour = I("red")
+#'    colour = I("red"),
+#'    title = "Correlation"
 #'  )
 #'  # split by a variable
 #'  ggally_cor(
@@ -262,77 +277,139 @@ ggally_density <- function(data, mapping, ...){
 ggally_cor <- function(
   data,
   mapping,
-  alignPercent = 0.6,
-  method = "pearson", use = "complete.obs",
-  corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
-  displayGrid = TRUE,
-  ...
-){
+  ...,
+  stars = TRUE,
+  method = "pearson",
+  use = "complete.obs",
+  display_grid = FALSE,
+  digits = 3,
+  title_args = list(...),
+  group_args = list(...),
+  justify_labels = "right",
+  align_percent = 0.5,
+  title = "Corr",
+  alignPercent = warning("deprecated. Use `align_percent`"),
+  displayGrid = warning("deprecated. Use `display_grid`")
+) {
+  if (!missing(alignPercent)) {
+    warning("`alignPercent` is deprecated. Please use `align_percent` if alignment still needs to be adjusted")
+    align_percent <- alignPercent
+  }
+  if (!missing(displayGrid)) {
+    warning("`displayGrid` is deprecated. Please use `display_grid`")
+    display_grid <- displayGrid
+  }
 
-  if (! is.null(corAlignPercent)) {
-    stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
-  }
-  if (! is.null(corMethod)) {
-    stop("'corMethod' is deprecated.  Please use argument 'method'")
-  }
-  if (! is.null(corUse)) {
-    stop("'corUse' is deprecated.  Please use argument 'use'")
-  }
+  na.rm <-
+    if (missing(use)) {
+      # display warnings
+      NA
+    } else {
+      (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete"))
+    }
 
-  useOptions <- c(
-    "all.obs",
-    "complete.obs",
-    "pairwise.complete.obs",
-    "everything",
-    "na.or.complete"
+  ggally_statistic(
+    data = data,
+    mapping = mapping,
+    na.rm = na.rm,
+    align_percent = align_percent,
+    display_grid = display_grid,
+    title_args = title_args,
+    group_args = group_args,
+    justify_labels = justify_labels,
+    justify_text = "left",
+    sep = if ("colour" %in% names(mapping)) ": " else ":\n",
+    title = title,
+    text_fn = function(x, y) {
+      if (is_date(x)) {
+        x <- as.numeric(x)
+      }
+      if (is_date(y)) {
+        y <- as.numeric(y)
+      }
+
+      corObj <- stats::cor.test(x, y, method = method, use = use)
+
+      # make sure all values have X-many decimal places
+      cor_est <- as.numeric(corObj$estimate)
+      cor_txt <- formatC(cor_est, digits = digits, format = "f")
+
+      # if stars should be added
+      if (isTRUE(stars)) {
+        cor_txt <- str_c(
+          cor_txt,
+          signif_stars(corObj$p.value)
+        )
+      }
+
+      cor_txt
+    }
   )
-  use <- pmatch(use, useOptions)
-  if (is.na(use)) {
-    warning("correlation 'use' not found.  Using default value of 'all.obs'")
-    use <- useOptions[1]
-  } else {
-    use <- useOptions[use]
+}
+
+
+#' Generalized Text Display
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param title title text to be displayed
+#' @param text_fn function that takes in \code{x} and \code{y} and returns a text string
+#' @param na.rm logical value which determines if \code{NA} values are removed. If \code{TRUE}, no warning message will be displayed.
+#' @param display_grid if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.
+#' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
+#' @param justify_text \code{justify} argument supplied when \code{\link[base]{format}}ting the returned \code{text_fn(x, y)} values
+#' @param sep separation value to be placed between the labels and text
+#' @param family font family used when displaying all text.  This value will be set in \code{title_args} or \code{group_args} if no \code{family} value exists.  By using \code{"mono"}, groups will align with each other.
+#' @param title_args arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}
+#' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
+#' @param align_percent relative align position of the text. When \code{title_hjust = 0.5} and \code{group_hjust = 0.5}, this should not be needed to be set.
+#' @param title_hjust,group_hjust \code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.
+#' @seealso \code{\link{ggally_cor}}
+#' @export
+ggally_statistic <- function(
+  data,
+  mapping,
+  text_fn,
+  title,
+  na.rm = NA,
+  display_grid = FALSE,
+  justify_labels = "right",
+  justify_text = "left",
+  sep = ": ",
+  family = "mono",
+  title_args = list(),
+  group_args = list(),
+  align_percent = 0.5,
+  title_hjust = 0.5,
+  group_hjust = 0.5
+) {
+  set_if_not_there <- function(obj, key, value) {
+    obj <- as.list(obj)
+    if (! "family" %in% rlang::names2(obj)) {
+      obj$family <- family
+    }
+    obj
   }
 
-  cor_fn <- function(x, y) {
-    # also do ddply below if fn is altered
-    cor(x, y, method = method, use = use)
-  }
+  title_args <- set_if_not_there(title_args, "family", family)
+  group_args <- set_if_not_there(group_args, "family", family)
 
-  # xVar <- data[[as.character(mapping$x)]]
-  # yVar <- data[[as.character(mapping$y)]]
-  # x_bad_rows <- is.na(xVar)
-  # y_bad_rows <- is.na(yVar)
-  # bad_rows <- x_bad_rows | y_bad_rows
-  # if (any(bad_rows)) {
-  #   total <- sum(bad_rows)
-  #   if (total > 1) {
-  #     warning("Removed ", total, " rows containing missing values")
-  #   } else if (total == 1) {
-  #     warning("Removing 1 row that contained a missing value")
-  #   }
-  #
-  #   xVar <- xVar[!bad_rows]
-  #   yVar <- yVar[!bad_rows]
-  # }
-
-  # mapping$x <- mapping$y <- NULL
+  title_args <- set_if_not_there(title_args, "hjust", title_hjust)
+  group_args <- set_if_not_there(group_args, "hjust", group_hjust)
 
   xData <- eval_data_col(data, mapping$x)
   yData <- eval_data_col(data, mapping$y)
-
-  if (is_date(xData)) {
-    xData <- as.numeric(xData)
-  }
-  if (is_date(yData)) {
-    yData <- as.numeric(yData)
-  }
   colorData <- eval_data_col(data, mapping$colour)
+
   if (is.numeric(colorData)) {
-    stop("ggally_cor: mapping color column must be categorical, not numeric")
+    stop("`mapping` color column must be categorical, not numeric")
   }
 
-  if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
+  display_na_rm <- is.na(na.rm)
+  if (display_na_rm) {
+    na.rm <- TRUE
+  }
+  if (isTRUE(na.rm)) {
     if (!is.null(colorData) && (length(colorData) == length(xData))) {
       rows <- complete.cases(xData, yData, colorData)
     } else {
@@ -340,48 +417,47 @@ ggally_cor <- function(
     }
 
     if (any(!rows)) {
-      total <- sum(!rows)
-      if (total > 1) {
-        warning("Removed ", total, " rows containing missing values")
-      } else if (total == 1) {
-        warning("Removing 1 row that contained a missing value")
+      if (!is.null(colorData) && (length(colorData) == length(xData))) {
+        colorData <- colorData[rows]
+      }
+      xData <- xData[rows]
+      yData <- yData[rows]
+
+      if (isTRUE(display_na_rm)) {
+        total <- sum(!rows)
+        if (total > 1) {
+          warning("Removed ", total, " rows containing missing values")
+        } else if (total == 1) {
+          warning("Removing 1 row that contained a missing value")
+        }
       }
     }
-
-    if (!is.null(colorData) && (length(colorData) == length(xData))) {
-      colorData <- colorData[rows]
-    }
-    xData <- xData[rows]
-    yData <- yData[rows]
   }
 
   xVal <- xData
   yVal <- yData
 
   # if the mapping has to deal with the data, remove it
-  if (packageVersion("ggplot2") > "2.2.1") {
-    for (mappingName in names(mapping)) {
-      itemData <- eval_data_col(data, mapping[[mappingName]])
-      if (!inherits(itemData, "AsIs")) {
-        mapping[[mappingName]] <- NULL
-      }
-    }
-  } else {
-    if (length(names(mapping)) > 0){
-      for (i in length(names(mapping)):1){
-        # find the last value of the aes, such as cyl of as.factor(cyl)
-        tmp_map_val <- deparse(mapping[names(mapping)[i]][[1]])
-        if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
-          mapping[[names(mapping)[i]]] <- NULL
-
-        if (length(names(mapping)) < 1){
-          mapping <- NULL
-          break;
-        }
-      }
+  ### IDK what this does. inherited from old code.
+  for (mappingName in names(mapping)) {
+    itemData <- eval_data_col(data, mapping[[mappingName]])
+    if (!inherits(itemData, "AsIs")) {
+      mapping[[mappingName]] <- NULL
     }
   }
+  ### END IDK
 
+  # calculate variable ranges so the gridlines line up
+  xValNum <- as.numeric(xVal)
+  yValNum <- as.numeric(yVal)
+  xmin <- min(xValNum, na.rm = TRUE)
+  xmax <- max(xValNum, na.rm = TRUE)
+  xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
+  ymin <- min(yValNum, na.rm = TRUE)
+  ymax <- max(yValNum, na.rm = TRUE)
+  yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
+
+  # if there is a color grouping...
   if (
     !is.null(colorData) &&
     !inherits(colorData, "AsIs")
@@ -391,12 +467,11 @@ ggally_cor <- function(
       data.frame(x = xData, y = yData, color = colorData),
       "color",
       function(dt) {
-        cor_fn(dt$x, dt$y)
+        text_fn(dt$x, dt$y)
       }
     )
-    colnames(cord)[2] <- "correlation"
+    colnames(cord)[2] <- "text"
 
-    cord$correlation <- signif(as.numeric(cord$correlation), 3)
 
     # put in correct order
     lev <- levels(as.factor(colorData))
@@ -408,96 +483,90 @@ ggally_cor <- function(
         }
       }
     }
-
-    # print(order(ord[ord >= 0]))
-    # print(lev)
     cord <- cord[order(ord[ord >= 0]), ]
-    cord$label <- str_c(cord$color, ": ", cord$correlation)
 
-    # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal, na.rm = TRUE)
-    xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
-    ymin <- min(yVal, na.rm = TRUE)
-    ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
-
-
-    # print(cord)
-    p <- ggally_text(
-      label   = str_c("Corr: ", signif(cor_fn(xVal, yVal), 3)),
-      mapping = mapping,
-      xP      = 0.5,
-      yP      = 0.9,
-      xrange  = xrange,
-      yrange  = yrange,
-      ...
+        # make labels align together
+    cord$label <- str_c(
+      format(cord$color, justify = justify_labels),
+      sep,
+      format(cord$text, justify = justify_text)
     )
 
-    xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    # title
+    ggally_text_args <- append(
+      list(
+        label   = str_c(title, sep, text_fn(xVal, yVal)),
+        mapping = mapping,
+        xP      = 0.5,
+        yP      = 0.9,
+        xrange  = xrange,
+        yrange  = yrange
+      ),
+      title_args
+    )
+    p <- do.call(ggally_text, ggally_text_args)
+
+    xPos <- rep(align_percent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
     yPos <- seq(
       from = 0.9,
       to = 0.2,
       length.out = nrow(cord) + 1)
     yPos <- yPos * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
-    # print(range(yVal))
-    # print(yPos)
 
     cordf <- data.frame(xPos = xPos, yPos = yPos, labelp = cord$label)
     cordf$labelp <- factor(cordf$labelp, levels = cordf$labelp)
-    # print(cordf)
-    # print(str(cordf))
 
-    p <- p + geom_text(
-      data = cordf,
-      aes(
-        x = xPos,
-        y = yPos,
-        label = labelp,
-        color = labelp
+    # group text values
+    geom_text_args <- append(
+      list(
+        data = cordf,
+        aes(
+          x = xPos,
+          y = yPos,
+          label = labelp,
+          color = labelp
+        )
       ),
-      hjust = 1,
-      ...
-
+      group_args
     )
+    p <- p + do.call(geom_text, geom_text_args)
   } else {
-    # calculate variable ranges so the gridlines line up
-    xmin <- min(xVal, na.rm = TRUE)
-    xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin - 0.01 * (xmax - xmin), xmax + 0.01 * (xmax - xmin))
-    ymin <- min(yVal, na.rm = TRUE)
-    ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
 
-    p <- ggally_text(
-      label = paste(
-        "Corr:\n",
-        signif(
-          cor_fn(xVal, yVal),
-          3
-        ),
-        sep = "", collapse = ""
+    ggally_text_args <- append(
+      list(
+        label = paste0(title, sep, text_fn(xVal, yVal), collapse = ""),
+        mapping,
+        xP = 0.5,
+        yP = 0.5,
+        xrange = xrange,
+        yrange = yrange
       ),
-      mapping,
-      xP = 0.5,
-      yP = 0.5,
-      xrange = xrange,
-      yrange = yrange,
-      ...
+      title_args
     )
+
+    p <- do.call(ggally_text, ggally_text_args)
   }
 
-  if (!isTRUE(displayGrid)) {
+  if (!isTRUE(display_grid)) {
     p <- p +
       theme(
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(
+          linetype = "solid",
+          color = theme_get()$panel.background$fill,
+          fill = "transparent"
+        )
       )
   }
 
   p + theme(legend.position = "none")
+
 }
+
+
+
 
 
 #' Plots the Box Plot
@@ -1312,6 +1381,156 @@ ggally_ratio <- function(
 
 
 
+#' Plots the number of observations
+#'
+#' Plot the number of observations by using rectangles
+#' with proportional areas.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param ... other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
+#' @details
+#'   You can adjust the size of rectangles with the \code{x.width} argument.
+#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex))
+#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day))
+#'
+#' ggally_count(
+#'   as.data.frame(Titanic),
+#'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
+#' )
+#' ggally_count(
+#'   as.data.frame(Titanic),
+#'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq),
+#'   x.width = 0.5
+#' )
+ggally_count <- function(data, mapping, ...) {
+  mapping <- mapping_color_to_fill(mapping)
+  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
+  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  # for stat_ggally_count(), y should be mapped to base_y
+  # and always be a factor
+  count_col <- ".ggally_y"
+  data[[count_col]] <- as.factor(eval_data_col(data, mapping$y))
+  ylabel <- mapping_string(mapping$y)
+  mapping$base_y <- aes_string(base_y = count_col)$base_y
+  mapping$y <- NULL
+
+  # default values
+  args <- list(...)
+  if (!"fill" %in% names(args) & is.null(mapping$fill)) {
+    args$fill <- GeomRect$default_aes$fill
+  }
+
+  ggplot(data, mapping) +
+    do.call(stat_ggally_count, args) +
+    scale_y_continuous(
+      breaks = 1:length(levels(data[[count_col]])),
+      labels = levels(data[[count_col]])
+    ) +
+    theme(panel.grid.minor = element_blank()) +
+    ylab(ylabel)
+}
+
+#' @export
+#' @rdname ggally_count
+#' @format NULL
+#' @usage NULL
+#' @export
+# na.rm = TRUE to remove warnings if NA (cf. stat_count)
+# x.width to control size of tiles
+stat_ggally_count <- function(mapping = NULL, data = NULL,
+                      geom = "tile", position = "identity",
+                      ...,
+                      x.width = .9,
+                      na.rm = FALSE,
+                      show.legend = NA,
+                      inherit.aes = TRUE) {
+
+  params <- list(
+    x.width = x.width,
+    na.rm = na.rm,
+    ...
+  )
+  if (!is.null(params$y)) {
+    stop("stat_ggally_count() must not be used with a y aesthetic,
+         but with a base_y aesthetic instead.", call. = FALSE)
+  }
+
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatGGallyCount,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params
+  )
+}
+
+#' @rdname ggally_count
+#' @format NULL
+#' @usage NULL
+#' @export
+StatGGallyCount <- ggproto("StatGGallyCount", Stat,
+  required_aes = c("x", "base_y"),
+  default_aes = aes(
+    weight = 1,
+    width = after_stat(width),
+    height = after_stat(height),
+    y = after_stat(y)
+  ),
+
+  setup_params = function(data, params) {
+    params
+  },
+
+  extra_params = c("na.rm"),
+
+  compute_panel = function(self, data, scales, x.width = NULL) {
+    if (is.null(data$weight))
+      data$weight <- rep(1, nrow(data))
+
+    if(is.null(x.width))
+      x.width <- .9
+
+    # sum weights for each combination of aesthetics
+    # the use of . allows to consider all aesthetics defined in data
+    panel <- stats::aggregate(weight ~ ., data = data, sum, na.rm = TRUE)
+
+    names(panel)[which(names(panel) == "weight")] <- "n"
+
+    # compute proportions by x and y
+    f <- function(n) {sum(abs(n), na.rm = TRUE)}
+    panel$n_xy <- stats::ave(panel$n, panel$x, panel$base_y, FUN = f)
+    panel$prop <- panel$n / panel$n_xy
+    panel$width <- sqrt(panel$n_xy) / max(sqrt(panel$n_xy)) * x.width
+    panel$height <- panel$width * panel$prop
+    panel$cum_height <- stats::ave(panel$height, panel$x, panel$base_y, FUN = cumsum)
+    panel$y <- as.numeric(panel$base_y) + panel$cum_height -
+      panel$height / 2 - panel$width / 2
+
+    panel
+  }
+)
+
+
+#' @rdname ggally_count
+#' @export
+#' @examples
+#'
+#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
+#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
+ggally_countDiag <- function(data, mapping, ...) {
+  mapping$y <- mapping$x
+  ggally_count(data = data, mapping = mapping, ...)
+}
+
 #' Blank
 #'
 #' Draws nothing.
@@ -1408,4 +1627,54 @@ ggally_na <- function(data = NULL, mapping = NULL, size = 10, color = "grey20", 
 #' @export
 ggally_naDiag <- function(...) {
   ggally_na(...)
+}
+
+
+
+#' Scatterplot for continuous and categorial variables
+#'
+#' Make scatterplots compatible with both continuous and catgeorical variables
+#' using \code{\link[ggforce]{geom_autopoint}} from package \pkg{ggforce}.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param ... other arguments passed to \code{\link[ggforce]{geom_autopoint}(...)}
+#' @author Joseph Larmarange
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill))
+#' ggally_autopoint(tips, mapping = aes(x = tip, y = sex))
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex))
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day))
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8)
+#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9)
+#'
+#' \dontrun{
+#' ggpairs(
+#'   tips,
+#'   mapping = aes(colour = sex),
+#'   upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
+#'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
+#' )
+#' }
+ggally_autopoint <- function(data, mapping, ...) {
+  require_namespaces("ggforce")
+
+  args <- list(...)
+  if (!"alpha" %in% names(args) & is.null(mapping$alpha))
+    args$alpha <- .5
+  # mapping needs to be sent directly to geom_autopoint
+  args$mapping <- mapping
+
+  ggplot(data, mapping) +
+    do.call(ggforce::geom_autopoint, args)
+}
+
+#' @rdname ggally_autopoint
+#' @export
+ggally_autopointDiag <- function(data, mapping, ...) {
+  mapping$y <- mapping$x
+  ggally_autopoint(data = data, mapping = mapping, ...)
 }

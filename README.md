@@ -2,7 +2,7 @@
 
 
 <!-- badges: start -->
-[![R build status](https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg)](https://github.com/ggobi/ggally)
+[![R build status](https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg)](https://github.com/ggobi/ggally/actions)
 [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](https://cran.r-project.org/package=GGally)
 [![](http://cranlogs.r-pkg.org/badges/GGally)](https://cran.r-project.org/package=GGally)

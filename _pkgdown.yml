@@ -1,0 +1,136 @@
+url: https://ggobi.github.io/ggally
+
+# template:
+#   params:
+#     docsearch:
+#       api_key: API_KEY
+#       index_name: INDEX_NAME
+
+
+reference:
+- title: Plot Matrix
+  desc: >
+    More details in `vignette("ggpairs")`, `vignette("ggmatrix")` and `vignette("ggscatmat")`
+  contents:
+  - ggmatrix
+  - ggpairs
+  - ggduo
+  - ggscatmat
+  - ggfacet
+  - ggts
+
+- title: High-Level Plots
+  desc: >
+    See `vignette("ggally_plots")` for a list with examples
+    of all high-level plots.
+  contents:
+  - ggally_autopoint
+  - ggally_barDiag
+  - ggally_blank
+  - ggally_box
+  - ggally_cor
+  - ggally_density
+  - ggally_densityDiag
+  - ggally_denstrip
+  - ggally_diagAxis
+  - ggally_dot
+  - ggally_dot_and_box
+  - ggally_facetbar
+  - ggally_facetdensity
+  - ggally_facethist
+  - ggally_na
+  - ggally_points
+  - ggally_ratio
+  - ggally_smooth
+  - ggally_statistic
+  - ggally_text
+
+- title: Major Plotting Functions
+  desc: >
+    More details in `vignette("ggcoef")` and `vignette("ggsurv")`
+  contents:
+  - ggcoef
+  - ggcorr
+  - ggparcoord
+  - ggsurv
+
+- title: Modeling Diagnostics
+  desc: >
+    More details in `vignette("ggnostic")`
+  contents:
+  - ggnostic
+  - broomify
+  - ggally_nostic_cooksd
+  - ggally_nostic_hat
+  - ggally_nostic_line
+  - ggally_nostic_resid
+  - ggally_nostic_se_fit
+  - ggally_nostic_sigma
+  - ggally_nostic_std_resid
+
+- title: Glyph Plot
+  desc: >
+    More details in `vignette("glyph")`
+  contents:
+  - glyphs
+  - add_ref_boxes
+  - add_ref_lines
+  - glyphplot
+  # - rescale01
+
+- title: Network Plots
+  desc: >
+    More details in `vignette("ggnetworkmap")`
+  contents:
+  - ggnet
+  - ggnet2
+  - ggnetworkmap
+
+- title: "ggmatrix() Helpers"
+  contents:
+  - wrap_fn_with_param_arg
+  - eval_data_col
+  - print.ggmatrix
+  - ggmatrix_gtable
+  - grab_legend
+  - gglegend
+  - putPlot
+  - getPlot
+  - +.gg
+  - mapping_color_to_fill
+  - mapping_swap_x_y
+  - fn_switch
+  - str.ggmatrix
+  - print_if_interactive
+  - ggmatrix_progress
+
+- title: Utilities
+  contents:
+  - brew_colors
+  - find_plot_type
+  - is_horizontal
+  - lowertriangle
+  - mapping_string
+  - model_response_variables
+  - scag_order
+  - scatmat
+  - singleClassOrder
+  - skewness
+  - signif_stars
+  - uppertriangle
+
+- title: Datasets
+  contents:
+  - australia_PISA2012
+  - flea
+  - happy
+  - nasa
+  - pigs
+  - psychademic
+  - twitter_spambots
+
+- title: Legacy
+  contents:
+  - v1_ggmatrix_theme
+  - ggally_cor_v1_5
+
