@@ -9,7 +9,7 @@
 #' @param geom Override the default connection between \code{\link[ggplot2]{geom_bar}}
 #'   and \code{stat_prop}.
 #' @section Aesthetics:
-#' \code{stat_prop} requires the \strong{by} aesthetic and the \code{by} aesthetic
+#' \code{stat_prop} requires the \strong{by} aesthetic and this \strong{by} aesthetic
 #' should be a factor.
 #' @section Computed variables:
 #' \describe{
@@ -123,10 +123,6 @@ StatProp <- ggproto("StatProp", Stat,
   }
 )
 
-
-"%||%" <- function(a, b) {
-  if (!is.null(a)) a else b
-}
 
 #' Column and Row bar plots
 #'

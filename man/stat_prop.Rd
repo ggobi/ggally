@@ -74,7 +74,7 @@ The \code{by} aesthetic should be a factor.
 }
 \section{Aesthetics}{
 
-\code{stat_prop} requires the \strong{by} aesthetic and the \code{by} aesthetic
+\code{stat_prop} requires the \strong{by} aesthetic and this \strong{by} aesthetic
 should be a factor.
 }
 

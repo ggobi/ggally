@@ -29,7 +29,7 @@ weights (see examples)}
 \item{types}{custom types of plots to use, see \code{\link{ggduo}}}
 
 \item{rowbar_args}{additional arguments passed to \code{\link{ggally_rowbar}}
-(see axamples)}
+(see examples)}
 
 \item{...}{additional arguments passed to \code{\link{ggduo}} (see examples)}
 }
@@ -41,10 +41,11 @@ an outcome variable with several potential explonatory variables.
 data(tips, package = "reshape")
 ggbivariate(tips, "smoker", c("day", "time", "sex", "tip"))
 
+\dontrun{
 # Personalize plot title and legend title
 ggbivariate(
   tips, "smoker", c("day", "time", "sex", "tip"),
-  title = "Plot title"
+  title = "Custom title"
 ) +
   labs(fill = "Smoker ?")
 
@@ -73,7 +74,7 @@ ggbivariate(d, "Survived", mapping = aes(weight = Freq))
 
 # outcome can be numerical
 ggbivariate(tips, outcome = "tip", title = "tip")
-
+}
 }
 \author{
 Joseph Larmarange \email{joseph@larmarange.net}
