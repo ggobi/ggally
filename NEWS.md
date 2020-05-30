@@ -12,7 +12,18 @@ GGally (development version)
 * To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
 * Previously deprecated parameters have been removed
 
+`ggpairs` (#331)
+* new `proportion` argument to control relative size of sub-plots
+* option `proportion = "auto"` for automatic guess based on the number of levels for discrete variables
+
+`ggduo` (#331)
+* new `xProportion` and `yProportion` arguments to control relative size of sub-plots
+* option `xproportion = "auto"` and `yproportion = "auto"` for automatic guess based on the number of levels for discrete variables
+
 ### New functions:
+
+`ggally_autopoint`, `ggally_autopointDiag` (#325)
+* Make scatterplots compatible with both continuous and catgeorical variables using `ggforce::geom_autopoint()`.
 
 `ggally_statistic` (#327)
 * New function which is a generialized version of `ggally_cor()`

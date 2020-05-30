@@ -18,3 +18,5 @@ vignettes/rd_files/
 _gh-pages
 ggduo_paper.txt
 .httr-oauth
+docs
+inst/doc

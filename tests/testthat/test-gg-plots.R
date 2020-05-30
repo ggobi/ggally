@@ -193,3 +193,68 @@ test_that("smooth_se", {
   expect_equal(p$layers[[2]]$stat_params$se, FALSE)
   expect_print(p)
 })
+
+
+test_that("ggally_count", {
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq),
+    fill = "red"
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Sex)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Survived, y = interaction(Sex, Age), weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  # check that y character vectors are rendering
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = toupper(Survived), weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  # check countDiag
+  p <- ggally_countDiag(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Survived, weight = Freq, fill = Class)
+  )
+  expect_print(p)
+
+  # change size of tiles
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Class),
+    x.width = .5
+  )
+  expect_print(p)
+
+  # no warnings expected if na.rm = TRUE
+  p <- ggally_count(
+    as.data.frame(Titanic),
+    ggplot2::aes(x = interaction(Class, Age), y = Survived, weight = Freq, fill = Class),
+    na.rm = TRUE
+  )
+  expect_print(p)
+
+})
