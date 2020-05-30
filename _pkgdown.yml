@@ -6,6 +6,24 @@ url: https://ggobi.github.io/ggally
 #       api_key: API_KEY
 #       index_name: INDEX_NAME
 
+authors:
+  Barret Schloerke:
+    href: http://schloerke.com/
+  Di Cook:
+    href: http://www.dicook.org/
+  Joseph Larmarange:
+    href: https://joseph.larmarange.net/
+  Francois Briatte:
+    href: https://f.briatte.org/
+  Moritz Marbach:
+    href: http://moritz-marbach.com/
+  Edwin Thoen:
+    href: https://edwinth.github.io/
+  Heike Hofmann:
+    href: https://hofmann.public.iastate.edu/
+  Hadley Wickham:
+    href: http://hadley.nz/
+
 
 reference:
 - title: Plot Matrix
