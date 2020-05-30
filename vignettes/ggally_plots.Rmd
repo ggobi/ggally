@@ -75,13 +75,29 @@ See also `ggally_smooth()` for more options.
 
 ### with 2 discrete variables
 
-
 #### `ggally_autopoint()`
 
 ```{r}
 ggally_autopoint(tips, aes(x = day, y = smoker))
 ggally_autopoint(tips, aes(x = day, y = smoker, colour = time))
 ```
+
+#### `ggally_count()`
+
+```{r}
+ggally_count(tips, aes(x = day, y = smoker))
+ggally_count(tips, aes(x = day, y = smoker, colour = time))
+```
+
+#### `ggally_cross()`
+
+```{r}
+ggally_cross(tips, aes(x = day, y = smoker))
+ggally_cross(tips, aes(x = day, y = smoker, colour = time))
+ggally_cross(tips, aes(x = day, y = smoker, colour = smoker))
+```
+
+Note: **colour** aesthetic is taken into account only if it corresponds to **x** or to **y**.
 
 #### `ggally_facetbar()`
 
@@ -95,6 +111,23 @@ ggally_facetbar(tips, aes(x = day, y = smoker, colour = time))
 ```{r}
 ggally_ratio(tips, aes(x = day, y = smoker))
 ggally_ratio(tips, aes(x = day, y = smoker, colour = time))
+```
+
+#### `ggally_table()`
+
+```{r}
+ggally_table(tips, aes(x = day, y = smoker))
+ggally_table(tips, aes(x = day, y = smoker, colour = time))
+ggally_table(tips, aes(x = day, y = smoker, colour = smoker))
+```
+
+Note: **colour** aesthetic is taken into account only if it corresponds to **x** or to **y**.
+
+#### `ggally_trends()`
+
+```{r}
+ggally_trends(tips, aes(x = day, y = smoker))
+ggally_trends(tips, aes(x = day, y = smoker, colour = time))
 ```
 
 ### with one continuous and one discrete variables
@@ -151,7 +184,12 @@ ggally_facethist(tips, aes(x = total_bill, y = day))
 ggally_facethist(tips, aes(x = total_bill, y = day, colour = time))
 ```
 
+#### `ggally_trends()`
 
+```{r}
+ggally_trends(tips, aes(y = total_bill, x = day))
+ggally_trends(tips, aes(y = total_bill, x = day, colour = time))
+```
 
 ## Diagonal plots
 
@@ -193,6 +231,13 @@ ggally_autopointDiag(tips, aes(x = day, colour = time))
 ```{r}
 ggally_barDiag(tips, aes(x = day))
 ggally_barDiag(tips, aes(x = day, colour = time))
+```
+
+#### `ggally_countDiag()`
+
+```{r}
+ggally_countDiag(tips, aes(x = day))
+ggally_countDiag(tips, aes(x = day, colour = time))
 ```
 
 
