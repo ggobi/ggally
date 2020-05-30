@@ -144,6 +144,7 @@ StatCross <- ggproto("StatCross", Stat,
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_point}(...)}
+#' @param scale_max_size `max_size` argument supplied to \code{\link[ggplot2]{scale_size_area}()}
 #' @param geom_text_args other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @keywords hplot
@@ -191,22 +192,25 @@ StatCross <- ggproto("StatCross", Stat,
 #'   fill = "darkblue",
 #'   geom_text_args = list(colour = "white", fontface = "bold", size = 6)
 #' )
-ggally_cross <- function(data, mapping, ..., geom_text_args = NULL){
+ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args = NULL){
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
   mapping <- mapping_color_to_fill(mapping)
 
   args <- list(...)
   # default values for geom_point
-  if (!"size" %in% names(mapping))
+  if (!"size" %in% names(mapping)) {
     mapping$size <- aes_string(size = "after_stat(observed)")$size
-  if (is.null(mapping$shape) & is.null(args$shape))
+  }
+  if (is.null(mapping$shape) & is.null(args$shape)) {
     args$shape <- 22
-  if (is.null(mapping$fill) & is.null(args$fill))
-    args$fill <- "white"
+  }
+  if (is.null(mapping$fill) & is.null(args$fill)) {
+    args$fill <- GeomRect$default_aes$fill
+  }
 
   p <- ggplot(data = data, mapping) +
     do.call(stat_cross, args) +
-    scale_size_area(max_size = 20)
+    scale_size_area(max_size = scale_max_size)
 
   # default values for geom_text
   geom_text_args$stat <- "cross"
@@ -215,9 +219,10 @@ ggally_cross <- function(data, mapping, ..., geom_text_args = NULL){
   if (is.null(geom_text_args$show.legend))
     geom_text_args$show.legend <- FALSE
 
-  if(!is.null(mapping$label))
+  if (!is.null(mapping$label)) {
     p <- p +
       do.call(geom_text, geom_text_args)
+  }
 
   p
 }
@@ -268,11 +273,12 @@ ggally_cross <- function(data, mapping, ..., geom_text_args = NULL){
 #' ) +
 #' scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
 ggally_table <- function(data, mapping, ..., geom_tile_args = NULL){
-  mapping <- keep_colour_if_in_x_or_y(mapping)
+  mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
 
   # default values geom_text
-  if (!"label" %in% names(mapping))
+  if (!"label" %in% names(mapping)) {
     mapping$label <- aes_string(label = "after_stat(observed)")$label
+  }
   geom_text_args <- list(...)
   geom_text_args$stat <- "cross"
 
