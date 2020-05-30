@@ -25,12 +25,32 @@ GGally (development version)
 `ggally_autopoint`, `ggally_autopointDiag` (#325)
 * Make scatterplots compatible with both continuous and catgeorical variables using `ggforce::geom_autopoint()`.
 
+`ggally_count`, `ggally_countDiag` (#321)
+* Plot the number of observations by using rectangles with proportional areas.
+
+`ggally_cross` (#326)
+* Plot the number of observations by using square points with proportional areas.
+
 `ggally_statistic` (#327)
 * New function which is a generialized version of `ggally_cor()`
 * Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
 
+`ggally_table` (#326)
+* Plot the number of observations as a table.
+
+`ggally_trends` (#333)
+* Plot trends using line plots.
+
 `signif_stars()` (#327)
 * Return the appropriate number of significance stars as a character vector for the provided numeric input values.
+
+### New statistics:
+
+`stat_cross` (#326)
+* Computes statistics of a 2-dimensional matrix using `broom::augment.htest`.
+
+`stat_weighted_mean` (#333)
+* Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.
 
 
 GGally 1.5.0
