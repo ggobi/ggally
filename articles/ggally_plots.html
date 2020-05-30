@@ -83,6 +83,9 @@
     <li>
       <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
     </li>
+    <li>
+      <a href="../articles/new_stats.html">Additional statistics for ggplot2</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -199,23 +202,65 @@
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
 </div>
+<div id="ggally_count" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ggally_count" class="anchor"></a><code>ggally_count()</code>
+</h4>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_count.html">ggally_count</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_count.html">ggally_count</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
+</div>
+<div id="ggally_cross" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ggally_cross" class="anchor"></a><code>ggally_cross()</code>
+</h4>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-10-2.png" width="700"></p>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-10-3.png" width="700"></p>
+<p>Note: <strong>colour</strong> aesthetic is taken into account only if it corresponds to <strong>x</strong> or to <strong>y</strong>.</p>
+</div>
 <div id="ggally_facetbar" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_facetbar" class="anchor"></a><code>ggally_facetbar()</code>
 </h4>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-11-2.png" width="700"></p>
 </div>
 <div id="ggally_ratio" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_ratio" class="anchor"></a><code>ggally_ratio()</code>
 </h4>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-10-2.png" width="700"></p>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-2.png" width="700"></p>
+</div>
+<div id="ggally_table" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ggally_table" class="anchor"></a><code>ggally_table()</code>
+</h4>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-13-2.png" width="700"></p>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-13-3.png" width="700"></p>
+<p>Note: <strong>colour</strong> aesthetic is taken into account only if it corresponds to <strong>x</strong> or to <strong>y</strong>.</p>
+</div>
+<div id="ggally_trends" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ggally_trends" class="anchor"></a><code>ggally_trends()</code>
+</h4>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">smoker</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-2.png" width="700"></p>
 </div>
 </div>
 <div id="with-one-continuous-and-one-discrete-variables" class="section level3">
@@ -225,73 +270,82 @@
 <h4 class="hasAnchor">
 <a href="#ggally_autopoint-2" class="anchor"></a><code>ggally_autopoint()</code>
 </h4>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-11-2.png" width="700"></p>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-15-2.png" width="700"></p>
 </div>
 <div id="ggally_box-ggally_box_no_facet" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_box-ggally_box_no_facet" class="anchor"></a><code>ggally_box()</code> &amp; <code>ggally_box_no_facet()</code>
 </h4>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-2.png" width="700"></p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-3.png" width="700"></p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-4.png" width="700"></p>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-2.png" width="700"></p>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-3.png" width="700"></p>
+<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-4.png" width="700"></p>
 <p>See also <code><a href="../reference/ggally_dot_and_box.html">ggally_dot_and_box()</a></code>.</p>
 </div>
 <div id="ggally_denstrip" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_denstrip" class="anchor"></a><code>ggally_denstrip()</code>
 </h4>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))
+<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; Warning: Removed 45 rows containing missing values (geom_bar).</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; Warning: Removed 45 rows containing missing values (geom_bar).</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-13-2.png" width="700"></p>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-17-2.png" width="700"></p>
 </div>
 <div id="ggally_dot-ggally_dot_no_facet" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_dot-ggally_dot_no_facet" class="anchor"></a><code>ggally_dot()</code> &amp; <code>ggally_dot_no_facet()</code>
 </h4>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-2.png" width="700"></p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-3.png" width="700"></p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-4.png" width="700"></p>
+<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
+<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-2.png" width="700"></p>
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-3.png" width="700"></p>
+<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-4.png" width="700"></p>
 <p>See also <code><a href="../reference/ggally_dot_and_box.html">ggally_dot_and_box()</a></code>.</p>
 </div>
 <div id="ggally_facetdensity" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_facetdensity" class="anchor"></a><code>ggally_facetdensity()</code>
 </h4>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetdensity.html">ggally_facetdensity</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
-<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetdensity.html">ggally_facetdensity</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
+<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetdensity.html">ggally_facetdensity</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
+<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facetdensity.html">ggally_facetdensity</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
 <span class="co">#&gt; Warning: Groups with fewer than two data points have been dropped.</span>
 <span class="co">#&gt; Warning: Removed 1 row(s) containing missing values (geom_path).</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-15-2.png" width="700"></p>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-2.png" width="700"></p>
 </div>
 <div id="ggally_facethist" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_facethist" class="anchor"></a><code>ggally_facethist()</code>
 </h4>
-<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))
+<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>))
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
-<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-2.png" width="700"></p>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-2.png" width="700"></p>
+</div>
+<div id="ggally_trends-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ggally_trends-1" class="anchor"></a><code>ggally_trends()</code>
+</h4>
+<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-2.png" width="700"></p>
 </div>
 </div>
 </div>
@@ -305,30 +359,30 @@
 <h4 class="hasAnchor">
 <a href="#ggally_autopointdiag" class="anchor"></a><code>ggally_autopointDiag()</code>
 </h4>
-<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-17-2.png" width="700"></p>
+<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
 </div>
 <div id="ggally_bardiag" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_bardiag" class="anchor"></a><code>ggally_barDiag()</code>
 </h4>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>))
+<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>))
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
-<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
+<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-2.png" width="700"></p>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-23-2.png" width="700"></p>
 </div>
 <div id="ggally_densitydiag" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_densitydiag" class="anchor"></a><code>ggally_densityDiag()</code>
 </h4>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
-<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-2.png" width="700"></p>
+<div class="sourceCode" id="cb52"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
+<div class="sourceCode" id="cb53"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">total_bill</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-24-2.png" width="700"></p>
 </div>
 </div>
 <div id="with-a-discrete-variable" class="section level3">
@@ -338,29 +392,38 @@
 <h4 class="hasAnchor">
 <a href="#ggally_autopointdiag-1" class="anchor"></a><code>ggally_autopointDiag()</code>
 </h4>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
-<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-2.png" width="700"></p>
+<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-25-2.png" width="700"></p>
 </div>
 <div id="ggally_bardiag-1" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_bardiag-1" class="anchor"></a><code>ggally_barDiag()</code>
 </h4>
-<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
-<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-2.png" width="700"></p>
+<div class="sourceCode" id="cb56"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
+<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-26-2.png" width="700"></p>
+</div>
+<div id="ggally_countdiag" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ggally_countdiag" class="anchor"></a><code>ggally_countDiag()</code>
+</h4>
+<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_count.html">ggally_countDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
+<div class="sourceCode" id="cb59"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_count.html">ggally_countDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-27-2.png" width="700"></p>
 </div>
 <div id="ggally_densitydiag-1" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ggally_densitydiag-1" class="anchor"></a><code>ggally_densityDiag()</code>
 </h4>
-<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
-<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
+<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>))</pre></body></html></div>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
+<div class="sourceCode" id="cb61"><html><body><pre class="r"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span>(<span class="no">tips</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">time</span>))
 <span class="co">#&gt; Warning: Groups with fewer than two data points have been dropped.</span></pre></body></html></div>
-<p><img src="ggally_plots_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
+<p><img src="ggally_plots_files/figure-html/unnamed-chunk-28-2.png" width="700"></p>
 </div>
 </div>
 </div>

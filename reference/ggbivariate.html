@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Plot an outcome with several potential explanotory variables — ggbivariate" />
 <meta property="og:description" content="ggbivariate is a variant of ggduo for plotting
-an outcome variable with several potential explonatory variables." />
+an outcome variable with several potential explanatory variables." />
 
 
 
@@ -125,6 +125,9 @@ an outcome variable with several potential explonatory variables." />
     <li>
       <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
     </li>
+    <li>
+      <a href="../articles/new_stats.html">Additional statistics for ggplot2</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -158,7 +161,7 @@ an outcome variable with several potential explonatory variables." />
 
     <div class="ref-description">
     <p><code>ggbivariate</code> is a variant of <code><a href='ggduo.html'>ggduo</a></code> for plotting
-an outcome variable with several potential explonatory variables.</p>
+an outcome variable with several potential explanatory variables.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggbivariate</span>(
@@ -167,8 +170,8 @@ an outcome variable with several potential explonatory variables.</p>
   <span class='kw'>explanatory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>rowbar_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
+  <span class='no'>...</span>,
+  <span class='kw'>rowbar_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,13 +201,13 @@ weights (see examples)</p></td>
       <td><p>custom types of plots to use, see <code><a href='ggduo.html'>ggduo</a></code></p></td>
     </tr>
     <tr>
+      <th>...</th>
+      <td><p>additional arguments passed to <code><a href='ggduo.html'>ggduo</a></code> (see examples)</p></td>
+    </tr>
+    <tr>
       <th>rowbar_args</th>
       <td><p>additional arguments passed to <code><a href='ggally_colbar.html'>ggally_rowbar</a></code>
 (see examples)</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional arguments passed to <code><a href='ggduo.html'>ggduo</a></code> (see examples)</p></td>
     </tr>
     </table>
 
