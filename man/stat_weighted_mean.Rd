@@ -117,7 +117,8 @@ d <- as.data.frame(Titanic)
 ggplot(d) +
   aes(x = Class, y = as.integer(Survived == "Yes"), weight = Freq, fill = Sex) +
   geom_bar(stat = "weighted_mean", position = "dodge") +
-  scale_y_continuous(labels = scales::percent)
+  scale_y_continuous(labels = scales::percent) +
+  labs(y = "Survived")
 
 
 \dontrun{
@@ -137,6 +138,7 @@ ggplot(cuse) +
   aes(x = education, y = prop, weight = n) +
   stat_weighted_mean(geom = "bar")
 
+# add percentages above each bar
 ggplot(cuse) +
   aes(x = age, y = prop, weight = n, fill = education) +
   stat_weighted_mean(geom = "bar") +

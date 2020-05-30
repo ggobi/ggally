@@ -2,9 +2,12 @@
 % Please edit documentation in R/stat_cross.R
 \name{ggally_table}
 \alias{ggally_table}
+\alias{ggally_tableDiag}
 \title{Display a table of the number of observations}
 \usage{
 ggally_table(data, mapping, ..., geom_tile_args = NULL)
+
+ggally_tableDiag(data, mapping, ..., geom_tile_args = NULL)
 }
 \arguments{
 \item{data}{data set using}
