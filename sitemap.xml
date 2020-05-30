@@ -142,6 +142,9 @@
     <loc>https://ggobi.github.io/ggally/reference/ggally_text.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggally_trends.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/ggcoef.html</loc>
   </url>
   <url>
@@ -278,6 +281,9 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/stat_cross.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/reference/stat_weighted_mean.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/str.ggmatrix.html</loc>
