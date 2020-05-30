@@ -1402,8 +1402,9 @@ ggally_count <- function(data, mapping, ...) {
 
   # default values
   args <- list(...)
-  if (!"fill" %in% names(args) & is.null(mapping$fill))
-    args$fill <- "grey50"
+  if (!"fill" %in% names(args) & is.null(mapping$fill)) {
+    args$fill <- GeomRect$default_aes$fill
+  }
 
   ggplot(data, mapping) +
     do.call(stat_ggally_count, args) +
