@@ -88,23 +88,23 @@ from \pkg{broom}.
 \examples{
 d <- as.data.frame(Titanic)
 
-# by default, plot number of observations
+# plot number of observations
 ggplot(d) +
-  aes(x = Class, y = Survived, weight = Freq) +
+  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed)) +
   stat_cross() +
-  scale_size_area()
+  scale_size_area(max_size = 20)
 
 # custom shape and fill colour based on chi-squared residuals
 ggplot(d) +
-  aes(x = Class, y = Survived, weight = Freq, fill = after_stat(stdres)) +
+  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed), fill = after_stat(stdres)) +
   stat_cross(shape = 22) +
-  scale_fill_steps2(breaks = c(-4, -2, 2, 4), show.limits = TRUE)
+  scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
+  scale_size_area(max_size = 20)
 
 # plotting the number of observations as a table
 ggplot(d) +
   aes(
-    x = Class, y = Survived, weight = Freq,
-    label = scales::percent(after_stat(row.prop)), size = NULL
+    x = Class, y = Survived, weight = Freq, label = after_stat(observed)
   ) +
   geom_text(stat = "cross")
 
@@ -117,7 +117,7 @@ ggplot(d) +
   ) +
   stat_cross(shape = 22, size = 30) +
   geom_text(stat = "cross") +
-  scale_fill_steps2(breaks = c(-3, -2, 3, 4), show.limits = TRUE) +
+  scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
   facet_grid(Sex ~ .) +
   labs(fill = "Standardized residuals") +
   theme_minimal()
@@ -125,7 +125,7 @@ ggplot(d) +
 # can work with continuous or character variables
 data(tips, package = "reshape")
 ggplot(tips) +
-  aes(x = tip, y = as.character(day)) +
+  aes(x = tip, y = as.character(day), size = after_stat(observed)) +
   stat_cross(alpha = .1, color = "blue") +
   scale_size_area(max_size = 12)
 
