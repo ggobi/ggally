@@ -92,7 +92,7 @@ reference:
 
 - title: Additional statistics for `ggplot2`
   desc: >
-    More details in `vignette("new_stats")`
+    More details in `vignette("ggally_stats")`
   contents:
   - stat_cross
   - stat_weighted_mean
