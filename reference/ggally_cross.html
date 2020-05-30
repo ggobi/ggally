@@ -165,7 +165,7 @@ statistics computed by <code><a href='stat_cross.html'>stat_cross</a></code>. La
 be added (see examples).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_cross</span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>, <span class='kw'>geom_text_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>ggally_cross</span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>, <span class='kw'>scale_max_size</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>geom_text_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,6 +181,10 @@ be added (see examples).</p>
     <tr>
       <th>...</th>
       <td><p>other arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a>(...)</code></p></td>
+    </tr>
+    <tr>
+      <th>scale_max_size</th>
+      <td><p>`max_size` argument supplied to <code><a href='https://ggplot2.tidyverse.org/reference/scale_size.html'>scale_size_area</a>()</code></p></td>
     </tr>
     <tr>
       <th>geom_text_args</th>
