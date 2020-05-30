@@ -113,13 +113,20 @@ StatCross <- ggproto("StatCross", Stat,
     # compute cross statistics
     panel <- broom::augment(chisq.test(xtabs(weight ~ y + x, data = data)))
 
-    names(panel)[which(names(panel) == ".observed")] <- "observed"
-    names(panel)[which(names(panel) == ".prop")] <- "prop"
-    names(panel)[which(names(panel) == ".row.prop")] <- "row.prop"
-    names(panel)[which(names(panel) == ".col.prop")] <- "col.prop"
-    names(panel)[which(names(panel) == ".expected")] <- "expected"
-    names(panel)[which(names(panel) == ".residuals")] <- "residuals"
-    names(panel)[which(names(panel) == ".stdres")] <- "stdres"
+    panel_names <- names(panel)
+    for (to_name in c(
+      "observed",
+      "prop",
+      "row.prop",
+      "col.prop",
+      "expected",
+      "residuals",
+      "stdres"
+    )) {
+      from_name <- paste0(".", to_name)
+      panel_names[which(panel_names == from_name)] <- to_name
+    }
+    names(panel) <- panel_names
 
     data <- merge(data, panel, by = c("x", "y"), all.x = TRUE)
     data
