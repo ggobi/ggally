@@ -47,7 +47,8 @@
 #' ggplot(d) +
 #'   aes(x = Class, y = as.integer(Survived == "Yes"), weight = Freq, fill = Sex) +
 #'   geom_bar(stat = "weighted_mean", position = "dodge") +
-#'   scale_y_continuous(labels = scales::percent)
+#'   scale_y_continuous(labels = scales::percent) +
+#'   labs(y = "Survived")
 #'
 #'
 #' \dontrun{
@@ -67,19 +68,24 @@
 #'   aes(x = education, y = prop, weight = n) +
 #'   stat_weighted_mean(geom = "bar")
 #'
+#' # add percentages above each bar
 #' ggplot(cuse) +
 #'   aes(x = age, y = prop, weight = n, fill = education) +
 #'   stat_weighted_mean(geom = "bar") +
 #'   geom_text(aes(label = scales::percent(after_stat(y))), stat = "weighted_mean", vjust = 0) +
 #'   facet_grid(~ education)
 #' }
-stat_weighted_mean <- function(mapping = NULL, data = NULL,
-                         geom = "point", position = "identity",
-                         ...,
-                         na.rm = FALSE,
-                         orientation = NA,
-                         show.legend = NA,
-                         inherit.aes = TRUE) {
+stat_weighted_mean <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "point",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
   layer(
     data = data,
     mapping = mapping,
@@ -140,29 +146,29 @@ StatWeightedMean <- ggproto(
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @keywords hplot
 #' @export
-#' @importFrom plyr rbind.fill
 #' @examples
 #' data(tips, package = "reshape")
-#' tips$day <- factor(tips$day, c("Thur", "Fri", "Sat", "Sun"))
+#' tips_f <- tips
+#' tips_f$day <- factor(tips$day, c("Thur", "Fri", "Sat", "Sun"))
 #'
 #' # Numeric variable
-#' ggally_trends(tips, mapping = aes(x = day, y = total_bill))
-#' ggally_trends(tips, mapping = aes(x = day, y = total_bill, colour = time))
+#' ggally_trends(tips_f, mapping = aes(x = day, y = total_bill))
+#' ggally_trends(tips_f, mapping = aes(x = day, y = total_bill, colour = time))
 #'
 #' # Binary variable
-#' ggally_trends(tips, mapping = aes(x = day, y = smoker))
-#' ggally_trends(tips, mapping = aes(x = day, y = smoker, colour = sex))
+#' ggally_trends(tips_f, mapping = aes(x = day, y = smoker))
+#' ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex))
 #'
 #' # Discrete variable with 3 or more categories
-#' ggally_trends(tips, mapping = aes(x = smoker, y = day))
-#' ggally_trends(tips, mapping = aes(x = smoker, y = day, color = sex))
+#' ggally_trends(tips_f, mapping = aes(x = smoker, y = day))
+#' ggally_trends(tips_f, mapping = aes(x = smoker, y = day, color = sex))
 #'
 #' # Include zero on Y axis
-#' ggally_trends(tips, mapping = aes(x = day, y = total_bill), include_zero = TRUE)
-#' ggally_trends(tips, mapping = aes(x = day, y = smoker), include_zero = TRUE)
+#' ggally_trends(tips_f, mapping = aes(x = day, y = total_bill), include_zero = TRUE)
+#' ggally_trends(tips_f, mapping = aes(x = day, y = smoker), include_zero = TRUE)
 #'
 #' # Change line size
-#' ggally_trends(tips, mapping = aes(x = day, y = smoker, colour = sex), size = 3)
+#' ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex), size = 3)
 #'
 #' # Define weights with the appropriate aesthetic
 #' d <- as.data.frame(Titanic)
@@ -172,10 +178,12 @@ StatWeightedMean <- ggproto(
 #'   include_zero = TRUE
 #' )
 #'
-#'
-ggally_trends <- function(data, mapping,
-                          ...,
-                          include_zero = FALSE) {
+ggally_trends <- function(
+  data,
+  mapping,
+  ...,
+  include_zero = FALSE
+) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
@@ -197,8 +205,8 @@ ggally_trends <- function(data, mapping,
   if (is.factor(y) || is.character(y) || is.logical(y)) {
     y <- as.factor(y)
     if (length(levels(y)) == 2) { # Binary variable
-      data$.y <- as.integer(y == levels(y)[2])
-      mapping$y <- aes_string(y = ".y")$y
+      data[[".ggally_y"]] <- as.integer(y == levels(y)[2])
+      mapping$y <- aes_string(y = ".ggally_y")$y
       p <- ggplot(data, mapping) +
         stat_weighted_mean(geom = "line", ...) +
         scale_y_continuous(labels = scales::percent) +
@@ -211,12 +219,12 @@ ggally_trends <- function(data, mapping,
       d <- data.frame()
       for (l in levels(y)) {
         tmp <- data
-        tmp$.y <- as.integer(y == l)
+        tmp[[".ggally_y"]] <- as.integer(y == l)
         tmp$y <- l
         d <- plyr::rbind.fill(d, tmp)
       }
       mapping$linetype <- aes_string(y = "y")$y
-      mapping$y <- aes_string(y = ".y")$y
+      mapping$y <- aes_string(y = ".ggally_y")$y
 
       # recomputing groups
       g <- list()

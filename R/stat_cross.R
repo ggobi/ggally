@@ -4,7 +4,7 @@
 #' from \pkg{broom}.
 #'
 #' @inheritParams ggplot2::stat_identity
-#' @param geom Override the default connection between \code{\link[ggplot1]{geom_point}}
+#' @param geom Override the default connection between \code{\link[ggplot2]{geom_point}}
 #'   and \code{stat_prop}.
 #' @param na.rm If \code{TRUE}, the default, missing values are removed with a warning.
 #'   If `TRUE`, missing values are silently removed.
