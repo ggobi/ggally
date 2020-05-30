@@ -1,7 +1,7 @@
 #' Plot an outcome with several potential explanotory variables
 #'
 #' \code{ggbivariate} is a variant of \code{\link{ggduo}} for plotting
-#' an outcome variable with several potential explonatory variables.
+#' an outcome variable with several potential explanatory variables.
 #'
 #' @param data dataset to be used, can have both categorical and
 #'   numerical variables
@@ -11,9 +11,9 @@
 #' @param mapping additional aesthetic to be used, for example to indicate
 #'   weights (see examples)
 #' @param types custom types of plots to use, see \code{\link{ggduo}}
+#' @param ... additional arguments passed to \code{\link{ggduo}} (see examples)
 #' @param rowbar_args additional arguments passed to \code{\link{ggally_rowbar}}
 #'   (see examples)
-#' @param ... additional arguments passed to \code{\link{ggduo}} (see examples)
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @export
 #' @examples
@@ -54,11 +54,16 @@
 #' # outcome can be numerical
 #' ggbivariate(tips, outcome = "tip", title = "tip")
 #' }
-ggbivariate <- function(data, outcome, explanatory = NULL,
-                        mapping = NULL, types = NULL,
-                        rowbar_args = NULL, ...) {
+ggbivariate <- function(
+  data,
+  outcome,
+  explanatory = NULL,
+  mapping = NULL, types = NULL,
+  ...,
+  rowbar_args = NULL
+) {
   if (length(outcome) != 1)
-    stop("You should provide only one outcome.")
+    stop("You should provide only one `outcome`.")
   if (is.numeric(outcome))
     outcome <- names(data)[outcome]
   if (is.null(explanatory))

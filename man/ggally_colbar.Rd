@@ -39,7 +39,7 @@ ggally_rowbar(
 \item{remove_x_axis}{should x-axis be removed?}
 }
 \description{
-Plot colum or row percentage using bar plots.
+Plot column or row percentage using bar plots.
 }
 \examples{
 data(tips, package = "reshape")

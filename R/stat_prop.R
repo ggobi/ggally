@@ -19,7 +19,6 @@
 #' @seealso \code{\link[ggplot2]{stat_count}}
 #'
 #' @import ggplot2
-#' @importFrom scales percent
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @export
 #' @examples
@@ -50,13 +49,17 @@
 #'     position = position_stack(.5)
 #'  )
 #'
-stat_prop <- function(mapping = NULL, data = NULL,
-                       geom = "bar", position = "fill",
-                       ...,
-                       width = NULL,
-                       na.rm = FALSE,
-                       show.legend = NA,
-                       inherit.aes = TRUE) {
+stat_prop <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "fill",
+  ...,
+  width = NULL,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
 
   params <- list(
     na.rm = na.rm,
@@ -115,8 +118,8 @@ StatProp <- ggproto("StatProp", Stat,
    panel$count[is.na(panel$count)] <- 0
 
    # compute proportions by by
-   f <- function(x) {sum(abs(x))}
-   panel$prop <- panel$count / ave(panel$count, panel$by, FUN = f)
+   sum_abs <- function(x) {sum(abs(x))}
+   panel$prop <- panel$count / ave(panel$count, panel$by, FUN = sum_abs)
    panel$width <- width
 
    panel
@@ -126,7 +129,7 @@ StatProp <- ggproto("StatProp", Stat,
 
 #' Column and Row bar plots
 #'
-#' Plot colum or row percentage using bar plots.
+#' Plot column or row percentage using bar plots.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -165,7 +168,6 @@ StatProp <- ggproto("StatProp", Stat,
 #'   types = list(discrete = "rowbar"),
 #'   legend = 1
 #' )
-#' @importFrom scales label_percent
 ggally_colbar <- function(data, mapping,
                           label_format = scales::label_percent(accuracy = .1),
                           remove_y_axis = TRUE, ...,
@@ -200,35 +202,46 @@ ggally_colbar <- function(data, mapping,
       panel.grid = element_blank()
     )
 
-  if (remove_y_axis)
+  if (isTRUE(remove_y_axis)) {
     p <- p +
-    theme(
-      axis.text.y = element_blank(),
-      axis.ticks.y = element_blank()
-    )
+      theme(
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()
+      )
+  }
   p
 }
 
 #' @rdname ggally_colbar
 #' @export
-ggally_rowbar <- function(data, mapping,
-                          label_format = scales::label_percent(accuracy = .1),
-                          remove_x_axis = TRUE, ...,
-                          geom_bar_args = NULL) {
+ggally_rowbar <- function(
+  data,
+  mapping,
+  label_format = scales::label_percent(accuracy = .1),
+  remove_x_axis = TRUE,
+  ...,
+  geom_bar_args = NULL
+) {
   mapping <- mapping_swap_x_y(mapping)
+
   p <- ggally_colbar(
-    data = data, mapping = mapping,
+    data = data,
+    mapping = mapping,
     label_format = label_format,
-    remove_y_axis = FALSE, ...,
-    geom_bar_args = geom_bar_args) +
+    remove_y_axis = FALSE,
+    ...,
+    geom_bar_args = geom_bar_args
+  ) +
     coord_flip()
 
-  if (remove_x_axis)
+  if (isTRUE(remove_x_axis)) {
     p <- p +
-    theme(
-      axis.text.x = element_blank(),
-      axis.ticks.x = element_blank()
-    )
+      theme(
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()
+      )
+  }
+
   p
 }
 

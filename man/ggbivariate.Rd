@@ -10,8 +10,8 @@ ggbivariate(
   explanatory = NULL,
   mapping = NULL,
   types = NULL,
-  rowbar_args = NULL,
-  ...
+  ...,
+  rowbar_args = NULL
 )
 }
 \arguments{
@@ -28,14 +28,14 @@ weights (see examples)}
 
 \item{types}{custom types of plots to use, see \code{\link{ggduo}}}
 
+\item{...}{additional arguments passed to \code{\link{ggduo}} (see examples)}
+
 \item{rowbar_args}{additional arguments passed to \code{\link{ggally_rowbar}}
 (see examples)}
-
-\item{...}{additional arguments passed to \code{\link{ggduo}} (see examples)}
 }
 \description{
 \code{ggbivariate} is a variant of \code{\link{ggduo}} for plotting
-an outcome variable with several potential explonatory variables.
+an outcome variable with several potential explanatory variables.
 }
 \examples{
 data(tips, package = "reshape")
