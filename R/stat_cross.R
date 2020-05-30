@@ -21,7 +21,6 @@
 #'   \item{stdres}{standardized residual}
 #' }
 #'
-#' @importFrom broom augment
 #' @export
 #' @examples
 #' d <- as.data.frame(Titanic)
