@@ -1,7 +1,9 @@
 ---
 title: "List of available high-level plots"
-output: rmarkdown::html_vignette
-author: GGally team
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+author: GGally Team
 date: May 28, 2020
 vignette: >
   %\VignetteIndexEntry{List of available high-level plots}
@@ -28,7 +30,7 @@ data(tips, package = "reshape")
 
 ## Bivariate plots
 
-### with 2 continuous variables
+### with 2x continuous variables
 
 #### `ggally_autopoint()`
 
@@ -73,7 +75,7 @@ ggally_smooth_loess(tips, aes(x = total_bill, y = tip, colour = time))
 
 See also `ggally_smooth()` for more options.
 
-### with 2 discrete variables
+### with 2x discrete variables
 
 #### `ggally_autopoint()`
 
@@ -130,7 +132,7 @@ ggally_trends(tips, aes(x = day, y = smoker))
 ggally_trends(tips, aes(x = day, y = smoker, colour = time))
 ```
 
-### with one continuous and one discrete variables
+### with 1x continuous and 1x discrete variables
 
 
 #### `ggally_autopoint()`
@@ -193,7 +195,7 @@ ggally_trends(tips, aes(y = total_bill, x = day, colour = time))
 
 ## Diagonal plots
 
-### with a continuous variable
+### with 1x continuous variable
 
 
 #### `ggally_autopointDiag()`
@@ -217,7 +219,7 @@ ggally_densityDiag(tips, aes(x = total_bill))
 ggally_densityDiag(tips, aes(x = total_bill, colour = time))
 ```
 
-### with a discrete variable
+### with 1x discrete variable
 
 #### `ggally_autopointDiag()`
 
