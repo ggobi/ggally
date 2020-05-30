@@ -73,23 +73,33 @@ mapping_swap_x_y <- function(mapping) {
 }
 
 
-#' Keep colour mapping only if same as x or y
+#' Remove colour mapping unless found in select mapping keys
 #' @param mapping output of \code{ggplot2::\link[ggplot2]{aes}(...)}
-#' @return Aes mapping with colour mapping kept only if equal to
-#' mapping to x or to y.
+#' @param to set of mapping keys to check
+#' @return Aes mapping with colour mapping kept only if found in selected mapping keys.
 #' @export
 #' @examples
 #' mapping <- aes(x = sex, y = age, colour = sex)
-#' keep_colour_if_in_x_or_y(mapping)
+# remove_color_unless_equal(mapping, to = c("x", "y"))
+# remove_color_unless_equal(mapping, to = c("y"))
 #'
 #' mapping <- aes(x = sex, y = age, colour = region)
-#' keep_colour_if_in_x_or_y(mapping)
-keep_colour_if_in_x_or_y <- function(mapping) {
-  if (
-    !is.null(mapping_string(mapping$colour)) &
-    mapping_string(mapping$colour) != mapping_string(mapping$x) &
-    mapping_string(mapping$colour) != mapping_string(mapping$y)
-  ) mapping <- mapping[names(mapping) != "colour"]
+#' remove_color_unless_equal(mapping)
+remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
+  if (!is.null(mapping$colour)) {
+    color_str <- mapping_string(mapping$colour)
+    for (to_val in to) {
+      to_str <- mapping_string(mapping[[to_val]])
+      if (color_str == to_str) {
+        # found! return
+        return(mapping)
+      }
+    }
+
+    # not found. Remove color value
+    mapping <- mapping[names(mapping) != "colour"]
+  }
+
   mapping
 }
 

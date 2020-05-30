@@ -186,7 +186,7 @@ StatCross <- ggproto("StatCross", Stat,
 #'   geom_text_args = list(colour = "white", fontface = "bold", size = 6)
 #' )
 ggally_cross <- function(data, mapping, ..., geom_text_args = NULL){
-  mapping <- keep_colour_if_in_x_or_y(mapping)
+  mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
   mapping <- mapping_color_to_fill(mapping)
 
   args <- list(...)
