@@ -1394,9 +1394,10 @@ ggally_count <- function(data, mapping, ...) {
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
   # for stat_ggally_count(), y should be mapped to base_y
   # and always be a factor
-  data$.y <- as.factor(eval_data_col(data, mapping$y))
+  count_col <- ".ggally_y"
+  data[[count_col]] <- as.factor(eval_data_col(data, mapping$y))
   ylabel <- mapping_string(mapping$y)
-  mapping$base_y <- aes_string(base_y = ".y")$base_y
+  mapping$base_y <- aes_string(base_y = count_col)$base_y
   mapping$y <- NULL
 
   # default values
@@ -1407,8 +1408,8 @@ ggally_count <- function(data, mapping, ...) {
   ggplot(data, mapping) +
     do.call(stat_ggally_count, args) +
     scale_y_continuous(
-      breaks = 1:length(levels(data$.y)),
-      labels = levels(data$.y)
+      breaks = 1:length(levels(data[[count_col]])),
+      labels = levels(data[[count_col]])
     ) +
     theme(panel.grid.minor = element_blank()) +
     ylab(ylabel)
