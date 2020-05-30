@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print ggmatrix object — ggmatrix_gtable • GGally</title>
+<title>Keep colour mapping only if same as x or y — keep_colour_if_in_x_or_y • GGally</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Print ggmatrix object — ggmatrix_gtable" />
-<meta property="og:description" content="Specialized method to print the ggmatrix object-" />
+<meta property="og:title" content="Keep colour mapping only if same as x or y — keep_colour_if_in_x_or_y" />
+<meta property="og:description" content="Keep colour mapping only if same as x or y" />
 
 
 
@@ -150,84 +150,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print ggmatrix object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggmatrix_gtable.R'><code>R/ggmatrix_gtable.R</code></a></small>
-    <div class="hidden name"><code>ggmatrix_gtable.Rd</code></div>
+    <h1>Keep colour mapping only if same as x or y</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/gg-plots.R'><code>R/gg-plots.R</code></a></small>
+    <div class="hidden name"><code>keep_colour_if_in_x_or_y.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Specialized method to print the ggmatrix object-</p>
+    <p>Keep colour mapping only if same as x or y</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggmatrix_gtable</span>(
-  <span class='no'>pm</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>progress_format</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/formals.html'>formals</a></span>(<span class='no'>ggmatrix_progress</span>)$<span class='no'>format</span>
-)</pre>
+    <pre class="usage"><span class='fu'>keep_colour_if_in_x_or_y</span>(<span class='no'>mapping</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pm</th>
-      <td><p>ggmatrix object to be plotted</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>ignored</p></td>
-    </tr>
-    <tr>
-      <th>progress, progress_format</th>
-      <td><p>Please use the 'progress' parameter in your ggmatrix-like function.  See <code><a href='ggmatrix_progress.html'>ggmatrix_progress</a></code> for a few examples.  These parameters will soon be deprecated.</p></td>
+      <th>mapping</th>
+      <td><p>output of <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a>(...)</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Barret Schloerke <a href='mailto:schloerke@gmail.com'>schloerke@gmail.com</a></p>
+    <p>Aes mapping with colour mapping kept only if equal to
+mapping to x or to y.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tips</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"reshape"</span>)
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>tips</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>2</span>), <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"sex"</span>))
-<span class='fu'>ggmatrix_gtable</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; TableGrob (17 x 14) "layout": 36 grobs
-#&gt;     z         cells       name                                   grob
-#&gt; 1   0 ( 1-17, 1-14) background       rect[plot.background..rect.7644]
-#&gt; 2   1 ( 8- 8, 5- 5)  panel-1-1                         gtable[layout]
-#&gt; 3   1 (10-10, 5- 5)  panel-2-1                         gtable[layout]
-#&gt; 4   1 (12-12, 5- 5)  panel-3-1                         gtable[layout]
-#&gt; 5   1 ( 8- 8, 7- 7)  panel-1-2                         gtable[layout]
-#&gt; 6   1 (10-10, 7- 7)  panel-2-2                         gtable[layout]
-#&gt; 7   1 (12-12, 7- 7)  panel-3-2                         gtable[layout]
-#&gt; 8   1 ( 8- 8, 9- 9)  panel-1-3                         gtable[layout]
-#&gt; 9   1 (10-10, 9- 9)  panel-2-3                         gtable[layout]
-#&gt; 10  1 (12-12, 9- 9)  panel-3-3                         gtable[layout]
-#&gt; 11  3 ( 6- 6, 5- 5)   axis-t-1                         zeroGrob[NULL]
-#&gt; 12  3 ( 6- 6, 7- 7)   axis-t-2                         zeroGrob[NULL]
-#&gt; 13  3 ( 6- 6, 9- 9)   axis-t-3                         zeroGrob[NULL]
-#&gt; 14  3 (13-13, 5- 5)   axis-b-1                         gtable[layout]
-#&gt; 15  3 (13-13, 7- 7)   axis-b-2                         gtable[layout]
-#&gt; 16  3 (13-13, 9- 9)   axis-b-3                         gtable[layout]
-#&gt; 17  3 ( 8- 8, 4- 4)   axis-l-1                         gtable[layout]
-#&gt; 18  3 (10-10, 4- 4)   axis-l-2                         gtable[layout]
-#&gt; 19  3 (12-12, 4- 4)   axis-l-3                         gtable[layout]
-#&gt; 20  3 ( 8- 8,11-11)   axis-r-1                         zeroGrob[NULL]
-#&gt; 21  3 (10-10,11-11)   axis-r-2                         zeroGrob[NULL]
-#&gt; 22  3 (12-12,11-11)   axis-r-3                         zeroGrob[NULL]
-#&gt; 23  2 ( 7- 7, 5- 5)  strip-t-1                          gtable[strip]
-#&gt; 24  2 ( 7- 7, 7- 7)  strip-t-2                          gtable[strip]
-#&gt; 25  2 ( 7- 7, 9- 9)  strip-t-3                          gtable[strip]
-#&gt; 26  2 ( 8- 8,10-10)  strip-r-1                          gtable[strip]
-#&gt; 27  2 (10-10,10-10)  strip-r-2                          gtable[strip]
-#&gt; 28  2 (12-12,10-10)  strip-r-3                          gtable[strip]
-#&gt; 29  4 ( 5- 5, 5- 9)     xlab-t                         zeroGrob[NULL]
-#&gt; 30  5 (14-14, 5- 9)     xlab-b                         zeroGrob[NULL]
-#&gt; 31  6 ( 8-12, 3- 3)     ylab-l                         zeroGrob[NULL]
-#&gt; 32  7 ( 8-12,12-12)     ylab-r                         zeroGrob[NULL]
-#&gt; 33  8 ( 4- 4, 5- 9)   subtitle zeroGrob[plot.subtitle..zeroGrob.7640]
-#&gt; 34  9 ( 3- 3, 5- 9)      title    zeroGrob[plot.title..zeroGrob.7639]
-#&gt; 35 10 (15-15, 5- 9)    caption  zeroGrob[plot.caption..zeroGrob.7642]
-#&gt; 36 11 ( 2- 2, 2- 2)        tag      zeroGrob[plot.tag..zeroGrob.7641]</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>mapping</span> <span class='kw'>&lt;-</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>age</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>sex</span>)
+<span class='fu'>keep_colour_if_in_x_or_y</span>(<span class='no'>mapping</span>)</div><div class='output co'>#&gt; Aesthetic mapping: 
+#&gt; * `x`      -&gt; `sex`
+#&gt; * `y`      -&gt; `age`
+#&gt; * `colour` -&gt; `sex`</div><div class='input'>
+<span class='no'>mapping</span> <span class='kw'>&lt;-</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>age</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>region</span>)
+<span class='fu'>keep_colour_if_in_x_or_y</span>(<span class='no'>mapping</span>)</div><div class='output co'>#&gt; Aesthetic mapping: 
+#&gt; * `x` -&gt; `sex`
+#&gt; * `y` -&gt; `age`</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -67,6 +67,9 @@
     <loc>https://ggobi.github.io/ggally/reference/ggally_count.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggally_cross.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/ggally_density.html</loc>
   </url>
   <url>
@@ -131,6 +134,9 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/ggally_statistic.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggally_table.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/ggally_text.html</loc>
@@ -208,6 +214,9 @@
     <loc>https://ggobi.github.io/ggally/reference/is_horizontal.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/keep_colour_if_in_x_or_y.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/lowertriangle.html</loc>
   </url>
   <url>
@@ -266,6 +275,9 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/skewness.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/reference/stat_cross.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/str.ggmatrix.html</loc>
