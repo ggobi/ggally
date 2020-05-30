@@ -4,7 +4,7 @@
 \name{ggally_count}
 \alias{ggally_count}
 \alias{stat_ggally_count}
-\alias{StatGgallyCount}
+\alias{StatGGallyCount}
 \alias{ggally_countDiag}
 \title{Plots the number of observations}
 \usage{

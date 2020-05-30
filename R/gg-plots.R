@@ -1443,7 +1443,7 @@ stat_ggally_count <- function(mapping = NULL, data = NULL,
   layer(
     data = data,
     mapping = mapping,
-    stat = StatGgallyCount,
+    stat = StatGGallyCount,
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -1456,7 +1456,7 @@ stat_ggally_count <- function(mapping = NULL, data = NULL,
 #' @format NULL
 #' @usage NULL
 #' @export
-StatGgallyCount <- ggproto("StatGgallyCount", Stat,
+StatGGallyCount <- ggproto("StatGGallyCount", Stat,
   required_aes = c("x", "base_y"),
   default_aes = aes(
     weight = 1,
