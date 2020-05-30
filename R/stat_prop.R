@@ -133,10 +133,10 @@ StatProp <- ggproto("StatProp", Stat,
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param remove_y_axis should y-axis be removed?
-#' @param remove_x_axis should x-axis be removed?
 #' @param label_format formatter function for displaying proportions
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
+#' @param remove_percentage_axis should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}
+#' @param remove_background should the \code{panel.background} be removed?
 #' @param geom_bar_args other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @keywords hplot
@@ -168,10 +168,15 @@ StatProp <- ggproto("StatProp", Stat,
 #'   types = list(discrete = "rowbar"),
 #'   legend = 1
 #' )
-ggally_colbar <- function(data, mapping,
-                          label_format = scales::label_percent(accuracy = .1),
-                          remove_y_axis = TRUE, ...,
-                          geom_bar_args = NULL) {
+ggally_colbar <- function(
+  data,
+  mapping,
+  label_format = scales::label_percent(accuracy = .1),
+  ...,
+  remove_background = FALSE,
+  remove_percentage_axis = FALSE,
+  geom_bar_args = NULL
+) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
@@ -195,16 +200,20 @@ ggally_colbar <- function(data, mapping,
       position = position_fill(.5),
       ...
     ) +
-    ylab("") +
-    scale_y_reverse(expand = c(0, 0)) +
-    theme(
-      panel.background = element_blank(),
-      panel.grid = element_blank()
-    )
+    scale_y_continuous(labels = scales::percent) +
+    ylab("")
 
-  if (isTRUE(remove_y_axis)) {
+  if (isTRUE(remove_background)) {
     p <- p +
       theme(
+        panel.background = element_blank()
+      )
+  }
+
+  if (isTRUE(remove_percentage_axis)) {
+    p <- p +
+      theme(
+        panel.grid = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks.y = element_blank()
       )
@@ -218,8 +227,9 @@ ggally_rowbar <- function(
   data,
   mapping,
   label_format = scales::label_percent(accuracy = .1),
-  remove_x_axis = TRUE,
   ...,
+  remove_background = FALSE,
+  remove_percentage_axis = FALSE,
   geom_bar_args = NULL
 ) {
   mapping <- mapping_swap_x_y(mapping)
@@ -228,19 +238,12 @@ ggally_rowbar <- function(
     data = data,
     mapping = mapping,
     label_format = label_format,
-    remove_y_axis = FALSE,
     ...,
+    remove_background = remove_background,
+    remove_percentage_axis = remove_percentage_axis,
     geom_bar_args = geom_bar_args
   ) +
     coord_flip()
-
-  if (isTRUE(remove_x_axis)) {
-    p <- p +
-      theme(
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()
-      )
-  }
 
   p
 }
