@@ -28,7 +28,9 @@ reference:
   - ggally_barDiag
   - ggally_blank
   - ggally_box
+  - ggally_count
   - ggally_cor
+  - ggally_cross
   - ggally_density
   - ggally_densityDiag
   - ggally_denstrip
@@ -43,7 +45,9 @@ reference:
   - ggally_ratio
   - ggally_smooth
   - ggally_statistic
+  - ggally_table
   - ggally_text
+  - ggally_trends
 
 - title: Major Plotting Functions
   desc: >
@@ -85,6 +89,13 @@ reference:
   - ggnet
   - ggnet2
   - ggnetworkmap
+
+- title: Additional statistics for `ggplot2`
+  desc: >
+    More details in `vignette("new_stats")`
+  contents:
+  - stat_cross
+  - stat_weighted_mean
 
 - title: "ggmatrix() Helpers"
   contents:
