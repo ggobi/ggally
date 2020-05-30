@@ -19,6 +19,7 @@
 
 # discrete
 #   ratio
+#   count
 #   facetbar
 #   blank
 
@@ -451,7 +452,7 @@ ggduo <- function(
     continuous = "smooth_loess",
     comboVertical = "box_no_facet",
     comboHorizontal = "facethist",
-    discrete = "ratio"
+    discrete = "count"
   ),
   axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
@@ -498,7 +499,7 @@ ggduo <- function(
 
   types <- check_and_set_ggpairs_defaults(
     "types", types,
-    continuous = "smooth_loess", discrete = "ratio", na = "na",
+    continuous = "smooth_loess", discrete = "count", na = "na",
     isDuo = TRUE
   )
 
@@ -777,7 +778,7 @@ ggpairs <- function(
   mapping = NULL,
   columns = 1:ncol(data),
   title = NULL,
-  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "facetbar", na = "na"),
+  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
   lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
   diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
   params = NULL,
@@ -820,7 +821,7 @@ ggpairs <- function(
 
   upper <- check_and_set_ggpairs_defaults(
     "upper", upper,
-    continuous = "cor", combo = "box_no_facet", discrete = "facetbar", na = "na"
+    continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"
   )
   lower <- check_and_set_ggpairs_defaults(
     "lower", lower,

@@ -11,7 +11,7 @@ ggduo(
   columnsY = 1:ncol(data),
   title = NULL,
   types = list(continuous = "smooth_loess", comboVertical = "box_no_facet",
-    comboHorizontal = "facethist", discrete = "ratio"),
+    comboHorizontal = "facethist", discrete = "count"),
   axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
   columnLabelsY = colnames(data[columnsY]),

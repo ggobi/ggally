@@ -9,7 +9,7 @@ ggpairs(
   mapping = NULL,
   columns = 1:ncol(data),
   title = NULL,
-  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "facetbar", na =
+  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na =
     "na"),
   lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na =
     "na"),
