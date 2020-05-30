@@ -12,7 +12,7 @@
 #'   weights (see examples)
 #' @param types custom types of plots to use, see \code{\link{ggduo}}
 #' @param rowbar_args additional arguments passed to \code{\link{ggally_rowbar}}
-#'   (see axamples)
+#'   (see examples)
 #' @param ... additional arguments passed to \code{\link{ggduo}} (see examples)
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @export
@@ -20,10 +20,11 @@
 #' data(tips, package = "reshape")
 #' ggbivariate(tips, "smoker", c("day", "time", "sex", "tip"))
 #'
+#' \dontrun{
 #' # Personalize plot title and legend title
 #' ggbivariate(
 #'   tips, "smoker", c("day", "time", "sex", "tip"),
-#'   title = "Plot title"
+#'   title = "Custom title"
 #' ) +
 #'   labs(fill = "Smoker ?")
 #'
@@ -52,7 +53,7 @@
 #'
 #' # outcome can be numerical
 #' ggbivariate(tips, outcome = "tip", title = "tip")
-#'
+#' }
 ggbivariate <- function(data, outcome, explanatory = NULL,
                         mapping = NULL, types = NULL,
                         rowbar_args = NULL, ...) {
@@ -85,6 +86,9 @@ ggbivariate <- function(data, outcome, explanatory = NULL,
   ggduo_args$columnsX <- outcome
   ggduo_args$columnsY <- explanatory
 
+  if (!"yProportions" %in% names(ggduo_args))
+    ggduo_args$yProportions <- "auto"
+
   if (!is.numeric(data[[outcome]]) & !"legend" %in% names(list(...)))
     ggduo_args$legend <- 1
 
@@ -93,19 +97,6 @@ ggbivariate <- function(data, outcome, explanatory = NULL,
       legend.position = "top",
       strip.text.x = element_blank()
     )
-
-  # yProportions
-  y_prop <- c()
-  for (v in explanatory) {
-    if (is.numeric(data[[v]]))
-      y_prop <- c(y_prop, NA)
-    else
-      y_prop <- c(y_prop, length(levels(data[[v]])))
-  }
-  # for numeric vars, the average
-  y_prop[is.na(y_prop)] <- mean(y_prop, na.rm = TRUE)
-  y_prop[is.na(y_prop)] <- 1 # in case all are numeric
-  p$yProportions <- y_prop
 
   p
 }
