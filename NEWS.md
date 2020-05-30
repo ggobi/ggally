@@ -1,8 +1,41 @@
 GGally (development version)
 ---------------------
 
+### New Functions:
 
-`ggally_cor` (#327)
+`ggally_autopoint()`, `ggally_autopointDiag()` (@larmarange, #325)
+* Make scatterplots compatible with both continuous and catgeorical variables using `ggforce::geom_autopoint()`.
+
+`ggally_count()`, `ggally_countDiag()` (@larmarange, #321)
+* Plot the number of observations by using rectangles with proportional areas.
+
+`ggally_cross()` (@larmarange, #326)
+* Plot the number of observations by using square points with proportional areas.
+
+`ggally_statistic()` (#327)
+* A generialized version of `ggally_cor()`
+* Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
+
+`ggally_table()` (@larmarange, #326)
+* Plot the number of observations as a table.
+
+`ggally_trends()` (@larmarange, #333)
+* Plot trends using line plots.
+
+`signif_stars()` (@larmarange, #327)
+* Return the appropriate number of significance stars as a character vector for the provided numeric input values.
+
+### New `ggplot2` plot statistics:
+
+`stat_cross` (@larmarange, #326)
+* Computes statistics of a 2-dimensional matrix using `broom::augment.htest`.
+
+`stat_weighted_mean` (@larmarange, #333)
+* Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.
+
+### Features and Bug Fixes:
+
+`ggally_cor()` (#327)
 * New implementation using `ggally_statistic()`
 * Will now hide the grid by default and add a border (`displayGrid = FALSE`)
 * Added the ability to display significance stars (`stars = TRUE`)
@@ -12,45 +45,19 @@ GGally (development version)
 * To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
 * Previously deprecated parameters have been removed
 
-`ggpairs` (#331)
+`ggpairs()` (#331)
 * new `proportion` argument to control relative size of sub-plots
 * option `proportion = "auto"` for automatic guess based on the number of levels for discrete variables
 
-`ggduo` (#331)
+`ggduo()` (#331)
 * new `xProportion` and `yProportion` arguments to control relative size of sub-plots
 * option `xproportion = "auto"` and `yproportion = "auto"` for automatic guess based on the number of levels for discrete variables
 
-### New functions:
+`ggscatmat()`
+* `lowertriangle()` now preallocates it's memory usage for a 2-5x speed improvement. (@vlepori, #328)
 
-`ggally_autopoint`, `ggally_autopointDiag` (#325)
-* Make scatterplots compatible with both continuous and catgeorical variables using `ggforce::geom_autopoint()`.
-
-`ggally_count`, `ggally_countDiag` (#321)
-* Plot the number of observations by using rectangles with proportional areas.
-
-`ggally_cross` (#326)
-* Plot the number of observations by using square points with proportional areas.
-
-`ggally_statistic` (#327)
-* New function which is a generialized version of `ggally_cor()`
-* Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
-
-`ggally_table` (#326)
-* Plot the number of observations as a table.
-
-`ggally_trends` (#333)
-* Plot trends using line plots.
-
-`signif_stars()` (#327)
-* Return the appropriate number of significance stars as a character vector for the provided numeric input values.
-
-### New statistics:
-
-`stat_cross` (#326)
-* Computes statistics of a 2-dimensional matrix using `broom::augment.htest`.
-
-`stat_weighted_mean` (#333)
-* Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.
+Website
+* Updated to use `pkgdown` (#335)
 
 
 GGally 1.5.0
