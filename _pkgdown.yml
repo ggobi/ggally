@@ -63,6 +63,7 @@ reference:
   - ggally_ratio
   - ggally_smooth
   - ggally_statistic
+  - ggally_summarise_by
   - ggally_table
   - ggally_text
   - ggally_trends

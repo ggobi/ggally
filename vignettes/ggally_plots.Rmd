@@ -186,6 +186,15 @@ ggally_facethist(tips, aes(x = total_bill, y = day))
 ggally_facethist(tips, aes(x = total_bill, y = day, colour = time))
 ```
 
+#### `ggally_summarise_by()`
+
+```{r}
+ggally_summarise_by(tips, aes(x = total_bill, y = day))
+ggally_summarise_by(tips, aes(x = total_bill, y = day, colour = day))
+```
+
+Note: colour aesthetic is kept only if corresponding to the discrete axis.
+
 #### `ggally_trends()`
 
 ```{r}
