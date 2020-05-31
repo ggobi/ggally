@@ -166,8 +166,9 @@
   <span class='no'>data</span>,
   <span class='no'>mapping</span>,
   <span class='kw'>label_format</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>label_percent</a></span>(<span class='kw'>accuracy</span> <span class='kw'>=</span> <span class='fl'>0.1</span>),
-  <span class='kw'>remove_y_axis</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>,
+  <span class='kw'>remove_background</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>remove_percentage_axis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>geom_bar_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 
@@ -175,8 +176,9 @@
   <span class='no'>data</span>,
   <span class='no'>mapping</span>,
   <span class='kw'>label_format</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>label_percent</a></span>(<span class='kw'>accuracy</span> <span class='kw'>=</span> <span class='fl'>0.1</span>),
-  <span class='kw'>remove_x_axis</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>,
+  <span class='kw'>remove_background</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>remove_percentage_axis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>geom_bar_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
@@ -196,20 +198,20 @@
       <td><p>formatter function for displaying proportions</p></td>
     </tr>
     <tr>
-      <th>remove_y_axis</th>
-      <td><p>should y-axis be removed?</p></td>
-    </tr>
-    <tr>
       <th>...</th>
       <td><p>other arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a>(...)</code></p></td>
     </tr>
     <tr>
-      <th>geom_bar_args</th>
-      <td><p>other arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a>(...)</code></p></td>
+      <th>remove_background</th>
+      <td><p>should the <code>panel.background</code> be removed?</p></td>
     </tr>
     <tr>
-      <th>remove_x_axis</th>
-      <td><p>should x-axis be removed?</p></td>
+      <th>remove_percentage_axis</th>
+      <td><p>should percentage axis be removed? Removes the y-axis for <code>ggally_colbar()</code> and x-axis for <code>ggally_rowbar()</code></p></td>
+    </tr>
+    <tr>
+      <th>geom_bar_args</th>
+      <td><p>other arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a>(...)</code></p></td>
     </tr>
     </table>
 
