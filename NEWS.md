@@ -19,7 +19,7 @@ GGally (development version)
 `ggally_summarise_by()`
 * Display summary statisctics of a continuous variable for each value of a discrete variable.
 
-`ggally_table()` (@larmarange, #326)
+`ggally_table()` and `ggally_table2()` (@larmarange, #326)
 * Plot the number of observations as a table.
 
 `ggally_trends()` (@larmarange, #333)
