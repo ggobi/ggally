@@ -301,3 +301,72 @@ ggally_tableDiag <- function(data, mapping, ..., geom_tile_args = NULL) {
   mapping$y <- mapping$x
   ggally_table(data = data, mapping = mapping, ..., geom_tile_args = geom_tile_args)
 }
+
+#' Display a cross-tabulated table
+#'
+#' \code{ggally_table2} is a variation of \code{ggally_table} with few modifications: (i) table cells are drawn; (ii) x and y axis are not expanded (and therefore are not aligned with other \code{ggally_*} plots); (iii) content and fill of cells can be easily controlled with dedicated arguments.
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param cells Which statistic should be displayed in table cells?
+#' @param fill Which statistic should be used for filling table cells?
+#' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
+#' @param geom_tile_args other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
+#' @importFrom scales percent
+#' @importFrom scales number
+#' @export
+#' @examples
+#' # ggally_table2() examples
+#' ggally_table(tips, mapping = aes(x = day, y = sex))
+#' ggally_table2(tips, mapping = aes(x = day, y = sex))
+#'
+#' # display column proportions
+#' ggally_table2(tips, mapping = aes(x = day, y = sex), cells = "col.prop")
+#'
+#' # display row proportions
+#' ggally_table2(tips, mapping = aes(x = day, y = sex), cells = "row.prop")
+#'
+#' # change size of text
+#' ggally_table2(tips, mapping = aes(x = day, y = sex), size = 8)
+#'
+#' # fill cells with standardized residuals
+#' ggally_table2(tips, mapping = aes(x = day, y = sex), fill = "stdres")
+#'
+#' \dontrun{
+#' # change scale for fill
+#' ggally_table2(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
+#'   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE)
+#' }
+ggally_table2 <- function(
+  data,
+  mapping,
+  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "residuals", "stdres"),
+  fill = c("none", "stdres", "residuals"),
+  ...,
+  geom_tile_args = list(colour = "grey50")
+){
+  fill <- match.arg(fill)
+  if (fill == "stdres")
+    mapping$fill <- aes_string(fill = "after_stat(stdres)")$fill
+  if (fill == "residuals")
+    mapping$fill <- aes_string(fill = "after_stat(residuals)")$fill
+  if (fill == "none")
+    geom_tile_args$fill <- "white"
+
+  cells <- match.arg(cells)
+  if (!"label" %in% names(mapping) && cells %in% c("observed", "expected"))
+    mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = 1)"))$label
+  if (!"label" %in% names(mapping) && cells %in% c("prop", "row.prop", "col.prop"))
+    mapping$label <- aes_string(label = paste0("scales::percent(after_stat(", cells, "), accuracy = .1)"))$label
+  if (!"label" %in% names(mapping) && cells %in% c("residuals", "stdres"))
+    mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = .1)"))$label
+
+  p <- ggally_table(data = data, mapping = mapping, geom_tile_args = geom_tile_args, ...) +
+    scale_x_discrete(expand = expansion(0, 0)) +
+    scale_y_discrete(expand = expansion(0, 0)) +
+    theme(axis.ticks = element_blank())
+
+  if (fill == "stdres")
+    p <- p + scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
+
+  p
+}

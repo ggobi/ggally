@@ -65,6 +65,7 @@ reference:
   - ggally_statistic
   - ggally_summarise_by
   - ggally_table
+  - ggally_table2
   - ggally_text
   - ggally_trends
 

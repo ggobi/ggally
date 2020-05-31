@@ -125,6 +125,15 @@ ggally_table(tips, aes(x = day, y = smoker, colour = smoker))
 
 Note: **colour** aesthetic is taken into account only if it corresponds to **x** or to **y**.
 
+#### `ggally_table()`
+
+```{r}
+ggally_table2(tips, aes(x = day, y = smoker))
+ggally_table2(tips, aes(x = day, y = smoker), cells = "col.prop", fill = "stdres")
+```
+
+Note: **colour** aesthetic is not taken into account.
+
 #### `ggally_trends()`
 
 ```{r}
