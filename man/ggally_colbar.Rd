@@ -9,8 +9,9 @@ ggally_colbar(
   data,
   mapping,
   label_format = scales::label_percent(accuracy = 0.1),
-  remove_y_axis = TRUE,
   ...,
+  remove_background = FALSE,
+  remove_percentage_axis = FALSE,
   geom_bar_args = NULL
 )
 
@@ -18,8 +19,9 @@ ggally_rowbar(
   data,
   mapping,
   label_format = scales::label_percent(accuracy = 0.1),
-  remove_x_axis = TRUE,
   ...,
+  remove_background = FALSE,
+  remove_percentage_axis = FALSE,
   geom_bar_args = NULL
 )
 }
@@ -30,13 +32,13 @@ ggally_rowbar(
 
 \item{label_format}{formatter function for displaying proportions}
 
-\item{remove_y_axis}{should y-axis be removed?}
-
 \item{...}{other arguments passed to \code{\link[ggplot2]{geom_text}(...)}}
 
-\item{geom_bar_args}{other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}}
+\item{remove_background}{should the \code{panel.background} be removed?}
 
-\item{remove_x_axis}{should x-axis be removed?}
+\item{remove_percentage_axis}{should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}}
+
+\item{geom_bar_args}{other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}}
 }
 \description{
 Plot column or row percentage using bar plots.
