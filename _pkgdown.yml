@@ -71,12 +71,13 @@ reference:
 
 - title: Major Plotting Functions
   desc: >
-    More details in `vignette("ggcoef")` and `vignette("ggsurv")`
+    More details in `vignette("ggcoef")`, `vignette("ggsurv")` and `vignette("ggtable")`
   contents:
   - ggcoef
   - ggcorr
   - ggparcoord
   - ggsurv
+  - ggtable
 
 - title: Modeling Diagnostics
   desc: >
