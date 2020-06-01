@@ -14,7 +14,8 @@ stat_cross(
   ...,
   na.rm = TRUE,
   show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = TRUE,
+  keep.zero.cells = FALSE
 )
 }
 \arguments{
@@ -62,6 +63,8 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{keep.zero.cells}{If \code{TRUE}, cells with no observations are kept.}
 }
 \description{
 Computes statistics of a 2-dimensional matrix using \code{\link[broom]{augment.htest}}

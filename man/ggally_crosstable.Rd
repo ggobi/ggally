@@ -34,8 +34,8 @@ ggally_crosstable(
 data(tips, package = "reshape")
 
 # differences with ggally_table()
-ggally_table(tips, mapping = aes(x = day, y = sex))
-ggally_crosstable(tips, mapping = aes(x = day, y = sex))
+ggally_table(tips, mapping = aes(x = day, y = time))
+ggally_crosstable(tips, mapping = aes(x = day, y = time))
 
 # display column proportions
 ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop")

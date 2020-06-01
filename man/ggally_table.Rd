@@ -5,14 +5,28 @@
 \alias{ggally_tableDiag}
 \title{Display a table of the number of observations}
 \usage{
-ggally_table(data, mapping, ..., geom_tile_args = NULL)
+ggally_table(
+  data,
+  mapping,
+  keep.zero.cells = FALSE,
+  ...,
+  geom_tile_args = NULL
+)
 
-ggally_tableDiag(data, mapping, ..., geom_tile_args = NULL)
+ggally_tableDiag(
+  data,
+  mapping,
+  keep.zero.cells = FALSE,
+  ...,
+  geom_tile_args = NULL
+)
 }
 \arguments{
 \item{data}{data set using}
 
 \item{mapping}{aesthetics being used}
+
+\item{keep.zero.cells}{If \code{TRUE}, display cells with no observation.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2]{geom_text}(...)}}
 
@@ -29,17 +43,22 @@ The \strong{colour} aesthetic is taken into account only if equal to
 \examples{
 data(tips, package = "reshape")
 ggally_table(tips, mapping = aes(x = smoker, y = sex))
+ggally_table(tips, mapping = aes(x = day, y = time))
 ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker))
+
+# colour is kept only if equal to x or y
 ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = day))
+
+# diagonal version
 ggally_tableDiag(tips, mapping = aes(x = smoker))
 
-# Custom label size and color
+# custom label size and color
 ggally_table(tips, mapping = aes(x = smoker, y = sex), size = 16, color = "red")
 
-# Display column proportions
+# display column proportions
 ggally_table(tips, mapping = aes(x = day, y = sex, label = scales::percent(after_stat(col.prop))))
 
-# Draw table cells
+# draw table cells
 ggally_table(
   tips,
   mapping = aes(x = smoker, y = sex),

@@ -8,6 +8,7 @@
 #'   and \code{stat_prop}.
 #' @param na.rm If \code{TRUE}, the default, missing values are removed with a warning.
 #'   If `TRUE`, missing values are silently removed.
+#' @param keep.zero.cells If \code{TRUE}, cells with no observations are kept.
 #' @section Aesthetics:
 #' \code{stat_prop} requires the \strong{x} and the \strong{y} aesthetics.
 #' @section Computed variables:
@@ -68,16 +69,17 @@
 #'   aes(x = tip, y = as.character(day), size = after_stat(observed)) +
 #'   stat_cross(alpha = .1, color = "blue") +
 #'   scale_size_area(max_size = 12)
-#'
 stat_cross <- function(mapping = NULL, data = NULL,
                        geom = "point", position = "identity",
                        ...,
                        na.rm = TRUE,
                        show.legend = NA,
-                       inherit.aes = TRUE) {
+                       inherit.aes = TRUE,
+                       keep.zero.cells = FALSE) {
 
   params <- list(
     na.rm = na.rm,
+    keep.zero.cells = keep.zero.cells,
     ...
   )
 
@@ -109,7 +111,7 @@ StatCross <- ggproto("StatCross", Stat,
 
   extra_params = c("na.rm"),
 
-  compute_panel = function(self, data, scales) {
+  compute_panel = function(self, data, scales, keep.zero.cells = FALSE) {
     if (is.null(data$weight))
       data$weight <- rep(1, nrow(data))
 
@@ -131,8 +133,22 @@ StatCross <- ggproto("StatCross", Stat,
     }
     names(panel) <- panel_names
 
-    data <- merge(data, panel, by = c("x", "y"), all.x = TRUE)
-    data
+    # to handle the fact that ggplot2 could transform factors into integers
+    # before computation of the statistic
+    if(is.numeric(data$x)) panel$x <- as.numeric(panel$x)
+    if(is.numeric(data$y)) panel$y <- as.numeric(panel$y)
+
+    # keeping first value of colour if provided
+    if ("colour" %in% names(data)) {
+      data <- data[!duplicated(data$x, data$y), ]
+      panel <- merge(panel, data[, c("x", "y", "colour")], by = c("x", "y"), all.x = TRUE)
+    }
+
+    if (!keep.zero.cells) {
+      panel <- panel[panel$observed != 0,]
+    }
+
+    panel
   }
 )
 
@@ -155,6 +171,7 @@ StatCross <- ggproto("StatCross", Stat,
 #' @examples
 #' data(tips, package = "reshape")
 #' ggally_cross(tips, mapping = aes(x = smoker, y = sex))
+#' ggally_cross(tips, mapping = aes(x = day, y = time))
 #'
 #' # Custom max size
 #' ggally_cross(tips, mapping = aes(x = smoker, y = sex)) +
@@ -210,6 +227,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
   if (is.null(mapping$fill) & is.null(args$fill)) {
     args$fill <- GeomRect$default_aes$fill
   }
+  args$keep.zero.cells <- FALSE
 
   p <- ggplot(data = data, mapping) +
     do.call(stat_cross, args) +
@@ -217,6 +235,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 
   # default values for geom_text
   geom_text_args$stat <- "cross"
+  geom_text_args$keep.zero.cells <- FALSE
   if (is.null(geom_text_args$mapping))
     geom_text_args$mapping <- aes(colour = NULL, size = NULL)
   if (is.null(geom_text_args$show.legend))
@@ -237,6 +256,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
+#' @param keep.zero.cells If \code{TRUE}, display cells with no observation.
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
 #' @param geom_tile_args other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
 #' @note The \strong{colour} aesthetic is taken into account only if equal to
@@ -247,17 +267,22 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #' @examples
 #' data(tips, package = "reshape")
 #' ggally_table(tips, mapping = aes(x = smoker, y = sex))
+#' ggally_table(tips, mapping = aes(x = day, y = time))
 #' ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker))
+#'
+#' # colour is kept only if equal to x or y
 #' ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = day))
+#'
+#' # diagonal version
 #' ggally_tableDiag(tips, mapping = aes(x = smoker))
 #'
-#' # Custom label size and color
+#' # custom label size and color
 #' ggally_table(tips, mapping = aes(x = smoker, y = sex), size = 16, color = "red")
 #'
-#' # Display column proportions
+#' # display column proportions
 #' ggally_table(tips, mapping = aes(x = day, y = sex, label = scales::percent(after_stat(col.prop))))
 #'
-#' # Draw table cells
+#' # draw table cells
 #' ggally_table(
 #'   tips,
 #'   mapping = aes(x = smoker, y = sex),
@@ -275,7 +300,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #'   geom_tile_args = list(colour = "black")
 #' ) +
 #' scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
-ggally_table <- function(data, mapping, ..., geom_tile_args = NULL){
+ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL){
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
 
   # default values geom_text
@@ -284,9 +309,11 @@ ggally_table <- function(data, mapping, ..., geom_tile_args = NULL){
   }
   geom_text_args <- list(...)
   geom_text_args$stat <- "cross"
+  geom_text_args$keep.zero.cells <- keep.zero.cells
 
   # default values geom_tile
   geom_tile_args$stat <- "cross"
+  geom_tile_args$keep.zero.cells <- keep.zero.cells
   geom_tile_args$mapping <- aes(colour = NULL)$colour
   if (is.null(geom_tile_args$colour))
     geom_tile_args$colour <- "transparent"
@@ -300,9 +327,13 @@ ggally_table <- function(data, mapping, ..., geom_tile_args = NULL){
 
 #' @export
 #' @rdname ggally_table
-ggally_tableDiag <- function(data, mapping, ..., geom_tile_args = NULL) {
+ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL) {
   mapping$y <- mapping$x
-  ggally_table(data = data, mapping = mapping, ..., geom_tile_args = geom_tile_args)
+  ggally_table(
+    data = data, mapping = mapping,
+    keep.zero.cells = keep.zero.cells, ...,
+    geom_tile_args = geom_tile_args
+  )
 }
 
 #' Display a cross-tabulated table
@@ -319,8 +350,8 @@ ggally_tableDiag <- function(data, mapping, ..., geom_tile_args = NULL) {
 #' data(tips, package = "reshape")
 #'
 #' # differences with ggally_table()
-#' ggally_table(tips, mapping = aes(x = day, y = sex))
-#' ggally_crosstable(tips, mapping = aes(x = day, y = sex))
+#' ggally_table(tips, mapping = aes(x = day, y = time))
+#' ggally_crosstable(tips, mapping = aes(x = day, y = time))
 #'
 #' # display column proportions
 #' ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop")
@@ -363,7 +394,7 @@ ggally_crosstable <- function(
   if (!"label" %in% names(mapping) && cells %in% c("residuals", "stdres"))
     mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = .1)"))$label
 
-  p <- ggally_table(data = data, mapping = mapping, geom_tile_args = geom_tile_args, ...) +
+  p <- ggally_table(data = data, mapping = mapping, keep.zero.cells = TRUE, geom_tile_args = geom_tile_args, ...) +
     scale_x_discrete(expand = expansion(0, 0)) +
     scale_y_discrete(expand = expansion(0, 0)) +
     theme(axis.ticks = element_blank())
