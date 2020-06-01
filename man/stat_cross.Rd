@@ -96,7 +96,10 @@ ggplot(d) +
 
 # custom shape and fill colour based on chi-squared residuals
 ggplot(d) +
-  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed), fill = after_stat(stdres)) +
+  aes(
+    x = Class, y = Survived, weight = Freq,
+    size = after_stat(observed), fill = after_stat(stdres)
+  ) +
   stat_cross(shape = 22) +
   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
   scale_size_area(max_size = 20)

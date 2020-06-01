@@ -39,7 +39,7 @@ ggtable <- function(
   cells <- match.arg(cells)
 
   types <- list(
-    discrete = wrapp(ggally_table2, list(cells = cells, fill = fill)),
+    discrete = wrapp(ggally_crosstable, list(cells = cells, fill = fill)),
     continuous = "cor",
     comboVertical = "summarise_by",
     comboHorizontal = "summarise_by"

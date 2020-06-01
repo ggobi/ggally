@@ -1724,8 +1724,6 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #'   paste0("Total : ", round(sum(x * weights, na.rm = TRUE), digits = 1))
 #' }
 #' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
-#'
-#'
 ggally_summarise_by <- function(
   data,
   mapping,

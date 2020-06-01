@@ -49,6 +49,7 @@ reference:
   - ggally_count
   - ggally_cor
   - ggally_cross
+  - ggally_crosstable
   - ggally_density
   - ggally_densityDiag
   - ggally_denstrip
@@ -65,7 +66,6 @@ reference:
   - ggally_statistic
   - ggally_summarise_by
   - ggally_table
-  - ggally_table2
   - ggally_text
   - ggally_trends
 

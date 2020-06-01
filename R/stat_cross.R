@@ -33,7 +33,10 @@
 #'
 #' # custom shape and fill colour based on chi-squared residuals
 #' ggplot(d) +
-#'   aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed), fill = after_stat(stdres)) +
+#'   aes(
+#'     x = Class, y = Survived, weight = Freq,
+#'     size = after_stat(observed), fill = after_stat(stdres)
+#'   ) +
 #'   stat_cross(shape = 22) +
 #'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
 #'   scale_size_area(max_size = 20)
@@ -304,39 +307,39 @@ ggally_tableDiag <- function(data, mapping, ..., geom_tile_args = NULL) {
 
 #' Display a cross-tabulated table
 #'
-#' \code{ggally_table2} is a variation of \code{ggally_table} with few modifications: (i) table cells are drawn; (ii) x and y axis are not expanded (and therefore are not aligned with other \code{ggally_*} plots); (iii) content and fill of cells can be easily controlled with dedicated arguments.
+#' \code{ggally_crosstable} is a variation of \code{\link{ggally_table}} with few modifications: (i) table cells are drawn; (ii) x and y axis are not expanded (and therefore are not aligned with other \code{ggally_*} plots); (iii) content and fill of cells can be easily controlled with dedicated arguments.
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param cells Which statistic should be displayed in table cells?
 #' @param fill Which statistic should be used for filling table cells?
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
 #' @param geom_tile_args other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
-#' @importFrom scales percent
-#' @importFrom scales number
 #' @export
 #' @examples
-#' # ggally_table2() examples
+#' data(tips, package = "reshape")
+#'
+#' # differences with ggally_table()
 #' ggally_table(tips, mapping = aes(x = day, y = sex))
-#' ggally_table2(tips, mapping = aes(x = day, y = sex))
+#' ggally_crosstable(tips, mapping = aes(x = day, y = sex))
 #'
 #' # display column proportions
-#' ggally_table2(tips, mapping = aes(x = day, y = sex), cells = "col.prop")
+#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop")
 #'
 #' # display row proportions
-#' ggally_table2(tips, mapping = aes(x = day, y = sex), cells = "row.prop")
+#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "row.prop")
 #'
 #' # change size of text
-#' ggally_table2(tips, mapping = aes(x = day, y = sex), size = 8)
+#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), size = 8)
 #'
 #' # fill cells with standardized residuals
-#' ggally_table2(tips, mapping = aes(x = day, y = sex), fill = "stdres")
+#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres")
 #'
 #' \dontrun{
 #' # change scale for fill
-#' ggally_table2(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
+#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
 #'   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE)
 #' }
-ggally_table2 <- function(
+ggally_crosstable <- function(
   data,
   mapping,
   cells = c("observed", "prop", "row.prop", "col.prop", "expected", "residuals", "stdres"),
