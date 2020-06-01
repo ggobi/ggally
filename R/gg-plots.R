@@ -1726,7 +1726,6 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
 #'
 #'
-#' @importFrom scales label_percent
 ggally_summarise_by <- function(
   data,
   mapping,
@@ -1739,17 +1738,16 @@ ggally_summarise_by <- function(
 
   horizontal <- is_horizontal(data, mapping)
   if(horizontal) {
-    x <- eval_data_col(data, mapping$x)
-    y <- eval_data_col(data, mapping$y)
-    weight <- eval_data_col(data, mapping$weight)
-    l <- c()
-    for (i in unique(y)) {
-      l <- c(l, text_fn(x[y == i], weight[y == i]))
-    }
-    res <- data.frame(
-      y = unique(y),
-      label = l,
-      stringsAsFactors = FALSE
+    res <- ddply(
+      data.frame(
+        x = eval_data_col(data, mapping$x),
+        y = eval_data_col(data, mapping$y),
+        weight = eval_data_col(data, mapping$weight) %||% 1,
+        stringsAsFactors = FALSE
+      ),
+      c('y'),
+      plyr::here(summarize),
+      label = text_fn(x, weight)
     )
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) col <- "y"
@@ -1814,5 +1812,4 @@ mean_sd <- function(x, weights = NULL) {
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
   paste0("Mean: ", m, " (", sd, ")")
 }
-
 
