@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggtable.R
 \name{ggtable}
 \alias{ggtable}
-\title{Plot an outcome with several potential explanotory variables}
+\title{Plot cross-tabulated tables of discrete variables}
 \usage{
 ggtable(
   data,
@@ -31,8 +31,8 @@ weights (see examples)}
 \item{...}{additional arguments passed to \code{\link{ggduo}} (see examples)}
 }
 \description{
-\code{ggtable} is a variant of \code{\link{ggduo}} for plotting
-an outcome variable with several potential explanatory variables.
+\code{ggtable} is a variant of \code{\link{ggduo}} for quick
+cross-tabulated tables of discrete variables.
 }
 \examples{
 data(tips, package = "reshape")
@@ -46,6 +46,17 @@ ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres")
 
 # if continuous variables are provided, just displaying some summary statistics
 ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip"))
+
+# specifying weights
+d <- as.data.frame(Titanic)
+ggtable(
+  d,
+  "Survived",
+  c("Class", "Sex", "Age"),
+  mapping = aes(weight = Freq),
+  cells = "row.prop",
+  fill = "stdres"
+)
 }
 \author{
 Joseph Larmarange \email{joseph@larmarange.net}

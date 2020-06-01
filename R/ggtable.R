@@ -1,7 +1,7 @@
-#' Plot an outcome with several potential explanotory variables
+#' Plot cross-tabulated tables of discrete variables
 #'
-#' \code{ggtable} is a variant of \code{\link{ggduo}} for plotting
-#' an outcome variable with several potential explanatory variables.
+#' \code{ggtable} is a variant of \code{\link{ggduo}} for quick
+#' cross-tabulated tables of discrete variables.
 #'
 #' @param data dataset to be used, can have both categorical and
 #'   numerical variables
@@ -25,6 +25,17 @@
 #'
 #' # if continuous variables are provided, just displaying some summary statistics
 #' ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip"))
+#'
+#' # specifying weights
+#' d <- as.data.frame(Titanic)
+#' ggtable(
+#'   d,
+#'   "Survived",
+#'   c("Class", "Sex", "Age"),
+#'   mapping = aes(weight = Freq),
+#'   cells = "row.prop",
+#'   fill = "stdres"
+#' )
 ggtable <- function(
   data,
   columnsX = 1:ncol(data),
