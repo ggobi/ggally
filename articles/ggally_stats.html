@@ -60,6 +60,9 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
@@ -190,6 +193,73 @@
   <span class="fu">theme_minimal</span>()</pre></body></html></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 </div>
+<div id="stat_prop" class="section level2">
+<h2 class="hasAnchor">
+<a href="#stat_prop" class="anchor"></a><code>stat_prop()</code>
+</h2>
+<p><code><a href="../reference/stat_prop.html">stat_prop()</a></code> is a variation of <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">ggplot2::stat_count()</a></code> allowing to compute custom proportions according to the <strong>by</strong> aesthetic defining the denominator (i.e. all proportions for a same value of <strong>by</strong> will sum to 1). The <strong>by</strong> aesthetic should be a factor. Therefore, <code><a href="../reference/stat_prop.html">stat_prop()</a></code> requires the <strong>by</strong> aesthetic and this <strong>by</strong> aesthetic should be a factor.</p>
+<div id="adding-labels-on-a-percent-stacked-bar-plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#adding-labels-on-a-percent-stacked-bar-plot" class="anchor"></a>adding labels on a percent stacked bar plot</h3>
+<p>When using <code>position = "fill"</code> with <code>geom_bar()</code>, you can produce a percent stacked bar plot. However, the proportions corresponding to the <strong>y</strong> axis are not directly accessible using only <code>ggplot2</code>. With <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, you can esily add them on the plot.</p>
+<p>In the following example, we indicated <code>stat = "prop"</code> to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code> to use <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, we defined the <strong>by</strong> aesthetic (here we want to compute the proportions separtely for each value of <strong>x</strong>), and we also used <code><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">ggplot2::position_fill()</a></code> when calling <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code>.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">Titanic</span>)
+<span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">d</span>) +
+  <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Class</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Survived</span>, <span class="kw">weight</span> <span class="kw">=</span> <span class="no">Freq</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="no">Class</span>) +
+  <span class="fu">geom_bar</span>(<span class="kw">position</span> <span class="kw">=</span> <span class="st">"fill"</span>) +
+  <span class="fu">geom_text</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"prop"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_fill</span>(<span class="fl">.5</span>))
+<span class="no">p</span></pre></body></html></div>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
+<p>Note that <code><a href="../reference/stat_prop.html">stat_prop()</a></code> has properly taken into account the <strong>weight</strong> aesthetic.</p>
+<p><code><a href="../reference/stat_prop.html">stat_prop()</a></code> is also compatible with faceting. In that case, proportions are computed separately in each facet.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">p</span> + <span class="fu">facet_grid</span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="fu">vars</span>(<span class="no">Sex</span>))</pre></body></html></div>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
+</div>
+<div id="displaying-proportions-of-the-total" class="section level3">
+<h3 class="hasAnchor">
+<a href="#displaying-proportions-of-the-total" class="anchor"></a>displaying proportions of the total</h3>
+<p>If you want to display proportions of the total, simply map the <strong>by</strong> aesthetic to <code>1</code>. Here an example using a stacked bar chart.</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">d</span>) +
+  <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Class</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Survived</span>, <span class="kw">weight</span> <span class="kw">=</span> <span class="no">Freq</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fl">1</span>) +
+  <span class="fu">geom_bar</span>() +
+  <span class="fu">geom_text</span>(
+    <span class="fu">aes</span>(<span class="kw">label</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>(<span class="fu">after_stat</span>(<span class="no">prop</span>), <span class="kw">accuracy</span> <span class="kw">=</span> <span class="fl">1</span>)),
+    <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"prop"</span>,
+    <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_stack</span>(<span class="fl">.5</span>)
+ )</pre></body></html></div>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
+</div>
+<div id="a-dodged-bar-plot-to-compare-two-distributions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#a-dodged-bar-plot-to-compare-two-distributions" class="anchor"></a>a dodged bar plot to compare two distributions</h3>
+<p>A dodged bar plot could be used to compare two distributions.</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">d</span>) +
+  <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Class</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Sex</span>, <span class="kw">weight</span> <span class="kw">=</span> <span class="no">Freq</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="no">Sex</span>) +
+  <span class="fu">geom_bar</span>(<span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>)</pre></body></html></div>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
+<p>On the previous graph, it is difficult to see if first class is over- or under-represented among women, due to the fact they were much more men on the boat. <code><a href="../reference/stat_prop.html">stat_prop()</a></code> could be used to adjust the graph by displaying instead the proportion within each category (i.e. here the proportion by sex).</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">d</span>) +
+  <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Class</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Sex</span>, <span class="kw">weight</span> <span class="kw">=</span> <span class="no">Freq</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="no">Sex</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fu">after_stat</span>(<span class="no">prop</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"prop"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
+  <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>)</pre></body></html></div>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
+<p>The same example with labels:</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">d</span>) +
+  <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Class</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Sex</span>, <span class="kw">weight</span> <span class="kw">=</span> <span class="no">Freq</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="no">Sex</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fu">after_stat</span>(<span class="no">prop</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"prop"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
+  <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) +
+  <span class="fu">geom_text</span>(
+    <span class="kw">mapping</span> <span class="kw">=</span> <span class="fu">aes</span>(
+      <span class="kw">label</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>(<span class="fu">after_stat</span>(<span class="no">prop</span>), <span class="kw">accuracy</span> <span class="kw">=</span> <span class="fl">.1</span>),
+      <span class="kw">y</span> <span class="kw">=</span> <span class="fu">after_stat</span>(<span class="fl">0.01</span>)
+    ),
+    <span class="kw">vjust</span> <span class="kw">=</span> <span class="st">"bottom"</span>,
+    <span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_dodge</span>(<span class="fl">.9</span>),
+    <span class="kw">stat</span> <span class="kw">=</span> <span class="st">"prop"</span>
+  )</pre></body></html></div>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
+</div>
+</div>
 <div id="stat_weighted_mean" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stat_weighted_mean" class="anchor"></a><code>stat_weighted_mean()</code>
@@ -202,51 +272,51 @@
 <li><strong>denominator</strong></li>
 </ul>
 <p>Let’s take an example. The following plot shows all tips received accrding to the day of the week.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">tips</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"reshape"</span>)
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">tips</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"reshape"</span>)
 <span class="fu">ggplot</span>(<span class="no">tips</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">tip</span>) +
   <span class="fu">geom_point</span>()</pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 <p>To plot their mean value per day, simply use <code><a href="../reference/stat_weighted_mean.html">stat_weighted_mean()</a></code>.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">tip</span>) +
   <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>()</pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
 <p>We can specify the geometry we want using <code>geom</code> argument. Note that for lines, we need to specify the <strong>group</strong> aesthetic as well.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">tip</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="fl">1</span>) +
   <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"line"</span>)</pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
 <p>An alternative is to specify the statistic in <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">ggplot2::geom_line()</a></code>.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">tip</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="fl">1</span>) +
   <span class="fu">geom_line</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"weighted_mean"</span>)</pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
 <p>Of course, it could be use with other geometries. Here a bar plot.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">tips</span>) +
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">tips</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">tip</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">sex</span>) +
   <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"bar"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
   <span class="fu">ylab</span>(<span class="st">"mean tip"</span>)
 <span class="no">p</span></pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
 <p>It is very easy to add facets. In that case, computation will be done separately for each facet.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">p</span> + <span class="fu">facet_grid</span>(<span class="kw">rows</span> <span class="kw">=</span> <span class="fu">vars</span>(<span class="no">smoker</span>))</pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">p</span> + <span class="fu">facet_grid</span>(<span class="kw">rows</span> <span class="kw">=</span> <span class="fu">vars</span>(<span class="no">smoker</span>))</pre></body></html></div>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
 <p><code><a href="../reference/stat_weighted_mean.html">stat_weighted_mean()</a></code> could be also used for computing proportions as a proportion is technically a mean of binary values (0 or 1).</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu">ggplot</span>(<span class="no">tips</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">smoker</span> <span class="kw">==</span> <span class="st">"Yes"</span>), <span class="kw">fill</span> <span class="kw">=</span> <span class="no">sex</span>) +
   <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"bar"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
   <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) +
   <span class="fu">ylab</span>(<span class="st">"proportion of smoker"</span>)</pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-19-1.png" width="576"></p>
 <p>Finally, you can use the <strong>weight</strong> aesthetic to indicate weights to take into account for computing means / proportions.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">Titanic</span>)
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">Titanic</span>)
 <span class="fu">ggplot</span>(<span class="no">d</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Class</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="no">Survived</span> <span class="kw">==</span> <span class="st">"Yes"</span>), <span class="kw">weight</span> <span class="kw">=</span> <span class="no">Freq</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Sex</span>) +
   <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"weighted_mean"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
   <span class="fu">scale_y_continuous</span>(<span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="no"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) +
   <span class="fu">labs</span>(<span class="kw">y</span> <span class="kw">=</span> <span class="st">"Proportion who survived"</span>)</pre></body></html></div>
-<p><img src="ggally_stats_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
+<p><img src="ggally_stats_files/figure-html/unnamed-chunk-20-1.png" width="576"></p>
 </div>
   </div>
 
