@@ -77,12 +77,21 @@ See also `ggally_smooth()` for more options.
 
 ### with 2x discrete variables
 
+#### `ggally_colbar()`
+
+```{r}
+ggally_colbar(tips, aes(x = day, y = smoker))
+```
+
+Note: the **colour** aesthetic is not taken into account.
+
 #### `ggally_autopoint()`
 
 ```{r}
 ggally_autopoint(tips, aes(x = day, y = smoker))
 ggally_autopoint(tips, aes(x = day, y = smoker, colour = time))
 ```
+
 
 #### `ggally_count()`
 
@@ -114,6 +123,14 @@ ggally_facetbar(tips, aes(x = day, y = smoker, colour = time))
 ggally_ratio(tips, aes(x = day, y = smoker))
 ggally_ratio(tips, aes(x = day, y = smoker, colour = time))
 ```
+
+#### `ggally_rowbar()`
+
+```{r}
+ggally_rowbar(tips, aes(x = day, y = smoker))
+```
+
+Note: the **colour** aesthetic is not taken into account.
 
 #### `ggally_table()`
 
@@ -172,11 +189,11 @@ ggally_dot_no_facet(tips, aes(x = total_bill, y = day, colour = time))
 
 See also `ggally_dot_and_box()`.
 
-#### `ggally_facetdensity()`
+#### `ggally_facetdensitystrip()`
 
 ```{r}
-ggally_facetdensity(tips, aes(x = total_bill, y = day))
-ggally_facetdensity(tips, aes(x = total_bill, y = day, colour = time))
+ggally_facetdensitystrip(tips, aes(x = total_bill, y = day))
+ggally_facetdensitystrip(tips, aes(x = total_bill, y = day, colour = time))
 ```
 
 #### `ggally_facethist()`
