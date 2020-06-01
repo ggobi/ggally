@@ -101,6 +101,15 @@ ggally_cross(tips, aes(x = day, y = smoker, colour = smoker))
 
 Note: **colour** aesthetic is taken into account only if it corresponds to **x** or to **y**.
 
+#### `ggally_crosstable()`
+
+```{r}
+ggally_crosstable(tips, aes(x = day, y = smoker))
+ggally_crosstable(tips, aes(x = day, y = smoker), cells = "col.prop", fill = "stdres")
+```
+
+Note: **colour** aesthetic is not taken into account.
+
 #### `ggally_facetbar()`
 
 ```{r}
@@ -185,6 +194,15 @@ ggally_facetdensity(tips, aes(x = total_bill, y = day, colour = time))
 ggally_facethist(tips, aes(x = total_bill, y = day))
 ggally_facethist(tips, aes(x = total_bill, y = day, colour = time))
 ```
+
+#### `ggally_summarise_by()`
+
+```{r}
+ggally_summarise_by(tips, aes(x = total_bill, y = day))
+ggally_summarise_by(tips, aes(x = total_bill, y = day, colour = day))
+```
+
+Note: colour aesthetic is kept only if corresponding to the discrete axis.
 
 #### `ggally_trends()`
 

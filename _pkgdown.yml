@@ -49,6 +49,7 @@ reference:
   - ggally_count
   - ggally_cor
   - ggally_cross
+  - ggally_crosstable
   - ggally_density
   - ggally_densityDiag
   - ggally_denstrip
@@ -63,18 +64,20 @@ reference:
   - ggally_ratio
   - ggally_smooth
   - ggally_statistic
+  - ggally_summarise_by
   - ggally_table
   - ggally_text
   - ggally_trends
 
 - title: Major Plotting Functions
   desc: >
-    More details in `vignette("ggcoef")` and `vignette("ggsurv")`
+    More details in `vignette("ggcoef")`, `vignette("ggsurv")` and `vignette("ggtable")`
   contents:
   - ggcoef
   - ggcorr
   - ggparcoord
   - ggsurv
+  - ggtable
 
 - title: Modeling Diagnostics
   desc: >

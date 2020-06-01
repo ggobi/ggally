@@ -12,9 +12,15 @@ GGally (development version)
 `ggally_cross()` (@larmarange, #326)
 * Plot the number of observations by using square points with proportional areas.
 
+`ggally_crosstable()` (@larmarange, #351)
+* Display a cross-tabulated table.
+
 `ggally_statistic()` (#327)
 * A generialized version of `ggally_cor()`
 * Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
+
+`ggally_summarise_by()`
+* Display summary statisctics of a continuous variable for each value of a discrete variable.
 
 `ggally_table()` (@larmarange, #326)
 * Plot the number of observations as a table.
@@ -58,6 +64,7 @@ GGally (development version)
 
 Website
 * Updated to use `pkgdown` (#335)
+
 
 
 GGally 1.5.0
