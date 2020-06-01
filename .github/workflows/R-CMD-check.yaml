@@ -69,8 +69,16 @@ jobs:
       - name: Install dependencies
         run: |
           options(install.packages.check.source = 'no')
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
+          if (system.file(package = "rcmdcheck") == "") {
+            install.packages("rcmdcheck")
+          }
+          update.packages(
+            oldPkgs = c(
+              remotes::local_package_deps(dependencies = TRUE),
+              "rcmdcheck"
+            ),
+            ask = FALSE
+          )
         shell: Rscript {0}
 
       - name: Session info
