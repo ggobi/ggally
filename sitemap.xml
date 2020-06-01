@@ -73,6 +73,9 @@
     <loc>https://ggobi.github.io/ggally/reference/ggally_cross.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggally_crosstable.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/ggally_density.html</loc>
   </url>
   <url>
@@ -139,6 +142,9 @@
     <loc>https://ggobi.github.io/ggally/reference/ggally_statistic.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggally_summarise_by.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/ggally_table.html</loc>
   </url>
   <url>
@@ -197,6 +203,9 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/ggsurv.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggtable.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/ggts.html</loc>
@@ -338,6 +347,9 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/articles/ggsurv.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggtable.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/articles/glyph.html</loc>
