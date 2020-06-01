@@ -61,6 +61,7 @@ GGally (development version)
 
 `ggscatmat()`
 * `lowertriangle()` now preallocates it's memory usage for a 2-5x speed improvement. (@vlepori, #328)
+* Fixed `facet`'ing error where the factor order was not preserved. This error caused the facets to be alphabetically sorted, cause plots to appear in unexpected locations. (#355)
 
 Website
 * Updated to use `pkgdown` (#335)
