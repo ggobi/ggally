@@ -62,24 +62,21 @@ jobs:
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "options(install.packages.check.source = 'no'); remotes::install_github('r-hub/sysreqs')"
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
       - name: Install dependencies
+        if: runner.os != 'Windows'
         run: |
-          options(install.packages.check.source = 'no')
-          .libPaths(Sys.getenv("R_LIBS_USER"))
-          if (system.file(package = "rcmdcheck") == "") {
-            install.packages("rcmdcheck")
-          }
-          update.packages(
-            oldPkgs = c(
-              remotes::local_package_deps(dependencies = TRUE),
-              "rcmdcheck"
-            ),
-            ask = FALSE
-          )
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          remotes::install_deps(dependencies = TRUE, type = "binary")
+          remotes::install_cran("rcmdcheck", type = "binary")
         shell: Rscript {0}
 
       - name: Session info
