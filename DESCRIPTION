@@ -55,7 +55,6 @@ Suggests:
     scagnostics,
     sna (>= 2.3-2),
     survival,
-    packagedocs (>= 0.4.0),
     rmarkdown,
     roxygen2,
     testthat,
