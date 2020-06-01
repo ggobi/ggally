@@ -134,6 +134,5 @@ ggplot(tips) +
   aes(x = tip, y = as.character(day), size = after_stat(observed)) +
   stat_cross(alpha = .1, color = "blue") +
   scale_size_area(max_size = 12)
-
 }
 \keyword{datasets}
