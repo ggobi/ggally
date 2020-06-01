@@ -1726,7 +1726,6 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
 #'
 #'
-#' @importFrom scales label_percent
 ggally_summarise_by <- function(
   data,
   mapping,
@@ -1814,5 +1813,4 @@ mean_sd <- function(x, weights = NULL) {
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
   paste0("Mean: ", m, " (", sd, ")")
 }
-
 
