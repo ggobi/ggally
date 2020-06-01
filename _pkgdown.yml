@@ -46,6 +46,7 @@ reference:
   - ggally_barDiag
   - ggally_blank
   - ggally_box
+  - ggally_colbar
   - ggally_count
   - ggally_cor
   - ggally_cross
@@ -58,6 +59,7 @@ reference:
   - ggally_dot_and_box
   - ggally_facetbar
   - ggally_facetdensity
+  - ggally_facetdensitystrip
   - ggally_facethist
   - ggally_na
   - ggally_points
@@ -71,8 +73,9 @@ reference:
 
 - title: Major Plotting Functions
   desc: >
-    More details in `vignette("ggcoef")`, `vignette("ggsurv")` and `vignette("ggtable")`
+    More details in `vignette("ggbivariate")`, `vignette("ggcoef")`, `vignette("ggsurv")`, and `vignette("ggtable")`
   contents:
+  - ggbivariate
   - ggcoef
   - ggcorr
   - ggparcoord
@@ -101,7 +104,7 @@ reference:
   - add_ref_boxes
   - add_ref_lines
   - glyphplot
-  # - rescale01
+  - rescale01
 
 - title: Network Plots
   desc: >
@@ -116,25 +119,27 @@ reference:
     More details in `vignette("ggally_stats")`
   contents:
   - stat_cross
+  - stat_prop
   - stat_weighted_mean
 
 - title: "ggmatrix() Helpers"
   contents:
-  - wrap_fn_with_param_arg
   - eval_data_col
-  - print.ggmatrix
+  - fn_switch
   - ggmatrix_gtable
+  - getPlot
   - grab_legend
   - gglegend
-  - putPlot
-  - getPlot
-  - +.gg
+  - ggmatrix_progress
   - mapping_color_to_fill
   - mapping_swap_x_y
-  - fn_switch
-  - str.ggmatrix
+  - print.ggmatrix
   - print_if_interactive
-  - ggmatrix_progress
+  - putPlot
+  - remove_color_unless_equal
+  - str.ggmatrix
+  - wrap_fn_with_param_arg
+  - +.gg
 
 - title: Utilities
   contents:
