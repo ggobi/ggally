@@ -14,7 +14,8 @@ stat_cross(
   ...,
   na.rm = TRUE,
   show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = TRUE,
+  keep.zero.cells = FALSE
 )
 }
 \arguments{
@@ -62,6 +63,8 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{keep.zero.cells}{If \code{TRUE}, cells with no observations are kept.}
 }
 \description{
 Computes statistics of a 2-dimensional matrix using \code{\link[broom]{augment.htest}}
@@ -96,7 +99,10 @@ ggplot(d) +
 
 # custom shape and fill colour based on chi-squared residuals
 ggplot(d) +
-  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed), fill = after_stat(stdres)) +
+  aes(
+    x = Class, y = Survived, weight = Freq,
+    size = after_stat(observed), fill = after_stat(stdres)
+  ) +
   stat_cross(shape = 22) +
   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
   scale_size_area(max_size = 20)

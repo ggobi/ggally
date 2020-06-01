@@ -1688,3 +1688,126 @@ ggally_autopointDiag <- function(data, mapping, ...) {
   mapping$y <- mapping$x
   ggally_autopoint(data = data, mapping = mapping, ...)
 }
+
+
+#' Summarise a continuous variable by each value of a discrete variable
+#'
+#' Display summary statisctics of a continuous variable for each value of a discrete variable.
+#'
+#' @param data data set using
+#' @param mapping aesthetics being used
+#' @param text_fn function that takes an x and weights and returns a text string
+#' @param text_fn_vertical function that takes an x and weights and returns a text string, used when \code{x} is discrete and \code{y} is continous. If not provided, will use \code{text_fn}, replacing spaces by carriage returns.
+#' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
+#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @keywords hplot
+#' @export
+#' @examples
+#' data(tips, package = "reshape")
+#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day))
+#' ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill))
+#'
+#' # colour is kept only if equal to the discrete variable
+#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = day))
+#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = sex))
+#' ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill, color = day))
+#'
+#' # custom text size
+#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6)
+#'
+#' # change statistic to display
+#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = mean_sd)
+#'
+#' # custom stat function
+#' weighted_sum <- function(x, weights = NULL) {
+#'   if (is.null(weights)) weights <- 1
+#'   paste0("Total : ", round(sum(x * weights, na.rm = TRUE), digits = 1))
+#' }
+#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
+ggally_summarise_by <- function(
+  data,
+  mapping,
+  text_fn = median_iqr,
+  text_fn_vertical = NULL,
+  ...)
+{
+  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
+  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+
+  horizontal <- is_horizontal(data, mapping)
+  if(horizontal) {
+    res <- ddply(
+      data.frame(
+        x = eval_data_col(data, mapping$x),
+        y = eval_data_col(data, mapping$y),
+        weight = eval_data_col(data, mapping$weight) %||% 1,
+        stringsAsFactors = FALSE
+      ),
+      c('y'),
+      plyr::here(summarize),
+      label = text_fn(x, weight)
+    )
+    # keep colour if matching the discrete variable
+    if (mapping_string(mapping$colour) == mapping_string(mapping$y)) col <- "y"
+    else col <- NULL
+
+    ggplot(res) +
+      aes_string(y = "y", x = "1", label = "label", colour = col) +
+      geom_text(...) +
+      xlab("") + ylab(mapping_string(mapping$y)) +
+      #theme_minimal() +
+      theme(
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        legend.position = "none",
+        panel.background = element_blank(),
+        panel.border = element_rect(
+          linetype = "solid",
+          color = theme_get()$panel.background$fill,
+          fill = "transparent"
+        )
+      )
+  } else {
+    if (is.null(text_fn_vertical)) {
+      text_fn_vertical <- function(x, weights) {
+        gsub(" ", "\n", text_fn(x, weights))
+      }
+    }
+    ggally_summarise_by(data, mapping_swap_x_y(mapping), text_fn_vertical, ...) +
+      coord_flip() +
+      theme(
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = theme_get()$axis.text,
+        axis.ticks.x = theme_get()$axis.ticks
+      ) +
+      theme(axis.text.x = element_text(size = 9))
+  }
+
+}
+
+#' @rdname ggally_summarise_by
+#' @param x a numeric vector
+#' @param weights an optionnal numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.
+#' @details
+#' \code{median_iqr} computes median and interquartile range.
+#' @export
+median_iqr <- function(x, weights = NULL) {
+  require_namespaces("Hmisc")
+  s <- round(Hmisc::wtd.quantile(x, weights = weights, probs = c(.25, .5, .75), na.rm = TRUE), digits = 1)
+  paste0("Median: ", s[2], " [", s[1], "-", s[3], "]")
+}
+
+#' @rdname ggally_summarise_by
+#' @details
+#' \code{mean_sd} computes mean and standard deviation.
+#' @export
+mean_sd <- function(x, weights = NULL) {
+  require_namespaces("Hmisc")
+  m <- round(Hmisc::wtd.mean(x, weights = weights, na.rm = TRUE), digits = 1)
+  sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
+  paste0("Mean: ", m, " (", sd, ")")
+}
+

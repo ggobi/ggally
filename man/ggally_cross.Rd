@@ -26,6 +26,7 @@ be added (see examples).
 \examples{
 data(tips, package = "reshape")
 ggally_cross(tips, mapping = aes(x = smoker, y = sex))
+ggally_cross(tips, mapping = aes(x = day, y = time))
 
 # Custom max size
 ggally_cross(tips, mapping = aes(x = smoker, y = sex)) +
