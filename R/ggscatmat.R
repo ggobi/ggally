@@ -231,7 +231,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
        ## b/w version
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
         data.frame(xlab = names(dn)[i], ylab = names(dn)[i],
-                   x = dn[, i])
+                   x = dn[, i], stringsAsFactors = TRUE)
       }))
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab == names(dn)[m])
@@ -249,7 +249,8 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
        ## do the colored version
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
         data.frame(xlab = names(dn)[i], ylab = names(dn)[i],
-                   x = dn[, i], colorcolumn = data[, which(colnames(data) == color)])
+                   x = dn[, i], colorcolumn = data[, which(colnames(data) == color)],
+                   stringsAsFactors = TRUE)
       }))
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab == names(dn)[m])
@@ -286,7 +287,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}.
-#' @param color an option to group the dataset by the factor variable and color them by different colors. 
+#' @param color an option to group the dataset by the factor variable and color them by different colors.
 #'   Defaults to \code{NULL}, i.e. no coloring. If supplied, it will be converted to a factor.
 #' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
 #' @param corMethod method argument supplied to \code{\link[stats]{cor}}
