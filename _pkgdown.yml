@@ -1,10 +1,10 @@
 url: https://ggobi.github.io/ggally
 
-# template:
-#   params:
-#     docsearch:
-#       api_key: API_KEY
-#       index_name: INDEX_NAME
+template:
+  params:
+    docsearch:
+      api_key: "038759c28b1c284f4b637d2a8c366640"
+      index_name: "ggally"
 
 authors:
   Barret Schloerke:
