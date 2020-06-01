@@ -1,0 +1,110 @@
+---
+title: "ggbivariate(): Plot an outcome with several potential explanotory variables"
+output: rmarkdown::html_vignette
+author: Joseph Larmarange
+date: May 16, 2016
+vignette: >
+  %\VignetteIndexEntry{ggbivariate(): Plot an outcome with several potential explanotory variables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(GGally)
+```
+
+
+# `GGally::ggbivariate()`
+
+The purpose of this function is to easily plot a visualisation of the bivariate relation betwen one outcome and several explanatory variables.
+
+## Basic example
+
+Simply indicate the outcome and the explanotory variables. Both could be discrete or continuous.
+
+```{r}
+data(tips, package = "reshape")
+ggbivariate(tips, outcome = "smoker", explanatory = c("day", "time", "sex", "tip"))
+```
+
+```{r}
+ggbivariate(tips, outcome = "total_bill", explanatory = c("day", "time", "sex", "tip"))
+```
+
+If no explanatory variables are provided, will take all available variables other than the outcome.
+
+```{r}
+ggbivariate(tips, "smoker")
+```
+
+
+## Customize plot titlle and legend title
+
+```{r}
+ggbivariate(
+  tips, "smoker", c("day", "time", "sex", "tip"),
+  title = "Custom title"
+) +
+  labs(fill = "Smoker ?")
+```
+
+## Customize fill colour scale
+
+```{r}
+ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")) +
+  scale_fill_brewer()
+```
+
+## Customize labels
+
+```{r}
+ggbivariate(
+  tips, "smoker", c("day", "time", "sex", "tip"),
+  rowbar_args = list(
+    colour = "white",
+    size = 4,
+    fontface = "bold",
+    label_format = scales::label_percent(accurary = 1)
+  )
+)
+```
+
+## Choose the sub-plot from which to get the legend
+
+```{r}
+ggbivariate(tips, "smoker")
+ggbivariate(tips, "smoker", legend = 3)
+```
+
+## Change theme
+
+```{r}
+ggbivariate(tips, "smoker") + theme_light()
+```
+
+## Use mapping to indicate weights
+
+```{r}
+d <- as.data.frame(Titanic)
+ggbivariate(d, "Survived", mapping = aes(weight = Freq))
+```
+
+## Use types to customize types of subplots
+
+```{r}
+ggbivariate(
+  tips, 
+  outcome = "smoker", 
+  explanatory = c("day", "time", "sex", "tip"),
+  types = list(comboVertical = "autopoint")
+)
+```
+
+For more customisation options, you could directly use `ggduo()` (see also `vignette("ggduo")`).
