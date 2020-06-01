@@ -69,6 +69,7 @@ jobs:
       - name: Install dependencies
         run: |
           options(install.packages.check.source = 'no')
+          .libPaths(Sys.getenv("R_LIBS_USER"))
           if (system.file(package = "rcmdcheck") == "") {
             install.packages("rcmdcheck")
           }
