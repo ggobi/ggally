@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggtable.R
 \name{ggtable}
 \alias{ggtable}
-\title{Plot cross-tabulated tables of discrete variables}
+\title{Cross-tabulated tables of discrete variables}
 \usage{
 ggtable(
   data,
@@ -23,7 +23,7 @@ numerical variables}
 
 \item{cells}{Which statistic should be displayed in table cells?}
 
-\item{fill}{Wich statistic should be used for filling table cells?}
+\item{fill}{Which statistic should be used for filling table cells?}
 
 \item{mapping}{additional aesthetic to be used, for example to indicate
 weights (see examples)}
@@ -59,5 +59,5 @@ ggtable(
 )
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }

@@ -54,6 +54,6 @@ ggally_trends(
 
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }
 \keyword{hplot}

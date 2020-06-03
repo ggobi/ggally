@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggfacet.R
 \name{ggfacet}
 \alias{ggfacet}
-\title{ggfacet - single ggplot2 plot matrix with facet_grid}
+\title{Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}}
 \usage{
 ggfacet(
   data,
@@ -39,7 +39,7 @@ ggfacet(
 \item{scales}{parameter supplied to \code{ggplot2::\link[ggplot2]{facet_grid}}. Default behavior is \code{"free"}}
 }
 \description{
-ggfacet - single ggplot2 plot matrix with facet_grid
+Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}
 }
 \examples{
 # Small function to display plots only if it's interactive

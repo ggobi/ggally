@@ -1,4 +1,4 @@
-#' Plot cross-tabulated tables of discrete variables
+#' Cross-tabulated tables of discrete variables
 #'
 #' \code{ggtable} is a variant of \code{\link{ggduo}} for quick
 #' cross-tabulated tables of discrete variables.
@@ -7,11 +7,11 @@
 #'   numerical variables
 #' @param columnsX,columnsY names or positions of which columns are used to make plots. Defaults to all columns.
 #' @param cells Which statistic should be displayed in table cells?
-#' @param fill Wich statistic should be used for filling table cells?
+#' @param fill Which statistic should be used for filling table cells?
 #' @param mapping additional aesthetic to be used, for example to indicate
 #'   weights (see examples)
 #' @param ... additional arguments passed to \code{\link{ggduo}} (see examples)
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @export
 #' @examples
 #' data(tips, package = "reshape")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggmatrix_progress.R
 \name{ggmatrix_progress}
 \alias{ggmatrix_progress}
-\title{ggmatrix default progress bar}
+\title{\code{\link{ggmatrix}} default progress bar}
 \usage{
 ggmatrix_progress(
   format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ",
@@ -18,7 +18,7 @@ ggmatrix_progress(
 function that accepts a plot matrix as the first argument and \code{...} for future expansion. Internally, the plot matrix is used to determine the total number of plots for the progress bar.
 }
 \description{
-ggmatrix default progress bar
+\code{\link{ggmatrix}} default progress bar
 }
 \examples{
 p_ <- GGally::print_if_interactive

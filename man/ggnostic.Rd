@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggnostic}
 \alias{ggnostic}
-\title{ggnostic - Plot matrix of statistical model diagnostics}
+\title{Plot matrix of statistical model diagnostics}
 \usage{
 ggnostic(
   model,
@@ -49,11 +49,11 @@ ggnostic(
 \item{data}{data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information}
 }
 \description{
-ggnostic - Plot matrix of statistical model diagnostics
+Plot matrix of statistical model diagnostics
 }
 \section{`columnsY`}{
 
-\code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
+\code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{\link{ggnostic}}.
 
 \describe{
   \item{.resid}{Residuals}

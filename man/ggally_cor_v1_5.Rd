@@ -2,7 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \name{ggally_cor_v1_5}
 \alias{ggally_cor_v1_5}
-\title{Correlation from the Scatter Plot (deprecated)}
+\title{Correlation value plot}
 \usage{
 ggally_cor_v1_5(
   data,
@@ -71,6 +71,6 @@ Estimate correlation from the given data.
 \code{\link{ggally_cor}}
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

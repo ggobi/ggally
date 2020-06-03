@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggsurv.R
 \name{ggsurv}
 \alias{ggsurv}
-\title{Survival curves with ggplot2}
+\title{Survival curves}
 \usage{
 ggsurv(
   s,
@@ -32,7 +32,7 @@ for single stratum objects and \code{FALSE} for multiple strata objects.}
 \item{plot.cens}{mark the censored observations?}
 
 \item{surv.col}{colour of the survival estimate. Defaults to black for
-one stratum, and to the default \code{ggplot2} colours for multiple
+one stratum, and to the default \pkg{ggplot2} colours for multiple
 strata. Length of vector with colour names should be either 1 or equal
 to the number of strata.}
 
@@ -66,7 +66,7 @@ grey of \code{ggplot2} but will be white with borders around the plot.}
 An object of class \code{ggplot}
 }
 \description{
-This function produces Kaplan-Meier plots using \code{ggplot2}.
+This function produces Kaplan-Meier plots using \pkg{ggplot2}.
 As a first argument it needs a \code{survfit} object, created by the
 \code{survival} package. Default settings differ for single stratum and
 multiple strata objects.
@@ -130,5 +130,5 @@ if (require(survival) && require(scales)) {
 }
 }
 \author{
-Edwin Thoen \email{edwinthoen@gmail.com}
+Edwin Thoen
 }

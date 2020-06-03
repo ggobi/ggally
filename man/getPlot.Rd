@@ -3,14 +3,14 @@
 \name{getPlot}
 \alias{getPlot}
 \alias{[.ggmatrix}
-\title{getPlot}
+\title{Subset a \code{\link{ggmatrix}} object}
 \usage{
 getPlot(pm, i, j)
 
 \method{[}{ggmatrix}(pm, i, j, ...)
 }
 \arguments{
-\item{pm}{ggmatrix object to select from}
+\item{pm}{\code{\link{ggmatrix}} object to select from}
 
 \item{i}{row from the top}
 
@@ -26,7 +26,10 @@ Retrieves the ggplot object at the desired location.
  plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
  plotMatrix2[1, 2]
 }
+\seealso{
+\code{\link{putPlot}}
+}
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

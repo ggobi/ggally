@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_ratio}
 \alias{ggally_ratio}
-\title{Plots a mosaic plot}
+\title{Mosaic plot}
 \usage{
 ggally_ratio(
   data,
@@ -37,6 +37,6 @@ ggally_ratio(
 ) + ggplot2::theme(aspect.ratio = 4/2)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_denstrip}
 \alias{ggally_denstrip}
-\title{Plots a tile plot with facets}
+\title{Tile plot with facets}
 \usage{
 ggally_denstrip(data, mapping, ...)
 }
@@ -14,7 +14,7 @@ ggally_denstrip(data, mapping, ...)
 \item{...}{other arguments being sent to stat_bin}
 }
 \description{
-Make Tile Plot as densely as possible.
+Displays a Tile Plot as densely as possible.
 }
 \examples{
  data(tips, package = "reshape")
@@ -26,6 +26,6 @@ Make Tile Plot as densely as possible.
  ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

@@ -38,7 +38,7 @@ ggtable(tips, c("smoker", "time"), c("day", "time", "sex"))
 
 ## Proportions
 
-The `cells` argument allows you to control what to dispay. For proportions of the total, row proportions or columns proportions, simply use `"prop"`, `"row.prop"` or `"col.prop"`.
+The `cells` argument allows you to control what to display. For proportions of the total, row proportions or columns proportions, simply use `"prop"`, `"row.prop"` or `"col.prop"`.
 
 ```{r}
 ggtable(tips, "smoker", c("day", "time", "sex"), cells = "prop") + ggtitle("Proportions of total")
@@ -50,7 +50,7 @@ ggtable(tips, "smoker", c("day", "time", "sex"), cells = "prop") + ggtitle("Colu
 
 Chi-square standardized residuals indicates which cells are over- or underrepresented compared to what would be expected under the independence hypothesis. If the standardized residual is less than -2, the cell’s observed frequency is less than the expected frequency. Greater than 2 and the observed frequency is greater than the expected frequency. Values lower than -3 or higher than 3 indicates a strong effect.
 
-To fill cells with standradized residuals, simply indicate `fill = "stdres"`.
+To fill cells with standardized residuals, simply indicate `fill = "stdres"`.
 
 ```{r}
 ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres")

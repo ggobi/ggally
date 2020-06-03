@@ -60,10 +60,12 @@ Suggests:
     roxygen2,
     testthat,
     crosstalk,
-    knitr
+    knitr,
+    spelling
 Roxygen: list(markdown = FALSE)
 RoxygenNote: 7.1.0
 VignetteBuilder: knitr
 SystemRequirements: openssl
 Encoding: UTF-8
 RdMacros: lifecycle
+Language: en-US

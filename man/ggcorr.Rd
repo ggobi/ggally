@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggcorr.R
 \name{ggcorr}
 \alias{ggcorr}
-\title{ggcorr - Plot a correlation matrix with ggplot2}
+\title{Correlation matrix}
 \usage{
 ggcorr(
   data,
@@ -134,7 +134,7 @@ Defaults to \code{9}.}
 the diagonal labels.}
 }
 \description{
-Function for making a correlation matrix plot, using ggplot2.
+Function for making a correlation matrix plot, using \pkg{ggplot2}.
 The function is directly inspired by Tian Zheng and Yu-Sung Su's
 \code{corrplot} function in the 'arm' package.
 Please visit \url{http://github.com/briatte/ggcorr} for the latest version

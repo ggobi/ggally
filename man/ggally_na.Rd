@@ -24,6 +24,6 @@ ggally_naDiag(...)
 Draws a large \code{NA} in the middle of the plotting area.  This plot is useful when all X or Y data is \code{NA}
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

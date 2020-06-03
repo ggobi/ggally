@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggpairs.R
 \name{mapping_color_to_fill}
 \alias{mapping_color_to_fill}
-\title{Aesthetic Mapping Color Fill}
+\title{Aesthetic mapping color fill}
 \usage{
 mapping_color_to_fill(current)
 }

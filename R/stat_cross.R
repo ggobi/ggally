@@ -1,4 +1,4 @@
-#' Compute cross-tabulation statisticics
+#' Compute cross-tabulation statistics
 #'
 #' Computes statistics of a 2-dimensional matrix using \code{\link[broom]{augment.htest}}
 #' from \pkg{broom}.
@@ -165,7 +165,7 @@ StatCross <- ggproto("StatCross", Stat,
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_point}(...)}
 #' @param scale_max_size `max_size` argument supplied to \code{\link[ggplot2]{scale_size_area}()}
 #' @param geom_text_args other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @keywords hplot
 #' @export
 #' @examples
@@ -261,7 +261,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #' @param geom_tile_args other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
 #' @note The \strong{colour} aesthetic is taken into account only if equal to
 #'   \strong{x} or \strong{y}.
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @keywords hplot
 #' @export
 #' @examples

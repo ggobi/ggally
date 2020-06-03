@@ -13,6 +13,6 @@ plot_types(data, columnsX, columnsY, allowDiag = TRUE)
 Retrieves the type of plot that should be used for all combinations
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{internal}

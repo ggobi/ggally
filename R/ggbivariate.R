@@ -1,4 +1,4 @@
-#' Plot an outcome with several potential explanotory variables
+#' Display an outcome using several potential explanatory variables
 #'
 #' \code{ggbivariate} is a variant of \code{\link{ggduo}} for plotting
 #' an outcome variable with several potential explanatory variables.
@@ -14,7 +14,7 @@
 #' @param ... additional arguments passed to \code{\link{ggduo}} (see examples)
 #' @param rowbar_args additional arguments passed to \code{\link{ggally_rowbar}}
 #'   (see examples)
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @export
 #' @examples
 #' data(tips, package = "reshape")
@@ -74,7 +74,7 @@ ggbivariate <- function(
     mapping$colour <- aes_string(colour = outcome)$colour
   }
 
-  # default behaviour
+  # default behavior
   if (is.null(types$discrete))
     types$discrete = wrapp(ggally_rowbar, rowbar_args)
   if (is.null(types$comboVertical))

@@ -1,4 +1,4 @@
-#' ggmatrix default progress bar
+#' \code{\link{ggmatrix}} default progress bar
 #'
 #' @param format,clear,show_after,... parameters supplied directly to \code{progress::\link[progress]{progress_bar}$new()}
 #' @return function that accepts a plot matrix as the first argument and \code{...} for future expansion. Internally, the plot matrix is used to determine the total number of plots for the progress bar.

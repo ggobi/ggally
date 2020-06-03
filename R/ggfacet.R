@@ -1,4 +1,4 @@
-#' ggfacet - single ggplot2 plot matrix with facet_grid
+#' Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}
 #'
 #'
 #' @param data data.frame that contains all columns to be displayed.  This data will be melted before being passed into the function \code{fn}

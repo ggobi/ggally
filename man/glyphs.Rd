@@ -2,7 +2,7 @@
 % Please edit documentation in R/gglyph.R
 \name{glyphs}
 \alias{glyphs}
-\title{Create the data needed to generate a glyph plot.}
+\title{Create \code{\link{glyphplot}} data}
 \usage{
 glyphs(
   data,
@@ -56,5 +56,5 @@ Create the data needed to generate a glyph plot.
    ggplot2::labs(x = "", y = "")
 }
 \author{
-Di Cook \email{dicook@monash.edu}, Heike Hofmann, Hadley Wickham
+Di Cook, Heike Hofmann, Hadley Wickham
 }

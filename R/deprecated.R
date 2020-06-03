@@ -1,5 +1,4 @@
-#' Modify a ggmatrix object by adding an ggplot2 object to all plots
-#'
+#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all #'
 # \lifecycle{deprecated}
 #'
 #' @export
@@ -16,7 +15,7 @@ v1_ggmatrix_theme <- function() {
 }
 
 
-#' Correlation from the Scatter Plot (deprecated)
+#' Correlation value plot
 #'
 # \lifecycle{deprecated}
 #'
@@ -34,7 +33,7 @@ v1_ggmatrix_theme <- function() {
 #' @param corUse deprecated. Use parameter \code{use}
 #' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export

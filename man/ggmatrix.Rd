@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggmatrix.R
 \name{ggmatrix}
 \alias{ggmatrix}
-\title{ggmatrix - A ggplot2 Matrix}
+\title{\pkg{ggplot2} plot matrix}
 \usage{
 ggmatrix(
   plots,
@@ -53,16 +53,16 @@ ggmatrix(
 
 \item{data}{data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time}
 
-\item{gg}{ggplot2 theme objects to be applied to every plot}
+\item{gg}{\pkg{ggplot2} theme objects to be applied to every plot}
 
 \item{legend}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
 }
 \description{
-Make a generic matrix of ggplot2 plots.
+Make a generic matrix of \pkg{ggplot2} plots.
 }
 \section{Memory usage}{
 
-Now that the print.ggmatrix method uses a large gtable object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the ggplot2 format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
+Now that the \code{\link{print.ggmatrix}} method uses a large \pkg{gtable} object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the \pkg{ggplot2} format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
 }
 
 \examples{
@@ -93,6 +93,6 @@ pm <- ggmatrix(
 p_(pm)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

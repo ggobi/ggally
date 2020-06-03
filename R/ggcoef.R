@@ -1,4 +1,4 @@
-#' ggcoef - Plot Model Coefficients with broom and ggplot2
+#' Model coefficients with \pkg{broom} and \pkg{ggplot2}
 #'
 #' Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
 #'

@@ -5,7 +5,8 @@ if (getRversion() >= "2.15.1") {
     c("..density..", "..scaled..", "x"), # facetdensitystrip plot
     c("..scaled..", "x"), #density diagonal plot
     c("x", "y", "lab"), # internal axis plot
-    c("x", "y", "result", "freq") # fluctuation plot
+    c("x", "y", "result", "freq"), # fluctuation plot
+    c("weight") # ggally_summarise_by
   )))
 }
 
@@ -104,14 +105,14 @@ remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
 }
 
 
-#' Plots the Scatter Plot
+#' Scatter plot
 #'
 #' Make a scatter plot with a given data set.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments are sent to geom_point
-#' @author Barret Schloerke  \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @export
 #' @keywords hplot
 #' @examples
@@ -134,7 +135,7 @@ ggally_points <- function(data, mapping, ...){
   p
 }
 
-#' Plots the Scatter Plot with Smoothing
+#' Scatter plot with a smoothed line
 #'
 #' Add a smoothed condition mean with a given scatter plot.
 #'
@@ -145,7 +146,7 @@ ggally_points <- function(data, mapping, ...){
 #' @param formula,... other arguments to add to geom_smooth
 #' @param method,se parameters supplied to \code{\link[ggplot2]{geom_smooth}}
 #' @param shrink boolean to determine if y range is reduced to range of points or points and error ribbon
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @export
 #' @keywords hplot
 #' @rdname ggally_smooth
@@ -187,16 +188,16 @@ ggally_smooth_lm <- function(data, mapping, ...) {
   ggally_smooth(data = data, mapping = mapping, ..., method = "lm")
 }
 
-#' Plots the Scatter Density Plot
+#' Bivariate density plot
 #'
-#' Make a scatter density plot from a given data.
+#' Make a 2D density plot from a given data.
 #'
-#' The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_density2d (lines) is used.
+#' The aesthetic "fill" determines whether or not \code{stat_density2d} (filled) or \code{geom_density2d} (lines) is used.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... parameters sent to either stat_density2d or geom_density2d
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @export
 #' @keywords hplot
 #' @examples
@@ -232,9 +233,9 @@ ggally_density <- function(data, mapping, ...){
 }
 
 
-#' Correlation from the Scatter Plot
+#' Correlation value plot
 #'
-#' Estimate correlation from the given data.
+#' Estimate correlation from the given data. If a color variable is supplied, the correlation will also be calculated per group.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -256,7 +257,7 @@ ggally_density <- function(data, mapping, ...){
 #' @param align_percent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
 #' @param alignPercent,displayGrid deprecated. Please use their snake-case counterparts.
 #' @param title title text to be displayed
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 #' @export
@@ -358,7 +359,7 @@ ggally_cor <- function(
 }
 
 
-#' Generalized Text Display
+#' Generalized text display
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -579,7 +580,7 @@ ggally_statistic <- function(
 
 
 
-#' Plots the Box Plot
+#' Box plot
 #'
 #' Make a box plot with a given data set. \code{ggally_box_no_facet} will be a single panel plot, while \code{ggally_box} will be a faceted plot
 
@@ -587,7 +588,7 @@ ggally_statistic <- function(
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments being supplied to geom_boxplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -615,14 +616,14 @@ ggally_box_no_facet <- function(data, mapping, ...) {
 }
 
 
-#' Plots the Box Plot with Dot
+#' Grouped dot plot
 #'
 #' Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single panel plot, while \code{ggally_dot} will be a faceted plot
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments being supplied to geom_jitter
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -647,7 +648,7 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 }
 
 
-#' Plots either Box Plot or Dot Plots
+#' Box and dot plot
 #'
 #' Place box plots or dot plots on the graph
 #'
@@ -655,8 +656,8 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #' @param mapping aesthetics being used
 #' @param ... parameters passed to either geom_jitter or geom_boxplot
 #' @param boxPlot boolean to decide to plot either box plots (TRUE) or dot plots (FALSE)
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @keywords hplot
+#' @author Barret Schloerke
+#' @keywords internal
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
@@ -732,14 +733,14 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 
 
 
-#' Plots the Histograms by Faceting
+#' Faceted histogram
 #'
-#' Make histograms by displaying subsets of the data in different panels.
+#' Display subsetted histograms of the data in different panels.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... parameters sent to stat_bin()
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -779,14 +780,14 @@ ggally_facethist <- function(data, mapping, ...){
 }
 
 
-#' Plots the density plots by faceting
+#' Faceted density plot
 #'
 #' Make density plots by displaying subsets of the data in different panels.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments being sent to stat_density
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -800,14 +801,14 @@ ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
 
-#' Plots a tile plot with facets
+#' Tile plot with facets
 #'
-#' Make Tile Plot as densely as possible.
+#' Displays a Tile Plot as densely as possible.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments being sent to stat_bin
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -824,15 +825,15 @@ ggally_denstrip <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
-#' Plots a density plot with facets or a tile plot with facets
+#' Density or tiles plot with facets
 #'
-#' Make Tile Plot as densely as possible.
+#' Make tile plot or density plot as compact as possible.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments being sent to either geom_histogram or stat_density
 #' @param den_strip boolean to decide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -897,15 +898,15 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 }
 
 
-#' Plots the Density Plots by Using Diagonal
+#' Univariate density plot
 #'
-#' Plots the density plots by using Diagonal.
+#' Displays a density plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used.
 #' @param ... other arguments sent to stat_density
 #' @param rescale boolean to decide whether or not to rescale the count output
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -936,15 +937,15 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
   p
 }
 
-#' Plots the Bar Plots by Using Diagonal
+#' Bar plot
 #'
-#' Plots the bar plots by using Diagonal.
+#' Displays a bar plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments are sent to geom_bar
 #' @param rescale boolean to decide whether or not to rescale the count output. Only applies to numeric data
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -990,7 +991,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 }
 
 
-#' Text Plot
+#' Text plot
 #'
 #' Plot text for a plot.
 #'
@@ -1001,7 +1002,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 #' @param xrange range of the data around it.  Only nice to have if plotting in a matrix
 #' @param yrange range of the data around it.  Only nice to have if plotting in a matrix
 #' @param ... other arguments for geom_text
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -1136,7 +1137,7 @@ get_x_axis_labels <- function(p, xRange) {
   axisLabs
 }
 
-#' Internal Axis Labeling Plot for ggpairs
+#' Internal axis labels for ggpairs
 #'
 #' This function is used when \code{axisLabels == "internal"}.
 #'
@@ -1150,7 +1151,7 @@ get_x_axis_labels <- function(p, xRange) {
 #' @param labelVJust vjust supplied to label
 #' @param gridLabelSize size of grid labels
 #' @param ... other arguments for geom_text
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com} and Barret Schloerke
+#' @author Jason Crowley and Barret Schloerke
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
@@ -1263,14 +1264,14 @@ ggally_diagAxis <- function(
 
 }
 
-#' Plots the Bar Plots Faceted by Conditional Variable
+#' Faceted bar plot
 #'
-#' X variables are plotted using \code{geom_bar} and faceted by the Y variable.
+#' X variables are plotted using \code{geom_bar} and are faceted by the Y variable.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param ... other arguments are sent to geom_bar
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -1293,7 +1294,7 @@ ggally_facetbar <- function(data, mapping, ...){
 }
 
 
-#' Plots a mosaic plot
+#' Mosaic plot
 #'
 #' Plots the mosaic plot by using fluctuation.
 #'
@@ -1302,7 +1303,7 @@ ggally_facetbar <- function(data, mapping, ...){
 #' @param ... passed to \code{\link[ggplot2]{geom_tile}(...)}
 #' @param floor don't display cells smaller than this value
 #' @param ceiling max value to scale frequencies.  If any frequency is larger than the ceiling, the fill color is displayed darker than other rectangles
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords hplot
 #' @export
 #' @examples
@@ -1391,7 +1392,7 @@ ggally_ratio <- function(
 
 
 
-#' Plots the number of observations
+#' Display counts of observations
 #'
 #' Plot the number of observations by using rectangles
 #' with proportional areas.
@@ -1401,7 +1402,7 @@ ggally_ratio <- function(
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
 #' @details
 #'   You can adjust the size of rectangles with the \code{x.width} argument.
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @keywords hplot
 #' @export
 #' @examples
@@ -1541,14 +1542,15 @@ ggally_countDiag <- function(data, mapping, ...) {
   ggally_count(data = data, mapping = mapping, ...)
 }
 
-#' Blank
+#' Blank plot
 #'
 #' Draws nothing.
 #'
 #' Makes a "blank" ggplot object that will only draw white space
 #'
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @param ... other arguments ignored
+#' @seealso \code{ggplot2::\link[ggplot2]{element_blank}()}
 #' @export
 #' @keywords hplot
 ggally_blank <- function(...){
@@ -1595,7 +1597,7 @@ ggally_blankDiag <- function(...) {
 #'
 #' Draws a large \code{NA} in the middle of the plotting area.  This plot is useful when all X or Y data is \code{NA}
 #'
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @param data ignored
 #' @param mapping ignored
 #' @param size size of the geom_text 'NA'
@@ -1641,9 +1643,9 @@ ggally_naDiag <- function(...) {
 
 
 
-#' Scatterplot for continuous and categorial variables
+#' Scatterplot for continuous and categorical variables
 #'
-#' Make scatterplots compatible with both continuous and catgeorical variables
+#' Make scatterplots compatible with both continuous and categorical variables
 #' using \code{\link[ggforce]{geom_autopoint}} from package \pkg{ggforce}.
 #'
 #' @param data data set using
@@ -1690,16 +1692,16 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 }
 
 
-#' Summarise a continuous variable by each value of a discrete variable
+#' Summarize a continuous variable by each value of a discrete variable
 #'
-#' Display summary statisctics of a continuous variable for each value of a discrete variable.
+#' Display summary statistics of a continuous variable for each value of a discrete variable.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param text_fn function that takes an x and weights and returns a text string
-#' @param text_fn_vertical function that takes an x and weights and returns a text string, used when \code{x} is discrete and \code{y} is continous. If not provided, will use \code{text_fn}, replacing spaces by carriage returns.
+#' @param text_fn_vertical function that takes an x and weights and returns a text string, used when \code{x} is discrete and \code{y} is continuous. If not provided, will use \code{text_fn}, replacing spaces by carriage returns.
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @keywords hplot
 #' @export
 #' @examples
@@ -1790,7 +1792,7 @@ ggally_summarise_by <- function(
 
 #' @rdname ggally_summarise_by
 #' @param x a numeric vector
-#' @param weights an optionnal numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.
+#' @param weights an optional numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.
 #' @details
 #' \code{median_iqr} computes median and interquartile range.
 #' @export

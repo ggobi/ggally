@@ -25,6 +25,6 @@ str(pm)
 
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{internal}

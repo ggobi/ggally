@@ -93,9 +93,9 @@ ggplot(d) +
 
 ### adding labels on a percent stacked bar plot
 
-When using `position = "fill"` with `geom_bar()`, you can produce a percent stacked bar plot. However, the proportions corresponding to the **y** axis are not directly accessible using only `ggplot2`. With `stat_prop()`, you can esily add them on the plot.
+When using `position = "fill"` with `geom_bar()`, you can produce a percent stacked bar plot. However, the proportions corresponding to the **y** axis are not directly accessible using only `ggplot2`. With `stat_prop()`, you can easily add them on the plot.
 
-In the following example, we indicated `stat = "prop"` to `ggplot2::geom_text()` to use `stat_prop()`, we defined the **by** aesthetic (here we want to compute the proportions separtely for each value of **x**), and we also used `ggplot2::position_fill()` when calling `ggplot2::geom_text()`.
+In the following example, we indicated `stat = "prop"` to `ggplot2::geom_text()` to use `stat_prop()`, we defined the **by** aesthetic (here we want to compute the proportions separately for each value of **x**), and we also used `ggplot2::position_fill()` when calling `ggplot2::geom_text()`.
 
 ```{r}
 d <- as.data.frame(Titanic)
@@ -175,7 +175,7 @@ ggplot(d) +
 - **numerator**
 - **denominator**
 
-Let's take an example. The following plot shows all tips received accrding to the day of the week.
+Let's take an example. The following plot shows all tips received according to the day of the week.
 
 ```{r}
 data(tips, package = "reshape")

@@ -3,7 +3,7 @@
 \name{ggally_dot}
 \alias{ggally_dot}
 \alias{ggally_dot_no_facet}
-\title{Plots the Box Plot with Dot}
+\title{Grouped dot plot}
 \usage{
 ggally_dot(data, mapping, ...)
 
@@ -33,6 +33,6 @@ Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single pan
  ) + ggplot2::scale_shape(solid=FALSE)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

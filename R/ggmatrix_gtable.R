@@ -1,13 +1,13 @@
 
 
-#' Print ggmatrix object
+#' \code{\link{ggmatrix}} \pkg{gtable} object
 #'
-#' Specialized method to print the ggmatrix object-
+#' Specialized method to print the \code{\link{ggmatrix}} object.
 #'
-#' @param pm ggmatrix object to be plotted
+#' @param pm \code{\link{ggmatrix}} object to be plotted
 #' @param ... ignored
-#' @param progress,progress_format Please use the 'progress' parameter in your ggmatrix-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @param progress,progress_format Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.
+#' @author Barret Schloerke
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
 #' @examples
@@ -29,7 +29,7 @@ ggmatrix_gtable <- function(
     progress_fn <- pm$progress
   } else {
     warning("Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples.  ggmatrix_gtable 'progress' and 'progress_format' will soon be deprecated.", immediate = TRUE)
-    
+
     # has progress variable defined
     # overrides pm$progress
     if (missing(progress_format)) {

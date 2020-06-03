@@ -119,6 +119,6 @@ ggplot(d) +
 \code{\link[ggplot2]{stat_count}}
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }
 \keyword{datasets}

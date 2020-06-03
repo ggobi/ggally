@@ -6,7 +6,7 @@
 \alias{stat_ggally_count}
 \alias{StatGGallyCount}
 \alias{ggally_countDiag}
-\title{Plots the number of observations}
+\title{Display counts of observations}
 \usage{
 ggally_count(data, mapping, ...)
 
@@ -45,7 +45,7 @@ ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
 ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }
 \keyword{datasets}
 \keyword{hplot}

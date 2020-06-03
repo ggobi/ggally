@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_points}
 \alias{ggally_points}
-\title{Plots the Scatter Plot}
+\title{Scatter plot}
 \usage{
 ggally_points(data, mapping, ...)
 }
@@ -31,6 +31,6 @@ ggally_points(
 )
 }
 \author{
-Barret Schloerke  \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}
