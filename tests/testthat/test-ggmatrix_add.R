@@ -34,7 +34,7 @@ test_that("add", {
   expect_false(identical(pm$plots[[2]], pm4$plots[[2]]))
 
   # change only some subplots
-  pm5 <- add_ggproto_to_ggmatrix(pm, ggplot2::coord_equal(), cols = 1)
+  pm5 <- add_to_ggmatrix(pm, ggplot2::coord_equal(), cols = 1)
   expect_false(identical(pm$plots[[1]], pm5$plots[[1]]))
   expect_true(identical(pm$plots[[2]], pm5$plots[[2]]))
 

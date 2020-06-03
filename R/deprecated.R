@@ -1,4 +1,24 @@
+#' Modify a ggmatrix object by adding an ggplot2 object to all plots
+#'
+# \lifecycle{deprecated}
+#'
+#' @export
+#' @examples
+#'
+#' ggpairs(iris, 1:2) + v1_ggmatrix_theme()
+#' # move the column names to the left and bottom
+#' ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme()
+v1_ggmatrix_theme <- function() {
+  theme(
+    strip.background = element_rect(fill = "white"),
+    strip.placement = "outside"
+  )
+}
+
+
 #' Correlation from the Scatter Plot (deprecated)
+#'
+# \lifecycle{deprecated}
 #'
 #' (Deprecated. See \code{\link{ggally_cor}}.)
 #'

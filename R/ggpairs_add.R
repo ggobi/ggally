@@ -56,7 +56,7 @@
   } else if (is.list(e2)) {
     add_list_to_ggmatrix(e1, e2)
   } else if (is.ggproto(e2)) {
-    add_ggproto_to_ggmatrix(e1, e2)
+    add_to_ggmatrix(e1, e2)
   } else {
     stop(
       "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
@@ -125,20 +125,21 @@ add_theme_to_ggmatrix <- function(e1, e2) {
 #' @param only_fn Character vector. If specified, only subplots
 #'   of that type will be modified (see examples).
 #' @details
-#' \code{add_ggproto_to_ggmatrix} gives you more control to modify
-#'   only some subplots.
+#' \code{add_to_ggmatrix} gives you more control to modify
+#'   only some subplots. \lifecycle{experimental}
 #' @examples
 #' ## modify scale
 #' pm + scale_fill_brewer()
 #' ## only first row
-#' add_ggproto_to_ggmatrix(pm, scale_fill_brewer(), rows = 1)
+#' add_to_ggmatrix(pm, scale_fill_brewer(), rows = 1)
 #' ## only certain types of subplots
-#' add_ggproto_to_ggmatrix(
+#' add_to_ggmatrix(
 #'   pm, scale_fill_brewer(),
 #'   only_fn = c("ggally_box_no_facet", "ggally_barDiag")
 #' )
-add_ggproto_to_ggmatrix <- function(
-  e1, e2,
+add_to_ggmatrix <- function(
+  e1,
+  e2,
   rows = 1:e1$nrow, cols = 1:e1$ncol,
   only_fn = NULL) {
   if (!is.ggmatrix(e1))
@@ -171,19 +172,3 @@ is.ggmatrix <- function(x) {
   inherits(x, "ggmatrix")
 }
 
-
-
-#' Modify a ggmatrix object by adding an ggplot2 object to all plots
-#'
-#' @export
-#' @examples
-#'
-#' ggpairs(iris, 1:2) + v1_ggmatrix_theme()
-#' # move the column names to the left and bottom
-#' ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme()
-v1_ggmatrix_theme <- function() {
-  theme(
-    strip.background = element_rect(fill = "white"),
-    strip.placement = "outside"
-  )
-}

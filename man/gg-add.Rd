@@ -2,18 +2,12 @@
 % Please edit documentation in R/ggpairs_add.R
 \name{+.gg}
 \alias{+.gg}
-\alias{add_ggproto_to_ggmatrix}
+\alias{add_to_ggmatrix}
 \title{Modify a ggmatrix object by adding an ggplot2 object to all plots}
 \usage{
 \method{+}{gg}(e1, e2)
 
-add_ggproto_to_ggmatrix(
-  e1,
-  e2,
-  rows = 1:e1$nrow,
-  cols = 1:e1$ncol,
-  only_fn = NULL
-)
+add_to_ggmatrix(e1, e2, rows = 1:e1$nrow, cols = 1:e1$ncol, only_fn = NULL)
 }
 \arguments{
 \item{e1}{An object of class \code{ggmatrix} or \code{ggplot}}
@@ -44,8 +38,8 @@ object.
 The \code{+} operator completely replaces elements
 with elements from e2.
 
-\code{add_ggproto_to_ggmatrix} gives you more control to modify
-  only some subplots.
+\code{add_to_ggmatrix} gives you more control to modify
+  only some subplots. \lifecycle{experimental}
 }
 \examples{
 data(tips, package = "reshape")
@@ -62,9 +56,9 @@ pm + extra
 ## modify scale
 pm + scale_fill_brewer()
 ## only first row
-add_ggproto_to_ggmatrix(pm, scale_fill_brewer(), rows = 1)
+add_to_ggmatrix(pm, scale_fill_brewer(), rows = 1)
 ## only certain types of subplots
-add_ggproto_to_ggmatrix(
+add_to_ggmatrix(
   pm, scale_fill_brewer(),
   only_fn = c("ggally_box_no_facet", "ggally_barDiag")
 )
