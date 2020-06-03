@@ -107,7 +107,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -245,23 +245,20 @@
   <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>),
   <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>
 )
-<span class='fu'>p_</span>(<span class='no'>regularPlot</span>)
-
+<span class='fu'>p_</span>(<span class='no'>regularPlot</span>)</div><div class='img'><img src='wrap-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Wrap ggally_points to have parameter values size = 5 and color = 'red'</span>
 <span class='no'>w_ggally_points</span> <span class='kw'>&lt;-</span> <span class='fu'>wrap</span>(<span class='no'>ggally_points</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
 <span class='no'>wrappedPlot</span> <span class='kw'>&lt;-</span> <span class='fu'>w_ggally_points</span>(
   <span class='no'>iris</span>,
   <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>)
 )
-<span class='fu'>p_</span>(<span class='no'>wrappedPlot</span>)
-
+<span class='fu'>p_</span>(<span class='no'>wrappedPlot</span>)</div><div class='img'><img src='wrap-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Double check the aes parameters are the same for the geom_point layer</span>
 <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='no'>regularPlot</span>$<span class='no'>layers</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>aes_params</span>, <span class='no'>wrappedPlot</span>$<span class='no'>layers</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>aes_params</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># Use a wrapped function in ggpairs</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>iris</span>, <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'>wrap</span>(<span class='no'>ggally_points</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>iris</span>, <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>w_ggally_points</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div></pre>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='wrap-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>iris</span>, <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>w_ggally_points</span>))
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='wrap-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

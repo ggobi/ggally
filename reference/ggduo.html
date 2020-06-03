@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame — ggduo • GGally</title>
+<title><span class="pkg">ggplot2</span> generalized pairs plot for two columns sets of data — ggduo • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame — ggduo" />
+<meta property="og:title" content="<span class="pkg">ggplot2</span> generalized pairs plot for two columns sets of data — ggduo" />
 <meta property="og:description" content="Make a matrix of plots with a given data set with two different column sets" />
 
 
@@ -107,7 +107,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -171,7 +171,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame</h1>
+    <h1><span class="pkg">ggplot2</span> generalized pairs plot for two columns sets of data</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggpairs.R'><code>R/ggpairs.R</code></a></small>
     <div class="hidden name"><code>ggduo.Rd</code></div>
     </div>
@@ -323,8 +323,7 @@
  <span class='co'>#   there is severe over plotting in the continuous plots</span>
  <span class='co'>#   the labels could be better</span>
  <span class='co'>#   want to add more hitting information</span>
- <span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+ <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-1.png' alt='' width='700' height='433' /></div><div class='input'>
  <span class='co'># address overplotting issues and add a title</span>
  <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
    <span class='no'>dt</span>,
@@ -341,8 +340,7 @@
    <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
  );
 
- <span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+ <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Use "auto" to adapt width of the sub-plots</span>
  <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
    <span class='no'>dt</span>,
@@ -352,8 +350,7 @@
    <span class='kw'>xProportions</span> <span class='kw'>=</span> <span class='st'>"auto"</span>
  )
 
- <span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+ <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-3.png' alt='' width='700' height='433' /></div><div class='input'>
  <span class='co'># Custom widths &amp; heights of the sub-plots</span>
  <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
    <span class='no'>dt</span>,
@@ -364,8 +361,7 @@
    <span class='kw'>yProportions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>)
  )
 
- <span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+ <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Example derived from:</span>
 <span class='co'>## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital</span>
 <span class='co'>##   Research and Education.</span>
@@ -394,9 +390,7 @@
 #&gt;  Max.   :67.10   Max.   :75.50   Max.   :74.20                     </div><div class='input'>
 (<span class='no'>psych_variables</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>psychademic</span>, <span class='st'>"psychology"</span>))</div><div class='output co'>#&gt; [1] "locus_of_control" "self_concept"     "motivation"      </div><div class='input'>(<span class='no'>academic_variables</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>psychademic</span>, <span class='st'>"academic"</span>))</div><div class='output co'>#&gt; [1] "read"    "write"   "math"    "science" "sex"    </div><div class='input'>
 <span class='co'>## Within correlation</span>
-<span class='fu'>p_</span>(<span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>psychademic</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='no'>psych_variables</span>))
-<span class='fu'>p_</span>(<span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>psychademic</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='no'>academic_variables</span>))
-
+<span class='fu'>p_</span>(<span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>psychademic</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='no'>psych_variables</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>psychademic</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='no'>academic_variables</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Between correlation</span>
 <span class='no'>loess_with_cor</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>, <span class='no'>method</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>) {
   <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='eval_data_col.html'>eval_data_col</a></span>(<span class='no'>data</span>, <span class='no'>mapping</span>$<span class='no'>x</span>)
@@ -421,8 +415,7 @@
   <span class='kw'>types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>loess_with_cor</span>),
   <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
-<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>)) <span class='co'># ignore warnings from loess</span>
-
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>)) <span class='co'># ignore warnings from loess</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># add color according to sex</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
   <span class='no'>psychademic</span>,
@@ -432,8 +425,7 @@
   <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>2</span>)
 )
-<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>))
-
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-8.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># add color according to sex</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
@@ -445,7 +437,7 @@
   <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>2</span>)
 ) +
   <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>))</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-9.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

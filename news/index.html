@@ -106,7 +106,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -177,12 +177,58 @@
     <div id="ggally-development-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ggally-development-version" class="anchor"></a>GGally (development version)</h2>
+<div id="vignettes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#vignettes" class="anchor"></a>Vignettes</h3>
+<ul>
+<li>
+<code><a href="../articles/ggally_plots.html">vignette("ggally_plots")</a></code> - List of available high-level plots</li>
+<li>
+<code><a href="../articles/ggally_stats.html">vignette("ggally_stats")</a></code> - Additional statistics for ggplot2</li>
+<li>
+<code><a href="../articles/ggbivariate.html">vignette("ggbivariate")</a></code> - ggbivariate(): Plot an outcome with several potential explanatory variables</li>
+<li>
+<code><a href="../articles/ggcoef.html">vignette("ggcoef")</a></code> - ggcoef(): Model coefficients</li>
+<li>
+<code><a href="../articles/ggduo.html">vignette("ggduo")</a></code> - ggduo(): Two-grouped plot matrix</li>
+<li>
+<code><a href="../articles/ggmatrix.html">vignette("ggmatrix")</a></code> - ggmatrix(): Plot matrix</li>
+<li>
+<code><a href="../articles/ggnetworkmap.html">vignette("ggnetworkmap")</a></code> - ggnetworkmap(): Network + map plot</li>
+<li>
+<code><a href="../articles/ggnostic.html">vignette("ggnostic")</a></code> - ggnostic(): Model diagnostics plot matrix</li>
+<li>
+<code><a href="../articles/ggpairs.html">vignette("ggpairs")</a></code> - ggpairs(): Pairwise plot matrix</li>
+<li>
+<code><a href="../articles/ggscatmat.html">vignette("ggscatmat")</a></code> - ggscatmat(): Numeric pairwise plot matrix</li>
+<li>
+<code><a href="../articles/ggsurv.html">vignette("ggsurv")</a></code> - ggsurv(): Survival curves</li>
+<li>
+<code><a href="../articles/ggtable.html">vignette("ggtable")</a></code> - ggtable(): Cross-tabulated tables</li>
+<li>
+<code><a href="../articles/glyph.html">vignette("glyph")</a></code> - glyphs(): Glyph plot</li>
+</ul>
+</div>
 <div id="new-functions" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-functions" class="anchor"></a>New Functions:</h3>
+<a href="#new-functions" class="anchor"></a>New functions</h3>
+<p><code><a href="../reference/ggbivariate.html">ggbivariate()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/324'>#324</a>)</p>
+<ul>
+<li>Display an outcome using several potential explanatory variables</li>
+<li><code><a href="../articles/ggbivariate.html">vignette("ggbivariate")</a></code></li>
+</ul>
+<p><code><a href="../reference/ggtable.html">ggtable()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/351'>#351</a>)</p>
+<ul>
+<li>Cross-tabulated tables of discrete variables</li>
+<li><code><a href="../articles/ggtable.html">vignette("ggtable")</a></code></li>
+</ul>
 <p><code><a href="../reference/ggally_autopoint.html">ggally_autopoint()</a></code>, <code><a href="../reference/ggally_autopoint.html">ggally_autopointDiag()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/325'>#325</a>)</p>
 <ul>
-<li>Make scatterplots compatible with both continuous and catgeorical variables using <code><a href="https://ggforce.data-imaginist.com/reference/geom_autopoint.html">ggforce::geom_autopoint()</a></code>.</li>
+<li>Make scatterplots compatible with both continuous and categorical variables using <code><a href="https://ggforce.data-imaginist.com/reference/geom_autopoint.html">ggforce::geom_autopoint()</a></code>.</li>
+</ul>
+<p><code><a href="../reference/ggally_colbar.html">ggally_colbar()</a></code>, <code><a href="../reference/ggally_colbar.html">ggally_rowbar()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/324'>#324</a>)</p>
+<ul>
+<li>Plot column or row percentage using bar plots.</li>
 </ul>
 <p><code><a href="../reference/ggally_count.html">ggally_count()</a></code>, <code><a href="../reference/ggally_count.html">ggally_countDiag()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/321'>#321</a>)</p>
 <ul>
@@ -198,13 +244,13 @@
 </ul>
 <p><code><a href="../reference/ggally_statistic.html">ggally_statistic()</a></code> (<a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
 <ul>
-<li>A generialized version of <code><a href="../reference/ggally_cor.html">ggally_cor()</a></code>
+<li>A generalized version of <code><a href="../reference/ggally_cor.html">ggally_cor()</a></code>
 </li>
 <li>Use this method to create functions similar to <code><a href="../reference/ggally_cor.html">ggally_cor()</a></code> that return any text value given and <code>x</code> and <code>y</code> vector of data</li>
 </ul>
-<p><code><a href="../reference/ggally_summarise_by.html">ggally_summarise_by()</a></code></p>
+<p><code><a href="../reference/ggally_summarise_by.html">ggally_summarise_by()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/325'>#325</a>)</p>
 <ul>
-<li>Display summary statisctics of a continuous variable for each value of a discrete variable.</li>
+<li>Display summary statistics of a continuous variable for each value of a discrete variable.</li>
 </ul>
 <p><code><a href="../reference/ggally_table.html">ggally_table()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/326'>#326</a>)</p>
 <ul>
@@ -226,14 +272,18 @@
 <ul>
 <li>Computes statistics of a 2-dimensional matrix using <code><a href="https://rdrr.io/pkg/broom/man/augment.htest.html">broom::augment.htest</a></code>.</li>
 </ul>
+<p><code>stat_prop</code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/324'>#324</a>)</p>
+<ul>
+<li>Compute proportions according to custom denominator.</li>
+</ul>
 <p><code>stat_weighted_mean</code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/333'>#333</a>)</p>
 <ul>
 <li>Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.</li>
 </ul>
 </div>
-<div id="features-and-bug-fixes" class="section level3">
+<div id="major-updates" class="section level3">
 <h3 class="hasAnchor">
-<a href="#features-and-bug-fixes" class="anchor"></a>Features and Bug Fixes:</h3>
+<a href="#major-updates" class="anchor"></a>Major updates</h3>
 <p><code><a href="../reference/ggally_cor.html">ggally_cor()</a></code> (<a href='https://github.com/ggobi/ggally/issues/327'>#327</a>)</p>
 <ul>
 <li>New implementation using <code><a href="../reference/ggally_statistic.html">ggally_statistic()</a></code>
@@ -246,6 +296,10 @@
 <li>To use the old version, change your <code>ggally_cor</code> function calls to <code>ggally_cor_v1_5</code>.</li>
 <li>Previously deprecated parameters have been removed</li>
 </ul>
+</div>
+<div id="features-and-bug-fixes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#features-and-bug-fixes" class="anchor"></a>Features and bug fixes:</h3>
 <p><code><a href="../reference/ggpairs.html">ggpairs()</a></code> (<a href='https://github.com/ggobi/ggally/issues/331'>#331</a>)</p>
 <ul>
 <li>new <code>proportion</code> argument to control relative size of sub-plots</li>

@@ -62,7 +62,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -209,8 +209,8 @@
 <div id="adding-labels-on-a-percent-stacked-bar-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-labels-on-a-percent-stacked-bar-plot" class="anchor"></a>adding labels on a percent stacked bar plot</h3>
-<p>When using <code>position = "fill"</code> with <code>geom_bar()</code>, you can produce a percent stacked bar plot. However, the proportions corresponding to the <strong>y</strong> axis are not directly accessible using only <code>ggplot2</code>. With <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, you can esily add them on the plot.</p>
-<p>In the following example, we indicated <code>stat = "prop"</code> to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code> to use <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, we defined the <strong>by</strong> aesthetic (here we want to compute the proportions separtely for each value of <strong>x</strong>), and we also used <code><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">ggplot2::position_fill()</a></code> when calling <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code>.</p>
+<p>When using <code>position = "fill"</code> with <code>geom_bar()</code>, you can produce a percent stacked bar plot. However, the proportions corresponding to the <strong>y</strong> axis are not directly accessible using only <code>ggplot2</code>. With <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, you can easily add them on the plot.</p>
+<p>In the following example, we indicated <code>stat = "prop"</code> to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code> to use <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, we defined the <strong>by</strong> aesthetic (here we want to compute the proportions separately for each value of <strong>x</strong>), and we also used <code><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">ggplot2::position_fill()</a></code> when calling <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code>.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">d</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">Titanic</span>)
 <span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">d</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Class</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Survived</span>, <span class="kw">weight</span> <span class="kw">=</span> <span class="no">Freq</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="no">Class</span>) +
@@ -279,7 +279,7 @@
 <li><strong>numerator</strong></li>
 <li><strong>denominator</strong></li>
 </ul>
-<p>Let’s take an example. The following plot shows all tips received accrding to the day of the week.</p>
+<p>Let’s take an example. The following plot shows all tips received according to the day of the week.</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">tips</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"reshape"</span>)
 <span class="fu">ggplot</span>(<span class="no">tips</span>) +
   <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">day</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">tip</span>) +

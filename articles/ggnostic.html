@@ -62,7 +62,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -361,7 +361,7 @@
 <div id="full-diagnostic-plot-matrix-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#full-diagnostic-plot-matrix-example" class="anchor"></a>Full diagnostic plot matrix example</h2>
-<p>The following lines of code will display different modle diagnostic plot matrices for the same statistical model. The first one is of the default settings. The second adds color according to the <code>species</code>. Finally, the third displays all possible columns and uses <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> to display the fitted points and response variables.</p>
+<p>The following lines of code will display different model diagnostic plot matrices for the same statistical model. The first one is of the default settings. The second adds color according to the <code>species</code>. Finally, the third displays all possible columns and uses <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> to display the fitted points and response variables.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">flea_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">head</span> ~ <span class="no">.</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">flea</span>), <span class="kw">trace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">flea_model</span>)
 <span class="co">#&gt; </span>

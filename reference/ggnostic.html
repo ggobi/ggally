@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ggnostic - Plot matrix of statistical model diagnostics — ggnostic • GGally</title>
+<title>Plot matrix of statistical model diagnostics — ggnostic • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,8 @@
 
 
 
-<meta property="og:title" content="ggnostic - Plot matrix of statistical model diagnostics — ggnostic" />
-<meta property="og:description" content="ggnostic - Plot matrix of statistical model diagnostics" />
+<meta property="og:title" content="Plot matrix of statistical model diagnostics — ggnostic" />
+<meta property="og:description" content="Plot matrix of statistical model diagnostics" />
 
 
 
@@ -107,7 +107,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -171,13 +171,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ggnostic - Plot matrix of statistical model diagnostics</h1>
+    <h1>Plot matrix of statistical model diagnostics</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggnostic.R'><code>R/ggnostic.R</code></a></small>
     <div class="hidden name"><code>ggnostic.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>ggnostic - Plot matrix of statistical model diagnostics</p>
+    <p>Plot matrix of statistical model diagnostics</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggnostic</span>(
@@ -284,16 +284,13 @@
 
 <span class='co'># display using defaults</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='no'>mod</span>)
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># color by am value</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='no'>mod</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>am</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># turn resid smooth error ribbon off</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='no'>mod</span>, <span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>.resid</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"nostic_resid"</span>, <span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-3.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>## plot residuals vs fitted in a ggpairs plot matrix</span>
 <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='broomify.html'>broomify</a></span>(<span class='no'>mod</span>)
@@ -302,7 +299,7 @@
   <span class='kw'>columnLabels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"fitted"</span>, <span class='st'>"residuals"</span>),
   <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_resid</span>)
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div></pre>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

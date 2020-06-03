@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ggpairs - A ggplot2 generalized pairs plot — ggpairs • GGally</title>
+<title>ggplot2 generalized pairs plot — ggpairs • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="ggpairs - A ggplot2 generalized pairs plot — ggpairs" />
+<meta property="og:title" content="ggplot2 generalized pairs plot — ggpairs" />
 <meta property="og:description" content="Make a matrix of plots with a given data set" />
 
 
@@ -107,7 +107,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -171,7 +171,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ggpairs - A ggplot2 generalized pairs plot</h1>
+    <h1>ggplot2 generalized pairs plot</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggpairs.R'><code>R/ggpairs.R</code></a></small>
     <div class="hidden name"><code>ggpairs.Rd</code></div>
     </div>
@@ -291,7 +291,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>ggmatrix object that if called, will print</p>
+    <p><code><a href='ggmatrix.html'>ggmatrix</a></code> object that if called, will print</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>upper</code> and <code>lower</code> are lists that may contain the variables
@@ -320,7 +320,7 @@
     <div class='dont-index'><p>wrap v1_ggmatrix_theme</p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Barret Schloerke <a href='mailto:schloerke@gmail.com'>schloerke@gmail.com</a>, Jason Crowley <a href='mailto:crowley.jason.s@gmail.com'>crowley.jason.s@gmail.com</a>, Di Cook <a href='mailto:dicook@iastate.edu'>dicook@iastate.edu</a>, Heike Hofmann <a href='mailto:hofmann@iastate.edu'>hofmann@iastate.edu</a>, Hadley Wickham <a href='mailto:h.wickham@gmail.com'>h.wickham@gmail.com</a></p>
+    <p>Barret Schloerke, Jason Crowley, Di Cook, Heike Hofmann, Hadley Wickham</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='co'># small function to display plots only if it's interactive</span>
@@ -330,18 +330,14 @@
 <span class='co'>## Quick example, with and without colour</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>flea</span>)
 <span class='fu'>ggpairs</span>(<span class='no'>flea</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>)</div><div class='img'><img src='ggpairs-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>flea</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>colour</span><span class='kw'>=</span><span class='no'>species</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='co'># Note: colour should be categorical, else you will need to reset</span>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Note: colour should be categorical, else you will need to reset</span>
 <span class='co'># the upper triangle to use points instead of trying to compute corr</span>
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tips</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"reshape"</span>)
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>[, <span class='fl'>1</span>:<span class='fl'>3</span>])
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>columnLabels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Total Bill"</span>, <span class='st'>"Tip"</span>, <span class='st'>"Sex"</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='st'>"blank"</span>)
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>columnLabels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Total Bill"</span>, <span class='st'>"Tip"</span>, <span class='st'>"Sex"</span>))
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='st'>"blank"</span>)
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Plot Types</span>
 <span class='co'># Change default plot behavior</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(
@@ -349,15 +345,13 @@
   <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='st'>"density"</span>, <span class='kw'>combo</span> <span class='kw'>=</span> <span class='st'>"box_no_facet"</span>),
   <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='st'>"points"</span>, <span class='kw'>combo</span> <span class='kw'>=</span> <span class='st'>"dot_no_facet"</span>)
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='co'># Supply Raw Functions (may be user defined functions!)</span>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Supply Raw Functions (may be user defined functions!)</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(
   <span class='no'>tips</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>2</span>)],
   <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>ggally_density</span>, <span class='kw'>combo</span> <span class='kw'>=</span> <span class='no'>ggally_box_no_facet</span>),
   <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>ggally_points</span>, <span class='kw'>combo</span> <span class='kw'>=</span> <span class='no'>ggally_dot_no_facet</span>)
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Use sample of the diamonds data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>diamonds</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ggplot2"</span>)
 <span class='no'>diamonds.samp</span> <span class='kw'>&lt;-</span> <span class='no'>diamonds</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>diamonds</span>)[<span class='fl'>1</span>], <span class='fl'>1000</span>), ]
@@ -370,16 +364,13 @@
  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"points"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>), <span class='kw'>combo</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"dot_no_facet"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.4</span>)),
  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Diamonds"</span>
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Axis Label Variations</span>
 <span class='co'># Only Variable Labels on the diagonal (no axis labels)</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>[, <span class='fl'>1</span>:<span class='fl'>3</span>], <span class='kw'>axisLabels</span><span class='kw'>=</span><span class='st'>"internal"</span>)
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='co'># Only Variable Labels on the outside (no axis labels)</span>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Only Variable Labels on the outside (no axis labels)</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>[, <span class='fl'>1</span>:<span class='fl'>3</span>], <span class='kw'>axisLabels</span><span class='kw'>=</span><span class='st'>"none"</span>)
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-10.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Facet Label Variations</span>
 <span class='co'>#  Default:</span>
 <span class='no'>df_x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)
@@ -389,15 +380,13 @@
   <span class='no'>df</span>,
   <span class='kw'>columnLabels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha[foo]"</span>, <span class='st'>"alpha[bar]"</span>, <span class='st'>"sqrt(alpha[foo]^2 + alpha[bar]^2)"</span>)
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='co'>#  Parsed labels:</span>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#  Parsed labels:</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(
   <span class='no'>df</span>,
   <span class='kw'>columnLabels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha[foo]"</span>, <span class='st'>"alpha[bar]"</span>, <span class='st'>"sqrt(alpha[foo]^2 + alpha[bar]^2)"</span>),
   <span class='kw'>labeller</span> <span class='kw'>=</span> <span class='st'>"label_parsed"</span>
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-12.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Plot Insertion Example</span>
 <span class='no'>custom_car</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>mtcars</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mpg"</span>, <span class='st'>"wt"</span>, <span class='st'>"cyl"</span>)], <span class='kw'>upper</span> <span class='kw'>=</span> <span class='st'>"blank"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Custom Example"</span>)
 <span class='co'># ggplot example taken from example(geom_text)</span>
@@ -410,35 +399,29 @@
   <span class='st'>"ggpairs allows you\nto put in your\nown plot.\nLike that one.\n &lt;---"</span>
 )
 <span class='no'>custom_car</span>[<span class='fl'>1</span>, <span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='no'>personal_plot</span>
-<span class='fu'>p_</span>(<span class='no'>custom_car</span>)
-
+<span class='fu'>p_</span>(<span class='no'>custom_car</span>)</div><div class='img'><img src='ggpairs-13.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Remove binwidth warning from ggplot2</span>
 <span class='co'># displays warning about picking a better binwidth</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='fl'>2</span>:<span class='fl'>3</span>)
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='co'># no warning displayed</span>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-14.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># no warning displayed</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>combo</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"facethist"</span>, <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-<span class='co'># no warning displayed with user supplied function</span>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-15.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># no warning displayed with user supplied function</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='fl'>2</span>:<span class='fl'>3</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>combo</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='no'>ggally_facethist</span>, <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggpairs-16.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Remove panel grid lines from correlation plots</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(
   <span class='no'>flea</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>,
   <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='no'>ggally_cor</span>, <span class='kw'>displayGrid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `displayGrid` is deprecated. Please use `display_grid`</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `displayGrid` is deprecated. Please use `display_grid`</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `displayGrid` is deprecated. Please use `display_grid`</span></div><div class='img'><img src='ggpairs-17.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Custom with/height of subplots</span>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-18.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>), <span class='kw'>proportions</span> <span class='kw'>=</span> <span class='st'>"auto"</span>)
-<span class='fu'>p_</span>(<span class='no'>pm</span>)
-
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-19.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='no'>tips</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>5</span>), <span class='kw'>proportions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>2</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div></pre>
+<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggpairs-20.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

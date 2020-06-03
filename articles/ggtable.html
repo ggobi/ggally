@@ -62,7 +62,7 @@
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -161,7 +161,7 @@
 <div id="proportions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#proportions" class="anchor"></a>Proportions</h2>
-<p>The <code>cells</code> argument allows you to control what to dispay. For proportions of the total, row proportions or columns proportions, simply use <code>"prop"</code>, <code>"row.prop"</code> or <code>"col.prop"</code>.</p>
+<p>The <code>cells</code> argument allows you to control what to display. For proportions of the total, row proportions or columns proportions, simply use <code>"prop"</code>, <code>"row.prop"</code> or <code>"col.prop"</code>.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span>(<span class="no">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>), <span class="kw">cells</span> <span class="kw">=</span> <span class="st">"prop"</span>) + <span class="fu">ggtitle</span>(<span class="st">"Proportions of total"</span>)</pre></body></html></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span>(<span class="no">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>), <span class="kw">cells</span> <span class="kw">=</span> <span class="st">"row.prop"</span>) + <span class="fu">ggtitle</span>(<span class="st">"Row proportions"</span>)</pre></body></html></div>
@@ -173,7 +173,7 @@
 <h2 class="hasAnchor">
 <a href="#filling-cells-with-residuals" class="anchor"></a>Filling cells with residuals</h2>
 <p>Chi-square standardized residuals indicates which cells are over- or underrepresented compared to what would be expected under the independence hypothesis. If the standardized residual is less than -2, the cell’s observed frequency is less than the expected frequency. Greater than 2 and the observed frequency is greater than the expected frequency. Values lower than -3 or higher than 3 indicates a strong effect.</p>
-<p>To fill cells with standradized residuals, simply indicate <code>fill = "stdres"</code>.</p>
+<p>To fill cells with standardized residuals, simply indicate <code>fill = "stdres"</code>.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span>(<span class="no">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>), <span class="kw">fill</span> <span class="kw">=</span> <span class="st">"stdres"</span>)</pre></body></html></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>

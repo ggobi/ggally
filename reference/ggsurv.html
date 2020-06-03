@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Survival curves with ggplot2 — ggsurv • GGally</title>
+<title>Survival curves — ggsurv • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="Survival curves with ggplot2 — ggsurv" />
+<meta property="og:title" content="Survival curves — ggsurv" />
 <meta property="og:description" content="This function produces Kaplan-Meier plots using ggplot2.
 As a first argument it needs a survfit object, created by the
 survival package. Default settings differ for single stratum and
@@ -110,7 +110,7 @@ multiple strata objects." />
       <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
     </li>
     <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanotory variables</a>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
@@ -174,13 +174,13 @@ multiple strata objects." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Survival curves with ggplot2</h1>
+    <h1>Survival curves</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggsurv.R'><code>R/ggsurv.R</code></a></small>
     <div class="hidden name"><code>ggsurv.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function produces Kaplan-Meier plots using <code>ggplot2</code>.
+    <p>This function produces Kaplan-Meier plots using <span class="pkg">ggplot2</span>.
 As a first argument it needs a <code>survfit</code> object, created by the
 <code>survival</code> package. Default settings differ for single stratum and
 multiple strata objects.</p>
@@ -224,7 +224,7 @@ for single stratum objects and <code>FALSE</code> for multiple strata objects.</
     <tr>
       <th>surv.col</th>
       <td><p>colour of the survival estimate. Defaults to black for
-one stratum, and to the default <code>ggplot2</code> colours for multiple
+one stratum, and to the default <span class="pkg">ggplot2</span> colours for multiple
 strata. Length of vector with colour names should be either 1 or equal
 to the number of strata.</p></td>
     </tr>
@@ -285,7 +285,7 @@ grey of <code>ggplot2</code> but will be white with borders around the plot.</p>
     <p>An object of class <code>ggplot</code></p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Edwin Thoen <a href='mailto:edwinthoen@gmail.com'>edwinthoen@gmail.com</a></p>
+    <p>Edwin Thoen</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
