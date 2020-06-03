@@ -56,7 +56,6 @@ reference:
   - ggally_denstrip
   - ggally_diagAxis
   - ggally_dot
-  - ggally_dot_and_box
   - ggally_facetbar
   - ggally_facetdensity
   - ggally_facetdensitystrip

@@ -122,7 +122,7 @@ Since there is only a marginal improvement by removing Hawaii, the original mode
 
 ## Full diagnostic plot matrix example
 
-The following lines of code will display different modle diagnostic plot matrices for the same statistical model.  The first one is of the default settings. The second adds color according to the ``species``. Finally, the third displays all possible columns and uses `ggally_smooth()` to display the fitted points and response variables.
+The following lines of code will display different model diagnostic plot matrices for the same statistical model.  The first one is of the default settings. The second adds color according to the ``species``. Finally, the third displays all possible columns and uses `ggally_smooth()` to display the fitted points and response variables.
 
 ```{r nostic_flea}
 flea_model <- step(lm(head ~ ., data = flea), trace = FALSE)

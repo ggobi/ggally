@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_diagAxis}
 \alias{ggally_diagAxis}
-\title{Internal Axis Labeling Plot for ggpairs}
+\title{Internal axis labels for ggpairs}
 \usage{
 ggally_diagAxis(
   data,
@@ -47,5 +47,5 @@ This function is used when \code{axisLabels == "internal"}.
  ggally_diagAxis(tips, ggplot2::aes(x=sex))
 }
 \author{
-Jason Crowley \email{crowley.jason.s@gmail.com} and Barret Schloerke
+Jason Crowley and Barret Schloerke
 }

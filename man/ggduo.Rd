@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggpairs.R
 \name{ggduo}
 \alias{ggduo}
-\title{ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame}
+\title{\pkg{ggplot2} generalized pairs plot for two columns sets of data}
 \usage{
 ggduo(
   data,

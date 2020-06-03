@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_density}
 \alias{ggally_density}
-\title{Plots the Scatter Density Plot}
+\title{Bivariate density plot}
 \usage{
 ggally_density(data, mapping, ...)
 }
@@ -14,10 +14,10 @@ ggally_density(data, mapping, ...)
 \item{...}{parameters sent to either stat_density2d or geom_density2d}
 }
 \description{
-Make a scatter density plot from a given data.
+Make a 2D density plot from a given data.
 }
 \details{
-The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_density2d (lines) is used.
+The aesthetic "fill" determines whether or not \code{stat_density2d} (filled) or \code{geom_density2d} (lines) is used.
 }
 \examples{
  data(tips, package = "reshape")
@@ -33,6 +33,6 @@ The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_d
  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

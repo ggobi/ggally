@@ -17,5 +17,5 @@ Calculate the sample skewness of a vector
 while ignoring missing values.
 }
 \author{
-Jason Crowley \email{crowley.jason.s@gmail.com}
+Jason Crowley
 }

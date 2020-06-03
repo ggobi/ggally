@@ -3,7 +3,7 @@
 \name{ggally_colbar}
 \alias{ggally_colbar}
 \alias{ggally_rowbar}
-\title{Column and Row bar plots}
+\title{Column and row bar plots}
 \usage{
 ggally_colbar(
   data,
@@ -72,6 +72,6 @@ ggduo(
 )
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }
 \keyword{hplot}

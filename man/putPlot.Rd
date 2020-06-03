@@ -3,7 +3,7 @@
 \name{putPlot}
 \alias{putPlot}
 \alias{[<-.ggmatrix}
-\title{Put Plot}
+\title{Insert a plot into a \code{\link{ggmatrix}} object}
 \usage{
 putPlot(pm, value, i, j)
 
@@ -43,7 +43,10 @@ custom_car[3,1] <- "blank" # the same as storing null
 custom_car[3,2] <- NULL
 custom_car
 }
+\seealso{
+\code{\link{getPlot}}
+}
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

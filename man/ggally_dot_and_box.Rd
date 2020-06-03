@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_dot_and_box}
 \alias{ggally_dot_and_box}
-\title{Plots either Box Plot or Dot Plots}
+\title{Box and dot plot}
 \usage{
 ggally_dot_and_box(data, mapping, ..., boxPlot = TRUE)
 }
@@ -32,6 +32,6 @@ Place box plots or dot plots on the graph
  )
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
-\keyword{hplot}
+\keyword{internal}

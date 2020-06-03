@@ -1,10 +1,37 @@
 GGally (development version)
 ---------------------
 
-### New Functions:
+### Vignettes
+* `vignette("ggally_plots")` - List of available high-level plots
+* `vignette("ggally_stats")` - Additional statistics for ggplot2
+* `vignette("ggbivariate")` - ggbivariate(): Plot an outcome with several potential explanatory variables
+* `vignette("ggcoef")` - ggcoef(): Model coefficients
+* `vignette("ggduo")` - ggduo(): Two-grouped plot matrix
+* `vignette("ggmatrix")` - ggmatrix(): Plot matrix
+* `vignette("ggnetworkmap")` - ggnetworkmap(): Network + map plot
+* `vignette("ggnostic")` - ggnostic(): Model diagnostics plot matrix
+* `vignette("ggpairs")` - ggpairs(): Pairwise plot matrix
+* `vignette("ggscatmat")` - ggscatmat(): Numeric pairwise plot matrix
+* `vignette("ggsurv")` - ggsurv(): Survival curves
+* `vignette("ggtable")` - ggtable(): Cross-tabulated tables
+* `vignette("glyph")` - glyphs(): Glyph plot
+
+
+### New functions
+
+`ggbivariate()` (@larmarange, #324)
+* Display an outcome using several potential explanatory variables
+* `vignette("ggbivariate")`
+
+`ggtable()` (@larmarange, #351)
+* Cross-tabulated tables of discrete variables
+* `vignette("ggtable")`
 
 `ggally_autopoint()`, `ggally_autopointDiag()` (@larmarange, #325)
-* Make scatterplots compatible with both continuous and catgeorical variables using `ggforce::geom_autopoint()`.
+* Make scatterplots compatible with both continuous and categorical variables using `ggforce::geom_autopoint()`.
+
+`ggally_colbar()`, `ggally_rowbar()` (@larmarange, #324)
+* Plot column or row percentage using bar plots.
 
 `ggally_count()`, `ggally_countDiag()` (@larmarange, #321)
 * Plot the number of observations by using rectangles with proportional areas.
@@ -16,11 +43,11 @@ GGally (development version)
 * Display a cross-tabulated table.
 
 `ggally_statistic()` (#327)
-* A generialized version of `ggally_cor()`
+* A generalized version of `ggally_cor()`
 * Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
 
-`ggally_summarise_by()`
-* Display summary statisctics of a continuous variable for each value of a discrete variable.
+`ggally_summarise_by()` (@larmarange, #325)
+* Display summary statistics of a continuous variable for each value of a discrete variable.
 
 `ggally_table()` (@larmarange, #326)
 * Plot the number of observations as a table.
@@ -36,10 +63,13 @@ GGally (development version)
 `stat_cross` (@larmarange, #326)
 * Computes statistics of a 2-dimensional matrix using `broom::augment.htest`.
 
+`stat_prop` (@larmarange, #324)
+* Compute proportions according to custom denominator.
+
 `stat_weighted_mean` (@larmarange, #333)
 * Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.
 
-### Features and Bug Fixes:
+### Major updates
 
 `ggally_cor()` (#327)
 * New implementation using `ggally_statistic()`
@@ -50,6 +80,8 @@ GGally (development version)
 * Digits now represents the total number of digits after the decimal place.
 * To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
 * Previously deprecated parameters have been removed
+
+### Features and bug fixes:
 
 `ggpairs()` (#331)
 * new `proportion` argument to control relative size of sub-plots

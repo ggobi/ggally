@@ -3,7 +3,7 @@
 \name{ggally_autopoint}
 \alias{ggally_autopoint}
 \alias{ggally_autopointDiag}
-\title{Scatterplot for continuous and categorial variables}
+\title{Scatterplot for continuous and categorical variables}
 \usage{
 ggally_autopoint(data, mapping, ...)
 
@@ -17,7 +17,7 @@ ggally_autopointDiag(data, mapping, ...)
 \item{...}{other arguments passed to \code{\link[ggforce]{geom_autopoint}(...)}}
 }
 \description{
-Make scatterplots compatible with both continuous and catgeorical variables
+Make scatterplots compatible with both continuous and categorical variables
 using \code{\link[ggforce]{geom_autopoint}} from package \pkg{ggforce}.
 }
 \examples{

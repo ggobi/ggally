@@ -9,7 +9,7 @@
 #' @param corMethod \code{method} supplied to cor function
 #' @param corUse \code{use} supplied to cor function
 #' @param ... other arguments being supplied to geom_text
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @export
 #' @keywords hplot
 #' @examples

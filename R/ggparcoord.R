@@ -4,7 +4,7 @@ if (getRversion() >= "2.15.1") {
 
 
 
-#' ggparcoord - A ggplot2 Parallel Coordinate Plot
+#' Parallel coordinate plot
 #'
 #' A function for plotting static parallel coordinate plots, utilizing
 #' the \code{ggplot2} graphics package.
@@ -73,11 +73,11 @@ if (getRversion() >= "2.15.1") {
 #' @param alphaLines value of alpha scaler for the lines of the parcoord plot or a column name of the data
 #' @param boxplot logical operator indicating whether or not boxplots should
 #'   underlay the distribution of each variable
-#' @param shadeBox color of underlaying box which extends from the min to the
-#'   max for each variable (no box is plotted if shadeBox == NULL)
+#' @param shadeBox color of underlying box which extends from the min to the
+#'   max for each variable (no box is plotted if \code{shadeBox == NULL})
 #' @param mapping aes string to pass to ggplot object
 #' @param title character string denoting the title of the plot
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
+#' @author Jason Crowley, Barret Schloerke, Di Cook, Heike Hofmann, Hadley Wickham
 #' @return ggplot object that if called, will print
 #' @import plyr
 #' @importFrom reshape melt melt.data.frame
@@ -602,7 +602,7 @@ ggparcoord <- function(
 #'
 #' @keywords internal
 #' @param df data frame to extract variable types from
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @author Jason Crowley
 #' @return character vector with variable types, with names corresponding to
 #'   the variable names from df
 column_is_character <- function(df) {
@@ -695,7 +695,7 @@ scag_order <- function(scag, vars, measure) {
 #' @param specClass character string matching to level of \code{classVar}; instead
 #'   of looking for separation between any class and the rest, will only look for
 #'   separation between this class and the rest
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @author Jason Crowley
 #' @importFrom stats lm
 #' @return character vector of names of axisVars ordered such that the first
 #'   variable has the most separation between one of the classes and the rest, and
@@ -725,7 +725,7 @@ singleClassOrder <- function(classVar, axisVars, specClass=NULL) {
 #' while ignoring missing values.
 #'
 #' @param x numeric vector
-#' @author Jason Crowley \email{crowley.jason.s@@gmail.com}
+#' @author Jason Crowley
 #' @return sample skewness of \code{x}
 skewness <- function(x) {
   x <- x[!is.na(x)]

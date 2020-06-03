@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggcoef.R
 \name{ggcoef}
 \alias{ggcoef}
-\title{ggcoef - Plot Model Coefficients with broom and ggplot2}
+\title{Model coefficients with \pkg{broom} and \pkg{ggplot2}}
 \usage{
 ggcoef(
   x,

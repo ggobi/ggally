@@ -3,7 +3,7 @@
 #' Retrieves the type of plot that should be used for all combinations
 #'
 #' @param data data set to be used
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @keywords internal
 plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
 
@@ -65,7 +65,7 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
   dataInfo
 }
 
-#' Find Plot Types
+#' Find plot types
 #'
 #' Retrieves the type of plot for the specific columns
 #'
@@ -75,7 +75,8 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
 #' @param type2 y column type
 #' @param isAllNa is.na(data)
 #' @param allowDiag allow for diag values to be returned
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
+#' @keywords internal
 find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa, allowDiag) {
 
   # diag calculations

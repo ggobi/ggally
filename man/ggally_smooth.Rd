@@ -4,7 +4,7 @@
 \alias{ggally_smooth}
 \alias{ggally_smooth_loess}
 \alias{ggally_smooth_lm}
-\title{Plots the Scatter Plot with Smoothing}
+\title{Scatter plot with a smoothed line}
 \usage{
 ggally_smooth(
   data,
@@ -44,6 +44,6 @@ Y limits are reduced to match original Y range with the goal of keeping the Y ax
  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

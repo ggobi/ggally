@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_facetdensitystrip}
 \alias{ggally_facetdensitystrip}
-\title{Plots a density plot with facets or a tile plot with facets}
+\title{Density or tiles plot with facets}
 \usage{
 ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
@@ -16,13 +16,13 @@ ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 \item{den_strip}{boolean to decide whether or not to plot a density strip(TRUE) or a facet density(FALSE) plot.}
 }
 \description{
-Make Tile Plot as densely as possible.
+Make tile plot or density plot as compact as possible.
 }
 \examples{
 example(ggally_facetdensity)
 example(ggally_denstrip)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

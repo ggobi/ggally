@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_densityDiag}
 \alias{ggally_densityDiag}
-\title{Plots the Density Plots by Using Diagonal}
+\title{Univariate density plot}
 \usage{
 ggally_densityDiag(data, mapping, ..., rescale = FALSE)
 }
@@ -16,7 +16,7 @@ ggally_densityDiag(data, mapping, ..., rescale = FALSE)
 \item{rescale}{boolean to decide whether or not to rescale the count output}
 }
 \description{
-Plots the density plots by using Diagonal.
+Displays a density plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 }
 \examples{
  data(tips, package = "reshape")
@@ -24,6 +24,6 @@ Plots the density plots by using Diagonal.
  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

@@ -1,10 +1,10 @@
 ---
-title: "ggbivariate(): Plot an outcome with several potential explanotory variables"
+title: "ggbivariate(): Plot an outcome with several potential explanatory variables"
 output: rmarkdown::html_vignette
 author: Joseph Larmarange
 date: May 16, 2016
 vignette: >
-  %\VignetteIndexEntry{ggbivariate(): Plot an outcome with several potential explanotory variables}
+  %\VignetteIndexEntry{ggbivariate(): Plot an outcome with several potential explanatory variables}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,11 +23,11 @@ library(GGally)
 
 # `GGally::ggbivariate()`
 
-The purpose of this function is to easily plot a visualisation of the bivariate relation betwen one outcome and several explanatory variables.
+The purpose of this function is to easily plot a visualization of the bivariate relation between one outcome and several explanatory variables.
 
 ## Basic example
 
-Simply indicate the outcome and the explanotory variables. Both could be discrete or continuous.
+Simply indicate the outcome and the explanatory variables. Both could be discrete or continuous.
 
 ```{r}
 data(tips, package = "reshape")
@@ -45,7 +45,7 @@ ggbivariate(tips, "smoker")
 ```
 
 
-## Customize plot titlle and legend title
+## Customize plot title and legend title
 
 ```{r}
 ggbivariate(
@@ -107,4 +107,4 @@ ggbivariate(
 )
 ```
 
-For more customisation options, you could directly use `ggduo()` (see also `vignette("ggduo")`).
+For more customization options, you could directly use `ggduo()` (see also `vignette("ggduo")`).

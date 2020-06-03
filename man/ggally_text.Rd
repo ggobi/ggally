@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_text}
 \alias{ggally_text}
-\title{Text Plot}
+\title{Text plot}
 \usage{
 ggally_text(
   label,
@@ -37,6 +37,6 @@ ggally_text("Example 1")
 ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red"))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

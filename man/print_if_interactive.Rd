@@ -10,5 +10,5 @@ print_if_interactive(p)
 \item{p}{plot to be displayed}
 }
 \description{
-Small function to print a plot if the R session is interactive or in a travis build
+Small function to print a plot if the R session is interactive or in a CI build
 }

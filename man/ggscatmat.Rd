@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggscatmat.R
 \name{ggscatmat}
 \alias{ggscatmat}
-\title{ggscatmat - a traditional scatterplot matrix for purely quantitative variables}
+\title{Traditional scatterplot matrix for purely quantitative variables}
 \usage{
 ggscatmat(
   data,
@@ -34,5 +34,5 @@ ggscatmat(flea, columns = 2:4)
 ggscatmat(flea, columns = 2:4, color = "species")
 }
 \author{
-Mengjia Ni, Di Cook \email{dicook@monash.edu}
+Mengjia Ni, Di Cook
 }

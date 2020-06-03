@@ -2,9 +2,9 @@ if(getRversion() >= "2.15.1") {
   utils::globalVariables(c("cens", "surv", "up", "low"))
 }
 
-#' Survival curves with ggplot2
+#' Survival curves
 #'
-#' This function produces Kaplan-Meier plots using \code{ggplot2}.
+#' This function produces Kaplan-Meier plots using \pkg{ggplot2}.
 #' As a first argument it needs a \code{survfit} object, created by the
 #' \code{survival} package. Default settings differ for single stratum and
 #' multiple strata objects.
@@ -15,7 +15,7 @@ if(getRversion() >= "2.15.1") {
 #'    for single stratum objects and \code{FALSE} for multiple strata objects.
 #' @param plot.cens mark the censored observations?
 #' @param surv.col colour of the survival estimate. Defaults to black for
-#'    one stratum, and to the default \code{ggplot2} colours for multiple
+#'    one stratum, and to the default \pkg{ggplot2} colours for multiple
 #'    strata. Length of vector with colour names should be either 1 or equal
 #'    to the number of strata.
 #' @param cens.col colour of the points that mark censored observations.
@@ -33,7 +33,7 @@ if(getRversion() >= "2.15.1") {
 #' @param main the plot label.
 #' @param order.legend boolean to determine if the legend display should be ordered by final survival time
 #' @return An object of class \code{ggplot}
-#' @author Edwin Thoen \email{edwinthoen@@gmail.com}
+#' @author Edwin Thoen
 #' @importFrom stats time
 #' @examples
 #'

@@ -3,7 +3,7 @@
 \name{ggally_blank}
 \alias{ggally_blank}
 \alias{ggally_blankDiag}
-\title{Blank}
+\title{Blank plot}
 \usage{
 ggally_blank(...)
 
@@ -18,7 +18,10 @@ Draws nothing.
 \details{
 Makes a "blank" ggplot object that will only draw white space
 }
+\seealso{
+\code{ggplot2::\link[ggplot2]{element_blank}()}
+}
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

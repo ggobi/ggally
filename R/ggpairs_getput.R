@@ -1,4 +1,4 @@
-#' Put Plot
+#' Insert a plot into a \code{\link{ggmatrix}} object
 #'
 #' Function to place your own plot in the layout.
 #'
@@ -7,7 +7,8 @@
 #' @param i row from the top
 #' @param j column from the left
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
+#' @seealso \code{\link{getPlot}}
 #' @export
 #' @examples
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
@@ -45,16 +46,17 @@ putPlot <- function(pm, value, i, j){
   pm
 }
 
-#' getPlot
+#' Subset a \code{\link{ggmatrix}} object
 #'
 #' Retrieves the ggplot object at the desired location.
 #'
-#' @param pm ggmatrix object to select from
+#' @param pm \code{\link{ggmatrix}} object to select from
 #' @param i row from the top
 #' @param j column from the left
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @importFrom utils capture.output
+#' @seealso \code{\link{putPlot}}
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
