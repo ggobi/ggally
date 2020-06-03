@@ -23,7 +23,7 @@ numerical variables}
 
 \item{cells}{Which statistic should be displayed in table cells?}
 
-\item{fill}{Wich statistic should be used for filling table cells?}
+\item{fill}{Which statistic should be used for filling table cells?}
 
 \item{mapping}{additional aesthetic to be used, for example to indicate
 weights (see examples)}

@@ -241,6 +241,6 @@ ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
 package
 }
 \author{
-Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+Moritz Marbach and Francois Briatte, with help from Heike Hofmann,
 Pedro Jordano and Ming-Yu Liu
 }

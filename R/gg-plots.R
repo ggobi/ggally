@@ -1642,9 +1642,9 @@ ggally_naDiag <- function(...) {
 
 
 
-#' Scatterplot for continuous and categorial variables
+#' Scatterplot for continuous and categorical variables
 #'
-#' Make scatterplots compatible with both continuous and catgeorical variables
+#' Make scatterplots compatible with both continuous and categorical variables
 #' using \code{\link[ggforce]{geom_autopoint}} from package \pkg{ggforce}.
 #'
 #' @param data data set using
@@ -1691,14 +1691,14 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 }
 
 
-#' Summarise a continuous variable by each value of a discrete variable
+#' Summarize a continuous variable by each value of a discrete variable
 #'
-#' Display summary statisctics of a continuous variable for each value of a discrete variable.
+#' Display summary statistics of a continuous variable for each value of a discrete variable.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
 #' @param text_fn function that takes an x and weights and returns a text string
-#' @param text_fn_vertical function that takes an x and weights and returns a text string, used when \code{x} is discrete and \code{y} is continous. If not provided, will use \code{text_fn}, replacing spaces by carriage returns.
+#' @param text_fn_vertical function that takes an x and weights and returns a text string, used when \code{x} is discrete and \code{y} is continuous. If not provided, will use \code{text_fn}, replacing spaces by carriage returns.
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
 #' @author Joseph Larmarange \email{joseph@@larmarange.net}
 #' @keywords hplot
@@ -1791,7 +1791,7 @@ ggally_summarise_by <- function(
 
 #' @rdname ggally_summarise_by
 #' @param x a numeric vector
-#' @param weights an optionnal numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.
+#' @param weights an optional numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.
 #' @details
 #' \code{median_iqr} computes median and interquartile range.
 #' @export

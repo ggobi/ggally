@@ -4,7 +4,7 @@
 \name{stat_cross}
 \alias{stat_cross}
 \alias{StatCross}
-\title{Compute cross-tabulation statisticics}
+\title{Compute cross-tabulation statistics}
 \usage{
 stat_cross(
   mapping = NULL,

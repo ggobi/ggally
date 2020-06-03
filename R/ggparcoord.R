@@ -73,8 +73,8 @@ if (getRversion() >= "2.15.1") {
 #' @param alphaLines value of alpha scaler for the lines of the parcoord plot or a column name of the data
 #' @param boxplot logical operator indicating whether or not boxplots should
 #'   underlay the distribution of each variable
-#' @param shadeBox color of underlaying box which extends from the min to the
-#'   max for each variable (no box is plotted if shadeBox == NULL)
+#' @param shadeBox color of underlying box which extends from the min to the
+#'   max for each variable (no box is plotted if \code{shadeBox == NULL})
 #' @param mapping aes string to pass to ggplot object
 #' @param title character string denoting the title of the plot
 #' @author Jason Crowley \email{crowley.jason.s@@gmail.com}, Barret Schloerke \email{schloerke@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}

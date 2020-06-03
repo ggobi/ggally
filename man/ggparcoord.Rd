@@ -51,8 +51,8 @@ plotted or not}
 \item{boxplot}{logical operator indicating whether or not boxplots should
 underlay the distribution of each variable}
 
-\item{shadeBox}{color of underlaying box which extends from the min to the
-max for each variable (no box is plotted if shadeBox == NULL)}
+\item{shadeBox}{color of underlying box which extends from the min to the
+max for each variable (no box is plotted if \code{shadeBox == NULL})}
 
 \item{mapping}{aes string to pass to ggplot object}
 

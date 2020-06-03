@@ -74,7 +74,7 @@ ggbivariate <- function(
     mapping$colour <- aes_string(colour = outcome)$colour
   }
 
-  # default behaviour
+  # default behavior
   if (is.null(types$discrete))
     types$discrete = wrapp(ggally_rowbar, rowbar_args)
   if (is.null(types$comboVertical))

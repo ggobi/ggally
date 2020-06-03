@@ -4,7 +4,7 @@
 \alias{ggally_summarise_by}
 \alias{median_iqr}
 \alias{mean_sd}
-\title{Summarise a continuous variable by each value of a discrete variable}
+\title{Summarize a continuous variable by each value of a discrete variable}
 \usage{
 ggally_summarise_by(
   data,
@@ -25,16 +25,16 @@ mean_sd(x, weights = NULL)
 
 \item{text_fn}{function that takes an x and weights and returns a text string}
 
-\item{text_fn_vertical}{function that takes an x and weights and returns a text string, used when \code{x} is discrete and \code{y} is continous. If not provided, will use \code{text_fn}, replacing spaces by carriage returns.}
+\item{text_fn_vertical}{function that takes an x and weights and returns a text string, used when \code{x} is discrete and \code{y} is continuous. If not provided, will use \code{text_fn}, replacing spaces by carriage returns.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2]{geom_text}(...)}}
 
 \item{x}{a numeric vector}
 
-\item{weights}{an optionnal numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.}
+\item{weights}{an optional numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.}
 }
 \description{
-Display summary statisctics of a continuous variable for each value of a discrete variable.
+Display summary statistics of a continuous variable for each value of a discrete variable.
 }
 \details{
 \code{median_iqr} computes median and interquartile range.

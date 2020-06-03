@@ -1,4 +1,4 @@
-#' Compute cross-tabulation statisticics
+#' Compute cross-tabulation statistics
 #'
 #' Computes statistics of a 2-dimensional matrix using \code{\link[broom]{augment.htest}}
 #' from \pkg{broom}.

@@ -45,7 +45,7 @@ ggbivariate(tips, "smoker")
 ```
 
 
-## Customize plot titlle and legend title
+## Customize plot title and legend title
 
 ```{r}
 ggbivariate(
@@ -107,4 +107,4 @@ ggbivariate(
 )
 ```
 
-For more customisation options, you could directly use `ggduo()` (see also `vignette("ggduo")`).
+For more customization options, you could directly use `ggduo()` (see also `vignette("ggduo")`).

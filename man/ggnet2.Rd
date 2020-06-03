@@ -352,6 +352,6 @@ ggnet2(flo, label = TRUE, size = 12, color = "white")
 package
 }
 \author{
-Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+Moritz Marbach and Francois Briatte, with help from Heike Hofmann,
 Pedro Jordano and Ming-Yu Liu
 }
