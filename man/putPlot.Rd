@@ -3,7 +3,7 @@
 \name{putPlot}
 \alias{putPlot}
 \alias{[<-.ggmatrix}
-\title{Insert a plot into a \link{\code{ggmatrix}} object}
+\title{Insert a plot into a \code{\link{ggmatrix}} object}
 \usage{
 putPlot(pm, value, i, j)
 

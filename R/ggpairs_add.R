@@ -21,7 +21,7 @@
 #' The \code{+} operator completely replaces elements
 #' with elements from e2.
 #'
-#' @param e1 An object of class \link{\code{ggnostic}} or \code{ggplot}
+#' @param e1 An object of class \code{\link{ggnostic}} or \code{ggplot}
 #' @param e2 A component to add to \code{e1}
 #'
 #' @export

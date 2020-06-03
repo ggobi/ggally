@@ -1,4 +1,4 @@
-#' Insert a plot into a \link{\code{ggmatrix}} object
+#' Insert a plot into a \code{\link{ggmatrix}} object
 #'
 #' Function to place your own plot in the layout.
 #'
@@ -46,7 +46,7 @@ putPlot <- function(pm, value, i, j){
   pm
 }
 
-#' Subset a \link{\code{ggmatrix}} object
+#' Subset a \code{\link{ggmatrix}} object
 #'
 #' Retrieves the ggplot object at the desired location.
 #'

@@ -3,7 +3,7 @@
 \name{getPlot}
 \alias{getPlot}
 \alias{[.ggmatrix}
-\title{Subset a \link{\code{ggmatrix}} object}
+\title{Subset a \code{\link{ggmatrix}} object}
 \usage{
 getPlot(pm, i, j)
 

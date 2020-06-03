@@ -1,4 +1,4 @@
-#' Create \link{\code{glyphplot}} data
+#' Create \code{\link{glyphplot}} data
 #'
 #' Create the data needed to generate a glyph plot.
 #'
