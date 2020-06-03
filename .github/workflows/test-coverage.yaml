@@ -42,5 +42,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
+        env:
+          CAN_PRINT: "TRUE"
         run: covr::codecov()
         shell: Rscript {0}
