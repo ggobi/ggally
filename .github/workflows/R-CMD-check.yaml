@@ -18,14 +18,14 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'devel', force_suggests: "0"}
-          - {os: windows-latest, r: 'devel'}
-          - {os: macOS-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-16.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: macOS-latest,   r: 'oldrel'}
-          - {os: windows-latest, r: 'oldrel'}
-          - {os: ubuntu-16.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          - { os: macOS-latest,   r: 'devel',   force_suggests: "0" }
+          - { os: windows-latest, r: 'devel',   force_suggests: "1" }
+          - { os: macOS-latest,   r: 'release', force_suggests: "1" }
+          - { os: windows-latest, r: 'release', force_suggests: "1" }
+          - { os: ubuntu-16.04,   r: 'release', force_suggests: "1",  rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest" }
+          - { os: macOS-latest,   r: 'oldrel',  force_suggests: "1" }
+          - { os: windows-latest, r: 'oldrel',  force_suggests: "1" }
+          - { os: ubuntu-16.04,   r: 'oldrel',  force_suggests: "1" , rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest" }
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -86,10 +86,16 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      - name: Check
+      - name: Check with printing
         env:
           _R_CHECK_CRAN_INCOMING_: false
           CAN_PRINT: "TRUE"
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
+
+      - name: Check as CRAN
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
