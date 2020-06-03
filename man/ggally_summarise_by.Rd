@@ -65,6 +65,6 @@ weighted_sum <- function(x, weights = NULL) {
 ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }
 \keyword{hplot}

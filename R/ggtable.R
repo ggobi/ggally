@@ -11,7 +11,7 @@
 #' @param mapping additional aesthetic to be used, for example to indicate
 #'   weights (see examples)
 #' @param ... additional arguments passed to \code{\link{ggduo}} (see examples)
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @export
 #' @examples
 #' data(tips, package = "reshape")

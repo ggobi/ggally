@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_sigma}
 \alias{ggally_nostic_sigma}
-\title{\link{\code{ggnostic}} leave one out model sigma}
+\title{\code{\link{ggnostic}} leave one out model sigma}
 \usage{
 ggally_nostic_sigma(
   data,

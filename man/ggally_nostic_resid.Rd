@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_resid}
 \alias{ggally_nostic_resid}
-\title{\link{\code{ggnostic}} residuals}
+\title{\code{\link{ggnostic}} residuals}
 \usage{
 ggally_nostic_resid(
   data,

@@ -32,6 +32,6 @@ Make a box plot with a given data set. \code{ggally_box_no_facet} will be a sing
  )
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

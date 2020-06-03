@@ -47,5 +47,5 @@ This function is used when \code{axisLabels == "internal"}.
  ggally_diagAxis(tips, ggplot2::aes(x=sex))
 }
 \author{
-Jason Crowley \email{crowley.jason.s@gmail.com} and Barret Schloerke
+Jason Crowley and Barret Schloerke
 }

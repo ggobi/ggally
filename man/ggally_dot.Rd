@@ -33,6 +33,6 @@ Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single pan
  ) + ggplot2::scale_shape(solid=FALSE)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

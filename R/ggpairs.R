@@ -652,7 +652,7 @@ ggduo <- function(
 #' @keywords hplot
 #' @import ggplot2
 #' @references John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
-#' @author Barret Schloerke \email{schloerke@@gmail.com}, Jason Crowley \email{crowley.jason.s@@gmail.com}, Di Cook \email{dicook@@iastate.edu}, Heike Hofmann \email{hofmann@@iastate.edu}, Hadley Wickham \email{h.wickham@@gmail.com}
+#' @author Barret Schloerke, Jason Crowley, Di Cook, Heike Hofmann, Hadley Wickham
 #' @return \code{\link{ggmatrix}} object that if called, will print
 #' @examples
 #'  # small function to display plots only if it's interactive
@@ -914,7 +914,7 @@ ggpairs <- function(
 #' Add new aesthetics to a previous aes.
 #'
 #' @keywords internal
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @return aes_ output
 #' @import ggplot2
 #' @rdname add_and_overwrite_aes

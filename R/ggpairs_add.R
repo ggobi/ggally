@@ -3,7 +3,7 @@
 #'
 #' This operator allows you to add \pkg{ggplot2} objects to a \code{\link{ggmatrix}} object.
 #'
-#' If the first object is an object of class \code{ggmatrix}, you can add
+#' If the first object is an object of class \code{\link{ggmatrix}}, you can add
 #' the following types of objects, and it will return a modified \pkg{ggplot2}
 #' object.
 #'
@@ -21,7 +21,7 @@
 #' The \code{+} operator completely replaces elements
 #' with elements from e2.
 #'
-#' @param e1 An object of class \code{ggmatrix} or \code{ggplot}
+#' @param e1 An object of class \link{\code{ggnostic}} or \code{ggplot}
 #' @param e2 A component to add to \code{e1}
 #'
 #' @export

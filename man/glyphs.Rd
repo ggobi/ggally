@@ -56,5 +56,5 @@ Create the data needed to generate a glyph plot.
    ggplot2::labs(x = "", y = "")
 }
 \author{
-Di Cook \email{dicook@monash.edu}, Heike Hofmann, Hadley Wickham
+Di Cook, Heike Hofmann, Hadley Wickham
 }

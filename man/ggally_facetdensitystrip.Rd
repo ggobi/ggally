@@ -23,6 +23,6 @@ example(ggally_facetdensity)
 example(ggally_denstrip)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

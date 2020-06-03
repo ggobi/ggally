@@ -19,7 +19,7 @@
 #' @seealso \code{\link[ggplot2]{stat_count}}
 #'
 #' @import ggplot2
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @export
 #' @examples
 #'
@@ -138,7 +138,7 @@ StatProp <- ggproto("StatProp", Stat,
 #' @param remove_percentage_axis should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}
 #' @param remove_background should the \code{panel.background} be removed?
 #' @param geom_bar_args other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @keywords hplot
 #' @export
 #' @examples

@@ -30,6 +30,6 @@ Retrieves the ggplot object at the desired location.
 \code{\link{putPlot}}
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

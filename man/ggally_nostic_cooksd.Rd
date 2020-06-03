@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_cooksd}
 \alias{ggally_nostic_cooksd}
-\title{\link{\code{ggnostic}} Cook's distance}
+\title{\code{\link{ggnostic}} Cook's distance}
 \usage{
 ggally_nostic_cooksd(
   data,

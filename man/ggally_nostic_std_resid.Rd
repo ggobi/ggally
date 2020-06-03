@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_std_resid}
 \alias{ggally_nostic_std_resid}
-\title{\link{\code{ggnostic}} standardized residuals}
+\title{\code{\link{ggnostic}} standardized residuals}
 \usage{
 ggally_nostic_std_resid(data, mapping, ..., sigma = 1)
 }

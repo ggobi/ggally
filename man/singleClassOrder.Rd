@@ -25,5 +25,5 @@ Order axis variables by separation between one class and the rest
 (most separation to least).
 }
 \author{
-Jason Crowley \email{crowley.jason.s@gmail.com}
+Jason Crowley
 }

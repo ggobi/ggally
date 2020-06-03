@@ -93,6 +93,6 @@ pm <- ggmatrix(
 p_(pm)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

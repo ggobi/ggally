@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_hat}
 \alias{ggally_nostic_hat}
-\title{\link{\code{ggnostic}} leverage points}
+\title{\code{\link{ggnostic}} leverage points}
 \usage{
 ggally_nostic_hat(
   data,

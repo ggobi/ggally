@@ -22,6 +22,6 @@ Makes a "blank" ggplot object that will only draw white space
 \code{ggplot2::\link[ggplot2]{element_blank}()}
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

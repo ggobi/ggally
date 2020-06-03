@@ -21,7 +21,7 @@
 #' @param gg \pkg{ggplot2} theme objects to be applied to every plot
 #' @template ggmatrix-legend-param
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @importFrom rlang %||%
 #' @export
 #' @examples

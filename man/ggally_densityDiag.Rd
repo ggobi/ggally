@@ -24,6 +24,6 @@ Displays a density plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

@@ -27,5 +27,5 @@ pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
 ggmatrix_gtable(pm)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }

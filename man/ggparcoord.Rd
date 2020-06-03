@@ -186,5 +186,5 @@ p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(spline
 p_(p)
 }
 \author{
-Jason Crowley \email{crowley.jason.s@gmail.com}, Barret Schloerke \email{schloerke@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
+Jason Crowley, Barret Schloerke, Di Cook, Heike Hofmann, Hadley Wickham
 }

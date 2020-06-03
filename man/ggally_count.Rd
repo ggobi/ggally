@@ -45,7 +45,7 @@ ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
 ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }
 \keyword{datasets}
 \keyword{hplot}

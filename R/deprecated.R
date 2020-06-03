@@ -14,7 +14,7 @@
 #' @param corUse deprecated. Use parameter \code{use}
 #' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export

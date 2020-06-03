@@ -14,7 +14,7 @@
 #' @param ... additional arguments passed to \code{\link{ggduo}} (see examples)
 #' @param rowbar_args additional arguments passed to \code{\link{ggally_rowbar}}
 #'   (see examples)
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @export
 #' @examples
 #' data(tips, package = "reshape")

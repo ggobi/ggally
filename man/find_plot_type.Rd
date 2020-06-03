@@ -23,6 +23,6 @@ find_plot_type(col1Name, col2Name, type1, type2, isAllNa, allowDiag)
 Retrieves the type of plot for the specific columns
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{internal}

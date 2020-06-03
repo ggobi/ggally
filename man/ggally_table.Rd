@@ -78,6 +78,6 @@ ggally_table(
 scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }
 \keyword{hplot}

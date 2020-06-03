@@ -136,7 +136,7 @@ brew_colors <- function(col) {
 
 
 
-#' \link{\code{ggnostic}} background line with geom
+#' \code{\link{ggnostic}} background line with geom
 #'
 #' If a non-null \code{linePosition} value is given, a line will be drawn before the given \code{continuous_geom} or \code{combo_geom} is added to the plot.
 #'
@@ -191,7 +191,7 @@ ggally_nostic_line <- function(
 
 
 
-#' \link{\code{ggnostic}} residuals
+#' \code{\link{ggnostic}} residuals
 #'
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} percentiles of a N(0, sigma) distribution.
 #'
@@ -260,7 +260,7 @@ ggally_nostic_resid <- function(
 
 
 
-#' \link{\code{ggnostic}} standardized residuals
+#' \code{\link{ggnostic}} standardized residuals
 #'
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} locations of a N(0, 1) distribution.
 #'
@@ -284,7 +284,7 @@ ggally_nostic_std_resid <- function(
 }
 
 
-#' \link{\code{ggnostic}} fitted value's standard error
+#' \code{\link{ggnostic}} fitted value's standard error
 #'
 #' A function to display \code{stats::\link[stats]{predict}}'s standard errors
 #'
@@ -318,7 +318,7 @@ ggally_nostic_se_fit <- function(
 }
 
 
-#' \link{\code{ggnostic}} leave one out model sigma
+#' \code{\link{ggnostic}} leave one out model sigma
 #'
 #' A function to display \code{stats::\link[stats]{influence}}'s sigma value.
 #'
@@ -350,7 +350,7 @@ ggally_nostic_sigma <- function(
 }
 
 
-#' \link{\code{ggnostic}} Cook's distance
+#' \code{\link{ggnostic}} Cook's distance
 #'
 #' A function to display \code{stats::\link[stats]{cooks.distance}}.
 #'
@@ -386,7 +386,7 @@ ggally_nostic_cooksd <- function(
 
 
 
-#' \link{\code{ggnostic}} leverage points
+#' \code{\link{ggnostic}} leverage points
 #'
 #' A function to display stats::influence's hat information against a given explanatory variable.
 #'
@@ -536,7 +536,7 @@ check_and_set_nostic_types <- function(
 #'
 #'
 #' @section `columnsY`:
-#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
+#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{\link{ggnostic}}.
 #'
 #' \describe{
 #'   \item{.resid}{Residuals}

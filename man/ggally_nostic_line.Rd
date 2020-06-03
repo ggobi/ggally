@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_line}
 \alias{ggally_nostic_line}
-\title{\link{\code{ggnostic}} background line with geom}
+\title{\code{\link{ggnostic}} background line with geom}
 \usage{
 ggally_nostic_line(
   data,

@@ -16,7 +16,7 @@ add_ggproto_to_ggmatrix(
 )
 }
 \arguments{
-\item{e1}{An object of class \code{ggmatrix} or \code{ggplot}}
+\item{e1}{An object of class \link{\code{ggnostic}} or \code{ggplot}}
 
 \item{e2}{A component to add to \code{e1}}
 
@@ -31,7 +31,7 @@ of that type will be modified (see examples).}
 This operator allows you to add \pkg{ggplot2} objects to a \code{\link{ggmatrix}} object.
 }
 \details{
-If the first object is an object of class \code{ggmatrix}, you can add
+If the first object is an object of class \code{\link{ggmatrix}}, you can add
 the following types of objects, and it will return a modified \pkg{ggplot2}
 object.
 

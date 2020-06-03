@@ -59,5 +59,5 @@ ggtable(
 )
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }

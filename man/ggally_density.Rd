@@ -33,6 +33,6 @@ The aesthetic "fill" determines whether or not \code{stat_density2d} (filled) or
  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

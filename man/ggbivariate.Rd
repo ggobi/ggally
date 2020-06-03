@@ -77,5 +77,5 @@ ggbivariate(tips, outcome = "tip", title = "tip")
 }
 }
 \author{
-Joseph Larmarange \email{joseph@larmarange.net}
+Joseph Larmarange
 }

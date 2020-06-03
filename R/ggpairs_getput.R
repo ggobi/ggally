@@ -7,7 +7,7 @@
 #' @param i row from the top
 #' @param j column from the left
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @seealso \code{\link{getPlot}}
 #' @export
 #' @examples
@@ -54,7 +54,7 @@ putPlot <- function(pm, value, i, j){
 #' @param i row from the top
 #' @param j column from the left
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @importFrom utils capture.output
 #' @seealso \code{\link{putPlot}}
 #' @export

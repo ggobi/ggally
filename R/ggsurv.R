@@ -33,7 +33,7 @@ if(getRversion() >= "2.15.1") {
 #' @param main the plot label.
 #' @param order.legend boolean to determine if the legend display should be ordered by final survival time
 #' @return An object of class \code{ggplot}
-#' @author Edwin Thoen \email{edwinthoen@@gmail.com}
+#' @author Edwin Thoen
 #' @importFrom stats time
 #' @examples
 #'

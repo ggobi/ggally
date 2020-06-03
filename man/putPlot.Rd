@@ -47,6 +47,6 @@ custom_car
 \code{\link{getPlot}}
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

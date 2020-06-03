@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_se_fit}
 \alias{ggally_nostic_se_fit}
-\title{\link{\code{ggnostic}} fitted value's standard error}
+\title{\code{\link{ggnostic}} fitted value's standard error}
 \usage{
 ggally_nostic_se_fit(
   data,

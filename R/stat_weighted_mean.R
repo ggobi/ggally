@@ -143,7 +143,7 @@ StatWeightedMean <- ggproto(
 #' @param mapping aesthetics being used
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_line}(...)}
 #' @param include_zero Should 0 be included on the y-axis?
-#' @author Joseph Larmarange \email{joseph@@larmarange.net}
+#' @author Joseph Larmarange
 #' @keywords hplot
 #' @export
 #' @examples

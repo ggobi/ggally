@@ -25,6 +25,6 @@ Make density plots by displaying subsets of the data in different panels.
  )
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

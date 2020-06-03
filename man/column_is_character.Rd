@@ -20,6 +20,6 @@ character vector with variable types, with names corresponding to
 Get vector of variable types from data frame
 }
 \author{
-Jason Crowley \email{crowley.jason.s@gmail.com}
+Jason Crowley
 }
 \keyword{internal}

@@ -31,6 +31,6 @@ ggally_points(
 )
 }
 \author{
-Barret Schloerke  \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

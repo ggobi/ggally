@@ -26,6 +26,6 @@ Displays a Tile Plot as densely as possible.
  ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

@@ -7,7 +7,7 @@
 #' @param pm \code{\link{ggmatrix}} object to be plotted
 #' @param ... ignored
 #' @param progress,progress_format Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @author Barret Schloerke
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
 #' @examples

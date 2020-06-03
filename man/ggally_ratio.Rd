@@ -37,6 +37,6 @@ ggally_ratio(
 ) + ggplot2::theme(aspect.ratio = 4/2)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

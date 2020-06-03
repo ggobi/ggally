@@ -17,7 +17,7 @@
 #'  minor values within a grid cell.  Defaults to \code{\link{identity}} so
 #'  that no scaling is performed.
 #' @export
-#' @author Di Cook \email{dicook@@monash.edu}, Heike Hofmann, Hadley Wickham
+#' @author Di Cook, Heike Hofmann, Hadley Wickham
 #' @examples
 #'  data(nasa)
 #'  nasaLate <- nasa[
@@ -144,7 +144,7 @@ ref_boxes <- function(data, fill = NULL) {
 #'   string) for the major x and y axes.  Together, the
 #    combination of \code{x_major} and \code{y_major} specifies a grid cell.
 #' @export
-#' @author Di Cook \email{dicook@@monash.edu}, Heike Hofmann, Hadley Wickham
+#' @author Di Cook, Heike Hofmann, Hadley Wickham
 glyphplot <- function(data, width, height, polar, x_major, y_major) {
   structure(data,
     width = width, height = height, polar = polar,

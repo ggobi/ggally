@@ -11,7 +11,7 @@ if (getRversion() >= "2.15.1") {
 #' @param data a data matrix. Should contain numerical (continuous) data.
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to choose a factor variable to be grouped with. Defaults to \code{(NULL)}
-#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
+#' @author Mengjia Ni, Di Cook
 #' @examples
 #' data(flea)
 #' head(lowertriangle(flea, columns= 2:4))
@@ -67,7 +67,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to choose a factor variable to be grouped with. Defaults to \code{(NULL)}
 #' @param corMethod method argument supplied to \code{\link[stats]{cor}}
-#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
+#' @author Mengjia Ni, Di Cook
 #' @importFrom stats cor
 #' @examples
 #' data(flea)
@@ -209,7 +209,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
 #' @param columns an option to choose the column to be used in the raw dataset. Defaults to \code{1:ncol(data)}
 #' @param color an option to group the dataset by the factor variable and color them by different colors. Defaults to \code{NULL}
 #' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
-#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
+#' @author Mengjia Ni, Di Cook
 #' @examples
 #' data(flea)
 #' scatmat(flea, columns=2:4)
@@ -291,7 +291,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #'   Defaults to \code{NULL}, i.e. no coloring. If supplied, it will be converted to a factor.
 #' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
 #' @param corMethod method argument supplied to \code{\link[stats]{cor}}
-#' @author Mengjia Ni, Di Cook \email{dicook@@monash.edu}
+#' @author Mengjia Ni, Di Cook
 #' @examples
 #' data(flea)
 #' ggscatmat(flea, columns = 2:4)

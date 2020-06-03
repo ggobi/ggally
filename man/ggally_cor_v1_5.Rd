@@ -71,6 +71,6 @@ Estimate correlation from the given data.
 \code{\link{ggally_cor}}
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

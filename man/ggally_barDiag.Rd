@@ -24,6 +24,6 @@ ggally_barDiag(tips, mapping = ggplot2::aes(x = day))
 ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

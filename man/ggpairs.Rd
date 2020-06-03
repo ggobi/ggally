@@ -223,6 +223,6 @@ John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, He
 wrap v1_ggmatrix_theme
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason.s@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
+Barret Schloerke, Jason Crowley, Di Cook, Heike Hofmann, Hadley Wickham
 }
 \keyword{hplot}

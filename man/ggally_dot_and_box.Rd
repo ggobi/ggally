@@ -32,6 +32,6 @@ Place box plots or dot plots on the graph
  )
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{internal}

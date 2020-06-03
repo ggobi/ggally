@@ -88,6 +88,6 @@ Estimate correlation from the given data. If a color variable is supplied, the c
 \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

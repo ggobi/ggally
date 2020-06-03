@@ -22,6 +22,6 @@ X variables are plotted using \code{geom_bar} and are faceted by the Y variable.
  ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}
