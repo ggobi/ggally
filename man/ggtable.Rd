@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggtable.R
 \name{ggtable}
 \alias{ggtable}
-\title{Plot cross-tabulated tables of discrete variables}
+\title{Cross-tabulated tables of discrete variables}
 \usage{
 ggtable(
   data,

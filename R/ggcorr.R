@@ -2,9 +2,9 @@ if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("x", "y", "coefficient", "breaks", "label"))
 }
 
-#' ggcorr - Plot a correlation matrix with ggplot2
+#' Correlation matrix
 #'
-#' Function for making a correlation matrix plot, using ggplot2.
+#' Function for making a correlation matrix plot, using \pkg{ggplot2}.
 #' The function is directly inspired by Tian Zheng and Yu-Sung Su's
 #' \code{corrplot} function in the 'arm' package.
 #' Please visit \url{http://github.com/briatte/ggcorr} for the latest version

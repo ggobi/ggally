@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_se_fit}
 \alias{ggally_nostic_se_fit}
-\title{ggnostic - fitted value standard error}
+\title{\link{\code{ggnostic}} fitted value's standard error}
 \usage{
 ggally_nostic_se_fit(
   data,
@@ -18,7 +18,7 @@ ggally_nostic_se_fit(
 \item{linePosition}{base comparison for a perfect fit}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
 A function to display \code{stats::\link[stats]{predict}}'s standard errors

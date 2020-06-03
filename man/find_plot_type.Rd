@@ -2,7 +2,7 @@
 % Please edit documentation in R/find-combo.R
 \name{find_plot_type}
 \alias{find_plot_type}
-\title{Find Plot Types}
+\title{Find plot types}
 \usage{
 find_plot_type(col1Name, col2Name, type1, type2, isAllNa, allowDiag)
 }
@@ -25,3 +25,4 @@ Retrieves the type of plot for the specific columns
 \author{
 Barret Schloerke \email{schloerke@gmail.com}
 }
+\keyword{internal}

@@ -4,7 +4,7 @@
 \alias{ggally_smooth}
 \alias{ggally_smooth_loess}
 \alias{ggally_smooth_lm}
-\title{Plots the Scatter Plot with Smoothing}
+\title{Scatter plot with a smoothed line}
 \usage{
 ggally_smooth(
   data,

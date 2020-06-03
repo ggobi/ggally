@@ -104,7 +104,7 @@ remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
 }
 
 
-#' Plots the Scatter Plot
+#' Scatter plot
 #'
 #' Make a scatter plot with a given data set.
 #'
@@ -134,7 +134,7 @@ ggally_points <- function(data, mapping, ...){
   p
 }
 
-#' Plots the Scatter Plot with Smoothing
+#' Scatter plot with a smoothed line
 #'
 #' Add a smoothed condition mean with a given scatter plot.
 #'
@@ -187,11 +187,11 @@ ggally_smooth_lm <- function(data, mapping, ...) {
   ggally_smooth(data = data, mapping = mapping, ..., method = "lm")
 }
 
-#' Plots the Scatter Density Plot
+#' Bivariate density plot
 #'
-#' Make a scatter density plot from a given data.
+#' Make a 2D density plot from a given data.
 #'
-#' The aesthetic "fill" determines whether or not stat_density2d (filled) or geom_density2d (lines) is used.
+#' The aesthetic "fill" determines whether or not \code{stat_density2d} (filled) or \code{geom_density2d} (lines) is used.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -232,9 +232,9 @@ ggally_density <- function(data, mapping, ...){
 }
 
 
-#' Correlation from the Scatter Plot
+#' Correlation value plot
 #'
-#' Estimate correlation from the given data.
+#' Estimate correlation from the given data. If a color variable is supplied, the correlation will also be calculated per group.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -358,7 +358,7 @@ ggally_cor <- function(
 }
 
 
-#' Generalized Text Display
+#' Generalized text display
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -579,7 +579,7 @@ ggally_statistic <- function(
 
 
 
-#' Plots the Box Plot
+#' Box plot
 #'
 #' Make a box plot with a given data set. \code{ggally_box_no_facet} will be a single panel plot, while \code{ggally_box} will be a faceted plot
 
@@ -615,7 +615,7 @@ ggally_box_no_facet <- function(data, mapping, ...) {
 }
 
 
-#' Plots the Box Plot with Dot
+#' Grouped dot plot
 #'
 #' Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single panel plot, while \code{ggally_dot} will be a faceted plot
 #'
@@ -647,7 +647,7 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 }
 
 
-#' Plots either Box Plot or Dot Plots
+#' Box and dot plot
 #'
 #' Place box plots or dot plots on the graph
 #'
@@ -656,7 +656,7 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #' @param ... parameters passed to either geom_jitter or geom_boxplot
 #' @param boxPlot boolean to decide to plot either box plots (TRUE) or dot plots (FALSE)
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @keywords hplot
+#' @keywords internal
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
@@ -732,9 +732,9 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 
 
 
-#' Plots the Histograms by Faceting
+#' Faceted histogram
 #'
-#' Make histograms by displaying subsets of the data in different panels.
+#' Display subsetted histograms of the data in different panels.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -779,7 +779,7 @@ ggally_facethist <- function(data, mapping, ...){
 }
 
 
-#' Plots the density plots by faceting
+#' Faceted density plot
 #'
 #' Make density plots by displaying subsets of the data in different panels.
 #'
@@ -800,9 +800,9 @@ ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
 
-#' Plots a tile plot with facets
+#' Tile plot with facets
 #'
-#' Make Tile Plot as densely as possible.
+#' Displays a Tile Plot as densely as possible.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -824,9 +824,9 @@ ggally_denstrip <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
 }
 
-#' Plots a density plot with facets or a tile plot with facets
+#' Density or tiles plot with facets
 #'
-#' Make Tile Plot as densely as possible.
+#' Make tile plot or density plot as compact as possible.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -897,9 +897,9 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 }
 
 
-#' Plots the Density Plots by Using Diagonal
+#' Univariate density plot
 #'
-#' Plots the density plots by using Diagonal.
+#' Displays a density plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used.
@@ -936,9 +936,9 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
   p
 }
 
-#' Plots the Bar Plots by Using Diagonal
+#' Bar plot
 #'
-#' Plots the bar plots by using Diagonal.
+#' Displays a bar plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -990,7 +990,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 }
 
 
-#' Text Plot
+#' Text plot
 #'
 #' Plot text for a plot.
 #'
@@ -1136,7 +1136,7 @@ get_x_axis_labels <- function(p, xRange) {
   axisLabs
 }
 
-#' Internal Axis Labeling Plot for ggpairs
+#' Internal axis labels for ggpairs
 #'
 #' This function is used when \code{axisLabels == "internal"}.
 #'
@@ -1263,9 +1263,9 @@ ggally_diagAxis <- function(
 
 }
 
-#' Plots the Bar Plots Faceted by Conditional Variable
+#' Faceted bar plot
 #'
-#' X variables are plotted using \code{geom_bar} and faceted by the Y variable.
+#' X variables are plotted using \code{geom_bar} and are faceted by the Y variable.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -1293,7 +1293,7 @@ ggally_facetbar <- function(data, mapping, ...){
 }
 
 
-#' Plots a mosaic plot
+#' Mosaic plot
 #'
 #' Plots the mosaic plot by using fluctuation.
 #'
@@ -1391,7 +1391,7 @@ ggally_ratio <- function(
 
 
 
-#' Plots the number of observations
+#' Display counts of observations
 #'
 #' Plot the number of observations by using rectangles
 #' with proportional areas.
@@ -1541,7 +1541,7 @@ ggally_countDiag <- function(data, mapping, ...) {
   ggally_count(data = data, mapping = mapping, ...)
 }
 
-#' Blank
+#' Blank plot
 #'
 #' Draws nothing.
 #'
@@ -1549,6 +1549,7 @@ ggally_countDiag <- function(data, mapping, ...) {
 #'
 #' @author Barret Schloerke \email{schloerke@@gmail.com}
 #' @param ... other arguments ignored
+#' @seealso \code{ggplot2::\link[ggplot2]{element_blank}()}
 #' @export
 #' @keywords hplot
 ggally_blank <- function(...){

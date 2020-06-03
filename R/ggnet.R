@@ -2,9 +2,9 @@ if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("X1", "X2", "Y1", "Y2", "midX", "midY"))
 }
 
-#' ggnet - Plot a network with ggplot2
+#' Network plot
 #'
-#' Function for plotting network objects using ggplot2, now replaced by the
+#' Function for plotting network objects using \pkg{ggplot2}, now replaced by the
 #' \code{\link{ggnet2}} function, which provides additional control over
 #' plotting parameters. Please visit \url{http://github.com/briatte/ggnet} for
 #' the latest version of ggnet2, and \url{https://briatte.github.io/ggnet} for a

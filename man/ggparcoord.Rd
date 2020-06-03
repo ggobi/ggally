@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggparcoord.R
 \name{ggparcoord}
 \alias{ggparcoord}
-\title{ggparcoord - A ggplot2 Parallel Coordinate Plot}
+\title{Parallel coordinate plot}
 \usage{
 ggparcoord(
   data,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggbivariate.R
 \name{ggbivariate}
 \alias{ggbivariate}
-\title{Plot an outcome with several potential explanotory variables}
+\title{Display an outcome using several potential explanatory variables}
 \usage{
 ggbivariate(
   data,

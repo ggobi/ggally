@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggpairs.R
 \name{ggpairs}
 \alias{ggpairs}
-\title{ggpairs - A ggplot2 generalized pairs plot}
+\title{ggplot2 generalized pairs plot}
 \usage{
 ggpairs(
   data,
@@ -70,7 +70,7 @@ ggpairs(
 \item{legends}{deprecated}
 }
 \value{
-ggmatrix object that if called, will print
+\code{\link{ggmatrix}} object that if called, will print
 }
 \description{
 Make a matrix of plots with a given data set

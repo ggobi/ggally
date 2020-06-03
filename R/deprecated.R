@@ -1,4 +1,4 @@
-#' Correlation from the Scatter Plot (deprecated)
+#' Correlation value plot
 #'
 #' (Deprecated. See \code{\link{ggally_cor}}.)
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_hat}
 \alias{ggally_nostic_hat}
-\title{ggnostic - leverage points}
+\title{\link{\code{ggnostic}} leverage points}
 \usage{
 ggally_nostic_hat(
   data,
@@ -28,7 +28,7 @@ ggally_nostic_hat(
 \item{avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}} for the average line}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
 A function to display stats::influence's hat information against a given explanatory variable.

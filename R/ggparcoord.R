@@ -4,7 +4,7 @@ if (getRversion() >= "2.15.1") {
 
 
 
-#' ggparcoord - A ggplot2 Parallel Coordinate Plot
+#' Parallel coordinate plot
 #'
 #' A function for plotting static parallel coordinate plots, utilizing
 #' the \code{ggplot2} graphics package.

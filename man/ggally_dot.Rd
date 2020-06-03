@@ -3,7 +3,7 @@
 \name{ggally_dot}
 \alias{ggally_dot}
 \alias{ggally_dot_no_facet}
-\title{Plots the Box Plot with Dot}
+\title{Grouped dot plot}
 \usage{
 ggally_dot(data, mapping, ...)
 

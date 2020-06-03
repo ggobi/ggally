@@ -127,7 +127,7 @@ StatProp <- ggproto("StatProp", Stat,
 )
 
 
-#' Column and Row bar plots
+#' Column and row bar plots
 #'
 #' Plot column or row percentage using bar plots.
 #'

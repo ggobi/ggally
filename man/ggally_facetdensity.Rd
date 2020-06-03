@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_facetdensity}
 \alias{ggally_facetdensity}
-\title{Plots the density plots by faceting}
+\title{Faceted density plot}
 \usage{
 ggally_facetdensity(data, mapping, ...)
 }

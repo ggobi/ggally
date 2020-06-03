@@ -2,12 +2,12 @@
 % Please edit documentation in R/ggpairs_add.R
 \name{v1_ggmatrix_theme}
 \alias{v1_ggmatrix_theme}
-\title{Modify a ggmatrix object by adding an ggplot2 object to all plots}
+\title{Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all plots}
 \usage{
 v1_ggmatrix_theme()
 }
 \description{
-Modify a ggmatrix object by adding an ggplot2 object to all plots
+Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all plots
 }
 \examples{
 

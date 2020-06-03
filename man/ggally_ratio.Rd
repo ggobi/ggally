@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_ratio}
 \alias{ggally_ratio}
-\title{Plots a mosaic plot}
+\title{Mosaic plot}
 \usage{
 ggally_ratio(
   data,

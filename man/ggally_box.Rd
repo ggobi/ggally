@@ -3,7 +3,7 @@
 \name{ggally_box}
 \alias{ggally_box}
 \alias{ggally_box_no_facet}
-\title{Plots the Box Plot}
+\title{Box plot}
 \usage{
 ggally_box(data, mapping, ...)
 

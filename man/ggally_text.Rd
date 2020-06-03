@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_text}
 \alias{ggally_text}
-\title{Text Plot}
+\title{Text plot}
 \usage{
 ggally_text(
   label,

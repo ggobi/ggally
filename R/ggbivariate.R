@@ -1,4 +1,4 @@
-#' Plot an outcome with several potential explanotory variables
+#' Display an outcome using several potential explanatory variables
 #'
 #' \code{ggbivariate} is a variant of \code{\link{ggduo}} for plotting
 #' an outcome variable with several potential explanatory variables.

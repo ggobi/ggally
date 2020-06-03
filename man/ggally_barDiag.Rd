@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_barDiag}
 \alias{ggally_barDiag}
-\title{Plots the Bar Plots by Using Diagonal}
+\title{Bar plot}
 \usage{
 ggally_barDiag(data, mapping, ..., rescale = FALSE)
 }
@@ -16,7 +16,7 @@ ggally_barDiag(data, mapping, ..., rescale = FALSE)
 \item{rescale}{boolean to decide whether or not to rescale the count output. Only applies to numeric data}
 }
 \description{
-Plots the bar plots by using Diagonal.
+Displays a bar plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 }
 \examples{
 data(tips, package = "reshape")

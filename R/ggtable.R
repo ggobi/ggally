@@ -1,4 +1,4 @@
-#' Plot cross-tabulated tables of discrete variables
+#' Cross-tabulated tables of discrete variables
 #'
 #' \code{ggtable} is a variant of \code{\link{ggduo}} for quick
 #' cross-tabulated tables of discrete variables.

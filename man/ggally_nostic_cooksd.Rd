@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_cooksd}
 \alias{ggally_nostic_cooksd}
-\title{ggnostic - Cook's distance}
+\title{\link{\code{ggnostic}} Cook's distance}
 \usage{
 ggally_nostic_cooksd(
   data,
@@ -20,7 +20,7 @@ ggally_nostic_cooksd(
 \item{linePosition}{4 / n is the general cutoff point for Cook's Distance}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
 A function to display \code{stats::\link[stats]{cooks.distance}}.

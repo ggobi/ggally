@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggscatmat.R
 \name{uppertriangle}
 \alias{uppertriangle}
-\title{uppertriangle - rearrange dataset as the preparation of ggscatmat function}
+\title{Rearrange dataset as the preparation of \code{\link{ggscatmat}} function}
 \usage{
 uppertriangle(
   data,
@@ -21,7 +21,7 @@ uppertriangle(
 \item{corMethod}{method argument supplied to \code{\link[stats]{cor}}}
 }
 \description{
-function for making the dataset used to plot the uppertriangle plots.
+Function for making the dataset used to plot the uppertriangle plots.
 }
 \examples{
 data(flea)

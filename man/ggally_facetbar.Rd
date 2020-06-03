@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_facetbar}
 \alias{ggally_facetbar}
-\title{Plots the Bar Plots Faceted by Conditional Variable}
+\title{Faceted bar plot}
 \usage{
 ggally_facetbar(data, mapping, ...)
 }
@@ -14,7 +14,7 @@ ggally_facetbar(data, mapping, ...)
 \item{...}{other arguments are sent to geom_bar}
 }
 \description{
-X variables are plotted using \code{geom_bar} and faceted by the Y variable.
+X variables are plotted using \code{geom_bar} and are faceted by the Y variable.
 }
 \examples{
  data(tips, package = "reshape")

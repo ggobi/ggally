@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_cor}
 \alias{ggally_cor}
-\title{Correlation from the Scatter Plot}
+\title{Correlation value plot}
 \usage{
 ggally_cor(
   data,
@@ -58,7 +58,7 @@ ggally_cor(
 \item{alignPercent, displayGrid}{deprecated. Please use their snake-case counterparts.}
 }
 \description{
-Estimate correlation from the given data.
+Estimate correlation from the given data. If a color variable is supplied, the correlation will also be calculated per group.
 }
 \examples{
  data(tips, package = "reshape")

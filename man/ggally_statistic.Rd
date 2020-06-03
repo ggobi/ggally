@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_statistic}
 \alias{ggally_statistic}
-\title{Generalized Text Display}
+\title{Generalized text display}
 \usage{
 ggally_statistic(
   data,
@@ -52,7 +52,7 @@ ggally_statistic(
 \item{title_hjust, group_hjust}{\code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.}
 }
 \description{
-Generalized Text Display
+Generalized text display
 }
 \seealso{
 \code{\link{ggally_cor}}

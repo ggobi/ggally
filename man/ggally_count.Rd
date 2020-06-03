@@ -6,7 +6,7 @@
 \alias{stat_ggally_count}
 \alias{StatGGallyCount}
 \alias{ggally_countDiag}
-\title{Plots the number of observations}
+\title{Display counts of observations}
 \usage{
 ggally_count(data, mapping, ...)
 

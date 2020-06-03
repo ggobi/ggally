@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggscatmat.R
 \name{scatmat}
 \alias{scatmat}
-\title{scatmat - plot the lowertriangle plots and density plots of the scatter plot matrix.}
+\title{Plots the lowertriangle and density plots of the scatter plot matrix.}
 \usage{
 scatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1)
 }
@@ -16,7 +16,7 @@ scatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1)
 \item{alpha}{an option to set the transparency in scatterplots for large data. Defaults to \code{1}.}
 }
 \description{
-function for making scatterplots in the lower triangle and diagonal density plots.
+Function for making scatterplots in the lower triangle and diagonal density plots.
 }
 \examples{
 data(flea)

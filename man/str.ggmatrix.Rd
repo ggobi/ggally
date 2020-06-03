@@ -2,17 +2,17 @@
 % Please edit documentation in R/ggpairs_internal_plots.R
 \name{str.ggmatrix}
 \alias{str.ggmatrix}
-\title{ggmatrix structure}
+\title{\code{\link{ggmatrix}} structure}
 \usage{
 \method{str}{ggmatrix}(object, ..., raw = FALSE)
 }
 \arguments{
-\item{object}{ggmatrix object to be viewed}
+\item{object}{\code{\link{ggmatrix}} object to be viewed}
 
-\item{...}{passed on to the default str method}
+\item{...}{passed on to the default \code{str} method}
 
 \item{raw}{boolean to determine if the plots should be converted to text or kept as original objects}
 }
 \description{
-View the condensed version of the ggmatrix object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
+View the condensed version of the \code{\link{ggmatrix}} object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
 }

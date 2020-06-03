@@ -260,12 +260,12 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 
 
 
-#' ggmatrix structure
+#' \code{\link{ggmatrix}} structure
 #'
-#' View the condensed version of the ggmatrix object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
+#' View the condensed version of the \code{\link{ggmatrix}} object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
 #'
-#' @param object ggmatrix object to be viewed
-#' @param ... passed on to the default str method
+#' @param object \code{\link{ggmatrix}} object to be viewed
+#' @param ... passed on to the default \code{str} method
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
 #' @method str ggmatrix
 #' @importFrom utils str

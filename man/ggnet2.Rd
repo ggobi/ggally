@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnet2.R
 \name{ggnet2}
 \alias{ggnet2}
-\title{ggnet2 - Plot a network with ggplot2}
+\title{Network plot}
 \usage{
 ggnet2(
   net,
@@ -274,7 +274,7 @@ Defaults to \code{"right"}.}
 the node labels: see \code{\link[ggplot2]{geom_text}} for details.}
 }
 \description{
-Function for plotting network objects using ggplot2, with additional control
+Function for plotting network objects using \pkg{ggplot2}, with additional control
 over graphical parameters that are not supported by the \code{\link{ggnet}}
 function. Please visit \url{http://github.com/briatte/ggnet} for the latest
 version of ggnet2, and \url{https://briatte.github.io/ggnet} for a vignette

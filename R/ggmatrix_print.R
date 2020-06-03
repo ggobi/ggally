@@ -1,9 +1,9 @@
 
 ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 
-#' Print ggmatrix object
+#' Print \code{\link{ggmatrix}} object
 #'
-#' Print method taken from \code{ggplot2:::print.ggplot} and altered for a ggmatrix object
+#' Print method taken from \code{ggplot2:::print.ggplot} and altered for a \code{\link{ggmatrix}} object
 #'
 #' @param x plot to display
 #' @param newpage draw new (empty) page first?

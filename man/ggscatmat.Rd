@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggscatmat.R
 \name{ggscatmat}
 \alias{ggscatmat}
-\title{ggscatmat - a traditional scatterplot matrix for purely quantitative variables}
+\title{Traditional scatterplot matrix for purely quantitative variables}
 \usage{
 ggscatmat(
   data,

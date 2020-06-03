@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_diagAxis}
 \alias{ggally_diagAxis}
-\title{Internal Axis Labeling Plot for ggpairs}
+\title{Internal axis labels for ggpairs}
 \usage{
 ggally_diagAxis(
   data,

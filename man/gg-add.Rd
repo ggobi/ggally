@@ -3,7 +3,7 @@
 \name{+.gg}
 \alias{+.gg}
 \alias{add_ggproto_to_ggmatrix}
-\title{Modify a ggmatrix object by adding an ggplot2 object to all plots}
+\title{Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all plots}
 \usage{
 \method{+}{gg}(e1, e2)
 
@@ -28,11 +28,11 @@ add_ggproto_to_ggmatrix(
 of that type will be modified (see examples).}
 }
 \description{
-This operator allows you to add ggplot2 objects to a ggmatrix object.
+This operator allows you to add \pkg{ggplot2} objects to a \code{\link{ggmatrix}} object.
 }
 \details{
 If the first object is an object of class \code{ggmatrix}, you can add
-the following types of objects, and it will return a modified ggplot
+the following types of objects, and it will return a modified \pkg{ggplot2}
 object.
 
 \itemize{

@@ -1,3 +1,5 @@
+#' Create \link{\code{glyphplot}} data
+#'
 #' Create the data needed to generate a glyph plot.
 #'
 #' @param data A data frame containing variables named in \code{x_major},

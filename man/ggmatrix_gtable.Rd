@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggmatrix_gtable.R
 \name{ggmatrix_gtable}
 \alias{ggmatrix_gtable}
-\title{Print ggmatrix object}
+\title{\code{\link{ggmatrix}} \pkg{gtable} object}
 \usage{
 ggmatrix_gtable(
   pm,
@@ -12,14 +12,14 @@ ggmatrix_gtable(
 )
 }
 \arguments{
-\item{pm}{ggmatrix object to be plotted}
+\item{pm}{\code{\link{ggmatrix}} object to be plotted}
 
 \item{...}{ignored}
 
-\item{progress, progress_format}{Please use the 'progress' parameter in your ggmatrix-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.}
+\item{progress, progress_format}{Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.}
 }
 \description{
-Specialized method to print the ggmatrix object-
+Specialized method to print the \code{\link{ggmatrix}} object.
 }
 \examples{
 data(tips, package = "reshape")

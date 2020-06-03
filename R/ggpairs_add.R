@@ -1,10 +1,10 @@
 
-#' Modify a ggmatrix object by adding an ggplot2 object to all plots
+#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all plots
 #'
-#' This operator allows you to add ggplot2 objects to a ggmatrix object.
+#' This operator allows you to add \pkg{ggplot2} objects to a \code{\link{ggmatrix}} object.
 #'
 #' If the first object is an object of class \code{ggmatrix}, you can add
-#' the following types of objects, and it will return a modified ggplot
+#' the following types of objects, and it will return a modified \pkg{ggplot2}
 #' object.
 #'
 #' \itemize{
@@ -173,7 +173,7 @@ is.ggmatrix <- function(x) {
 
 
 
-#' Modify a ggmatrix object by adding an ggplot2 object to all plots
+#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all plots
 #'
 #' @export
 #' @examples

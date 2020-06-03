@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_facethist}
 \alias{ggally_facethist}
-\title{Plots the Histograms by Faceting}
+\title{Faceted histogram}
 \usage{
 ggally_facethist(data, mapping, ...)
 }
@@ -14,7 +14,7 @@ ggally_facethist(data, mapping, ...)
 \item{...}{parameters sent to stat_bin()}
 }
 \description{
-Make histograms by displaying subsets of the data in different panels.
+Display subsetted histograms of the data in different panels.
 }
 \examples{
  data(tips, package = "reshape")

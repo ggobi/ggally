@@ -2,7 +2,7 @@
 % Please edit documentation in R/gglyph.R
 \name{glyphs}
 \alias{glyphs}
-\title{Create the data needed to generate a glyph plot.}
+\title{Create \link{\code{glyphplot}} data}
 \usage{
 glyphs(
   data,

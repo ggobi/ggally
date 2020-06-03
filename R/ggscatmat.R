@@ -3,7 +3,7 @@ if (getRversion() >= "2.15.1") {
 }
 
 
-#' lowertriangle - rearrange dataset as the preparation of ggscatmat function
+#' lowertriangle - rearrange dataset as the preparation of \code{\link{ggscatmat}} function
 #'
 #' function for making the melted dataset used to plot the lowertriangle scatterplots.
 #'
@@ -58,9 +58,9 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   return(rp.new)
 }
 
-#' uppertriangle - rearrange dataset as the preparation of ggscatmat function
+#' Rearrange dataset as the preparation of \code{\link{ggscatmat}} function
 #'
-#' function for making the dataset used to plot the uppertriangle plots.
+#' Function for making the dataset used to plot the uppertriangle plots.
 #'
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
@@ -200,9 +200,9 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
   }
 }
 
-#' scatmat - plot the lowertriangle plots and density plots of the scatter plot matrix.
+#' Plots the lowertriangle and density plots of the scatter plot matrix.
 #'
-#' function for making scatterplots in the lower triangle and diagonal density plots.
+#' Function for making scatterplots in the lower triangle and diagonal density plots.
 #'
 #' @export
 #' @param data a data matrix. Should contain numerical (continuous) data.
@@ -279,7 +279,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
   }
 }
 
-#' ggscatmat - a traditional scatterplot matrix for purely quantitative variables
+#'Traditional scatterplot matrix for purely quantitative variables
 #'
 #' This function makes a scatterplot matrix for quantitative variables with density plots on the diagonal
 #' and correlation printed in the upper triangle.
