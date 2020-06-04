@@ -590,16 +590,16 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>letters</span>[ <span class='fl'>1</span>:<span class='no'>x</span> ], <span class='no'>letters</span>[ <span class='fl'>1</span>:<span class='no'>x</span> ])
 <span class='no'>m</span>[ <span class='fu'><a href='https://rdrr.io/r/base/row.html'>row</a></span>(<span class='no'>m</span>) <span class='kw'>!=</span> <span class='fu'><a href='https://rdrr.io/r/base/col.html'>col</a></span>(<span class='no'>m</span>) ] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>ndyads</span>) <span class='kw'>&lt;</span> <span class='no'>density</span>
 <span class='no'>m</span></div><div class='output co'>#&gt;   a b c d e f g h i j
-#&gt; a 0 0 0 0 1 0 0 0 0 0
-#&gt; b 0 0 0 0 0 0 1 1 0 0
-#&gt; c 0 0 0 0 1 0 0 0 0 0
-#&gt; d 0 0 0 0 0 0 0 0 0 0
-#&gt; e 0 1 0 1 0 0 0 0 0 0
-#&gt; f 0 0 0 0 0 0 1 1 0 0
-#&gt; g 0 0 0 0 0 0 0 0 0 0
-#&gt; h 0 0 0 0 0 0 0 0 0 0
-#&gt; i 0 0 0 0 0 0 0 0 0 0
-#&gt; j 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
+#&gt; a 0 0 0 0 0 0 0 0 0 0
+#&gt; b 0 0 0 0 0 1 0 1 0 0
+#&gt; c 0 0 0 0 0 1 0 0 0 0
+#&gt; d 0 0 0 0 1 0 0 0 0 0
+#&gt; e 0 0 0 1 0 0 0 0 0 0
+#&gt; f 0 0 0 0 0 0 0 0 0 0
+#&gt; g 0 0 0 0 0 0 0 0 0 1
+#&gt; h 1 0 0 0 0 0 0 0 0 0
+#&gt; i 0 0 0 0 0 0 1 0 0 0
+#&gt; j 0 0 1 0 0 1 0 1 0 0</div><div class='input'>
 <span class='co'># random undirected network</span>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='no'>m</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>n</span></div><div class='output co'>#&gt;  Network attributes:
@@ -609,9 +609,9 @@ Pedro Jordano and Ming-Yu Liu</p>
 #&gt;   loops = FALSE 
 #&gt;   multiple = FALSE 
 #&gt;   bipartite = FALSE 
-#&gt;   total edges= 8 
+#&gt;   total edges= 10 
 #&gt;     missing edges= 0 
-#&gt;     non-missing edges= 8 
+#&gt;     non-missing edges= 10 
 #&gt; 
 #&gt;  Vertex attribute names: 
 #&gt;     vertex.names 

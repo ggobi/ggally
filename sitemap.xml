@@ -4,6 +4,9 @@
     <loc>https://ggobi.github.io/ggally/index.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/GGally-package.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/add_and_overwrite_aes.html</loc>
   </url>
   <url>
@@ -176,6 +179,9 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/ggmatrix_gtable.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggmatrix_location.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/ggmatrix_progress.html</loc>

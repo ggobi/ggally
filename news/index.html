@@ -177,36 +177,20 @@
     <div id="ggally-development-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ggally-development-version" class="anchor"></a>GGally (development version)</h2>
-<div id="vignettes" class="section level3">
+<div id="new-vignettes" class="section level3">
 <h3 class="hasAnchor">
-<a href="#vignettes" class="anchor"></a>Vignettes</h3>
+<a href="#new-vignettes" class="anchor"></a>New Vignettes</h3>
 <ul>
 <li>
-<code><a href="../articles/ggally_plots.html">vignette("ggally_plots")</a></code> - List of available high-level plots</li>
+<code><a href="../articles/ggally_plots.html">vignette("ggally_plots", package = "GGally")</a></code> - List of available high-level plots</li>
 <li>
-<code><a href="../articles/ggally_stats.html">vignette("ggally_stats")</a></code> - Additional statistics for ggplot2</li>
+<code><a href="../articles/ggally_stats.html">vignette("ggally_stats", package = "GGally")</a></code> - Additional statistics for ggplot2</li>
 <li>
-<code><a href="../articles/ggbivariate.html">vignette("ggbivariate")</a></code> - ggbivariate(): Plot an outcome with several potential explanatory variables</li>
+<code><a href="../articles/ggbivariate.html">vignette("ggbivariate", package = "GGally")</a></code> - ggbivariate(): Plot an outcome with several potential explanatory variables</li>
 <li>
-<code><a href="../articles/ggcoef.html">vignette("ggcoef")</a></code> - ggcoef(): Model coefficients</li>
-<li>
-<code><a href="../articles/ggduo.html">vignette("ggduo")</a></code> - ggduo(): Two-grouped plot matrix</li>
-<li>
-<code><a href="../articles/ggmatrix.html">vignette("ggmatrix")</a></code> - ggmatrix(): Plot matrix</li>
-<li>
-<code><a href="../articles/ggnetworkmap.html">vignette("ggnetworkmap")</a></code> - ggnetworkmap(): Network + map plot</li>
-<li>
-<code><a href="../articles/ggnostic.html">vignette("ggnostic")</a></code> - ggnostic(): Model diagnostics plot matrix</li>
-<li>
-<code><a href="../articles/ggpairs.html">vignette("ggpairs")</a></code> - ggpairs(): Pairwise plot matrix</li>
-<li>
-<code><a href="../articles/ggscatmat.html">vignette("ggscatmat")</a></code> - ggscatmat(): Numeric pairwise plot matrix</li>
-<li>
-<code><a href="../articles/ggsurv.html">vignette("ggsurv")</a></code> - ggsurv(): Survival curves</li>
-<li>
-<code><a href="../articles/ggtable.html">vignette("ggtable")</a></code> - ggtable(): Cross-tabulated tables</li>
-<li>
-<code><a href="../articles/glyph.html">vignette("glyph")</a></code> - glyphs(): Glyph plot</li>
+<code><a href="../articles/ggtable.html">vignette("ggtable", package = "GGally")</a></code> - ggtable(): Cross-tabulated tables</li>
+<li>Call <code><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes(package = "GGally")</a></code> to view all vignettes for <code>GGally</code>
+</li>
 </ul>
 </div>
 <div id="new-functions" class="section level3">
@@ -221,6 +205,11 @@
 <ul>
 <li>Cross-tabulated tables of discrete variables</li>
 <li><code><a href="../articles/ggtable.html">vignette("ggtable")</a></code></li>
+</ul>
+<p><code><a href="../reference/gg-add.html">add_to_ggmatrix()</a></code> (<a href='https://github.com/ggobi/ggally/issues/362'>#362</a>)</p>
+<ul>
+<li>Add ggplot2 objects to <code>ggmatrix</code> objects at selected locations</li>
+<li>Locations can be rows, columns, matrices, or other shorthand values.</li>
 </ul>
 <p><code><a href="../reference/ggally_autopoint.html">ggally_autopoint()</a></code>, <code><a href="../reference/ggally_autopoint.html">ggally_autopointDiag()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/325'>#325</a>)</p>
 <ul>
@@ -296,29 +285,29 @@
 <li>To use the old version, change your <code>ggally_cor</code> function calls to <code>ggally_cor_v1_5</code>.</li>
 <li>Previously deprecated parameters have been removed</li>
 </ul>
+<p>Website</p>
+<ul>
+<li>Updated to use <code>pkgdown</code> (<a href='https://github.com/ggobi/ggally/issues/335'>#335</a>)</li>
+</ul>
 </div>
 <div id="features-and-bug-fixes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#features-and-bug-fixes" class="anchor"></a>Features and bug fixes:</h3>
 <p><code><a href="../reference/ggpairs.html">ggpairs()</a></code> (<a href='https://github.com/ggobi/ggally/issues/331'>#331</a>)</p>
 <ul>
-<li>new <code>proportion</code> argument to control relative size of sub-plots</li>
+<li>New <code>proportion</code> argument to control relative size of sub-plots</li>
 <li>option <code>proportion = "auto"</code> for automatic guess based on the number of levels for discrete variables</li>
 </ul>
 <p><code><a href="../reference/ggduo.html">ggduo()</a></code> (<a href='https://github.com/ggobi/ggally/issues/331'>#331</a>)</p>
 <ul>
-<li>new <code>xProportion</code> and <code>yProportion</code> arguments to control relative size of sub-plots</li>
-<li>option <code>xproportion = "auto"</code> and <code>yproportion = "auto"</code> for automatic guess based on the number of levels for discrete variables</li>
+<li>New <code>xProportion</code> and <code>yProportion</code> arguments to control relative size of sub-plots</li>
+<li>Set option <code>xProportion = "auto"</code> and <code>yProportion = "auto"</code> for automatic guess based on the number of levels for discrete variables</li>
 </ul>
 <p><code><a href="../reference/ggscatmat.html">ggscatmat()</a></code></p>
 <ul>
 <li>
 <code><a href="../reference/lowertriangle.html">lowertriangle()</a></code> now preallocates it’s memory usage for a 2-5x speed improvement. (<a href='https://github.com/vlepori'>@vlepori</a>, <a href='https://github.com/ggobi/ggally/issues/328'>#328</a>)</li>
 <li>Fixed <code>facet</code>’ing error where the factor order was not preserved. This error caused the facets to be alphabetically sorted, cause plots to appear in unexpected locations. (<a href='https://github.com/ggobi/ggally/issues/355'>#355</a>)</li>
-</ul>
-<p>Website</p>
-<ul>
-<li>Updated to use <code>pkgdown</code> (<a href='https://github.com/ggobi/ggally/issues/335'>#335</a>)</li>
 </ul>
 </div>
 </div>

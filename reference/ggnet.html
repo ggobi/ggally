@@ -486,15 +486,15 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>m</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>letters</span>[ <span class='fl'>1</span>:<span class='no'>x</span> ], <span class='no'>letters</span>[ <span class='fl'>1</span>:<span class='no'>x</span> ])
 <span class='no'>m</span>[ <span class='fu'><a href='https://rdrr.io/r/base/row.html'>row</a></span>(<span class='no'>m</span>) <span class='kw'>!=</span> <span class='fu'><a href='https://rdrr.io/r/base/col.html'>col</a></span>(<span class='no'>m</span>) ] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>ndyads</span>) <span class='kw'>&lt;</span> <span class='no'>density</span>
 <span class='no'>m</span></div><div class='output co'>#&gt;   a b c d e f g h i j
-#&gt; a 0 1 1 0 0 0 1 1 0 0
-#&gt; b 1 0 0 0 0 0 0 0 0 0
+#&gt; a 0 0 0 0 0 0 0 0 0 0
+#&gt; b 0 0 0 0 0 1 0 0 0 0
 #&gt; c 0 0 0 0 0 0 0 0 0 0
-#&gt; d 0 0 0 0 0 1 0 0 0 0
-#&gt; e 0 0 0 0 0 0 0 0 0 0
-#&gt; f 0 0 0 0 0 0 0 1 0 0
-#&gt; g 0 0 0 0 0 0 0 0 0 1
+#&gt; d 0 0 0 0 0 0 0 1 0 0
+#&gt; e 0 0 0 0 0 0 0 0 0 1
+#&gt; f 0 0 0 0 0 0 0 0 0 0
+#&gt; g 0 0 0 0 0 0 0 0 0 0
 #&gt; h 0 0 0 0 0 0 0 0 0 0
-#&gt; i 0 0 0 0 0 0 0 0 0 0
+#&gt; i 1 1 0 0 0 1 1 0 0 0
 #&gt; j 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
 <span class='co'># random undirected network</span>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='no'>m</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
@@ -516,13 +516,13 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class='fu'>ggnet</span>(<span class='no'>n</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>segment.color</span> <span class='kw'>=</span> <span class='st'>"black"</span>)</div><div class='img'><img src='ggnet-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># random groups</span>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='no'>letters</span>[ <span class='fl'>1</span>:<span class='fl'>3</span> ], <span class='fl'>10</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>g</span></div><div class='output co'>#&gt;  [1] "a" "c" "a" "b" "a" "c" "c" "a" "b" "a"</div><div class='input'>
+<span class='no'>g</span></div><div class='output co'>#&gt;  [1] "b" "a" "b" "c" "a" "c" "a" "a" "b" "c"</div><div class='input'>
 <span class='co'># color palette</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span> <span class='kw'>=</span> <span class='st'>"steelblue"</span>, <span class='st'>"b"</span> <span class='kw'>=</span> <span class='st'>"forestgreen"</span>, <span class='st'>"c"</span> <span class='kw'>=</span> <span class='st'>"tomato"</span>)
 
 <span class='fu'>ggnet</span>(<span class='no'>n</span>, <span class='kw'>node.group</span> <span class='kw'>=</span> <span class='no'>g</span>, <span class='kw'>node.color</span> <span class='kw'>=</span> <span class='no'>p</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"white"</span>)</div><div class='img'><img src='ggnet-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># edge arrows on a directed network</span>
-<span class='fu'>ggnet</span>(<span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='no'>m</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>arrow.gap</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>arrow.size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_segment).</span></div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>ggnet</span>(<span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='no'>m</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>arrow.gap</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>arrow.size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
