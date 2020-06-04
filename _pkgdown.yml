@@ -124,20 +124,21 @@ reference:
 - title: "ggmatrix() Helpers"
   contents:
   - eval_data_col
-  - fn_switch
-  - ggmatrix_gtable
+  - ggmatrix_location
+  - wrap_fn_with_param_arg
   - getPlot
+  - putPlot
+  - fn_switch
   - grab_legend
   - gglegend
   - ggmatrix_progress
-  - mapping_color_to_fill
   - mapping_swap_x_y
-  - print.ggmatrix
-  - print_if_interactive
-  - putPlot
+  - mapping_color_to_fill
   - remove_color_unless_equal
+  - print.ggmatrix
+  - ggmatrix_gtable
+  - print_if_interactive
   - str.ggmatrix
-  - wrap_fn_with_param_arg
   - +.gg
 
 - title: Utilities
