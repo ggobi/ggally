@@ -1812,4 +1812,3 @@ mean_sd <- function(x, weights = NULL) {
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
   paste0("Mean: ", m, " (", sd, ")")
 }
-

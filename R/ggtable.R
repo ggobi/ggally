@@ -14,28 +14,31 @@
 #' @author Joseph Larmarange
 #' @export
 #' @examples
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(tips, package = "reshape")
 #' ggtable(tips, "smoker", c("day", "time", "sex"))
 #'
 #' # displaying row proportions
-#' ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop")
+#' p_(ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop"))
 #'
 #' # filling cells with standardized residuals
-#' ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres")
+#' p_(ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres"))
 #'
 #' # if continuous variables are provided, just displaying some summary statistics
-#' ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip"))
+#' p_(ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip")))
 #'
 #' # specifying weights
 #' d <- as.data.frame(Titanic)
-#' ggtable(
+#' p_(ggtable(
 #'   d,
 #'   "Survived",
 #'   c("Class", "Sex", "Age"),
 #'   mapping = aes(weight = Freq),
 #'   cells = "row.prop",
 #'   fill = "stdres"
-#' )
+#' ))
 ggtable <- function(
   data,
   columnsX = 1:ncol(data),

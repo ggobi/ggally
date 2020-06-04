@@ -211,9 +211,13 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
 #' @param alpha an option to set the transparency in scatterplots for large data. Defaults to \code{1}.
 #' @author Mengjia Ni, Di Cook
 #' @examples
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(flea)
+#'
 #' scatmat(flea, columns=2:4)
-#' scatmat(flea, columns= 2:4, color="species")
+#' p_(scatmat(flea, columns= 2:4, color="species"))
 scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
   data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
@@ -293,9 +297,13 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #' @param corMethod method argument supplied to \code{\link[stats]{cor}}
 #' @author Mengjia Ni, Di Cook
 #' @examples
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(flea)
+#'
 #' ggscatmat(flea, columns = 2:4)
-#' ggscatmat(flea, columns = 2:4, color = "species")
+#' p_(ggscatmat(flea, columns = 2:4, color = "species"))
 ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson"){
   ## if 'color' is not a factor, mold it into one
   if (!is.null(color)) {
