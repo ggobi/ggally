@@ -40,7 +40,8 @@ Imports:
     reshape (>= 0.8.5),
     scales (>= 1.1.0),
     utils,
-    rlang
+    rlang,
+    lifecycle
 Suggests:
     broom (>= 0.4.0),
     chemometrics,

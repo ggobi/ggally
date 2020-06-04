@@ -51,7 +51,7 @@ ggbivariate(
 
 # Customize fill colour scale
 ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")) +
-  scale_fill_brewer()
+  scale_fill_brewer(type = "qual")
 
 # Customize labels
 ggbivariate(

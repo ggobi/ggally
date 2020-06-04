@@ -18,12 +18,6 @@ tests/testthat/Rplots.pdf
 ^cran-comments\.md$
 ^codecov\.yml$
 vigs/
-vignettes/rd_cache
-vignettes/docs_cache
-vignettes/rd_files
-vignettes/index_files
-vignettes/assets
-vignettes/z_old
 _gh-pages
 ggduo_paper.txt
 ^man-roxygen
@@ -35,3 +29,5 @@ ggduo_paper.txt
 ^docs$
 ^pkgdown$
 ^\.github$
+^doc$
+^Meta$

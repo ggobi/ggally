@@ -25,7 +25,7 @@ test_that("add", {
   pm3 <- pm + ggplot2::theme_bw()
   expect_true(! is.null(pm3$gg))
 
-  # badd add
+  # bad add
   expect_error(pm + 3, "'ggmatrix' does not know how to add")
 
   # adding scale
@@ -34,7 +34,7 @@ test_that("add", {
   expect_false(identical(pm$plots[[2]], pm4$plots[[2]]))
 
   # change only some subplots
-  pm5 <- add_ggproto_to_ggmatrix(pm, ggplot2::coord_equal(), cols = 1)
+  pm5 <- add_to_ggmatrix(pm, ggplot2::coord_equal(), cols = 1)
   expect_false(identical(pm$plots[[1]], pm5$plots[[1]]))
   expect_true(identical(pm$plots[[2]], pm5$plots[[2]]))
 

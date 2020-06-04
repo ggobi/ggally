@@ -1,20 +1,12 @@
 GGally (development version)
 ---------------------
 
-### Vignettes
-* `vignette("ggally_plots")` - List of available high-level plots
-* `vignette("ggally_stats")` - Additional statistics for ggplot2
-* `vignette("ggbivariate")` - ggbivariate(): Plot an outcome with several potential explanatory variables
-* `vignette("ggcoef")` - ggcoef(): Model coefficients
-* `vignette("ggduo")` - ggduo(): Two-grouped plot matrix
-* `vignette("ggmatrix")` - ggmatrix(): Plot matrix
-* `vignette("ggnetworkmap")` - ggnetworkmap(): Network + map plot
-* `vignette("ggnostic")` - ggnostic(): Model diagnostics plot matrix
-* `vignette("ggpairs")` - ggpairs(): Pairwise plot matrix
-* `vignette("ggscatmat")` - ggscatmat(): Numeric pairwise plot matrix
-* `vignette("ggsurv")` - ggsurv(): Survival curves
-* `vignette("ggtable")` - ggtable(): Cross-tabulated tables
-* `vignette("glyph")` - glyphs(): Glyph plot
+### New Vignettes
+* `vignette("ggally_plots", package = "GGally")` - List of available high-level plots
+* `vignette("ggally_stats", package = "GGally")` - Additional statistics for ggplot2
+* `vignette("ggbivariate", package = "GGally")` - ggbivariate(): Plot an outcome with several potential explanatory variables
+* `vignette("ggtable", package = "GGally")` - ggtable(): Cross-tabulated tables
+* Call `browseVignettes(package = "GGally")` to view all vignettes for `GGally`
 
 
 ### New functions
@@ -26,6 +18,10 @@ GGally (development version)
 `ggtable()` (@larmarange, #351)
 * Cross-tabulated tables of discrete variables
 * `vignette("ggtable")`
+
+`add_to_ggmatrix()` (#362)
+* Add ggplot2 objects to `ggmatrix` objects at selected locations
+* Locations can be rows, columns, matrices, or other shorthand values.
 
 `ggally_autopoint()`, `ggally_autopointDiag()` (@larmarange, #325)
 * Make scatterplots compatible with both continuous and categorical variables using `ggforce::geom_autopoint()`.
@@ -81,22 +77,23 @@ GGally (development version)
 * To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
 * Previously deprecated parameters have been removed
 
+Website
+* Updated to use `pkgdown` (#335)
+
 ### Features and bug fixes:
 
 `ggpairs()` (#331)
-* new `proportion` argument to control relative size of sub-plots
+* New `proportion` argument to control relative size of sub-plots
 * option `proportion = "auto"` for automatic guess based on the number of levels for discrete variables
 
 `ggduo()` (#331)
-* new `xProportion` and `yProportion` arguments to control relative size of sub-plots
-* option `xproportion = "auto"` and `yproportion = "auto"` for automatic guess based on the number of levels for discrete variables
+* New `xProportion` and `yProportion` arguments to control relative size of sub-plots
+* Set option `xProportion = "auto"` and `yProportion = "auto"` for automatic guess based on the number of levels for discrete variables
 
 `ggscatmat()`
 * `lowertriangle()` now preallocates it's memory usage for a 2-5x speed improvement. (@vlepori, #328)
 * Fixed `facet`'ing error where the factor order was not preserved. This error caused the facets to be alphabetically sorted, cause plots to appear in unexpected locations. (#355)
 
-Website
-* Updated to use `pkgdown` (#335)
 
 
 

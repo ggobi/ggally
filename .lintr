@@ -1,11 +1,11 @@
 linters: with_defaults(
     camel_case_linter = NULL,
     commented_code_linter = NULL,
-    line_length_linter(100),
-    NULL
+    line_length_linter = NULL
   )
 exclusions:
   list(
+    "R/deprecated.R",
     "R/ggnetworkmap.R",
     "R/ggcorr.R",
     "R/ggsurv.R",

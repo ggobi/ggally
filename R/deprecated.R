@@ -1,4 +1,24 @@
+#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
+#'
+# \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
+#'
+#' @export
+#' @examples
+#'
+#' ggpairs(iris, 1:2) + v1_ggmatrix_theme()
+#' # move the column names to the left and bottom
+#' ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme()
+v1_ggmatrix_theme <- function() {
+  theme(
+    strip.background = element_rect(fill = "white"),
+    strip.placement = "outside"
+  )
+}
+
+
 #' Correlation value plot
+#'
+# \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
 #'
 #' (Deprecated. See \code{\link{ggally_cor}}.)
 #'
