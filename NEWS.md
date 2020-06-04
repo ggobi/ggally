@@ -2,10 +2,10 @@ GGally (development version)
 ---------------------
 
 ### New Vignettes
-* `vignette("ggally_plots")` - List of available high-level plots
-* `vignette("ggally_stats")` - Additional statistics for ggplot2
-* `vignette("ggbivariate")` - ggbivariate(): Plot an outcome with several potential explanatory variables
-* `vignette("ggtable")` - ggtable(): Cross-tabulated tables
+* `vignette("ggally_plots", package = "GGally")` - List of available high-level plots
+* `vignette("ggally_stats", package = "GGally")` - Additional statistics for ggplot2
+* `vignette("ggbivariate", package = "GGally")` - ggbivariate(): Plot an outcome with several potential explanatory variables
+* `vignette("ggtable", package = "GGally")` - ggtable(): Cross-tabulated tables
 * Call `browseVignettes(package = "GGally")` to view all vignettes for `GGally`
 
 

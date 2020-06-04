@@ -630,18 +630,30 @@ test_that("subtypes", {
       theme(legend.position = "bottom")
   }
 
+
   # re ordered the subs so that density can have no binwidth param
-  conSubs <- list("density", "points", "smooth", "smooth_loess", "cor", "blank")
+  conSubs <- list(
+    "autopoint",
+    "density", "points", "smooth", "smooth_lm", "smooth_loess", "cor",
+    "blank")
   comSubs <- list(
+    "autopoint",
     "box", "dot", "box_no_facet", "dot_no_facet",
     wrap("facethist", binwidth = 1),
-    "facetdensity", wrap("denstrip", binwidth = 1),
+    "facetdensity",
+    "facetdensitystrip",
+    "summarise_by",
+    wrap("denstrip", binwidth = 1),
     "blank"
   )
-  disSubs <- list("ratio", "facetbar", "blank")
+  disSubs <- list(
+    "autopoint", "colbar", "count",
+    "cross", "crosstable", "facetbar",
+    "ratio", "rowbar", "table", "trends",
+    "blank")
 
-  conDiagSubs <- c("densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
-  disDiagSubs <- c("barDiag", "blankDiag")
+  conDiagSubs <- c("autopointDiag", "densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
+  disDiagSubs <- c("autopointDiag", "barDiag", "countDiag", "tableDiag", "blankDiag")
 
   # for (fn in list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)) {
   for (fn_num in 1:4) {

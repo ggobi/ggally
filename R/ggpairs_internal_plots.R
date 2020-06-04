@@ -106,28 +106,11 @@ wrap_fn_with_param_arg <- function(
       },
       error = function(e) {
         stop(str_c(
-"The following ggpairs plot functions are readily available: \n",
-"\tcontinuous: c('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank')\n",
-"\tcombo: c('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist',",
-  " 'facetdensity', 'denstrip', 'blank')\n",
-"\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
-"\tna: c('na', 'blank')\n",
-"\n",
-"\tdiag continuous: c('densityDiag', 'barDiag', 'blankDiag')\n",
-"\tdiag discrete: c('barDiag', 'blankDiag')\n",
-"\tdiag na: c('naDiag', 'blankDiag')\n",
-"\n",
-"You may also provide your own function that follows the api of ",
-  "function(data, mapping, ...){ . . . }\nand returns a ggplot2 plot object\n",
-  "\tEx:\n",
-  "\tmy_fn <- function(data, mapping, ...){\n",
-  "\t  p <- ggplot(data = data, mapping = mapping) + \n",
-  "\t    geom_point(...)\n",
-  "\t  p\n",
-  "\t}\n",
-  "\tggpairs(data, lower = list(continuous = my_fn))\n",
-"\n",
-"Function provided: ", funcVal
+          "Error retrieving `GGally` function.\n",
+          "Please provide a string such as `'points'` for `ggally_points()`\n",
+          "For a list of all predefined functions, check out `vignette(\"ggally_plots\", package = \"GGally\")`\n",
+          "A custom function may be supplied directly: `wrap(my_fn, param = val)`\n",
+          "Function provided: ", funcVal
         ))
       }
     )
