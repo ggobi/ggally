@@ -25,7 +25,7 @@ test_that("add", {
   pm3 <- pm + ggplot2::theme_bw()
   expect_true(! is.null(pm3$gg))
 
-  # badd add
+  # bad add
   expect_error(pm + 3, "'ggmatrix' does not know how to add")
 
   # adding scale

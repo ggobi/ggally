@@ -7,19 +7,31 @@
 \usage{
 \method{+}{gg}(e1, e2)
 
-add_to_ggmatrix(e1, e2, rows = 1:e1$nrow, cols = 1:e1$ncol, only_fn = NULL)
+add_to_ggmatrix(e1, e2, location = NULL, rows = NULL, cols = NULL)
 }
 \arguments{
 \item{e1}{An object of class \code{\link{ggnostic}} or \code{ggplot}}
 
 \item{e2}{A component to add to \code{e1}}
 
-\item{rows}{Integer vector. Rows to modify}
+\item{location}{\describe{
+  \item{\code{"all"}, \code{TRUE}}{All row and col combinations}
+  \item{\code{"none"}}{No row and column combinations}
+  \item{\code{"upper"}}{Locations where the column value is higher than the row value}
+  \item{\code{"lower"}}{Locations where the row value is higher than the column value}
+  \item{\code{"diag"}}{Locations where the column value is equal to the row value}
+  \item{\code{matrix} or \code{data.frame}}{
+    \code{matrix} values will be converted into \code{data.frame}s.
+    \itemize{
+      \item A \code{data.frame} with the exact column names \code{c("row", "col")}
+      \item A \code{data.frame} with the number of rows and columns matching the plot matrix object provided.  Each cell will be tested for a "truthy" value to determine if the location should be kept.
+    }
+  }
+}}
 
-\item{cols}{Integer vector. Cols to modify}
+\item{rows}{numeric vector of the rows to be used. Will be used with  \code{cols} if \code{location} is \code{NULL}}
 
-\item{only_fn}{Character vector. If specified, only subplots
-of that type will be modified (see examples).}
+\item{cols}{numeric vector of the cols to be used. Will be used with \code{rows} if \code{location} is \code{NULL}}
 }
 \description{
 This operator allows you to add \pkg{ggplot2} objects to a \code{\link{ggmatrix}} object.
@@ -39,11 +51,11 @@ The \code{+} operator completely replaces elements
 with elements from e2.
 
 \code{add_to_ggmatrix} gives you more control to modify
-  only some subplots. \lifecycle{experimental}
+  only some subplots.  This function may be replaced and/or removed in the future. \Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
 }
 \examples{
 data(tips, package = "reshape")
-pm <- ggpairs(tips[, 2:3])
+pm <- ggpairs(tips[, 2:4], ggplot2::aes(color = sex))
 ## change to black and white theme
 pm + ggplot2::theme_bw()
 ## change to linedraw theme
@@ -54,15 +66,20 @@ pm + ggplot2::theme_bw()
 extra <- list(ggplot2::theme_bw(), ggplot2::labs(caption = "My caption!"))
 pm + extra
 ## modify scale
-pm + scale_fill_brewer()
+pm + scale_fill_brewer(type = "qual")
 ## only first row
-add_to_ggmatrix(pm, scale_fill_brewer(), rows = 1)
-## only certain types of subplots
+add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), rows = 1:2)
+## only second col
+add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), cols = 2:3)
+## only to upper triangle of plot matrix
 add_to_ggmatrix(
-  pm, scale_fill_brewer(),
-  only_fn = c("ggally_box_no_facet", "ggally_barDiag")
+  pm,
+  scale_fill_brewer(type = "qual"),
+  location = "upper"
 )
 }
 \seealso{
 \code{\link[ggplot2]{+.gg}} and \code{\link[ggplot2]{theme}}
+
+\code{\link{ggmatrix_location}}
 }
