@@ -19,6 +19,10 @@ GGally (development version)
 * Cross-tabulated tables of discrete variables
 * `vignette("ggtable")`
 
+`add_to_ggmatrix()` (#362)
+* Add ggplot2 objects to `ggmatrix` objects at selected locations
+* Locations can be rows, columns, matrices, or other shorthand values.
+
 `ggally_autopoint()`, `ggally_autopointDiag()` (@larmarange, #325)
 * Make scatterplots compatible with both continuous and categorical variables using `ggforce::geom_autopoint()`.
 
