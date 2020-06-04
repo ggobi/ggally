@@ -54,29 +54,32 @@ with elements from e2.
   only some subplots.  This function may be replaced and/or removed in the future. \Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
 }
 \examples{
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 data(tips, package = "reshape")
+
 pm <- ggpairs(tips[, 2:4], ggplot2::aes(color = sex))
 ## change to black and white theme
 pm + ggplot2::theme_bw()
 ## change to linedraw theme
-# pm + ggplot2::theme_linedraw()
+p_(pm + ggplot2::theme_linedraw())
 ## change to custom theme
-# pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue"))
+p_(pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue")))
 ## add a list of information
 extra <- list(ggplot2::theme_bw(), ggplot2::labs(caption = "My caption!"))
-pm + extra
+p_(pm + extra)
 ## modify scale
-pm + scale_fill_brewer(type = "qual")
+p_(pm + scale_fill_brewer(type = "qual"))
 ## only first row
-add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), rows = 1:2)
+p_(add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), rows = 1:2))
 ## only second col
-add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), cols = 2:3)
+p_(add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), cols = 2:3))
 ## only to upper triangle of plot matrix
-add_to_ggmatrix(
+p_(add_to_ggmatrix(
   pm,
   scale_fill_brewer(type = "qual"),
   location = "upper"
-)
+))
 }
 \seealso{
 \code{\link[ggplot2]{+.gg}} and \code{\link[ggplot2]{theme}}
