@@ -1,5 +1,4 @@
-GGally (development version)
----------------------
+# GGally 2.0.0
 
 ### New Vignettes
 * `vignette("ggally_plots", package = "GGally")` - List of available high-level plots
