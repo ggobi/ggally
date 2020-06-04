@@ -178,8 +178,6 @@ ggally_box_no_facet(tips, aes(x = total_bill, y = day))
 ggally_box_no_facet(tips, aes(x = total_bill, y = day, colour = time))
 ```
 
-See also `ggally_dot_and_box()`.
-
 #### `ggally_denstrip()`
 
 ```{r}
@@ -195,8 +193,6 @@ ggally_dot(tips, aes(x = total_bill, y = day, colour = time))
 ggally_dot_no_facet(tips, aes(x = total_bill, y = day))
 ggally_dot_no_facet(tips, aes(x = total_bill, y = day, colour = time))
 ```
-
-See also `ggally_dot_and_box()`.
 
 #### `ggally_facetdensitystrip()`
 

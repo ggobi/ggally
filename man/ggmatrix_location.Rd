@@ -66,7 +66,7 @@ ggmatrix_location(pm, cols = 2)
 ggmatrix_location(pm, rows = c(1,2), cols = c(1,3))
 
 # matrix locations
-mat <- matrix(T, ncol = 3, nrow = 3)
+mat <- matrix(TRUE, ncol = 3, nrow = 3)
 mat[1,1] <- FALSE
 locs <- ggmatrix_location(pm, location = mat)
 ## does not contain the 1,1 cell
