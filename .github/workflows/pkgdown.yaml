@@ -52,7 +52,7 @@ jobs:
           CAN_PRINT: "TRUE"
         run: |
           pkgdown::build_site()
-          stopifnot(length(warnings) == 0)
+          stopifnot(length(warnings()) == 0)
         shell: Rscript {0}
 
       - name: Build and Deploy Site
