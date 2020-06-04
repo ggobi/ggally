@@ -175,7 +175,7 @@ add_to_ggmatrix <- function(
 
 #' \code{\link{ggmatrix}} plot locations
 #'
-#' \Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
+#' \lifecycle{experimental}
 #'
 #' Convert many types of location values to a consistent \code{data.frame} of \code{row} and \code{col} values.
 #'
