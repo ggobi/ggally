@@ -15,8 +15,8 @@ test_that("errors", {
   expect_error(wrapp(fn, list(A = 4, 5)), "'params' must")
 
   # if the character fn doesn't exist
-  expect_error(wrap("does not exist", A = 5), "The following")
-  expect_error(wrapp("does not exist", list(A = 5)), "The following")
+  expect_error(wrap("does not exist", A = 5), "Function provided")
+  expect_error(wrapp("does not exist", list(A = 5)), "Function provided")
 })
 
 test_that("wrap", {
