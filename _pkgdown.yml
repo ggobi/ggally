@@ -113,7 +113,7 @@ reference:
   - ggnet2
   - ggnetworkmap
 
-- title: Additional statistics for `ggplot2`
+- title: Additional Statistics for `ggplot2`
   desc: >
     More details in `vignette("ggally_stats")`
   contents:

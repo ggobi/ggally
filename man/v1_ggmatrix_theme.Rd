@@ -2,12 +2,12 @@
 % Please edit documentation in R/deprecated.R
 \name{v1_ggmatrix_theme}
 \alias{v1_ggmatrix_theme}
-\title{Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all #'}
+\title{Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all}
 \usage{
 v1_ggmatrix_theme()
 }
 \description{
-Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all #'
+Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
 }
 \examples{
 

@@ -170,7 +170,7 @@ add_to_ggmatrix <- function(
   pm
 }
 
-#' \code{\link{ggmatrix}} locations
+#' \code{\link{ggmatrix}} plot locations
 #'
 #' \Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
 #'

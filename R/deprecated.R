@@ -1,5 +1,6 @@
-#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all #'
-# \Sexpr[results=rd, stage=render]{lifecycle::badge("depricated")}
+#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
+#'
+# \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
 #'
 #' @export
 #' @examples
@@ -17,7 +18,7 @@ v1_ggmatrix_theme <- function() {
 
 #' Correlation value plot
 #'
-# \Sexpr[results=rd, stage=render]{lifecycle::badge("depricated")}
+# \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
 #'
 #' (Deprecated. See \code{\link{ggally_cor}}.)
 #'

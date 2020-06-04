@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggpairs_add.R
 \name{ggmatrix_location}
 \alias{ggmatrix_location}
-\title{\code{\link{ggmatrix}} locations}
+\title{\code{\link{ggmatrix}} plot locations}
 \usage{
 ggmatrix_location(pm, location = NULL, rows = NULL, cols = NULL)
 }
