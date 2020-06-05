@@ -235,7 +235,6 @@ add_to_ggmatrix <- function(
 #'
 #' # Use the output of a prior ggmatrix_location
 #' ggmatrix_location(pm, location = locs)
-#'
 ggmatrix_location <- function(
   pm,
   location = NULL,

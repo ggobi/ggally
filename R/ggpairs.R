@@ -293,7 +293,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'      continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
 #'    ),
 #'    showStrips = FALSE
-#'  );
+#'  )
 #'
 #'  p_(pm)
 #'
@@ -655,8 +655,8 @@ ggduo <- function(
 #' @author Barret Schloerke, Jason Crowley, Di Cook, Heike Hofmann, Hadley Wickham
 #' @return \code{\link{ggmatrix}} object that if called, will print
 #' @examples
-#'  # small function to display plots only if it's interactive
-#'  p_ <- GGally::print_if_interactive
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
 #'
 #' ## Quick example, with and without colour

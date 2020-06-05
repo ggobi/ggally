@@ -38,23 +38,25 @@ weights (see examples)}
 an outcome variable with several potential explanatory variables.
 }
 \examples{
-data(tips, package = "reshape")
-ggbivariate(tips, "smoker", c("day", "time", "sex", "tip"))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
-\dontrun{
+data(tips, package = "reshape")
+p_(ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")))
+
 # Personalize plot title and legend title
-ggbivariate(
+p_(ggbivariate(
   tips, "smoker", c("day", "time", "sex", "tip"),
   title = "Custom title"
 ) +
-  labs(fill = "Smoker ?")
+  labs(fill = "Smoker ?"))
 
 # Customize fill colour scale
-ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")) +
-  scale_fill_brewer(type = "qual")
+p_(ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")) +
+  scale_fill_brewer(type = "qual"))
 
 # Customize labels
-ggbivariate(
+p_(ggbivariate(
   tips, "smoker", c("day", "time", "sex", "tip"),
   rowbar_args = list(
     colour = "white",
@@ -62,19 +64,18 @@ ggbivariate(
     fontface = "bold",
     label_format = scales::label_percent(accurary = 1)
   )
-)
+))
 
 # Choose the sub-plot from which get legend
-ggbivariate(tips, "smoker")
-ggbivariate(tips, "smoker", legend = 3)
+p_(ggbivariate(tips, "smoker"))
+p_(ggbivariate(tips, "smoker", legend = 3))
 
 # Use mapping to indicate weights
 d <- as.data.frame(Titanic)
-ggbivariate(d, "Survived", mapping = aes(weight = Freq))
+p_(ggbivariate(d, "Survived", mapping = aes(weight = Freq)))
 
 # outcome can be numerical
-ggbivariate(tips, outcome = "tip", title = "tip")
-}
+p_(ggbivariate(tips, outcome = "tip", title = "tip"))
 }
 \author{
 Joseph Larmarange

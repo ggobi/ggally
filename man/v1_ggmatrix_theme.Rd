@@ -10,8 +10,10 @@ v1_ggmatrix_theme()
 Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
-ggpairs(iris, 1:2) + v1_ggmatrix_theme()
+p_(ggpairs(iris, 1:2) + v1_ggmatrix_theme())
 # move the column names to the left and bottom
-ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme()
+p_(ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme())
 }

@@ -27,22 +27,27 @@ with proportional areas.
 You can adjust the size of rectangles with the \code{x.width} argument.
 }
 \examples{
-data(tips, package = "reshape")
-ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex))
-ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
-ggally_count(
+data(tips, package = "reshape")
+p_(ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex)))
+p_(ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day)))
+
+p_(ggally_count(
   as.data.frame(Titanic),
   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
-)
-ggally_count(
+))
+p_(ggally_count(
   as.data.frame(Titanic),
   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq),
   x.width = 0.5
-)
+))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
-ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
-ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
+p_(ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker)))
+p_(ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex)))
 }
 \author{
 Joseph Larmarange

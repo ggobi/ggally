@@ -205,6 +205,9 @@ but will be unweighted. To compute weighted network measures, see the
 \code{tnet} package by Tore Opsahl (\code{help("tnet", package = "tnet")}).
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 library(network)
 
 # random adjacency matrix
@@ -229,10 +232,10 @@ g
 # color palette
 p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
 
-ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
+p_(ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white"))
 
 # edge arrows on a directed network
-ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+p_(ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10))
 }
 \seealso{
 \code{\link{ggnet2}} in this package,

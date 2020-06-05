@@ -22,6 +22,8 @@
 #' @author Joseph Larmarange
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
 #' d <- as.data.frame(Titanic)
 #'
@@ -29,26 +31,25 @@
 #'   aes(x = Class, fill = Survived, weight = Freq, by = Class) +
 #'   geom_bar(position = "fill") +
 #'   geom_text(stat = "prop", position = position_fill(.5))
-#' p
-#' p + facet_grid(~ Sex)
+#' p_(p)
+#' p_(p + facet_grid(~ Sex))
 #'
-#' ggplot(d) +
+#' p_(ggplot(d) +
 #'   aes(x = Class, fill = Survived, weight = Freq) +
 #'   geom_bar(position = "dodge") +
 #'   geom_text(
 #'     aes(by = Survived), stat = "prop",
 #'     position = position_dodge(0.9), vjust = "bottom"
-#'  )
+#'  ))
 #'
-#' ggplot(d) +
+#' p_(ggplot(d) +
 #'   aes(x = Class, fill = Survived, weight = Freq, by = 1) +
 #'   geom_bar() +
 #'   geom_text(
 #'     aes(label = scales::percent(after_stat(prop), accuracy = 1)),
 #'     stat = "prop",
 #'     position = position_stack(.5)
-#'  )
-#'
+#'  ))
 stat_prop <- function(
   mapping = NULL,
   data = NULL,
@@ -142,32 +143,35 @@ StatProp <- ggproto("StatProp", Stat,
 #' @keywords hplot
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(tips, package = "reshape")
-#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex))
-#' ggally_rowbar(tips, mapping = aes(x = smoker, y = sex))
+#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex)))
+#' p_(ggally_rowbar(tips, mapping = aes(x = smoker, y = sex)))
 #'
 #' # change labels' size
-#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8)
+#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8))
 #'
 #' # change labels' colour and use bold
-#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-#'               colour = "white", fontface = "bold")
+#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
+#'               colour = "white", fontface = "bold"))
 #'
 #' # custom bar width
-#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5))
+#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))
 #'
 #' # change format of labels
-#' ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-#'               label_format = scales::label_percent(accuracy = .01, decimal.mark = ","))
+#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
+#'               label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")))
 #'
-#' ggduo(
+#' p_(ggduo(
 #'   data = as.data.frame(Titanic),
 #'   mapping = aes(weight = Freq),
 #'   columnsX = "Survived",
 #'   columnsY = c("Sex", "Class", "Age"),
 #'   types = list(discrete = "rowbar"),
 #'   legend = 1
-#' )
+#' ))
 ggally_colbar <- function(
   data,
   mapping,

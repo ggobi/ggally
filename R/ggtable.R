@@ -17,28 +17,30 @@
 #' # small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
-#' ggtable(tips, "smoker", c("day", "time", "sex"))
+#' if (require(Hmisc)) {
+#'   data(tips, package = "reshape")
+#'   p_(ggtable(tips, "smoker", c("day", "time", "sex")))
 #'
-#' # displaying row proportions
-#' p_(ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop"))
+#'   # displaying row proportions
+#'   p_(ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop"))
 #'
-#' # filling cells with standardized residuals
-#' p_(ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres"))
+#'   # filling cells with standardized residuals
+#'   p_(ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres"))
 #'
-#' # if continuous variables are provided, just displaying some summary statistics
-#' p_(ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip")))
+#'   # if continuous variables are provided, just displaying some summary statistics
+#'   p_(ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip")))
 #'
-#' # specifying weights
-#' d <- as.data.frame(Titanic)
-#' p_(ggtable(
-#'   d,
-#'   "Survived",
-#'   c("Class", "Sex", "Age"),
-#'   mapping = aes(weight = Freq),
-#'   cells = "row.prop",
-#'   fill = "stdres"
-#' ))
+#'   # specifying weights
+#'   d <- as.data.frame(Titanic)
+#'   p_(ggtable(
+#'     d,
+#'     "Survived",
+#'     c("Class", "Sex", "Age"),
+#'     mapping = aes(weight = Freq),
+#'     cells = "row.prop",
+#'     fill = "stdres"
+#'   ))
+#' }
 ggtable <- function(
   data,
   columnsX = 1:ncol(data),

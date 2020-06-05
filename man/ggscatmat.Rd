@@ -34,7 +34,7 @@ p_ <- GGally::print_if_interactive
 
 data(flea)
 
-ggscatmat(flea, columns = 2:4)
+p_(ggscatmat(flea, columns = 2:4))
 p_(ggscatmat(flea, columns = 2:4, color = "species"))
 }
 \author{

@@ -136,6 +136,9 @@ if (getRversion() >= "2.15.1") {
 #' @importFrom utils head installed.packages
 #' @importFrom grDevices gray.colors
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' library(network)
 #'
 #' # random adjacency matrix
@@ -160,10 +163,10 @@ if (getRversion() >= "2.15.1") {
 #' # color palette
 #' p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
 #'
-#' ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
+#' p_(ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white"))
 #'
 #' # edge arrows on a directed network
-#' ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+#' p_(ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10))
 ggnet <- function(
   net,
   mode             = "fruchtermanreingold",

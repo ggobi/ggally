@@ -24,51 +24,54 @@
 #'
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' d <- as.data.frame(Titanic)
 #'
 #' # plot number of observations
-#' ggplot(d) +
-#'   aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed)) +
-#'   stat_cross() +
-#'   scale_size_area(max_size = 20)
+#' p_(ggplot(d) +
+#'  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed)) +
+#'  stat_cross() +
+#'  scale_size_area(max_size = 20))
 #'
 #' # custom shape and fill colour based on chi-squared residuals
-#' ggplot(d) +
-#'   aes(
-#'     x = Class, y = Survived, weight = Freq,
-#'     size = after_stat(observed), fill = after_stat(stdres)
-#'   ) +
-#'   stat_cross(shape = 22) +
-#'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
-#'   scale_size_area(max_size = 20)
+#' p_(ggplot(d) +
+#'  aes(
+#'    x = Class, y = Survived, weight = Freq,
+#'    size = after_stat(observed), fill = after_stat(stdres)
+#'  ) +
+#'  stat_cross(shape = 22) +
+#'  scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
+#'  scale_size_area(max_size = 20))
 #'
 #' # plotting the number of observations as a table
-#' ggplot(d) +
-#'   aes(
-#'     x = Class, y = Survived, weight = Freq, label = after_stat(observed)
-#'   ) +
-#'   geom_text(stat = "cross")
+#' p_(ggplot(d) +
+#'  aes(
+#'    x = Class, y = Survived, weight = Freq, label = after_stat(observed)
+#'  ) +
+#'  geom_text(stat = "cross"))
 #'
 #' # Row proportions with standardized residuals
-#' ggplot(d) +
+#' p_(ggplot(d) +
 #'   aes(
 #'     x = Class, y = Survived, weight = Freq,
 #'     label = scales::percent(after_stat(row.prop)),
-#'      size = NULL, fill = after_stat(stdres)
+#'     size = NULL, fill = after_stat(stdres)
 #'   ) +
 #'   stat_cross(shape = 22, size = 30) +
 #'   geom_text(stat = "cross") +
 #'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
 #'   facet_grid(Sex ~ .) +
 #'   labs(fill = "Standardized residuals") +
-#'   theme_minimal()
+#'   theme_minimal())
 #'
 #' # can work with continuous or character variables
 #' data(tips, package = "reshape")
-#' ggplot(tips) +
+#' p_(ggplot(tips) +
 #'   aes(x = tip, y = as.character(day), size = after_stat(observed)) +
 #'   stat_cross(alpha = .1, color = "blue") +
-#'   scale_size_area(max_size = 12)
+#'   scale_size_area(max_size = 12))
 stat_cross <- function(mapping = NULL, data = NULL,
                        geom = "point", position = "identity",
                        ...,
@@ -169,39 +172,42 @@ StatCross <- ggproto("StatCross", Stat,
 #' @keywords hplot
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(tips, package = "reshape")
-#' ggally_cross(tips, mapping = aes(x = smoker, y = sex))
-#' ggally_cross(tips, mapping = aes(x = day, y = time))
+#' p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex)))
+#' p_(ggally_cross(tips, mapping = aes(x = day, y = time)))
 #'
 #' # Custom max size
-#' ggally_cross(tips, mapping = aes(x = smoker, y = sex)) +
-#'   scale_size_area(max_size = 40)
+#' p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex)) +
+#'   scale_size_area(max_size = 40))
 #'
 #' # Custom fill
-#' ggally_cross(tips, mapping = aes(x = smoker, y = sex), fill = "red")
+#' p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex), fill = "red"))
 #'
 #' # Custom shape
-#' ggally_cross(tips, mapping = aes(x = smoker, y = sex), shape = 21)
+#' p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex), shape = 21))
 #'
 #' # Fill squares according to standardized residuals
 #' d <- as.data.frame(Titanic)
-#' ggally_cross(
+#' p_(ggally_cross(
 #'   d,
 #'   mapping = aes(x = Class, y = Survived, weight = Freq, fill = after_stat(stdres))
 #' ) +
-#'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
+#'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
 #'
 #' # Add labels
-#' ggally_cross(
+#' p_(ggally_cross(
 #'   tips,
 #'   mapping = aes(
 #'     x = smoker, y = sex, colour = smoker,
 #'     label = scales::percent(after_stat(prop))
 #'   )
-#' )
+#' ))
 #'
 #' # Customize labels' appearance and same size for all squares
-#' ggally_cross(
+#' p_(ggally_cross(
 #'   tips,
 #'   mapping = aes(
 #'     x = smoker, y = sex,
@@ -211,7 +217,7 @@ StatCross <- ggproto("StatCross", Stat,
 #'   size = 40, # fix value for points size
 #'   fill = "darkblue",
 #'   geom_text_args = list(colour = "white", fontface = "bold", size = 6)
-#' )
+#' ))
 ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args = NULL){
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
   mapping <- mapping_color_to_fill(mapping)
@@ -265,32 +271,38 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #' @keywords hplot
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(tips, package = "reshape")
-#' ggally_table(tips, mapping = aes(x = smoker, y = sex))
-#' ggally_table(tips, mapping = aes(x = day, y = time))
-#' ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker))
+#' p_(ggally_table(tips, mapping = aes(x = smoker, y = sex)))
+#' p_(ggally_table(tips, mapping = aes(x = day, y = time)))
+#' p_(ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker)))
 #'
 #' # colour is kept only if equal to x or y
-#' ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = day))
+#' p_(ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = day)))
 #'
 #' # diagonal version
-#' ggally_tableDiag(tips, mapping = aes(x = smoker))
+#' p_(ggally_tableDiag(tips, mapping = aes(x = smoker)))
 #'
 #' # custom label size and color
-#' ggally_table(tips, mapping = aes(x = smoker, y = sex), size = 16, color = "red")
+#' p_(ggally_table(tips, mapping = aes(x = smoker, y = sex), size = 16, color = "red"))
 #'
 #' # display column proportions
-#' ggally_table(tips, mapping = aes(x = day, y = sex, label = scales::percent(after_stat(col.prop))))
+#' p_(ggally_table(
+#'   tips,
+#'   mapping = aes(x = day, y = sex, label = scales::percent(after_stat(col.prop)))
+#' ))
 #'
 #' # draw table cells
-#' ggally_table(
+#' p_(ggally_table(
 #'   tips,
 #'   mapping = aes(x = smoker, y = sex),
 #'   geom_tile_args = list(colour = "black", fill = "white")
-#' )
+#' ))
 #'
 #' # Use standardized residuals to fill table cells
-#' ggally_table(
+#' p_(ggally_table(
 #'   as.data.frame(Titanic),
 #'   mapping = aes(
 #'     x = Class, y = Survived, weight = Freq,
@@ -299,7 +311,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #'   ),
 #'   geom_tile_args = list(colour = "black")
 #' ) +
-#' scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
+#' scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
 ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL){
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
 
@@ -347,29 +359,30 @@ ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_t
 #' @param geom_tile_args other arguments passed to \code{\link[ggplot2]{geom_tile}(...)}
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(tips, package = "reshape")
 #'
 #' # differences with ggally_table()
-#' ggally_table(tips, mapping = aes(x = day, y = time))
-#' ggally_crosstable(tips, mapping = aes(x = day, y = time))
+#' p_(ggally_table(tips, mapping = aes(x = day, y = time)))
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = time)))
 #'
 #' # display column proportions
-#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop")
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop"))
 #'
 #' # display row proportions
-#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "row.prop")
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "row.prop"))
 #'
 #' # change size of text
-#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), size = 8)
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), size = 8))
 #'
 #' # fill cells with standardized residuals
-#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres")
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres"))
 #'
-#' \dontrun{
 #' # change scale for fill
-#' ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
-#'   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE)
-#' }
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
+#'   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE))
 ggally_crosstable <- function(
   data,
   mapping,

@@ -66,9 +66,12 @@ if \code{x} is not a data frame)}
 Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 library(broom)
 reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
-ggcoef(reg)
+p_(ggcoef(reg))
 \donttest{d <- as.data.frame(Titanic)
 reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
 ggcoef(reg2, exponentiate = TRUE)
