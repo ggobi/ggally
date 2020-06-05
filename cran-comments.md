@@ -1,10 +1,48 @@
 
 ## Comments
 
+### 2020-6-5
+
+I have renamed the offending functions.
+
+I have rerun package checks and revdep checks and updated the final results below. (tl/dr 0 revdep problems & 0 errors | 0 warnings | 0 notes)
+
+Please let me know if there is anything else I can do.
+
+Best,
+Barret
+
+
+### 2020-6-5
+
+I talked with Joseph (co-author and author of the conflicting function names).  We are going to change our function names and resubmit.  This seems like the safest approach all around.
+
+Thank you for your time and patience.
+
+Best,
+Barret
+
+
+### 2020-6-5
+
+Changes to worse in reverse depends:
+
+Package: robustSingleCell
+Check: whether package can be installed
+New result: WARNING
+
+
+  Found the following significant warnings:
+    Warning: replacing previous import ‘GGally::mean_sd’ by ‘ggpubr::mean_sd’ when loading ‘robustSingleCell’
+    Warning: replacing previous import ‘GGally::median_iqr’ by ‘ggpubr::median_iqr’ when loading ‘robustSingleCell’
+
+- CRAN teams' auto-check service
+
+
 ### 2020-6-4
 
 Changes since last submission:
-* I removed the package vignettes (and will only host them on the package's website). 
+* I removed the package vignettes (and will only host them on the package's website).
 * I have altered the examples to only print the ggplot2 images if they are in an interactive session.
 * I have made some of the longer running tests to be CI only. (On a weekly schedule)
 
@@ -92,11 +130,6 @@ Brian D. Ripley
 
 #### R CMD check results
 
-win-builder - release:
-* checking files in 'vignettes' ... NOTE
-Package has no Sweave vignette sources and no VignetteBuilder field.
-
-Everywhere else:
 * 0 errors | 0 warnings | 0 notes
 
 
@@ -106,18 +139,5 @@ Link: https://github.com/ggobi/ggally/blob/rc-v2.0.0/revdep/README.md
 
 We checked 98 reverse dependencies (77 from CRAN + 21 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 1 new problems
+ * We saw 0 new problems
  * We failed to check 0 packages
-
-#### New revdepcheck problems
-
-One package had an extra warning produced due to a import clash. A PR was made here: https://github.com/asmagen/robustSingleCell/pull/34
-This is not a breaking change, so I did not deem it necessary to wait two weeks before submitting to CRAN (delaying a CRAN deadline).
-
-* robustSingleCell
-  * checking whether package ‘robustSingleCell’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Warning: replacing previous import ‘GGally::mean_sd’ by ‘ggpubr::mean_sd’ when loading ‘robustSingleCell’
-      Warning: replacing previous import ‘GGally::median_iqr’ by ‘ggpubr::median_iqr’ when loading ‘robustSingleCell’
-    ```
