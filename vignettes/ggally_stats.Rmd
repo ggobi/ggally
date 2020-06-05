@@ -1,10 +1,10 @@
 ---
-title: "Additional statistics for ggplot2"
+title: "stat_*(): Additional statistics for ggplot2"
 output: rmarkdown::html_vignette
 author: GGally team
 date: May 28, 2020
 vignette: >
-  %\VignetteIndexEntry{Additional statistics for ggplot2}
+  %\VignetteIndexEntry{stat_*(): Additional statistics for ggplot2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

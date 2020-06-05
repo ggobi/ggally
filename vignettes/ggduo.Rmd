@@ -239,5 +239,5 @@ You can customize the type of plots to display with the `types` argument. `types
 * `discrete`: when both x and y variables are discrete
 * `na`: when all x data and all y data is `NA`
 
-The list of current valid `ggally_NAME` functions is visible in `vignette("ggally_plots")`.
+The list of current valid `ggally_NAME` functions is visible in `vig_ggally("ggally_plots")`.
 

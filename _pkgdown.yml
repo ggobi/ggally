@@ -24,11 +24,43 @@ authors:
   Hadley Wickham:
     href: http://hadley.nz/
 
+articles:
+- title: Generic plot matrix
+  navbar: Generic plot matrix
+  # desc: description here
+  contents:
+  - ggpairs
+  - ggduo
+  - ggmatrix
+  - ggally_plots
+
+- title: Specialized plot matrix
+  navbar: Specialized plot matrix
+  # desc: description here
+  contents:
+  - ggbivariate
+  - ggnostic
+  - ggscatmat
+  - ggtable
+  - ggally_stats
+
+- title: Specialized ggplot2 plot
+  navbar: Specialized ggplot2 plot
+  # desc: description here
+  contents:
+  - ggcoef
+  - ggnetworkmap
+  - ggsurv
+  - glyph
+
 
 reference:
 - title: Plot Matrix
   desc: >
-    More details in `vignette("ggpairs")`, `vignette("ggmatrix")` and `vignette("ggscatmat")`
+    More details in
+    [`vig_ggally("ggpairs")`](https://ggobi.github.io/ggally/articles/ggpairs.html),
+    [`vig_ggally("ggmatrix")`](https://ggobi.github.io/ggally/articles/ggmatrix.html),
+    and [`vig_ggally("ggscatmat")`](https://ggobi.github.io/ggally/articles/ggscatmat.html)
   contents:
   - ggmatrix
   - ggpairs
@@ -39,8 +71,9 @@ reference:
 
 - title: High-Level Plots
   desc: >
-    See `vignette("ggally_plots")` for a list with examples
-    of all high-level plots.
+    See
+    [`vig_ggally("ggally_plots")`](https://ggobi.github.io/ggally/articles/ggally_plots.html)
+    for a list with examples of all high-level plots.
   contents:
   - ggally_autopoint
   - ggally_barDiag
@@ -72,7 +105,11 @@ reference:
 
 - title: Major Plotting Functions
   desc: >
-    More details in `vignette("ggbivariate")`, `vignette("ggcoef")`, `vignette("ggsurv")`, and `vignette("ggtable")`
+    More details in
+    [`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html),
+    [`vig_ggally("ggcoef")`](https://ggobi.github.io/ggally/articles/ggcoef.html),
+    [`vig_ggally("ggsurv")`](https://ggobi.github.io/ggally/articles/ggsurv.html),
+    and [`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html)
   contents:
   - ggbivariate
   - ggcoef
@@ -83,7 +120,8 @@ reference:
 
 - title: Modeling Diagnostics
   desc: >
-    More details in `vignette("ggnostic")`
+    More details in
+    [`vig_ggally("ggnostic")`](https://ggobi.github.io/ggally/articles/ggpairs.html)
   contents:
   - ggnostic
   - broomify
@@ -97,7 +135,8 @@ reference:
 
 - title: Glyph Plot
   desc: >
-    More details in `vignette("glyph")`
+    More details in
+    [`vig_ggally("glyph")`](https://ggobi.github.io/ggally/articles/glyph.html)
   contents:
   - glyphs
   - add_ref_boxes
@@ -107,7 +146,8 @@ reference:
 
 - title: Network Plots
   desc: >
-    More details in `vignette("ggnetworkmap")`
+    More details in
+    [`vig_ggally("ggnetworkmap")`](https://ggobi.github.io/ggally/articles/ggnetworkmap.html)
   contents:
   - ggnet
   - ggnet2
@@ -115,7 +155,8 @@ reference:
 
 - title: Additional Statistics for `ggplot2`
   desc: >
-    More details in `vignette("ggally_stats")`
+    More details in
+    [`vig_ggally("ggally_stats")`](https://ggobi.github.io/ggally/articles/ggally_stats.html)
   contents:
   - stat_cross
   - stat_prop
@@ -123,7 +164,7 @@ reference:
 
 - title: "ggmatrix() Helpers"
   contents:
-  - eval_data_col
+  - +.gg
   - ggmatrix_location
   - wrap_fn_with_param_arg
   - getPlot
@@ -131,15 +172,15 @@ reference:
   - fn_switch
   - grab_legend
   - gglegend
-  - ggmatrix_progress
+  - eval_data_col
   - mapping_swap_x_y
   - mapping_color_to_fill
   - remove_color_unless_equal
   - print.ggmatrix
   - ggmatrix_gtable
-  - print_if_interactive
+  - ggmatrix_progress
   - str.ggmatrix
-  - +.gg
+  - print_if_interactive
 
 - title: Utilities
   contents:
@@ -155,6 +196,7 @@ reference:
   - skewness
   - signif_stars
   - uppertriangle
+  - vig_ggally
 
 - title: Datasets
   contents:

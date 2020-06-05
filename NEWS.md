@@ -1,22 +1,22 @@
 # GGally 2.0.0
 
 ### New Vignettes
-* `vignette("ggally_plots", package = "GGally")` - List of available high-level plots
-* `vignette("ggally_stats", package = "GGally")` - Additional statistics for ggplot2
-* `vignette("ggbivariate", package = "GGally")` - ggbivariate(): Plot an outcome with several potential explanatory variables
-* `vignette("ggtable", package = "GGally")` - ggtable(): Cross-tabulated tables
-* Call `browseVignettes(package = "GGally")` to view all vignettes for `GGally`
+* `vig_ggally("ggally_plots")` - ggally_*(): List of available high-level plots
+* `vig_ggally("ggally_stats")` - stat_*(): Additional statistics for ggplot2
+* `vig_ggally("ggbivariate")` - ggbivariate(): Plot an outcome with several potential explanatory variables
+* `vig_ggally("ggtable")` - ggtable(): Cross-tabulated tables
+* To view all vignettes for `GGally`, call `GGally::vig_ggally()`
 
 
 ### New functions
 
 `ggbivariate()` (@larmarange, #324)
 * Display an outcome using several potential explanatory variables
-* `vignette("ggbivariate")`
+* `vig_ggally("ggbivariate")`
 
 `ggtable()` (@larmarange, #351)
 * Cross-tabulated tables of discrete variables
-* `vignette("ggtable")`
+* `vig_ggally("ggtable")`
 
 `add_to_ggmatrix()` (#362)
 * Add ggplot2 objects to `ggmatrix` objects at selected locations

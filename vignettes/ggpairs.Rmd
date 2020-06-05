@@ -71,7 +71,7 @@ To make adjustments to each section, a list of information may be supplied.  The
 * `discrete`: a character string representing the tail end of a `ggally_NAME` function, or a custom function
 * `mapping`:  if mapping is provided, only the section's mapping will be overwritten
 
-The list of current valid `ggally_NAME` functions is visible in `vignette("ggally_plots")`.
+The list of current valid `ggally_NAME` functions is visible in `vig_ggally("ggally_plots")`.
 
 ```{r ggpairs_section}
 library(ggplot2)
