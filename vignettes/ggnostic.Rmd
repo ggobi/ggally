@@ -1,10 +1,10 @@
 ---
-title: "ggnostic(): Model diagnostics plot matrix"
+title: "ggnostic(): Model diagnostics"
 output: rmarkdown::html_vignette
 author: Barret Schloerke
 date: Oct 1, 2016
 vignette: >
-  %\VignetteIndexEntry{ggnostic(): Model diagnostics plot matrix}
+  %\VignetteIndexEntry{ggnostic(): Model diagnostics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

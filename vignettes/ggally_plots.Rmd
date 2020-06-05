@@ -1,12 +1,12 @@
 ---
-title: "List of available high-level plots"
+title: "ggally_*(): List of available high-level plots"
 output: 
   rmarkdown::html_vignette:
     toc: true
 author: GGally Team
 date: May 28, 2020
 vignette: >
-  %\VignetteIndexEntry{List of available high-level plots}
+  %\VignetteIndexEntry{ggally_*(): List of available high-level plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

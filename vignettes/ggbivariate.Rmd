@@ -107,4 +107,4 @@ ggbivariate(
 )
 ```
 
-For more customization options, you could directly use `ggduo()` (see also `vignette("ggduo")`).
+For more customization options, you could directly use `ggduo()` (see also `vig_ggally("ggduo")`).

@@ -5,6 +5,7 @@ on:
   pull_request:
     branches:
       - master
+      - rc-*
 
 name: R-CMD-check
 
@@ -96,7 +97,7 @@ jobs:
       - name: Check as CRAN
         env:
           _R_CHECK_CRAN_INCOMING_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "note", check_dir = "check")
         shell: Rscript {0}
 
       - name: Show testthat output

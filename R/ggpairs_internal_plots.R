@@ -108,7 +108,7 @@ wrap_fn_with_param_arg <- function(
         stop(str_c(
           "Error retrieving `GGally` function.\n",
           "Please provide a string such as `'points'` for `ggally_points()`\n",
-          "For a list of all predefined functions, check out `vignette(\"ggally_plots\", package = \"GGally\")`\n",
+          "For a list of all predefined functions, check out `vig_ggally(\"ggally_plots\")`\n",
           "A custom function may be supplied directly: `wrap(my_fn, param = val)`\n",
           "Function provided: ", funcVal
         ))
