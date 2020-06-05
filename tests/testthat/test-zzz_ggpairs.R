@@ -1,5 +1,7 @@
-
 context("ggpairs")
+# This file takes too long
+testthat::skip_on_cran()
+
 data(tips, package = "reshape")
 
 expect_print <- function(p) {
