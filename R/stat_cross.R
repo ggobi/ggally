@@ -400,7 +400,7 @@ ggally_crosstable <- function(
     theme(axis.ticks = element_blank())
 
   if (fill == "stdres")
-    p <- p + scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
+    p <- p + scale_fill_steps2(breaks = c(-Inf, -3, -2, 2, 3, Inf))
 
   p
 }
