@@ -2,21 +2,21 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_summarise_by}
 \alias{ggally_summarise_by}
-\alias{median_iqr}
-\alias{mean_sd}
+\alias{weighted_median_iqr}
+\alias{weighted_mean_sd}
 \title{Summarize a continuous variable by each value of a discrete variable}
 \usage{
 ggally_summarise_by(
   data,
   mapping,
-  text_fn = median_iqr,
+  text_fn = weighted_median_iqr,
   text_fn_vertical = NULL,
   ...
 )
 
-median_iqr(x, weights = NULL)
+weighted_median_iqr(x, weights = NULL)
 
-mean_sd(x, weights = NULL)
+weighted_mean_sd(x, weights = NULL)
 }
 \arguments{
 \item{data}{data set using}
@@ -37,9 +37,9 @@ mean_sd(x, weights = NULL)
 Display summary statistics of a continuous variable for each value of a discrete variable.
 }
 \details{
-\code{median_iqr} computes median and interquartile range.
+\code{weighted_median_iqr} computes weighted median and interquartile range.
 
-\code{mean_sd} computes mean and standard deviation.
+\code{weighted_mean_sd} computes weighted mean and standard deviation.
 }
 \examples{
 # Small function to display plots only if it's interactive
@@ -59,7 +59,7 @@ if (require(Hmisc)) {
   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6))
 
   # change statistic to display
-  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = mean_sd))
+  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_mean_sd))
 
   # custom stat function
   weighted_sum <- function(x, weights = NULL) {

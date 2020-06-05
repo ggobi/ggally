@@ -25,7 +25,7 @@
 #'   p_(ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop"))
 #'
 #'   # filling cells with standardized residuals
-#'   p_(ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres"))
+#'   p_(ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres", legend = 1))
 #'
 #'   # if continuous variables are provided, just displaying some summary statistics
 #'   p_(ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip")))
@@ -72,8 +72,6 @@ ggtable <- function(
     ggduo_args$xProportions <- "auto"
   if (!"yProportions" %in% names(ggduo_args))
     ggduo_args$yProportions <- "auto"
-  if (!"legend" %in% names(ggduo_args) & fill == "stdres")
-    ggduo_args$legend <- 1
 
   p <- do.call(ggduo, ggduo_args)
   p
