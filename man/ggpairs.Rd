@@ -97,8 +97,8 @@ If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
 If a function is supplied as an option to \code{upper}, \code{lower}, or \code{diag}, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
- # small function to display plots only if it's interactive
- p_ <- GGally::print_if_interactive
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
 
 ## Quick example, with and without colour

@@ -44,8 +44,11 @@ A suggested "cutoff" line is added to the plot at a height of 2 * p / n and an e
 If either \code{linePosition} or \code{avgLinePosition} is \code{NULL}, the respective line will not be drawn.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
+p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
 }
 \seealso{
 \code{stats::\link[stats]{influence}}

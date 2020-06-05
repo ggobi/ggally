@@ -17,13 +17,16 @@ ggally_denstrip(data, mapping, ...)
 Displays a Tile Plot as densely as possible.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
- ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
- ggally_denstrip(
-   tips,
-   mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
- ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+p_(ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
+p_(ggally_denstrip(
+  tips,
+  mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
+) + ggplot2::scale_fill_gradient(low = "grey80", high = "black"))
 }
 \author{
 Barret Schloerke

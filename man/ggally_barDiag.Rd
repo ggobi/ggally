@@ -19,9 +19,12 @@ ggally_barDiag(data, mapping, ..., rescale = FALSE)
 Displays a bar plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
-ggally_barDiag(tips, mapping = ggplot2::aes(x = day))
-ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
+p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = day)))
+p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25))
 }
 \author{
 Barret Schloerke

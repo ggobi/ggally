@@ -74,5 +74,4 @@ locs
 
 # Use the output of a prior ggmatrix_location
 ggmatrix_location(pm, location = locs)
-
 }

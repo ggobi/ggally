@@ -11,6 +11,9 @@
 #' @seealso \code{\link{getPlot}}
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
 #'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
@@ -28,7 +31,7 @@
 #' custom_car[2,1] <- NULL
 #' custom_car[3,1] <- "blank" # the same as storing null
 #' custom_car[3,2] <- NULL
-#' custom_car
+#' p_(custom_car)
 putPlot <- function(pm, value, i, j){
   pos <- get_pos(pm, i, j)
   if (is.null(value)) {
@@ -59,9 +62,12 @@ putPlot <- function(pm, value, i, j){
 #' @seealso \code{\link{putPlot}}
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
-#'  plotMatrix2[1, 2]
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
+#' p_(plotMatrix2[1, 2])
 getPlot <- function(pm, i, j){
   if (FALSE) {
     cat("i: ", i, " j: ", j, "\n")

@@ -89,50 +89,53 @@ from \pkg{broom}.
 }
 
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 d <- as.data.frame(Titanic)
 
 # plot number of observations
-ggplot(d) +
-  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed)) +
-  stat_cross() +
-  scale_size_area(max_size = 20)
+p_(ggplot(d) +
+ aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed)) +
+ stat_cross() +
+ scale_size_area(max_size = 20))
 
 # custom shape and fill colour based on chi-squared residuals
-ggplot(d) +
-  aes(
-    x = Class, y = Survived, weight = Freq,
-    size = after_stat(observed), fill = after_stat(stdres)
-  ) +
-  stat_cross(shape = 22) +
-  scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
-  scale_size_area(max_size = 20)
+p_(ggplot(d) +
+ aes(
+   x = Class, y = Survived, weight = Freq,
+   size = after_stat(observed), fill = after_stat(stdres)
+ ) +
+ stat_cross(shape = 22) +
+ scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
+ scale_size_area(max_size = 20))
 
 # plotting the number of observations as a table
-ggplot(d) +
-  aes(
-    x = Class, y = Survived, weight = Freq, label = after_stat(observed)
-  ) +
-  geom_text(stat = "cross")
+p_(ggplot(d) +
+ aes(
+   x = Class, y = Survived, weight = Freq, label = after_stat(observed)
+ ) +
+ geom_text(stat = "cross"))
 
 # Row proportions with standardized residuals
-ggplot(d) +
+p_(ggplot(d) +
   aes(
     x = Class, y = Survived, weight = Freq,
     label = scales::percent(after_stat(row.prop)),
-     size = NULL, fill = after_stat(stdres)
+    size = NULL, fill = after_stat(stdres)
   ) +
   stat_cross(shape = 22, size = 30) +
   geom_text(stat = "cross") +
   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
   facet_grid(Sex ~ .) +
   labs(fill = "Standardized residuals") +
-  theme_minimal()
+  theme_minimal())
 
 # can work with continuous or character variables
 data(tips, package = "reshape")
-ggplot(tips) +
+p_(ggplot(tips) +
   aes(x = tip, y = as.character(day), size = after_stat(observed)) +
   stat_cross(alpha = .1, color = "blue") +
-  scale_size_area(max_size = 12)
+  scale_size_area(max_size = 12))
 }
 \keyword{datasets}

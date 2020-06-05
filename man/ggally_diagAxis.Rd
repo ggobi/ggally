@@ -42,9 +42,12 @@ ggally_diagAxis(
 This function is used when \code{axisLabels == "internal"}.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_diagAxis(tips, ggplot2::aes(x=tip))
- ggally_diagAxis(tips, ggplot2::aes(x=sex))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_diagAxis(tips, ggplot2::aes(x=tip)))
+p_(ggally_diagAxis(tips, ggplot2::aes(x=sex)))
 }
 \author{
 Jason Crowley and Barret Schloerke

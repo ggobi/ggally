@@ -42,27 +42,30 @@ Display summary statistics of a continuous variable for each value of a discrete
 \code{mean_sd} computes mean and standard deviation.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day))
-ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill))
+p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day)))
+p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill)))
 
 # colour is kept only if equal to the discrete variable
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = day))
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = sex))
-ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill, color = day))
+p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = day)))
+p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = sex)))
+p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill, color = day)))
 
 # custom text size
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6)
+p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6))
 
 # change statistic to display
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = mean_sd)
+p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = mean_sd))
 
 # custom stat function
 weighted_sum <- function(x, weights = NULL) {
   if (is.null(weights)) weights <- 1
   paste0("Total : ", round(sum(x * weights, na.rm = TRUE), digits = 1))
 }
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
+p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 }
 \author{
 Joseph Larmarange

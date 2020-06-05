@@ -41,32 +41,38 @@ The \strong{colour} aesthetic is taken into account only if equal to
   \strong{x} or \strong{y}.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
-ggally_table(tips, mapping = aes(x = smoker, y = sex))
-ggally_table(tips, mapping = aes(x = day, y = time))
-ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker))
+p_(ggally_table(tips, mapping = aes(x = smoker, y = sex)))
+p_(ggally_table(tips, mapping = aes(x = day, y = time)))
+p_(ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker)))
 
 # colour is kept only if equal to x or y
-ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = day))
+p_(ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = day)))
 
 # diagonal version
-ggally_tableDiag(tips, mapping = aes(x = smoker))
+p_(ggally_tableDiag(tips, mapping = aes(x = smoker)))
 
 # custom label size and color
-ggally_table(tips, mapping = aes(x = smoker, y = sex), size = 16, color = "red")
+p_(ggally_table(tips, mapping = aes(x = smoker, y = sex), size = 16, color = "red"))
 
 # display column proportions
-ggally_table(tips, mapping = aes(x = day, y = sex, label = scales::percent(after_stat(col.prop))))
+p_(ggally_table(
+  tips,
+  mapping = aes(x = day, y = sex, label = scales::percent(after_stat(col.prop)))
+))
 
 # draw table cells
-ggally_table(
+p_(ggally_table(
   tips,
   mapping = aes(x = smoker, y = sex),
   geom_tile_args = list(colour = "black", fill = "white")
-)
+))
 
 # Use standardized residuals to fill table cells
-ggally_table(
+p_(ggally_table(
   as.data.frame(Titanic),
   mapping = aes(
     x = Class, y = Survived, weight = Freq,
@@ -75,7 +81,7 @@ ggally_table(
   ),
   geom_tile_args = list(colour = "black")
 ) +
-scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
+scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
 }
 \author{
 Joseph Larmarange

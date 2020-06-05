@@ -18,7 +18,7 @@
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(tips, package = "reshape")
-#' ggtable(tips, "smoker", c("day", "time", "sex"))
+#' p_(ggtable(tips, "smoker", c("day", "time", "sex")))
 #'
 #' # displaying row proportions
 #' p_(ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop"))

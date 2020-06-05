@@ -31,27 +31,28 @@ ggally_crosstable(
 \code{ggally_crosstable} is a variation of \code{\link{ggally_table}} with few modifications: (i) table cells are drawn; (ii) x and y axis are not expanded (and therefore are not aligned with other \code{ggally_*} plots); (iii) content and fill of cells can be easily controlled with dedicated arguments.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
 
 # differences with ggally_table()
-ggally_table(tips, mapping = aes(x = day, y = time))
-ggally_crosstable(tips, mapping = aes(x = day, y = time))
+p_(ggally_table(tips, mapping = aes(x = day, y = time)))
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = time)))
 
 # display column proportions
-ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop")
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop"))
 
 # display row proportions
-ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "row.prop")
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "row.prop"))
 
 # change size of text
-ggally_crosstable(tips, mapping = aes(x = day, y = sex), size = 8)
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), size = 8))
 
 # fill cells with standardized residuals
-ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres")
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres"))
 
-\dontrun{
 # change scale for fill
-ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
-  scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE)
-}
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
+  scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE))
 }

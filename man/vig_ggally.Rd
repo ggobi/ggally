@@ -16,9 +16,10 @@ This function will open the directly to the vignette requested. If no \code{name
 This method allows for vignettes to be hosted remotely, reducing \pkg{GGally}'s package size, and installation time.
 }
 \examples{
+\donttest{
 # View `ggnostic` vignette
 vig_ggally("ggnostic")
 
 # View all vignettes by GGally
-vig_ggally()
+vig_ggally()}
 }

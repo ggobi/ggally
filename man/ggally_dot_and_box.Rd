@@ -19,17 +19,20 @@ ggally_dot_and_box(data, mapping, ..., boxPlot = TRUE)
 Place box plots or dot plots on the graph
 }
 \examples{
- data(tips, package = "reshape")
- ggally_dot_and_box(
-   tips,
-   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
-   boxPlot = TRUE
- )
- ggally_dot_and_box(
-   tips,
-   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
-   boxPlot = FALSE
- )
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_dot_and_box(
+  tips,
+  mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+  boxPlot = TRUE
+))
+p_(ggally_dot_and_box(
+  tips,
+  mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+  boxPlot = FALSE
+))
 }
 \author{
 Barret Schloerke

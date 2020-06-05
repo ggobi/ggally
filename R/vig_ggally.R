@@ -7,11 +7,12 @@
 #' @param name Vignette name to open. If no name is provided, the vignette index will be opened
 #' @export
 #' @examples
+#' \donttest{
 #' # View `ggnostic` vignette
 #' vig_ggally("ggnostic")
 #'
 #' # View all vignettes by GGally
-#' vig_ggally()
+#' vig_ggally()}
 vig_ggally <- function(name) {
 
   vig_url <-

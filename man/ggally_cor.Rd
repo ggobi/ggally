@@ -61,28 +61,31 @@ ggally_cor(
 Estimate correlation from the given data. If a color variable is supplied, the correlation will also be calculated per group.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
- # display with grid
- ggally_cor(
-   tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-   display_grid = TRUE
- )
- # change text attributes
- ggally_cor(
-   tips,
-   mapping = ggplot2::aes(x = total_bill, y = tip),
-   size = 15,
-   colour = I("red"),
-   title = "Correlation"
- )
- # split by a variable
- ggally_cor(
-   tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
-   size = 5
- )
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+# display with grid
+p_(ggally_cor(
+  tips,
+  mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+  display_grid = TRUE
+))
+# change text attributes
+p_(ggally_cor(
+  tips,
+  mapping = ggplot2::aes(x = total_bill, y = tip),
+  size = 15,
+  colour = I("red"),
+  title = "Correlation"
+))
+# split by a variable
+p_(ggally_cor(
+  tips,
+  mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+  size = 5
+))
 }
 \seealso{
 \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}

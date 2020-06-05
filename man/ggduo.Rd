@@ -130,7 +130,7 @@ If a function is supplied as an option, it should implement the function api of 
      continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
    ),
    showStrips = FALSE
- );
+ )
 
  p_(pm)
 

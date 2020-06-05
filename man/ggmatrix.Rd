@@ -66,7 +66,7 @@ Now that the \code{\link{print.ggmatrix}} method uses a large \pkg{gtable} objec
 }
 
 \examples{
-# small function to display plots only if it's interactive
+# Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
 plotList <- list()

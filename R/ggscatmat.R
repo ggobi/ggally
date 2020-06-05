@@ -216,7 +216,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
 #'
 #' data(flea)
 #'
-#' scatmat(flea, columns=2:4)
+#' p_(scatmat(flea, columns=2:4))
 #' p_(scatmat(flea, columns= 2:4, color="species"))
 scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
   data <- upgrade_scatmat_data(data)
@@ -302,7 +302,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #'
 #' data(flea)
 #'
-#' ggscatmat(flea, columns = 2:4)
+#' p_(ggscatmat(flea, columns = 2:4))
 #' p_(ggscatmat(flea, columns = 2:4, color = "species"))
 ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson"){
   ## if 'color' is not a factor, mold it into one

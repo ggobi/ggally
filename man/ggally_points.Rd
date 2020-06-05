@@ -17,10 +17,13 @@ ggally_points(data, mapping, ...)
 Make a scatter plot with a given data set.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(mtcars)
-ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp))
-ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp"))
-ggally_points(
+p_(ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp)))
+p_(ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp")))
+p_(ggally_points(
   mtcars,
   mapping = ggplot2::aes_string(
     x     = "disp",
@@ -28,7 +31,7 @@ ggally_points(
     color = "as.factor(cyl)",
     size  = "gear"
   )
-)
+))
 }
 \author{
 Barret Schloerke

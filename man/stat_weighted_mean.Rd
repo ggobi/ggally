@@ -84,41 +84,44 @@ aesthetic if provided.
 }
 
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
 
-ggplot(tips) +
+p_(ggplot(tips) +
   aes(x = day, y = total_bill) +
-  geom_point()
+  geom_point())
 
-ggplot(tips) +
+p_(ggplot(tips) +
   aes(x = day, y = total_bill) +
-  stat_weighted_mean()
+  stat_weighted_mean())
 
-ggplot(tips) +
+p_(ggplot(tips) +
   aes(x = day, y = total_bill, group = 1) +
-  stat_weighted_mean(geom = "line")
+  stat_weighted_mean(geom = "line"))
 
-ggplot(tips) +
+p_(ggplot(tips) +
   aes(x = day, y = total_bill, colour = sex, group = sex) +
-  stat_weighted_mean(geom = "line")
+  stat_weighted_mean(geom = "line"))
 
-ggplot(tips) +
+p_(ggplot(tips) +
   aes(x = day, y = total_bill, fill = sex) +
-  stat_weighted_mean(geom = "bar", position = "dodge")
+  stat_weighted_mean(geom = "bar", position = "dodge"))
 
 # computing a proportion on the fly
-ggplot(tips) +
+p_(ggplot(tips) +
   aes(x = day, y = as.integer(smoker == "Yes"), fill = sex) +
   stat_weighted_mean(geom = "bar", position = "dodge") +
-  scale_y_continuous(labels = scales::percent)
+  scale_y_continuous(labels = scales::percent))
 
 # taking into account some weights
 d <- as.data.frame(Titanic)
-ggplot(d) +
+p_(ggplot(d) +
   aes(x = Class, y = as.integer(Survived == "Yes"), weight = Freq, fill = Sex) +
   geom_bar(stat = "weighted_mean", position = "dodge") +
   scale_y_continuous(labels = scales::percent) +
-  labs(y = "Survived")
+  labs(y = "Survived"))
 
 
 \dontrun{

@@ -31,8 +31,11 @@ sigma: a vector whose i-th element contains the estimate of the residual standar
 A line is added to display the overall model's sigma value. This gives a baseline for comparison
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma))
+p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
 }
 \seealso{
 \code{stats::\link[stats]{influence}}

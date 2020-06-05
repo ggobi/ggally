@@ -17,9 +17,12 @@ ggally_facethist(data, mapping, ...)
 Display subsetted histograms of the data in different panels.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
- ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex)))
+p_(ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1))
 }
 \author{
 Barret Schloerke

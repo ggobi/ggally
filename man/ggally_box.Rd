@@ -20,16 +20,19 @@ ggally_box_no_facet(data, mapping, ...)
 Make a box plot with a given data set. \code{ggally_box_no_facet} will be a single panel plot, while \code{ggally_box} will be a faceted plot
 }
 \examples{
- data(tips, package = "reshape")
- ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
- ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
- ggally_box(
-   tips,
-   mapping        = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"),
-   outlier.colour = "red",
-   outlier.shape  = 13,
-   outlier.size   = 8
- )
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+p_(ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
+p_(ggally_box(
+  tips,
+  mapping        = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"),
+  outlier.colour = "red",
+  outlier.shape  = 13,
+  outlier.size   = 8
+))
 }
 \author{
 Barret Schloerke
