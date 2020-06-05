@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/New_York             |
-|date     |2020-06-04                   |
+|date     |2020-06-05                   |
 
 # Dependencies
 
@@ -68,10 +68,10 @@
 |[httk](problems.md#httk)                         |2.0.1   |      |        |1    |
 |[ICtest](problems.md#ictest)                     |0.3-2   |      |        |1    |
 |imageData                                        |0.1-60  |      |        |     |
-|[isomiRs](problems.md#isomirs)                   |1.16.1  |2     |        |3    |
+|[isomiRs](problems.md#isomirs)                   |1.16.2  |1     |        |3    |
 |ITNr                                             |0.6.0   |      |        |     |
 |[jmv](problems.md#jmv)                           |1.2.5   |      |        |1    |
-|[jsmodule](problems.md#jsmodule)                 |1.0.7   |      |        |1    |
+|[jsmodule](problems.md#jsmodule)                 |1.0.8   |      |        |1    |
 |[LANDD](problems.md#landd)                       |1.1.0   |      |        |1    |
 |[MAINT.Data](problems.md#maintdata)              |2.3.1   |      |        |1    |
 |[MAST](problems.md#mast)                         |1.14.0  |      |        |2    |

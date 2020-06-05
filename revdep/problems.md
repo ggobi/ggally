@@ -289,20 +289,20 @@ Run `revdep_details(,"finalfit")` for more info
     1    Alive            1 511
     2     Died            2 404
     3     <NA>           NA  14
-
+    
     $counts[[19]]
       sex.factor2 age.factor2   n
     1           M   <60 years 204
     2           M   60+ years 241
     3           F   <60 years 210
     4           F   60+ years 274
-
-
-    >
+    
+    
+    > 
     > # Select a tibble and expand
     > out$counts[[9]] %>%
     +   print(n = Inf)
-    Error in print.default(m, ..., quote = quote, right = right, max = max) :
+    Error in print.default(m, ..., quote = quote, right = right, max = max) : 
       invalid 'na.print' specification
     Calls: %>% ... print -> print.data.frame -> print -> print.default
     Execution halted
@@ -392,7 +392,7 @@ Run `revdep_details(,"ggbio")` for more info
 *   checking examples ... WARNING
     ```
     Found the following significant warnings:
-
+    
       Warning: 'GenenameFilter' is deprecated.
     Deprecated functions may be defunct as soon as of the next release of
     R.
@@ -464,11 +464,11 @@ Run `revdep_details(,"GGPA")` for more info
     File ‘GGPA/libs/GGPA.so’:
       Found ‘__ZNSt3__14coutE’, possibly from ‘std::cout’ (C++)
         Object: ‘3_Param.o’
-
+    
     Compiled code should not call entry points which might terminate R nor
     write to stdout/stderr instead of to the console, nor use Fortran I/O
     nor system RNGs.
-
+    
     See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
     ```
 
@@ -548,10 +548,10 @@ Run `revdep_details(,"ICtest")` for more info
 
 <details>
 
-* Version: 1.16.1
+* Version: 1.16.2
 * Source code: https://github.com/cran/isomiRs
 * BugReports: https://github.com/lpantano/isomiRs/issues
-* Date/Publication: 2020-05-26
+* Date/Publication: 2020-06-03
 * Number of recursive dependencies: 149
 
 Run `revdep_details(,"isomiRs")` for more info
@@ -562,50 +562,19 @@ Run `revdep_details(,"isomiRs")` for more info
 
 *   checking examples ... ERROR
     ```
-    ...
-    Joining, by = "merge"
-    Error: Problem with `summarise()` input `n_genes`.
-    ✖ could not find function "n"
-    ℹ Input `n_genes` is `n()`.
-    ℹ The error occured in group 1: merge = "one_groupcontrol", cluster = 1, xaxis = "control", colored = "one_group".
-    Backtrace:
-         █
-      1. └─isomiRs::isoNetwork(...)
-      2.   └─isomiRs:::.viz_mirna_gene_enrichment(...)
-      3.     └─isomiRs:::.cluster_exp(...)
-      4.       └─DEGreport::degPatterns(ma, meta, time = "xaxis", minc = 0, plot = FALSE)
-      5.         └─`%>%`(...)
-      6.           ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-      7.           └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-      8.             └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
-      9.               └─DEGreport:::`_fseq`(`_lhs`)
-     10.                 └─magrittr::freduce(value, `_function_list`)
-     11.                   └─function_list[[i]](value)
-     12.                     ├─dplyr::summarise(., abundance = median(value), n_genes = n())
-     13.
+    Running examples in ‘isomiRs-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: mirna2targetscan
+    > ### Title: Find targets in targetscan database
+    > ### Aliases: mirna2targetscan
+    > 
+    > ### ** Examples
+    > 
+    > library(targetscan.Hs.eg.db)
+    Error in library(targetscan.Hs.eg.db) : 
+      there is no package called ‘targetscan.Hs.eg.db’
     Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ℹ The error occured in group 1: merge = "one_groupcontrol_1", cluster = 1, xaxis = "control_1", colored = "one_group".
-      Backtrace:
-        1. testthat::expect_equal(unique(.cluster_exp(gene)), c(1, 2))
-        5. isomiRs:::.cluster_exp(gene)
-        6. DEGreport::degPatterns(ma, meta, time = "xaxis", minc = 0, plot = FALSE)
-        4. dplyr::group_by(...)
-       11. dplyr::summarise(., abundance = median(value), n_genes = n())
-       16. dplyr:::summarise_cols(.data, ...)
-
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 27 | SKIPPED: 0 | WARNINGS: 2 | FAILED: 1 ]
-      1. Error: matrix (@test_calculus.R#23)
-
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 *   checking package dependencies ... NOTE
@@ -675,11 +644,11 @@ Run `revdep_details(,"jmv")` for more info
 
 <details>
 
-* Version: 1.0.7
+* Version: 1.0.8
 * Source code: https://github.com/cran/jsmodule
 * URL: https://github.com/jinseob2kim/jsmodule
 * BugReports: https://github.com/jinseob2kim/jsmodule/issues
-* Date/Publication: 2020-04-29 17:20:09 UTC
+* Date/Publication: 2020-06-04 17:00:02 UTC
 * Number of recursive dependencies: 188
 
 Run `revdep_details(,"jsmodule")` for more info
@@ -843,24 +812,24 @@ Run `revdep_details(,"MissingDataGUI")` for more info
 
 *   checking S3 generic/method consistency ... WARNING
     ```
-
-    (R:15348): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:49914): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See section ‘Generic functions and methods’ in the ‘Writing R
     Extensions’ manual.
     ```
 
 *   checking replacement functions ... WARNING
     ```
-
-    (R:15410): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:50079): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The argument of a replacement function which corresponds to the right
     hand side must be named ‘value’.
     ```
 
 *   checking for missing documentation entries ... WARNING
     ```
-
-    (R:15967): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:50734): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     All user-level objects in a package should have documentation entries.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
     Extensions’ manual.
@@ -868,38 +837,38 @@ Run `revdep_details(,"MissingDataGUI")` for more info
 
 *   checking for code/documentation mismatches ... WARNING
     ```
-
-    (R:16060): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
-
-    (R:16138): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
-
-    (R:16267): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:50780): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:50817): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:50949): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking dependencies in R code ... NOTE
     ```
-
-    (R:15208): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:49828): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking foreign function calls ... NOTE
     ```
-
-    (R:15441): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:50140): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See chapter ‘System and foreign language interfaces’ in the ‘Writing R
     Extensions’ manual.
     ```
 
 *   checking R code for possible problems ... NOTE
     ```
-
-    (R:15653): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:50408): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking Rd \usage sections ... NOTE
     ```
-
-    (R:16367): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:51056): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The \usage entries for S3 methods should use the \method markup and not
     their full name.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
@@ -947,18 +916,18 @@ Run `revdep_details(,"MOFA")` for more info
     ```
     Running examples in ‘MOFA-Ex.R’ failed
     The error most likely occurred in:
-
+    
     > ### Name: DataOptions
     > ### Title: DataOptions: set and retrieve data options
     > ### Aliases: DataOptions DataOptions<- DataOptions,MOFAmodel-method
     > ###   DataOptions<-,MOFAmodel,list-method
-    >
+    > 
     > ### ** Examples
-    >
+    > 
     > # load a trained MOFAmodel object
     > filepath <- system.file("extdata", "scMT_model.hdf5", package = "MOFAdata")
     > MOFAobject <- loadModel(filepath)
-    Error in h5checktypeOrOpenLoc(file, readonly = TRUE, native = native) :
+    Error in h5checktypeOrOpenLoc(file, readonly = TRUE, native = native) : 
       Error in h5checktypeOrOpenLoc(). Cannot open file. File '' does not exist.
     Calls: loadModel -> h5read -> h5checktypeOrOpenLoc
     Execution halted
@@ -1495,10 +1464,10 @@ Run `revdep_details(,"tidybulk")` for more info
       Getting the 5 most variable genes
       ══ testthat results  ═══════════════════════════════════════════════════════════
       [ OK: 139 | SKIPPED: 0 | WARNINGS: 18 | FAILED: 3 ]
-      1. Error: Only scaled counts - no object (@test-bulk_methods.R#65)
-      2. Error: tidybulk SummarizedExperiment normalisation manual (@test-bulk_methods_SummarizedExperiment.R#29)
-      3. Error: tidybulk SummarizedExperiment normalisation (@test-bulk_methods_SummarizedExperiment.R#50)
-
+      1. Error: Only scaled counts - no object (@test-bulk_methods.R#65) 
+      2. Error: tidybulk SummarizedExperiment normalisation manual (@test-bulk_methods_SummarizedExperiment.R#29) 
+      3. Error: tidybulk SummarizedExperiment normalisation (@test-bulk_methods_SummarizedExperiment.R#50) 
+      
       Error: testthat unit tests failed
       Execution halted
     ```
@@ -1644,3 +1613,4 @@ Run `revdep_details(,"vidger")` for more info
         data   4.7Mb
         doc    6.1Mb
     ```
+
