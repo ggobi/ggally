@@ -1,6 +1,46 @@
 
 ## Comments
 
+### 2020-6-4
+
+Changes since last submission:
+* I removed the package vignettes (and will only host them on the package's website). 
+* I have altered the examples to only print the ggplot2 images if they are in an interactive session.
+* I have made some of the longer running tests to be CI only. (On a weekly schedule)
+
+The package size should be smaller (I did not receive any warnings) and the check time should be faster.
+
+I have rerun package checks and revdep checks and updated the final results below.
+
+Please let me know if there is anything else I can do.
+
+Best,
+Barret
+
+
+### 2020-6-4
+
+Thanks, we see:
+
+
+   Size of tarball: 5726242 bytes
+
+This is more than the 5MB CRAN threshhold and more than ever before?
+
+
+Flavor: r-devel-windows-ix86+x86_64
+Check: Overall checktime, Result: NOTE
+   Overall checktime 14 min > 10 min
+
+This is also rather extensive.
+
+
+Can these be reduced?
+
+Best,
+Uwe Ligges
+
+
 ### 2020-6-3
 
 I have removed `packagedocs` as a dependency.  This fixes the errors on CRAN check.
@@ -48,27 +88,21 @@ Brian D. Ripley
 * win-builder
   * oldrelease
   * release
-  * devel
+  * devel - Could not test. `Failed FTP upload: 550`
 
 #### R CMD check results
 
-win-builder
+win-builder - release:
+* checking files in 'vignettes' ... NOTE
+Package has no Sweave vignette sources and no VignetteBuilder field.
+
+Everywhere else:
 * 0 errors | 0 warnings | 0 notes
-
-
-Local & GitHub Actions
-* 0 errors | 0 warnings | 1 notes
-
-N  checking installed package size ...
-     installed size is  7.8Mb
-     sub-directories of 1Mb or more:
-       doc   6.1Mb
-
 
 
 ## revdepcheck results
 
-Link: https://github.com/ggobi/ggally/commit/8a6b8ffbf6f7187dc9503ac51c3f5f48b3f72a1c
+Link: https://github.com/ggobi/ggally/blob/rc-v2.0.0/revdep/README.md
 
 We checked 98 reverse dependencies (77 from CRAN + 21 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
 
