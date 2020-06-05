@@ -557,6 +557,8 @@ test_that("strip-top and strip-right", {
 
 test_that("subtypes", {
 
+  testthat::skip_on_cran()
+
 # list of the different plot types to check
 # continuous
 #    points
