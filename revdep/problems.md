@@ -813,7 +813,7 @@ Run `revdep_details(,"MissingDataGUI")` for more info
 *   checking S3 generic/method consistency ... WARNING
     ```
     
-    (R:49914): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:34676): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See section ‘Generic functions and methods’ in the ‘Writing R
     Extensions’ manual.
     ```
@@ -821,7 +821,7 @@ Run `revdep_details(,"MissingDataGUI")` for more info
 *   checking replacement functions ... WARNING
     ```
     
-    (R:50079): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:34834): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The argument of a replacement function which corresponds to the right
     hand side must be named ‘value’.
     ```
@@ -829,7 +829,7 @@ Run `revdep_details(,"MissingDataGUI")` for more info
 *   checking for missing documentation entries ... WARNING
     ```
     
-    (R:50734): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:35294): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     All user-level objects in a package should have documentation entries.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
     Extensions’ manual.
@@ -838,23 +838,23 @@ Run `revdep_details(,"MissingDataGUI")` for more info
 *   checking for code/documentation mismatches ... WARNING
     ```
     
-    (R:50780): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:35454): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     
-    (R:50817): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:35517): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     
-    (R:50949): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:35576): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking dependencies in R code ... NOTE
     ```
     
-    (R:49828): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:34374): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking foreign function calls ... NOTE
     ```
     
-    (R:50140): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:34960): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See chapter ‘System and foreign language interfaces’ in the ‘Writing R
     Extensions’ manual.
     ```
@@ -862,13 +862,13 @@ Run `revdep_details(,"MissingDataGUI")` for more info
 *   checking R code for possible problems ... NOTE
     ```
     
-    (R:50408): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:35057): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking Rd \usage sections ... NOTE
     ```
     
-    (R:51056): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:35671): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The \usage entries for S3 methods should use the \method markup and not
     their full name.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
@@ -1196,30 +1196,6 @@ Run `revdep_details(,"robustbase")` for more info
 *   checking Rd cross-references ... NOTE
     ```
     Package unavailable to check Rd xrefs: ‘robustX’
-    ```
-
-# robustSingleCell
-
-<details>
-
-* Version: 0.1.1
-* Source code: https://github.com/cran/robustSingleCell
-* URL: https://github.com/asmagen/robustSingleCell
-* BugReports: https://github.com/asmagen/robustSingleCell/issues
-* Date/Publication: 2019-04-23 22:00:02 UTC
-* Number of recursive dependencies: 149
-
-Run `revdep_details(,"robustSingleCell")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking whether package ‘robustSingleCell’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Warning: replacing previous import ‘GGally::mean_sd’ by ‘ggpubr::mean_sd’ when loading ‘robustSingleCell’
-      Warning: replacing previous import ‘GGally::median_iqr’ by ‘ggpubr::median_iqr’ when loading ‘robustSingleCell’
     ```
 
 # rrr
