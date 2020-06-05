@@ -31,3 +31,4 @@ ggduo_paper.txt
 ^\.github$
 ^doc$
 ^Meta$
+^CRAN-RELEASE$
