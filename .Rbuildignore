@@ -32,3 +32,4 @@ ggduo_paper.txt
 ^doc$
 ^Meta$
 ^CRAN-RELEASE$
+^vignettes$

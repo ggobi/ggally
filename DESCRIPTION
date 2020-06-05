@@ -64,7 +64,6 @@ Suggests:
     spelling
 Roxygen: list(markdown = FALSE)
 RoxygenNote: 7.1.0
-VignetteBuilder: knitr
 SystemRequirements: openssl
 Encoding: UTF-8
 Language: en-US
