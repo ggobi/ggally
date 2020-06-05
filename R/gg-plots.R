@@ -1718,7 +1718,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6)
 #'
 #' # change statistic to display
-#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = mean_sd)
+#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_mean_sd)
 #'
 #' # custom stat function
 #' weighted_sum <- function(x, weights = NULL) {
@@ -1729,7 +1729,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 ggally_summarise_by <- function(
   data,
   mapping,
-  text_fn = median_iqr,
+  text_fn = weighted_median_iqr,
   text_fn_vertical = NULL,
   ...)
 {
@@ -1794,9 +1794,9 @@ ggally_summarise_by <- function(
 #' @param x a numeric vector
 #' @param weights an optional numeric vectors of weights. If \code{NULL}, equal weights of 1 will be taken into account.
 #' @details
-#' \code{median_iqr} computes median and interquartile range.
+#' \code{weighted_median_iqr} computes weighted median and interquartile range.
 #' @export
-median_iqr <- function(x, weights = NULL) {
+weighted_median_iqr <- function(x, weights = NULL) {
   require_namespaces("Hmisc")
   s <- round(Hmisc::wtd.quantile(x, weights = weights, probs = c(.25, .5, .75), na.rm = TRUE), digits = 1)
   paste0("Median: ", s[2], " [", s[1], "-", s[3], "]")
@@ -1804,9 +1804,9 @@ median_iqr <- function(x, weights = NULL) {
 
 #' @rdname ggally_summarise_by
 #' @details
-#' \code{mean_sd} computes mean and standard deviation.
+#' \code{weighted_mean_sd} computes weighted mean and standard deviation.
 #' @export
-mean_sd <- function(x, weights = NULL) {
+weighted_mean_sd <- function(x, weights = NULL) {
   require_namespaces("Hmisc")
   m <- round(Hmisc::wtd.mean(x, weights = weights, na.rm = TRUE), digits = 1)
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
