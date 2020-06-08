@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -55,17 +55,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/ggally_plots.html">List of available high-level plots</a>
-    </li>
+<li class="divider">
+    <li class="dropdown-header">Generic plot matrix</li>
     <li>
-      <a href="../articles/ggally_stats.html">Additional statistics for ggplot2</a>
-    </li>
-    <li>
-      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
-    </li>
-    <li>
-      <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
+      <a href="../articles/ggpairs.html">ggpairs(): Pairwise plot matrix</a>
     </li>
     <li>
       <a href="../articles/ggduo.html">ggduo(): Two-grouped plot matrix</a>
@@ -74,22 +67,35 @@
       <a href="../articles/ggmatrix.html">ggmatrix(): Plot matrix</a>
     </li>
     <li>
-      <a href="../articles/ggnetworkmap.html">ggnetworkmap(): Network + map plot</a>
+      <a href="../articles/ggally_plots.html">ggally_*(): List of available high-level plots</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Specialized plot matrix</li>
+    <li>
+      <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
     <li>
-      <a href="../articles/ggnostic.html">ggnostic(): Model diagnostics plot matrix</a>
-    </li>
-    <li>
-      <a href="../articles/ggpairs.html">ggpairs(): Pairwise plot matrix</a>
+      <a href="../articles/ggnostic.html">ggnostic(): Model diagnostics</a>
     </li>
     <li>
       <a href="../articles/ggscatmat.html">ggscatmat(): Numeric pairwise plot matrix</a>
     </li>
     <li>
-      <a href="../articles/ggsurv.html">ggsurv(): Survival curves</a>
+      <a href="../articles/ggtable.html">ggtable(): Cross-tabulated tables</a>
     </li>
     <li>
-      <a href="../articles/ggtable.html">ggtable(): Cross-tabulated tables</a>
+      <a href="../articles/ggally_stats.html">stat_*(): Additional statistics for ggplot2</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Specialized ggplot2 plot</li>
+    <li>
+      <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
+    </li>
+    <li>
+      <a href="../articles/ggnetworkmap.html">ggnetworkmap(): Network + map plot</a>
+    </li>
+    <li>
+      <a href="../articles/ggsurv.html">ggsurv(): Survival curves</a>
     </li>
     <li>
       <a href="../articles/glyph.html">glyphs(): Glyph plot</a>
@@ -211,7 +217,7 @@
 <li>
 <code>mapping</code>: if mapping is provided, only the section’s mapping will be overwritten</li>
 </ul>
-<p>The list of current valid <code>ggally_NAME</code> functions is visible in <code><a href="../articles/ggally_plots.html">vignette("ggally_plots")</a></code>.</p>
+<p>The list of current valid <code>ggally_NAME</code> functions is visible in <code><a href="../reference/vig_ggally.html">vig_ggally("ggally_plots")</a></code>.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
 <span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
   <span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
