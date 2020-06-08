@@ -1,4 +1,4 @@
-#' View \pkg{GGally} vignettes
+#' View GGally vignettes
 #'
 #' This function will open the directly to the vignette requested. If no \code{name} is provided, the index of all \pkg{GGally} vignettes will be opened.
 #'
@@ -12,7 +12,8 @@
 #' vig_ggally("ggnostic")
 #'
 #' # View all vignettes by GGally
-#' vig_ggally()}
+#' vig_ggally()
+#' }
 vig_ggally <- function(name) {
 
   vig_url <-

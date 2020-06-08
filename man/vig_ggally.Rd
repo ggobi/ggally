@@ -2,7 +2,7 @@
 % Please edit documentation in R/vig_ggally.R
 \name{vig_ggally}
 \alias{vig_ggally}
-\title{View \pkg{GGally} vignettes}
+\title{View GGally vignettes}
 \usage{
 vig_ggally(name)
 }
@@ -21,5 +21,6 @@ This method allows for vignettes to be hosted remotely, reducing \pkg{GGally}'s 
 vig_ggally("ggnostic")
 
 # View all vignettes by GGally
-vig_ggally()}
+vig_ggally()
+}
 }
