@@ -55,13 +55,13 @@
 
 ### New `ggplot2` plot statistics:
 
-`stat_cross` (@larmarange, #326)
+`stat_cross()` (@larmarange, #326)
 * Computes statistics of a 2-dimensional matrix using `broom::augment.htest`.
 
-`stat_prop` (@larmarange, #324)
+`stat_prop()` (@larmarange, #324)
 * Compute proportions according to custom denominator.
 
-`stat_weighted_mean` (@larmarange, #333)
+`stat_weighted_mean()` (@larmarange, #333)
 * Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.
 
 ### Major updates
@@ -73,7 +73,7 @@
 * Alignment has been fixed so both short and long names should be displayed within view. `alignPercent` now corresponds to the center of the text.
 * Added the ability to separate the arguments sent to the title and the groups (`title_args` and `group_args`)
 * Digits now represents the total number of digits after the decimal place.
-* To use the old version, change your `ggally_cor` function calls to `ggally_cor_v1_5`.
+* To use the old version, change your `ggally_cor()` function calls to `ggally_cor_v1_5()`.
 * Previously deprecated parameters have been removed
 
 Website
