@@ -207,8 +207,11 @@ ggally_nostic_line <- function(
 #' @export
 #' @importFrom stats qnorm
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' ggally_nostic_resid(dt, ggplot2::aes(wt, .resid))
+#' p_(ggally_nostic_resid(dt, ggplot2::aes(wt, .resid)))
 ggally_nostic_resid <- function(
   data, mapping, ...,
   linePosition = 0,
@@ -271,8 +274,11 @@ ggally_nostic_resid <- function(
 #' @rdname ggally_nostic_std_resid
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid))
+#' p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
 ggally_nostic_std_resid <- function(
   data, mapping, ...,
   sigma = 1
@@ -303,8 +309,11 @@ ggally_nostic_std_resid <- function(
 #' @return \pkg{ggplot2} plot object
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit))
+#' p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
 ggally_nostic_se_fit <- function(
   data, mapping, ...,
   lineColor = brew_colors("grey"),
@@ -335,8 +344,11 @@ ggally_nostic_se_fit <- function(
 #' @return \pkg{ggplot2} plot object
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma))
+#' p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
 ggally_nostic_sigma <- function(
   data, mapping, ...,
   lineColor = brew_colors("grey"),
@@ -367,8 +379,11 @@ ggally_nostic_sigma <- function(
 #' @export
 #' @importFrom stats pf
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd))
+#' p_(ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd)))
 ggally_nostic_cooksd <- function(
   data, mapping, ...,
   linePosition = pf(0.5, length(attr(data, "var_x")), nrow(data) - length(attr(data, "var_x"))),
@@ -408,8 +423,11 @@ ggally_nostic_cooksd <- function(
 #' @return \pkg{ggplot2} plot object
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
+#' p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
 ggally_nostic_hat <- function(
   data, mapping, ...,
   linePosition = 2 * sum(eval_data_col(data, mapping$y)) / nrow(data),
@@ -720,7 +738,10 @@ ggnostic <- function(
 #' @return \code{\link{ggmatrix}} object
 #' @export
 #' @examples
-#' ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' p_(ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz")))
 ggts <- function(
   ...,
   columnLabelsX = NULL,

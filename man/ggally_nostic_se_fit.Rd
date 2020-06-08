@@ -33,8 +33,11 @@ Since the se.fit is \code{TRUE} and scale is unset by default, the standard erro
 A base line of 0 is added to give reference to a perfect fit.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit))
+p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
 }
 \seealso{
 \code{stats::\link[stats]{influence}}

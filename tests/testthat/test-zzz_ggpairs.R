@@ -1,5 +1,7 @@
-
 context("ggpairs")
+# This file takes too long
+testthat::skip_on_cran()
+
 data(tips, package = "reshape")
 
 expect_print <- function(p) {
@@ -556,6 +558,9 @@ test_that("strip-top and strip-right", {
 
 
 test_that("subtypes", {
+
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("Hmisc")
 
 # list of the different plot types to check
 # continuous

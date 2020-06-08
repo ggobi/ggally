@@ -19,9 +19,13 @@ scatmat(data, columns = 1:ncol(data), color = NULL, alpha = 1)
 Function for making scatterplots in the lower triangle and diagonal density plots.
 }
 \examples{
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(flea)
-scatmat(flea, columns=2:4)
-scatmat(flea, columns= 2:4, color="species")
+
+p_(scatmat(flea, columns=2:4))
+p_(scatmat(flea, columns= 2:4, color="species"))
 }
 \author{
 Mengjia Ni, Di Cook

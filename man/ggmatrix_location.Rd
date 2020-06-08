@@ -32,7 +32,7 @@ ggmatrix_location(pm, location = NULL, rows = NULL, cols = NULL)
 Data frame with columns \code{c("row", "col")} containing locations for the plot matrix
 }
 \description{
-\Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
+\lifecycle{experimental}
 }
 \details{
 Convert many types of location values to a consistent \code{data.frame} of \code{row} and \code{col} values.
@@ -74,5 +74,4 @@ locs
 
 # Use the output of a prior ggmatrix_location
 ggmatrix_location(pm, location = locs)
-
 }

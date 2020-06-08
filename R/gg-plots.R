@@ -116,10 +116,13 @@ remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
 #' @export
 #' @keywords hplot
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(mtcars)
-#' ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp))
-#' ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp"))
-#' ggally_points(
+#' p_(ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp)))
+#' p_(ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp")))
+#' p_(ggally_points(
 #'   mtcars,
 #'   mapping = ggplot2::aes_string(
 #'     x     = "disp",
@@ -127,7 +130,7 @@ remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
 #'     color = "as.factor(cyl)",
 #'     size  = "gear"
 #'   )
-#' )
+#' ))
 ggally_points <- function(data, mapping, ...){
 
   p <- ggplot(data = data, mapping = mapping) + geom_point(...)
@@ -151,10 +154,13 @@ ggally_points <- function(data, mapping, ...){
 #' @keywords hplot
 #' @rdname ggally_smooth
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
-#'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
+#' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+#' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex")))
 ggally_smooth <- function(data, mapping, ..., method = "lm", formula = y ~ x, se = TRUE, shrink = TRUE) {
 
   p <- ggplot(data = data, mapping)
@@ -201,17 +207,20 @@ ggally_smooth_lm <- function(data, mapping, ...) {
 #' @export
 #' @keywords hplot
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
-#'  ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  ggally_density(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
-#'  )
-#'  ggally_density(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
-#'  ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
+#' p_(ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+#' p_(ggally_density(
+#'   tips,
+#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+#' ))
+#' p_(ggally_density(
+#'   tips,
+#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+#' ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2)))
 ggally_density <- function(data, mapping, ...){
   rangeX <- range(eval_data_col(data, mapping$x), na.rm = TRUE)
   rangeY <- range(eval_data_col(data, mapping$y), na.rm = TRUE)
@@ -263,28 +272,31 @@ ggally_density <- function(data, mapping, ...){
 #' @export
 #' @keywords hplot
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  # display with grid
-#'  ggally_cor(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-#'    display_grid = TRUE
-#'  )
-#'  # change text attributes
-#'  ggally_cor(
-#'    tips,
-#'    mapping = ggplot2::aes(x = total_bill, y = tip),
-#'    size = 15,
-#'    colour = I("red"),
-#'    title = "Correlation"
-#'  )
-#'  # split by a variable
-#'  ggally_cor(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
-#'    size = 5
-#'  )
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+#' # display with grid
+#' p_(ggally_cor(
+#'   tips,
+#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+#'   display_grid = TRUE
+#' ))
+#' # change text attributes
+#' p_(ggally_cor(
+#'   tips,
+#'   mapping = ggplot2::aes(x = total_bill, y = tip),
+#'   size = 15,
+#'   colour = I("red"),
+#'   title = "Correlation"
+#' ))
+#' # split by a variable
+#' p_(ggally_cor(
+#'   tips,
+#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+#'   size = 5
+#' ))
 ggally_cor <- function(
   data,
   mapping,
@@ -592,16 +604,19 @@ ggally_statistic <- function(
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
-#'  ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
-#'  ggally_box(
-#'    tips,
-#'    mapping        = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"),
-#'    outlier.colour = "red",
-#'    outlier.shape  = 13,
-#'    outlier.size   = 8
-#'  )
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+#' p_(ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
+#' p_(ggally_box(
+#'   tips,
+#'   mapping        = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"),
+#'   outlier.colour = "red",
+#'   outlier.shape  = 13,
+#'   outlier.size   = 8
+#' ))
 ggally_box <- function(data, mapping, ...){
   mapping <- mapping_color_to_fill(mapping)
 
@@ -627,17 +642,20 @@ ggally_box_no_facet <- function(data, mapping, ...) {
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
-#'  ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
-#'  ggally_dot(
-#'    tips,
-#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
-#'  )
-#'  ggally_dot(
-#'    tips,
-#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
-#'  ) + ggplot2::scale_shape(solid=FALSE)
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+#' p_(ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
+#' p_(ggally_dot(
+#'   tips,
+#'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+#' ))
+#' p_(ggally_dot(
+#'   tips,
+#'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
+#' ) + ggplot2::scale_shape(solid=FALSE))
 ggally_dot <- function(data, mapping, ...){
   ggally_dot_and_box(data, mapping, ..., boxPlot = FALSE)
 }
@@ -660,17 +678,20 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #' @keywords internal
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_dot_and_box(
-#'    tips,
-#'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
-#'    boxPlot = TRUE
-#'  )
-#'  ggally_dot_and_box(
-#'    tips,
-#'    mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
-#'    boxPlot = FALSE
-#'  )
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_dot_and_box(
+#'   tips,
+#'   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+#'   boxPlot = TRUE
+#' ))
+#' p_(ggally_dot_and_box(
+#'   tips,
+#'   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+#'   boxPlot = FALSE
+#' ))
 ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
 
   horizontal <- is_horizontal(data, mapping)
@@ -744,9 +765,12 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex))
-#'  ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1)
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex)))
+#' p_(ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1))
 ggally_facethist <- function(data, mapping, ...){
 
   mapping <- mapping_color_to_fill(mapping)
@@ -791,12 +815,15 @@ ggally_facethist <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
-#'  ggally_facetdensity(
-#'    tips,
-#'    mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
-#'  )
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+#' p_(ggally_facetdensity(
+#'   tips,
+#'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+#' ))
 ggally_facetdensity <- function(data, mapping, ...){
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
@@ -812,13 +839,16 @@ ggally_facetdensity <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
-#'  ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
-#'  ggally_denstrip(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
-#'  ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+#' p_(ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
+#' p_(ggally_denstrip(
+#'   tips,
+#'   mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
+#' ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black"))
 ggally_denstrip <- function(data, mapping, ...){
   mapping <- mapping_color_to_fill(mapping)
 
@@ -910,9 +940,12 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill))
-#'  ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill)))
+#' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day)))
 ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 
   mapping <- mapping_color_to_fill(mapping)
@@ -949,9 +982,12 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 #' @keywords hplot
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(tips, package = "reshape")
-#' ggally_barDiag(tips, mapping = ggplot2::aes(x = day))
-#' ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25)
+#' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = day)))
+#' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25))
 ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 
   mapping <- mapping_color_to_fill(mapping)
@@ -1006,8 +1042,11 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
 #' @keywords hplot
 #' @export
 #' @examples
-#' ggally_text("Example 1")
-#' ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red"))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' p_(ggally_text("Example 1"))
+#' p_(ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red")))
 ggally_text <- function(
   label,
   mapping = ggplot2::aes(color = "black"),
@@ -1154,9 +1193,12 @@ get_x_axis_labels <- function(p, xRange) {
 #' @author Jason Crowley and Barret Schloerke
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_diagAxis(tips, ggplot2::aes(x=tip))
-#'  ggally_diagAxis(tips, ggplot2::aes(x=sex))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_diagAxis(tips, ggplot2::aes(x=tip)))
+#' p_(ggally_diagAxis(tips, ggplot2::aes(x=sex)))
 ggally_diagAxis <- function(
   data,
   mapping,
@@ -1275,9 +1317,12 @@ ggally_diagAxis <- function(
 #' @keywords hplot
 #' @export
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time))
-#'  ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
+#' data(tips, package = "reshape")
+#' p_(ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time)))
+#' p_(ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time)))
 ggally_facetbar <- function(data, mapping, ...){
 
   mapping <- mapping_color_to_fill(mapping)
@@ -1307,14 +1352,17 @@ ggally_facetbar <- function(data, mapping, ...){
 #' @keywords hplot
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' data(tips, package = "reshape")
-#' ggally_ratio(tips, ggplot2::aes(sex, day))
-#' ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal()
+#' p_(ggally_ratio(tips, ggplot2::aes(sex, day)))
+#' p_(ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal())
 #' # only plot tiles greater or equal to 20 and scale to a max of 50
-#' ggally_ratio(
+#' p_(ggally_ratio(
 #'   tips, ggplot2::aes(sex, day),
 #'   floor = 20, ceiling = 50
-#' ) + ggplot2::theme(aspect.ratio = 4/2)
+#' ) + ggplot2::theme(aspect.ratio = 4/2))
 ggally_ratio <- function(
   data,
   mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
@@ -1406,19 +1454,22 @@ ggally_ratio <- function(
 #' @keywords hplot
 #' @export
 #' @examples
-#' data(tips, package = "reshape")
-#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex))
-#' ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
-#' ggally_count(
+#' data(tips, package = "reshape")
+#' p_(ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex)))
+#' p_(ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day)))
+#'
+#' p_(ggally_count(
 #'   as.data.frame(Titanic),
 #'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq)
-#' )
-#' ggally_count(
+#' ))
+#' p_(ggally_count(
 #'   as.data.frame(Titanic),
 #'   mapping = ggplot2::aes(x = Class, y = Survived, weight = Freq),
 #'   x.width = 0.5
-#' )
+#' ))
 ggally_count <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
@@ -1534,9 +1585,11 @@ StatGGallyCount <- ggproto("StatGGallyCount", Stat,
 #' @rdname ggally_count
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
-#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker))
-#' ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex))
+#' p_(ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker)))
+#' p_(ggally_countDiag(tips, mapping = ggplot2::aes(x = smoker, fill = sex)))
 ggally_countDiag <- function(data, mapping, ...) {
   mapping$y <- mapping$x
   ggally_count(data = data, mapping = mapping, ...)
@@ -1655,22 +1708,23 @@ ggally_naDiag <- function(...) {
 #' @keywords hplot
 #' @export
 #' @examples
-#' data(tips, package = "reshape")
-#' ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill))
-#' ggally_autopoint(tips, mapping = aes(x = tip, y = sex))
-#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex))
-#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day))
-#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8)
-#' ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9)
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
-#' \dontrun{
-#' ggpairs(
+#' data(tips, package = "reshape")
+#' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
+#' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
+#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))
+#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day)))
+#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8))
+#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9))
+#'
+#' p_(ggpairs(
 #'   tips,
 #'   mapping = aes(colour = sex),
 #'   upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
 #'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
-#' )
-#' }
+#' ))
 ggally_autopoint <- function(data, mapping, ...) {
   require_namespaces("ggforce")
 
@@ -1705,27 +1759,32 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #' @keywords hplot
 #' @export
 #' @examples
-#' data(tips, package = "reshape")
-#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day))
-#' ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill))
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
-#' # colour is kept only if equal to the discrete variable
-#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = day))
-#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = sex))
-#' ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill, color = day))
+#' if (require(Hmisc)) {
+#'   data(tips, package = "reshape")
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day)))
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill)))
 #'
-#' # custom text size
-#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6)
+#'   # colour is kept only if equal to the discrete variable
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = day)))
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = sex)))
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill, color = day)))
 #'
-#' # change statistic to display
-#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_mean_sd)
+#'   # custom text size
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6))
 #'
-#' # custom stat function
-#' weighted_sum <- function(x, weights = NULL) {
-#'   if (is.null(weights)) weights <- 1
-#'   paste0("Total : ", round(sum(x * weights, na.rm = TRUE), digits = 1))
+#'   # change statistic to display
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_mean_sd))
+#'
+#'   # custom stat function
+#'   weighted_sum <- function(x, weights = NULL) {
+#'     if (is.null(weights)) weights <- 1
+#'     paste0("Total : ", round(sum(x * weights, na.rm = TRUE), digits = 1))
+#'   }
+#'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 #' }
-#' ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
 ggally_summarise_by <- function(
   data,
   mapping,
@@ -1812,4 +1871,3 @@ weighted_mean_sd <- function(x, weights = NULL) {
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
   paste0("Mean: ", m, " (", sd, ")")
 }
-

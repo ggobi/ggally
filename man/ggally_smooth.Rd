@@ -38,10 +38,13 @@ Add a smoothed condition mean with a given scatter plot.
 Y limits are reduced to match original Y range with the goal of keeping the Y axis the same across plots.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
- ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
- ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
+p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex")))
 }
 \author{
 Barret Schloerke

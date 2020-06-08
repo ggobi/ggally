@@ -45,27 +45,33 @@ ggally_cor_v1_5(
 Estimate correlation from the given data.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_cor_v1_5(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
- # display with no grid
- ggally_cor_v1_5(
-   tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
-   displayGrid = FALSE
- )
- # change text attributes
- ggally_cor_v1_5(
-   tips,
-   mapping = ggplot2::aes(x = total_bill, y = tip),
-   size = 15,
-   colour = I("red")
- )
- # split by a variable
- ggally_cor_v1_5(
-   tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
-   size = 5
- )
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_cor_v1_5(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+
+# display with no grid
+p_(ggally_cor_v1_5(
+  tips,
+  mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+  displayGrid = FALSE
+))
+
+# change text attributes
+p_(ggally_cor_v1_5(
+  tips,
+  mapping = ggplot2::aes(x = total_bill, y = tip),
+  size = 15,
+  colour = I("red")
+))
+
+# split by a variable
+p_(ggally_cor_v1_5(
+  tips,
+  mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+  size = 5
+))
 }
 \seealso{
 \code{\link{ggally_cor}}

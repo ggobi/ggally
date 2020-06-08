@@ -42,27 +42,32 @@ Display summary statistics of a continuous variable for each value of a discrete
 \code{weighted_mean_sd} computes weighted mean and standard deviation.
 }
 \examples{
-data(tips, package = "reshape")
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day))
-ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
-# colour is kept only if equal to the discrete variable
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = day))
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = sex))
-ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill, color = day))
+if (require(Hmisc)) {
+  data(tips, package = "reshape")
+  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day)))
+  p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill)))
 
-# custom text size
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6)
+  # colour is kept only if equal to the discrete variable
+  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = day)))
+  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day, color = sex)))
+  p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill, color = day)))
 
-# change statistic to display
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_mean_sd)
+  # custom text size
+  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), size = 6))
 
-# custom stat function
-weighted_sum <- function(x, weights = NULL) {
-  if (is.null(weights)) weights <- 1
-  paste0("Total : ", round(sum(x * weights, na.rm = TRUE), digits = 1))
+  # change statistic to display
+  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_mean_sd))
+
+  # custom stat function
+  weighted_sum <- function(x, weights = NULL) {
+    if (is.null(weights)) weights <- 1
+    paste0("Total : ", round(sum(x * weights, na.rm = TRUE), digits = 1))
+  }
+  p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 }
-ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum)
 }
 \author{
 Joseph Larmarange

@@ -87,6 +87,8 @@ should be a factor.
 }
 
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
 d <- as.data.frame(Titanic)
 
@@ -94,26 +96,25 @@ p <- ggplot(d) +
   aes(x = Class, fill = Survived, weight = Freq, by = Class) +
   geom_bar(position = "fill") +
   geom_text(stat = "prop", position = position_fill(.5))
-p
-p + facet_grid(~ Sex)
+p_(p)
+p_(p + facet_grid(~ Sex))
 
-ggplot(d) +
+p_(ggplot(d) +
   aes(x = Class, fill = Survived, weight = Freq) +
   geom_bar(position = "dodge") +
   geom_text(
     aes(by = Survived), stat = "prop",
     position = position_dodge(0.9), vjust = "bottom"
- )
+ ))
 
-ggplot(d) +
+p_(ggplot(d) +
   aes(x = Class, fill = Survived, weight = Freq, by = 1) +
   geom_bar() +
   geom_text(
     aes(label = scales::percent(after_stat(prop), accuracy = 1)),
     stat = "prop",
     position = position_stack(.5)
- )
-
+ ))
 }
 \seealso{
 \code{\link[ggplot2]{stat_count}}

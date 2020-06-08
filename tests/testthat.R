@@ -1,4 +1,7 @@
-library(testthat)
-library(GGally)
 
-test_check("GGally")
+if (requireNamespace('testthat', quietly = TRUE)) {
+  library(testthat)
+  library(GGally)
+
+  test_check("GGally")
+}

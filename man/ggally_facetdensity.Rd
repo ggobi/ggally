@@ -17,12 +17,15 @@ ggally_facetdensity(data, mapping, ...)
 Make density plots by displaying subsets of the data in different panels.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
- ggally_facetdensity(
-   tips,
-   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
- )
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+p_(ggally_facetdensity(
+  tips,
+  mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+))
 }
 \author{
 Barret Schloerke

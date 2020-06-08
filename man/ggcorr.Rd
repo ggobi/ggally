@@ -147,19 +147,22 @@ Recommended values for the \code{nbreaks} argument are \code{3} to
 supported by diverging ColorBrewer palettes.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 # Basketball statistics provided by Nathan Yau at Flowing Data.
 dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
 
 # Default output.
-ggcorr(dt[, -1])
+p_(ggcorr(dt[, -1]))
 
-# Labelled output, with coefficient transparency.
-ggcorr(dt[, -1],
+# Labeled output, with coefficient transparency.
+p_(ggcorr(dt[, -1],
        label = TRUE,
-       label_alpha = TRUE)
+       label_alpha = TRUE))
 
 # Custom options.
-ggcorr(
+p_(ggcorr(
   dt[, -1],
   name = expression(rho),
   geom = "circle",
@@ -170,13 +173,13 @@ ggcorr(
   nbreaks = 6,
   angle = -45,
   palette = "PuOr" # colorblind safe, photocopy-able
-)
+))
 
 # Supply your own correlation matrix
-ggcorr(
+p_(ggcorr(
   data = NULL,
   cor_matrix = cor(dt[, -1], use = "pairwise")
-)
+))
 }
 \seealso{
 \code{\link[stats]{cor}} and \code{corrplot} in the

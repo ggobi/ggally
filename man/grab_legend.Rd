@@ -22,6 +22,9 @@ grab_legend(p)
 Grab the legend and print it as a plot
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 library(ggplot2)
 histPlot <- qplot(
   x = Sepal.Length,
@@ -35,8 +38,8 @@ histPlot <- qplot(
 (top <- histPlot + theme(legend.position = "top"))
 (left <- histPlot + theme(legend.position = "left"))
 
-grab_legend(right)
-grab_legend(bottom)
-grab_legend(top)
-grab_legend(left)
+p_(grab_legend(right))
+p_(grab_legend(bottom))
+p_(grab_legend(top))
+p_(grab_legend(left))
 }

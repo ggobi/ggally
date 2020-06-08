@@ -21,37 +21,39 @@ For continuous y variables, plot the evolution of the mean.
 For binary y variables, plot the evolution of the proportion.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
 tips_f <- tips
 tips_f$day <- factor(tips$day, c("Thur", "Fri", "Sat", "Sun"))
 
 # Numeric variable
-ggally_trends(tips_f, mapping = aes(x = day, y = total_bill))
-ggally_trends(tips_f, mapping = aes(x = day, y = total_bill, colour = time))
+p_(ggally_trends(tips_f, mapping = aes(x = day, y = total_bill)))
+p_(ggally_trends(tips_f, mapping = aes(x = day, y = total_bill, colour = time)))
 
 # Binary variable
-ggally_trends(tips_f, mapping = aes(x = day, y = smoker))
-ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex))
+p_(ggally_trends(tips_f, mapping = aes(x = day, y = smoker)))
+p_(ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex)))
 
 # Discrete variable with 3 or more categories
-ggally_trends(tips_f, mapping = aes(x = smoker, y = day))
-ggally_trends(tips_f, mapping = aes(x = smoker, y = day, color = sex))
+p_(ggally_trends(tips_f, mapping = aes(x = smoker, y = day)))
+p_(ggally_trends(tips_f, mapping = aes(x = smoker, y = day, color = sex)))
 
 # Include zero on Y axis
-ggally_trends(tips_f, mapping = aes(x = day, y = total_bill), include_zero = TRUE)
-ggally_trends(tips_f, mapping = aes(x = day, y = smoker), include_zero = TRUE)
+p_(ggally_trends(tips_f, mapping = aes(x = day, y = total_bill), include_zero = TRUE))
+p_(ggally_trends(tips_f, mapping = aes(x = day, y = smoker), include_zero = TRUE))
 
 # Change line size
-ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex), size = 3)
+p_(ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex), size = 3))
 
 # Define weights with the appropriate aesthetic
 d <- as.data.frame(Titanic)
-ggally_trends(
+p_(ggally_trends(
   d,
   mapping = aes(x = Class, y = Survived, weight = Freq, color = Sex),
   include_zero = TRUE
-)
-
+))
 }
 \author{
 Joseph Larmarange

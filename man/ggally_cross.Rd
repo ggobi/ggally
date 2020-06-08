@@ -24,39 +24,42 @@ statistics computed by \code{\link{stat_cross}}. Labels could also
 be added (see examples).
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
-ggally_cross(tips, mapping = aes(x = smoker, y = sex))
-ggally_cross(tips, mapping = aes(x = day, y = time))
+p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex)))
+p_(ggally_cross(tips, mapping = aes(x = day, y = time)))
 
 # Custom max size
-ggally_cross(tips, mapping = aes(x = smoker, y = sex)) +
-  scale_size_area(max_size = 40)
+p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex)) +
+  scale_size_area(max_size = 40))
 
 # Custom fill
-ggally_cross(tips, mapping = aes(x = smoker, y = sex), fill = "red")
+p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex), fill = "red"))
 
 # Custom shape
-ggally_cross(tips, mapping = aes(x = smoker, y = sex), shape = 21)
+p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex), shape = 21))
 
 # Fill squares according to standardized residuals
 d <- as.data.frame(Titanic)
-ggally_cross(
+p_(ggally_cross(
   d,
   mapping = aes(x = Class, y = Survived, weight = Freq, fill = after_stat(stdres))
 ) +
-  scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE)
+  scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
 
 # Add labels
-ggally_cross(
+p_(ggally_cross(
   tips,
   mapping = aes(
     x = smoker, y = sex, colour = smoker,
     label = scales::percent(after_stat(prop))
   )
-)
+))
 
 # Customize labels' appearance and same size for all squares
-ggally_cross(
+p_(ggally_cross(
   tips,
   mapping = aes(
     x = smoker, y = sex,
@@ -66,7 +69,7 @@ ggally_cross(
   size = 40, # fix value for points size
   fill = "darkblue",
   geom_text_args = list(colour = "white", fontface = "bold", size = 6)
-)
+))
 }
 \author{
 Joseph Larmarange

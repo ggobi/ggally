@@ -44,32 +44,35 @@ ggally_rowbar(
 Plot column or row percentage using bar plots.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(tips, package = "reshape")
-ggally_colbar(tips, mapping = aes(x = smoker, y = sex))
-ggally_rowbar(tips, mapping = aes(x = smoker, y = sex))
+p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex)))
+p_(ggally_rowbar(tips, mapping = aes(x = smoker, y = sex)))
 
 # change labels' size
-ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8)
+p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8))
 
 # change labels' colour and use bold
-ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-              colour = "white", fontface = "bold")
+p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
+              colour = "white", fontface = "bold"))
 
 # custom bar width
-ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5))
+p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))
 
 # change format of labels
-ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-              label_format = scales::label_percent(accuracy = .01, decimal.mark = ","))
+p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
+              label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")))
 
-ggduo(
+p_(ggduo(
   data = as.data.frame(Titanic),
   mapping = aes(weight = Freq),
   columnsX = "Survived",
   columnsY = c("Sex", "Class", "Age"),
   types = list(discrete = "rowbar"),
   legend = 1
-)
+))
 }
 \author{
 Joseph Larmarange

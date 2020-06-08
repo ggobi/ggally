@@ -24,6 +24,9 @@ putPlot(pm, value, i, j)
 Function to place your own plot in the layout.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 # ggplot example taken from example(geom_text)
   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
@@ -41,7 +44,7 @@ custom_car[1, 3] <- personal_plot
 custom_car[2,1] <- NULL
 custom_car[3,1] <- "blank" # the same as storing null
 custom_car[3,2] <- NULL
-custom_car
+p_(custom_car)
 }
 \seealso{
 \code{\link{getPlot}}

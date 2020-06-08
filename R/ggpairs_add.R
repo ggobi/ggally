@@ -29,17 +29,20 @@
 #' @method + gg
 #' @rdname gg-add
 #' @examples
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #' data(tips, package = "reshape")
+#'
 #' pm <- ggpairs(tips[, 2:4], ggplot2::aes(color = sex))
 #' ## change to black and white theme
 #' pm + ggplot2::theme_bw()
 #' ## change to linedraw theme
-#' # pm + ggplot2::theme_linedraw()
+#' p_(pm + ggplot2::theme_linedraw())
 #' ## change to custom theme
-#' # pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue"))
+#' p_(pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue")))
 #' ## add a list of information
 #' extra <- list(ggplot2::theme_bw(), ggplot2::labs(caption = "My caption!"))
-#' pm + extra
+#' p_(pm + extra)
 "+.gg" <- function(e1, e2) {
 
   if (!is.ggmatrix(e1)) {
@@ -127,17 +130,17 @@ add_theme_to_ggmatrix <- function(e1, e2) {
 #' @seealso \code{\link{ggmatrix_location}}
 #' @examples
 #' ## modify scale
-#' pm + scale_fill_brewer(type = "qual")
+#' p_(pm + scale_fill_brewer(type = "qual"))
 #' ## only first row
-#' add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), rows = 1:2)
+#' p_(add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), rows = 1:2))
 #' ## only second col
-#' add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), cols = 2:3)
+#' p_(add_to_ggmatrix(pm, scale_fill_brewer(type = "qual"), cols = 2:3))
 #' ## only to upper triangle of plot matrix
-#' add_to_ggmatrix(
+#' p_(add_to_ggmatrix(
 #'   pm,
 #'   scale_fill_brewer(type = "qual"),
 #'   location = "upper"
-#' )
+#' ))
 add_to_ggmatrix <- function(
   e1,
   e2,
@@ -172,7 +175,7 @@ add_to_ggmatrix <- function(
 
 #' \code{\link{ggmatrix}} plot locations
 #'
-#' \Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
+#' \lifecycle{experimental}
 #'
 #' Convert many types of location values to a consistent \code{data.frame} of \code{row} and \code{col} values.
 #'
@@ -232,7 +235,6 @@ add_to_ggmatrix <- function(
 #'
 #' # Use the output of a prior ggmatrix_location
 #' ggmatrix_location(pm, location = locs)
-#'
 ggmatrix_location <- function(
   pm,
   location = NULL,

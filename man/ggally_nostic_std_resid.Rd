@@ -18,8 +18,11 @@ ggally_nostic_std_resid(data, mapping, ..., sigma = 1)
 If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} locations of a N(0, 1) distribution.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid))
+p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
 }
 \seealso{
 \code{stats::\link[stats]{rstandard}}

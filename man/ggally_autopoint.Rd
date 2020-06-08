@@ -21,22 +21,23 @@ Make scatterplots compatible with both continuous and categorical variables
 using \code{\link[ggforce]{geom_autopoint}} from package \pkg{ggforce}.
 }
 \examples{
-data(tips, package = "reshape")
-ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill))
-ggally_autopoint(tips, mapping = aes(x = tip, y = sex))
-ggally_autopoint(tips, mapping = aes(x = smoker, y = sex))
-ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day))
-ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8)
-ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9)
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
-\dontrun{
-ggpairs(
+data(tips, package = "reshape")
+p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
+p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
+p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))
+p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day)))
+p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8))
+p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9))
+
+p_(ggpairs(
   tips,
   mapping = aes(colour = sex),
   upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
-)
-}
+))
 }
 \author{
 Joseph Larmarange

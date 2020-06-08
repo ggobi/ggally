@@ -29,9 +29,13 @@ This function makes a scatterplot matrix for quantitative variables with density
 and correlation printed in the upper triangle.
 }
 \examples{
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 data(flea)
-ggscatmat(flea, columns = 2:4)
-ggscatmat(flea, columns = 2:4, color = "species")
+
+p_(ggscatmat(flea, columns = 2:4))
+p_(ggscatmat(flea, columns = 2:4, color = "species"))
 }
 \author{
 Mengjia Ni, Di Cook

@@ -20,17 +20,20 @@ Make a 2D density plot from a given data.
 The aesthetic "fill" determines whether or not \code{stat_density2d} (filled) or \code{geom_density2d} (lines) is used.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
- ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
- ggally_density(
-   tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
- )
- ggally_density(
-   tips,
-   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
- ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips, package = "reshape")
+p_(ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
+p_(ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+p_(ggally_density(
+  tips,
+  mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+))
+p_(ggally_density(
+  tips,
+  mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2)))
 }
 \author{
 Barret Schloerke
