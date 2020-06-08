@@ -1,10 +1,11 @@
 # GGally 2.0.0
 
 ### New Vignettes
-* `vig_ggally("ggally_plots")` - ggally_*(): List of available high-level plots
-* `vig_ggally("ggally_stats")` - stat_*(): Additional statistics for ggplot2
-* `vig_ggally("ggbivariate")` - ggbivariate(): Plot an outcome with several potential explanatory variables
-* `vig_ggally("ggtable")` - ggtable(): Cross-tabulated tables
+
+* [`vig_ggally("ggally_plots")`](https://ggobi.github.io/ggally/articles/ggally_plots.html) - ggally_*(): List of available high-level plots
+* [`vig_ggally("ggally_stats")`](https://ggobi.github.io/ggally/articles/ggally_stats.html) - stat_*(): Additional statistics for ggplot2
+* [`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html) - ggbivariate(): Plot an outcome with several potential explanatory variables
+* [`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html) - ggtable(): Cross-tabulated tables
 * To view all vignettes for `GGally`, call `GGally::vig_ggally()`
 
 
@@ -12,11 +13,11 @@
 
 `ggbivariate()` (@larmarange, #324)
 * Display an outcome using several potential explanatory variables
-* `vig_ggally("ggbivariate")`
+* [`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html)
 
 `ggtable()` (@larmarange, #351)
 * Cross-tabulated tables of discrete variables
-* `vig_ggally("ggtable")`
+* [`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html)
 
 `add_to_ggmatrix()` (#362)
 * Add ggplot2 objects to `ggmatrix` objects at selected locations
