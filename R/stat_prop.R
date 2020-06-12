@@ -138,6 +138,7 @@ StatProp <- ggproto("StatProp", Stat,
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
 #' @param remove_percentage_axis should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}
 #' @param remove_background should the \code{panel.background} be removed?
+#' @param reverse_fill_levels should the levels of the fill variable be reversed?
 #' @param geom_bar_args other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}
 #' @author Joseph Larmarange
 #' @keywords hplot
@@ -179,6 +180,7 @@ ggally_colbar <- function(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = FALSE,
   geom_bar_args = NULL
 ) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
@@ -194,18 +196,19 @@ ggally_colbar <- function(
     mapping$colour <- NULL
 
   # position for geom_bar
-  geom_bar_args$position <- "fill"
+  geom_bar_args$position <- position_fill(reverse = reverse_fill_levels)
 
   p <- ggplot(data, mapping) +
     do.call(geom_bar, geom_bar_args) +
     geom_text(
       aes_string(label = "label_format(after_stat(prop))"),
       stat = "prop",
-      position = position_fill(.5),
+      position = position_fill(.5, reverse = reverse_fill_levels),
       ...
     ) +
     scale_y_continuous(labels = scales::percent) +
-    ylab("")
+    ylab("") +
+    guides(fill = guide_legend(reverse = reverse_fill_levels))
 
   if (isTRUE(remove_background)) {
     p <- p +
@@ -234,6 +237,7 @@ ggally_rowbar <- function(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = TRUE,
   geom_bar_args = NULL
 ) {
   mapping <- mapping_swap_x_y(mapping)
@@ -245,9 +249,11 @@ ggally_rowbar <- function(
     ...,
     remove_background = remove_background,
     remove_percentage_axis = remove_percentage_axis,
+    reverse_fill_levels = reverse_fill_levels,
     geom_bar_args = geom_bar_args
   ) +
-    coord_flip()
+    coord_flip() +
+    guides(fill = guide_legend(reverse = !reverse_fill_levels))
 
   p
 }

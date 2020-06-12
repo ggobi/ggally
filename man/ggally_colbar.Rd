@@ -12,6 +12,7 @@ ggally_colbar(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = FALSE,
   geom_bar_args = NULL
 )
 
@@ -22,6 +23,7 @@ ggally_rowbar(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = TRUE,
   geom_bar_args = NULL
 )
 }
@@ -37,6 +39,8 @@ ggally_rowbar(
 \item{remove_background}{should the \code{panel.background} be removed?}
 
 \item{remove_percentage_axis}{should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}}
+
+\item{reverse_fill_levels}{should the levels of the fill variable be reversed?}
 
 \item{geom_bar_args}{other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}}
 }
