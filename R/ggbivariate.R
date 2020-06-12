@@ -76,6 +76,8 @@ ggbivariate <- function(
   }
 
   # default behavior
+  if (is.null(rowbar_args$remove_background))
+    rowbar_args$remove_background <- TRUE
   if (is.null(types$discrete))
     types$discrete = wrapp(ggally_rowbar, rowbar_args)
   if (is.null(types$comboVertical))

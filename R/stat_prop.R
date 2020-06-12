@@ -248,12 +248,21 @@ ggally_rowbar <- function(
     label_format = label_format,
     ...,
     remove_background = remove_background,
-    remove_percentage_axis = remove_percentage_axis,
+    remove_percentage_axis = FALSE,
     reverse_fill_levels = reverse_fill_levels,
     geom_bar_args = geom_bar_args
   ) +
     coord_flip() +
     guides(fill = guide_legend(reverse = !reverse_fill_levels))
+
+  if (isTRUE(remove_percentage_axis)) {
+    p <- p +
+      theme(
+        panel.grid = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()
+      )
+  }
 
   p
 }
