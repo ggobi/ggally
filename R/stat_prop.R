@@ -206,7 +206,11 @@ ggally_colbar <- function(
       position = position_fill(.5, reverse = reverse_fill_levels),
       ...
     ) +
-    scale_y_continuous(labels = scales::percent) +
+    scale_y_continuous(
+      labels = scales::percent,
+      expand = expansion(ifelse(remove_background, 0, .05), 0)
+    ) +
+    scale_x_discrete(expand = expansion(0, ifelse(remove_background, 0, .6))) +
     ylab("") +
     guides(fill = guide_legend(reverse = reverse_fill_levels))
 
@@ -225,6 +229,7 @@ ggally_colbar <- function(
         axis.ticks.y = element_blank()
       )
   }
+
   p
 }
 
