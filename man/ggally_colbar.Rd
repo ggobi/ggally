@@ -32,7 +32,7 @@ ggally_rowbar(
 
 \item{mapping}{aesthetics being used}
 
-\item{label_format}{formatter function for displaying proportions}
+\item{label_format}{formatter function for displaying proportions, not taken into account if a label aesthetic is provided in \code{mapping}}
 
 \item{...}{other arguments passed to \code{\link[ggplot2]{geom_text}(...)}}
 
@@ -61,6 +61,9 @@ p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8))
 # change labels' colour and use bold
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
               colour = "white", fontface = "bold"))
+
+# display number of observations instead of proportions
+p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(count))))
 
 # custom bar width
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))

@@ -134,7 +134,7 @@ StatProp <- ggproto("StatProp", Stat,
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param label_format formatter function for displaying proportions
+#' @param label_format formatter function for displaying proportions, not taken into account if a label aesthetic is provided in \code{mapping}
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
 #' @param remove_percentage_axis should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}
 #' @param remove_background should the \code{panel.background} be removed?
@@ -157,6 +157,9 @@ StatProp <- ggproto("StatProp", Stat,
 #' # change labels' colour and use bold
 #' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
 #'               colour = "white", fontface = "bold"))
+#'
+#' # display number of observations instead of proportions
+#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(count))))
 #'
 #' # custom bar width
 #' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))
@@ -195,13 +198,21 @@ ggally_colbar <- function(
   if (!is.null(mapping$colour))
     mapping$colour <- NULL
 
+  # label mapping
+  if (!is.null(mapping$label)) {
+    mapping_text <- aes()
+    mapping_text$label <- mapping$label
+  } else {
+    mapping_text <- aes_string(label = "label_format(after_stat(prop))")
+  }
+
   # position for geom_bar
   geom_bar_args$position <- position_fill(reverse = reverse_fill_levels)
 
   p <- ggplot(data, mapping) +
     do.call(geom_bar, geom_bar_args) +
     geom_text(
-      aes_string(label = "label_format(after_stat(prop))"),
+      mapping = mapping_text,
       stat = "prop",
       position = position_fill(.5, reverse = reverse_fill_levels),
       ...
