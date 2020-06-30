@@ -186,11 +186,11 @@
     <p>Retrieve either the response variable names, the beta variable names, or beta variable names.  If the model is an object of class 'lm', by default, the beta variable names will include anova significance stars.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>model_response_variables</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/broom/man/reexports.html'>augment</a></span>(<span class='no'>model</span>))
+    <pre class="usage"><span class='fu'>model_response_variables</span>(<span class='kw'>model</span>, data = <span class='kw'>broom</span>::<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>model</span>))
 
-<span class='fu'>model_beta_variables</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/broom/man/reexports.html'>augment</a></span>(<span class='no'>model</span>))
+<span class='fu'>model_beta_variables</span>(<span class='kw'>model</span>, data = <span class='kw'>broom</span>::<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>model</span>))
 
-<span class='fu'>model_beta_label</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>broom</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/broom/man/reexports.html'>augment</a></span>(<span class='no'>model</span>), <span class='kw'>lmStars</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>model_beta_label</span>(<span class='kw'>model</span>, data = <span class='kw'>broom</span>::<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>model</span>), lmStars = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,7 +201,7 @@
     </tr>
     <tr>
       <th>data</th>
-      <td><p>equivalent to <code><a href='https://rdrr.io/pkg/broom/man/reexports.html'>broom::augment(model)</a></code></p></td>
+      <td><p>equivalent to <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>broom::augment(model)</a></code></p></td>
     </tr>
     <tr>
       <th>lmStars</th>

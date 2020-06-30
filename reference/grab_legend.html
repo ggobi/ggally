@@ -186,10 +186,10 @@
     <p>Grab the legend and print it as a plot</p>
     </div>
 
-    <pre class="usage"><span class='fu'>grab_legend</span>(<span class='no'>p</span>)
+    <pre class="usage"><span class='fu'>grab_legend</span>(<span class='kw'>p</span>)
 
 <span class='co'># S3 method for legend_guide_box</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>plotNew</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>, plotNew = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,18 +215,18 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='no'>histPlot</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>,
-  <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"histogram"</span>,
-  <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>4</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='kw'>histPlot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/qplot.html'>qplot</a></span>(
+  x = <span class='kw'>Sepal.Length</span>,
+  data = <span class='kw'>iris</span>,
+  fill = <span class='kw'>Species</span>,
+  geom = <span class='st'>"histogram"</span>,
+  binwidth = <span class='fl'>1</span><span class='op'>/</span><span class='fl'>4</span>
 )
-(<span class='no'>right</span> <span class='kw'>&lt;-</span> <span class='no'>histPlot</span>)</div><div class='img'><img src='grab_legend-1.png' alt='' width='700' height='433' /></div><div class='input'>(<span class='no'>bottom</span> <span class='kw'>&lt;-</span> <span class='no'>histPlot</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>))</div><div class='img'><img src='grab_legend-2.png' alt='' width='700' height='433' /></div><div class='input'>(<span class='no'>top</span> <span class='kw'>&lt;-</span> <span class='no'>histPlot</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>))</div><div class='img'><img src='grab_legend-3.png' alt='' width='700' height='433' /></div><div class='input'>(<span class='no'>left</span> <span class='kw'>&lt;-</span> <span class='no'>histPlot</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"left"</span>))</div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='no'>right</span>))</div><div class='input'><span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='no'>bottom</span>))</div><div class='input'><span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='no'>top</span>))</div><div class='input'><span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='no'>left</span>))</div><div class='img'><img src='grab_legend-4.png' alt='' width='700' height='433' /></div></pre>
+(<span class='kw'>right</span> <span class='op'>&lt;-</span> <span class='kw'>histPlot</span>)</div><div class='img'><img src='grab_legend-1.png' alt='' width='700' height='433' /></div><div class='input'>(<span class='kw'>bottom</span> <span class='op'>&lt;-</span> <span class='kw'>histPlot</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(legend.position = <span class='st'>"bottom"</span>))</div><div class='img'><img src='grab_legend-2.png' alt='' width='700' height='433' /></div><div class='input'>(<span class='kw'>top</span> <span class='op'>&lt;-</span> <span class='kw'>histPlot</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(legend.position = <span class='st'>"top"</span>))</div><div class='img'><img src='grab_legend-3.png' alt='' width='700' height='433' /></div><div class='input'>(<span class='kw'>left</span> <span class='op'>&lt;-</span> <span class='kw'>histPlot</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(legend.position = <span class='st'>"left"</span>))</div><div class='input'>
+<span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='kw'>right</span>))</div><div class='input'><span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='kw'>bottom</span>))</div><div class='input'><span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='kw'>top</span>))</div><div class='input'><span class='fu'>p_</span>(<span class='fu'>grab_legend</span>(<span class='kw'>left</span>))</div><div class='img'><img src='grab_legend-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

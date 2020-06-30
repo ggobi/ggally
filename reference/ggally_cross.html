@@ -188,11 +188,11 @@ be added (see examples)." />
     <div class="ref-description">
     <p>Plot the number of observations by using square points
 with proportional areas. Could be filled according to chi-squared
-statistics computed by <code><a href='stat_cross.html'>stat_cross</a></code>. Labels could also
+statistics computed by <code>stat_cross</code>. Labels could also
 be added (see examples).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_cross</span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>, <span class='kw'>scale_max_size</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>geom_text_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>ggally_cross</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span>, <span class='kw'>...</span>, scale_max_size = <span class='fl'>20</span>, geom_text_args = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,44 +225,44 @@ be added (see examples).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tips</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"reshape"</span>)
-<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='no'>tips</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>smoker</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>sex</span>)))</div><div class='img'><img src='ggally_cross-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='no'>tips</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>day</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>time</span>)))</div><div class='img'><img src='ggally_cross-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>tips</span>, package = <span class='st'>"reshape"</span>)
+<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='kw'>tips</span>, mapping = <span class='fu'>aes</span>(x = <span class='kw'>smoker</span>, y = <span class='kw'>sex</span>)))</div><div class='img'><img src='ggally_cross-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='kw'>tips</span>, mapping = <span class='fu'>aes</span>(x = <span class='kw'>day</span>, y = <span class='kw'>time</span>)))</div><div class='img'><img src='ggally_cross-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Custom max size</span>
-<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='no'>tips</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>smoker</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>sex</span>)) +
-  <span class='fu'>scale_size_area</span>(<span class='kw'>max_size</span> <span class='kw'>=</span> <span class='fl'>40</span>))</div><div class='output co'>#&gt; <span class='message'>Scale for 'size' is already present. Adding another scale for 'size', which</span>
+<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='kw'>tips</span>, mapping = <span class='fu'>aes</span>(x = <span class='kw'>smoker</span>, y = <span class='kw'>sex</span>)) <span class='op'>+</span>
+  <span class='fu'>scale_size_area</span>(max_size = <span class='fl'>40</span>))</div><div class='output co'>#&gt; <span class='message'>Scale for 'size' is already present. Adding another scale for 'size', which</span>
 #&gt; <span class='message'>will replace the existing scale.</span></div><div class='img'><img src='ggally_cross-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Custom fill</span>
-<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='no'>tips</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>smoker</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>sex</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"red"</span>))</div><div class='img'><img src='ggally_cross-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='kw'>tips</span>, mapping = <span class='fu'>aes</span>(x = <span class='kw'>smoker</span>, y = <span class='kw'>sex</span>), fill = <span class='st'>"red"</span>))</div><div class='img'><img src='ggally_cross-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Custom shape</span>
-<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='no'>tips</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>smoker</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>sex</span>), <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>21</span>))</div><div class='img'><img src='ggally_cross-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(<span class='kw'>tips</span>, mapping = <span class='fu'>aes</span>(x = <span class='kw'>smoker</span>, y = <span class='kw'>sex</span>), shape = <span class='fl'>21</span>))</div><div class='img'><img src='ggally_cross-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Fill squares according to standardized residuals</span>
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>Titanic</span>)
+<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>Titanic</span>)
 <span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(
-  <span class='no'>d</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Class</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Survived</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'>after_stat</span>(<span class='no'>stdres</span>))
-) +
-  <span class='fu'>scale_fill_steps2</span>(<span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>3</span>, -<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>), <span class='kw'>show.limits</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='img'><img src='ggally_cross-6.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='kw'>d</span>,
+  mapping = <span class='fu'>aes</span>(x = <span class='kw'>Class</span>, y = <span class='kw'>Survived</span>, weight = <span class='kw'>Freq</span>, fill = <span class='fu'>after_stat</span>(<span class='kw'>stdres</span>))
+) <span class='op'>+</span>
+  <span class='fu'>scale_fill_steps2</span>(breaks = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='op'>-</span><span class='fl'>3</span>, <span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>), show.limits = <span class='fl'>TRUE</span>))</div><div class='img'><img src='ggally_cross-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Add labels</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>smoker</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>smoker</span>,
-    <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'>after_stat</span>(<span class='no'>prop</span>))
+  <span class='kw'>tips</span>,
+  mapping = <span class='fu'>aes</span>(
+    x = <span class='kw'>smoker</span>, y = <span class='kw'>sex</span>, colour = <span class='kw'>smoker</span>,
+    label = <span class='kw'>scales</span>::<span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'>after_stat</span>(<span class='kw'>prop</span>))
   )
 ))</div><div class='img'><img src='ggally_cross-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Customize labels' appearance and same size for all squares</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cross</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>smoker</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>sex</span>,
-    <span class='kw'>size</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='co'># do not map size to a variable</span>
-    <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'>after_stat</span>(<span class='no'>prop</span>))
+  <span class='kw'>tips</span>,
+  mapping = <span class='fu'>aes</span>(
+    x = <span class='kw'>smoker</span>, y = <span class='kw'>sex</span>,
+    size = <span class='kw'>NULL</span>, <span class='co'># do not map size to a variable</span>
+    label = <span class='kw'>scales</span>::<span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'>after_stat</span>(<span class='kw'>prop</span>))
   ),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>40</span>, <span class='co'># fix value for points size</span>
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>,
-  <span class='kw'>geom_text_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>6</span>)
+  size = <span class='fl'>40</span>, <span class='co'># fix value for points size</span>
+  fill = <span class='st'>"darkblue"</span>,
+  geom_text_args = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(colour = <span class='st'>"white"</span>, fontface = <span class='st'>"bold"</span>, size = <span class='fl'>6</span>)
 ))</div><div class='img'><img src='ggally_cross-8.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

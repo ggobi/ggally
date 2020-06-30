@@ -189,21 +189,21 @@ the <code>ggplot2</code> graphics package.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggparcoord</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>data</span>),
-  <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"std"</span>,
-  <span class='kw'>scaleSummary</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
-  <span class='kw'>centerObsID</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>missing</span> <span class='kw'>=</span> <span class='st'>"exclude"</span>,
-  <span class='kw'>order</span> <span class='kw'>=</span> <span class='no'>columns</span>,
-  <span class='kw'>showPoints</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>splineFactor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>alphaLines</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>boxplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>shadeBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>
+  <span class='kw'>data</span>,
+  columns = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>data</span>),
+  groupColumn = <span class='kw'>NULL</span>,
+  scale = <span class='st'>"std"</span>,
+  scaleSummary = <span class='st'>"mean"</span>,
+  centerObsID = <span class='fl'>1</span>,
+  missing = <span class='st'>"exclude"</span>,
+  order = <span class='kw'>columns</span>,
+  showPoints = <span class='fl'>FALSE</span>,
+  splineFactor = <span class='fl'>FALSE</span>,
+  alphaLines = <span class='fl'>1</span>,
+  boxplot = <span class='fl'>FALSE</span>,
+  shadeBox = <span class='kw'>NULL</span>,
+  mapping = <span class='kw'>NULL</span>,
+  title = <span class='st'>""</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -332,63 +332,63 @@ in the parallel coordinate plot. Options:</p><ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
 <span class='co'># use sample of the diamonds data for illustrative purposes</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>diamonds</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ggplot2"</span>)
-<span class='no'>diamonds.samp</span> <span class='kw'>&lt;-</span> <span class='no'>diamonds</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>diamonds</span>)[<span class='fl'>1</span>], <span class='fl'>100</span>), ]
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>diamonds</span>, package=<span class='st'>"ggplot2"</span>)
+<span class='kw'>diamonds.samp</span> <span class='op'>&lt;-</span> <span class='kw'>diamonds</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='kw'>diamonds</span>)[<span class='fl'>1</span>], <span class='fl'>100</span>), ]
 
 <span class='co'># basic parallel coordinate plot, using default settings</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>diamonds.samp</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>:<span class='fl'>10</span>))
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>diamonds.samp</span>, columns = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>10</span>))
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># this time, color by diamond cut</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>diamonds.samp</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>:<span class='fl'>10</span>), <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>diamonds.samp</span>, columns = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>10</span>), groupColumn = <span class='fl'>2</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># underlay univariate boxplots, add title, use uniminmax scaling</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>diamonds.samp</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>:<span class='fl'>10</span>), <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"uniminmax"</span>, <span class='kw'>boxplot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Parallel Coord. Plot of Diamonds Data"</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>diamonds.samp</span>, columns = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>10</span>), groupColumn = <span class='fl'>2</span>,
+  scale = <span class='st'>"uniminmax"</span>, boxplot = <span class='fl'>TRUE</span>, title = <span class='st'>"Parallel Coord. Plot of Diamonds Data"</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># utilize ggplot2 aes to switch to thicker lines</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>diamonds.samp</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>:<span class='fl'>10</span>), <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span><span class='st'>"Parallel Coord. Plot of Diamonds Data"</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_identity.html'>scale_size_identity</a></span>()
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>diamonds.samp</span>, columns = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>10</span>), groupColumn = <span class='fl'>2</span>,
+  title =<span class='st'>"Parallel Coord. Plot of Diamonds Data"</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(size = <span class='fl'>1</span>)) <span class='op'>+</span>
+  <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_identity.html'>scale_size_identity</a></span>()
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># basic parallel coord plot of the msleep data, using 'random' imputation and</span>
 <span class='co'># coloring by diet (can also use variable names in the columns and groupColumn</span>
 <span class='co'># arguments)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>msleep</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ggplot2"</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>msleep</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>11</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='st'>"vore"</span>, <span class='kw'>missing</span> <span class='kw'>=</span>
-  <span class='st'>"random"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='st'>"uniminmax"</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>msleep</span>, package=<span class='st'>"ggplot2"</span>)
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>msleep</span>, columns = <span class='fl'>6</span><span class='op'>:</span><span class='fl'>11</span>, groupColumn = <span class='st'>"vore"</span>, missing =
+  <span class='st'>"random"</span>, scale = <span class='st'>"uniminmax"</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># center each variable by its median, using the default missing value handler,</span>
 <span class='co'># 'exclude'</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>msleep</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>6</span>:<span class='fl'>11</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='st'>"vore"</span>, <span class='kw'>scale</span> <span class='kw'>=</span>
-  <span class='st'>"center"</span>, <span class='kw'>scaleSummary</span> <span class='kw'>=</span> <span class='st'>"median"</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>msleep</span>, columns = <span class='fl'>6</span><span class='op'>:</span><span class='fl'>11</span>, groupColumn = <span class='st'>"vore"</span>, scale =
+  <span class='st'>"center"</span>, scaleSummary = <span class='st'>"median"</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># with the iris data, order the axes by overall class (Species) separation using</span>
 <span class='co'># the anyClass option</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='st'>"anyClass"</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>iris</span>, columns = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>, groupColumn = <span class='fl'>5</span>, order = <span class='st'>"anyClass"</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># add points to the plot, add a title, and use an alpha scalar to make the lines</span>
 <span class='co'># transparent</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='st'>"anyClass"</span>,
-  <span class='kw'>showPoints</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Parallel Coordinate Plot for the Iris Data"</span>,
-  <span class='kw'>alphaLines</span> <span class='kw'>=</span> <span class='fl'>0.3</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-8.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>iris</span>, columns = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>, groupColumn = <span class='fl'>5</span>, order = <span class='st'>"anyClass"</span>,
+  showPoints = <span class='fl'>TRUE</span>, title = <span class='st'>"Parallel Coordinate Plot for the Iris Data"</span>,
+  alphaLines = <span class='fl'>0.3</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># color according to a column</span>
-<span class='no'>iris2</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>
-<span class='no'>iris2</span>$<span class='no'>alphaLevel</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"setosa"</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='st'>"versicolor"</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='st'>"virginica"</span> <span class='kw'>=</span> <span class='fl'>0</span>)[<span class='no'>iris2</span>$<span class='no'>Species</span>]
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris2</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>order</span> <span class='kw'>=</span> <span class='st'>"anyClass"</span>,
-  <span class='kw'>showPoints</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Parallel Coordinate Plot for the Iris Data"</span>,
-  <span class='kw'>alphaLines</span> <span class='kw'>=</span> <span class='st'>"alphaLevel"</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-9.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>iris2</span> <span class='op'>&lt;-</span> <span class='kw'>iris</span>
+<span class='kw'>iris2</span><span class='op'>$</span><span class='kw'>alphaLevel</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"setosa"</span> = <span class='fl'>0.2</span>, <span class='st'>"versicolor"</span> = <span class='fl'>0.3</span>, <span class='st'>"virginica"</span> = <span class='fl'>0</span>)[<span class='kw'>iris2</span><span class='op'>$</span><span class='kw'>Species</span>]
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(data = <span class='kw'>iris2</span>, columns = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>, groupColumn = <span class='fl'>5</span>, order = <span class='st'>"anyClass"</span>,
+  showPoints = <span class='fl'>TRUE</span>, title = <span class='st'>"Parallel Coordinate Plot for the Iris Data"</span>,
+  alphaLines = <span class='st'>"alphaLevel"</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-9.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Use splines on values, rather than lines (all produce the same result)</span>
-<span class='no'>columns</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>:<span class='fl'>10</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='no'>diamonds.samp</span>, <span class='no'>columns</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>splineFactor</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-10.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='no'>diamonds.samp</span>, <span class='no'>columns</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>splineFactor</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>splineFactor</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>columns</span>) * <span class='fl'>3</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='no'>diamonds.samp</span>, <span class='no'>columns</span>, <span class='kw'>groupColumn</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>splineFactor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='no'>splineFactor</span>))
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='ggparcoord-12.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>columns</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>10</span>)
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>diamonds.samp</span>, <span class='kw'>columns</span>, groupColumn = <span class='fl'>2</span>, splineFactor = <span class='fl'>TRUE</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-10.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>diamonds.samp</span>, <span class='kw'>columns</span>, groupColumn = <span class='fl'>2</span>, splineFactor = <span class='fl'>3</span>)
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>splineFactor</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>columns</span>) <span class='op'>*</span> <span class='fl'>3</span>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggparcoord</span>(<span class='kw'>diamonds.samp</span>, <span class='kw'>columns</span>, groupColumn = <span class='fl'>2</span>, splineFactor = <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='kw'>splineFactor</span>))
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='ggparcoord-12.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

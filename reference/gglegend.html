@@ -186,14 +186,14 @@
     <p>Plot only legend of plot function</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gglegend</span>(<span class='no'>fn</span>)</pre>
+    <pre class="usage"><span class='fu'>gglegend</span>(<span class='kw'>fn</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fn</th>
-      <td><p>this value is passed directly to an empty <code><a href='wrap.html'>wrap</a></code> call.  Please see <code>?<a href='wrap.html'>wrap</a></code> for more details.</p></td>
+      <td><p>this value is passed directly to an empty <code>wrap</code> call.  Please see <code>?wrap</code> for more details.</p></td>
     </tr>
     </table>
 
@@ -203,34 +203,34 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
 <span class='co'># display regular plot</span>
-<span class='fu'>p_</span>(<span class='fu'><a href='ggally_points.html'>ggally_points</a></span>(<span class='no'>iris</span>, <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>)))</div><div class='input'>
+<span class='fu'>p_</span>(<span class='fu'>ggally_points</span>(<span class='kw'>iris</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>Sepal.Length</span>, <span class='kw'>Sepal.Width</span>, color = <span class='kw'>Species</span>)))</div><div class='input'>
 <span class='co'># Make a function that will only print the legend</span>
-<span class='no'>points_legend</span> <span class='kw'>&lt;-</span> <span class='fu'>gglegend</span>(<span class='no'>ggally_points</span>)
-<span class='fu'>p_</span>(<span class='fu'>points_legend</span>(<span class='no'>iris</span>, <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>)))</div><div class='input'>
+<span class='kw'>points_legend</span> <span class='op'>&lt;-</span> <span class='fu'>gglegend</span>(<span class='kw'>ggally_points</span>)
+<span class='fu'>p_</span>(<span class='fu'>points_legend</span>(<span class='kw'>iris</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>Sepal.Length</span>, <span class='kw'>Sepal.Width</span>, color = <span class='kw'>Species</span>)))</div><div class='input'>
 <span class='co'># produce the sample legend plot, but supply a string that 'wrap' understands</span>
-<span class='no'>same_points_legend</span> <span class='kw'>&lt;-</span> <span class='fu'>gglegend</span>(<span class='st'>"points"</span>)
+<span class='kw'>same_points_legend</span> <span class='op'>&lt;-</span> <span class='fu'>gglegend</span>(<span class='st'>"points"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>points_legend</span>, <span class='st'>"fn"</span>), <span class='st'>"original_fn"</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>same_points_legend</span>, <span class='st'>"fn"</span>), <span class='st'>"original_fn"</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>points_legend</span>, <span class='st'>"fn"</span>), <span class='st'>"original_fn"</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>same_points_legend</span>, <span class='st'>"fn"</span>), <span class='st'>"original_fn"</span>)
 )</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># Complicated examples</span>
-<span class='no'>custom_legend</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='fu'>gglegend</span>(<span class='st'>"points"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>6</span>)
-<span class='fu'>p_</span>(<span class='fu'>custom_legend</span>(<span class='no'>iris</span>, <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>)))</div><div class='img'><img src='gglegend-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>custom_legend</span> <span class='op'>&lt;-</span> <span class='fu'>wrap</span>(<span class='fu'>gglegend</span>(<span class='st'>"points"</span>), size = <span class='fl'>6</span>)
+<span class='fu'>p_</span>(<span class='fu'>custom_legend</span>(<span class='kw'>iris</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>Sepal.Length</span>, <span class='kw'>Sepal.Width</span>, color = <span class='kw'>Species</span>)))</div><div class='img'><img src='gglegend-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Use within ggpairs</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(
-  <span class='no'>iris</span>, <span class='fl'>1</span>:<span class='fl'>2</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>),
-  <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'>gglegend</span>(<span class='st'>"points"</span>))
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(
+  <span class='kw'>iris</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>Species</span>),
+  upper = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='fu'>gglegend</span>(<span class='st'>"points"</span>))
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='gglegend-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='gglegend-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Place a legend in a specific location</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>iris</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>))
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>iris</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>Species</span>))
 <span class='co'># Make the legend</span>
-<span class='no'>pm</span>[<span class='fl'>1</span>,<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='fu'>points_legend</span>(<span class='no'>iris</span>, <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Width</span>, <span class='no'>Sepal.Length</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='gglegend-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>pm</span>[<span class='fl'>1</span>,<span class='fl'>2</span>] <span class='op'>&lt;-</span> <span class='fu'>points_legend</span>(<span class='kw'>iris</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>Sepal.Width</span>, <span class='kw'>Sepal.Length</span>, color = <span class='kw'>Species</span>))
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='gglegend-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

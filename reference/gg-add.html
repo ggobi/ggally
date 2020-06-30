@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Modify a <code><a href='ggmatrix.html'>ggmatrix</a></code> object by adding an <span class="pkg">ggplot2</span> object to all plots — +.gg • GGally</title>
+<title>Modify a <code>ggmatrix</code> object by adding an <span class="pkg">ggplot2</span> object to all plots — +.gg • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="Modify a <code><a href='ggmatrix.html'>ggmatrix</a></code> object by adding an <span class="pkg">ggplot2</span> object to all plots — +.gg" />
+<meta property="og:title" content="Modify a <code>ggmatrix</code> object by adding an <span class="pkg">ggplot2</span> object to all plots — +.gg" />
 <meta property="og:description" content="This operator allows you to add ggplot2 objects to a ggmatrix object." />
 
 
@@ -177,13 +177,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Modify a <code><a href='ggmatrix.html'>ggmatrix</a></code> object by adding an <span class="pkg">ggplot2</span> object to all plots</h1>
+    <h1>Modify a <code>ggmatrix</code> object by adding an <span class="pkg">ggplot2</span> object to all plots</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggpairs_add.R'><code>R/ggpairs_add.R</code></a></small>
     <div class="hidden name"><code>gg-add.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This operator allows you to add <span class="pkg">ggplot2</span> objects to a <code><a href='ggmatrix.html'>ggmatrix</a></code> object.</p>
+    <p>This operator allows you to add <span class="pkg">ggplot2</span> objects to a <code>ggmatrix</code> object.</p>
     </div>
 
     <pre class="usage"># S3 method for gg
@@ -196,7 +196,7 @@ add_to_ggmatrix(e1, e2, location = NULL, rows = NULL, cols = NULL)</pre>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>e1</th>
-      <td><p>An object of class <code><a href='ggnostic.html'>ggnostic</a></code> or <code>ggplot</code></p></td>
+      <td><p>An object of class <code>ggnostic</code> or <code>ggplot</code></p></td>
     </tr>
     <tr>
       <th>e2</th>
@@ -230,7 +230,7 @@ add_to_ggmatrix(e1, e2, location = NULL, rows = NULL, cols = NULL)</pre>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If the first object is an object of class <code><a href='ggmatrix.html'>ggmatrix</a></code>, you can add
+    <p>If the first object is an object of class <code>ggmatrix</code>, you can add
 the following types of objects, and it will return a modified <span class="pkg">ggplot2</span>
 object.</p>
 <ul>
@@ -239,34 +239,34 @@ object.</p>
 <li><p><code>coord</code>: override current coordinate system</p></li>
 </ul>
 
-<p>The <code>+</code> operator completely replaces elements
+<p>The <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> operator completely replaces elements
 with elements from e2.</p>
 <p><code>add_to_ggmatrix</code> gives you more control to modify
   only some subplots.  This function may be replaced and/or removed in the future. <a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/gg-add.html'>+.gg</a></code> and <code><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></code></p>
-<p><code><a href='ggmatrix_location.html'>ggmatrix_location</a></code></p></div>
+<p><code>ggmatrix_location</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tips</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"reshape"</span>)
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>tips</span>, package = <span class='st'>"reshape"</span>)
 
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>tips</span>[, <span class='fl'>2</span>:<span class='fl'>4</span>], <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>sex</span>))
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>tips</span>[, <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>], <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>sex</span>))
 <span class='co'>## change to black and white theme</span>
-<span class='no'>pm</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>()</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## change to linedraw theme</span>
-<span class='fu'>p_</span>(<span class='no'>pm</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_linedraw</a></span>())</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## change to custom theme</span>
-<span class='fu'>p_</span>(<span class='no'>pm</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>panel.background</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"lightblue"</span>)))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## add a list of information</span>
-<span class='no'>extra</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>(), <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>"My caption!"</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span> + <span class='no'>extra</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## modify scale</span>
-<span class='fu'>p_</span>(<span class='no'>pm</span> + <span class='fu'>scale_fill_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## only first row</span>
-<span class='fu'>p_</span>(<span class='fu'>add_to_ggmatrix</span>(<span class='no'>pm</span>, <span class='fu'>scale_fill_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>), <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## only second col</span>
-<span class='fu'>p_</span>(<span class='fu'>add_to_ggmatrix</span>(<span class='no'>pm</span>, <span class='fu'>scale_fill_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>), <span class='kw'>cols</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>3</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## only to upper triangle of plot matrix</span>
+<span class='kw'>pm</span> <span class='op'>+</span> <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>()</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## change to linedraw theme</span>
+<span class='fu'>p_</span>(<span class='kw'>pm</span> <span class='op'>+</span> <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_linedraw</a></span>())</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## change to custom theme</span>
+<span class='fu'>p_</span>(<span class='kw'>pm</span> <span class='op'>+</span> <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(panel.background = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span>(fill = <span class='st'>"lightblue"</span>)))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## add a list of information</span>
+<span class='kw'>extra</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>(), <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(caption = <span class='st'>"My caption!"</span>))
+<span class='fu'>p_</span>(<span class='kw'>pm</span> <span class='op'>+</span> <span class='kw'>extra</span>)</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## modify scale</span>
+<span class='fu'>p_</span>(<span class='kw'>pm</span> <span class='op'>+</span> <span class='fu'>scale_fill_brewer</span>(type = <span class='st'>"qual"</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## only first row</span>
+<span class='fu'>p_</span>(<span class='fu'>add_to_ggmatrix</span>(<span class='kw'>pm</span>, <span class='fu'>scale_fill_brewer</span>(type = <span class='st'>"qual"</span>), rows = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## only second col</span>
+<span class='fu'>p_</span>(<span class='fu'>add_to_ggmatrix</span>(<span class='kw'>pm</span>, <span class='fu'>scale_fill_brewer</span>(type = <span class='st'>"qual"</span>), cols = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## only to upper triangle of plot matrix</span>
 <span class='fu'>p_</span>(<span class='fu'>add_to_ggmatrix</span>(
-  <span class='no'>pm</span>,
-  <span class='fu'>scale_fill_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>),
-  <span class='kw'>location</span> <span class='kw'>=</span> <span class='st'>"upper"</span>
+  <span class='kw'>pm</span>,
+  <span class='fu'>scale_fill_brewer</span>(type = <span class='st'>"qual"</span>),
+  location = <span class='st'>"upper"</span>
 ))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='gg-add-8.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

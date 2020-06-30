@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code><a href='ggmatrix.html'>ggmatrix</a></code> default progress bar — ggmatrix_progress • GGally</title>
+<title><code>ggmatrix</code> default progress bar — ggmatrix_progress • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="<code><a href='ggmatrix.html'>ggmatrix</a></code> default progress bar — ggmatrix_progress" />
+<meta property="og:title" content="<code>ggmatrix</code> default progress bar — ggmatrix_progress" />
 <meta property="og:description" content="ggmatrix default progress bar" />
 
 
@@ -177,20 +177,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code><a href='ggmatrix.html'>ggmatrix</a></code> default progress bar</h1>
+    <h1><code>ggmatrix</code> default progress bar</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggmatrix_progress.R'><code>R/ggmatrix_progress.R</code></a></small>
     <div class="hidden name"><code>ggmatrix_progress.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='ggmatrix.html'>ggmatrix</a></code> default progress bar</p>
+    <p><code>ggmatrix</code> default progress bar</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggmatrix_progress</span>(
-  <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>" plot: [:plot_i,:plot_j] [:bar]:percent est::eta "</span>,
-  <span class='kw'>clear</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_after</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='no'>...</span>
+  format = <span class='st'>" plot: [:plot_i,:plot_j] [:bar]:percent est::eta "</span>,
+  clear = <span class='fl'>TRUE</span>,
+  show_after = <span class='fl'>0</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -207,13 +207,13 @@
     <p>function that accepts a plot matrix as the first argument and <code>...</code> for future expansion. Internally, the plot matrix is used to determine the total number of plots for the progress bar.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+    <pre class="examples"><div class='input'><span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>iris</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fu'>ggmatrix_progress</span>())
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggmatrix_progress-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>iris</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, progress = <span class='fu'>ggmatrix_progress</span>())
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggmatrix_progress-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># does not clear after finishing</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>iris</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fu'>ggmatrix_progress</span>(<span class='kw'>clear</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggmatrix_progress-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>iris</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, progress = <span class='fu'>ggmatrix_progress</span>(clear = <span class='fl'>FALSE</span>))
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggmatrix_progress-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

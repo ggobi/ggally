@@ -193,22 +193,22 @@ multiple strata objects.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggsurv</span>(
-  <span class='no'>s</span>,
-  <span class='kw'>CI</span> <span class='kw'>=</span> <span class='st'>"def"</span>,
-  <span class='kw'>plot.cens</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>surv.col</span> <span class='kw'>=</span> <span class='st'>"gg.def"</span>,
-  <span class='kw'>cens.col</span> <span class='kw'>=</span> <span class='st'>"gg.def"</span>,
-  <span class='kw'>lty.est</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lty.ci</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>size.est</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>size.ci</span> <span class='kw'>=</span> <span class='no'>size.est</span>,
-  <span class='kw'>cens.size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>cens.shape</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>back.white</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Time"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Survival"</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>order.legend</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>s</span>,
+  CI = <span class='st'>"def"</span>,
+  plot.cens = <span class='fl'>TRUE</span>,
+  surv.col = <span class='st'>"gg.def"</span>,
+  cens.col = <span class='st'>"gg.def"</span>,
+  lty.est = <span class='fl'>1</span>,
+  lty.ci = <span class='fl'>2</span>,
+  size.est = <span class='fl'>0.5</span>,
+  size.ci = <span class='kw'>size.est</span>,
+  cens.size = <span class='fl'>2</span>,
+  cens.shape = <span class='fl'>3</span>,
+  back.white = <span class='fl'>FALSE</span>,
+  xlab = <span class='st'>"Time"</span>,
+  ylab = <span class='st'>"Survival"</span>,
+  main = <span class='st'>""</span>,
+  order.legend = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -295,62 +295,62 @@ grey of <code>ggplot2</code> but will be white with borders around the plot.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>survival</span>) <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='no'>scales</span>)) {
-  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>lung</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"survival"</span>)
-  <span class='no'>sf.lung</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>survival</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='fl'>1</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>lung</span>)
-  <span class='fu'>p_</span>(<span class='fu'>ggsurv</span>(<span class='no'>sf.lung</span>))
+<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='kw'><a href='https://github.com/therneau/survival'>survival</a></span>) <span class='op'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='kw'><a href='https://scales.r-lib.org'>scales</a></span>)) {
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>lung</span>, package = <span class='st'>"survival"</span>)
+  <span class='kw'>sf.lung</span> <span class='op'>&lt;-</span> <span class='kw'>survival</span>::<span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>time</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='fl'>1</span>, data = <span class='kw'>lung</span>)
+  <span class='fu'>p_</span>(<span class='fu'>ggsurv</span>(<span class='kw'>sf.lung</span>))
 
   <span class='co'># Multiple strata examples</span>
-  <span class='no'>sf.sex</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>survival</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>sex</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>lung</span>)
-  <span class='no'>pl.sex</span> <span class='kw'>&lt;-</span> <span class='fu'>ggsurv</span>(<span class='no'>sf.sex</span>)
-  <span class='fu'>p_</span>(<span class='no'>pl.sex</span>)
+  <span class='kw'>sf.sex</span> <span class='op'>&lt;-</span> <span class='kw'>survival</span>::<span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>time</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='kw'>sex</span>, data = <span class='kw'>lung</span>)
+  <span class='kw'>pl.sex</span> <span class='op'>&lt;-</span> <span class='fu'>ggsurv</span>(<span class='kw'>sf.sex</span>)
+  <span class='fu'>p_</span>(<span class='kw'>pl.sex</span>)
 
   <span class='co'># Adjusting the legend of the ggsurv fit</span>
-  <span class='fu'>p_</span>(<span class='no'>pl.sex</span> +
-    <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(<span class='kw'>linetype</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
-    <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_hue.html'>scale_colour_discrete</a></span>(
-      <span class='kw'>name</span>   <span class='kw'>=</span> <span class='st'>'Sex'</span>,
-      <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>),
-      <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'Male'</span>, <span class='st'>'Female'</span>)
+  <span class='fu'>p_</span>(<span class='kw'>pl.sex</span> <span class='op'>+</span>
+    <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(linetype = <span class='fl'>FALSE</span>) <span class='op'>+</span>
+    <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html'>scale_colour_discrete</a></span>(
+      name   = <span class='st'>'Sex'</span>,
+      breaks = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>),
+      labels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'Male'</span>, <span class='st'>'Female'</span>)
     ))
 
   <span class='co'># Multiple factors</span>
-  <span class='no'>lung2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>plyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/plyr/man/mutate.html'>mutate</a></span>(<span class='no'>lung</span>, <span class='kw'>older</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>age</span> <span class='kw'>&gt;</span> <span class='fl'>60</span>))
-  <span class='no'>sf.sex2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>survival</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>sex</span> + <span class='no'>older</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>lung2</span>)
-  <span class='no'>pl.sex2</span> <span class='kw'>&lt;-</span> <span class='fu'>ggsurv</span>(<span class='no'>sf.sex2</span>)
-  <span class='fu'>p_</span>(<span class='no'>pl.sex2</span>)
+  <span class='kw'>lung2</span> <span class='op'>&lt;-</span> <span class='kw'>plyr</span>::<span class='fu'><a href='https://rdrr.io/pkg/plyr/man/mutate.html'>mutate</a></span>(<span class='kw'>lung</span>, older = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='kw'>age</span> <span class='op'>&gt;</span> <span class='fl'>60</span>))
+  <span class='kw'>sf.sex2</span> <span class='op'>&lt;-</span> <span class='kw'>survival</span>::<span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>time</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='kw'>sex</span> <span class='op'>+</span> <span class='kw'>older</span>, data = <span class='kw'>lung2</span>)
+  <span class='kw'>pl.sex2</span> <span class='op'>&lt;-</span> <span class='fu'>ggsurv</span>(<span class='kw'>sf.sex2</span>)
+  <span class='fu'>p_</span>(<span class='kw'>pl.sex2</span>)
 
   <span class='co'># Change legend title</span>
-  <span class='fu'>p_</span>(<span class='no'>pl.sex2</span> + <span class='fu'>labs</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"New Title"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"New Title"</span>))
+  <span class='fu'>p_</span>(<span class='kw'>pl.sex2</span> <span class='op'>+</span> <span class='fu'>labs</span>(color = <span class='st'>"New Title"</span>, linetype = <span class='st'>"New Title"</span>))
 
   <span class='co'># We can still adjust the plot after fitting</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>kidney</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"survival"</span>)
-  <span class='no'>sf.kid</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>survival</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='no'>time</span>, <span class='no'>status</span>) ~ <span class='no'>disease</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>kidney</span>)
-  <span class='no'>pl.kid</span> <span class='kw'>&lt;-</span> <span class='fu'>ggsurv</span>(<span class='no'>sf.kid</span>, <span class='kw'>plot.cens</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-  <span class='fu'>p_</span>(<span class='no'>pl.kid</span>)
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>kidney</span>, package = <span class='st'>"survival"</span>)
+  <span class='kw'>sf.kid</span> <span class='op'>&lt;-</span> <span class='kw'>survival</span>::<span class='fu'><a href='https://rdrr.io/pkg/survival/man/survfit.html'>survfit</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span>(<span class='kw'>time</span>, <span class='kw'>status</span>) <span class='op'>~</span> <span class='kw'>disease</span>, data = <span class='kw'>kidney</span>)
+  <span class='kw'>pl.kid</span> <span class='op'>&lt;-</span> <span class='fu'>ggsurv</span>(<span class='kw'>sf.kid</span>, plot.cens = <span class='fl'>FALSE</span>)
+  <span class='fu'>p_</span>(<span class='kw'>pl.kid</span>)
 
   <span class='co'># Zoom in to first 80 days</span>
-  <span class='fu'>p_</span>(<span class='no'>pl.kid</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_cartesian.html'>coord_cartesian</a></span>(<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>80</span>), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.45</span>, <span class='fl'>1</span>)))
+  <span class='fu'>p_</span>(<span class='kw'>pl.kid</span> <span class='op'>+</span> <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_cartesian.html'>coord_cartesian</a></span>(xlim = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>80</span>), ylim = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.45</span>, <span class='fl'>1</span>)))
 
   <span class='co'># Add the diseases names to the plot and remove legend</span>
-  <span class='fu'>p_</span>(<span class='no'>pl.kid</span> +
-    <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/annotate.html'>annotate</a></span>(
+  <span class='fu'>p_</span>(<span class='kw'>pl.kid</span> <span class='op'>+</span>
+    <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/annotate.html'>annotate</a></span>(
       <span class='st'>"text"</span>,
-      <span class='kw'>label</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"PKD"</span>, <span class='st'>"Other"</span>, <span class='st'>"GN"</span>, <span class='st'>"AN"</span>),
-      <span class='kw'>x</span>      <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>90</span>, <span class='fl'>125</span>, <span class='fl'>5</span>, <span class='fl'>60</span>),
-      <span class='kw'>y</span>      <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.65</span>, <span class='fl'>0.55</span>, <span class='fl'>0.30</span>),
-      <span class='kw'>size</span>   <span class='kw'>=</span> <span class='fl'>5</span>,
-      <span class='kw'>colour</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/hue_pal.html'>hue_pal</a></span>(
-        <span class='kw'>h</span>         <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>360</span>) + <span class='fl'>15</span>,
-        <span class='kw'>c</span>         <span class='kw'>=</span> <span class='fl'>100</span>,
-        <span class='kw'>l</span>         <span class='kw'>=</span> <span class='fl'>65</span>,
-        <span class='kw'>h.start</span>   <span class='kw'>=</span> <span class='fl'>0</span>,
-        <span class='kw'>direction</span> <span class='kw'>=</span> <span class='fl'>1</span>
+      label  = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"PKD"</span>, <span class='st'>"Other"</span>, <span class='st'>"GN"</span>, <span class='st'>"AN"</span>),
+      x      = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>90</span>, <span class='fl'>125</span>, <span class='fl'>5</span>, <span class='fl'>60</span>),
+      y      = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.65</span>, <span class='fl'>0.55</span>, <span class='fl'>0.30</span>),
+      size   = <span class='fl'>5</span>,
+      colour = <span class='kw'>scales</span>::<span class='fu'><a href='https://scales.r-lib.org//reference/hue_pal.html'>hue_pal</a></span>(
+        h         = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>360</span>) <span class='op'>+</span> <span class='fl'>15</span>,
+        c         = <span class='fl'>100</span>,
+        l         = <span class='fl'>65</span>,
+        h.start   = <span class='fl'>0</span>,
+        direction = <span class='fl'>1</span>
       )(<span class='fl'>4</span>)
-    ) +
-    <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
+    ) <span class='op'>+</span>
+    <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(color = <span class='fl'>FALSE</span>, linetype = <span class='fl'>FALSE</span>))
 }</div><div class='output co'>#&gt; <span class='message'>Loading required package: scales</span></div><div class='img'><img src='ggsurv-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; <span class='message'>Scale for 'colour' is already present. Adding another scale for 'colour',</span>
 #&gt; <span class='message'>which will replace the existing scale.</span></div><div class='img'><img src='ggsurv-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggsurv-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggsurv-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggsurv-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggsurv-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggsurv-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggsurv-8.png' alt='' width='700' height='433' /></div></pre>
   </div>

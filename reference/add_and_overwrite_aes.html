@@ -186,7 +186,7 @@
     <p>Add new aesthetics to a previous aes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_and_overwrite_aes</span>(<span class='no'>current</span>, <span class='no'>new</span>)</pre>
+    <pre class="usage"><span class='fu'>add_and_overwrite_aes</span>(<span class='kw'>current</span>, <span class='kw'>new</span>)</pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -197,15 +197,15 @@
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>diamonds</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"ggplot2"</span>)
-<span class='no'>diamonds.samp</span> <span class='kw'>&lt;-</span> <span class='no'>diamonds</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>diamonds</span>)[<span class='fl'>1</span>], <span class='fl'>1000</span>), ]
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>diamonds.samp</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>5</span>:<span class='fl'>7</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>color</span>),
-  <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='st'>"cor"</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"clarity"</span>)),
-  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='st'>"cor"</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"cut"</span>)),
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Diamonds Sample"</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>diamonds</span>, package=<span class='st'>"ggplot2"</span>)
+<span class='kw'>diamonds.samp</span> <span class='op'>&lt;-</span> <span class='kw'>diamonds</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='kw'>diamonds</span>)[<span class='fl'>1</span>], <span class='fl'>1000</span>), ]
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>diamonds.samp</span>, columns = <span class='fl'>5</span><span class='op'>:</span><span class='fl'>7</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>color</span>),
+  upper = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='st'>"cor"</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(color = <span class='st'>"clarity"</span>)),
+  lower = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='st'>"cor"</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(color = <span class='st'>"cut"</span>)),
+  title = <span class='st'>"Diamonds Sample"</span>
 )
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>pm</span>)</div><div class='output co'>#&gt; 
 #&gt; Custom str.ggmatrix output: 
 #&gt; To view original object use 'str(pm, raw = TRUE)'
 #&gt; 
@@ -249,8 +249,7 @@
 #&gt;  $ nrow               : int 3
 #&gt;  $ ncol               : int 3
 #&gt;  $ byrow              : logi TRUE
-#&gt;  - attr(*, "_class")= chr [1:2] "gg" "ggmatrix"</div><div class='input'>
-</div></pre>
+#&gt;  - attr(*, "_class")= chr [1:2] "gg" "ggmatrix"</div><div class='input'></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -187,28 +187,28 @@
     </div>
 
     <pre class="usage"><span class='fu'>ggnostic</span>(
-  <span class='no'>model</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>columnsX</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>data</span>, <span class='st'>"var_x"</span>),
-  <span class='kw'>columnsY</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".resid"</span>, <span class='st'>".sigma"</span>, <span class='st'>".hat"</span>, <span class='st'>".cooksd"</span>),
-  <span class='kw'>columnLabelsX</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>data</span>, <span class='st'>"var_x_label"</span>),
-  <span class='kw'>columnLabelsY</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"\\."</span>, <span class='st'>" "</span>, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"^\\."</span>, <span class='st'>""</span>, <span class='no'>columnsY</span>)),
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"explanatory variables"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"diagnostics"</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='no'>model</span>$<span class='no'>call</span>, <span class='kw'>width.cutoff</span> <span class='kw'>=</span> <span class='fl'>500L</span>), <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='st'>"\n"</span>),
-  <span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>ggally_points</span>, <span class='kw'>.fitted</span> <span class='kw'>=</span> <span class='no'>ggally_points</span>, <span class='kw'>.se.fit</span> <span class='kw'>=</span>
-    <span class='no'>ggally_nostic_se_fit</span>, <span class='kw'>.resid</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_resid</span>, <span class='kw'>.hat</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_hat</span>, <span class='kw'>.sigma</span>
-    <span class='kw'>=</span> <span class='no'>ggally_nostic_sigma</span>, <span class='kw'>.cooksd</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_cooksd</span>, <span class='kw'>.std.resid</span> <span class='kw'>=</span>
-    <span class='no'>ggally_nostic_std_resid</span>),
-  <span class='kw'>combo</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>ggally_box_no_facet</span>, <span class='kw'>fitted</span> <span class='kw'>=</span> <span class='no'>ggally_box_no_facet</span>, <span class='kw'>.se.fit</span> <span class='kw'>=</span>
-    <span class='no'>ggally_nostic_se_fit</span>, <span class='kw'>.resid</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_resid</span>, <span class='kw'>.hat</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_hat</span>, <span class='kw'>.sigma</span>
-    <span class='kw'>=</span> <span class='no'>ggally_nostic_sigma</span>, <span class='kw'>.cooksd</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_cooksd</span>, <span class='kw'>.std.resid</span> <span class='kw'>=</span>
-    <span class='no'>ggally_nostic_std_resid</span>),
-  <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>default</span> <span class='kw'>=</span> <span class='no'>ggally_ratio</span>, <span class='kw'>.fitted</span> <span class='kw'>=</span> <span class='no'>ggally_ratio</span>, <span class='kw'>.se.fit</span> <span class='kw'>=</span>
-    <span class='no'>ggally_ratio</span>, <span class='kw'>.resid</span> <span class='kw'>=</span> <span class='no'>ggally_ratio</span>, <span class='kw'>.hat</span> <span class='kw'>=</span> <span class='no'>ggally_ratio</span>, <span class='kw'>.sigma</span> <span class='kw'>=</span> <span class='no'>ggally_ratio</span>,
-    <span class='kw'>.cooksd</span> <span class='kw'>=</span> <span class='no'>ggally_ratio</span>, <span class='kw'>.std.resid</span> <span class='kw'>=</span> <span class='no'>ggally_ratio</span>),
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='broomify.html'>broomify</a></span>(<span class='no'>model</span>)
+  <span class='kw'>model</span>,
+  <span class='kw'>...</span>,
+  columnsX = <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>data</span>, <span class='st'>"var_x"</span>),
+  columnsY = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".resid"</span>, <span class='st'>".sigma"</span>, <span class='st'>".hat"</span>, <span class='st'>".cooksd"</span>),
+  columnLabelsX = <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>data</span>, <span class='st'>"var_x_label"</span>),
+  columnLabelsY = <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"\\."</span>, <span class='st'>" "</span>, <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"^\\."</span>, <span class='st'>""</span>, <span class='kw'>columnsY</span>)),
+  xlab = <span class='st'>"explanatory variables"</span>,
+  ylab = <span class='st'>"diagnostics"</span>,
+  title = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span>(<span class='kw'>model</span><span class='op'>$</span><span class='kw'>call</span>, width.cutoff = <span class='fl'>500L</span>), collapse = <span class='st'>"\n"</span>),
+  continuous = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(default = <span class='kw'>ggally_points</span>, .fitted = <span class='kw'>ggally_points</span>, .se.fit =
+    <span class='kw'>ggally_nostic_se_fit</span>, .resid = <span class='kw'>ggally_nostic_resid</span>, .hat = <span class='kw'>ggally_nostic_hat</span>, .sigma
+    = <span class='kw'>ggally_nostic_sigma</span>, .cooksd = <span class='kw'>ggally_nostic_cooksd</span>, .std.resid =
+    <span class='kw'>ggally_nostic_std_resid</span>),
+  combo = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(default = <span class='kw'>ggally_box_no_facet</span>, fitted = <span class='kw'>ggally_box_no_facet</span>, .se.fit =
+    <span class='kw'>ggally_nostic_se_fit</span>, .resid = <span class='kw'>ggally_nostic_resid</span>, .hat = <span class='kw'>ggally_nostic_hat</span>, .sigma
+    = <span class='kw'>ggally_nostic_sigma</span>, .cooksd = <span class='kw'>ggally_nostic_cooksd</span>, .std.resid =
+    <span class='kw'>ggally_nostic_std_resid</span>),
+  discrete = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(default = <span class='kw'>ggally_ratio</span>, .fitted = <span class='kw'>ggally_ratio</span>, .se.fit =
+    <span class='kw'>ggally_ratio</span>, .resid = <span class='kw'>ggally_ratio</span>, .hat = <span class='kw'>ggally_ratio</span>, .sigma = <span class='kw'>ggally_ratio</span>,
+    .cooksd = <span class='kw'>ggally_ratio</span>, .std.resid = <span class='kw'>ggally_ratio</span>),
+  progress = <span class='kw'>NULL</span>,
+  data = <span class='fu'>broomify</span>(<span class='kw'>model</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -220,7 +220,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>arguments passed directly to <code><a href='ggduo.html'>ggduo</a></code></p></td>
+      <td><p>arguments passed directly to <code>ggduo</code></p></td>
     </tr>
     <tr>
       <th>columnsX</th>
@@ -228,7 +228,7 @@
     </tr>
     <tr>
       <th>columnsY</th>
-      <td><p>rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by <code>broom::<a href='https://rdrr.io/pkg/broom/man/reexports.html'>augment</a>(model)</code>. See details for more information.</p></td>
+      <td><p>rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by <code>broom::<a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>(model)</code>. See details for more information.</p></td>
     </tr>
     <tr>
       <th>columnLabelsX, columnLabelsY</th>
@@ -236,7 +236,7 @@
     </tr>
     <tr>
       <th>xlab, ylab, title</th>
-      <td><p>plot matrix labels passed directly to <code><a href='ggmatrix.html'>ggmatrix</a></code></p></td>
+      <td><p>plot matrix labels passed directly to <code>ggmatrix</code></p></td>
     </tr>
     <tr>
       <th>continuous, combo, discrete</th>
@@ -244,11 +244,11 @@
     </tr>
     <tr>
       <th>progress</th>
-      <td><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress_bar</a></code>.  See <code><a href='ggmatrix_progress.html'>ggmatrix_progress</a></code>.</p></td>
+      <td><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress_bar</a></code>.  See <code>ggmatrix_progress</code>.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See <code><a href='broomify.html'>broomify</a>(model)</code> for more information</p></td>
+      <td><p>data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See <code>broomify(model)</code> for more information</p></td>
     </tr>
     </table>
 
@@ -256,7 +256,7 @@
 
     
 
-<p><code>broom::<a href='https://rdrr.io/pkg/broom/man/reexports.html'>augment</a>()</code> collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the <code>columnsY</code> parameter to <code>ggnostic</code>.</p>
+<p><code>broom::<a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>()</code> collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the <code>columnsY</code> parameter to <code>ggnostic</code>.</p>
 <dl>
   <dt>.resid</dt><dd><p>Residuals</p></dd>
   <dt>.hat</dt><dd><p>Diagonal of the hat matrix</p></dd>
@@ -274,38 +274,38 @@
 
     
 
-<p>Similar to <code><a href='ggduo.html'>ggduo</a></code> and <code><a href='ggpairs.html'>ggpairs</a></code>, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the <code>broom::<a href='https://rdrr.io/pkg/broom/man/reexports.html'>augment</a>()</code> output: <code>".fitted"</code>, <code>".resid"</code>, <code>".std.resid"</code>, <code>".sigma"</code>, <code>".se.fit"</code>, <code>".hat"</code>, <code>".cooksd"</code>. An extra key, <code>"default"</code>, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the <code>types</code> parameter in <code><a href='ggduo.html'>ggduo</a></code>.</p>
+<p>Similar to <code>ggduo</code> and <code>ggpairs</code>, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the <code>broom::<a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>()</code> output: <code>".fitted"</code>, <code>".resid"</code>, <code>".std.resid"</code>, <code>".sigma"</code>, <code>".se.fit"</code>, <code>".hat"</code>, <code>".cooksd"</code>. An extra key, <code>"default"</code>, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the <code>types</code> parameter in <code>ggduo</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>mtcars</span>)
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mtcars</span>)
 
 <span class='co'># use mtcars dataset and alter the 'am' column to display actual name values</span>
-<span class='no'>mtc</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
-<span class='no'>mtc</span>$<span class='no'>am</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0"</span> <span class='kw'>=</span> <span class='st'>"automatic"</span>, <span class='st'>"1"</span> <span class='kw'>=</span> <span class='st'>"manual"</span>)[<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>mtc</span>$<span class='no'>am</span>)]
+<span class='kw'>mtc</span> <span class='op'>&lt;-</span> <span class='kw'>mtcars</span>
+<span class='kw'>mtc</span><span class='op'>$</span><span class='kw'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0"</span> = <span class='st'>"automatic"</span>, <span class='st'>"1"</span> = <span class='st'>"manual"</span>)[<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='kw'>mtc</span><span class='op'>$</span><span class='kw'>am</span>)]
 
 <span class='co'># step the complete model down to a smaller model</span>
-<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span>(<span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>.</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtc</span>), <span class='kw'>trace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='kw'>mod</span> <span class='op'>&lt;-</span> <span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span>(<span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>.</span>, data = <span class='kw'>mtc</span>), trace = <span class='fl'>FALSE</span>)
 
 <span class='co'># display using defaults</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='no'>mod</span>)
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='kw'>mod</span>)
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># color by am value</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='no'>mod</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>am</span>))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='kw'>mod</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>am</span>))
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># turn resid smooth error ribbon off</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='no'>mod</span>, <span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>.resid</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"nostic_resid"</span>, <span class='kw'>se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)))
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggnostic</span>(<span class='kw'>mod</span>, continuous = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(.resid = <span class='fu'>wrap</span>(<span class='st'>"nostic_resid"</span>, se = <span class='fl'>FALSE</span>)))
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-3.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>## plot residuals vs fitted in a ggpairs plot matrix</span>
-<span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='broomify.html'>broomify</a></span>(<span class='no'>mod</span>)
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(
-  <span class='no'>dt</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".fitted"</span>, <span class='st'>".resid"</span>),
-  <span class='kw'>columnLabels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"fitted"</span>, <span class='st'>"residuals"</span>),
-  <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>ggally_nostic_resid</span>)
+<span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>broomify</span>(<span class='kw'>mod</span>)
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(
+  <span class='kw'>dt</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".fitted"</span>, <span class='st'>".resid"</span>),
+  columnLabels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"fitted"</span>, <span class='st'>"residuals"</span>),
+  lower = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='kw'>ggally_nostic_resid</span>)
 )
-<span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-4.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggnostic-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

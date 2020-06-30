@@ -129,7 +129,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="ggscatmat_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggscatmat(): Numeric pairwise plot matrix</h1>
@@ -144,18 +144,22 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GGally</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggobi.github.io/ggally">GGally</a></span>)
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></pre></body></html></div>
+<span class="co">#&gt;   +.gg   ggplot2</span>
+</pre></div>
 <div id="ggallyggscatmat" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ggallyggscatmat" class="anchor"></a><code>GGally::ggscatmat()</code>
 </h1>
 <p>The primary function is <code><a href="../reference/ggscatmat.html">ggscatmat()</a></code>. It is similar to <code><a href="../reference/ggpairs.html">ggpairs()</a></code> but only works for purely numeric multivariate data. It is faster than <code><a href="../reference/ggpairs.html">ggpairs()</a></code>, because less choices need to be made. It creates a matrix with scatterplots in the lower diagonal, densities on the diagonal and correlations written in the upper diagonal. Syntax is to enter the dataset, the columns that you want to plot, a color column, and an alpha level.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">flea</span>)
-<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span>(<span class="no">flea</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fl">2</span>:<span class="fl">4</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"species"</span>, <span class="kw">alpha</span><span class="kw">=</span><span class="fl">0.8</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">flea</span>)
+<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span>(<span class="kw">flea</span>, columns = <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, color=<span class="st">"species"</span>, alpha=<span class="fl">0.8</span>)
+</pre></div>
 <p><img src="ggscatmat_files/figure-html/ggscatmat-basic-usage-1.png" width="672"></p>
 <p>In this plot, you can see that the three different species vary a little from each other in these three variables. Heptapot (blue) has smaller values on the variable <code>tars1</code> than the other two. The correlation between the three variables is similar for all species.</p>
 <div id="references" class="section level2">

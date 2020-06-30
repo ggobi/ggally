@@ -186,14 +186,14 @@
     <p>GGally implementation of ts.plot. Wraps around the ggduo function and removes the column strips</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggts</span>(<span class='no'>...</span>, <span class='kw'>columnLabelsX</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"time"</span>)</pre>
+    <pre class="usage"><span class='fu'>ggts</span>(<span class='kw'>...</span>, columnLabelsX = <span class='kw'>NULL</span>, xlab = <span class='st'>"time"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>supplied directly to <code><a href='ggduo.html'>ggduo</a></code></p></td>
+      <td><p>supplied directly to <code>ggduo</code></p></td>
     </tr>
     <tr>
       <th>columnLabelsX</th>
@@ -207,13 +207,13 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><a href='ggmatrix.html'>ggmatrix</a></code> object</p>
+    <p><code>ggmatrix</code> object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'>p_</span>(<span class='fu'>ggts</span>(<span class='no'>pigs</span>, <span class='st'>"time"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gilts"</span>, <span class='st'>"profit"</span>, <span class='st'>"s_per_herdsz"</span>, <span class='st'>"production"</span>, <span class='st'>"herdsz"</span>)))</div><div class='img'><img src='ggts-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>p_</span>(<span class='fu'>ggts</span>(<span class='kw'>pigs</span>, <span class='st'>"time"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gilts"</span>, <span class='st'>"profit"</span>, <span class='st'>"s_per_herdsz"</span>, <span class='st'>"production"</span>, <span class='st'>"herdsz"</span>)))</div><div class='img'><img src='ggts-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

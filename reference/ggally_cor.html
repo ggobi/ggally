@@ -187,21 +187,21 @@
     </div>
 
     <pre class="usage"><span class='fu'>ggally_cor</span>(
-  <span class='no'>data</span>,
-  <span class='no'>mapping</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"complete.obs"</span>,
-  <span class='kw'>display_grid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>title_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>...</span>),
-  <span class='kw'>group_args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>...</span>),
-  <span class='kw'>justify_labels</span> <span class='kw'>=</span> <span class='st'>"right"</span>,
-  <span class='kw'>align_percent</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Corr"</span>,
-  <span class='kw'>alignPercent</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span>(<span class='st'>"deprecated. Use `align_percent`"</span>),
-  <span class='kw'>displayGrid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span>(<span class='st'>"deprecated. Use `display_grid`"</span>)
+  <span class='kw'>data</span>,
+  <span class='kw'>mapping</span>,
+  <span class='kw'>...</span>,
+  stars = <span class='fl'>TRUE</span>,
+  method = <span class='st'>"pearson"</span>,
+  use = <span class='st'>"complete.obs"</span>,
+  display_grid = <span class='fl'>FALSE</span>,
+  digits = <span class='fl'>3</span>,
+  title_args = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>...</span>),
+  group_args = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>...</span>),
+  justify_labels = <span class='st'>"right"</span>,
+  align_percent = <span class='fl'>0.5</span>,
+  title = <span class='st'>"Corr"</span>,
+  alignPercent = <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span>(<span class='st'>"deprecated. Use `align_percent`"</span>),
+  displayGrid = <span class='fu'><a href='https://rdrr.io/r/base/warning.html'>warning</a></span>(<span class='st'>"deprecated. Use `display_grid`"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -224,7 +224,7 @@
       <td><p>logical value which determines if the significance stars should be displayed.  Given the <code><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></code> p-values, display</p><dl>
   <dt><code>"***"</code></dt><dd><p>if the p-value is <code>&lt; 0.001</code></p></dd>
   <dt><code>"**"</code></dt><dd><p>if the p-value is <code>&lt; 0.01</code></p></dd>
-  <dt><code><a href='https://rdrr.io/r/base/Arithmetic.html'>"*"</a></code></dt><dd><p>if the p-value is <code>&lt; 0.05</code></p></dd>
+  <dt><code>"*"</code></dt><dd><p>if the p-value is <code>&lt; 0.05</code></p></dd>
   <dt><code>"."</code></dt><dd><p>if the p-value is <code>&lt; 0.10</code></p></dd>
   <dt><code>""</code></dt><dd><p>otherwise</p></dd>
 
@@ -274,33 +274,33 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='ggally_statistic.html'>ggally_statistic</a></code>, <code><a href='ggally_cor_v1_5.html'>ggally_cor_v1_5</a></code></p></div>
+    <div class='dont-index'><p><code>ggally_statistic</code>, <code>ggally_cor_v1_5</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tips</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"reshape"</span>)
-<span class='fu'>p_</span>(<span class='fu'>ggally_cor</span>(<span class='no'>tips</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"total_bill"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"tip"</span>)))</div><div class='img'><img src='ggally_cor-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># display with grid</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>tips</span>, package = <span class='st'>"reshape"</span>)
+<span class='fu'>p_</span>(<span class='fu'>ggally_cor</span>(<span class='kw'>tips</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(x = <span class='st'>"total_bill"</span>, y = <span class='st'>"tip"</span>)))</div><div class='img'><img src='ggally_cor-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># display with grid</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cor</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"total_bill"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"tip"</span>),
-  <span class='kw'>display_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>tips</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(x = <span class='st'>"total_bill"</span>, y = <span class='st'>"tip"</span>),
+  display_grid = <span class='fl'>TRUE</span>
 ))</div><div class='img'><img src='ggally_cor-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># change text attributes</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cor</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>total_bill</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>tip</span>),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>15</span>,
-  <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='st'>"red"</span>),
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Correlation"</span>
+  <span class='kw'>tips</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>total_bill</span>, y = <span class='kw'>tip</span>),
+  size = <span class='fl'>15</span>,
+  colour = <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='st'>"red"</span>),
+  title = <span class='st'>"Correlation"</span>
 ))</div><div class='img'><img src='ggally_cor-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># split by a variable</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cor</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"total_bill"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"tip"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"sex"</span>),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>
+  <span class='kw'>tips</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(x = <span class='st'>"total_bill"</span>, y = <span class='st'>"tip"</span>, color = <span class='st'>"sex"</span>),
+  size = <span class='fl'>5</span>
 ))</div><div class='img'><img src='ggally_cor-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

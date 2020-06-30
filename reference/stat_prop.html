@@ -193,15 +193,15 @@ The <code>by</code> aesthetic should be a factor.</p>
     </div>
 
     <pre class="usage"><span class='fu'>stat_prop</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"bar"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"fill"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  mapping = <span class='kw'>NULL</span>,
+  data = <span class='kw'>NULL</span>,
+  geom = <span class='st'>"bar"</span>,
+  position = <span class='st'>"fill"</span>,
+  <span class='kw'>...</span>,
+  width = <span class='kw'>NULL</span>,
+  na.rm = <span class='fl'>FALSE</span>,
+  show.legend = <span class='fl'>NA</span>,
+  inherit.aes = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -296,29 +296,29 @@ should be a factor.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>Titanic</span>)
+<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>Titanic</span>)
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>ggplot</span>(<span class='no'>d</span>) +
-  <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Class</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Survived</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>Class</span>) +
-  <span class='fu'>geom_bar</span>(<span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"fill"</span>) +
-  <span class='fu'>geom_text</span>(<span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"prop"</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='fu'>position_fill</span>(<span class='fl'>.5</span>))
-<span class='fu'>p_</span>(<span class='no'>p</span>)</div><div class='img'><img src='stat_prop-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='no'>p</span> + <span class='fu'>facet_grid</span>(~ <span class='no'>Sex</span>))</div><div class='img'><img src='stat_prop-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'>ggplot</span>(<span class='no'>d</span>) +
-  <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Class</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Survived</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='no'>Freq</span>) +
-  <span class='fu'>geom_bar</span>(<span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"dodge"</span>) +
-  <span class='fu'>geom_text</span>(
-    <span class='fu'>aes</span>(<span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>Survived</span>), <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"prop"</span>,
-    <span class='kw'>position</span> <span class='kw'>=</span> <span class='fu'>position_dodge</span>(<span class='fl'>0.9</span>), <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Class</span>, fill = <span class='kw'>Survived</span>, weight = <span class='kw'>Freq</span>, by = <span class='kw'>Class</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(position = <span class='st'>"fill"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(stat = <span class='st'>"prop"</span>, position = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_stack.html'>position_fill</a></span>(<span class='fl'>.5</span>))
+<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='stat_prop-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span>(<span class='op'>~</span> <span class='kw'>Sex</span>))</div><div class='img'><img src='stat_prop-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Class</span>, fill = <span class='kw'>Survived</span>, weight = <span class='kw'>Freq</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(position = <span class='st'>"dodge"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(by = <span class='kw'>Survived</span>), stat = <span class='st'>"prop"</span>,
+    position = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_dodge.html'>position_dodge</a></span>(<span class='fl'>0.9</span>), vjust = <span class='st'>"bottom"</span>
  ))</div><div class='img'><img src='stat_prop-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'>ggplot</span>(<span class='no'>d</span>) +
-  <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Class</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Survived</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='no'>Freq</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'>geom_bar</span>() +
-  <span class='fu'>geom_text</span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'>after_stat</span>(<span class='no'>prop</span>), <span class='kw'>accuracy</span> <span class='kw'>=</span> <span class='fl'>1</span>)),
-    <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"prop"</span>,
-    <span class='kw'>position</span> <span class='kw'>=</span> <span class='fu'>position_stack</span>(<span class='fl'>.5</span>)
+<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Class</span>, fill = <span class='kw'>Survived</span>, weight = <span class='kw'>Freq</span>, by = <span class='fl'>1</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(label = <span class='kw'>scales</span>::<span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_eval.html'>after_stat</a></span>(<span class='kw'>prop</span>), accuracy = <span class='fl'>1</span>)),
+    stat = <span class='st'>"prop"</span>,
+    position = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_stack.html'>position_stack</a></span>(<span class='fl'>.5</span>)
  ))</div><div class='img'><img src='stat_prop-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

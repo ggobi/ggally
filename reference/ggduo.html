@@ -187,27 +187,27 @@
     </div>
 
     <pre class="usage"><span class='fu'>ggduo</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>columnsX</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>data</span>),
-  <span class='kw'>columnsY</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>data</span>),
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='st'>"smooth_loess"</span>, <span class='kw'>comboVertical</span> <span class='kw'>=</span> <span class='st'>"box_no_facet"</span>,
-    <span class='kw'>comboHorizontal</span> <span class='kw'>=</span> <span class='st'>"facethist"</span>, <span class='kw'>discrete</span> <span class='kw'>=</span> <span class='st'>"count"</span>),
-  <span class='kw'>axisLabels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"show"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>columnLabelsX</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data</span>[<span class='no'>columnsX</span>]),
-  <span class='kw'>columnLabelsY</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data</span>[<span class='no'>columnsY</span>]),
-  <span class='kw'>labeller</span> <span class='kw'>=</span> <span class='st'>"label_value"</span>,
-  <span class='kw'>switch</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cardinality_threshold</span> <span class='kw'>=</span> <span class='fl'>15</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xProportions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>yProportions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>legends</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>)
+  <span class='kw'>data</span>,
+  mapping = <span class='kw'>NULL</span>,
+  columnsX = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>data</span>),
+  columnsY = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>data</span>),
+  title = <span class='kw'>NULL</span>,
+  types = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='st'>"smooth_loess"</span>, comboVertical = <span class='st'>"box_no_facet"</span>,
+    comboHorizontal = <span class='st'>"facethist"</span>, discrete = <span class='st'>"count"</span>),
+  axisLabels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"show"</span>, <span class='st'>"none"</span>),
+  columnLabelsX = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>data</span>[<span class='kw'>columnsX</span>]),
+  columnLabelsY = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>data</span>[<span class='kw'>columnsY</span>]),
+  labeller = <span class='st'>"label_value"</span>,
+  switch = <span class='kw'>NULL</span>,
+  xlab = <span class='kw'>NULL</span>,
+  ylab = <span class='kw'>NULL</span>,
+  showStrips = <span class='kw'>NULL</span>,
+  legend = <span class='kw'>NULL</span>,
+  cardinality_threshold = <span class='fl'>15</span>,
+  progress = <span class='kw'>NULL</span>,
+  xProportions = <span class='kw'>NULL</span>,
+  yProportions = <span class='kw'>NULL</span>,
+  legends = <span class='fu'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='st'>"deprecated"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -256,7 +256,7 @@
     <tr>
       <th>legend</th>
       <td><p>May be the two objects described below or the default <code>NULL</code> value.  The legend position can be moved by using ggplot2's theme element <code>pm + theme(legend.position = "bottom")</code></p><dl>
-<dt>a single numeric value</dt><dd><p>provides the location of a plot according to the display order. Such as <code>legend = 3</code> in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position <code><a href='https://rdrr.io/r/base/c.html'>c(1,2)</a></code></p></dd><dt>a object from <code><a href='grab_legend.html'>grab_legend</a>()</code></dt><dd><p>a predetermined plot legend that will be displayed directly</p></dd>
+<dt>a single numeric value</dt><dd><p>provides the location of a plot according to the display order. Such as <code>legend = 3</code> in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position <code><a href='https://rdrr.io/r/base/c.html'>c(1,2)</a></code></p></dd><dt>a object from <code>grab_legend()</code></dt><dd><p>a predetermined plot legend that will be displayed directly</p></dd>
 </dl></td>
     </tr>
     <tr>
@@ -265,7 +265,7 @@
     </tr>
     <tr>
       <th>progress</th>
-      <td><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress_bar</a></code>.  See <code><a href='ggmatrix_progress.html'>ggmatrix_progress</a></code>.</p></td>
+      <td><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress_bar</a></code>.  See <code>ggmatrix_progress</code>.</p></td>
     </tr>
     <tr>
       <th>xProportions, yProportions</th>
@@ -290,84 +290,84 @@
 </dl>
 
 <p>If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.</p>
-<p>If a function is supplied as an option, it should implement the function api of <code>function(data, mapping, ...){#make ggplot2 plot}</code>.  If a specific function needs its parameters set, <code><a href='wrap.html'>wrap</a>(fn, param1 = val1, param2 = val2)</code> the function with its parameters.</p>
+<p>If a function is supplied as an option, it should implement the function api of <code>function(data, mapping, ...){#make ggplot2 plot}</code>.  If a specific function needs its parameters set, <code>wrap(fn, param1 = val1, param2 = val2)</code> the function with its parameters.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='co'># small function to display plots only if it's interactive</span>
- <span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+ <span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
- <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>baseball</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"plyr"</span>)
+ <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>baseball</span>, package = <span class='st'>"plyr"</span>)
 
  <span class='co'># Keep players from 1990-1995 with at least one at bat</span>
  <span class='co'># Add how many singles a player hit</span>
  <span class='co'># (must do in two steps as X1b is used in calculations)</span>
- <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(
-   <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>baseball</span>, <span class='no'>year</span> <span class='kw'>&gt;=</span> <span class='fl'>1990</span> <span class='kw'>&amp;</span> <span class='no'>year</span> <span class='kw'>&lt;=</span> <span class='fl'>1995</span> <span class='kw'>&amp;</span> <span class='no'>ab</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>),
-   <span class='kw'>X1b</span> <span class='kw'>=</span> <span class='no'>h</span> - <span class='no'>X2b</span> - <span class='no'>X3b</span> - <span class='no'>hr</span>
+ <span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(
+   <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='kw'>baseball</span>, <span class='kw'>year</span> <span class='op'>&gt;=</span> <span class='fl'>1990</span> <span class='op'>&amp;</span> <span class='kw'>year</span> <span class='op'>&lt;=</span> <span class='fl'>1995</span> <span class='op'>&amp;</span> <span class='kw'>ab</span> <span class='op'>&gt;</span> <span class='fl'>0</span>),
+   X1b = <span class='kw'>h</span> <span class='op'>-</span> <span class='kw'>X2b</span> <span class='op'>-</span> <span class='kw'>X3b</span> <span class='op'>-</span> <span class='kw'>hr</span>
  )
  <span class='co'># Add</span>
  <span class='co'>#  the player's batting average,</span>
  <span class='co'>#  the player's slugging percentage,</span>
  <span class='co'>#  and the player's on base percentage</span>
  <span class='co'># Make factor a year, as each season is discrete</span>
- <span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(
-   <span class='no'>dt</span>,
-   <span class='kw'>batting_avg</span> <span class='kw'>=</span> <span class='no'>h</span> / <span class='no'>ab</span>,
-   <span class='kw'>slug</span> <span class='kw'>=</span> (<span class='no'>X1b</span> + <span class='fl'>2</span>*<span class='no'>X2b</span> + <span class='fl'>3</span>*<span class='no'>X3b</span> + <span class='fl'>4</span>*<span class='no'>hr</span>) / <span class='no'>ab</span>,
-   <span class='kw'>on_base</span> <span class='kw'>=</span> (<span class='no'>h</span> + <span class='no'>bb</span> + <span class='no'>hbp</span>) / (<span class='no'>ab</span> + <span class='no'>bb</span> + <span class='no'>hbp</span>),
-   <span class='kw'>year</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>year</span>)
+ <span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(
+   <span class='kw'>dt</span>,
+   batting_avg = <span class='kw'>h</span> <span class='op'>/</span> <span class='kw'>ab</span>,
+   slug = (<span class='kw'>X1b</span> <span class='op'>+</span> <span class='fl'>2</span><span class='op'>*</span><span class='kw'>X2b</span> <span class='op'>+</span> <span class='fl'>3</span><span class='op'>*</span><span class='kw'>X3b</span> <span class='op'>+</span> <span class='fl'>4</span><span class='op'>*</span><span class='kw'>hr</span>) <span class='op'>/</span> <span class='kw'>ab</span>,
+   on_base = (<span class='kw'>h</span> <span class='op'>+</span> <span class='kw'>bb</span> <span class='op'>+</span> <span class='kw'>hbp</span>) <span class='op'>/</span> (<span class='kw'>ab</span> <span class='op'>+</span> <span class='kw'>bb</span> <span class='op'>+</span> <span class='kw'>hbp</span>),
+   year = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='kw'>year</span>)
  )
 
 
- <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
-   <span class='no'>dt</span>,
+ <span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(
+   <span class='kw'>dt</span>,
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"g"</span>, <span class='st'>"ab"</span>, <span class='st'>"lg"</span>),
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting_avg"</span>, <span class='st'>"slug"</span>, <span class='st'>"on_base"</span>),
-   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>lg</span>)
+   mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>lg</span>)
  )
  <span class='co'># Prints, but</span>
  <span class='co'>#   there is severe over plotting in the continuous plots</span>
  <span class='co'>#   the labels could be better</span>
  <span class='co'>#   want to add more hitting information</span>
- <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-1.png' alt='' width='700' height='433' /></div><div class='input'>
+ <span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggduo-1.png' alt='' width='700' height='433' /></div><div class='input'>
  <span class='co'># address overplotting issues and add a title</span>
- <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
-   <span class='no'>dt</span>,
+ <span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(
+   <span class='kw'>dt</span>,
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"g"</span>, <span class='st'>"ab"</span>, <span class='st'>"lg"</span>),
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting_avg"</span>, <span class='st'>"slug"</span>, <span class='st'>"on_base"</span>),
-   <span class='kw'>columnLabelsX</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"player game count"</span>, <span class='st'>"player at bat count"</span>, <span class='st'>"league"</span>),
-   <span class='kw'>columnLabelsY</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting avg"</span>, <span class='st'>"slug %"</span>, <span class='st'>"on base %"</span>),
-   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Baseball Hitting Stats from 1990-1995"</span>,
-   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>lg</span>),
-   <span class='kw'>types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+   columnLabelsX = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"player game count"</span>, <span class='st'>"player at bat count"</span>, <span class='st'>"league"</span>),
+   columnLabelsY = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting avg"</span>, <span class='st'>"slug %"</span>, <span class='st'>"on base %"</span>),
+   title = <span class='st'>"Baseball Hitting Stats from 1990-1995"</span>,
+   mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>lg</span>),
+   types = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
      <span class='co'># change the shape and add some transparency to the points</span>
-     <span class='kw'>continuous</span> <span class='kw'>=</span> <span class='fu'><a href='wrap.html'>wrap</a></span>(<span class='st'>"smooth_loess"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.50</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='st'>"+"</span>)
+     continuous = <span class='fu'>wrap</span>(<span class='st'>"smooth_loess"</span>, alpha = <span class='fl'>0.50</span>, shape = <span class='st'>"+"</span>)
    ),
-   <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+   showStrips = <span class='fl'>FALSE</span>
  )
 
- <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-2.png' alt='' width='700' height='433' /></div><div class='input'>
+ <span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggduo-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Use "auto" to adapt width of the sub-plots</span>
- <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
-   <span class='no'>dt</span>,
+ <span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(
+   <span class='kw'>dt</span>,
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"g"</span>, <span class='st'>"ab"</span>, <span class='st'>"lg"</span>),
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting_avg"</span>, <span class='st'>"slug"</span>, <span class='st'>"on_base"</span>),
-   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>lg</span>),
-   <span class='kw'>xProportions</span> <span class='kw'>=</span> <span class='st'>"auto"</span>
+   mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>lg</span>),
+   xProportions = <span class='st'>"auto"</span>
  )
 
- <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-3.png' alt='' width='700' height='433' /></div><div class='input'>
+ <span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggduo-3.png' alt='' width='700' height='433' /></div><div class='input'>
  <span class='co'># Custom widths &amp; heights of the sub-plots</span>
- <span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
-   <span class='no'>dt</span>,
+ <span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(
+   <span class='kw'>dt</span>,
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"g"</span>, <span class='st'>"ab"</span>, <span class='st'>"lg"</span>),
    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"batting_avg"</span>, <span class='st'>"slug"</span>, <span class='st'>"on_base"</span>),
-   <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>lg</span>),
-   <span class='kw'>xProportions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>),
-   <span class='kw'>yProportions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>)
+   mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>lg</span>),
+   xProportions = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>2</span>),
+   yProportions = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>)
  )
 
- <span class='fu'>p_</span>(<span class='no'>pm</span>)</div><div class='img'><img src='ggduo-4.png' alt='' width='700' height='433' /></div><div class='input'>
+ <span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggduo-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Example derived from:</span>
 <span class='co'>## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital</span>
 <span class='co'>##   Research and Education.</span>
@@ -379,8 +379,8 @@
 <span class='co'>#  variables and gender. In particular, the researcher is interested in how many</span>
 <span class='co'>#  dimensions (canonical variables) are necessary to understand the association between</span>
 <span class='co'>#  the two sets of variables."</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>psychademic</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>psychademic</span>)</div><div class='output co'>#&gt;  locus_of_control    self_concept        motivation             read     
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>psychademic</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>psychademic</span>)</div><div class='output co'>#&gt;  locus_of_control    self_concept        motivation             read     
 #&gt;  Min.   :-2.23000   Min.   :-2.620000   Length:600         Min.   :28.3  
 #&gt;  1st Qu.:-0.37250   1st Qu.:-0.300000   Class :character   1st Qu.:44.2  
 #&gt;  Median : 0.21000   Median : 0.030000   Mode  :character   Median :52.1  
@@ -394,56 +394,56 @@
 #&gt;  Mean   :52.38   Mean   :51.85   Mean   :51.76                     
 #&gt;  3rd Qu.:59.90   3rd Qu.:58.38   3rd Qu.:58.65                     
 #&gt;  Max.   :67.10   Max.   :75.50   Max.   :74.20                     </div><div class='input'>
-(<span class='no'>psych_variables</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>psychademic</span>, <span class='st'>"psychology"</span>))</div><div class='output co'>#&gt; [1] "locus_of_control" "self_concept"     "motivation"      </div><div class='input'>(<span class='no'>academic_variables</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>psychademic</span>, <span class='st'>"academic"</span>))</div><div class='output co'>#&gt; [1] "read"    "write"   "math"    "science" "sex"    </div><div class='input'>
+(<span class='kw'>psych_variables</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>psychademic</span>, <span class='st'>"psychology"</span>))</div><div class='output co'>#&gt; [1] "locus_of_control" "self_concept"     "motivation"      </div><div class='input'>(<span class='kw'>academic_variables</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>psychademic</span>, <span class='st'>"academic"</span>))</div><div class='output co'>#&gt; [1] "read"    "write"   "math"    "science" "sex"    </div><div class='input'>
 <span class='co'>## Within correlation</span>
-<span class='fu'>p_</span>(<span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>psychademic</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='no'>psych_variables</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='fu'><a href='ggpairs.html'>ggpairs</a></span>(<span class='no'>psychademic</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='no'>academic_variables</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span>(<span class='fu'>ggpairs</span>(<span class='kw'>psychademic</span>, columns = <span class='kw'>psych_variables</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='fu'>ggpairs</span>(<span class='kw'>psychademic</span>, columns = <span class='kw'>academic_variables</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Between correlation</span>
-<span class='no'>loess_with_cor</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>, <span class='no'>method</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>) {
-  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='eval_data_col.html'>eval_data_col</a></span>(<span class='no'>data</span>, <span class='no'>mapping</span>$<span class='no'>x</span>)
-  <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='eval_data_col.html'>eval_data_col</a></span>(<span class='no'>data</span>, <span class='no'>mapping</span>$<span class='no'>y</span>)
-  <span class='no'>cor</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='no'>method</span>)
-  <span class='fu'><a href='ggally_smooth.html'>ggally_smooth_loess</a></span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>) +
-    <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_label</a></span>(
-      <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-        <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-        <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>y</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-        <span class='kw'>lab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>cor</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='kw'>loess_with_cor</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span>, <span class='kw'>...</span>, <span class='kw'>method</span> = <span class='st'>"pearson"</span>) {
+  <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>eval_data_col</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span><span class='op'>$</span><span class='kw'>x</span>)
+  <span class='kw'>y</span> <span class='op'>&lt;-</span> <span class='fu'>eval_data_col</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span><span class='op'>$</span><span class='kw'>y</span>)
+  <span class='kw'>cor</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>, method = <span class='kw'>method</span>)
+  <span class='fu'>ggally_smooth_loess</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span>, <span class='kw'>...</span>) <span class='op'>+</span>
+    <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_label</a></span>(
+      data = <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+        x = <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='kw'>x</span>, na.rm = <span class='fl'>TRUE</span>),
+        y = <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='kw'>y</span>, na.rm = <span class='fl'>TRUE</span>),
+        lab = <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='kw'>cor</span>, digits = <span class='fl'>3</span>)
       ),
-      <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>lab</span>),
-      <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-      <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>,
-      <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> <span class='co'># do not inherit anything from the ...</span>
+      mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>x</span>, y = <span class='kw'>y</span>, label = <span class='kw'>lab</span>),
+      hjust = <span class='fl'>0</span>, vjust = <span class='fl'>1</span>,
+      size = <span class='fl'>5</span>, fontface = <span class='st'>"bold"</span>,
+      inherit.aes = <span class='fl'>FALSE</span> <span class='co'># do not inherit anything from the ...</span>
     )
 }
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
-  <span class='no'>psychademic</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>psych_variables</span>), <span class='no'>academic_variables</span>,
-  <span class='kw'>types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>loess_with_cor</span>),
-  <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(
+  <span class='kw'>psychademic</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='kw'>psych_variables</span>), <span class='kw'>academic_variables</span>,
+  types = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='kw'>loess_with_cor</span>),
+  showStrips = <span class='fl'>FALSE</span>
 )
-<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>)) <span class='co'># ignore warnings from loess</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='kw'>pm</span>)) <span class='co'># ignore warnings from loess</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># add color according to sex</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
-  <span class='no'>psychademic</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>sex</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>psych_variables</span>), <span class='no'>academic_variables</span>,
-  <span class='kw'>types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>loess_with_cor</span>),
-  <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>2</span>)
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(
+  <span class='kw'>psychademic</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>sex</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='kw'>psych_variables</span>), <span class='kw'>academic_variables</span>,
+  types = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='kw'>loess_with_cor</span>),
+  showStrips = <span class='fl'>FALSE</span>,
+  legend = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>2</span>)
 )
-<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-8.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='kw'>pm</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-8.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># add color according to sex</span>
-<span class='no'>pm</span> <span class='kw'>&lt;-</span> <span class='fu'>ggduo</span>(
-  <span class='no'>psychademic</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>motivation</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>psych_variables</span>), <span class='no'>academic_variables</span>,
-  <span class='kw'>types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>continuous</span> <span class='kw'>=</span> <span class='no'>loess_with_cor</span>),
-  <span class='kw'>showStrips</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>legend</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>2</span>)
-) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='no'>pm</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-9.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(
+  <span class='kw'>psychademic</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>motivation</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='kw'>psych_variables</span>), <span class='kw'>academic_variables</span>,
+  types = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='kw'>loess_with_cor</span>),
+  showStrips = <span class='fl'>FALSE</span>,
+  legend = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>2</span>)
+) <span class='op'>+</span>
+  <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(legend.position = <span class='st'>"bottom"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>p_</span>(<span class='kw'>pm</span>))</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggduo-9.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

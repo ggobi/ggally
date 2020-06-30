@@ -183,20 +183,20 @@
     </div>
 
     <div class="ref-description">
-    <p>(Deprecated. See <code><a href='ggally_cor.html'>ggally_cor</a></code>.)</p>
+    <p>(Deprecated. See <code>ggally_cor</code>.)</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggally_cor_v1_5</span>(
-  <span class='no'>data</span>,
-  <span class='no'>mapping</span>,
-  <span class='kw'>alignPercent</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"complete.obs"</span>,
-  <span class='kw'>corAlignPercent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>corMethod</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>corUse</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>displayGrid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>data</span>,
+  <span class='kw'>mapping</span>,
+  alignPercent = <span class='fl'>0.6</span>,
+  method = <span class='st'>"pearson"</span>,
+  use = <span class='st'>"complete.obs"</span>,
+  corAlignPercent = <span class='kw'>NULL</span>,
+  corMethod = <span class='kw'>NULL</span>,
+  corUse = <span class='kw'>NULL</span>,
+  displayGrid = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -249,35 +249,35 @@
     <p>Estimate correlation from the given data.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='ggally_cor.html'>ggally_cor</a></code></p></div>
+    <div class='dont-index'><p><code>ggally_cor</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tips</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"reshape"</span>)
-<span class='fu'>p_</span>(<span class='fu'>ggally_cor_v1_5</span>(<span class='no'>tips</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"total_bill"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"tip"</span>)))</div><div class='img'><img src='ggally_cor_v1_5-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>tips</span>, package = <span class='st'>"reshape"</span>)
+<span class='fu'>p_</span>(<span class='fu'>ggally_cor_v1_5</span>(<span class='kw'>tips</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(x = <span class='st'>"total_bill"</span>, y = <span class='st'>"tip"</span>)))</div><div class='img'><img src='ggally_cor_v1_5-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># display with no grid</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cor_v1_5</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"total_bill"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"tip"</span>),
-  <span class='kw'>displayGrid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>tips</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(x = <span class='st'>"total_bill"</span>, y = <span class='st'>"tip"</span>),
+  displayGrid = <span class='fl'>FALSE</span>
 ))</div><div class='img'><img src='ggally_cor_v1_5-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># change text attributes</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cor_v1_5</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>total_bill</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>tip</span>),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>15</span>,
-  <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='st'>"red"</span>)
+  <span class='kw'>tips</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>total_bill</span>, y = <span class='kw'>tip</span>),
+  size = <span class='fl'>15</span>,
+  colour = <span class='fu'><a href='https://rdrr.io/r/base/AsIs.html'>I</a></span>(<span class='st'>"red"</span>)
 ))</div><div class='img'><img src='ggally_cor_v1_5-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># split by a variable</span>
 <span class='fu'>p_</span>(<span class='fu'>ggally_cor_v1_5</span>(
-  <span class='no'>tips</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"total_bill"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"tip"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"sex"</span>),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>5</span>
+  <span class='kw'>tips</span>,
+  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(x = <span class='st'>"total_bill"</span>, y = <span class='st'>"tip"</span>, color = <span class='st'>"sex"</span>),
+  size = <span class='fl'>5</span>
 ))</div><div class='img'><img src='ggally_cor_v1_5-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

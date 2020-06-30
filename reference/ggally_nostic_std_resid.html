@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code><a href='ggnostic.html'>ggnostic</a></code> standardized residuals — ggally_nostic_std_resid • GGally</title>
+<title><code>ggnostic</code> standardized residuals — ggally_nostic_std_resid • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="<code><a href='ggnostic.html'>ggnostic</a></code> standardized residuals — ggally_nostic_std_resid" />
+<meta property="og:title" content="<code>ggnostic</code> standardized residuals — ggally_nostic_std_resid" />
 <meta property="og:description" content="If non-null pVal and sigma values are given, confidence interval lines will be added to the plot at the specified pVal locations of a N(0, 1) distribution." />
 
 
@@ -177,7 +177,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code><a href='ggnostic.html'>ggnostic</a></code> standardized residuals</h1>
+    <h1><code>ggnostic</code> standardized residuals</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggnostic.R'><code>R/ggnostic.R</code></a></small>
     <div class="hidden name"><code>ggally_nostic_std_resid.Rd</code></div>
     </div>
@@ -186,14 +186,14 @@
     <p>If non-null <code>pVal</code> and <code>sigma</code> values are given, confidence interval lines will be added to the plot at the specified <code>pVal</code> locations of a N(0, 1) distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_nostic_std_resid</span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>, <span class='kw'>sigma</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>ggally_nostic_std_resid</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span>, <span class='kw'>...</span>, sigma = <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data, mapping, ...</th>
-      <td><p>parameters supplied to <code><a href='ggally_nostic_resid.html'>ggally_nostic_resid</a></code></p></td>
+      <td><p>parameters supplied to <code>ggally_nostic_resid</code></p></td>
     </tr>
     <tr>
       <th>sigma</th>
@@ -210,10 +210,10 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='no'>dt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='broomify.html'>broomify</a></span>(<span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>))
-<span class='fu'>p_</span>(<span class='fu'>ggally_nostic_std_resid</span>(<span class='no'>dt</span>, <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>wt</span>, <span class='no'>.std.resid</span>)))</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggally_nostic_std_resid-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>broomify</span>(<span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>wt</span> <span class='op'>+</span> <span class='kw'>qsec</span> <span class='op'>+</span> <span class='kw'>am</span>, data = <span class='kw'>mtcars</span>))
+<span class='fu'>p_</span>(<span class='fu'>ggally_nostic_std_resid</span>(<span class='kw'>dt</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>wt</span>, <span class='kw'>.std.resid</span>)))</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess'</span></div><div class='img'><img src='ggally_nostic_std_resid-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

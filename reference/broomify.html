@@ -186,14 +186,14 @@
     <p>broom::augment a model and add broom::glance and broom::tidy output as attributes. X and Y variables are also added.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>broomify</span>(<span class='no'>model</span>, <span class='kw'>lmStars</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>broomify</span>(<span class='kw'>model</span>, lmStars = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>model to be sent to <code>broom::<a href='https://rdrr.io/pkg/broom/man/reexports.html'>augment</a></code>, <code>broom::<a href='https://rdrr.io/pkg/broom/man/reexports.html'>glance</a></code>, and <code>broom::<a href='https://rdrr.io/pkg/broom/man/reexports.html'>tidy</a></code></p></td>
+      <td><p>model to be sent to <code>broom::<a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></code>, <code>broom::<a href='https://rdrr.io/pkg/generics/man/glance.html'>glance</a></code>, and <code>broom::<a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></code></p></td>
     </tr>
     <tr>
       <th>lmStars</th>
@@ -206,10 +206,10 @@
     <p>broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  <code>var_x</code> and <code>var_y</code> variables are also added as attributes</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>mtcars</span>)
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>qsec</span> + <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
-<span class='no'>broomified_model</span> <span class='kw'>&lt;-</span> <span class='fu'>broomify</span>(<span class='no'>model</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>broomified_model</span>)</div><div class='output co'>#&gt; tibble (S3: tbl_df/tbl/data.frame/broomify)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mtcars</span>)
+<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>wt</span> <span class='op'>+</span> <span class='kw'>qsec</span> <span class='op'>+</span> <span class='kw'>am</span>, data = <span class='kw'>mtcars</span>)
+<span class='kw'>broomified_model</span> <span class='op'>&lt;-</span> <span class='fu'>broomify</span>(<span class='kw'>model</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>broomified_model</span>)</div><div class='output co'>#&gt; tibble (S3: tbl_df/tbl/data.frame/broomify)
 #&gt;  $ .rownames : chr [1:32] "Mazda RX4" "Mazda RX4 Wag" "Datsun 710" "Hornet 4 Drive" ...
 #&gt;  $ mpg       : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
 #&gt;  $ wt        : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...

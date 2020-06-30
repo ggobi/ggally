@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create <code><a href='glyphplot.html'>glyphplot</a></code> data — glyphs • GGally</title>
+<title>Create <code>glyphplot</code> data — glyphs • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="Create <code><a href='glyphplot.html'>glyphplot</a></code> data — glyphs" />
+<meta property="og:title" content="Create <code>glyphplot</code> data — glyphs" />
 <meta property="og:description" content="Create the data needed to generate a glyph plot." />
 
 
@@ -177,7 +177,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create <code><a href='glyphplot.html'>glyphplot</a></code> data</h1>
+    <h1>Create <code>glyphplot</code> data</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/gglyph.R'><code>R/gglyph.R</code></a></small>
     <div class="hidden name"><code>glyphs.Rd</code></div>
     </div>
@@ -187,16 +187,16 @@
     </div>
 
     <pre class="usage"><span class='fu'>glyphs</span>(
-  <span class='no'>data</span>,
-  <span class='no'>x_major</span>,
-  <span class='no'>x_minor</span>,
-  <span class='no'>y_major</span>,
-  <span class='no'>y_minor</span>,
-  <span class='kw'>polar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>rel</a></span>(<span class='fl'>0.95</span>),
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>rel</a></span>(<span class='fl'>0.95</span>),
-  <span class='kw'>y_scale</span> <span class='kw'>=</span> <span class='no'>identity</span>,
-  <span class='kw'>x_scale</span> <span class='kw'>=</span> <span class='no'>identity</span>
+  <span class='kw'>data</span>,
+  <span class='kw'>x_major</span>,
+  <span class='kw'>x_minor</span>,
+  <span class='kw'>y_major</span>,
+  <span class='kw'>y_minor</span>,
+  polar = <span class='fl'>FALSE</span>,
+  height = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>rel</a></span>(<span class='fl'>0.95</span>),
+  width = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>rel</a></span>(<span class='fl'>0.95</span>),
+  y_scale = <span class='kw'>identity</span>,
+  x_scale = <span class='kw'>identity</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -237,22 +237,22 @@ that no scaling is performed.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>nasa</span>)
-<span class='no'>nasaLate</span> <span class='kw'>&lt;-</span> <span class='no'>nasa</span>[
-  <span class='no'>nasa</span>$<span class='no'>date</span> <span class='kw'>&gt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"1998-01-01"</span>) <span class='kw'>&amp;</span>
-  <span class='no'>nasa</span>$<span class='no'>lat</span> <span class='kw'>&gt;=</span> <span class='fl'>20</span> <span class='kw'>&amp;</span>
-  <span class='no'>nasa</span>$<span class='no'>lat</span> <span class='kw'>&lt;=</span> <span class='fl'>40</span> <span class='kw'>&amp;</span>
-  <span class='no'>nasa</span>$<span class='no'>long</span> <span class='kw'>&gt;=</span> -<span class='fl'>80</span> <span class='kw'>&amp;</span>
-  <span class='no'>nasa</span>$<span class='no'>long</span> <span class='kw'>&lt;=</span> -<span class='fl'>60</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>nasa</span>)
+<span class='kw'>nasaLate</span> <span class='op'>&lt;-</span> <span class='kw'>nasa</span>[
+  <span class='kw'>nasa</span><span class='op'>$</span><span class='kw'>date</span> <span class='op'>&gt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"1998-01-01"</span>) <span class='op'>&amp;</span>
+  <span class='kw'>nasa</span><span class='op'>$</span><span class='kw'>lat</span> <span class='op'>&gt;=</span> <span class='fl'>20</span> <span class='op'>&amp;</span>
+  <span class='kw'>nasa</span><span class='op'>$</span><span class='kw'>lat</span> <span class='op'>&lt;=</span> <span class='fl'>40</span> <span class='op'>&amp;</span>
+  <span class='kw'>nasa</span><span class='op'>$</span><span class='kw'>long</span> <span class='op'>&gt;=</span> <span class='op'>-</span><span class='fl'>80</span> <span class='op'>&amp;</span>
+  <span class='kw'>nasa</span><span class='op'>$</span><span class='kw'>long</span> <span class='op'>&lt;=</span> <span class='op'>-</span><span class='fl'>60</span>
 , ]
-<span class='no'>temp.gly</span> <span class='kw'>&lt;-</span> <span class='fu'>glyphs</span>(<span class='no'>nasaLate</span>, <span class='st'>"long"</span>, <span class='st'>"day"</span>, <span class='st'>"lat"</span>, <span class='st'>"surftemp"</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>2.5</span>)</div><div class='output co'>#&gt; <span class='message'>Using width 2.38</span></div><div class='input'><span class='fu'>p_</span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>temp.gly</span>, <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>gx</span>, <span class='no'>gy</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>gid</span>)) +
-  <span class='fu'><a href='add_ref_lines.html'>add_ref_lines</a></span>(<span class='no'>temp.gly</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey90"</span>) +
-  <span class='fu'><a href='add_ref_boxes.html'>add_ref_boxes</a></span>(<span class='no'>temp.gly</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey90"</span>) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span>() +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>() +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>""</span>))</div><div class='img'><img src='glyphs-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>temp.gly</span> <span class='op'>&lt;-</span> <span class='fu'>glyphs</span>(<span class='kw'>nasaLate</span>, <span class='st'>"long"</span>, <span class='st'>"day"</span>, <span class='st'>"lat"</span>, <span class='st'>"surftemp"</span>, height=<span class='fl'>2.5</span>)</div><div class='output co'>#&gt; <span class='message'>Using width 2.38</span></div><div class='input'><span class='fu'>p_</span>(<span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>temp.gly</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>gx</span>, <span class='kw'>gy</span>, group = <span class='kw'>gid</span>)) <span class='op'>+</span>
+  <span class='fu'>add_ref_lines</span>(<span class='kw'>temp.gly</span>, color = <span class='st'>"grey90"</span>) <span class='op'>+</span>
+  <span class='fu'>add_ref_boxes</span>(<span class='kw'>temp.gly</span>, color = <span class='st'>"grey90"</span>) <span class='op'>+</span>
+  <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span>() <span class='op'>+</span>
+  <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>() <span class='op'>+</span>
+  <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(x = <span class='st'>""</span>, y = <span class='st'>""</span>))</div><div class='img'><img src='glyphs-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

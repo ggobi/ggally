@@ -129,7 +129,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="ggmatrix_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggmatrix(): Plot matrix</h1>
@@ -144,11 +144,13 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GGally</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggobi.github.io/ggally">GGally</a></span>)
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></pre></body></html></div>
+<span class="co">#&gt;   +.gg   ggplot2</span>
+</pre></div>
 <div id="ggallyggmatrix" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ggallyggmatrix" class="anchor"></a><code>GGally::ggmatrix()</code>
@@ -158,154 +160,182 @@
 <h2 class="hasAnchor">
 <a href="#generic-example" class="anchor"></a>Generic Example</h2>
 <p>The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">plotList</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()
-<span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">6</span>) {
-  <span class="no">plotList</span><span class="kw">[[</span><span class="no">i</span>]] <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggally_text.html">ggally_text</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Plot #"</span>, <span class="no">i</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">""</span>))
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()
+<span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>) {
+  <span class="kw">plotList</span>[[<span class="kw">i</span>]] <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggally_text.html">ggally_text</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Plot #"</span>, <span class="kw">i</span>, sep = <span class="st">""</span>))
 }
 
 <span class="co"># bare minimum of plotList, nrow, and ncol</span>
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(<span class="no">plotList</span>, <span class="fl">2</span>, <span class="fl">3</span>)
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(<span class="kw">plotList</span>, <span class="fl">2</span>, <span class="fl">3</span>)
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_genExample-1.png" width="700"></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">
+<div class="sourceCode" id="cb3"><pre class="downlit">
+
 <span class="co"># provide more information</span>
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>,
-  <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Matrix Title"</span>
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>,
+  nrow = <span class="fl">2</span>, ncol = <span class="fl">3</span>,
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
+  title = <span class="st">"Matrix Title"</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_genExample-2.png" width="700"></p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r">
+<div class="sourceCode" id="cb4"><pre class="downlit">
+
 <span class="co"># display plots in column order</span>
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>,
-  <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Matrix Title"</span>,
-  <span class="kw">byrow</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>,
+  nrow = <span class="fl">2</span>, ncol = <span class="fl">3</span>,
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
+  title = <span class="st">"Matrix Title"</span>,
+  byrow = <span class="fl">FALSE</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_genExample-3.png" width="700"></p>
 </div>
 <div id="matrix-subsetting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#matrix-subsetting" class="anchor"></a>Matrix Subsetting</h2>
 <p>Individual plots may be retrieved from the plot matrix and can be placed in the plot matrix.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>,
-  <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Matrix Title"</span>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>,
+  nrow = <span class="fl">2</span>, ncol = <span class="fl">3</span>,
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
+  title = <span class="st">"Matrix Title"</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_place-1.png" width="700"></p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">p2</span> <span class="kw">&lt;-</span> <span class="no">pm</span>[<span class="fl">1</span>,<span class="fl">2</span>]
-<span class="no">p3</span> <span class="kw">&lt;-</span> <span class="no">pm</span>[<span class="fl">1</span>,<span class="fl">3</span>]
-<span class="no">p2</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="kw">pm</span>[<span class="fl">1</span>,<span class="fl">2</span>]
+<span class="kw">p3</span> <span class="op">&lt;-</span> <span class="kw">pm</span>[<span class="fl">1</span>,<span class="fl">3</span>]
+<span class="kw">p2</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_place-2.png" width="700"></p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">p3</span></pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">p3</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_place-3.png" width="700"></p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">pm</span>[<span class="fl">1</span>,<span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="no">p3</span>
-<span class="no">pm</span>[<span class="fl">1</span>,<span class="fl">3</span>] <span class="kw">&lt;-</span> <span class="no">p2</span>
-<span class="no">pm</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">pm</span>[<span class="fl">1</span>,<span class="fl">2</span>] <span class="op">&lt;-</span> <span class="kw">p3</span>
+<span class="kw">pm</span>[<span class="fl">1</span>,<span class="fl">3</span>] <span class="op">&lt;-</span> <span class="kw">p2</span>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_place-4.png" width="700"></p>
 </div>
 <div id="themes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#themes" class="anchor"></a>Themes</h2>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>,
-  <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Matrix Title"</span>,
-  <span class="kw">byrow</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>,
+  nrow = <span class="fl">2</span>, ncol = <span class="fl">3</span>,
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
+  title = <span class="st">"Matrix Title"</span>,
+  byrow = <span class="fl">FALSE</span>
 )
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="no">pm</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="kw">pm</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_theme-1.png" width="700"></p>
 </div>
 <div id="axis-control" class="section level2">
 <h2 class="hasAnchor">
 <a href="#axis-control" class="anchor"></a>Axis Control</h2>
 <p>The X and Y axis have booleans to turn on/off the individual plot’s axes on the bottom and left sides of the plot matrix. To save time, <code>showAxisPlotLabels</code> can be set to override <code>showXAxisPlotLabels</code> and <code>showYAxisPlotLabels</code>.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"No Left Plot Axis"</span>,
-  <span class="kw">showYAxisPlotLabels</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>, nrow = <span class="fl">2</span>, ncol = <span class="fl">3</span>,
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
+  title = <span class="st">"No Left Plot Axis"</span>,
+  showYAxisPlotLabels = <span class="fl">FALSE</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_axisControl-1.png" width="700"></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"No Bottom Plot Axis"</span>,
-  <span class="kw">showXAxisPlotLabels</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>, nrow = <span class="fl">2</span>, ncol = <span class="fl">3</span>,
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
+  title = <span class="st">"No Bottom Plot Axis"</span>,
+  showXAxisPlotLabels = <span class="fl">FALSE</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_axisControl-2.png" width="700"></p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"No Plot Axes"</span>,
-  <span class="kw">showAxisPlotLabels</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>, nrow = <span class="fl">2</span>, ncol = <span class="fl">3</span>,
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"D"</span>, <span class="st">"E"</span>),
+  title = <span class="st">"No Plot Axes"</span>,
+  showAxisPlotLabels = <span class="fl">FALSE</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_axisControl-3.png" width="700"></p>
 </div>
 <div id="strips-control" class="section level2">
 <h2 class="hasAnchor">
 <a href="#strips-control" class="anchor"></a>Strips Control</h2>
 <p>By default, the plots in the top row and the right most column will display top-side and right-side strips respectively (<code>showStrips = NULL</code>). If all strips need to appear in each plot, <code>showStrips</code> may be set to <code>TRUE</code>. If all strips should not be displayed, <code>showStrips</code> may be set to <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">tips</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"reshape"</span>)
-<span class="no">plotList</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">total_bill</span>, <span class="no">tip</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">tips</span>, <span class="no">smoker</span> <span class="kw">==</span> <span class="st">"No"</span> <span class="kw">&amp;</span> <span class="no">sex</span> <span class="kw">==</span> <span class="st">"Female"</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="no">time</span> ~ <span class="no">day</span>),
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">total_bill</span>, <span class="no">tip</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">tips</span>, <span class="no">smoker</span> <span class="kw">==</span> <span class="st">"Yes"</span> <span class="kw">&amp;</span> <span class="no">sex</span> <span class="kw">==</span> <span class="st">"Female"</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="no">time</span> ~ <span class="no">day</span>),
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">total_bill</span>, <span class="no">tip</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">tips</span>, <span class="no">smoker</span> <span class="kw">==</span> <span class="st">"No"</span> <span class="kw">&amp;</span> <span class="no">sex</span> <span class="kw">==</span> <span class="st">"Male"</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="no">time</span> ~ <span class="no">day</span>),
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="no">total_bill</span>, <span class="no">tip</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">tips</span>, <span class="no">smoker</span> <span class="kw">==</span> <span class="st">"Yes"</span> <span class="kw">&amp;</span> <span class="no">sex</span> <span class="kw">==</span> <span class="st">"Male"</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="no">time</span> ~ <span class="no">day</span>)
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">tips</span>, package = <span class="st">"reshape"</span>)
+<span class="kw">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">total_bill</span>, <span class="kw">tip</span>, data = <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">tips</span>, <span class="kw">smoker</span> <span class="op">==</span> <span class="st">"No"</span> <span class="op">&amp;</span> <span class="kw">sex</span> <span class="op">==</span> <span class="st">"Female"</span>)) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">time</span> <span class="op">~</span> <span class="kw">day</span>),
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">total_bill</span>, <span class="kw">tip</span>, data = <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">tips</span>, <span class="kw">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span> <span class="op">&amp;</span> <span class="kw">sex</span> <span class="op">==</span> <span class="st">"Female"</span>)) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">time</span> <span class="op">~</span> <span class="kw">day</span>),
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">total_bill</span>, <span class="kw">tip</span>, data = <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">tips</span>, <span class="kw">smoker</span> <span class="op">==</span> <span class="st">"No"</span> <span class="op">&amp;</span> <span class="kw">sex</span> <span class="op">==</span> <span class="st">"Male"</span>)) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">time</span> <span class="op">~</span> <span class="kw">day</span>),
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(<span class="kw">total_bill</span>, <span class="kw">tip</span>, data = <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">tips</span>, <span class="kw">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span> <span class="op">&amp;</span> <span class="kw">sex</span> <span class="op">==</span> <span class="st">"Male"</span>)) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">time</span> <span class="op">~</span> <span class="kw">day</span>)
 )
 
 
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>,
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Total Bill vs Tip"</span>,
-  <span class="kw">showStrips</span> <span class="kw">=</span> <span class="kw">NULL</span> <span class="co"># default</span>
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>, nrow = <span class="fl">2</span>, ncol = <span class="fl">2</span>,
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span>),
+  title = <span class="st">"Total Bill vs Tip"</span>,
+  showStrips = <span class="kw">NULL</span> <span class="co"># default</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_stripControl-1.png" width="700"></p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>,
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Total Bill vs Tip"</span>,
-  <span class="kw">showStrips</span> <span class="kw">=</span> <span class="fl">TRUE</span>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>, nrow = <span class="fl">2</span>, ncol = <span class="fl">2</span>,
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span>),
+  title = <span class="st">"Total Bill vs Tip"</span>,
+  showStrips = <span class="fl">TRUE</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_stripControl-2.png" width="700"></p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
-  <span class="no">plotList</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>,
-  <span class="kw">yAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),
-  <span class="kw">xAxisLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span>),
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Total Bill vs Tip"</span>,
-  <span class="kw">showStrips</span> <span class="kw">=</span> <span class="fl">FALSE</span>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span>(
+  <span class="kw">plotList</span>, nrow = <span class="fl">2</span>, ncol = <span class="fl">2</span>,
+  yAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),
+  xAxisLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span>),
+  title = <span class="st">"Total Bill vs Tip"</span>,
+  showStrips = <span class="fl">FALSE</span>
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_stripControl-3.png" width="700"></p>
 </div>
 </div>

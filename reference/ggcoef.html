@@ -187,23 +187,23 @@
     </div>
 
     <pre class="usage"><span class='fu'>ggcoef</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes_string</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"term"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"estimate"</span>),
-  <span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>exclude_intercept</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>vline</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>vline_intercept</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>vline_color</span> <span class='kw'>=</span> <span class='st'>"gray50"</span>,
-  <span class='kw'>vline_linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>,
-  <span class='kw'>vline_size</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>errorbar_color</span> <span class='kw'>=</span> <span class='st'>"gray25"</span>,
-  <span class='kw'>errorbar_height</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>errorbar_linetype</span> <span class='kw'>=</span> <span class='st'>"solid"</span>,
-  <span class='kw'>errorbar_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>sort</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"ascending"</span>, <span class='st'>"descending"</span>),
-  <span class='no'>...</span>
+  <span class='kw'>x</span>,
+  mapping = <span class='fu'>aes_string</span>(y = <span class='st'>"term"</span>, x = <span class='st'>"estimate"</span>),
+  conf.int = <span class='fl'>TRUE</span>,
+  conf.level = <span class='fl'>0.95</span>,
+  exponentiate = <span class='fl'>FALSE</span>,
+  exclude_intercept = <span class='fl'>FALSE</span>,
+  vline = <span class='fl'>TRUE</span>,
+  vline_intercept = <span class='st'>"auto"</span>,
+  vline_color = <span class='st'>"gray50"</span>,
+  vline_linetype = <span class='st'>"dotted"</span>,
+  vline_size = <span class='fl'>1</span>,
+  errorbar_color = <span class='st'>"gray25"</span>,
+  errorbar_height = <span class='fl'>0</span>,
+  errorbar_linetype = <span class='st'>"solid"</span>,
+  errorbar_size = <span class='fl'>0.5</span>,
+  sort = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"ascending"</span>, <span class='st'>"descending"</span>),
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -211,7 +211,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a model object to be tidied with <code><a href='https://rdrr.io/pkg/broom/man/reexports.html'>tidy</a></code> or a data frame (see Details)</p></td>
+      <td><p>a model object to be tidied with <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></code> or a data frame (see Details)</p></td>
     </tr>
     <tr>
       <th>mapping</th>
@@ -223,12 +223,12 @@
     </tr>
     <tr>
       <th>conf.level</th>
-      <td><p>level of confidence intervals (passed to <code><a href='https://rdrr.io/pkg/broom/man/reexports.html'>tidy</a></code>
+      <td><p>level of confidence intervals (passed to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></code>
 if <code>x</code> is not a data frame)</p></td>
     </tr>
     <tr>
       <th>exponentiate</th>
-      <td><p>if <code>TRUE</code>, x-axis will be logarithmic (also passed to <code><a href='https://rdrr.io/pkg/broom/man/reexports.html'>tidy</a></code>
+      <td><p>if <code>TRUE</code>, x-axis will be logarithmic (also passed to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></code>
 if <code>x</code> is not a data frame)</p></td>
     </tr>
     <tr>
@@ -285,15 +285,15 @@ if <code>x</code> is not a data frame)</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>broom</span>)
-<span class='no'>reg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Sepal.Width</span> + <span class='no'>Petal.Length</span> + <span class='no'>Petal.Width</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
-<span class='fu'>p_</span>(<span class='fu'>ggcoef</span>(<span class='no'>reg</span>))</div><div class='img'><img src='ggcoef-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>Titanic</span>)
-<span class='no'>reg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='no'>Survived</span> ~ <span class='no'>Sex</span> + <span class='no'>Age</span> + <span class='no'>Class</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='no'>binomial</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>d</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='no'>d</span>$<span class='no'>Freq</span>)
-<span class='fu'>ggcoef</span>(<span class='no'>reg2</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ggcoef-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggcoef</span>(
-  <span class='no'>reg2</span>, <span class='kw'>exponentiate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exclude_intercept</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>errorbar_height</span> <span class='kw'>=</span> <span class='fl'>.2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>sort</span> <span class='kw'>=</span> <span class='st'>"ascending"</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://github.com/tidyverse/broom'>broom</a></span>)
+<span class='kw'>reg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Sepal.Width</span> <span class='op'>+</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> <span class='kw'>Petal.Width</span>, data = <span class='kw'>iris</span>)
+<span class='fu'>p_</span>(<span class='fu'>ggcoef</span>(<span class='kw'>reg</span>))</div><div class='img'><img src='ggcoef-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>Titanic</span>)
+<span class='kw'>reg2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>Survived</span> <span class='op'>~</span> <span class='kw'>Sex</span> <span class='op'>+</span> <span class='kw'>Age</span> <span class='op'>+</span> <span class='kw'>Class</span>, family = <span class='kw'>binomial</span>, data = <span class='kw'>d</span>, weights = <span class='kw'>d</span><span class='op'>$</span><span class='kw'>Freq</span>)
+<span class='fu'>ggcoef</span>(<span class='kw'>reg2</span>, exponentiate = <span class='fl'>TRUE</span>)</div><div class='img'><img src='ggcoef-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggcoef</span>(
+  <span class='kw'>reg2</span>, exponentiate = <span class='fl'>TRUE</span>, exclude_intercept = <span class='fl'>TRUE</span>,
+  errorbar_height = <span class='fl'>.2</span>, color = <span class='st'>"blue"</span>, sort = <span class='st'>"ascending"</span>
 )</div><div class='img'><img src='ggcoef-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

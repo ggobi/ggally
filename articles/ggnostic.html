@@ -129,7 +129,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="ggnostic_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggnostic(): Model diagnostics</h1>
@@ -144,11 +144,13 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GGally</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggobi.github.io/ggally">GGally</a></span>)
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></pre></body></html></div>
+<span class="co">#&gt;   +.gg   ggplot2</span>
+</pre></div>
 <div id="ggallyggnostic" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ggallyggnostic" class="anchor"></a><code>GGally::ggnostic()</code>
@@ -244,10 +246,11 @@
 <h2 class="hasAnchor">
 <a href="#life-expectancy-model-fitting" class="anchor"></a>Life Expectancy Model Fitting</h2>
 <p>Looking at the dataset <code><a href="https://rdrr.io/r/datasets/state.html">datasets::state.x77</a></code>, we will fit a multiple regression model for Life Expectancy.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># make a data.frame and fix column names</span>
-<span class="no">state</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="no">state.x77</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">state</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">6</span>)] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Life.Exp"</span>, <span class="st">"HS.Grad"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">state</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># make a data.frame and fix column names</span>
+<span class="kw">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">state.x77</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="kw">state</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">4</span>, <span class="fl">6</span>)] <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Life.Exp"</span>, <span class="st">"HS.Grad"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">state</span>)
 <span class="co">#&gt; 'data.frame':    50 obs. of  8 variables:</span>
 <span class="co">#&gt;  $ Population: num  3615 365 2212 2110 21198 ...</span>
 <span class="co">#&gt;  $ Income    : num  3624 6315 4530 3378 5114 ...</span>
@@ -259,64 +262,10 @@
 <span class="co">#&gt;  $ Area      : num  50708 566432 113417 51945 156361 ...</span>
 
 <span class="co"># fit full model</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">Life.Exp</span> ~ <span class="no">.</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">state</span>)
+<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Life.Exp</span> <span class="op">~</span> <span class="kw">.</span>, data = <span class="kw">state</span>)
 <span class="co"># reduce to "best fit" model with</span>
-<span class="no">model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>(<span class="no">model</span>, <span class="kw">trace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">model</span>)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
-<span class="co">#&gt;     data = state)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
-<span class="co">#&gt; -1.47095 -0.53464 -0.03701  0.57621  1.50683 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***</span>
-<span class="co">#&gt; Population   5.014e-05  2.512e-05   1.996  0.05201 .  </span>
-<span class="co">#&gt; Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***</span>
-<span class="co">#&gt; HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** </span>
-<span class="co">#&gt; Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span>
-<span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span>
-<span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span></pre></body></html></div>
-<p>Next, we look at the variables for any high (|value| &gt; 0.8) correlation values and general interaction behavior.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># look at variables for high correlation (none)</span>
-<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span>(<span class="no">state</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span>))</pre></body></html></div>
-<p><img src="ggnostic_files/figure-html/nostic_scatmat-1.png" width="700"></p>
-<p>All variables appear to be ok. Next, we look at the model diagnostics.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># look at model diagnostics</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="no">model</span>)
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></pre></body></html></div>
-<p><img src="ggnostic_files/figure-html/nostic_diag-1.png" width="700"></p>
-<ul>
-<li>The residuals appear to be normally distributed. There are a couple residual outliers, but 2.5 outliers are expected.</li>
-<li>There are 5 leverage points according the diagonal of the hat matrix</li>
-<li>There are 2 leverage points according to Cook’s distance. One is <strong>much</strong> larger than the other.</li>
-</ul>
-<p>Let’s remove the largest data point first to try and define a better model.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># very high life expectancy</span>
-<span class="no">state</span>[<span class="fl">11</span>, ]
-<span class="co">#&gt;        Population Income Illiteracy Life.Exp Murder HS.Grad Frost Area</span>
-<span class="co">#&gt; Hawaii        868   4963        1.9     73.6    6.2    61.9     0 6425</span>
-<span class="no">state_no_hawaii</span> <span class="kw">&lt;-</span> <span class="no">state</span>[-<span class="fl">11</span>, ]
-<span class="no">model_no_hawaii</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">Life.Exp</span> ~ <span class="no">Population</span> + <span class="no">Murder</span> + <span class="no">HS.Grad</span> + <span class="no">Frost</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">state_no_hawaii</span>)
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="no">model_no_hawaii</span>)
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></pre></body></html></div>
-<p><img src="ggnostic_files/figure-html/nostic_no_hawaii-1.png" width="700"></p>
-<p>There are no more outrageous Cook’s distance values. The model without Hawaii appears to be a good fitting model.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">model</span>)
+<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>(<span class="kw">model</span>, trace = <span class="fl">FALSE</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">model</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
@@ -339,7 +288,69 @@
 <span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span>
 <span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span>
 <span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">model_no_hawaii</span>)
+</pre></div>
+<p>Next, we look at the variables for any high (|value| &gt; 0.8) correlation values and general interaction behavior.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co"># look at variables for high correlation (none)</span>
+<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span>(<span class="kw">state</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span>))
+</pre></div>
+<p><img src="ggnostic_files/figure-html/nostic_scatmat-1.png" width="700"></p>
+<p>All variables appear to be ok. Next, we look at the model diagnostics.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># look at model diagnostics</span>
+<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="kw">model</span>)
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+</pre></div>
+<p><img src="ggnostic_files/figure-html/nostic_diag-1.png" width="700"></p>
+<ul>
+<li>The residuals appear to be normally distributed. There are a couple residual outliers, but 2.5 outliers are expected.</li>
+<li>There are 5 leverage points according the diagonal of the hat matrix</li>
+<li>There are 2 leverage points according to Cook’s distance. One is <strong>much</strong> larger than the other.</li>
+</ul>
+<p>Let’s remove the largest data point first to try and define a better model.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co"># very high life expectancy</span>
+<span class="kw">state</span>[<span class="fl">11</span>, ]
+<span class="co">#&gt;        Population Income Illiteracy Life.Exp Murder HS.Grad Frost Area</span>
+<span class="co">#&gt; Hawaii        868   4963        1.9     73.6    6.2    61.9     0 6425</span>
+<span class="kw">state_no_hawaii</span> <span class="op">&lt;-</span> <span class="kw">state</span>[<span class="op">-</span><span class="fl">11</span>, ]
+<span class="kw">model_no_hawaii</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Life.Exp</span> <span class="op">~</span> <span class="kw">Population</span> <span class="op">+</span> <span class="kw">Murder</span> <span class="op">+</span> <span class="kw">HS.Grad</span> <span class="op">+</span> <span class="kw">Frost</span>, data = <span class="kw">state_no_hawaii</span>)
+<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="kw">model_no_hawaii</span>)
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+</pre></div>
+<p><img src="ggnostic_files/figure-html/nostic_no_hawaii-1.png" width="700"></p>
+<p>There are no more outrageous Cook’s distance values. The model without Hawaii appears to be a good fitting model.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">model</span>)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
+<span class="co">#&gt;     data = state)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -1.47095 -0.53464 -0.03701  0.57621  1.50683 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***</span>
+<span class="co">#&gt; Population   5.014e-05  2.512e-05   1.996  0.05201 .  </span>
+<span class="co">#&gt; Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***</span>
+<span class="co">#&gt; HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** </span>
+<span class="co">#&gt; Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span>
+<span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">model_no_hawaii</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
@@ -361,15 +372,17 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Residual standard error: 0.6796 on 44 degrees of freedom</span>
 <span class="co">#&gt; Multiple R-squared:  0.7483, Adjusted R-squared:  0.7254 </span>
-<span class="co">#&gt; F-statistic: 32.71 on 4 and 44 DF,  p-value: 1.15e-12</span></pre></body></html></div>
+<span class="co">#&gt; F-statistic: 32.71 on 4 and 44 DF,  p-value: 1.15e-12</span>
+</pre></div>
 <p>Since there is only a marginal improvement by removing Hawaii, the original model should be used to explain life expectancy.</p>
 </div>
 <div id="full-diagnostic-plot-matrix-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#full-diagnostic-plot-matrix-example" class="anchor"></a>Full diagnostic plot matrix example</h2>
 <p>The following lines of code will display different model diagnostic plot matrices for the same statistical model. The first one is of the default settings. The second adds color according to the <code>species</code>. Finally, the third displays all possible columns and uses <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> to display the fitted points and response variables.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">flea_model</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">head</span> ~ <span class="no">.</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">flea</span>), <span class="kw">trace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">flea_model</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">flea_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">head</span> <span class="op">~</span> <span class="kw">.</span>, data = <span class="kw">flea</span>), trace = <span class="fl">FALSE</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="kw">flea_model</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = head ~ species + tars1 + tars2 + aede1, data = flea)</span>
@@ -393,30 +406,35 @@
 <span class="co">#&gt; Multiple R-squared:  0.685,  Adjusted R-squared:  0.6618 </span>
 <span class="co">#&gt; F-statistic: 29.57 on 5 and 68 DF,  p-value: 7.997e-16</span>
 <span class="co"># default output</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="no">flea_model</span>)
+<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="kw">flea_model</span>)
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></pre></body></html></div>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+</pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_flea-1.png" width="700"></p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># color'ed output</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="no">flea_model</span>, <span class="kw">mapping</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">species</span>))
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="co"># color'ed output</span>
+<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(<span class="kw">flea_model</span>, mapping = <span class="kw">ggplot2</span>::<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(color = <span class="kw">species</span>))
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></pre></body></html></div>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+</pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_flea-2.png" width="700"></p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># full color'ed output</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="co"># full color'ed output</span>
 <span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span>(
-  <span class="no">flea_model</span>,
-  <span class="kw">mapping</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">species</span>),
-  <span class="kw">columnsY</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"head"</span>, <span class="st">".fitted"</span>, <span class="st">".se.fit"</span>, <span class="st">".resid"</span>, <span class="st">".std.resid"</span>, <span class="st">".hat"</span>, <span class="st">".sigma"</span>, <span class="st">".cooksd"</span>),
-  <span class="kw">continuous</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">default</span> <span class="kw">=</span> <span class="no">ggally_smooth</span>, <span class="kw">.fitted</span> <span class="kw">=</span> <span class="no">ggally_smooth</span>)
+  <span class="kw">flea_model</span>,
+  mapping = <span class="kw">ggplot2</span>::<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(color = <span class="kw">species</span>),
+  columnsY = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"head"</span>, <span class="st">".fitted"</span>, <span class="st">".se.fit"</span>, <span class="st">".resid"</span>, <span class="st">".std.resid"</span>, <span class="st">".hat"</span>, <span class="st">".sigma"</span>, <span class="st">".cooksd"</span>),
+  continuous = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(default = <span class="kw">ggally_smooth</span>, .fitted = <span class="kw">ggally_smooth</span>)
 )
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></pre></body></html></div>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
+</pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_flea-3.png" width="700"></p>
 </div>
 </div>

@@ -189,11 +189,11 @@ and correlation printed in the upper triangle.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggscatmat</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>data</span>),
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>corMethod</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>
+  <span class='kw'>data</span>,
+  columns = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>data</span>),
+  color = <span class='kw'>NULL</span>,
+  alpha = <span class='fl'>1</span>,
+  corMethod = <span class='st'>"pearson"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -228,11 +228,11 @@ Defaults to <code>NULL</code>, i.e. no coloring. If supplied, it will be convert
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># small function to display plots only if it's interactive</span>
-<span class='no'>p_</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>GGally</span><span class='kw ns'>::</span><span class='no'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>flea</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>flea</span>)
 
-<span class='fu'>p_</span>(<span class='fu'>ggscatmat</span>(<span class='no'>flea</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>))</div><div class='img'><img src='ggscatmat-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='fu'>ggscatmat</span>(<span class='no'>flea</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"species"</span>))</div><div class='img'><img src='ggscatmat-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>p_</span>(<span class='fu'>ggscatmat</span>(<span class='kw'>flea</span>, columns = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>))</div><div class='img'><img src='ggscatmat-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='fu'>ggscatmat</span>(<span class='kw'>flea</span>, columns = <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>, color = <span class='st'>"species"</span>))</div><div class='img'><img src='ggscatmat-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

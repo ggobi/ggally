@@ -186,7 +186,7 @@
     <p>Make tile plot or density plot as compact as possible.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_facetdensitystrip</span>(<span class='no'>data</span>, <span class='no'>mapping</span>, <span class='no'>...</span>, <span class='kw'>den_strip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>ggally_facetdensitystrip</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span>, <span class='kw'>...</span>, den_strip = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -214,7 +214,7 @@
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span>(<span class='no'>ggally_facetdensity</span>)</div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span>(<span class='kw'>ggally_facetdensity</span>)</div><div class='output co'>#&gt; 
 #&gt; gglly_&gt; # Small function to display plots only if it's interactive
 #&gt; gglly_&gt; p_ &lt;- GGally::print_if_interactive
 #&gt; 
@@ -224,7 +224,7 @@
 #&gt; gglly_&gt; p_(ggally_facetdensity(
 #&gt; gglly_+   tips,
 #&gt; gglly_+   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
-#&gt; gglly_+ ))</div><div class='img'><img src='ggally_facetdensitystrip-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span>(<span class='no'>ggally_denstrip</span>)</div><div class='output co'>#&gt; 
+#&gt; gglly_+ ))</div><div class='img'><img src='ggally_facetdensitystrip-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/example.html'>example</a></span>(<span class='kw'>ggally_denstrip</span>)</div><div class='output co'>#&gt; 
 #&gt; gglly_&gt; # Small function to display plots only if it's interactive
 #&gt; gglly_&gt; p_ &lt;- GGally::print_if_interactive
 #&gt; 

@@ -186,7 +186,7 @@
     <p>Remove colour mapping unless found in select mapping keys</p>
     </div>
 
-    <pre class="usage"><span class='fu'>remove_color_unless_equal</span>(<span class='no'>mapping</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>, <span class='st'>"y"</span>))</pre>
+    <pre class="usage"><span class='fu'>remove_color_unless_equal</span>(<span class='kw'>mapping</span>, to = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>, <span class='st'>"y"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,10 +206,10 @@
     <p>Aes mapping with colour mapping kept only if found in selected mapping keys.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mapping</span> <span class='kw'>&lt;-</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>age</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>sex</span>)
+    <pre class="examples"><div class='input'><span class='kw'>mapping</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>sex</span>, y = <span class='kw'>age</span>, colour = <span class='kw'>sex</span>)
 
-<span class='no'>mapping</span> <span class='kw'>&lt;-</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>sex</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>age</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='no'>region</span>)
-<span class='fu'>remove_color_unless_equal</span>(<span class='no'>mapping</span>)</div><div class='output co'>#&gt; Aesthetic mapping: 
+<span class='kw'>mapping</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>sex</span>, y = <span class='kw'>age</span>, colour = <span class='kw'>region</span>)
+<span class='fu'>remove_color_unless_equal</span>(<span class='kw'>mapping</span>)</div><div class='output co'>#&gt; Aesthetic mapping: 
 #&gt; * `x` -&gt; `sex`
 #&gt; * `y` -&gt; `age`</div></pre>
   </div>

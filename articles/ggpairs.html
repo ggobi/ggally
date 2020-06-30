@@ -129,7 +129,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="ggpairs_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggpairs(): Pairwise plot matrix</h1>
@@ -144,11 +144,13 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GGally</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggobi.github.io/ggally">GGally</a></span>)
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></pre></body></html></div>
+<span class="co">#&gt;   +.gg   ggplot2</span>
+</pre></div>
 <div id="ggallyggpairs" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ggallyggpairs" class="anchor"></a><code>GGally::ggpairs()</code>
@@ -159,9 +161,10 @@
 <h2 class="hasAnchor">
 <a href="#columns-and-mapping" class="anchor"></a>Columns and Mapping</h2>
 <p>The <code>columns</code> displayed default to all columns of the provided <code>data</code>. To subset to only a few columns, use the <code>columns</code> parameter.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">tips</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"reshape"</span>)
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="no">tips</span>)
-<span class="no">pm</span>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">tips</span>, package = <span class="st">"reshape"</span>)
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="kw">tips</span>)
+<span class="kw">pm</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
@@ -173,24 +176,29 @@
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_columns-1.png" width="700"></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">## too many plots for this example.</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co">## too many plots for this example.</span>
 
 <span class="co">## reduce the columns being displayed</span>
 <span class="co">## these two lines of code produce the same plot matrix</span>
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">2</span>))
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>), <span class="kw">columnLabels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Total Bill"</span>, <span class="st">"Time of Day"</span>, <span class="st">"Tip"</span>))
-<span class="no">pm</span>
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="kw">tips</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">2</span>))
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="kw">tips</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>), columnLabels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Total Bill"</span>, <span class="st">"Time of Day"</span>, <span class="st">"Tip"</span>))
+<span class="kw">pm</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_columns-2.png" width="700"></p>
 <p>Aesthetics can be applied to every subplot with the <code>mapping</code> parameter.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="no">tips</span>, <span class="kw">mapping</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">sex</span>), <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>))
-<span class="no">pm</span>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="kw">tips</span>, mapping = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(color = <span class="kw">sex</span>), columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>))
+<span class="kw">pm</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_mapping-1.png" width="700"></p>
 <p>Since the plots are default plots (or are helper functions from GGally), the aesthetic color is altered to be appropriate. Looking at the example above, ‘tip’ vs ‘total_bill’ (pm[3,1]) needs the <code>color</code> aesthetic, while ‘time’ vs ‘total_bill’ needs the <code>fill</code> aesthetic. If custom functions are supplied, no aesthetic alterations will be done.</p>
 </div>
@@ -218,26 +226,30 @@
 <code>mapping</code>: if mapping is provided, only the section’s mapping will be overwritten</li>
 </ul>
 <p>The list of current valid <code>ggally_NAME</code> functions is visible in <code><a href="../reference/vig_ggally.html">vig_ggally("ggally_plots")</a></code>.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
-  <span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
-  <span class="kw">lower</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="kw">continuous</span> <span class="kw">=</span> <span class="st">"smooth"</span>,
-    <span class="kw">combo</span> <span class="kw">=</span> <span class="st">"facetdensity"</span>,
-    <span class="kw">mapping</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">time</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
+  <span class="kw">tips</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
+  lower = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+    continuous = <span class="st">"smooth"</span>,
+    combo = <span class="st">"facetdensity"</span>,
+    mapping = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(color = <span class="kw">time</span>)
   )
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_section-1.png" width="700"></p>
 <p>A section list may be set to the character string <code>"blank"</code> or <code>NULL</code> if the section should be skipped when printed.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
-  <span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
-  <span class="kw">upper</span> <span class="kw">=</span> <span class="st">"blank"</span>,
-  <span class="kw">diag</span> <span class="kw">=</span> <span class="kw">NULL</span>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
+  <span class="kw">tips</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
+  upper = <span class="st">"blank"</span>,
+  diag = <span class="kw">NULL</span>
 )
-<span class="no">pm</span>
+<span class="kw">pm</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_blank-1.png" width="700"></p>
 </div>
 <div id="custom-functions" class="section level2">
@@ -245,39 +257,45 @@
 <a href="#custom-functions" class="anchor"></a>Custom Functions</h2>
 <p>The <code>ggally_NAME</code> functions do not provide all graphical options. Instead of supplying a character string to a <code>continuous</code>, <code>combo</code>, or <code>discrete</code> element within <code>upper</code>, <code>lower</code>, or <code>diag</code>, a custom function may be given.</p>
 <p>The custom function should follow the api of</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">custom_function</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">mapping</span>, <span class="no">...</span>){
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">custom_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>, <span class="kw">mapping</span>, <span class="kw">...</span>){
   <span class="co"># produce ggplot2 object here</span>
-}</pre></body></html></div>
-<p>There is no requirement to what happens within the function, as long as a ggplot2 object is returned.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">my_bin</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>, <span class="no">mapping</span>, <span class="no">...</span>, <span class="no">low</span> <span class="kw">=</span> <span class="st">"#132B43"</span>, <span class="no">high</span> <span class="kw">=</span> <span class="st">"#56B1F7"</span>) {
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>, <span class="kw">mapping</span> <span class="kw">=</span> <span class="no">mapping</span>) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bin2d.html">geom_bin2d</a></span>(<span class="no">...</span>) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span>(<span class="kw">low</span> <span class="kw">=</span> <span class="no">low</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="no">high</span>)
 }
-<span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
-  <span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
-  <span class="kw">lower</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="kw">continuous</span> <span class="kw">=</span> <span class="no">my_bin</span>
+</pre></div>
+<p>There is no requirement to what happens within the function, as long as a ggplot2 object is returned.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">my_bin</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>, <span class="kw">mapping</span>, <span class="kw">...</span>, <span class="kw">low</span> = <span class="st">"#132B43"</span>, <span class="kw">high</span> = <span class="st">"#56B1F7"</span>) {
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(data = <span class="kw">data</span>, mapping = <span class="kw">mapping</span>) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bin2d.html">geom_bin2d</a></span>(<span class="kw">...</span>) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span>(low = <span class="kw">low</span>, high = <span class="kw">high</span>)
+}
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
+  <span class="kw">tips</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
+  lower = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+    continuous = <span class="kw">my_bin</span>
   )
 )
-<span class="no">pm</span>
+<span class="kw">pm</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_custom_function-1.png" width="700"></p>
 </div>
 <div id="function-wrapping" class="section level2">
 <h2 class="hasAnchor">
 <a href="#function-wrapping" class="anchor"></a>Function Wrapping</h2>
 <p>The examples above use default parameters to each of the subplots. One of the immediate parameters to be set it <code>binwidth</code>. This parameters is only needed in the lower, combination plots where one variable is continuous while the other variable is discrete.</p>
-<p>To change the default parameter <code>binwidth</code> setting, we will <code><a href="../reference/wrap.html">wrap()</a></code> the function. <code><a href="../reference/wrap.html">wrap()</a></code> first parameter should be a character string or a custom function. The remaining parameters supplied to wrap will be supplied to the function at run time.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
-  <span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
-  <span class="kw">lower</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="kw">combo</span> <span class="kw">=</span> <span class="fu"><a href="../reference/wrap.html">wrap</a></span>(<span class="st">"facethist"</span>, <span class="kw">binwidth</span> <span class="kw">=</span> <span class="fl">1</span>),
-    <span class="kw">continuous</span> <span class="kw">=</span> <span class="fu"><a href="../reference/wrap.html">wrap</a></span>(<span class="no">my_bin</span>, <span class="kw">binwidth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">0.5</span>), <span class="kw">high</span> <span class="kw">=</span> <span class="st">"red"</span>)
+<p>To change the default parameter <code>binwidth</code> setting, we will <code><a href="../reference/wrap_fn_with_param_arg.html">wrap()</a></code> the function. <code><a href="../reference/wrap_fn_with_param_arg.html">wrap()</a></code> first parameter should be a character string or a custom function. The remaining parameters supplied to wrap will be supplied to the function at run time.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(
+  <span class="kw">tips</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>),
+  lower = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+    combo = <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span>(<span class="st">"facethist"</span>, binwidth = <span class="fl">1</span>),
+    continuous = <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span>(<span class="kw">my_bin</span>, binwidth = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">0.5</span>), high = <span class="st">"red"</span>)
   )
 )
-<span class="no">pm</span></pre></body></html></div>
+<span class="kw">pm</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_wrap-1.png" width="700"></p>
 <p>To get finer control over parameters, please look into custom functions.</p>
 </div>
@@ -286,16 +304,20 @@
 <a href="#plot-matrix-subsetting" class="anchor"></a>Plot Matrix Subsetting</h2>
 <p>Please look at the <a href="#ggallyggmatrix">vignette for ggmatrix</a> on plot matrix manipulations.</p>
 <p>Small <code><a href="../reference/ggpairs.html">ggpairs()</a></code> example:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">pm</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="no">tips</span>, <span class="kw">columns</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>))
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="kw">tips</span>, columns = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"total_bill"</span>, <span class="st">"time"</span>, <span class="st">"tip"</span>))
 <span class="co"># retrieve the third row, first column plot</span>
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="no">pm</span>[<span class="fl">3</span>,<span class="fl">1</span>]
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="no">p</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">time</span>)
-<span class="no">p</span></pre></body></html></div>
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="kw">pm</span>[<span class="fl">3</span>,<span class="fl">1</span>]
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(color = <span class="kw">time</span>)
+<span class="kw">p</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_matrix-1.png" width="700"></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">pm</span>[<span class="fl">3</span>,<span class="fl">1</span>] <span class="kw">&lt;-</span> <span class="no">p</span>
-<span class="no">pm</span>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="kw">pm</span>[<span class="fl">3</span>,<span class="fl">1</span>] <span class="op">&lt;-</span> <span class="kw">p</span>
+<span class="kw">pm</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_matrix-2.png" width="700"></p>
 </div>
 <div id="themes" class="section level2">
@@ -303,10 +325,12 @@
 <a href="#themes" class="anchor"></a>Themes</h2>
 <p>Please look at the <a href="#ggallyggmatrix">vignette for ggmatrix</a> on plot matrix manipulations.</p>
 <p>Small <code><a href="../reference/ggpairs.html">ggpairs()</a></code> example:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">pmBW</span> <span class="kw">&lt;-</span> <span class="no">pm</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
-<span class="no">pmBW</span>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">pmBW</span> <span class="op">&lt;-</span> <span class="kw">pm</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()
+<span class="kw">pmBW</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></pre></body></html></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+</pre></div>
 <p><img src="ggpairs_files/figure-html/ggpairs_theme-1.png" width="700"></p>
 </div>
 <div id="references" class="section level2">

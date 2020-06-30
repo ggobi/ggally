@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>lowertriangle - rearrange dataset as the preparation of <code><a href='ggscatmat.html'>ggscatmat</a></code> function — lowertriangle • GGally</title>
+<title>lowertriangle - rearrange dataset as the preparation of <code>ggscatmat</code> function — lowertriangle • GGally</title>
 
 
 <!-- jquery -->
@@ -45,7 +45,7 @@
 
 
 
-<meta property="og:title" content="lowertriangle - rearrange dataset as the preparation of <code><a href='ggscatmat.html'>ggscatmat</a></code> function — lowertriangle" />
+<meta property="og:title" content="lowertriangle - rearrange dataset as the preparation of <code>ggscatmat</code> function — lowertriangle" />
 <meta property="og:description" content="function for making the melted dataset used to plot the lowertriangle scatterplots." />
 
 
@@ -177,7 +177,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>lowertriangle - rearrange dataset as the preparation of <code><a href='ggscatmat.html'>ggscatmat</a></code> function</h1>
+    <h1>lowertriangle - rearrange dataset as the preparation of <code>ggscatmat</code> function</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggscatmat.R'><code>R/ggscatmat.R</code></a></small>
     <div class="hidden name"><code>lowertriangle.Rd</code></div>
     </div>
@@ -186,7 +186,7 @@
     <p>function for making the melted dataset used to plot the lowertriangle scatterplots.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lowertriangle</span>(<span class='no'>data</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>data</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>lowertriangle</span>(<span class='kw'>data</span>, columns = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>data</span>), color = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,20 +210,20 @@
     <p>Mengjia Ni, Di Cook</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>flea</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>lowertriangle</span>(<span class='no'>flea</span>, <span class='kw'>columns</span><span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>4</span>))</div><div class='output co'>#&gt;   xvalue yvalue xslot yslot  xlab  ylab
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>flea</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>lowertriangle</span>(<span class='kw'>flea</span>, columns= <span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>))</div><div class='output co'>#&gt;   xvalue yvalue xslot yslot  xlab  ylab
 #&gt; 1    191     NA     1     1 tars1 tars1
 #&gt; 2    185     NA     1     1 tars1 tars1
 #&gt; 3    200     NA     1     1 tars1 tars1
 #&gt; 4    173     NA     1     1 tars1 tars1
 #&gt; 5    171     NA     1     1 tars1 tars1
-#&gt; 6    160     NA     1     1 tars1 tars1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>lowertriangle</span>(<span class='no'>flea</span>))</div><div class='output co'>#&gt;   xvalue yvalue xslot yslot  xlab  ylab
+#&gt; 6    160     NA     1     1 tars1 tars1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>lowertriangle</span>(<span class='kw'>flea</span>))</div><div class='output co'>#&gt;   xvalue yvalue xslot yslot  xlab  ylab
 #&gt; 1    191     NA     1     1 tars1 tars1
 #&gt; 2    185     NA     1     1 tars1 tars1
 #&gt; 3    200     NA     1     1 tars1 tars1
 #&gt; 4    173     NA     1     1 tars1 tars1
 #&gt; 5    171     NA     1     1 tars1 tars1
-#&gt; 6    160     NA     1     1 tars1 tars1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>lowertriangle</span>(<span class='no'>flea</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"species"</span>))</div><div class='output co'>#&gt;   xvalue yvalue xslot yslot  xlab  ylab colorcolumn
+#&gt; 6    160     NA     1     1 tars1 tars1</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>lowertriangle</span>(<span class='kw'>flea</span>, color=<span class='st'>"species"</span>))</div><div class='output co'>#&gt;   xvalue yvalue xslot yslot  xlab  ylab colorcolumn
 #&gt; 1    191     NA     1     1 tars1 tars1    Concinna
 #&gt; 2    185     NA     1     1 tars1 tars1    Concinna
 #&gt; 3    200     NA     1     1 tars1 tars1    Concinna
