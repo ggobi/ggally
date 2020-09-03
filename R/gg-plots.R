@@ -408,14 +408,14 @@ ggally_statistic <- function(
 ) {
   set_if_not_there <- function(obj, key, value) {
     obj <- as.list(obj)
-    if (! "family" %in% rlang::names2(obj)) {
-      obj$family <- family
-    }
+    #if (! "family" %in% rlang::names2(obj)) {
+    #  obj$family <- family
+    #}
     obj
   }
 
-  title_args <- set_if_not_there(title_args, "family", family)
-  group_args <- set_if_not_there(group_args, "family", family)
+  #title_args <- set_if_not_there(title_args, "family", family)
+  #group_args <- set_if_not_there(group_args, "family", family)
 
   title_args <- set_if_not_there(title_args, "hjust", title_hjust)
   group_args <- set_if_not_there(group_args, "hjust", group_hjust)
