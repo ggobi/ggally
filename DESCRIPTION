@@ -31,6 +31,7 @@ Depends:
     R (>= 3.1),
     ggplot2 (>= 3.3.0)
 Imports:
+    dplyr,
     grDevices,
     grid,
     gtable (>= 0.2.0),
@@ -44,6 +45,8 @@ Imports:
     lifecycle
 Suggests:
     broom (>= 0.4.0),
+    broom.helpers,
+    gtsummary,
     chemometrics,
     geosphere (>= 1.5-1),
     ggforce,
@@ -63,7 +66,7 @@ Suggests:
     knitr,
     spelling
 Roxygen: list(markdown = FALSE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 SystemRequirements: openssl
 Encoding: UTF-8
 Language: en-US

@@ -18,3 +18,7 @@ NULL
 # \lifecycle{deprecated}
 # \lifecycle{defunct}
 # \lifecycle{archived}
+
+#' @importFrom dplyr `%>%`
+#' @export
+dplyr::`%>%`
