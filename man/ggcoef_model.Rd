@@ -19,8 +19,7 @@ ggcoef_model(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
+  keep = dplyr::everything(),
   significance = 0.05,
   significance_labels = NULL,
   show_p_values = TRUE,
@@ -41,8 +40,6 @@ ggcoef_compare(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
   significance = 0.05,
   significance_labels = NULL,
   return_data = FALSE,
@@ -62,8 +59,7 @@ ggcoef_multinom(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
+  keep = dplyr::everything(),
   significance = 0.05,
   significance_labels = NULL,
   show_p_values = TRUE,
@@ -83,8 +79,7 @@ ggcoef_data(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
+  keep = dplyr::everything(),
   significance = 0.05,
   significance_labels = NULL
 )
@@ -140,9 +135,8 @@ for those no reference row should be added, when \code{add_reference_rows = TRUE
 
 \item{intercept}{should the intercept(s) be included?}
 
-\item{keep}{variables to keep}
-
-\item{drop}{variables to drop}
+\item{keep}{variables to keep. Use \code{-} to remove a variable.
+Default is \code{everything()}}
 
 \item{significance}{level (between 0 and 1) below which a
 coefficient is consider to be significantly different from 0

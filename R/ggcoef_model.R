@@ -58,8 +58,7 @@ ggcoef_model <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
+  keep = dplyr::everything(),
   significance = .05,
   significance_labels = NULL,
   show_p_values = TRUE,
@@ -79,7 +78,6 @@ ggcoef_model <- function (
     no_reference_row  = no_reference_row ,
     intercept = intercept,
     keep = keep,
-    drop = drop,
     significance = significance,
     significance_labels = significance_labels
   )
@@ -151,14 +149,11 @@ ggcoef_compare <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
   significance = .05,
   significance_labels = NULL,
   return_data = FALSE,
   ...
 ){
-
   data <- lapply(
     X = models,
     FUN = ggcoef_data,
@@ -171,8 +166,6 @@ ggcoef_compare <- function (
     add_reference_rows = add_reference_rows,
     no_reference_row  = no_reference_row ,
     intercept = intercept,
-    keep = keep,
-    drop = drop,
     significance = significance,
     significance_labels = significance_labels
   )
@@ -254,8 +247,7 @@ ggcoef_multinom <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
+  keep = dplyr::everything(),
   significance = .05,
   significance_labels = NULL,
   show_p_values = TRUE,
@@ -275,7 +267,6 @@ ggcoef_multinom <- function (
     no_reference_row  = no_reference_row ,
     intercept = intercept,
     keep = keep,
-    drop = drop,
     significance = significance,
     significance_labels = significance_labels
   )
@@ -335,8 +326,7 @@ ggcoef_data <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = NULL,
-  drop = NULL,
+  keep = dplyr::everything(),
   significance = .05,
   significance_labels = NULL
 ){
@@ -357,7 +347,6 @@ ggcoef_data <- function (
     add_header_rows = FALSE,
     intercept = intercept,
     keep = keep,
-    drop = drop,
     keep_model = FALSE
   )
 
