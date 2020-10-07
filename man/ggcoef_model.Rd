@@ -40,6 +40,7 @@ ggcoef_compare(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
+  keep = dplyr::everything(),
   significance = 0.05,
   significance_labels = NULL,
   return_data = FALSE,

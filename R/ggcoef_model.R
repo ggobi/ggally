@@ -149,6 +149,7 @@ ggcoef_compare <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
+  keep = dplyr::everything(),
   significance = .05,
   significance_labels = NULL,
   return_data = FALSE,
@@ -174,6 +175,14 @@ ggcoef_compare <- function (
   coefficients_label <- attr(data, "coefficients_label")
 
   data$model <- forcats::fct_inorder(data$model)
+
+  # keep should be applied after lapply
+  data <- data %>%
+    broom.helpers::tidy_select_variables(
+      keep = keep,
+      model = models[[1]] # we just need to pass a model to allow the function to work
+    ) %>%
+    broom.helpers::tidy_detach_model()
 
   # Add NA values for unobserved combinations
   # (i.e. for a term present in one model but not in another)
