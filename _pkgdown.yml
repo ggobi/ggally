@@ -1,5 +1,8 @@
 url: https://ggobi.github.io/ggally
 
+development:
+  mode: auto
+
 template:
   params:
     docsearch:

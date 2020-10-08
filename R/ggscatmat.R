@@ -18,14 +18,15 @@ if (getRversion() >= "2.15.1") {
 #' head(lowertriangle(flea))
 #' head(lowertriangle(flea, color="species"))
 lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
-  data <- upgrade_scatmat_data(data)
+  # why do  we need to ocheck this again?
+  # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   q <- nrow(dn)
-  newdata      <- as.data.frame(matrix(NA, nrow = q*p*p, ncol = 6+ncol(factor)))
-  newdata[5:6] <- as.data.frame(matrix("", nrow = q*p*p, ncol = 2), stringsAsFactors = F)
+  newdata      <- as.data.frame(matrix(NA, nrow = q*p*p, ncol = 6+ncol(factor)), stringsAsFactors = FALSE)
+  newdata[5:6] <- as.data.frame(matrix("", nrow = q*p*p, ncol = 2), stringsAsFactors = FALSE)
 
   r <-1
   for (i in 1:p) {
@@ -75,8 +76,9 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' head(uppertriangle(flea))
 #' head(uppertriangle(flea, color="species"))
 uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "pearson") {
-  data <- upgrade_scatmat_data(data)
+  # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
+  # why do  we need to ocheck this again?
   dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
@@ -98,7 +100,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
     colnames(factor)
   )
 
-  rp <- data.frame(newdata)
+  rp <- data.frame(newdata, stringsAsFactors = TRUE)
   rp[[2]][rp[[3]] <= rp[[4]]] <- "NA"
   rp[[1]][rp[[3]] < rp[[4]]] <- "NA"
 
@@ -113,9 +115,11 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
   }
   a <- rp.new
   b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
+  b$xlab <- factor(b$xlab, levels=unique(b$xlab))
+  b$ylab <- factor(b$ylab, levels=unique(b$ylab))
   if (is.null(color)){
     data.cor <- ddply(
-      b, .(ylab, xlab),
+      b, .(xlab, ylab),
       function(subsetDt) {
         xlab <- subsetDt$xlab
         ylab <- subsetDt$ylab
@@ -219,7 +223,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
 #' p_(scatmat(flea, columns=2:4))
 #' p_(scatmat(flea, columns= 2:4, color="species"))
 scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
-  data <- upgrade_scatmat_data(data)
+  # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
   if (ncol(dn) == 0) {
@@ -312,7 +316,7 @@ ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, cor
      }
      data[[color]] <- as.factor(data[[color]])
   }
-  ##
+  ## do we really need this next line?
   data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
@@ -344,7 +348,7 @@ ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, cor
 
 upgrade_scatmat_data <- function(data) {
   data <- as.data.frame(data)
-  dataIsCharacter <- sapply(data, is.character)
+  dataIsCharacter <- sapply(data, is.factor)
   if (any(dataIsCharacter)) {
     dataCharacterColumns <- names(dataIsCharacter[dataIsCharacter])
     for (dataCol in dataCharacterColumns) {
