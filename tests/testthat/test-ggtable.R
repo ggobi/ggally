@@ -6,10 +6,11 @@ test_that("example", {
   expect_print <- function(x) {
     expect_silent(print(x))
   }
+  skip_if_not_installed("reshape")
+
   reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
   expect_print(ggcoef(reg))
 
-  skip_if_not_installed("reshape")
   data(tips, package = "reshape")
   expect_print(ggtable(tips, "smoker", c("day", "time", "sex")))
 
