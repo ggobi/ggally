@@ -43,7 +43,7 @@ Imports:
     rlang,
     lifecycle
 Suggests:
-    broom (>= 0.4.0),
+    broom (>= 0.7.0),
     chemometrics,
     geosphere (>= 1.5-1),
     ggforce,
@@ -63,7 +63,7 @@ Suggests:
     knitr,
     spelling
 Roxygen: list(markdown = FALSE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 SystemRequirements: openssl
 Encoding: UTF-8
 Language: en-US

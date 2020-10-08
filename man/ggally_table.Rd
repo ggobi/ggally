@@ -76,7 +76,7 @@ p_(ggally_table(
   as.data.frame(Titanic),
   mapping = aes(
     x = Class, y = Survived, weight = Freq,
-    fill = after_stat(stdres),
+    fill = after_stat(std.resid),
     label = scales::percent(after_stat(col.prop), accuracy = .1)
   ),
   geom_tile_args = list(colour = "black")

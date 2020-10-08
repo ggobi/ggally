@@ -45,7 +45,7 @@ p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex), shape = 21))
 d <- as.data.frame(Titanic)
 p_(ggally_cross(
   d,
-  mapping = aes(x = Class, y = Survived, weight = Freq, fill = after_stat(stdres))
+  mapping = aes(x = Class, y = Survived, weight = Freq, fill = after_stat(std.resid))
 ) +
   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
 
