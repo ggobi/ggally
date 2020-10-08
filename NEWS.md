@@ -109,10 +109,7 @@ Website
 * Fixed `facet`'ing error where the factor order was not preserved. This error caused the facets to be alphabetically sorted, cause plots to appear in unexpected locations. (#355)
 
 
-
-
-GGally 1.5.0
----------------------
+# GGally 1.5.0
 
 * Updated to work with ggplot2 v3.3.0 (#308)
 
