@@ -1,5 +1,17 @@
 # GGally (development version)
 
+### Breaking changes
+
+* Following version 7.0.0 of `broom`, computed residuals in `stat_cross()`
+  are now named `"resid"` and `"std.resid"`. `cells` and `fill` arguments
+  of `ggally_crosstable()` and `ggtable()` have been updated accordingly
+  (@larmarange, #391)
+
+### Other changes
+
+* New option `reverse_fill_labels` for `ggally_colbar()`
+  and `ggally_rowbar()` (@larmarange, #374)
+
 # GGally 2.0.0
 
 ### New Vignettes
