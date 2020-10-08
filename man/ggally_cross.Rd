@@ -13,7 +13,7 @@ ggally_cross(data, mapping, ..., scale_max_size = 20, geom_text_args = NULL)
 
 \item{...}{other arguments passed to \code{\link[ggplot2]{geom_point}(...)}}
 
-\item{scale_max_size}{`max_size` argument supplied to \code{\link[ggplot2]{scale_size_area}()}}
+\item{scale_max_size}{\code{max_size} argument supplied to \code{\link[ggplot2]{scale_size_area}()}}
 
 \item{geom_text_args}{other arguments passed to \code{\link[ggplot2]{geom_text}(...)}}
 }

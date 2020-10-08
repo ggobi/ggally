@@ -51,24 +51,24 @@ ggnostic(
 \description{
 Plot matrix of statistical model diagnostics
 }
-\section{`columnsY`}{
+\section{\code{columnsY}}{
 
 \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{\link{ggnostic}}.
 
 \describe{
-  \item{.resid}{Residuals}
-  \item{.hat}{Diagonal of the hat matrix}
-  \item{.sigma}{Estimate of residual standard deviation when
-    corresponding observation is dropped from model}
-  \item{.cooksd}{Cooks distance, \code{\link[stats]{cooks.distance}}}
-  \item{.fitted}{Fitted values of model}
-  \item{.se.fit}{Standard errors of fitted values}
-  \item{.std.resid}{Standardized residuals}
-  \item{response variable name}{The response variable in the model may be added. Such as \code{"mpg"} in the model \code{lm(mpg ~ ., data = mtcars)}}
+\item{.resid}{Residuals}
+\item{.hat}{Diagonal of the hat matrix}
+\item{.sigma}{Estimate of residual standard deviation when
+corresponding observation is dropped from model}
+\item{.cooksd}{Cooks distance, \code{\link[stats]{cooks.distance}}}
+\item{.fitted}{Fitted values of model}
+\item{.se.fit}{Standard errors of fitted values}
+\item{.std.resid}{Standardized residuals}
+\item{response variable name}{The response variable in the model may be added. Such as \code{"mpg"} in the model \code{lm(mpg ~ ., data = mtcars)}}
 }
 }
 
-\section{`continuous`, `combo`, `discrete` types}{
+\section{\code{continuous}, \code{combo}, \code{discrete} types}{
 
 Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{broom::\link[broom]{augment}()} output: \code{".fitted"}, \code{".resid"}, \code{".std.resid"}, \code{".sigma"}, \code{".se.fit"}, \code{".hat"}, \code{".cooksd"}. An extra key, \code{"default"}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the \code{types} parameter in \code{\link{ggduo}}.
 }

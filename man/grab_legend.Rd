@@ -16,7 +16,7 @@ grab_legend(p)
 
 \item{...}{ignored}
 
-\item{plotNew}{boolean to determine if the `grid.newpage()` command and a new blank rectangle should be printed}
+\item{plotNew}{boolean to determine if the \code{grid.newpage()} command and a new blank rectangle should be printed}
 }
 \description{
 Grab the legend and print it as a plot

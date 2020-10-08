@@ -51,7 +51,7 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 
 \item{na.rm}{If \code{TRUE}, the default, missing values are removed with a warning.
-If `TRUE`, missing values are silently removed.}
+If \code{TRUE}, missing values are silently removed.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -78,13 +78,13 @@ from \pkg{broom}.
 \section{Computed variables}{
 
 \describe{
-  \item{observed}{number of observations in x,y}
-  \item{prop}{proportion of total}
-  \item{row.prop}{row proportion}
-  \item{col.prop}{column proportion}
-  \item{expected}{expected count under the null hypothesis}
-  \item{resid}{Pearson's residual}
-  \item{std.resid}{standardized residual}
+\item{observed}{number of observations in x,y}
+\item{prop}{proportion of total}
+\item{row.prop}{row proportion}
+\item{col.prop}{column proportion}
+\item{expected}{expected count under the null hypothesis}
+\item{resid}{Pearson's residual}
+\item{std.resid}{standardized residual}
 }
 }
 

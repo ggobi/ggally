@@ -38,7 +38,7 @@ by \code{\link{stat_cross}}  could be used (see examples).
 }
 \note{
 The \strong{colour} aesthetic is taken into account only if equal to
-  \strong{x} or \strong{y}.
+\strong{x} or \strong{y}.
 }
 \examples{
 # Small function to display plots only if it's interactive

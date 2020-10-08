@@ -81,8 +81,8 @@ should be a factor.
 \section{Computed variables}{
 
 \describe{
-  \item{count}{number of points in bin}
-  \item{prop}{computed proportion}
+\item{count}{number of points in bin}
+\item{prop}{computed proportion}
 }
 }
 

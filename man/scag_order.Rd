@@ -15,7 +15,7 @@ scag_order(scag, vars, measure)
 }
 \value{
 character vector of variable ordered according to the given
-  scagnostic measure
+scagnostic measure
 }
 \description{
 Find order of variables based on a specified scagnostic measure
