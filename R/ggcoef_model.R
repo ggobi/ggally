@@ -31,7 +31,7 @@
 #' p_(ggcoef_model(mod, exponentiate = TRUE))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease")))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, no_reference_row = "high_marker", intercept = TRUE))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, keep = c("stage", "age")))
+#' p_(ggcoef_model(mod, exponentiate = TRUE, include = c("stage", "age")))
 #' p_(ggcoef_model(mod, significance = .10, conf.level = .9, signif_stars = FALSE, show_p_values = FALSE))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, colour = NULL, stripped_rows = FALSE, signif_stars = FALSE))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, conf.int = FALSE))
@@ -58,7 +58,7 @@ ggcoef_model <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = dplyr::everything(),
+  include = dplyr::everything(),
   significance = .05,
   significance_labels = NULL,
   show_p_values = TRUE,
@@ -77,7 +77,7 @@ ggcoef_model <- function (
     add_reference_rows = add_reference_rows,
     no_reference_row  = no_reference_row ,
     intercept = intercept,
-    keep = keep,
+    include = include,
     significance = significance,
     significance_labels = significance_labels
   )
@@ -149,7 +149,7 @@ ggcoef_compare <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = dplyr::everything(),
+  include = dplyr::everything(),
   significance = .05,
   significance_labels = NULL,
   return_data = FALSE,
@@ -176,10 +176,10 @@ ggcoef_compare <- function (
 
   data$model <- forcats::fct_inorder(data$model)
 
-  # keep should be applied after lapply
+  # include should be applied after lapply
   data <- data %>%
     broom.helpers::tidy_select_variables(
-      keep = keep,
+      include = include,
       model = models[[1]] # we just need to pass a model to allow the function to work
     ) %>%
     broom.helpers::tidy_detach_model()
@@ -256,7 +256,7 @@ ggcoef_multinom <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = dplyr::everything(),
+  include = dplyr::everything(),
   significance = .05,
   significance_labels = NULL,
   show_p_values = TRUE,
@@ -275,7 +275,7 @@ ggcoef_multinom <- function (
     add_reference_rows = add_reference_rows,
     no_reference_row  = no_reference_row ,
     intercept = intercept,
-    keep = keep,
+    include = include,
     significance = significance,
     significance_labels = significance_labels
   )
@@ -335,7 +335,7 @@ ggcoef_data <- function (
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
-  keep = dplyr::everything(),
+  include = dplyr::everything(),
   significance = .05,
   significance_labels = NULL
 ){
@@ -355,7 +355,7 @@ ggcoef_data <- function (
     add_estimate_to_reference_rows = TRUE,
     add_header_rows = FALSE,
     intercept = intercept,
-    keep = keep,
+    include = include,
     keep_model = FALSE
   )
 
