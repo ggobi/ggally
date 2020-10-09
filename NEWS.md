@@ -209,7 +209,6 @@ Added original ggmatrix theme
 
 
 
-
 GGally 1.3.0
 -----------------
 
