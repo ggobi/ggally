@@ -16,8 +16,18 @@
 #'   such coefficients
 #' @param significance_labels optional vector with custom labels
 #'   for significance variable
-#' @param return_data if `TRUE`, will return the data.frame used for plotting instead of the plot
+#' @param return_data if `TRUE`, will return the data.frame used
+#'   for plotting instead of the plot
 #' @param ... parameters passed to [ggcoef_plot()]
+#' @details
+#' `ggcoef_model()`, `ggcoef_multinom()` and `ggcoef_compare()` use
+#' [broom.helpers::tidy_plus_plus()] to obtain a tibble of the model
+#' coefficients, apply additional data transformation and then pass the
+#' produced tibble to `ggcoef_plot()` to generate the plot.
+#'
+#' For more control, you can use the argument `return_data = TRUE` to
+#' get the produced tibble, apply any transformation of your own and
+#' then pass your customised tibble to `ggcoef_plot()`.
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
@@ -30,6 +40,7 @@
 #' p_(ggcoef_model(mod))
 #' p_(ggcoef_model(mod, exponentiate = TRUE))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease")))
+#' p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease"), facet_labeller = label_wrap_gen(15)))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, no_reference_row = "high_marker", intercept = TRUE))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, include = c("stage", "age")))
 #' p_(ggcoef_model(mod, significance = .10, conf.level = .9, signif_stars = FALSE, show_p_values = FALSE))
@@ -322,8 +333,7 @@ ggcoef_multinom <- function (
   do.call(ggcoef_plot, args)
 }
 
-#' @rdname ggcoef_model
-#' @export
+# not exporting ggcoef_data
 ggcoef_data <- function (
   model,
   tidy_fun = broom::tidy,
@@ -391,8 +401,11 @@ ggcoef_data <- function (
 #' @param colour optional variable name to be mapped to colour aesthetic
 #' @param colour_guide should colour guide be displayed in the legend?
 #' @param colour_lab label of the colour aesthetic in the legend
+#' @param colour_labels labels argument passed to
+#' [ggplot2::scale_colour_discrete()] and [ggplot2::discrete_scale()]
 #' @param shape optional variable name to be mapped to the shape aesthetic
-#' @param shape_values values of the different shapes to use in [ggplot2::scale_shape_manual()]
+#' @param shape_values values of the different shapes to use in
+#'   [ggplot2::scale_shape_manual()]
 #' @param shape_guide should shape guide be displayed in the legend?
 #' @param shape_lab label of the shape aesthetic in the legend
 #' @param errorbar should error bars be plotted?
@@ -405,7 +418,10 @@ ggcoef_data <- function (
 #' @param vline_colour colour of vertical line
 #' @param dodged should points be dodged (according to the colour aesthetic)?
 #' @param dodged_width width value for [ggplot2::position_dodge()]
-#' @param facet_col optional variable name to be used for column facets
+#' @param facet_col optional variable name to be used for facets
+#' @param facet_labeller labelled function to be used for labelling facets;
+#'   if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
+#'   more information in the documentation of [ggplot2::facet_grid()]
 #' @export
 ggcoef_plot <- function (
   data,
@@ -416,6 +432,7 @@ ggcoef_plot <- function (
   colour = NULL,
   colour_guide = TRUE,
   colour_lab = "",
+  colour_labels = ggplot2::waiver(),
   shape = "significance",
   shape_values = c(16, 21),
   shape_guide = TRUE,
@@ -430,7 +447,8 @@ ggcoef_plot <- function (
   vline_colour = "grey50",
   dodged = FALSE,
   dodged_width = .8,
-  facet_col = NULL
+  facet_col = NULL,
+  facet_labeller = "label_value"
 ){
   data$label <- forcats::fct_rev(data$label)
 
@@ -507,7 +525,7 @@ ggcoef_plot <- function (
       na.rm = TRUE
     ) +
     facet_grid(
-      facet_formula,
+      facet_formula, labeller = facet_labeller,
       scales = "free_y", space = "free_y", switch = "y"
     ) +
     ylab("") +
@@ -531,7 +549,7 @@ ggcoef_plot <- function (
     if (colour_guide)
       colour_guide <- guide_legend()
     p <- p +
-      scale_colour_discrete(guide = colour_guide) +
+      scale_colour_discrete(guide = colour_guide, labels = colour_labels) +
       labs(colour = colour_lab)
   }
 

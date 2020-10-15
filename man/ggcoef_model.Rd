@@ -4,7 +4,6 @@
 \alias{ggcoef_model}
 \alias{ggcoef_compare}
 \alias{ggcoef_multinom}
-\alias{ggcoef_data}
 \alias{ggcoef_plot}
 \title{Plot model coefficients}
 \usage{
@@ -19,7 +18,7 @@ ggcoef_model(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
-  keep = dplyr::everything(),
+  include = dplyr::everything(),
   significance = 0.05,
   significance_labels = NULL,
   show_p_values = TRUE,
@@ -40,7 +39,7 @@ ggcoef_compare(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
-  keep = dplyr::everything(),
+  include = dplyr::everything(),
   significance = 0.05,
   significance_labels = NULL,
   return_data = FALSE,
@@ -60,29 +59,13 @@ ggcoef_multinom(
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
-  keep = dplyr::everything(),
+  include = dplyr::everything(),
   significance = 0.05,
   significance_labels = NULL,
   show_p_values = TRUE,
   signif_stars = TRUE,
   return_data = FALSE,
   ...
-)
-
-ggcoef_data(
-  model,
-  tidy_fun = broom::tidy,
-  conf.int = TRUE,
-  conf.level = 0.95,
-  exponentiate = TRUE,
-  variable_labels = NULL,
-  term_labels = NULL,
-  add_reference_rows = TRUE,
-  no_reference_row = NULL,
-  intercept = FALSE,
-  keep = dplyr::everything(),
-  significance = 0.05,
-  significance_labels = NULL
 )
 
 ggcoef_plot(
@@ -94,6 +77,7 @@ ggcoef_plot(
   colour = NULL,
   colour_guide = TRUE,
   colour_lab = "",
+  colour_labels = ggplot2::waiver(),
   shape = "significance",
   shape_values = c(16, 21),
   shape_guide = TRUE,
@@ -108,7 +92,8 @@ ggcoef_plot(
   vline_colour = "grey50",
   dodged = FALSE,
   dodged_width = 0.8,
-  facet_col = NULL
+  facet_col = NULL,
+  facet_labeller = "label_value"
 )
 }
 \arguments{
@@ -131,13 +116,15 @@ percent confidence interval}
 
 \item{add_reference_rows}{should reference rows be added?}
 
-\item{no_reference_row}{a vector indicating the name of variables
+\item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
 for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
 \item{intercept}{should the intercept(s) be included?}
 
-\item{keep}{variables to keep. Use \code{-} to remove a variable.
-Default is \code{everything()}}
+\item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
+syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
+See also \code{\link[broom.helpers:select_helpers]{all_continuous()}}, \code{\link[broom.helpers:select_helpers]{all_categorical()}}, \code{\link[broom.helpers:select_helpers]{all_dichotomous()}}
+and \code{\link[broom.helpers:select_helpers]{all_interaction()}}}
 
 \item{significance}{level (between 0 and 1) below which a
 coefficient is consider to be significantly different from 0
@@ -151,7 +138,8 @@ for significance variable}
 
 \item{signif_stars}{if `TRUE`, add significant stars to labels}
 
-\item{return_data}{if `TRUE`, will return the data.frame used for plotting instead of the plot}
+\item{return_data}{if `TRUE`, will return the data.frame used
+for plotting instead of the plot}
 
 \item{...}{parameters passed to [ggcoef_plot()]}
 
@@ -175,9 +163,13 @@ for significance variable}
 
 \item{colour_lab}{label of the colour aesthetic in the legend}
 
+\item{colour_labels}{labels argument passed to
+[ggplot2::scale_colour_discrete()] and [ggplot2::discrete_scale()]}
+
 \item{shape}{optional variable name to be mapped to the shape aesthetic}
 
-\item{shape_values}{values of the different shapes to use in [ggplot2::scale_shape_manual()]}
+\item{shape_values}{values of the different shapes to use in
+[ggplot2::scale_shape_manual()]}
 
 \item{shape_guide}{should shape guide be displayed in the legend?}
 
@@ -203,7 +195,11 @@ for significance variable}
 
 \item{dodged_width}{width value for [ggplot2::position_dodge()]}
 
-\item{facet_col}{optional variable name to be used for column facets}
+\item{facet_col}{optional variable name to be used for facets}
+
+\item{facet_labeller}{labelled function to be used for labelling facets;
+if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
+more information in the documentation of [ggplot2::facet_grid()]}
 }
 \description{
 Redesign of [GGally::ggcoef()] based on [broom.helpers].
@@ -211,6 +207,16 @@ Redesign of [GGally::ggcoef()] based on [broom.helpers].
 [ggcoef_multinom()] is a variation of [ggcoef_model()] adapted to multinomial
 logistic regressions performed with [nnet::multinom()].
 [ggcoef_multinom()] works only with the dev version of `gtsummary`.
+}
+\details{
+`ggcoef_model()`, `ggcoef_multinom()` and `ggcoef_compare()` use
+[broom.helpers::tidy_plus_plus()] to obtain a tibble of the model
+coefficients, apply additional data transformation and then pass the
+produced tibble to `ggcoef_plot()` to generate the plot.
+
+For more control, you can use the argument `return_data = TRUE` to
+get the produced tibble, apply any transformation of your own and
+then pass your customised tibble to `ggcoef_plot()`.
 }
 \examples{
 # Small function to display plots only if it's interactive
@@ -224,7 +230,7 @@ p_(ggcoef_model(mod))
 p_(ggcoef_model(mod, exponentiate = TRUE))
 p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease")))
 p_(ggcoef_model(mod, exponentiate = TRUE, no_reference_row = "high_marker", intercept = TRUE))
-p_(ggcoef_model(mod, exponentiate = TRUE, keep = c("stage", "age")))
+p_(ggcoef_model(mod, exponentiate = TRUE, include = c("stage", "age")))
 p_(ggcoef_model(mod, significance = .10, conf.level = .9, signif_stars = FALSE, show_p_values = FALSE))
 p_(ggcoef_model(mod, exponentiate = TRUE, colour = NULL, stripped_rows = FALSE, signif_stars = FALSE))
 p_(ggcoef_model(mod, exponentiate = TRUE, conf.int = FALSE))

@@ -45,8 +45,7 @@ Imports:
     lifecycle
 Suggests:
     broom (>= 0.4.0),
-    broom.helpers,
-    gtsummary,
+    broom.helpers (>= 1.0.0.9001),
     chemometrics,
     geosphere (>= 1.5-1),
     ggforce,
