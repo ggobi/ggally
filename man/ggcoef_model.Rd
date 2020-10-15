@@ -12,9 +12,10 @@ ggcoef_model(
   tidy_fun = broom::tidy,
   conf.int = TRUE,
   conf.level = 0.95,
-  exponentiate = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
+  interaction_sep = " * ",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
@@ -33,9 +34,10 @@ ggcoef_compare(
   tidy_fun = broom::tidy,
   conf.int = TRUE,
   conf.level = 0.95,
-  exponentiate = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
+  interaction_sep = " * ",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
@@ -53,7 +55,7 @@ ggcoef_multinom(
   tidy_fun = broom::tidy,
   conf.int = TRUE,
   conf.level = 0.95,
-  exponentiate = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
@@ -113,6 +115,8 @@ percent confidence interval}
 \item{variable_labels}{a named list or a named vector of custom variable labels}
 
 \item{term_labels}{a named list or a named vector of custom term labels}
+
+\item{interaction_sep}{separator for interaction terms}
 
 \item{add_reference_rows}{should reference rows be added?}
 
@@ -202,7 +206,7 @@ if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
 more information in the documentation of [ggplot2::facet_grid()]}
 }
 \description{
-Redesign of [GGally::ggcoef()] based on [broom.helpers].
+Redesign of [GGally::ggcoef()] based on [broom.helpers::tidy_plus_plus()].
 
 [ggcoef_multinom()] is a variation of [ggcoef_model()] adapted to multinomial
 logistic regressions performed with [nnet::multinom()].
@@ -225,10 +229,12 @@ p_ <- GGally::print_if_interactive
 data(trial, package = "gtsummary")
 trial$high_marker <- factor(trial$marker > 1, label = c("low", "high"))
 attr(trial$high_marker, "label") <- "Marker level"
-mod <- glm(response ~ age + stage + grade + high_marker, trial, family = binomial(link = "logit"))
+mod <- glm(response ~ age + stage * grade + high_marker, trial, family = binomial(link = "logit"))
 p_(ggcoef_model(mod))
 p_(ggcoef_model(mod, exponentiate = TRUE))
 p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease")))
+p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease"), facet_labeller = label_wrap_gen(15)))
+p_(ggcoef_model(mod, exponentiate = TRUE, interaction_sep = " \u00D7 "))
 p_(ggcoef_model(mod, exponentiate = TRUE, no_reference_row = "high_marker", intercept = TRUE))
 p_(ggcoef_model(mod, exponentiate = TRUE, include = c("stage", "age")))
 p_(ggcoef_model(mod, significance = .10, conf.level = .9, signif_stars = FALSE, show_p_values = FALSE))

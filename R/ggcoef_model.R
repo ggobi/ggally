@@ -1,6 +1,6 @@
 #' Plot model coefficients
 #'
-#' Redesign of [GGally::ggcoef()] based on [broom.helpers].
+#' Redesign of [GGally::ggcoef()] based on [broom.helpers::tidy_plus_plus()].
 #'
 #' @inheritParams broom.helpers::tidy_plus_plus
 #' @param model a regression model object
@@ -36,11 +36,12 @@
 #' data(trial, package = "gtsummary")
 #' trial$high_marker <- factor(trial$marker > 1, label = c("low", "high"))
 #' attr(trial$high_marker, "label") <- "Marker level"
-#' mod <- glm(response ~ age + stage + grade + high_marker, trial, family = binomial(link = "logit"))
+#' mod <- glm(response ~ age + stage * grade + high_marker, trial, family = binomial(link = "logit"))
 #' p_(ggcoef_model(mod))
 #' p_(ggcoef_model(mod, exponentiate = TRUE))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease")))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease"), facet_labeller = label_wrap_gen(15)))
+#' p_(ggcoef_model(mod, exponentiate = TRUE, interaction_sep = " \u00D7 "))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, no_reference_row = "high_marker", intercept = TRUE))
 #' p_(ggcoef_model(mod, exponentiate = TRUE, include = c("stage", "age")))
 #' p_(ggcoef_model(mod, significance = .10, conf.level = .9, signif_stars = FALSE, show_p_values = FALSE))
@@ -63,9 +64,10 @@ ggcoef_model <- function (
   tidy_fun = broom::tidy,
   conf.int = TRUE,
   conf.level = .95,
-  exponentiate = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
+  interaction_sep = " * ",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
@@ -85,6 +87,7 @@ ggcoef_model <- function (
     exponentiate = exponentiate,
     variable_labels = variable_labels,
     term_labels = term_labels,
+    interaction_sep = interaction_sep,
     add_reference_rows = add_reference_rows,
     no_reference_row  = no_reference_row ,
     intercept = intercept,
@@ -154,9 +157,10 @@ ggcoef_compare <- function (
   tidy_fun = broom::tidy,
   conf.int = TRUE,
   conf.level = .95,
-  exponentiate = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
+  interaction_sep = " * ",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
@@ -175,6 +179,7 @@ ggcoef_compare <- function (
     exponentiate = exponentiate,
     variable_labels = variable_labels,
     term_labels = term_labels,
+    interaction_sep = interaction_sep,
     add_reference_rows = add_reference_rows,
     no_reference_row  = no_reference_row ,
     intercept = intercept,
@@ -261,7 +266,7 @@ ggcoef_multinom <- function (
   tidy_fun = broom::tidy,
   conf.int = TRUE,
   conf.level = .95,
-  exponentiate = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
   add_reference_rows = TRUE,
@@ -283,6 +288,7 @@ ggcoef_multinom <- function (
     exponentiate = exponentiate,
     variable_labels = variable_labels,
     term_labels = term_labels,
+    interaction_sep = interaction_sep,
     add_reference_rows = add_reference_rows,
     no_reference_row  = no_reference_row ,
     intercept = intercept,
@@ -339,9 +345,10 @@ ggcoef_data <- function (
   tidy_fun = broom::tidy,
   conf.int = TRUE,
   conf.level = .95,
-  exponentiate = TRUE,
+  exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
+  interaction_sep = " * ",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
   intercept = FALSE,
@@ -360,6 +367,7 @@ ggcoef_data <- function (
     exponentiate = exponentiate,
     variable_labels = variable_labels,
     term_labels = term_labels,
+    interaction_sep = interaction_sep,
     add_reference_rows = add_reference_rows,
     no_reference_row = no_reference_row,
     add_estimate_to_reference_rows = TRUE,
