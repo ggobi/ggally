@@ -16,6 +16,7 @@ ggcoef_model(
   variable_labels = NULL,
   term_labels = NULL,
   interaction_sep = " * ",
+  categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
@@ -38,6 +39,7 @@ ggcoef_compare(
   variable_labels = NULL,
   term_labels = NULL,
   interaction_sep = " * ",
+  categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
@@ -58,6 +60,8 @@ ggcoef_multinom(
   exponentiate = FALSE,
   variable_labels = NULL,
   term_labels = NULL,
+  interaction_sep = " * ",
+  categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
   intercept = FALSE,
@@ -117,6 +121,10 @@ percent confidence interval}
 \item{term_labels}{a named list or a named vector of custom term labels}
 
 \item{interaction_sep}{separator for interaction terms}
+
+\item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
+labels of categorical terms with treatment or sum contrasts
+(see \code{\link[broom.helpers:model_list_terms_levels]{model_list_terms_levels()}})}
 
 \item{add_reference_rows}{should reference rows be added?}
 
