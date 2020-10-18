@@ -33,32 +33,111 @@
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(trial, package = "gtsummary")
-#' trial$high_marker <- factor(trial$marker > 1, label = c("low", "high"))
-#' attr(trial$high_marker, "label") <- "Marker level"
-#' mod <- glm(response ~ age + stage * grade + high_marker, trial, family = binomial(link = "logit"))
-#' p_(ggcoef_model(mod))
-#' p_(ggcoef_model(mod, exponentiate = TRUE))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease")))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, variable_labels = c(age = "Age in years", stage = "Stage of the disease"), facet_labeller = label_wrap_gen(15)))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, interaction_sep = " \u00D7 "))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, no_reference_row = "high_marker", intercept = TRUE))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, include = c("stage", "age")))
-#' p_(ggcoef_model(mod, significance = .10, conf.level = .9, signif_stars = FALSE, show_p_values = FALSE))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, colour = NULL, stripped_rows = FALSE, signif_stars = FALSE))
-#' p_(ggcoef_model(mod, exponentiate = TRUE, conf.int = FALSE))
+#' data(tips, package = "reshape")
+#' mod_simple <- lm(tip ~ day + time + total_bill, data = tips)
+#' p_(ggcoef_model(mod_simple))
 #'
-#' mod <- glm(response ~ stage:age + grade:stage, trial, family = binomial(link = "logit"))
-#' p_(ggcoef_model(mod, exponentiate = TRUE))
-#'
-#' if (require(survival)) {
-#'   test <- list(time = c(4,3,1,1,2,2,3),
-#'                 status = c(1,1,1,0,1,1,0),
-#'                 x = c(0,2,1,1,1,0,0),
-#'                 sex = c("f", "f", "f", "f", "m", "m", "m"))
-#'   mod <- coxph(Surv(time, status) ~ x + sex, test)
-#'   p_(ggcoef_model(mod, exponentiate = TRUE))
+#' # custom variable labels
+#' # you can use to define variable labels before computing model
+#' if (require(labelled)) {
+#'   tips_labelled <- tips %>%
+#'     set_variable_labels(
+#'       day = "Day of the week",
+#'       time = "Lunch or Dinner",
+#'       total_bill = "Bill's total"
+#'     )
+#'   mod_labelled <- lm(tip ~ day + time + total_bill, data = tips_labelled)
+#'   p_(ggcoef_model(mod_labelled))
 #' }
+#' # you can provide custom variable labels with 'variable_labels'
+#' p_(ggcoef_model(
+#'   mod_simple,
+#'   variable_labels = c(
+#'     day = "Week day",
+#'     time = "Time (lunch or dinner ?)",
+#'     total_bill = "Total of the bill"
+#'   )
+#' ))
+#' # if labels are too long, you can use 'facet_labeller' to wrap them
+#' p_(ggcoef_model(
+#'   mod_simple,
+#'   variable_labels = c(
+#'     day = "Week day",
+#'     time = "Time (lunch or dinner ?)",
+#'     total_bill = "Total of the bill"
+#'   ),
+#'   facet_labeller = label_wrap_gen(10)
+#' ))
+#'
+#' # do not display variable facets but add colour guide
+#' p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
+#'
+#' # a logistic regression example
+#' d_titanic <- as.data.frame(Titanic)
+#' d_titanic$Survived <- factor(d_titanic$Survived, c("No", "Yes"))
+#' mod_titanic <- glm(
+#'   Survived ~ Sex * Age + Class,
+#'   weights = Freq,
+#'   data = d_titanic,
+#'   family = binomial
+#' )
+#'
+#' # use 'exponentiate = TRUE' to get the Odds Ratio
+#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE))
+#'
+#' # display intercepts
+#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE, intercept = TRUE))
+#'
+#' # customize terms labels
+#' p_(
+#'   ggcoef_model(
+#'     mod_titanic,
+#'     exponentiate = TRUE,
+#'     show_p_values = FALSE,
+#'     signif_stars = FALSE,
+#'     add_reference_rows = FALSE,
+#'     categorical_terms_pattern = "{level} (ref: {reference_level})",
+#'     interaction_sep = " x "
+#'   ) +
+#'   scale_y_discrete(labels = scales::label_wrap(15))
+#' )
+#'
+#' # display only a subset of terms
+#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE, include = c("Age", "Class")))
+#'
+#' # do not change points' shape based on significance
+#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE, significance = NULL))
+#'
+#' # a black and white version
+#' p_(ggcoef_model(
+#'   mod_titanic, exponentiate = TRUE,
+#'   colour = NULL, stripped_rows = FALSE
+#' ))
+#'
+#' # show dichotomous terms on one row
+#' p_(ggcoef_model(
+#'   mod_titanic,
+#'   exponentiate = TRUE,
+#'   no_reference_row = broom.helpers::all_dichotomous(),
+#'   categorical_terms_pattern = "{ifelse(dichotomous, paste0(level, ' / ', reference_level), level)}",
+#'   show_p_values = FALSE
+#' ))
+#'
+#' # works also with with polynomial terms
+#' mod_poly <- lm(
+#'   tip ~ poly(total_bill, 3) + day,
+#'   data = tips,
+#' )
+#' p_(ggcoef_model(mod_poly))
+#'
+#' # or with different type of contrasts
+#' # for sum contrasts, the value of the reference term is computed
+#' mod2 <- lm(
+#'   tip ~ day + time + sex,
+#'   data = tips,
+#'   contrasts = list(time = contr.sum, day = contr.treatment(4, base = 3))
+#' )
+#' p_(ggcoef_model(mod2))
 ggcoef_model <- function (
   model,
   tidy_fun = broom::tidy,
@@ -139,19 +218,19 @@ ggcoef_model <- function (
 #' @param type a dodged plot or a facetted plot?
 #' @examples
 #'
-#' # Comparison of several models
-#' mod1 <- glm(response ~ age + stage + grade + high_marker, trial, family = binomial())
+#' # Use ggcoef_compare() for comparing several models on the same plot
+#' mod1 <- lm(Fertility ~ ., data = swiss)
 #' mod2 <- step(mod1, trace = 0)
-#' mod3 <- glm(response ~ high_marker * stage, trial, family = binomial())
+#' mod3 <- lm(Fertility ~ Agriculture + Education * Catholic, data = swiss)
 #' models <- list("Full model" = mod1, "Simplified model" = mod2, "With interaction" = mod3)
 #'
-#' p_(ggcoef_compare(models, exponentiate = TRUE))
-#' p_(ggcoef_compare(models, exponentiate = TRUE, type = "faceted"))
+#' p_(ggcoef_compare(models))
+#' p_(ggcoef_compare(models, type = "faceted"))
 #'
 #' # you can reverse the vertical position of the point by using a negative value
 #' # for dodged_width (but it will produce some warnings)
 #' \dontrun{
-#'   p_(ggcoef_compare(models, exponentiate = TRUE, dodged_width = -.9))
+#'   p_(ggcoef_compare(models, dodged_width = -.9))
 #' }
 ggcoef_compare <- function (
   models,
@@ -255,14 +334,19 @@ ggcoef_compare <- function (
 #' @export
 #' @examples
 #'
-#' # specific function for multinom models
-#' data(tips, package = "reshape")
-#' library(nnet)
-#' mod <- multinom(day ~ total_bill + tip + sex + smoker, data = tips)
-#' p_(ggcoef_multinom(mod))
-#' p_(ggcoef_multinom(mod, y.level = c(Thur = "Thursday", Sat = "Saturday", Sun = "Sunday")))
-#' p_(ggcoef_multinom(mod, type = "faceted"))
-#' p_(ggcoef_multinom(mod, type = "faceted", y.level = c(Thur = "Thursday", Sat = "Saturday", Sun = "Sunday")))
+#' # specific function for nnet::multinom models
+#' if (require(nnet)) {
+#'   data(happy)
+#'   mod <- multinom(happy ~ age + degree + sex, data = happy)
+#'   p_(ggcoef_multinom(mod, exponentiate = TRUE))
+#'   p_(ggcoef_multinom(mod, type = "faceted"))
+#'   p_(ggcoef_multinom(
+#'     mod, type = "faceted",
+#'     y.level = c(
+#'       "pretty happy" = "pretty happy\n(ref: very happy)"
+#'     )
+#'   ))
+#' }
 ggcoef_multinom <- function (
   model,
   type = c("dodged", "faceted"),
@@ -435,7 +519,8 @@ ggcoef_data <- function (
 #' @param vline_colour colour of vertical line
 #' @param dodged should points be dodged (according to the colour aesthetic)?
 #' @param dodged_width width value for [ggplot2::position_dodge()]
-#' @param facet_col optional variable name to be used for facets
+#' @param facet_row variable name to be used for row facets
+#' @param facet_col optional variable name to be used for column facets
 #' @param facet_labeller labelled function to be used for labelling facets;
 #'   if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
 #'   more information in the documentation of [ggplot2::facet_grid()]
@@ -464,6 +549,7 @@ ggcoef_plot <- function (
   vline_colour = "grey50",
   dodged = FALSE,
   dodged_width = .8,
+  facet_row = "var_label",
   facet_col = NULL,
   facet_labeller = "label_value"
 ){
@@ -528,10 +614,10 @@ ggcoef_plot <- function (
     }
   }
 
-  if (!is.null(facet_col))
-    facet_formula <- as.formula(paste("var_label ~ ", facet_col))
-  else
-    facet_formula <- var_label ~ .
+  if (!is.null(facet_col) & is.character(facet_col))
+    facet_col <- vars(!!sym(facet_col))
+  if (!is.null(facet_row) & is.character(facet_row))
+    facet_row <- vars(!!sym(facet_row))
 
   p <- p +
     geom_point(
@@ -542,7 +628,9 @@ ggcoef_plot <- function (
       na.rm = TRUE
     ) +
     facet_grid(
-      facet_formula, labeller = facet_labeller,
+      rows = facet_row,
+      cols = facet_col,
+      labeller = facet_labeller,
       scales = "free_y", space = "free_y", switch = "y"
     ) +
     ylab("") +
