@@ -214,6 +214,7 @@ ggcoef_model <- function (
 
 #' @rdname ggcoef_model
 #' @export
+#' @importFrom rlang .data
 #' @param models named list of models
 #' @param type a dodged plot or a facetted plot?
 #' @examples
@@ -286,8 +287,22 @@ ggcoef_compare <- function (
   # Add NA values for unobserved combinations
   # (i.e. for a term present in one model but not in another)
   data <- data %>%
-    tidyr::expand(model, tidyr::nesting(variable, var_label, var_class, var_type, contrasts, reference_row, label)) %>%
-    dplyr::left_join(data, by = c("model", "variable", "var_label", "var_class", "var_type", "contrasts", "reference_row", "label"))
+    tidyr::expand(
+      .data$model,
+      tidyr::nesting(
+        .data$variable, .data$var_label, .data$var_class,
+        .data$var_type, .data$contrasts, .data$reference_row,
+        .data$label
+      )
+    ) %>%
+    dplyr::left_join(
+      data,
+      by = c(
+        "model", "variable", "var_label",
+        "var_class", "var_type", "contrasts",
+        "reference_row", "label"
+      )
+    )
 
   attr(data, "coefficients_label") <- coefficients_label
 
@@ -494,19 +509,26 @@ ggcoef_data <- function (
 }
 
 #' @rdname ggcoef_model
-#' @param data a data frame containing data to be plotted, typically the output of [ggcoef_data()]
-#' @param exponentiate if `TRUE` a logarithmic scale will be used for x-axis
+#' @param data a data frame containing data to be plotted,
+#' typically the output of [ggcoef_model()], [ggcoef_compare()]
+#' or [ggcoef_multinom()] with the option `return_data = TRUE`
+#' @param exponentiate if `TRUE` a logarithmic scale will
+#' be used for x-axis
 #' @param point_size size of the points
 #' @param point_stroke thickness of the points
 #' @param point_fill fill colour for the points
-#' @param colour optional variable name to be mapped to colour aesthetic
-#' @param colour_guide should colour guide be displayed in the legend?
+#' @param colour optional variable name to be mapped to
+#' colour aesthetic
+#' @param colour_guide should colour guide be displayed
+#' in the legend?
 #' @param colour_lab label of the colour aesthetic in the legend
 #' @param colour_labels labels argument passed to
-#' [ggplot2::scale_colour_discrete()] and [ggplot2::discrete_scale()]
-#' @param shape optional variable name to be mapped to the shape aesthetic
+#' [ggplot2::scale_colour_discrete()] and
+#' [ggplot2::discrete_scale()]
+#' @param shape optional variable name to be mapped to the
+#' shape aesthetic
 #' @param shape_values values of the different shapes to use in
-#'   [ggplot2::scale_shape_manual()]
+#' [ggplot2::scale_shape_manual()]
 #' @param shape_guide should shape guide be displayed in the legend?
 #' @param shape_lab label of the shape aesthetic in the legend
 #' @param errorbar should error bars be plotted?
@@ -521,7 +543,7 @@ ggcoef_data <- function (
 #' @param dodged_width width value for [ggplot2::position_dodge()]
 #' @param facet_row variable name to be used for row facets
 #' @param facet_col optional variable name to be used for column facets
-#' @param facet_labeller labelled function to be used for labelling facets;
+#' @param facet_labeller labeller function to be used for labelling facets;
 #'   if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
 #'   more information in the documentation of [ggplot2::facet_grid()]
 #' @export

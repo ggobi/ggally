@@ -115,7 +115,8 @@ interval if \code{conf.int = TRUE}; must be strictly greater than 0
 and less than 1; defaults to 0.95, which corresponds to a 95
 percent confidence interval}
 
-\item{exponentiate}{if \code{TRUE} a logarithmic scale will be used for x-axis}
+\item{exponentiate}{if \code{TRUE} a logarithmic scale will
+be used for x-axis}
 
 \item{variable_labels}{a named list or a named vector of custom variable labels}
 
@@ -162,7 +163,9 @@ for plotting instead of the plot}
 
 \item{y.level_label}{an optional named vector for labelling \code{y.level} (see examples)}
 
-\item{data}{a data frame containing data to be plotted, typically the output of \code{\link[=ggcoef_data]{ggcoef_data()}}}
+\item{data}{a data frame containing data to be plotted,
+typically the output of \code{\link[=ggcoef_model]{ggcoef_model()}}, \code{\link[=ggcoef_compare]{ggcoef_compare()}}
+or \code{\link[=ggcoef_multinom]{ggcoef_multinom()}} with the option \code{return_data = TRUE}}
 
 \item{point_size}{size of the points}
 
@@ -170,16 +173,20 @@ for plotting instead of the plot}
 
 \item{point_fill}{fill colour for the points}
 
-\item{colour}{optional variable name to be mapped to colour aesthetic}
+\item{colour}{optional variable name to be mapped to
+colour aesthetic}
 
-\item{colour_guide}{should colour guide be displayed in the legend?}
+\item{colour_guide}{should colour guide be displayed
+in the legend?}
 
 \item{colour_lab}{label of the colour aesthetic in the legend}
 
 \item{colour_labels}{labels argument passed to
-\code{\link[ggplot2:scale_colour_discrete]{ggplot2::scale_colour_discrete()}} and \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}}
+\code{\link[ggplot2:scale_colour_discrete]{ggplot2::scale_colour_discrete()}} and
+\code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}}
 
-\item{shape}{optional variable name to be mapped to the shape aesthetic}
+\item{shape}{optional variable name to be mapped to the
+shape aesthetic}
 
 \item{shape_values}{values of the different shapes to use in
 \code{\link[ggplot2:scale_manual]{ggplot2::scale_shape_manual()}}}
@@ -212,7 +219,7 @@ for plotting instead of the plot}
 
 \item{facet_col}{optional variable name to be used for column facets}
 
-\item{facet_labeller}{labelled function to be used for labelling facets;
+\item{facet_labeller}{labeller function to be used for labelling facets;
 if labels are too long, you can use \code{\link[ggplot2:labellers]{ggplot2::label_wrap_gen()}} (see examples),
 more information in the documentation of \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}}
 }

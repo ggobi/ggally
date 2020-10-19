@@ -32,17 +32,19 @@ Depends:
     ggplot2 (>= 3.3.0)
 Imports:
     dplyr,
+    forcats,
     grDevices,
     grid,
     gtable (>= 0.2.0),
+    lifecycle,
     plyr (>= 1.8.3),
     progress,
     RColorBrewer,
     reshape (>= 0.8.5),
+    rlang,
     scales (>= 1.1.0),
     utils,
-    rlang,
-    lifecycle
+    tidyr
 Remotes:
     larmarange/broom.helpers
 Suggests:
@@ -54,8 +56,10 @@ Suggests:
     Hmisc,
     igraph (>= 1.0.1),
     intergraph (>= 2.0-2),
+    labelled,
     maps (>= 3.1.0),
     mapproj,
+    nnet,
     network (>= 1.12.0),
     scagnostics,
     sna (>= 2.3-2),
