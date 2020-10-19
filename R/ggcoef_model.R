@@ -213,6 +213,8 @@ ggcoef_model <- function (
 }
 
 #' @rdname ggcoef_model
+#' @description
+#' [ggcoef_compare()] is designed for displaying several models on the same plot.
 #' @export
 #' @param models named list of models
 #' @param type a dodged plot or a facetted plot?
@@ -343,7 +345,6 @@ ggcoef_compare <- function (
 #' @description
 #' [ggcoef_multinom()] is a variation of [ggcoef_model()] adapted to multinomial
 #' logistic regressions performed with [nnet::multinom()].
-#' [ggcoef_multinom()] works only with the dev version of `gtsummary`.
 #' @param y.level_label an optional named vector for labelling `y.level` (see examples)
 #' @export
 #' @examples

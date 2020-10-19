@@ -226,9 +226,10 @@ more information in the documentation of \code{\link[ggplot2:facet_grid]{ggplot2
 \description{
 Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
 
+\code{\link[=ggcoef_compare]{ggcoef_compare()}} is designed for displaying several models on the same plot.
+
 \code{\link[=ggcoef_multinom]{ggcoef_multinom()}} is a variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial
 logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
-\code{\link[=ggcoef_multinom]{ggcoef_multinom()}} works only with the dev version of \code{gtsummary}.
 }
 \details{
 \code{ggcoef_model()}, \code{ggcoef_multinom()} and \code{ggcoef_compare()} use
