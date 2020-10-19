@@ -9,7 +9,7 @@
 #    combination of \code{x_major} and \code{y_major} specifies a grid cell.
 #' @param polar A logical of length 1, specifying whether the glyphs should
 #'   be drawn in polar coordinates.  Defaults to \code{FALSE}.
-#' @param height,width The height and width of each glyph. Defaults to 95\% of
+#' @param height,width The height and width of each glyph. Defaults to 95% of
 #'  the \code{\link[ggplot2]{resolution}} of the data. Specify the width
 #'  absolutely by supplying a numeric vector of length 1, or relative to the
 #   resolution of the data by using \code{\link[ggplot2]{rel}}.
@@ -137,7 +137,7 @@ ref_boxes <- function(data, fill = NULL) {
 #'
 #' @param data A data frame containing variables named in \code{x_major},
 #'   \code{x_minor}, \code{y_major} and \code{y_minor}.
-#' @param height,width The height and width of each glyph. Defaults to 95\% of
+#' @param height,width The height and width of each glyph. Defaults to 95% of
 #'  the \code{\link[ggplot2]{resolution}} of the data. Specify the width
 #'  absolutely by supplying a numeric vector of length 1, or relative to the
 #   resolution of the data by using \code{\link[ggplot2]{rel}}.

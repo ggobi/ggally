@@ -7,9 +7,9 @@
 ggally_crosstable(
   data,
   mapping,
-  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "residuals",
-    "stdres"),
-  fill = c("none", "stdres", "residuals"),
+  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid",
+    "std.resid"),
+  fill = c("none", "std.resid", "resid"),
   ...,
   geom_tile_args = list(colour = "grey50")
 )
@@ -50,9 +50,9 @@ p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "row.prop"))
 p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), size = 8))
 
 # fill cells with standardized residuals
-p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres"))
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "std.resid"))
 
 # change scale for fill
-p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
+p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "std.resid") +
   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE))
 }

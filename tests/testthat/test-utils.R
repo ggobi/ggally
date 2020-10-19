@@ -2,6 +2,8 @@
 context("utils")
 test_that("require_namespaces", {
 
+  if ("Hmisc" %in% loadedNamespaces()) unloadNamespace("Hmisc")
+  #NB: survival is required by Hmisc, so Hmisc must be unloaded before
   if ("survival" %in% loadedNamespaces()) unloadNamespace("survival")
 
   expect_false("package:survival" %in% search())

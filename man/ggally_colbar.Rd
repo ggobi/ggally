@@ -12,6 +12,7 @@ ggally_colbar(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = FALSE,
   geom_bar_args = NULL
 )
 
@@ -22,6 +23,7 @@ ggally_rowbar(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = TRUE,
   geom_bar_args = NULL
 )
 }
@@ -30,13 +32,15 @@ ggally_rowbar(
 
 \item{mapping}{aesthetics being used}
 
-\item{label_format}{formatter function for displaying proportions}
+\item{label_format}{formatter function for displaying proportions, not taken into account if a label aesthetic is provided in \code{mapping}}
 
 \item{...}{other arguments passed to \code{\link[ggplot2]{geom_text}(...)}}
 
 \item{remove_background}{should the \code{panel.background} be removed?}
 
 \item{remove_percentage_axis}{should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}}
+
+\item{reverse_fill_levels}{should the levels of the fill variable be reversed?}
 
 \item{geom_bar_args}{other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}}
 }
@@ -57,6 +61,9 @@ p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8))
 # change labels' colour and use bold
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
               colour = "white", fontface = "bold"))
+
+# display number of observations instead of proportions
+p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(count))))
 
 # custom bar width
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))

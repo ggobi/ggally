@@ -1,3 +1,17 @@
+# GGally (development version)
+
+### Breaking changes
+
+* Following version 7.0.0 of `broom`, computed residuals in `stat_cross()`
+  are now named `"resid"` and `"std.resid"`. `cells` and `fill` arguments
+  of `ggally_crosstable()` and `ggtable()` have been updated accordingly
+  (@larmarange, #391)
+
+### Other changes
+
+* New option `reverse_fill_labels` for `ggally_colbar()`
+  and `ggally_rowbar()` (@larmarange, #374)
+
 # GGally 2.0.0
 
 ### New Vignettes
@@ -95,10 +109,7 @@ Website
 * Fixed `facet`'ing error where the factor order was not preserved. This error caused the facets to be alphabetically sorted, cause plots to appear in unexpected locations. (#355)
 
 
-
-
-GGally 1.5.0
----------------------
+# GGally 1.5.0
 
 * Updated to work with ggplot2 v3.3.0 (#308)
 
@@ -198,7 +209,6 @@ Added original ggmatrix theme
 
 
 
-
 GGally 1.3.0
 -----------------
 
@@ -292,7 +302,6 @@ Vignettes
 `ggally_box_no_facet` and `ggally_dot_no_facet`
 
 * New methods added as defaults to pair with new ggmatrix print method
-
 
 
 

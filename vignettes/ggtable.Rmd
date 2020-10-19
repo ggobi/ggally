@@ -50,10 +50,10 @@ ggtable(tips, "smoker", c("day", "time", "sex"), cells = "prop") + ggtitle("Colu
 
 Chi-square standardized residuals indicates which cells are over- or underrepresented compared to what would be expected under the independence hypothesis. If the standardized residual is less than -2, the cell’s observed frequency is less than the expected frequency. Greater than 2 and the observed frequency is greater than the expected frequency. Values lower than -3 or higher than 3 indicates a strong effect.
 
-To fill cells with standardized residuals, simply indicate `fill = "stdres"`.
+To fill cells with standardized residuals, simply indicate `fill = "std.resid"`.
 
 ```{r}
-ggtable(tips, "smoker", c("day", "time", "sex"), fill = "stdres")
+ggtable(tips, "smoker", c("day", "time", "sex"), fill = "std.resid")
 ```
 
 ## Using weights
@@ -68,7 +68,7 @@ ggtable(
   c("Age", "Class", "Sex"),
   mapping = aes(weight = Freq),
   cells = "row.prop",
-  fill = "stdres"
+  fill = "std.resid"
 )
 ```
 

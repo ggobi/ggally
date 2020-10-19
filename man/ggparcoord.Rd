@@ -69,49 +69,48 @@ the \code{ggplot2} graphics package.
 \code{scale} is a character string that denotes how to scale the variables
 in the parallel coordinate plot. Options:
 \itemize{
-  \item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
-  \item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
-  \item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
-  \item{\code{globalminmax}}{: no scaling is done; the range of the graphs is defined
-    by the global minimum and the global maximum}
-  \item{\code{center}}{: use \code{uniminmax} to standardize vertical height, then
-    center each variable at a value specified by the \code{scaleSummary} param}
-  \item{\code{centerObs}}{: use \code{uniminmax} to standardize vertical height, then
-    center each variable at the value of the observation specified by the \code{centerObsID} param}
+\item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
+\item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
+\item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
+\item{\code{globalminmax}}{: no scaling is done; the range of the graphs is defined
+by the global minimum and the global maximum}
+\item{\code{center}}{: use \code{uniminmax} to standardize vertical height, then
+center each variable at a value specified by the \code{scaleSummary} param}
+\item{\code{centerObs}}{: use \code{uniminmax} to standardize vertical height, then
+center each variable at the value of the observation specified by the \code{centerObsID} param}
 }
 
 \code{missing} is a character string that denotes how to handle missing
-  missing values. Options:
+missing values. Options:
 \itemize{
-  \item{\code{exclude}}{: remove all cases with missing values}
-  \item{\code{mean}}{: set missing values to the mean of the variable}
-  \item{\code{median}}{: set missing values to the median of the variable}
-  \item{\code{min10}}{: set missing values to 10\% below the minimum of the variable}
-  \item{\code{random}}{: set missing values to value of randomly chosen observation
-    on that variable}
+\item{\code{exclude}}{: remove all cases with missing values}
+\item{\code{mean}}{: set missing values to the mean of the variable}
+\item{\code{median}}{: set missing values to the median of the variable}
+\item{\code{min10}}{: set missing values to 10\% below the minimum of the variable}
+\item{\code{random}}{: set missing values to value of randomly chosen observation on that variable}
 }
 
 \code{order} is either a vector of indices or a character string that denotes how to
-  order the axes (variables) of the parallel coordinate plot. Options:
+order the axes (variables) of the parallel coordinate plot. Options:
 \itemize{
-  \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
-  \item{\code{(given vector)}}{: order by the vector specified}
-  \item{\code{anyClass}}{: order variables by their separation between any one class and
-    the rest (as opposed to their overall variation between classes). This is accomplished
-    by calculating the F-statistic for each class vs. the rest, for each axis variable.
-    The axis variables are then ordered (decreasing) by their maximum of k F-statistics,
-    where k is the number of classes.}
-  \item{\code{allClass}}{: order variables by their overall F statistic (decreasing) from
-    an ANOVA with \code{groupColumn} as the explanatory variable (note: it is required
-    to specify a \code{groupColumn} with this ordering method). Basically, this method
-    orders the variables by their variation between classes (most to least).}
-  \item{\code{skewness}}{: order variables by their sample skewness (most skewed to
-    least skewed)}
-  \item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
-    by the package \code{scagnostics}. Other scagnostic measures available to order
-    by are \code{Skewed}, \code{Clumpy}, \code{Sparse}, \code{Striated}, \code{Convex}, \code{Skinny}, \code{Stringy}, and
-    \code{Monotonic}. Note: To use these methods of ordering, you must have the \code{scagnostics}
-    package loaded.}
+\item{\code{(default)}}{: order by the vector denoted by \code{columns}}
+\item{\code{(given vector)}}{: order by the vector specified}
+\item{\code{anyClass}}{: order variables by their separation between any one class and
+the rest (as opposed to their overall variation between classes). This is accomplished
+by calculating the F-statistic for each class vs. the rest, for each axis variable.
+The axis variables are then ordered (decreasing) by their maximum of k F-statistics,
+where k is the number of classes.}
+\item{\code{allClass}}{: order variables by their overall F statistic (decreasing) from
+an ANOVA with \code{groupColumn} as the explanatory variable (note: it is required
+to specify a \code{groupColumn} with this ordering method). Basically, this method
+orders the variables by their variation between classes (most to least).}
+\item{\code{skewness}}{: order variables by their sample skewness (most skewed to
+least skewed)}
+\item{\code{Outlying}}{: order by the scagnostic measure, Outlying, as calculated
+by the package \code{scagnostics}. Other scagnostic measures available to order
+by are \code{Skewed}, \code{Clumpy}, \code{Sparse}, \code{Striated}, \code{Convex}, \code{Skinny}, \code{Stringy}, and
+\code{Monotonic}. Note: To use these methods of ordering, you must have the \code{scagnostics}
+package loaded.}
 }
 }
 \examples{

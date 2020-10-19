@@ -2,8 +2,6 @@ if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("variable", "value", "ggally_splineFactor"))
 }
 
-
-
 #' Parallel coordinate plot
 #'
 #' A function for plotting static parallel coordinate plots, utilizing
@@ -29,9 +27,8 @@ if (getRversion() >= "2.15.1") {
 #'   \item{\code{exclude}}{: remove all cases with missing values}
 #'   \item{\code{mean}}{: set missing values to the mean of the variable}
 #'   \item{\code{median}}{: set missing values to the median of the variable}
-#'   \item{\code{min10}}{: set missing values to 10\% below the minimum of the variable}
-#'   \item{\code{random}}{: set missing values to value of randomly chosen observation
-#'     on that variable}
+#'   \item{\code{min10}}{: set missing values to 10% below the minimum of the variable}
+#'   \item{\code{random}}{: set missing values to value of randomly chosen observation on that variable}
 #' }
 #'
 #' \code{order} is either a vector of indices or a character string that denotes how to

@@ -79,17 +79,17 @@ Make a matrix of plots with a given data set
 \code{upper} and \code{lower} are lists that may contain the variables
 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
 \describe{
- \item{continuous}{This option is used for continuous X and Y data.}
- \item{combo}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
- \item{discrete}{This option is used for categorical X and Y data.}
- \item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+\item{continuous}{This option is used for continuous X and Y data.}
+\item{combo}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+\item{discrete}{This option is used for categorical X and Y data.}
+\item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 }
 
 \code{diag} is a list that may only contain the variables 'continuous', 'discrete', and 'na'. Each element of the diag list is a string implementing the following options:
 \describe{
- \item{continuous}{exactly one of ('densityDiag', 'barDiag', 'blankDiag'). This option is used for continuous X data.}
- \item{discrete}{exactly one of ('barDiag', 'blankDiag'). This option is used for categorical X and Y data.}
- \item{na}{exactly one of ('naDiag', 'blankDiag').  This option is used when all X data is \code{NA}.}
+\item{continuous}{exactly one of ('densityDiag', 'barDiag', 'blankDiag'). This option is used for continuous X data.}
+\item{discrete}{exactly one of ('barDiag', 'blankDiag'). This option is used for categorical X and Y data.}
+\item{na}{exactly one of ('naDiag', 'blankDiag').  This option is used when all X data is \code{NA}.}
 }
 
 If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
