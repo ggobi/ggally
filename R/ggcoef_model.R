@@ -214,7 +214,6 @@ ggcoef_model <- function (
 
 #' @rdname ggcoef_model
 #' @export
-#' @importFrom rlang .data
 #' @param models named list of models
 #' @param type a dodged plot or a facetted plot?
 #' @examples
@@ -290,9 +289,9 @@ ggcoef_compare <- function (
     tidyr::expand(
       .data$model,
       tidyr::nesting(
-        .data$variable, .data$var_label, .data$var_class,
-        .data$var_type, .data$contrasts, .data$reference_row,
-        .data$label
+        !!sym("variable"), !!sym("var_label"), !!sym("var_class"),
+        !!sym("var_type"), !!sym("contrasts"), !!sym("reference_row"),
+        !!sym("label")
       )
     ) %>%
     dplyr::left_join(
