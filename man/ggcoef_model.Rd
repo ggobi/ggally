@@ -111,11 +111,11 @@ ggcoef_plot(
 \item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
 
 \item{conf.level}{the confidence level to use for the confidence
-interval if `conf.int = TRUE`; must be strictly greater than 0
+interval if \code{conf.int = TRUE}; must be strictly greater than 0
 and less than 1; defaults to 0.95, which corresponds to a 95
 percent confidence interval}
 
-\item{exponentiate}{if `TRUE` a logarithmic scale will be used for x-axis}
+\item{exponentiate}{if \code{TRUE} a logarithmic scale will be used for x-axis}
 
 \item{variable_labels}{a named list or a named vector of custom variable labels}
 
@@ -141,28 +141,28 @@ and \code{\link[broom.helpers:select_helpers]{all_interaction()}}}
 
 \item{significance}{level (between 0 and 1) below which a
 coefficient is consider to be significantly different from 0
-(or 1 if `exponentiate = TRUE`), `NULL` for not highlighting
+(or 1 if \code{exponentiate = TRUE}), \code{NULL} for not highlighting
 such coefficients}
 
 \item{significance_labels}{optional vector with custom labels
 for significance variable}
 
-\item{show_p_values}{if `TRUE`, add p-value to labels}
+\item{show_p_values}{if \code{TRUE}, add p-value to labels}
 
-\item{signif_stars}{if `TRUE`, add significant stars to labels}
+\item{signif_stars}{if \code{TRUE}, add significant stars to labels}
 
-\item{return_data}{if `TRUE`, will return the data.frame used
+\item{return_data}{if \code{TRUE}, will return the data.frame used
 for plotting instead of the plot}
 
-\item{...}{parameters passed to [ggcoef_plot()]}
+\item{...}{parameters passed to \code{\link[=ggcoef_plot]{ggcoef_plot()}}}
 
 \item{models}{named list of models}
 
 \item{type}{a dodged plot or a facetted plot?}
 
-\item{y.level_label}{an optional named vector for labelling `y.level` (see examples)}
+\item{y.level_label}{an optional named vector for labelling \code{y.level} (see examples)}
 
-\item{data}{a data frame containing data to be plotted, typically the output of [ggcoef_data()]}
+\item{data}{a data frame containing data to be plotted, typically the output of \code{\link[=ggcoef_data]{ggcoef_data()}}}
 
 \item{point_size}{size of the points}
 
@@ -177,12 +177,12 @@ for plotting instead of the plot}
 \item{colour_lab}{label of the colour aesthetic in the legend}
 
 \item{colour_labels}{labels argument passed to
-[ggplot2::scale_colour_discrete()] and [ggplot2::discrete_scale()]}
+\code{\link[ggplot2:scale_colour_discrete]{ggplot2::scale_colour_discrete()}} and \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}}
 
 \item{shape}{optional variable name to be mapped to the shape aesthetic}
 
 \item{shape_values}{values of the different shapes to use in
-[ggplot2::scale_shape_manual()]}
+\code{\link[ggplot2:scale_manual]{ggplot2::scale_shape_manual()}}}
 
 \item{shape_guide}{should shape guide be displayed in the legend?}
 
@@ -200,38 +200,38 @@ for plotting instead of the plot}
 
 \item{strips_even}{color of the even rows}
 
-\item{vline}{should a vertical line de drawn at 0 (or 1 if `exponentiate = TRUE`)?}
+\item{vline}{should a vertical line de drawn at 0 (or 1 if \code{exponentiate = TRUE})?}
 
 \item{vline_colour}{colour of vertical line}
 
 \item{dodged}{should points be dodged (according to the colour aesthetic)?}
 
-\item{dodged_width}{width value for [ggplot2::position_dodge()]}
+\item{dodged_width}{width value for \code{\link[ggplot2:position_dodge]{ggplot2::position_dodge()}}}
 
 \item{facet_row}{variable name to be used for row facets}
 
 \item{facet_col}{optional variable name to be used for column facets}
 
 \item{facet_labeller}{labelled function to be used for labelling facets;
-if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
-more information in the documentation of [ggplot2::facet_grid()]}
+if labels are too long, you can use \code{\link[ggplot2:labellers]{ggplot2::label_wrap_gen()}} (see examples),
+more information in the documentation of \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}}
 }
 \description{
-Redesign of [GGally::ggcoef()] based on [broom.helpers::tidy_plus_plus()].
+Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
 
-[ggcoef_multinom()] is a variation of [ggcoef_model()] adapted to multinomial
-logistic regressions performed with [nnet::multinom()].
-[ggcoef_multinom()] works only with the dev version of `gtsummary`.
+\code{\link[=ggcoef_multinom]{ggcoef_multinom()}} is a variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial
+logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
+\code{\link[=ggcoef_multinom]{ggcoef_multinom()}} works only with the dev version of \code{gtsummary}.
 }
 \details{
-`ggcoef_model()`, `ggcoef_multinom()` and `ggcoef_compare()` use
-[broom.helpers::tidy_plus_plus()] to obtain a tibble of the model
+\code{ggcoef_model()}, \code{ggcoef_multinom()} and \code{ggcoef_compare()} use
+\code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}} to obtain a tibble of the model
 coefficients, apply additional data transformation and then pass the
-produced tibble to `ggcoef_plot()` to generate the plot.
+produced tibble to \code{ggcoef_plot()} to generate the plot.
 
-For more control, you can use the argument `return_data = TRUE` to
+For more control, you can use the argument \code{return_data = TRUE} to
 get the produced tibble, apply any transformation of your own and
-then pass your customised tibble to `ggcoef_plot()`.
+then pass your customised tibble to \code{ggcoef_plot()}.
 }
 \examples{
 # Small function to display plots only if it's interactive
