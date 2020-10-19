@@ -30,11 +30,11 @@ ggally_cor(
 \item{...}{other arguments being supplied to \code{\link[ggplot2]{geom_text}()} for the title and groups}
 
 \item{stars}{logical value which determines if the significance stars should be displayed.  Given the \code{\link[stats]{cor.test}} p-values, display \describe{
-  \item{\code{"***"}}{if the p-value is \verb{< 0.001}}
-  \item{\code{"**"}}{if the p-value is \verb{< 0.01}}
-  \item{\code{"*"}}{if the p-value is \verb{< 0.05}}
-  \item{\code{"."}}{if the p-value is \verb{< 0.10}}
-  \item{\code{""}}{otherwise}
+\item{\code{"***"}}{if the p-value is \verb{< 0.001}}
+\item{\code{"**"}}{if the p-value is \verb{< 0.01}}
+\item{\code{"*"}}{if the p-value is \verb{< 0.05}}
+\item{\code{"."}}{if the p-value is \verb{< 0.10}}
+\item{\code{""}}{otherwise}
 }}
 
 \item{method}{\code{method} supplied to cor function}

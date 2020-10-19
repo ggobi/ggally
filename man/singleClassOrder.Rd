@@ -17,8 +17,8 @@ separation between this class and the rest}
 }
 \value{
 character vector of names of axisVars ordered such that the first
-  variable has the most separation between one of the classes and the rest, and
-  the last variable has the least (as measured by F-statistics from an ANOVA)
+variable has the most separation between one of the classes and the rest, and
+the last variable has the least (as measured by F-statistics from an ANOVA)
 }
 \description{
 Order axis variables by separation between one class and the rest

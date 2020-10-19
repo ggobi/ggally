@@ -114,7 +114,7 @@ Note: **colour** aesthetic is taken into account only if it corresponds to **x**
 
 ```{r}
 ggally_crosstable(tips, aes(x = day, y = smoker))
-ggally_crosstable(tips, aes(x = day, y = smoker), cells = "col.prop", fill = "stdres")
+ggally_crosstable(tips, aes(x = day, y = smoker), cells = "col.prop", fill = "std.resid")
 ```
 
 Note: **colour** aesthetic is not taken into account.

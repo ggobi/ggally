@@ -18,8 +18,8 @@
 #'   \item{row.prop}{row proportion}
 #'   \item{col.prop}{column proportion}
 #'   \item{expected}{expected count under the null hypothesis}
-#'   \item{residuals}{Pearson's residual}
-#'   \item{stdres}{standardized residual}
+#'   \item{resid}{Pearson's residual}
+#'   \item{std.resid}{standardized residual}
 #' }
 #'
 #' @export
@@ -39,7 +39,7 @@
 #' p_(ggplot(d) +
 #'  aes(
 #'    x = Class, y = Survived, weight = Freq,
-#'    size = after_stat(observed), fill = after_stat(stdres)
+#'    size = after_stat(observed), fill = after_stat(std.resid)
 #'  ) +
 #'  stat_cross(shape = 22) +
 #'  scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
@@ -57,7 +57,7 @@
 #'   aes(
 #'     x = Class, y = Survived, weight = Freq,
 #'     label = scales::percent(after_stat(row.prop)),
-#'     size = NULL, fill = after_stat(stdres)
+#'     size = NULL, fill = after_stat(std.resid)
 #'   ) +
 #'   stat_cross(shape = 22, size = 30) +
 #'   geom_text(stat = "cross") +
@@ -128,8 +128,8 @@ StatCross <- ggproto("StatCross", Stat,
       "row.prop",
       "col.prop",
       "expected",
-      "residuals",
-      "stdres"
+      "resid",
+      "std.resid"
     )) {
       from_name <- paste0(".", to_name)
       panel_names[which(panel_names == from_name)] <- to_name
@@ -193,7 +193,7 @@ StatCross <- ggproto("StatCross", Stat,
 #' d <- as.data.frame(Titanic)
 #' p_(ggally_cross(
 #'   d,
-#'   mapping = aes(x = Class, y = Survived, weight = Freq, fill = after_stat(stdres))
+#'   mapping = aes(x = Class, y = Survived, weight = Freq, fill = after_stat(std.resid))
 #' ) +
 #'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
 #'
@@ -306,7 +306,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #'   as.data.frame(Titanic),
 #'   mapping = aes(
 #'     x = Class, y = Survived, weight = Freq,
-#'     fill = after_stat(stdres),
+#'     fill = after_stat(std.resid),
 #'     label = scales::percent(after_stat(col.prop), accuracy = .1)
 #'   ),
 #'   geom_tile_args = list(colour = "black")
@@ -378,24 +378,24 @@ ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_t
 #' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), size = 8))
 #'
 #' # fill cells with standardized residuals
-#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres"))
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "std.resid"))
 #'
 #' # change scale for fill
-#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "stdres") +
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "std.resid") +
 #'   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE))
 ggally_crosstable <- function(
   data,
   mapping,
-  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "residuals", "stdres"),
-  fill = c("none", "stdres", "residuals"),
+  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid", "std.resid"),
+  fill = c("none", "std.resid", "resid"),
   ...,
   geom_tile_args = list(colour = "grey50")
 ){
   fill <- match.arg(fill)
-  if (fill == "stdres")
-    mapping$fill <- aes_string(fill = "after_stat(stdres)")$fill
-  if (fill == "residuals")
-    mapping$fill <- aes_string(fill = "after_stat(residuals)")$fill
+  if (fill == "std.resid")
+    mapping$fill <- aes_string(fill = "after_stat(std.resid)")$fill
+  if (fill == "resid")
+    mapping$fill <- aes_string(fill = "after_stat(resid)")$fill
   if (fill == "none")
     geom_tile_args$fill <- "white"
 
@@ -404,7 +404,7 @@ ggally_crosstable <- function(
     mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = 1)"))$label
   if (!"label" %in% names(mapping) && cells %in% c("prop", "row.prop", "col.prop"))
     mapping$label <- aes_string(label = paste0("scales::percent(after_stat(", cells, "), accuracy = .1)"))$label
-  if (!"label" %in% names(mapping) && cells %in% c("residuals", "stdres"))
+  if (!"label" %in% names(mapping) && cells %in% c("resid", "std.resid"))
     mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = .1)"))$label
 
   p <- ggally_table(data = data, mapping = mapping, keep.zero.cells = TRUE, geom_tile_args = geom_tile_args, ...) +
@@ -412,7 +412,7 @@ ggally_crosstable <- function(
     scale_y_discrete(expand = expansion(0, 0)) +
     theme(axis.ticks = element_blank())
 
-  if (fill == "stdres")
+  if (fill == "std.resid")
     p <- p + scale_fill_steps2(breaks = c(-Inf, -3, -2, 2, 3, Inf))
 
   p

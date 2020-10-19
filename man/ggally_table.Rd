@@ -38,7 +38,7 @@ by \code{\link{stat_cross}}  could be used (see examples).
 }
 \note{
 The \strong{colour} aesthetic is taken into account only if equal to
-  \strong{x} or \strong{y}.
+\strong{x} or \strong{y}.
 }
 \examples{
 # Small function to display plots only if it's interactive
@@ -76,7 +76,7 @@ p_(ggally_table(
   as.data.frame(Titanic),
   mapping = aes(
     x = Class, y = Survived, weight = Freq,
-    fill = after_stat(stdres),
+    fill = after_stat(std.resid),
     label = scales::percent(after_stat(col.prop), accuracy = .1)
   ),
   geom_tile_args = list(colour = "black")

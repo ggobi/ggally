@@ -62,7 +62,7 @@ Make a generic matrix of \pkg{ggplot2} plots.
 }
 \section{Memory usage}{
 
-Now that the \code{\link{print.ggmatrix}} method uses a large \pkg{gtable} object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the \pkg{ggplot2} format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
+Now that the \code{\link{print.ggmatrix}} method uses a large \pkg{gtable} object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the \pkg{ggplot2} format greatly outweigh the price of about 20\% increase in memory usage from the prior ad-hoc print method.
 }
 
 \examples{
