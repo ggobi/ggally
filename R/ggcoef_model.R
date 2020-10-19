@@ -587,8 +587,10 @@ ggcoef_plot <- function (
   if (stripped_rows)
     p <- p +
       geom_stripped_rows(
-        mapping = aes_string(y = "label", odd = ".fill", even = ".fill"),
-        inherit.aes = FALSE
+        mapping = aes_string(
+          odd = ".fill", even = ".fill",
+          colour = NULL, linetype = NULL
+        )
       )
 
   if (vline)
