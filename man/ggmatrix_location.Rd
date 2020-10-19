@@ -10,18 +10,18 @@ ggmatrix_location(pm, location = NULL, rows = NULL, cols = NULL)
 \item{pm}{\code{\link{ggmatrix}} plot object}
 
 \item{location}{\describe{
-  \item{\code{"all"}, \code{TRUE}}{All row and col combinations}
-  \item{\code{"none"}}{No row and column combinations}
-  \item{\code{"upper"}}{Locations where the column value is higher than the row value}
-  \item{\code{"lower"}}{Locations where the row value is higher than the column value}
-  \item{\code{"diag"}}{Locations where the column value is equal to the row value}
-  \item{\code{matrix} or \code{data.frame}}{
-    \code{matrix} values will be converted into \code{data.frame}s.
-    \itemize{
-      \item A \code{data.frame} with the exact column names \code{c("row", "col")}
-      \item A \code{data.frame} with the number of rows and columns matching the plot matrix object provided.  Each cell will be tested for a "truthy" value to determine if the location should be kept.
-    }
-  }
+\item{\code{"all"}, \code{TRUE}}{All row and col combinations}
+\item{\code{"none"}}{No row and column combinations}
+\item{\code{"upper"}}{Locations where the column value is higher than the row value}
+\item{\code{"lower"}}{Locations where the row value is higher than the column value}
+\item{\code{"diag"}}{Locations where the column value is equal to the row value}
+\item{\code{matrix} or \code{data.frame}}{
+\code{matrix} values will be converted into \code{data.frame}s.
+\itemize{
+\item A \code{data.frame} with the exact column names \code{c("row", "col")}
+\item A \code{data.frame} with the number of rows and columns matching the plot matrix object provided.  Each cell will be tested for a "truthy" value to determine if the location should be kept.
+}
+}
 }}
 
 \item{rows}{numeric vector of the rows to be used. Will be used with  \code{cols} if \code{location} is \code{NULL}}

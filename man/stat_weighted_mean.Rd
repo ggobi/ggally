@@ -77,9 +77,9 @@ aesthetic if provided.
 \section{Computed variables}{
 
 \describe{
-  \item{y}{weighted y (numerator / denominator)}
-  \item{numerator}{numerator}
-  \item{denominator}{denominator}
+\item{y}{weighted y (numerator / denominator)}
+\item{numerator}{numerator}
+\item{denominator}{denominator}
 }
 }
 

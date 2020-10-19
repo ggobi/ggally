@@ -336,7 +336,8 @@ ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, cor
     plot <- scatmat(data, columns = columns, color = color, alpha = alpha) +
       geom_text(data = a, aes_string(label = "r", color = "colorcolumn")) + labs(color = color)
   }
-  factor <- data.choose[sapply(data.choose, is.factor)]
+  is.factor.or.character <- function(x) {is.factor(x)|is.character(x)}
+  factor <- data.choose[sapply(data.choose, is.factor.or.character)]
   if (ncol(factor) == 0){
     return(plot)
   } else {

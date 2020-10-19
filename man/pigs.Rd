@@ -17,14 +17,14 @@ This data contains about the United Kingdom Pig Production from the book 'Data' 
 The time variable has been added from a combination of year and quarter
 
 \itemize{
-  \item time year + (quarter - 1) / 4
-  \item year year of production
-  \item quarter quarter of the year of production
-  \item gilts number of sows giving birth for the first time
-  \item profit ratio of price to an index of feed price
-  \item s_per_herdsz ratio of the number of breeding pigs slaughtered to the total breeding herd size
-  \item production number of pigs slaughtered that were reared for meat
-  \item herdsz breeding herd size
+\item time year + (quarter - 1) / 4
+\item year year of production
+\item quarter quarter of the year of production
+\item gilts number of sows giving birth for the first time
+\item profit ratio of price to an index of feed price
+\item s_per_herdsz ratio of the number of breeding pigs slaughtered to the total breeding herd size
+\item production number of pigs slaughtered that were reared for meat
+\item herdsz breeding herd size
 }
 }
 \references{

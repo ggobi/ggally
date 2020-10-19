@@ -66,11 +66,11 @@ Make a matrix of plots with a given data set with two different column sets
 \code{types} is a list that may contain the variables
 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
 \describe{
- \item{continuous}{This option is used for continuous X and Y data.}
- \item{comboHorizontal}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
- \item{comboVertical}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
- \item{discrete}{This option is used for categorical X and Y data.}
- \item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+\item{continuous}{This option is used for continuous X and Y data.}
+\item{comboHorizontal}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+\item{comboVertical}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+\item{discrete}{This option is used for categorical X and Y data.}
+\item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 }
 
 If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.

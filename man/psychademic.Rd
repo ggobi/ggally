@@ -15,15 +15,15 @@ This data contains 600 observations on eight variables
 }
 \details{
 \itemize{
-  \item locus_of_control - psychological
-  \item self_concept - psychological
-  \item motivation - psychological. Converted to four character groups
-  \item read - academic
-  \item write - academic
-  \item math - academic
-  \item science - academic
-  \item female - academic. Dropped from original source
-  \item sex - academic. Added as a character version of female column
+\item locus_of_control - psychological
+\item self_concept - psychological
+\item motivation - psychological. Converted to four character groups
+\item read - academic
+\item write - academic
+\item math - academic
+\item science - academic
+\item female - academic. Dropped from original source
+\item sex - academic. Added as a character version of female column
 }
 }
 \references{

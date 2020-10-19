@@ -1,5 +1,5 @@
 Package: GGally
-Version: 2.0.0
+Version: 2.0.0.9000
 License: GPL (>= 2.0)
 Title: Extension to 'ggplot2'
 Type: Package
@@ -44,7 +44,7 @@ Imports:
     rlang,
     lifecycle
 Suggests:
-    broom (>= 0.4.0),
+    broom (>= 0.7.0),
     broom.helpers (>= 1.0.0.9001),
     chemometrics,
     geosphere (>= 1.5-1),
@@ -64,7 +64,7 @@ Suggests:
     crosstalk,
     knitr,
     spelling
-Roxygen: list(markdown = FALSE)
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 SystemRequirements: openssl
 Encoding: UTF-8

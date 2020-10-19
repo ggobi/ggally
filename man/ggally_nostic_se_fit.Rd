@@ -26,7 +26,7 @@ A function to display \code{stats::\link[stats]{predict}}'s standard errors
 \details{
 As stated in \code{stats::\link[stats]{predict}} documentation:
 
- If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
+If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
 
 Since the se.fit is \code{TRUE} and scale is unset by default, the standard errors are extracted from the model fit.
 

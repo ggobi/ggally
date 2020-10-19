@@ -9,7 +9,7 @@
 #'
 #' \itemize{
 ######   \item \code{data.frame}: replace current data.frame
-######      (must use \code{\%+\%})
+######      (must use \code{%+%})
 ######   \item \code{uneval}: replace current aesthetics
 ######   \item \code{layer}: add new layer
 #'   \item \code{theme}: update plot theme

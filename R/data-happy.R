@@ -28,7 +28,7 @@
 #' @format A data frame with 51020 rows and 10 variables
 #' @references
 #' Smith, Tom W., Peter V. Marsden, Michael Hout, Jibum Kim. \emph{General Social Surveys, 1972-2006}.
-#'   [machine-readable data file]. Principal Investigator, Tom W. Smith; Co-Principal Investigators,
+#'   \[machine-readable data file\]. Principal Investigator, Tom W. Smith; Co-Principal Investigators,
 #'   Peter V. Marsden and Michael Hout, NORC ed.
 #'   Chicago: National Opinion Research Center, producer, 2005;
 #'   Storrs, CT: The Roper Center for Public Opinion Research, University of Connecticut, distributor.

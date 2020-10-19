@@ -35,8 +35,8 @@ This statistic is intended to be used with two discrete variables mapped to **x*
 - **row.prop**: row proportion
 - **col.prop**: column proportion
 - **expected**: expected count under the null hypothesis
-- **residuals**: Pearson's residual
-- **stdres**: standardized residual
+- **resid**: Pearson's residual
+- **std.resid**: standardized residual
 
 By default, `stat_cross()` is using `ggplot2::geom_points()`. If you can to plot the number of observations, you need to map `after_stat(observed)` to an aesthetic (here **size**):
 
@@ -54,7 +54,7 @@ We can go further using a custom shape and filling points with standardized resi
 
 ```{r fig.height=6, fig.width=6}
 ggplot(d) +
-  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed), fill = after_stat(stdres)) +
+  aes(x = Class, y = Survived, weight = Freq, size = after_stat(observed), fill = after_stat(std.resid)) +
   stat_cross(shape = 22) +
   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE) +
   scale_size_area(max_size = 20)
@@ -77,7 +77,7 @@ ggplot(d) +
   aes(
     x = Class, y = Survived, weight = Freq,
     label = scales::percent(after_stat(col.prop), accuracy = .1),
-    fill = after_stat(stdres)
+    fill = after_stat(std.resid)
   ) +
   stat_cross(shape = 22, size = 30) +
   geom_text(stat = "cross") +

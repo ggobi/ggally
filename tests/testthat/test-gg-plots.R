@@ -136,7 +136,7 @@ test_that("dates", {
 test_that("cor stars are aligned", {
   p <- ggally_cor(iris, ggplot2::aes(x = Sepal.Length, y = Petal.Width, color = as.factor(Species)))
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr: 0.818***")
-  expect_equal(get("aes_params", envir = p$layers[[1]])$family, "mono")
+  #expect_equal(get("aes_params", envir = p$layers[[1]])$family, "mono")
 
   labels <- eval_data_col(p$layers[[2]]$data, p$layers[[2]]$mapping$label)
   expect_equal(as.character(labels), c("    setosa: 0.278.  ", "versicolor: 0.546***", " virginica: 0.281*  "))

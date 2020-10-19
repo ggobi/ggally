@@ -21,9 +21,9 @@ if(getRversion() >= "2.15.1") {
 #' @param cens.col colour of the points that mark censored observations.
 #' @param lty.est linetype of the survival curve(s). Vector length should be
 #'    either 1 or equal to the number of strata.
-#' @param lty.ci linetype of the bounds that mark the 95\% CI.
+#' @param lty.ci linetype of the bounds that mark the 95% CI.
 #' @param size.est line width of the survival curve
-#' @param size.ci line width of the 95\% CI
+#' @param size.ci line width of the 95% CI
 #' @param cens.size point size of the censoring points
 #' @param cens.shape shape of the points that mark censored observations.
 #' @param back.white if TRUE the background will not be the default

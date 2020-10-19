@@ -134,10 +134,11 @@ StatProp <- ggproto("StatProp", Stat,
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param label_format formatter function for displaying proportions
+#' @param label_format formatter function for displaying proportions, not taken into account if a label aesthetic is provided in \code{mapping}
 #' @param ... other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
 #' @param remove_percentage_axis should percentage axis be removed? Removes the y-axis for \code{ggally_colbar()} and x-axis for \code{ggally_rowbar()}
 #' @param remove_background should the \code{panel.background} be removed?
+#' @param reverse_fill_levels should the levels of the fill variable be reversed?
 #' @param geom_bar_args other arguments passed to \code{\link[ggplot2]{geom_bar}(...)}
 #' @author Joseph Larmarange
 #' @keywords hplot
@@ -156,6 +157,9 @@ StatProp <- ggproto("StatProp", Stat,
 #' # change labels' colour and use bold
 #' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
 #'               colour = "white", fontface = "bold"))
+#'
+#' # display number of observations instead of proportions
+#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(count))))
 #'
 #' # custom bar width
 #' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))
@@ -179,6 +183,7 @@ ggally_colbar <- function(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = FALSE,
   geom_bar_args = NULL
 ) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
@@ -193,19 +198,32 @@ ggally_colbar <- function(
   if (!is.null(mapping$colour))
     mapping$colour <- NULL
 
+  # label mapping
+  if (!is.null(mapping$label)) {
+    mapping_text <- aes()
+    mapping_text$label <- mapping$label
+  } else {
+    mapping_text <- aes_string(label = "label_format(after_stat(prop))")
+  }
+
   # position for geom_bar
-  geom_bar_args$position <- "fill"
+  geom_bar_args$position <- position_fill(reverse = reverse_fill_levels)
 
   p <- ggplot(data, mapping) +
     do.call(geom_bar, geom_bar_args) +
     geom_text(
-      aes_string(label = "label_format(after_stat(prop))"),
+      mapping = mapping_text,
       stat = "prop",
-      position = position_fill(.5),
+      position = position_fill(.5, reverse = reverse_fill_levels),
       ...
     ) +
-    scale_y_continuous(labels = scales::percent) +
-    ylab("")
+    scale_y_continuous(
+      labels = scales::percent,
+      expand = expansion(ifelse(remove_background, 0, .05), 0)
+    ) +
+    scale_x_discrete(expand = expansion(0, ifelse(remove_background, 0, .6))) +
+    ylab("") +
+    guides(fill = guide_legend(reverse = reverse_fill_levels))
 
   if (isTRUE(remove_background)) {
     p <- p +
@@ -222,6 +240,7 @@ ggally_colbar <- function(
         axis.ticks.y = element_blank()
       )
   }
+
   p
 }
 
@@ -234,6 +253,7 @@ ggally_rowbar <- function(
   ...,
   remove_background = FALSE,
   remove_percentage_axis = FALSE,
+  reverse_fill_levels = TRUE,
   geom_bar_args = NULL
 ) {
   mapping <- mapping_swap_x_y(mapping)
@@ -244,10 +264,21 @@ ggally_rowbar <- function(
     label_format = label_format,
     ...,
     remove_background = remove_background,
-    remove_percentage_axis = remove_percentage_axis,
+    remove_percentage_axis = FALSE,
+    reverse_fill_levels = reverse_fill_levels,
     geom_bar_args = geom_bar_args
   ) +
-    coord_flip()
+    coord_flip() +
+    guides(fill = guide_legend(reverse = !reverse_fill_levels))
+
+  if (isTRUE(remove_percentage_axis)) {
+    p <- p +
+      theme(
+        panel.grid = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()
+      )
+  }
 
   p
 }
