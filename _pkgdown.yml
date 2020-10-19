@@ -116,6 +116,7 @@ reference:
   contents:
   - ggbivariate
   - ggcoef
+  - ggcoef_model
   - ggcorr
   - ggparcoord
   - ggsurv
@@ -164,6 +165,10 @@ reference:
   - stat_cross
   - stat_prop
   - stat_weighted_mean
+
+- title: Additional Geometries for `ggplot2`
+  contents:
+  - geom_stripped_rows
 
 - title: "ggmatrix() Helpers"
   contents:
