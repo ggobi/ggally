@@ -1,6 +1,6 @@
 #' Compute proportions according to custom denominator
 #'
-#' \code{stat_prop} is a variation of \code{\link[ggplot2]{stat_count}} allowing to compute custom
+#' \code{stat_prop} is a variation of [ggplot2::stat_count()] allowing to compute custom
 #' proportions according to the \strong{by} aesthetic defining the denominator
 #' (i.e. all proportions for a same value of \strong{by} will sum to 1).
 #' The \code{by} aesthetic should be a factor.
@@ -16,7 +16,7 @@
 #'   \item{count}{number of points in bin}
 #'   \item{prop}{computed proportion}
 #' }
-#' @seealso \code{\link[ggplot2]{stat_count}}
+#' @seealso [ggplot2::stat_count()]
 #'
 #' @import ggplot2
 #' @author Joseph Larmarange

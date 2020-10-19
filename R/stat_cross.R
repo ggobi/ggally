@@ -160,14 +160,14 @@ StatCross <- ggproto("StatCross", Stat,
 #'
 #' Plot the number of observations by using square points
 #' with proportional areas. Could be filled according to chi-squared
-#' statistics computed by \code{\link{stat_cross}}. Labels could also
+#' statistics computed by [stat_cross()]. Labels could also
 #' be added (see examples).
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
-#' @param ... other arguments passed to \code{\link[ggplot2]{geom_point}(...)}
-#' @param scale_max_size `max_size` argument supplied to \code{\link[ggplot2]{scale_size_area}()}
-#' @param geom_text_args other arguments passed to \code{\link[ggplot2]{geom_text}(...)}
+#' @param ... other arguments passed to [ggplot2::geom_point()]
+#' @param scale_max_size `max_size` argument supplied to [ggplot2::scale_size_area()]
+#' @param geom_text_args other arguments passed to [ggplot2::geom_text()]
 #' @author Joseph Larmarange
 #' @keywords hplot
 #' @export

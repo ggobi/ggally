@@ -23,7 +23,7 @@ ggally_nostic_cooksd(
 \pkg{ggplot2} plot object
 }
 \description{
-A function to display \code{stats::\link[stats]{cooks.distance}}.
+A function to display \code{\link[stats:influence.measures]{stats::cooks.distance()}}.
 }
 \details{
 A line is added at F_{p, n - p}(0.5) to display the general cutoff point for Cook's Distance.
@@ -38,5 +38,5 @@ dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 p_(ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd)))
 }
 \seealso{
-\code{stats::\link[stats]{cooks.distance}}
+\code{\link[stats:influence.measures]{stats::cooks.distance()}}
 }

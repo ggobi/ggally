@@ -27,9 +27,11 @@ ggally_nostic_resid(
 \arguments{
 \item{data, mapping, ...}{parameters supplied to \code{\link{ggally_nostic_line}}}
 
-\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}}
+\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
+\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}}}
 
-\item{lineConfColor, lineConfSize, lineConfAlpha, lineConfType}{parameters supplied to the confidence interval lines}
+\item{lineConfColor, lineConfSize, lineConfAlpha, lineConfType}{parameters supplied to the
+confidence interval lines}
 
 \item{pVal}{percentiles of a N(0, sigma) distribution to be drawn}
 
@@ -37,7 +39,8 @@ ggally_nostic_resid(
 
 \item{se}{boolean to determine if the confidence intervals should be displayed}
 
-\item{method, formula}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"} and \code{"y ~ x"}}
+\item{method, formula}{parameters supplied to \code{\link[ggplot2:geom_smooth]{ggplot2::geom_smooth()}}.
+Defaults to \code{"auto"} and \code{"y ~ x"}}
 }
 \value{
 \pkg{ggplot2} plot object

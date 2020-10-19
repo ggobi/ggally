@@ -24,7 +24,7 @@ add_ref_boxes(
 
 \item{fill}{fill value used if \code{var_fill} is \code{NULL}}
 
-\item{...}{other arguments passed onto \code{\link[ggplot2]{geom_rect}}}
+\item{...}{other arguments passed onto \code{\link[ggplot2:geom_tile]{ggplot2::geom_rect()}}}
 }
 \description{
 Add reference boxes around each cell of the glyphmap.

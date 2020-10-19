@@ -67,7 +67,7 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
-\code{stat_prop} is a variation of \code{\link[ggplot2]{stat_count}} allowing to compute custom
+\code{stat_prop} is a variation of \code{\link[ggplot2:geom_bar]{ggplot2::stat_count()}} allowing to compute custom
 proportions according to the \strong{by} aesthetic defining the denominator
 (i.e. all proportions for a same value of \strong{by} will sum to 1).
 The \code{by} aesthetic should be a factor.
@@ -117,7 +117,7 @@ p_(ggplot(d) +
  ))
 }
 \seealso{
-\code{\link[ggplot2]{stat_count}}
+\code{\link[ggplot2:geom_bar]{ggplot2::stat_count()}}
 }
 \author{
 Joseph Larmarange

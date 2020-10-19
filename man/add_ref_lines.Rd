@@ -13,7 +13,7 @@ add_ref_lines(data, color = "white", size = 1.5, ...)
 
 \item{size}{Set the line size, default is 1.5}
 
-\item{...}{other arguments passed onto \code{\link[ggplot2]{geom_line}}}
+\item{...}{other arguments passed onto \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}}}
 }
 \description{
 Add reference lines for each cell of the glyphmap.

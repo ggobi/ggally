@@ -40,5 +40,5 @@ dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
 }
 \seealso{
-\code{stats::\link[stats]{influence}}
+\code{\link[stats:lm.influence]{stats::influence()}}
 }

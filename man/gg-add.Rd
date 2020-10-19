@@ -82,7 +82,7 @@ p_(add_to_ggmatrix(
 ))
 }
 \seealso{
-\code{\link[ggplot2]{+.gg}} and \code{\link[ggplot2]{theme}}
+\link[ggplot2:gg-add]{ggplot2::+.gg} and \code{\link[ggplot2:theme]{ggplot2::theme()}}
 
 \code{\link{ggmatrix_location}}
 }

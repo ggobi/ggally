@@ -15,8 +15,8 @@ if (getRversion() >= "2.15.1") {
 #' that can be coerced to this class, such as an adjacency or incidence matrix,
 #' or an edge list: see \link[network]{edgeset.constructors} and
 #' \link[network]{network} for details. If the object is of class
-#' \code{\link[igraph:igraph-package]{igraph}} and the
-#' \code{\link[intergraph:intergraph-package]{intergraph}} package is installed,
+#' [igraph][igraph::igraph-package] and the
+#' [intergraph][intergraph::intergraph-package] package is installed,
 #' it will be used to convert the object: see
 #' \code{\link[intergraph]{asNetwork}} for details.
 #' @param mode a placement method from those provided in the
