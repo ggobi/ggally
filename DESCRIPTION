@@ -43,6 +43,8 @@ Imports:
     utils,
     rlang,
     lifecycle
+Remotes:
+    larmarange/broom.helpers
 Suggests:
     broom (>= 0.7.0),
     broom.helpers (>= 1.0.0.9001),
