@@ -273,6 +273,9 @@ p_(ggcoef_model(
   facet_labeller = label_wrap_gen(10)
 ))
 
+# do not display variable facets but add colour guide
+p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
+
 # a logistic regression example
 d_titanic <- as.data.frame(Titanic)
 d_titanic$Survived <- factor(d_titanic$Survived, c("No", "Yes"))
@@ -355,12 +358,17 @@ p_(ggcoef_compare(models, type = "faceted"))
   p_(ggcoef_compare(models, dodged_width = -.9))
 }
 
-# specific function for multinom models
-data(tips, package = "reshape")
-library(nnet)
-mod <- multinom(day ~ total_bill + tip + sex + smoker, data = tips)
-p_(ggcoef_multinom(mod))
-p_(ggcoef_multinom(mod, y.level = c(Thur = "Thursday", Sat = "Saturday", Sun = "Sunday")))
-p_(ggcoef_multinom(mod, type = "faceted"))
-p_(ggcoef_multinom(mod, type = "faceted", y.level = c(Thur = "Thursday", Sat = "Saturday", Sun = "Sunday")))
+# specific function for nnet::multinom models
+if (require(nnet)) {
+  data(happy)
+  mod <- multinom(happy ~ age + degree + sex, data = happy)
+  p_(ggcoef_multinom(mod, exponentiate = TRUE))
+  p_(ggcoef_multinom(mod, type = "faceted"))
+  p_(ggcoef_multinom(
+    mod, type = "faceted",
+    y.level = c(
+      "pretty happy" = "pretty happy\n(ref: very happy)"
+    )
+  ))
+}
 }
