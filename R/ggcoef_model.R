@@ -8,6 +8,7 @@
 #'   interval if `conf.int = TRUE`; must be strictly greater than 0
 #'   and less than 1; defaults to 0.95, which corresponds to a 95
 #'   percent confidence interval
+#' @group_one_row_variables group variables displayed on one row each?
 #' @param show_p_values if `TRUE`, add p-value to labels
 #' @param signif_stars if `TRUE`, add significant stars to labels
 #' @param significance level (between 0 and 1) below which a
@@ -150,6 +151,7 @@ ggcoef_model <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
+  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -170,7 +172,8 @@ ggcoef_model <- function (
     interaction_sep = interaction_sep,
     categorical_terms_pattern = categorical_terms_pattern,
     add_reference_rows = add_reference_rows,
-    no_reference_row  = no_reference_row ,
+    no_reference_row  = no_reference_row,
+    group_one_row_variables = group_one_row_variables,
     intercept = intercept,
     include = include,
     significance = significance,
@@ -247,6 +250,7 @@ ggcoef_compare <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
+  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -304,6 +308,23 @@ ggcoef_compare <- function (
         "reference_row", "label"
       )
     )
+
+  # group variables with one row
+  if (group_one_row_variables) {
+    data <- data %>%
+      dplyr::group_by(.data$variable) %>%
+      dplyr::mutate(n_rows = dplyr::n()) %>%
+      dplyr::ungroup() %>%
+      dplyr::mutate(
+        var_label = dplyr::if_else(
+          .data$n_rows == length(models),
+          " ",
+          as.character(.data$var_label)
+        )
+      ) %>%
+      dplyr::select(-.data$n_rows)
+    data$var_label <- forcats::fct_inorder(data$var_label)
+  }
 
   attr(data, "coefficients_label") <- coefficients_label
 
@@ -376,6 +397,7 @@ ggcoef_multinom <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
+  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -396,7 +418,7 @@ ggcoef_multinom <- function (
     interaction_sep = interaction_sep,
     categorical_terms_pattern = categorical_terms_pattern,
     add_reference_rows = add_reference_rows,
-    no_reference_row  = no_reference_row ,
+    no_reference_row  = no_reference_row,
     intercept = intercept,
     include = include,
     significance = significance,
@@ -410,6 +432,23 @@ ggcoef_multinom <- function (
       labels = y.level_label
   ) else
     data$y.level <- forcats::fct_inorder(factor(data$y.level))
+
+  # group variables with one row
+  if (group_one_row_variables) {
+    data <- data %>%
+      dplyr::group_by(.data$variable) %>%
+      dplyr::mutate(n_rows = dplyr::n()) %>%
+      dplyr::ungroup() %>%
+      dplyr::mutate(
+        var_label = dplyr::if_else(
+          .data$n_rows == length(levels(data$y.level)),
+          " ",
+          as.character(.data$var_label)
+        )
+      ) %>%
+      dplyr::select(-.data$n_rows)
+    data$var_label <- forcats::fct_inorder(data$var_label)
+  }
 
   if (return_data)
     return(data)
@@ -458,6 +497,7 @@ ggcoef_data <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
+  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = conf.level,
@@ -504,6 +544,18 @@ ggcoef_data <- function (
 
   # keep only rows with estimate
   data <- data[!is.na(data$estimate), ]
+
+  # group variables with one row
+  if (group_one_row_variables) {
+    data <- data %>%
+      dplyr::group_by(.data$variable) %>%
+      dplyr::mutate(n_rows = dplyr::n()) %>%
+      dplyr::ungroup() %>%
+      dplyr::mutate(
+        var_label = dplyr::if_else(.data$n_rows == 1, " ", as.character(.data$var_label))
+      ) %>%
+      dplyr::select(-.data$n_rows)
+  }
 
   data$var_label <- forcats::fct_inorder(data$var_label)
   data$label <- forcats::fct_inorder(data$label)
