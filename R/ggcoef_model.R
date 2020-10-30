@@ -152,7 +152,7 @@ ggcoef_model <- function (
   no_reference_row  = NULL,
   intercept = FALSE,
   include = dplyr::everything(),
-  significance = .05,
+  significance = 1 - conf.level,
   significance_labels = NULL,
   show_p_values = TRUE,
   signif_stars = TRUE,
@@ -249,7 +249,7 @@ ggcoef_compare <- function (
   no_reference_row  = NULL,
   intercept = FALSE,
   include = dplyr::everything(),
-  significance = .05,
+  significance = 1 - conf.level,
   significance_labels = NULL,
   return_data = FALSE,
   ...
@@ -378,7 +378,7 @@ ggcoef_multinom <- function (
   no_reference_row  = NULL,
   intercept = FALSE,
   include = dplyr::everything(),
-  significance = .05,
+  significance = 1 - conf.level,
   significance_labels = NULL,
   show_p_values = TRUE,
   signif_stars = TRUE,
@@ -460,11 +460,14 @@ ggcoef_data <- function (
   no_reference_row  = NULL,
   intercept = FALSE,
   include = dplyr::everything(),
-  significance = .05,
+  significance = conf.level,
   significance_labels = NULL
 ){
   if (!requireNamespace("broom.helpers"))
     stop("Package broom.helpers is required.")
+
+  if (length(significance) == 0)
+    significance <- NULL
 
   data <- broom.helpers::tidy_plus_plus(
     model = model,
