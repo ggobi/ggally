@@ -136,6 +136,8 @@ labels of categorical terms with treatment or sum contrasts
 \item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
 for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
+\item{group_one_row_variables}{group variables displayed on one row each?}
+
 \item{intercept}{should the intercept(s) be included?}
 
 \item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
@@ -286,6 +288,9 @@ p_(ggcoef_model(
 
 # do not display variable facets but add colour guide
 p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
+
+# groupe variables displayed on one row
+p_(ggcoef_model(mod_simple, no_reference_row = "time", group_one_row_variables = TRUE))
 
 # a logistic regression example
 d_titanic <- as.data.frame(Titanic)

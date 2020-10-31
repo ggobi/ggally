@@ -8,7 +8,7 @@
 #'   interval if `conf.int = TRUE`; must be strictly greater than 0
 #'   and less than 1; defaults to 0.95, which corresponds to a 95
 #'   percent confidence interval
-#' @group_one_row_variables group variables displayed on one row each?
+#' @param group_one_row_variables group variables displayed on one row each?
 #' @param show_p_values if `TRUE`, add p-value to labels
 #' @param signif_stars if `TRUE`, add significant stars to labels
 #' @param significance level (between 0 and 1) below which a
@@ -72,6 +72,9 @@
 #'
 #' # do not display variable facets but add colour guide
 #' p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
+#'
+#' # groupe variables displayed on one row
+#' p_(ggcoef_model(mod_simple, no_reference_row = "time", group_one_row_variables = TRUE))
 #'
 #' # a logistic regression example
 #' d_titanic <- as.data.frame(Titanic)
@@ -324,6 +327,8 @@ ggcoef_compare <- function (
       ) %>%
       dplyr::select(-.data$n_rows)
     data$var_label <- forcats::fct_inorder(data$var_label)
+    if (" " %in% levels(data$var_label))
+      data$var_label <- forcats::fct_relevel(data$var_label, " ")
   }
 
   attr(data, "coefficients_label") <- coefficients_label
@@ -448,6 +453,8 @@ ggcoef_multinom <- function (
       ) %>%
       dplyr::select(-.data$n_rows)
     data$var_label <- forcats::fct_inorder(data$var_label)
+    if (" " %in% levels(data$var_label))
+      data$var_label <- forcats::fct_relevel(data$var_label, " ")
   }
 
   if (return_data)
@@ -558,6 +565,8 @@ ggcoef_data <- function (
   }
 
   data$var_label <- forcats::fct_inorder(data$var_label)
+  if (" " %in% levels(data$var_label))
+    data$var_label <- forcats::fct_relevel(data$var_label, " ")
   data$label <- forcats::fct_inorder(data$label)
 
   data
