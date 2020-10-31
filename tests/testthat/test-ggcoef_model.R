@@ -1,9 +1,9 @@
 context("ggcoef_model")
 
-suppressMessages(require(broom))
-suppressMessages(require(broom.helpers))
-
 test_that("example of ggcoef_model", {
+  suppressMessages(require(broom))
+  suppressMessages(require(broom.helpers))
+
   expect_print <- function(x) {
     expect_silent(print(x))
   }

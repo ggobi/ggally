@@ -510,7 +510,7 @@ ggcoef_data <- function (
   significance = conf.level,
   significance_labels = NULL
 ){
-  if (!requireNamespace("broom.helpers"))
+  if (!requireNamespace("broom.helpers", quietly = TRUE))
     stop("Package broom.helpers is required.")
 
   if (length(significance) == 0)
