@@ -1,6 +1,7 @@
 #' Model coefficients with \pkg{broom} and \pkg{ggplot2}
 #'
 #' Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
+#' For an updated and improved version, see [ggcoef_model()].
 #'
 #' @param x a model object to be tidied with [broom::tidy()] or a data frame (see Details)
 #' @param mapping default aesthetic mapping

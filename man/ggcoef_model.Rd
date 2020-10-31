@@ -255,7 +255,7 @@ mod_simple <- lm(tip ~ day + time + total_bill, data = tips)
 p_(ggcoef_model(mod_simple))
 
 # custom variable labels
-# you can use to define variable labels before computing model
+# you can use the labelled package to define variable labels before computing model
 if (require(labelled)) {
   tips_labelled <- tips \%>\%
     set_variable_labels(
