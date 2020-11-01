@@ -46,9 +46,6 @@ test_that("example of ggcoef_model", {
   # do not display variable facets but add colour guide
   expect_print(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
 
-  # groupe variables displayed on one row
-  expect_print(ggcoef_model(mod_simple, no_reference_row = "time", group_one_row_variables = TRUE))
-
   # a logistic regression example
   d_titanic <- as.data.frame(Titanic)
   d_titanic$Survived <- factor(d_titanic$Survived, c("No", "Yes"))
