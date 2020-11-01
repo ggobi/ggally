@@ -514,8 +514,6 @@ ggcoef_data <- function (
   data <- data[!is.na(data$estimate), ]
 
   data$var_label <- forcats::fct_inorder(data$var_label)
-  if (" " %in% levels(data$var_label))
-    data$var_label <- forcats::fct_relevel(data$var_label, " ")
   data$label <- forcats::fct_inorder(data$label)
 
   data$label_light <- dplyr::if_else(
@@ -599,11 +597,22 @@ ggcoef_plot <- function (
   facet_col = NULL,
   facet_labeller = "label_value"
 ){
-  data$label <- forcats::fct_rev(data$label)
+  data[[y]] <- forcats::fct_rev(forcats::fct_inorder(data[[y]]))
+  if (!is.null(facet_row))
+    data[[facet_row]] <- forcats::fct_inorder(data[[facet_row]])
 
-  if (stripped_rows)
+
+  if (stripped_rows) {
+    if (!"term" %in% names(data)) {
+      data$term <- data[[y]]
+    }
     data <- data %>%
-      mutate(.fill = dplyr::if_else(as.integer(label) %% 2L == 1, strips_even, strips_odd))
+      mutate(.fill = dplyr::if_else(
+        as.integer(forcats::fct_inorder(term)) %% 2L == 1,
+        strips_even,
+        strips_odd
+      ))
+  }
 
   # mapping
   mapping <- aes_string(x = x, y = y)
