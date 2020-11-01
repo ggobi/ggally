@@ -42,9 +42,10 @@ Imports:
     RColorBrewer,
     reshape (>= 0.8.5),
     rlang,
+    stringr,
     scales (>= 1.1.0),
-    utils,
-    tidyr
+    tidyr,
+    utils
 Remotes:
     larmarange/broom.helpers
 Suggests:
