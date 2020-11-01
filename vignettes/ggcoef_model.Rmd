@@ -101,14 +101,6 @@ Use `facet_row = NULL` to hide variable names.
 ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE)
 ```
 
-When you have a model with several continuous variables (who have usually only one model term per variable), you can group variables displayed on one row together.
-
-```{r}
-mod <- lm(Sepal.Length ~ ., data = iris)
-ggcoef_model(mod)
-ggcoef_model(mod, group_one_row_variables = TRUE)
-```
-
 ### Term labels
 
 Several options allows you to customize term labels.
@@ -139,6 +131,14 @@ mod_titanic2 <- glm(
 )
 ggcoef_model(mod_titanic2, exponentiate = TRUE)
 ```
+
+Continuous variables with polynomial terms defined with `stats::poly()` are also properly managed.
+
+```{r}
+mod_poly <- lm(Sepal.Length ~ poly(Petal.Width, 3) + Petal.Length, data = iris)
+ggcoef_model(mod_poly)
+```
+
 
 Use `no_reference_row` to indicate which variables should not have a reference row added.
 
@@ -217,7 +217,8 @@ ggcoef_multinom(mod, exponentiate = TRUE, type = "faceted")
 ggcoef_multinom(
   mod, exponentiate = TRUE, 
   y.level = c(
-      "pretty happy" = "pretty happy\n(ref: very happy)"
+      "pretty happy" = "pretty happy\n(ref: not too happy)",
+      "very happy" = "very happy"
   )
 )
 ```

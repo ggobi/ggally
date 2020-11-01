@@ -19,7 +19,6 @@ ggcoef_model(
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
-  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -43,7 +42,6 @@ ggcoef_compare(
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
-  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -66,7 +64,6 @@ ggcoef_multinom(
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row = NULL,
-  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -79,6 +76,8 @@ ggcoef_multinom(
 
 ggcoef_plot(
   data,
+  x = "estimate",
+  y = "label",
   exponentiate = FALSE,
   point_size = 2,
   point_stroke = 2,
@@ -136,8 +135,6 @@ labels of categorical terms with treatment or sum contrasts
 \item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
 for those no reference row should be added, when \code{add_reference_rows = TRUE}}
 
-\item{group_one_row_variables}{group variables displayed on one row each?}
-
 \item{intercept}{should the intercept(s) be included?}
 
 \item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
@@ -171,6 +168,8 @@ for plotting instead of the plot}
 \item{data}{a data frame containing data to be plotted,
 typically the output of \code{\link[=ggcoef_model]{ggcoef_model()}}, \code{\link[=ggcoef_compare]{ggcoef_compare()}}
 or \code{\link[=ggcoef_multinom]{ggcoef_multinom()}} with the option \code{return_data = TRUE}}
+
+\item{x, y}{variables mapped to x and y axis}
 
 \item{point_size}{size of the points}
 
@@ -289,9 +288,6 @@ p_(ggcoef_model(
 # do not display variable facets but add colour guide
 p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
 
-# groupe variables displayed on one row
-p_(ggcoef_model(mod_simple, no_reference_row = "time", group_one_row_variables = TRUE))
-
 # a logistic regression example
 d_titanic <- as.data.frame(Titanic)
 d_titanic$Survived <- factor(d_titanic$Survived, c("No", "Yes"))
@@ -383,7 +379,8 @@ if (require(nnet)) {
   p_(ggcoef_multinom(
     mod, type = "faceted",
     y.level = c(
-      "pretty happy" = "pretty happy\n(ref: very happy)"
+      "pretty happy" = "pretty happy\n(ref: very happy)",
+      "very happy" = "very happy"
     )
   ))
 }

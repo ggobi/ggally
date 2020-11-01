@@ -8,7 +8,6 @@
 #'   interval if `conf.int = TRUE`; must be strictly greater than 0
 #'   and less than 1; defaults to 0.95, which corresponds to a 95
 #'   percent confidence interval
-#' @param group_one_row_variables group variables displayed on one row each?
 #' @param show_p_values if `TRUE`, add p-value to labels
 #' @param signif_stars if `TRUE`, add significant stars to labels
 #' @param significance level (between 0 and 1) below which a
@@ -72,9 +71,6 @@
 #'
 #' # do not display variable facets but add colour guide
 #' p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
-#'
-#' # groupe variables displayed on one row
-#' p_(ggcoef_model(mod_simple, no_reference_row = "time", group_one_row_variables = TRUE))
 #'
 #' # a logistic regression example
 #' d_titanic <- as.data.frame(Titanic)
@@ -154,7 +150,6 @@ ggcoef_model <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
-  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -176,7 +171,6 @@ ggcoef_model <- function (
     categorical_terms_pattern = categorical_terms_pattern,
     add_reference_rows = add_reference_rows,
     no_reference_row  = no_reference_row,
-    group_one_row_variables = group_one_row_variables,
     intercept = intercept,
     include = include,
     significance = significance,
@@ -199,6 +193,14 @@ ggcoef_model <- function (
         )
       )
     )
+    data$label_light <- forcats::fct_inorder(
+      factor(
+        paste0(
+          data$label_light,
+          ifelse(data$add_to_label == "", "", paste0(" (", data$add_to_label, ")"))
+        )
+      )
+    )
   }
 
   if (return_data)
@@ -207,6 +209,9 @@ ggcoef_model <- function (
   args <- list(...)
   args$data <- data
   args$exponentiate <- exponentiate
+
+  if (!"y" %in% names(args) && !"facet_row" %in% names(args))
+    args$y <- "label_light"
 
   if (!"colour" %in% names(args)) {
     args$colour <- "var_label"
@@ -253,7 +258,6 @@ ggcoef_compare <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
-  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -295,41 +299,14 @@ ggcoef_compare <- function (
   # Add NA values for unobserved combinations
   # (i.e. for a term present in one model but not in another)
   data <- data %>%
-    tidyr::expand(
+    tidyr::complete(
       .data$model,
       tidyr::nesting(
         !!sym("variable"), !!sym("var_label"), !!sym("var_class"),
         !!sym("var_type"), !!sym("contrasts"), !!sym("reference_row"),
-        !!sym("label")
-      )
-    ) %>%
-    dplyr::left_join(
-      data,
-      by = c(
-        "model", "variable", "var_label",
-        "var_class", "var_type", "contrasts",
-        "reference_row", "label"
+        !!sym("label"), !!sym("label_light")
       )
     )
-
-  # group variables with one row
-  if (group_one_row_variables) {
-    data <- data %>%
-      dplyr::group_by(.data$variable) %>%
-      dplyr::mutate(n_rows = dplyr::n()) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(
-        var_label = dplyr::if_else(
-          .data$n_rows == length(models),
-          " ",
-          as.character(.data$var_label)
-        )
-      ) %>%
-      dplyr::select(-.data$n_rows)
-    data$var_label <- forcats::fct_inorder(data$var_label)
-    if (" " %in% levels(data$var_label))
-      data$var_label <- forcats::fct_relevel(data$var_label, " ")
-  }
 
   attr(data, "coefficients_label") <- coefficients_label
 
@@ -341,6 +318,8 @@ ggcoef_compare <- function (
   args <- list(...)
   args$data <- data
   args$exponentiate <- exponentiate
+  if (!"y" %in% names(args) && !"facet_row" %in% names(args))
+    args$y <- "label_light"
 
   if (type == "dodged") {
     if (!"dodged " %in% names(args)) {
@@ -384,7 +363,8 @@ ggcoef_compare <- function (
 #'   p_(ggcoef_multinom(
 #'     mod, type = "faceted",
 #'     y.level = c(
-#'       "pretty happy" = "pretty happy\n(ref: very happy)"
+#'       "pretty happy" = "pretty happy\n(ref: very happy)",
+#'       "very happy" = "very happy"
 #'     )
 #'   ))
 #' }
@@ -402,7 +382,6 @@ ggcoef_multinom <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
-  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = 1 - conf.level,
@@ -438,25 +417,6 @@ ggcoef_multinom <- function (
   ) else
     data$y.level <- forcats::fct_inorder(factor(data$y.level))
 
-  # group variables with one row
-  if (group_one_row_variables) {
-    data <- data %>%
-      dplyr::group_by(.data$variable) %>%
-      dplyr::mutate(n_rows = dplyr::n()) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(
-        var_label = dplyr::if_else(
-          .data$n_rows == length(levels(data$y.level)),
-          " ",
-          as.character(.data$var_label)
-        )
-      ) %>%
-      dplyr::select(-.data$n_rows)
-    data$var_label <- forcats::fct_inorder(data$var_label)
-    if (" " %in% levels(data$var_label))
-      data$var_label <- forcats::fct_relevel(data$var_label, " ")
-  }
-
   if (return_data)
     return(data)
 
@@ -465,6 +425,8 @@ ggcoef_multinom <- function (
   args <- list(...)
   args$data <- data
   args$exponentiate <- exponentiate
+  if (!"y" %in% names(args) && !"facet_row" %in% names(args))
+    args$y <- "label_light"
 
   if (type == "dodged") {
     if (!"dodged " %in% names(args)) {
@@ -504,7 +466,6 @@ ggcoef_data <- function (
   categorical_terms_pattern = "{level}",
   add_reference_rows = TRUE,
   no_reference_row  = NULL,
-  group_one_row_variables = FALSE,
   intercept = FALSE,
   include = dplyr::everything(),
   significance = conf.level,
@@ -552,22 +513,18 @@ ggcoef_data <- function (
   # keep only rows with estimate
   data <- data[!is.na(data$estimate), ]
 
-  # group variables with one row
-  if (group_one_row_variables) {
-    data <- data %>%
-      dplyr::group_by(.data$variable) %>%
-      dplyr::mutate(n_rows = dplyr::n()) %>%
-      dplyr::ungroup() %>%
-      dplyr::mutate(
-        var_label = dplyr::if_else(.data$n_rows == 1, " ", as.character(.data$var_label))
-      ) %>%
-      dplyr::select(-.data$n_rows)
-  }
-
   data$var_label <- forcats::fct_inorder(data$var_label)
   if (" " %in% levels(data$var_label))
     data$var_label <- forcats::fct_relevel(data$var_label, " ")
   data$label <- forcats::fct_inorder(data$label)
+
+  data$label_light <- dplyr::if_else(
+    as.character(data$label) == as.character(data$var_label) &
+      (!stringr::str_starts(data$var_class, "nmatrix") | is.na(data$var_class)),
+    "",
+    as.character(data$label)
+  ) %>%
+    forcats::fct_inorder()
 
   data
 }
@@ -576,6 +533,7 @@ ggcoef_data <- function (
 #' @param data a data frame containing data to be plotted,
 #' typically the output of [ggcoef_model()], [ggcoef_compare()]
 #' or [ggcoef_multinom()] with the option `return_data = TRUE`
+#' @param x,y variables mapped to x and y axis
 #' @param exponentiate if `TRUE` a logarithmic scale will
 #' be used for x-axis
 #' @param point_size size of the points
@@ -613,6 +571,8 @@ ggcoef_data <- function (
 #' @export
 ggcoef_plot <- function (
   data,
+  x = "estimate",
+  y = "label",
   exponentiate = FALSE,
   point_size = 2,
   point_stroke = 2,
@@ -646,7 +606,7 @@ ggcoef_plot <- function (
       mutate(.fill = dplyr::if_else(as.integer(label) %% 2L == 1, strips_even, strips_odd))
 
   # mapping
-  mapping <- aes_string(x = "estimate", y = "label")
+  mapping <- aes_string(x = x, y = y)
 
   errorbar <- errorbar & all(c("conf.low", "conf.high") %in% names(data))
   if(errorbar) {
