@@ -204,6 +204,20 @@ ggcoef_model(mod_simple, stripped_rows = FALSE)
 
 Do not hesitate to consult the [help file](http://ggobi.github.io/ggally/reference/ggcoef_model.html) of `ggcoef_model()` to see all avalaible options.
 
+### ggplot2 elements
+
+The plot returned by `ggcoef_model()` is a classic `ggplot2` plot. You can therefore apply `ggplot2` functions to it.
+
+```{r}
+ggcoef_model(mod_simple) +
+  xlab("Coefficients") +
+  ggtitle("Custom title") +
+  scale_color_brewer(palette = "Set1") +
+  theme(legend.position = "right")
+```
+
+
+
 ## Multinomial models
 
 For multinomial models, simply use `ggcoef_multinom()`. Two types of visualisation are available: "dodged" and "faceted".
