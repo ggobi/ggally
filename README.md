@@ -1,6 +1,5 @@
 # [GGally](http://ggobi.github.io/ggally): Extension to [ggplot2](https://ggplot2.tidyverse.org/)
 
-
 <!-- badges: start -->
 [![R build status](https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg)](https://github.com/ggobi/ggally/actions)
 [![codecov.io](https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master)](https://codecov.io/github/ggobi/ggally?branch=master)
