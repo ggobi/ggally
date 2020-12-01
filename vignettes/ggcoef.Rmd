@@ -64,7 +64,7 @@ ggcoef(
 )
 ```
 
-Additional parameters will be passed to [ggplot2::geom\_point()].
+Additional parameters will be passed to [ggplot2::geom_point()].
 
 ```{r ggcoef-log.reg}
 ggcoef(log.reg, exponentiate = TRUE, color = "purple", size = 5, shape = 18)
