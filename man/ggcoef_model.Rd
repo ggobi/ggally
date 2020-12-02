@@ -228,12 +228,7 @@ if labels are too long, you can use \code{\link[ggplot2:labellers]{ggplot2::labe
 more information in the documentation of \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}}
 }
 \description{
-Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
-
-\code{\link[=ggcoef_compare]{ggcoef_compare()}} is designed for displaying several models on the same plot.
-
-\code{\link[=ggcoef_multinom]{ggcoef_multinom()}} is a variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial
-logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
+Plot model coefficients
 }
 \details{
 \code{ggcoef_model()}, \code{ggcoef_multinom()} and \code{ggcoef_compare()} use
@@ -245,6 +240,17 @@ For more control, you can use the argument \code{return_data = TRUE} to
 get the produced tibble, apply any transformation of your own and
 then pass your customised tibble to \code{ggcoef_plot()}.
 }
+\section{Functions}{
+\itemize{
+\item \code{ggcoef_model}: Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
+
+\item \code{ggcoef_compare}: Designed for displaying several models on the same plot.
+
+\item \code{ggcoef_multinom}: A variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
+
+\item \code{ggcoef_plot}: SOME DESCRIPTION HERE
+}}
+
 \examples{
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
@@ -257,7 +263,7 @@ p_(ggcoef_model(mod_simple))
 # you can use the labelled package to define variable labels before computing model
 if (require(labelled)) {
   tips_labelled <- tips \%>\%
-    set_variable_labels(
+    labelled::set_variable_labels(
       day = "Day of the week",
       time = "Lunch or Dinner",
       total_bill = "Bill's total"
