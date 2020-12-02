@@ -194,6 +194,7 @@ The <code>by</code> aesthetic should be a factor.</p>
   <span class='va'>...</span>,
   width <span class='op'>=</span> <span class='cn'>NULL</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  orientation <span class='op'>=</span> <span class='cn'>NA</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
@@ -249,6 +250,13 @@ to the paired geom/stat.</p></td>
 a warning. If <code>TRUE</code>, missing values are silently removed.</p></td>
     </tr>
     <tr>
+      <th>orientation</th>
+      <td><p>The orientation of the layer. The default (<code>NA</code>)
+automatically determines the orientation from the aesthetic mapping. In the
+rare event that this fails it can be given explicitly by setting <code>orientation</code>
+to either <code>"x"</code> or <code>"y"</code>. See the <em>Orientation</em> section for more detail.</p></td>
+    </tr>
+    <tr>
       <th>show.legend</th>
       <td><p>logical. Should this layer be included in the legends?
 <code>NA</code>, the default, includes if any aesthetics are mapped.
@@ -269,8 +277,13 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
 
     
 
-<p><code>stat_prop</code> requires the <strong>by</strong> aesthetic and this <strong>by</strong> aesthetic
-should be a factor.</p>
+<p><code>stat_prop()</code> understands the following aesthetics (required aesthetics are in bold):</p><ul>
+<li><p><strong>x <em>or</em> y</strong></p></li>
+<li><p><strong>by</strong> (this aesthetic should be a <strong>factor</strong>)</p></li>
+<li><p>group</p></li>
+<li><p>weight</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="computed-variables"><a class="anchor" href="#computed-variables"></a>Computed variables</h2>
 
     
