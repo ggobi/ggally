@@ -1,5 +1,7 @@
 # GGally (development version)
 
+* `stat_prop()` now accepts a **x** or a **y** aesthetic (#395, @larmarange)
+
 ### Breaking changes
 
 * Following version 7.0.0 of `broom`, computed residuals in `stat_cross()`

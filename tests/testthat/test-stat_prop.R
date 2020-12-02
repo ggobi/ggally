@@ -63,3 +63,16 @@ test_that("example", {
     legend = 1
   ))
 })
+
+test_that("stat_prop() works with an y aesthetic", {
+  expect_print <- function(x) {
+    expect_silent(print(x))
+  }
+
+  d <- as.data.frame(Titanic)
+  p <- ggplot(d) +
+    aes(y = Class, fill = Survived, weight = Freq, by = Class) +
+    geom_bar(position = "fill") +
+    geom_text(stat = "prop", position = position_fill(.5))
+  expect_print(p)
+})
