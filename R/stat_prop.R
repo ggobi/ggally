@@ -9,8 +9,12 @@
 #' @param geom Override the default connection between \code{\link[ggplot2]{geom_bar}}
 #'   and \code{stat_prop}.
 #' @section Aesthetics:
-#' \code{stat_prop} requires the \strong{by} aesthetic and this \strong{by} aesthetic
-#' should be a factor.
+#' `stat_prop()` understands the following aesthetics (required aesthetics are in bold):
+#'
+#' - **x *or* y**
+#' - **by** (this aesthetic should be a **factor**)
+#' - group
+#' - weight
 #' @section Computed variables:
 #' \describe{
 #'   \item{count}{number of points in bin}
@@ -58,12 +62,14 @@ stat_prop <- function(
   ...,
   width = NULL,
   na.rm = FALSE,
+  orientation = NA,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
 
   params <- list(
     na.rm = na.rm,
+    orientation = orientation,
     width = width,
     ...
   )
@@ -88,15 +94,22 @@ stat_prop <- function(
 #' @usage NULL
 #' @export
 StatProp <- ggproto("StatProp", Stat,
-  required_aes = c("x", "by"),
+  required_aes = c("x|y", "by"),
   default_aes = aes(
-    y = stat(count), weight = 1,
+    x = after_stat(count), y = after_stat(count), weight = 1,
     label = scales::percent(after_stat(prop), accuracy = .1)
   ),
 
   setup_params = function(data, params) {
-    if (!is.null(data$y)) {
-      stop("stat_prop() must not be used with a y aesthetic.", call. = FALSE)
+    params$flipped_aes <- has_flipped_aes(data, params, main_is_orthogonal = FALSE)
+
+    has_x <- !(is.null(data$x) && is.null(params$x))
+    has_y <- !(is.null(data$y) && is.null(params$y))
+    if (!has_x && !has_y) {
+      stop("stat_prop() requires an x or y aesthetic.", call. = FALSE)
+    }
+    if (has_x && has_y) {
+      stop("stat_prop() can only have an x or y aesthetic.", call. = FALSE)
     }
     # there is an unresolved bug when by is a character vector. To be explored.
     if (is.character(data$by)) {
@@ -107,23 +120,25 @@ StatProp <- ggproto("StatProp", Stat,
 
   extra_params = c("na.rm"),
 
-  compute_panel = function(self, data, scales, width = NULL) {
-   data$weight <- data$weight %||% rep(1, nrow(data))
-   width <- width %||% (ggplot2::resolution(data$x) * 0.9)
+  compute_panel = function(self, data, scales, width = NULL, flipped_aes = FALSE) {
+    data <- flip_data(data, flipped_aes)
+    data$weight <- data$weight %||% rep(1, nrow(data))
+    width <- width %||% (ggplot2::resolution(data$x) * 0.9)
 
-   # sum weights for each combination of by and aesthetics
-   # the use of . allows to consider all aesthetics defined in data
-   panel <- aggregate(weight ~ ., data = data, sum, na.rm = TRUE)
+    # sum weights for each combination of by and aesthetics
+    # the use of . allows to consider all aesthetics defined in data
+    panel <- aggregate(weight ~ ., data = data, sum, na.rm = TRUE)
 
-   names(panel)[which(names(panel) == "weight")] <- "count"
-   panel$count[is.na(panel$count)] <- 0
+    names(panel)[which(names(panel) == "weight")] <- "count"
+    panel$count[is.na(panel$count)] <- 0
 
-   # compute proportions by by
-   sum_abs <- function(x) {sum(abs(x))}
-   panel$prop <- panel$count / ave(panel$count, panel$by, FUN = sum_abs)
-   panel$width <- width
+    # compute proportions by by
+    sum_abs <- function(x) {sum(abs(x))}
+    panel$prop <- panel$count / ave(panel$count, panel$by, FUN = sum_abs)
+    panel$width <- width
+    panel$flipped_aes <- flipped_aes
 
-   panel
+    flip_data(panel, flipped_aes)
   }
 )
 
