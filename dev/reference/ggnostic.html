@@ -222,7 +222,7 @@
     </tr>
     <tr>
       <th>columnsY</th>
-      <td><p>rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by <code>broom::<a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>(model)</code>. See details for more information.</p></td>
+      <td><p>rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by <code><a href='https://generics.r-lib.org/reference/augment.html'>broom::augment()</a></code>. See details for more information.</p></td>
     </tr>
     <tr>
       <th>columnLabelsX, columnLabelsY</th>
@@ -250,13 +250,13 @@
 
     
 
-<p><code>broom::<a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>()</code> collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the <code>columnsY</code> parameter to <code>ggnostic</code>.</p>
+<p><code><a href='https://generics.r-lib.org/reference/augment.html'>broom::augment()</a></code> collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the <code>columnsY</code> parameter to <code>ggnostic</code>.</p>
 <dl>
 <dt>.resid</dt><dd><p>Residuals</p></dd>
 <dt>.hat</dt><dd><p>Diagonal of the hat matrix</p></dd>
 <dt>.sigma</dt><dd><p>Estimate of residual standard deviation when
 corresponding observation is dropped from model</p></dd>
-<dt>.cooksd</dt><dd><p>Cooks distance, <code><a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></code></p></dd>
+<dt>.cooksd</dt><dd><p>Cooks distance, <code><a href='https://rdrr.io/r/stats/influence.measures.html'>stats::cooks.distance()</a></code></p></dd>
 <dt>.fitted</dt><dd><p>Fitted values of model</p></dd>
 <dt>.se.fit</dt><dd><p>Standard errors of fitted values</p></dd>
 <dt>.std.resid</dt><dd><p>Standardized residuals</p></dd>
@@ -268,7 +268,7 @@ corresponding observation is dropped from model</p></dd>
 
     
 
-<p>Similar to <code><a href='ggduo.html'>ggduo</a></code> and <code><a href='ggpairs.html'>ggpairs</a></code>, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the <code>broom::<a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a>()</code> output: <code>".fitted"</code>, <code>".resid"</code>, <code>".std.resid"</code>, <code>".sigma"</code>, <code>".se.fit"</code>, <code>".hat"</code>, <code>".cooksd"</code>. An extra key, <code>"default"</code>, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the <code>types</code> parameter in <code><a href='ggduo.html'>ggduo</a></code>.</p>
+<p>Similar to <code><a href='ggduo.html'>ggduo</a></code> and <code><a href='ggpairs.html'>ggpairs</a></code>, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the <code><a href='https://generics.r-lib.org/reference/augment.html'>broom::augment()</a></code> output: <code>".fitted"</code>, <code>".resid"</code>, <code>".std.resid"</code>, <code>".sigma"</code>, <code>".se.fit"</code>, <code>".hat"</code>, <code>".cooksd"</code>. An extra key, <code>"default"</code>, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the <code>types</code> parameter in <code><a href='ggduo.html'>ggduo</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># small function to display plots only if it's interactive</span>

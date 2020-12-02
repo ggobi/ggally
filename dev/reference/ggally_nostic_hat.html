@@ -205,11 +205,13 @@
     </tr>
     <tr>
       <th>linePosition, lineColor, lineSize, lineAlpha, lineType</th>
-      <td><p>parameters supplied to <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></code> for the cutoff line</p></td>
+      <td><p>parameters supplied to
+<code><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>ggplot2::geom_line()</a></code> for the cutoff line</p></td>
     </tr>
     <tr>
       <th>avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType</th>
-      <td><p>parameters supplied to <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></code> for the average line</p></td>
+      <td><p>parameters supplied
+to <code><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>ggplot2::geom_line()</a></code> for the average line</p></td>
     </tr>
     </table>
 
@@ -218,14 +220,14 @@
     <p><span class="pkg">ggplot2</span> plot object</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>As stated in <code>stats::<a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></code> documentation:</p>
+    <p>As stated in <code><a href='https://rdrr.io/r/stats/lm.influence.html'>stats::influence()</a></code> documentation:</p>
 <p>hat: a vector containing the diagonal of the 'hat' matrix.</p>
 <p>The diagonal elements of the 'hat' matrix describe the influence each response value has on the fitted value for that same observation.</p>
 <p>A suggested "cutoff" line is added to the plot at a height of 2 * p / n and an expected line at a height of p / n.
 If either <code>linePosition</code> or <code>avgLinePosition</code> is <code>NULL</code>, the respective line will not be drawn.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>stats::<a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/lm.influence.html'>stats::influence()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>

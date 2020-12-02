@@ -46,7 +46,8 @@
 
 
 <meta property="og:title" content="Model coefficients with broom and ggplot2 — ggcoef" />
-<meta property="og:description" content="Plot the coefficients of a model with broom and ggplot2." />
+<meta property="og:description" content="Plot the coefficients of a model with broom and ggplot2.
+For an updated and improved version, see ggcoef_model()." />
 
 
 <meta name="robots" content="noindex">
@@ -177,7 +178,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Plot the coefficients of a model with <span class="pkg">broom</span> and <span class="pkg">ggplot2</span>.</p>
+    <p>Plot the coefficients of a model with <span class="pkg">broom</span> and <span class="pkg">ggplot2</span>.
+For an updated and improved version, see <code><a href='ggcoef_model.html'>ggcoef_model()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggcoef</span><span class='op'>(</span>
@@ -205,7 +207,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a model object to be tidied with <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></code> or a data frame (see Details)</p></td>
+      <td><p>a model object to be tidied with <code><a href='https://generics.r-lib.org/reference/tidy.html'>broom::tidy()</a></code> or a data frame (see Details)</p></td>
     </tr>
     <tr>
       <th>mapping</th>
@@ -217,12 +219,12 @@
     </tr>
     <tr>
       <th>conf.level</th>
-      <td><p>level of confidence intervals (passed to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></code>
+      <td><p>level of confidence intervals (passed to <code><a href='https://generics.r-lib.org/reference/tidy.html'>broom::tidy()</a></code>
 if <code>x</code> is not a data frame)</p></td>
     </tr>
     <tr>
       <th>exponentiate</th>
-      <td><p>if <code>TRUE</code>, x-axis will be logarithmic (also passed to <code><a href='https://rdrr.io/pkg/generics/man/tidy.html'>tidy</a></code>
+      <td><p>if <code>TRUE</code>, x-axis will be logarithmic (also passed to <code><a href='https://generics.r-lib.org/reference/tidy.html'>broom::tidy()</a></code>
 if <code>x</code> is not a data frame)</p></td>
     </tr>
     <tr>
@@ -272,7 +274,7 @@ if <code>x</code> is not a data frame)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments sent to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></code></p></td>
+      <td><p>additional arguments sent to <code><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>ggplot2::geom_point()</a></code></p></td>
     </tr>
     </table>
 

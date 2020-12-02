@@ -40,6 +40,9 @@
     <loc>https://ggobi.github.io/ggally/reference/fn_switch.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/geom_stripped_rows.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/getPlot.html</loc>
   </url>
   <url>
@@ -163,6 +166,9 @@
     <loc>https://ggobi.github.io/ggally/reference/ggcoef.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/ggcoef_model.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/ggcorr.html</loc>
   </url>
   <url>
@@ -277,6 +283,9 @@
     <loc>https://ggobi.github.io/ggally/reference/putPlot.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/reexports.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/remove_color_unless_equal.html</loc>
   </url>
   <url>
@@ -338,6 +347,9 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/articles/ggcoef.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggcoef_model.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/articles/ggduo.html</loc>
