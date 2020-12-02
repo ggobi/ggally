@@ -595,13 +595,12 @@ ggcoef_plot <- function (
   if (!is.null(facet_row))
     data[[facet_row]] <- forcats::fct_inorder(data[[facet_row]])
 
-
   if (stripped_rows) {
     if (!"term" %in% names(data)) {
       data$term <- data[[y]]
     }
     data <- data %>%
-      mutate(.fill = dplyr::if_else(
+      dplyr::mutate(.fill = dplyr::if_else(
         as.integer(forcats::fct_inorder(.data$term)) %% 2L == 1,
         strips_even,
         strips_odd
