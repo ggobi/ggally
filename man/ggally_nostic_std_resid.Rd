@@ -25,5 +25,5 @@ dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
 }
 \seealso{
-\code{stats::\link[stats]{rstandard}}
+\code{\link[stats:influence.measures]{stats::rstandard()}}
 }

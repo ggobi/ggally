@@ -20,14 +20,15 @@ knitr::opts_chunk$set(
 library(GGally)
 ```
 
-
 # `GGally::ggcoef()`
 
-The purpose of this function is to quickly plot the coefficients of a model.
+The purpose of this function is to quickly plot the coefficients of a model. For an updated and improved version, see `GGally::ggcoef_model()` and the [corresponding vignette](https://ggobi.github.io/ggally/articles/ggcoef_model.html).
 
 ## Quick coefficients plot
 
-To work automatically, this function requires the `broom` package. Simply call `ggcoef()` with a model object. It could be the result of `stats::lm`, `stats::glm` or any other model covered by `broom` and its `broom::tidy` method^[See http://www.rdocumentation.org/packages/broom.].
+To work automatically, this function requires the `broom` package. Simply call `ggcoef()` with a model object. It could be the result of `stats::lm`, `stats::glm` or any other model covered by `broom` and its `broom::tidy` method[^1].
+
+[^1]: See <http://www.rdocumentation.org/packages/broom>.
 
 ```{r ggcoef-reg}
 reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
@@ -81,9 +82,9 @@ ggcoef(log.reg, exponentiate = TRUE, mapping = aes(x = estimate, y = term, size 
 
 You can also pass a custom data frame to [ggcoef()]. The following variables are expected:
 
-- `term` (except if you customize the mapping)
-- `estimate` (except if you customize the mapping)
-- `conf.low` and `conf.high` (only if you want to display error bars)
+-   `term` (except if you customize the mapping)
+-   `estimate` (except if you customize the mapping)
+-   `conf.low` and `conf.high` (only if you want to display error bars)
 
 ```{r ggcoef-data-frame}
 cust <- data.frame(

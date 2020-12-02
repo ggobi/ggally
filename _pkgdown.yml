@@ -111,11 +111,13 @@ reference:
     More details in
     [`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html),
     [`vig_ggally("ggcoef")`](https://ggobi.github.io/ggally/articles/ggcoef.html),
+    [`vig_ggally("ggcoef_model")`](https://ggobi.github.io/ggally/articles/ggcoef_model.html),
     [`vig_ggally("ggsurv")`](https://ggobi.github.io/ggally/articles/ggsurv.html),
     and [`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html)
   contents:
   - ggbivariate
   - ggcoef
+  - ggcoef_model
   - ggcorr
   - ggparcoord
   - ggsurv
@@ -164,6 +166,10 @@ reference:
   - stat_cross
   - stat_prop
   - stat_weighted_mean
+
+- title: Additional Geometries for `ggplot2`
+  contents:
+  - geom_stripped_rows
 
 - title: "ggmatrix() Helpers"
   contents:

@@ -1603,7 +1603,7 @@ ggally_countDiag <- function(data, mapping, ...) {
 #'
 #' @author Barret Schloerke
 #' @param ... other arguments ignored
-#' @seealso \code{ggplot2::\link[ggplot2]{element_blank}()}
+#' @seealso [ggplot2::element_blank()]
 #' @export
 #' @keywords hplot
 ggally_blank <- function(...){

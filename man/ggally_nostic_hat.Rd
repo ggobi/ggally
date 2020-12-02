@@ -23,9 +23,11 @@ ggally_nostic_hat(
 \arguments{
 \item{data, mapping, ...}{supplied directly to \code{\link{ggally_nostic_line}}}
 
-\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}} for the cutoff line}
+\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
+\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} for the cutoff line}
 
-\item{avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}} for the average line}
+\item{avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType}{parameters supplied
+to \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} for the average line}
 }
 \value{
 \pkg{ggplot2} plot object
@@ -34,7 +36,7 @@ ggally_nostic_hat(
 A function to display stats::influence's hat information against a given explanatory variable.
 }
 \details{
-As stated in \code{stats::\link[stats]{influence}} documentation:
+As stated in \code{\link[stats:lm.influence]{stats::influence()}} documentation:
 
 hat: a vector containing the diagonal of the 'hat' matrix.
 
@@ -51,5 +53,5 @@ dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
 }
 \seealso{
-\code{stats::\link[stats]{influence}}
+\code{\link[stats:lm.influence]{stats::influence()}}
 }

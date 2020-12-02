@@ -18,7 +18,7 @@
 #'
 #' broom::augment a model and add broom::glance and broom::tidy output as attributes. X and Y variables are also added.
 #'
-#' @param model model to be sent to \code{broom::\link[broom]{augment}}, \code{broom::\link[broom]{glance}}, and \code{broom::\link[broom]{tidy}}
+#' @param model model to be sent to [broom::augment()], [broom::glance()], and [broom::tidy()]
 #' @param lmStars boolean that determines if stars are added to labels
 #' @return broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  \code{var_x} and \code{var_y} variables are also added as attributes
 #' @export
@@ -142,11 +142,14 @@ brew_colors <- function(col) {
 #'
 #' Functions with a color in their name have different default color behavior.
 #'
-#' @param data,mapping supplied directly to \code{ggplot2::\link[ggplot2]{ggplot}(data, mapping)}
+#' @param data,mapping supplied directly to [ggplot2::ggplot()]
 #' @param ... parameters supplied to \code{continuous_geom} or \code{combo_geom}
-#' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}
-#' @param continuous_geom \pkg{ggplot2} geom that is executed after the line is (possibly) added and if the x data is continuous
-#' @param combo_geom \pkg{ggplot2} geom that is executed after the line is (possibly) added and if the x data is discrete
+#' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to
+#' [ggplot2::geom_line()]
+#' @param continuous_geom \pkg{ggplot2} geom that is executed after the line is (possibly)
+#' added and if the x data is continuous
+#' @param combo_geom \pkg{ggplot2} geom that is executed after the line is (possibly) added and
+#' if the x data is discrete
 #' @param mapColorToFill boolean to determine if combo plots should cut the color mapping to the fill mapping
 #' @return \pkg{ggplot2} plot object
 #' @rdname ggally_nostic_line
@@ -196,12 +199,15 @@ ggally_nostic_line <- function(
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} percentiles of a N(0, sigma) distribution.
 #'
 #' @param data,mapping,... parameters supplied to \code{\link{ggally_nostic_line}}
-#' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}
-#' @param lineConfColor,lineConfSize,lineConfAlpha,lineConfType parameters supplied to the confidence interval lines
+#' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to
+#' [ggplot2::geom_line()]
+#' @param lineConfColor,lineConfSize,lineConfAlpha,lineConfType parameters supplied to the
+#' confidence interval lines
 #' @param pVal percentiles of a N(0, sigma) distribution to be drawn
 #' @param sigma sigma value for the \code{pVal} percentiles
 #' @param se boolean to determine if the confidence intervals should be displayed
-#' @param method,formula parameters supplied to \code{ggplot2::\link[ggplot2]{geom_smooth}}. Defaults to \code{"auto"} and \code{"y ~ x"}
+#' @param method,formula parameters supplied to [ggplot2::geom_smooth()].
+#' Defaults to \code{"auto"} and \code{"y ~ x"}
 #' @return \pkg{ggplot2} plot object
 #' @seealso \code{stats::\link[stats]{residuals}}
 #' @export
@@ -269,7 +275,7 @@ ggally_nostic_resid <- function(
 #'
 #' @param data,mapping,... parameters supplied to \code{\link{ggally_nostic_resid}}
 #' @param sigma sigma value for the \code{pVal} percentiles. Set to 1 for standardized residuals
-#' @seealso \code{stats::\link[stats]{rstandard}}
+#' @seealso [stats::rstandard()]
 #' @return \pkg{ggplot2} plot object
 #' @rdname ggally_nostic_std_resid
 #' @export
@@ -305,7 +311,7 @@ ggally_nostic_std_resid <- function(
 #'
 #' @param data,mapping,...,lineColor parameters supplied to \code{\link{ggally_nostic_line}}
 #' @param linePosition base comparison for a perfect fit
-#' @seealso \code{stats::\link[stats]{influence}}
+#' @seealso [stats::influence()]
 #' @return \pkg{ggplot2} plot object
 #' @export
 #' @examples
@@ -329,10 +335,10 @@ ggally_nostic_se_fit <- function(
 
 #' \code{\link{ggnostic}} leave one out model sigma
 #'
-#' A function to display \code{stats::\link[stats]{influence}}'s sigma value.
+#' A function to display [stats::influence()]'s sigma value.
 #'
 #' @details
-#' As stated in \code{stats::\link[stats]{influence}} documentation:
+#' As stated in [stats::influence()] documentation:
 #'
 #' sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being 'NaN'.)
 #'
@@ -340,7 +346,7 @@ ggally_nostic_se_fit <- function(
 #'
 #' @param data,mapping,...,lineColor parameters supplied to \code{\link{ggally_nostic_line}}
 #' @param linePosition line that is drawn in the background of the plot. Defaults to the overall model's sigma value.
-#' @seealso \code{stats::\link[stats]{influence}}
+#' @seealso [stats::influence()]
 #' @return \pkg{ggplot2} plot object
 #' @export
 #' @examples
@@ -364,7 +370,7 @@ ggally_nostic_sigma <- function(
 
 #' \code{\link{ggnostic}} Cook's distance
 #'
-#' A function to display \code{stats::\link[stats]{cooks.distance}}.
+#' A function to display [stats::cooks.distance()].
 #'
 #' @details
 #' A line is added at F_{p, n - p}(0.5) to display the general cutoff point for Cook's Distance.
@@ -373,7 +379,7 @@ ggally_nostic_sigma <- function(
 #'
 #' @param data,mapping,...,lineColor,lineType parameters supplied to \code{\link{ggally_nostic_line}}
 #' @param linePosition 4 / n is the general cutoff point for Cook's Distance
-#' @seealso \code{stats::\link[stats]{cooks.distance}}
+#' @seealso [stats::cooks.distance()]
 #' @return \pkg{ggplot2} plot object
 #' @rdname ggally_nostic_cooksd
 #' @export
@@ -406,7 +412,7 @@ ggally_nostic_cooksd <- function(
 #' A function to display stats::influence's hat information against a given explanatory variable.
 #'
 #' @details
-#' As stated in \code{stats::\link[stats]{influence}} documentation:
+#' As stated in [stats::influence()] documentation:
 #'
 #' hat: a vector containing the diagonal of the 'hat' matrix.
 #'
@@ -417,9 +423,11 @@ ggally_nostic_cooksd <- function(
 #' If either \code{linePosition} or \code{avgLinePosition} is \code{NULL}, the respective line will not be drawn.
 #'
 #' @param data,mapping,... supplied directly to \code{\link{ggally_nostic_line}}
-#' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}} for the cutoff line
-#' @param avgLinePosition,avgLineColor,avgLineSize,avgLineAlpha,avgLineType parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}} for the average line
-#' @seealso \code{stats::\link[stats]{influence}}
+#' @param linePosition,lineColor,lineSize,lineAlpha,lineType parameters supplied to
+#' [ggplot2::geom_line()] for the cutoff line
+#' @param avgLinePosition,avgLineColor,avgLineSize,avgLineAlpha,avgLineType parameters supplied
+#' to [ggplot2::geom_line()] for the average line
+#' @seealso [stats::influence()]
 #' @return \pkg{ggplot2} plot object
 #' @export
 #' @examples
@@ -554,14 +562,14 @@ check_and_set_nostic_types <- function(
 #'
 #'
 #' @section `columnsY`:
-#' \code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{\link{ggnostic}}.
+#' [broom::augment()] collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{\link{ggnostic}}.
 #'
 #' \describe{
 #'   \item{.resid}{Residuals}
 #'   \item{.hat}{Diagonal of the hat matrix}
 #'   \item{.sigma}{Estimate of residual standard deviation when
 #'     corresponding observation is dropped from model}
-#'   \item{.cooksd}{Cooks distance, \code{\link[stats]{cooks.distance}}}
+#'   \item{.cooksd}{Cooks distance, [stats::cooks.distance()]}
 #'   \item{.fitted}{Fitted values of model}
 #'   \item{.se.fit}{Standard errors of fitted values}
 #'   \item{.std.resid}{Standardized residuals}
@@ -569,12 +577,12 @@ check_and_set_nostic_types <- function(
 #' }
 #'
 #' @section `continuous`, `combo`, `discrete` types:
-#' Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{broom::\link[broom]{augment}()} output: \code{".fitted"}, \code{".resid"}, \code{".std.resid"}, \code{".sigma"}, \code{".se.fit"}, \code{".hat"}, \code{".cooksd"}. An extra key, \code{"default"}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the \code{types} parameter in \code{\link{ggduo}}.
+#' Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the [broom::augment()] output: \code{".fitted"}, \code{".resid"}, \code{".std.resid"}, \code{".sigma"}, \code{".se.fit"}, \code{".hat"}, \code{".cooksd"}. An extra key, \code{"default"}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the \code{types} parameter in \code{\link{ggduo}}.
 #'
 #' @param model statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}
 #' @param ... arguments passed directly to \code{\link{ggduo}}
 #' @param columnsX columns to be displayed in the plot matrix. Defaults to the predictor columns of the \code{model}
-#' @param columnsY rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by \code{broom::\link[broom]{augment}(model)}. See details for more information.
+#' @param columnsY rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by [broom::augment()]. See details for more information.
 #' @param columnLabelsX,columnLabelsY column and row labels to display in the plot matrix
 #' @param xlab,ylab,title plot matrix labels passed directly to \code{\link{ggmatrix}}
 #' @param continuous,combo,discrete list of functions for each y variable.  See details for more information.

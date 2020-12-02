@@ -49,7 +49,7 @@ Most diagnostic plots contain reference line(s) to help determine if the model i
     * See also `stats::influence`'s value on `hat`
 * **Cook's distance:**
     * Type key: `".cooksd"`
-    * Points that are larger than $4 / n$ line are considered highly influential points. Plot function: `ggally_nostic_cooksd()`. See also `stats::cooks.distance`
+    * Points that are larger than $4 / n$ line are considered highly influential points. Plot function: `ggally_nostic_cooksd()`. See also `stats::cooks.distance()`
 * **fitted points:**
     * Type key: `".fitted"`
     * No reference lines by default.

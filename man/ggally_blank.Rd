@@ -19,7 +19,7 @@ Draws nothing.
 Makes a "blank" ggplot object that will only draw white space
 }
 \seealso{
-\code{ggplot2::\link[ggplot2]{element_blank}()}
+\code{\link[ggplot2:element]{ggplot2::element_blank()}}
 }
 \author{
 Barret Schloerke

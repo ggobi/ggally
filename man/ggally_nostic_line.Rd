@@ -19,15 +19,18 @@ ggally_nostic_line(
 )
 }
 \arguments{
-\item{data, mapping}{supplied directly to \code{ggplot2::\link[ggplot2]{ggplot}(data, mapping)}}
+\item{data, mapping}{supplied directly to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}}
 
 \item{...}{parameters supplied to \code{continuous_geom} or \code{combo_geom}}
 
-\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}}
+\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
+\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}}}
 
-\item{continuous_geom}{\pkg{ggplot2} geom that is executed after the line is (possibly) added and if the x data is continuous}
+\item{continuous_geom}{\pkg{ggplot2} geom that is executed after the line is (possibly)
+added and if the x data is continuous}
 
-\item{combo_geom}{\pkg{ggplot2} geom that is executed after the line is (possibly) added and if the x data is discrete}
+\item{combo_geom}{\pkg{ggplot2} geom that is executed after the line is (possibly) added and
+if the x data is discrete}
 
 \item{mapColorToFill}{boolean to determine if combo plots should cut the color mapping to the fill mapping}
 }

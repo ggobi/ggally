@@ -11,7 +11,7 @@ ggally_trends(data, mapping, ..., include_zero = FALSE)
 
 \item{mapping}{aesthetics being used}
 
-\item{...}{other arguments passed to \code{\link[ggplot2]{geom_line}(...)}}
+\item{...}{other arguments passed to \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}}}
 
 \item{include_zero}{Should 0 be included on the y-axis?}
 }

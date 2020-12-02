@@ -21,10 +21,10 @@ ggally_nostic_sigma(
 \pkg{ggplot2} plot object
 }
 \description{
-A function to display \code{stats::\link[stats]{influence}}'s sigma value.
+A function to display \code{\link[stats:lm.influence]{stats::influence()}}'s sigma value.
 }
 \details{
-As stated in \code{stats::\link[stats]{influence}} documentation:
+As stated in \code{\link[stats:lm.influence]{stats::influence()}} documentation:
 
 sigma: a vector whose i-th element contains the estimate of the residual standard deviation obtained when the i-th case is dropped from the regression.  (The approximations needed for GLMs can result in this being 'NaN'.)
 
@@ -38,5 +38,5 @@ dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
 }
 \seealso{
-\code{stats::\link[stats]{influence}}
+\code{\link[stats:lm.influence]{stats::influence()}}
 }

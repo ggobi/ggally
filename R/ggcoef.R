@@ -1,13 +1,14 @@
 #' Model coefficients with \pkg{broom} and \pkg{ggplot2}
 #'
 #' Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
+#' For an updated and improved version, see [ggcoef_model()].
 #'
-#' @param x a model object to be tidied with \code{\link[broom]{tidy}} or a data frame (see Details)
+#' @param x a model object to be tidied with [broom::tidy()] or a data frame (see Details)
 #' @param mapping default aesthetic mapping
 #' @param conf.int display confidence intervals as error bars?
-#' @param conf.level level of confidence intervals (passed to \code{\link[broom]{tidy}}
+#' @param conf.level level of confidence intervals (passed to [broom::tidy()]
 #'   if \code{x} is not a data frame)
-#' @param exponentiate if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom]{tidy}}
+#' @param exponentiate if \code{TRUE}, x-axis will be logarithmic (also passed to [broom::tidy()]
 #'   if \code{x} is not a data frame)
 #' @param exclude_intercept should the intercept be excluded from the plot?
 #' @param vline print a vertical line?
@@ -21,7 +22,7 @@
 #' @param errorbar_linetype line type of the error bars
 #' @param errorbar_size size of the error bars
 #' @param sort \code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"descending"} sort by decreasing coefficient value
-#' @param ... additional arguments sent to \code{\link[ggplot2]{geom_point}}
+#' @param ... additional arguments sent to [ggplot2::geom_point()]
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive

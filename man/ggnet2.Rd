@@ -60,8 +60,8 @@ ggnet2(
 that can be coerced to this class, such as an adjacency or incidence matrix,
 or an edge list: see \link[network]{edgeset.constructors} and
 \link[network]{network} for details. If the object is of class
-\code{\link[igraph:igraph-package]{igraph}} and the
-\code{\link[intergraph:intergraph-package]{intergraph}} package is installed,
+\link[igraph:aaa-igraph-package]{igraph} and the
+\link[intergraph:intergraph-package]{intergraph} package is installed,
 it will be used to convert the object: see
 \code{\link[intergraph]{asNetwork}} for details.}
 
@@ -115,8 +115,8 @@ Defaults to \code{NA} (does nothing).}
 
 \item{palette}{the palette to color the nodes, when \code{color} is not a
 color value or a vector of color values. Accepts named vectors of color
-values, or if \code{\link[RColorBrewer]{RColorBrewer}} is installed, any
-ColorBrewer palette name: see \code{\link[RColorBrewer]{brewer.pal}} and
+values, or if \link[RColorBrewer:ColorBrewer]{RColorBrewer} is installed, any
+ColorBrewer palette name: see \code{\link[RColorBrewer:ColorBrewer]{RColorBrewer::brewer.pal()}} and
 \url{http://colorbrewer2.org/} for details.
 Defaults to \code{NULL}, which will create an array of grayscale color values
 if \code{color} is not a color value or a vector of color values.}

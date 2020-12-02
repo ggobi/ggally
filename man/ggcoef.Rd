@@ -25,16 +25,16 @@ ggcoef(
 )
 }
 \arguments{
-\item{x}{a model object to be tidied with \code{\link[broom]{tidy}} or a data frame (see Details)}
+\item{x}{a model object to be tidied with \code{\link[broom:reexports]{broom::tidy()}} or a data frame (see Details)}
 
 \item{mapping}{default aesthetic mapping}
 
 \item{conf.int}{display confidence intervals as error bars?}
 
-\item{conf.level}{level of confidence intervals (passed to \code{\link[broom]{tidy}}
+\item{conf.level}{level of confidence intervals (passed to \code{\link[broom:reexports]{broom::tidy()}}
 if \code{x} is not a data frame)}
 
-\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom]{tidy}}
+\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom:reexports]{broom::tidy()}}
 if \code{x} is not a data frame)}
 
 \item{exclude_intercept}{should the intercept be excluded from the plot?}
@@ -60,10 +60,11 @@ if \code{x} is not a data frame)}
 
 \item{sort}{\code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"descending"} sort by decreasing coefficient value}
 
-\item{...}{additional arguments sent to \code{\link[ggplot2]{geom_point}}}
+\item{...}{additional arguments sent to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}}
 }
 \description{
 Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
+For an updated and improved version, see \code{\link[=ggcoef_model]{ggcoef_model()}}.
 }
 \examples{
 # Small function to display plots only if it's interactive
