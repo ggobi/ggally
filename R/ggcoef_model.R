@@ -1,7 +1,6 @@
 #' Plot model coefficients
 #'
-#' Redesign of [GGally::ggcoef()] based on [broom.helpers::tidy_plus_plus()].
-#'
+#' @describeIn ggcoef_model Redesign of [GGally::ggcoef()] based on [broom.helpers::tidy_plus_plus()].
 #' @inheritParams broom.helpers::tidy_plus_plus
 #' @param model a regression model object
 #' @param conf.level the confidence level to use for the confidence
@@ -41,7 +40,7 @@
 #' # you can use the labelled package to define variable labels before computing model
 #' if (require(labelled)) {
 #'   tips_labelled <- tips %>%
-#'     set_variable_labels(
+#'     labelled::set_variable_labels(
 #'       day = "Day of the week",
 #'       time = "Lunch or Dinner",
 #'       total_bill = "Bill's total"
@@ -223,9 +222,7 @@ ggcoef_model <- function (
   do.call(ggcoef_plot, args)
 }
 
-#' @rdname ggcoef_model
-#' @description
-#' [ggcoef_compare()] is designed for displaying several models on the same plot.
+#' @describeIn ggcoef_model Designed for displaying several models on the same plot.
 #' @export
 #' @param models named list of models
 #' @param type a dodged plot or a facetted plot?
@@ -346,10 +343,7 @@ ggcoef_compare <- function (
   do.call(ggcoef_plot, args)
 }
 
-#' @rdname ggcoef_model
-#' @description
-#' [ggcoef_multinom()] is a variation of [ggcoef_model()] adapted to multinomial
-#' logistic regressions performed with [nnet::multinom()].
+#' @describeIn ggcoef_model A variation of [ggcoef_model()] adapted to multinomial logistic regressions performed with [nnet::multinom()].
 #' @param y.level_label an optional named vector for labelling `y.level` (see examples)
 #' @export
 #' @examples
@@ -518,7 +512,7 @@ ggcoef_data <- function (
 
   data$label_light <- dplyr::if_else(
     as.character(data$label) == as.character(data$var_label) &
-      (!stringr::str_starts(data$var_class, "nmatrix") | is.na(data$var_class)),
+      ((!grepl("^nmatrix", data$var_class)) | is.na(data$var_class)),
     "",
     as.character(data$label)
   ) %>%
@@ -527,7 +521,7 @@ ggcoef_data <- function (
   data
 }
 
-#' @rdname ggcoef_model
+#' @describeIn ggcoef_model SOME DESCRIPTION HERE
 #' @param data a data frame containing data to be plotted,
 #' typically the output of [ggcoef_model()], [ggcoef_compare()]
 #' or [ggcoef_multinom()] with the option `return_data = TRUE`
@@ -608,7 +602,7 @@ ggcoef_plot <- function (
     }
     data <- data %>%
       mutate(.fill = dplyr::if_else(
-        as.integer(forcats::fct_inorder(term)) %% 2L == 1,
+        as.integer(forcats::fct_inorder(.data$term)) %% 2L == 1,
         strips_even,
         strips_odd
       ))
@@ -736,4 +730,3 @@ ggcoef_plot <- function (
 
   p
 }
-

@@ -81,7 +81,7 @@ ggcoef_model(
 )
 ```
 
-If variable labels are to long, you can pass `ggplot2::label_crap_gen()` or any other labeller function to `facet_labeller.`
+If variable labels are to long, you can pass `ggplot2::label_wrap_gen()` or any other labeller function to `facet_labeller.`
 
 ```{r}
 ggcoef_model(

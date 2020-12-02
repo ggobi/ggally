@@ -31,7 +31,7 @@ Depends:
     R (>= 3.1),
     ggplot2 (>= 3.3.0)
 Imports:
-    dplyr,
+    dplyr (>= 1.0.0),
     forcats,
     grDevices,
     grid,
@@ -42,7 +42,6 @@ Imports:
     RColorBrewer,
     reshape (>= 0.8.5),
     rlang,
-    stringr,
     scales (>= 1.1.0),
     tidyr,
     utils

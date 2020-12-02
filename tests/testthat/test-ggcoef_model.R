@@ -15,7 +15,7 @@ test_that("example of ggcoef_model", {
   # you can use to define variable labels before computing model
   if (require(labelled)) {
     tips_labelled <- tips %>%
-      set_variable_labels(
+      labelled::set_variable_labels(
         day = "Day of the week",
         time = "Lunch or Dinner",
         total_bill = "Bill's total"
