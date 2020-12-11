@@ -1,5 +1,5 @@
 Package: GGally
-Version: 2.0.0.9000
+Version: 2.1.0
 License: GPL (>= 2.0)
 Title: Extension to 'ggplot2'
 Type: Package
