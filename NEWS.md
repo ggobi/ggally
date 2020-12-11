@@ -1,7 +1,5 @@
 # GGally (development version)
 
-* `stat_prop()` now accepts a **x** or a **y** aesthetic (#395, @larmarange)
-
 ### Breaking changes
 
 * Following version 7.0.0 of `broom`, computed residuals in `stat_cross()`
@@ -11,8 +9,14 @@
 
 ### Other changes
 
+* `ggcoef()` redesign based on `broom.helpers` with four new functions:
+  `ggcoef_model()`, `ggcoef_compare()`, `ggcoef_multinom()` and `ggcoef_plot()`
+  (more informations in the dedicated vignette, @larmarange, #392)
+* New geometries: `geom_stripped_rows()` and `geom_stripped_cols()`
+  (#392, @larmarange)
 * New option `reverse_fill_labels` for `ggally_colbar()`
   and `ggally_rowbar()` (@larmarange, #374)
+* `stat_prop()` now accepts a **x** or a **y** aesthetic (#395, @larmarange)
 
 # GGally 2.0.0
 
