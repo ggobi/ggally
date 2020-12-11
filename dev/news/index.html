@@ -178,10 +178,6 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ggally-development-version" class="anchor"></a>GGally (development version)<small> Unreleased </small>
 </h1>
-<ul>
-<li>
-<code><a href="../reference/stat_prop.html">stat_prop()</a></code> now accepts a <strong>x</strong> or a <strong>y</strong> aesthetic (<a href='https://github.com/ggobi/ggally/issues/395'>#395</a>, <a href='https://github.com/larmarange'>@larmarange</a>)</li>
-</ul>
 <div id="breaking-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h3>
@@ -193,7 +189,12 @@
 <h3 class="hasAnchor">
 <a href="#other-changes" class="anchor"></a>Other changes</h3>
 <ul>
+<li>
+<code><a href="../reference/ggcoef.html">ggcoef()</a></code> redesign based on <code>broom.helpers</code> with four new functions: <code><a href="../reference/ggcoef_model.html">ggcoef_model()</a></code>, <code><a href="../reference/ggcoef_model.html">ggcoef_compare()</a></code>, <code><a href="../reference/ggcoef_model.html">ggcoef_multinom()</a></code> and <code><a href="../reference/ggcoef_model.html">ggcoef_plot()</a></code> (more informations in the dedicated vignette, <a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/392'>#392</a>)</li>
+<li>New geometries: <code><a href="../reference/geom_stripped_rows.html">geom_stripped_rows()</a></code> and <code><a href="../reference/geom_stripped_rows.html">geom_stripped_cols()</a></code> (<a href='https://github.com/ggobi/ggally/issues/392'>#392</a>, <a href='https://github.com/larmarange'>@larmarange</a>)</li>
 <li>New option <code>reverse_fill_labels</code> for <code><a href="../reference/ggally_colbar.html">ggally_colbar()</a></code> and <code><a href="../reference/ggally_colbar.html">ggally_rowbar()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/374'>#374</a>)</li>
+<li>
+<code><a href="../reference/stat_prop.html">stat_prop()</a></code> now accepts a <strong>x</strong> or a <strong>y</strong> aesthetic (<a href='https://github.com/ggobi/ggally/issues/395'>#395</a>, <a href='https://github.com/larmarange'>@larmarange</a>)</li>
 </ul>
 </div>
 </div>
