@@ -39,6 +39,7 @@ vignettes_for_ggally <- c(
   "ggally_plots",
   "ggally_stats",
   "ggbivariate",
+  "ggcoef_model",
   "ggcoef",
   "ggduo",
   "ggmatrix",
