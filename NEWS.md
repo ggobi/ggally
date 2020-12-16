@@ -17,7 +17,7 @@
 * New option `reverse_fill_labels` for `ggally_colbar()`
   and `ggally_rowbar()` (@larmarange, #374)
 * `stat_prop()` now accepts a **x** or a **y** aesthetic (#395, @larmarange)
-* Temporarily not listening to `ggally_statistic(family)` to avoid monospace font issues. See #373 for more details. (#387)
+* Temporarily not listening to `ggally_statistic(family)` to avoid monospaced font issues. See #373 for more details. (#387)
 
 
 # GGally 2.0.0

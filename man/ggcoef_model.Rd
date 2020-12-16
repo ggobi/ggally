@@ -161,9 +161,9 @@ for plotting instead of the plot}
 
 \item{models}{named list of models}
 
-\item{type}{a dodged plot or a facetted plot?}
+\item{type}{a dodged plot or a faceted plot?}
 
-\item{y.level_label}{an optional named vector for labelling \code{y.level} (see examples)}
+\item{y.level_label}{an optional named vector for labeling \code{y.level} (see examples)}
 
 \item{data}{a data frame containing data to be plotted,
 typically the output of \code{\link[=ggcoef_model]{ggcoef_model()}}, \code{\link[=ggcoef_compare]{ggcoef_compare()}}
@@ -203,7 +203,7 @@ shape aesthetic}
 
 \item{errorbar_height}{height of error bars}
 
-\item{errorbar_coloured}{should error bars be coloured as the points?}
+\item{errorbar_coloured}{should error bars be colored as the points?}
 
 \item{stripped_rows}{should stripped rows be displayed in the background?}
 
@@ -211,7 +211,7 @@ shape aesthetic}
 
 \item{strips_even}{color of the even rows}
 
-\item{vline}{should a vertical line de drawn at 0 (or 1 if \code{exponentiate = TRUE})?}
+\item{vline}{should a vertical line be drawn at 0 (or 1 if \code{exponentiate = TRUE})?}
 
 \item{vline_colour}{colour of vertical line}
 
@@ -223,7 +223,7 @@ shape aesthetic}
 
 \item{facet_col}{optional variable name to be used for column facets}
 
-\item{facet_labeller}{labeller function to be used for labelling facets;
+\item{facet_labeller}{labeller function to be used for labeling facets;
 if labels are too long, you can use \code{\link[ggplot2:labellers]{ggplot2::label_wrap_gen()}} (see examples),
 more information in the documentation of \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}}
 }
@@ -232,13 +232,13 @@ Plot model coefficients
 }
 \details{
 \code{ggcoef_model()}, \code{ggcoef_multinom()} and \code{ggcoef_compare()} use
-\code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}} to obtain a tibble of the model
+\code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}} to obtain a \code{tibble} of the model
 coefficients, apply additional data transformation and then pass the
-produced tibble to \code{ggcoef_plot()} to generate the plot.
+produced \code{tibble} to \code{ggcoef_plot()} to generate the plot.
 
 For more control, you can use the argument \code{return_data = TRUE} to
-get the produced tibble, apply any transformation of your own and
-then pass your customised tibble to \code{ggcoef_plot()}.
+get the produced \code{tibble}, apply any transformation of your own and
+then pass your customized \code{tibble} to \code{ggcoef_plot()}.
 }
 \section{Functions}{
 \itemize{

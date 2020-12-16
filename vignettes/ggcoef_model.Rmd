@@ -65,7 +65,7 @@ tips_labelled <- tips %>%
     total_bill = "Bill's total"
   )
 mod_labelled <- lm(tip ~ day + time + total_bill, data = tips_labelled)
-ggcoef_model(mod_labelled)  
+ggcoef_model(mod_labelled)
 ```
 
 You can also define custom variable labels directly by passing a named vector to the `variable_labels` option.
@@ -144,15 +144,15 @@ Use `no_reference_row` to indicate which variables should not have a reference r
 
 ```{r}
 ggcoef_model(
-  mod_titanic2, exponentiate = TRUE, 
+  mod_titanic2, exponentiate = TRUE,
   no_reference_row = "Sex"
 )
 ggcoef_model(
-  mod_titanic2, exponentiate = TRUE, 
+  mod_titanic2, exponentiate = TRUE,
   no_reference_row = broom.helpers::all_dichotomous()
 )
 ggcoef_model(
-  mod_titanic2, exponentiate = TRUE, 
+  mod_titanic2, exponentiate = TRUE,
   no_reference_row = broom.helpers::all_categorical(),
   categorical_terms_pattern = "{level}/{reference_level}"
 )
@@ -202,7 +202,7 @@ You can remove stripped rows with `stripped_rows = FALSE`.
 ggcoef_model(mod_simple, stripped_rows = FALSE)
 ```
 
-Do not hesitate to consult the [help file](http://ggobi.github.io/ggally/reference/ggcoef_model.html) of `ggcoef_model()` to see all avalaible options.
+Do not hesitate to consult the [help file](http://ggobi.github.io/ggally/reference/ggcoef_model.html) of `ggcoef_model()` to see all available options.
 
 ### ggplot2 elements
 
@@ -220,7 +220,7 @@ ggcoef_model(mod_simple) +
 
 ## Multinomial models
 
-For multinomial models, simply use `ggcoef_multinom()`. Two types of visualisation are available: "dodged" and "faceted".
+For multinomial models, simply use `ggcoef_multinom()`. Two types of visualizations are available: `"dodged"` and `"faceted"`.
 
 ```{r}
 library(nnet)
@@ -229,7 +229,7 @@ mod <- multinom(happy ~ age + degree + sex, data = happy, trace = FALSE)
 ggcoef_multinom(mod, exponentiate = TRUE)
 ggcoef_multinom(mod, exponentiate = TRUE, type = "faceted")
 ggcoef_multinom(
-  mod, exponentiate = TRUE, 
+  mod, exponentiate = TRUE,
   y.level = c(
       "pretty happy" = "pretty happy\n(ref: not too happy)",
       "very happy" = "very happy"

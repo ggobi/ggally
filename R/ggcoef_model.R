@@ -20,13 +20,13 @@
 #' @param ... parameters passed to [ggcoef_plot()]
 #' @details
 #' `ggcoef_model()`, `ggcoef_multinom()` and `ggcoef_compare()` use
-#' [broom.helpers::tidy_plus_plus()] to obtain a tibble of the model
+#' [broom.helpers::tidy_plus_plus()] to obtain a `tibble` of the model
 #' coefficients, apply additional data transformation and then pass the
-#' produced tibble to `ggcoef_plot()` to generate the plot.
+#' produced `tibble` to `ggcoef_plot()` to generate the plot.
 #'
 #' For more control, you can use the argument `return_data = TRUE` to
-#' get the produced tibble, apply any transformation of your own and
-#' then pass your customised tibble to `ggcoef_plot()`.
+#' get the produced `tibble`, apply any transformation of your own and
+#' then pass your customized `tibble` to `ggcoef_plot()`.
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
@@ -228,7 +228,7 @@ ggcoef_model <- function (
 #' @describeIn ggcoef_model Designed for displaying several models on the same plot.
 #' @export
 #' @param models named list of models
-#' @param type a dodged plot or a facetted plot?
+#' @param type a dodged plot or a faceted plot?
 #' @examples
 #'
 #' if (require(broom.helpers)) {
@@ -349,7 +349,7 @@ ggcoef_compare <- function (
 }
 
 #' @describeIn ggcoef_model A variation of [ggcoef_model()] adapted to multinomial logistic regressions performed with [nnet::multinom()].
-#' @param y.level_label an optional named vector for labelling `y.level` (see examples)
+#' @param y.level_label an optional named vector for labeling `y.level` (see examples)
 #' @export
 #' @examples
 #'
@@ -552,17 +552,17 @@ ggcoef_data <- function (
 #' @param shape_lab label of the shape aesthetic in the legend
 #' @param errorbar should error bars be plotted?
 #' @param errorbar_height height of error bars
-#' @param errorbar_coloured should error bars be coloured as the points?
+#' @param errorbar_coloured should error bars be colored as the points?
 #' @param stripped_rows should stripped rows be displayed in the background?
 #' @param strips_odd color of the odd rows
 #' @param strips_even color of the even rows
-#' @param vline should a vertical line de drawn at 0 (or 1 if `exponentiate = TRUE`)?
+#' @param vline should a vertical line be drawn at 0 (or 1 if `exponentiate = TRUE`)?
 #' @param vline_colour colour of vertical line
 #' @param dodged should points be dodged (according to the colour aesthetic)?
 #' @param dodged_width width value for [ggplot2::position_dodge()]
 #' @param facet_row variable name to be used for row facets
 #' @param facet_col optional variable name to be used for column facets
-#' @param facet_labeller labeller function to be used for labelling facets;
+#' @param facet_labeller labeller function to be used for labeling facets;
 #'   if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
 #'   more information in the documentation of [ggplot2::facet_grid()]
 #' @export
