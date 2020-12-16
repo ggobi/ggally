@@ -2,6 +2,8 @@
 context("utils")
 test_that("require_namespaces", {
 
+  skip_on_cran()
+
   if ("Hmisc" %in% loadedNamespaces()) unloadNamespace("Hmisc")
   #NB: survival is required by Hmisc, so Hmisc must be unloaded before
   if ("multcomp" %in% loadedNamespaces()) unloadNamespace("multcomp")
