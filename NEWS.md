@@ -1,6 +1,4 @@
-# GGally (development version)
-
-* `stat_prop()` now accepts a **x** or a **y** aesthetic (#395, @larmarange)
+# GGally 2.1.0
 
 ### Breaking changes
 
@@ -11,10 +9,15 @@
 
 ### Other changes
 
+* `ggcoef()` redesign based on `broom.helpers` with four new functions:
+  `ggcoef_model()`, `ggcoef_compare()`, `ggcoef_multinom()` and `ggcoef_plot()`
+  (more informations in the dedicated vignette, @larmarange, #392)
+* New geometries: `geom_stripped_rows()` and `geom_stripped_cols()`
+  (#392, @larmarange)
 * New option `reverse_fill_labels` for `ggally_colbar()`
   and `ggally_rowbar()` (@larmarange, #374)
+* `stat_prop()` now accepts a **x** or a **y** aesthetic (#395, @larmarange)
 * Temporarily not listening to `ggally_statistic(family)` to avoid monospace font issues. See #373 for more details. (#387)
-
 
 
 # GGally 2.0.0
