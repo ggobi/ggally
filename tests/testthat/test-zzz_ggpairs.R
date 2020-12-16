@@ -469,11 +469,25 @@ test_that("user functions", {
 
   pm1 <- ggpairs(tips, 1:2, lower = list(continuous = "points"))
   p1 <- pm1[2, 1]
-  expect_equivalent(p0, p1)
 
   pm2 <- ggpairs(tips, 1:2, lower = list(continuous = ggally_points))
   p2 <- pm2[2, 1]
-  expect_equivalent(p0, p2)
+
+  expect_equal_plots <- function(x, y) {
+    expect_equal(length(x$layers), 1)
+    expect_equal(length(y$layers), 1)
+    expect_true(
+      "GeomPoint" %in% class(x$layers[[1]]$geom)
+    )
+    expect_true(
+      "GeomPoint" %in% class(y$layers[[1]]$geom)
+    )
+
+    expect_equal(x$labels, list(x = "total_bill", y = "tip"))
+    expect_equal(x$labels, y$labels)
+  }
+  expect_equal_plots(p0, p1)
+  expect_equal_plots(p0, p2)
 })
 
 test_that("NA data", {
