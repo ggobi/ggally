@@ -137,7 +137,7 @@ the diagonal labels.}
 Function for making a correlation matrix plot, using \pkg{ggplot2}.
 The function is directly inspired by Tian Zheng and Yu-Sung Su's
 \code{corrplot} function in the 'arm' package.
-Please visit \url{http://github.com/briatte/ggcorr} for the latest version
+Please visit \url{https://github.com/briatte/ggcorr} for the latest version
 of \code{ggcorr}, and see the vignette at
 \url{https://briatte.github.io/ggcorr/} for many examples of how to use it.
 }

@@ -194,8 +194,8 @@ the node labels: see \code{\link[ggplot2]{geom_text}} for details.}
 \description{
 Function for plotting network objects using \pkg{ggplot2}, now replaced by the
 \code{\link{ggnet2}} function, which provides additional control over
-plotting parameters. Please visit \url{http://github.com/briatte/ggnet} for
-the latest version of ggnet2, and \url{https://briatte.github.io/ggnet} for a
+plotting parameters. Please visit \url{https://github.com/briatte/ggnet} for
+the latest version of ggnet2, and \url{https://briatte.github.io/ggnet/} for a
 vignette that contains many examples and explanations.
 }
 \details{

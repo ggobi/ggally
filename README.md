@@ -1,4 +1,4 @@
-# [GGally](http://ggobi.github.io/ggally): Extension to [ggplot2](https://ggplot2.tidyverse.org/)
+# [GGally](http://ggobi.github.io/ggally/): Extension to [ggplot2](https://ggplot2.tidyverse.org/)
 
 <!-- badges: start -->
 [![R build status](https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg)](https://github.com/ggobi/ggally/actions)
@@ -10,7 +10,7 @@
 <!-- badges: end -->
 
 
-[`ggplot2`](https://ggplot2.tidyverse.org/) is a plotting system for R based on the grammar of graphics. [`GGally`](https://ggobi.github.io/ggally) extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data.  Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.
+[`ggplot2`](https://ggplot2.tidyverse.org/) is a plotting system for R based on the grammar of graphics. [`GGally`](https://ggobi.github.io/ggally/) extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data.  Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.
 
 ## Installation
 

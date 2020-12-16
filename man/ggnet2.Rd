@@ -117,7 +117,7 @@ Defaults to \code{NA} (does nothing).}
 color value or a vector of color values. Accepts named vectors of color
 values, or if \link[RColorBrewer:ColorBrewer]{RColorBrewer} is installed, any
 ColorBrewer palette name: see \code{\link[RColorBrewer:ColorBrewer]{RColorBrewer::brewer.pal()}} and
-\url{http://colorbrewer2.org/} for details.
+\url{https://colorbrewer2.org/} for details.
 Defaults to \code{NULL}, which will create an array of grayscale color values
 if \code{color} is not a color value or a vector of color values.}
 
@@ -276,8 +276,8 @@ the node labels: see \code{\link[ggplot2]{geom_text}} for details.}
 \description{
 Function for plotting network objects using \pkg{ggplot2}, with additional control
 over graphical parameters that are not supported by the \code{\link{ggnet}}
-function. Please visit \url{http://github.com/briatte/ggnet} for the latest
-version of ggnet2, and \url{https://briatte.github.io/ggnet} for a vignette
+function. Please visit \url{https://github.com/briatte/ggnet} for the latest
+version of ggnet2, and \url{https://briatte.github.io/ggnet/} for a vignette
 that contains many examples and explanations.
 }
 \details{
