@@ -10,7 +10,7 @@
 |collate  |en_US.UTF-8                  |
 |ctype    |en_US.UTF-8                  |
 |tz       |America/New_York             |
-|date     |2020-12-16                   |
+|date     |2021-01-04                   |
 
 # Dependencies
 
@@ -32,7 +32,7 @@
 |:--------------------------------------|:-------|:-----|:-------|:----|
 |[bootcluster](problems.md#bootcluster) |0.2.0   |      |__+1__  |     |
 
-## All (112)
+## All (113)
 
 |package                                                          |version |error |warning |note |
 |:----------------------------------------------------------------|:-------|:-----|:-------|:----|
@@ -54,7 +54,7 @@
 |[CINNA](problems.md#cinna)                                       |1.1.53  |      |        |1    |
 |[CluMSID](problems.md#clumsid)                                   |1.6.0   |      |        |1    |
 |clustrd                                                          |1.3.7-2 |      |        |     |
-|[ctsem](problems.md#ctsem)                                       |3.3.11  |      |        |3    |
+|[ctsem](problems.md#ctsem)                                       |3.4.1   |      |        |3    |
 |DescribeDisplay                                                  |0.2.7   |      |        |     |
 |discourseGT                                                      |1.1.2   |      |        |     |
 |eechidna                                                         |1.4.0   |      |        |     |
@@ -72,7 +72,7 @@
 |ggmcmc                                                           |1.5.0   |      |        |     |
 |[GGPA](problems.md#ggpa)                                         |1.2.0   |      |        |2    |
 |[ggPMX](problems.md#ggpmx)                                       |1.1.2   |      |        |1    |
-|[ggquickeda](problems.md#ggquickeda)                             |0.1.8   |      |        |1    |
+|[ggquickeda](problems.md#ggquickeda)                             |0.1.9   |      |        |1    |
 |glancedata                                                       |1.0.1   |      |        |     |
 |growthPheno                                                      |1.0-30  |      |        |     |
 |gsynth                                                           |1.0.9   |      |        |     |
@@ -87,7 +87,7 @@
 |[LANDD](problems.md#landd)                                       |1.1.0   |      |        |1    |
 |[loon.ggplot](failures.md#loonggplot)                            |1.0.1   |1     |        |     |
 |[MAINT.Data](problems.md#maintdata)                              |2.5.0   |      |        |1    |
-|[MAST](problems.md#mast)                                         |1.16.0  |      |1       |2    |
+|[MAST](problems.md#mast)                                         |1.16.0  |1     |1       |2    |
 |[MCbiclust](problems.md#mcbiclust)                               |1.14.0  |      |        |1    |
 |metan                                                            |1.11.0  |      |        |     |
 |[mgcViz](problems.md#mgcviz)                                     |0.1.6   |      |        |1    |
@@ -96,10 +96,10 @@
 |miWQS                                                            |0.2.0   |      |        |     |
 |mlergm                                                           |0.7     |      |        |     |
 |mlr3viz                                                          |0.5.0   |      |        |     |
-|mlrMBO                                                           |1.1.5   |-1    |        |     |
+|mlrMBO                                                           |1.1.5   |      |        |     |
 |[MOFA](problems.md#mofa)                                         |1.6.1   |1     |1       |5    |
 |[MOFA2](problems.md#mofa2)                                       |1.0.1   |      |        |7    |
-|MRPC                                                             |2.2.1   |      |-1      |     |
+|MRPC                                                             |2.2.1   |      |        |     |
 |[nanny](problems.md#nanny)                                       |0.1.8   |      |        |1    |
 |[NetworkChange](problems.md#networkchange)                       |0.7     |      |        |1    |
 |[nzelect](problems.md#nzelect)                                   |0.4.0   |      |        |2    |
@@ -110,7 +110,7 @@
 |[PAsso](problems.md#passo)                                       |0.1.8   |      |        |2    |
 |PhosR                                                            |1.0.0   |      |        |     |
 |[Pi](problems.md#pi)                                             |2.2.1   |      |1       |     |
-|[plotly](problems.md#plotly)                                     |4.9.2.1 |      |        |1    |
+|[plotly](problems.md#plotly)                                     |4.9.2.2 |      |        |1    |
 |[PopGenReport](problems.md#popgenreport)                         |3.0.4   |      |        |1    |
 |PPforest                                                         |0.1.1   |      |        |     |
 |[pubh](problems.md#pubh)                                         |1.1.19  |      |        |1    |
@@ -130,6 +130,7 @@
 |SimBIID                                                          |0.2.0   |      |        |     |
 |simplexdesign                                                    |0.1.0   |      |        |     |
 |[SmartEDA](problems.md#smarteda)                                 |0.3.6   |      |        |1    |
+|[specmine](problems.md#specmine)                                 |3.0.3   |      |        |3    |
 |[spinifex](problems.md#spinifex)                                 |0.2.7   |1     |        |1    |
 |[spup](problems.md#spup)                                         |1.3-2   |      |        |1    |
 |staRdom                                                          |1.1.18  |      |        |     |

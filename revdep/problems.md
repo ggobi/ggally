@@ -117,22 +117,22 @@ Run `revdep_details(, "AlpsNMR")` for more info
 *   checking Rd \usage sections ... WARNING
     ```
     ...
-
+    
     Undocumented arguments in documentation object 'confusion_matrix'
       ‘MVObj’ ‘model’
-
+    
     Undocumented arguments in documentation object 'model_VIP'
       ‘model’
-
+    
     Undocumented arguments in documentation object 'rdCV_PLS_RF'
       ‘X’ ‘Y’ ‘ID’ ‘scale’ ‘nRep’ ‘nOuter’ ‘nInner’ ‘varRatio’ ‘DA’
       ‘fitness’ ‘method’ ‘nCompMax’ ‘methParam’ ‘ML’ ‘modReturn’ ‘logg’
       ‘parallel’
-
+    
     Undocumented arguments in documentation object 'rdCV_PLS_RF_ML'
       ‘scale’ ‘nRep’ ‘nOuter’ ‘nInner’ ‘varRatio’ ‘DA’ ‘fitness’ ‘method’
       ‘ML’ ‘modReturn’ ‘logg’ ‘parallel’
-
+    
     Functions with \usage entries need to have the appropriate \alias
     entries, and all their arguments documented.
     The \usage entries must correspond to syntactically valid R code.
@@ -238,7 +238,7 @@ Run `revdep_details(, "bootcluster")` for more info
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘GGally::%>%’ by ‘sets::%>%’ when loading ‘bootcluster’
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/bootcluster/new/bootcluster.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/bootcluster/new/bootcluster.Rcheck/00install.out’ for details.
     ```
 
 # CeTF
@@ -249,7 +249,7 @@ Run `revdep_details(, "bootcluster")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/CeTF
 * Date/Publication: 2020-11-23
-* Number of recursive dependencies: 227
+* Number of recursive dependencies: 228
 
 Run `revdep_details(, "CeTF")` for more info
 
@@ -259,7 +259,7 @@ Run `revdep_details(, "CeTF")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.3Mb
+      installed size is  5.2Mb
       sub-directories of 1Mb or more:
         data   1.6Mb
         doc    2.5Mb
@@ -273,7 +273,7 @@ Run `revdep_details(, "CeTF")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/CINNA
 * Date/Publication: 2019-02-25 12:50:14 UTC
-* Number of recursive dependencies: 151
+* Number of recursive dependencies: 152
 
 Run `revdep_details(, "CINNA")` for more info
 
@@ -314,11 +314,11 @@ Run `revdep_details(, "CluMSID")` for more info
 
 <details>
 
-* Version: 3.3.11
+* Version: 3.4.1
 * GitHub: https://github.com/cdriveraus/ctsem
 * Source code: https://github.com/cran/ctsem
-* Date/Publication: 2020-09-16 11:10:04 UTC
-* Number of recursive dependencies: 131
+* Date/Publication: 2020-12-18 13:00:25 UTC
+* Number of recursive dependencies: 132
 
 Run `revdep_details(, "ctsem")` for more info
 
@@ -328,12 +328,11 @@ Run `revdep_details(, "ctsem")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.1Mb
+      installed size is 14.5Mb
       sub-directories of 1Mb or more:
-        R      2.0Mb
-        data   1.4Mb
-        doc    1.0Mb
-        libs   7.4Mb
+        R      2.1Mb
+        data   1.6Mb
+        libs   9.6Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -376,7 +375,7 @@ Run `revdep_details(, "egoTERGM")` for more info
 * GitHub: https://github.com/chjackson/fic
 * Source code: https://github.com/cran/fic
 * Date/Publication: 2019-04-13 08:32:39 UTC
-* Number of recursive dependencies: 95
+* Number of recursive dependencies: 98
 
 Run `revdep_details(, "fic")` for more info
 
@@ -398,7 +397,7 @@ Run `revdep_details(, "fic")` for more info
 * GitHub: https://github.com/NA/NA
 * Source code: https://github.com/cran/fingerPro
 * Date/Publication: 2018-08-28 10:04:54 UTC
-* Number of recursive dependencies: 164
+* Number of recursive dependencies: 165
 
 Run `revdep_details(, "fingerPro")` for more info
 
@@ -430,7 +429,7 @@ Run `revdep_details(, "GENESIS")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.9Mb
+      installed size is  7.0Mb
       sub-directories of 1Mb or more:
         doc       3.2Mb
         extdata   3.1Mb
@@ -471,7 +470,7 @@ Run `revdep_details(, "ggbio")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘BiocGenerics’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/ggbio/new/ggbio.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/ggbio/new/ggbio.Rcheck/00install.out’ for details.
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -539,11 +538,11 @@ Run `revdep_details(, "GGPA")` for more info
     File ‘GGPA/libs/GGPA.so’:
       Found ‘__ZNSt3__14coutE’, possibly from ‘std::cout’ (C++)
         Object: ‘3_Param.o’
-
+    
     Compiled code should not call entry points which might terminate R nor
     write to stdout/stderr instead of to the console, nor use Fortran I/O
     nor system RNGs.
-
+    
     See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
     ```
 
@@ -572,11 +571,11 @@ Run `revdep_details(, "ggPMX")` for more info
 
 <details>
 
-* Version: 0.1.8
+* Version: 0.1.9
 * GitHub: https://github.com/smouksassi/ggquickeda
 * Source code: https://github.com/cran/ggquickeda
-* Date/Publication: 2020-11-05 17:40:02 UTC
-* Number of recursive dependencies: 172
+* Date/Publication: 2020-12-16 13:40:02 UTC
+* Number of recursive dependencies: 173
 
 Run `revdep_details(, "ggquickeda")` for more info
 
@@ -667,7 +666,7 @@ Run `revdep_details(, "isomiRs")` for more info
       Warning: package ‘IRanges’ was built under R version 4.0.3
       Warning: package ‘GenomeInfoDb’ was built under R version 4.0.3
       Warning: package ‘Biobase’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/isomiRs/new/isomiRs.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/isomiRs/new/isomiRs.Rcheck/00install.out’ for details.
     ```
 
 *   checking for hidden files and directories ... NOTE
@@ -712,7 +711,7 @@ Run `revdep_details(, "isomiRs")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/jmv
 * Date/Publication: 2020-06-26 10:00:09 UTC
-* Number of recursive dependencies: 200
+* Number of recursive dependencies: 201
 
 Run `revdep_details(, "jmv")` for more info
 
@@ -800,7 +799,7 @@ Run `revdep_details(, "loon.ggplot")` for more info
 *   checking whether package ‘loon.ggplot’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -824,7 +823,7 @@ In addition: Warning message:
 In fun(libname, pkgname) : couldn't connect to display ""
 Execution halted
 ERROR: lazy loading failed for package ‘loon.ggplot’
-* removing ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/loon.ggplot’
+* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/loon.ggplot’
 
 ```
 ### CRAN
@@ -846,7 +845,7 @@ In addition: Warning message:
 In fun(libname, pkgname) : couldn't connect to display ""
 Execution halted
 ERROR: lazy loading failed for package ‘loon.ggplot’
-* removing ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/loon.ggplot/old/loon.ggplot.Rcheck/loon.ggplot’
+* removing ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/loon.ggplot/old/loon.ggplot.Rcheck/loon.ggplot’
 
 ```
 # MAINT.Data
@@ -867,9 +866,9 @@ Run `revdep_details(, "MAINT.Data")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.9Mb
+      installed size is  5.8Mb
       sub-directories of 1Mb or more:
-        R      2.1Mb
+        R      2.0Mb
         data   2.3Mb
         libs   1.2Mb
     ```
@@ -882,13 +881,35 @@ Run `revdep_details(, "MAINT.Data")` for more info
 * GitHub: https://github.com/RGLab/MAST
 * Source code: https://github.com/cran/MAST
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 202
+* Number of recursive dependencies: 205
 
 Run `revdep_details(, "MAST")` for more info
 
 </details>
 
 ## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+       23. lme4::lFormula(...)
+       24. lme4:::chkRank.drop.cols(X, kind = rankX.chk, tol = 1e-07)
+       25. Matrix::rankMatrix(X, tol = tol, method = method)
+       27. Matrix::qr2rankMatrix(q.r, tol = tol, isBqr = x.dense, do.warn = warn.qr)
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure (test-lmWrapper-glmer.R:22:9): lrt is non-NA ────────────────────────
+      all(l1[, "hurdle", "lambda"] > 0) is not TRUE
+      
+      `actual`:   FALSE
+      `expected`: TRUE 
+      
+      [ FAIL 1 | WARN 7 | SKIP 4 | PASS 286 ]
+      Error: Test failures
+      Execution halted
+    ```
 
 *   checking whether package ‘MAST’ can be installed ... WARNING
     ```
@@ -902,7 +923,7 @@ Run `revdep_details(, "MAST")` for more info
       Warning: package ‘IRanges’ was built under R version 4.0.3
       Warning: package ‘GenomeInfoDb’ was built under R version 4.0.3
       Warning: package ‘Biobase’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/MAST/new/MAST.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/MAST/new/MAST.Rcheck/00install.out’ for details.
     ```
 
 *   checking for hidden files and directories ... NOTE
@@ -963,7 +984,7 @@ Run `revdep_details(, "mgcViz")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.1Mb
+      installed size is  5.2Mb
       sub-directories of 1Mb or more:
         doc   4.4Mb
     ```
@@ -986,24 +1007,24 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 
 *   checking S3 generic/method consistency ... WARNING
     ```
-
-    (R:77535): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56419): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See section ‘Generic functions and methods’ in the ‘Writing R
     Extensions’ manual.
     ```
 
 *   checking replacement functions ... WARNING
     ```
-
-    (R:77695): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56430): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The argument of a replacement function which corresponds to the right
     hand side must be named ‘value’.
     ```
 
 *   checking for missing documentation entries ... WARNING
     ```
-
-    (R:78397): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56715): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     All user-level objects in a package should have documentation entries.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
     Extensions’ manual.
@@ -1011,38 +1032,38 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 
 *   checking for code/documentation mismatches ... WARNING
     ```
-
-    (R:78560): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
-
-    (R:78678): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
-
-    (R:78730): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56733): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56749): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56765): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking dependencies in R code ... NOTE
     ```
-
-    (R:77221): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56284): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking foreign function calls ... NOTE
     ```
-
-    (R:77799): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56469): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See chapter ‘System and foreign language interfaces’ in the ‘Writing R
     Extensions’ manual.
     ```
 
 *   checking R code for possible problems ... NOTE
     ```
-
-    (R:78003): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56517): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking Rd \usage sections ... NOTE
     ```
-
-    (R:78916): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    
+    (R:56803): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The \usage entries for S3 methods should use the \method markup and not
     their full name.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
@@ -1069,18 +1090,18 @@ Run `revdep_details(, "MOFA")` for more info
     ```
     Running examples in ‘MOFA-Ex.R’ failed
     The error most likely occurred in:
-
+    
     > ### Name: DataOptions
     > ### Title: DataOptions: set and retrieve data options
     > ### Aliases: DataOptions DataOptions<- DataOptions,MOFAmodel-method
     > ###   DataOptions<-,MOFAmodel,list-method
-    >
+    > 
     > ### ** Examples
-    >
+    > 
     > # load a trained MOFAmodel object
     > filepath <- system.file("extdata", "scMT_model.hdf5", package = "MOFAdata")
     > MOFAobject <- loadModel(filepath)
-    Error in h5checktypeOrOpenLoc(file, readonly = TRUE, fapl = NULL, native = native) :
+    Error in h5checktypeOrOpenLoc(file, readonly = TRUE, fapl = NULL, native = native) : 
       Error in h5checktypeOrOpenLoc(). Cannot open file. File '' does not exist.
     Calls: loadModel -> h5read -> h5checktypeOrOpenLoc
     Execution halted
@@ -1090,7 +1111,7 @@ Run `revdep_details(, "MOFA")` for more info
     ```
     Found the following significant warnings:
       Warning: Please use MOFA2 instead of MOFA.  Package 'MOFA' is deprecated and
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/MOFA/new/MOFA.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/MOFA/new/MOFA.Rcheck/00install.out’ for details.
     ```
 
 *   checking package dependencies ... NOTE
@@ -1136,7 +1157,7 @@ Run `revdep_details(, "MOFA")` for more info
 * GitHub: https://github.com/bioFAM/MOFA2
 * Source code: https://github.com/cran/MOFA2
 * Date/Publication: 2020-11-03
-* Number of recursive dependencies: 218
+* Number of recursive dependencies: 219
 
 Run `revdep_details(, "MOFA2")` for more info
 
@@ -1156,7 +1177,7 @@ Run `revdep_details(, "MOFA2")` for more info
     ```
     Found the following notes/warnings:
       Non-staged installation was used
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/MOFA2/new/MOFA2.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/MOFA2/new/MOFA2.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -1314,7 +1335,7 @@ Run `revdep_details(, "ORFik")` for more info
       Warning: package ‘Biostrings’ was built under R version 4.0.3
       Warning: package ‘XVector’ was built under R version 4.0.3
       Warning: package ‘Rsamtools’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/ORFik/new/ORFik.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/ORFik/new/ORFik.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -1430,17 +1451,17 @@ Run `revdep_details(, "Pi")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘supraHex’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/Pi/new/Pi.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/Pi/new/Pi.Rcheck/00install.out’ for details.
     ```
 
 # plotly
 
 <details>
 
-* Version: 4.9.2.1
+* Version: 4.9.2.2
 * GitHub: https://github.com/ropensci/plotly
 * Source code: https://github.com/cran/plotly
-* Date/Publication: 2020-04-04 19:50:02 UTC
+* Date/Publication: 2020-12-19 06:15:37 UTC
 * Number of recursive dependencies: 156
 
 Run `revdep_details(, "plotly")` for more info
@@ -1451,7 +1472,7 @@ Run `revdep_details(, "plotly")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.6Mb
+      installed size is  6.5Mb
       sub-directories of 1Mb or more:
         htmlwidgets   3.7Mb
     ```
@@ -1507,7 +1528,7 @@ Run `revdep_details(, "pubh")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/robCompositions
 * Date/Publication: 2020-11-18 21:10:02 UTC
-* Number of recursive dependencies: 143
+* Number of recursive dependencies: 146
 
 Run `revdep_details(, "robCompositions")` for more info
 
@@ -1591,7 +1612,7 @@ Run `revdep_details(, "scPipe")` for more info
       Warning: package ‘IRanges’ was built under R version 4.0.3
       Warning: package ‘GenomeInfoDb’ was built under R version 4.0.3
       Warning: package ‘Biobase’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/scPipe/new/scPipe.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/scPipe/new/scPipe.Rcheck/00install.out’ for details.
     ```
 
 *   checking for hidden files and directories ... NOTE
@@ -1671,17 +1692,17 @@ Run `revdep_details(, "SeqSQC")` for more info
     ...
     Method: exacting biallelic SNPs
     Number of samples: 5
-    Parsing "/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/SeqSQC/new/SeqSQC.Rcheck/SeqSQC/extdata/example_sub.vcf" ...
+    Parsing "/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/SeqSQC/new/SeqSQC.Rcheck/SeqSQC/extdata/example_sub.vcf" ...
     	import 1000 variants.
     + genotype   { Bit2 5x1000, 1.2K } *
     SNP genotypes: 5 samples, 1000 SNPs
     Genotype matrix is being transposed ...
     Optimize the access efficiency ...
     Clean up the fragments of GDS file:
-        open the file '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//Rtmplmsq6b/file6e5a1e3134fe' (12.4K)
+        open the file '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmprkZ7pQ/file78b615f5a092' (12.4K)
         # of fragments: 48
-        save to '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//Rtmplmsq6b/file6e5a1e3134fe.tmp'
-        rename '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//Rtmplmsq6b/file6e5a1e3134fe.tmp' (10.7K, reduced: 1.6K)
+        save to '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmprkZ7pQ/file78b615f5a092.tmp'
+        rename '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmprkZ7pQ/file78b615f5a092.tmp' (10.7K, reduced: 1.6K)
         # of fragments: 20
     Load study cohort annotation file ...
     Load 1kg data to temp directory...
@@ -1701,7 +1722,7 @@ Run `revdep_details(, "SeqSQC")` for more info
       Warning: package ‘BiocFileCache’ was built under R version 4.0.3
       Warning: package ‘SNPRelate’ was built under R version 4.0.3
       Warning: package ‘gdsfmt’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/SeqSQC/new/SeqSQC.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/SeqSQC/new/SeqSQC.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -1733,6 +1754,39 @@ Run `revdep_details(, "SmartEDA")` for more info
     Packages unavailable to check Rd xrefs: ‘InformationValue’, ‘DataExplorer’
     ```
 
+# specmine
+
+<details>
+
+* Version: 3.0.3
+* GitHub: https://github.com/BioSystemsUM/specmine
+* Source code: https://github.com/cran/specmine
+* Date/Publication: 2020-12-17 23:30:02 UTC
+* Number of recursive dependencies: 281
+
+Run `revdep_details(, "specmine")` for more info
+
+</details>
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘rcytoscapejs’
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘e1071’ ‘specmine.datasets’
+      All declared Imports should be used.
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘hyperSpec’
+    ```
+
 # spinifex
 
 <details>
@@ -1754,19 +1808,19 @@ Run `revdep_details(, "spinifex")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      Warning (test-0_util.R:139:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:139:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:140:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:140:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:140:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:140:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:140:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:140:1): (code run outside of `test_that()`)
-      Warning (test-0_util.R:140:1): (code run outside of `test_that()`)
-      ERROR (test-2_render.R:37:1): (code run outside of `test_that()`)
-      ERROR (test-3_visualize.r:18:1): (code run outside of `test_that()`)
-
-      [ FAIL 2 | WARN 9 | SKIP 0 | PASS 53 ]
+      Error: argument 'fps' must be a factor of 100
+      Backtrace:
+          █
+       1. └─spinifex::play_tour_path(...) test-3_visualize.r:18:0
+       2.   └─spinifex:::render_type(frames = tour_df, ...)
+       3.     ├─base::do.call(anim_func, args = gganimate_args)
+       4.     └─(function (...) ...
+       5.       ├─gganimate::animate(...)
+       6.       └─gganimate:::animate.gganim(...)
+       7.         └─args$renderer(frames_vars$frame_source, args$fps)
+       8.           └─magick::image_animate(anim, fps, loop = if (loop) 0 else 1)
+      
+      [ FAIL 2 | WARN 14 | SKIP 0 | PASS 53 ]
       Error: Test failures
       Execution halted
     ```
@@ -1807,7 +1861,7 @@ Run `revdep_details(, "spup")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/statVisual
 * Date/Publication: 2020-02-20 19:30:02 UTC
-* Number of recursive dependencies: 175
+* Number of recursive dependencies: 176
 
 Run `revdep_details(, "statVisual")` for more info
 
@@ -1820,7 +1874,7 @@ Run `revdep_details(, "statVisual")` for more info
     Found the following significant warnings:
       Warning: package ‘Biobase’ was built under R version 4.0.3
       Warning: package ‘BiocGenerics’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/statVisual/new/statVisual.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/statVisual/new/statVisual.Rcheck/00install.out’ for details.
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -1928,7 +1982,7 @@ Run `revdep_details(, "tidySingleCellExperiment")` for more info
       Warning: package ‘IRanges’ was built under R version 4.0.3
       Warning: package ‘GenomeInfoDb’ was built under R version 4.0.3
       Warning: package ‘Biobase’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/tidySingleCellExperiment/new/tidySingleCellExperiment.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/tidySingleCellExperiment/new/tidySingleCellExperiment.Rcheck/00install.out’ for details.
     ```
 
 *   checking DESCRIPTION meta-information ... NOTE
@@ -1970,7 +2024,7 @@ Run `revdep_details(, "tidySingleCellExperiment")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/TNBC.CMS
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 163
+* Number of recursive dependencies: 164
 
 Run `revdep_details(, "TNBC.CMS")` for more info
 
@@ -1989,7 +2043,7 @@ Run `revdep_details(, "TNBC.CMS")` for more info
       Warning: package ‘IRanges’ was built under R version 4.0.3
       Warning: package ‘GenomeInfoDb’ was built under R version 4.0.3
       Warning: package ‘Biobase’ was built under R version 4.0.3
-    See ‘/Users/barret/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/TNBC.CMS/new/TNBC.CMS.Rcheck/00install.out’ for details.
+    See ‘/Users/barret/odrive/AmazonCloudDrive/git/R/ggobi_org/ggally/ggally/revdep/checks.noindex/TNBC.CMS/new/TNBC.CMS.Rcheck/00install.out’ for details.
     ```
 
 # TVTB
@@ -2034,7 +2088,7 @@ Run `revdep_details(, "ubiquity")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  9.6Mb
+      installed size is  9.5Mb
       sub-directories of 1Mb or more:
         doc     6.5Mb
         ubinc   2.1Mb
@@ -2048,7 +2102,7 @@ Run `revdep_details(, "ubiquity")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/ufs
 * Date/Publication: 2020-11-10 11:40:03 UTC
-* Number of recursive dependencies: 157
+* Number of recursive dependencies: 159
 
 Run `revdep_details(, "ufs")` for more info
 
@@ -2085,8 +2139,9 @@ Run `revdep_details(, "vidger")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 11.1Mb
+      installed size is 10.5Mb
       sub-directories of 1Mb or more:
-        data   4.7Mb
+        data   4.0Mb
         doc    6.1Mb
     ```
+
