@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><span class="pkg">ggplot2</span> plot matrix — ggmatrix • GGally</title>
+<title>ggplot2 plot matrix — ggmatrix • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="<span class="pkg">ggplot2</span> plot matrix — ggmatrix" />
+<meta property="og:title" content="ggplot2 plot matrix — ggmatrix" />
 <meta property="og:description" content="Make a generic matrix of ggplot2 plots." />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -186,29 +182,29 @@
     <p>Make a generic matrix of <span class="pkg">ggplot2</span> plots.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggmatrix</span>(
-  <span class='kw'>plots</span>,
-  <span class='kw'>nrow</span>,
-  <span class='kw'>ncol</span>,
-  xAxisLabels = <span class='kw'>NULL</span>,
-  yAxisLabels = <span class='kw'>NULL</span>,
-  title = <span class='kw'>NULL</span>,
-  xlab = <span class='kw'>NULL</span>,
-  ylab = <span class='kw'>NULL</span>,
-  byrow = <span class='fl'>TRUE</span>,
-  showStrips = <span class='kw'>NULL</span>,
-  showAxisPlotLabels = <span class='fl'>TRUE</span>,
-  showXAxisPlotLabels = <span class='fl'>TRUE</span>,
-  showYAxisPlotLabels = <span class='fl'>TRUE</span>,
-  labeller = <span class='kw'>NULL</span>,
-  switch = <span class='kw'>NULL</span>,
-  xProportions = <span class='kw'>NULL</span>,
-  yProportions = <span class='kw'>NULL</span>,
-  progress = <span class='kw'>NULL</span>,
-  data = <span class='kw'>NULL</span>,
-  gg = <span class='kw'>NULL</span>,
-  legend = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggmatrix</span><span class='op'>(</span>
+  <span class='va'>plots</span>,
+  <span class='va'>nrow</span>,
+  <span class='va'>ncol</span>,
+  xAxisLabels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  yAxisLabels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  byrow <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showStrips <span class='op'>=</span> <span class='cn'>NULL</span>,
+  showAxisPlotLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showXAxisPlotLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showYAxisPlotLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  labeller <span class='op'>=</span> <span class='cn'>NULL</span>,
+  switch <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xProportions <span class='op'>=</span> <span class='cn'>NULL</span>,
+  yProportions <span class='op'>=</span> <span class='cn'>NULL</span>,
+  progress <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gg <span class='op'>=</span> <span class='cn'>NULL</span>,
+  legend <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -255,7 +251,7 @@
     </tr>
     <tr>
       <th>progress</th>
-      <td><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress_bar</a></code>.  See <code>ggmatrix_progress</code>.</p></td>
+      <td><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href='https://rdrr.io/pkg/progress/man/progress_bar.html'>progress_bar</a></code>.  See <code><a href='ggmatrix_progress.html'>ggmatrix_progress</a></code>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -268,7 +264,7 @@
     <tr>
       <th>legend</th>
       <td><p>May be the two objects described below or the default <code>NULL</code> value.  The legend position can be moved by using ggplot2's theme element <code>pm + theme(legend.position = "bottom")</code></p><dl>
-<dt>a single numeric value</dt><dd><p>provides the location of a plot according to the display order. Such as <code>legend = 3</code> in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position <code><a href='https://rdrr.io/r/base/c.html'>c(1,2)</a></code></p></dd><dt>a object from <code>grab_legend()</code></dt><dd><p>a predetermined plot legend that will be displayed directly</p></dd>
+<dt>a single numeric value</dt><dd><p>provides the location of a plot according to the display order. Such as <code>legend = 3</code> in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position <code><a href='https://rdrr.io/r/base/c.html'>c(1,2)</a></code></p></dd><dt>a object from <code><a href='grab_legend.html'>grab_legend</a>()</code></dt><dd><p>a predetermined plot legend that will be displayed directly</p></dd>
 </dl></td>
     </tr>
     </table>
@@ -277,36 +273,38 @@
 
     
 
-<p>Now that the <code>print.ggmatrix</code> method uses a large <span class="pkg">gtable</span> object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around <code>object.size(data) * 0.3 * length(plots)</code>.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the <span class="pkg">ggplot2</span> format greatly outweigh the price of about 20<!-- % increase in memory usage from the prior ad-hoc print method. --></p>
+<p>Now that the <code><a href='print.ggmatrix.html'>print.ggmatrix</a></code> method uses a large <span class="pkg">gtable</span> object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around <code>object.size(data) * 0.3 * length(plots)</code>.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the <span class="pkg">ggplot2</span> format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='kw'>plotList</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
-<span class='co'>for</span> (<span class='kw'>i</span> <span class='co'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>) {
-  <span class='kw'>plotList</span>[[<span class='kw'>i</span>]] <span class='op'>&lt;-</span> <span class='fu'>ggally_text</span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Plot #"</span>, <span class='kw'>i</span>, sep = <span class='st'>""</span>))
-}
-<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggmatrix</span>(
-  <span class='kw'>plotList</span>,
+<span class='va'>plotList</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>plotList</span><span class='op'>[[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggally_text.html'>ggally_text</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"Plot #"</span>, <span class='va'>i</span>, sep <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='va'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggmatrix</span><span class='op'>(</span>
+  <span class='va'>plotList</span>,
   <span class='fl'>2</span>, <span class='fl'>3</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"D"</span>, <span class='st'>"E"</span>),
-  byrow = <span class='fl'>TRUE</span>
-)
-<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggmatrix-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggmatrix</span>(
-  <span class='kw'>plotList</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"D"</span>, <span class='st'>"E"</span><span class='op'>)</span>,
+  byrow <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+<span class='fu'>p_</span><span class='op'>(</span><span class='va'>pm</span><span class='op'>)</span>
+</div><div class='img'><img src='ggmatrix-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggmatrix</span><span class='op'>(</span>
+  <span class='va'>plotList</span>,
   <span class='fl'>2</span>, <span class='fl'>3</span>,
-  xAxisLabels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>),
-  yAxisLabels = <span class='kw'>NULL</span>,
-  byrow = <span class='fl'>FALSE</span>,
-  showXAxisPlotLabels = <span class='fl'>FALSE</span>
-)
-<span class='fu'>p_</span>(<span class='kw'>pm</span>)</div><div class='img'><img src='ggmatrix-2.png' alt='' width='700' height='433' /></div></pre>
+  xAxisLabels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span><span class='op'>)</span>,
+  yAxisLabels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  byrow <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  showXAxisPlotLabels <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
+<span class='fu'>p_</span><span class='op'>(</span><span class='va'>pm</span><span class='op'>)</span>
+</div><div class='img'><img src='ggmatrix-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -322,7 +320,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -48,9 +48,11 @@
 <meta property="og:title" content="Network plot — ggnet" />
 <meta property="og:description" content="Function for plotting network objects using ggplot2, now replaced by the
 ggnet2 function, which provides additional control over
-plotting parameters. Please visit http://github.com/briatte/ggnet for
-the latest version of ggnet2, and https://briatte.github.io/ggnet for a
+plotting parameters. Please visit https://github.com/briatte/ggnet for
+the latest version of ggnet2, and https://briatte.github.io/ggnet/ for a
 vignette that contains many examples and explanations." />
+
+
 
 
 
@@ -82,19 +84,13 @@ vignette that contains many examples and explanations." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -158,7 +154,7 @@ vignette that contains many examples and explanations." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -188,50 +184,50 @@ vignette that contains many examples and explanations." />
 
     <div class="ref-description">
     <p>Function for plotting network objects using <span class="pkg">ggplot2</span>, now replaced by the
-<code>ggnet2</code> function, which provides additional control over
-plotting parameters. Please visit <a href='http://github.com/briatte/ggnet'>http://github.com/briatte/ggnet</a> for
-the latest version of ggnet2, and <a href='https://briatte.github.io/ggnet'>https://briatte.github.io/ggnet</a> for a
+<code><a href='ggnet2.html'>ggnet2</a></code> function, which provides additional control over
+plotting parameters. Please visit <a href='https://github.com/briatte/ggnet'>https://github.com/briatte/ggnet</a> for
+the latest version of ggnet2, and <a href='https://briatte.github.io/ggnet/'>https://briatte.github.io/ggnet/</a> for a
 vignette that contains many examples and explanations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggnet</span>(
-  <span class='kw'>net</span>,
-  mode = <span class='st'>"fruchtermanreingold"</span>,
-  layout.par = <span class='kw'>NULL</span>,
-  layout.exp = <span class='fl'>0</span>,
-  size = <span class='fl'>9</span>,
-  alpha = <span class='fl'>1</span>,
-  weight = <span class='st'>"none"</span>,
-  weight.legend = <span class='fl'>NA</span>,
-  weight.method = <span class='kw'>weight</span>,
-  weight.min = <span class='fl'>NA</span>,
-  weight.max = <span class='fl'>NA</span>,
-  weight.cut = <span class='fl'>FALSE</span>,
-  group = <span class='kw'>NULL</span>,
-  group.legend = <span class='fl'>NA</span>,
-  node.group = <span class='kw'>group</span>,
-  node.color = <span class='kw'>NULL</span>,
-  node.alpha = <span class='kw'>alpha</span>,
-  segment.alpha = <span class='kw'>alpha</span>,
-  segment.color = <span class='st'>"grey50"</span>,
-  segment.label = <span class='kw'>NULL</span>,
-  segment.size = <span class='fl'>0.25</span>,
-  arrow.size = <span class='fl'>0</span>,
-  arrow.gap = <span class='fl'>0</span>,
-  arrow.type = <span class='st'>"closed"</span>,
-  label = <span class='fl'>FALSE</span>,
-  label.nodes = <span class='kw'>label</span>,
-  label.size = <span class='kw'>size</span><span class='op'>/</span><span class='fl'>2</span>,
-  label.trim = <span class='fl'>FALSE</span>,
-  legend.size = <span class='fl'>9</span>,
-  legend.position = <span class='st'>"right"</span>,
-  names = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='st'>""</span>),
-  quantize.weights = <span class='fl'>FALSE</span>,
-  subset.threshold = <span class='fl'>0</span>,
-  top8.nodes = <span class='fl'>FALSE</span>,
-  trim.labels = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggnet</span><span class='op'>(</span>
+  <span class='va'>net</span>,
+  mode <span class='op'>=</span> <span class='st'>"fruchtermanreingold"</span>,
+  layout.par <span class='op'>=</span> <span class='cn'>NULL</span>,
+  layout.exp <span class='op'>=</span> <span class='fl'>0</span>,
+  size <span class='op'>=</span> <span class='fl'>9</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span>,
+  weight <span class='op'>=</span> <span class='st'>"none"</span>,
+  weight.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  weight.method <span class='op'>=</span> <span class='va'>weight</span>,
+  weight.min <span class='op'>=</span> <span class='cn'>NA</span>,
+  weight.max <span class='op'>=</span> <span class='cn'>NA</span>,
+  weight.cut <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  group <span class='op'>=</span> <span class='cn'>NULL</span>,
+  group.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  node.group <span class='op'>=</span> <span class='va'>group</span>,
+  node.color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  node.alpha <span class='op'>=</span> <span class='va'>alpha</span>,
+  segment.alpha <span class='op'>=</span> <span class='va'>alpha</span>,
+  segment.color <span class='op'>=</span> <span class='st'>"grey50"</span>,
+  segment.label <span class='op'>=</span> <span class='cn'>NULL</span>,
+  segment.size <span class='op'>=</span> <span class='fl'>0.25</span>,
+  arrow.size <span class='op'>=</span> <span class='fl'>0</span>,
+  arrow.gap <span class='op'>=</span> <span class='fl'>0</span>,
+  arrow.type <span class='op'>=</span> <span class='st'>"closed"</span>,
+  label <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  label.nodes <span class='op'>=</span> <span class='va'>label</span>,
+  label.size <span class='op'>=</span> <span class='va'>size</span><span class='op'>/</span><span class='fl'>2</span>,
+  label.trim <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  legend.size <span class='op'>=</span> <span class='fl'>9</span>,
+  legend.position <span class='op'>=</span> <span class='st'>"right"</span>,
+  names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>""</span>, <span class='st'>""</span><span class='op'>)</span>,
+  quantize.weights <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  subset.threshold <span class='op'>=</span> <span class='fl'>0</span>,
+  top8.nodes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  trim.labels <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -242,8 +238,8 @@ vignette that contains many examples and explanations.</p>
 that can be coerced to this class, such as an adjacency or incidence matrix,
 or an edge list: see <a href='https://rdrr.io/pkg/network/man/edgeset.constructors.html'>edgeset.constructors</a> and
 <a href='https://rdrr.io/pkg/network/man/network.html'>network</a> for details. If the object is of class
-<code><a href='https://rdrr.io/pkg/igraph/man/aaa-igraph-package.html'>igraph</a></code> and the
-<code><a href='https://rdrr.io/pkg/intergraph/man/intergraph-package.html'>intergraph</a></code> package is installed,
+igraph and the
+<a href='https://rdrr.io/pkg/intergraph/man/intergraph-package.html'>intergraph</a> package is installed,
 it will be used to convert the object: see
 <code><a href='https://rdrr.io/pkg/intergraph/man/asNetwork.html'>asNetwork</a></code> for details.</p></td>
     </tr>
@@ -465,7 +461,7 @@ but will be unweighted. To compute weighted network measures, see the
 <code>tnet</code> package by Tore Opsahl (<code>help("tnet", package = "tnet")</code>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>ggnet2</code> in this package,
+    <div class='dont-index'><p><code><a href='ggnet2.html'>ggnet2</a></code> in this package,
 <code><a href='https://rdrr.io/pkg/sna/man/gplot.html'>gplot</a></code> in the <code><a href='https://rdrr.io/pkg/sna/man/sna.html'>sna</a></code> package, and
 <code><a href='https://rdrr.io/pkg/network/man/plot.network.html'>plot.network</a></code> in the <code><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></code>
 package</p></div>
@@ -476,10 +472,11 @@ Pedro Jordano and Ming-Yu Liu</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://statnet.org'>network</a></span>)</div><div class='output co'>#&gt; <span class='message'>network: Classes for Relational Data</span>
-#&gt; <span class='message'>Version 1.16.0 created on 2019-11-30.</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://statnet.org/'>network</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>network: Classes for Relational Data</span>
+#&gt; <span class='message'>Version 1.16.1 created on 2020-10-06.</span>
 #&gt; <span class='message'>copyright (c) 2005, Carter T. Butts, University of California-Irvine</span>
 #&gt; <span class='message'>                    Mark S. Handcock, University of California -- Los Angeles</span>
 #&gt; <span class='message'>                    David R. Hunter, Penn State University</span>
@@ -491,13 +488,14 @@ Pedro Jordano and Ming-Yu Liu</p>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    is.discrete</span></div><div class='input'>
 <span class='co'># random adjacency matrix</span>
-<span class='kw'>x</span>           <span class='op'>&lt;-</span> <span class='fl'>10</span>
-<span class='kw'>ndyads</span>      <span class='op'>&lt;-</span> <span class='kw'>x</span> <span class='op'>*</span> (<span class='kw'>x</span> <span class='op'>-</span> <span class='fl'>1</span>)
-<span class='kw'>density</span>     <span class='op'>&lt;-</span> <span class='kw'>x</span> <span class='op'>/</span> <span class='kw'>ndyads</span>
-<span class='kw'>m</span>           <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>0</span>, nrow = <span class='kw'>x</span>, ncol = <span class='kw'>x</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='kw'>m</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>letters</span>[ <span class='fl'>1</span><span class='op'>:</span><span class='kw'>x</span> ], <span class='kw'>letters</span>[ <span class='fl'>1</span><span class='op'>:</span><span class='kw'>x</span> ])
-<span class='kw'>m</span>[ <span class='fu'><a href='https://rdrr.io/r/base/row.html'>row</a></span>(<span class='kw'>m</span>) != <span class='fu'><a href='https://rdrr.io/r/base/col.html'>col</a></span>(<span class='kw'>m</span>) ] <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='kw'>ndyads</span>) <span class='op'>&lt;</span> <span class='kw'>density</span>
-<span class='kw'>m</span></div><div class='output co'>#&gt;   a b c d e f g h i j
+<span class='va'>x</span>           <span class='op'>&lt;-</span> <span class='fl'>10</span>
+<span class='va'>ndyads</span>      <span class='op'>&lt;-</span> <span class='va'>x</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>density</span>     <span class='op'>&lt;-</span> <span class='va'>x</span> <span class='op'>/</span> <span class='va'>ndyads</span>
+<span class='va'>m</span>           <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fl'>0</span>, nrow <span class='op'>=</span> <span class='va'>x</span>, ncol <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>x</span> <span class='op'>]</span>, <span class='va'>letters</span><span class='op'>[</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>x</span> <span class='op'>]</span><span class='op'>)</span>
+<span class='va'>m</span><span class='op'>[</span> <span class='fu'><a href='https://rdrr.io/r/base/row.html'>row</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span> <span class='op'>!=</span> <span class='fu'><a href='https://rdrr.io/r/base/col.html'>col</a></span><span class='op'>(</span><span class='va'>m</span><span class='op'>)</span> <span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>ndyads</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='va'>density</span>
+<span class='va'>m</span>
+</div><div class='output co'>#&gt;   a b c d e f g h i j
 #&gt; a 0 0 0 0 0 0 1 0 0 0
 #&gt; b 0 0 0 0 0 0 0 0 1 1
 #&gt; c 0 0 0 0 0 0 0 0 0 0
@@ -509,8 +507,9 @@ Pedro Jordano and Ming-Yu Liu</p>
 #&gt; i 0 0 0 0 1 0 0 0 0 0
 #&gt; j 1 1 0 0 1 0 0 0 0 0</div><div class='input'>
 <span class='co'># random undirected network</span>
-<span class='kw'>n</span> <span class='op'>&lt;-</span> <span class='kw'>network</span>::<span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='kw'>m</span>, directed = <span class='fl'>FALSE</span>)
-<span class='kw'>n</span></div><div class='output co'>#&gt;  Network attributes:
+<span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fu'>network</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span><span class='op'>(</span><span class='va'>m</span>, directed <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>n</span>
+</div><div class='output co'>#&gt;  Network attributes:
 #&gt;   vertices = 10 
 #&gt;   directed = FALSE 
 #&gt;   hyper = FALSE 
@@ -525,16 +524,20 @@ Pedro Jordano and Ming-Yu Liu</p>
 #&gt;     vertex.names 
 #&gt; 
 #&gt; No edge attributes</div><div class='input'>
-<span class='fu'>ggnet</span>(<span class='kw'>n</span>, label = <span class='fl'>TRUE</span>, alpha = <span class='fl'>1</span>, color = <span class='st'>"white"</span>, segment.color = <span class='st'>"black"</span>)</div><div class='img'><img src='ggnet-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>ggnet</span><span class='op'>(</span><span class='va'>n</span>, label <span class='op'>=</span> <span class='cn'>TRUE</span>, alpha <span class='op'>=</span> <span class='fl'>1</span>, color <span class='op'>=</span> <span class='st'>"white"</span>, segment.color <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span>
+</div><div class='img'><img src='ggnet-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># random groups</span>
-<span class='kw'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>letters</span>[ <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> ], <span class='fl'>10</span>, replace = <span class='fl'>TRUE</span>)
-<span class='kw'>g</span></div><div class='output co'>#&gt;  [1] "b" "b" "c" "a" "a" "b" "c" "a" "a" "b"</div><div class='input'>
+<span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>]</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>g</span>
+</div><div class='output co'>#&gt;  [1] "b" "b" "c" "a" "a" "b" "c" "a" "a" "b"</div><div class='input'>
 <span class='co'># color palette</span>
-<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span> = <span class='st'>"steelblue"</span>, <span class='st'>"b"</span> = <span class='st'>"forestgreen"</span>, <span class='st'>"c"</span> = <span class='st'>"tomato"</span>)
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span> <span class='op'>=</span> <span class='st'>"steelblue"</span>, <span class='st'>"b"</span> <span class='op'>=</span> <span class='st'>"forestgreen"</span>, <span class='st'>"c"</span> <span class='op'>=</span> <span class='st'>"tomato"</span><span class='op'>)</span>
 
-<span class='fu'>p_</span>(<span class='fu'>ggnet</span>(<span class='kw'>n</span>, node.group = <span class='kw'>g</span>, node.color = <span class='kw'>p</span>, label = <span class='fl'>TRUE</span>, color = <span class='st'>"white"</span>))</div><div class='img'><img src='ggnet-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggnet</span><span class='op'>(</span><span class='va'>n</span>, node.group <span class='op'>=</span> <span class='va'>g</span>, node.color <span class='op'>=</span> <span class='va'>p</span>, label <span class='op'>=</span> <span class='cn'>TRUE</span>, color <span class='op'>=</span> <span class='st'>"white"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggnet-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># edge arrows on a directed network</span>
-<span class='fu'>p_</span>(<span class='fu'>ggnet</span>(<span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span>(<span class='kw'>m</span>, directed = <span class='fl'>TRUE</span>), arrow.gap = <span class='fl'>0.05</span>, arrow.size = <span class='fl'>10</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_segment).</span></div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggnet</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span><span class='op'>(</span><span class='va'>m</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, arrow.gap <span class='op'>=</span> <span class='fl'>0.05</span>, arrow.size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_segment).</span></div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -550,7 +553,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -51,6 +51,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -186,23 +182,23 @@
     <p>Generalized text display</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_statistic</span>(
-  <span class='kw'>data</span>,
-  <span class='kw'>mapping</span>,
-  <span class='kw'>text_fn</span>,
-  <span class='kw'>title</span>,
-  na.rm = <span class='fl'>NA</span>,
-  display_grid = <span class='fl'>FALSE</span>,
-  justify_labels = <span class='st'>"right"</span>,
-  justify_text = <span class='st'>"left"</span>,
-  sep = <span class='st'>": "</span>,
-  family = <span class='st'>"mono"</span>,
-  title_args = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  group_args = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  align_percent = <span class='fl'>0.5</span>,
-  title_hjust = <span class='fl'>0.5</span>,
-  group_hjust = <span class='fl'>0.5</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggally_statistic</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>mapping</span>,
+  <span class='va'>text_fn</span>,
+  <span class='va'>title</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>NA</span>,
+  display_grid <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  justify_labels <span class='op'>=</span> <span class='st'>"right"</span>,
+  justify_text <span class='op'>=</span> <span class='st'>"left"</span>,
+  sep <span class='op'>=</span> <span class='st'>": "</span>,
+  family <span class='op'>=</span> <span class='st'>"mono"</span>,
+  title_args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  group_args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  align_percent <span class='op'>=</span> <span class='fl'>0.5</span>,
+  title_hjust <span class='op'>=</span> <span class='fl'>0.5</span>,
+  group_hjust <span class='op'>=</span> <span class='fl'>0.5</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -267,7 +263,7 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>ggally_cor</code></p></div>
+    <div class='dont-index'><p><code><a href='ggally_cor.html'>ggally_cor</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -284,7 +280,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

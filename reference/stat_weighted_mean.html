@@ -53,6 +53,8 @@ aesthetic if provided." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -80,19 +82,13 @@ aesthetic if provided." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -156,7 +152,7 @@ aesthetic if provided." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -190,17 +186,17 @@ each unique value of <strong>x</strong>, taking into account <strong>weight</str
 aesthetic if provided.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stat_weighted_mean</span>(
-  mapping = <span class='kw'>NULL</span>,
-  data = <span class='kw'>NULL</span>,
-  geom = <span class='st'>"point"</span>,
-  position = <span class='st'>"identity"</span>,
-  <span class='kw'>...</span>,
-  na.rm = <span class='fl'>FALSE</span>,
-  orientation = <span class='fl'>NA</span>,
-  show.legend = <span class='fl'>NA</span>,
-  inherit.aes = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>stat_weighted_mean</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"point"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  orientation <span class='op'>=</span> <span class='cn'>NA</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -277,71 +273,79 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
     
 
 <dl>
-  <dt>y</dt><dd><p>weighted y (numerator / denominator)</p></dd>
-  <dt>numerator</dt><dd><p>numerator</p></dd>
-  <dt>denominator</dt><dd><p>denominator</p></dd>
+<dt>y</dt><dd><p>weighted y (numerator / denominator)</p></dd>
+<dt>numerator</dt><dd><p>numerator</p></dd>
+<dt>denominator</dt><dd><p>denominator</p></dd>
 
 </dl>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>tips</span>, package = <span class='st'>"reshape"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>tips</span>, package <span class='op'>=</span> <span class='st'>"reshape"</span><span class='op'>)</span>
 
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tips</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>day</span>, y = <span class='kw'>total_bill</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>())</div><div class='img'><img src='stat_weighted_mean-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tips</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>day</span>, y = <span class='kw'>total_bill</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>())</div><div class='img'><img src='stat_weighted_mean-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tips</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>day</span>, y = <span class='kw'>total_bill</span>, group = <span class='fl'>1</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>(geom = <span class='st'>"line"</span>))</div><div class='img'><img src='stat_weighted_mean-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tips</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>day</span>, y = <span class='kw'>total_bill</span>, colour = <span class='kw'>sex</span>, group = <span class='kw'>sex</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>(geom = <span class='st'>"line"</span>))</div><div class='img'><img src='stat_weighted_mean-4.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tips</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>day</span>, y = <span class='kw'>total_bill</span>, fill = <span class='kw'>sex</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>(geom = <span class='st'>"bar"</span>, position = <span class='st'>"dodge"</span>))</div><div class='img'><img src='stat_weighted_mean-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tips</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>day</span>, y <span class='op'>=</span> <span class='va'>total_bill</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_weighted_mean-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tips</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>day</span>, y <span class='op'>=</span> <span class='va'>total_bill</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_weighted_mean-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tips</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>day</span>, y <span class='op'>=</span> <span class='va'>total_bill</span>, group <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"line"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_weighted_mean-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tips</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>day</span>, y <span class='op'>=</span> <span class='va'>total_bill</span>, colour <span class='op'>=</span> <span class='va'>sex</span>, group <span class='op'>=</span> <span class='va'>sex</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"line"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_weighted_mean-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tips</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>day</span>, y <span class='op'>=</span> <span class='va'>total_bill</span>, fill <span class='op'>=</span> <span class='va'>sex</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"bar"</span>, position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_weighted_mean-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># computing a proportion on the fly</span>
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>tips</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>day</span>, y = <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='kw'>smoker</span> <span class='op'>==</span> <span class='st'>"Yes"</span>), fill = <span class='kw'>sex</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>(geom = <span class='st'>"bar"</span>, position = <span class='st'>"dodge"</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(labels = <span class='kw'>scales</span>::<span class='kw'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>))</div><div class='img'><img src='stat_weighted_mean-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tips</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>day</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>smoker</span> <span class='op'>==</span> <span class='st'>"Yes"</span><span class='op'>)</span>, fill <span class='op'>=</span> <span class='va'>sex</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"bar"</span>, position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_weighted_mean-6.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># taking into account some weights</span>
-<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>Titanic</span>)
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Class</span>, y = <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='kw'>Survived</span> <span class='op'>==</span> <span class='st'>"Yes"</span>), weight = <span class='kw'>Freq</span>, fill = <span class='kw'>Sex</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(stat = <span class='st'>"weighted_mean"</span>, position = <span class='st'>"dodge"</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(labels = <span class='kw'>scales</span>::<span class='kw'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(y = <span class='st'>"Survived"</span>))</div><div class='img'><img src='stat_weighted_mean-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>Titanic</span><span class='op'>)</span>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Class</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>Survived</span> <span class='op'>==</span> <span class='st'>"Yes"</span><span class='op'>)</span>, weight <span class='op'>=</span> <span class='va'>Freq</span>, fill <span class='op'>=</span> <span class='va'>Sex</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"weighted_mean"</span>, position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='st'>"Survived"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_weighted_mean-7.png' alt='' width='700' height='433' /></div><div class='input'>
 
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>cuse</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></span>(<span class='st'>"https://data.princeton.edu/wws509/datasets/cuse.dat"</span>, header = <span class='fl'>TRUE</span>)
-<span class='kw'>cuse</span><span class='op'>$</span><span class='kw'>n</span> <span class='op'>&lt;-</span> <span class='kw'>cuse</span><span class='op'>$</span><span class='kw'>notUsing</span> <span class='op'>+</span> <span class='kw'>cuse</span><span class='op'>$</span><span class='kw'>using</span>
-<span class='kw'>cuse</span><span class='op'>$</span><span class='kw'>prop</span> <span class='op'>&lt;-</span> <span class='kw'>cuse</span><span class='op'>$</span><span class='kw'>using</span> <span class='op'>/</span> <span class='kw'>cuse</span><span class='op'>$</span><span class='kw'>n</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>cuse</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></span><span class='op'>(</span><span class='st'>"https://data.princeton.edu/wws509/datasets/cuse.dat"</span>, header <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>cuse</span><span class='op'>$</span><span class='va'>n</span> <span class='op'>&lt;-</span> <span class='va'>cuse</span><span class='op'>$</span><span class='va'>notUsing</span> <span class='op'>+</span> <span class='va'>cuse</span><span class='op'>$</span><span class='va'>using</span>
+<span class='va'>cuse</span><span class='op'>$</span><span class='va'>prop</span> <span class='op'>&lt;-</span> <span class='va'>cuse</span><span class='op'>$</span><span class='va'>using</span> <span class='op'>/</span> <span class='va'>cuse</span><span class='op'>$</span><span class='va'>n</span>
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>cuse</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>education</span>, y = <span class='kw'>prop</span>, weight = <span class='kw'>n</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>()
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>cuse</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>education</span>, y <span class='op'>=</span> <span class='va'>prop</span>, weight <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>cuse</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>age</span>, y = <span class='kw'>prop</span>, weight = <span class='kw'>n</span>, color = <span class='kw'>education</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>()
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>cuse</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>age</span>, y <span class='op'>=</span> <span class='va'>prop</span>, weight <span class='op'>=</span> <span class='va'>n</span>, color <span class='op'>=</span> <span class='va'>education</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>cuse</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>education</span>, y = <span class='kw'>prop</span>, weight = <span class='kw'>n</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>(geom = <span class='st'>"bar"</span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>cuse</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>education</span>, y <span class='op'>=</span> <span class='va'>prop</span>, weight <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"bar"</span><span class='op'>)</span>
 
 <span class='co'># add percentages above each bar</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>cuse</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>age</span>, y = <span class='kw'>prop</span>, weight = <span class='kw'>n</span>, fill = <span class='kw'>education</span>) <span class='op'>+</span>
-  <span class='fu'>stat_weighted_mean</span>(geom = <span class='st'>"bar"</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(label = <span class='kw'>scales</span>::<span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_eval.html'>after_stat</a></span>(<span class='kw'>y</span>))), stat = <span class='st'>"weighted_mean"</span>, vjust = <span class='fl'>0</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span>(<span class='op'>~</span> <span class='kw'>education</span>)
-}</div></pre>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>cuse</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>age</span>, y <span class='op'>=</span> <span class='va'>prop</span>, weight <span class='op'>=</span> <span class='va'>n</span>, fill <span class='op'>=</span> <span class='va'>education</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_weighted_mean</span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"bar"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>label <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_eval.html'>after_stat</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>, stat <span class='op'>=</span> <span class='st'>"weighted_mean"</span>, vjust <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>education</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -357,7 +361,7 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

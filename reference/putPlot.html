@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Insert a plot into a <code>ggmatrix</code> object — putPlot • GGally</title>
+<title>Insert a plot into a ggmatrix object — putPlot • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="Insert a plot into a <code>ggmatrix</code> object — putPlot" />
+<meta property="og:title" content="Insert a plot into a ggmatrix object — putPlot" />
 <meta property="og:description" content="Function to place your own plot in the layout." />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,7 +173,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Insert a plot into a <code>ggmatrix</code> object</h1>
+    <h1>Insert a plot into a <code><a href='ggmatrix.html'>ggmatrix</a></code> object</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggpairs_getput.R'><code>R/ggpairs_getput.R</code></a></small>
     <div class="hidden name"><code>putPlot.Rd</code></div>
     </div>
@@ -218,33 +214,34 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>getPlot</code></p></div>
+    <div class='dont-index'><p><code><a href='getPlot.html'>getPlot</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='kw'>custom_car</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>mtcars</span>[, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mpg"</span>, <span class='st'>"wt"</span>, <span class='st'>"cyl"</span>)], upper = <span class='st'>"blank"</span>, title = <span class='st'>"Custom Example"</span>)
+<span class='va'>custom_car</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mpg"</span>, <span class='st'>"wt"</span>, <span class='st'>"cyl"</span><span class='op'>)</span><span class='op'>]</span>, upper <span class='op'>=</span> <span class='st'>"blank"</span>, title <span class='op'>=</span> <span class='st'>"Custom Example"</span><span class='op'>)</span>
 <span class='co'># ggplot example taken from example(geom_text)</span>
-  <span class='kw'>plot</span> <span class='op'>&lt;-</span> <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>mtcars</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x=<span class='kw'>wt</span>, y=<span class='kw'>mpg</span>, label=<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>mtcars</span>)))
-  <span class='kw'>plot</span> <span class='op'>&lt;-</span> <span class='kw'>plot</span> <span class='op'>+</span>
-    <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(<span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(colour=<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>cyl</span>)), size = <span class='fl'>3</span>) <span class='op'>+</span>
-    <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html'>scale_colour_discrete</a></span>(l=<span class='fl'>40</span>)
-<span class='kw'>custom_car</span>[<span class='fl'>1</span>, <span class='fl'>2</span>] <span class='op'>&lt;-</span> <span class='kw'>plot</span>
-<span class='kw'>personal_plot</span> <span class='op'>&lt;-</span> <span class='fu'>ggally_text</span>(
+  <span class='va'>plot</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>wt</span>, y<span class='op'>=</span><span class='va'>mpg</span>, label<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>plot</span> <span class='op'>&lt;-</span> <span class='va'>plot</span> <span class='op'>+</span>
+    <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span><span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>colour<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>cyl</span><span class='op'>)</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html'>scale_colour_discrete</a></span><span class='op'>(</span>l<span class='op'>=</span><span class='fl'>40</span><span class='op'>)</span>
+<span class='va'>custom_car</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>plot</span>
+<span class='va'>personal_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggally_text.html'>ggally_text</a></span><span class='op'>(</span>
   <span class='st'>"ggpairs allows you\nto put in your\nown plot.\nLike that one.\n &lt;---"</span>
-)
-<span class='kw'>custom_car</span>[<span class='fl'>1</span>, <span class='fl'>3</span>] <span class='op'>&lt;-</span> <span class='kw'>personal_plot</span>
+<span class='op'>)</span>
+<span class='va'>custom_car</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>personal_plot</span>
 <span class='co'># custom_car</span>
 
 <span class='co'># remove plots after creating a plot matrix</span>
-<span class='kw'>custom_car</span>[<span class='fl'>2</span>,<span class='fl'>1</span>] <span class='op'>&lt;-</span> <span class='kw'>NULL</span>
-<span class='kw'>custom_car</span>[<span class='fl'>3</span>,<span class='fl'>1</span>] <span class='op'>&lt;-</span> <span class='st'>"blank"</span> <span class='co'># the same as storing null</span>
-<span class='kw'>custom_car</span>[<span class='fl'>3</span>,<span class='fl'>2</span>] <span class='op'>&lt;-</span> <span class='kw'>NULL</span>
-<span class='fu'>p_</span>(<span class='kw'>custom_car</span>)</div><div class='img'><img src='putPlot-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>custom_car</span><span class='op'>[</span><span class='fl'>2</span>,<span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+<span class='va'>custom_car</span><span class='op'>[</span><span class='fl'>3</span>,<span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"blank"</span> <span class='co'># the same as storing null</span>
+<span class='va'>custom_car</span><span class='op'>[</span><span class='fl'>3</span>,<span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+<span class='fu'>p_</span><span class='op'>(</span><span class='va'>custom_car</span><span class='op'>)</span>
+</div><div class='img'><img src='putPlot-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,7 +257,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

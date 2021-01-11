@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>ggnostic</code> background line with geom — ggally_nostic_line • GGally</title>
+<title>ggnostic background line with geom — ggally_nostic_line • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="<code>ggnostic</code> background line with geom — ggally_nostic_line" />
+<meta property="og:title" content="ggnostic background line with geom — ggally_nostic_line" />
 <meta property="og:description" content="If a non-null linePosition value is given, a line will be drawn before the given continuous_geom or combo_geom is added to the plot." />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,7 +173,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>ggnostic</code> background line with geom</h1>
+    <h1><code><a href='ggnostic.html'>ggnostic</a></code> background line with geom</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggnostic.R'><code>R/ggnostic.R</code></a></small>
     <div class="hidden name"><code>ggally_nostic_line.Rd</code></div>
     </div>
@@ -186,26 +182,26 @@
     <p>If a non-null <code>linePosition</code> value is given, a line will be drawn before the given <code>continuous_geom</code> or <code>combo_geom</code> is added to the plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_nostic_line</span>(
-  <span class='kw'>data</span>,
-  <span class='kw'>mapping</span>,
-  <span class='kw'>...</span>,
-  linePosition = <span class='kw'>NULL</span>,
-  lineColor = <span class='st'>"red"</span>,
-  lineSize = <span class='fl'>0.5</span>,
-  lineAlpha = <span class='fl'>1</span>,
-  lineType = <span class='fl'>1</span>,
-  continuous_geom = <span class='kw'>ggplot2</span>::<span class='kw'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>,
-  combo_geom = <span class='kw'>ggplot2</span>::<span class='kw'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>,
-  mapColorToFill = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggally_nostic_line</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>mapping</span>,
+  <span class='va'>...</span>,
+  linePosition <span class='op'>=</span> <span class='cn'>NULL</span>,
+  lineColor <span class='op'>=</span> <span class='st'>"red"</span>,
+  lineSize <span class='op'>=</span> <span class='fl'>0.5</span>,
+  lineAlpha <span class='op'>=</span> <span class='fl'>1</span>,
+  lineType <span class='op'>=</span> <span class='fl'>1</span>,
+  continuous_geom <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='va'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>,
+  combo_geom <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='va'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>,
+  mapColorToFill <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data, mapping</th>
-      <td><p>supplied directly to <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a>(data, mapping)</code></p></td>
+      <td><p>supplied directly to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -213,15 +209,18 @@
     </tr>
     <tr>
       <th>linePosition, lineColor, lineSize, lineAlpha, lineType</th>
-      <td><p>parameters supplied to <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></code></p></td>
+      <td><p>parameters supplied to
+<code><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>ggplot2::geom_line()</a></code></p></td>
     </tr>
     <tr>
       <th>continuous_geom</th>
-      <td><p><span class="pkg">ggplot2</span> geom that is executed after the line is (possibly) added and if the x data is continuous</p></td>
+      <td><p><span class="pkg">ggplot2</span> geom that is executed after the line is (possibly)
+added and if the x data is continuous</p></td>
     </tr>
     <tr>
       <th>combo_geom</th>
-      <td><p><span class="pkg">ggplot2</span> geom that is executed after the line is (possibly) added and if the x data is discrete</p></td>
+      <td><p><span class="pkg">ggplot2</span> geom that is executed after the line is (possibly) added and
+if the x data is discrete</p></td>
     </tr>
     <tr>
       <th>mapColorToFill</th>
@@ -251,7 +250,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

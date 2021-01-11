@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print <code>ggmatrix</code> object — print.ggmatrix • GGally</title>
+<title>Print ggmatrix object — print.ggmatrix • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="Print <code>ggmatrix</code> object — print.ggmatrix" />
+<meta property="og:title" content="Print ggmatrix object — print.ggmatrix" />
 <meta property="og:description" content="Print method taken from ggplot2:::print.ggplot and altered for a ggmatrix object" />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,17 +173,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print <code>ggmatrix</code> object</h1>
+    <h1>Print <code><a href='ggmatrix.html'>ggmatrix</a></code> object</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggmatrix_print.R'><code>R/ggmatrix_print.R</code></a></small>
     <div class="hidden name"><code>print.ggmatrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Print method taken from <code>ggplot2:::print.ggplot</code> and altered for a <code>ggmatrix</code> object</p>
+    <p>Print method taken from <code>ggplot2:::print.ggplot</code> and altered for a <code><a href='ggmatrix.html'>ggmatrix</a></code> object</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ggmatrix</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>, newpage = <span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='kw'>vp</span>), vp = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, newpage <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>vp</span><span class='op'>)</span>, vp <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,7 +202,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>arguments passed onto <code>ggmatrix_gtable</code></p></td>
+      <td><p>arguments passed onto <code><a href='ggmatrix_gtable.html'>ggmatrix_gtable</a></code></p></td>
     </tr>
     </table>
 
@@ -215,9 +211,10 @@
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>tips</span>, package = <span class='st'>"reshape"</span>)
- <span class='kw'>pMat</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>tips</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>2</span>), mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(color = <span class='st'>"sex"</span>))
- <span class='kw'>pMat</span> <span class='co'># calls print(pMat), which calls print.ggmatrix(pMat)</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='print.ggmatrix-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>tips</span>, package <span class='op'>=</span> <span class='st'>"reshape"</span><span class='op'>)</span>
+ <span class='va'>pMat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span><span class='op'>(</span><span class='va'>tips</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>2</span><span class='op'>)</span>, mapping <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"sex"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='va'>pMat</span> <span class='co'># calls print(pMat), which calls print.ggmatrix(pMat)</span>
+</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='print.ggmatrix-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -233,7 +230,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -33,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -109,7 +103,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -145,12 +139,11 @@
     
     
 <p><code>GGally</code> proposes several additional statistics that could be used with <code>ggplot2</code>. As reminder, a statistic is always used in conjunction with a geometry. You can call a statistic from a <code>geom_*()</code> or call a geometry from a <code>stat_*()</code>. A statistic will compute new variables from the provided <code>data</code>. These new variables could be mapped to an aesthetic using <code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">ggplot2::after_stat()</a></code>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggobi.github.io/ggally">GGally</a></span>, quietly = <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span>
-</pre></div>
+<span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
 <div id="stat_cross" class="section level2">
 <h2 class="hasAnchor">
 <a href="#stat_cross" class="anchor"></a><code>stat_cross()</code>
@@ -168,53 +161,49 @@
 <li>
 <strong>expected</strong>: expected count under the null hypothesis</li>
 <li>
-<strong>residuals</strong>: Pearson’s residual</li>
+<strong>resid</strong>: Pearson’s residual</li>
 <li>
-<strong>stdres</strong>: standardized residual</li>
+<strong>std.resid</strong>: standardized residual</li>
 </ul>
 <p>By default, <code><a href="../reference/stat_cross.html">stat_cross()</a></code> is using <code>ggplot2::geom_points()</code>. If you can to plot the number of observations, you need to map <code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat(observed)</a></code> to an aesthetic (here <strong>size</strong>):</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">Titanic</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, y = <span class="kw">Survived</span>, weight = <span class="kw">Freq</span>, size = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">observed</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/stat_cross.html">stat_cross</a></span>() <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size_area</a></span>(max_size = <span class="fl">20</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, y <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span>, size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">observed</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/stat_cross.html">stat_cross</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size_area</a></span><span class="op">(</span>max_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 <p>Note that the <strong>weight</strong> aesthetic is taken into account by <code><a href="../reference/stat_cross.html">stat_cross()</a></code>.</p>
 <p>We can go further using a custom shape and filling points with standardized residual to identify visually cells who are over- or underrepresented.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, y = <span class="kw">Survived</span>, weight = <span class="kw">Freq</span>, size = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">observed</span>), fill = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">stdres</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/stat_cross.html">stat_cross</a></span>(shape = <span class="fl">22</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_steps.html">scale_fill_steps2</a></span>(breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>), show.limits = <span class="fl">TRUE</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size_area</a></span>(max_size = <span class="fl">20</span>)
-</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, y <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span>, size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">observed</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">std.resid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/stat_cross.html">stat_cross</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">22</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_steps.html">scale_fill_steps2</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, show.limits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size_area</a></span><span class="op">(</span>max_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>We can easily recreate a cross-tabulated table.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, y = <span class="kw">Survived</span>, weight = <span class="kw">Freq</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span>(fill = <span class="st">"white"</span>, colour = <span class="st">"black"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(stat = <span class="st">"cross"</span>, mapping = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(label = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">observed</span>))) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
-</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, y <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"cross"</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">observed</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
 <p>Even more complicated, we want to produce a table showing column proportions and where cells are filled with standardized residuals. Note that <code><a href="../reference/stat_cross.html">stat_cross()</a></code> could be used with facets. In that case, computation is done separately in each facet.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-    x = <span class="kw">Class</span>, y = <span class="kw">Survived</span>, weight = <span class="kw">Freq</span>,
-    label = <span class="kw">scales</span>::<span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">col.prop</span>), accuracy = <span class="fl">.1</span>),
-    fill = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">stdres</span>)
-  ) <span class="op">+</span>
-  <span class="fu"><a href="../reference/stat_cross.html">stat_cross</a></span>(shape = <span class="fl">22</span>, size = <span class="fl">30</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(stat = <span class="st">"cross"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_steps.html">scale_fill_steps2</a></span>(breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>), show.limits = <span class="fl">TRUE</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(rows = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">Sex</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(fill = <span class="st">"Standardized residuals"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+    x <span class="op">=</span> <span class="va">Class</span>, y <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span>,
+    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">col.prop</span><span class="op">)</span>, accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,
+    fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">std.resid</span><span class="op">)</span>
+  <span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/stat_cross.html">stat_cross</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">22</span>, size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"cross"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_steps.html">scale_fill_steps2</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, show.limits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Standardized residuals"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 </div>
 <div id="stat_prop" class="section level2">
@@ -227,72 +216,66 @@
 <a href="#adding-labels-on-a-percent-stacked-bar-plot" class="anchor"></a>adding labels on a percent stacked bar plot</h3>
 <p>When using <code>position = "fill"</code> with <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>, you can produce a percent stacked bar plot. However, the proportions corresponding to the <strong>y</strong> axis are not directly accessible using only <code>ggplot2</code>. With <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, you can easily add them on the plot.</p>
 <p>In the following example, we indicated <code>stat = "prop"</code> to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code> to use <code><a href="../reference/stat_prop.html">stat_prop()</a></code>, we defined the <strong>by</strong> aesthetic (here we want to compute the proportions separately for each value of <strong>x</strong>), and we also used <code><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">ggplot2::position_fill()</a></code> when calling <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">ggplot2::geom_text()</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">Titanic</span>)
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, fill = <span class="kw">Survived</span>, weight = <span class="kw">Freq</span>, by = <span class="kw">Class</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(position = <span class="st">"fill"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(stat = <span class="st">"prop"</span>, position = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">position_fill</a></span>(<span class="fl">.5</span>))
-<span class="kw">p</span>
-</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, fill <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span>, by <span class="op">=</span> <span class="va">Class</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"prop"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">position_fill</a></span><span class="op">(</span><span class="fl">.5</span><span class="op">)</span><span class="op">)</span>
+<span class="va">p</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
 <p>Note that <code><a href="../reference/stat_prop.html">stat_prop()</a></code> has properly taken into account the <strong>weight</strong> aesthetic.</p>
 <p><code><a href="../reference/stat_prop.html">stat_prop()</a></code> is also compatible with faceting. In that case, proportions are computed separately in each facet.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(cols = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">Sex</span>))
-</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">Sex</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
 </div>
 <div id="displaying-proportions-of-the-total" class="section level3">
 <h3 class="hasAnchor">
 <a href="#displaying-proportions-of-the-total" class="anchor"></a>displaying proportions of the total</h3>
 <p>If you want to display proportions of the total, simply map the <strong>by</strong> aesthetic to <code>1</code>. Here an example using a stacked bar chart.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, fill = <span class="kw">Survived</span>, weight = <span class="kw">Freq</span>, by = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>() <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(label = <span class="kw">scales</span>::<span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">prop</span>), accuracy = <span class="fl">1</span>)),
-    stat = <span class="st">"prop"</span>,
-    position = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">position_stack</a></span>(<span class="fl">.5</span>)
- )
-</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, fill <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span>, accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>,
+    stat <span class="op">=</span> <span class="st">"prop"</span>,
+    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">position_stack</a></span><span class="op">(</span><span class="fl">.5</span><span class="op">)</span>
+ <span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
 </div>
 <div id="a-dodged-bar-plot-to-compare-two-distributions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-dodged-bar-plot-to-compare-two-distributions" class="anchor"></a>a dodged bar plot to compare two distributions</h3>
 <p>A dodged bar plot could be used to compare two distributions.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, fill = <span class="kw">Sex</span>, weight = <span class="kw">Freq</span>, by = <span class="kw">Sex</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(position = <span class="st">"dodge"</span>)
-</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, fill <span class="op">=</span> <span class="va">Sex</span>, weight <span class="op">=</span> <span class="va">Freq</span>, by <span class="op">=</span> <span class="va">Sex</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
 <p>On the previous graph, it is difficult to see if first class is over- or under-represented among women, due to the fact they were much more men on the boat. <code><a href="../reference/stat_prop.html">stat_prop()</a></code> could be used to adjust the graph by displaying instead the proportion within each category (i.e. here the proportion by sex).</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, fill = <span class="kw">Sex</span>, weight = <span class="kw">Freq</span>, by = <span class="kw">Sex</span>, y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">prop</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(stat = <span class="st">"prop"</span>, position = <span class="st">"dodge"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>)
-</pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, fill <span class="op">=</span> <span class="va">Sex</span>, weight <span class="op">=</span> <span class="va">Freq</span>, by <span class="op">=</span> <span class="va">Sex</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"prop"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
 <p>The same example with labels:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, fill = <span class="kw">Sex</span>, weight = <span class="kw">Freq</span>, by = <span class="kw">Sex</span>, y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">prop</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(stat = <span class="st">"prop"</span>, position = <span class="st">"dodge"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(
-    mapping = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(
-      label = <span class="kw">scales</span>::<span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="kw">prop</span>), accuracy = <span class="fl">.1</span>), 
-      y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span>(<span class="fl">0.01</span>)
-    ),
-    vjust = <span class="st">"bottom"</span>,
-    position = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span>(<span class="fl">.9</span>),
-    stat = <span class="st">"prop"</span>
-  )
-</pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, fill <span class="op">=</span> <span class="va">Sex</span>, weight <span class="op">=</span> <span class="va">Freq</span>, by <span class="op">=</span> <span class="va">Sex</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"prop"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>
+    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+      label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span>, accuracy <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>, 
+      y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>
+    <span class="op">)</span>,
+    vjust <span class="op">=</span> <span class="st">"bottom"</span>,
+    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">.9</span><span class="op">)</span>,
+    stat <span class="op">=</span> <span class="st">"prop"</span>
+  <span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
 </div>
 </div>
@@ -308,66 +291,58 @@
 <li><strong>denominator</strong></li>
 </ul>
 <p>Let’s take an example. The following plot shows all tips received according to the day of the week.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">tips</span>, package = <span class="st">"reshape"</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">tips</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">day</span>, y = <span class="kw">tip</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
-</pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 <p>To plot their mean value per day, simply use <code><a href="../reference/stat_weighted_mean.html">stat_weighted_mean()</a></code>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">tips</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">day</span>, y = <span class="kw">tip</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>()
-</pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
 <p>We can specify the geometry we want using <code>geom</code> argument. Note that for lines, we need to specify the <strong>group</strong> aesthetic as well.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">tips</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">day</span>, y = <span class="kw">tip</span>, group = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>(geom = <span class="st">"line"</span>)
-</pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">tip</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
 <p>An alternative is to specify the statistic in <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">ggplot2::geom_line()</a></code>.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">tips</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">day</span>, y = <span class="kw">tip</span>, group = <span class="fl">1</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(stat = <span class="st">"weighted_mean"</span>)
-</pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">tip</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"weighted_mean"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
 <p>Of course, it could be use with other geometries. Here a bar plot.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">tips</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">day</span>, y = <span class="kw">tip</span>, fill = <span class="kw">sex</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>(geom = <span class="st">"bar"</span>, position = <span class="st">"dodge"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"mean tip"</span>)
-<span class="kw">p</span>
-</pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">tip</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"bar"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"mean tip"</span><span class="op">)</span>
+<span class="va">p</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
 <p>It is very easy to add facets. In that case, computation will be done separately for each facet.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(rows = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw">smoker</span>))
-</pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
 <p><code><a href="../reference/stat_weighted_mean.html">stat_weighted_mean()</a></code> could be also used for computing proportions as a proportion is technically a mean of binary values (0 or 1).</p>
-<div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">tips</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">day</span>, y = <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="kw">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span>), fill = <span class="kw">sex</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span>(geom = <span class="st">"bar"</span>, position = <span class="st">"dodge"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"proportion of smoker"</span>)
-</pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/stat_weighted_mean.html">stat_weighted_mean</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"bar"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"proportion of smoker"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-19-1.png" width="576"></p>
 <p>Finally, you can use the <strong>weight</strong> aesthetic to indicate weights to take into account for computing means / proportions.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="kw">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw">Titanic</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">d</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Class</span>, y = <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="kw">Survived</span> <span class="op">==</span> <span class="st">"Yes"</span>), weight = <span class="kw">Freq</span>, fill = <span class="kw">Sex</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(stat = <span class="st">"weighted_mean"</span>, position = <span class="st">"dodge"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(y = <span class="st">"Proportion who survived"</span>)
-</pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">==</span> <span class="st">"Yes"</span><span class="op">)</span>, weight <span class="op">=</span> <span class="va">Freq</span>, fill <span class="op">=</span> <span class="va">Sex</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"weighted_mean"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Proportion who survived"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_stats_files/figure-html/unnamed-chunk-20-1.png" width="576"></p>
 </div>
   </div>
@@ -387,7 +362,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

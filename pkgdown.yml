@@ -1,8 +1,22 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1.9000
-pkgdown_sha: caf7cc74e008e8d0d6e53eeda93cd3cad3545bf2
-articles: []
-last_built: 2020-06-30T17:27Z
+pkgdown: 1.6.1.9000
+pkgdown_sha: 84f234cf19153ce99bf1bcf875dc56248ddf0cbe
+articles:
+  ggally_plots: ggally_plots.html
+  ggally_stats: ggally_stats.html
+  ggbivariate: ggbivariate.html
+  ggcoef: ggcoef.html
+  ggcoef_model: ggcoef_model.html
+  ggduo: ggduo.html
+  ggmatrix: ggmatrix.html
+  ggnetworkmap: ggnetworkmap.html
+  ggnostic: ggnostic.html
+  ggpairs: ggpairs.html
+  ggscatmat: ggscatmat.html
+  ggsurv: ggsurv.html
+  ggtable: ggtable.html
+  glyph: glyph.html
+last_built: 2021-01-11T17:03Z
 urls:
   reference: https://ggobi.github.io/ggally/reference
   article: https://ggobi.github.io/ggally/articles

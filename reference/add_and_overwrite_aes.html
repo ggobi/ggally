@@ -51,6 +51,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -186,7 +182,7 @@
     <p>Add new aesthetics to a previous aes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_and_overwrite_aes</span>(<span class='kw'>current</span>, <span class='kw'>new</span>)</pre>
+    <pre class="usage"><span class='fu'>add_and_overwrite_aes</span><span class='op'>(</span><span class='va'>current</span>, <span class='va'>new</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -197,15 +193,16 @@
     <p>Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>diamonds</span>, package=<span class='st'>"ggplot2"</span>)
-<span class='kw'>diamonds.samp</span> <span class='op'>&lt;-</span> <span class='kw'>diamonds</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='kw'>diamonds</span>)[<span class='fl'>1</span>], <span class='fl'>1000</span>), ]
-<span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>diamonds.samp</span>, columns = <span class='fl'>5</span><span class='op'>:</span><span class='fl'>7</span>,
-  mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='kw'>color</span>),
-  upper = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='st'>"cor"</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(color = <span class='st'>"clarity"</span>)),
-  lower = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='st'>"cor"</span>, mapping = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span>(color = <span class='st'>"cut"</span>)),
-  title = <span class='st'>"Diamonds Sample"</span>
-)
-<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>pm</span>)</div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>diamonds</span>, package<span class='op'>=</span><span class='st'>"ggplot2"</span><span class='op'>)</span>
+<span class='va'>diamonds.samp</span> <span class='op'>&lt;-</span> <span class='va'>diamonds</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>diamonds</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>1000</span><span class='op'>)</span>, <span class='op'>]</span>
+<span class='va'>pm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span><span class='op'>(</span><span class='va'>diamonds.samp</span>, columns <span class='op'>=</span> <span class='fl'>5</span><span class='op'>:</span><span class='fl'>7</span>,
+  mapping <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>color</span><span class='op'>)</span>,
+  upper <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>continuous <span class='op'>=</span> <span class='st'>"cor"</span>, mapping <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"clarity"</span><span class='op'>)</span><span class='op'>)</span>,
+  lower <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>continuous <span class='op'>=</span> <span class='st'>"cor"</span>, mapping <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"cut"</span><span class='op'>)</span><span class='op'>)</span>,
+  title <span class='op'>=</span> <span class='st'>"Diamonds Sample"</span>
+<span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>pm</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Custom str.ggmatrix output: 
 #&gt; To view original object use 'str(pm, raw = TRUE)'
 #&gt; 
@@ -249,7 +246,8 @@
 #&gt;  $ nrow               : int 3
 #&gt;  $ ncol               : int 3
 #&gt;  $ byrow              : logi TRUE
-#&gt;  - attr(*, "_class")= chr [1:2] "gg" "ggmatrix"</div><div class='input'></div></pre>
+#&gt;  - attr(*, "_class")= chr [1:2] "gg" "ggmatrix"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,7 +263,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Single <span class="pkg">ggplot2</span> plot matrix with <code><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></code> — ggfacet • GGally</title>
+<title>Single ggplot2 plot matrix with facet_grid — ggfacet • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="Single <span class="pkg">ggplot2</span> plot matrix with <code><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></code> — ggfacet" />
+<meta property="og:title" content="Single ggplot2 plot matrix with facet_grid — ggfacet" />
 <meta property="og:description" content="Single ggplot2 plot matrix with facet_grid" />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -186,20 +182,20 @@
     <p>Single <span class="pkg">ggplot2</span> plot matrix with <code><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggfacet</span>(
-  <span class='kw'>data</span>,
-  mapping = <span class='kw'>NULL</span>,
-  columnsX = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>data</span>),
-  columnsY = <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>data</span>),
-  fn = <span class='kw'>ggally_points</span>,
-  <span class='kw'>...</span>,
-  columnLabelsX = <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='kw'>data</span>[<span class='kw'>columnsX</span>]),
-  columnLabelsY = <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='kw'>data</span>[<span class='kw'>columnsY</span>]),
-  xlab = <span class='kw'>NULL</span>,
-  ylab = <span class='kw'>NULL</span>,
-  title = <span class='kw'>NULL</span>,
-  scales = <span class='st'>"free"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggfacet</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  columnsX <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
+  columnsY <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
+  fn <span class='op'>=</span> <span class='va'>ggally_points</span>,
+  <span class='va'>...</span>,
+  columnLabelsX <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>[</span><span class='va'>columnsX</span><span class='op'>]</span><span class='op'>)</span>,
+  columnLabelsY <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>[</span><span class='va'>columnsY</span><span class='op'>]</span><span class='op'>)</span>,
+  xlab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scales <span class='op'>=</span> <span class='st'>"free"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,7 +218,7 @@
     </tr>
     <tr>
       <th>fn</th>
-      <td><p>function to be executed. Similar to <code>ggpairs</code> and <code>ggduo</code>, the function may either be a string identifier or a real function that <code>wrap</code> understands.</p></td>
+      <td><p>function to be executed. Similar to <code><a href='ggpairs.html'>ggpairs</a></code> and <code><a href='ggduo.html'>ggduo</a></code>, the function may either be a string identifier or a real function that <code><a href='wrap_fn_with_param_arg.html'>wrap</a></code> understands.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -245,33 +241,34 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
-<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"chemometrics"</span>, quietly = <span class='fl'>TRUE</span>)) {
-  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>NIR</span>, package = <span class='st'>"chemometrics"</span>)
-  <span class='kw'>NIR_sub</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>NIR</span><span class='op'>$</span><span class='kw'>yGlcEtOH</span>, <span class='kw'>NIR</span><span class='op'>$</span><span class='kw'>xNIR</span>[,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>])
-  <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>NIR_sub</span>)
-  <span class='kw'>x_cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X1115.0"</span>, <span class='st'>"X1120.0"</span>, <span class='st'>"X1125.0"</span>)
-  <span class='kw'>y_cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Glucose"</span>, <span class='st'>"Ethanol"</span>)
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"chemometrics"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>NIR</span>, package <span class='op'>=</span> <span class='st'>"chemometrics"</span><span class='op'>)</span>
+  <span class='va'>NIR_sub</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>NIR</span><span class='op'>$</span><span class='va'>yGlcEtOH</span>, <span class='va'>NIR</span><span class='op'>$</span><span class='va'>xNIR</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>NIR_sub</span><span class='op'>)</span>
+  <span class='va'>x_cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"X1115.0"</span>, <span class='st'>"X1120.0"</span>, <span class='st'>"X1125.0"</span><span class='op'>)</span>
+  <span class='va'>y_cols</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Glucose"</span>, <span class='st'>"Ethanol"</span><span class='op'>)</span>
 
   <span class='co'># using ggduo directly</span>
-  <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggduo</span>(<span class='kw'>NIR_sub</span>, <span class='kw'>x_cols</span>, <span class='kw'>y_cols</span>, types = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(continuous = <span class='st'>"points"</span>))
-  <span class='fu'>p_</span>(<span class='kw'>p</span>)
+  <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggduo.html'>ggduo</a></span><span class='op'>(</span><span class='va'>NIR_sub</span>, <span class='va'>x_cols</span>, <span class='va'>y_cols</span>, types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>continuous <span class='op'>=</span> <span class='st'>"points"</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>p_</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
 
   <span class='co'># using ggfacet</span>
-  <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span>(<span class='kw'>NIR_sub</span>, <span class='kw'>x_cols</span>, <span class='kw'>y_cols</span>)
-  <span class='fu'>p_</span>(<span class='kw'>p</span>)
+  <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span><span class='op'>(</span><span class='va'>NIR_sub</span>, <span class='va'>x_cols</span>, <span class='va'>y_cols</span><span class='op'>)</span>
+  <span class='fu'>p_</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
 
   <span class='co'># add a smoother</span>
-  <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span>(<span class='kw'>NIR_sub</span>, <span class='kw'>x_cols</span>, <span class='kw'>y_cols</span>, fn = <span class='st'>'smooth_loess'</span>)
-  <span class='fu'>p_</span>(<span class='kw'>p</span>)
+  <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span><span class='op'>(</span><span class='va'>NIR_sub</span>, <span class='va'>x_cols</span>, <span class='va'>y_cols</span>, fn <span class='op'>=</span> <span class='st'>'smooth_loess'</span><span class='op'>)</span>
+  <span class='fu'>p_</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
   <span class='co'># same output</span>
-  <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span>(<span class='kw'>NIR_sub</span>, <span class='kw'>x_cols</span>, <span class='kw'>y_cols</span>, fn = <span class='kw'>ggally_smooth_loess</span>)
-  <span class='fu'>p_</span>(<span class='kw'>p</span>)
+  <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span><span class='op'>(</span><span class='va'>NIR_sub</span>, <span class='va'>x_cols</span>, <span class='va'>y_cols</span>, fn <span class='op'>=</span> <span class='va'>ggally_smooth_loess</span><span class='op'>)</span>
+  <span class='fu'>p_</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
 
   <span class='co'># Change scales to be the same in for every row and for every column</span>
-  <span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span>(<span class='kw'>NIR_sub</span>, <span class='kw'>x_cols</span>, <span class='kw'>y_cols</span>, scales = <span class='st'>"fixed"</span>)
-  <span class='fu'>p_</span>(<span class='kw'>p</span>)
-}</div><div class='output co'>#&gt; 'data.frame':	166 obs. of  5 variables:
+  <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggfacet</span><span class='op'>(</span><span class='va'>NIR_sub</span>, <span class='va'>x_cols</span>, <span class='va'>y_cols</span>, scales <span class='op'>=</span> <span class='st'>"fixed"</span><span class='op'>)</span>
+  <span class='fu'>p_</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; 'data.frame':	166 obs. of  5 variables:
 #&gt;  $ Glucose: num  9.78 17.08 27.05 33.41 39.5 ...
 #&gt;  $ Ethanol: num  40.3 39.1 37.9 37.3 36.4 ...
 #&gt;  $ X1115.0: num  0.00319 0.00324 0.00317 0.00315 0.00315 ...
@@ -292,7 +289,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

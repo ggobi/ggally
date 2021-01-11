@@ -46,10 +46,12 @@
 
 
 <meta property="og:title" content="Compute proportions according to custom denominator — stat_prop" />
-<meta property="og:description" content="stat_prop is a variation of stat_count allowing to compute custom
+<meta property="og:description" content="stat_prop is a variation of ggplot2::stat_count() allowing to compute custom
 proportions according to the by aesthetic defining the denominator
 (i.e. all proportions for a same value of by will sum to 1).
 The by aesthetic should be a factor." />
+
+
 
 
 
@@ -81,19 +83,13 @@ The by aesthetic should be a factor." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -157,7 +153,7 @@ The by aesthetic should be a factor." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -186,23 +182,24 @@ The by aesthetic should be a factor." />
     </div>
 
     <div class="ref-description">
-    <p><code>stat_prop</code> is a variation of <code><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>stat_count</a></code> allowing to compute custom
+    <p><code>stat_prop</code> is a variation of <code><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>ggplot2::stat_count()</a></code> allowing to compute custom
 proportions according to the <strong>by</strong> aesthetic defining the denominator
 (i.e. all proportions for a same value of <strong>by</strong> will sum to 1).
 The <code>by</code> aesthetic should be a factor.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stat_prop</span>(
-  mapping = <span class='kw'>NULL</span>,
-  data = <span class='kw'>NULL</span>,
-  geom = <span class='st'>"bar"</span>,
-  position = <span class='st'>"fill"</span>,
-  <span class='kw'>...</span>,
-  width = <span class='kw'>NULL</span>,
-  na.rm = <span class='fl'>FALSE</span>,
-  show.legend = <span class='fl'>NA</span>,
-  inherit.aes = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>stat_prop</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"bar"</span>,
+  position <span class='op'>=</span> <span class='st'>"fill"</span>,
+  <span class='va'>...</span>,
+  width <span class='op'>=</span> <span class='cn'>NULL</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  orientation <span class='op'>=</span> <span class='cn'>NA</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -255,6 +252,13 @@ to the paired geom/stat.</p></td>
 a warning. If <code>TRUE</code>, missing values are silently removed.</p></td>
     </tr>
     <tr>
+      <th>orientation</th>
+      <td><p>The orientation of the layer. The default (<code>NA</code>)
+automatically determines the orientation from the aesthetic mapping. In the
+rare event that this fails it can be given explicitly by setting <code>orientation</code>
+to either <code>"x"</code> or <code>"y"</code>. See the <em>Orientation</em> section for more detail.</p></td>
+    </tr>
+    <tr>
       <th>show.legend</th>
       <td><p>logical. Should this layer be included in the legends?
 <code>NA</code>, the default, includes if any aesthetics are mapped.
@@ -275,51 +279,60 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
 
     
 
-<p><code>stat_prop</code> requires the <strong>by</strong> aesthetic and this <strong>by</strong> aesthetic
-should be a factor.</p>
+<p><code>stat_prop()</code> understands the following aesthetics (required aesthetics are in bold):</p><ul>
+<li><p><strong>x <em>or</em> y</strong></p></li>
+<li><p><strong>by</strong> (this aesthetic should be a <strong>factor</strong>)</p></li>
+<li><p>group</p></li>
+<li><p>weight</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="computed-variables"><a class="anchor" href="#computed-variables"></a>Computed variables</h2>
 
     
 
 <dl>
-  <dt>count</dt><dd><p>number of points in bin</p></dd>
-  <dt>prop</dt><dd><p>computed proportion</p></dd>
+<dt>count</dt><dd><p>number of points in bin</p></dd>
+<dt>prop</dt><dd><p>computed proportion</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>stat_count</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>ggplot2::stat_count()</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Joseph Larmarange</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='kw'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>Titanic</span>)
+<span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>Titanic</span><span class='op'>)</span>
 
-<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Class</span>, fill = <span class='kw'>Survived</span>, weight = <span class='kw'>Freq</span>, by = <span class='kw'>Class</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(position = <span class='st'>"fill"</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(stat = <span class='st'>"prop"</span>, position = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_stack.html'>position_fill</a></span>(<span class='fl'>.5</span>))
-<span class='fu'>p_</span>(<span class='kw'>p</span>)</div><div class='img'><img src='stat_prop-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span>(<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span>(<span class='op'>~</span> <span class='kw'>Sex</span>))</div><div class='img'><img src='stat_prop-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Class</span>, fill = <span class='kw'>Survived</span>, weight = <span class='kw'>Freq</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(position = <span class='st'>"dodge"</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(by = <span class='kw'>Survived</span>), stat = <span class='st'>"prop"</span>,
-    position = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_dodge.html'>position_dodge</a></span>(<span class='fl'>0.9</span>), vjust = <span class='st'>"bottom"</span>
- ))</div><div class='img'><img src='stat_prop-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>p_</span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>d</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Class</span>, fill = <span class='kw'>Survived</span>, weight = <span class='kw'>Freq</span>, by = <span class='fl'>1</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(label = <span class='kw'>scales</span>::<span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_eval.html'>after_stat</a></span>(<span class='kw'>prop</span>), accuracy = <span class='fl'>1</span>)),
-    stat = <span class='st'>"prop"</span>,
-    position = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_stack.html'>position_stack</a></span>(<span class='fl'>.5</span>)
- ))</div><div class='img'><img src='stat_prop-4.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Class</span>, fill <span class='op'>=</span> <span class='va'>Survived</span>, weight <span class='op'>=</span> <span class='va'>Freq</span>, by <span class='op'>=</span> <span class='va'>Class</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"fill"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"prop"</span>, position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_stack.html'>position_fill</a></span><span class='op'>(</span><span class='fl'>.5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>p_</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_prop-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span><span class='op'>(</span><span class='va'>p</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>Sex</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_prop-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Class</span>, fill <span class='op'>=</span> <span class='va'>Survived</span>, weight <span class='op'>=</span> <span class='va'>Freq</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>by <span class='op'>=</span> <span class='va'>Survived</span><span class='op'>)</span>, stat <span class='op'>=</span> <span class='st'>"prop"</span>,
+    position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_dodge.html'>position_dodge</a></span><span class='op'>(</span><span class='fl'>0.9</span><span class='op'>)</span>, vjust <span class='op'>=</span> <span class='st'>"bottom"</span>
+ <span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_prop-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Class</span>, fill <span class='op'>=</span> <span class='va'>Survived</span>, weight <span class='op'>=</span> <span class='va'>Freq</span>, by <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>label <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_eval.html'>after_stat</a></span><span class='op'>(</span><span class='va'>prop</span><span class='op'>)</span>, accuracy <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
+    stat <span class='op'>=</span> <span class='st'>"prop"</span>,
+    position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_stack.html'>position_stack</a></span><span class='op'>(</span><span class='fl'>.5</span><span class='op'>)</span>
+ <span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='stat_prop-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -335,7 +348,7 @@ should be a factor.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

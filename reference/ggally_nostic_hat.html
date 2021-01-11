@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>ggnostic</code> leverage points — ggally_nostic_hat • GGally</title>
+<title>ggnostic leverage points — ggally_nostic_hat • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="<code>ggnostic</code> leverage points — ggally_nostic_hat" />
+<meta property="og:title" content="ggnostic leverage points — ggally_nostic_hat" />
 <meta property="og:description" content="A function to display stats::influence's hat information against a given explanatory variable." />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,7 +173,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>ggnostic</code> leverage points</h1>
+    <h1><code><a href='ggnostic.html'>ggnostic</a></code> leverage points</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggnostic.R'><code>R/ggnostic.R</code></a></small>
     <div class="hidden name"><code>ggally_nostic_hat.Rd</code></div>
     </div>
@@ -186,36 +182,38 @@
     <p>A function to display stats::influence's hat information against a given explanatory variable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_nostic_hat</span>(
-  <span class='kw'>data</span>,
-  <span class='kw'>mapping</span>,
-  <span class='kw'>...</span>,
-  linePosition = <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='fu'>eval_data_col</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span><span class='op'>$</span><span class='kw'>y</span>))<span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>data</span>),
-  lineColor = <span class='fu'>brew_colors</span>(<span class='st'>"grey"</span>),
-  lineSize = <span class='fl'>0.5</span>,
-  lineAlpha = <span class='fl'>1</span>,
-  lineType = <span class='fl'>2</span>,
-  avgLinePosition = <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='fu'>eval_data_col</span>(<span class='kw'>data</span>, <span class='kw'>mapping</span><span class='op'>$</span><span class='kw'>y</span>))<span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>data</span>),
-  avgLineColor = <span class='fu'>brew_colors</span>(<span class='st'>"grey"</span>),
-  avgLineSize = <span class='kw'>lineSize</span>,
-  avgLineAlpha = <span class='kw'>lineAlpha</span>,
-  avgLineType = <span class='fl'>1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggally_nostic_hat</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>mapping</span>,
+  <span class='va'>...</span>,
+  linePosition <span class='op'>=</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='eval_data_col.html'>eval_data_col</a></span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>mapping</span><span class='op'>$</span><span class='va'>y</span><span class='op'>)</span><span class='op'>)</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
+  lineColor <span class='op'>=</span> <span class='fu'><a href='brew_colors.html'>brew_colors</a></span><span class='op'>(</span><span class='st'>"grey"</span><span class='op'>)</span>,
+  lineSize <span class='op'>=</span> <span class='fl'>0.5</span>,
+  lineAlpha <span class='op'>=</span> <span class='fl'>1</span>,
+  lineType <span class='op'>=</span> <span class='fl'>2</span>,
+  avgLinePosition <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='eval_data_col.html'>eval_data_col</a></span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>mapping</span><span class='op'>$</span><span class='va'>y</span><span class='op'>)</span><span class='op'>)</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
+  avgLineColor <span class='op'>=</span> <span class='fu'><a href='brew_colors.html'>brew_colors</a></span><span class='op'>(</span><span class='st'>"grey"</span><span class='op'>)</span>,
+  avgLineSize <span class='op'>=</span> <span class='va'>lineSize</span>,
+  avgLineAlpha <span class='op'>=</span> <span class='va'>lineAlpha</span>,
+  avgLineType <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data, mapping, ...</th>
-      <td><p>supplied directly to <code>ggally_nostic_line</code></p></td>
+      <td><p>supplied directly to <code><a href='ggally_nostic_line.html'>ggally_nostic_line</a></code></p></td>
     </tr>
     <tr>
       <th>linePosition, lineColor, lineSize, lineAlpha, lineType</th>
-      <td><p>parameters supplied to <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></code> for the cutoff line</p></td>
+      <td><p>parameters supplied to
+<code><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>ggplot2::geom_line()</a></code> for the cutoff line</p></td>
     </tr>
     <tr>
       <th>avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType</th>
-      <td><p>parameters supplied to <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></code> for the average line</p></td>
+      <td><p>parameters supplied
+to <code><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>ggplot2::geom_line()</a></code> for the average line</p></td>
     </tr>
     </table>
 
@@ -224,21 +222,22 @@
     <p><span class="pkg">ggplot2</span> plot object</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>As stated in <code>stats::<a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></code> documentation:</p>
+    <p>As stated in <code><a href='https://rdrr.io/r/stats/lm.influence.html'>stats::influence()</a></code> documentation:</p>
 <p>hat: a vector containing the diagonal of the 'hat' matrix.</p>
 <p>The diagonal elements of the 'hat' matrix describe the influence each response value has on the fitted value for that same observation.</p>
 <p>A suggested "cutoff" line is added to the plot at a height of 2 * p / n and an expected line at a height of p / n.
 If either <code>linePosition</code> or <code>avgLinePosition</code> is <code>NULL</code>, the respective line will not be drawn.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>stats::<a href='https://rdrr.io/r/stats/lm.influence.html'>influence</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/lm.influence.html'>stats::influence()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>broomify</span>(<span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>wt</span> <span class='op'>+</span> <span class='kw'>qsec</span> <span class='op'>+</span> <span class='kw'>am</span>, data = <span class='kw'>mtcars</span>))
-<span class='fu'>p_</span>(<span class='fu'>ggally_nostic_hat</span>(<span class='kw'>dt</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>wt</span>, <span class='kw'>.hat</span>)))</div><div class='img'><img src='ggally_nostic_hat-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='broomify.html'>broomify</a></span><span class='op'>(</span><span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>am</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggally_nostic_hat</span><span class='op'>(</span><span class='va'>dt</span>, <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>wt</span>, <span class='va'>.hat</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggally_nostic_hat-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -254,7 +253,7 @@ If either <code>linePosition</code> or <code>avgLinePosition</code> is <code>NUL
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -51,6 +51,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -186,14 +182,14 @@
     <p>Add reference boxes around each cell of the glyphmap.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_ref_boxes</span>(
-  <span class='kw'>data</span>,
-  var_fill = <span class='kw'>NULL</span>,
-  color = <span class='st'>"white"</span>,
-  size = <span class='fl'>0.5</span>,
-  fill = <span class='fl'>NA</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>add_ref_boxes</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  var_fill <span class='op'>=</span> <span class='cn'>NULL</span>,
+  color <span class='op'>=</span> <span class='st'>"white"</span>,
+  size <span class='op'>=</span> <span class='fl'>0.5</span>,
+  fill <span class='op'>=</span> <span class='cn'>NA</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,7 +216,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other arguments passed onto <code><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_rect</a></code></p></td>
+      <td><p>other arguments passed onto <code><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>ggplot2::geom_rect()</a></code></p></td>
     </tr>
     </table>
 
@@ -240,7 +236,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

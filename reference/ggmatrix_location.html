@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>ggmatrix</code> plot locations — ggmatrix_location • GGally</title>
+<title>ggmatrix plot locations — ggmatrix_location • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="<code>ggmatrix</code> plot locations — ggmatrix_location" />
+<meta property="og:title" content="ggmatrix plot locations — ggmatrix_location" />
 <meta property="og:description" content="" />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,7 +173,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>ggmatrix</code> plot locations</h1>
+    <h1><code><a href='ggmatrix.html'>ggmatrix</a></code> plot locations</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggpairs_add.R'><code>R/ggpairs_add.R</code></a></small>
     <div class="hidden name"><code>ggmatrix_location.Rd</code></div>
     </div>
@@ -186,25 +182,25 @@
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='kw'>NULL</span>, rows = <span class='kw'>NULL</span>, cols = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='cn'>NULL</span>, rows <span class='op'>=</span> <span class='cn'>NULL</span>, cols <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pm</th>
-      <td><p><code>ggmatrix</code> plot object</p></td>
+      <td><p><code><a href='ggmatrix.html'>ggmatrix</a></code> plot object</p></td>
     </tr>
     <tr>
       <th>location</th>
       <td><dl>
-  <dt><code>"all"</code>, <code>TRUE</code></dt><dd><p>All row and col combinations</p></dd>
-  <dt><code>"none"</code></dt><dd><p>No row and column combinations</p></dd>
-  <dt><code>"upper"</code></dt><dd><p>Locations where the column value is higher than the row value</p></dd>
-  <dt><code>"lower"</code></dt><dd><p>Locations where the row value is higher than the column value</p></dd>
-  <dt><code>"diag"</code></dt><dd><p>Locations where the column value is equal to the row value</p></dd>
-  <dt><code>matrix</code> or <code>data.frame</code></dt><dd><p><code>matrix</code> values will be converted into <code>data.frame</code>s.
-    <ul>
+<dt><code>"all"</code>, <code>TRUE</code></dt><dd><p>All row and col combinations</p></dd>
+<dt><code>"none"</code></dt><dd><p>No row and column combinations</p></dd>
+<dt><code>"upper"</code></dt><dd><p>Locations where the column value is higher than the row value</p></dd>
+<dt><code>"lower"</code></dt><dd><p>Locations where the row value is higher than the column value</p></dd>
+<dt><code>"diag"</code></dt><dd><p>Locations where the column value is equal to the row value</p></dd>
+<dt><code>matrix</code> or <code>data.frame</code></dt><dd><p><code>matrix</code> values will be converted into <code>data.frame</code>s.
+<ul>
 <li><p>A <code>data.frame</code> with the exact column names <code><a href='https://rdrr.io/r/base/c.html'>c("row", "col")</a></code></p></li>
 <li><p>A <code>data.frame</code> with the number of rows and columns matching the plot matrix object provided.  Each cell will be tested for a "truthy" value to determine if the location should be kept.</p></li>
 </ul></p></dd>
@@ -229,10 +225,11 @@
     <p>Convert many types of location values to a consistent <code>data.frame</code> of <code>row</code> and <code>col</code> values.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>pm</span> <span class='op'>&lt;-</span> <span class='fu'>ggpairs</span>(<span class='kw'>reshape</span>::<span class='kw'><a href='https://rdrr.io/pkg/reshape/man/tips.html'>tips</a></span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>)
+    <pre class="examples"><div class='input'><span class='va'>pm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ggpairs.html'>ggpairs</a></span><span class='op'>(</span><span class='fu'>reshape</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/reshape/man/tips.html'>tips</a></span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
 
 <span class='co'># All locations</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='st'>"all"</span>)</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='st'>"all"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   1   1
 #&gt; 2   2   1
 #&gt; 3   3   1
@@ -241,7 +238,8 @@
 #&gt; 6   3   2
 #&gt; 7   1   3
 #&gt; 8   2   3
-#&gt; 9   3   3</div><div class='input'><span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   row col
+#&gt; 9   3   3</div><div class='input'><span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   1   1
 #&gt; 2   2   1
 #&gt; 3   3   1
@@ -252,45 +250,53 @@
 #&gt; 8   2   3
 #&gt; 9   3   3</div><div class='input'>
 <span class='co'># No locations</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='st'>"none"</span>)</div><div class='output co'>#&gt; [1] row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] row col
 #&gt; &lt;0 rows&gt; (or 0-length row.names)</div><div class='input'>
 <span class='co'># "upper" triangle locations</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='st'>"upper"</span>)</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='st'>"upper"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 4   1   2
 #&gt; 7   1   3
 #&gt; 8   2   3</div><div class='input'>
 <span class='co'># "lower" triangle locations</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='st'>"lower"</span>)</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='st'>"lower"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 2   2   1
 #&gt; 3   3   1
 #&gt; 6   3   2</div><div class='input'>
 <span class='co'># "diag" locations</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='st'>"diag"</span>)</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='st'>"diag"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   1   1
 #&gt; 5   2   2
 #&gt; 9   3   3</div><div class='input'>
 <span class='co'># specific rows</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, rows = <span class='fl'>2</span>)</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, rows <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   2   1
 #&gt; 2   2   2
 #&gt; 3   2   3</div><div class='input'>
 <span class='co'># specific columns</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, cols = <span class='fl'>2</span>)</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, cols <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   1   2
 #&gt; 2   2   2
 #&gt; 3   3   2</div><div class='input'>
 <span class='co'># row and column combinations</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, rows = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>), cols = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, rows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span>, cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   1   1
 #&gt; 2   2   1
 #&gt; 3   1   3
 #&gt; 4   2   3</div><div class='input'>
 <span class='co'># matrix locations</span>
-<span class='kw'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>TRUE</span>, ncol = <span class='fl'>3</span>, nrow = <span class='fl'>3</span>)
-<span class='kw'>mat</span>[<span class='fl'>1</span>,<span class='fl'>1</span>] <span class='op'>&lt;-</span> <span class='fl'>FALSE</span>
-<span class='kw'>locs</span> <span class='op'>&lt;-</span> <span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='kw'>mat</span>)
+<span class='va'>mat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, ncol <span class='op'>=</span> <span class='fl'>3</span>, nrow <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>mat</span><span class='op'>[</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='va'>locs</span> <span class='op'>&lt;-</span> <span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='va'>mat</span><span class='op'>)</span>
 <span class='co'>## does not contain the 1,1 cell</span>
-<span class='kw'>locs</span></div><div class='output co'>#&gt;   row col
+<span class='va'>locs</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   1   2
 #&gt; 2   1   3
 #&gt; 3   2   1
@@ -300,7 +306,8 @@
 #&gt; 7   3   2
 #&gt; 8   3   3</div><div class='input'>
 <span class='co'># Use the output of a prior ggmatrix_location</span>
-<span class='fu'>ggmatrix_location</span>(<span class='kw'>pm</span>, location = <span class='kw'>locs</span>)</div><div class='output co'>#&gt;   row col
+<span class='fu'>ggmatrix_location</span><span class='op'>(</span><span class='va'>pm</span>, location <span class='op'>=</span> <span class='va'>locs</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   row col
 #&gt; 1   1   2
 #&gt; 2   1   3
 #&gt; 3   2   1
@@ -324,7 +331,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

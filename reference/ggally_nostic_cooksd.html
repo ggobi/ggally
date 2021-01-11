@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>ggnostic</code> Cook's distance — ggally_nostic_cooksd • GGally</title>
+<title>ggnostic Cook's distance — ggally_nostic_cooksd • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,10 @@
 
 
 
-<meta property="og:title" content="<code>ggnostic</code> Cook's distance — ggally_nostic_cooksd" />
-<meta property="og:description" content="A function to display stats::cooks.distance." />
+<meta property="og:title" content="ggnostic Cook's distance — ggally_nostic_cooksd" />
+<meta property="og:description" content="A function to display stats::cooks.distance()." />
+
+
 
 
 
@@ -78,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -154,7 +150,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,31 +173,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>ggnostic</code> Cook's distance</h1>
+    <h1><code><a href='ggnostic.html'>ggnostic</a></code> Cook's distance</h1>
     <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/ggnostic.R'><code>R/ggnostic.R</code></a></small>
     <div class="hidden name"><code>ggally_nostic_cooksd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A function to display <code>stats::<a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></code>.</p>
+    <p>A function to display <code><a href='https://rdrr.io/r/stats/influence.measures.html'>stats::cooks.distance()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_nostic_cooksd</span>(
-  <span class='kw'>data</span>,
-  <span class='kw'>mapping</span>,
-  <span class='kw'>...</span>,
-  linePosition = <span class='fu'><a href='https://rdrr.io/r/stats/Fdist.html'>pf</a></span>(<span class='fl'>0.5</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>data</span>, <span class='st'>"var_x"</span>)), <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>data</span>) <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='kw'>data</span>,
-    <span class='st'>"var_x"</span>))),
-  lineColor = <span class='fu'>brew_colors</span>(<span class='st'>"grey"</span>),
-  lineType = <span class='fl'>2</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggally_nostic_cooksd</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>mapping</span>,
+  <span class='va'>...</span>,
+  linePosition <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Fdist.html'>pf</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>data</span>, <span class='st'>"var_x"</span><span class='op'>)</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>data</span>,
+    <span class='st'>"var_x"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>,
+  lineColor <span class='op'>=</span> <span class='fu'><a href='brew_colors.html'>brew_colors</a></span><span class='op'>(</span><span class='st'>"grey"</span><span class='op'>)</span>,
+  lineType <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data, mapping, ..., lineColor, lineType</th>
-      <td><p>parameters supplied to <code>ggally_nostic_line</code></p></td>
+      <td><p>parameters supplied to <code><a href='ggally_nostic_line.html'>ggally_nostic_line</a></code></p></td>
     </tr>
     <tr>
       <th>linePosition</th>
@@ -218,14 +214,15 @@
 <p>Reference: Michael H. Kutner, Christopher J. Nachtsheim, John Neter, and William Li. Applied linear statistical models. The McGraw-Hill / Irwin series operations and decision sciences. McGraw-Hill Irwin, 2005, p. 403</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>stats::<a href='https://rdrr.io/r/stats/influence.measures.html'>cooks.distance</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/influence.measures.html'>stats::cooks.distance()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
-<span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'>broomify</span>(<span class='kw'>stats</span>::<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>mpg</span> <span class='op'>~</span> <span class='kw'>wt</span> <span class='op'>+</span> <span class='kw'>qsec</span> <span class='op'>+</span> <span class='kw'>am</span>, data = <span class='kw'>mtcars</span>))
-<span class='fu'>p_</span>(<span class='fu'>ggally_nostic_cooksd</span>(<span class='kw'>dt</span>, <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>wt</span>, <span class='kw'>.cooksd</span>)))</div><div class='img'><img src='ggally_nostic_cooksd-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='broomify.html'>broomify</a></span><span class='op'>(</span><span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>am</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggally_nostic_cooksd</span><span class='op'>(</span><span class='va'>dt</span>, <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>wt</span>, <span class='va'>.cooksd</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggally_nostic_cooksd-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -241,7 +238,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

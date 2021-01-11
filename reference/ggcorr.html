@@ -49,9 +49,11 @@
 <meta property="og:description" content="Function for making a correlation matrix plot, using ggplot2.
 The function is directly inspired by Tian Zheng and Yu-Sung Su's
 corrplot function in the 'arm' package.
-Please visit http://github.com/briatte/ggcorr for the latest version
+Please visit https://github.com/briatte/ggcorr for the latest version
 of ggcorr, and see the vignette at
 https://briatte.github.io/ggcorr/ for many examples of how to use it." />
+
+
 
 
 
@@ -83,19 +85,13 @@ https://briatte.github.io/ggcorr/ for many examples of how to use it." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -159,7 +155,7 @@ https://briatte.github.io/ggcorr/ for many examples of how to use it." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -191,38 +187,38 @@ https://briatte.github.io/ggcorr/ for many examples of how to use it." />
     <p>Function for making a correlation matrix plot, using <span class="pkg">ggplot2</span>.
 The function is directly inspired by Tian Zheng and Yu-Sung Su's
 <code>corrplot</code> function in the 'arm' package.
-Please visit <a href='http://github.com/briatte/ggcorr'>http://github.com/briatte/ggcorr</a> for the latest version
+Please visit <a href='https://github.com/briatte/ggcorr'>https://github.com/briatte/ggcorr</a> for the latest version
 of <code>ggcorr</code>, and see the vignette at
 <a href='https://briatte.github.io/ggcorr/'>https://briatte.github.io/ggcorr/</a> for many examples of how to use it.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggcorr</span>(
-  <span class='kw'>data</span>,
-  method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pairwise"</span>, <span class='st'>"pearson"</span>),
-  cor_matrix = <span class='kw'>NULL</span>,
-  nbreaks = <span class='kw'>NULL</span>,
-  digits = <span class='fl'>2</span>,
-  name = <span class='st'>""</span>,
-  low = <span class='st'>"#3B9AB2"</span>,
-  mid = <span class='st'>"#EEEEEE"</span>,
-  high = <span class='st'>"#F21A00"</span>,
-  midpoint = <span class='fl'>0</span>,
-  palette = <span class='kw'>NULL</span>,
-  geom = <span class='st'>"tile"</span>,
-  min_size = <span class='fl'>2</span>,
-  max_size = <span class='fl'>6</span>,
-  label = <span class='fl'>FALSE</span>,
-  label_alpha = <span class='fl'>FALSE</span>,
-  label_color = <span class='st'>"black"</span>,
-  label_round = <span class='fl'>1</span>,
-  label_size = <span class='fl'>4</span>,
-  limits = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span>),
-  drop = <span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='kw'>limits</span>) <span class='op'>||</span> <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>limits</span>, <span class='fl'>FALSE</span>),
-  layout.exp = <span class='fl'>0</span>,
-  legend.position = <span class='st'>"right"</span>,
-  legend.size = <span class='fl'>9</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggcorr</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pairwise"</span>, <span class='st'>"pearson"</span><span class='op'>)</span>,
+  cor_matrix <span class='op'>=</span> <span class='cn'>NULL</span>,
+  nbreaks <span class='op'>=</span> <span class='cn'>NULL</span>,
+  digits <span class='op'>=</span> <span class='fl'>2</span>,
+  name <span class='op'>=</span> <span class='st'>""</span>,
+  low <span class='op'>=</span> <span class='st'>"#3B9AB2"</span>,
+  mid <span class='op'>=</span> <span class='st'>"#EEEEEE"</span>,
+  high <span class='op'>=</span> <span class='st'>"#F21A00"</span>,
+  midpoint <span class='op'>=</span> <span class='fl'>0</span>,
+  palette <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"tile"</span>,
+  min_size <span class='op'>=</span> <span class='fl'>2</span>,
+  max_size <span class='op'>=</span> <span class='fl'>6</span>,
+  label <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  label_alpha <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  label_color <span class='op'>=</span> <span class='st'>"black"</span>,
+  label_round <span class='op'>=</span> <span class='fl'>1</span>,
+  label_size <span class='op'>=</span> <span class='fl'>4</span>,
+  limits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>,
+  drop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>limits</span><span class='op'>)</span> <span class='op'>||</span> <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='va'>limits</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+  layout.exp <span class='op'>=</span> <span class='fl'>0</span>,
+  legend.position <span class='op'>=</span> <span class='st'>"right"</span>,
+  legend.size <span class='op'>=</span> <span class='fl'>9</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -395,35 +391,39 @@ Barret Schloerke</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='kw'>p_</span> <span class='op'>&lt;-</span> <span class='kw'>GGally</span>::<span class='kw'><a href='https://ggobi.github.io/ggally/reference/print_if_interactive.html'>print_if_interactive</a></span>
+<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
 
 <span class='co'># Basketball statistics provided by Nathan Yau at Flowing Data.</span>
-<span class='kw'>dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='st'>"http://datasets.flowingdata.com/ppg2008.csv"</span>)
+<span class='va'>dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"http://datasets.flowingdata.com/ppg2008.csv"</span><span class='op'>)</span>
 
 <span class='co'># Default output.</span>
-<span class='fu'>p_</span>(<span class='fu'>ggcorr</span>(<span class='kw'>dt</span>[, <span class='op'>-</span><span class='fl'>1</span>]))</div><div class='img'><img src='ggcorr-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcorr</span><span class='op'>(</span><span class='va'>dt</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggcorr-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Labeled output, with coefficient transparency.</span>
-<span class='fu'>p_</span>(<span class='fu'>ggcorr</span>(<span class='kw'>dt</span>[, <span class='op'>-</span><span class='fl'>1</span>],
-       label = <span class='fl'>TRUE</span>,
-       label_alpha = <span class='fl'>TRUE</span>))</div><div class='img'><img src='ggcorr-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcorr</span><span class='op'>(</span><span class='va'>dt</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>,
+       label <span class='op'>=</span> <span class='cn'>TRUE</span>,
+       label_alpha <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggcorr-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Custom options.</span>
-<span class='fu'>p_</span>(<span class='fu'>ggcorr</span>(
-  <span class='kw'>dt</span>[, <span class='op'>-</span><span class='fl'>1</span>],
-  name = <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='kw'>rho</span>),
-  geom = <span class='st'>"circle"</span>,
-  max_size = <span class='fl'>10</span>,
-  min_size = <span class='fl'>2</span>,
-  size = <span class='fl'>3</span>,
-  hjust = <span class='fl'>0.75</span>,
-  nbreaks = <span class='fl'>6</span>,
-  angle = <span class='op'>-</span><span class='fl'>45</span>,
-  palette = <span class='st'>"PuOr"</span> <span class='co'># colorblind safe, photocopy-able</span>
-))</div><div class='img'><img src='ggcorr-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcorr</span><span class='op'>(</span>
+  <span class='va'>dt</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>,
+  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span><span class='op'>(</span><span class='va'>rho</span><span class='op'>)</span>,
+  geom <span class='op'>=</span> <span class='st'>"circle"</span>,
+  max_size <span class='op'>=</span> <span class='fl'>10</span>,
+  min_size <span class='op'>=</span> <span class='fl'>2</span>,
+  size <span class='op'>=</span> <span class='fl'>3</span>,
+  hjust <span class='op'>=</span> <span class='fl'>0.75</span>,
+  nbreaks <span class='op'>=</span> <span class='fl'>6</span>,
+  angle <span class='op'>=</span> <span class='op'>-</span><span class='fl'>45</span>,
+  palette <span class='op'>=</span> <span class='st'>"PuOr"</span> <span class='co'># colorblind safe, photocopy-able</span>
+<span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggcorr-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Supply your own correlation matrix</span>
-<span class='fu'>p_</span>(<span class='fu'>ggcorr</span>(
-  data = <span class='kw'>NULL</span>,
-  cor_matrix = <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span>(<span class='kw'>dt</span>[, <span class='op'>-</span><span class='fl'>1</span>], use = <span class='st'>"pairwise"</span>)
-))</div><div class='img'><img src='ggcorr-4.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcorr</span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cor_matrix <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>dt</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>, use <span class='op'>=</span> <span class='st'>"pairwise"</span><span class='op'>)</span>
+<span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggcorr-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -439,7 +439,7 @@ Barret Schloerke</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

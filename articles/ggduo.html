@@ -33,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -109,7 +103,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -144,13 +138,12 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggobi.github.io/ggally">GGally</a></span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span>
-</pre></div>
+<span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
 <div id="ggallyggduo" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ggallyggduo" class="anchor"></a><code>GGally::ggduo()</code>
@@ -162,9 +155,9 @@
 <p>This example is derived from</p>
 <p><code>R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital Research and Education. from http://www.stats.idre.ucla.edu/r/dae/canonical-correlation-analysis (accessed May 22, 2017).</code></p>
 <p><code>Example 1. A researcher has collected data on three psychological variables, four academic variables (standardized test scores) and gender for 600 college freshman. She is interested in how the set of psychological variables relates to the academic variables and gender. In particular, the researcher is interested in how many dimensions (canonical variables) are necessary to understand the association between the two sets of variables."</code></p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">psychademic</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">psychademic</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">psychademic</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">psychademic</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    600 obs. of  8 variables:</span>
 <span class="co">#&gt;  $ locus_of_control: num  -0.84 -0.38 0.89 0.71 -0.64 1.11 0.06 -0.91 0.45 0 ...</span>
 <span class="co">#&gt;  $ self_concept    : num  -0.24 -0.47 0.59 0.28 0.03 0.9 0.03 -0.59 0.03 0.03 ...</span>
@@ -176,150 +169,140 @@
 <span class="co">#&gt;  $ sex             : chr  "female" "female" "male" "male" ...</span>
 <span class="co">#&gt;  - attr(*, "academic")= chr [1:5] "read" "write" "math" "science" ...</span>
 <span class="co">#&gt;  - attr(*, "psychology")= chr [1:3] "locus_of_control" "self_concept" "motivation"</span>
-(<span class="kw">psych_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span>(<span class="kw">psychademic</span>, <span class="st">"psychology"</span>))
+<span class="op">(</span><span class="va">psych_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="st">"psychology"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "locus_of_control" "self_concept"     "motivation"</span>
-(<span class="kw">academic_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span>(<span class="kw">psychademic</span>, <span class="st">"academic"</span>))
-<span class="co">#&gt; [1] "read"    "write"   "math"    "science" "sex"</span>
-</pre></div>
+<span class="op">(</span><span class="va">academic_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="st">"academic"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "read"    "write"   "math"    "science" "sex"</span></code></pre></div>
 <p>First, look at the within correlation using <code><a href="../reference/ggpairs.html">ggpairs()</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="kw">psychademic</span>, <span class="kw">psych_variables</span>, title = <span class="st">"Within Psychological Variables"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="va">psych_variables</span>, title <span class="op">=</span> <span class="st">"Within Psychological Variables"</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-</pre></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-within-1.png" width="700"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span>(<span class="kw">psychademic</span>, <span class="kw">academic_variables</span>, title = <span class="st">"Within Academic Variables"</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="va">academic_variables</span>, title <span class="op">=</span> <span class="st">"Within Academic Variables"</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-</pre></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-within-2.png" width="700"></p>
 <p>Next, look at the between correlation using <code><a href="../reference/ggduo.html">ggduo()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../reference/ggduo.html">ggduo</a></span>(
-  <span class="kw">psychademic</span>, <span class="kw">psych_variables</span>, <span class="kw">academic_variables</span>,
-  types = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(continuous = <span class="st">"smooth_lm"</span>),
-  title = <span class="st">"Between Academic and Psychological Variable Correlation"</span>,
-  xlab = <span class="st">"Psychological"</span>,
-  ylab = <span class="st">"Academic"</span>
-)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggduo.html">ggduo</a></span><span class="op">(</span>
+  <span class="va">psychademic</span>, <span class="va">psych_variables</span>, <span class="va">academic_variables</span>,
+  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="st">"smooth_lm"</span><span class="op">)</span>,
+  title <span class="op">=</span> <span class="st">"Between Academic and Psychological Variable Correlation"</span>,
+  xlab <span class="op">=</span> <span class="st">"Psychological"</span>,
+  ylab <span class="op">=</span> <span class="st">"Academic"</span>
+<span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-</pre></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-between-1.png" width="700"></p>
 <p>Since ggduo does not have a upper section to display the correlation values, we may use a custom function to add the information in the continuous plots. The strips may be removed as each group name may be recovered in the outer axis labels.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">lm_with_cor</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>, <span class="kw">mapping</span>, <span class="kw">...</span>, <span class="kw">method</span> = <span class="st">"pearson"</span>) {
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_data_col.html">eval_data_col</a></span>(<span class="kw">data</span>, <span class="kw">mapping</span><span class="op">$</span><span class="kw">x</span>)
-  <span class="kw">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_data_col.html">eval_data_col</a></span>(<span class="kw">data</span>, <span class="kw">mapping</span><span class="op">$</span><span class="kw">y</span>)
-  <span class="kw">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="kw">x</span>, <span class="kw">y</span>, method = <span class="kw">method</span>)
-  <span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span>(<span class="kw">data</span>, <span class="kw">mapping</span>, <span class="kw">...</span>) <span class="op">+</span>
-    <span class="kw">ggplot2</span>::<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_label</a></span>(
-      data = <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-        x = <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="kw">x</span>, na.rm = <span class="fl">TRUE</span>),
-        y = <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="kw">y</span>, na.rm = <span class="fl">TRUE</span>),
-        lab = <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">cor</span>, digits = <span class="fl">3</span>)
-      ),
-      mapping = <span class="kw">ggplot2</span>::<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">x</span>, y = <span class="kw">y</span>, label = <span class="kw">lab</span>),
-      hjust = <span class="fl">0</span>, vjust = <span class="fl">1</span>,
-      size = <span class="fl">5</span>, fontface = <span class="st">"bold"</span>,
-      inherit.aes = <span class="fl">FALSE</span> <span class="co"># do not inherit anything from the ...</span>
-    )
-}
-<span class="fu"><a href="../reference/ggduo.html">ggduo</a></span>(
-  <span class="kw">psychademic</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span>(<span class="kw">psych_variables</span>), <span class="kw">academic_variables</span>,
-  mapping = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(color = <span class="kw">sex</span>),
-  types = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(continuous = <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span>(<span class="kw">lm_with_cor</span>, alpha = <span class="fl">0.25</span>)),
-  showStrips = <span class="fl">FALSE</span>,
-  title = <span class="st">"Between Academic and Psychological Variable Correlation"</span>,
-  xlab = <span class="st">"Psychological"</span>,
-  ylab = <span class="st">"Academic"</span>,
-  legend = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>,<span class="fl">2</span>)
-) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"bottom"</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_with_cor</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span>, <span class="va">...</span>, <span class="va">method</span> <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_data_col.html">eval_data_col</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span><span class="op">$</span><span class="va">x</span><span class="op">)</span>
+  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_data_col.html">eval_data_col</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>
+  <span class="va">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, method <span class="op">=</span> <span class="va">method</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span>, <span class="va">...</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_label</a></span><span class="op">(</span>
+      data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+        x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+        y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">y</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+        lab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cor</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+      <span class="op">)</span>,
+      mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, label <span class="op">=</span> <span class="va">lab</span><span class="op">)</span>,
+      hjust <span class="op">=</span> <span class="fl">0</span>, vjust <span class="op">=</span> <span class="fl">1</span>,
+      size <span class="op">=</span> <span class="fl">5</span>, fontface <span class="op">=</span> <span class="st">"bold"</span>,
+      inherit.aes <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># do not inherit anything from the ...</span>
+    <span class="op">)</span>
+<span class="op">}</span>
+<span class="fu"><a href="../reference/ggduo.html">ggduo</a></span><span class="op">(</span>
+  <span class="va">psychademic</span>, <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">psych_variables</span><span class="op">)</span>, <span class="va">academic_variables</span>,
+  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,
+  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span><span class="op">(</span><span class="va">lm_with_cor</span>, alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span><span class="op">)</span>,
+  showStrips <span class="op">=</span> <span class="cn">FALSE</span>,
+  title <span class="op">=</span> <span class="st">"Between Academic and Psychological Variable Correlation"</span>,
+  xlab <span class="op">=</span> <span class="st">"Psychological"</span>,
+  ylab <span class="op">=</span> <span class="st">"Academic"</span>,
+  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">2</span><span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-</pre></div>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-lm-1.png" width="700"></p>
 </div>
 <div id="multiple-time-series-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multiple-time-series-analysis" class="anchor"></a>Multiple Time Series Analysis</h2>
 <p>While displaying multiple time series vertically over time, such as <code>+ ggplot2::facet_grid(time ~ .)</code>, <code><a href="../reference/ggduo.html">ggduo()</a></code> can handle both continuous and discrete data. <code>ggplot2</code> does not mix discrete and continuous data on the same axis.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">pigs</span>)
-<span class="kw">pigs_dt</span> <span class="op">&lt;-</span> <span class="kw">pigs</span>[<span class="op">-</span>(<span class="fl">2</span><span class="op">:</span><span class="fl">3</span>)] <span class="co"># remove year and quarter</span>
-<span class="kw">pigs_dt</span><span class="op">$</span><span class="kw">profit_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw">pigs_dt</span><span class="op">$</span><span class="kw">profit</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">pigs_dt</span><span class="op">$</span><span class="kw">profit</span>))
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span>(
-  <span class="kw">time</span>, <span class="kw">value</span>,
-  data = <span class="kw">reshape</span>::<span class="fu"><a href="https://rdrr.io/pkg/reshape/man/melt-data-frame-da.html">melt.data.frame</a></span>(<span class="kw">pigs_dt</span>, <span class="st">"time"</span>),
-  geom = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"smooth"</span>, <span class="st">"point"</span>)
-) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">variable</span> <span class="op">~</span> <span class="kw">.</span>, scales = <span class="st">"free_y"</span>)
-<span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula 'y ~ x'</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">pigs</span><span class="op">)</span>
+<span class="va">pigs_dt</span> <span class="op">&lt;-</span> <span class="va">pigs</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co"># remove year and quarter</span>
+<span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span>
+  <span class="va">time</span>, <span class="va">value</span>,
+  data <span class="op">=</span> <span class="fu">reshape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reshape/man/melt-data-frame-da.html">melt.data.frame</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="st">"time"</span><span class="op">)</span>,
+  geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"smooth"</span>, <span class="st">"point"</span><span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">~</span> <span class="va">.</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span>
+<span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-1.png" width="700"></p>
 <p>Instead, we may use <code>ggts</code> to display the data. <code>ggts</code> changes the default behavior of ggduo of <code>columnLabelsX</code> to equal <code>NULL</code> and allows for mixed variable types.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="co"># make the profit group as a factor value</span>
-<span class="kw">profit_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-  <span class="st">"1"</span> = <span class="st">"high"</span>,
-  <span class="st">"0"</span> = <span class="st">"low"</span>
-)
-<span class="kw">pigs_dt</span><span class="op">$</span><span class="kw">profit_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(
-  <span class="kw">profit_groups</span>[<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw">pigs_dt</span><span class="op">$</span><span class="kw">profit_group</span>)],
-  levels = <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span>(<span class="kw">profit_groups</span>),
-  ordered = <span class="fl">TRUE</span>
-)
-<span class="fu"><a href="../reference/ggts.html">ggts</a></span>(<span class="kw">pigs_dt</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>)
-<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># make the profit group as a factor value</span>
+<span class="va">profit_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"high"</span>,
+  <span class="st">"0"</span> <span class="op">=</span> <span class="st">"low"</span>
+<span class="op">)</span>
+<span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span>
+  <span class="va">profit_groups</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit_group</span><span class="op">)</span><span class="op">]</span>,
+  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="va">profit_groups</span><span class="op">)</span>,
+  ordered <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
+<span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-group-1.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># remove the binwidth warning</span>
-<span class="kw">pigs_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  comboHorizontal = <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span>(<span class="kw">ggally_facethist</span>, binwidth = <span class="fl">1</span>)
-)
-<span class="fu"><a href="../reference/ggts.html">ggts</a></span>(<span class="kw">pigs_dt</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, types = <span class="kw">pigs_types</span>)
-</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># remove the binwidth warning</span>
+<span class="va">pigs_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  comboHorizontal <span class="op">=</span> <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span><span class="op">(</span><span class="va">ggally_facethist</span>, binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, types <span class="op">=</span> <span class="va">pigs_types</span><span class="op">)</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-group-2.png" width="700"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="co"># add color and legend</span>
-<span class="kw">pigs_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(color = <span class="kw">profit_group</span>)
-<span class="fu"><a href="../reference/ggts.html">ggts</a></span>(<span class="kw">pigs_dt</span>, <span class="kw">pigs_mapping</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, types = <span class="kw">pigs_types</span>, legend = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>,<span class="fl">1</span>))
-</pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># add color and legend</span>
+<span class="va">pigs_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">profit_group</span><span class="op">)</span>
+<span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="va">pigs_mapping</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, types <span class="op">=</span> <span class="va">pigs_types</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-group-3.png" width="700"></p>
 <p>Produce more meaningful labels, add a legend, and remove profit group strips.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggts.html">ggts</a></span>(
-  <span class="kw">pigs_dt</span>, <span class="kw">pigs_mapping</span>,
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span>
+  <span class="va">pigs_dt</span>, <span class="va">pigs_mapping</span>,
   <span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>,
-  types = <span class="kw">pigs_types</span>,
-  legend = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6</span>,<span class="fl">1</span>),
-  columnLabelsY = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+  types <span class="op">=</span> <span class="va">pigs_types</span>,
+  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">1</span><span class="op">)</span>,
+  columnLabelsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
     <span class="st">"number of\nfirst birth sows"</span>,
     <span class="st">"sell price over\nfeed cost"</span>,
     <span class="st">"sell count over\nheard size"</span>,
     <span class="st">"meat head count"</span>,
     <span class="st">"breading\nheard size"</span>,
     <span class="st">"profit\ngroup"</span>
-  ),
-  showStrips = <span class="fl">FALSE</span>
-) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(fill = <span class="st">"profit group"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
-    legend.position = <span class="st">"bottom"</span>,
-    strip.background = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(
-      fill = <span class="st">"transparent"</span>, color = <span class="st">"grey80"</span>
-    )
-  )
-<span class="kw">pm</span>
-</pre></div>
+  <span class="op">)</span>,
+  showStrips <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"profit group"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+    legend.position <span class="op">=</span> <span class="st">"bottom"</span>,
+    strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>
+      fill <span class="op">=</span> <span class="st">"transparent"</span>, color <span class="op">=</span> <span class="st">"grey80"</span>
+    <span class="op">)</span>
+  <span class="op">)</span>
+<span class="va">pm</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-pretty-1.png" width="700"></p>
 </div>
 <div id="regression-analysis" class="section level2">
@@ -327,44 +310,44 @@
 <a href="#regression-analysis" class="anchor"></a>Regression Analysis</h2>
 <p>Since <code><a href="../reference/ggduo.html">ggduo()</a></code> may take custom functions just like <code><a href="../reference/ggpairs.html">ggpairs()</a></code>, we will make a custom function that displays the residuals with a red line at 0 and all other y variables will receive a simple linear regression plot.</p>
 <p>Note: the marginal residuals are calculated before plotting and the y_range is found to display all residuals on the same scale.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="kw">swiss</span> <span class="op">&lt;-</span> <span class="kw">datasets</span>::<span class="kw"><a href="https://rdrr.io/r/datasets/swiss.html">swiss</a></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">swiss</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/swiss.html">swiss</a></span>
 
 <span class="co"># add a 'fake' column</span>
-<span class="kw">swiss</span><span class="op">$</span><span class="kw">Residual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">swiss</span>))
+<span class="va">swiss</span><span class="op">$</span><span class="va">Residual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">swiss</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># calculate all residuals prior to display</span>
-<span class="kw">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">swiss</span>[<span class="fl">2</span><span class="op">:</span><span class="fl">6</span>], <span class="fu">function</span>(<span class="kw">x</span>) {
-  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Fertility</span> <span class="op">~</span> <span class="kw">x</span>, data = <span class="kw">swiss</span>))<span class="op">$</span><span class="kw">residuals</span>
-})
+<span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">swiss</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Fertility</span> <span class="op">~</span> <span class="va">x</span>, data <span class="op">=</span> <span class="va">swiss</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">residuals</span>
+<span class="op">}</span><span class="op">)</span>
 <span class="co"># calculate a consistent y range for all residuals</span>
-<span class="kw">y_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span>(<span class="kw">residuals</span>))
+<span class="va">y_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">residuals</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># custom function to display continuous data. If the y variable is "Residual", do custom work.</span>
-<span class="kw">lm_or_resid</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>, <span class="kw">mapping</span>, <span class="kw">...</span>, <span class="kw">line_color</span> = <span class="st">"red"</span>, <span class="kw">line_size</span> = <span class="fl">1</span>) {
-  <span class="co">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw">mapping</span><span class="op">$</span><span class="kw">y</span>) != <span class="st">"Residual"</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span>(<span class="kw">data</span>, <span class="kw">mapping</span>, <span class="kw">...</span>))
-  }
+<span class="va">lm_or_resid</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span>, <span class="va">...</span>, <span class="va">line_color</span> <span class="op">=</span> <span class="st">"red"</span>, <span class="va">line_size</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">mapping</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"Residual"</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span>, <span class="va">...</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span>
 
   <span class="co"># make residual data to display</span>
-  <span class="kw">resid_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-    x = <span class="kw">data</span>[[<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw">mapping</span><span class="op">$</span><span class="kw">x</span>)]],
-    y = <span class="kw">residuals</span>[[<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw">mapping</span><span class="op">$</span><span class="kw">x</span>)]]
-  )
+  <span class="va">resid_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+    x <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">mapping</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>,
+    y <span class="op">=</span> <span class="va">residuals</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">mapping</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>
+  <span class="op">)</span>
 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(data = <span class="kw">data</span>, mapping = <span class="kw">mapping</span>) <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(yintercept = <span class="fl">0</span>, color = <span class="kw">line_color</span>, size = <span class="kw">line_size</span>) <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span>(<span class="kw">y_range</span>) <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(data = <span class="kw">resid_data</span>, mapping = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">x</span>, y = <span class="kw">y</span>), <span class="kw">...</span>)
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, mapping <span class="op">=</span> <span class="va">mapping</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="va">line_color</span>, size <span class="op">=</span> <span class="va">line_size</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="va">y_range</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">resid_data</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span>
 
-}
+<span class="op">}</span>
 
 <span class="co"># plot the data</span>
-<span class="fu"><a href="../reference/ggduo.html">ggduo</a></span>(
-  <span class="kw">swiss</span>,
-  <span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">7</span>),
-  types = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(continuous = <span class="kw">lm_or_resid</span>)
-)
+<span class="fu"><a href="../reference/ggduo.html">ggduo</a></span><span class="op">(</span>
+  <span class="va">swiss</span>,
+  <span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">7</span><span class="op">)</span>,
+  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="va">lm_or_resid</span><span class="op">)</span>
+<span class="op">)</span>
 <span class="co">#&gt; Warning: Using `as.character()` on a quosure is deprecated as of rlang 0.3.0.</span>
 <span class="co">#&gt; Please use `as_label()` or `as_name()` instead.</span>
 <span class="co">#&gt; This warning is displayed once per session.</span>
@@ -396,23 +379,22 @@
 <span class="co">#&gt; length &gt; 1 and only the first element will be used</span>
 
 <span class="co">#&gt; Warning in if (as.character(mapping$y) != "Residual") {: the condition has</span>
-<span class="co">#&gt; length &gt; 1 and only the first element will be used</span>
-</pre></div>
+<span class="co">#&gt; length &gt; 1 and only the first element will be used</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-reg-swiss-1.png" width="700"></p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># change line to be thicker and blue and the points to be slightly transparent</span>
-<span class="fu"><a href="../reference/ggduo.html">ggduo</a></span>(
-  <span class="kw">swiss</span>,
-  <span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">7</span>),
-  types = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    continuous = <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span>(<span class="kw">lm_or_resid</span>,
-      alpha = <span class="fl">0.7</span>,
-      line_color = <span class="st">"blue"</span>,
-      line_size = <span class="fl">3</span>
-    )
-  )
-)
+<span class="fu"><a href="../reference/ggduo.html">ggduo</a></span><span class="op">(</span>
+  <span class="va">swiss</span>,
+  <span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">7</span><span class="op">)</span>,
+  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    continuous <span class="op">=</span> <span class="fu"><a href="../reference/wrap_fn_with_param_arg.html">wrap</a></span><span class="op">(</span><span class="va">lm_or_resid</span>,
+      alpha <span class="op">=</span> <span class="fl">0.7</span>,
+      line_color <span class="op">=</span> <span class="st">"blue"</span>,
+      line_size <span class="op">=</span> <span class="fl">3</span>
+    <span class="op">)</span>
+  <span class="op">)</span>
+<span class="op">)</span>
 <span class="co">#&gt; Warning in if (as.character(mapping$y) != "Residual") {: the condition has</span>
 <span class="co">#&gt; length &gt; 1 and only the first element will be used</span>
 
@@ -441,8 +423,7 @@
 <span class="co">#&gt; length &gt; 1 and only the first element will be used</span>
 
 <span class="co">#&gt; Warning in if (as.character(mapping$y) != "Residual") {: the condition has</span>
-<span class="co">#&gt; length &gt; 1 and only the first element will be used</span>
-</pre></div>
+<span class="co">#&gt; length &gt; 1 and only the first element will be used</span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-reg-swiss-2.png" width="700"></p>
 </div>
 <div id="types-of-plots" class="section level2">
@@ -482,7 +463,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
