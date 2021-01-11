@@ -16,7 +16,7 @@ The R package 'ggplot2' is a plotting system based on the grammar of graphics.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://ggobi.github.io/ggally}
+  \item \url{https://ggobi.github.io/ggally/}
   \item \url{https://github.com/ggobi/ggally}
   \item Report bugs at \url{https://github.com/ggobi/ggally/issues}
 }

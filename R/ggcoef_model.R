@@ -20,123 +20,126 @@
 #' @param ... parameters passed to [ggcoef_plot()]
 #' @details
 #' `ggcoef_model()`, `ggcoef_multinom()` and `ggcoef_compare()` use
-#' [broom.helpers::tidy_plus_plus()] to obtain a tibble of the model
+#' [broom.helpers::tidy_plus_plus()] to obtain a `tibble` of the model
 #' coefficients, apply additional data transformation and then pass the
-#' produced tibble to `ggcoef_plot()` to generate the plot.
+#' produced `tibble` to `ggcoef_plot()` to generate the plot.
 #'
 #' For more control, you can use the argument `return_data = TRUE` to
-#' get the produced tibble, apply any transformation of your own and
-#' then pass your customised tibble to `ggcoef_plot()`.
+#' get the produced `tibble`, apply any transformation of your own and
+#' then pass your customized `tibble` to `ggcoef_plot()`.
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
-#' mod_simple <- lm(tip ~ day + time + total_bill, data = tips)
-#' p_(ggcoef_model(mod_simple))
+#' if (require(broom.helpers)) {
+#'   data(tips, package = "reshape")
+#'   mod_simple <- lm(tip ~ day + time + total_bill, data = tips)
+#'   p_(ggcoef_model(mod_simple))
 #'
-#' # custom variable labels
-#' # you can use the labelled package to define variable labels before computing model
-#' if (require(labelled)) {
-#'   tips_labelled <- tips %>%
-#'     labelled::set_variable_labels(
-#'       day = "Day of the week",
-#'       time = "Lunch or Dinner",
-#'       total_bill = "Bill's total"
+#'   # custom variable labels
+#'   # you can use the labelled package to define variable labels before computing model
+#'   if (require(labelled)) {
+#'     tips_labelled <- tips %>%
+#'       labelled::set_variable_labels(
+#'         day = "Day of the week",
+#'         time = "Lunch or Dinner",
+#'         total_bill = "Bill's total"
+#'       )
+#'     mod_labelled <- lm(tip ~ day + time + total_bill, data = tips_labelled)
+#'     p_(ggcoef_model(mod_labelled))
+#'   }
+#'   # you can provide custom variable labels with 'variable_labels'
+#'   p_(ggcoef_model(
+#'     mod_simple,
+#'     variable_labels = c(
+#'       day = "Week day",
+#'       time = "Time (lunch or dinner ?)",
+#'       total_bill = "Total of the bill"
 #'     )
-#'   mod_labelled <- lm(tip ~ day + time + total_bill, data = tips_labelled)
-#'   p_(ggcoef_model(mod_labelled))
-#' }
-#' # you can provide custom variable labels with 'variable_labels'
-#' p_(ggcoef_model(
-#'   mod_simple,
-#'   variable_labels = c(
-#'     day = "Week day",
-#'     time = "Time (lunch or dinner ?)",
-#'     total_bill = "Total of the bill"
+#'   ))
+#'   # if labels are too long, you can use 'facet_labeller' to wrap them
+#'   p_(ggcoef_model(
+#'     mod_simple,
+#'     variable_labels = c(
+#'       day = "Week day",
+#'       time = "Time (lunch or dinner ?)",
+#'       total_bill = "Total of the bill"
+#'     ),
+#'     facet_labeller = label_wrap_gen(10)
+#'   ))
+#'
+#'   # do not display variable facets but add colour guide
+#'   p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
+#'
+#'   # a logistic regression example
+#'   d_titanic <- as.data.frame(Titanic)
+#'   d_titanic$Survived <- factor(d_titanic$Survived, c("No", "Yes"))
+#'   mod_titanic <- glm(
+#'     Survived ~ Sex * Age + Class,
+#'     weights = Freq,
+#'     data = d_titanic,
+#'     family = binomial
 #'   )
-#' ))
-#' # if labels are too long, you can use 'facet_labeller' to wrap them
-#' p_(ggcoef_model(
-#'   mod_simple,
-#'   variable_labels = c(
-#'     day = "Week day",
-#'     time = "Time (lunch or dinner ?)",
-#'     total_bill = "Total of the bill"
-#'   ),
-#'   facet_labeller = label_wrap_gen(10)
-#' ))
 #'
-#' # do not display variable facets but add colour guide
-#' p_(ggcoef_model(mod_simple, facet_row = NULL, colour_guide = TRUE))
+#'   # use 'exponentiate = TRUE' to get the Odds Ratio
+#'   p_(ggcoef_model(mod_titanic, exponentiate = TRUE))
 #'
-#' # a logistic regression example
-#' d_titanic <- as.data.frame(Titanic)
-#' d_titanic$Survived <- factor(d_titanic$Survived, c("No", "Yes"))
-#' mod_titanic <- glm(
-#'   Survived ~ Sex * Age + Class,
-#'   weights = Freq,
-#'   data = d_titanic,
-#'   family = binomial
-#' )
+#'   # display intercepts
+#'   p_(ggcoef_model(mod_titanic, exponentiate = TRUE, intercept = TRUE))
 #'
-#' # use 'exponentiate = TRUE' to get the Odds Ratio
-#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE))
+#'   # customize terms labels
+#'   p_(
+#'     ggcoef_model(
+#'       mod_titanic,
+#'       exponentiate = TRUE,
+#'       show_p_values = FALSE,
+#'       signif_stars = FALSE,
+#'       add_reference_rows = FALSE,
+#'       categorical_terms_pattern = "{level} (ref: {reference_level})",
+#'       interaction_sep = " x "
+#'     ) +
+#'     scale_y_discrete(labels = scales::label_wrap(15))
+#'   )
 #'
-#' # display intercepts
-#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE, intercept = TRUE))
+#'   # display only a subset of terms
+#'   p_(ggcoef_model(mod_titanic, exponentiate = TRUE, include = c("Age", "Class")))
 #'
-#' # customize terms labels
-#' p_(
-#'   ggcoef_model(
+#'   # do not change points' shape based on significance
+#'   p_(ggcoef_model(mod_titanic, exponentiate = TRUE, significance = NULL))
+#'
+#'   # a black and white version
+#'   p_(ggcoef_model(
+#'     mod_titanic, exponentiate = TRUE,
+#'     colour = NULL, stripped_rows = FALSE
+#'   ))
+#'
+#'   # show dichotomous terms on one row
+#'   p_(ggcoef_model(
 #'     mod_titanic,
 #'     exponentiate = TRUE,
-#'     show_p_values = FALSE,
-#'     signif_stars = FALSE,
-#'     add_reference_rows = FALSE,
-#'     categorical_terms_pattern = "{level} (ref: {reference_level})",
-#'     interaction_sep = " x "
-#'   ) +
-#'   scale_y_discrete(labels = scales::label_wrap(15))
-#' )
+#'     no_reference_row = broom.helpers::all_dichotomous(),
+#'     categorical_terms_pattern =
+#'       "{ifelse(dichotomous, paste0(level, ' / ', reference_level), level)}",
+#'     show_p_values = FALSE
+#'   ))
 #'
-#' # display only a subset of terms
-#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE, include = c("Age", "Class")))
+#'   # works also with with polynomial terms
+#'   mod_poly <- lm(
+#'     tip ~ poly(total_bill, 3) + day,
+#'     data = tips,
+#'   )
+#'   p_(ggcoef_model(mod_poly))
 #'
-#' # do not change points' shape based on significance
-#' p_(ggcoef_model(mod_titanic, exponentiate = TRUE, significance = NULL))
-#'
-#' # a black and white version
-#' p_(ggcoef_model(
-#'   mod_titanic, exponentiate = TRUE,
-#'   colour = NULL, stripped_rows = FALSE
-#' ))
-#'
-#' # show dichotomous terms on one row
-#' p_(ggcoef_model(
-#'   mod_titanic,
-#'   exponentiate = TRUE,
-#'   no_reference_row = broom.helpers::all_dichotomous(),
-#'   categorical_terms_pattern = "{ifelse(dichotomous, paste0(level, ' / ', reference_level), level)}",
-#'   show_p_values = FALSE
-#' ))
-#'
-#' # works also with with polynomial terms
-#' mod_poly <- lm(
-#'   tip ~ poly(total_bill, 3) + day,
-#'   data = tips,
-#' )
-#' p_(ggcoef_model(mod_poly))
-#'
-#' # or with different type of contrasts
-#' # for sum contrasts, the value of the reference term is computed
-#' mod2 <- lm(
-#'   tip ~ day + time + sex,
-#'   data = tips,
-#'   contrasts = list(time = contr.sum, day = contr.treatment(4, base = 3))
-#' )
-#' p_(ggcoef_model(mod2))
+#'   # or with different type of contrasts
+#'   # for sum contrasts, the value of the reference term is computed
+#'   mod2 <- lm(
+#'     tip ~ day + time + sex,
+#'     data = tips,
+#'     contrasts = list(time = contr.sum, day = contr.treatment(4, base = 3))
+#'   )
+#'   p_(ggcoef_model(mod2))
+#' }
 ggcoef_model <- function (
   model,
   tidy_fun = broom::tidy,
@@ -225,22 +228,24 @@ ggcoef_model <- function (
 #' @describeIn ggcoef_model Designed for displaying several models on the same plot.
 #' @export
 #' @param models named list of models
-#' @param type a dodged plot or a facetted plot?
+#' @param type a dodged plot or a faceted plot?
 #' @examples
 #'
-#' # Use ggcoef_compare() for comparing several models on the same plot
-#' mod1 <- lm(Fertility ~ ., data = swiss)
-#' mod2 <- step(mod1, trace = 0)
-#' mod3 <- lm(Fertility ~ Agriculture + Education * Catholic, data = swiss)
-#' models <- list("Full model" = mod1, "Simplified model" = mod2, "With interaction" = mod3)
+#' if (require(broom.helpers)) {
+#'   # Use ggcoef_compare() for comparing several models on the same plot
+#'   mod1 <- lm(Fertility ~ ., data = swiss)
+#'   mod2 <- step(mod1, trace = 0)
+#'   mod3 <- lm(Fertility ~ Agriculture + Education * Catholic, data = swiss)
+#'   models <- list("Full model" = mod1, "Simplified model" = mod2, "With interaction" = mod3)
 #'
-#' p_(ggcoef_compare(models))
-#' p_(ggcoef_compare(models, type = "faceted"))
+#'   p_(ggcoef_compare(models))
+#'   p_(ggcoef_compare(models, type = "faceted"))
 #'
-#' # you can reverse the vertical position of the point by using a negative value
-#' # for dodged_width (but it will produce some warnings)
+#'   # you can reverse the vertical position of the point by using a negative value
+#'   # for dodged_width (but it will produce some warnings)
 #' \dontrun{
 #'   p_(ggcoef_compare(models, dodged_width = -.9))
+#' }
 #' }
 ggcoef_compare <- function (
   models,
@@ -344,12 +349,12 @@ ggcoef_compare <- function (
 }
 
 #' @describeIn ggcoef_model A variation of [ggcoef_model()] adapted to multinomial logistic regressions performed with [nnet::multinom()].
-#' @param y.level_label an optional named vector for labelling `y.level` (see examples)
+#' @param y.level_label an optional named vector for labeling `y.level` (see examples)
 #' @export
 #' @examples
 #'
 #' # specific function for nnet::multinom models
-#' if (require(nnet)) {
+#' if (require(broom.helpers) && require(nnet)) {
 #'   data(happy)
 #'   mod <- multinom(happy ~ age + degree + sex, data = happy)
 #'   p_(ggcoef_multinom(mod, exponentiate = TRUE))
@@ -547,17 +552,17 @@ ggcoef_data <- function (
 #' @param shape_lab label of the shape aesthetic in the legend
 #' @param errorbar should error bars be plotted?
 #' @param errorbar_height height of error bars
-#' @param errorbar_coloured should error bars be coloured as the points?
+#' @param errorbar_coloured should error bars be colored as the points?
 #' @param stripped_rows should stripped rows be displayed in the background?
 #' @param strips_odd color of the odd rows
 #' @param strips_even color of the even rows
-#' @param vline should a vertical line de drawn at 0 (or 1 if `exponentiate = TRUE`)?
+#' @param vline should a vertical line be drawn at 0 (or 1 if `exponentiate = TRUE`)?
 #' @param vline_colour colour of vertical line
 #' @param dodged should points be dodged (according to the colour aesthetic)?
 #' @param dodged_width width value for [ggplot2::position_dodge()]
 #' @param facet_row variable name to be used for row facets
 #' @param facet_col optional variable name to be used for column facets
-#' @param facet_labeller labeller function to be used for labelling facets;
+#' @param facet_labeller labeller function to be used for labeling facets;
 #'   if labels are too long, you can use [ggplot2::label_wrap_gen()] (see examples),
 #'   more information in the documentation of [ggplot2::facet_grid()]
 #' @export
