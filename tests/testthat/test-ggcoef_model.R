@@ -124,3 +124,17 @@ test_that("example of ggcoef_model", {
 
 
 })
+
+test_that("ggcoef_model works with tieders not returning p-values", {
+  mod <- lm(Sepal.Width ~ Species, iris)
+  my_tidier <- function(x, ...) {
+    x %>%
+      broom::tidy(...) %>%
+      dplyr::select(-.data$p.value)
+  }
+  expect_error(
+    mod %>% ggcoef_model(tidy_fun = my_tidier),
+    NA
+  )
+
+})

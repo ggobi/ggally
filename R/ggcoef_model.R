@@ -495,6 +495,11 @@ ggcoef_data <- function (
     keep_model = FALSE
   )
 
+  if (!"p.value" %in% names(data)) {
+    data$p.value <- NA_real_
+    significance <- NULL
+  }
+
   if(!is.null(significance)) {
     if (is.null(significance_labels))
       significance_labels <- paste(c("p \u2264", "p >"), significance)
