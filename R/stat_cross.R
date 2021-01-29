@@ -141,11 +141,9 @@ StatCross <- ggproto("StatCross", Stat,
     if(is.numeric(data$x)) panel$x <- as.numeric(panel$x)
     if(is.numeric(data$y)) panel$y <- as.numeric(panel$y)
 
-    # keeping first value of colour if provided
-    if ("colour" %in% names(data)) {
-      data <- data[!duplicated(data$x, data$y), ]
-      panel <- merge(panel, data[, c("x", "y", "colour")], by = c("x", "y"), all.x = TRUE)
-    }
+    # keeping first value of other aesthetics in data
+    panel <- merge(panel, data, by = c("x", "y"), all.x = TRUE)
+    panel <- panel %>% dplyr::distinct(.data$x, .data$y, .keep_all = TRUE)
 
     if (!keep.zero.cells) {
       panel <- panel[panel$observed != 0,]
