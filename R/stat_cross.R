@@ -363,8 +363,8 @@ ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_t
 #' data(tips, package = "reshape")
 #'
 #' # differences with ggally_table()
-#' p_(ggally_table(tips, mapping = aes(x = day, y = time)))
-#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = time)))
+#' p_(ggally_table(tips, mapping = aes(x = day, y = sex)))
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex)))
 #'
 #' # display column proportions
 #' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop"))
