@@ -92,12 +92,15 @@ test_that("example of ggcoef_model", {
 
   # or with different type of contrasts
   # for sum contrasts, the value of the reference term is computed
-  mod2 <- lm(
-    tip ~ day + time + sex,
-    data = tips,
-    contrasts = list(time = contr.sum, day = contr.treatment(4, base = 3))
-  )
-  expect_print(ggcoef_model(mod2))
+  if (requireNamespace("emmeans")) {
+    mod2 <- lm(
+      tip ~ day + time + sex,
+      data = tips,
+      contrasts = list(time = contr.sum, day = contr.treatment(4, base = 3))
+    )
+    expect_print(ggcoef_model(mod2))
+
+  }
 
   # Use ggcoef_compare() for comparing several models on the same plot
   mod1 <- lm(Fertility ~ ., data = swiss)
