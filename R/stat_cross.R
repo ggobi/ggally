@@ -142,7 +142,13 @@ StatCross <- ggproto("StatCross", Stat,
     if(is.numeric(data$y)) panel$y <- as.numeric(panel$y)
 
     # keeping first value of other aesthetics in data
-    panel <- merge(panel, data, by = c("x", "y"), all.x = TRUE)
+    panel <- merge(
+      panel,
+      dplyr::select(data, -.data$PANEL),
+      by = c("x", "y"),
+      all.x = TRUE
+    )
+
     panel <- panel %>% dplyr::distinct(.data$x, .data$y, .keep_all = TRUE)
 
     if (!keep.zero.cells) {
@@ -363,8 +369,8 @@ ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_t
 #' data(tips, package = "reshape")
 #'
 #' # differences with ggally_table()
-#' p_(ggally_table(tips, mapping = aes(x = day, y = sex)))
-#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex)))
+#' p_(ggally_table(tips, mapping = aes(x = day, y = time)))
+#' p_(ggally_crosstable(tips, mapping = aes(x = day, y = time)))
 #'
 #' # display column proportions
 #' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), cells = "col.prop"))
