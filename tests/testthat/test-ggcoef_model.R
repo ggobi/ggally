@@ -130,6 +130,9 @@ test_that("example of ggcoef_model", {
 })
 
 test_that("ggcoef_model works with tieders not returning p-values", {
+  skip_if_not_installed("broom.helpers")
+  skip_if_not_installed("scagnostics")
+
   mod <- lm(Sepal.Width ~ Species, iris)
   my_tidier <- function(x, ...) {
     x %>%
