@@ -92,7 +92,8 @@ test_that("example of ggcoef_model", {
 
   # or with different type of contrasts
   # for sum contrasts, the value of the reference term is computed
-  if (requireNamespace("emmeans")) {
+  emmeans_is_installed <- (system.file(package = "emmeans") != "")
+  if (emmeans_is_installed) {
     mod2 <- lm(
       tip ~ day + time + sex,
       data = tips,
