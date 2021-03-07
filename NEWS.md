@@ -1,3 +1,12 @@
+# GGally 2.1.1
+
+### Bug fixes
+
+* Ignore `colour` aesthetic if all values are `NA`. (@larmarange, #404)
+* Avoid all duplicates within `stat_cross()`. (@larmarange, #402)
+* Avoid an error when tidiers do not return p-values. (@larmarange, #400)
+* Suggest `emmeans` to allow `ggcoef()` example to execute. (#407)
+
 # GGally 2.1.0
 
 ### Breaking changes
