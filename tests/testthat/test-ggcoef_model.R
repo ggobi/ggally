@@ -92,12 +92,16 @@ test_that("example of ggcoef_model", {
 
   # or with different type of contrasts
   # for sum contrasts, the value of the reference term is computed
-  mod2 <- lm(
-    tip ~ day + time + sex,
-    data = tips,
-    contrasts = list(time = contr.sum, day = contr.treatment(4, base = 3))
-  )
-  expect_print(ggcoef_model(mod2))
+  emmeans_is_installed <- (system.file(package = "emmeans") != "")
+  if (emmeans_is_installed) {
+    mod2 <- lm(
+      tip ~ day + time + sex,
+      data = tips,
+      contrasts = list(time = contr.sum, day = contr.treatment(4, base = 3))
+    )
+    expect_print(ggcoef_model(mod2))
+
+  }
 
   # Use ggcoef_compare() for comparing several models on the same plot
   mod1 <- lm(Fertility ~ ., data = swiss)
@@ -122,5 +126,22 @@ test_that("example of ggcoef_model", {
     )
   ))
 
+
+})
+
+test_that("ggcoef_model works with tieders not returning p-values", {
+  skip_if_not_installed("broom.helpers")
+  skip_if_not_installed("scagnostics")
+
+  mod <- lm(Sepal.Width ~ Species, iris)
+  my_tidier <- function(x, ...) {
+    x %>%
+      broom::tidy(...) %>%
+      dplyr::select(-.data$p.value)
+  }
+  expect_error(
+    mod %>% ggcoef_model(tidy_fun = my_tidier),
+    NA
+  )
 
 })
