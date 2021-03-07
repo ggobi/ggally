@@ -51,6 +51,7 @@ articles:
   navbar: Specialized ggplot2 plot
   # desc: description here
   contents:
+  - ggcoef_model
   - ggcoef
   - ggnetworkmap
   - ggsurv
