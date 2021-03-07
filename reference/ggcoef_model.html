@@ -64,9 +64,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -629,15 +635,20 @@ then pass your customized <code>tibble</code> to <code>ggcoef_plot()</code>.</p>
 
   <span class='co'># or with different type of contrasts</span>
   <span class='co'># for sum contrasts, the value of the reference term is computed</span>
-  <span class='va'>mod2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>
-    <span class='va'>tip</span> <span class='op'>~</span> <span class='va'>day</span> <span class='op'>+</span> <span class='va'>time</span> <span class='op'>+</span> <span class='va'>sex</span>,
-    data <span class='op'>=</span> <span class='va'>tips</span>,
-    contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>time <span class='op'>=</span> <span class='va'>contr.sum</span>, day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>4</span>, base <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-  <span class='op'>)</span>
-  <span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcoef_model</span><span class='op'>(</span><span class='va'>mod2</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rvlenth/emmeans'>emmeans</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>mod2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>
+      <span class='va'>tip</span> <span class='op'>~</span> <span class='va'>day</span> <span class='op'>+</span> <span class='va'>time</span> <span class='op'>+</span> <span class='va'>sex</span>,
+      data <span class='op'>=</span> <span class='va'>tips</span>,
+      contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>time <span class='op'>=</span> <span class='va'>contr.sum</span>, day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/contrast.html'>contr.treatment</a></span><span class='op'>(</span><span class='fl'>4</span>, base <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='op'>)</span>
+    <span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcoef_model</span><span class='op'>(</span><span class='va'>mod2</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Loading required package: broom.helpers</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: labelled</span></div><div class='img'><img src='ggcoef_model-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; <span class='message'>Scale for 'y' is already present. Adding another scale for 'y', which will</span>
-#&gt; <span class='message'>replace the existing scale.</span></div><div class='img'><img src='ggcoef_model-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-8.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-9.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-10.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-11.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-12.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-13.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-14.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; <span class='message'>replace the existing scale.</span></div><div class='img'><img src='ggcoef_model-7.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-8.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-9.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-10.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-11.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-12.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; <span class='message'>Loading required package: emmeans</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘emmeans’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:GGally’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    pigs</span></div><div class='img'><img src='ggcoef_model-13.png' alt='' width='700' height='433' /></div><div class='img'><img src='ggcoef_model-14.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://larmarange.github.io/broom.helpers/'>broom.helpers</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='co'># Use ggcoef_compare() for comparing several models on the same plot</span>
   <span class='va'>mod1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Fertility</span> <span class='op'>~</span> <span class='va'>.</span>, data <span class='op'>=</span> <span class='va'>swiss</span><span class='op'>)</span>
@@ -686,11 +697,11 @@ then pass your customized <code>tibble</code> to <code>ggcoef_plot()</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://schloerke.com/'>Barret Schloerke</a>, <a href='http://www.dicook.org/'>Di Cook</a>, <a href='https://joseph.larmarange.net/'>Joseph Larmarange</a>, <a href='https://f.briatte.org/'>Francois Briatte</a>, <a href='http://moritz-marbach.com/'>Moritz Marbach</a>, <a href='https://edwinth.github.io/'>Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p><p>Developed by <a href="http://schloerke.com/" class="external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
       </footer>
@@ -715,6 +726,8 @@ then pass your customized <code>tibble</code> to <code>ggcoef_plot()</code>.</p>
 </script>
 
 
+
+  
 
   </body>
 </html>
