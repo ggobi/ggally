@@ -67,7 +67,8 @@ Suggests:
     testthat,
     crosstalk,
     knitr,
-    spelling
+    spelling,
+    emmeans
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 SystemRequirements: openssl
