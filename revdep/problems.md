@@ -6,7 +6,7 @@
 * GitHub: NA
 * Source code: https://github.com/cran/adventr
 * Date/Publication: 2020-05-05 16:50:06 UTC
-* Number of recursive dependencies: 169
+* Number of recursive dependencies: 162
 
 Run `revdep_details(, "adventr")` for more info
 
@@ -38,7 +38,7 @@ Run `revdep_details(, "adventr")` for more info
 * GitHub: https://github.com/MazamaScience/AirSensor
 * Source code: https://github.com/cran/AirSensor
 * Date/Publication: 2020-10-08 12:10:02 UTC
-* Number of recursive dependencies: 181
+* Number of recursive dependencies: 186
 
 Run `revdep_details(, "AirSensor")` for more info
 
@@ -55,11 +55,11 @@ Run `revdep_details(, "AirSensor")` for more info
 
 <details>
 
-* Version: 1.6.0
+* Version: 1.6.1
 * GitHub: https://github.com/csoneson/alevinQC
 * Source code: https://github.com/cran/alevinQC
-* Date/Publication: 2020-10-27
-* Number of recursive dependencies: 91
+* Date/Publication: 2021-02-02
+* Number of recursive dependencies: 100
 
 Run `revdep_details(, "alevinQC")` for more info
 
@@ -82,7 +82,7 @@ Run `revdep_details(, "alevinQC")` for more info
 * GitHub: https://github.com/itsvenu/ALPS
 * Source code: https://github.com/cran/ALPS
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 194
+* Number of recursive dependencies: 197
 
 Run `revdep_details(, "ALPS")` for more info
 
@@ -102,10 +102,10 @@ Run `revdep_details(, "ALPS")` for more info
 
 <details>
 
-* Version: 3.0.4
+* Version: 3.0.5
 * GitHub: NA
 * Source code: https://github.com/cran/AlpsNMR
-* Date/Publication: 2020-11-19
+* Date/Publication: 2021-01-20
 * Number of recursive dependencies: 163
 
 Run `revdep_details(, "AlpsNMR")` for more info
@@ -154,7 +154,7 @@ Run `revdep_details(, "AlpsNMR")` for more info
 * GitHub: https://github.com/sndmrc/BasketballAnalyzeR
 * Source code: https://github.com/cran/BasketballAnalyzeR
 * Date/Publication: 2020-06-26 09:00:11 UTC
-* Number of recursive dependencies: 91
+* Number of recursive dependencies: 76
 
 Run `revdep_details(, "BasketballAnalyzeR")` for more info
 
@@ -169,6 +169,30 @@ Run `revdep_details(, "BasketballAnalyzeR")` for more info
       All declared Imports should be used.
     ```
 
+# bayestestR
+
+<details>
+
+* Version: 0.8.2
+* GitHub: https://github.com/easystats/bayestestR
+* Source code: https://github.com/cran/bayestestR
+* Date/Publication: 2021-01-26 17:40:03 UTC
+* Number of recursive dependencies: 209
+
+Run `revdep_details(, "bayestestR")` for more info
+
+</details>
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  9.1Mb
+      sub-directories of 1Mb or more:
+        doc    7.2Mb
+        help   1.3Mb
+    ```
+
 # BGGM
 
 <details>
@@ -177,7 +201,7 @@ Run `revdep_details(, "BasketballAnalyzeR")` for more info
 * GitHub: https://github.com/donaldRwilliams/BGGM
 * Source code: https://github.com/cran/BGGM
 * Date/Publication: 2020-12-03 08:20:06 UTC
-* Number of recursive dependencies: 193
+* Number of recursive dependencies: 167
 
 Run `revdep_details(, "BGGM")` for more info
 
@@ -211,7 +235,7 @@ Run `revdep_details(, "bigPint")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  7.7Mb
+      installed size is  7.8Mb
       sub-directories of 1Mb or more:
         data             2.1Mb
         doc              2.3Mb
@@ -226,13 +250,13 @@ Run `revdep_details(, "bigPint")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/bootcluster
 * Date/Publication: 2020-10-20 14:50:06 UTC
-* Number of recursive dependencies: 81
+* Number of recursive dependencies: 68
 
 Run `revdep_details(, "bootcluster")` for more info
 
 </details>
 
-## Newly broken
+## In both
 
 *   checking whether package ‘bootcluster’ can be installed ... WARNING
     ```
@@ -249,7 +273,7 @@ Run `revdep_details(, "bootcluster")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/CeTF
 * Date/Publication: 2020-11-23
-* Number of recursive dependencies: 228
+* Number of recursive dependencies: 229
 
 Run `revdep_details(, "CeTF")` for more info
 
@@ -259,7 +283,7 @@ Run `revdep_details(, "CeTF")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.2Mb
+      installed size is  5.3Mb
       sub-directories of 1Mb or more:
         data   1.6Mb
         doc    2.5Mb
@@ -269,11 +293,11 @@ Run `revdep_details(, "CeTF")` for more info
 
 <details>
 
-* Version: 1.1.53
+* Version: 1.1.54
 * GitHub: NA
 * Source code: https://github.com/cran/CINNA
-* Date/Publication: 2019-02-25 12:50:14 UTC
-* Number of recursive dependencies: 152
+* Date/Publication: 2021-01-28 15:00:02 UTC
+* Number of recursive dependencies: 138
 
 Run `revdep_details(, "CINNA")` for more info
 
@@ -310,40 +334,51 @@ Run `revdep_details(, "CluMSID")` for more info
         doc   5.6Mb
     ```
 
-# ctsem
+# communication
 
 <details>
 
-* Version: 3.4.1
-* GitHub: https://github.com/cdriveraus/ctsem
-* Source code: https://github.com/cran/ctsem
-* Date/Publication: 2020-12-18 13:00:25 UTC
-* Number of recursive dependencies: 132
+* Version: 0.1
+* GitHub: NA
+* Source code: https://github.com/cran/communication
+* Date/Publication: 2021-02-25 09:20:02 UTC
+* Number of recursive dependencies: 89
 
-Run `revdep_details(, "ctsem")` for more info
+Run `revdep_details(, "communication")` for more info
 
 </details>
 
 ## In both
 
-*   checking installed package size ... NOTE
-    ```
-      installed size is 14.5Mb
-      sub-directories of 1Mb or more:
-        R      2.1Mb
-        data   1.6Mb
-        libs   9.6Mb
-    ```
-
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘pkgbuild’
+    Namespaces in Imports field not imported from:
+      ‘GGally’ ‘RColorBrewer’ ‘abind’ ‘diagram’ ‘ggplot2’ ‘grid’ ‘gtable’
+      ‘igraph’ ‘magrittr’ ‘plyr’ ‘purrr’ ‘reshape2’ ‘scales’ ‘useful’
       All declared Imports should be used.
     ```
 
-*   checking for GNU extensions in Makefiles ... NOTE
+# discourseGT
+
+<details>
+
+* Version: 1.1.4
+* GitHub: NA
+* Source code: https://github.com/cran/discourseGT
+* Date/Publication: 2021-02-17 07:20:02 UTC
+* Number of recursive dependencies: 106
+
+Run `revdep_details(, "discourseGT")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
     ```
-    GNU make is a SystemRequirements.
+    Namespaces in Imports field not imported from:
+      ‘BiocManager’ ‘sna’
+      All declared Imports should be used.
     ```
 
 # egoTERGM
@@ -354,7 +389,7 @@ Run `revdep_details(, "ctsem")` for more info
 * GitHub: https://github.com/benjamin-w-campbell/egoTERGM
 * Source code: https://github.com/cran/egoTERGM
 * Date/Publication: 2019-05-17 13:20:03 UTC
-* Number of recursive dependencies: 90
+* Number of recursive dependencies: 82
 
 Run `revdep_details(, "egoTERGM")` for more info
 
@@ -375,7 +410,7 @@ Run `revdep_details(, "egoTERGM")` for more info
 * GitHub: https://github.com/chjackson/fic
 * Source code: https://github.com/cran/fic
 * Date/Publication: 2019-04-13 08:32:39 UTC
-* Number of recursive dependencies: 98
+* Number of recursive dependencies: 104
 
 Run `revdep_details(, "fic")` for more info
 
@@ -397,7 +432,7 @@ Run `revdep_details(, "fic")` for more info
 * GitHub: https://github.com/NA/NA
 * Source code: https://github.com/cran/fingerPro
 * Date/Publication: 2018-08-28 10:04:54 UTC
-* Number of recursive dependencies: 165
+* Number of recursive dependencies: 162
 
 Run `revdep_details(, "fingerPro")` for more info
 
@@ -415,11 +450,11 @@ Run `revdep_details(, "fingerPro")` for more info
 
 <details>
 
-* Version: 2.20.0
+* Version: 2.20.1
 * GitHub: https://github.com/UW-GAC/GENESIS
 * Source code: https://github.com/cran/GENESIS
-* Date/Publication: 2020-10-27
-* Number of recursive dependencies: 162
+* Date/Publication: 2021-01-28
+* Number of recursive dependencies: 165
 
 Run `revdep_details(, "GENESIS")` for more info
 
@@ -458,7 +493,7 @@ Run `revdep_details(, "GENESIS")` for more info
 * GitHub: https://github.com/tengfei/ggbio
 * Source code: https://github.com/cran/ggbio
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 162
+* Number of recursive dependencies: 167
 
 Run `revdep_details(, "ggbio")` for more info
 
@@ -517,7 +552,7 @@ Run `revdep_details(, "ggbio")` for more info
 * GitHub: https://github.com/dongjunchung/GGPA
 * Source code: https://github.com/cran/GGPA
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 77
+* Number of recursive dependencies: 70
 
 Run `revdep_details(, "GGPA")` for more info
 
@@ -554,7 +589,7 @@ Run `revdep_details(, "GGPA")` for more info
 * GitHub: https://github.com/ggPMXdevelopment/ggPMX
 * Source code: https://github.com/cran/ggPMX
 * Date/Publication: 2020-06-25 15:50:09 UTC
-* Number of recursive dependencies: 71
+* Number of recursive dependencies: 78
 
 Run `revdep_details(, "ggPMX")` for more info
 
@@ -571,11 +606,11 @@ Run `revdep_details(, "ggPMX")` for more info
 
 <details>
 
-* Version: 0.1.9
+* Version: 0.2.0
 * GitHub: https://github.com/smouksassi/ggquickeda
 * Source code: https://github.com/cran/ggquickeda
-* Date/Publication: 2020-12-16 13:40:02 UTC
-* Number of recursive dependencies: 173
+* Date/Publication: 2021-02-15 12:40:02 UTC
+* Number of recursive dependencies: 167
 
 Run `revdep_details(, "ggquickeda")` for more info
 
@@ -587,10 +622,9 @@ Run `revdep_details(, "ggquickeda")` for more info
     ```
     Namespaces in Imports field not imported from:
       ‘DT’ ‘Formula’ ‘GGally’ ‘Hmisc’ ‘RPostgres’ ‘colourpicker’ ‘dplyr’
-      ‘ggpmisc’ ‘ggpubr’ ‘ggrepel’ ‘ggstance’ ‘grDevices’ ‘grid’
-      ‘gridExtra’ ‘lazyeval’ ‘markdown’ ‘plotly’ ‘quantreg’ ‘rlang’
-      ‘shinyFiles’ ‘shinyjqui’ ‘shinyjs’ ‘survival’ ‘survminer’ ‘table1’
-      ‘tidyr’
+      ‘ggpmisc’ ‘ggpubr’ ‘ggrepel’ ‘gridExtra’ ‘markdown’ ‘plotly’
+      ‘quantreg’ ‘rlang’ ‘shinyFiles’ ‘shinyjqui’ ‘shinyjs’ ‘survival’
+      ‘survminer’ ‘table1’ ‘tidyr’ ‘zoo’
       All declared Imports should be used.
     ```
 
@@ -602,7 +636,7 @@ Run `revdep_details(, "ggquickeda")` for more info
 * GitHub: https://github.com/USEPA/CompTox-ExpoCast-httk
 * Source code: https://github.com/cran/httk
 * Date/Publication: 2020-09-25 11:00:03 UTC
-* Number of recursive dependencies: 114
+* Number of recursive dependencies: 104
 
 Run `revdep_details(, "httk")` for more info
 
@@ -618,36 +652,15 @@ Run `revdep_details(, "httk")` for more info
         doc    2.1Mb
     ```
 
-# ICtest
-
-<details>
-
-* Version: 0.3-2
-* GitHub: NA
-* Source code: https://github.com/cran/ICtest
-* Date/Publication: 2019-08-23 11:50:02 UTC
-* Number of recursive dependencies: 83
-
-Run `revdep_details(, "ICtest")` for more info
-
-</details>
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘fICA’
-    ```
-
 # isomiRs
 
 <details>
 
-* Version: 1.18.0
+* Version: 1.18.1
 * GitHub: https://github.com/lpantano/isomiRs
 * Source code: https://github.com/cran/isomiRs
-* Date/Publication: 2020-10-27
-* Number of recursive dependencies: 159
+* Date/Publication: 2021-01-29
+* Number of recursive dependencies: 162
 
 Run `revdep_details(, "isomiRs")` for more info
 
@@ -711,7 +724,7 @@ Run `revdep_details(, "isomiRs")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/jmv
 * Date/Publication: 2020-06-26 10:00:09 UTC
-* Number of recursive dependencies: 201
+* Number of recursive dependencies: 189
 
 Run `revdep_details(, "jmv")` for more info
 
@@ -732,11 +745,11 @@ Run `revdep_details(, "jmv")` for more info
 
 <details>
 
-* Version: 1.1.4
+* Version: 1.1.6
 * GitHub: https://github.com/jinseob2kim/jsmodule
 * Source code: https://github.com/cran/jsmodule
-* Date/Publication: 2020-12-01 05:30:03 UTC
-* Number of recursive dependencies: 200
+* Date/Publication: 2021-02-15 14:20:06 UTC
+* Number of recursive dependencies: 214
 
 Run `revdep_details(, "jsmodule")` for more info
 
@@ -759,7 +772,7 @@ Run `revdep_details(, "jsmodule")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/LANDD
 * Date/Publication: 2016-10-01 01:14:24
-* Number of recursive dependencies: 113
+* Number of recursive dependencies: 107
 
 Run `revdep_details(, "LANDD")` for more info
 
@@ -788,7 +801,7 @@ Run `revdep_details(, "LANDD")` for more info
 * GitHub: https://github.com/great-northern-diver/loon.ggplot
 * Source code: https://github.com/cran/loon.ggplot
 * Date/Publication: 2020-06-26 16:40:03 UTC
-* Number of recursive dependencies: 108
+* Number of recursive dependencies: 107
 
 Run `revdep_details(, "loon.ggplot")` for more info
 
@@ -856,7 +869,7 @@ ERROR: lazy loading failed for package ‘loon.ggplot’
 * GitHub: NA
 * Source code: https://github.com/cran/MAINT.Data
 * Date/Publication: 2020-09-24 20:30:06 UTC
-* Number of recursive dependencies: 72
+* Number of recursive dependencies: 63
 
 Run `revdep_details(, "MAINT.Data")` for more info
 
@@ -866,10 +879,10 @@ Run `revdep_details(, "MAINT.Data")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.8Mb
+      installed size is  6.6Mb
       sub-directories of 1Mb or more:
         R      2.0Mb
-        data   2.3Mb
+        data   3.0Mb
         libs   1.2Mb
     ```
 
@@ -881,35 +894,13 @@ Run `revdep_details(, "MAINT.Data")` for more info
 * GitHub: https://github.com/RGLab/MAST
 * Source code: https://github.com/cran/MAST
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 205
+* Number of recursive dependencies: 207
 
 Run `revdep_details(, "MAST")` for more info
 
 </details>
 
 ## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-       23. lme4::lFormula(...)
-       24. lme4:::chkRank.drop.cols(X, kind = rankX.chk, tol = 1e-07)
-       25. Matrix::rankMatrix(X, tol = tol, method = method)
-       27. Matrix::qr2rankMatrix(q.r, tol = tol, isBqr = x.dense, do.warn = warn.qr)
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure (test-lmWrapper-glmer.R:22:9): lrt is non-NA ────────────────────────
-      all(l1[, "hurdle", "lambda"] > 0) is not TRUE
-      
-      `actual`:   FALSE
-      `expected`: TRUE 
-      
-      [ FAIL 1 | WARN 7 | SKIP 4 | PASS 286 ]
-      Error: Test failures
-      Execution halted
-    ```
 
 *   checking whether package ‘MAST’ can be installed ... WARNING
     ```
@@ -950,7 +941,7 @@ Run `revdep_details(, "MAST")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/MCbiclust
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 178
+* Number of recursive dependencies: 182
 
 Run `revdep_details(, "MCbiclust")` for more info
 
@@ -974,7 +965,7 @@ Run `revdep_details(, "MCbiclust")` for more info
 * GitHub: https://github.com/mfasiolo/mgcViz
 * Source code: https://github.com/cran/mgcViz
 * Date/Publication: 2020-03-04 15:10:02 UTC
-* Number of recursive dependencies: 100
+* Number of recursive dependencies: 112
 
 Run `revdep_details(, "mgcViz")` for more info
 
@@ -984,7 +975,7 @@ Run `revdep_details(, "mgcViz")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.2Mb
+      installed size is  5.1Mb
       sub-directories of 1Mb or more:
         doc   4.4Mb
     ```
@@ -997,7 +988,7 @@ Run `revdep_details(, "mgcViz")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/MissingDataGUI
 * Date/Publication: 2016-04-25 08:58:53
-* Number of recursive dependencies: 105
+* Number of recursive dependencies: 93
 
 Run `revdep_details(, "MissingDataGUI")` for more info
 
@@ -1008,7 +999,7 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 *   checking S3 generic/method consistency ... WARNING
     ```
     
-    (R:56419): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:14605): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See section ‘Generic functions and methods’ in the ‘Writing R
     Extensions’ manual.
     ```
@@ -1016,7 +1007,7 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 *   checking replacement functions ... WARNING
     ```
     
-    (R:56430): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:14779): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The argument of a replacement function which corresponds to the right
     hand side must be named ‘value’.
     ```
@@ -1024,7 +1015,7 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 *   checking for missing documentation entries ... WARNING
     ```
     
-    (R:56715): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:15107): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     All user-level objects in a package should have documentation entries.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
     Extensions’ manual.
@@ -1033,23 +1024,23 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 *   checking for code/documentation mismatches ... WARNING
     ```
     
-    (R:56733): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:15132): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     
-    (R:56749): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:15259): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     
-    (R:56765): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:15357): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking dependencies in R code ... NOTE
     ```
     
-    (R:56284): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:14396): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking foreign function calls ... NOTE
     ```
     
-    (R:56469): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:14814): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     See chapter ‘System and foreign language interfaces’ in the ‘Writing R
     Extensions’ manual.
     ```
@@ -1057,13 +1048,13 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 *   checking R code for possible problems ... NOTE
     ```
     
-    (R:56517): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:14905): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     ```
 
 *   checking Rd \usage sections ... NOTE
     ```
     
-    (R:56803): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
+    (R:15405): Gtk-WARNING **: gtk_disable_setlocale() must be called before gtk_init()
     The \usage entries for S3 methods should use the \method markup and not
     their full name.
     See chapter ‘Writing R documentation files’ in the ‘Writing R
@@ -1074,11 +1065,11 @@ Run `revdep_details(, "MissingDataGUI")` for more info
 
 <details>
 
-* Version: 1.6.1
+* Version: 1.6.2
 * GitHub: NA
 * Source code: https://github.com/cran/MOFA
-* Date/Publication: 2020-10-28
-* Number of recursive dependencies: 103
+* Date/Publication: 2021-02-09
+* Number of recursive dependencies: 90
 
 Run `revdep_details(, "MOFA")` for more info
 
@@ -1157,7 +1148,7 @@ Run `revdep_details(, "MOFA")` for more info
 * GitHub: https://github.com/bioFAM/MOFA2
 * Source code: https://github.com/cran/MOFA2
 * Date/Publication: 2020-11-03
-* Number of recursive dependencies: 219
+* Number of recursive dependencies: 223
 
 Run `revdep_details(, "MOFA2")` for more info
 
@@ -1182,7 +1173,7 @@ Run `revdep_details(, "MOFA2")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.5Mb
+      installed size is  5.6Mb
       sub-directories of 1Mb or more:
         doc       3.0Mb
         extdata   1.7Mb
@@ -1239,7 +1230,7 @@ Run `revdep_details(, "MOFA2")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/nanny
 * Date/Publication: 2020-06-13 13:50:03 UTC
-* Number of recursive dependencies: 162
+* Number of recursive dependencies: 167
 
 Run `revdep_details(, "nanny")` for more info
 
@@ -1262,7 +1253,7 @@ Run `revdep_details(, "nanny")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/NetworkChange
 * Date/Publication: 2020-07-11 22:00:14 UTC
-* Number of recursive dependencies: 144
+* Number of recursive dependencies: 126
 
 Run `revdep_details(, "NetworkChange")` for more info
 
@@ -1308,11 +1299,11 @@ Run `revdep_details(, "nzelect")` for more info
 
 <details>
 
-* Version: 1.10.1
+* Version: 1.10.11
 * GitHub: https://github.com/Roleren/ORFik
 * Source code: https://github.com/cran/ORFik
-* Date/Publication: 2020-11-09
-* Number of recursive dependencies: 146
+* Date/Publication: 2021-02-09
+* Number of recursive dependencies: 150
 
 Run `revdep_details(, "ORFik")` for more info
 
@@ -1340,9 +1331,9 @@ Run `revdep_details(, "ORFik")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.5Mb
+      installed size is  6.4Mb
       sub-directories of 1Mb or more:
-        doc   3.2Mb
+        doc   3.9Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -1352,30 +1343,33 @@ Run `revdep_details(, "ORFik")` for more info
       ‘IRanges:::regroupBySupergroup’ ‘S4Vectors:::normarg_mcols’
       ‘biomartr:::getENSEMBL.Seq’ ‘biomartr:::getENSEMBL.gtf’
       See the note in ?`:::` about the use of this operator.
+    There are ::: calls to the package's namespace in its code. A package
+      almost never needs to use ::: for its own objects:
+      ‘findFa’ ‘find_url_ebi’ ‘hasHits’ ‘trimming.table’
     ```
 
 *   checking R code for possible problems ... NOTE
     ```
     ...
-    collapseDuplicatedReads,GRanges: no visible binding for global variable
-      ‘size’
-    collapseDuplicatedReads,GRanges: no visible global function definition
-      for ‘.’
-    Undefined global functions or variables:
-      . CDS CDSGrouping Hx LEADERS ORFGrouping ORFScores RRS RSS Run Sample
-      StartCodons StopCodons TOP chr cigar1 cigar2 codonSums count countRFP
-      count_seq_pos_with_count detectCores dif difPer disengagementScores
-      distORFCDS entropyRFP exon_rank feature forward fpkmRFP fpkmRNA
-      fraction fraction.x fraction.y fractionLengths fraction_min fractions
-      frame frame_one_RP frame_two_RP gene_id gene_sum grnames inFrameCDS
-      ioScore isOverlappingCds kozak leaders mRNA mean_per_gene
-      median_per_gene median_score name ones pShifted pick position random
-      rankInTx ranks ratio_cds_leader ratio_cds_mrna ratio_mrna_aligned
-      rowSums2 sample_id scalingFactor sd_per_gene seq1 seq2 seq3 seq4 seq5
-      size spots start1 start2 startCodonCoverage startRegionRelative
-      sum.count sum_per_gene te trailers tx utr3_len utr5_len value
-      variable widths windowMean windowSD zscore
+      . CDS CDSGrouping Hx IR LEADERS LFC_TE ORFGrouping ORFScores RRS RSS
+      Regulation Run StartCodons StopCodons TE_log2 TOP chr cigar1 cigar2
+      codonSums count countRFP count_seq_pos_with_count counts_per_sample
+      detectCores df.rfp df.rna dif difPer disengagementScores distORFCDS
+      entropyRFP exon_rank feature forward fpkmRFP fpkmRNA fraction
+      fraction.x fraction.y fractionLengths fraction_min fractions frame
+      frame_one_RP frame_two_RP gene_id gene_sum grnames inFrameCDS ioScore
+      isOverlappingCds kozak leaders mRNA mean_IR mean_per_gene
+      median_per_gene median_score name ones pShifted
+      perc_of_counts_per_sample percent percentage percentage_mrna_aligned
+      pick position random rankInTx ranks ratio_cds_leader ratio_cds_mrna
+      read length rfp rfp_log2 rna rna_log10 rna_log2 rowMin rowSums2
+      sample_id sample_total scalingFactor sd_per_gene seq1 seq2 seq3 seq4
+      seq5 size spots start1 start2 startCodonCoverage startRegionRelative
+      subtitle sum.count sum_per_gene te trailers tx tx_len
+      upstream_kozak_strength utr3_len utr5_len value variable widths
+      windowMean windowSD zscore
     Consider adding
+      importFrom("base", "length")
       importFrom("graphics", "frame")
     to your NAMESPACE file.
     ```
@@ -1388,7 +1382,7 @@ Run `revdep_details(, "ORFik")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/PAFway
 * Date/Publication: 2020-02-05 16:40:02 UTC
-* Number of recursive dependencies: 78
+* Number of recursive dependencies: 71
 
 Run `revdep_details(, "PAFway")` for more info
 
@@ -1411,7 +1405,7 @@ Run `revdep_details(, "PAFway")` for more info
 * GitHub: https://github.com/XiaoruiZhu/PAsso
 * Source code: https://github.com/cran/PAsso
 * Date/Publication: 2020-07-13 08:50:07 UTC
-* Number of recursive dependencies: 163
+* Number of recursive dependencies: 161
 
 Run `revdep_details(, "PAsso")` for more info
 
@@ -1439,7 +1433,7 @@ Run `revdep_details(, "PAsso")` for more info
 * GitHub: https://github.com/hfang-bristol/Pi
 * Source code: https://github.com/cran/Pi
 * Date/Publication: 2020-11-24
-* Number of recursive dependencies: 241
+* Number of recursive dependencies: 230
 
 Run `revdep_details(, "Pi")` for more info
 
@@ -1458,11 +1452,11 @@ Run `revdep_details(, "Pi")` for more info
 
 <details>
 
-* Version: 4.9.2.2
+* Version: 4.9.3
 * GitHub: https://github.com/ropensci/plotly
 * Source code: https://github.com/cran/plotly
-* Date/Publication: 2020-12-19 06:15:37 UTC
-* Number of recursive dependencies: 156
+* Date/Publication: 2021-01-10 14:30:02 UTC
+* Number of recursive dependencies: 161
 
 Run `revdep_details(, "plotly")` for more info
 
@@ -1472,9 +1466,9 @@ Run `revdep_details(, "plotly")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.5Mb
+      installed size is  6.8Mb
       sub-directories of 1Mb or more:
-        htmlwidgets   3.7Mb
+        htmlwidgets   3.8Mb
     ```
 
 # PopGenReport
@@ -1485,7 +1479,7 @@ Run `revdep_details(, "plotly")` for more info
 * GitHub: https://github.com/green-striped-gecko/PopGenReport
 * Source code: https://github.com/cran/PopGenReport
 * Date/Publication: 2019-02-04 12:13:23 UTC
-* Number of recursive dependencies: 124
+* Number of recursive dependencies: 119
 
 Run `revdep_details(, "PopGenReport")` for more info
 
@@ -1502,11 +1496,11 @@ Run `revdep_details(, "PopGenReport")` for more info
 
 <details>
 
-* Version: 1.1.19
+* Version: 1.1.20
 * GitHub: https://github.com/josie-athens/pubh
 * Source code: https://github.com/cran/pubh
-* Date/Publication: 2020-12-03 08:20:02 UTC
-* Number of recursive dependencies: 204
+* Date/Publication: 2021-02-16 17:30:06 UTC
+* Number of recursive dependencies: 202
 
 Run `revdep_details(, "pubh")` for more info
 
@@ -1528,7 +1522,7 @@ Run `revdep_details(, "pubh")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/robCompositions
 * Date/Publication: 2020-11-18 21:10:02 UTC
-* Number of recursive dependencies: 146
+* Number of recursive dependencies: 148
 
 Run `revdep_details(, "robCompositions")` for more info
 
@@ -1545,17 +1539,22 @@ Run `revdep_details(, "robCompositions")` for more info
 
 <details>
 
-* Version: 0.93-6
+* Version: 0.93-7
 * GitHub: NA
 * Source code: https://github.com/cran/robustbase
-* Date/Publication: 2020-03-23 17:40:02 UTC
-* Number of recursive dependencies: 76
+* Date/Publication: 2021-01-04 15:30:03 UTC
+* Number of recursive dependencies: 67
 
 Run `revdep_details(, "robustbase")` for more info
 
 </details>
 
 ## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package which this enhances but not available for checking: ‘robustX’
+    ```
 
 *   checking Rd cross-references ... NOTE
     ```
@@ -1592,7 +1591,7 @@ Run `revdep_details(, "rrr")` for more info
 * GitHub: https://github.com/LuyiTian/scPipe
 * Source code: https://github.com/cran/scPipe
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 144
+* Number of recursive dependencies: 149
 
 Run `revdep_details(, "scPipe")` for more info
 
@@ -1657,7 +1656,7 @@ Run `revdep_details(, "scPipe")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/seer
 * Date/Publication: 2020-06-08 05:00:02 UTC
-* Number of recursive dependencies: 111
+* Number of recursive dependencies: 112
 
 Run `revdep_details(, "seer")` for more info
 
@@ -1679,7 +1678,7 @@ Run `revdep_details(, "seer")` for more info
 * GitHub: https://github.com/Liubuntu/SeqSQC
 * Source code: https://github.com/cran/SeqSQC
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 133
+* Number of recursive dependencies: 141
 
 Run `revdep_details(, "SeqSQC")` for more info
 
@@ -1699,16 +1698,16 @@ Run `revdep_details(, "SeqSQC")` for more info
     Genotype matrix is being transposed ...
     Optimize the access efficiency ...
     Clean up the fragments of GDS file:
-        open the file '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmprkZ7pQ/file78b615f5a092' (12.4K)
+        open the file '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmpjeDD22/file1054219e79e09' (12.4K)
         # of fragments: 48
-        save to '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmprkZ7pQ/file78b615f5a092.tmp'
-        rename '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmprkZ7pQ/file78b615f5a092.tmp' (10.7K, reduced: 1.6K)
+        save to '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmpjeDD22/file1054219e79e09.tmp'
+        rename '/var/folders/0k/bxg5lhr92sq74mb1d446ql540000gp/T//RtmpjeDD22/file1054219e79e09.tmp' (10.7K, reduced: 1.6K)
         # of fragments: 20
     Load study cohort annotation file ...
     Load 1kg data to temp directory...
     Error: Corrupt Cache: sqlite file
       See vignette section on corrupt cache
-      cache: /Users/barret/Library/Caches/ExperimentHub
+      cache: ~/Library/Caches/ExperimentHub
       filename: experimenthub.sqlite3
     Execution halted
     ```
@@ -1741,7 +1740,7 @@ Run `revdep_details(, "SeqSQC")` for more info
 * GitHub: https://github.com/daya6489/SmartEDA
 * Source code: https://github.com/cran/SmartEDA
 * Date/Publication: 2020-07-10 10:20:17 UTC
-* Number of recursive dependencies: 115
+* Number of recursive dependencies: 124
 
 Run `revdep_details(, "SmartEDA")` for more info
 
@@ -1758,11 +1757,11 @@ Run `revdep_details(, "SmartEDA")` for more info
 
 <details>
 
-* Version: 3.0.3
+* Version: 3.1.4
 * GitHub: https://github.com/BioSystemsUM/specmine
 * Source code: https://github.com/cran/specmine
-* Date/Publication: 2020-12-17 23:30:02 UTC
-* Number of recursive dependencies: 281
+* Date/Publication: 2021-03-04 23:10:02 UTC
+* Number of recursive dependencies: 284
 
 Run `revdep_details(, "specmine")` for more info
 
@@ -1795,7 +1794,7 @@ Run `revdep_details(, "specmine")` for more info
 * GitHub: https://github.com/nspyrison/spinifex
 * Source code: https://github.com/cran/spinifex
 * Date/Publication: 2020-11-18 15:00:02 UTC
-* Number of recursive dependencies: 101
+* Number of recursive dependencies: 107
 
 Run `revdep_details(, "spinifex")` for more info
 
@@ -1820,7 +1819,7 @@ Run `revdep_details(, "spinifex")` for more info
        7.         └─args$renderer(frames_vars$frame_source, args$fps)
        8.           └─magick::image_animate(anim, fps, loop = if (loop) 0 else 1)
       
-      [ FAIL 2 | WARN 14 | SKIP 0 | PASS 53 ]
+      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 53 ]
       Error: Test failures
       Execution halted
     ```
@@ -1839,7 +1838,7 @@ Run `revdep_details(, "spinifex")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/spup
 * Date/Publication: 2020-04-30 22:20:06 UTC
-* Number of recursive dependencies: 83
+* Number of recursive dependencies: 85
 
 Run `revdep_details(, "spup")` for more info
 
@@ -1861,7 +1860,7 @@ Run `revdep_details(, "spup")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/statVisual
 * Date/Publication: 2020-02-20 19:30:02 UTC
-* Number of recursive dependencies: 176
+* Number of recursive dependencies: 165
 
 Run `revdep_details(, "statVisual")` for more info
 
@@ -1892,7 +1891,7 @@ Run `revdep_details(, "statVisual")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/tidybulk
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 265
+* Number of recursive dependencies: 269
 
 Run `revdep_details(, "tidybulk")` for more info
 
@@ -1962,7 +1961,7 @@ Run `revdep_details(, "tidybulk")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/tidySingleCellExperiment
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 200
+* Number of recursive dependencies: 205
 
 Run `revdep_details(, "tidySingleCellExperiment")` for more info
 
@@ -2024,7 +2023,7 @@ Run `revdep_details(, "tidySingleCellExperiment")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/TNBC.CMS
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 164
+* Number of recursive dependencies: 151
 
 Run `revdep_details(, "TNBC.CMS")` for more info
 
@@ -2054,7 +2053,7 @@ Run `revdep_details(, "TNBC.CMS")` for more info
 * GitHub: https://github.com/kevinrue/TVTB
 * Source code: https://github.com/cran/TVTB
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 164
+* Number of recursive dependencies: 172
 
 Run `revdep_details(, "TVTB")` for more info
 
@@ -2078,7 +2077,7 @@ Run `revdep_details(, "TVTB")` for more info
 * GitHub: https://github.com/john-harrold/ubiquity
 * Source code: https://github.com/cran/ubiquity
 * Date/Publication: 2020-09-13 16:40:02 UTC
-* Number of recursive dependencies: 110
+* Number of recursive dependencies: 117
 
 Run `revdep_details(, "ubiquity")` for more info
 
@@ -2088,37 +2087,10 @@ Run `revdep_details(, "ubiquity")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  9.5Mb
+      installed size is  9.6Mb
       sub-directories of 1Mb or more:
         doc     6.5Mb
         ubinc   2.1Mb
-    ```
-
-# ufs
-
-<details>
-
-* Version: 0.4.0
-* GitHub: NA
-* Source code: https://github.com/cran/ufs
-* Date/Publication: 2020-11-10 11:40:03 UTC
-* Number of recursive dependencies: 159
-
-Run `revdep_details(, "ufs")` for more info
-
-</details>
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘viridis’
-      All declared Imports should be used.
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘behaviorchange’
     ```
 
 # vidger
@@ -2129,7 +2101,7 @@ Run `revdep_details(, "ufs")` for more info
 * GitHub: https://github.com/btmonier/vidger
 * Source code: https://github.com/cran/vidger
 * Date/Publication: 2020-10-27
-* Number of recursive dependencies: 123
+* Number of recursive dependencies: 126
 
 Run `revdep_details(, "vidger")` for more info
 

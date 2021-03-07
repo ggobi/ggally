@@ -25,16 +25,14 @@ Best,
 
 ## Test environments and R CMD check results
 
-* local macOS install 10.15.7
+* local macOS install 11.2.2
   * R 4.0
-* GitHub Actions - https://github.com/ggobi/ggally/pull/397/checks
-  * macOS, windows - R devel
-  * macOS, windows, ubuntu 16 - R 4.0
-  * macOS, windows, ubuntu 16 - R 3.6
+* GitHub Actions - https://github.com/ggobi/ggally/pull/408/checks
+  * windows - R devel
+  * macOS, windows, ubuntu 16 - R release
+  * macOS, windows, ubuntu 16 - R oldrelease
 
 * win-builder
-  * oldrelease
-  * release
   * devel
 
 #### R CMD check results
@@ -44,24 +42,13 @@ Best,
 
 ## revdepcheck results
 
-We checked 113 reverse dependencies (88 from CRAN + 25 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 116 reverse dependencies (91 from CRAN + 25 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 1 new problems
+ * We saw 0 new problems
  * We failed to check 1 packages
 
 Issues with CRAN packages are summarised below.
 
-### New problems
-(This reports the first line of each new failure)
-
-* bootcluster
-  checking whether package ‘bootcluster’ can be installed ... WARNING
-
-  - Maintainer (Mingmei Tian <mingmeit@buffalo.edu>) was contacted on Dec 16th about an upcoming release of GGally.
-    * A possible patch was provided over email.
-    * Mingmei replied to the email and asked for time until Jan 1st.
-    * I have not heard an update since.
-
-### Failed to check
+### Failed to install
 
 * loon.ggplot (NA)
