@@ -217,7 +217,7 @@ ggcoef_model <- function (
   if (!"y" %in% names(args) && !"facet_row" %in% names(args))
     args$y <- "label_light"
 
-  if (!"colour" %in% names(args)) {
+  if (!"colour" %in% names(args) & !all(is.na(data$var_label))) {
     args$colour <- "var_label"
     if (!"colour_guide" %in% names(args)) {
       args$colour_guide <- FALSE
@@ -339,7 +339,7 @@ ggcoef_compare <- function (
     if (!"facet_col" %in% names(args)) {
       args$facet_col <- "model"
     }
-    if (!"colour" %in% names(args)) {
+    if (!"colour" %in% names(args) & !all(is.na(data$var_label))) {
       args$colour <- "var_label"
       if (!"colour_guide" %in% names(args)) {
         args$colour_guide <- FALSE
@@ -443,7 +443,7 @@ ggcoef_multinom <- function (
     if (!"facet_col" %in% names(args)) {
       args$facet_col <- "y.level"
     }
-    if (!"colour" %in% names(args)) {
+    if (!"colour" %in% names(args) & !all(is.na(data$var_label))) {
       args$colour <- "var_label"
       if (!"colour_guide" %in% names(args)) {
         args$colour_guide <- FALSE
