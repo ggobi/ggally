@@ -1,27 +1,25 @@
 
 ## Comments
+#### 2021-03-07
 
-#### 2021-01-04
+Have addressed the missing `emmeans` package error.
 
-New features added. Time to share them to CRAN.
-
-Please let me know if there is anything I can provide!
+Have also included other small bug fixes. No new features / functions.
 
 Thank you,
 Barret
 
+#### 2021-02-24
 
-#### 2020-12-28
+Dear maintainer,
 
-Sorry for the delay but would you please give me 2 more days to check the package?
+Please see the problems shown on
+<https://cran.r-project.org/web/checks/check_results_GGally.html>.
 
-- Mingmei
+Please correct before 2021-03-10 to safely retain your package on CRAN.
 
-#### 2020-12-16
-
-Reached out to {bootclust} maintainer Mingmei Tian <mingmeit@buffalo.edu> about not importing `sets::%>%` to avoid conflict with (possibly) many packages.
-
-Waiting until >= 2020-12-29 to submit.
+Best,
+-k
 
 
 
