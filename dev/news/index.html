@@ -77,13 +77,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -127,6 +133,9 @@
     <li class="divider"></li>
     <li class="dropdown-header">Specialized ggplot2 plot</li>
     <li>
+      <a href="../articles/ggcoef_model.html">ggcoef_model(): Model coefficients</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
@@ -147,7 +156,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -178,6 +187,26 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ggally-development-version" class="anchor"></a>GGally (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="ggally-211" class="section level1">
+<h1 class="page-header" data-toc-text="2.1.1">
+<a href="#ggally-211" class="anchor"></a>GGally 2.1.1<small> 2021-03-08 </small>
+</h1>
+<div id="bug-fixes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
+<ul>
+<li>Ignore <code>colour</code> aesthetic if all values are <code>NA</code>. (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/404'>#404</a>)</li>
+<li>Avoid all duplicates within <code><a href="../reference/stat_cross.html">stat_cross()</a></code>. (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/402'>#402</a>)</li>
+<li>Avoid an error when tidiers do not return p-values. (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/400'>#400</a>)</li>
+<li>Suggest <code>emmeans</code> to allow <code><a href="../reference/ggcoef.html">ggcoef()</a></code> example to execute. (<a href='https://github.com/ggobi/ggally/issues/407'>#407</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="ggally-210" class="section level1">
+<h1 class="page-header" data-toc-text="2.1.0">
+<a href="#ggally-210" class="anchor"></a>GGally 2.1.0<small> 2021-01-06 </small>
+</h1>
 <div id="breaking-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h3>
@@ -195,6 +224,7 @@
 <li>New option <code>reverse_fill_labels</code> for <code><a href="../reference/ggally_colbar.html">ggally_colbar()</a></code> and <code><a href="../reference/ggally_colbar.html">ggally_rowbar()</a></code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/374'>#374</a>)</li>
 <li>
 <code><a href="../reference/stat_prop.html">stat_prop()</a></code> now accepts a <strong>x</strong> or a <strong>y</strong> aesthetic (<a href='https://github.com/ggobi/ggally/issues/395'>#395</a>, <a href='https://github.com/larmarange'>@larmarange</a>)</li>
+<li>Temporarily not listening to <code><a href="../reference/ggally_statistic.html">ggally_statistic(family)</a></code> to avoid monospaced font issues. See <a href='https://github.com/ggobi/ggally/issues/373'>#373</a> for more details. (<a href='https://github.com/ggobi/ggally/issues/387'>#387</a>)</li>
 </ul>
 </div>
 </div>
@@ -744,7 +774,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

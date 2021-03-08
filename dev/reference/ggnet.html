@@ -48,8 +48,8 @@
 <meta property="og:title" content="Network plot — ggnet" />
 <meta property="og:description" content="Function for plotting network objects using ggplot2, now replaced by the
 ggnet2 function, which provides additional control over
-plotting parameters. Please visit http://github.com/briatte/ggnet for
-the latest version of ggnet2, and https://briatte.github.io/ggnet for a
+plotting parameters. Please visit https://github.com/briatte/ggnet for
+the latest version of ggnet2, and https://briatte.github.io/ggnet/ for a
 vignette that contains many examples and explanations." />
 
 
@@ -82,13 +82,19 @@ vignette that contains many examples and explanations." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -132,6 +138,9 @@ vignette that contains many examples and explanations." />
     <li class="divider"></li>
     <li class="dropdown-header">Specialized ggplot2 plot</li>
     <li>
+      <a href="../articles/ggcoef_model.html">ggcoef_model(): Model coefficients</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
@@ -152,7 +161,7 @@ vignette that contains many examples and explanations." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -183,8 +192,8 @@ vignette that contains many examples and explanations." />
     <div class="ref-description">
     <p>Function for plotting network objects using <span class="pkg">ggplot2</span>, now replaced by the
 <code><a href='ggnet2.html'>ggnet2</a></code> function, which provides additional control over
-plotting parameters. Please visit <a href='http://github.com/briatte/ggnet'>http://github.com/briatte/ggnet</a> for
-the latest version of ggnet2, and <a href='https://briatte.github.io/ggnet'>https://briatte.github.io/ggnet</a> for a
+plotting parameters. Please visit <a href='https://github.com/briatte/ggnet'>https://github.com/briatte/ggnet</a> for
+the latest version of ggnet2, and <a href='https://briatte.github.io/ggnet/'>https://briatte.github.io/ggnet/</a> for a
 vignette that contains many examples and explanations.</p>
     </div>
 
@@ -527,7 +536,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class='co'># random groups</span>
 <span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>]</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='va'>g</span>
-</div><div class='output co'>#&gt;  [1] "b" "b" "c" "a" "a" "b" "c" "a" "a" "b"</div><div class='input'>
+</div><div class='output co'>#&gt;  [1] "c" "b" "c" "b" "a" "a" "a" "c" "c" "a"</div><div class='input'>
 <span class='co'># color palette</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span> <span class='op'>=</span> <span class='st'>"steelblue"</span>, <span class='st'>"b"</span> <span class='op'>=</span> <span class='st'>"forestgreen"</span>, <span class='st'>"c"</span> <span class='op'>=</span> <span class='st'>"tomato"</span><span class='op'>)</span>
 
@@ -535,7 +544,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 </div><div class='img'><img src='ggnet-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># edge arrows on a directed network</span>
 <span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggnet</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span><span class='op'>(</span><span class='va'>m</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, arrow.gap <span class='op'>=</span> <span class='fl'>0.05</span>, arrow.size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_segment).</span></div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 2 rows containing missing values (geom_segment).</span></div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -551,7 +560,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

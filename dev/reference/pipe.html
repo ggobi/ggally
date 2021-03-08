@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Faceted histogram — ggally_facethist • GGally</title>
+<title>Pipe operator — %&gt;% • GGally</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,8 @@
 
 
 
-<meta property="og:title" content="Faceted histogram — ggally_facethist" />
-<meta property="og:description" content="Display subsetted histograms of the data in different panels." />
+<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
 
 
 <meta name="robots" content="noindex">
@@ -180,46 +180,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Faceted histogram</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/gg-plots.R'><code>R/gg-plots.R</code></a></small>
-    <div class="hidden name"><code>ggally_facethist.Rd</code></div>
+    <h1>Pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ggobi/ggally/blob/master/R/GGally-package.R'><code>R/GGally-package.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Display subsetted histograms of the data in different panels.</p>
+    <p>See <code>magrittr::%&gt;%</code> for details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggally_facethist</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>mapping</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>lhs</span> <span class='op'>%&gt;%</span> <span class='va'>rhs</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p>data set using</p></td>
-    </tr>
-    <tr>
-      <th>mapping</th>
-      <td><p>aesthetics being used</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>parameters sent to stat_bin()</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Barret Schloerke</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Small function to display plots only if it's interactive</span>
-<span class='va'>p_</span> <span class='op'>&lt;-</span> <span class='fu'>GGally</span><span class='fu'>::</span><span class='va'><a href='print_if_interactive.html'>print_if_interactive</a></span>
-
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>tips</span>, package <span class='op'>=</span> <span class='st'>"reshape"</span><span class='op'>)</span>
-<span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggally_facethist</span><span class='op'>(</span><span class='va'>tips</span>, mapping <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>tip</span>, y <span class='op'>=</span> <span class='va'>sex</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='ggally_facethist-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggally_facethist</span><span class='op'>(</span><span class='va'>tips</span>, mapping <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_string</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"tip"</span>, y <span class='op'>=</span> <span class='st'>"sex"</span><span class='op'>)</span>, binwidth <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='ggally_facethist-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

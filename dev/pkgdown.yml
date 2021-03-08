@@ -1,6 +1,6 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1.9000
-pkgdown_sha: 6094ac3dd80a1f3f1d4e2f47d0ed4716d51362b0
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
   ggally_plots: ggally_plots.html
   ggally_stats: ggally_stats.html
@@ -16,7 +16,7 @@ articles:
   ggsurv: ggsurv.html
   ggtable: ggtable.html
   glyph: glyph.html
-last_built: 2020-12-11T18:29Z
+last_built: 2021-03-08T14:51Z
 urls:
   reference: https://ggobi.github.io/ggally/reference
   article: https://ggobi.github.io/ggally/articles

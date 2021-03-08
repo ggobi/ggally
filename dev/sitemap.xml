@@ -265,6 +265,9 @@
     <loc>https://ggobi.github.io/ggally/reference/pigs.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/pipe.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/plot_types.html</loc>
   </url>
   <url>
@@ -281,9 +284,6 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/putPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/reference/reexports.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/remove_color_unless_equal.html</loc>

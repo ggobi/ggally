@@ -34,12 +34,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -84,6 +90,9 @@
     <li class="divider">
     <li class="dropdown-header">Specialized ggplot2 plot</li>
     <li>
+      <a href="../articles/ggcoef_model.html">ggcoef_model(): Model coefficients</a>
+    </li>
+    <li>
       <a href="../articles/ggcoef.html">ggcoef(): Model coefficients</a>
     </li>
     <li>
@@ -104,7 +113,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/ggobi/ggally/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -141,7 +150,7 @@
     
 <p><code>GGally</code> proposes several additional statistics that could be used with <code>ggplot2</code>. As reminder, a statistic is always used in conjunction with a geometry. You can call a statistic from a <code>geom_*()</code> or call a geometry from a <code>stat_*()</code>. A statistic will compute new variables from the provided <code>data</code>. These new variables could be mapped to an aesthetic using <code><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">ggplot2::after_stat()</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally">GGally</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
 <span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
@@ -363,7 +372,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
