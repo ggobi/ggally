@@ -74,6 +74,11 @@ jobs:
           stopifnot(length(warnings()) == 0)
         shell: Rscript {0}
 
+      - name: Git Config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
       - name: Build and Deploy Site
         if: github.event_name == 'push'
         env:
