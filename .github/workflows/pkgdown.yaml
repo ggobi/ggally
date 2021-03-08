@@ -2,11 +2,11 @@ on:
   push:
     branches:
       - master
-      - pkgdown
+      - "**pkgdown**"
   pull_request:
     branches:
       - master
-      - rc-*
+      - rc-**
 
 
 name: pkgdown
@@ -73,6 +73,11 @@ jobs:
           pkgdown::build_site()
           stopifnot(length(warnings()) == 0)
         shell: Rscript {0}
+
+      - name: Git Config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - name: Build and Deploy Site
         if: github.event_name == 'push'
