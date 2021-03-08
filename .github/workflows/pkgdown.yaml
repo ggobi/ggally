@@ -2,11 +2,11 @@ on:
   push:
     branches:
       - master
-      - pkgdown
+      - "**pkgdown**"
   pull_request:
     branches:
       - master
-      - rc-*
+      - rc-**
 
 
 name: pkgdown
