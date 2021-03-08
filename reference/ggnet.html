@@ -55,8 +55,6 @@ vignette that contains many examples and explanations." />
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -68,15 +66,9 @@ vignette that contains many examples and explanations." />
 
 
 
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,13 +82,19 @@ vignette that contains many examples and explanations." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -538,7 +536,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class='co'># random groups</span>
 <span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>]</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='va'>g</span>
-</div><div class='output co'>#&gt;  [1] "b" "b" "c" "a" "a" "b" "c" "a" "a" "b"</div><div class='input'>
+</div><div class='output co'>#&gt;  [1] "c" "b" "c" "b" "a" "a" "a" "c" "c" "a"</div><div class='input'>
 <span class='co'># color palette</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span> <span class='op'>=</span> <span class='st'>"steelblue"</span>, <span class='st'>"b"</span> <span class='op'>=</span> <span class='st'>"forestgreen"</span>, <span class='st'>"c"</span> <span class='op'>=</span> <span class='st'>"tomato"</span><span class='op'>)</span>
 
@@ -546,7 +544,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 </div><div class='img'><img src='ggnet-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># edge arrows on a directed network</span>
 <span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggnet</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span><span class='op'>(</span><span class='va'>m</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, arrow.gap <span class='op'>=</span> <span class='fl'>0.05</span>, arrow.size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_segment).</span></div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 2 rows containing missing values (geom_segment).</span></div><div class='img'><img src='ggnet-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -558,11 +556,11 @@ Pedro Jordano and Ming-Yu Liu</p>
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by <a href="http://schloerke.com/" class="external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p></p>
+  <p>Developed by <a href='http://schloerke.com/'>Barret Schloerke</a>, <a href='http://www.dicook.org/'>Di Cook</a>, <a href='https://joseph.larmarange.net/'>Joseph Larmarange</a>, <a href='https://f.briatte.org/'>Francois Briatte</a>, <a href='http://moritz-marbach.com/'>Moritz Marbach</a>, <a href='https://edwinth.github.io/'>Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -587,8 +585,6 @@ Pedro Jordano and Ming-Yu Liu</p>
 </script>
 
 
-
-  
 
   </body>
 </html>

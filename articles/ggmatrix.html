@@ -21,8 +21,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,12 +33,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -107,7 +111,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggobi/ggally/" class="external-link">
+  <a href="https://github.com/ggobi/ggally/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -132,11 +136,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggmatrix(): Plot matrix</h1>
-                        <h4 data-toc-skip class="author">Barret Schloerke</h4>
+                        <h4 class="author">Barret Schloerke</h4>
             
-            <h4 data-toc-skip class="date">Oct 29, 2015</h4>
+            <h4 class="date">Oct 29, 2015</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/ggmatrix.Rmd" class="external-link"><code>vignettes/ggmatrix.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/ggmatrix.Rmd"><code>vignettes/ggmatrix.Rmd</code></a></small>
       <div class="hidden name"><code>ggmatrix.Rmd</code></div>
 
     </div>
@@ -144,7 +148,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
@@ -159,9 +163,9 @@
 <a href="#generic-example" class="anchor"></a>Generic Example</h2>
 <p>The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">plotList</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggally_text.html">ggally_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Plot #"</span>, <span class="va">i</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">plotList</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggally_text.html">ggally_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Plot #"</span>, <span class="va">i</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># bare minimum of plotList, nrow, and ncol</span>
@@ -174,8 +178,8 @@
 <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>,
   nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Matrix Title"</span>
 <span class="op">)</span>
 <span class="va">pm</span></code></pre></div>
@@ -186,8 +190,8 @@
 <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>,
   nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Matrix Title"</span>,
   byrow <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
@@ -202,8 +206,8 @@
 <code class="sourceCode R"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>,
   nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Matrix Title"</span>
 <span class="op">)</span>
 <span class="va">pm</span></code></pre></div>
@@ -226,16 +230,16 @@
 <h2 class="hasAnchor">
 <a href="#themes" class="anchor"></a>Themes</h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>,
   nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Matrix Title"</span>,
   byrow <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
-<span class="va">pm</span> <span class="op">&lt;-</span> <span class="va">pm</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">pm</span> <span class="op">&lt;-</span> <span class="va">pm</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">pm</span></code></pre></div>
 <p><img src="ggmatrix_files/figure-html/ggmatrix_theme-1.png" width="700"></p>
 </div>
@@ -246,8 +250,8 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"No Left Plot Axis"</span>,
   showYAxisPlotLabels <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
@@ -256,8 +260,8 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"No Bottom Plot Axis"</span>,
   showXAxisPlotLabels <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
@@ -266,8 +270,8 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"No Plot Axes"</span>,
   showAxisPlotLabels <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
@@ -279,23 +283,23 @@
 <a href="#strips-control" class="anchor"></a>Strips Control</h2>
 <p>By default, the plots in the top row and the right most column will display top-side and right-side strips respectively (<code>showStrips = NULL</code>). If all strips need to appear in each plot, <code>showStrips</code> may be set to <code>TRUE</code>. If all strips should not be displayed, <code>showStrips</code> may be set to <code>FALSE</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span>
-<span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"No"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>,
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>,
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"No"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>,
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span>
+<span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"No"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>,
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>,
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"No"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>,
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span>
 <span class="op">)</span>
 
 
 <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">2</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Total Bill vs Tip"</span>,
   showStrips <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># default</span>
 <span class="op">)</span>
@@ -304,8 +308,8 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">2</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Total Bill vs Tip"</span>,
   showStrips <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
@@ -314,8 +318,8 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span>
   <span class="va">plotList</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">2</span>,
-  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span>,
-  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span><span class="op">)</span>,
+  yAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span>,
+  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Non Smoker"</span>, <span class="st">"Smoker"</span><span class="op">)</span>,
   title <span class="op">=</span> <span class="st">"Total Bill vs Tip"</span>,
   showStrips <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
@@ -336,13 +340,11 @@
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="http://schloerke.com/" class="external-link external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p>Developed by <a href="http://schloerke.com/">Barret Schloerke</a>, <a href="http://www.dicook.org/">Di Cook</a>, <a href="https://joseph.larmarange.net/">Joseph Larmarange</a>, <a href="https://f.briatte.org/">Francois Briatte</a>, <a href="http://moritz-marbach.com/">Moritz Marbach</a>, <a href="https://edwinth.github.io/">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

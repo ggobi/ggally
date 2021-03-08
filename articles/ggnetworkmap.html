@@ -21,8 +21,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,12 +33,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -107,7 +111,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggobi/ggally/" class="external-link">
+  <a href="https://github.com/ggobi/ggally/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -132,11 +136,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggnetworkmap(): Network + map plot</h1>
-                        <h4 data-toc-skip class="author">Amos Elberg</h4>
+                        <h4 class="author">Amos Elberg</h4>
             
-            <h4 data-toc-skip class="date">Jan 10, 2015</h4>
+            <h4 class="date">Jan 10, 2015</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/ggnetworkmap.Rmd" class="external-link"><code>vignettes/ggnetworkmap.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/ggnetworkmap.Rmd"><code>vignettes/ggnetworkmap.Rmd</code></a></small>
       <div class="hidden name"><code>ggnetworkmap.Rmd</code></div>
 
     </div>
@@ -144,7 +148,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
@@ -157,49 +161,49 @@
 <div id="example-us-airports" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-us-airports" class="anchor"></a>Example: US airports</h2>
-<p>This example is based on a <a href="http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/" class="external-link">tutorial by Nathan Yau at Flowing Data</a>.</p>
+<p>This example is based on a <a href="http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/">tutorial by Nathan Yau at Flowing Data</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://statnet.org/" class="external-link">network</a></span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://statnet.org" class="external-link">sna</a></span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://statnet.org/">network</a></span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://statnet.org">sna</a></span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">airports</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"http://datasets.flowingdata.com/tuts/maparcs/airports.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">airports</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">airports</span><span class="op">$</span><span class="va">iata</span>
+<span class="va">airports</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"http://datasets.flowingdata.com/tuts/maparcs/airports.csv"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">airports</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">airports</span><span class="op">$</span><span class="va">iata</span>
 
 <span class="co"># select some random flights</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
-<span class="va">flights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  origin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">airports</span><span class="op">[</span><span class="fl">200</span><span class="op">:</span><span class="fl">400</span>, <span class="op">]</span><span class="op">$</span><span class="va">iata</span>, <span class="fl">200</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-  destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">airports</span><span class="op">[</span><span class="fl">200</span><span class="op">:</span><span class="fl">400</span>, <span class="op">]</span><span class="op">$</span><span class="va">iata</span>, <span class="fl">200</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
+<span class="va">flights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  origin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">airports</span><span class="op">[</span><span class="fl">200</span><span class="op">:</span><span class="fl">400</span>, <span class="op">]</span><span class="op">$</span><span class="va">iata</span>, <span class="fl">200</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  destination <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">airports</span><span class="op">[</span><span class="fl">200</span><span class="op">:</span><span class="fl">400</span>, <span class="op">]</span><span class="op">$</span><span class="va">iata</span>, <span class="fl">200</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co"># convert to network</span>
-<span class="va">flights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">flights</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">flights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html">network</a></span><span class="op">(</span><span class="va">flights</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># add geographic coordinates</span>
-<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lat"</span> <span class="op">&lt;-</span> <span class="va">airports</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html" class="external-link">network.vertex.names</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span>, <span class="st">"lat"</span> <span class="op">]</span>
-<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lon"</span> <span class="op">&lt;-</span> <span class="va">airports</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html" class="external-link">network.vertex.names</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span>, <span class="st">"long"</span> <span class="op">]</span>
+<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lat"</span> <span class="op">&lt;-</span> <span class="va">airports</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html">network.vertex.names</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span>, <span class="st">"lat"</span> <span class="op">]</span>
+<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lon"</span> <span class="op">&lt;-</span> <span class="va">airports</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html">network.vertex.names</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span>, <span class="st">"long"</span> <span class="op">]</span>
 
 <span class="co"># drop isolated airports</span>
-<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html" class="external-link">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html">degree</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># compute degree centrality</span>
-<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"degree"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">flights</span>, gmode <span class="op">=</span> <span class="st">"digraph"</span><span class="op">)</span>
+<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"degree"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html">degree</a></span><span class="op">(</span><span class="va">flights</span>, gmode <span class="op">=</span> <span class="st">"digraph"</span><span class="op">)</span>
 
 <span class="co"># add random groups</span>
-<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"mygroup"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.size.html" class="external-link">network.size</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">flights</span> <span class="op">%v%</span> <span class="st">"mygroup"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.size.html">network.size</a></span><span class="op">(</span><span class="va">flights</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># create a map of the USA</span>
-<span class="va">usa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/map_data.html" class="external-link">map_data</a></span><span class="op">(</span><span class="st">"usa"</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">long</span>, y <span class="op">=</span> <span class="va">lat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html" class="external-link">geom_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey65"</span>,
+<span class="va">usa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/map_data.html">map_data</a></span><span class="op">(</span><span class="st">"usa"</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">long</span>, y <span class="op">=</span> <span class="va">lat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey65"</span>,
                fill <span class="op">=</span> <span class="st">"#f9f9f9"</span>, size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>
 
 <span class="co"># trim flights</span>
-<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html" class="external-link">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lon"</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">long</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html" class="external-link">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lon"</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">long</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html" class="external-link">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lat"</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html" class="external-link">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lat"</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lon"</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">long</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lon"</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">long</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lat"</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/network/man/deletion.methods.html">delete.vertices</a></span><span class="op">(</span><span class="va">flights</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">flights</span> <span class="op">%v%</span> <span class="st">"lat"</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">usa</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># overlay network data to map</span>
 <span class="fu"><a href="../reference/ggnetworkmap.html">ggnetworkmap</a></span><span class="op">(</span><span class="va">usa</span>, <span class="va">flights</span>, size <span class="op">=</span> <span class="fl">4</span>, great.circles <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -212,12 +216,12 @@
 <a href="#example-twitter-spambots" class="anchor"></a>Example: Twitter spambots</h2>
 <p>This next example uses data from a Twitter spam community identified while exploring and trying to clear-up a group of tweets. After coloring the nodes based on their centrality, the odd structure stood out clearly.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">twitter_spambots</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">twitter_spambots</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a world map</span>
-<span class="va">world</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"world"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-<span class="va">world</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">world</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">long</span>, y <span class="op">=</span> <span class="va">lat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html" class="external-link">geom_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey65"</span>,
+<span class="va">world</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html">fortify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="va">world</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">world</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">long</span>, y <span class="op">=</span> <span class="va">lat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey65"</span>,
                fill <span class="op">=</span> <span class="st">"#f9f9f9"</span>, size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>
 
 <span class="co"># view global structure</span>
@@ -231,15 +235,15 @@
 <p>Coloring nodes according to degree centrality can highlight network structures.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># compute indegree and outdegree centrality</span>
-<span class="va">twitter_spambots</span> <span class="op">%v%</span> <span class="st">"indegree"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">twitter_spambots</span>, cmode <span class="op">=</span> <span class="st">"indegree"</span><span class="op">)</span>
-<span class="va">twitter_spambots</span> <span class="op">%v%</span> <span class="st">"outdegree"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">twitter_spambots</span>, cmode <span class="op">=</span> <span class="st">"outdegree"</span><span class="op">)</span>
+<span class="va">twitter_spambots</span> <span class="op">%v%</span> <span class="st">"indegree"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html">degree</a></span><span class="op">(</span><span class="va">twitter_spambots</span>, cmode <span class="op">=</span> <span class="st">"indegree"</span><span class="op">)</span>
+<span class="va">twitter_spambots</span> <span class="op">%v%</span> <span class="st">"outdegree"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sna/man/degree.html">degree</a></span><span class="op">(</span><span class="va">twitter_spambots</span>, cmode <span class="op">=</span> <span class="st">"outdegree"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/ggnetworkmap.html">ggnetworkmap</a></span><span class="op">(</span>net <span class="op">=</span> <span class="va">twitter_spambots</span>,
              arrow.size <span class="op">=</span> <span class="fl">0.5</span>,
              node.group <span class="op">=</span> <span class="va">indegree</span>,
              ring.group <span class="op">=</span> <span class="va">outdegree</span>, size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html" class="external-link">scale_fill_continuous</a></span><span class="op">(</span><span class="st">"Indegree"</span>, high <span class="op">=</span> <span class="st">"red"</span>, low <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Outdegree"</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html">scale_fill_continuous</a></span><span class="op">(</span><span class="st">"Indegree"</span>, high <span class="op">=</span> <span class="st">"red"</span>, low <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Outdegree"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggnetworkmap_files/figure-html/ggnetworkmap-color-1.png" width="700"></p>
 <p>Some Twitter attributes have been included as vertex attributes.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -251,9 +255,9 @@
              size <span class="op">=</span> <span class="fl">4</span>,
              weight <span class="op">=</span> <span class="va">indegree</span>,
              label.nodes <span class="op">=</span> <span class="cn">TRUE</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html" class="external-link">scale_fill_continuous</a></span><span class="op">(</span><span class="st">"Followers"</span>, high <span class="op">=</span> <span class="st">"red"</span>, low <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Friends"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html" class="external-link">scale_color_continuous</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"lightgreen"</span>, high <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html">scale_fill_continuous</a></span><span class="op">(</span><span class="st">"Followers"</span>, high <span class="op">=</span> <span class="st">"red"</span>, low <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Friends"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html">scale_color_continuous</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"lightgreen"</span>, high <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggnetworkmap_files/figure-html/ggnetworkmap-twitter-attr-1.png" width="700"></p>
 </div>
 </div>
@@ -270,13 +274,11 @@
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="http://schloerke.com/" class="external-link external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p>Developed by <a href="http://schloerke.com/">Barret Schloerke</a>, <a href="http://www.dicook.org/">Di Cook</a>, <a href="https://joseph.larmarange.net/">Joseph Larmarange</a>, <a href="https://f.briatte.org/">Francois Briatte</a>, <a href="http://moritz-marbach.com/">Moritz Marbach</a>, <a href="https://edwinth.github.io/">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -21,8 +21,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,12 +33,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -107,7 +111,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggobi/ggally/" class="external-link">
+  <a href="https://github.com/ggobi/ggally/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -132,11 +136,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>glyphs(): Glyph plot</h1>
-                        <h4 data-toc-skip class="author">Hadley Wickham, Charlotte Wickham, Di Cook, Heike Hofmann</h4>
+                        <h4 class="author">Hadley Wickham, Charlotte Wickham, Di Cook, Heike Hofmann</h4>
             
-            <h4 data-toc-skip class="date">Nov 6, 2015</h4>
+            <h4 class="date">Nov 6, 2015</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/glyph.Rmd" class="external-link"><code>vignettes/glyph.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/glyph.Rmd"><code>vignettes/glyph.Rmd</code></a></small>
       <div class="hidden name"><code>glyph.Rmd</code></div>
 
     </div>
@@ -144,7 +148,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
@@ -155,16 +159,16 @@
 </h1>
 <p>This function rearranges data to be able to construct a glyph plot</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nasa</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">nasa</span><span class="op">)</span>
 <span class="va">temp.gly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/glyphs.html">glyphs</a></span><span class="op">(</span><span class="va">nasa</span>, <span class="st">"long"</span>, <span class="st">"day"</span>, <span class="st">"lat"</span>, <span class="st">"surftemp"</span>, height<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span>
 <span class="co">#&gt; Using width 2.38</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">temp.gly</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">gx</span>, <span class="va">gy</span>, group <span class="op">=</span> <span class="va">gid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">temp.gly</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">gx</span>, <span class="va">gy</span>, group <span class="op">=</span> <span class="va">gid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/add_ref_lines.html">add_ref_lines</a></span><span class="op">(</span><span class="va">temp.gly</span>, color <span class="op">=</span> <span class="st">"grey90"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/add_ref_boxes.html">add_ref_boxes</a></span><span class="op">(</span><span class="va">temp.gly</span>, color <span class="op">=</span> <span class="st">"grey90"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_path</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_path</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span><span class="op">)</span></code></pre></div>
 <p><img src="glyph_files/figure-html/glyphs-basic-usage-1.png" width="672"></p>
 <p>This shows a glyphplot of monthly surface temperature for 6 years over Central America. You can see differences from one location to another, that in large areas temperature doesn’t change much. There are large seasonal trends in the top left over land.</p>
 <p>Rescaling in different ways puts emphasis on different components, see the examples in the referenced paper. And with ggplot2 you can make a map of the geographic area underlying the glyphs.</p>
@@ -187,13 +191,11 @@
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="http://schloerke.com/" class="external-link external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p>Developed by <a href="http://schloerke.com/">Barret Schloerke</a>, <a href="http://www.dicook.org/">Di Cook</a>, <a href="https://joseph.larmarange.net/">Joseph Larmarange</a>, <a href="https://f.briatte.org/">Francois Briatte</a>, <a href="http://moritz-marbach.com/">Moritz Marbach</a>, <a href="https://edwinth.github.io/">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
