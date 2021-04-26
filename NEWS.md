@@ -1,5 +1,11 @@
 # GGally (development version)
 
+### Bug fixes
+
+* No more warning when using `colour_guide = FALSE` or `shape_guide = FALSE`
+  with `ggcoef_plot()` (@larmarange, #413)
+
+
 # GGally 2.1.1
 
 ### Bug fixes
