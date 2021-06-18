@@ -29,7 +29,7 @@ Description:
     plot networks.
 Depends:
     R (>= 3.1),
-    ggplot2 (>= 3.3.0)
+    ggplot2 (>= 3.3.4)
 Imports:
     dplyr (>= 1.0.0),
     forcats,
