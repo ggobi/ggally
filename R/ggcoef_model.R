@@ -713,16 +713,22 @@ ggcoef_plot <- function (
     )
 
   if(!is.null(colour) && colour %in% names(data)) {
-    if (colour_guide)
+    if (colour_guide) {
       colour_guide <- guide_legend()
+    } else {
+      colour_guide <- "none"
+    }
     p <- p +
       scale_colour_discrete(guide = colour_guide, labels = colour_labels) +
       labs(colour = colour_lab)
   }
 
   if(!is.null(shape) && shape %in% names(data)) {
-    if (shape_guide)
+    if (shape_guide) {
       shape_guide <- guide_legend()
+    } else {
+      shape_guide <- "none"
+    }
     p <- p +
       scale_shape_manual(
         values = shape_values,
