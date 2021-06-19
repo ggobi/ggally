@@ -363,7 +363,7 @@ ggcoef_compare <- function (
 #'   p_(ggcoef_multinom(mod, type = "faceted"))
 #'   p_(ggcoef_multinom(
 #'     mod, type = "faceted",
-#'     y.level = c(
+#'     y.level_label = c(
 #'       "pretty happy" = "pretty happy\n(ref: very happy)",
 #'       "very happy" = "very happy"
 #'     )

@@ -128,7 +128,7 @@ test_that("example of ggcoef_model", {
   expect_print(ggcoef_multinom(mod, type = "faceted"))
   expect_print(ggcoef_multinom(
     mod, type = "faceted",
-    y.level = c(
+    y.level_label = c(
       "pretty happy" = "pretty happy\n(ref: very happy)"
     )
   ))
