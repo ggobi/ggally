@@ -209,10 +209,10 @@ test_that("examples", {
 
   # weighted bipartite network
   bip <- network(
-    bip,
+    bip[-4,], # remove "loop"
     matrix.type = "bipartite",
-    ignore.eval = FALSE,
-    names.eval = "weights"
+    ignore.eval = FALSE
+    # names.eval = "weights"
   )
 
   # test bipartite mode
@@ -223,7 +223,7 @@ test_that("examples", {
   expect_warning(ggnet(network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)), "self-loops")
 
   expect_error(ggnet(1:2), "network object")
-  expect_error(ggnet(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper graphs")
+  expect_error(ggnet(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
   expect_error(ggnet(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality

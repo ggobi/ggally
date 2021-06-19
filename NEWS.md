@@ -1,5 +1,10 @@
 # GGally (development version)
 
+### Bug fixes
+
+* Replace `ggplot2` usage of `*_guide = FALSE` with `*_guide = "none"` (@larmarange, #418)
+* Require `network >= 1.17.1` (#418)
+
 # GGally 2.1.1
 
 ### Bug fixes

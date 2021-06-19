@@ -946,7 +946,7 @@ ggnet2 <- function(
     names(v_alpha) = unique(data$alpha)
 
     p = p +
-      scale_alpha_manual("", values = v_alpha) + guides(alpha = FALSE)
+      scale_alpha_manual("", values = v_alpha) + guides(alpha = "none")
 
   } else {
 
@@ -974,7 +974,7 @@ ggnet2 <- function(
     names(v_color) = unique(data$color)
 
     p = p +
-      scale_color_manual("", values = v_color) + guides(color = FALSE)
+      scale_color_manual("", values = v_color) + guides(color = "none")
 
   }
 
@@ -986,7 +986,7 @@ ggnet2 <- function(
     names(v_shape) = unique(data$shape)
 
     p = p +
-      scale_shape_manual("", values = v_shape) + guides(shape = FALSE)
+      scale_shape_manual("", values = v_shape) + guides(shape = "none")
 
   } else {
 
@@ -1009,7 +1009,7 @@ ggnet2 <- function(
 
       v_size = as.numeric(names(v_size))
       p = p +
-        scale_size_manual("", values = v_size) + guides(size = FALSE)
+        scale_size_manual("", values = v_size) + guides(size = "none")
 
     } else {
 

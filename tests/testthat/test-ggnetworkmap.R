@@ -20,7 +20,7 @@ skip_if_not_installed("geosphere")
 
 # first 500 rows of http://datasets.flowingdata.com/tuts/maparcs/airports.csv
 # avoids downloading the dataset to test the package
-airports <- read.csv("data/airports.csv", header = TRUE)
+airports <- read.csv(test_path("data/airports.csv"), header = TRUE)
 rownames(airports) <- airports$iata
 
 # select some random flights
@@ -31,7 +31,10 @@ flights <- data.frame(
 )
 
 # convert to network
-flights <- network(flights, directed = TRUE)
+flights <- network(
+  flights[-114,], # remove loop
+  directed = TRUE
+)
 
 # add geographic coordinates
 flights %v% "lat" <- airports[ network.vertex.names(flights), "lat" ] # nolint
@@ -205,7 +208,7 @@ test_that("network coercion", {
   )
 
   expect_error(ggnetworkmap(net = 1:2), "network object")
-  expect_error(ggnetworkmap(net = network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper graphs")
+  expect_error(ggnetworkmap(net = network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
   expect_error(
     ggnetworkmap(net = network(data.frame(1:2, 3:4), multiple = TRUE)),
     "multiplex graphs"

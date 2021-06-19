@@ -21,6 +21,7 @@ rq(RColorBrewer) # test ColorBrewer palettes
 test_that("examples", {
 
   ### --- start: documented examples
+  set.seed(54321)
 
   # random adjacency matrix
   x           <- 10
@@ -242,10 +243,10 @@ test_that("examples", {
 
   # weighted bipartite network
   bip <- network(
-    bip,
+    bip[-4, ], # remove loop
     matrix.type = "bipartite",
     ignore.eval = FALSE,
-    names.eval = "weights"
+    # names.eval = "weights"
   )
 
   # test bipartite mode
@@ -256,7 +257,7 @@ test_that("examples", {
   expect_warning(ggnet2(network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)), "self-loops")
 
   expect_error(ggnet2(1:2), "network object")
-  expect_error(ggnet2(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper graphs")
+  expect_error(ggnet2(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
   expect_error(ggnet2(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality

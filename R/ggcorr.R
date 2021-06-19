@@ -323,7 +323,7 @@ ggcorr <- function(
 
     p = p +
       scale_size_continuous(range = c(min_size, max_size)) +
-      guides(size = FALSE)
+      guides(size = "none")
 
     r = list(size = (min_size + max_size) / 2)
 

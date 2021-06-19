@@ -11,6 +11,13 @@ test_that("example of ggcoef_model", {
   mod_simple <- lm(tip ~ day + time + total_bill, data = tips)
   expect_print(ggcoef_model(mod_simple))
 
+  expect_warning(
+    print(
+      ggcoef_model(mod_simple, shape_guide = FALSE, colour_guide = FALSE)
+    ),
+    NA
+  )
+
   # custom variable labels
   # you can use to define variable labels before computing model
   if (require(labelled)) {
@@ -121,7 +128,7 @@ test_that("example of ggcoef_model", {
   expect_print(ggcoef_multinom(mod, type = "faceted"))
   expect_print(ggcoef_multinom(
     mod, type = "faceted",
-    y.level = c(
+    y.level_label = c(
       "pretty happy" = "pretty happy\n(ref: very happy)"
     )
   ))

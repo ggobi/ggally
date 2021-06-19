@@ -129,7 +129,7 @@ test_that("dates", {
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278***")
   p <- ggally_barDiag(nas, ggplot2::aes(x = date))
   expect_equal(mapping_string(p$mapping$x), "date")
-  expect_equal(p$labels$y, "count")
+  expect_equal(as.character(p$labels$y), "count")
 
 })
 

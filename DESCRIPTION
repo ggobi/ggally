@@ -29,7 +29,7 @@ Description:
     plot networks.
 Depends:
     R (>= 3.1),
-    ggplot2 (>= 3.3.0)
+    ggplot2 (>= 3.3.4)
 Imports:
     dplyr (>= 1.0.0),
     forcats,
@@ -58,7 +58,7 @@ Suggests:
     maps (>= 3.1.0),
     mapproj,
     nnet,
-    network (>= 1.12.0),
+    network (>= 1.17.1),
     scagnostics,
     sna (>= 2.3-2),
     survival,
