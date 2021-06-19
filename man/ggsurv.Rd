@@ -87,7 +87,7 @@ if (require(survival) && require(scales)) {
 
   # Adjusting the legend of the ggsurv fit
   p_(pl.sex +
-    ggplot2::guides(linetype = FALSE) +
+    ggplot2::guides(linetype = "none") +
     ggplot2::scale_colour_discrete(
       name   = 'Sex',
       breaks = c(1,2),
@@ -128,7 +128,7 @@ if (require(survival) && require(scales)) {
         direction = 1
       )(4)
     ) +
-    ggplot2::guides(color = FALSE, linetype = FALSE))
+    ggplot2::guides(color = "none", linetype = "none"))
 }
 }
 \author{

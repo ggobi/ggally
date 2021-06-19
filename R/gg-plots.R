@@ -1087,7 +1087,7 @@ ggally_text <- function(
   if (!is.null(mapping$colour)) {
     p <- p +
        geom_text( label = label, mapping = mapping, ...) +
-       guides(colour = FALSE)
+       guides(colour = "none")
   } else if ("colour" %in% names(aes(...))) {
     p <- p +
        geom_text( label = label, mapping = mapping, ...)
