@@ -56,17 +56,14 @@ if(getRversion() >= "2.15.1") {
 #' rownames(airports) <- airports$iata
 #'
 #' # select some random flights
-#' set.seed(1234)
+#' set.seed(123)
 #' flights <- data.frame(
 #'   origin = sample(airports[200:400, ]$iata, 200, replace = TRUE),
 #'   destination = sample(airports[200:400, ]$iata, 200, replace = TRUE)
 #' )
 #'
 #' # convert to network
-#' flights <- network(
-#'   flights[-114,], # remove loop
-#'   directed = TRUE
-#' )
+#' flights <- network(flights, directed = TRUE)
 #'
 #' # add geographic coordinates
 #' flights %v% "lat" <- airports[ network.vertex.names(flights), "lat" ]
