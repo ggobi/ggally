@@ -63,7 +63,10 @@ if(getRversion() >= "2.15.1") {
 #' )
 #'
 #' # convert to network
-#' flights <- network(flights, directed = TRUE)
+#' flights <- network(
+#'   flights[-114,], # remove loop
+#'   directed = TRUE
+#' )
 #'
 #' # add geographic coordinates
 #' flights %v% "lat" <- airports[ network.vertex.names(flights), "lat" ]
