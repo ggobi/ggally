@@ -1,6 +1,6 @@
 
 ## Comments
-#### 2021-06-19
+#### 2021-06-20
 
 I have fixed the failing tests due to an update in `network` package. `GGally` now requires the latest version of the `network` package and should pass the tests.
 
@@ -41,13 +41,16 @@ Best,
 
 ## revdepcheck results
 
-We checked 116 reverse dependencies (91 from CRAN + 25 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 125 reverse dependencies (100 from CRAN + 25 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 1 packages
+ * We failed to check 2 packages
 
 Issues with CRAN packages are summarised below.
 
-### Failed to install
+### Failed to check
 
+* egoTERGM    (NA)
+  * Package is archived. I believe this is a false positive
 * loon.ggplot (NA)
+  * Could not install `loon`. The changes made for this release should have a negative effect on their code.
