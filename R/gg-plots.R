@@ -1491,8 +1491,9 @@ ggally_count <- function(data, mapping, ...) {
   ggplot(data, mapping) +
     do.call(stat_ggally_count, args) +
     scale_y_continuous(
-      breaks = 1:length(levels(data[[count_col]])),
-      labels = levels(data[[count_col]])
+      breaks = seq_along(levels(data[[count_col]])),
+      labels = levels(data[[count_col]]),
+      trans = scales::reverse_trans()
     ) +
     theme(panel.grid.minor = element_blank()) +
     ylab(ylabel)
