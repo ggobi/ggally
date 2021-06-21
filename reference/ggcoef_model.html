@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.2</span>
       </span>
     </div>
 
@@ -599,7 +599,7 @@ then pass your customized <code>tibble</code> to <code>ggcoef_plot()</code>.</p>
       categorical_terms_pattern <span class='op'>=</span> <span class='st'>"{level} (ref: {reference_level})"</span>,
       interaction_sep <span class='op'>=</span> <span class='st'>" x "</span>
     <span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'>scale_y_discrete</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/label_wrap.html'>label_wrap</a></span><span class='op'>(</span><span class='fl'>15</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='fu'>scale_y_discrete</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='fu'><a href='https://scales.r-lib.org/reference/label_wrap.html'>label_wrap</a></span><span class='op'>(</span><span class='fl'>15</span><span class='op'>)</span><span class='op'>)</span>
   <span class='op'>)</span>
 
   <span class='co'># display only a subset of terms</span>
@@ -672,7 +672,7 @@ then pass your customized <code>tibble</code> to <code>ggcoef_plot()</code>.</p>
   <span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcoef_multinom</span><span class='op'>(</span><span class='va'>mod</span>, type <span class='op'>=</span> <span class='st'>"faceted"</span><span class='op'>)</span><span class='op'>)</span>
   <span class='fu'>p_</span><span class='op'>(</span><span class='fu'>ggcoef_multinom</span><span class='op'>(</span>
     <span class='va'>mod</span>, type <span class='op'>=</span> <span class='st'>"faceted"</span>,
-    y.level <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    y.level_label <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
       <span class='st'>"pretty happy"</span> <span class='op'>=</span> <span class='st'>"pretty happy\n(ref: very happy)"</span>,
       <span class='st'>"very happy"</span> <span class='op'>=</span> <span class='st'>"very happy"</span>
     <span class='op'>)</span>

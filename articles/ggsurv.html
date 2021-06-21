@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.2</span>
       </span>
     </div>
 
@@ -169,6 +169,7 @@
 <span class="co">#&gt; Loading required package: scales</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">lung</span>, package <span class="op">=</span> <span class="st">"survival"</span><span class="op">)</span>
+<span class="co">#&gt; Warning in data(lung, package = "survival"): data set 'lung' not found</span>
 <span class="va">sf.lung</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span>
 <span class="fu"><a href="../reference/ggsurv.html">ggsurv</a></span><span class="op">(</span><span class="va">sf.lung</span><span class="op">)</span></code></pre></div>
 <p><img src="ggsurv_files/figure-html/basic-usage-1.png" width="672"></p>
@@ -192,7 +193,7 @@
 <a href="#adjusting-the-legend" class="anchor"></a>Adjusting the legend</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pl.sex</span> <span class="op">+</span>
-  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html">scale_colour_discrete</a></span><span class="op">(</span>
     name   <span class="op">=</span> <span class="st">'Sex'</span>,
     breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
@@ -207,6 +208,7 @@
 <a href="#adjust-the-limits" class="anchor"></a>Adjust the limits</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">kidney</span>, package <span class="op">=</span> <span class="st">"survival"</span><span class="op">)</span>
+<span class="co">#&gt; Warning in data(kidney, package = "survival"): data set 'kidney' not found</span>
 <span class="va">sf.kid</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">disease</span>, data <span class="op">=</span> <span class="va">kidney</span><span class="op">)</span>
 <span class="va">pl.kid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggsurv.html">ggsurv</a></span><span class="op">(</span><span class="va">sf.kid</span>, plot.cens <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">pl.kid</span></code></pre></div>
@@ -228,7 +230,7 @@
     x      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">125</span>, <span class="fl">5</span>, <span class="fl">60</span><span class="op">)</span>,
     y      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.65</span>, <span class="fl">0.55</span>, <span class="fl">0.30</span><span class="op">)</span>,
     size   <span class="op">=</span> <span class="fl">5</span>,
-    colour <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/hue_pal.html">hue_pal</a></span><span class="op">(</span>
+    colour <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/hue_pal.html">hue_pal</a></span><span class="op">(</span>
       h         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span><span class="op">)</span> <span class="op">+</span> <span class="fl">15</span>,
       c         <span class="op">=</span> <span class="fl">100</span>,
       l         <span class="op">=</span> <span class="fl">65</span>,
@@ -236,7 +238,7 @@
       direction <span class="op">=</span> <span class="fl">1</span>
     <span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
   <span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">FALSE</span>, linetype <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span>, linetype <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggsurv_files/figure-html/ggsurv-text-1.png" width="700"></p>
 </div>
 </div>
