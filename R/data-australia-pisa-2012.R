@@ -46,5 +46,5 @@
 #' @name australia_PISA2012
 #' @usage data(australia_PISA2012)
 #' @format A data frame with 8247 rows and 32 variables
-#' @source \url{http://www.oecd.org/pisa/pisaproducts/database-cbapisa2012.htm}
+#' @source \url{https://www.oecd.org/pisa/pisaproducts/database-cbapisa2012.htm}
 NULL

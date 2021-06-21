@@ -235,15 +235,15 @@ test_that("examples", {
 
   # weighted adjacency matrix
   bip <- data.frame(
-    event1 = c(1, 2, 1, 0),
-    event2 = c(0, 0, 3, 0),
-    event3 = c(1, 1, 0, 4),
-    row.names = letters[1:4]
+    event1 = c(1, 2, 1),
+    event2 = c(0, 0, 3),
+    event3 = c(1, 1, 0),
+    row.names = letters[1:3]
   )
 
   # weighted bipartite network
   bip <- network(
-    bip[-4, ], # remove loop
+    bip,
     matrix.type = "bipartite",
     ignore.eval = FALSE,
     # names.eval = "weights"

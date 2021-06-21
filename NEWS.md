@@ -1,4 +1,4 @@
-# GGally (development version)
+# GGally 2.1.2
 
 ### Bug fixes
 
