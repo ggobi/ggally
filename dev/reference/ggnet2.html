@@ -82,7 +82,7 @@ that contains many examples and explanations." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.2.9000</span>
       </span>
     </div>
 
@@ -280,7 +280,7 @@ Defaults to <code>NULL</code>.</p></td>
     <tr>
       <th>layout.exp</th>
       <td><p>a multiplier to expand the horizontal axis if node labels
-get clipped: see <a href='https://scales.r-lib.org//reference/expand_range.html'>expand_range</a> for details.
+get clipped: see <a href='https://scales.r-lib.org/reference/expand_range.html'>expand_range</a> for details.
 Defaults to <code>0</code> (no expansion).</p></td>
     </tr>
     <tr>
@@ -604,15 +604,15 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class='va'>m</span>
 </div><div class='output co'>#&gt;   a b c d e f g h i j
 #&gt; a 0 0 0 0 0 0 0 0 0 0
-#&gt; b 0 0 0 0 0 0 0 0 0 1
-#&gt; c 0 0 0 0 0 0 0 0 0 0
+#&gt; b 0 0 0 0 1 0 0 0 1 0
+#&gt; c 0 0 0 0 1 0 0 0 0 0
 #&gt; d 0 0 0 0 0 0 0 0 0 0
-#&gt; e 0 0 0 0 0 0 0 0 0 0
-#&gt; f 0 0 0 1 0 0 0 0 1 0
-#&gt; g 0 0 0 0 0 0 0 0 0 1
+#&gt; e 0 0 0 0 0 0 0 0 1 0
+#&gt; f 0 0 0 1 0 0 0 0 0 1
+#&gt; g 1 0 0 0 0 0 0 0 0 0
 #&gt; h 0 0 0 0 0 0 0 0 0 0
 #&gt; i 0 0 0 0 0 0 0 0 0 0
-#&gt; j 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
+#&gt; j 0 0 0 0 0 1 1 0 0 0</div><div class='input'>
 <span class='co'># random undirected network</span>
 <span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fu'>network</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/network.html'>network</a></span><span class='op'>(</span><span class='va'>m</span>, directed <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='va'>n</span>
@@ -623,9 +623,9 @@ Pedro Jordano and Ming-Yu Liu</p>
 #&gt;   loops = FALSE 
 #&gt;   multiple = FALSE 
 #&gt;   bipartite = FALSE 
-#&gt;   total edges= 4 
+#&gt;   total edges= 8 
 #&gt;     missing edges= 0 
-#&gt;     non-missing edges= 4 
+#&gt;     non-missing edges= 8 
 #&gt; 
 #&gt;  Vertex attribute names: 
 #&gt;     vertex.names 

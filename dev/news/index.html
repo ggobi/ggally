@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.2.9000</span>
       </span>
     </div>
 
@@ -187,14 +187,34 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ggally-development-version" class="anchor"></a>GGally (development version)<small> Unreleased </small>
 </h1>
+<div id="bug-fixes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
+<ul>
+<li>Reverse ordering of y-axis in <code><a href="../reference/ggally_count.html">ggally_count()</a></code> (<a href='https://github.com/ggobi/ggally/issues/420'>#420</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="ggally-212" class="section level1">
+<h1 class="page-header" data-toc-text="2.1.2">
+<a href="#ggally-212" class="anchor"></a>GGally 2.1.2<small> 2021-06-21 </small>
+</h1>
+<div id="bug-fixes-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h3>
+<ul>
+<li>Replace <code>ggplot2</code> usage of <code>*_guide = FALSE</code> with <code>*_guide = "none"</code> (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/418'>#418</a>)</li>
+<li>Require <code>network &gt;= 1.17.1</code> (<a href='https://github.com/ggobi/ggally/issues/418'>#418</a>)</li>
+</ul>
+</div>
 </div>
     <div id="ggally-211" class="section level1">
 <h1 class="page-header" data-toc-text="2.1.1">
 <a href="#ggally-211" class="anchor"></a>GGally 2.1.1<small> 2021-03-08 </small>
 </h1>
-<div id="bug-fixes" class="section level3">
+<div id="bug-fixes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h3>
 <ul>
 <li>Ignore <code>colour</code> aesthetic if all values are <code>NA</code>. (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/404'>#404</a>)</li>
 <li>Avoid all duplicates within <code><a href="../reference/stat_cross.html">stat_cross()</a></code>. (<a href='https://github.com/larmarange'>@larmarange</a>, <a href='https://github.com/ggobi/ggally/issues/402'>#402</a>)</li>
@@ -518,11 +538,11 @@
 <p><code>ggmatrix</code> and ggplot2 labels</p>
 <ul>
 <li>
-<code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::labs</a></code> <code><a href="https://rdrr.io/pkg/network/man/network-internal.html">+</a></code>’ed to a ggmatrix object</li>
+<code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::labs</a></code> <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>’ed to a ggmatrix object</li>
 <li>
-<code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::xlab</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::ylab</a></code> may be <code><a href="https://rdrr.io/pkg/network/man/network-internal.html">+</a></code>’ed to a ggmatrix object</li>
+<code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::xlab</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::ylab</a></code> may be <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>’ed to a ggmatrix object</li>
 <li>
-<code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::ggtitle</a></code> <code><a href="https://rdrr.io/pkg/network/man/network-internal.html">+</a></code>’ed to a ggmatrix object</li>
+<code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggplot2::ggtitle</a></code> <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>’ed to a ggmatrix object</li>
 <li>(anything that returns a class of “labels” may be added to a ggmatrix object)</li>
 </ul>
 <p><code>ggmatrix</code> and <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggplot2::ggsave()</a></code></p>
