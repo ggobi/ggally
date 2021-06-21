@@ -1,5 +1,10 @@
 # GGally (development version)
 
+### Bug fixes
+
+* Reverse ordering of y-axis in `ggally_count()` (#420)
+
+
 # GGally 2.1.2
 
 ### Bug fixes
