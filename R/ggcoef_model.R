@@ -306,7 +306,7 @@ ggcoef_compare <- function (
     tidyr::complete(
       .data$model,
       tidyr::nesting(
-        !!sym("variable"), !!sym("var_label"), !!sym("var_class"),
+        !!sym("var_label"), !!sym("variable"), !!sym("var_class"),
         !!sym("var_type"), !!sym("contrasts"), !!sym("reference_row"),
         !!sym("label"), !!sym("label_light")
       )
@@ -520,6 +520,7 @@ ggcoef_data <- function (
   data <- data[!is.na(data$estimate), ]
 
   data$var_label <- forcats::fct_inorder(data$var_label)
+  data$variable <- forcats::fct_inorder(data$variable)
   data$label <- forcats::fct_inorder(data$label)
 
   data$label_light <- dplyr::if_else(
