@@ -8,7 +8,7 @@ jobs:
   ## Need to supply env var
   # pkgdown:
   #   uses: rstudio/shinycoreci/.github/workflows/call-pkgdown.yaml@v1
-  Rituals:
+  rituals:
     uses: rstudio/shinycoreci/.github/workflows/call-rituals.yaml@v1
   ## Can not use regular R cmd check until printing tests are done with vdiffr
   # R-CMD-check:
@@ -83,10 +83,10 @@ jobs:
       matrix:
         config:
         - { os: "macOS-latest", r: "${{ needs.r-versions.outputs.release }}" }
-        - { os: "ubuntu-18.04", r: "${{ needs.r-versions.outputs.release }}" }
         - { os: "windows-latest", r: "${{ needs.r-versions.outputs.release }}" }
         - { os: "windows-latest", r: "3.6" }
 
+        - { os: "ubuntu-18.04", r: "${{ needs.r-versions.outputs.release }}" }
         - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.devel }}", http-user-agent: release }
         - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.release }}" }
         - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.oldrel-1 }}" }
