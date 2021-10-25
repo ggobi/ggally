@@ -77,7 +77,7 @@ jobs:
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
-    needs: [r-version]
+    needs: [r-versions]
     strategy:
       fail-fast: false
       matrix:
