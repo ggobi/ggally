@@ -105,7 +105,6 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           cache-version: 1
-          needs: check
           extra-packages: |
             rcmdcheck
 
