@@ -59,12 +59,12 @@ jobs:
     name: R Versions
     runs-on: ubuntu-latest
     outputs:
-      devel: steps.devel.installed-r-version
-      release: steps.release.installed-r-version
-      oldrel-1: steps.oldrel-1.installed-r-version
-      oldrel-2: steps.oldrel-2.installed-r-version
-      oldrel-3: steps.oldrel-3.installed-r-version
-      oldrel-4: steps.oldrel-4.installed-r-version
+      devel:    ${{ steps.devel.installed-r-version    }}
+      release:  ${{ steps.release.installed-r-version  }}
+      oldrel-1: ${{ steps.oldrel-1.installed-r-version }}
+      oldrel-2: ${{ steps.oldrel-2.installed-r-version }}
+      oldrel-3: ${{ steps.oldrel-3.installed-r-version }}
+      oldrel-4: ${{ steps.oldrel-4.installed-r-version }}
     steps:
     - { name: devel,    id: devel,    uses: r-lib/actions/setup-r@v1, with: { r-version: devel,    install-r: false } }
     - { name: release,  id: release,  uses: r-lib/actions/setup-r@v1, with: { r-version: release,  install-r: false } }
