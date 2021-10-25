@@ -3,6 +3,7 @@
 ### Bug fixes
 
 * Reverse ordering of y-axis in `ggally_count()` (#420)
+* Facets ordering in `ggcoef_compare()` (#426)
 
 
 # GGally 2.1.2
