@@ -55,16 +55,15 @@ jobs:
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
 
-  r-version:
-    name: R Versions
+  r-versions:
     runs-on: ubuntu-latest
     outputs:
-      devel:    ${{ steps.devel.installed-r-version    }}
-      release:  ${{ steps.release.installed-r-version  }}
-      oldrel-1: ${{ steps.oldrel-1.installed-r-version }}
-      oldrel-2: ${{ steps.oldrel-2.installed-r-version }}
-      oldrel-3: ${{ steps.oldrel-3.installed-r-version }}
-      oldrel-4: ${{ steps.oldrel-4.installed-r-version }}
+      devel:    ${{ steps.devel.outputs.installed-r-version    }}
+      release:  ${{ steps.release.outputs.installed-r-version  }}
+      oldrel-1: ${{ steps.oldrel-1.outputs.installed-r-version }}
+      oldrel-2: ${{ steps.oldrel-2.outputs.installed-r-version }}
+      oldrel-3: ${{ steps.oldrel-3.outputs.installed-r-version }}
+      oldrel-4: ${{ steps.oldrel-4.outputs.installed-r-version }}
     steps:
     - { name: devel,    id: devel,    uses: r-lib/actions/setup-r@v1, with: { r-version: devel,    install-r: false } }
     - { name: release,  id: release,  uses: r-lib/actions/setup-r@v1, with: { r-version: release,  install-r: false } }
@@ -83,17 +82,17 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: "macOS-latest", r: "${{ needs.r-version.outputs.release }}" }
-        - { os: "ubuntu-18.04", r: "${{ needs.r-version.outputs.release }}" }
-        - { os: "windows-latest", r: "${{ needs.r-version.outputs.release }}" }
+        - { os: "macOS-latest", r: "${{ needs.r-versions.outputs.release }}" }
+        - { os: "ubuntu-18.04", r: "${{ needs.r-versions.outputs.release }}" }
+        - { os: "windows-latest", r: "${{ needs.r-versions.outputs.release }}" }
         - { os: "windows-latest", r: "3.6" }
 
-        - { os: "ubuntu-20.04", r: "${{ needs.r-version.outputs.devel }}", http-user-agent: release }
-        - { os: "ubuntu-20.04", r: "${{ needs.r-version.outputs.release }}" }
-        - { os: "ubuntu-20.04", r: "${{ needs.r-version.outputs.oldrel-1 }}" }
-        - { os: "ubuntu-20.04", r: "${{ needs.r-version.outputs.oldrel-2 }}" }
-        - { os: "ubuntu-20.04", r: "${{ needs.r-version.outputs.oldrel-3 }}" }
-        - { os: "ubuntu-20.04", r: "${{ needs.r-version.outputs.oldrel-4 }}" }
+        - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.devel }}", http-user-agent: release }
+        - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.release }}" }
+        - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.oldrel-1 }}" }
+        - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.oldrel-2 }}" }
+        - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.oldrel-3 }}" }
+        - { os: "ubuntu-20.04", r: "${{ needs.r-versions.outputs.oldrel-4 }}" }
 
     env:
       GITHUB_PAT: ${{ github.token }}
