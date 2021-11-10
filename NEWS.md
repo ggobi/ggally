@@ -4,6 +4,8 @@
 
 * Reverse ordering of y-axis in `ggally_count()` (#420)
 * Facets ordering in `ggcoef_compare()` (#426)
+* Bug fix for `ggcoef_compare()` when using tidy selectors for 
+  `no_reference_row` (#430)
 
 
 # GGally 2.1.2
