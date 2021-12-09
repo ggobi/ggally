@@ -7,6 +7,7 @@
 [![](http://cranlogs.r-pkg.org/badges/GGally)](https://cran.r-project.org/package=GGally)
 [![DOI](https://zenodo.org/badge/22529/ggobi/ggally.svg)](https://zenodo.org/badge/latestdoi/22529/ggobi/ggally)
 [![RStudio community](https://img.shields.io/badge/community-GGally-blue?style=social&logo=rstudio&logoColor=75AADB)](https://community.rstudio.com/tags/c/general/17/ggally)
+[![R-CMD-check](https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg)](https://github.com/ggobi/ggally/actions)
 <!-- badges: end -->
 
 

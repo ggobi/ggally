@@ -1,66 +1,30 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches:
-      - master
+    branches: [main, master]
   pull_request:
-    branches:
-      - master
-      - rc-*
+    branches: [main, master]
 
 name: test-coverage
 
 jobs:
   test-coverage:
-    runs-on: ${{ matrix.config.os }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - { os: ubuntu-16.04,   r: 'release', force_suggests: "1",  rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest" }
+    runs-on: ubuntu-latest
     env:
-      RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
-        id: install-r
+      - uses: r-lib/actions/setup-r@v1
         with:
-          r-version: ${{ matrix.config.r }}
+          use-public-rspm: true
 
-      - uses: r-lib/actions/setup-pandoc@master
-
-      - name: Install pak and query dependencies
-        shell: Rscript {0}
-        run: |
-          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
-          saveRDS(pak::pkg_deps_tree("local::.", dependencies = TRUE), ".github/r-depends.rds")
-
-      - name: Cache R packages
-        uses: actions/cache@v2
+      - uses: r-lib/actions/setup-r-dependencies@v1
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.config.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-testing-${{ hashFiles('.github/r-depends.rds') }}
-          restore-keys: |
-            ${{ matrix.config.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-testing-
-            ${{ matrix.config.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-
-
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        shell: Rscript {0}
-        run: |
-          pak::local_system_requirements(execute = TRUE)
-          pak::pkg_system_requirements("covr", execute = TRUE)
-
-      - name: Install dependencies
-        shell: Rscript {0}
-        run: |
-          pak::local_install_dev_deps(upgrade = TRUE)
-          pak::pkg_install("covr")
+          extra-packages: covr
 
       - name: Test coverage
-        env:
-          CAN_PRINT: "TRUE"
         run: covr::codecov()
         shell: Rscript {0}
