@@ -144,7 +144,7 @@
 #' }
 ggcoef_model <- function (
   model,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
@@ -252,7 +252,7 @@ ggcoef_model <- function (
 ggcoef_compare <- function (
   models,
   type = c("dodged", "faceted"),
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
@@ -373,7 +373,7 @@ ggcoef_multinom <- function (
   model,
   type = c("dodged", "faceted"),
   y.level_label = NULL,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
@@ -457,7 +457,7 @@ ggcoef_multinom <- function (
 # not exporting ggcoef_data
 ggcoef_data <- function (
   model,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
