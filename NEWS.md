@@ -6,7 +6,9 @@
 * Facets ordering in `ggcoef_compare()` (#426)
 * Bug fix for `ggcoef_compare()` when using tidy selectors for 
   `no_reference_row` (#430)
-
+* Fix in `ggcoef_compare()` regarding `no_reference_row` option (#430)
+* New default tidier for `ggcoef_model()`, now using
+  `broom.helpers::tidy_with_broom_or_parameters()` (#432)
 
 # GGally 2.1.2
 
