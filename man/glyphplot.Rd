@@ -4,16 +4,16 @@
 \alias{glyphplot}
 \alias{is.glyphplot}
 \alias{[.glyphplot}
-\alias{print.glyphplot}
+\alias{tbl_sum.glyphplot}
 \title{Glyph plot class}
 \usage{
-glyphplot(data, width, height, polar, x_major, y_major)
+glyphplot(data, width, height, polar, x_major, y_major, x_minor, y_minor)
 
 is.glyphplot(x)
 
 \method{[}{glyphplot}(x, ...)
 
-\method{print}{glyphplot}(x, ...)
+\method{tbl_sum}{glyphplot}(x, ...)
 }
 \arguments{
 \item{data}{A data frame containing variables named in \code{x_major},

@@ -108,10 +108,6 @@ ggcoef_plot(
 \arguments{
 \item{model}{a regression model object}
 
-\item{tidy_fun}{option to specify a custom tidier function}
-
-\item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
-
 \item{conf.level}{the confidence level to use for the confidence
 interval if \code{conf.int = TRUE}; must be strictly greater than 0
 and less than 1; defaults to 0.95, which corresponds to a 95
@@ -119,28 +115,6 @@ percent confidence interval}
 
 \item{exponentiate}{if \code{TRUE} a logarithmic scale will
 be used for x-axis}
-
-\item{variable_labels}{a named list or a named vector of custom variable labels}
-
-\item{term_labels}{a named list or a named vector of custom term labels}
-
-\item{interaction_sep}{separator for interaction terms}
-
-\item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
-labels of categorical terms with treatment or sum contrasts
-(see \code{\link[broom.helpers:model_list_terms_levels]{model_list_terms_levels()}})}
-
-\item{add_reference_rows}{should reference rows be added?}
-
-\item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
-for those no reference row should be added, when \code{add_reference_rows = TRUE}}
-
-\item{intercept}{should the intercept(s) be included?}
-
-\item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
-syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
-See also \code{\link[broom.helpers:select_helpers]{all_continuous()}}, \code{\link[broom.helpers:select_helpers]{all_categorical()}}, \code{\link[broom.helpers:select_helpers]{all_dichotomous()}}
-and \code{\link[broom.helpers:select_helpers]{all_interaction()}}}
 
 \item{significance}{level (between 0 and 1) below which a
 coefficient is consider to be significantly different from 0

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gglyph.R
 \name{glyphs}
 \alias{glyphs}
-\title{Create \code{\link{glyphplot}} data}
+\title{Create data for glyph map}
 \usage{
 glyphs(
   data,
@@ -37,6 +37,10 @@ that no scaling is performed.}
 }
 \description{
 Create the data needed to generate a glyph plot.
+}
+\details{
+The \code{glyphs} functions
+now extract the data object created with \code{\link{cubble::geom_glyph}}
 }
 \examples{
 # Small function to display plots only if it's interactive
