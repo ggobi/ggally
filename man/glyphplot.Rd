@@ -37,5 +37,5 @@ string) for the major x and y axes.  Together, the}
 Glyph plot class
 }
 \author{
-Di Cook, Heike Hofmann, Hadley Wickham
+Di Cook, Heike Hofmann, Hadley Wickham, Sherry Zhang
 }

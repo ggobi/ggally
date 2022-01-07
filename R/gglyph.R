@@ -20,7 +20,7 @@
 #'  minor values within a grid cell.  Defaults to \code{\link{identity}} so
 #'  that no scaling is performed.
 #' @export
-#' @importFrom cubble geom_glyph
+#' @importFrom cubble geom_glyph geom_glyph_line geom_glyph_box
 #' @author Di Cook, Heike Hofmann, Hadley Wickham, Sherry Zhang
 #' @examples
 #' # Small function to display plots only if it's interactive
@@ -110,6 +110,7 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
   data <- glyph_layer(data, component = "box")
   data <- data %>% dplyr::select(gid, gx, gy, xmin:ymax)
 
+  if (!is.null(var_fill)) data$fill <- var_fill
   suppressWarnings(ggplot2::geom_rect(
     data = data,
     aes_all(names(data)),
@@ -130,7 +131,7 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
 #   resolution of the data by using \code{\link[ggplot2]{rel}}.
 #' @param polar A logical of length 1, specifying whether the glyphs should
 #'   be drawn in polar coordinates.  Defaults to \code{FALSE}.
-#' @param x_major,y_major The name of the variable (as a
+#' @param x_major,x_minor,y_major,y_minorm The name of the variable (as a
 #'   string) for the major x and y axes.  Together, the
 #    combination of \code{x_major} and \code{y_major} specifies a grid cell.
 #' @export

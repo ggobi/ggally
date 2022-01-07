@@ -41,10 +41,13 @@ Imports:
     progress,
     RColorBrewer,
     reshape (>= 0.8.5),
+    tibble,
     rlang,
     scales (>= 1.1.0),
     tidyr,
-    utils
+    utils,
+    cubble,
+    glue
 Suggests:
     broom (>= 0.7.0),
     broom.helpers (>= 1.1.0),
@@ -69,8 +72,6 @@ Suggests:
     knitr,
     spelling,
     emmeans
-Remotes:
-    huizezhang-sherry/cubble
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 SystemRequirements: openssl

@@ -44,13 +44,6 @@ test_that("examples", {
 
 })
 
-test_that("message", {
-
-  expect_message(glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 1), "Using width 2.38")
-  expect_message(glyphs(nasaLate, "long", "day", "lat", "surftemp", width = 1), "Using height 2.37")
-})
-
-
 test_that("scales", {
 
   dt <- do_glyph(x_scale = log)
@@ -118,24 +111,5 @@ test_that("fill", {
   expect_equal(mapping_string(get("aes_params", envir = p$layers[[2]])$fill), "\"green\"")
   p <- do_gg_fill(var_fill = "gid")
   expect_equal(mapping_string(get("mapping", envir = p$layers[[2]])$fill), "fill")
-
-})
-
-test_that("print", {
-
-  dt <- do_glyph()
-  txt <- capture.output(print(dt))
-  expect_equal(txt[length(txt) - 2], "Cartesian glyphplot: ")
-  expect_equal(txt[length(txt) - 1], "  Size: [2.38, 2.37]")
-  expect_equal(txt[length(txt) - 0], "  Major axes: long, lat" )
-
-  dt <- do_glyph(polar = TRUE)
-  txt <- capture.output(print(dt))
-  expect_equal(txt[length(txt) - 2], "Polar glyphplot: ")
-  expect_equal(txt[length(txt) - 1], "  Size: [2.38, 2.37]")
-  expect_equal(txt[length(txt) - 0], "  Major axes: long, lat" )
-
-  txt <- capture.output(print(rel(0.95)))
-  expect_equal(txt, "[1] 0.95 *")
 
 })

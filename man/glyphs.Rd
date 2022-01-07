@@ -63,5 +63,5 @@ p_(ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
   ggplot2::labs(x = "", y = ""))
 }
 \author{
-Di Cook, Heike Hofmann, Hadley Wickham
+Di Cook, Heike Hofmann, Hadley Wickham, Sherry Zhang
 }
