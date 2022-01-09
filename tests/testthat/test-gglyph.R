@@ -58,25 +58,6 @@ test_that("scales", {
   dtm <- merge(dt, nasaLate)
   expect_true(all(dtm$surftempLog == log(dtm$surftemp)))
 
-  for (scale_fn in c(range01, max1, mean0, min0, rescale01, rescale11)) {
-    dt <- do_glyph(y_scale = scale_fn)
-    dt$surftempScaled <- dt$surftemp
-    dt$surftemp <- NULL
-    dtm <- merge(dt, nasaLate)
-    expect_true(all(dtm$surftempScaled != dtm$surftemp))
-  }
-
-
-  for (scale_fn in c(rescale01, rescale11)) {
-    scale_fn2 <- function(x) {
-      scale_fn(x, xlim = c(1 / 4, 3 / 4))
-    }
-    dt <- do_glyph(y_scale = scale_fn2)
-    dt$surftempScaled <- dt$surftemp
-    dt$surftemp <- NULL
-    dtm <- merge(dt, nasaLate)
-    expect_true(all(dtm$surftempScaled != dtm$surftemp))
-  }
 
 })
 

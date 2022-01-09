@@ -50,15 +50,22 @@ glyphs <- function(
   y_scale = identity,
   x_scale = identity
 ) {
+
+  x_scale <- enquo(x_scale)
+  y_scale <- enquo(y_scale)
   out <- glyph_layer(data, component = "glyph",
-                     x_major, x_minor,
-                     y_major, y_minor,
-                    polar, height, width, y_scale, x_scale)
+                     x_major, x_minor, y_major, y_minor,
+                     polar, height, width, x_scale, y_scale)
   new_cols <- out %>%
     dplyr::select(group, x, y) %>%
     dplyr::rename(gid = group, gx = x, gy = y)
 
   data <- data %>% dplyr::bind_cols(new_cols)
+
+  if (!identical(x_scale, identity) || !identical(y_scale, identity)){
+    data[[x_minor]] <- out$x_minor
+    data[[y_minor]] <- out$y_minor
+  }
 
   tibble::new_tibble(data, nrow = nrow(data),
             width = width, height = height, polar = polar,
@@ -71,8 +78,8 @@ glyphs <- function(
 
 glyph_layer <- function(data, component = c("glyph", "line", "box"),
                         x_major, x_minor, y_major, y_minor,
-                       polar, height, width,
-                       y_scale, x_scale){
+                        polar, height, width, x_scale, y_scale){
+
   if (missing(x_major)) x_major <- attr(data, "x_major")
   if (missing(x_minor)) x_minor <- attr(data, "x_minor")
   if (missing(y_major)) y_major <- attr(data, "y_major")
@@ -83,7 +90,9 @@ glyph_layer <- function(data, component = c("glyph", "line", "box"),
 
   p <- ggplot2::ggplot(data = data,
                          aes(x_major = data[[x_major]], x_minor = data[[x_minor]],
-                             y_major = data[[y_major]], y_minor = data[[y_minor]]),
+                             y_major = data[[y_major]], y_minor = data[[y_minor]],
+                             x_scale = rlang::quo_name(x_scale),
+                             y_scale = rlang::quo_name(y_scale)),
                          polar = polar, height = height, width = width)
 
   out <- switch (component,
