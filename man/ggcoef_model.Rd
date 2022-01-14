@@ -9,7 +9,7 @@
 \usage{
 ggcoef_model(
   model,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
@@ -32,7 +32,7 @@ ggcoef_model(
 ggcoef_compare(
   models,
   type = c("dodged", "faceted"),
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
@@ -54,7 +54,7 @@ ggcoef_multinom(
   model,
   type = c("dodged", "faceted"),
   y.level_label = NULL,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
