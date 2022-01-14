@@ -72,6 +72,8 @@ Suggests:
     knitr,
     spelling,
     emmeans
+Remotes:
+    huizezhang-sherry/cubble
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 SystemRequirements: openssl
