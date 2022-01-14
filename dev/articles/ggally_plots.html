@@ -22,6 +22,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -41,12 +43,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -57,7 +53,8 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li class="divider">
-    <li class="dropdown-header">Generic plot matrix</li>
+    </li>
+<li class="dropdown-header">Generic plot matrix</li>
     <li>
       <a href="../articles/ggpairs.html">ggpairs(): Pairwise plot matrix</a>
     </li>
@@ -71,7 +68,8 @@
       <a href="../articles/ggally_plots.html">ggally_*(): List of available high-level plots</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized plot matrix</li>
+    </li>
+<li class="dropdown-header">Specialized plot matrix</li>
     <li>
       <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
@@ -88,7 +86,8 @@
       <a href="../articles/ggally_stats.html">stat_*(): Additional statistics for ggplot2</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized ggplot2 plot</li>
+    </li>
+<li class="dropdown-header">Specialized ggplot2 plot</li>
     <li>
       <a href="../articles/ggcoef_model.html">ggcoef_model(): Model coefficients</a>
     </li>
@@ -112,7 +111,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggobi/ggally/">
+  <a href="https://github.com/ggobi/ggally/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -137,11 +136,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggally_*(): List of available high-level plots</h1>
-                        <h4 class="author">GGally Team</h4>
+                        <h4 data-toc-skip class="author">GGally Team</h4>
             
-            <h4 class="date">May 28, 2020</h4>
+            <h4 data-toc-skip class="date">May 28, 2020</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/ggally_plots.Rmd"><code>vignettes/ggally_plots.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/HEAD/vignettes/ggally_plots.Rmd" class="external-link"><code>vignettes/ggally_plots.Rmd</code></a></small>
       <div class="hidden name"><code>ggally_plots.Rmd</code></div>
 
     </div>
@@ -151,412 +150,412 @@
 <p>The purpose of this vignette is to display all high-level plots available in <code>GGally</code> to be used in particular with <code><a href="../reference/ggduo.html">ggduo()</a></code> and <code><a href="../reference/ggpairs.html">ggpairs()</a></code>. The name of all the corresponding functions are of the form <code>ggally_*()</code>. Most of them accept a discrete variables to be passed to the <strong>colour</strong> aesthetic.</p>
 <p>We can distinct <strong>bivariate plots</strong> requiring two variables for <strong>x</strong> and <strong>y</strong> axis respectively and <strong>diagonal plots</strong> when the same variable is plotted on <strong>x</strong> and <strong>y</strong> axis.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
 <span class="co">#&gt;   +.gg   ggplot2</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></code></pre></div>
-<div id="bivariate-plots" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bivariate-plots" class="anchor"></a>Bivariate plots</h2>
-<div id="with-2x-continuous-variables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#with-2x-continuous-variables" class="anchor"></a>with 2x continuous variables</h3>
-<div id="ggally_autopoint" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_autopoint" class="anchor"></a><code>ggally_autopoint()</code>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="bivariate-plots">Bivariate plots<a class="anchor" aria-label="anchor" href="#bivariate-plots"></a>
+</h2>
+<div class="section level3">
+<h3 id="with-2x-continuous-variables">with 2x continuous variables<a class="anchor" aria-label="anchor" href="#with-2x-continuous-variables"></a>
+</h3>
+<div class="section level4">
+<h4 id="ggally_autopoint">
+<code>ggally_autopoint()</code><a class="anchor" aria-label="anchor" href="#ggally_autopoint"></a>
 </h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 </div>
-<div id="ggally_cor" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_cor" class="anchor"></a><code>ggally_cor()</code>
+<div class="section level4">
+<h4 id="ggally_cor">
+<code>ggally_cor()</code><a class="anchor" aria-label="anchor" href="#ggally_cor"></a>
 </h4>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cor.html">ggally_cor</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cor.html">ggally_cor</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cor.html">ggally_cor</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cor.html">ggally_cor</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-4-2.png" width="700"></p>
 <p>See also <code><a href="../reference/ggally_statistic.html">ggally_statistic()</a></code>.</p>
 </div>
-<div id="ggally_density" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_density" class="anchor"></a><code>ggally_density()</code>
+<div class="section level4">
+<h4 id="ggally_density">
+<code>ggally_density()</code><a class="anchor" aria-label="anchor" href="#ggally_density"></a>
 </h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_density.html">ggally_density</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_density.html">ggally_density</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_density.html">ggally_density</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_density.html">ggally_density</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
 </div>
-<div id="ggally_points" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_points" class="anchor"></a><code>ggally_points()</code>
+<div class="section level4">
+<h4 id="ggally_points">
+<code>ggally_points()</code><a class="anchor" aria-label="anchor" href="#ggally_points"></a>
 </h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_points.html">ggally_points</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_points.html">ggally_points</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_points.html">ggally_points</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_points.html">ggally_points</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
 </div>
-<div id="ggally_smooth-ggally_smooth_lm-ggally_smooth_loess" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_smooth-ggally_smooth_lm-ggally_smooth_loess" class="anchor"></a><code>ggally_smooth()</code>, <code>ggally_smooth_lm()</code> &amp; <code>ggally_smooth_loess()</code>
+<div class="section level4">
+<h4 id="ggally_smooth-ggally_smooth_lm-ggally_smooth_loess">
+<code>ggally_smooth()</code>, <code>ggally_smooth_lm()</code> &amp; <code>ggally_smooth_loess()</code><a class="anchor" aria-label="anchor" href="#ggally_smooth-ggally_smooth_lm-ggally_smooth_loess"></a>
 </h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_lm</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_loess</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_loess</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-7-3.png" width="700"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_loess</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_smooth.html">ggally_smooth_loess</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-7-4.png" width="700"></p>
 <p>See also <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> for more options.</p>
 </div>
 </div>
-<div id="with-2x-discrete-variables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#with-2x-discrete-variables" class="anchor"></a>with 2x discrete variables</h3>
-<div id="ggally_colbar" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_colbar" class="anchor"></a><code>ggally_colbar()</code>
+<div class="section level3">
+<h3 id="with-2x-discrete-variables">with 2x discrete variables<a class="anchor" aria-label="anchor" href="#with-2x-discrete-variables"></a>
+</h3>
+<div class="section level4">
+<h4 id="ggally_colbar">
+<code>ggally_colbar()</code><a class="anchor" aria-label="anchor" href="#ggally_colbar"></a>
 </h4>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_colbar.html">ggally_colbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_colbar.html">ggally_colbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Note: the <strong>colour</strong> aesthetic is not taken into account.</p>
 </div>
-<div id="ggally_autopoint-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_autopoint-1" class="anchor"></a><code>ggally_autopoint()</code>
+<div class="section level4">
+<h4 id="ggally_autopoint-1">
+<code>ggally_autopoint()</code><a class="anchor" aria-label="anchor" href="#ggally_autopoint-1"></a>
 </h4>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
 </div>
-<div id="ggally_count" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_count" class="anchor"></a><code>ggally_count()</code>
+<div class="section level4">
+<h4 id="ggally_count">
+<code>ggally_count()</code><a class="anchor" aria-label="anchor" href="#ggally_count"></a>
 </h4>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_count</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_count</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_count</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_count</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-10-2.png" width="700"></p>
 </div>
-<div id="ggally_cross" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_cross" class="anchor"></a><code>ggally_cross()</code>
+<div class="section level4">
+<h4 id="ggally_cross">
+<code>ggally_cross()</code><a class="anchor" aria-label="anchor" href="#ggally_cross"></a>
 </h4>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-11-2.png" width="700"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_cross.html">ggally_cross</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-11-3.png" width="700"></p>
 <p>Note: <strong>colour</strong> aesthetic is taken into account only if it corresponds to <strong>x</strong> or to <strong>y</strong>.</p>
 </div>
-<div id="ggally_crosstable" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_crosstable" class="anchor"></a><code>ggally_crosstable()</code>
+<div class="section level4">
+<h4 id="ggally_crosstable">
+<code>ggally_crosstable()</code><a class="anchor" aria-label="anchor" href="#ggally_crosstable"></a>
 </h4>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_crosstable.html">ggally_crosstable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_crosstable.html">ggally_crosstable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_crosstable.html">ggally_crosstable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"col.prop"</span>, fill <span class="op">=</span> <span class="st">"std.resid"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_crosstable.html">ggally_crosstable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"col.prop"</span>, fill <span class="op">=</span> <span class="st">"std.resid"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-12-2.png" width="700"></p>
 <p>Note: <strong>colour</strong> aesthetic is not taken into account.</p>
 </div>
-<div id="ggally_facetbar" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_facetbar" class="anchor"></a><code>ggally_facetbar()</code>
+<div class="section level4">
+<h4 id="ggally_facetbar">
+<code>ggally_facetbar()</code><a class="anchor" aria-label="anchor" href="#ggally_facetbar"></a>
 </h4>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetbar.html">ggally_facetbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-13-2.png" width="700"></p>
 </div>
-<div id="ggally_ratio" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_ratio" class="anchor"></a><code>ggally_ratio()</code>
+<div class="section level4">
+<h4 id="ggally_ratio">
+<code>ggally_ratio()</code><a class="anchor" aria-label="anchor" href="#ggally_ratio"></a>
 </h4>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_ratio.html">ggally_ratio</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-14-2.png" width="700"></p>
 </div>
-<div id="ggally_rowbar" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_rowbar" class="anchor"></a><code>ggally_rowbar()</code>
+<div class="section level4">
+<h4 id="ggally_rowbar">
+<code>ggally_rowbar()</code><a class="anchor" aria-label="anchor" href="#ggally_rowbar"></a>
 </h4>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_colbar.html">ggally_rowbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_colbar.html">ggally_rowbar</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 <p>Note: the <strong>colour</strong> aesthetic is not taken into account.</p>
 </div>
-<div id="ggally_table" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_table" class="anchor"></a><code>ggally_table()</code>
+<div class="section level4">
+<h4 id="ggally_table">
+<code>ggally_table()</code><a class="anchor" aria-label="anchor" href="#ggally_table"></a>
 </h4>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-2.png" width="700"></p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_table.html">ggally_table</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-16-3.png" width="700"></p>
 <p>Note: <strong>colour</strong> aesthetic is taken into account only if it corresponds to <strong>x</strong> or to <strong>y</strong>.</p>
 </div>
-<div id="ggally_trends" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_trends" class="anchor"></a><code>ggally_trends()</code>
+<div class="section level4">
+<h4 id="ggally_trends">
+<code>ggally_trends()</code><a class="anchor" aria-label="anchor" href="#ggally_trends"></a>
 </h4>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-17-2.png" width="700"></p>
 </div>
 </div>
-<div id="with-1x-continuous-and-1x-discrete-variables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#with-1x-continuous-and-1x-discrete-variables" class="anchor"></a>with 1x continuous and 1x discrete variables</h3>
-<div id="ggally_autopoint-2" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_autopoint-2" class="anchor"></a><code>ggally_autopoint()</code>
+<div class="section level3">
+<h3 id="with-1x-continuous-and-1x-discrete-variables">with 1x continuous and 1x discrete variables<a class="anchor" aria-label="anchor" href="#with-1x-continuous-and-1x-discrete-variables"></a>
+</h3>
+<div class="section level4">
+<h4 id="ggally_autopoint-2">
+<code>ggally_autopoint()</code><a class="anchor" aria-label="anchor" href="#ggally_autopoint-2"></a>
 </h4>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopoint</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-18-2.png" width="700"></p>
 </div>
-<div id="ggally_box-ggally_box_no_facet" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_box-ggally_box_no_facet" class="anchor"></a><code>ggally_box()</code> &amp; <code>ggally_box_no_facet()</code>
+<div class="section level4">
+<h4 id="ggally_box-ggally_box_no_facet">
+<code>ggally_box()</code> &amp; <code>ggally_box_no_facet()</code><a class="anchor" aria-label="anchor" href="#ggally_box-ggally_box_no_facet"></a>
 </h4>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-2.png" width="700"></p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-3.png" width="700"></p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_box.html">ggally_box_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-19-4.png" width="700"></p>
 </div>
-<div id="ggally_denstrip" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_denstrip" class="anchor"></a><code>ggally_denstrip()</code>
+<div class="section level4">
+<h4 id="ggally_denstrip">
+<code>ggally_denstrip()</code><a class="anchor" aria-label="anchor" href="#ggally_denstrip"></a>
 </h4>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; Warning: Removed 45 rows containing missing values (geom_bar).</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="co">#&gt; Warning: Removed 45 rows containing missing values (geom_bar).</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-2.png" width="700"></p>
 </div>
-<div id="ggally_dot-ggally_dot_no_facet" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_dot-ggally_dot_no_facet" class="anchor"></a><code>ggally_dot()</code> &amp; <code>ggally_dot_no_facet()</code>
+<div class="section level4">
+<h4 id="ggally_dot-ggally_dot_no_facet">
+<code>ggally_dot()</code> &amp; <code>ggally_dot_no_facet()</code><a class="anchor" aria-label="anchor" href="#ggally_dot-ggally_dot_no_facet"></a>
 </h4>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-2.png" width="700"></p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-3.png" width="700"></p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_dot.html">ggally_dot_no_facet</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-21-4.png" width="700"></p>
 </div>
-<div id="ggally_facetdensitystrip" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_facetdensitystrip" class="anchor"></a><code>ggally_facetdensitystrip()</code>
+<div class="section level4">
+<h4 id="ggally_facetdensitystrip">
+<code>ggally_facetdensitystrip()</code><a class="anchor" aria-label="anchor" href="#ggally_facetdensitystrip"></a>
 </h4>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetdensitystrip.html">ggally_facetdensitystrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetdensitystrip.html">ggally_facetdensitystrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetdensitystrip.html">ggally_facetdensitystrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facetdensitystrip.html">ggally_facetdensitystrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Groups with fewer than two data points have been dropped.</span>
 <span class="co">#&gt; Warning: Removed 1 row(s) containing missing values (geom_path).</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
 </div>
-<div id="ggally_facethist" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_facethist" class="anchor"></a><code>ggally_facethist()</code>
+<div class="section level4">
+<h4 id="ggally_facethist">
+<code>ggally_facethist()</code><a class="anchor" aria-label="anchor" href="#ggally_facethist"></a>
 </h4>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_facethist.html">ggally_facethist</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-23-2.png" width="700"></p>
 </div>
-<div id="ggally_summarise_by" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_summarise_by" class="anchor"></a><code>ggally_summarise_by()</code>
+<div class="section level4">
+<h4 id="ggally_summarise_by">
+<code>ggally_summarise_by()</code><a class="anchor" aria-label="anchor" href="#ggally_summarise_by"></a>
 </h4>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_summarise_by.html">ggally_summarise_by</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_summarise_by.html">ggally_summarise_by</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_summarise_by.html">ggally_summarise_by</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_summarise_by.html">ggally_summarise_by</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-24-2.png" width="700"></p>
 <p>Note: colour aesthetic is kept only if corresponding to the discrete axis.</p>
 </div>
-<div id="ggally_trends-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_trends-1" class="anchor"></a><code>ggally_trends()</code>
+<div class="section level4">
+<h4 id="ggally_trends-1">
+<code>ggally_trends()</code><a class="anchor" aria-label="anchor" href="#ggally_trends-1"></a>
 </h4>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">total_bill</span>, x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">total_bill</span>, x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">total_bill</span>, x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_trends.html">ggally_trends</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">total_bill</span>, x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-25-2.png" width="700"></p>
 </div>
 </div>
 </div>
-<div id="diagonal-plots" class="section level2">
-<h2 class="hasAnchor">
-<a href="#diagonal-plots" class="anchor"></a>Diagonal plots</h2>
-<div id="with-1x-continuous-variable" class="section level3">
-<h3 class="hasAnchor">
-<a href="#with-1x-continuous-variable" class="anchor"></a>with 1x continuous variable</h3>
-<div id="ggally_autopointdiag" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_autopointdiag" class="anchor"></a><code>ggally_autopointDiag()</code>
+<div class="section level2">
+<h2 id="diagonal-plots">Diagonal plots<a class="anchor" aria-label="anchor" href="#diagonal-plots"></a>
+</h2>
+<div class="section level3">
+<h3 id="with-1x-continuous-variable">with 1x continuous variable<a class="anchor" aria-label="anchor" href="#with-1x-continuous-variable"></a>
+</h3>
+<div class="section level4">
+<h4 id="ggally_autopointdiag">
+<code>ggally_autopointDiag()</code><a class="anchor" aria-label="anchor" href="#ggally_autopointdiag"></a>
 </h4>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-26-2.png" width="700"></p>
 </div>
-<div id="ggally_bardiag" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_bardiag" class="anchor"></a><code>ggally_barDiag()</code>
+<div class="section level4">
+<h4 id="ggally_bardiag">
+<code>ggally_barDiag()</code><a class="anchor" aria-label="anchor" href="#ggally_bardiag"></a>
 </h4>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-27-2.png" width="700"></p>
 </div>
-<div id="ggally_densitydiag" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_densitydiag" class="anchor"></a><code>ggally_densityDiag()</code>
+<div class="section level4">
+<h4 id="ggally_densitydiag">
+<code>ggally_densityDiag()</code><a class="anchor" aria-label="anchor" href="#ggally_densitydiag"></a>
 </h4>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-28-1.png" width="700"></p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-28-2.png" width="700"></p>
 </div>
 </div>
-<div id="with-1x-discrete-variable" class="section level3">
-<h3 class="hasAnchor">
-<a href="#with-1x-discrete-variable" class="anchor"></a>with 1x discrete variable</h3>
-<div id="ggally_autopointdiag-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_autopointdiag-1" class="anchor"></a><code>ggally_autopointDiag()</code>
+<div class="section level3">
+<h3 id="with-1x-discrete-variable">with 1x discrete variable<a class="anchor" aria-label="anchor" href="#with-1x-discrete-variable"></a>
+</h3>
+<div class="section level4">
+<h4 id="ggally_autopointdiag-1">
+<code>ggally_autopointDiag()</code><a class="anchor" aria-label="anchor" href="#ggally_autopointdiag-1"></a>
 </h4>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_autopoint.html">ggally_autopointDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-29-2.png" width="700"></p>
 </div>
-<div id="ggally_bardiag-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_bardiag-1" class="anchor"></a><code>ggally_barDiag()</code>
+<div class="section level4">
+<h4 id="ggally_bardiag-1">
+<code>ggally_barDiag()</code><a class="anchor" aria-label="anchor" href="#ggally_bardiag-1"></a>
 </h4>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-30-1.png" width="700"></p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_barDiag.html">ggally_barDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-30-2.png" width="700"></p>
 </div>
-<div id="ggally_countdiag" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_countdiag" class="anchor"></a><code>ggally_countDiag()</code>
+<div class="section level4">
+<h4 id="ggally_countdiag">
+<code>ggally_countDiag()</code><a class="anchor" aria-label="anchor" href="#ggally_countdiag"></a>
 </h4>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_countDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_countDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-31-1.png" width="700"></p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_countDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_count.html">ggally_countDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-31-2.png" width="700"></p>
 </div>
-<div id="ggally_densitydiag-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#ggally_densitydiag-1" class="anchor"></a><code>ggally_densityDiag()</code>
+<div class="section level4">
+<h4 id="ggally_densitydiag-1">
+<code>ggally_densityDiag()</code><a class="anchor" aria-label="anchor" href="#ggally_densitydiag-1"></a>
 </h4>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-32-1.png" width="700"></p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggally_densityDiag.html">ggally_densityDiag</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Groups with fewer than two data points have been dropped.</span>
-<span class="co">#&gt; Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning -</span>
-<span class="co">#&gt; Inf</span></code></pre></div>
+<span class="co">#&gt; Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning</span>
+<span class="co">#&gt; -Inf</span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-32-2.png" width="700"></p>
 </div>
 </div>
 </div>
-<div id="additional-plots" class="section level2">
-<h2 class="hasAnchor">
-<a href="#additional-plots" class="anchor"></a>Additional plots</h2>
+<div class="section level2">
+<h2 id="additional-plots">Additional plots<a class="anchor" aria-label="anchor" href="#additional-plots"></a>
+</h2>
 <ul>
 <li>
 <code><a href="../reference/ggally_statistic.html">ggally_statistic()</a></code> and <code><a href="../reference/ggally_text.html">ggally_text()</a></code> to display custom text</li>
@@ -580,11 +579,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://schloerke.com/">Barret Schloerke</a>, <a href="http://www.dicook.org/">Di Cook</a>, <a href="https://joseph.larmarange.net/">Joseph Larmarange</a>, <a href="https://f.briatte.org/">Francois Briatte</a>, <a href="http://moritz-marbach.com/">Moritz Marbach</a>, <a href="https://edwinth.github.io/">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p></p>
+<p>Developed by <a href="http://schloerke.com/" class="external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

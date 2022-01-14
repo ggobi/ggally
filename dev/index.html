@@ -28,6 +28,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -47,12 +49,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -63,7 +59,8 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li class="divider">
-    <li class="dropdown-header">Generic plot matrix</li>
+    </li>
+<li class="dropdown-header">Generic plot matrix</li>
     <li>
       <a href="articles/ggpairs.html">ggpairs(): Pairwise plot matrix</a>
     </li>
@@ -77,7 +74,8 @@
       <a href="articles/ggally_plots.html">ggally_*(): List of available high-level plots</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized plot matrix</li>
+    </li>
+<li class="dropdown-header">Specialized plot matrix</li>
     <li>
       <a href="articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
@@ -94,7 +92,8 @@
       <a href="articles/ggally_stats.html">stat_*(): Additional statistics for ggplot2</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized ggplot2 plot</li>
+    </li>
+<li class="dropdown-header">Specialized ggplot2 plot</li>
     <li>
       <a href="articles/ggcoef_model.html">ggcoef_model(): Model coefficients</a>
     </li>
@@ -118,7 +117,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggobi/ggally/">
+  <a href="https://github.com/ggobi/ggally/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -141,88 +140,100 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="ggally-extension-to-ggplot2" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#ggally-extension-to-ggplot2" class="anchor"></a><a href="http://ggobi.github.io/ggally/">GGally</a>: Extension to <a href="https://ggplot2.tidyverse.org/">ggplot2</a>
+<div class="section level1">
+<div class="page-header"><h1 id="ggally-extension-to-ggplot2">
+<a href="http://ggobi.github.io/ggally/" class="external-link">GGally</a>: Extension to <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a>
+<a class="anchor" aria-label="anchor" href="#ggally-extension-to-ggplot2"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p><a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> is a plotting system for R based on the grammar of graphics. <a href="https://ggobi.github.io/ggally/"><code>GGally</code></a> extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>To install this package from GitHub or <a href="https://cran.r-project.org/package=GGally">CRAN</a>, do the following from the R console:</p>
+<p><a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> is a plotting system for R based on the grammar of graphics. <a href="https://ggobi.github.io/ggally/"><code>GGally</code></a> extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>To install this package from GitHub or <a href="https://cran.r-project.org/package=GGally" class="external-link">CRAN</a>, do the following from the R console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Github</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu">install_github</span><span class="op">(</span><span class="st">"ggobi/ggally"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"GGally"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"GGally"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=GGally">https://​cloud.r-project.org/​package=GGally</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/ggobi/ggally/">https://​github.com/​ggobi/​ggally/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/ggobi/ggally/issues">https://​github.com/​ggobi/​ggally/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=GGally" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/ggobi/ggally/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ggobi/ggally/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL (&gt;= 2.0)</li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>
-<a href="http://schloerke.com/">Barret Schloerke</a> <br><small class="roles"> Author, maintainer </small>  </li>
-<li>
-<a href="http://www.dicook.org/">Di Cook</a> <br><small class="roles"> Author, thesis advisor </small>  </li>
-<li>
-<a href="https://joseph.larmarange.net/">Joseph Larmarange</a> <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://f.briatte.org/">Francois Briatte</a> <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="http://moritz-marbach.com/">Moritz Marbach</a> <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://edwinth.github.io/">Edwin Thoen</a> <br><small class="roles"> Author </small>  </li>
-<li>Amos Elberg <br><small class="roles"> Author </small>  </li>
-<li>Jason Crowley <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing GGally</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/ggobi/ggally/actions"><img src="https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/github/ggobi/ggally?branch=master"><img src="https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master" alt="codecov.io"></a></li>
-<li><a href="https://cran.r-project.org/package=GGally"><img src="http://www.r-pkg.org/badges/version/GGally" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=GGally"><img src="http://cranlogs.r-pkg.org/badges/GGally"></a></li>
-<li><a href="https://zenodo.org/badge/latestdoi/22529/ggobi/ggally"><img src="https://zenodo.org/badge/22529/ggobi/ggally.svg" alt="DOI"></a></li>
-<li><a href="https://community.rstudio.com/tags/c/general/17/ggally"><img src="https://img.shields.io/badge/community-GGally-blue?style=social&amp;logo=rstudio&amp;logoColor=75AADB" alt="RStudio community"></a></li>
+<li>
+<a href="http://schloerke.com/" class="external-link">Barret Schloerke</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<li>
+<a href="http://www.dicook.org/" class="external-link">Di Cook</a> <br><small class="roles"> Author, thesis advisor </small>  </li>
+<li>
+<a href="https://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://f.briatte.org/" class="external-link">Francois Briatte</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="http://moritz-marbach.com/" class="external-link">Moritz Marbach</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://edwinth.github.io/" class="external-link">Edwin Thoen</a> <br><small class="roles"> Author </small>  </li>
+<li>Amos Elberg <br><small class="roles"> Author </small>  </li>
+<li>Jason Crowley <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/ggobi/ggally/actions" class="external-link"><img src="https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/github/ggobi/ggally?branch=master" class="external-link"><img src="https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master" alt="codecov.io"></a></li>
+<li><a href="https://cran.r-project.org/package=GGally" class="external-link"><img src="http://www.r-pkg.org/badges/version/GGally" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=GGally" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/GGally"></a></li>
+<li><a href="https://zenodo.org/badge/latestdoi/22529/ggobi/ggally" class="external-link"><img src="https://zenodo.org/badge/22529/ggobi/ggally.svg" alt="DOI"></a></li>
+<li><a href="https://community.rstudio.com/tags/c/general/17/ggally" class="external-link"><img src="https://img.shields.io/badge/community-GGally-blue?style=social&amp;logo=rstudio&amp;logoColor=75AADB" alt="RStudio community"></a></li>
+<li><a href="https://github.com/ggobi/ggally/actions" class="external-link"><img src="https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://schloerke.com/">Barret Schloerke</a>, <a href="http://www.dicook.org/">Di Cook</a>, <a href="https://joseph.larmarange.net/">Joseph Larmarange</a>, <a href="https://f.briatte.org/">Francois Briatte</a>, <a href="http://moritz-marbach.com/">Moritz Marbach</a>, <a href="https://edwinth.github.io/">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p></p>
+<p>Developed by <a href="http://schloerke.com/" class="external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

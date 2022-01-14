@@ -22,6 +22,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -41,12 +43,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -57,7 +53,8 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li class="divider">
-    <li class="dropdown-header">Generic plot matrix</li>
+    </li>
+<li class="dropdown-header">Generic plot matrix</li>
     <li>
       <a href="../articles/ggpairs.html">ggpairs(): Pairwise plot matrix</a>
     </li>
@@ -71,7 +68,8 @@
       <a href="../articles/ggally_plots.html">ggally_*(): List of available high-level plots</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized plot matrix</li>
+    </li>
+<li class="dropdown-header">Specialized plot matrix</li>
     <li>
       <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
@@ -88,7 +86,8 @@
       <a href="../articles/ggally_stats.html">stat_*(): Additional statistics for ggplot2</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized ggplot2 plot</li>
+    </li>
+<li class="dropdown-header">Specialized ggplot2 plot</li>
     <li>
       <a href="../articles/ggcoef_model.html">ggcoef_model(): Model coefficients</a>
     </li>
@@ -112,7 +111,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggobi/ggally/">
+  <a href="https://github.com/ggobi/ggally/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -137,11 +136,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggnostic(): Model diagnostics</h1>
-                        <h4 class="author">Barret Schloerke</h4>
+                        <h4 data-toc-skip class="author">Barret Schloerke</h4>
             
-            <h4 class="date">Oct 1, 2016</h4>
+            <h4 data-toc-skip class="date">Oct 1, 2016</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/ggnostic.Rmd"><code>vignettes/ggnostic.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/HEAD/vignettes/ggnostic.Rmd" class="external-link"><code>vignettes/ggnostic.Rmd</code></a></small>
       <div class="hidden name"><code>ggnostic.Rmd</code></div>
 
     </div>
@@ -149,16 +148,16 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
 <span class="co">#&gt;   method from   </span>
 <span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
-<div id="ggallyggnostic" class="section level1">
-<h1 class="hasAnchor">
-<a href="#ggallyggnostic" class="anchor"></a><code>GGally::ggnostic()</code>
-</h1>
-<p><code><a href="../reference/ggnostic.html">ggnostic()</a></code> is a display wrapper to <code><a href="../reference/ggduo.html">ggduo()</a></code> that displays full model diagnostics for each given explanatory variable. By default, <code><a href="../reference/ggduo.html">ggduo()</a></code> displays the residuals, leave-one-out model sigma value, leverage points, and Cook’s distance against each explanatory variable. The rows of the plot matrix can be expanded to include fitted values, standard error of the fitted values, standardized residuals, and any of the response variables. If the model is a linear model, stars are added according to the <code><a href="https://rdrr.io/r/stats/anova.html">stats::anova</a></code> significance of each explanatory variable.</p>
+<div class="section level2">
+<h2 id="ggallyggnostic">
+<code>GGally::ggnostic()</code><a class="anchor" aria-label="anchor" href="#ggallyggnostic"></a>
+</h2>
+<p><code><a href="../reference/ggnostic.html">ggnostic()</a></code> is a display wrapper to <code><a href="../reference/ggduo.html">ggduo()</a></code> that displays full model diagnostics for each given explanatory variable. By default, <code><a href="../reference/ggduo.html">ggduo()</a></code> displays the residuals, leave-one-out model sigma value, leverage points, and Cook’s distance against each explanatory variable. The rows of the plot matrix can be expanded to include fitted values, standard error of the fitted values, standardized residuals, and any of the response variables. If the model is a linear model, stars are added according to the <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">stats::anova</a></code> significance of each explanatory variable.</p>
 <p>Most diagnostic plots contain reference line(s) to help determine if the model is fitting properly</p>
 <ul>
 <li>
@@ -168,7 +167,7 @@
 </li>
 <li>A solid line is located at the expected value of 0 with dashed lines at the 95% confidence interval. (<span class="math inline">\(0 \pm 1.96 * \sigma\)</span>)</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_resid.html">ggally_nostic_resid()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/residuals.html">stats::residuals</a></code>
+<li>See also <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">stats::residuals</a></code>
 </li>
 </ul>
 </li>
@@ -179,7 +178,7 @@
 </li>
 <li>Same as residuals, except the standardized residuals equal the regular residuals divided by sigma. The dashed lines are located at <span class="math inline">\(0 \pm 1.96 * 1\)</span>.</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_std_resid.html">ggally_nostic_std_resid()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/influence.measures.html">stats::rstandard</a></code>
+<li>See also <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">stats::rstandard</a></code>
 </li>
 </ul>
 </li>
@@ -190,7 +189,7 @@
 </li>
 <li>A solid line is located at the full model’s sigma value.</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_sigma.html">ggally_nostic_sigma()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html">stats::influence</a></code>’s value on <code>sigma</code>
+<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">stats::influence</a></code>’s value on <code>sigma</code>
 </li>
 </ul>
 </li>
@@ -201,7 +200,7 @@
 </li>
 <li>The expected value for the diagonal of a hat matrix is <span class="math inline">\(p / n\)</span>. Points are considered leverage points if they are large than <span class="math inline">\(2 * p / n\)</span>, where the higher line is drawn.</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_hat.html">ggally_nostic_hat()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html">stats::influence</a></code>’s value on <code>hat</code>
+<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">stats::influence</a></code>’s value on <code>hat</code>
 </li>
 </ul>
 </li>
@@ -210,7 +209,7 @@
 <ul>
 <li>Type key: <code>".cooksd"</code>
 </li>
-<li>Points that are larger than <span class="math inline">\(4 / n\)</span> line are considered highly influential points. Plot function: <code><a href="../reference/ggally_nostic_cooksd.html">ggally_nostic_cooksd()</a></code>. See also <code><a href="https://rdrr.io/r/stats/influence.measures.html">stats::cooks.distance()</a></code>
+<li>Points that are larger than <span class="math inline">\(4 / n\)</span> line are considered highly influential points. Plot function: <code><a href="../reference/ggally_nostic_cooksd.html">ggally_nostic_cooksd()</a></code>. See also <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">stats::cooks.distance()</a></code>
 </li>
 </ul>
 </li>
@@ -221,7 +220,7 @@
 </li>
 <li>No reference lines by default.</li>
 <li>Default plot function: <code><a href="../reference/ggally_points.html">ggally_points()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/predict.html">stats::predict</a></code>
+<li>See also <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">stats::predict</a></code>
 </li>
 </ul>
 </li>
@@ -232,7 +231,7 @@
 </li>
 <li>No reference lines by default.</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_se_fit.html">ggally_nostic_se_fit()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/fitted.values.html">stats::fitted</a></code>
+<li>See also <code><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">stats::fitted</a></code>
 </li>
 </ul>
 </li>
@@ -245,15 +244,15 @@
 </ul>
 </li>
 </ul>
-<div id="life-expectancy-model-fitting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#life-expectancy-model-fitting" class="anchor"></a>Life Expectancy Model Fitting</h2>
-<p>Looking at the dataset <code><a href="https://rdrr.io/r/datasets/state.html">datasets::state.x77</a></code>, we will fit a multiple regression model for Life Expectancy.</p>
+<div class="section level3">
+<h3 id="life-expectancy-model-fitting">Life Expectancy Model Fitting<a class="anchor" aria-label="anchor" href="#life-expectancy-model-fitting"></a>
+</h3>
+<p>Looking at the dataset <code><a href="https://rdrr.io/r/datasets/state.html" class="external-link">datasets::state.x77</a></code>, we will fit a multiple regression model for Life Expectancy.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make a data.frame and fix column names</span>
-<span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">state.x77</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Life.Exp"</span>, <span class="st">"HS.Grad"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span>
+<span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">state.x77</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Life.Exp"</span>, <span class="st">"HS.Grad"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    50 obs. of  8 variables:</span>
 <span class="co">#&gt;  $ Population: num  3615 365 2212 2110 21198 ...</span>
 <span class="co">#&gt;  $ Income    : num  3624 6315 4530 3378 5114 ...</span>
@@ -265,10 +264,10 @@
 <span class="co">#&gt;  $ Area      : num  50708 566432 113417 51945 156361 ...</span>
 
 <span class="co"># fit full model</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">state</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">state</span><span class="op">)</span>
 <span class="co"># reduce to "best fit" model with</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="va">model</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="va">model</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
@@ -294,7 +293,7 @@
 <p>Next, we look at the variables for any high (|value| &gt; 0.8) correlation values and general interaction behavior.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># look at variables for high correlation (none)</span>
-<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">state</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">state</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_scatmat-1.png" width="700"></p>
 <p>All variables appear to be ok. Next, we look at the model diagnostics.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -317,7 +316,7 @@
 <span class="co">#&gt;        Population Income Illiteracy Life.Exp Murder HS.Grad Frost Area</span>
 <span class="co">#&gt; Hawaii        868   4963        1.9     73.6    6.2    61.9     0 6425</span>
 <span class="va">state_no_hawaii</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="op">-</span><span class="fl">11</span>, <span class="op">]</span>
-<span class="va">model_no_hawaii</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">Population</span> <span class="op">+</span> <span class="va">Murder</span> <span class="op">+</span> <span class="va">HS.Grad</span> <span class="op">+</span> <span class="va">Frost</span>, data <span class="op">=</span> <span class="va">state_no_hawaii</span><span class="op">)</span>
+<span class="va">model_no_hawaii</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">Population</span> <span class="op">+</span> <span class="va">Murder</span> <span class="op">+</span> <span class="va">HS.Grad</span> <span class="op">+</span> <span class="va">Frost</span>, data <span class="op">=</span> <span class="va">state_no_hawaii</span><span class="op">)</span>
 <span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">model_no_hawaii</span><span class="op">)</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
@@ -326,7 +325,7 @@
 <p><img src="ggnostic_files/figure-html/nostic_no_hawaii-1.png" width="700"></p>
 <p>There are no more outrageous Cook’s distance values. The model without Hawaii appears to be a good fitting model.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
@@ -349,7 +348,7 @@
 <span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span>
 <span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span>
 <span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model_no_hawaii</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model_no_hawaii</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
@@ -374,13 +373,13 @@
 <span class="co">#&gt; F-statistic: 32.71 on 4 and 44 DF,  p-value: 1.15e-12</span></code></pre></div>
 <p>Since there is only a marginal improvement by removing Hawaii, the original model should be used to explain life expectancy.</p>
 </div>
-<div id="full-diagnostic-plot-matrix-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#full-diagnostic-plot-matrix-example" class="anchor"></a>Full diagnostic plot matrix example</h2>
+<div class="section level3">
+<h3 id="full-diagnostic-plot-matrix-example">Full diagnostic plot matrix example<a class="anchor" aria-label="anchor" href="#full-diagnostic-plot-matrix-example"></a>
+</h3>
 <p>The following lines of code will display different model diagnostic plot matrices for the same statistical model. The first one is of the default settings. The second adds color according to the <code>species</code>. Finally, the third displays all possible columns and uses <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> to display the fitted points and response variables.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">flea_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html">step</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">head</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">flea</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">flea_model</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">flea_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">head</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">flea</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">flea_model</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = head ~ species + tars1 + tars2 + aede1, data = flea)</span>
@@ -411,7 +410,7 @@
 <p><img src="ggnostic_files/figure-html/nostic_flea-1.png" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># color'ed output</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">flea_model</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">flea_model</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></code></pre></div>
@@ -420,9 +419,9 @@
 <code class="sourceCode R"><span class="co"># full color'ed output</span>
 <span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span>
   <span class="va">flea_model</span>,
-  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,
-  columnsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"head"</span>, <span class="st">".fitted"</span>, <span class="st">".se.fit"</span>, <span class="st">".resid"</span>, <span class="st">".std.resid"</span>, <span class="st">".hat"</span>, <span class="st">".sigma"</span>, <span class="st">".cooksd"</span><span class="op">)</span>,
-  continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_smooth</span>, .fitted <span class="op">=</span> <span class="va">ggally_smooth</span><span class="op">)</span>
+  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,
+  columnsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"head"</span>, <span class="st">".fitted"</span>, <span class="st">".se.fit"</span>, <span class="st">".resid"</span>, <span class="st">".std.resid"</span>, <span class="st">".hat"</span>, <span class="st">".sigma"</span>, <span class="st">".cooksd"</span><span class="op">)</span>,
+  continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_smooth</span>, .fitted <span class="op">=</span> <span class="va">ggally_smooth</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
@@ -446,11 +445,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://schloerke.com/">Barret Schloerke</a>, <a href="http://www.dicook.org/">Di Cook</a>, <a href="https://joseph.larmarange.net/">Joseph Larmarange</a>, <a href="https://f.briatte.org/">Francois Briatte</a>, <a href="http://moritz-marbach.com/">Moritz Marbach</a>, <a href="https://edwinth.github.io/">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p></p>
+<p>Developed by <a href="http://schloerke.com/" class="external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
