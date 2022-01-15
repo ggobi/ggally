@@ -40,7 +40,7 @@ Create the data needed to generate a glyph plot.
 }
 \details{
 The \code{glyphs} functions
-now extract the data object created with \code{\link{cubble::geom_glyph}}
+now extract the data object created with \code{\link[cubble]{geom_glyph}}
 }
 \examples{
 # Small function to display plots only if it's interactive

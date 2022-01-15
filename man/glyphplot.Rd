@@ -26,7 +26,7 @@ absolutely by supplying a numeric vector of length 1, or relative to the}
 \item{polar}{A logical of length 1, specifying whether the glyphs should
 be drawn in polar coordinates.  Defaults to \code{FALSE}.}
 
-\item{x_major, y_major}{The name of the variable (as a
+\item{x_major, x_minor, y_major, y_minor}{The name of the variable (as a
 string) for the major x and y axes.  Together, the}
 
 \item{x}{glyphplot to be printed}

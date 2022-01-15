@@ -3,7 +3,7 @@
 #' Create the data needed to generate a glyph plot.
 #'
 #' The \code{glyphs} functions
-#' now extract the data object created with \code{\link{cubble::geom_glyph}}
+#' now extract the data object created with \code{\link[cubble]{geom_glyph}}
 #'
 #' @param data A data frame containing variables named in \code{x_major},
 #'   \code{x_minor}, \code{y_major} and \code{y_minor}.
@@ -89,8 +89,8 @@ glyph_layer <- function(data, component = c("glyph", "line", "box"),
   if (missing(height)) height <- attr(data, "height")
 
   p <- ggplot2::ggplot(data = data,
-                         aes(x_major = data[[x_major]], x_minor = data[[x_minor]],
-                             y_major = data[[y_major]], y_minor = data[[y_minor]],
+                         aes(x_major = .data[[x_major]], x_minor = .data[[x_minor]],
+                             y_major = .data[[y_major]], y_minor = .data[[y_minor]],
                              x_scale = rlang::quo_name(x_scale),
                              y_scale = rlang::quo_name(y_scale)),
                          polar = polar, height = height, width = width)
@@ -117,7 +117,7 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
                           fill = NA, ...){
 
   data <- glyph_layer(data, component = "box")
-  data <- data %>% dplyr::select(gid, gx, gy, xmin:ymax)
+  data <- data %>% dplyr::select(.data$gid, .data$gx, .data$gy, .data$xmin:.data$ymax)
 
   if (!is.null(var_fill)) data$fill <- var_fill
   suppressWarnings(ggplot2::geom_rect(
@@ -140,7 +140,7 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
 #   resolution of the data by using \code{\link[ggplot2]{rel}}.
 #' @param polar A logical of length 1, specifying whether the glyphs should
 #'   be drawn in polar coordinates.  Defaults to \code{FALSE}.
-#' @param x_major,x_minor,y_major,y_minorm The name of the variable (as a
+#' @param x_major,x_minor,y_major,y_minor The name of the variable (as a
 #'   string) for the major x and y axes.  Together, the
 #    combination of \code{x_major} and \code{y_major} specifies a grid cell.
 #' @export
