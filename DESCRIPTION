@@ -41,13 +41,10 @@ Imports:
     progress,
     RColorBrewer,
     reshape (>= 0.8.5),
-    tibble,
     rlang,
     scales (>= 1.1.0),
     tidyr,
-    utils,
-    cubble,
-    glue
+    utils
 Suggests:
     broom (>= 0.7.0),
     broom.helpers (>= 1.1.0),
@@ -71,7 +68,9 @@ Suggests:
     crosstalk,
     knitr,
     spelling,
-    emmeans
+    emmeans,
+    tibble,
+    cubble
 Remotes:
     huizezhang-sherry/cubble
 Roxygen: list(markdown = TRUE)

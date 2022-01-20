@@ -90,13 +90,12 @@ glyph_layer <- function(data, component = c("glyph", "line", "box"),
 
   p <- ggplot2::ggplot(data = data,
                          aes(x_major = .data[[x_major]], x_minor = .data[[x_minor]],
-                             y_major = .data[[y_major]], y_minor = .data[[y_minor]],
-                             x_scale = rlang::quo_name(x_scale),
-                             y_scale = rlang::quo_name(y_scale)),
+                             y_major = .data[[y_major]], y_minor = .data[[y_minor]]),
                          polar = polar, height = height, width = width)
 
   out <- switch (component,
-    "glyph" = p + cubble::geom_glyph(),
+    "glyph" = p + cubble::geom_glyph(x_scale = rlang::quo_name(x_scale),
+                                     y_scale = rlang::quo_name(y_scale)),
     "line" = p + cubble::geom_glyph_line(),
     "box" = p + cubble::geom_glyph_box()
   )
@@ -127,6 +126,43 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
 
 }
 
+#' @export
+#' @rdname rescale01
+range01 <- function(x) {
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+
+#' @export
+#' @rdname rescale01
+max1 <- function(x) {
+  x / max(x, na.rm = TRUE)
+}
+#' @export
+#' @rdname rescale01
+mean0 <- function(x) {
+  x - mean(x, na.rm = TRUE)
+}
+#' @export
+#' @rdname rescale01
+min0 <- function(x) {
+  x - min(x, na.rm = TRUE)
+}
+#' @export
+#' @rdname rescale01
+rescale01 <- function(x, xlim=NULL) {
+  if (is.null(xlim)) {
+    rng <- range(x, na.rm = TRUE)
+  } else {
+    rng <- xlim
+  }
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+#' @export
+#' @rdname rescale01
+rescale11 <- function(x, xlim=NULL) {
+  2 * rescale01(x, xlim) - 1
+}
 
 # Glyph plot class -----------------------------------------------------------
 
@@ -180,13 +216,13 @@ tbl_sum.glyphplot <- function(x, ...) {
     coord <- "cartesian"
   }
 
-  dim <- glue::glue(nrow(x), " x ", ncol(x))
+  dim <- paste0(nrow(x), " x ", ncol(x))
   width <- format(attr(x, "width"), digits = 3)
   height <- format(attr(x, "height"), digits = 3)
 
-  size <- glue::glue("[", width, ", ", height,  "]\n", sep = "")
-  axes <- glue::glue(attr(x, "x_major"), ", ", attr(x, "y_major"), "\n",
+  size <- paste0("[", width, ", ", height,  "]\n", sep = "")
+  axes <- paste0(attr(x, "x_major"), ", ", attr(x, "y_major"), "\n",
       sep = "")
 
-  c(glyphplot = dim, coord = coord, size = size, "major axes" = axes)
+  c(glyphplot = dim, coord = coord, size = size, "major_axes" = axes)
 }
