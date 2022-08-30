@@ -4,6 +4,7 @@
 
 * Reverse ordering of y-axis in `ggally_count()` (#420)
 * Facets ordering in `ggcoef_compare()` (#426)
+* `ggcoef_compare()` with an `include` argument (#447)
 
 
 # GGally 2.1.2
