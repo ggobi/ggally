@@ -144,7 +144,7 @@
 #' }
 ggcoef_model <- function (
   model,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
@@ -174,9 +174,9 @@ ggcoef_model <- function (
     interaction_sep = interaction_sep,
     categorical_terms_pattern = categorical_terms_pattern,
     add_reference_rows = add_reference_rows,
-    no_reference_row  = no_reference_row,
+    no_reference_row  = {{ no_reference_row }},
     intercept = intercept,
-    include = include,
+    include = {{ include }},
     significance = significance,
     significance_labels = significance_labels
   )
@@ -252,7 +252,7 @@ ggcoef_model <- function (
 ggcoef_compare <- function (
   models,
   type = c("dodged", "faceted"),
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
@@ -281,7 +281,7 @@ ggcoef_compare <- function (
     interaction_sep = interaction_sep,
     categorical_terms_pattern = categorical_terms_pattern,
     add_reference_rows = add_reference_rows,
-    no_reference_row  = no_reference_row ,
+    no_reference_row = {{ no_reference_row }},
     intercept = intercept,
     significance = significance,
     significance_labels = significance_labels
@@ -295,7 +295,7 @@ ggcoef_compare <- function (
   # include should be applied after lapply
   data <- data %>%
     broom.helpers::tidy_select_variables(
-      include = include,
+      include = {{ include }},
       model = models[[1]] # we just need to pass a model to allow the function to work
     ) %>%
     broom.helpers::tidy_detach_model()
@@ -373,7 +373,7 @@ ggcoef_multinom <- function (
   model,
   type = c("dodged", "faceted"),
   y.level_label = NULL,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
@@ -403,9 +403,9 @@ ggcoef_multinom <- function (
     interaction_sep = interaction_sep,
     categorical_terms_pattern = categorical_terms_pattern,
     add_reference_rows = add_reference_rows,
-    no_reference_row  = no_reference_row,
+    no_reference_row  = {{ no_reference_row }},
     intercept = intercept,
-    include = include,
+    include = {{ include }},
     significance = significance,
     significance_labels = significance_labels
   )
@@ -457,7 +457,7 @@ ggcoef_multinom <- function (
 # not exporting ggcoef_data
 ggcoef_data <- function (
   model,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = .95,
   exponentiate = FALSE,
@@ -489,11 +489,11 @@ ggcoef_data <- function (
     interaction_sep = interaction_sep,
     categorical_terms_pattern = categorical_terms_pattern,
     add_reference_rows = add_reference_rows,
-    no_reference_row = no_reference_row,
+    no_reference_row = {{ no_reference_row }},
     add_estimate_to_reference_rows = TRUE,
     add_header_rows = FALSE,
     intercept = intercept,
-    include = include,
+    include = {{ include }},
     keep_model = FALSE
   )
 

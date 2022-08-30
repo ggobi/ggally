@@ -47,7 +47,7 @@ Imports:
     utils
 Suggests:
     broom (>= 0.7.0),
-    broom.helpers (>= 1.1.0),
+    broom.helpers (>= 1.3.0),
     chemometrics,
     geosphere (>= 1.5-1),
     ggforce,
