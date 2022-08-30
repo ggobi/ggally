@@ -12,6 +12,7 @@
 #' }
 #'
 #' @inheritParams ggplot2::stat_bin
+#' @inheritParams ggplot2::layer
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
