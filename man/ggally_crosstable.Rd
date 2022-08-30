@@ -7,8 +7,7 @@
 ggally_crosstable(
   data,
   mapping,
-  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid",
-    "std.resid"),
+  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid", "std.resid"),
   fill = c("none", "std.resid", "resid"),
   ...,
   geom_tile_args = list(colour = "grey50")

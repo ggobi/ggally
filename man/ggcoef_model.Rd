@@ -139,8 +139,8 @@ for those no reference row should be added, when \code{add_reference_rows = TRUE
 
 \item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
 syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
-See also \code{\link[broom.helpers:select_helpers]{all_continuous()}}, \code{\link[broom.helpers:select_helpers]{all_categorical()}}, \code{\link[broom.helpers:select_helpers]{all_dichotomous()}}
-and \code{\link[broom.helpers:select_helpers]{all_interaction()}}}
+See also \code{\link[broom.helpers:all_continuous]{all_continuous()}}, \code{\link[broom.helpers:all_categorical]{all_categorical()}}, \code{\link[broom.helpers:all_dichotomous]{all_dichotomous()}}
+and \code{\link[broom.helpers:all_interaction]{all_interaction()}}}
 
 \item{significance}{level (between 0 and 1) below which a
 coefficient is consider to be significantly different from 0
@@ -242,15 +242,15 @@ then pass your customized \code{tibble} to \code{ggcoef_plot()}.
 }
 \section{Functions}{
 \itemize{
-\item \code{ggcoef_model}: Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
+\item \code{ggcoef_model()}: Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
 
-\item \code{ggcoef_compare}: Designed for displaying several models on the same plot.
+\item \code{ggcoef_compare()}: Designed for displaying several models on the same plot.
 
-\item \code{ggcoef_multinom}: A variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
+\item \code{ggcoef_multinom()}: A variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
 
-\item \code{ggcoef_plot}: SOME DESCRIPTION HERE
+\item \code{ggcoef_plot()}: SOME DESCRIPTION HERE
+
 }}
-
 \examples{
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
