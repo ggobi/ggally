@@ -164,3 +164,17 @@ test_that("ggcoef_compare complete missing data by respecting the order if varia
                               "Infant.Mortality"), class = "factor")
   )
 })
+
+test_that("ggcoef_compare() does not produce an error with an include", {
+  skip_if_not_installed("survival")
+  skip_if_not_installed("broom.helpers")
+  m1 <- survival::coxph(survival::Surv(time, status) ~ prior + age, data = survival::veteran)
+  m2 <- survival::coxph(survival::Surv(time, status) ~ prior + celltype, data = survival::veteran)
+  models <- list("Model 1" = m1, "Model 2" = m2)
+
+  expect_error(
+    ggcoef_compare(models, include = broom.helpers::starts_with("p")),
+    NA
+  )
+
+})
