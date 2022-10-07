@@ -170,9 +170,9 @@ ggnetworkmap <- function (
 
   # -- conversion to network class ---------------------------------------------
 
-  if (class(net) == "igraph" && "intergraph" %in% rownames(installed.packages())) {
+  if (inherits(net, "igraph") && "intergraph" %in% rownames(installed.packages())) {
     net = intergraph::asNetwork(net)
-  } else if (class(net) == "igraph") {
+  } else if (inherits(net, "igraph")) {
     stop("install the 'intergraph' package to use igraph objects with ggnet")
   }
 

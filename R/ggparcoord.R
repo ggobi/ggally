@@ -526,7 +526,7 @@ ggparcoord <- function(
 
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
-    if (class(splineFactor) == "AsIs") {
+    if (inherits(splineFactor, "AsIs")) {
       data.m <- ddply(
         data.m, ".ID", transform,
         spline = spline(variable, value, n = ggally_splineFactor[1])

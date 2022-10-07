@@ -290,7 +290,7 @@ ggcoef_compare <- function (
   data <- dplyr::bind_rows(data, .id = "model")
   coefficients_label <- attr(data, "coefficients_label")
 
-  data$model <- forcats::fct_inorder(data$model)
+  data$model <- .in_order(data$model)
 
   # include should be applied after lapply
   data <- data %>%
@@ -416,7 +416,7 @@ ggcoef_multinom <- function (
       levels = names(y.level_label),
       labels = y.level_label
   ) else
-    data$y.level <- forcats::fct_inorder(factor(data$y.level))
+    data$y.level <- .in_order(data$y.level)
 
   if (return_data)
     return(data)
@@ -519,9 +519,9 @@ ggcoef_data <- function (
   # keep only rows with estimate
   data <- data[!is.na(data$estimate), ]
 
-  data$var_label <- forcats::fct_inorder(data$var_label)
-  data$variable <- forcats::fct_inorder(data$variable)
-  data$label <- forcats::fct_inorder(data$label)
+  data$var_label <- .in_order(data$var_label)
+  data$variable <- .in_order(data$variable)
+  data$label <- .in_order(data$label)
 
   data$label_light <- dplyr::if_else(
     as.character(data$label) == as.character(data$var_label) &
@@ -529,7 +529,7 @@ ggcoef_data <- function (
     "",
     as.character(data$label)
   ) %>%
-    forcats::fct_inorder()
+    .in_order()
 
   data
 }
@@ -604,9 +604,9 @@ ggcoef_plot <- function (
   facet_col = NULL,
   facet_labeller = "label_value"
 ){
-  data[[y]] <- forcats::fct_rev(forcats::fct_inorder(data[[y]]))
+  data[[y]] <- forcats::fct_rev(.in_order(data[[y]]))
   if (!is.null(facet_row))
-    data[[facet_row]] <- forcats::fct_inorder(data[[facet_row]])
+    data[[facet_row]] <- .in_order(data[[facet_row]])
 
   if (stripped_rows) {
     if (!"term" %in% names(data)) {
@@ -614,7 +614,7 @@ ggcoef_plot <- function (
     }
     data <- data %>%
       dplyr::mutate(.fill = dplyr::if_else(
-        as.integer(forcats::fct_inorder(.data$term)) %% 2L == 1,
+        as.integer(.in_order(.data$term)) %% 2L == 1,
         strips_even,
         strips_odd
       ))
@@ -747,4 +747,9 @@ ggcoef_plot <- function (
     p <- p + xlab(attr(data, "coefficients_label"))
 
   p
+}
+
+.in_order <- function(x) {
+  # droping unobserved value if needed
+  forcats::fct_inorder(as.character(x))
 }

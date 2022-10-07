@@ -22,9 +22,9 @@ ggnostic(
     ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat = ggally_nostic_hat, .sigma
     = ggally_nostic_sigma, .cooksd = ggally_nostic_cooksd, .std.resid =
     ggally_nostic_std_resid),
-  discrete = list(default = ggally_ratio, .fitted = ggally_ratio, .se.fit =
-    ggally_ratio, .resid = ggally_ratio, .hat = ggally_ratio, .sigma = ggally_ratio,
-    .cooksd = ggally_ratio, .std.resid = ggally_ratio),
+  discrete = list(default = ggally_ratio, .fitted = ggally_ratio, .se.fit = ggally_ratio,
+    .resid = ggally_ratio, .hat = ggally_ratio, .sigma = ggally_ratio, .cooksd =
+    ggally_ratio, .std.resid = ggally_ratio),
   progress = NULL,
   data = broomify(model)
 )
