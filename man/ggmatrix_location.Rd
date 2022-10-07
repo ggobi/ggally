@@ -63,13 +63,13 @@ ggmatrix_location(pm, rows = 2)
 ggmatrix_location(pm, cols = 2)
 
 # row and column combinations
-ggmatrix_location(pm, rows = c(1,2), cols = c(1,3))
+ggmatrix_location(pm, rows = c(1, 2), cols = c(1, 3))
 
 # matrix locations
 mat <- matrix(TRUE, ncol = 3, nrow = 3)
-mat[1,1] <- FALSE
+mat[1, 1] <- FALSE
 locs <- ggmatrix_location(pm, location = mat)
-## does not contain the 1,1 cell
+## does not contain the 1, 1 cell
 locs
 
 # Use the output of a prior ggmatrix_location

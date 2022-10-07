@@ -90,7 +90,7 @@ if (require(survival) && require(scales)) {
     ggplot2::guides(linetype = "none") +
     ggplot2::scale_colour_discrete(
       name   = 'Sex',
-      breaks = c(1,2),
+      breaks = c(1, 2),
       labels = c('Male', 'Female')
     ))
 

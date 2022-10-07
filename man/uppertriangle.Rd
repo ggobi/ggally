@@ -25,9 +25,9 @@ Function for making the dataset used to plot the uppertriangle plots.
 }
 \examples{
 data(flea)
-head(uppertriangle(flea, columns=2:4))
+head(uppertriangle(flea, columns = 2:4))
 head(uppertriangle(flea))
-head(uppertriangle(flea, color="species"))
+head(uppertriangle(flea, color = "species"))
 }
 \author{
 Mengjia Ni, Di Cook

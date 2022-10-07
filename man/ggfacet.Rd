@@ -46,7 +46,7 @@ Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}
 p_ <- GGally::print_if_interactive
 if (requireNamespace("chemometrics", quietly = TRUE)) {
   data(NIR, package = "chemometrics")
-  NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[,1:3])
+  NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[, 1:3])
   str(NIR_sub)
   x_cols <- c("X1115.0", "X1120.0", "X1125.0")
   y_cols <- c("Glucose", "Ethanol")

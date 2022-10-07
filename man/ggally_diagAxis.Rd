@@ -46,8 +46,8 @@ This function is used when \code{axisLabels == "internal"}.
 p_ <- GGally::print_if_interactive
 
 data(tips, package = "reshape")
-p_(ggally_diagAxis(tips, ggplot2::aes(x=tip)))
-p_(ggally_diagAxis(tips, ggplot2::aes(x=sex)))
+p_(ggally_diagAxis(tips, ggplot2::aes(x = tip)))
+p_(ggally_diagAxis(tips, ggplot2::aes(x = sex)))
 }
 \author{
 Jason Crowley and Barret Schloerke
