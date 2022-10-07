@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpODAuNjV8NjM5LjM1fDAuMDB8NTc2LjAw'>
+    <rect x='80.65' y='0.00' width='558.70' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpODAuNjV8NjM5LjM1fDAuMDB8NTc2LjAw)'>
+<rect x='80.65' y='0.00' width='558.70' height='576.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpODYuMTN8NjMzLjg3fDIyLjc4fDU3MC41Mg=='>
+    <rect x='86.13' y='22.78' width='547.74' height='547.74' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpODYuMTN8NjMzLjg3fDIyLjc4fDU3MC41Mg==)'>
+<text x='139.14' y='521.31' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='24.55px' lengthAdjust='spacingAndGlyphs'>tars1</text>
+<text x='227.48' y='432.97' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='24.55px' lengthAdjust='spacingAndGlyphs'>tars2</text>
+<text x='315.83' y='344.62' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='24.56px' lengthAdjust='spacingAndGlyphs'>head</text>
+<text x='404.17' y='256.28' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='30.70px' lengthAdjust='spacingAndGlyphs'>aede1</text>
+<text x='492.52' y='167.93' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='30.70px' lengthAdjust='spacingAndGlyphs'>aede2</text>
+<text x='580.86' y='79.59' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='30.70px' lengthAdjust='spacingAndGlyphs'>aede3</text>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='86.13' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='68.98px' lengthAdjust='spacingAndGlyphs'>geom-blank</text>
+</g>
+</svg>

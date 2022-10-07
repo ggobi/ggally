@@ -5,13 +5,8 @@ suppressMessages(require(scales))
 lung <- survival::lung
 kidney <- survival::kidney
 
-sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = survival::lung)
-sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = survival::kidney)
-
-expect_print <- function(x) {
-  testthat::expect_silent(print(x))
-}
-
+sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
+sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
 
 test_that("single", {
 
@@ -127,41 +122,33 @@ test_that("CI", {
 })
 
 test_that("multiple colors", {
-  expect_print(ggsurv(sf.kid, plot.cens = TRUE))
+  p <- ggsurv(sf.kid, plot.cens = TRUE)
+  vdiffr::expect_doppelganger("plot-cens-true", p)
   expect_warning({
     ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue"))
   }, "Color scales for censored points") # nolint
 
-  expect_silent({
-    print(
-      ggsurv(sf.kid, plot.cens = TRUE, cens.col = "blue")
-    )
-  })
+  p <- ggsurv(sf.kid, plot.cens = TRUE, cens.col = "blue")
+  vdiffr::expect_doppelganger("plot-cens-true-blue", p)
 
-  cusotm_color <- c("green", "blue", "purple", "orange")
-  expect_silent({
-    print(
-      ggsurv(sf.kid, plot.cens = TRUE, cens.col = cusotm_color)
-    )
-  })
+  custom_color <- c("green", "blue", "purple", "orange")
+  p <- ggsurv(sf.kid, plot.cens = TRUE, cens.col = custom_color)
+  vdiffr::expect_doppelganger("plot-cens-true-custom", p)
 
   expect_warning({
     ggsurv(
       sf.kid, plot.cens = TRUE,
-      cens.col = cusotm_color,
+      cens.col = custom_color,
       cens.shape = c(1, 2)
     )
   }, "The length of the censored shapes") # nolint
-  expect_silent({
-    print(
-      ggsurv(
-        sf.kid, plot.cens = TRUE,
-        cens.col = cusotm_color,
-        cens.shape = c(1, 2, 3, 4)
-      )
+  p <-
+    ggsurv(
+      sf.kid, plot.cens = TRUE,
+      cens.col = custom_color,
+      cens.shape = c(1, 2, 3, 4)
     )
-  })
-
+  vdiffr::expect_doppelganger("plot-cens-true-custom-shape", p)
 })
 
 test_that("cens.size", {
@@ -175,18 +162,3 @@ test_that("cens.size", {
   expect_true(a$layers[[2]]$aes_params$size == 2)
   expect_true(b$layers[[2]]$aes_params$size != 2)
 })
-
-
-
-
-# 881            R/ggsurv.r        231       231     0
-# 883            R/ggsurv.r        242       242     0
-
-# 884            R/ggsurv.r        247       249     0
-# 885            R/ggsurv.r        248       248     0
-# 886            R/ggsurv.r        251       255     0
-# 887            R/ggsurv.r        252       252     0
-# 888            R/ggsurv.r        254       254     0
-# 889            R/ggsurv.r        256       258     0
-# 890            R/ggsurv.r        263       263     0
-# 891            R/ggsurv.r        274       274     0

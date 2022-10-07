@@ -1,12 +1,5 @@
 context("ggnostic")
 
-expect_print <- function(p) {
-  testthat::expect_silent({
-    print(p)
-  })
-}
-
-
 test_that("fn_switch", {
   fn1 <- function(data, mapping, ...) {
     return(1)
@@ -68,7 +61,7 @@ test_that("ggnostic mtcars", {
     continuous = continuous_type,
     progress = FALSE
   )
-  expect_print(pm)
+  vdiffr::expect_doppelganger("custom-y", pm)
 
   pm <- ggnostic(
     mod,
@@ -77,7 +70,7 @@ test_that("ggnostic mtcars", {
     continuous = continuous_type,
     progress = FALSE
   )
-  expect_print(pm)
+  vdiffr::expect_doppelganger("legend", pm)
 })
 
 

@@ -4,10 +4,6 @@ testthat::skip_on_cran()
 
 data(tips, package = "reshape")
 
-expect_print <- function(p) {
-  testthat::expect_silent(print(p))
-}
-
 facethistBindwidth1 <- list(combo = wrap("facethist", binwidth = 1))
 facethistBindwidth1Duo <- list(
   comboHorizontal = wrap("facethist", binwidth = 1),
@@ -322,7 +318,7 @@ test_that("blank types", {
 })
 
 test_that("axisLabels", {
-  expect_obj <- function(pm, axisLabel) {
+  expect_axis_labels <- function(pm, prefix, axisLabel) {
     expect_true(is.null(pm$showStrips))
     if (axisLabel == "show") {
       expect_true(pm$showXAxisPlotLabels)
@@ -346,7 +342,7 @@ test_that("axisLabels", {
       expect_false(is.null(pm$xAxisLabels))
       expect_false(is.null(pm$yAxisLabels))
     }
-    expect_print(pm)
+    vdiffr::expect_doppelganger(paste0("axisLabels-", prefix, "-", axisLabel), pm)
   }
 
   fn <- function(axisLabels) {
@@ -361,7 +357,7 @@ test_that("axisLabels", {
     pm
   }
   for (axisLabels in c("show", "internal", "none")) {
-    expect_obj(fn(axisLabels), axisLabels)
+    expect_axis_labels(fn(axisLabels), "ggpairs", axisLabels)
   }
 
   plots <- ggpairs(iris, 1:3)$plots
@@ -385,7 +381,7 @@ test_that("axisLabels", {
     a
   }
   for (axisLabels in c("show", "none")) {
-    expect_obj(fn(axisLabels), axisLabels)
+    expect_axis_labels(fn(axisLabels), "ggduo", axisLabels)
   }
 
 })
@@ -400,7 +396,7 @@ test_that("strips and axis", {
     title = "Axis should line up even if strips are present",
     lower = list(combo = wrap("facethist", binwidth = 1))
   )
-  expect_print(pm)
+  vdiffr::expect_doppelganger("show-strips", pm)
   # default behavior. tested in other places
   # expect_silent({
   #   pm <- ggpairs(tips, c(3, 1, 4), showStrips = FALSE)
@@ -558,7 +554,7 @@ test_that("strip-top and strip-right", {
     upper = list(discrete = double_strips),
     progress = FALSE
   )
-  expect_print(pm)
+  vdiffr::expect_doppelganger("nested-strips-default", pm)
   pm <- ggpairs(
     tips, 3:6,
     lower = "blank", diag = "blank",
@@ -566,7 +562,7 @@ test_that("strip-top and strip-right", {
     showStrips = TRUE,
     progress = FALSE
   )
-  expect_print(pm)
+  vdiffr::expect_doppelganger("nested-strips-true", pm)
 
 })
 
@@ -661,23 +657,37 @@ test_that("subtypes", {
     wrap("facethist", binwidth = 1),
     "facetdensity",
     "facetdensitystrip",
-    "summarise_by",
+    # "summarise_by", # Issues with grid printing
     wrap("denstrip", binwidth = 1),
     "blank"
   )
   disSubs <- list(
     "autopoint", "colbar", "count",
     "cross", "crosstable", "facetbar",
-    "ratio", "rowbar", "table", "trends",
+    "ratio", "rowbar",
+    "table",
+    # "trends", # Issues with grid printing
     "blank")
 
   conDiagSubs <- c("autopointDiag", "densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
   disDiagSubs <- c("autopointDiag", "barDiag", "countDiag", "tableDiag", "blankDiag")
 
   # for (fn in list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)) {
-  for (fn_num in 1:4) {
-    fn <- list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)[[fn_num]]
-    for (i in 1:6) {
+  for (fn_info in list(
+    list(fn = ggpairs_fn1, title = "ggpairs"),
+    list(fn = ggpairs_fn2, title = "ggpairs_color"),
+    list(fn = ggduo_fn1, title = "ggduo"),
+    list(fn = ggduo_fn2, title = "ggduo_color")
+  )) {
+    fn <- fn_info$fn
+    fn_name <- fn_info$title
+    for (i in 1:max(c(
+      length(conSubs),
+      length(comSubs),
+      length(disSubs),
+      length(conDiagSubs),
+      length(disDiagSubs)
+    ))) {
       conSub <- if (i <= length(conSubs)) conSubs[[i]] else "blank"
       comSub <- if (i <= length(comSubs)) comSubs[[i]] else "blank"
       disSub <- if (i <= length(disSubs)) disSubs[[i]] else "blank"
@@ -712,10 +722,33 @@ test_that("subtypes", {
         )
       })
 
-      if (grepl("/Users/barret/", getwd(), fixed = TRUE)) {
-        # only if on personal machine, do viz test
-        expect_print(pm)
+      type_name <- function(x) {
+        if (is.function(x)) {
+          sub("ggally_", "", attr(x, "name"))
+        } else {
+          x
+        }
       }
+      type_names <- vapply(c(conSub, comSub, disSub, diagConSub, diagDisSub), type_name, character(1))
+      if (all(grepl("blank", type_names))) {
+        # vdiffr can't handle blank plots
+        next
+      }
+      pm_name <- paste0(type_names, collapse = "-")
+      pm_name <- paste0(fn_name, "-", pm_name)
+
+      tryCatch({
+        set.seed(123456) # keep jitter consistent
+        suppressWarnings({
+          built_pm <- ggmatrix_gtable(pm)
+        })
+        vdiffr::expect_doppelganger(pm_name, built_pm)
+      }, error = function(e) {
+        print("failed to create doppelganger")
+        print(pm_name)
+        print(e)
+        barret <<- pm
+      })
     }
   }
 
