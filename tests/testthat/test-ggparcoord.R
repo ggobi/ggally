@@ -142,7 +142,7 @@ test_that("splineFactor", {
     expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$y), "spline.y")
 
     tmp <- unique(as.numeric(get("data", envir = p$layers[[1]])$ggally_splineFactor))
-    expect_true( (tmp == 3) || (tmp == 21) )
+    expect_true((tmp == 3) || (tmp == 21))
   }
 
   p <- ggparcoord(

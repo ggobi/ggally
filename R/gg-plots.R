@@ -131,7 +131,7 @@ remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
 #'     size  = "gear"
 #'   )
 #' ))
-ggally_points <- function(data, mapping, ...){
+ggally_points <- function(data, mapping, ...) {
 
   p <- ggplot(data = data, mapping = mapping) + geom_point(...)
 
@@ -221,7 +221,7 @@ ggally_smooth_lm <- function(data, mapping, ...) {
 #'   tips,
 #'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
 #' ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2)))
-ggally_density <- function(data, mapping, ...){
+ggally_density <- function(data, mapping, ...) {
   rangeX <- range(eval_data_col(data, mapping$x), na.rm = TRUE)
   rangeY <- range(eval_data_col(data, mapping$y), na.rm = TRUE)
 
@@ -500,7 +500,7 @@ ggally_statistic <- function(
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
     for (i in 1:nrow(cord)) {
-      for (j in seq_along(lev)){
+      for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
         }
@@ -617,7 +617,7 @@ ggally_statistic <- function(
 #'   outlier.shape  = 13,
 #'   outlier.size   = 8
 #' ))
-ggally_box <- function(data, mapping, ...){
+ggally_box <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
 
   ggally_dot_and_box(data, mapping, ..., boxPlot = TRUE)
@@ -655,8 +655,8 @@ ggally_box_no_facet <- function(data, mapping, ...) {
 #' p_(ggally_dot(
 #'   tips,
 #'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
-#' ) + ggplot2::scale_shape(solid=FALSE))
-ggally_dot <- function(data, mapping, ...){
+#' ) + ggplot2::scale_shape(solid = FALSE))
+ggally_dot <- function(data, mapping, ...) {
   ggally_dot_and_box(data, mapping, ..., boxPlot = FALSE)
 }
 #' @export
@@ -692,7 +692,7 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #'   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
 #'   boxPlot = FALSE
 #' ))
-ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE){
+ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE) {
 
   horizontal <- is_horizontal(data, mapping)
 
@@ -771,7 +771,7 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 #' data(tips, package = "reshape")
 #' p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex)))
 #' p_(ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1))
-ggally_facethist <- function(data, mapping, ...){
+ggally_facethist <- function(data, mapping, ...) {
 
   mapping <- mapping_color_to_fill(mapping)
 
@@ -824,7 +824,7 @@ ggally_facethist <- function(data, mapping, ...){
 #'   tips,
 #'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
 #' ))
-ggally_facetdensity <- function(data, mapping, ...){
+ggally_facetdensity <- function(data, mapping, ...) {
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
 }
 
@@ -849,7 +849,7 @@ ggally_facetdensity <- function(data, mapping, ...){
 #'   tips,
 #'   mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
 #' ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black"))
-ggally_denstrip <- function(data, mapping, ...){
+ggally_denstrip <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
 
   ggally_facetdensitystrip(data, mapping, ..., den_strip = TRUE)
@@ -869,7 +869,7 @@ ggally_denstrip <- function(data, mapping, ...){
 #' @examples
 #' example(ggally_facetdensity)
 #' example(ggally_denstrip)
-ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
+ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
   horizontal <- is_horizontal(data, mapping)
 
   if (!horizontal) {
@@ -946,7 +946,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE){
 #' data(tips, package = "reshape")
 #' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill)))
 #' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day)))
-ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
+ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
 
   mapping <- mapping_color_to_fill(mapping)
 
@@ -988,7 +988,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE){
 #' data(tips, package = "reshape")
 #' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = day)))
 #' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25))
-ggally_barDiag <- function(data, mapping, ..., rescale = FALSE){
+ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
 
   mapping <- mapping_color_to_fill(mapping)
 
@@ -1055,7 +1055,7 @@ ggally_text <- function(
   xrange = c(0, 1),
   yrange = c(0, 1),
   ...
-){
+) {
 
   theme <- theme_get()
 
@@ -1086,17 +1086,17 @@ ggally_text <- function(
   # dont mess with color if it's already there
   if (!is.null(mapping$colour)) {
     p <- p +
-       geom_text( label = label, mapping = mapping, ...) +
+       geom_text(label = label, mapping = mapping, ...) +
        guides(colour = "none")
   } else if ("colour" %in% names(aes(...))) {
     p <- p +
-       geom_text( label = label, mapping = mapping, ...)
+       geom_text(label = label, mapping = mapping, ...)
   } else {
     bg <- ifnull(theme$panel.background$fill, "grey92")
     fg <- ifnull(theme$axis.text$colour, "gray30")
     colour <- scales::colour_ramp(c(bg, fg))(0.75)
     p <- p +
-       geom_text( label = label, mapping = mapping, colour = colour, ...)
+       geom_text(label = label, mapping = mapping, colour = colour, ...)
   }
 
   p <- p + theme(legend.position = "none")
@@ -1122,7 +1122,7 @@ get_x_axis_labels <- function(p, xRange) {
   # have to do a function as filter doesn't work
   get_raw_grob_by_name <- function(g, name) {
     for (item in g$grobs) {
-      if (str_detect(item$name, name) ) {
+      if (str_detect(item$name, name)) {
         return(item$children[[1]])
       }
     }
@@ -1197,8 +1197,8 @@ get_x_axis_labels <- function(p, xRange) {
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(tips, package = "reshape")
-#' p_(ggally_diagAxis(tips, ggplot2::aes(x=tip)))
-#' p_(ggally_diagAxis(tips, ggplot2::aes(x=sex)))
+#' p_(ggally_diagAxis(tips, ggplot2::aes(x = tip)))
+#' p_(ggally_diagAxis(tips, ggplot2::aes(x = sex)))
 ggally_diagAxis <- function(
   data,
   mapping,
@@ -1298,8 +1298,8 @@ ggally_diagAxis <- function(
     p$scales$scales[[1]]$breaks <- axisBreaks
     p$scales$scales[[2]]$breaks <- axisBreaks
     # pLabs <- pLabs +
-    #   scale_x_continuous(breaks=axisBreaks,limits=c(0,1)) +
-    #   scale_y_continuous(breaks=axisBreaks,limits=c(0,1))
+    #   scale_x_continuous(breaks = axisBreaks, limits = c(0, 1)) +
+    #   scale_y_continuous(breaks = axisBreaks, limits = c(0, 1))
   }
 
   p
@@ -1323,11 +1323,11 @@ ggally_diagAxis <- function(
 #' data(tips, package = "reshape")
 #' p_(ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time)))
 #' p_(ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time)))
-ggally_facetbar <- function(data, mapping, ...){
+ggally_facetbar <- function(data, mapping, ...) {
 
   mapping <- mapping_color_to_fill(mapping)
 
-  # numer <- is.null(attributes(data[,as.character(mapping$x)])$class)
+  # numer <- is.null(attributes(data[, as.character(mapping$x)])$class)
   # xVal <- mapping$x
   yVal <- mapping_string(mapping$y)
   mapping$y <- NULL
@@ -1484,7 +1484,7 @@ ggally_count <- function(data, mapping, ...) {
 
   # default values
   args <- list(...)
-  if (!"fill" %in% names(args) & is.null(mapping$fill)) {
+  if (!"fill" %in% names(args) && is.null(mapping$fill)) {
     args$fill <- GeomRect$default_aes$fill
   }
 
@@ -1559,7 +1559,7 @@ StatGGallyCount <- ggproto("StatGGallyCount", Stat,
     if (is.null(data$weight))
       data$weight <- rep(1, nrow(data))
 
-    if(is.null(x.width))
+    if (is.null(x.width))
       x.width <- .9
 
     # sum weights for each combination of aesthetics
@@ -1569,7 +1569,9 @@ StatGGallyCount <- ggproto("StatGGallyCount", Stat,
     names(panel)[which(names(panel) == "weight")] <- "n"
 
     # compute proportions by x and y
-    f <- function(n) {sum(abs(n), na.rm = TRUE)}
+    f <- function(n) {
+      sum(abs(n), na.rm = TRUE)
+    }
     panel$n_xy <- stats::ave(panel$n, panel$x, panel$base_y, FUN = f)
     panel$prop <- panel$n / panel$n_xy
     panel$width <- sqrt(panel$n_xy) / max(sqrt(panel$n_xy)) * x.width
@@ -1607,12 +1609,12 @@ ggally_countDiag <- function(data, mapping, ...) {
 #' @seealso [ggplot2::element_blank()]
 #' @export
 #' @keywords hplot
-ggally_blank <- function(...){
+ggally_blank <- function(...) {
   aes(...) # ignored
   a <- data.frame(X = 1:2, Y = 1:2)
 
   p <- ggplot(data = a, aes_string(x = "X", y = "Y")) +
-    geom_point( colour = "transparent") +
+    geom_point(colour = "transparent") +
     theme(
       axis.line         = element_blank(),
       axis.text.x       = element_blank(),
@@ -1730,7 +1732,7 @@ ggally_autopoint <- function(data, mapping, ...) {
   require_namespaces("ggforce")
 
   args <- list(...)
-  if (!"alpha" %in% names(args) & is.null(mapping$alpha))
+  if (!"alpha" %in% names(args) && is.null(mapping$alpha))
     args$alpha <- .5
   # mapping needs to be sent directly to geom_autopoint
   args$mapping <- mapping
@@ -1791,13 +1793,13 @@ ggally_summarise_by <- function(
   mapping,
   text_fn = weighted_median_iqr,
   text_fn_vertical = NULL,
-  ...)
-{
+  ...
+) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
   horizontal <- is_horizontal(data, mapping)
-  if(horizontal) {
+  if (horizontal) {
     res <- ddply(
       data.frame(
         x = eval_data_col(data, mapping$x),
@@ -1805,7 +1807,7 @@ ggally_summarise_by <- function(
         weight = eval_data_col(data, mapping$weight) %||% 1,
         stringsAsFactors = FALSE
       ),
-      c('y'),
+      c("y"),
       plyr::here(summarize),
       label = text_fn(x, weight)
     )

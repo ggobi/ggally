@@ -94,7 +94,7 @@ beta_stars <- function(p_val) {
 model_beta_label <- function(model, data = broom::augment(model), lmStars = TRUE) {
   beta_vars <- model_beta_variables(model, data = data)
 
-  if ( (! identical(class(model), "lm")) || (!isTRUE(lmStars))) {
+  if ((! identical(class(model), "lm")) || (!isTRUE(lmStars))) {
     return(beta_vars)
   }
 
@@ -166,7 +166,7 @@ ggally_nostic_line <- function(
 
   x_is_character <- is_character_column(data, mapping, "x")
 
-  if (x_is_character & isTRUE(mapColorToFill)) {
+  if (x_is_character && isTRUE(mapColorToFill)) {
     mapping <- mapping_color_to_fill(mapping)
   }
 
@@ -234,7 +234,7 @@ ggally_nostic_resid <- function(
   formula = y ~ x
 ) {
 
-  if (!is.null(linePosition) & !is.null(pVal) & !is.null(sigma)) {
+  if (!is.null(linePosition) && !is.null(pVal) && !is.null(sigma)) {
     scaled_sigmas <- qnorm(pVal, lower.tail = TRUE, sd = sigma)
 
     linePosition <- c(linePosition, linePosition + scaled_sigmas)

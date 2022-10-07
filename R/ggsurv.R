@@ -1,4 +1,4 @@
-if(getRversion() >= "2.15.1") {
+if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("cens", "surv", "up", "low"))
 }
 
@@ -54,7 +54,7 @@ if(getRversion() >= "2.15.1") {
 #'     ggplot2::guides(linetype = "none") +
 #'     ggplot2::scale_colour_discrete(
 #'       name   = 'Sex',
-#'       breaks = c(1,2),
+#'       breaks = c(1, 2),
 #'       labels = c('Male', 'Female')
 #'     ))
 #'
@@ -111,7 +111,7 @@ ggsurv <- function(
   ylab       = 'Survival',
   main       = '',
   order.legend = TRUE
-){
+) {
 
   require_namespaces(c("survival", "scales"))
 
@@ -119,7 +119,7 @@ ggsurv <- function(
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)
   stopifnot(length(lty.est) == 1 | length(lty.est) == strata)
 
-  if(strata == 1) {
+  if (strata == 1) {
     fn <- ggsurv_s
   } else {
     fn <- ggsurv_m
@@ -153,7 +153,7 @@ ggsurv_s <- function(
   main       = '',
   strata     = 1,
   order.legend = TRUE
-){
+) {
 
   dat <- data.frame(
     time = c(0, s$time),
@@ -172,14 +172,14 @@ ggsurv_s <- function(
     ylab(ylab) +
     ggtitle(main)
 
-  if(identical(CI, TRUE) | identical(CI, 'def')) {
+  if (identical(CI, TRUE) | identical(CI, 'def')) {
     pl <- pl +
       geom_step(aes(y = up), color = col, lty = lty.ci, size = size.ci) +
       geom_step(aes(y = low), color = col, lty = lty.ci, size = size.ci)
   }
 
-  if (identical(plot.cens, TRUE) ) {
-    if (nrow(dat.cens) == 0){
+  if (identical(plot.cens, TRUE)) {
+    if (nrow(dat.cens) == 0) {
       stop('There are no censored observations')
     }
     col <- ifelse(cens.col == 'gg.def', 'red', cens.col)
@@ -193,7 +193,7 @@ ggsurv_s <- function(
     )
   }
 
-  if(back.white == TRUE) {
+  if (back.white == TRUE) {
     pl <- pl + theme_bw()
   }
 
@@ -271,11 +271,11 @@ ggsurv_m <- function(
   for (i in 1:strata) {
     indI <- (n.ind[i]+1):n.ind[i+1]
     gr.df[[i]] <- data.frame(
-      time  = c(0, s$time[ indI ]),
-      surv  = c(1, s$surv[ indI ]),
-      up    = c(1, s$upper[ indI ]),
-      low   = c(1, s$lower[ indI ]),
-      cens  = c(0, s$n.censor[ indI ]),
+      time  = c(0, s$time[indI]),
+      surv  = c(1, s$surv[indI]),
+      up    = c(1, s$upper[indI]),
+      low   = c(1, s$lower[indI]),
+      cens  = c(0, s$n.censor[indI]),
       group = rep(groups[i], n[i] + 1)
     )
   }
@@ -288,10 +288,10 @@ ggsurv_m <- function(
     ylab(ylab) +
     ggtitle(main)
 
-  pl <- if(surv.col[1] != 'gg.def'){
+  pl <- if (surv.col[1] != 'gg.def') {
     scaleValues <- if (length(surv.col) == 1) {
       rep(surv.col, strata)
-    } else{
+    } else {
       surv.col
     }
     pl + scale_colour_manual(values = scaleValues)
@@ -307,7 +307,7 @@ ggsurv_m <- function(
   }
   pl <- pl + scale_linetype_manual(values = lineScaleValues)
 
-  if(identical(CI,TRUE)) {
+  if (identical(CI, TRUE)) {
     stepLty <- if ((length(surv.col) > 1 | surv.col == 'gg.def')[1]) {
       lty.ci
     } else {
@@ -315,10 +315,10 @@ ggsurv_m <- function(
     }
     pl <- pl +
       geom_step(aes(y = up, lty = group, col = group), lty = stepLty, size = size.ci) +
-      geom_step(aes(y = low,lty = group, col = group), lty = stepLty, size = size.ci)
+      geom_step(aes(y = low, lty = group, col = group), lty = stepLty, size = size.ci)
   }
 
-  if (identical(plot.cens, TRUE) ){
+  if (identical(plot.cens, TRUE)) {
     dat.cens <- subset(dat, cens != 0)
     dat.cens <- subset(dat.cens, group != "PKD")
 
@@ -349,7 +349,7 @@ ggsurv_m <- function(
 
 
     } else if (length(cens.col) > 0) {
-      # if(!(identical(cens.col,surv.col) || is.null(cens.col))) {
+      # if (!(identical(cens.col, surv.col) || is.null(cens.col))) {
       #   warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
       # }
 
@@ -391,7 +391,7 @@ ggsurv_m <- function(
 
           pl <- pl + geom_point(
             data = dtGroup,
-            mapping = aes(y=surv),
+            mapping = aes(y = surv),
             color = I(cens.col[i]),
             shape = cens.shape[i],
             show.legend = FALSE,
@@ -404,7 +404,7 @@ ggsurv_m <- function(
     }
   }
 
-  if(identical(back.white, TRUE)) {
+  if (identical(back.white, TRUE)) {
     pl <- pl + theme_bw()
   }
 

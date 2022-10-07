@@ -138,8 +138,8 @@ StatCross <- ggproto("StatCross", Stat,
 
     # to handle the fact that ggplot2 could transform factors into integers
     # before computation of the statistic
-    if(is.numeric(data$x)) panel$x <- as.numeric(panel$x)
-    if(is.numeric(data$y)) panel$y <- as.numeric(panel$y)
+    if (is.numeric(data$x)) panel$x <- as.numeric(panel$x)
+    if (is.numeric(data$y)) panel$y <- as.numeric(panel$y)
 
     # keeping first value of other aesthetics in data
     panel <- merge(
@@ -152,7 +152,7 @@ StatCross <- ggproto("StatCross", Stat,
     panel <- panel %>% dplyr::distinct(.data$x, .data$y, .keep_all = TRUE)
 
     if (!keep.zero.cells) {
-      panel <- panel[panel$observed != 0,]
+      panel <- panel[panel$observed != 0, ]
     }
 
     panel
@@ -222,7 +222,7 @@ StatCross <- ggproto("StatCross", Stat,
 #'   fill = "darkblue",
 #'   geom_text_args = list(colour = "white", fontface = "bold", size = 6)
 #' ))
-ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args = NULL){
+ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args = NULL) {
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
   mapping <- mapping_color_to_fill(mapping)
 
@@ -231,10 +231,10 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
   if (!"size" %in% names(mapping)) {
     mapping$size <- aes_string(size = "after_stat(observed)")$size
   }
-  if (is.null(mapping$shape) & is.null(args$shape)) {
+  if (is.null(mapping$shape) && is.null(args$shape)) {
     args$shape <- 22
   }
-  if (is.null(mapping$fill) & is.null(args$fill)) {
+  if (is.null(mapping$fill) && is.null(args$fill)) {
     args$fill <- GeomRect$default_aes$fill
   }
   args$keep.zero.cells <- FALSE
@@ -316,7 +316,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #'   geom_tile_args = list(colour = "black")
 #' ) +
 #' scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
-ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL){
+ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL) {
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
 
   # default values geom_text
@@ -333,7 +333,7 @@ ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_
   geom_tile_args$mapping <- aes(colour = NULL)$colour
   if (is.null(geom_tile_args$colour))
     geom_tile_args$colour <- "transparent"
-  if (is.null(mapping$fill) & is.null(geom_tile_args$fill))
+  if (is.null(mapping$fill) && is.null(geom_tile_args$fill))
     geom_tile_args$fill <- "transparent"
 
   ggplot(data = data, mapping) +
@@ -394,7 +394,7 @@ ggally_crosstable <- function(
   fill = c("none", "std.resid", "resid"),
   ...,
   geom_tile_args = list(colour = "grey50")
-){
+) {
   fill <- match.arg(fill)
   if (fill == "std.resid")
     mapping$fill <- aes_string(fill = "after_stat(std.resid)")$fill

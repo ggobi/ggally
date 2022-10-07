@@ -30,7 +30,7 @@ require_namespaces <- function(pkgs) {
 }
 
 
-str_c <- function (..., sep = "", collapse = NULL) {
+str_c <- function(..., sep = "", collapse = NULL) {
   paste(..., sep = sep, collapse = collapse)
 }
 

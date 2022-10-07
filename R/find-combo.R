@@ -90,7 +90,7 @@ find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa, allowDiag)
     }
   }
 
-  if (type1 == "na" | type2 == "na") {
+  if (type1 == "na" || type2 == "na") {
     return("na")
   }
 

@@ -106,19 +106,19 @@ test_that("upper/lower/diag = blank", {
   for (i in 1:3) {
     for (j in 1:3) {
       if (i < j) {
-        expect_true(  is_blank_plot(au[i, j]))
-        expect_false( is_blank_plot(ad[i, j]))
-        expect_false( is_blank_plot(al[i, j]))
+        expect_true(is_blank_plot(au[i, j]))
+        expect_false(is_blank_plot(ad[i, j]))
+        expect_false(is_blank_plot(al[i, j]))
       }
       if (i > j) {
-        expect_false( is_blank_plot(au[i, j]))
-        expect_false( is_blank_plot(ad[i, j]))
-        expect_true(  is_blank_plot(al[i, j]))
+        expect_false(is_blank_plot(au[i, j]))
+        expect_false(is_blank_plot(ad[i, j]))
+        expect_true(is_blank_plot(al[i, j]))
       }
       if (i == j) {
-        expect_false( is_blank_plot(au[i, j]))
-        expect_true(  is_blank_plot(ad[i, j]))
-        expect_false( is_blank_plot(al[i, j]))
+        expect_false(is_blank_plot(au[i, j]))
+        expect_true(is_blank_plot(ad[i, j]))
+        expect_false(is_blank_plot(al[i, j]))
       }
     }
   }
@@ -164,13 +164,13 @@ test_that("stops", {
     ggpairs(tips, params = c(size = 2))
   }, "'params' is a deprecated") # nolint
 
-  expect_error( {
+  expect_error({
     ggpairs(tips, columns = 1:10)
   }, "Make sure your numeric 'columns' values are less than or equal to") # nolint
-  expect_error( {
+  expect_error({
     ggduo(tips, columnsX = 1:10)
   }, "Make sure your numeric 'columnsX' values are less than or equal to") # nolint
-  expect_error( {
+  expect_error({
     ggduo(tips, columnsY = 1:10)
   }, "Make sure your numeric 'columnsY' values are less than or equal to") # nolint
 
@@ -295,7 +295,7 @@ test_that("blank types", {
         expect_false(is_blank_plot(pmDiag[i, j]))
         expect_false(is_blank_plot(pmLower[i, j]))
 
-      } else if ( i > j) {
+      } else if (i > j) {
         # lower
         expect_false(is_blank_plot(pmUpper[i, j]))
         expect_false(is_blank_plot(pmDiag[i, j]))
@@ -512,7 +512,7 @@ test_that("NA data", {
         if (na_mat[i, j]) {
           expect_is_na_plot(pm[i, j])
         } else {
-          if (j == 3 & i < 3) {
+          if (j == 3 && i < 3) {
             expect_warning({
                 p <- pm[i, j]
               },
@@ -739,7 +739,7 @@ test_that("subtypes", {
 #  # pm
 
 #  # Use sample of the diamonds data
-#  data(diamonds, package="ggplot2")
+#  data(diamonds, package = "ggplot2")
 #  diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 200), ]
 
 #  # Custom Example
@@ -762,19 +762,19 @@ test_that("subtypes", {
 #  # bad_plots
 
 #  # Only Variable Labels on the diagonal (no axis labels)
-#  pm <- ggpairs(tips[, 1:3], axisLabels="internal")
+#  pm <- ggpairs(tips[, 1:3], axisLabels = "internal")
 #  # pm
 #  # Only Variable Labels on the outside (no axis labels)
-#  pm <- ggpairs(tips[, 1:3], axisLabels="none")
+#  pm <- ggpairs(tips[, 1:3], axisLabels = "none")
 #  # pm
 
 #  # Custom Examples
 #  custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 # #' # ggplot example taken from example(geom_text)
-# #'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
+# #'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
 # #'   plot <- plot +
-# #'     ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
-# #'     ggplot2::scale_colour_discrete(l=40)
+# #'     ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
+# #'     ggplot2::scale_colour_discrete(l = 40)
 # #' custom_car <- putPlot(custom_car, plot, 1, 2)
 # #' personal_plot <- ggally_text(
 # #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"

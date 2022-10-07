@@ -27,8 +27,8 @@ test_that("examples", {
   ndyads      <- x * (x - 1)
   density     <- x / ndyads
   m           <- matrix(0, nrow = x, ncol = x)
-  dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-  m[ row(m) != col(m) ] <- runif(ndyads) < density
+  dimnames(m) <- list(letters[1:x], letters[1:x])
+  m[row(m) != col(m)] <- runif(ndyads) < density
   m
 
   # random undirected network
@@ -38,7 +38,7 @@ test_that("examples", {
   ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
 
   # random groups
-  g <- sample(letters[ 1:3 ], 10, replace = TRUE)
+  g <- sample(letters[1:3], 10, replace = TRUE)
 
   # color palette
   p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
@@ -179,9 +179,9 @@ test_that("examples", {
 
   ### --- test node labels and label sizes
 
-  ggnet(n, label = letters[ 1:10 ], color = "white")
+  ggnet(n, label = letters[1:10], color = "white")
   ggnet(n, label = "abc", color = "white", label.size = 4, size = 12)
-  expect_error(ggnet(n, label = letters[ 1:10 ], label.size = "abc"), "incorrect label.size")
+  expect_error(ggnet(n, label = letters[1:10], label.size = "abc"), "incorrect label.size")
 
   ### --- test node placement
 

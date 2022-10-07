@@ -224,13 +224,13 @@ add_to_ggmatrix <- function(
 #' ggmatrix_location(pm, cols = 2)
 #'
 #' # row and column combinations
-#' ggmatrix_location(pm, rows = c(1,2), cols = c(1,3))
+#' ggmatrix_location(pm, rows = c(1, 2), cols = c(1, 3))
 #'
 #' # matrix locations
 #' mat <- matrix(TRUE, ncol = 3, nrow = 3)
-#' mat[1,1] <- FALSE
+#' mat[1, 1] <- FALSE
 #' locs <- ggmatrix_location(pm, location = mat)
-#' ## does not contain the 1,1 cell
+#' ## does not contain the 1, 1 cell
 #' locs
 #'
 #' # Use the output of a prior ggmatrix_location
@@ -294,7 +294,7 @@ ggmatrix_location <- function(
           tmp_locs <- data.frame(row = numeric(0), col = numeric(0))
           for (i in seq_len(nrow(location))) {
             for (j in seq_len(ncol(location))) {
-              val <- location[i,j]
+              val <- location[i, j]
               if (val) {
                 tmp_locs[nrow(tmp_locs) + 1, ] <- list(row = i, col = j)
               }

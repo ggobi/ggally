@@ -100,8 +100,8 @@ ggbivariate(d, "Survived", mapping = aes(weight = Freq))
 
 ```{r}
 ggbivariate(
-  tips, 
-  outcome = "smoker", 
+  tips,
+  outcome = "smoker",
   explanatory = c("day", "time", "sex", "tip"),
   types = list(comboVertical = "autopoint")
 )

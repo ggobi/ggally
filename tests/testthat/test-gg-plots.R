@@ -144,11 +144,11 @@ test_that("cor stars are aligned", {
 
 test_that("ggally_statistic handles factors", {
 
-  simple_chisq <- function(x, y){
-    scales::number(chisq.test(x,y)$p.value, accuracy=.001)
+  simple_chisq <- function(x, y) {
+    scales::number(chisq.test(x, y)$p.value, accuracy = .001)
   }
   expect_silent({
-    p <- ggally_statistic(reshape::tips, aes(x=sex, y=day), text_fn = simple_chisq, title = "Chi^2")
+    p <- ggally_statistic(reshape::tips, aes(x = sex, y = day), text_fn = simple_chisq, title = "Chi^2")
   })
 })
 

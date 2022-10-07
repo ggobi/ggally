@@ -55,7 +55,7 @@ fix_data <- function(data) {
   data <- fortify(data)
   data <- as.data.frame(data)
 
-  for (i in 1:dim(data)[2] ) {
+  for (i in 1:dim(data)[2]) {
     if (is.character(data[[i]])) {
       data[[i]] <- as.factor(data[[i]])
     }
@@ -83,7 +83,7 @@ fix_column_values <- function(
   colnamesData <- colnames(data)
 
   if (is.character(columns)) {
-    colNumValues <- lapply(columns, function(colName){
+    colNumValues <- lapply(columns, function(colName) {
       which(colnamesData == colName)
     })
     isFound <- as.logical(unlist(lapply(colNumValues, length)))
@@ -110,7 +110,7 @@ fix_column_values <- function(
       "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
     )
   }
-  if (any( (columns %% 1) != 0)) {
+  if (any((columns %% 1) != 0)) {
     stop(
       "Make sure your numeric '", columnsName, "' values are integers.", "\n",
       "\t", columnsName, " = c(", paste(columns, collapse = ", "), ")"
@@ -374,7 +374,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'   rev(psych_variables), academic_variables,
 #'   types = list(continuous = loess_with_cor),
 #'   showStrips = FALSE,
-#'   legend = c(5,2)
+#'   legend = c(5, 2)
 #' )
 #' suppressWarnings(p_(pm))
 #'
@@ -386,7 +386,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'   rev(psych_variables), academic_variables,
 #'   types = list(continuous = loess_with_cor),
 #'   showStrips = FALSE,
-#'   legend = c(5,2)
+#'   legend = c(5, 2)
 #' ) +
 #'   ggplot2::theme(legend.position = "bottom")
 #' suppressWarnings(p_(pm))
@@ -410,10 +410,10 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 # );
 #
 # # make the 5th column blank, except for the legend
-# pm[1,5] <- NULL
-# pm[2,5] <- grab_legend(pm[2,1])
-# pm[3,5] <- NULL
-# pm[4,5] <- NULL
+# pm[1, 5] <- NULL
+# pm[2, 5] <- grab_legend(pm[2, 1])
+# pm[3, 5] <- NULL
+# pm[4, 5] <- NULL
 #
 # pm
 #
@@ -478,8 +478,8 @@ ggduo <- function(
 
   # fix args
   if (
-    !missing(mapping) & !is.list(mapping) &
-    !missing(columnsX) & missing(columnsY)
+    !missing(mapping) && !is.list(mapping) &&
+    !missing(columnsX) && missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -591,7 +591,7 @@ ggduo <- function(
 # make_small_strip <- function(plot_matrix, from_top, from_left, new_size = 7){
 #   up <- from_left > from_top
 #   p <- getPlot(plot_matrix, from_top, from_left)
-#   if(up)
+#   if (up)
 #     p <- p + opts(strip.text.x = element_text(size = new_size))
 #   else
 #     p <- p + opts(strip.text.y = element_text(angle = -90, size = new_size))
@@ -662,7 +662,7 @@ ggduo <- function(
 #' ## Quick example, with and without colour
 #' data(flea)
 #' ggpairs(flea, columns = 2:4)
-#' pm <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
+#' pm <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour = species))
 #' p_(pm)
 #' # Note: colour should be categorical, else you will need to reset
 #' # the upper triangle to use points instead of trying to compute corr
@@ -692,7 +692,7 @@ ggduo <- function(
 #' p_(pm)
 #'
 #' # Use sample of the diamonds data
-#' data(diamonds, package="ggplot2")
+#' data(diamonds, package = "ggplot2")
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
 #'
 #' # Different aesthetics for different plot sections and plot types
@@ -707,10 +707,10 @@ ggduo <- function(
 #'
 #' ## Axis Label Variations
 #' # Only Variable Labels on the diagonal (no axis labels)
-#' pm <- ggpairs(tips[, 1:3], axisLabels="internal")
+#' pm <- ggpairs(tips[, 1:3], axisLabels = "internal")
 #' p_(pm)
 #' # Only Variable Labels on the outside (no axis labels)
-#' pm <- ggpairs(tips[, 1:3], axisLabels="none")
+#' pm <- ggpairs(tips[, 1:3], axisLabels = "none")
 #' p_(pm)
 #'
 #' ## Facet Label Variations
@@ -734,10 +734,10 @@ ggduo <- function(
 #' ## Plot Insertion Example
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
-#'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
+#'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
 #'   plot <- plot +
-#'     ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
-#'     ggplot2::scale_colour_discrete(l=40)
+#'     ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
+#'     ggplot2::scale_colour_discrete(l = 40)
 #' custom_car[1, 2] <- plot
 #' personal_plot <- ggally_text(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
@@ -795,7 +795,7 @@ ggpairs <- function(
   progress = NULL,
   proportions = NULL,
   legends = stop("deprecated")
-){
+) {
 
   warn_deprecated(!missing(legends), "legends")
   warn_if_args_exist(list(...))
@@ -807,7 +807,7 @@ ggpairs <- function(
   data <- fix_data_slim(data_, isSharedData)
 
   if (
-    !missing(mapping) & !is.list(mapping) &
+    !missing(mapping) && !is.list(mapping) &&
     missing(columns)
   ) {
       columns <- mapping
@@ -919,7 +919,7 @@ ggpairs <- function(
 #' @import ggplot2
 #' @rdname add_and_overwrite_aes
 #' @examples
-#' data(diamonds, package="ggplot2")
+#' data(diamonds, package = "ggplot2")
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
 #' pm <- ggpairs(diamonds.samp, columns = 5:7,
 #'   mapping = ggplot2::aes(color = color),
@@ -971,9 +971,9 @@ mapping_color_to_fill <- function(current) {
     current$colour <- NULL
   }
 
-  # if(!is.null(mapping$colour) && !is.null(mapping$fill)) {
+  # if (!is.null(mapping$colour) && !is.null(mapping$fill)) {
   #   # do nothing
-  # } else if(!is.null(mapping$colour)) {
+  # } else if (!is.null(mapping$colour)) {
   # }
   current
 }
@@ -1020,7 +1020,7 @@ check_and_set_ggpairs_defaults <- function(
 
   obj <- set_to_blank_list_if_blank(
     obj,
-    combo = ! isDiag & ! isDuo,
+    combo = ! isDiag && ! isDuo,
     blank = blankVal,
     isDuo = isDuo
   )

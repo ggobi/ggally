@@ -1,7 +1,9 @@
-linters: with_defaults(
-    camel_case_linter = NULL,
+linters: linters_with_defaults(
+    cyclocomp_linter = NULL,
     commented_code_linter = NULL,
-    line_length_linter = NULL
+    line_length_linter = NULL,
+    object_name_linter = NULL,
+    seq_linter = NULL
   )
 exclusions:
   list(

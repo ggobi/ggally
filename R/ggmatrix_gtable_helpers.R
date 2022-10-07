@@ -9,7 +9,7 @@ plot_gtable <- function(p) {
 # axis_size_bottom(p)
 # axis_size_left(g)
 # axis_size_bottom(g)
-axis_list <- (function(){
+axis_list <- (function() {
   axis_label_size_wrapper <- function(fn, filter_val, select_val, unitTo, valueOnly) {
     function(pg) {
       pg_axis <- gtable::gtable_filter(pg, filter_val)

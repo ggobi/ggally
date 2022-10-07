@@ -30,7 +30,7 @@
 #'   nasa$long >= -80 &
 #'   nasa$long <= -60
 #' , ]
-#' temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height=2.5)
+#' temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 2.5)
 #' p_(ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
 #'   add_ref_lines(temp.gly, color = "grey90") +
 #'   add_ref_boxes(temp.gly, color = "grey90") +
@@ -124,7 +124,7 @@ ref_boxes <- function(data, fill = NULL) {
       xmax = cells[[glyph$x_major]] + glyph$width / 2,
       ymin = cells[[glyph$y_major]] - glyph$height / 2,
       ymax = cells[[glyph$y_major]] + glyph$height / 2)
-  if (!is.null(fill)){
+  if (!is.null(fill)) {
     df$fill <- cells[[fill]]
   }
   df
@@ -253,7 +253,7 @@ min0 <- function(x) {
 }
 #' @export
 #' @rdname rescale01
-rescale01 <- function(x, xlim=NULL) {
+rescale01 <- function(x, xlim = NULL) {
   if (is.null(xlim)) {
     rng <- range(x, na.rm = TRUE)
   } else {
@@ -263,7 +263,7 @@ rescale01 <- function(x, xlim=NULL) {
 }
 #' @export
 #' @rdname rescale01
-rescale11 <- function(x, xlim=NULL) {
+rescale11 <- function(x, xlim = NULL) {
   2 * rescale01(x, xlim) - 1
 }
 
@@ -274,7 +274,7 @@ rescale11 <- function(x, xlim=NULL) {
 #' @param size Set the line size, default is 1.5
 #' @param ... other arguments passed onto [ggplot2::geom_line()]
 #' @export
-add_ref_lines <- function(data, color = "white", size = 1.5, ...){
+add_ref_lines <- function(data, color = "white", size = 1.5, ...) {
   rl <- ref_lines(data)
   geom_path(data = rl, color = color, size = size, ...)
 }
@@ -289,13 +289,12 @@ add_ref_lines <- function(data, color = "white", size = 1.5, ...){
 #' @param ... other arguments passed onto [ggplot2::geom_rect()]
 #' @export
 add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
-                          fill = NA, ...){
+                          fill = NA, ...) {
   rb <- ref_boxes(data, var_fill)
-  if (!is.null(var_fill)){
+  if (!is.null(var_fill)) {
     geom_rect(aes_all(names(rb)), data = rb,
               color = color, size = size, inherit.aes = FALSE, ...)
-  }
-  else{
+  } else {
     geom_rect(aes_all(names(rb)), data = rb,
               color = color, size = size, inherit.aes = FALSE, fill = fill, ...)
   }

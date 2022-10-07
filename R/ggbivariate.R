@@ -81,7 +81,7 @@ ggbivariate <- function(
   if (is.null(rowbar_args$remove_background))
     rowbar_args$remove_background <- TRUE
   if (is.null(types$discrete))
-    types$discrete = wrapp(ggally_rowbar, rowbar_args)
+    types$discrete <- wrapp(ggally_rowbar, rowbar_args)
   if (is.null(types$comboVertical))
     types$comboVertical <- "box_no_facet"
   if (is.null(types$continuous))
@@ -99,7 +99,7 @@ ggbivariate <- function(
   if (!"yProportions" %in% names(ggduo_args))
     ggduo_args$yProportions <- "auto"
 
-  if (!is.numeric(data[[outcome]]) & !"legend" %in% names(list(...)))
+  if (!is.numeric(data[[outcome]]) && !"legend" %in% names(list(...)))
     ggduo_args$legend <- 1
 
   p <- do.call(ggduo, ggduo_args) +

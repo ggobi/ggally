@@ -209,8 +209,8 @@ if (getRversion() >= "2.15.1") {
 #' ndyads      <- x * (x - 1)
 #' density     <- x / ndyads
 #' m           <- matrix(0, nrow = x, ncol = x)
-#' dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-#' m[ row(m) != col(m) ] <- runif(ndyads) < density
+#' dimnames(m) <- list(letters[1:x], letters[1:x])
+#' m[row(m) != col(m)] <- runif(ndyads) < density
 #' m
 #'
 #' # random undirected network
@@ -302,7 +302,7 @@ ggnet2 <- function(
   legend.size      = 9,
   legend.position  = "right",
   ...
-){
+) {
 
   # -- packages ----------------------------------------------------------------
 
@@ -422,14 +422,14 @@ ggnet2 <- function(
 
   if (!is.numeric(arrow.size) || arrow.size < 0) {
     stop("incorrect arrow.size value")
-  } else if (arrow.size > 0 & is_dir == "graph") {
+  } else if (arrow.size > 0 && is_dir == "graph") {
     warning("network is undirected; arrow.size ignored")
     arrow.size = 0
   }
 
   if (!is.numeric(arrow.gap) || arrow.gap < 0 || arrow.gap > 1) {
     stop("incorrect arrow.gap value")
-  } else if (arrow.gap > 0 & is_dir == "graph") {
+  } else if (arrow.gap > 0 && is_dir == "graph") {
     warning("network is undirected; arrow.gap ignored")
     arrow.gap = 0
   }
@@ -480,7 +480,7 @@ ggnet2 <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -504,7 +504,7 @@ ggnet2 <- function(
     if ("package:igraph" %in% search()) {
 
       y = ifelse(is_dir == "digraph", "directed", "undirected")
-      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[ x ]
+      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[x]
       data$size = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
 
     } else {
@@ -530,7 +530,7 @@ ggnet2 <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -557,7 +557,7 @@ ggnet2 <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -611,7 +611,7 @@ ggnet2 <- function(
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$alpha[ !data$alpha %in% names(x) ]))
+    y = unique(na.omit(data$alpha[!data$alpha %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no alpha.palette value for", paste0(y, collapse = ", ")))
@@ -643,7 +643,7 @@ ggnet2 <- function(
     data$color = factor(data$color)
 
     n_groups = length(levels(data$color))
-    n_colors = RColorBrewer::brewer.pal.info[ x, "maxcolors" ]
+    n_colors = RColorBrewer::brewer.pal.info[x, "maxcolors"]
 
     if (n_groups > n_colors) {
 
@@ -654,14 +654,14 @@ ggnet2 <- function(
       n_groups = 3
     }
 
-    x = RColorBrewer::brewer.pal(n_groups, x)[ 1:length(levels(data$color)) ]
+    x = RColorBrewer::brewer.pal(n_groups, x)[1:length(levels(data$color))]
     names(x) = levels(data$color)
 
   }
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$color[ !data$color %in% names(x) ]))
+    y = unique(na.omit(data$color[!data$color %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no color.palette value for", paste0(y, collapse = ", ")))
@@ -690,7 +690,7 @@ ggnet2 <- function(
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$shape[ !data$shape %in% names(x) ]))
+    y = unique(na.omit(data$shape[!data$shape %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no shape.palette value for", paste0(y, collapse = ", ")))
@@ -718,7 +718,7 @@ ggnet2 <- function(
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$size[ !data$size %in% names(x) ]))
+    y = unique(na.omit(data$size[!data$size %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no size.palette value for", paste0(y, collapse = ", ")))
@@ -740,7 +740,7 @@ ggnet2 <- function(
 
   if (isTRUE(l)) {
     l = data$label
-  } else if (length(l) > 1 & length(l) == n_nodes) {
+  } else if (length(l) > 1 && length(l) == n_nodes) {
     data$label = l
   } else if (length(l) == 1 && l %in% v_attr) {
     l = get_v(net, l)
@@ -780,8 +780,8 @@ ggnet2 <- function(
 
   }
 
-  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[,1]
-  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[,1]
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[, 1]
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[, 1]
 
   data = cbind(data, xy)
 
@@ -792,15 +792,15 @@ ggnet2 <- function(
   if (edge.color[1] == "color" && length(edge.color) == 2) {
 
     # edge colors from node source and target
-    edge.color = ifelse(data$color[ edges[, 1]] == data$color[ edges[, 2]],
-                        as.character(data$color[ edges[, 1]]), edge.color[2])
+    edge.color = ifelse(data$color[edges[, 1]] == data$color[edges[, 2]],
+                        as.character(data$color[edges[, 1]]), edge.color[2])
 
     if (!is.null(names(color.palette))) {
       x = which(edge.color %in% names(color.palette))
-      edge.color[x] = color.palette[ edge.color[x] ]
+      edge.color[x] = color.palette[edge.color[x]]
     }
 
-    edge.color[ is.na(edge.color) ] = edge.color[2]
+    edge.color[is.na(edge.color)] = edge.color[2]
 
   }
 
@@ -812,7 +812,7 @@ ggnet2 <- function(
 
   # -- edge list ---------------------------------------------------------------
 
-  edges = data.frame(xy[ edges[, 1], ], xy[ edges[, 2], ])
+  edges = data.frame(xy[edges[, 1], ], xy[edges[, 2], ])
   names(edges) = c("X1", "Y1", "X2", "Y2")
 
   # -- edge labels, colors and sizes -------------------------------------------
@@ -999,7 +999,7 @@ ggnet2 <- function(
 
   # -- legend: size ------------------------------------------------------------
 
-  x = x[ names(x) != "size" ]
+  x = x[names(x) != "size"]
 
   if (is.numeric(data$size)) {
 
@@ -1053,7 +1053,7 @@ ggnet2 <- function(
 
     x = label.trim
 
-    if (length(x) > 1 || (!is.logical(x) & !is.numeric(x) & !is.function(x))) {
+    if (length(x) > 1 || (!is.logical(x) && !is.numeric(x) && !is.function(x))) {
       stop("incorrect label.trim value")
     } else if (is.numeric(x) && x > 0) {
       l = substr(l, 1, x)
