@@ -40,7 +40,7 @@ if (getRversion() >= "2.15.1") {
 #' p_ <- GGally::print_if_interactive
 #'
 #' if (require(survival) && require(scales)) {
-#'   data(lung, package = "survival")
+#'   lung <- survival::lung
 #'   sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
 #'   p_(ggsurv(sf.lung))
 #'
@@ -68,7 +68,7 @@ if (getRversion() >= "2.15.1") {
 #'   p_(pl.sex2 + labs(color = "New Title", linetype = "New Title"))
 #'
 #'   # We can still adjust the plot after fitting
-#'   data(kidney, package = "survival")
+#'   kidney <- survival::kidney
 #'   sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
 #'   pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
 #'   p_(pl.kid)

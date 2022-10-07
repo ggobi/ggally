@@ -2,11 +2,11 @@
 context("ggsurv")
 suppressMessages(require(survival))
 suppressMessages(require(scales))
-data(lung, package = "survival")
-data(kidney, package = "survival")
+lung <- survival::lung
+kidney <- survival::kidney
 
-sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
-sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
+sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = survival::lung)
+sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = survival::kidney)
 
 expect_print <- function(x) {
   testthat::expect_silent(print(x))
