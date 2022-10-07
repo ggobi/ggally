@@ -6,7 +6,7 @@
 #' @param p plot to be displayed
 #' @export
 print_if_interactive <- function(p) {
-  if (interactive() || nzchar(Sys.getenv("CAN_PRINT")) || on_ci())) {
+  if (interactive() || nzchar(Sys.getenv("CAN_PRINT")) || on_ci()) {
     print(p)
   }
 }
