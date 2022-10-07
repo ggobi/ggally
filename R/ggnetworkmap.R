@@ -295,7 +295,7 @@ ggnetworkmap <- function(
     lon1 = plotcord[edges[, 1], "lon"],
     lat2 =  plotcord[edges[, 2], "lat"],
     lon2 = plotcord[edges[, 2], "lon"])
-  edges <- subset(na.omit(edges), (! (lat1 == lat2 && lon2 == lon2)))
+  edges <- subset(na.omit(edges), (! (lat1 == lat2 & lon2 == lon2)))
 
   edge_args <- list(size = substitute(segment.size),
                     alpha = substitute(inherit(segment.alpha)),
