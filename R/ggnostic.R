@@ -645,7 +645,7 @@ ggnostic <- function(
   ),
   combo = list(
     default = ggally_box_no_facet,
-    fitted = ggally_box_no_facet,
+    .fitted = ggally_box_no_facet,
     .se.fit = ggally_nostic_se_fit,
     .resid = ggally_nostic_resid,
     .hat = ggally_nostic_hat,
