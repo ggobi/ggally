@@ -33,14 +33,11 @@ jobs:
       - name: Install R, system dependencies, and package dependencies
         uses: rstudio/shiny-workflows/setup-r-package@v1
         with:
-          pandoc-version: ${{ inputs.pandoc-version }}
-          cache-version: ${{ inputs.cache-version }}
           needs: website
           extra-packages: |
             any::pkgdown
             any::testthat
             local::.
-            ${{ inputs.extra-packages }}
 
 
       - name: Build articles
