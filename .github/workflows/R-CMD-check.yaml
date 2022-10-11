@@ -21,3 +21,34 @@ jobs:
     uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
     with:
       minimum-r-version: "4.1.0"
+
+  debug:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout GitHub repo
+        uses: rstudio/shiny-workflows/.github/internal/checkout@v1
+
+      - name: Install R, system dependencies, and package dependencies
+        uses: rstudio/shiny-workflows/setup-r-package@v1
+        with:
+          pandoc-version: ${{ inputs.pandoc-version }}
+          cache-version: ${{ inputs.cache-version }}
+          needs: website
+          extra-packages: |
+            any::pkgdown
+            any::testthat
+            local::.
+            ${{ inputs.extra-packages }}
+
+
+      - name: Build articles
+        shell: Rscript {0}
+        run: |
+          pkgdown::build_articles(quiet = FALSE, lazy = FALSE)
+
+      - name: Build site
+        shell: Rscript {0}
+        run: |
+          pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
