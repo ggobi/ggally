@@ -28,7 +28,7 @@ This function rearranges data to be able to construct a glyph plot
 ```{r glyphs-basic-usage, fig.height=7, fig.width=7}
 library(ggplot2)
 data(nasa)
-temp.gly <- glyphs(nasa, "long", "day", "lat", "surftemp", height=2.5)
+temp.gly <- glyphs(nasa, "long", "day", "lat", "surftemp", height = 2.5)
 ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
   add_ref_lines(temp.gly, color = "grey90") +
   add_ref_boxes(temp.gly, color = "grey90") +

@@ -92,7 +92,7 @@ ggduo(
   title = "Between Academic and Psychological Variable Correlation",
   xlab = "Psychological",
   ylab = "Academic",
-  legend = c(5,2)
+  legend = c(5, 2)
 ) +
   theme(legend.position = "bottom")
 ```
@@ -138,7 +138,7 @@ pigs_types <- list(
 ggts(pigs_dt, "time", 2:7, types = pigs_types)
 # add color and legend
 pigs_mapping <- aes(color = profit_group)
-ggts(pigs_dt, pigs_mapping, "time", 2:7, types = pigs_types, legend = c(6,1))
+ggts(pigs_dt, pigs_mapping, "time", 2:7, types = pigs_types, legend = c(6, 1))
 ```
 
 Produce more meaningful labels, add a legend, and remove profit group strips.
@@ -148,7 +148,7 @@ pm <- ggts(
   pigs_dt, pigs_mapping,
   1, 2:7,
   types = pigs_types,
-  legend = c(6,1),
+  legend = c(6, 1),
   columnLabelsY = c(
     "number of\nfirst birth sows",
     "sell price over\nfeed cost",
@@ -191,14 +191,17 @@ y_range <- range(unlist(residuals))
 
 # custom function to display continuous data. If the y variable is "Residual", do custom work.
 lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
-  if (as.character(mapping$y) != "Residual") {
+  if (!identical(
+    rlang::expr_text(mapping$y),
+    rlang::expr_text(ggplot2::aes(y = Residual)$y)
+  )) {
     return(ggally_smooth_lm(data, mapping, ...))
   }
 
   # make residual data to display
   resid_data <- data.frame(
-    x = data[[as.character(mapping$x)]],
-    y = residuals[[as.character(mapping$x)]]
+    x = rlang::eval_tidy(mapping$x, data = data),
+    y = rlang::eval_tidy(mapping$x, data = residuals)
   )
 
   ggplot(data = data, mapping = mapping) +
@@ -211,14 +214,14 @@ lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
 # plot the data
 ggduo(
   swiss,
-  2:6, c(1,7),
+  2:6, c(1, 7),
   types = list(continuous = lm_or_resid)
 )
 
 # change line to be thicker and blue and the points to be slightly transparent
 ggduo(
   swiss,
-  2:6, c(1,7),
+  2:6, c(1, 7),
   types = list(
     continuous = wrap(lm_or_resid,
       alpha = 0.7,
@@ -240,4 +243,3 @@ You can customize the type of plots to display with the `types` argument. `types
 * `na`: when all x data and all y data is `NA`
 
 The list of current valid `ggally_NAME` functions is visible in `vig_ggally("ggally_plots")`.
-

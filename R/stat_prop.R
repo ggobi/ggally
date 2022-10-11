@@ -133,7 +133,9 @@ StatProp <- ggproto("StatProp", Stat,
     panel$count[is.na(panel$count)] <- 0
 
     # compute proportions by by
-    sum_abs <- function(x) {sum(abs(x))}
+    sum_abs <- function(x) {
+      sum(abs(x))
+    }
     panel$prop <- panel$count / ave(panel$count, panel$by, FUN = sum_abs)
     panel$width <- width
     panel$flipped_aes <- flipped_aes
@@ -297,5 +299,3 @@ ggally_rowbar <- function(
 
   p
 }
-
-

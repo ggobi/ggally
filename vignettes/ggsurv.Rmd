@@ -59,9 +59,9 @@ Since a ggplot2 object is returned, plot objects may be altered after the origin
 pl.sex +
   ggplot2::guides(linetype = "none") +
   ggplot2::scale_colour_discrete(
-    name   = 'Sex',
+    name   = "Sex",
     breaks = c(1, 2),
-    labels = c('Male', 'Female')
+    labels = c("Male", "Female")
   )
 ```
 

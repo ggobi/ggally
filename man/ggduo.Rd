@@ -211,7 +211,7 @@ pm <- ggduo(
   rev(psych_variables), academic_variables,
   types = list(continuous = loess_with_cor),
   showStrips = FALSE,
-  legend = c(5,2)
+  legend = c(5, 2)
 )
 suppressWarnings(p_(pm))
 
@@ -223,7 +223,7 @@ pm <- ggduo(
   rev(psych_variables), academic_variables,
   types = list(continuous = loess_with_cor),
   showStrips = FALSE,
-  legend = c(5,2)
+  legend = c(5, 2)
 ) +
   ggplot2::theme(legend.position = "bottom")
 suppressWarnings(p_(pm))

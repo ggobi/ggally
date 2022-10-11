@@ -16,9 +16,9 @@ ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 #' @export
 #' @examples
 #'  data(tips, package = "reshape")
-#'  pMat <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
+#'  pMat <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes_string(color = "sex"))
 #'  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
-print.ggmatrix <- function (x, newpage = is.null(vp), vp = NULL, ...) {
+print.ggmatrix <- function(x, newpage = is.null(vp), vp = NULL, ...) {
   if (newpage) {
     grid.newpage()
   }
@@ -54,6 +54,6 @@ print.ggmatrix <- function (x, newpage = is.null(vp), vp = NULL, ...) {
 #'  GGally:::is_blank_plot(ggally_blank())
 #'  GGally:::is_blank_plot(ggally_points(mtcars, ggplot2::aes_string(x = "disp", y = "hp")))
 #'
-is_blank_plot <- function(p){
+is_blank_plot <- function(p) {
   is.null(p) || identical(p, "blank") || inherits(p, "ggmatrix_blank")
 }

@@ -1,108 +1,23 @@
+# Workflow derived from https://github.com/rstudio/shiny-workflows
+#
+# NOTE: This Shiny team GHA workflow is overkill for most R packages.
+# For most R packages it is better to use https://github.com/r-lib/actions
 on:
   push:
-    branches:
-      - master
+    branches: [master, rc-**]
   pull_request:
-    branches:
-      - master
-      - rc-*
+    branches: [master]
+  schedule:
+    - cron: '0 5 * * 1' # every monday
 
-name: R-CMD-check
+name: Package checks
 
 jobs:
+  website:
+    uses: rstudio/shiny-workflows/.github/workflows/website.yaml@v1
+  routine:
+    uses: rstudio/shiny-workflows/.github/workflows/routine.yaml@v1
   R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
-
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          # - { os: macOS-latest,   r: 'devel',   force_suggests: "0" }
-          # - { os: window-latest,   r: 'devel',   force_suggests: "1" }
-
-          - { os: macOS-latest,   r: 'release', force_suggests: "1" }
-          - { os: windows-latest, r: 'release', force_suggests: "1" }
-          - { os: ubuntu-16.04,   r: 'release', force_suggests: "1",  rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest" }
-          - { os: ubuntu-20.04,   r: 'release', force_suggests: "1",  rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest" }
-
-          - { os: macOS-latest,   r: 'oldrel',  force_suggests: "1" }
-          - { os: windows-latest, r: 'oldrel',  force_suggests: "1" }
-          - { os: ubuntu-16.04,   r: 'oldrel',  force_suggests: "1" , rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest" }
-          - { os: ubuntu-20.04,   r: 'oldrel',  force_suggests: "1" , rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest" }
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      _R_CHECK_FORCE_SUGGESTS_: ${{ matrix.config.force_suggests }}
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: r-lib/actions/setup-r@master
-        id: install-r
-        with:
-          r-version: ${{ matrix.config.r }}
-
-      - uses: r-lib/actions/setup-pandoc@master
-
-      - name: Install pak and query dependencies
-        shell: Rscript {0}
-        run: |
-          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
-          saveRDS(pak::pkg_deps_tree("local::.", dependencies = TRUE), ".github/r-depends.rds")
-
-      - name: Cache R packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.config.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
-          restore-keys: ${{ matrix.config.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-
-
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        shell: Rscript {0}
-        run: |
-          pak::local_system_requirements(execute = TRUE)
-          pak::pkg_system_requirements("rcmdcheck", execute = TRUE)
-          pak::pkg_system_requirements("sessioninfo", execute = TRUE)
-
-      - name: Install dependencies
-        shell: Rscript {0}
-        run: |
-          pak::local_install_dev_deps(upgrade = TRUE)
-          pak::pkg_install(c("rcmdcheck", "sessioninfo"))
-
-      - name: Session info
-        shell: Rscript {0}
-        run: |
-          options(width = 100)
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-
-      - name: Check with printing
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-          CAN_PRINT: "TRUE"
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Check as CRAN
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@master
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+    uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
+    with:
+      minimum-r-version: "4.1.0"

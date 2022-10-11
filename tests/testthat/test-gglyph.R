@@ -20,7 +20,7 @@ do_glyph <- function(...) {
 
 
 do_gg <- function(dt) {
-  ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) +
+  ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) + # nolint
     add_ref_lines(dt, color = "red", size = 0.5) +
     add_ref_boxes(dt, color = "blue") +
     ggplot2::geom_path() +
@@ -58,6 +58,25 @@ test_that("scales", {
   dtm <- merge(dt, nasaLate)
   expect_true(all(dtm$surftempLog == log(dtm$surftemp)))
 
+  for (scale_fn in c(range01, max1, mean0, min0, rescale01, rescale11)) {
+    dt <- do_glyph(y_scale = scale_fn)
+    dt$surftempScaled <- dt$surftemp
+    dt$surftemp <- NULL
+    dtm <- merge(dt, nasaLate)
+    expect_true(all(dtm$surftempScaled != dtm$surftemp))
+  }
+
+
+  for (scale_fn in c(rescale01, rescale11)) {
+    scale_fn2 <- function(x) {
+      scale_fn(x, xlim = c(1 / 4, 3 / 4))
+    }
+    dt <- do_glyph(y_scale = scale_fn2)
+    dt$surftempScaled <- dt$surftemp
+    dt$surftemp <- NULL
+    dtm <- merge(dt, nasaLate)
+    expect_true(all(dtm$surftempScaled != dtm$surftemp))
+  }
 
 })
 
@@ -78,7 +97,7 @@ test_that("fill", {
   dt <- do_glyph()
 
   # idk how to test that polar happened
-  do_gg_fill <- function(...){
+  do_gg_fill <- function(...) {
     ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) +
       add_ref_lines(dt, color = "red", size = 0.5) +
       add_ref_boxes(dt, color = "blue", ...) +

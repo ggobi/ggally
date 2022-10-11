@@ -34,7 +34,7 @@
 #'   nasa$long >= -80 &
 #'   nasa$long <= -60
 #' , ]
-#' temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height=2.5)
+#' temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 2.5)
 #' p_(ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
 #'   add_ref_lines(temp.gly, color = "grey90") +
 #'   add_ref_boxes(temp.gly, color = "grey90") +
@@ -106,15 +106,13 @@ glyph_layer <- function(data, component = c("glyph", "line", "box"),
   res
 }
 
-add_ref_lines <- function(data, color = "white", size = 1.5, ...){
-
+add_ref_lines <- function(data, color = "white", size = 1.5, ...) {
   data <- glyph_layer(data, component = "line")
   ggplot2::geom_path(data = data, color = color, size = size, ...)
 }
 
 add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
-                          fill = NA, ...){
-
+                          fill = NA, ...) {
   data <- glyph_layer(data, component = "box")
   data <- data %>% dplyr::select(.data$gid, .data$gx, .data$gy, .data$xmin:.data$ymax)
 
@@ -123,7 +121,6 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
     data = data,
     aes_all(names(data)),
     color = color, size = size,fill = fill, ...))
-
 }
 
 #' @export
@@ -150,7 +147,7 @@ min0 <- function(x) {
 }
 #' @export
 #' @rdname rescale01
-rescale01 <- function(x, xlim=NULL) {
+rescale01 <- function(x, xlim = NULL) {
   if (is.null(xlim)) {
     rng <- range(x, na.rm = TRUE)
   } else {
@@ -160,7 +157,7 @@ rescale01 <- function(x, xlim=NULL) {
 }
 #' @export
 #' @rdname rescale01
-rescale11 <- function(x, xlim=NULL) {
+rescale11 <- function(x, xlim = NULL) {
   2 * rescale01(x, xlim) - 1
 }
 

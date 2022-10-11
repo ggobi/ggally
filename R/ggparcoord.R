@@ -85,7 +85,7 @@ if (getRversion() >= "2.15.1") {
 #' p_ <- GGally::print_if_interactive
 #'
 #' # use sample of the diamonds data for illustrative purposes
-#' data(diamonds, package="ggplot2")
+#' data(diamonds, package = "ggplot2")
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 #'
 #' # basic parallel coordinate plot, using default settings
@@ -110,7 +110,7 @@ if (getRversion() >= "2.15.1") {
 #' # basic parallel coord plot of the msleep data, using 'random' imputation and
 #' # coloring by diet (can also use variable names in the columns and groupColumn
 #' # arguments)
-#' data(msleep, package="ggplot2")
+#' data(msleep, package = "ggplot2")
 #' p <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
 #'   "random", scale = "uniminmax")
 #' p_(p)
@@ -179,7 +179,7 @@ ggparcoord <- function(
       stop("can't use the 'order' methods anyClass or allClass without specifying groupColumn")
     }
   } else if (
-    !( (length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))
+    !((length(groupColumn) == 1) && (is.numeric(groupColumn) || is.character(groupColumn)))
   ) {
     stop("invalid value for 'groupColumn'; must be a single numeric or character index")
   }
@@ -210,7 +210,7 @@ ggparcoord <- function(
         "skewness", "allClass", "anyClass", "Outlying", "Skewed", "Clumpy",
         "Sparse", "Striated", "Convex", "Skinny", "Stringy", "Monotonic"
       ))
-    )) ) {
+    ))) {
     stop(str_c(
       "invalid value for 'order'; must either be a vector of column indices or one of ",
       "'skewness', 'allClass', 'anyClass', 'Outlying', 'Skewed', 'Clumpy', 'Sparse', 'Striated', ",
@@ -313,7 +313,7 @@ ggparcoord <- function(
   data$anyMissing <- apply(is.na(data[, columns]), 1, any)
   columnsPlusTwo <- c(columns, p)
 
-  inner_rescaler_default <- function (x, type = "sd", ...) {
+  inner_rescaler_default <- function(x, type = "sd", ...) {
     # copied directly from reshape because of import difficulties :-(
     # rescaler.default
     switch(type,
@@ -332,7 +332,7 @@ ggparcoord <- function(
     if (any(continuous)) {
       if (type %in% c("sd", "robust", "range")) {
         # indicating columns containing only one single value
-        singleVal <- sapply(x, function(col){
+        singleVal <- sapply(x, function(col) {
           if (length(unique(col)) == 1) {
             TRUE
           } else {
@@ -386,8 +386,7 @@ ggparcoord <- function(
     }
 
     data <- data[dataCompleteCases, ]
-  }
-  else if (tolower(missing) %in% c("mean", "median", "min10", "random")) {
+  } else if (tolower(missing) %in% c("mean", "median", "min10", "random")) {
     missingFns <- list(
       mean = function(x) {
         mean(x, na.rm = TRUE)
@@ -395,7 +394,7 @@ ggparcoord <- function(
       median = function(x) {
         median(x, na.rm = TRUE)
       },
-      min10 = function(x){
+      min10 = function(x) {
         0.9 * min(x, na.rm = TRUE)
       },
       random = function(x) {
@@ -406,7 +405,7 @@ ggparcoord <- function(
     )
     missing_fn <- missingFns[[tolower(missing)]]
     data[columns] <- apply(data[columns], 2, function(x) {
-      if (any(is.na(x))){
+      if (any(is.na(x))) {
         x[is.na(x)] <- missing_fn(x)
       }
       return(x)
@@ -419,7 +418,7 @@ ggparcoord <- function(
   #   in case the observation to be centered on has missing values
   if (tolower(scale) == "centerobs") {
     data[columnsPlusTwo] <- inner_rescaler(data[columnsPlusTwo], type = "range")
-    data[columns] <- apply(data[columns], 2, function(x){
+    data[columns] <- apply(data[columns], 2, function(x) {
       x <- x - x[centerObsID]
     })
   }
@@ -440,30 +439,27 @@ ggparcoord <- function(
     meltIDVars <- union(meltIDVars, alphaLines)
   }
 
-  # if(is.list(mapping)) {
+  # if (is.list(mapping)) {
   #   mappingNames <- names(mapping)
   # }
   data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
 
   ### Ordering ###
-  if (length(order) > 1 & is.numeric(order)) {
+  if (length(order) > 1 && is.numeric(order)) {
      data.m$variable <- factor(data.m$variable, levels = names(saveData)[order])
-  }
-  else if (order %in% c("Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
+  } else if (order %in% c("Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
     "Stringy", "Monotonic")) {
 
     require_namespaces("scagnostics")
     scag <- scagnostics::scagnostics(saveData2)
     data.m$variable <- factor(data.m$variable, levels = scag_order(scag, names(saveData2), order))
-  }
-  else if (tolower(order) == "skewness") {
+  } else if (tolower(order) == "skewness") {
     abs.skew <- abs(apply(saveData2, 2, skewness))
     data.m$variable <- factor(
       data.m$variable,
       levels = names(abs.skew)[order(abs.skew, decreasing = TRUE)]
     )
-  }
-  else if (tolower(order) == "allclass") {
+  } else if (tolower(order) == "allclass") {
     f.stats <- rep(NA, length(columns))
     names(f.stats) <- names(saveData2[columns])
     for (i in 1:length(columns)) {
@@ -473,8 +469,7 @@ ggparcoord <- function(
       data.m$variable,
       levels = names(f.stats)[order(f.stats, decreasing = TRUE)]
     )
-  }
-  else if (tolower(order) == "anyclass") {
+  } else if (tolower(order) == "anyclass") {
     axis.order <- singleClassOrder(groupVar, saveData2)
     data.m$variable <- factor(data.m$variable, levels = axis.order)
   }
@@ -526,7 +521,7 @@ ggparcoord <- function(
 
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
-    if (class(splineFactor) == "AsIs") {
+    if (inherits(splineFactor, "AsIs")) {
       data.m <- ddply(
         data.m, ".ID", transform,
         spline = spline(variable, value, n = ggally_splineFactor[1])
@@ -697,7 +692,7 @@ scag_order <- function(scag, vars, measure) {
 #' @return character vector of names of axisVars ordered such that the first
 #'   variable has the most separation between one of the classes and the rest, and
 #'   the last variable has the least (as measured by F-statistics from an ANOVA)
-singleClassOrder <- function(classVar, axisVars, specClass=NULL) {
+singleClassOrder <- function(classVar, axisVars, specClass = NULL) {
   if (!is.null(specClass)) {
     # for when user is interested in ordering by variation between one class and
     # the rest...will add this later
@@ -728,6 +723,6 @@ skewness <- function(x) {
   x <- x[!is.na(x)]
   xbar <- mean(x)
   n <- length(x)
-  skewness <- (1 / n) * sum( (x - xbar) ^ 3) / ( (1 / n) * sum( (x - xbar) ^ 2)) ^ (3 / 2)
+  skewness <- (1 / n) * sum((x - xbar)^3) / ((1 / n) * sum((x - xbar)^2))^(3 / 2)
   return(skewness)
 }

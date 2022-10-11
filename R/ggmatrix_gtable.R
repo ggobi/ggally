@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' data(tips, package = "reshape")
-#' pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
+#' pm <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes_string(color = "sex"))
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
   pm,

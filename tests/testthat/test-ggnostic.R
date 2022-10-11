@@ -1,12 +1,5 @@
 context("ggnostic")
 
-expect_print <- function(p) {
-  testthat::expect_silent({
-    print(p)
-  })
-}
-
-
 test_that("fn_switch", {
   fn1 <- function(data, mapping, ...) {
     return(1)
@@ -52,10 +45,10 @@ test_that("model_beta_label", {
 
 test_that("ggnostic mtcars", {
 
-  mtc <- mtcars;
-  mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)];
+  mtc <- mtcars
+  mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)]
 
-  mod <- lm(mpg ~ wt + qsec + am, data = mtc);
+  mod <- lm(mpg ~ wt + qsec + am, data = mtc)
   continuous_type <- list(
     .resid = wrap(ggally_nostic_resid, method = "loess"),
     .std.resid = wrap(ggally_nostic_std_resid, method = "loess")
@@ -68,7 +61,7 @@ test_that("ggnostic mtcars", {
     continuous = continuous_type,
     progress = FALSE
   )
-  expect_print(pm)
+  vdiffr::expect_doppelganger("custom-y", pm)
 
   pm <- ggnostic(
     mod,
@@ -77,7 +70,7 @@ test_that("ggnostic mtcars", {
     continuous = continuous_type,
     progress = FALSE
   )
-  expect_print(pm)
+  vdiffr::expect_doppelganger("legend", pm)
 })
 
 

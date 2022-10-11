@@ -100,8 +100,8 @@ flights <- data.frame(
 flights <- network(flights, directed = TRUE)
 
 # add geographic coordinates
-flights \%v\% "lat" <- airports[ network.vertex.names(flights), "lat" ]
-flights \%v\% "lon" <- airports[ network.vertex.names(flights), "long" ]
+flights \%v\% "lat" <- airports[network.vertex.names(flights), "lat"]
+flights \%v\% "lon" <- airports[network.vertex.names(flights), "long"]
 
 # drop isolated airports
 delete.vertices(flights, which(degree(flights) < 2))

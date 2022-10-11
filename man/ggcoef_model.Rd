@@ -9,7 +9,7 @@
 \usage{
 ggcoef_model(
   model,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
@@ -32,7 +32,7 @@ ggcoef_model(
 ggcoef_compare(
   models,
   type = c("dodged", "faceted"),
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
@@ -54,7 +54,7 @@ ggcoef_multinom(
   model,
   type = c("dodged", "faceted"),
   y.level_label = NULL,
-  tidy_fun = broom::tidy,
+  tidy_fun = broom.helpers::tidy_with_broom_or_parameters,
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
@@ -108,6 +108,10 @@ ggcoef_plot(
 \arguments{
 \item{model}{a regression model object}
 
+\item{tidy_fun}{option to specify a custom tidier function}
+
+\item{conf.int}{should confidence intervals be computed? (see \code{\link[broom:reexports]{broom::tidy()}})}
+
 \item{conf.level}{the confidence level to use for the confidence
 interval if \code{conf.int = TRUE}; must be strictly greater than 0
 and less than 1; defaults to 0.95, which corresponds to a 95
@@ -115,6 +119,28 @@ percent confidence interval}
 
 \item{exponentiate}{if \code{TRUE} a logarithmic scale will
 be used for x-axis}
+
+\item{variable_labels}{a named list or a named vector of custom variable labels}
+
+\item{term_labels}{a named list or a named vector of custom term labels}
+
+\item{interaction_sep}{separator for interaction terms}
+
+\item{categorical_terms_pattern}{a \link[glue:glue]{glue pattern} for
+labels of categorical terms with treatment or sum contrasts
+(see \code{\link[broom.helpers:model_list_terms_levels]{model_list_terms_levels()}})}
+
+\item{add_reference_rows}{should reference rows be added?}
+
+\item{no_reference_row}{variables (accepts \link[dplyr:select]{tidyselect} notation)
+for those no reference row should be added, when \code{add_reference_rows = TRUE}}
+
+\item{intercept}{should the intercept(s) be included?}
+
+\item{include}{variables to include. Accepts \link[dplyr:select]{tidyselect}
+syntax. Use \code{-} to remove a variable. Default is \code{everything()}.
+See also \code{\link[broom.helpers:all_continuous]{all_continuous()}}, \code{\link[broom.helpers:all_categorical]{all_categorical()}}, \code{\link[broom.helpers:all_dichotomous]{all_dichotomous()}}
+and \code{\link[broom.helpers:all_interaction]{all_interaction()}}}
 
 \item{significance}{level (between 0 and 1) below which a
 coefficient is consider to be significantly different from 0
@@ -216,15 +242,15 @@ then pass your customized \code{tibble} to \code{ggcoef_plot()}.
 }
 \section{Functions}{
 \itemize{
-\item \code{ggcoef_model}: Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
+\item \code{ggcoef_model()}: Redesign of \code{\link[=ggcoef]{ggcoef()}} based on \code{\link[broom.helpers:tidy_plus_plus]{broom.helpers::tidy_plus_plus()}}.
 
-\item \code{ggcoef_compare}: Designed for displaying several models on the same plot.
+\item \code{ggcoef_compare()}: Designed for displaying several models on the same plot.
 
-\item \code{ggcoef_multinom}: A variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
+\item \code{ggcoef_multinom()}: A variation of \code{\link[=ggcoef_model]{ggcoef_model()}} adapted to multinomial logistic regressions performed with \code{\link[nnet:multinom]{nnet::multinom()}}.
 
-\item \code{ggcoef_plot}: SOME DESCRIPTION HERE
+\item \code{ggcoef_plot()}: SOME DESCRIPTION HERE
+
 }}
-
 \examples{
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive

@@ -5,7 +5,7 @@
 \title{\code{\link{ggmatrix}} default progress bar}
 \usage{
 ggmatrix_progress(
-  format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ",
+  format = " plot: [:plot_i, :plot_j] [:bar]:percent est::eta ",
   clear = TRUE,
   show_after = 0,
   ...

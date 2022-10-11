@@ -24,7 +24,7 @@
 #'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
 #'    size = 5
 #'  )
-ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...){
+ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...) {
 
   useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
   corUse <-  pmatch(corUse, useOptions)
@@ -50,9 +50,9 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
   cor_fn <- function(x, y) {
 
     # also do ddply below if fn is altered
-    # pVals <- cor(x,y, method = corMethod, use = corUse)
-    corObj <- stats::cor.test(x,y, method = corMethod, use = corUse)
-    signifPVals <- sprintf("%.3f",corObj$estimate)
+    # pVals <- cor(x, y, method = corMethod, use = corUse)
+    corObj <- stats::cor.test(x, y, method = corMethod, use = corUse)
+    signifPVals <- sprintf("%.3f", corObj$estimate)
     pStars <- cor_stars(corObj$p.value)
 
     ret <- str_c(signifPVals, pStars)
@@ -83,15 +83,15 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
   xCol <- as.character(mapping$x)
   yCol <- as.character(mapping$y)
 
-  # if (is_date(data[,xCol]) || is_date(data[,yCol])) {
+  # if (is_date(data[, xCol]) || is_date(data[, yCol])) {
   #
   #   # make sure it's a data.frame, as data.tables don't work well
-  #   if (! identical(class(data),"data.frame")) {
+  #   if (! identical(class(data), "data.frame")) {
   #     data <- as.data.frame(data)
   #   }
   #
   #   for (col in c(xCol, yCol)) {
-  #     if (is_date(data[,col])) {
+  #     if (is_date(data[, col])) {
   #       data[, col] <- as.numeric(data[, col])
   #     }
   #   }
@@ -101,17 +101,17 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
   singleColorCol <- paste(colorCol, collapse = "")
 
   if (corUse %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
-    if(length(colorCol) > 0) {
-      if(singleColorCol %in% colnames(data)) {
-        rows <- complete.cases(data[,c(xCol,yCol,colorCol)])
+    if (length(colorCol) > 0) {
+      if (singleColorCol %in% colnames(data)) {
+        rows <- complete.cases(data[, c(xCol, yCol, colorCol)])
       } else {
-        rows <- complete.cases(data[,c(xCol,yCol)])
+        rows <- complete.cases(data[, c(xCol, yCol)])
       }
     } else {
-      rows <- complete.cases(data[,c(xCol,yCol)])
+      rows <- complete.cases(data[, c(xCol, yCol)])
     }
 
-    if(any(!rows)) {
+    if (any(!rows)) {
       total <- sum(!rows)
       if (total > 1) {
         warning("Removed ", total, " rows containing missing values")
@@ -122,19 +122,19 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
     data <- data[rows, ]
   }
 
-  xVal <- data[,xCol]
-  yVal <- data[,yCol]
+  xVal <- data[, xCol]
+  yVal <- data[, yCol]
 
-  if(length(names(mapping)) > 0){
-    for(i in length(names(mapping)):1){
+  if (length(names(mapping)) > 0) {
+    for (i in length(names(mapping)):1) {
       # find the last value of the aes, such as cyl of as.factor(cyl)
       tmp_map_val <- as.character(mapping[names(mapping)[i]][[1]])
-      if(tmp_map_val[length(tmp_map_val)] %in% colnames(data))
+      if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
         mapping[names(mapping)[i]] <- NULL
 
-      if(length(names(mapping)) < 1){
+      if (length(names(mapping)) < 1) {
         mapping <- NULL
-        break;
+        break
       }
     }
   }
@@ -160,9 +160,9 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
     # put in correct order
     lev <- levels(data[[colorCol]])
     ord <- rep(-1, nrow(cord))
-    for(i in 1:nrow(cord)) {
-      for(j in seq_along(lev)){
-        if(identical(as.character(cord[i, colorCol]), as.character(lev[j]))) {
+    for (i in 1:nrow(cord)) {
+      for (j in seq_along(lev)) {
+        if (identical(as.character(cord[i, colorCol]), as.character(lev[j]))) {
           ord[i] <- j
         }
       }
@@ -177,15 +177,15 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
     xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    xrange <- c(xmin - .01 * (xmax - xmin), xmax + .01 * (xmax - xmin))
     ymin <- min(yVal, na.rm = TRUE)
     ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
+    yrange <- c(ymin - .01 * (ymax - ymin), ymax + .01 * (ymax - ymin))
 
 
     # print(cord)
     p <- ggally_text(
-      label   = str_c("r=", cor_fn(xVal,yVal)),
+      label   = str_c("r=", cor_fn(xVal, yVal)),
       mapping = mapping,
       xP      = 0.5,
       yP      = 0.9,
@@ -228,16 +228,16 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
     xmax <- max(xVal, na.rm = TRUE)
-    xrange <- c(xmin-.01*(xmax-xmin),xmax+.01*(xmax-xmin))
+    xrange <- c(xmin - .01 * (xmax - xmin), xmax + .01 * (xmax - xmin))
     ymin <- min(yVal, na.rm = TRUE)
     ymax <- max(yVal, na.rm = TRUE)
-    yrange <- c(ymin-.01*(ymax-ymin),ymax+.01*(ymax-ymin))
+    yrange <- c(ymin - .01 * (ymax - ymin), ymax + .01 * (ymax - ymin))
 
     p <- ggally_text(
-      label = str_c("r=\n", cor_fn(xVal,yVal), collapse=""),
+      label = str_c("r=\n", cor_fn(xVal, yVal), collapse = ""),
       mapping,
-      xP=0.5,
-      yP=0.5,
+      xP = 0.5,
+      yP = 0.5,
       xrange = xrange,
       yrange = yrange,
       ...
@@ -258,5 +258,5 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
 ggally_custom_cor_fn(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
 
 
-ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"), upper=list(continuous = "custom_cor_fn"))
-ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"), upper=list(continuous = "custom_cor_fn"), color = "sex")
+ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"), upper = list(continuous = "custom_cor_fn"))
+ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"), upper = list(continuous = "custom_cor_fn"), color = "sex")

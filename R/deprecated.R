@@ -77,7 +77,7 @@ ggally_cor_v1_5 <- function(
   corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
   displayGrid = TRUE,
   ...
-){
+) {
 
   if (! is.null(corAlignPercent)) {
     stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
@@ -177,14 +177,14 @@ ggally_cor_v1_5 <- function(
       }
     }
   } else {
-    if (length(names(mapping)) > 0){
-      for (i in length(names(mapping)):1){
+    if (length(names(mapping)) > 0) {
+      for (i in length(names(mapping)):1) {
         # find the last value of the aes, such as cyl of as.factor(cyl)
         tmp_map_val <- deparse(mapping[names(mapping)[i]][[1]])
         if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
           mapping[[names(mapping)[i]]] <- NULL
 
-        if (length(names(mapping)) < 1){
+        if (length(names(mapping)) < 1) {
           mapping <- NULL
           break;
         }
@@ -212,7 +212,7 @@ ggally_cor_v1_5 <- function(
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
     for (i in 1:nrow(cord)) {
-      for (j in seq_along(lev)){
+      for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
         }

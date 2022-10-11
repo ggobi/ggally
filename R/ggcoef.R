@@ -114,7 +114,7 @@ ggcoef <- function(
         )
     }
   }
-  if (conf.int & "conf.low" %in% names(x) & "conf.high" %in% names(x))
+  if (conf.int && "conf.low" %in% names(x) && "conf.high" %in% names(x))
     p <- p + geom_errorbarh(
       aes_string(xmin = "conf.low", xmax = "conf.high"),
       color = errorbar_color,
