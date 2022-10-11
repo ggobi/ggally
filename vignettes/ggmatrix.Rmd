@@ -74,12 +74,12 @@ pm <- ggmatrix(
   title = "Matrix Title"
 )
 pm
-p2 <- pm[1,2]
-p3 <- pm[1,3]
+p2 <- pm[1, 2]
+p3 <- pm[1, 3]
 p2
 p3
-pm[1,2] <- p3
-pm[1,3] <- p2
+pm[1, 2] <- p3
+pm[1, 3] <- p2
 pm
 
 ```
@@ -176,5 +176,3 @@ pm <- ggmatrix(
 )
 pm
 ```
-
-

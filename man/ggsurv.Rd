@@ -76,7 +76,7 @@ multiple strata objects.
 p_ <- GGally::print_if_interactive
 
 if (require(survival) && require(scales)) {
-  data(lung, package = "survival")
+  lung <- survival::lung
   sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
   p_(ggsurv(sf.lung))
 
@@ -90,7 +90,7 @@ if (require(survival) && require(scales)) {
     ggplot2::guides(linetype = "none") +
     ggplot2::scale_colour_discrete(
       name   = 'Sex',
-      breaks = c(1,2),
+      breaks = c(1, 2),
       labels = c('Male', 'Female')
     ))
 
@@ -104,7 +104,7 @@ if (require(survival) && require(scales)) {
   p_(pl.sex2 + labs(color = "New Title", linetype = "New Title"))
 
   # We can still adjust the plot after fitting
-  data(kidney, package = "survival")
+  kidney <- survival::kidney
   sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
   pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
   p_(pl.kid)

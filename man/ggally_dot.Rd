@@ -33,7 +33,7 @@ p_(ggally_dot(
 p_(ggally_dot(
   tips,
   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
-) + ggplot2::scale_shape(solid=FALSE))
+) + ggplot2::scale_shape(solid = FALSE))
 }
 \author{
 Barret Schloerke

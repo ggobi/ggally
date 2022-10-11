@@ -175,4 +175,3 @@ GeomStrippedCols <- ggplot2::ggproto("GeomStrippedCols", ggplot2::Geom,
     )
   }
 )
-

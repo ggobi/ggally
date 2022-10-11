@@ -14,10 +14,10 @@ if (getRversion() >= "2.15.1") {
 #' @author Mengjia Ni, Di Cook
 #' @examples
 #' data(flea)
-#' head(lowertriangle(flea, columns= 2:4))
+#' head(lowertriangle(flea, columns = 2:4))
 #' head(lowertriangle(flea))
-#' head(lowertriangle(flea, color="species"))
-lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
+#' head(lowertriangle(flea, color = "species"))
+lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
   # why do  we need to ocheck this again?
   # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
@@ -25,18 +25,20 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   q <- nrow(dn)
-  newdata      <- as.data.frame(matrix(NA, nrow = q*p*p, ncol = 6+ncol(factor)), stringsAsFactors = FALSE)
-  newdata[5:6] <- as.data.frame(matrix("", nrow = q*p*p, ncol = 2), stringsAsFactors = FALSE)
+  newdata      <- as.data.frame(matrix(NA, nrow = q * p * p, ncol = 6 + ncol(factor)), stringsAsFactors = FALSE)
+  newdata[5:6] <- as.data.frame(matrix("", nrow = q * p * p, ncol = 2), stringsAsFactors = FALSE)
 
-  r <-1
+  r <- 1
   for (i in 1:p) {
     for (j in 1:p) {
-      newdata[r:(r+q-1), 1:6] <- cbind(dn[[i]], dn[[j]], i, j, colnames(dn)[i], colnames(dn)[j])
-      r <- r+q
+      newdata[r:(r + q - 1), 1:6] <- cbind(dn[[i]], dn[[j]], i, j, colnames(dn)[i], colnames(dn)[j])
+      r <- r + q
     }
   }
 
-  if (ncol(newdata) > 6){newdata[7:ncol(newdata)] <- factor}
+  if (ncol(newdata) > 6) {
+    newdata[7:ncol(newdata)] <- factor
+  }
   colnames(newdata) <- c("xvalue", "yvalue", "xslot", "yslot", "xlab", "ylab", colnames(factor))
 
   rp <- data.frame(newdata)
@@ -50,7 +52,7 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
   rp$xlab <- factor(rp$xlab, levels = unique(rp$xlab))
   rp$ylab <- factor(rp$ylab, levels = unique(rp$ylab))
 
-  if (is.null(color)){
+  if (is.null(color)) {
     rp.new <- rp[1:6]
   } else {
     colorcolumn <- rp[[which(colnames(rp) == color)]]
@@ -72,10 +74,10 @@ lowertriangle <- function(data, columns=1:ncol(data), color=NULL) {
 #' @importFrom stats cor
 #' @examples
 #' data(flea)
-#' head(uppertriangle(flea, columns=2:4))
+#' head(uppertriangle(flea, columns = 2:4))
 #' head(uppertriangle(flea))
-#' head(uppertriangle(flea, color="species"))
-uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "pearson") {
+#' head(uppertriangle(flea, color = "species"))
+uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod = "pearson") {
   # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
   # why do  we need to ocheck this again?
@@ -107,17 +109,17 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
   rp$xvalue <- suppressWarnings(as.numeric(as.character(rp$xvalue)))
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
 
-  if (is.null(color)){
+  if (is.null(color)) {
     rp.new <- rp[1:8]
-  }else{
+  } else {
     colorcolumn <- rp[[which(colnames(rp) == color)]]
     rp.new <- cbind(rp[1:8],  colorcolumn)
   }
   a <- rp.new
   b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
-  b$xlab <- factor(b$xlab, levels=unique(b$xlab))
-  b$ylab <- factor(b$ylab, levels=unique(b$ylab))
-  if (is.null(color)){
+  b$xlab <- factor(b$xlab, levels = unique(b$xlab))
+  b$ylab <- factor(b$ylab, levels = unique(b$ylab))
+  if (is.null(color)) {
     data.cor <- ddply(
       b, .(xlab, ylab),
       function(subsetDt) {
@@ -152,7 +154,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
     )
     return(data.cor)
 
-  }else{
+  } else {
     c <- b
     data.cor1 <- ddply(
       c, .(ylab, xlab, colorcolumn),
@@ -193,7 +195,7 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
                       range = max(yvalue) - min(yvalue))
     df <- data.frame()
     for (i in 1:nrow(position)) {
-      for (j in 1:n){
+      for (j in 1:n) {
         row <- position[i, ]
         df <- rbind(df, cbind(row[, 3], (row[, 4] + row[, 6] * j / (n + 1))))
       }
@@ -220,9 +222,9 @@ uppertriangle <- function(data, columns=1:ncol(data), color=NULL, corMethod = "p
 #'
 #' data(flea)
 #'
-#' p_(scatmat(flea, columns=2:4))
-#' p_(scatmat(flea, columns= 2:4, color="species"))
-scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
+#' p_(scatmat(flea, columns = 2:4))
+#' p_(scatmat(flea, columns= 2:4, color = "species"))
+scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
@@ -308,7 +310,7 @@ scatmat <- function(data, columns=1:ncol(data), color=NULL, alpha=1) {
 #'
 #' p_(ggscatmat(flea, columns = 2:4))
 #' p_(ggscatmat(flea, columns = 2:4, color = "species"))
-ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson"){
+ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson") {
   ## if 'color' is not a factor, mold it into one
   if (!is.null(color)) {
      if (is.null(data[[color]])) {
@@ -324,21 +326,23 @@ ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, cor
   if (ncol(dn) == 0) {
     stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
   }
-  if (ncol(dn) < 2){
-    stop ("Not enough numeric variables to make a scatter plot matrix")
+  if (ncol(dn) < 2) {
+    stop("Not enough numeric variables to make a scatter plot matrix")
   }
 
   a <- uppertriangle(data, columns = columns, color = color, corMethod = corMethod)
-  if (is.null(color)){
+  if (is.null(color)) {
     plot <- scatmat(data, columns = columns, alpha = alpha) +
       geom_text(data = a, aes_string(label = "r"), colour = "black")
   } else {
     plot <- scatmat(data, columns = columns, color = color, alpha = alpha) +
       geom_text(data = a, aes_string(label = "r", color = "colorcolumn")) + labs(color = color)
   }
-  is.factor.or.character <- function(x) {is.factor(x)|is.character(x)}
+  is.factor.or.character <- function(x) {
+    is.factor(x) | is.character(x)
+  }
   factor <- data.choose[sapply(data.choose, is.factor.or.character)]
-  if (ncol(factor) == 0){
+  if (ncol(factor) == 0) {
     return(plot)
   } else {
     warning("Factor variables are omitted in plot")

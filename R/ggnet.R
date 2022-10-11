@@ -146,8 +146,8 @@ if (getRversion() >= "2.15.1") {
 #' ndyads      <- x * (x - 1)
 #' density     <- x / ndyads
 #' m           <- matrix(0, nrow = x, ncol = x)
-#' dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-#' m[ row(m) != col(m) ] <- runif(ndyads) < density
+#' dimnames(m) <- list(letters[1:x], letters[1:x])
+#' m[row(m) != col(m)] <- runif(ndyads) < density
 #' m
 #'
 #' # random undirected network
@@ -157,7 +157,7 @@ if (getRversion() >= "2.15.1") {
 #' ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
 #'
 #' # random groups
-#' g <- sample(letters[ 1:3 ], 10, replace = TRUE)
+#' g <- sample(letters[1:3], 10, replace = TRUE)
 #' g
 #'
 #' # color palette
@@ -205,7 +205,7 @@ ggnet <- function(
   top8.nodes       = FALSE,
   trim.labels      = FALSE,
   ...
-){
+) {
 
   # -- packages ----------------------------------------------------------------
 
@@ -339,14 +339,14 @@ ggnet <- function(
 
   if (!is.numeric(arrow.size) || arrow.size < 0) {
     stop("incorrect arrow.size value")
-  } else if (arrow.size > 0 & is_dir == "graph") {
+  } else if (arrow.size > 0 && is_dir == "graph") {
     warning("network is undirected; arrow.size ignored")
     arrow.size = 0
   }
 
   if (!is.numeric(arrow.gap) || arrow.gap < 0 || arrow.gap > 1) {
     stop("incorrect arrow.gap value")
-  } else if (arrow.gap > 0 & is_dir == "graph") {
+  } else if (arrow.gap > 0 && is_dir == "graph") {
     warning("network is undirected; arrow.gap ignored")
     arrow.gap = 0
   }
@@ -385,7 +385,7 @@ ggnet <- function(
     if ("package:igraph" %in% search()) {
 
       y = ifelse(is_dir == "digraph", "directed", "undirected")
-      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[ x ]
+      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[x]
       data$weight = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
 
     } else {
@@ -415,7 +415,7 @@ ggnet <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -440,7 +440,7 @@ ggnet <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -488,7 +488,7 @@ ggnet <- function(
       set_name(weight.method, weight.legend),
       max_size = size,
       breaks   = sort(unique(as.integer(data$weight))),
-      labels   = levels(data$weight)[ sort(unique(as.integer(data$weight))) ]
+      labels = levels(data$weight)[sort(unique(as.integer(data$weight)))]
     )
     data$weight = as.integer(data$weight)
 
@@ -528,7 +528,7 @@ ggnet <- function(
 
   if (isTRUE(l)) {
     l = data$label
-  } else if (length(l) > 1 & length(l) == n_nodes) {
+  } else if (length(l) > 1 && length(l) == n_nodes) {
     data$label = l
   } else if (length(l) == 1 && l %in% v_attr) {
     l = get_v(net, l)
@@ -568,15 +568,15 @@ ggnet <- function(
 
   }
 
-  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[,1]
-  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[,1]
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[, 1]
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[, 1]
 
   data = cbind(data, xy)
 
   # -- edge list ---------------------------------------------------------------
 
   edges = network::as.matrix.network.edgelist(net)
-  edges = data.frame(xy[ edges[, 1], ], xy[ edges[, 2], ])
+  edges = data.frame(xy[edges[, 1], ], xy[edges[, 2], ])
   names(edges) = c("X1", "Y1", "X2", "Y2")
 
   # -- edge labels -------------------------------------------------------------
@@ -690,7 +690,7 @@ ggnet <- function(
 
     x = label.trim
 
-    if (length(x) > 1 || (!is.logical(x) & !is.numeric(x) & !is.function(x))) {
+    if (length(x) > 1 || (!is.logical(x) && !is.numeric(x) && !is.function(x))) {
       stop("incorrect label.trim value")
     } else if (is.numeric(x) && x > 0) {
       l = substr(l, 1, x)

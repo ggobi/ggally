@@ -14,11 +14,10 @@ ggplot_gtable(ggplot_build(p)) -> x2
 gtable_show_layout(x2)
 
 grid.draw(gtable_filter(x, "strip-top"))
-grid.draw(gtable_filter(x, "strip-top")[1,])
+grid.draw(gtable_filter(x, "strip-top")[1, ])
 
 gtable_show_layout(x)
 gtable_show_layout(x2)
 
-str(x2, max.level=2)
+str(x2, max.level = 2)
 x2$heights[[3]]
-

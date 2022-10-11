@@ -34,8 +34,8 @@ flights <- data.frame(
 flights <- network(flights, directed = TRUE)
 
 # add geographic coordinates
-flights %v% "lat" <- airports[ network.vertex.names(flights), "lat" ] # nolint
-flights %v% "lon" <- airports[ network.vertex.names(flights), "long" ] # nolint
+flights %v% "lat" <- airports[network.vertex.names(flights), "lat"] # nolint
+flights %v% "lon" <- airports[network.vertex.names(flights), "long"] # nolint
 
 # drop isolated airports
 delete.vertices(flights, which(degree(flights) < 2))

@@ -29,7 +29,7 @@ The primary function is `ggscatmat()`. It is similar to `ggpairs()` but only wor
 
 ```{r ggscatmat-basic-usage, fig.height=7, fig.width=7}
 data(flea)
-ggscatmat(flea, columns = 2:4, color="species", alpha=0.8)
+ggscatmat(flea, columns = 2:4, color = "species", alpha = 0.8)
 ```
 
 In this plot, you can see that the three different species vary a little from each other in these three variables. Heptapot (blue) has smaller values on the variable `tars1` than the other two. The correlation between the three variables is similar for all species.

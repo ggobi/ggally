@@ -28,8 +28,8 @@ test_that("rows work", {
   pm <- ggpairs(reshape::tips)
 
   expect_rows_cols(
-    ggmatrix_location(pm, rows = c(3,5)),
-    rows = c(3,5),
+    ggmatrix_location(pm, rows = c(3, 5)),
+    rows = c(3, 5),
     cols = 1:7
   )
   expect_rows_cols(
@@ -53,9 +53,9 @@ test_that("cols work", {
   pm <- ggpairs(reshape::tips)
 
   expect_rows_cols(
-    ggmatrix_location(pm, cols = c(3,5)),
+    ggmatrix_location(pm, cols = c(3, 5)),
     rows = 1:7,
-    cols = c(3,5)
+    cols = c(3, 5)
   )
   expect_rows_cols(
     ggmatrix_location(pm, cols = 1),
@@ -119,11 +119,11 @@ test_that("location character", {
 
 test_that("location matrix", {
   pm <- ggpairs(reshape::tips)
-  to_loc <- subset(expand.grid(row = 1:7, col = 1:7), row %in% c(3,5) | col %in% c(3,5))
+  to_loc <- subset(expand.grid(row = 1:7, col = 1:7), row %in% c(3, 5) | col %in% c(3, 5))
 
   mat <- matrix(FALSE, nrow = 7, ncol = 7, byrow = TRUE)
-  mat[,c(3,5)] <- TRUE
-  mat[c(3,5), ] <- TRUE
+  mat[, c(3, 5)] <- TRUE
+  mat[c(3, 5), ] <- TRUE
 
   expect_loc_grid(
     ggmatrix_location(pm, location = mat),
@@ -203,4 +203,3 @@ test_that("location recursion", {
     expand.grid(row = 1:7, col = 1:7)
   )
 })
-

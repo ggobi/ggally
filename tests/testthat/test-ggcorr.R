@@ -6,13 +6,12 @@ context("ggcorr")
 data(flea)
 
 test_that("limits", {
-  print(ggcorr(flea[, -1]))
-  print(ggcorr(flea[, -1], limits = TRUE))
-  print(ggcorr(flea[, -1], limits = FALSE))
-  print(ggcorr(flea[, -1], limits = NULL))
-  print(ggcorr(flea[, -1], limits = c(-5, 5)))
-  print(ggcorr(flea[, -1], limits = c(-0.5, 0.5)))
-  expect_true(TRUE)
+  vdiffr::expect_doppelganger("flea", ggcorr(flea[, -1]))
+  vdiffr::expect_doppelganger("flea-limits", ggcorr(flea[, -1], limits = TRUE))
+  vdiffr::expect_doppelganger("flea-no-limits", ggcorr(flea[, -1], limits = FALSE))
+  vdiffr::expect_doppelganger("flea-null-limits", ggcorr(flea[, -1], limits = NULL))
+  vdiffr::expect_doppelganger("flea-big-limits", ggcorr(flea[, -1], limits = c(-5, 5)))
+  vdiffr::expect_doppelganger("flea-small-limits", ggcorr(flea[, -1], limits = c(-0.5, 0.5)))
 })
 
 test_that("examples", {
@@ -67,14 +66,12 @@ test_that("null midpoint", {
 })
 
 test_that("further options", {
-  ggcorr(flea[, -1], geom = "circle")
-  ggcorr(flea[, -1], geom = "circle", limits = FALSE)
-  ggcorr(flea[, -1], geom = "tile", nbreaks = 3)
-  ggcorr(flea[, -1], geom = "tile", limits = FALSE)
+  vdiffr::expect_doppelganger("geom-circle", ggcorr(flea[, -1], geom = "circle"))
+  vdiffr::expect_doppelganger("geom-circle-no-limits", ggcorr(flea[, -1], geom = "circle", limits = FALSE))
+  vdiffr::expect_doppelganger("geom-tile", ggcorr(flea[, -1], geom = "tile", nbreaks = 3))
+  vdiffr::expect_doppelganger("geom-tile-no-limits", ggcorr(flea[, -1], geom = "tile", limits = FALSE))
   expect_error(ggcorr(flea[, -1], layout.exp = "a"), "incorrect layout.exp")
-  expect_silent({
-    ggcorr(flea[, -1], layout.exp = 1)
-  })
+  vdiffr::expect_doppelganger("layout.exp", ggcorr(flea[, -1], layout.exp = 1))
 })
 
 test_that("data.matrix", {
@@ -90,13 +87,13 @@ test_that("cor_matrix", {
 
 test_that("other geoms", {
   expect_error(ggcorr(flea[, -1], geom = "hexbin"), "incorrect geom")
-  expect_silent({
+  vdiffr::expect_doppelganger("geom-blank",
     ggcorr(flea[, -1], geom = "blank")
-  })
+  )
 })
 
 test_that("backwards compatibility", {
-  expect_silent({
+  vdiffr::expect_doppelganger("method-everything",
     ggcorr(flea[, -1], method = "everything")
-  })
+  )
 })

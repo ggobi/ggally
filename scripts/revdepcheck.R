@@ -3,7 +3,7 @@
 
 
 local({
-  dev_revdep <- function (
+  dev_revdep <- function(
     pkg = ".",
     ...,
     num_workers = 6,
@@ -23,7 +23,7 @@ local({
       remotes::install_cran(
         setdiff(
           desc::desc_get_deps(basename(normalizePath(pkg)))$package,
-          c("R", unname(installed.packages(priority = "base")[,"Package", drop = TRUE]))
+          c("R", unname(installed.packages(priority = "base")[, "Package", drop = TRUE]))
         )
       )
     }

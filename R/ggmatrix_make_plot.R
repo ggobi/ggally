@@ -16,7 +16,7 @@ make_label_plot <- function(types, sectionAes, label) {
 
 
 
-ggmatrix_plot_list <- (function(){
+ggmatrix_plot_list <- (function() {
   make_diag_plot_wrapper <- function(sub_type_val) {
     plot_fn <- make_plot_wrapper(sub_type_val)
 

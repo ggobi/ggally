@@ -20,7 +20,7 @@ do_glyph <- function(...) {
 
 
 do_gg <- function(dt) {
-  ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) +
+  ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) + # nolint
     add_ref_lines(dt, color = "red", size = 0.5) +
     add_ref_boxes(dt, color = "blue") +
     ggplot2::geom_path() +
@@ -104,7 +104,7 @@ test_that("fill", {
   dt <- do_glyph()
 
   # idk how to test that polar happened
-  do_gg_fill <- function(...){
+  do_gg_fill <- function(...) {
     ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) +
       add_ref_lines(dt, color = "red", size = 0.5) +
       add_ref_boxes(dt, color = "blue", ...) +
@@ -127,13 +127,13 @@ test_that("print", {
   txt <- capture.output(print(dt))
   expect_equal(txt[length(txt) - 2], "Cartesian glyphplot: ")
   expect_equal(txt[length(txt) - 1], "  Size: [2.38, 2.37]")
-  expect_equal(txt[length(txt) - 0], "  Major axes: long, lat" )
+  expect_equal(txt[length(txt) - 0], "  Major axes: long, lat")
 
   dt <- do_glyph(polar = TRUE)
   txt <- capture.output(print(dt))
   expect_equal(txt[length(txt) - 2], "Polar glyphplot: ")
   expect_equal(txt[length(txt) - 1], "  Size: [2.38, 2.37]")
-  expect_equal(txt[length(txt) - 0], "  Major axes: long, lat" )
+  expect_equal(txt[length(txt) - 0], "  Major axes: long, lat")
 
   txt <- capture.output(print(rel(0.95)))
   expect_equal(txt, "[1] 0.95 *")

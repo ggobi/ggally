@@ -18,9 +18,9 @@ function for making the melted dataset used to plot the lowertriangle scatterplo
 }
 \examples{
 data(flea)
-head(lowertriangle(flea, columns= 2:4))
+head(lowertriangle(flea, columns = 2:4))
 head(lowertriangle(flea))
-head(lowertriangle(flea, color="species"))
+head(lowertriangle(flea, color = "species"))
 }
 \author{
 Mengjia Ni, Di Cook

@@ -104,7 +104,7 @@ The `ggally_NAME` functions do not provide all graphical options.  Instead of su
 The custom function should follow the api of
 
 ```{r ggally_custom_function}
-custom_function <- function(data, mapping, ...){
+custom_function <- function(data, mapping, ...) {
   # produce ggplot2 object here
 }
 ```
@@ -155,10 +155,10 @@ Small `ggpairs()` example:
 ```{r ggpairs_matrix}
 pm <- ggpairs(tips, columns = c("total_bill", "time", "tip"))
 # retrieve the third row, first column plot
-p <- pm[3,1]
+p <- pm[3, 1]
 p <- p + aes(color = time)
 p
-pm[3,1] <- p
+pm[3, 1] <- p
 pm
 ```
 

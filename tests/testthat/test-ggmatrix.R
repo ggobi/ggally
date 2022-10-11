@@ -2,10 +2,6 @@
 context("ggmatrix")
 data(tips, package = "reshape")
 
-expect_print <- function(x) {
-  testthat::expect_silent(print(x))
-}
-
 test_that("stops", {
 
   expect_error(ggmatrix(plots = matrix(), nrow = 2, ncol = 3), "'plots' must be a list()")
@@ -29,7 +25,9 @@ test_that("expression labels", {
   chars <- c("col1", "col2")
   exprs <- c("alpha[0]", "gamma[x + y ^ z]")
 
-  expect_print(ggpairs(tips, 1:2, columnLabels = exprs, labeller = "label_parsed"))
+  p <- ggpairs(tips, 1:2, columnLabels = exprs, labeller = "label_parsed")
+  vdiffr::expect_doppelganger("expression-labels", p)
+
   expect_error(print(ggpairs(tips, 1:2, columnLabels = expression(alpha, beta))), "xAxisLabels")
 })
 
@@ -90,7 +88,7 @@ test_that("missing plot", {
     byrow = TRUE
   )
   # reaches code where there are more cells than plots
-  print(a)
+  vdiffr::expect_doppelganger("not-enough-plots", a)
 
   expect_equal(a[1, 1]$ggally_check_val, 1)
   expect_equal(a[1, 3]$ggally_check_val, 3)
@@ -119,10 +117,10 @@ test_that("str.ggmatrix", {
 test_that("blank", {
   pm <- ggpairs(tips, 1:2)
   pm[1, 2] <- "blank"
-  expect_print(pm)
+  vdiffr::expect_doppelganger("blank-1_2", pm)
 
   pm[2, 1] <- NULL
-  expect_print(pm)
+  vdiffr::expect_doppelganger("blank-1_2-2_1", pm)
 
   expect_equal(length(pm$plots), 4)
 
@@ -145,8 +143,7 @@ test_that("proportions", {
     yProportions = c(1, 2),
     title = "big plot, small marginals"
   )
-
-  expect_print(pm2)
+  vdiffr::expect_doppelganger("proportions", pm2)
 
   # turn on progress for a quick plot
   # TODO - turn test back on when it uses message properly

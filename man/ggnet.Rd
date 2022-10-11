@@ -215,8 +215,8 @@ x           <- 10
 ndyads      <- x * (x - 1)
 density     <- x / ndyads
 m           <- matrix(0, nrow = x, ncol = x)
-dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-m[ row(m) != col(m) ] <- runif(ndyads) < density
+dimnames(m) <- list(letters[1:x], letters[1:x])
+m[row(m) != col(m)] <- runif(ndyads) < density
 m
 
 # random undirected network
@@ -226,7 +226,7 @@ n
 ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
 
 # random groups
-g <- sample(letters[ 1:3 ], 10, replace = TRUE)
+g <- sample(letters[1:3], 10, replace = TRUE)
 g
 
 # color palette

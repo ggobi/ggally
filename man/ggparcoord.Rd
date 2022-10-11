@@ -118,7 +118,7 @@ package loaded.}
 p_ <- GGally::print_if_interactive
 
 # use sample of the diamonds data for illustrative purposes
-data(diamonds, package="ggplot2")
+data(diamonds, package = "ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 
 # basic parallel coordinate plot, using default settings
@@ -143,7 +143,7 @@ p_(p)
 # basic parallel coord plot of the msleep data, using 'random' imputation and
 # coloring by diet (can also use variable names in the columns and groupColumn
 # arguments)
-data(msleep, package="ggplot2")
+data(msleep, package = "ggplot2")
 p <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
   "random", scale = "uniminmax")
 p_(p)

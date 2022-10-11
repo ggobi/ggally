@@ -13,7 +13,7 @@
 #' pm <- ggpairs(iris, 1:2, progress = ggmatrix_progress(clear = FALSE))
 #' p_(pm)
 ggmatrix_progress <- function(
-  format = " plot: [:plot_i,:plot_j] [:bar]:percent est::eta ",
+  format = " plot: [:plot_i, :plot_j] [:bar]:percent est::eta ",
   clear = TRUE,
   show_after = 0,
   ...

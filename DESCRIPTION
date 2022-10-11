@@ -68,7 +68,8 @@ Suggests:
     crosstalk,
     knitr,
     spelling,
-    emmeans
+    emmeans,
+    vdiffr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 SystemRequirements: openssl

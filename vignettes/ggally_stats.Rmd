@@ -157,7 +157,7 @@ ggplot(d) +
   scale_y_continuous(labels = scales::percent) +
   geom_text(
     mapping = aes(
-      label = scales::percent(after_stat(prop), accuracy = .1), 
+      label = scales::percent(after_stat(prop), accuracy = .1),
       y = after_stat(0.01)
     ),
     vjust = "bottom",
@@ -244,4 +244,3 @@ ggplot(d) +
   scale_y_continuous(labels = scales::percent) +
   labs(y = "Proportion who survived")
 ```
-

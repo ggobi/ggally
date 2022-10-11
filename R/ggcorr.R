@@ -222,7 +222,7 @@ ggcorr <- function(
   m$.ggally_ggcorr_row_names = rownames(m)
   m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
   names(m) = c("x", "y", "coefficient")
-  m$coefficient[ m$coefficient == 0 ] = NA
+  m$coefficient[m$coefficient == 0] = NA
 
   # -- correlation quantiles ---------------------------------------------------
 
@@ -437,7 +437,7 @@ ggcorr <- function(
 
   # -- horizontal scale expansion ----------------------------------------------
 
-  textData <- m[ m$x == m$y & is.na(m$coefficient), ]
+  textData <- m[m$x == m$y & is.na(m$coefficient), ]
   xLimits <- levels(textData$y)
   textData$diagLabel <- textData$x
 

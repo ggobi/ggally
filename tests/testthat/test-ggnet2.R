@@ -28,8 +28,8 @@ test_that("examples", {
   ndyads      <- x * (x - 1)
   density     <- x / ndyads
   m           <- matrix(0, nrow = x, ncol = x)
-  dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-  m[ row(m) != col(m) ] <- runif(ndyads) < density
+  dimnames(m) <- list(letters[1:x], letters[1:x])
+  m[row(m) != col(m)] <- runif(ndyads) < density
   m
 
   # random undirected network
