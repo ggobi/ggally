@@ -52,7 +52,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -146,19 +146,18 @@
 <a class="anchor" aria-label="anchor" href="#ggally-extension-to-ggplot2"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p><a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> is a plotting system for R based on the grammar of graphics. <a href="https://ggobi.github.io/ggally/"><code>GGally</code></a> extends ggplot2 by adding several functions to reduce the complexity of combining geoms with transformed data. Some of these functions include a pairwise plot matrix, a scatterplot plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>To install this package from GitHub or <a href="https://cran.r-project.org/package=GGally" class="external-link">CRAN</a>, do the following from the R console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Github</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
-<span class="fu">install_github</span><span class="op">(</span><span class="st">"ggobi/ggally"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Github</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
+<span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ggobi/ggally"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"GGally"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># CRAN</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"GGally"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -213,7 +212,6 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/ggobi/ggally/actions" class="external-link"><img src="https://github.com/ggobi/ggally/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/github/ggobi/ggally?branch=master" class="external-link"><img src="https://codecov.io/github/ggobi/ggally/coverage.svg?branch=master" alt="codecov.io"></a></li>
 <li><a href="https://cran.r-project.org/package=GGally" class="external-link"><img src="http://www.r-pkg.org/badges/version/GGally" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://cran.r-project.org/package=GGally" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/GGally"></a></li>
 <li><a href="https://zenodo.org/badge/latestdoi/22529/ggobi/ggally" class="external-link"><img src="https://zenodo.org/badge/22529/ggobi/ggally.svg" alt="DOI"></a></li>
@@ -233,7 +231,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

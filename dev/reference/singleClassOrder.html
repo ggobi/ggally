@@ -27,7 +27,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -115,23 +115,30 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">singleClassOrder</span><span class="op">(</span><span class="va">classVar</span>, <span class="va">axisVars</span>, specClass <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">singleClassOrder</span><span class="op">(</span><span class="va">classVar</span>, <span class="va">axisVars</span>, specClass <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>classVar</dt>
 <dd><p>class variable (vector from original dataset)</p></dd>
+
+
 <dt>axisVars</dt>
 <dd><p>variables to be plotted as axes (data frame)</p></dd>
+
+
 <dt>specClass</dt>
 <dd><p>character string matching to level of <code>classVar</code>; instead
 of looking for separation between any class and the rest, will only look for
 separation between this class and the rest</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>character vector of names of axisVars ordered such that the first
+    
+
+<p>character vector of names of axisVars ordered such that the first
 variable has the most separation between one of the classes and the rest, and
 the last variable has the least (as measured by F-statistics from an ANOVA)</p>
     </div>
@@ -152,7 +159,7 @@ the last variable has the least (as measured by F-statistics from an ANOVA)</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

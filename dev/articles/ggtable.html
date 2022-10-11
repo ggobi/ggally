@@ -46,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -148,11 +148,11 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
-<span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: ggplot2</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span></span>
+<span><span class="co">#&gt;   method from   </span></span>
+<span><span class="co">#&gt;   +.gg   ggplot2</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="ggallyggtable">
 <code>GGally::ggtable()</code><a class="anchor" aria-label="anchor" href="#ggallyggtable"></a>
@@ -163,11 +163,11 @@
 </h3>
 <p>To display tables with the number of observations, simply indicate variables to present in columns and in rows.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smoker"</span>, <span class="st">"time"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smoker"</span>, <span class="st">"time"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -175,13 +175,13 @@
 </h3>
 <p>The <code>cells</code> argument allows you to control what to display. For proportions of the total, row proportions or columns proportions, simply use <code>"prop"</code>, <code>"row.prop"</code> or <code>"col.prop"</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Proportions of total"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Proportions of total"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"row.prop"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Row proportions"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"row.prop"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Row proportions"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Column proportions"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Column proportions"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-3-3.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -190,7 +190,7 @@
 <p>Chi-square standardized residuals indicates which cells are over- or underrepresented compared to what would be expected under the independence hypothesis. If the standardized residual is less than -2, the cell’s observed frequency is less than the expected frequency. Greater than 2 and the observed frequency is greater than the expected frequency. Values lower than -3 or higher than 3 indicates a strong effect.</p>
 <p>To fill cells with standardized residuals, simply indicate <code>fill = "std.resid"</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"std.resid"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"std.resid"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -198,15 +198,15 @@
 </h3>
 <p>You can easily indicates weights to take into account with the <strong>weight</strong> aesthetic.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span>
-  <span class="va">d</span>,
-  <span class="st">"Survived"</span>,
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Age"</span>, <span class="st">"Class"</span>, <span class="st">"Sex"</span><span class="op">)</span>,
-  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span>,
-  cells <span class="op">=</span> <span class="st">"row.prop"</span>,
-  fill <span class="op">=</span> <span class="st">"std.resid"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span></span>
+<span>  <span class="va">d</span>,</span>
+<span>  <span class="st">"Survived"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Age"</span>, <span class="st">"Class"</span>, <span class="st">"Sex"</span><span class="op">)</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span>,</span>
+<span>  cells <span class="op">=</span> <span class="st">"row.prop"</span>,</span>
+<span>  fill <span class="op">=</span> <span class="st">"std.resid"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -214,7 +214,7 @@
 </h3>
 <p>Although <code><a href="../reference/ggtable.html">ggtable()</a></code> is mainly intended to be used with discrete variables, you can also indicates continuous variables. In such case, some summary statistics are displayed.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smoker"</span>, <span class="st">"total_bill"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smoker"</span>, <span class="st">"total_bill"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>If you need more customization of the output, please refer to <code><a href="../reference/ggduo.html">ggduo()</a></code>.</p>
 </div>
@@ -238,7 +238,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

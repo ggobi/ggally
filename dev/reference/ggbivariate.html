@@ -27,7 +27,7 @@ an outcome variable with several potential explanatory variables."><meta name="r
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -115,15 +115,15 @@ an outcome variable with several potential explanatory variables.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggbivariate</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">outcome</span>,
-  explanatory <span class="op">=</span> <span class="cn">NULL</span>,
-  mapping <span class="op">=</span> <span class="cn">NULL</span>,
-  types <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>,
-  rowbar_args <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggbivariate</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">outcome</span>,</span>
+<span>  explanatory <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  rowbar_args <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -131,21 +131,34 @@ an outcome variable with several potential explanatory variables.</p>
     <dl><dt>data</dt>
 <dd><p>dataset to be used, can have both categorical and
 numerical variables</p></dd>
+
+
 <dt>outcome</dt>
 <dd><p>name or position of the outcome variable (one variable only)</p></dd>
+
+
 <dt>explanatory</dt>
 <dd><p>names or positions of the explanatory variables (if <code>NULL</code>,
 will take all variables other than <code>outcome</code>)</p></dd>
+
+
 <dt>mapping</dt>
 <dd><p>additional aesthetic to be used, for example to indicate
 weights (see examples)</p></dd>
+
+
 <dt>types</dt>
 <dd><p>custom types of plots to use, see <code><a href="ggduo.html">ggduo</a></code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed to <code><a href="ggduo.html">ggduo</a></code> (see examples)</p></dd>
+
+
 <dt>rowbar_args</dt>
 <dd><p>additional arguments passed to <code><a href="ggally_colbar.html">ggally_rowbar</a></code>
 (see examples)</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -154,44 +167,52 @@ weights (see examples)</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Personalize plot title and legend title</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span>,</span>
-<span class="r-in">  title <span class="op">=</span> <span class="st">"Custom title"</span></span>
-<span class="r-in"><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Smoker ?"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Customize fill colour scale</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_brewer</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Customize labels</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span>,</span>
-<span class="r-in">  rowbar_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">    colour <span class="op">=</span> <span class="st">"white"</span>,</span>
-<span class="r-in">    size <span class="op">=</span> <span class="fl">4</span>,</span>
-<span class="r-in">    fontface <span class="op">=</span> <span class="st">"bold"</span>,</span>
-<span class="r-in">    label_format <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accurary <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Choose the sub-plot from which get legend</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, legend <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use mapping to indicate weights</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">d</span>, <span class="st">"Survived"</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># outcome can be numerical</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, outcome <span class="op">=</span> <span class="st">"tip"</span>, title <span class="op">=</span> <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Personalize plot title and legend title</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Custom title"</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Smoker ?"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Customize fill colour scale</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_brewer</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Customize labels</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  rowbar_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    colour <span class="op">=</span> <span class="st">"white"</span>,</span></span>
+<span class="r-in"><span>    size <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>    fontface <span class="op">=</span> <span class="st">"bold"</span>,</span></span>
+<span class="r-in"><span>    label_format <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accurary <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Choose the sub-plot from which get legend</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-5.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, legend <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-6.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use mapping to indicate weights</span></span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">d</span>, <span class="st">"Survived"</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># outcome can be numerical</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggbivariate</span><span class="op">(</span><span class="va">tips</span>, outcome <span class="op">=</span> <span class="st">"tip"</span>, title <span class="op">=</span> <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggbivariate-8.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -206,7 +227,7 @@ weights (see examples)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

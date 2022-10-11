@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,59 +113,85 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggmatrix</span><span class="op">(</span>
-  <span class="va">plots</span>,
-  <span class="va">nrow</span>,
-  <span class="va">ncol</span>,
-  xAxisLabels <span class="op">=</span> <span class="cn">NULL</span>,
-  yAxisLabels <span class="op">=</span> <span class="cn">NULL</span>,
-  title <span class="op">=</span> <span class="cn">NULL</span>,
-  xlab <span class="op">=</span> <span class="cn">NULL</span>,
-  ylab <span class="op">=</span> <span class="cn">NULL</span>,
-  byrow <span class="op">=</span> <span class="cn">TRUE</span>,
-  showStrips <span class="op">=</span> <span class="cn">NULL</span>,
-  showAxisPlotLabels <span class="op">=</span> <span class="cn">TRUE</span>,
-  showXAxisPlotLabels <span class="op">=</span> <span class="cn">TRUE</span>,
-  showYAxisPlotLabels <span class="op">=</span> <span class="cn">TRUE</span>,
-  labeller <span class="op">=</span> <span class="cn">NULL</span>,
-  switch <span class="op">=</span> <span class="cn">NULL</span>,
-  xProportions <span class="op">=</span> <span class="cn">NULL</span>,
-  yProportions <span class="op">=</span> <span class="cn">NULL</span>,
-  progress <span class="op">=</span> <span class="cn">NULL</span>,
-  data <span class="op">=</span> <span class="cn">NULL</span>,
-  gg <span class="op">=</span> <span class="cn">NULL</span>,
-  legend <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggmatrix</span><span class="op">(</span></span>
+<span>  <span class="va">plots</span>,</span>
+<span>  <span class="va">nrow</span>,</span>
+<span>  <span class="va">ncol</span>,</span>
+<span>  xAxisLabels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  yAxisLabels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  byrow <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  showStrips <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  showAxisPlotLabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  showXAxisPlotLabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  showYAxisPlotLabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  labeller <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  switch <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xProportions <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  yProportions <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  gg <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>plots</dt>
 <dd><p>list of plots to be put into matrix</p></dd>
+
+
 <dt>nrow, ncol</dt>
 <dd><p>number of rows and columns</p></dd>
+
+
 <dt>xAxisLabels, yAxisLabels</dt>
 <dd><p>strip titles for the x and y axis respectively. Set to <code>NULL</code> to not be displayed</p></dd>
+
+
 <dt>title, xlab, ylab</dt>
 <dd><p>title, x label, and y label for the graph. Set to <code>NULL</code> to not be displayed</p></dd>
+
+
 <dt>byrow</dt>
 <dd><p>boolean that determines whether the plots should be ordered by row or by column</p></dd>
+
+
 <dt>showStrips</dt>
 <dd><p>boolean to determine if each plot's strips should be displayed. <code>NULL</code> will default to the top and right side plots only. <code>TRUE</code> or <code>FALSE</code> will turn all strips on or off respectively.</p></dd>
+
+
 <dt>showAxisPlotLabels, showXAxisPlotLabels, showYAxisPlotLabels</dt>
 <dd><p>booleans that determine if the plots axis labels are printed on the X (bottom) or Y (left) part of the plot matrix. If <code>showAxisPlotLabels</code> is set, both <code>showXAxisPlotLabels</code> and <code>showYAxisPlotLabels</code> will be set to the given value.</p></dd>
+
+
 <dt>labeller</dt>
 <dd><p>labeller for facets. See <code><a href="https://ggplot2.tidyverse.org/reference/labellers.html" class="external-link">labellers</a></code>. Common values are <code>"label_value"</code> (default) and <code>"label_parsed"</code>.</p></dd>
+
+
 <dt>switch</dt>
 <dd><p>switch parameter for facet_grid. See <code>ggplot2::<a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></code>.  By default, the labels are displayed on the top and right of the plot. If <code>"x"</code>, the top labels will be displayed to the bottom. If <code>"y"</code>, the right-hand side labels will be displayed to the left. Can also be set to <code>"both"</code></p></dd>
+
+
 <dt>xProportions, yProportions</dt>
 <dd><p>Value to change how much area is given for each plot. Either <code>NULL</code> (default), numeric value matching respective length, or <code>grid::<a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></code> object with matching respective length</p></dd>
+
+
 <dt>progress</dt>
 <dd><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href="https://rdrr.io/pkg/progress/man/progress_bar.html" class="external-link">progress_bar</a></code>.  See <code><a href="ggmatrix_progress.html">ggmatrix_progress</a></code>.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time</p></dd>
+
+
 <dt>gg</dt>
 <dd><p><span class="pkg">ggplot2</span> theme objects to be applied to every plot</p></dd>
+
+
 <dt>legend</dt>
 <dd><p>May be the two objects described below or the default <code>NULL</code> value.  The legend position can be moved by using ggplot2's theme element <code>pm + theme(legend.position = "bottom")</code></p><dl><dt>a single numeric value</dt>
 <dd><p>provides the location of a plot according to the display order. Such as <code>legend = 3</code> in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position <code>c(1,2)</code></p></dd>
@@ -173,6 +199,7 @@
 <dd><p>a predetermined plot legend that will be displayed directly</p></dd>
 
 </dl></dd>
+
 </dl></div>
     <div id="memory-usage">
     <h2>Memory usage</h2>
@@ -187,31 +214,33 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">plotList</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggally_text.html">ggally_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Plot #"</span>, <span class="va">i</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggmatrix</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">plotList</span>,</span>
-<span class="r-in">  <span class="fl">2</span>, <span class="fl">3</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,</span>
-<span class="r-in">  byrow <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggmatrix</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">plotList</span>,</span>
-<span class="r-in">  <span class="fl">2</span>, <span class="fl">3</span>,</span>
-<span class="r-in">  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
-<span class="r-in">  yAxisLabels <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span class="r-in">  byrow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  showXAxisPlotLabels <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">plotList</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggally_text.html">ggally_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Plot #"</span>, <span class="va">i</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggmatrix</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">plotList</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">2</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  byrow <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggmatrix-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggmatrix</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">plotList</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">2</span>, <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  xAxisLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  yAxisLabels <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  byrow <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  showXAxisPlotLabels <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggmatrix-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -226,7 +255,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

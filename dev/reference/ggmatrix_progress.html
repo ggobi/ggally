@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,34 +113,39 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggmatrix_progress</span><span class="op">(</span>
-  format <span class="op">=</span> <span class="st">" plot: [:plot_i,:plot_j] [:bar]:percent est::eta "</span>,
-  clear <span class="op">=</span> <span class="cn">TRUE</span>,
-  show_after <span class="op">=</span> <span class="fl">0</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggmatrix_progress</span><span class="op">(</span></span>
+<span>  format <span class="op">=</span> <span class="st">" plot: [:plot_i, :plot_j] [:bar]:percent est::eta "</span>,</span>
+<span>  clear <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_after <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>format, clear, show_after, ...</dt>
 <dd><p>parameters supplied directly to <code>progress::<a href="https://rdrr.io/pkg/progress/man/progress_bar.html" class="external-link">progress_bar</a>$new()</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>function that accepts a plot matrix as the first argument and <code>...</code> for future expansion. Internally, the plot matrix is used to determine the total number of plots for the progress bar.</p>
+    
+
+<p>function that accepts a plot matrix as the first argument and <code>...</code> for future expansion. Internally, the plot matrix is used to determine the total number of plots for the progress bar.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, progress <span class="op">=</span> <span class="fu">ggmatrix_progress</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># does not clear after finishing</span></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, progress <span class="op">=</span> <span class="fu">ggmatrix_progress</span><span class="op">(</span>clear <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, progress <span class="op">=</span> <span class="fu">ggmatrix_progress</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggmatrix_progress-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># does not clear after finishing</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, progress <span class="op">=</span> <span class="fu">ggmatrix_progress</span><span class="op">(</span>clear <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggmatrix_progress-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -155,7 +160,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

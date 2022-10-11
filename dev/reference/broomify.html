@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,27 +113,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">broomify</span><span class="op">(</span><span class="va">model</span>, lmStars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">broomify</span><span class="op">(</span><span class="va">model</span>, lmStars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>model</dt>
-<dd><p>model to be sent to <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">broom::augment()</a></code>, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">broom::glance()</a></code>, and <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code></p></dd>
+<dd><p>model to be sent to <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::augment()</a></code>, <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::glance()</a></code>, and <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::tidy()</a></code></p></dd>
+
+
 <dt>lmStars</dt>
 <dd><p>boolean that determines if stars are added to labels</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  <code>var_x</code> and <code>var_y</code> variables are also added as attributes</p>
+    
+
+<p>broom::augmented data frame with the broom::glance data.frame and broom::tidy data.frame as 'broom_glance' and 'broom_tidy' attributes respectively.  <code>var_x</code> and <code>var_y</code> variables are also added as attributes</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">qsec</span> <span class="op">+</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">broomified_model</span> <span class="op">&lt;-</span> <span class="fu">broomify</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">broomified_model</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">qsec</span> <span class="op">+</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">broomified_model</span> <span class="op">&lt;-</span> <span class="fu">broomify</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">broomified_model</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> tibble[,12] (S3: tbl_df/tbl/data.frame/broomify)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ .rownames : chr [1:32] "Mazda RX4" "Mazda RX4 Wag" "Datsun 710" "Hornet 4 Drive" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ mpg       : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span>
@@ -158,7 +163,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "order")= int [1:3] 1 1 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "intercept")= int 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "response")= int 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, ".Environment")=&lt;environment: 0x56090e985a50&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, ".Environment")=&lt;environment: 0x562cf953ac50&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "predvars")= language list(mpg, wt, qsec, am)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "dataClasses")= Named chr [1:4] "numeric" "numeric" "numeric" "numeric"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. ..- attr(*, "names")= chr [1:4] "mpg" "wt" "qsec" "am"</span>
@@ -201,7 +206,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

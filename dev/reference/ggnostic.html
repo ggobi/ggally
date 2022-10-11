@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,58 +113,75 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggnostic</span><span class="op">(</span>
-  <span class="va">model</span>,
-  <span class="va">...</span>,
-  columnsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x"</span><span class="op">)</span>,
-  columnsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".resid"</span>, <span class="st">".sigma"</span>, <span class="st">".hat"</span>, <span class="st">".cooksd"</span><span class="op">)</span>,
-  columnLabelsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x_label"</span><span class="op">)</span>,
-  columnLabelsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"\\."</span>, <span class="st">" "</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^\\."</span>, <span class="st">""</span>, <span class="va">columnsY</span><span class="op">)</span><span class="op">)</span>,
-  xlab <span class="op">=</span> <span class="st">"explanatory variables"</span>,
-  ylab <span class="op">=</span> <span class="st">"diagnostics"</span>,
-  title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">call</span>, width.cutoff <span class="op">=</span> <span class="fl">500L</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span>,
-  continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_points</span>, .fitted <span class="op">=</span> <span class="va">ggally_points</span>, .se.fit <span class="op">=</span>
-    <span class="va">ggally_nostic_se_fit</span>, .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>, .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>, .sigma
-    <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>, .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>, .std.resid <span class="op">=</span>
-    <span class="va">ggally_nostic_std_resid</span><span class="op">)</span>,
-  combo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_box_no_facet</span>, fitted <span class="op">=</span> <span class="va">ggally_box_no_facet</span>, .se.fit <span class="op">=</span>
-    <span class="va">ggally_nostic_se_fit</span>, .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>, .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>, .sigma
-    <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>, .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>, .std.resid <span class="op">=</span>
-    <span class="va">ggally_nostic_std_resid</span><span class="op">)</span>,
-  discrete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_ratio</span>, .fitted <span class="op">=</span> <span class="va">ggally_ratio</span>, .se.fit <span class="op">=</span>
-    <span class="va">ggally_ratio</span>, .resid <span class="op">=</span> <span class="va">ggally_ratio</span>, .hat <span class="op">=</span> <span class="va">ggally_ratio</span>, .sigma <span class="op">=</span> <span class="va">ggally_ratio</span>,
-    .cooksd <span class="op">=</span> <span class="va">ggally_ratio</span>, .std.resid <span class="op">=</span> <span class="va">ggally_ratio</span><span class="op">)</span>,
-  progress <span class="op">=</span> <span class="cn">NULL</span>,
-  data <span class="op">=</span> <span class="fu"><a href="broomify.html">broomify</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggnostic</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  columnsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x"</span><span class="op">)</span>,</span>
+<span>  columnsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".resid"</span>, <span class="st">".sigma"</span>, <span class="st">".hat"</span>, <span class="st">".cooksd"</span><span class="op">)</span>,</span>
+<span>  columnLabelsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x_label"</span><span class="op">)</span>,</span>
+<span>  columnLabelsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"\\."</span>, <span class="st">" "</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^\\."</span>, <span class="st">""</span>, <span class="va">columnsY</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"explanatory variables"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"diagnostics"</span>,</span>
+<span>  title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">call</span>, width.cutoff <span class="op">=</span> <span class="fl">500L</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span>,</span>
+<span>  continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_points</span>, .fitted <span class="op">=</span> <span class="va">ggally_points</span>, .se.fit <span class="op">=</span></span>
+<span>    <span class="va">ggally_nostic_se_fit</span>, .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>, .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>, .sigma</span>
+<span>    <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>, .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>, .std.resid <span class="op">=</span></span>
+<span>    <span class="va">ggally_nostic_std_resid</span><span class="op">)</span>,</span>
+<span>  combo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_box_no_facet</span>, .fitted <span class="op">=</span> <span class="va">ggally_box_no_facet</span>, .se.fit <span class="op">=</span></span>
+<span>    <span class="va">ggally_nostic_se_fit</span>, .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>, .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>, .sigma</span>
+<span>    <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>, .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>, .std.resid <span class="op">=</span></span>
+<span>    <span class="va">ggally_nostic_std_resid</span><span class="op">)</span>,</span>
+<span>  discrete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_ratio</span>, .fitted <span class="op">=</span> <span class="va">ggally_ratio</span>, .se.fit <span class="op">=</span> <span class="va">ggally_ratio</span>,</span>
+<span>    .resid <span class="op">=</span> <span class="va">ggally_ratio</span>, .hat <span class="op">=</span> <span class="va">ggally_ratio</span>, .sigma <span class="op">=</span> <span class="va">ggally_ratio</span>, .cooksd <span class="op">=</span></span>
+<span>    <span class="va">ggally_ratio</span>, .std.resid <span class="op">=</span> <span class="va">ggally_ratio</span><span class="op">)</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="broomify.html">broomify</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>model</dt>
 <dd><p>statistical model object such as output from <code>stats::<a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></code> or <code>stats::<a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed directly to <code><a href="ggduo.html">ggduo</a></code></p></dd>
+
+
 <dt>columnsX</dt>
 <dd><p>columns to be displayed in the plot matrix. Defaults to the predictor columns of the <code>model</code></p></dd>
+
+
 <dt>columnsY</dt>
-<dd><p>rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">broom::augment()</a></code>. See details for more information.</p></dd>
+<dd><p>rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::augment()</a></code>. See details for more information.</p></dd>
+
+
 <dt>columnLabelsX, columnLabelsY</dt>
 <dd><p>column and row labels to display in the plot matrix</p></dd>
+
+
 <dt>xlab, ylab, title</dt>
 <dd><p>plot matrix labels passed directly to <code><a href="ggmatrix.html">ggmatrix</a></code></p></dd>
+
+
 <dt>continuous, combo, discrete</dt>
 <dd><p>list of functions for each y variable.  See details for more information.</p></dd>
+
+
 <dt>progress</dt>
 <dd><p><code>NULL</code> (default) for a progress bar in interactive sessions with more than 15 plots, <code>TRUE</code> for a progress bar, <code>FALSE</code> for no progress bar, or a function that accepts at least a plot matrix and returns a new <code>progress::<a href="https://rdrr.io/pkg/progress/man/progress_bar.html" class="external-link">progress_bar</a></code>.  See <code><a href="ggmatrix_progress.html">ggmatrix_progress</a></code>.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See <code><a href="broomify.html">broomify</a>(model)</code> for more information</p></dd>
+
 </dl></div>
     <div id="columnsy">
     <h2><code>columnsY</code></h2>
     
 
-<p><code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">broom::augment()</a></code> collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the <code>columnsY</code> parameter to <code>ggnostic</code>.</p>
+<p><code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::augment()</a></code> collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the <code>columnsY</code> parameter to <code>ggnostic</code>.</p>
 <dl><dt>.resid</dt>
 <dd><p>Residuals</p></dd>
 
@@ -196,43 +213,54 @@ corresponding observation is dropped from model</p></dd>
     <h2><code>continuous</code>, <code>combo</code>, <code>discrete</code> types</h2>
     
 
-<p>Similar to <code><a href="ggduo.html">ggduo</a></code> and <code><a href="ggpairs.html">ggpairs</a></code>, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">broom::augment()</a></code> output: <code>".fitted"</code>, <code>".resid"</code>, <code>".std.resid"</code>, <code>".sigma"</code>, <code>".se.fit"</code>, <code>".hat"</code>, <code>".cooksd"</code>. An extra key, <code>"default"</code>, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the <code>types</code> parameter in <code><a href="ggduo.html">ggduo</a></code>.</p>
+<p>Similar to <code><a href="ggduo.html">ggduo</a></code> and <code><a href="ggpairs.html">ggpairs</a></code>, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the <code><a href="https://broom.tidymodels.org/reference/reexports.html" class="external-link">broom::augment()</a></code> output: <code>".fitted"</code>, <code>".resid"</code>, <code>".std.resid"</code>, <code>".sigma"</code>, <code>".se.fit"</code>, <code>".hat"</code>, <code>".cooksd"</code>. An extra key, <code>"default"</code>, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the <code>types</code> parameter in <code><a href="ggduo.html">ggduo</a></code>.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># use mtcars dataset and alter the 'am' column to display actual name values</span></span>
-<span class="r-in"><span class="va">mtc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
-<span class="r-in"><span class="va">mtc</span><span class="op">$</span><span class="va">am</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"0"</span> <span class="op">=</span> <span class="st">"automatic"</span>, <span class="st">"1"</span> <span class="op">=</span> <span class="st">"manual"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">mtc</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># step the complete model down to a smaller model</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">mtc</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># display using defaults</span></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggnostic</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># color by am value</span></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggnostic</span><span class="op">(</span><span class="va">mod</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">am</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># turn resid smooth error ribbon off</span></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggnostic</span><span class="op">(</span><span class="va">mod</span>, continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>.resid <span class="op">=</span> <span class="fu"><a href="wrap.html">wrap</a></span><span class="op">(</span><span class="st">"nostic_resid"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## plot residuals vs fitted in a ggpairs plot matrix</span></span>
-<span class="r-in"><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="broomify.html">broomify</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">dt</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".fitted"</span>, <span class="st">".resid"</span><span class="op">)</span>,</span>
-<span class="r-in">  columnLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fitted"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
-<span class="r-in">  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="va">ggally_nostic_resid</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># use mtcars dataset and alter the 'am' column to display actual name values</span></span></span>
+<span class="r-in"><span><span class="va">mtc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span></span>
+<span class="r-in"><span><span class="va">mtc</span><span class="op">$</span><span class="va">am</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"0"</span> <span class="op">=</span> <span class="st">"automatic"</span>, <span class="st">"1"</span> <span class="op">=</span> <span class="st">"manual"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">mtc</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># step the complete model down to a smaller model</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">mtc</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># display using defaults</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggnostic</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `geom_smooth()` using method = 'loess'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `geom_smooth()` using method = 'loess'</span>
+<span class="r-plt img"><img src="ggnostic-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># color by am value</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggnostic</span><span class="op">(</span><span class="va">mod</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">am</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `geom_smooth()` using method = 'loess'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `geom_smooth()` using method = 'loess'</span>
+<span class="r-plt img"><img src="ggnostic-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># turn resid smooth error ribbon off</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggnostic</span><span class="op">(</span><span class="va">mod</span>, continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>.resid <span class="op">=</span> <span class="fu"><a href="wrap.html">wrap</a></span><span class="op">(</span><span class="st">"nostic_resid"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `geom_smooth()` using method = 'loess'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `geom_smooth()` using method = 'loess'</span>
+<span class="r-plt img"><img src="ggnostic-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## plot residuals vs fitted in a ggpairs plot matrix</span></span></span>
+<span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="broomify.html">broomify</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">dt</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".fitted"</span>, <span class="st">".resid"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  columnLabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fitted"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="va">ggally_nostic_resid</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `geom_smooth()` using method = 'loess'</span>
+<span class="r-plt img"><img src="ggnostic-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -247,7 +275,7 @@ corresponding observation is dropped from model</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

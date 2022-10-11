@@ -28,7 +28,7 @@ For binary y variables, plot the evolution of the proportion."><meta name="robot
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -117,19 +117,26 @@ For binary y variables, plot the evolution of the proportion.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span>, <span class="va">...</span>, include_zero <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span>, <span class="va">...</span>, include_zero <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>data set using</p></dd>
+
+
 <dt>mapping</dt>
 <dd><p>aesthetics being used</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">ggplot2::geom_line()</a></code></p></dd>
+
+
 <dt>include_zero</dt>
 <dd><p>Should 0 be included on the y-axis?</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -138,39 +145,49 @@ For binary y variables, plot the evolution of the proportion.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tips_f</span> <span class="op">&lt;-</span> <span class="va">tips</span></span>
-<span class="r-in"><span class="va">tips_f</span><span class="op">$</span><span class="va">day</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">tips</span><span class="op">$</span><span class="va">day</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Thur"</span>, <span class="st">"Fri"</span>, <span class="st">"Sat"</span>, <span class="st">"Sun"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Numeric variable</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Binary variable</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Discrete variable with 3 or more categories</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">smoker</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">smoker</span>, y <span class="op">=</span> <span class="va">day</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Include zero on Y axis</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span>, include_zero <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span>, include_zero <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Change line size</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Define weights with the appropriate aesthetic</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">d</span>,</span>
-<span class="r-in">  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, y <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span>, color <span class="op">=</span> <span class="va">Sex</span><span class="op">)</span>,</span>
-<span class="r-in">  include_zero <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tips_f</span> <span class="op">&lt;-</span> <span class="va">tips</span></span></span>
+<span class="r-in"><span><span class="va">tips_f</span><span class="op">$</span><span class="va">day</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">tips</span><span class="op">$</span><span class="va">day</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Thur"</span>, <span class="st">"Fri"</span>, <span class="st">"Sat"</span>, <span class="st">"Sun"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Numeric variable</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">total_bill</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Binary variable</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Discrete variable with 3 or more categories</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">smoker</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-5.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">smoker</span>, y <span class="op">=</span> <span class="va">day</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-6.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Include zero on Y axis</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">total_bill</span><span class="op">)</span>, include_zero <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span><span class="op">)</span>, include_zero <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-8.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Change line size</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span><span class="va">tips_f</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">smoker</span>, colour <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-9.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Define weights with the appropriate aesthetic</span></span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_trends</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">d</span>,</span></span>
+<span class="r-in"><span>  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Class</span>, y <span class="op">=</span> <span class="va">Survived</span>, weight <span class="op">=</span> <span class="va">Freq</span>, color <span class="op">=</span> <span class="va">Sex</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  include_zero <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggally_trends-10.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -185,7 +202,7 @@ For binary y variables, plot the evolution of the proportion.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

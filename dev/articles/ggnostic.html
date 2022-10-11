@@ -46,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -148,11 +148,11 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
-<span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: ggplot2</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span></span>
+<span><span class="co">#&gt;   method from   </span></span>
+<span><span class="co">#&gt;   +.gg   ggplot2</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="ggallyggnostic">
 <code>GGally::ggnostic()</code><a class="anchor" aria-label="anchor" href="#ggallyggnostic"></a>
@@ -249,60 +249,60 @@
 </h3>
 <p>Looking at the dataset <code><a href="https://rdrr.io/r/datasets/state.html" class="external-link">datasets::state.x77</a></code>, we will fit a multiple regression model for Life Expectancy.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># make a data.frame and fix column names</span>
-<span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">state.x77</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Life.Exp"</span>, <span class="st">"HS.Grad"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span>
-<span class="co">#&gt; 'data.frame':    50 obs. of  8 variables:</span>
-<span class="co">#&gt;  $ Population: num  3615 365 2212 2110 21198 ...</span>
-<span class="co">#&gt;  $ Income    : num  3624 6315 4530 3378 5114 ...</span>
-<span class="co">#&gt;  $ Illiteracy: num  2.1 1.5 1.8 1.9 1.1 0.7 1.1 0.9 1.3 2 ...</span>
-<span class="co">#&gt;  $ Life.Exp  : num  69 69.3 70.5 70.7 71.7 ...</span>
-<span class="co">#&gt;  $ Murder    : num  15.1 11.3 7.8 10.1 10.3 6.8 3.1 6.2 10.7 13.9 ...</span>
-<span class="co">#&gt;  $ HS.Grad   : num  41.3 66.7 58.1 39.9 62.6 63.9 56 54.6 52.6 40.6 ...</span>
-<span class="co">#&gt;  $ Frost     : num  20 152 15 65 20 166 139 103 11 60 ...</span>
-<span class="co">#&gt;  $ Area      : num  50708 566432 113417 51945 156361 ...</span>
-
-<span class="co"># fit full model</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">state</span><span class="op">)</span>
-<span class="co"># reduce to "best fit" model with</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="va">model</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
-<span class="co">#&gt;     data = state)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
-<span class="co">#&gt; -1.47095 -0.53464 -0.03701  0.57621  1.50683 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***</span>
-<span class="co">#&gt; Population   5.014e-05  2.512e-05   1.996  0.05201 .  </span>
-<span class="co">#&gt; Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***</span>
-<span class="co">#&gt; HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** </span>
-<span class="co">#&gt; Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span>
-<span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span>
-<span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># make a data.frame and fix column names</span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">state.x77</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Life.Exp"</span>, <span class="st">"HS.Grad"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'data.frame':    50 obs. of  8 variables:</span></span>
+<span><span class="co">#&gt;  $ Population: num  3615 365 2212 2110 21198 ...</span></span>
+<span><span class="co">#&gt;  $ Income    : num  3624 6315 4530 3378 5114 ...</span></span>
+<span><span class="co">#&gt;  $ Illiteracy: num  2.1 1.5 1.8 1.9 1.1 0.7 1.1 0.9 1.3 2 ...</span></span>
+<span><span class="co">#&gt;  $ Life.Exp  : num  69 69.3 70.5 70.7 71.7 ...</span></span>
+<span><span class="co">#&gt;  $ Murder    : num  15.1 11.3 7.8 10.1 10.3 6.8 3.1 6.2 10.7 13.9 ...</span></span>
+<span><span class="co">#&gt;  $ HS.Grad   : num  41.3 66.7 58.1 39.9 62.6 63.9 56 54.6 52.6 40.6 ...</span></span>
+<span><span class="co">#&gt;  $ Frost     : num  20 152 15 65 20 166 139 103 11 60 ...</span></span>
+<span><span class="co">#&gt;  $ Area      : num  50708 566432 113417 51945 156361 ...</span></span>
+<span></span>
+<span><span class="co"># fit full model</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">state</span><span class="op">)</span></span>
+<span><span class="co"># reduce to "best fit" model with</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="va">model</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span></span>
+<span><span class="co">#&gt;     data = state)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">#&gt; -1.47095 -0.53464 -0.03701  0.57621  1.50683 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; Population   5.014e-05  2.512e-05   1.996  0.05201 .  </span></span>
+<span><span class="co">#&gt; Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***</span></span>
+<span><span class="co">#&gt; HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** </span></span>
+<span><span class="co">#&gt; Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span></span>
+<span><span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span></span></code></pre></div>
 <p>Next, we look at the variables for any high (|value| &gt; 0.8) correlation values and general interaction behavior.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># look at variables for high correlation (none)</span>
-<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">state</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># look at variables for high correlation (none)</span></span>
+<span><span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">state</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_scatmat-1.png" width="700"></p>
 <p>All variables appear to be ok. Next, we look at the model diagnostics.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># look at model diagnostics</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># look at model diagnostics</span></span>
+<span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_diag-1.png" width="700"></p>
 <ul>
 <li>The residuals appear to be normally distributed. There are a couple residual outliers, but 2.5 outliers are expected.</li>
@@ -311,66 +311,66 @@
 </ul>
 <p>Let’s remove the largest data point first to try and define a better model.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># very high life expectancy</span>
-<span class="va">state</span><span class="op">[</span><span class="fl">11</span>, <span class="op">]</span>
-<span class="co">#&gt;        Population Income Illiteracy Life.Exp Murder HS.Grad Frost Area</span>
-<span class="co">#&gt; Hawaii        868   4963        1.9     73.6    6.2    61.9     0 6425</span>
-<span class="va">state_no_hawaii</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="op">-</span><span class="fl">11</span>, <span class="op">]</span>
-<span class="va">model_no_hawaii</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">Population</span> <span class="op">+</span> <span class="va">Murder</span> <span class="op">+</span> <span class="va">HS.Grad</span> <span class="op">+</span> <span class="va">Frost</span>, data <span class="op">=</span> <span class="va">state_no_hawaii</span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">model_no_hawaii</span><span class="op">)</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># very high life expectancy</span></span>
+<span><span class="va">state</span><span class="op">[</span><span class="fl">11</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt;        Population Income Illiteracy Life.Exp Murder HS.Grad Frost Area</span></span>
+<span><span class="co">#&gt; Hawaii        868   4963        1.9     73.6    6.2    61.9     0 6425</span></span>
+<span><span class="va">state_no_hawaii</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="op">-</span><span class="fl">11</span>, <span class="op">]</span></span>
+<span><span class="va">model_no_hawaii</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Life.Exp</span> <span class="op">~</span> <span class="va">Population</span> <span class="op">+</span> <span class="va">Murder</span> <span class="op">+</span> <span class="va">HS.Grad</span> <span class="op">+</span> <span class="va">Frost</span>, data <span class="op">=</span> <span class="va">state_no_hawaii</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">model_no_hawaii</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_no_hawaii-1.png" width="700"></p>
 <p>There are no more outrageous Cook’s distance values. The model without Hawaii appears to be a good fitting model.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
-<span class="co">#&gt;     data = state)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
-<span class="co">#&gt; -1.47095 -0.53464 -0.03701  0.57621  1.50683 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***</span>
-<span class="co">#&gt; Population   5.014e-05  2.512e-05   1.996  0.05201 .  </span>
-<span class="co">#&gt; Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***</span>
-<span class="co">#&gt; HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** </span>
-<span class="co">#&gt; Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span>
-<span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span>
-<span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model_no_hawaii</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span>
-<span class="co">#&gt;     data = state_no_hawaii)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
-<span class="co">#&gt; -1.48967 -0.50158  0.01999  0.54355  1.11810 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)  7.106e+01  8.998e-01  78.966  &lt; 2e-16 ***</span>
-<span class="co">#&gt; Population   6.363e-05  2.431e-05   2.618   0.0121 *  </span>
-<span class="co">#&gt; Murder      -2.906e-01  3.477e-02  -8.357 1.24e-10 ***</span>
-<span class="co">#&gt; HS.Grad      3.728e-02  1.447e-02   2.576   0.0134 *  </span>
-<span class="co">#&gt; Frost       -3.099e-03  2.545e-03  -1.218   0.2297    </span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 0.6796 on 44 degrees of freedom</span>
-<span class="co">#&gt; Multiple R-squared:  0.7483, Adjusted R-squared:  0.7254 </span>
-<span class="co">#&gt; F-statistic: 32.71 on 4 and 44 DF,  p-value: 1.15e-12</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span></span>
+<span><span class="co">#&gt;     data = state)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">#&gt; -1.47095 -0.53464 -0.03701  0.57621  1.50683 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)  7.103e+01  9.529e-01  74.542  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; Population   5.014e-05  2.512e-05   1.996  0.05201 .  </span></span>
+<span><span class="co">#&gt; Murder      -3.001e-01  3.661e-02  -8.199 1.77e-10 ***</span></span>
+<span><span class="co">#&gt; HS.Grad      4.658e-02  1.483e-02   3.142  0.00297 ** </span></span>
+<span><span class="co">#&gt; Frost       -5.943e-03  2.421e-03  -2.455  0.01802 *  </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span></span>
+<span><span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model_no_hawaii</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = Life.Exp ~ Population + Murder + HS.Grad + Frost, </span></span>
+<span><span class="co">#&gt;     data = state_no_hawaii)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">#&gt; -1.48967 -0.50158  0.01999  0.54355  1.11810 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)  7.106e+01  8.998e-01  78.966  &lt; 2e-16 ***</span></span>
+<span><span class="co">#&gt; Population   6.363e-05  2.431e-05   2.618   0.0121 *  </span></span>
+<span><span class="co">#&gt; Murder      -2.906e-01  3.477e-02  -8.357 1.24e-10 ***</span></span>
+<span><span class="co">#&gt; HS.Grad      3.728e-02  1.447e-02   2.576   0.0134 *  </span></span>
+<span><span class="co">#&gt; Frost       -3.099e-03  2.545e-03  -1.218   0.2297    </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 0.6796 on 44 degrees of freedom</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.7483, Adjusted R-squared:  0.7254 </span></span>
+<span><span class="co">#&gt; F-statistic: 32.71 on 4 and 44 DF,  p-value: 1.15e-12</span></span></code></pre></div>
 <p>Since there is only a marginal improvement by removing Hawaii, the original model should be used to explain life expectancy.</p>
 </div>
 <div class="section level3">
@@ -378,57 +378,57 @@
 </h3>
 <p>The following lines of code will display different model diagnostic plot matrices for the same statistical model. The first one is of the default settings. The second adds color according to the <code>species</code>. Finally, the third displays all possible columns and uses <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> to display the fitted points and response variables.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">flea_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">head</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">flea</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">flea_model</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = head ~ species + tars1 + tars2 + aede1, data = flea)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
-<span class="co">#&gt; -3.0152 -1.2315 -0.0048  1.1490  3.6068 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;                  Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)       0.63693    6.09162   0.105 0.917034    </span>
-<span class="co">#&gt; speciesHeikert.   1.13651    1.25452   0.906 0.368171    </span>
-<span class="co">#&gt; speciesHeptapot.  5.22207    0.92110   5.669 3.18e-07 ***</span>
-<span class="co">#&gt; tars1             0.06815    0.01989   3.426 0.001043 ** </span>
-<span class="co">#&gt; tars2             0.10160    0.03297   3.081 0.002974 ** </span>
-<span class="co">#&gt; aede1             0.17069    0.04275   3.993 0.000163 ***</span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 1.6 on 68 degrees of freedom</span>
-<span class="co">#&gt; Multiple R-squared:  0.685,  Adjusted R-squared:  0.6618 </span>
-<span class="co">#&gt; F-statistic: 29.57 on 5 and 68 DF,  p-value: 7.997e-16</span>
-<span class="co"># default output</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">flea_model</span><span class="op">)</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">flea_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">head</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">flea</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">flea_model</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = head ~ species + tars1 + tars2 + aede1, data = flea)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">#&gt; -3.0152 -1.2315 -0.0048  1.1490  3.6068 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;                  Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)       0.63693    6.09162   0.105 0.917034    </span></span>
+<span><span class="co">#&gt; speciesHeikert.   1.13651    1.25452   0.906 0.368171    </span></span>
+<span><span class="co">#&gt; speciesHeptapot.  5.22207    0.92110   5.669 3.18e-07 ***</span></span>
+<span><span class="co">#&gt; tars1             0.06815    0.01989   3.426 0.001043 ** </span></span>
+<span><span class="co">#&gt; tars2             0.10160    0.03297   3.081 0.002974 ** </span></span>
+<span><span class="co">#&gt; aede1             0.17069    0.04275   3.993 0.000163 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 1.6 on 68 degrees of freedom</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.685,  Adjusted R-squared:  0.6618 </span></span>
+<span><span class="co">#&gt; F-statistic: 29.57 on 5 and 68 DF,  p-value: 7.997e-16</span></span>
+<span><span class="co"># default output</span></span>
+<span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">flea_model</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_flea-1.png" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># color'ed output</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">flea_model</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># color'ed output</span></span>
+<span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">flea_model</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_flea-2.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># full color'ed output</span>
-<span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span>
-  <span class="va">flea_model</span>,
-  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,
-  columnsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"head"</span>, <span class="st">".fitted"</span>, <span class="st">".se.fit"</span>, <span class="st">".resid"</span>, <span class="st">".std.resid"</span>, <span class="st">".hat"</span>, <span class="st">".sigma"</span>, <span class="st">".cooksd"</span><span class="op">)</span>,
-  continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_smooth</span>, .fitted <span class="op">=</span> <span class="va">ggally_smooth</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span>
-<span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># full color'ed output</span></span>
+<span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span></span>
+<span>  <span class="va">flea_model</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,</span>
+<span>  columnsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"head"</span>, <span class="st">".fitted"</span>, <span class="st">".se.fit"</span>, <span class="st">".resid"</span>, <span class="st">".std.resid"</span>, <span class="st">".hat"</span>, <span class="st">".sigma"</span>, <span class="st">".cooksd"</span><span class="op">)</span>,</span>
+<span>  continuous <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>default <span class="op">=</span> <span class="va">ggally_smooth</span>, .fitted <span class="op">=</span> <span class="va">ggally_smooth</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_flea-3.png" width="700"></p>
 </div>
 </div>
@@ -451,7 +451,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

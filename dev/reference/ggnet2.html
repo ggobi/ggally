@@ -30,7 +30,7 @@ that contains many examples and explanations."><meta name="robots" content="noin
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -121,56 +121,56 @@ that contains many examples and explanations.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggnet2</span><span class="op">(</span>
-  <span class="va">net</span>,
-  mode <span class="op">=</span> <span class="st">"fruchtermanreingold"</span>,
-  layout.par <span class="op">=</span> <span class="cn">NULL</span>,
-  layout.exp <span class="op">=</span> <span class="fl">0</span>,
-  alpha <span class="op">=</span> <span class="fl">1</span>,
-  color <span class="op">=</span> <span class="st">"grey75"</span>,
-  shape <span class="op">=</span> <span class="fl">19</span>,
-  size <span class="op">=</span> <span class="fl">9</span>,
-  max_size <span class="op">=</span> <span class="fl">9</span>,
-  na.rm <span class="op">=</span> <span class="cn">NA</span>,
-  palette <span class="op">=</span> <span class="cn">NULL</span>,
-  alpha.palette <span class="op">=</span> <span class="cn">NULL</span>,
-  alpha.legend <span class="op">=</span> <span class="cn">NA</span>,
-  color.palette <span class="op">=</span> <span class="va">palette</span>,
-  color.legend <span class="op">=</span> <span class="cn">NA</span>,
-  shape.palette <span class="op">=</span> <span class="cn">NULL</span>,
-  shape.legend <span class="op">=</span> <span class="cn">NA</span>,
-  size.palette <span class="op">=</span> <span class="cn">NULL</span>,
-  size.legend <span class="op">=</span> <span class="cn">NA</span>,
-  size.zero <span class="op">=</span> <span class="cn">FALSE</span>,
-  size.cut <span class="op">=</span> <span class="cn">FALSE</span>,
-  size.min <span class="op">=</span> <span class="cn">NA</span>,
-  size.max <span class="op">=</span> <span class="cn">NA</span>,
-  label <span class="op">=</span> <span class="cn">FALSE</span>,
-  label.alpha <span class="op">=</span> <span class="fl">1</span>,
-  label.color <span class="op">=</span> <span class="st">"black"</span>,
-  label.size <span class="op">=</span> <span class="va">max_size</span><span class="op">/</span><span class="fl">2</span>,
-  label.trim <span class="op">=</span> <span class="cn">FALSE</span>,
-  node.alpha <span class="op">=</span> <span class="va">alpha</span>,
-  node.color <span class="op">=</span> <span class="va">color</span>,
-  node.label <span class="op">=</span> <span class="va">label</span>,
-  node.shape <span class="op">=</span> <span class="va">shape</span>,
-  node.size <span class="op">=</span> <span class="va">size</span>,
-  edge.alpha <span class="op">=</span> <span class="fl">1</span>,
-  edge.color <span class="op">=</span> <span class="st">"grey50"</span>,
-  edge.lty <span class="op">=</span> <span class="st">"solid"</span>,
-  edge.size <span class="op">=</span> <span class="fl">0.25</span>,
-  edge.label <span class="op">=</span> <span class="cn">NULL</span>,
-  edge.label.alpha <span class="op">=</span> <span class="fl">1</span>,
-  edge.label.color <span class="op">=</span> <span class="va">label.color</span>,
-  edge.label.fill <span class="op">=</span> <span class="st">"white"</span>,
-  edge.label.size <span class="op">=</span> <span class="va">max_size</span><span class="op">/</span><span class="fl">2</span>,
-  arrow.size <span class="op">=</span> <span class="fl">0</span>,
-  arrow.gap <span class="op">=</span> <span class="fl">0</span>,
-  arrow.type <span class="op">=</span> <span class="st">"closed"</span>,
-  legend.size <span class="op">=</span> <span class="fl">9</span>,
-  legend.position <span class="op">=</span> <span class="st">"right"</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggnet2</span><span class="op">(</span></span>
+<span>  <span class="va">net</span>,</span>
+<span>  mode <span class="op">=</span> <span class="st">"fruchtermanreingold"</span>,</span>
+<span>  layout.par <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  layout.exp <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"grey75"</span>,</span>
+<span>  shape <span class="op">=</span> <span class="fl">19</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>  max_size <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  alpha.palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  alpha.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  color.palette <span class="op">=</span> <span class="va">palette</span>,</span>
+<span>  color.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  shape.palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shape.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  size.palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  size.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  size.zero <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  size.cut <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  size.min <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  size.max <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="va">max_size</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>  label.trim <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  node.alpha <span class="op">=</span> <span class="va">alpha</span>,</span>
+<span>  node.color <span class="op">=</span> <span class="va">color</span>,</span>
+<span>  node.label <span class="op">=</span> <span class="va">label</span>,</span>
+<span>  node.shape <span class="op">=</span> <span class="va">shape</span>,</span>
+<span>  node.size <span class="op">=</span> <span class="va">size</span>,</span>
+<span>  edge.alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  edge.color <span class="op">=</span> <span class="st">"grey50"</span>,</span>
+<span>  edge.lty <span class="op">=</span> <span class="st">"solid"</span>,</span>
+<span>  edge.size <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  edge.label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  edge.label.alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  edge.label.color <span class="op">=</span> <span class="va">label.color</span>,</span>
+<span>  edge.label.fill <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  edge.label.size <span class="op">=</span> <span class="va">max_size</span><span class="op">/</span><span class="fl">2</span>,</span>
+<span>  arrow.size <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  arrow.gap <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  arrow.type <span class="op">=</span> <span class="st">"closed"</span>,</span>
+<span>  legend.size <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>  legend.position <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -184,6 +184,8 @@ igraph and the
 <a href="https://rdrr.io/pkg/intergraph/man/intergraph-package.html" class="external-link">intergraph</a> package is installed,
 it will be used to convert the object: see
 <code><a href="https://rdrr.io/pkg/intergraph/man/asNetwork.html" class="external-link">asNetwork</a></code> for details.</p></dd>
+
+
 <dt>mode</dt>
 <dd><p>a placement method from those provided in the
 <code><a href="https://rdrr.io/pkg/sna/man/sna.html" class="external-link">sna</a></code> package: see <a href="https://rdrr.io/pkg/sna/man/gplot.layout.html" class="external-link">gplot.layout</a> for
@@ -191,29 +193,41 @@ details. Also accepts the names of two numeric vertex attributes of
 <code>net</code>, or a matrix of numeric coordinates, in which case the first two
 columns of the matrix are used.
 Defaults to the Fruchterman-Reingold force-directed algorithm.</p></dd>
+
+
 <dt>layout.par</dt>
 <dd><p>options to be passed to the placement method, as listed in
 <a href="https://rdrr.io/pkg/sna/man/gplot.layout.html" class="external-link">gplot.layout</a>.
 Defaults to <code>NULL</code>.</p></dd>
+
+
 <dt>layout.exp</dt>
 <dd><p>a multiplier to expand the horizontal axis if node labels
 get clipped: see <a href="https://scales.r-lib.org/reference/expand_range.html" class="external-link">expand_range</a> for details.
 Defaults to <code>0</code> (no expansion).</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>the level of transparency of the edges and nodes, which might be
 a single value, a vertex attribute, or a vector of values.
 Also accepts <code>"mode"</code> on bipartite networks (see 'Details').
 Defaults to <code>1</code> (no transparency).</p></dd>
+
+
 <dt>color</dt>
 <dd><p>the color of the nodes, which might be a single value, a vertex
 attribute, or a vector of values.
 Also accepts <code>"mode"</code> on bipartite networks (see 'Details').
 Defaults to <code>grey75</code>.</p></dd>
+
+
 <dt>shape</dt>
 <dd><p>the shape of the nodes, which might be a single value, a vertex
 attribute, or a vector of values.
 Also accepts <code>"mode"</code> on bipartite networks (see 'Details').
 Defaults to <code>19</code> (solid circle).</p></dd>
+
+
 <dt>size</dt>
 <dd><p>the size of the nodes, in points, which might be a single value,
 a vertex attribute, or a vector of values. Also accepts <code>"indegree"</code>,
@@ -223,15 +237,21 @@ equivalent): see <code><a href="https://rdrr.io/pkg/sna/man/degree.html" class="
 be strictly positive.
 Also accepts <code>"mode"</code> on bipartite networks (see 'Details').
 Defaults to <code>9</code>.</p></dd>
+
+
 <dt>max_size</dt>
 <dd><p>the <em>maximum</em> size of the node when <code>size</code> produces
 nodes of different sizes, in points.
 Defaults to <code>9</code>.</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p>whether to subset the network to nodes that are <em>not</em>
 missing a given vertex attribute. If set to any vertex attribute of
 <code>net</code>, the nodes for which this attribute is <code>NA</code> will be removed.
 Defaults to <code>NA</code> (does nothing).</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>the palette to color the nodes, when <code>color</code> is not a
 color value or a vector of color values. Accepts named vectors of color
@@ -240,42 +260,62 @@ ColorBrewer palette name: see <code><a href="https://rdrr.io/pkg/RColorBrewer/ma
 <a href="https://colorbrewer2.org/" class="external-link">https://colorbrewer2.org/</a> for details.
 Defaults to <code>NULL</code>, which will create an array of grayscale color values
 if <code>color</code> is not a color value or a vector of color values.</p></dd>
+
+
 <dt>alpha.palette</dt>
 <dd><p>the palette to control the transparency levels of the
 nodes set by <code>alpha</code> when the levels are not numeric values.
 Defaults to <code>NULL</code>, which will create an array of alpha transparency
 values if <code>alpha</code> is not a numeric value or a vector of numeric values.</p></dd>
+
+
 <dt>alpha.legend</dt>
 <dd><p>the name to assign to the legend created by
 <code>alpha</code> when its levels are not numeric values.
 Defaults to <code>NA</code> (no name).</p></dd>
+
+
 <dt>color.palette</dt>
 <dd><p>see <code>palette</code></p></dd>
+
+
 <dt>color.legend</dt>
 <dd><p>the name to assign to the legend created by
 <code>palette</code>.
 Defaults to <code>NA</code> (no name).</p></dd>
+
+
 <dt>shape.palette</dt>
 <dd><p>the palette to control the shapes of the nodes set by
 <code>shape</code> when the shapes are not numeric values.
 Defaults to <code>NULL</code>, which will create an array of shape values if
 <code>shape</code> is not a numeric value or a vector of numeric values.</p></dd>
+
+
 <dt>shape.legend</dt>
 <dd><p>the name to assign to the legend created by
 <code>shape</code> when its levels are not numeric values.
 Defaults to <code>NA</code> (no name).</p></dd>
+
+
 <dt>size.palette</dt>
 <dd><p>the palette to control the sizes of the nodes set by
 <code>size</code> when the sizes are not numeric values.</p></dd>
+
+
 <dt>size.legend</dt>
 <dd><p>the name to assign to the legend created by
 <code>size</code>.
 Defaults to <code>NA</code> (no name).</p></dd>
+
+
 <dt>size.zero</dt>
 <dd><p>whether to accept zero-sized nodes based on the value(s) of
 <code>size</code>.
 Defaults to <code>FALSE</code>, which ensures that zero-sized nodes are still
 shown in the plot and its size legend.</p></dd>
+
+
 <dt>size.cut</dt>
 <dd><p>whether to cut the size of the nodes into a certain number of
 quantiles. Accepts <code>TRUE</code>, which tries to cut the sizes into quartiles,
@@ -284,14 +324,20 @@ quantiles. If the size of the nodes do not contain the specified number of
 distinct quantiles, the largest possible number is used.
 See <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></code> and <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></code> for details.
 Defaults to <code>FALSE</code> (does nothing).</p></dd>
+
+
 <dt>size.min</dt>
 <dd><p>whether to subset the network to nodes with a minimum size,
 based on the values of <code>size</code>.
 Defaults to <code>NA</code> (preserves all nodes).</p></dd>
+
+
 <dt>size.max</dt>
 <dd><p>whether to subset the network to nodes with a maximum size,
 based on the values of <code>size</code>.
 Defaults to <code>NA</code> (preserves all nodes).</p></dd>
+
+
 <dt>label</dt>
 <dd><p>whether to label the nodes. If set to <code>TRUE</code>, nodes are
 labeled with their vertex names. If set to a vector that contains as many
@@ -299,99 +345,148 @@ elements as there are nodes in <code>net</code>, nodes are labeled with these. I
 set to any other vector of values, the nodes are labeled only when their
 vertex name matches one of these values.
 Defaults to <code>FALSE</code> (no labels).</p></dd>
+
+
 <dt>label.alpha</dt>
 <dd><p>the level of transparency of the node labels, as a
 numeric value, a vector of numeric values, or as a vertex attribute
 containing numeric values.
 Defaults to <code>1</code> (no transparency).</p></dd>
+
+
 <dt>label.color</dt>
 <dd><p>the color of the node labels, as a color value, a vector
 of color values, or as a vertex attribute containing color values.
 Defaults to <code>"black"</code>.</p></dd>
+
+
 <dt>label.size</dt>
 <dd><p>the size of the node labels, in points, as a numeric value,
 a vector of numeric values, or as a vertex attribute containing numeric
 values.
 Defaults to <code>max_size / 2</code> (half the maximum node size), which defaults
 to <code>4.5</code>.</p></dd>
+
+
 <dt>label.trim</dt>
 <dd><p>whether to apply some trimming to the node labels. Accepts
 any function that can process a character vector, or a strictly positive
 numeric value, in which case the labels are trimmed to a fixed-length
 substring of that length: see <code><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></code> for details.
 Defaults to <code>FALSE</code> (does nothing).</p></dd>
+
+
 <dt>node.alpha</dt>
 <dd><p>see <code>alpha</code></p></dd>
+
+
 <dt>node.color</dt>
 <dd><p>see <code>color</code></p></dd>
+
+
 <dt>node.label</dt>
 <dd><p>see <code>label</code></p></dd>
+
+
 <dt>node.shape</dt>
 <dd><p>see <code>shape</code></p></dd>
+
+
 <dt>node.size</dt>
 <dd><p>see <code>size</code></p></dd>
+
+
 <dt>edge.alpha</dt>
 <dd><p>the level of transparency of the edges.
 Defaults to the value of <code>alpha</code>, which defaults to <code>1</code>.</p></dd>
+
+
 <dt>edge.color</dt>
 <dd><p>the color of the edges, as a color value, a vector of color
 values, or as an edge attribute containing color values.
 Defaults to <code>"grey50"</code>.</p></dd>
+
+
 <dt>edge.lty</dt>
 <dd><p>the linetype of the edges, as a linetype value, a vector of
 linetype values, or as an edge attribute containing linetype values.
 Defaults to <code>"solid"</code>.</p></dd>
+
+
 <dt>edge.size</dt>
 <dd><p>the size of the edges, in points, as a numeric value, a
 vector of numeric values, or as an edge attribute containing numeric values.
 All edge sizes must be strictly positive.
 Defaults to <code>0.25</code>.</p></dd>
+
+
 <dt>edge.label</dt>
 <dd><p>the labels to plot at the middle of the edges, as a single
 value, a vector of values, or as an edge attribute.
 Defaults to <code>NULL</code> (no edge labels).</p></dd>
+
+
 <dt>edge.label.alpha</dt>
 <dd><p>the level of transparency of the edge labels, as a
 numeric value, a vector of numeric values, or as an edge attribute
 containing numeric values.
 Defaults to <code>1</code> (no transparency).</p></dd>
+
+
 <dt>edge.label.color</dt>
 <dd><p>the color of the edge labels, as a color value, a
 vector of color values, or as an edge attribute containing color values.
 Defaults to <code>label.color</code>, which defaults to <code>"black"</code>.</p></dd>
+
+
 <dt>edge.label.fill</dt>
 <dd><p>the background color of the edge labels.
 Defaults to <code>"white"</code>.</p></dd>
+
+
 <dt>edge.label.size</dt>
 <dd><p>the size of the edge labels, in points, as a numeric
 value, a vector of numeric values, or as an edge attribute containing numeric
 values. All edge label sizes must be strictly positive.
 Defaults to <code>max_size / 2</code> (half the maximum node size), which defaults
 to <code>4.5</code>.</p></dd>
+
+
 <dt>arrow.size</dt>
 <dd><p>the size of the arrows for directed network edges, in
 points. See <code><a href="https://rdrr.io/r/grid/arrow.html" class="external-link">arrow</a></code> for details.
 Defaults to <code>0</code> (no arrows).</p></dd>
+
+
 <dt>arrow.gap</dt>
 <dd><p>a setting aimed at improving the display of edge arrows by
 plotting slightly shorter edges. Accepts any value between <code>0</code> and
 <code>1</code>, where a value of <code>0.05</code> will generally achieve good results
 when the size of the nodes is reasonably small.
 Defaults to <code>0</code> (no shortening).</p></dd>
+
+
 <dt>arrow.type</dt>
 <dd><p>the type of the arrows for directed network edges. See
 <code><a href="https://rdrr.io/r/grid/arrow.html" class="external-link">arrow</a></code> for details.
 Defaults to <code>"closed"</code>.</p></dd>
+
+
 <dt>legend.size</dt>
 <dd><p>the size of the legend symbols and text, in points.
 Defaults to <code>9</code>.</p></dd>
+
+
 <dt>legend.position</dt>
 <dd><p>the location of the plot legend(s). Accepts all
 <code>legend.position</code> values supported by <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></code>.
 Defaults to <code>"right"</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other arguments passed to the <code>geom_text</code> object that sets
 the node labels: see <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></code> for details.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -420,34 +515,34 @@ Pedro Jordano and Ming-Yu Liu</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://statnet.org/" class="external-link">network</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># random adjacency matrix</span></span>
-<span class="r-in"><span class="va">x</span>           <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span class="r-in"><span class="va">ndyads</span>      <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">density</span>     <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">ndyads</span></span>
-<span class="r-in"><span class="va">m</span>           <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">x</span>, ncol <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span> <span class="fl">1</span><span class="op">:</span><span class="va">x</span> <span class="op">]</span>, <span class="va">letters</span><span class="op">[</span> <span class="fl">1</span><span class="op">:</span><span class="va">x</span> <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span><span class="op">[</span> <span class="fu"><a href="https://rdrr.io/r/base/row.html" class="external-link">row</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/col.html" class="external-link">col</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">ndyads</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">density</span></span>
-<span class="r-in"><span class="va">m</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://statnet.org/" class="external-link">network</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># random adjacency matrix</span></span></span>
+<span class="r-in"><span><span class="va">x</span>           <span class="op">&lt;-</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">ndyads</span>      <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">density</span>     <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">ndyads</span></span></span>
+<span class="r-in"><span><span class="va">m</span>           <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">x</span>, ncol <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/row.html" class="external-link">row</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/col.html" class="external-link">col</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">ndyads</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">density</span></span></span>
+<span class="r-in"><span><span class="va">m</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   a b c d e f g h i j</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a 0 0 0 0 1 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c 0 0 0 0 1 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> d 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> e 0 1 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g 0 0 0 0 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a 0 0 1 0 0 1 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b 0 0 0 1 0 0 1 1 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c 0 0 0 1 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d 1 0 0 0 1 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e 0 0 0 0 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f 0 0 1 1 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> g 0 0 0 0 0 1 0 0 0 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> h 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j 0 0 0 0 0 1 0 0 0 0</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># random undirected network</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu">network</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">n</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> i 0 0 0 1 0 0 1 0 0 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> j 0 0 1 0 1 1 0 0 0 0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># random undirected network</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu">network</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Network attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vertices = 10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   directed = FALSE </span>
@@ -455,48 +550,58 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   loops = FALSE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   multiple = FALSE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   bipartite = FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   total edges= 4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   total edges= 18 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     missing edges= 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     non-missing edges= 4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     non-missing edges= 18 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Vertex attribute names: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vertex.names </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No edge attributes</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span>, color <span class="op">=</span> <span class="st">"black"</span>, label.color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># add vertex attribute</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html" class="external-link">network.vertex.names</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span><span class="op">)</span>, <span class="st">"vowel"</span>, <span class="st">"consonant"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"phono"</span> <span class="op">=</span> <span class="va">x</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vowel"</span> <span class="op">=</span> <span class="st">"gold"</span>, <span class="st">"consonant"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="st">"phono"</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># random groups</span></span>
-<span class="r-in">  <span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"group"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"group"</span>, palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span>, color <span class="op">=</span> <span class="st">"black"</span>, label.color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add vertex attribute</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html" class="external-link">network.vertex.names</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span><span class="op">)</span>, <span class="st">"vowel"</span>, <span class="st">"consonant"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"phono"</span> <span class="op">=</span> <span class="va">x</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vowel"</span> <span class="op">=</span> <span class="st">"gold"</span>, <span class="st">"consonant"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-5.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="st">"phono"</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Duplicated override.aes is ignored.</span>
+<span class="r-plt img"><img src="ggnet2-6.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># random groups</span></span></span>
+<span class="r-in"><span>  <span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"group"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"group"</span>, palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: RColorBrewer</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># random weights</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%e%</a></span> <span class="st">"weight"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.edgecount.html" class="external-link">network.edgecount</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, edge.size <span class="op">=</span> <span class="st">"weight"</span>, edge.label <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># edge arrows on a directed network</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, arrow.gap <span class="op">=</span> <span class="fl">0.05</span>, arrow.size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Padgett's Florentine wedding data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flo</span>, package <span class="op">=</span> <span class="st">"network"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">flo</span></span>
+<span class="r-plt img"><img src="ggnet2-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># random weights</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%e%</a></span> <span class="st">"weight"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.edgecount.html" class="external-link">network.edgecount</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, edge.size <span class="op">=</span> <span class="st">"weight"</span>, edge.label <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-8.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># edge arrows on a directed network</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, arrow.gap <span class="op">=</span> <span class="fl">0.05</span>, arrow.size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-9.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Padgett's Florentine wedding data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flo</span>, package <span class="op">=</span> <span class="st">"network"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">flo</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              Acciaiuoli Albizzi Barbadori Bischeri Castellani Ginori Guadagni</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Acciaiuoli            0       0         0        0          0      0        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Albizzi               0       0         0        0          0      1        1</span>
@@ -548,10 +653,13 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Salviati              0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Strozzi               0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Tornabuoni            0</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, label.trim <span class="op">=</span> <span class="fl">4</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">12</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-10.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, label.trim <span class="op">=</span> <span class="fl">4</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-11.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">12</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggnet2-12.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -566,7 +674,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

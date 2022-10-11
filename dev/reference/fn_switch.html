@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,40 +113,43 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fn_switch</span><span class="op">(</span><span class="va">types</span>, mapping_val <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fn_switch</span><span class="op">(</span><span class="va">types</span>, mapping_val <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>types</dt>
 <dd><p>list of functions that follow the <code><a href="ggmatrix.html">ggmatrix</a></code> function standard: <code>function(data, mapping, ...){ #make ggplot2 object }</code>.  One key should be a 'default' key for a default switch case.</p></dd>
+
+
 <dt>mapping_val</dt>
 <dd><p>mapping value to switch on.  Defaults to the 'y' variable of the aesthetics list.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ggnostic_continuous_fn</span> <span class="op">&lt;-</span> <span class="fu">fn_switch</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">  default <span class="op">=</span> <span class="va">ggally_points</span>,</span>
-<span class="r-in">  .fitted <span class="op">=</span> <span class="va">ggally_points</span>,</span>
-<span class="r-in">  .se.fit <span class="op">=</span> <span class="va">ggally_nostic_se_fit</span>,</span>
-<span class="r-in">  .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>,</span>
-<span class="r-in">  .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>,</span>
-<span class="r-in">  .sigma <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>,</span>
-<span class="r-in">  .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>,</span>
-<span class="r-in">  .std.resid <span class="op">=</span> <span class="va">ggally_nostic_std_resid</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ggnostic_combo_fn</span> <span class="op">&lt;-</span> <span class="fu">fn_switch</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">  default <span class="op">=</span> <span class="va">ggally_box_no_facet</span>,</span>
-<span class="r-in">  fitted <span class="op">=</span> <span class="va">ggally_box_no_facet</span>,</span>
-<span class="r-in">  .se.fit <span class="op">=</span> <span class="va">ggally_nostic_se_fit</span>,</span>
-<span class="r-in">  .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>,</span>
-<span class="r-in">  .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>,</span>
-<span class="r-in">  .sigma <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>,</span>
-<span class="r-in">  .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>,</span>
-<span class="r-in">  .std.resid <span class="op">=</span> <span class="va">ggally_nostic_std_resid</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ggnostic_continuous_fn</span> <span class="op">&lt;-</span> <span class="fu">fn_switch</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  default <span class="op">=</span> <span class="va">ggally_points</span>,</span></span>
+<span class="r-in"><span>  .fitted <span class="op">=</span> <span class="va">ggally_points</span>,</span></span>
+<span class="r-in"><span>  .se.fit <span class="op">=</span> <span class="va">ggally_nostic_se_fit</span>,</span></span>
+<span class="r-in"><span>  .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>,</span></span>
+<span class="r-in"><span>  .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>,</span></span>
+<span class="r-in"><span>  .sigma <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>,</span></span>
+<span class="r-in"><span>  .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>,</span></span>
+<span class="r-in"><span>  .std.resid <span class="op">=</span> <span class="va">ggally_nostic_std_resid</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ggnostic_combo_fn</span> <span class="op">&lt;-</span> <span class="fu">fn_switch</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  default <span class="op">=</span> <span class="va">ggally_box_no_facet</span>,</span></span>
+<span class="r-in"><span>  fitted <span class="op">=</span> <span class="va">ggally_box_no_facet</span>,</span></span>
+<span class="r-in"><span>  .se.fit <span class="op">=</span> <span class="va">ggally_nostic_se_fit</span>,</span></span>
+<span class="r-in"><span>  .resid <span class="op">=</span> <span class="va">ggally_nostic_resid</span>,</span></span>
+<span class="r-in"><span>  .hat <span class="op">=</span> <span class="va">ggally_nostic_hat</span>,</span></span>
+<span class="r-in"><span>  .sigma <span class="op">=</span> <span class="va">ggally_nostic_sigma</span>,</span></span>
+<span class="r-in"><span>  .cooksd <span class="op">=</span> <span class="va">ggally_nostic_cooksd</span>,</span></span>
+<span class="r-in"><span>  .std.resid <span class="op">=</span> <span class="va">ggally_nostic_std_resid</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -161,7 +164,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,42 +113,55 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggally_nostic_line</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">mapping</span>,
-  <span class="va">...</span>,
-  linePosition <span class="op">=</span> <span class="cn">NULL</span>,
-  lineColor <span class="op">=</span> <span class="st">"red"</span>,
-  lineSize <span class="op">=</span> <span class="fl">0.5</span>,
-  lineAlpha <span class="op">=</span> <span class="fl">1</span>,
-  lineType <span class="op">=</span> <span class="fl">1</span>,
-  continuous_geom <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span>,
-  combo_geom <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span>,
-  mapColorToFill <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggally_nostic_line</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">mapping</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  linePosition <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lineColor <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  lineSize <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  lineAlpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lineType <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  continuous_geom <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span>,</span>
+<span>  combo_geom <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span>,</span>
+<span>  mapColorToFill <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data, mapping</dt>
 <dd><p>supplied directly to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot()</a></code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>parameters supplied to <code>continuous_geom</code> or <code>combo_geom</code></p></dd>
+
+
 <dt>linePosition, lineColor, lineSize, lineAlpha, lineType</dt>
 <dd><p>parameters supplied to
 <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">ggplot2::geom_line()</a></code></p></dd>
+
+
 <dt>continuous_geom</dt>
 <dd><p><span class="pkg">ggplot2</span> geom that is executed after the line is (possibly)
 added and if the x data is continuous</p></dd>
+
+
 <dt>combo_geom</dt>
 <dd><p><span class="pkg">ggplot2</span> geom that is executed after the line is (possibly) added and
 if the x data is discrete</p></dd>
+
+
 <dt>mapColorToFill</dt>
 <dd><p>boolean to determine if combo plots should cut the color mapping to the fill mapping</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><span class="pkg">ggplot2</span> plot object</p>
+    
+
+<p><span class="pkg">ggplot2</span> plot object</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -167,7 +180,7 @@ if the x data is discrete</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

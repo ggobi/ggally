@@ -29,7 +29,7 @@ multiple strata objects."><meta name="robots" content="noindex"><!-- mathjax -->
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -119,70 +119,105 @@ multiple strata objects.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggsurv</span><span class="op">(</span>
-  <span class="va">s</span>,
-  CI <span class="op">=</span> <span class="st">"def"</span>,
-  plot.cens <span class="op">=</span> <span class="cn">TRUE</span>,
-  surv.col <span class="op">=</span> <span class="st">"gg.def"</span>,
-  cens.col <span class="op">=</span> <span class="st">"gg.def"</span>,
-  lty.est <span class="op">=</span> <span class="fl">1</span>,
-  lty.ci <span class="op">=</span> <span class="fl">2</span>,
-  size.est <span class="op">=</span> <span class="fl">0.5</span>,
-  size.ci <span class="op">=</span> <span class="va">size.est</span>,
-  cens.size <span class="op">=</span> <span class="fl">2</span>,
-  cens.shape <span class="op">=</span> <span class="fl">3</span>,
-  back.white <span class="op">=</span> <span class="cn">FALSE</span>,
-  xlab <span class="op">=</span> <span class="st">"Time"</span>,
-  ylab <span class="op">=</span> <span class="st">"Survival"</span>,
-  main <span class="op">=</span> <span class="st">""</span>,
-  order.legend <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggsurv</span><span class="op">(</span></span>
+<span>  <span class="va">s</span>,</span>
+<span>  CI <span class="op">=</span> <span class="st">"def"</span>,</span>
+<span>  plot.cens <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  surv.col <span class="op">=</span> <span class="st">"gg.def"</span>,</span>
+<span>  cens.col <span class="op">=</span> <span class="st">"gg.def"</span>,</span>
+<span>  lty.est <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lty.ci <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  size.est <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  size.ci <span class="op">=</span> <span class="va">size.est</span>,</span>
+<span>  cens.size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  cens.shape <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  back.white <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Survival"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  order.legend <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>s</dt>
 <dd><p>an object of class <code>survfit</code></p></dd>
+
+
 <dt>CI</dt>
 <dd><p>should a confidence interval be plotted? Defaults to <code>TRUE</code>
 for single stratum objects and <code>FALSE</code> for multiple strata objects.</p></dd>
+
+
 <dt>plot.cens</dt>
 <dd><p>mark the censored observations?</p></dd>
+
+
 <dt>surv.col</dt>
 <dd><p>colour of the survival estimate. Defaults to black for
 one stratum, and to the default <span class="pkg">ggplot2</span> colours for multiple
 strata. Length of vector with colour names should be either 1 or equal
 to the number of strata.</p></dd>
+
+
 <dt>cens.col</dt>
 <dd><p>colour of the points that mark censored observations.</p></dd>
+
+
 <dt>lty.est</dt>
 <dd><p>linetype of the survival curve(s). Vector length should be
 either 1 or equal to the number of strata.</p></dd>
+
+
 <dt>lty.ci</dt>
 <dd><p>linetype of the bounds that mark the 95% CI.</p></dd>
+
+
 <dt>size.est</dt>
 <dd><p>line width of the survival curve</p></dd>
+
+
 <dt>size.ci</dt>
 <dd><p>line width of the 95% CI</p></dd>
+
+
 <dt>cens.size</dt>
 <dd><p>point size of the censoring points</p></dd>
+
+
 <dt>cens.shape</dt>
 <dd><p>shape of the points that mark censored observations.</p></dd>
+
+
 <dt>back.white</dt>
 <dd><p>if TRUE the background will not be the default
 grey of <code>ggplot2</code> but will be white with borders around the plot.</p></dd>
+
+
 <dt>xlab</dt>
 <dd><p>the label of the x-axis.</p></dd>
+
+
 <dt>ylab</dt>
 <dd><p>the label of the y-axis.</p></dd>
+
+
 <dt>main</dt>
 <dd><p>the plot label.</p></dd>
+
+
 <dt>order.legend</dt>
 <dd><p>boolean to determine if the legend display should be ordered by final survival time</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>ggplot</code></p>
+    
+
+<p>An object of class <code>ggplot</code></p>
+
+
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -191,67 +226,75 @@ grey of <code>ggplot2</code> but will be white with borders around the plot.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lung</span>, package <span class="op">=</span> <span class="st">"survival"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">sf.lung</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.lung</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Multiple strata examples</span></span>
-<span class="r-in">  <span class="va">sf.sex</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">pl.sex</span> <span class="op">&lt;-</span> <span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.sex</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Adjusting the legend of the ggsurv fit</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex</span> <span class="op">+</span></span>
-<span class="r-in">    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html" class="external-link">scale_colour_discrete</a></span><span class="op">(</span></span>
-<span class="r-in">      name   <span class="op">=</span> <span class="st">'Sex'</span>,</span>
-<span class="r-in">      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Male'</span>, <span class="st">'Female'</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Multiple factors</span></span>
-<span class="r-in">  <span class="va">lung2</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">lung</span>, older <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">60</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">sf.sex2</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">older</span>, data <span class="op">=</span> <span class="va">lung2</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">pl.sex2</span> <span class="op">&lt;-</span> <span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.sex2</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Change legend title</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex2</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"New Title"</span>, linetype <span class="op">=</span> <span class="st">"New Title"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># We can still adjust the plot after fitting</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">kidney</span>, package <span class="op">=</span> <span class="st">"survival"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">sf.kid</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">disease</span>, data <span class="op">=</span> <span class="va">kidney</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">pl.kid</span> <span class="op">&lt;-</span> <span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.kid</span>, plot.cens <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.kid</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Zoom in to first 80 days</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.kid</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">80</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.45</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># Add the diseases names to the plot and remove legend</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.kid</span> <span class="op">+</span></span>
-<span class="r-in">    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="st">"text"</span>,</span>
-<span class="r-in">      label  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PKD"</span>, <span class="st">"Other"</span>, <span class="st">"GN"</span>, <span class="st">"AN"</span><span class="op">)</span>,</span>
-<span class="r-in">      x      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">125</span>, <span class="fl">5</span>, <span class="fl">60</span><span class="op">)</span>,</span>
-<span class="r-in">      y      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.65</span>, <span class="fl">0.55</span>, <span class="fl">0.30</span><span class="op">)</span>,</span>
-<span class="r-in">      size   <span class="op">=</span> <span class="fl">5</span>,</span>
-<span class="r-in">      colour <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/hue_pal.html" class="external-link">hue_pal</a></span><span class="op">(</span></span>
-<span class="r-in">        h         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span><span class="op">)</span> <span class="op">+</span> <span class="fl">15</span>,</span>
-<span class="r-in">        c         <span class="op">=</span> <span class="fl">100</span>,</span>
-<span class="r-in">        l         <span class="op">=</span> <span class="fl">65</span>,</span>
-<span class="r-in">        h.start   <span class="op">=</span> <span class="fl">0</span>,</span>
-<span class="r-in">        direction <span class="op">=</span> <span class="fl">1</span></span>
-<span class="r-in">      <span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span>, linetype <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">lung</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/survival/man/lung.html" class="external-link">lung</a></span></span></span>
+<span class="r-in"><span>  <span class="va">sf.lung</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.lung</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Multiple strata examples</span></span></span>
+<span class="r-in"><span>  <span class="va">sf.sex</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">pl.sex</span> <span class="op">&lt;-</span> <span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.sex</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Adjusting the legend of the ggsurv fit</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_discrete.html" class="external-link">scale_colour_discrete</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      name   <span class="op">=</span> <span class="st">'Sex'</span>,</span></span>
+<span class="r-in"><span>      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Male'</span>, <span class="st">'Female'</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Multiple factors</span></span></span>
+<span class="r-in"><span>  <span class="va">lung2</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">lung</span>, older <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">60</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">sf.sex2</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">older</span>, data <span class="op">=</span> <span class="va">lung2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">pl.sex2</span> <span class="op">&lt;-</span> <span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.sex2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Change legend title</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.sex2</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"New Title"</span>, linetype <span class="op">=</span> <span class="st">"New Title"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># We can still adjust the plot after fitting</span></span></span>
+<span class="r-in"><span>  <span class="va">kidney</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/survival/man/kidney.html" class="external-link">kidney</a></span></span></span>
+<span class="r-in"><span>  <span class="va">sf.kid</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">disease</span>, data <span class="op">=</span> <span class="va">kidney</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">pl.kid</span> <span class="op">&lt;-</span> <span class="fu">ggsurv</span><span class="op">(</span><span class="va">sf.kid</span>, plot.cens <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.kid</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Zoom in to first 80 days</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.kid</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">80</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.45</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Add the diseases names to the plot and remove legend</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="va">pl.kid</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"text"</span>,</span></span>
+<span class="r-in"><span>      label  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PKD"</span>, <span class="st">"Other"</span>, <span class="st">"GN"</span>, <span class="st">"AN"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      x      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">125</span>, <span class="fl">5</span>, <span class="fl">60</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      y      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.65</span>, <span class="fl">0.55</span>, <span class="fl">0.30</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      size   <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>      colour <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/hue_pal.html" class="external-link">hue_pal</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        h         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span><span class="op">)</span> <span class="op">+</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>        c         <span class="op">=</span> <span class="fl">100</span>,</span></span>
+<span class="r-in"><span>        l         <span class="op">=</span> <span class="fl">65</span>,</span></span>
+<span class="r-in"><span>        h.start   <span class="op">=</span> <span class="fl">0</span>,</span></span>
+<span class="r-in"><span>        direction <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span>, linetype <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: scales</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘lung’ not found</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘kidney’ not found</span>
+<span class="r-plt img"><img src="ggsurv-1.png" alt="" width="700" height="433"></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for 'colour' is already present. Adding another scale for 'colour',</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> which will replace the existing scale.</span>
+<span class="r-plt img"><img src="ggsurv-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggsurv-3.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggsurv-4.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggsurv-5.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggsurv-6.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggsurv-7.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggsurv-8.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -266,7 +309,7 @@ grey of <code>ggplot2</code> but will be white with borders around the plot.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

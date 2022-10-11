@@ -27,7 +27,7 @@ cross-tabulated tables of discrete variables."><meta name="robots" content="noin
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -115,16 +115,15 @@ cross-tabulated tables of discrete variables.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggtable</span><span class="op">(</span>
-  <span class="va">data</span>,
-  columnsX <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,
-  columnsY <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,
-  cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"observed"</span>, <span class="st">"prop"</span>, <span class="st">"row.prop"</span>, <span class="st">"col.prop"</span>, <span class="st">"expected"</span>, <span class="st">"resid"</span>,
-    <span class="st">"std.resid"</span><span class="op">)</span>,
-  fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"std.resid"</span>, <span class="st">"resid"</span><span class="op">)</span>,
-  mapping <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggtable</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  columnsX <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
+<span>  columnsY <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
+<span>  cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"observed"</span>, <span class="st">"prop"</span>, <span class="st">"row.prop"</span>, <span class="st">"col.prop"</span>, <span class="st">"expected"</span>, <span class="st">"resid"</span>, <span class="st">"std.resid"</span><span class="op">)</span>,</span>
+<span>  fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"std.resid"</span>, <span class="st">"resid"</span><span class="op">)</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -132,17 +131,28 @@ cross-tabulated tables of discrete variables.</p>
     <dl><dt>data</dt>
 <dd><p>dataset to be used, can have both categorical and
 numerical variables</p></dd>
+
+
 <dt>columnsX, columnsY</dt>
 <dd><p>names or positions of which columns are used to make plots. Defaults to all columns.</p></dd>
+
+
 <dt>cells</dt>
 <dd><p>Which statistic should be displayed in table cells?</p></dd>
+
+
 <dt>fill</dt>
 <dd><p>Which statistic should be used for filling table cells?</p></dd>
+
+
 <dt>mapping</dt>
 <dd><p>additional aesthetic to be used, for example to indicate
 weights (see examples)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed to <code><a href="ggduo.html">ggduo</a></code> (see examples)</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -151,34 +161,39 @@ weights (see examples)</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/reshape" class="external-link">reshape</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># displaying row proportions</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"row.prop"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># filling cells with standardized residuals</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"std.resid"</span>, legend <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="co"># if continuous variables are provided, just displaying some summary statistics</span></span>
-<span class="r-in">  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smoker"</span>, <span class="st">"total_bill"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/reshape" class="external-link">reshape</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># displaying row proportions</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"row.prop"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># filling cells with standardized residuals</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"std.resid"</span>, legend <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># if continuous variables are provided, just displaying some summary statistics</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smoker"</span>, <span class="st">"total_bill"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: reshape</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># specifying weights</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">d</span>,</span>
-<span class="r-in">  <span class="st">"Survived"</span>,</span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Class"</span>, <span class="st">"Sex"</span>, <span class="st">"Age"</span><span class="op">)</span>,</span>
-<span class="r-in">  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span>,</span>
-<span class="r-in">  cells <span class="op">=</span> <span class="st">"row.prop"</span>,</span>
-<span class="r-in">  fill <span class="op">=</span> <span class="st">"std.resid"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="ggtable-1.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggtable-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggtable-3.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ggtable-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># specifying weights</span></span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggtable</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">d</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Survived"</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Class"</span>, <span class="st">"Sex"</span>, <span class="st">"Age"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  cells <span class="op">=</span> <span class="st">"row.prop"</span>,</span></span>
+<span class="r-in"><span>  fill <span class="op">=</span> <span class="st">"std.resid"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggtable-5.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -193,7 +208,7 @@ weights (see examples)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

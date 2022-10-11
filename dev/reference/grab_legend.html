@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,50 +113,57 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">grab_legend</span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
-
-<span class="co"># S3 method for legend_guide_box</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, plotNew <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for legend_guide_box</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, plotNew <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>p</dt>
 <dd><p>ggplot2 plot object</p></dd>
+
+
 <dt>x</dt>
 <dd><p>legend object that has been grabbed from a ggplot2 object</p></dd>
+
+
 <dt>...</dt>
 <dd><p>ignored</p></dd>
+
+
 <dt>plotNew</dt>
 <dd><p>boolean to determine if the <code>grid.newpage()</code> command and a new blank rectangle should be printed</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">histPlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span></span>
-<span class="r-in">  x <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">iris</span>,</span>
-<span class="r-in">  fill <span class="op">=</span> <span class="va">Species</span>,</span>
-<span class="r-in">  geom <span class="op">=</span> <span class="st">"histogram"</span>,</span>
-<span class="r-in">  binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">4</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">(</span><span class="va">right</span> <span class="op">&lt;-</span> <span class="va">histPlot</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">histPlot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x <span class="op">=</span> <span class="va">Sepal.Length</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">iris</span>,</span></span>
+<span class="r-in"><span>  fill <span class="op">=</span> <span class="va">Species</span>,</span></span>
+<span class="r-in"><span>  geom <span class="op">=</span> <span class="st">"histogram"</span>,</span></span>
+<span class="r-in"><span>  binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">4</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">right</span> <span class="op">&lt;-</span> <span class="va">histPlot</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="grab_legend-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="op">(</span><span class="va">bottom</span> <span class="op">&lt;-</span> <span class="va">histPlot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">bottom</span> <span class="op">&lt;-</span> <span class="va">histPlot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="grab_legend-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="op">(</span><span class="va">top</span> <span class="op">&lt;-</span> <span class="va">histPlot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">top</span> <span class="op">&lt;-</span> <span class="va">histPlot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="grab_legend-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="op">(</span><span class="va">left</span> <span class="op">&lt;-</span> <span class="va">histPlot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">left</span> <span class="op">&lt;-</span> <span class="va">histPlot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">right</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">bottom</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">top</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">left</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="grab_legend-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">right</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">bottom</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">top</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">grab_legend</span><span class="op">(</span><span class="va">left</span><span class="op">)</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -171,7 +178,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

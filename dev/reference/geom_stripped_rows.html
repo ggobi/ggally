@@ -27,7 +27,7 @@ aesthetics odd and even that receive color codes."><meta name="robots" content="
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -115,33 +115,33 @@ aesthetics <code>odd</code> and <code>even</code> that receive color codes.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">geom_stripped_rows</span><span class="op">(</span>
-  mapping <span class="op">=</span> <span class="cn">NULL</span>,
-  data <span class="op">=</span> <span class="cn">NULL</span>,
-  stat <span class="op">=</span> <span class="st">"identity"</span>,
-  position <span class="op">=</span> <span class="st">"identity"</span>,
-  <span class="va">...</span>,
-  show.legend <span class="op">=</span> <span class="cn">NA</span>,
-  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,
-  xfrom <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>,
-  xto <span class="op">=</span> <span class="cn">Inf</span>,
-  width <span class="op">=</span> <span class="fl">1</span>,
-  nudge_y <span class="op">=</span> <span class="fl">0</span>
-<span class="op">)</span>
-
-<span class="fu">geom_stripped_cols</span><span class="op">(</span>
-  mapping <span class="op">=</span> <span class="cn">NULL</span>,
-  data <span class="op">=</span> <span class="cn">NULL</span>,
-  stat <span class="op">=</span> <span class="st">"identity"</span>,
-  position <span class="op">=</span> <span class="st">"identity"</span>,
-  <span class="va">...</span>,
-  show.legend <span class="op">=</span> <span class="cn">NA</span>,
-  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,
-  yfrom <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>,
-  yto <span class="op">=</span> <span class="cn">Inf</span>,
-  width <span class="op">=</span> <span class="fl">1</span>,
-  nudge_x <span class="op">=</span> <span class="fl">0</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">geom_stripped_rows</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  xfrom <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>,</span>
+<span>  xto <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  nudge_y <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_stripped_cols</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  yfrom <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>,</span>
+<span>  yto <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  nudge_x <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -151,6 +151,8 @@ aesthetics <code>odd</code> and <code>even</code> that receive color codes.</p>
 <code><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>The data to be displayed in this layer. There are three
 options:</p>
@@ -163,70 +165,102 @@ data. All objects will be fortified to produce a data frame. See
 the plot data. The return value must be a <code>data.frame</code>, and
 will be used as the layer data. A <code>function</code> can be created
 from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></dd>
+
+
 <dt>stat</dt>
 <dd><p>The statistical transformation to use on the data for this
 layer, as a string.</p></dd>
+
+
 <dt>position</dt>
 <dd><p>Position adjustment, either as a string, or the result of
 a call to a position adjustment function.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer()</a></code>. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
 <code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
 to the paired geom/stat.</p></dd>
+
+
 <dt>show.legend</dt>
 <dd><p>logical. Should this layer be included in the legends?
 <code>NA</code>, the default, includes if any aesthetics are mapped.
 <code>FALSE</code> never includes, and <code>TRUE</code> always includes.
 It can also be a named logical vector to finely select the aesthetics to
 display.</p></dd>
+
+
 <dt>inherit.aes</dt>
 <dd><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders()</a></code>.</p></dd>
+
+
 <dt>xfrom, xto</dt>
 <dd><p>limitation of the strips along the x-axis</p></dd>
+
+
 <dt>width</dt>
 <dd><p>width of the strips</p></dd>
+
+
 <dt>yfrom, yto</dt>
 <dd><p>limitation of the strips along the y-axis</p></dd>
+
+
 <dt>nudge_x, nudge_y</dt>
 <dd><p>horizontal or vertical adjustment to nudge strips by</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">geom_count</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">geom_count</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">p</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">geom_count</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="geom_stripped_rows-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_y_discrete</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>xfrom <span class="op">=</span> <span class="fl">10</span>, xto <span class="op">=</span> <span class="fl">35</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>odd <span class="op">=</span> <span class="st">"blue"</span>, even <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>odd <span class="op">=</span> <span class="st">"blue"</span>, even <span class="op">=</span> <span class="st">"yellow"</span>, alpha <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>odd <span class="op">=</span> <span class="st">"#00FF0022"</span>, even <span class="op">=</span> <span class="st">"#FF000022"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">10</span>, nudge_x <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">tips</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">geom_count</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-5.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-6.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_y_discrete</span><span class="op">(</span>expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>xfrom <span class="op">=</span> <span class="fl">10</span>, xto <span class="op">=</span> <span class="fl">35</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-8.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>odd <span class="op">=</span> <span class="st">"blue"</span>, even <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-9.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>odd <span class="op">=</span> <span class="st">"blue"</span>, even <span class="op">=</span> <span class="st">"yellow"</span>, alpha <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-10.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_rows</span><span class="op">(</span>odd <span class="op">=</span> <span class="st">"#00FF0022"</span>, even <span class="op">=</span> <span class="st">"#FF000022"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-11.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-12.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-13.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span> <span class="op">+</span> <span class="fu">geom_stripped_cols</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">10</span>, nudge_x <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="geom_stripped_rows-14.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -241,7 +275,7 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

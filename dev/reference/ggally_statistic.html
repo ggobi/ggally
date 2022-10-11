@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,55 +113,82 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggally_statistic</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">mapping</span>,
-  <span class="va">text_fn</span>,
-  <span class="va">title</span>,
-  na.rm <span class="op">=</span> <span class="cn">NA</span>,
-  display_grid <span class="op">=</span> <span class="cn">FALSE</span>,
-  justify_labels <span class="op">=</span> <span class="st">"right"</span>,
-  justify_text <span class="op">=</span> <span class="st">"left"</span>,
-  sep <span class="op">=</span> <span class="st">": "</span>,
-  family <span class="op">=</span> <span class="st">"mono"</span>,
-  title_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  group_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  align_percent <span class="op">=</span> <span class="fl">0.5</span>,
-  title_hjust <span class="op">=</span> <span class="fl">0.5</span>,
-  group_hjust <span class="op">=</span> <span class="fl">0.5</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggally_statistic</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">mapping</span>,</span>
+<span>  <span class="va">text_fn</span>,</span>
+<span>  <span class="va">title</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  display_grid <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  justify_labels <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>  justify_text <span class="op">=</span> <span class="st">"left"</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">": "</span>,</span>
+<span>  family <span class="op">=</span> <span class="st">"mono"</span>,</span>
+<span>  title_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  group_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  align_percent <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  title_hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  group_hjust <span class="op">=</span> <span class="fl">0.5</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>data set using</p></dd>
+
+
 <dt>mapping</dt>
 <dd><p>aesthetics being used</p></dd>
+
+
 <dt>text_fn</dt>
 <dd><p>function that takes in <code>x</code> and <code>y</code> and returns a text string</p></dd>
+
+
 <dt>title</dt>
 <dd><p>title text to be displayed</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p>logical value which determines if <code>NA</code> values are removed. If <code>TRUE</code>, no warning message will be displayed.</p></dd>
+
+
 <dt>display_grid</dt>
 <dd><p>if <code>TRUE</code>, display aligned panel grid lines. If <code>FALSE</code> (default), display a thin panel border.</p></dd>
+
+
 <dt>justify_labels</dt>
 <dd><p><code>justify</code> argument supplied when <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></code>ting the labels</p></dd>
+
+
 <dt>justify_text</dt>
 <dd><p><code>justify</code> argument supplied when <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></code>ting the returned <code>text_fn(x, y)</code> values</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>separation value to be placed between the labels and text</p></dd>
+
+
 <dt>family</dt>
 <dd><p>font family used when displaying all text.  This value will be set in <code>title_args</code> or <code>group_args</code> if no <code>family</code> value exists.  By using <code>"mono"</code>, groups will align with each other.</p></dd>
+
+
 <dt>title_args</dt>
 <dd><p>arguments being supplied to the title's <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a>()</code></p></dd>
+
+
 <dt>group_args</dt>
 <dd><p>arguments being supplied to the split-by-color group's <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a>()</code></p></dd>
+
+
 <dt>align_percent</dt>
 <dd><p>relative align position of the text. When <code>title_hjust = 0.5</code> and <code>group_hjust = 0.5</code>, this should not be needed to be set.</p></dd>
+
+
 <dt>title_hjust, group_hjust</dt>
 <dd><p><code>hjust</code> sent to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a>()</code> for the title and group values respectively. Any <code>hjust</code> value supplied in <code>title_args</code> or <code>group_args</code> will take precedence.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -180,7 +207,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

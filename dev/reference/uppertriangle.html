@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,24 +113,31 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">uppertriangle</span><span class="op">(</span>
-  <span class="va">data</span>,
-  columns <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,
-  color <span class="op">=</span> <span class="cn">NULL</span>,
-  corMethod <span class="op">=</span> <span class="st">"pearson"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">uppertriangle</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
+<span>  color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  corMethod <span class="op">=</span> <span class="st">"pearson"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>a data matrix. Should contain numerical (continuous) data.</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>an option to choose the column to be used in the raw dataset. Defaults to <code>1:ncol(data)</code></p></dd>
+
+
 <dt>color</dt>
 <dd><p>an option to choose a factor variable to be grouped with. Defaults to <code>(NULL)</code></p></dd>
+
+
 <dt>corMethod</dt>
 <dd><p>method argument supplied to <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></code></p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -139,13 +146,13 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flea</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span>, columns<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flea</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span>, columns <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    xlab  ylab    r xvalue yvalue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 tars2 tars1 0.03  126.5  182.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  head tars1 -0.1   50.5  182.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3  head tars2 0.67   50.5  126.5</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    xlab  ylab     r xvalue yvalue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 tars2 tars1  0.03  126.5  182.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  head tars1  -0.1   50.5  182.0</span>
@@ -153,7 +160,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 aede1 tars1 -0.33  136.5  182.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 aede1 tars2  0.56  136.5  126.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 aede1  head  0.59  136.5   50.5</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span>, color<span class="op">=</span><span class="st">"species"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span>, color <span class="op">=</span> <span class="st">"species"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ylab  xlab colorcolumn    r xvalue yvalue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 tars1 tars2    Concinna 0.77  126.5    152</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 tars1 tars2    Heikert. 0.64  126.5    182</span>
@@ -175,7 +182,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

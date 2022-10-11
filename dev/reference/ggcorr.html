@@ -31,7 +31,7 @@ https://briatte.github.io/ggcorr/ for many examples of how to use it."><meta nam
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -123,33 +123,33 @@ of <code>ggcorr</code>, and see the vignette at
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggcorr</span><span class="op">(</span>
-  <span class="va">data</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pairwise"</span>, <span class="st">"pearson"</span><span class="op">)</span>,
-  cor_matrix <span class="op">=</span> <span class="cn">NULL</span>,
-  nbreaks <span class="op">=</span> <span class="cn">NULL</span>,
-  digits <span class="op">=</span> <span class="fl">2</span>,
-  name <span class="op">=</span> <span class="st">""</span>,
-  low <span class="op">=</span> <span class="st">"#3B9AB2"</span>,
-  mid <span class="op">=</span> <span class="st">"#EEEEEE"</span>,
-  high <span class="op">=</span> <span class="st">"#F21A00"</span>,
-  midpoint <span class="op">=</span> <span class="fl">0</span>,
-  palette <span class="op">=</span> <span class="cn">NULL</span>,
-  geom <span class="op">=</span> <span class="st">"tile"</span>,
-  min_size <span class="op">=</span> <span class="fl">2</span>,
-  max_size <span class="op">=</span> <span class="fl">6</span>,
-  label <span class="op">=</span> <span class="cn">FALSE</span>,
-  label_alpha <span class="op">=</span> <span class="cn">FALSE</span>,
-  label_color <span class="op">=</span> <span class="st">"black"</span>,
-  label_round <span class="op">=</span> <span class="fl">1</span>,
-  label_size <span class="op">=</span> <span class="fl">4</span>,
-  limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-  drop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">limits</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">limits</span>, <span class="cn">FALSE</span><span class="op">)</span>,
-  layout.exp <span class="op">=</span> <span class="fl">0</span>,
-  legend.position <span class="op">=</span> <span class="st">"right"</span>,
-  legend.size <span class="op">=</span> <span class="fl">9</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggcorr</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pairwise"</span>, <span class="st">"pearson"</span><span class="op">)</span>,</span>
+<span>  cor_matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  nbreaks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  low <span class="op">=</span> <span class="st">"#3B9AB2"</span>,</span>
+<span>  mid <span class="op">=</span> <span class="st">"#EEEEEE"</span>,</span>
+<span>  high <span class="op">=</span> <span class="st">"#F21A00"</span>,</span>
+<span>  midpoint <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"tile"</span>,</span>
+<span>  min_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  max_size <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  label_alpha <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  label_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  label_round <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  label_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  drop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">limits</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">limits</span>, <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  layout.exp <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  legend.position <span class="op">=</span> <span class="st">"right"</span>,</span>
+<span>  legend.size <span class="op">=</span> <span class="fl">9</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -158,6 +158,8 @@ of <code>ggcorr</code>, and see the vignette at
 <dd><p>a data frame or matrix containing numeric (continuous) data. If
 any of the columns contain non-numeric data, they will be dropped with a
 warning.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>a vector of two character strings. The first value gives the
 method for computing covariances in the presence of missing values, and must
@@ -168,92 +170,139 @@ correlation coefficient to compute, and must be one of <code>"pearson"</code>,
 <code>"kendall"</code> or <code>"spearman"</code>.
 See <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></code> for details.
 Defaults to <code>c("pairwise", "pearson")</code>.</p></dd>
+
+
 <dt>cor_matrix</dt>
 <dd><p>the named correlation matrix to use for calculations.
 Defaults to the correlation matrix of <code>data</code> when <code>data</code> is
 supplied.</p></dd>
+
+
 <dt>nbreaks</dt>
 <dd><p>the number of breaks to apply to the correlation coefficients,
 which results in a categorical color scale. See 'Note'.
 Defaults to <code>NULL</code> (no breaks, continuous scaling).</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>the number of digits to show in the breaks of the correlation
 coefficients: see <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></code> for details.
 Defaults to <code>2</code>.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>a character string for the legend that shows the colors of the
 correlation coefficients.
 Defaults to <code>""</code> (no legend name).</p></dd>
+
+
 <dt>low</dt>
 <dd><p>the lower color of the gradient for continuous scaling of the
 correlation coefficients.
 Defaults to <code>"#3B9AB2"</code> (blue).</p></dd>
+
+
 <dt>mid</dt>
 <dd><p>the midpoint color of the gradient for continuous scaling of the
 correlation coefficients.
 Defaults to <code>"#EEEEEE"</code> (very light grey).</p></dd>
+
+
 <dt>high</dt>
 <dd><p>the upper color of the gradient for continuous scaling of the
 correlation coefficients.
 Defaults to <code>"#F21A00"</code> (red).</p></dd>
+
+
 <dt>midpoint</dt>
 <dd><p>the midpoint value for continuous scaling of the
 correlation coefficients.
 Defaults to <code>0</code>.</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>if <code>nbreaks</code> is used, a ColorBrewer palette to use
 instead of the colors specified by <code>low</code>, <code>mid</code> and <code>high</code>.
 Defaults to <code>NULL</code>.</p></dd>
+
+
 <dt>geom</dt>
 <dd><p>the geom object to use. Accepts either <code>"tile"</code>,
 <code>"circle"</code>, <code>"text"</code> or <code>"blank"</code>.</p></dd>
+
+
 <dt>min_size</dt>
 <dd><p>when <code>geom</code> has been set to <code>"circle"</code>, the minimum
 size of the circles.
 Defaults to <code>2</code>.</p></dd>
+
+
 <dt>max_size</dt>
 <dd><p>when <code>geom</code> has been set to <code>"circle"</code>, the maximum
 size of the circles.
 Defaults to <code>6</code>.</p></dd>
+
+
 <dt>label</dt>
 <dd><p>whether to add correlation coefficients to the plot.
 Defaults to <code>FALSE</code>.</p></dd>
+
+
 <dt>label_alpha</dt>
 <dd><p>whether to make the correlation coefficients increasingly
 transparent as they come close to 0. Also accepts any numeric value between
 <code>0</code> and <code>1</code>, in which case the level of transparency is set to that
 fixed value.
 Defaults to <code>FALSE</code> (no transparency).</p></dd>
+
+
 <dt>label_color</dt>
 <dd><p>the color of the correlation coefficients.
 Defaults to <code>"grey75"</code>.</p></dd>
+
+
 <dt>label_round</dt>
 <dd><p>the decimal rounding of the correlation coefficients.
 Defaults to <code>1</code>.</p></dd>
+
+
 <dt>label_size</dt>
 <dd><p>the size of the correlation coefficients.
 Defaults to <code>4</code>.</p></dd>
+
+
 <dt>limits</dt>
 <dd><p>bounding of color scaling for correlations, set <code>limits = NULL</code> or <code>FALSE</code> to remove</p></dd>
+
+
 <dt>drop</dt>
 <dd><p>if using <code>nbreaks</code>, whether to drop unused breaks from the
 color scale.
 Defaults to <code>FALSE</code> (recommended).</p></dd>
+
+
 <dt>layout.exp</dt>
 <dd><p>a multiplier to expand the horizontal axis to the left if
 variable names get clipped.
 Defaults to <code>0</code> (no expansion).</p></dd>
+
+
 <dt>legend.position</dt>
 <dd><p>where to put the legend of the correlation
 coefficients: see <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></code> for details.
 Defaults to <code>"bottom"</code>.</p></dd>
+
+
 <dt>legend.size</dt>
 <dd><p>the size of the legend title and labels, in points: see
 <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></code> for details.
 Defaults to <code>9</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other arguments supplied to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></code> for
 the diagonal labels.</p></dd>
+
 </dl></div>
     <div id="note">
     <h2>Note</h2>
@@ -274,39 +323,43 @@ Barret Schloerke</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Small function to display plots only if it's interactive</span></span>
-<span class="r-in"><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Basketball statistics provided by Nathan Yau at Flowing Data.</span></span>
-<span class="r-in"><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"http://datasets.flowingdata.com/ppg2008.csv"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Default output.</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span><span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Labeled output, with coefficient transparency.</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span><span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span class="r-in">       label <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">       label_alpha <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Custom options.</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span class="r-in">  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>,</span>
-<span class="r-in">  geom <span class="op">=</span> <span class="st">"circle"</span>,</span>
-<span class="r-in">  max_size <span class="op">=</span> <span class="fl">10</span>,</span>
-<span class="r-in">  min_size <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">  size <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  hjust <span class="op">=</span> <span class="fl">0.75</span>,</span>
-<span class="r-in">  nbreaks <span class="op">=</span> <span class="fl">6</span>,</span>
-<span class="r-in">  angle <span class="op">=</span> <span class="op">-</span><span class="fl">45</span>,</span>
-<span class="r-in">  palette <span class="op">=</span> <span class="st">"PuOr"</span> <span class="co"># colorblind safe, photocopy-able</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Supply your own correlation matrix</span></span>
-<span class="r-in"><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span></span>
-<span class="r-in">  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span class="r-in">  cor_matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>, use <span class="op">=</span> <span class="st">"pairwise"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Basketball statistics provided by Nathan Yau at Flowing Data.</span></span></span>
+<span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"http://datasets.flowingdata.com/ppg2008.csv"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Default output.</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span><span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggcorr-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Labeled output, with coefficient transparency.</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span><span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>       label <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>       label_alpha <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggcorr-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Custom options.</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  geom <span class="op">=</span> <span class="st">"circle"</span>,</span></span>
+<span class="r-in"><span>  max_size <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>  min_size <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  size <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  hjust <span class="op">=</span> <span class="fl">0.75</span>,</span></span>
+<span class="r-in"><span>  nbreaks <span class="op">=</span> <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>  angle <span class="op">=</span> <span class="op">-</span><span class="fl">45</span>,</span></span>
+<span class="r-in"><span>  palette <span class="op">=</span> <span class="st">"PuOr"</span> <span class="co"># colorblind safe, photocopy-able</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggcorr-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Supply your own correlation matrix</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcorr</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  cor_matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">dt</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>, use <span class="op">=</span> <span class="st">"pairwise"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ggcorr-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -321,7 +374,7 @@ Barret Schloerke</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -113,22 +113,27 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggmatrix_gtable</span><span class="op">(</span>
-  <span class="va">pm</span>,
-  <span class="va">...</span>,
-  progress <span class="op">=</span> <span class="cn">NULL</span>,
-  progress_format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/formals.html" class="external-link">formals</a></span><span class="op">(</span><span class="va">ggmatrix_progress</span><span class="op">)</span><span class="op">$</span><span class="va">format</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggmatrix_gtable</span><span class="op">(</span></span>
+<span>  <span class="va">pm</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  progress_format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/formals.html" class="external-link">formals</a></span><span class="op">(</span><span class="va">ggmatrix_progress</span><span class="op">)</span><span class="op">$</span><span class="va">format</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pm</dt>
 <dd><p><code><a href="ggmatrix.html">ggmatrix</a></code> object to be plotted</p></dd>
+
+
 <dt>...</dt>
 <dd><p>ignored</p></dd>
+
+
 <dt>progress, progress_format</dt>
 <dd><p>Please use the 'progress' parameter in your <code><a href="ggmatrix.html">ggmatrix</a></code>-like function.  See <code><a href="ggmatrix_progress.html">ggmatrix_progress</a></code> for a few examples.  These parameters will soon be deprecated.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -137,49 +142,49 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ggmatrix_gtable</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ggmatrix_gtable</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> TableGrob (17 x 14) "layout": 36 grobs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     z         cells       name                                   grob</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0 ( 1-17, 1-14) background       rect[plot.background..rect.1394]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1 ( 8- 8, 5- 5)  panel-1-1                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   1 (10-10, 5- 5)  panel-2-1                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1 (12-12, 5- 5)  panel-3-1                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   1 ( 8- 8, 7- 7)  panel-1-2                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   1 (10-10, 7- 7)  panel-2-2                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   1 (12-12, 7- 7)  panel-3-2                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   1 ( 8- 8, 9- 9)  panel-1-3                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   1 (10-10, 9- 9)  panel-2-3                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  1 (12-12, 9- 9)  panel-3-3                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  3 ( 6- 6, 5- 5)   axis-t-1                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  3 ( 6- 6, 7- 7)   axis-t-2                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  3 ( 6- 6, 9- 9)   axis-t-3                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  3 (13-13, 5- 5)   axis-b-1                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  3 (13-13, 7- 7)   axis-b-2                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  3 (13-13, 9- 9)   axis-b-3                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  3 ( 8- 8, 4- 4)   axis-l-1                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  3 (10-10, 4- 4)   axis-l-2                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  3 (12-12, 4- 4)   axis-l-3                         gtable[layout]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  3 ( 8- 8,11-11)   axis-r-1                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  3 (10-10,11-11)   axis-r-2                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  3 (12-12,11-11)   axis-r-3                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23  2 ( 7- 7, 5- 5)  strip-t-1                          gtable[strip]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24  2 ( 7- 7, 7- 7)  strip-t-2                          gtable[strip]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25  2 ( 7- 7, 9- 9)  strip-t-3                          gtable[strip]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  2 ( 8- 8,10-10)  strip-r-1                          gtable[strip]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  2 (10-10,10-10)  strip-r-2                          gtable[strip]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  2 (12-12,10-10)  strip-r-3                          gtable[strip]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  4 ( 5- 5, 5- 9)     xlab-t                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  5 (14-14, 5- 9)     xlab-b                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  6 ( 8-12, 3- 3)     ylab-l                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  7 ( 8-12,12-12)     ylab-r                         zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  8 ( 4- 4, 5- 9)   subtitle zeroGrob[plot.subtitle..zeroGrob.1390]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  9 ( 3- 3, 5- 9)      title    zeroGrob[plot.title..zeroGrob.1389]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35 10 (15-15, 5- 9)    caption  zeroGrob[plot.caption..zeroGrob.1392]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36 11 ( 2- 2, 2- 2)        tag      zeroGrob[plot.tag..zeroGrob.1391]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     z         cells       name                                    grob</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0 ( 1-17, 1-14) background       rect[plot.background..rect.43971]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   1 ( 8- 8, 5- 5)  panel-1-1                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   1 (10-10, 5- 5)  panel-2-1                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1 (12-12, 5- 5)  panel-3-1                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   1 ( 8- 8, 7- 7)  panel-1-2                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   1 (10-10, 7- 7)  panel-2-2                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   1 (12-12, 7- 7)  panel-3-2                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   1 ( 8- 8, 9- 9)  panel-1-3                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   1 (10-10, 9- 9)  panel-2-3                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  1 (12-12, 9- 9)  panel-3-3                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  3 ( 6- 6, 5- 5)   axis-t-1                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  3 ( 6- 6, 7- 7)   axis-t-2                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  3 ( 6- 6, 9- 9)   axis-t-3                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  3 (13-13, 5- 5)   axis-b-1                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  3 (13-13, 7- 7)   axis-b-2                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  3 (13-13, 9- 9)   axis-b-3                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  3 ( 8- 8, 4- 4)   axis-l-1                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  3 (10-10, 4- 4)   axis-l-2                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  3 (12-12, 4- 4)   axis-l-3                          gtable[layout]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  3 ( 8- 8,11-11)   axis-r-1                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  3 (10-10,11-11)   axis-r-2                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  3 (12-12,11-11)   axis-r-3                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  2 ( 7- 7, 5- 5)  strip-t-1                           gtable[strip]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  2 ( 7- 7, 7- 7)  strip-t-2                           gtable[strip]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  2 ( 7- 7, 9- 9)  strip-t-3                           gtable[strip]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  2 ( 8- 8,10-10)  strip-r-1                           gtable[strip]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  2 (10-10,10-10)  strip-r-2                           gtable[strip]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  2 (12-12,10-10)  strip-r-3                           gtable[strip]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  4 ( 5- 5, 5- 9)     xlab-t                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  5 (14-14, 5- 9)     xlab-b                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  6 ( 8-12, 3- 3)     ylab-l                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  7 ( 8-12,12-12)     ylab-r                          zeroGrob[NULL]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  8 ( 4- 4, 5- 9)   subtitle zeroGrob[plot.subtitle..zeroGrob.43967]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  9 ( 3- 3, 5- 9)      title    zeroGrob[plot.title..zeroGrob.43966]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35 10 (15-15, 5- 9)    caption  zeroGrob[plot.caption..zeroGrob.43969]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36 11 ( 2- 2, 2- 2)        tag      zeroGrob[plot.tag..zeroGrob.43968]</span>
 </code></pre></div>
     </div>
   </div>
@@ -194,7 +199,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -46,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -148,19 +148,19 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
-<span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: ggplot2</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span></span>
+<span><span class="co">#&gt;   method from   </span></span>
+<span><span class="co">#&gt;   +.gg   ggplot2</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="ggallyggscatmat">
 <code>GGally::ggscatmat()</code><a class="anchor" aria-label="anchor" href="#ggallyggscatmat"></a>
 </h2>
 <p>The primary function is <code><a href="../reference/ggscatmat.html">ggscatmat()</a></code>. It is similar to <code><a href="../reference/ggpairs.html">ggpairs()</a></code> but only works for purely numeric multivariate data. It is faster than <code><a href="../reference/ggpairs.html">ggpairs()</a></code>, because less choices need to be made. It creates a matrix with scatterplots in the lower diagonal, densities on the diagonal and correlations written in the upper diagonal. Syntax is to enter the dataset, the columns that you want to plot, a color column, and an alpha level.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flea</span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">flea</span>, columns <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, color<span class="op">=</span><span class="st">"species"</span>, alpha<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flea</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">flea</span>, columns <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, color <span class="op">=</span> <span class="st">"species"</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggscatmat_files/figure-html/ggscatmat-basic-usage-1.png" width="672"></p>
 <p>In this plot, you can see that the three different species vary a little from each other in these three variables. Heptapot (blue) has smaller values on the variable <code>tars1</code> than the other two. The correlation between the three variables is similar for all species.</p>
 <div class="section level3">
@@ -188,7 +188,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
