@@ -191,14 +191,17 @@ y_range <- range(unlist(residuals))
 
 # custom function to display continuous data. If the y variable is "Residual", do custom work.
 lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
-  if (as.character(mapping$y) != "Residual") {
+  if (!identical(
+    rlang::expr_text(mapping$y),
+    rlang::expr_text(ggplot2::aes(y = Residual)$y)
+  )) {
     return(ggally_smooth_lm(data, mapping, ...))
   }
 
   # make residual data to display
   resid_data <- data.frame(
-    x = data[[as.character(mapping$x)]],
-    y = residuals[[as.character(mapping$x)]]
+    x = rlang::eval_tidy(mapping$x, data = data),
+    y = rlang::eval_tidy(mapping$x, data = residuals)
   )
 
   ggplot(data = data, mapping = mapping) +
