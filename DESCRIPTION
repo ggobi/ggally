@@ -72,6 +72,8 @@ Suggests:
     tibble,
     cubble,
     vdiffr
+Remotes:
+    huizezhang-sherry/cubble
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 SystemRequirements: openssl

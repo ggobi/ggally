@@ -50,9 +50,6 @@ glyphs <- function(
   y_scale = identity,
   x_scale = identity
 ) {
-
-  x_scale <- enquo(x_scale)
-  y_scale <- enquo(y_scale)
   out <- glyph_layer(data, component = "glyph",
                      x_major, x_minor, y_major, y_minor,
                      polar, height, width, x_scale, y_scale)
@@ -62,7 +59,7 @@ glyphs <- function(
 
   data <- data %>% dplyr::bind_cols(new_cols)
 
-  if (!identical(x_scale, identity) || !identical(y_scale, identity)){
+  if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
     data[[x_minor]] <- out$x_minor
     data[[y_minor]] <- out$y_minor
   }
@@ -76,77 +73,112 @@ glyphs <- function(
 
 
 
-glyph_layer <- function(data, component = c("glyph", "line", "box"),
-                        x_major, x_minor, y_major, y_minor,
-                        polar, height, width, x_scale, y_scale){
+glyph_layer <- function(
+  data,
+  component = c("glyph", "line", "box"),
+  x_major = attr(data, "x_major"),
+  x_minor = attr(data, "x_minor"),
+  y_major = attr(data, "y_major"),
+  y_minor = attr(data, "y_minor"),
+  polar = attr(data, "polar"),
+  height = attr(data, "height"),
+  width = attr(data, "width"),
+  x_scale = identity,
+  y_scale = identity
+) {
+  p <-
+    ggplot2::ggplot(
+      data = data,
+      aes_string(
+        x_major = x_major,
+        x_minor = x_minor,
+        y_major = y_major,
+        y_minor = y_minor
+      ),
+      polar = polar,
+      height = height,
+      width = width
+    )
 
-  if (missing(x_major)) x_major <- attr(data, "x_major")
-  if (missing(x_minor)) x_minor <- attr(data, "x_minor")
-  if (missing(y_major)) y_major <- attr(data, "y_major")
-  if (missing(y_minor)) y_minor <- attr(data, "y_minor")
-  if (missing(polar)) polar <- attr(data, "polar")
-  if (missing(width)) width <- attr(data, "width")
-  if (missing(height)) height <- attr(data, "height")
-
-  p <- ggplot2::ggplot(data = data,
-                         aes(x_major = .data[[x_major]], x_minor = .data[[x_minor]],
-                             y_major = .data[[y_major]], y_minor = .data[[y_minor]]),
-                         polar = polar, height = height, width = width)
-
-  out <- switch (component,
-    "glyph" = p + cubble::geom_glyph(x_scale = rlang::quo_name(x_scale),
-                                     y_scale = rlang::quo_name(y_scale)),
+  out <- switch(
+    component,
+    "glyph" = p + cubble::geom_glyph(x_scale = x_scale, y_scale = y_scale),
     "line" = p + cubble::geom_glyph_line(),
     "box" = p + cubble::geom_glyph_box()
   )
 
   res <- ggplot2::layer_data(out)
 
-  if (component %in% c("line", "box")) res <- res %>% dplyr::rename(gx = x, gy = y, gid = group)
+  if (component %in% c("line", "box")) {
+    res <- res %>% dplyr::rename(gx = x, gy = y, gid = group)
+  }
   res
 }
 
+
+#' Add reference lines for each cell of the glyphmap.
+#'
+#' @param data A glyphmap structure.
+#' @param color Set the color to draw in, default is "white"
+#' @param size Set the line size, default is 1.5
+#' @param ... other arguments passed onto [ggplot2::geom_line()]
+#' @export
 add_ref_lines <- function(data, color = "white", size = 1.5, ...) {
   data <- glyph_layer(data, component = "line")
   ggplot2::geom_path(data = data, color = color, size = size, ...)
 }
 
+#' Add reference boxes around each cell of the glyphmap.
+#'
+#' @param data A glyphmap structure.
+#' @param var_fill Variable name to use to set the fill color
+#' @param color Set the color to draw in, default is "white"
+#' @param size Set the line size, default is 0.5
+#' @param fill fill value used if \code{var_fill} is \code{NULL}
+#' @param ... other arguments passed onto [ggplot2::geom_rect()]
+#' @export
 add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
                           fill = NA, ...) {
   data <- glyph_layer(data, component = "box")
-  data <- data %>% dplyr::select(.data$gid, .data$gx, .data$gy, .data$xmin:.data$ymax)
+  data <- data %>% dplyr::select(gid, gx, gy, xmin:ymax)
 
   if (!is.null(var_fill)) data$fill <- var_fill
   suppressWarnings(ggplot2::geom_rect(
     data = data,
     aes_all(names(data)),
-    color = color, size = size,fill = fill, ...))
+    color = color, size = size, fill = fill, ...))
 }
 
+#' Rescaling functions
+#'
+#' @param x numeric vector
+#' @param xlim value used in \code{range}
 #' @export
-#' @rdname rescale01
+#' @describeIn rescale01 Rescale all values to [0, 1]
 range01 <- function(x) {
   rng <- range(x, na.rm = TRUE)
   (x - rng[1]) / (rng[2] - rng[1])
 }
 
 #' @export
-#' @rdname rescale01
+#' @describeIn rescale01 Divide by the maximum value
 max1 <- function(x) {
   x / max(x, na.rm = TRUE)
 }
 #' @export
-#' @rdname rescale01
+#' @describeIn rescale01 Subtract the mean value
 mean0 <- function(x) {
   x - mean(x, na.rm = TRUE)
 }
 #' @export
-#' @rdname rescale01
+#' @describeIn rescale01 Subtract the minimum value
 min0 <- function(x) {
   x - min(x, na.rm = TRUE)
 }
 #' @export
-#' @rdname rescale01
+#' @describeIn rescale01 Rescale all values given a range. If no range is
+#'   provided, the min and max values are used. By default, this will result in
+#'   values from `[0, 1]`.
 rescale01 <- function(x, xlim = NULL) {
   if (is.null(xlim)) {
     rng <- range(x, na.rm = TRUE)
@@ -156,7 +188,9 @@ rescale01 <- function(x, xlim = NULL) {
   (x - rng[1]) / (rng[2] - rng[1])
 }
 #' @export
-#' @rdname rescale01
+#' @describeIn rescale01 Rescale all values given a range. If no range is
+#'   provided, the min and max values are used. By default, this will result in
+#'   values from `[-1, 1]`.
 rescale11 <- function(x, xlim = NULL) {
   2 * rescale01(x, xlim) - 1
 }
