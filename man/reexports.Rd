@@ -7,6 +7,8 @@
 \alias{ggcoef_compare}
 \alias{ggcoef_multinom}
 \alias{ggcoef_plot}
+\alias{geom_stripped_cols}
+\alias{geom_stripped_rows}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -14,6 +16,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ggstats}{\code{\link[ggstats:ggcoef_model]{ggcoef_compare}}, \code{\link[ggstats]{ggcoef_model}}, \code{\link[ggstats:ggcoef_model]{ggcoef_multinom}}, \code{\link[ggstats:ggcoef_model]{ggcoef_plot}}}
+  \item{ggstats}{\code{\link[ggstats:geom_stripped_rows]{geom_stripped_cols}}, \code{\link[ggstats]{geom_stripped_rows}}, \code{\link[ggstats:ggcoef_model]{ggcoef_compare}}, \code{\link[ggstats]{ggcoef_model}}, \code{\link[ggstats:ggcoef_model]{ggcoef_multinom}}, \code{\link[ggstats:ggcoef_model]{ggcoef_plot}}}
 }}
 
