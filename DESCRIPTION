@@ -32,7 +32,6 @@ Depends:
     ggplot2 (>= 3.3.4)
 Imports:
     dplyr (>= 1.0.0),
-    forcats,
     grDevices,
     grid,
     ggstats,
@@ -44,7 +43,6 @@ Imports:
     reshape (>= 0.8.5),
     rlang,
     scales (>= 1.1.0),
-    tidyr,
     utils
 Suggests:
     broom (>= 0.7.0),
