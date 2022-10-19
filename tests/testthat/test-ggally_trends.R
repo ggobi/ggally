@@ -1,8 +1,57 @@
-context("ggally_trends")
+context("stat_weighted_mean")
 
 test_that("example", {
   skip_if_not_installed("reshape")
   data(tips, package = "reshape")
+
+  vdiffr::expect_doppelganger(
+    "point",
+    ggplot(tips) +
+       aes(x = day, y = total_bill) +
+       geom_point())
+
+  vdiffr::expect_doppelganger(
+    "geom-default",
+    ggplot(tips) +
+       aes(x = day, y = total_bill) +
+       stat_weighted_mean())
+
+  vdiffr::expect_doppelganger(
+    "geom-line",
+    ggplot(tips) +
+       aes(x = day, y = total_bill, group = 1) +
+       stat_weighted_mean(geom = "line"))
+
+  vdiffr::expect_doppelganger(
+    "geom-line-grouped",
+    ggplot(tips) +
+       aes(x = day, y = total_bill, colour = sex, group = sex) +
+       stat_weighted_mean(geom = "line"))
+
+  vdiffr::expect_doppelganger(
+    "geom-bar-dodge",
+    ggplot(tips) +
+       aes(x = day, y = total_bill, fill = sex) +
+       stat_weighted_mean(geom = "bar", position = "dodge"))
+
+  # computing a proportion on the fly
+  vdiffr::expect_doppelganger(
+    "geom-bar-dodge-percent",
+    ggplot(tips) +
+       aes(x = day, y = as.integer(smoker == "Yes"), fill = sex) +
+       stat_weighted_mean(geom = "bar", position = "dodge") +
+       scale_y_continuous(labels = scales::percent))
+
+  # taking into account some weights
+  d <- as.data.frame(Titanic)
+  vdiffr::expect_doppelganger(
+    "titanic",
+    ggplot(d) +
+       aes(x = Class, y = as.integer(Survived == "Yes"), weight = Freq, fill = Sex) +
+       geom_bar(stat = "weighted_mean", position = "dodge") +
+       scale_y_continuous(labels = scales::percent) +
+       labs(y = "Survived"))
+
 
   tips_f <- tips
   tips_f$day <- factor(tips$day, c("Thur", "Fri", "Sat", "Sun"))

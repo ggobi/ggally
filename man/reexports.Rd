@@ -7,8 +7,12 @@
 \alias{ggcoef_compare}
 \alias{ggcoef_multinom}
 \alias{ggcoef_plot}
+\alias{signif_stars}
 \alias{geom_stripped_cols}
 \alias{geom_stripped_rows}
+\alias{stat_cross}
+\alias{stat_prop}
+\alias{stat_weighted_mean}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -16,6 +20,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ggstats}{\code{\link[ggstats:geom_stripped_rows]{geom_stripped_cols}}, \code{\link[ggstats]{geom_stripped_rows}}, \code{\link[ggstats:ggcoef_model]{ggcoef_compare}}, \code{\link[ggstats]{ggcoef_model}}, \code{\link[ggstats:ggcoef_model]{ggcoef_multinom}}, \code{\link[ggstats:ggcoef_model]{ggcoef_plot}}}
+  \item{ggstats}{\code{\link[ggstats:geom_stripped_rows]{geom_stripped_cols}}, \code{\link[ggstats]{geom_stripped_rows}}, \code{\link[ggstats:ggcoef_model]{ggcoef_compare}}, \code{\link[ggstats]{ggcoef_model}}, \code{\link[ggstats:ggcoef_model]{ggcoef_multinom}}, \code{\link[ggstats:ggcoef_model]{ggcoef_plot}}, \code{\link[ggstats]{signif_stars}}, \code{\link[ggstats]{stat_cross}}, \code{\link[ggstats]{stat_prop}}, \code{\link[ggstats]{stat_weighted_mean}}}
 }}
 
