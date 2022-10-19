@@ -35,6 +35,7 @@ Imports:
     forcats,
     grDevices,
     grid,
+    ggstats,
     gtable (>= 0.2.0),
     lifecycle,
     plyr (>= 1.8.3),
