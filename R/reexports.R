@@ -32,10 +32,22 @@ ggstats::geom_stripped_rows
 #' @export
 ggstats::stat_cross
 
+#' @importFrom ggstats StatCross
+#' @export
+ggstats::StatCross
+
 #' @importFrom ggstats stat_prop
 #' @export
 ggstats::stat_prop
 
+#' @importFrom ggstats StatProp
+#' @export
+ggstats::StatProp
+
 #' @importFrom ggstats stat_weighted_mean
 #' @export
 ggstats::stat_weighted_mean
+
+#' @importFrom ggstats StatWeightedMean
+#' @export
+ggstats::StatWeightedMean
