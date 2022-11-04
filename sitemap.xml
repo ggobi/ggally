@@ -1,7 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ggobi.github.io/ggally/404.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/ISSUE_TEMPLATE.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggally_plots.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggally_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggbivariate.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggcoef.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggcoef_model.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggduo.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggmatrix.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggnetworkmap.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggnostic.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggpairs.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggscatmat.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggsurv.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/ggtable.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/glyph.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/authors.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ggobi.github.io/ggally/news/index.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/GGally-package.html</loc>
@@ -38,9 +95,6 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/fn_switch.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/reference/geom_stripped_rows.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/getPlot.html</loc>
@@ -166,9 +220,6 @@
     <loc>https://ggobi.github.io/ggally/reference/ggcoef.html</loc>
   </url>
   <url>
-    <loc>https://ggobi.github.io/ggally/reference/ggcoef_model.html</loc>
-  </url>
-  <url>
     <loc>https://ggobi.github.io/ggally/reference/ggcorr.html</loc>
   </url>
   <url>
@@ -235,6 +286,9 @@
     <loc>https://ggobi.github.io/ggally/reference/happy.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/is_blank_plot.html</loc>
   </url>
   <url>
@@ -286,6 +340,9 @@
     <loc>https://ggobi.github.io/ggally/reference/putPlot.html</loc>
   </url>
   <url>
+    <loc>https://ggobi.github.io/ggally/reference/reexports.html</loc>
+  </url>
+  <url>
     <loc>https://ggobi.github.io/ggally/reference/remove_color_unless_equal.html</loc>
   </url>
   <url>
@@ -301,22 +358,10 @@
     <loc>https://ggobi.github.io/ggally/reference/scatmat.html</loc>
   </url>
   <url>
-    <loc>https://ggobi.github.io/ggally/reference/signif_stars.html</loc>
-  </url>
-  <url>
     <loc>https://ggobi.github.io/ggally/reference/singleClassOrder.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/skewness.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/reference/stat_cross.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/reference/stat_prop.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/reference/stat_weighted_mean.html</loc>
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/str.ggmatrix.html</loc>
@@ -335,47 +380,5 @@
   </url>
   <url>
     <loc>https://ggobi.github.io/ggally/reference/wrap.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggally_plots.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggally_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggbivariate.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggcoef.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggcoef_model.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggduo.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggmatrix.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggnetworkmap.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggnostic.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggpairs.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggscatmat.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggsurv.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/ggtable.html</loc>
-  </url>
-  <url>
-    <loc>https://ggobi.github.io/ggally/articles/glyph.html</loc>
   </url>
 </urlset>

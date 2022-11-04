@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,30 +35,25 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li class="divider">
-    <li class="dropdown-header">Generic plot matrix</li>
+    </li>
+<li class="dropdown-header">Generic plot matrix</li>
     <li>
       <a href="../articles/ggpairs.html">ggpairs(): Pairwise plot matrix</a>
     </li>
@@ -70,7 +67,8 @@
       <a href="../articles/ggally_plots.html">ggally_*(): List of available high-level plots</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized plot matrix</li>
+    </li>
+<li class="dropdown-header">Specialized plot matrix</li>
     <li>
       <a href="../articles/ggbivariate.html">ggbivariate(): Plot an outcome with several potential explanatory variables</a>
     </li>
@@ -87,7 +85,8 @@
       <a href="../articles/ggally_stats.html">stat_*(): Additional statistics for ggplot2</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Specialized ggplot2 plot</li>
+    </li>
+<li class="dropdown-header">Specialized ggplot2 plot</li>
     <li>
       <a href="../articles/ggcoef_model.html">ggcoef_model(): Model coefficients</a>
     </li>
@@ -111,7 +110,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggobi/ggally/">
+  <a href="https://github.com/ggobi/ggally/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -136,11 +135,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggcoef(): Model coefficients</h1>
-                        <h4 class="author">Joseph Larmarange</h4>
+                        <h4 data-toc-skip class="author">Joseph Larmarange</h4>
             
-            <h4 class="date">May 16, 2016</h4>
+            <h4 data-toc-skip class="date">May 16, 2016</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/master/vignettes/ggcoef.Rmd"><code>vignettes/ggcoef.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/HEAD/vignettes/ggcoef.Rmd" class="external-link"><code>vignettes/ggcoef.Rmd</code></a></small>
       <div class="hidden name"><code>ggcoef.Rmd</code></div>
 
     </div>
@@ -148,63 +147,63 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span>
-<span class="co">#&gt;   method from   </span>
-<span class="co">#&gt;   +.gg   ggplot2</span></code></pre></div>
-<div id="ggallyggcoef" class="section level1">
-<h1 class="hasAnchor">
-<a href="#ggallyggcoef" class="anchor"></a><code>GGally::ggcoef()</code>
-</h1>
-<p>The purpose of this function is to quickly plot the coefficients of a model. For an updated and improved version, see <code><a href="../reference/ggcoef_model.html">GGally::ggcoef_model()</a></code> and the <a href="https://ggobi.github.io/ggally/articles/ggcoef_model.html">corresponding vignette</a>.</p>
-<div id="quick-coefficients-plot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quick-coefficients-plot" class="anchor"></a>Quick coefficients plot</h2>
-<p>To work automatically, this function requires the <code>broom</code> package. Simply call <code><a href="../reference/ggcoef.html">ggcoef()</a></code> with a model object. It could be the result of <code><a href="https://rdrr.io/r/stats/lm.html">stats::lm</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html">stats::glm</a></code> or any other model covered by <code>broom</code> and its <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy</a></code> method<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: ggplot2</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'GGally':</span></span>
+<span><span class="co">#&gt;   method from   </span></span>
+<span><span class="co">#&gt;   +.gg   ggplot2</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="ggallyggcoef">
+<code>GGally::ggcoef()</code><a class="anchor" aria-label="anchor" href="#ggallyggcoef"></a>
+</h2>
+<p>The purpose of this function is to quickly plot the coefficients of a model. For an updated and improved version, see <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">GGally::ggcoef_model()</a></code> and the <a href="https://ggobi.github.io/ggally/articles/ggcoef_model.html">corresponding vignette</a>.</p>
+<div class="section level3">
+<h3 id="quick-coefficients-plot">Quick coefficients plot<a class="anchor" aria-label="anchor" href="#quick-coefficients-plot"></a>
+</h3>
+<p>To work automatically, this function requires the <code>broom</code> package. Simply call <code><a href="../reference/ggcoef.html">ggcoef()</a></code> with a model object. It could be the result of <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm</a></code> or any other model covered by <code>broom</code> and its <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy</a></code> method<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span> <span class="op">+</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="va">Petal.Width</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">reg</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span> <span class="op">+</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="va">Petal.Width</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">reg</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-reg-1.png" width="700"></p>
 <p>In the case of a logistic regression (or any other model for which coefficients are usually exponentiated), simply indicated <code>exponentiate = TRUE</code>. Note that a logarithmic scale will be used for the x-axis.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>
-<span class="va">log.reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Class</span>, family <span class="op">=</span> <span class="va">binomial</span>, data <span class="op">=</span> <span class="va">d</span>, weights <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">Freq</span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">log.reg</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
+<span><span class="va">log.reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Class</span>, family <span class="op">=</span> <span class="va">binomial</span>, data <span class="op">=</span> <span class="va">d</span>, weights <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">Freq</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">log.reg</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-titanic-1.png" width="700"></p>
 </div>
-<div id="customizing-the-plot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#customizing-the-plot" class="anchor"></a>Customizing the plot</h2>
+<div class="section level3">
+<h3 id="customizing-the-plot">Customizing the plot<a class="anchor" aria-label="anchor" href="#customizing-the-plot"></a>
+</h3>
 <p>You can use <code>conf.int</code>, <code>vline</code> and <code>exclude_intercept</code> to display or not confidence intervals as error bars, a vertical line for <code>x = 0</code> (or <code>x = 1</code> if coefficients are exponentiated) and the intercept.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">reg</span>, vline <span class="op">=</span> <span class="cn">FALSE</span>, conf.int <span class="op">=</span> <span class="cn">FALSE</span>, exclude_intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">reg</span>, vline <span class="op">=</span> <span class="cn">FALSE</span>, conf.int <span class="op">=</span> <span class="cn">FALSE</span>, exclude_intercept <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-reg-custom-1.png" width="700"></p>
 <p>See the help page of <code><a href="../reference/ggcoef.html">ggcoef()</a></code> for the full list of arguments that could be used to personalize how error bars and the vertical line are plotted.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span>
-  <span class="va">log.reg</span>,
-  exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,
-  vline_color <span class="op">=</span> <span class="st">"red"</span>,
-  vline_linetype <span class="op">=</span>  <span class="st">"solid"</span>,
-  errorbar_color <span class="op">=</span> <span class="st">"blue"</span>,
-  errorbar_height <span class="op">=</span> <span class="fl">.25</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span></span>
+<span>  <span class="va">log.reg</span>,</span>
+<span>  exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  vline_color <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  vline_linetype <span class="op">=</span>  <span class="st">"solid"</span>,</span>
+<span>  errorbar_color <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  errorbar_height <span class="op">=</span> <span class="fl">.25</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-full-args-1.png" width="700"></p>
 <p>Additional parameters will be passed to [ggplot2::geom_point()].</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">log.reg</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"purple"</span>, size <span class="op">=</span> <span class="fl">5</span>, shape <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">log.reg</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, color <span class="op">=</span> <span class="st">"purple"</span>, size <span class="op">=</span> <span class="fl">5</span>, shape <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-log.reg-1.png" width="700"></p>
 <p>Finally, you can also customize the aesthetic mapping of the points.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">log.reg</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">term</span>, size <span class="op">=</span> <span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size_continuous</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"reverse"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">log.reg</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">term</span>, size <span class="op">=</span> <span class="va">p.value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_continuous</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"reverse"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-aes-1.png" width="700"></p>
 </div>
-<div id="custom-data-frame" class="section level2">
-<h2 class="hasAnchor">
-<a href="#custom-data-frame" class="anchor"></a>Custom data frame</h2>
+<div class="section level3">
+<h3 id="custom-data-frame">Custom data frame<a class="anchor" aria-label="anchor" href="#custom-data-frame"></a>
+</h3>
 <p>You can also pass a custom data frame to [ggcoef()]. The following variables are expected:</p>
 <ul>
 <li>
@@ -215,30 +214,30 @@
 <code>conf.low</code> and <code>conf.high</code> (only if you want to display error bars)</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cust</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male vs. female"</span>, <span class="st">"30-49 vs. 18-29"</span>, <span class="st">"50+ vs. 18-29"</span>, <span class="st">"urban vs. rural"</span><span class="op">)</span>,
-  estimate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.456</span>, <span class="fl">1.234</span>, <span class="fl">1.897</span>, <span class="fl">1.003</span><span class="op">)</span>,
-  conf.low <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.411</span>, <span class="fl">1.042</span>, <span class="fl">1.765</span>, <span class="fl">0.678</span><span class="op">)</span>,
-  conf.high <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.498</span>, <span class="fl">1.564</span>, <span class="fl">2.034</span>, <span class="fl">1.476</span><span class="op">)</span>,
-  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age"</span>, <span class="st">"age"</span>, <span class="st">"residence"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="va">cust</span><span class="op">$</span><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cust</span><span class="op">$</span><span class="va">term</span>, <span class="va">cust</span><span class="op">$</span><span class="va">term</span><span class="op">)</span>
-<span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">cust</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cust</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"male vs. female"</span>, <span class="st">"30-49 vs. 18-29"</span>, <span class="st">"50+ vs. 18-29"</span>, <span class="st">"urban vs. rural"</span><span class="op">)</span>,</span>
+<span>  estimate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.456</span>, <span class="fl">1.234</span>, <span class="fl">1.897</span>, <span class="fl">1.003</span><span class="op">)</span>,</span>
+<span>  conf.low <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.411</span>, <span class="fl">1.042</span>, <span class="fl">1.765</span>, <span class="fl">0.678</span><span class="op">)</span>,</span>
+<span>  conf.high <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.498</span>, <span class="fl">1.564</span>, <span class="fl">2.034</span>, <span class="fl">1.476</span><span class="op">)</span>,</span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age"</span>, <span class="st">"age"</span>, <span class="st">"residence"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cust</span><span class="op">$</span><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cust</span><span class="op">$</span><span class="va">term</span>, <span class="va">cust</span><span class="op">$</span><span class="va">term</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span><span class="va">cust</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-data-frame-1.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span>
-  <span class="va">cust</span>,
-  exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,
-  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">term</span>, colour <span class="op">=</span> <span class="va">variable</span><span class="op">)</span>,
-  size <span class="op">=</span> <span class="fl">5</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggcoef.html">ggcoef</a></span><span class="op">(</span></span>
+<span>  <span class="va">cust</span>,</span>
+<span>  exponentiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">term</span>, colour <span class="op">=</span> <span class="va">variable</span><span class="op">)</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggcoef_files/figure-html/ggcoef-data-frame-2.png" width="700"></p>
 </div>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>See <a href="http://www.rdocumentation.org/packages/broom" class="uri">http://www.rdocumentation.org/packages/broom</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>See <a href="http://www.rdocumentation.org/packages/broom" class="external-link uri">http://www.rdocumentation.org/packages/broom</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
@@ -254,11 +253,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://schloerke.com/">Barret Schloerke</a>, <a href="http://www.dicook.org/">Di Cook</a>, <a href="https://joseph.larmarange.net/">Joseph Larmarange</a>, <a href="https://f.briatte.org/">Francois Briatte</a>, <a href="http://moritz-marbach.com/">Moritz Marbach</a>, <a href="https://edwinth.github.io/">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
+  <p></p>
+<p>Developed by <a href="http://schloerke.com/" class="external-link">Barret Schloerke</a>, <a href="http://www.dicook.org/" class="external-link">Di Cook</a>, <a href="https://joseph.larmarange.net/" class="external-link">Joseph Larmarange</a>, <a href="https://f.briatte.org/" class="external-link">Francois Briatte</a>, <a href="http://moritz-marbach.com/" class="external-link">Moritz Marbach</a>, <a href="https://edwinth.github.io/" class="external-link">Edwin Thoen</a>, Amos Elberg, Jason Crowley.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
