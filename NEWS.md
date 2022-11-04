@@ -10,6 +10,8 @@
 * Fix in `ggcoef_compare()` with an `include` argument (#447)
 * New default tidier for `ggcoef_model()`, now using
   `broom.helpers::tidy_with_broom_or_parameters()` (#432)
+* Re-export methods from and redirect vignettes to the `{ggstats}` package (#452, #457)
+
 
 # GGally 2.1.2
 
