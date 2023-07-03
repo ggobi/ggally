@@ -132,11 +132,12 @@
 
       
 
-      </header><script src="ggmatrix_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggmatrix(): Plot matrix</h1>
-                        <h4 data-toc-skip class="author">Barret Schloerke</h4>
+                        <h4 data-toc-skip class="author">Barret
+Schloerke</h4>
             
             <h4 data-toc-skip class="date">Oct 29, 2015</h4>
       
@@ -157,11 +158,14 @@
 <h2 id="ggallyggmatrix">
 <code>GGally::ggmatrix()</code><a class="anchor" aria-label="anchor" href="#ggallyggmatrix"></a>
 </h2>
-<p><code><a href="../reference/ggmatrix.html">ggmatrix()</a></code> is a function for managing multiple plots in a matrix-like layout. It was designed to adapt to any number of columns and rows. This allows for very customized plot matrices.</p>
+<p><code><a href="../reference/ggmatrix.html">ggmatrix()</a></code> is a function for managing multiple plots in
+a matrix-like layout. It was designed to adapt to any number of columns
+and rows. This allows for very customized plot matrices.</p>
 <div class="section level3">
 <h3 id="generic-example">Generic Example<a class="anchor" aria-label="anchor" href="#generic-example"></a>
 </h3>
-<p>The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.</p>
+<p>The examples below use plots labeled 1 to 6 to distinguish where the
+plots are being placed.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">{</span></span>
@@ -201,7 +205,8 @@
 <div class="section level3">
 <h3 id="matrix-subsetting">Matrix Subsetting<a class="anchor" aria-label="anchor" href="#matrix-subsetting"></a>
 </h3>
-<p>Individual plots may be retrieved from the plot matrix and can be placed in the plot matrix.</p>
+<p>Individual plots may be retrieved from the plot matrix and can be
+placed in the plot matrix.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span></span>
 <span>  <span class="va">plotList</span>,</span>
@@ -246,7 +251,11 @@
 <div class="section level3">
 <h3 id="axis-control">Axis Control<a class="anchor" aria-label="anchor" href="#axis-control"></a>
 </h3>
-<p>The X and Y axis have booleans to turn on/off the individual plot’s axes on the bottom and left sides of the plot matrix. To save time, <code>showAxisPlotLabels</code> can be set to override <code>showXAxisPlotLabels</code> and <code>showYAxisPlotLabels</code>.</p>
+<p>The X and Y axis have booleans to turn on/off the individual plot’s
+axes on the bottom and left sides of the plot matrix. To save time,
+<code>showAxisPlotLabels</code> can be set to override
+<code>showXAxisPlotLabels</code> and
+<code>showYAxisPlotLabels</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span></span>
 <span>  <span class="va">plotList</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -281,7 +290,12 @@
 <div class="section level3">
 <h3 id="strips-control">Strips Control<a class="anchor" aria-label="anchor" href="#strips-control"></a>
 </h3>
-<p>By default, the plots in the top row and the right most column will display top-side and right-side strips respectively (<code>showStrips = NULL</code>). If all strips need to appear in each plot, <code>showStrips</code> may be set to <code>TRUE</code>. If all strips should not be displayed, <code>showStrips</code> may be set to <code>FALSE</code>.</p>
+<p>By default, the plots in the top row and the right most column will
+display top-side and right-side strips respectively
+(<code>showStrips = NULL</code>). If all strips need to appear in each
+plot, <code>showStrips</code> may be set to <code>TRUE</code>. If all
+strips should not be displayed, <code>showStrips</code> may be set to
+<code>FALSE</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
 <span><span class="va">plotList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -294,6 +308,10 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">tips</span>, <span class="va">smoker</span> <span class="op">==</span> <span class="st">"Yes"</span> <span class="op">&amp;</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">time</span> <span class="op">~</span> <span class="va">day</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: `qplot()` was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span></span>
 <span></span>
 <span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggmatrix.html">ggmatrix</a></span><span class="op">(</span></span>
@@ -346,7 +364,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

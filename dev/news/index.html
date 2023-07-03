@@ -118,6 +118,7 @@
 <li>Fix in <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_compare()</a></code> with an <code>include</code> argument (<a href="https://github.com/ggobi/ggally/issues/447" class="external-link">#447</a>)</li>
 <li>New default tidier for <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggcoef_model()</a></code>, now using <code><a href="https://larmarange.github.io/broom.helpers/reference/tidy_with_broom_or_parameters.html" class="external-link">broom.helpers::tidy_with_broom_or_parameters()</a></code> (<a href="https://github.com/ggobi/ggally/issues/432" class="external-link">#432</a>)</li>
 <li>Re-export methods from and redirect vignettes to the <a href="https://larmarange.github.io/ggstats/" class="external-link">ggstats</a> package (<a href="https://github.com/ggobi/ggally/issues/452" class="external-link">#452</a>, <a href="https://github.com/ggobi/ggally/issues/457" class="external-link">#457</a>)</li>
+<li>Replaced ..scaled.. with after_stat(scaled) in ggscatmat (<a href="https://github.com/ggobi/ggally/issues/467" class="external-link">#467</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -142,7 +143,8 @@
 <h2 class="page-header" data-toc-text="2.1.0" id="ggally-210">GGally 2.1.0<small>2021-01-06</small><a class="anchor" aria-label="anchor" href="#ggally-210"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-2-1-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-1-0"></a></h4>
-<ul><li>Following version 7.0.0 of <code>broom</code>, computed residuals in <code><a href="https://larmarange.github.io/ggstats/reference/stat_cross.html" class="external-link">stat_cross()</a></code> are now named <code>"resid"</code> and <code>"std.resid"</code>. <code>cells</code> and <code>fill</code> arguments of <code><a href="../reference/ggally_crosstable.html">ggally_crosstable()</a></code> and <code><a href="../reference/ggtable.html">ggtable()</a></code> have been updated accordingly (<a href="https://github.com/larmarange" class="external-link">@larmarange</a>, <a href="https://github.com/ggobi/ggally/issues/391" class="external-link">#391</a>)</li></ul></div>
+<ul><li>Following version 7.0.0 of <code>broom</code>, computed residuals in <code><a href="https://larmarange.github.io/ggstats/reference/stat_cross.html" class="external-link">stat_cross()</a></code> are now named <code>"resid"</code> and <code>"std.resid"</code>. <code>cells</code> and <code>fill</code> arguments of <code><a href="../reference/ggally_crosstable.html">ggally_crosstable()</a></code> and <code><a href="../reference/ggtable.html">ggtable()</a></code> have been updated accordingly (<a href="https://github.com/larmarange" class="external-link">@larmarange</a>, <a href="https://github.com/ggobi/ggally/issues/391" class="external-link">#391</a>)</li>
+</ul></div>
 <div class="section level4">
 <h4 id="other-changes-2-1-0">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-2-1-0"></a></h4>
 <ul><li>
@@ -205,7 +207,8 @@
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="ggally-150">GGally 1.5.0<small>2020-03-25</small><a class="anchor" aria-label="anchor" href="#ggally-150"></a></h2>
-<ul><li>Updated to work with ggplot2 v3.3.0 (<a href="https://github.com/ggobi/ggally/issues/308" class="external-link">#308</a>)</li></ul><p><code>ggnet</code> and <code>ggnet2</code> * Fixed some logic bugs from newer R versions</p>
+<ul><li>Updated to work with ggplot2 v3.3.0 (<a href="https://github.com/ggobi/ggally/issues/308" class="external-link">#308</a>)</li>
+</ul><p><code>ggnet</code> and <code>ggnet2</code> * Fixed some logic bugs from newer R versions</p>
 <p><code>ggally_box</code> and <code>ggally_dot</code> * Label now appears axis and is displayed in a plot matrix. (<a href="https://github.com/ggobi/ggally/issues/253" class="external-link">#253</a>)</p>
 <p><code>ggsurv</code> * Provide sensible legend values when multiple factors are present. (<a href="https://github.com/ggobi/ggally/issues/310" class="external-link">#310</a>)</p>
 <p><code>ggally_cor</code> * Added <code>displayGrid</code> argument to turn of the background grid. (<a href="https://github.com/ggobi/ggally/issues/312" class="external-link">#312</a>)</p>
@@ -219,20 +222,28 @@
 <li>Logical values are now treated as discrete (<a href="https://github.com/ggobi/ggally/issues/272" class="external-link">#272</a>)</li>
 </ul><p><code>ggmatrix</code></p>
 <ul><li>
-<code>progress</code> parameter added to ggmatrix (and appropriate parent functions). Allows for <code>TRUE</code>, <code>FALSE</code>, <code>NULL</code>, and <code>function(pm){...}</code> (<a href="https://github.com/ggobi/ggally/issues/271" class="external-link">#271</a>)</li></ul><p><code>ggnostic</code></p>
-<ul><li>Cooks distance cutoff is now at F_{p, n - p}(0.5) (<a href="https://github.com/ggobi/ggally/issues/274" class="external-link">#274</a>)</li></ul><p><code>ggnet2</code></p>
-<ul><li>Replaced loading packages with loading namespaces(<a href="https://github.com/ggobi/ggally/issues/262" class="external-link">#262</a>)</li></ul><p><code>ggally_smooth</code></p>
-<ul><li>Added <code>shrink</code> and <code>se</code> parameters to <code>ggally_smooth</code> (<a href="https://github.com/ggobi/ggally/issues/247" class="external-link">#247</a>)</li></ul><p><code>ggcoef</code></p>
-<ul><li>Added <code>sort</code> parameter to sort by beta values (<a href="https://github.com/ggobi/ggally/issues/273" class="external-link">#273</a>)</li></ul><p><code>ggparcoord</code></p>
-<ul><li>Fixed bug where x axis breaks and labels did not appear when <code>splineFactor = TRUE</code> (<a href="https://github.com/ggobi/ggally/issues/279" class="external-link">#279</a>)</li></ul></div>
+<code>progress</code> parameter added to ggmatrix (and appropriate parent functions). Allows for <code>TRUE</code>, <code>FALSE</code>, <code>NULL</code>, and <code>function(pm){...}</code> (<a href="https://github.com/ggobi/ggally/issues/271" class="external-link">#271</a>)</li>
+</ul><p><code>ggnostic</code></p>
+<ul><li>Cooks distance cutoff is now at F_{p, n - p}(0.5) (<a href="https://github.com/ggobi/ggally/issues/274" class="external-link">#274</a>)</li>
+</ul><p><code>ggnet2</code></p>
+<ul><li>Replaced loading packages with loading namespaces(<a href="https://github.com/ggobi/ggally/issues/262" class="external-link">#262</a>)</li>
+</ul><p><code>ggally_smooth</code></p>
+<ul><li>Added <code>shrink</code> and <code>se</code> parameters to <code>ggally_smooth</code> (<a href="https://github.com/ggobi/ggally/issues/247" class="external-link">#247</a>)</li>
+</ul><p><code>ggcoef</code></p>
+<ul><li>Added <code>sort</code> parameter to sort by beta values (<a href="https://github.com/ggobi/ggally/issues/273" class="external-link">#273</a>)</li>
+</ul><p><code>ggparcoord</code></p>
+<ul><li>Fixed bug where x axis breaks and labels did not appear when <code>splineFactor = TRUE</code> (<a href="https://github.com/ggobi/ggally/issues/279" class="external-link">#279</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="ggally-1-5-0-1">GGally 1.3.2<a class="anchor" aria-label="anchor" href="#ggally-1-5-0-1"></a></h3>
 <p><code>ggpairs</code> and <code>ggduo</code></p>
 <ul><li>Removed warning where pure numeric names gave a warning (<a href="https://github.com/ggobi/ggally/issues/238" class="external-link">#238</a>, <a href="https://github.com/lepennec" class="external-link">@lepennec</a>)</li>
 <li>Fixed ordering issue with horizontal boxplots (<a href="https://github.com/ggobi/ggally/issues/239" class="external-link">#239</a>)</li>
 </ul><p><code>ggparcoord</code></p>
-<ul><li>Fixed missing <code>x</code> aes requirement when shadebox is provided (<a href="https://github.com/ggobi/ggally/issues/237" class="external-link">#237</a>, <a href="https://github.com/treysp" class="external-link">@treysp</a>)</li></ul><p>Package</p>
-<ul><li>Made igraph a non required dependency for tests (<a href="https://github.com/ggobi/ggally/issues/240" class="external-link">#240</a>)</li></ul></div>
+<ul><li>Fixed missing <code>x</code> aes requirement when shadebox is provided (<a href="https://github.com/ggobi/ggally/issues/237" class="external-link">#237</a>, <a href="https://github.com/treysp" class="external-link">@treysp</a>)</li>
+</ul><p>Package</p>
+<ul><li>Made igraph a non required dependency for tests (<a href="https://github.com/ggobi/ggally/issues/240" class="external-link">#240</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="ggally-1-5-0-2">GGally 1.3.1<a class="anchor" aria-label="anchor" href="#ggally-1-5-0-2"></a></h3>
 <p>Added new dataset <code>psychademic</code></p>
@@ -242,9 +253,12 @@
 <ul><li>added function to set theme to have clear strip background and rearrange the strip positions</li>
 <li>added parameter <code>switch</code> to ggmatrix (and friends) to allow for strip repositioning. See <code>?ggplot::facet_grid</code> for more documentation on <code>switch</code> (<a href="https://github.com/ggobi/ggally/issues/223" class="external-link">#223</a>, <a href="https://github.com/ggobi/ggally/issues/224" class="external-link">#224</a>)</li>
 </ul><p><code>ggsurv</code> error reporting</p>
-<ul><li>removed a one error check that is covered in other places (<a href="https://github.com/ggobi/ggally/issues/222" class="external-link">#222</a>)</li></ul><p><code>+.gg</code></p>
-<ul><li>allow to add a list of items to a ggmatrix (<a href="https://github.com/ggobi/ggally/issues/228" class="external-link">#228</a>)</li></ul><p><code>ggmatrix.print</code></p>
-<ul><li>fix strip issues with ggplot2 name update</li></ul></div>
+<ul><li>removed a one error check that is covered in other places (<a href="https://github.com/ggobi/ggally/issues/222" class="external-link">#222</a>)</li>
+</ul><p><code>+.gg</code></p>
+<ul><li>allow to add a list of items to a ggmatrix (<a href="https://github.com/ggobi/ggally/issues/228" class="external-link">#228</a>)</li>
+</ul><p><code>ggmatrix.print</code></p>
+<ul><li>fix strip issues with ggplot2 name update</li>
+</ul></div>
 <div class="section level3">
 <h3 id="ggally-1-5-0-3">GGally 1.3.0<a class="anchor" aria-label="anchor" href="#ggally-1-5-0-3"></a></h3>
 <p><code>ggmatrix.print</code> - massive update!</p>
@@ -275,7 +289,8 @@
 </li>
 <li>Allows for labels with plotmath expressions</li>
 </ul><p><code>ggmatrix</code> and <code><a href="https://ggplot2.tidyverse.org/reference/last_plot.html" class="external-link">ggplot2::last_plot()</a></code></p>
-<ul><li>If a <code>ggmatrix</code> object is printed, <code><a href="https://ggplot2.tidyverse.org/reference/last_plot.html" class="external-link">ggplot2::last_plot()</a></code> will return the plot matrix</li></ul><p><code>ggmatrix</code> and ggplot2 labels</p>
+<ul><li>If a <code>ggmatrix</code> object is printed, <code><a href="https://ggplot2.tidyverse.org/reference/last_plot.html" class="external-link">ggplot2::last_plot()</a></code> will return the plot matrix</li>
+</ul><p><code>ggmatrix</code> and ggplot2 labels</p>
 <ul><li>
 <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggplot2::labs</a></code> <code>+</code>’ed to a ggmatrix object</li>
 <li>
@@ -285,7 +300,8 @@
 <li>(anything that returns a class of “labels” may be added to a ggmatrix object)</li>
 </ul><p><code>ggmatrix</code> and <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code></p>
 <ul><li>
-<code>ggsave</code> now works with <code>ggmatrix</code> objects</li></ul><p><code>ggpairs</code> and <code>ggduo</code> check for cardinality (<a href="https://github.com/ggobi/ggally/issues/197" class="external-link">#197</a>)</p>
+<code>ggsave</code> now works with <code>ggmatrix</code> objects</li>
+</ul><p><code>ggpairs</code> and <code>ggduo</code> check for cardinality (<a href="https://github.com/ggobi/ggally/issues/197" class="external-link">#197</a>)</p>
 <ul><li>Before creating a ggmatrix object, a check is made for character/factor columns</li>
 <li>If there are more than 15 (default) unique combinations, an error is thrown.</li>
 <li>Setting <code>cardinality_threshold</code> parameter to a higher value can fix the problem (knowing single cell plots may take more time to produce)</li>
@@ -296,47 +312,65 @@
 </li>
 <li>These will change the relative size of the plot panels produced.</li>
 </ul><p><code>ggally_cor</code> colour aesthetic</p>
-<ul><li>color must be a non-numeric value</li></ul><p><code>ggsurv</code></p>
+<ul><li>color must be a non-numeric value</li>
+</ul><p><code>ggsurv</code></p>
 <ul><li>added boolean to allow for legend to not be sorted</li>
 <li>fixed bug where censored points with custom color didn’t match properly (<a href="https://github.com/ggobi/ggally/issues/185" class="external-link">#185</a>)</li>
 </ul><p>Vignettes</p>
 <ul><li>vignettes are now displayed using <code>packagedocs</code>. More info at <a href="http://hafen.github.io/packagedocs/" class="external-link uri">http://hafen.github.io/packagedocs/</a>
-</li></ul><p><code>ggally_box_no_facet</code> and <code>ggally_dot_no_facet</code></p>
-<ul><li>New methods added as defaults to pair with new ggmatrix print method</li></ul></div>
+</li>
+</ul><p><code>ggally_box_no_facet</code> and <code>ggally_dot_no_facet</code></p>
+<ul><li>New methods added as defaults to pair with new ggmatrix print method</li>
+</ul></div>
 <div class="section level3">
 <h3 id="ggally-1-5-0-4">GGally 1.2.0<a class="anchor" aria-label="anchor" href="#ggally-1-5-0-4"></a></h3>
 <p>install requirements</p>
-<ul><li>relaxed install requirements on grid (5d06dfc, d57469a, 933bb14, 73b314d)</li></ul><p>ggduo - New!</p>
+<ul><li>relaxed install requirements on grid (5d06dfc, d57469a, 933bb14, 73b314d)</li>
+</ul><p>ggduo - New!</p>
 <ul><li>plot two grouped data in a plot matrix (<a href="https://github.com/ggobi/ggally/issues/173" class="external-link">#173</a>)</li>
 <li>helpful for plotting two sets of columns, multivariate analysis, and canonical correlation analysis</li>
 <li>be sure to check out the examples!</li>
 </ul><p>ggally_smooth_loess - New!</p>
-<ul><li>uses the loess method with drawing a line (1552f96)</li></ul><p>ggally_smooth_lm - New!</p>
+<ul><li>uses the loess method with drawing a line (1552f96)</li>
+</ul><p>ggally_smooth_lm - New!</p>
 <ul><li>uses the lm method with drawing a line (1552f96)</li>
 <li>alias of ggally_smooth</li>
 </ul><p>ggmatrix.print</p>
-<ul><li>fixed bug strips where causing spacing issue when printing axis labels (174630d)</li></ul><p>ggnetworkmap</p>
-<ul><li>fixed bug where checking for the package ‘intergraph’ couldn’t be reached</li></ul><p>ggsurv</p>
-<ul><li>changed default of plotting multiple censored data color to match the survival line</li></ul><p>package testing</p>
-<ul><li>added many more tests!</li></ul></div>
+<ul><li>fixed bug strips where causing spacing issue when printing axis labels (174630d)</li>
+</ul><p>ggnetworkmap</p>
+<ul><li>fixed bug where checking for the package ‘intergraph’ couldn’t be reached</li>
+</ul><p>ggsurv</p>
+<ul><li>changed default of plotting multiple censored data color to match the survival line</li>
+</ul><p>package testing</p>
+<ul><li>added many more tests!</li>
+</ul></div>
 <div class="section level3">
 <h3 id="ggally-1-5-0-5">GGally 1.1.0<a class="anchor" aria-label="anchor" href="#ggally-1-5-0-5"></a></h3>
 <p>ggcoef - New!</p>
 <ul><li>plot model coefficients with broom and ggplot2 PR#162</li>
 <li>Plotting model coefficients (<a href="http://www.r-statistics.com/2010/07/visualization-of-regression-coefficients-in-r/" class="external-link uri">http://www.r-statistics.com/2010/07/visualization-of-regression-coefficients-in-r/</a>)</li>
 </ul><p>gglegend - New!</p>
-<ul><li>pull out the legend of a plot which can also be used in ggpairs PR#155, PR#169</li></ul><p>ggally_densityDiag</p>
-<ul><li>fixed bug where ‘…’ was not respected (d0fe633)</li></ul><p>ggally_smooth</p>
-<ul><li>added ‘method’ parameter (411213c)</li></ul><p>ggally_ratio</p>
-<ul><li>Does not call ggfluctuation2 anymore. PR#165</li></ul><p>ggcorr</p>
+<ul><li>pull out the legend of a plot which can also be used in ggpairs PR#155, PR#169</li>
+</ul><p>ggally_densityDiag</p>
+<ul><li>fixed bug where ‘…’ was not respected (d0fe633)</li>
+</ul><p>ggally_smooth</p>
+<ul><li>added ‘method’ parameter (411213c)</li>
+</ul><p>ggally_ratio</p>
+<ul><li>Does not call ggfluctuation2 anymore. PR#165</li>
+</ul><p>ggcorr</p>
 <ul><li>fixed issue with unnamed correlation matrix used as input PR#146</li>
 <li>fixed issue undesired shifting when layout.exp was &gt; 0 PR#171</li>
 </ul><p>ggfluctuation2</p>
-<ul><li>is being deprecated. Please use ggally_ratio instead PR#165</li></ul><p>ggnetworkmap</p>
-<ul><li>fixed issue with overlaying network on a world map PR#157</li></ul><p>ggparcoord</p>
-<ul><li>Fixed odd bug where a list was trying to be forced as a double PR#162</li></ul><p>ggpairs</p>
-<ul><li>Fixed improperly rotated axes with ggally_ratio PR#165</li></ul><p>ggscatmat</p>
-<ul><li>added ‘corMethod’ parameter for use in upper triangle PR#145</li></ul><p>ggsurv</p>
+<ul><li>is being deprecated. Please use ggally_ratio instead PR#165</li>
+</ul><p>ggnetworkmap</p>
+<ul><li>fixed issue with overlaying network on a world map PR#157</li>
+</ul><p>ggparcoord</p>
+<ul><li>Fixed odd bug where a list was trying to be forced as a double PR#162</li>
+</ul><p>ggpairs</p>
+<ul><li>Fixed improperly rotated axes with ggally_ratio PR#165</li>
+</ul><p>ggscatmat</p>
+<ul><li>added ‘corMethod’ parameter for use in upper triangle PR#145</li>
+</ul><p>ggsurv</p>
 <ul><li>size.est and size.ci parameters added PR#153</li>
 <li>ordering changed to reflect survival time PR#147</li>
 <li>added a vignette PR#154</li>
@@ -345,20 +379,25 @@
 <li>changes default behavior only. If an argument is supplied, the argument will take precedence</li>
 </ul><p>github chat</p>
 <ul><li>
-<a href="https://gitter.im/ggobi/ggally" class="external-link uri">https://gitter.im/ggobi/ggally</a> is the place to visit for general questions.</li></ul><p>travis-ci</p>
+<a href="https://gitter.im/ggobi/ggally" class="external-link uri">https://gitter.im/ggobi/ggally</a> is the place to visit for general questions.</li>
+</ul><p>travis-ci</p>
 <ul><li>cache packages for faster checking</li>
 <li>install covr and lintr from github for testing purposes</li>
 </ul></div>
 <div class="section level3">
 <h3 id="ggally-1-5-0-6">GGally 1.0.1<a class="anchor" aria-label="anchor" href="#ggally-1-5-0-6"></a></h3>
 <p>ggparcoord</p>
-<ul><li>fix handling of factor group variable PR#131</li></ul><p>ggscatmat</p>
-<ul><li>force all char columns to factors PR#134</li></ul><p>print.ggmatrix</p>
-<ul><li>add boolean for grid.newpage ggmatrix print method PR#126</li></ul></div>
+<ul><li>fix handling of factor group variable PR#131</li>
+</ul><p>ggscatmat</p>
+<ul><li>force all char columns to factors PR#134</li>
+</ul><p>print.ggmatrix</p>
+<ul><li>add boolean for grid.newpage ggmatrix print method PR#126</li>
+</ul></div>
 <div class="section level3">
 <h3 id="ggally-1-5-0-7">GGally 1.0.0<a class="anchor" aria-label="anchor" href="#ggally-1-5-0-7"></a></h3>
 <p>ggplot2</p>
-<ul><li>GGally has been upgraded to run on the latest ggplot2 v1.1.0. PR#109</li></ul><p>New functions</p>
+<ul><li>GGally has been upgraded to run on the latest ggplot2 v1.1.0. PR#109</li>
+</ul><p>New functions</p>
 <ul><li>ggmatrix. Make a generic matrix of ggplot2 plots</li>
 <li>ggnetworkmap. Plot a network with ggplot2 suitable for overlay on a ggmap::map ggplot, or other ggplot</li>
 <li>ggnet2. Function for plotting network objects using ggplot2, with additional control over graphical parameters that are not supported by the ggnet function</li>
@@ -380,7 +419,8 @@
 <ul><li>legend title expressions may be used. PR#55</li>
 <li>handles objects that may be coerced into a data.frame PR#70</li>
 </ul><p>gglyph</p>
-<ul><li>changed geom_line to geom_path in gglyph. Fixes ordering issue. PR#51</li></ul><p>ggparcoord</p>
+<ul><li>changed geom_line to geom_path in gglyph. Fixes ordering issue. PR#51</li>
+</ul><p>ggparcoord</p>
 <ul><li>remaining columns are passed through so aesthetics may be added later. PR#54</li>
 <li>fixed parcoord ordering issues with odd names. PR#106</li>
 <li>fixed scaling when unique length equals 1. PR#122</li>
@@ -388,8 +428,10 @@
 <ul><li>color censored marks the same color as the line. PR#74</li>
 <li>allow for different censored color marks. PR#113</li>
 </ul><p>ggally_density</p>
-<ul><li>add fake data points to extend the limits of the stat_density2d. PR#114</li></ul><p>ggally_na</p>
-<ul><li>new plot type!</li></ul><p>Data</p>
+<ul><li>add fake data points to extend the limits of the stat_density2d. PR#114</li>
+</ul><p>ggally_na</p>
+<ul><li>new plot type!</li>
+</ul><p>Data</p>
 <ul><li>removed cityServiceFirms</li>
 <li>added twitter_spambots</li>
 </ul></div>
@@ -408,7 +450,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

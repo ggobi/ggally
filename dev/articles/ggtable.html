@@ -132,11 +132,12 @@
 
       
 
-      </header><script src="ggtable_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggtable(): Cross-tabulated tables</h1>
-                        <h4 data-toc-skip class="author">Joseph Larmarange</h4>
+                        <h4 data-toc-skip class="author">Joseph
+Larmarange</h4>
             
             <h4 data-toc-skip class="date">May 16, 2016</h4>
       
@@ -157,11 +158,13 @@
 <h2 id="ggallyggtable">
 <code>GGally::ggtable()</code><a class="anchor" aria-label="anchor" href="#ggallyggtable"></a>
 </h2>
-<p>The purpose of this function is to quickly plot cross-tabulated tables of discrete variables.</p>
+<p>The purpose of this function is to quickly plot cross-tabulated
+tables of discrete variables.</p>
 <div class="section level3">
 <h3 id="basic-example">Basic example<a class="anchor" aria-label="anchor" href="#basic-example"></a>
 </h3>
-<p>To display tables with the number of observations, simply indicate variables to present in columns and in rows.</p>
+<p>To display tables with the number of observations, simply indicate
+variables to present in columns and in rows.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -173,7 +176,10 @@
 <div class="section level3">
 <h3 id="proportions">Proportions<a class="anchor" aria-label="anchor" href="#proportions"></a>
 </h3>
-<p>The <code>cells</code> argument allows you to control what to display. For proportions of the total, row proportions or columns proportions, simply use <code>"prop"</code>, <code>"row.prop"</code> or <code>"col.prop"</code>.</p>
+<p>The <code>cells</code> argument allows you to control what to
+display. For proportions of the total, row proportions or columns
+proportions, simply use <code>"prop"</code>, <code>"row.prop"</code> or
+<code>"col.prop"</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, cells <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Proportions of total"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
@@ -187,8 +193,15 @@
 <div class="section level3">
 <h3 id="filling-cells-with-residuals">Filling cells with residuals<a class="anchor" aria-label="anchor" href="#filling-cells-with-residuals"></a>
 </h3>
-<p>Chi-square standardized residuals indicates which cells are over- or underrepresented compared to what would be expected under the independence hypothesis. If the standardized residual is less than -2, the cell’s observed frequency is less than the expected frequency. Greater than 2 and the observed frequency is greater than the expected frequency. Values lower than -3 or higher than 3 indicates a strong effect.</p>
-<p>To fill cells with standardized residuals, simply indicate <code>fill = "std.resid"</code>.</p>
+<p>Chi-square standardized residuals indicates which cells are over- or
+underrepresented compared to what would be expected under the
+independence hypothesis. If the standardized residual is less than -2,
+the cell’s observed frequency is less than the expected frequency.
+Greater than 2 and the observed frequency is greater than the expected
+frequency. Values lower than -3 or higher than 3 indicates a strong
+effect.</p>
+<p>To fill cells with standardized residuals, simply indicate
+<code>fill = "std.resid"</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="st">"smoker"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"std.resid"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
@@ -196,7 +209,8 @@
 <div class="section level3">
 <h3 id="using-weights">Using weights<a class="anchor" aria-label="anchor" href="#using-weights"></a>
 </h3>
-<p>You can easily indicates weights to take into account with the <strong>weight</strong> aesthetic.</p>
+<p>You can easily indicates weights to take into account with the
+<strong>weight</strong> aesthetic.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span></span>
@@ -212,11 +226,14 @@
 <div class="section level3">
 <h3 id="missing-with-continuous-variables">Missing with continuous variables<a class="anchor" aria-label="anchor" href="#missing-with-continuous-variables"></a>
 </h3>
-<p>Although <code><a href="../reference/ggtable.html">ggtable()</a></code> is mainly intended to be used with discrete variables, you can also indicates continuous variables. In such case, some summary statistics are displayed.</p>
+<p>Although <code><a href="../reference/ggtable.html">ggtable()</a></code> is mainly intended to be used with
+discrete variables, you can also indicates continuous variables. In such
+case, some summary statistics are displayed.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggtable.html">ggtable</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smoker"</span>, <span class="st">"total_bill"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"day"</span>, <span class="st">"time"</span>, <span class="st">"sex"</span>, <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggtable_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>If you need more customization of the output, please refer to <code><a href="../reference/ggduo.html">ggduo()</a></code>.</p>
+<p>If you need more customization of the output, please refer to
+<code><a href="../reference/ggduo.html">ggduo()</a></code>.</p>
 </div>
 </div>
   </div>
@@ -238,7 +255,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

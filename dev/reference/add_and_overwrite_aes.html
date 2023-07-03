@@ -137,6 +137,9 @@
 <span class="r-in"><span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="st">"cor"</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"cut"</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Diamonds Sample"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`aes_string()` was deprecated in ggplot2 3.0.0.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> See also `vignette("ggplot2-in-packages")` for more information.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Custom str.ggmatrix output: </span>
@@ -144,16 +147,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data               :'data.frame':	1000 obs. of  10 variables:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ carat  : num [1:1000] 0.72 1.09 1.06 0.32 0.3 0.25 0.35 0.43 0.32 0.73 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ cut    : Ord.factor w/ 5 levels "Fair"&lt;"Good"&lt;..: 3 4 4 5 4 5 5 5 5 3 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ color  : Ord.factor w/ 7 levels "D"&lt;"E"&lt;"F"&lt;"G"&lt;..: 4 2 1 4 4 3 4 4 1 2 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ clarity: Ord.factor w/ 8 levels "I1"&lt;"SI2"&lt;"SI1"&lt;..: 3 6 3 5 6 5 3 3 2 3 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ depth  : num [1:1000] 62.8 59.9 61.1 60.7 62.9 61.1 60.6 62 61.4 63.3 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ table  : num [1:1000] 59 59 59 56 55 58 56 55 56 60 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ price  : int [1:1000] 2265 10111 6352 602 878 595 555 795 612 2523 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x      : num [1:1000] 5.69 6.73 6.63 4.43 4.28 4.04 4.56 4.84 4.46 5.65 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ y      : num [1:1000] 5.74 6.7 6.56 4.46 4.24 4.08 4.58 4.87 4.43 5.7 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ z      : num [1:1000] 3.59 4.02 4.03 2.7 2.68 2.48 2.77 3.01 2.73 3.59 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ carat  : num [1:1000] 0.75 0.24 1.23 0.61 0.3 1 0.31 1.69 1 0.32 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ cut    : Ord.factor w/ 5 levels "Fair"&lt;"Good"&lt;..: 2 5 4 5 5 4 5 3 3 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ color  : Ord.factor w/ 7 levels "D"&lt;"E"&lt;"F"&lt;"G"&lt;..: 2 3 6 2 3 2 4 2 1 2 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ clarity: Ord.factor w/ 8 levels "I1"&lt;"SI2"&lt;"SI1"&lt;..: 5 4 3 5 8 6 4 2 3 4 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ depth  : num [1:1000] 63.1 61.8 62 61.3 60 61.6 61.4 62.6 59.3 62.9 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ table  : num [1:1000] 55 57 57 54 59 59 57 59 61 56 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ price  : int [1:1000] 3231 408 5717 3004 873 9050 698 10317 5987 900 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x      : num [1:1000] 5.8 3.97 6.91 5.53 4.37 6.46 4.37 7.53 6.45 4.39 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ y      : num [1:1000] 5.83 3.99 6.83 5.5 4.39 6.42 4.33 7.61 6.5 4.36 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ z      : num [1:1000] 3.67 2.46 4.26 3.38 2.63 3.97 2.67 4.74 3.84 2.75 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ plots              :List of 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ : chr "PM; aes: c(x = ~depth, colour = ~color); fn: {wrap: 'ggally_densityDiag'}; gg: FALSE"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ : chr "PM; aes: c(x = ~table, y = ~depth, colour = ~clarity); fn: {wrap: 'ggally_cor'}; gg: FALSE"</span>
@@ -198,7 +201,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

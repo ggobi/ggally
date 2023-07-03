@@ -273,6 +273,11 @@ package loaded.</p></li>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggparcoord</span><span class="op">(</span>data <span class="op">=</span> <span class="va">diamonds.samp</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, groupColumn <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>  scale <span class="op">=</span> <span class="st">"uniminmax"</span>, boxplot <span class="op">=</span> <span class="cn">TRUE</span>, title <span class="op">=</span> <span class="st">"Parallel Coord. Plot of Diamonds Data"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">colour</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
 <span class="r-plt img"><img src="ggparcoord-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># utilize ggplot2 aes to switch to thicker lines</span></span></span>
@@ -347,7 +352,7 @@ package loaded.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
