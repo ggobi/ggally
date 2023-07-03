@@ -1,5 +1,5 @@
 if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("xvalue", "yvalue"))
+  utils::globalVariables(c("xvalue", "yvalue", "scaled"))
 }
 
 
@@ -248,7 +248,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
         r <- r + stat_density(
           aes(
             x = x,
-            y = ..scaled.. * diff(range(x)) + min(x) # nolint
+            y = after_stat(scaled) * diff(range(x)) + min(x) # nolint
           ),
           data = j, position = "identity", geom = "line", color = "black")
       }
@@ -268,7 +268,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
                            # r is the facet grid plot
           stat_density(
             aes_string(
-              x = "x", y = "..scaled.. * diff(range(x)) + min(x)",
+              x = "x", y = "after_stat(scaled) * diff(range(x)) + min(x)",
               colour = "colorcolumn"
             ),
             data = j,
