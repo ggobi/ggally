@@ -2,6 +2,7 @@
 
 ### Bug fixes
 
+* removed dependency on reshape2 (#475)
 * Reverse ordering of y-axis in `ggally_count()` (#420)
 * Facets ordering in `ggcoef_compare()` (#426)
 * Fix in `ggcoef_compare()` when using tidy selectors for

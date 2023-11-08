@@ -65,7 +65,7 @@ putPlot <- function(pm, value, i, j) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
 #' p_(plotMatrix2[1, 2])
 getPlot <- function(pm, i, j) {

@@ -3,7 +3,7 @@ context("gg-plots")
 # This file takes too long
 testthat::skip_on_cran()
 
-data(tips, package = "reshape")
+data(tips)
 data(nasa)
 nas <- subset(nasa, x <= 2 & y == 1)
 
@@ -147,7 +147,7 @@ test_that("ggally_statistic handles factors", {
     scales::number(chisq.test(x, y)$p.value, accuracy = .001)
   }
   expect_silent({
-    p <- ggally_statistic(reshape::tips, aes(x = sex, y = day), text_fn = simple_chisq, title = "Chi^2")
+    p <- ggally_statistic(tips, aes(x = sex, y = day), text_fn = simple_chisq, title = "Chi^2")
   })
 })
 

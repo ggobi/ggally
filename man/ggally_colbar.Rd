@@ -51,7 +51,7 @@ Plot column or row percentage using bar plots.
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex)))
 p_(ggally_rowbar(tips, mapping = aes(x = smoker, y = sex)))
 

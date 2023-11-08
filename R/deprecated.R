@@ -45,7 +45,7 @@ v1_ggmatrix_theme <- function() {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_cor_v1_5(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 #'
 #' # display with no grid

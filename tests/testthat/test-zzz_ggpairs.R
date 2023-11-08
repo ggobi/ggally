@@ -2,7 +2,7 @@ context("ggpairs")
 # This file takes too long
 testthat::skip_on_cran()
 
-data(tips, package = "reshape")
+data(tips)
 
 facethistBindwidth1 <- list(combo = wrap("facethist", binwidth = 1))
 facethistBindwidth1Duo <- list(
@@ -535,7 +535,7 @@ test_that("NA data", {
 test_that("strip-top and strip-right", {
 
 
-  data(tips, package = "reshape")
+  data(tips)
 
   double_strips <- function(data, mapping, ...) {
     dt <- count(data, c(mapping_string(mapping$x), mapping_string(mapping$y)))

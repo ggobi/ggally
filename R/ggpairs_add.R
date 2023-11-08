@@ -31,7 +31,7 @@
 #' @examples
 #' # small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
-#' data(tips, package = "reshape")
+#' data(tips)
 #'
 #' pm <- ggpairs(tips[, 2:4], ggplot2::aes(color = sex))
 #' ## change to black and white theme
@@ -199,7 +199,7 @@ add_to_ggmatrix <- function(
 #' @return Data frame with columns \code{c("row", "col")} containing locations for the plot matrix
 #' @export
 #' @examples
-#' pm <- ggpairs(reshape::tips, 1:3)
+#' pm <- ggpairs(tips, 1:3)
 #'
 #' # All locations
 #' ggmatrix_location(pm, location = "all")

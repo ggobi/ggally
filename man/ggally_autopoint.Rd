@@ -24,7 +24,7 @@ using \code{\link[ggforce]{geom_autopoint}} from package \pkg{ggforce}.
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
 p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
 p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))

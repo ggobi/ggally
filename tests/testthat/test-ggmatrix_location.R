@@ -25,7 +25,7 @@ expect_rows_cols <- function(loc, rows, cols) {
 }
 
 test_that("rows work", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
 
   expect_rows_cols(
     ggmatrix_location(pm, rows = c(3, 5)),
@@ -50,7 +50,7 @@ test_that("rows work", {
 
 
 test_that("cols work", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
 
   expect_rows_cols(
     ggmatrix_location(pm, cols = c(3, 5)),
@@ -75,7 +75,7 @@ test_that("cols work", {
 
 
 test_that("location logical", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
 
   expect_loc_grid(
     ggmatrix_location(pm, location = TRUE),
@@ -87,7 +87,7 @@ test_that("location logical", {
 })
 
 test_that("location character", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
   to_loc <- expand.grid(row = 1:7, col = 1:7)
 
   expect_loc_grid(
@@ -118,7 +118,7 @@ test_that("location character", {
 
 
 test_that("location matrix", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
   to_loc <- subset(expand.grid(row = 1:7, col = 1:7), row %in% c(3, 5) | col %in% c(3, 5))
 
   mat <- matrix(FALSE, nrow = 7, ncol = 7, byrow = TRUE)
@@ -158,7 +158,7 @@ test_that("location matrix", {
 
 
 test_that("location matrix", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
   to_loc <- expand.grid(row = 1:7, col = 1:7)
 
   expect_loc_grid(
@@ -190,7 +190,7 @@ test_that("location matrix", {
 
 
 test_that("location recursion", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
   to_loc <- expand.grid(row = 1:7, col = 1:7)
 
   expect_loc_grid(

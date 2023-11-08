@@ -180,10 +180,7 @@ p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = TRUE)
 p_(p)
 p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = 3)
 p_(p)
-splineFactor <- length(columns) * 3
-p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(splineFactor))
-p_(p)
 }
 \author{
-Jason Crowley, Barret Schloerke, Di Cook, Heike Hofmann, Hadley Wickham
+Jason Crowley, Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham
 }

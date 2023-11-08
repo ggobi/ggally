@@ -81,7 +81,7 @@ If a function is supplied as an option, it should implement the function api of 
  # small function to display plots only if it's interactive
  p_ <- GGally::print_if_interactive
 
- data(baseball, package = "plyr")
+ data(baseball)
 
  # Keep players from 1990-1995 with at least one at bat
  # Add how many singles a player hit

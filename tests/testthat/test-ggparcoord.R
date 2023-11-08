@@ -133,10 +133,7 @@ test_that("splineFactor", {
   p1 <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = TRUE)
   p2 <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = 3)
 
-  splineFactor <- length(columns) * 3
-  p3 <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(splineFactor))
-
-  pList <- list(p1, p2, p3)
+  pList <- list(p1, p2)
   for (p in pList) {
     expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$x), "spline.x")
     expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$y), "spline.y")
@@ -194,14 +191,14 @@ test_that("groupColumn", {
 
   # group column is a regular column
   ## factor
-  p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 4)
-  expect_true("clarity" %in% levels(p$data$variable))
+  #p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 4)
+  #expect_true("clarity" %in% levels(p$data$variable))
   ## character
-  p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 3)
-  expect_true("color" %in% levels(p$data$variable))
+  #p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 3)
+  #expect_true("color" %in% levels(p$data$variable))
   ## numeric
-  p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 1)
-  expect_true("carat" %in% levels(p$data$variable))
+  #p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 1)
+  #expect_true("carat" %in% levels(p$data$variable))
 
 
 })

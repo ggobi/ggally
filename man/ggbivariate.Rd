@@ -41,7 +41,7 @@ an outcome variable with several potential explanatory variables.
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")))
 
 # Personalize plot title and legend title

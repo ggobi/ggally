@@ -95,8 +95,9 @@ if (getRversion() >= "2.15.1") {
 #' \code{arm} package.
 #' @author Francois Briatte, with contributions from Amos B. Elberg and
 #' Barret Schloerke
-#' @importFrom reshape melt melt.data.frame melt.default
 #' @importFrom stats cor
+#' @importFrom dplyr rename
+#' @importFrom tidyr pivot_longer
 #' @importFrom grDevices colorRampPalette
 #' @examples
 #' # Small function to display plots only if it's interactive
@@ -220,9 +221,15 @@ ggcorr <- function(
   m = data.frame(m * lower.tri(m))
   rownames(m) = names(m)
   m$.ggally_ggcorr_row_names = rownames(m)
-  m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
-  names(m) = c("x", "y", "coefficient")
-  m$coefficient[m$coefficient == 0] = NA
+  #m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
+  #names(m) = c("x", "y", "coefficient")
+  m_long = m |>
+    tidyr::pivot_longer(cols = -.ggally_ggcorr_row_names,
+                 names_to="y",
+                 values_to="coefficient") |>
+    dplyr::rename(x=.ggally_ggcorr_row_names) |>
+    dplyr::mutate(y = factor(y, levels=rownames(m)))
+  m_long$coefficient[m_long$coefficient == 0] = NA
 
   # -- correlation quantiles ---------------------------------------------------
 
@@ -234,7 +241,7 @@ ggcorr <- function(
       x = sort(c(x, 0))
     }
 
-    m$breaks = cut(m$coefficient, breaks = unique(x), include.lowest = TRUE,
+    m_long$breaks = cut(m_long$coefficient, breaks = unique(x), include.lowest = TRUE,
                    dig.lab = digits)
 
   }
@@ -243,7 +250,7 @@ ggcorr <- function(
 
   if (is.null(midpoint)) {
 
-    midpoint = median(m$coefficient, na.rm = TRUE)
+    midpoint = median(m_long$coefficient, na.rm = TRUE)
     message(paste("Color gradient midpoint set at median correlation to",
                   round(midpoint, 2)))
 
@@ -251,8 +258,8 @@ ggcorr <- function(
 
   # -- plot structure ----------------------------------------------------------
 
-  m$label = round(m$coefficient, label_round)
-  p = ggplot(na.omit(m), aes(x, y))
+  m_long$label = round(m_long$coefficient, label_round)
+  p = ggplot(na.omit(m_long), aes(x, y))
 
   if (geom == "tile") {
 
@@ -288,7 +295,7 @@ ggcorr <- function(
 
     } else if (is.null(palette)) {
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
+      x = colorRampPalette(c(low, mid, high))(length(levels(m_long$breaks)))
 
       p = p +
         scale_fill_manual(name, values = x, drop = drop)
@@ -343,7 +350,7 @@ ggcorr <- function(
 
     } else if (is.null(palette)) {
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
+      x = colorRampPalette(c(low, mid, high))(length(levels(m_long$breaks)))
 
       p = p +
         scale_color_manual(name, values = x, drop = drop) +
@@ -391,7 +398,7 @@ ggcorr <- function(
 
     } else if (is.null(palette)) {
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
+      x = colorRampPalette(c(low, mid, high))(length(levels(m_long$breaks)))
 
       p = p +
         scale_color_manual(name, values = x, drop = drop)
@@ -437,7 +444,7 @@ ggcorr <- function(
 
   # -- horizontal scale expansion ----------------------------------------------
 
-  textData <- m[m$x == m$y & is.na(m$coefficient), ]
+  textData <- m_long[m_long$x == m_long$y & is.na(m_long$coefficient), ]
   xLimits <- levels(textData$y)
   textData$diagLabel <- textData$x
 
@@ -452,13 +459,13 @@ ggcorr <- function(
 
     textData$x[1:layout.exp] <- spacer
     textData$diagLabel[1:layout.exp] <- NA
-    xLimits <- c(spacer, levels(m$y))
+    xLimits <- c(spacer, levels(m_long$y))
   }
 
   p = p  +
     geom_text(data = textData, aes_string(label = "diagLabel"), ..., na.rm = TRUE) +
     scale_x_discrete(breaks = NULL, limits = xLimits) +
-    scale_y_discrete(breaks = NULL, limits = levels(m$y)) +
+    scale_y_discrete(breaks = NULL, limits = levels(m_long$y)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +
     theme(

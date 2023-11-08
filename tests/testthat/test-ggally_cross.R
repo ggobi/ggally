@@ -2,8 +2,7 @@ context("ggally_cross")
 
 test_that("example", {
   # ggally_cross
-  skip_if_not_installed("reshape")
-  data(tips, package = "reshape")
+  data(tips)
 
   # Custom fill
   vdiffr::expect_doppelganger("tips-fill-red", ggally_cross(tips, mapping = aes(x = smoker, y = sex), fill = "red"))

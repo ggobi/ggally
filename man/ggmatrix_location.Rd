@@ -38,7 +38,7 @@ Data frame with columns \code{c("row", "col")} containing locations for the plot
 Convert many types of location values to a consistent \code{data.frame} of \code{row} and \code{col} values.
 }
 \examples{
-pm <- ggpairs(reshape::tips, 1:3)
+pm <- ggpairs(tips, 1:3)
 
 # All locations
 ggmatrix_location(pm, location = "all")

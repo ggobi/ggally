@@ -1,7 +1,7 @@
 
 context("ggmatrix_getput")
 
-data(tips, package = "reshape")
+data(tips)
 
 test_that("stops", {
 
