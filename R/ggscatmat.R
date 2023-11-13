@@ -72,6 +72,7 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
 #' @param corMethod method argument supplied to \code{\link[stats]{cor}}
 #' @author Mengjia Ni, Di Cook
 #' @importFrom stats cor
+#' @importFrom dplyr group_by summarise
 #' @examples
 #' data(flea)
 #' head(uppertriangle(flea, columns = 2:4))
@@ -80,7 +81,7 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
 uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod = "pearson") {
   # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
-  # why do  we need to ocheck this again?
+  # why do  we need to check this again?
   dn <- data.choose[sapply(data.choose, is.numeric)]
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
@@ -120,79 +121,105 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
   b$xlab <- factor(b$xlab, levels = unique(b$xlab))
   b$ylab <- factor(b$ylab, levels = unique(b$ylab))
   if (is.null(color)) {
-    data.cor <- ddply(
-      b, .(xlab, ylab),
-      function(subsetDt) {
-        xlab <- subsetDt$xlab
-        ylab <- subsetDt$ylab
-        xvalue <- subsetDt$xvalue
-        yvalue <- subsetDt$yvalue
+    data.cor <- b |>
+      dplyr::group_by(xlab, ylab) |>
+      dplyr::summarise(r=cor(xvalue, yvalue,
+                      use = "pairwise.complete.obs",
+                      method = "pearson"),
+                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+                      yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue)))
+    if (identical(corMethod, "rsquare"))
+      data.cor$r <- data.cor$r^2
+    data.cor$r <- paste(round(data.cor$r, digits = 2))
 
-        if (identical(corMethod, "rsquare")) {
-          r <- cor(
-            xvalue, yvalue,
-            use = "pairwise.complete.obs",
-            method = "pearson"
-          )
-          r <- r ^ 2
-        } else {
-          r <- cor(
-            xvalue, yvalue,
-            use = "pairwise.complete.obs",
-            method = corMethod
-          )
-        }
-        r <- paste(round(r, digits = 2))
+#    data.cor <- ddply(
+#      b, .(xlab, ylab),
+#      function(subsetDt) {
+#        xlab <- subsetDt$xlab
+#        ylab <- subsetDt$ylab
+#        xvalue <- subsetDt$xvalue
+#        yvalue <- subsetDt$yvalue
 
-        data.frame(
-          xlab = unique(xlab), ylab = unique(ylab),
-          r = r,
-          xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-          yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
-        )
-      }
-    )
+#        if (identical(corMethod, "rsquare")) {
+#          r <- cor(
+#            xvalue, yvalue,
+#            use = "pairwise.complete.obs",
+#            method = "pearson"
+#          )
+#          r <- r ^ 2
+#        } else {
+#          r <- cor(
+#            xvalue, yvalue,
+#            use = "pairwise.complete.obs",
+#            method = corMethod
+#          )
+#        }
+#        r <- paste(round(r, digits = 2))
+#
+#        data.frame(
+#          xlab = unique(xlab), ylab = unique(ylab),
+#          r = r,
+#          xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+#          yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
+#        )
+#      }
+#    )
     return(data.cor)
 
   } else {
     c <- b
-    data.cor1 <- ddply(
-      c, .(ylab, xlab, colorcolumn),
-      function(subsetDt) {
-        xlab <- subsetDt$xlab
-        ylab <- subsetDt$ylab
-        colorcolumn <- subsetDt$colorcolumn
-        xvalue <- subsetDt$xvalue
-        yvalue <- subsetDt$yvalue
+    data.cor1 <- c |>
+      dplyr::group_by(xlab, ylab, colorcolumn) |>
+      dplyr::summarise(r=cor(xvalue, yvalue,
+                             use = "pairwise.complete.obs",
+                             method = "pearson"))
+    if (identical(corMethod, "rsquare"))
+      data.cor1$r <- data.cor1$r^2
+    data.cor1$r <- paste(round(data.cor1$r, digits = 2))
 
-        if (identical(corMethod, "rsquare")) {
-          r <- cor(
-            xvalue, yvalue,
-            use = "pairwise.complete.obs",
-            method = "pearson"
-          )
-          r <- r ^ 2
-        } else {
-          r <- cor(
-            xvalue, yvalue,
-            use = "pairwise.complete.obs",
-            method = corMethod
-          )
-        }
-        r <- paste(round(r, digits = 2))
-        data.frame(
-          ylab = unique(ylab), xlab = unique(xlab), colorcolumn = unique(colorcolumn),
-          r = r
-        )
-      }
-    )
+#    data.cor1 <- ddply(
+#      c, .(ylab, xlab, colorcolumn),
+#      function(subsetDt) {
+#        xlab <- subsetDt$xlab
+#        ylab <- subsetDt$ylab
+#        colorcolumn <- subsetDt$colorcolumn
+#        xvalue <- subsetDt$xvalue
+#        yvalue <- subsetDt$yvalue
+
+#        if (identical(corMethod, "rsquare")) {
+#          r <- cor(
+#            xvalue, yvalue,
+#            use = "pairwise.complete.obs",
+#            method = "pearson"
+#          )
+#          r <- r ^ 2
+#        } else {
+#          r <- cor(
+#            xvalue, yvalue,
+#            use = "pairwise.complete.obs",
+#            method = corMethod
+#          )
+#        }
+#        r <- paste(round(r, digits = 2))
+#        data.frame(
+#          ylab = unique(ylab), xlab = unique(xlab), colorcolumn = unique(colorcolumn),
+#          r = r
+#        )
+#      }
+#    )
 
     n <- nrow(data.frame(unique(b$colorcolumn)))
-    position <- ddply(b, .(ylab, xlab), summarise,
-                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-                      ymin = min(yvalue),
-                      ymax = max(yvalue),
-                      range = max(yvalue) - min(yvalue))
+    position <- b |>
+      dplyr::group_by(xlab, ylab) |>
+      dplyr::summarise(xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+                ymin = min(yvalue),
+                ymax = max(yvalue),
+                range = max(yvalue) - min(yvalue))
+#    position <- ddply(b, .(ylab, xlab), summarise,
+#                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+#                      ymin = min(yvalue),
+#                      ymax = max(yvalue),
+#                      range = max(yvalue) - min(yvalue))
     df <- data.frame()
     for (i in 1:nrow(position)) {
       for (j in 1:n) {
@@ -201,7 +228,7 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
       }
     }
     data.cor <- cbind(data.cor1, df)
-    colnames(data.cor) <- c("ylab", "xlab", "colorcolumn", "r", "xvalue", "yvalue")
+    colnames(data.cor) <- c("xlab", "ylab", "colorcolumn", "r", "xvalue", "yvalue")
     return(data.cor)
   }
 }
