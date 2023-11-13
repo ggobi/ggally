@@ -148,26 +148,35 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flea</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span>, columns <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    xlab  ylab    r xvalue yvalue</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 tars2 tars1 0.03  126.5  182.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  head tars1 -0.1   50.5  182.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  head tars2 0.67   50.5  126.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   xlab [2]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   xlab  ylab  r     xvalue yvalue</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tars2 tars1 0.03   126.    182 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> head  tars1 -0.1    50.5   182 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> head  tars2 0.67    50.5   126.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    xlab  ylab     r xvalue yvalue</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 tars2 tars1  0.03  126.5  182.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  head tars1  -0.1   50.5  182.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  head tars2  0.67   50.5  126.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 aede1 tars1 -0.33  136.5  182.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 aede1 tars2  0.56  136.5  126.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 aede1  head  0.59  136.5   50.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   xlab [3]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   xlab  ylab  r     xvalue yvalue</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tars2 tars1 0.03   126.   182  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> head  tars1 -0.1    50.5  182  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> head  tars2 0.67    50.5  126. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> aede1 tars1 -0.33  136.   182  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> aede1 tars2 0.56   136.   126. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> aede1 head  0.59   136.    50.5</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">uppertriangle</span><span class="op">(</span><span class="va">flea</span>, color <span class="op">=</span> <span class="st">"species"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ylab  xlab colorcolumn    r xvalue yvalue</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 tars1 tars2    Concinna 0.77  126.5    152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 tars1 tars2    Heikert. 0.64  126.5    182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 tars1 tars2   Heptapot. 0.56  126.5    212</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 tars1  head    Concinna 0.68   50.5    152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 tars1  head    Heikert. 0.65   50.5    182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 tars1  head   Heptapot. 0.77   50.5    212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   xlab, ylab [2]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   xlab  ylab  colorcolumn r     xvalue yvalue</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tars2 tars1 Concinna    0.77   126.     152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> tars2 tars1 Heikert.    0.64   126.     182</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> tars2 tars1 Heptapot.   0.56   126.     212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> head  tars1 Concinna    0.68    50.5    152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> head  tars1 Heikert.    0.65    50.5    182</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> head  tars1 Heptapot.   0.77    50.5    212</span>
 </code></pre></div>
     </div>
   </div>
