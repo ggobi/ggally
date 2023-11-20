@@ -42,8 +42,7 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
   colnames(newdata) <- c("xvalue", "yvalue", "xslot", "yslot", "xlab", "ylab", colnames(factor))
 
   rp <- data.frame(newdata)
-  rp[[2]][rp[[3]] >= rp[[4]]] <- "NA"
-  rp[[1]][rp[[3]] > rp[[4]]] <- "NA"
+
 
   rp$xvalue <- suppressWarnings(as.numeric(as.character(rp$xvalue)))
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
@@ -51,6 +50,9 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
   rp$yslot <- suppressWarnings(as.numeric(as.character(rp$yslot)))
   rp$xlab <- factor(rp$xlab, levels = unique(rp$xlab))
   rp$ylab <- factor(rp$ylab, levels = unique(rp$ylab))
+
+  rp[[2]][rp[[3]] >= rp[[4]]] <- NA
+  rp[[1]][rp[[3]] > rp[[4]]] <- NA
 
   if (is.null(color)) {
     rp.new <- rp[1:6]
@@ -107,11 +109,10 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
   )
 
   rp <- data.frame(newdata, stringsAsFactors = TRUE)
-  rp[[2]][rp[[3]] <= rp[[4]]] <- "NA"
-  rp[[1]][rp[[3]] < rp[[4]]] <- "NA"
-
   rp$xvalue <- suppressWarnings(as.numeric(as.character(rp$xvalue)))
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
+  rp[[2]][rp[[3]] <= rp[[4]]] <- NA
+  rp[[1]][rp[[3]] < rp[[4]]] <- NA
 
   if (is.null(color)) {
     rp.new <- rp[1:8]
@@ -119,8 +120,7 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     colorcolumn <- rp[[which(colnames(rp) == color)]]
     rp.new <- cbind(rp[1:8], colorcolumn)
   }
-  a <- rp.new
-  b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
+  b <- rp.new[!is.na(rp.new$xvalue) & !is.na(rp.new$yvalue), ]
   b$xlab <- factor(b$xlab, levels = unique(b$xlab))
   b$ylab <- factor(b$ylab, levels = unique(b$ylab))
   if (is.null(color)) {
