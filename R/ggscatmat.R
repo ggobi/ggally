@@ -25,7 +25,7 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   q <- nrow(dn)
-  newdata      <- as.data.frame(matrix(NA, nrow = q * p * p, ncol = 6 + ncol(factor)), stringsAsFactors = FALSE)
+  newdata <- as.data.frame(matrix(NA, nrow = q * p * p, ncol = 6 + ncol(factor)), stringsAsFactors = FALSE)
   newdata[5:6] <- as.data.frame(matrix("", nrow = q * p * p, ncol = 2), stringsAsFactors = FALSE)
 
   r <- 1
@@ -47,8 +47,8 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
 
   rp$xvalue <- suppressWarnings(as.numeric(as.character(rp$xvalue)))
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
-  rp$xslot  <- suppressWarnings(as.numeric(as.character(rp$xslot)))
-  rp$yslot  <- suppressWarnings(as.numeric(as.character(rp$yslot)))
+  rp$xslot <- suppressWarnings(as.numeric(as.character(rp$xslot)))
+  rp$yslot <- suppressWarnings(as.numeric(as.character(rp$yslot)))
   rp$xlab <- factor(rp$xlab, levels = unique(rp$xlab))
   rp$ylab <- factor(rp$ylab, levels = unique(rp$ylab))
 
@@ -88,10 +88,13 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
   newdata <- NULL
   for (i in 1:p) {
     for (j in 1:p) {
-      newdata <- rbind(newdata,
-                       cbind(dn[, i], dn[, j], i, j, colnames(dn)[i], colnames(dn)[j],
-                             min(dn[, i]) + 0.5 * (max(dn[, i]) - min(dn[, i])),
-                             min(dn[, j]) + 0.5 * (max(dn[, j]) - min(dn[, j])), factor)
+      newdata <- rbind(
+        newdata,
+        cbind(
+          dn[, i], dn[, j], i, j, colnames(dn)[i], colnames(dn)[j],
+          min(dn[, i]) + 0.5 * (max(dn[, i]) - min(dn[, i])),
+          min(dn[, j]) + 0.5 * (max(dn[, j]) - min(dn[, j])), factor
+        )
       )
     }
   }
@@ -114,7 +117,7 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     rp.new <- rp[1:8]
   } else {
     colorcolumn <- rp[[which(colnames(rp) == color)]]
-    rp.new <- cbind(rp[1:8],  colorcolumn)
+    rp.new <- cbind(rp[1:8], colorcolumn)
   }
   a <- rp.new
   b <- subset(a, (a$yvalue != "NA") & (a$xvalue != "NA"))
@@ -123,103 +126,110 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
   if (is.null(color)) {
     data.cor <- b |>
       dplyr::group_by(xlab, ylab) |>
-      dplyr::summarise(r=cor(xvalue, yvalue,
-                      use = "pairwise.complete.obs",
-                      method = "pearson"),
-                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-                      yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue)))
-    if (identical(corMethod, "rsquare"))
+      dplyr::summarise(
+        r = cor(xvalue, yvalue,
+          use = "pairwise.complete.obs",
+          method = "pearson"
+        ),
+        xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+        yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
+      )
+    if (identical(corMethod, "rsquare")) {
       data.cor$r <- data.cor$r^2
+    }
     data.cor$r <- paste(round(data.cor$r, digits = 2))
 
-#    data.cor <- ddply(
-#      b, .(xlab, ylab),
-#      function(subsetDt) {
-#        xlab <- subsetDt$xlab
-#        ylab <- subsetDt$ylab
-#        xvalue <- subsetDt$xvalue
-#        yvalue <- subsetDt$yvalue
+    #    data.cor <- ddply(
+    #      b, .(xlab, ylab),
+    #      function(subsetDt) {
+    #        xlab <- subsetDt$xlab
+    #        ylab <- subsetDt$ylab
+    #        xvalue <- subsetDt$xvalue
+    #        yvalue <- subsetDt$yvalue
 
-#        if (identical(corMethod, "rsquare")) {
-#          r <- cor(
-#            xvalue, yvalue,
-#            use = "pairwise.complete.obs",
-#            method = "pearson"
-#          )
-#          r <- r ^ 2
-#        } else {
-#          r <- cor(
-#            xvalue, yvalue,
-#            use = "pairwise.complete.obs",
-#            method = corMethod
-#          )
-#        }
-#        r <- paste(round(r, digits = 2))
-#
-#        data.frame(
-#          xlab = unique(xlab), ylab = unique(ylab),
-#          r = r,
-#          xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-#          yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
-#        )
-#      }
-#    )
+    #        if (identical(corMethod, "rsquare")) {
+    #          r <- cor(
+    #            xvalue, yvalue,
+    #            use = "pairwise.complete.obs",
+    #            method = "pearson"
+    #          )
+    #          r <- r ^ 2
+    #        } else {
+    #          r <- cor(
+    #            xvalue, yvalue,
+    #            use = "pairwise.complete.obs",
+    #            method = corMethod
+    #          )
+    #        }
+    #        r <- paste(round(r, digits = 2))
+    #
+    #        data.frame(
+    #          xlab = unique(xlab), ylab = unique(ylab),
+    #          r = r,
+    #          xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+    #          yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
+    #        )
+    #      }
+    #    )
     return(data.cor)
-
   } else {
     c <- b
     data.cor1 <- c |>
       dplyr::group_by(xlab, ylab, colorcolumn) |>
-      dplyr::summarise(r=cor(xvalue, yvalue,
-                             use = "pairwise.complete.obs",
-                             method = "pearson"))
-    if (identical(corMethod, "rsquare"))
+      dplyr::summarise(r = cor(xvalue, yvalue,
+        use = "pairwise.complete.obs",
+        method = "pearson"
+      ))
+    if (identical(corMethod, "rsquare")) {
       data.cor1$r <- data.cor1$r^2
+    }
     data.cor1$r <- paste(round(data.cor1$r, digits = 2))
 
-#    data.cor1 <- ddply(
-#      c, .(ylab, xlab, colorcolumn),
-#      function(subsetDt) {
-#        xlab <- subsetDt$xlab
-#        ylab <- subsetDt$ylab
-#        colorcolumn <- subsetDt$colorcolumn
-#        xvalue <- subsetDt$xvalue
-#        yvalue <- subsetDt$yvalue
+    #    data.cor1 <- ddply(
+    #      c, .(ylab, xlab, colorcolumn),
+    #      function(subsetDt) {
+    #        xlab <- subsetDt$xlab
+    #        ylab <- subsetDt$ylab
+    #        colorcolumn <- subsetDt$colorcolumn
+    #        xvalue <- subsetDt$xvalue
+    #        yvalue <- subsetDt$yvalue
 
-#        if (identical(corMethod, "rsquare")) {
-#          r <- cor(
-#            xvalue, yvalue,
-#            use = "pairwise.complete.obs",
-#            method = "pearson"
-#          )
-#          r <- r ^ 2
-#        } else {
-#          r <- cor(
-#            xvalue, yvalue,
-#            use = "pairwise.complete.obs",
-#            method = corMethod
-#          )
-#        }
-#        r <- paste(round(r, digits = 2))
-#        data.frame(
-#          ylab = unique(ylab), xlab = unique(xlab), colorcolumn = unique(colorcolumn),
-#          r = r
-#        )
-#      }
-#    )
+    #        if (identical(corMethod, "rsquare")) {
+    #          r <- cor(
+    #            xvalue, yvalue,
+    #            use = "pairwise.complete.obs",
+    #            method = "pearson"
+    #          )
+    #          r <- r ^ 2
+    #        } else {
+    #          r <- cor(
+    #            xvalue, yvalue,
+    #            use = "pairwise.complete.obs",
+    #            method = corMethod
+    #          )
+    #        }
+    #        r <- paste(round(r, digits = 2))
+    #        data.frame(
+    #          ylab = unique(ylab), xlab = unique(xlab), colorcolumn = unique(colorcolumn),
+    #          r = r
+    #        )
+    #      }
+    #    )
 
     n <- nrow(data.frame(unique(b$colorcolumn)))
     position <- b |>
       dplyr::group_by(xlab, ylab) |>
-      dplyr::summarise(xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-                ymin = min(yvalue),
-                ymax = max(yvalue),
-                range = max(yvalue) - min(yvalue))
-#    position <- ddply(b, .(ylab, xlab), summarise,
-#                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-#                      ymin = min(yvalue),
-#                      ymax = max(yvalue),
-#                      range = max(yvalue) - min(yvalue))
+      dplyr::summarise(
+        xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+        ymin = min(yvalue),
+        ymax = max(yvalue),
+        range = max(yvalue) - min(yvalue)
+      )
+    #    position <- ddply(b, .(ylab, xlab), summarise,
+    #                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
+    #                      ymin = min(yvalue),
+    #                      ymax = max(yvalue),
+    #                      range = max(yvalue) - min(yvalue))
     df <- data.frame()
     for (i in 1:nrow(position)) {
       for (j in 1:n) {
@@ -250,7 +260,7 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
 #' data(flea)
 #'
 #' p_(scatmat(flea, columns = 2:4))
-#' p_(scatmat(flea, columns= 2:4, color = "species"))
+#' p_(scatmat(flea, columns = 2:4, color = "species"))
 scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
@@ -258,17 +268,19 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   if (ncol(dn) == 0) {
     stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
   } else {
-     ltdata.new <- lowertriangle(data, columns = columns, color = color)
-     ## set up the plot
+    ltdata.new <- lowertriangle(data, columns = columns, color = color)
+    ## set up the plot
     r <- ggplot(ltdata.new, mapping = aes_string(x = "xvalue", y = "yvalue")) +
       theme(axis.title.x = element_blank(), axis.title.y = element_blank()) +
       facet_grid(ylab ~ xlab, scales = "free") +
       theme(aspect.ratio = 1)
     if (is.null(color)) {
-       ## b/w version
+      ## b/w version
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
-        data.frame(xlab = names(dn)[i], ylab = names(dn)[i],
-                   x = dn[, i], stringsAsFactors = TRUE)
+        data.frame(
+          xlab = names(dn)[i], ylab = names(dn)[i],
+          x = dn[, i], stringsAsFactors = TRUE
+        )
       }))
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab == names(dn)[m])
@@ -277,22 +289,25 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
             x = x,
             y = after_stat(scaled) * diff(range(x)) + min(x) # nolint
           ),
-          data = j, position = "identity", geom = "line", color = "black")
+          data = j, position = "identity", geom = "line", color = "black"
+        )
       }
-       ## add b/w points
+      ## add b/w points
       r <- r + geom_point(alpha = alpha, na.rm = TRUE)
       return(r)
     } else {
-       ## do the colored version
+      ## do the colored version
       densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
-        data.frame(xlab = names(dn)[i], ylab = names(dn)[i],
-                   x = dn[, i], colorcolumn = data[, which(colnames(data) == color)],
-                   stringsAsFactors = TRUE)
+        data.frame(
+          xlab = names(dn)[i], ylab = names(dn)[i],
+          x = dn[, i], colorcolumn = data[, which(colnames(data) == color)],
+          stringsAsFactors = TRUE
+        )
       }))
       for (m in 1:ncol(dn)) {
         j <- subset(densities, xlab == names(dn)[m])
         r <- r +
-                           # r is the facet grid plot
+          # r is the facet grid plot
           stat_density(
             aes_string(
               x = "x", y = "after_stat(scaled) * diff(range(x)) + min(x)",
@@ -316,7 +331,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   }
 }
 
-#'Traditional scatterplot matrix for purely quantitative variables
+#' Traditional scatterplot matrix for purely quantitative variables
 #'
 #' This function makes a scatterplot matrix for quantitative variables with density plots on the diagonal
 #' and correlation printed in the upper triangle.
@@ -340,10 +355,10 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
 ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson") {
   ## if 'color' is not a factor, mold it into one
   if (!is.null(color)) {
-     if (is.null(data[[color]])) {
-        stop(paste0("Non-existent column <", color, "> requested"))
-     }
-     data[[color]] <- as.factor(data[[color]])
+    if (is.null(data[[color]])) {
+      stop(paste0("Non-existent column <", color, "> requested"))
+    }
+    data[[color]] <- as.factor(data[[color]])
   }
   ## do we really need this next line?
   data <- upgrade_scatmat_data(data)
