@@ -95,7 +95,7 @@ if (require(survival) && require(scales)) {
     ))
 
   # Multiple factors
-  lung2 <- plyr::mutate(lung, older = as.factor(age > 60))
+  lung2 <- dplyr::mutate(lung, older = as.factor(age > 60))
   sf.sex2 <- survival::survfit(Surv(time, status) ~ sex + older, data = lung2)
   pl.sex2 <- ggsurv(sf.sex2)
   p_(pl.sex2)

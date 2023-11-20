@@ -1,8 +1,7 @@
 context("stat_weighted_mean")
 
 test_that("example", {
-  skip_if_not_installed("reshape")
-  data(tips, package = "reshape")
+  data(tips)
 
   vdiffr::expect_doppelganger(
     "point",

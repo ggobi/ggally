@@ -157,7 +157,7 @@ ggally_points <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex")))
@@ -210,7 +210,7 @@ ggally_smooth_lm <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
 #' p_(ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 #' p_(ggally_density(
@@ -275,7 +275,7 @@ ggally_density <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 #' # display with grid
 #' p_(ggally_cor(
@@ -607,7 +607,7 @@ ggally_statistic <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 #' p_(ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 #' p_(ggally_box(
@@ -645,7 +645,7 @@ ggally_box_no_facet <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 #' p_(ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 #' p_(ggally_dot(
@@ -681,7 +681,7 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_dot_and_box(
 #'   tips,
 #'   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
@@ -768,7 +768,7 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex)))
 #' p_(ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1))
 ggally_facethist <- function(data, mapping, ...) {
@@ -818,7 +818,7 @@ ggally_facethist <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 #' p_(ggally_facetdensity(
 #'   tips,
@@ -842,7 +842,7 @@ ggally_facetdensity <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 #' p_(ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 #' p_(ggally_denstrip(
@@ -943,7 +943,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill)))
 #' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day)))
 ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
@@ -985,7 +985,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = day)))
 #' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25))
 ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
@@ -1128,14 +1128,7 @@ get_x_axis_labels <- function(p, xRange) {
     }
     NULL
   }
-  name <-
-    if (packageVersion("ggplot2") >= 3.3) {
-      "title"
-    } else {
-      "axis.text.x"
-    }
-
-  xAxisGrob <- get_raw_grob_by_name(axisTable, name)
+  xAxisGrob <- get_raw_grob_by_name(axisTable, "title")
 
   axisBreaks <- as.numeric(xAxisGrob$label)
 
@@ -1196,7 +1189,7 @@ get_x_axis_labels <- function(p, xRange) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_diagAxis(tips, ggplot2::aes(x = tip)))
 #' p_(ggally_diagAxis(tips, ggplot2::aes(x = sex)))
 ggally_diagAxis <- function(
@@ -1320,7 +1313,7 @@ ggally_diagAxis <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time)))
 #' p_(ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time)))
 ggally_facetbar <- function(data, mapping, ...) {
@@ -1355,7 +1348,7 @@ ggally_facetbar <- function(data, mapping, ...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_ratio(tips, ggplot2::aes(sex, day)))
 #' p_(ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal())
 #' # only plot tiles greater or equal to 20 and scale to a max of 50
@@ -1457,7 +1450,7 @@ ggally_ratio <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex)))
 #' p_(ggally_count(tips, mapping = ggplot2::aes(x = smoker, y = sex, fill = day)))
 #'
@@ -1714,7 +1707,7 @@ ggally_naDiag <- function(...) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
 #' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
 #' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))
@@ -1766,7 +1759,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #' p_ <- GGally::print_if_interactive
 #'
 #' if (require(Hmisc)) {
-#'   data(tips, package = "reshape")
+#'   data(tips)
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day)))
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill)))
 #'

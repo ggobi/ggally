@@ -27,7 +27,7 @@ be added (see examples).
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex)))
 p_(ggally_cross(tips, mapping = aes(x = day, y = time)))
 

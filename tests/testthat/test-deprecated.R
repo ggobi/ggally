@@ -1,7 +1,7 @@
 
 context("deprecated")
 
-data(tips, package = "reshape")
+data(tips)
 
 test_that("ggally-cor", {
 

@@ -23,7 +23,7 @@ Make a box plot with a given data set. \code{ggally_box_no_facet} will be a sing
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 p_(ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 p_(ggally_box(

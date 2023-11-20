@@ -1,8 +1,7 @@
 context("ggbivariate")
 
 test_that("example", {
-  skip_if_not_installed("reshape")
-  data(tips, package = "reshape")
+  data(tips)
 
   p <- ggbivariate(tips, "smoker", c("day", "time", "sex", "tip"))
   vdiffr::expect_doppelganger("tips", p)

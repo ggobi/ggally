@@ -1,6 +1,6 @@
 
 context("ggmatrix")
-data(tips, package = "reshape")
+data(tips)
 
 test_that("stops", {
 
@@ -177,26 +177,26 @@ test_that("ggmatrix_gtable progress", {
 test_that("ggmatrix proportions", {
 
   expect_error({
-    ggmatrix_proportions("not auto", reshape::tips, 1:ncol(reshape::tips))
+    ggmatrix_proportions("not auto", tips, 1:ncol(tips))
   }, "need to be non-NA")
   expect_error({
-    ggmatrix_proportions(NA, reshape::tips, 1:ncol(reshape::tips))
+    ggmatrix_proportions(NA, tips, 1:ncol(tips))
   }, "need to be non-NA")
   expect_error({
-    ggmatrix_proportions(c(1, NA, 1, 1, 1, 1, 1), reshape::tips, 1:ncol(reshape::tips))
+    ggmatrix_proportions(c(1, NA, 1, 1, 1, 1, 1), tips, 1:ncol(tips))
   }, "need to be non-NA")
 
   expect_equal(
-    ggmatrix_proportions("auto", reshape::tips, 1:ncol(reshape::tips)),
+    ggmatrix_proportions("auto", tips, 1:ncol(tips)),
     c(2.5, 2.5, 2, 2, 4, 2, 2.5)
   )
 
   expect_equal(
-    ggmatrix_proportions(1, reshape::tips, 1:ncol(reshape::tips)),
+    ggmatrix_proportions(1, tips, 1:ncol(tips)),
     c(1, 1, 1, 1, 1, 1, 1)
   )
   expect_equal(
-    ggmatrix_proportions(NULL, reshape::tips, 1:ncol(reshape::tips)),
+    ggmatrix_proportions(NULL, tips, 1:ncol(tips)),
     NULL
   )
 })

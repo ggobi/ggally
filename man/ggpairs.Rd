@@ -108,7 +108,7 @@ p_(pm)
 # Note: colour should be categorical, else you will need to reset
 # the upper triangle to use points instead of trying to compute corr
 
-data(tips, package = "reshape")
+data(tips)
 pm <- ggpairs(tips[, 1:3])
 p_(pm)
 pm <- ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"))

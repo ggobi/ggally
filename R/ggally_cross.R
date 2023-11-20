@@ -17,7 +17,7 @@
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_cross(tips, mapping = aes(x = smoker, y = sex)))
 #' p_(ggally_cross(tips, mapping = aes(x = day, y = time)))
 #'
@@ -116,7 +116,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' p_(ggally_table(tips, mapping = aes(x = smoker, y = sex)))
 #' p_(ggally_table(tips, mapping = aes(x = day, y = time)))
 #' p_(ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker)))
@@ -204,7 +204,7 @@ ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_t
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #'
 #' # differences with ggally_table()
 #' p_(ggally_table(tips, mapping = aes(x = day, y = time)))

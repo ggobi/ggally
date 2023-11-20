@@ -64,7 +64,7 @@ Estimate correlation from the given data. If a color variable is supplied, the c
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 # display with grid
 p_(ggally_cor(

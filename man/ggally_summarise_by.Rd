@@ -46,7 +46,7 @@ Display summary statistics of a continuous variable for each value of a discrete
 p_ <- GGally::print_if_interactive
 
 if (require(Hmisc)) {
-  data(tips, package = "reshape")
+  data(tips)
   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day)))
   p_(ggally_summarise_by(tips, mapping = aes(x = day, y = total_bill)))
 

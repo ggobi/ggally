@@ -23,7 +23,7 @@ Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single pan
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 p_(ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 p_(ggally_dot(

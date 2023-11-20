@@ -244,7 +244,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #'  # small function to display plots only if it's interactive
 #'  p_ <- GGally::print_if_interactive
 #'
-#'  data(baseball, package = "plyr")
+#'  data(baseball)
 #'
 #'  # Keep players from 1990-1995 with at least one at bat
 #'  # Add how many singles a player hit
@@ -667,7 +667,7 @@ ggduo <- function(
 #' # Note: colour should be categorical, else you will need to reset
 #' # the upper triangle to use points instead of trying to compute corr
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' pm <- ggpairs(tips[, 1:3])
 #' p_(pm)
 #' pm <- ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"))

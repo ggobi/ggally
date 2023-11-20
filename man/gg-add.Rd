@@ -56,7 +56,7 @@ only some subplots.  This function may be replaced and/or removed in the future.
 \examples{
 # small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
-data(tips, package = "reshape")
+data(tips)
 
 pm <- ggpairs(tips[, 2:4], ggplot2::aes(color = sex))
 ## change to black and white theme

@@ -44,7 +44,7 @@ The \strong{colour} aesthetic is taken into account only if equal to
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_table(tips, mapping = aes(x = smoker, y = sex)))
 p_(ggally_table(tips, mapping = aes(x = day, y = time)))
 p_(ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker)))

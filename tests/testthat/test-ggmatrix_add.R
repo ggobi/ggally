@@ -1,7 +1,7 @@
 
 context("ggmatrix_add")
 
-data(tips, package = "reshape")
+data(tips)
 
 test_that("add", {
 

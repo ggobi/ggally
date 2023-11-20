@@ -23,7 +23,7 @@ The aesthetic "fill" determines whether or not \code{stat_density2d} (filled) or
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
 p_(ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 p_(ggally_density(

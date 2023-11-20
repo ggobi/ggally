@@ -28,8 +28,7 @@ test_that("example", {
       position = position_stack(.5)
     ))
 
-  skip_if_not_installed("reshape")
-  data(tips, package = "reshape")
+  data(tips)
 
   vdiffr::expect_doppelganger("tips", ggally_rowbar(tips, mapping = aes(x = smoker, y = sex)))
 

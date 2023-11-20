@@ -1,5 +1,5 @@
 if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("variable", "value", "ggally_splineFactor"))
+  utils::globalVariables(c("variable", "value", "ggally_splineFactor", ".ggally_ggcorr_row_names"))
 }
 
 #' Parallel coordinate plot
@@ -74,11 +74,11 @@ if (getRversion() >= "2.15.1") {
 #'   max for each variable (no box is plotted if \code{shadeBox == NULL})
 #' @param mapping aes string to pass to ggplot object
 #' @param title character string denoting the title of the plot
-#' @author Jason Crowley, Barret Schloerke, Di Cook, Heike Hofmann, Hadley Wickham
+#' @author Jason Crowley, Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham
 #' @return ggplot object that if called, will print
-#' @import plyr
-#' @importFrom reshape melt melt.data.frame
+#' @importFrom plyr ddply summarize
 #' @importFrom stats complete.cases sd median mad lm spline
+#' @importFrom tidyr pivot_longer
 #' @export
 #' @examples
 #' # small function to display plots only if it's interactive
@@ -146,9 +146,6 @@ if (getRversion() >= "2.15.1") {
 #' p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = TRUE)
 #' p_(p)
 #' p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = 3)
-#' p_(p)
-#' splineFactor <- length(columns) * 3
-#' p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(splineFactor))
 #' p_(p)
 ggparcoord <- function(
   data,
@@ -442,7 +439,11 @@ ggparcoord <- function(
   # if (is.list(mapping)) {
   #   mappingNames <- names(mapping)
   # }
-  data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
+  #data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
+  data.m <- data |>
+    pivot_longer(cols = columns,
+                 names_to="variable",
+                 values_to="value")
 
   ### Ordering ###
   if (length(order) > 1 && is.numeric(order)) {
