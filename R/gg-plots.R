@@ -728,7 +728,7 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
   if (horizontal) {
     p <- p +
       scale_x_discrete(
-        limits = rev(levels(eval_data_col(data, mapping$x)))
+        limits = rev(levels(as.factor(eval_data_col(data, mapping$x))))
       ) +
       coord_flip()
   }
