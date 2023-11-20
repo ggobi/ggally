@@ -75,3 +75,5 @@ SystemRequirements: openssl
 Encoding: UTF-8
 Language: en-US
 RdMacros: lifecycle
+Config/Needs/check:
+    larmarange/ggstats
