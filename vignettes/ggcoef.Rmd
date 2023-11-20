@@ -58,7 +58,7 @@ ggcoef(
   log.reg,
   exponentiate = TRUE,
   vline_color = "red",
-  vline_linetype =  "solid",
+  vline_linetype = "solid",
   errorbar_color = "blue",
   errorbar_height = .25
 )

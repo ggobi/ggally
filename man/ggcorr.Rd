@@ -158,8 +158,9 @@ p_(ggcorr(dt[, -1]))
 
 # Labeled output, with coefficient transparency.
 p_(ggcorr(dt[, -1],
-       label = TRUE,
-       label_alpha = TRUE))
+  label = TRUE,
+  label_alpha = TRUE
+))
 
 # Custom options.
 p_(ggcorr(

@@ -53,9 +53,9 @@ if (getRversion() >= "2.15.1") {
 #'   p_(pl.sex +
 #'     ggplot2::guides(linetype = "none") +
 #'     ggplot2::scale_colour_discrete(
-#'       name   = 'Sex',
+#'       name   = "Sex",
 #'       breaks = c(1, 2),
-#'       labels = c('Male', 'Female')
+#'       labels = c("Male", "Female")
 #'     ))
 #'
 #'   # Multiple factors
@@ -80,10 +80,10 @@ if (getRversion() >= "2.15.1") {
 #'   p_(pl.kid +
 #'     ggplot2::annotate(
 #'       "text",
-#'       label  = c("PKD", "Other", "GN", "AN"),
-#'       x      = c(90, 125, 5, 60),
-#'       y      = c(0.8, 0.65, 0.55, 0.30),
-#'       size   = 5,
+#'       label = c("PKD", "Other", "GN", "AN"),
+#'       x = c(90, 125, 5, 60),
+#'       y = c(0.8, 0.65, 0.55, 0.30),
+#'       size = 5,
 #'       colour = scales::hue_pal(
 #'         h         = c(0, 360) + 15,
 #'         c         = 100,
@@ -95,24 +95,22 @@ if (getRversion() >= "2.15.1") {
 #'     ggplot2::guides(color = "none", linetype = "none"))
 #' }
 ggsurv <- function(
-  s,
-  CI         = 'def',
-  plot.cens  = TRUE,
-  surv.col   = 'gg.def',
-  cens.col   = 'gg.def',
-  lty.est    = 1,
-  lty.ci     = 2,
-  size.est   = 0.5,
-  size.ci    = size.est,
-  cens.size  = 2,
-  cens.shape = 3,
-  back.white = FALSE,
-  xlab       = 'Time',
-  ylab       = 'Survival',
-  main       = '',
-  order.legend = TRUE
-) {
-
+    s,
+    CI = "def",
+    plot.cens = TRUE,
+    surv.col = "gg.def",
+    cens.col = "gg.def",
+    lty.est = 1,
+    lty.ci = 2,
+    size.est = 0.5,
+    size.ci = size.est,
+    cens.size = 2,
+    cens.shape = 3,
+    back.white = FALSE,
+    xlab = "Time",
+    ylab = "Survival",
+    main = "",
+    order.legend = TRUE) {
   require_namespaces(c("survival", "scales"))
 
   strata <- ifelse(is.null(s$strata) == TRUE, 1, length(s$strata))
@@ -126,7 +124,7 @@ ggsurv <- function(
   }
 
   pl <- fn(
-    s, CI , plot.cens, surv.col,
+    s, CI, plot.cens, surv.col,
     cens.col, lty.est, lty.ci, size.est, size.ci, cens.size,
     cens.shape, back.white, xlab,
     ylab, main, strata, order.legend
@@ -136,25 +134,23 @@ ggsurv <- function(
 
 # survival function for single survival
 ggsurv_s <- function(
-  s,
-  CI         = 'def',
-  plot.cens  = TRUE,
-  surv.col   = 'gg.def',
-  cens.col   = 'gg.def',
-  lty.est    = 1,
-  lty.ci     = 2,
-  size.est   = 0.5,
-  size.ci    = size.est,
-  cens.size  = 2,
-  cens.shape = 3,
-  back.white = FALSE,
-  xlab       = 'Time',
-  ylab       = 'Survival',
-  main       = '',
-  strata     = 1,
-  order.legend = TRUE
-) {
-
+    s,
+    CI = "def",
+    plot.cens = TRUE,
+    surv.col = "gg.def",
+    cens.col = "gg.def",
+    lty.est = 1,
+    lty.ci = 2,
+    size.est = 0.5,
+    size.ci = size.est,
+    cens.size = 2,
+    cens.shape = 3,
+    back.white = FALSE,
+    xlab = "Time",
+    ylab = "Survival",
+    main = "",
+    strata = 1,
+    order.legend = TRUE) {
   dat <- data.frame(
     time = c(0, s$time),
     surv = c(1, s$surv),
@@ -164,7 +160,7 @@ ggsurv_s <- function(
   )
   dat.cens <- subset(dat, cens != 0)
 
-  col <- ifelse(surv.col == 'gg.def', 'black', surv.col)
+  col <- ifelse(surv.col == "gg.def", "black", surv.col)
 
   pl <- ggplot(dat, aes(x = time, y = surv)) +
     geom_step(col = col, lty = lty.est, size = size.est) +
@@ -172,7 +168,7 @@ ggsurv_s <- function(
     ylab(ylab) +
     ggtitle(main)
 
-  if (identical(CI, TRUE) | identical(CI, 'def')) {
+  if (identical(CI, TRUE) | identical(CI, "def")) {
     pl <- pl +
       geom_step(aes(y = up), color = col, lty = lty.ci, size = size.ci) +
       geom_step(aes(y = low), color = col, lty = lty.ci, size = size.ci)
@@ -180,9 +176,9 @@ ggsurv_s <- function(
 
   if (identical(plot.cens, TRUE)) {
     if (nrow(dat.cens) == 0) {
-      stop('There are no censored observations')
+      stop("There are no censored observations")
     }
-    col <- ifelse(cens.col == 'gg.def', 'red', cens.col)
+    col <- ifelse(cens.col == "gg.def", "red", cens.col)
 
     pl <- pl + geom_point(
       data    = dat.cens,
@@ -202,24 +198,23 @@ ggsurv_s <- function(
 
 # survival function for multiple survivals
 ggsurv_m <- function(
-  s,
-  CI         = 'def',
-  plot.cens  = TRUE,
-  surv.col   = 'gg.def',
-  cens.col   = 'gg.def',
-  lty.est    = 1,
-  lty.ci     = 2,
-  size.est   = 0.5,
-  size.ci    = size.est,
-  cens.size  = 2,
-  cens.shape = 3,
-  back.white = FALSE,
-  xlab       = 'Time',
-  ylab       = 'Survival',
-  main       = '',
-  strata     = length(s$strata),
-  order.legend = TRUE
-) {
+    s,
+    CI = "def",
+    plot.cens = TRUE,
+    surv.col = "gg.def",
+    cens.col = "gg.def",
+    lty.est = 1,
+    lty.ci = 2,
+    size.est = 0.5,
+    size.ci = size.est,
+    cens.size = 2,
+    cens.shape = 3,
+    back.white = FALSE,
+    xlab = "Time",
+    ylab = "Survival",
+    main = "",
+    strata = length(s$strata),
+    order.legend = TRUE) {
   n <- s$strata
 
   has_many <- all(grepl(",", names(s$strata)))
@@ -265,11 +260,11 @@ ggsurv_m <- function(
     lastv <- ugroups
   }
   groups <- factor(ugroups, levels = lastv)
-  gr.df <- vector('list', strata)
+  gr.df <- vector("list", strata)
   n.ind <- cumsum(c(0, n))
 
   for (i in 1:strata) {
-    indI <- (n.ind[i]+1):n.ind[i+1]
+    indI <- (n.ind[i] + 1):n.ind[i + 1]
     gr.df[[i]] <- data.frame(
       time  = c(0, s$time[indI]),
       surv  = c(1, s$surv[indI]),
@@ -280,7 +275,7 @@ ggsurv_m <- function(
     )
   }
 
-  dat      <- do.call(rbind, gr.df)
+  dat <- do.call(rbind, gr.df)
 
   pl <- ggplot(dat, aes(x = time, y = surv, group = group)) +
     geom_step(aes(col = group, lty = group), size = size.est) +
@@ -288,14 +283,13 @@ ggsurv_m <- function(
     ylab(ylab) +
     ggtitle(main)
 
-  pl <- if (surv.col[1] != 'gg.def') {
+  pl <- if (surv.col[1] != "gg.def") {
     scaleValues <- if (length(surv.col) == 1) {
       rep(surv.col, strata)
     } else {
       surv.col
     }
     pl + scale_colour_manual(values = scaleValues)
-
   } else {
     pl + scale_colour_discrete()
   }
@@ -308,7 +302,7 @@ ggsurv_m <- function(
   pl <- pl + scale_linetype_manual(values = lineScaleValues)
 
   if (identical(CI, TRUE)) {
-    stepLty <- if ((length(surv.col) > 1 | surv.col == 'gg.def')[1]) {
+    stepLty <- if ((length(surv.col) > 1 | surv.col == "gg.def")[1]) {
       lty.ci
     } else {
       surv.col
@@ -323,17 +317,16 @@ ggsurv_m <- function(
     dat.cens <- subset(dat.cens, group != "PKD")
 
     if (nrow(dat.cens) == 0) {
-      stop('There are no censored observations')
+      stop("There are no censored observations")
     }
     if (length(cens.col) == 1) {
-
       if (identical(cens.col, "gg.def")) {
         # match the colors of the lines
         pl <- pl + geom_point(
           data = dat.cens,
           mapping = aes(y = surv, col = group),
           shape = cens.shape,
-          size    = cens.size,
+          size = cens.size,
           show.legend = FALSE
         )
       } else {
@@ -346,15 +339,13 @@ ggsurv_m <- function(
           size    = cens.size
         )
       }
-
-
     } else if (length(cens.col) > 0) {
       # if (!(identical(cens.col, surv.col) || is.null(cens.col))) {
       #   warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
       # }
 
 
-      if (! identical(cens.col, "gg.def")) {
+      if (!identical(cens.col, "gg.def")) {
         if (length(cens.col) != strata) {
           warning("Color scales for censored points don't match the number of groups. Defaulting to ggplot2 default color scale")
           cens.col <- "gg.def"
@@ -371,19 +362,18 @@ ggsurv_m <- function(
           size = cens.size
         )
       } else {
-
         # custom colors and maybe custom shape
-        uniqueGroupVals = levels(dat.cens$group)
+        uniqueGroupVals <- levels(dat.cens$group)
         if (length(cens.shape) == 1) {
-          cens.shape = rep(cens.shape, strata)
+          cens.shape <- rep(cens.shape, strata)
         }
 
         if (length(cens.shape) != strata) {
           warning("The length of the censored shapes does not match the number of groups (or 1). Defaulting shape = 3 (+)")
-          cens.shape = rep(3, strata)
+          cens.shape <- rep(3, strata)
         }
         for (i in seq_along(uniqueGroupVals)) {
-          groupVal = uniqueGroupVals[i]
+          groupVal <- uniqueGroupVals[i]
           dtGroup <- subset(dat.cens, group == groupVal)
           if (nrow(dtGroup) == 0) {
             next
@@ -397,10 +387,8 @@ ggsurv_m <- function(
             show.legend = FALSE,
             size = cens.size
           )
-
         }
       }
-
     }
   }
 

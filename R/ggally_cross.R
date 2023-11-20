@@ -84,10 +84,12 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
   # default values for geom_text
   geom_text_args$stat <- "cross"
   geom_text_args$keep.zero.cells <- FALSE
-  if (is.null(geom_text_args$mapping))
+  if (is.null(geom_text_args$mapping)) {
     geom_text_args$mapping <- aes(colour = NULL, size = NULL)
-  if (is.null(geom_text_args$show.legend))
+  }
+  if (is.null(geom_text_args$show.legend)) {
     geom_text_args$show.legend <- FALSE
+  }
 
   if (!is.null(mapping$label)) {
     p <- p +
@@ -153,7 +155,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #'   ),
 #'   geom_tile_args = list(colour = "black")
 #' ) +
-#' scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
+#'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
 ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL) {
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
 
@@ -169,10 +171,12 @@ ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_
   geom_tile_args$stat <- "cross"
   geom_tile_args$keep.zero.cells <- keep.zero.cells
   geom_tile_args$mapping <- aes(colour = NULL)$colour
-  if (is.null(geom_tile_args$colour))
+  if (is.null(geom_tile_args$colour)) {
     geom_tile_args$colour <- "transparent"
-  if (is.null(mapping$fill) && is.null(geom_tile_args$fill))
+  }
+  if (is.null(mapping$fill) && is.null(geom_tile_args$fill)) {
     geom_tile_args$fill <- "transparent"
+  }
 
   ggplot(data = data, mapping) +
     do.call(geom_tile, geom_tile_args) +
@@ -226,36 +230,42 @@ ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_t
 #' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "std.resid") +
 #'   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE))
 ggally_crosstable <- function(
-  data,
-  mapping,
-  cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid", "std.resid"),
-  fill = c("none", "std.resid", "resid"),
-  ...,
-  geom_tile_args = list(colour = "grey50")
-) {
+    data,
+    mapping,
+    cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid", "std.resid"),
+    fill = c("none", "std.resid", "resid"),
+    ...,
+    geom_tile_args = list(colour = "grey50")) {
   fill <- match.arg(fill)
-  if (fill == "std.resid")
+  if (fill == "std.resid") {
     mapping$fill <- aes_string(fill = "after_stat(std.resid)")$fill
-  if (fill == "resid")
+  }
+  if (fill == "resid") {
     mapping$fill <- aes_string(fill = "after_stat(resid)")$fill
-  if (fill == "none")
+  }
+  if (fill == "none") {
     geom_tile_args$fill <- "white"
+  }
 
   cells <- match.arg(cells)
-  if (!"label" %in% names(mapping) && cells %in% c("observed", "expected"))
+  if (!"label" %in% names(mapping) && cells %in% c("observed", "expected")) {
     mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = 1)"))$label
-  if (!"label" %in% names(mapping) && cells %in% c("prop", "row.prop", "col.prop"))
+  }
+  if (!"label" %in% names(mapping) && cells %in% c("prop", "row.prop", "col.prop")) {
     mapping$label <- aes_string(label = paste0("scales::percent(after_stat(", cells, "), accuracy = .1)"))$label
-  if (!"label" %in% names(mapping) && cells %in% c("resid", "std.resid"))
+  }
+  if (!"label" %in% names(mapping) && cells %in% c("resid", "std.resid")) {
     mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = .1)"))$label
+  }
 
   p <- ggally_table(data = data, mapping = mapping, keep.zero.cells = TRUE, geom_tile_args = geom_tile_args, ...) +
     scale_x_discrete(expand = expansion(0, 0)) +
     scale_y_discrete(expand = expansion(0, 0)) +
     theme(axis.ticks = element_blank())
 
-  if (fill == "std.resid")
+  if (fill == "std.resid") {
     p <- p + scale_fill_steps2(breaks = c(-Inf, -3, -2, 2, 3, Inf))
+  }
 
   p
 }

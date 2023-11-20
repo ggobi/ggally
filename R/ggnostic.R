@@ -127,9 +127,14 @@ brew_colors <- function(col) {
   brew_cols <- as.list(brew_cols)
   ret <- brew_cols[[col]]
   if (is.null(ret)) {
-    stop(paste("color '", col, "' not found in: c(",
-      paste(names(brew_cols), collapse = ", "),
-    ")", sep = ""))
+    stop(
+      paste(
+        "color '", col, "' not found in: c(",
+        paste(names(brew_cols), collapse = ", "),
+        ")",
+        sep = ""
+      )
+    )
   }
   ret
 }

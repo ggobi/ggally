@@ -1,4 +1,3 @@
-
 context("ggnet")
 
 if ("package:igraph" %in% search()) {
@@ -9,24 +8,23 @@ rq <- function(...) {
   suppressMessages(require(..., quietly = TRUE))
 }
 rq(network) # network objects
-rq(sna)     # placement and centrality
+rq(sna) # placement and centrality
 
 rq(ggplot2) # grammar of graphics
-rq(grid)    # arrows
-rq(scales)  # sizing
+rq(grid) # arrows
+rq(scales) # sizing
 
 rq(intergraph) # test igraph conversion
 
 test_that("examples", {
-
   ### --- start: documented examples
   set.seed(54321)
 
   # random adjacency matrix
-  x           <- 10
-  ndyads      <- x * (x - 1)
-  density     <- x / ndyads
-  m           <- matrix(0, nrow = x, ncol = x)
+  x <- 10
+  ndyads <- x * (x - 1)
+  density <- x / ndyads
+  m <- matrix(0, nrow = x, ncol = x)
   dimnames(m) <- list(letters[1:x], letters[1:x])
   m[row(m) != col(m)] <- runif(ndyads) < density
   m
@@ -72,18 +70,18 @@ test_that("examples", {
   # test trim.labels
   expect_warning(ggnet(n, trim.labels = TRUE))
 
-#   # test subset.threshold by removing all nodes
-#   expect_warning(
-#     expect_error(
-#       ggnet(n, subset.threshold = 11),
-#       "NA/NaN/Inf"
-#     ),
-#     "NaNs produced"
-#   )
-#
-#   p <- ggnet(n, mode = "geo")
-#   expect_equal(p$data$X1, xy[, 1])
-#   expect_equal(p$data$X2, xy[, 2])
+  #   # test subset.threshold by removing all nodes
+  #   expect_warning(
+  #     expect_error(
+  #       ggnet(n, subset.threshold = 11),
+  #       "NA/NaN/Inf"
+  #     ),
+  #     "NaNs produced"
+  #   )
+  #
+  #   p <- ggnet(n, mode = "geo")
+  #   expect_equal(p$data$X1, xy[, 1])
+  #   expect_equal(p$data$X2, xy[, 2])
 
   # test user-submitted weights
   ggnet(n, weight = sample(1:2, 10, replace = TRUE))
@@ -238,5 +236,4 @@ test_that("examples", {
     ggnet(n, weight = "degree")
     expect_true(TRUE)
   }
-
 })

@@ -37,7 +37,7 @@ p_(ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal())
 p_(ggally_ratio(
   tips, ggplot2::aes(sex, day),
   floor = 20, ceiling = 50
-) + ggplot2::theme(aspect.ratio = 4/2))
+) + ggplot2::theme(aspect.ratio = 4 / 2))
 }
 \author{
 Barret Schloerke

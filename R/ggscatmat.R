@@ -124,8 +124,8 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
   b$xlab <- factor(b$xlab, levels = unique(b$xlab))
   b$ylab <- factor(b$ylab, levels = unique(b$ylab))
   if (is.null(color)) {
-    data.cor <- b |>
-      dplyr::group_by(xlab, ylab) |>
+    data.cor <- b %>%
+      dplyr::group_by(xlab, ylab) %>%
       dplyr::summarise(
         r = cor(xvalue, yvalue,
           use = "pairwise.complete.obs",
@@ -174,8 +174,8 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     return(data.cor)
   } else {
     c <- b
-    data.cor1 <- c |>
-      dplyr::group_by(xlab, ylab, colorcolumn) |>
+    data.cor1 <- c %>%
+      dplyr::group_by(xlab, ylab, colorcolumn) %>%
       dplyr::summarise(r = cor(xvalue, yvalue,
         use = "pairwise.complete.obs",
         method = "pearson"
@@ -217,8 +217,8 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     #    )
 
     n <- nrow(data.frame(unique(b$colorcolumn)))
-    position <- b |>
-      dplyr::group_by(xlab, ylab) |>
+    position <- b %>%
+      dplyr::group_by(xlab, ylab) %>%
       dplyr::summarise(
         xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
         ymin = min(yvalue),
@@ -267,69 +267,76 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   dn <- data.choose[sapply(data.choose, is.numeric)]
   if (ncol(dn) == 0) {
     stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
-  } else {
-    ltdata.new <- lowertriangle(data, columns = columns, color = color)
-    ## set up the plot
-    r <- ggplot(ltdata.new, mapping = aes_string(x = "xvalue", y = "yvalue")) +
-      theme(axis.title.x = element_blank(), axis.title.y = element_blank()) +
-      facet_grid(ylab ~ xlab, scales = "free") +
-      theme(aspect.ratio = 1)
-    if (is.null(color)) {
-      ## b/w version
-      densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
-        data.frame(
-          xlab = names(dn)[i], ylab = names(dn)[i],
-          x = dn[, i], stringsAsFactors = TRUE
-        )
-      }))
-      for (m in 1:ncol(dn)) {
-        j <- subset(densities, xlab == names(dn)[m])
-        r <- r + stat_density(
-          aes(
-            x = x,
-            y = after_stat(scaled) * diff(range(x)) + min(x) # nolint
-          ),
-          data = j, position = "identity", geom = "line", color = "black"
-        )
-      }
-      ## add b/w points
-      r <- r + geom_point(alpha = alpha, na.rm = TRUE)
-      return(r)
-    } else {
-      ## do the colored version
-      densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
-        data.frame(
-          xlab = names(dn)[i], ylab = names(dn)[i],
-          x = dn[, i], colorcolumn = data[, which(colnames(data) == color)],
-          stringsAsFactors = TRUE
-        )
-      }))
-      for (m in 1:ncol(dn)) {
-        j <- subset(densities, xlab == names(dn)[m])
-        r <- r +
-          # r is the facet grid plot
-          stat_density(
-            aes_string(
-              x = "x", y = "after_stat(scaled) * diff(range(x)) + min(x)",
-              colour = "colorcolumn"
-            ),
-            data = j,
-            position = "identity",
-            geom = "line"
-          )
-      }
-      ## add color points
-      r <- r +
-        geom_point(
-          data = ltdata.new,
-          aes_string(colour = "colorcolumn"),
-          alpha = alpha,
-          na.rm = TRUE
-        )
-      return(r)
+  }
+
+  ltdata.new <- lowertriangle(data, columns = columns, color = color)
+  ## set up the plot
+  r <- ggplot(
+    ltdata.new,
+    mapping = aes_string(x = "xvalue", y = "yvalue")
+  ) +
+    theme(
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
+    facet_grid(ylab ~ xlab, scales = "free") +
+    theme(aspect.ratio = 1)
+  if (is.null(color)) {
+    ## b/w version
+    densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
+      data.frame(
+        xlab = names(dn)[i], ylab = names(dn)[i],
+        x = dn[, i], stringsAsFactors = TRUE
+      )
+    }))
+    for (m in 1:ncol(dn)) {
+      j <- subset(densities, xlab == names(dn)[m])
+      r <- r + stat_density(
+        aes(
+          x = x,
+          y = after_stat(scaled) * diff(range(x)) + min(x) # nolint
+        ),
+        data = j, position = "identity", geom = "line", color = "black"
+      )
     }
+    ## add b/w points
+    r <- r + geom_point(alpha = alpha, na.rm = TRUE)
+    return(r)
+  } else {
+    ## do the colored version
+    densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
+      data.frame(
+        xlab = names(dn)[i], ylab = names(dn)[i],
+        x = dn[, i], colorcolumn = data[, which(colnames(data) == color)],
+        stringsAsFactors = TRUE
+      )
+    }))
+    for (m in 1:ncol(dn)) {
+      j <- subset(densities, xlab == names(dn)[m])
+      r <- r +
+        # r is the facet grid plot
+        stat_density(
+          aes_string(
+            x = "x", y = "after_stat(scaled) * diff(range(x)) + min(x)",
+            colour = "colorcolumn"
+          ),
+          data = j,
+          position = "identity",
+          geom = "line"
+        )
+    }
+    ## add color points
+    r <- r +
+      geom_point(
+        data = ltdata.new,
+        aes_string(colour = "colorcolumn"),
+        alpha = alpha,
+        na.rm = TRUE
+      )
+    return(r)
   }
 }
+
 
 #' Traditional scatterplot matrix for purely quantitative variables
 #'

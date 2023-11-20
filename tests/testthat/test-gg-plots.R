@@ -1,4 +1,3 @@
-
 context("gg-plots")
 # This file takes too long
 testthat::skip_on_cran()
@@ -10,27 +9,26 @@ nas <- subset(nasa, x <= 2 & y == 1)
 test_that("denstrip", {
   expect_message(
     suppressWarnings(print(ggally_denstrip(tips, mapping = aes_string("sex", "tip")))),
-    "`stat_bin()` using `bins = 30`", fixed = TRUE
+    "`stat_bin()` using `bins = 30`",
+    fixed = TRUE
   )
   expect_message(
     suppressWarnings(print(ggally_denstrip(tips, mapping = aes_string("tip", "sex")))),
-    "`stat_bin()` using `bins = 30`", fixed = TRUE
+    "`stat_bin()` using `bins = 30`",
+    fixed = TRUE
   )
 })
 
 
 test_that("density", {
-
   p <- ggally_density(
     tips,
     mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
   ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
   expect_equal(p$labels$fill, "level")
-
 })
 
 test_that("cor", {
-
   ti <- tips
   class(ti) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), use = "complete.obs")
@@ -116,33 +114,33 @@ test_that("diagAxis", {
   expect_equal(pDat2, testDt2)
 
 
-  expect_error({
-    ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length))
-  }, "mapping\\$x is null.") # nolint
+  expect_error(
+    {
+      ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length))
+    },
+    "mapping\\$x is null."
+  ) # nolint
 })
 
 test_that("dates", {
-
   class(nas) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(nas, ggplot2::aes(x = date, y = ozone))
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278***")
   p <- ggally_barDiag(nas, ggplot2::aes(x = date))
   expect_equal(mapping_string(p$mapping$x), "date")
   expect_equal(as.character(p$labels$y), "count")
-
 })
 
 test_that("cor stars are aligned", {
   p <- ggally_cor(iris, ggplot2::aes(x = Sepal.Length, y = Petal.Width, color = as.factor(Species)))
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr: 0.818***")
-  #expect_equal(get("aes_params", envir = p$layers[[1]])$family, "mono")
+  # expect_equal(get("aes_params", envir = p$layers[[1]])$family, "mono")
 
   labels <- eval_data_col(p$layers[[2]]$data, p$layers[[2]]$mapping$label)
   expect_equal(as.character(labels), c("    setosa: 0.278.  ", "versicolor: 0.546***", " virginica: 0.281*  "))
 })
 
 test_that("ggally_statistic handles factors", {
-
   simple_chisq <- function(x, y) {
     scales::number(chisq.test(x, y)$p.value, accuracy = .001)
   }
@@ -157,7 +155,7 @@ test_that("rescale", {
   vdiffr::expect_doppelganger("rescale-false", p)
 
   p <- ggally_densityDiag(tips, mapping = ggplot2::aes(x = day), rescale = TRUE)
-  expect_true(! identical(p$labels$y, "density"))
+  expect_true(!identical(p$labels$y, "density"))
   vdiffr::expect_doppelganger("rescale-true", p)
 
 
@@ -166,7 +164,7 @@ test_that("rescale", {
   vdiffr::expect_doppelganger("rescale-false-binwidth", p)
 
   p <- ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25, rescale = TRUE)
-  expect_true(! identical(p$labels$y, "count"))
+  expect_true(!identical(p$labels$y, "count"))
   vdiffr::expect_doppelganger("rescale-true-binwidth", p)
 })
 
@@ -254,5 +252,4 @@ test_that("ggally_count", {
     na.rm = TRUE
   )
   vdiffr::expect_doppelganger("titanic-count-diag-interaction", p)
-
 })

@@ -30,7 +30,7 @@
 #'   p_(p)
 #'
 #'   # add a smoother
-#'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = 'smooth_loess')
+#'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = "smooth_loess")
 #'   p_(p)
 #'   # same output
 #'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = ggally_smooth_loess)
@@ -41,25 +41,23 @@
 #'   p_(p)
 #' }
 ggfacet <- function(
-  data, mapping = NULL,
-  columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data),
-  fn = ggally_points, ...,
-  columnLabelsX = names(data[columnsX]),
-  columnLabelsY = names(data[columnsY]),
-  xlab = NULL,
-  ylab = NULL,
-  title = NULL,
-  scales = "free"
-) {
-
+    data, mapping = NULL,
+    columnsX = 1:ncol(data),
+    columnsY = 1:ncol(data),
+    fn = ggally_points, ...,
+    columnLabelsX = names(data[columnsX]),
+    columnLabelsY = names(data[columnsY]),
+    xlab = NULL,
+    ylab = NULL,
+    title = NULL,
+    scales = "free") {
   data <- fix_data(data)
   fn <- wrap(fn)
 
   # fix args
   if (
     !missing(mapping) && !is.list(mapping) &&
-    !missing(columnsX) && missing(columnsY)
+      !missing(columnsX) && missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping

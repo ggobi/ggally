@@ -87,6 +87,4 @@ test_that("example", {
     geom_tile_args = list(colour = "black")
   ) +
     scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
-
-
 })

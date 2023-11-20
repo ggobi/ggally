@@ -3,7 +3,7 @@ if (getRversion() >= "2.15.1") {
   utils::globalVariables(unique(c(
     "labelp", # cor plot
     c("..density..", "..scaled..", "x"), # facetdensitystrip plot
-    c("..scaled..", "x"), #density diagonal plot
+    c("..scaled..", "x"), # density diagonal plot
     c("x", "y", "lab"), # internal axis plot
     c("x", "y", "result", "freq"), # fluctuation plot
     c("weight") # ggally_summarise_by
@@ -132,8 +132,8 @@ remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
 #'   )
 #' ))
 ggally_points <- function(data, mapping, ...) {
-
-  p <- ggplot(data = data, mapping = mapping) + geom_point(...)
+  p <- ggplot(data = data, mapping = mapping) +
+    geom_point(...)
 
   p
 }
@@ -162,12 +162,11 @@ ggally_points <- function(data, mapping, ...) {
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex")))
 ggally_smooth <- function(data, mapping, ..., method = "lm", formula = y ~ x, se = TRUE, shrink = TRUE) {
-
   p <- ggplot(data = data, mapping)
 
   p <- p + geom_point(...)
 
-  if (! is.null(mapping$color) || ! is.null(mapping$colour)) {
+  if (!is.null(mapping$color) || !is.null(mapping$colour)) {
     p <- p + geom_smooth(method = method, se = se, formula = formula)
   } else {
     p <- p + geom_smooth(method = method, se = se, formula = formula, colour = I("black"))
@@ -298,22 +297,21 @@ ggally_density <- function(data, mapping, ...) {
 #'   size = 5
 #' ))
 ggally_cor <- function(
-  data,
-  mapping,
-  ...,
-  stars = TRUE,
-  method = "pearson",
-  use = "complete.obs",
-  display_grid = FALSE,
-  digits = 3,
-  title_args = list(...),
-  group_args = list(...),
-  justify_labels = "right",
-  align_percent = 0.5,
-  title = "Corr",
-  alignPercent = warning("deprecated. Use `align_percent`"),
-  displayGrid = warning("deprecated. Use `display_grid`")
-) {
+    data,
+    mapping,
+    ...,
+    stars = TRUE,
+    method = "pearson",
+    use = "complete.obs",
+    display_grid = FALSE,
+    digits = 3,
+    title_args = list(...),
+    group_args = list(...),
+    justify_labels = "right",
+    align_percent = 0.5,
+    title = "Corr",
+    alignPercent = warning("deprecated. Use `align_percent`"),
+    displayGrid = warning("deprecated. Use `display_grid`")) {
   if (!missing(alignPercent)) {
     warning("`alignPercent` is deprecated. Please use `align_percent` if alignment still needs to be adjusted")
     align_percent <- alignPercent
@@ -390,32 +388,31 @@ ggally_cor <- function(
 #' @seealso \code{\link{ggally_cor}}
 #' @export
 ggally_statistic <- function(
-  data,
-  mapping,
-  text_fn,
-  title,
-  na.rm = NA,
-  display_grid = FALSE,
-  justify_labels = "right",
-  justify_text = "left",
-  sep = ": ",
-  family = "mono",
-  title_args = list(),
-  group_args = list(),
-  align_percent = 0.5,
-  title_hjust = 0.5,
-  group_hjust = 0.5
-) {
+    data,
+    mapping,
+    text_fn,
+    title,
+    na.rm = NA,
+    display_grid = FALSE,
+    justify_labels = "right",
+    justify_text = "left",
+    sep = ": ",
+    family = "mono",
+    title_args = list(),
+    group_args = list(),
+    align_percent = 0.5,
+    title_hjust = 0.5,
+    group_hjust = 0.5) {
   set_if_not_there <- function(obj, key, value) {
     obj <- as.list(obj)
-    #if (! "family" %in% rlang::names2(obj)) {
+    # if (! "family" %in% rlang::names2(obj)) {
     #  obj$family <- family
-    #}
+    # }
     obj
   }
 
-  #title_args <- set_if_not_there(title_args, "family", family)
-  #group_args <- set_if_not_there(group_args, "family", family)
+  # title_args <- set_if_not_there(title_args, "family", family)
+  # group_args <- set_if_not_there(group_args, "family", family)
 
   title_args <- set_if_not_there(title_args, "hjust", title_hjust)
   group_args <- set_if_not_there(group_args, "hjust", group_hjust)
@@ -481,11 +478,7 @@ ggally_statistic <- function(
   yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
 
   # if there is a color grouping...
-  if (
-    !is.null(colorData) &&
-    !inherits(colorData, "AsIs")
-  ) {
-
+  if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
     cord <- ddply(
       data.frame(x = xData, y = yData, color = colorData),
       "color",
@@ -494,7 +487,6 @@ ggally_statistic <- function(
       }
     )
     colnames(cord)[2] <- "text"
-
 
     # put in correct order
     lev <- levels(as.factor(colorData))
@@ -508,7 +500,7 @@ ggally_statistic <- function(
     }
     cord <- cord[order(ord[ord >= 0]), ]
 
-        # make labels align together
+    # make labels align together
     cord$label <- str_c(
       format(cord$color, justify = justify_labels),
       sep,
@@ -530,10 +522,7 @@ ggally_statistic <- function(
     p <- do.call(ggally_text, ggally_text_args)
 
     xPos <- rep(align_percent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
-    yPos <- seq(
-      from = 0.9,
-      to = 0.2,
-      length.out = nrow(cord) + 1)
+    yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1)
     yPos <- yPos * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
 
@@ -555,7 +544,6 @@ ggally_statistic <- function(
     )
     p <- p + do.call(geom_text, geom_text_args)
   } else {
-
     ggally_text_args <- append(
       list(
         label = paste0(title, sep, text_fn(xVal, yVal), collapse = ""),
@@ -585,7 +573,6 @@ ggally_statistic <- function(
   }
 
   p + theme(legend.position = "none")
-
 }
 
 
@@ -693,7 +680,6 @@ ggally_dot_no_facet <- function(data, mapping, ...) {
 #'   boxPlot = FALSE
 #' ))
 ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE) {
-
   horizontal <- is_horizontal(data, mapping)
 
   if (horizontal) {
@@ -714,7 +700,6 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE) {
     p <- p +
       facet_grid(paste(". ~ ", xVal, sep = ""), scales = "free_x") +
       theme(panel.spacing = unit(0.1, "lines"))
-
   } else {
     p <- p +
       coord_flip() +
@@ -726,7 +711,6 @@ ggally_dot_and_box <- function(data, mapping, ..., boxPlot = TRUE) {
 }
 
 ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
-
   horizontal <- is_horizontal(data, mapping)
 
   if (horizontal) {
@@ -772,7 +756,6 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 #' p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex)))
 #' p_(ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1))
 ggally_facethist <- function(data, mapping, ...) {
-
   mapping <- mapping_color_to_fill(mapping)
 
   horizontal <- is_horizontal(data, mapping)
@@ -881,10 +864,10 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
   mappingY <- mapping$y # nolint
   mapping$y <- NULL # will be faceted
 
-  p <- ggplot(data = data, mapping) + labs(x = xVal, y = yVal)
+  p <- ggplot(data = data, mapping) +
+    labs(x = xVal, y = yVal)
 
   if (identical(den_strip, TRUE)) {
-
     p <- p +
       geom_histogram(
         mapping = aes(fill = ..density..), # nolint
@@ -895,11 +878,10 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
         breaks = c(0.5),
         labels = "1"
       )
-
   } else {
     p <- p +
       stat_density(
-      aes(
+        aes(
           y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         position = "identity",
@@ -947,7 +929,6 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
 #' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill)))
 #' p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day)))
 ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
-
   mapping <- mapping_color_to_fill(mapping)
 
   p <- ggplot(data, mapping) +
@@ -989,7 +970,6 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
 #' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = day)))
 #' p_(ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25))
 ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
-
   mapping <- mapping_color_to_fill(mapping)
 
   mapping$y <- NULL
@@ -1000,10 +980,9 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
 
   if (is_date(x_data)) {
     p <- p + geom_histogram(...)
-    #TODO make y axis lines match date positions
+    # TODO make y axis lines match date positions
     # buildInfo <- ggplot_build(p + geom_bar(...))
     # histBarPerc <- buildInfo$data[[1]]$ncount
-
   } else if (numer) {
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
@@ -1012,15 +991,11 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
         ),
         ...
       ) + coord_cartesian(ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE))
-
     } else {
       p <- p + geom_histogram(...)
-
     }
-
-   } else {
+  } else {
     p <- p + geom_bar(...)
-
   }
 
   p
@@ -1048,15 +1023,13 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
 #' p_(ggally_text("Example 1"))
 #' p_(ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red")))
 ggally_text <- function(
-  label,
-  mapping = ggplot2::aes(color = "black"),
-  xP = 0.5,
-  yP = 0.5,
-  xrange = c(0, 1),
-  yrange = c(0, 1),
-  ...
-) {
-
+    label,
+    mapping = ggplot2::aes(color = "black"),
+    xP = 0.5,
+    yP = 0.5,
+    xrange = c(0, 1),
+    yrange = c(0, 1),
+    ...) {
   theme <- theme_get()
 
   p <- ggplot() +
@@ -1086,23 +1059,22 @@ ggally_text <- function(
   # dont mess with color if it's already there
   if (!is.null(mapping$colour)) {
     p <- p +
-       geom_text(label = label, mapping = mapping, ...) +
-       guides(colour = "none")
+      geom_text(label = label, mapping = mapping, ...) +
+      guides(colour = "none")
   } else if ("colour" %in% names(aes(...))) {
     p <- p +
-       geom_text(label = label, mapping = mapping, ...)
+      geom_text(label = label, mapping = mapping, ...)
   } else {
     bg <- ifnull(theme$panel.background$fill, "grey92")
     fg <- ifnull(theme$axis.text$colour, "gray30")
     colour <- scales::colour_ramp(c(bg, fg))(0.75)
     p <- p +
-       geom_text(label = label, mapping = mapping, colour = colour, ...)
+      geom_text(label = label, mapping = mapping, colour = colour, ...)
   }
 
   p <- p + theme(legend.position = "none")
 
   p
-
 }
 
 
@@ -1134,7 +1106,7 @@ get_x_axis_labels <- function(p, xRange) {
 
   axisLabs <- rbind(
     expand.grid(xPos = axisBreaks[1], yPos = axisBreaks),
-    expand.grid(xPos = axisBreaks,    yPos = axisBreaks[1])
+    expand.grid(xPos = axisBreaks, yPos = axisBreaks[1])
   )[-1, ]
 
   axisLabs <- as.data.frame(axisLabs)
@@ -1193,24 +1165,23 @@ get_x_axis_labels <- function(p, xRange) {
 #' p_(ggally_diagAxis(tips, ggplot2::aes(x = tip)))
 #' p_(ggally_diagAxis(tips, ggplot2::aes(x = sex)))
 ggally_diagAxis <- function(
-  data,
-  mapping,
-  label = mapping$x,
-  labelSize     = 5,
-  labelXPercent = 0.5,
-  labelYPercent = 0.55,
-  labelHJust    = 0.5,
-  labelVJust    = 0.5,
-  gridLabelSize = 4,
-  ...
-) {
+    data,
+    mapping,
+    label = mapping$x,
+    labelSize = 5,
+    labelXPercent = 0.5,
+    labelYPercent = 0.55,
+    labelHJust = 0.5,
+    labelVJust = 0.5,
+    gridLabelSize = 4,
+    ...) {
   if (is.null(mapping$x)) {
     stop("mapping$x is null.  There must be a column value in this location.")
   }
   mapping$y <- NULL
-  numer <- ! is_horizontal(data, mapping, "x")
+  numer <- !is_horizontal(data, mapping, "x")
 
-  if (! is.character(label)) {
+  if (!is.character(label)) {
     label <- mapping_string(mapping$x)
   }
 
@@ -1239,7 +1210,7 @@ ggally_diagAxis <- function(
     axisBreaks <- get_x_axis_labels(p, xrange)
     # print(axisBreaks)
     p <- p + geom_text(
-      data    = axisBreaks,
+      data = axisBreaks,
       mapping = aes_string(
         x     = "xPos",
         y     = "yPos",
@@ -1247,10 +1218,9 @@ ggally_diagAxis <- function(
         hjust = "hjust",
         vjust = "vjust"
       ),
-      col     = "grey50",
+      col = "grey50",
       size = gridLabelSize
     )
-
   } else {
     breakLabels <- levels(as.factor(xData))
     numLvls <- length(breakLabels)
@@ -1266,7 +1236,7 @@ ggally_diagAxis <- function(
       hjust   = labelHJust,
       vjust   = labelVJust
     )
-    #axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
+    # axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
     axisBreaks <- 0:(numLvls - 1) * (0.125 + (1 - 0.125 * (numLvls - 1)) / numLvls) +
       (1 - 0.125 * (numLvls - 1)) / (2 * numLvls)
 
@@ -1296,7 +1266,6 @@ ggally_diagAxis <- function(
   }
 
   p
-
 }
 
 #' Faceted bar plot
@@ -1317,7 +1286,6 @@ ggally_diagAxis <- function(
 #' p_(ggally_facetbar(tips, ggplot2::aes(x = sex, y = smoker, fill = time)))
 #' p_(ggally_facetbar(tips, ggplot2::aes(x = smoker, y = sex, fill = time)))
 ggally_facetbar <- function(data, mapping, ...) {
-
   mapping <- mapping_color_to_fill(mapping)
 
   # numer <- is.null(attributes(data[, as.character(mapping$x)])$class)
@@ -1355,15 +1323,13 @@ ggally_facetbar <- function(data, mapping, ...) {
 #' p_(ggally_ratio(
 #'   tips, ggplot2::aes(sex, day),
 #'   floor = 20, ceiling = 50
-#' ) + ggplot2::theme(aspect.ratio = 4/2))
+#' ) + ggplot2::theme(aspect.ratio = 4 / 2))
 ggally_ratio <- function(
-  data,
-  mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
-  ...,
-  floor = 0,
-  ceiling = NULL
-) {
-
+    data,
+    mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
+    ...,
+    floor = 0,
+    ceiling = NULL) {
   # capture the original names
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
@@ -1388,7 +1354,8 @@ ggally_ratio <- function(
   countData[["xPos"]] <- as.numeric(countData[["x"]]) + (1 / 2) * countData[["freqSize"]]
   countData[["yPos"]] <- as.numeric(countData[["y"]]) + (1 / 2) * countData[["freqSize"]]
 
-  p <- ggplot(
+  p <-
+    ggplot(
       data = countData,
       mapping = aes_string(
         x = "xPos",
@@ -1499,14 +1466,15 @@ ggally_count <- function(data, mapping, ...) {
 #' @export
 # na.rm = TRUE to remove warnings if NA (cf. stat_count)
 # x.width to control size of tiles
-stat_ggally_count <- function(mapping = NULL, data = NULL,
-                      geom = "tile", position = "identity",
-                      ...,
-                      x.width = .9,
-                      na.rm = FALSE,
-                      show.legend = NA,
-                      inherit.aes = TRUE) {
-
+stat_ggally_count <- function(
+    mapping = NULL,
+    data = NULL,
+    geom = "tile", position = "identity",
+    ...,
+    x.width = .9,
+    na.rm = FALSE,
+    show.legend = NA,
+    inherit.aes = TRUE) {
   params <- list(
     x.width = x.width,
     na.rm = na.rm,
@@ -1541,19 +1509,18 @@ StatGGallyCount <- ggproto("StatGGallyCount", Stat,
     height = after_stat(height),
     y = after_stat(y)
   ),
-
   setup_params = function(data, params) {
     params
   },
-
   extra_params = c("na.rm"),
-
   compute_panel = function(self, data, scales, x.width = NULL) {
-    if (is.null(data$weight))
+    if (is.null(data$weight)) {
       data$weight <- rep(1, nrow(data))
+    }
 
-    if (is.null(x.width))
+    if (is.null(x.width)) {
       x.width <- .9
+    }
 
     # sum weights for each combination of aesthetics
     # the use of . allows to consider all aesthetics defined in data
@@ -1725,8 +1692,9 @@ ggally_autopoint <- function(data, mapping, ...) {
   require_namespaces("ggforce")
 
   args <- list(...)
-  if (!"alpha" %in% names(args) && is.null(mapping$alpha))
+  if (!"alpha" %in% names(args) && is.null(mapping$alpha)) {
     args$alpha <- .5
+  }
   # mapping needs to be sent directly to geom_autopoint
   args$mapping <- mapping
 
@@ -1782,12 +1750,11 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 #' }
 ggally_summarise_by <- function(
-  data,
-  mapping,
-  text_fn = weighted_median_iqr,
-  text_fn_vertical = NULL,
-  ...
-) {
+    data,
+    mapping,
+    text_fn = weighted_median_iqr,
+    text_fn_vertical = NULL,
+    ...) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
@@ -1805,14 +1772,18 @@ ggally_summarise_by <- function(
       label = text_fn(x, weight)
     )
     # keep colour if matching the discrete variable
-    if (mapping_string(mapping$colour) == mapping_string(mapping$y)) col <- "y"
-    else col <- NULL
+    if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
+      col <- "y"
+    } else {
+      col <- NULL
+    }
 
     ggplot(res) +
       aes_string(y = "y", x = "1", label = "label", colour = col) +
       geom_text(...) +
-      xlab("") + ylab(mapping_string(mapping$y)) +
-      #theme_minimal() +
+      xlab("") +
+      ylab(mapping_string(mapping$y)) +
+      # theme_minimal() +
       theme(
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -1842,7 +1813,6 @@ ggally_summarise_by <- function(
       ) +
       theme(axis.text.x = element_text(size = 9))
   }
-
 }
 
 #' @rdname ggally_summarise_by

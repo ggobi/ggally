@@ -1,5 +1,3 @@
-
-
 #' \code{\link{ggmatrix}} \pkg{gtable} object
 #'
 #' Specialized method to print the \code{\link{ggmatrix}} object.
@@ -15,11 +13,10 @@
 #' pm <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes_string(color = "sex"))
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
-  pm,
-  ...,
-  progress = NULL,
-  progress_format = formals(ggmatrix_progress)$format
-) {
+    pm,
+    ...,
+    progress = NULL,
+    progress_format = formals(ggmatrix_progress)$format) {
   # pm is for "plot matrix"
 
   # init progress bar handle
@@ -52,8 +49,10 @@ ggmatrix_gtable <- function(
   # make a fake facet grid to fill in with proper plot panels
   get_labels <- function(labels, length_out, name) {
     if (is.expression(labels)) {
-      stop("'", name, "' can only be a character vector or NULL.",
-      "  Character values can be parsed using the 'labeller' parameter.")
+      stop(
+        "'", name, "' can only be a character vector or NULL.",
+        "  Character values can be parsed using the 'labeller' parameter."
+      )
     }
     ifnull(labels, as.character(seq_len(length_out)))
   }
@@ -132,7 +131,6 @@ ggmatrix_gtable <- function(
       }
 
       legend_obj <- grab_legend(pm[legend[1], legend[2]])
-
     } else if (inherits(legend, "legend_guide_box")) {
       legend_obj <- legend
     }
@@ -256,7 +254,7 @@ ggmatrix_gtable <- function(
     layout_name = "axis-l",
     layout_cols = c("l", "r"),
     pmg_key = "widths"
-    #stop_msg = "left axis width issue!! Fix!"
+    # stop_msg = "left axis width issue!! Fix!"
   )
   pmg <- set_max_axis_size(
     pmg,
@@ -264,7 +262,7 @@ ggmatrix_gtable <- function(
     layout_name = "axis-b",
     layout_cols = c("t", "b"),
     pmg_key = "heights"
-    #stop_msg = "bottom axis height issue!! Fix!"
+    # stop_msg = "bottom axis height issue!! Fix!"
   )
 
   pmg

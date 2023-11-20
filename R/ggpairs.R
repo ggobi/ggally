@@ -479,7 +479,7 @@ ggduo <- function(
   # fix args
   if (
     !missing(mapping) && !is.list(mapping) &&
-    !missing(columnsX) && missing(columnsY)
+      !missing(columnsX) && missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -808,10 +808,10 @@ ggpairs <- function(
 
   if (
     !missing(mapping) && !is.list(mapping) &&
-    missing(columns)
+      missing(columns)
   ) {
-      columns <- mapping
-      mapping <- NULL
+    columns <- mapping
+    mapping <- NULL
   }
   stop_if_bad_mapping(mapping)
 
@@ -1082,11 +1082,11 @@ get_subtype_name <- function(.subType) {
 
 stop_if_params_exist <- function(params) {
   if (! is.null(params)) {
-      stop(
-        "'params' is a deprecated argument.  ",
-        "Please 'wrap' the function to supply arguments. ",
-        "help(\"wrap\", package = \"GGally\")"
-      )
+    stop(
+      "'params' is a deprecated argument.  ",
+      "Please 'wrap' the function to supply arguments. ",
+      "help(\"wrap\", package = \"GGally\")"
+    )
   }
 }
 

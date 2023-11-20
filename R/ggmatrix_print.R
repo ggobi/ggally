@@ -1,4 +1,3 @@
-
 ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 
 #' Print \code{\link{ggmatrix}} object
@@ -15,15 +14,18 @@ ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 #' @importFrom grid grid.newpage grid.draw seekViewport pushViewport upViewport
 #' @export
 #' @examples
-#'  data(tips)
-#'  pMat <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes_string(color = "sex"))
-#'  pMat # calls print(pMat), which calls print.ggmatrix(pMat)
+#' data(tips)
+#' pMat <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes_string(color = "sex"))
+#' pMat # calls print(pMat), which calls print.ggmatrix(pMat)
 print.ggmatrix <- function(x, newpage = is.null(vp), vp = NULL, ...) {
   if (newpage) {
     grid.newpage()
   }
-  grDevices::recordGraphics(requireNamespace("GGally", quietly = TRUE),
-      list(), getNamespace("GGally"))
+  grDevices::recordGraphics(
+    requireNamespace("GGally", quietly = TRUE),
+    list(),
+    getNamespace("GGally")
+  )
   gtable <- ggmatrix_gtable(x, ...)
 
   # must be done after gtable, as gtable calls many ggplot2::print.ggplot methods
@@ -51,8 +53,8 @@ print.ggmatrix <- function(x, newpage = is.null(vp), vp = NULL, ...) {
 #'
 #' @keywords internal
 #' @examples
-#'  GGally:::is_blank_plot(ggally_blank())
-#'  GGally:::is_blank_plot(ggally_points(mtcars, ggplot2::aes_string(x = "disp", y = "hp")))
+#' GGally:::is_blank_plot(ggally_blank())
+#' GGally:::is_blank_plot(ggally_points(mtcars, ggplot2::aes_string(x = "disp", y = "hp")))
 #'
 is_blank_plot <- function(p) {
   is.null(p) || identical(p, "blank") || inherits(p, "ggmatrix_blank")

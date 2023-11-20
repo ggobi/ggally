@@ -16,7 +16,7 @@
 #'   data = iris,
 #'   fill = Species,
 #'   geom = "histogram",
-#'   binwidth = 1/4
+#'   binwidth = 1 / 4
 #' )
 #' (right <- histPlot)
 #' (bottom <- histPlot + theme(legend.position = "bottom"))
@@ -101,7 +101,6 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #' pm[1, 2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
 #' p_(pm)
 gglegend <- function(fn) {
-
   # allows users to supply a character just like in ggpairs
   fn <- wrapp(fn, list())
   fn <- attr(fn, "fn")

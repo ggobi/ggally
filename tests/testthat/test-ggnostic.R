@@ -33,7 +33,6 @@ test_that("fn_switch", {
   fn <- fn_switch(list(A = fn1), "value")
   expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "A")), 1)
   expect_error(fn(dummy_dt, ggplot2::aes_string(value = "B")), "function could not be found")
-
 })
 
 test_that("model_beta_label", {
@@ -44,7 +43,6 @@ test_that("model_beta_label", {
 })
 
 test_that("ggnostic mtcars", {
-
   mtc <- mtcars
   mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)]
 
@@ -76,7 +74,6 @@ test_that("ggnostic mtcars", {
 
 
 test_that("error checking", {
-
   get_cols <- function(cols) {
     match_nostic_columns(
       cols,
@@ -97,5 +94,4 @@ test_that("error checking", {
     )),
     "Could not match 'columnsY'"
   )
-
 })

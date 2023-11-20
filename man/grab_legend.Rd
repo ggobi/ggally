@@ -31,7 +31,7 @@ histPlot <- qplot(
   data = iris,
   fill = Species,
   geom = "histogram",
-  binwidth = 1/4
+  binwidth = 1 / 4
 )
 (right <- histPlot)
 (bottom <- histPlot + theme(legend.position = "bottom"))

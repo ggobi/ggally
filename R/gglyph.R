@@ -25,11 +25,11 @@
 #' data(nasa)
 #' nasaLate <- nasa[
 #'   nasa$date >= as.POSIXct("1998-01-01") &
-#'   nasa$lat >= 20 &
-#'   nasa$lat <= 40 &
-#'   nasa$long >= -80 &
-#'   nasa$long <= -60
-#' , ]
+#'     nasa$lat >= 20 &
+#'     nasa$lat <= 40 &
+#'     nasa$long >= -80 &
+#'     nasa$long <= -60,
+#' ]
 #' temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 2.5)
 #' p_(ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
 #'   add_ref_lines(temp.gly, color = "grey90") +
@@ -38,14 +38,13 @@
 #'   ggplot2::theme_bw() +
 #'   ggplot2::labs(x = "", y = ""))
 glyphs <- function(
-  data,
-  x_major, x_minor,
-  y_major, y_minor,
-  polar = FALSE,
-  height = ggplot2::rel(0.95), width = ggplot2::rel(0.95),
-  y_scale = identity,
-  x_scale = identity
-) {
+    data,
+    x_major, x_minor,
+    y_major, y_minor,
+    polar = FALSE,
+    height = ggplot2::rel(0.95), width = ggplot2::rel(0.95),
+    y_scale = identity,
+    x_scale = identity) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
 
   if (is.rel(width)) {
@@ -70,7 +69,7 @@ glyphs <- function(
     theta <- 2 * pi * rescale01(data[[x_minor]])
     r <- rescale01(data[[y_minor]])
 
-    data$gx <- data[[x_major]] + width  / 2 * r * sin(theta)
+    data$gx <- data[[x_major]] + width / 2 * r * sin(theta)
     data$gy <- data[[y_major]] + height / 2 * r * cos(theta)
     data <- data[order(data[[x_major]], data[[x_minor]]), ]
   } else {
@@ -78,10 +77,15 @@ glyphs <- function(
     data$gy <- data[[y_major]] + rescale11(data[[y_minor]]) * height / 2
   }
 
-  structure(data,
-    width = width, height = height, polar = polar,
-    x_major = x_major, y_major = y_major,
-    class = c("glyphplot", "data.frame"))
+  structure(
+    data,
+    width = width,
+    height = height,
+    polar = polar,
+    x_major = x_major,
+    y_major = y_major,
+    class = c("glyphplot", "data.frame")
+  )
 }
 
 # Create reference lines for a glyph plot
@@ -100,7 +104,6 @@ ref_lines <- function(data) {
         gx = df[[glyph$x_major]] + glyph$width / 4 * sin(theta),
         gy = df[[glyph$y_major]] + glyph$height / 4 * cos(theta)
       )
-
     }
   } else {
     ref_line <- function(df) {
@@ -120,10 +123,13 @@ ref_boxes <- function(data, fill = NULL) {
   glyph <- attributes(data)
   cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid", fill)]))
 
-  df <- data.frame(xmin = cells[[glyph$x_major]] - glyph$width / 2,
+  df <-
+    data.frame(
+      xmin = cells[[glyph$x_major]] - glyph$width / 2,
       xmax = cells[[glyph$x_major]] + glyph$width / 2,
       ymin = cells[[glyph$y_major]] - glyph$height / 2,
-      ymax = cells[[glyph$y_major]] + glyph$height / 2)
+      ymax = cells[[glyph$y_major]] + glyph$height / 2
+    )
   if (!is.null(fill)) {
     df$fill <- cells[[fill]]
   }
@@ -149,10 +155,15 @@ ref_boxes <- function(data, fill = NULL) {
 #' @export
 #' @author Di Cook, Heike Hofmann, Hadley Wickham
 glyphplot <- function(data, width, height, polar, x_major, y_major) {
-  structure(data,
-    width = width, height = height, polar = polar,
-    x_major = x_major, y_major = y_major,
-    class = c("glyphplot", "data.frame"))
+  structure(
+    data,
+    width = width,
+    height = height,
+    polar = polar,
+    x_major = x_major,
+    y_major = y_major,
+    class = c("glyphplot", "data.frame")
+  )
 }
 #' @export
 #' @rdname glyphplot
@@ -162,10 +173,14 @@ is.glyphplot <- function(x) {
 #' @export
 #' @rdname glyphplot
 "[.glyphplot" <- function(x, ...) {
-  glyphplot(NextMethod(),
-    width = attr(x, "width"), height = attr(x, "height"),
-    x_major = attr(x, "x_major"), y_major = attr(x, "y_major"),
-    polar = attr(x, "polar"))
+  glyphplot(
+    NextMethod(),
+    width = attr(x, "width"),
+    height = attr(x, "height"),
+    x_major = attr(x, "x_major"),
+    y_major = attr(x, "y_major"),
+    polar = attr(x, "polar")
+  )
 }
 
 #' @param x glyphplot to be printed
@@ -184,9 +199,11 @@ print.glyphplot <- function(x, ...) {
   height <- format(attr(x, "height"), digits = 3)
 
   cat("glyphplot: \n")
-  cat("  Size: [", width, ", ", height,  "]\n", sep = "")
-  cat("  Major axes: ", attr(x, "x_major"), ", ", attr(x, "y_major"), "\n",
-    sep = "")
+  cat("  Size: [", width, ", ", height, "]\n", sep = "")
+  cat(
+    "  Major axes: ", attr(x, "x_major"), ", ", attr(x, "y_major"), "\n",
+    sep = ""
+  )
   # cat("\n")
 }
 
@@ -292,10 +309,14 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
                           fill = NA, ...) {
   rb <- ref_boxes(data, var_fill)
   if (!is.null(var_fill)) {
-    geom_rect(aes_all(names(rb)), data = rb,
-              color = color, size = size, inherit.aes = FALSE, ...)
+    geom_rect(aes_all(names(rb)),
+      data = rb,
+      color = color, size = size, inherit.aes = FALSE, ...
+    )
   } else {
-    geom_rect(aes_all(names(rb)), data = rb,
-              color = color, size = size, inherit.aes = FALSE, fill = fill, ...)
+    geom_rect(aes_all(names(rb)),
+      data = rb,
+      color = color, size = size, inherit.aes = FALSE, fill = fill, ...
+    )
   }
 }

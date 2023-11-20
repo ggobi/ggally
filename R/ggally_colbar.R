@@ -25,8 +25,10 @@
 #' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8))
 #'
 #' # change labels' colour and use bold
-#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-#'               colour = "white", fontface = "bold"))
+#' p_(ggally_colbar(tips,
+#'   mapping = aes(x = smoker, y = sex),
+#'   colour = "white", fontface = "bold"
+#' ))
 #'
 #' # display number of observations instead of proportions
 #' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(count))))
@@ -35,8 +37,10 @@
 #' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))
 #'
 #' # change format of labels
-#' p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-#'               label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")))
+#' p_(ggally_colbar(tips,
+#'   mapping = aes(x = smoker, y = sex),
+#'   label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")
+#' ))
 #'
 #' p_(ggduo(
 #'   data = as.data.frame(Titanic),
@@ -47,15 +51,14 @@
 #'   legend = 1
 #' ))
 ggally_colbar <- function(
-  data,
-  mapping,
-  label_format = scales::label_percent(accuracy = .1),
-  ...,
-  remove_background = FALSE,
-  remove_percentage_axis = FALSE,
-  reverse_fill_levels = FALSE,
-  geom_bar_args = NULL
-) {
+    data,
+    mapping,
+    label_format = scales::label_percent(accuracy = .1),
+    ...,
+    remove_background = FALSE,
+    remove_percentage_axis = FALSE,
+    reverse_fill_levels = FALSE,
+    geom_bar_args = NULL) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
@@ -65,8 +68,9 @@ ggally_colbar <- function(
   mapping$by <- mapping$x
 
   # colour should not be mapped in aes
-  if (!is.null(mapping$colour))
+  if (!is.null(mapping$colour)) {
     mapping$colour <- NULL
+  }
 
   # label mapping
   if (!is.null(mapping$label)) {
@@ -117,15 +121,14 @@ ggally_colbar <- function(
 #' @rdname ggally_colbar
 #' @export
 ggally_rowbar <- function(
-  data,
-  mapping,
-  label_format = scales::label_percent(accuracy = .1),
-  ...,
-  remove_background = FALSE,
-  remove_percentage_axis = FALSE,
-  reverse_fill_levels = TRUE,
-  geom_bar_args = NULL
-) {
+    data,
+    mapping,
+    label_format = scales::label_percent(accuracy = .1),
+    ...,
+    remove_background = FALSE,
+    remove_percentage_axis = FALSE,
+    reverse_fill_levels = TRUE,
+    geom_bar_args = NULL) {
   mapping <- mapping_swap_x_y(mapping)
 
   p <- ggally_colbar(
