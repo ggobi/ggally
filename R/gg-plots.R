@@ -1128,14 +1128,7 @@ get_x_axis_labels <- function(p, xRange) {
     }
     NULL
   }
-  name <-
-    if (packageVersion("ggplot2") >= 3.3) {
-      "title"
-    } else {
-      "axis.text.x"
-    }
-
-  xAxisGrob <- get_raw_grob_by_name(axisTable, name)
+  xAxisGrob <- get_raw_grob_by_name(axisTable, "title")
 
   axisBreaks <- as.numeric(xAxisGrob$label)
 
