@@ -23,7 +23,7 @@ test_that("denstrip", {
 test_that("density", {
   p <- ggally_density(
     tips,
-    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "after_stat(level)")
   ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
   expect_equal(p$labels$fill, "level")
 })

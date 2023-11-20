@@ -2,8 +2,8 @@
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(unique(c(
     "labelp", # cor plot
-    c("..density..", "..scaled..", "x"), # facetdensitystrip plot
-    c("..scaled..", "x"), # density diagonal plot
+    c("x"), # facetdensitystrip plot
+    c("x"), # density diagonal plot
     c("x", "y", "lab"), # internal axis plot
     c("x", "y", "result", "freq"), # fluctuation plot
     c("weight") # ggally_summarise_by
@@ -214,11 +214,11 @@ ggally_smooth_lm <- function(data, mapping, ...) {
 #' p_(ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 #' p_(ggally_density(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "after_stat(level)")
 #' ))
 #' p_(ggally_density(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "..level..")
+#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "after_stat(level)")
 #' ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2)))
 ggally_density <- function(data, mapping, ...) {
   rangeX <- range(eval_data_col(data, mapping$x), na.rm = TRUE)
@@ -870,7 +870,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
   if (identical(den_strip, TRUE)) {
     p <- p +
       geom_histogram(
-        mapping = aes(fill = ..density..), # nolint
+        mapping = aes(fill = after_stat(density)), # nolint
         position = "fill",
         ...
       ) +
@@ -882,7 +882,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(scaled) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -938,7 +938,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = ..scaled.. * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(scaled) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -987,7 +987,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
         aes(
-          y = ..density.. / max(..density..) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(density) / max(after_stat(density)) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         ...
       ) + coord_cartesian(ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE))
