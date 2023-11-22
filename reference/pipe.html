@@ -104,7 +104,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/HEAD/R/GGally-package.R" class="external-link"><code>R/GGally-package.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/ggobi/ggally/blob/HEAD/R/utils-pipe.R" class="external-link"><code>R/utils-pipe.R</code></a></small>
     <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
@@ -116,6 +116,22 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="va">lhs</span> <span class="op">%&gt;%</span> <span class="va">rhs</span></span></code></pre></div>
     </div>
 
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>lhs</dt>
+<dd><p>A value or the magrittr placeholder.</p></dd>
+
+
+<dt>rhs</dt>
+<dd><p>A function call using the magrittr semantics.</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>The result of calling <code>rhs(lhs)</code>.</p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
