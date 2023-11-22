@@ -143,13 +143,13 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ggmatrix_gtable</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> TableGrob (17 x 14) "layout": 36 grobs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     z         cells       name                                    grob</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0 ( 1-17, 1-14) background       rect[plot.background..rect.39616]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   0 ( 1-17, 1-14) background       rect[plot.background..rect.40579]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   1 ( 8- 8, 5- 5)  panel-1-1                          gtable[layout]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3   1 (10-10, 5- 5)  panel-2-1                          gtable[layout]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   1 (12-12, 5- 5)  panel-3-1                          gtable[layout]</span>
@@ -181,10 +181,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 30  5 (14-14, 5- 9)     xlab-b                          zeroGrob[NULL]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 31  6 ( 8-12, 3- 3)     ylab-l                          zeroGrob[NULL]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 32  7 ( 8-12,12-12)     ylab-r                          zeroGrob[NULL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  8 ( 4- 4, 5- 9)   subtitle zeroGrob[plot.subtitle..zeroGrob.39612]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  9 ( 3- 3, 5- 9)      title    zeroGrob[plot.title..zeroGrob.39611]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35 10 (15-15, 5- 9)    caption  zeroGrob[plot.caption..zeroGrob.39614]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36 11 ( 2- 2, 2- 2)        tag      zeroGrob[plot.tag..zeroGrob.39613]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  8 ( 4- 4, 5- 9)   subtitle zeroGrob[plot.subtitle..zeroGrob.40575]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  9 ( 3- 3, 5- 9)      title    zeroGrob[plot.title..zeroGrob.40574]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35 10 (15-15, 5- 9)    caption  zeroGrob[plot.caption..zeroGrob.40577]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36 11 ( 2- 2, 2- 2)        tag      zeroGrob[plot.tag..zeroGrob.40576]</span>
 </code></pre></div>
     </div>
   </div>

@@ -131,15 +131,13 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">diamonds</span>, package <span class="op">=</span> <span class="st">"ggplot2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">diamonds.samp</span> <span class="op">&lt;-</span> <span class="va">diamonds</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">diamonds</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">1000</span><span class="op">)</span>, <span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">diamonds.samp</span>, columns <span class="op">=</span> <span class="fl">5</span><span class="op">:</span><span class="fl">7</span>,</span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">diamonds.samp</span>,</span></span>
+<span class="r-in"><span>  columns <span class="op">=</span> <span class="fl">5</span><span class="op">:</span><span class="fl">7</span>,</span></span>
 <span class="r-in"><span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">color</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="st">"cor"</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"clarity"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="st">"cor"</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"cut"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="st">"cor"</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">clarity</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="st">"cor"</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">cut</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Diamonds Sample"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`aes_string()` was deprecated in ggplot2 3.0.0.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> See also `vignette("ggplot2-in-packages")` for more information.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Custom str.ggmatrix output: </span>
@@ -147,16 +145,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data               :'data.frame':	1000 obs. of  10 variables:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ carat  : num [1:1000] 1.51 0.7 1.2 0.31 0.55 0.31 1.1 0.84 1.51 0.52 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ cut    : Ord.factor w/ 5 levels "Fair"&lt;"Good"&lt;..: 5 3 3 5 3 4 3 3 5 4 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ color  : Ord.factor w/ 7 levels "D"&lt;"E"&lt;"F"&lt;"G"&lt;..: 5 3 6 3 7 4 5 3 5 3 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ clarity: Ord.factor w/ 8 levels "I1"&lt;"SI2"&lt;"SI1"&lt;..: 3 4 3 8 3 5 3 3 5 2 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ depth  : num [1:1000] 61.3 61.6 62.9 62 62.5 61.2 63.5 63.8 62.3 62.7 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ table  : num [1:1000] 56 60 54 56 57 59 55 57 57 57 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ price  : int [1:1000] 9833 2737 5955 979 965 802 4682 2885 11967 1073 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x      : num [1:1000] 7.4 5.59 6.75 4.32 5.22 4.37 6.55 5.95 7.34 5.11 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ y      : num [1:1000] 7.44 5.65 6.77 4.36 5.24 4.35 6.49 6 7.29 5.07 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ z      : num [1:1000] 4.55 3.46 4.25 2.69 3.27 2.67 4.14 3.81 4.55 3.19 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ carat  : num [1:1000] 1.17 0.31 0.31 0.3 0.55 0.61 0.51 0.84 0.52 0.4 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ cut    : Ord.factor w/ 5 levels "Fair"&lt;"Good"&lt;..: 4 2 5 5 5 5 3 5 3 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ color  : Ord.factor w/ 7 levels "D"&lt;"E"&lt;"F"&lt;"G"&lt;..: 3 5 3 4 2 7 2 6 5 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ clarity: Ord.factor w/ 8 levels "I1"&lt;"SI2"&lt;"SI1"&lt;..: 2 3 7 8 3 4 4 5 4 7 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ depth  : num [1:1000] 59.6 63.6 62 62.8 61.4 59.7 61.4 62.3 61.4 61.4 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ table  : num [1:1000] 60 57 55 57 55 59 56 59 55 57 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ price  : int [1:1000] 4324 435 828 956 1668 1233 1612 3283 1389 1017 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ x      : num [1:1000] 6.88 4.28 4.34 4.3 5.29 5.54 5.15 5.99 5.19 4.74 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ y      : num [1:1000] 6.85 4.31 4.37 4.27 5.26 5.47 5.18 6.04 5.24 4.81 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ z      : num [1:1000] 4.09 2.73 2.7 2.69 3.24 3.29 3.17 3.75 3.2 2.93 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ plots              :List of 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ : chr "PM; aes: c(x = ~depth, colour = ~color); fn: {wrap: 'ggally_densityDiag'}; gg: FALSE"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ : chr "PM; aes: c(x = ~table, y = ~depth, colour = ~clarity); fn: {wrap: 'ggally_cor'}; gg: FALSE"</span>

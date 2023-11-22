@@ -230,87 +230,87 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="co"># small function to display plots only if it's interactive</span></span></span>
-<span class="r-in"><span> <span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># small function to display plots only if it's interactive</span></span></span>
+<span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">baseball</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">baseball</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="co"># Keep players from 1990-1995 with at least one at bat</span></span></span>
-<span class="r-in"><span> <span class="co"># Add how many singles a player hit</span></span></span>
-<span class="r-in"><span> <span class="co"># (must do in two steps as X1b is used in calculations)</span></span></span>
-<span class="r-in"><span> <span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">baseball</span>, <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">1990</span> <span class="op">&amp;</span> <span class="va">year</span> <span class="op">&lt;=</span> <span class="fl">1995</span> <span class="op">&amp;</span> <span class="va">ab</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   X1b <span class="op">=</span> <span class="va">h</span> <span class="op">-</span> <span class="va">X2b</span> <span class="op">-</span> <span class="va">X3b</span> <span class="op">-</span> <span class="va">hr</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="co"># Add</span></span></span>
-<span class="r-in"><span> <span class="co">#  the player's batting average,</span></span></span>
-<span class="r-in"><span> <span class="co">#  the player's slugging percentage,</span></span></span>
-<span class="r-in"><span> <span class="co">#  and the player's on base percentage</span></span></span>
-<span class="r-in"><span> <span class="co"># Make factor a year, as each season is discrete</span></span></span>
-<span class="r-in"><span> <span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="va">dt</span>,</span></span>
-<span class="r-in"><span>   batting_avg <span class="op">=</span> <span class="va">h</span> <span class="op">/</span> <span class="va">ab</span>,</span></span>
-<span class="r-in"><span>   slug <span class="op">=</span> <span class="op">(</span><span class="va">X1b</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">X2b</span> <span class="op">+</span> <span class="fl">3</span><span class="op">*</span><span class="va">X3b</span> <span class="op">+</span> <span class="fl">4</span><span class="op">*</span><span class="va">hr</span><span class="op">)</span> <span class="op">/</span> <span class="va">ab</span>,</span></span>
-<span class="r-in"><span>   on_base <span class="op">=</span> <span class="op">(</span><span class="va">h</span> <span class="op">+</span> <span class="va">bb</span> <span class="op">+</span> <span class="va">hbp</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">ab</span> <span class="op">+</span> <span class="va">bb</span> <span class="op">+</span> <span class="va">hbp</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Keep players from 1990-1995 with at least one at bat</span></span></span>
+<span class="r-in"><span><span class="co"># Add how many singles a player hit</span></span></span>
+<span class="r-in"><span><span class="co"># (must do in two steps as X1b is used in calculations)</span></span></span>
+<span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">baseball</span>, <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">1990</span> <span class="op">&amp;</span> <span class="va">year</span> <span class="op">&lt;=</span> <span class="fl">1995</span> <span class="op">&amp;</span> <span class="va">ab</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  X1b <span class="op">=</span> <span class="va">h</span> <span class="op">-</span> <span class="va">X2b</span> <span class="op">-</span> <span class="va">X3b</span> <span class="op">-</span> <span class="va">hr</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Add</span></span></span>
+<span class="r-in"><span><span class="co">#  the player's batting average,</span></span></span>
+<span class="r-in"><span><span class="co">#  the player's slugging percentage,</span></span></span>
+<span class="r-in"><span><span class="co">#  and the player's on base percentage</span></span></span>
+<span class="r-in"><span><span class="co"># Make factor a year, as each season is discrete</span></span></span>
+<span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">dt</span>,</span></span>
+<span class="r-in"><span>  batting_avg <span class="op">=</span> <span class="va">h</span> <span class="op">/</span> <span class="va">ab</span>,</span></span>
+<span class="r-in"><span>  slug <span class="op">=</span> <span class="op">(</span><span class="va">X1b</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">X2b</span> <span class="op">+</span> <span class="fl">3</span> <span class="op">*</span> <span class="va">X3b</span> <span class="op">+</span> <span class="fl">4</span> <span class="op">*</span> <span class="va">hr</span><span class="op">)</span> <span class="op">/</span> <span class="va">ab</span>,</span></span>
+<span class="r-in"><span>  on_base <span class="op">=</span> <span class="op">(</span><span class="va">h</span> <span class="op">+</span> <span class="va">bb</span> <span class="op">+</span> <span class="va">hbp</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">ab</span> <span class="op">+</span> <span class="va">bb</span> <span class="op">+</span> <span class="va">hbp</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="va">dt</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="co"># Prints, but</span></span></span>
-<span class="r-in"><span> <span class="co">#   there is severe over plotting in the continuous plots</span></span></span>
-<span class="r-in"><span> <span class="co">#   the labels could be better</span></span></span>
-<span class="r-in"><span> <span class="co">#   want to add more hitting information</span></span></span>
-<span class="r-in"><span> <span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">dt</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Prints, but</span></span></span>
+<span class="r-in"><span><span class="co">#   there is severe over plotting in the continuous plots</span></span></span>
+<span class="r-in"><span><span class="co">#   the labels could be better</span></span></span>
+<span class="r-in"><span><span class="co">#   want to add more hitting information</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggduo-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="co"># address overplotting issues and add a title</span></span></span>
-<span class="r-in"><span> <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="va">dt</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   columnLabelsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"player game count"</span>, <span class="st">"player at bat count"</span>, <span class="st">"league"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   columnLabelsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting avg"</span>, <span class="st">"slug %"</span>, <span class="st">"on base %"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   title <span class="op">=</span> <span class="st">"Baseball Hitting Stats from 1990-1995"</span>,</span></span>
-<span class="r-in"><span>   mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>     <span class="co"># change the shape and add some transparency to the points</span></span></span>
-<span class="r-in"><span>     continuous <span class="op">=</span> <span class="fu"><a href="wrap.html">wrap</a></span><span class="op">(</span><span class="st">"smooth_loess"</span>, alpha <span class="op">=</span> <span class="fl">0.50</span>, shape <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>   <span class="op">)</span>,</span></span>
-<span class="r-in"><span>   showStrips <span class="op">=</span> <span class="cn">FALSE</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># address overplotting issues and add a title</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">dt</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  columnLabelsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"player game count"</span>, <span class="st">"player at bat count"</span>, <span class="st">"league"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  columnLabelsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting avg"</span>, <span class="st">"slug %"</span>, <span class="st">"on base %"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Baseball Hitting Stats from 1990-1995"</span>,</span></span>
+<span class="r-in"><span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="co"># change the shape and add some transparency to the points</span></span></span>
+<span class="r-in"><span>    continuous <span class="op">=</span> <span class="fu"><a href="wrap.html">wrap</a></span><span class="op">(</span><span class="st">"smooth_loess"</span>, alpha <span class="op">=</span> <span class="fl">0.50</span>, shape <span class="op">=</span> <span class="st">"+"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  showStrips <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggduo-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use "auto" to adapt width of the sub-plots</span></span></span>
-<span class="r-in"><span> <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="va">dt</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   xProportions <span class="op">=</span> <span class="st">"auto"</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">dt</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  xProportions <span class="op">=</span> <span class="st">"auto"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggduo-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="co"># Custom widths &amp; heights of the sub-plots</span></span></span>
-<span class="r-in"><span> <span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="va">dt</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   xProportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   yProportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Custom widths &amp; heights of the sub-plots</span></span></span>
+<span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu">ggduo</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">dt</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"g"</span>, <span class="st">"ab"</span>, <span class="st">"lg"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"batting_avg"</span>, <span class="st">"slug"</span>, <span class="st">"on_base"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">lg</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  xProportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  yProportions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="va">pm</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggduo-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example derived from:</span></span></span>
@@ -418,6 +418,37 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="ggduo-9.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co">#  dt,</span></span></span>
+<span class="r-in"><span><span class="co">#  c("year", "g", "ab", "lg", "lg"),</span></span></span>
+<span class="r-in"><span><span class="co">#  c("batting_avg", "slug", "on_base", "hit_type"),</span></span></span>
+<span class="r-in"><span><span class="co">#  columnLabelsX = c("year", "player game count", "player at bat count", "league", ""),</span></span></span>
+<span class="r-in"><span><span class="co">#  columnLabelsY = c("batting avg", "slug %", "on base %", "hit type"),</span></span></span>
+<span class="r-in"><span><span class="co">#  title = "Baseball Hitting Stats from 1990-1995 (player strike in 1994)",</span></span></span>
+<span class="r-in"><span><span class="co">#  mapping = aes(color = year),</span></span></span>
+<span class="r-in"><span><span class="co">#  types = list(</span></span></span>
+<span class="r-in"><span><span class="co">#    continuous = wrap("smooth_loess", alpha = 0.50, shape = "+"),</span></span></span>
+<span class="r-in"><span><span class="co">#    comboHorizontal = wrap(display_hit_type_combo, binwidth = 15),</span></span></span>
+<span class="r-in"><span><span class="co">#    discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)</span></span></span>
+<span class="r-in"><span><span class="co">#  ),</span></span></span>
+<span class="r-in"><span><span class="co">#  showStrips = FALSE</span></span></span>
+<span class="r-in"><span><span class="co">## make the 5th column blank, except for the legend</span></span></span>
+<span class="r-in"><span><span class="co">#  australia_PISA2012,</span></span></span>
+<span class="r-in"><span><span class="co">#  c("gender", "age", "homework", "possessions"),</span></span></span>
+<span class="r-in"><span><span class="co">#  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),</span></span></span>
+<span class="r-in"><span><span class="co">#  types = list(</span></span></span>
+<span class="r-in"><span><span class="co">#    continuous = "points",</span></span></span>
+<span class="r-in"><span><span class="co">#    combo = "box",</span></span></span>
+<span class="r-in"><span><span class="co">#    discrete = "ratio"</span></span></span>
+<span class="r-in"><span><span class="co">#  )</span></span></span>
+<span class="r-in"><span><span class="co">#  australia_PISA2012,</span></span></span>
+<span class="r-in"><span><span class="co">#  c("gender", "age", "homework", "possessions"),</span></span></span>
+<span class="r-in"><span><span class="co">#  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),</span></span></span>
+<span class="r-in"><span><span class="co">#  mapping = ggplot2::aes(color = gender),</span></span></span>
+<span class="r-in"><span><span class="co">#  types = list(</span></span></span>
+<span class="r-in"><span><span class="co">#    continuous = wrap("smooth", alpha = 0.25, method = "loess"),</span></span></span>
+<span class="r-in"><span><span class="co">#    combo = "box",</span></span></span>
+<span class="r-in"><span><span class="co">#    discrete = "ratio"</span></span></span>
+<span class="r-in"><span><span class="co">#  )</span></span></span>
 </code></pre></div>
     </div>
   </div>
