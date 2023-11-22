@@ -43,7 +43,8 @@ Imports:
     RColorBrewer,
     rlang,
     scales (>= 1.1.0),
-    utils
+    utils,
+    magrittr
 Suggests:
     broom (>= 0.7.0),
     broom.helpers (>= 1.3.0),

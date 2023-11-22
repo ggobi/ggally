@@ -2,7 +2,7 @@
 
 ### Bug fixes
 
-* removed dependency on reshape2 (#475)
+* Removed dependency on reshape2 (#475)
 * Reverse ordering of y-axis in `ggally_count()` (#420)
 * Facets ordering in `ggcoef_compare()` (#426)
 * Fix in `ggcoef_compare()` when using tidy selectors for
@@ -12,7 +12,7 @@
 * New default tidier for `ggcoef_model()`, now using
   `broom.helpers::tidy_with_broom_or_parameters()` (#432)
 * Re-export methods from and redirect vignettes to the `{ggstats}` package (#452, #457)
-* Replaced ..scaled.. with after_stat(scaled) in ggscatmat (#467)
+* Replaced `..scaled..` with `after_stat(scaled)` in ggscatmat (#467)
 
 
 # GGally 2.1.2
