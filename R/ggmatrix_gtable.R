@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #' data(tips)
-#' pm <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes_string(color = "sex"))
+#' pm <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes(color = sex))
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
     pm,
@@ -64,7 +64,7 @@ ggmatrix_gtable <- function(
   fake_data$y <- 1
 
   # make the smallest plot possible so the guts may be replaced
-  pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
+  pm_fake <- ggplot(fake_data, mapping = aes(!!as.name("x"), !!as.name("y"))) +
     geom_point() +
     # make the 'fake' strips for x and y titles
     facet_grid(Var2 ~ Var1, labeller = ifnull(pm$labeller, "label_value"), switch = pm$switch) +
@@ -91,7 +91,7 @@ ggmatrix_gtable <- function(
 
   # if there is a legend, make a fake legend that will be replaced later
   if (!is.null(pm$legend)) {
-    pm_fake <- pm_fake + geom_point(mapping = aes_(color = "Var1"))
+    pm_fake <- pm_fake + geom_point(mapping = aes(color = !!as.name("Var1")))
   }
 
   # make a gtable of the plot matrix (to be filled in)

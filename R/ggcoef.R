@@ -43,7 +43,7 @@
 #' @export
 ggcoef <- function(
     x,
-    mapping = aes_string(y = "term", x = "estimate"),
+    mapping = aes(!!as.name("estimate"), !!as.name("term")),
     conf.int = TRUE,
     conf.level = 0.95,
     exponentiate = FALSE,
@@ -100,7 +100,7 @@ ggcoef <- function(
       p <- p +
         geom_vline(
           xintercept = vline_intercept, color = vline_color,
-          linetype = vline_linetype, size = vline_size
+          linetype = vline_linetype, linewidth = vline_size
         ) +
         scale_x_log10()
     } else {
@@ -112,17 +112,17 @@ ggcoef <- function(
           xintercept = vline_intercept,
           color = vline_color,
           linetype = vline_linetype,
-          size = vline_size
+          linewidth = vline_size
         )
     }
   }
   if (conf.int && "conf.low" %in% names(x) && "conf.high" %in% names(x)) {
     p <- p + geom_errorbarh(
-      aes_string(xmin = "conf.low", xmax = "conf.high"),
+      aes(xmin = !!as.name("conf.low"), xmax = !!as.name("conf.high")),
       color = errorbar_color,
       height = errorbar_height,
       linetype = errorbar_linetype,
-      size = errorbar_size
+      linewidth = errorbar_size
     )
   }
   p + geom_point(...)

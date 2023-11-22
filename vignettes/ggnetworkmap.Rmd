@@ -66,7 +66,7 @@ flights %v% "mygroup" <- sample(letters[1:4], network.size(flights), replace = T
 usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
   geom_polygon(aes(group = group),
     color = "grey65",
-    fill = "#f9f9f9", size = 0.2
+    fill = "#f9f9f9", linewidth = 0.2
   )
 
 # trim flights
@@ -96,7 +96,7 @@ world <- fortify(map("world", plot = FALSE, fill = TRUE))
 world <- ggplot(world, aes(x = long, y = lat)) +
   geom_polygon(aes(group = group),
     color = "grey65",
-    fill = "#f9f9f9", size = 0.2
+    fill = "#f9f9f9", linewidth = 0.2
   )
 
 # view global structure

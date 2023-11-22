@@ -273,7 +273,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   ## set up the plot
   r <- ggplot(
     ltdata.new,
-    mapping = aes_string(x = "xvalue", y = "yvalue")
+    mapping = aes(x = !!as.name("xvalue"), y = !!as.name("yvalue"))
   ) +
     theme(
       axis.title.x = element_blank(),
@@ -293,8 +293,8 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
       j <- subset(densities, xlab == names(dn)[m])
       r <- r + stat_density(
         aes(
-          x = x,
-          y = after_stat(scaled) * diff(range(x)) + min(x) # nolint
+          x = !!as.name("x"),
+          y = after_stat(scaled) * diff(range(!!as.name("x"))) + min(!!as.name("x")) # nolint
         ),
         data = j, position = "identity", geom = "line", color = "black"
       )
@@ -316,9 +316,10 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
       r <- r +
         # r is the facet grid plot
         stat_density(
-          aes_string(
-            x = "x", y = "after_stat(scaled) * diff(range(x)) + min(x)",
-            colour = "colorcolumn"
+          aes(
+            x = !!as.name("x"),
+            y = after_stat(scaled) * diff(range(!!as.name("x"))) + min(!!as.name("x")),
+            colour = !!as.name("colorcolumn")
           ),
           data = j,
           position = "identity",
@@ -329,7 +330,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
     r <- r +
       geom_point(
         data = ltdata.new,
-        aes_string(colour = "colorcolumn"),
+        aes(colour = !!as.name("colorcolumn")),
         alpha = alpha,
         na.rm = TRUE
       )
@@ -382,10 +383,10 @@ ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, cor
   a <- uppertriangle(data, columns = columns, color = color, corMethod = corMethod)
   if (is.null(color)) {
     plot <- scatmat(data, columns = columns, alpha = alpha) +
-      geom_text(data = a, aes_string(label = "r"), colour = "black")
+      geom_text(data = a, aes(label = !!as.name("r")), colour = "black")
   } else {
     plot <- scatmat(data, columns = columns, color = color, alpha = alpha) +
-      geom_text(data = a, aes_string(label = "r", color = "colorcolumn")) + labs(color = color)
+      geom_text(data = a, aes(label = !!as.name("r"), color = !!as.name("colorcolumn"))) + labs(color = color)
   }
   is.factor.or.character <- function(x) {
     is.factor(x) | is.character(x)

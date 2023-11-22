@@ -141,17 +141,20 @@ By default, the plots in the top row and the right most column will display top-
 
 ```{r ggmatrix_stripControl}
 data(tips)
-plotList <- list(
-  qplot(total_bill, tip, data = subset(tips, smoker == "No" & sex == "Female")) +
-    facet_grid(time ~ day),
-  qplot(total_bill, tip, data = subset(tips, smoker == "Yes" & sex == "Female")) +
-    facet_grid(time ~ day),
-  qplot(total_bill, tip, data = subset(tips, smoker == "No" & sex == "Male")) +
-    facet_grid(time ~ day),
-  qplot(total_bill, tip, data = subset(tips, smoker == "Yes" & sex == "Male")) +
+subPlot <- function(smoker_value, sex_value) {
+  ggplot(
+    data = tips[tips$smoker == smoker_value & tips$sex == sex_value, ],
+    aes(x = !!as.name("total_bill"), y = !!as.name("tip"))
+  ) +
+    geom_point() +
     facet_grid(time ~ day)
+}
+plotList <- list(
+  subPlot("No", "Female"),
+  subPlot("Yes", "Female"),
+  subPlot("No", "Male"),
+  subPlot("Yes", "Male")
 )
-
 
 pm <- ggmatrix(
   plotList,

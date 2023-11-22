@@ -77,7 +77,7 @@ ggally_colbar <- function(
     mapping_text <- aes()
     mapping_text$label <- mapping$label
   } else {
-    mapping_text <- aes_string(label = "label_format(after_stat(prop))")
+    mapping_text <- aes(label = label_format(after_stat(!!as.name("prop"))))
   }
 
   # position for geom_bar

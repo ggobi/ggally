@@ -25,14 +25,13 @@ p_ <- GGally::print_if_interactive
 
 data(tips)
 p_(ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
-p_(ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 p_(ggally_dot(
   tips,
-  mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+  mapping = ggplot2::aes(sex, total_bill, color = sex)
 ))
 p_(ggally_dot(
   tips,
-  mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
+  mapping = ggplot2::aes(sex, total_bill, color = sex, shape = sex)
 ) + ggplot2::scale_shape(solid = FALSE))
 }
 \author{

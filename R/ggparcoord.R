@@ -1,3 +1,4 @@
+#' @importFrom dplyr all_of
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(c("variable", "value", "ggally_splineFactor", ".ggally_ggcorr_row_names"))
 }
@@ -106,9 +107,9 @@ if (getRversion() >= "2.15.1") {
 #' # utilize ggplot2 aes to switch to thicker lines
 #' p <- ggparcoord(
 #'   data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
-#'   title = "Parallel Coord. Plot of Diamonds Data", mapping = ggplot2::aes(size = 1)
+#'   title = "Parallel Coord. Plot of Diamonds Data", mapping = ggplot2::aes(linewidth = 1)
 #' ) +
-#'   ggplot2::scale_size_identity()
+#'   ggplot2::scale_linewidth_identity()
 #' p_(p)
 #'
 #' # basic parallel coord plot of the msleep data, using 'random' imputation and
@@ -453,7 +454,7 @@ ggparcoord <- function(
   # data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
   data.m <- pivot_longer(
     data,
-    cols = columns,
+    cols = all_of(columns),
     names_to = "variable",
     values_to = "value"
   )
@@ -490,21 +491,21 @@ ggparcoord <- function(
   }
 
   if (!is.null(groupColumn)) {
-    mapping2 <- aes_string(
-      x = "variable",
-      y = "value",
-      group = ".ID",
-      colour = groupColumn
+    mapping2 <- aes(
+      x = !!as.name("variable"),
+      y = !!as.name("value"),
+      group = !!as.name(".ID"),
+      colour = !!as.name(groupColumn)
     )
   } else {
-    mapping2 <- aes_string(
-      x = "variable",
-      y = "value",
-      group = ".ID"
+    mapping2 <- aes(
+      x = !!as.name("variable"),
+      y = !!as.name("value"),
+      group = !!as.name(".ID")
     )
   }
   mapping2 <- add_and_overwrite_aes(mapping2, mapping)
-  # mapping2 <- add_and_overwrite_aes(aes_string(size = I(0.5)), mapping2)
+  # mapping2 <- add_and_overwrite_aes(aes(size = I(0.5)), mapping2)
   p <- ggplot(data = data.m, mapping = mapping2)
 
   if (!is.null(shadeBox)) {
@@ -514,23 +515,23 @@ ggparcoord <- function(
       max = max(value)
     )
     p <- p + geom_linerange(
-      data = d.sum, size = I(10), col = shadeBox,
+      data = d.sum, linewidth = I(10), col = shadeBox,
       inherit.aes = FALSE,
-      mapping = aes_string(
-        x = "variable",
-        ymin = "min",
-        ymax = "max",
-        group = "variable"
+      mapping = aes(
+        x = !!as.name("variable"),
+        ymin = !!as.name("min"),
+        ymax = !!as.name("max"),
+        group = !!as.name("variable")
       )
     )
   }
 
   if (boxplot) {
-    p <- p + geom_boxplot(mapping = aes_string(group = "variable"), alpha = 0.8)
+    p <- p + geom_boxplot(mapping = aes(group = !!as.name("variable")), alpha = 0.8)
   }
 
-  if (!is.null(mapping2$size)) {
-    lineSize <- mapping2$size
+  if (!is.null(mapping2$linewidth)) {
+    lineSize <- mapping2$linewidth
   } else {
     lineSize <- 0.5
   }
@@ -555,17 +556,17 @@ ggparcoord <- function(
     if (alphaLinesIsCharacter) {
       p <- p +
         geom_line(
-          aes_string(x = linexvar, y = lineyvar, alpha = alphaLines),
-          size = lineSize,
+          aes(x = !!as.name(linexvar), y = !!as.name(lineyvar), alpha = !!as.name(alphaLines)),
+          linewidth = lineSize,
           data = data.m
         ) +
         scale_alpha(range = alphaRange)
     } else {
       p <- p +
         geom_line(
-          aes_string(x = linexvar, y = lineyvar),
+          aes(x = !!as.name(linexvar), y = !!as.name(lineyvar)),
           alpha = alphaLines,
-          size = lineSize,
+          linewidth = lineSize,
           data = data.m
         )
     }
@@ -584,10 +585,10 @@ ggparcoord <- function(
   } else {
     if (alphaLinesIsCharacter) {
       p <- p +
-        geom_line(aes_string(alpha = alphaLines), size = lineSize, data = data.m) +
+        geom_line(aes(alpha = !!as.name(alphaLines)), linewidth = lineSize, data = data.m) +
         scale_alpha(range = alphaRange)
     } else {
-      # p <- p + geom_line(alpha = alphaLines, size = lineSize)
+      # p <- p + geom_line(alpha = alphaLines, linewidth = lineSize)
       p <- p + geom_line(alpha = alphaLines)
     }
 

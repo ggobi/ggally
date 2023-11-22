@@ -27,10 +27,10 @@
 </defs>
 <g clip-path='url(#cpNTIuMzV8NjY1LjYzfDIyLjc4fDU0NS4xMQ==)'>
 <rect x='52.35' y='22.78' width='613.28' height='522.33' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='80.23' y='283.95' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: square; stroke-linejoin: miter;' />
-<rect x='80.23' y='46.53' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: square; stroke-linejoin: miter;' />
-<rect x='358.99' y='283.95' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: square; stroke-linejoin: miter;' />
-<rect x='358.99' y='46.53' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: square; stroke-linejoin: miter;' />
+<rect x='80.23' y='283.95' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter;' />
+<rect x='80.23' y='46.53' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter;' />
+<rect x='358.99' y='283.95' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter;' />
+<rect x='358.99' y='46.53' width='278.76' height='237.42' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter;' />
 <text x='219.61' y='406.46' text-anchor='middle' style='font-size: 11.04px; fill: #F8766D; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>54</text>
 <text x='219.61' y='169.04' text-anchor='middle' style='font-size: 11.04px; fill: #F8766D; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>97</text>
 <text x='498.37' y='406.46' text-anchor='middle' style='font-size: 11.04px; fill: #00BFC4; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>33</text>

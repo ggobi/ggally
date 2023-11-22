@@ -155,5 +155,5 @@ test_that("cens.size", {
   a <- ggsurv(sf.kid)
   b <- ggsurv(sf.lung, cens.size = 5)
   expect_true(a$layers[[2]]$aes_params$size == 2)
-  expect_true(b$layers[[2]]$aes_params$size != 2)
+  expect_true(b$layers[[4]]$aes_params$size != 2)
 })

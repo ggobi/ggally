@@ -6,7 +6,7 @@
 \usage{
 ggally_text(
   label,
-  mapping = ggplot2::aes(color = "black"),
+  mapping = ggplot2::aes(color = I("black")),
   xP = 0.5,
   yP = 0.5,
   xrange = c(0, 1),

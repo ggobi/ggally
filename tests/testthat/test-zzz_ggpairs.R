@@ -116,7 +116,8 @@ test_that("upper/lower/diag = blank", {
   }
 
   a <- ggpairs(tips, columnsUsed)
-  a[1, 1] <- ggplot2::qplot(total_bill, data = tips)
+  a[1, 1] <- ggplot(tips, aes(total_bill)) +
+    geom_histogram()
   expect_false(is_blank_plot(a[1, 1]))
 })
 
@@ -612,12 +613,9 @@ test_that("strip-top and strip-right", {
   data(tips)
 
   double_strips <- function(data, mapping, ...) {
-    dt <- count(data, c(mapping_string(mapping$x), mapping_string(mapping$y)))
-    ggplot2::qplot(
-      xmin = 0.25, xmax = 0.75,
-      ymin = 1, ymax = freq,
-      data = dt, geom = "rect"
-    ) +
+    dt <- plyr::count(data, c(mapping_string(mapping$x), mapping_string(mapping$y)))
+    ggplot(dt, aes(xmin = 0.25, xmax = 0.75, ymin = 1, ymax = freq)) +
+      geom_rect() +
       ggplot2::facet_grid(paste0(mapping_string(mapping$y), " ~ ", mapping_string(mapping$x))) +
       ggplot2::scale_x_continuous(breaks = 0.5, labels = NULL)
   }
@@ -824,10 +822,10 @@ test_that("subtypes", {
           vdiffr::expect_doppelganger(pm_name, built_pm)
         },
         error = function(e) {
-          print("failed to create doppelganger")
-          print(pm_name)
+          message("failed to create doppelganger: ", pm_name)
           print(e)
           barret <<- pm
+          expect_silent(print(c("failed to create doppelganger", pm_name)))
         }
       )
     }

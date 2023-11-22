@@ -205,7 +205,7 @@ lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
   )
 
   ggplot(data = data, mapping = mapping) +
-    geom_hline(yintercept = 0, color = line_color, size = line_size) +
+    geom_hline(yintercept = 0, color = line_color, linewidth = line_size) +
     ylim(y_range) +
     geom_point(data = resid_data, mapping = aes(x = x, y = y), ...)
 }

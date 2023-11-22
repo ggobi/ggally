@@ -163,15 +163,15 @@ ggsurv_s <- function(
   col <- ifelse(surv.col == "gg.def", "black", surv.col)
 
   pl <- ggplot(dat, aes(x = time, y = surv)) +
-    geom_step(col = col, lty = lty.est, size = size.est) +
+    geom_step(col = col, lty = lty.est, linewidth = size.est) +
     xlab(xlab) +
     ylab(ylab) +
     ggtitle(main)
 
   if (identical(CI, TRUE) | identical(CI, "def")) {
     pl <- pl +
-      geom_step(aes(y = up), color = col, lty = lty.ci, size = size.ci) +
-      geom_step(aes(y = low), color = col, lty = lty.ci, size = size.ci)
+      geom_step(aes(y = up), color = col, lty = lty.ci, linewidth = size.ci) +
+      geom_step(aes(y = low), color = col, lty = lty.ci, linewidth = size.ci)
   }
 
   if (identical(plot.cens, TRUE)) {
@@ -278,7 +278,7 @@ ggsurv_m <- function(
   dat <- do.call(rbind, gr.df)
 
   pl <- ggplot(dat, aes(x = time, y = surv, group = group)) +
-    geom_step(aes(col = group, lty = group), size = size.est) +
+    geom_step(aes(col = group, lty = group), linewidth = size.est) +
     xlab(xlab) +
     ylab(ylab) +
     ggtitle(main)
@@ -308,8 +308,8 @@ ggsurv_m <- function(
       surv.col
     }
     pl <- pl +
-      geom_step(aes(y = up, lty = group, col = group), lty = stepLty, size = size.ci) +
-      geom_step(aes(y = low, lty = group, col = group), lty = stepLty, size = size.ci)
+      geom_step(aes(y = up, lty = group, col = group), lty = stepLty, linewidth = size.ci) +
+      geom_step(aes(y = low, lty = group, col = group), lty = stepLty, linewidth = size.ci)
   }
 
   if (identical(plot.cens, TRUE)) {

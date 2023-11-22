@@ -67,7 +67,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
   args <- list(...)
   # default values for geom_point
   if (!"size" %in% names(mapping)) {
-    mapping$size <- aes_string(size = "after_stat(observed)")$size
+    mapping$size <- aes(size = after_stat(!!as.name("observed")))$size
   }
   if (is.null(mapping$shape) && is.null(args$shape)) {
     args$shape <- 22
@@ -161,7 +161,7 @@ ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_
 
   # default values geom_text
   if (!"label" %in% names(mapping)) {
-    mapping$label <- aes_string(label = "after_stat(observed)")$label
+    mapping$label <- aes(label = after_stat(!!as.name("observed")))$label
   }
   geom_text_args <- list(...)
   geom_text_args$stat <- "cross"
@@ -238,10 +238,10 @@ ggally_crosstable <- function(
     geom_tile_args = list(colour = "grey50")) {
   fill <- match.arg(fill)
   if (fill == "std.resid") {
-    mapping$fill <- aes_string(fill = "after_stat(std.resid)")$fill
+    mapping$fill <- aes(fill = after_stat(!!as.name("std.resid")))$fill
   }
   if (fill == "resid") {
-    mapping$fill <- aes_string(fill = "after_stat(resid)")$fill
+    mapping$fill <- aes(fill = after_stat(!!as.name("resid")))$fill
   }
   if (fill == "none") {
     geom_tile_args$fill <- "white"
@@ -249,13 +249,13 @@ ggally_crosstable <- function(
 
   cells <- match.arg(cells)
   if (!"label" %in% names(mapping) && cells %in% c("observed", "expected")) {
-    mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = 1)"))$label
+    mapping$label <- aes(label = scales::number(after_stat(!!as.name(cells)), accuracy = 1))$label
   }
   if (!"label" %in% names(mapping) && cells %in% c("prop", "row.prop", "col.prop")) {
-    mapping$label <- aes_string(label = paste0("scales::percent(after_stat(", cells, "), accuracy = .1)"))$label
+    mapping$label <- aes(label = scales::percent(after_stat(!!as.name(cells)), accuracy = .1))$label
   }
   if (!"label" %in% names(mapping) && cells %in% c("resid", "std.resid")) {
-    mapping$label <- aes_string(label = paste0("scales::number(after_stat(", cells, "), accuracy = .1)"))$label
+    mapping$label <- aes(label = scales::number(after_stat(!!as.name(cells)), accuracy = .1))$label
   }
 
   p <- ggally_table(data = data, mapping = mapping, keep.zero.cells = TRUE, geom_tile_args = geom_tile_args, ...) +

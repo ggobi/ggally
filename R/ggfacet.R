@@ -108,7 +108,7 @@ ggfacet <- function(
   if (is.null(mapping)) {
     mapping <- aes()
   }
-  mapping[c("x", "y")] <- aes_string(x = ".x_val", y = ".y_val")
+  mapping[c("x", "y")] <- aes(x = !!as.name(".x_val"), y = !!as.name(".y_val"))
 
   names(columnLabelsX) <- as.character(columnsX)
   names(columnLabelsY) <- as.character(columnsY)

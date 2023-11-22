@@ -20,19 +20,19 @@ test_that("fn_switch", {
 
   chars <- c("A", "B", "C")
   for (i in 1:3) {
-    mapping <- ggplot2::aes_string(value = chars[i])
+    mapping <- ggplot2::aes(value = !!as.name(chars[i]))
     expect_equal(fn(dummy_dt, mapping), i)
   }
 
 
   fn <- fn_switch(list(A = fn1, default = fn5), "value")
-  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "A")), 1)
-  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "B")), 5)
-  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "C")), 5)
+  expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("A"))), 1)
+  expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("B"))), 5)
+  expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("C"))), 5)
 
   fn <- fn_switch(list(A = fn1), "value")
-  expect_equal(fn(dummy_dt, ggplot2::aes_string(value = "A")), 1)
-  expect_error(fn(dummy_dt, ggplot2::aes_string(value = "B")), "function could not be found")
+  expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("A"))), 1)
+  expect_error(fn(dummy_dt, ggplot2::aes(value = !!as.name("B"))), "function could not be found")
 })
 
 test_that("model_beta_label", {

@@ -6,7 +6,7 @@
 \usage{
 ggcoef(
   x,
-  mapping = aes_string(y = "term", x = "estimate"),
+  mapping = aes(!!as.name("estimate"), !!as.name("term")),
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,

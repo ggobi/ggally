@@ -105,7 +105,7 @@ test_that("example", {
   # Change line size
   vdiffr::expect_doppelganger(
     "trends-size-3",
-    ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex), size = 3)
+    ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex), linewidth = 3)
   )
 
   # Define weights with the appropriate aesthetic

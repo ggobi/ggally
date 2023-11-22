@@ -120,15 +120,15 @@ remove_color_unless_equal <- function(mapping, to = c("x", "y")) {
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(mtcars)
-#' p_(ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp)))
-#' p_(ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp")))
+#' p_(ggally_points(mtcars, mapping = ggplot2::aes(disp, hp)))
+#' p_(ggally_points(mtcars, mapping = ggplot2::aes(disp, hp)))
 #' p_(ggally_points(
 #'   mtcars,
-#'   mapping = ggplot2::aes_string(
-#'     x     = "disp",
-#'     y     = "hp",
-#'     color = "as.factor(cyl)",
-#'     size  = "gear"
+#'   mapping = ggplot2::aes(
+#'     x     = disp,
+#'     y     = hp,
+#'     color = as.factor(cyl),
+#'     size  = gear
 #'   )
 #' ))
 ggally_points <- function(data, mapping, ...) {
@@ -159,8 +159,7 @@ ggally_points <- function(data, mapping, ...) {
 #'
 #' data(tips)
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
-#' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
-#' p_(ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex")))
+#' p_(ggally_smooth(tips, mapping = ggplot2::aes(total_bill, tip, color = sex)))
 ggally_smooth <- function(data, mapping, ..., method = "lm", formula = y ~ x, se = TRUE, shrink = TRUE) {
   p <- ggplot(data = data, mapping)
 
@@ -211,14 +210,13 @@ ggally_smooth_lm <- function(data, mapping, ...) {
 #'
 #' data(tips)
 #' p_(ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
-#' p_(ggally_density(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
 #' p_(ggally_density(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "after_stat(level)")
+#'   mapping = ggplot2::aes(total_bill, tip, fill = after_stat(level))
 #' ))
 #' p_(ggally_density(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", fill = "after_stat(level)")
+#'   mapping = ggplot2::aes(total_bill, tip, fill = after_stat(level))
 #' ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2)))
 ggally_density <- function(data, mapping, ...) {
   rangeX <- range(eval_data_col(data, mapping$x), na.rm = TRUE)
@@ -227,7 +225,7 @@ ggally_density <- function(data, mapping, ...) {
   p <- ggplot(data = data) +
     geom_point(
       data = data.frame(rangeX = rangeX, rangeY = rangeY),
-      mapping = aes(x = rangeX, y = rangeY),
+      mapping = aes(x = !!as.name("rangeX"), y = !!as.name("rangeY")),
       alpha = 0
     )
 
@@ -275,11 +273,11 @@ ggally_density <- function(data, mapping, ...) {
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(tips)
-#' p_(ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+#' p_(ggally_cor(tips, mapping = ggplot2::aes(total_bill, tip)))
 #' # display with grid
 #' p_(ggally_cor(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+#'   mapping = ggplot2::aes(total_bill, tip),
 #'   display_grid = TRUE
 #' ))
 #' # change text attributes
@@ -293,7 +291,7 @@ ggally_density <- function(data, mapping, ...) {
 #' # split by a variable
 #' p_(ggally_cor(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+#'   mapping = ggplot2::aes(total_bill, tip, color = sex),
 #'   size = 5
 #' ))
 ggally_cor <- function(
@@ -534,10 +532,10 @@ ggally_statistic <- function(
       list(
         data = cordf,
         aes(
-          x = xPos,
-          y = yPos,
-          label = labelp,
-          color = labelp
+          x = !!as.name("xPos"),
+          y = !!as.name("yPos"),
+          label = !!as.name("labelp"),
+          color = !!as.name("labelp")
         )
       ),
       group_args
@@ -596,10 +594,9 @@ ggally_statistic <- function(
 #'
 #' data(tips)
 #' p_(ggally_box(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
-#' p_(ggally_box(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 #' p_(ggally_box(
 #'   tips,
-#'   mapping        = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex"),
+#'   mapping        = ggplot2::aes(sex, total_bill, color = sex),
 #'   outlier.colour = "red",
 #'   outlier.shape  = 13,
 #'   outlier.size   = 8
@@ -634,14 +631,13 @@ ggally_box_no_facet <- function(data, mapping, ...) {
 #'
 #' data(tips)
 #' p_(ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
-#' p_(ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 #' p_(ggally_dot(
 #'   tips,
-#'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+#'   mapping = ggplot2::aes(sex, total_bill, color = sex)
 #' ))
 #' p_(ggally_dot(
 #'   tips,
-#'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
+#'   mapping = ggplot2::aes(sex, total_bill, color = sex, shape = sex)
 #' ) + ggplot2::scale_shape(solid = FALSE))
 ggally_dot <- function(data, mapping, ...) {
   ggally_dot_and_box(data, mapping, ..., boxPlot = FALSE)
@@ -754,7 +750,7 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 #'
 #' data(tips)
 #' p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex)))
-#' p_(ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1))
+#' p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex), binwidth = 0.1))
 ggally_facethist <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
 
@@ -805,7 +801,7 @@ ggally_facethist <- function(data, mapping, ...) {
 #' p_(ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 #' p_(ggally_facetdensity(
 #'   tips,
-#'   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+#'   mapping = ggplot2::aes(sex, total_bill, color = sex)
 #' ))
 ggally_facetdensity <- function(data, mapping, ...) {
   ggally_facetdensitystrip(data, mapping, ..., den_strip = FALSE)
@@ -827,10 +823,9 @@ ggally_facetdensity <- function(data, mapping, ...) {
 #'
 #' data(tips)
 #' p_(ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
-#' p_(ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))
 #' p_(ggally_denstrip(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
+#'   mapping = ggplot2::aes(sex, tip), binwidth = 0.2
 #' ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black"))
 ggally_denstrip <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
@@ -870,7 +865,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
   if (identical(den_strip, TRUE)) {
     p <- p +
       geom_histogram(
-        mapping = aes(fill = after_stat(density)), # nolint
+        mapping = aes(fill = after_stat(!!as.name("density"))), # nolint
         position = "fill",
         ...
       ) +
@@ -882,7 +877,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(scaled) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -938,7 +933,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(scaled) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -987,7 +982,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
         aes(
-          y = after_stat(density) / max(after_stat(density)) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("density")) / max(after_stat(!!as.name("density"))) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
         ),
         ...
       ) + coord_cartesian(ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE))
@@ -1024,7 +1019,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
 #' p_(ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red")))
 ggally_text <- function(
     label,
-    mapping = ggplot2::aes(color = "black"),
+    mapping = ggplot2::aes(color = I("black")),
     xP = 0.5,
     yP = 0.5,
     xrange = c(0, 1),
@@ -1046,9 +1041,9 @@ ggally_text <- function(
     ) +
     labs(x = NULL, y = NULL)
 
-  new_mapping <- aes_string(
-    x = xP * diff(xrange) + min(xrange, na.rm = TRUE),
-    y = yP * diff(yrange) + min(yrange, na.rm = TRUE)
+  new_mapping <- aes(
+    x = !!xP * diff(xrange) + min(xrange, na.rm = TRUE),
+    y = !!yP * diff(yrange) + min(yrange, na.rm = TRUE)
   )
   if (is.null(mapping)) {
     mapping <- new_mapping
@@ -1197,7 +1192,7 @@ ggally_diagAxis <- function(
 
     p <- ggally_text(
       label   = label,
-      mapping = aes(col = "grey50"),
+      mapping = aes(col = I("grey50")),
       xrange  = xrange,
       yrange  = xrange,
       size    = labelSize,
@@ -1211,12 +1206,12 @@ ggally_diagAxis <- function(
     # print(axisBreaks)
     p <- p + geom_text(
       data = axisBreaks,
-      mapping = aes_string(
-        x     = "xPos",
-        y     = "yPos",
-        label = "lab",
-        hjust = "hjust",
-        vjust = "vjust"
+      mapping = aes(
+        x     = !!as.name("xPos"),
+        y     = !!as.name("yPos"),
+        label = !!as.name("lab"),
+        hjust = !!as.name("hjust"),
+        vjust = !!as.name("vjust")
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1227,7 +1222,7 @@ ggally_diagAxis <- function(
 
     p <- ggally_text(
       label   = label,
-      mapping = aes(col = "grey50"),
+      mapping = aes(col = I("grey50")),
       xrange  = c(0, 1),
       yrange  = c(0, 1),
       size    = labelSize,
@@ -1249,9 +1244,9 @@ ggally_diagAxis <- function(
     p <- p + geom_text(
       data = axisLabs,
       mapping = aes(
-        x     = x,
-        y     = y,
-        label = lab
+        x     = !!as.name("x"),
+        y     = !!as.name("y"),
+        label = !!as.name("lab")
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1326,7 +1321,7 @@ ggally_facetbar <- function(data, mapping, ...) {
 #' ) + ggplot2::theme(aspect.ratio = 4 / 2))
 ggally_ratio <- function(
     data,
-    mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
+    mapping = ggplot2::aes(!!!setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
     ...,
     floor = 0,
     ceiling = NULL) {
@@ -1357,12 +1352,12 @@ ggally_ratio <- function(
   p <-
     ggplot(
       data = countData,
-      mapping = aes_string(
-        x = "xPos",
-        y = "yPos",
-        height = "freqSize",
-        width = "freqSize",
-        fill = "col"
+      mapping = aes(
+        x = !!as.name("xPos"),
+        y = !!as.name("yPos"),
+        height = !!as.name("freqSize"),
+        width = !!as.name("freqSize"),
+        fill = !!as.name("col")
       )
     ) +
     geom_tile(...) +
@@ -1438,22 +1433,29 @@ ggally_count <- function(data, mapping, ...) {
   # and always be a factor
   count_col <- ".ggally_y"
   data[[count_col]] <- as.factor(eval_data_col(data, mapping$y))
+
+  # Reverse the y axis here. I'd like to perform this in the
+  # `scale_y_continuous(trans="reverse")`, but the trans is applied after
+  # `breaks/labels`
+  data[[count_col]] <- factor(data[[count_col]], levels = rev(levels(data[[count_col]])))
+
   ylabel <- mapping_string(mapping$y)
-  mapping$base_y <- aes_string(base_y = count_col)$base_y
+  mapping$base_y <- aes(base_y = !!as.name(count_col))$base_y
   mapping$y <- NULL
 
   # default values
   args <- list(...)
-  if (!"fill" %in% names(args) && is.null(mapping$fill)) {
-    args$fill <- GeomRect$default_aes$fill
+  if (!"fill" %in% names(args)) {
+    if (is.null(mapping$fill)) {
+      args$fill <- GeomRect$default_aes$fill
+    }
   }
 
   ggplot(data, mapping) +
     do.call(stat_ggally_count, args) +
     scale_y_continuous(
       breaks = seq_along(levels(data[[count_col]])),
-      labels = levels(data[[count_col]]),
-      trans = scales::reverse_trans()
+      labels = levels(data[[count_col]])
     ) +
     theme(panel.grid.minor = element_blank()) +
     ylab(ylabel)
@@ -1528,6 +1530,11 @@ StatGGallyCount <- ggproto("StatGGallyCount", Stat,
 
     names(panel)[which(names(panel) == "weight")] <- "n"
 
+    # Reverse both the y and fill values here.
+    # This makes the colors appear the correct order
+    # If it is a single color, it won't make any difference in the cum_height
+    panel <- panel[rev(seq_len(nrow(panel))), ]
+
     # compute proportions by x and y
     f <- function(n) {
       sum(abs(n), na.rm = TRUE)
@@ -1573,7 +1580,7 @@ ggally_blank <- function(...) {
   aes(...) # ignored
   a <- data.frame(X = 1:2, Y = 1:2)
 
-  p <- ggplot(data = a, aes_string(x = "X", y = "Y")) +
+  p <- ggplot(data = a, aes(x = !!as.name("X"), y = !!as.name("Y"))) +
     geom_point(colour = "transparent") +
     theme(
       axis.line         = element_blank(),
@@ -1624,7 +1631,7 @@ ggally_blankDiag <- function(...) {
 ggally_na <- function(data = NULL, mapping = NULL, size = 10, color = "grey20", ...) {
   a <- data.frame(x = 1, y = 1, label = "NA")
 
-  p <- ggplot(data = a, aes_string(x = "x", y = "y", label = "label")) +
+  p <- ggplot(data = a, aes(x = !!as.name("X"), y = !!as.name("Y"), label = !!as.name("label"))) +
     geom_text(color = color, size = size, ...) +
     theme(
       axis.line         = element_blank(),
@@ -1773,13 +1780,13 @@ ggally_summarise_by <- function(
     )
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
-      col <- "y"
+      col <- as.name("y")
     } else {
       col <- NULL
     }
 
     ggplot(res) +
-      aes_string(y = "y", x = "1", label = "label", colour = col) +
+      aes(y = !!as.name("y"), x = 1, label = !!as.name("label"), colour = !!col) +
       geom_text(...) +
       xlab("") +
       ylab(mapping_string(mapping$y)) +

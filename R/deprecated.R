@@ -46,12 +46,12 @@ v1_ggmatrix_theme <- function() {
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(tips)
-#' p_(ggally_cor_v1_5(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+#' p_(ggally_cor_v1_5(tips, mapping = ggplot2::aes(total_bill, tip)))
 #'
 #' # display with no grid
 #' p_(ggally_cor_v1_5(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+#'   mapping = ggplot2::aes(total_bill, tip),
 #'   displayGrid = FALSE
 #' ))
 #'
@@ -66,7 +66,7 @@ v1_ggmatrix_theme <- function() {
 #' # split by a variable
 #' p_(ggally_cor_v1_5(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+#'   mapping = ggplot2::aes(total_bill, tip, color = sex),
 #'   size = 5
 #' ))
 ggally_cor_v1_5 <- function(

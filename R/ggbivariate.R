@@ -74,7 +74,7 @@ ggbivariate <- function(
 
   if (!is.numeric(data[[outcome]])) {
     # mapping outcome to colour
-    mapping$colour <- aes_string(colour = outcome)$colour
+    mapping$colour <- aes(colour = !!as.name(outcome))$colour
   }
 
   # default behavior

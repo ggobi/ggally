@@ -615,7 +615,7 @@ ggnet <- function(
         data = edges,
         aes(x = X1, y = Y1, xend = X2, yend = Y2),
         alpha  = segment.alpha,
-        size   = segment.size,
+        linewidth = segment.size,
         color  = segment.color,
         arrow  = arrow(
           type   = arrow.type,

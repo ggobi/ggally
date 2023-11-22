@@ -6,7 +6,7 @@
 \usage{
 ggally_ratio(
   data,
-  mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
+  mapping = ggplot2::aes(!!!setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
   ...,
   floor = 0,
   ceiling = NULL

@@ -293,7 +293,7 @@ rescale11 <- function(x, xlim = NULL) {
 #' @export
 add_ref_lines <- function(data, color = "white", size = 1.5, ...) {
   rl <- ref_lines(data)
-  geom_path(data = rl, color = color, size = size, ...)
+  geom_path(data = rl, color = color, linewidth = size, ...)
 }
 
 #' Add reference boxes around each cell of the glyphmap.
@@ -311,12 +311,12 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
   if (!is.null(var_fill)) {
     geom_rect(aes_all(names(rb)),
       data = rb,
-      color = color, size = size, inherit.aes = FALSE, ...
+      color = color, linewidth = size, inherit.aes = FALSE, ...
     )
   } else {
     geom_rect(aes_all(names(rb)),
       data = rb,
-      color = color, size = size, inherit.aes = FALSE, fill = fill, ...
+      color = color, linewidth = size, inherit.aes = FALSE, fill = fill, ...
     )
   }
 }

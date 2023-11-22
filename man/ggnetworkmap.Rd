@@ -114,12 +114,15 @@ flights \%v\% "mygroup" <- sample(letters[1:4], network.size(flights), replace =
 
 # create a map of the USA
 usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
-  geom_polygon(aes(group = group), color = "grey65",
-               fill = "#f9f9f9", size = 0.2)
+  geom_polygon(aes(group = group),
+    color = "grey65",
+    fill = "#f9f9f9", linewidth = 0.2
+  )
 
 # overlay network data to map
 p <- ggnetworkmap(
-  usa, flights, size = 4, great.circles = TRUE,
+  usa, flights,
+  size = 4, great.circles = TRUE,
   node.group = mygroup, segment.color = "steelblue",
   ring.group = degree, weight = degree
 )
@@ -133,8 +136,10 @@ data(twitter_spambots)
 # create a world map
 world <- fortify(map("world", plot = FALSE, fill = TRUE))
 world <- ggplot(world, aes(x = long, y = lat)) +
-  geom_polygon(aes(group = group), color = "grey65",
-               fill = "#f9f9f9", size = 0.2)
+  geom_polygon(aes(group = group),
+    color = "grey65",
+    fill = "#f9f9f9", linewidth = 0.2
+  )
 
 # view global structure
 p <- ggnetworkmap(world, twitter_spambots)
