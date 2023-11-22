@@ -42,7 +42,7 @@ if \code{x} is not a data frame)}
 \item{vline}{print a vertical line?}
 
 \item{vline_intercept}{\code{xintercept} for the vertical line.
-\code{"auto"} for \code{x = 0} (or \code{x = 1} if {exponentiate} is \code{TRUE})}
+\code{"auto"} for \code{x = 0} (or \code{x = 1} if \code{exponentiate} is \code{TRUE})}
 
 \item{vline_color}{color of the vertical line}
 
