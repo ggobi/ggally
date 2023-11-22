@@ -115,7 +115,8 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggally_ratio</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
-<span>  mapping <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, <span class="va">as.name</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>,</span>
+<span>    <span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  floor <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  ceiling <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -154,7 +155,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
 <span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_ratio</span><span class="op">(</span><span class="va">tips</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">day</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggally_ratio-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_ratio</span><span class="op">(</span><span class="va">tips</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">day</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_equal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -163,7 +164,7 @@
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_ratio</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">tips</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">day</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  floor <span class="op">=</span> <span class="fl">20</span>, ceiling <span class="op">=</span> <span class="fl">50</span></span></span>
-<span class="r-in"><span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">4</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">4</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggally_ratio-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -179,7 +180,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

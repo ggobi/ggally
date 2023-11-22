@@ -146,14 +146,14 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; # Small function to display plots only if it's interactive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_ &lt;- GGally::print_if_interactive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; data(tips, package = "reshape")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; data(tips)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_(ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))</span>
 <span class="r-plt img"><img src="ggally_facetdensitystrip-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_(ggally_facetdensity(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   tips,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   mapping = ggplot2::aes(sex, total_bill, color = sex)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+ ))</span>
 <span class="r-plt img"><img src="ggally_facetdensitystrip-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">ggally_denstrip</span><span class="op">)</span></span></span>
@@ -161,25 +161,19 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; # Small function to display plots only if it's interactive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_ &lt;- GGally::print_if_interactive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; data(tips, package = "reshape")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; data(tips)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_(ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 15 rows containing missing values (geom_bar).</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 15 rows containing missing values (`geom_bar()`).</span>
 <span class="r-plt img"><img src="ggally_facetdensitystrip-3.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_(ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex")))</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 15 rows containing missing values (geom_bar).</span>
-<span class="r-plt img"><img src="ggally_facetdensitystrip-4.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_(ggally_denstrip(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   tips,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   mapping = ggplot2::aes(sex, tip), binwidth = 0.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+ ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black"))</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 22 rows containing missing values (geom_bar).</span>
-<span class="r-plt img"><img src="ggally_facetdensitystrip-5.png" alt="" width="700" height="433"></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 41 rows containing missing values (`geom_bar()`).</span>
+<span class="r-plt img"><img src="ggally_facetdensitystrip-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -194,7 +188,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

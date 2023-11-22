@@ -131,11 +131,12 @@
 
       
 
-      </header><script src="ggduo_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggduo(): Two-grouped plot matrix</h1>
-                        <h4 data-toc-skip class="author">Barret Schloerke</h4>
+                        <h4 data-toc-skip class="author">Barret
+Schloerke</h4>
             
             <h4 data-toc-skip class="date">July 4, 2016</h4>
       
@@ -156,7 +157,9 @@
 <h2 id="ggallyggduo">
 <code>GGally::ggduo()</code><a class="anchor" aria-label="anchor" href="#ggallyggduo"></a>
 </h2>
-<p>The purpose of this function is to display two grouped data in a plot matrix. This is useful for canonical correlation analysis, multiple time series analysis, and regression analysis.</p>
+<p>The purpose of this function is to display two grouped data in a plot
+matrix. This is useful for canonical correlation analysis, multiple time
+series analysis, and regression analysis.</p>
 <div class="section level3">
 <h3 id="canonical-correlation-analysis">Canonical Correlation Analysis<a class="anchor" aria-label="anchor" href="#canonical-correlation-analysis"></a>
 </h3>
@@ -181,7 +184,8 @@
 <span><span class="co">#&gt; [1] "locus_of_control" "self_concept"     "motivation"</span></span>
 <span><span class="op">(</span><span class="va">academic_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="st">"academic"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "read"    "write"   "math"    "science" "sex"</span></span></code></pre></div>
-<p>First, look at the within correlation using <code><a href="../reference/ggpairs.html">ggpairs()</a></code>.</p>
+<p>First, look at the within correlation using
+<code><a href="../reference/ggpairs.html">ggpairs()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="va">psych_variables</span>, title <span class="op">=</span> <span class="st">"Within Psychological Variables"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
@@ -206,7 +210,10 @@
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-between-1.png" width="700"></p>
-<p>Since ggduo does not have a upper section to display the correlation values, we may use a custom function to add the information in the continuous plots. The strips may be removed as each group name may be recovered in the outer axis labels.</p>
+<p>Since ggduo does not have a upper section to display the correlation
+values, we may use a custom function to add the information in the
+continuous plots. The strips may be removed as each group name may be
+recovered in the outer axis labels.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_with_cor</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span>, <span class="va">...</span>, <span class="va">method</span> <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_data_col.html">eval_data_col</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">mapping</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span>
@@ -244,22 +251,29 @@
 <div class="section level3">
 <h3 id="multiple-time-series-analysis">Multiple Time Series Analysis<a class="anchor" aria-label="anchor" href="#multiple-time-series-analysis"></a>
 </h3>
-<p>While displaying multiple time series vertically over time, such as <code>+ ggplot2::facet_grid(time ~ .)</code>, <code><a href="../reference/ggduo.html">ggduo()</a></code> can handle both continuous and discrete data. <code>ggplot2</code> does not mix discrete and continuous data on the same axis.</p>
+<p>While displaying multiple time series vertically over time, such as
+<code>+ ggplot2::facet_grid(time ~ .)</code>, <code><a href="../reference/ggduo.html">ggduo()</a></code> can
+handle both continuous and discrete data. <code>ggplot2</code> does not
+mix discrete and continuous data on the same axis.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pigs</span><span class="op">)</span></span>
 <span><span class="va">pigs_dt</span> <span class="op">&lt;-</span> <span class="va">pigs</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co"># remove year and quarter</span></span>
 <span><span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pigs_dt</span><span class="op">$</span><span class="va">profit</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/qplot.html" class="external-link">qplot</a></span><span class="op">(</span></span>
-<span>  <span class="va">time</span>, <span class="va">value</span>,</span>
-<span>  data <span class="op">=</span> <span class="fu">reshape</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/reshape/man/melt-data-frame-da.html" class="external-link">melt.data.frame</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="st">"time"</span><span class="op">)</span>,</span>
-<span>  geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smooth"</span>, <span class="st">"point"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="op">-</span><span class="va">time</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">~</span> <span class="va">.</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">name</span> <span class="op">~</span> <span class="va">.</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-1.png" width="700"></p>
-<p>Instead, we may use <code>ggts</code> to display the data. <code>ggts</code> changes the default behavior of ggduo of <code>columnLabelsX</code> to equal <code>NULL</code> and allows for mixed variable types.</p>
+<p>Instead, we may use <code>ggts</code> to display the data.
+<code>ggts</code> changes the default behavior of ggduo of
+<code>columnLabelsX</code> to equal <code>NULL</code> and allows for
+mixed variable types.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make the profit group as a factor value</span></span>
 <span><span class="va">profit_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -286,7 +300,8 @@
 <span><span class="va">pigs_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">profit_group</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="va">pigs_mapping</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, types <span class="op">=</span> <span class="va">pigs_types</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-group-3.png" width="700"></p>
-<p>Produce more meaningful labels, add a legend, and remove profit group strips.</p>
+<p>Produce more meaningful labels, add a legend, and remove profit group
+strips.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span></span>
 <span>  <span class="va">pigs_dt</span>, <span class="va">pigs_mapping</span>,</span>
@@ -316,8 +331,12 @@
 <div class="section level3">
 <h3 id="regression-analysis">Regression Analysis<a class="anchor" aria-label="anchor" href="#regression-analysis"></a>
 </h3>
-<p>Since <code><a href="../reference/ggduo.html">ggduo()</a></code> may take custom functions just like <code><a href="../reference/ggpairs.html">ggpairs()</a></code>, we will make a custom function that displays the residuals with a red line at 0 and all other y variables will receive a simple linear regression plot.</p>
-<p>Note: the marginal residuals are calculated before plotting and the y_range is found to display all residuals on the same scale.</p>
+<p>Since <code><a href="../reference/ggduo.html">ggduo()</a></code> may take custom functions just like
+<code><a href="../reference/ggpairs.html">ggpairs()</a></code>, we will make a custom function that displays the
+residuals with a red line at 0 and all other y variables will receive a
+simple linear regression plot.</p>
+<p>Note: the marginal residuals are calculated before plotting and the
+y_range is found to display all residuals on the same scale.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">swiss</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/swiss.html" class="external-link">swiss</a></span></span>
 <span></span>
@@ -347,10 +366,9 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, mapping <span class="op">=</span> <span class="va">mapping</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="va">line_color</span>, size <span class="op">=</span> <span class="va">line_size</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="va">line_color</span>, linewidth <span class="op">=</span> <span class="va">line_size</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="va">y_range</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">resid_data</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># plot the data</span></span>
@@ -379,21 +397,31 @@
 <div class="section level3">
 <h3 id="types-of-plots">Types of plots<a class="anchor" aria-label="anchor" href="#types-of-plots"></a>
 </h3>
-<p>You can customize the type of plots to display with the <code>types</code> argument. <code>types</code> is a list that may contain the variables ‘continuous’, ‘combo’, ‘discrete’, and ‘na’. Each element of the list may be a function or a string. If a string is supplied, it must be a character string representing the tail end of a <code>ggally_NAME</code> function.</p>
+<p>You can customize the type of plots to display with the
+<code>types</code> argument. <code>types</code> is a list that may
+contain the variables ‘continuous’, ‘combo’, ‘discrete’, and ‘na’. Each
+element of the list may be a function or a string. If a string is
+supplied, it must be a character string representing the tail end of a
+<code>ggally_NAME</code> function.</p>
 <ul>
 <li>
-<code>continuous</code>: when both x and y variables are continuous</li>
+<code>continuous</code>: when both x and y variables are
+continuous</li>
 <li>
-<code>comboHorizontal</code>: when x is continuous and y is discrete</li>
+<code>comboHorizontal</code>: when x is continuous and y is
+discrete</li>
 <li>
-<code>comboVorizontal</code>: when x is discrete and y is continuous</li>
+<code>comboVorizontal</code>: when x is discrete and y is
+continuous</li>
 <li>
 <code>discrete</code>: when both x and y variables are discrete</li>
 <li>
-<code>na</code>: when all x data and all y data is <code>NA</code>
+<code>na</code>: when all x data and all y data is
+<code>NA</code>
 </li>
 </ul>
-<p>The list of current valid <code>ggally_NAME</code> functions is visible in <code>vig_ggally("ggally_plots")</code>.</p>
+<p>The list of current valid <code>ggally_NAME</code> functions is
+visible in <code>vig_ggally("ggally_plots")</code>.</p>
 </div>
 </div>
   </div>
@@ -415,7 +443,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

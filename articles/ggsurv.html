@@ -131,11 +131,12 @@
 
       
 
-      </header><script src="ggsurv_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggsurv(): Survival curves</h1>
-                        <h4 data-toc-skip class="author">Edwin Thoen</h4>
+                        <h4 data-toc-skip class="author">Edwin
+Thoen</h4>
             
             <h4 data-toc-skip class="date">April, 4, 2016</h4>
       
@@ -156,7 +157,10 @@
 <h2 id="ggallyggsurv">
 <code>GGally::ggsurv()</code><a class="anchor" aria-label="anchor" href="#ggallyggsurv"></a>
 </h2>
-<p>This function produces Kaplan-Meier plots using <code>ggplot2</code>. As a first argument, <code><a href="../reference/ggsurv.html">ggsurv()</a></code> needs a <code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code> object. Default settings differ for single stratum and multiple strata objects.</p>
+<p>This function produces Kaplan-Meier plots using <code>ggplot2</code>.
+As a first argument, <code><a href="../reference/ggsurv.html">ggsurv()</a></code> needs a
+<code><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survival::survfit()</a></code> object. Default settings differ for
+single stratum and multiple strata objects.</p>
 <div class="section level3">
 <h3 id="single-stratum">Single Stratum<a class="anchor" aria-label="anchor" href="#single-stratum"></a>
 </h3>
@@ -176,7 +180,9 @@
 <div class="section level3">
 <h3 id="multiple-stratum">Multiple Stratum<a class="anchor" aria-label="anchor" href="#multiple-stratum"></a>
 </h3>
-<p>The legend color positions matches the survival order or each stratum, where the stratums that end at a lower value or time have a position that is lower in the legend.</p>
+<p>The legend color positions matches the survival order or each
+stratum, where the stratums that end at a lower value or time have a
+position that is lower in the legend.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sf.sex</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span></span>
 <span><span class="va">pl.sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggsurv.html">ggsurv</a></span><span class="op">(</span><span class="va">sf.sex</span><span class="op">)</span></span>
@@ -186,7 +192,8 @@
 <div class="section level3">
 <h3 id="alterations">Alterations<a class="anchor" aria-label="anchor" href="#alterations"></a>
 </h3>
-<p>Since a ggplot2 object is returned, plot objects may be altered after the original creation.</p>
+<p>Since a ggplot2 object is returned, plot objects may be altered after
+the original creation.</p>
 <div class="section level4">
 <h4 id="adjusting-the-legend">Adjusting the legend<a class="anchor" aria-label="anchor" href="#adjusting-the-legend"></a>
 </h4>
@@ -198,8 +205,8 @@
 <span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for 'colour',</span></span>
-<span><span class="co">#&gt; which will replace the existing scale.</span></span></code></pre></div>
+<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span></span></code></pre></div>
 <p><img src="ggsurv_files/figure-html/ggsurv-legend-1.png" width="700"></p>
 </div>
 <div class="section level4">
@@ -225,10 +232,10 @@
 <code class="sourceCode R"><span><span class="va">pl.kid</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
 <span>    <span class="st">"text"</span>,</span>
-<span>    label  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PKD"</span>, <span class="st">"Other"</span>, <span class="st">"GN"</span>, <span class="st">"AN"</span><span class="op">)</span>,</span>
-<span>    x      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">125</span>, <span class="fl">5</span>, <span class="fl">60</span><span class="op">)</span>,</span>
-<span>    y      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.65</span>, <span class="fl">0.55</span>, <span class="fl">0.30</span><span class="op">)</span>,</span>
-<span>    size   <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PKD"</span>, <span class="st">"Other"</span>, <span class="st">"GN"</span>, <span class="st">"AN"</span><span class="op">)</span>,</span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">125</span>, <span class="fl">5</span>, <span class="fl">60</span><span class="op">)</span>,</span>
+<span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.65</span>, <span class="fl">0.55</span>, <span class="fl">0.30</span><span class="op">)</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>    colour <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/hue_pal.html" class="external-link">hue_pal</a></span><span class="op">(</span></span>
 <span>      h         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span><span class="op">)</span> <span class="op">+</span> <span class="fl">15</span>,</span>
 <span>      c         <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -261,7 +268,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

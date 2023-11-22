@@ -117,7 +117,7 @@ For an updated and improved version, see <code><a href="https://larmarange.githu
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggcoef</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"term"</span>, x <span class="op">=</span> <span class="st">"estimate"</span><span class="op">)</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/name.html" class="external-link">as.name</a></span><span class="op">(</span><span class="st">"estimate"</span><span class="op">)</span>, <span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/name.html" class="external-link">as.name</a></span><span class="op">(</span><span class="st">"term"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  conf.int <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  conf.level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  exponentiate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -219,15 +219,18 @@ if <code>x</code> is not a data frame)</p></dd>
 <span class="r-in"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span> <span class="op">+</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="va">Petal.Width</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggcoef</span><span class="op">(</span><span class="va">reg</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggcoef-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">reg2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">~</span> <span class="va">Sex</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Class</span>, family <span class="op">=</span> <span class="va">binomial</span>, data <span class="op">=</span> <span class="va">d</span>, weights <span class="op">=</span> <span class="va">d</span><span class="op">$</span><span class="va">Freq</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ggcoef</span><span class="op">(</span><span class="va">reg2</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggcoef-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">ggcoef</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">reg2</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, exclude_intercept <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  <span class="va">reg2</span>,</span></span>
+<span class="r-in"><span>  exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, exclude_intercept <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  errorbar_height <span class="op">=</span> <span class="fl">.2</span>, color <span class="op">=</span> <span class="st">"blue"</span>, sort <span class="op">=</span> <span class="st">"ascending"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggcoef-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -242,7 +245,7 @@ if <code>x</code> is not a data frame)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

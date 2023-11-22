@@ -131,11 +131,12 @@
 
       
 
-      </header><script src="ggnostic_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>ggnostic(): Model diagnostics</h1>
-                        <h4 data-toc-skip class="author">Barret Schloerke</h4>
+                        <h4 data-toc-skip class="author">Barret
+Schloerke</h4>
             
             <h4 data-toc-skip class="date">Oct 1, 2016</h4>
       
@@ -156,15 +157,26 @@
 <h2 id="ggallyggnostic">
 <code>GGally::ggnostic()</code><a class="anchor" aria-label="anchor" href="#ggallyggnostic"></a>
 </h2>
-<p><code><a href="../reference/ggnostic.html">ggnostic()</a></code> is a display wrapper to <code><a href="../reference/ggduo.html">ggduo()</a></code> that displays full model diagnostics for each given explanatory variable. By default, <code><a href="../reference/ggduo.html">ggduo()</a></code> displays the residuals, leave-one-out model sigma value, leverage points, and Cook’s distance against each explanatory variable. The rows of the plot matrix can be expanded to include fitted values, standard error of the fitted values, standardized residuals, and any of the response variables. If the model is a linear model, stars are added according to the <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">stats::anova</a></code> significance of each explanatory variable.</p>
-<p>Most diagnostic plots contain reference line(s) to help determine if the model is fitting properly</p>
+<p><code><a href="../reference/ggnostic.html">ggnostic()</a></code> is a display wrapper to <code><a href="../reference/ggduo.html">ggduo()</a></code>
+that displays full model diagnostics for each given explanatory
+variable. By default, <code><a href="../reference/ggduo.html">ggduo()</a></code> displays the residuals,
+leave-one-out model sigma value, leverage points, and Cook’s distance
+against each explanatory variable. The rows of the plot matrix can be
+expanded to include fitted values, standard error of the fitted values,
+standardized residuals, and any of the response variables. If the model
+is a linear model, stars are added according to the
+<code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">stats::anova</a></code> significance of each explanatory variable.</p>
+<p>Most diagnostic plots contain reference line(s) to help determine if
+the model is fitting properly</p>
 <ul>
 <li>
 <strong>residuals:</strong>
 <ul>
 <li>Type key: <code>".resid"</code>
 </li>
-<li>A solid line is located at the expected value of 0 with dashed lines at the 95% confidence interval. (<span class="math inline">\(0 \pm 1.96 * \sigma\)</span>)</li>
+<li>A solid line is located at the expected value of 0 with dashed lines
+at the 95% confidence interval. (<span class="math inline">\(0 \pm 1.96
+* \sigma\)</span>)</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_resid.html">ggally_nostic_resid()</a></code>.</li>
 <li>See also <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">stats::residuals</a></code>
 </li>
@@ -175,7 +187,9 @@
 <ul>
 <li>Type key: <code>".std.resid"</code>
 </li>
-<li>Same as residuals, except the standardized residuals equal the regular residuals divided by sigma. The dashed lines are located at <span class="math inline">\(0 \pm 1.96 * 1\)</span>.</li>
+<li>Same as residuals, except the standardized residuals equal the
+regular residuals divided by sigma. The dashed lines are located at
+<span class="math inline">\(0 \pm 1.96 * 1\)</span>.</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_std_resid.html">ggally_nostic_std_resid()</a></code>.</li>
 <li>See also <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">stats::rstandard</a></code>
 </li>
@@ -188,7 +202,8 @@
 </li>
 <li>A solid line is located at the full model’s sigma value.</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_sigma.html">ggally_nostic_sigma()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">stats::influence</a></code>’s value on <code>sigma</code>
+<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">stats::influence</a></code>’s value on
+<code>sigma</code>
 </li>
 </ul>
 </li>
@@ -197,9 +212,12 @@
 <ul>
 <li>Type key: <code>".hat"</code>
 </li>
-<li>The expected value for the diagonal of a hat matrix is <span class="math inline">\(p / n\)</span>. Points are considered leverage points if they are large than <span class="math inline">\(2 * p / n\)</span>, where the higher line is drawn.</li>
+<li>The expected value for the diagonal of a hat matrix is <span class="math inline">\(p / n\)</span>. Points are considered leverage
+points if they are large than <span class="math inline">\(2 * p /
+n\)</span>, where the higher line is drawn.</li>
 <li>Plot function: <code><a href="../reference/ggally_nostic_hat.html">ggally_nostic_hat()</a></code>.</li>
-<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">stats::influence</a></code>’s value on <code>hat</code>
+<li>See also <code><a href="https://rdrr.io/r/stats/lm.influence.html" class="external-link">stats::influence</a></code>’s value on
+<code>hat</code>
 </li>
 </ul>
 </li>
@@ -208,7 +226,10 @@
 <ul>
 <li>Type key: <code>".cooksd"</code>
 </li>
-<li>Points that are larger than <span class="math inline">\(4 / n\)</span> line are considered highly influential points. Plot function: <code><a href="../reference/ggally_nostic_cooksd.html">ggally_nostic_cooksd()</a></code>. See also <code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">stats::cooks.distance()</a></code>
+<li>Points that are larger than <span class="math inline">\(4 /
+n\)</span> line are considered highly influential points. Plot function:
+<code><a href="../reference/ggally_nostic_cooksd.html">ggally_nostic_cooksd()</a></code>. See also
+<code><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">stats::cooks.distance()</a></code>
 </li>
 </ul>
 </li>
@@ -246,7 +267,8 @@
 <div class="section level3">
 <h3 id="life-expectancy-model-fitting">Life Expectancy Model Fitting<a class="anchor" aria-label="anchor" href="#life-expectancy-model-fitting"></a>
 </h3>
-<p>Looking at the dataset <code><a href="https://rdrr.io/r/datasets/state.html" class="external-link">datasets::state.x77</a></code>, we will fit a multiple regression model for Life Expectancy.</p>
+<p>Looking at the dataset <code><a href="https://rdrr.io/r/datasets/state.html" class="external-link">datasets::state.x77</a></code>, we will fit
+a multiple regression model for Life Expectancy.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a data.frame and fix column names</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">state.x77</span><span class="op">)</span></span>
@@ -289,12 +311,14 @@
 <span><span class="co">#&gt; Residual standard error: 0.7197 on 45 degrees of freedom</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.736,  Adjusted R-squared:  0.7126 </span></span>
 <span><span class="co">#&gt; F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</span></span></code></pre></div>
-<p>Next, we look at the variables for any high (|value| &gt; 0.8) correlation values and general interaction behavior.</p>
+<p>Next, we look at the variables for any high (|value| &gt; 0.8)
+correlation values and general interaction behavior.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># look at variables for high correlation (none)</span></span>
 <span><span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">state</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_scatmat-1.png" width="700"></p>
-<p>All variables appear to be ok. Next, we look at the model diagnostics.</p>
+<p>All variables appear to be ok. Next, we look at the model
+diagnostics.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># look at model diagnostics</span></span>
 <span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -304,11 +328,15 @@
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_diag-1.png" width="700"></p>
 <ul>
-<li>The residuals appear to be normally distributed. There are a couple residual outliers, but 2.5 outliers are expected.</li>
-<li>There are 5 leverage points according the diagonal of the hat matrix</li>
-<li>There are 2 leverage points according to Cook’s distance. One is <strong>much</strong> larger than the other.</li>
+<li>The residuals appear to be normally distributed. There are a couple
+residual outliers, but 2.5 outliers are expected.</li>
+<li>There are 5 leverage points according the diagonal of the hat
+matrix</li>
+<li>There are 2 leverage points according to Cook’s distance. One is
+<strong>much</strong> larger than the other.</li>
 </ul>
-<p>Let’s remove the largest data point first to try and define a better model.</p>
+<p>Let’s remove the largest data point first to try and define a better
+model.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># very high life expectancy</span></span>
 <span><span class="va">state</span><span class="op">[</span><span class="fl">11</span>, <span class="op">]</span></span>
@@ -322,7 +350,8 @@
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
 <p><img src="ggnostic_files/figure-html/nostic_no_hawaii-1.png" width="700"></p>
-<p>There are no more outrageous Cook’s distance values. The model without Hawaii appears to be a good fitting model.</p>
+<p>There are no more outrageous Cook’s distance values. The model
+without Hawaii appears to be a good fitting model.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -370,12 +399,18 @@
 <span><span class="co">#&gt; Residual standard error: 0.6796 on 44 degrees of freedom</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.7483, Adjusted R-squared:  0.7254 </span></span>
 <span><span class="co">#&gt; F-statistic: 32.71 on 4 and 44 DF,  p-value: 1.15e-12</span></span></code></pre></div>
-<p>Since there is only a marginal improvement by removing Hawaii, the original model should be used to explain life expectancy.</p>
+<p>Since there is only a marginal improvement by removing Hawaii, the
+original model should be used to explain life expectancy.</p>
 </div>
 <div class="section level3">
 <h3 id="full-diagnostic-plot-matrix-example">Full diagnostic plot matrix example<a class="anchor" aria-label="anchor" href="#full-diagnostic-plot-matrix-example"></a>
 </h3>
-<p>The following lines of code will display different model diagnostic plot matrices for the same statistical model. The first one is of the default settings. The second adds color according to the <code>species</code>. Finally, the third displays all possible columns and uses <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> to display the fitted points and response variables.</p>
+<p>The following lines of code will display different model diagnostic
+plot matrices for the same statistical model. The first one is of the
+default settings. The second adds color according to the
+<code>species</code>. Finally, the third displays all possible columns
+and uses <code><a href="../reference/ggally_smooth.html">ggally_smooth()</a></code> to display the fitted points and
+response variables.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flea_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/step.html" class="external-link">step</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">head</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">flea</span><span class="op">)</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">flea_model</span><span class="op">)</span></span>
@@ -450,7 +485,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

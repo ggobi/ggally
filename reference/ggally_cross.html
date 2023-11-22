@@ -154,7 +154,7 @@ be added (see examples).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
 <span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_cross</span><span class="op">(</span><span class="va">tips</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">smoker</span>, y <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggally_cross-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_cross</span><span class="op">(</span><span class="va">tips</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">day</span>, y <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -163,8 +163,8 @@ be added (see examples).</p>
 <span class="r-in"><span><span class="co"># Custom max size</span></span></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_cross</span><span class="op">(</span><span class="va">tips</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">smoker</span>, y <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">scale_size_area</span><span class="op">(</span>max_size <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for 'size' is already present. Adding another scale for 'size', which</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> will replace the existing scale.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for <span style="color: #00BB00;">size</span> is already present.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding another scale for <span style="color: #00BB00;">size</span>, which will replace the existing scale.</span>
 <span class="r-plt img"><img src="ggally_cross-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Custom fill</span></span></span>
@@ -221,7 +221,7 @@ be added (see examples).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

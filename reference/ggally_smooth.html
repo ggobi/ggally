@@ -164,13 +164,11 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
 <span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span>, package <span class="op">=</span> <span class="st">"reshape"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_smooth</span><span class="op">(</span><span class="va">tips</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">tip</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggally_smooth-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_smooth</span><span class="op">(</span><span class="va">tips</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"total_bill"</span>, y <span class="op">=</span> <span class="st">"tip"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_smooth</span><span class="op">(</span><span class="va">tips</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">total_bill</span>, <span class="va">tip</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggally_smooth-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggally_smooth</span><span class="op">(</span><span class="va">tips</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"total_bill"</span>, y <span class="op">=</span> <span class="st">"tip"</span>, color <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="ggally_smooth-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -185,7 +183,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
