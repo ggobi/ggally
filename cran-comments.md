@@ -2,7 +2,7 @@
 ## Comments
 #### 2023-11-22
 
-Thank you for being patient with me on submission time.
+Thank you for being patient with me on my submission.
 
 I have fixed the packageVersion issue by removing the unecessary code: https://github.com/ggobi/ggally/commit/9e7228c6d4219c515857426a982d1a5c1ff0cd13
 
@@ -58,7 +58,7 @@ packageVersion("ggplot2") >= 3.3
       Status: 403
       Message: Forbidden
 
-When visiting it manually, the link works as expected. I believe they have a bot blocker that is causing this error.
+When visiting the link manually, the link works as expected. I believe they have a bot blocker that is causing this error.
 
 
 ## revdepcheck results
