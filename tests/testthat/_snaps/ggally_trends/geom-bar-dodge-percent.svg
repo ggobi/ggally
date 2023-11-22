@@ -27,14 +27,14 @@
 </defs>
 <g clip-path='url(#cpNDAuNjJ8NjUxLjQ2fDIyLjc4fDU0NS4xMQ==)'>
 <rect x='40.62' y='22.78' width='610.84' height='522.33' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='62.43' y='59.72' width='65.45' height='461.65' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='127.88' y='46.53' width='65.45' height='474.84' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
-<rect x='207.87' y='203.39' width='65.45' height='317.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='273.32' y='249.74' width='65.45' height='271.63' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
-<rect x='353.31' y='389.47' width='65.45' height='131.90' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='418.76' y='367.86' width='65.45' height='153.51' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
-<rect x='498.75' y='391.53' width='65.45' height='129.84' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='564.19' y='323.52' width='65.45' height='197.85' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='62.43' y='59.72' width='65.45' height='461.65' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='127.88' y='46.53' width='65.45' height='474.84' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='207.87' y='203.39' width='65.45' height='317.98' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='273.32' y='249.74' width='65.45' height='271.63' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='353.31' y='389.47' width='65.45' height='131.90' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='418.76' y='367.86' width='65.45' height='153.51' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='498.75' y='391.53' width='65.45' height='129.84' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='564.19' y='323.52' width='65.45' height='197.85' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
 <rect x='40.62' y='22.78' width='610.84' height='522.33' style='stroke-width: 1.07; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
@@ -61,9 +61,9 @@
 <rect x='662.41' y='259.00' width='52.11' height='49.89' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <text x='662.41' y='267.71' style='font-size: 11.00px; font-family: sans;' textLength='17.13px' lengthAdjust='spacingAndGlyphs'>sex</text>
 <rect x='662.41' y='274.33' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='663.12' y='275.04' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='663.12' y='275.04' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
 <rect x='662.41' y='291.61' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='663.12' y='292.32' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='663.12' y='292.32' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
 <text x='685.17' y='286.00' style='font-size: 8.80px; font-family: sans;' textLength='29.35px' lengthAdjust='spacingAndGlyphs'>Female</text>
 <text x='685.17' y='303.28' style='font-size: 8.80px; font-family: sans;' textLength='19.08px' lengthAdjust='spacingAndGlyphs'>Male</text>
 <text x='40.62' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='146.04px' lengthAdjust='spacingAndGlyphs'>geom-bar-dodge-percent</text>

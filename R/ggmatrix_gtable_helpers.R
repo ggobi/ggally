@@ -1,5 +1,3 @@
-
-
 plot_gtable <- function(p) {
   ggplot_gtable(ggplot_build(p))
 }
@@ -47,13 +45,11 @@ axis_size_bottom <- axis_list[[2]]
 
 
 plot_panel <- function(
-  pg,
-  row_pos, col_pos,
-  matrix_show_strips,
-  matrix_ncol,
-  plot_show_axis_labels
-) {
-
+    pg,
+    row_pos, col_pos,
+    matrix_show_strips,
+    matrix_ncol,
+    plot_show_axis_labels) {
   # ask about strips
   layout_names <- c("panel")
   strip_right_name <- "strip-r|strip-l"
@@ -69,13 +65,12 @@ plot_panel <- function(
     if (row_pos == 1) {
       layout_names <- c(layout_names, strip_top_name)
     }
-
   } else if (matrix_show_strips) {
     layout_names <- c(layout_names, strip_right_name, strip_top_name)
   }
 
   # if they have a custom plot, make sure it shows up
-  if (! is.null(plot_show_axis_labels)) {
+  if (!is.null(plot_show_axis_labels)) {
     # pShowStrips <- ! identical(p$axisLabels, FALSE)
 
     # copied from old code.  want to replace it to something like above

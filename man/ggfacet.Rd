@@ -60,7 +60,7 @@ if (requireNamespace("chemometrics", quietly = TRUE)) {
   p_(p)
 
   # add a smoother
-  p <- ggfacet(NIR_sub, x_cols, y_cols, fn = 'smooth_loess')
+  p <- ggfacet(NIR_sub, x_cols, y_cols, fn = "smooth_loess")
   p_(p)
   # same output
   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = ggally_smooth_loess)

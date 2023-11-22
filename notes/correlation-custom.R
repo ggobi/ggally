@@ -1,4 +1,3 @@
-
 #' Correlation from the Scatter Plot
 #'
 #' Estimate correlation from the given data.
@@ -13,21 +12,20 @@
 #' @export
 #' @keywords hplot
 #' @examples
-#'  data(tips, package = "reshape")
-#'  ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
-#'  ggally_cor(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", size = 15, colour = "I(\"red\")")
-#'  )
-#'  ggally_cor(
-#'    tips,
-#'    mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
-#'    size = 5
-#'  )
+#' data(tips)
+#' ggally_cor(tips, mapping = aes(total_bill, tip))
+#' ggally_cor(
+#'   tips,
+#'   mapping = aes(total_bill, tip, size = 15, colour = I("red"))
+#' )
+#' ggally_cor(
+#'   tips,
+#'   mapping = aes(total_bill, tip, color = sex),
+#'   size = 5
+#' )
 ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod = "pearson", corUse = "complete.obs", ...) {
-
-  useOptions = c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
-  corUse <-  pmatch(corUse, useOptions)
+  useOptions <- c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete")
+  corUse <- pmatch(corUse, useOptions)
   if (is.na(corUse)) {
     warning("correlation 'use' not found.  Using default value of 'all.obs'")
     corUse <- useOptions[1]
@@ -48,7 +46,6 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
     }
   }
   cor_fn <- function(x, y) {
-
     # also do ddply below if fn is altered
     # pVals <- cor(x, y, method = corMethod, use = corUse)
     corObj <- stats::cor.test(x, y, method = corMethod, use = corUse)
@@ -129,8 +126,9 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
     for (i in length(names(mapping)):1) {
       # find the last value of the aes, such as cyl of as.factor(cyl)
       tmp_map_val <- as.character(mapping[names(mapping)[i]][[1]])
-      if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
+      if (tmp_map_val[length(tmp_map_val)] %in% colnames(data)) {
         mapping[names(mapping)[i]] <- NULL
+      }
 
       if (length(names(mapping)) < 1) {
         mapping <- NULL
@@ -149,9 +147,8 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
 
   if (
     (singleColorCol != "ggally_NO_EXIST") &&
-    (singleColorCol %in% colnames(data))
+      (singleColorCol %in% colnames(data))
   ) {
-
     cord <- ddply(data, c(colorCol), function(x) {
       cor_fn(x[, xCol], x[, yCol])
     }, .parallel = FALSE)
@@ -194,8 +191,8 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
       color   = "black",
       ...
     ) +
-    #element_bw() +
-    theme(legend.position = "none")
+      # element_bw() +
+      theme(legend.position = "none")
 
     xPos <- rep(corAlignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
     yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1) * diff(yrange) + min(yrange, na.rm = TRUE)
@@ -218,7 +215,6 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
       ),
       hjust = 1,
       ...
-
     )
 
     p$type <- "continuous"
@@ -242,8 +238,8 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
       yrange = yrange,
       ...
     ) +
-    #element_bw() +
-    theme(legend.position = "none")
+      # element_bw() +
+      theme(legend.position = "none")
 
     p$type <- "continuous"
     p$subType <- "cor"
@@ -255,7 +251,7 @@ ggally_custom_cor_fn <- function(data, mapping, corAlignPercent = 0.6, corMethod
 
 
 
-ggally_custom_cor_fn(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
+ggally_custom_cor_fn(tips, mapping = ggplot2::aes(total_bill, tip, color = sex))
 
 
 ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"), upper = list(continuous = "custom_cor_fn"))

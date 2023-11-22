@@ -42,7 +42,6 @@ data(psychademic)
 str(psychademic)
 (psych_variables <- attr(psychademic, "psychology"))
 (academic_variables <- attr(psychademic, "academic"))
-
 ```
 
 First, look at the within correlation using `ggpairs()`.
@@ -109,12 +108,13 @@ library(ggplot2)
 data(pigs)
 pigs_dt <- pigs[-(2:3)] # remove year and quarter
 pigs_dt$profit_group <- as.numeric(pigs_dt$profit > mean(pigs_dt$profit))
-qplot(
-  time, value,
-  data = reshape::melt.data.frame(pigs_dt, "time"),
-  geom = c("smooth", "point")
+ggplot(
+  tidyr::pivot_longer(pigs_dt, -time),
+  aes(x = time, y = value)
 ) +
-  facet_grid(variable ~ ., scales = "free_y")
+  geom_smooth() +
+  geom_point() +
+  facet_grid(name ~ ., scales = "free_y")
 ```
 
 Instead, we may use `ggts` to display the data.  `ggts` changes the default behavior of ggduo of `columnLabelsX` to equal `NULL` and allows for mixed variable types.
@@ -205,10 +205,9 @@ lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
   )
 
   ggplot(data = data, mapping = mapping) +
-    geom_hline(yintercept = 0, color = line_color, size = line_size) +
+    geom_hline(yintercept = 0, color = line_color, linewidth = line_size) +
     ylim(y_range) +
     geom_point(data = resid_data, mapping = aes(x = x, y = y), ...)
-
 }
 
 # plot the data

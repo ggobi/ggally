@@ -1,4 +1,3 @@
-
 context("ggsurv")
 suppressMessages(require(survival))
 suppressMessages(require(scales))
@@ -9,7 +8,6 @@ sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
 sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
 
 test_that("single", {
-
   a <- ggsurv(sf.lung)
 
   expect_equivalent(mapping_string(a$mapping$x), "time")
@@ -21,7 +19,6 @@ test_that("single", {
 })
 
 test_that("multiple", {
-
   a <- ggsurv(sf.kid)
 
   expect_equivalent(mapping_string(a$mapping$x), "time")
@@ -30,21 +27,17 @@ test_that("multiple", {
   expect_true(!is.null(a$labels$group))
   expect_true(!is.null(a$labels$colour))
   expect_true(!is.null(a$labels$linetype))
-
 })
 
 test_that("adjust plot", {
-
   a <- ggsurv(sf.kid, plot.cens = FALSE)
   expect_equivalent(length(a$layers), 1)
 
   a <- ggsurv(sf.kid, plot.cens = TRUE)
   expect_equivalent(length(a$layers), 2)
-
 })
 
 test_that("stops", {
-
   noCensor <- subset(lung, status == 1)
   lungNoCensor <- survival::survfit(Surv(time, status) ~ 1, data = noCensor)
 
@@ -75,12 +68,9 @@ test_that("stops", {
   )
 
   ggsurv(sf.kid, CI = TRUE, surv.col = "red")
-
-
 })
 
 test_that("back.white", {
-
   sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
   sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
 
@@ -93,12 +83,9 @@ test_that("back.white", {
   expect_true(length(a$theme) == 0)
   a <- ggsurv(sf.kid, back.white = TRUE)
   expect_true(length(a$theme) != 0)
-
 })
 
 test_that("surv.col", {
-
-
   ggsurv(sf.lung, surv.col = "red")
 
 
@@ -124,9 +111,12 @@ test_that("CI", {
 test_that("multiple colors", {
   p <- ggsurv(sf.kid, plot.cens = TRUE)
   vdiffr::expect_doppelganger("plot-cens-true", p)
-  expect_warning({
-    ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue"))
-  }, "Color scales for censored points") # nolint
+  expect_warning(
+    {
+      ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue"))
+    },
+    "Color scales for censored points"
+  ) # nolint
 
   p <- ggsurv(sf.kid, plot.cens = TRUE, cens.col = "blue")
   vdiffr::expect_doppelganger("plot-cens-true-blue", p)
@@ -135,16 +125,21 @@ test_that("multiple colors", {
   p <- ggsurv(sf.kid, plot.cens = TRUE, cens.col = custom_color)
   vdiffr::expect_doppelganger("plot-cens-true-custom", p)
 
-  expect_warning({
-    ggsurv(
-      sf.kid, plot.cens = TRUE,
-      cens.col = custom_color,
-      cens.shape = c(1, 2)
-    )
-  }, "The length of the censored shapes") # nolint
+  expect_warning(
+    {
+      ggsurv(
+        sf.kid,
+        plot.cens = TRUE,
+        cens.col = custom_color,
+        cens.shape = c(1, 2)
+      )
+    },
+    "The length of the censored shapes"
+  ) # nolint
   p <-
     ggsurv(
-      sf.kid, plot.cens = TRUE,
+      sf.kid,
+      plot.cens = TRUE,
       cens.col = custom_color,
       cens.shape = c(1, 2, 3, 4)
     )
@@ -160,5 +155,5 @@ test_that("cens.size", {
   a <- ggsurv(sf.kid)
   b <- ggsurv(sf.lung, cens.size = 5)
   expect_true(a$layers[[2]]$aes_params$size == 2)
-  expect_true(b$layers[[2]]$aes_params$size != 2)
+  expect_true(b$layers[[4]]$aes_params$size != 2)
 })

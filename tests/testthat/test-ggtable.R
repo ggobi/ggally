@@ -3,7 +3,6 @@ context("ggtable")
 suppressMessages(require(broom))
 
 test_that("example", {
-
   reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
   vdiffr::expect_doppelganger("lm", ggcoef(reg))
 

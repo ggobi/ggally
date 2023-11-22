@@ -1,5 +1,3 @@
-
-
 context("ggparcoord")
 
 set.seed(123)
@@ -10,7 +8,6 @@ iris2 <- iris
 iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
 
 test_that("stops", {
-
   # basic parallel coordinate plot, using default settings
   # ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
   # this time, color by diamond cut
@@ -112,8 +109,6 @@ test_that("stops", {
     ggparcoord(diamonds.samp, columns = c(1, 5:10), groupColumn = 2, splineFactor = NULL),
     "invalid value for 'splineFactor'"
   )
-
-
 })
 
 test_that("alphaLines", {
@@ -157,11 +152,9 @@ test_that("splineFactor", {
   expect_equal(length(p$layers), 2)
   expect_equal(mapping_string(get("mapping", p$layers[[1]])$x), "spline.x")
   expect_equal(mapping_string(get("mapping", p$layers[[2]])$y), "value")
-
 })
 
 test_that("groupColumn", {
-
   ds2 <- diamonds.samp
   ds2$color <- mapping_string(ds2$color)
 
@@ -191,16 +184,14 @@ test_that("groupColumn", {
 
   # group column is a regular column
   ## factor
-  #p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 4)
-  #expect_true("clarity" %in% levels(p$data$variable))
+  # p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 4)
+  # expect_true("clarity" %in% levels(p$data$variable))
   ## character
-  #p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 3)
-  #expect_true("color" %in% levels(p$data$variable))
+  # p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 3)
+  # expect_true("color" %in% levels(p$data$variable))
   ## numeric
-  #p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 1)
-  #expect_true("carat" %in% levels(p$data$variable))
-
-
+  # p <- ggparcoord(data = ds2, columns = c(1, 3:10), groupColumn = 1)
+  # expect_true("carat" %in% levels(p$data$variable))
 })
 
 test_that("scale", {
@@ -221,10 +212,11 @@ test_that("missing", {
 })
 
 test_that("order", {
-
   if (requireNamespace("scagnostics", quietly = TRUE)) {
-    for (ordering in c("Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
-      "Stringy", "Monotonic")) {
+    for (ordering in c(
+      "Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
+      "Stringy", "Monotonic"
+    )) {
       p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = ordering)
       expect_true(all(levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")))
     }
@@ -234,11 +226,9 @@ test_that("order", {
     p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = ordering)
     expect_true(all(levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")))
   }
-
 })
 
 test_that("basic", {
-
   # no color supplied
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
   expect_true(is.null(p$mapping$colour))
@@ -260,7 +250,6 @@ test_that("basic", {
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), mapping = ggplot2::aes(size = 1))
   expect_equal(length(p$layers), 1)
   expect_equal(p$mapping$size, 1)
-
 })
 
 
@@ -270,7 +259,6 @@ test_that("size", {
 
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10)) + ggplot2::aes(size = gear)
   expect_equal(mapping_string(p$mapping$size), "gear")
-
 })
 
 

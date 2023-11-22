@@ -1,10 +1,7 @@
-
-
 context("gglegend")
 library(ggplot2)
 
 test_that("examples", {
-
   histPlot <-
     ggplot(diamonds, aes(price, fill = cut)) +
     geom_histogram(binwidth = 500)
@@ -31,7 +28,6 @@ test_that("examples", {
 
 
 test_that("legend", {
-
   # display regular plot
   vdiffr::expect_doppelganger(
     "legend",
@@ -66,9 +62,9 @@ test_that("legend", {
   # Use within ggpairs
   expect_silent({
     pm <- ggpairs(
-     iris, 1:2,
-     mapping = ggplot2::aes(color = Species),
-     upper = list(continuous = gglegend("points"))
+      iris, 1:2,
+      mapping = ggplot2::aes(color = Species),
+      upper = list(continuous = gglegend("points"))
     )
   })
   vdiffr::expect_doppelganger("legend-pm", pm)
@@ -76,13 +72,12 @@ test_that("legend", {
   # Use within ggpairs
   expect_silent({
     pm <- ggpairs(
-     iris, 1:2,
-     mapping = ggplot2::aes(color = Species)
+      iris, 1:2,
+      mapping = ggplot2::aes(color = Species)
     )
     pm[1, 2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
   })
   vdiffr::expect_doppelganger("internal-legend", pm)
-
 })
 
 test_that("plotNew", {

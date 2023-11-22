@@ -46,11 +46,10 @@
 #'   include_zero = TRUE
 #' ))
 ggally_trends <- function(
-  data,
-  mapping,
-  ...,
-  include_zero = FALSE
-) {
+    data,
+    mapping,
+    ...,
+    include_zero = FALSE) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
@@ -64,7 +63,7 @@ ggally_trends <- function(
     mapping$group <- aes(group = 1)$group
   } else {
     data$.group <- interaction(g)
-    mapping$group <- aes_string(group = ".group")$group
+    mapping$group <- aes(group = !!as.name(".group"))$group
   }
 
   # considering the different situations regarding y
@@ -73,7 +72,7 @@ ggally_trends <- function(
     y <- as.factor(y)
     if (length(levels(y)) == 2) { # Binary variable
       data[[".ggally_y"]] <- as.integer(y == levels(y)[2])
-      mapping$y <- aes_string(y = ".ggally_y")$y
+      mapping$y <- aes(y = !!as.name(".ggally_y"))$y
       p <- ggplot(data, mapping) +
         stat_weighted_mean(geom = "line", ...) +
         scale_y_continuous(labels = scales::percent) +
@@ -90,8 +89,8 @@ ggally_trends <- function(
         tmp$y <- l
         d <- plyr::rbind.fill(d, tmp)
       }
-      mapping$linetype <- aes_string(y = "y")$y
-      mapping$y <- aes_string(y = ".ggally_y")$y
+      mapping$linetype <- aes(y = !!as.name("y"))$y
+      mapping$y <- aes(y = !!as.name(".ggally_y"))$y
 
       # recomputing groups
       g <- list()
@@ -100,20 +99,22 @@ ggally_trends <- function(
       if (!is.null(mapping$linetype)) g <- append(g, list(eval_data_col(d, mapping$linetype)))
       if (!is.null(mapping$size)) g <- append(g, list(eval_data_col(d, mapping$size)))
       d$.group <- interaction(g)
-      mapping$group <- aes_string(group = ".group")$group
+      mapping$group <- aes(group = !!as.name(".group"))$group
 
       p <- ggplot(d, mapping) +
         stat_weighted_mean(geom = "line", ...) +
         scale_y_continuous(labels = scales::percent) +
-        ylab("") + labs(linetype = yname)
+        ylab("") +
+        labs(linetype = yname)
     }
   } else { # Numeric variable
     p <- ggplot(data, mapping) +
       stat_weighted_mean(geom = "line", ...)
   }
 
-  if (include_zero)
+  if (include_zero) {
     p <- p + expand_limits(y = 0)
+  }
 
   p
 }

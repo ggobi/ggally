@@ -78,84 +78,84 @@ If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
 If a function is supplied as an option, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
- # small function to display plots only if it's interactive
- p_ <- GGally::print_if_interactive
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
- data(baseball)
+data(baseball)
 
- # Keep players from 1990-1995 with at least one at bat
- # Add how many singles a player hit
- # (must do in two steps as X1b is used in calculations)
- dt <- transform(
-   subset(baseball, year >= 1990 & year <= 1995 & ab > 0),
-   X1b = h - X2b - X3b - hr
- )
- # Add
- #  the player's batting average,
- #  the player's slugging percentage,
- #  and the player's on base percentage
- # Make factor a year, as each season is discrete
- dt <- transform(
-   dt,
-   batting_avg = h / ab,
-   slug = (X1b + 2*X2b + 3*X3b + 4*hr) / ab,
-   on_base = (h + bb + hbp) / (ab + bb + hbp),
-   year = as.factor(year)
- )
+# Keep players from 1990-1995 with at least one at bat
+# Add how many singles a player hit
+# (must do in two steps as X1b is used in calculations)
+dt <- transform(
+  subset(baseball, year >= 1990 & year <= 1995 & ab > 0),
+  X1b = h - X2b - X3b - hr
+)
+# Add
+#  the player's batting average,
+#  the player's slugging percentage,
+#  and the player's on base percentage
+# Make factor a year, as each season is discrete
+dt <- transform(
+  dt,
+  batting_avg = h / ab,
+  slug = (X1b + 2 * X2b + 3 * X3b + 4 * hr) / ab,
+  on_base = (h + bb + hbp) / (ab + bb + hbp),
+  year = as.factor(year)
+)
 
 
- pm <- ggduo(
-   dt,
-   c("year", "g", "ab", "lg"),
-   c("batting_avg", "slug", "on_base"),
-   mapping = ggplot2::aes(color = lg)
- )
- # Prints, but
- #   there is severe over plotting in the continuous plots
- #   the labels could be better
- #   want to add more hitting information
- p_(pm)
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  mapping = ggplot2::aes(color = lg)
+)
+# Prints, but
+#   there is severe over plotting in the continuous plots
+#   the labels could be better
+#   want to add more hitting information
+p_(pm)
 
- # address overplotting issues and add a title
- pm <- ggduo(
-   dt,
-   c("year", "g", "ab", "lg"),
-   c("batting_avg", "slug", "on_base"),
-   columnLabelsX = c("year", "player game count", "player at bat count", "league"),
-   columnLabelsY = c("batting avg", "slug \%", "on base \%"),
-   title = "Baseball Hitting Stats from 1990-1995",
-   mapping = ggplot2::aes(color = lg),
-   types = list(
-     # change the shape and add some transparency to the points
-     continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
-   ),
-   showStrips = FALSE
- )
+# address overplotting issues and add a title
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  columnLabelsX = c("year", "player game count", "player at bat count", "league"),
+  columnLabelsY = c("batting avg", "slug \%", "on base \%"),
+  title = "Baseball Hitting Stats from 1990-1995",
+  mapping = ggplot2::aes(color = lg),
+  types = list(
+    # change the shape and add some transparency to the points
+    continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
+  ),
+  showStrips = FALSE
+)
 
- p_(pm)
+p_(pm)
 
 # Use "auto" to adapt width of the sub-plots
- pm <- ggduo(
-   dt,
-   c("year", "g", "ab", "lg"),
-   c("batting_avg", "slug", "on_base"),
-   mapping = ggplot2::aes(color = lg),
-   xProportions = "auto"
- )
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  mapping = ggplot2::aes(color = lg),
+  xProportions = "auto"
+)
 
- p_(pm)
+p_(pm)
 
- # Custom widths & heights of the sub-plots
- pm <- ggduo(
-   dt,
-   c("year", "g", "ab", "lg"),
-   c("batting_avg", "slug", "on_base"),
-   mapping = ggplot2::aes(color = lg),
-   xProportions = c(6, 4, 3, 2),
-   yProportions = c(1, 2, 1)
- )
+# Custom widths & heights of the sub-plots
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  mapping = ggplot2::aes(color = lg),
+  xProportions = c(6, 4, 3, 2),
+  yProportions = c(1, 2, 1)
+)
 
- p_(pm)
+p_(pm)
 
 # Example derived from:
 ## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital
@@ -227,4 +227,35 @@ pm <- ggduo(
 ) +
   ggplot2::theme(legend.position = "bottom")
 suppressWarnings(p_(pm))
+#  dt,
+#  c("year", "g", "ab", "lg", "lg"),
+#  c("batting_avg", "slug", "on_base", "hit_type"),
+#  columnLabelsX = c("year", "player game count", "player at bat count", "league", ""),
+#  columnLabelsY = c("batting avg", "slug \%", "on base \%", "hit type"),
+#  title = "Baseball Hitting Stats from 1990-1995 (player strike in 1994)",
+#  mapping = aes(color = year),
+#  types = list(
+#    continuous = wrap("smooth_loess", alpha = 0.50, shape = "+"),
+#    comboHorizontal = wrap(display_hit_type_combo, binwidth = 15),
+#    discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
+#  ),
+#  showStrips = FALSE
+## make the 5th column blank, except for the legend
+#  australia_PISA2012,
+#  c("gender", "age", "homework", "possessions"),
+#  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#  types = list(
+#    continuous = "points",
+#    combo = "box",
+#    discrete = "ratio"
+#  )
+#  australia_PISA2012,
+#  c("gender", "age", "homework", "possessions"),
+#  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#  mapping = ggplot2::aes(color = gender),
+#  types = list(
+#    continuous = wrap("smooth", alpha = 0.25, method = "loess"),
+#    combo = "box",
+#    discrete = "ratio"
+#  )
 }

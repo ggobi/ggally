@@ -89,9 +89,9 @@ if (require(survival) && require(scales)) {
   p_(pl.sex +
     ggplot2::guides(linetype = "none") +
     ggplot2::scale_colour_discrete(
-      name   = 'Sex',
+      name   = "Sex",
       breaks = c(1, 2),
-      labels = c('Male', 'Female')
+      labels = c("Male", "Female")
     ))
 
   # Multiple factors
@@ -116,10 +116,10 @@ if (require(survival) && require(scales)) {
   p_(pl.kid +
     ggplot2::annotate(
       "text",
-      label  = c("PKD", "Other", "GN", "AN"),
-      x      = c(90, 125, 5, 60),
-      y      = c(0.8, 0.65, 0.55, 0.30),
-      size   = 5,
+      label = c("PKD", "Other", "GN", "AN"),
+      x = c(90, 125, 5, 60),
+      y = c(0.8, 0.65, 0.55, 0.30),
+      size = 5,
       colour = scales::hue_pal(
         h         = c(0, 360) + 15,
         c         = 100,

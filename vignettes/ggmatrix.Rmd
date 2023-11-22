@@ -81,7 +81,6 @@ p3
 pm[1, 2] <- p3
 pm[1, 3] <- p2
 pm
-
 ```
 
 ## Themes
@@ -108,7 +107,8 @@ The X and Y axis have booleans to turn on/off the individual plot's axes on the 
 
 ```{r ggmatrix_axisControl}
 pm <- ggmatrix(
-  plotList, nrow = 2, ncol = 3,
+  plotList,
+  nrow = 2, ncol = 3,
   xAxisLabels = c("A", "B", "C"),
   yAxisLabels = c("D", "E"),
   title = "No Left Plot Axis",
@@ -116,7 +116,8 @@ pm <- ggmatrix(
 )
 pm
 pm <- ggmatrix(
-  plotList, nrow = 2, ncol = 3,
+  plotList,
+  nrow = 2, ncol = 3,
   xAxisLabels = c("A", "B", "C"),
   yAxisLabels = c("D", "E"),
   title = "No Bottom Plot Axis",
@@ -124,7 +125,8 @@ pm <- ggmatrix(
 )
 pm
 pm <- ggmatrix(
-  plotList, nrow = 2, ncol = 3,
+  plotList,
+  nrow = 2, ncol = 3,
   xAxisLabels = c("A", "B", "C"),
   yAxisLabels = c("D", "E"),
   title = "No Plot Axes",
@@ -138,21 +140,25 @@ pm
 By default, the plots in the top row and the right most column will display top-side and right-side strips respectively (`showStrips = NULL`).  If all strips need to appear in each plot, `showStrips` may be set to `TRUE`. If all strips should not be displayed, `showStrips` may be set to `FALSE`.
 
 ```{r ggmatrix_stripControl}
-data(tips, package = "reshape")
-plotList <- list(
-  qplot(total_bill, tip, data = subset(tips, smoker == "No" & sex == "Female")) +
-    facet_grid(time ~ day),
-  qplot(total_bill, tip, data = subset(tips, smoker == "Yes" & sex == "Female")) +
-    facet_grid(time ~ day),
-  qplot(total_bill, tip, data = subset(tips, smoker == "No" & sex == "Male")) +
-    facet_grid(time ~ day),
-  qplot(total_bill, tip, data = subset(tips, smoker == "Yes" & sex == "Male")) +
+data(tips)
+subPlot <- function(smoker_value, sex_value) {
+  ggplot(
+    data = tips[tips$smoker == smoker_value & tips$sex == sex_value, ],
+    aes(x = !!as.name("total_bill"), y = !!as.name("tip"))
+  ) +
+    geom_point() +
     facet_grid(time ~ day)
+}
+plotList <- list(
+  subPlot("No", "Female"),
+  subPlot("Yes", "Female"),
+  subPlot("No", "Male"),
+  subPlot("Yes", "Male")
 )
 
-
 pm <- ggmatrix(
-  plotList, nrow = 2, ncol = 2,
+  plotList,
+  nrow = 2, ncol = 2,
   yAxisLabels = c("Female", "Male"),
   xAxisLabels = c("Non Smoker", "Smoker"),
   title = "Total Bill vs Tip",
@@ -160,7 +166,8 @@ pm <- ggmatrix(
 )
 pm
 pm <- ggmatrix(
-  plotList, nrow = 2, ncol = 2,
+  plotList,
+  nrow = 2, ncol = 2,
   yAxisLabels = c("Female", "Male"),
   xAxisLabels = c("Non Smoker", "Smoker"),
   title = "Total Bill vs Tip",
@@ -168,7 +175,8 @@ pm <- ggmatrix(
 )
 pm
 pm <- ggmatrix(
-  plotList, nrow = 2, ncol = 2,
+  plotList,
+  nrow = 2, ncol = 2,
   yAxisLabels = c("Female", "Male"),
   xAxisLabels = c("Non Smoker", "Smoker"),
   title = "Total Bill vs Tip",

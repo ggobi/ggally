@@ -880,7 +880,7 @@ ggnet2 <- function(
       geom_segment(
         data = edges,
         aes(x = X1, y = Y1, xend = X2, yend = Y2),
-        size   = edge.size,
+        linewidth   = edge.size,
         color  = edge.color,
         alpha  = edge.alpha,
         lty    = edge.lty,

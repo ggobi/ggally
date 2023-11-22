@@ -31,7 +31,7 @@ The purpose of this function is to quickly plot cross-tabulated tables of discre
 To display tables with the number of observations, simply indicate variables to present in columns and in rows.
 
 ```{r}
-data(tips, package = "reshape")
+data(tips)
 ggtable(tips, "smoker", c("day", "time", "sex"))
 ggtable(tips, c("smoker", "time"), c("day", "time", "sex"))
 ```

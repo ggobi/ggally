@@ -1,4 +1,3 @@
-
 # context("utils")
 # test_that("require_namespaces", {
 

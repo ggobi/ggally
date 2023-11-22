@@ -27,10 +27,10 @@
 </defs>
 <g clip-path='url(#cpNDUuNTF8NjUxLjQ2fDIyLjc4fDU0NS4xMQ==)'>
 <rect x='45.51' y='22.78' width='605.94' height='522.33' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='86.83' y='46.53' width='247.89' height='169.81' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='86.83' y='216.34' width='247.89' height='305.03' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
-<rect x='362.26' y='46.53' width='247.89' height='168.49' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='362.26' y='215.02' width='247.89' height='306.35' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='86.83' y='46.53' width='247.89' height='169.81' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='86.83' y='216.34' width='247.89' height='305.03' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='362.26' y='46.53' width='247.89' height='168.49' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='362.26' y='215.02' width='247.89' height='306.35' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
 <text x='210.77' y='135.23' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>54</text>
 <text x='210.77' y='372.65' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>97</text>
 <text x='486.20' y='134.57' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>33</text>
@@ -56,9 +56,9 @@
 <rect x='662.41' y='259.00' width='52.11' height='49.89' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <text x='662.41' y='267.71' style='font-size: 11.00px; font-family: sans;' textLength='17.13px' lengthAdjust='spacingAndGlyphs'>sex</text>
 <rect x='662.41' y='274.33' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='663.12' y='275.04' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D;' />
+<rect x='663.12' y='275.04' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
 <rect x='662.41' y='291.61' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='663.12' y='292.32' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #00BFC4;' />
+<rect x='663.12' y='292.32' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
 <text x='685.17' y='286.00' style='font-size: 8.80px; font-family: sans;' textLength='29.35px' lengthAdjust='spacingAndGlyphs'>Female</text>
 <text x='685.17' y='303.28' style='font-size: 8.80px; font-family: sans;' textLength='19.08px' lengthAdjust='spacingAndGlyphs'>Male</text>
 <text x='45.51' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='52.83px' lengthAdjust='spacingAndGlyphs'>tips-label</text>

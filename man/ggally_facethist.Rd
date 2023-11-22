@@ -22,7 +22,7 @@ p_ <- GGally::print_if_interactive
 
 data(tips)
 p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex)))
-p_(ggally_facethist(tips, mapping = ggplot2::aes_string(x = "tip", y = "sex"), binwidth = 0.1))
+p_(ggally_facethist(tips, mapping = ggplot2::aes(x = tip, y = sex), binwidth = 0.1))
 }
 \author{
 Barret Schloerke

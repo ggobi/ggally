@@ -59,8 +59,10 @@ p_(ggally_rowbar(tips, mapping = aes(x = smoker, y = sex)))
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8))
 
 # change labels' colour and use bold
-p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-              colour = "white", fontface = "bold"))
+p_(ggally_colbar(tips,
+  mapping = aes(x = smoker, y = sex),
+  colour = "white", fontface = "bold"
+))
 
 # display number of observations instead of proportions
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(count))))
@@ -69,8 +71,10 @@ p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(cou
 p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))
 
 # change format of labels
-p_(ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-              label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")))
+p_(ggally_colbar(tips,
+  mapping = aes(x = smoker, y = sex),
+  label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")
+))
 
 p_(ggduo(
   data = as.data.frame(Titanic),

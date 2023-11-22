@@ -6,7 +6,8 @@
 \usage{
 ggally_ratio(
   data,
-  mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
+  mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x",
+    "y"))),
   ...,
   floor = 0,
   ceiling = NULL
@@ -37,7 +38,7 @@ p_(ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal())
 p_(ggally_ratio(
   tips, ggplot2::aes(sex, day),
   floor = 20, ceiling = 50
-) + ggplot2::theme(aspect.ratio = 4/2))
+) + ggplot2::theme(aspect.ratio = 4 / 2))
 }
 \author{
 Barret Schloerke

@@ -6,8 +6,6 @@
 #' @author Barret Schloerke
 #' @keywords internal
 plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
-
-
   plotTypesX <- lapply(data[columnsX], plotting_data_type)
   plotTypesY <- lapply(data[columnsY], plotting_data_type)
 
@@ -26,7 +24,7 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
   posX <- integer(n)
   posY <- integer(n)
 
-  #horizontal then vertical
+  # horizontal then vertical
   for (yI in seq_len(lenY)) {
     yColName <- columnNamesY[yI]
     for (xI in seq_len(lenX)) {
@@ -78,7 +76,6 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
 #' @author Barret Schloerke
 #' @keywords internal
 find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa, allowDiag) {
-
   # diag calculations
   if (col1Name == col2Name && allowDiag) {
     if (type1 == "na") {
@@ -94,7 +91,7 @@ find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa, allowDiag)
     return("na")
   }
 
-  #cat(names(data)[col2Name],": ", type2,"\t",names(data)[col1Name],": ",type1,"\n")
+  # cat(names(data)[col2Name],": ", type2,"\t",names(data)[col1Name],": ",type1,"\n")
   isCats <- c(type1, type2) %in% "discrete"
   if (any(isCats)) {
     if (all(isCats)) {

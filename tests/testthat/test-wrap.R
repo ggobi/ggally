@@ -1,8 +1,6 @@
-
 context("wrap")
 
 test_that("errors", {
-
   fn <- ggally_points
 
   # named params

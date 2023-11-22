@@ -1,4 +1,3 @@
-
 context("ggcorr")
 
 # nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
@@ -15,16 +14,16 @@ test_that("limits", {
 })
 
 test_that("examples", {
-
   # Default output.
   p <- ggcorr(flea[, -1])
   expect_equal(length(p$layers), 2)
 
   # Labelled output, with coefficient transparency.
   p <- ggcorr(flea[, -1],
-         label = TRUE,
-         label_alpha = TRUE,
-         name = "")
+    label = TRUE,
+    label_alpha = TRUE,
+    name = ""
+  )
   expect_equal(length(p$layers), 3)
 
   # Custom options.
@@ -41,8 +40,9 @@ test_that("examples", {
   expect_equal(length(p$layers), 3)
 
   p <- ggcorr(flea[, -1],
-         label = TRUE,
-         name = "")
+    label = TRUE,
+    name = ""
+  )
   expect_equal(length(p$layers), 3)
 
   # test other combinations of geoms + color scales
@@ -54,7 +54,6 @@ test_that("examples", {
   ggcorr(flea[, -1], nbreaks = 4, palette = "PuOr", geom = "text")
 
   ggcorr(flea[, -1], label = TRUE, label_alpha = 0.5)
-
 })
 
 test_that("non-numeric data", {
@@ -87,13 +86,15 @@ test_that("cor_matrix", {
 
 test_that("other geoms", {
   expect_error(ggcorr(flea[, -1], geom = "hexbin"), "incorrect geom")
-  vdiffr::expect_doppelganger("geom-blank",
+  vdiffr::expect_doppelganger(
+    "geom-blank",
     ggcorr(flea[, -1], geom = "blank")
   )
 })
 
 test_that("backwards compatibility", {
-  vdiffr::expect_doppelganger("method-everything",
+  vdiffr::expect_doppelganger(
+    "method-everything",
     ggcorr(flea[, -1], method = "everything")
   )
 })
