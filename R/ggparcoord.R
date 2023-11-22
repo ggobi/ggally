@@ -452,12 +452,14 @@ ggparcoord <- function(
   #   mappingNames <- names(mapping)
   # }
   # data.m <- melt(data, id.vars = meltIDVars, measure.vars = columns)
-  data.m <- pivot_longer(
+  # Return a data.frame for freqparcoord::freqparcoord.
+  # The method uses vector recycling, which is not allowed in a tibble
+  data.m <- as.data.frame(pivot_longer(
     data,
     cols = all_of(columns),
     names_to = "variable",
     values_to = "value"
-  )
+  ))
 
   ### Ordering ###
   if (length(order) > 1 && is.numeric(order)) {
