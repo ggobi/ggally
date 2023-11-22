@@ -30,7 +30,7 @@ The purpose of this function is to easily plot a visualization of the bivariate 
 Simply indicate the outcome and the explanatory variables. Both could be discrete or continuous.
 
 ```{r}
-data(tips, package = "reshape")
+data(tips)
 ggbivariate(tips, outcome = "smoker", explanatory = c("day", "time", "sex", "tip"))
 ```
 

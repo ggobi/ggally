@@ -36,8 +36,10 @@ test_that("example", {
   vdiffr::expect_doppelganger("tips-size8", ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8))
 
   # change labels' colour and use bold
-  vdiffr::expect_doppelganger("tips-color-white", ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-                   colour = "white", fontface = "bold"))
+  vdiffr::expect_doppelganger("tips-color-white", ggally_colbar(tips,
+    mapping = aes(x = smoker, y = sex),
+    colour = "white", fontface = "bold"
+  ))
 
   # display number of observations instead of proportions
   vdiffr::expect_doppelganger("tips-label", ggally_colbar(tips, mapping = aes(x = smoker, y = sex, label = after_stat(count))))
@@ -46,8 +48,10 @@ test_that("example", {
   vdiffr::expect_doppelganger("tips-bar-width", ggally_colbar(tips, mapping = aes(x = smoker, y = sex), geom_bar_args = list(width = .5)))
 
   # change format of labels
-  vdiffr::expect_doppelganger("tips-label-custom", ggally_colbar(tips, mapping = aes(x = smoker, y = sex),
-                   label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")))
+  vdiffr::expect_doppelganger("tips-label-custom", ggally_colbar(tips,
+    mapping = aes(x = smoker, y = sex),
+    label_format = scales::label_percent(accuracy = .01, decimal.mark = ",")
+  ))
 
   vdiffr::expect_doppelganger("ggduo-titanic", ggduo(
     data = as.data.frame(Titanic),

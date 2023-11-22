@@ -11,13 +11,9 @@
 #' p_ <- GGally::print_if_interactive
 #'
 #' library(ggplot2)
-#' histPlot <- qplot(
-#'   x = Sepal.Length,
-#'   data = iris,
-#'   fill = Species,
-#'   geom = "histogram",
-#'   binwidth = 1/4
-#' )
+#' histPlot <-
+#'   ggplot(iris, aes(Sepal.Length, fill = Species)) +
+#'   geom_histogram(binwidth = 1 / 4)
 #' (right <- histPlot)
 #' (bottom <- histPlot + theme(legend.position = "bottom"))
 #' (top <- histPlot + theme(legend.position = "top"))
@@ -101,7 +97,6 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #' pm[1, 2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
 #' p_(pm)
 gglegend <- function(fn) {
-
   # allows users to supply a character just like in ggpairs
   fn <- wrapp(fn, list())
   fn <- attr(fn, "fn")

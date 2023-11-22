@@ -1,10 +1,8 @@
-
 context("ggmatrix_getput")
 
 data(tips)
 
 test_that("stops", {
-
   pm <- ggpairs(tips)
   p <- ggally_blankDiag()
   expect_error(pm["total_bill", 1], "'i' may only be a single")
@@ -25,8 +23,6 @@ test_that("stops", {
       })
     }
   }
-
-
 })
 
 
@@ -41,10 +37,12 @@ test_that("get", {
 
   # test odd input and retrieve it
   a[2, 1] <- 1:4
-  expect_error({
-    a[2, 1]
-  }, "unknown plot object type") # nolint
-
+  expect_error(
+    {
+      a[2, 1]
+    },
+    "unknown plot object type"
+  ) # nolint
 })
 
 test_that("put", {
@@ -56,5 +54,4 @@ test_that("put", {
   a[2, 1] <- ggally_text(txt)
   p <- a[2, 1]
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, txt)
-
 })

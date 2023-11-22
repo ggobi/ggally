@@ -1,4 +1,3 @@
-
 context("ggcoef")
 
 suppressMessages(require(broom))

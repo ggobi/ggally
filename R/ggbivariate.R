@@ -56,38 +56,46 @@
 #' # outcome can be numerical
 #' p_(ggbivariate(tips, outcome = "tip", title = "tip"))
 ggbivariate <- function(
-  data,
-  outcome,
-  explanatory = NULL,
-  mapping = NULL, types = NULL,
-  ...,
-  rowbar_args = NULL
-) {
-  if (length(outcome) != 1)
+    data,
+    outcome,
+    explanatory = NULL,
+    mapping = NULL, types = NULL,
+    ...,
+    rowbar_args = NULL) {
+  if (length(outcome) != 1) {
     stop("You should provide only one `outcome`.")
-  if (is.numeric(outcome))
+  }
+  if (is.numeric(outcome)) {
     outcome <- names(data)[outcome]
-  if (is.null(explanatory))
+  }
+  if (is.null(explanatory)) {
     explanatory <- names(data)[!names(data) %in% c(outcome, mapping_string(mapping$weight))]
+  }
 
   if (!is.numeric(data[[outcome]])) {
     # mapping outcome to colour
-    mapping$colour <- aes_string(colour = outcome)$colour
+    mapping$colour <- aes(colour = !!as.name(outcome))$colour
   }
 
   # default behavior
-  if (is.null(rowbar_args$remove_percentage_axis))
+  if (is.null(rowbar_args$remove_percentage_axis)) {
     rowbar_args$remove_percentage_axis <- TRUE
-  if (is.null(rowbar_args$remove_background))
+  }
+  if (is.null(rowbar_args$remove_background)) {
     rowbar_args$remove_background <- TRUE
-  if (is.null(types$discrete))
+  }
+  if (is.null(types$discrete)) {
     types$discrete <- wrapp(ggally_rowbar, rowbar_args)
-  if (is.null(types$comboVertical))
+  }
+  if (is.null(types$comboVertical)) {
     types$comboVertical <- "box_no_facet"
-  if (is.null(types$continuous))
+  }
+  if (is.null(types$continuous)) {
     types$continuous <- "smooth_lm"
-  if (is.null(types$comboHorizontal))
+  }
+  if (is.null(types$comboHorizontal)) {
     types$comboHorizontal <- "box_no_facet"
+  }
 
   ggduo_args <- list(...)
   ggduo_args$data <- data
@@ -96,11 +104,13 @@ ggbivariate <- function(
   ggduo_args$columnsX <- outcome
   ggduo_args$columnsY <- explanatory
 
-  if (!"yProportions" %in% names(ggduo_args))
+  if (!"yProportions" %in% names(ggduo_args)) {
     ggduo_args$yProportions <- "auto"
+  }
 
-  if (!is.numeric(data[[outcome]]) && !"legend" %in% names(list(...)))
+  if (!is.numeric(data[[outcome]]) && !"legend" %in% names(list(...))) {
     ggduo_args$legend <- 1
+  }
 
   p <- do.call(ggduo, ggduo_args) +
     theme(

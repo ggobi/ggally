@@ -80,12 +80,15 @@ if (getRversion() >= "2.15.1") {
 #'
 #' # create a map of the USA
 #' usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
-#'   geom_polygon(aes(group = group), color = "grey65",
-#'                fill = "#f9f9f9", size = 0.2)
+#'   geom_polygon(aes(group = group),
+#'     color = "grey65",
+#'     fill = "#f9f9f9", linewidth = 0.2
+#'   )
 #'
 #' # overlay network data to map
 #' p <- ggnetworkmap(
-#'   usa, flights, size = 4, great.circles = TRUE,
+#'   usa, flights,
+#'   size = 4, great.circles = TRUE,
 #'   node.group = mygroup, segment.color = "steelblue",
 #'   ring.group = degree, weight = degree
 #' )
@@ -99,8 +102,10 @@ if (getRversion() >= "2.15.1") {
 #' # create a world map
 #' world <- fortify(map("world", plot = FALSE, fill = TRUE))
 #' world <- ggplot(world, aes(x = long, y = lat)) +
-#'   geom_polygon(aes(group = group), color = "grey65",
-#'                fill = "#f9f9f9", size = 0.2)
+#'   geom_polygon(aes(group = group),
+#'     color = "grey65",
+#'     fill = "#f9f9f9", linewidth = 0.2
+#'   )
 #'
 #' # view global structure
 #' p <- ggnetworkmap(world, twitter_spambots)
@@ -142,42 +147,39 @@ if (getRversion() >= "2.15.1") {
 #'   labs(color = "Friends") +
 #'   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 #' p_(p)
-#'}
+#' }
 #'
-
 ggnetworkmap <- function(
-  gg,
-  net,
-  size = 3,
-  alpha = 0.75,
-  weight,
-  node.group,
-  node.color = NULL,
-  node.alpha = NULL,
-  ring.group,
-  segment.alpha = NULL,
-  segment.color = "grey",
-  great.circles = FALSE,
-  segment.size = 0.25,
-  arrow.size = 0,
-  label.nodes = FALSE,
-  label.size = size/2,
-  ...)
-{
-
+    gg,
+    net,
+    size = 3,
+    alpha = 0.75,
+    weight,
+    node.group,
+    node.color = NULL,
+    node.alpha = NULL,
+    ring.group,
+    segment.alpha = NULL,
+    segment.color = "grey",
+    great.circles = FALSE,
+    segment.size = 0.25,
+    arrow.size = 0,
+    label.nodes = FALSE,
+    label.size = size / 2,
+    ...) {
   require_namespaces(c("network", "sna"))
   # sna          # node placement if there is no ggplot object in function call
 
   # -- conversion to network class ---------------------------------------------
 
   if (inherits(net, "igraph") && "intergraph" %in% rownames(installed.packages())) {
-    net = intergraph::asNetwork(net)
+    net <- intergraph::asNetwork(net)
   } else if (inherits(net, "igraph")) {
     stop("install the 'intergraph' package to use igraph objects with ggnet")
   }
 
   if (!network::is.network(net)) {
-    net = try(network::network(net), silent = TRUE)
+    net <- try(network::network(net), silent = TRUE)
   }
 
   if (!network::is.network(net)) {
@@ -186,19 +188,19 @@ ggnetworkmap <- function(
 
   # -- network functions -------------------------------------------------------
 
-  get_v = utils::getFromNamespace("%v%", ns = "network")
+  get_v <- utils::getFromNamespace("%v%", ns = "network")
 
   # -- network structure -------------------------------------------------------
 
-  vattr = network::list.vertex.attributes(net)
+  vattr <- network::list.vertex.attributes(net)
 
-  is_dir = ifelse(network::is.directed(net), "digraph", "graph")
+  is_dir <- ifelse(network::is.directed(net), "digraph", "graph")
 
   if (!is.numeric(arrow.size) || arrow.size < 0) {
     stop("incorrect arrow.size value")
   } else if (arrow.size > 0 && is_dir == "graph") {
     warning("network is undirected; arrow.size ignored")
-    arrow.size = 0
+    arrow.size <- 0
   }
 
   if (network::is.hyper(net)) {
@@ -216,7 +218,7 @@ ggnetworkmap <- function(
   # -- ... -------------------------------------------------------
 
   # get arguments
-  labels    = label.nodes
+  labels <- label.nodes
 
   # alpha default
   inherit <- function(x) ifelse(is.null(x), alpha, x)
@@ -227,24 +229,24 @@ ggnetworkmap <- function(
   if (missing(gg)) {
     # mapproj doesn't need to be loaded, but
     # it needs to exist for ggplot2::coord_map() to work properly
-    if (! ("mapproj" %in% installed.packages())) {
+    if (!("mapproj" %in% installed.packages())) {
       require_namespaces("mapproj")
     }
-    gg <- ggplot() + coord_map()
+    gg <- ggplot() +
+      coord_map()
 
     plotcord <- sna::gplot.layout.fruchtermanreingold(net, list(m, layout.par = NULL))
     plotcord <- data.frame(plotcord)
-    colnames(plotcord) = c("lon", "lat")
+    colnames(plotcord) <- c("lon", "lat")
   } else {
-    plotcord = data.frame(
+    plotcord <- data.frame(
       lon = as.numeric(get_v(net, "lon")),
       lat = as.numeric(get_v(net, "lat"))
     )
-
   }
 
   # Correct vertex labels
-  if (! is.logical(labels)) {
+  if (!is.logical(labels)) {
     stopifnot(length(labels) == nrow(plotcord))
     plotcord$.label <- labels
   } else if ("id" %in% vattr) {
@@ -265,11 +267,11 @@ ggnetworkmap <- function(
   if (!missing(node.group)) {
     plotcord$.ngroup <- get_v(net, as.character(substitute(node.group)))
     if (missing(ring.group)) {
-      point_aes$color = substitute(.ngroup)
+      point_aes$color <- substitute(.ngroup)
     } else {
-      point_aes$fill = substitute(.ngroup)
+      point_aes$fill <- substitute(.ngroup)
     }
-  } else if (! missing(node.color)) {
+  } else if (!missing(node.color)) {
     point_args$color <- substitute(node.color)
   } else {
     point_args$color <- substitute("black")
@@ -290,16 +292,18 @@ ggnetworkmap <- function(
 
   # get edgelist
   edges <- network::as.matrix.network.edgelist(net)
-  edges   <- data.frame(
+  edges <- data.frame(
     lat1 = plotcord[edges[, 1], "lat"],
     lon1 = plotcord[edges[, 1], "lon"],
     lat2 =  plotcord[edges[, 2], "lat"],
-    lon2 = plotcord[edges[, 2], "lon"])
-  edges <- subset(na.omit(edges), (! (lat1 == lat2 & lon2 == lon2)))
+    lon2 = plotcord[edges[, 2], "lon"]
+  )
+  edges <- subset(na.omit(edges), (!(lat1 == lat2 & lon2 == lon2)))
 
-  edge_args <- list(size = substitute(segment.size),
-                    alpha = substitute(inherit(segment.alpha)),
-                    color = substitute(segment.color)
+  edge_args <- list(
+    linewidth = substitute(segment.size),
+    alpha = substitute(inherit(segment.alpha)),
+    color = substitute(segment.color)
   )
   edge_aes <- list()
 
@@ -315,17 +319,16 @@ ggnetworkmap <- function(
   # -- great circles -----------------------------------------------------------
 
   if (great.circles) {
-
     # geosphere    # great circles
     require_namespaces("geosphere")
 
-    pts <- 25  # number of intermediate points for drawing great circles
+    pts <- 25 # number of intermediate points for drawing great circles
     i <- 0 # used to keep track of groups when getting intermediate points for great circles
 
     edges <- ddply(
-      .data       = edges,
-      .variables  = c("lat1", "lat2", "lon1", "lon2"),
-      .parallel   = FALSE,
+      .data = edges,
+      .variables = c("lat1", "lat2", "lon1", "lon2"),
+      .parallel = FALSE,
       .fun = function(x) {
         p1Mat <- x[, c("lon1", "lat1")]
         colnames(p1Mat) <- NULL
@@ -355,7 +358,7 @@ ggnetworkmap <- function(
             return(rbind(ret, ret2))
           } else {
             ret <- data.frame(lon = numeric(0), lat = numeric(0), group = numeric(0))
-            for (j in 1: length(inter)) {
+            for (j in 1:length(inter)) {
               i <<- i + 1
               ret1 <- data.frame(inter[[j]][[1]])
               ret1$group <- i
@@ -370,23 +373,20 @@ ggnetworkmap <- function(
       }
     )
 
-    edge_aes$x = substitute(lon)
-    edge_aes$y = substitute(lat)
-    edge_aes$group = substitute(group)
-    edge_args$data = substitute(edges)
+    edge_aes$x <- substitute(lon)
+    edge_aes$y <- substitute(lat)
+    edge_aes$group <- substitute(group)
+    edge_args$data <- substitute(edges)
     edge_args$mapping <- do.call(aes, edge_aes)
     gg <- gg + do.call(geom_path, edge_args)
-
   } else {
-
-    edge_aes$x = substitute(lon1)
-    edge_aes$y = substitute(lat1)
-    edge_aes$xend = substitute(lon2)
-    edge_aes$yend = substitute(lat2)
+    edge_aes$x <- substitute(lon1)
+    edge_aes$y <- substitute(lat1)
+    edge_aes$xend <- substitute(lon2)
+    edge_aes$yend <- substitute(lat2)
     edge_args$data <- substitute(edges)
-    edge_args$mapping = do.call(aes, edge_aes)
+    edge_args$mapping <- do.call(aes, edge_aes)
     gg <- gg + do.call(geom_segment, edge_args)
-
   }
 
   #
@@ -400,22 +400,18 @@ ggnetworkmap <- function(
   # null weighting
   sizer <- NULL
   if (missing(weight)) {
-
     point_args$size <- substitute(size)
-
   } else {
-
     # Setup weight-sizing
-    plotcord$.weight = get_v(net, as.character(substitute(weight)))
+    plotcord$.weight <- get_v(net, as.character(substitute(weight)))
 
     # proportional scaling
     if (is.factor(plotcord$.weight)) {
-      sizer <- scale_size_discrete(name = substitute(weight), range = c(size/nlevels(plotcord$weight), size))
+      sizer <- scale_size_discrete(name = substitute(weight), range = c(size / nlevels(plotcord$weight), size))
     } else {
       sizer <- scale_size_area(name = substitute(weight), max_size = size)
     }
     point_aes$size <- substitute(.weight)
-
   }
 
   # Add points to plot
@@ -423,32 +419,32 @@ ggnetworkmap <- function(
   point_args$data <- substitute(plotcord)
   point_args$mapping <- do.call(aes, point_aes)
 
-  gg = gg +
+  gg <- gg +
     do.call(geom_point, point_args)
 
   if (!is.null(sizer)) {
-
-    gg = gg +
+    gg <- gg +
       sizer
-
   }
 
   # -- node labels -------------------------------------------------------------
 
   if (isTRUE(labels)) {
-
-    gg <- gg + geom_text(data = plotcord,
-                         aes(x = lon, y = lat, label = .label),
-                         size = label.size, ...)
-
+    gg <- gg + geom_text(
+      data = plotcord,
+      aes(x = lon, y = lat, label = .label),
+      size = label.size, ...
+    )
   }
 
-  gg = gg +
+  gg <- gg +
     scale_x_continuous(breaks = NULL) +
     scale_y_continuous(breaks = NULL) +
     labs(color = "", fill = "", size = "", y = NULL, x = NULL) +
-    theme(panel.background = element_blank(),
-          legend.key = element_blank())
+    theme(
+      panel.background = element_blank(),
+      legend.key = element_blank()
+    )
 
   return(gg)
 }

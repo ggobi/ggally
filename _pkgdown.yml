@@ -211,15 +211,16 @@ reference:
 - title: Datasets
   contents:
   - australia_PISA2012
+  - baseball
   - flea
   - happy
   - nasa
   - pigs
   - psychademic
+  - tips
   - twitter_spambots
 
 - title: Legacy
   contents:
   - v1_ggmatrix_theme
   - ggally_cor_v1_5
-

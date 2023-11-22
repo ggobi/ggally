@@ -1,5 +1,3 @@
-
-
 #' @export
 # @examples
 # ggsave("test.pdf", ggpairs(iris, 1:2))

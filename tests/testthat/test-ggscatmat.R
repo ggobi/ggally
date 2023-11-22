@@ -1,10 +1,8 @@
-
 context("ggscatmat")
 
 data(flea)
 
 test_that("example", {
-
   flea2 <- flea
   flea2$species2 <- as.character(flea2$species)
   expect_warning(p <- ggscatmat(flea2, c(1:3)), "Factor variables are omitted in plot")

@@ -1,4 +1,3 @@
-
 #' Print if not CRAN
 #'
 #' Small function to print a plot if the R session is interactive or in a CI build
@@ -23,7 +22,7 @@ on_ci <- function() {
 #' @keywords internal
 require_namespaces <- function(pkgs) {
   for (pkg in pkgs) {
-    if (! requireNamespace(pkg, quietly = TRUE)) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(str_c("please install the package '", pkg, "'.  install.packages('", pkg, "') "))
     }
   }

@@ -1,4 +1,3 @@
-
 #' \pkg{ggplot2} plot matrix
 #'
 #' Make a generic matrix of \pkg{ggplot2} plots.
@@ -51,29 +50,27 @@
 #' )
 #' p_(pm)
 ggmatrix <- function(
-  plots,
-  nrow,
-  ncol,
-  xAxisLabels = NULL,
-  yAxisLabels = NULL,
-  title = NULL,
-  xlab = NULL,
-  ylab = NULL,
-  byrow = TRUE,
-  showStrips = NULL,
-  showAxisPlotLabels = TRUE,
-  showXAxisPlotLabels = TRUE,
-  showYAxisPlotLabels = TRUE,
-  labeller = NULL,
-  switch = NULL,
-  xProportions = NULL,
-  yProportions = NULL,
-  progress = NULL,
-  data = NULL,
-  gg = NULL,
-  legend = NULL
-) {
-
+    plots,
+    nrow,
+    ncol,
+    xAxisLabels = NULL,
+    yAxisLabels = NULL,
+    title = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    byrow = TRUE,
+    showStrips = NULL,
+    showAxisPlotLabels = TRUE,
+    showXAxisPlotLabels = TRUE,
+    showYAxisPlotLabels = TRUE,
+    labeller = NULL,
+    switch = NULL,
+    xProportions = NULL,
+    yProportions = NULL,
+    progress = NULL,
+    data = NULL,
+    gg = NULL,
+    legend = NULL) {
   if (!is.list(plots)) {
     stop("'plots' must be a list()")
   }
@@ -123,5 +120,4 @@ check_nrow_ncol <- function(x, title) {
   if (length(x) != 1) {
     stop(paste("'", title, "' must be a single numeric value", sep = ""))
   }
-
 }

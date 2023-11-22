@@ -1,4 +1,3 @@
-
 expect_loc_grid <- function(loc, to_loc) {
   testthat::expect_equal(
     colnames(loc),

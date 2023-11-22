@@ -1,10 +1,6 @@
-
-
-
 context("crosstalk")
 
 test_that("crosstalk works with ggduo and ggpairs", {
-
   skip_if_not_installed("crosstalk")
 
   sd <- try(crosstalk::SharedData$new(iris[1:4]), silent = TRUE)
@@ -15,12 +11,14 @@ test_that("crosstalk works with ggduo and ggpairs", {
   expect_silent({
     pm <- ggpairs(sd)
   })
-  expect_error({
+  expect_error(
+    {
       pm <- ggpairs(sd, 3:5)
     },
     "Make sure your numeric"
   )
-  expect_error({
+  expect_error(
+    {
       pm <- ggpairs(sd, c("Petal.Length", "Petal.Width", crosstalk_key()))
     },
     "Columns in 'columns' not"
@@ -29,12 +27,14 @@ test_that("crosstalk works with ggduo and ggpairs", {
   expect_silent({
     pm <- ggduo(sd)
   })
-  expect_error({
+  expect_error(
+    {
       pm <- ggduo(sd, c(1:2, 5), 3:5)
     },
     "Make sure your numeric 'columnsX'"
   )
-  expect_error({
+  expect_error(
+    {
       pm <- ggduo(
         sd,
         c("Sepal.Length", "Sepal.Width", crosstalk_key()),
@@ -43,7 +43,8 @@ test_that("crosstalk works with ggduo and ggpairs", {
     },
     "Columns in 'columnsX' not"
   )
-  expect_error({
+  expect_error(
+    {
       pm <- ggduo(
         sd,
         c("Sepal.Length", "Sepal.Width"),
@@ -52,5 +53,4 @@ test_that("crosstalk works with ggduo and ggpairs", {
     },
     "Columns in 'columnsY' not"
   )
-
 })

@@ -16,10 +16,10 @@
 #'
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
-#'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
-#'   plot <- plot +
-#'     ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
-#'     ggplot2::scale_colour_discrete(l = 40)
+#' plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
+#' plot <- plot +
+#'   ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
+#'   ggplot2::scale_colour_discrete(l = 40)
 #' custom_car[1, 2] <- plot
 #' personal_plot <- ggally_text(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
@@ -86,14 +86,11 @@ getPlot <- function(pm, i, j) {
   } else {
     if (ggplot2::is.ggplot(plotObj)) {
       p <- plotObj
-
     } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
       fn <- plotObj$fn
       p <- fn(pm$data, plotObj$mapping)
-
     } else if (inherits(plotObj, "legend_guide_box")) {
       p <- plotObj
-
     } else {
       firstNote <- str_c("Position: i = ", i, ", j = ", j, "\nstr(plotObj):\n", sep = "")
       strObj <- capture.output({

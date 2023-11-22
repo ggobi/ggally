@@ -21,15 +21,15 @@ Make a scatter plot with a given data set.
 p_ <- GGally::print_if_interactive
 
 data(mtcars)
-p_(ggally_points(mtcars, mapping = ggplot2::aes(x = disp, y = hp)))
-p_(ggally_points(mtcars, mapping = ggplot2::aes_string(x = "disp", y = "hp")))
+p_(ggally_points(mtcars, mapping = ggplot2::aes(disp, hp)))
+p_(ggally_points(mtcars, mapping = ggplot2::aes(disp, hp)))
 p_(ggally_points(
   mtcars,
-  mapping = ggplot2::aes_string(
-    x     = "disp",
-    y     = "hp",
-    color = "as.factor(cyl)",
-    size  = "gear"
+  mapping = ggplot2::aes(
+    x     = disp,
+    y     = hp,
+    color = as.factor(cyl),
+    size  = gear
   )
 ))
 }

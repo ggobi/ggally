@@ -1,4 +1,3 @@
-
 context("ggnet2")
 
 if ("package:igraph" %in% search()) {
@@ -9,25 +8,24 @@ rq <- function(...) {
   require(..., quietly = TRUE)
 }
 rq(network) # network objects
-rq(sna)     # placement and centrality
+rq(sna) # placement and centrality
 
 rq(ggplot2) # grammar of graphics
-rq(grid)    # arrows
-rq(scales)  # sizing
+rq(grid) # arrows
+rq(scales) # sizing
 
-rq(intergraph)   # test igraph conversion
+rq(intergraph) # test igraph conversion
 rq(RColorBrewer) # test ColorBrewer palettes
 
 test_that("examples", {
-
   ### --- start: documented examples
   set.seed(54321)
 
   # random adjacency matrix
-  x           <- 10
-  ndyads      <- x * (x - 1)
-  density     <- x / ndyads
-  m           <- matrix(0, nrow = x, ncol = x)
+  x <- 10
+  ndyads <- x * (x - 1)
+  density <- x / ndyads
+  m <- matrix(0, nrow = x, ncol = x)
   dimnames(m) <- list(letters[1:x], letters[1:x])
   m[row(m) != col(m)] <- runif(ndyads) < density
   m
@@ -272,5 +270,4 @@ test_that("examples", {
 
     expect_true(TRUE)
   }
-
 })

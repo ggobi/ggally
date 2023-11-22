@@ -65,11 +65,11 @@ Estimate correlation from the given data. If a color variable is supplied, the c
 p_ <- GGally::print_if_interactive
 
 data(tips)
-p_(ggally_cor(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+p_(ggally_cor(tips, mapping = ggplot2::aes(total_bill, tip)))
 # display with grid
 p_(ggally_cor(
   tips,
-  mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+  mapping = ggplot2::aes(total_bill, tip),
   display_grid = TRUE
 ))
 # change text attributes
@@ -83,7 +83,7 @@ p_(ggally_cor(
 # split by a variable
 p_(ggally_cor(
   tips,
-  mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+  mapping = ggplot2::aes(total_bill, tip, color = sex),
   size = 5
 ))
 }

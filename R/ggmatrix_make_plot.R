@@ -1,5 +1,3 @@
-
-
 make_label_plot <- function(types, sectionAes, label) {
   sectionAes$y <- NULL
 

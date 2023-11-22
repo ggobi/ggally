@@ -30,33 +30,35 @@
 #' library(broom)
 #' reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
 #' p_(ggcoef(reg))
-#' \donttest{d <- as.data.frame(Titanic)
+#' \donttest{
+#' d <- as.data.frame(Titanic)
 #' reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
 #' ggcoef(reg2, exponentiate = TRUE)
 #' ggcoef(
-#'   reg2, exponentiate = TRUE, exclude_intercept = TRUE,
+#'   reg2,
+#'   exponentiate = TRUE, exclude_intercept = TRUE,
 #'   errorbar_height = .2, color = "blue", sort = "ascending"
-#' )}
+#' )
+#' }
 #' @export
 ggcoef <- function(
-  x,
-  mapping = aes_string(y = "term", x = "estimate"),
-  conf.int = TRUE,
-  conf.level = 0.95,
-  exponentiate = FALSE,
-  exclude_intercept = FALSE,
-  vline = TRUE,
-  vline_intercept = "auto",
-  vline_color = "gray50",
-  vline_linetype = "dotted",
-  vline_size = 1,
-  errorbar_color = "gray25",
-  errorbar_height = 0,
-  errorbar_linetype = "solid",
-  errorbar_size = .5,
-  sort = c("none", "ascending", "descending"),
-  ...
-) {
+    x,
+    mapping = aes(!!as.name("estimate"), !!as.name("term")),
+    conf.int = TRUE,
+    conf.level = 0.95,
+    exponentiate = FALSE,
+    exclude_intercept = FALSE,
+    vline = TRUE,
+    vline_intercept = "auto",
+    vline_color = "gray50",
+    vline_linetype = "dotted",
+    vline_size = 1,
+    errorbar_color = "gray25",
+    errorbar_height = 0,
+    errorbar_linetype = "solid",
+    errorbar_size = .5,
+    sort = c("none", "ascending", "descending"),
+    ...) {
   if (!is.data.frame(x)) {
     require_namespaces("broom")
     x <- broom::tidy(
@@ -98,7 +100,7 @@ ggcoef <- function(
       p <- p +
         geom_vline(
           xintercept = vline_intercept, color = vline_color,
-          linetype = vline_linetype, size = vline_size
+          linetype = vline_linetype, linewidth = vline_size
         ) +
         scale_x_log10()
     } else {
@@ -110,17 +112,18 @@ ggcoef <- function(
           xintercept = vline_intercept,
           color = vline_color,
           linetype = vline_linetype,
-          size = vline_size
+          linewidth = vline_size
         )
     }
   }
-  if (conf.int && "conf.low" %in% names(x) && "conf.high" %in% names(x))
+  if (conf.int && "conf.low" %in% names(x) && "conf.high" %in% names(x)) {
     p <- p + geom_errorbarh(
-      aes_string(xmin = "conf.low", xmax = "conf.high"),
+      aes(xmin = !!as.name("conf.low"), xmax = !!as.name("conf.high")),
       color = errorbar_color,
       height = errorbar_height,
       linetype = errorbar_linetype,
-      size = errorbar_size
+      linewidth = errorbar_size
     )
+  }
   p + geom_point(...)
 }

@@ -47,7 +47,6 @@ fortify_SharedData <- function(model, data, ...) {
 }
 
 fix_data <- function(data) {
-
   if (inherits(data, "SharedData")) {
     data <- fortify_SharedData(data)
   }
@@ -72,14 +71,12 @@ fix_data_slim <- function(data, isSharedData) {
 
 
 fix_column_values <- function(
-  data,
-  columns,
-  columnLabels,
-  columnsName,
-  columnLabelsName,
-  isSharedData = FALSE
-) {
-
+    data,
+    columns,
+    columnLabels,
+    columnsName,
+    columnLabelsName,
+    isSharedData = FALSE) {
   colnamesData <- colnames(data)
 
   if (is.character(columns)) {
@@ -211,13 +208,13 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @details
 #' \code{types} is a list that may contain the variables
 #' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
-#'\describe{
+#' \describe{
 #'  \item{continuous}{This option is used for continuous X and Y data.}
 #'  \item{comboHorizontal}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
 #'  \item{comboVertical}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
 #'  \item{discrete}{This option is used for categorical X and Y data.}
 #'  \item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
-#'}
+#' }
 #'
 #' If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
 #'
@@ -241,84 +238,84 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.
 #' @export
 #' @examples
-#'  # small function to display plots only if it's interactive
-#'  p_ <- GGally::print_if_interactive
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
-#'  data(baseball)
+#' data(baseball)
 #'
-#'  # Keep players from 1990-1995 with at least one at bat
-#'  # Add how many singles a player hit
-#'  # (must do in two steps as X1b is used in calculations)
-#'  dt <- transform(
-#'    subset(baseball, year >= 1990 & year <= 1995 & ab > 0),
-#'    X1b = h - X2b - X3b - hr
-#'  )
-#'  # Add
-#'  #  the player's batting average,
-#'  #  the player's slugging percentage,
-#'  #  and the player's on base percentage
-#'  # Make factor a year, as each season is discrete
-#'  dt <- transform(
-#'    dt,
-#'    batting_avg = h / ab,
-#'    slug = (X1b + 2*X2b + 3*X3b + 4*hr) / ab,
-#'    on_base = (h + bb + hbp) / (ab + bb + hbp),
-#'    year = as.factor(year)
-#'  )
+#' # Keep players from 1990-1995 with at least one at bat
+#' # Add how many singles a player hit
+#' # (must do in two steps as X1b is used in calculations)
+#' dt <- transform(
+#'   subset(baseball, year >= 1990 & year <= 1995 & ab > 0),
+#'   X1b = h - X2b - X3b - hr
+#' )
+#' # Add
+#' #  the player's batting average,
+#' #  the player's slugging percentage,
+#' #  and the player's on base percentage
+#' # Make factor a year, as each season is discrete
+#' dt <- transform(
+#'   dt,
+#'   batting_avg = h / ab,
+#'   slug = (X1b + 2 * X2b + 3 * X3b + 4 * hr) / ab,
+#'   on_base = (h + bb + hbp) / (ab + bb + hbp),
+#'   year = as.factor(year)
+#' )
 #'
 #'
-#'  pm <- ggduo(
-#'    dt,
-#'    c("year", "g", "ab", "lg"),
-#'    c("batting_avg", "slug", "on_base"),
-#'    mapping = ggplot2::aes(color = lg)
-#'  )
-#'  # Prints, but
-#'  #   there is severe over plotting in the continuous plots
-#'  #   the labels could be better
-#'  #   want to add more hitting information
-#'  p_(pm)
+#' pm <- ggduo(
+#'   dt,
+#'   c("year", "g", "ab", "lg"),
+#'   c("batting_avg", "slug", "on_base"),
+#'   mapping = ggplot2::aes(color = lg)
+#' )
+#' # Prints, but
+#' #   there is severe over plotting in the continuous plots
+#' #   the labels could be better
+#' #   want to add more hitting information
+#' p_(pm)
 #'
-#'  # address overplotting issues and add a title
-#'  pm <- ggduo(
-#'    dt,
-#'    c("year", "g", "ab", "lg"),
-#'    c("batting_avg", "slug", "on_base"),
-#'    columnLabelsX = c("year", "player game count", "player at bat count", "league"),
-#'    columnLabelsY = c("batting avg", "slug %", "on base %"),
-#'    title = "Baseball Hitting Stats from 1990-1995",
-#'    mapping = ggplot2::aes(color = lg),
-#'    types = list(
-#'      # change the shape and add some transparency to the points
-#'      continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
-#'    ),
-#'    showStrips = FALSE
-#'  )
+#' # address overplotting issues and add a title
+#' pm <- ggduo(
+#'   dt,
+#'   c("year", "g", "ab", "lg"),
+#'   c("batting_avg", "slug", "on_base"),
+#'   columnLabelsX = c("year", "player game count", "player at bat count", "league"),
+#'   columnLabelsY = c("batting avg", "slug %", "on base %"),
+#'   title = "Baseball Hitting Stats from 1990-1995",
+#'   mapping = ggplot2::aes(color = lg),
+#'   types = list(
+#'     # change the shape and add some transparency to the points
+#'     continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
+#'   ),
+#'   showStrips = FALSE
+#' )
 #'
-#'  p_(pm)
+#' p_(pm)
 #'
 #' # Use "auto" to adapt width of the sub-plots
-#'  pm <- ggduo(
-#'    dt,
-#'    c("year", "g", "ab", "lg"),
-#'    c("batting_avg", "slug", "on_base"),
-#'    mapping = ggplot2::aes(color = lg),
-#'    xProportions = "auto"
-#'  )
+#' pm <- ggduo(
+#'   dt,
+#'   c("year", "g", "ab", "lg"),
+#'   c("batting_avg", "slug", "on_base"),
+#'   mapping = ggplot2::aes(color = lg),
+#'   xProportions = "auto"
+#' )
 #'
-#'  p_(pm)
+#' p_(pm)
 #'
-#'  # Custom widths & heights of the sub-plots
-#'  pm <- ggduo(
-#'    dt,
-#'    c("year", "g", "ab", "lg"),
-#'    c("batting_avg", "slug", "on_base"),
-#'    mapping = ggplot2::aes(color = lg),
-#'    xProportions = c(6, 4, 3, 2),
-#'    yProportions = c(1, 2, 1)
-#'  )
+#' # Custom widths & heights of the sub-plots
+#' pm <- ggduo(
+#'   dt,
+#'   c("year", "g", "ab", "lg"),
+#'   c("batting_avg", "slug", "on_base"),
+#'   mapping = ggplot2::aes(color = lg),
+#'   xProportions = c(6, 4, 3, 2),
+#'   yProportions = c(1, 2, 1)
+#' )
 #'
-#'  p_(pm)
+#' p_(pm)
 #'
 #' # Example derived from:
 #' ## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital
@@ -390,86 +387,76 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' ) +
 #'   ggplot2::theme(legend.position = "bottom")
 #' suppressWarnings(p_(pm))
-#
-#
-#
 # pm <- ggduo(
-#   dt,
-#   c("year", "g", "ab", "lg", "lg"),
-#   c("batting_avg", "slug", "on_base", "hit_type"),
-#   columnLabelsX = c("year", "player game count", "player at bat count", "league", ""),
-#   columnLabelsY = c("batting avg", "slug %", "on base %", "hit type"),
-#   title = "Baseball Hitting Stats from 1990-1995 (player strike in 1994)",
-#   mapping = aes(color = year),
-#   types = list(
-#     continuous = wrap("smooth_loess", alpha = 0.50, shape = "+"),
-#     comboHorizontal = wrap(display_hit_type_combo, binwidth = 15),
-#     discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
-#   ),
-#   showStrips = FALSE
+#' #  dt,
+#' #  c("year", "g", "ab", "lg", "lg"),
+#' #  c("batting_avg", "slug", "on_base", "hit_type"),
+#' #  columnLabelsX = c("year", "player game count", "player at bat count", "league", ""),
+#' #  columnLabelsY = c("batting avg", "slug %", "on base %", "hit type"),
+#' #  title = "Baseball Hitting Stats from 1990-1995 (player strike in 1994)",
+#' #  mapping = aes(color = year),
+#' #  types = list(
+#' #    continuous = wrap("smooth_loess", alpha = 0.50, shape = "+"),
+#' #    comboHorizontal = wrap(display_hit_type_combo, binwidth = 15),
+#' #    discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
+#' #  ),
+#' #  showStrips = FALSE
 # );
-#
-# # make the 5th column blank, except for the legend
+#' ## make the 5th column blank, except for the legend
 # pm[1, 5] <- NULL
 # pm[2, 5] <- grab_legend(pm[2, 1])
 # pm[3, 5] <- NULL
 # pm[4, 5] <- NULL
-#
 # pm
-#
 # ggduo(
-#   australia_PISA2012,
-#   c("gender", "age", "homework", "possessions"),
-#   c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
-#   types = list(
-#     continuous = "points",
-#     combo = "box",
-#     discrete = "ratio"
-#   )
+#' #  australia_PISA2012,
+#' #  c("gender", "age", "homework", "possessions"),
+#' #  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#' #  types = list(
+#' #    continuous = "points",
+#' #    combo = "box",
+#' #    discrete = "ratio"
+#' #  )
 # )
-#
 # ggduo(
-#   australia_PISA2012,
-#   c("gender", "age", "homework", "possessions"),
-#   c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
-#   mapping = ggplot2::aes(color = gender),
-#   types = list(
-#     continuous = wrap("smooth", alpha = 0.25, method = "loess"),
-#     combo = "box",
-#     discrete = "ratio"
-#   )
+#' #  australia_PISA2012,
+#' #  c("gender", "age", "homework", "possessions"),
+#' #  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#' #  mapping = ggplot2::aes(color = gender),
+#' #  types = list(
+#' #    continuous = wrap("smooth", alpha = 0.25, method = "loess"),
+#' #    combo = "box",
+#' #    discrete = "ratio"
+#' #  )
 # )
-#
 # ggduo(australia_PISA2012, c("gender", "age", "homework", "possessions"), c("PV1MATH", "PV1READ", "PV1SCIE"), types = list(continuous = "points", combo = "box", discrete = "ratio"))
 # ggduo(australia_PISA2012, c("gender", "age", "homework", "possessions"), c("PV1MATH", "PV1READ", "PV1SCIE"), types = list(continuous = wrap("smooth", alpha = 0.25, method = "loess"), combo = "box", discrete = "ratio"), mapping = ggplot2::aes(color = gender))
 ggduo <- function(
-  data,
-  mapping = NULL,
-  columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data),
-  title = NULL,
-  types = list(
-    continuous = "smooth_loess",
-    comboVertical = "box_no_facet",
-    comboHorizontal = "facethist",
-    discrete = "count"
-  ),
-  axisLabels = c("show", "none"),
-  columnLabelsX = colnames(data[columnsX]),
-  columnLabelsY = colnames(data[columnsY]),
-  labeller = "label_value",
-  switch = NULL,
-  xlab = NULL,
-  ylab = NULL,
-  showStrips = NULL,
-  legend = NULL,
-  cardinality_threshold = 15,
-  progress = NULL,
-  xProportions = NULL,
-  yProportions = NULL,
-  legends = stop("deprecated")
-) {
-
+    data,
+    mapping = NULL,
+    columnsX = 1:ncol(data),
+    columnsY = 1:ncol(data),
+    title = NULL,
+    types = list(
+      continuous = "smooth_loess",
+      comboVertical = "box_no_facet",
+      comboHorizontal = "facethist",
+      discrete = "count"
+    ),
+    axisLabels = c("show", "none"),
+    columnLabelsX = colnames(data[columnsX]),
+    columnLabelsY = colnames(data[columnsY]),
+    labeller = "label_value",
+    switch = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    showStrips = NULL,
+    legend = NULL,
+    cardinality_threshold = 15,
+    progress = NULL,
+    xProportions = NULL,
+    yProportions = NULL,
+    legends = stop("deprecated")) {
   warn_deprecated(!missing(legends), "legends")
 
   isSharedData <- inherits(data, "SharedData")
@@ -479,7 +466,7 @@ ggduo <- function(
   # fix args
   if (
     !missing(mapping) && !is.list(mapping) &&
-    !missing(columnsX) && missing(columnsY)
+      !missing(columnsX) && missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -526,7 +513,6 @@ ggduo <- function(
   dataTypes <- plot_types(data, columnsX, columnsY, allowDiag = FALSE)
 
   ggduoPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
-
     plotType <- dataTypes[i, "plotType"]
 
     # posX <- dataTypes[i, "posX"]
@@ -536,7 +522,7 @@ ggduo <- function(
 
     sectionAes <- add_and_overwrite_aes(
       add_and_overwrite_aes(
-        aes_(x = as.name(xColName), y = as.name(yColName)),
+        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
         mapping
       ),
       types$mapping
@@ -610,19 +596,19 @@ ggduo <- function(
 #' @details
 #' \code{upper} and \code{lower} are lists that may contain the variables
 #' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
-#'\describe{
+#' \describe{
 #'  \item{continuous}{This option is used for continuous X and Y data.}
 #'  \item{combo}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
 #'  \item{discrete}{This option is used for categorical X and Y data.}
 #'  \item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
-#'}
+#' }
 #'
 #' \code{diag} is a list that may only contain the variables 'continuous', 'discrete', and 'na'. Each element of the diag list is a string implementing the following options:
-#'\describe{
+#' \describe{
 #'  \item{continuous}{exactly one of ('densityDiag', 'barDiag', 'blankDiag'). This option is used for continuous X data.}
 #'  \item{discrete}{exactly one of ('barDiag', 'blankDiag'). This option is used for categorical X and Y data.}
 #'  \item{na}{exactly one of ('naDiag', 'blankDiag').  This option is used when all X data is \code{NA}.}
-#'}
+#' }
 #'
 #' If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
 #'
@@ -697,11 +683,11 @@ ggduo <- function(
 #'
 #' # Different aesthetics for different plot sections and plot types
 #' pm <- ggpairs(
-#'  diamonds.samp[, 1:5],
-#'  mapping = ggplot2::aes(color = cut),
-#'  upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
-#'  lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
-#'  title = "Diamonds"
+#'   diamonds.samp[, 1:5],
+#'   mapping = ggplot2::aes(color = cut),
+#'   upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
+#'   lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
+#'   title = "Diamonds"
 #' )
 #' p_(pm)
 #'
@@ -734,10 +720,10 @@ ggduo <- function(
 #' ## Plot Insertion Example
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
-#'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
-#'   plot <- plot +
-#'     ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
-#'     ggplot2::scale_colour_discrete(l = 40)
+#' plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
+#' plot <- plot +
+#'   ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
+#'   ggplot2::scale_colour_discrete(l = 40)
 #' custom_car[1, 2] <- plot
 #' personal_plot <- ggally_text(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
@@ -758,7 +744,8 @@ ggduo <- function(
 #'
 #' ## Remove panel grid lines from correlation plots
 #' pm <- ggpairs(
-#'   flea, columns = 2:4,
+#'   flea,
+#'   columns = 2:4,
 #'   upper = list(continuous = wrap(ggally_cor, displayGrid = FALSE))
 #' )
 #' p_(pm)
@@ -774,29 +761,27 @@ ggduo <- function(
 #' p_(pm)
 #'
 ggpairs <- function(
-  data,
-  mapping = NULL,
-  columns = 1:ncol(data),
-  title = NULL,
-  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
-  lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
-  diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
-  params = NULL,
-  ...,
-  xlab = NULL,
-  ylab = NULL,
-  axisLabels = c("show", "internal", "none"),
-  columnLabels = colnames(data[columns]),
-  labeller = "label_value",
-  switch = NULL,
-  showStrips = NULL,
-  legend = NULL,
-  cardinality_threshold = 15,
-  progress = NULL,
-  proportions = NULL,
-  legends = stop("deprecated")
-) {
-
+    data,
+    mapping = NULL,
+    columns = 1:ncol(data),
+    title = NULL,
+    upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
+    lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
+    diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+    params = NULL,
+    ...,
+    xlab = NULL,
+    ylab = NULL,
+    axisLabels = c("show", "internal", "none"),
+    columnLabels = colnames(data[columns]),
+    labeller = "label_value",
+    switch = NULL,
+    showStrips = NULL,
+    legend = NULL,
+    cardinality_threshold = 15,
+    progress = NULL,
+    proportions = NULL,
+    legends = stop("deprecated")) {
   warn_deprecated(!missing(legends), "legends")
   warn_if_args_exist(list(...))
   stop_if_params_exist(params)
@@ -808,10 +793,10 @@ ggpairs <- function(
 
   if (
     !missing(mapping) && !is.list(mapping) &&
-    missing(columns)
+      missing(columns)
   ) {
-      columns <- mapping
-      mapping <- NULL
+    columns <- mapping
+    mapping <- NULL
   }
   stop_if_bad_mapping(mapping)
 
@@ -846,7 +831,6 @@ ggpairs <- function(
   }
 
   ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
-
     plotType <- dataTypes[i, "plotType"]
 
     posX <- dataTypes[i, "posX"]
@@ -864,7 +848,7 @@ ggpairs <- function(
 
     sectionAes <- add_and_overwrite_aes(
       add_and_overwrite_aes(
-        aes_(x = as.name(xColName), y = as.name(yColName)),
+        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
         mapping
       ),
       types$mapping
@@ -921,10 +905,11 @@ ggpairs <- function(
 #' @examples
 #' data(diamonds, package = "ggplot2")
 #' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
-#' pm <- ggpairs(diamonds.samp, columns = 5:7,
+#' pm <- ggpairs(diamonds.samp,
+#'   columns = 5:7,
 #'   mapping = ggplot2::aes(color = color),
-#'   upper = list(continuous = "cor", mapping = ggplot2::aes_string(color = "clarity")),
-#'   lower = list(continuous = "cor", mapping = ggplot2::aes_string(color = "cut")),
+#'   upper = list(continuous = "cor", mapping = ggplot2::aes(color = clarity)),
+#'   lower = list(continuous = "cor", mapping = ggplot2::aes(color = cut)),
 #'   title = "Diamonds Sample"
 #' )
 #' str(pm)
@@ -980,11 +965,10 @@ mapping_color_to_fill <- function(current) {
 
 
 set_to_blank_list_if_blank <- function(
-  val,
-  combo = TRUE,
-  blank = "blank",
-  isDuo = FALSE
-) {
+    val,
+    combo = TRUE,
+    blank = "blank",
+    isDuo = FALSE) {
   isBlank <- is.null(val)
   if (!isBlank) {
     isBlank <- (!is.list(val) && (val == blank || val == "blank"))
@@ -1007,20 +991,18 @@ set_to_blank_list_if_blank <- function(
 }
 
 check_and_set_ggpairs_defaults <- function(
-  name, obj,
-  continuous = NULL,
-  combo = NULL,
-  discrete = NULL,
-  na = NULL,
-  isDiag = FALSE,
-  isDuo = FALSE
-) {
-
+    name, obj,
+    continuous = NULL,
+    combo = NULL,
+    discrete = NULL,
+    na = NULL,
+    isDiag = FALSE,
+    isDuo = FALSE) {
   blankVal <- ifelse(isDiag, "blankDiag", "blank")
 
   obj <- set_to_blank_list_if_blank(
     obj,
-    combo = ! isDiag && ! isDuo,
+    combo = !isDiag && !isDuo,
     blank = blankVal,
     isDuo = isDuo
   )
@@ -1043,7 +1025,7 @@ check_and_set_ggpairs_defaults <- function(
     obj$na <- na
   }
 
-  if (! is.null(obj$aes_string)) {
+  if (!is.null(obj$aes_string)) {
     stop(
       "'aes_string' is a deprecated element for the section ", name, ".\n",
       "Please use 'mapping' instead. "
@@ -1054,7 +1036,7 @@ check_and_set_ggpairs_defaults <- function(
     for (key in c("continuous", "discrete", "na")) {
       val <- obj[[key]]
       if (is.character(val)) {
-        if (! str_detect(val, "Diag$")) {
+        if (!str_detect(val, "Diag$")) {
           newVal <- paste(val, "Diag", sep = "")
           warning(paste(
             "Changing diag$", key, " from '", val, "' to '", newVal, "'",
@@ -1081,18 +1063,17 @@ get_subtype_name <- function(.subType) {
 
 
 stop_if_params_exist <- function(params) {
-  if (! is.null(params)) {
-      stop(
-        "'params' is a deprecated argument.  ",
-        "Please 'wrap' the function to supply arguments. ",
-        "help(\"wrap\", package = \"GGally\")"
-      )
+  if (!is.null(params)) {
+    stop(
+      "'params' is a deprecated argument.  ",
+      "Please 'wrap' the function to supply arguments. ",
+      "help(\"wrap\", package = \"GGally\")"
+    )
   }
 }
 
 
 ggmatrix_proportions <- function(proportions, data, columns) {
-
   if (is.null(proportions)) {
     return(proportions)
   }
@@ -1102,10 +1083,11 @@ ggmatrix_proportions <- function(proportions, data, columns) {
   if (isTRUE(length(proportions) == 1 && proportions == "auto")) {
     proportions <- c()
     for (v in columns) {
-      if (is.numeric(data[[v]]))
+      if (is.numeric(data[[v]])) {
         proportions <- c(proportions, NA)
-      else
+      } else {
         proportions <- c(proportions, length(levels(as.factor(data[[v]]))))
+      }
     }
     # for numeric variables, the average
     proportions[is.na(proportions)] <- mean(proportions, na.rm = TRUE)
@@ -1139,7 +1121,7 @@ dput_val <- function(x) {
   ret
 }
 
-#diamondMatrix <- ggpairs(
+# diamondMatrix <- ggpairs(
 #  diamonds,
 #  columns = 8:10,
 #  upper = list(points = "scatterplot", aes_string = aes_string(color = "cut")),
@@ -1147,13 +1129,13 @@ dput_val <- function(x) {
 #  diag = "blank",
 ##  color = "color",
 #  title = "Diamonds"
-#)
-#if(TRUE)
-#{
+# )
+# if(TRUE)
+# {
 #
-#d <- diamonds[runif(floor(nrow(diamonds)/10), 0, nrow(diamonds)), ]
+# d <- diamonds[runif(floor(nrow(diamonds)/10), 0, nrow(diamonds)), ]
 #
-#diamondMatrix <- ggpairs(
+# diamondMatrix <- ggpairs(
 #  d,
 #  columns = 8:10,
 #  upper = list(continuous = "points", aes_string = aes_string(color = "clarity")),
@@ -1161,14 +1143,14 @@ dput_val <- function(x) {
 #  diag = "blank",
 ##  color = "color",
 #  title = "Diamonds"
-#)
+# )
 #
 #
-#m <- mtcars
-##m$vs <- as.factor(m$vs)
-##m$cyl <- as.factor(m$cyl)
-##m$qsec <- as.factor(m$qsec)
-#carsMatrix <- ggpairs(
+# m <- mtcars
+## m$vs <- as.factor(m$vs)
+## m$cyl <- as.factor(m$cyl)
+## m$qsec <- as.factor(m$qsec)
+# carsMatrix <- ggpairs(
 #  mtcars,
 #  columns = c(1, 3, 4),
 #  upper = list(continuous = "points", aes_string = aes_string(shape = "cyl", size = 5)),
@@ -1176,7 +1158,7 @@ dput_val <- function(x) {
 #  diag = "blank",
 #  color = "cyl",
 #  title = "mtcars",
-#)
+# )
 #
 #
 # carsMatrix <- ggpairs(
@@ -1190,4 +1172,4 @@ dput_val <- function(x) {
 # )
 #
 #
-#}
+# }

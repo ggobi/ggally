@@ -1,4 +1,3 @@
-
 #' Wrap a function with different parameter values
 #'
 #' Wraps a function with the supplied parameters to force different default behavior.  This is useful for functions that are supplied to ggpairs.  It allows you to change the behavior of one function, rather than creating multiple functions with different parameter settings.
@@ -17,8 +16,8 @@
 #' @export
 #' @rdname wrap
 #' @examples
-#'  # small function to display plots only if it's interactive
-#'  p_ <- GGally::print_if_interactive
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
 #' # example function that prints 'val'
 #' fn <- function(data, mapping, val = 2) {
@@ -62,11 +61,9 @@
 #' pm <- ggpairs(iris, 1:3, lower = list(continuous = w_ggally_points))
 #' p_(pm)
 wrap_fn_with_param_arg <- function(
-  funcVal,
-  params = NULL,
-  funcArgName = deparse(substitute(funcVal))
-) {
-
+    funcVal,
+    params = NULL,
+    funcArgName = deparse(substitute(funcVal))) {
   if (missing(funcArgName)) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {
@@ -93,12 +90,12 @@ wrap_fn_with_param_arg <- function(
   }
 
   if (mode(funcVal) == "character") {
-
     if (missing(funcArgName)) {
       funcArgName <- str_c("ggally_", funcVal)
     }
 
-    tryCatch({
+    tryCatch(
+      {
         funcVal <- get(
           str_c("ggally_", funcVal),
           mode = "function"
@@ -143,7 +140,7 @@ wrapp <- wrap_fn_with_param_arg
 
 #' @export
 #' @rdname wrap
-wrap  <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
+wrap <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
   if (missing(funcArgName)) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {

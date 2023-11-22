@@ -31,5 +31,4 @@ test_that("generally works", {
     "pigs",
     ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
   )
-
 })

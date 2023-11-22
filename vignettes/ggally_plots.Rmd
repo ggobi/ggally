@@ -1,6 +1,6 @@
 ---
 title: "ggally_*(): List of available high-level plots"
-output: 
+output:
   rmarkdown::html_vignette:
     toc: true
 author: GGally Team
@@ -24,7 +24,7 @@ We can distinct **bivariate plots** requiring two variables for **x** and **y** 
 
 ```{r}
 library(GGally, quietly = TRUE)
-data(tips, package = "reshape")
+data(tips)
 ```
 
 

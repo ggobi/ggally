@@ -24,7 +24,7 @@ data(tips)
 p_(ggally_facetdensity(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
 p_(ggally_facetdensity(
   tips,
-  mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
+  mapping = ggplot2::aes(sex, total_bill, color = sex)
 ))
 }
 \author{
