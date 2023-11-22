@@ -10,7 +10,7 @@ if (getRversion() >= "2.15.1") {
 #'
 #' \code{scale} is a character string that denotes how to scale the variables
 #' in the parallel coordinate plot. Options:
-#' \itemize{
+#' \describe{
 #'   \item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
 #'   \item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
 #'   \item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
@@ -24,7 +24,7 @@ if (getRversion() >= "2.15.1") {
 #'
 #' \code{missing} is a character string that denotes how to handle missing
 #'   missing values. Options:
-#' \itemize{
+#' \describe{
 #'   \item{\code{exclude}}{: remove all cases with missing values}
 #'   \item{\code{mean}}{: set missing values to the mean of the variable}
 #'   \item{\code{median}}{: set missing values to the median of the variable}
@@ -34,7 +34,7 @@ if (getRversion() >= "2.15.1") {
 #'
 #' \code{order} is either a vector of indices or a character string that denotes how to
 #'   order the axes (variables) of the parallel coordinate plot. Options:
-#' \itemize{
+#' \describe{
 #'   \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
 #'   \item{\code{(given vector)}}{: order by the vector specified}
 #'   \item{\code{anyClass}}{: order variables by their separation between any one class and

@@ -13,7 +13,7 @@
 #' @param exclude_intercept should the intercept be excluded from the plot?
 #' @param vline print a vertical line?
 #' @param vline_intercept \code{xintercept} for the vertical line.
-#' \code{"auto"} for \code{x = 0} (or \code{x = 1} if {exponentiate} is \code{TRUE})
+#' \code{"auto"} for \code{x = 0} (or \code{x = 1} if \code{exponentiate} is \code{TRUE})
 #' @param vline_color color of the vertical line
 #' @param vline_linetype line type of the vertical line
 #' @param vline_size size of the vertical line

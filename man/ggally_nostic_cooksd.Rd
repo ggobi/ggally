@@ -26,7 +26,7 @@ ggally_nostic_cooksd(
 A function to display \code{\link[stats:influence.measures]{stats::cooks.distance()}}.
 }
 \details{
-A line is added at F_{p, n - p}(0.5) to display the general cutoff point for Cook's Distance.
+A line is added at \eqn{F_{p,n-p}(0.5)}{F[p,n-p](0.5)} to display the general cutoff point for Cook's Distance.
 
 Reference: Michael H. Kutner, Christopher J. Nachtsheim, John Neter, and William Li. Applied linear statistical models. The McGraw-Hill / Irwin series operations and decision sciences. McGraw-Hill Irwin, 2005, p. 403
 }
