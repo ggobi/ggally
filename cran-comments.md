@@ -1,56 +1,77 @@
 
 ## Comments
-#### 2021-06-20
+#### 2023-11-22
 
-I have fixed the failing tests due to an update in `network` package. `GGally` now requires the latest version of the `network` package and should pass the tests.
+Thank you for being patient with me on submission time.
 
-Thank you,
-Barret
+I have fixed the packageVersion issue by removing the unecessary code: https://github.com/ggobi/ggally/commit/9e7228c6d4219c515857426a982d1a5c1ff0cd13
 
-#### 2021-06-08
+The update also contains bug fixes and new datasets.
 
-Dear maintainer,
-
-Please see the problems shown on
-<https://cran.r-project.org/web/checks/check_results_GGally.html>.
-
-Please correct before 2021-06-22 to safely retain your package on CRAN.
+Please let me know if there is anything else I can do to help. Thank you again for your patience!!
 
 Best,
+Barret
+
+
+#### 2023-11-07
+
+Can you please change to "3.3"?
+
+Please fix before 2023-11-21 to safely retain your package on CRAN.
+
+Best
 -k
 
 
+#### 2023-07-18
 
-## Test environments and R CMD check results
+[packageVersion() should only compare against strings.]
 
-* local macOS install 11.3.1
-  * R 4.0
-* GitHub Actions - https://github.com/ggobi/ggally/pull/419/checks
-  * macOS, windows, ubuntu {16,20} - R release
-  * macOS, windows, ubuntu {16,20} - R oldrelease
+....
 
-* win-builder
-  * devel
-  * release
-  * oldrelease
+Please correct before 2023-08-16 to safely retain your package on CRAN.
 
-#### R CMD check results
+....
 
-* 0 errors | 0 warnings | 0 notes
+Best
+-k
+
+**********************************
+
+$GGally
+$GGally$`GGally/R/gg-plots.R`
+$GGally$`GGally/R/gg-plots.R`[[1]]
+packageVersion("ggplot2") >= 3.3
+
+
+
+## R CMD check results
+
+* 0 errors | 0 warnings | 1 note
+
+  Maintainer: ‘Barret Schloerke <schloerke@gmail.com>’
+
+  Found the following (possibly) invalid URLs:
+    URL: https://www.oecd.org/pisa/pisaproducts/database-cbapisa2012.htm
+      From: man/australia_PISA2012.Rd
+      Status: 403
+      Message: Forbidden
+
+When visiting it manually, the link works as expected. I believe they have a bot blocker that is causing this error.
 
 
 ## revdepcheck results
 
-We checked 125 reverse dependencies (100 from CRAN + 25 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 158 reverse dependencies (128 from CRAN + 30 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 2 packages
+ * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* egoTERGM    (NA)
-  * Package is archived. I believe this is a false positive
-* loon.ggplot (NA)
-  * Could not install `loon`. The changes made for this release should have a negative effect on their code.
+* fingerPro   (NA) - depends on rjags; Could not install rjags
+* loon.ggplot (NA) - Trying to attached to a null device
+* simmr       (NA) - depends on rjags; Could not install rjags
