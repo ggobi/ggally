@@ -1321,7 +1321,7 @@ ggally_facetbar <- function(data, mapping, ...) {
 #' ) + ggplot2::theme(aspect.ratio = 4 / 2))
 ggally_ratio <- function(
     data,
-    mapping = ggplot2::aes(!!!setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
+    mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
     ...,
     floor = 0,
     ceiling = NULL) {
