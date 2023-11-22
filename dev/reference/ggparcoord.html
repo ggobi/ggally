@@ -18,7 +18,7 @@ the ggplot2 graphics package."><meta name="robots" content="noindex"><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.1.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">2.2.0.9000</span>
       </span>
     </div>
 
@@ -210,41 +210,78 @@ max for each variable (no box is plotted if <code>shadeBox == NULL</code>)</p></
     <div id="details">
     <h2>Details</h2>
     <p><code>scale</code> is a character string that denotes how to scale the variables
-in the parallel coordinate plot. Options:</p><ul><li><p><code>std</code>: univariately, subtract mean and divide by standard deviation</p></li>
-<li><p><code>robust</code>: univariately, subtract median and divide by median absolute deviation</p></li>
-<li><p><code>uniminmax</code>: univariately, scale so the minimum of the variable is zero, and the maximum is one</p></li>
-<li><p><code>globalminmax</code>: no scaling is done; the range of the graphs is defined
-by the global minimum and the global maximum</p></li>
-<li><p><code>center</code>: use <code>uniminmax</code> to standardize vertical height, then
-center each variable at a value specified by the <code>scaleSummary</code> param</p></li>
-<li><p><code>centerObs</code>: use <code>uniminmax</code> to standardize vertical height, then
-center each variable at the value of the observation specified by the <code>centerObsID</code> param</p></li>
-</ul><p><code>missing</code> is a character string that denotes how to handle missing
-missing values. Options:</p><ul><li><p><code>exclude</code>: remove all cases with missing values</p></li>
-<li><p><code>mean</code>: set missing values to the mean of the variable</p></li>
-<li><p><code>median</code>: set missing values to the median of the variable</p></li>
-<li><p><code>min10</code>: set missing values to 10% below the minimum of the variable</p></li>
-<li><p><code>random</code>: set missing values to value of randomly chosen observation on that variable</p></li>
-</ul><p><code>order</code> is either a vector of indices or a character string that denotes how to
-order the axes (variables) of the parallel coordinate plot. Options:</p><ul><li><p><code>(default)</code>: order by the vector denoted by <code>columns</code></p></li>
-<li><p><code>(given vector)</code>: order by the vector specified</p></li>
-<li><p><code>anyClass</code>: order variables by their separation between any one class and
+in the parallel coordinate plot. Options:</p><dl><dt><code>std</code></dt>
+<dd><p>: univariately, subtract mean and divide by standard deviation</p></dd>
+
+<dt><code>robust</code></dt>
+<dd><p>: univariately, subtract median and divide by median absolute deviation</p></dd>
+
+<dt><code>uniminmax</code></dt>
+<dd><p>: univariately, scale so the minimum of the variable is zero, and the maximum is one</p></dd>
+
+<dt><code>globalminmax</code></dt>
+<dd><p>: no scaling is done; the range of the graphs is defined
+by the global minimum and the global maximum</p></dd>
+
+<dt><code>center</code></dt>
+<dd><p>: use <code>uniminmax</code> to standardize vertical height, then
+center each variable at a value specified by the <code>scaleSummary</code> param</p></dd>
+
+<dt><code>centerObs</code></dt>
+<dd><p>: use <code>uniminmax</code> to standardize vertical height, then
+center each variable at the value of the observation specified by the <code>centerObsID</code> param</p></dd>
+
+
+</dl><p><code>missing</code> is a character string that denotes how to handle missing
+missing values. Options:</p><dl><dt><code>exclude</code></dt>
+<dd><p>: remove all cases with missing values</p></dd>
+
+<dt><code>mean</code></dt>
+<dd><p>: set missing values to the mean of the variable</p></dd>
+
+<dt><code>median</code></dt>
+<dd><p>: set missing values to the median of the variable</p></dd>
+
+<dt><code>min10</code></dt>
+<dd><p>: set missing values to 10% below the minimum of the variable</p></dd>
+
+<dt><code>random</code></dt>
+<dd><p>: set missing values to value of randomly chosen observation on that variable</p></dd>
+
+
+</dl><p><code>order</code> is either a vector of indices or a character string that denotes how to
+order the axes (variables) of the parallel coordinate plot. Options:</p><dl><dt><code>(default)</code></dt>
+<dd><p>: order by the vector denoted by <code>columns</code></p></dd>
+
+<dt><code>(given vector)</code></dt>
+<dd><p>: order by the vector specified</p></dd>
+
+<dt><code>anyClass</code></dt>
+<dd><p>: order variables by their separation between any one class and
 the rest (as opposed to their overall variation between classes). This is accomplished
 by calculating the F-statistic for each class vs. the rest, for each axis variable.
 The axis variables are then ordered (decreasing) by their maximum of k F-statistics,
-where k is the number of classes.</p></li>
-<li><p><code>allClass</code>: order variables by their overall F statistic (decreasing) from
+where k is the number of classes.</p></dd>
+
+<dt><code>allClass</code></dt>
+<dd><p>: order variables by their overall F statistic (decreasing) from
 an ANOVA with <code>groupColumn</code> as the explanatory variable (note: it is required
 to specify a <code>groupColumn</code> with this ordering method). Basically, this method
-orders the variables by their variation between classes (most to least).</p></li>
-<li><p><code>skewness</code>: order variables by their sample skewness (most skewed to
-least skewed)</p></li>
-<li><p><code>Outlying</code>: order by the scagnostic measure, Outlying, as calculated
+orders the variables by their variation between classes (most to least).</p></dd>
+
+<dt><code>skewness</code></dt>
+<dd><p>: order variables by their sample skewness (most skewed to
+least skewed)</p></dd>
+
+<dt><code>Outlying</code></dt>
+<dd><p>: order by the scagnostic measure, Outlying, as calculated
 by the package <code>scagnostics</code>. Other scagnostic measures available to order
 by are <code>Skewed</code>, <code>Clumpy</code>, <code>Sparse</code>, <code>Striated</code>, <code>Convex</code>, <code>Skinny</code>, <code>Stringy</code>, and
 <code>Monotonic</code>. Note: To use these methods of ordering, you must have the <code>scagnostics</code>
-package loaded.</p></li>
-</ul></div>
+package loaded.</p></dd>
+
+
+</dl></div>
     <div id="author">
     <h2>Author</h2>
     <p>Jason Crowley, Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham</p>
