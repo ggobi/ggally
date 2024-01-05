@@ -135,18 +135,34 @@ ggmatrix_gtable <- function(
       legend_obj <- legend
     }
 
-    legend_layout <- (pmg_layout[pmg_layout_name == "guide-box", ])[1, ]
+    legend_layout <- pmg_layout[grepl("guide-box", pmg_layout_name), ]
     class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
-    pmg$grobs[[legend_layout$grob_pos]] <- legend_obj
+    index <- legend_layout$grob_pos[match(legend_obj$layout$name, legend_layout$name)]
+    pmg$grobs[index] <- legend_obj$grobs
 
-    legend_position <- ifnull(pm_fake$theme$legend.position, "right")
+    if ("guide-box" %in% legend_layout$name) {
+      legend_position <- ifnull(pm_fake$theme$legend.position, "right")
 
-    if (legend_position %in% c("right", "left")) {
-      pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
-    } else if (legend_position %in% c("top", "bottom")) {
-      pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
+      if (legend_position %in% c("right", "left")) {
+        pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
+      } else if (legend_position %in% c("top", "bottom")) {
+        pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
+      } else {
+        stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
+      }
     } else {
-      stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
+      # From ggplot 3.5.0 onwards, a plot can have multiple legends
+      lr <- intersect(c("guide-box-left", "guide-box-right"), legend_obj$layout$name)
+      if (length(lr) > 0) {
+        width <- legend_obj$widths[legend_obj$layout$l[match(lr, legend_obj$layout$name)]]
+        pmg$widths[legend_layout$l[match(lr, legend_layout$name)]] <- width
+      }
+
+      tb <- intersect(c("guide-box-bottom", "guide-box-right"), legend_obj$layout$name)
+      if (length(tb) > 0) {
+        height <- legend_obj$heights[legend_obj$layout$t[match(tb, legend_obj$layout$name)]]
+        pmg$heights[legend_layout$t[match(tb, legend_layout$name)]] <- height
+      }
     }
   }
 
