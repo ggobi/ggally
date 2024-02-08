@@ -1,6 +1,6 @@
 # GGally (development version)
 
-* Fix compatibility with ggplot2 3.5.0 (#481)
+* Fix compatibility with ggplot2 3.5.0 (@teunbrand, #481)
 
 # GGally 2.2.0
 
