@@ -77,4 +77,4 @@ Encoding: UTF-8
 Language: en-US
 RdMacros: lifecycle
 Remotes:
-    ggplot2
+    tidyverse/ggplot2
