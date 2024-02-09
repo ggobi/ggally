@@ -70,7 +70,7 @@ putPlot <- function(pm, value, i, j) {
 #' p_(plotMatrix2[1, 2])
 getPlot <- function(pm, i, j) {
   if (FALSE) {
-    message("i: ", i, " j: ", j, "\n")
+    cat("i: ", i, " j: ", j, "\n")
   }
 
   pos <- get_pos(pm, i, j)
