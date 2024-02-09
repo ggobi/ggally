@@ -53,13 +53,13 @@
 <text transform='translate(13.05,283.95) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='42.81px' lengthAdjust='spacingAndGlyphs'>Survived</text>
 <rect x='660.26' y='236.24' width='54.26' height='95.41' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <text x='665.74' y='250.43' style='font-size: 11.00px; font-family: sans;' textLength='27.52px' lengthAdjust='spacingAndGlyphs'>Class</text>
-<rect x='665.74' y='257.05' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
+<rect x='665.74' y='257.05' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
 <rect x='665.88' y='257.20' width='17.00' height='17.00' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
-<rect x='665.74' y='274.33' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
+<rect x='665.74' y='274.33' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
 <rect x='665.88' y='274.48' width='17.00' height='17.00' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #7CAE00;' />
-<rect x='665.74' y='291.61' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
+<rect x='665.74' y='291.61' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
 <rect x='665.88' y='291.76' width='17.00' height='17.00' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4;' />
-<rect x='665.74' y='308.89' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
+<rect x='665.74' y='308.89' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
 <rect x='665.88' y='309.04' width='17.00' height='17.00' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #C77CFF;' />
 <text x='688.50' y='268.72' style='font-size: 8.80px; font-family: sans;' textLength='11.74px' lengthAdjust='spacingAndGlyphs'>1st</text>
 <text x='688.50' y='286.00' style='font-size: 8.80px; font-family: sans;' textLength='14.68px' lengthAdjust='spacingAndGlyphs'>2nd</text>
