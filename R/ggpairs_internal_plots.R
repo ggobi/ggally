@@ -124,7 +124,7 @@ wrap_fn_with_param_arg <- function(
     allParams$mapping <- mapping
     argsList <- list(...)
     allParams[names(argsList)] <- argsList
-    # Using do.call causes issues with the poor implementation of ggplot2::scale_y_continuous
+    # Using do.call causes issues with the nonstandard implementation of ggplot2::scale_y_continuous
     # do.call(original_fn, allParams)
     rlang::inject(original_fn(!!!allParams))
   }
