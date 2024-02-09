@@ -1,49 +1,11 @@
 
 ## Comments
-#### 2023-11-22
+#### 2024-02-09
 
-Thank you for being patient with me on my submission.
-
-I have fixed the packageVersion issue by removing the unecessary code: https://github.com/ggobi/ggally/commit/9e7228c6d4219c515857426a982d1a5c1ff0cd13
-
-The update also contains bug fixes and new datasets.
-
-Please let me know if there is anything else I can do to help. Thank you again for your patience!!
+I am updating GGally for support for the latest ggplot2 release.
 
 Best,
 Barret
-
-
-#### 2023-11-07
-
-Can you please change to "3.3"?
-
-Please fix before 2023-11-21 to safely retain your package on CRAN.
-
-Best
--k
-
-
-#### 2023-07-18
-
-[packageVersion() should only compare against strings.]
-
-....
-
-Please correct before 2023-08-16 to safely retain your package on CRAN.
-
-....
-
-Best
--k
-
-**********************************
-
-$GGally
-$GGally$`GGally/R/gg-plots.R`
-$GGally$`GGally/R/gg-plots.R`[[1]]
-packageVersion("ggplot2") >= 3.3
-
 
 
 ## R CMD check results
