@@ -76,6 +76,4 @@ SystemRequirements: openssl
 Encoding: UTF-8
 Language: en-US
 RdMacros: lifecycle
-Remotes:
-    tidyverse/ggplot2@rc/3.5.0
 Config/testthat/edition: 3
