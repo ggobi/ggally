@@ -1,4 +1,3 @@
-context("ggbivariate")
 
 test_that("example", {
   data(tips)

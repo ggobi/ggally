@@ -1,4 +1,3 @@
-context("ggscatmat")
 
 data(flea)
 

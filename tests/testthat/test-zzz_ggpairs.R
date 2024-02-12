@@ -1,4 +1,3 @@
-context("ggpairs")
 # This file takes too long
 testthat::skip_on_cran()
 
@@ -16,18 +15,18 @@ test_that("structure", {
   }
 
   expect_obj <- function(x) {
-    expect_is(x$data, "data.frame")
-    expect_is(x$plots, "list")
-    expect_equivalent(length(x$plots), ncol(tips)^2)
+    expect_s3_class(x$data, "data.frame")
+    expect_type(x$plots, "list")
+    expect_equal(length(x$plots), ncol(tips)^2)
     expect_null(x$title)
     expect_null(x$xlab)
     expect_null(x$ylab)
-    expect_is(x$xAxisLabels, "character")
-    expect_is(x$yAxisLabels, "character")
-    expect_is(x$showXAxisPlotLabels, "logical")
-    expect_is(x$showYAxisPlotLabels, "logical")
+    expect_type(x$xAxisLabels, "character")
+    expect_type(x$yAxisLabels, "character")
+    expect_type(x$showXAxisPlotLabels, "logical")
+    expect_type(x$showYAxisPlotLabels, "logical")
     expect_null(x$legend)
-    expect_is(x$byrow, "logical")
+    expect_type(x$byrow, "logical")
     expect_null(x$gg)
     expect_true("gg" %in% names(x))
   }
@@ -38,11 +37,11 @@ test_that("structure", {
 
 test_that("columns", {
   expect_obj <- function(pm, columnsX, columnsY) {
-    expect_equivalent(length(pm$plots), length(columnsX) * length(columnsY))
-    expect_equivalent(pm$xAxisLabels, columnsX)
-    expect_equivalent(pm$yAxisLabels, columnsY)
-    expect_equivalent(pm$ncol, length(columnsX))
-    expect_equivalent(pm$nrow, length(columnsY))
+    expect_equal(length(pm$plots), length(columnsX) * length(columnsY))
+    expect_equal(pm$xAxisLabels, columnsX)
+    expect_equal(pm$yAxisLabels, columnsY)
+    expect_equal(pm$ncol, length(columnsX))
+    expect_equal(pm$nrow, length(columnsY))
   }
 
   columnsUsed <- c("total_bill", "tip", "sex")
@@ -57,8 +56,8 @@ test_that("columns", {
 
 test_that("column labels", {
   expect_obj <- function(pm, columnLabelsX, columnLabelsY) {
-    expect_equivalent(pm$xAxisLabels, columnLabelsX)
-    expect_equivalent(pm$yAxisLabels, columnLabelsY)
+    expect_equal(pm$xAxisLabels, columnLabelsX)
+    expect_equal(pm$yAxisLabels, columnLabelsY)
   }
 
   columnTitles <- c("A", "B", "C")
@@ -567,7 +566,7 @@ test_that("NA data", {
   expect_is_na_plot <- function(p) {
     expect_true(identical(as.character(p$data$label), "NA"))
     expect_true(inherits(p$layers[[1]]$geom, "GeomText"))
-    expect_equivalent(length(p$layers), 1)
+    expect_equal(length(p$layers), 1)
   }
   expect_not_na_plot <- function(p) {
     expect_false(identical(as.character(p$data$label), "NA"))

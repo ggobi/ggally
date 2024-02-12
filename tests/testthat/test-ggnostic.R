@@ -1,4 +1,3 @@
-context("ggnostic")
 
 test_that("fn_switch", {
   fn1 <- function(data, mapping, ...) {
@@ -82,7 +81,7 @@ test_that("error checking", {
     )
   }
 
-  expect_equivalent(
+  expect_equal(
     get_cols(c(".resid", ".sig", ".hat", ".c")),
     c(".resid", ".sigma", ".hat", ".cooksd")
   )

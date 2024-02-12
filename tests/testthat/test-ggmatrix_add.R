@@ -1,4 +1,3 @@
-context("ggmatrix_add")
 
 data(tips)
 
@@ -9,9 +8,9 @@ test_that("add", {
   expect_true(is.null(pm$xlab))
   expect_true(is.null(pm$ylab))
   pm1 <- pm + labs(title = "my title", x = "x label", y = "y label")
-  expect_equivalent(pm1$title, "my title")
-  expect_equivalent(pm1$xlab, "x label")
-  expect_equivalent(pm1$ylab, "y label")
+  expect_equal(pm1$title, "my title")
+  expect_equal(pm1$xlab, "x label")
+  expect_equal(pm1$ylab, "y label")
 
   expect_true(is.null(pm$gg))
 

@@ -1,4 +1,3 @@
-# context("utils")
 # test_that("require_namespaces", {
 
 #   skip("This test is too error prone")

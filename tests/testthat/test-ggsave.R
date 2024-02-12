@@ -1,4 +1,3 @@
-context("ggsave")
 
 test_that("ggsave", {
   pm <- ggpairs(iris, 1:2)

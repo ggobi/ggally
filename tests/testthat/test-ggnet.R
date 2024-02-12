@@ -1,12 +1,8 @@
-context("ggnet")
 
 if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-rq <- function(...) {
-  suppressMessages(require(..., quietly = TRUE))
-}
 rq(network) # network objects
 rq(sna) # placement and centrality
 
@@ -59,10 +55,15 @@ test_that("examples", {
   expect_warning(ggnet(n, names = c("a", "b")), "deprecated")
 
   # test quantize.weights
-  expect_warning(ggnet(n, quantize.weights = TRUE))
+  with_options(list(warn = 2), {
+    expect_error(ggnet(n, quantize.weights = TRUE))
+  })
+
 
   # test subset.threshold
-  expect_warning(ggnet(n, subset.threshold = 2))
+  suppressMessages({
+    expect_warning(ggnet(n, subset.threshold = 2))
+  })
 
   # test top8.nodes
   expect_warning(ggnet(n, top8.nodes = TRUE))
@@ -155,14 +156,18 @@ test_that("examples", {
   ### --- test weight.min, weight.max and weight.cut
 
   # test weight.min
-  expect_error(ggnet(n, weight = "degree", weight.min = -1), "incorrect weight.min")
-  expect_message(ggnet(n, weight = "degree", weight.min = 1), "weight.min removed")
-  expect_warning(ggnet(n, weight = "degree", weight.min = 99), "removed all nodes")
+  suppressMessages({
+    expect_error(ggnet(n, weight = "degree", weight.min = -1), "incorrect weight.min")
+    expect_message(ggnet(n, weight = "degree", weight.min = 1), "weight.min removed")
+    expect_warning(ggnet(n, weight = "degree", weight.min = 99), "removed all nodes")
+  })
 
   # test weight.max
   expect_error(ggnet(n, weight = "degree", weight.max = -1), "incorrect weight.max")
   expect_message(ggnet(n, weight = "degree", weight.max = 99), "weight.max removed")
-  expect_warning(ggnet(n, weight = 1:10, weight.max = 0.5), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet(n, weight = 1:10, weight.max = 0.5), "removed all nodes")
+  })
   expect_error(ggnet(n, weight = "abc"), "incorrect weight.method")
 
   # test weight.cut
@@ -225,8 +230,7 @@ test_that("examples", {
   expect_error(ggnet(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
-  if (requireNamespace("igraph", quietly = TRUE)) {
-    library(igraph)
+  if (rq(igraph)) {
     # test igraph conversion
     p <- ggnet(asIgraph(n))
     expect_null(p$guides$colour)

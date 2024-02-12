@@ -1,12 +1,8 @@
-context("ggnet2")
 
 if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-rq <- function(...) {
-  require(..., quietly = TRUE)
-}
 rq(network) # network objects
 rq(sna) # placement and centrality
 
@@ -124,7 +120,9 @@ test_that("examples", {
   expect_message(ggnet2(n, na.rm = "missing"), "removed")
 
   n %v% "missing" <- NA
-  expect_warning(ggnet2(n, na.rm = "missing"), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet2(n, na.rm = "missing"), "removed all nodes")
+  })
 
   # test size = "degree"
   ggnet2(n, size = "degree")
@@ -132,14 +130,18 @@ test_that("examples", {
   # test size.min
   expect_error(ggnet2(n, size = "degree", size.min = -1), "incorrect size.min")
   expect_message(ggnet2(n, size = "degree", size.min = 1), "size.min removed")
-  expect_warning(ggnet2(n, size = "abc", size.min = 1), "not numeric")
-  expect_warning(ggnet2(n, size = 4, size.min = 5), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet2(n, size = "abc", size.min = 1), "not numeric")
+    expect_warning(ggnet2(n, size = 4, size.min = 5), "removed all nodes")
+  })
 
   # test size.max
   expect_error(ggnet2(n, size = "degree", size.max = -1), "incorrect size.max")
   expect_message(ggnet2(n, size = "degree", size.max = 99), "size.max removed")
-  expect_warning(ggnet2(n, size = "abc", size.max = 1), "not numeric")
-  expect_warning(ggnet2(n, size = 4, size.max = 3), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet2(n, size = "abc", size.max = 1), "not numeric")
+    expect_warning(ggnet2(n, size = 4, size.max = 3), "removed all nodes")
+  })
 
   # test size.cut
   ggnet2(n, size = 1:10, size.cut = 3)
@@ -259,8 +261,7 @@ test_that("examples", {
   expect_error(ggnet2(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
-  if (requireNamespace("igraph", quietly = TRUE)) {
-    library(igraph)
+  if (rq(igraph)) {
     # test igraph conversion
     p <- ggnet2(asIgraph(n), color = "group")
     expect_null(p$guides$colour)

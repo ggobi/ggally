@@ -1,4 +1,3 @@
-context("stat_prop")
 
 test_that("example", {
   d <- as.data.frame(Titanic)

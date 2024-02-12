@@ -1,4 +1,3 @@
-context("gglyph")
 
 data(nasa)
 nasaLate <- nasa[

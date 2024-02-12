@@ -1,4 +1,3 @@
-context("ggsurv")
 suppressMessages(require(survival))
 suppressMessages(require(scales))
 lung <- survival::lung
@@ -10,8 +9,8 @@ sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
 test_that("single", {
   a <- ggsurv(sf.lung)
 
-  expect_equivalent(mapping_string(a$mapping$x), "time")
-  expect_equivalent(mapping_string(a$mapping$y), "surv")
+  expect_equal(mapping_string(a$mapping$x), "time")
+  expect_equal(mapping_string(a$mapping$y), "surv")
 
   expect_true(is.null(a$labels$group))
   expect_true(is.null(a$labels$colour))
@@ -21,8 +20,8 @@ test_that("single", {
 test_that("multiple", {
   a <- ggsurv(sf.kid)
 
-  expect_equivalent(mapping_string(a$mapping$x), "time")
-  expect_equivalent(mapping_string(a$mapping$y), "surv")
+  expect_equal(mapping_string(a$mapping$x), "time")
+  expect_equal(mapping_string(a$mapping$y), "surv")
 
   expect_true(!is.null(a$labels$group))
   expect_true(!is.null(a$labels$colour))
@@ -31,10 +30,10 @@ test_that("multiple", {
 
 test_that("adjust plot", {
   a <- ggsurv(sf.kid, plot.cens = FALSE)
-  expect_equivalent(length(a$layers), 1)
+  expect_equal(length(a$layers), 1)
 
   a <- ggsurv(sf.kid, plot.cens = TRUE)
-  expect_equivalent(length(a$layers), 2)
+  expect_equal(length(a$layers), 2)
 })
 
 test_that("stops", {
@@ -101,11 +100,11 @@ test_that("surv.col", {
 test_that("CI", {
   a <- ggsurv(sf.lung, CI = FALSE)
   b <- ggsurv(sf.lung, CI = TRUE)
-  expect_equivalent(length(b$layers) - length(a$layers), 2)
+  expect_equal(length(b$layers) - length(a$layers), 2)
 
   a <- ggsurv(sf.kid, CI = FALSE)
   b <- ggsurv(sf.kid, CI = TRUE)
-  expect_equivalent(length(b$layers) - length(a$layers), 2)
+  expect_equal(length(b$layers) - length(a$layers), 2)
 })
 
 test_that("multiple colors", {

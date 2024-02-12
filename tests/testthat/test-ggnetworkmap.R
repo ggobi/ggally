@@ -1,12 +1,8 @@
-context("ggnetworkmap")
 
 if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-rq <- function(...) {
-  suppressWarnings(require(..., quietly = TRUE))
-}
 skip_if(!rq(network))
 skip_if(!rq(sna))
 skip_if(!rq(maps))
@@ -224,12 +220,9 @@ test_that("network coercion", {
 ### --- test igraph functionality
 
 test_that("igraph conversion", {
-  if (requireNamespace("igraph", quietly = TRUE)) {
-    library(igraph)
+  if (rq(igraph)) {
     n <- asIgraph(flights)
     p <- ggnetworkmap(net = n)
     expect_equal(length(p$layers), 2)
   }
 })
-
-expect_true(TRUE)
