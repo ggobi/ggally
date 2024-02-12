@@ -1,4 +1,3 @@
-context("ggparcoord")
 
 set.seed(123)
 data(diamonds, package = "ggplot2")
@@ -119,7 +118,7 @@ test_that("alphaLines", {
     alphaLines = "alphaLevel"
   )
   expect_equal(length(p$layers), 2)
-  expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$alpha), "alphaLevel")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[1]])$alpha), "alphaLevel")
 })
 
 test_that("splineFactor", {
@@ -130,8 +129,8 @@ test_that("splineFactor", {
 
   pList <- list(p1, p2)
   for (p in pList) {
-    expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$x), "spline.x")
-    expect_equivalent(mapping_string(get("mapping", envir = p$layers[[1]])$y), "spline.y")
+    expect_equal(mapping_string(get("mapping", envir = p$layers[[1]])$x), "spline.x")
+    expect_equal(mapping_string(get("mapping", envir = p$layers[[1]])$y), "spline.y")
 
     tmp <- unique(as.numeric(get("data", envir = p$layers[[1]])$ggally_splineFactor))
     expect_true((tmp == 3) || (tmp == 21))

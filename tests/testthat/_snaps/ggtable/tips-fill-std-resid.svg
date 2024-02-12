@@ -18,7 +18,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+<rect x='0.000000000000064' y='0.00' width='720.00' height='576.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
 </g>
 <defs>
   <clipPath id='cpMzkuNzZ8NjM0LjM3fDIyLjEzfDI4NC40NA=='>
@@ -52,6 +52,10 @@
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
+<g clip-path='url(#cpMzkuNzZ8NjM0LjM3fDIyLjEzfDI4NC40NA==)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
 <defs>
   <clipPath id='cpMzkuNzZ8NjM0LjM3fDI4OS45Mnw0MjEuMDc='>
     <rect x='39.76' y='289.92' width='594.62' height='131.15' />
@@ -74,6 +78,10 @@
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
+<g clip-path='url(#cpMzkuNzZ8NjM0LjM3fDI4OS45Mnw0MjEuMDc=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
 <defs>
   <clipPath id='cpMzkuNzZ8NjM0LjM3fDQyNi41NXw1NTcuNzE='>
     <rect x='39.76' y='426.55' width='594.62' height='131.15' />
@@ -93,6 +101,10 @@
 <text x='188.41' y='463.14' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>97</text>
 <text x='485.72' y='528.72' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>33</text>
 <text x='485.72' y='463.14' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='12.28px' lengthAdjust='spacingAndGlyphs'>60</text>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<g clip-path='url(#cpMzkuNzZ8NjM0LjM3fDQyNi41NXw1NTcuNzE=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
@@ -150,6 +162,7 @@
 <text x='34.83' y='527.95' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='29.35px' lengthAdjust='spacingAndGlyphs'>Female</text>
 <text x='34.83' y='462.37' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='19.08px' lengthAdjust='spacingAndGlyphs'>Male</text>
 <rect x='661.98' y='233.57' width='52.54' height='112.69' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='667.46' y='247.76' style='font-size: 11.00px; font-family: sans;' textLength='41.58px' lengthAdjust='spacingAndGlyphs'>std.resid</text>
 <rect x='667.46' y='323.50' width='17.28' height='17.28' style='stroke-width: 0.75; stroke: none; fill: #933D38;' />
 <rect x='667.46' y='306.22' width='17.28' height='17.28' style='stroke-width: 0.75; stroke: none; fill: #B46F68;' />
 <rect x='667.46' y='288.94' width='17.28' height='17.28' style='stroke-width: 0.75; stroke: none; fill: #FFFFFF;' />
@@ -159,6 +172,5 @@
 <text x='690.22' y='309.25' style='font-size: 8.80px; font-family: sans;' textLength='7.82px' lengthAdjust='spacingAndGlyphs'>-2</text>
 <text x='690.22' y='291.97' style='font-size: 8.80px; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>2</text>
 <text x='690.22' y='274.69' style='font-size: 8.80px; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='667.46' y='247.76' style='font-size: 11.00px; font-family: sans;' textLength='41.58px' lengthAdjust='spacingAndGlyphs'>std.resid</text>
 </g>
 </svg>

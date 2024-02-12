@@ -1,4 +1,3 @@
-context("gglegend")
 library(ggplot2)
 
 test_that("examples", {

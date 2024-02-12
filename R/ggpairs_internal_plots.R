@@ -124,7 +124,7 @@ wrap_fn_with_param_arg <- function(
     allParams$mapping <- mapping
     argsList <- list(...)
     allParams[names(argsList)] <- argsList
-    do.call(original_fn, allParams)
+    rlang::inject(original_fn(!!!allParams))
   }
 
   class(ret_fn) <- "ggmatrix_fn_with_params"
@@ -166,6 +166,7 @@ wrap <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
 wrap_fn_with_params <- wrap
 
 
+#' @export
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
   params <- attr(x, "params")
   fnName <- attr(x, "name")
@@ -220,6 +221,7 @@ mapping_as_string <- function(mapping) {
   str_c("c(", str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
 }
 
+#' @export
 as.character.ggmatrix_plot_obj <- function(x, ...) {
   hasGg <- (!is.null(x$gg))
   mappingTxt <- mapping_as_string(x$mapping)

@@ -1,4 +1,3 @@
-context("ggtable")
 
 suppressMessages(require(broom))
 

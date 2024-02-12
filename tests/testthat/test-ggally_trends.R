@@ -1,4 +1,3 @@
-context("stat_weighted_mean")
 
 test_that("example", {
   data(tips)

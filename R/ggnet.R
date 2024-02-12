@@ -386,7 +386,7 @@ ggnet <- function(
 
       y = ifelse(is_dir == "digraph", "directed", "undirected")
       z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[x]
-      data$weight = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
+      data$weight = igraph::degree(igraph_graph_adjacency_matrix(as.matrix(net), mode = y), mode = z)
 
     } else {
       data$weight = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
@@ -735,4 +735,13 @@ ggnet <- function(
 
   return(p)
 
+}
+
+
+igraph_graph_adjacency_matrix <- function(...) {
+  if (packageVersion("igraph") >= "2.0.0") {
+    igraph::graph_from_adjacency_matrix(...)
+  } else {
+    igraph::graph.adjacency(...)
+  }
 }
