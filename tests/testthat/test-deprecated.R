@@ -1,4 +1,3 @@
-context("deprecated")
 
 data(tips)
 

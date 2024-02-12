@@ -1,5 +1,4 @@
 
-context("ggmatrix")
 data(tips)
 
 test_that("stops", {

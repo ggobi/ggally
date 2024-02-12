@@ -7,5 +7,5 @@ test_that("all vignetts are accounted for", {
 
   vigs <- dir(vig_dir, pattern = "\\.Rmd$")
   vigs <- sub(".Rmd", "", vigs, fixed = TRUE)
-  expect_equal(vignettes_for_ggally, vigs)
+  expect_setequal(vignettes_for_ggally, vigs)
 })

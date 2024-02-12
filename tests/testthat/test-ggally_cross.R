@@ -1,4 +1,3 @@
-context("ggally_cross")
 
 test_that("example", {
   # ggally_cross

@@ -1,4 +1,3 @@
-context("ggmatrix_getput")
 
 data(tips)
 

@@ -1,4 +1,3 @@
-context("ggfacet")
 
 skip_if_not_installed("chemometrics")
 
