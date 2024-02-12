@@ -400,12 +400,14 @@ it corresponds to <strong>x</strong> or to <strong>y</strong>.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; Warning: Removed 45 rows containing missing values (`geom_bar()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 45 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_bar()`).</span></span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggally_denstrip.html">ggally_denstrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; Warning: Removed 45 rows containing missing values (`geom_bar()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 45 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_bar()`).</span></span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-20-2.png" width="700"></p>
 </div>
 <div class="section level4">
@@ -436,7 +438,8 @@ it corresponds to <strong>x</strong> or to <strong>y</strong>.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggally_facetdensitystrip.html">ggally_facetdensitystrip</a></span><span class="op">(</span><span class="va">tips</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">total_bill</span>, y <span class="op">=</span> <span class="va">day</span>, colour <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Groups with fewer than two data points have been dropped.</span></span>
-<span><span class="co">#&gt; Warning: Removed 1 row containing missing values (`geom_line()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 1 row containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_line()`).</span></span></code></pre></div>
 <p><img src="ggally_plots_files/figure-html/unnamed-chunk-22-2.png" width="700"></p>
 </div>
 <div class="section level4">
