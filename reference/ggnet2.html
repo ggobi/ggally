@@ -21,7 +21,7 @@ that contains many examples and explanations."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GGally</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1</span>
       </span>
     </div>
 
@@ -529,16 +529,16 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class="r-in"><span><span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/row.html" class="external-link">row</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/col.html" class="external-link">col</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">ndyads</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">density</span></span></span>
 <span class="r-in"><span><span class="va">m</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   a b c d e f g h i j</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a 0 0 0 0 0 0 1 0 1 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b 0 0 0 0 0 0 0 0 1 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c 0 0 0 0 0 1 0 0 1 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> d 0 0 0 0 0 1 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> e 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f 0 0 0 0 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a 0 0 1 0 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b 0 0 1 0 0 0 0 1 1 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c 1 0 0 0 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d 0 0 0 0 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e 0 0 0 1 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f 1 0 0 1 0 0 0 0 0 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> g 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> h 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i 0 0 0 0 0 1 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j 1 0 0 0 0 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> h 0 0 0 0 1 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> i 1 0 0 0 1 0 0 0 0 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> j 1 0 0 0 0 0 0 0 1 0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># random undirected network</span></span></span>
 <span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu">network</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -550,9 +550,9 @@ Pedro Jordano and Ming-Yu Liu</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   loops = FALSE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   multiple = FALSE </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   bipartite = FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   total edges= 9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   total edges= 12 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     missing edges= 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     non-missing edges= 9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     non-missing edges= 12 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Vertex attribute names: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vertex.names </span>
