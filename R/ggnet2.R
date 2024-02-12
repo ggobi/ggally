@@ -505,7 +505,7 @@ ggnet2 <- function(
 
       y = ifelse(is_dir == "digraph", "directed", "undirected")
       z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[x]
-      data$size = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
+      data$size = igraph::degree(igraph_graph_adjacency_matrix(as.matrix(net), mode = y), mode = z)
 
     } else {
       data$size = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
