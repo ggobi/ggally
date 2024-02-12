@@ -261,7 +261,7 @@ test_that("examples", {
   expect_error(ggnet2(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
-  if (rq(igraph)) {
+  if (rq(igraph) && rq(intergraph)) {
     # test igraph conversion
     p <- ggnet2(asIgraph(n), color = "group")
     expect_null(p$guides$colour)
