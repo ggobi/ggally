@@ -1,6 +1,6 @@
 
 ## Comments
-#### 2024-02-12
+#### 2024-02-13
 
 I am updating GGally for support for the latest ggplot2 release.
 
@@ -12,6 +12,7 @@ Barret
 
 * 0 errors | 0 warnings | 1 note
 
+* checking CRAN incoming feasibility ... [11s] NOTE
   Maintainer: ‘Barret Schloerke <schloerke@gmail.com>’
 
   Found the following (possibly) invalid URLs:
@@ -25,15 +26,17 @@ When visiting the link manually, the link works as expected. I believe they have
 
 ## revdepcheck results
 
-We checked 158 reverse dependencies (128 from CRAN + 30 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 159 reverse dependencies (128 from CRAN + 31 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 3 packages
+ * We failed to check 5 packages
 
 Issues with CRAN packages are summarised below.
 
-### Failed to check
+### Failed to check packages below due to installation compilation errors
 
-* fingerPro   (NA) - depends on rjags; Could not install rjags
-* loon.ggplot (NA) - Trying to attached to a null device
-* simmr       (NA) - depends on rjags; Could not install rjags
+* airGR
+* fingerPro
+* loon.ggplot
+* robustbase
+* simmr

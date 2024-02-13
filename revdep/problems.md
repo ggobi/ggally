@@ -6,7 +6,7 @@
 * GitHub: NA
 * Source code: https://github.com/cran/adventr
 * Date/Publication: 2020-05-05 16:50:06 UTC
-* Number of recursive dependencies: 160
+* Number of recursive dependencies: 165
 
 Run `revdepcheck::revdep_details(, "adventr")` for more info
 
@@ -18,7 +18,7 @@ Run `revdepcheck::revdep_details(, "adventr")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘learnr’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/adventr/new/adventr.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/adventr/new/adventr.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -37,6 +37,84 @@ Run `revdepcheck::revdep_details(, "adventr")` for more info
       All declared Imports should be used.
     ```
 
+# airGR
+
+<details>
+
+* Version: 1.7.6
+* GitHub: NA
+* Source code: https://github.com/cran/airGR
+* Date/Publication: 2023-10-26 07:30:05 UTC
+* Number of recursive dependencies: 110
+
+Run `revdepcheck::revdep_details(, "airGR")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘airGR’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/ggally/revdep/checks.noindex/airGR/new/airGR.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘airGR’ ...
+** package ‘airGR’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+sh: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+using SDK: ‘MacOSX14.2.sdk’
+clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c airGR.c -o airGR.o
+/opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran  -fPIC  -Wall -g -O2  -c  frun_CEMANEIGE.f90 -o frun_CEMANEIGE.o
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+...
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+make: *** [frun_CEMANEIGE.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [frun_GR4H.o] Error 1
+make: *** [frun_GR2M.o] Error 1
+make: *** [frun_GR1A.o] Error 1
+make: *** [frun_GR4J.o] Error 1
+make: *** [frun_GR5H.o] Error 1
+ERROR: compilation failed for package ‘airGR’
+* removing ‘/ggally/revdep/checks.noindex/airGR/new/airGR.Rcheck/airGR’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘airGR’ ...
+** package ‘airGR’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+sh: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+using SDK: ‘MacOSX14.2.sdk’
+clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c airGR.c -o airGR.o
+/opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran  -fPIC  -Wall -g -O2  -c  frun_CEMANEIGE.f90 -o frun_CEMANEIGE.o
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+...
+make: *** Waiting for unfinished jobs....
+make: *** [frun_GR1A.o] Error 1
+make: *** [frun_GR2M.o] Error 1
+make: *** [frun_GR4H.o] Error 1
+make: *** [frun_GR5H.o] Error 1
+make: *** [frun_GR4J.o] Error 1
+make: *** [frun_GR6J.o] Error 1
+make: *** [frun_GR5J.o] Error 1
+ERROR: compilation failed for package ‘airGR’
+* removing ‘/ggally/revdep/checks.noindex/airGR/old/airGR.Rcheck/airGR’
+
+
+```
 # alevinQC
 
 <details>
@@ -45,7 +123,7 @@ Run `revdepcheck::revdep_details(, "adventr")` for more info
 * GitHub: https://github.com/csoneson/alevinQC
 * Source code: https://github.com/cran/alevinQC
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 98
+* Number of recursive dependencies: 110
 
 Run `revdepcheck::revdep_details(, "alevinQC")` for more info
 
@@ -65,6 +143,29 @@ Run `revdepcheck::revdep_details(, "alevinQC")` for more info
         extdata  19.2Mb
     ```
 
+# AlpsNMR
+
+<details>
+
+* Version: 4.4.0
+* GitHub: https://github.com/sipss/AlpsNMR
+* Source code: https://github.com/cran/AlpsNMR
+* Date/Publication: 2023-10-24
+* Number of recursive dependencies: 187
+
+Run `revdepcheck::revdep_details(, "AlpsNMR")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘AlpsNMR’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘future’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/AlpsNMR/new/AlpsNMR.Rcheck/00install.out’ for details.
+    ```
+
 # AntMAN
 
 <details>
@@ -73,13 +174,20 @@ Run `revdepcheck::revdep_details(, "alevinQC")` for more info
 * GitHub: https://github.com/bbodin/AntMAN
 * Source code: https://github.com/cran/AntMAN
 * Date/Publication: 2021-07-23 10:00:02 UTC
-* Number of recursive dependencies: 69
+* Number of recursive dependencies: 80
 
 Run `revdepcheck::revdep_details(, "AntMAN")` for more info
 
 </details>
 
 ## In both
+
+*   checking whether package ‘AntMAN’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘mvtnorm’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/AntMAN/new/AntMAN.Rcheck/00install.out’ for details.
+    ```
 
 *   checking C++ specification ... NOTE
     ```
@@ -101,7 +209,7 @@ Run `revdepcheck::revdep_details(, "AntMAN")` for more info
 * GitHub: https://github.com/sndmrc/BasketballAnalyzeR
 * Source code: https://github.com/cran/BasketballAnalyzeR
 * Date/Publication: 2020-06-26 09:00:11 UTC
-* Number of recursive dependencies: 79
+* Number of recursive dependencies: 86
 
 Run `revdepcheck::revdep_details(, "BasketballAnalyzeR")` for more info
 
@@ -113,7 +221,7 @@ Run `revdepcheck::revdep_details(, "BasketballAnalyzeR")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/BasketballAnalyzeR/new/BasketballAnalyzeR.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/BasketballAnalyzeR/new/BasketballAnalyzeR.Rcheck/00install.out’ for details.
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -131,7 +239,7 @@ Run `revdepcheck::revdep_details(, "BasketballAnalyzeR")` for more info
 * GitHub: https://github.com/ZarnackGroup/BindingSiteFinder
 * Source code: https://github.com/cran/BindingSiteFinder
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 213
+* Number of recursive dependencies: 218
 
 Run `revdepcheck::revdep_details(, "BindingSiteFinder")` for more info
 
@@ -144,10 +252,10 @@ Run `revdepcheck::revdep_details(, "BindingSiteFinder")` for more info
     Found the following significant warnings:
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
-    See ‘ggally/revdep/checks.noindex/BindingSiteFinder/new/BindingSiteFinder.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/BindingSiteFinder/new/BindingSiteFinder.Rcheck/00install.out’ for details.
     ```
 
 # bootcluster
@@ -158,7 +266,7 @@ Run `revdepcheck::revdep_details(, "BindingSiteFinder")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/bootcluster
 * Date/Publication: 2022-01-29 22:50:03 UTC
-* Number of recursive dependencies: 69
+* Number of recursive dependencies: 82
 
 Run `revdepcheck::revdep_details(, "bootcluster")` for more info
 
@@ -172,6 +280,54 @@ Run `revdepcheck::revdep_details(, "bootcluster")` for more info
       All declared Imports should be used.
     ```
 
+# CARBayes
+
+<details>
+
+* Version: 6.1
+* GitHub: https://github.com/duncanplee/CARBayes
+* Source code: https://github.com/cran/CARBayes
+* Date/Publication: 2023-11-17 11:40:11 UTC
+* Number of recursive dependencies: 139
+
+Run `revdepcheck::revdep_details(, "CARBayes")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘CARBayes’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘MASS’ was built under R version 4.3.1
+      Warning: package ‘Rcpp’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/CARBayes/new/CARBayes.Rcheck/00install.out’ for details.
+    ```
+
+# CARBayesST
+
+<details>
+
+* Version: 4.0
+* GitHub: https://github.com/duncanplee/CARBayesST
+* Source code: https://github.com/cran/CARBayesST
+* Date/Publication: 2023-10-30 16:40:02 UTC
+* Number of recursive dependencies: 119
+
+Run `revdepcheck::revdep_details(, "CARBayesST")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘CARBayesST’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘MASS’ was built under R version 4.3.1
+      Warning: package ‘Rcpp’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/CARBayesST/new/CARBayesST.Rcheck/00install.out’ for details.
+    ```
+
 # CeTF
 
 <details>
@@ -180,7 +336,7 @@ Run `revdepcheck::revdep_details(, "bootcluster")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/CeTF
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 226
+* Number of recursive dependencies: 230
 
 Run `revdepcheck::revdep_details(, "CeTF")` for more info
 
@@ -204,7 +360,7 @@ Run `revdepcheck::revdep_details(, "CeTF")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/CINNA
 * Date/Publication: 2023-08-08 16:40:02 UTC
-* Number of recursive dependencies: 139
+* Number of recursive dependencies: 149
 
 Run `revdepcheck::revdep_details(, "CINNA")` for more info
 
@@ -227,7 +383,7 @@ Run `revdepcheck::revdep_details(, "CINNA")` for more info
 * GitHub: https://github.com/tdepke/CluMSID
 * Source code: https://github.com/cran/CluMSID
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 190
+* Number of recursive dependencies: 195
 
 Run `revdepcheck::revdep_details(, "CluMSID")` for more info
 
@@ -239,7 +395,7 @@ Run `revdepcheck::revdep_details(, "CluMSID")` for more info
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘dbscan::as.dendrogram’ by ‘stats::as.dendrogram’ when loading ‘CluMSID’
-    See ‘ggally/revdep/checks.noindex/CluMSID/new/CluMSID.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/CluMSID/new/CluMSID.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -257,7 +413,7 @@ Run `revdepcheck::revdep_details(, "CluMSID")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/clustrd
 * Date/Publication: 2022-07-16 23:20:06 UTC
-* Number of recursive dependencies: 63
+* Number of recursive dependencies: 76
 
 Run `revdepcheck::revdep_details(, "clustrd")` for more info
 
@@ -269,7 +425,7 @@ Run `revdepcheck::revdep_details(, "clustrd")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/clustrd/new/clustrd.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/clustrd/new/clustrd.Rcheck/00install.out’ for details.
     ```
 
 # communication
@@ -280,7 +436,7 @@ Run `revdepcheck::revdep_details(, "clustrd")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/communication
 * Date/Publication: 2021-02-25 09:20:02 UTC
-* Number of recursive dependencies: 96
+* Number of recursive dependencies: 108
 
 Run `revdepcheck::revdep_details(, "communication")` for more info
 
@@ -309,7 +465,7 @@ Run `revdepcheck::revdep_details(, "communication")` for more info
 * GitHub: https://github.com/azizka/conserveR
 * Source code: https://github.com/cran/conserveR
 * Date/Publication: 2021-08-02 09:10:06 UTC
-* Number of recursive dependencies: 51
+* Number of recursive dependencies: 64
 
 Run `revdepcheck::revdep_details(, "conserveR")` for more info
 
@@ -337,7 +493,7 @@ Run `revdepcheck::revdep_details(, "conserveR")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/corrViz
 * Date/Publication: 2023-06-30 11:40:07 UTC
-* Number of recursive dependencies: 116
+* Number of recursive dependencies: 128
 
 Run `revdepcheck::revdep_details(, "corrViz")` for more info
 
@@ -352,6 +508,29 @@ Run `revdepcheck::revdep_details(, "corrViz")` for more info
         doc   6.7Mb
     ```
 
+# coveffectsplot
+
+<details>
+
+* Version: 1.0.5
+* GitHub: https://github.com/smouksassi/coveffectsplot
+* Source code: https://github.com/cran/coveffectsplot
+* Date/Publication: 2024-01-18 14:10:02 UTC
+* Number of recursive dependencies: 149
+
+Run `revdepcheck::revdep_details(, "coveffectsplot")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘coveffectsplot’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘data.table’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/coveffectsplot/new/coveffectsplot.Rcheck/00install.out’ for details.
+    ```
+
 # covsim
 
 <details>
@@ -360,7 +539,7 @@ Run `revdepcheck::revdep_details(, "corrViz")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/covsim
 * Date/Publication: 2022-04-29 22:40:09 UTC
-* Number of recursive dependencies: 95
+* Number of recursive dependencies: 107
 
 Run `revdepcheck::revdep_details(, "covsim")` for more info
 
@@ -383,7 +562,7 @@ Run `revdepcheck::revdep_details(, "covsim")` for more info
 * GitHub: https://github.com/fomotis/cyanoFilter
 * Source code: https://github.com/cran/cyanoFilter
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 136
+* Number of recursive dependencies: 146
 
 Run `revdepcheck::revdep_details(, "cyanoFilter")` for more info
 
@@ -407,7 +586,7 @@ Run `revdepcheck::revdep_details(, "cyanoFilter")` for more info
 * GitHub: https://github.com/nicolas-robette/descriptio
 * Source code: https://github.com/cran/descriptio
 * Date/Publication: 2023-10-05 12:50:02 UTC
-* Number of recursive dependencies: 86
+* Number of recursive dependencies: 98
 
 Run `revdepcheck::revdep_details(, "descriptio")` for more info
 
@@ -428,7 +607,7 @@ Run `revdepcheck::revdep_details(, "descriptio")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/fect
 * Date/Publication: 2022-10-14 09:52:32 UTC
-* Number of recursive dependencies: 67
+* Number of recursive dependencies: 81
 
 Run `revdepcheck::revdep_details(, "fect")` for more info
 
@@ -455,7 +634,7 @@ Run `revdepcheck::revdep_details(, "fect")` for more info
 * GitHub: https://github.com/chjackson/fic
 * Source code: https://github.com/cran/fic
 * Date/Publication: 2019-04-13 08:32:39 UTC
-* Number of recursive dependencies: 107
+* Number of recursive dependencies: 119
 
 Run `revdepcheck::revdep_details(, "fic")` for more info
 
@@ -477,7 +656,7 @@ Run `revdepcheck::revdep_details(, "fic")` for more info
 * GitHub: https://github.com/ewenharrison/finalfit
 * Source code: https://github.com/cran/finalfit
 * Date/Publication: 2023-11-16 17:40:02 UTC
-* Number of recursive dependencies: 169
+* Number of recursive dependencies: 172
 
 Run `revdepcheck::revdep_details(, "finalfit")` for more info
 
@@ -506,7 +685,7 @@ Run `revdepcheck::revdep_details(, "finalfit")` for more info
 * GitHub: https://github.com/NA/NA
 * Source code: https://github.com/cran/fingerPro
 * Date/Publication: 2018-08-28 10:04:54 UTC
-* Number of recursive dependencies: 158
+* Number of recursive dependencies: 161
 
 Run `revdepcheck::revdep_details(, "fingerPro")` for more info
 
@@ -517,7 +696,7 @@ Run `revdepcheck::revdep_details(, "fingerPro")` for more info
 *   checking whether package ‘fingerPro’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘ggally/revdep/checks.noindex/fingerPro/new/fingerPro.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/fingerPro/new/fingerPro.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -529,23 +708,23 @@ Run `revdepcheck::revdep_details(, "fingerPro")` for more info
 ** package ‘fingerPro’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
-using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.0.40.1)’
-using SDK: ‘MacOSX14.0.sdk’
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c fingerprinting.cpp -o fingerprinting.o
+using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+using SDK: ‘MacOSX14.2.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'/ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'/ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'/ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'/ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c fingerprinting.cpp -o fingerprinting.o
 In file included from RcppExports.cpp:4:
-In file included from ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
+In file included from /ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
 ...
 make: *** Waiting for unfinished jobs....
 In file included from fingerprinting.cpp:5:
-In file included from ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
-ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSLForward.h:25:10: fatal error: 'gsl/gsl_vector.h' file not found
+In file included from /ggally//ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
+/ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSLForward.h:25:10: fatal error: 'gsl/gsl_vector.h' file not found
 #include <gsl/gsl_vector.h>
          ^~~~~~~~~~~~~~~~~~
 1 error generated.
 make: *** [fingerprinting.o] Error 1
 ERROR: compilation failed for package ‘fingerPro’
-* removing ‘ggally/revdep/checks.noindex/fingerPro/new/fingerPro.Rcheck/fingerPro’
+* removing ‘/ggally/revdep/checks.noindex/fingerPro/new/fingerPro.Rcheck/fingerPro’
 
 
 ```
@@ -556,26 +735,49 @@ ERROR: compilation failed for package ‘fingerPro’
 ** package ‘fingerPro’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
-using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.0.40.1)’
-using SDK: ‘MacOSX14.0.sdk’
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c fingerprinting.cpp -o fingerprinting.o
+using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+using SDK: ‘MacOSX14.2.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally//ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'/ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'/ggally//ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally/revdep/library.noindex/fingerPro/Rcpp/include' -I'/ggally/revdep/library.noindex/fingerPro/RcppGSL/include' -I'/ggally/revdep/library.noindex/fingerPro/RcppProgress/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c fingerprinting.cpp -o fingerprinting.o
 In file included from RcppExports.cpp:4:
-In file included from ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
+In file included from /ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
 ...
-In file included from ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
-ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSLForward.h:25:10: fatal error: 'gsl/gsl_vector.h' file not found
+make: *** Waiting for unfinished jobs....
+In file included from fingerprinting.cpp:5:
+In file included from /ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSL.h:25:
+/ggally/revdep/library.noindex/fingerPro/RcppGSL/include/RcppGSLForward.h:25:10: fatal error: 'gsl/gsl_vector.h' file not found
 #include <gsl/gsl_vector.h>
          ^~~~~~~~~~~~~~~~~~
-make: *** [RcppExports.o] Error 1
-make: *** Waiting for unfinished jobs....
 1 error generated.
 make: *** [fingerprinting.o] Error 1
 ERROR: compilation failed for package ‘fingerPro’
-* removing ‘ggally/revdep/checks.noindex/fingerPro/old/fingerPro.Rcheck/fingerPro’
+* removing ‘/ggally/revdep/checks.noindex/fingerPro/old/fingerPro.Rcheck/fingerPro’
 
 
 ```
+# FPDclustering
+
+<details>
+
+* Version: 2.3.1
+* GitHub: NA
+* Source code: https://github.com/cran/FPDclustering
+* Date/Publication: 2024-01-30 00:10:06 UTC
+* Number of recursive dependencies: 104
+
+Run `revdepcheck::revdep_details(, "FPDclustering")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘FPDclustering’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘mvtnorm’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/FPDclustering/new/FPDclustering.Rcheck/00install.out’ for details.
+    ```
+
 # fpp2
 
 <details>
@@ -584,7 +786,7 @@ ERROR: compilation failed for package ‘fingerPro’
 * GitHub: https://github.com/robjhyndman/fpp2-package
 * Source code: https://github.com/cran/fpp2
 * Date/Publication: 2023-02-19 07:30:02 UTC
-* Number of recursive dependencies: 70
+* Number of recursive dependencies: 83
 
 Run `revdepcheck::revdep_details(, "fpp2")` for more info
 
@@ -596,7 +798,7 @@ Run `revdepcheck::revdep_details(, "fpp2")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/fpp2/new/fpp2.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/fpp2/new/fpp2.Rcheck/00install.out’ for details.
     ```
 
 # freqparcoord
@@ -607,7 +809,7 @@ Run `revdepcheck::revdep_details(, "fpp2")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/freqparcoord
 * Date/Publication: 2016-01-17 10:59:33
-* Number of recursive dependencies: 47
+* Number of recursive dependencies: 60
 
 Run `revdepcheck::revdep_details(, "freqparcoord")` for more info
 
@@ -619,7 +821,9 @@ Run `revdepcheck::revdep_details(, "freqparcoord")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/freqparcoord/new/freqparcoord.Rcheck/00install.out’ for details.
+      Warning: package ‘FNN’ was built under R version 4.3.1
+      Warning: package ‘mvtnorm’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/freqparcoord/new/freqparcoord.Rcheck/00install.out’ for details.
     ```
 
 # gatom
@@ -630,66 +834,13 @@ Run `revdepcheck::revdep_details(, "freqparcoord")` for more info
 * GitHub: https://github.com/ctlab/gatom
 * Source code: https://github.com/cran/gatom
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 144
+* Number of recursive dependencies: 150
 
 Run `revdepcheck::revdep_details(, "gatom")` for more info
 
 </details>
 
 ## In both
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘gatom-Ex.R’ failed
-    The error most likely occurred in:
-
-    > ### Name: makeOrgGatomAnnotation
-    > ### Title: Create an organism annotation object for network analysis
-    > ### Aliases: makeOrgGatomAnnotation
-    >
-    > ### ** Examples
-    >
-    > library(org.Mm.eg.db)
-    ...
-    > org.Mm.eg.gatom.anno <- makeOrgGatomAnnotation(org.db = org.Mm.eg.db)
-    'select()' returned 1:1 mapping between keys and columns
-    'select()' returned 1:many mapping between keys and columns
-    'select()' returned 1:many mapping between keys and columns
-    'select()' returned 1:many mapping between keys and columns
-    'select()' returned 1:1 mapping between keys and columns
-    Error in h(simpleError(msg, call)) :
-      error in evaluating the argument 'object' in selecting a method for function 'na.omit': error in evaluating the argument 'x' in selecting a method for function 'select': there is no package called ‘reactome.db’
-    Calls: makeOrgGatomAnnotation ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-      Running ‘testthat.R’
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        1. ├─gatom:::getMetabolicPathways(universe, metGenes, keggOrgCode = "mmu") at test_annotation.R:18:5
-        2. │ ├─stats::na.omit(...)
-        3. │ └─AnnotationDbi::select(...)
-        4. ├─base::loadNamespace(x)
-        5. │ ├─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-        6. │ │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        7. │ │   └─base (local) doWithOneRestart(return(expr), restart)
-        8. │ └─base::stop(cond)
-        9. ├─base (local) `<fn>`(`<pckgNtFE>`)
-       10. └─base::.handleSimpleError(...)
-       11.   └─base (local) h(simpleError(msg, call))
-
-      [ FAIL 2 | WARN 6 | SKIP 0 | PASS 81 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘reactome.db’
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -730,7 +881,7 @@ Run `revdepcheck::revdep_details(, "gatom")` for more info
 * GitHub: https://github.com/UW-GAC/GENESIS
 * Source code: https://github.com/cran/GENESIS
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 192
+* Number of recursive dependencies: 195
 
 Run `revdepcheck::revdep_details(, "GENESIS")` for more info
 
@@ -740,7 +891,7 @@ Run `revdepcheck::revdep_details(, "GENESIS")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  7.1Mb
+      installed size is  7.0Mb
       sub-directories of 1Mb or more:
         doc       3.2Mb
         extdata   3.1Mb
@@ -756,11 +907,11 @@ Run `revdepcheck::revdep_details(, "GENESIS")` for more info
 
 <details>
 
-* Version: 3.5.0
+* Version: 3.6.2
 * GitHub: NA
 * Source code: https://github.com/cran/GeomxTools
-* Date/Publication: 2023-04-25
-* Number of recursive dependencies: 220
+* Date/Publication: 2024-02-09
+* Number of recursive dependencies: 229
 
 Run `revdepcheck::revdep_details(, "GeomxTools")` for more info
 
@@ -768,50 +919,25 @@ Run `revdepcheck::revdep_details(, "GeomxTools")` for more info
 
 ## In both
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘GeomxTools-Ex.R’ failed
-    The error most likely occurred in:
-
-    > ### Name: as.Seurat
-    > ### Title: Convert GeoMxSet Object to SeuratObject
-    > ### Aliases: as.Seurat as.Seurat.NanoStringGeoMxSet
-    >
-    > ### ** Examples
-    >
-    > datadir <- system.file("extdata", "DSP_NGS_Example_Data", package = "GeomxTools")
-    ...
-      Object has no negatives. No summary statistics for negatives will be calculated.
-    >
-    > target_demoData <- normalize(target_demoData, "quant")
-    >
-    > seurat_demoData <- as.Seurat(target_demoData, ident = "cell_line",
-    +                              normData = "exprs_norm", forceRaw = FALSE)
-    Error in validObject(object = object) :
-      invalid class “Seurat” object: 'project' cannot be an empty character
-    Calls: as.Seurat -> as.Seurat.NanoStringGeoMxSet
-    Execution halted
-    ```
-
 *   checking tests ...
     ```
       Running ‘testthat.R’
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      Backtrace:
-          ▆
-       1. ├─SeuratObject::as.Seurat(...) at test_coercions.R:72:1
-       2. └─GeomxTools:::as.Seurat.NanoStringGeoMxSet(...)
-       3.   ├─base::suppressWarnings(...)
-       4.   │ └─base::withCallingHandlers(...)
-       5.   ├─Seurat::CreateSeuratObject(...)
-       6.   └─SeuratObject:::CreateSeuratObject.default(...)
-       7.     ├─SeuratObject::CreateSeuratObject(...)
-       8.     └─SeuratObject:::CreateSeuratObject.Assay5(...)
-       9.       └─methods::validObject(object = object)
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test_GeoMxSet_probeCollapse.R:61:3'): test that collapsed probe count is equal to the geomean of probes for each target ──
+      sum(matches) == nrow(aggTestData@assayData$exprs) * numDCC is not TRUE
 
-      [ FAIL 4 | WARN 14 | SKIP 0 | PASS 251 ]
+      `actual`:   FALSE
+      `expected`: TRUE
+      ── Failure ('test_GeoMxSet_probeCollapse.R:100:3'): test that the geomean and geosd of negatives is correct ──
+      sum(matches) == length(unique(PKC$Module)) * numDCC * 2 is not TRUE
+
+      `actual`:   FALSE
+      `expected`: TRUE
+
+      [ FAIL 2 | WARN 16 | SKIP 0 | PASS 288 ]
       Error: Test failures
       Execution halted
     ```
@@ -822,34 +948,16 @@ Run `revdepcheck::revdep_details(, "GeomxTools")` for more info
       Warning: package ‘Biobase’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
       Warning: package ‘NanoStringNCTools’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/GeomxTools/new/GeomxTools.Rcheck/00install.out’ for details.
-    ```
-
-*   checking Rd files ... WARNING
-    ```
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:109-112: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:113-116: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:117-120: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:121-124: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:125-128: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:129-132: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:133-136: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:137-140: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:141-144: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:145-149: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:150-154: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:155-158: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:159-162: \item in \describe must have non-empty label
-    checkRd: (5) NanoStringGeoMxSet-class.Rd:163-166: \item in \describe must have non-empty label
+    See ‘/ggally/revdep/checks.noindex/GeomxTools/new/GeomxTools.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 24.7Mb
+      installed size is 24.5Mb
       sub-directories of 1Mb or more:
-        doc       5.3Mb
+        doc       5.2Mb
         extdata  18.4Mb
     ```
 
@@ -899,7 +1007,7 @@ Run `revdepcheck::revdep_details(, "GeomxTools")` for more info
 * GitHub: https://github.com/stla/gfilmm
 * Source code: https://github.com/cran/gfilmm
 * Date/Publication: 2022-07-11 23:20:06 UTC
-* Number of recursive dependencies: 124
+* Number of recursive dependencies: 134
 
 Run `revdepcheck::revdep_details(, "gfilmm")` for more info
 
@@ -920,7 +1028,7 @@ Run `revdepcheck::revdep_details(, "gfilmm")` for more info
 * GitHub: https://github.com/lawremi/ggbio
 * Source code: https://github.com/cran/ggbio
 * Date/Publication: 2023-11-01
-* Number of recursive dependencies: 177
+* Number of recursive dependencies: 186
 
 Run `revdepcheck::revdep_details(, "ggbio")` for more info
 
@@ -958,7 +1066,7 @@ Run `revdepcheck::revdep_details(, "ggbio")` for more info
     Found the following significant warnings:
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/ggbio/new/ggbio.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/ggbio/new/ggbio.Rcheck/00install.out’ for details.
     ```
 
 *   checking for missing documentation entries ... WARNING
@@ -1054,7 +1162,7 @@ Run `revdepcheck::revdep_details(, "ggbio")` for more info
 * GitHub: https://github.com/xfim/ggmcmc
 * Source code: https://github.com/cran/ggmcmc
 * Date/Publication: 2021-02-10 10:50:10 UTC
-* Number of recursive dependencies: 74
+* Number of recursive dependencies: 86
 
 Run `revdepcheck::revdep_details(, "ggmcmc")` for more info
 
@@ -1066,8 +1174,9 @@ Run `revdepcheck::revdep_details(, "ggmcmc")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘dplyr’ was built under R version 4.3.1
+      Warning: package ‘tidyr’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/ggmcmc/new/ggmcmc.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/ggmcmc/new/ggmcmc.Rcheck/00install.out’ for details.
     ```
 
 # GGMncv
@@ -1078,7 +1187,7 @@ Run `revdepcheck::revdep_details(, "ggmcmc")` for more info
 * GitHub: https://github.com/donaldRwilliams/GGMncv
 * Source code: https://github.com/cran/GGMncv
 * Date/Publication: 2021-12-15 07:40:28 UTC
-* Number of recursive dependencies: 180
+* Number of recursive dependencies: 184
 
 Run `revdepcheck::revdep_details(, "GGMncv")` for more info
 
@@ -1112,7 +1221,7 @@ Run `revdepcheck::revdep_details(, "GGMncv")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/GGMnonreg
 * Date/Publication: 2021-04-08 11:30:06 UTC
-* Number of recursive dependencies: 121
+* Number of recursive dependencies: 133
 
 Run `revdepcheck::revdep_details(, "GGMnonreg")` for more info
 
@@ -1140,7 +1249,7 @@ Run `revdepcheck::revdep_details(, "GGMnonreg")` for more info
 * GitHub: https://github.com/dongjunchung/GGPA
 * Source code: https://github.com/cran/GGPA
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 76
+* Number of recursive dependencies: 88
 
 Run `revdepcheck::revdep_details(, "GGPA")` for more info
 
@@ -1153,8 +1262,11 @@ Run `revdepcheck::revdep_details(, "GGPA")` for more info
     Found the following significant warnings:
       3_Param.cpp:74:12: warning: use of bitwise '&' with boolean operands [-Wbitwise-instead-of-logical]
       Warning: package ‘ggplot2’ was built under R version 4.3.1
+      Warning: package ‘network’ was built under R version 4.3.1
+      Warning: package ‘sna’ was built under R version 4.3.1
+      Warning: package ‘scales’ was built under R version 4.3.1
       Warning: package ‘matrixStats’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/GGPA/new/GGPA.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/GGPA/new/GGPA.Rcheck/00install.out’ for details.
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -1186,7 +1298,7 @@ Run `revdepcheck::revdep_details(, "GGPA")` for more info
 * GitHub: https://github.com/heike/ggpcp
 * Source code: https://github.com/cran/ggpcp
 * Date/Publication: 2022-11-28 09:30:08 UTC
-* Number of recursive dependencies: 81
+* Number of recursive dependencies: 93
 
 Run `revdepcheck::revdep_details(, "ggpcp")` for more info
 
@@ -1207,7 +1319,7 @@ Run `revdepcheck::revdep_details(, "ggpcp")` for more info
 * GitHub: https://github.com/cafferychen777/ggpicrust2
 * Source code: https://github.com/cran/ggpicrust2
 * Date/Publication: 2023-11-08 16:10:02 UTC
-* Number of recursive dependencies: 246
+* Number of recursive dependencies: 249
 
 Run `revdepcheck::revdep_details(, "ggpicrust2")` for more info
 
@@ -1223,38 +1335,15 @@ Run `revdepcheck::revdep_details(, "ggpicrust2")` for more info
     manual.
     ```
 
-# ggplot2.utils
-
-<details>
-
-* Version: 0.3.0
-* GitHub: https://github.com/insightsengineering/ggplot2.utils
-* Source code: https://github.com/cran/ggplot2.utils
-* Date/Publication: 2023-06-24 18:20:10 UTC
-* Number of recursive dependencies: 80
-
-Run `revdepcheck::revdep_details(, "ggplot2.utils")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘ggplot2.utils’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/ggplot2.utils/new/ggplot2.utils.Rcheck/00install.out’ for details.
-    ```
-
 # ggPMX
 
 <details>
 
-* Version: 1.2.10
+* Version: 1.2.11
 * GitHub: https://github.com/ggPMXdevelopment/ggPMX
 * Source code: https://github.com/cran/ggPMX
-* Date/Publication: 2023-06-16 23:20:07 UTC
-* Number of recursive dependencies: 177
+* Date/Publication: 2023-11-30 16:10:06 UTC
+* Number of recursive dependencies: 181
 
 Run `revdepcheck::revdep_details(, "ggPMX")` for more info
 
@@ -1264,8 +1353,7 @@ Run `revdepcheck::revdep_details(, "ggPMX")` for more info
 
 *   checking package dependencies ... NOTE
     ```
-    Packages suggested but not available for checking:
-      'captioner', 'lixoftConnectors'
+    Package suggested but not available for checking: ‘lixoftConnectors’
     ```
 
 *   checking installed package size ... NOTE
@@ -1281,11 +1369,11 @@ Run `revdepcheck::revdep_details(, "ggPMX")` for more info
 
 <details>
 
-* Version: 0.3.0
+* Version: 0.3.1
 * GitHub: https://github.com/smouksassi/ggquickeda
 * Source code: https://github.com/cran/ggquickeda
-* Date/Publication: 2023-03-26 10:20:08 UTC
-* Number of recursive dependencies: 175
+* Date/Publication: 2024-01-15 10:20:02 UTC
+* Number of recursive dependencies: 188
 
 Run `revdepcheck::revdep_details(, "ggquickeda")` for more info
 
@@ -1296,10 +1384,9 @@ Run `revdepcheck::revdep_details(, "ggquickeda")` for more info
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘DT’ ‘Formula’ ‘GGally’ ‘Hmisc’ ‘RPostgres’ ‘colourpicker’ ‘dplyr’
-      ‘ggpmisc’ ‘ggpubr’ ‘ggrepel’ ‘gridExtra’ ‘markdown’ ‘plotly’
-      ‘quantreg’ ‘rlang’ ‘shinyFiles’ ‘shinyjqui’ ‘shinyjs’ ‘survival’
-      ‘survminer’ ‘table1’ ‘tidyr’ ‘zoo’
+      ‘DT’ ‘Formula’ ‘GGally’ ‘Hmisc’ ‘RPostgres’ ‘colourpicker’ ‘ggpmisc’
+      ‘ggpubr’ ‘glue’ ‘gridExtra’ ‘markdown’ ‘patchwork’ ‘plotly’
+      ‘quantreg’ ‘shinyFiles’ ‘shinyjqui’ ‘shinyjs’ ‘table1’ ‘zoo’
       All declared Imports should be used.
     ```
 
@@ -1311,7 +1398,7 @@ Run `revdepcheck::revdep_details(, "ggquickeda")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/glancedata
 * Date/Publication: 2019-11-22 23:10:05 UTC
-* Number of recursive dependencies: 97
+* Number of recursive dependencies: 109
 
 Run `revdepcheck::revdep_details(, "glancedata")` for more info
 
@@ -1332,7 +1419,7 @@ Run `revdepcheck::revdep_details(, "glancedata")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/gsynth
 * Date/Publication: 2021-08-06 07:50:05 UTC
-* Number of recursive dependencies: 64
+* Number of recursive dependencies: 77
 
 Run `revdepcheck::revdep_details(, "gsynth")` for more info
 
@@ -1345,30 +1432,6 @@ Run `revdepcheck::revdep_details(, "gsynth")` for more info
       Specified C++11: please drop specification unless essential
     ```
 
-# httk
-
-<details>
-
-* Version: 2.2.2
-* GitHub: https://github.com/USEPA/CompTox-ExpoCast-httk
-* Source code: https://github.com/cran/httk
-* Date/Publication: 2023-02-20 22:40:02 UTC
-* Number of recursive dependencies: 130
-
-Run `revdepcheck::revdep_details(, "httk")` for more info
-
-</details>
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.3Mb
-      sub-directories of 1Mb or more:
-        data   2.1Mb
-        doc    2.1Mb
-    ```
-
 # ibawds
 
 <details>
@@ -1377,7 +1440,7 @@ Run `revdepcheck::revdep_details(, "httk")` for more info
 * GitHub: https://github.com/stibu81/ibawds
 * Source code: https://github.com/cran/ibawds
 * Date/Publication: 2022-06-17 08:20:07 UTC
-* Number of recursive dependencies: 198
+* Number of recursive dependencies: 199
 
 Run `revdepcheck::revdep_details(, "ibawds")` for more info
 
@@ -1398,7 +1461,7 @@ Run `revdepcheck::revdep_details(, "ibawds")` for more info
 * GitHub: https://github.com/AuroreAA/ICSClust
 * Source code: https://github.com/cran/ICSClust
 * Date/Publication: 2023-09-21 13:20:02 UTC
-* Number of recursive dependencies: 127
+* Number of recursive dependencies: 137
 
 Run `revdepcheck::revdep_details(, "ICSClust")` for more info
 
@@ -1410,8 +1473,9 @@ Run `revdepcheck::revdep_details(, "ICSClust")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ICS’ was built under R version 4.3.1
+      Warning: package ‘mvtnorm’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/ICSClust/new/ICSClust.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/ICSClust/new/ICSClust.Rcheck/00install.out’ for details.
     ```
 
 # ICtest
@@ -1422,7 +1486,7 @@ Run `revdepcheck::revdep_details(, "ICSClust")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/ICtest
 * Date/Publication: 2022-05-18 07:30:29 UTC
-* Number of recursive dependencies: 85
+* Number of recursive dependencies: 97
 
 Run `revdepcheck::revdep_details(, "ICtest")` for more info
 
@@ -1435,8 +1499,9 @@ Run `revdepcheck::revdep_details(, "ICtest")` for more info
     Found the following significant warnings:
       Warning: package ‘JADE’ was built under R version 4.3.1
       Warning: package ‘ICS’ was built under R version 4.3.1
+      Warning: package ‘mvtnorm’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/ICtest/new/ICtest.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/ICtest/new/ICtest.Rcheck/00install.out’ for details.
     ```
 
 # InflectSSP
@@ -1447,7 +1512,7 @@ Run `revdepcheck::revdep_details(, "ICtest")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/InflectSSP
 * Date/Publication: 2023-04-19 08:00:03 UTC
-* Number of recursive dependencies: 85
+* Number of recursive dependencies: 97
 
 Run `revdepcheck::revdep_details(, "InflectSSP")` for more info
 
@@ -1469,7 +1534,7 @@ Run `revdepcheck::revdep_details(, "InflectSSP")` for more info
 * GitHub: https://github.com/lpantano/isomiRs
 * Source code: https://github.com/cran/isomiRs
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 168
+* Number of recursive dependencies: 173
 
 Run `revdepcheck::revdep_details(, "isomiRs")` for more info
 
@@ -1485,11 +1550,11 @@ Run `revdepcheck::revdep_details(, "isomiRs")` for more info
       Warning: package ‘matrixStats’ was built under R version 4.3.1
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
       Warning: package ‘Biobase’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/isomiRs/new/isomiRs.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/isomiRs/new/isomiRs.Rcheck/00install.out’ for details.
     ```
 
 *   checking for hidden files and directories ... NOTE
@@ -1525,6 +1590,29 @@ Run `revdepcheck::revdep_details(, "isomiRs")` for more info
       targetscan.Mm.egTARGETSFULL total
     ```
 
+# ITNr
+
+<details>
+
+* Version: 0.7.0
+* GitHub: NA
+* Source code: https://github.com/cran/ITNr
+* Date/Publication: 2023-03-31 14:10:11 UTC
+* Number of recursive dependencies: 95
+
+Run `revdepcheck::revdep_details(, "ITNr")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘ITNr’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘network’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/ITNr/new/ITNr.Rcheck/00install.out’ for details.
+    ```
+
 # jmv
 
 <details>
@@ -1533,7 +1621,7 @@ Run `revdepcheck::revdep_details(, "isomiRs")` for more info
 * GitHub: https://github.com/jamovi/jmv
 * Source code: https://github.com/cran/jmv
 * Date/Publication: 2023-10-12 13:20:02 UTC
-* Number of recursive dependencies: 182
+* Number of recursive dependencies: 192
 
 Run `revdepcheck::revdep_details(, "jmv")` for more info
 
@@ -1558,6 +1646,27 @@ Run `revdepcheck::revdep_details(, "jmv")` for more info
       All declared Imports should be used.
     ```
 
+# klovan
+
+<details>
+
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/klovan
+* Date/Publication: 2024-02-01 10:20:02 UTC
+* Number of recursive dependencies: 136
+
+Run `revdepcheck::revdep_details(, "klovan")` for more info
+
+</details>
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘RGeostats’
+    ```
+
 # loon.ggplot
 
 <details>
@@ -1566,7 +1675,7 @@ Run `revdepcheck::revdep_details(, "jmv")` for more info
 * GitHub: https://github.com/great-northern-diver/loon.ggplot
 * Source code: https://github.com/cran/loon.ggplot
 * Date/Publication: 2022-11-12 22:30:02 UTC
-* Number of recursive dependencies: 106
+* Number of recursive dependencies: 117
 
 Run `revdepcheck::revdep_details(, "loon.ggplot")` for more info
 
@@ -1577,7 +1686,7 @@ Run `revdepcheck::revdep_details(, "loon.ggplot")` for more info
 *   checking whether package ‘loon.ggplot’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -1599,7 +1708,7 @@ In addition: Warning message:
 In fun(libname, pkgname) : couldn't connect to display ""
 Execution halted
 ERROR: lazy loading failed for package ‘loon.ggplot’
-* removing ‘ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/loon.ggplot’
+* removing ‘/ggally/revdep/checks.noindex/loon.ggplot/new/loon.ggplot.Rcheck/loon.ggplot’
 
 
 ```
@@ -1620,7 +1729,7 @@ In addition: Warning message:
 In fun(libname, pkgname) : couldn't connect to display ""
 Execution halted
 ERROR: lazy loading failed for package ‘loon.ggplot’
-* removing ‘ggally/revdep/checks.noindex/loon.ggplot/old/loon.ggplot.Rcheck/loon.ggplot’
+* removing ‘/ggally/revdep/checks.noindex/loon.ggplot/old/loon.ggplot.Rcheck/loon.ggplot’
 
 
 ```
@@ -1632,13 +1741,20 @@ ERROR: lazy loading failed for package ‘loon.ggplot’
 * GitHub: NA
 * Source code: https://github.com/cran/MAINT.Data
 * Date/Publication: 2023-04-04 08:10:02 UTC
-* Number of recursive dependencies: 78
+* Number of recursive dependencies: 90
 
 Run `revdepcheck::revdep_details(, "MAINT.Data")` for more info
 
 </details>
 
 ## In both
+
+*   checking whether package ‘MAINT.Data’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘Rcpp’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/MAINT.Data/new/MAINT.Data.Rcheck/00install.out’ for details.
+    ```
 
 *   checking installed package size ... NOTE
     ```
@@ -1656,7 +1772,7 @@ Run `revdepcheck::revdep_details(, "MAINT.Data")` for more info
 * GitHub: https://github.com/RGLab/MAST
 * Source code: https://github.com/cran/MAST
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 218
+* Number of recursive dependencies: 226
 
 Run `revdepcheck::revdep_details(, "MAST")` for more info
 
@@ -1682,7 +1798,7 @@ Run `revdepcheck::revdep_details(, "MAST")` for more info
       `actual`:   FALSE
       `expected`: TRUE
 
-      [ FAIL 1 | WARN 7 | SKIP 5 | PASS 292 ]
+      [ FAIL 1 | WARN 8 | SKIP 5 | PASS 292 ]
       Error: Test failures
       Execution halted
     ```
@@ -1696,21 +1812,16 @@ Run `revdepcheck::revdep_details(, "MAST")` for more info
       Warning: package ‘matrixStats’ was built under R version 4.3.1
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
       Warning: package ‘Biobase’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/MAST/new/MAST.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/MAST/new/MAST.Rcheck/00install.out’ for details.
     ```
 
 *   checking dependencies in R code ... WARNING
     ```
     Missing or unexported object: ‘gdata::xls2csv’
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘scater’
     ```
 
 *   checking for hidden files and directories ... NOTE
@@ -1737,7 +1848,7 @@ Run `revdepcheck::revdep_details(, "MAST")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/MCbiclust
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 206
+* Number of recursive dependencies: 214
 
 Run `revdepcheck::revdep_details(, "MCbiclust")` for more info
 
@@ -1761,7 +1872,7 @@ Run `revdepcheck::revdep_details(, "MCbiclust")` for more info
 * GitHub: https://github.com/mfasiolo/mgcViz
 * Source code: https://github.com/cran/mgcViz
 * Date/Publication: 2023-10-06 10:50:02 UTC
-* Number of recursive dependencies: 110
+* Number of recursive dependencies: 122
 
 Run `revdepcheck::revdep_details(, "mgcViz")` for more info
 
@@ -1772,8 +1883,10 @@ Run `revdepcheck::revdep_details(, "mgcViz")` for more info
 *   checking whether package ‘mgcViz’ can be installed ... WARNING
     ```
     Found the following significant warnings:
+      Warning: package ‘mgcv’ was built under R version 4.3.1
+      Warning: package ‘nlme’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/mgcViz/new/mgcViz.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/mgcViz/new/mgcViz.Rcheck/00install.out’ for details.
     ```
 
 # miaSim
@@ -1784,35 +1897,13 @@ Run `revdepcheck::revdep_details(, "mgcViz")` for more info
 * GitHub: https://github.com/microbiome/miaSim
 * Source code: https://github.com/cran/miaSim
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 197
+* Number of recursive dependencies: 206
 
 Run `revdepcheck::revdep_details(, "miaSim")` for more info
 
 </details>
 
 ## In both
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘miaSim-Ex.R’ failed
-    The error most likely occurred in:
-
-    > ### Name: simulateHubbellRates
-    > ### Title: Hubbell's neutral model simulation applied to time series
-    > ### Aliases: simulateHubbellRates simulateHubbellRates-numeric
-    > ###   simulateHubbellRates,numeric-method
-    >
-    > ### ** Examples
-    >
-    > set.seed(42)
-    > tse <- simulateHubbellRates(n_species = 5)
-    >
-    > miaViz::plotSeries(tse, x = "time")
-    Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) :
-      there is no package called ‘mia’
-    Calls: loadNamespace ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-    Execution halted
-    ```
 
 *   checking whether package ‘miaSim’ can be installed ... WARNING
     ```
@@ -1824,18 +1915,37 @@ Run `revdepcheck::revdep_details(, "miaSim")` for more info
       Warning: package ‘matrixStats’ was built under R version 4.3.1
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
       Warning: package ‘Biobase’ was built under R version 4.3.1
-      Warning: package ‘Biostrings’ was built under R version 4.3.1
+      Warning: package ‘Biostrings’ was built under R version 4.3.2
       Warning: package ‘XVector’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/miaSim/new/miaSim.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/miaSim/new/miaSim.Rcheck/00install.out’ for details.
     ```
 
-*   checking package dependencies ... NOTE
+# mlergm
+
+<details>
+
+* Version: 0.8
+* GitHub: NA
+* Source code: https://github.com/cran/mlergm
+* Date/Publication: 2021-08-23 16:00:02 UTC
+* Number of recursive dependencies: 94
+
+Run `revdepcheck::revdep_details(, "mlergm")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘mlergm’ can be installed ... WARNING
     ```
-    Package suggested but not available for checking: ‘mia’
+    Found the following significant warnings:
+      Warning: package ‘ergm’ was built under R version 4.3.1
+      Warning: package ‘network’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/mlergm/new/mlergm.Rcheck/00install.out’ for details.
     ```
 
 # mlrMBO
@@ -1846,7 +1956,7 @@ Run `revdepcheck::revdep_details(, "miaSim")` for more info
 * GitHub: https://github.com/mlr-org/mlrMBO
 * Source code: https://github.com/cran/mlrMBO
 * Date/Publication: 2022-07-04 08:50:50 UTC
-* Number of recursive dependencies: 131
+* Number of recursive dependencies: 142
 
 Run `revdepcheck::revdep_details(, "mlrMBO")` for more info
 
@@ -1854,22 +1964,45 @@ Run `revdepcheck::revdep_details(, "mlrMBO")` for more info
 
 ## In both
 
+*   checking tests ...
+    ```
+      Running ‘testthat.R’
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      (<https://mlr3.mlr-org.com>). Due to the focus on 'mlr3' there might be
+      uncaught bugs meanwhile in {mlr} - please consider switching.
+      Loading required package: smoof
+      Loading required package: checkmate
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 59 ]
+
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test_mbo_km.R:47:3'): mbo works with km ───────────────────────────
+      `suppressPackageStartupMessages(...)` produced warnings.
+
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 59 ]
+      Error: Test failures
+      In addition: Warning message:
+      package 'checkmate' was built under R version 4.3.1
+      Execution halted
+    ```
+
 *   checking whether package ‘mlrMBO’ can be installed ... WARNING
     ```
     Found the following significant warnings:
       Warning: package ‘checkmate’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/mlrMBO/new/mlrMBO.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/mlrMBO/new/mlrMBO.Rcheck/00install.out’ for details.
     ```
 
 # MOFA2
 
 <details>
 
-* Version: 1.12.0
+* Version: 1.12.1
 * GitHub: https://github.com/bioFAM/MOFA2
 * Source code: https://github.com/cran/MOFA2
-* Date/Publication: 2023-10-24
-* Number of recursive dependencies: 257
+* Date/Publication: 2024-01-05
+* Number of recursive dependencies: 259
 
 Run `revdepcheck::revdep_details(, "MOFA2")` for more info
 
@@ -1900,34 +2033,28 @@ Run `revdepcheck::revdep_details(, "MOFA2")` for more info
     Execution halted
     ```
 
-*   checking tests ...
+*   checking for code/documentation mismatches ... WARNING
     ```
-      Running ‘testthat.R’
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-       8.         └─MOFA2:::.split_seurat_into_groups(...)
-      ── Error ('test_prepare_model.R:53:2'): a model can be created from a Seurat object ──
-      Error in `.split_seurat_into_groups(seurat, groups = groups, assay = i,
-          slot = slot, features = features[[i]])`: No data present in the slot data of the assay RNA in the Seurat object.
-      Backtrace:
-          ▆
-       1. └─MOFA2::create_mofa(srt, features = genes, slot = "data") at test_prepare_model.R:53:9
-       2.   └─MOFA2::create_mofa_from_Seurat(...)
-       3.     └─base::lapply(...)
-       4.       └─MOFA2 (local) FUN(X[[i]], ...)
-       5.         └─MOFA2:::.split_seurat_into_groups(...)
-
-      [ FAIL 2 | WARN 9 | SKIP 0 | PASS 23 ]
-      Error: Test failures
-      Execution halted
+    Codoc mismatches from documentation object 'create_mofa_from_Seurat':
+    create_mofa_from_Seurat
+      Code: function(seurat, groups = NULL, assays = NULL, layer = "data",
+                     features = NULL, extract_metadata = FALSE)
+      Docs: function(seurat, groups = NULL, assays = NULL, slot =
+                     "scale.data", features = NULL, extract_metadata =
+                     FALSE)
+      Argument names in code not in docs:
+        layer
+      Argument names in docs not in code:
+        slot
+      Mismatches in argument names:
+        Position: 4 Code: layer Docs: slot
     ```
 
 *   checking whether package ‘MOFA2’ can be installed ... NOTE
     ```
     Found the following notes/warnings:
       Non-staged installation was used
-    See ‘ggally/revdep/checks.noindex/MOFA2/new/MOFA2.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/MOFA2/new/MOFA2.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -1976,7 +2103,7 @@ Run `revdepcheck::revdep_details(, "MOFA2")` for more info
 * GitHub: https://github.com/jongheepark/NetworkChange
 * Source code: https://github.com/cran/NetworkChange
 * Date/Publication: 2022-03-04 07:30:02 UTC
-* Number of recursive dependencies: 120
+* Number of recursive dependencies: 132
 
 Run `revdepcheck::revdep_details(, "NetworkChange")` for more info
 
@@ -1987,8 +2114,11 @@ Run `revdepcheck::revdep_details(, "NetworkChange")` for more info
 *   checking whether package ‘NetworkChange’ can be installed ... WARNING
     ```
     Found the following significant warnings:
+      Warning: package ‘MCMCpack’ was built under R version 4.3.1
+      Warning: package ‘coda’ was built under R version 4.3.1
+      Warning: package ‘MASS’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/NetworkChange/new/NetworkChange.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/NetworkChange/new/NetworkChange.Rcheck/00install.out’ for details.
     ```
 
 *   checking Rd files ... NOTE
@@ -1996,6 +2126,29 @@ Run `revdepcheck::revdep_details(, "NetworkChange")` for more info
     checkRd: (-1) NetworkChange.Rd:163: Escaped LaTeX specials: \&
     checkRd: (-1) NetworkChangeRobust.Rd:144: Escaped LaTeX specials: \&
     checkRd: (-1) NetworkStatic.Rd:142: Escaped LaTeX specials: \&
+    ```
+
+# NPflow
+
+<details>
+
+* Version: 0.13.5
+* GitHub: https://github.com/sistm/NPflow
+* Source code: https://github.com/cran/NPflow
+* Date/Publication: 2024-01-13 10:00:02 UTC
+* Number of recursive dependencies: 70
+
+Run `revdepcheck::revdep_details(, "NPflow")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘NPflow’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘Rcpp’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/NPflow/new/NPflow.Rcheck/00install.out’ for details.
     ```
 
 # nzelect
@@ -2006,7 +2159,7 @@ Run `revdepcheck::revdep_details(, "NetworkChange")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/nzelect
 * Date/Publication: 2017-10-02 20:35:23 UTC
-* Number of recursive dependencies: 83
+* Number of recursive dependencies: 95
 
 Run `revdepcheck::revdep_details(, "nzelect")` for more info
 
@@ -2019,6 +2172,59 @@ Run `revdepcheck::revdep_details(, "nzelect")` for more info
       Note: found 6409 marked UTF-8 strings
     ```
 
+# pareg
+
+<details>
+
+* Version: 1.6.0
+* GitHub: https://github.com/cbg-ethz/pareg
+* Source code: https://github.com/cran/pareg
+* Date/Publication: 2023-10-24
+* Number of recursive dependencies: 320
+
+Run `revdepcheck::revdep_details(, "pareg")` for more info
+
+</details>
+
+## In both
+
+*   R CMD check timed out
+
+
+*   checking whether package ‘pareg’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘tensorflow’ was built under R version 4.3.1
+    Found the following additional notes/warnings:
+      Non-staged installation was used
+    See ‘/ggally/revdep/checks.noindex/pareg/new/pareg.Rcheck/00install.out’ for details.
+    ```
+
+*   checking for portable file names ... NOTE
+    ```
+    Found the following non-portable file paths:
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_ablation_study/config.yaml
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_ablation_study/params.csv
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_dispersion_fitting/config.yaml
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_dispersion_fitting/params.csv
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_real_datasets/config.yaml
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_real_datasets/params.csv
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_regularization_effect/config.yaml
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_regularization_effect/params.csv
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_regularization_parameter/config.yaml
+    ...
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_response_distribution/params.csv
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_similarity_measures/config.yaml
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_similarity_measures/params.csv
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/workflow/scripts/compare_rocauc_vs_loss.R
+      pareg/inst/scripts/synthetic_benchmark/resources/multi_config_workflow/config_regularization_parameter
+
+    Tarballs are only required to store paths of up to 100 bytes and cannot
+    store those of more than 256 bytes, with restrictions including to 100
+    bytes for the final component.
+    See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
 # PAsso
 
 <details>
@@ -2027,7 +2233,7 @@ Run `revdepcheck::revdep_details(, "nzelect")` for more info
 * GitHub: https://github.com/XiaoruiZhu/PAsso
 * Source code: https://github.com/cran/PAsso
 * Date/Publication: 2021-06-18 09:20:08 UTC
-* Number of recursive dependencies: 177
+* Number of recursive dependencies: 180
 
 Run `revdepcheck::revdep_details(, "PAsso")` for more info
 
@@ -2040,7 +2246,7 @@ Run `revdepcheck::revdep_details(, "PAsso")` for more info
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
       Warning: package ‘dplyr’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/PAsso/new/PAsso.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/PAsso/new/PAsso.Rcheck/00install.out’ for details.
     ```
 
 # PhosR
@@ -2051,18 +2257,13 @@ Run `revdepcheck::revdep_details(, "PAsso")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/PhosR
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 185
+* Number of recursive dependencies: 193
 
 Run `revdepcheck::revdep_details(, "PhosR")` for more info
 
 </details>
 
 ## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘reactome.db’
-    ```
 
 *   checking for hidden files and directories ... NOTE
     ```
@@ -2105,7 +2306,7 @@ Run `revdepcheck::revdep_details(, "PhosR")` for more info
 * GitHub: https://github.com/hfang-bristol/Pi
 * Source code: https://github.com/cran/Pi
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 257
+* Number of recursive dependencies: 260
 
 Run `revdepcheck::revdep_details(, "Pi")` for more info
 
@@ -2113,29 +2314,23 @@ Run `revdepcheck::revdep_details(, "Pi")` for more info
 
 ## In both
 
-*   checking whether package ‘Pi’ can be installed ... WARNING
+*   checking package dependencies ... ERROR
     ```
-    Found the following significant warnings:
-      Warning: package ‘supraHex’ was built under R version 4.3.1
-      Warning: package ‘ggplot2’ was built under R version 4.3.1
-      Warning: replacing previous import ‘ROCR::plot’ by ‘graphics::plot’ when loading ‘Pi’
-    See ‘ggally/revdep/checks.noindex/Pi/new/Pi.Rcheck/00install.out’ for details.
-    ```
+    Package required but not available: ‘dnet’
 
-*   checking dependencies in R code ... WARNING
-    ```
-    '::' or ':::' import not declared from: 'pbapply'
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
     ```
 
 # plotly
 
 <details>
 
-* Version: 4.10.3
+* Version: 4.10.4
 * GitHub: https://github.com/plotly/plotly.R
 * Source code: https://github.com/cran/plotly
-* Date/Publication: 2023-10-21 22:50:09 UTC
-* Number of recursive dependencies: 138
+* Date/Publication: 2024-01-13 22:40:02 UTC
+* Number of recursive dependencies: 148
 
 Run `revdepcheck::revdep_details(, "plotly")` for more info
 
@@ -2147,14 +2342,14 @@ Run `revdepcheck::revdep_details(, "plotly")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/plotly/new/plotly.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/plotly/new/plotly.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  7.1Mb
+      installed size is  7.0Mb
       sub-directories of 1Mb or more:
-        R             1.1Mb
+        R             1.0Mb
         htmlwidgets   4.0Mb
     ```
 
@@ -2166,7 +2361,7 @@ Run `revdepcheck::revdep_details(, "plotly")` for more info
 * GitHub: https://github.com/green-striped-gecko/PopGenReport
 * Source code: https://github.com/cran/PopGenReport
 * Date/Publication: 2023-10-11 07:20:02 UTC
-* Number of recursive dependencies: 129
+* Number of recursive dependencies: 141
 
 Run `revdepcheck::revdep_details(, "PopGenReport")` for more info
 
@@ -2178,7 +2373,7 @@ Run `revdepcheck::revdep_details(, "PopGenReport")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘knitr’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/PopGenReport/new/PopGenReport.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/PopGenReport/new/PopGenReport.Rcheck/00install.out’ for details.
     ```
 
 # protGear
@@ -2189,7 +2384,7 @@ Run `revdepcheck::revdep_details(, "PopGenReport")` for more info
 * GitHub: https://github.com/Keniajin/protGear
 * Source code: https://github.com/cran/protGear
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 199
+* Number of recursive dependencies: 203
 
 Run `revdepcheck::revdep_details(, "protGear")` for more info
 
@@ -2205,7 +2400,7 @@ Run `revdepcheck::revdep_details(, "protGear")` for more info
       Warning: package ‘vsn’ was built under R version 4.3.1
       Warning: package ‘Biobase’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/protGear/new/protGear.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/protGear/new/protGear.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -2249,7 +2444,7 @@ Run `revdepcheck::revdep_details(, "protGear")` for more info
 * GitHub: https://github.com/ModelOriented/randomForestExplainer
 * Source code: https://github.com/cran/randomForestExplainer
 * Date/Publication: 2020-07-11 20:30:02 UTC
-* Number of recursive dependencies: 93
+* Number of recursive dependencies: 105
 
 Run `revdepcheck::revdep_details(, "randomForestExplainer")` for more info
 
@@ -2270,7 +2465,7 @@ Run `revdepcheck::revdep_details(, "randomForestExplainer")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/rbioacc
 * Date/Publication: 2023-09-21 09:30:06 UTC
-* Number of recursive dependencies: 95
+* Number of recursive dependencies: 106
 
 Run `revdepcheck::revdep_details(, "rbioacc")` for more info
 
@@ -2291,7 +2486,7 @@ Run `revdepcheck::revdep_details(, "rbioacc")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/RHMS
 * Date/Publication: 2021-09-27 15:50:02 UTC
-* Number of recursive dependencies: 85
+* Number of recursive dependencies: 96
 
 Run `revdepcheck::revdep_details(, "RHMS")` for more info
 
@@ -2302,8 +2497,32 @@ Run `revdepcheck::revdep_details(, "RHMS")` for more info
 *   checking whether package ‘RHMS’ can be installed ... WARNING
     ```
     Found the following significant warnings:
+      Warning: package ‘network’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/RHMS/new/RHMS.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/RHMS/new/RHMS.Rcheck/00install.out’ for details.
+    ```
+
+# ridgetorus
+
+<details>
+
+* Version: 1.0.2
+* GitHub: https://github.com/egarpor/ridgetorus
+* Source code: https://github.com/cran/ridgetorus
+* Date/Publication: 2023-08-27 22:40:02 UTC
+* Number of recursive dependencies: 142
+
+Run `revdepcheck::revdep_details(, "ridgetorus")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘ridgetorus’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: package ‘Rcpp’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/ridgetorus/new/ridgetorus.Rcheck/00install.out’ for details.
     ```
 
 # robCompositions
@@ -2314,7 +2533,7 @@ Run `revdepcheck::revdep_details(, "RHMS")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/robCompositions
 * Date/Publication: 2023-08-25 15:30:06 UTC
-* Number of recursive dependencies: 135
+* Number of recursive dependencies: 143
 
 Run `revdepcheck::revdep_details(, "robCompositions")` for more info
 
@@ -2327,18 +2546,24 @@ Run `revdepcheck::revdep_details(, "robCompositions")` for more info
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
       Warning: package ‘pls’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/robCompositions/new/robCompositions.Rcheck/00install.out’ for details.
+      Warning: package ‘data.table’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/robCompositions/new/robCompositions.Rcheck/00install.out’ for details.
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 1 marked UTF-8 string
     ```
 
 # robustbase
 
 <details>
 
-* Version: 0.99-0
+* Version: 0.99-2
 * GitHub: NA
 * Source code: https://github.com/cran/robustbase
-* Date/Publication: 2023-06-16 13:30:02 UTC
-* Number of recursive dependencies: 65
+* Date/Publication: 2024-01-27 16:30:02 UTC
+* Number of recursive dependencies: 78
 
 Run `revdepcheck::revdep_details(, "robustbase")` for more info
 
@@ -2346,17 +2571,73 @@ Run `revdepcheck::revdep_details(, "robustbase")` for more info
 
 ## In both
 
+*   checking whether package ‘robustbase’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/ggally/revdep/checks.noindex/robustbase/new/robustbase.Rcheck/00install.out’ for details.
+    ```
+
 *   checking package dependencies ... NOTE
     ```
-    Packages which this enhances but not available for checking:
-      'robustX', 'matrixStats', 'quantreg'
+    Package which this enhances but not available for checking: ‘robustX’
     ```
 
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘matrixStats’, ‘robustX’, ‘quantreg’
-    ```
+## Installation
 
+### Devel
+
+```
+* installing *source* package ‘robustbase’ ...
+** package ‘robustbase’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+sh: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+using SDK: ‘MacOSX14.2.sdk’
+clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c R-rng4ftn.c -o R-rng4ftn.o
+/opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran  -fPIC  -Wall -g -O2  -c eigen.f -o eigen.o
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+...
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+/opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran  -fPIC  -Wall -g -O2  -c rfltsreg.f -o rfltsreg.o
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+make: *** [eigen.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [rfltsreg.o] Error 1
+make: *** [rffastmcd.o] Error 1
+make: *** [rf-common.o] Error 1
+ERROR: compilation failed for package ‘robustbase’
+* removing ‘/ggally/revdep/checks.noindex/robustbase/new/robustbase.Rcheck/robustbase’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘robustbase’ ...
+** package ‘robustbase’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+sh: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+using SDK: ‘MacOSX14.2.sdk’
+clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c R-rng4ftn.c -o R-rng4ftn.o
+/opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran  -fPIC  -Wall -g -O2  -c eigen.f -o eigen.o
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+...
+/opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran  -fPIC  -Wall -g -O2  -c rf-common.f -o rf-common.o
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+/opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran  -fPIC  -Wall -g -O2  -c rffastmcd.f -o rffastmcd.o
+make: /opt/homebrew/Cellar/gcc/12.2.0/bin/gfortran: No such file or directory
+make: *** [eigen.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [rf-common.o] Error 1
+make: *** [rffastmcd.o] Error 1
+ERROR: compilation failed for package ‘robustbase’
+* removing ‘/ggally/revdep/checks.noindex/robustbase/old/robustbase.Rcheck/robustbase’
+
+
+```
 # rrr
 
 <details>
@@ -2365,7 +2646,7 @@ Run `revdepcheck::revdep_details(, "robustbase")` for more info
 * GitHub: https://github.com/chrisaddy/rrr
 * Source code: https://github.com/cran/rrr
 * Date/Publication: 2016-12-09 15:15:55
-* Number of recursive dependencies: 98
+* Number of recursive dependencies: 104
 
 Run `revdepcheck::revdep_details(, "rrr")` for more info
 
@@ -2387,7 +2668,7 @@ Run `revdepcheck::revdep_details(, "rrr")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/rwty
 * Date/Publication: 2019-02-15 15:10:03 UTC
-* Number of recursive dependencies: 90
+* Number of recursive dependencies: 102
 
 Run `revdepcheck::revdep_details(, "rwty")` for more info
 
@@ -2399,7 +2680,7 @@ Run `revdepcheck::revdep_details(, "rwty")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/rwty/new/rwty.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/rwty/new/rwty.Rcheck/00install.out’ for details.
     ```
 
 # sageR
@@ -2410,7 +2691,7 @@ Run `revdepcheck::revdep_details(, "rwty")` for more info
 * GitHub: https://github.com/fbertran/sageR
 * Source code: https://github.com/cran/sageR
 * Date/Publication: 2023-03-23 18:40:02 UTC
-* Number of recursive dependencies: 241
+* Number of recursive dependencies: 249
 
 Run `revdepcheck::revdep_details(, "sageR")` for more info
 
@@ -2431,7 +2712,7 @@ Run `revdepcheck::revdep_details(, "sageR")` for more info
 * GitHub: https://github.com/LuyiTian/scPipe
 * Source code: https://github.com/cran/scPipe
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 256
+* Number of recursive dependencies: 260
 
 Run `revdepcheck::revdep_details(, "scPipe")` for more info
 
@@ -2448,16 +2729,11 @@ Run `revdepcheck::revdep_details(, "scPipe")` for more info
       Warning: package ‘matrixStats’ was built under R version 4.3.1
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
       Warning: package ‘Biobase’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/scPipe/new/scPipe.Rcheck/00install.out’ for details.
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘scater’
+    See ‘/ggally/revdep/checks.noindex/scPipe/new/scPipe.Rcheck/00install.out’ for details.
     ```
 
 *   checking C++ specification ... NOTE
@@ -2519,7 +2795,7 @@ Run `revdepcheck::revdep_details(, "scPipe")` for more info
 * GitHub: https://github.com/Liubuntu/SeqSQC
 * Source code: https://github.com/cran/SeqSQC
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 134
+* Number of recursive dependencies: 144
 
 Run `revdepcheck::revdep_details(, "SeqSQC")` for more info
 
@@ -2543,7 +2819,7 @@ Run `revdepcheck::revdep_details(, "SeqSQC")` for more info
 * GitHub: https://github.com/tjmckinley/SimBIID
 * Source code: https://github.com/cran/SimBIID
 * Date/Publication: 2021-02-04 05:20:02 UTC
-* Number of recursive dependencies: 67
+* Number of recursive dependencies: 79
 
 Run `revdepcheck::revdep_details(, "SimBIID")` for more info
 
@@ -2564,7 +2840,7 @@ Run `revdepcheck::revdep_details(, "SimBIID")` for more info
 * GitHub: https://github.com/andrewcparnell/simmr
 * Source code: https://github.com/cran/simmr
 * Date/Publication: 2023-10-27 14:20:02 UTC
-* Number of recursive dependencies: 118
+* Number of recursive dependencies: 129
 
 Run `revdepcheck::revdep_details(, "simmr")` for more info
 
@@ -2575,7 +2851,7 @@ Run `revdepcheck::revdep_details(, "simmr")` for more info
 *   checking whether package ‘simmr’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘ggally/revdep/checks.noindex/simmr/new/simmr.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/simmr/new/simmr.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -2587,23 +2863,23 @@ Run `revdepcheck::revdep_details(, "simmr")` for more info
 ** package ‘simmr’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
-using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.0.40.1)’
-using SDK: ‘MacOSX14.0.sdk’
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/simmr/Rcpp/include' -I'ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/simmr/Rcpp/include' -I'ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c run_VB.cpp -o run_VB.o
+using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+using SDK: ‘MacOSX14.2.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally/revdep/library.noindex/simmr/Rcpp/include' -I'/ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'/ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally/revdep/library.noindex/simmr/Rcpp/include' -I'/ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'/ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c run_VB.cpp -o run_VB.o
 run_VB.cpp:6:21: warning: unused variable 'log2pi' [-Wunused-const-variable]
 static double const log2pi = std::log(2.0 * M_PI);
 ...
-Error: package or namespace load failed for ‘rjags’:
- .onLoad failed in loadNamespace() for 'rjags', details:
-  call: dyn.load(file, DLLpath = DLLpath, ...)
-  error: unable to load shared object 'ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so':
-  dlopen(ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so, 0x000A): Library not loaded: /usr/local/lib/libjags.4.dylib
-  Referenced from: <7F6B5629-D6B5-35D1-BEDC-76C09B11A283> ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so
+  dlopen(/ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so, 0x000A): Library not loaded: /usr/local/lib/libjags.4.dylib
+  Referenced from: <621A7307-C96A-3A25-BE2B-B9C2339518AE> /ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so
   Reason: tried: '/usr/local/lib/libjags.4.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/usr/local/lib/libjags.4.dylib' (no such file), '/usr/local/lib/libjags.4.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libjags.4.dy
+In addition: Warning messages:
+1: package ‘R2jags’ was built under R version 4.3.1
+2: package ‘rjags’ was built under R version 4.3.1
+3: package ‘coda’ was built under R version 4.3.1
 Execution halted
 ERROR: lazy loading failed for package ‘simmr’
-* removing ‘ggally/revdep/checks.noindex/simmr/new/simmr.Rcheck/simmr’
+* removing ‘/ggally/revdep/checks.noindex/simmr/new/simmr.Rcheck/simmr’
 
 
 ```
@@ -2614,23 +2890,23 @@ ERROR: lazy loading failed for package ‘simmr’
 ** package ‘simmr’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** libs
-using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.0.40.1)’
-using SDK: ‘MacOSX14.0.sdk’
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/simmr/Rcpp/include' -I'ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'ggally/revdep/library.noindex/simmr/Rcpp/include' -I'ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c run_VB.cpp -o run_VB.o
+using C++ compiler: ‘Apple clang version 15.0.0 (clang-1500.1.0.2.5)’
+using SDK: ‘MacOSX14.2.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally/revdep/library.noindex/simmr/Rcpp/include' -I'/ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'/ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/ggally/revdep/library.noindex/simmr/Rcpp/include' -I'/ggally/revdep/library.noindex/simmr/RcppArmadillo/include' -I'/ggally/revdep/library.noindex/simmr/RcppDist/include' -I/opt/R/arm64/include -I/usr/local/include -Xclang -fopenmp    -fPIC  -falign-functions=64 -Wall -g -O2  -c run_VB.cpp -o run_VB.o
 run_VB.cpp:6:21: warning: unused variable 'log2pi' [-Wunused-const-variable]
 static double const log2pi = std::log(2.0 * M_PI);
 ...
-Error: package or namespace load failed for ‘rjags’:
- .onLoad failed in loadNamespace() for 'rjags', details:
-  call: dyn.load(file, DLLpath = DLLpath, ...)
-  error: unable to load shared object 'ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so':
-  dlopen(ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so, 0x000A): Library not loaded: /usr/local/lib/libjags.4.dylib
-  Referenced from: <7F6B5629-D6B5-35D1-BEDC-76C09B11A283> ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so
+  dlopen(/ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so, 0x000A): Library not loaded: /usr/local/lib/libjags.4.dylib
+  Referenced from: <621A7307-C96A-3A25-BE2B-B9C2339518AE> /ggally/revdep/library.noindex/simmr/rjags/libs/rjags.so
   Reason: tried: '/usr/local/lib/libjags.4.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/usr/local/lib/libjags.4.dylib' (no such file), '/usr/local/lib/libjags.4.dylib' (no such file), '/Library/Frameworks/R.framework/Resources/lib/libjags.4.dy
+In addition: Warning messages:
+1: package ‘R2jags’ was built under R version 4.3.1
+2: package ‘rjags’ was built under R version 4.3.1
+3: package ‘coda’ was built under R version 4.3.1
 Execution halted
 ERROR: lazy loading failed for package ‘simmr’
-* removing ‘ggally/revdep/checks.noindex/simmr/old/simmr.Rcheck/simmr’
+* removing ‘/ggally/revdep/checks.noindex/simmr/old/simmr.Rcheck/simmr’
 
 
 ```
@@ -2638,11 +2914,11 @@ ERROR: lazy loading failed for package ‘simmr’
 
 <details>
 
-* Version: 0.3.9
+* Version: 0.3.10
 * GitHub: https://github.com/daya6489/SmartEDA
 * Source code: https://github.com/cran/SmartEDA
-* Date/Publication: 2022-12-03 22:42:29 UTC
-* Number of recursive dependencies: 96
+* Date/Publication: 2024-01-30 17:50:02 UTC
+* Number of recursive dependencies: 108
 
 Run `revdepcheck::revdep_details(, "SmartEDA")` for more info
 
@@ -2659,29 +2935,6 @@ Run `revdepcheck::revdep_details(, "SmartEDA")` for more info
 *   checking Rd cross-references ... NOTE
     ```
     Packages unavailable to check Rd xrefs: ‘ggthemes’, ‘DataExplorer’
-    Unknown package ‘InformationValue’ in Rd xrefs
-    ```
-
-# spinifex
-
-<details>
-
-* Version: 0.3.6
-* GitHub: https://github.com/nspyrison/spinifex
-* Source code: https://github.com/cran/spinifex
-* Date/Publication: 2022-03-31 08:30:02 UTC
-* Number of recursive dependencies: 154
-
-Run `revdepcheck::revdep_details(, "spinifex")` for more info
-
-</details>
-
-## In both
-
-*   checking Rd files ... NOTE
-    ```
-    checkRd: (-1) PimaIndiansDiabetes_long.Rd:14: Escaped LaTeX specials: \^
-    checkRd: (-1) PimaIndiansDiabetes_wide.Rd:16: Escaped LaTeX specials: \^
     ```
 
 # SPOTMisc
@@ -2692,7 +2945,7 @@ Run `revdepcheck::revdep_details(, "spinifex")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/SPOTMisc
 * Date/Publication: 2022-09-05 15:10:02 UTC
-* Number of recursive dependencies: 176
+* Number of recursive dependencies: 181
 
 Run `revdepcheck::revdep_details(, "SPOTMisc")` for more info
 
@@ -2707,28 +2960,6 @@ Run `revdepcheck::revdep_details(, "SPOTMisc")` for more info
         data   4.7Mb
     ```
 
-# spup
-
-<details>
-
-* Version: 1.3-2
-* GitHub: NA
-* Source code: https://github.com/cran/spup
-* Date/Publication: 2020-04-30 22:20:06 UTC
-* Number of recursive dependencies: 99
-
-Run `revdepcheck::revdep_details(, "spup")` for more info
-
-</details>
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘sp’
-      All declared Imports should be used.
-    ```
-
 # staRdom
 
 <details>
@@ -2737,7 +2968,7 @@ Run `revdepcheck::revdep_details(, "spup")` for more info
 * GitHub: https://github.com/MatthiasPucher/staRdom
 * Source code: https://github.com/cran/staRdom
 * Date/Publication: 2023-06-16 08:20:02 UTC
-* Number of recursive dependencies: 157
+* Number of recursive dependencies: 158
 
 Run `revdepcheck::revdep_details(, "staRdom")` for more info
 
@@ -2749,7 +2980,7 @@ Run `revdepcheck::revdep_details(, "staRdom")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/staRdom/new/staRdom.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/staRdom/new/staRdom.Rcheck/00install.out’ for details.
     ```
 
 # statVisual
@@ -2760,7 +2991,7 @@ Run `revdepcheck::revdep_details(, "staRdom")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/statVisual
 * Date/Publication: 2020-02-20 19:30:02 UTC
-* Number of recursive dependencies: 191
+* Number of recursive dependencies: 194
 
 Run `revdepcheck::revdep_details(, "statVisual")` for more info
 
@@ -2774,7 +3005,7 @@ Run `revdepcheck::revdep_details(, "statVisual")` for more info
       Warning: package ‘Biobase’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/statVisual/new/statVisual.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/statVisual/new/statVisual.Rcheck/00install.out’ for details.
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -2788,11 +3019,11 @@ Run `revdepcheck::revdep_details(, "statVisual")` for more info
 
 <details>
 
-* Version: 0.0.4
+* Version: 0.0.6.1
 * GitHub: https://github.com/fndemarqui/survstan
 * Source code: https://github.com/cran/survstan
-* Date/Publication: 2023-09-21 21:10:02 UTC
-* Number of recursive dependencies: 99
+* Date/Publication: 2024-02-05 15:00:02 UTC
+* Number of recursive dependencies: 123
 
 Run `revdepcheck::revdep_details(, "survstan")` for more info
 
@@ -2820,7 +3051,7 @@ Run `revdepcheck::revdep_details(, "survstan")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/systemPipeTools
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 153
+* Number of recursive dependencies: 164
 
 Run `revdepcheck::revdep_details(, "systemPipeTools")` for more info
 
@@ -2837,11 +3068,11 @@ Run `revdepcheck::revdep_details(, "systemPipeTools")` for more info
 
 <details>
 
-* Version: 1.14.2
+* Version: 1.14.3
 * GitHub: https://github.com/stemangiola/tidybulk
 * Source code: https://github.com/cran/tidybulk
-* Date/Publication: 2023-11-17
-* Number of recursive dependencies: 349
+* Date/Publication: 2023-12-04
+* Number of recursive dependencies: 400
 
 Run `revdepcheck::revdep_details(, "tidybulk")` for more info
 
@@ -2853,17 +3084,15 @@ Run `revdepcheck::revdep_details(, "tidybulk")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘ttservice’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/tidybulk/new/tidybulk.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/tidybulk/new/tidybulk.Rcheck/00install.out’ for details.
     ```
 
-*   checking dependencies in R code ... WARNING
+*   checking installed package size ... NOTE
     ```
-    '::' or ':::' import not declared from: ‘pkgconfig’
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘EGSEA’
+      installed size is  5.0Mb
+      sub-directories of 1Mb or more:
+        data   2.3Mb
+        help   1.2Mb
     ```
 
 *   checking R code for possible problems ... NOTE
@@ -2895,40 +3124,17 @@ Run `revdepcheck::revdep_details(, "tidybulk")` for more info
 
 <details>
 
-* Version: 0.7.4
+* Version: 0.8.0
 * GitHub: https://github.com/stemangiola/tidyseurat
 * Source code: https://github.com/cran/tidyseurat
-* Date/Publication: 2023-10-02 07:00:06 UTC
-* Number of recursive dependencies: 195
+* Date/Publication: 2024-01-10 04:50:02 UTC
+* Number of recursive dependencies: 206
 
 Run `revdepcheck::revdep_details(, "tidyseurat")` for more info
 
 </details>
 
 ## In both
-
-*   checking tests ...
-    ```
-      Running ‘testthat.R’
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-          scale.max = scale.max, block.size = block.size, min.cells.to.block = min.cells.to.block,
-          verbose = verbose, ...)`: No layer matching pattern 'data' found. Please run NormalizeData and retry
-      Backtrace:
-          ▆
-       1. ├─Seurat::RunPCA(...) at test-tidyr.R:8:3
-       2. ├─Seurat::FindVariableFeatures(...)
-       3. ├─Seurat::ScaleData(unnest(nest(tt, data = -groups), data))
-       4. └─Seurat:::ScaleData.Seurat(unnest(nest(tt, data = -groups), data))
-       5.   ├─Seurat::ScaleData(...)
-       6.   └─Seurat:::ScaleData.StdAssay(...)
-       7.     └─rlang::abort(paste0("No layer matching pattern '", olayer, "' found. Please run NormalizeData and retry"))
-
-      [ FAIL 5 | WARN 13 | SKIP 0 | PASS 69 ]
-      Error: Test failures
-      Execution halted
-    ```
 
 *   checking whether package ‘tidyseurat’ can be installed ... WARNING
     ```
@@ -2937,13 +3143,9 @@ Run `revdepcheck::revdep_details(, "tidyseurat")` for more info
       Warning: package ‘SeuratObject’ was built under R version 4.3.1
       Warning: package ‘sp’ was built under R version 4.3.1
       Warning: package ‘dplyr’ was built under R version 4.3.1
+      Warning: package ‘tidyr’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/tidyseurat/new/tidyseurat.Rcheck/00install.out’ for details.
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘SingleR’
+    See ‘/ggally/revdep/checks.noindex/tidyseurat/new/tidyseurat.Rcheck/00install.out’ for details.
     ```
 
 # tidySingleCellExperiment
@@ -2954,7 +3156,7 @@ Run `revdepcheck::revdep_details(, "tidyseurat")` for more info
 * GitHub: https://github.com/stemangiola/tidySingleCellExperiment
 * Source code: https://github.com/cran/tidySingleCellExperiment
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 213
+* Number of recursive dependencies: 222
 
 Run `revdepcheck::revdep_details(, "tidySingleCellExperiment")` for more info
 
@@ -2968,17 +3170,17 @@ Run `revdepcheck::revdep_details(, "tidySingleCellExperiment")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      <packageNotFoundError/error/condition>
-      Error in `loadNamespace(x)`: there is no package called 'scater'
-      Backtrace:
-          ▆
-       1. ├─base::suppressWarnings(...) at test-dplyr_methods.R:12:5
-       2. │ └─base::withCallingHandlers(...)
-       3. ├─df %>% scater::logNormCounts() %>% scater::runPCA() at test-dplyr_methods.R:13:9
-       4. └─base::loadNamespace(x)
-       5.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-       6.     └─base (local) withOneRestart(expr, restarts[[1L]])
-       7.       └─base (local) doWithOneRestart(return(expr), restart)
+       11.           ├─BiocSingular::runPCA(...)
+       12.           └─BiocSingular::runPCA(...)
+       13.             └─BiocSingular (local) .local(x, ...)
+       14.               ├─BiocSingular::runSVD(...)
+       15.               └─BiocSingular::runSVD(...)
+       16.                 ├─BiocSingular::runSVD(...)
+       17.                 └─BiocSingular::runSVD(...)
+       18.                   ├─base::do.call(...)
+       19.                   └─BiocSingular (local) `<fn>`(...)
+       20.                     ├─base::do.call(...)
+       21.                     └─irlba (local) `<fn>`(...)
 
       [ FAIL 1 | WARN 7 | SKIP 0 | PASS 154 ]
       Error: Test failures
@@ -2994,20 +3196,15 @@ Run `revdepcheck::revdep_details(, "tidySingleCellExperiment")` for more info
       Warning: package ‘matrixStats’ was built under R version 4.3.1
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
       Warning: package ‘Biobase’ was built under R version 4.3.1
       Warning: package ‘dplyr’ was built under R version 4.3.1
+      Warning: package ‘tidyr’ was built under R version 4.3.1
       Warning: package ‘ttservice’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/tidySingleCellExperiment/new/tidySingleCellExperiment.Rcheck/00install.out’ for details.
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking:
-      'SingleCellSignalR', 'SingleR', 'scater', 'scran'
+    See ‘/ggally/revdep/checks.noindex/tidySingleCellExperiment/new/tidySingleCellExperiment.Rcheck/00install.out’ for details.
     ```
 
 *   checking R code for possible problems ... NOTE
@@ -3037,7 +3234,7 @@ Run `revdepcheck::revdep_details(, "tidySingleCellExperiment")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/TNBC.CMS
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 166
+* Number of recursive dependencies: 174
 
 Run `revdepcheck::revdep_details(, "TNBC.CMS")` for more info
 
@@ -3048,16 +3245,17 @@ Run `revdepcheck::revdep_details(, "TNBC.CMS")` for more info
 *   checking whether package ‘TNBC.CMS’ can be installed ... WARNING
     ```
     Found the following significant warnings:
+      Warning: package ‘e1071’ was built under R version 4.3.1
       Warning: package ‘SummarizedExperiment’ was built under R version 4.3.2
       Warning: package ‘MatrixGenerics’ was built under R version 4.3.1
       Warning: package ‘matrixStats’ was built under R version 4.3.1
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
       Warning: package ‘Biobase’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/TNBC.CMS/new/TNBC.CMS.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/TNBC.CMS/new/TNBC.CMS.Rcheck/00install.out’ for details.
     ```
 
 # TOAST
@@ -3068,7 +3266,7 @@ Run `revdepcheck::revdep_details(, "TNBC.CMS")` for more info
 * GitHub: https://github.com/ziyili20/TOAST
 * Source code: https://github.com/cran/TOAST
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 106
+* Number of recursive dependencies: 118
 
 Run `revdepcheck::revdep_details(, "TOAST")` for more info
 
@@ -3081,7 +3279,7 @@ Run `revdepcheck::revdep_details(, "TOAST")` for more info
     Found the following significant warnings:
       Warning: package ‘EpiDISH’ was built under R version 4.3.1
       Warning: package ‘limma’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/TOAST/new/TOAST.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/TOAST/new/TOAST.Rcheck/00install.out’ for details.
     ```
 
 # TOmicsVis
@@ -3092,7 +3290,7 @@ Run `revdepcheck::revdep_details(, "TOAST")` for more info
 * GitHub: https://github.com/benben-miao/TOmicsVis
 * Source code: https://github.com/cran/TOmicsVis
 * Date/Publication: 2023-08-28 18:30:02 UTC
-* Number of recursive dependencies: 258
+* Number of recursive dependencies: 265
 
 Run `revdepcheck::revdep_details(, "TOmicsVis")` for more info
 
@@ -3107,7 +3305,8 @@ Run `revdepcheck::revdep_details(, "TOmicsVis")` for more info
       Warning: package ‘DynDoc’ was built under R version 4.3.1
       Warning: package ‘Biobase’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/TOmicsVis/new/TOmicsVis.Rcheck/00install.out’ for details.
+      Warning: package ‘e1071’ was built under R version 4.3.1
+    See ‘/ggally/revdep/checks.noindex/TOmicsVis/new/TOmicsVis.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -3127,7 +3326,7 @@ Run `revdepcheck::revdep_details(, "TOmicsVis")` for more info
 * GitHub: https://github.com/kevinrue/TVTB
 * Source code: https://github.com/cran/TVTB
 * Date/Publication: 2023-11-02
-* Number of recursive dependencies: 183
+* Number of recursive dependencies: 192
 
 Run `revdepcheck::revdep_details(, "TVTB")` for more info
 
@@ -3159,7 +3358,7 @@ Run `revdepcheck::revdep_details(, "TVTB")` for more info
     ```
       installed size is  5.8Mb
       sub-directories of 1Mb or more:
-        R     2.0Mb
+        R     2.1Mb
         doc   2.8Mb
     ```
 
@@ -3171,7 +3370,7 @@ Run `revdepcheck::revdep_details(, "TVTB")` for more info
 * GitHub: https://github.com/john-harrold/ubiquity
 * Source code: https://github.com/cran/ubiquity
 * Date/Publication: 2023-10-29 20:50:02 UTC
-* Number of recursive dependencies: 135
+* Number of recursive dependencies: 146
 
 Run `revdepcheck::revdep_details(, "ubiquity")` for more info
 
@@ -3195,7 +3394,7 @@ Run `revdepcheck::revdep_details(, "ubiquity")` for more info
 * GitHub: https://github.com/SineadMorris/ushr
 * Source code: https://github.com/cran/ushr
 * Date/Publication: 2020-04-21 18:20:03 UTC
-* Number of recursive dependencies: 80
+* Number of recursive dependencies: 92
 
 Run `revdepcheck::revdep_details(, "ushr")` for more info
 
@@ -3207,8 +3406,9 @@ Run `revdepcheck::revdep_details(, "ushr")` for more info
     ```
     Found the following significant warnings:
       Warning: package ‘dplyr’ was built under R version 4.3.1
+      Warning: package ‘tidyr’ was built under R version 4.3.1
       Warning: package ‘ggplot2’ was built under R version 4.3.1
-    See ‘ggally/revdep/checks.noindex/ushr/new/ushr.Rcheck/00install.out’ for details.
+    See ‘/ggally/revdep/checks.noindex/ushr/new/ushr.Rcheck/00install.out’ for details.
     ```
 
 # velociraptor
@@ -3219,7 +3419,7 @@ Run `revdepcheck::revdep_details(, "ushr")` for more info
 * GitHub: https://github.com/kevinrue/velociraptor
 * Source code: https://github.com/cran/velociraptor
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 229
+* Number of recursive dependencies: 237
 
 Run `revdepcheck::revdep_details(, "velociraptor")` for more info
 
@@ -3283,18 +3483,13 @@ Run `revdepcheck::revdep_details(, "velociraptor")` for more info
       Warning: package ‘matrixStats’ was built under R version 4.3.1
       Warning: package ‘GenomicRanges’ was built under R version 4.3.1
       Warning: package ‘BiocGenerics’ was built under R version 4.3.1
-      Warning: package ‘S4Vectors’ was built under R version 4.3.1
+      Warning: package ‘S4Vectors’ was built under R version 4.3.2
       Warning: package ‘IRanges’ was built under R version 4.3.1
       Warning: package ‘GenomeInfoDb’ was built under R version 4.3.2
       Warning: package ‘Biobase’ was built under R version 4.3.1
     Found the following additional notes/warnings:
       Non-staged installation was used
-    See ‘ggally/revdep/checks.noindex/velociraptor/new/velociraptor.Rcheck/00install.out’ for details.
-    ```
-
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking: 'scran', 'scater'
+    See ‘/ggally/revdep/checks.noindex/velociraptor/new/velociraptor.Rcheck/00install.out’ for details.
     ```
 
 # vidger
@@ -3305,7 +3500,7 @@ Run `revdepcheck::revdep_details(, "velociraptor")` for more info
 * GitHub: https://github.com/btmonier/vidger
 * Source code: https://github.com/cran/vidger
 * Date/Publication: 2023-10-24
-* Number of recursive dependencies: 116
+* Number of recursive dependencies: 128
 
 Run `revdepcheck::revdep_details(, "vidger")` for more info
 
@@ -3329,7 +3524,7 @@ Run `revdepcheck::revdep_details(, "vidger")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/WOTPLY
 * Date/Publication: 2022-09-12 07:43:01 UTC
-* Number of recursive dependencies: 71
+* Number of recursive dependencies: 83
 
 Run `revdepcheck::revdep_details(, "WOTPLY")` for more info
 
