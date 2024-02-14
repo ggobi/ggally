@@ -1,55 +1,18 @@
 
 ## Comments
-#### 2023-11-22
+#### 2024-02-13
 
-Thank you for being patient with me on my submission.
-
-I have fixed the packageVersion issue by removing the unecessary code: https://github.com/ggobi/ggally/commit/9e7228c6d4219c515857426a982d1a5c1ff0cd13
-
-The update also contains bug fixes and new datasets.
-
-Please let me know if there is anything else I can do to help. Thank you again for your patience!!
+I am updating GGally for support for the latest ggplot2 release.
 
 Best,
 Barret
-
-
-#### 2023-11-07
-
-Can you please change to "3.3"?
-
-Please fix before 2023-11-21 to safely retain your package on CRAN.
-
-Best
--k
-
-
-#### 2023-07-18
-
-[packageVersion() should only compare against strings.]
-
-....
-
-Please correct before 2023-08-16 to safely retain your package on CRAN.
-
-....
-
-Best
--k
-
-**********************************
-
-$GGally
-$GGally$`GGally/R/gg-plots.R`
-$GGally$`GGally/R/gg-plots.R`[[1]]
-packageVersion("ggplot2") >= 3.3
-
 
 
 ## R CMD check results
 
 * 0 errors | 0 warnings | 1 note
 
+* checking CRAN incoming feasibility ... [11s] NOTE
   Maintainer: ‘Barret Schloerke <schloerke@gmail.com>’
 
   Found the following (possibly) invalid URLs:
@@ -63,15 +26,17 @@ When visiting the link manually, the link works as expected. I believe they have
 
 ## revdepcheck results
 
-We checked 158 reverse dependencies (128 from CRAN + 30 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 159 reverse dependencies (128 from CRAN + 31 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 3 packages
+ * We failed to check 5 packages
 
 Issues with CRAN packages are summarised below.
 
-### Failed to check
+### Failed to check packages below due to installation compilation errors
 
-* fingerPro   (NA) - depends on rjags; Could not install rjags
-* loon.ggplot (NA) - Trying to attached to a null device
-* simmr       (NA) - depends on rjags; Could not install rjags
+* airGR
+* fingerPro
+* loon.ggplot
+* robustbase
+* simmr

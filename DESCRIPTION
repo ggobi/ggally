@@ -1,5 +1,5 @@
 Package: GGally
-Version: 2.2.0.9000
+Version: 2.2.1
 License: GPL (>= 2.0)
 Title: Extension to 'ggplot2'
 Type: Package
@@ -76,6 +76,4 @@ SystemRequirements: openssl
 Encoding: UTF-8
 Language: en-US
 RdMacros: lifecycle
-Remotes:
-    tidyverse/ggplot2@rc/3.5.0
 Config/testthat/edition: 3
