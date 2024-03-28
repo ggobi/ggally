@@ -25,7 +25,7 @@ ggduo(
   progress = NULL,
   xProportions = NULL,
   yProportions = NULL,
-  legends = stop("deprecated")
+  legends = deprecated()
 )
 }
 \arguments{
@@ -57,7 +57,7 @@ ggduo(
 
 \item{xProportions, yProportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
 
-\item{legends}{deprecated}
+\item{legends}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
 \description{
 Make a matrix of plots with a given data set with two different column sets
