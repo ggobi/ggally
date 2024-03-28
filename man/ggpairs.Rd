@@ -13,7 +13,7 @@ ggpairs(
   lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na =
     "na"),
   diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
-  params = NULL,
+  params = deprecated(),
   ...,
   xlab = NULL,
   ylab = NULL,
@@ -26,7 +26,7 @@ ggpairs(
   cardinality_threshold = 15,
   progress = NULL,
   proportions = NULL,
-  legends = stop("deprecated")
+  legends = deprecated()
 )
 }
 \arguments{
@@ -44,9 +44,9 @@ ggpairs(
 
 \item{diag}{see Details}
 
-\item{params}{deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}}
+\item{params}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{\link{wrap_fn_with_param_arg}}}
 
-\item{...}{deprecated. Please use \code{mapping}}
+\item{...}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} use \code{mapping}}
 
 \item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 
@@ -66,7 +66,7 @@ ggpairs(
 
 \item{proportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
 
-\item{legends}{deprecated}
+\item{legends}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
 \value{
 \code{\link{ggmatrix}} object that if called, will print

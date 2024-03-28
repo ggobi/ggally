@@ -134,11 +134,10 @@ test_that("stops", {
     "'axisLabels' not in "
   ) # nolint
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     {
       pm <- ggpairs(tips, color = "sex")
     },
-    "Extra arguments: "
   ) # nolint
 
   expect_warning(
@@ -167,18 +166,16 @@ test_that("stops", {
     "Columns in 'columnsY' not found in data"
   ) # nolint
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     {
       pm <- ggpairs(tips, legends = TRUE)
-    },
-    "'legends' will be deprecated"
+    }
   ) # nolint
 
-  expect_error(
+  lifecycle::expect_deprecated(
     {
       ggpairs(tips, params = c(size = 2))
-    },
-    "'params' is a deprecated"
+    }
   ) # nolint
 
   expect_error(
