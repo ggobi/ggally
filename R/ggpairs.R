@@ -780,13 +780,10 @@ ggpairs <- function(
       what = "ggpairs(params)"
     )
   }
-  if(lifecycle::is_present(list(...))){
-    lifecycle::deprecate_warn(
-      when = "2.2.2",
-      what = "ggpairs(...)"
-    )
+  has_dots = rlang::check_dots_empty(error = function(cnd) TRUE)
+  if(isTRUE(has_dots)){
+    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
   }
-
 
   isSharedData <- inherits(data, "SharedData")
 
