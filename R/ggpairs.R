@@ -128,33 +128,12 @@ fix_column_values <- function(
   columns
 }
 
-warn_deprecated <- function(is_supplied, title) {
-  if (is_supplied) {
-    warning(paste(
-      "'", title, "' will be deprecated in future versions.  Please remove it from your code",
-      sep = ""
-    ))
-  }
-}
-
 stop_if_bad_mapping <- function(mapping) {
   if (is.numeric(mapping)) {
     stop(
       "'mapping' should not be numeric",
       " unless 'columns' is missing from function call."
     )
-  }
-}
-
-warn_if_args_exist <- function(args) {
-  if (length(args) > 0) {
-    argNames <- names(args)
-    warning(str_c(
-      "Extra arguments: ",
-      str_c(shQuote(argNames), collapse = ", "), " are being ignored.",
-      "  If these are meant to be aesthetics, submit them using the",
-      " 'mapping' variable within ggpairs with ggplot2::aes or ggplot2::aes_string."
-    ))
   }
 }
 
@@ -234,7 +213,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @template ggmatrix-progress
-#' @param legends deprecated
+#' @param legends `r lifecycle::badge('deprecated')`
 #' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.
 #' @export
 #' @examples
@@ -456,8 +435,14 @@ ggduo <- function(
     progress = NULL,
     xProportions = NULL,
     yProportions = NULL,
-    legends = stop("deprecated")) {
-  warn_deprecated(!missing(legends), "legends")
+    legends = deprecated()) {
+  if (lifecycle::is_present(legends)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggduo(legends)",
+      details = "Ability to put legends in each plot will be dropped in next releases."
+    )
+  }
 
   isSharedData <- inherits(data, "SharedData")
   data_ <- fix_data(data)
@@ -623,8 +608,8 @@ ggduo <- function(
 #' @param upper see Details
 #' @param lower see Details
 #' @param diag see Details
-#' @param params deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}
-#' @param ... deprecated. Please use \code{mapping}
+#' @param params `r lifecycle::badge("deprecated")` see \code{\link{wrap_fn_with_param_arg}}
+#' @param ... `r lifecycle::badge("deprecated")` use \code{mapping}
 #' @param axisLabels either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels
 #' @param columnLabels label names to be displayed.  Defaults to names of columns being used.
 #' @param proportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.
@@ -634,7 +619,7 @@ ggduo <- function(
 #' @template ggmatrix-legend-param
 #' @param cardinality_threshold maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15
 #' @template ggmatrix-progress
-#' @param legends deprecated
+#' @param legends `r lifecycle::badge("deprecated")`
 #' @keywords hplot
 #' @import ggplot2
 #' @references John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
@@ -768,7 +753,7 @@ ggpairs <- function(
     upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
     lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
     diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
-    params = NULL,
+    params = deprecated(),
     ...,
     xlab = NULL,
     ylab = NULL,
@@ -781,10 +766,26 @@ ggpairs <- function(
     cardinality_threshold = 15,
     progress = NULL,
     proportions = NULL,
-    legends = stop("deprecated")) {
-  warn_deprecated(!missing(legends), "legends")
-  warn_if_args_exist(list(...))
-  stop_if_params_exist(params)
+    legends = deprecated()) {
+  if (lifecycle::is_present(legends)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(legends)",
+      details = "Ability to put legends in each plot will be dropped in next releases."
+    )
+  }
+  if (lifecycle::is_present(params)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(params)"
+    )
+  }
+  has_dots <- rlang::check_dots_empty(error = function(cnd) {
+    TRUE
+  })
+  if (isTRUE(has_dots)) {
+    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
+  }
 
   isSharedData <- inherits(data, "SharedData")
 
