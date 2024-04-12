@@ -780,7 +780,9 @@ ggpairs <- function(
       what = "ggpairs(params)"
     )
   }
-  has_dots = rlang::check_dots_empty(error = function(cnd) {TRUE})
+  has_dots <- rlang::check_dots_empty(error = function(cnd) {
+    TRUE
+  })
   if (isTRUE(has_dots)) {
     lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
   }
