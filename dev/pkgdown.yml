@@ -1,12 +1,12 @@
-pandoc: 3.1.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.0.8
 pkgdown_sha: ~
 articles:
   ggally_plots: ggally_plots.html
   ggally_stats: ggally_stats.html
   ggbivariate: ggbivariate.html
-  ggcoef: ggcoef.html
   ggcoef_model: ggcoef_model.html
+  ggcoef: ggcoef.html
   ggduo: ggduo.html
   ggmatrix: ggmatrix.html
   ggnetworkmap: ggnetworkmap.html
@@ -16,7 +16,7 @@ articles:
   ggsurv: ggsurv.html
   ggtable: ggtable.html
   glyph: glyph.html
-last_built: 2024-02-14T18:11Z
+last_built: 2024-04-12T14:07Z
 urls:
   reference: https://ggobi.github.io/ggally/reference
   article: https://ggobi.github.io/ggally/articles
