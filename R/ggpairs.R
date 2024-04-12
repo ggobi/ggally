@@ -436,7 +436,7 @@ ggduo <- function(
     xProportions = NULL,
     yProportions = NULL,
     legends = deprecated()) {
-  if(lifecycle::is_present(legends)){
+  if (lifecycle::is_present(legends)) {
     lifecycle::deprecate_warn(
       when = "2.2.2",
       what = "ggduo(legends)",
@@ -767,21 +767,21 @@ ggpairs <- function(
     progress = NULL,
     proportions = NULL,
     legends = deprecated()) {
-  if(lifecycle::is_present(legends)){
+  if (lifecycle::is_present(legends)) {
     lifecycle::deprecate_warn(
       when = "2.2.2",
       what = "ggpairs(legends)",
       details = "Ability to put legends in each plot will be dropped in next releases."
     )
   }
-  if(lifecycle::is_present(params)){
+  if (lifecycle::is_present(params)) {
     lifecycle::deprecate_warn(
       when = "2.2.2",
       what = "ggpairs(params)"
     )
   }
-  has_dots = rlang::check_dots_empty(error = function(cnd) TRUE)
-  if(isTRUE(has_dots)){
+  has_dots = rlang::check_dots_empty(error = function(cnd) {TRUE})
+  if (isTRUE(has_dots)) {
     lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
   }
 
