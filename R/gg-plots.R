@@ -261,10 +261,11 @@ ggally_density <- function(data, mapping, ...) {
 #' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
 #' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
 #' @param align_percent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
-#' @param alignPercent,displayGrid deprecated. Please use their snake-case counterparts.
+#' @param alignPercent,displayGrid `r lifecycle::badge("deprecated")`. Please use their snake-case counterparts.
 #' @param title title text to be displayed
 #' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
+#' @importFrom lifecycle deprecated
 #' @seealso \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 #' @export
 #' @keywords hplot
@@ -308,14 +309,22 @@ ggally_cor <- function(
     justify_labels = "right",
     align_percent = 0.5,
     title = "Corr",
-    alignPercent = warning("deprecated. Use `align_percent`"),
-    displayGrid = warning("deprecated. Use `display_grid`")) {
-  if (!missing(alignPercent)) {
-    warning("`alignPercent` is deprecated. Please use `align_percent` if alignment still needs to be adjusted")
+    alignPercent = deprecated(),
+    displayGrid = deprecated()) {
+  if (lifecycle::is_present(alignPercent)) {
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = "ggally_cor(alignPercent)",
+      details = "Please use `align_percent` if alignment still needs to be adjusted."
+    )
     align_percent <- alignPercent
   }
-  if (!missing(displayGrid)) {
-    warning("`displayGrid` is deprecated. Please use `display_grid`")
+  if (lifecycle::is_present(displayGrid)) {
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = "ggally_cor(displayGrid)",
+      details = "Please use `display_grid`"
+    )
     display_grid <- displayGrid
   }
 
