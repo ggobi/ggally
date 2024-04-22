@@ -1,4 +1,4 @@
-# v1_ggmatrix_theme is deprecated
+# v1_ggmatrix_theme() is deprecated
 
     Code
       v1_ggmatrix_theme()
@@ -19,4 +19,14 @@
        - attr(*, "class")= chr [1:2] "theme" "gg"
        - attr(*, "complete")= logi FALSE
        - attr(*, "validate")= logi TRUE
+
+# ggally_cor_v1_5() is deprecated
+
+    Code
+      p <- ggally_cor_v1_5(tips, ggplot2::aes(!!as.name("total_bill"), !!as.name(
+        "tip")))
+    Condition
+      Warning:
+      `ggally_cor_v1_5()` was deprecated in GGally 2.2.2.
+      i Please use `ggally_cor()` instead.
 

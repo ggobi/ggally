@@ -52,11 +52,14 @@ v1_ggmatrix_theme <- function() {
 
 #' Correlation value plot
 #'
-# \lifecycle{deprecated}
-#'
-#' (Deprecated. See \code{\link{ggally_cor}}.)
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Estimate correlation from the given data.
+#'
+#' This function is deprecated and will be removed in future releases.
+#'
+#' See \code{\link{ggally_cor}}.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -72,7 +75,7 @@ v1_ggmatrix_theme <- function() {
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export
-#' @keywords hplot
+#' @keywords hplot internal
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
@@ -109,6 +112,11 @@ ggally_cor_v1_5 <- function(
     corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
     displayGrid = TRUE,
     ...) {
+  lifecycle::deprecate_soft(
+    when = "2.2.2",
+    what = "ggally_cor_v1_5()",
+    with = "ggally_cor()"
+  )
   if (!is.null(corAlignPercent)) {
     stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
   }
