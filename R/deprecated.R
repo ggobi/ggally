@@ -75,7 +75,7 @@ v1_ggmatrix_theme <- function() {
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export
-#' @keywords hplot internal
+#' @keywords internal
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
