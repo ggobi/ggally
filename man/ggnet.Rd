@@ -192,6 +192,8 @@ been removed entirely from \code{ggnet}}
 the node labels: see \code{\link[ggplot2]{geom_text}} for details.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Function for plotting network objects using \pkg{ggplot2}, now replaced by the
 \code{\link{ggnet2}} function, which provides additional control over
 plotting parameters. Please visit \url{https://github.com/briatte/ggnet} for
@@ -247,3 +249,4 @@ package
 Moritz Marbach and Francois Briatte, with help from Heike Hofmann,
 Pedro Jordano and Ming-Yu Liu
 }
+\keyword{internal}

@@ -4,6 +4,9 @@ if (getRversion() >= "2.15.1") {
 
 #' Network plot
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
 #' Function for plotting network objects using \pkg{ggplot2}, now replaced by the
 #' \code{\link{ggnet2}} function, which provides additional control over
 #' plotting parameters. Please visit \url{https://github.com/briatte/ggnet} for
@@ -135,6 +138,7 @@ if (getRversion() >= "2.15.1") {
 #' @importFrom stats quantile na.omit
 #' @importFrom utils head installed.packages
 #' @importFrom grDevices gray.colors
+#' @keywords internal
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
@@ -206,6 +210,7 @@ ggnet <- function(
   trim.labels      = deprecated(),
   ...
 ) {
+  lifecycle::deprecate_soft("2.2.2", "ggnet()", "ggnet2()")
 
   # -- packages ----------------------------------------------------------------
 
