@@ -49,10 +49,10 @@ test_that("examples", {
   xy <- gplot.layout.circle(n) # nolint
   n %v% "lon" <- xy[, 1]
   n %v% "lat" <- xy[, 2]
-  expect_warning(ggnet(n, mode = "geo"), "deprecated")
+  lifecycle::expect_deprecated(ggnet(n, mode = "geo"))
 
   # test names = c(x, y)
-  expect_warning(ggnet(n, names = c("a", "b")), "deprecated")
+  lifecycle::expect_deprecated(ggnet(n, names = c("a", "b")))
 
   # test quantize.weights
   with_options(list(warn = 2), {
@@ -62,14 +62,14 @@ test_that("examples", {
 
   # test subset.threshold
   suppressMessages({
-    expect_warning(ggnet(n, subset.threshold = 2))
+    lifecycle::expect_deprecated(ggnet(n, subset.threshold = 2))
   })
 
   # test top8.nodes
-  expect_warning(ggnet(n, top8.nodes = TRUE))
+  lifecycle::expect_deprecated(ggnet(n, top8.nodes = TRUE))
 
   # test trim.labels
-  expect_warning(ggnet(n, trim.labels = TRUE))
+  lifecycle::expect_deprecated(ggnet(n, trim.labels = TRUE))
 
   #   # test subset.threshold by removing all nodes
   #   expect_warning(

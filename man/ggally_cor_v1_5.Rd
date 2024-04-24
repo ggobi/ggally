@@ -82,5 +82,4 @@ p_(ggally_cor_v1_5(
 \author{
 Barret Schloerke
 }
-\keyword{hplot}
 \keyword{internal}

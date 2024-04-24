@@ -114,12 +114,12 @@ if (getRversion() >= "2.15.1") {
 #' @param legend.position the location of the plot legend(s). Accepts all
 #' \code{legend.position} values supported by \code{\link[ggplot2]{theme}}.
 #' Defaults to \code{"right"}.
-#' @param names deprecated: see \code{group.legend} and \code{size.legend}
-#' @param quantize.weights deprecated: see \code{weight.cut}
-#' @param subset.threshold deprecated: see \code{weight.min}
-#' @param top8.nodes deprecated: this functionality was experimental and has
+#' @param names `r lifecycle::badge("deprecated")` see \code{group.legend} and \code{size.legend}
+#' @param quantize.weights `r lifecycle::badge("deprecated")` see \code{weight.cut}
+#' @param subset.threshold `r lifecycle::badge("deprecated")` see \code{weight.min}
+#' @param top8.nodes `r lifecycle::badge("deprecated")` this functionality was experimental and has
 #' been removed entirely from \code{ggnet}
-#' @param trim.labels deprecated: see \code{label.trim}
+#' @param trim.labels `r lifecycle::badge("deprecated")` see \code{label.trim}
 #' @param ... other arguments passed to the \code{geom_text} object that sets
 #' the node labels: see \code{\link[ggplot2]{geom_text}} for details.
 #' @seealso \code{\link{ggnet2}} in this package,
@@ -199,11 +199,11 @@ ggnet <- function(
   legend.size      = 9,
   legend.position  = "right",
   # -- deprecated arguments ----------------------------------------------------
-  names            = c("", ""),
-  quantize.weights = FALSE,
-  subset.threshold = 0,
-  top8.nodes       = FALSE,
-  trim.labels      = FALSE,
+  names            = deprecated(),
+  quantize.weights = deprecated(),
+  subset.threshold = deprecated(),
+  top8.nodes       = deprecated(),
+  trim.labels      = deprecated(),
   ...
 ) {
 
@@ -213,32 +213,55 @@ ggnet <- function(
   # -- deprecations ------------------------------------------------------------
 
   if (length(mode) == 1 && mode == "geo") {
-    warning("mode = 'geo' is deprecated; please use mode = c('lon', 'lat') instead")
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(mode='cannot be `geo`')",
+      details = "Please use mode = c('lon', 'lat') instead"
+    )
     mode = c("lon", "lat")
   }
 
-  if (!identical(names, c("", ""))) {
-    warning("names is deprecated; please use group.legend and size.legend instead")
+  if (lifecycle::is_present(names)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(names)",
+      details = "Please use group.legend and size.legend instead"
+    )
     group.legend = names[1]
     size.legend  = names[2]
   }
 
-  if (isTRUE(quantize.weights)) {
-    warning("quantize.weights is deprecated; please use weight.cut instead")
-    weight.cut = TRUE
+  if (lifecycle::is_present(quantize.weights)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(quantize.weights)",
+      details = "Please use weight.cut instead"
+    )
+    weight.cut = quantize.weights
   }
 
-  if (subset.threshold > 0) {
-    warning("subset.threshold is deprecated; please use weight.min instead")
+  if (lifecycle::is_present(subset.threshold)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(subset.threshold)",
+      details = "Please use weight.min instead"
+    )
     weight.min = subset.threshold
   }
 
-  if (isTRUE(top8.nodes)) {
-    warning("top8.nodes is deprecated")
+  if (lifecycle::is_present(top8.nodes)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(top8.nodes)"
+    )
   }
 
-  if (isTRUE(trim.labels)) {
-    warning("trim.labels is deprecated; please use label.trim instead")
+  if (lifecycle::is_present(trim.labels)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(trim.labels)",
+      details = "Please use label.trim instead"
+    )
     label.trim = function(x) gsub("^@|^http://(www\\.)?|/$", "", x)
   }
 

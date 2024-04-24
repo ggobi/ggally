@@ -35,11 +35,11 @@ ggnet(
   label.trim = FALSE,
   legend.size = 9,
   legend.position = "right",
-  names = c("", ""),
-  quantize.weights = FALSE,
-  subset.threshold = 0,
-  top8.nodes = FALSE,
-  trim.labels = FALSE,
+  names = deprecated(),
+  quantize.weights = deprecated(),
+  subset.threshold = deprecated(),
+  top8.nodes = deprecated(),
+  trim.labels = deprecated(),
   ...
 )
 }
@@ -177,16 +177,16 @@ Defaults to \code{9}.}
 \code{legend.position} values supported by \code{\link[ggplot2]{theme}}.
 Defaults to \code{"right"}.}
 
-\item{names}{deprecated: see \code{group.legend} and \code{size.legend}}
+\item{names}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{group.legend} and \code{size.legend}}
 
-\item{quantize.weights}{deprecated: see \code{weight.cut}}
+\item{quantize.weights}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{weight.cut}}
 
-\item{subset.threshold}{deprecated: see \code{weight.min}}
+\item{subset.threshold}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{weight.min}}
 
-\item{top8.nodes}{deprecated: this functionality was experimental and has
+\item{top8.nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} this functionality was experimental and has
 been removed entirely from \code{ggnet}}
 
-\item{trim.labels}{deprecated: see \code{label.trim}}
+\item{trim.labels}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{label.trim}}
 
 \item{...}{other arguments passed to the \code{geom_text} object that sets
 the node labels: see \code{\link[ggplot2]{geom_text}} for details.}
