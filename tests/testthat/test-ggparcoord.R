@@ -227,6 +227,17 @@ test_that("order", {
   }
 })
 
+test_that("missing and order(anyClass)", {
+  ds2 <- diamonds.samp
+  ds2[3, 1] <- NA
+  missing_options <- c("exclude", "mean", "median", "min10", "random")
+
+  for (missing in missing_options) {
+    p <- ggparcoord(data = ds2, columns = c(1, 5:10), groupColumn = 2, missing = missing, order = "anyClass")
+  }
+  expect_true(TRUE)
+})
+
 test_that("basic", {
   # no color supplied
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10))

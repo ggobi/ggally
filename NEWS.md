@@ -1,5 +1,7 @@
 # GGally (development version)
 
+* Fix anyClass ordering in ggparcoord when data has missing values (#500)
+
 # GGally 2.2.1
 
 * Fix compatibility with ggplot2 3.5.0 (@teunbrand, #481)
