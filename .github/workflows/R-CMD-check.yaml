@@ -20,4 +20,7 @@ jobs:
   R-CMD-check:
     uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
     with:
-      minimum-r-version: "4.1.0"
+      # * emmeans: Can't install dependency estimability (>= 1.4.1)
+      # * estimability: Needs R >= 4.3.0
+      # :-( - https://github.com/rvlenth/estimability/blob/9606dad3e04cffa4b6bf54f4124834de464c1f3f/inst/NEWS#L10
+      minimum-r-version: "4.3.0"
