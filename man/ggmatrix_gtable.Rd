@@ -16,7 +16,7 @@ ggmatrix_gtable(
 
 \item{...}{ignored}
 
-\item{progress, progress_format}{Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.}
+\item{progress, progress_format}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.}
 }
 \description{
 Specialized method to print the \code{\link{ggmatrix}} object.

@@ -18,8 +18,8 @@ ggally_cor(
   justify_labels = "right",
   align_percent = 0.5,
   title = "Corr",
-  alignPercent = warning("deprecated. Use `align_percent`"),
-  displayGrid = warning("deprecated. Use `display_grid`")
+  alignPercent = deprecated(),
+  displayGrid = deprecated()
 )
 }
 \arguments{
@@ -55,7 +55,7 @@ ggally_cor(
 
 \item{title}{title text to be displayed}
 
-\item{alignPercent, displayGrid}{deprecated. Please use their snake-case counterparts.}
+\item{alignPercent, displayGrid}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}. Please use their snake-case counterparts.}
 }
 \description{
 Estimate correlation from the given data. If a color variable is supplied, the correlation will also be calculated per group.
