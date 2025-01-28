@@ -496,7 +496,7 @@ fn_switch <- function(
   function(data, mapping, ...) {
     var <- mapping_string(mapping[[mapping_val]])
 
-    fn <- ifnull(types[[var]], types[["default"]])
+    fn <- types[[var]] %||% types[["default"]]
 
     if (is.null(fn)) {
       stop(str_c(

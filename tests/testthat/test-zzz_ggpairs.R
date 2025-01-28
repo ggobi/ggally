@@ -662,7 +662,7 @@ test_that("subtypes", {
 
   gn <- function(x) {
     fnName <- attr(x, "name")
-    ifnull(fnName, x)
+    fnName %||% x
   }
 
   ggpairs_fn1 <- function(title, types, diag, ...) {

@@ -63,7 +63,6 @@ Suggests:
     sna (>= 2.3-2),
     survival,
     rmarkdown,
-    roxygen2,
     testthat,
     crosstalk,
     knitr,

@@ -19,7 +19,7 @@ on_ci <- function() {
 #' Loads package namespaces or yells at user... loudly
 #'
 #' @param pkgs vector of character values
-#' @keywords internal
+#' @noRd
 require_namespaces <- function(pkgs) {
   for (pkg in pkgs) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -40,15 +40,6 @@ str_detect <- function(string, pattern, ...) {
 # str_replace <- function(string, pattern, replacement) {
 #   sub(pattern, replacement, string)
 # }
-
-ifnull <- function(a, b) {
-  if (!is.null(a)) {
-    a
-  } else {
-    b
-  }
-}
-
 
 hf <- function(field) {
   eval(parse(text = read.dcf(".helper_functions", fields = field)))

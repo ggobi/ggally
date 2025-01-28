@@ -1033,10 +1033,10 @@ ggally_text <- function(
     theme(
       panel.grid.minor = element_blank(),
       panel.grid.major = element_line(
-        colour = ifnull(theme$panel.background$fill, NA)
+        colour = theme$panel.background$fill %||% NA
       ),
       panel.background = element_rect(
-        fill = ifnull(theme$panel.grid.major$colour, NA)
+        fill = theme$panel.grid.major$colour %||% NA
       )
     ) +
     labs(x = NULL, y = NULL)
@@ -1060,8 +1060,8 @@ ggally_text <- function(
     p <- p +
       geom_text(label = label, mapping = mapping, ...)
   } else {
-    bg <- ifnull(theme$panel.background$fill, "grey92")
-    fg <- ifnull(theme$axis.text$colour, "gray30")
+    bg <- theme$panel.background$fill %||% "grey92"
+    fg <- theme$axis.text$colour %||% "gray30"
     colour <- scales::colour_ramp(c(bg, fg))(0.75)
     p <- p +
       geom_text(label = label, mapping = mapping, colour = colour, ...)
