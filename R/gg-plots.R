@@ -1329,19 +1329,14 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- plyr::count(data, vars = c(xName, yName))
-
-  # overwrite names so name clashes don't happen
-  colnames(countData)[1:2] <- c("x", "y")
+  countData <- dplyr::count(data, x = .data$xName, y = .data$yName, name = "freq")
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
 
   countData <- subset(countData, freq >= floor)
 
-  if (is.null(ceiling)) {
-    ceiling <- max(countData$freq)
-  }
+  ceiling <- ceiling %||% max(countData$freq)
 
   countData[["freqSize"]] <- sqrt(pmin(countData[["freq"]], ceiling) / ceiling)
   countData[["col"]] <- ifelse(countData[["freq"]] > ceiling, "grey30", "grey50")
@@ -1786,7 +1781,7 @@ ggally_summarise_by <- function(
     }
 
     ggplot(res) +
-      aes(y = !!as.name("y"), x = 1, label = !!as.name("label"), colour = !!col) +
+      aes(y = .data$y, x = 1, label = .data$label, colour = !!col) +
       geom_text(...) +
       xlab("") +
       ylab(mapping_string(mapping$y)) +

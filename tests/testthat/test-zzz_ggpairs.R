@@ -609,7 +609,7 @@ test_that("strip-top and strip-right", {
   data(tips)
 
   double_strips <- function(data, mapping, ...) {
-    dt <- plyr::count(data, c(mapping_string(mapping$x), mapping_string(mapping$y)))
+    dt <- dplyr::count(data, .data[[mapping_string(mapping$x)]], .data[[mapping_string(mapping$y)]], name = "freq")
     ggplot(dt, aes(xmin = 0.25, xmax = 0.75, ymin = 1, ymax = freq)) +
       geom_rect() +
       ggplot2::facet_grid(paste0(mapping_string(mapping$y), " ~ ", mapping_string(mapping$x))) +

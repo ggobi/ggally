@@ -87,7 +87,7 @@ ggally_trends <- function(
         tmp <- data
         tmp[[".ggally_y"]] <- as.integer(y == l)
         tmp$y <- l
-        d <- plyr::rbind.fill(d, tmp)
+        d <- dplyr::bind_rows(d, tmp)
       }
       mapping$linetype <- aes(y = !!as.name("y"))$y
       mapping$y <- aes(y = !!as.name(".ggally_y"))$y
