@@ -225,7 +225,7 @@ ggally_density <- function(data, mapping, ...) {
   p <- ggplot(data = data) +
     geom_point(
       data = data.frame(rangeX = rangeX, rangeY = rangeY),
-      mapping = aes(x = !!as.name("rangeX"), y = !!as.name("rangeY")),
+      mapping = aes(x = .data$rangeX, y = .data$rangeY),
       alpha = 0
     )
 
@@ -532,10 +532,10 @@ ggally_statistic <- function(
       list(
         data = cordf,
         aes(
-          x = !!as.name("xPos"),
-          y = !!as.name("yPos"),
-          label = !!as.name("labelp"),
-          color = !!as.name("labelp")
+          x     = .data$xPos,
+          y     = .data$yPos,
+          label = .data$labelp,
+          color = .data$labelp
         )
       ),
       group_args
@@ -1207,11 +1207,11 @@ ggally_diagAxis <- function(
     p <- p + geom_text(
       data = axisBreaks,
       mapping = aes(
-        x     = !!as.name("xPos"),
-        y     = !!as.name("yPos"),
-        label = !!as.name("lab"),
-        hjust = !!as.name("hjust"),
-        vjust = !!as.name("vjust")
+        x     = .data$xPos,
+        y     = .data$yPos,
+        label = .data$lab,
+        hjust = .data$hjust,
+        vjust = .data$"vjust"
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1244,9 +1244,9 @@ ggally_diagAxis <- function(
     p <- p + geom_text(
       data = axisLabs,
       mapping = aes(
-        x     = !!as.name("x"),
-        y     = !!as.name("y"),
-        label = !!as.name("lab")
+        x     = .data$x,
+        y     = .data$y,
+        label = .data$lab
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1348,11 +1348,11 @@ ggally_ratio <- function(
     ggplot(
       data = countData,
       mapping = aes(
-        x = !!as.name("xPos"),
-        y = !!as.name("yPos"),
-        height = !!as.name("freqSize"),
-        width = !!as.name("freqSize"),
-        fill = !!as.name("col")
+        x = .data$xPos,
+        y = .data$yPos,
+        height = .data$freqSize,
+        width = .data$freqSize,
+        fill = .data$col
       )
     ) +
     geom_tile(...) +
