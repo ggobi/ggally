@@ -1691,7 +1691,7 @@ ggally_naDiag <- function(...) {
 #'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
 #' ))
 ggally_autopoint <- function(data, mapping, ...) {
-  require_namespaces("ggforce")
+  rlang::check_installed("ggforce")
 
   args <- list(...)
   if (!"alpha" %in% names(args) && is.null(mapping$alpha)) {
@@ -1824,7 +1824,7 @@ ggally_summarise_by <- function(
 #' \code{weighted_median_iqr} computes weighted median and interquartile range.
 #' @export
 weighted_median_iqr <- function(x, weights = NULL) {
-  require_namespaces("Hmisc")
+  rlang::check_installed("Hmisc")
   s <- round(Hmisc::wtd.quantile(x, weights = weights, probs = c(.25, .5, .75), na.rm = TRUE), digits = 1)
   paste0("Median: ", s[2], " [", s[1], "-", s[3], "]")
 }
@@ -1834,7 +1834,7 @@ weighted_median_iqr <- function(x, weights = NULL) {
 #' \code{weighted_mean_sd} computes weighted mean and standard deviation.
 #' @export
 weighted_mean_sd <- function(x, weights = NULL) {
-  require_namespaces("Hmisc")
+  rlang::check_installed("Hmisc")
   m <- round(Hmisc::wtd.mean(x, weights = weights, na.rm = TRUE), digits = 1)
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
   paste0("Mean: ", m, " (", sd, ")")

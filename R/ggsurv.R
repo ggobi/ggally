@@ -111,7 +111,7 @@ ggsurv <- function(
     ylab = "Survival",
     main = "",
     order.legend = TRUE) {
-  require_namespaces(c("survival", "scales"))
+  rlang::check_installed(c("survival", "scales"))
 
   strata <- ifelse(is.null(s$strata), 1, length(s$strata))
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)

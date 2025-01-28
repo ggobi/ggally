@@ -32,7 +32,7 @@ broomify <- function(model, lmStars = TRUE) {
     return(model)
   }
 
-  require_namespaces("broom")
+  rlang::check_installed("broom")
 
   broom_glance_info <- broom::glance(model)
   broom_tidy_coef <- broom::tidy(model)

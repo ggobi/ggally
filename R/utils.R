@@ -13,22 +13,6 @@ on_ci <- function() {
   isTRUE(as.logical(Sys.getenv("CI")))
 }
 
-
-#' Loads package namespaces
-#'
-#' Loads package namespaces or yells at user... loudly
-#'
-#' @param pkgs vector of character values
-#' @noRd
-require_namespaces <- function(pkgs) {
-  for (pkg in pkgs) {
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-      stop(str_c("please install the package '", pkg, "'.  install.packages('", pkg, "') "))
-    }
-  }
-}
-
-
 str_c <- function(..., sep = "", collapse = NULL) {
   paste(..., sep = sep, collapse = collapse)
 }
