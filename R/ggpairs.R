@@ -766,7 +766,9 @@ ggpairs <- function(
     cardinality_threshold = 15,
     progress = NULL,
     proportions = NULL,
-    legends = deprecated()) {
+    legends = deprecated(),
+    filter_pairs = NULL) {  # Nouveau paramètre pour filtrer les paires
+
   if (lifecycle::is_present(legends)) {
     lifecycle::deprecate_warn(
       when = "2.2.2",
@@ -832,40 +834,50 @@ ggpairs <- function(
   }
 
   ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
-    plotType <- dataTypes[i, "plotType"]
+  plotType <- dataTypes[i, "plotType"]
+  posX <- dataTypes[i, "posX"]
+  posY <- dataTypes[i, "posY"]
+  xColName <- dataTypes[i, "xVar"]
+  yColName <- dataTypes[i, "yVar"]
 
-    posX <- dataTypes[i, "posX"]
-    posY <- dataTypes[i, "posY"]
-    xColName <- dataTypes[i, "xVar"]
-    yColName <- dataTypes[i, "yVar"]
+  # Vérifier si la paire doit être exclue
+  # Vérifier si la paire doit être exclue (sauf la diagonale)
+  if (!is.null(filter_pairs) && posX != posY && filter_pairs(data[[xColName]], data[[yColName]])) {
+      return(NULL)  # Ignore cette paire sauf sur la diagonale
+  }
 
-    if (posX > posY) {
-      types <- upper
-    } else if (posX < posY) {
-      types <- lower
-    } else {
-      types <- diag
-    }
+  if (posX > posY) {
+    types <- upper
+  } else if (posX < posY) {
+    types <- lower
+  } else {
+    types <- diag
+  }
 
-    sectionAes <- add_and_overwrite_aes(
-      add_and_overwrite_aes(
-        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
-        mapping
-      ),
-      types$mapping
-    )
+  sectionAes <- add_and_overwrite_aes(
+    add_and_overwrite_aes(
+      aes(x = !!as.name(xColName), y = !!as.name(yColName)),
+      mapping
+    ),
+    types$mapping
+  )
 
-    args <- list(types = types, sectionAes = sectionAes)
-    if (plotType == "label") {
-      args$label <- columnLabels[posX]
-    }
+  args <- list(types = types, sectionAes = sectionAes)
+  if (plotType == "label") {
+    args$label <- columnLabels[posX]
+  }
 
-    plot_fn <- ggmatrix_plot_list(plotType)
+  #args$data <- data  # Utilisation des données complètes
+  
+  #args$filter <- filter_function
 
-    p <- do.call(plot_fn, args)
+  plot_fn <- ggmatrix_plot_list(plotType)
 
-    return(p)
-  })
+  p <- do.call(plot_fn, args)
+
+  return(p)
+})
+
 
   plotMatrix <- ggmatrix(
     plots = ggpairsPlots,
@@ -892,7 +904,6 @@ ggpairs <- function(
 
   plotMatrix
 }
-
 
 #' Add new aes
 #'
