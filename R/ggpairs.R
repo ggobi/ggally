@@ -767,7 +767,7 @@ ggpairs <- function(
     progress = NULL,
     proportions = NULL,
     legends = deprecated(),
-    filter_pairs = NULL) {  # Nouveau paramètre pour filtrer les paires
+    filter_pairs = NULL) {  #Nouveau paramètre pour filtrer les paires
 
   if (lifecycle::is_present(legends)) {
     lifecycle::deprecate_warn(
