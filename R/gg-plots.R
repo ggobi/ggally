@@ -347,6 +347,11 @@ ggally_cor <- function(
         y <- as.numeric(y)
       }
 
+      # Checking the size of the samples before doing cor.test
+      if (length(x) < 3 | length(y) < 3) {
+        return("NA")  # Return "NA" instead of an error
+      }
+
       corObj <- stats::cor.test(x, y, method = method, use = use)
 
       # make sure all values have X-many decimal places

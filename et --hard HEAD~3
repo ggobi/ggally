@@ -1,0 +1,2043 @@
+[33mf407b68[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfix-ggally-cor-small-sample[m[33m, [m[1;31morigin/fix-ggally-cor-small-sample[m[33m)[m Fix ggally_cor error with small sample sizes
+[33m9d954c1[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m test: Bump min R version to 4.3 (#501)
+[33m1f58feb[m chore: Use lifecycle for arguments deprecation in ggpairs (#494)
+[33m27acf5a[m Increment version number to 2.2.1.9000
+[33m9fdc7a8[m v2.2.1 (#492)
+[33m85a4944[m Safeguard suggested `{intergraph}` package in tests (#491)
+[33ma635e2d[m Use `{testthat}` edition 3 (#490)
+[33mb062ddf[m Work around `scale_y_continuous()` behavior in {ggplot2@3.5} (#488)
+[33mb889015[m Update test snapshots using `{ggplot2@3.5}` (#489)
+[33m117c0ae[m Compatibility with ggplot2 3.5.0 (#483)
+[33me19b6b2[m Increment version number to 2.2.0.9000
+[33m911aac8[m Update .Rbuildignore
+[33mf6cd613[m v2.2.0 (#458)
+[33m8131749[m Bug fixes; Update internal ggplot2 usage (#477)
+[33m9e7228c[m Remove use of `packageVersion()` (#476)
+[33m4b6661b[m Typo fixes (#474)
+[33m8e05816[m fixed uppertriangle/ggscatmat error - still one check error in the test of strip-top and strip-right
+[33mf4c527a[m removing dependence on reshape - some errors when checking package with uppertriangle but this should not be related to changes made today
+[33md79b4ef[m fix to ggscatmat for #467
+[33m4d8fa81[m Make two vignettes to redirect to `{ggstats}` (#457)
+[33me32676b[m Reexport ggstats functions (#455)
+[33md13006e[m Use `{vdiffr}`; Update GHA; Update "print on CI / examples" method; Fix lints (#453)
+[33me4217fe[m Fix in `ggcoef_compare()` when using an `include` argument (#448)
+[33m53c1f65[m Fix no_reference_row option in ggcoeff_compare() (#431)
+[33m8072493[m Fix facets ordering in `ggcoef_compare()` (#427)
+[33m3918c50[m Reverse Y axis in `ggally_count()` (#420)
+[33m68f15c4[m GGally 2.1.2 (#419)
+[33m01a2c67[m Fix tests for cran (#418)
+[33m4b37d1e[m Add git config into pkgdown workflow (#409)
+[33meb733e8[m `usethis::use_dev_version()`
+[33m03b5335[m v2.1.1 (#408)
+[33mb098ce9[m no colour arg  if all values are NA (#404)
+[33m4edfeed[m Suggest `emmeans` (#407)
+[33m03acb3d[m Merge branch 'master' of https://github.com/ggobi/ggally
+[33m610761f[m ignore CRAN-RELEASE
+[33m8fd00c1[m bug fix in ggcoef_model when tidy() does not return a p.value (#400)
+[33mbb51db8[m missing link in documentation (#403)
+[33m8b28022[m bug fix in stat_cross() (#402)
+[33m78d73d0[m v2.1.0 (#397)
+[33me40ae14[m NEWS update about #392
+[33mb95ff02[m stat_prop() now accepts a x or a y aesthetic (#396)
+[33m9de5508[m ggcoef() redesign (#392)
+[33mf289584[m Improvements and bug fixes for ggally_colbar(), ggally_rowbar() and ggbivariate() (#375)
+[33m17f6860[m Merge pull request #387 from ggobi/cor_font
+[33mf20d94f[m removing reference to family in ggall_statistic to see if this fixes the bug
+[33m71eb7fe[m ggscatmat problem of rearranging variables is now fixed
+[33m03a3e41[m Do not stomp release docs with dev docs
+[33m1f7a7cb[m Fix vig_ggally() doc page
+[33m3094fd9[m Direct link to all vignettes
+[33m2758e7b[m Add parens to make pkgdown links appear
+[33m5b2c576[m Merge pull request #364 from ggobi/rc-v2.0.0
+[33mea372b1[m Update CRAN-RELEASE
+[33m11d8214[m Update cran-comments.md
+[33m1dd3322[m Run revdep
+[33mdaf5a9f[m Update ggtable.Rd
+[33m532e4b5[m Merge branch 'master' into rc-v2.0.0
+[33mf1699bf[m weighted_mean_sd and weighted_median_iqr instead of mean_sd and median_iqr
+[33m6279186[m Merge pull request #369 from larmarange/small_ggtable_fix
+[33m88cf6b5[m change default legend in ggtable
+[33mc3faed8[m change default fill scale
+[33mabc207c[m Update CRAN-RELEASE
+[33mcc766e3[m Update cran-comments.md
+[33m8d0de8c[m Test less things on CRAN for timing purposes
+[33m1d7c1ef[m Do not error on warning
+[33mffd3989[m Run revdep
+[33m174e88c[m All examples use `p_()` (#368)
+[33mc5f1397[m use skip on cran. Not test on CI. Skip subplots tests on cran.
+[33mb0de56d[m Remove Vignettes from CRAN pkg (#367)
+[33m415e109[m fix typo
+[33m3b451bc[m only spell check on CI. Safeguard testthat
+[33mfb5adfa[m Update cran-comments.md
+[33m8a6b8ff[m Run Revdep
+[33m887672b[m speed up cran examples
+[33m27e82a0[m Create rhub.R
+[33m3cdb23d[m Update pkgdown.yaml
+[33m0d91af2[m Add back lifecycle macros
+[33m5607c9c[m Do not print as much
+[33mdffef84[m bump version to 2.0.0
+[33m2837ab6[m Add `add_to_ggmatrix()` and `ggmatrix_location()` (#362)
+[33md91fb30[m Update docs (#357)
+[33m9e695f7[m Cleanup Actions and Remove Travis (#356)
+[33m2cb012c[m Preserve factor ordering in ggscatmat (#355)
+[33m3c5b7ff[m add scripts for building the website and calling revdepcheck
+[33md1bef2f[m add searching of website
+[33ma027ec6[m document
+[33m2d9a793[m Merge pull request #352 from larmarange/doc_new_functions
+[33m1a92e68[m Merge branch 'master' into doc_new_functions
+[33mee8fb8b[m Merge pull request #351 from larmarange/ggtable_ggcross
+[33m410b643[m listing all ggally_* in the vignette
+[33m15d0085[m updating pkgdown reference index
+[33m31fa9e2[m vignette for stat_prop()
+[33mc85e346[m a vignette for ggbivariate
+[33m4cd79f6[m ggtable in pkgdown
+[33mce692d3[m vignette and documentation for ggtable()
+[33m3ed7a41[m evolution of stat_cross() to properly handle cells with zero observation
+[33m100e218[m integration of @schloerke 's comments
+[33m86f7d5a[m Merge branch 'ggtable_ggcross' of github.com:larmarange/ggally into ggtable_ggcross
+[33m412fd5c[m Update R/gg-plots.R
+[33m0ac8ea0[m Update R/gg-plots.R
+[33me153a35[m a ggtable() function and its associated ggally_table2()
+[33m9ecf0c1[m ggally_summarise_by
+[33mdb9f4ce[m Updates to `ggally_colbar` / `ggally_rowbar` (#349)
+[33me827279[m a ggtable() function and its associated ggally_table2()
+[33m0732ea8[m ggally_summarise_by
+[33mda6d345[m update author order and author urls for pkgdown
+[33mcd2504d[m add a TOC and update the header names
+[33m99e091f[m Reorganize news order. Rename 'new_stats' vig to 'ggally_stats' (#348)
+[33m3edf3c7[m listing new functions in NEWS
+[33m4781390[m typo
+[33m90ebe32[m updating reference page for pkgdown
+[33m7875170[m a vignette presenting new stats
+[33m28c7293[m Adding new ggaly_* plots to the vignette
+[33m89d0109[m updating examples in stat_cross
+[33m2912061[m Small changes to stat_prop and docs (#347)
+[33m7eeb2a1[m updating PR with last version of master
+[33m8574e4a[m test to be removed, as x is not yet evaluated
+[33m38da8ce[m devtools::document()
+[33m3967732[m ggbivariate()
+[33m12413ec[m ggally_colbar & ggally_rowbar
+[33m3d198d5[m stat_prop()
+[33m0666bf3[m Stat weighted mean tweaks (#343)
+[33m8e73a3e[m Merge pull request #333 from larmarange/stat_weighted_mean
+[33m87fef10[m Merge branch 'master' into stat_weighted_mean
+[33m7962b88[m Small tweaks to ggally_cross and ggally_table (#342)
+[33m7d50265[m Merge pull request #326 from larmarange/stat_cross
+[33m5ee8cdc[m Merge branch 'master' into stat_cross
+[33m4a41d4c[m Set ggally_count fill color to GeomRect fill color (#341)
+[33m11e3846[m Use ggally_count in ggduo and ggpairs discrete plots (#340)
+[33me9ec315[m Merge pull request #321 from larmarange/ggally_count
+[33m02a238c[m Merge branch 'master' into ggally_count
+[33m34b32e6[m reduce code copy and add tests
+[33me9383a9[m proportion argument for ggpairs()
+[33md635490[m new options in ggduo for relative heights and with of the subplots
+[33m9042257[m Some proposition of evolution of documentation
+[33m01a2eaf[m do not force suggest packages
+[33m25e60ba[m Convert `packagedocs` to `pkgdown` (#335)
+[33mbe7a74c[m ggally_trends
+[33m8c21ac3[m stat_weighted_mean()
+[33m8c7769b[m Add news item and author info
+[33m70a928e[m ggally_autopoint
+[33mac2cf98[m lowertriangle() with memory preallocation
+[33mc63bad3[m Gut `ggally_cor()` to use `ggally_statistic()` (#327)
+[33me0cb12e[m set se_fit to TRUE in augment call
+[33mbf0d402[m Update ggcoef.R
+[33m501ac25[m stat_cross, ggally_cross & ggally_table
+[33m4407a2f[m additional arguments for ggally_count
+[33medb1af7[m better syntax for managing default values
+[33mb13f719[m ggally_count() rewritten
+[33m77b36ac[m ggally_countDiag()
+[33mdf15254[m ggally_count()
+[33m242f426[m update doc
+[33m012883d[m Update R/ggpairs_add.R
+[33m0bd960a[m devtools::document()
+[33m7ab743e[m tests for the new functions
+[33m361a82a[m functions to add any ggproto object to a ggmatrix
+[33ma0b3075[m Smarter colouring defaults in ggally_text() (#316)
+[33me90c8aa[m rc v1.5.0 (#313)
+[33ma5a20db[m Merge branch 'ewallace-ggally_cor_nogrid'
+[33m9147307[m document
+[33mb1a14e9[m add news item
+[33m723e97e[m make code formatting consistent. Add some more comments for examples
+[33mc436f9f[m displayGrid option in ggally_cor
+[33mb6e7f19[m no panel grid in ggally_cor
+[33m967f9db[m themeVoid option in ggally_cor
+[33m82a4b6c[m make sure the docs are built
+[33m0eb6ded[m Fix nonsense legend in ggsurv (#310)
+[33mc3a75aa[m Merge pull request #308 from ggobi/ggplot2
+[33mbb6ba9b[m Add news
+[33m116c1d2[m use inherits over class(x) = y
+[33ma6faa90[m Display label on side in addition to facet
+[33m1e1e0ee[m try to fix the examples. Reduce a if logic to a single value. Fix eval on data column col
+[33m4068d34[m try to fix ggnet logical logic
+[33mb9feac5[m More function changes similar to https://github.com/ggobi/ggally/pull/305
+[33mb491b98[m Merge branch 'master' into ggplot2
+[33ma9195f3[m Merge pull request #305 from owenjonesuob/master
+[33m3ceec62[m Merge pull request #296 from otoomet/master
+[33m64d195c[m do not use actions. too many problems
+[33m66f404d[m use cloud repo location and statnet.common pkg
+[33mbc38b20[m use cran, but try to install sna and mvtnorm with source type
+[33md1830a7[m remove the cran repo to try to be able to install sna and mvtnorm
+[33mc062bf8[m do not try to install sys deps when checking
+[33md3c6a9c[m pass in formula to geom_smooth with y~x to avoid message.  Fix other ggplot2 3.3 gtable issues
+[33m5726625[m white space adjustment
+[33m2b16611[m Remove dev badges. Remove gitter link. Update ggplot2 links
+[33mc6da0e3[m Fix partial arg match
+[33m0959dbb[m Update roxygen version
+[33mf6c1ff0[m ignore .github
+[33m5dc53bb[m Use community link vs stackoverflow
+[33m4811ddc[m Create R-CMD-check.yaml
+[33m8420c26[m Fix spacing. Use `as.factor` over `factor`
+[33mfc52c8d[m Update DESCRIPTION
+[33m2cac657[m Fix implicit dependency on network package
+[33m65335d3[m DESCRIPTION: version, authors updated
+[33m1eee5d8[m R/ggscatmat.R: allows to use non-factor color variable
+[33m17b7409[m Directly check for factors in find-combo.R (#290)
+[33mcaec7a2[m bump version for cran
+[33m5174f25[m update cran comments
+[33me2df986[m make crosstalk a real suggests to avoid testing dep issue (#278)
+[33me7167eb[m ggparcoord(splineFactor = TRUE) now displays breaks (#279)
+[33m1d30777[m v1.3.3 dev to master (#276)
+[33m97dc9f5[m Release 1.3.3 (#275)
+[33md5b9ece[m lints
+[33mcb957f4[m Cooks distance cutoff is now at F_{p, n - p}(0.5) (#274)
+[33me2425d8[m added `sort` param to ggcoef (#273)
+[33m8ad169c[m logical types are discrete types (#272)
+[33ma42d098[m added news item about ggally_smooth
+[33m45f9064[m Progress bar is now TRUE, FALSE, NULL, or a function (#271)
+[33m2155a55[m master -> dev
+[33mdc6df8d[m export is_horizontal and is_character_column (#270)
+[33mc8196a6[m ggally_* does not require GGally namespace (#269)
+[33m84433d3[m remove require_pkgs and only use require_namespaces
+[33mddd9d8e[m fix broken ggplot2 2.2.2 tests
+[33m5d157f6[m export mapping helper functions
+[33ma337bda[m Replace loading packages with loading namespaces in ggnet2 (#262)
+[33m095dfa3[m ggplot2 2.2.2 compliant (#266)
+[33mdd30629[m enforce data to be data.frame in ggscatmat (#267)
+[33m122fc9c[m Progress options() (#254)
+[33m0ed6f93[m add shrink and se param to ggally_smooth (#247)
+[33ma8b3e38[m add progress arg to ggduo, ggpairs, and ggmatrix (#246)
+[33mf42a8c6[m lints
+[33mdeb80b5[m fix adding a non ggmatrix obj
+[33m8ed62cf[m clean up add method to sep functions
+[33m36761eb[m Use development version
+[33m0dc3283[m spelling
+[33m14a5e6c[m updated cran comments for submission
+[33m6c2854c[m ran revdep
+[33m9496437[m bumped version
+[33m9fdc878[m library igraph in tests
+[33mb4fb4a1[m news for igraph
+[33m74d7ea0[m requireNamespace quietly
+[33m1678ba4[m fix for igraph dependency in tests
+[33medb2e57[m updated news
+[33mb71adc4[m use limits, not breaks to change level order in boxplot
+[33m14d1606[m added news info
+[33mb163614[m documented
+[33m69c7ad8[m remove lintr check. can do locally
+[33m8da4190[m removed test for removed code
+[33mf36fc2f[m added :: to grDevices for col2rgb()
+[33m4e088a7[m added grDevices to imports
+[33m4cef46d[m no need to check for odd column names and provide warning
+[33m1b3632d[m Merge branch 'master' of https://github.com/lepennec/ggally into aes_
+[33m1d9b06b[m Change from aes_string to aes_
+[33m186e696[m Merge branch 'patch_shadebox' of https://github.com/treysp/ggally into shadebox
+[33m0aba7aa[m Merge branch 'master' into dev
+[33m4cbe0e3[m Test stop conditions for shadeBox
+[33m99a3e83[m Add geom_linerange() required aesthetic x
+[33m301b31f[m Confirm shadeBox is either NULL or (length 1 and a valid R color)
+[33m3d328a7[m Updated cran comments
+[33med8edec[m Ignore white space changes
+[33m870cef8[m Calculate diff in revdep/problems.md
+[33m73902de[m return regular revdep output
+[33mc23b470[m Copy revdep info over to 1.3.0 for comparison to new version
+[33m29aed8a[m Use development version
+[33mcb07aa2[m More spelling
+[33mdbeab79[m Spelling
+[33mffc70a9[m Test theme
+[33m91ff7ba[m add issue template (thanks Hadley)
+[33m300031a[m Update cran comments
+[33m8b5ac3f[m Execute revdep
+[33me7bf32b[m Update helper function for revdep
+[33md9cb32b[m Don't ignore revdep/install
+[33m1fd5a17[m Cran comments updated for release
+[33m8dcb8dd[m No bioc revdep
+[33m2dc7ed2[m Fix news and cran comments
+[33mcbd28d6[m add v1_ggmetrix_theme to rd.yaml
+[33me438c42[m Ignore install location
+[33mbc5bba6[m Update ucla cca example
+[33m139472a[m Dont lint code on travis and update GitHub secure code
+[33m8ec35d1[m validate adding a list works
+[33mbe3886a[m fix ggsurv tests
+[33m2dfc3dc[m dont cache lintr and dont comment
+[33m26a9076[m documented
+[33m6f3e72f[m bumped version
+[33m7f0c2df[m updated news
+[33md20f407[m remove odd error check in ggsurv
+[33mfed7995[m added v1_ggmatrix_theme()
+[33mc825505[m document psychademic
+[33mfbe815c[m Merge branch 'ggfacet_params' into dev
+[33mefcafb9[m updated ggduo example to use psycademic data
+[33m8dfd100[m added psych data
+[33mdc142c9[m documented
+[33me1f84f3[m allow for ggmatrix to add a list of elements
+[33ma2dfe8e[m add more options for strip locations
+[33m9895558[m document
+[33mec901f4[m Add switch param to ggduo and ggpairs
+[33me005056[m Add switch param to ggmatrix
+[33m7ab48f8[m Pass along the switch param
+[33m412a1b8[m Add documentation for switch param
+[33maa51969[m fixed grep for strip-right
+[33m8ccc1d0[m Use development version
+[33m4ed1c3b[m bumped news version
+[33m44af9a1[m Merge branch 'master' of github.com:ggobi/ggally
+[33mab0311e[m Revdep and version bump to 1.3.0 (#216)
+[33m3639557[m more updates to the stop message
+[33mf2d1904[m updated cran notes
+[33md6a23c1[m cran comment updates
+[33mc162b09[m added more p_ for examples that are taking long
+[33md46f995[m ignore more files
+[33m5373478[m run with latest packagedocs
+[33mac8fb2d[m run revdep
+[33m1535ca0[m add revdep install outputs
+[33mb9cdfdb[m update revdep script
+[33m5bdd809[m ignore revdep things
+[33m6fe9bcb[m fix cran urls for build_win
+[33mbcaba37[m remove bad helper functions
+[33m068d689[m add fn_switch to rd_index
+[33m36bc5e0[m fix description for author
+[33mab52262[m bump version
+[33m5d43362[m add fn_switch, ggnostic resid/fitted example, fix glm anova title issue (#215)
+[33m0edd8ba[m bump ggplot2 version
+[33mb072444[m Merge branch 'shared_data'
+[33m496f9a5[m add crosstalk to testing on travis
+[33m72bccad[m add crosstalk test
+[33mc55bc46[m fix ggplot2 aes y issue
+[33m87f364d[m fix mapping arg issue with ggpairs
+[33m8e5b33e[m comment
+[33m434c2bd[m pass crosstalk key in data to plotmatrix, but not for calculations
+[33m69a0382[m add isSharedData param to fix_column_values
+[33m1426912[m re-run revdep
+[33m86cb613[m make more options for revdep
+[33md9c74c4[m pass "crosstalk key" to ggplot_build(), but dont plot it
+[33m274deb8[m use cran packagedocs
+[33m7aaef27[m fixed param name for deparse
+[33md169155[m make ggnostic title 500 chars long as 60 is too small
+[33m8bbb557[m fixed broken example
+[33m85f5ea5[m document
+[33ma517f72[m remove warning from ggplot2 in tests
+[33m8698926[m update labeller test
+[33m8508094[m lintr
+[33mf54c170[m clean up labeller logic in ggmatrix_gtable
+[33md27ff34[m have ggpairs labeller example cover multiple lines and use print function
+[33m325885c[m move labeller arg up and use template
+[33m4748504[m move news lower
+[33me1c892c[m Fixed a typo in the parameter documentation for ggpairs.
+[33mb68f115[m Merge branch 'master' of https://github.com/ggobi/ggally into add_labeller
+[33m7f8a6ea[m Added labeller argument to ggpairs and ggmatrix, to allow fancy labelling of matrix facets.
+[33mda3cd94[m whitespace
+[33mf2900a1[m use deparse, not as.character for expressions
+[33m480dec8[m add an xlab of 'time' to ggts
+[33ma0f186b[m print the plot matrix in ggts
+[33m865de19[m added tests for expressions in columns
+[33m7b960bd[m use a labeller for expressions in ggmatrix print
+[33m3eab441[m update comment
+[33mcbaeca7[m no need to install now with updated packagedocs::deploy_travis
+[33m20770ac[m use pigs data for ggts in ggduo vig
+[33m006376f[m remove custom printing from vig
+[33m3ce9109[m fix issue for labels not being listened to
+[33mfb35fa6[m ggts passes all params to ggduo except changes columnLabelsX
+[33m6850247[m fix impossible code
+[33m368ab61[m allow for columns labels to be null in ggpairs and ggduo
+[33m209de62[m updates to cran comments
+[33m1765a61[m email formatting
+[33md3078df[m give up on r3.1
+[33m58a0d90[m install devtools first to get the deps
+[33m0f61055[m use wget not curl
+[33m5788ac7[m travis debug
+[33mee5ccc9[m email updates
+[33m83e798f[m unzip not untar
+[33mbf0656f[m direct way to install
+[33mc922722[m add a before install for r3.1 to get the latest devtools
+[33m954d924[m move all logic into r:release and not be global
+[33m8bce19f[m try before install
+[33m081f931[m try to make r3.1 work
+[33med4f5dd[m fn to email revdep maintainers
+[33m724372e[m push to schloerke/drat
+[33m0c79cb4[m set up comments for next release
+[33m7cc6445[m set up email template
+[33mb5d5344[m ignore gmailr oauth
+[33md6c2b01[m do all the r versions
+[33m17ec8ea[m gmailr
+[33mf5a23ff[m make sure devtools has a certain version
+[33m1d8254f[m make it a dev version for now
+[33m5ce97ac[m move news to news.md
+[33ma77ea53[m re-run revdep check
+[33m4d8c4fd[m remove all prev revdep checks
+[33mc79dc78[m add more revdep notes
+[33mcf3cbd7[m run revdep_check()
+[33m71f0102[m ignore revdep lib
+[33mf36786d[m remove date field
+[33m8422042[m fix packagedocs location
+[33m1410f9d[m bump version
+[33m4ab76a5[m copy for redirect vigs locations for one version back
+[33m6348ee4[m only ignore docs and rd vigs
+[33m6b053ef[m fix ggsurv test to match behavior
+[33ma549a39[m lintr
+[33m6f96dcf[m fix color ordering issues in ggsurv
+[33mc7e2312[m fix ggnostic error
+[33m0a720cc[m fix check warning
+[33me365d70[m fix ggplot2 warning
+[33m3385554[m make sure ggally_nostic_resid only adds smother to continuous x data
+[33ma6ded10[m remove browser statement
+[33m2588eff[m ignore less things
+[33m8781248[m upgrade to latest packagedocs
+[33m42bce58[m fix packagedocs location
+[33m9618f14[m more ggplot2 upgrades
+[33m37fdfdb[m better unit conversions
+[33m076d7d6[m upgrades for ggplot2
+[33m471603e[m use the dev version of ggplot2
+[33m8d83bb3[m ignore all the things
+[33mb717fe1[m documented
+[33m995c748[m link ggduo
+[33m5d4c17b[m add pigs data to pkg
+[33mf81a2a5[m change default function and add a note about plot output
+[33mbce481b[m added news about ggsurv fixes
+[33m597d5fc[m fix issue where cens colors didn't match ggsurv lines when supplied.  also added boolean for order.legend
+[33m2bc724d[m updated link to packagedocs
+[33m2ed15cc[m add docs on lineType for ggally_nostic_cooksd
+[33m655e6dd[m document
+[33ma29b852[m re-arrange ggts to be at end of plot matrix functions
+[33m39c795c[m all ggnostic lines are now grey and a "cutoff" line is dashed
+[33m820a9f6[m fix ggnostic xlab
+[33me8662b1[m add basic examples for each ggally_nostic function
+[33mc3eff66[m render vig helpers
+[33m26c2d38[m add a wrapper to plotting ggplot objects in ggnetworkmap
+[33mfa74c79[m document
+[33m47c4730[m cache all the things!
+[33m4e9ff1f[m clean up formatting
+[33mc2df1d3[m clean up language
+[33m0854ffa[m remove items to ignore (don't exist)
+[33m4fd95fe[m ignore more things
+[33m0b13081[m update vig to show off ggnostic
+[33m264e619[m document
+[33m1fc165d[m if there is color in the residual plot, show black
+[33md26dfb7[m ignore files
+[33mb18acbe[m more consistent docs
+[33md9ad9ea[m faster / better ggnostic labels
+[33m2bc995c[m better error messages
+[33md52ae1a[m stop doesn't need an str_c
+[33m25a7564[m add more to the rd index file.  need vigs
+[33m5b32dc1[m export the print method
+[33me41aaa5[m test high cardinality
+[33m0be4438[m legend pos single val
+[33m37c5626[m fixed test to have regex be fixed
+[33m7935818[m more testing!
+[33mdd74533[m document
+[33m856add2[m fix doc issues
+[33m268ba6f[m testing!!
+[33m65ac41e[m fix example error
+[33me32d1e1[m use chemometrics example in ggfacet
+[33m8dcf12c[m added small note
+[33mccbf18f[m document
+[33mf02b268[m rename fn to use underscore casing
+[33m42d3028[m fix color fille mapping for ggally_dot
+[33m055cb9e[m suppress testing messages
+[33m8657ec2[m only map box color, not dot
+[33m94b3935[m fix lints
+[33md623e82[m document
+[33mc419c7e[m add news!
+[33me681be1[m add a ggfacet fn
+[33m82984c8[m ggnostic notes
+[33mdabede8[m broomify, always
+[33m77528a0[m documentation for ggnostic
+[33mf9bc3cf[m don't show a line at 0 for se_fit
+[33m6a1f2f7[m default cooksd to 4/n
+[33m7956d23[m better file naming
+[33m96c8bae[m fixed ggpairs tests
+[33m52bb2ea[m remove bad test
+[33m155e125[m fix is_blank_plot() logic
+[33m69ae322[m documentation fixes
+[33md485c66[m document
+[33m8037ccf[m display more column information for ggnostic
+[33md66fafe[m add se param to ggally_nostic_resid
+[33m3842073[m ignore row names from broom
+[33ma76c320[m fix color issue
+[33m7558e39[m fix loading issue
+[33m9c4c0a2[m document
+[33m6524466[m first pass add ggnostic and ggts
+[33m62e0090[m arg cleanup
+[33me8fd77b[m add denstrip color to fill
+[33m2e508e6[m swap_x and y
+[33m865a3a6[m remove archaic type and subtype from plots
+[33mf3cbaed[m add a is_character_column fn and swap x and y fn
+[33mc7248e8[m make each ggally_fn map color to fill and remove a bunch of duplicated code
+[33mb48699a[m remove unnecessary args
+[33m6587b8a[m fix spacing in progress format
+[33m6d5a733[m add titles to ggduo plots
+[33mad94cbd[m remove doubled fn
+[33m1161fc3[m re-organize the rd page
+[33m9a39f68[m fix bad link display
+[33m86fd4ea[m clean up rd index
+[33mdffeb10[m document
+[33m575a35b[m no caching vigs
+[33m1ace8b9[m fix doc issue
+[33m7018168[m make ggcoef example library brrom for better output in rd
+[33mbf3385b[m document
+[33ma6f70ee[m updated news
+[33mc2cea0e[m try to hide the print method like ggplot2
+[33mfec71c6[m ggplot2::last_plot now works with ggmatrix
+[33m2d10efa[m pass in xProportions and yProportions in ggmatrix
+[33m139919f[m clean up ggtable
+[33m17cf5a6[m remove old print method
+[33m4ba76ea[m fixed errors
+[33mdff1224[m removed return at end of progress_format
+[33me6404ea[m document
+[33m421f792[m stop if there is large cardinality in column of ggpairs and ggduo
+[33m9cf2ff4[m document
+[33mfe63bec[m add no facet methods to ggpairs/ggduo. set as defaults
+[33m441c1ad[m fix bad function call
+[33m2e7a428[m add test for no facet ggally methods
+[33m9c5a234[m fix bad aes command
+[33meb3863e[m add no facet methods to error message
+[33mf934914[m ignore vig cache
+[33m78d96c0[m clean up the code to use deparse and not as.character for mapping. added no_facet box and dot methods
+[33m48c8ae3[m remove ggfluctuation2 fn
+[33m80eac56[m document
+[33md3cc1f4[m no .install_extras for vigs
+[33maf48e6c[m add section about memory usage in ggmatrix
+[33m45d889e[m document
+[33m041f725[m yell if a non-standard legend position is provided
+[33m29a5cd9[m +.gg works with all labels
+[33mfa4ebe0[m remove ggprint fn and replace with known ggmatrix_gtable and remove print method from fn
+[33m18cee46[m document
+[33m30e1c6e[m ignore some vignette files
+[33m3884af6[m use progress::progress_bar
+[33m9657445[m merged
+[33m038d267[m make the old print method call'able
+[33md3050e7[m document
+[33m54bb96b[m fix tests
+[33mad91413[m fix bad param and name
+[33mf42cd22[m import utils
+[33m65f15e9[m document
+[33m22756ac[m attempt to fix tests
+[33m5aefdbb[m copy ggplot2::print.ggplot and alter for print.ggmatrix
+[33m7dfe8e1[m ggprint will now return the gtable obj. make ggmatrix_gtable function
+[33me611e62[m arg does not exist
+[33m8af4880[m files do not exist anymore
+[33m81173b5[m do not show legends for each plot. doesn't make sense now
+[33m54571e7[m better arg name
+[33md68b164[m fix check variable issues
+[33mbe4f9c4[m remove verbose arg
+[33m47fe3ff[m documentation
+[33mbbc4f90[m legends is now deprecated. don't pass along
+[33m27e7d90[m generic warning for deprecated args
+[33mb07861c[m add legend roxygen definition
+[33m0b7290f[m respect progress_wait
+[33m96e35ad[m no need for fake build obj
+[33mbc511f9[m if there are xlab or ylab vals, display them
+[33meebf8c2[m if there is a title obj, either insert it or remove it completely
+[33m64d8f9e[m if there are no strip labels, remove them from fake plot
+[33m9df9b18[m make sure there are items to facet on in the fake data
+[33m245b9c0[m comment code
+[33mca192ee[m be able to add x, y, and title labs
+[33m4f31599[m give ggpairs 'legend'
+[33md2ace56[m title should be NULL as default
+[33m7130b76[m add xlab and ylab args
+[33m3bf9c4d[m do not include the stop msg.  this should never occur
+[33me626389[m Merge branch 'dev' into ggmatrix_print
+[33mf42fe1c[m legends added. needs more work
+[33mf4ccf18[m fixing small issues with print method
+[33m2d54539[m first past... now to speed up
+[33mc9a404a[m make a grid.draw.ggmatrix method for ggsave
+[33m6ca0ade[m added x and y proportions to the print method
+[33mea5836e[m fixed missing comma bug
+[33m9680acd[m document
+[33mc62851d[m re-order rd index
+[33m3f16053[m fix R formatting
+[33m5a2d59a[m fail on failure to load
+[33mbb086c9[m make examples more packagedocs friendly
+[33mc242248[m fix description link
+[33m37c3f04[m formatting for vig
+[33mce64997[m dont do 3.1 as it fails to build
+[33ma3e79ef[m try a env var for the specific line
+[33m38c4192[m try listening to a travis var instead of a boolean that is set
+[33mf1b6b5b[m install ggally after success
+[33m738b91a[m don't build on devel yet
+[33m04a1407[m make a travis build matrix and only include the secret var for the release version
+[33m615dba3[m only create on release
+[33m65cec46[m document
+[33m7075c60[m add packagedocs to travis
+[33mf622bb0[m add travisDrat to travis
+[33m06554f9[m add function to allow for printing when not in interactive mode
+[33m01513f7[m wrong file to ignore
+[33m5745204[m delete old vig files
+[33mb01e95b[m alter example to work better for knitr
+[33m0bc5095[m init packagedocs
+[33m6284cbf[m print if interactive
+[33mb5cb905[m use packagedocs
+[33m7ab3f93[m ignore paper
+[33me2db48d[m ignore a bunch of items
+[33m75b159a[m ignore _gh-pages
+[33m6140fed[m no caching for now with lintr
+[33m79dc9ff[m dev --> bracket
+[33m0fcf86e[m Merge branch 'ggally_cor' into dev
+[33mc3bc087[m ignore ggduo inst file
+[33mbfa930d[m alter single bracket with all rows to a double bracket
+[33m8cb482a[m added examples for ggpairs to add context for removing binwidth warning
+[33mab0703d[m color column must be numeric in ggally_cor
+[33m9b05786[m helper function to load helper functions file
+[33m874f7f9[m Merge branch 'dev' into carson_fortify
+[33m542c87a[m add a spacer arg to test file
+[33m78d4fe1[m Merge branch 'dev' into carson_fortify
+[33m03cc1d3[m Merge branch 'master' of git://github.com/cpsievert/ggally into carson_fortify
+[33m7ab1826[m fortify data to support more 'data' objects
+[33m6c890dd[m included a basic ggpairs example with color. not to self, need to update ggscatmat to use dplyr instead of plyr
+[33m5872e10[m worked, but is stomped anyways. reverting
+[33m38cc98e[m install devtools to get the rev deps. remove. then install again
+[33m4cb509c[m devtools fix again
+[33mddf003d[m another try with wget
+[33m5c56d40[m change to install
+[33mcf93a16[m install fix for devtools
+[33meb7f2c3[m travis diagnostics
+[33m5e8f160[m less stuff in travis
+[33m063e62d[m after failure to before_install
+[33m971f7d0[m fixed parse error for travis
+[33mb4c0a51[m merged travis
+[33m1b6a513[m after failure
+[33m8c48a5f[m no before install
+[33m6c7e17b[m trigger travis
+[33md947a4f[m debug
+[33mccc8511[m parse all vigs after a success
+[33m26e621e[m add coments to be a true dcf file
+[33me605c38[m build vigs now that they are in diff folder
+[33m6903fca[m remove bad file
+[33md1a97f4[m fix data.frame issue
+[33m5a70d47[m white space
+[33mb16e167[m plain install
+[33m346fca9[m point all to main dir in website
+[33m7666d9f[m have all vigs be of same style and read the cache chunk
+[33me1283ff[m make a ggduo vig
+[33m7f6d78d[m add a cache chunk to eval on every vig
+[33me6388b2[m add a pointer for ggduo
+[33mb0531b6[m ignore vignette output and cache
+[33m6eedfe6[m make dev version
+[33md3abf0e[m update .Rproj file
+[33m9b04b7b[m say thank you
+[33ma719ac4[m updated cran comments
+[33m44e57ab[m fix spelling and update description
+[33m1c3f2ce[m make place holder vigs
+[33m4e407ed[m move vignettes to vigs and build ignore it
+[33m785cdf2[m add more comments for cran
+[33m93c9403[m bump date
+[33m5bc090c[m fixes for uwe. quote ggplot2 and use full name for geom
+[33m23a0cc2[m added note for size of tarball
+[33mcdd8596[m less builds and fast finish without waiting for 3.1
+[33m2daeb72[m try to make travis happy with covr and lintr
+[33m559cb1a[m added more functions to role
+[33m1169809[m bumped date
+[33mc7af621[m fixed a bad doc for ggduo
+[33me9b3acc[m updated news
+[33m1552f96[m added ggally_smooth_lm and documented
+[33m0336f9a[m added citation for ggduo example
+[33mb36a50e[m added example print function for ggparcoord and documented
+[33m5d8a5c9[m updated travis info in cran docs plus updated comments
+[33m908c754[m updated cran comments and fixed tests for build_win
+[33m03ac01f[m fixed test
+[33m96cbe63[m documented
+[33mc1d0b02[m ran revdep check.  updated cran comments
+[33mb3b7712[m ggplot2::arrow exists no need to import from grid
+[33maab75ce[m change default of title to "" to not change anything for now
+[33m933bb14[m added mapproj back to depends to ggplot2 can function properly
+[33m5fcdfcd[m install a survival on travis binary
+[33m0265203[m document
+[33med8355e[m clean up how packages are required in ggnetworkmap
+[33m73b314d[m remove package versions for suggests
+[33mead5618[m remove unused ggmap suggests
+[33mcf0bc6a[m remove package suggests to arm and tnet
+[33me3d75a4[m add arm and lme4 so 3.1 passes
+[33m88465b2[m version bump and news update
+[33md13e68b[m fix ggduo example
+[33mdf640af[m try to run travis on 3 builds
+[33mc2cb9e8[m add the print function to ggpairs example to plot all the plot matrixes
+[33m67cc28c[m trying to make it so the examples will print but pass r cmd check
+[33mea440aa[m fix bad tag
+[33mc248a3f[m document
+[33mca0ab21[m add a cca example for ggduo
+[33m5fd0d92[m update example for ggduo with baseball data
+[33mc550eec[m export the mapping color to fill fn
+[33m2c622d4[m do not allow for partial arg matching
+[33mb0fa4ec[m if a unit.list is returned, use the first element. otherwise keep as is
+[33m5ca967d[m ... in ggally_ratio should go to geom_tile
+[33m52a764d[m merged carson --> ggduo
+[33mb6360d7[m Merge branch 'master' of git://github.com/cpsievert/ggally into carson
+[33m3eb4659[m add RStudio project
+[33mbe16879[m use mapping argument
+[33m4f99ca3[m add bad aus data docs
+[33m3beee86[m allow for a vertical and horizontal combo value
+[33m5ffe83e[m lintr
+[33m5237282[m add ggally_smooth_loess
+[33ma1c454c[m add a plot type column to know if is vertical
+[33m75aacc9[m merged dev --> ggduo
+[33m1bd0fa4[m fix test to look at aes_params and not geom_params
+[33m1e1628e[m switch size.cens --> cens.size for consistency
+[33mc8086ca[m remove roxygen2 dev version
+[33mc96e9d0[m Merge branch 'master' of git://github.com/EdwinTh/ggally into ggsurv-edwin
+[33maeaa031[m add in data to display for ggduo
+[33mc48ff79[m add some more news
+[33me9c59ee[m Merge branch 'dev' into ggduo
+[33mb79d228[m Merge branch 'master' into dev
+[33m5d06dfc[m relax install reqs
+[33m174630d[m fix bug with bad strips printing in ggmatrix
+[33m9a41b5c[m relax install reqs
+[33mdad9ef0[m fixed ggsurv unit test
+[33m1d5e953[m ggsurv with censoring size parameter
+[33m1e7c6e2[m Merge branch 'dev' into ggduo
+[33mdca8057[m Merge branch 'master' into dev
+[33m64c422a[m added a digital online ID for ggally
+[33m35acdb7[m fix doc issue
+[33m2427fc2[m fixed lints and tests
+[33m6f048c2[m getPlot / putPlot are now consistent
+[33m30b51e4[m fix check issue
+[33m2fcba65[m comment on testing
+[33m6d33886[m remove unused code
+[33m0bc460c[m test plotNew for gglegend
+[33m39f1ff7[m add more cases to getting a retrieving plots
+[33m68ed45d[m add news about ggnetworkmap
+[33m16d1c91[m fix impossible if case for intergraph
+[33m80a9058[m add tests to covr ggscatmat
+[33md687872[m check that all diag values are upgraded from value to valueDiag
+[33m53dd001[m clearer stop string
+[33m0a7b6a1[m pass lintr
+[33mc60dffe[m add ggduo into ggpairs tests... lots of them
+[33mdf7a151[m make sure name is pass correctly
+[33ma9be132[m clean up situations for make_plot
+[33m5211e79[m white space
+[33m267fe86[m fix cases for mapping and columnsX/Y
+[33m4a568ba[m clean up stop cases
+[33m21c1b1c[m fixed bug with multiple ggsurv with a single col
+[33m9cb456e[m test for odd ggmatrix type
+[33m60b1c86[m more ggsurv tests
+[33m21b38c0[m remove impossible situation
+[33m8178b0e[m white space
+[33m3760f24[m remove impossible case
+[33m0d93d50[m more tests for ggpairs
+[33mff04c78[m test ggsurv cens.color and cens.shape
+[33m98310ec[m remove unused util
+[33me6bb0d2[m match ggsurv ggplot2 color when multiple groups are present by default
+[33m49d944a[m fix tests
+[33m050b703[m make more tests
+[33mf1b03f9[m remove impossible code
+[33m8b866f4[m test more blank plot putting
+[33m943a5ff[m test for shifting of the axis labels in drag labels in ggpairs
+[33m665fc24[m unify the naming convention in the tests for expect_print
+[33mb27c15f[m document
+[33m59d736b[m test for rescaling the densityDiag and barDiag for numeric
+[33m097d2bb[m properly eval the data to get the range
+[33ma25dbd6[m fix bug where singleColorCol couldn't be NULL
+[33m2820c29[m more consistency with blank plot strings
+[33m949f737[m document
+[33m32b4bc7[m is mapping is not a list, vs just numeric
+[33m6a4870a[m formatting
+[33m6ae334f[m ggmatrix_plot_list is now a function
+[33m3dbf742[m don't print the datatypes in ggduo
+[33m3d69069[m try a different bot name for codecov
+[33mdeac628[m document
+[33mef1cd90[m fix test
+[33m299b287[m fix lintr
+[33maf4a207[m ignore compiled ggcoef vig
+[33mff2614f[m add details and examples for ggduo. small changes to ggpairs
+[33m35e3aae[m fix bad docs
+[33m7f99b53[m documented
+[33mf4f48d9[m document
+[33m9b3adc8[m first pass at ggduo
+[33mc5866c6[m tell people verbose is deprecated
+[33mc23d2e1[m find plot type now allows for yes/no diag
+[33m1610d87[m don't print the positions
+[33mc2d5994[m document
+[33m48cc0b6[m better comment and removed un needed print
+[33md6b18f1[m fix function names
+[33m6d94218[m consolidate code for blank info
+[33md72f611[m fix axisLabels in ggduo
+[33m6ccee1c[m full default lists for ggpairs
+[33m3339868[m clean up columnLabels default args
+[33me003327[m use the plotting routines in ggpairs
+[33m075f2c1[m add make_ggmatrix_plot_obj helper routines
+[33mb586d25[m clean up find-combo to use names that make sense
+[33m4e7c133[m remove unused function eval_ggpair
+[33mb9121d4[m default mapping to an empty aes()
+[33m5048e3e[m remove old commented code; remove a lot of printInfo
+[33me597d89[m update correct default file name
+[33m2b47c04[m Merge branch 'dev' into ggduo
+[33m824b240[m add small ex to better display PR's
+[33m94e792a[m merged master --> dev
+[33m1d10e52[m setup for next version
+[33m32c4604[m bumped news version
+[33mfa90e83[m updated cran release notes. ready for release
+[33mfa5c4e1[m updated news
+[33m32a307f[m add build_win to helper functions
+[33m71923aa[m bumped date
+[33m165e1ac[m ran new devtools::revdep_check
+[33m9d1bd6f[m ignore rds file
+[33me27a248[m Merge branch 'ggcorr_shift' into dev
+[33m3973a15[m fix url so cran likes me
+[33me2c187a[m updates to revdep
+[33m36b5074[m fixed check NOTE
+[33m7d2f36a[m fixed issue where setting layout.exp to a non-zero value makes the data shift improperly
+[33mdb393e0[m update revdep to check bioconductor and pass along ignore
+[33m02309a6[m remove default setup
+[33me96aeda[m fix error if GGally::ggpairs was called without loading pkg
+[33m52cd214[m rename to match devtools output
+[33m74dfefd[m point to r-project.org for pkg url
+[33m6b41698[m make sure ggplot2 is used in fn for example
+[33md57469a[m updated pkg versions and pkg version and pkg date
+[33mf65ed5e[m changes only need to hit 80%
+[33m40e5ef0[m Merge branch 'dev' into legend
+[33mf3a68cd[m more examples for gglegend
+[33m48c2ce5[m more test coverage!
+[33m3c7d147[m spelling
+[33m6f78733[m codecov has a bot / user
+[33m2ef3d89[m add codecov file for covr
+[33mab30c2e[m document
+[33md7fd8f3[m make sure plot object can print
+[33m133bfa8[m show specific example that produces a legend plot
+[33m35cfe0d[m update news
+[33m37a0f55[m alpha sort the suggests (besides the building pkgs)
+[33m49f7c87[m don't report to slack
+[33mab6264e[m fix the ggparcoord example with aes(size = 1) to include scale_size_identity()
+[33m1be05aa[m updated news
+[33md0fe633[m respect '...' in densityDiag
+[33mf9c5174[m document
+[33me563c4d[m updated news
+[33m259dbba[m since ggally_ratio is properly done, don't make a special case for it
+[33ma1b34ce[m revamp the ggally_ratio plot to be of the same format as the other plots
+[33m1de1cde[m deprecate ggfluctuation plot
+[33m77d932b[m Merge branch 'master' into dev
+[33mcaee935[m updated NEWS
+[33m386d799[m fix of ggnet2 problem with directed networks
+[33me1d1c85[m add a bunch of tests from the examples of gglegend
+[33m73aef46[m give gglegend a name that wrap understands
+[33md4be99a[m don't collapse the recursion. let environments do their thing
+[33m2564c9c[m only overwrite the funcArgName if it's missing
+[33m038c4b2[m retrieve the function earlier in gglegend
+[33mb16dc94[m avoid name collision
+[33m03744de[m supply name to wrap when possible
+[33m0564157[m added examples into test for coverage
+[33m312d7de[m documented
+[33m8c63280[m remove set.seed and make sure all data is a data.frame
+[33m824d30e[m fix ggpairs issue in example
+[33m5a534b0[m Merge branch 'dev' into ggcoef
+[33m8601cbc[m use correct username in github url
+[33m1389a74[m set seed for ggparcoord to avoid bad samples
+[33m50fa5f8[m ignore all lintr cache
+[33m58f8862[m install the latest from github, not cran for covr and lintr
+[33m0b64409[m Fixing check warnings and notes
+[33ma29faaf[m documentation and namespace
+[33m036fda0[m ggcoef
+[33m70a7e0b[m notes for travis
+[33m36562b8[m change remotes to r_packages to not require rev dep
+[33m4667db6[m update tests to try to pass on travis.  incorporate expect_silent
+[33mb4d0633[m updated lints to pass with newer test that and lintr
+[33me5d0c6e[m document
+[33m6989364[m use better names for ggpairs internals
+[33mf391473[m clean up print method and how the wrap functions are generated
+[33mafa0416[m add a if a is null, then b util
+[33m4cb1bc1[m ignore lintr stuff
+[33m2676322[m clean up helper functions
+[33md3b28c1[m use devtools lint which defaults to cache = true
+[33mf007199[m ignore linter cache and inst lints
+[33m70373d1[m updated news with travis-ci
+[33m0b45cef[m remove r binary packages
+[33mcfa96eb[m remove comments and check speed
+[33m6f32d5d[m upgrade travis to new spec
+[33m28d526b[m Merge branch 'master' into dev
+[33mef6f2a9[m replace slack with gitter
+[33mdfc402e[m Add Gitter badge
+[33m538b2b6[m documented
+[33me1c395a[m Merge branch 'ggnetworkmapfix' of git://github.com/elbamos/ggally into elbamos-ggnetworkmapfix
+[33m463aad6[m Fix visual glitch when overlaying network on world map.
+[33mb3c4f96[m updated news
+[33m1bdc471[m Merge branch 'legend' into dev
+[33mb1f8313[m added ggpairs example and export gglegend
+[33meec0ae2[m fixed issues with the ggsurv vig
+[33m2e8c205[m documented
+[33meb746ce[m add gglegend and grab_legend functions
+[33m7cc015f[m allow for non ggplot2 objects to be printed
+[33m649c5af[m Merge branch 'ggsurv_vig' into dev
+[33m158f676[m added PR's to NEWS
+[33mab2cf5c[m documented
+[33m4aeb5ed[m added vig for ggsurv
+[33m5092fb9[m Merge branch 'wrap_doc' into dev
+[33mc2c934c[m documented
+[33m7ee5cfa[m change param lty.size to size.est and added size.ci for more control
+[33me3788cc[m documented
+[33m735ff22[m Merge branch 'patch-1' of git://github.com/codetrainee/ggally into codetrainee-patch-1
+[33ma6f86ed[m move test file order around to have ggpairs and lintr last
+[33m9f5b6bb[m document
+[33ma55d72c[m more explicit error checking
+[33m1eded2b[m added tests for wrap to check for cases
+[33m92ae138[m added more examples and cleaned up docs for wrap
+[33mbc9d36f[m Merge branch 'dev' into ggduo
+[33m6fad198[m Merge branch 'master' into dev
+[33m0621026[m documented
+[33m34f0856[m print the get locations for a ggmatrix
+[33mecb769a[m make helper functions for ggpairs. round 1
+[33m46037a3[m change how the find_plot_type functions work to use two column sets
+[33m40e248c[m Update README.md
+[33md8fc508[m Add parameter for changing line width
+[33maca83bc[m commit the current state of ggpairs2. horribly broken
+[33mb4d3970[m upated news
+[33m411213c[m method arg added to ggally_smooth
+[33m7cff644[m Merge branch 'ggsurv_label_order' into dev
+[33m8a738b3[m fixed ggsurv example error. updated example colors. documented
+[33m777d1e7[m Merge branch 'dev' into ggcorr_labeling
+[33m58be79c[m linter updates, even though it isn't checked
+[33m8841c6e[m if strands die, tie goes to the longer survivor
+[33mfdce6e3[m Merge branch 'master' of git://github.com/fubar2/ggally into ggsurv_label_order
+[33md033046[m don't listen to .Rproj files
+[33mbddd134[m fix lintr
+[33m86ec128[m document
+[33mf568164[m update definition of limits
+[33m70c01fa[m add poor tests for ggcorr
+[33m2beb467[m update drop param to account for new values
+[33m723feb4[m add checks for old variables
+[33m6d0f1dc[m Merge branch 'master' of git://github.com/fawda123/ggally into ggcorr_labeling
+[33m114039f[m documented
+[33m5221f51[m fix cor fn issues in ggscatmat
+[33m932ec89[m add method argument to uppertriangle
+[33mc09c60d[m change name, make param eq check and identical, pass the argument through, white space
+[33mc8cb3f2[m use variable, not quoted string
+[33m4089ecf[m Merge branch 'master' of git://github.com/FabianRoger/ggally into FabianRoger-master
+[33m607394b[m Trivial ws change to trigger travis ci build
+[33m84e0a1f[m Trying again after editing with nano (!) Add ordering of group factor so legend label ordering = order(LAST survival value for each group).
+[33m6e70daf[m Edited in rstudio so something wierd happened. Will try again...
+[33mc9812d9[m Add ordering of group factor so legend label ordering = order(LAST survival value for each group).
+[33mef2e1f0[m limits can be set to arbitrary scale in ggcorr
+[33me439cb8[m Merge pull request #1 from FabianRoger/FabianRoger_ggscatmat_with_corr
+[33mdbc3214[m ggscatmat_with_corr_argument.R
+[33mbc3712e[m fix with labelling of cor_matrix with ggcorr
+[33m410b9d0[m bump to dev version
+[33m4484e85[m add single quotes around package names in description file as per Uwe
+[33m665b049[m update cran comments
+[33me3325ba[m ran reverse depends
+[33mbc7a21b[m bump version and date
+[33m6034b71[m make ggnetworkmap knitr options like others in attempt to reduce file size
+[33mf3ae9ca[m update vignettes to use knitr::rmarkdown in the setup
+[33mc953c94[m documented
+[33md1ad640[m updated news
+[33m2ff4d45[m fixed lintr
+[33m99d1e4a[m upgrade data in all entry points
+[33m21093e1[m force all char columns to factors
+[33m091b6b3[m trying to remove note from travis for vignette builder
+[33ma06c718[m try to set warnings are errors to true in travis
+[33m4f590f6[m documented
+[33m0c8bfd0[m fixed missing ncol var
+[33m1f8b993[m lintr: fixed commas_lintr
+[33m2f72e08[m lintr: fixed infix_spaces_linter
+[33mb8381a9[m lintr: fixed pre space
+[33ma5a06ee[m make lintr a travis / dev only package
+[33m49bff56[m fix vignette builder to rmarkdown
+[33m243fc5a[m update vignette engine to rmarkdown from knitr as per it's comment
+[33m4ac9ab9[m remove bad docs
+[33m36d8e4e[m Merge branch 'master' of git://github.com/jakob-r/ggally into jakob-r-master
+[33m02b25c4[m fix roxygen in gglyph.R
+[33m3f91a59[m ggparcoord: fix factor group variable
+[33m60b731f[m do not install github version of ggplot2
+[33m0fa18dd[m Merge branch 'ggmatrix.print_newpage' into dev
+[33m031c719[m have test set diag elements to blankDiag
+[33mdaee01e[m set default diag elements to be blankDiag
+[33m9bb17ca[m remove wrong docs
+[33me7439d9[m made dev version
+[33mcdf2763[m fixed documentation issue
+[33m4c1da43[m add boolean for grid.newpage ggmatrix print method
+[33m3fd029c[m updated date
+[33m337fb3f[m updates to cran comments
+[33m753dd17[m namespace upgrades to make r-devel happy
+[33m927c9e1[m add revdep folder info
+[33m125e812[m add cran comments
+[33mdcc6a9f[m update revdep summary
+[33m372b896[m remove git ignore for revdep
+[33me87cde6[m fixed ggplot2 version
+[33m5028c7a[m updates to news (formatting)
+[33mcc89421[m added cran-comments
+[33mcc12186[m updated revdep check summary
+[33m725dd55[m added na display info for ggpairs error
+[33m78ad3e0[m better name for when warnings appear
+[33ma89c832[m make sure all string labels supplied to ggpairs for diag, end in Diag
+[33m3515800[m update cran url to follow suggested style
+[33mbdcbf82[m documented
+[33mc44590b[m update to reverse depends
+[33m99db661[m better ggplot2 version check.  helps with dev version of ggplot2
+[33m6795cf1[m spelling
+[33m74f3387[m updated news
+[33m153b1a0[m bump version and date
+[33m026c7c9[m depend on at least 1.1.0 ggplot2.  idk what version he's going to
+[33mb9d829b[m reduce fig.retina to 1 in vigs
+[33m3e3ec3a[m white space
+[33m427587e[m do check for densityDiag rescale arg
+[33mef0ad67[m do check for strip-top and strip-right
+[33mbf9f6b3[m add check for a warning message
+[33mee7a1c8[m avoid printing if possible
+[33mdc842a0[m fixes error that a discrete custom plot would produce a blank
+[33m2547613[m fixed bug - that alpha didn't work when no color
+[33m1e6ff19[m forgot color arg in docs
+[33m23c451e[m document
+[33m33f14f3[m add blankDiag to ggpairs test
+[33mbcffc8c[m update ggpairs description
+[33md76dbd9[m update ggally_na args to follow function api
+[33maa16d5a[m undo ggally_cor changes.
+[33m8caf145[m make a ggally_na docs
+[33m1fa7c58[m document
+[33m1575378[m add ggally_na tests
+[33m852cdd4[m pass lintr
+[33mb2d4165[m export a ggally_naDiag for completeness
+[33m0186121[m add subType to ggally_na
+[33mc1deb62[m setup na fn within ggpairs
+[33mcf38362[m add a na type for ggpairs combos
+[33m7cae2fc[m Merge branch 'dev' into ggally_na
+[33m2451b01[m added PR into news
+[33mf4ad869[m Merge branch 'dev' into fix_uniminmax_scaling
+[33m10306b2[m added test for group column in display columns.  string, factor, numeric
+[33md386a03[m formatting
+[33m83c4e93[m 'ggparcoord.R': Removed unnecessary is.factor() check. Added more tests to check that the 'ggparcoord()' function handles columns containing multiple and single factors correctly.
+[33m9fb8f15[m Merge branch 'bbolker-master' into ggally_na
+[33mca24328[m consistent linking in readme
+[33mc106c05[m documented
+[33m298acf6[m add ggally_na setup in ggpairs
+[33m9e40a0c[m add ggally_na function
+[33m31a371c[m formatting
+[33mbba4544[m Fixed #120:'uniminmax' scaling error for columns containing one single numeric value only. Added corresponding tests that confirm the error is not thrown anymore.
+[33mcfe54a7[m set all-NA panels to blank, skip cor()
+[33md65c911[m use ggplot2 rel functions. Avoids double export when loading ggplot2
+[33m30f1fb0[m move pkgType to a default arg
+[33mf816407[m documented alpha arg
+[33m465e4b5[m white space
+[33m9fff170[m do not source ggally.  only source the R files
+[33mfa0baac[m deleted random figures
+[33m9ab0ebd[m documented with roxygen2 v5.0.0
+[33m086e9a0[m updates to ggscatmat and gglyph
+[33m360a65f[m trying to reduce description notes
+[33m4313590[m bumped description date
+[33m4018c87[m remove special formatting in docs
+[33m7521d2e[m updated ggnet2 test to check for more arrow warnings
+[33m49e200d[m removed non-ascii char
+[33m4b11132[m Added ggpairs reference
+[33meebda60[m readme tweaks
+[33m7abc7b5[m remove messages from loading libraries in ggnetworkmap.Rmd
+[33me4e30fc[m fix test to not produce extra warnings in output
+[33mcfcc69c[m more updates to ggplot2 upgrade
+[33m69acf23[m updates to pkg description and title
+[33m85b1fdb[m documented
+[33m3cd16d2[m bumped roxygen2 version
+[33m124e495[m fixed rstudio given errors on scoping from packages readily available
+[33m0d15aa3[m first pass at new news
+[33mdbb6d19[m updated description of ggmatrix
+[33meab3abe[m do not send mapping in early to density, only on density geom
+[33mb8aa637[m remove na val when finding range
+[33m98bf4c1[m load test that when testing
+[33m6b1a164[m add fake data points to extend the limits of the stat_density2d
+[33mc3c0566[m removed todo.  bad idea
+[33mb120d5f[m updates for ggplot2 upgrade
+[33m54f864c[m Merge branch 'dev' into ggsurv_question
+[33m0bde095[m moved revdep folder to default name
+[33meecc228[m check summary added for rev deps
+[33m90b3da6[m helper function of checking rev deps
+[33m227b806[m added spacing to pass lintr
+[33m407a862[m added a download count from cranlogs
+[33mcc87bea[m bumped version to a 'development' version
+[33mc755725[m do not lint inst/*
+[33m952dd1e[m added helper function for checking reverse deps
+[33m426e0f4[m updated example to match new code
+[33m733bc7d[m removed non-ascii char
+[33m4f78b89[m fixed double name in vig
+[33m40e812d[m added more to matrix subsetting
+[33m85d95b7[m fixed missing variable name issue
+[33ma9a7b60[m added missing comma
+[33m7e0d532[m fist go at ggpairs vignette
+[33mfda487a[m sections listen to mapping.  not aes_string
+[33mfde6f98[m allow sections to be NULL in ggpairs
+[33m2c41566[m update to knit helper fn
+[33ma71d917[m fixed ordering of character column parameter in ggparis
+[33mc673126[m documented
+[33m54e26cb[m init ggmatrix vignette
+[33mff57ab2[m ignore vignette html files
+[33mdaba266[m vignette helper functions
+[33me1d9244[m ignore vignette figure folder
+[33me14ba53[m fixed strip alignment in ggmatrix print
+[33mf25a232[m strips are now printed for all plots, not just ggally_* plots
+[33m0a564b7[m default to no axis labels for ggmatrix
+[33me1f81e5[m fixed minor alignment issue in ggmatrix
+[33md925569[m legends are now printed if boolean is set in ggmatrix
+[33mab4f467[m fixed some spacing issue for labels in ggmatrix
+[33m727ed01[m cooler example for ggmatrix
+[33me1583c8[m better warnings
+[33m93ac8f1[m fixed slack svg link
+[33m992d7e9[m attempt to add slack svg
+[33m1737522[m added encrypted slack in travis
+[33m9de3e5b[m added a help comment for covr
+[33m09120e3[m fixed svg for codecov badge
+[33m4107732[m updated coverage badges to codecov.io
+[33m52ac7e4[m added a test for str.ggmatrix
+[33m4c182c4[m load the dev version of ggplot2 with travis
+[33m37b6042[m documented
+[33m1b82cd3[m fixes to make examples work for ggally_*
+[33mbcb26e9[m fixed tests and added a date density and bar test
+[33m4740116[m fixed error output for ggpairs
+[33md5da13d[m cleaned up ggally_barDiag and ggally_denstrip
+[33m22628d9[m fixed a helper function
+[33m861c3ad[m all but 1 test passes
+[33mf26d9c3[m testing helper functions updated
+[33mc0fa29b[m small update for xtable/ggplot2 update
+[33ma8c3b4a[m added test file helper function
+[33m9b65a12[m removed grid arrow and grid unit imports
+[33m6ec13ee[m fixed lintr issues
+[33md3b99db[m merge from briatte to fix ggnet/2
+[33m7bd62d3[m fixed lintr issue
+[33m01542ab[m documented
+[33me97676f[m added small tests for user functions supplied to ggpairs and ggpairs mapping
+[33m721a540[m if mapping is a numeric, make it the columns. updated warnings
+[33m7698cc8[m cleaned up docs
+[33maa2e00f[m delete .cover file
+[33m858f695[m documented
+[33m4a90cad[m fix bad test
+[33m1b54aaa[m pass lintr
+[33ma794889[m unused variables
+[33md4a61a2[m consolidate helper functions into .helper_functions file
+[33m024ee79[m fixed @@ error for roxygen
+[33m607400f[m added .lintr to build ignore
+[33m5f7baf9[m merged params -> lintr
+[33m28cb0ce[m add show strips arg to ggpairs, ggmatrix now has full control over axis labels and text
+[33mde6f77a[m fixed bad merge again
+[33mefcccab[m fixed bad merge
+[33mea69f30[m merged params -> lintr
+[33m1f3f943[m Merge branch 'dev' into params
+[33m0f300bd[m ignore .covr in R build
+[33meebf450[m Merge branch 'dev' into params
+[33md5b3972[m documented
+[33m3df3425[m fix parcoord issues with odd names.  display error when proper count can't be found
+[33m79ae86a[m protect ggnetwork tests
+[33md9f2bb6[m ggnet, ggnet2: slightly higher test coverage
+[33m378cb2e[m wait, bad idea, revert that last one
+[33m7375b6a[m ggnet2: remove check on label color
+[33mc2b5fba[m acknowledgements
+[33m979b162[m edge arrows: revert to initial solution
+[33m7deef95[m acknowledgements
+[33m8472974[m ggnet: compatibility with ggplot2 >= 1.0.1.9003
+[33m3fbe594[m better solution to edge arrows issue, thanks to @ethen8181
+[33m730106a[m better distance handling in arrow.gap
+[33m00ecc47[m arrow.gap option + coverage tests
+[33m2d50f70[m listens to themes applied to ggmatrix
+[33md052aed[m Merge branch 'params' into lintr
+[33m478cbfb[m Merge branch 'dev' into params
+[33mc4878e9[m added a code file for covr to run code coverage
+[33m2caaeca[m added Rplots to ignores
+[33m1bbf356[m added notes on sudo for travis
+[33me84f115[m require sudo :-/
+[33me5a22bc[m travis sudo false.  trying to upgrade to new travis infra
+[33m437405f[m added travis to be built.  removed sudo from travis
+[33ma229f08[m added lintr to suggests for testing purposes
+[33m97928fa[m Merge branch 'params' into lintr
+[33m70c13eb[m documented
+[33m0636056[m merged dev -> params
+[33ma3e903a[m documented
+[33m37e9479[m updated Roxygen version to 4.1.1
+[33mbe0b63c[m passes lintr
+[33mdf908d8[m merged params -> lintr
+[33m9bd035e[m Merge branch 'dev' into params
+[33me1a53a6[m lintr: added testthat check
+[33m9d53223[m lintr: fixed line_length_linter
+[33md2d383a[m lintr: fixed assignment_linter
+[33m73842c2[m Merge branch 'dev' of git://github.com/briatte/ggally into briatte_dev_PR100
+[33mb7f24e1[m ggnetworkmap vignette: re-add author and date, limit plot to USA
+[33m4a11f53[m avoid potential namespace conflict with igraph
+[33mf8d8c45[m lintr: fixed infix_spaces_linter
+[33m3d77901[m lintr: fixed trailing_whitespace_linter
+[33m3bccee7[m lintr: fixed spaces_left_parentheses_linter
+[33m1689a03[m lintr: fixed single_quotes_linter
+[33mb7991a4[m lintr: fixed commas_linter
+[33m4fa331a[m lintr: fixed object_usage_linter
+[33mb8a3b9f[m lintr: fixed a lot of multiple_dots_linter by adding a "# nolint"
+[33m3592e31[m updated .lintr comments
+[33m653a677[m lintr: fixed trailing_blank_lines_linter
+[33ma91a107[m added comments to .lintr
+[33maf8a173[m lintr: fixed no_tab_linter
+[33m7d5cf3f[m fixed starting brackets
+[33m9e7a83a[m update lintr code
+[33m5f4ce19[m re-run lint code (comments) with only barret-files
+[33m3148805[m exclude non-barret files for now
+[33m4c8b821[m passes closed_curly_linter
+[33m73bdf2d[m Merge branch 'params' into lintr
+[33me9ddc34[m make linter file to lint with.  notes added
+[33mc03c7eb[m lintr: Trailing blank lines are superfluous
+[33m419eb9e[m added lintr to travis
+[33m7525fb0[m ggnetworkmap: slightly better coverage at 82.91%
+[33m391495b[m ggnetworkmap: lost all dependencies to igraph
+[33m923ae83[m ggnetworkmap: converted + renamed example network data
+[33ma74e463[m DESCRIPTION details
+[33mf793bc4[m anticipate on gh-pages, mention ggnet2
+[33mae66356[m allow for multi cens.col and cens.shape in ggsurv
+[33m65b6c32[m typo
+[33m2d6987e[m Merge branch 'dev' into params
+[33m6663b8e[m documented
+[33m69e9845[m fixed stringr imports issue
+[33me7c5df6[m Merge branch 'dev' into params
+[33m0c2e736[m Merge pull request #94 from briatte/dev
+[33m24fd7c8[m Merge pull request #97 from briatte/dev
+[33me9680e2[m 100% test coverage
+[33m828d6d6[m improvements + vignette
+[33m61995e0[m merged dev -> params
+[33mc624744[m removed stringr completely
+[33m90f12e9[m Merge branch 'dev' into params
+[33ma460e05[m fixed str_c problem
+[33m95f60a2[m Merge branch 'dev' into params
+[33m6dbf07b[m removed stringr as a dependency.  made small internal functions
+[33m29e6ca9[m avoid sna/network/igraph conflicts in ggnet and ggnet2 tests
+[33md40337e[m avoid sna/network/igraph conflicts in ggnet and ggnet2 tests
+[33mf05cb0d[m expect warning when using 7+ node shapes
+[33m827f31f[m fixed tests for ggpairs
+[33mc834291[m add 'Diag' to all diagonal plot fns.  must require Diag for diagonal plots
+[33m37dda6d[m documented
+[33ma5c43ea[m added rescale arg to barDiag and densityDiag
+[33mae89b4d[m fixed typo
+[33med11d8e[m Merge branch 'params' into neg_bar
+[33mc371e89[m updated odd column name to start with a '.ggally_'
+[33mb247809[m Merge branch 'dev' into params
+[33m26f09c1[m documented
+[33ma26e3e2[m Merge branch 'dev' into params
+[33m835eb0c[m Merge pull request #91 from briatte/dev
+[33mc88e915[m document
+[33mb3ea52c[m better name recognition for functions supplied within ggpairs
+[33m90b191a[m fix examples in ggpairs
+[33m2874f29[m document mapping in ggpairs
+[33m7f7b08f[m clearer error message when supplying a nonexistent function
+[33mdbd39ad[m updated ggally_cor to use non-ugly args
+[33m81ac2d6[m doc mistake
+[33m2676739[m documentation
+[33m79df104[m 100% coverage tests
+[33m808f2a0[m geom_text method and global improvements
+[33md781a40[m better doc, checks for numeric data
+[33md6c8349[m slightly better examples
+[33m08df57a[m cleaner code and better default colors
+[33md3d139a[m better naming for wraps
+[33mb4739be[m Merge branch 'dev' into params
+[33m5284533[m documented
+[33mf73b549[m Merge branch 'dev' into params
+[33md2d11d6[m Merge pull request #89 from briatte/dev
+[33m2876694[m remove params args in tests of ggpairs
+[33m9b796fc[m fix tests to use updated mapping arg and wrap all binwidth fns
+[33m444c98b[m make whole error output into one output
+[33mef7208a[m if a wrapped function is wrapped again, reduce to one wrap
+[33m106efe7[m more ways to check if a plot is blank
+[33mf88767d[m documented
+[33meaf11d7[m fixed blank plot addition to ggmatrix
+[33m5441f7a[m use 'mapping' variable.  Not '...'
+[33m1eaf676[m check for odd aes mapping values
+[33m9557587[m allow for "blank" plot insertion
+[33mafac65c[m added 'raw' arg to str.ggmatrix to view (almost) raw info
+[33mad62026[m documented
+[33m5778780[m removed all use of the params arg in ggpairs.  made error note to use wrap
+[33md95e6d1[m reorder wrap functions for cleaner docs
+[33m780e02b[m documented()
+[33m5cf3654[m fix issue of subType being a function
+[33m334febb[m added shorter name for wrap_n_with_param_arg
+[33m241e533[m wrap_fn now returns a function with attire's
+[33m21fc9fd[m fix getPlot method for ggmatrix
+[33m23db7b0[m use new ggmatrix plot obj methods
+[33m4bd4e4a[m make str method for ggmatrix
+[33meb1bfd5[m genet (revised) + 99% coverage tests
+[33md08bc53[m ggnet2 + 99% coverage tests
+[33m1de4529[m have two wrappers.  One with ... and other with params
+[33mdb72a65[m better way to find if it is a ggmatrix object
+[33m2b159d9[m rename file
+[33meb7ba18[m Merge branch 'dev' into params
+[33m0f66f13[m white space
+[33m67a9476[m make some wrappers for functions to pass parameters with pretty print methods
+[33m548f306[m actually listen to the args given
+[33m721367e[m make smaller functions to set defaults
+[33mb73ead8[m fix some camel casing issues
+[33md18680b[m fixed funciton name applied to params
+[33m895e95b[m added rdname to add_and_overwrite_params
+[33m304cfcd[m renamed addAndOverwriteAes to add_and_overwrite_aes
+[33mf902f64[m removed cityServiceFirms from package.  left commented block within testing
+[33m9b4b456[m intergraph and tnet not on travis
+[33mecd09f9[m try adding some r_binary_packages
+[33m6d23620[m changed Url to URL
+[33m4af064e[m fixed non-ascii character
+[33m58400c5[m change coveralls code in travis
+[33m41ca91f[m Merge branch 'dev' into travis
+[33m5b86ac6[m documented
+[33m3d1abee[m Merge pull request #84 from briatte/dev
+[33m0ecb7d8[m very first version of ggnet2
+[33m9487120[m Merge remote-tracking branch 'ggobi/dev' into dev
+[33m66b82f3[m 100% coverage for ggnet
+[33m6c6e0f0[m first attempt at first class R travis.
+[33m3e95a14[m merged briatte:dev -> briatte-dev
+[33m5994bf3[m ggcorr, improvements suggested by @maxheld83
+[33m8d73a09[m added a version badge to the readme
+[33m7889c05[m added some scripts for reminders / needs work
+[33maa3e91a[m documented
+[33m21de780[m Merge branch 'censColor' of https://github.com/ogdenkev/ggally into ogdenkev-censColor
+[33me65741e[m corrects an error with if statement checking cens.col
+[33m2dd8678[m allows NULL to be passed for cens.col to use surv.col colors for censored points
+[33me5ca69b[m modifies group creation to maintain the strata order from the survfit object
+[33m5a25aaf[m adds cens.color for coloring censored data by group
+[33mf214cd7[m documented
+[33m0672392[m if else brackets
+[33m5b1dd3d[m fixed function name
+[33ma2f3ee7[m fixed roxygen author error
+[33m7a2f843[m Update ggcorr.R
+[33mcf73a55[m documented
+[33m61c3610[m fixed test
+[33mbcc8201[m show example using cor_matrix
+[33m4c866e6[m document
+[33mae0857a[m add docs about cor_matrix for ggcorr
+[33mcdce383[m added test for cor_matrix in ggcorr
+[33m82c4ef8[m move correlation matrix to argument to ggcorr function.  allows for direct passing of cor matrix
+[33mc76760c[m added test for ggcorr
+[33mc55ce4a[m supply rowans to the data.frame
+[33m14bcdcb[m no need to subset on all columns
+[33m313c47f[m white space
+[33mcd295ad[m fixed examples
+[33mbb0c153[m more tests for coverage
+[33m5a590bb[m fixed some cor color issues
+[33m1ba2436[m more tests for gg-plots
+[33md9976b7[m made a TODO for ggally_barDiag with dates
+[33m7b5a1e0[m add warning for cor use
+[33mef865b8[m allow columns to be a character vector of column names
+[33m72f294a[m fix subType bug for discrete type
+[33mbfb3cd9[m all plots need the same section_aes and section_params
+[33md3c69c1[m fixed old bug of facetdensity not having color
+[33m40da8d2[m error on color mapping fixed
+[33m421d528[m better printing for printInfo
+[33maacf5cc[m bug to do combo or continuous for subType
+[33md379d63[m bug that prevented diff types of plots
+[33md023eea[m combine scatterplot, box-vert, box-hori ggpairs code
+[33mcd88454[m condense diag in ggpairs
+[33m5a248a0[m blankDiag situation is covered in make_ggpair_text
+[33m0e49479[m move common subType/section_* code to one area
+[33m8363f9a[m remove old code in comments
+[33m6c3f544[m re-arrange to non-diag / diag if statements in ggpairs
+[33md533718[m allow for missing plots in plotList for ggmatrix
+[33m8dfeda1[m move the byrow arg to execute in print method
+[33mf20164c[m documented
+[33mc9590d9[m renamed ggpairs-print to ggmatrix-print
+[33m1fb697f[m tests for getput, add, and matrix
+[33mdfa90cc[m add simple example for ggmatrix
+[33mc82d702[m print spacing
+[33mf29eaf2[m fix arg error
+[33mc69dfe4[m allows to change order for plotmatrix
+[33m868b19b[m added extra param for ggmatrix
+[33me282813[m now works with non-square matrix
+[33mb6346d7[m better plotObj title check
+[33m3f3436c[m documented
+[33ma389934[m added a ggmatrix object.  generic ggpairs plot matrix
+[33me781fb2[m setup to use x/yAxisLabels for ggpairs
+[33m3d25efc[m true-er parsing for eval statement
+[33m2d0e5f8[m Merge branch 'dev' into plot_matrix
+[33ma591be4[m documented
+[33meaf0899[m don't use nba when testing only use in example
+[33mec57efe[m add support for non square matrix in put plot
+[33mde63fc0[m add support for non-square matrix
+[33m7c463da[m fn name change
+[33mbf67b13[m Merge branch 'bracket' into split_files
+[33m3d1c917[m fixed test error
+[33mc759928[m fixed test error
+[33m2aa1b7f[m split ggpairs into three files
+[33m1406c52[m add test to check for blank plot
+[33m61d3ff8[m revert is_blank_plot code change
+[33m8f704d7[m less printing while testing
+[33m68922af[m better error checking for brackets
+[33mb00337d[m match arg names for get/putPlot and brackets
+[33m3aa1a34[m document
+[33m2477984[m change all examples and tests to use brackets
+[33m1c9b398[m make sure i and j are single numbers for get/putPlot
+[33me2822f3[m Merge branch 'dev' into bracket
+[33m87e040a[m only do travis tests
+[33ma1feb66[m remove prints and set a seed
+[33m43e9a7e[m added prints to debug travis
+[33m87341bb[m try to have travis output error
+[33mc332daf[m Merge branch 'dev' into date_cor
+[33m29e560c[m first pass at bracket notation
+[33mba78b8e[m remove un-necessary as.character(substitute()) calls that mess up the code
+[33m9f35e06[m add test for date values in ggpairs and cor plot
+[33m8ad24c2[m do cor plot for date values
+[33m1ff28dd[m trying to improve test score
+[33m6ccc699[m fix the allowed-to-fail for travis
+[33mfe744da[m only do master and dev.  all others should be pull requests
+[33m90c845b[m removed old vignette file with bad name
+[33m2296c97[m Merge branch 'vignette' into vignette_travis
+[33mfa28466[m removed non-ascii chars from vignette
+[33m0261f14[m merged vignette --> vignette_travis
+[33md159e93[m Merge branch 'dev' into vignette
+[33maadc21a[m do all branches for travis
+[33m29c56e0[m Merge branch 'vignette' into vignette_travis
+[33meb5e3de[m Merge branch 'dev' into vignette
+[33me3de99b[m documented
+[33mef6e035[m Merge branch 'vignette' into vignette_travis
+[33m8ca8f4c[m Merge branch 'dev' into vignette
+[33md7f87e3[m better test for columns in ggparcoord
+[33m53a56c1[m move context up in file
+[33m48d4b4d[m better check for columns in ggparcoord
+[33m63af9c3[m Merge branch 'dev' into tests
+[33m98a9da6[m more tests for ggparcoord
+[33md7a66c4[m make sure a "custom" plot for axisLabels test
+[33m9152f01[m don't do bin width on density
+[33m683eec5[m add bin width parameter to all ggpairs fns
+[33m68aae54[m make sure to pass on params
+[33m665b97c[m better date finding
+[33m268bd64[m better message for dates in correlations
+[33m4409dcb[m allow for dates in barDiag
+[33m4857406[m clean up find_plot_type and account for POSIX dates
+[33m70ce844[m white space
+[33m21b91d2[m comment scale_x_continuous for densityDiag
+[33m1d26c86[m do not do corr on date data
+[33mb357f0d[m have the smooth line appear on top of points
+[33m18010e7[m force data.frame in ggpairs.  do not allow for other classes
+[33mefea4a3[m build branch
+[33m6a792e1[m trying args for building
+[33mc321c87[m don't ignore 'inst/'... it's important for vignettes
+[33m6ce3a35[m Merge branch 'dev' into vignette
+[33m8156cac[m documented
+[33ma3e703b[m Merge branch 'dev' into vignette
+[33me6fb7cd[m rename R files to have .R extension
+[33mec6a7fc[m translate README.html --> vignette/ggnetworkmap.Rmd
+[33m1c4f191[m force igraph for degree function in R docs
+[33mf2b6de9[m add a set.seed to the R docs
+[33mec098b8[m force igraph for degree function
+[33m9267d56[m consistent outputs with set.seed
+[33m8b888a7[m ignore inst
+[33m2756ce6[m added knitr to have vignette build, hopefully
+[33m5986bf2[m Merge branch 'dev' into vignette
+[33m742d88e[m updated travis to only have dev and master.  travis also does pull requests
+[33ma428d59[m documented
+[33md461644[m Merge branch 'dev' into elbamos-ggcorr_legend
+[33m8e4244d[m added/updated param docs for ggcorr
+[33m5344f4a[m moved context higher in file
+[33m3b8a662[m updated test to match code
+[33mcb4f17e[m add a backdrop point to see the light color points
+[33m11d714b[m reorder the x and y axes to match the levels of the data
+[33m7d4d747[m the guide should be on fill, not color
+[33m4f9f173[m have size change with abs value of number
+[33ma292f92[m specify the aes params
+[33m7b3c52d[m only use complete cases
+[33m2527392[m added a min size and max size variable
+[33m198253b[m add new test that checks for aes params not included
+[33mfc9a345[m remove bad expect test
+[33mbb588fd[m clean up warnings.  get all unique values starting from top
+[33m9b56bdc[m fix error
+[33md19e1a6[m white space
+[33m23a7e24[m remove print statements
+[33mf257388[m formatting
+[33mb3d824e[m resovled dev --> ggparcoord_size
+[33m97edfcd[m Merge branch 'dev' into vignette
+[33m329b606[m Merge branch 'dev' into elbamos-ggcorr_legend
+[33mfa0a2be[m added examples of ggnet to tests
+[33mc5993ad[m more tests for ggpairs and gg-plots
+[33m00e4f12[m use aes_string to avoid global variable
+[33mfbfa6b5[m remove helper function and do all global variables at top
+[33m94b3047[m should only be under printInfo
+[33mf905e9e[m only use ggpairs objects
+[33m4294a1e[m context arrangement
+[33md92d96a[m whitespace
+[33mdb948f0[m if statement brackets
+[33md4240f3[m test character inputs
+[33m97bacf8[m add axisLabels testing
+[33m1b7da8b[m return text version of incorrect plot
+[33m412ff47[m return "blank" text instead of blank function text
+[33m7353425[m remove unnecessary code
+[33m0fe5699[m allow printInfo in ggpairs to be accessed at all times
+[33m42b01f4[m added test files for ggcorr. and template for ggnet
+[33mb514250[m more tests for ggnetworkmap
+[33m545f4cb[m fix case where labels could be a vector
+[33m2e3a5b4[m glpyh test file added
+[33m90f3ff4[m document
+[33md664e3a[m add docs to rescaling functions
+[33mda16694[m add docs to rel
+[33m8a01814[m add docs to glyphplot
+[33m2a37c60[m reduce example time in glyphs
+[33m45780c4[m give di credit
+[33m2978240[m Merge branch 'dev' into tests
+[33m515a5ab[m changed geom_line to geom_path in gglyph
+[33m3ff903b[m fixed broken tests
+[33m2effa0c[m 100% on ggparcoord
+[33m3dd2007[m no need to print ggscatmat tests
+[33m4773369[m more order tests for ggparcoord
+[33m7072935[m remove impossible to reach code.  makes sense that you can't reach it
+[33m2b5be61[m more tests for ggparcoord
+[33m59e504f[m add stop for splineFactor
+[33m3fcaaf8[m update stop checks
+[33mf9d142e[m make single line if's into multi line
+[33m67028ba[m notify user on a non-valid splineFactor value
+[33mb18c907[m better stop messages
+[33m74834d4[m cleaner code for getting characters and factors in ggparcoord
+[33m072f657[m Merge branch 'dev' into tests
+[33mbdc0069[m fixed examples for ggpairs helper
+[33m46af903[m documented
+[33m70db723[m Merge branch 'dev' into tests
+[33m93852fd[m documented
+[33mb9e10e0[m Merge branch 'dev' into tests
+[33m1454a59[m removed un needed arg
+[33m1c9a712[m first pass test on ggparcoord
+[33m35487d2[m fixed logic for alpha checking in ggparcoord
+[33m50575f8[m better layout for if statement
+[33mb043c6a[m removed old ggpairs print method
+[33m28add0d[m old typo got through
+[33m7cadade[m change non failing tests to actual tests
+[33mbb9be59[m move requires up top and set seed for consistency
+[33mf3d8b68[m Merge branch 'dev' into famuvie-axisLabelSize
+[33mbc6292a[m ggpairs x axis title size
+[33m9a3be0e[m ggpairs y axis title size
+[33m8471a9b[m ggpairs title size
+[33ma0a8541[m add helper functions to get first non-null theme values
+[33mf6b9015[m New option axisLabelSize in print.ggpairs()
+[33ma38fe5d[m remove column names to avoid warnings
+[33m65a8d4d[m arg alignment
+[33m16d32d8[m whitespace
+[33mf03fe64[m for .parallel to be true when doing <<- in ddply
+[33mf0f17bc[m remove direct plyr call. shift function to (whitespace)
+[33m4a8965a[m base ggscatmat test file added
+[33m1d22b66[m white space
+[33m1d1d280[m move all factor check to beginning
+[33mcbe06b0[m ggpairs_add test file added
+[33m19e392f[m do a quick print test for ggpairs
+[33m5411505[m remove unused context
+[33m3b02be6[m first pass on ggpairs test file
+[33m016f541[m added ggsurv test file
+[33m693dde0[m added a diag blank plot
+[33m554a4a0[m check to make sure all column names are not numbers
+[33me54b512[m add error about dig not being a list
+[33m41d7ab4[m better error warnings
+[33m7eb4916[m small bugs to clean up data.frame / vector
+[33m2803148[m added utils.R test coverage
+[33mc7951d0[m whitespace
+[33m1f60435[m renamed ggnetworkmap test file
+[33m76f525c[m added comment about commit version of covr
+[33mabd035b[m install working version of covr for coveralls
+[33m4b5b0b8[m added coverage badges for both master and dev
+[33m01ce6a9[m added back manual r_binary installs for travis
+[33m3eb0f4d[m print packages and forgot paren
+[33m7d3086b[m added library calls
+[33mfc24ff2[m added repo to available packages
+[33m4581048[m recursively find all rev-deps and install binary packages of them for travis
+[33m88c590d[m remove all binary installs and add jimhester's covr and run coveralls() after success
+[33m51ded04[m Merge branch 'tests' of github.com:ggobi/ggally into tests
+[33m8f6e1ed[m added coverage badge to dev
+[33me3291ee[m make knitr the vignette builder
+[33me9cf5ab[m use Authors@R in DESCRIPTION
+[33md38b775[m forgot comma in ggcorr example
+[33m17066fb[m Merge branch 'dev' into elbamos-ggcorr_legend
+[33mdcf3afc[m alphabetize description suggests
+[33m41818d5[m add url and bugreports to description
+[33m35614bc[m update description
+[33md93f991[m documented
+[33mcc7d61d[m only do color guide
+[33m1684791[m remove name from fill scale
+[33m34798fd[m remove latexify arg and only use name.  made example
+[33m15cee48[m Merge remote-tracking branch 'elbamos/ggnetworkmap' into dev_test
+[33mc4363f1[m Info file for the twitter_spam_community dataset
+[33m5b751e0[m Merge branch 'dev' into elbamos-ggcorr_legend
+[33mc93bceb[m clean up author in ggnetworkmap
+[33mf43224d[m remove ggplot2:: as it was required
+[33m1c8e57e[m Give Amos credit in the description file
+[33mfe4733c[m Merge branch 'dev' into ggparcoord_size
+[33md75b19c[m Merge branch 'dev' into elbamos-ggcorr_legend
+[33m4293822[m Merge branch 'dev' into elbamos_ggnetworkmap2
+[33m8dc9b63[m documented
+[33ma2fb862[m added physical binding for '.label' in globalVariables check
+[33m0b00c5d[m ignore un-wanted files for rbuild
+[33mb18f797[m remove double ggmap suggests
+[33mcf59f07[m make under 100 chars wide
+[33m24487fe[m tabs to spaces
+[33m8920af2[m merged elbamos/ggnetworkmap -> elbamos_ggnetworkmap2
+[33m4c3410b[m Fixing a typo in the documentation.  Also adding a page for the repository on my git -- that is not intended to be part of the pull request.
+[33m086c4d2[m Data and examples to show-off features
+[33m7dbe65b[m Fixing the typo in great circles uncovered an issue that... well, frankly gcIntermediate() just sometimes doesn't return what it should when a line crosses the dateline.  Who knows why?  Anyway this fixes it.
+[33m1b2abc2[m Travis
+[33m5b2e85e[m More dependencies...
+[33mcd770ec[m More Travis & Dependencies
+[33m87f4202[m These all seem to be failing on Travis saying that there is no such package, on a test from testthat, when the package is requested in a library() command and the package is in CRAN.  I'm thinking what's going on here is that the packages need to be identified somewhere else in the package definition.
+[33m9947688[m Trying to get travis to build... more dependencies...
+[33m43a5dd4[m Trying to get travis to build... Dependencies...
+[33m72f300d[m Found typo in call to gcIntermediate that was the reason the great circles weren't pretty.  Swapped ggmap:: out of the test and examples because Travis couldn't find it.
+[33mf2a99ee[m Maybe fix tests breaking Travis?
+[33mfd0f5f0[m indent using spaces
+[33m7426d5e[m add igraph call to degree
+[33m0630496[m ignore tmp png files
+[33m18232af[m added ggmap to suggests for example and testing
+[33m1157b02[m remove ::: call to require_pkgs
+[33m2660980[m Fixing some dependencies to try to get Travis' ok
+[33m1b81443[m Fixed typo, added testthat script
+[33m1acd758[m Adding dependency that may have been causing Travis to fail.
+[33m226abb0[m Changed documentation, took out extraneous "feature."
+[33m7271565[m After document() and check(), with some fixes to examples and documentation.
+[33mc1d7aa3[m Documentation and examples
+[33mff72fa9[m Fixed vertex labelling (apparently broken in original ggnet when using igraphs).
+[33mfc93ae6[m Added breaks at dateline; world map still looks funny, but at least it attempts to draw the lines.
+[33m9d03931[m Fixed bug caused by naming conflict in non-standard evaluation.  Got rid of quantizing weights, which was unnecessary.
+[33m7d479ed[m For testing
+[33md289e7d[m Great circles added.  Node coloration and groups and weighting working properly.  Arrows don't look quite right.
+[33m6484f72[m documented
+[33m5c836a9[m add more author descriptions
+[33m173991b[m Merge branch 'ggcorr_legend' of https://github.com/elbamos/ggally into elbamos-ggcorr_legend
+[33m8c6233d[m Merge branch 'dev' into ggparcoord_size
+[33m2b0025f[m bumped roxygen version to 4.1.0
+[33made1485[m Delete ggnetworkmap.R
+[33mc54afd6[m Updating for push...
+[33m19dfda0[m 1.  Allows user to specify number of breaks shown in legend, and drops levels not in use.  Otherwise, the plotting function has little utility for correlation charts that don't cover a wide range, which in my experience is most of them.
+[33m4f49ab8[m Should work...
+[33m11e9ee6[m Initial pass at ggnetworkmap - doesn't handle groups yet
+[33ma3a50af[m 1.  Allows user to specify number of breaks shown in legend, and drops levels not in use.  Otherwise, the plotting function has little utility for correlation charts that don't cover a wide range, which in my experience is most of them.
+[33m7e037b2[m tmp print statements and current status
+[33mbef534a[m get mapping names and melt the data
+[33me1f4393[m keep old columns and condense code
+[33m42e4e52[m condense code
+[33m5c7f7a7[m subset on columns used to maintain other columns
+[33mb2c9396[m make sure all columns are integers
+[33m577577e[m don't subset the data first
+[33ma22ff60[m parens
+[33mbac9f3e[m define the columns
+[33m19176ee[m removed title period by Uwe's request
+[33m4654a02[m bumped version at start of dev
+[33m150077c[m bumped date
+[33mdd65312[m document
+[33m8278535[m allow for plain values in ggpair_text, like alpha = 0.4
+[33mcfb5a4d[m clarify news on custom labels
+[33m96e4feb[m comment in news about themes for ggpairs
+[33m53b5b57[m formatting for news
+[33m004a23a[m combine procured spline code into one area
+[33m80b289a[m shorten the data to make glyphs example faster
+[33md30947c[m added global variable xvalue, yvalue to ggscatmat
+[33m9868ce8[m documented
+[33m69ea137[m added NEWS about ggscatmat
+[33me3e3eba[m change to aes_string to help R CMD check and full arg names
+[33mf253846[m whitespace
+[33m698d0d6[m added a 'if' around optional package network in example
+[33mae228df[m added a faster, traditional scatterplot matrix
+[33mfa9618a[m documented
+[33ma203fdf[m change examples to something smaller and comment extras
+[33mc33b239[m added ggplot2:: to example
+[33mf6d1ff0[m documented
+[33m6d719dc[m add in ggpairs "+" method
+[33m56eca14[m add class gg to ggpairs object
+[33m91ef2da[m add variable gg to plotMatrix object
+[33mba4232d[m documented
+[33mfa4a1cb[m document undocumented params for add_ref_lines and add_ref_boxes
+[33m4376b8c[m remove roxygen mark for internal function
+[33ma8e1ecd[m added ggplot2:: to glyphs examples
+[33mf77fba6[m 'merica
+[33m4d51589[m white space
+[33mbdb8df3[m bumped roxygen version. documented
+[33me59cc0d[m documented
+[33m2a4ad76[m added a glyph plot to the package, and two new data sets
+[33m1dc34bf[m added ggally_splineFactor to global vars for checks
+[33m21dde63[m formatting for news
+[33m70d729f[m added columnLabels example to ggpairs
+[33mc0eb048[m added news about new version
+[33m5698f4a[m bumped version
+[33m24c993a[m do all branches with travis
+[33m362d51d[m renamed file
+[33m9154840[m update old print name
+[33m65757ca[m documented
+[33mad80549[m cleaned up example for print.ggpairs
+[33md475e44[m documented
+[33mf357d40[m updated ggpairs examples
+[33m20df0c3[m skip blank plots
+[33mf0d911b[m merged dev -> print_align
+[33m8a8203b[m Merge pull request #39 from ggobi/splines
+[33mf920940[m comment long examples
+[33m98b67e5[m documented
+[33m629291d[m more print examples
+[33mb77d173[m keep same default strip control
+[33m79b966f[m have better logic over axis strips
+[33me0540f7[m setup better example
+[33m7c04550[m added the small spacer between each facet for axisLabels
+[33md3dff6d[m formatting for Rcheck
+[33m38e6e6f[m added splines to travis
+[33m2116202[m documented
+[33m8bd92fa[m updated docs on splineFactor
+[33m8ce4194[m add examples
+[33m277bd93[m add constant column to data as transform is fussy. only use first value
+[33m9e7169e[m whitespace
+[33m7d4eaa0[m fixed 'if' bug
+[33m12ab8e0[m change arg useSplines to splineFactor
+[33mb407087[m Merge branch 'dev' into splines
+[33mfb6b799[m added print_align to travis
+[33m7903718[m merged dev -> print_align
+[33md39b040[m remove null arguments in aes
+[33meceaec2[m better stop description
+[33m3ae5627[m document
+[33mbbba2a0[m add parameter descriptions
+[33mb286091[m merged dev -> print_align
+[33m50e880f[m stop checks for column labels
+[33mc77d6cb[m use column labels where applicable and store in pMat obj
+[33md552747[m do not allow 'funny' names in the mapping
+[33ma7e6760[m add label argument to ggally_diagAxis
+[33md9fe167[m more curly brackets and white space
+[33m88242f4[m added curly brackets to an if
+[33m4b60509[m added an example of the splines
+[33mc210fe1[m added the labels back to the x axis
+[33m0409582[m added brackets
+[33m7659772[m Merge branch 'pr/34' into splines
+[33ma6eff78[m changed f.briatte@@ed.ac.uk to f.briatte@@gmail.com
+[33m55667f9[m documented
+[33mf2bc769[m update to better example using color
+[33maa5b89b[m removed old comments
+[33m36fa39b[m updated print.ggpairs example
+[33m634117b[m updated names and value for pring.ggpairs
+[33mb748e40[m better arg matching on axisLabel
+[33m0fb075b[m moved old print method to a sep file
+[33mc30c302[m works with internal, none, and show labels
+[33m197ef96[m changing default of ggpairs axisLabels to 'show'
+[33m9930b37[m fixed layout issue
+[33m0a9be12[m move comments
+[33m9a792de[m added grid.draw to be imported
+[33m4913763[m fixed bottom and left labels. removed small spaces on left and bottom of matrix
+[33m50799df[m white space and small comments
+[33ma99e4c8[m remove old commented code
+[33m935f55a[m move plot generation to be only done once
+[33m41bb6bd[m move spacing to be an arg
+[33m7422f91[m grabs the panel grow and prints it.
+[33m17afcec[m removed extra branch from travis
+[33m2099ee9[m version bump... trying at beginning of development this time
+[33m01e48cd[m version bump
+[33m9b1768f[m added news for new version
+[33m0664c96[m satisfy R CMD check reqs for suggested pkgs
+[33ma3086dc[m use new require_pkg function
+[33mb85285b[m add new require_kgs function... cleaner
+[33m72729d8[m updated travis
+[33ma2f3bb3[m updated travis
+[33me0c156b[m updated cityServiceFirms in ggnet file
+[33mdea34d4[m Added city service firms to package directly due to url loading errors
+[33m3605eb2[m recompressed happy data
+[33mab97d9b[m install revdep depends from binary (trying all)
+[33mf595be9[m setup matrix to allow for failures (revdep)
+[33me4ef7ea[m make into matrix to check revdeps and not check revdeps
+[33m127a46b[m put back to language: c
+[33m95b1291[m try with objective-c language to run on mac
+[33m8be2ab4[m change col to lty for geom_step
+[33m04d6c44[m added RGtk2 to the binary in travis
+[33ma009148[m --no-test-load is not supported.  trying binary
+[33m9ff4f61[m try with manual install
+[33m9ada30c[m try all as one arg to travis
+[33m26f49c6[m trying to install cairoDevice
+[33m8e4d67e[m white space
+[33m938690e[m added cmd flag for travis
+[33mec10679[m version bump and release
+[33m1fc2088[m added latex to install of travis
+[33m3006772[m point to personal r-travis to check reverse deps
+[33m3a7a62a[m added some news
+[33m17570a3[m removed unfound packages
+[33m4ee46d8[m added a bunch of packages to speed up process
+[33m57ae242[m added another 0 to tnet
+[33m19d9db3[m reduced tnet version to just 3.0.0
+[33mdec74ad[m added 'arm' to suggest for docs
+[33me07ed19[m added igraph to travis
+[33mf17cdba[m documented
+[33ma7ce953[m added packages namespace to examples
+[33m7682df2[m added to vars to global check for r cmd check
+[33m62e5343[m added label.size to the params
+[33m45cc4b8[m updated examples to use full arg name
+[33m103b605[m changed link to url
+[33m6435cc1[m added tnet to suggests
+[33m8a44a36[m updated docs to use link within code
+[33m13c92fc[m added travis to r build ignore
+[33m83fc01d[m documented
+[33m9688a59[m Merge branch 'dev' into briatte-master
+[33maa38597[m merged in briatte-master
+[33mcc77aab[m changed file name
+[33m8d495b4[m added rJava binary
+[33m9020ff7[m Added a readme file
+[33ma308ee4[m added a travis file
+[33mef8ba8a[m add roxygen2 to the suggests for documentations
+[33mab806af[m documented
+[33mdf4eca0[m put example in if statement b/c depends on suggests.  added function locations
+[33mecf69cc[m shorten lines to comply with r cmd check
+[33mfd42216[m updated the barDiag function to scale for continuous variables.
+[33m11a9e8e[m Merge branch 'dev' into muschellij2-master
+[33m8f9cf83[m Merge branch 'master' of git://github.com/muschellij2/ggally into muschellij2-master
+[33me376ad5[m Add experimental spline interpolation support
+[33mf8caad3[m Added ggally_histogramDiag.R
+[33mdcb4f8a[m git merge fix.  namespace now fixed
+[33m65e4e36[m no double import of ggplot2
+[33meaf4e7c[m added backslash to work with new roxygen
+[33m9e90221[m added news about removing ggsurv
+[33m6be2dc6[m removed namespace of plyr::ddply.  already imported in general plyr
+[33m71ed97b[m merged ggsurv -> dev
+[33m4e8f5b7[m v 0.4.6
+[33m1e69cd1[m documented with new roxygen
+[33m8f157cc[m downgraded R version to make more user friendly
+[33m06fc909[m version bump
+[33mfe7b5e2[m updated date. submitting
+[33m85621ce[m version bump
+[33m3b883f8[m documentation
+[33m4a92d2d[m Merge branch 'cor_method' into dev_cor_method
+[33m0cfa36f[m fixed smooth color issue
+[33m5a7b481[m document
+[33m2cb4ec0[m copy rescaler code from reshape due to namespace
+[33mffe5ec6[m more namespace issues
+[33md293ddf[m more data issues from reshape
+[33mf8fc3c2[m added more files
+[33mebb13b4[m document
+[33m2048fcc[m ggplot2 hates life less now in run_examples()
+[33m0a7f767[m more namespace stuff
+[33mf45f479[m document
+[33mb927a2c[m removed collate
+[33med98021[m trying to pass R CMD check
+[33m2003901[m Namespace stuff
+[33mab698b0[m white space
+[33m3a367cf[m added ..Rcheck
+[33mb78ea1b[m make the cordf labels have the correct level order
+[33m0755ca0[m changed the ddply command to not rely on eval within ggally_cor
+[33md3c1834[m fixed corUse being an integer and not a value
+[33mcdd7868[m added parameter matching and more cases for the removing warning
+[33m03420a9[m only remove rows if corUse is 'complete.obs'. Set default corUse to 'complete.obs'
+[33m4d3f21a[m added na.rm to all min/max/range commands
+[33me3f2d2a[m all cor fns are now cor_fn to use same parameters
+[33m131f06b[m added corMethod to ggally_cor
+[33m2c41b3d[m added ..Rcheck to .gitignore
+[33m329b6a5[m bug
+[33m02386ed[m better geo option
+[33md1db63a[m geographic coordinates, custom weights from network attributes
+[33m9c5486f[m support for geographic networks
+[33m55dfc09[m bugfix
+[33me115241[m tiny example improvement
+[33mb18f325[m ggnet: labels at mid-edges
+[33m4c3e085[m ggnet option: support layout.par
+[33mcfff3a5[m ggcorr option: print correlation coefficients
+[33m966954d[m fixed news
+[33ma78e707[m updated news and description
+[33m8556b76[m documented
+[33m9ab0a91[m worked on imports of plyr, ggplot2, and reshape
+[33m8193a91[m shortened ggnet example time
+[33m8927815[m removed "ggplot2::" from functions
+[33mf3382b4[m added id as global var in ggnet
+[33m7057afd[m removed require to ggplot2 as it is 'depend'ed
+[33m3a105eb[m added ..Rcheck to ignore
+[33m22e5dc7[m added ggplot2 import for depends
+[33m7426a8d[m stored the last pl.kid to have the labels attach nicely, like it was originalll
+[33m69821d0[m documented
+[33m224bcf3[m added edwin to the authors
+[33mc57d53a[m passes check() and documents().  changed example to use coord_cartesian and not xlim to preserve exiting lines.
+[33m8d64120[m added small comment for helper functions
+[33m5000388[m style / changed some assignments. removed vector ind from ggsurv_m. changed ITEM == TRUE to identical(ITEM, TRUE) to safe guard against NULL
+[33m471f881[m show full TRUE / FALSE
+[33me373736[m changed ggsurv helper method names
+[33m4bb5acd[m move internal helper functions outside, as they are fully defined already
+[33maa639b4[m change library to require
+[33mea6423a[m ggsurve style at beginning
+[33ma89df75[m ggsurv examples white space / code style
+[33m3694812[m added example roxygen hash tag
+[33m12ef384[m rearranged the roxygen keys
+[33m2e6a1a5[m @param white space
+[33mec8200c[m white space
+[33m54c35ed[m added ggsurv from edwin
+[33m7358f84[m added a .r file to auto document the happy.Rda file
+[33mea87232[m added lazy data in description
+[33m05478c6[m Merge pull request #27 from briatte/master
+[33m6cb24df[m indentation
+[33md649f61[m GSS citation
+[33mb4860e4[m adding the happy example dataset
+[33m11dd44e[m documented
+[33m4a8ffcf[m remove explicit return statement and just have 'p' as last line
+[33m6e58098[m equals to arrows
+[33m9aae81d[m white space
+[33m3a00f9a[m fixed links in description
+[33m9e34182[m changed 'circle' to 'point'
+[33m179bbcf[m documented
+[33mfe5ddd5[m Merge branch 'master' of git://github.com/briatte/ggally into ggcorr_point
+[33m505b483[m removing ggtable from pull
+[33m3eabf2f[m renamed files to make the description accurate.  It did not pick up the case change in the file names originally
+[33m22bff82[m documentation
+[33m68f4d77[m ggtable -- quick bar plots with ggplot2
+[33m8fc9ab7[m support for geom_point as an alternative to geom_tile
+[33m288ab35[m updated file names
+[33m037640c[m removed non ascii letters
+[33mf74cbff[m bump date and try again
+[33mfcc4c9e[m document
+[33mc3fd6ef[m added "require(network) to make example work"
+[33m6b2cee4[m changed urls "\link" to "\url"
+[33mf85b6fe[m added utils::globalVariables to remove NOTE in check()
+[33m92f128a[m white space
+[33m984777e[m Removed double @ in description
+[33m2394679[m Merge branch 'ergm'
+[33me2ae404[m added links to dev urls for ggnet and ggcorr
+[33mb4c051d[m removed ergm suggest and documented
+[33m81887a9[m took ergm code out of the example and only used necessary parts
+[33me9d9801[m document
+[33m600a9db[m do not execute the first example as it takes a while to load... :-(
+[33mf14cc3f[m fixed documentation error, since they were from another package
+[33m19f53c1[m fixed import error
+[33m0672fc2[m bumped version/date, updated authors/description
+[33m64388f3[m updated package suggests, as ggnet is not required to have package function
+[33m99b9422[m updated news
+[33md0a8a57[m documented
+[33mb720a72[m white space / code formatting
+[33m30ca3d8[m only do if ergm is require-able
+[33mbfb2230[m Fixed odd warning in document.
+[33m2b17936[m first pass of document
+[33m75d28ff[m Merge pull request #20 from briatte/master
+[33m1013932[m Merge pull request #21 from briatte/patch-1
+[33md8885c0[m Merge pull request #22 from briatte/patch-2
+[33m45ba121[m tiny fixes
+[33m2bd4562[m support for NA values in node groups
+[33mcd57a2d[m final fixes to documentation
+[33m99344f9[m robust call to sna
+[33m83bc8fa[m little improvements
+[33m3ed7254[m additional functions
+[33mc5e1e74[m example correction
+[33me449cff[m better example code
+[33m3e3dddf[m network package dependency
+[33md0470b3[m robust node.group argument
+[33m8173a24[m additional city-firms example
+[33m15c847b[m gitignore
+[33m423097a[m example correction
+[33md72ed4f[m precision in example
+[33mb2ec181[m typo
+[33m3ac19e5[m typo
+[33m2c79010[m ggnet submission -- a function for making a network plot from an object of class network or igraph, using ggplot2
+[33m274f445[m updated description and released
+[33me5f0c6a[m added ggcorr from Francois Briatte.  Added '...' to feed into geom_text.  (had to remove the default of size = 4)
+[33m7aa7087[m documented
+[33mb7614bc[m removed first plot to speed up testing / pass checks
+[33mb6fde89[m erge branch 'master' of github.com:briatte/ggally into briatte-master
+[33mc92d444[m added comment
+[33m89c3c02[m merged master --> parcoord
+[33m25726b4[m made ggally_cor docs fit
+[33m86fe77a[m Merge branch 'master' into params
+[33m5a1ab9d[m updated the .Rd files and made sure each example was sub 5 secs
+[33m0abe53a[m fixed missing comment
+[33mc154623[m white space
+[33mb1a4495[m fixed docs for ggparcoord
+[33m6d6bbad[m fixed docs for putPlot
+[33m04891df[m fixed docs for ggpairs
+[33m88353a0[m fixed docs for ggally_ratio
+[33m2314484[m fixed docs for ggally_denstrip
+[33mdf981fa[m fixed docs for ggally_facetdensity
+[33md69e358[m fixed docs for ggally_dotAndBox
+[33mc8543ca[m fixed docs for ggally_dot
+[33ma022d3c[m fixed docs for ggally_box
+[33m89dead5[m fixed docs for ggally_density
+[33m19f5000[m fixed docs for ggally_points
+[33m9c83217[m ggcorr -- draw a correlation plot matrix with ggplot2
+[33mad33eaf[m updates to allow for the alpha to be a column name and not a single value
+[33mfcfa867[m version bump.  getting ready to release
+[33mcc7715a[m Merge branch 'master' into params
+[33mfe5dd48[m cor size variable.... again feeding into the horrible var naming problem
+[33m9d58e6b[m Merge pull request #17 from muelleki/master
+[33m91a5808[m fixes #16: title and description are separated by blank comment line in Roxygen comment
+[33m6098d8b[m updates to make it better for the MissingDataGUI
+[33ma0c86f4[m example run time reduction
+[33mc99128e[m version revert
+[33md1f2309[m version bump
+[33m2812eaf[m switch maintainer to Barret
+[33m4aec6da[m white space
+[33m0e77cb8[m fixed issue where not all levels where accounted for in the cor plot
+[33m9f64570[m documentation
+[33me73fee4[m made example much faster and it shows off the aes overwrite much clearer. fixed functino layout
+[33m49489d7[m added overall cor to the cor when split by color
+[33m3debc4e[m code cleanup
+[33me69a79b[m white space
+[33m5a41860[m white space
+[33mcb758b3[m bumped version to 0.4.0
+[33m49fda69[m added depends of gtable
+[33md81f87a[m added a .Rbuildignore of TODO and inst/
+[33m9a53282[m added notes to the TODO
+[33mf9f72f6[m removed extra file
+[33m4b7e701[m passes examples
+[33m4dbf9b9[m updated docs
+[33m911b35c[m fixed ggally_diagAxis to work properly with new ggplot2. yay!
+[33m7172a10[m white space
+[33m4752063[m do not print facet strips unless it is on the outside
+[33m62c21a9[m ggplot2 has improved. removed some hacks
+[33m1c5da42[m reduce title size to 15
+[33m3145b0b[m do not need to add class of ggplot back. let it be what it originally was
+[33mc362836[m better change of x and ylabs
+[33m60134b8[m opts, theme --> theme, element
+[33m57d7b45[m added a todo after talking with winston
+[33m516c056[m upped ggplot2 version
+[33m3ca7101[m removed print statement
+[33m1cdb4b2[m white space
+[33m1dcd468[m white space
+[33m2cc0a39[m updated version of devtools and roxygen2. redocumented
+[33m055adea[m removing unused files
+[33m8c1172d[m removing unused files
+[33m46164b3[m overhauled package, substituted iris data
+[33m1f58d2c[m Fixed major errors with ggplot2 compatibility.
+[33m8b2adaf[m updated docs and passes checks. posted to cran
+[33m3a5e9e8[m made axisLabels use three items: none show internal
+[33m589a973[m removed print statement
+[33m7f997e1[m white space and moved args to the surface
+[33m096d97f[m whitespace
+[33md1478d9[m merge
+[33m95790ac[m updates
+[33m70989d4[m add scagonostics as suggested package in DESCRIPTION
+[33m5e0a2bc[m bug fix in ggally_cor
+[33m5f58d43[m fix ggally_cor to remove rows appropriately
+[33m351c773[m remove 'removeTicks' option; partially fix factor/char bug
+[33mc960375[m change globalminmax scaling in ggparcoord
+[33mbf422ab[m add examples to the man files, and update the Rd files
+[33me56b651[m change default text color in ggally_text to grey50
+[33m0b403bd[m finish ggally_cor alignment fix
+[33mcaeb3a3[m change range of ggally_cor to match rest of plots
+[33mb825445[m fix problem with 10 or more vars in ggpairs
+[33m9f2562b[m change ggparcoord so groupColumn is not required
+[33me5d61ac[m change order arg names in ggparcoord
+[33m10b34d0[m addendum to Eduardo's patch
+[33mc429242[m Merge remote branch 'upstream/master'
+[33m637d7a7[m Added internal axis labeling to ggpairs
+[33m969c17b[m add ggally_diagAxis for internal axis labeling in ggpairs
+[33mf88c355[m Change ggally_text background
+[33md6039d9[m fix margin gap on faceted bar plots in ggpairs
+[33mc4d5750[m add ability to order axes by class separation to ggparcoord
+[33mb180e9c[m add ability to order axes by overall F stat in ggparcoord
+[33m57b3f7d[m add ability to order axes by skewness in ggparcoord
+[33mb7a31e4[m fixed missing plot in ratio plot
+[33m6ba283c[m Corrected x and y that are printed on screen (grid)
+[33mbfb6bf7[m Reset x and y in aes
+[33mcbcdd76[m Using rev as suggested by Hadley
+[33m817115c[m Updated 'grid' so 'all' follows the new variable order
+[33m06e427a[m Update identification of positions in the upper section
+[33m21f8fe8[m Corrected variable order and plot position in plot_types
+[33m4ef504f[m add error checking for args in ggparcoord
+[33m0253522[m updated, roxygenized man files
+[33me13781f[m add axis ordering functionality to ggparcoord
+[33m736ab7d[m fixed gridlines so they line up in ggpairs
+[33m3a80472[m fixed margin gap on combo plots
+[33m5be139d[m Minor fixes to ggpairs
+[33m78823f0[m bug fix to ggpairs combo plots
+[33m5a25958[m Added parallel coordinate plot fn (ggparcoord)
+[33mf46ca6c[m explain testing
+[33m75c865f[m test
+[33m6b5dd9c[m version 2.2.3 with latest updates on splitting the cor
+[33mf8be90d[m fixed barDiag
+[33m895e426[m added stringr as a depend
+[33m34d40c2[m added ggally_facetbar for discrete plots
+[33ma6979ef[m fixed the ggally_data missing error
+[33m73a38d4[m print statements removed and white background added back to the cor plot
+[33m87145d0[m cor works for split data
+[33m90b4fa6[m updates for paper with Jay
+[33m5f70ad0[m eval has been updated.
+[33m21a5252[m evaluating the plot is done in printing now
+[33medeaf27[m fixed cor plot with NA's
+[33m301cdca[m version 0.2.1, submitted before JSM 2010
+[33m0591c30[m major internal changes.  needs to run documentation
+[33me974f42[m Version 0.2 added custom aes and verbose
+[33m4e0bf7c[m needs to be roxygenized and remove the warnings
+[33m1f635ab[m removed files
+[33maa5d7d0[m ggaaly package that was sent to cran
+[33mfec5ff5[m ready to publish, need some answers on authors and writeup
+[33m949f839[m Passed R CMD check and ready to go
+[33m5785f7e[m Latest update with notes.
+[33m2aff560[m Added docs for packaging
+[33mc3ee7a9[m Added docs for packaging
+[33m7ebe4ff[m Testing
+[33mcf4bce6[m HI
+[33m230dca2[m Updates from the meeting
+[33mc93a55e[m Added documentation to the functions, renamed them to be more like each other and well representative.  Needs some more work on doc details.
+[33mc48f05b[m minor changes
+[33me184083[m Latest one, added a getPlot, and ggfluctuation2
+[33m91a262f[m Added "blank" plot and cleaned code.  Added density strips
+[33ma993a7b[m Added "put" command and Text command
+[33madf913e[m Need to remove the label of pos = iden, categorical Need to make text appear on outer viewports
+[33m859825c[m HUGE advancement.  made into matrix and have box plots Putting up a version that has some trouble with labels.
+[33m45eeddf[m Current  set of files.  find-combo.r functions work.  Trouble with scales
+[33m6120ec0[m added a ggpairs folder
