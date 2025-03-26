@@ -791,7 +791,8 @@ ggpairs <- function(
 
   isSharedData <- inherits(data, "SharedData")
 
-  
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
 
   if (
     !missing(mapping) && !is.list(mapping) &&
