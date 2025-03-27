@@ -9,108 +9,52 @@ output: html_document
 library(effects)
 library(ggplot2)
 library(GGally)
-
+library(patchwork)
 ```
 
-## Plot
+## The Plot 
 
 ```{r}
-plot <- ggpairs(Arrests)
-plot
-```
+# Load the data
+data(Arrests)
 
-## Première Proposition Chatgpt
-
-### Select only the 'released' column against all other variables 
-
-```{r}
-plot <- ggpairs(Arrests, columns = c(1, 2:5), mapping = ggplot2::aes(color = released)) + theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
-
-plot
-```
-
-### Select only the 'released' column against all other variables
-
-```{r}
-plot <- ggpairs(Arrests, columns = c(1, 2:5), mapping = ggplot2::aes(color = released)) + theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(), legend.title = ggplot2::element_text(size = 12), legend.text = ggplot2::element_text(size = 10))
-
-plot
-
-```
-
-## Je teste des trucs
-
-### Select only the 'released' column against all other variables
-
-```{r}
-plot <- ggpairs(Arrests, columns = c(1, 2:5),
-                mapping = ggplot2::aes(color = released),
-                upper = list(continuous = wrap("points")),
-                lower = list(continuous = wrap("points"))) +
-  theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-        panel.grid.major = ggplot2::element_blank(),
-        panel.grid.minor = ggplot2::element_blank(),
-        legend.title = ggplot2::element_text(size = 12),
-        legend.text = ggplot2::element_text(size = 10))
-
-```
-
-### Ensure x-axis labels appear on every subplot
-
-```{r}
-plot <- plot + theme(strip.background = ggplot2::element_blank(),
-                     strip.text.x = ggplot2::element_text(size = 10),
-                     axis.text.x = ggplot2::element_text(size = 9))
-
-plot
-
-```
-
-### Function to add x-axis labels and gridlines to each subplot
-
-```{r}
-add_axes_and_grids <- function(plot) {
-  plot + theme(
-    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-    axis.ticks.x = ggplot2::element_line(),
-    panel.grid.major = ggplot2::element_line(color = "grey80"),
-    panel.grid.minor = ggplot2::element_line(color = "grey90"),
-    strip.background = ggplot2::element_blank(),
-    strip.text.x = ggplot2::element_text(size = 10),
-    axis.title.x = ggplot2::element_text(size = 12)
-  )
+# Create individual plots for continuous variables
+plot_continuous <- function(data, x_var) {
+  ggplot(data, aes_string(x = x_var)) +
+    geom_histogram(aes(fill = released), bins = 20, position = "dodge") +
+    labs(title = paste(x_var, "vs Released"),
+         x = x_var,
+         y = "Count") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 }
 
-```
+# Create plots for categorical variables
+plot_categorical <- function(data, x_var) {
+  ggplot(data, aes_string(x = x_var, fill = "released")) +
+    geom_bar(position = "dodge") +
+    labs(title = paste(x_var, "vs Released"),
+         x = x_var,
+         y = "Count") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
 
-### Select only the 'released' column against all other variables
+# Identify continuous and categorical variables
+continuous_vars <- sapply(Arrests, is.numeric)
+categorical_vars <- sapply(Arrests, is.factor)
 
-```{r}
-base_plot <- ggpairs(Arrests, columns = c(1, 2:5),
-                     mapping = ggplot2::aes(color = released),
-                     upper = list(continuous = wrap("points")),
-                     lower = list(continuous = wrap("points")),
-                     diag = list(continuous = wrap("barDiag")))
+# Exclude 'released' from continuous variables
+continuous_vars <- continuous_vars & (names(Arrests) != "released")
 
-```
+# Create plots
+cont_plots <- lapply(names(Arrests)[continuous_vars], function(var) plot_continuous(Arrests, var))
+cat_plots <- lapply(names(Arrests)[categorical_vars], function(var) plot_categorical(Arrests, var))
 
-### Ensure x-axis labels and gridlines are shown on each subplot, even in the same column
+# Combine plots using patchwork
+final_plot <- Reduce(`+`, c(cont_plots, cat_plots)) + 
+  plot_layout(ncol = 3, guides = "collect")
 
-```{r}
-plot <- base_plot +
-  theme(
-    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-    panel.grid.major = ggplot2::element_line(color = "grey80"),
-    panel.grid.minor = ggplot2::element_line(color = "grey90"),
-    strip.background = ggplot2::element_blank(),
-    strip.text.x = ggplot2::element_text(size = 10),
-    axis.title.x = ggplot2::element_text(size = 12),
-    axis.ticks.x = ggplot2::element_line(),
-    axis.text.x.bottom = ggplot2::element_text(size = 10)
-  )
-
-
-plot
-
-
+# Display the plot
+print(final_plot)
 ```
