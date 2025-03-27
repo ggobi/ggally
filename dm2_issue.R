@@ -88,3 +88,54 @@ plot <- base_plot +
 
 plot
 
+
+##encore des tests
+
+library(GGally)
+library(ggplot2)
+library(effects)
+
+data(Arrests)
+
+# Create a pair plot selecting only 'released' against all other variables
+base_plot <- ggpairs(Arrests,
+                     columns = c(1, 2, 3, 4, 5),  # Keep only 'released' vs others
+                     mapping = aes(color = released),
+                     upper = list(continuous = wrap("points")),
+                     lower = list(continuous = wrap("points")),
+                     diag = list(continuous = wrap("barDiag")),
+                     columnLabels = c("Released", "Colour", "Year", "Age", "Sex"))
+
+# Function to add x-axis labels and enforce grid
+fix_x_axis_labels <- function(plot) {
+  for (i in 2:length(plot$plots)) {
+    plot$plots[[i, 1]] <- plot$plots[[i, 1]] +
+      theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 10),
+            axis.title.x = element_text(size = 12))
+  }
+  return(plot)
+}
+
+# Apply the function to enforce x-axis labels on all subplots
+final_plot <- fix_x_axis_labels(base_plot)
+
+print(final_plot)
+
+
+# Create a pair plot selecting only 'released' against all other variables
+base_plot <- ggpairs(Arrests,
+                     columns = c(1, 2, 3, 4, 5),  # Only released vs. others
+                     mapping = aes(color = released),
+                     upper = list(continuous = wrap("points")),
+                     lower = list(continuous = wrap("points")),
+                     diag = list(continuous = wrap("barDiag")))
+
+# Manually enforce x-axis labels on each subplot
+final_plot <- base_plot +
+  theme(
+    strip.text = element_text(size = 10), # Ensure facet labels are visible
+    axis.text.x = element_text(angle = 45, vjust = 1, size = 10),
+    axis.title.x = element_text(size = 12)
+  )
+
+print(final_plot)
