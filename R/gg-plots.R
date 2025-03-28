@@ -254,7 +254,9 @@ ggally_density <- function(data, mapping, ...) {
 #'   \item{\code{""}}{otherwise}
 #' }
 #' @param method \code{method} supplied to cor function
-#' @param use \code{use} supplied to \code{\link[stats]{cor}} function
+#' @details
+#' Missing values are handled internally by `cor.test()` using pairwise complete observations.
+#' The `use` argument is no longer supported.
 #' @param display_grid if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.
 #' @param digits number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.
 #' @param title_args arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}
@@ -300,7 +302,6 @@ ggally_cor <- function(
     ...,
     stars = TRUE,
     method = "pearson",
-    use = "complete.obs",
     display_grid = FALSE,
     digits = 3,
     title_args = list(...),
@@ -319,13 +320,7 @@ ggally_cor <- function(
     display_grid <- displayGrid
   }
 
-  na.rm <-
-    if (missing(use)) {
-      # display warnings
-      NA
-    } else {
-      (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete"))
-    }
+  na.rm <- TRUE
 
   ggally_statistic(
     data = data,
@@ -347,7 +342,7 @@ ggally_cor <- function(
         y <- as.numeric(y)
       }
 
-      corObj <- stats::cor.test(x, y, method = method, use = use)
+      corObj <- stats::cor.test(x, y, method = method)
 
       # make sure all values have X-many decimal places
       cor_est <- as.numeric(corObj$estimate)
