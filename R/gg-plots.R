@@ -300,7 +300,7 @@ ggally_cor <- function(
     ...,
     stars = TRUE,
     method = "pearson",
-    use = "complete.obs",
+    use = "complete.obs",  # Cet argument est maintenant utilisé manuellement
     display_grid = FALSE,
     digits = 3,
     title_args = list(...),
@@ -310,6 +310,7 @@ ggally_cor <- function(
     title = "Corr",
     alignPercent = warning("deprecated. Use `align_percent`"),
     displayGrid = warning("deprecated. Use `display_grid`")) {
+  
   if (!missing(alignPercent)) {
     warning("`alignPercent` is deprecated. Please use `align_percent` if alignment still needs to be adjusted")
     align_percent <- alignPercent
@@ -319,18 +320,27 @@ ggally_cor <- function(
     display_grid <- displayGrid
   }
 
-  na.rm <-
-    if (missing(use)) {
-      # display warnings
-      NA
-    } else {
-      (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete"))
+  # Définition du filtrage des valeurs manquantes
+  filter_na <- function(x, y, use) {
+    if (use == "complete.obs") {
+      complete_cases <- complete.cases(x, y)
+      x <- x[complete_cases]
+      y <- y[complete_cases]
+    } else if (use == "pairwise.complete.obs") {
+      # On ne peut pas traiter cela directement dans cor.test, mais on peut gérer NA en externe
+      na_x <- !is.na(x)
+      na_y <- !is.na(y)
+      valid_cases <- na_x & na_y
+      x <- x[valid_cases]
+      y <- y[valid_cases]
     }
+    return(list(x = x, y = y))
+  }
 
   ggally_statistic(
     data = data,
     mapping = mapping,
-    na.rm = na.rm,
+    na.rm = TRUE,  # On a déjà géré les NA, donc on les supprime directement
     align_percent = align_percent,
     display_grid = display_grid,
     title_args = title_args,
@@ -347,24 +357,35 @@ ggally_cor <- function(
         y <- as.numeric(y)
       }
 
-      corObj <- stats::cor.test(x, y, method = method, use = use)
+      # Appliquer le filtre des valeurs NA
+      filtered_data <- filter_na(x, y, use)
+      x <- filtered_data$x
+      y <- filtered_data$y
 
-      # make sure all values have X-many decimal places
-      cor_est <- as.numeric(corObj$estimate)
-      cor_txt <- formatC(cor_est, digits = digits, format = "f")
+      # Vérifier qu'il y a encore des données après le filtrage
+      if (length(x) > 1 && length(y) > 1) {
+        corObj <- stats::cor.test(x, y, method = method)
 
-      # if stars should be added
-      if (isTRUE(stars)) {
-        cor_txt <- str_c(
-          cor_txt,
-          signif_stars(corObj$p.value)
-        )
+        # Formatage de la valeur de corrélation
+        cor_est <- as.numeric(corObj$estimate)
+        cor_txt <- formatC(cor_est, digits = digits, format = "f")
+
+        # Ajout des étoiles si nécessaire
+        if (isTRUE(stars)) {
+          cor_txt <- str_c(
+            cor_txt,
+            signif_stars(corObj$p.value)
+          )
+        }
+      } else {
+        cor_txt <- "NA"  # Retourne NA si pas assez de données après filtrage
       }
 
       cor_txt
     }
   )
 }
+
 
 
 #' Generalized text display
