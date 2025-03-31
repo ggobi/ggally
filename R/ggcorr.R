@@ -27,6 +27,9 @@ if (getRversion() >= "2.15.1") {
 #' @param cor_matrix the named correlation matrix to use for calculations.
 #' Defaults to the correlation matrix of \code{data} when \code{data} is
 #' supplied.
+#' @param remove_zero_corr a boolean to precise if the user wants the zero
+#' correlation coefficient to be omitted or appear as zero.
+#' Defaults TRUE which means the zero corelation are omitted
 #' @param palette if \code{nbreaks} is used, a ColorBrewer palette to use
 #' instead of the colors specified by \code{low}, \code{mid} and \code{high}.
 #' Defaults to \code{NULL}.
