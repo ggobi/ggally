@@ -153,3 +153,17 @@ final_plot <- base_plot +
 print(final_plot)
 
 
+#test d'une fonction ggpairs_focus
+
+# Load required libraries
+library(ggplot2)
+library(GGally)
+library(gridExtra)
+library(effects)  # Contains the 'Arrests' dataset
+library(cowplot)
+library(effects)  # For 'Arrests' dataset
+data("Arrests")
+
+# Run the function for 'released' column
+ggpairs_focus(Arrests, target_column = "released")
+
