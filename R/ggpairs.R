@@ -893,53 +893,230 @@ ggpairs <- function(
   plotMatrix
 }
 
-                   
+
 # Modified ggpairs function to display only one column against all others
 # with proper x-axis labels
-#' 
+#'
 #' Optimized function to display one target column vs all other variables
-#' 
+#'
 
 
-ggpairs_focus <- function(data, target_column, title = NULL, save_pdf = FALSE, pdf_name = "column_relationships.pdf") {
-  
+ggpairs_focus <- function(data, target_column, title = NULL) {
+
   # Ensure target column exists
   if (!target_column %in% names(data)) {
     stop(paste("Target column '", target_column, "' not found in the data frame"))
   }
-  
+
   # Get all variables except the target column
   other_vars <- setdiff(names(data), target_column)
-  
+
   # Generate full ggpairs plot
   full_plot <- ggpairs(data, columns = c(target_column, other_vars))
-  
+
   # Extract the first column of the pair plot (excluding diagonal)
   num_vars <- length(other_vars)
   extracted_plots <- vector("list", num_vars)
-  
+
   for (i in seq_len(num_vars)) {
     extracted_plots[[i]] <- full_plot[i + 1, 1]  # Select only first column (excluding diagonal)
   }
-  
+
   # Maintain proper ggmatrix spacing
   focused_plot <- ggmatrix(
     extracted_plots,
-    nrow = num_vars, 
+    nrow = num_vars,
     ncol = 1,
-    xAxisLabels = colnames(data[target_column]), 
+    xAxisLabels = colnames(data[target_column]),
     yAxisLabels = colnames(data[other_vars])
   )
-  
-  # Save to PDF if requested
-  if (save_pdf) {
-    ggsave(pdf_name, focused_plot, width = 6, height = 3 * num_vars, limitsize = FALSE)
-    message(paste("Plot saved to", pdf_name))
-  }
-  
+
   return(focused_plot)
 }
 
+ggpairs_focus2 <- function(
+    data,
+    mapping = NULL,
+    columns = 1:ncol(data),
+    target_column = NULL,
+    title = NULL,
+    upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
+    lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
+    diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+    params = deprecated(),
+    ...,
+    xlab = NULL,
+    ylab = NULL,
+    axisLabels = c("show", "internal", "none"),
+    columnLabels = colnames(data[columns]),
+    labeller = "label_value",
+    switch = NULL,
+    showStrips = NULL,
+    legend = NULL,
+    cardinality_threshold = 15,
+    progress = NULL,
+    proportions = NULL,
+    legends = deprecated()) {
+  if (lifecycle::is_present(legends)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(legends)",
+      details = "Ability to put legends in each plot will be dropped in next releases."
+    )
+  }
+  if (!is.null(target_column)) {
+    # Vérifier si la colonne cible existe
+    if (!target_column %in% names(data)) {
+      stop(paste("Target column '", target_column, "' not found in the data frame"))
+    }
+
+    # Sélectionner la colonne cible et les autres colonnes
+    other_vars <- setdiff(names(data), target_column)
+    columns <- c(target_column, other_vars)
+  }
+  if (!is.null(target_column)) {
+    # Extraire uniquement la colonne cible vs autres variables
+    num_vars <- length(other_vars)
+    extracted_plots <- vector("list", num_vars)
+
+    for (i in seq_len(num_vars)) {
+      # Generate full ggpairs plot
+      full_plot <- ggpairs(data, columns = c(target_column, other_vars))
+
+      # Extract the first column of the pair plot (excluding diagonal)
+      num_vars <- length(other_vars)
+      extracted_plots <- vector("list", num_vars)
+      extracted_plots[[i]] <- full_plot[i + 1, 1]  # Sélectionne seulement la première colonne
+    }
+
+    # Construire un ggmatrix focalisé
+    focused_plot <- ggmatrix(
+      extracted_plots,
+      nrow = num_vars,
+      ncol = 1,
+      xAxisLabels = colnames(data[target_column]),
+      yAxisLabels = colnames(data[other_vars])
+    )
+    return(focused_plot)
+  }
+  if (lifecycle::is_present(params)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(params)"
+    )
+  }
+  has_dots <- rlang::check_dots_empty(error = function(cnd) {
+    TRUE
+  })
+  if (isTRUE(has_dots)) {
+    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
+  }
+
+  isSharedData <- inherits(data, "SharedData")
+
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
+
+  if (
+    !missing(mapping) && !is.list(mapping) &&
+    missing(columns)
+  ) {
+    columns <- mapping
+    mapping <- NULL
+  }
+  stop_if_bad_mapping(mapping)
+
+  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
+
+  stop_if_high_cardinality(data, columns, cardinality_threshold)
+
+  upper <- check_and_set_ggpairs_defaults(
+    "upper", upper,
+    continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"
+  )
+  lower <- check_and_set_ggpairs_defaults(
+    "lower", lower,
+    continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"
+  )
+  diag <- check_and_set_ggpairs_defaults(
+    "diag", diag,
+    continuous = "densityDiag", discrete = "barDiag", na = "naDiag",
+    isDiag = TRUE
+  )
+
+  axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
+
+  proportions <- ggmatrix_proportions(proportions, data, columns)
+
+  # get plot type information
+  dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
+
+  # make internal labels on the diag axis
+  if (identical(axisLabels, "internal")) {
+    dataTypes$plotType[dataTypes$posX == dataTypes$posY] <- "label"
+  }
+
+  ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
+    plotType <- dataTypes[i, "plotType"]
+
+    posX <- dataTypes[i, "posX"]
+    posY <- dataTypes[i, "posY"]
+    xColName <- dataTypes[i, "xVar"]
+    yColName <- dataTypes[i, "yVar"]
+
+    if (posX > posY) {
+      types <- upper
+    } else if (posX < posY) {
+      types <- lower
+    } else {
+      types <- diag
+    }
+
+    sectionAes <- add_and_overwrite_aes(
+      add_and_overwrite_aes(
+        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
+        mapping
+      ),
+      types$mapping
+    )
+
+    args <- list(types = types, sectionAes = sectionAes)
+    if (plotType == "label") {
+      args$label <- columnLabels[posX]
+    }
+
+    plot_fn <- ggmatrix_plot_list(plotType)
+
+    p <- do.call(plot_fn, args)
+
+    return(p)
+  })
+
+  plotMatrix <- ggmatrix(
+    plots = ggpairsPlots,
+    byrow = TRUE,
+    nrow = length(columns),
+    ncol = length(columns),
+    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    labeller = labeller,
+    switch = switch,
+    showStrips = showStrips,
+    showXAxisPlotLabels = identical(axisLabels, "show"),
+    showYAxisPlotLabels = identical(axisLabels, "show"),
+    title = title,
+    xlab = xlab,
+    ylab = ylab,
+    data = data_,
+    gg = NULL,
+    progress = progress,
+    legend = legend,
+    xProportions = proportions,
+    yProportions = proportions
+  )
+
+  plotMatrix
+}
 
 #' Add new aes
 #'
