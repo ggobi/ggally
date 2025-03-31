@@ -141,7 +141,7 @@ ggcorr <- function(
     data,
     method = c("pairwise", "pearson"),
     cor_matrix = NULL,
-    remove_zero_corr = TRUE, # par defaut les correlation = 0 sont remplacé par des NA
+    remove_zero_corr = TRUE, # by default correlation = 0 are replaced by NA
     nbreaks = NULL,
     digits = 2,
     name = "",
@@ -219,8 +219,8 @@ ggcorr <- function(
   colnames(m) <- rownames(m) <- gsub(" ", "_", colnames(m)) # protect spaces
 
   # -- correlation data.frame --------------------------------------------------
-  # indentifier les coefficients nulls et les remplacer par 5
-  # afin de les retrouver après pour les gérer
+  # identify null coefficients and replace them with 5 so that you can find
+  # them later to manage them
 
   zero_coef = which(m==0)
   m[zero_coef] = 5
@@ -239,17 +239,19 @@ ggcorr <- function(
     dplyr::rename(x = .ggally_ggcorr_row_names) %>%
     dplyr::mutate(y = factor(y, levels = rownames(m)))
 
-  # remplacer d'abord les zero créer par les maniplulations en NA
-  # pour une bonne visualisation
+  # first replace the zeros created by maniplulations in NA
+  # for better visualization
   m_long$coefficient[which(m_long$coefficient==0)] <- NA
 
-  # remplacer les corrélation nulle (précédement remplacées par 5) en NA si remove_zero_corr==TRUE
+  # replace null correlations (previously replaced by 5) with NA
+  # if remove_zero_corr==TRUE
   if(remove_zero_corr){
     zero_coef_5 <- which(m_long$coefficient==5)
     m_long$coefficient[zero_coef_5] <- NA
   }
 
-  # remplacer les corrélation nulle (précédement remplacées par 5) en 0 si remove_zero_corr==FALSE
+  # replace null correlations (previously replaced by 5) with 0
+  # if remove_zero_corr==FALSE
   zero_coef_5 <- which(m_long$coefficient==5)
   m_long$coefficient[zero_coef_5] <- 0
 
