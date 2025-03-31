@@ -80,22 +80,179 @@ print(final_plot)
 ```{r}
 library(GGally)
 library(ggplot2)
+library(effects)
+library(lifecycle)
+library(stringr)
+ggpairs_focus <- function(
+    data,
+    mapping = NULL,
+    columns = 1:ncol(data),
+    title = NULL,
+    upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
+    lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
+    diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+    params = deprecated(),
+    focus_mode = FALSE,  # Nouveau paramètre
+    focus_column = NULL,  # Colonne à focaliser en mode 'focus_mode'
+    ...,
+    xlab = NULL,
+    ylab = NULL,
+    axisLabels = c("show", "internal", "none"),
+    columnLabels = colnames(data[columns]),
+    labeller = "label_value",
+    switch = NULL,
+    showStrips = NULL,
+    legend = NULL,
+    cardinality_threshold = 15,
+    progress = NULL,
+    proportions = NULL,
+    legends = deprecated()) {
+  if (lifecycle::is_present(legends)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(legends)",
+      details = "Ability to put legends in each plot will be dropped in next releases."
+    )
+  }
+    if (focus_mode && !is.null(focus_column)) {
+      other_vars <- setdiff(names(data), focus_column)
+      columns <- c(focus_column, other_vars)
 
+      # Modifier les parties du graphique quand on est en mode 'focus_column'
+      upper <- list(continuous = "blank", combo = "blank", discrete = "blank")
+      lower <- list(continuous = "blank", combo = "blank", discrete = "blank")
+      diag <- list(continuous = "blank", discrete = "blank")
+    }
+  if (lifecycle::is_present(params)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(params)"
+    )
+  }
+  has_dots <- rlang::check_dots_empty(error = function(cnd) {
+    TRUE
+  })
+  if (isTRUE(has_dots)) {
+    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
+  }
+
+  isSharedData <- inherits(data, "SharedData")
+
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
+
+  if (
+    !missing(mapping) && !is.list(mapping) &&
+      missing(columns)
+  ) {
+    columns <- mapping
+    mapping <- NULL
+  }
+  stop_if_bad_mapping(mapping)
+
+  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
+
+  stop_if_high_cardinality(data, columns, cardinality_threshold)
+
+  upper <- check_and_set_ggpairs_defaults(
+    "upper", upper,
+    continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"
+  )
+  lower <- check_and_set_ggpairs_defaults(
+    "lower", lower,
+    continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"
+  )
+  diag <- check_and_set_ggpairs_defaults(
+    "diag", diag,
+    continuous = "densityDiag", discrete = "barDiag", na = "naDiag",
+    isDiag = TRUE
+  )
+
+  axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
+
+  proportions <- ggmatrix_proportions(proportions, data, columns)
+
+  # get plot type information
+  dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
+
+  # make internal labels on the diag axis
+  if (identical(axisLabels, "internal")) {
+    dataTypes$plotType[dataTypes$posX == dataTypes$posY] <- "label"
+  }
+
+  ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
+    plotType <- dataTypes[i, "plotType"]
+
+    posX <- dataTypes[i, "posX"]
+    posY <- dataTypes[i, "posY"]
+    xColName <- dataTypes[i, "xVar"]
+    yColName <- dataTypes[i, "yVar"]
+
+    if (posX > posY) {
+      types <- upper
+    } else if (posX < posY) {
+      types <- lower
+    } else {
+      types <- diag
+    }
+
+    sectionAes <- add_and_overwrite_aes(
+      add_and_overwrite_aes(
+        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
+        mapping
+      ),
+      types$mapping
+    )
+
+    args <- list(types = types, sectionAes = sectionAes)
+    if (plotType == "label") {
+      args$label <- columnLabels[posX]
+    }
+
+    plot_fn <- ggmatrix_plot_list(plotType)
+
+    p <- do.call(plot_fn, args)
+
+    return(p)
+  })
+
+  plotMatrix <- ggmatrix(
+    plots = ggpairsPlots,
+    byrow = TRUE,
+    nrow = length(columns),
+    ncol = length(columns),
+    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    labeller = labeller,
+    switch = switch,
+    showStrips = showStrips,
+    showXAxisPlotLabels = identical(axisLabels, "show"),
+    showYAxisPlotLabels = identical(axisLabels, "show"),
+    title = title,
+    xlab = xlab,
+    ylab = ylab,
+    data = data_,
+    gg = NULL,
+    progress = progress,
+    legend = legend,
+    xProportions = proportions,
+    yProportions = proportions
+  )
+
+  plotMatrix
+}
+```
+
+```{r}
 # Charger les données
 data(Arrests)
 
-# Sélectionner uniquement 'released' et les autres variables
-selected_vars <- c("released", setdiff(names(Arrests), "released"))
-
 # Créer un ggpairs avec une seule colonne (1, N)
-custom_plot <- ggpairs(Arrests,
+custom_plot <- ggpairs_focus(Arrests,
                        columns = 1:length(selected_vars),  # Exclure 'released' des X
                        mapping = aes(color = released),  # Coloration par released
-                       lower = list(continuous = wrap("points", alpha = 0.6), 
-                                    combo = wrap("box_no_facet"),
-                                    discrete = wrap("facetbar")),
-                       diag = list(continuous = wrap("densityDiag")),  # Histogrammes en diag
-                       upper = list(continuous = "blank", combo = "blank", discrete = "blank")  # Supprimer la partie supérieure
+                       focus_mode = TRUE,
+                       focus_column = "released"
 )
 
 # Afficher le plot
