@@ -1,26 +1,29 @@
 ###Original text for the issue ####
 
-####Load packages####
+# Chargement des bibliothèques nécessaires
 library(effects)
 library(ggplot2)
 library(GGally)
-####Load data ####
+# Chargement des données d'arrestations
 data(Arrests)
 ####Plot####
 plot <- ggpairs(Arrests)
 plot
 
-####Première propal ChatGPT####
+####Première proposition de chatGPT####
 
-# Select only the 'released' column against all other variables
+# Création d'un graphique de paires en sélectionnant uniquement la colonne 'released' contre toutes les autres variables
 plot <- ggpairs(Arrests, columns = c(1, 2:5),
                 mapping = ggplot2::aes(color = released)) +
   theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+# Affichage du graphique
 
 plot
 
+#Ce code a enlevé les colonnes checks et citizen alors que cela n'était pas demandé, et n'a pas fait ce qui était attendu mais à rajouté le canal, couleurs qui aident à la compréhension globale des graphiques
+#J'ai donc redemandé à ChatGPT, voici la deuxième proposition : 
 
-# Select only the 'released' column against all other variables
+# Création d'un graphique de paires en sélectionnant uniquement la colonne 'released' contre toutes les autres variables
 plot <- ggpairs(Arrests, columns = c(1, 2:5),
                 mapping = ggplot2::aes(color = released)) +
   theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
@@ -31,9 +34,13 @@ plot <- ggpairs(Arrests, columns = c(1, 2:5),
 
 plot
 
-#JE teste des trucs
+#On rencontre toujours le même problème
 
-# Select only the 'released' column against all other variables
+#Je teste du code à l'aide de forums et de recherches 
+
+# Test de différentes configurations :
+
+# Création d'un graphique de paires en sélectionnant uniquement la colonne 'released' contre toutes les autres variables
 plot <- ggpairs(Arrests, columns = c(1, 2:5),
                 mapping = ggplot2::aes(color = released),
                 upper = list(continuous = wrap("points")),
@@ -44,15 +51,16 @@ plot <- ggpairs(Arrests, columns = c(1, 2:5),
         legend.title = ggplot2::element_text(size = 12),
         legend.text = ggplot2::element_text(size = 10))
 
-# Ensure x-axis labels appear on every subplot
+# Ajout de thèmes pour s'assurer que les étiquettes de l'axe x apparaissent sur chaque sous-graphique
 plot <- plot + theme(strip.background = ggplot2::element_blank(),
                      strip.text.x = ggplot2::element_text(size = 10),
                      axis.text.x = ggplot2::element_text(size = 9))
+# Affichage du graphique
 
 plot
 
-
-# Function to add x-axis labels and gridlines to each subplot
+#Je rencontre toujours le même problème avec les axes 
+# Fonction pour ajouter des étiquettes d'axe x et des lignes de grille à chaque sous-graphique
 add_axes_and_grids <- function(plot) {
   plot + theme(
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
@@ -65,14 +73,14 @@ add_axes_and_grids <- function(plot) {
   )
 }
 
-# Select only the 'released' column against all other variables
+# Création d'un graphique de paires en sélectionnant uniquement la colonne 'released' contre toutes les autres variables
 base_plot <- ggpairs(Arrests, columns = c(1, 2:5),
                      mapping = ggplot2::aes(color = released),
                      upper = list(continuous = wrap("points")),
                      lower = list(continuous = wrap("points")),
                      diag = list(continuous = wrap("barDiag")))
 
-# Ensure x-axis labels and gridlines are shown on each subplot, even in the same column
+# Ajout de thèmes pour s'assurer que les étiquettes de l'axe x et les lignes de grille sont visibles sur chaque sous-graphique
 plot <- base_plot +
   theme(
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
@@ -85,11 +93,12 @@ plot <- base_plot +
     axis.text.x.bottom = ggplot2::element_text(size = 10)
   )
 
+# Affichage du graphique
 
 plot
 
 
-##encore des tests
+# Encore des tests
 
 library(GGally)
 library(ggplot2)
@@ -97,16 +106,16 @@ library(effects)
 
 data(Arrests)
 
-# Create a pair plot selecting only 'released' against all other variables
+# Création d'un graphique de paires en sélectionnant uniquement la colonne 'released' contre toutes les autres variables
 base_plot <- ggpairs(Arrests,
-                     columns = c(1, 2, 3, 4, 5),  # Keep only 'released' vs others
+                     columns = c(1, 2, 3, 4, 5),  # Garder uniquement 'released' vs autres
                      mapping = aes(color = released),
                      upper = list(continuous = wrap("points")),
                      lower = list(continuous = wrap("points")),
                      diag = list(continuous = wrap("barDiag")),
                      columnLabels = c("Released", "Colour", "Year", "Age", "Sex"))
 
-# Function to add x-axis labels and enforce grid
+# Fonction pour ajouter des étiquettes d'axe x et appliquer une grille
 fix_x_axis_labels <- function(plot) {
   for (i in 2:length(plot$plots)) {
     plot$plots[[i, 1]] <- plot$plots[[i, 1]] +
@@ -116,26 +125,31 @@ fix_x_axis_labels <- function(plot) {
   return(plot)
 }
 
-# Apply the function to enforce x-axis labels on all subplots
+# Application de la fonction pour appliquer les étiquettes d'axe x sur tous les sous-graphiques
 final_plot <- fix_x_axis_labels(base_plot)
+
+# Affichage du graphique final
 
 print(final_plot)
 
 
 # Create a pair plot selecting only 'released' against all other variables
 base_plot <- ggpairs(Arrests,
-                     columns = c(1, 2, 3, 4, 5),  # Only released vs. others
+                     columns = c(1, 2, 3, 4, 5),  # Garder uniquement 'released' vs autres
                      mapping = aes(color = released),
                      upper = list(continuous = wrap("points")),
                      lower = list(continuous = wrap("points")),
                      diag = list(continuous = wrap("barDiag")))
 
-# Manually enforce x-axis labels on each subplot
+# Application manuelle des étiquettes d'axe x sur chaque sous-graphique
 final_plot <- base_plot +
   theme(
-    strip.text = element_text(size = 10), # Ensure facet labels are visible
+    strip.text = element_text(size = 10), # Assurer la visibilité des étiquettes de facettes
     axis.text.x = element_text(angle = 45, vjust = 1, size = 10),
     axis.title.x = element_text(size = 12)
   )
+# Affichage du graphique final
 
 print(final_plot)
+
+
