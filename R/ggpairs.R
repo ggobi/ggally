@@ -745,30 +745,39 @@ ggduo <- function(
 #' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
 #' p_(pm)
 #'
-library(ggplot2)
 library(GGally)
+library(ggplot2)
 library(ggridges)
+library(dplyr)
+library(scales)
 
-# Custom function to dynamically adjust binning for density ridges
+# Function to dynamically create bins for ridgelines
 dynamic_cut_number <- function(x, bins = 3) {
-  # Get the number of unique values
   unique_vals <- unique(x)
-
-  # If fewer unique values than bins, use the number of unique values
   num_bins <- min(length(unique_vals), bins)
-
-  # Cut the data into bins
   return(cut_number(x, num_bins))
 }
 
-# Custom ggpairs function for iris dataset with dynamic adjustments
-ggpairs_with_ridges_iris <- function(
+# Custom function for diagonal ridge plots
+ggally_ridgeDiag <- function(data, mapping, ...) {
+  var_name <- rlang::as_label(mapping$x)  # Extract variable name
+  data <- data %>% mutate(bin = dynamic_cut_number(.data[[var_name]], bins = 3))  # Create bins
+
+  ggplot(data, aes(x = .data[[var_name]], y = bin)) +
+    geom_density_ridges() +
+    scale_x_continuous(labels = label_number()) +
+    theme_minimal() +
+    ggtitle(paste("Ridge Plot of", var_name))
+}
+
+# Custom ggpairs function with ridge plot support
+ggpairs_custom <- function(
     data,
     mapping = NULL,
     columns = 1:ncol(data),
     title = NULL,
-    upper = list(continuous = "smooth", combo = "dot_no_facet"),
-    lower = list(continuous = "points", combo = "facetdensity"),
+    upper = list(continuous = "points", combo = "dot_no_facet"),
+    lower = list(continuous = "smooth", combo = "facetdensity"),
     diag = list(continuous = "densityDiag", discrete = "barDiag"),
     ...,
     xlab = NULL,
@@ -783,80 +792,33 @@ ggpairs_with_ridges_iris <- function(
     progress = NULL,
     proportions = NULL
 ) {
-  # Check if columns are numeric for diagonal
-  is_numeric_diag <- sapply(data[columns], is.numeric)
+  # Check if user requested ridge plots in diagonal
+  if (!is.null(diag$continuous) && diag$continuous == "ridgeDiag") {
+    diag$continuous <- ggally_ridgeDiag  # Replace with function
+  }
 
-  # Modify the diagonal plots
-  diag_plots <- lapply(1:length(columns), function(i) {
-    if (is_numeric_diag[i]) {
-      ggplot(data, aes(x = .data[[columns[i]]], y = dynamic_cut_number(.data[[columns[i]]], bins = 3))) +
-        scale_x_continuous(labels = scales::label_number()) +
-        geom_density_ridges() +
-        theme_minimal() +
-        ggtitle(paste("Conditional Distribution of", colnames(data)[columns[i]]))
-    } else {
-      ggally_densityDiag(data, mapping = mapping, ...)
-    }
-  })
-
-  # Modify the lower triangle (scatter plots)
-  lower_plots <- lapply(1:length(columns), function(i) {
-    for (j in i:length(columns)) {
-      if (i != j) {
-        ggplot(data, aes_string(x = names(data)[columns[i]], y = names(data)[columns[j]])) +
-          geom_point(aes(color = ..density..), size = 2) +
-          scale_color_viridis_c() +  # Adding gradient color for scatter plot
-          theme_minimal() +
-          ggtitle(paste(names(data)[columns[i]], "vs", names(data)[columns[j]]))
-      }
-    }
-  })
-
-  # Modify the upper triangle (mirrored scatter plots)
-  upper_plots <- lapply(1:length(columns), function(i) {
-    for (j in i:length(columns)) {
-      if (i != j) {
-        ggplot(data, aes_string(x = names(data)[columns[j]], y = names(data)[columns[i]])) +
-          geom_point(aes(color = ..density..), size = 2) +
-          scale_color_viridis_c() +  # Gradient coloring for scatter plot
-          theme_minimal() +
-          ggtitle(paste(names(data)[columns[j]], "vs", names(data)[columns[i]]))
-      }
-    }
-  })
-
-  # Combine all plots into the final matrix
-  plotMatrix <- ggmatrix(
-    plots = c(diagonal = diag_plots, lower = lower_plots, upper = upper_plots),
-    byrow = TRUE,
-    nrow = length(columns),
-    ncol = length(columns),
-    xAxisLabels = columnLabels,
-    yAxisLabels = columnLabels,
-    labeller = labeller,
+  # Generate ggpairs plot
+  ggpairs(
+    data,
+    mapping = mapping,
+    columns = columns,
     title = title,
+    upper = upper,
+    lower = lower,
+    diag = diag,
     xlab = xlab,
     ylab = ylab,
-    data = data,
-    progress = progress,
+    axisLabels = axisLabels,
+    columnLabels = columnLabels,
+    labeller = labeller,
+    switch = switch,
+    showStrips = showStrips,
     legend = legend,
-    xProportions = proportions,
-    yProportions = proportions
+    cardinality_threshold = cardinality_threshold,
+    progress = progress,
+    proportions = proportions
   )
-
-  plotMatrix
 }
-
-# Example usage with iris dataset
-ggpairs_with_ridges_iris(
-  iris,
-  columns = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"),
-  mapping = aes(colour = Species),
-  title = "Pairwise Plots for Iris",
-  upper = list(continuous = "smooth", combo = "dot_no_facet"),
-  lower = list(continuous = "points", combo = "facetdensity"),
-  diag = list(continuous = "densityDiag")
-)
 
 
 #' Add new aes
