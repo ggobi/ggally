@@ -6,256 +6,60 @@ output: html_document
 ## Load packages
 
 ```{r}
-# Load required libraries
-library(effects)    # For the Arrests dataset
-library(ggplot2)    # For creating graphics
-library(GGally)     # For advanced data visualization
-library(patchwork)  # For combining multiple ggplot2 plots
+library(ggplot2)
+library(GGally)
+library(gridExtra)
+library(effects)  # Contains the 'Arrests' dataset
+library(cowplot)
+library(effects)  # For 'Arrests' dataset
+data("Arrests")
+```
+
+## The fonction we modified in ggpairs.R
+
+```{r}
+ggpairs_focus <- function(data, target_column, title = NULL, save_pdf = FALSE, pdf_name = "column_relationships.pdf") {
+  
+  # Ensure target column exists
+  if (!target_column %in% names(data)) {
+    stop(paste("Target column '", target_column, "' not found in the data frame"))
+  }
+  
+  # Get all variables except the target column
+  other_vars <- setdiff(names(data), target_column)
+  
+  # Generate full ggpairs plot
+  full_plot <- ggpairs(data, columns = c(target_column, other_vars))
+  
+  # Extract the first column of the pair plot (excluding diagonal)
+  num_vars <- length(other_vars)
+  extracted_plots <- vector("list", num_vars)
+  
+  for (i in seq_len(num_vars)) {
+    extracted_plots[[i]] <- full_plot[i + 1, 1]  # Select only first column (excluding diagonal)
+  }
+  
+  # Maintain proper ggmatrix spacing
+  focused_plot <- ggmatrix(
+    extracted_plots,
+    nrow = num_vars, 
+    ncol = 1,
+    xAxisLabels = colnames(data[target_column]), 
+    yAxisLabels = colnames(data[other_vars])
+  )
+  
+  # Save to PDF if requested
+  if (save_pdf) {
+    ggsave(pdf_name, focused_plot, width = 6, height = 3 * num_vars, limitsize = FALSE)
+    message(paste("Plot saved to", pdf_name))
+  }
+  
+  return(focused_plot)
+}
 ```
 
 ## The Plot
 
 ```{r}
-# Load the Arrests dataset
-data(Arrests)
-
-# Function to create histograms for continuous variables
-# This function takes the dataset and a variable name as input
-plot_continuous <- function(data, x_var) {
-  # Create a histogram showing distribution of a continuous variable
-  # Colored by 'released' status to show relationship
-  ggplot(data, aes_string(x = x_var)) +
-    # Create histogram with 20 bins, separated by 'released' status
-    geom_histogram(aes(fill = released), bins = 20, position = "dodge") +
-    # Add informative labels
-    labs(title = paste(x_var, "vs Released"),
-         x = x_var,
-         y = "Count") +
-    # Use a clean, minimal theme
-    theme_minimal() +
-    # Rotate x-axis labels for better readability
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-# Function to create bar plots for categorical variables
-plot_categorical <- function(data, x_var) {
-  # Create a bar plot showing distribution of a categorical variable
-  # Colored by 'released' status to show relationship
-  ggplot(data, aes_string(x = x_var, fill = "released")) +
-    # Create bar plot with bars side by side
-    geom_bar(position = "dodge") +
-    # Add informative labels
-    labs(title = paste(x_var, "vs released"),
-         x = x_var,
-         y = "Count") +
-    # Use a clean, minimal theme
-    theme_minimal() +
-    # Rotate x-axis labels for better readability
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-# Continuous variables are numeric
-continuous_vars <- sapply(Arrests, is.numeric)
-# Categorical variables are factors
-categorical_vars <- sapply(Arrests, is.factor)
-
-# Create plots for continuous variables
-# Use lapply to apply the plotting function to each continuous variable
-cont_plots <- lapply(names(Arrests)[continuous_vars], function(var) plot_continuous(Arrests, var))
-
-# Create plots for categorical variables
-# Use lapply to apply the plotting function to each categorical variable
-cat_plots <- lapply(names(Arrests)[categorical_vars], function(var) plot_categorical(Arrests, var))
-
-# Combine all plots using patchwork
-# Reduce function helps to add multiple plots together
-final_plot <- Reduce(`+`, c(cont_plots, cat_plots)) +
-  # Arrange plots in 3 columns and collect legends
-  plot_layout(ncol = 3, guides = "collect")
-
-# Display the final combined plot
-print(final_plot)
-```
-
-```{r}
-library(GGally)
-library(ggplot2)
-library(effects)
-library(lifecycle)
-library(stringr)
-ggpairs_focus <- function(
-    data,
-    mapping = NULL,
-    columns = 1:ncol(data),
-    title = NULL,
-    upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
-    lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
-    diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
-    params = deprecated(),
-    focus_mode = FALSE,  # Nouveau paramètre
-    focus_column = NULL,  # Colonne à focaliser en mode 'focus_mode'
-    ...,
-    xlab = NULL,
-    ylab = NULL,
-    axisLabels = c("show", "internal", "none"),
-    columnLabels = colnames(data[columns]),
-    labeller = "label_value",
-    switch = NULL,
-    showStrips = NULL,
-    legend = NULL,
-    cardinality_threshold = 15,
-    progress = NULL,
-    proportions = NULL,
-    legends = deprecated()) {
-  if (lifecycle::is_present(legends)) {
-    lifecycle::deprecate_warn(
-      when = "2.2.2",
-      what = "ggpairs(legends)",
-      details = "Ability to put legends in each plot will be dropped in next releases."
-    )
-  }
-    if (focus_mode && !is.null(focus_column)) {
-      other_vars <- setdiff(names(data), focus_column)
-      columns <- c(focus_column, other_vars)
-
-      # Modifier les parties du graphique quand on est en mode 'focus_column'
-      upper <- list(continuous = "blank", combo = "blank", discrete = "blank")
-      lower <- list(continuous = "blank", combo = "blank", discrete = "blank")
-      diag <- list(continuous = "blank", discrete = "blank")
-    }
-  if (lifecycle::is_present(params)) {
-    lifecycle::deprecate_warn(
-      when = "2.2.2",
-      what = "ggpairs(params)"
-    )
-  }
-  has_dots <- rlang::check_dots_empty(error = function(cnd) {
-    TRUE
-  })
-  if (isTRUE(has_dots)) {
-    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
-  }
-
-  isSharedData <- inherits(data, "SharedData")
-
-  data_ <- fix_data(data)
-  data <- fix_data_slim(data_, isSharedData)
-
-  if (
-    !missing(mapping) && !is.list(mapping) &&
-      missing(columns)
-  ) {
-    columns <- mapping
-    mapping <- NULL
-  }
-  stop_if_bad_mapping(mapping)
-
-  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
-
-  stop_if_high_cardinality(data, columns, cardinality_threshold)
-
-  upper <- check_and_set_ggpairs_defaults(
-    "upper", upper,
-    continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"
-  )
-  lower <- check_and_set_ggpairs_defaults(
-    "lower", lower,
-    continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"
-  )
-  diag <- check_and_set_ggpairs_defaults(
-    "diag", diag,
-    continuous = "densityDiag", discrete = "barDiag", na = "naDiag",
-    isDiag = TRUE
-  )
-
-  axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
-
-  proportions <- ggmatrix_proportions(proportions, data, columns)
-
-  # get plot type information
-  dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
-
-  # make internal labels on the diag axis
-  if (identical(axisLabels, "internal")) {
-    dataTypes$plotType[dataTypes$posX == dataTypes$posY] <- "label"
-  }
-
-  ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
-    plotType <- dataTypes[i, "plotType"]
-
-    posX <- dataTypes[i, "posX"]
-    posY <- dataTypes[i, "posY"]
-    xColName <- dataTypes[i, "xVar"]
-    yColName <- dataTypes[i, "yVar"]
-
-    if (posX > posY) {
-      types <- upper
-    } else if (posX < posY) {
-      types <- lower
-    } else {
-      types <- diag
-    }
-
-    sectionAes <- add_and_overwrite_aes(
-      add_and_overwrite_aes(
-        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
-        mapping
-      ),
-      types$mapping
-    )
-
-    args <- list(types = types, sectionAes = sectionAes)
-    if (plotType == "label") {
-      args$label <- columnLabels[posX]
-    }
-
-    plot_fn <- ggmatrix_plot_list(plotType)
-
-    p <- do.call(plot_fn, args)
-
-    return(p)
-  })
-
-  plotMatrix <- ggmatrix(
-    plots = ggpairsPlots,
-    byrow = TRUE,
-    nrow = length(columns),
-    ncol = length(columns),
-    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
-    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
-    labeller = labeller,
-    switch = switch,
-    showStrips = showStrips,
-    showXAxisPlotLabels = identical(axisLabels, "show"),
-    showYAxisPlotLabels = identical(axisLabels, "show"),
-    title = title,
-    xlab = xlab,
-    ylab = ylab,
-    data = data_,
-    gg = NULL,
-    progress = progress,
-    legend = legend,
-    xProportions = proportions,
-    yProportions = proportions
-  )
-
-  plotMatrix
-}
-```
-
-```{r}
-# Charger les données
-data(Arrests)
-
-# Créer un ggpairs avec une seule colonne (1, N)
-custom_plot <- ggpairs_focus(Arrests,
-                       columns = 1:length(selected_vars),  # Exclure 'released' des X
-                       mapping = aes(color = released),  # Coloration par released
-                       focus_mode = TRUE,
-                       focus_column = "released"
-)
-
-# Afficher le plot
-print(custom_plot)
-
+ggpairs_focus(Arrests, target_column = "released")
 ```
