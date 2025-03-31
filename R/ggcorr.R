@@ -138,6 +138,7 @@ ggcorr <- function(
     data,
     method = c("pairwise", "pearson"),
     cor_matrix = NULL,
+    remove_zero_corr = TRUE, # par defaut les correlation = 0 sont remplacé par des NA
     nbreaks = NULL,
     digits = 2,
     name = "",
@@ -215,6 +216,11 @@ ggcorr <- function(
   colnames(m) <- rownames(m) <- gsub(" ", "_", colnames(m)) # protect spaces
 
   # -- correlation data.frame --------------------------------------------------
+  # indentifier les coefficients nulls et les remplacer par 5
+  # afin de les retrouver après pour les gérer
+
+  zero_coef = which(m==0)
+  m[zero_coef] = 5
 
   m <- data.frame(m * lower.tri(m))
   rownames(m) <- names(m)
@@ -229,7 +235,22 @@ ggcorr <- function(
     ) %>%
     dplyr::rename(x = .ggally_ggcorr_row_names) %>%
     dplyr::mutate(y = factor(y, levels = rownames(m)))
-  m_long$coefficient[m_long$coefficient == 0] <- NA
+
+  # remplacer d'abord les zero créer par les maniplulations en NA
+  # pour une bonne visualisation
+  m_long$coefficient[which(m_long$coefficient==0)] <- NA
+
+  # remplacer les corrélation nulle (précédement remplacées par 5) en NA si remove_zero_corr==TRUE
+  if(remove_zero_corr){
+    zero_coef_5 <- which(m_long$coefficient==5)
+    m_long$coefficient[zero_coef_5] <- NA
+  }
+
+  # remplacer les corrélation nulle (précédement remplacées par 5) en 0 si remove_zero_corr==FALSE
+  zero_coef_5 <- which(m_long$coefficient==5)
+  m_long$coefficient[zero_coef_5] <- 0
+
+
 
   # -- correlation quantiles ---------------------------------------------------
 
