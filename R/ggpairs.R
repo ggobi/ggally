@@ -451,7 +451,7 @@ ggduo <- function(
   # fix args
   if (
     !missing(mapping) && !is.list(mapping) &&
-      !missing(columnsX) && missing(columnsY)
+    !missing(columnsX) && missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -745,40 +745,37 @@ ggduo <- function(
 #' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
 #' p_(pm)
 #'
-library(GGally)
-library(ggplot2)
-library(ggridges)
-library(dplyr)
-library(scales)
 
-# Function to dynamically create bins for ridgelines
+
+# Custom binning logic
 dynamic_cut_number <- function(x, bins = 3) {
   unique_vals <- unique(x)
   num_bins <- min(length(unique_vals), bins)
-  return(cut_number(x, num_bins))
+  cut_number(x, num_bins)
 }
 
-# Custom function for diagonal ridge plots
+# Custom ridge plot for diagonals
 ggally_ridgeDiag <- function(data, mapping, ...) {
-  var_name <- rlang::as_label(mapping$x)  # Extract variable name
-  data <- data %>% mutate(bin = dynamic_cut_number(.data[[var_name]], bins = 3))  # Create bins
+  var_name <- rlang::as_name(mapping$x)  # safer than as_label
+  data <- data %>% mutate(bin = dynamic_cut_number(.data[[var_name]], bins = 3))
 
   ggplot(data, aes(x = .data[[var_name]], y = bin)) +
-    geom_density_ridges() +
+    geom_density_ridges(scale = 1.5, rel_min_height = 0.01, fill = "gray") +
     scale_x_continuous(labels = label_number()) +
     theme_minimal() +
     ggtitle(paste("Ridge Plot of", var_name))
 }
 
-# Custom ggpairs function with ridge plot support
-ggpairs_custom <- function(
+
+ggpairs <- function(
     data,
     mapping = NULL,
     columns = 1:ncol(data),
     title = NULL,
-    upper = list(continuous = "points", combo = "dot_no_facet"),
-    lower = list(continuous = "smooth", combo = "facetdensity"),
-    diag = list(continuous = "densityDiag", discrete = "barDiag"),
+    upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
+    lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
+    diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+    params = deprecated(),
     ...,
     xlab = NULL,
     ylab = NULL,
@@ -790,34 +787,143 @@ ggpairs_custom <- function(
     legend = NULL,
     cardinality_threshold = 15,
     progress = NULL,
-    proportions = NULL
-) {
-  # Check if user requested ridge plots in diagonal
-  if (!is.null(diag$continuous) && diag$continuous == "ridgeDiag") {
-    diag$continuous <- ggally_ridgeDiag  # Replace with function
+    proportions = NULL,
+    legends = deprecated()) {
+  if (lifecycle::is_present(legends)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(legends)",
+      details = "Ability to put legends in each plot will be dropped in next releases."
+    )
+  }
+  if (lifecycle::is_present(params)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggpairs(params)"
+    )
+  }
+  has_dots <- rlang::check_dots_empty(error = function(cnd) {
+    TRUE
+  })
+  if (isTRUE(has_dots)) {
+    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
   }
 
-  # Generate ggpairs plot
-  ggpairs(
-    data,
-    mapping = mapping,
-    columns = columns,
-    title = title,
-    upper = upper,
-    lower = lower,
-    diag = diag,
-    xlab = xlab,
-    ylab = ylab,
-    axisLabels = axisLabels,
-    columnLabels = columnLabels,
+  isSharedData <- inherits(data, "SharedData")
+
+  data_ <- fix_data(data)
+  data <- fix_data_slim(data_, isSharedData)
+
+  if (
+    !missing(mapping) && !is.list(mapping) &&
+    missing(columns)
+  ) {
+    columns <- mapping
+    mapping <- NULL
+  }
+  stop_if_bad_mapping(mapping)
+
+  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
+
+  stop_if_high_cardinality(data, columns, cardinality_threshold)
+
+  upper <- check_and_set_ggpairs_defaults(
+    "upper", upper,
+    continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"
+  )
+  lower <- check_and_set_ggpairs_defaults(
+    "lower", lower,
+    continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"
+  )
+  diag <- check_and_set_ggpairs_defaults(
+    "diag", diag,
+    continuous = "densityDiag",
+    discrete = "barDiag",
+    na = "naDiag",
+    isDiag = TRUE
+  )
+
+  # Allow "ridgeDiag" as a string option
+  for (key in c("continuous", "discrete", "na")) {
+    val <- diag[[key]]
+    if (is.character(val) && val == "ridgeDiag") {
+      diag[[key]] <- ggally_ridgeDiag
+    }
+  }
+
+
+  axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
+
+  proportions <- ggmatrix_proportions(proportions, data, columns)
+
+  # get plot type information
+  dataTypes <- GGally:::plot_types(data, columns, columns, allowDiag = TRUE)
+
+  # make internal labels on the diag axis
+  if (identical(axisLabels, "internal")) {
+    dataTypes$plotType[dataTypes$posX == dataTypes$posY] <- "label"
+  }
+
+  ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
+    plotType <- dataTypes[i, "plotType"]
+
+    posX <- dataTypes[i, "posX"]
+    posY <- dataTypes[i, "posY"]
+    xColName <- dataTypes[i, "xVar"]
+    yColName <- dataTypes[i, "yVar"]
+
+    if (posX > posY) {
+      types <- upper
+    } else if (posX < posY) {
+      types <- lower
+    } else {
+      types <- diag
+    }
+
+    sectionAes <- add_and_overwrite_aes(
+      add_and_overwrite_aes(
+        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
+        mapping
+      ),
+      types$mapping
+    )
+
+    args <- list(types = types, sectionAes = sectionAes)
+    if (plotType == "label") {
+      args$label <- columnLabels[posX]
+    }
+
+    plot_fn <- GGally:::ggmatrix_plot_list(plotType)
+
+    p <- do.call(plot_fn, args)
+
+    return(p)
+  })
+
+  plotMatrix <- ggmatrix(
+    plots = ggpairsPlots,
+    byrow = TRUE,
+    nrow = length(columns),
+    ncol = length(columns),
+    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
     labeller = labeller,
     switch = switch,
     showStrips = showStrips,
-    legend = legend,
-    cardinality_threshold = cardinality_threshold,
+    showXAxisPlotLabels = identical(axisLabels, "show"),
+    showYAxisPlotLabels = identical(axisLabels, "show"),
+    title = title,
+    xlab = xlab,
+    ylab = ylab,
+    data = data_,
+    gg = NULL,
     progress = progress,
-    proportions = proportions
+    legend = legend,
+    xProportions = proportions,
+    yProportions = proportions
   )
+
+  plotMatrix
 }
 
 
