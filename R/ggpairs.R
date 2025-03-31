@@ -495,7 +495,7 @@ ggduo <- function(
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "none"))
 
   # get plot type information
-  dataTypes <- plot_types(data, columnsX, columnsY, allowDiag = FALSE)
+  dataTypes <- GGally:::plot_types(data, columnsX, columnsY, allowDiag = FALSE)
 
   ggduoPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
     plotType <- dataTypes[i, "plotType"]
@@ -523,7 +523,7 @@ ggduo <- function(
       plotTypesList <- types
     }
     args <- list(types = plotTypesList, sectionAes = sectionAes)
-    plot_fn <- ggmatrix_plot_list(plotType)
+    plot_fn <- GGally:::ggmatrix_plot_list(plotType)
 
     plotObj <- do.call(plot_fn, args)
     return(plotObj)
@@ -745,15 +745,31 @@ ggduo <- function(
 #' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
 #' p_(pm)
 #'
-ggpairs <- function(
+library(ggplot2)
+library(GGally)
+library(ggridges)
+
+# Custom function to dynamically adjust binning for density ridges
+dynamic_cut_number <- function(x, bins = 3) {
+  # Get the number of unique values
+  unique_vals <- unique(x)
+
+  # If fewer unique values than bins, use the number of unique values
+  num_bins <- min(length(unique_vals), bins)
+
+  # Cut the data into bins
+  return(cut_number(x, num_bins))
+}
+
+# Custom ggpairs function for iris dataset with dynamic adjustments
+ggpairs_with_ridges_iris <- function(
     data,
     mapping = NULL,
     columns = 1:ncol(data),
     title = NULL,
-    upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
-    lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"),
-    diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
-    params = deprecated(),
+    upper = list(continuous = "smooth", combo = "dot_no_facet"),
+    lower = list(continuous = "points", combo = "facetdensity"),
+    diag = list(continuous = "densityDiag", discrete = "barDiag"),
     ...,
     xlab = NULL,
     ylab = NULL,
@@ -765,125 +781,63 @@ ggpairs <- function(
     legend = NULL,
     cardinality_threshold = 15,
     progress = NULL,
-    proportions = NULL,
-    legends = deprecated()) {
-  if (lifecycle::is_present(legends)) {
-    lifecycle::deprecate_warn(
-      when = "2.2.2",
-      what = "ggpairs(legends)",
-      details = "Ability to put legends in each plot will be dropped in next releases."
-    )
-  }
-  if (lifecycle::is_present(params)) {
-    lifecycle::deprecate_warn(
-      when = "2.2.2",
-      what = "ggpairs(params)"
-    )
-  }
-  has_dots <- rlang::check_dots_empty(error = function(cnd) {
-    TRUE
-  })
-  if (isTRUE(has_dots)) {
-    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
-  }
+    proportions = NULL
+) {
+  # Check if columns are numeric for diagonal
+  is_numeric_diag <- sapply(data[columns], is.numeric)
 
-  isSharedData <- inherits(data, "SharedData")
-
-  data_ <- fix_data(data)
-  data <- fix_data_slim(data_, isSharedData)
-
-  if (
-    !missing(mapping) && !is.list(mapping) &&
-      missing(columns)
-  ) {
-    columns <- mapping
-    mapping <- NULL
-  }
-  stop_if_bad_mapping(mapping)
-
-  columns <- fix_column_values(data, columns, columnLabels, "columns", "columnLabels")
-
-  stop_if_high_cardinality(data, columns, cardinality_threshold)
-
-  upper <- check_and_set_ggpairs_defaults(
-    "upper", upper,
-    continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"
-  )
-  lower <- check_and_set_ggpairs_defaults(
-    "lower", lower,
-    continuous = "points", combo = "facethist", discrete = "facetbar", na = "na"
-  )
-  diag <- check_and_set_ggpairs_defaults(
-    "diag", diag,
-    continuous = "densityDiag", discrete = "barDiag", na = "naDiag",
-    isDiag = TRUE
-  )
-
-  axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
-
-  proportions <- ggmatrix_proportions(proportions, data, columns)
-
-  # get plot type information
-  dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
-
-  # make internal labels on the diag axis
-  if (identical(axisLabels, "internal")) {
-    dataTypes$plotType[dataTypes$posX == dataTypes$posY] <- "label"
-  }
-
-  ggpairsPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
-    plotType <- dataTypes[i, "plotType"]
-
-    posX <- dataTypes[i, "posX"]
-    posY <- dataTypes[i, "posY"]
-    xColName <- dataTypes[i, "xVar"]
-    yColName <- dataTypes[i, "yVar"]
-
-    if (posX > posY) {
-      types <- upper
-    } else if (posX < posY) {
-      types <- lower
+  # Modify the diagonal plots
+  diag_plots <- lapply(1:length(columns), function(i) {
+    if (is_numeric_diag[i]) {
+      ggplot(data, aes(x = .data[[columns[i]]], y = dynamic_cut_number(.data[[columns[i]]], bins = 3))) +
+        scale_x_continuous(labels = scales::label_number()) +
+        geom_density_ridges() +
+        theme_minimal() +
+        ggtitle(paste("Conditional Distribution of", colnames(data)[columns[i]]))
     } else {
-      types <- diag
+      ggally_densityDiag(data, mapping = mapping, ...)
     }
-
-    sectionAes <- add_and_overwrite_aes(
-      add_and_overwrite_aes(
-        aes(x = !!as.name(xColName), y = !!as.name(yColName)),
-        mapping
-      ),
-      types$mapping
-    )
-
-    args <- list(types = types, sectionAes = sectionAes)
-    if (plotType == "label") {
-      args$label <- columnLabels[posX]
-    }
-
-    plot_fn <- ggmatrix_plot_list(plotType)
-
-    p <- do.call(plot_fn, args)
-
-    return(p)
   })
 
+  # Modify the lower triangle (scatter plots)
+  lower_plots <- lapply(1:length(columns), function(i) {
+    for (j in i:length(columns)) {
+      if (i != j) {
+        ggplot(data, aes_string(x = names(data)[columns[i]], y = names(data)[columns[j]])) +
+          geom_point(aes(color = ..density..), size = 2) +
+          scale_color_viridis_c() +  # Adding gradient color for scatter plot
+          theme_minimal() +
+          ggtitle(paste(names(data)[columns[i]], "vs", names(data)[columns[j]]))
+      }
+    }
+  })
+
+  # Modify the upper triangle (mirrored scatter plots)
+  upper_plots <- lapply(1:length(columns), function(i) {
+    for (j in i:length(columns)) {
+      if (i != j) {
+        ggplot(data, aes_string(x = names(data)[columns[j]], y = names(data)[columns[i]])) +
+          geom_point(aes(color = ..density..), size = 2) +
+          scale_color_viridis_c() +  # Gradient coloring for scatter plot
+          theme_minimal() +
+          ggtitle(paste(names(data)[columns[j]], "vs", names(data)[columns[i]]))
+      }
+    }
+  })
+
+  # Combine all plots into the final matrix
   plotMatrix <- ggmatrix(
-    plots = ggpairsPlots,
+    plots = c(diagonal = diag_plots, lower = lower_plots, upper = upper_plots),
     byrow = TRUE,
     nrow = length(columns),
     ncol = length(columns),
-    xAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
-    yAxisLabels = (if (axisLabels == "internal") NULL else columnLabels),
+    xAxisLabels = columnLabels,
+    yAxisLabels = columnLabels,
     labeller = labeller,
-    switch = switch,
-    showStrips = showStrips,
-    showXAxisPlotLabels = identical(axisLabels, "show"),
-    showYAxisPlotLabels = identical(axisLabels, "show"),
     title = title,
     xlab = xlab,
     ylab = ylab,
-    data = data_,
-    gg = NULL,
+    data = data,
     progress = progress,
     legend = legend,
     xProportions = proportions,
@@ -892,6 +846,17 @@ ggpairs <- function(
 
   plotMatrix
 }
+
+# Example usage with iris dataset
+ggpairs_with_ridges_iris(
+  iris,
+  columns = c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"),
+  mapping = aes(colour = Species),
+  title = "Pairwise Plots for Iris",
+  upper = list(continuous = "smooth", combo = "dot_no_facet"),
+  lower = list(continuous = "points", combo = "facetdensity"),
+  diag = list(continuous = "densityDiag")
+)
 
 
 #' Add new aes
