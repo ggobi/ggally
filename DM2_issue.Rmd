@@ -13,7 +13,7 @@ library(GGally)     # For advanced data visualization
 library(patchwork)  # For combining multiple ggplot2 plots
 ```
 
-## The Plot 
+## The Plot
 
 ```{r}
 # Load the Arrests dataset
@@ -75,4 +75,30 @@ final_plot <- Reduce(`+`, c(cont_plots, cat_plots)) +
 
 # Display the final combined plot
 print(final_plot)
+```
+
+```{r}
+library(GGally)
+library(ggplot2)
+
+# Charger les données
+data(Arrests)
+
+# Sélectionner uniquement 'released' et les autres variables
+selected_vars <- c("released", setdiff(names(Arrests), "released"))
+
+# Créer un ggpairs avec une seule colonne (1, N)
+custom_plot <- ggpairs(Arrests,
+                       columns = 1:length(selected_vars),  # Exclure 'released' des X
+                       mapping = aes(color = released),  # Coloration par released
+                       lower = list(continuous = wrap("points", alpha = 0.6), 
+                                    combo = wrap("box_no_facet"),
+                                    discrete = wrap("facetbar")),
+                       diag = list(continuous = wrap("densityDiag")),  # Histogrammes en diag
+                       upper = list(continuous = "blank", combo = "blank", discrete = "blank")  # Supprimer la partie supérieure
+)
+
+# Afficher le plot
+print(custom_plot)
+
 ```
