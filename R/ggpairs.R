@@ -893,6 +893,53 @@ ggpairs <- function(
   plotMatrix
 }
 
+                   
+# Modified ggpairs function to display only one column against all others
+# with proper x-axis labels
+#' 
+#' Optimized function to display one target column vs all other variables
+#' 
+
+
+ggpairs_focus <- function(data, target_column, title = NULL, save_pdf = FALSE, pdf_name = "column_relationships.pdf") {
+  
+  # Ensure target column exists
+  if (!target_column %in% names(data)) {
+    stop(paste("Target column '", target_column, "' not found in the data frame"))
+  }
+  
+  # Get all variables except the target column
+  other_vars <- setdiff(names(data), target_column)
+  
+  # Generate full ggpairs plot
+  full_plot <- ggpairs(data, columns = c(target_column, other_vars))
+  
+  # Extract the first column of the pair plot (excluding diagonal)
+  num_vars <- length(other_vars)
+  extracted_plots <- vector("list", num_vars)
+  
+  for (i in seq_len(num_vars)) {
+    extracted_plots[[i]] <- full_plot[i + 1, 1]  # Select only first column (excluding diagonal)
+  }
+  
+  # Maintain proper ggmatrix spacing
+  focused_plot <- ggmatrix(
+    extracted_plots,
+    nrow = num_vars, 
+    ncol = 1,
+    xAxisLabels = colnames(data[target_column]), 
+    yAxisLabels = colnames(data[other_vars])
+  )
+  
+  # Save to PDF if requested
+  if (save_pdf) {
+    ggsave(pdf_name, focused_plot, width = 6, height = 3 * num_vars, limitsize = FALSE)
+    message(paste("Plot saved to", pdf_name))
+  }
+  
+  return(focused_plot)
+}
+
 
 #' Add new aes
 #'
