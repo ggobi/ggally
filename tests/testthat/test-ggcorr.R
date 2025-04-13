@@ -97,3 +97,12 @@ test_that("backwards compatibility", {
     ggcorr(flea[, -1], method = "everything")
   )
 })
+
+
+test_that("ggally_cor handles n < 3 gracefully", {
+  data <- data.frame(x = c(1, 2), y = c(3, 4))  # only 2 observations
+  p <- ggally_cor(data, mapping = aes(x = x, y = y))
+
+  # Check that the result is indeed a ggplot object (no errors)
+  expect_s3_class(p, "ggplot")
+})
