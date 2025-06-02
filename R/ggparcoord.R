@@ -77,7 +77,8 @@ if (getRversion() >= "2.15.1") {
 #' @param title character string denoting the title of the plot
 #' @author Jason Crowley, Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham
 #' @return ggplot object that if called, will print
-#' @importFrom plyr ddply summarize
+#' @importFrom dplyr arrange summarise
+#' @importFrom plyr ddply
 #' @importFrom stats complete.cases sd median mad lm spline
 #' @importFrom tidyr pivot_longer
 #' @export
@@ -512,10 +513,9 @@ ggparcoord <- function(
 
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
-    d.sum <- ddply(data.m, c("variable"), summarize,
-      min = min(value),
-      max = max(value)
-    )
+    d.sum <- data.m %>%
+      summarise(min = min(value), max = max(value), .by = variable) %>%
+      arrange(variable)
     p <- p + geom_linerange(
       data = d.sum, linewidth = I(10), col = shadeBox,
       inherit.aes = FALSE,
