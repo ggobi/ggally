@@ -384,6 +384,7 @@ ggally_cor <- function(
 #' @param align_percent relative align position of the text. When \code{title_hjust = 0.5} and \code{group_hjust = 0.5}, this should not be needed to be set.
 #' @param title_hjust,group_hjust \code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.
 #' @seealso \code{\link{ggally_cor}}
+#' @importFrom dplyr %>% arrange summarize
 #' @export
 ggally_statistic <- function(
     data,
@@ -477,19 +478,14 @@ ggally_statistic <- function(
 
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
-    cord <- ddply(
-      data.frame(x = xData, y = yData, color = colorData),
-      "color",
-      function(dt) {
-        text_fn(dt$x, dt$y)
-      }
-    )
-    colnames(cord)[2] <- "text"
+    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
+      summarise(text = text_fn(x, y), .by = color) %>%
+      arrange(color)
 
     # put in correct order
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
-    for (i in 1:nrow(cord)) {
+    for (i in seq_len(nrow(cord))) {
       for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
