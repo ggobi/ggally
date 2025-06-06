@@ -47,12 +47,12 @@ glyphs <- function(
     x_scale = identity) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
 
-  if (is.rel(width)) {
+  if (inherits(width, "rel")) {
     width <- resolution(data[[x_major]], zero = FALSE) * unclass(width)
     message("Using width ", format(width, digits = 3))
   }
 
-  if (is.rel(height)) {
+  if (inherits(height, "rel")) {
     height <- resolution(data[[y_major]], zero = FALSE) * unclass(height)
     message("Using height ", format(height, digits = 3))
   }
@@ -206,36 +206,6 @@ print.glyphplot <- function(x, ...) {
   )
   # cat("\n")
 }
-
-
-# Relative dimensions --------------------------------------------------------
-
-# Relative dimensions
-#
-# @param x numeric value between 0 and 1
-# rel <- function(x) {
-#   structure(x, class = "rel")
-# }
-# @export
-# rel <- ggplot2::rel
-
-# @rdname rel
-# @param ... ignored
-# print.rel <- function(x, ...) {
-#   print(noquote(paste(x, " *", sep = "")))
-# }
-## works even though it is not exported
-# @export
-# ggplot2::print.rel
-
-# @rdname rel
-# is.rel <- function(x) {
-#   inherits(x, "rel")
-# }
-## only used internally.  and ggplot2 has this exported
-# @export
-# ggplot2:::is.rel
-is.rel <- ggplot2:::is.rel
 
 # Rescaling functions --------------------------------------------------------
 
