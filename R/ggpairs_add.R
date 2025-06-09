@@ -56,11 +56,11 @@
   }
   if (inherits(e2, c("labels", "ggplot2::labels"))) {
     add_labels_to_ggmatrix(e1, e2)
-  } else if (is.theme(e2)) {
+  } else if (is_theme(e2)) {
     add_theme_to_ggmatrix(e1, e2)
   } else if (is.list(e2)) {
     add_list_to_ggmatrix(e1, e2)
-  } else if (is.ggproto(e2)) {
+  } else if (is_ggproto(e2)) {
     add_to_ggmatrix(e1, e2)
   } else {
     stop(
@@ -152,7 +152,7 @@ add_to_ggmatrix <- function(
   if (!is.ggmatrix(e1)) {
     stop("e1 should be a ggmatrix.")
   }
-  if (!is.ggproto(e2)) {
+  if (!is_ggproto(e2)) {
     stop("e2 should be a ggproto object.")
   }
 
