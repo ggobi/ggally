@@ -288,7 +288,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
       j <- subset(densities, xlab == names(dn)[m])
       r <- r + stat_density(
         aes(
-          x = !!as.name("x"),
+          x = .data$x,
           y = after_stat(.data$scaled) * diff(range(!!as.name("x"))) + min(!!as.name("x")) # nolint
         ),
         data = j, position = "identity", geom = "line", color = "black"
@@ -325,7 +325,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
     r <- r +
       geom_point(
         data = ltdata.new,
-        aes(colour = !!as.name("colorcolumn")),
+        aes(colour = .data$colorcolumn),
         alpha = alpha,
         na.rm = TRUE
       )

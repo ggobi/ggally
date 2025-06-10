@@ -80,7 +80,7 @@
 #'       x = c(90, 125, 5, 60),
 #'       y = c(0.8, 0.65, 0.55, 0.30),
 #'       size = 5,
-#'       colour = scales::hue_pal(
+#'       colour = scales::pal_hue(
 #'         h         = c(0, 360) + 15,
 #'         c         = 100,
 #'         l         = 65,
@@ -107,9 +107,9 @@ ggsurv <- function(
     ylab = "Survival",
     main = "",
     order.legend = TRUE) {
-  require_namespaces(c("survival", "scales"))
+  rlang::check_installed(c("survival", "scales"))
 
-  strata <- ifelse(is.null(s$strata) == TRUE, 1, length(s$strata))
+  strata <- ifelse(is.null(s$strata), 1, length(s$strata))
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)
   stopifnot(length(lty.est) == 1 | length(lty.est) == strata)
 

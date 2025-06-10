@@ -302,7 +302,7 @@ ggnet2 <- function(
 
   # -- packages ----------------------------------------------------------------
 
-  require_namespaces(c("network", "sna", "scales"))
+  rlang::check_installed(c("network", "sna", "scales"))
 
   # -- conversion to network class ---------------------------------------------
 
