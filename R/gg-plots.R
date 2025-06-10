@@ -1315,6 +1315,7 @@ ggally_facetbar <- function(data, mapping, ...) {
 #'   tips, ggplot2::aes(sex, day),
 #'   floor = 20, ceiling = 50
 #' ) + ggplot2::theme(aspect.ratio = 4 / 2))
+#' @importFrom dplyr all_of arrange n pick summarise
 ggally_ratio <- function(
     data,
     mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
@@ -1325,7 +1326,9 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- plyr::count(data, vars = c(xName, yName))
+  countData <- data %>%
+    summarise(freq = n(), .by = all_of(c(xName, yName))) %>%
+    arrange(pick(c(xName, yName)))
 
   # overwrite names so name clashes don't happen
   colnames(countData)[1:2] <- c("x", "y")
@@ -1443,7 +1446,7 @@ ggally_count <- function(data, mapping, ...) {
   args <- list(...)
   if (!"fill" %in% names(args)) {
     if (is.null(mapping$fill)) {
-      args$fill <- GeomRect$default_aes$fill
+      args$fill <- get_geom_defaults(GeomRect)$fill
     }
   }
 
@@ -1752,6 +1755,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #'   }
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 #' }
+#' @importFrom dplyr arrange summarise
 ggally_summarise_by <- function(
     data,
     mapping,
@@ -1763,17 +1767,14 @@ ggally_summarise_by <- function(
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {
-    res <- ddply(
-      data.frame(
-        x = eval_data_col(data, mapping$x),
-        y = eval_data_col(data, mapping$y),
-        weight = eval_data_col(data, mapping$weight) %||% 1,
-        stringsAsFactors = FALSE
-      ),
-      c("y"),
-      plyr::here(summarize),
-      label = text_fn(x, weight)
-    )
+    res <- data.frame(
+      x = eval_data_col(data, mapping$x),
+      y = eval_data_col(data, mapping$y),
+      weight = eval_data_col(data, mapping$weight) %||% 1,
+      stringsAsFactors = FALSE
+    ) %>%
+      summarise(label = text_fn(x, weight), .by = y) %>%
+      arrange(y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
       col <- as.name("y")
