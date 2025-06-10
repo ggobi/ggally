@@ -77,7 +77,7 @@ if (getRversion() >= "2.15.1") {
 #' @param title character string denoting the title of the plot
 #' @author Jason Crowley, Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham
 #' @return ggplot object that if called, will print
-#' @importFrom dplyr across arrange bind_cols everything n reframe summarise transmute
+#' @importFrom dplyr across arrange bind_cols everything n reframe summarise mutate
 #' @importFrom plyr ddply
 #' @importFrom stats complete.cases sd median mad lm spline
 #' @importFrom tidyr pivot_longer
@@ -548,9 +548,11 @@ ggparcoord <- function(
     } else {
       data.m <- bind_cols(
         reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1]))),
-        transmute(
+        mutate(
           reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = n() * ggally_splineFactor[1]))),
-          spline.x = x, spline.y = y
+          spline.x = x,
+          spline.y = y,
+          .keep = "none"
         )
       )
     }

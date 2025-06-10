@@ -384,7 +384,7 @@ ggally_cor <- function(
 #' @param align_percent relative align position of the text. When \code{title_hjust = 0.5} and \code{group_hjust = 0.5}, this should not be needed to be set.
 #' @param title_hjust,group_hjust \code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.
 #' @seealso \code{\link{ggally_cor}}
-#' @importFrom dplyr %>% arrange summarize
+#' @importFrom dplyr arrange summarise
 #' @export
 ggally_statistic <- function(
     data,

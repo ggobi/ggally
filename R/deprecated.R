@@ -37,7 +37,7 @@ v1_ggmatrix_theme <- function() {
 #' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke
-#' @importFrom dplyr %>% arrange mutate summarise
+#' @importFrom dplyr arrange mutate summarise
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export
