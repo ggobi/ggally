@@ -168,15 +168,14 @@ ggnetworkmap <- function(
     label.nodes = FALSE,
     label.size = size / 2,
     ...) {
-  require_namespaces(c("network", "sna"))
+  rlang::check_installed(c("network", "sna"))
   # sna          # node placement if there is no ggplot object in function call
 
   # -- conversion to network class ---------------------------------------------
 
-  if (inherits(net, "igraph") && "intergraph" %in% rownames(installed.packages())) {
+  if (inherits(net, "igraph")) {
+    rlang::check_installed("intergraph")
     net <- intergraph::asNetwork(net)
-  } else if (inherits(net, "igraph")) {
-    stop("install the 'intergraph' package to use igraph objects with ggnet")
   }
 
   if (!network::is.network(net)) {
@@ -230,9 +229,7 @@ ggnetworkmap <- function(
   if (missing(gg)) {
     # mapproj doesn't need to be loaded, but
     # it needs to exist for ggplot2::coord_map() to work properly
-    if (!("mapproj" %in% installed.packages())) {
-      require_namespaces("mapproj")
-    }
+    rlang::check_installed("mapproj")
     gg <- ggplot() +
       coord_map()
 
@@ -321,7 +318,7 @@ ggnetworkmap <- function(
 
   if (great.circles) {
     # geosphere    # great circles
-    require_namespaces("geosphere")
+    rlang::check_installed("geosphere")
 
     pts <- 25 # number of intermediate points for drawing great circles
     i <- 0 # used to keep track of groups when getting intermediate points for great circles
