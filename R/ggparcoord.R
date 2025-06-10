@@ -541,8 +541,8 @@ ggparcoord <- function(
         reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1] / length(x)))),
         mutate(
           reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = ggally_splineFactor[1]))),
-          spline.x = x,
-          spline.y = y,
+          spline.x = .data$x,
+          spline.y = .data$y,
           .keep = "none"
         )
       )
@@ -551,8 +551,8 @@ ggparcoord <- function(
         reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1]))),
         mutate(
           reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = n() * ggally_splineFactor[1]))),
-          spline.x = x,
-          spline.y = y,
+          spline.x = .data$x,
+          spline.y = .data$y,
           .keep = "none"
         )
       )
