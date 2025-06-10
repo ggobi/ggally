@@ -263,8 +263,8 @@ ggally_cor_v1_5 <- function(
       aes(
         x = xPos,
         y = yPos,
-        label = labelp,
-        color = labelp
+        label = .data$labelp,
+        color = .data$labelp
       ),
       hjust = 1,
       ...

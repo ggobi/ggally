@@ -219,12 +219,12 @@ ggcorr <- function(
   # names(m) = c("x", "y", "coefficient")
   m_long <- m %>%
     tidyr::pivot_longer(
-      cols = -.ggally_ggcorr_row_names,
+      cols = -.data$.ggally_ggcorr_row_names,
       names_to = "y",
       values_to = "coefficient"
     ) %>%
-    dplyr::rename(x = .ggally_ggcorr_row_names) %>%
-    dplyr::mutate(y = factor(y, levels = rownames(m)))
+    dplyr::rename(x = .data$.ggally_ggcorr_row_names) %>%
+    dplyr::mutate(y = factor(.data$y, levels = rownames(m)))
   m_long$coefficient[m_long$coefficient == 0] <- NA
 
   # -- correlation quantiles ---------------------------------------------------
@@ -255,19 +255,19 @@ ggcorr <- function(
   # -- plot structure ----------------------------------------------------------
 
   m_long$label <- round(m_long$coefficient, label_round)
-  p <- ggplot(na.omit(m_long), aes(x, y))
+  p <- ggplot(na.omit(m_long), aes(x, .data$y))
 
   if (geom == "tile") {
     if (is.null(nbreaks)) {
       # -- tiles, continuous ---------------------------------------------------
 
       p <- p +
-        geom_tile(aes(fill = coefficient), color = "white")
+        geom_tile(aes(fill = .data$coefficient), color = "white")
     } else {
       # -- tiles, ordinal ------------------------------------------------------
 
       p <- p +
-        geom_tile(aes(fill = breaks), color = "white")
+        geom_tile(aes(fill = .data$breaks), color = "white")
     }
 
     # -- tiles, color scale ----------------------------------------------------
@@ -295,18 +295,18 @@ ggcorr <- function(
     }
   } else if (geom == "circle") {
     p <- p +
-      geom_point(aes(size = abs(coefficient) * 1.25), color = "grey50") # border
+      geom_point(aes(size = abs(.data$coefficient) * 1.25), color = "grey50") # border
 
     if (is.null(nbreaks)) {
       # -- circles, continuous -------------------------------------------------
 
       p <- p +
-        geom_point(aes(size = abs(coefficient), color = coefficient))
+        geom_point(aes(size = abs(.data$coefficient), color = .data$coefficient))
     } else {
       # -- circles, ordinal ----------------------------------------------------
 
       p <- p +
-        geom_point(aes(size = abs(coefficient), color = breaks))
+        geom_point(aes(size = abs(.data$coefficient), color = .data$breaks))
     }
 
     p <- p +
@@ -345,12 +345,12 @@ ggcorr <- function(
       # -- text, continuous ----------------------------------------------------
 
       p <- p +
-        geom_text(aes(label = label, color = coefficient), size = label_size)
+        geom_text(aes(label = label, color = .data$coefficient), size = label_size)
     } else {
       # -- text, ordinal -------------------------------------------------------
 
       p <- p +
-        geom_text(aes(label = label, color = breaks), size = label_size)
+        geom_text(aes(label = label, color = .data$breaks), size = label_size)
     }
 
     # -- text, color scale ----------------------------------------------------

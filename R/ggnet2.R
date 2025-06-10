@@ -864,18 +864,16 @@ ggnet2 <- function(
 
       arrow.gap = with(edges, arrow.gap / sqrt(x.dir ^ 2 + y.dir ^ 2))
 
-      edges = transform(edges,
-                        X1 = X1 + arrow.gap * x.dir,
-                        Y1 = Y1 + arrow.gap * y.dir,
-                        X2 = X1 + (1 - arrow.gap) * x.dir,
-                        Y2 = Y1 + (1 - arrow.gap) * y.dir)
-
+      edges$X1 = edges$X1 + arrow.gap * x.dir
+      edges$Y1 = edges$Y1 + arrow.gap * y.dir
+      edges$X2 = edges$X1 + (1 - arrow.gap) * x.dir
+      edges$Y2 = edges$Y1 + (1 - arrow.gap) * y.dir
     }
 
     p = p +
       geom_segment(
         data = edges,
-        aes(x = X1, y = Y1, xend = X2, yend = Y2),
+        aes(x = .data$X1, y = .data$Y1, xend = .data$X2, yend = .data$Y2),
         linewidth   = edge.size,
         color  = edge.color,
         alpha  = edge.alpha,
@@ -893,14 +891,14 @@ ggnet2 <- function(
     p = p +
       geom_point(
         data = edges,
-        aes(x = midX, y = midY),
+        aes(x = .data$midX, y = .data$midY),
         alpha  = edge.alpha,
         color  = edge.label.fill,
         size   = edge.label.size * 1.5
       ) +
       geom_text(
         data = edges,
-        aes(x = midX, y = midY, label = label),
+        aes(x = .data$midX, y = .data$midY, label = label),
         alpha  = edge.label.alpha,
         color  = edge.label.color,
         size   = edge.label.size

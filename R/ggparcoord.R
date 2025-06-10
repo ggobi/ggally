@@ -570,7 +570,7 @@ ggparcoord <- function(
     }
 
     if (showPoints) {
-      p <- p + geom_point(aes(x = as.numeric(variable), y = value))
+      p <- p + geom_point(aes(x = as.numeric(.data$variable), y = .data$value))
     }
 
     xAxisLabels <- levels(data.m$variable)
