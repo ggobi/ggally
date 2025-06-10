@@ -1,17 +1,13 @@
 # add global variable
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(unique(c(
-    "labelp", # cor plot
-    c("x"), # facetdensitystrip plot
-    c("x"), # density diagonal plot
-    c("x", "y", "lab"), # internal axis plot
-    c("x", "y", "result", "freq"), # fluctuation plot
-    c("weight") # ggally_summarise_by
-  )))
-}
-
-
-
+utils::globalVariables(c(
+  c("labelp"), # cor plot
+  c("x"), # facetdensitystrip plot
+  c("x"), # density diagonal plot
+  c("x", "y", "lab"), # internal axis plot
+  c("x", "y", "result", "freq"), # fluctuation plot
+  c("weight"), # ggally_summarise_by
+  NULL
+))
 
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
@@ -225,7 +221,7 @@ ggally_density <- function(data, mapping, ...) {
   p <- ggplot(data = data) +
     geom_point(
       data = data.frame(rangeX = rangeX, rangeY = rangeY),
-      mapping = aes(x = !!as.name("rangeX"), y = !!as.name("rangeY")),
+      mapping = aes(x = .data$rangeX, y = .data$rangeY),
       alpha = 0
     )
 
@@ -375,7 +371,6 @@ ggally_cor <- function(
   )
 }
 
-
 #' Generalized text display
 #'
 #' @param data data set using
@@ -393,6 +388,7 @@ ggally_cor <- function(
 #' @param align_percent relative align position of the text. When \code{title_hjust = 0.5} and \code{group_hjust = 0.5}, this should not be needed to be set.
 #' @param title_hjust,group_hjust \code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.
 #' @seealso \code{\link{ggally_cor}}
+#' @importFrom dplyr arrange summarise
 #' @export
 ggally_statistic <- function(
     data,
@@ -486,19 +482,14 @@ ggally_statistic <- function(
 
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
-    cord <- ddply(
-      data.frame(x = xData, y = yData, color = colorData),
-      "color",
-      function(dt) {
-        text_fn(dt$x, dt$y)
-      }
-    )
-    colnames(cord)[2] <- "text"
+    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
+      summarise(text = text_fn(x, y), .by = .data$color) %>%
+      arrange(.data$color)
 
     # put in correct order
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
-    for (i in 1:nrow(cord)) {
+    for (i in seq_len(nrow(cord))) {
       for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
@@ -541,10 +532,10 @@ ggally_statistic <- function(
       list(
         data = cordf,
         aes(
-          x = !!as.name("xPos"),
-          y = !!as.name("yPos"),
-          label = !!as.name("labelp"),
-          color = !!as.name("labelp")
+          x     = .data$xPos,
+          y     = .data$yPos,
+          label = .data$labelp,
+          color = .data$labelp
         )
       ),
       group_args
@@ -1042,10 +1033,10 @@ ggally_text <- function(
     theme(
       panel.grid.minor = element_blank(),
       panel.grid.major = element_line(
-        colour = ifnull(theme$panel.background$fill, NA)
+        colour = theme$panel.background$fill %||% NA
       ),
       panel.background = element_rect(
-        fill = ifnull(theme$panel.grid.major$colour, NA)
+        fill = theme$panel.grid.major$colour %||% NA
       )
     ) +
     labs(x = NULL, y = NULL)
@@ -1069,8 +1060,8 @@ ggally_text <- function(
     p <- p +
       geom_text(label = label, mapping = mapping, ...)
   } else {
-    bg <- ifnull(theme$panel.background$fill, "grey92")
-    fg <- ifnull(theme$axis.text$colour, "gray30")
+    bg <- theme$panel.background$fill %||% "grey92"
+    fg <- theme$axis.text$colour %||% "gray30"
     colour <- scales::colour_ramp(c(bg, fg))(0.75)
     p <- p +
       geom_text(label = label, mapping = mapping, colour = colour, ...)
@@ -1216,11 +1207,11 @@ ggally_diagAxis <- function(
     p <- p + geom_text(
       data = axisBreaks,
       mapping = aes(
-        x     = !!as.name("xPos"),
-        y     = !!as.name("yPos"),
-        label = !!as.name("lab"),
-        hjust = !!as.name("hjust"),
-        vjust = !!as.name("vjust")
+        x     = .data$xPos,
+        y     = .data$yPos,
+        label = .data$lab,
+        hjust = .data$hjust,
+        vjust = .data$"vjust"
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1253,9 +1244,9 @@ ggally_diagAxis <- function(
     p <- p + geom_text(
       data = axisLabs,
       mapping = aes(
-        x     = !!as.name("x"),
-        y     = !!as.name("y"),
-        label = !!as.name("lab")
+        x     = .data$x,
+        y     = .data$y,
+        label = .data$lab
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1328,6 +1319,7 @@ ggally_facetbar <- function(data, mapping, ...) {
 #'   tips, ggplot2::aes(sex, day),
 #'   floor = 20, ceiling = 50
 #' ) + ggplot2::theme(aspect.ratio = 4 / 2))
+#' @importFrom dplyr all_of arrange n pick summarise
 ggally_ratio <- function(
     data,
     mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
@@ -1338,19 +1330,19 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- plyr::count(data, vars = c(xName, yName))
-
-  # overwrite names so name clashes don't happen
-  colnames(countData)[1:2] <- c("x", "y")
+  countData <-
+    dplyr::count(data, xvar = .data[[xName]], yvar = .data[[yName]], name = "freq") %>%
+    rename(
+      x = "xvar",
+      y = "yvar"
+    )
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
 
   countData <- subset(countData, freq >= floor)
 
-  if (is.null(ceiling)) {
-    ceiling <- max(countData$freq)
-  }
+  ceiling <- ceiling %||% max(countData$freq)
 
   countData[["freqSize"]] <- sqrt(pmin(countData[["freq"]], ceiling) / ceiling)
   countData[["col"]] <- ifelse(countData[["freq"]] > ceiling, "grey30", "grey50")
@@ -1362,11 +1354,11 @@ ggally_ratio <- function(
     ggplot(
       data = countData,
       mapping = aes(
-        x = !!as.name("xPos"),
-        y = !!as.name("yPos"),
-        height = !!as.name("freqSize"),
-        width = !!as.name("freqSize"),
-        fill = !!as.name("col")
+        x = .data$xPos,
+        y = .data$yPos,
+        height = .data$freqSize,
+        width = .data$freqSize,
+        fill = .data$col
       )
     ) +
     geom_tile(...) +
@@ -1456,7 +1448,7 @@ ggally_count <- function(data, mapping, ...) {
   args <- list(...)
   if (!"fill" %in% names(args)) {
     if (is.null(mapping$fill)) {
-      args$fill <- GeomRect$default_aes$fill
+      args$fill <- get_geom_defaults(GeomRect)$fill
     }
   }
 
@@ -1705,7 +1697,7 @@ ggally_naDiag <- function(...) {
 #'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
 #' ))
 ggally_autopoint <- function(data, mapping, ...) {
-  require_namespaces("ggforce")
+  rlang::check_installed("ggforce")
 
   args <- list(...)
   if (!"alpha" %in% names(args) && is.null(mapping$alpha)) {
@@ -1765,6 +1757,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #'   }
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 #' }
+#' @importFrom dplyr arrange summarise
 ggally_summarise_by <- function(
     data,
     mapping,
@@ -1776,17 +1769,14 @@ ggally_summarise_by <- function(
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {
-    res <- ddply(
-      data.frame(
-        x = eval_data_col(data, mapping$x),
-        y = eval_data_col(data, mapping$y),
-        weight = eval_data_col(data, mapping$weight) %||% 1,
-        stringsAsFactors = FALSE
-      ),
-      c("y"),
-      plyr::here(summarize),
-      label = text_fn(x, weight)
-    )
+    res <- data.frame(
+      x = eval_data_col(data, mapping$x),
+      y = eval_data_col(data, mapping$y),
+      weight = eval_data_col(data, mapping$weight) %||% 1,
+      stringsAsFactors = FALSE
+    ) %>%
+      summarise(label = text_fn(x, weight), .by = y) %>%
+      arrange(y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
       col <- as.name("y")
@@ -1795,7 +1785,7 @@ ggally_summarise_by <- function(
     }
 
     ggplot(res) +
-      aes(y = !!as.name("y"), x = 1, label = !!as.name("label"), colour = !!col) +
+      aes(y = .data$y, x = 1, label = .data$label, colour = !!col) +
       geom_text(...) +
       xlab("") +
       ylab(mapping_string(mapping$y)) +
@@ -1838,7 +1828,7 @@ ggally_summarise_by <- function(
 #' \code{weighted_median_iqr} computes weighted median and interquartile range.
 #' @export
 weighted_median_iqr <- function(x, weights = NULL) {
-  require_namespaces("Hmisc")
+  rlang::check_installed("Hmisc")
   s <- round(Hmisc::wtd.quantile(x, weights = weights, probs = c(.25, .5, .75), na.rm = TRUE), digits = 1)
   paste0("Median: ", s[2], " [", s[1], "-", s[3], "]")
 }
@@ -1848,7 +1838,7 @@ weighted_median_iqr <- function(x, weights = NULL) {
 #' \code{weighted_mean_sd} computes weighted mean and standard deviation.
 #' @export
 weighted_mean_sd <- function(x, weights = NULL) {
-  require_namespaces("Hmisc")
+  rlang::check_installed("Hmisc")
   m <- round(Hmisc::wtd.mean(x, weights = weights, na.rm = TRUE), digits = 1)
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
   paste0("Mean: ", m, " (", sd, ")")

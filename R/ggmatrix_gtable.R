@@ -58,7 +58,7 @@ ggmatrix_gtable <- function(
         "  Character values can be parsed using the 'labeller' parameter."
       )
     }
-    ifnull(labels, as.character(seq_len(length_out)))
+    labels %||% as.character(seq_len(length_out))
   }
   fake_data <- expand.grid(
     Var1 = get_labels(pm$xAxisLabels, pm$ncol, "xAxisLabels"),
@@ -71,7 +71,7 @@ ggmatrix_gtable <- function(
   pm_fake <- ggplot(fake_data, mapping = aes(!!as.name("x"), !!as.name("y"))) +
     geom_point() +
     # make the 'fake' strips for x and y titles
-    facet_grid(Var2 ~ Var1, labeller = ifnull(pm$labeller, "label_value"), switch = pm$switch) +
+    facet_grid(Var2 ~ Var1, labeller = pm$labeller %||% "label_value", switch = pm$switch) +
     # remove both x and y titles
     labs(x = pm$xlab, y = pm$ylab)
 
@@ -145,7 +145,7 @@ ggmatrix_gtable <- function(
     pmg$grobs[index] <- legend_obj$grobs
 
     if ("guide-box" %in% legend_layout$name) {
-      legend_position <- ifnull(pm_fake$theme$legend.position, "right")
+      legend_position <- pm_fake$theme$legend.position %||% "right"
 
       if (legend_position %in% c("right", "left")) {
         pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
@@ -222,7 +222,7 @@ ggmatrix_gtable <- function(
       }
 
       # if it's not a ggplot2 obj, insert it and pray it works
-      if (!is.ggplot(p)) {
+      if (!is_ggplot(p)) {
         pmg$grobs[[grob_pos_panel]] <- p
         next
       }

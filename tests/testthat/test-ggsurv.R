@@ -12,9 +12,10 @@ test_that("single", {
   expect_equal(mapping_string(a$mapping$x), "time")
   expect_equal(mapping_string(a$mapping$y), "surv")
 
-  expect_true(is.null(a$labels$group))
-  expect_true(is.null(a$labels$colour))
-  expect_true(is.null(a$labels$linetype))
+  labs <- get_labs(a)
+  expect_true(is.null(labs$group))
+  expect_true(is.null(labs$colour))
+  expect_true(is.null(labs$linetype))
 })
 
 test_that("multiple", {
@@ -23,9 +24,10 @@ test_that("multiple", {
   expect_equal(mapping_string(a$mapping$x), "time")
   expect_equal(mapping_string(a$mapping$y), "surv")
 
-  expect_true(!is.null(a$labels$group))
-  expect_true(!is.null(a$labels$colour))
-  expect_true(!is.null(a$labels$linetype))
+  labs <- get_labs(a)
+  expect_true(!is.null(labs$group))
+  expect_true(!is.null(labs$colour))
+  expect_true(!is.null(labs$linetype))
 })
 
 test_that("adjust plot", {

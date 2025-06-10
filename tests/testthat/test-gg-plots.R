@@ -24,7 +24,7 @@ test_that("density", {
     tips,
     mapping = ggplot2::aes(x = !!as.name("total_bill"), y = !!as.name("tip"), fill = after_stat(level))
   ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2))
-  expect_equal(p$labels$fill, "level")
+  expect_equal(get_labs(p)$fill, "level")
 })
 
 test_that("cor", {
@@ -127,7 +127,7 @@ test_that("dates", {
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278***")
   p <- ggally_barDiag(nas, ggplot2::aes(x = date))
   expect_equal(mapping_string(p$mapping$x), "date")
-  expect_equal(as.character(p$labels$y), "count")
+  expect_equal(as.character(get_labs(p)$y), "count")
 })
 
 test_that("cor stars are aligned", {
@@ -150,20 +150,20 @@ test_that("ggally_statistic handles factors", {
 
 test_that("rescale", {
   p <- ggally_densityDiag(tips, mapping = ggplot2::aes(x = day), rescale = FALSE)
-  expect_true(p$labels$y == "density")
+  expect_true(get_labs(p)$y == "density")
   vdiffr::expect_doppelganger("rescale-false", p)
 
   p <- ggally_densityDiag(tips, mapping = ggplot2::aes(x = day), rescale = TRUE)
-  expect_true(!identical(p$labels$y, "density"))
+  expect_true(!identical(get_labs(p)$y, "density"))
   vdiffr::expect_doppelganger("rescale-true", p)
 
 
   p <- ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25, rescale = FALSE)
-  expect_true(p$labels$y == "count")
+  expect_true(get_labs(p)$y == "count")
   vdiffr::expect_doppelganger("rescale-false-binwidth", p)
 
   p <- ggally_barDiag(tips, mapping = ggplot2::aes(x = tip), binwidth = 0.25, rescale = TRUE)
-  expect_true(!identical(p$labels$y, "count"))
+  expect_true(!identical(get_labs(p)$y, "count"))
   vdiffr::expect_doppelganger("rescale-true-binwidth", p)
 })
 
