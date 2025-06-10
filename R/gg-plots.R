@@ -6,7 +6,6 @@ utils::globalVariables(c(
   c("x", "y", "lab"), # internal axis plot
   c("x", "y", "result", "freq"), # fluctuation plot
   c("weight"), # ggally_summarise_by
-  c("color"), # ggally_statistic
   NULL
 ))
 
@@ -476,7 +475,7 @@ ggally_statistic <- function(
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
     cord <- data.frame(x = xData, y = yData, color = colorData) %>%
       summarise(text = text_fn(x, y), .by = color) %>%
-      arrange(color)
+      arrange(.data$color)
 
     # put in correct order
     lev <- levels(as.factor(colorData))

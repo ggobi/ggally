@@ -1,8 +1,3 @@
-utils::globalVariables(c(
-  c("correlation"), # ggally_cor_v1_5
-  NULL
-))
-
 #' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
 #'
 # \lifecycle{deprecated}
@@ -202,8 +197,8 @@ ggally_cor_v1_5 <- function(
   ) {
     cord <- data.frame(x = xData, y = yData, color = colorData) %>%
       summarise(correlation = cor_fn(x, y), .by = color) %>%
-      arrange(color) %>%
-      mutate(correlation = signif(as.numeric(correlation), 3L))
+      arrange(.data$color) %>%
+      mutate(correlation = signif(as.numeric(.data$correlation), 3L))
 
     # put in correct order
     lev <- levels(as.factor(colorData))

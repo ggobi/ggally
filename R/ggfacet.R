@@ -1,8 +1,3 @@
-utils::globalVariables(
-  c(".x_col", ".y_col"), # ggfacet
-  NULL
-))
-
 #' Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}
 #'
 #'
@@ -104,7 +99,7 @@ ggfacet <- function(
       .x_val = data[[.data$.x_col]],
       .y_val = data[[.data$.y_col]]
     ) %>%
-    arrange(.x_col,, .y_col)
+    arrange(.data$.x_col,, .data$.y_col)
 
   if (is.null(mapping)) {
     mapping <- aes()

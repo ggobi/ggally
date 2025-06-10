@@ -1,8 +1,3 @@
-utils::globalVariables(c(
-  c("gid"), # glyphs
-  NULL
-))
-
 #' Create \code{\link{glyphplot}} data
 #'
 #' Create the data needed to generate a glyph plot.
@@ -72,8 +67,8 @@ glyphs <- function(
         "{x_minor}" := x_scale(!!sym(x_minor)),
         "{y_minor}" := y_scale(!!sym(y_minor))
       ) %>%
-      arrange(gid) %>%
-      relocate(gid, .after = last_col())
+      arrange(.data$gid) %>%
+      relocate(.data$gid, .after = last_col())
   }
 
   if (polar) {
