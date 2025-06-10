@@ -60,7 +60,7 @@ ggcoef <- function(
     sort = c("none", "ascending", "descending"),
     ...) {
   if (!is.data.frame(x)) {
-    require_namespaces("broom")
+    rlang::check_installed("broom")
     x <- broom::tidy(
       x,
       conf.int = conf.int,

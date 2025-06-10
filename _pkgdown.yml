@@ -4,28 +4,25 @@ development:
   mode: auto
 
 template:
-  params:
-    docsearch:
-      api_key: "038759c28b1c284f4b637d2a8c366640"
-      index_name: "ggally"
+  bootstrap: 5
 
 authors:
   Barret Schloerke:
-    href: http://schloerke.com/
+    href: https://schloerke.com/
   Di Cook:
-    href: http://www.dicook.org/
+    href: https://www.dicook.org/
   Joseph Larmarange:
     href: https://joseph.larmarange.net/
   Francois Briatte:
     href: https://f.briatte.org/
   Moritz Marbach:
-    href: http://moritz-marbach.com/
+    href: https://www.moritz-marbach.com/
   Edwin Thoen:
     href: https://edwinth.github.io/
   Heike Hofmann:
-    href: https://hofmann.public.iastate.edu/
+    href: https://heike.github.io/
   Hadley Wickham:
-    href: http://hadley.nz/
+    href: https://hadley.nz/
 
 articles:
 - title: Generic plot matrix

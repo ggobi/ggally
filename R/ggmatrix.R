@@ -21,7 +21,7 @@
 #' @template ggmatrix-legend-param
 #' @keywords hplot
 #' @author Barret Schloerke
-#' @importFrom rlang %||%
+#' @importFrom rlang %||% .data
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive

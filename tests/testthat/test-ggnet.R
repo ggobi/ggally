@@ -13,6 +13,7 @@ rq(scales) # sizing
 rq(intergraph) # test igraph conversion
 
 test_that("examples", {
+  skip_if_not_installed("network")
   ### --- start: documented examples
   set.seed(54321)
 

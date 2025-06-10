@@ -75,7 +75,7 @@ ggally_trends <- function(
       mapping$y <- aes(y = !!as.name(".ggally_y"))$y
       p <- ggplot(data, mapping) +
         stat_weighted_mean(geom = "line", ...) +
-        scale_y_continuous(labels = scales::percent) +
+        scale_y_continuous(labels = scales::label_percent()) +
         ylab("")
     } else { # 3 or more categories
       yname <- mapping_string(mapping$y)
@@ -87,7 +87,7 @@ ggally_trends <- function(
         tmp <- data
         tmp[[".ggally_y"]] <- as.integer(y == l)
         tmp$y <- l
-        d <- rbind(d, tmp)
+        d <- dplyr::bind_rows(d, tmp)
       }
       mapping$linetype <- aes(y = !!as.name("y"))$y
       mapping$y <- aes(y = !!as.name(".ggally_y"))$y
@@ -103,7 +103,7 @@ ggally_trends <- function(
 
       p <- ggplot(d, mapping) +
         stat_weighted_mean(geom = "line", ...) +
-        scale_y_continuous(labels = scales::percent) +
+        scale_y_continuous(labels = scales::label_percent()) +
         ylab("") +
         labs(linetype = yname)
     }
