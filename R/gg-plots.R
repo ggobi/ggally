@@ -1304,6 +1304,7 @@ ggally_facetbar <- function(data, mapping, ...) {
 #'   tips, ggplot2::aes(sex, day),
 #'   floor = 20, ceiling = 50
 #' ) + ggplot2::theme(aspect.ratio = 4 / 2))
+#' @importFrom dplyr all_of arrange n pick summarise
 ggally_ratio <- function(
     data,
     mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
@@ -1314,7 +1315,9 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- dplyr::count(data, x = xName, y = yName, name = "freq")
+  countData <- data %>%
+    summarise(freq = n(), .by = all_of(c(xName, yName))) %>%
+    arrange(pick(c(xName, yName)))
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
