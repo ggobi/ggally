@@ -67,8 +67,8 @@ glyphs <- function(
         "{x_minor}" := x_scale(!!sym(x_minor)),
         "{y_minor}" := y_scale(!!sym(y_minor))
       ) %>%
-      arrange(gid) %>%
-      relocate(gid, .after = last_col())
+      arrange(.data$gid) %>%
+      relocate(.data$gid, .after = last_col())
   }
 
   if (polar) {
@@ -124,7 +124,7 @@ ref_lines <- function(data) {
   }
   cells %>%
     summarise(ref_line(.data), .by = "gid") %>%
-    arrange(gid)
+    arrange(.data$gid)
 }
 
 # Create reference boxes for a glyph plot

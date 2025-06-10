@@ -1,17 +1,13 @@
 # add global variable
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(unique(c(
-    "labelp", # cor plot
-    c("x"), # facetdensitystrip plot
-    c("x"), # density diagonal plot
-    c("x", "y", "lab"), # internal axis plot
-    c("x", "y", "result", "freq"), # fluctuation plot
-    c("weight") # ggally_summarise_by
-  )))
-}
-
-
-
+utils::globalVariables(c(
+  c("labelp"), # cor plot
+  c("x"), # facetdensitystrip plot
+  c("x"), # density diagonal plot
+  c("x", "y", "lab"), # internal axis plot
+  c("x", "y", "result", "freq"), # fluctuation plot
+  c("weight"), # ggally_summarise_by
+  NULL
+))
 
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
@@ -366,7 +362,6 @@ ggally_cor <- function(
   )
 }
 
-
 #' Generalized text display
 #'
 #' @param data data set using
@@ -479,8 +474,8 @@ ggally_statistic <- function(
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
     cord <- data.frame(x = xData, y = yData, color = colorData) %>%
-      summarise(text = text_fn(x, y), .by = color) %>%
-      arrange(color)
+      summarise(text = text_fn(x, y), .by = .data$color) %>%
+      arrange(.data$color)
 
     # put in correct order
     lev <- levels(as.factor(colorData))
@@ -1326,7 +1321,12 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- dplyr::count(data, x = .data$xName, y = .data$yName, name = "freq")
+  countData <-
+    dplyr::count(data, xvar = .data[[xName]], yvar = .data[[yName]], name = "freq") %>%
+    rename(
+      x = "xvar",
+      y = "yvar"
+    )
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])

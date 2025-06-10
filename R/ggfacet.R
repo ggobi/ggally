@@ -99,7 +99,7 @@ ggfacet <- function(
       .x_val = data[[.data$.x_col]],
       .y_val = data[[.data$.y_col]]
     ) %>%
-    arrange(.x_col,, .y_col)
+    arrange(.data$.x_col, .data$.y_col)
 
   if (is.null(mapping)) {
     mapping <- aes()
