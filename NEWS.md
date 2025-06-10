@@ -1,6 +1,8 @@
 # GGally (development version)
 
-* Prepare GGally for ggplot2 v4 (Thank you @teunbrand! #528)
+* Prepare GGally for {ggplot2} v4 (Thank you @teunbrand! #528)
+
+* Replace internal {plyr} usage with {dplyr}. (Thank you @MichaelChirico! #520, #521, #522, #523, #524, #525, #527, #530)
 
 
 # GGally 2.2.1
