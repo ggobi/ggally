@@ -122,7 +122,7 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     data.cor <- b %>%
       dplyr::group_by(xlab, ylab) %>%
       dplyr::summarise(
-        r = cor(xvalue, yvalue,
+        r = cor(.data$xvalue, .data$yvalue,
           use = "pairwise.complete.obs",
           method = "pearson"
         ),

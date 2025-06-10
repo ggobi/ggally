@@ -508,6 +508,7 @@ ggparcoord <- function(
 
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
+    value = NULL # to be removed during plyr->dplyr migration
     d.sum <- ddply(data.m, c("variable"), summarize,
       min = min(value),
       max = max(value)
@@ -536,6 +537,7 @@ ggparcoord <- function(
 
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
+    variable = value = ggally_splineFactor = NULL # to be removed during plyr->dplyr migration
     if (inherits(splineFactor, "AsIs")) {
       data.m <- ddply(
         data.m, ".ID", transform,
