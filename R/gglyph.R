@@ -124,7 +124,7 @@ ref_lines <- function(data) {
   }
   cells %>%
     summarise(ref_line(.data), .by = "gid") %>%
-    arrange(gid)
+    arrange(.data$gid)
 }
 
 # Create reference boxes for a glyph plot
