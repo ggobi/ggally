@@ -1759,6 +1759,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #'   }
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 #' }
+#' @importFrom dplyr arrange summarise
 ggally_summarise_by <- function(
     data,
     mapping,
@@ -1770,17 +1771,14 @@ ggally_summarise_by <- function(
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {
-    res <- ddply(
-      data.frame(
-        x = eval_data_col(data, mapping$x),
-        y = eval_data_col(data, mapping$y),
-        weight = eval_data_col(data, mapping$weight) %||% 1,
-        stringsAsFactors = FALSE
-      ),
-      c("y"),
-      plyr::here(summarize),
-      label = text_fn(x, weight)
-    )
+    res <- data.frame(
+      x = eval_data_col(data, mapping$x),
+      y = eval_data_col(data, mapping$y),
+      weight = eval_data_col(data, mapping$weight) %||% 1,
+      stringsAsFactors = FALSE
+    ) %>%
+      summarise(label = text_fn(x, weight), .by = y) %>%
+      arrange(y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
       col <- as.name("y")
