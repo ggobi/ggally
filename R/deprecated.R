@@ -17,7 +17,6 @@ v1_ggmatrix_theme <- function() {
   )
 }
 
-
 #' Correlation value plot
 #'
 # \lifecycle{deprecated}
@@ -37,6 +36,7 @@ v1_ggmatrix_theme <- function() {
 #' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke
+#' @importFrom dplyr arrange mutate summarise
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export
@@ -103,7 +103,7 @@ ggally_cor_v1_5 <- function(
   }
 
   cor_fn <- function(x, y) {
-    # also do ddply below if fn is altered
+    # also do summarise below if fn is altered
     cor(x, y, method = method, use = use)
   }
 
@@ -195,21 +195,15 @@ ggally_cor_v1_5 <- function(
     !is.null(colorData) &&
       !inherits(colorData, "AsIs")
   ) {
-    cord <- ddply(
-      data.frame(x = xData, y = yData, color = colorData),
-      "color",
-      function(dt) {
-        cor_fn(dt$x, dt$y)
-      }
-    )
-    colnames(cord)[2] <- "correlation"
-
-    cord$correlation <- signif(as.numeric(cord$correlation), 3)
+    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
+      summarise(correlation = cor_fn(x, y), .by = .data$color) %>%
+      arrange(.data$color) %>%
+      mutate(correlation = signif(as.numeric(.data$correlation), 3L))
 
     # put in correct order
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
-    for (i in 1:nrow(cord)) {
+    for (i in seq_len(nrow(cord))) {
       for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j

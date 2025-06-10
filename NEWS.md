@@ -1,11 +1,15 @@
 # GGally (development version)
 
-* Prepare GGally for ggplot2 v4 (Thank you @teunbrand! #528)
+* Prepare GGally for `{ggplot2}` v4 (Thank you @teunbrand! #528)
+
+* Replace internal `{plyr}` usage with `{dplyr}`. (Thank you @MichaelChirico! #520, #521, #522, #523, #524, #525, #527, #530)
+
+* General package dependency cleanup. (Thank you @olivroy! #509)
 
 
 # GGally 2.2.1
 
-* Fix compatibility with ggplot2 3.5.0 (Thank you @teunbrand! #481)
+* Fix compatibility with `{ggplot2}` 3.5.0 (Thank you @teunbrand! #481)
 
 
 # GGally 2.2.0

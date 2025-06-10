@@ -1,3 +1,4 @@
+
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
 #' @param data data set to evaluate the data with
@@ -351,7 +352,6 @@ ggally_cor <- function(
   )
 }
 
-
 #' Generalized text display
 #'
 #' @param data data set using
@@ -369,6 +369,7 @@ ggally_cor <- function(
 #' @param align_percent relative align position of the text. When \code{title_hjust = 0.5} and \code{group_hjust = 0.5}, this should not be needed to be set.
 #' @param title_hjust,group_hjust \code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.
 #' @seealso \code{\link{ggally_cor}}
+#' @importFrom dplyr arrange summarise
 #' @export
 ggally_statistic <- function(
     data,
@@ -462,19 +463,14 @@ ggally_statistic <- function(
 
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
-    cord <- ddply(
-      data.frame(x = xData, y = yData, color = colorData),
-      "color",
-      function(dt) {
-        text_fn(dt$x, dt$y)
-      }
-    )
-    colnames(cord)[2] <- "text"
+    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
+      summarise(text = text_fn(x, y), .by = .data$color) %>%
+      arrange(.data$color)
 
     # put in correct order
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
-    for (i in 1:nrow(cord)) {
+    for (i in seq_len(nrow(cord))) {
       for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
@@ -1315,9 +1311,12 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- data %>%
-    summarise(freq = n(), .by = all_of(c(xName, yName))) %>%
-    arrange(pick(c(xName, yName)))
+  countData <-
+    dplyr::count(data, xvar = .data[[xName]], yvar = .data[[yName]], name = "freq") %>%
+    rename(
+      x = "xvar",
+      y = "yvar"
+    )
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
@@ -1739,6 +1738,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #'   }
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 #' }
+#' @importFrom dplyr arrange summarise
 ggally_summarise_by <- function(
     data,
     mapping,
@@ -1750,18 +1750,14 @@ ggally_summarise_by <- function(
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {
-    x = weight = NULL # to be removed during plyr->dplyr migration
-    res <- ddply(
-      data.frame(
-        x = eval_data_col(data, mapping$x),
-        y = eval_data_col(data, mapping$y),
-        weight = eval_data_col(data, mapping$weight) %||% 1,
-        stringsAsFactors = FALSE
-      ),
-      c("y"),
-      plyr::here(summarize),
-      label = text_fn(x, weight)
-    )
+    res <- data.frame(
+      x = eval_data_col(data, mapping$x),
+      y = eval_data_col(data, mapping$y),
+      weight = eval_data_col(data, mapping$weight) %||% 1,
+      stringsAsFactors = FALSE
+    ) %>%
+      summarise(label = text_fn(.data$x, .data$weight), .by = .data$y) %>%
+      arrange(.data$y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
       col <- as.name("y")

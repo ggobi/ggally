@@ -37,6 +37,8 @@
 #'   ggplot2::geom_path() +
 #'   ggplot2::theme_bw() +
 #'   ggplot2::labs(x = "", y = ""))
+#' @importFrom dplyr across arrange everything last_col relocate summarise
+#' @importFrom rlang := sym
 glyphs <- function(
     data,
     x_major, x_minor,
@@ -58,11 +60,15 @@ glyphs <- function(
   }
 
   if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
-    data <- ddply(data, "gid", function(df) {
-      df[[x_minor]] <- x_scale(df[[x_minor]])
-      df[[y_minor]] <- y_scale(df[[y_minor]])
-      df
-    })
+    data <- data %>%
+      summarise(
+        .by = "gid",
+        across(everything(), identity),
+        "{x_minor}" := x_scale(!!sym(x_minor)),
+        "{y_minor}" := y_scale(!!sym(y_minor))
+      ) %>%
+      arrange(.data$gid) %>%
+      relocate(.data$gid, .after = last_col())
   }
 
   if (polar) {
@@ -89,6 +95,8 @@ glyphs <- function(
 }
 
 # Create reference lines for a glyph plot
+#' @importFrom dplyr .data arrange summarise
+#' @noRd
 ref_lines <- function(data) {
   stopifnot(is.glyphplot(data))
 
@@ -114,7 +122,9 @@ ref_lines <- function(data) {
       )
     }
   }
-  ddply(cells, "gid", ref_line)
+  cells %>%
+    reframe(ref_line(.data), .by = "gid") %>%
+    arrange(.data$gid)
 }
 
 # Create reference boxes for a glyph plot
