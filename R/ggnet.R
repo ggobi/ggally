@@ -209,7 +209,7 @@ ggnet <- function(
 
   # -- packages ----------------------------------------------------------------
 
-  require_namespaces(c("network", "sna", "scales"))
+  rlang::check_installed(c("network", "sna", "scales"))
   # -- deprecations ------------------------------------------------------------
 
   if (length(mode) == 1 && mode == "geo") {

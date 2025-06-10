@@ -13,6 +13,7 @@ skip_if_not(rq(scales)) # sizing
 skip_if_not(rq(intergraph)) # test igraph conversion
 
 test_that("examples", {
+  skip_if_not_installed("network")
   ### --- start: documented examples
   set.seed(54321)
 
