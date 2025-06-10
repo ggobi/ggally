@@ -1747,6 +1747,7 @@ ggally_summarise_by <- function(
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {
+    x = weight = NULL # to be removed during plyr->dplyr migration
     res <- ddply(
       data.frame(
         x = eval_data_col(data, mapping$x),
@@ -1756,7 +1757,7 @@ ggally_summarise_by <- function(
       ),
       c("y"),
       plyr::here(summarize),
-      label = text_fn(.data$x, .data$weight)
+      label = text_fn(x, weight)
     )
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
