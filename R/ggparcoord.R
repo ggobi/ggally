@@ -77,7 +77,7 @@ if (getRversion() >= "2.15.1") {
 #' @param title character string denoting the title of the plot
 #' @author Jason Crowley, Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham
 #' @return ggplot object that if called, will print
-#' @importFrom plyr ddply summarize
+#' @importFrom dplyr across arrange bind_cols everything n reframe summarise mutate
 #' @importFrom stats complete.cases sd median mad lm spline
 #' @importFrom tidyr pivot_longer
 #' @export
@@ -512,10 +512,9 @@ ggparcoord <- function(
 
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
-    d.sum <- ddply(data.m, c("variable"), summarize,
-      min = min(value),
-      max = max(value)
-    )
+    d.sum <- data.m %>%
+      summarise(min = min(value), max = max(value), .by = variable) %>%
+      arrange(variable)
     p <- p + geom_linerange(
       data = d.sum, linewidth = I(10), col = shadeBox,
       inherit.aes = FALSE,
@@ -541,14 +540,24 @@ ggparcoord <- function(
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
     if (inherits(splineFactor, "AsIs")) {
-      data.m <- ddply(
-        data.m, ".ID", transform,
-        spline = spline(variable, value, n = ggally_splineFactor[1])
+      data.m <- bind_cols(
+        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1] / length(x)))),
+        mutate(
+          reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = ggally_splineFactor[1]))),
+          spline.x = x,
+          spline.y = y,
+          .keep = "none"
+        )
       )
     } else {
-      data.m <- ddply(
-        data.m, ".ID", transform,
-        spline = spline(variable, value, n = length(variable) * ggally_splineFactor[1])
+      data.m <- bind_cols(
+        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1]))),
+        mutate(
+          reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = n() * ggally_splineFactor[1]))),
+          spline.x = x,
+          spline.y = y,
+          .keep = "none"
+        )
       )
     }
 
