@@ -223,7 +223,7 @@ ggcorr <- function(
       names_to = "y",
       values_to = "coefficient"
     ) %>%
-    dplyr::rename(x = .data$.ggally_ggcorr_row_names) %>%
+    dplyr::rename(x = ".ggally_ggcorr_row_names") %>%
     dplyr::mutate(y = factor(.data$y, levels = rownames(m)))
   m_long$coefficient[m_long$coefficient == 0] <- NA
 
@@ -383,20 +383,20 @@ ggcorr <- function(
   if (label) {
     if (isTRUE(label_alpha)) {
       p <- p +
-        geom_text(aes(x, y, label = label, alpha = abs(coefficient)),
+        geom_text(aes(.data$x, .data$y, label = label, alpha = abs(.data$coefficient)),
           color = label_color, size = label_size,
           show.legend = FALSE
         )
     } else if (label_alpha > 0) {
       p <- p +
         geom_text(
-          aes(x, y, label = label),
+          aes(.data$x, .data$y, label = label),
           show.legend = FALSE,
           alpha = label_alpha, color = label_color, size = label_size
         )
     } else {
       p <- p +
-        geom_text(aes(x, y, label = label),
+        geom_text(aes(.data$x, .data$y, label = label),
           color = label_color, size = label_size
         )
     }
