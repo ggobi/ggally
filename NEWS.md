@@ -4,6 +4,8 @@
 
 * Replace internal {plyr} usage with {dplyr}. (Thank you @MichaelChirico! #520, #521, #522, #523, #524, #525, #527, #530)
 
+* General package dependecy cleanup. (Thank you @olivroy! #509)
+
 
 # GGally 2.2.1
 
