@@ -1,11 +1,3 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c(
-    "lon", "lat", "group", "id",
-    "lon1", "lat1", "lon2", "lat2",
-    ".label"
-  ))
-}
-
 #' Network plot map overlay
 #'
 #' Plots a network with \pkg{ggplot2} suitable for overlay on a \pkg{ggmap} plot or \pkg{ggplot2}

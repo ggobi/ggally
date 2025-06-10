@@ -1,18 +1,3 @@
-# add global variable
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(unique(c(
-    "labelp", # cor plot
-    c("x"), # facetdensitystrip plot
-    c("x"), # density diagonal plot
-    c("x", "y", "lab"), # internal axis plot
-    c("x", "y", "result", "freq"), # fluctuation plot
-    c("weight") # ggally_summarise_by
-  )))
-}
-
-
-
-
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
 #' @param data data set to evaluate the data with

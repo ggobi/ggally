@@ -1,8 +1,4 @@
 #' @importFrom dplyr all_of
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("variable", "value", "ggally_splineFactor", ".ggally_ggcorr_row_names"))
-}
-
 #' Parallel coordinate plot
 #'
 #' A function for plotting static parallel coordinate plots, utilizing

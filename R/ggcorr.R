@@ -1,7 +1,3 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("x", "y", "coefficient", "breaks", "label"))
-}
-
 #' Correlation matrix
 #'
 #' Function for making a correlation matrix plot, using \pkg{ggplot2}.

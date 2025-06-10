@@ -1,8 +1,3 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("xvalue", "yvalue", "scaled"))
-}
-
-
 #' lowertriangle - rearrange dataset as the preparation of \code{\link{ggscatmat}} function
 #'
 #' function for making the melted dataset used to plot the lowertriangle scatterplots.

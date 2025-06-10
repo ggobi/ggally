@@ -1,7 +1,3 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("cens", "surv", "up", "low"))
-}
-
 #' Survival curves
 #'
 #' This function produces Kaplan-Meier plots using \pkg{ggplot2}.
