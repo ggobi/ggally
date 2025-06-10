@@ -107,7 +107,7 @@ ggmatrix <- function(
     byrow = byrow
   )
 
-  attributes(plotMatrix)$class <- c("gg", "ggmatrix")
+  attributes(plotMatrix)$class <- c("ggmatrix", "gg")
 
   plotMatrix
 }
