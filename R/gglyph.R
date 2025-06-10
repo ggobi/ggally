@@ -37,6 +37,8 @@
 #'   ggplot2::geom_path() +
 #'   ggplot2::theme_bw() +
 #'   ggplot2::labs(x = "", y = ""))
+#' @importFrom dplyr across arrange everything last_col relocate summarise
+#' @importFrom rlang := sym
 glyphs <- function(
     data,
     x_major, x_minor,
@@ -47,22 +49,26 @@ glyphs <- function(
     x_scale = identity) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
 
-  if (is.rel(width)) {
+  if (inherits(width, "rel")) {
     width <- resolution(data[[x_major]], zero = FALSE) * unclass(width)
     message("Using width ", format(width, digits = 3))
   }
 
-  if (is.rel(height)) {
+  if (inherits(height, "rel")) {
     height <- resolution(data[[y_major]], zero = FALSE) * unclass(height)
     message("Using height ", format(height, digits = 3))
   }
 
   if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
-    data <- ddply(data, "gid", function(df) {
-      df[[x_minor]] <- x_scale(df[[x_minor]])
-      df[[y_minor]] <- y_scale(df[[y_minor]])
-      df
-    })
+    data <- data %>%
+      summarise(
+        .by = "gid",
+        across(everything(), identity),
+        "{x_minor}" := x_scale(!!sym(x_minor)),
+        "{y_minor}" := y_scale(!!sym(y_minor))
+      ) %>%
+      arrange(.data$gid) %>%
+      relocate(.data$gid, .after = last_col())
   }
 
   if (polar) {
@@ -89,6 +95,8 @@ glyphs <- function(
 }
 
 # Create reference lines for a glyph plot
+#' @importFrom dplyr .data arrange summarise
+#' @noRd
 ref_lines <- function(data) {
   stopifnot(is.glyphplot(data))
 
@@ -114,7 +122,9 @@ ref_lines <- function(data) {
       )
     }
   }
-  ddply(cells, "gid", ref_line)
+  cells %>%
+    reframe(ref_line(.data), .by = "gid") %>%
+    arrange(.data$gid)
 }
 
 # Create reference boxes for a glyph plot
@@ -206,36 +216,6 @@ print.glyphplot <- function(x, ...) {
   )
   # cat("\n")
 }
-
-
-# Relative dimensions --------------------------------------------------------
-
-# Relative dimensions
-#
-# @param x numeric value between 0 and 1
-# rel <- function(x) {
-#   structure(x, class = "rel")
-# }
-# @export
-# rel <- ggplot2::rel
-
-# @rdname rel
-# @param ... ignored
-# print.rel <- function(x, ...) {
-#   print(noquote(paste(x, " *", sep = "")))
-# }
-## works even though it is not exported
-# @export
-# ggplot2::print.rel
-
-# @rdname rel
-# is.rel <- function(x) {
-#   inherits(x, "rel")
-# }
-## only used internally.  and ggplot2 has this exported
-# @export
-# ggplot2:::is.rel
-is.rel <- ggplot2:::is.rel
 
 # Rescaling functions --------------------------------------------------------
 

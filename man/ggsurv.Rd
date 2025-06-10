@@ -120,7 +120,7 @@ if (require(survival) && require(scales)) {
       x = c(90, 125, 5, 60),
       y = c(0.8, 0.65, 0.55, 0.30),
       size = 5,
-      colour = scales::hue_pal(
+      colour = scales::pal_hue(
         h         = c(0, 360) + 15,
         c         = 100,
         l         = 65,

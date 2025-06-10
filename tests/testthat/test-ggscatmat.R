@@ -6,11 +6,11 @@ test_that("example", {
   flea2$species2 <- as.character(flea2$species)
   expect_warning(p <- ggscatmat(flea2, c(1:3)), "Factor variables are omitted in plot")
   expect_warning(p <- ggscatmat(flea2, c(2:3, 8)), "Factor variables are omitted in plot")
-  expect_true(is.null(p$labels$colour))
+  expect_true(is.null(get_labs(p)$colour))
   vdiffr::expect_doppelganger("flea", p)
 
   p <- ggscatmat(flea, columns = 2:4, color = "species")
-  expect_true(!is.null(p$labels$colour))
+  expect_true(!is.null(get_labs(p)$colour))
   vdiffr::expect_doppelganger("flea-color", p)
 })
 
