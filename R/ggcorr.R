@@ -219,7 +219,7 @@ ggcorr <- function(
   # names(m) = c("x", "y", "coefficient")
   m_long <- m %>%
     tidyr::pivot_longer(
-      cols = -.data$.ggally_ggcorr_row_names,
+      cols = -".ggally_ggcorr_row_names",
       names_to = "y",
       values_to = "coefficient"
     ) %>%

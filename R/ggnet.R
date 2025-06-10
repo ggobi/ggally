@@ -205,7 +205,7 @@ ggnet <- function(
 
   # -- packages ----------------------------------------------------------------
 
-  rlnag::check_installed(c("network", "sna", "scales"))
+  rlang::check_installed(c("network", "sna", "scales"))
   # -- deprecations ------------------------------------------------------------
 
   if (length(mode) == 1 && mode == "geo") {

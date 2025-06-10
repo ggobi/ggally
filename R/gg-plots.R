@@ -1314,7 +1314,7 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- dplyr::count(data, x = .data$xName, y = .data$yName, name = "freq")
+  countData <- dplyr::count(data, x = xName, y = yName, name = "freq")
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
@@ -1343,14 +1343,14 @@ ggally_ratio <- function(
     geom_tile(...) +
     scale_fill_identity() +
     scale_x_continuous(
-      name = xName,
+      name = .data$xName,
       limits = c(0.9999, length(xNames) + 1),
       breaks = 1:(length(xNames) + 1),
       labels = c(xNames, ""),
       minor_breaks = FALSE
     ) +
     scale_y_continuous(
-      name = yName,
+      name = .data$yName,
       limits = c(0.9999, length(yNames) + 1),
       breaks = 1:(length(yNames) + 1),
       labels = c(yNames, ""),
