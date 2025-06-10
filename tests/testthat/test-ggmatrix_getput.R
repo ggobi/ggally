@@ -31,8 +31,9 @@ test_that("get", {
     axisLabels = "show"
   )
   p <- a[2, 1]
-  expect_equal(p$labels$x, "total_bill")
-  expect_equal(p$labels$y, "tip")
+  labs <- get_labs(p)
+  expect_equal(labs$x, "total_bill")
+  expect_equal(labs$y, "tip")
 
   # test odd input and retrieve it
   a[2, 1] <- 1:4

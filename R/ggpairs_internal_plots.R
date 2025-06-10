@@ -261,7 +261,7 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
       "'str(", objName, ", raw = TRUE)'\n\n"
     ))
     obj$plots <- lapply(obj$plots, function(plotObj) {
-      if (ggplot2::is.ggplot(plotObj)) {
+      if (ggplot2::is_ggplot(plotObj)) {
         str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
       } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
         as.character(plotObj)

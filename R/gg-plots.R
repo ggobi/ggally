@@ -1447,7 +1447,7 @@ ggally_count <- function(data, mapping, ...) {
   args <- list(...)
   if (!"fill" %in% names(args)) {
     if (is.null(mapping$fill)) {
-      args$fill <- GeomRect$default_aes$fill
+      args$fill <- get_geom_defaults(GeomRect)$fill
     }
   }
 
