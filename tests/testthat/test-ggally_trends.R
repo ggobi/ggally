@@ -43,7 +43,7 @@ test_that("example", {
     ggplot(tips) +
       aes(x = day, y = as.integer(smoker == "Yes"), fill = sex) +
       stat_weighted_mean(geom = "bar", position = "dodge") +
-      scale_y_continuous(labels = scales::percent)
+      scale_y_continuous(labels = scales::label_percent())
   )
 
   # taking into account some weights
@@ -53,7 +53,7 @@ test_that("example", {
     ggplot(d) +
       aes(x = Class, y = as.integer(Survived == "Yes"), weight = Freq, fill = Sex) +
       geom_bar(stat = "weighted_mean", position = "dodge") +
-      scale_y_continuous(labels = scales::percent) +
+      scale_y_continuous(labels = scales::label_percent()) +
       labs(y = "Survived")
   )
 

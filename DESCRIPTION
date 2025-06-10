@@ -42,7 +42,7 @@ Imports:
     progress,
     RColorBrewer,
     rlang,
-    scales (>= 1.1.0),
+    scales (>= 1.3.0),
     utils,
     magrittr
 Suggests:
@@ -63,7 +63,6 @@ Suggests:
     sna (>= 2.3-2),
     survival,
     rmarkdown,
-    roxygen2,
     testthat,
     crosstalk,
     knitr,
