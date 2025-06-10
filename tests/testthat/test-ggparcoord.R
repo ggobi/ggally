@@ -239,7 +239,7 @@ test_that("basic", {
   # title supplied
   ttl <- "Parallel Coord. Plot of Diamonds Data"
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), title = ttl)
-  expect_equal(p$labels$title, ttl)
+  expect_equal(get_labs(p)$title, ttl)
 
   col <- "blue"
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), shadeBox = col)

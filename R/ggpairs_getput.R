@@ -84,7 +84,7 @@ getPlot <- function(pm, i, j) {
   if (is.null(plotObj)) {
     p <- ggally_blank()
   } else {
-    if (ggplot2::is.ggplot(plotObj)) {
+    if (ggplot2::is_ggplot(plotObj)) {
       p <- plotObj
     } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
       fn <- plotObj$fn
