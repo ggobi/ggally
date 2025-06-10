@@ -1321,7 +1321,12 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- dplyr::count(data, x = .data$xName, y = .data$yName, name = "freq")
+  countData <-
+    dplyr::count(data, xvar = .data[[xName]], yvar = .data[[yName]], name = "freq") %>%
+    rename(
+      x = "xvar",
+      y = "yvar"
+    )
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
