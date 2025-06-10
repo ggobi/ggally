@@ -1,3 +1,8 @@
+utils::globalVariables(
+  c(".x_col", ".y_col"), # ggfacet
+  NULL
+))
+
 #' Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}
 #'
 #'

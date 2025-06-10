@@ -1,3 +1,8 @@
+utils::globalVariables(c(
+  c("correlation"), # ggally_cor_v1_5
+  NULL
+))
+
 #' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
 #'
 # \lifecycle{deprecated}
@@ -16,7 +21,6 @@ v1_ggmatrix_theme <- function() {
     strip.placement = "outside"
   )
 }
-
 
 #' Correlation value plot
 #'

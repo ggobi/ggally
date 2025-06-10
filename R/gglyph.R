@@ -1,3 +1,8 @@
+utils::globalVariables(c(
+  c("gid"), # glyphs
+  NULL
+))
+
 #' Create \code{\link{glyphplot}} data
 #'
 #' Create the data needed to generate a glyph plot.
