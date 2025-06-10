@@ -123,7 +123,7 @@ ref_lines <- function(data) {
     }
   }
   cells %>%
-    summarise(ref_line(.data), .by = "gid") %>%
+    reframe(ref_line(.data), .by = "gid") %>%
     arrange(.data$gid)
 }
 
