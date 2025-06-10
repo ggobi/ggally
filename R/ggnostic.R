@@ -32,7 +32,7 @@ broomify <- function(model, lmStars = TRUE) {
     return(model)
   }
 
-  require_namespaces("broom")
+  rlang::check_installed("broom")
 
   broom_glance_info <- broom::glance(model)
   broom_tidy_coef <- broom::tidy(model)
@@ -496,7 +496,7 @@ fn_switch <- function(
   function(data, mapping, ...) {
     var <- mapping_string(mapping[[mapping_val]])
 
-    fn <- ifnull(types[[var]], types[["default"]])
+    fn <- types[[var]] %||% types[["default"]]
 
     if (is.null(fn)) {
       stop(str_c(

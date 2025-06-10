@@ -609,10 +609,7 @@ test_that("strip-top and strip-right", {
   data(tips)
 
   double_strips <- function(data, mapping, ...) {
-    cols <- c(mapping_string(mapping$x), mapping_string(mapping$y))
-    dt <- data %>%
-      summarise(freq = n(), .by = all_of(cols)) %>%
-      arrange(pick(cols))
+    dt <- dplyr::count(data, .data[[mapping_string(mapping$x)]], .data[[mapping_string(mapping$y)]], name = "freq")
     ggplot(dt, aes(xmin = 0.25, xmax = 0.75, ymin = 1, ymax = freq)) +
       geom_rect() +
       ggplot2::facet_grid(paste0(mapping_string(mapping$y), " ~ ", mapping_string(mapping$x))) +
@@ -665,7 +662,7 @@ test_that("subtypes", {
 
   gn <- function(x) {
     fnName <- attr(x, "name")
-    ifnull(fnName, x)
+    fnName %||% x
   }
 
   ggpairs_fn1 <- function(title, types, diag, ...) {

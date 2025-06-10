@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Barret Schloerke \email{schloerke@gmail.com}
+\strong{Maintainer}: Barret Schloerke \email{schloerke@gmail.com} (\href{https://orcid.org/0000-0001-9986-114X}{ORCID})
 
 Authors:
 \itemize{
