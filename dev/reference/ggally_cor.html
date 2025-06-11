@@ -68,7 +68,6 @@
 <span>  <span class="va">...</span>,</span>
 <span>  stars <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"pearson"</span>,</span>
-<span>  use <span class="op">=</span> <span class="st">"complete.obs"</span>,</span>
 <span>  display_grid <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  title_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>,</span>
@@ -76,6 +75,8 @@
 <span>  justify_labels <span class="op">=</span> <span class="st">"right"</span>,</span>
 <span>  align_percent <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Corr"</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  use <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  alignPercent <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  displayGrid <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -121,10 +122,6 @@
 <dd><p><code>method</code> supplied to cor function</p></dd>
 
 
-<dt id="arg-use">use<a class="anchor" aria-label="anchor" href="#arg-use"></a></dt>
-<dd><p><code>use</code> supplied to <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></code> function</p></dd>
-
-
 <dt id="arg-display-grid">display_grid<a class="anchor" aria-label="anchor" href="#arg-display-grid"></a></dt>
 <dd><p>if <code>TRUE</code>, display aligned panel grid lines. If <code>FALSE</code> (default), display a thin panel border.</p></dd>
 
@@ -151,6 +148,14 @@
 
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
 <dd><p>title text to be displayed</p></dd>
+
+
+<dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
+<dd><p>logical value which determines if <code>NA</code> values are removed. If <code>TRUE</code>, no warning message will be displayed.</p></dd>
+
+
+<dt id="arg-use">use<a class="anchor" aria-label="anchor" href="#arg-use"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a>. This variable is not used internally. Please remove it from your code.</p></dd>
 
 
 <dt id="arg-alignpercent-displaygrid">alignPercent, displayGrid<a class="anchor" aria-label="anchor" href="#arg-alignpercent-displaygrid"></a></dt>
