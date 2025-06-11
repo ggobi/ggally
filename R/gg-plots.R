@@ -240,15 +240,13 @@ ggally_density <- function(data, mapping, ...) {
 #'   \item{\code{""}}{otherwise}
 #' }
 #' @param method \code{method} supplied to cor function
-#' @details
-#' Missing values are handled internally by `cor.test()` using pairwise complete observations.
-#' The `use` argument is no longer supported.
 #' @param display_grid if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.
 #' @param digits number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.
 #' @param title_args arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}
 #' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
 #' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
 #' @param align_percent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
+#' @param use `r lifecycle::badge("deprecated")`. This variable is not used internally. Please remove it from your code.
 #' @param alignPercent,displayGrid `r lifecycle::badge("deprecated")`. Please use their snake-case counterparts.
 #' @param title title text to be displayed
 #' @author Barret Schloerke
@@ -296,8 +294,17 @@ ggally_cor <- function(
     justify_labels = "right",
     align_percent = 0.5,
     title = "Corr",
+    use = deprecated(),
     alignPercent = deprecated(),
     displayGrid = deprecated()) {
+  if (lifecycle::is_present(use)) {
+    lifecycle::deprecate_warn(
+      when = "2.3.0",
+      what = "ggally_cor(use)",
+      details = "`use=` is not leveraged within `ggally_cor()`. Please remove it from your code.`"
+    )
+  }
+
   if (lifecycle::is_present(alignPercent)) {
     lifecycle::deprecate_soft(
       when = "2.2.2",
