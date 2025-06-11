@@ -1,30 +1,64 @@
 #' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-# \lifecycle{deprecated}
+#' This function allows cleaner axis labels for your plots, but is deprecated.
+#' You can achieve the same effect by specifying strip's background and placement
+#' properties (see Examples).
+#'
+#' @keywords internal
 #'
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
+#' # Cleaner axis labels with v1_ggmatrix_theme
 #' p_(ggpairs(iris, 1:2) + v1_ggmatrix_theme())
-#' # move the column names to the left and bottom
+#'
+#' # Move the column names to the left and bottom
 #' p_(ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme())
+#'
+#' # Manually specifying axis labels properties
+#' p_(
+#'   ggpairs(iris, 1:2) +
+#'   theme(
+#'     strip.background = element_rect(fill = "white"),
+#'     strip.placement = "outside"
+#'   )
+#')
+#'
+#' # This way you have even more control over how the final plot looks.
+#' # For example, if you want to set the background color to yellow:
+#' p_(
+#'   ggpairs(iris, 1:2) +
+#'   theme(
+#'     strip.background = element_rect(fill = "yellow"),
+#'     strip.placement = "outside"
+#'   )
+#')
 v1_ggmatrix_theme <- function() {
+  lifecycle::deprecate_soft(
+    when = "2.2.2",
+    what = "v1_ggmatrix_theme()",
+    details = "This function will be removed in future releases."
+  )
   theme(
     strip.background = element_rect(fill = "white"),
     strip.placement = "outside"
   )
 }
 
-
 #' Correlation value plot
 #'
-# \lifecycle{deprecated}
-#'
-#' (Deprecated. See \code{\link{ggally_cor}}.)
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Estimate correlation from the given data.
+#'
+#' This function is deprecated and will be removed in future releases.
+#'
+#' See \code{\link{ggally_cor}}.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -37,10 +71,11 @@ v1_ggmatrix_theme <- function() {
 #' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke
+#' @importFrom dplyr arrange mutate summarise
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export
-#' @keywords hplot
+#' @keywords internal
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
@@ -77,6 +112,11 @@ ggally_cor_v1_5 <- function(
     corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
     displayGrid = TRUE,
     ...) {
+  lifecycle::deprecate_soft(
+    when = "2.2.2",
+    what = "ggally_cor_v1_5()",
+    with = "ggally_cor()"
+  )
   if (!is.null(corAlignPercent)) {
     stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
   }
@@ -103,7 +143,7 @@ ggally_cor_v1_5 <- function(
   }
 
   cor_fn <- function(x, y) {
-    # also do ddply below if fn is altered
+    # also do summarise below if fn is altered
     cor(x, y, method = method, use = use)
   }
 
@@ -195,21 +235,15 @@ ggally_cor_v1_5 <- function(
     !is.null(colorData) &&
       !inherits(colorData, "AsIs")
   ) {
-    cord <- ddply(
-      data.frame(x = xData, y = yData, color = colorData),
-      "color",
-      function(dt) {
-        cor_fn(dt$x, dt$y)
-      }
-    )
-    colnames(cord)[2] <- "correlation"
-
-    cord$correlation <- signif(as.numeric(cord$correlation), 3)
+    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
+      summarise(correlation = cor_fn(.data$x, .data$y), .by = "color") %>%
+      arrange(.data$color) %>%
+      mutate(correlation = signif(as.numeric(.data$correlation), 3L))
 
     # put in correct order
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
-    for (i in 1:nrow(cord)) {
+    for (i in seq_len(nrow(cord))) {
       for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
@@ -261,10 +295,10 @@ ggally_cor_v1_5 <- function(
     p <- p + geom_text(
       data = cordf,
       aes(
-        x = xPos,
-        y = yPos,
-        label = labelp,
-        color = labelp
+        x = .data$xPos,
+        y = .data$yPos,
+        label = .data$labelp,
+        color = .data$labelp
       ),
       hjust = 1,
       ...

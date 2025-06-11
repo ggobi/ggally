@@ -50,10 +50,14 @@ test_that("add_list", {
 })
 
 test_that("v1_ggmatrix_theme", {
-  pm <- ggpairs(tips, 1:2)
+  expect_snapshot(
+    {
+      pm <- ggpairs(tips, 1:2)
 
-  pm1 <- pm + v1_ggmatrix_theme()
+      pm1 <- pm + v1_ggmatrix_theme()
 
-  expect_true(is.null(pm$gg))
-  expect_true(!is.null(pm1$gg))
+      expect_true(is.null(pm$gg))
+      expect_true(!is.null(pm1$gg))
+    }
+  )
 })

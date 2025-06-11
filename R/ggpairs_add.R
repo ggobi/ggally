@@ -24,7 +24,6 @@
 #' @param e2 A component to add to \code{e1}
 #'
 #' @export
-#' @seealso [ggplot2::+.gg] and [ggplot2::theme()]
 #' @method + gg
 #' @rdname gg-add
 #' @examples
@@ -44,19 +43,24 @@
 #' p_(pm + extra)
 "+.gg" <- function(e1, e2) {
   if (!is.ggmatrix(e1)) {
-    return(e1 %+% e2)
+    if ("add_gg" %in% getNamespaceExports("ggplot2")) {
+      fn <- utils::getFromNamespace("add_gg", "ggplot2")
+    } else {
+      fn <- ggplot2::`%+%`
+    }
+    return(fn(e1, e2))
   }
 
   if (is.null(e1$gg)) {
     e1$gg <- list()
   }
-  if (inherits(e2, "labels")) {
+  if (inherits(e2, c("labels", "ggplot2::labels"))) {
     add_labels_to_ggmatrix(e1, e2)
-  } else if (is.theme(e2)) {
+  } else if (is_theme(e2)) {
     add_theme_to_ggmatrix(e1, e2)
   } else if (is.list(e2)) {
     add_list_to_ggmatrix(e1, e2)
-  } else if (is.ggproto(e2)) {
+  } else if (is_ggproto(e2)) {
     add_to_ggmatrix(e1, e2)
   } else {
     stop(
@@ -97,7 +101,7 @@ add_labels_to_ggmatrix <- function(e1, e2) {
 
   if (length(non_ggmatrix_labels) > 0) {
     if (is.null(e1$gg$labs)) {
-      e1$gg$labs <- structure(list(), class = "labels")
+      e1$gg$labs <- labs()
     }
     e1$gg$labs[non_ggmatrix_labels] <- e2[non_ggmatrix_labels]
   }
@@ -114,7 +118,7 @@ add_theme_to_ggmatrix <- function(e1, e2) {
     e1$gg$theme <- e2
   } else {
     # calls ggplot2 add method and stores the result in gg
-    e1$gg$theme <- e1$gg$theme %+% e2
+    e1$gg$theme <- e1$gg$theme + e2
   }
   e1
 }
@@ -148,7 +152,7 @@ add_to_ggmatrix <- function(
   if (!is.ggmatrix(e1)) {
     stop("e1 should be a ggmatrix.")
   }
-  if (!is.ggproto(e2)) {
+  if (!is_ggproto(e2)) {
     stop("e2 should be a ggproto object.")
   }
 

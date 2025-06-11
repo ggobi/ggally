@@ -153,6 +153,18 @@ test_that("splineFactor", {
   expect_equal(mapping_string(get("mapping", p$layers[[2]])$y), "value")
 })
 
+test_that("splineFactor as is", {
+  iris2 <- iris
+  iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
+
+  k <- 4
+  p_no_visible_spline <- ggparcoord(data = iris2, columns = seq_len(k), groupColumn = 5, splineFactor = I(k))
+  p_single_split_between <- ggparcoord(data = iris2, columns = seq_len(k), groupColumn = 5, splineFactor = I(2 * k))
+
+  vdiffr::expect_doppelganger("ggparcoord-splineFactor-as-is-4", p_no_visible_spline)
+  vdiffr::expect_doppelganger("ggparcoord-splineFactor-as-is-8", p_single_split_between)
+})
+
 test_that("groupColumn", {
   ds2 <- diamonds.samp
   ds2$color <- mapping_string(ds2$color)
@@ -227,6 +239,17 @@ test_that("order", {
   }
 })
 
+test_that("missing and order(anyClass)", {
+  ds2 <- diamonds.samp
+  ds2[3, 1] <- NA
+  missing_options <- c("exclude", "mean", "median", "min10", "random")
+
+  for (missing in missing_options) {
+    p <- ggparcoord(data = ds2, columns = c(1, 5:10), groupColumn = 2, missing = missing, order = "anyClass")
+  }
+  expect_true(TRUE)
+})
+
 test_that("basic", {
   # no color supplied
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
@@ -239,7 +262,7 @@ test_that("basic", {
   # title supplied
   ttl <- "Parallel Coord. Plot of Diamonds Data"
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), title = ttl)
-  expect_equal(p$labels$title, ttl)
+  expect_equal(get_labs(p)$title, ttl)
 
   col <- "blue"
   p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), shadeBox = col)

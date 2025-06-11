@@ -1,7 +1,3 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("cens", "surv", "up", "low"))
-}
-
 #' Survival curves
 #'
 #' This function produces Kaplan-Meier plots using \pkg{ggplot2}.
@@ -84,7 +80,7 @@ if (getRversion() >= "2.15.1") {
 #'       x = c(90, 125, 5, 60),
 #'       y = c(0.8, 0.65, 0.55, 0.30),
 #'       size = 5,
-#'       colour = scales::hue_pal(
+#'       colour = scales::pal_hue(
 #'         h         = c(0, 360) + 15,
 #'         c         = 100,
 #'         l         = 65,
@@ -111,9 +107,9 @@ ggsurv <- function(
     ylab = "Survival",
     main = "",
     order.legend = TRUE) {
-  require_namespaces(c("survival", "scales"))
+  rlang::check_installed(c("survival", "scales"))
 
-  strata <- ifelse(is.null(s$strata) == TRUE, 1, length(s$strata))
+  strata <- ifelse(is.null(s$strata), 1, length(s$strata))
   stopifnot(length(surv.col) == 1 | length(surv.col) == strata)
   stopifnot(length(lty.est) == 1 | length(lty.est) == strata)
 
@@ -158,11 +154,11 @@ ggsurv_s <- function(
     low  = c(1, s$lower),
     cens = c(0, s$n.censor)
   )
-  dat.cens <- subset(dat, cens != 0)
+  dat.cens <- dat[!is.na(dat$cens) & dat$cens != 0, ]
 
   col <- ifelse(surv.col == "gg.def", "black", surv.col)
 
-  pl <- ggplot(dat, aes(x = time, y = surv)) +
+  pl <- ggplot(dat, aes(x = .data$time, y = .data$surv)) +
     geom_step(col = col, lty = lty.est, linewidth = size.est) +
     xlab(xlab) +
     ylab(ylab) +
@@ -170,8 +166,8 @@ ggsurv_s <- function(
 
   if (identical(CI, TRUE) | identical(CI, "def")) {
     pl <- pl +
-      geom_step(aes(y = up), color = col, lty = lty.ci, linewidth = size.ci) +
-      geom_step(aes(y = low), color = col, lty = lty.ci, linewidth = size.ci)
+      geom_step(aes(y = .data$up), color = col, lty = lty.ci, linewidth = size.ci) +
+      geom_step(aes(y = .data$low), color = col, lty = lty.ci, linewidth = size.ci)
   }
 
   if (identical(plot.cens, TRUE)) {
@@ -182,7 +178,7 @@ ggsurv_s <- function(
 
     pl <- pl + geom_point(
       data    = dat.cens,
-      mapping = aes(y = surv),
+      mapping = aes(y = .data$surv),
       shape   = cens.shape,
       col     = col,
       size    = cens.size
@@ -277,8 +273,8 @@ ggsurv_m <- function(
 
   dat <- do.call(rbind, gr.df)
 
-  pl <- ggplot(dat, aes(x = time, y = surv, group = group)) +
-    geom_step(aes(col = group, lty = group), linewidth = size.est) +
+  pl <- ggplot(dat, aes(x = .data$time, y = .data$surv, group = .data$group)) +
+    geom_step(aes(col = .data$group, lty = .data$group), linewidth = size.est) +
     xlab(xlab) +
     ylab(ylab) +
     ggtitle(main)
@@ -308,13 +304,13 @@ ggsurv_m <- function(
       surv.col
     }
     pl <- pl +
-      geom_step(aes(y = up, lty = group, col = group), lty = stepLty, linewidth = size.ci) +
-      geom_step(aes(y = low, lty = group, col = group), lty = stepLty, linewidth = size.ci)
+      geom_step(aes(y = .data$up, lty = .data$group, col = .data$group), lty = stepLty, linewidth = size.ci) +
+      geom_step(aes(y = .data$low, lty = .data$group, col = .data$group), lty = stepLty, linewidth = size.ci)
   }
 
   if (identical(plot.cens, TRUE)) {
-    dat.cens <- subset(dat, cens != 0)
-    dat.cens <- subset(dat.cens, group != "PKD")
+    dat.cens <- dat[!is.na(dat$cens) & dat$cens != 0, ]
+    dat.cens <- dat.cens[!is.na(dat.cens$group) & dat.cens$group != "PKD", ]
 
     if (nrow(dat.cens) == 0) {
       stop("There are no censored observations")
@@ -324,7 +320,7 @@ ggsurv_m <- function(
         # match the colors of the lines
         pl <- pl + geom_point(
           data = dat.cens,
-          mapping = aes(y = surv, col = group),
+          mapping = aes(y = .data$surv, col = .data$group),
           shape = cens.shape,
           size = cens.size,
           show.legend = FALSE
@@ -333,7 +329,7 @@ ggsurv_m <- function(
         # supply the raw color value
         pl <- pl + geom_point(
           data    = dat.cens,
-          mapping = aes(y = surv),
+          mapping = aes(y = .data$surv),
           shape   = cens.shape,
           color   = cens.col,
           size    = cens.size
@@ -356,7 +352,7 @@ ggsurv_m <- function(
         # match the group color value
         pl <- pl + geom_point(
           data = dat.cens,
-          mapping = aes(y = surv, col = group),
+          mapping = aes(y = .data$surv, col = .data$group),
           shape = cens.shape,
           show.legend = FALSE,
           size = cens.size
@@ -374,14 +370,14 @@ ggsurv_m <- function(
         }
         for (i in seq_along(uniqueGroupVals)) {
           groupVal <- uniqueGroupVals[i]
-          dtGroup <- subset(dat.cens, group == groupVal)
+          dtGroup <- dat.cens[!is.na(dat.cens$group) & dat.cens$group == groupVal, ]
           if (nrow(dtGroup) == 0) {
             next
           }
 
           pl <- pl + geom_point(
             data = dtGroup,
-            mapping = aes(y = surv),
+            mapping = aes(y = .data$surv),
             color = I(cens.col[i]),
             shape = cens.shape[i],
             show.legend = FALSE,

@@ -73,7 +73,7 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
     args$shape <- 22
   }
   if (is.null(mapping$fill) && is.null(args$fill)) {
-    args$fill <- GeomRect$default_aes$fill
+    args$fill <- get_geom_defaults(GeomRect)$fill
   }
   args$keep.zero.cells <- FALSE
 

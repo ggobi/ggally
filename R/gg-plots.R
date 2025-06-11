@@ -1,17 +1,3 @@
-# add global variable
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(unique(c(
-    "labelp", # cor plot
-    c("x"), # facetdensitystrip plot
-    c("x"), # density diagonal plot
-    c("x", "y", "lab"), # internal axis plot
-    c("x", "y", "result", "freq"), # fluctuation plot
-    c("weight") # ggally_summarise_by
-  )))
-}
-
-
-
 
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
@@ -33,7 +19,7 @@ eval_data_col <- function(data, aes_col) {
 #' mapping <- ggplot2::aes(Petal.Length)
 #' mapping_string(mapping$x)
 mapping_string <- function(aes_col) {
-  gsub("^~", "", deparse(aes_col, 500L))
+  gsub("^~(?:\\.data\\$)?", "", deparse(aes_col, 500L))
 }
 
 # is categories on the left?
@@ -225,7 +211,7 @@ ggally_density <- function(data, mapping, ...) {
   p <- ggplot(data = data) +
     geom_point(
       data = data.frame(rangeX = rangeX, rangeY = rangeY),
-      mapping = aes(x = !!as.name("rangeX"), y = !!as.name("rangeY")),
+      mapping = aes(x = .data$rangeX, y = .data$rangeY),
       alpha = 0
     )
 
@@ -261,10 +247,11 @@ ggally_density <- function(data, mapping, ...) {
 #' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
 #' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
 #' @param align_percent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
-#' @param alignPercent,displayGrid deprecated. Please use their snake-case counterparts.
+#' @param alignPercent,displayGrid `r lifecycle::badge("deprecated")`. Please use their snake-case counterparts.
 #' @param title title text to be displayed
 #' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
+#' @importFrom lifecycle deprecated
 #' @seealso \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 #' @export
 #' @keywords hplot
@@ -308,14 +295,22 @@ ggally_cor <- function(
     justify_labels = "right",
     align_percent = 0.5,
     title = "Corr",
-    alignPercent = warning("deprecated. Use `align_percent`"),
-    displayGrid = warning("deprecated. Use `display_grid`")) {
-  if (!missing(alignPercent)) {
-    warning("`alignPercent` is deprecated. Please use `align_percent` if alignment still needs to be adjusted")
+    alignPercent = deprecated(),
+    displayGrid = deprecated()) {
+  if (lifecycle::is_present(alignPercent)) {
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = "ggally_cor(alignPercent)",
+      details = "Please use `align_percent` if alignment still needs to be adjusted."
+    )
     align_percent <- alignPercent
   }
-  if (!missing(displayGrid)) {
-    warning("`displayGrid` is deprecated. Please use `display_grid`")
+  if (lifecycle::is_present(displayGrid)) {
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = "ggally_cor(displayGrid)",
+      details = "Please use `display_grid`"
+    )
     display_grid <- displayGrid
   }
 
@@ -371,7 +366,6 @@ ggally_cor <- function(
   )
 }
 
-
 #' Generalized text display
 #'
 #' @param data data set using
@@ -389,6 +383,7 @@ ggally_cor <- function(
 #' @param align_percent relative align position of the text. When \code{title_hjust = 0.5} and \code{group_hjust = 0.5}, this should not be needed to be set.
 #' @param title_hjust,group_hjust \code{hjust} sent to \code{\link[ggplot2]{geom_text}()} for the title and group values respectively. Any \code{hjust} value supplied in \code{title_args} or \code{group_args} will take precedence.
 #' @seealso \code{\link{ggally_cor}}
+#' @importFrom dplyr arrange summarise
 #' @export
 ggally_statistic <- function(
     data,
@@ -482,19 +477,14 @@ ggally_statistic <- function(
 
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
-    cord <- ddply(
-      data.frame(x = xData, y = yData, color = colorData),
-      "color",
-      function(dt) {
-        text_fn(dt$x, dt$y)
-      }
-    )
-    colnames(cord)[2] <- "text"
+    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
+      summarise(text = text_fn(.data$x, .data$y), .by = "color") %>%
+      arrange(.data$color)
 
     # put in correct order
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
-    for (i in 1:nrow(cord)) {
+    for (i in seq_len(nrow(cord))) {
       for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
@@ -537,10 +527,10 @@ ggally_statistic <- function(
       list(
         data = cordf,
         aes(
-          x = !!as.name("xPos"),
-          y = !!as.name("yPos"),
-          label = !!as.name("labelp"),
-          color = !!as.name("labelp")
+          x     = .data$xPos,
+          y     = .data$yPos,
+          label = .data$labelp,
+          color = .data$labelp
         )
       ),
       group_args
@@ -882,7 +872,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(!!as.name("scaled")) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -938,7 +928,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(!!as.name("scaled")) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -987,7 +977,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
         aes(
-          y = after_stat(!!as.name("density")) / max(after_stat(!!as.name("density"))) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("density")) / max(after_stat(!!as.name("density"))) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
         ),
         ...
       ) + coord_cartesian(ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE))
@@ -1038,10 +1028,10 @@ ggally_text <- function(
     theme(
       panel.grid.minor = element_blank(),
       panel.grid.major = element_line(
-        colour = ifnull(theme$panel.background$fill, NA)
+        colour = theme$panel.background$fill %||% NA
       ),
       panel.background = element_rect(
-        fill = ifnull(theme$panel.grid.major$colour, NA)
+        fill = theme$panel.grid.major$colour %||% NA
       )
     ) +
     labs(x = NULL, y = NULL)
@@ -1065,8 +1055,8 @@ ggally_text <- function(
     p <- p +
       geom_text(label = label, mapping = mapping, ...)
   } else {
-    bg <- ifnull(theme$panel.background$fill, "grey92")
-    fg <- ifnull(theme$axis.text$colour, "gray30")
+    bg <- theme$panel.background$fill %||% "grey92"
+    fg <- theme$axis.text$colour %||% "gray30"
     colour <- scales::colour_ramp(c(bg, fg))(0.75)
     p <- p +
       geom_text(label = label, mapping = mapping, colour = colour, ...)
@@ -1212,11 +1202,11 @@ ggally_diagAxis <- function(
     p <- p + geom_text(
       data = axisBreaks,
       mapping = aes(
-        x     = !!as.name("xPos"),
-        y     = !!as.name("yPos"),
-        label = !!as.name("lab"),
-        hjust = !!as.name("hjust"),
-        vjust = !!as.name("vjust")
+        x     = .data$xPos,
+        y     = .data$yPos,
+        label = .data$lab,
+        hjust = .data$hjust,
+        vjust = .data$"vjust"
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1249,9 +1239,9 @@ ggally_diagAxis <- function(
     p <- p + geom_text(
       data = axisLabs,
       mapping = aes(
-        x     = !!as.name("x"),
-        y     = !!as.name("y"),
-        label = !!as.name("lab")
+        x     = .data$x,
+        y     = .data$y,
+        label = .data$lab
       ),
       col = "grey50",
       size = gridLabelSize
@@ -1324,6 +1314,7 @@ ggally_facetbar <- function(data, mapping, ...) {
 #'   tips, ggplot2::aes(sex, day),
 #'   floor = 20, ceiling = 50
 #' ) + ggplot2::theme(aspect.ratio = 4 / 2))
+#' @importFrom dplyr all_of arrange n pick summarise
 ggally_ratio <- function(
     data,
     mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
@@ -1334,19 +1325,19 @@ ggally_ratio <- function(
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
-  countData <- plyr::count(data, vars = c(xName, yName))
-
-  # overwrite names so name clashes don't happen
-  colnames(countData)[1:2] <- c("x", "y")
+  countData <-
+    dplyr::count(data, xvar = .data[[xName]], yvar = .data[[yName]], name = "freq") %>%
+    rename(
+      x = "xvar",
+      y = "yvar"
+    )
 
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
 
-  countData <- subset(countData, freq >= floor)
+  countData <- countData[!is.na(countData$freq) & countData$freq >= floor, ]
 
-  if (is.null(ceiling)) {
-    ceiling <- max(countData$freq)
-  }
+  ceiling <- ceiling %||% max(countData$freq)
 
   countData[["freqSize"]] <- sqrt(pmin(countData[["freq"]], ceiling) / ceiling)
   countData[["col"]] <- ifelse(countData[["freq"]] > ceiling, "grey30", "grey50")
@@ -1358,11 +1349,11 @@ ggally_ratio <- function(
     ggplot(
       data = countData,
       mapping = aes(
-        x = !!as.name("xPos"),
-        y = !!as.name("yPos"),
-        height = !!as.name("freqSize"),
-        width = !!as.name("freqSize"),
-        fill = !!as.name("col")
+        x = .data$xPos,
+        y = .data$yPos,
+        height = .data$freqSize,
+        width = .data$freqSize,
+        fill = .data$col
       )
     ) +
     geom_tile(...) +
@@ -1452,7 +1443,7 @@ ggally_count <- function(data, mapping, ...) {
   args <- list(...)
   if (!"fill" %in% names(args)) {
     if (is.null(mapping$fill)) {
-      args$fill <- GeomRect$default_aes$fill
+      args$fill <- get_geom_defaults(GeomRect)$fill
     }
   }
 
@@ -1701,7 +1692,7 @@ ggally_naDiag <- function(...) {
 #'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
 #' ))
 ggally_autopoint <- function(data, mapping, ...) {
-  require_namespaces("ggforce")
+  rlang::check_installed("ggforce")
 
   args <- list(...)
   if (!"alpha" %in% names(args) && is.null(mapping$alpha)) {
@@ -1761,6 +1752,7 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #'   }
 #'   p_(ggally_summarise_by(tips, mapping = aes(x = total_bill, y = day), text_fn = weighted_sum))
 #' }
+#' @importFrom dplyr arrange summarise
 ggally_summarise_by <- function(
     data,
     mapping,
@@ -1772,17 +1764,14 @@ ggally_summarise_by <- function(
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {
-    res <- ddply(
-      data.frame(
-        x = eval_data_col(data, mapping$x),
-        y = eval_data_col(data, mapping$y),
-        weight = eval_data_col(data, mapping$weight) %||% 1,
-        stringsAsFactors = FALSE
-      ),
-      c("y"),
-      plyr::here(summarize),
-      label = text_fn(x, weight)
-    )
+    res <- data.frame(
+      x = eval_data_col(data, mapping$x),
+      y = eval_data_col(data, mapping$y),
+      weight = eval_data_col(data, mapping$weight) %||% 1,
+      stringsAsFactors = FALSE
+    ) %>%
+      summarise(label = text_fn(.data$x, .data$weight), .by = "y") %>%
+      arrange(.data$y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
       col <- as.name("y")
@@ -1791,7 +1780,7 @@ ggally_summarise_by <- function(
     }
 
     ggplot(res) +
-      aes(y = !!as.name("y"), x = 1, label = !!as.name("label"), colour = !!col) +
+      aes(y = .data$y, x = 1, label = .data$label, colour = !!col) +
       geom_text(...) +
       xlab("") +
       ylab(mapping_string(mapping$y)) +
@@ -1834,7 +1823,7 @@ ggally_summarise_by <- function(
 #' \code{weighted_median_iqr} computes weighted median and interquartile range.
 #' @export
 weighted_median_iqr <- function(x, weights = NULL) {
-  require_namespaces("Hmisc")
+  rlang::check_installed("Hmisc")
   s <- round(Hmisc::wtd.quantile(x, weights = weights, probs = c(.25, .5, .75), na.rm = TRUE), digits = 1)
   paste0("Median: ", s[2], " [", s[1], "-", s[3], "]")
 }
@@ -1844,7 +1833,7 @@ weighted_median_iqr <- function(x, weights = NULL) {
 #' \code{weighted_mean_sd} computes weighted mean and standard deviation.
 #' @export
 weighted_mean_sd <- function(x, weights = NULL) {
-  require_namespaces("Hmisc")
+  rlang::check_installed("Hmisc")
   m <- round(Hmisc::wtd.mean(x, weights = weights, na.rm = TRUE), digits = 1)
   sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
   paste0("Mean: ", m, " (", sd, ")")
