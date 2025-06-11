@@ -307,7 +307,7 @@ ggally_cor <- function(
 
   if (lifecycle::is_present(alignPercent)) {
     lifecycle::deprecate_soft(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggally_cor(alignPercent)",
       details = "Please use `align_percent` if alignment still needs to be adjusted."
     )
@@ -315,7 +315,7 @@ ggally_cor <- function(
   }
   if (lifecycle::is_present(displayGrid)) {
     lifecycle::deprecate_soft(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggally_cor(displayGrid)",
       details = "Please use `display_grid`"
     )
