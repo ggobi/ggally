@@ -1345,14 +1345,14 @@ ggally_ratio <- function(
     geom_tile(...) +
     scale_fill_identity() +
     scale_x_continuous(
-      name = .data$xName,
+      name = xName,
       limits = c(0.9999, length(xNames) + 1),
       breaks = 1:(length(xNames) + 1),
       labels = c(xNames, ""),
       minor_breaks = FALSE
     ) +
     scale_y_continuous(
-      name = .data$yName,
+      name = yName,
       limits = c(0.9999, length(yNames) + 1),
       breaks = 1:(length(yNames) + 1),
       labels = c(yNames, ""),
