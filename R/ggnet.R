@@ -215,7 +215,7 @@ ggnet <- function(
 
   if (length(mode) == 1 && mode == "geo") {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggnet(mode='cannot be `geo`')",
       details = "Please use mode = c('lon', 'lat') instead"
     )
@@ -224,7 +224,7 @@ ggnet <- function(
 
   if (lifecycle::is_present(names)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggnet(names)",
       details = "Please use group.legend and size.legend instead"
     )
@@ -234,7 +234,7 @@ ggnet <- function(
 
   if (lifecycle::is_present(quantize.weights)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggnet(quantize.weights)",
       details = "Please use weight.cut instead"
     )
@@ -243,7 +243,7 @@ ggnet <- function(
 
   if (lifecycle::is_present(subset.threshold)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggnet(subset.threshold)",
       details = "Please use weight.min instead"
     )
@@ -252,14 +252,14 @@ ggnet <- function(
 
   if (lifecycle::is_present(top8.nodes)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggnet(top8.nodes)"
     )
   }
 
   if (lifecycle::is_present(trim.labels)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggnet(trim.labels)",
       details = "Please use label.trim instead"
     )

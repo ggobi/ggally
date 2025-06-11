@@ -240,18 +240,19 @@ ggally_density <- function(data, mapping, ...) {
 #'   \item{\code{""}}{otherwise}
 #' }
 #' @param method \code{method} supplied to cor function
-#' @param use \code{use} supplied to \code{\link[stats]{cor}} function
 #' @param display_grid if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.
 #' @param digits number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.
 #' @param title_args arguments being supplied to the title's \code{\link[ggplot2]{geom_text}()}
 #' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
 #' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
 #' @param align_percent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
+#' @param use `r lifecycle::badge("deprecated")`. This variable is not used internally. Please remove it from your code.
 #' @param alignPercent,displayGrid `r lifecycle::badge("deprecated")`. Please use their snake-case counterparts.
 #' @param title title text to be displayed
 #' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
 #' @importFrom lifecycle deprecated
+#' @inheritParams ggally_statistic
 #' @seealso \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 #' @export
 #' @keywords hplot
@@ -287,7 +288,6 @@ ggally_cor <- function(
     ...,
     stars = TRUE,
     method = "pearson",
-    use = "complete.obs",
     display_grid = FALSE,
     digits = 3,
     title_args = list(...),
@@ -295,11 +295,21 @@ ggally_cor <- function(
     justify_labels = "right",
     align_percent = 0.5,
     title = "Corr",
+    na.rm = NA,
+    use = deprecated(),
     alignPercent = deprecated(),
     displayGrid = deprecated()) {
+  if (lifecycle::is_present(use)) {
+    lifecycle::deprecate_warn(
+      when = "2.3.0",
+      what = "ggally_cor(use)",
+      details = "`use=` is not leveraged within `ggally_cor()`. Please remove it from your code.`"
+    )
+  }
+
   if (lifecycle::is_present(alignPercent)) {
     lifecycle::deprecate_soft(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggally_cor(alignPercent)",
       details = "Please use `align_percent` if alignment still needs to be adjusted."
     )
@@ -307,20 +317,12 @@ ggally_cor <- function(
   }
   if (lifecycle::is_present(displayGrid)) {
     lifecycle::deprecate_soft(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggally_cor(displayGrid)",
       details = "Please use `display_grid`"
     )
     display_grid <- displayGrid
   }
-
-  na.rm <-
-    if (missing(use)) {
-      # display warnings
-      NA
-    } else {
-      (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete"))
-    }
 
   ggally_statistic(
     data = data,
@@ -347,7 +349,7 @@ ggally_cor <- function(
         return("NA")
       }
 
-      corObj <- stats::cor.test(x, y, method = method, use = use)
+      corObj <- stats::cor.test(x, y, method = method)
 
       # make sure all values have X-many decimal places
       cor_est <- as.numeric(corObj$estimate)

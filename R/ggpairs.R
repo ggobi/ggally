@@ -438,7 +438,7 @@ ggduo <- function(
     legends = deprecated()) {
   if (lifecycle::is_present(legends)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggduo(legends)",
       details = "Ability to put legends in each plot will be dropped in next releases."
     )
@@ -769,14 +769,14 @@ ggpairs <- function(
     legends = deprecated()) {
   if (lifecycle::is_present(legends)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggpairs(legends)",
       details = "Ability to put legends in each plot will be dropped in next releases."
     )
   }
   if (lifecycle::is_present(params)) {
     lifecycle::deprecate_warn(
-      when = "2.2.2",
+      when = "2.3.0",
       what = "ggpairs(params)"
     )
   }
@@ -784,7 +784,7 @@ ggpairs <- function(
     TRUE
   })
   if (isTRUE(has_dots)) {
-    lifecycle::deprecate_soft(when = "2.2.2", what = "ggpais(...)")
+    lifecycle::deprecate_soft(when = "2.3.0", what = "ggpais(...)")
   }
 
   isSharedData <- inherits(data, "SharedData")

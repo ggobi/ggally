@@ -39,7 +39,7 @@
 #')
 v1_ggmatrix_theme <- function() {
   lifecycle::deprecate_soft(
-    when = "2.2.2",
+    when = "2.3.0",
     what = "v1_ggmatrix_theme()",
     details = "This function will be removed in future releases."
   )
@@ -113,7 +113,7 @@ ggally_cor_v1_5 <- function(
     displayGrid = TRUE,
     ...) {
   lifecycle::deprecate_soft(
-    when = "2.2.2",
+    when = "2.3.0",
     what = "ggally_cor_v1_5()",
     with = "ggally_cor()"
   )

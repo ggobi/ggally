@@ -30,13 +30,12 @@ test_that("density", {
 test_that("cor", {
   ti <- tips
   class(ti) <- c("NOTFOUND", "data.frame")
-  p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), use = "complete.obs")
+  p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day))
   expect_equal(mapping_string(get("mapping", envir = p$layers[[2]])$colour), "labelp")
 
   p <- ggally_cor(
     ti,
-    ggplot2::aes(x = total_bill, y = tip, color = I("blue")),
-    use = "complete.obs"
+    ggplot2::aes(x = total_bill, y = tip, color = I("blue"))
   )
   expect_equal(mapping_string(get("mapping", envir = p$layers[[1]])$colour), "I(\"blue\")")
 
@@ -69,6 +68,7 @@ test_that("cor", {
       msg
     )
   }
+
   expect_warn(ti2, "Removing 1 row that")
   expect_warn(ti3, "Removed 3 rows containing")
 
@@ -125,7 +125,7 @@ test_that("dates", {
   class(nas) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(nas, ggplot2::aes(x = date, y = ozone))
   expect_equal(get("aes_params", envir = p$layers[[1]])$label, "Corr:\n0.278***")
-  p <- ggally_barDiag(nas, ggplot2::aes(x = date))
+  p <- ggally_barDiag(nas, ggplot2::aes(x = date), bins = 10)
   expect_equal(mapping_string(p$mapping$x), "date")
   expect_equal(as.character(get_labs(p)$y), "count")
 })
@@ -251,4 +251,19 @@ test_that("ggally_count", {
     na.rm = TRUE
   )
   vdiffr::expect_doppelganger("titanic-count-diag-interaction", p)
+})
+
+
+
+test_that("deprecated ggally_cor variables are deprecated", {
+  lifecycle::expect_deprecated(
+    ggally_cor(tips, mapping = aes(total_bill, tip), use = "something")
+  )
+  lifecycle::expect_deprecated(
+    ggally_cor(tips, mapping = aes(total_bill, tip), alignPercent = 0.5)
+  )
+  lifecycle::expect_deprecated(
+    ggally_cor(tips, mapping = aes(total_bill, tip), displayGrid = FALSE)
+  )
+
 })
