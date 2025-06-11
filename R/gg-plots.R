@@ -1,13 +1,3 @@
-# add global variable
-utils::globalVariables(c(
-  c("labelp"), # cor plot
-  c("x"), # facetdensitystrip plot
-  c("x"), # density diagonal plot
-  c("x", "y", "lab"), # internal axis plot
-  c("x", "y", "result", "freq"), # fluctuation plot
-  c("weight"), # ggally_summarise_by
-  NULL
-))
 
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
@@ -29,7 +19,7 @@ eval_data_col <- function(data, aes_col) {
 #' mapping <- ggplot2::aes(Petal.Length)
 #' mapping_string(mapping$x)
 mapping_string <- function(aes_col) {
-  gsub("^~", "", deparse(aes_col, 500L))
+  gsub("^~(?:\\.data\\$)?", "", deparse(aes_col, 500L))
 }
 
 # is categories on the left?
@@ -257,10 +247,11 @@ ggally_density <- function(data, mapping, ...) {
 #' @param group_args arguments being supplied to the split-by-color group's \code{\link[ggplot2]{geom_text}()}
 #' @param justify_labels \code{justify} argument supplied when \code{\link[base]{format}}ting the labels
 #' @param align_percent relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.
-#' @param alignPercent,displayGrid deprecated. Please use their snake-case counterparts.
+#' @param alignPercent,displayGrid `r lifecycle::badge("deprecated")`. Please use their snake-case counterparts.
 #' @param title title text to be displayed
 #' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
+#' @importFrom lifecycle deprecated
 #' @seealso \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 #' @export
 #' @keywords hplot
@@ -304,14 +295,22 @@ ggally_cor <- function(
     justify_labels = "right",
     align_percent = 0.5,
     title = "Corr",
-    alignPercent = warning("deprecated. Use `align_percent`"),
-    displayGrid = warning("deprecated. Use `display_grid`")) {
-  if (!missing(alignPercent)) {
-    warning("`alignPercent` is deprecated. Please use `align_percent` if alignment still needs to be adjusted")
+    alignPercent = deprecated(),
+    displayGrid = deprecated()) {
+  if (lifecycle::is_present(alignPercent)) {
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = "ggally_cor(alignPercent)",
+      details = "Please use `align_percent` if alignment still needs to be adjusted."
+    )
     align_percent <- alignPercent
   }
-  if (!missing(displayGrid)) {
-    warning("`displayGrid` is deprecated. Please use `display_grid`")
+  if (lifecycle::is_present(displayGrid)) {
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = "ggally_cor(displayGrid)",
+      details = "Please use `display_grid`"
+    )
     display_grid <- displayGrid
   }
 
@@ -474,7 +473,7 @@ ggally_statistic <- function(
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
     cord <- data.frame(x = xData, y = yData, color = colorData) %>%
-      summarise(text = text_fn(x, y), .by = "color") %>%
+      summarise(text = text_fn(.data$x, .data$y), .by = "color") %>%
       arrange(.data$color)
 
     # put in correct order
@@ -868,7 +867,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(!!as.name("scaled")) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -924,7 +923,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(!!as.name("scaled")) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
         ),
         position = "identity",
         geom = "line",
@@ -973,7 +972,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
     if (identical(rescale, TRUE)) {
       p <- p + geom_histogram(
         aes(
-          y = after_stat(!!as.name("density")) / max(after_stat(!!as.name("density"))) * diff(range(x, na.rm = TRUE)) + min(x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("density")) / max(after_stat(!!as.name("density"))) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
         ),
         ...
       ) + coord_cartesian(ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE))
@@ -1331,7 +1330,7 @@ ggally_ratio <- function(
   xNames <- levels(countData[["x"]])
   yNames <- levels(countData[["y"]])
 
-  countData <- subset(countData, freq >= floor)
+  countData <- countData[!is.na(countData$freq) & countData$freq >= floor, ]
 
   ceiling <- ceiling %||% max(countData$freq)
 
@@ -1766,8 +1765,8 @@ ggally_summarise_by <- function(
       weight = eval_data_col(data, mapping$weight) %||% 1,
       stringsAsFactors = FALSE
     ) %>%
-      summarise(label = text_fn(x, weight), .by = y) %>%
-      arrange(y)
+      summarise(label = text_fn(.data$x, .data$weight), .by = "y") %>%
+      arrange(.data$y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
       col <- as.name("y")

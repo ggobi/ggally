@@ -155,10 +155,10 @@ test_that("ggmatrix_gtable progress", {
   expect_silent({
     pg <- ggmatrix_gtable(pm)
   })
-  expect_warning({
+  lifecycle::expect_deprecated({
     ggmatrix_gtable(pm, progress = TRUE)
   })
-  expect_warning({
+  lifecycle::expect_deprecated({
     ggmatrix_gtable(pm, progress_format = "asdfasdf :plot_i")
   })
 })

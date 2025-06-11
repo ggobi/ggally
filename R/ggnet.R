@@ -1,8 +1,7 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("X1", "X2", "Y1", "Y2", "midX", "midY"))
-}
-
 #' Network plot
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Function for plotting network objects using \pkg{ggplot2}, now replaced by the
 #' \code{\link{ggnet2}} function, which provides additional control over
@@ -114,12 +113,12 @@ if (getRversion() >= "2.15.1") {
 #' @param legend.position the location of the plot legend(s). Accepts all
 #' \code{legend.position} values supported by \code{\link[ggplot2]{theme}}.
 #' Defaults to \code{"right"}.
-#' @param names deprecated: see \code{group.legend} and \code{size.legend}
-#' @param quantize.weights deprecated: see \code{weight.cut}
-#' @param subset.threshold deprecated: see \code{weight.min}
-#' @param top8.nodes deprecated: this functionality was experimental and has
+#' @param names `r lifecycle::badge("deprecated")` see \code{group.legend} and \code{size.legend}
+#' @param quantize.weights `r lifecycle::badge("deprecated")` see \code{weight.cut}
+#' @param subset.threshold `r lifecycle::badge("deprecated")` see \code{weight.min}
+#' @param top8.nodes `r lifecycle::badge("deprecated")` this functionality was experimental and has
 #' been removed entirely from \code{ggnet}
-#' @param trim.labels deprecated: see \code{label.trim}
+#' @param trim.labels `r lifecycle::badge("deprecated")` see \code{label.trim}
 #' @param ... other arguments passed to the \code{geom_text} object that sets
 #' the node labels: see \code{\link[ggplot2]{geom_text}} for details.
 #' @seealso \code{\link{ggnet2}} in this package,
@@ -135,6 +134,7 @@ if (getRversion() >= "2.15.1") {
 #' @importFrom stats quantile na.omit
 #' @importFrom utils head installed.packages
 #' @importFrom grDevices gray.colors
+#' @keywords internal
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
@@ -199,13 +199,14 @@ ggnet <- function(
   legend.size      = 9,
   legend.position  = "right",
   # -- deprecated arguments ----------------------------------------------------
-  names            = c("", ""),
-  quantize.weights = FALSE,
-  subset.threshold = 0,
-  top8.nodes       = FALSE,
-  trim.labels      = FALSE,
+  names            = deprecated(),
+  quantize.weights = deprecated(),
+  subset.threshold = deprecated(),
+  top8.nodes       = deprecated(),
+  trim.labels      = deprecated(),
   ...
 ) {
+  lifecycle::deprecate_soft("2.2.2", "ggnet()", "ggnet2()")
 
   # -- packages ----------------------------------------------------------------
 
@@ -213,32 +214,55 @@ ggnet <- function(
   # -- deprecations ------------------------------------------------------------
 
   if (length(mode) == 1 && mode == "geo") {
-    warning("mode = 'geo' is deprecated; please use mode = c('lon', 'lat') instead")
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(mode='cannot be `geo`')",
+      details = "Please use mode = c('lon', 'lat') instead"
+    )
     mode = c("lon", "lat")
   }
 
-  if (!identical(names, c("", ""))) {
-    warning("names is deprecated; please use group.legend and size.legend instead")
+  if (lifecycle::is_present(names)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(names)",
+      details = "Please use group.legend and size.legend instead"
+    )
     group.legend = names[1]
     size.legend  = names[2]
   }
 
-  if (isTRUE(quantize.weights)) {
-    warning("quantize.weights is deprecated; please use weight.cut instead")
-    weight.cut = TRUE
+  if (lifecycle::is_present(quantize.weights)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(quantize.weights)",
+      details = "Please use weight.cut instead"
+    )
+    weight.cut = quantize.weights
   }
 
-  if (subset.threshold > 0) {
-    warning("subset.threshold is deprecated; please use weight.min instead")
+  if (lifecycle::is_present(subset.threshold)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(subset.threshold)",
+      details = "Please use weight.min instead"
+    )
     weight.min = subset.threshold
   }
 
-  if (isTRUE(top8.nodes)) {
-    warning("top8.nodes is deprecated")
+  if (lifecycle::is_present(top8.nodes)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(top8.nodes)"
+    )
   }
 
-  if (isTRUE(trim.labels)) {
-    warning("trim.labels is deprecated; please use label.trim instead")
+  if (lifecycle::is_present(trim.labels)) {
+    lifecycle::deprecate_warn(
+      when = "2.2.2",
+      what = "ggnet(trim.labels)",
+      details = "Please use label.trim instead"
+    )
     label.trim = function(x) gsub("^@|^http://(www\\.)?|/$", "", x)
   }
 
@@ -591,7 +615,7 @@ ggnet <- function(
 
   # -- plot edges --------------------------------------------------------------
 
-  p = ggplot(data, aes(x = x, y = y))
+  p = ggplot(data, aes(x = .data$x, y = .data$y))
 
   if (nrow(edges) > 0) {
 
@@ -602,18 +626,16 @@ ggnet <- function(
 
       arrow.gap = with(edges, arrow.gap / sqrt(x.length ^ 2 + y.length ^ 2))
 
-      edges = transform(edges,
-                        X1 = X1 + arrow.gap * x.length,
-                        Y1 = Y1 + arrow.gap * y.length,
-                        X2 = X1 + (1 - arrow.gap) * x.length,
-                        Y2 = Y1 + (1 - arrow.gap) * y.length)
-
+      edges$X1 = edges$X1 + arrow.gap * x.length
+      edges$Y1 = edges$Y1 + arrow.gap * y.length
+      edges$X2 = edges$X1 + (1 - arrow.gap) * x.length
+      edges$Y2 = edges$Y1 + (1 - arrow.gap) * y.length
     }
 
     p = p +
       geom_segment(
         data = edges,
-        aes(x = X1, y = Y1, xend = X2, yend = Y2),
+        aes(x = .data$X1, y = .data$Y1, xend = .data$X2, yend = .data$Y2),
         alpha  = segment.alpha,
         linewidth = segment.size,
         color  = segment.color,
@@ -630,13 +652,13 @@ ggnet <- function(
     p = p +
       geom_point(
         data = edges,
-        aes(x = midX, y = midY),
+        aes(x = .data$midX, y = .data$midY),
         color  = "white",
         size   = size
       ) +
       geom_text(
         data = edges,
-        aes(x = midX, y = midY, label = label),
+        aes(x = .data$midX, y = .data$midY, label = label),
         alpha  = segment.alpha,
         color  = segment.color,
         size   = size / 2
@@ -657,7 +679,7 @@ ggnet <- function(
 
     p = p +
       geom_point(
-        aes(size = weight),
+        aes(size = .data$weight),
         alpha = node.alpha
       ) +
       sizer
@@ -669,7 +691,7 @@ ggnet <- function(
   if (!is.null(node.group)) {
 
     p = p +
-      aes(color = group) +
+      aes(color = .data$group) +
       scale_color_manual(
         set_name(node.group, group.legend),
         values = node.color,

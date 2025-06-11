@@ -1,11 +1,3 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c(
-    "lon", "lat", "group", "id",
-    "lon1", "lat1", "lon2", "lat2",
-    ".label"
-  ))
-}
-
 #' Network plot map overlay
 #'
 #' Plots a network with \pkg{ggplot2} suitable for overlay on a \pkg{ggmap} plot or \pkg{ggplot2}
@@ -296,7 +288,9 @@ ggnetworkmap <- function(
     lat2 =  plotcord[edges[, 2], "lat"],
     lon2 = plotcord[edges[, 2], "lon"]
   )
-  edges <- subset(na.omit(edges), (!(lat1 == lat2 & lon2 == lon2)))
+  edges <- na.omit(edges)
+  keep_idx <- with(edges, !(lat1 == lat2 & lon2 == lon2))
+  edges <- edges[!is.na(keep_idx) & keep_idx, ]
 
   edge_args <- list(
     linewidth = substitute(segment.size),
@@ -433,7 +427,7 @@ ggnetworkmap <- function(
   if (isTRUE(labels)) {
     gg <- gg + geom_text(
       data = plotcord,
-      aes(x = lon, y = lat, label = .label),
+      aes(x = .data$lon, y = .data$lat, label = .data$.label),
       size = label.size, ...
     )
   }

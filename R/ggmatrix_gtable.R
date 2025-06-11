@@ -4,7 +4,7 @@
 #'
 #' @param pm \code{\link{ggmatrix}} object to be plotted
 #' @param ... ignored
-#' @param progress,progress_format Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.
+#' @param progress,progress_format `r lifecycle::badge("deprecated")` Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.
 #' @author Barret Schloerke
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
@@ -25,7 +25,11 @@ ggmatrix_gtable <- function(
     hasProgressBar <- !isFALSE(pm$progress)
     progress_fn <- pm$progress
   } else {
-    warning("Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples.  ggmatrix_gtable 'progress' and 'progress_format' will soon be deprecated.", immediate = TRUE)
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = I("`progress` and `progress_format`"),
+      details = "Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples."
+    )
 
     # has progress variable defined
     # overrides pm$progress
