@@ -6,7 +6,9 @@
 
 * General package dependency cleanup. (Thank you @olivroy! #509)
 
-* Use lifecycle for deprecation warnings (#494, #496)
+* Use lifecycle for deprecation warnings (Thank you @92amartins! #494, #496)
+
+* Leverage tidyverse `.data$` mask to remove all global variable declarations. (Thank you @MichaelChirico! #533)
 
 
 # GGally 2.2.1

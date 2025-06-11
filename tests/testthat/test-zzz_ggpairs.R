@@ -818,10 +818,11 @@ test_that("subtypes", {
           vdiffr::expect_doppelganger(pm_name, built_pm)
         },
         error = function(e) {
-          message("failed to create doppelganger: ", pm_name)
-          print(e)
-          barret <<- pm
-          expect_silent(print(c("failed to create doppelganger", pm_name)))
+          if (interactive()) {
+            assign("barret", pm, envir = globalenv())
+          }
+          # Rethrow error
+          signalCondition(e)
         }
       )
     }

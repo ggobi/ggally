@@ -12,5 +12,8 @@ exclusions:
     "R/ggcorr.R",
     "R/ggsurv.R",
     "R/ggnet.R",
-    "R/ggnet2.R"
+    "R/ggnet2.R",
+    "vignettes/ggduo.Rmd" = list(
+      "object_usage_linter" = c(80, 210)
+    )
   )
