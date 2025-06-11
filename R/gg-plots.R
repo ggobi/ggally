@@ -347,23 +347,23 @@ ggally_cor <- function(
         y <- as.numeric(y)
       }
 
-      if (length(x) <= 2 | length(y) <= 2) {
+      if (length(x) < 3 | length(y) < 3) {
         warning("Less than 2 observations, returning NA")
-        cor_txt <- NA
-      } else {
-        corObj <- stats::cor.test(x, y, method = method, use = use)
+        return("NA")
+      }
 
-        # make sure all values have X-many decimal places
-        cor_est <- as.numeric(corObj$estimate)
-        cor_txt <- formatC(cor_est, digits = digits, format = "f")
+      corObj <- stats::cor.test(x, y, method = method, use = use)
 
-        # if stars should be added
-        if (isTRUE(stars)) {
-          cor_txt <- str_c(
-            cor_txt,
-            signif_stars(corObj$p.value)
-          )
-        }
+      # make sure all values have X-many decimal places
+      cor_est <- as.numeric(corObj$estimate)
+      cor_txt <- formatC(cor_est, digits = digits, format = "f")
+
+      # if stars should be added
+      if (isTRUE(stars)) {
+        cor_txt <- str_c(
+          cor_txt,
+          signif_stars(corObj$p.value)
+        )
       }
 
       cor_txt
