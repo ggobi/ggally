@@ -6,6 +6,8 @@
 
 * General package dependency cleanup. (Thank you @olivroy! #509)
 
+* Leverage tidyverse `.data$` mask to remove all global variable declarations. (Thank you @MichaelChirico! #533)
+
 
 # GGally 2.2.1
 
