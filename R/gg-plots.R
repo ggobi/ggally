@@ -19,7 +19,7 @@ eval_data_col <- function(data, aes_col) {
 #' mapping <- ggplot2::aes(Petal.Length)
 #' mapping_string(mapping$x)
 mapping_string <- function(aes_col) {
-  gsub("^~(?:\\.data[$])?", "", deparse(aes_col, 500L))
+  gsub("^~(?:\\.data\\$)?", "", deparse(aes_col, 500L))
 }
 
 # is categories on the left?
