@@ -1,4 +1,6 @@
 #' @importFrom dplyr all_of
+NULL
+
 #' Parallel coordinate plot
 #'
 #' A function for plotting static parallel coordinate plots, utilizing
@@ -509,7 +511,7 @@ ggparcoord <- function(
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
     d.sum <- data.m %>%
-      summarise(min = min(.data$value), max = max(.data$value), .by = .data$variable) %>%
+      summarise(min = min(.data$value), max = max(.data$value), .by = "variable") %>%
       arrange(.data$variable)
     p <- p + geom_linerange(
       data = d.sum, linewidth = I(10), col = shadeBox,
@@ -524,7 +526,7 @@ ggparcoord <- function(
   }
 
   if (boxplot) {
-    p <- p + geom_boxplot(mapping = aes(group = !!as.name("variable")), alpha = 0.8)
+    p <- p + geom_boxplot(mapping = aes(group = .data$variable), alpha = 0.8)
   }
 
   if (!is.null(mapping2$linewidth)) {
@@ -535,7 +537,6 @@ ggparcoord <- function(
 
   if (splineFactor > 0) {
     data.m$ggally_splineFactor <- splineFactor
-    variable = value = ggally_splineFactor = NULL # to be removed during plyr->dplyr migration
     if (inherits(splineFactor, "AsIs")) {
       data.m <- bind_cols(
         reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1] / length(x)))),

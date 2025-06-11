@@ -1756,7 +1756,7 @@ ggally_summarise_by <- function(
       weight = eval_data_col(data, mapping$weight) %||% 1,
       stringsAsFactors = FALSE
     ) %>%
-      summarise(label = text_fn(.data$x, .data$weight), .by = .data$y) %>%
+      summarise(label = text_fn(.data$x, .data$weight), .by = "y") %>%
       arrange(.data$y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {
