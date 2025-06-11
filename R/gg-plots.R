@@ -252,6 +252,7 @@ ggally_density <- function(data, mapping, ...) {
 #' @author Barret Schloerke
 #' @importFrom stats complete.cases cor
 #' @importFrom lifecycle deprecated
+#' @inheritParams ggally_statistic
 #' @seealso \code{\link{ggally_statistic}}, \code{\link{ggally_cor_v1_5}}
 #' @export
 #' @keywords hplot
@@ -294,6 +295,7 @@ ggally_cor <- function(
     justify_labels = "right",
     align_percent = 0.5,
     title = "Corr",
+    na.rm = NA,
     use = deprecated(),
     alignPercent = deprecated(),
     displayGrid = deprecated()) {
@@ -321,8 +323,6 @@ ggally_cor <- function(
     )
     display_grid <- displayGrid
   }
-
-  na.rm <- TRUE
 
   ggally_statistic(
     data = data,

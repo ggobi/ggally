@@ -17,6 +17,7 @@ ggally_cor(
   justify_labels = "right",
   align_percent = 0.5,
   title = "Corr",
+  na.rm = NA,
   use = deprecated(),
   alignPercent = deprecated(),
   displayGrid = deprecated()
@@ -52,6 +53,8 @@ ggally_cor(
 \item{align_percent}{relative align position of the text. When \code{justify_labels = 0.5}, this should not be needed to be set.}
 
 \item{title}{title text to be displayed}
+
+\item{na.rm}{logical value which determines if \code{NA} values are removed. If \code{TRUE}, no warning message will be displayed.}
 
 \item{use}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}. This variable is not used internally. Please remove it from your code.}
 
