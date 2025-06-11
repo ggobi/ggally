@@ -317,51 +317,56 @@ ggnetworkmap <- function(
     pts <- 25 # number of intermediate points for drawing great circles
     i <- 0 # used to keep track of groups when getting intermediate points for great circles
 
-    edges <- edges %>%
-      split(edges[, c("lat1", "lat2", "lon1", "lon2")]) %>%
-      lapply(function(x) {
-        p1Mat <- x[, c("lon1", "lat1")]
-        colnames(p1Mat) <- NULL
-        p2Mat <- x[, c("lon2", "lat2")]
-        colnames(p2Mat) <- NULL
-        inter <- geosphere::gcIntermediate(
-          p1 = p1Mat,
-          p2 = p2Mat,
-          n = pts,
-          addStartEnd = TRUE,
-          breakAtDateLine = TRUE
-        )
+    process_edges <- function(lat1, lat2, lon1, lon2) {
+      p1Mat <- data.frame(lon = lon1, lat = lat1)
+      colnames(p1Mat) <- NULL
+      p2Mat <- data.frame(lon = lon2, lat = lat2)
+      colnames(p2Mat) <- NULL
+      inter <- geosphere::gcIntermediate(
+        p1 = p1Mat,
+        p2 = p2Mat,
+        n = pts,
+        addStartEnd = TRUE,
+        breakAtDateLine = TRUE
+      )
 
-        if (!is.list(inter)) {
+      if (!is.list(inter)) {
+        i <<- i + 1
+        inter <- data.frame(inter)
+        inter$group <- i
+        return(inter)
+      } else {
+        if (is.matrix(inter[[1]])) {
           i <<- i + 1
-          inter <- data.frame(inter)
-          inter$group <- i
-          return(inter)
+          ret <- data.frame(inter[[1]])
+          ret$group <- i
+          i <<- i + 1
+          ret2 <- data.frame(inter[[2]])
+          ret2$group <- i
+          return(rbind(ret, ret2))
         } else {
-          if (is.matrix(inter[[1]])) {
+          ret <- data.frame(lon = numeric(0), lat = numeric(0), group = numeric(0))
+          for (j in 1:length(inter)) {
             i <<- i + 1
-            ret <- data.frame(inter[[1]])
-            ret$group <- i
+            ret1 <- data.frame(inter[[j]][[1]])
+            ret1$group <- i
             i <<- i + 1
-            ret2 <- data.frame(inter[[2]])
+            ret2 <- data.frame(inter[[j]][[2]])
             ret2$group <- i
-            return(rbind(ret, ret2))
-          } else {
-            ret <- data.frame(lon = numeric(0), lat = numeric(0), group = numeric(0))
-            for (j in 1:length(inter)) {
-              i <<- i + 1
-              ret1 <- data.frame(inter[[j]][[1]])
-              ret1$group <- i
-              i <<- i + 1
-              ret2 <- data.frame(inter[[j]][[2]])
-              ret2$group <- i
-              ret <- rbind(ret, ret1, ret2)
-            }
-            return(ret)
+            ret <- rbind(ret, ret1, ret2)
           }
+          return(ret)
         }
-      }) %>%
-      bind_rows()
+      }
+    }
+
+    edges <-
+      edges %>%
+      reframe(
+        .by = c("lat1", "lat2", "lon1", "lon2"),
+        process_edges(.data$lat1, .data$lat2, .data$lon1, .data$lon2)
+      ) %>%
+      dplyr::select("lat", "lon", "group")
 
     edge_aes$x <- substitute(lon)
     edge_aes$y <- substitute(lat)
