@@ -37,7 +37,7 @@
 #'   ggplot2::geom_path() +
 #'   ggplot2::theme_bw() +
 #'   ggplot2::labs(x = "", y = ""))
-#' @importFrom dplyr across arrange everything last_col relocate summarise
+#' @importFrom dplyr across arrange everything last_col summarise
 #' @importFrom rlang := sym
 glyphs <- function(
     data,
@@ -61,14 +61,11 @@ glyphs <- function(
 
   if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
     data <- data %>%
-      summarise(
-        .by = "gid",
-        across(everything(), identity),
+      mutate(
         "{x_minor}" := x_scale(!!sym(x_minor)),
-        "{y_minor}" := y_scale(!!sym(y_minor))
-      ) %>%
-      arrange(.data$gid) %>%
-      relocate(.data$gid, .after = last_col())
+        "{y_minor}" := y_scale(!!sym(y_minor)),
+        .by = "gid"
+      )
   }
 
   if (polar) {
