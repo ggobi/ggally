@@ -1,25 +1,22 @@
-
-
-#' Print ggmatrix object
+#' \code{\link{ggmatrix}} \pkg{gtable} object
 #'
-#' Specialized method to print the ggmatrix object-
+#' Specialized method to print the \code{\link{ggmatrix}} object.
 #'
-#' @param pm ggmatrix object to be plotted
+#' @param pm \code{\link{ggmatrix}} object to be plotted
 #' @param ... ignored
-#' @param progress,progress_format Please use the 'progress' parameter in your ggmatrix-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
+#' @param progress,progress_format `r lifecycle::badge("deprecated")` Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.
+#' @author Barret Schloerke
 #' @importFrom grid gpar grid.layout grid.newpage grid.text grid.rect popViewport pushViewport viewport grid.draw
 #' @export
 #' @examples
-#' data(tips, package = "reshape")
-#' pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
+#' data(tips)
+#' pm <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes(color = sex))
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
-  pm,
-  ...,
-  progress = NULL,
-  progress_format = formals(ggmatrix_progress)$format
-) {
+    pm,
+    ...,
+    progress = NULL,
+    progress_format = formals(ggmatrix_progress)$format) {
   # pm is for "plot matrix"
 
   # init progress bar handle
@@ -28,8 +25,12 @@ ggmatrix_gtable <- function(
     hasProgressBar <- !isFALSE(pm$progress)
     progress_fn <- pm$progress
   } else {
-    warning("Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples.  ggmatrix_gtable 'progress' and 'progress_format' will soon be deprecated.", immediate = TRUE)
-    
+    lifecycle::deprecate_soft(
+      when = "2.2.2",
+      what = I("`progress` and `progress_format`"),
+      details = "Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples."
+    )
+
     # has progress variable defined
     # overrides pm$progress
     if (missing(progress_format)) {
@@ -52,10 +53,12 @@ ggmatrix_gtable <- function(
   # make a fake facet grid to fill in with proper plot panels
   get_labels <- function(labels, length_out, name) {
     if (is.expression(labels)) {
-      stop("'", name, "' can only be a character vector or NULL.",
-      "  Character values can be parsed using the 'labeller' parameter.")
+      stop(
+        "'", name, "' can only be a character vector or NULL.",
+        "  Character values can be parsed using the 'labeller' parameter."
+      )
     }
-    ifnull(labels, as.character(seq_len(length_out)))
+    labels %||% as.character(seq_len(length_out))
   }
   fake_data <- expand.grid(
     Var1 = get_labels(pm$xAxisLabels, pm$ncol, "xAxisLabels"),
@@ -65,10 +68,10 @@ ggmatrix_gtable <- function(
   fake_data$y <- 1
 
   # make the smallest plot possible so the guts may be replaced
-  pm_fake <- ggplot(fake_data, mapping = aes_("x", "y")) +
+  pm_fake <- ggplot(fake_data, mapping = aes(!!as.name("x"), !!as.name("y"))) +
     geom_point() +
     # make the 'fake' strips for x and y titles
-    facet_grid(Var2 ~ Var1, labeller = ifnull(pm$labeller, "label_value"), switch = pm$switch) +
+    facet_grid(Var2 ~ Var1, labeller = pm$labeller %||% "label_value", switch = pm$switch) +
     # remove both x and y titles
     labs(x = pm$xlab, y = pm$ylab)
 
@@ -92,7 +95,7 @@ ggmatrix_gtable <- function(
 
   # if there is a legend, make a fake legend that will be replaced later
   if (!is.null(pm$legend)) {
-    pm_fake <- pm_fake + geom_point(mapping = aes_(color = "Var1"))
+    pm_fake <- pm_fake + geom_point(mapping = aes(color = !!as.name("Var1")))
   }
 
   # make a gtable of the plot matrix (to be filled in)
@@ -132,23 +135,38 @@ ggmatrix_gtable <- function(
       }
 
       legend_obj <- grab_legend(pm[legend[1], legend[2]])
-
     } else if (inherits(legend, "legend_guide_box")) {
       legend_obj <- legend
     }
 
-    legend_layout <- (pmg_layout[pmg_layout_name == "guide-box", ])[1, ]
+    legend_layout <- pmg_layout[grepl("guide-box", pmg_layout_name), ]
     class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
-    pmg$grobs[[legend_layout$grob_pos]] <- legend_obj
+    index <- legend_layout$grob_pos[match(legend_obj$layout$name, legend_layout$name)]
+    pmg$grobs[index] <- legend_obj$grobs
 
-    legend_position <- ifnull(pm_fake$theme$legend.position, "right")
+    if ("guide-box" %in% legend_layout$name) {
+      legend_position <- pm_fake$theme$legend.position %||% "right"
 
-    if (legend_position %in% c("right", "left")) {
-      pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
-    } else if (legend_position %in% c("top", "bottom")) {
-      pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
+      if (legend_position %in% c("right", "left")) {
+        pmg$widths[[legend_layout$l]] <- legend_obj$widths[1]
+      } else if (legend_position %in% c("top", "bottom")) {
+        pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
+      } else {
+        stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
+      }
     } else {
-      stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
+      # From ggplot 3.5.0 onwards, a plot can have multiple legends
+      lr <- intersect(c("guide-box-left", "guide-box-right"), legend_obj$layout$name)
+      if (length(lr) > 0) {
+        width <- legend_obj$widths[legend_obj$layout$l[match(lr, legend_obj$layout$name)]]
+        pmg$widths[legend_layout$l[match(lr, legend_layout$name)]] <- width
+      }
+
+      tb <- intersect(c("guide-box-bottom", "guide-box-right"), legend_obj$layout$name)
+      if (length(tb) > 0) {
+        height <- legend_obj$heights[legend_obj$layout$t[match(tb, legend_obj$layout$name)]]
+        pmg$heights[legend_layout$t[match(tb, legend_layout$name)]] <- height
+      }
     }
   }
 
@@ -204,7 +222,7 @@ ggmatrix_gtable <- function(
       }
 
       # if it's not a ggplot2 obj, insert it and pray it works
-      if (!is.ggplot(p)) {
+      if (!is_ggplot(p)) {
         pmg$grobs[[grob_pos_panel]] <- p
         next
       }
@@ -256,7 +274,7 @@ ggmatrix_gtable <- function(
     layout_name = "axis-l",
     layout_cols = c("l", "r"),
     pmg_key = "widths"
-    #stop_msg = "left axis width issue!! Fix!"
+    # stop_msg = "left axis width issue!! Fix!"
   )
   pmg <- set_max_axis_size(
     pmg,
@@ -264,7 +282,7 @@ ggmatrix_gtable <- function(
     layout_name = "axis-b",
     layout_cols = c("t", "b"),
     pmg_key = "heights"
-    #stop_msg = "bottom axis height issue!! Fix!"
+    # stop_msg = "bottom axis height issue!! Fix!"
   )
 
   pmg

@@ -2,10 +2,17 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_text}
 \alias{ggally_text}
-\title{Text Plot}
+\title{Text plot}
 \usage{
-ggally_text(label, mapping = ggplot2::aes(color = "black"), xP = 0.5,
-  yP = 0.5, xrange = c(0, 1), yrange = c(0, 1), ...)
+ggally_text(
+  label,
+  mapping = ggplot2::aes(color = I("black")),
+  xP = 0.5,
+  yP = 0.5,
+  xrange = c(0, 1),
+  yrange = c(0, 1),
+  ...
+)
 }
 \arguments{
 \item{label}{text that you want to appear}
@@ -26,10 +33,13 @@ ggally_text(label, mapping = ggplot2::aes(color = "black"), xP = 0.5,
 Plot text for a plot.
 }
 \examples{
-ggally_text("Example 1")
-ggally_text("Example\\nTwo", mapping = ggplot2::aes(size = 15), color = I("red"))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+p_(ggally_text("Example 1"))
+p_(ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red")))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

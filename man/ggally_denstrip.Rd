@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_denstrip}
 \alias{ggally_denstrip}
-\title{Plots a tile plot with facets}
+\title{Tile plot with facets}
 \usage{
 ggally_denstrip(data, mapping, ...)
 }
@@ -14,18 +14,20 @@ ggally_denstrip(data, mapping, ...)
 \item{...}{other arguments being sent to stat_bin}
 }
 \description{
-Make Tile Plot as densely as possible.
+Displays a Tile Plot as densely as possible.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
- ggally_denstrip(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
- ggally_denstrip(
-   tips,
-   mapping = ggplot2::aes_string(x = "sex", y = "tip", binwidth = "0.2")
- ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black")
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips)
+p_(ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+p_(ggally_denstrip(
+  tips,
+  mapping = ggplot2::aes(sex, tip), binwidth = 0.2
+) + ggplot2::scale_fill_gradient(low = "grey80", high = "black"))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

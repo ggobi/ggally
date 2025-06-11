@@ -2,26 +2,39 @@
 % Please edit documentation in R/ggcoef.R
 \name{ggcoef}
 \alias{ggcoef}
-\title{ggcoef - Plot Model Coefficients with broom and ggplot2}
+\title{Model coefficients with \pkg{broom} and \pkg{ggplot2}}
 \usage{
-ggcoef(x, mapping = aes_string(y = "term", x = "estimate"), conf.int = TRUE,
-  conf.level = 0.95, exponentiate = FALSE, exclude_intercept = FALSE,
-  vline = TRUE, vline_intercept = "auto", vline_color = "gray50",
-  vline_linetype = "dotted", vline_size = 1, errorbar_color = "gray25",
-  errorbar_height = 0, errorbar_linetype = "solid", errorbar_size = 0.5,
-  sort = c("none", "ascending", "decending"), ...)
+ggcoef(
+  x,
+  mapping = aes(!!as.name("estimate"), !!as.name("term")),
+  conf.int = TRUE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  exclude_intercept = FALSE,
+  vline = TRUE,
+  vline_intercept = "auto",
+  vline_color = "gray50",
+  vline_linetype = "dotted",
+  vline_size = 1,
+  errorbar_color = "gray25",
+  errorbar_height = 0,
+  errorbar_linetype = "solid",
+  errorbar_size = 0.5,
+  sort = c("none", "ascending", "descending"),
+  ...
+)
 }
 \arguments{
-\item{x}{a model object to be tidied with \code{\link[broom]{tidy}} or a data frame (see Details)}
+\item{x}{a model object to be tidied with \code{\link[broom:reexports]{broom::tidy()}} or a data frame (see Details)}
 
 \item{mapping}{default aesthetic mapping}
 
 \item{conf.int}{display confidence intervals as error bars?}
 
-\item{conf.level}{level of confidence intervals (passed to \code{\link[broom]{tidy}}
+\item{conf.level}{level of confidence intervals (passed to \code{\link[broom:reexports]{broom::tidy()}}
 if \code{x} is not a data frame)}
 
-\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom]{tidy}}
+\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom:reexports]{broom::tidy()}}
 if \code{x} is not a data frame)}
 
 \item{exclude_intercept}{should the intercept be excluded from the plot?}
@@ -29,7 +42,7 @@ if \code{x} is not a data frame)}
 \item{vline}{print a vertical line?}
 
 \item{vline_intercept}{\code{xintercept} for the vertical line.
-\code{"auto"} for \code{x = 0} (or \code{x = 1} if {exponentiate} is \code{TRUE})}
+\code{"auto"} for \code{x = 0} (or \code{x = 1} if \code{exponentiate} is \code{TRUE})}
 
 \item{vline_color}{color of the vertical line}
 
@@ -45,22 +58,29 @@ if \code{x} is not a data frame)}
 
 \item{errorbar_size}{size of the error bars}
 
-\item{sort}{\code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"decending"} sort by decreasing coefficient value}
+\item{sort}{\code{"none"} (default) do not sort, \code{"ascending"} sort by increasing coefficient value, or \code{"descending"} sort by decreasing coefficient value}
 
-\item{...}{additional arguments sent to \code{\link[ggplot2]{geom_point}}}
+\item{...}{additional arguments sent to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}}
 }
 \description{
 Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
+For an updated and improved version, see \code{\link[=ggcoef_model]{ggcoef_model()}}.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 library(broom)
 reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
-ggcoef(reg)
-\donttest{d <- as.data.frame(Titanic)
+p_(ggcoef(reg))
+\donttest{
+d <- as.data.frame(Titanic)
 reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
 ggcoef(reg2, exponentiate = TRUE)
 ggcoef(
-  reg2, exponentiate = TRUE, exclude_intercept = TRUE,
+  reg2,
+  exponentiate = TRUE, exclude_intercept = TRUE,
   errorbar_height = .2, color = "blue", sort = "ascending"
-)}
+)
+}
 }

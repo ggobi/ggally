@@ -2,7 +2,6 @@
 .Rhistory
 ..Rcheck
 *ggmapTemp.png
-inst/*
 tests/testthat/Rplots.pdf
 vignettes/figure
 vignettes/docs.html
@@ -18,3 +17,8 @@ vignettes/rd_files/
 _gh-pages
 ggduo_paper.txt
 .httr-oauth
+docs
+inst/doc
+doc
+Meta
+CRAN-RELEASE

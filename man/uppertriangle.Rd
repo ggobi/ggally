@@ -2,10 +2,14 @@
 % Please edit documentation in R/ggscatmat.R
 \name{uppertriangle}
 \alias{uppertriangle}
-\title{uppertriangle - rearrange dataset as the preparation of ggscatmat function}
+\title{Rearrange dataset as the preparation of \code{\link{ggscatmat}} function}
 \usage{
-uppertriangle(data, columns = 1:ncol(data), color = NULL,
-  corMethod = "pearson")
+uppertriangle(
+  data,
+  columns = 1:ncol(data),
+  color = NULL,
+  corMethod = "pearson"
+)
 }
 \arguments{
 \item{data}{a data matrix. Should contain numerical (continuous) data.}
@@ -17,14 +21,14 @@ uppertriangle(data, columns = 1:ncol(data), color = NULL,
 \item{corMethod}{method argument supplied to \code{\link[stats]{cor}}}
 }
 \description{
-function for making the dataset used to plot the uppertriangle plots.
+Function for making the dataset used to plot the uppertriangle plots.
 }
 \examples{
 data(flea)
-head(uppertriangle(flea, columns=2:4))
+head(uppertriangle(flea, columns = 2:4))
 head(uppertriangle(flea))
-head(uppertriangle(flea, color="species"))
+head(uppertriangle(flea, color = "species"))
 }
 \author{
-Mengjia Ni, Di Cook \email{dicook@monash.edu}
+Mengjia Ni, Di Cook
 }

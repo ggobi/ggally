@@ -1,0 +1,41 @@
+---
+title: "ggscatmat(): Numeric pairwise plot matrix"
+output: rmarkdown::html_vignette
+author: Di Cook, Mengjia Ni
+date: Nov 6, 2015
+vignette: >
+  %\VignetteIndexEntry{ggscatmat(): Numeric pairwise plot matrix}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(GGally)
+```
+
+
+# `GGally::ggscatmat()`
+
+
+
+The primary function is `ggscatmat()`. It is similar to `ggpairs()` but only works for purely numeric multivariate data. It is faster than `ggpairs()`, because less choices need to be made. It creates a matrix with scatterplots in the lower diagonal, densities on the diagonal and correlations written in the upper diagonal. Syntax is to enter the dataset, the columns that you want to plot, a color column, and an alpha level.
+
+```{r ggscatmat-basic-usage, fig.height=7, fig.width=7}
+data(flea)
+ggscatmat(flea, columns = 2:4, color = "species", alpha = 0.8)
+```
+
+In this plot, you can see that the three different species vary a little from each other in these three variables. Heptapot (blue) has smaller values on the variable `tars1` than the other two. The correlation between the three variables is similar for all species.
+
+## References
+
+John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham.
+**[The Generalized Pairs Plot](http://vita.had.co.nz/papers/gpp.html)**.
+*Journal of Computational and Graphical Statistics*, vol. 22, no. 1, pp. 79-91, 2012.

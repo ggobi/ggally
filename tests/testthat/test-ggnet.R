@@ -1,34 +1,29 @@
 
-context("ggnet")
-
 if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-rq <- function(...) {
-  suppressMessages(require(..., quietly = TRUE))
-}
-rq(network) # network objects
-rq(sna)     # placement and centrality
+skip_if_not(rq(network)) # network objects
+skip_if_not(rq(sna)) # placement and centrality
 
-rq(ggplot2) # grammar of graphics
-rq(grid)    # arrows
-rq(scales)  # sizing
+skip_if_not(rq(ggplot2)) # grammar of graphics
+skip_if_not(rq(grid)) # arrows
+skip_if_not(rq(scales)) # sizing
 
-rq(intergraph) # test igraph conversion
+skip_if_not(rq(intergraph)) # test igraph conversion
 
 test_that("examples", {
-
+  skip_if_not_installed("network")
   ### --- start: documented examples
   set.seed(54321)
 
   # random adjacency matrix
-  x           <- 10
-  ndyads      <- x * (x - 1)
-  density     <- x / ndyads
-  m           <- matrix(0, nrow = x, ncol = x)
-  dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-  m[ row(m) != col(m) ] <- runif(ndyads) < density
+  x <- 10
+  ndyads <- x * (x - 1)
+  density <- x / ndyads
+  m <- matrix(0, nrow = x, ncol = x)
+  dimnames(m) <- list(letters[1:x], letters[1:x])
+  m[row(m) != col(m)] <- runif(ndyads) < density
   m
 
   # random undirected network
@@ -38,7 +33,7 @@ test_that("examples", {
   ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
 
   # random groups
-  g <- sample(letters[ 1:3 ], 10, replace = TRUE)
+  g <- sample(letters[1:3], 10, replace = TRUE)
 
   # color palette
   p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
@@ -55,35 +50,40 @@ test_that("examples", {
   xy <- gplot.layout.circle(n) # nolint
   n %v% "lon" <- xy[, 1]
   n %v% "lat" <- xy[, 2]
-  expect_warning(ggnet(n, mode = "geo"), "deprecated")
+  lifecycle::expect_deprecated(ggnet(n, mode = "geo"))
 
   # test names = c(x, y)
-  expect_warning(ggnet(n, names = c("a", "b")), "deprecated")
+  lifecycle::expect_deprecated(ggnet(n, names = c("a", "b")))
 
   # test quantize.weights
-  expect_warning(ggnet(n, quantize.weights = TRUE))
+  with_options(list(warn = 2), {
+    expect_error(ggnet(n, quantize.weights = TRUE))
+  })
+
 
   # test subset.threshold
-  expect_warning(ggnet(n, subset.threshold = 2))
+  suppressMessages({
+    lifecycle::expect_deprecated(ggnet(n, subset.threshold = 2))
+  })
 
   # test top8.nodes
-  expect_warning(ggnet(n, top8.nodes = TRUE))
+  lifecycle::expect_deprecated(ggnet(n, top8.nodes = TRUE))
 
   # test trim.labels
-  expect_warning(ggnet(n, trim.labels = TRUE))
+  lifecycle::expect_deprecated(ggnet(n, trim.labels = TRUE))
 
-#   # test subset.threshold by removing all nodes
-#   expect_warning(
-#     expect_error(
-#       ggnet(n, subset.threshold = 11),
-#       "NA/NaN/Inf"
-#     ),
-#     "NaNs produced"
-#   )
-#
-#   p <- ggnet(n, mode = "geo")
-#   expect_equal(p$data$X1, xy[, 1])
-#   expect_equal(p$data$X2, xy[, 2])
+  #   # test subset.threshold by removing all nodes
+  #   expect_warning(
+  #     expect_error(
+  #       ggnet(n, subset.threshold = 11),
+  #       "NA/NaN/Inf"
+  #     ),
+  #     "NaNs produced"
+  #   )
+  #
+  #   p <- ggnet(n, mode = "geo")
+  #   expect_equal(p$data$X1, xy[, 1])
+  #   expect_equal(p$data$X2, xy[, 2])
 
   # test user-submitted weights
   ggnet(n, weight = sample(1:2, 10, replace = TRUE))
@@ -157,14 +157,18 @@ test_that("examples", {
   ### --- test weight.min, weight.max and weight.cut
 
   # test weight.min
-  expect_error(ggnet(n, weight = "degree", weight.min = -1), "incorrect weight.min")
-  expect_message(ggnet(n, weight = "degree", weight.min = 1), "weight.min removed")
-  expect_warning(ggnet(n, weight = "degree", weight.min = 99), "removed all nodes")
+  suppressMessages({
+    expect_error(ggnet(n, weight = "degree", weight.min = -1), "incorrect weight.min")
+    expect_message(ggnet(n, weight = "degree", weight.min = 1), "weight.min removed")
+    expect_warning(ggnet(n, weight = "degree", weight.min = 99), "removed all nodes")
+  })
 
   # test weight.max
   expect_error(ggnet(n, weight = "degree", weight.max = -1), "incorrect weight.max")
   expect_message(ggnet(n, weight = "degree", weight.max = 99), "weight.max removed")
-  expect_warning(ggnet(n, weight = 1:10, weight.max = 0.5), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet(n, weight = 1:10, weight.max = 0.5), "removed all nodes")
+  })
   expect_error(ggnet(n, weight = "abc"), "incorrect weight.method")
 
   # test weight.cut
@@ -179,9 +183,9 @@ test_that("examples", {
 
   ### --- test node labels and label sizes
 
-  ggnet(n, label = letters[ 1:10 ], color = "white")
+  ggnet(n, label = letters[1:10], color = "white")
   ggnet(n, label = "abc", color = "white", label.size = 4, size = 12)
-  expect_error(ggnet(n, label = letters[ 1:10 ], label.size = "abc"), "incorrect label.size")
+  expect_error(ggnet(n, label = letters[1:10], label.size = "abc"), "incorrect label.size")
 
   ### --- test node placement
 
@@ -201,18 +205,18 @@ test_that("examples", {
 
   # weighted adjacency matrix
   bip <- data.frame(
-    event1 = c(1, 2, 1, 0),
-    event2 = c(0, 0, 3, 0),
-    event3 = c(1, 1, 0, 4),
-    row.names = letters[1:4]
+    event1 = c(1, 2, 1),
+    event2 = c(0, 0, 3),
+    event3 = c(1, 1, 0),
+    row.names = letters[1:3]
   )
 
   # weighted bipartite network
   bip <- network(
     bip,
     matrix.type = "bipartite",
-    ignore.eval = FALSE,
-    names.eval = "weights"
+    ignore.eval = FALSE
+    # names.eval = "weights"
   )
 
   # test bipartite mode
@@ -223,12 +227,11 @@ test_that("examples", {
   expect_warning(ggnet(network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)), "self-loops")
 
   expect_error(ggnet(1:2), "network object")
-  expect_error(ggnet(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper graphs")
+  expect_error(ggnet(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
   expect_error(ggnet(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
-  if (requireNamespace("igraph", quietly = TRUE)) {
-    library(igraph)
+  if (rq(igraph) && rq(intergraph)) {
     # test igraph conversion
     p <- ggnet(asIgraph(n))
     expect_null(p$guides$colour)
@@ -238,5 +241,4 @@ test_that("examples", {
     ggnet(n, weight = "degree")
     expect_true(TRUE)
   }
-
 })

@@ -13,18 +13,19 @@ aes_ output
 Add new aesthetics to a previous aes.
 }
 \examples{
-data(diamonds, package="ggplot2")
+data(diamonds, package = "ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
-pm <- ggpairs(diamonds.samp, columns = 5:7,
+pm <- ggpairs(diamonds.samp,
+  columns = 5:7,
   mapping = ggplot2::aes(color = color),
-  upper = list(continuous = "cor", mapping = ggplot2::aes_string(color = "clarity")),
-  lower = list(continuous = "cor", mapping = ggplot2::aes_string(color = "cut")),
+  upper = list(continuous = "cor", mapping = ggplot2::aes(color = clarity)),
+  lower = list(continuous = "cor", mapping = ggplot2::aes(color = cut)),
   title = "Diamonds Sample"
 )
 str(pm)
 
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{internal}

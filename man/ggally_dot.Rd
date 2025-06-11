@@ -3,7 +3,7 @@
 \name{ggally_dot}
 \alias{ggally_dot}
 \alias{ggally_dot_no_facet}
-\title{Plots the Box Plot with Dot}
+\title{Grouped dot plot}
 \usage{
 ggally_dot(data, mapping, ...)
 
@@ -20,19 +20,21 @@ ggally_dot_no_facet(data, mapping, ...)
 Add jittering with the box plot. \code{ggally_dot_no_facet} will be a single panel plot, while \code{ggally_dot} will be a faceted plot
 }
 \examples{
- data(tips, package = "reshape")
- ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex))
- ggally_dot(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "sex"))
- ggally_dot(
-   tips,
-   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex")
- )
- ggally_dot(
-   tips,
-   mapping = ggplot2::aes_string(y = "total_bill", x = "sex", color = "sex", shape = "sex")
- ) + ggplot2::scale_shape(solid=FALSE)
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips)
+p_(ggally_dot(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))
+p_(ggally_dot(
+  tips,
+  mapping = ggplot2::aes(sex, total_bill, color = sex)
+))
+p_(ggally_dot(
+  tips,
+  mapping = ggplot2::aes(sex, total_bill, color = sex, shape = sex)
+) + ggplot2::scale_shape(solid = FALSE))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

@@ -7,23 +7,22 @@
 #' @import ggplot2
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' library(ggplot2)
-#' histPlot <- qplot(
-#'   x = Sepal.Length,
-#'   data = iris,
-#'   fill = Species,
-#'   geom = "histogram",
-#'   binwidth = 1/4
-#' )
+#' histPlot <-
+#'   ggplot(iris, aes(Sepal.Length, fill = Species)) +
+#'   geom_histogram(binwidth = 1 / 4)
 #' (right <- histPlot)
 #' (bottom <- histPlot + theme(legend.position = "bottom"))
 #' (top <- histPlot + theme(legend.position = "top"))
 #' (left <- histPlot + theme(legend.position = "left"))
 #'
-#' grab_legend(right)
-#' grab_legend(bottom)
-#' grab_legend(top)
-#' grab_legend(left)
+#' p_(grab_legend(right))
+#' p_(grab_legend(bottom))
+#' p_(grab_legend(top))
+#' p_(grab_legend(left))
 grab_legend <- function(p) {
   builtP <- ggplot_build(p)
   pTable <- ggplot_gtable(builtP)
@@ -35,8 +34,11 @@ grab_legend <- function(p) {
 get_legend_from_gtable <- function(pTable) {
   ret <- ggplot2::zeroGrob()
   if (inherits(pTable, "gtable")) {
-    if ("guide-box" %in% pTable$layout$name) {
+    if (any(grepl("guide-box", pTable$layout$name))) {
       ret <- gtable_filter(pTable, "guide-box")
+      keep <- !vapply(ret$grobs, inherits, what = "zeroGrob", logical(1))
+      keep <- paste0(ret$layout$name[keep], collapse = "|")
+      ret  <- gtable_filter(ret, keep)
     }
   }
   class(ret) <- c("legend_guide_box", class(ret))
@@ -63,12 +65,15 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #' @return a function that when called with arguments will produce the legend of the plotting function supplied.
 #' @export
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' # display regular plot
-#' ggally_points(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species))
+#' p_(ggally_points(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species)))
 #'
 #' # Make a function that will only print the legend
 #' points_legend <- gglegend(ggally_points)
-#' points_legend(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species))
+#' p_(points_legend(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species)))
 #'
 #' # produce the sample legend plot, but supply a string that 'wrap' understands
 #' same_points_legend <- gglegend("points")
@@ -79,7 +84,7 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #'
 #' # Complicated examples
 #' custom_legend <- wrap(gglegend("points"), size = 6)
-#' custom_legend(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species))
+#' p_(custom_legend(iris, ggplot2::aes(Sepal.Length, Sepal.Width, color = Species)))
 #'
 #' # Use within ggpairs
 #' pm <- ggpairs(
@@ -87,15 +92,14 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #'   mapping = ggplot2::aes(color = Species),
 #'   upper = list(continuous = gglegend("points"))
 #' )
-#' # pm
+#' p_(pm)
 #'
 #' # Place a legend in a specific location
 #' pm <- ggpairs(iris, 1:2, mapping = ggplot2::aes(color = Species))
 #' # Make the legend
-#' pm[1,2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
-#' pm
+#' pm[1, 2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
+#' p_(pm)
 gglegend <- function(fn) {
-
   # allows users to supply a character just like in ggpairs
   fn <- wrapp(fn, list())
   fn <- attr(fn, "fn")

@@ -1,3 +1,196 @@
+# GGally (development version)
+
+* Prepare GGally for `{ggplot2}` v4 (Thank you @teunbrand! #528)
+
+* Replace internal `{plyr}` usage with `{dplyr}`. (Thank you @MichaelChirico! #520, #521, #522, #523, #524, #525, #527, #530)
+
+* General package dependency cleanup. (Thank you @olivroy! #509)
+
+* Fix `anyClass` ordering in `ggparcoord()` when data has missing values (Thank you @92amartins! #500)
+
+* Use `{lifecycle}` for deprecation warnings (Thank you @92amartins! #494, #496)
+
+* Leverage `.data$` mask to remove all global variable declarations. (Thank you @MichaelChirico! #533)
+
+
+# GGally 2.2.1
+
+* Fix compatibility with `{ggplot2}` 3.5.0 (Thank you @teunbrand! #481)
+
+
+# GGally 2.2.0
+
+### Bug fixes
+
+* Removed dependency on reshape2 (#475)
+* Reverse ordering of y-axis in `ggally_count()` (#420)
+* Facets ordering in `ggcoef_compare()` (#426)
+* Fix in `ggcoef_compare()` when using tidy selectors for
+  `no_reference_row` (#430)
+* Fix in `ggcoef_compare()` regarding `no_reference_row` option (#430)
+* Fix in `ggcoef_compare()` with an `include` argument (#447)
+* New default tidier for `ggcoef_model()`, now using
+  `broom.helpers::tidy_with_broom_or_parameters()` (#432)
+* Re-export methods from and redirect vignettes to the `{ggstats}` package (#452, #457)
+* Replaced `..scaled..` with `after_stat(scaled)` in ggscatmat (#467)
+
+
+# GGally 2.1.2
+
+### Bug fixes
+
+* Replace `ggplot2` usage of `*_guide = FALSE` with `*_guide = "none"` (@larmarange, #418)
+* Require `network >= 1.17.1` (#418)
+
+
+# GGally 2.1.1
+
+### Bug fixes
+
+* Ignore `colour` aesthetic if all values are `NA`. (@larmarange, #404)
+* Avoid all duplicates within `stat_cross()`. (@larmarange, #402)
+* Avoid an error when tidiers do not return p-values. (@larmarange, #400)
+* Suggest `emmeans` to allow `ggcoef()` example to execute. (#407)
+
+
+# GGally 2.1.0
+
+### Breaking changes
+
+* Following version 7.0.0 of `broom`, computed residuals in `stat_cross()`
+  are now named `"resid"` and `"std.resid"`. `cells` and `fill` arguments
+  of `ggally_crosstable()` and `ggtable()` have been updated accordingly
+  (@larmarange, #391)
+
+### Other changes
+
+* `ggcoef()` redesign based on `broom.helpers` with four new functions:
+  `ggcoef_model()`, `ggcoef_compare()`, `ggcoef_multinom()` and `ggcoef_plot()`
+  (more informations in the dedicated vignette, @larmarange, #392)
+* New geometries: `geom_stripped_rows()` and `geom_stripped_cols()`
+  (#392, @larmarange)
+* New option `reverse_fill_labels` for `ggally_colbar()`
+  and `ggally_rowbar()` (@larmarange, #374)
+* `stat_prop()` now accepts a **x** or a **y** aesthetic (#395, @larmarange)
+* Temporarily not listening to `ggally_statistic(family)` to avoid monospaced font issues. See #373 for more details. (#387)
+
+
+# GGally 2.0.0
+
+### New Vignettes
+
+* [`vig_ggally("ggally_plots")`](https://ggobi.github.io/ggally/articles/ggally_plots.html) - ggally_*(): List of available high-level plots
+* [`vig_ggally("ggally_stats")`](https://ggobi.github.io/ggally/articles/ggally_stats.html) - stat_*(): Additional statistics for ggplot2
+* [`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html) - ggbivariate(): Plot an outcome with several potential explanatory variables
+* [`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html) - ggtable(): Cross-tabulated tables
+* To view all vignettes for `GGally`, call `GGally::vig_ggally()`
+
+
+### New functions
+
+`ggbivariate()` (@larmarange, #324)
+* Display an outcome using several potential explanatory variables
+* [`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html)
+
+`ggtable()` (@larmarange, #351)
+* Cross-tabulated tables of discrete variables
+* [`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html)
+
+`add_to_ggmatrix()` (#362)
+* Add ggplot2 objects to `ggmatrix` objects at selected locations
+* Locations can be rows, columns, matrices, or other shorthand values.
+
+`ggally_autopoint()`, `ggally_autopointDiag()` (@larmarange, #325)
+* Make scatterplots compatible with both continuous and categorical variables using `ggforce::geom_autopoint()`.
+
+`ggally_colbar()`, `ggally_rowbar()` (@larmarange, #324)
+* Plot column or row percentage using bar plots.
+
+`ggally_count()`, `ggally_countDiag()` (@larmarange, #321)
+* Plot the number of observations by using rectangles with proportional areas.
+
+`ggally_cross()` (@larmarange, #326)
+* Plot the number of observations by using square points with proportional areas.
+
+`ggally_crosstable()` (@larmarange, #351)
+* Display a cross-tabulated table.
+
+`ggally_statistic()` (#327)
+* A generalized version of `ggally_cor()`
+* Use this method to create functions similar to `ggally_cor()` that return any text value given and `x` and `y` vector of data
+
+`ggally_summarise_by()` (@larmarange, #325)
+* Display summary statistics of a continuous variable for each value of a discrete variable.
+
+`ggally_table()` (@larmarange, #326)
+* Plot the number of observations as a table.
+
+`ggally_trends()` (@larmarange, #333)
+* Plot trends using line plots.
+
+`signif_stars()` (@larmarange, #327)
+* Return the appropriate number of significance stars as a character vector for the provided numeric input values.
+
+### New `ggplot2` plot statistics:
+
+`stat_cross()` (@larmarange, #326)
+* Computes statistics of a 2-dimensional matrix using `broom::augment.htest`.
+
+`stat_prop()` (@larmarange, #324)
+* Compute proportions according to custom denominator.
+
+`stat_weighted_mean()` (@larmarange, #333)
+* Compute the mean of y aesthetic for each unique value of x, taking into account weight aesthetic if provided.
+
+### Major updates
+
+`ggally_cor()` (#327)
+* New implementation using `ggally_statistic()`
+* Will now hide the grid by default and add a border (`displayGrid = FALSE`)
+* Added the ability to display significance stars (`stars = TRUE`)
+* Alignment has been fixed so both short and long names should be displayed within view. `alignPercent` now corresponds to the center of the text.
+* Added the ability to separate the arguments sent to the title and the groups (`title_args` and `group_args`)
+* Digits now represents the total number of digits after the decimal place.
+* To use the old version, change your `ggally_cor()` function calls to `ggally_cor_v1_5()`.
+* Previously deprecated parameters have been removed
+
+Website
+* Updated to use `pkgdown` (#335)
+
+### Features and bug fixes:
+
+`ggpairs()` (#331)
+* New `proportion` argument to control relative size of sub-plots
+* option `proportion = "auto"` for automatic guess based on the number of levels for discrete variables
+
+`ggduo()` (#331)
+* New `xProportion` and `yProportion` arguments to control relative size of sub-plots
+* Set option `xProportion = "auto"` and `yProportion = "auto"` for automatic guess based on the number of levels for discrete variables
+
+`ggscatmat()`
+* `lowertriangle()` now preallocates it's memory usage for a 2-5x speed improvement. (@vlepori, #328)
+* Fixed `facet`'ing error where the factor order was not preserved. This error caused the facets to be alphabetically sorted, cause plots to appear in unexpected locations. (#355)
+
+
+# GGally 1.5.0
+
+* Updated to work with ggplot2 v3.3.0 (#308)
+
+`ggnet` and `ggnet2`
+* Fixed some logic bugs from newer R versions
+
+`ggally_box` and `ggally_dot`
+* Label now appears axis and is displayed in a plot matrix. (#253)
+
+`ggsurv`
+* Provide sensible legend values when multiple factors are present. (#310)
+
+`ggally_cor`
+* Added `displayGrid` argument to turn of the background grid. (#312)
+
+
+
+
 GGally 1.3.3
 ----------------
 
@@ -76,7 +269,6 @@ Added original ggmatrix theme
 `ggmatrix.print`
 
 * fix strip issues with ggplot2 name update
-
 
 
 
@@ -173,7 +365,6 @@ Vignettes
 `ggally_box_no_facet` and `ggally_dot_no_facet`
 
 * New methods added as defaults to pair with new ggmatrix print method
-
 
 
 

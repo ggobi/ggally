@@ -1,10 +1,9 @@
-
-#' ggmatrix - A ggplot2 Matrix
+#' \pkg{ggplot2} plot matrix
 #'
-#' Make a generic matrix of ggplot2 plots.
+#' Make a generic matrix of \pkg{ggplot2} plots.
 #'
 #' @section Memory usage:
-#' Now that the print.ggmatrix method uses a large gtable object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the ggplot2 format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
+#' Now that the \code{\link{print.ggmatrix}} method uses a large \pkg{gtable} object, rather than print each plot independently, memory usage may be of concern.  From small tests, memory usage flutters around \code{object.size(data) * 0.3 * length(plots)}.  So, for a 80Mb random noise dataset with 100 plots, about 2.4 Gb of memory needed to print. For the 3.46 Mb diamonds dataset with 100 plots, about 100 Mb of memory was needed to print.  The benefits of using the \pkg{ggplot2} format greatly outweigh the price of about 20% increase in memory usage from the prior ad-hoc print method.
 #'
 #' @param plots list of plots to be put into matrix
 #' @param nrow,ncol number of rows and columns
@@ -18,14 +17,14 @@
 #' @param xProportions,yProportions Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, or \code{grid::\link[grid]{unit}} object with matching respective length
 #' @template ggmatrix-progress
 #' @param data data set using. This is the data to be used in place of 'ggally_data' if the plot is a string to be evaluated at print time
-#' @param gg ggplot2 theme objects to be applied to every plot
+#' @param gg \pkg{ggplot2} theme objects to be applied to every plot
 #' @template ggmatrix-legend-param
 #' @keywords hplot
-#' @author Barret Schloerke \email{schloerke@@gmail.com}
-#' @importFrom rlang %||%
+#' @author Barret Schloerke
+#' @importFrom rlang %||% .data
 #' @export
 #' @examples
-#' # small function to display plots only if it's interactive
+#' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
 #' plotList <- list()
@@ -50,31 +49,28 @@
 #'   showXAxisPlotLabels = FALSE
 #' )
 #' p_(pm)
-
 ggmatrix <- function(
-  plots,
-  nrow,
-  ncol,
-  xAxisLabels = NULL,
-  yAxisLabels = NULL,
-  title = NULL,
-  xlab = NULL,
-  ylab = NULL,
-  byrow = TRUE,
-  showStrips = NULL,
-  showAxisPlotLabels = TRUE,
-  showXAxisPlotLabels = TRUE,
-  showYAxisPlotLabels = TRUE,
-  labeller = NULL,
-  switch = NULL,
-  xProportions = NULL,
-  yProportions = NULL,
-  progress = NULL,
-  data = NULL,
-  gg = NULL,
-  legend = NULL
-) {
-
+    plots,
+    nrow,
+    ncol,
+    xAxisLabels = NULL,
+    yAxisLabels = NULL,
+    title = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    byrow = TRUE,
+    showStrips = NULL,
+    showAxisPlotLabels = TRUE,
+    showXAxisPlotLabels = TRUE,
+    showYAxisPlotLabels = TRUE,
+    labeller = NULL,
+    switch = NULL,
+    xProportions = NULL,
+    yProportions = NULL,
+    progress = NULL,
+    data = NULL,
+    gg = NULL,
+    legend = NULL) {
   if (!is.list(plots)) {
     stop("'plots' must be a list()")
   }
@@ -111,7 +107,7 @@ ggmatrix <- function(
     byrow = byrow
   )
 
-  attributes(plotMatrix)$class <- c("gg", "ggmatrix")
+  attributes(plotMatrix)$class <- c("ggmatrix", "gg")
 
   plotMatrix
 }
@@ -124,5 +120,4 @@ check_nrow_ncol <- function(x, title) {
   if (length(x) != 1) {
     stop(paste("'", title, "' must be a single numeric value", sep = ""))
   }
-
 }

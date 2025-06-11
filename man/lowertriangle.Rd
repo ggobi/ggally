@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggscatmat.R
 \name{lowertriangle}
 \alias{lowertriangle}
-\title{lowertriangle - rearrange dataset as the preparation of ggscatmat function}
+\title{lowertriangle - rearrange dataset as the preparation of \code{\link{ggscatmat}} function}
 \usage{
 lowertriangle(data, columns = 1:ncol(data), color = NULL)
 }
@@ -18,10 +18,10 @@ function for making the melted dataset used to plot the lowertriangle scatterplo
 }
 \examples{
 data(flea)
-head(lowertriangle(flea, columns= 2:4))
+head(lowertriangle(flea, columns = 2:4))
 head(lowertriangle(flea))
-head(lowertriangle(flea, color="species"))
+head(lowertriangle(flea, color = "species"))
 }
 \author{
-Mengjia Ni, Di Cook \email{dicook@monash.edu}
+Mengjia Ni, Di Cook
 }

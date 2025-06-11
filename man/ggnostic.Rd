@@ -2,25 +2,32 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggnostic}
 \alias{ggnostic}
-\title{ggnostic - Plot matrix of statistical model diagnostics}
+\title{Plot matrix of statistical model diagnostics}
 \usage{
-ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
-  ".sigma", ".hat", ".cooksd"), columnLabelsX = attr(data, "var_x_label"),
+ggnostic(
+  model,
+  ...,
+  columnsX = attr(data, "var_x"),
+  columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
+  columnLabelsX = attr(data, "var_x_label"),
   columnLabelsY = gsub("\\\\.", " ", gsub("^\\\\.", "", columnsY)),
-  xlab = "explanatory variables", ylab = "diagnostics",
+  xlab = "explanatory variables",
+  ylab = "diagnostics",
   title = paste(deparse(model$call, width.cutoff = 500L), collapse = "\\n"),
-  continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit
-  = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
-  ggally_nostic_hat, .sigma = ggally_nostic_sigma, .cooksd =
-  ggally_nostic_cooksd, .std.resid = ggally_nostic_std_resid),
-  combo = list(default = ggally_box_no_facet, fitted = ggally_box_no_facet,
-  .se.fit = ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat =
-  ggally_nostic_hat, .sigma = ggally_nostic_sigma, .cooksd =
-  ggally_nostic_cooksd, .std.resid = ggally_nostic_std_resid),
-  discrete = list(default = ggally_ratio, .fitted = ggally_ratio, .se.fit =
-  ggally_ratio, .resid = ggally_ratio, .hat = ggally_ratio, .sigma =
-  ggally_ratio, .cooksd = ggally_ratio, .std.resid = ggally_ratio),
-  progress = NULL, data = broomify(model))
+  continuous = list(default = ggally_points, .fitted = ggally_points, .se.fit =
+    ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat = ggally_nostic_hat, .sigma
+    = ggally_nostic_sigma, .cooksd = ggally_nostic_cooksd, .std.resid =
+    ggally_nostic_std_resid),
+  combo = list(default = ggally_box_no_facet, .fitted = ggally_box_no_facet, .se.fit =
+    ggally_nostic_se_fit, .resid = ggally_nostic_resid, .hat = ggally_nostic_hat, .sigma
+    = ggally_nostic_sigma, .cooksd = ggally_nostic_cooksd, .std.resid =
+    ggally_nostic_std_resid),
+  discrete = list(default = ggally_ratio, .fitted = ggally_ratio, .se.fit = ggally_ratio,
+    .resid = ggally_ratio, .hat = ggally_ratio, .sigma = ggally_ratio, .cooksd =
+    ggally_ratio, .std.resid = ggally_ratio),
+  progress = NULL,
+  data = broomify(model)
+)
 }
 \arguments{
 \item{model}{statistical model object such as output from \code{stats::\link[stats]{lm}} or \code{stats::\link[stats]{glm}}}
@@ -29,7 +36,7 @@ ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
 
 \item{columnsX}{columns to be displayed in the plot matrix. Defaults to the predictor columns of the \code{model}}
 
-\item{columnsY}{rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by \code{broom::\link[broom]{augment}(model)}. See details for more information.}
+\item{columnsY}{rows to be displayed in the plot matrix. Defaults to residuals, leave one out sigma value, diagonal of the hat matrix, and Cook's Distance. The possible values are the response variables in the model and the added columns provided by \code{\link[broom:reexports]{broom::augment()}}. See details for more information.}
 
 \item{columnLabelsX, columnLabelsY}{column and row labels to display in the plot matrix}
 
@@ -42,28 +49,28 @@ ggnostic(model, ..., columnsX = attr(data, "var_x"), columnsY = c(".resid",
 \item{data}{data defaults to a 'broomify'ed model object.  This object will contain information about the X variables, Y variables, and multiple broom outputs. See \code{\link{broomify}(model)} for more information}
 }
 \description{
-ggnostic - Plot matrix of statistical model diagnostics
+Plot matrix of statistical model diagnostics
 }
-\section{`columnsY`}{
+\section{\code{columnsY}}{
 
-\code{broom::\link[broom]{augment}()} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{ggnostic}.
+\code{\link[broom:reexports]{broom::augment()}} collects data from the supplied model and returns a data.frame with the following columns (taken directly from broom documentation).  These columns are the only allowed values in the \code{columnsY} parameter to \code{\link{ggnostic}}.
 
 \describe{
-  \item{.resid}{Residuals}
-  \item{.hat}{Diagonal of the hat matrix}
-  \item{.sigma}{Estimate of residual standard deviation when
-    corresponding observation is dropped from model}
-  \item{.cooksd}{Cooks distance, \code{\link[stats]{cooks.distance}}}
-  \item{.fitted}{Fitted values of model}
-  \item{.se.fit}{Standard errors of fitted values}
-  \item{.std.resid}{Standardized residuals}
-  \item{response variable name}{The response variable in the model may be added. Such as \code{"mpg"} in the model \code{lm(mpg ~ ., data = mtcars)}}
+\item{.resid}{Residuals}
+\item{.hat}{Diagonal of the hat matrix}
+\item{.sigma}{Estimate of residual standard deviation when
+corresponding observation is dropped from model}
+\item{.cooksd}{Cooks distance, \code{\link[stats:influence.measures]{stats::cooks.distance()}}}
+\item{.fitted}{Fitted values of model}
+\item{.se.fit}{Standard errors of fitted values}
+\item{.std.resid}{Standardized residuals}
+\item{response variable name}{The response variable in the model may be added. Such as \code{"mpg"} in the model \code{lm(mpg ~ ., data = mtcars)}}
 }
 }
 
-\section{`continuous`, `combo`, `discrete` types}{
+\section{\code{continuous}, \code{combo}, \code{discrete} types}{
 
-Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{broom::\link[broom]{augment}()} output: \code{".fitted"}, \code{".resid"}, \code{".std.resid"}, \code{".sigma"}, \code{".se.fit"}, \code{".hat"}, \code{".cooksd"}. An extra key, \code{"default"}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the \code{types} parameter in \code{\link{ggduo}}.
+Similar to \code{\link{ggduo}} and \code{\link{ggpairs}}, functions may be supplied to display the different column types.  However, since the Y rows are fixed, each row has it's own corresponding function in each of the plot types: continuous, combo, and discrete.  Each plot type list can have keys that correspond to the \code{\link[broom:reexports]{broom::augment()}} output: \code{".fitted"}, \code{".resid"}, \code{".std.resid"}, \code{".sigma"}, \code{".se.fit"}, \code{".hat"}, \code{".cooksd"}. An extra key, \code{"default"}, is used to plot the response variables of the model if they are included.  Having a function for each diagnostic allows for very fine control over the diagnostics plot matrix.  The functions for each type list are wrapped into a switch function that calls the function corresponding to the y variable being plotted.  These switch functions are then passed directly to the \code{types} parameter in \code{\link{ggduo}}.
 }
 
 \examples{

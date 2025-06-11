@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_std_resid}
 \alias{ggally_nostic_std_resid}
-\title{ggnostic - standardized residuals}
+\title{\code{\link{ggnostic}} standardized residuals}
 \usage{
 ggally_nostic_std_resid(data, mapping, ..., sigma = 1)
 }
@@ -12,15 +12,18 @@ ggally_nostic_std_resid(data, mapping, ..., sigma = 1)
 \item{sigma}{sigma value for the \code{pVal} percentiles. Set to 1 for standardized residuals}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
 If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} locations of a N(0, 1) distribution.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid))
+p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
 }
 \seealso{
-\code{stats::\link[stats]{rstandard}}
+\code{\link[stats:influence.measures]{stats::rstandard()}}
 }

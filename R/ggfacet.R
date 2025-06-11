@@ -1,4 +1,4 @@
-#' ggfacet - single ggplot2 plot matrix with facet_grid
+#' Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}
 #'
 #'
 #' @param data data.frame that contains all columns to be displayed.  This data will be melted before being passed into the function \code{fn}
@@ -16,7 +16,7 @@
 #' p_ <- GGally::print_if_interactive
 #' if (requireNamespace("chemometrics", quietly = TRUE)) {
 #'   data(NIR, package = "chemometrics")
-#'   NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[,1:3])
+#'   NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[, 1:3])
 #'   str(NIR_sub)
 #'   x_cols <- c("X1115.0", "X1120.0", "X1125.0")
 #'   y_cols <- c("Glucose", "Ethanol")
@@ -30,7 +30,7 @@
 #'   p_(p)
 #'
 #'   # add a smoother
-#'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = 'smooth_loess')
+#'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = "smooth_loess")
 #'   p_(p)
 #'   # same output
 #'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = ggally_smooth_loess)
@@ -40,26 +40,25 @@
 #'   p <- ggfacet(NIR_sub, x_cols, y_cols, scales = "fixed")
 #'   p_(p)
 #' }
+#' @importFrom dplyr arrange .data reframe
 ggfacet <- function(
-  data, mapping = NULL,
-  columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data),
-  fn = ggally_points, ...,
-  columnLabelsX = names(data[columnsX]),
-  columnLabelsY = names(data[columnsY]),
-  xlab = NULL,
-  ylab = NULL,
-  title = NULL,
-  scales = "free"
-) {
-
+    data, mapping = NULL,
+    columnsX = 1:ncol(data),
+    columnsY = 1:ncol(data),
+    fn = ggally_points, ...,
+    columnLabelsX = names(data[columnsX]),
+    columnLabelsY = names(data[columnsY]),
+    xlab = NULL,
+    ylab = NULL,
+    title = NULL,
+    scales = "free") {
   data <- fix_data(data)
   fn <- wrap(fn)
 
   # fix args
   if (
-    !missing(mapping) & !is.list(mapping) &
-    !missing(columnsX) & missing(columnsY)
+    !missing(mapping) && !is.list(mapping) &&
+      !missing(columnsX) && missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -77,8 +76,8 @@ ggfacet <- function(
   # mtc$cyl <- as.factor(mtc$cyl)
   # ggfacet(
   #   mtc,
-  #   columnsY = c(1,3,4,5), columnsX = c("am", "cyl"),
-  #   fn = function(data, mapping){ggplot(data, mapping) + geom_boxplot()}
+  #   columnsY = c(1, 3, 4, 5), columnsX = c("am", "cyl"),
+  #   fn = function(data, mapping) {ggplot(data, mapping) + geom_boxplot()}
   # )
   is_factor_x <- sapply(data[columnsX], is.factor)
   if (sum(is_factor_x) != 0) {
@@ -93,24 +92,19 @@ ggfacet <- function(
     columnLabelsY <- columnLabelsY[!is_factor_y]
   }
 
-  tall_data <- ddply(
-    expand.grid(.x_col = columnsX, .y_col = columnsY),
-    c(".x_col", ".y_col"),
-    function(row) {
-      x_var <- row$.x_col[1]
-      y_var <- row$.y_col[1]
-
-      ret <- data
-      ret[[".x_val"]] <- data[[x_var]]
-      ret[[".y_val"]] <- data[[y_var]]
-      ret
-    }
-  )
+  tall_data <- expand.grid(.x_col = columnsX, .y_col = columnsY) %>%
+    reframe(
+      .by = c(".x_col", ".y_col"),
+      data,
+      .x_val = data[[.data$.x_col]],
+      .y_val = data[[.data$.y_col]]
+    ) %>%
+    arrange(.data$.x_col, .data$.y_col)
 
   if (is.null(mapping)) {
     mapping <- aes()
   }
-  mapping[c("x", "y")] <- aes_string(x = ".x_val", y = ".y_val")
+  mapping[c("x", "y")] <- aes(x = !!as.name(".x_val"), y = !!as.name(".y_val"))
 
   names(columnLabelsX) <- as.character(columnsX)
   names(columnLabelsY) <- as.character(columnsY)

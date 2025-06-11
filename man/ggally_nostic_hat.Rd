@@ -2,30 +2,41 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_hat}
 \alias{ggally_nostic_hat}
-\title{ggnostic - leverage points}
+\title{\code{\link{ggnostic}} leverage points}
 \usage{
-ggally_nostic_hat(data, mapping, ..., linePosition = 2 *
-  sum(eval_data_col(data, mapping$y))/nrow(data),
-  lineColor = brew_colors("grey"), lineSize = 0.5, lineAlpha = 1,
-  lineType = 2, avgLinePosition = sum(eval_data_col(data,
-  mapping$y))/nrow(data), avgLineColor = brew_colors("grey"),
-  avgLineSize = lineSize, avgLineAlpha = lineAlpha, avgLineType = 1)
+ggally_nostic_hat(
+  data,
+  mapping,
+  ...,
+  linePosition = 2 * sum(eval_data_col(data, mapping$y))/nrow(data),
+  lineColor = brew_colors("grey"),
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 2,
+  avgLinePosition = sum(eval_data_col(data, mapping$y))/nrow(data),
+  avgLineColor = brew_colors("grey"),
+  avgLineSize = lineSize,
+  avgLineAlpha = lineAlpha,
+  avgLineType = 1
+)
 }
 \arguments{
 \item{data, mapping, ...}{supplied directly to \code{\link{ggally_nostic_line}}}
 
-\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}} for the cutoff line}
+\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
+\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} for the cutoff line}
 
-\item{avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}} for the average line}
+\item{avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType}{parameters supplied
+to \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} for the average line}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
 A function to display stats::influence's hat information against a given explanatory variable.
 }
 \details{
-As stated in \code{stats::\link[stats]{influence}} documentation:
+As stated in \code{\link[stats:lm.influence]{stats::influence()}} documentation:
 
 hat: a vector containing the diagonal of the 'hat' matrix.
 
@@ -35,9 +46,12 @@ A suggested "cutoff" line is added to the plot at a height of 2 * p / n and an e
 If either \code{linePosition} or \code{avgLinePosition} is \code{NULL}, the respective line will not be drawn.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_hat(dt, ggplot2::aes(wt, .hat))
+p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
 }
 \seealso{
-\code{stats::\link[stats]{influence}}
+\code{\link[stats:lm.influence]{stats::influence()}}
 }

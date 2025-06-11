@@ -4,8 +4,14 @@
 \alias{add_ref_boxes}
 \title{Add reference boxes around each cell of the glyphmap.}
 \usage{
-add_ref_boxes(data, var_fill = NULL, color = "white", size = 0.5,
-  fill = NA, ...)
+add_ref_boxes(
+  data,
+  var_fill = NULL,
+  color = "white",
+  size = 0.5,
+  fill = NA,
+  ...
+)
 }
 \arguments{
 \item{data}{A glyphmap structure.}
@@ -18,7 +24,7 @@ add_ref_boxes(data, var_fill = NULL, color = "white", size = 0.5,
 
 \item{fill}{fill value used if \code{var_fill} is \code{NULL}}
 
-\item{...}{other arguments passed onto \code{\link[ggplot2]{geom_rect}}}
+\item{...}{other arguments passed onto \code{\link[ggplot2:geom_tile]{ggplot2::geom_rect()}}}
 }
 \description{
 Add reference boxes around each cell of the glyphmap.

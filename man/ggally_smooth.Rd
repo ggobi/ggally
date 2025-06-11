@@ -4,9 +4,17 @@
 \alias{ggally_smooth}
 \alias{ggally_smooth_loess}
 \alias{ggally_smooth_lm}
-\title{Plots the Scatter Plot with Smoothing}
+\title{Scatter plot with a smoothed line}
 \usage{
-ggally_smooth(data, mapping, ..., method = "lm", se = TRUE, shrink = TRUE)
+ggally_smooth(
+  data,
+  mapping,
+  ...,
+  method = "lm",
+  formula = y ~ x,
+  se = TRUE,
+  shrink = TRUE
+)
 
 ggally_smooth_loess(data, mapping, ...)
 
@@ -17,9 +25,9 @@ ggally_smooth_lm(data, mapping, ...)
 
 \item{mapping}{aesthetics being used}
 
-\item{...}{other arguments to add to geom_point}
-
 \item{method, se}{parameters supplied to \code{\link[ggplot2]{geom_smooth}}}
+
+\item{formula, ...}{other arguments to add to geom_smooth}
 
 \item{shrink}{boolean to determine if y range is reduced to range of points or points and error ribbon}
 }
@@ -30,12 +38,14 @@ Add a smoothed condition mean with a given scatter plot.
 Y limits are reduced to match original Y range with the goal of keeping the Y axis the same across plots.
 }
 \examples{
- data(tips, package = "reshape")
- ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip))
- ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip"))
- ggally_smooth(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips)
+p_(ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
+p_(ggally_smooth(tips, mapping = ggplot2::aes(total_bill, tip, color = sex)))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

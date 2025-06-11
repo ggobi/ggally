@@ -1,0 +1,14 @@
+---
+title: "stat_*(): Additional statistics for ggplot2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{stat_*(): Additional statistics for ggplot2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+`{GGally}` reexports three `{ggplot2}` statistics functions from `{ggstats}`. Please see their corresponding vignettes in `{ggstats}` for more details:
+* [Compute cross-tabulation statistics with `stat_cross()`](https://larmarange.github.io/ggstats/articles/stat_cross.html) (`vignette("stat_cross", "ggstats")`)
+* [Compute custom proportions with `stat_prop()`](https://larmarange.github.io/ggstats/articles/stat_prop.html)  (`vignette("stat_prop", "ggstats")`)
+* [Compute weighted mean with `stat_weighted_mean()`](https://larmarange.github.io/ggstats/articles/stat_weighted_mean.html) (`vignette("stat_weighted_mean", "ggstats")`)

@@ -2,10 +2,15 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_se_fit}
 \alias{ggally_nostic_se_fit}
-\title{ggnostic - fitted value standard error}
+\title{\code{\link{ggnostic}} fitted value's standard error}
 \usage{
-ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("grey"),
-  linePosition = NULL)
+ggally_nostic_se_fit(
+  data,
+  mapping,
+  ...,
+  lineColor = brew_colors("grey"),
+  linePosition = NULL
+)
 }
 \arguments{
 \item{data, mapping, ..., lineColor}{parameters supplied to \code{\link{ggally_nostic_line}}}
@@ -13,7 +18,7 @@ ggally_nostic_se_fit(data, mapping, ..., lineColor = brew_colors("grey"),
 \item{linePosition}{base comparison for a perfect fit}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
 A function to display \code{stats::\link[stats]{predict}}'s standard errors
@@ -21,16 +26,19 @@ A function to display \code{stats::\link[stats]{predict}}'s standard errors
 \details{
 As stated in \code{stats::\link[stats]{predict}} documentation:
 
- If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
+If the logical 'se.fit' is 'TRUE', standard errors of the predictions are calculated.  If the numeric argument 'scale' is set (with optional ''df'), it is used as the residual standard deviation in the computation of the standard errors, otherwise this is extracted from the model fit.
 
 Since the se.fit is \code{TRUE} and scale is unset by default, the standard errors are extracted from the model fit.
 
 A base line of 0 is added to give reference to a perfect fit.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit))
+p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
 }
 \seealso{
-\code{stats::\link[stats]{influence}}
+\code{\link[stats:lm.influence]{stats::influence()}}
 }

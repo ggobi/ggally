@@ -1,34 +1,30 @@
 
-context("ggnet2")
-
 if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-rq <- function(...) {
-  require(..., quietly = TRUE)
-}
-rq(network) # network objects
-rq(sna)     # placement and centrality
+skip_if_not(rq(network)) # network objects
+skip_if_not(rq(sna)) # placement and centrality
 
-rq(ggplot2) # grammar of graphics
-rq(grid)    # arrows
-rq(scales)  # sizing
+skip_if_not(rq(ggplot2)) # grammar of graphics
+skip_if_not(rq(grid)) # arrows
+skip_if_not(rq(scales)) # sizing
 
-rq(intergraph)   # test igraph conversion
-rq(RColorBrewer) # test ColorBrewer palettes
+skip_if_not(rq(intergraph)) # test igraph conversion
+skip_if_not(rq(RColorBrewer)) # test ColorBrewer palettes
 
 test_that("examples", {
-
+  skip_if_not_installed("network")
   ### --- start: documented examples
+  set.seed(54321)
 
   # random adjacency matrix
-  x           <- 10
-  ndyads      <- x * (x - 1)
-  density     <- x / ndyads
-  m           <- matrix(0, nrow = x, ncol = x)
-  dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-  m[ row(m) != col(m) ] <- runif(ndyads) < density
+  x <- 10
+  ndyads <- x * (x - 1)
+  density <- x / ndyads
+  m <- matrix(0, nrow = x, ncol = x)
+  dimnames(m) <- list(letters[1:x], letters[1:x])
+  m[row(m) != col(m)] <- runif(ndyads) < density
   m
 
   # random undirected network
@@ -125,7 +121,9 @@ test_that("examples", {
   expect_message(ggnet2(n, na.rm = "missing"), "removed")
 
   n %v% "missing" <- NA
-  expect_warning(ggnet2(n, na.rm = "missing"), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet2(n, na.rm = "missing"), "removed all nodes")
+  })
 
   # test size = "degree"
   ggnet2(n, size = "degree")
@@ -133,14 +131,18 @@ test_that("examples", {
   # test size.min
   expect_error(ggnet2(n, size = "degree", size.min = -1), "incorrect size.min")
   expect_message(ggnet2(n, size = "degree", size.min = 1), "size.min removed")
-  expect_warning(ggnet2(n, size = "abc", size.min = 1), "not numeric")
-  expect_warning(ggnet2(n, size = 4, size.min = 5), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet2(n, size = "abc", size.min = 1), "not numeric")
+    expect_warning(ggnet2(n, size = 4, size.min = 5), "removed all nodes")
+  })
 
   # test size.max
   expect_error(ggnet2(n, size = "degree", size.max = -1), "incorrect size.max")
   expect_message(ggnet2(n, size = "degree", size.max = 99), "size.max removed")
-  expect_warning(ggnet2(n, size = "abc", size.max = 1), "not numeric")
-  expect_warning(ggnet2(n, size = 4, size.max = 3), "removed all nodes")
+  suppressMessages({
+    expect_warning(ggnet2(n, size = "abc", size.max = 1), "not numeric")
+    expect_warning(ggnet2(n, size = 4, size.max = 3), "removed all nodes")
+  })
 
   # test size.cut
   ggnet2(n, size = 1:10, size.cut = 3)
@@ -234,10 +236,10 @@ test_that("examples", {
 
   # weighted adjacency matrix
   bip <- data.frame(
-    event1 = c(1, 2, 1, 0),
-    event2 = c(0, 0, 3, 0),
-    event3 = c(1, 1, 0, 4),
-    row.names = letters[1:4]
+    event1 = c(1, 2, 1),
+    event2 = c(0, 0, 3),
+    event3 = c(1, 1, 0),
+    row.names = letters[1:3]
   )
 
   # weighted bipartite network
@@ -245,7 +247,7 @@ test_that("examples", {
     bip,
     matrix.type = "bipartite",
     ignore.eval = FALSE,
-    names.eval = "weights"
+    # names.eval = "weights"
   )
 
   # test bipartite mode
@@ -256,12 +258,11 @@ test_that("examples", {
   expect_warning(ggnet2(network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)), "self-loops")
 
   expect_error(ggnet2(1:2), "network object")
-  expect_error(ggnet2(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper graphs")
+  expect_error(ggnet2(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
   expect_error(ggnet2(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
 
   ### --- test igraph functionality
-  if (requireNamespace("igraph", quietly = TRUE)) {
-    library(igraph)
+  if (rq(igraph) && rq(intergraph)) {
     # test igraph conversion
     p <- ggnet2(asIgraph(n), color = "group")
     expect_null(p$guides$colour)
@@ -271,5 +272,4 @@ test_that("examples", {
 
     expect_true(TRUE)
   }
-
 })

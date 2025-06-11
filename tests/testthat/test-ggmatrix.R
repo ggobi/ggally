@@ -1,10 +1,5 @@
 
-context("ggmatrix")
-data(tips, package = "reshape")
-
-expect_print <- function(x) {
-  testthat::expect_silent(print(x))
-}
+data(tips)
 
 test_that("stops", {
 
@@ -29,7 +24,9 @@ test_that("expression labels", {
   chars <- c("col1", "col2")
   exprs <- c("alpha[0]", "gamma[x + y ^ z]")
 
-  expect_print(ggpairs(tips, 1:2, columnLabels = exprs, labeller = "label_parsed"))
+  p <- ggpairs(tips, 1:2, columnLabels = exprs, labeller = "label_parsed")
+  vdiffr::expect_doppelganger("expression-labels", p)
+
   expect_error(print(ggpairs(tips, 1:2, columnLabels = expression(alpha, beta))), "xAxisLabels")
 })
 
@@ -90,7 +87,7 @@ test_that("missing plot", {
     byrow = TRUE
   )
   # reaches code where there are more cells than plots
-  print(a)
+  vdiffr::expect_doppelganger("not-enough-plots", a)
 
   expect_equal(a[1, 1]$ggally_check_val, 1)
   expect_equal(a[1, 3]$ggally_check_val, 3)
@@ -119,10 +116,10 @@ test_that("str.ggmatrix", {
 test_that("blank", {
   pm <- ggpairs(tips, 1:2)
   pm[1, 2] <- "blank"
-  expect_print(pm)
+  vdiffr::expect_doppelganger("blank-1_2", pm)
 
   pm[2, 1] <- NULL
-  expect_print(pm)
+  vdiffr::expect_doppelganger("blank-1_2-2_1", pm)
 
   expect_equal(length(pm$plots), 4)
 
@@ -145,8 +142,7 @@ test_that("proportions", {
     yProportions = c(1, 2),
     title = "big plot, small marginals"
   )
-
-  expect_print(pm2)
+  vdiffr::expect_doppelganger("proportions", pm2)
 
   # turn on progress for a quick plot
   # TODO - turn test back on when it uses message properly
@@ -159,10 +155,10 @@ test_that("ggmatrix_gtable progress", {
   expect_silent({
     pg <- ggmatrix_gtable(pm)
   })
-  expect_warning({
+  lifecycle::expect_deprecated({
     ggmatrix_gtable(pm, progress = TRUE)
   })
-  expect_warning({
+  lifecycle::expect_deprecated({
     ggmatrix_gtable(pm, progress_format = "asdfasdf :plot_i")
   })
 })
@@ -175,3 +171,31 @@ test_that("ggmatrix_gtable progress", {
 #   printShowStrip <- NULL
 # }
 #
+
+
+test_that("ggmatrix proportions", {
+
+  expect_error({
+    ggmatrix_proportions("not auto", tips, 1:ncol(tips))
+  }, "need to be non-NA")
+  expect_error({
+    ggmatrix_proportions(NA, tips, 1:ncol(tips))
+  }, "need to be non-NA")
+  expect_error({
+    ggmatrix_proportions(c(1, NA, 1, 1, 1, 1, 1), tips, 1:ncol(tips))
+  }, "need to be non-NA")
+
+  expect_equal(
+    ggmatrix_proportions("auto", tips, 1:ncol(tips)),
+    c(2.5, 2.5, 2, 2, 4, 2, 2.5)
+  )
+
+  expect_equal(
+    ggmatrix_proportions(1, tips, 1:ncol(tips)),
+    c(1, 1, 1, 1, 1, 1, 1)
+  )
+  expect_equal(
+    ggmatrix_proportions(NULL, tips, 1:ncol(tips)),
+    NULL
+  )
+})

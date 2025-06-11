@@ -4,7 +4,9 @@
 \name{twitter_spambots}
 \alias{twitter_spambots}
 \title{Twitter spambots}
-\format{An object of class \code{network} with 120 edges and 94 vertices.}
+\format{
+An object of class \code{network} with 120 edges and 94 vertices.
+}
 \usage{
 data(twitter_spambots)
 }
@@ -16,11 +18,11 @@ Each node of the network is identified by the Twitter screen name of the
 account and further carries five vertex attributes:
 
 \itemize{
-  \item location user's location, as provided by the user
-  \item lat latitude, based on the user's location
-  \item lon longitude, based on the user's location
-  \item followers number of Twitter accounts that follow this account
-  \item friends number of Twitter accounts followed by the account
+\item location user's location, as provided by the user
+\item lat latitude, based on the user's location
+\item lon longitude, based on the user's location
+\item followers number of Twitter accounts that follow this account
+\item friends number of Twitter accounts followed by the account
 }
 }
 \author{

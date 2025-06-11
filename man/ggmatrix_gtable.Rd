@@ -2,26 +2,30 @@
 % Please edit documentation in R/ggmatrix_gtable.R
 \name{ggmatrix_gtable}
 \alias{ggmatrix_gtable}
-\title{Print ggmatrix object}
+\title{\code{\link{ggmatrix}} \pkg{gtable} object}
 \usage{
-ggmatrix_gtable(pm, ..., progress = NULL,
-  progress_format = formals(ggmatrix_progress)$format)
+ggmatrix_gtable(
+  pm,
+  ...,
+  progress = NULL,
+  progress_format = formals(ggmatrix_progress)$format
+)
 }
 \arguments{
-\item{pm}{ggmatrix object to be plotted}
+\item{pm}{\code{\link{ggmatrix}} object to be plotted}
 
 \item{...}{ignored}
 
-\item{progress, progress_format}{Please use the 'progress' parameter in your ggmatrix-like function.  See \code{\link{ggmatrix_progress}} for a few examples.  These parameters will soon be deprecated.}
+\item{progress, progress_format}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Please use the 'progress' parameter in your \code{\link{ggmatrix}}-like function.  See \code{\link{ggmatrix_progress}} for a few examples.}
 }
 \description{
-Specialized method to print the ggmatrix object-
+Specialized method to print the \code{\link{ggmatrix}} object.
 }
 \examples{
-data(tips, package = "reshape")
-pm <- ggpairs(tips, c(1,3,2), mapping = ggplot2::aes_string(color = "sex"))
+data(tips)
+pm <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes(color = sex))
 ggmatrix_gtable(pm)
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }

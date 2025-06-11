@@ -2,16 +2,35 @@
 % Please edit documentation in R/ggcorr.R
 \name{ggcorr}
 \alias{ggcorr}
-\title{ggcorr - Plot a correlation matrix with ggplot2}
+\title{Correlation matrix}
 \usage{
-ggcorr(data, method = c("pairwise", "pearson"), cor_matrix = NULL,
-  nbreaks = NULL, digits = 2, name = "", low = "#3B9AB2",
-  mid = "#EEEEEE", high = "#F21A00", midpoint = 0, palette = NULL,
-  geom = "tile", min_size = 2, max_size = 6, label = FALSE,
-  label_alpha = FALSE, label_color = "black", label_round = 1,
-  label_size = 4, limits = c(-1, 1), drop = is.null(limits) ||
-  identical(limits, FALSE), layout.exp = 0, legend.position = "right",
-  legend.size = 9, ...)
+ggcorr(
+  data,
+  method = c("pairwise", "pearson"),
+  cor_matrix = NULL,
+  nbreaks = NULL,
+  digits = 2,
+  name = "",
+  low = "#3B9AB2",
+  mid = "#EEEEEE",
+  high = "#F21A00",
+  midpoint = 0,
+  palette = NULL,
+  geom = "tile",
+  min_size = 2,
+  max_size = 6,
+  label = FALSE,
+  label_alpha = FALSE,
+  label_color = "black",
+  label_round = 1,
+  label_size = 4,
+  limits = c(-1, 1),
+  drop = is.null(limits) || identical(limits, FALSE),
+  layout.exp = 0,
+  legend.position = "right",
+  legend.size = 9,
+  ...
+)
 }
 \arguments{
 \item{data}{a data frame or matrix containing numeric (continuous) data. If
@@ -115,10 +134,10 @@ Defaults to \code{9}.}
 the diagonal labels.}
 }
 \description{
-Function for making a correlation matrix plot, using ggplot2.
+Function for making a correlation matrix plot, using \pkg{ggplot2}.
 The function is directly inspired by Tian Zheng and Yu-Sung Su's
 \code{corrplot} function in the 'arm' package.
-Please visit \url{http://github.com/briatte/ggcorr} for the latest version
+Please visit \url{https://github.com/briatte/ggcorr} for the latest version
 of \code{ggcorr}, and see the vignette at
 \url{https://briatte.github.io/ggcorr/} for many examples of how to use it.
 }
@@ -128,19 +147,23 @@ Recommended values for the \code{nbreaks} argument are \code{3} to
 supported by diverging ColorBrewer palettes.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 # Basketball statistics provided by Nathan Yau at Flowing Data.
 dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
 
 # Default output.
-ggcorr(dt[, -1])
+p_(ggcorr(dt[, -1]))
 
-# Labelled output, with coefficient transparency.
-ggcorr(dt[, -1],
-       label = TRUE,
-       label_alpha = TRUE)
+# Labeled output, with coefficient transparency.
+p_(ggcorr(dt[, -1],
+  label = TRUE,
+  label_alpha = TRUE
+))
 
 # Custom options.
-ggcorr(
+p_(ggcorr(
   dt[, -1],
   name = expression(rho),
   geom = "circle",
@@ -151,13 +174,13 @@ ggcorr(
   nbreaks = 6,
   angle = -45,
   palette = "PuOr" # colorblind safe, photocopy-able
-)
+))
 
 # Supply your own correlation matrix
-ggcorr(
+p_(ggcorr(
   data = NULL,
   cor_matrix = cor(dt[, -1], use = "pairwise")
-)
+))
 }
 \seealso{
 \code{\link[stats]{cor}} and \code{corrplot} in the

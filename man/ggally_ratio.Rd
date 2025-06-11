@@ -2,10 +2,16 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_ratio}
 \alias{ggally_ratio}
-\title{Plots a mosaic plot}
+\title{Mosaic plot}
 \usage{
-ggally_ratio(data, mapping = do.call(ggplot2::aes_string,
-  as.list(colnames(data)[1:2])), ..., floor = 0, ceiling = NULL)
+ggally_ratio(
+  data,
+  mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x",
+    "y"))),
+  ...,
+  floor = 0,
+  ceiling = NULL
+)
 }
 \arguments{
 \item{data}{data set using}
@@ -22,16 +28,19 @@ ggally_ratio(data, mapping = do.call(ggplot2::aes_string,
 Plots the mosaic plot by using fluctuation.
 }
 \examples{
-data(tips, package = "reshape")
-ggally_ratio(tips, ggplot2::aes(sex, day))
-ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal()
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips)
+p_(ggally_ratio(tips, ggplot2::aes(sex, day)))
+p_(ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal())
 # only plot tiles greater or equal to 20 and scale to a max of 50
-ggally_ratio(
+p_(ggally_ratio(
   tips, ggplot2::aes(sex, day),
   floor = 20, ceiling = 50
-) + ggplot2::theme(aspect.ratio = 4/2)
+) + ggplot2::theme(aspect.ratio = 4 / 2))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
 \keyword{hplot}

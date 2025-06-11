@@ -2,11 +2,17 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_cooksd}
 \alias{ggally_nostic_cooksd}
-\title{ggnostic - Cook's distance}
+\title{\code{\link{ggnostic}} Cook's distance}
 \usage{
-ggally_nostic_cooksd(data, mapping, ..., linePosition = pf(0.5,
-  length(attr(data, "var_x")), nrow(data) - length(attr(data, "var_x"))),
-  lineColor = brew_colors("grey"), lineType = 2)
+ggally_nostic_cooksd(
+  data,
+  mapping,
+  ...,
+  linePosition = pf(0.5, length(attr(data, "var_x")), nrow(data) - length(attr(data,
+    "var_x"))),
+  lineColor = brew_colors("grey"),
+  lineType = 2
+)
 }
 \arguments{
 \item{data, mapping, ..., lineColor, lineType}{parameters supplied to \code{\link{ggally_nostic_line}}}
@@ -14,20 +20,23 @@ ggally_nostic_cooksd(data, mapping, ..., linePosition = pf(0.5,
 \item{linePosition}{4 / n is the general cutoff point for Cook's Distance}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
-A function to display \code{stats::\link[stats]{cooks.distance}}.
+A function to display \code{\link[stats:influence.measures]{stats::cooks.distance()}}.
 }
 \details{
-A line is added at F_{p, n - p}(0.5) to display the general cutoff point for Cook's Distance.
+A line is added at \eqn{F_{p,n-p}(0.5)}{F[p,n-p](0.5)} to display the general cutoff point for Cook's Distance.
 
 Reference: Michael H. Kutner, Christopher J. Nachtsheim, John Neter, and William Li. Applied linear statistical models. The McGraw-Hill / Irwin series operations and decision sciences. McGraw-Hill Irwin, 2005, p. 403
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd))
+p_(ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd)))
 }
 \seealso{
-\code{stats::\link[stats]{cooks.distance}}
+\code{\link[stats:influence.measures]{stats::cooks.distance()}}
 }

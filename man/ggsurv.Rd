@@ -2,12 +2,26 @@
 % Please edit documentation in R/ggsurv.R
 \name{ggsurv}
 \alias{ggsurv}
-\title{Survival curves with ggplot2}
+\title{Survival curves}
 \usage{
-ggsurv(s, CI = "def", plot.cens = TRUE, surv.col = "gg.def",
-  cens.col = "gg.def", lty.est = 1, lty.ci = 2, size.est = 0.5,
-  size.ci = size.est, cens.size = 2, cens.shape = 3, back.white = FALSE,
-  xlab = "Time", ylab = "Survival", main = "", order.legend = TRUE)
+ggsurv(
+  s,
+  CI = "def",
+  plot.cens = TRUE,
+  surv.col = "gg.def",
+  cens.col = "gg.def",
+  lty.est = 1,
+  lty.ci = 2,
+  size.est = 0.5,
+  size.ci = size.est,
+  cens.size = 2,
+  cens.shape = 3,
+  back.white = FALSE,
+  xlab = "Time",
+  ylab = "Survival",
+  main = "",
+  order.legend = TRUE
+)
 }
 \arguments{
 \item{s}{an object of class \code{survfit}}
@@ -18,7 +32,7 @@ for single stratum objects and \code{FALSE} for multiple strata objects.}
 \item{plot.cens}{mark the censored observations?}
 
 \item{surv.col}{colour of the survival estimate. Defaults to black for
-one stratum, and to the default \code{ggplot2} colours for multiple
+one stratum, and to the default \pkg{ggplot2} colours for multiple
 strata. Length of vector with colour names should be either 1 or equal
 to the number of strata.}
 
@@ -52,50 +66,61 @@ grey of \code{ggplot2} but will be white with borders around the plot.}
 An object of class \code{ggplot}
 }
 \description{
-This function produces Kaplan-Meier plots using \code{ggplot2}.
+This function produces Kaplan-Meier plots using \pkg{ggplot2}.
 As a first argument it needs a \code{survfit} object, created by the
 \code{survival} package. Default settings differ for single stratum and
 multiple strata objects.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
 if (require(survival) && require(scales)) {
-  data(lung, package = "survival")
+  lung <- survival::lung
   sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
-  ggsurv(sf.lung)
+  p_(ggsurv(sf.lung))
 
   # Multiple strata examples
   sf.sex <- survival::survfit(Surv(time, status) ~ sex, data = lung)
   pl.sex <- ggsurv(sf.sex)
-  pl.sex
+  p_(pl.sex)
 
   # Adjusting the legend of the ggsurv fit
-  pl.sex +
-    ggplot2::guides(linetype = FALSE) +
+  p_(pl.sex +
+    ggplot2::guides(linetype = "none") +
     ggplot2::scale_colour_discrete(
-      name   = 'Sex',
-      breaks = c(1,2),
-      labels = c('Male', 'Female')
-    )
+      name   = "Sex",
+      breaks = c(1, 2),
+      labels = c("Male", "Female")
+    ))
+
+  # Multiple factors
+  lung2 <- dplyr::mutate(lung, older = as.factor(age > 60))
+  sf.sex2 <- survival::survfit(Surv(time, status) ~ sex + older, data = lung2)
+  pl.sex2 <- ggsurv(sf.sex2)
+  p_(pl.sex2)
+
+  # Change legend title
+  p_(pl.sex2 + labs(color = "New Title", linetype = "New Title"))
 
   # We can still adjust the plot after fitting
-  data(kidney, package = "survival")
+  kidney <- survival::kidney
   sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
   pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
-  pl.kid
+  p_(pl.kid)
 
   # Zoom in to first 80 days
-  pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
+  p_(pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1)))
 
   # Add the diseases names to the plot and remove legend
-  pl.kid +
+  p_(pl.kid +
     ggplot2::annotate(
       "text",
-      label  = c("PKD", "Other", "GN", "AN"),
-      x      = c(90, 125, 5, 60),
-      y      = c(0.8, 0.65, 0.55, 0.30),
-      size   = 5,
-      colour = scales::hue_pal(
+      label = c("PKD", "Other", "GN", "AN"),
+      x = c(90, 125, 5, 60),
+      y = c(0.8, 0.65, 0.55, 0.30),
+      size = 5,
+      colour = scales::pal_hue(
         h         = c(0, 360) + 15,
         c         = 100,
         l         = 65,
@@ -103,9 +128,9 @@ if (require(survival) && require(scales)) {
         direction = 1
       )(4)
     ) +
-    ggplot2::guides(color = FALSE, linetype = FALSE)
+    ggplot2::guides(color = "none", linetype = "none"))
 }
 }
 \author{
-Edwin Thoen \email{edwinthoen@gmail.com}
+Edwin Thoen
 }

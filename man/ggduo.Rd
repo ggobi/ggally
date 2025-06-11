@@ -2,17 +2,31 @@
 % Please edit documentation in R/ggpairs.R
 \name{ggduo}
 \alias{ggduo}
-\title{ggduo - A ggplot2 generalized pairs plot for two columns sets of a data.frame}
+\title{\pkg{ggplot2} generalized pairs plot for two columns sets of data}
 \usage{
-ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data), title = NULL, types = list(continuous =
-  "smooth_loess", comboVertical = "box_no_facet", comboHorizontal = "facethist",
-  discrete = "ratio"), axisLabels = c("show", "none"),
+ggduo(
+  data,
+  mapping = NULL,
+  columnsX = 1:ncol(data),
+  columnsY = 1:ncol(data),
+  title = NULL,
+  types = list(continuous = "smooth_loess", comboVertical = "box_no_facet",
+    comboHorizontal = "facethist", discrete = "count"),
+  axisLabels = c("show", "none"),
   columnLabelsX = colnames(data[columnsX]),
-  columnLabelsY = colnames(data[columnsY]), labeller = "label_value",
-  switch = NULL, xlab = NULL, ylab = NULL, showStrips = NULL,
-  legend = NULL, cardinality_threshold = 15, progress = NULL,
-  legends = stop("deprecated"))
+  columnLabelsY = colnames(data[columnsY]),
+  labeller = "label_value",
+  switch = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  showStrips = NULL,
+  legend = NULL,
+  cardinality_threshold = 15,
+  progress = NULL,
+  xProportions = NULL,
+  yProportions = NULL,
+  legends = deprecated()
+)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -41,20 +55,22 @@ ggduo(data, mapping = NULL, columnsX = 1:ncol(data),
 
 \item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
-\item{legends}{deprecated}
+\item{xProportions, yProportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
+
+\item{legends}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
 \description{
 Make a matrix of plots with a given data set with two different column sets
 }
 \details{
 \code{types} is a list that may contain the variables
-'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
+'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
 \describe{
- \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
- \item{comboHorizontal}{exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
- \item{comboVertical}{exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
- \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
- \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+\item{continuous}{This option is used for continuous X and Y data.}
+\item{comboHorizontal}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+\item{comboVertical}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+\item{discrete}{This option is used for categorical X and Y data.}
+\item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 }
 
 If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
@@ -62,63 +78,84 @@ If 'blank' is ever chosen as an option, then ggduo will produce an empty plot.
 If a function is supplied as an option, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
- # small function to display plots only if it's interactive
- p_ <- GGally::print_if_interactive
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
- data(baseball, package = "plyr")
+data(baseball)
 
- # Keep players from 1990-1995 with at least one at bat
- # Add how many singles a player hit
- # (must do in two steps as X1b is used in calculations)
- dt <- transform(
-   subset(baseball, year >= 1990 & year <= 1995 & ab > 0),
-   X1b = h - X2b - X3b - hr
- )
- # Add
- #  the player's batting average,
- #  the player's slugging percentage,
- #  and the player's on base percentage
- # Make factor a year, as each season is discrete
- dt <- transform(
-   dt,
-   batting_avg = h / ab,
-   slug = (X1b + 2*X2b + 3*X3b + 4*hr) / ab,
-   on_base = (h + bb + hbp) / (ab + bb + hbp),
-   year = as.factor(year)
- )
-
-
- pm <- ggduo(
-   dt,
-   c("year", "g", "ab", "lg"),
-   c("batting_avg", "slug", "on_base"),
-   mapping = ggplot2::aes(color = lg)
- )
- # Prints, but
- #   there is severe over plotting in the continuous plots
- #   the labels could be better
- #   want to add more hitting information
- p_(pm)
-
- # address overplotting issues and add a title
- pm <- ggduo(
-   dt,
-   c("year", "g", "ab", "lg"),
-   c("batting_avg", "slug", "on_base"),
-   columnLabelsX = c("year", "player game count", "player at bat count", "league"),
-   columnLabelsY = c("batting avg", "slug \%", "on base \%"),
-   title = "Baseball Hitting Stats from 1990-1995",
-   mapping = ggplot2::aes(color = lg),
-   types = list(
-     # change the shape and add some transparency to the points
-     continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
-   ),
-   showStrips = FALSE
- );
-
- p_(pm)
+# Keep players from 1990-1995 with at least one at bat
+# Add how many singles a player hit
+# (must do in two steps as X1b is used in calculations)
+dt <- transform(
+  subset(baseball, year >= 1990 & year <= 1995 & ab > 0),
+  X1b = h - X2b - X3b - hr
+)
+# Add
+#  the player's batting average,
+#  the player's slugging percentage,
+#  and the player's on base percentage
+# Make factor a year, as each season is discrete
+dt <- transform(
+  dt,
+  batting_avg = h / ab,
+  slug = (X1b + 2 * X2b + 3 * X3b + 4 * hr) / ab,
+  on_base = (h + bb + hbp) / (ab + bb + hbp),
+  year = as.factor(year)
+)
 
 
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  mapping = ggplot2::aes(color = lg)
+)
+# Prints, but
+#   there is severe over plotting in the continuous plots
+#   the labels could be better
+#   want to add more hitting information
+p_(pm)
+
+# address overplotting issues and add a title
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  columnLabelsX = c("year", "player game count", "player at bat count", "league"),
+  columnLabelsY = c("batting avg", "slug \%", "on base \%"),
+  title = "Baseball Hitting Stats from 1990-1995",
+  mapping = ggplot2::aes(color = lg),
+  types = list(
+    # change the shape and add some transparency to the points
+    continuous = wrap("smooth_loess", alpha = 0.50, shape = "+")
+  ),
+  showStrips = FALSE
+)
+
+p_(pm)
+
+# Use "auto" to adapt width of the sub-plots
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  mapping = ggplot2::aes(color = lg),
+  xProportions = "auto"
+)
+
+p_(pm)
+
+# Custom widths & heights of the sub-plots
+pm <- ggduo(
+  dt,
+  c("year", "g", "ab", "lg"),
+  c("batting_avg", "slug", "on_base"),
+  mapping = ggplot2::aes(color = lg),
+  xProportions = c(6, 4, 3, 2),
+  yProportions = c(1, 2, 1)
+)
+
+p_(pm)
 
 # Example derived from:
 ## R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital
@@ -143,8 +180,8 @@ p_(ggpairs(psychademic, columns = academic_variables))
 
 ## Between correlation
 loess_with_cor <- function(data, mapping, ..., method = "pearson") {
-  x <- eval(mapping$x, data)
-  y <- eval(mapping$y, data)
+  x <- eval_data_col(data, mapping$x)
+  y <- eval_data_col(data, mapping$y)
   cor <- cor(x, y, method = method)
   ggally_smooth_loess(data, mapping, ...) +
     ggplot2::geom_label(
@@ -174,7 +211,7 @@ pm <- ggduo(
   rev(psych_variables), academic_variables,
   types = list(continuous = loess_with_cor),
   showStrips = FALSE,
-  legend = c(5,2)
+  legend = c(5, 2)
 )
 suppressWarnings(p_(pm))
 
@@ -186,8 +223,39 @@ pm <- ggduo(
   rev(psych_variables), academic_variables,
   types = list(continuous = loess_with_cor),
   showStrips = FALSE,
-  legend = c(5,2)
+  legend = c(5, 2)
 ) +
   ggplot2::theme(legend.position = "bottom")
 suppressWarnings(p_(pm))
+#  dt,
+#  c("year", "g", "ab", "lg", "lg"),
+#  c("batting_avg", "slug", "on_base", "hit_type"),
+#  columnLabelsX = c("year", "player game count", "player at bat count", "league", ""),
+#  columnLabelsY = c("batting avg", "slug \%", "on base \%", "hit type"),
+#  title = "Baseball Hitting Stats from 1990-1995 (player strike in 1994)",
+#  mapping = aes(color = year),
+#  types = list(
+#    continuous = wrap("smooth_loess", alpha = 0.50, shape = "+"),
+#    comboHorizontal = wrap(display_hit_type_combo, binwidth = 15),
+#    discrete = wrap(display_hit_type_discrete, color = "black", size = 0.15)
+#  ),
+#  showStrips = FALSE
+## make the 5th column blank, except for the legend
+#  australia_PISA2012,
+#  c("gender", "age", "homework", "possessions"),
+#  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#  types = list(
+#    continuous = "points",
+#    combo = "box",
+#    discrete = "ratio"
+#  )
+#  australia_PISA2012,
+#  c("gender", "age", "homework", "possessions"),
+#  c("PV1MATH", "PV2MATH", "PV3MATH", "PV4MATH", "PV5MATH"),
+#  mapping = ggplot2::aes(color = gender),
+#  types = list(
+#    continuous = wrap("smooth", alpha = 0.25, method = "loess"),
+#    combo = "box",
+#    discrete = "ratio"
+#  )
 }

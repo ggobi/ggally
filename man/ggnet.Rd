@@ -2,27 +2,54 @@
 % Please edit documentation in R/ggnet.R
 \name{ggnet}
 \alias{ggnet}
-\title{ggnet - Plot a network with ggplot2}
+\title{Network plot}
 \usage{
-ggnet(net, mode = "fruchtermanreingold", layout.par = NULL,
-  layout.exp = 0, size = 9, alpha = 1, weight = "none",
-  weight.legend = NA, weight.method = weight, weight.min = NA,
-  weight.max = NA, weight.cut = FALSE, group = NULL, group.legend = NA,
-  node.group = group, node.color = NULL, node.alpha = alpha,
-  segment.alpha = alpha, segment.color = "grey50", segment.label = NULL,
-  segment.size = 0.25, arrow.size = 0, arrow.gap = 0,
-  arrow.type = "closed", label = FALSE, label.nodes = label,
-  label.size = size/2, label.trim = FALSE, legend.size = 9,
-  legend.position = "right", names = c("", ""), quantize.weights = FALSE,
-  subset.threshold = 0, top8.nodes = FALSE, trim.labels = FALSE, ...)
+ggnet(
+  net,
+  mode = "fruchtermanreingold",
+  layout.par = NULL,
+  layout.exp = 0,
+  size = 9,
+  alpha = 1,
+  weight = "none",
+  weight.legend = NA,
+  weight.method = weight,
+  weight.min = NA,
+  weight.max = NA,
+  weight.cut = FALSE,
+  group = NULL,
+  group.legend = NA,
+  node.group = group,
+  node.color = NULL,
+  node.alpha = alpha,
+  segment.alpha = alpha,
+  segment.color = "grey50",
+  segment.label = NULL,
+  segment.size = 0.25,
+  arrow.size = 0,
+  arrow.gap = 0,
+  arrow.type = "closed",
+  label = FALSE,
+  label.nodes = label,
+  label.size = size/2,
+  label.trim = FALSE,
+  legend.size = 9,
+  legend.position = "right",
+  names = deprecated(),
+  quantize.weights = deprecated(),
+  subset.threshold = deprecated(),
+  top8.nodes = deprecated(),
+  trim.labels = deprecated(),
+  ...
+)
 }
 \arguments{
 \item{net}{an object of class \code{\link[network]{network}}, or any object
 that can be coerced to this class, such as an adjacency or incidence matrix,
 or an edge list: see \link[network]{edgeset.constructors} and
 \link[network]{network} for details. If the object is of class
-\code{\link[igraph:igraph-package]{igraph}} and the
-\code{\link[intergraph:intergraph-package]{intergraph}} package is installed,
+\link[igraph:aaa-igraph-package]{igraph} and the
+\link[intergraph:intergraph-package]{intergraph} package is installed,
 it will be used to convert the object: see
 \code{\link[intergraph]{asNetwork}} for details.}
 
@@ -150,25 +177,27 @@ Defaults to \code{9}.}
 \code{legend.position} values supported by \code{\link[ggplot2]{theme}}.
 Defaults to \code{"right"}.}
 
-\item{names}{deprecated: see \code{group.legend} and \code{size.legend}}
+\item{names}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{group.legend} and \code{size.legend}}
 
-\item{quantize.weights}{deprecated: see \code{weight.cut}}
+\item{quantize.weights}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{weight.cut}}
 
-\item{subset.threshold}{deprecated: see \code{weight.min}}
+\item{subset.threshold}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{weight.min}}
 
-\item{top8.nodes}{deprecated: this functionality was experimental and has
+\item{top8.nodes}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} this functionality was experimental and has
 been removed entirely from \code{ggnet}}
 
-\item{trim.labels}{deprecated: see \code{label.trim}}
+\item{trim.labels}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{label.trim}}
 
 \item{...}{other arguments passed to the \code{geom_text} object that sets
 the node labels: see \code{\link[ggplot2]{geom_text}} for details.}
 }
 \description{
-Function for plotting network objects using ggplot2, now replaced by the
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Function for plotting network objects using \pkg{ggplot2}, now replaced by the
 \code{\link{ggnet2}} function, which provides additional control over
-plotting parameters. Please visit \url{http://github.com/briatte/ggnet} for
-the latest version of ggnet2, and \url{https://briatte.github.io/ggnet} for a
+plotting parameters. Please visit \url{https://github.com/briatte/ggnet} for
+the latest version of ggnet2, and \url{https://briatte.github.io/ggnet/} for a
 vignette that contains many examples and explanations.
 }
 \details{
@@ -178,6 +207,9 @@ but will be unweighted. To compute weighted network measures, see the
 \code{tnet} package by Tore Opsahl (\code{help("tnet", package = "tnet")}).
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 library(network)
 
 # random adjacency matrix
@@ -185,8 +217,8 @@ x           <- 10
 ndyads      <- x * (x - 1)
 density     <- x / ndyads
 m           <- matrix(0, nrow = x, ncol = x)
-dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-m[ row(m) != col(m) ] <- runif(ndyads) < density
+dimnames(m) <- list(letters[1:x], letters[1:x])
+m[row(m) != col(m)] <- runif(ndyads) < density
 m
 
 # random undirected network
@@ -196,15 +228,16 @@ n
 ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
 
 # random groups
-g <- sample(letters[ 1:3 ], 10, replace = TRUE)
+g <- sample(letters[1:3], 10, replace = TRUE)
+g
 
 # color palette
 p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
 
-ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
+p_(ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white"))
 
 # edge arrows on a directed network
-ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+p_(ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10))
 }
 \seealso{
 \code{\link{ggnet2}} in this package,
@@ -213,6 +246,7 @@ ggnet(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
 package
 }
 \author{
-Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+Moritz Marbach and Francois Briatte, with help from Heike Hofmann,
 Pedro Jordano and Ming-Yu Liu
 }
+\keyword{internal}

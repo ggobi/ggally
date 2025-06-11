@@ -14,12 +14,12 @@ column_is_factor(df)
 }
 \value{
 character vector with variable types, with names corresponding to
-  the variable names from df
+the variable names from df
 }
 \description{
 Get vector of variable types from data frame
 }
 \author{
-Jason Crowley \email{crowley.jason.s@gmail.com}
+Jason Crowley
 }
 \keyword{internal}

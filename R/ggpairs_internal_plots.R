@@ -1,4 +1,3 @@
-
 #' Wrap a function with different parameter values
 #'
 #' Wraps a function with the supplied parameters to force different default behavior.  This is useful for functions that are supplied to ggpairs.  It allows you to change the behavior of one function, rather than creating multiple functions with different parameter settings.
@@ -17,8 +16,8 @@
 #' @export
 #' @rdname wrap
 #' @examples
-#'  # small function to display plots only if it's interactive
-#'  p_ <- GGally::print_if_interactive
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
 #' # example function that prints 'val'
 #' fn <- function(data, mapping, val = 2) {
@@ -62,11 +61,9 @@
 #' pm <- ggpairs(iris, 1:3, lower = list(continuous = w_ggally_points))
 #' p_(pm)
 wrap_fn_with_param_arg <- function(
-  funcVal,
-  params = NULL,
-  funcArgName = deparse(substitute(funcVal))
-) {
-
+    funcVal,
+    params = NULL,
+    funcArgName = deparse(substitute(funcVal))) {
   if (missing(funcArgName)) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {
@@ -93,12 +90,12 @@ wrap_fn_with_param_arg <- function(
   }
 
   if (mode(funcVal) == "character") {
-
     if (missing(funcArgName)) {
       funcArgName <- str_c("ggally_", funcVal)
     }
 
-    tryCatch({
+    tryCatch(
+      {
         funcVal <- get(
           str_c("ggally_", funcVal),
           mode = "function"
@@ -106,35 +103,18 @@ wrap_fn_with_param_arg <- function(
       },
       error = function(e) {
         stop(str_c(
-"The following ggpairs plot functions are readily available: \n",
-"\tcontinuous: c('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank')\n",
-"\tcombo: c('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist',",
-  " 'facetdensity', 'denstrip', 'density_ridges', 'blank')\n",
-"\tdiscrete: c('ratio', 'facetbar', 'blank')\n",
-"\tna: c('na', 'blank')\n",
-"\n",
-"\tdiag continuous: c('densityDiag', 'barDiag', 'blankDiag')\n",
-"\tdiag discrete: c('barDiag', 'blankDiag')\n",
-"\tdiag na: c('naDiag', 'blankDiag')\n",
-"\n",
-"You may also provide your own function that follows the api of ",
-  "function(data, mapping, ...){ . . . }\nand returns a ggplot2 plot object\n",
-  "\tEx:\n",
-  "\tmy_fn <- function(data, mapping, ...){\n",
-  "\t  p <- ggplot(data = data, mapping = mapping) + \n",
-  "\t    geom_point(...)\n",
-  "\t  p\n",
-  "\t}\n",
-  "\tggpairs(data, lower = list(continuous = my_fn))\n",
-"\n",
-"Function provided: ", funcVal
+          "Error retrieving `GGally` function.\n",
+          "Please provide a string such as `'points'` for `ggally_points()`\n",
+          "For a list of all predefined functions, check out `vig_ggally(\"ggally_plots\")`\n",
+          "A custom function may be supplied directly: `wrap(my_fn, param = val)`\n",
+          "Function provided: ", funcVal
         ))
       }
     )
   }
 
 
-  allParams <- ifnull(attr(funcVal, "params"), list())
+  allParams <- attr(funcVal, "params") %||% list()
   allParams[names(params)] <- params
 
   original_fn <- funcVal
@@ -144,7 +124,7 @@ wrap_fn_with_param_arg <- function(
     allParams$mapping <- mapping
     argsList <- list(...)
     allParams[names(argsList)] <- argsList
-    do.call(original_fn, allParams)
+    rlang::inject(original_fn(!!!allParams))
   }
 
   class(ret_fn) <- "ggmatrix_fn_with_params"
@@ -160,7 +140,7 @@ wrapp <- wrap_fn_with_param_arg
 
 #' @export
 #' @rdname wrap
-wrap  <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
+wrap <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
   if (missing(funcArgName)) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {
@@ -186,6 +166,7 @@ wrap  <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
 wrap_fn_with_params <- wrap
 
 
+#' @export
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
   params <- attr(x, "params")
   fnName <- attr(x, "name")
@@ -240,6 +221,7 @@ mapping_as_string <- function(mapping) {
   str_c("c(", str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
 }
 
+#' @export
 as.character.ggmatrix_plot_obj <- function(x, ...) {
   hasGg <- (!is.null(x$gg))
   mappingTxt <- mapping_as_string(x$mapping)
@@ -260,12 +242,12 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 
 
 
-#' ggmatrix structure
+#' \code{\link{ggmatrix}} structure
 #'
-#' View the condensed version of the ggmatrix object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
+#' View the condensed version of the \code{\link{ggmatrix}} object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
 #'
-#' @param object ggmatrix object to be viewed
-#' @param ... passed on to the default str method
+#' @param object \code{\link{ggmatrix}} object to be viewed
+#' @param ... passed on to the default \code{str} method
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
 #' @method str ggmatrix
 #' @importFrom utils str
@@ -279,7 +261,7 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
       "'str(", objName, ", raw = TRUE)'\n\n"
     ))
     obj$plots <- lapply(obj$plots, function(plotObj) {
-      if (ggplot2::is.ggplot(plotObj)) {
+      if (ggplot2::is_ggplot(plotObj)) {
         str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
       } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
         as.character(plotObj)

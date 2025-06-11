@@ -2,18 +2,32 @@
 % Please edit documentation in R/ggpairs.R
 \name{ggpairs}
 \alias{ggpairs}
-\title{ggpairs - A ggplot2 generalized pairs plot}
+\title{ggplot2 generalized pairs plot}
 \usage{
-ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
-  upper = list(continuous = "cor", combo = "box_no_facet", discrete =
-  "facetbar", na = "na"), lower = list(continuous = "points", combo =
-  "facethist", discrete = "facetbar", na = "na"), diag = list(continuous =
-  "densityDiag", discrete = "barDiag", na = "naDiag"), params = NULL, ...,
-  xlab = NULL, ylab = NULL, axisLabels = c("show", "internal", "none"),
-  columnLabels = colnames(data[columns]), labeller = "label_value",
-  switch = NULL, showStrips = NULL, legend = NULL,
-  cardinality_threshold = 15, progress = NULL,
-  legends = stop("deprecated"))
+ggpairs(
+  data,
+  mapping = NULL,
+  columns = 1:ncol(data),
+  title = NULL,
+  upper = list(continuous = "cor", combo = "box_no_facet", discrete = "count", na = "na"),
+  lower = list(continuous = "points", combo = "facethist", discrete = "facetbar", na =
+    "na"),
+  diag = list(continuous = "densityDiag", discrete = "barDiag", na = "naDiag"),
+  params = deprecated(),
+  ...,
+  xlab = NULL,
+  ylab = NULL,
+  axisLabels = c("show", "internal", "none"),
+  columnLabels = colnames(data[columns]),
+  labeller = "label_value",
+  switch = NULL,
+  showStrips = NULL,
+  legend = NULL,
+  cardinality_threshold = 15,
+  progress = NULL,
+  proportions = NULL,
+  legends = deprecated()
+)
 }
 \arguments{
 \item{data}{data set using.  Can have both numerical and categorical data.}
@@ -30,9 +44,9 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 
 \item{diag}{see Details}
 
-\item{params}{deprecated.  Please see \code{\link{wrap_fn_with_param_arg}}}
+\item{params}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{\link{wrap_fn_with_param_arg}}}
 
-\item{...}{deprecated. Please use \code{mapping}}
+\item{...}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} use \code{mapping}}
 
 \item{axisLabels}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
 
@@ -50,29 +64,31 @@ ggpairs(data, mapping = NULL, columns = 1:ncol(data), title = NULL,
 
 \item{progress}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link{ggmatrix_progress}}.}
 
-\item{legends}{deprecated}
+\item{proportions}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
+
+\item{legends}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
 \value{
-ggmatrix object that if called, will print
+\code{\link{ggmatrix}} object that if called, will print
 }
 \description{
 Make a matrix of plots with a given data set
 }
 \details{
 \code{upper} and \code{lower} are lists that may contain the variables
-'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must implement one of the following options:
+'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
 \describe{
- \item{continuous}{exactly one of ('points', 'smooth', 'smooth_loess', 'density', 'cor', 'blank'). This option is used for continuous X and Y data.}
- \item{combo}{exactly one of ('box', 'box_no_facet', 'dot', 'dot_no_facet', 'facethist', 'facetdensity', 'denstrip', 'blank'). This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
- \item{discrete}{exactly one of ('facetbar', 'ratio', 'blank'). This option is used for categorical X and Y data.}
- \item{na}{exactly one of ('na', 'blank').  This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
+\item{continuous}{This option is used for continuous X and Y data.}
+\item{combo}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
+\item{discrete}{This option is used for categorical X and Y data.}
+\item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
 }
 
 \code{diag} is a list that may only contain the variables 'continuous', 'discrete', and 'na'. Each element of the diag list is a string implementing the following options:
 \describe{
- \item{continuous}{exactly one of ('densityDiag', 'barDiag', 'blankDiag'). This option is used for continuous X data.}
- \item{discrete}{exactly one of ('barDiag', 'blankDiag'). This option is used for categorical X and Y data.}
- \item{na}{exactly one of ('naDiag', 'blankDiag').  This option is used when all X data is \code{NA}.}
+\item{continuous}{exactly one of ('densityDiag', 'barDiag', 'blankDiag'). This option is used for continuous X data.}
+\item{discrete}{exactly one of ('barDiag', 'blankDiag'). This option is used for categorical X and Y data.}
+\item{na}{exactly one of ('naDiag', 'blankDiag').  This option is used when all X data is \code{NA}.}
 }
 
 If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
@@ -80,19 +96,19 @@ If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
 If a function is supplied as an option to \code{upper}, \code{lower}, or \code{diag}, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
 }
 \examples{
- # small function to display plots only if it's interactive
- p_ <- GGally::print_if_interactive
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
 
 ## Quick example, with and without colour
 data(flea)
 ggpairs(flea, columns = 2:4)
-pm <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
+pm <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour = species))
 p_(pm)
 # Note: colour should be categorical, else you will need to reset
 # the upper triangle to use points instead of trying to compute corr
 
-data(tips, package = "reshape")
+data(tips)
 pm <- ggpairs(tips[, 1:3])
 p_(pm)
 pm <- ggpairs(tips, 1:3, columnLabels = c("Total Bill", "Tip", "Sex"))
@@ -117,25 +133,25 @@ pm <- ggpairs(
 p_(pm)
 
 # Use sample of the diamonds data
-data(diamonds, package="ggplot2")
+data(diamonds, package = "ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
 
 # Different aesthetics for different plot sections and plot types
 pm <- ggpairs(
- diamonds.samp[, 1:5],
- mapping = ggplot2::aes(color = cut),
- upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
- lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
- title = "Diamonds"
+  diamonds.samp[, 1:5],
+  mapping = ggplot2::aes(color = cut),
+  upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
+  lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
+  title = "Diamonds"
 )
 p_(pm)
 
 ## Axis Label Variations
 # Only Variable Labels on the diagonal (no axis labels)
-pm <- ggpairs(tips[, 1:3], axisLabels="internal")
+pm <- ggpairs(tips[, 1:3], axisLabels = "internal")
 p_(pm)
 # Only Variable Labels on the outside (no axis labels)
-pm <- ggpairs(tips[, 1:3], axisLabels="none")
+pm <- ggpairs(tips[, 1:3], axisLabels = "none")
 p_(pm)
 
 ## Facet Label Variations
@@ -159,13 +175,13 @@ p_(pm)
 ## Plot Insertion Example
 custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 # ggplot example taken from example(geom_text)
-  plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x=wt, y=mpg, label=rownames(mtcars)))
-  plot <- plot +
-    ggplot2::geom_text(ggplot2::aes(colour=factor(cyl)), size = 3) +
-    ggplot2::scale_colour_discrete(l=40)
+plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
+plot <- plot +
+  ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
+  ggplot2::scale_colour_discrete(l = 40)
 custom_car[1, 2] <- plot
 personal_plot <- ggally_text(
-  "ggpairs allows you\\nto put in your\\nown plot.\\nLike that one.\\n <---"
+  "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
 )
 custom_car[1, 3] <- personal_plot
 p_(custom_car)
@@ -180,6 +196,25 @@ p_(pm)
 # no warning displayed with user supplied function
 pm <- ggpairs(tips, 2:3, lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
 p_(pm)
+
+## Remove panel grid lines from correlation plots
+pm <- ggpairs(
+  flea,
+  columns = 2:4,
+  upper = list(continuous = wrap(ggally_cor, displayGrid = FALSE))
+)
+p_(pm)
+
+## Custom with/height of subplots
+pm <- ggpairs(tips, columns = c(2, 3, 5))
+p_(pm)
+
+pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = "auto")
+p_(pm)
+
+pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
+p_(pm)
+
 }
 \references{
 John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, Hadley Wickham. The Generalized Pairs Plot. Journal of Computational and Graphical Statistics, vol. 22, no. 1, pp. 79-91, 2012.
@@ -188,6 +223,6 @@ John W Emerson, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, He
 wrap v1_ggmatrix_theme
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}, Jason Crowley \email{crowley.jason.s@gmail.com}, Di Cook \email{dicook@iastate.edu}, Heike Hofmann \email{hofmann@iastate.edu}, Hadley Wickham \email{h.wickham@gmail.com}
+Barret Schloerke, Jason Crowley, Di Cook, Heike Hofmann, Hadley Wickham
 }
 \keyword{hplot}

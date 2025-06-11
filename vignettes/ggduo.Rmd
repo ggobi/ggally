@@ -1,0 +1,244 @@
+---
+title: "ggduo(): Two-grouped plot matrix"
+output: rmarkdown::html_vignette
+author: Barret Schloerke
+date: July 4, 2016
+vignette: >
+  %\VignetteIndexEntry{ggduo(): Two-grouped plot matrix}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(GGally)
+```
+
+# `GGally::ggduo()`
+
+
+The purpose of this function is to display two grouped data in a plot matrix.  This is useful for canonical correlation analysis, multiple time series analysis, and regression analysis.
+
+## Canonical Correlation Analysis
+
+This example is derived from
+
+``
+R Data Analysis Examples | Canonical Correlation Analysis.  UCLA: Institute for Digital Research and Education. from http://www.stats.idre.ucla.edu/r/dae/canonical-correlation-analysis (accessed May 22, 2017).
+``
+
+``
+Example 1. A researcher has collected data on three psychological variables, four academic variables (standardized test scores) and gender for 600 college freshman. She is interested in how the set of psychological variables relates to the academic variables and gender. In particular, the researcher is interested in how many dimensions (canonical variables) are necessary to understand the association between the two sets of variables."
+``
+
+```{r ggduo-cca}
+data(psychademic)
+str(psychademic)
+(psych_variables <- attr(psychademic, "psychology"))
+(academic_variables <- attr(psychademic, "academic"))
+```
+
+First, look at the within correlation using `ggpairs()`.
+
+```{r ggduo-within}
+ggpairs(psychademic, psych_variables, title = "Within Psychological Variables")
+ggpairs(psychademic, academic_variables, title = "Within Academic Variables")
+```
+
+Next, look at the between correlation using `ggduo()`.
+
+```{r ggduo-between}
+ggduo(
+  psychademic, psych_variables, academic_variables,
+  types = list(continuous = "smooth_lm"),
+  title = "Between Academic and Psychological Variable Correlation",
+  xlab = "Psychological",
+  ylab = "Academic"
+)
+```
+
+Since ggduo does not have a upper section to display the correlation values, we may use a custom function to add the information in the continuous plots.  The strips may be removed as each group name may be recovered in the outer axis labels.
+
+```{r ggduo-lm}
+lm_with_cor <- function(data, mapping, ..., method = "pearson") {
+  x <- eval_data_col(data, mapping$x)
+  y <- eval_data_col(data, mapping$y)
+  cor <- cor(x, y, method = method)
+  ggally_smooth_lm(data, mapping, ...) +
+    ggplot2::geom_label(
+      data = data.frame(
+        x = min(x, na.rm = TRUE),
+        y = max(y, na.rm = TRUE),
+        lab = round(cor, digits = 3)
+      ),
+      mapping = ggplot2::aes(x = x, y = y, label = lab),
+      hjust = 0, vjust = 1,
+      size = 5, fontface = "bold",
+      inherit.aes = FALSE # do not inherit anything from the ...
+    )
+}
+ggduo(
+  psychademic, rev(psych_variables), academic_variables,
+  mapping = aes(color = sex),
+  types = list(continuous = wrap(lm_with_cor, alpha = 0.25)),
+  showStrips = FALSE,
+  title = "Between Academic and Psychological Variable Correlation",
+  xlab = "Psychological",
+  ylab = "Academic",
+  legend = c(5, 2)
+) +
+  theme(legend.position = "bottom")
+```
+
+
+## Multiple Time Series Analysis
+
+While displaying multiple time series vertically over time, such as `+ ggplot2::facet_grid(time ~ .)`, `ggduo()` can handle both continuous and discrete data.  `ggplot2` does not mix discrete and continuous data on the same axis.
+
+
+```{r ggduo-mtsa}
+library(ggplot2)
+
+data(pigs)
+pigs_dt <- pigs[-(2:3)] # remove year and quarter
+pigs_dt$profit_group <- as.numeric(pigs_dt$profit > mean(pigs_dt$profit))
+ggplot(
+  tidyr::pivot_longer(pigs_dt, -time),
+  aes(x = time, y = value)
+) +
+  geom_smooth() +
+  geom_point() +
+  facet_grid(name ~ ., scales = "free_y")
+```
+
+Instead, we may use `ggts` to display the data.  `ggts` changes the default behavior of ggduo of `columnLabelsX` to equal `NULL` and allows for mixed variable types.
+
+```{r ggduo-mtsa-group}
+# make the profit group as a factor value
+profit_groups <- c(
+  "1" = "high",
+  "0" = "low"
+)
+pigs_dt$profit_group <- factor(
+  profit_groups[as.character(pigs_dt$profit_group)],
+  levels = unname(profit_groups),
+  ordered = TRUE
+)
+ggts(pigs_dt, "time", 2:7)
+# remove the binwidth warning
+pigs_types <- list(
+  comboHorizontal = wrap(ggally_facethist, binwidth = 1)
+)
+ggts(pigs_dt, "time", 2:7, types = pigs_types)
+# add color and legend
+pigs_mapping <- aes(color = profit_group)
+ggts(pigs_dt, pigs_mapping, "time", 2:7, types = pigs_types, legend = c(6, 1))
+```
+
+Produce more meaningful labels, add a legend, and remove profit group strips.
+
+```{r ggduo-mtsa-pretty}
+pm <- ggts(
+  pigs_dt, pigs_mapping,
+  1, 2:7,
+  types = pigs_types,
+  legend = c(6, 1),
+  columnLabelsY = c(
+    "number of\nfirst birth sows",
+    "sell price over\nfeed cost",
+    "sell count over\nheard size",
+    "meat head count",
+    "breading\nheard size",
+    "profit\ngroup"
+  ),
+  showStrips = FALSE
+) +
+  labs(fill = "profit group") +
+  theme(
+    legend.position = "bottom",
+    strip.background = element_rect(
+      fill = "transparent", color = "grey80"
+    )
+  )
+pm
+```
+
+
+## Regression Analysis
+
+Since `ggduo()` may take custom functions just like `ggpairs()`, we will make a custom function that displays the residuals with a red line at 0 and all other y variables will receive a simple linear regression plot.
+
+Note: the marginal residuals are calculated before plotting and the y_range is found to display all residuals on the same scale.
+
+```{r ggduo-reg-swiss}
+swiss <- datasets::swiss
+
+# add a 'fake' column
+swiss$Residual <- seq_len(nrow(swiss))
+
+# calculate all residuals prior to display
+residuals <- lapply(swiss[2:6], function(x) {
+  summary(lm(Fertility ~ x, data = swiss))$residuals
+})
+# calculate a consistent y range for all residuals
+y_range <- range(unlist(residuals))
+
+# custom function to display continuous data. If the y variable is "Residual", do custom work.
+lm_or_resid <- function(data, mapping, ..., line_color = "red", line_size = 1) {
+  if (!identical(
+    rlang::expr_text(mapping$y),
+    rlang::expr_text(ggplot2::aes(y = Residual)$y)
+  )) {
+    return(ggally_smooth_lm(data, mapping, ...))
+  }
+
+  # make residual data to display
+  resid_data <- data.frame(
+    x = rlang::eval_tidy(mapping$x, data = data),
+    y = rlang::eval_tidy(mapping$x, data = residuals)
+  )
+
+  ggplot(data = data, mapping = mapping) +
+    geom_hline(yintercept = 0, color = line_color, linewidth = line_size) +
+    ylim(y_range) +
+    geom_point(data = resid_data, mapping = aes(x = x, y = y), ...)
+}
+
+# plot the data
+ggduo(
+  swiss,
+  2:6, c(1, 7),
+  types = list(continuous = lm_or_resid)
+)
+
+# change line to be thicker and blue and the points to be slightly transparent
+ggduo(
+  swiss,
+  2:6, c(1, 7),
+  types = list(
+    continuous = wrap(lm_or_resid,
+      alpha = 0.7,
+      line_color = "blue",
+      line_size = 3
+    )
+  )
+)
+```
+
+## Types of plots
+
+You can customize the type of plots to display with the `types` argument. `types` is a list that may contain the variables 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string. If a string is supplied, it must be a character string representing the tail end of a `ggally_NAME` function.
+
+* `continuous`: when both x and y variables are continuous
+* `comboHorizontal`: when x is continuous and y is discrete
+* `comboVorizontal`: when x is discrete and y is continuous
+* `discrete`: when both x and y variables are discrete
+* `na`: when all x data and all y data is `NA`
+
+The list of current valid `ggally_NAME` functions is visible in `vig_ggally("ggally_plots")`.

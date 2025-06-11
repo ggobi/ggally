@@ -1,13 +1,9 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("x", "y", "coefficient", "breaks", "label"))
-}
-
-#' ggcorr - Plot a correlation matrix with ggplot2
+#' Correlation matrix
 #'
-#' Function for making a correlation matrix plot, using ggplot2.
+#' Function for making a correlation matrix plot, using \pkg{ggplot2}.
 #' The function is directly inspired by Tian Zheng and Yu-Sung Su's
 #' \code{corrplot} function in the 'arm' package.
-#' Please visit \url{http://github.com/briatte/ggcorr} for the latest version
+#' Please visit \url{https://github.com/briatte/ggcorr} for the latest version
 #' of \code{ggcorr}, and see the vignette at
 #' \url{https://briatte.github.io/ggcorr/} for many examples of how to use it.
 #'
@@ -95,23 +91,28 @@ if (getRversion() >= "2.15.1") {
 #' \code{arm} package.
 #' @author Francois Briatte, with contributions from Amos B. Elberg and
 #' Barret Schloerke
-#' @importFrom reshape melt melt.data.frame melt.default
 #' @importFrom stats cor
+#' @importFrom dplyr rename
+#' @importFrom tidyr pivot_longer
 #' @importFrom grDevices colorRampPalette
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' # Basketball statistics provided by Nathan Yau at Flowing Data.
 #' dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
 #'
 #' # Default output.
-#' ggcorr(dt[, -1])
+#' p_(ggcorr(dt[, -1]))
 #'
-#' # Labelled output, with coefficient transparency.
-#' ggcorr(dt[, -1],
-#'        label = TRUE,
-#'        label_alpha = TRUE)
+#' # Labeled output, with coefficient transparency.
+#' p_(ggcorr(dt[, -1],
+#'   label = TRUE,
+#'   label_alpha = TRUE
+#' ))
 #'
 #' # Custom options.
-#' ggcorr(
+#' p_(ggcorr(
 #'   dt[, -1],
 #'   name = expression(rho),
 #'   geom = "circle",
@@ -122,40 +123,39 @@ if (getRversion() >= "2.15.1") {
 #'   nbreaks = 6,
 #'   angle = -45,
 #'   palette = "PuOr" # colorblind safe, photocopy-able
-#' )
+#' ))
 #'
 #' # Supply your own correlation matrix
-#' ggcorr(
+#' p_(ggcorr(
 #'   data = NULL,
 #'   cor_matrix = cor(dt[, -1], use = "pairwise")
-#' )
+#' ))
 ggcorr <- function(
-  data,
-  method = c("pairwise", "pearson"),
-  cor_matrix = NULL,
-  nbreaks = NULL,
-  digits = 2,
-  name = "",
-  low = "#3B9AB2",
-  mid = "#EEEEEE",
-  high = "#F21A00",
-  midpoint = 0,
-  palette = NULL,
-  geom = "tile",
-  min_size = 2,
-  max_size = 6,
-  label = FALSE,
-  label_alpha = FALSE,
-  label_color = "black",
-  label_round = 1,
-  label_size = 4,
-  limits = c(-1, 1),
-  drop = is.null(limits) || identical(limits, FALSE),
-  layout.exp = 0,
-  legend.position = "right",
-  legend.size = 9,
-  ...) {
-
+    data,
+    method = c("pairwise", "pearson"),
+    cor_matrix = NULL,
+    nbreaks = NULL,
+    digits = 2,
+    name = "",
+    low = "#3B9AB2",
+    mid = "#EEEEEE",
+    high = "#F21A00",
+    midpoint = 0,
+    palette = NULL,
+    geom = "tile",
+    min_size = 2,
+    max_size = 6,
+    label = FALSE,
+    label_alpha = FALSE,
+    label_color = "black",
+    label_round = 1,
+    label_size = 4,
+    limits = c(-1, 1),
+    drop = is.null(limits) || identical(limits, FALSE),
+    layout.exp = 0,
+    legend.position = "right",
+    legend.size = 9,
+    ...) {
   if (is.numeric(limits)) {
     if (length(limits) != 2) {
       stop("'limits' must be of length 2 if numeric")
@@ -178,263 +178,233 @@ ggcorr <- function(
   # -- correlation method ------------------------------------------------------
 
   if (length(method) == 1) {
-    method = c(method, "pearson") # for backwards compatibility
+    method <- c(method, "pearson") # for backwards compatibility
   }
 
   # -- check data columns ------------------------------------------------------
 
   if (!is.null(data)) {
-
     if (!is.data.frame(data)) {
-      data = as.data.frame(data)
+      data <- as.data.frame(data)
     }
 
-    x = which(!sapply(data, is.numeric))
+    x <- which(!sapply(data, is.numeric))
 
     if (length(x) > 0) {
+      warning(paste(
+        "data in column(s)",
+        paste0(paste0("'", names(data)[x], "'"), collapse = ", "),
+        "are not numeric and were ignored"
+      ))
 
-      warning(paste("data in column(s)",
-                    paste0(paste0("'", names(data)[x], "'"), collapse = ", "),
-                    "are not numeric and were ignored"))
-
-      data = data[, -x ]
-
+      data <- data[, -x]
     }
-
   }
 
   # -- correlation matrix ------------------------------------------------------
 
   if (is.null(cor_matrix)) {
-    cor_matrix = cor(data, use = method[1], method = method[2])
+    cor_matrix <- cor(data, use = method[1], method = method[2])
   }
 
-  m = cor_matrix
-  colnames(m) = rownames(m) = gsub(" ", "_", colnames(m)) # protect spaces
+  m <- cor_matrix
+  colnames(m) <- rownames(m) <- gsub(" ", "_", colnames(m)) # protect spaces
 
   # -- correlation data.frame --------------------------------------------------
 
-  m = data.frame(m * lower.tri(m))
-  rownames(m) = names(m)
-  m$.ggally_ggcorr_row_names = rownames(m)
-  m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
-  names(m) = c("x", "y", "coefficient")
-  m$coefficient[ m$coefficient == 0 ] = NA
+  m <- data.frame(m * lower.tri(m))
+  rownames(m) <- names(m)
+  m$.ggally_ggcorr_row_names <- rownames(m)
+  # m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
+  # names(m) = c("x", "y", "coefficient")
+  m_long <- m %>%
+    tidyr::pivot_longer(
+      cols = -".ggally_ggcorr_row_names",
+      names_to = "y",
+      values_to = "coefficient"
+    ) %>%
+    dplyr::rename(x = ".ggally_ggcorr_row_names") %>%
+    dplyr::mutate(y = factor(.data$y, levels = rownames(m)))
+  m_long$coefficient[m_long$coefficient == 0] <- NA
 
   # -- correlation quantiles ---------------------------------------------------
 
   if (!is.null(nbreaks)) {
-
-    x = seq(-1, 1, length.out = nbreaks + 1)
+    x <- seq(-1, 1, length.out = nbreaks + 1)
 
     if (!nbreaks %% 2) {
-      x = sort(c(x, 0))
+      x <- sort(c(x, 0))
     }
 
-    m$breaks = cut(m$coefficient, breaks = unique(x), include.lowest = TRUE,
-                   dig.lab = digits)
-
+    m_long$breaks <- cut(m_long$coefficient,
+      breaks = unique(x), include.lowest = TRUE,
+      dig.lab = digits
+    )
   }
 
   # -- gradient midpoint -------------------------------------------------------
 
   if (is.null(midpoint)) {
-
-    midpoint = median(m$coefficient, na.rm = TRUE)
-    message(paste("Color gradient midpoint set at median correlation to",
-                  round(midpoint, 2)))
-
+    midpoint <- median(m_long$coefficient, na.rm = TRUE)
+    message(paste(
+      "Color gradient midpoint set at median correlation to",
+      round(midpoint, 2)
+    ))
   }
 
   # -- plot structure ----------------------------------------------------------
 
-  m$label = round(m$coefficient, label_round)
-  p = ggplot(na.omit(m), aes(x, y))
+  m_long$label <- round(m_long$coefficient, label_round)
+  p <- ggplot(na.omit(m_long), aes(x, .data$y))
 
   if (geom == "tile") {
-
     if (is.null(nbreaks)) {
-
       # -- tiles, continuous ---------------------------------------------------
 
-      p = p +
-        geom_tile(aes(fill = coefficient), color = "white")
-
+      p <- p +
+        geom_tile(aes(fill = .data$coefficient), color = "white")
     } else {
-
       # -- tiles, ordinal ------------------------------------------------------
 
-      p = p +
-        geom_tile(aes(fill = breaks), color = "white")
-
+      p <- p +
+        geom_tile(aes(fill = .data$breaks), color = "white")
     }
 
     # -- tiles, color scale ----------------------------------------------------
 
     if (is.null(nbreaks) && !is.null(limits)) {
-
-      p = p +
-        scale_fill_gradient2(name, low = low, mid = mid, high = high,
-                             midpoint = midpoint, limits = limits)
-
+      p <- p +
+        scale_fill_gradient2(name,
+          low = low, mid = mid, high = high,
+          midpoint = midpoint, limits = limits
+        )
     } else if (is.null(nbreaks)) {
-
-        p = p +
-          scale_fill_gradient2(name, low = low, mid = mid, high = high,
-                               midpoint = midpoint)
-
+      p <- p +
+        scale_fill_gradient2(name,
+          low = low, mid = mid, high = high,
+          midpoint = midpoint
+        )
     } else if (is.null(palette)) {
+      x <- colorRampPalette(c(low, mid, high))(length(levels(m_long$breaks)))
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
-
-      p = p +
+      p <- p +
         scale_fill_manual(name, values = x, drop = drop)
-
     } else {
-
-      p = p +
+      p <- p +
         scale_fill_brewer(name, palette = palette, drop = drop)
-
     }
-
   } else if (geom == "circle") {
-
-    p = p +
-      geom_point(aes(size = abs(coefficient) * 1.25), color = "grey50") # border
+    p <- p +
+      geom_point(aes(size = abs(.data$coefficient) * 1.25), color = "grey50") # border
 
     if (is.null(nbreaks)) {
-
       # -- circles, continuous -------------------------------------------------
 
-      p = p +
-        geom_point(aes(size = abs(coefficient), color = coefficient))
-
+      p <- p +
+        geom_point(aes(size = abs(.data$coefficient), color = .data$coefficient))
     } else {
-
       # -- circles, ordinal ----------------------------------------------------
 
-      p = p +
-        geom_point(aes(size = abs(coefficient), color = breaks))
-
+      p <- p +
+        geom_point(aes(size = abs(.data$coefficient), color = .data$breaks))
     }
 
-    p = p +
+    p <- p +
       scale_size_continuous(range = c(min_size, max_size)) +
-      guides(size = FALSE)
+      guides(size = "none")
 
-    r = list(size = (min_size + max_size) / 2)
+    r <- list(size = (min_size + max_size) / 2)
 
     # -- circles, color scale --------------------------------------------------
 
     if (is.null(nbreaks) && !is.null(limits)) {
-
-      p = p +
-        scale_color_gradient2(name, low = low, mid = mid, high = high,
-                              midpoint = midpoint, limits = limits)
-
+      p <- p +
+        scale_color_gradient2(name,
+          low = low, mid = mid, high = high,
+          midpoint = midpoint, limits = limits
+        )
     } else if (is.null(nbreaks)) {
-
-      p = p +
-        scale_color_gradient2(name, low = low, mid = mid, high = high,
-                              midpoint = midpoint)
-
+      p <- p +
+        scale_color_gradient2(name,
+          low = low, mid = mid, high = high,
+          midpoint = midpoint
+        )
     } else if (is.null(palette)) {
+      x <- colorRampPalette(c(low, mid, high))(length(levels(m_long$breaks)))
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
-
-      p = p +
+      p <- p +
         scale_color_manual(name, values = x, drop = drop) +
         guides(color = guide_legend(override.aes = r))
-
     } else {
-
-      p = p +
+      p <- p +
         scale_color_brewer(name, palette = palette, drop = drop) +
         guides(color = guide_legend(override.aes = r))
-
     }
-
   } else if (geom == "text") {
-
     if (is.null(nbreaks)) {
-
       # -- text, continuous ----------------------------------------------------
 
-      p = p +
-        geom_text(aes(label = label, color = coefficient), size = label_size)
-
+      p <- p +
+        geom_text(aes(label = label, color = .data$coefficient), size = label_size)
     } else {
-
       # -- text, ordinal -------------------------------------------------------
 
-      p = p +
-        geom_text(aes(label = label, color = breaks), size = label_size)
-
+      p <- p +
+        geom_text(aes(label = label, color = .data$breaks), size = label_size)
     }
 
     # -- text, color scale ----------------------------------------------------
 
     if (is.null(nbreaks) && !is.null(limits)) {
-
-      p = p +
-        scale_color_gradient2(name, low = low, mid = mid, high = high,
-                              midpoint = midpoint, limits = limits)
-
+      p <- p +
+        scale_color_gradient2(name,
+          low = low, mid = mid, high = high,
+          midpoint = midpoint, limits = limits
+        )
     } else if (is.null(nbreaks)) {
-
-      p = p +
-        scale_color_gradient2(name, low = low, mid = mid, high = high,
-                              midpoint = midpoint)
-
+      p <- p +
+        scale_color_gradient2(name,
+          low = low, mid = mid, high = high,
+          midpoint = midpoint
+        )
     } else if (is.null(palette)) {
+      x <- colorRampPalette(c(low, mid, high))(length(levels(m_long$breaks)))
 
-      x = colorRampPalette(c(low, mid, high))(length(levels(m$breaks)))
-
-      p = p +
+      p <- p +
         scale_color_manual(name, values = x, drop = drop)
-
     } else {
-
-      p = p +
+      p <- p +
         scale_color_brewer(name, palette = palette, drop = drop)
-
     }
-
   }
 
   # -- coefficient labels ------------------------------------------------------
 
   if (label) {
-
     if (isTRUE(label_alpha)) {
-
-      p = p +
-        geom_text(aes(x, y, label = label, alpha = abs(coefficient)),
-                  color = label_color, size = label_size,
-                  show.legend = FALSE)
-
+      p <- p +
+        geom_text(aes(.data$x, .data$y, label = label, alpha = abs(.data$coefficient)),
+          color = label_color, size = label_size,
+          show.legend = FALSE
+        )
     } else if (label_alpha > 0) {
-
-      p = p +
+      p <- p +
         geom_text(
-          aes(x, y, label = label),
+          aes(.data$x, .data$y, label = label),
           show.legend = FALSE,
           alpha = label_alpha, color = label_color, size = label_size
         )
-
     } else {
-
-      p = p +
-        geom_text(aes(x, y, label = label),
-                  color = label_color, size = label_size)
-
+      p <- p +
+        geom_text(aes(.data$x, .data$y, label = label),
+          color = label_color, size = label_size
+        )
     }
-
   }
 
   # -- horizontal scale expansion ----------------------------------------------
 
-  textData <- m[ m$x == m$y & is.na(m$coefficient), ]
+  textData <- m_long[m_long$x == m_long$y & is.na(m_long$coefficient), ]
   xLimits <- levels(textData$y)
   textData$diagLabel <- textData$x
 
@@ -449,13 +419,13 @@ ggcorr <- function(
 
     textData$x[1:layout.exp] <- spacer
     textData$diagLabel[1:layout.exp] <- NA
-    xLimits <- c(spacer, levels(m$y))
+    xLimits <- c(spacer, levels(m_long$y))
   }
 
-  p = p  +
-    geom_text(data = textData, aes_string(label = "diagLabel"), ..., na.rm = TRUE) +
+  p <- p +
+    geom_text(data = textData, aes(label = !!as.name("diagLabel")), ..., na.rm = TRUE) +
     scale_x_discrete(breaks = NULL, limits = xLimits) +
-    scale_y_discrete(breaks = NULL, limits = levels(m$y)) +
+    scale_y_discrete(breaks = NULL, limits = levels(m_long$y)) +
     labs(x = NULL, y = NULL) +
     coord_equal() +
     theme(
@@ -467,5 +437,4 @@ ggcorr <- function(
     )
 
   return(p)
-
 }

@@ -4,7 +4,9 @@
 \name{nasa}
 \alias{nasa}
 \title{Data from the Data Expo JSM 2006.}
-\format{A data frame with 41472 rows and 17 variables}
+\format{
+A data frame with 41472 rows and 17 variables
+}
 \usage{
 data(nasa)
 }
@@ -16,16 +18,16 @@ The data shows 6 years of monthly measurements of a 24x24 spatial grid
 from Central America:
 
 \itemize{
-  \item time integer specifying temporal order of measurements
-  \item x, y, lat, long spatial location of measurements.
-  \item cloudhigh, cloudlow, cloudmid, ozone, pressure, surftemp, temperature
-  are the various satellite measurements.
-  \item date, day, month, year specifying the time of measurements.
-  \item id unique ide for each spatial position.
+\item time integer specifying temporal order of measurements
+\item x, y, lat, long spatial location of measurements.
+\item cloudhigh, cloudlow, cloudmid, ozone, pressure, surftemp, temperature
+are the various satellite measurements.
+\item date, day, month, year specifying the time of measurements.
+\item id unique ide for each spatial position.
 }
 }
 \references{
 Murrell, P. (2010) The 2006 Data Expo of the American Statistical Association.
-  Computational Statistics, 25:551-554.
+Computational Statistics, 25:551-554.
 }
 \keyword{datasets}

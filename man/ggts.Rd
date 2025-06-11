@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggts}
 \alias{ggts}
-\title{Multiple Time Series}
+\title{Multiple time series}
 \usage{
 ggts(..., columnLabelsX = NULL, xlab = "time")
 }
@@ -14,11 +14,14 @@ ggts(..., columnLabelsX = NULL, xlab = "time")
 \item{xlab}{defaults to "time"}
 }
 \value{
-ggmatrix object
+\code{\link{ggmatrix}} object
 }
 \description{
 GGally implementation of ts.plot. Wraps around the ggduo function and removes the column strips
 }
 \examples{
-ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+p_(ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz")))
 }

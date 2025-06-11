@@ -2,31 +2,66 @@
 % Please edit documentation in R/ggnet2.R
 \name{ggnet2}
 \alias{ggnet2}
-\title{ggnet2 - Plot a network with ggplot2}
+\title{Network plot}
 \usage{
-ggnet2(net, mode = "fruchtermanreingold", layout.par = NULL,
-  layout.exp = 0, alpha = 1, color = "grey75", shape = 19, size = 9,
-  max_size = 9, na.rm = NA, palette = NULL, alpha.palette = NULL,
-  alpha.legend = NA, color.palette = palette, color.legend = NA,
-  shape.palette = NULL, shape.legend = NA, size.palette = NULL,
-  size.legend = NA, size.zero = FALSE, size.cut = FALSE, size.min = NA,
-  size.max = NA, label = FALSE, label.alpha = 1, label.color = "black",
-  label.size = max_size/2, label.trim = FALSE, node.alpha = alpha,
-  node.color = color, node.label = label, node.shape = shape,
-  node.size = size, edge.alpha = 1, edge.color = "grey50",
-  edge.lty = "solid", edge.size = 0.25, edge.label = NULL,
-  edge.label.alpha = 1, edge.label.color = label.color,
-  edge.label.fill = "white", edge.label.size = max_size/2, arrow.size = 0,
-  arrow.gap = 0, arrow.type = "closed", legend.size = 9,
-  legend.position = "right", ...)
+ggnet2(
+  net,
+  mode = "fruchtermanreingold",
+  layout.par = NULL,
+  layout.exp = 0,
+  alpha = 1,
+  color = "grey75",
+  shape = 19,
+  size = 9,
+  max_size = 9,
+  na.rm = NA,
+  palette = NULL,
+  alpha.palette = NULL,
+  alpha.legend = NA,
+  color.palette = palette,
+  color.legend = NA,
+  shape.palette = NULL,
+  shape.legend = NA,
+  size.palette = NULL,
+  size.legend = NA,
+  size.zero = FALSE,
+  size.cut = FALSE,
+  size.min = NA,
+  size.max = NA,
+  label = FALSE,
+  label.alpha = 1,
+  label.color = "black",
+  label.size = max_size/2,
+  label.trim = FALSE,
+  node.alpha = alpha,
+  node.color = color,
+  node.label = label,
+  node.shape = shape,
+  node.size = size,
+  edge.alpha = 1,
+  edge.color = "grey50",
+  edge.lty = "solid",
+  edge.size = 0.25,
+  edge.label = NULL,
+  edge.label.alpha = 1,
+  edge.label.color = label.color,
+  edge.label.fill = "white",
+  edge.label.size = max_size/2,
+  arrow.size = 0,
+  arrow.gap = 0,
+  arrow.type = "closed",
+  legend.size = 9,
+  legend.position = "right",
+  ...
+)
 }
 \arguments{
 \item{net}{an object of class \code{\link[network]{network}}, or any object
 that can be coerced to this class, such as an adjacency or incidence matrix,
 or an edge list: see \link[network]{edgeset.constructors} and
 \link[network]{network} for details. If the object is of class
-\code{\link[igraph:igraph-package]{igraph}} and the
-\code{\link[intergraph:intergraph-package]{intergraph}} package is installed,
+\link[igraph:aaa-igraph-package]{igraph} and the
+\link[intergraph:intergraph-package]{intergraph} package is installed,
 it will be used to convert the object: see
 \code{\link[intergraph]{asNetwork}} for details.}
 
@@ -80,9 +115,9 @@ Defaults to \code{NA} (does nothing).}
 
 \item{palette}{the palette to color the nodes, when \code{color} is not a
 color value or a vector of color values. Accepts named vectors of color
-values, or if \code{\link[RColorBrewer]{RColorBrewer}} is installed, any
-ColorBrewer palette name: see \code{\link[RColorBrewer]{brewer.pal}} and
-\url{http://colorbrewer2.org/} for details.
+values, or if \link[RColorBrewer:ColorBrewer]{RColorBrewer} is installed, any
+ColorBrewer palette name: see \code{\link[RColorBrewer:ColorBrewer]{RColorBrewer::brewer.pal()}} and
+\url{https://colorbrewer2.org/} for details.
 Defaults to \code{NULL}, which will create an array of grayscale color values
 if \code{color} is not a color value or a vector of color values.}
 
@@ -239,10 +274,10 @@ Defaults to \code{"right"}.}
 the node labels: see \code{\link[ggplot2]{geom_text}} for details.}
 }
 \description{
-Function for plotting network objects using ggplot2, with additional control
+Function for plotting network objects using \pkg{ggplot2}, with additional control
 over graphical parameters that are not supported by the \code{\link{ggnet}}
-function. Please visit \url{http://github.com/briatte/ggnet} for the latest
-version of ggnet2, and \url{https://briatte.github.io/ggnet} for a vignette
+function. Please visit \url{https://github.com/briatte/ggnet} for the latest
+version of ggnet2, and \url{https://briatte.github.io/ggnet/} for a vignette
 that contains many examples and explanations.
 }
 \details{
@@ -258,6 +293,9 @@ The nodes of bipartite networks can be mapped to their mode by passing the
 \code{"event"}.
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 library(network)
 
 # random adjacency matrix
@@ -265,50 +303,50 @@ x           <- 10
 ndyads      <- x * (x - 1)
 density     <- x / ndyads
 m           <- matrix(0, nrow = x, ncol = x)
-dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-m[ row(m) != col(m) ] <- runif(ndyads) < density
+dimnames(m) <- list(letters[1:x], letters[1:x])
+m[row(m) != col(m)] <- runif(ndyads) < density
 m
 
 # random undirected network
 n <- network::network(m, directed = FALSE)
 n
 
-ggnet2(n, label = TRUE)
-ggnet2(n, label = TRUE, shape = 15)
-ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white")
+p_(ggnet2(n, label = TRUE))
+p_(ggnet2(n, label = TRUE, shape = 15))
+p_(ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white"))
 
 # add vertex attribute
 x = network.vertex.names(n)
 x = ifelse(x \%in\% c("a", "e", "i"), "vowel", "consonant")
 n \%v\% "phono" = x
 
-ggnet2(n, color = "phono")
-ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey"))
-ggnet2(n, shape = "phono", color = "phono")
+p_(ggnet2(n, color = "phono"))
+p_(ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey")))
+p_(ggnet2(n, shape = "phono", color = "phono"))
 
 if (require(RColorBrewer)) {
 
   # random groups
   n \%v\% "group" <- sample(LETTERS[1:3], 10, replace = TRUE)
 
-  ggnet2(n, color = "group", palette = "Set2")
+  p_(ggnet2(n, color = "group", palette = "Set2"))
 
 }
 
 # random weights
 n \%e\% "weight" <- sample(1:3, network.edgecount(n), replace = TRUE)
-ggnet2(n, edge.size = "weight", edge.label = "weight")
+p_(ggnet2(n, edge.size = "weight", edge.label = "weight"))
 
 # edge arrows on a directed network
-ggnet2(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+p_(ggnet2(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10))
 
 # Padgett's Florentine wedding data
 data(flo, package = "network")
 flo
 
-ggnet2(flo, label = TRUE)
-ggnet2(flo, label = TRUE, label.trim = 4, vjust = -1, size = 3, color = 1)
-ggnet2(flo, label = TRUE, size = 12, color = "white")
+p_(ggnet2(flo, label = TRUE))
+p_(ggnet2(flo, label = TRUE, label.trim = 4, vjust = -1, size = 3, color = 1))
+p_(ggnet2(flo, label = TRUE, size = 12, color = "white"))
 }
 \seealso{
 \code{\link{ggnet}} in this package,
@@ -317,6 +355,6 @@ ggnet2(flo, label = TRUE, size = 12, color = "white")
 package
 }
 \author{
-Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+Moritz Marbach and Francois Briatte, with help from Heike Hofmann,
 Pedro Jordano and Ming-Yu Liu
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg-plots.R
 \name{ggally_dot_and_box}
 \alias{ggally_dot_and_box}
-\title{Plots either Box Plot or Dot Plots}
+\title{Box and dot plot}
 \usage{
 ggally_dot_and_box(data, mapping, ..., boxPlot = TRUE)
 }
@@ -19,19 +19,22 @@ ggally_dot_and_box(data, mapping, ..., boxPlot = TRUE)
 Place box plots or dot plots on the graph
 }
 \examples{
- data(tips, package = "reshape")
- ggally_dot_and_box(
-   tips,
-   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
-   boxPlot = TRUE
- )
- ggally_dot_and_box(
-   tips,
-   mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
-   boxPlot = FALSE
- )
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(tips)
+p_(ggally_dot_and_box(
+  tips,
+  mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+  boxPlot = TRUE
+))
+p_(ggally_dot_and_box(
+  tips,
+  mapping = ggplot2::aes(x = total_bill, y = sex, color = sex),
+  boxPlot = FALSE
+))
 }
 \author{
-Barret Schloerke \email{schloerke@gmail.com}
+Barret Schloerke
 }
-\keyword{hplot}
+\keyword{internal}

@@ -2,13 +2,22 @@
 % Please edit documentation in R/ggfacet.R
 \name{ggfacet}
 \alias{ggfacet}
-\title{ggfacet - single ggplot2 plot matrix with facet_grid}
+\title{Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}}
 \usage{
-ggfacet(data, mapping = NULL, columnsX = 1:ncol(data),
-  columnsY = 1:ncol(data), fn = ggally_points, ...,
+ggfacet(
+  data,
+  mapping = NULL,
+  columnsX = 1:ncol(data),
+  columnsY = 1:ncol(data),
+  fn = ggally_points,
+  ...,
   columnLabelsX = names(data[columnsX]),
-  columnLabelsY = names(data[columnsY]), xlab = NULL, ylab = NULL,
-  title = NULL, scales = "free")
+  columnLabelsY = names(data[columnsY]),
+  xlab = NULL,
+  ylab = NULL,
+  title = NULL,
+  scales = "free"
+)
 }
 \arguments{
 \item{data}{data.frame that contains all columns to be displayed.  This data will be melted before being passed into the function \code{fn}}
@@ -30,14 +39,14 @@ ggfacet(data, mapping = NULL, columnsX = 1:ncol(data),
 \item{scales}{parameter supplied to \code{ggplot2::\link[ggplot2]{facet_grid}}. Default behavior is \code{"free"}}
 }
 \description{
-ggfacet - single ggplot2 plot matrix with facet_grid
+Single \pkg{ggplot2} plot matrix with \code{\link[ggplot2]{facet_grid}}
 }
 \examples{
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 if (requireNamespace("chemometrics", quietly = TRUE)) {
   data(NIR, package = "chemometrics")
-  NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[,1:3])
+  NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[, 1:3])
   str(NIR_sub)
   x_cols <- c("X1115.0", "X1120.0", "X1125.0")
   y_cols <- c("Glucose", "Ethanol")
@@ -51,7 +60,7 @@ if (requireNamespace("chemometrics", quietly = TRUE)) {
   p_(p)
 
   # add a smoother
-  p <- ggfacet(NIR_sub, x_cols, y_cols, fn = 'smooth_loess')
+  p <- ggfacet(NIR_sub, x_cols, y_cols, fn = "smooth_loess")
   p_(p)
   # same output
   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = ggally_smooth_loess)

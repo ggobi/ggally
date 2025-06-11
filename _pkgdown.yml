@@ -1,0 +1,223 @@
+url: https://ggobi.github.io/ggally
+
+development:
+  mode: auto
+
+template:
+  bootstrap: 5
+
+authors:
+  Barret Schloerke:
+    href: https://schloerke.com/
+  Di Cook:
+    href: https://www.dicook.org/
+  Joseph Larmarange:
+    href: https://joseph.larmarange.net/
+  Francois Briatte:
+    href: https://f.briatte.org/
+  Moritz Marbach:
+    href: https://www.moritz-marbach.com/
+  Edwin Thoen:
+    href: https://edwinth.github.io/
+  Heike Hofmann:
+    href: https://heike.github.io/
+  Hadley Wickham:
+    href: https://hadley.nz/
+
+articles:
+- title: Generic plot matrix
+  navbar: Generic plot matrix
+  # desc: description here
+  contents:
+  - ggpairs
+  - ggduo
+  - ggmatrix
+  - ggally_plots
+
+- title: Specialized plot matrix
+  navbar: Specialized plot matrix
+  # desc: description here
+  contents:
+  - ggbivariate
+  - ggnostic
+  - ggscatmat
+  - ggtable
+  - ggally_stats
+
+- title: Specialized ggplot2 plot
+  navbar: Specialized ggplot2 plot
+  # desc: description here
+  contents:
+  - ggcoef_model
+  - ggcoef
+  - ggnetworkmap
+  - ggsurv
+  - glyph
+
+
+reference:
+- title: Plot Matrix
+  desc: >
+    More details in
+    [`vig_ggally("ggpairs")`](https://ggobi.github.io/ggally/articles/ggpairs.html),
+    [`vig_ggally("ggmatrix")`](https://ggobi.github.io/ggally/articles/ggmatrix.html),
+    and [`vig_ggally("ggscatmat")`](https://ggobi.github.io/ggally/articles/ggscatmat.html)
+  contents:
+  - ggmatrix
+  - ggpairs
+  - ggduo
+  - ggscatmat
+  - ggfacet
+  - ggts
+
+- title: High-Level Plots
+  desc: >
+    See
+    [`vig_ggally("ggally_plots")`](https://ggobi.github.io/ggally/articles/ggally_plots.html)
+    for a list with examples of all high-level plots.
+  contents:
+  - ggally_autopoint
+  - ggally_barDiag
+  - ggally_blank
+  - ggally_box
+  - ggally_colbar
+  - ggally_count
+  - ggally_cor
+  - ggally_cross
+  - ggally_crosstable
+  - ggally_density
+  - ggally_densityDiag
+  - ggally_denstrip
+  - ggally_diagAxis
+  - ggally_dot
+  - ggally_facetbar
+  - ggally_facetdensity
+  - ggally_facetdensitystrip
+  - ggally_facethist
+  - ggally_na
+  - ggally_points
+  - ggally_ratio
+  - ggally_smooth
+  - ggally_statistic
+  - ggally_summarise_by
+  - ggally_table
+  - ggally_text
+  - ggally_trends
+
+- title: Major Plotting Functions
+  desc: >
+    More details in
+    [`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html),
+    [`vig_ggally("ggcoef")`](https://ggobi.github.io/ggally/articles/ggcoef.html),
+    [`vig_ggally("ggcoef_model")`](https://ggobi.github.io/ggally/articles/ggcoef_model.html),
+    [`vig_ggally("ggsurv")`](https://ggobi.github.io/ggally/articles/ggsurv.html),
+    and [`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html)
+  contents:
+  - ggbivariate
+  - ggcoef
+  - ggcoef_model
+  - ggcorr
+  - ggparcoord
+  - ggsurv
+  - ggtable
+
+- title: Modeling Diagnostics
+  desc: >
+    More details in
+    [`vig_ggally("ggnostic")`](https://ggobi.github.io/ggally/articles/ggpairs.html)
+  contents:
+  - ggnostic
+  - broomify
+  - ggally_nostic_cooksd
+  - ggally_nostic_hat
+  - ggally_nostic_line
+  - ggally_nostic_resid
+  - ggally_nostic_se_fit
+  - ggally_nostic_sigma
+  - ggally_nostic_std_resid
+
+- title: Glyph Plot
+  desc: >
+    More details in
+    [`vig_ggally("glyph")`](https://ggobi.github.io/ggally/articles/glyph.html)
+  contents:
+  - glyphs
+  - add_ref_boxes
+  - add_ref_lines
+  - glyphplot
+  - rescale01
+
+- title: Network Plots
+  desc: >
+    More details in
+    [`vig_ggally("ggnetworkmap")`](https://ggobi.github.io/ggally/articles/ggnetworkmap.html)
+  contents:
+  - ggnet
+  - ggnet2
+  - ggnetworkmap
+
+- title: Additional Statistics for `ggplot2`
+  desc: >
+    More details in
+    [`vig_ggally("ggally_stats")`](https://ggobi.github.io/ggally/articles/ggally_stats.html)
+  contents:
+  - stat_cross
+  - stat_prop
+  - stat_weighted_mean
+
+- title: Additional Geometries for `ggplot2`
+  contents:
+  - geom_stripped_rows
+
+- title: "ggmatrix() Helpers"
+  contents:
+  - +.gg
+  - ggmatrix_location
+  - wrap_fn_with_param_arg
+  - getPlot
+  - putPlot
+  - fn_switch
+  - grab_legend
+  - gglegend
+  - eval_data_col
+  - mapping_swap_x_y
+  - mapping_color_to_fill
+  - remove_color_unless_equal
+  - print.ggmatrix
+  - ggmatrix_gtable
+  - ggmatrix_progress
+  - str.ggmatrix
+  - print_if_interactive
+
+- title: Utilities
+  contents:
+  - brew_colors
+  - find_plot_type
+  - is_horizontal
+  - lowertriangle
+  - mapping_string
+  - model_response_variables
+  - scag_order
+  - scatmat
+  - singleClassOrder
+  - skewness
+  - signif_stars
+  - uppertriangle
+  - vig_ggally
+
+- title: Datasets
+  contents:
+  - australia_PISA2012
+  - baseball
+  - flea
+  - happy
+  - nasa
+  - pigs
+  - psychademic
+  - tips
+  - twitter_spambots
+
+- title: Legacy
+  contents:
+  - v1_ggmatrix_theme
+  - ggally_cor_v1_5

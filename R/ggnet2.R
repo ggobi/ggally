@@ -1,13 +1,9 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("X1", "X2", "Y1", "Y2", "midX", "midY"))
-}
-
-#' ggnet2 - Plot a network with ggplot2
+#' Network plot
 #'
-#' Function for plotting network objects using ggplot2, with additional control
+#' Function for plotting network objects using \pkg{ggplot2}, with additional control
 #' over graphical parameters that are not supported by the \code{\link{ggnet}}
-#' function. Please visit \url{http://github.com/briatte/ggnet} for the latest
-#' version of ggnet2, and \url{https://briatte.github.io/ggnet} for a vignette
+#' function. Please visit \url{https://github.com/briatte/ggnet} for the latest
+#' version of ggnet2, and \url{https://briatte.github.io/ggnet/} for a vignette
 #' that contains many examples and explanations.
 #'
 #' @export
@@ -15,8 +11,8 @@ if (getRversion() >= "2.15.1") {
 #' that can be coerced to this class, such as an adjacency or incidence matrix,
 #' or an edge list: see \link[network]{edgeset.constructors} and
 #' \link[network]{network} for details. If the object is of class
-#' \code{\link[igraph:igraph-package]{igraph}} and the
-#' \code{\link[intergraph:intergraph-package]{intergraph}} package is installed,
+#' [igraph][igraph::igraph-package] and the
+#' [intergraph][intergraph::intergraph-package] package is installed,
 #' it will be used to convert the object: see
 #' \code{\link[intergraph]{asNetwork}} for details.
 #' @param mode a placement method from those provided in the
@@ -60,9 +56,9 @@ if (getRversion() >= "2.15.1") {
 #' Defaults to \code{NA} (does nothing).
 #' @param palette the palette to color the nodes, when \code{color} is not a
 #' color value or a vector of color values. Accepts named vectors of color
-#' values, or if \code{\link[RColorBrewer]{RColorBrewer}} is installed, any
-#' ColorBrewer palette name: see \code{\link[RColorBrewer]{brewer.pal}} and
-#' \url{http://colorbrewer2.org/} for details.
+#' values, or if [RColorBrewer][RColorBrewer::RColorBrewer] is installed, any
+#' ColorBrewer palette name: see [RColorBrewer::brewer.pal()] and
+#' \url{https://colorbrewer2.org/} for details.
 #' Defaults to \code{NULL}, which will create an array of grayscale color values
 #' if \code{color} is not a color value or a vector of color values.
 #' @param alpha.palette the palette to control the transparency levels of the
@@ -184,7 +180,7 @@ if (getRversion() >= "2.15.1") {
 #' \code{\link[sna]{gplot}} in the \code{\link[sna]{sna}} package, and
 #' \code{\link[network]{plot.network}} in the \code{\link[network]{network}}
 #' package
-#' @author Moritz Marbach and Francois Briatte, with help from Heike Hoffmann,
+#' @author Moritz Marbach and Francois Briatte, with help from Heike Hofmann,
 #' Pedro Jordano and Ming-Yu Liu
 #' @details The degree centrality measures that can be produced through the
 #' \code{size} argument will take the directedness of the network into account,
@@ -199,6 +195,9 @@ if (getRversion() >= "2.15.1") {
 #' @importFrom utils installed.packages
 #' @importFrom grDevices gray.colors
 #' @examples
+#' # Small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#'
 #' library(network)
 #'
 #' # random adjacency matrix
@@ -206,50 +205,50 @@ if (getRversion() >= "2.15.1") {
 #' ndyads      <- x * (x - 1)
 #' density     <- x / ndyads
 #' m           <- matrix(0, nrow = x, ncol = x)
-#' dimnames(m) <- list(letters[ 1:x ], letters[ 1:x ])
-#' m[ row(m) != col(m) ] <- runif(ndyads) < density
+#' dimnames(m) <- list(letters[1:x], letters[1:x])
+#' m[row(m) != col(m)] <- runif(ndyads) < density
 #' m
 #'
 #' # random undirected network
 #' n <- network::network(m, directed = FALSE)
 #' n
 #'
-#' ggnet2(n, label = TRUE)
-#' ggnet2(n, label = TRUE, shape = 15)
-#' ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white")
+#' p_(ggnet2(n, label = TRUE))
+#' p_(ggnet2(n, label = TRUE, shape = 15))
+#' p_(ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white"))
 #'
 #' # add vertex attribute
 #' x = network.vertex.names(n)
 #' x = ifelse(x %in% c("a", "e", "i"), "vowel", "consonant")
 #' n %v% "phono" = x
 #'
-#' ggnet2(n, color = "phono")
-#' ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey"))
-#' ggnet2(n, shape = "phono", color = "phono")
+#' p_(ggnet2(n, color = "phono"))
+#' p_(ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey")))
+#' p_(ggnet2(n, shape = "phono", color = "phono"))
 #'
 #' if (require(RColorBrewer)) {
 #'
 #'   # random groups
 #'   n %v% "group" <- sample(LETTERS[1:3], 10, replace = TRUE)
 #'
-#'   ggnet2(n, color = "group", palette = "Set2")
+#'   p_(ggnet2(n, color = "group", palette = "Set2"))
 #'
 #' }
 #'
 #' # random weights
 #' n %e% "weight" <- sample(1:3, network.edgecount(n), replace = TRUE)
-#' ggnet2(n, edge.size = "weight", edge.label = "weight")
+#' p_(ggnet2(n, edge.size = "weight", edge.label = "weight"))
 #'
 #' # edge arrows on a directed network
-#' ggnet2(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10)
+#' p_(ggnet2(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10))
 #'
 #' # Padgett's Florentine wedding data
 #' data(flo, package = "network")
 #' flo
 #'
-#' ggnet2(flo, label = TRUE)
-#' ggnet2(flo, label = TRUE, label.trim = 4, vjust = -1, size = 3, color = 1)
-#' ggnet2(flo, label = TRUE, size = 12, color = "white")
+#' p_(ggnet2(flo, label = TRUE))
+#' p_(ggnet2(flo, label = TRUE, label.trim = 4, vjust = -1, size = 3, color = 1))
+#' p_(ggnet2(flo, label = TRUE, size = 12, color = "white"))
 ggnet2 <- function(
   net,
   mode             = "fruchtermanreingold",
@@ -299,17 +298,17 @@ ggnet2 <- function(
   legend.size      = 9,
   legend.position  = "right",
   ...
-){
+) {
 
   # -- packages ----------------------------------------------------------------
 
-  require_namespaces(c("network", "sna", "scales"))
+  rlang::check_installed(c("network", "sna", "scales"))
 
   # -- conversion to network class ---------------------------------------------
 
-  if (class(net) == "igraph" && "intergraph" %in% rownames(installed.packages())) {
+  if (inherits(net, "igraph") && "intergraph" %in% rownames(installed.packages())) {
     net = intergraph::asNetwork(net)
-  } else if (class("net") == "igraph") {
+  } else if (inherits(net, "igraph")) {
     stop("install the 'intergraph' package to use igraph objects with ggnet2")
   }
 
@@ -332,7 +331,7 @@ ggnet2 <- function(
 
   set_node = function(x, value, mode = TRUE) {
 
-    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+    if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
       stop(paste("incorrect", value, "value"))
     } else if (is.numeric(x) && any(x < 0)) {
       stop(paste("incorrect", value, "value"))
@@ -340,9 +339,9 @@ ggnet2 <- function(
       x
     } else if (length(x) > 1) {
       stop(paste("incorrect", value, "length"))
-    } else if (x %in% v_attr) {
+    } else if (any(x %in% v_attr)) {
       get_v(net, x)
-    } else if (mode && x == "mode" & is_bip) {
+    } else if (mode && identical(x, "mode") && is_bip) {
       set_mode(net)
     } else {
       x
@@ -352,7 +351,7 @@ ggnet2 <- function(
 
   set_edge = function(x, value) {
 
-    if (is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
+    if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
       stop(paste("incorrect", value, "value"))
     } else if (is.numeric(x) && any(x < 0)) {
       stop(paste("incorrect", value, "value"))
@@ -360,7 +359,7 @@ ggnet2 <- function(
       x
     } else if (length(x) > 1) {
       stop(paste("incorrect", value, "length"))
-    } else if (x %in% e_attr) {
+    } else if (any(x %in% e_attr)) {
       get_e(net, x)
     } else {
       x
@@ -419,14 +418,14 @@ ggnet2 <- function(
 
   if (!is.numeric(arrow.size) || arrow.size < 0) {
     stop("incorrect arrow.size value")
-  } else if (arrow.size > 0 & is_dir == "graph") {
+  } else if (arrow.size > 0 && is_dir == "graph") {
     warning("network is undirected; arrow.size ignored")
     arrow.size = 0
   }
 
   if (!is.numeric(arrow.gap) || arrow.gap < 0 || arrow.gap > 1) {
     stop("incorrect arrow.gap value")
-  } else if (arrow.gap > 0 & is_dir == "graph") {
+  } else if (arrow.gap > 0 && is_dir == "graph") {
     warning("network is undirected; arrow.gap ignored")
     arrow.gap = 0
   }
@@ -477,7 +476,7 @@ ggnet2 <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -501,8 +500,8 @@ ggnet2 <- function(
     if ("package:igraph" %in% search()) {
 
       y = ifelse(is_dir == "digraph", "directed", "undirected")
-      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[ x ]
-      data$size = igraph::degree(igraph::graph.adjacency(as.matrix(net), mode = y), mode = z)
+      z = c("indegree" = "in", "outdegree" = "out", "degree" = "all", "freeman" = "all")[x]
+      data$size = igraph::degree(igraph_graph_adjacency_matrix(as.matrix(net), mode = y), mode = z)
 
     } else {
       data$size = sna::degree(net, gmode = is_dir, cmode = ifelse(x == "degree", "freeman", x))
@@ -527,7 +526,7 @@ ggnet2 <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -554,7 +553,7 @@ ggnet2 <- function(
 
     if (length(x) > 0) {
 
-      data = data[ -x, ]
+      data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
@@ -608,7 +607,7 @@ ggnet2 <- function(
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$alpha[ !data$alpha %in% names(x) ]))
+    y = unique(na.omit(data$alpha[!data$alpha %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no alpha.palette value for", paste0(y, collapse = ", ")))
@@ -640,7 +639,7 @@ ggnet2 <- function(
     data$color = factor(data$color)
 
     n_groups = length(levels(data$color))
-    n_colors = RColorBrewer::brewer.pal.info[ x, "maxcolors" ]
+    n_colors = RColorBrewer::brewer.pal.info[x, "maxcolors"]
 
     if (n_groups > n_colors) {
 
@@ -651,14 +650,14 @@ ggnet2 <- function(
       n_groups = 3
     }
 
-    x = RColorBrewer::brewer.pal(n_groups, x)[ 1:length(levels(data$color)) ]
+    x = RColorBrewer::brewer.pal(n_groups, x)[1:length(levels(data$color))]
     names(x) = levels(data$color)
 
   }
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$color[ !data$color %in% names(x) ]))
+    y = unique(na.omit(data$color[!data$color %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no color.palette value for", paste0(y, collapse = ", ")))
@@ -687,7 +686,7 @@ ggnet2 <- function(
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$shape[ !data$shape %in% names(x) ]))
+    y = unique(na.omit(data$shape[!data$shape %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no shape.palette value for", paste0(y, collapse = ", ")))
@@ -715,7 +714,7 @@ ggnet2 <- function(
 
   if (!is.null(names(x))) {
 
-    y = unique(na.omit(data$size[ !data$size %in% names(x) ]))
+    y = unique(na.omit(data$size[!data$size %in% names(x)]))
 
     if (length(y) > 0) {
       stop(paste("no size.palette value for", paste0(y, collapse = ", ")))
@@ -737,7 +736,7 @@ ggnet2 <- function(
 
   if (isTRUE(l)) {
     l = data$label
-  } else if (length(l) > 1 & length(l) == n_nodes) {
+  } else if (length(l) > 1 && length(l) == n_nodes) {
     data$label = l
   } else if (length(l) == 1 && l %in% v_attr) {
     l = get_v(net, l)
@@ -777,8 +776,8 @@ ggnet2 <- function(
 
   }
 
-  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[,1]
-  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[,1]
+  xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[, 1]
+  xy$y = scale(xy$y, min(xy$y), diff(range(xy$y)))[, 1]
 
   data = cbind(data, xy)
 
@@ -789,15 +788,15 @@ ggnet2 <- function(
   if (edge.color[1] == "color" && length(edge.color) == 2) {
 
     # edge colors from node source and target
-    edge.color = ifelse(data$color[ edges[, 1]] == data$color[ edges[, 2]],
-                        as.character(data$color[ edges[, 1]]), edge.color[2])
+    edge.color = ifelse(data$color[edges[, 1]] == data$color[edges[, 2]],
+                        as.character(data$color[edges[, 1]]), edge.color[2])
 
     if (!is.null(names(color.palette))) {
       x = which(edge.color %in% names(color.palette))
-      edge.color[x] = color.palette[ edge.color[x] ]
+      edge.color[x] = color.palette[edge.color[x]]
     }
 
-    edge.color[ is.na(edge.color) ] = edge.color[2]
+    edge.color[is.na(edge.color)] = edge.color[2]
 
   }
 
@@ -809,7 +808,7 @@ ggnet2 <- function(
 
   # -- edge list ---------------------------------------------------------------
 
-  edges = data.frame(xy[ edges[, 1], ], xy[ edges[, 2], ])
+  edges = data.frame(xy[edges[, 1], ], xy[edges[, 2], ])
   names(edges) = c("X1", "Y1", "X2", "Y2")
 
   # -- edge labels, colors and sizes -------------------------------------------
@@ -854,7 +853,7 @@ ggnet2 <- function(
 
   # -- plot edges --------------------------------------------------------------
 
-  p = ggplot(data, aes(x = x, y = y))
+  p = ggplot(data, aes(x = .data$x, y = .data$y))
 
   if (nrow(edges) > 0) {
 
@@ -865,19 +864,17 @@ ggnet2 <- function(
 
       arrow.gap = with(edges, arrow.gap / sqrt(x.dir ^ 2 + y.dir ^ 2))
 
-      edges = transform(edges,
-                        X1 = X1 + arrow.gap * x.dir,
-                        Y1 = Y1 + arrow.gap * y.dir,
-                        X2 = X1 + (1 - arrow.gap) * x.dir,
-                        Y2 = Y1 + (1 - arrow.gap) * y.dir)
-
+      edges$X1 = edges$X1 + arrow.gap * x.dir
+      edges$Y1 = edges$Y1 + arrow.gap * y.dir
+      edges$X2 = edges$X1 + (1 - arrow.gap) * x.dir
+      edges$Y2 = edges$Y1 + (1 - arrow.gap) * y.dir
     }
 
     p = p +
       geom_segment(
         data = edges,
-        aes(x = X1, y = Y1, xend = X2, yend = Y2),
-        size   = edge.size,
+        aes(x = .data$X1, y = .data$Y1, xend = .data$X2, yend = .data$Y2),
+        linewidth   = edge.size,
         color  = edge.color,
         alpha  = edge.alpha,
         lty    = edge.lty,
@@ -894,14 +891,14 @@ ggnet2 <- function(
     p = p +
       geom_point(
         data = edges,
-        aes(x = midX, y = midY),
+        aes(x = .data$midX, y = .data$midY),
         alpha  = edge.alpha,
         color  = edge.label.fill,
         size   = edge.label.size * 1.5
       ) +
       geom_text(
         data = edges,
-        aes(x = midX, y = midY, label = label),
+        aes(x = .data$midX, y = .data$midY, label = label),
         alpha  = edge.label.alpha,
         color  = edge.label.color,
         size   = edge.label.size
@@ -943,7 +940,7 @@ ggnet2 <- function(
     names(v_alpha) = unique(data$alpha)
 
     p = p +
-      scale_alpha_manual("", values = v_alpha) + guides(alpha = FALSE)
+      scale_alpha_manual("", values = v_alpha) + guides(alpha = "none")
 
   } else {
 
@@ -971,7 +968,7 @@ ggnet2 <- function(
     names(v_color) = unique(data$color)
 
     p = p +
-      scale_color_manual("", values = v_color) + guides(color = FALSE)
+      scale_color_manual("", values = v_color) + guides(color = "none")
 
   }
 
@@ -983,7 +980,7 @@ ggnet2 <- function(
     names(v_shape) = unique(data$shape)
 
     p = p +
-      scale_shape_manual("", values = v_shape) + guides(shape = FALSE)
+      scale_shape_manual("", values = v_shape) + guides(shape = "none")
 
   } else {
 
@@ -996,7 +993,7 @@ ggnet2 <- function(
 
   # -- legend: size ------------------------------------------------------------
 
-  x = x[ names(x) != "size" ]
+  x = x[names(x) != "size"]
 
   if (is.numeric(data$size)) {
 
@@ -1006,7 +1003,7 @@ ggnet2 <- function(
 
       v_size = as.numeric(names(v_size))
       p = p +
-        scale_size_manual("", values = v_size) + guides(size = FALSE)
+        scale_size_manual("", values = v_size) + guides(size = "none")
 
     } else {
 
@@ -1050,7 +1047,7 @@ ggnet2 <- function(
 
     x = label.trim
 
-    if (length(x) > 1 || (!is.logical(x) & !is.numeric(x) & !is.function(x))) {
+    if (length(x) > 1 || (!is.logical(x) && !is.numeric(x) && !is.function(x))) {
       stop("incorrect label.trim value")
     } else if (is.numeric(x) && x > 0) {
       l = substr(l, 1, x)

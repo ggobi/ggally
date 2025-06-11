@@ -2,28 +2,40 @@
 % Please edit documentation in R/ggnostic.R
 \name{ggally_nostic_line}
 \alias{ggally_nostic_line}
-\title{ggnostic -background line with geom}
+\title{\code{\link{ggnostic}} background line with geom}
 \usage{
-ggally_nostic_line(data, mapping, ..., linePosition = NULL,
-  lineColor = "red", lineSize = 0.5, lineAlpha = 1, lineType = 1,
-  continuous_geom = ggplot2::geom_point, combo_geom = ggplot2::geom_boxplot,
-  mapColorToFill = TRUE)
+ggally_nostic_line(
+  data,
+  mapping,
+  ...,
+  linePosition = NULL,
+  lineColor = "red",
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 1,
+  continuous_geom = ggplot2::geom_point,
+  combo_geom = ggplot2::geom_boxplot,
+  mapColorToFill = TRUE
+)
 }
 \arguments{
-\item{data, mapping}{supplied directly to \code{ggplot2::\link[ggplot2]{ggplot}(data, mapping)}}
+\item{data, mapping}{supplied directly to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}}
 
 \item{...}{parameters supplied to \code{continuous_geom} or \code{combo_geom}}
 
-\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to \code{ggplot2::\link[ggplot2]{geom_line}}}
+\item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
+\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}}}
 
-\item{continuous_geom}{ggplot2 geom that is executed after the line is (possibly) added and if the x data is continuous}
+\item{continuous_geom}{\pkg{ggplot2} geom that is executed after the line is (possibly)
+added and if the x data is continuous}
 
-\item{combo_geom}{ggplot2 geom that is executed after the line is (possibly) added and if the x data is discrete}
+\item{combo_geom}{\pkg{ggplot2} geom that is executed after the line is (possibly) added and
+if the x data is discrete}
 
 \item{mapColorToFill}{boolean to determine if combo plots should cut the color mapping to the fill mapping}
 }
 \value{
-ggplot2 plot object
+\pkg{ggplot2} plot object
 }
 \description{
 If a non-null \code{linePosition} value is given, a line will be drawn before the given \code{continuous_geom} or \code{combo_geom} is added to the plot.

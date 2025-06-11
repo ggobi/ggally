@@ -2,11 +2,20 @@
 % Please edit documentation in R/gglyph.R
 \name{glyphs}
 \alias{glyphs}
-\title{Create the data needed to generate a glyph plot.}
+\title{Create \code{\link{glyphplot}} data}
 \usage{
-glyphs(data, x_major, x_minor, y_major, y_minor, polar = FALSE,
-  height = ggplot2::rel(0.95), width = ggplot2::rel(0.95),
-  y_scale = identity, x_scale = identity)
+glyphs(
+  data,
+  x_major,
+  x_minor,
+  y_major,
+  y_minor,
+  polar = FALSE,
+  height = ggplot2::rel(0.95),
+  width = ggplot2::rel(0.95),
+  y_scale = identity,
+  x_scale = identity
+)
 }
 \arguments{
 \item{data}{A data frame containing variables named in \code{x_major},
@@ -30,22 +39,25 @@ that no scaling is performed.}
 Create the data needed to generate a glyph plot.
 }
 \examples{
- data(nasa)
- nasaLate <- nasa[
-   nasa$date >= as.POSIXct("1998-01-01") &
-   nasa$lat >= 20 &
-   nasa$lat <= 40 &
-   nasa$long >= -80 &
-   nasa$long <= -60
- , ]
- temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height=2.5)
- ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
-   add_ref_lines(temp.gly, color = "grey90") +
-   add_ref_boxes(temp.gly, color = "grey90") +
-   ggplot2::geom_path() +
-   ggplot2::theme_bw() +
-   ggplot2::labs(x = "", y = "")
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(nasa)
+nasaLate <- nasa[
+  nasa$date >= as.POSIXct("1998-01-01") &
+    nasa$lat >= 20 &
+    nasa$lat <= 40 &
+    nasa$long >= -80 &
+    nasa$long <= -60,
+]
+temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 2.5)
+p_(ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
+  add_ref_lines(temp.gly, color = "grey90") +
+  add_ref_boxes(temp.gly, color = "grey90") +
+  ggplot2::geom_path() +
+  ggplot2::theme_bw() +
+  ggplot2::labs(x = "", y = ""))
 }
 \author{
-Di Cook \email{dicook@monash.edu}, Heike Hofmann, Hadley Wickham
+Di Cook, Heike Hofmann, Hadley Wickham
 }

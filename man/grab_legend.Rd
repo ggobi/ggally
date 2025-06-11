@@ -16,27 +16,26 @@ grab_legend(p)
 
 \item{...}{ignored}
 
-\item{plotNew}{boolean to determine if the `grid.newpage()` command and a new blank rectangle should be printed}
+\item{plotNew}{boolean to determine if the \code{grid.newpage()} command and a new blank rectangle should be printed}
 }
 \description{
 Grab the legend and print it as a plot
 }
 \examples{
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
 library(ggplot2)
-histPlot <- qplot(
-  x = Sepal.Length,
-  data = iris,
-  fill = Species,
-  geom = "histogram",
-  binwidth = 1/4
-)
+histPlot <-
+  ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_histogram(binwidth = 1 / 4)
 (right <- histPlot)
 (bottom <- histPlot + theme(legend.position = "bottom"))
 (top <- histPlot + theme(legend.position = "top"))
 (left <- histPlot + theme(legend.position = "left"))
 
-grab_legend(right)
-grab_legend(bottom)
-grab_legend(top)
-grab_legend(left)
+p_(grab_legend(right))
+p_(grab_legend(bottom))
+p_(grab_legend(top))
+p_(grab_legend(left))
 }

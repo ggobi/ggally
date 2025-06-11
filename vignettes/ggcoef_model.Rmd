@@ -1,0 +1,14 @@
+---
+title: "ggcoef_model(): Model coefficients"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggcoef_model(): Model coefficients}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Redirecting to <a href="https://larmarange.github.io/ggstats/articles/ggcoef_model.html">https://larmarange.github.io/ggstats/articles/ggcoef_model.html</a>
+
+To view locally, run the R command `vignette("ggcoef_model", "ggstats")`.
+
+<meta http-equiv="Refresh" content="0; url='https://larmarange.github.io/ggstats/articles/ggcoef_model.html'" />
