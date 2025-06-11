@@ -273,7 +273,7 @@ ggsurv_m <- function(
 
   dat <- do.call(rbind, gr.df)
 
-  pl <- ggplot(dat, aes(x = time, y = .data$surv, group = .data$group)) +
+  pl <- ggplot(dat, aes(x = .data$time, y = .data$surv, group = .data$group)) +
     geom_step(aes(col = .data$group, lty = .data$group), linewidth = size.est) +
     xlab(xlab) +
     ylab(ylab) +
@@ -310,7 +310,7 @@ ggsurv_m <- function(
 
   if (identical(plot.cens, TRUE)) {
     dat.cens <- dat[!is.na(dat$cens) & dat$cens != 0, ]
-    dat.cens <- dat.cens[!is.na(dat$group) & dat$group != "PKD", ]
+    dat.cens <- dat.cens[!is.na(dat.cens$group) & dat.cens$group != "PKD", ]
 
     if (nrow(dat.cens) == 0) {
       stop("There are no censored observations")
