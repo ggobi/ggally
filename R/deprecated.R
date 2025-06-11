@@ -196,7 +196,7 @@ ggally_cor_v1_5 <- function(
       !inherits(colorData, "AsIs")
   ) {
     cord <- data.frame(x = xData, y = yData, color = colorData) %>%
-      summarise(correlation = cor_fn(x, y), .by = "color") %>%
+      summarise(correlation = cor_fn(.data$x, .data$y), .by = "color") %>%
       arrange(.data$color) %>%
       mutate(correlation = signif(as.numeric(.data$correlation), 3L))
 
@@ -255,10 +255,10 @@ ggally_cor_v1_5 <- function(
     p <- p + geom_text(
       data = cordf,
       aes(
-        x = xPos,
-        y = yPos,
-        label = labelp,
-        color = labelp
+        x = .data$xPos,
+        y = .data$yPos,
+        label = .data$labelp,
+        color = .data$labelp
       ),
       hjust = 1,
       ...

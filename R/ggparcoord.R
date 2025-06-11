@@ -1,7 +1,5 @@
 #' @importFrom dplyr all_of
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("variable", "value", "ggally_splineFactor", ".ggally_ggcorr_row_names"))
-}
+NULL
 
 #' Parallel coordinate plot
 #'
@@ -513,8 +511,8 @@ ggparcoord <- function(
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
     d.sum <- data.m %>%
-      summarise(min = min(value), max = max(value), .by = variable) %>%
-      arrange(variable)
+      summarise(min = min(.data$value), max = max(.data$value), .by = "variable") %>%
+      arrange(.data$variable)
     p <- p + geom_linerange(
       data = d.sum, linewidth = I(10), col = shadeBox,
       inherit.aes = FALSE,
@@ -528,7 +526,7 @@ ggparcoord <- function(
   }
 
   if (boxplot) {
-    p <- p + geom_boxplot(mapping = aes(group = !!as.name("variable")), alpha = 0.8)
+    p <- p + geom_boxplot(mapping = aes(group = .data$variable), alpha = 0.8)
   }
 
   if (!is.null(mapping2$linewidth)) {
@@ -541,21 +539,21 @@ ggparcoord <- function(
     data.m$ggally_splineFactor <- splineFactor
     if (inherits(splineFactor, "AsIs")) {
       data.m <- bind_cols(
-        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1] / length(x)))),
+        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, .data$ggally_splineFactor[1] / length(x)))),
         mutate(
-          reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = ggally_splineFactor[1]))),
-          spline.x = x,
-          spline.y = y,
+          reframe(data.m, .by = ".ID", data.frame(spline(.data$variable, .data$value, n = .data$ggally_splineFactor[1]))),
+          spline.x = .data$x,
+          spline.y = .data$y,
           .keep = "none"
         )
       )
     } else {
       data.m <- bind_cols(
-        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1]))),
+        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, .data$ggally_splineFactor[1]))),
         mutate(
-          reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = n() * ggally_splineFactor[1]))),
-          spline.x = x,
-          spline.y = y,
+          reframe(data.m, .by = ".ID", data.frame(spline(.data$variable, .data$value, n = n() * .data$ggally_splineFactor[1]))),
+          spline.x = .data$x,
+          spline.y = .data$y,
           .keep = "none"
         )
       )
@@ -583,7 +581,7 @@ ggparcoord <- function(
     }
 
     if (showPoints) {
-      p <- p + geom_point(aes(x = as.numeric(variable), y = value))
+      p <- p + geom_point(aes(x = as.numeric(.data$variable), y = .data$value))
     }
 
     xAxisLabels <- levels(data.m$variable)

@@ -31,7 +31,7 @@ test_that("cor", {
   ti <- tips
   class(ti) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = day), use = "complete.obs")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[2]])$colour), ".data$labelp")
+  expect_equal(mapping_string(get("mapping", envir = p$layers[[2]])$colour), "labelp")
 
   p <- ggally_cor(
     ti,
