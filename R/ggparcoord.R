@@ -539,9 +539,9 @@ ggparcoord <- function(
     data.m$ggally_splineFactor <- splineFactor
     if (inherits(splineFactor, "AsIs")) {
       data.m <- bind_cols(
-        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1] / length(x)))),
+        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, .data$ggally_splineFactor[1] / length(x)))),
         mutate(
-          reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = ggally_splineFactor[1]))),
+          reframe(data.m, .by = ".ID", data.frame(spline(.data$variable, .data$value, n = .data$ggally_splineFactor[1]))),
           spline.x = .data$x,
           spline.y = .data$y,
           .keep = "none"
@@ -549,9 +549,9 @@ ggparcoord <- function(
       )
     } else {
       data.m <- bind_cols(
-        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, ggally_splineFactor[1]))),
+        reframe(data.m, .by = ".ID", across(everything(), function(x) rep(x, .data$ggally_splineFactor[1]))),
         mutate(
-          reframe(data.m, .by = ".ID", data.frame(spline(variable, value, n = n() * ggally_splineFactor[1]))),
+          reframe(data.m, .by = ".ID", data.frame(spline(.data$variable, .data$value, n = n() * .data$ggally_splineFactor[1]))),
           spline.x = .data$x,
           spline.y = .data$y,
           .keep = "none"
