@@ -1,8 +1,3 @@
-if (getRversion() >= "2.15.1") {
-  utils::globalVariables(c("xvalue", "yvalue", "scaled"))
-}
-
-
 #' lowertriangle - rearrange dataset as the preparation of \code{\link{ggscatmat}} function
 #'
 #' function for making the melted dataset used to plot the lowertriangle scatterplots.
@@ -127,12 +122,12 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     data.cor <- b %>%
       dplyr::group_by(xlab, ylab) %>%
       dplyr::summarise(
-        r = cor(xvalue, yvalue,
+        r = cor(.data$xvalue, .data$yvalue,
           use = "pairwise.complete.obs",
           method = "pearson"
         ),
-        xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-        yvalue = min(yvalue) + 0.5 * (max(yvalue) - min(yvalue))
+        xvalue = min(.data$xvalue) + 0.5 * (max(.data$xvalue) - min(.data$xvalue)),
+        yvalue = min(.data$yvalue) + 0.5 * (max(.data$yvalue) - min(.data$yvalue))
       )
     if (identical(corMethod, "rsquare")) {
       data.cor$r <- data.cor$r^2
@@ -176,7 +171,7 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     c <- b
     data.cor1 <- c %>%
       dplyr::group_by(xlab, ylab, colorcolumn) %>%
-      dplyr::summarise(r = cor(xvalue, yvalue,
+      dplyr::summarise(r = cor(.data$xvalue, .data$yvalue,
         use = "pairwise.complete.obs",
         method = "pearson"
       ))
@@ -220,10 +215,10 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     position <- b %>%
       dplyr::group_by(xlab, ylab) %>%
       dplyr::summarise(
-        xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
-        ymin = min(yvalue),
-        ymax = max(yvalue),
-        range = max(yvalue) - min(yvalue)
+        xvalue = min(.data$xvalue) + 0.5 * (max(.data$xvalue) - min(.data$xvalue)),
+        ymin = min(.data$yvalue),
+        ymax = max(.data$yvalue),
+        range = max(.data$yvalue) - min(.data$yvalue)
       )
     #    position <- ddply(b, .(ylab, xlab), summarise,
     #                      xvalue = min(xvalue) + 0.5 * (max(xvalue) - min(xvalue)),
@@ -293,8 +288,8 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
       j <- subset(densities, xlab == names(dn)[m])
       r <- r + stat_density(
         aes(
-          x = !!as.name("x"),
-          y = after_stat(scaled) * diff(range(!!as.name("x"))) + min(!!as.name("x")) # nolint
+          x = .data$x,
+          y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x) # nolint
         ),
         data = j, position = "identity", geom = "line", color = "black"
       )
@@ -317,9 +312,9 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
         # r is the facet grid plot
         stat_density(
           aes(
-            x = !!as.name("x"),
-            y = after_stat(scaled) * diff(range(!!as.name("x"))) + min(!!as.name("x")),
-            colour = !!as.name("colorcolumn")
+            x = .data$x,
+            y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x),
+            colour = .data$colorcolumn
           ),
           data = j,
           position = "identity",
@@ -330,7 +325,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
     r <- r +
       geom_point(
         data = ltdata.new,
-        aes(colour = !!as.name("colorcolumn")),
+        aes(colour = .data$colorcolumn),
         alpha = alpha,
         na.rm = TRUE
       )

@@ -2,6 +2,7 @@
 suppressMessages(require(broom))
 
 test_that("example", {
+  skip_if_not_installed("Hmisc")
   reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
   vdiffr::expect_doppelganger("lm", ggcoef(reg))
 

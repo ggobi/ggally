@@ -3,17 +3,18 @@ if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-rq(network) # network objects
-rq(sna) # placement and centrality
+skip_if_not(rq(network)) # network objects
+skip_if_not(rq(sna)) # placement and centrality
 
-rq(ggplot2) # grammar of graphics
-rq(grid) # arrows
-rq(scales) # sizing
+skip_if_not(rq(ggplot2)) # grammar of graphics
+skip_if_not(rq(grid)) # arrows
+skip_if_not(rq(scales)) # sizing
 
-rq(intergraph) # test igraph conversion
-rq(RColorBrewer) # test ColorBrewer palettes
+skip_if_not(rq(intergraph)) # test igraph conversion
+skip_if_not(rq(RColorBrewer)) # test ColorBrewer palettes
 
 test_that("examples", {
+  skip_if_not_installed("network")
   ### --- start: documented examples
   set.seed(54321)
 
