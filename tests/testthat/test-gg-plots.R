@@ -260,7 +260,7 @@ test_that("deprecated ggally_cor variables are deprecated", {
     ggally_cor(tips, mapping = aes(total_bill, tip), use = "something")
   )
   lifecycle::expect_deprecated(
-    ggally_cor(tips, mapping = aes(total_bill, tip), alignPercent= 0.5)
+    ggally_cor(tips, mapping = aes(total_bill, tip), alignPercent = 0.5)
   )
   lifecycle::expect_deprecated(
     ggally_cor(tips, mapping = aes(total_bill, tip), displayGrid = FALSE)
