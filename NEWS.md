@@ -1,5 +1,9 @@
 # GGally (development version)
 
+* Added parameter `ggally_cor(na.rm=)` which is passed directly to `ggally_statistic()`. (Thank you @vinouselouane! #516)
+
+* Deprecated parameter `ggally_cor(use=)`. The value was never leveraged within the code. Please use `ggally_cor(na.rm=)` instead. (Thank you @vinouselouane! #516)
+
 * Prepare GGally for `{ggplot2}` v4 (Thank you @teunbrand! #528)
 
 * Replace internal `{plyr}` usage with `{dplyr}`. (Thank you @MichaelChirico! #520, #521, #522, #523, #524, #525, #527, #530)

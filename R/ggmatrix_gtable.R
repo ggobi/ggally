@@ -26,7 +26,7 @@ ggmatrix_gtable <- function(
     progress_fn <- pm$progress
   } else {
     lifecycle::deprecate_soft(
-      when = "2.2.2",
+      when = "2.3.0",
       what = I("`progress` and `progress_format`"),
       details = "Please use the 'progress' parameter in your ggmatrix-like function call.  See ?ggmatrix_progress for a few examples."
     )
