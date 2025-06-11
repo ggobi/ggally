@@ -394,6 +394,7 @@ ggparcoord <- function(
     }
 
     data <- data[dataCompleteCases, ]
+    saveData2 <- saveData2[dataCompleteCases, ]
   } else if (tolower(missing) %in% c("mean", "median", "min10", "random")) {
     missingFns <- list(
       mean = function(x) {

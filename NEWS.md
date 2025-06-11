@@ -6,9 +6,11 @@
 
 * General package dependency cleanup. (Thank you @olivroy! #509)
 
-* Use lifecycle for deprecation warnings (Thank you @92amartins! #494, #496)
+* Fix `anyClass` ordering in `ggparcoord()` when data has missing values (Thank you @92amartins! #500)
 
-* Leverage tidyverse `.data$` mask to remove all global variable declarations. (Thank you @MichaelChirico! #533)
+* Use `{lifecycle}` for deprecation warnings (Thank you @92amartins! #494, #496)
+
+* Leverage `.data$` mask to remove all global variable declarations. (Thank you @MichaelChirico! #533)
 
 
 # GGally 2.2.1
