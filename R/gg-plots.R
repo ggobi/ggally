@@ -483,7 +483,7 @@ ggally_statistic <- function(
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
     cord <- data.frame(x = xData, y = yData, color = colorData) %>%
-      summarise(text = text_fn(x, y), .by = .data$color) %>%
+      summarise(text = text_fn(x, y), .by = "color") %>%
       arrange(.data$color)
 
     # put in correct order
