@@ -1,16 +1,48 @@
 #' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-# \lifecycle{deprecated}
+#' This function allows cleaner axis labels for your plots, but is deprecated.
+#' You can achieve the same effect by specifying strip's background and placement
+#' properties (see Examples).
+#'
+#' @keywords internal
 #'
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
+#' # Cleaner axis labels with v1_ggmatrix_theme
 #' p_(ggpairs(iris, 1:2) + v1_ggmatrix_theme())
-#' # move the column names to the left and bottom
+#'
+#' # Move the column names to the left and bottom
 #' p_(ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme())
+#'
+#' # Manually specifying axis labels properties
+#' p_(
+#'   ggpairs(iris, 1:2) +
+#'   theme(
+#'     strip.background = element_rect(fill = "white"),
+#'     strip.placement = "outside"
+#'   )
+#')
+#'
+#' # This way you have even more control over how the final plot looks.
+#' # For example, if you want to set the background color to yellow:
+#' p_(
+#'   ggpairs(iris, 1:2) +
+#'   theme(
+#'     strip.background = element_rect(fill = "yellow"),
+#'     strip.placement = "outside"
+#'   )
+#')
 v1_ggmatrix_theme <- function() {
+  lifecycle::deprecate_soft(
+    when = "2.2.2",
+    what = "v1_ggmatrix_theme()",
+    details = "This function will be removed in future releases."
+  )
   theme(
     strip.background = element_rect(fill = "white"),
     strip.placement = "outside"
@@ -19,11 +51,14 @@ v1_ggmatrix_theme <- function() {
 
 #' Correlation value plot
 #'
-# \lifecycle{deprecated}
-#'
-#' (Deprecated. See \code{\link{ggally_cor}}.)
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Estimate correlation from the given data.
+#'
+#' This function is deprecated and will be removed in future releases.
+#'
+#' See \code{\link{ggally_cor}}.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -40,7 +75,7 @@ v1_ggmatrix_theme <- function() {
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export
-#' @keywords hplot
+#' @keywords internal
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
@@ -77,6 +112,11 @@ ggally_cor_v1_5 <- function(
     corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
     displayGrid = TRUE,
     ...) {
+  lifecycle::deprecate_soft(
+    when = "2.2.2",
+    what = "ggally_cor_v1_5()",
+    with = "ggally_cor()"
+  )
   if (!is.null(corAlignPercent)) {
     stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
   }

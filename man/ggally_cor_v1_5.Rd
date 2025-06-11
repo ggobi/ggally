@@ -39,10 +39,13 @@ ggally_cor_v1_5(
 \item{...}{other arguments being supplied to geom_text}
 }
 \description{
-(Deprecated. See \code{\link{ggally_cor}}.)
-}
-\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Estimate correlation from the given data.
+
+This function is deprecated and will be removed in future releases.
+
+See \code{\link{ggally_cor}}.
 }
 \examples{
 # Small function to display plots only if it's interactive
@@ -79,4 +82,4 @@ p_(ggally_cor_v1_5(
 \author{
 Barret Schloerke
 }
-\keyword{hplot}
+\keyword{internal}
