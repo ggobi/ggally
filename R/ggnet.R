@@ -587,7 +587,7 @@ ggnet <- function(
 
   # -- plot edges --------------------------------------------------------------
 
-  p = ggplot(data, aes(x = x, y = y))
+  p = ggplot(data, aes(x = .data$x, y = .data$y))
 
   if (nrow(edges) > 0) {
 
@@ -651,7 +651,7 @@ ggnet <- function(
 
     p = p +
       geom_point(
-        aes(size = weight),
+        aes(size = .data$weight),
         alpha = node.alpha
       ) +
       sizer
@@ -663,7 +663,7 @@ ggnet <- function(
   if (!is.null(node.group)) {
 
     p = p +
-      aes(color = group) +
+      aes(color = .data$group) +
       scale_color_manual(
         set_name(node.group, group.legend),
         values = node.color,

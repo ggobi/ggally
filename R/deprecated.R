@@ -255,8 +255,8 @@ ggally_cor_v1_5 <- function(
     p <- p + geom_text(
       data = cordf,
       aes(
-        x = xPos,
-        y = yPos,
+        x = .data$xPos,
+        y = .data$yPos,
         label = .data$labelp,
         color = .data$labelp
       ),

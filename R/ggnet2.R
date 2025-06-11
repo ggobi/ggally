@@ -853,7 +853,7 @@ ggnet2 <- function(
 
   # -- plot edges --------------------------------------------------------------
 
-  p = ggplot(data, aes(x = x, y = y))
+  p = ggplot(data, aes(x = .data$x, y = .data$y))
 
   if (nrow(edges) > 0) {
 

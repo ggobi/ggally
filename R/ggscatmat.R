@@ -289,7 +289,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
       r <- r + stat_density(
         aes(
           x = .data$x,
-          y = after_stat(.data$scaled) * diff(range(!!as.name("x"))) + min(!!as.name("x")) # nolint
+          y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x) # nolint
         ),
         data = j, position = "identity", geom = "line", color = "black"
       )
@@ -312,9 +312,9 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
         # r is the facet grid plot
         stat_density(
           aes(
-            x = !!as.name("x"),
-            y = after_stat(.data$scaled) * diff(range(!!as.name("x"))) + min(!!as.name("x")),
-            colour = !!as.name("colorcolumn")
+            x = .data$x,
+            y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x),
+            colour = .data$colorcolumn
           ),
           data = j,
           position = "identity",
