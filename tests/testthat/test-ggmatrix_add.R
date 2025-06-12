@@ -50,6 +50,9 @@ test_that("add_list", {
 })
 
 test_that("v1_ggmatrix_theme", {
+  old_opts <- options(lifecycle_verbosity = "quiet")
+  on.exit(options(old_opts), add = TRUE)
+
   expect_snapshot(
     {
       pm <- ggpairs(tips, 1:2)
