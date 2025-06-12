@@ -291,25 +291,25 @@ test_that("stops", {
   errorString <- "'aes_string' is a deprecated element"
   expect_error(
     {
-      ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = day)))
+      ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
   ) # nolint
   expect_error(
     {
-      ggpairs(tips, lower = list(aes_string = ggplot2::aes(color = day)))
+      ggpairs(tips, lower = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
   ) # nolint
   expect_error(
     {
-      ggpairs(tips, diag = list(aes_string = ggplot2::aes(color = day)))
+      ggpairs(tips, diag = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
   ) # nolint
   expect_error(
     {
-      ggduo(tips, types = list(aes_string = ggplot2::aes(color = day)))
+      ggduo(tips, types = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
   ) # nolint
@@ -634,138 +634,155 @@ test_that("strip-top and strip-right", {
 })
 
 
-test_that("subtypes", {
-  testthat::skip_on_cran()
-  testthat::skip_if_not_installed("Hmisc")
-
-  # list of the different plot types to check
-  # continuous
-  #    points
-  #    smooth
-  #    smooth_loess
-  #    density
-  #    cor
-  #   blank
-
-  # combo
-  #   box
-  #   dot plot
-  #   facethist
-  #   facetdensity
-  #   denstrip
-  #   blank
-
-  # discrete
-  #   ratio
-  #   facetbar
-  #   blank
-
-  gn <- function(x) {
-    fnName <- attr(x, "name")
-    fnName %||% x
-  }
-
-  ggpairs_fn1 <- function(title, types, diag, ...) {
-    ggpairs(
-      tips, 1:4,
-      axisLabels = "show",
-      title = paste(
-        "upper = c(cont = ", gn(types$continuous),
-        ", combo = ", gn(types$combo),
-        ", discrete = ", gn(types$discrete),
-        "); diag = c(cont = ", gn(diag$continuous),
-        ", discrete = ", gn(diag$discrete),
-        ")",
-        sep = ""
-      ),
-      upper = types,
-      lower = types,
-      diag = diag,
-      progress = FALSE,
-      ...
-    ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
-  }
-
-  ggpairs_fn2 <- function(...) {
-    ggpairs_fn1(..., mapping = ggplot2::aes(color = day), legend = c(1, 3))
-  }
-
-  ggduo_fn1 <- function(title, types, diag, ...) {
-    types$comboHorizontal <- types$combo
-    types$comboVertical <- types$combo
-    types$combo <- NULL
-    ggduo(
-      tips, 1:3, 1:4,
-      axisLabels = "show",
-      title = paste(
-        "types = c(cont = ", gn(types$continuous),
-        ", combo = ", gn(types$comboHorizontal),
-        ", discrete = ", gn(types$discrete),
-        ")",
-        sep = ""
-      ),
-      types = types,
-      progress = FALSE,
-      ...
-    ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
-  }
-
-  ggduo_fn2 <- function(...) {
-    ggduo_fn1(..., mapping = ggplot2::aes(color = day), legend = 3) +
-      theme(legend.position = "bottom")
-  }
+testthat::skip_on_cran()
+testthat::skip_if_not_installed("Hmisc")
 
 
-  # re ordered the subs so that density can have no binwidth param
-  conSubs <- list(
-    "autopoint",
-    "density", "points", "smooth", "smooth_lm", "smooth_loess", "cor",
-    "blank"
-  )
-  comSubs <- list(
-    "autopoint",
-    "box", "dot", "box_no_facet", "dot_no_facet",
-    wrap("facethist", binwidth = 1),
-    "facetdensity",
-    "facetdensitystrip",
-    # "summarise_by", # Issues with grid printing
-    wrap("denstrip", binwidth = 1),
-    "blank"
-  )
-  disSubs <- list(
-    "autopoint", "colbar", "count",
-    "cross", "crosstable", "facetbar",
-    "ratio", "rowbar",
-    "table",
-    # "trends", # Issues with grid printing
-    "blank"
-  )
+# list of the different plot types to check
+# continuous
+#    points
+#    smooth
+#    smooth_loess
+#    density
+#    cor
+#   blank
 
-  conDiagSubs <- c("autopointDiag", "densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
-  disDiagSubs <- c("autopointDiag", "barDiag", "countDiag", "tableDiag", "blankDiag")
+# combo
+#   box
+#   dot plot
+#   facethist
+#   facetdensity
+#   denstrip
+#   blank
 
-  # for (fn in list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)) {
-  for (fn_info in list(
-    list(fn = ggpairs_fn1, title = "ggpairs"),
-    list(fn = ggpairs_fn2, title = "ggpairs_color"),
-    list(fn = ggduo_fn1, title = "ggduo"),
-    list(fn = ggduo_fn2, title = "ggduo_color")
-  )) {
-    fn <- fn_info$fn
-    fn_name <- fn_info$title
-    for (i in 1:max(c(
-      length(conSubs),
-      length(comSubs),
-      length(disSubs),
-      length(conDiagSubs),
-      length(disDiagSubs)
-    ))) {
-      conSub <- if (i <= length(conSubs)) conSubs[[i]] else "blank"
-      comSub <- if (i <= length(comSubs)) comSubs[[i]] else "blank"
-      disSub <- if (i <= length(disSubs)) disSubs[[i]] else "blank"
+# discrete
+#   ratio
+#   facetbar
+#   blank
 
-      diagConSub <- if (i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
-      diagDisSub <- if (i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
+gn <- function(x) {
+  fnName <- attr(x, "name")
+  fnName %||% x
+}
+
+ggpairs_fn1 <- function(title, types, diag, ...) {
+  ggpairs(
+    tips, 1:4,
+    axisLabels = "show",
+    title = paste(
+      "upper = c(cont = ", gn(types$continuous),
+      ", combo = ", gn(types$combo),
+      ", discrete = ", gn(types$discrete),
+      "); diag = c(cont = ", gn(diag$continuous),
+      ", discrete = ", gn(diag$discrete),
+      ")",
+      sep = ""
+    ),
+    upper = types,
+    lower = types,
+    diag = diag,
+    progress = FALSE,
+    ...
+  ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
+}
+
+ggpairs_fn2 <- function(...) {
+  ggpairs_fn1(..., mapping = ggplot2::aes(color = .data$day), legend = c(1, 3))
+}
+
+ggduo_fn1 <- function(title, types, diag, ...) {
+  types$comboHorizontal <- types$combo
+  types$comboVertical <- types$combo
+  types$combo <- NULL
+  ggduo(
+    tips, 1:3, 1:4,
+    axisLabels = "show",
+    title = paste(
+      "types = c(cont = ", gn(types$continuous),
+      ", combo = ", gn(types$comboHorizontal),
+      ", discrete = ", gn(types$discrete),
+      ")",
+      sep = ""
+    ),
+    types = types,
+    progress = FALSE,
+    ...
+  ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
+}
+
+ggduo_fn2 <- function(...) {
+  ggduo_fn1(..., mapping = ggplot2::aes(color = .data$day), legend = 3) +
+    theme(legend.position = "bottom")
+}
+
+
+# re ordered the subs so that density can have no binwidth param
+conSubs <- list(
+  "autopoint",
+  "density", "points", "smooth", "smooth_lm", "smooth_loess", "cor",
+  "blank"
+)
+comSubs <- list(
+  "autopoint",
+  "box", "dot", "box_no_facet", "dot_no_facet",
+  wrap("facethist", binwidth = 1),
+  "facetdensity",
+  "facetdensitystrip",
+  # "summarise_by", # Issues with grid printing
+  wrap("denstrip", binwidth = 1),
+  "blank"
+)
+disSubs <- list(
+  "autopoint", "colbar", "count",
+  "cross", "crosstable", "facetbar",
+  "ratio", "rowbar",
+  "table",
+  # "trends", # Issues with grid printing
+  "blank"
+)
+
+conDiagSubs <- c("autopointDiag", "densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
+disDiagSubs <- c("autopointDiag", "barDiag", "countDiag", "tableDiag", "blankDiag")
+
+# for (fn in list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)) {
+for (fn_info in list(
+  list(fn = ggpairs_fn1, title = "ggpairs"),
+  list(fn = ggpairs_fn2, title = "ggpairs_color"),
+  list(fn = ggduo_fn1, title = "ggduo"),
+  list(fn = ggduo_fn2, title = "ggduo_color")
+)) {
+  fn <- fn_info$fn
+  fn_name <- fn_info$title
+  for (i in 1:max(c(
+    length(conSubs),
+    length(comSubs),
+    length(disSubs),
+    length(conDiagSubs),
+    length(disDiagSubs)
+  ))) {
+    conSub <- if (i <= length(conSubs)) conSubs[[i]] else "blank"
+    comSub <- if (i <= length(comSubs)) comSubs[[i]] else "blank"
+    disSub <- if (i <= length(disSubs)) disSubs[[i]] else "blank"
+
+    diagConSub <- if (i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
+    diagDisSub <- if (i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
+
+    type_name <- function(x) {
+      if (is.function(x)) {
+        sub("ggally_", "", attr(x, "name"))
+      } else {
+        x
+      }
+    }
+    type_names <- vapply(c(conSub, comSub, disSub, diagConSub, diagDisSub), type_name, character(1))
+    if (all(grepl("blank", type_names))) {
+      # vdiffr can't handle blank plots
+      next
+    }
+    pm_name <- paste0(type_names, collapse = "-")
+    pm_name <- paste0(fn_name, "-", pm_name)
+
+    test_that(paste0("subtypes", "-", pm_name), {
 
       # print(list(
       #   fn_num = fn_num,
@@ -794,20 +811,6 @@ test_that("subtypes", {
         )
       })
 
-      type_name <- function(x) {
-        if (is.function(x)) {
-          sub("ggally_", "", attr(x, "name"))
-        } else {
-          x
-        }
-      }
-      type_names <- vapply(c(conSub, comSub, disSub, diagConSub, diagDisSub), type_name, character(1))
-      if (all(grepl("blank", type_names))) {
-        # vdiffr can't handle blank plots
-        next
-      }
-      pm_name <- paste0(type_names, collapse = "-")
-      pm_name <- paste0(fn_name, "-", pm_name)
 
       tryCatch(
         {
@@ -825,8 +828,14 @@ test_that("subtypes", {
           signalCondition(e)
         }
       )
-    }
+    })
   }
+}
+
+
+
+test_that("bad types", {
+  skip_on_cran()
 
   expect_error({
     ggpairs(tips, 1:2, lower = "blank", diag = "blank", upper = list(continuous = "BAD_TYPE"))
