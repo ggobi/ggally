@@ -1,8 +1,28 @@
 # GGally (development version)
 
+* Added parameter `ggally_cor(na.rm=)` which is passed directly to `ggally_statistic()`. (Thank you @vinouselouane! #516)
+
+* Deprecated parameter `ggally_cor(use=)`. The value was never leveraged within the code. Please use `ggally_cor(na.rm=)` instead. (Thank you @vinouselouane! #516)
+
+* Prepare GGally for `{ggplot2}` v4 (Thank you @teunbrand! #528)
+
+* Replace internal `{plyr}` usage with `{dplyr}`. (Thank you @MichaelChirico! #520, #521, #522, #523, #524, #525, #527, #530)
+
+* General package dependency cleanup. (Thank you @olivroy! #509)
+
+* Fix `anyClass` ordering in `ggparcoord()` when data has missing values (Thank you @92amartins! #500)
+
+* Use `{lifecycle}` for deprecation warnings (Thank you @92amartins! #494, #496)
+
+* Leverage `.data$` mask to remove all global variable declarations. (Thank you @MichaelChirico! #533)
+
+* Warn and return `"NA"` when less than 3 values are given to a combination in `ggally_cor()`. (Thank you @bk1n! #510)
+
+
 # GGally 2.2.1
 
-* Fix compatibility with ggplot2 3.5.0 (@teunbrand, #481)
+* Fix compatibility with `{ggplot2}` 3.5.0 (Thank you @teunbrand! #481)
+
 
 # GGally 2.2.0
 
@@ -28,6 +48,7 @@
 * Replace `ggplot2` usage of `*_guide = FALSE` with `*_guide = "none"` (@larmarange, #418)
 * Require `network >= 1.17.1` (#418)
 
+
 # GGally 2.1.1
 
 ### Bug fixes
@@ -36,6 +57,7 @@
 * Avoid all duplicates within `stat_cross()`. (@larmarange, #402)
 * Avoid an error when tidiers do not return p-values. (@larmarange, #400)
 * Suggest `emmeans` to allow `ggcoef()` example to execute. (#407)
+
 
 # GGally 2.1.0
 

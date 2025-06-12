@@ -10,7 +10,6 @@ ggally_cor(
   ...,
   stars = TRUE,
   method = "pearson",
-  use = "complete.obs",
   display_grid = FALSE,
   digits = 3,
   title_args = list(...),
@@ -18,8 +17,10 @@ ggally_cor(
   justify_labels = "right",
   align_percent = 0.5,
   title = "Corr",
-  alignPercent = warning("deprecated. Use `align_percent`"),
-  displayGrid = warning("deprecated. Use `display_grid`")
+  na.rm = NA,
+  use = deprecated(),
+  alignPercent = deprecated(),
+  displayGrid = deprecated()
 )
 }
 \arguments{
@@ -39,8 +40,6 @@ ggally_cor(
 
 \item{method}{\code{method} supplied to cor function}
 
-\item{use}{\code{use} supplied to \code{\link[stats]{cor}} function}
-
 \item{display_grid}{if \code{TRUE}, display aligned panel grid lines. If \code{FALSE} (default), display a thin panel border.}
 
 \item{digits}{number of digits to be displayed after the decimal point. See \code{\link[base]{formatC}} for how numbers are calculated.}
@@ -55,7 +54,11 @@ ggally_cor(
 
 \item{title}{title text to be displayed}
 
-\item{alignPercent, displayGrid}{deprecated. Please use their snake-case counterparts.}
+\item{na.rm}{logical value which determines if \code{NA} values are removed. If \code{TRUE}, no warning message will be displayed.}
+
+\item{use}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}. This variable is not used internally. Please remove it from your code.}
+
+\item{alignPercent, displayGrid}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}. Please use their snake-case counterparts.}
 }
 \description{
 Estimate correlation from the given data. If a color variable is supplied, the correlation will also be calculated per group.

@@ -92,7 +92,7 @@ ggally_colbar <- function(
       ...
     ) +
     scale_y_continuous(
-      labels = scales::percent,
+      labels = scales::label_percent(),
       expand = expansion(ifelse(remove_background, 0, .05), 0)
     ) +
     scale_x_discrete(expand = expansion(0, ifelse(remove_background, 0, .6))) +

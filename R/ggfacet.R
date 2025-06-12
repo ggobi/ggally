@@ -40,6 +40,7 @@
 #'   p <- ggfacet(NIR_sub, x_cols, y_cols, scales = "fixed")
 #'   p_(p)
 #' }
+#' @importFrom dplyr arrange .data reframe
 ggfacet <- function(
     data, mapping = NULL,
     columnsX = 1:ncol(data),
@@ -91,19 +92,14 @@ ggfacet <- function(
     columnLabelsY <- columnLabelsY[!is_factor_y]
   }
 
-  tall_data <- ddply(
-    expand.grid(.x_col = columnsX, .y_col = columnsY),
-    c(".x_col", ".y_col"),
-    function(row) {
-      x_var <- row$.x_col[1]
-      y_var <- row$.y_col[1]
-
-      ret <- data
-      ret[[".x_val"]] <- data[[x_var]]
-      ret[[".y_val"]] <- data[[y_var]]
-      ret
-    }
-  )
+  tall_data <- expand.grid(.x_col = columnsX, .y_col = columnsY) %>%
+    reframe(
+      .by = c(".x_col", ".y_col"),
+      data,
+      .x_val = data[[.data$.x_col]],
+      .y_val = data[[.data$.y_col]]
+    ) %>%
+    arrange(.data$.x_col, .data$.y_col)
 
   if (is.null(mapping)) {
     mapping <- aes()
