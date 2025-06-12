@@ -64,10 +64,7 @@ Suggests:
     rmarkdown,
     testthat,
     crosstalk,
-    knitr,
-    spelling,
-    emmeans,
-    vdiffr
+    ggridges
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 SystemRequirements: openssl

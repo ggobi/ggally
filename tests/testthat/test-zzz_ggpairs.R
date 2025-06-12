@@ -724,7 +724,7 @@ test_that("subtypes", {
   )
   comSubs <- list(
     "autopoint",
-    "box", "dot", "box_no_facet", "dot_no_facet",
+    "box", "dot", "box_no_facet", "dot_no_facet", "density_ridges",
     wrap("facethist", binwidth = 1),
     "facetdensity",
     "facetdensitystrip",
