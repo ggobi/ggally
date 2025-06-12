@@ -1,5 +1,9 @@
 # GGally (development version)
 
+* Fixed bug where correlations of 0 in a `ggcor()` output were silently dropped. Now all correlations are always displayed. (Thank you @winterstat! #536)
+
+* Fixed correlations values `ggcor()` so that they are formatted to the same number of decimal places via `label_round`. Now `0.2` and `0.001` with `label_round = 2` will be displayed as `"0.20"` and `"0.00"` respectively. (Thank you @winterstat! #536)
+
 * Added parameter `ggally_cor(na.rm=)` which is passed directly to `ggally_statistic()`. (Thank you @vinouselouane! #516)
 
 * Deprecated parameter `ggally_cor(use=)`. The value was never leveraged within the code. Please use `ggally_cor(na.rm=)` instead. (Thank you @vinouselouane! #516)
