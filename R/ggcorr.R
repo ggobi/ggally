@@ -253,9 +253,15 @@ ggcorr <- function(
   }
 
   # -- plot structure ----------------------------------------------------------
+  m_long$label <-
+    format(
+      # round(c(0.2, 0, 0.001), digits = 2) #> c(0.2, 0, 0)
+      round(.data$coefficient, digits = label_round),
+      # format(c(0.2, 0, 0), nsmall = 2) #> c("0.20", "0.00", "0.00")
+      nsmall = label_round
+    )
 
-  m_long$label <- round(m_long$coefficient, label_round)
-  p <- ggplot(na.omit(m_long), aes(x, .data$y))
+  p <- ggplot(na.omit(m_long), aes(.data$x, .data$y))
 
   if (geom == "tile") {
     if (is.null(nbreaks)) {
