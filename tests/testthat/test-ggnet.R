@@ -109,9 +109,11 @@ test_that("examples", {
   #   expect_equal(p$data$X1, xy[, 1])
   #   expect_equal(p$data$X2, xy[, 2])
 
-  # test user-submitted weights
-  withr::local_options(lifecycle_verbosity = "quiet")
+  # Be quiet about lifecycle messages from here on
+  old_opts <- options(lifecycle_verbosity = "quiet")
+  on.exit(options(old_opts), add = TRUE)
 
+  # test user-submitted weights
   ggnet(n, weight = sample(1:2, 10, replace = TRUE))
 
   # test segment.label
