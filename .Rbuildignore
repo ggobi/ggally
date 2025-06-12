@@ -12,7 +12,6 @@ figure
 ggmapTemp.png
 README.html
 notes/
-tests/testthat/_snaps
 tests/testthat/Rplots.pdf
 ^.*\.Rproj$
 ^\.Rproj\.user$
