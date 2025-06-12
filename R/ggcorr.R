@@ -212,12 +212,13 @@ ggcorr <- function(
 
   # -- correlation data.frame --------------------------------------------------
 
-  m <- data.frame(m * lower.tri(m))
-  rownames(m) <- names(m)
+  m[upper.tri(m, diag = T)] <- NA
+  rownames(m) <- colnames(m)
+  m <- data.frame(m)
+
   m$.ggally_ggcorr_row_names <- rownames(m)
-  # m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
-  # names(m) = c("x", "y", "coefficient")
-  m_long <- m %>%
+  m_long <-
+    m %>%
     tidyr::pivot_longer(
       cols = -".ggally_ggcorr_row_names",
       names_to = "y",
@@ -225,7 +226,6 @@ ggcorr <- function(
     ) %>%
     dplyr::rename(x = ".ggally_ggcorr_row_names") %>%
     dplyr::mutate(y = factor(.data$y, levels = rownames(m)))
-  m_long$coefficient[m_long$coefficient == 0] <- NA
 
   # -- correlation quantiles ---------------------------------------------------
 
