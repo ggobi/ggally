@@ -344,6 +344,11 @@ ggally_cor <- function(
         y <- as.numeric(y)
       }
 
+      if (length(x) < 3 | length(y) < 3) {
+        warning("Less than 2 observations, returning NA")
+        return("NA")
+      }
+
       corObj <- stats::cor.test(x, y, method = method)
 
       # make sure all values have X-many decimal places
