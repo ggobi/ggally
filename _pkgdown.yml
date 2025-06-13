@@ -4,6 +4,7 @@ development:
   mode: auto
 
 template:
+  package: tidytemplate
   bootstrap: 5
 
 authors:
@@ -21,8 +22,6 @@ authors:
     href: https://edwinth.github.io/
   Heike Hofmann:
     href: https://heike.github.io/
-  Hadley Wickham:
-    href: https://hadley.nz/
 
 articles:
 - title: Generic plot matrix
