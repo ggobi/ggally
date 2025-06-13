@@ -16,6 +16,8 @@ jobs:
     uses: rstudio/shiny-workflows/.github/workflows/website.yaml@v1
   routine:
     uses: rstudio/shiny-workflows/.github/workflows/routine.yaml@v1
+    with:
+      format-r-code: true
   R-CMD-check:
     uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
     with:
@@ -24,4 +26,3 @@ jobs:
       # # :-( - https://github.com/rvlenth/estimability/blob/9606dad3e04cffa4b6bf54f4124834de464c1f3f/inst/NEWS#L10
       # minimum-r-version: "4.3.0"
       check-timeout-minutes: 60
-      format-r-code: true
