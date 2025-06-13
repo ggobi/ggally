@@ -62,7 +62,7 @@ Suggests:
     sna (>= 2.3-2),
     survival,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     crosstalk,
     knitr,
     spelling,
