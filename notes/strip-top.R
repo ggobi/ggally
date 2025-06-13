@@ -1,4 +1,3 @@
-
 library(gtable)
 library(grid)
 library(ggplot)
@@ -8,7 +7,8 @@ p
 ggplot_gtable(ggplot_build(p)) -> x
 gtable_show_layout(x)
 
-qplot(total_bill, tip, data = tips, main = "test\ntitle") + facet_grid(time ~ day) -> p
+qplot(total_bill, tip, data = tips, main = "test\ntitle") +
+  facet_grid(time ~ day) -> p
 p
 ggplot_gtable(ggplot_build(p)) -> x2
 gtable_show_layout(x2)

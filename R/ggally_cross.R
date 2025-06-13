@@ -60,7 +60,13 @@
 #'   fill = "darkblue",
 #'   geom_text_args = list(colour = "white", fontface = "bold", size = 6)
 #' ))
-ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args = NULL) {
+ggally_cross <- function(
+  data,
+  mapping,
+  ...,
+  scale_max_size = 20,
+  geom_text_args = NULL
+) {
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
   mapping <- mapping_color_to_fill(mapping)
 
@@ -156,7 +162,13 @@ ggally_cross <- function(data, mapping, ..., scale_max_size = 20, geom_text_args
 #'   geom_tile_args = list(colour = "black")
 #' ) +
 #'   scale_fill_steps2(breaks = c(-3, -2, 2, 3), show.limits = TRUE))
-ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL) {
+ggally_table <- function(
+  data,
+  mapping,
+  keep.zero.cells = FALSE,
+  ...,
+  geom_tile_args = NULL
+) {
   mapping <- remove_color_unless_equal(mapping, to = c("x", "y"))
 
   # default values geom_text
@@ -185,11 +197,19 @@ ggally_table <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_
 
 #' @export
 #' @rdname ggally_table
-ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_tile_args = NULL) {
+ggally_tableDiag <- function(
+  data,
+  mapping,
+  keep.zero.cells = FALSE,
+  ...,
+  geom_tile_args = NULL
+) {
   mapping$y <- mapping$x
   ggally_table(
-    data = data, mapping = mapping,
-    keep.zero.cells = keep.zero.cells, ...,
+    data = data,
+    mapping = mapping,
+    keep.zero.cells = keep.zero.cells,
+    ...,
     geom_tile_args = geom_tile_args
   )
 }
@@ -230,12 +250,21 @@ ggally_tableDiag <- function(data, mapping, keep.zero.cells = FALSE, ..., geom_t
 #' p_(ggally_crosstable(tips, mapping = aes(x = day, y = sex), fill = "std.resid") +
 #'   scale_fill_steps2(breaks = c(-2, 0, 2), show.limits = TRUE))
 ggally_crosstable <- function(
-    data,
-    mapping,
-    cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid", "std.resid"),
-    fill = c("none", "std.resid", "resid"),
-    ...,
-    geom_tile_args = list(colour = "grey50")) {
+  data,
+  mapping,
+  cells = c(
+    "observed",
+    "prop",
+    "row.prop",
+    "col.prop",
+    "expected",
+    "resid",
+    "std.resid"
+  ),
+  fill = c("none", "std.resid", "resid"),
+  ...,
+  geom_tile_args = list(colour = "grey50")
+) {
   fill <- match.arg(fill)
   if (fill == "std.resid") {
     mapping$fill <- aes(fill = after_stat(!!as.name("std.resid")))$fill
@@ -249,16 +278,30 @@ ggally_crosstable <- function(
 
   cells <- match.arg(cells)
   if (!"label" %in% names(mapping) && cells %in% c("observed", "expected")) {
-    mapping$label <- aes(label = scales::number(after_stat(!!as.name(cells)), accuracy = 1))$label
+    mapping$label <- aes(
+      label = scales::number(after_stat(!!as.name(cells)), accuracy = 1)
+    )$label
   }
-  if (!"label" %in% names(mapping) && cells %in% c("prop", "row.prop", "col.prop")) {
-    mapping$label <- aes(label = scales::percent(after_stat(!!as.name(cells)), accuracy = .1))$label
+  if (
+    !"label" %in% names(mapping) && cells %in% c("prop", "row.prop", "col.prop")
+  ) {
+    mapping$label <- aes(
+      label = scales::percent(after_stat(!!as.name(cells)), accuracy = .1)
+    )$label
   }
   if (!"label" %in% names(mapping) && cells %in% c("resid", "std.resid")) {
-    mapping$label <- aes(label = scales::number(after_stat(!!as.name(cells)), accuracy = .1))$label
+    mapping$label <- aes(
+      label = scales::number(after_stat(!!as.name(cells)), accuracy = .1)
+    )$label
   }
 
-  p <- ggally_table(data = data, mapping = mapping, keep.zero.cells = TRUE, geom_tile_args = geom_tile_args, ...) +
+  p <- ggally_table(
+    data = data,
+    mapping = mapping,
+    keep.zero.cells = TRUE,
+    geom_tile_args = geom_tile_args,
+    ...
+  ) +
     scale_x_discrete(expand = expansion(0, 0)) +
     scale_y_discrete(expand = expansion(0, 0)) +
     theme(axis.ticks = element_blank())

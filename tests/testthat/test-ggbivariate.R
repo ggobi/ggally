@@ -1,4 +1,3 @@
-
 test_that("example", {
   data(tips)
 
@@ -7,7 +6,9 @@ test_that("example", {
 
   # Personalize plot title and legend title
   p <- ggbivariate(
-    tips, "smoker", c("day", "time", "sex", "tip"),
+    tips,
+    "smoker",
+    c("day", "time", "sex", "tip"),
     title = "Custom title"
   ) +
     labs(fill = "Smoker ?")
@@ -18,10 +19,11 @@ test_that("example", {
     scale_fill_brewer(type = "qual")
   vdiffr::expect_doppelganger("tips-fill-qual", p)
 
-
   # Customize labels
   p <- ggbivariate(
-    tips, "smoker", c("day", "time", "sex", "tip"),
+    tips,
+    "smoker",
+    c("day", "time", "sex", "tip"),
     rowbar_args = list(
       colour = "white",
       size = 4,

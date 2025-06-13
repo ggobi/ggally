@@ -46,8 +46,6 @@ print.ggmatrix <- function(x, newpage = is.null(vp), vp = NULL, ...) {
 }
 
 
-
-
 #' Is Blank Plot?
 #' Find out if the plot equals a blank plot
 #'

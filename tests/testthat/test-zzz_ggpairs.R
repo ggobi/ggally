@@ -70,7 +70,13 @@ test_that("column labels", {
 
   columnLabelsX <- c("Total Bill %", "Tip 123456", "Sex ( /a asdf)")
   columnLabelsY <- c("Smoker !#@", "Day 678", "1", "NULL")
-  pm <- ggduo(tips, 1:3, 4:7, columnLabelsX = columnLabelsX, columnLabelsY = columnLabelsY)
+  pm <- ggduo(
+    tips,
+    1:3,
+    4:7,
+    columnLabelsX = columnLabelsX,
+    columnLabelsY = columnLabelsY
+  )
   expect_obj(pm, columnLabelsX, columnLabelsY)
 })
 
@@ -123,170 +129,186 @@ test_that("upper/lower/diag = blank", {
 test_that("stops", {
   expect_warning(
     {
-      pm <- ggpairs(tips, axisLabels = "not_a_chosen", lower = facethistBindwidth1)
+      pm <- ggpairs(
+        tips,
+        axisLabels = "not_a_chosen",
+        lower = facethistBindwidth1
+      )
     },
     "'axisLabels' not in "
-  ) # nolint
+  )
   expect_warning(
     {
-      pm <- ggduo(tips, axisLabels = "not_a_chosen", types = facethistBindwidth1Duo)
+      pm <- ggduo(
+        tips,
+        axisLabels = "not_a_chosen",
+        types = facethistBindwidth1Duo
+      )
     },
     "'axisLabels' not in "
-  ) # nolint
+  )
 
   lifecycle::expect_deprecated(
     {
       pm <- ggpairs(tips, color = "sex")
     },
-  ) # nolint
+  )
 
   expect_warning(
     {
       pm <- ggduo(tips, 2:3, 2:3, types = list(combo = "facetdensity"))
     },
     "Setting:\n\ttypes"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = c("tip", "day", "not in tips"))
     },
     "Columns in 'columns' not found in data"
-  ) # nolint
+  )
   expect_error(
     {
-      ggduo(tips, columnsX = c("tip", "day", "not in tips"), columnsY = "smoker")
+      ggduo(
+        tips,
+        columnsX = c("tip", "day", "not in tips"),
+        columnsY = "smoker"
+      )
     },
     "Columns in 'columnsX' not found in data"
-  ) # nolint
+  )
   expect_error(
     {
-      ggduo(tips, columnsX = c("tip", "day", "smoker"), columnsY = "not in tips")
+      ggduo(
+        tips,
+        columnsX = c("tip", "day", "smoker"),
+        columnsY = "not in tips"
+      )
     },
     "Columns in 'columnsY' not found in data"
-  ) # nolint
+  )
 
   lifecycle::expect_deprecated(
     {
       pm <- ggpairs(tips, legends = TRUE)
     }
-  ) # nolint
+  )
 
   lifecycle::expect_deprecated(
     {
       ggpairs(tips, params = c(size = 2))
     }
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = 1:10)
     },
     "Make sure your numeric 'columns' values are less than or equal to"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = 1:10)
     },
     "Make sure your numeric 'columnsX' values are less than or equal to"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = 1:10)
     },
     "Make sure your numeric 'columnsY' values are less than or equal to"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = -5:5)
     },
     "Make sure your numeric 'columns' values are positive"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = -5:5)
     },
     "Make sure your numeric 'columnsX' values are positive"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = -5:5)
     },
     "Make sure your numeric 'columnsY' values are positive"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = (2:10) / 2)
     },
     "Make sure your numeric 'columns' values are integers"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = (2:10) / 2)
     },
     "Make sure your numeric 'columnsX' values are integers"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = (2:10) / 2)
     },
     "Make sure your numeric 'columnsY' values are integers"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra"))
     },
     "The length of the 'columnLabels' does not match the length of the 'columns'"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = 1:3, columnLabelsX = c("A", "B", "C", "Extra"))
     },
     "The length of the 'columnLabelsX' does not match the length of the 'columnsX'"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = 1:3, columnLabelsY = c("A", "B", "C", "Extra"))
     },
     "The length of the 'columnLabelsY' does not match the length of the 'columnsY'"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, upper = c("not_a_list"))
     },
     "'upper' is not a list"
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, diag = c("not_a_list"))
     },
     "'diag' is not a list"
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, lower = c("not_a_list"))
     },
     "'lower' is not a list"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, types = c("not_a_list"))
     },
     "'types' is not a list"
-  ) # nolint
+  )
 
   # # couldn't get correct error message
   # #  variables: 'colour' have non standard format: 'total_bill + tip'.
   # expect_error({
   #   ggpairs(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  # }, "variables\\: \"colour\" have non standard format") # nolint
+  # }, "variables\\: \"colour\" have non standard format")
   # expect_error({
   #   ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  # }, "variables\\: \"colour\" have non standard format") # nolint
+  # }, "variables\\: \"colour\" have non standard format")
 
   errorString <- "'aes_string' is a deprecated element"
   expect_error(
@@ -294,29 +316,36 @@ test_that("stops", {
       ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, lower = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, diag = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, types = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
-
+  )
 
   expect_diag_warn <- function(key, value) {
-    warnString <- str_c("Changing diag\\$", key, " from '", value, "' to '", value, "Diag'")
+    warnString <- str_c(
+      "Changing diag\\$",
+      key,
+      " from '",
+      value,
+      "' to '",
+      value,
+      "Diag'"
+    )
     diagObj <- list()
     diagObj[[key]] <- value
     expect_warning(
@@ -357,8 +386,18 @@ test_that("cardinality", {
 
 test_that("blank types", {
   columnsUsed <- 1:3
-  pmUpper <- ggpairs(tips, columnsUsed, upper = "blank", lower = facethistBindwidth1)
-  pmDiag <- ggpairs(tips, columnsUsed, diag = "blank", lower = facethistBindwidth1)
+  pmUpper <- ggpairs(
+    tips,
+    columnsUsed,
+    upper = "blank",
+    lower = facethistBindwidth1
+  )
+  pmDiag <- ggpairs(
+    tips,
+    columnsUsed,
+    diag = "blank",
+    lower = facethistBindwidth1
+  )
   pmLower <- ggpairs(tips, columnsUsed, lower = "blank")
 
   for (i in columnsUsed) {
@@ -417,12 +456,16 @@ test_that("axisLabels", {
       expect_false(is.null(pm$xAxisLabels))
       expect_false(is.null(pm$yAxisLabels))
     }
-    vdiffr::expect_doppelganger(paste0("axisLabels-", prefix, "-", axisLabel), pm)
+    vdiffr::expect_doppelganger(
+      paste0("axisLabels-", prefix, "-", axisLabel),
+      pm
+    )
   }
 
   fn <- function(axisLabels) {
     pm <- ggpairs(
-      iris, c(3, 4, 5, 1),
+      iris,
+      c(3, 4, 5, 1),
       upper = "blank",
       lower = facethistBindwidth1,
       axisLabels = axisLabels,
@@ -438,17 +481,20 @@ test_that("axisLabels", {
   plots <- ggpairs(iris, 1:3)$plots
   for (val in c(TRUE, FALSE)) {
     pm <- ggmatrix(
-      plots, 3, 3,
+      plots,
+      3,
+      3,
       showAxisPlotLabels = val
     )
     expect_equal(pm$showXAxisPlotLabels, val)
     expect_equal(pm$showYAxisPlotLabels, val)
   }
 
-
   fn <- function(axisLabels) {
     a <- ggduo(
-      iris, c(4, 5), c(5, 1),
+      iris,
+      c(4, 5),
+      c(5, 1),
       types = facethistBindwidth1Duo,
       axisLabels = axisLabels,
       title = str_c("axisLabels = ", axisLabels)
@@ -464,7 +510,8 @@ test_that("axisLabels", {
 test_that("strips and axis", {
   # axis should line up with left side strips
   pm <- ggpairs(
-    tips, c(3, 1, 4),
+    tips,
+    c(3, 1, 4),
     showStrips = TRUE,
     title = "Axis should line up even if strips are present",
     lower = list(combo = wrap("facethist", binwidth = 1))
@@ -493,7 +540,8 @@ test_that("dates", {
   class(x) <- c("NOT_data.frame", "data.frame")
 
   a <- ggpairs(
-    x, c(2, 1, 4, 3),
+    x,
+    c(2, 1, 4, 3),
     mapping = ggplot2::aes(color = cat),
     lower = "blank",
     diag = list(continuous = "densityDiag"),
@@ -504,9 +552,9 @@ test_that("dates", {
   expect_true(inherits(p$layers[[2]]$geom, "GeomText"))
   expect_equal(length(p$layers), 2)
 
-
   a <- ggpairs(
-    x, c(2, 1, 4, 3),
+    x,
+    c(2, 1, 4, 3),
     mapping = ggplot2::aes(color = cat),
     lower = "blank",
     diag = list(continuous = "barDiag"),
@@ -530,7 +578,7 @@ test_that("mapping", {
       ggpairs(tips, columns = 1:3, mapping = 1:3)
     },
     "'mapping' should not be numeric"
-  ) # nolint
+  )
 })
 
 test_that("user functions", {
@@ -572,7 +620,12 @@ test_that("NA data", {
     expect_true(is_blank_plot(p))
   }
 
-  dd <- data.frame(x = c(1:5, rep(NA, 5)), y = c(rep(NA, 5), 2:6), z = 1:10, w = NA)
+  dd <- data.frame(
+    x = c(1:5, rep(NA, 5)),
+    y = c(rep(NA, 5), 2:6),
+    z = 1:10,
+    w = NA
+  )
   pm <- ggpairs(dd)
 
   test_pm <- function(pm, na_mat) {
@@ -609,23 +662,36 @@ test_that("strip-top and strip-right", {
   data(tips)
 
   double_strips <- function(data, mapping, ...) {
-    dt <- dplyr::count(data, .data[[mapping_string(mapping$x)]], .data[[mapping_string(mapping$y)]], name = "freq")
+    dt <- dplyr::count(
+      data,
+      .data[[mapping_string(mapping$x)]],
+      .data[[mapping_string(mapping$y)]],
+      name = "freq"
+    )
     ggplot(dt, aes(xmin = 0.25, xmax = 0.75, ymin = 1, ymax = freq)) +
       geom_rect() +
-      ggplot2::facet_grid(paste0(mapping_string(mapping$y), " ~ ", mapping_string(mapping$x))) +
+      ggplot2::facet_grid(paste0(
+        mapping_string(mapping$y),
+        " ~ ",
+        mapping_string(mapping$x)
+      )) +
       ggplot2::scale_x_continuous(breaks = 0.5, labels = NULL)
   }
 
   pm <- ggpairs(
-    tips, 3:6,
-    lower = "blank", diag = "blank",
+    tips,
+    3:6,
+    lower = "blank",
+    diag = "blank",
     upper = list(discrete = double_strips),
     progress = FALSE
   )
   vdiffr::expect_doppelganger("nested-strips-default", pm)
   pm <- ggpairs(
-    tips, 3:6,
-    lower = "blank", diag = "blank",
+    tips,
+    3:6,
+    lower = "blank",
+    diag = "blank",
     upper = list(discrete = double_strips),
     showStrips = TRUE,
     progress = FALSE
@@ -667,14 +733,20 @@ gn <- function(x) {
 
 ggpairs_fn1 <- function(title, types, diag, ...) {
   ggpairs(
-    tips, 1:4,
+    tips,
+    1:4,
     axisLabels = "show",
     title = paste(
-      "upper = c(cont = ", gn(types$continuous),
-      ", combo = ", gn(types$combo),
-      ", discrete = ", gn(types$discrete),
-      "); diag = c(cont = ", gn(diag$continuous),
-      ", discrete = ", gn(diag$discrete),
+      "upper = c(cont = ",
+      gn(types$continuous),
+      ", combo = ",
+      gn(types$combo),
+      ", discrete = ",
+      gn(types$discrete),
+      "); diag = c(cont = ",
+      gn(diag$continuous),
+      ", discrete = ",
+      gn(diag$discrete),
       ")",
       sep = ""
     ),
@@ -683,7 +755,8 @@ ggpairs_fn1 <- function(title, types, diag, ...) {
     diag = diag,
     progress = FALSE,
     ...
-  ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
+  ) +
+    ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
 }
 
 ggpairs_fn2 <- function(...) {
@@ -695,19 +768,25 @@ ggduo_fn1 <- function(title, types, diag, ...) {
   types$comboVertical <- types$combo
   types$combo <- NULL
   ggduo(
-    tips, 1:3, 1:4,
+    tips,
+    1:3,
+    1:4,
     axisLabels = "show",
     title = paste(
-      "types = c(cont = ", gn(types$continuous),
-      ", combo = ", gn(types$comboHorizontal),
-      ", discrete = ", gn(types$discrete),
+      "types = c(cont = ",
+      gn(types$continuous),
+      ", combo = ",
+      gn(types$comboHorizontal),
+      ", discrete = ",
+      gn(types$discrete),
       ")",
       sep = ""
     ),
     types = types,
     progress = FALSE,
     ...
-  ) + ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
+  ) +
+    ggplot2::theme(plot.title = ggplot2::element_text(size = 9))
 }
 
 ggduo_fn2 <- function(...) {
@@ -719,12 +798,20 @@ ggduo_fn2 <- function(...) {
 # re ordered the subs so that density can have no binwidth param
 conSubs <- list(
   "autopoint",
-  "density", "points", "smooth", "smooth_lm", "smooth_loess", "cor",
+  "density",
+  "points",
+  "smooth",
+  "smooth_lm",
+  "smooth_loess",
+  "cor",
   "blank"
 )
 comSubs <- list(
   "autopoint",
-  "box", "dot", "box_no_facet", "dot_no_facet",
+  "box",
+  "dot",
+  "box_no_facet",
+  "dot_no_facet",
   wrap("facethist", binwidth = 1),
   "facetdensity",
   "facetdensitystrip",
@@ -733,16 +820,32 @@ comSubs <- list(
   "blank"
 )
 disSubs <- list(
-  "autopoint", "colbar", "count",
-  "cross", "crosstable", "facetbar",
-  "ratio", "rowbar",
+  "autopoint",
+  "colbar",
+  "count",
+  "cross",
+  "crosstable",
+  "facetbar",
+  "ratio",
+  "rowbar",
   "table",
   # "trends", # Issues with grid printing
   "blank"
 )
 
-conDiagSubs <- c("autopointDiag", "densityDiag", wrap("barDiag", binwidth = 1), "blankDiag")
-disDiagSubs <- c("autopointDiag", "barDiag", "countDiag", "tableDiag", "blankDiag")
+conDiagSubs <- c(
+  "autopointDiag",
+  "densityDiag",
+  wrap("barDiag", binwidth = 1),
+  "blankDiag"
+)
+disDiagSubs <- c(
+  "autopointDiag",
+  "barDiag",
+  "countDiag",
+  "tableDiag",
+  "blankDiag"
+)
 
 # for (fn in list(ggpairs_fn1, ggpairs_fn2, ggduo_fn1, ggduo_fn2)) {
 for (fn_info in list(
@@ -764,8 +867,16 @@ for (fn_info in list(
     comSub <- if (i <= length(comSubs)) comSubs[[i]] else "blank"
     disSub <- if (i <= length(disSubs)) disSubs[[i]] else "blank"
 
-    diagConSub <- if (i <= length(conDiagSubs)) conDiagSubs[[i]] else "blankDiag"
-    diagDisSub <- if (i <= length(disDiagSubs)) disDiagSubs[[i]] else "blankDiag"
+    diagConSub <- if (i <= length(conDiagSubs)) {
+      conDiagSubs[[i]]
+    } else {
+      "blankDiag"
+    }
+    diagDisSub <- if (i <= length(disDiagSubs)) {
+      disDiagSubs[[i]]
+    } else {
+      "blankDiag"
+    }
 
     type_name <- function(x) {
       if (is.function(x)) {
@@ -774,7 +885,11 @@ for (fn_info in list(
         x
       }
     }
-    type_names <- vapply(c(conSub, comSub, disSub, diagConSub, diagDisSub), type_name, character(1))
+    type_names <- vapply(
+      c(conSub, comSub, disSub, diagConSub, diagDisSub),
+      type_name,
+      character(1)
+    )
     if (all(grepl("blank", type_names))) {
       # vdiffr can't handle blank plots
       next
@@ -783,7 +898,6 @@ for (fn_info in list(
     pm_name <- paste0(fn_name, "-", pm_name)
 
     test_that(paste0("subtypes", "-", pm_name), {
-
       # print(list(
       #   fn_num = fn_num,
       #   types = list(
@@ -811,7 +925,6 @@ for (fn_info in list(
         )
       })
 
-
       tryCatch(
         {
           set.seed(123456) # keep jitter consistent
@@ -833,19 +946,22 @@ for (fn_info in list(
 }
 
 
-
 test_that("bad types", {
   skip_on_cran()
 
   expect_error({
-    ggpairs(tips, 1:2, lower = "blank", diag = "blank", upper = list(continuous = "BAD_TYPE"))
+    ggpairs(
+      tips,
+      1:2,
+      lower = "blank",
+      diag = "blank",
+      upper = list(continuous = "BAD_TYPE")
+    )
   })
 })
 
-
 # pm <- ggpairs(tips, upper = "blank")
 # # pm
-
 
 #  # Custom Example
 #  pm <- ggpairs(

@@ -38,7 +38,7 @@ get_legend_from_gtable <- function(pTable) {
       ret <- gtable_filter(pTable, "guide-box")
       keep <- !vapply(ret$grobs, inherits, what = "zeroGrob", logical(1))
       keep <- paste0(ret$layout$name[keep], collapse = "|")
-      ret  <- gtable_filter(ret, keep)
+      ret <- gtable_filter(ret, keep)
     }
   }
   class(ret) <- c("legend_guide_box", class(ret))

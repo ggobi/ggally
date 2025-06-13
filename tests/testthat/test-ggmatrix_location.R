@@ -118,7 +118,10 @@ test_that("location character", {
 
 test_that("location matrix", {
   pm <- ggpairs(tips)
-  to_loc <- subset(expand.grid(row = 1:7, col = 1:7), row %in% c(3, 5) | col %in% c(3, 5))
+  to_loc <- subset(
+    expand.grid(row = 1:7, col = 1:7),
+    row %in% c(3, 5) | col %in% c(3, 5)
+  )
 
   mat <- matrix(FALSE, nrow = 7, ncol = 7, byrow = TRUE)
   mat[, c(3, 5)] <- TRUE
@@ -153,7 +156,6 @@ test_that("location matrix", {
     ggmatrix_location(pm, location = rbind(mat, 1))
   )
 })
-
 
 
 test_that("location matrix", {

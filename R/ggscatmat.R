@@ -20,13 +20,26 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
   factor <- data[sapply(data, is.factor)]
   p <- ncol(dn)
   q <- nrow(dn)
-  newdata <- as.data.frame(matrix(NA, nrow = q * p * p, ncol = 6 + ncol(factor)), stringsAsFactors = FALSE)
-  newdata[5:6] <- as.data.frame(matrix("", nrow = q * p * p, ncol = 2), stringsAsFactors = FALSE)
+  newdata <- as.data.frame(
+    matrix(NA, nrow = q * p * p, ncol = 6 + ncol(factor)),
+    stringsAsFactors = FALSE
+  )
+  newdata[5:6] <- as.data.frame(
+    matrix("", nrow = q * p * p, ncol = 2),
+    stringsAsFactors = FALSE
+  )
 
   r <- 1
   for (i in 1:p) {
     for (j in 1:p) {
-      newdata[r:(r + q - 1), 1:6] <- cbind(dn[[i]], dn[[j]], i, j, colnames(dn)[i], colnames(dn)[j])
+      newdata[r:(r + q - 1), 1:6] <- cbind(
+        dn[[i]],
+        dn[[j]],
+        i,
+        j,
+        colnames(dn)[i],
+        colnames(dn)[j]
+      )
       r <- r + q
     }
   }
@@ -34,10 +47,17 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
   if (ncol(newdata) > 6) {
     newdata[7:ncol(newdata)] <- factor
   }
-  colnames(newdata) <- c("xvalue", "yvalue", "xslot", "yslot", "xlab", "ylab", colnames(factor))
+  colnames(newdata) <- c(
+    "xvalue",
+    "yvalue",
+    "xslot",
+    "yslot",
+    "xlab",
+    "ylab",
+    colnames(factor)
+  )
 
   rp <- data.frame(newdata)
-
 
   rp$xvalue <- suppressWarnings(as.numeric(as.character(rp$xvalue)))
   rp$yvalue <- suppressWarnings(as.numeric(as.character(rp$yvalue)))
@@ -75,7 +95,12 @@ lowertriangle <- function(data, columns = 1:ncol(data), color = NULL) {
 #' head(uppertriangle(flea, columns = 2:4))
 #' head(uppertriangle(flea))
 #' head(uppertriangle(flea, color = "species"))
-uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod = "pearson") {
+uppertriangle <- function(
+  data,
+  columns = 1:ncol(data),
+  color = NULL,
+  corMethod = "pearson"
+) {
   # data <- upgrade_scatmat_data(data)
   data.choose <- data[columns]
   # why do  we need to check this again?
@@ -88,18 +113,28 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
       newdata <- rbind(
         newdata,
         cbind(
-          dn[, i], dn[, j], i, j, colnames(dn)[i], colnames(dn)[j],
+          dn[, i],
+          dn[, j],
+          i,
+          j,
+          colnames(dn)[i],
+          colnames(dn)[j],
           min(dn[, i]) + 0.5 * (max(dn[, i]) - min(dn[, i])),
-          min(dn[, j]) + 0.5 * (max(dn[, j]) - min(dn[, j])), factor
+          min(dn[, j]) + 0.5 * (max(dn[, j]) - min(dn[, j])),
+          factor
         )
       )
     }
   }
   colnames(newdata) <- c(
-    "xvalue", "yvalue",
-    "xslot", "yslot",
-    "xlab", "ylab",
-    "xcenter", "ycenter",
+    "xvalue",
+    "yvalue",
+    "xslot",
+    "yslot",
+    "xlab",
+    "ylab",
+    "xcenter",
+    "ycenter",
     colnames(factor)
   )
 
@@ -122,12 +157,16 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     data.cor <- b %>%
       dplyr::group_by(xlab, ylab) %>%
       dplyr::summarise(
-        r = cor(.data$xvalue, .data$yvalue,
+        r = cor(
+          .data$xvalue,
+          .data$yvalue,
           use = "pairwise.complete.obs",
           method = "pearson"
         ),
-        xvalue = min(.data$xvalue) + 0.5 * (max(.data$xvalue) - min(.data$xvalue)),
-        yvalue = min(.data$yvalue) + 0.5 * (max(.data$yvalue) - min(.data$yvalue))
+        xvalue = min(.data$xvalue) +
+          0.5 * (max(.data$xvalue) - min(.data$xvalue)),
+        yvalue = min(.data$yvalue) +
+          0.5 * (max(.data$yvalue) - min(.data$yvalue))
       )
     if (identical(corMethod, "rsquare")) {
       data.cor$r <- data.cor$r^2
@@ -171,10 +210,14 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     c <- b
     data.cor1 <- c %>%
       dplyr::group_by(xlab, ylab, colorcolumn) %>%
-      dplyr::summarise(r = cor(.data$xvalue, .data$yvalue,
-        use = "pairwise.complete.obs",
-        method = "pearson"
-      ))
+      dplyr::summarise(
+        r = cor(
+          .data$xvalue,
+          .data$yvalue,
+          use = "pairwise.complete.obs",
+          method = "pearson"
+        )
+      )
     if (identical(corMethod, "rsquare")) {
       data.cor1$r <- data.cor1$r^2
     }
@@ -215,7 +258,8 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
     position <- b %>%
       dplyr::group_by(xlab, ylab) %>%
       dplyr::summarise(
-        xvalue = min(.data$xvalue) + 0.5 * (max(.data$xvalue) - min(.data$xvalue)),
+        xvalue = min(.data$xvalue) +
+          0.5 * (max(.data$xvalue) - min(.data$xvalue)),
         ymin = min(.data$yvalue),
         ymax = max(.data$yvalue),
         range = max(.data$yvalue) - min(.data$yvalue)
@@ -233,7 +277,14 @@ uppertriangle <- function(data, columns = 1:ncol(data), color = NULL, corMethod 
       }
     }
     data.cor <- cbind(data.cor1, df)
-    colnames(data.cor) <- c("xlab", "ylab", "colorcolumn", "r", "xvalue", "yvalue")
+    colnames(data.cor) <- c(
+      "xlab",
+      "ylab",
+      "colorcolumn",
+      "r",
+      "xvalue",
+      "yvalue"
+    )
     return(data.cor)
   }
 }
@@ -261,7 +312,9 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   data.choose <- data[columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
   if (ncol(dn) == 0) {
-    stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
+    stop(
+      "All of your variables are factors. Need numeric variables to make scatterplot matrix."
+    )
   }
 
   ltdata.new <- lowertriangle(data, columns = columns, color = color)
@@ -278,34 +331,48 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
     theme(aspect.ratio = 1)
   if (is.null(color)) {
     ## b/w version
-    densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
-      data.frame(
-        xlab = names(dn)[i], ylab = names(dn)[i],
-        x = dn[, i], stringsAsFactors = TRUE
-      )
-    }))
+    densities <- do.call(
+      "rbind",
+      lapply(1:ncol(dn), function(i) {
+        data.frame(
+          xlab = names(dn)[i],
+          ylab = names(dn)[i],
+          x = dn[, i],
+          stringsAsFactors = TRUE
+        )
+      })
+    )
     for (m in 1:ncol(dn)) {
       j <- subset(densities, xlab == names(dn)[m])
-      r <- r + stat_density(
-        aes(
-          x = .data$x,
-          y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x) # nolint
-        ),
-        data = j, position = "identity", geom = "line", color = "black"
-      )
+      r <- r +
+        stat_density(
+          aes(
+            x = .data$x,
+            y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x)
+          ),
+          data = j,
+          position = "identity",
+          geom = "line",
+          color = "black"
+        )
     }
     ## add b/w points
     r <- r + geom_point(alpha = alpha, na.rm = TRUE)
     return(r)
   } else {
     ## do the colored version
-    densities <- do.call("rbind", lapply(1:ncol(dn), function(i) {
-      data.frame(
-        xlab = names(dn)[i], ylab = names(dn)[i],
-        x = dn[, i], colorcolumn = data[, which(colnames(data) == color)],
-        stringsAsFactors = TRUE
-      )
-    }))
+    densities <- do.call(
+      "rbind",
+      lapply(1:ncol(dn), function(i) {
+        data.frame(
+          xlab = names(dn)[i],
+          ylab = names(dn)[i],
+          x = dn[, i],
+          colorcolumn = data[, which(colnames(data) == color)],
+          stringsAsFactors = TRUE
+        )
+      })
+    )
     for (m in 1:ncol(dn)) {
       j <- subset(densities, xlab == names(dn)[m])
       r <- r +
@@ -355,7 +422,13 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
 #'
 #' p_(ggscatmat(flea, columns = 2:4))
 #' p_(ggscatmat(flea, columns = 2:4, color = "species"))
-ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, corMethod = "pearson") {
+ggscatmat <- function(
+  data,
+  columns = 1:ncol(data),
+  color = NULL,
+  alpha = 1,
+  corMethod = "pearson"
+) {
   ## if 'color' is not a factor, mold it into one
   if (!is.null(color)) {
     if (is.null(data[[color]])) {
@@ -369,19 +442,30 @@ ggscatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1, cor
   dn <- data.choose[sapply(data.choose, is.numeric)]
 
   if (ncol(dn) == 0) {
-    stop("All of your variables are factors. Need numeric variables to make scatterplot matrix.")
+    stop(
+      "All of your variables are factors. Need numeric variables to make scatterplot matrix."
+    )
   }
   if (ncol(dn) < 2) {
     stop("Not enough numeric variables to make a scatter plot matrix")
   }
 
-  a <- uppertriangle(data, columns = columns, color = color, corMethod = corMethod)
+  a <- uppertriangle(
+    data,
+    columns = columns,
+    color = color,
+    corMethod = corMethod
+  )
   if (is.null(color)) {
     plot <- scatmat(data, columns = columns, alpha = alpha) +
       geom_text(data = a, aes(label = !!as.name("r")), colour = "black")
   } else {
     plot <- scatmat(data, columns = columns, color = color, alpha = alpha) +
-      geom_text(data = a, aes(label = !!as.name("r"), color = !!as.name("colorcolumn"))) + labs(color = color)
+      geom_text(
+        data = a,
+        aes(label = !!as.name("r"), color = !!as.name("colorcolumn"))
+      ) +
+      labs(color = color)
   }
   is.factor.or.character <- function(x) {
     is.factor(x) | is.character(x)

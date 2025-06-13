@@ -1,4 +1,3 @@
-
 test_that("errors", {
   fn <- ggally_points
 
@@ -20,7 +19,8 @@ test_that("wrap", {
   (regularPlot <- ggally_points(
     iris,
     ggplot2::aes(Sepal.Length, Sepal.Width),
-    size = 5, color = "red"
+    size = 5,
+    color = "red"
   ))
 
   # Wrap ggally_points to have parameter values size = 5 and color = 'red'
@@ -31,5 +31,8 @@ test_that("wrap", {
   ))
 
   # Double check the aes parameters are the same for the geom_point layer
-  expect_true(identical(regularPlot$layers[[1]]$aes_params, wrappedPlot$layers[[1]]$aes_params))
+  expect_true(identical(
+    regularPlot$layers[[1]]$aes_params,
+    wrappedPlot$layers[[1]]$aes_params
+  ))
 })

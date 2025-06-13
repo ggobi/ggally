@@ -40,13 +40,17 @@
 #' @importFrom dplyr across arrange everything last_col summarise
 #' @importFrom rlang := sym
 glyphs <- function(
-    data,
-    x_major, x_minor,
-    y_major, y_minor,
-    polar = FALSE,
-    height = ggplot2::rel(0.95), width = ggplot2::rel(0.95),
-    y_scale = identity,
-    x_scale = identity) {
+  data,
+  x_major,
+  x_minor,
+  y_major,
+  y_minor,
+  polar = FALSE,
+  height = ggplot2::rel(0.95),
+  width = ggplot2::rel(0.95),
+  y_scale = identity,
+  x_scale = identity
+) {
   data$gid <- interaction(data[[x_major]], data[[y_major]], drop = TRUE)
 
   if (inherits(width, "rel")) {
@@ -128,7 +132,12 @@ ref_lines <- function(data) {
 ref_boxes <- function(data, fill = NULL) {
   stopifnot(is.glyphplot(data))
   glyph <- attributes(data)
-  cells <- data.frame(unique(data[c(glyph$x_major, glyph$y_major, "gid", fill)]))
+  cells <- data.frame(unique(data[c(
+    glyph$x_major,
+    glyph$y_major,
+    "gid",
+    fill
+  )]))
 
   df <-
     data.frame(
@@ -208,7 +217,11 @@ print.glyphplot <- function(x, ...) {
   cat("glyphplot: \n")
   cat("  Size: [", width, ", ", height, "]\n", sep = "")
   cat(
-    "  Major axes: ", attr(x, "x_major"), ", ", attr(x, "y_major"), "\n",
+    "  Major axes: ",
+    attr(x, "x_major"),
+    ", ",
+    attr(x, "y_major"),
+    "\n",
     sep = ""
   )
   # cat("\n")
@@ -221,7 +234,6 @@ print.glyphplot <- function(x, ...) {
 #' @param x numeric vector
 #' @param xlim value used in \code{range}
 #' @name rescale01
-
 
 #' @export
 #' @rdname rescale01
@@ -282,18 +294,33 @@ add_ref_lines <- function(data, color = "white", size = 1.5, ...) {
 #' @param fill fill value used if \code{var_fill} is \code{NULL}
 #' @param ... other arguments passed onto [ggplot2::geom_rect()]
 #' @export
-add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
-                          fill = NA, ...) {
+add_ref_boxes <- function(
+  data,
+  var_fill = NULL,
+  color = "white",
+  size = 0.5,
+  fill = NA,
+  ...
+) {
   rb <- ref_boxes(data, var_fill)
   if (!is.null(var_fill)) {
-    geom_rect(aes_all(names(rb)),
+    geom_rect(
+      aes_all(names(rb)),
       data = rb,
-      color = color, linewidth = size, inherit.aes = FALSE, ...
+      color = color,
+      linewidth = size,
+      inherit.aes = FALSE,
+      ...
     )
   } else {
-    geom_rect(aes_all(names(rb)),
+    geom_rect(
+      aes_all(names(rb)),
       data = rb,
-      color = color, linewidth = size, inherit.aes = FALSE, fill = fill, ...
+      color = color,
+      linewidth = size,
+      inherit.aes = FALSE,
+      fill = fill,
+      ...
     )
   }
 }

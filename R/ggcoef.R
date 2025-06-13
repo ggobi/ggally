@@ -42,23 +42,24 @@
 #' }
 #' @export
 ggcoef <- function(
-    x,
-    mapping = aes(!!as.name("estimate"), !!as.name("term")),
-    conf.int = TRUE,
-    conf.level = 0.95,
-    exponentiate = FALSE,
-    exclude_intercept = FALSE,
-    vline = TRUE,
-    vline_intercept = "auto",
-    vline_color = "gray50",
-    vline_linetype = "dotted",
-    vline_size = 1,
-    errorbar_color = "gray25",
-    errorbar_height = 0,
-    errorbar_linetype = "solid",
-    errorbar_size = .5,
-    sort = c("none", "ascending", "descending"),
-    ...) {
+  x,
+  mapping = aes(!!as.name("estimate"), !!as.name("term")),
+  conf.int = TRUE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  exclude_intercept = FALSE,
+  vline = TRUE,
+  vline_intercept = "auto",
+  vline_color = "gray50",
+  vline_linetype = "dotted",
+  vline_size = 1,
+  errorbar_color = "gray25",
+  errorbar_height = 0,
+  errorbar_linetype = "solid",
+  errorbar_size = .5,
+  sort = c("none", "ascending", "descending"),
+  ...
+) {
   if (!is.data.frame(x)) {
     rlang::check_installed("broom")
     x <- broom::tidy(
@@ -99,8 +100,10 @@ ggcoef <- function(
       }
       p <- p +
         geom_vline(
-          xintercept = vline_intercept, color = vline_color,
-          linetype = vline_linetype, linewidth = vline_size
+          xintercept = vline_intercept,
+          color = vline_color,
+          linetype = vline_linetype,
+          linewidth = vline_size
         ) +
         scale_x_log10()
     } else {
@@ -117,13 +120,14 @@ ggcoef <- function(
     }
   }
   if (conf.int && "conf.low" %in% names(x) && "conf.high" %in% names(x)) {
-    p <- p + geom_errorbar(
-      aes(xmin = !!as.name("conf.low"), xmax = !!as.name("conf.high")),
-      color = errorbar_color,
-      width = errorbar_height,
-      linetype = errorbar_linetype,
-      linewidth = errorbar_size
-    )
+    p <- p +
+      geom_errorbar(
+        aes(xmin = !!as.name("conf.low"), xmax = !!as.name("conf.high")),
+        color = errorbar_color,
+        width = errorbar_height,
+        linetype = errorbar_linetype,
+        linewidth = errorbar_size
+      )
   }
   p + geom_point(...)
 }

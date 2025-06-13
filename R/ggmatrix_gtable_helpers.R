@@ -8,14 +8,26 @@ plot_gtable <- function(p) {
 # axis_size_left(g)
 # axis_size_bottom(g)
 axis_list <- (function() {
-  axis_label_size_wrapper <- function(fn, filter_val, select_val, unitTo, valueOnly) {
+  axis_label_size_wrapper <- function(
+    fn,
+    filter_val,
+    select_val,
+    unitTo,
+    valueOnly
+  ) {
     function(pg) {
       pg_axis <- gtable::gtable_filter(pg, filter_val)
       items <- pg_axis[[select_val]]
       if (!inherits(items, "unit.list")) {
         ret <- fn(items, unitTo = unitTo, valueOnly = valueOnly)
       } else {
-        ret <- vapply(items, fn, numeric(1), unitTo = unitTo, valueOnly = valueOnly)
+        ret <- vapply(
+          items,
+          fn,
+          numeric(1),
+          unitTo = unitTo,
+          valueOnly = valueOnly
+        )
       }
       max(ret)
     }
@@ -25,13 +37,15 @@ axis_list <- (function() {
     grid::convertWidth,
     "axis-l",
     "widths",
-    unitTo = "cm", valueOnly = TRUE
+    unitTo = "cm",
+    valueOnly = TRUE
   )
   axis_size_bottom <- axis_label_size_wrapper(
     grid::convertHeight,
     "axis-b",
     "heights",
-    unitTo = "cm", valueOnly = TRUE
+    unitTo = "cm",
+    valueOnly = TRUE
   )
 
   list(axis_size_left, axis_size_bottom)
@@ -42,20 +56,25 @@ axis_size_bottom <- axis_list[[2]]
 
 # add_correct_label <- function(pmg, pm,
 
-
-
 plot_panel <- function(
-    pg,
-    row_pos, col_pos,
-    matrix_show_strips,
-    matrix_ncol,
-    plot_show_axis_labels) {
+  pg,
+  row_pos,
+  col_pos,
+  matrix_show_strips,
+  matrix_ncol,
+  plot_show_axis_labels
+) {
   # ask about strips
   layout_names <- c("panel")
   strip_right_name <- "strip-r|strip-l"
   strip_top_name <- "strip-t|strip-b"
   legend_name <- "guide-box"
-  all_layout_names <- c(layout_names, strip_right_name, strip_top_name, legend_name)
+  all_layout_names <- c(
+    layout_names,
+    strip_right_name,
+    strip_top_name,
+    legend_name
+  )
 
   if (is.null(matrix_show_strips)) {
     # make sure it's on the outer right and top edge
@@ -93,10 +112,6 @@ plot_panel <- function(
 
   plot_panel
 }
-
-
-
-
 
 
 add_left_axis <- function(pmg, pg, show_strips, grob_pos) {
@@ -146,8 +161,13 @@ add_bottom_axis <- function(pmg, pg, show_strips, grob_pos) {
 }
 
 
-
-set_max_axis_size <- function(pmg, axis_sizes, layout_name, layout_cols, pmg_key) {
+set_max_axis_size <- function(
+  pmg,
+  axis_sizes,
+  layout_name,
+  layout_cols,
+  pmg_key
+) {
   m_axis_size <- max(axis_sizes, na.rm = TRUE)
   grob_pos_vals <- which(str_detect(pmg$layout$name, layout_name))
   val_pos <- pmg$layout[grob_pos_vals, layout_cols]

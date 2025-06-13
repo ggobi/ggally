@@ -33,8 +33,10 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
       pos <- (yI - 1) * lenX + xI
 
       plotType[pos] <- find_plot_type(
-        xColName, yColName,
-        plotTypesX[xI], plotTypesY[yI],
+        xColName,
+        yColName,
+        plotTypesX[xI],
+        plotTypesY[yI],
         isAllNa = all(isNaData[[xColName]] | isNaData[[yColName]]),
         allowDiag = allowDiag
       )
@@ -57,7 +59,8 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
 
   isCombo <- dataInfo$plotType == "combo"
   if (any(isCombo)) {
-    dataInfo$isVertical[isCombo] <- unlist(plotTypesX[xVar[isCombo]]) == "discrete"
+    dataInfo$isVertical[isCombo] <- unlist(plotTypesX[xVar[isCombo]]) ==
+      "discrete"
   }
 
   dataInfo
@@ -75,7 +78,14 @@ plot_types <- function(data, columnsX, columnsY, allowDiag = TRUE) {
 #' @param allowDiag allow for diag values to be returned
 #' @author Barret Schloerke
 #' @keywords internal
-find_plot_type <- function(col1Name, col2Name, type1, type2, isAllNa, allowDiag) {
+find_plot_type <- function(
+  col1Name,
+  col2Name,
+  type1,
+  type2,
+  isAllNa,
+  allowDiag
+) {
   # diag calculations
   if (col1Name == col2Name && allowDiag) {
     if (type1 == "na") {

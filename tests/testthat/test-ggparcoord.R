@@ -1,26 +1,41 @@
-
 set.seed(123)
 data(diamonds, package = "ggplot2")
 diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
 
 iris2 <- iris
-iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
+iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[
+  iris2$Species
+]
 
 test_that("stops", {
   # basic parallel coordinate plot, using default settings
   # ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
   # this time, color by diamond cut
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = NULL, order = "anyClass"),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = NULL,
+      order = "anyClass"
+    ),
     "can't use the 'order' methods "
   )
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = NULL, order = "allClass"),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = NULL,
+      order = "allClass"
+    ),
     "can't use the 'order' methods "
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = c(1, 2)),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = c(1, 2)
+    ),
     "invalid value for 'groupColumn'"
   )
   expect_error(
@@ -29,41 +44,70 @@ test_that("stops", {
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, scale = "notValid"),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      scale = "notValid"
+    ),
     "invalid value for 'scale'"
   )
 
   expect_error(
     ggparcoord(
-      data = diamonds.samp, columns = c(1, 5:10),
-      groupColumn = 2, centerObsID = nrow(diamonds.samp) + 10
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      centerObsID = nrow(diamonds.samp) + 10
     ),
     "invalid value for 'centerObsID'"
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, missing = "notValid"),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      missing = "notValid"
+    ),
     "invalid value for 'missing'"
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = "notValid"),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      order = "notValid"
+    ),
     "invalid value for 'order'"
   )
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = 1i),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      order = 1i
+    ),
     "invalid value for 'order'"
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, showPoints = 1),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      showPoints = 1
+    ),
     "invalid value for 'showPoints'"
   )
 
   expect_error(
     ggparcoord(
-      data = diamonds.samp, columns = c(1, 5:10),
-      groupColumn = 2, alphaLines = "notAColumn"
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      alphaLines = "notAColumn"
     ),
     "'alphaLines' column is missing in data"
   )
@@ -72,53 +116,96 @@ test_that("stops", {
   range(tmpDt$price)
   expect_error(
     ggparcoord(
-      data = tmpDt, columns = c(1, 5:10),
-      groupColumn = 2, alphaLines = "price"
+      data = tmpDt,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      alphaLines = "price"
     ),
     "missing data in 'alphaLines' column"
   )
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = "price"),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      alphaLines = "price"
+    ),
     "invalid value for 'alphaLines' column; max range "
   )
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = -0.1),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      alphaLines = -0.1
+    ),
     "invalid value for 'alphaLines'; must be a scalar value"
   )
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, alphaLines = 1.1),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      alphaLines = 1.1
+    ),
     "invalid value for 'alphaLines'; must be a scalar value"
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, boxplot = 1),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      boxplot = 1
+    ),
     "invalid value for 'boxplot'"
   )
 
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, shadeBox = c(1, 2)),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      shadeBox = c(1, 2)
+    ),
     "invalid value for 'shadeBox'; must be a single color"
   )
   expect_error(
-    ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, shadeBox = "notacolor"),
+    ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      shadeBox = "notacolor"
+    ),
     "invalid value for 'shadeBox'; must be a valid R color"
   )
 
   expect_error(
-    ggparcoord(diamonds.samp, columns = c(1, 5:10), groupColumn = 2, splineFactor = NULL),
+    ggparcoord(
+      diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      splineFactor = NULL
+    ),
     "invalid value for 'splineFactor'"
   )
 })
 
 test_that("alphaLines", {
   p <- ggparcoord(
-    data = iris2, columns = 1:4, groupColumn = 5,
-    order = "anyClass", showPoints = TRUE,
+    data = iris2,
+    columns = 1:4,
+    groupColumn = 5,
+    order = "anyClass",
+    showPoints = TRUE,
     title = "Parallel Coordinate Plot for the Iris Data",
     alphaLines = "alphaLevel"
   )
   expect_equal(length(p$layers), 2)
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[1]])$alpha), "alphaLevel")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[1]])$alpha),
+    "alphaLevel"
+  )
 })
 
 test_that("splineFactor", {
@@ -129,23 +216,38 @@ test_that("splineFactor", {
 
   pList <- list(p1, p2)
   for (p in pList) {
-    expect_equal(mapping_string(get("mapping", envir = p$layers[[1]])$x), "spline.x")
-    expect_equal(mapping_string(get("mapping", envir = p$layers[[1]])$y), "spline.y")
+    expect_equal(
+      mapping_string(get("mapping", envir = p$layers[[1]])$x),
+      "spline.x"
+    )
+    expect_equal(
+      mapping_string(get("mapping", envir = p$layers[[1]])$y),
+      "spline.y"
+    )
 
-    tmp <- unique(as.numeric(get("data", envir = p$layers[[1]])$ggally_splineFactor))
+    tmp <- unique(as.numeric(
+      get("data", envir = p$layers[[1]])$ggally_splineFactor
+    ))
     expect_true((tmp == 3) || (tmp == 21))
   }
 
   p <- ggparcoord(
-    data = iris2, columns = 1:4,
-    groupColumn = 5, splineFactor = 3,
+    data = iris2,
+    columns = 1:4,
+    groupColumn = 5,
+    splineFactor = 3,
     alphaLines = "alphaLevel"
   )
-  expect_equal(mapping_string(get("mapping", p$layers[[1]])$alpha), "alphaLevel")
+  expect_equal(
+    mapping_string(get("mapping", p$layers[[1]])$alpha),
+    "alphaLevel"
+  )
 
   p <- ggparcoord(
-    data = iris2, columns = 1:4,
-    groupColumn = 5, splineFactor = 3,
+    data = iris2,
+    columns = 1:4,
+    groupColumn = 5,
+    splineFactor = 3,
     showPoints = TRUE
   )
   expect_equal(length(p$layers), 2)
@@ -155,14 +257,32 @@ test_that("splineFactor", {
 
 test_that("splineFactor as is", {
   iris2 <- iris
-  iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
+  iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[
+    iris2$Species
+  ]
 
   k <- 4
-  p_no_visible_spline <- ggparcoord(data = iris2, columns = seq_len(k), groupColumn = 5, splineFactor = I(k))
-  p_single_split_between <- ggparcoord(data = iris2, columns = seq_len(k), groupColumn = 5, splineFactor = I(2 * k))
+  p_no_visible_spline <- ggparcoord(
+    data = iris2,
+    columns = seq_len(k),
+    groupColumn = 5,
+    splineFactor = I(k)
+  )
+  p_single_split_between <- ggparcoord(
+    data = iris2,
+    columns = seq_len(k),
+    groupColumn = 5,
+    splineFactor = I(2 * k)
+  )
 
-  vdiffr::expect_doppelganger("ggparcoord-splineFactor-as-is-4", p_no_visible_spline)
-  vdiffr::expect_doppelganger("ggparcoord-splineFactor-as-is-8", p_single_split_between)
+  vdiffr::expect_doppelganger(
+    "ggparcoord-splineFactor-as-is-4",
+    p_no_visible_spline
+  )
+  vdiffr::expect_doppelganger(
+    "ggparcoord-splineFactor-as-is-8",
+    p_single_split_between
+  )
 })
 
 test_that("groupColumn", {
@@ -180,9 +300,15 @@ test_that("groupColumn", {
   p <- ggparcoord(
     data = ds2,
     columns = c(
-      "carat", "color", "clarity",
-      "depth", "table", "price",
-      "x", "y", "z"
+      "carat",
+      "color",
+      "clarity",
+      "depth",
+      "table",
+      "price",
+      "x",
+      "y",
+      "z"
     ),
     order = c(1, 3:10),
     groupColumn = "cut"
@@ -191,7 +317,6 @@ test_that("groupColumn", {
   expect_true("clarity" %in% levels(p$data$variable))
   expect_true(is.numeric(p$data$value))
   expect_equal(levels(p$data$cut), levels(ds2$cut))
-
 
   # group column is a regular column
   ## factor
@@ -206,8 +331,20 @@ test_that("groupColumn", {
 })
 
 test_that("scale", {
-  for (scale in c("std", "robust", "uniminmax", "globalminmax", "center", "centerObs")) {
-    p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, scale = scale)
+  for (scale in c(
+    "std",
+    "robust",
+    "uniminmax",
+    "globalminmax",
+    "center",
+    "centerObs"
+  )) {
+    p <- ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      scale = scale
+    )
   }
   expect_true(TRUE)
 })
@@ -217,7 +354,12 @@ test_that("missing", {
   ds2[3, 1] <- NA
 
   for (missing in c("exclude", "mean", "median", "min10", "random")) {
-    p <- ggparcoord(data = ds2, columns = c(1, 5:10), groupColumn = 2, missing = missing)
+    p <- ggparcoord(
+      data = ds2,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      missing = missing
+    )
   }
   expect_true(TRUE)
 })
@@ -225,17 +367,38 @@ test_that("missing", {
 test_that("order", {
   if (requireNamespace("scagnostics", quietly = TRUE)) {
     for (ordering in c(
-      "Outlying", "Skewed", "Clumpy", "Sparse", "Striated", "Convex", "Skinny",
-      "Stringy", "Monotonic"
+      "Outlying",
+      "Skewed",
+      "Clumpy",
+      "Sparse",
+      "Striated",
+      "Convex",
+      "Skinny",
+      "Stringy",
+      "Monotonic"
     )) {
-      p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = ordering)
-      expect_true(all(levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")))
+      p <- ggparcoord(
+        data = diamonds.samp,
+        columns = c(1, 5:10),
+        groupColumn = 2,
+        order = ordering
+      )
+      expect_true(all(
+        levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")
+      ))
     }
   }
 
   for (ordering in c("skewness", "allClass", "anyClass")) {
-    p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2, order = ordering)
-    expect_true(all(levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")))
+    p <- ggparcoord(
+      data = diamonds.samp,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      order = ordering
+    )
+    expect_true(all(
+      levels(p$data) != c("carat", "depth", "table", "price", "x", "y", "z")
+    ))
   }
 })
 
@@ -245,7 +408,13 @@ test_that("missing and order(anyClass)", {
   missing_options <- c("exclude", "mean", "median", "min10", "random")
 
   for (missing in missing_options) {
-    p <- ggparcoord(data = ds2, columns = c(1, 5:10), groupColumn = 2, missing = missing, order = "anyClass")
+    p <- ggparcoord(
+      data = ds2,
+      columns = c(1, 5:10),
+      groupColumn = 2,
+      missing = missing,
+      order = "anyClass"
+    )
   }
   expect_true(TRUE)
 })
@@ -269,17 +438,26 @@ test_that("basic", {
   expect_equal(length(p$layers), 2)
   expect_equal(get("aes_params", envir = p$layers[[1]])$colour, col)
 
-  p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), mapping = ggplot2::aes(size = 1))
+  p <- ggparcoord(
+    data = diamonds.samp,
+    columns = c(1, 5:10),
+    mapping = ggplot2::aes(size = 1)
+  )
   expect_equal(length(p$layers), 1)
   expect_equal(p$mapping$size, 1)
 })
 
 
 test_that("size", {
-  p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), mapping = ggplot2::aes(size = gear))
+  p <- ggparcoord(
+    data = diamonds.samp,
+    columns = c(1, 5:10),
+    mapping = ggplot2::aes(size = gear)
+  )
   expect_equal(mapping_string(p$mapping$size), "gear")
 
-  p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10)) + ggplot2::aes(size = gear)
+  p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10)) +
+    ggplot2::aes(size = gear)
   expect_equal(mapping_string(p$mapping$size), "gear")
 })
 
@@ -292,11 +470,9 @@ test_that("columns containing only a single value do not cause an scaling error"
   # requires scaling, must not throw an errror due to scaling the single values (to NaN)
   expect_silent(ggparcoord(data = df, columns = 1:3, scale = "uniminmax"))
 
-
   df2 <- data.frame(df, var3 = factor(c("a", "b", "c", "a", "c")))
   # requires scaling, must not throw an errror due to scaling the single values (to NaN)
   expect_silent(ggparcoord(data = df2, columns = 1:4, scale = "uniminmax"))
-
 
   df3 <- data.frame(df2, var4 = factor(c("d", "d", "d", "d", "d")))
   expect_silent(ggparcoord(data = df3, columns = 1:4, scale = "uniminmax"))

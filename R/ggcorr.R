@@ -131,31 +131,32 @@
 #'   cor_matrix = cor(dt[, -1], use = "pairwise")
 #' ))
 ggcorr <- function(
-    data,
-    method = c("pairwise", "pearson"),
-    cor_matrix = NULL,
-    nbreaks = NULL,
-    digits = 2,
-    name = "",
-    low = "#3B9AB2",
-    mid = "#EEEEEE",
-    high = "#F21A00",
-    midpoint = 0,
-    palette = NULL,
-    geom = "tile",
-    min_size = 2,
-    max_size = 6,
-    label = FALSE,
-    label_alpha = FALSE,
-    label_color = "black",
-    label_round = 1,
-    label_size = 4,
-    limits = c(-1, 1),
-    drop = is.null(limits) || identical(limits, FALSE),
-    layout.exp = 0,
-    legend.position = "right",
-    legend.size = 9,
-    ...) {
+  data,
+  method = c("pairwise", "pearson"),
+  cor_matrix = NULL,
+  nbreaks = NULL,
+  digits = 2,
+  name = "",
+  low = "#3B9AB2",
+  mid = "#EEEEEE",
+  high = "#F21A00",
+  midpoint = 0,
+  palette = NULL,
+  geom = "tile",
+  min_size = 2,
+  max_size = 6,
+  label = FALSE,
+  label_alpha = FALSE,
+  label_color = "black",
+  label_round = 1,
+  label_size = 4,
+  limits = c(-1, 1),
+  drop = is.null(limits) || identical(limits, FALSE),
+  layout.exp = 0,
+  legend.position = "right",
+  legend.size = 9,
+  ...
+) {
   if (is.numeric(limits)) {
     if (length(limits) != 2) {
       stop("'limits' must be of length 2 if numeric")
@@ -236,8 +237,10 @@ ggcorr <- function(
       x <- sort(c(x, 0))
     }
 
-    m_long$breaks <- cut(m_long$coefficient,
-      breaks = unique(x), include.lowest = TRUE,
+    m_long$breaks <- cut(
+      m_long$coefficient,
+      breaks = unique(x),
+      include.lowest = TRUE,
       dig.lab = digits
     )
   }
@@ -280,14 +283,21 @@ ggcorr <- function(
 
     if (is.null(nbreaks) && !is.null(limits)) {
       p <- p +
-        scale_fill_gradient2(name,
-          low = low, mid = mid, high = high,
-          midpoint = midpoint, limits = limits
+        scale_fill_gradient2(
+          name,
+          low = low,
+          mid = mid,
+          high = high,
+          midpoint = midpoint,
+          limits = limits
         )
     } else if (is.null(nbreaks)) {
       p <- p +
-        scale_fill_gradient2(name,
-          low = low, mid = mid, high = high,
+        scale_fill_gradient2(
+          name,
+          low = low,
+          mid = mid,
+          high = high,
           midpoint = midpoint
         )
     } else if (is.null(palette)) {
@@ -307,7 +317,10 @@ ggcorr <- function(
       # -- circles, continuous -------------------------------------------------
 
       p <- p +
-        geom_point(aes(size = abs(.data$coefficient), color = .data$coefficient))
+        geom_point(aes(
+          size = abs(.data$coefficient),
+          color = .data$coefficient
+        ))
     } else {
       # -- circles, ordinal ----------------------------------------------------
 
@@ -325,14 +338,21 @@ ggcorr <- function(
 
     if (is.null(nbreaks) && !is.null(limits)) {
       p <- p +
-        scale_color_gradient2(name,
-          low = low, mid = mid, high = high,
-          midpoint = midpoint, limits = limits
+        scale_color_gradient2(
+          name,
+          low = low,
+          mid = mid,
+          high = high,
+          midpoint = midpoint,
+          limits = limits
         )
     } else if (is.null(nbreaks)) {
       p <- p +
-        scale_color_gradient2(name,
-          low = low, mid = mid, high = high,
+        scale_color_gradient2(
+          name,
+          low = low,
+          mid = mid,
+          high = high,
           midpoint = midpoint
         )
     } else if (is.null(palette)) {
@@ -351,7 +371,10 @@ ggcorr <- function(
       # -- text, continuous ----------------------------------------------------
 
       p <- p +
-        geom_text(aes(label = label, color = .data$coefficient), size = label_size)
+        geom_text(
+          aes(label = label, color = .data$coefficient),
+          size = label_size
+        )
     } else {
       # -- text, ordinal -------------------------------------------------------
 
@@ -363,14 +386,21 @@ ggcorr <- function(
 
     if (is.null(nbreaks) && !is.null(limits)) {
       p <- p +
-        scale_color_gradient2(name,
-          low = low, mid = mid, high = high,
-          midpoint = midpoint, limits = limits
+        scale_color_gradient2(
+          name,
+          low = low,
+          mid = mid,
+          high = high,
+          midpoint = midpoint,
+          limits = limits
         )
     } else if (is.null(nbreaks)) {
       p <- p +
-        scale_color_gradient2(name,
-          low = low, mid = mid, high = high,
+        scale_color_gradient2(
+          name,
+          low = low,
+          mid = mid,
+          high = high,
           midpoint = midpoint
         )
     } else if (is.null(palette)) {
@@ -389,8 +419,10 @@ ggcorr <- function(
   if (label) {
     if (isTRUE(label_alpha)) {
       p <- p +
-        geom_text(aes(.data$x, .data$y, label = label, alpha = abs(.data$coefficient)),
-          color = label_color, size = label_size,
+        geom_text(
+          aes(.data$x, .data$y, label = label, alpha = abs(.data$coefficient)),
+          color = label_color,
+          size = label_size,
           show.legend = FALSE
         )
     } else if (label_alpha > 0) {
@@ -398,12 +430,16 @@ ggcorr <- function(
         geom_text(
           aes(.data$x, .data$y, label = label),
           show.legend = FALSE,
-          alpha = label_alpha, color = label_color, size = label_size
+          alpha = label_alpha,
+          color = label_color,
+          size = label_size
         )
     } else {
       p <- p +
-        geom_text(aes(.data$x, .data$y, label = label),
-          color = label_color, size = label_size
+        geom_text(
+          aes(.data$x, .data$y, label = label),
+          color = label_color,
+          size = label_size
         )
     }
   }
@@ -429,7 +465,12 @@ ggcorr <- function(
   }
 
   p <- p +
-    geom_text(data = textData, aes(label = !!as.name("diagLabel")), ..., na.rm = TRUE) +
+    geom_text(
+      data = textData,
+      aes(label = !!as.name("diagLabel")),
+      ...,
+      na.rm = TRUE
+    ) +
     scale_x_discrete(breaks = NULL, limits = xLimits) +
     scale_y_discrete(breaks = NULL, limits = levels(m_long$y)) +
     labs(x = NULL, y = NULL) +

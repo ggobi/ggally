@@ -1,4 +1,3 @@
-
 # retrieve the evaulated data column given the aes (which could possibly do operations)
 #' Evaluate data column
 #' @param data data set to evaluate the data with
@@ -146,7 +145,15 @@ ggally_points <- function(data, mapping, ...) {
 #' data(tips)
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
 #' p_(ggally_smooth(tips, mapping = ggplot2::aes(total_bill, tip, color = sex)))
-ggally_smooth <- function(data, mapping, ..., method = "lm", formula = y ~ x, se = TRUE, shrink = TRUE) {
+ggally_smooth <- function(
+  data,
+  mapping,
+  ...,
+  method = "lm",
+  formula = y ~ x,
+  se = TRUE,
+  shrink = TRUE
+) {
   p <- ggplot(data = data, mapping)
 
   p <- p + geom_point(...)
@@ -154,7 +161,13 @@ ggally_smooth <- function(data, mapping, ..., method = "lm", formula = y ~ x, se
   if (!is.null(mapping$color) || !is.null(mapping$colour)) {
     p <- p + geom_smooth(method = method, se = se, formula = formula)
   } else {
-    p <- p + geom_smooth(method = method, se = se, formula = formula, colour = I("black"))
+    p <- p +
+      geom_smooth(
+        method = method,
+        se = se,
+        formula = formula,
+        colour = I("black")
+      )
   }
 
   if (isTRUE(shrink)) {
@@ -283,22 +296,23 @@ ggally_density <- function(data, mapping, ...) {
 #'   size = 5
 #' ))
 ggally_cor <- function(
-    data,
-    mapping,
-    ...,
-    stars = TRUE,
-    method = "pearson",
-    display_grid = FALSE,
-    digits = 3,
-    title_args = list(...),
-    group_args = list(...),
-    justify_labels = "right",
-    align_percent = 0.5,
-    title = "Corr",
-    na.rm = NA,
-    use = deprecated(),
-    alignPercent = deprecated(),
-    displayGrid = deprecated()) {
+  data,
+  mapping,
+  ...,
+  stars = TRUE,
+  method = "pearson",
+  display_grid = FALSE,
+  digits = 3,
+  title_args = list(...),
+  group_args = list(...),
+  justify_labels = "right",
+  align_percent = 0.5,
+  title = "Corr",
+  na.rm = NA,
+  use = deprecated(),
+  alignPercent = deprecated(),
+  displayGrid = deprecated()
+) {
   if (lifecycle::is_present(use)) {
     lifecycle::deprecate_warn(
       when = "2.3.0",
@@ -388,21 +402,22 @@ ggally_cor <- function(
 #' @importFrom dplyr arrange summarise
 #' @export
 ggally_statistic <- function(
-    data,
-    mapping,
-    text_fn,
-    title,
-    na.rm = NA,
-    display_grid = FALSE,
-    justify_labels = "right",
-    justify_text = "left",
-    sep = ": ",
-    family = "mono",
-    title_args = list(),
-    group_args = list(),
-    align_percent = 0.5,
-    title_hjust = 0.5,
-    group_hjust = 0.5) {
+  data,
+  mapping,
+  text_fn,
+  title,
+  na.rm = NA,
+  display_grid = FALSE,
+  justify_labels = "right",
+  justify_text = "left",
+  sep = ": ",
+  family = "mono",
+  title_args = list(),
+  group_args = list(),
+  align_percent = 0.5,
+  title_hjust = 0.5,
+  group_hjust = 0.5
+) {
   set_if_not_there <- function(obj, key, value) {
     obj <- as.list(obj)
     # if (! "family" %in% rlang::names2(obj)) {
@@ -505,18 +520,20 @@ ggally_statistic <- function(
     # title
     ggally_text_args <- append(
       list(
-        label   = str_c(title, sep, text_fn(xVal, yVal)),
+        label = str_c(title, sep, text_fn(xVal, yVal)),
         mapping = mapping,
-        xP      = 0.5,
-        yP      = 0.9,
-        xrange  = xrange,
-        yrange  = yrange
+        xP = 0.5,
+        yP = 0.9,
+        xrange = xrange,
+        yrange = yrange
       ),
       title_args
     )
     p <- do.call(ggally_text, ggally_text_args)
 
-    xPos <- rep(align_percent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    xPos <- rep(align_percent, nrow(cord)) *
+      diff(xrange) +
+      min(xrange, na.rm = TRUE)
     yPos <- seq(from = 0.9, to = 0.2, length.out = nrow(cord) + 1)
     yPos <- yPos * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
@@ -529,8 +546,8 @@ ggally_statistic <- function(
       list(
         data = cordf,
         aes(
-          x     = .data$xPos,
-          y     = .data$yPos,
+          x = .data$xPos,
+          y = .data$yPos,
           label = .data$labelp,
           color = .data$labelp
         )
@@ -569,9 +586,6 @@ ggally_statistic <- function(
 
   p + theme(legend.position = "none")
 }
-
-
-
 
 
 #' Box plot
@@ -730,7 +744,6 @@ ggally_dot_and_box_no_facet <- function(data, mapping, ..., boxPlot = TRUE) {
 }
 
 
-
 #' Faceted histogram
 #'
 #' Display subsetted histograms of the data in different panels.
@@ -853,7 +866,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
 
   xVal <- mapping_string(mapping$x)
   yVal <- mapping_string(mapping$y)
-  mappingY <- mapping$y # nolint
+  mappingY <- mapping$y
   mapping$y <- NULL # will be faceted
 
   p <- ggplot(data = data, mapping) +
@@ -862,7 +875,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
   if (identical(den_strip, TRUE)) {
     p <- p +
       geom_histogram(
-        mapping = aes(fill = after_stat(!!as.name("density"))), # nolint
+        mapping = aes(fill = after_stat(!!as.name("density"))),
         position = "fill",
         ...
       ) +
@@ -874,14 +887,15 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(!!as.name("scaled")) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) *
+            diff(range(.data$x, na.rm = TRUE)) +
+            min(.data$x, na.rm = TRUE)
         ),
         position = "identity",
         geom = "line",
         ...
       )
   }
-
 
   if (horizontal) {
     p <- p + facet_grid(paste(yVal, " ~ .", sep = ""))
@@ -930,7 +944,9 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
     p <- p +
       stat_density(
         aes(
-          y = after_stat(!!as.name("scaled")) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
+          y = after_stat(!!as.name("scaled")) *
+            diff(range(.data$x, na.rm = TRUE)) +
+            min(.data$x, na.rm = TRUE)
         ),
         position = "identity",
         geom = "line",
@@ -977,12 +993,19 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
     # histBarPerc <- buildInfo$data[[1]]$ncount
   } else if (numer) {
     if (identical(rescale, TRUE)) {
-      p <- p + geom_histogram(
-        aes(
-          y = after_stat(!!as.name("density")) / max(after_stat(!!as.name("density"))) * diff(range(.data$x, na.rm = TRUE)) + min(.data$x, na.rm = TRUE) # nolint
-        ),
-        ...
-      ) + coord_cartesian(ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE))
+      p <- p +
+        geom_histogram(
+          aes(
+            y = after_stat(!!as.name("density")) /
+              max(after_stat(!!as.name("density"))) *
+              diff(range(.data$x, na.rm = TRUE)) +
+              min(.data$x, na.rm = TRUE)
+          ),
+          ...
+        ) +
+        coord_cartesian(
+          ylim = range(eval_data_col(data, mapping$x), na.rm = TRUE)
+        )
     } else {
       p <- p + geom_histogram(...)
     }
@@ -1015,13 +1038,14 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
 #' p_(ggally_text("Example 1"))
 #' p_(ggally_text("Example\nTwo", mapping = ggplot2::aes(size = 15), color = I("red")))
 ggally_text <- function(
-    label,
-    mapping = ggplot2::aes(color = I("black")),
-    xP = 0.5,
-    yP = 0.5,
-    xrange = c(0, 1),
-    yrange = c(0, 1),
-    ...) {
+  label,
+  mapping = ggplot2::aes(color = I("black")),
+  xP = 0.5,
+  yP = 0.5,
+  xrange = c(0, 1),
+  yrange = c(0, 1),
+  ...
+) {
   theme <- theme_get()
 
   p <- ggplot() +
@@ -1157,16 +1181,17 @@ get_x_axis_labels <- function(p, xRange) {
 #' p_(ggally_diagAxis(tips, ggplot2::aes(x = tip)))
 #' p_(ggally_diagAxis(tips, ggplot2::aes(x = sex)))
 ggally_diagAxis <- function(
-    data,
-    mapping,
-    label = mapping$x,
-    labelSize = 5,
-    labelXPercent = 0.5,
-    labelYPercent = 0.55,
-    labelHJust = 0.5,
-    labelVJust = 0.5,
-    gridLabelSize = 4,
-    ...) {
+  data,
+  mapping,
+  label = mapping$x,
+  labelSize = 5,
+  labelXPercent = 0.5,
+  labelYPercent = 0.55,
+  labelHJust = 0.5,
+  labelVJust = 0.5,
+  gridLabelSize = 4,
+  ...
+) {
   if (is.null(mapping$x)) {
     stop("mapping$x is null.  There must be a column value in this location.")
   }
@@ -1188,66 +1213,69 @@ ggally_diagAxis <- function(
     # xrange <- c(xmin, xmax)
 
     p <- ggally_text(
-      label   = label,
+      label = label,
       mapping = aes(col = I("grey50")),
-      xrange  = xrange,
-      yrange  = xrange,
-      size    = labelSize,
-      xP      = labelXPercent,
-      yP      = labelYPercent,
-      hjust   = labelHJust,
-      vjust   = labelVJust
+      xrange = xrange,
+      yrange = xrange,
+      size = labelSize,
+      xP = labelXPercent,
+      yP = labelYPercent,
+      hjust = labelHJust,
+      vjust = labelVJust
     )
 
     axisBreaks <- get_x_axis_labels(p, xrange)
     # print(axisBreaks)
-    p <- p + geom_text(
-      data = axisBreaks,
-      mapping = aes(
-        x     = .data$xPos,
-        y     = .data$yPos,
-        label = .data$lab,
-        hjust = .data$hjust,
-        vjust = .data$"vjust"
-      ),
-      col = "grey50",
-      size = gridLabelSize
-    )
+    p <- p +
+      geom_text(
+        data = axisBreaks,
+        mapping = aes(
+          x = .data$xPos,
+          y = .data$yPos,
+          label = .data$lab,
+          hjust = .data$hjust,
+          vjust = .data$"vjust"
+        ),
+        col = "grey50",
+        size = gridLabelSize
+      )
   } else {
     breakLabels <- levels(as.factor(xData))
     numLvls <- length(breakLabels)
 
     p <- ggally_text(
-      label   = label,
+      label = label,
       mapping = aes(col = I("grey50")),
-      xrange  = c(0, 1),
-      yrange  = c(0, 1),
-      size    = labelSize,
-      yP      = labelYPercent,
-      xP      = labelXPercent,
-      hjust   = labelHJust,
-      vjust   = labelVJust
+      xrange = c(0, 1),
+      yrange = c(0, 1),
+      size = labelSize,
+      yP = labelYPercent,
+      xP = labelXPercent,
+      hjust = labelHJust,
+      vjust = labelVJust
     )
     # axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
-    axisBreaks <- 0:(numLvls - 1) * (0.125 + (1 - 0.125 * (numLvls - 1)) / numLvls) +
+    axisBreaks <- 0:(numLvls - 1) *
+      (0.125 + (1 - 0.125 * (numLvls - 1)) / numLvls) +
       (1 - 0.125 * (numLvls - 1)) / (2 * numLvls)
 
     axisLabs <- data.frame(
-      x   = axisBreaks[1:numLvls],
-      y   = axisBreaks[numLvls:1],
+      x = axisBreaks[1:numLvls],
+      y = axisBreaks[numLvls:1],
       lab = breakLabels
     )
 
-    p <- p + geom_text(
-      data = axisLabs,
-      mapping = aes(
-        x     = .data$x,
-        y     = .data$y,
-        label = .data$lab
-      ),
-      col = "grey50",
-      size = gridLabelSize
-    )
+    p <- p +
+      geom_text(
+        data = axisLabs,
+        mapping = aes(
+          x = .data$x,
+          y = .data$y,
+          label = .data$lab
+        ),
+        col = "grey50",
+        size = gridLabelSize
+      )
 
     # hack to remove warning message... cuz it doesn't listen to suppress messages
     p$scales$scales[[1]]$breaks <- axisBreaks
@@ -1318,17 +1346,25 @@ ggally_facetbar <- function(data, mapping, ...) {
 #' ) + ggplot2::theme(aspect.ratio = 4 / 2))
 #' @importFrom dplyr all_of arrange n pick summarise
 ggally_ratio <- function(
-    data,
-    mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))),
-    ...,
-    floor = 0,
-    ceiling = NULL) {
+  data,
+  mapping = ggplot2::aes(
+    !!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x", "y"))
+  ),
+  ...,
+  floor = 0,
+  ceiling = NULL
+) {
   # capture the original names
   xName <- mapping_string(mapping$x)
   yName <- mapping_string(mapping$y)
 
   countData <-
-    dplyr::count(data, xvar = .data[[xName]], yvar = .data[[yName]], name = "freq") %>%
+    dplyr::count(
+      data,
+      xvar = .data[[xName]],
+      yvar = .data[[yName]],
+      name = "freq"
+    ) %>%
     rename(
       x = "xvar",
       y = "yvar"
@@ -1342,10 +1378,16 @@ ggally_ratio <- function(
   ceiling <- ceiling %||% max(countData$freq)
 
   countData[["freqSize"]] <- sqrt(pmin(countData[["freq"]], ceiling) / ceiling)
-  countData[["col"]] <- ifelse(countData[["freq"]] > ceiling, "grey30", "grey50")
+  countData[["col"]] <- ifelse(
+    countData[["freq"]] > ceiling,
+    "grey30",
+    "grey50"
+  )
 
-  countData[["xPos"]] <- as.numeric(countData[["x"]]) + (1 / 2) * countData[["freqSize"]]
-  countData[["yPos"]] <- as.numeric(countData[["y"]]) + (1 / 2) * countData[["freqSize"]]
+  countData[["xPos"]] <- as.numeric(countData[["x"]]) +
+    (1 / 2) * countData[["freqSize"]]
+  countData[["yPos"]] <- as.numeric(countData[["y"]]) +
+    (1 / 2) * countData[["freqSize"]]
 
   p <-
     ggplot(
@@ -1392,7 +1434,6 @@ ggally_ratio <- function(
 }
 
 
-
 #' Display counts of observations
 #'
 #' Plot the number of observations by using rectangles
@@ -1425,8 +1466,12 @@ ggally_ratio <- function(
 #' ))
 ggally_count <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
-  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
-  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  if (is.null(mapping$x)) {
+    stop("'x' aesthetic is required.")
+  }
+  if (is.null(mapping$y)) {
+    stop("'y' aesthetic is required.")
+  }
   # for stat_ggally_count(), y should be mapped to base_y
   # and always be a factor
   count_col <- ".ggally_y"
@@ -1435,7 +1480,10 @@ ggally_count <- function(data, mapping, ...) {
   # Reverse the y axis here. I'd like to perform this in the
   # `scale_y_continuous(trans="reverse")`, but the trans is applied after
   # `breaks/labels`
-  data[[count_col]] <- factor(data[[count_col]], levels = rev(levels(data[[count_col]])))
+  data[[count_col]] <- factor(
+    data[[count_col]],
+    levels = rev(levels(data[[count_col]]))
+  )
 
   ylabel <- mapping_string(mapping$y)
   mapping$base_y <- aes(base_y = !!as.name(count_col))$base_y
@@ -1467,22 +1515,27 @@ ggally_count <- function(data, mapping, ...) {
 # na.rm = TRUE to remove warnings if NA (cf. stat_count)
 # x.width to control size of tiles
 stat_ggally_count <- function(
-    mapping = NULL,
-    data = NULL,
-    geom = "tile", position = "identity",
-    ...,
-    x.width = .9,
-    na.rm = FALSE,
-    show.legend = NA,
-    inherit.aes = TRUE) {
+  mapping = NULL,
+  data = NULL,
+  geom = "tile",
+  position = "identity",
+  ...,
+  x.width = .9,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
   params <- list(
     x.width = x.width,
     na.rm = na.rm,
     ...
   )
   if (!is.null(params$y)) {
-    stop("stat_ggally_count() must not be used with a y aesthetic,
-         but with a base_y aesthetic instead.", call. = FALSE)
+    stop(
+      "stat_ggally_count() must not be used with a y aesthetic,
+         but with a base_y aesthetic instead.",
+      call. = FALSE
+    )
   }
 
   layer(
@@ -1501,7 +1554,9 @@ stat_ggally_count <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatGGallyCount <- ggproto("StatGGallyCount", Stat,
+StatGGallyCount <- ggproto(
+  "StatGGallyCount",
+  Stat,
   required_aes = c("x", "base_y"),
   default_aes = aes(
     weight = 1,
@@ -1541,9 +1596,16 @@ StatGGallyCount <- ggproto("StatGGallyCount", Stat,
     panel$prop <- panel$n / panel$n_xy
     panel$width <- sqrt(panel$n_xy) / max(sqrt(panel$n_xy)) * x.width
     panel$height <- panel$width * panel$prop
-    panel$cum_height <- stats::ave(panel$height, panel$x, panel$base_y, FUN = cumsum)
-    panel$y <- as.numeric(panel$base_y) + panel$cum_height -
-      panel$height / 2 - panel$width / 2
+    panel$cum_height <- stats::ave(
+      panel$height,
+      panel$x,
+      panel$base_y,
+      FUN = cumsum
+    )
+    panel$y <- as.numeric(panel$base_y) +
+      panel$cum_height -
+      panel$height / 2 -
+      panel$width / 2
 
     panel
   }
@@ -1581,25 +1643,25 @@ ggally_blank <- function(...) {
   p <- ggplot(data = a, aes(x = !!as.name("X"), y = !!as.name("Y"))) +
     geom_point(colour = "transparent") +
     theme(
-      axis.line         = element_blank(),
-      axis.text.x       = element_blank(),
-      axis.text.y       = element_blank(),
-      axis.ticks        = element_blank(),
-      axis.title.x      = element_blank(),
-      axis.title.y      = element_blank(),
+      axis.line = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
       legend.background = element_blank(),
-      legend.key        = element_blank(),
-      legend.text       = element_blank(),
-      legend.title      = element_blank(),
-      panel.background  = element_blank(),
-      panel.border      = element_blank(),
-      panel.grid.major  = element_blank(),
-      panel.grid.minor  = element_blank(),
-      plot.background   = element_blank(),
-      plot.title        = element_blank(),
-      strip.background  = element_blank(),
-      strip.text.x      = element_blank(),
-      strip.text.y      = element_blank()
+      legend.key = element_blank(),
+      legend.text = element_blank(),
+      legend.title = element_blank(),
+      panel.background = element_blank(),
+      panel.border = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.background = element_blank(),
+      plot.title = element_blank(),
+      strip.background = element_blank(),
+      strip.text.x = element_blank(),
+      strip.text.y = element_blank()
     )
 
   class(p) <- c(class(p), "ggmatrix_blank")
@@ -1611,7 +1673,6 @@ ggally_blank <- function(...) {
 ggally_blankDiag <- function(...) {
   ggally_blank(...)
 }
-
 
 
 #' NA plot
@@ -1626,31 +1687,40 @@ ggally_blankDiag <- function(...) {
 #' @param ... other arguments sent to geom_text
 #' @export
 #' @keywords hplot
-ggally_na <- function(data = NULL, mapping = NULL, size = 10, color = "grey20", ...) {
+ggally_na <- function(
+  data = NULL,
+  mapping = NULL,
+  size = 10,
+  color = "grey20",
+  ...
+) {
   a <- data.frame(x = 1, y = 1, label = "NA")
 
-  p <- ggplot(data = a, aes(x = !!as.name("X"), y = !!as.name("Y"), label = !!as.name("label"))) +
+  p <- ggplot(
+    data = a,
+    aes(x = !!as.name("X"), y = !!as.name("Y"), label = !!as.name("label"))
+  ) +
     geom_text(color = color, size = size, ...) +
     theme(
-      axis.line         = element_blank(),
-      axis.text.x       = element_blank(),
-      axis.text.y       = element_blank(),
-      axis.ticks        = element_blank(),
-      axis.title.x      = element_blank(),
-      axis.title.y      = element_blank(),
+      axis.line = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
       legend.background = element_blank(),
-      legend.key        = element_blank(),
-      legend.text       = element_blank(),
-      legend.title      = element_blank(),
-      panel.background  = element_blank(),
-      panel.border      = element_blank(),
-      panel.grid.major  = element_blank(),
-      panel.grid.minor  = element_blank(),
-      plot.background   = element_blank(),
-      plot.title        = element_blank(),
-      strip.background  = element_blank(),
-      strip.text.x      = element_blank(),
-      strip.text.y      = element_blank()
+      legend.key = element_blank(),
+      legend.text = element_blank(),
+      legend.title = element_blank(),
+      panel.background = element_blank(),
+      panel.border = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.background = element_blank(),
+      plot.title = element_blank(),
+      strip.background = element_blank(),
+      strip.text.x = element_blank(),
+      strip.text.y = element_blank()
     )
 
   p
@@ -1661,7 +1731,6 @@ ggally_na <- function(data = NULL, mapping = NULL, size = 10, color = "grey20", 
 ggally_naDiag <- function(...) {
   ggally_na(...)
 }
-
 
 
 #' Scatterplot for continuous and categorical variables
@@ -1756,13 +1825,18 @@ ggally_autopointDiag <- function(data, mapping, ...) {
 #' }
 #' @importFrom dplyr arrange summarise
 ggally_summarise_by <- function(
-    data,
-    mapping,
-    text_fn = weighted_median_iqr,
-    text_fn_vertical = NULL,
-    ...) {
-  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
-  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  data,
+  mapping,
+  text_fn = weighted_median_iqr,
+  text_fn_vertical = NULL,
+  ...
+) {
+  if (is.null(mapping$x)) {
+    stop("'x' aesthetic is required.")
+  }
+  if (is.null(mapping$y)) {
+    stop("'y' aesthetic is required.")
+  }
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {
@@ -1806,7 +1880,12 @@ ggally_summarise_by <- function(
         gsub(" ", "\n", text_fn(x, weights))
       }
     }
-    ggally_summarise_by(data, mapping_swap_x_y(mapping), text_fn_vertical, ...) +
+    ggally_summarise_by(
+      data,
+      mapping_swap_x_y(mapping),
+      text_fn_vertical,
+      ...
+    ) +
       coord_flip() +
       theme(
         axis.ticks.y = element_blank(),
@@ -1826,7 +1905,15 @@ ggally_summarise_by <- function(
 #' @export
 weighted_median_iqr <- function(x, weights = NULL) {
   rlang::check_installed("Hmisc")
-  s <- round(Hmisc::wtd.quantile(x, weights = weights, probs = c(.25, .5, .75), na.rm = TRUE), digits = 1)
+  s <- round(
+    Hmisc::wtd.quantile(
+      x,
+      weights = weights,
+      probs = c(.25, .5, .75),
+      na.rm = TRUE
+    ),
+    digits = 1
+  )
   paste0("Median: ", s[2], " [", s[1], "-", s[3], "]")
 }
 
@@ -1837,6 +1924,9 @@ weighted_median_iqr <- function(x, weights = NULL) {
 weighted_mean_sd <- function(x, weights = NULL) {
   rlang::check_installed("Hmisc")
   m <- round(Hmisc::wtd.mean(x, weights = weights, na.rm = TRUE), digits = 1)
-  sd <- round(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)), digits = 1)
+  sd <- round(
+    sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = TRUE)),
+    digits = 1
+  )
   paste0("Mean: ", m, " (", sd, ")")
 }

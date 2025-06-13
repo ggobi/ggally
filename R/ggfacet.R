@@ -42,23 +42,28 @@
 #' }
 #' @importFrom dplyr arrange .data reframe
 ggfacet <- function(
-    data, mapping = NULL,
-    columnsX = 1:ncol(data),
-    columnsY = 1:ncol(data),
-    fn = ggally_points, ...,
-    columnLabelsX = names(data[columnsX]),
-    columnLabelsY = names(data[columnsY]),
-    xlab = NULL,
-    ylab = NULL,
-    title = NULL,
-    scales = "free") {
+  data,
+  mapping = NULL,
+  columnsX = 1:ncol(data),
+  columnsY = 1:ncol(data),
+  fn = ggally_points,
+  ...,
+  columnLabelsX = names(data[columnsX]),
+  columnLabelsY = names(data[columnsY]),
+  xlab = NULL,
+  ylab = NULL,
+  title = NULL,
+  scales = "free"
+) {
   data <- fix_data(data)
   fn <- wrap(fn)
 
   # fix args
   if (
-    !missing(mapping) && !is.list(mapping) &&
-      !missing(columnsX) && missing(columnsY)
+    !missing(mapping) &&
+      !is.list(mapping) &&
+      !missing(columnsX) &&
+      missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -67,8 +72,20 @@ ggfacet <- function(
 
   stop_if_bad_mapping(mapping)
 
-  columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
-  columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
+  columnsX <- fix_column_values(
+    data,
+    columnsX,
+    columnLabelsX,
+    "columnsX",
+    "columnLabelsX"
+  )
+  columnsY <- fix_column_values(
+    data,
+    columnsY,
+    columnLabelsY,
+    "columnsY",
+    "columnLabelsY"
+  )
 
   # could theoretically work like
   # mtc <- mtcars
@@ -81,13 +98,21 @@ ggfacet <- function(
   # )
   is_factor_x <- sapply(data[columnsX], is.factor)
   if (sum(is_factor_x) != 0) {
-    warning(paste(sum(is_factor_x), " factor variables are being removed from X columns", sep = ""))
+    warning(paste(
+      sum(is_factor_x),
+      " factor variables are being removed from X columns",
+      sep = ""
+    ))
     columnsX <- columnsX[!is_factor_x]
     columnLabelsX <- columnLabelsX[!is_factor_x]
   }
   is_factor_y <- sapply(data[columnsY], is.factor)
   if (sum(is_factor_y) != 0) {
-    warning(paste(sum(is_factor_y), " factor variables are being removed from Y columns", sep = ""))
+    warning(paste(
+      sum(is_factor_y),
+      " factor variables are being removed from Y columns",
+      sep = ""
+    ))
     columnsY <- columnsY[!is_factor_y]
     columnLabelsY <- columnLabelsY[!is_factor_y]
   }

@@ -1,4 +1,3 @@
-
 if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
@@ -36,12 +35,16 @@ test_that("examples", {
   # ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white")
 
   # add vertex attribute
-  x <- network.vertex.names(n) # nolint
+  x <- network.vertex.names(n)
   x <- ifelse(x %in% c("a", "e", "i"), "vowel", "consonant")
   n %v% "phono" <- x
 
   ggnet2(n, color = "phono")
-  ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey"))
+  ggnet2(
+    n,
+    color = "phono",
+    palette = c("vowel" = "gold", "consonant" = "grey")
+  )
   ggnet2(n, shape = "phono", color = "phono")
 
   # random groups
@@ -86,7 +89,10 @@ test_that("examples", {
   ggnet2(n, mode = c("x", "y"))
   expect_error(ggnet2(n, mode = c("xx", "yy")), "not found")
   expect_error(ggnet2(n, mode = c("phono", "phono")), "not numeric")
-  expect_error(ggnet2(n, mode = matrix(1, ncol = 2, nrow = 9)), "coordinates length")
+  expect_error(
+    ggnet2(n, mode = matrix(1, ncol = 2, nrow = 9)),
+    "coordinates length"
+  )
 
   # test arrow.size
   expect_error(ggnet2(n, arrow.size = -1), "incorrect arrow.size")
@@ -164,7 +170,10 @@ test_that("examples", {
   # ggnet2(n, color = "phono", color.palette = c("vowel" = 1, "consonant" = 2))
   ggnet2(n, color = factor(1:10))
   ggnet2(n, color = "phono", palette = "Set1") # only 2 groups, palette has min. 3
-  expect_error(ggnet2(n, color = factor(1:10), palette = "Set1"), "too many node groups")
+  expect_error(
+    ggnet2(n, color = factor(1:10), palette = "Set1"),
+    "too many node groups"
+  )
   expect_error(
     ggnet2(n, color = "phono", color.palette = c("vowel" = 1)),
     "no color.palette value"
@@ -181,23 +190,38 @@ test_that("examples", {
   # test size.palette
   ggnet2(n, size = "phono", size.palette = c("vowel" = 1, "consonant" = 2))
   ggnet2(n, size = factor(1:10))
-  expect_error(ggnet2(n, size = "phono", size.palette = c("vowel" = 1)), "no size.palette value")
+  expect_error(
+    ggnet2(n, size = "phono", size.palette = c("vowel" = 1)),
+    "no size.palette value"
+  )
 
   # test node.label
   ggnet2(n, label = sample(letters, 10))
   ggnet2(n, label = "phono")
 
   # test label.alpha
-  expect_error(ggnet2(n, label = TRUE, label.alpha = "xyz"), "incorrect label.alpha")
+  expect_error(
+    ggnet2(n, label = TRUE, label.alpha = "xyz"),
+    "incorrect label.alpha"
+  )
 
   # test label.color
-  expect_error(ggnet2(n, label = TRUE, label.color = "xyz"), "incorrect label.color")
+  expect_error(
+    ggnet2(n, label = TRUE, label.color = "xyz"),
+    "incorrect label.color"
+  )
 
   # test label.size
-  expect_error(ggnet2(n, label = TRUE, label.size = "xyz"), "incorrect label.size")
+  expect_error(
+    ggnet2(n, label = TRUE, label.size = "xyz"),
+    "incorrect label.size"
+  )
 
   # test label.trim
-  expect_error(ggnet2(n, label = TRUE, label.trim = "xyz"), "incorrect label.trim")
+  expect_error(
+    ggnet2(n, label = TRUE, label.trim = "xyz"),
+    "incorrect label.trim"
+  )
   ggnet2(n, label = TRUE, label.trim = toupper)
 
   # test mode
@@ -223,7 +247,10 @@ test_that("examples", {
   )
 
   # test edge.label.size
-  expect_error(ggnet2(n, edge.label = "xyz", edge.label.size = "xyz"), "incorrect edge.label.size")
+  expect_error(
+    ggnet2(n, edge.label = "xyz", edge.label.size = "xyz"),
+    "incorrect edge.label.size"
+  )
 
   # test edge.size
   expect_error(ggnet2(n, edge.size = "xyz"), "incorrect edge.size")
@@ -255,11 +282,17 @@ test_that("examples", {
 
   ### --- test network coercion
 
-  expect_warning(ggnet2(network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)), "self-loops")
+  expect_warning(
+    ggnet2(network(matrix(1, nrow = 2, ncol = 2), loops = TRUE)),
+    "self-loops"
+  )
 
   expect_error(ggnet2(1:2), "network object")
   expect_error(ggnet2(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
-  expect_error(ggnet2(network(data.frame(1:2, 3:4), multiple = TRUE)), "multiplex graphs")
+  expect_error(
+    ggnet2(network(data.frame(1:2, 3:4), multiple = TRUE)),
+    "multiplex graphs"
+  )
 
   ### --- test igraph functionality
   if (rq(igraph) && rq(intergraph)) {

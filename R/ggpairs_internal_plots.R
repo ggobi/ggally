@@ -61,9 +61,10 @@
 #' pm <- ggpairs(iris, 1:3, lower = list(continuous = w_ggally_points))
 #' p_(pm)
 wrap_fn_with_param_arg <- function(
-    funcVal,
-    params = NULL,
-    funcArgName = deparse(substitute(funcVal))) {
+  funcVal,
+  params = NULL,
+  funcArgName = deparse(substitute(funcVal))
+) {
   if (missing(funcArgName)) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {
@@ -107,12 +108,12 @@ wrap_fn_with_param_arg <- function(
           "Please provide a string such as `'points'` for `ggally_points()`\n",
           "For a list of all predefined functions, check out `vig_ggally(\"ggally_plots\")`\n",
           "A custom function may be supplied directly: `wrap(my_fn, param = val)`\n",
-          "Function provided: ", funcVal
+          "Function provided: ",
+          funcVal
         ))
       }
     )
   }
-
 
   allParams <- attr(funcVal, "params") %||% list()
   allParams[names(params)] <- params
@@ -174,18 +175,24 @@ as.character.ggmatrix_fn_with_params <- function(x, ...) {
   if (length(params) == 0) {
     txt <- str_c("wrap: '", fnName, "'")
   } else {
-    txt <- str_c("wrap: '", attr(x, "name"), "'; params: ", mapping_as_string(params))
+    txt <- str_c(
+      "wrap: '",
+      attr(x, "name"),
+      "'; params: ",
+      mapping_as_string(params)
+    )
   }
 
   txt
 }
 
 
-
-
-
-
-make_ggmatrix_plot_obj <- function(fn, mapping = ggplot2::aes(), dataPos = 1, gg = NULL) {
+make_ggmatrix_plot_obj <- function(
+  fn,
+  mapping = ggplot2::aes(),
+  dataPos = 1,
+  gg = NULL
+) {
   # nonCallVals <- which(lapply(mapping, mode) == "call")
   # if (length(nonCallVals) > 0) {
   #   nonCallNames <- names(mapping)[nonCallVals]
@@ -218,14 +225,22 @@ blank_plot_string <- function() {
 }
 
 mapping_as_string <- function(mapping) {
-  str_c("c(", str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
+  str_c(
+    "c(",
+    str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "),
+    ")"
+  )
 }
 
 #' @export
 as.character.ggmatrix_plot_obj <- function(x, ...) {
   hasGg <- (!is.null(x$gg))
   mappingTxt <- mapping_as_string(x$mapping)
-  fnTxt <- ifelse(inherits(x$fn, "ggmatrix_fn_with_params"), as.character(x$fn), "custom_function")
+  fnTxt <- ifelse(
+    inherits(x$fn, "ggmatrix_fn_with_params"),
+    as.character(x$fn),
+    "custom_function"
+  )
   if (inherits(x$fn, "ggmatrix_fn_with_params")) {
     if (attr(x$fn, "name") %in% c("ggally_blank", "ggally_blankDiag")) {
       return(blank_plot_string())
@@ -233,13 +248,16 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
   }
   str_c(
     "PM",
-    "; aes: ", mappingTxt,
-    "; fn: {", fnTxt, "}",
+    "; aes: ",
+    mappingTxt,
+    "; fn: {",
+    fnTxt,
+    "}",
     # "; dataPos: ", x$dataPos,
-    "; gg: ", as.character(hasGg)
+    "; gg: ",
+    as.character(hasGg)
   )
 }
-
 
 
 #' \code{\link{ggmatrix}} structure
@@ -258,11 +276,16 @@ str.ggmatrix <- function(object, ..., raw = FALSE) {
   if (identical(raw, FALSE)) {
     cat(str_c(
       "\nCustom str.ggmatrix output: \nTo view original object use ",
-      "'str(", objName, ", raw = TRUE)'\n\n"
+      "'str(",
+      objName,
+      ", raw = TRUE)'\n\n"
     ))
     obj$plots <- lapply(obj$plots, function(plotObj) {
       if (ggplot2::is_ggplot(plotObj)) {
-        str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
+        str_c(
+          "PM; ggplot2 object; mapping: ",
+          mapping_as_string(plotObj$mapping)
+        )
       } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
         as.character(plotObj)
       } else {

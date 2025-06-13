@@ -1,4 +1,3 @@
-
 test_that("fn_switch", {
   fn1 <- function(data, mapping, ...) {
     return(1)
@@ -23,7 +22,6 @@ test_that("fn_switch", {
     expect_equal(fn(dummy_dt, mapping), i)
   }
 
-
   fn <- fn_switch(list(A = fn1, default = fn5), "value")
   expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("A"))), 1)
   expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("B"))), 5)
@@ -31,7 +29,10 @@ test_that("fn_switch", {
 
   fn <- fn_switch(list(A = fn1), "value")
   expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("A"))), 1)
-  expect_error(fn(dummy_dt, ggplot2::aes(value = !!as.name("B"))), "function could not be found")
+  expect_error(
+    fn(dummy_dt, ggplot2::aes(value = !!as.name("B"))),
+    "function could not be found"
+  )
 })
 
 test_that("model_beta_label", {
@@ -54,7 +55,16 @@ test_that("ggnostic mtcars", {
   pm <- ggnostic(
     mod,
     mapping = ggplot2::aes(),
-    columnsY = c("mpg", ".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
+    columnsY = c(
+      "mpg",
+      ".fitted",
+      ".se.fit",
+      ".resid",
+      ".std.resid",
+      ".sigma",
+      ".hat",
+      ".cooksd"
+    ),
     continuous = continuous_type,
     progress = FALSE
   )
@@ -69,7 +79,6 @@ test_that("ggnostic mtcars", {
   )
   vdiffr::expect_doppelganger("legend", pm)
 })
-
 
 
 test_that("error checking", {
@@ -88,8 +97,14 @@ test_that("error checking", {
 
   expect_error(
     get_cols(c(
-      "not_there", ".fitted", ".se.fit", ".resid",
-      ".std.resid", ".sigma", ".hat", ".cooksd"
+      "not_there",
+      ".fitted",
+      ".se.fit",
+      ".resid",
+      ".std.resid",
+      ".sigma",
+      ".hat",
+      ".cooksd"
     )),
     "Could not match 'columnsY'"
   )
