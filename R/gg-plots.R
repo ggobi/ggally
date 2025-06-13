@@ -1466,8 +1466,12 @@ ggally_ratio <- function(
 #' ))
 ggally_count <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
-  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
-  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  if (is.null(mapping$x)) {
+    stop("'x' aesthetic is required.")
+  }
+  if (is.null(mapping$y)) {
+    stop("'y' aesthetic is required.")
+  }
   # for stat_ggally_count(), y should be mapped to base_y
   # and always be a factor
   count_col <- ".ggally_y"
@@ -1827,8 +1831,12 @@ ggally_summarise_by <- function(
   text_fn_vertical = NULL,
   ...
 ) {
-  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
-  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  if (is.null(mapping$x)) {
+    stop("'x' aesthetic is required.")
+  }
+  if (is.null(mapping$y)) {
+    stop("'y' aesthetic is required.")
+  }
 
   horizontal <- is_horizontal(data, mapping)
   if (horizontal) {

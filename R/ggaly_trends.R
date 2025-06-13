@@ -51,19 +51,27 @@ ggally_trends <- function(
   ...,
   include_zero = FALSE
 ) {
-  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
-  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  if (is.null(mapping$x)) {
+    stop("'x' aesthetic is required.")
+  }
+  if (is.null(mapping$y)) {
+    stop("'y' aesthetic is required.")
+  }
 
   # computing group
   g <- list()
-  if (!is.null(mapping$alpha))
+  if (!is.null(mapping$alpha)) {
     g <- append(g, list(eval_data_col(data, mapping$alpha)))
-  if (!is.null(mapping$colour))
+  }
+  if (!is.null(mapping$colour)) {
     g <- append(g, list(eval_data_col(data, mapping$colour)))
-  if (!is.null(mapping$linetype))
+  }
+  if (!is.null(mapping$linetype)) {
     g <- append(g, list(eval_data_col(data, mapping$linetype)))
-  if (!is.null(mapping$size))
+  }
+  if (!is.null(mapping$size)) {
     g <- append(g, list(eval_data_col(data, mapping$size)))
+  }
   if (length(g) == 0) {
     mapping$group <- aes(group = 1)$group
   } else {
@@ -101,14 +109,18 @@ ggally_trends <- function(
 
       # recomputing groups
       g <- list()
-      if (!is.null(mapping$alpha))
+      if (!is.null(mapping$alpha)) {
         g <- append(g, list(eval_data_col(d, mapping$alpha)))
-      if (!is.null(mapping$colour))
+      }
+      if (!is.null(mapping$colour)) {
         g <- append(g, list(eval_data_col(d, mapping$colour)))
-      if (!is.null(mapping$linetype))
+      }
+      if (!is.null(mapping$linetype)) {
         g <- append(g, list(eval_data_col(d, mapping$linetype)))
-      if (!is.null(mapping$size))
+      }
+      if (!is.null(mapping$size)) {
         g <- append(g, list(eval_data_col(d, mapping$size)))
+      }
       d$.group <- interaction(g)
       mapping$group <- aes(group = !!as.name(".group"))$group
 

@@ -867,10 +867,16 @@ for (fn_info in list(
     comSub <- if (i <= length(comSubs)) comSubs[[i]] else "blank"
     disSub <- if (i <= length(disSubs)) disSubs[[i]] else "blank"
 
-    diagConSub <- if (i <= length(conDiagSubs)) conDiagSubs[[i]] else
+    diagConSub <- if (i <= length(conDiagSubs)) {
+      conDiagSubs[[i]]
+    } else {
       "blankDiag"
-    diagDisSub <- if (i <= length(disDiagSubs)) disDiagSubs[[i]] else
+    }
+    diagDisSub <- if (i <= length(disDiagSubs)) {
+      disDiagSubs[[i]]
+    } else {
       "blankDiag"
+    }
 
     type_name <- function(x) {
       if (is.function(x)) {

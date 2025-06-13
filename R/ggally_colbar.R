@@ -60,8 +60,12 @@ ggally_colbar <- function(
   reverse_fill_levels = FALSE,
   geom_bar_args = NULL
 ) {
-  if (is.null(mapping$x)) stop("'x' aesthetic is required.")
-  if (is.null(mapping$y)) stop("'y' aesthetic is required.")
+  if (is.null(mapping$x)) {
+    stop("'x' aesthetic is required.")
+  }
+  if (is.null(mapping$y)) {
+    stop("'y' aesthetic is required.")
+  }
 
   # y should be mapped to fill and x to by
   mapping$fill <- mapping$y

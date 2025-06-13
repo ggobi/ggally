@@ -247,7 +247,9 @@ ggmatrix_location <- function(
   rows = NULL,
   cols = NULL
 ) {
-  if (!is.ggmatrix(pm)) stop("pm should be a ggmatrix.")
+  if (!is.ggmatrix(pm)) {
+    stop("pm should be a ggmatrix.")
+  }
 
   if (!is.null(location)) {
     if (

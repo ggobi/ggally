@@ -392,7 +392,11 @@ ggnet2 <- function(
     y = x + (0 %in% x) * !size.zero
     y = scales::rescale_max(y)
     y = scales::abs_area(max_size)(y)
-    if (is.null(names(x))) names(y) = x else names(y) = names(x)
+    if (is.null(names(x))) {
+      names(y) = x
+    } else {
+      names(y) = names(x)
+    }
     y
   }
 

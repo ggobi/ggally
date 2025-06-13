@@ -10,13 +10,22 @@ local({
     width = as.numeric(system("tput cols", intern = TRUE)) - 5,
     install_deps = TRUE
   ) {
-    if (system.file(package = "remotes") == "") install.packages("remotes")
-    if (system.file(package = "withr") == "") install.packages("withr")
-    if (system.file(package = "pkgload") == "") install.packages("pkgload")
-    if (system.file(package = "revdepcheck") == "")
+    if (system.file(package = "remotes") == "") {
+      install.packages("remotes")
+    }
+    if (system.file(package = "withr") == "") {
+      install.packages("withr")
+    }
+    if (system.file(package = "pkgload") == "") {
+      install.packages("pkgload")
+    }
+    if (system.file(package = "revdepcheck") == "") {
       remotes::install_github("r-lib/revdepcheck")
+    }
     if (isTRUE(install_deps)) {
-      if (system.file(package = "remotes") == "") remotes::install_cran("desc")
+      if (system.file(package = "remotes") == "") {
+        remotes::install_cran("desc")
+      }
 
       # make sure all direct deps are from CRAN (not remotes) and the latest version
       remotes::install_cran(
