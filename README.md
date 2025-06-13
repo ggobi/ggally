@@ -17,8 +17,7 @@ To install this package from GitHub or [CRAN](https://cran.r-project.org/package
 
 ```r
 # Github
-library(devtools)
-install_github("ggobi/ggally")
+pak::pak("ggobi/ggally")
 ```
 
 ```r

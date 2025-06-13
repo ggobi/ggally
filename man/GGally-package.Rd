@@ -22,8 +22,8 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Di Cook \email{dicook@monash.edu} [thesis advisor]
-  \item Joseph Larmarange \email{joseph@larmarange.net}
+  \item Di Cook \email{dicook@monash.edu} (\href{https://orcid.org/0000-0002-3813-7155}{ORCID}) [thesis advisor]
+  \item Joseph Larmarange \email{joseph@larmarange.net} (\href{https://orcid.org/0000-0001-7097-700X}{ORCID})
   \item Francois Briatte \email{f.briatte@gmail.com}
   \item Moritz Marbach \email{mmarbach@mail.uni-mannheim.de}
   \item Edwin Thoen \email{edwinthoen@gmail.com}
@@ -34,8 +34,8 @@ Authors:
 Other contributors:
 \itemize{
   \item Ott Toomet \email{otoomet@gmail.com} [contributor]
-  \item Heike Hofmann \email{hofmann@iastate.edu} [thesis advisor]
-  \item Hadley Wickham \email{h.wickham@gmail.com} [thesis advisor]
+  \item Heike Hofmann \email{hhofmann4@unl.edu} (\href{https://orcid.org/0000-0001-6216-5183}{ORCID}) [thesis advisor]
+  \item Hadley Wickham \email{h.wickham@gmail.com} (\href{https://orcid.org/0000-0003-4757-117X}{ORCID}) [thesis advisor]
 }
 
 }
