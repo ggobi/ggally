@@ -75,3 +75,4 @@ Encoding: UTF-8
 Language: en-US
 RdMacros: lifecycle
 Config/testthat/edition: 3
+Config/usethis/last-upkeep: 2025-06-13
