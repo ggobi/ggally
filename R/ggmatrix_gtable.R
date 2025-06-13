@@ -13,10 +13,11 @@
 #' pm <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes(color = sex))
 #' ggmatrix_gtable(pm)
 ggmatrix_gtable <- function(
-    pm,
-    ...,
-    progress = NULL,
-    progress_format = formals(ggmatrix_progress)$format) {
+  pm,
+  ...,
+  progress = NULL,
+  progress_format = formals(ggmatrix_progress)$format
+) {
   # pm is for "plot matrix"
 
   # init progress bar handle
@@ -54,7 +55,9 @@ ggmatrix_gtable <- function(
   get_labels <- function(labels, length_out, name) {
     if (is.expression(labels)) {
       stop(
-        "'", name, "' can only be a character vector or NULL.",
+        "'",
+        name,
+        "' can only be a character vector or NULL.",
         "  Character values can be parsed using the 'labeller' parameter."
       )
     }
@@ -71,7 +74,11 @@ ggmatrix_gtable <- function(
   pm_fake <- ggplot(fake_data, mapping = aes(!!as.name("x"), !!as.name("y"))) +
     geom_point() +
     # make the 'fake' strips for x and y titles
-    facet_grid(Var2 ~ Var1, labeller = pm$labeller %||% "label_value", switch = pm$switch) +
+    facet_grid(
+      Var2 ~ Var1,
+      labeller = pm$labeller %||% "label_value",
+      switch = pm$switch
+    ) +
     # remove both x and y titles
     labs(x = pm$xlab, y = pm$ylab)
 
@@ -131,7 +138,9 @@ ggmatrix_gtable <- function(
       if (length(legend) == 1) {
         legend <- get_pos_rev(pm, legend)
       } else if (length(legend) > 2) {
-        stop("'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'") # nolint
+        stop(
+          "'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'"
+        ) # nolint
       }
 
       legend_obj <- grab_legend(pm[legend[1], legend[2]])
@@ -141,7 +150,10 @@ ggmatrix_gtable <- function(
 
     legend_layout <- pmg_layout[grepl("guide-box", pmg_layout_name), ]
     class(legend_obj) <- setdiff(class(legend_obj), "legend_guide_box")
-    index <- legend_layout$grob_pos[match(legend_obj$layout$name, legend_layout$name)]
+    index <- legend_layout$grob_pos[match(
+      legend_obj$layout$name,
+      legend_layout$name
+    )]
     pmg$grobs[index] <- legend_obj$grobs
 
     if ("guide-box" %in% legend_layout$name) {
@@ -152,28 +164,48 @@ ggmatrix_gtable <- function(
       } else if (legend_position %in% c("top", "bottom")) {
         pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
       } else {
-        stop(paste("ggmatrix does not know how display a legend when legend.position with value: '", legend_position, "'. Valid values: c('right', 'left', 'bottom', 'top')", sep = "")) # nolint
+        stop(paste(
+          "ggmatrix does not know how display a legend when legend.position with value: '",
+          legend_position,
+          "'. Valid values: c('right', 'left', 'bottom', 'top')",
+          sep = ""
+        )) # nolint
       }
     } else {
       # From ggplot 3.5.0 onwards, a plot can have multiple legends
-      lr <- intersect(c("guide-box-left", "guide-box-right"), legend_obj$layout$name)
+      lr <- intersect(
+        c("guide-box-left", "guide-box-right"),
+        legend_obj$layout$name
+      )
       if (length(lr) > 0) {
-        width <- legend_obj$widths[legend_obj$layout$l[match(lr, legend_obj$layout$name)]]
+        width <- legend_obj$widths[legend_obj$layout$l[match(
+          lr,
+          legend_obj$layout$name
+        )]]
         pmg$widths[legend_layout$l[match(lr, legend_layout$name)]] <- width
       }
 
-      tb <- intersect(c("guide-box-bottom", "guide-box-right"), legend_obj$layout$name)
+      tb <- intersect(
+        c("guide-box-bottom", "guide-box-right"),
+        legend_obj$layout$name
+      )
       if (length(tb) > 0) {
-        height <- legend_obj$heights[legend_obj$layout$t[match(tb, legend_obj$layout$name)]]
+        height <- legend_obj$heights[legend_obj$layout$t[match(
+          tb,
+          legend_obj$layout$name
+        )]]
         pmg$heights[legend_layout$t[match(tb, legend_layout$name)]] <- height
       }
     }
   }
 
-
   # Get all 'panel' grob_pos in the pmg
   panel_layout <- pmg_layout[str_detect(pmg_layout_name, "panel"), ]
-  panel_locations_order <- order(panel_layout$t, panel_layout$l, decreasing = FALSE)
+  panel_locations_order <- order(
+    panel_layout$t,
+    panel_layout$l,
+    decreasing = FALSE
+  )
   panel_locations <- panel_layout[panel_locations_order, "grob_pos"]
 
   # init the axis sizes
@@ -199,7 +231,6 @@ ggmatrix_gtable <- function(
     }
     pmg$heights[panel_height_pos] <- y_proportions
   }
-
 
   # build and insert all plots and axis labels
   plot_number <- 0
@@ -235,10 +266,10 @@ ggmatrix_gtable <- function(
         left_axis_sizes[i] <- axis_size_left(pg)
 
         pmg <- add_left_axis(
-          pmg, pg,
-          show_strips = (
-            (i == 1) && is.null(pm$showStrips)
-          ) || isTRUE(pm$showStrips),
+          pmg,
+          pg,
+          show_strips = ((i == 1) && is.null(pm$showStrips)) ||
+            isTRUE(pm$showStrips),
           grob_pos = axis_l_grob_pos[i]
         )
       }
@@ -247,10 +278,10 @@ ggmatrix_gtable <- function(
         bottom_axis_sizes[j] <- axis_size_bottom(pg)
 
         pmg <- add_bottom_axis(
-          pmg, pg,
-          show_strips = (
-            (j == pm$ncol) && is.null(pm$showStrips)
-          ) || isTRUE(pm$showStrips),
+          pmg,
+          pg,
+          show_strips = ((j == pm$ncol) && is.null(pm$showStrips)) ||
+            isTRUE(pm$showStrips),
           grob_pos = axis_b_grob_pos[j]
         )
       }
@@ -258,7 +289,8 @@ ggmatrix_gtable <- function(
       # grab plot panel and insert
       pmg$grobs[[grob_pos_panel]] <- plot_panel(
         pg = pg,
-        row_pos = i, col_pos = j,
+        row_pos = i,
+        col_pos = j,
         matrix_show_strips = pm$showStrips,
         matrix_ncol = pm$ncol,
         plot_show_axis_labels = p$showLabels

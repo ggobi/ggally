@@ -1,4 +1,3 @@
-
 test_that("example", {
   data(tips)
 
@@ -51,12 +50,16 @@ test_that("example", {
   vdiffr::expect_doppelganger(
     "titanic",
     ggplot(d) +
-      aes(x = Class, y = as.integer(Survived == "Yes"), weight = Freq, fill = Sex) +
+      aes(
+        x = Class,
+        y = as.integer(Survived == "Yes"),
+        weight = Freq,
+        fill = Sex
+      ) +
       geom_bar(stat = "weighted_mean", position = "dodge") +
       scale_y_continuous(labels = scales::label_percent()) +
       labs(y = "Survived")
   )
-
 
   tips_f <- tips
   tips_f$day <- factor(tips$day, c("Thur", "Fri", "Sat", "Sun"))
@@ -94,17 +97,29 @@ test_that("example", {
   # Include zero on Y axis
   vdiffr::expect_doppelganger(
     "trends-incl-zero-false",
-    ggally_trends(tips_f, mapping = aes(x = day, y = total_bill), include_zero = TRUE)
+    ggally_trends(
+      tips_f,
+      mapping = aes(x = day, y = total_bill),
+      include_zero = TRUE
+    )
   )
   vdiffr::expect_doppelganger(
     "trends-incl-zero-true",
-    ggally_trends(tips_f, mapping = aes(x = day, y = smoker), include_zero = TRUE)
+    ggally_trends(
+      tips_f,
+      mapping = aes(x = day, y = smoker),
+      include_zero = TRUE
+    )
   )
 
   # Change line size
   vdiffr::expect_doppelganger(
     "trends-size-3",
-    ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex), linewidth = 3)
+    ggally_trends(
+      tips_f,
+      mapping = aes(x = day, y = smoker, colour = sex),
+      linewidth = 3
+    )
   )
 
   # Define weights with the appropriate aesthetic

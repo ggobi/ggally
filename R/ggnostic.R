@@ -5,7 +5,6 @@
 # sigma
 # how much of a problem it is to the model
 
-
 ## .hat: Diagonal of the hat matrix
 ## .sigma: Estimate of residual standard deviation when corresponding observation is dropped from model
 ## .fitted: Fitted values of model
@@ -39,11 +38,16 @@ broomify <- function(model, lmStars = TRUE) {
   broom_augment_rows <- broom::augment(model, se_fit = TRUE)
   attr(broom_augment_rows, "broom_glance") <- broom_glance_info
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
-  attr(broom_augment_rows, "var_x") <- model_beta_variables(data = broom_augment_rows)
-  attr(broom_augment_rows, "var_y") <- model_response_variables(data = broom_augment_rows)
+  attr(broom_augment_rows, "var_x") <- model_beta_variables(
+    data = broom_augment_rows
+  )
+  attr(broom_augment_rows, "var_y") <- model_response_variables(
+    data = broom_augment_rows
+  )
   attr(broom_augment_rows, "var_x_label") <- model_beta_label(
     model,
-    data = broom_augment_rows, lmStars
+    data = broom_augment_rows,
+    lmStars
   )
 
   class(broom_augment_rows) <- c(class(broom_augment_rows), "broomify")
@@ -91,7 +95,11 @@ beta_stars <- function(p_val) {
 #' @export
 #' @rdname model_terms
 #' @importFrom stats anova
-model_beta_label <- function(model, data = broom::augment(model), lmStars = TRUE) {
+model_beta_label <- function(
+  model,
+  data = broom::augment(model),
+  lmStars = TRUE
+) {
   beta_vars <- model_beta_variables(model, data = data)
 
   if ((!identical(class(model), "lm")) || (!isTRUE(lmStars))) {
@@ -121,15 +129,24 @@ broom_columns <- function() {
 brew_colors <- function(col) {
   brew_cols <- RColorBrewer::brewer.pal(n = 9, "Set1")
   names(brew_cols) <- c(
-    "red", "blue", "green", "purple", "orange",
-    "yellow", "brown", "pink", "grey"
+    "red",
+    "blue",
+    "green",
+    "purple",
+    "orange",
+    "yellow",
+    "brown",
+    "pink",
+    "grey"
   )
   brew_cols <- as.list(brew_cols)
   ret <- brew_cols[[col]]
   if (is.null(ret)) {
     stop(
       paste(
-        "color '", col, "' not found in: c(",
+        "color '",
+        col,
+        "' not found in: c(",
         paste(names(brew_cols), collapse = ", "),
         ")",
         sep = ""
@@ -138,7 +155,6 @@ brew_colors <- function(col) {
   }
   ret
 }
-
 
 
 #' \code{\link{ggnostic}} background line with geom
@@ -159,14 +175,18 @@ brew_colors <- function(col) {
 #' @return \pkg{ggplot2} plot object
 #' @rdname ggally_nostic_line
 ggally_nostic_line <- function(
-    data, mapping, ...,
-    linePosition = NULL,
-    lineColor = "red",
-    lineSize = 0.5, lineAlpha = 1,
-    lineType = 1,
-    continuous_geom = ggplot2::geom_point,
-    combo_geom = ggplot2::geom_boxplot,
-    mapColorToFill = TRUE) {
+  data,
+  mapping,
+  ...,
+  linePosition = NULL,
+  lineColor = "red",
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 1,
+  continuous_geom = ggplot2::geom_point,
+  combo_geom = ggplot2::geom_boxplot,
+  mapColorToFill = TRUE
+) {
   x_is_character <- is_character_column(data, mapping, "x")
 
   if (x_is_character && isTRUE(mapColorToFill)) {
@@ -196,7 +216,6 @@ ggally_nostic_line <- function(
 }
 
 
-
 #' \code{\link{ggnostic}} residuals
 #'
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} percentiles of a N(0, sigma) distribution.
@@ -222,19 +241,24 @@ ggally_nostic_line <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_resid(dt, ggplot2::aes(wt, .resid)))
 ggally_nostic_resid <- function(
-    data, mapping, ...,
-    linePosition = 0,
-    lineColor = brew_colors("grey"),
-    lineSize = 0.5, lineAlpha = 1,
-    lineType = 1,
-    lineConfColor = brew_colors("grey"),
-    lineConfSize = lineSize, lineConfAlpha = lineAlpha,
-    lineConfType = 2,
-    pVal = c(0.025, 0.975),
-    sigma = attr(data, "broom_glance")$sigma,
-    se = TRUE,
-    method = "auto",
-    formula = y ~ x) {
+  data,
+  mapping,
+  ...,
+  linePosition = 0,
+  lineColor = brew_colors("grey"),
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 1,
+  lineConfColor = brew_colors("grey"),
+  lineConfSize = lineSize,
+  lineConfAlpha = lineAlpha,
+  lineConfType = 2,
+  pVal = c(0.025, 0.975),
+  sigma = attr(data, "broom_glance")$sigma,
+  se = TRUE,
+  method = "auto",
+  formula = y ~ x
+) {
   if (!is.null(linePosition) && !is.null(pVal) && !is.null(sigma)) {
     scaled_sigmas <- qnorm(pVal, lower.tail = TRUE, sd = sigma)
 
@@ -246,7 +270,9 @@ ggally_nostic_resid <- function(
   }
 
   p <- ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     linePosition = linePosition,
     lineColor = lineColor,
     lineType = lineType,
@@ -268,7 +294,6 @@ ggally_nostic_resid <- function(
 }
 
 
-
 #' \code{\link{ggnostic}} standardized residuals
 #'
 #' If non-null \code{pVal} and \code{sigma} values are given, confidence interval lines will be added to the plot at the specified \code{pVal} locations of a N(0, 1) distribution.
@@ -286,10 +311,15 @@ ggally_nostic_resid <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
 ggally_nostic_std_resid <- function(
-    data, mapping, ...,
-    sigma = 1) {
+  data,
+  mapping,
+  ...,
+  sigma = 1
+) {
   ggally_nostic_resid(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     sigma = sigma
   )
 }
@@ -320,11 +350,16 @@ ggally_nostic_std_resid <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
 ggally_nostic_se_fit <- function(
-    data, mapping, ...,
-    lineColor = brew_colors("grey"),
-    linePosition = NULL) {
+  data,
+  mapping,
+  ...,
+  lineColor = brew_colors("grey"),
+  linePosition = NULL
+) {
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     lineColor = lineColor,
     linePosition = linePosition
   )
@@ -354,11 +389,16 @@ ggally_nostic_se_fit <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
 ggally_nostic_sigma <- function(
-    data, mapping, ...,
-    lineColor = brew_colors("grey"),
-    linePosition = attr(data, "broom_glance")$sigma) {
+  data,
+  mapping,
+  ...,
+  lineColor = brew_colors("grey"),
+  linePosition = attr(data, "broom_glance")$sigma
+) {
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     lineColor = lineColor,
     linePosition = linePosition
   )
@@ -388,18 +428,26 @@ ggally_nostic_sigma <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd)))
 ggally_nostic_cooksd <- function(
-    data, mapping, ...,
-    linePosition = pf(0.5, length(attr(data, "var_x")), nrow(data) - length(attr(data, "var_x"))),
-    lineColor = brew_colors("grey"),
-    lineType = 2) {
+  data,
+  mapping,
+  ...,
+  linePosition = pf(
+    0.5,
+    length(attr(data, "var_x")),
+    nrow(data) - length(attr(data, "var_x"))
+  ),
+  lineColor = brew_colors("grey"),
+  lineType = 2
+) {
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     linePosition = linePosition,
     lineColor = lineColor,
     lineType = lineType
   )
 }
-
 
 
 #' \code{\link{ggnostic}} leverage points
@@ -432,15 +480,20 @@ ggally_nostic_cooksd <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
 ggally_nostic_hat <- function(
-    data, mapping, ...,
-    linePosition = 2 * sum(eval_data_col(data, mapping$y)) / nrow(data),
-    lineColor = brew_colors("grey"),
-    lineSize = 0.5, lineAlpha = 1,
-    lineType = 2,
-    avgLinePosition = sum(eval_data_col(data, mapping$y)) / nrow(data),
-    avgLineColor = brew_colors("grey"),
-    avgLineSize = lineSize, avgLineAlpha = lineAlpha,
-    avgLineType = 1) {
+  data,
+  mapping,
+  ...,
+  linePosition = 2 * sum(eval_data_col(data, mapping$y)) / nrow(data),
+  lineColor = brew_colors("grey"),
+  lineSize = 0.5,
+  lineAlpha = 1,
+  lineType = 2,
+  avgLinePosition = sum(eval_data_col(data, mapping$y)) / nrow(data),
+  avgLineColor = brew_colors("grey"),
+  avgLineSize = lineSize,
+  avgLineAlpha = lineAlpha,
+  avgLineType = 1
+) {
   if (is.null(linePosition)) {
     lineColor <- lineSize <- lineAlpha <- lineType <- NULL
   }
@@ -449,7 +502,9 @@ ggally_nostic_hat <- function(
   }
 
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     linePosition = c(linePosition, avgLinePosition),
     lineColor = c(lineColor, avgLineColor),
     lineSize = c(lineSize, avgLineSize),
@@ -457,8 +512,6 @@ ggally_nostic_hat <- function(
     lineAlpha = c(lineAlpha, avgLineAlpha)
   )
 }
-
-
 
 
 #' Function switch
@@ -491,8 +544,9 @@ ggally_nostic_hat <- function(
 #'   .std.resid = ggally_nostic_std_resid
 #' ))
 fn_switch <- function(
-    types,
-    mapping_val = "y") {
+  types,
+  mapping_val = "y"
+) {
   function(data, mapping, ...) {
     var <- mapping_string(mapping[[mapping_val]])
 
@@ -500,7 +554,9 @@ fn_switch <- function(
 
     if (is.null(fn)) {
       stop(str_c(
-        "function could not be found for ", mapping_val, " or 'default'.  ",
+        "function could not be found for ",
+        mapping_val,
+        " or 'default'.  ",
         "Please include one of these two keys as a function."
       ))
     }
@@ -511,15 +567,16 @@ fn_switch <- function(
 
 
 check_and_set_nostic_types <- function(
-    types,
-    default,
-    .fitted,
-    .resid,
-    .std.resid, # nolint
-    .sigma,
-    .se.fit, # nolint
-    .hat,
-    .cooksd) {
+  types,
+  default,
+  .fitted,
+  .resid,
+  .std.resid, # nolint
+  .sigma,
+  .se.fit, # nolint
+  .hat,
+  .cooksd
+) {
   types_names <- names(types)
   set_type_value <- function(name, value) {
     if (is.null(types[[name]])) {
@@ -612,48 +669,49 @@ check_and_set_nostic_types <- function(
 #' )
 #' p_(pm)
 ggnostic <- function(
-    model,
-    ...,
-    columnsX = attr(data, "var_x"),
-    # columnsY = c(".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
-    columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
-    columnLabelsX = attr(data, "var_x_label"),
-    columnLabelsY = gsub("\\.", " ", gsub("^\\.", "", columnsY)),
-    xlab = "explanatory variables",
-    ylab = "diagnostics",
-    title = paste(deparse(model$call, width.cutoff = 500L), collapse = "\n"),
-    continuous = list(
-      default = ggally_points,
-      .fitted = ggally_points,
-      .se.fit = ggally_nostic_se_fit,
-      .resid = ggally_nostic_resid,
-      .hat = ggally_nostic_hat,
-      .sigma = ggally_nostic_sigma,
-      .cooksd = ggally_nostic_cooksd,
-      .std.resid = ggally_nostic_std_resid
-    ),
-    combo = list(
-      default = ggally_box_no_facet,
-      .fitted = ggally_box_no_facet,
-      .se.fit = ggally_nostic_se_fit,
-      .resid = ggally_nostic_resid,
-      .hat = ggally_nostic_hat,
-      .sigma = ggally_nostic_sigma,
-      .cooksd = ggally_nostic_cooksd,
-      .std.resid = ggally_nostic_std_resid
-    ),
-    discrete = list(
-      default = ggally_ratio,
-      .fitted = ggally_ratio,
-      .se.fit = ggally_ratio,
-      .resid = ggally_ratio,
-      .hat = ggally_ratio,
-      .sigma = ggally_ratio,
-      .cooksd = ggally_ratio,
-      .std.resid = ggally_ratio
-    ),
-    progress = NULL,
-    data = broomify(model)) {
+  model,
+  ...,
+  columnsX = attr(data, "var_x"),
+  # columnsY = c(".fitted", ".se.fit", ".resid", ".std.resid", ".sigma", ".hat", ".cooksd"),
+  columnsY = c(".resid", ".sigma", ".hat", ".cooksd"),
+  columnLabelsX = attr(data, "var_x_label"),
+  columnLabelsY = gsub("\\.", " ", gsub("^\\.", "", columnsY)),
+  xlab = "explanatory variables",
+  ylab = "diagnostics",
+  title = paste(deparse(model$call, width.cutoff = 500L), collapse = "\n"),
+  continuous = list(
+    default = ggally_points,
+    .fitted = ggally_points,
+    .se.fit = ggally_nostic_se_fit,
+    .resid = ggally_nostic_resid,
+    .hat = ggally_nostic_hat,
+    .sigma = ggally_nostic_sigma,
+    .cooksd = ggally_nostic_cooksd,
+    .std.resid = ggally_nostic_std_resid
+  ),
+  combo = list(
+    default = ggally_box_no_facet,
+    .fitted = ggally_box_no_facet,
+    .se.fit = ggally_nostic_se_fit,
+    .resid = ggally_nostic_resid,
+    .hat = ggally_nostic_hat,
+    .sigma = ggally_nostic_sigma,
+    .cooksd = ggally_nostic_cooksd,
+    .std.resid = ggally_nostic_std_resid
+  ),
+  discrete = list(
+    default = ggally_ratio,
+    .fitted = ggally_ratio,
+    .se.fit = ggally_ratio,
+    .resid = ggally_ratio,
+    .hat = ggally_ratio,
+    .sigma = ggally_ratio,
+    .cooksd = ggally_ratio,
+    .std.resid = ggally_ratio
+  ),
+  progress = NULL,
+  data = broomify(model)
+) {
   continuous_types <- check_and_set_nostic_types(
     continuous,
     default = ggally_nostic_line,
@@ -701,7 +759,8 @@ ggnostic <- function(
 
   ggduo(
     data = data,
-    columnsX = columnsX, columnsY = columnsY,
+    columnsX = columnsX,
+    columnsY = columnsY,
     columnLabelsX = columnLabelsX,
     columnLabelsY = columnLabelsY,
     types = list(
@@ -719,8 +778,6 @@ ggnostic <- function(
 }
 
 
-
-
 # https://github.com/ggobi/ggobi/blob/master/data/pigs.xml
 #' Multiple time series
 #'
@@ -736,9 +793,10 @@ ggnostic <- function(
 #'
 #' p_(ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz")))
 ggts <- function(
-    ...,
-    columnLabelsX = NULL,
-    xlab = "time") {
+  ...,
+  columnLabelsX = NULL,
+  xlab = "time"
+) {
   pm <- ggduo(
     ...,
     # remove the "time" strip
@@ -748,9 +806,6 @@ ggts <- function(
 
   pm
 }
-
-
-
 
 
 # if (!is.null(group)) {
@@ -799,13 +854,20 @@ ggts <- function(
 #   }
 # )
 
-
 match_nostic_columns <- function(columns, choices, name) {
   column_matches <- pmatch(columns, choices, nomatch = NA, duplicates.ok = TRUE)
   if (any(is.na(column_matches))) {
     stop(paste(
-      "Could not match '", name, "': c(",
-      paste("'", columns[is.na(column_matches)], "'", collapse = ", ", sep = ""),
+      "Could not match '",
+      name,
+      "': c(",
+      paste(
+        "'",
+        columns[is.na(column_matches)],
+        "'",
+        collapse = ", ",
+        sep = ""
+      ),
       ") to choices: c(",
       paste("'", choices, "'", collapse = ", ", sep = ""),
       ")",

@@ -1,12 +1,19 @@
-
 data(tips)
 
 test_that("stops", {
+  expect_error(
+    ggmatrix(plots = matrix(), nrow = 2, ncol = 3),
+    "'plots' must be a list()"
+  )
 
-  expect_error(ggmatrix(plots = matrix(), nrow = 2, ncol = 3), "'plots' must be a list()")
-
-  expect_error(ggmatrix(plots = list(), nrow = "2", ncol = 3), "'nrow' must be a numeric value")
-  expect_error(ggmatrix(plots = list(), nrow = 2, ncol = "3"), "'ncol' must be a numeric value")
+  expect_error(
+    ggmatrix(plots = list(), nrow = "2", ncol = 3),
+    "'nrow' must be a numeric value"
+  )
+  expect_error(
+    ggmatrix(plots = list(), nrow = 2, ncol = "3"),
+    "'ncol' must be a numeric value"
+  )
 
   expect_error(
     ggmatrix(plots = list(), nrow = c(2, 3), ncol = 3),
@@ -16,7 +23,6 @@ test_that("stops", {
     ggmatrix(plots = list(), nrow = 2, ncol = c(2, 3)),
     "'ncol' must be a single numeric value"
   )
-
 })
 
 
@@ -27,7 +33,10 @@ test_that("expression labels", {
   p <- ggpairs(tips, 1:2, columnLabels = exprs, labeller = "label_parsed")
   vdiffr::expect_doppelganger("expression-labels", p)
 
-  expect_error(print(ggpairs(tips, 1:2, columnLabels = expression(alpha, beta))), "xAxisLabels")
+  expect_error(
+    print(ggpairs(tips, 1:2, columnLabels = expression(alpha, beta))),
+    "xAxisLabels"
+  )
 })
 
 
@@ -40,7 +49,8 @@ test_that("byrow", {
   }
   a <- ggmatrix(
     plotList,
-    2, 3,
+    2,
+    3,
     c("A", "B", "C"),
     c("D", "E"),
     byrow = TRUE
@@ -56,7 +66,8 @@ test_that("byrow", {
 
   a <- ggmatrix(
     plotList,
-    2, 3,
+    2,
+    3,
     c("A", "B", "C"),
     c("D", "E"),
     byrow = FALSE
@@ -69,7 +80,6 @@ test_that("byrow", {
     }
   }
   a
-
 })
 
 test_that("missing plot", {
@@ -81,7 +91,8 @@ test_that("missing plot", {
   }
   a <- ggmatrix(
     plotList,
-    2, 3,
+    2,
+    3,
     c("A", "B", "C"),
     c("D", "E"),
     byrow = TRUE
@@ -92,8 +103,6 @@ test_that("missing plot", {
   expect_equal(a[1, 1]$ggally_check_val, 1)
   expect_equal(a[1, 3]$ggally_check_val, 3)
   expect_equal(a[2, 2]$ggally_check_val, 5)
-
-
 })
 
 
@@ -123,15 +132,17 @@ test_that("blank", {
 
   expect_equal(length(pm$plots), 4)
 
-  expect_error({
-    pm[2, 2] <- "not blank"
-  }, "character values \\(besides 'blank'\\)") # nolint
+  expect_error(
+    {
+      pm[2, 2] <- "not blank"
+    },
+    "character values \\(besides 'blank'\\)"
+  ) # nolint
 })
 
 test_that("proportions", {
   pm <- ggpairs(iris, 1:2, mapping = ggplot2::aes(color = Species))
   pm[2, 2] <- pm[2, 2] + ggplot2::coord_flip()
-
 
   pm2 <- ggmatrix(
     data = iris,
@@ -172,18 +183,25 @@ test_that("ggmatrix_gtable progress", {
 # }
 #
 
-
 test_that("ggmatrix proportions", {
-
-  expect_error({
-    ggmatrix_proportions("not auto", tips, 1:ncol(tips))
-  }, "need to be non-NA")
-  expect_error({
-    ggmatrix_proportions(NA, tips, 1:ncol(tips))
-  }, "need to be non-NA")
-  expect_error({
-    ggmatrix_proportions(c(1, NA, 1, 1, 1, 1, 1), tips, 1:ncol(tips))
-  }, "need to be non-NA")
+  expect_error(
+    {
+      ggmatrix_proportions("not auto", tips, 1:ncol(tips))
+    },
+    "need to be non-NA"
+  )
+  expect_error(
+    {
+      ggmatrix_proportions(NA, tips, 1:ncol(tips))
+    },
+    "need to be non-NA"
+  )
+  expect_error(
+    {
+      ggmatrix_proportions(c(1, NA, 1, 1, 1, 1, 1), tips, 1:ncol(tips))
+    },
+    "need to be non-NA"
+  )
 
   expect_equal(
     ggmatrix_proportions("auto", tips, 1:ncol(tips)),

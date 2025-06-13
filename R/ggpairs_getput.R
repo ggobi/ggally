@@ -35,12 +35,20 @@
 putPlot <- function(pm, value, i, j) {
   pos <- get_pos(pm, i, j)
   if (is.null(value)) {
-    pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
+    pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap(
+      "blank",
+      funcArgName = "ggally_blank"
+    ))
   } else if (mode(value) == "character") {
     if (value == "blank") {
-      pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
+      pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap(
+        "blank",
+        funcArgName = "ggally_blank"
+      ))
     } else {
-      stop("character values (besides 'blank') are not allowed to be stored as plot values.")
+      stop(
+        "character values (besides 'blank') are not allowed to be stored as plot values."
+      )
     }
   } else {
     pm$plots[[pos]] <- value
@@ -92,7 +100,14 @@ getPlot <- function(pm, i, j) {
     } else if (inherits(plotObj, "legend_guide_box")) {
       p <- plotObj
     } else {
-      firstNote <- str_c("Position: i = ", i, ", j = ", j, "\nstr(plotObj):\n", sep = "")
+      firstNote <- str_c(
+        "Position: i = ",
+        i,
+        ", j = ",
+        j,
+        "\nstr(plotObj):\n",
+        sep = ""
+      )
       strObj <- capture.output({
         str(plotObj)
       })

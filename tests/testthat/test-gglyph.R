@@ -1,4 +1,3 @@
-
 data(nasa)
 nasaLate <- nasa[
   nasa$date >= as.POSIXct("1998-01-01") &
@@ -11,11 +10,15 @@ nasaLate <- nasa[
 do_glyph <- function(...) {
   glyphs(
     nasaLate, # no lint
-    "long", "day", "lat", "surftemp",
-    height = 2.37, width = 2.38, ...
+    "long",
+    "day",
+    "lat",
+    "surftemp",
+    height = 2.37,
+    width = 2.38,
+    ...
   )
 }
-
 
 
 do_gg <- function(dt) {
@@ -38,13 +41,25 @@ test_that("examples", {
   p <- do_gg(dt)
 
   expect_equal(length(p$layers), 3)
-  expect_equal(as.character(get("aes_params", envir = p$layers[[1]])$colour), "red")
-  expect_equal(as.character(get("aes_params", envir = p$layers[[2]])$colour), "blue")
+  expect_equal(
+    as.character(get("aes_params", envir = p$layers[[1]])$colour),
+    "red"
+  )
+  expect_equal(
+    as.character(get("aes_params", envir = p$layers[[2]])$colour),
+    "blue"
+  )
 })
 
 test_that("message", {
-  expect_message(glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 1), "Using width 2.38")
-  expect_message(glyphs(nasaLate, "long", "day", "lat", "surftemp", width = 1), "Using height 2.37")
+  expect_message(
+    glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 1),
+    "Using width 2.38"
+  )
+  expect_message(
+    glyphs(nasaLate, "long", "day", "lat", "surftemp", width = 1),
+    "Using height 2.37"
+  )
 })
 
 
@@ -68,7 +83,6 @@ test_that("scales", {
     dtm <- merge(dt, nasaLate)
     expect_true(all(dtm$surftempScaled != dtm$surftemp))
   }
-
 
   for (scale_fn in c(rescale01, rescale11)) {
     scale_fn2 <- function(x) {
@@ -109,9 +123,15 @@ test_that("fill", {
   }
 
   p <- do_gg_fill(fill = "green")
-  expect_equal(mapping_string(get("aes_params", envir = p$layers[[2]])$fill), "\"green\"")
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[2]])$fill),
+    "\"green\""
+  )
   p <- do_gg_fill(var_fill = "gid")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[2]])$fill), "fill")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[2]])$fill),
+    "fill"
+  )
 })
 
 test_that("print", {

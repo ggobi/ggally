@@ -50,27 +50,28 @@
 #' )
 #' p_(pm)
 ggmatrix <- function(
-    plots,
-    nrow,
-    ncol,
-    xAxisLabels = NULL,
-    yAxisLabels = NULL,
-    title = NULL,
-    xlab = NULL,
-    ylab = NULL,
-    byrow = TRUE,
-    showStrips = NULL,
-    showAxisPlotLabels = TRUE,
-    showXAxisPlotLabels = TRUE,
-    showYAxisPlotLabels = TRUE,
-    labeller = NULL,
-    switch = NULL,
-    xProportions = NULL,
-    yProportions = NULL,
-    progress = NULL,
-    data = NULL,
-    gg = NULL,
-    legend = NULL) {
+  plots,
+  nrow,
+  ncol,
+  xAxisLabels = NULL,
+  yAxisLabels = NULL,
+  title = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  byrow = TRUE,
+  showStrips = NULL,
+  showAxisPlotLabels = TRUE,
+  showXAxisPlotLabels = TRUE,
+  showYAxisPlotLabels = TRUE,
+  labeller = NULL,
+  switch = NULL,
+  xProportions = NULL,
+  yProportions = NULL,
+  progress = NULL,
+  data = NULL,
+  gg = NULL,
+  legend = NULL
+) {
   if (!is.list(plots)) {
     stop("'plots' must be a list()")
   }

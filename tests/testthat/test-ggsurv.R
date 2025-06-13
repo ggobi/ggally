@@ -49,9 +49,11 @@ test_that("stops", {
   # must have censor to plot
   expect_error(ggsurv(lungNoCensor, plot.cens = TRUE))
 
-
   noCensor <- subset(kidney, status == 1)
-  kidneyNoCensor <- survival::survfit(Surv(time, status) ~ disease, data = noCensor)
+  kidneyNoCensor <- survival::survfit(
+    Surv(time, status) ~ disease,
+    data = noCensor
+  )
 
   # check that the surv.col and lty.est are of the correct length.  should be 4
   expect_error(ggsurv(kidneyNoCensor, surv.col = c("black", "red", "blue")))
@@ -88,7 +90,6 @@ test_that("back.white", {
 
 test_that("surv.col", {
   ggsurv(sf.lung, surv.col = "red")
-
 
   ggsurv(sf.kid, surv.col = "red")
   ggsurv(sf.kid, surv.col = c("black", "red", "blue", "green"))

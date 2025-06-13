@@ -40,13 +40,22 @@
 #'   fill = "std.resid"
 #' ))
 ggtable <- function(
-    data,
-    columnsX = 1:ncol(data),
-    columnsY = 1:ncol(data),
-    cells = c("observed", "prop", "row.prop", "col.prop", "expected", "resid", "std.resid"),
-    fill = c("none", "std.resid", "resid"),
-    mapping = NULL,
-    ...) {
+  data,
+  columnsX = 1:ncol(data),
+  columnsY = 1:ncol(data),
+  cells = c(
+    "observed",
+    "prop",
+    "row.prop",
+    "col.prop",
+    "expected",
+    "resid",
+    "std.resid"
+  ),
+  fill = c("none", "std.resid", "resid"),
+  mapping = NULL,
+  ...
+) {
   fill <- match.arg(fill)
   cells <- match.arg(cells)
 

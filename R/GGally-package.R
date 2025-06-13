@@ -9,7 +9,6 @@
 ## usethis namespace: end
 NULL
 
-
 # \lifecycle{experimental}
 # \lifecycle{maturing}
 # \lifecycle{stable}

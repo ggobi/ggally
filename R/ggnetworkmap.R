@@ -143,23 +143,24 @@
 #' }
 #'
 ggnetworkmap <- function(
-    gg,
-    net,
-    size = 3,
-    alpha = 0.75,
-    weight,
-    node.group,
-    node.color = NULL,
-    node.alpha = NULL,
-    ring.group,
-    segment.alpha = NULL,
-    segment.color = "grey",
-    great.circles = FALSE,
-    segment.size = 0.25,
-    arrow.size = 0,
-    label.nodes = FALSE,
-    label.size = size / 2,
-    ...) {
+  gg,
+  net,
+  size = 3,
+  alpha = 0.75,
+  weight,
+  node.group,
+  node.color = NULL,
+  node.alpha = NULL,
+  ring.group,
+  segment.alpha = NULL,
+  segment.color = "grey",
+  great.circles = FALSE,
+  segment.size = 0.25,
+  arrow.size = 0,
+  label.nodes = FALSE,
+  label.size = size / 2,
+  ...
+) {
   rlang::check_installed(c("network", "sna"))
   # sna          # node placement if there is no ggplot object in function call
 
@@ -225,7 +226,10 @@ ggnetworkmap <- function(
     gg <- ggplot() +
       coord_map()
 
-    plotcord <- sna::gplot.layout.fruchtermanreingold(net, list(m, layout.par = NULL))
+    plotcord <- sna::gplot.layout.fruchtermanreingold(
+      net,
+      list(m, layout.par = NULL)
+    )
     plotcord <- data.frame(plotcord)
     colnames(plotcord) <- c("lon", "lat")
   } else {
@@ -285,7 +289,7 @@ ggnetworkmap <- function(
   edges <- data.frame(
     lat1 = plotcord[edges[, 1], "lat"],
     lon1 = plotcord[edges[, 1], "lon"],
-    lat2 =  plotcord[edges[, 2], "lat"],
+    lat2 = plotcord[edges[, 2], "lat"],
     lon2 = plotcord[edges[, 2], "lon"]
   )
   edges <- na.omit(edges)
@@ -303,7 +307,7 @@ ggnetworkmap <- function(
 
   if (!missing(arrow.size) && arrow.size > 0) {
     edge_args$arrow <- substitute(arrow(
-      type   = "closed",
+      type = "closed",
       length = unit(arrow.size, "cm")
     ))
   }
@@ -345,7 +349,11 @@ ggnetworkmap <- function(
           ret2$group <- i
           return(rbind(ret, ret2))
         } else {
-          ret <- data.frame(lon = numeric(0), lat = numeric(0), group = numeric(0))
+          ret <- data.frame(
+            lon = numeric(0),
+            lat = numeric(0),
+            group = numeric(0)
+          )
           for (j in 1:length(inter)) {
             i <<- i + 1
             ret1 <- data.frame(inter[[j]][[1]])
@@ -390,7 +398,6 @@ ggnetworkmap <- function(
   #
   #
 
-
   # custom weights: vertex attribute
   # null weighting
   sizer <- NULL
@@ -402,7 +409,10 @@ ggnetworkmap <- function(
 
     # proportional scaling
     if (is.factor(plotcord$.weight)) {
-      sizer <- scale_size_discrete(name = substitute(weight), range = c(size / nlevels(plotcord$weight), size))
+      sizer <- scale_size_discrete(
+        name = substitute(weight),
+        range = c(size / nlevels(plotcord$weight), size)
+      )
     } else {
       sizer <- scale_size_area(name = substitute(weight), max_size = size)
     }
@@ -425,11 +435,13 @@ ggnetworkmap <- function(
   # -- node labels -------------------------------------------------------------
 
   if (isTRUE(labels)) {
-    gg <- gg + geom_text(
-      data = plotcord,
-      aes(x = .data$lon, y = .data$lat, label = .data$.label),
-      size = label.size, ...
-    )
+    gg <- gg +
+      geom_text(
+        data = plotcord,
+        aes(x = .data$lon, y = .data$lat, label = .data$.label),
+        size = label.size,
+        ...
+      )
   }
 
   gg <- gg +

@@ -46,19 +46,24 @@
 #'   include_zero = TRUE
 #' ))
 ggally_trends <- function(
-    data,
-    mapping,
-    ...,
-    include_zero = FALSE) {
+  data,
+  mapping,
+  ...,
+  include_zero = FALSE
+) {
   if (is.null(mapping$x)) stop("'x' aesthetic is required.")
   if (is.null(mapping$y)) stop("'y' aesthetic is required.")
 
   # computing group
   g <- list()
-  if (!is.null(mapping$alpha)) g <- append(g, list(eval_data_col(data, mapping$alpha)))
-  if (!is.null(mapping$colour)) g <- append(g, list(eval_data_col(data, mapping$colour)))
-  if (!is.null(mapping$linetype)) g <- append(g, list(eval_data_col(data, mapping$linetype)))
-  if (!is.null(mapping$size)) g <- append(g, list(eval_data_col(data, mapping$size)))
+  if (!is.null(mapping$alpha))
+    g <- append(g, list(eval_data_col(data, mapping$alpha)))
+  if (!is.null(mapping$colour))
+    g <- append(g, list(eval_data_col(data, mapping$colour)))
+  if (!is.null(mapping$linetype))
+    g <- append(g, list(eval_data_col(data, mapping$linetype)))
+  if (!is.null(mapping$size))
+    g <- append(g, list(eval_data_col(data, mapping$size)))
   if (length(g) == 0) {
     mapping$group <- aes(group = 1)$group
   } else {
@@ -70,14 +75,16 @@ ggally_trends <- function(
   y <- eval_data_col(data, mapping$y)
   if (is.factor(y) || is.character(y) || is.logical(y)) {
     y <- as.factor(y)
-    if (length(levels(y)) == 2) { # Binary variable
+    if (length(levels(y)) == 2) {
+      # Binary variable
       data[[".ggally_y"]] <- as.integer(y == levels(y)[2])
       mapping$y <- aes(y = !!as.name(".ggally_y"))$y
       p <- ggplot(data, mapping) +
         stat_weighted_mean(geom = "line", ...) +
         scale_y_continuous(labels = scales::label_percent()) +
         ylab("")
-    } else { # 3 or more categories
+    } else {
+      # 3 or more categories
       yname <- mapping_string(mapping$y)
 
       # we need to duplicate date for each level of y
@@ -94,10 +101,14 @@ ggally_trends <- function(
 
       # recomputing groups
       g <- list()
-      if (!is.null(mapping$alpha)) g <- append(g, list(eval_data_col(d, mapping$alpha)))
-      if (!is.null(mapping$colour)) g <- append(g, list(eval_data_col(d, mapping$colour)))
-      if (!is.null(mapping$linetype)) g <- append(g, list(eval_data_col(d, mapping$linetype)))
-      if (!is.null(mapping$size)) g <- append(g, list(eval_data_col(d, mapping$size)))
+      if (!is.null(mapping$alpha))
+        g <- append(g, list(eval_data_col(d, mapping$alpha)))
+      if (!is.null(mapping$colour))
+        g <- append(g, list(eval_data_col(d, mapping$colour)))
+      if (!is.null(mapping$linetype))
+        g <- append(g, list(eval_data_col(d, mapping$linetype)))
+      if (!is.null(mapping$size))
+        g <- append(g, list(eval_data_col(d, mapping$size)))
       d$.group <- interaction(g)
       mapping$group <- aes(group = !!as.name(".group"))$group
 
@@ -107,7 +118,8 @@ ggally_trends <- function(
         ylab("") +
         labs(linetype = yname)
     }
-  } else { # Numeric variable
+  } else {
+    # Numeric variable
     p <- ggplot(data, mapping) +
       stat_weighted_mean(geom = "line", ...)
   }

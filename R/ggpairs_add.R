@@ -65,7 +65,9 @@
   } else {
     stop(
       "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
-      " Received object with class: '", paste(class(e2), collapse = ", "), "'"
+      " Received object with class: '",
+      paste(class(e2), collapse = ", "),
+      "'"
     )
   }
 }
@@ -144,11 +146,12 @@ add_theme_to_ggmatrix <- function(e1, e2) {
 #'   location = "upper"
 #' ))
 add_to_ggmatrix <- function(
-    e1,
-    e2,
-    location = NULL,
-    rows = NULL,
-    cols = NULL) {
+  e1,
+  e2,
+  location = NULL,
+  rows = NULL,
+  cols = NULL
+) {
   if (!is.ggmatrix(e1)) {
     stop("e1 should be a ggmatrix.")
   }
@@ -239,14 +242,17 @@ add_to_ggmatrix <- function(
 #' # Use the output of a prior ggmatrix_location
 #' ggmatrix_location(pm, location = locs)
 ggmatrix_location <- function(
-    pm,
-    location = NULL,
-    rows = NULL,
-    cols = NULL) {
+  pm,
+  location = NULL,
+  rows = NULL,
+  cols = NULL
+) {
   if (!is.ggmatrix(pm)) stop("pm should be a ggmatrix.")
 
   if (!is.null(location)) {
-    if (is.logical(location) && !(is.matrix(location) || is.data.frame(location))) {
+    if (
+      is.logical(location) && !(is.matrix(location) || is.data.frame(location))
+    ) {
       if (length(location) != 1) {
         stop("`location` logical value must be of length 1")
       }
@@ -259,11 +265,16 @@ ggmatrix_location <- function(
         }
     }
     if (is.character(location)) {
-      location <- match.arg(location, c("all", "upper", "lower", "diag", "none"), several.ok = FALSE)
+      location <- match.arg(
+        location,
+        c("all", "upper", "lower", "diag", "none"),
+        several.ok = FALSE
+      )
       locs <- expand.grid(row = seq_len(pm$nrow), col = seq_len(pm$ncol))
 
       location <-
-        switch(location,
+        switch(
+          location,
           "all" = locs,
           "none" = subset(locs, FALSE),
           "diag" = subset(locs, row == col),
@@ -317,7 +328,6 @@ ggmatrix_location <- function(
     location <- expand.grid(row = rows, col = cols)
   }
 
-
   # location will be a 2d data.frame with colnames of `'row'` and `'col'`
   locs <- as.data.frame(location)
   if (ncol(locs) < 2) {
@@ -331,17 +341,25 @@ ggmatrix_location <- function(
   row <- locs$row
   if (any(row > pm$nrow) || any(row <= 0) || any(is.na(row))) {
     stop(
-      "`row` must be non-NA / positive numeric values `<= pm$nrow`", "\n",
-      "pm$nrow: ", dput_val(pm$nrow), "\n",
-      "row: ", dput_val(row)
+      "`row` must be non-NA / positive numeric values `<= pm$nrow`",
+      "\n",
+      "pm$nrow: ",
+      dput_val(pm$nrow),
+      "\n",
+      "row: ",
+      dput_val(row)
     )
   }
   col <- locs$col
   if (any(col > pm$ncol) || any(col <= 0) || any(is.na(col))) {
     stop(
-      "`col` must be non-NA / positive numeric values `<= pm$ncol`", "\n",
-      "pm$ncol: ", dput_val(pm$ncol), "\n",
-      "col: ", dput_val(col)
+      "`col` must be non-NA / positive numeric values `<= pm$ncol`",
+      "\n",
+      "pm$ncol: ",
+      dput_val(pm$ncol),
+      "\n",
+      "col: ",
+      dput_val(col)
     )
   }
 

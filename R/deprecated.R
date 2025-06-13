@@ -105,13 +105,17 @@ v1_ggmatrix_theme <- function() {
 #'   size = 5
 #' ))
 ggally_cor_v1_5 <- function(
-    data,
-    mapping,
-    alignPercent = 0.6,
-    method = "pearson", use = "complete.obs",
-    corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
-    displayGrid = TRUE,
-    ...) {
+  data,
+  mapping,
+  alignPercent = 0.6,
+  method = "pearson",
+  use = "complete.obs",
+  corAlignPercent = NULL,
+  corMethod = NULL,
+  corUse = NULL,
+  displayGrid = TRUE,
+  ...
+) {
   lifecycle::deprecate_soft(
     when = "2.3.0",
     what = "ggally_cor_v1_5()",
@@ -264,19 +268,20 @@ ggally_cor_v1_5 <- function(
     ymax <- max(yVal, na.rm = TRUE)
     yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
 
-
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Corr: ", signif(cor_fn(xVal, yVal), 3)),
+      label = str_c("Corr: ", signif(cor_fn(xVal, yVal), 3)),
       mapping = mapping,
-      xP      = 0.5,
-      yP      = 0.9,
-      xrange  = xrange,
-      yrange  = yrange,
+      xP = 0.5,
+      yP = 0.9,
+      xrange = xrange,
+      yrange = yrange,
       ...
     )
 
-    xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    xPos <- rep(alignPercent, nrow(cord)) *
+      diff(xrange) +
+      min(xrange, na.rm = TRUE)
     yPos <- seq(
       from = 0.9,
       to = 0.2,
@@ -292,17 +297,18 @@ ggally_cor_v1_5 <- function(
     # print(cordf)
     # print(str(cordf))
 
-    p <- p + geom_text(
-      data = cordf,
-      aes(
-        x = .data$xPos,
-        y = .data$yPos,
-        label = .data$labelp,
-        color = .data$labelp
-      ),
-      hjust = 1,
-      ...
-    )
+    p <- p +
+      geom_text(
+        data = cordf,
+        aes(
+          x = .data$xPos,
+          y = .data$yPos,
+          label = .data$labelp,
+          color = .data$labelp
+        ),
+        hjust = 1,
+        ...
+      )
   } else {
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
@@ -319,7 +325,8 @@ ggally_cor_v1_5 <- function(
           cor_fn(xVal, yVal),
           3
         ),
-        sep = "", collapse = ""
+        sep = "",
+        collapse = ""
       ),
       mapping,
       xP = 0.5,

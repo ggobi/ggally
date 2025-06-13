@@ -1,4 +1,3 @@
-
 test_that("crosstalk works with ggduo and ggpairs", {
   skip_if_not_installed("crosstalk")
 

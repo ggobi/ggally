@@ -1,21 +1,35 @@
-
 suppressMessages(require(broom))
 
 test_that("example", {
   skip_if_not_installed("Hmisc")
-  reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
+  reg <- lm(
+    Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width,
+    data = iris
+  )
   vdiffr::expect_doppelganger("lm", ggcoef(reg))
 
   data(tips)
-  vdiffr::expect_doppelganger("tips", ggtable(tips, "smoker", c("day", "time", "sex")))
+  vdiffr::expect_doppelganger(
+    "tips",
+    ggtable(tips, "smoker", c("day", "time", "sex"))
+  )
 
   # displaying row proportions
-  vdiffr::expect_doppelganger("tips-cells", ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop"))
+  vdiffr::expect_doppelganger(
+    "tips-cells",
+    ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop")
+  )
 
   # filling cells with residuals
   vdiffr::expect_doppelganger(
     "tips-fill-std_resid",
-    ggtable(tips, "smoker", c("day", "time", "sex"), fill = "std.resid", legend = 1)
+    ggtable(
+      tips,
+      "smoker",
+      c("day", "time", "sex"),
+      fill = "std.resid",
+      legend = 1
+    )
   )
   vdiffr::expect_doppelganger(
     "tips-fill-resid",

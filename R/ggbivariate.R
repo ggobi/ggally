@@ -56,12 +56,14 @@
 #' # outcome can be numerical
 #' p_(ggbivariate(tips, outcome = "tip", title = "tip"))
 ggbivariate <- function(
-    data,
-    outcome,
-    explanatory = NULL,
-    mapping = NULL, types = NULL,
-    ...,
-    rowbar_args = NULL) {
+  data,
+  outcome,
+  explanatory = NULL,
+  mapping = NULL,
+  types = NULL,
+  ...,
+  rowbar_args = NULL
+) {
   if (length(outcome) != 1) {
     stop("You should provide only one `outcome`.")
   }
@@ -69,7 +71,9 @@ ggbivariate <- function(
     outcome <- names(data)[outcome]
   }
   if (is.null(explanatory)) {
-    explanatory <- names(data)[!names(data) %in% c(outcome, mapping_string(mapping$weight))]
+    explanatory <- names(data)[
+      !names(data) %in% c(outcome, mapping_string(mapping$weight))
+    ]
   }
 
   if (!is.numeric(data[[outcome]])) {

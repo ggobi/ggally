@@ -1,4 +1,3 @@
-
 test_that("simple test with iris data", {
   p <- ggfacet(iris, columnsX = 1:2, columnsY = 3:4)
   expect_s3_class(p, "ggplot")
@@ -32,13 +31,18 @@ test_that("generally works", {
     "factor",
     ggfacet(
       NIR_sub,
-      columnsY = 1:2, columnsX = 3:5,
+      columnsY = 1:2,
+      columnsX = 3:5,
       fn = ggally_smooth_loess
     )
   )
 
   vdiffr::expect_doppelganger(
     "pigs",
-    ggts(pigs, "time", c("gilts", "profit", "s_per_herdsz", "production", "herdsz"))
+    ggts(
+      pigs,
+      "time",
+      c("gilts", "profit", "s_per_herdsz", "production", "herdsz")
+    )
   )
 })
