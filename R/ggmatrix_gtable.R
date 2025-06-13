@@ -140,7 +140,7 @@ ggmatrix_gtable <- function(
       } else if (length(legend) > 2) {
         stop(
           "'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'"
-        ) # nolint
+        )
       }
 
       legend_obj <- grab_legend(pm[legend[1], legend[2]])
@@ -169,7 +169,7 @@ ggmatrix_gtable <- function(
           legend_position,
           "'. Valid values: c('right', 'left', 'bottom', 'top')",
           sep = ""
-        )) # nolint
+        ))
       }
     } else {
       # From ggplot 3.5.0 onwards, a plot can have multiple legends

@@ -348,7 +348,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
         stat_density(
           aes(
             x = .data$x,
-            y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x) # nolint
+            y = after_stat(.data$scaled) * diff(range(.data$x)) + min(.data$x)
           ),
           data = j,
           position = "identity",

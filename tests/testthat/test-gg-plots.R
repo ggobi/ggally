@@ -159,7 +159,7 @@ test_that("diagAxis", {
       ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length))
     },
     "mapping\\$x is null."
-  ) # nolint
+  )
 })
 
 test_that("dates", {

@@ -214,7 +214,7 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
           " than the threshold (",
           threshold,
           ") allowed.\n",
-          "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times" # nolint
+          "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times"
         )
       }
     }

@@ -35,7 +35,7 @@ test_that("examples", {
   # ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white")
 
   # add vertex attribute
-  x <- network.vertex.names(n) # nolint
+  x <- network.vertex.names(n)
   x <- ifelse(x %in% c("a", "e", "i"), "vowel", "consonant")
   n %v% "phono" <- x
 

@@ -137,7 +137,7 @@ test_that("blank", {
       pm[2, 2] <- "not blank"
     },
     "character values \\(besides 'blank'\\)"
-  ) # nolint
+  )
 })
 
 test_that("proportions", {

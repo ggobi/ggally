@@ -118,7 +118,7 @@ test_that("multiple colors", {
       ggsurv(sf.kid, plot.cens = TRUE, cens.col = c("red", "blue"))
     },
     "Color scales for censored points"
-  ) # nolint
+  )
 
   p <- ggsurv(sf.kid, plot.cens = TRUE, cens.col = "blue")
   vdiffr::expect_doppelganger("plot-cens-true-blue", p)
@@ -137,7 +137,7 @@ test_that("multiple colors", {
       )
     },
     "The length of the censored shapes"
-  ) # nolint
+  )
   p <-
     ggsurv(
       sf.kid,

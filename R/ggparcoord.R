@@ -273,7 +273,6 @@ ggparcoord <- function(
       )
     }
   } else if ((alphaLines < 0) || (alphaLines > 1)) {
-    # nolint
     stop(
       "invalid value for 'alphaLines'; must be a scalar value between 0 and 1"
     )
@@ -357,7 +356,7 @@ ggparcoord <- function(
     switch(
       type,
       rank = rank(x, ...),
-      var = , # nolint
+      var = ,
       sd = (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE),
       robust = (x - median(x, na.rm = TRUE)) / mad(x, na.rm = TRUE),
       I = x,

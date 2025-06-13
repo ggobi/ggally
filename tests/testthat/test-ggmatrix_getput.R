@@ -42,7 +42,7 @@ test_that("get", {
       a[2, 1]
     },
     "unknown plot object type"
-  ) # nolint
+  )
 })
 
 test_that("put", {

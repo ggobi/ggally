@@ -571,9 +571,9 @@ check_and_set_nostic_types <- function(
   default,
   .fitted,
   .resid,
-  .std.resid, # nolint
+  .std.resid,
   .sigma,
-  .se.fit, # nolint
+  .se.fit,
   .hat,
   .cooksd
 ) {
@@ -595,9 +595,9 @@ check_and_set_nostic_types <- function(
   set_type_value("default", default)
   set_type_value(".fitted", .fitted)
   set_type_value(".resid", .resid)
-  set_type_value(".std.resid", .std.resid) # nolint
+  set_type_value(".std.resid", .std.resid)
   set_type_value(".sigma", .sigma)
-  set_type_value(".se.fit", .se.fit) # nolint
+  set_type_value(".se.fit", .se.fit)
   set_type_value(".hat", .hat)
   set_type_value(".cooksd", .cooksd)
 

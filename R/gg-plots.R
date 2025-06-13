@@ -866,7 +866,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
 
   xVal <- mapping_string(mapping$x)
   yVal <- mapping_string(mapping$y)
-  mappingY <- mapping$y # nolint
+  mappingY <- mapping$y
   mapping$y <- NULL # will be faceted
 
   p <- ggplot(data = data, mapping) +
@@ -875,7 +875,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
   if (identical(den_strip, TRUE)) {
     p <- p +
       geom_histogram(
-        mapping = aes(fill = after_stat(!!as.name("density"))), # nolint
+        mapping = aes(fill = after_stat(!!as.name("density"))),
         position = "fill",
         ...
       ) +
@@ -889,7 +889,7 @@ ggally_facetdensitystrip <- function(data, mapping, ..., den_strip = FALSE) {
         aes(
           y = after_stat(!!as.name("scaled")) *
             diff(range(.data$x, na.rm = TRUE)) +
-            min(.data$x, na.rm = TRUE) # nolint
+            min(.data$x, na.rm = TRUE)
         ),
         position = "identity",
         geom = "line",
@@ -946,7 +946,7 @@ ggally_densityDiag <- function(data, mapping, ..., rescale = FALSE) {
         aes(
           y = after_stat(!!as.name("scaled")) *
             diff(range(.data$x, na.rm = TRUE)) +
-            min(.data$x, na.rm = TRUE) # nolint
+            min(.data$x, na.rm = TRUE)
         ),
         position = "identity",
         geom = "line",
@@ -999,7 +999,7 @@ ggally_barDiag <- function(data, mapping, ..., rescale = FALSE) {
             y = after_stat(!!as.name("density")) /
               max(after_stat(!!as.name("density"))) *
               diff(range(.data$x, na.rm = TRUE)) +
-              min(.data$x, na.rm = TRUE) # nolint
+              min(.data$x, na.rm = TRUE)
           ),
           ...
         ) +

@@ -22,7 +22,7 @@ do_glyph <- function(...) {
 
 
 do_gg <- function(dt) {
-  ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) + # nolint
+  ggplot2::ggplot(dt, ggplot2::aes(gx, gy, group = gid)) +
     add_ref_lines(dt, color = "red", size = 0.5) +
     add_ref_boxes(dt, color = "blue") +
     ggplot2::geom_path() +

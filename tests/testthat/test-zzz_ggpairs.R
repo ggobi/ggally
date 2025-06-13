@@ -136,7 +136,7 @@ test_that("stops", {
       )
     },
     "'axisLabels' not in "
-  ) # nolint
+  )
   expect_warning(
     {
       pm <- ggduo(
@@ -146,27 +146,27 @@ test_that("stops", {
       )
     },
     "'axisLabels' not in "
-  ) # nolint
+  )
 
   lifecycle::expect_deprecated(
     {
       pm <- ggpairs(tips, color = "sex")
     },
-  ) # nolint
+  )
 
   expect_warning(
     {
       pm <- ggduo(tips, 2:3, 2:3, types = list(combo = "facetdensity"))
     },
     "Setting:\n\ttypes"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = c("tip", "day", "not in tips"))
     },
     "Columns in 'columns' not found in data"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(
@@ -176,7 +176,7 @@ test_that("stops", {
       )
     },
     "Columns in 'columnsX' not found in data"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(
@@ -186,129 +186,129 @@ test_that("stops", {
       )
     },
     "Columns in 'columnsY' not found in data"
-  ) # nolint
+  )
 
   lifecycle::expect_deprecated(
     {
       pm <- ggpairs(tips, legends = TRUE)
     }
-  ) # nolint
+  )
 
   lifecycle::expect_deprecated(
     {
       ggpairs(tips, params = c(size = 2))
     }
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = 1:10)
     },
     "Make sure your numeric 'columns' values are less than or equal to"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = 1:10)
     },
     "Make sure your numeric 'columnsX' values are less than or equal to"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = 1:10)
     },
     "Make sure your numeric 'columnsY' values are less than or equal to"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = -5:5)
     },
     "Make sure your numeric 'columns' values are positive"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = -5:5)
     },
     "Make sure your numeric 'columnsX' values are positive"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = -5:5)
     },
     "Make sure your numeric 'columnsY' values are positive"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = (2:10) / 2)
     },
     "Make sure your numeric 'columns' values are integers"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = (2:10) / 2)
     },
     "Make sure your numeric 'columnsX' values are integers"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = (2:10) / 2)
     },
     "Make sure your numeric 'columnsY' values are integers"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra"))
     },
     "The length of the 'columnLabels' does not match the length of the 'columns'"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsX = 1:3, columnLabelsX = c("A", "B", "C", "Extra"))
     },
     "The length of the 'columnLabelsX' does not match the length of the 'columnsX'"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, columnsY = 1:3, columnLabelsY = c("A", "B", "C", "Extra"))
     },
     "The length of the 'columnLabelsY' does not match the length of the 'columnsY'"
-  ) # nolint
+  )
 
   expect_error(
     {
       ggpairs(tips, upper = c("not_a_list"))
     },
     "'upper' is not a list"
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, diag = c("not_a_list"))
     },
     "'diag' is not a list"
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, lower = c("not_a_list"))
     },
     "'lower' is not a list"
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, types = c("not_a_list"))
     },
     "'types' is not a list"
-  ) # nolint
+  )
 
   # # couldn't get correct error message
   # #  variables: 'colour' have non standard format: 'total_bill + tip'.
   # expect_error({
   #   ggpairs(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  # }, "variables\\: \"colour\" have non standard format") # nolint
+  # }, "variables\\: \"colour\" have non standard format")
   # expect_error({
   #   ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
-  # }, "variables\\: \"colour\" have non standard format") # nolint
+  # }, "variables\\: \"colour\" have non standard format")
 
   errorString <- "'aes_string' is a deprecated element"
   expect_error(
@@ -316,25 +316,25 @@ test_that("stops", {
       ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, lower = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
+  )
   expect_error(
     {
       ggpairs(tips, diag = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
+  )
   expect_error(
     {
       ggduo(tips, types = list(aes_string = ggplot2::aes(color = .data$day)))
     },
     errorString
-  ) # nolint
+  )
 
   expect_diag_warn <- function(key, value) {
     warnString <- str_c(
@@ -578,7 +578,7 @@ test_that("mapping", {
       ggpairs(tips, columns = 1:3, mapping = 1:3)
     },
     "'mapping' should not be numeric"
-  ) # nolint
+  )
 })
 
 test_that("user functions", {

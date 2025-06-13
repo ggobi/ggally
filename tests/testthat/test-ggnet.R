@@ -50,7 +50,7 @@ test_that("examples", {
   ### --- test deprecations
 
   # test mode = "geo"
-  xy <- gplot.layout.circle(n) # nolint
+  xy <- gplot.layout.circle(n)
   n %v% "lon" <- xy[, 1]
   n %v% "lat" <- xy[, 2]
   lifecycle::expect_deprecated({
