@@ -97,3 +97,17 @@ test_that("backwards compatibility", {
     ggcorr(flea[, -1], method = "everything")
   )
 })
+
+test_that("label with round gives same size corr values and all corr squares", {
+  cors <- matrix(
+    c(1, 0, .001,
+      0, 1, .2,
+      .001, .2, 1),
+    nrow = 3,
+    byrow = TRUE
+  )
+  row.names(cors) <- colnames(cors) <- c("X1", "X2", "X3")
+
+  p <- ggcorr(data = NULL, cor_matrix = cors, label = TRUE, label_round = 2)
+  vdiffr::expect_doppelganger("label-round-2", p)
+})

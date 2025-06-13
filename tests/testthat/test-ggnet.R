@@ -30,7 +30,9 @@ test_that("examples", {
   n <- network::network(m, directed = FALSE)
   n
 
-  ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
+  lifecycle::expect_deprecated(
+    ggnet(n, label = TRUE, alpha = 1, color = "white", segment.color = "black")
+  )
 
   # random groups
   g <- sample(letters[1:3], 10, replace = TRUE)
@@ -38,7 +40,9 @@ test_that("examples", {
   # color palette
   p <- c("a" = "steelblue", "b" = "forestgreen", "c" = "tomato")
 
-  p <- ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
+  lifecycle::expect_deprecated({
+    p <- ggnet(n, node.group = g, node.color = p, label = TRUE, color = "white")
+  })
   expect_equal(length(p$layers), 3)
   expect_true(!is.null(p$mapping$colour))
 
@@ -50,10 +54,17 @@ test_that("examples", {
   xy <- gplot.layout.circle(n) # nolint
   n %v% "lon" <- xy[, 1]
   n %v% "lat" <- xy[, 2]
-  lifecycle::expect_deprecated(ggnet(n, mode = "geo"))
+  lifecycle::expect_deprecated({ # mode = "geo"
+    lifecycle::expect_deprecated({ # ggnet
+      ggnet(n, mode = "geo")
+    })
+  })
 
-  # test names = c(x, y)
-  lifecycle::expect_deprecated(ggnet(n, names = c("a", "b")))
+  lifecycle::expect_deprecated({ # names = c(x, y)
+    lifecycle::expect_deprecated({ # ggnet
+      ggnet(n, names = c("a", "b"))
+    })
+  })
 
   # test quantize.weights
   with_options(list(warn = 2), {
@@ -61,16 +72,29 @@ test_that("examples", {
   })
 
 
-  # test subset.threshold
-  suppressMessages({
-    lifecycle::expect_deprecated(ggnet(n, subset.threshold = 2))
+  lifecycle::expect_deprecated({ # subset.threshold
+    lifecycle::expect_deprecated({ # ggnet
+      suppressMessages({
+        ggnet(n, subset.threshold = 2)
+      })
+    })
   })
 
-  # test top8.nodes
-  lifecycle::expect_deprecated(ggnet(n, top8.nodes = TRUE))
+  lifecycle::expect_deprecated({ # top8.nodes
+    lifecycle::expect_deprecated({ # ggnet
+      suppressMessages({
+        ggnet(n, top8.nodes = TRUE)
+      })
+    })
+  })
 
-  # test trim.labels
-  lifecycle::expect_deprecated(ggnet(n, trim.labels = TRUE))
+  lifecycle::expect_deprecated({ # trim.labels
+    lifecycle::expect_deprecated({ # ggnet
+      suppressMessages({
+        ggnet(n, trim.labels = TRUE)
+      })
+    })
+  })
 
   #   # test subset.threshold by removing all nodes
   #   expect_warning(
@@ -84,6 +108,10 @@ test_that("examples", {
   #   p <- ggnet(n, mode = "geo")
   #   expect_equal(p$data$X1, xy[, 1])
   #   expect_equal(p$data$X2, xy[, 2])
+
+  # Be quiet about lifecycle messages from here on
+  old_opts <- options(lifecycle_verbosity = "quiet")
+  on.exit(options(old_opts), add = TRUE)
 
   # test user-submitted weights
   ggnet(n, weight = sample(1:2, 10, replace = TRUE))

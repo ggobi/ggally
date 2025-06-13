@@ -212,12 +212,13 @@ ggcorr <- function(
 
   # -- correlation data.frame --------------------------------------------------
 
-  m <- data.frame(m * lower.tri(m))
-  rownames(m) <- names(m)
+  m[upper.tri(m, diag = T)] <- NA
+  rownames(m) <- colnames(m)
+  m <- data.frame(m)
+
   m$.ggally_ggcorr_row_names <- rownames(m)
-  # m = reshape::melt(m, id.vars = ".ggally_ggcorr_row_names")
-  # names(m) = c("x", "y", "coefficient")
-  m_long <- m %>%
+  m_long <-
+    m %>%
     tidyr::pivot_longer(
       cols = -".ggally_ggcorr_row_names",
       names_to = "y",
@@ -225,7 +226,6 @@ ggcorr <- function(
     ) %>%
     dplyr::rename(x = ".ggally_ggcorr_row_names") %>%
     dplyr::mutate(y = factor(.data$y, levels = rownames(m)))
-  m_long$coefficient[m_long$coefficient == 0] <- NA
 
   # -- correlation quantiles ---------------------------------------------------
 
@@ -253,9 +253,15 @@ ggcorr <- function(
   }
 
   # -- plot structure ----------------------------------------------------------
+  m_long$label <-
+    format(
+      # round(c(0.2, 0, 0.001), digits = 2) #> c(0.2, 0, 0)
+      round(m_long$coefficient, digits = label_round),
+      # format(c(0.2, 0, 0), nsmall = 2) #> c("0.20", "0.00", "0.00")
+      nsmall = label_round
+    )
 
-  m_long$label <- round(m_long$coefficient, label_round)
-  p <- ggplot(na.omit(m_long), aes(x, .data$y))
+  p <- ggplot(na.omit(m_long), aes(.data$x, .data$y))
 
   if (geom == "tile") {
     if (is.null(nbreaks)) {
