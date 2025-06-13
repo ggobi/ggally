@@ -178,8 +178,6 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
   }
 }
 
-
-
 #' \pkg{ggplot2} generalized pairs plot for two columns sets of data
 #'
 #' Make a matrix of plots with a given data set with two different column sets
@@ -451,7 +449,7 @@ ggduo <- function(
   # fix args
   if (
     !missing(mapping) && !is.list(mapping) &&
-      !missing(columnsX) && missing(columnsY)
+    !missing(columnsX) && missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -495,7 +493,7 @@ ggduo <- function(
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "none"))
 
   # get plot type information
-  dataTypes <- plot_types(data, columnsX, columnsY, allowDiag = FALSE)
+  dataTypes <- GGally:::plot_types(data, columnsX, columnsY, allowDiag = FALSE)
 
   ggduoPlots <- lapply(seq_len(nrow(dataTypes)), function(i) {
     plotType <- dataTypes[i, "plotType"]
@@ -523,7 +521,7 @@ ggduo <- function(
       plotTypesList <- types
     }
     args <- list(types = plotTypesList, sectionAes = sectionAes)
-    plot_fn <- ggmatrix_plot_list(plotType)
+    plot_fn <- GGally:::ggmatrix_plot_list(plotType)
 
     plotObj <- do.call(plot_fn, args)
     return(plotObj)
@@ -745,6 +743,7 @@ ggduo <- function(
 #' pm <- ggpairs(tips, columns = c(2, 3, 5), proportions = c(1, 3, 2))
 #' p_(pm)
 #'
+
 ggpairs <- function(
     data,
     mapping = NULL,
@@ -794,7 +793,7 @@ ggpairs <- function(
 
   if (
     !missing(mapping) && !is.list(mapping) &&
-      missing(columns)
+    missing(columns)
   ) {
     columns <- mapping
     mapping <- NULL
@@ -815,18 +814,26 @@ ggpairs <- function(
   )
   diag <- check_and_set_ggpairs_defaults(
     "diag", diag,
-    continuous = "densityDiag", discrete = "barDiag", na = "naDiag",
+    continuous = "densityDiag",
+    discrete = "barDiag",
+    na = "naDiag",
     isDiag = TRUE
   )
+
+  for (key in c("continuous", "discrete", "na")) {
+    val <- diag[[key]]
+    if (is.character(val) && val == "ridgeDiag") {
+      diag[[key]] <- ggridgediag
+    }
+  }
+
 
   axisLabels <- fix_axis_label_choice(axisLabels, c("show", "internal", "none"))
 
   proportions <- ggmatrix_proportions(proportions, data, columns)
 
-  # get plot type information
-  dataTypes <- plot_types(data, columns, columns, allowDiag = TRUE)
+  dataTypes <- GGally:::plot_types(data, columns, columns, allowDiag = TRUE)
 
-  # make internal labels on the diag axis
   if (identical(axisLabels, "internal")) {
     dataTypes$plotType[dataTypes$posX == dataTypes$posY] <- "label"
   }
@@ -860,7 +867,7 @@ ggpairs <- function(
       args$label <- columnLabels[posX]
     }
 
-    plot_fn <- ggmatrix_plot_list(plotType)
+    plot_fn <- GGally:::ggmatrix_plot_list(plotType)
 
     p <- do.call(plot_fn, args)
 
@@ -1121,6 +1128,24 @@ dput_val <- function(x) {
   ret <- paste0(readLines(f), collapse = "\n")
   ret
 }
+
+dynamic_cut_number <- function(x, bins = 3) {
+  unique_vals <- unique(x)
+  num_bins <- min(length(unique_vals), bins)
+  cut_number(x, num_bins)
+}
+
+ggridgediag <- function(data, mapping, ...) {
+  var_name <- rlang::as_name(mapping$x)
+  data <- data %>% mutate(bin = dynamic_cut_number(.data[[var_name]], bins = 3))
+
+  ggplot(data, aes(x = .data[[var_name]], y = bin)) +
+    geom_density_ridges(scale = 1.5, rel_min_height = 0.01, fill = "gray") +
+    scale_x_continuous(labels = label_number()) +
+    theme_minimal()
+}
+
+
 
 # diamondMatrix <- ggpairs(
 #  diamonds,
