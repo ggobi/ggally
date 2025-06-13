@@ -35,3 +35,4 @@ ggduo_paper.txt
 ^CRAN-RELEASE$
 ^vignettes$
 ^CRAN-SUBMISSION$
+.vscode
