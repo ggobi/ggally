@@ -1,4 +1,4 @@
-# GGally (development version)
+# GGally 2.3.0
 
 * Fixed bug where correlations of 0 in a `ggcor()` output were silently dropped. Now all correlations are always displayed. (Thank you @winterstat! #536)
 
