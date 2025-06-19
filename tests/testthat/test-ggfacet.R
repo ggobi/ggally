@@ -27,7 +27,7 @@ test_that("generally works", {
   NIR_sub <- data.frame(NIR$yGlcEtOH, NIR$xNIR[, 1:3])
 
   # factor variables
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "factor",
     ggfacet(
       NIR_sub,
@@ -37,7 +37,7 @@ test_that("generally works", {
     )
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "pigs",
     ggts(
       pigs,
