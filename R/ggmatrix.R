@@ -200,6 +200,10 @@ check_nrow_ncol <- function(x, title) {
 #' @export
 `[[<-.GGally::ggmatrix` <- `$<-.GGally::ggmatrix`
 
+
+# https://github.com/RConsortium/S7/issues/529
+utils::globalVariables("properties")
+
 method(convert, list(from = ggmatrix, to = class_list)) <-
   function(from, to) {
     vals <- props(from)
