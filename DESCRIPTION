@@ -83,8 +83,6 @@ LazyLoad: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 SystemRequirements: openssl
-Remotes:
-    tidyverse/ggplot2
 Collate:
     'GGally-package.R'
     'data-australia-pisa-2012.R'
