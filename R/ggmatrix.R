@@ -142,7 +142,7 @@ ggmatrix <- new_class(
         meta = list()
       )
     # Prefix with ggmatrix class
-    class(ret) <- c("ggmatrix", class(ret))
+    class(ret) <- c("ggmatrix", class(ret), "gg")
     ret
   }
 )
@@ -215,7 +215,7 @@ method(convert, list(from = ggmatrix, to = class_list)) <-
   }
 
 local({
-  method(as.list, class_ggplot) <- function(x, ...) {
+  method(as.list, ggmatrix) <- function(x, ...) {
     convert(x, class_list)
   }
 })
