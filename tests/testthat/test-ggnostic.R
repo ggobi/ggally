@@ -68,7 +68,7 @@ test_that("ggnostic mtcars", {
     continuous = continuous_type,
     progress = FALSE
   )
-  vdiffr::expect_doppelganger("custom-y", pm)
+  ggally_expect_doppelganger("custom-y", pm)
 
   pm <- ggnostic(
     mod,
@@ -77,7 +77,7 @@ test_that("ggnostic mtcars", {
     continuous = continuous_type,
     progress = FALSE
   )
-  vdiffr::expect_doppelganger("legend", pm)
+  ggally_expect_doppelganger("legend", pm)
 })
 
 

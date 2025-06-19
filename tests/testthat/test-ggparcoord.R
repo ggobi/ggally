@@ -275,11 +275,11 @@ test_that("splineFactor as is", {
     splineFactor = I(2 * k)
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "ggparcoord-splineFactor-as-is-4",
     p_no_visible_spline
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "ggparcoord-splineFactor-as-is-8",
     p_single_split_between
   )

@@ -65,12 +65,12 @@
 <circle cx='548.27' cy='340.82' r='5.55' style='stroke-width: 0.71; stroke: #FF7856; fill: #FF7856;' />
 <circle cx='548.27' cy='252.48' r='6.29' style='stroke-width: 0.71; stroke: #F21A00; fill: #F21A00;' />
 <circle cx='548.27' cy='164.13' r='5.43' style='stroke-width: 0.71; stroke: #8ABAC9; fill: #8ABAC9;' />
-<text x='106.54' y='521.31' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='24.55px' lengthAdjust='spacingAndGlyphs'>tars1</text>
-<text x='194.89' y='432.97' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='24.55px' lengthAdjust='spacingAndGlyphs'>tars2</text>
-<text x='283.23' y='344.62' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='24.56px' lengthAdjust='spacingAndGlyphs'>head</text>
-<text x='371.58' y='256.28' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='30.70px' lengthAdjust='spacingAndGlyphs'>aede1</text>
-<text x='459.92' y='167.93' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='30.70px' lengthAdjust='spacingAndGlyphs'>aede2</text>
-<text x='548.27' y='79.59' text-anchor='middle' style='font-size: 11.04px; font-family: sans;' textLength='30.70px' lengthAdjust='spacingAndGlyphs'>aede3</text>
+<text x='106.54' y='521.30' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='24.46px' lengthAdjust='spacingAndGlyphs'>tars1</text>
+<text x='194.89' y='432.95' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='24.46px' lengthAdjust='spacingAndGlyphs'>tars2</text>
+<text x='283.23' y='344.61' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='24.47px' lengthAdjust='spacingAndGlyphs'>head</text>
+<text x='371.58' y='256.26' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='30.59px' lengthAdjust='spacingAndGlyphs'>aede1</text>
+<text x='459.92' y='167.92' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='30.59px' lengthAdjust='spacingAndGlyphs'>aede2</text>
+<text x='548.27' y='79.58' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='30.59px' lengthAdjust='spacingAndGlyphs'>aede3</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <rect x='612.23' y='241.20' width='54.23' height='110.90' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />

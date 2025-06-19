@@ -707,6 +707,12 @@ ggparcoord <- function(
     p <- p + labs(title = title)
   }
 
+  p <- p +
+    labs(
+      x = "variable",
+      y = "value"
+    )
+
   p
 }
 

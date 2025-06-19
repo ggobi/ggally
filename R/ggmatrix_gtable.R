@@ -105,8 +105,25 @@ ggmatrix_gtable <- function(
     pm_fake <- pm_fake + geom_point(mapping = aes(color = !!as.name("Var1")))
   }
 
-  # make a gtable of the plot matrix (to be filled in)
-  pmg <- plot_gtable(pm_fake)
+  # Suppress warnings such as:
+  # ```r
+  # ggbivariate(
+  #   tips,
+  #   "smoker",
+  #   c("day", "time", "sex", "tip"),
+  #   title = "Custom title"
+  # ) +
+  #   labs(fill = "Smoker ?")
+  # ```
+  # ```
+  # Ignoring unknown labels:
+  # * fill : "Smoker ?"
+  # ````
+  # as the plot / data does not exist yet
+  suppressWarnings(
+    # make a gtable of the plot matrix (to be filled in)
+    pmg <- plot_gtable(pm_fake)
+  )
 
   ###############
   ## Everything beyond this point is only to fill in the correct information.

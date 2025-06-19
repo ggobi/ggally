@@ -211,7 +211,7 @@ ggally_cor_v1_5 <- function(
   yVal <- yData
 
   # if the mapping has to deal with the data, remove it
-  if (packageVersion("ggplot2") > "2.2.1") {
+  if (utils::packageVersion("ggplot2") > "2.2.1") {
     for (mappingName in names(mapping)) {
       itemData <- eval_data_col(data, mapping[[mappingName]])
       if (!inherits(itemData, "AsIs")) {

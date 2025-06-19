@@ -3,21 +3,21 @@
 data(flea)
 
 test_that("limits", {
-  vdiffr::expect_doppelganger("flea", ggcorr(flea[, -1]))
-  vdiffr::expect_doppelganger("flea-limits", ggcorr(flea[, -1], limits = TRUE))
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger("flea", ggcorr(flea[, -1]))
+  ggally_expect_doppelganger("flea-limits", ggcorr(flea[, -1], limits = TRUE))
+  ggally_expect_doppelganger(
     "flea-no-limits",
     ggcorr(flea[, -1], limits = FALSE)
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "flea-null-limits",
     ggcorr(flea[, -1], limits = NULL)
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "flea-big-limits",
     ggcorr(flea[, -1], limits = c(-5, 5))
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "flea-small-limits",
     ggcorr(flea[, -1], limits = c(-0.5, 0.5))
   )
@@ -68,24 +68,24 @@ test_that("null midpoint", {
 })
 
 test_that("further options", {
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-circle",
     ggcorr(flea[, -1], geom = "circle")
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-circle-no-limits",
     ggcorr(flea[, -1], geom = "circle", limits = FALSE)
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-tile",
     ggcorr(flea[, -1], geom = "tile", nbreaks = 3)
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-tile-no-limits",
     ggcorr(flea[, -1], geom = "tile", limits = FALSE)
   )
   expect_error(ggcorr(flea[, -1], layout.exp = "a"), "incorrect layout.exp")
-  vdiffr::expect_doppelganger("layout.exp", ggcorr(flea[, -1], layout.exp = 1))
+  ggally_expect_doppelganger("layout.exp", ggcorr(flea[, -1], layout.exp = 1))
 })
 
 test_that("data.matrix", {
@@ -101,14 +101,14 @@ test_that("cor_matrix", {
 
 test_that("other geoms", {
   expect_error(ggcorr(flea[, -1], geom = "hexbin"), "incorrect geom")
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-blank",
     ggcorr(flea[, -1], geom = "blank")
   )
 })
 
 test_that("backwards compatibility", {
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "method-everything",
     ggcorr(flea[, -1], method = "everything")
   )
@@ -123,5 +123,5 @@ test_that("label with round gives same size corr values and all corr squares", {
   row.names(cors) <- colnames(cors) <- c("X1", "X2", "X3")
 
   p <- ggcorr(data = NULL, cor_matrix = cors, label = TRUE, label_round = 2)
-  vdiffr::expect_doppelganger("label-round-2", p)
+  ggally_expect_doppelganger("label-round-2", p)
 })

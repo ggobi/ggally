@@ -5,10 +5,10 @@ test_that("example", {
     aes(x = Class, fill = Survived, weight = Freq, by = Class) +
     geom_bar(position = "fill") +
     geom_text(stat = "prop", position = position_fill(.5))
-  vdiffr::expect_doppelganger("titanic", p)
-  vdiffr::expect_doppelganger("titanic-facet", p + facet_grid(~Sex))
+  ggally_expect_doppelganger("titanic", p)
+  ggally_expect_doppelganger("titanic-facet", p + facet_grid(~Sex))
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "titanic-dodge",
     ggplot(d) +
       aes(x = Class, fill = Survived, weight = Freq) +
@@ -21,7 +21,7 @@ test_that("example", {
       )
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "titanic-stack",
     ggplot(d) +
       aes(x = Class, fill = Survived, weight = Freq, by = 1) +
@@ -35,19 +35,19 @@ test_that("example", {
 
   data(tips)
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips",
     ggally_rowbar(tips, mapping = aes(x = smoker, y = sex))
   )
 
   # change labels' size
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-size8",
     ggally_colbar(tips, mapping = aes(x = smoker, y = sex), size = 8)
   )
 
   # change labels' colour and use bold
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-color-white",
     ggally_colbar(
       tips,
@@ -58,7 +58,7 @@ test_that("example", {
   )
 
   # display number of observations instead of proportions
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-label",
     ggally_colbar(
       tips,
@@ -67,7 +67,7 @@ test_that("example", {
   )
 
   # custom bar width
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-bar-width",
     ggally_colbar(
       tips,
@@ -77,7 +77,7 @@ test_that("example", {
   )
 
   # change format of labels
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-label-custom",
     ggally_colbar(
       tips,
@@ -86,7 +86,7 @@ test_that("example", {
     )
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "ggduo-titanic",
     ggduo(
       data = as.data.frame(Titanic),
@@ -105,5 +105,5 @@ test_that("stat_prop() works with an y aesthetic", {
     aes(y = Class, fill = Survived, weight = Freq, by = Class) +
     geom_bar(position = "fill") +
     geom_text(stat = "prop", position = position_fill(.5))
-  vdiffr::expect_doppelganger("titanic-stat-prop", p)
+  ggally_expect_doppelganger("titanic-stat-prop", p)
 })

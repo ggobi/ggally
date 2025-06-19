@@ -6,7 +6,7 @@ test_that("example", {
     data = iris
   )
   p <- ggcoef(reg)
-  vdiffr::expect_doppelganger("lm", p)
+  ggally_expect_doppelganger("lm", p)
 
   skip_if_not_installed("MASS")
   d <- as.data.frame(Titanic)
@@ -17,7 +17,7 @@ test_that("example", {
     weights = d$Freq
   )
   p <- ggcoef(reg2, exponentiate = TRUE)
-  vdiffr::expect_doppelganger("lm-expo", p)
+  ggally_expect_doppelganger("lm-expo", p)
   p <- ggcoef(
     reg2,
     exponentiate = TRUE,
@@ -25,5 +25,5 @@ test_that("example", {
     errorbar_height = .2,
     color = "blue"
   )
-  vdiffr::expect_doppelganger("lm-expo-blue", p)
+  ggally_expect_doppelganger("lm-expo-blue", p)
 })

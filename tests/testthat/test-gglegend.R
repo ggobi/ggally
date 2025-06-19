@@ -15,7 +15,7 @@ test_that("examples", {
     expect_true(inherits(plotLegend, "gtable"))
     expect_true(inherits(plotLegend, "gTree"))
     expect_true(inherits(plotLegend, "grob"))
-    vdiffr::expect_doppelganger(paste0("pos-", name), plotLegend)
+    ggally_expect_doppelganger(paste0("pos-", name), plotLegend)
   }
 
   expect_legend("right", right)
@@ -27,7 +27,7 @@ test_that("examples", {
 
 test_that("legend", {
   # display regular plot
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "legend",
     ggally_points(
       iris,
@@ -41,7 +41,7 @@ test_that("legend", {
     iris,
     ggplot2::aes(Sepal.Length, Sepal.Width, color = Species)
   )
-  vdiffr::expect_doppelganger("points", l)
+  ggally_expect_doppelganger("points", l)
 
   # produce the sample legend plot, but supply a string that 'wrap' understands
   same_points_legend <- gglegend("points")
@@ -56,7 +56,7 @@ test_that("legend", {
     iris,
     ggplot2::aes(Sepal.Length, Sepal.Width, color = Species)
   )
-  vdiffr::expect_doppelganger("custom", p)
+  ggally_expect_doppelganger("custom", p)
   expect_true(inherits(p, "gtable"))
   expect_true(inherits(p, "gTree"))
   expect_true(inherits(p, "grob"))
@@ -70,7 +70,7 @@ test_that("legend", {
       upper = list(continuous = gglegend("points"))
     )
   })
-  vdiffr::expect_doppelganger("legend-pm", pm)
+  ggally_expect_doppelganger("legend-pm", pm)
 
   # Use within ggpairs
   expect_silent({
@@ -84,12 +84,12 @@ test_that("legend", {
       ggplot2::aes(Sepal.Width, Sepal.Length, color = Species)
     )
   })
-  vdiffr::expect_doppelganger("internal-legend", pm)
+  ggally_expect_doppelganger("internal-legend", pm)
 })
 
 test_that("plotNew", {
   points_legend <- gglegend(ggally_points)
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "plotNew-default",
     points_legend(
       iris,
