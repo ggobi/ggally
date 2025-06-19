@@ -48,7 +48,7 @@ get_legend_from_gtable <- function(pTable) {
 #' @importFrom grid grid.newpage grid.draw gpar
 #' @importFrom gtable gtable_filter
 #' @rdname grab_legend
-#' @export
+#' @exportS3Method NULL
 print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
   if (identical(plotNew, TRUE)) {
     grid.newpage()
@@ -56,6 +56,11 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 
   grid::grid.rect(gp = grid::gpar(fill = "white", col = "white"))
   grid.draw(x)
+}
+# For R 4.2 only
+# https://github.com/wch/s3ops/blob/51c4a937025b5c3a19be766bd73db06ab574b1a0/README.md#a-solution-for-packages
+`_print_legend_guide_box` <- function(x, ..., plotNew = FALSE) {
+  print.legend_guide_box(x, ..., plotNew = plotNew)
 }
 
 

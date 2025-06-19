@@ -201,7 +201,7 @@ is.glyphplot <- function(x) {
 
 #' @param x glyphplot to be printed
 #' @param ... ignored
-#' @export
+#' @exportS3Method NULL
 #' @rdname glyphplot
 print.glyphplot <- function(x, ...) {
   NextMethod()
@@ -224,6 +224,11 @@ print.glyphplot <- function(x, ...) {
     sep = ""
   )
   # cat("\n")
+}
+# For R 4.2 support only
+# https://github.com/wch/s3ops/blob/51c4a937025b5c3a19be766bd73db06ab574b1a0/README.md#a-solution-for-packages
+`_print_glyphplot` <- function(x, ...) {
+  print.glyphplot(x, ...)
 }
 
 # Rescaling functions --------------------------------------------------------
