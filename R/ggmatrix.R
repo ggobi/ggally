@@ -52,7 +52,7 @@
 ggmatrix <- S7::new_class(
   "ggmatrix",
   properties = list(
-    data = S7::class_data.frame,
+    data = S7::new_union(S7::class_data.frame, NULL),
     plots = S7::class_list,
     title = S7::class_any,
     xlab = S7::class_any,
