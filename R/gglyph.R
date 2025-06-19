@@ -203,7 +203,6 @@ is.glyphplot <- function(x) {
 #' @param ... ignored
 #' @export
 #' @rdname glyphplot
-#' @method print glyphplot
 print.glyphplot <- function(x, ...) {
   NextMethod()
   if (attr(x, "polar")) {

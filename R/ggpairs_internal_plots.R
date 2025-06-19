@@ -267,7 +267,6 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #' @param object \code{\link{ggmatrix}} object to be viewed
 #' @param ... passed on to the default \code{str} method
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
-#' @method str ggmatrix
 #' @importFrom utils str
 #' @name str.ggmatrix
 method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
