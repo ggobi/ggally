@@ -43,6 +43,7 @@ Imports:
     progress,
     RColorBrewer,
     rlang,
+    S7,
     scales (>= 1.3.0),
     tidyr (>= 1.3.0),
     utils
