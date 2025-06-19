@@ -49,36 +49,36 @@
 #'   showXAxisPlotLabels = FALSE
 #' )
 #' p_(pm)
-ggmatrix <- S7::new_class(
+ggmatrix <- new_class(
   "ggmatrix",
   properties = list(
-    data = S7::new_union(S7::class_data.frame, NULL),
-    plots = S7::class_list,
-    title = S7::class_any,
-    xlab = S7::class_any,
-    ylab = S7::class_any,
-    showStrips = S7::new_union(S7::class_logical, NULL),
-    xAxisLabels = S7::class_any,
-    yAxisLabels = S7::class_any,
-    showXAxisPlotLabels = S7::class_logical,
-    showYAxisPlotLabels = S7::class_logical,
-    labeller = S7::class_any,
-    switch = S7::new_union(S7::class_character, NULL),
-    # xProportions = S7::new_union(S7::class_numeric, S7::class_grid_unit, NULL),
-    xProportions = S7::class_any,
-    yProportions = S7::class_any,
-    progress = S7::new_union(
-      S7::new_S3_class("progress_bar"),
-      S7::class_function,
-      S7::class_logical,
+    data = new_union(class_data.frame, NULL),
+    plots = class_list,
+    title = class_any,
+    xlab = class_any,
+    ylab = class_any,
+    showStrips = new_union(class_logical, NULL),
+    xAxisLabels = class_any,
+    yAxisLabels = class_any,
+    showXAxisPlotLabels = class_logical,
+    showYAxisPlotLabels = class_logical,
+    labeller = class_any,
+    switch = new_union(class_character, NULL),
+    # xProportions = new_union(class_numeric, class_grid_unit, NULL),
+    xProportions = class_any,
+    yProportions = class_any,
+    progress = new_union(
+      new_S3_class("progress_bar"),
+      class_function,
+      class_logical,
       NULL
     ),
-    legend = S7::class_any,
-    gg = S7::new_union(S7::class_list, NULL),
-    nrow = S7::class_numeric,
-    ncol = S7::class_numeric,
-    byrow = S7::class_logical,
-    meta = S7::class_list
+    legend = class_any,
+    gg = new_union(class_list, NULL),
+    nrow = class_numeric,
+    ncol = class_numeric,
+    byrow = class_logical,
+    meta = class_list
   ),
   constructor = function(
     plots,
@@ -117,8 +117,8 @@ ggmatrix <- S7::new_class(
     progress <- as_ggmatrix_progress(progress, nrow * ncol)
 
     ret <-
-      S7::new_object(
-        S7::S7_object(),
+      new_object(
+        S7_object(),
         data = data,
         plots = plots,
         title = title,
@@ -164,25 +164,25 @@ check_nrow_ncol <- function(x, title) {
 
 #' @export
 `$.GGally::ggmatrix` <- function(x, i) {
-  if (!S7::prop_exists(x, i) && S7::prop_exists(x, "meta")) {
+  if (!prop_exists(x, i) && prop_exists(x, "meta")) {
     # This is a trick to bridge a gap between S3 and S7. We're allowing
     # for arbitrary fields by reading/writing to the 'meta' field when the
     # index does not point to an actual property.
     # The proper way to go about this is to implement new fields as properties
     # of a ggplot subclass.
-    S7::prop(x, "meta")[[i]]
+    prop(x, "meta")[[i]]
   } else {
-    `[[`(S7::props(x), i)
+    `[[`(props(x), i)
   }
 }
 
 #' @export
 `$<-.GGally::ggmatrix` <- function(x, i, value) {
-  if (!S7::prop_exists(x, i) && S7::prop_exists(x, "meta")) {
+  if (!prop_exists(x, i) && prop_exists(x, "meta")) {
     # See explanation in `$.GGally::ggmatrix`
-    S7::prop(x, "meta")[[i]] <- value
+    prop(x, "meta")[[i]] <- value
   } else {
-    S7::props(x) <- `[[<-`(S7::props(x), i, value)
+    props(x) <- `[[<-`(props(x), i, value)
   }
   x
 }
@@ -200,10 +200,9 @@ check_nrow_ncol <- function(x, title) {
 #' @export
 `[[<-.GGally::ggmatrix` <- `$<-.GGally::ggmatrix`
 
-#' @importFrom S7 convert
-S7::method(convert, list(from = ggmatrix, to = S7::class_list)) <-
+method(convert, list(from = ggmatrix, to = class_list)) <-
   function(from, to) {
-    vals <- S7::props(from)
+    vals <- props(from)
     meta <- vals$meta
     # Remove meta from the list of properties
     vals$meta <- NULL
@@ -212,7 +211,7 @@ S7::method(convert, list(from = ggmatrix, to = S7::class_list)) <-
   }
 
 local({
-  S7::method(as.list, class_ggplot) <- function(x, ...) {
-    convert(x, S7::class_list)
+  method(as.list, class_ggplot) <- function(x, ...) {
+    convert(x, class_list)
   }
 })

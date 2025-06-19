@@ -21,7 +21,7 @@ ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 #' data(tips)
 #' pMat <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes(color = sex))
 #' pMat # calls print(pMat), which calls print.ggmatrix(pMat)
-S7::method(print, ggmatrix) <- function(x, newpage = TRUE, vp = NULL, ...) {
+method(print, ggmatrix) <- function(x, newpage = TRUE, vp = NULL, ...) {
   if (newpage) {
     grid.newpage()
   }

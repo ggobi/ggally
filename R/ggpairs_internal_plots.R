@@ -270,7 +270,7 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #' @method str ggmatrix
 #' @importFrom utils str
 #' @name str.ggmatrix
-S7::method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
+method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
   if (isTRUE(raw)) {
     # S7's str method
     NextMethod()
@@ -283,7 +283,7 @@ S7::method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
   )
   objName <- rlang::call_args(matched_call)$object
 
-  obj <- S7::convert(object, S7::class_list)
+  obj <- convert(object, class_list)
   cat(str_c(
     "\nCustom str.ggmatrix output: \nTo view original object use ",
     "'str(",

@@ -1,12 +1,3 @@
-# # temp work around for https://github.com/RConsortium/S7/issues/544
-# class_ggmatrix <- S7::new_S3_class("ggmatrix")
-# ggmatrix2 <- S7::new_class(
-#   "ggmatrix2",
-#   properties = list(
-#     pm = class_ggmatrix
-#   )
-# )
-
 add_gg_info <- function(p, gg) {
   if (!is.null(gg)) {
     if (!is.null(gg$theme)) {
@@ -417,27 +408,27 @@ if (utils::packageVersion("ggplot2") < "3.5.2.001") {
   # class_ggplot <- ggplot2:::class_ggplot
   # class_ggplot_built <- ggplot2:::class_ggplot_built
 
-  S7::method(`+`, list(ggmatrix, class_labels)) <-
+  method(`+`, list(ggmatrix, class_labels)) <-
     function(e1, e2) {
       add_labels_to_ggmatrix(e1, e2)
     }
 
-  S7::method(`+`, list(ggmatrix, class_theme)) <-
+  method(`+`, list(ggmatrix, class_theme)) <-
     function(e1, e2) {
       add_theme_to_ggmatrix(e1, e2)
     }
 
-  S7::method(`+`, list(ggmatrix, class_ggproto)) <-
+  method(`+`, list(ggmatrix, class_ggproto)) <-
     function(e1, e2) {
       add_to_ggmatrix(e1, e2)
     }
 
-  S7::method(`+`, list(ggmatrix, S7::class_list)) <-
+  method(`+`, list(ggmatrix, class_list)) <-
     function(e1, e2) {
       add_list_to_ggmatrix(e1, e2)
     }
 
-  S7::method(`+`, list(ggmatrix, S7::class_any)) <-
+  method(`+`, list(ggmatrix, class_any)) <-
     function(e1, e2) {
       stop(
         "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",

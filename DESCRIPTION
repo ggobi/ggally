@@ -43,7 +43,7 @@ Imports:
     progress,
     RColorBrewer,
     rlang,
-    S7,
+    S7 (>= 0.2.0),
     scales (>= 1.3.0),
     tidyr (>= 1.3.0),
     utils
@@ -85,7 +85,7 @@ RoxygenNote: 7.3.2
 SystemRequirements: openssl
 Remotes:
     tidyverse/ggplot2
-Collate: 
+Collate:
     'GGally-package.R'
     'data-australia-pisa-2012.R'
     'data-baseball.R'
