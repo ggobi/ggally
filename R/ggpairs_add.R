@@ -358,37 +358,37 @@ is.ggmatrix <- function(x) {
 
 #' @rawNamespace if (utils::packageVersion("ggplot2") < "3.5.2.9001") S3method("+",gg)
 NULL
-
-
-if (utils::packageVersion("ggplot2") < "3.5.2.001") {
-  "+.gg" <- function(e1, e2) {
-    if (!is.ggmatrix(e1)) {
-      if ("add_gg" %in% getNamespaceExports("ggplot2")) {
-        fn <- utils::getFromNamespace("add_gg", "ggplot2")
-      } else {
-        fn <- ggplot2::`%+%`
-      }
-      return(fn(e1, e2))
-    }
-
-    if (inherits(e2, c("labels", "ggplot2::labels"))) {
-      add_labels_to_ggmatrix(e1, e2)
-    } else if (is_theme(e2)) {
-      add_theme_to_ggmatrix(e1, e2)
-    } else if (is.list(e2)) {
-      add_list_to_ggmatrix(e1, e2)
-    } else if (is_ggproto(e2)) {
-      add_to_ggmatrix(e1, e2)
+#' @exportS3Method NULL
+"+.gg" <- function(e1, e2) {
+  if (!is.ggmatrix(e1)) {
+    if ("add_gg" %in% getNamespaceExports("ggplot2")) {
+      fn <- utils::getFromNamespace("add_gg", "ggplot2")
     } else {
-      stop(
-        "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
-        " Received object with class: '",
-        paste(class(e2), collapse = ", "),
-        "'"
-      )
+      fn <- ggplot2::`%+%`
     }
+    return(fn(e1, e2))
   }
-} else {
+
+  if (inherits(e2, c("labels", "ggplot2::labels"))) {
+    add_labels_to_ggmatrix(e1, e2)
+  } else if (is_theme(e2)) {
+    add_theme_to_ggmatrix(e1, e2)
+  } else if (is.list(e2)) {
+    add_list_to_ggmatrix(e1, e2)
+  } else if (is_ggproto(e2)) {
+    add_to_ggmatrix(e1, e2)
+  } else {
+    stop(
+      "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
+      " Received object with class: '",
+      paste(class(e2), collapse = ", "),
+      "'"
+    )
+  }
+}
+
+
+if (utils::packageVersion("ggplot2") >= "3.5.2.001") {
   # ggplot2 3.5.2.9001 and later!
 
   class_gg <- ggplot2:::class_gg
