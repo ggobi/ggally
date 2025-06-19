@@ -170,7 +170,7 @@ reference:
 
 - title: "ggmatrix() Helpers"
   contents:
-  - +.gg
+  - add_to_ggmatrix
   - ggmatrix_location
   - wrap_fn_with_param_arg
   - getPlot
@@ -220,3 +220,4 @@ reference:
   contents:
   - v1_ggmatrix_theme
   - ggally_cor_v1_5
+  - +.gg

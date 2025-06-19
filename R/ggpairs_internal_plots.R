@@ -269,30 +269,39 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
 #' @method str ggmatrix
 #' @importFrom utils str
-#' @export
-str.ggmatrix <- function(object, ..., raw = FALSE) {
-  objName <- deparse(substitute(object))
-  obj <- object
-  if (identical(raw, FALSE)) {
-    cat(str_c(
-      "\nCustom str.ggmatrix output: \nTo view original object use ",
-      "'str(",
-      objName,
-      ", raw = TRUE)'\n\n"
-    ))
-    obj$plots <- lapply(obj$plots, function(plotObj) {
-      if (ggplot2::is_ggplot(plotObj)) {
-        str_c(
-          "PM; ggplot2 object; mapping: ",
-          mapping_as_string(plotObj$mapping)
-        )
-      } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
-        as.character(plotObj)
-      } else {
-        plotObj
-      }
-    })
+#' @name str.ggmatrix
+S7::method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
+  if (isTRUE(raw)) {
+    # S7's str method
+    NextMethod()
+    return()
   }
+
+  matched_call <- rlang::call_match(
+    sys.call(),
+    function(object, ..., raw = FALSE) {}
+  )
+  objName <- rlang::call_args(matched_call)$object
+
+  obj <- S7::convert(object, S7::class_list)
+  cat(str_c(
+    "\nCustom str.ggmatrix output: \nTo view original object use ",
+    "'str(",
+    objName,
+    ", raw = TRUE)'\n\n"
+  ))
+  obj$plots <- lapply(obj$plots, function(plotObj) {
+    if (ggplot2::is_ggplot(plotObj)) {
+      str_c(
+        "PM; ggplot2 object; mapping: ",
+        mapping_as_string(plotObj$mapping)
+      )
+    } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+      as.character(plotObj)
+    } else {
+      plotObj
+    }
+  })
   attr(obj, "_class") <- attr(obj, "class")
   class(obj) <- NULL
   str(obj, ...)

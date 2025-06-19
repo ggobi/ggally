@@ -20,7 +20,7 @@ Authors@R: c(
     person("Hadley", "Wickham", , "h.wickham@gmail.com", role = "ths",
            comment = c(ORCID = "0000-0003-4757-117X"))
   )
-Description:The R package 'ggplot2' is a plotting system based on the
+Description: The R package 'ggplot2' is a plotting system based on the
     grammar of graphics.  'GGally' extends 'ggplot2' by adding several
     functions to reduce the complexity of combining geometric objects with
     transformed data.  Some of these functions include a pairwise plot
@@ -70,7 +70,7 @@ Suggests:
     survival,
     testthat (>= 3.0.0),
     vdiffr
-RdMacros: 
+RdMacros:
     lifecycle
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
@@ -82,3 +82,52 @@ LazyLoad: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 SystemRequirements: openssl
+Remotes:
+    tidyverse/ggplot2
+Collate: 
+    'GGally-package.R'
+    'data-australia-pisa-2012.R'
+    'data-baseball.R'
+    'data-flea.R'
+    'data-happy.R'
+    'data-nasa.R'
+    'data-pigs.R'
+    'data-psychademic.R'
+    'data-tips.R'
+    'data-twitter_spambots.R'
+    'deprecated.R'
+    'find-combo.R'
+    'gg-plots.R'
+    'ggally_colbar.R'
+    'ggally_cross.R'
+    'ggaly_trends.R'
+    'ggbivariate.R'
+    'ggcoef.R'
+    'ggcorr.R'
+    'ggfacet.R'
+    'gglyph.R'
+    'ggpairs_getput.R'
+    'ggmatrix.R'
+    'ggmatrix_gtable.R'
+    'ggmatrix_gtable_helpers.R'
+    'ggmatrix_legend.R'
+    'ggmatrix_make_plot.R'
+    'ggmatrix_print.R'
+    'ggmatrix_progress.R'
+    'ggnet.R'
+    'ggnet2.R'
+    'ggnetworkmap.R'
+    'ggnostic.R'
+    'ggpairs.R'
+    'ggpairs_add.R'
+    'ggpairs_internal_plots.R'
+    'ggparcoord.R'
+    'ggsave.R'
+    'ggscatmat.R'
+    'ggsurv.R'
+    'ggtable.R'
+    'reexports.R'
+    'utils-pipe.R'
+    'utils.R'
+    'vig_ggally.R'
+    'zzz.R'

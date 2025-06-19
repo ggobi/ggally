@@ -733,7 +733,7 @@ ggnet <- function(
 
 
 igraph_graph_adjacency_matrix <- function(...) {
-  if (packageVersion("igraph") >= "2.0.0") {
+  if (utils::packageVersion("igraph") >= "2.0.0") {
     igraph::graph_from_adjacency_matrix(...)
   } else {
     igraph::graph.adjacency(...)

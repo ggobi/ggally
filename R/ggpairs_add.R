@@ -1,77 +1,11 @@
-#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all plots
-#'
-#' This operator allows you to add \pkg{ggplot2} objects to a \code{\link{ggmatrix}} object.
-#'
-#' If the first object is an object of class \code{\link{ggmatrix}}, you can add
-#' the following types of objects, and it will return a modified \pkg{ggplot2}
-#' object.
-#'
-#' \itemize{
-######   \item \code{data.frame}: replace current data.frame
-######      (must use \code{%+%})
-######   \item \code{uneval}: replace current aesthetics
-######   \item \code{layer}: add new layer
-#'   \item \code{theme}: update plot theme
-#'   \item \code{scale}: replace current scale
-#'   \item \code{coord}: override current coordinate system
-######   \item \code{facet}: override current coordinate faceting
-#' }
-#'
-#' The \code{+} operator completely replaces elements
-#' with elements from e2.
-#'
-#' @param e1 An object of class \code{\link{ggnostic}} or \code{ggplot}
-#' @param e2 A component to add to \code{e1}
-#'
-#' @export
-#' @method + gg
-#' @rdname gg-add
-#' @examples
-#' # small function to display plots only if it's interactive
-#' p_ <- GGally::print_if_interactive
-#' data(tips)
-#'
-#' pm <- ggpairs(tips[, 2:4], ggplot2::aes(color = sex))
-#' ## change to black and white theme
-#' pm + ggplot2::theme_bw()
-#' ## change to linedraw theme
-#' p_(pm + ggplot2::theme_linedraw())
-#' ## change to custom theme
-#' p_(pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue")))
-#' ## add a list of information
-#' extra <- list(ggplot2::theme_bw(), ggplot2::labs(caption = "My caption!"))
-#' p_(pm + extra)
-"+.gg" <- function(e1, e2) {
-  if (!is.ggmatrix(e1)) {
-    if ("add_gg" %in% getNamespaceExports("ggplot2")) {
-      fn <- utils::getFromNamespace("add_gg", "ggplot2")
-    } else {
-      fn <- ggplot2::`%+%`
-    }
-    return(fn(e1, e2))
-  }
-
-  if (is.null(e1$gg)) {
-    e1$gg <- list()
-  }
-  if (inherits(e2, c("labels", "ggplot2::labels"))) {
-    add_labels_to_ggmatrix(e1, e2)
-  } else if (is_theme(e2)) {
-    add_theme_to_ggmatrix(e1, e2)
-  } else if (is.list(e2)) {
-    add_list_to_ggmatrix(e1, e2)
-  } else if (is_ggproto(e2)) {
-    add_to_ggmatrix(e1, e2)
-  } else {
-    stop(
-      "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
-      " Received object with class: '",
-      paste(class(e2), collapse = ", "),
-      "'"
-    )
-  }
-}
-
+# # temp work around for https://github.com/RConsortium/S7/issues/544
+# class_ggmatrix <- S7::new_S3_class("ggmatrix")
+# ggmatrix2 <- S7::new_class(
+#   "ggmatrix2",
+#   properties = list(
+#     pm = class_ggmatrix
+#   )
+# )
 
 add_gg_info <- function(p, gg) {
   if (!is.null(gg)) {
@@ -102,6 +36,10 @@ add_labels_to_ggmatrix <- function(e1, e2) {
   non_ggmatrix_labels <- label_names[!label_names %in% c("x", "y", "title")]
 
   if (length(non_ggmatrix_labels) > 0) {
+    if (is.null(e1$gg)) {
+      e1$gg <- list()
+    }
+
     if (is.null(e1$gg$labs)) {
       e1$gg$labs <- labs()
     }
@@ -112,6 +50,9 @@ add_labels_to_ggmatrix <- function(e1, e2) {
 }
 
 add_theme_to_ggmatrix <- function(e1, e2) {
+  if (is.null(e1$gg)) {
+    e1$gg <- list()
+  }
   # Get the name of what was passed in as e2, and pass along so that it
   # can be displayed in error messages
   # e2name <- deparse(substitute(e2))
@@ -125,14 +66,52 @@ add_theme_to_ggmatrix <- function(e1, e2) {
   e1
 }
 
+#' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all plots
+#'
+#' This operator allows you to add \pkg{ggplot2} objects to a \code{\link{ggmatrix}} object.
+#'
+#' If the first object is an object of class \code{\link{ggmatrix}}, you can add
+#' the following types of objects, and it will return a modified \pkg{ggplot2}
+#' object.
+#'
+#' \itemize{
+######   \item \code{data.frame}: replace current data.frame
+######      (must use \code{%+%})
+######   \item \code{uneval}: replace current aesthetics
+######   \item \code{layer}: add new layer
+#'   \item \code{theme}: update plot theme
+#'   \item \code{scale}: replace current scale
+#'   \item \code{coord}: override current coordinate system
+######   \item \code{facet}: override current coordinate faceting
+#' }
+#'
+#' The \code{+} operator completely replaces elements
+#' with elements from e2.
+#'
+#' @param e1 An object of class \code{\link{ggnostic}} or \code{ggplot}
+#' @param e2 A component to add to \code{e1}
 #' @export
-#' @rdname gg-add
 #' @inheritParams ggmatrix_location
 #' @details
 #' \code{add_to_ggmatrix} gives you more control to modify
 #'   only some subplots.  This function may be replaced and/or removed in the future. \Sexpr[results=rd, stage=render]{lifecycle::badge("experimental")}
 #' @seealso \code{\link{ggmatrix_location}}
 #' @examples
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
+#' data(tips)
+#'
+#' pm <- ggpairs(tips[, 2:4], ggplot2::aes(color = sex))
+#' ## change to black and white theme
+#' pm + ggplot2::theme_bw()
+#' ## change to linedraw theme
+#' p_(pm + ggplot2::theme_linedraw())
+#' ## change to custom theme
+#' p_(pm + ggplot2::theme(panel.background = ggplot2::element_rect(fill = "lightblue")))
+#' ## add a list of information
+#' extra <- list(ggplot2::theme_bw(), ggplot2::labs(caption = "My caption!"))
+#' p_(pm + extra)
+#'
 #' ## modify scale
 #' p_(pm + scale_fill_brewer(type = "qual"))
 #' ## only first row
@@ -381,4 +360,90 @@ add_list_to_ggmatrix <- function(e1, e2) {
 
 is.ggmatrix <- function(x) {
   inherits(x, "ggmatrix")
+}
+
+
+# -------------------------
+
+#' @rawNamespace if (utils::packageVersion("ggplot2") < "3.5.2.9001") S3method("+",gg)
+NULL
+
+
+if (utils::packageVersion("ggplot2") < "3.5.2.001") {
+  "+.gg" <- function(e1, e2) {
+    if (!is.ggmatrix(e1)) {
+      if ("add_gg" %in% getNamespaceExports("ggplot2")) {
+        fn <- utils::getFromNamespace("add_gg", "ggplot2")
+      } else {
+        fn <- ggplot2::`%+%`
+      }
+      return(fn(e1, e2))
+    }
+
+    if (inherits(e2, c("labels", "ggplot2::labels"))) {
+      add_labels_to_ggmatrix(e1, e2)
+    } else if (is_theme(e2)) {
+      add_theme_to_ggmatrix(e1, e2)
+    } else if (is.list(e2)) {
+      add_list_to_ggmatrix(e1, e2)
+    } else if (is_ggproto(e2)) {
+      add_to_ggmatrix(e1, e2)
+    } else {
+      stop(
+        "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
+        " Received object with class: '",
+        paste(class(e2), collapse = ", "),
+        "'"
+      )
+    }
+  }
+} else {
+  # ggplot2 3.5.2.9001 and later!
+
+  class_gg <- ggplot2:::class_gg
+
+  class_ggproto <- ggplot2:::class_ggproto
+  # class_gtable <- ggplot2:::class_gtable
+  # class_scale <- ggplot2:::class_scale
+  # class_guides <- ggplot2:::class_guides
+  # class_coord <- ggplot2:::class_coord
+  # class_facet <- ggplot2:::class_facet
+  # class_layer <- ggplot2:::class_layer
+  # class_layout <- ggplot2:::class_layout
+  # class_scales_list <- ggplot2:::class_scales_list
+  class_theme <- ggplot2:::class_theme
+  class_labels <- ggplot2:::class_labels
+  # class_mapping <- ggplot2:::class_mapping
+  # class_ggplot <- ggplot2:::class_ggplot
+  # class_ggplot_built <- ggplot2:::class_ggplot_built
+
+  S7::method(`+`, list(ggmatrix, class_labels)) <-
+    function(e1, e2) {
+      add_labels_to_ggmatrix(e1, e2)
+    }
+
+  S7::method(`+`, list(ggmatrix, class_theme)) <-
+    function(e1, e2) {
+      add_theme_to_ggmatrix(e1, e2)
+    }
+
+  S7::method(`+`, list(ggmatrix, class_ggproto)) <-
+    function(e1, e2) {
+      add_to_ggmatrix(e1, e2)
+    }
+
+  S7::method(`+`, list(ggmatrix, S7::class_list)) <-
+    function(e1, e2) {
+      add_list_to_ggmatrix(e1, e2)
+    }
+
+  S7::method(`+`, list(ggmatrix, S7::class_any)) <-
+    function(e1, e2) {
+      stop(
+        "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
+        " Received object with class: '",
+        paste(class(e2), collapse = ", "),
+        "'"
+      )
+    }
 }

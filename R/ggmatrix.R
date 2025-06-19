@@ -49,70 +49,103 @@
 #'   showXAxisPlotLabels = FALSE
 #' )
 #' p_(pm)
-ggmatrix <- function(
-  plots,
-  nrow,
-  ncol,
-  xAxisLabels = NULL,
-  yAxisLabels = NULL,
-  title = NULL,
-  xlab = NULL,
-  ylab = NULL,
-  byrow = TRUE,
-  showStrips = NULL,
-  showAxisPlotLabels = TRUE,
-  showXAxisPlotLabels = TRUE,
-  showYAxisPlotLabels = TRUE,
-  labeller = NULL,
-  switch = NULL,
-  xProportions = NULL,
-  yProportions = NULL,
-  progress = NULL,
-  data = NULL,
-  gg = NULL,
-  legend = NULL
-) {
-  if (!is.list(plots)) {
-    stop("'plots' must be a list()")
+ggmatrix <- S7::new_class(
+  "ggmatrix",
+  properties = list(
+    data = S7::class_data.frame,
+    plots = S7::class_list,
+    title = S7::class_any,
+    xlab = S7::class_any,
+    ylab = S7::class_any,
+    showStrips = S7::new_union(S7::class_logical, NULL),
+    xAxisLabels = S7::class_any,
+    yAxisLabels = S7::class_any,
+    showXAxisPlotLabels = S7::class_logical,
+    showYAxisPlotLabels = S7::class_logical,
+    labeller = S7::class_any,
+    switch = S7::new_union(S7::class_character, NULL),
+    # xProportions = S7::new_union(S7::class_numeric, S7::class_grid_unit, NULL),
+    xProportions = S7::class_any,
+    yProportions = S7::class_any,
+    progress = S7::new_union(
+      S7::new_S3_class("progress_bar"),
+      S7::class_function,
+      S7::class_logical,
+      NULL
+    ),
+    legend = S7::class_any,
+    gg = S7::new_union(S7::class_list, NULL),
+    nrow = S7::class_numeric,
+    ncol = S7::class_numeric,
+    byrow = S7::class_logical,
+    meta = S7::class_list
+  ),
+  constructor = function(
+    plots,
+    nrow,
+    ncol,
+    xAxisLabels = NULL,
+    yAxisLabels = NULL,
+    title = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    byrow = TRUE,
+    showStrips = NULL,
+    showAxisPlotLabels = TRUE,
+    showXAxisPlotLabels = TRUE,
+    showYAxisPlotLabels = TRUE,
+    labeller = NULL,
+    switch = NULL,
+    xProportions = NULL,
+    yProportions = NULL,
+    progress = NULL,
+    data = NULL,
+    gg = NULL,
+    legend = NULL
+  ) {
+    if (!is.list(plots)) {
+      stop("'plots' must be a list()")
+    }
+    check_nrow_ncol(nrow, "nrow")
+    check_nrow_ncol(ncol, "ncol")
+
+    if (!missing(showAxisPlotLabels)) {
+      showXAxisPlotLabels <- showAxisPlotLabels
+      showYAxisPlotLabels <- showAxisPlotLabels
+    }
+
+    progress <- as_ggmatrix_progress(progress, nrow * ncol)
+
+    ret <-
+      S7::new_object(
+        S7::S7_object(),
+        data = data,
+        plots = plots,
+        title = title,
+        xlab = xlab,
+        ylab = ylab,
+        showStrips = showStrips,
+        xAxisLabels = xAxisLabels,
+        yAxisLabels = yAxisLabels,
+        showXAxisPlotLabels = showXAxisPlotLabels,
+        showYAxisPlotLabels = showYAxisPlotLabels,
+        labeller = labeller,
+        switch = switch,
+        xProportions = xProportions,
+        yProportions = yProportions,
+        progress = progress,
+        legend = legend,
+        gg = gg,
+        nrow = nrow,
+        ncol = ncol,
+        byrow = byrow,
+        meta = list()
+      )
+    # Prefix with ggmatrix class
+    class(ret) <- c("ggmatrix", class(ret))
+    ret
   }
-  check_nrow_ncol(nrow, "nrow")
-  check_nrow_ncol(ncol, "ncol")
-
-  if (!missing(showAxisPlotLabels)) {
-    showXAxisPlotLabels <- showAxisPlotLabels
-    showYAxisPlotLabels <- showAxisPlotLabels
-  }
-
-  progress <- as_ggmatrix_progress(progress, nrow * ncol)
-
-  plotMatrix <- list(
-    data = data,
-    plots = plots,
-    title = title,
-    xlab = xlab,
-    ylab = ylab,
-    showStrips = showStrips,
-    xAxisLabels = xAxisLabels,
-    yAxisLabels = yAxisLabels,
-    showXAxisPlotLabels = showXAxisPlotLabels,
-    showYAxisPlotLabels = showYAxisPlotLabels,
-    labeller = labeller,
-    switch = switch,
-    xProportions = xProportions,
-    yProportions = yProportions,
-    progress = progress,
-    legend = legend,
-    gg = gg,
-    nrow = nrow,
-    ncol = ncol,
-    byrow = byrow
-  )
-
-  attributes(plotMatrix)$class <- c("ggmatrix", "gg")
-
-  plotMatrix
-}
-
+)
 
 check_nrow_ncol <- function(x, title) {
   if (!is.numeric(x)) {
@@ -122,3 +155,81 @@ check_nrow_ncol <- function(x, title) {
     stop(paste("'", title, "' must be a single numeric value", sep = ""))
   }
 }
+
+
+# ------------------------------------------------------
+
+# The following extractors and subassignment operators are for a smooth
+# transition and should be deprecated in the release cycle after 4.0.0
+# TODO: should convert to proper S7 method once bug in S7 is resolved
+
+# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[",GGally::ggmatrix)
+# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[<-",GGally::ggmatrix)
+# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[[",GGally::ggmatrix)
+# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[[<-",GGally::ggmatrix)
+# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("$",GGally::ggmatrix)
+# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("$<-",GGally::ggmatrix)
+
+#' @export
+`$.GGally::ggmatrix` <- function(x, i) {
+  if (!S7::prop_exists(x, i) && S7::prop_exists(x, "meta")) {
+    # This is a trick to bridge a gap between S3 and S7. We're allowing
+    # for arbitrary fields by reading/writing to the 'meta' field when the
+    # index does not point to an actual property.
+    # The proper way to go about this is to implement new fields as properties
+    # of a ggplot subclass.
+    S7::prop(x, "meta")[[i]]
+  } else {
+    `[[`(S7::props(x), i)
+  }
+}
+
+#' @export
+`$<-.GGally::ggmatrix` <- function(x, i, value) {
+  if (!S7::prop_exists(x, i) && S7::prop_exists(x, "meta")) {
+    # See explanation in `$.GGally::ggmatrix`
+    S7::prop(x, "meta")[[i]] <- value
+  } else {
+    S7::props(x) <- `[[<-`(S7::props(x), i, value)
+  }
+  x
+}
+
+#' @include ggpairs_getput.R
+#' @export
+`[.GGally::ggmatrix` <- `[.ggmatrix`
+#' @export
+`[<-.GGally::ggmatrix` <- `[<-.ggmatrix`
+
+# #' @export
+# `[.GGally::ggmatrix` <- function(x, i) {
+#   `[`(S7::props(x), i)
+# }
+
+# #' @export
+# `[<-.GGally::ggmatrix` <- function(x, i, value) {
+#   S7::props(x) <- `[<-`(S7::props(x), i, value)
+#   x
+# }
+
+#' @export
+`[[.GGally::ggmatrix` <- `$.GGally::ggmatrix`
+
+#' @export
+`[[<-.GGally::ggmatrix` <- `$<-.GGally::ggmatrix`
+
+#' @importFrom S7 convert
+S7::method(convert, list(from = ggmatrix, to = S7::class_list)) <-
+  function(from, to) {
+    vals <- S7::props(from)
+    meta <- vals$meta
+    # Remove meta from the list of properties
+    vals$meta <- NULL
+    # Collect the original values and the user added meta data
+    c(vals, meta)
+  }
+
+S7::method(as.list, class_ggplot) <- function(x, ...) {
+  convert(x, S7::class_list)
+}
+rm(`as.list`)

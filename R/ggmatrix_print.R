@@ -1,3 +1,6 @@
+#' @include ggmatrix.R
+NULL
+
 ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 
 #' Print \code{\link{ggmatrix}} object
@@ -12,12 +15,13 @@ ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 #' @author Barret Schloerke
 #' @import utils
 #' @importFrom grid grid.newpage grid.draw seekViewport pushViewport upViewport
-#' @export
+# ' @export
+#' @name print.ggmatrix
 #' @examples
 #' data(tips)
 #' pMat <- ggpairs(tips, c(1, 3, 2), mapping = ggplot2::aes(color = sex))
 #' pMat # calls print(pMat), which calls print.ggmatrix(pMat)
-print.ggmatrix <- function(x, newpage = is.null(vp), vp = NULL, ...) {
+S7::method(print, ggmatrix) <- function(x, newpage = TRUE, vp = NULL, ...) {
   if (newpage) {
     grid.newpage()
   }
