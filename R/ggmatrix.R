@@ -229,7 +229,8 @@ S7::method(convert, list(from = ggmatrix, to = S7::class_list)) <-
     c(vals, meta)
   }
 
-S7::method(as.list, class_ggplot) <- function(x, ...) {
-  convert(x, S7::class_list)
-}
-rm(`as.list`)
+local({
+  S7::method(as.list, class_ggplot) <- function(x, ...) {
+    convert(x, S7::class_list)
+  }
+})
