@@ -160,15 +160,7 @@ check_nrow_ncol <- function(x, title) {
 # ------------------------------------------------------
 
 # The following extractors and subassignment operators are for a smooth
-# transition and should be deprecated in the release cycle after 4.0.0
-# TODO: should convert to proper S7 method once bug in S7 is resolved
-
-# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[",GGally::ggmatrix)
-# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[<-",GGally::ggmatrix)
-# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[[",GGally::ggmatrix)
-# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("[[<-",GGally::ggmatrix)
-# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("$",GGally::ggmatrix)
-# ' @rawNamespace if (utils::packageVersion("ggplot2") >= "3.5.2.9001") S3method("$<-",GGally::ggmatrix)
+# transition and should be deprecated in the release cycle of choice
 
 #' @export
 `$.GGally::ggmatrix` <- function(x, i) {
@@ -201,16 +193,6 @@ check_nrow_ncol <- function(x, title) {
 #' @export
 `[<-.GGally::ggmatrix` <- `[<-.ggmatrix`
 
-# #' @export
-# `[.GGally::ggmatrix` <- function(x, i) {
-#   `[`(S7::props(x), i)
-# }
-
-# #' @export
-# `[<-.GGally::ggmatrix` <- function(x, i, value) {
-#   S7::props(x) <- `[<-`(S7::props(x), i, value)
-#   x
-# }
 
 #' @export
 `[[.GGally::ggmatrix` <- `$.GGally::ggmatrix`
