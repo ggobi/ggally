@@ -357,9 +357,10 @@ is.ggmatrix <- function(x) {
 # -------------------------
 
 #' @rawNamespace if (utils::packageVersion("ggplot2") < "3.5.2.9001") S3method("+",gg)
+#' @rawNamespace if (utils::packageVersion("ggplot2") < "3.5.2.9001") S3method("+",ggmatrix)
 NULL
 #' @exportS3Method NULL
-"+.gg" <- function(e1, e2) {
+"+.ggmatrix" <- "+.gg" <- function(e1, e2) {
   if (!is.ggmatrix(e1)) {
     if ("add_gg" %in% getNamespaceExports("ggplot2")) {
       fn <- utils::getFromNamespace("add_gg", "ggplot2")
