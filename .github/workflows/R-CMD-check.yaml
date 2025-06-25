@@ -28,8 +28,8 @@ jobs:
 
           # Test with dev ggplot2
           - extra-packages: |
-              tidyverse/ggstats
-            cache-version: "dev-ggstats"
+              tidyverse/ggplot2
+            cache-version: "dev-ggplot2"
 
     with:
       # * ggstats: needs R >= 4.2.0
