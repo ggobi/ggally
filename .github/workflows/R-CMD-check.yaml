@@ -24,13 +24,16 @@ jobs:
       matrix:
         config:
           # Regular CRAN checks
-          - {}
+          - cache-version: "cran"
+
           # Test with dev ggplot2
           - extra-packages: |
               tidyverse/ggstats
+            cache-version: "dev-ggstats"
 
     with:
       # * ggstats: needs R >= 4.2.0
       minimum-r-version: "4.2.0"
       check-timeout-minutes: 60
       extra-packages: ${{ matrix.config.extra-packages || '' }}
+      cache-version: ${{ matrix.config.cache-version }}
