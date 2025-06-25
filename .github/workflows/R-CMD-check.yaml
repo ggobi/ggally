@@ -20,16 +20,17 @@ jobs:
       format-r-code: true
   R-CMD-check:
     uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
-    with:
-      # * ggstats: needs R >= 4.2.0
-      minimum-r-version: "4.2.0"
-      check-timeout-minutes: 60
+    strategy:
+      matrix:
+        config:
+          # Regular CRAN checks
+          - {}
+          # Test with dev ggplot2
+          - extra-packages: |
+              tidyverse/ggstats
 
-  R-CMD-check-dev-ggplot2:
-    uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
     with:
-      extra-packages: |
-        tidyverse/ggplot2
       # * ggstats: needs R >= 4.2.0
       minimum-r-version: "4.2.0"
       check-timeout-minutes: 60
+      extra-packages: ${{ matrix.config.extra-packages || '' }}
