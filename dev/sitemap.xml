@@ -1,4 +1,5 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://ggobi.github.io/ggally/dev/CODE_OF_CONDUCT.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/ISSUE_TEMPLATE.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/articles/ggally_plots.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/articles/ggally_stats.html</loc></url>
@@ -22,6 +23,7 @@
 <url><loc>https://ggobi.github.io/ggally/dev/reference/add_and_overwrite_aes.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/add_ref_boxes.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/add_ref_lines.html</loc></url>
+<url><loc>https://ggobi.github.io/ggally/dev/reference/add_to_ggmatrix.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/australia_PISA2012.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/baseball.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/brew_colors.html</loc></url>
@@ -33,7 +35,6 @@
 <url><loc>https://ggobi.github.io/ggally/dev/reference/fn_switch.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/getPlot.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/get_x_axis_labels.html</loc></url>
-<url><loc>https://ggobi.github.io/ggally/dev/reference/gg-add.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/ggally_autopoint.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/ggally_barDiag.html</loc></url>
 <url><loc>https://ggobi.github.io/ggally/dev/reference/ggally_blank.html</loc></url>
