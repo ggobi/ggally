@@ -1,35 +1,35 @@
 test_that("example", {
   data(tips)
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "point",
     ggplot(tips) +
       aes(x = day, y = total_bill) +
       geom_point()
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-default",
     ggplot(tips) +
       aes(x = day, y = total_bill) +
       stat_weighted_mean()
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-line",
     ggplot(tips) +
       aes(x = day, y = total_bill, group = 1) +
       stat_weighted_mean(geom = "line")
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-line-grouped",
     ggplot(tips) +
       aes(x = day, y = total_bill, colour = sex, group = sex) +
       stat_weighted_mean(geom = "line")
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-bar-dodge",
     ggplot(tips) +
       aes(x = day, y = total_bill, fill = sex) +
@@ -37,7 +37,7 @@ test_that("example", {
   )
 
   # computing a proportion on the fly
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "geom-bar-dodge-percent",
     ggplot(tips) +
       aes(x = day, y = as.integer(smoker == "Yes"), fill = sex) +
@@ -47,7 +47,7 @@ test_that("example", {
 
   # taking into account some weights
   d <- as.data.frame(Titanic)
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "titanic",
     ggplot(d) +
       aes(
@@ -65,37 +65,37 @@ test_that("example", {
   tips_f$day <- factor(tips$day, c("Thur", "Fri", "Sat", "Sun"))
 
   # Numeric variable
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends",
     ggally_trends(tips_f, mapping = aes(x = day, y = total_bill))
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-color",
     ggally_trends(tips_f, mapping = aes(x = day, y = total_bill, colour = time))
   )
 
   # Binary variable
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-binary",
     ggally_trends(tips_f, mapping = aes(x = day, y = smoker))
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-binary-color",
     ggally_trends(tips_f, mapping = aes(x = day, y = smoker, colour = sex))
   )
 
   # Discrete variable with 3 or more categories
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-many",
     ggally_trends(tips_f, mapping = aes(x = smoker, y = day))
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-many-color",
     ggally_trends(tips_f, mapping = aes(x = smoker, y = day, color = sex))
   )
 
   # Include zero on Y axis
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-incl-zero-false",
     ggally_trends(
       tips_f,
@@ -103,7 +103,7 @@ test_that("example", {
       include_zero = TRUE
     )
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-incl-zero-true",
     ggally_trends(
       tips_f,
@@ -113,7 +113,7 @@ test_that("example", {
   )
 
   # Change line size
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-size-3",
     ggally_trends(
       tips_f,
@@ -124,7 +124,7 @@ test_that("example", {
 
   # Define weights with the appropriate aesthetic
   d <- as.data.frame(Titanic)
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "trends-titanic",
     ggally_trends(
       d,

@@ -21,13 +21,6 @@
 <rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
 </g>
 <defs>
-  <clipPath id='cpNS40OHwzNDguOTR8MzkuNDN8MzAyLjI0'>
-    <rect x='5.48' y='39.43' width='343.46' height='262.80' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpNS40OHwzNDguOTR8MzkuNDN8MzAyLjI0)'>
-</g>
-<defs>
   <clipPath id='cpNS40OHwzNDguOTR8MzkuNDN8MTI2LjA3'>
     <rect x='5.48' y='39.43' width='343.46' height='86.64' />
   </clipPath>
@@ -56,7 +49,7 @@
 <rect x='125.17' y='120.53' width='104.08' height='1.61' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='229.25' y='122.14' width='104.08' height='0.00' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 </g>
-<g clip-path='url(#cpNS40OHwzNDguOTR8MzkuNDN8MzAyLjI0)'>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
   <clipPath id='cpNS40OHwzNDguOTR8MTI3LjUxfDIxNC4xNg=='>
@@ -87,7 +80,7 @@
 <rect x='125.17' y='137.88' width='104.08' height='72.33' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='229.25' y='202.18' width='104.08' height='8.04' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 </g>
-<g clip-path='url(#cpNS40OHwzNDguOTR8MzkuNDN8MzAyLjI0)'>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
   <clipPath id='cpNS40OHwzNDguOTR8MjE1LjYwfDMwMi4yNA=='>
@@ -117,12 +110,6 @@
 <rect x='21.09' y='298.30' width='104.08' height='0.00' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='125.17' y='293.48' width='104.08' height='4.82' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='229.25' y='222.75' width='104.08' height='75.55' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
-</g>
-<g clip-path='url(#cpNS40OHwzNDguOTR8MzkuNDN8MzAyLjI0)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<g clip-path='url(#cpNS40OHwzNDguOTR8MzkuNDN8MzAyLjI0)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
@@ -309,10 +296,6 @@
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
-<g clip-path='url(#cpNS40OHwzNDguOTR8MzA3LjcyfDU3MC41Mg==)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
 <defs>
   <clipPath id='cpMzU0LjQxfDY5Ny44N3wzOS40M3wzMDIuMjQ='>
     <rect x='354.41' y='39.43' width='343.46' height='262.80' />
@@ -326,22 +309,11 @@
 <polyline points='418.81,302.24 418.81,39.43 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='526.14,302.24 526.14,39.43 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='633.47,302.24 633.47,39.43 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
-<rect x='585.17' y='216.15' width='96.60' height='74.15' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
-<rect x='477.84' y='133.76' width='96.60' height='74.15' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
-<rect x='370.51' y='51.38' width='96.60' height='74.15' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
+<rect x='585.17' y='216.15' width='96.60' height='74.15' style='stroke-width: 0.43; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
+<rect x='477.84' y='133.76' width='96.60' height='74.15' style='stroke-width: 0.43; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
+<rect x='370.51' y='51.38' width='96.60' height='74.15' style='stroke-width: 0.43; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<g clip-path='url(#cpMzU0LjQxfDY5Ny44N3wzOS40M3wzMDIuMjQ=)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<defs>
-  <clipPath id='cpMzU0LjQxfDY5Ny44N3wzMDcuNzJ8NTcwLjUy'>
-    <rect x='354.41' y='307.72' width='343.46' height='262.80' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMzU0LjQxfDY5Ny44N3wzMDcuNzJ8NTcwLjUy)'>
 </g>
 <defs>
   <clipPath id='cpMzU0LjQxfDQ2Ny45NHwzMDcuNzJ8NTcwLjUy'>
@@ -376,7 +348,7 @@
 <rect x='359.57' y='367.44' width='0.00' height='47.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='359.57' y='319.66' width='0.00' height='47.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 </g>
-<g clip-path='url(#cpMzU0LjQxfDY5Ny44N3wzMDcuNzJ8NTcwLjUy)'>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
   <clipPath id='cpNDY5LjM4fDU4Mi45MXwzMDcuNzJ8NTcwLjUy'>
@@ -411,7 +383,7 @@
 <rect x='474.54' y='367.44' width='19.66' height='47.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='474.54' y='319.66' width='0.00' height='47.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 </g>
-<g clip-path='url(#cpMzU0LjQxfDY5Ny44N3wzMDcuNzJ8NTcwLjUy)'>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
   <clipPath id='cpNTg0LjM1fDY5Ny44N3wzMDcuNzJ8NTcwLjUy'>
@@ -445,12 +417,6 @@
 <rect x='589.51' y='415.23' width='66.35' height='47.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='589.51' y='367.44' width='39.32' height='47.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
 <rect x='589.51' y='319.66' width='14.74' height='47.78' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
-</g>
-<g clip-path='url(#cpMzU0LjQxfDY5Ny44N3wzMDcuNzJ8NTcwLjUy)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<g clip-path='url(#cpMzU0LjQxfDY5Ny44N3wzMDcuNzJ8NTcwLjUy)'>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>

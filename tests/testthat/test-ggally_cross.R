@@ -3,20 +3,20 @@ test_that("example", {
   data(tips)
 
   # Custom fill
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-fill-red",
     ggally_cross(tips, mapping = aes(x = smoker, y = sex), fill = "red")
   )
 
   # Custom shape
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-shape",
     ggally_cross(tips, mapping = aes(x = smoker, y = sex), shape = 21)
   )
 
   # Fill squares according to standardized residuals
   d <- as.data.frame(Titanic)
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "titanic-fill-steps2",
     ggally_cross(
       d,
@@ -31,7 +31,7 @@ test_that("example", {
   )
 
   # Add labels
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-label",
     ggally_cross(
       tips,
@@ -45,7 +45,7 @@ test_that("example", {
   )
 
   # Customize labels' appearance and same size for all squares
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-label-custom",
     ggally_cross(
       tips,
@@ -61,33 +61,33 @@ test_that("example", {
     )
   )
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-sex",
     ggally_cross(tips, mapping = aes(x = smoker, y = sex))
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-time",
     ggally_cross(tips, mapping = aes(x = day, y = time))
   )
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-time-color",
     ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = smoker))
   )
 
   # colour is kept only if equal to x or y
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-color-equal",
     ggally_table(tips, mapping = aes(x = smoker, y = sex, colour = day))
   )
 
   # diagonal version
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-diagonal",
     ggally_tableDiag(tips, mapping = aes(x = smoker))
   )
 
   # custom label size and color
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "tips-red-size16",
     ggally_table(
       tips,
@@ -98,7 +98,7 @@ test_that("example", {
   )
 
   # display column proportions
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "table-label",
     ggally_table(
       tips,
@@ -111,7 +111,7 @@ test_that("example", {
   )
 
   # draw table cells
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "table-color-fill",
     ggally_table(
       tips,
@@ -121,7 +121,7 @@ test_that("example", {
   )
 
   # Use standardized residuals to fill table cells
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "table-fill-steps2",
     ggally_table(
       as.data.frame(Titanic),

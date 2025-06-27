@@ -28,7 +28,6 @@ test_that("structure", {
     expect_null(x$legend)
     expect_type(x$byrow, "logical")
     expect_null(x$gg)
-    expect_true("gg" %in% names(x))
   }
 
   expect_obj(ggduo(tips))
@@ -456,7 +455,7 @@ test_that("axisLabels", {
       expect_false(is.null(pm$xAxisLabels))
       expect_false(is.null(pm$yAxisLabels))
     }
-    vdiffr::expect_doppelganger(
+    ggally_expect_doppelganger(
       paste0("axisLabels-", prefix, "-", axisLabel),
       pm
     )
@@ -516,7 +515,7 @@ test_that("strips and axis", {
     title = "Axis should line up even if strips are present",
     lower = list(combo = wrap("facethist", binwidth = 1))
   )
-  vdiffr::expect_doppelganger("show-strips", pm)
+  ggally_expect_doppelganger("show-strips", pm)
   # default behavior. tested in other places
   # expect_silent({
   #   pm <- ggpairs(tips, c(3, 1, 4), showStrips = FALSE)
@@ -600,8 +599,18 @@ test_that("user functions", {
       "GeomPoint" %in% class(y$layers[[1]]$geom)
     )
 
-    expect_equal(x$labels, list(x = "total_bill", y = "tip"))
-    expect_equal(x$labels, y$labels)
+    if (packageVersion("ggplot2") > "3.5.2") {
+      x_built <- ggplot2::build_ggplot(x)
+      y_built <- ggplot2::build_ggplot(y)
+      expect_equal(
+        x_built@plot@labels[c("x", "y")],
+        list(x = "total_bill", y = "tip")
+      )
+      expect_equal(x_built@plot@labels, y_built@plot@labels)
+    } else {
+      expect_equal(x$labels, list(x = "total_bill", y = "tip"))
+      expect_equal(x$labels, y$labels)
+    }
   }
   expect_equal_plots(p0, p1)
   expect_equal_plots(p0, p2)
@@ -686,7 +695,7 @@ test_that("strip-top and strip-right", {
     upper = list(discrete = double_strips),
     progress = FALSE
   )
-  vdiffr::expect_doppelganger("nested-strips-default", pm)
+  ggally_expect_doppelganger("nested-strips-default", pm)
   pm <- ggpairs(
     tips,
     3:6,
@@ -696,7 +705,7 @@ test_that("strip-top and strip-right", {
     showStrips = TRUE,
     progress = FALSE
   )
-  vdiffr::expect_doppelganger("nested-strips-true", pm)
+  ggally_expect_doppelganger("nested-strips-true", pm)
 })
 
 
@@ -760,7 +769,11 @@ ggpairs_fn1 <- function(title, types, diag, ...) {
 }
 
 ggpairs_fn2 <- function(...) {
-  ggpairs_fn1(..., mapping = ggplot2::aes(color = .data$day), legend = c(1, 3))
+  ggpairs_fn1(
+    ...,
+    mapping = ggplot2::aes(color = !!as.name("day")),
+    legend = c(1, 3)
+  )
 }
 
 ggduo_fn1 <- function(title, types, diag, ...) {
@@ -931,7 +944,7 @@ for (fn_info in list(
           suppressWarnings({
             built_pm <- ggmatrix_gtable(pm)
           })
-          vdiffr::expect_doppelganger(pm_name, built_pm)
+          ggally_expect_doppelganger(pm_name, built_pm)
         },
         error = function(e) {
           if (interactive()) {
