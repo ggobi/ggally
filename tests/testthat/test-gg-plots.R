@@ -67,7 +67,7 @@ test_that("cor", {
     )
   }
 
-  vdiffr::expect_doppelganger(
+  ggally_expect_doppelganger(
     "cor-green",
     ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = I("green")))
   )
@@ -210,11 +210,11 @@ test_that("rescale", {
     rescale = FALSE
   )
   expect_true(get_labs(p)$y == "density")
-  vdiffr::expect_doppelganger("rescale-false", p)
+  ggally_expect_doppelganger("rescale-false", p)
 
   p <- ggally_densityDiag(tips, mapping = ggplot2::aes(x = day), rescale = TRUE)
   expect_true(!identical(get_labs(p)$y, "density"))
-  vdiffr::expect_doppelganger("rescale-true", p)
+  ggally_expect_doppelganger("rescale-true", p)
 
   p <- ggally_barDiag(
     tips,
@@ -223,7 +223,7 @@ test_that("rescale", {
     rescale = FALSE
   )
   expect_true(get_labs(p)$y == "count")
-  vdiffr::expect_doppelganger("rescale-false-binwidth", p)
+  ggally_expect_doppelganger("rescale-false-binwidth", p)
 
   p <- ggally_barDiag(
     tips,
@@ -232,7 +232,7 @@ test_that("rescale", {
     rescale = TRUE
   )
   expect_true(!identical(get_labs(p)$y, "count"))
-  vdiffr::expect_doppelganger("rescale-true-binwidth", p)
+  ggally_expect_doppelganger("rescale-true-binwidth", p)
 })
 
 
@@ -242,7 +242,7 @@ test_that("shrink", {
     mapping = ggplot2::aes(Sepal.Width, Petal.Length)
   )
   expect_true(!is.null(p$coordinates$limits$y))
-  vdiffr::expect_doppelganger("shrink-true", p)
+  ggally_expect_doppelganger("shrink-true", p)
 
   p <- ggally_smooth_loess(
     iris,
@@ -250,7 +250,7 @@ test_that("shrink", {
     shrink = FALSE
   )
   expect_true(is.null(p$coordinates$limits$y))
-  vdiffr::expect_doppelganger("shrink-false", p)
+  ggally_expect_doppelganger("shrink-false", p)
 })
 
 test_that("smooth_se", {
@@ -260,7 +260,7 @@ test_that("smooth_se", {
     se = TRUE
   )
   expect_equal(p$layers[[2]]$stat_params$se, TRUE)
-  vdiffr::expect_doppelganger("smooth-se-true", p)
+  ggally_expect_doppelganger("smooth-se-true", p)
 
   p <- ggally_smooth_loess(
     iris,
@@ -268,7 +268,7 @@ test_that("smooth_se", {
     se = FALSE
   )
   expect_equal(p$layers[[2]]$stat_params$se, FALSE)
-  vdiffr::expect_doppelganger("smooth-se-false", p)
+  ggally_expect_doppelganger("smooth-se-false", p)
 })
 
 
@@ -277,26 +277,26 @@ test_that("ggally_count", {
     as.data.frame(Titanic),
     ggplot2::aes(x = Class, y = Survived, weight = Freq)
   )
-  vdiffr::expect_doppelganger("titanic-count", p)
+  ggally_expect_doppelganger("titanic-count", p)
 
   p <- ggally_count(
     as.data.frame(Titanic),
     ggplot2::aes(x = Class, y = Survived, weight = Freq),
     fill = "red"
   )
-  vdiffr::expect_doppelganger("titanic-count-red", p)
+  ggally_expect_doppelganger("titanic-count-red", p)
 
   p <- ggally_count(
     as.data.frame(Titanic),
     ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Sex)
   )
-  vdiffr::expect_doppelganger("titanic-count-sex", p)
+  ggally_expect_doppelganger("titanic-count-sex", p)
 
   p <- ggally_count(
     as.data.frame(Titanic),
     ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Class)
   )
-  vdiffr::expect_doppelganger("titanic-count-class", p)
+  ggally_expect_doppelganger("titanic-count-class", p)
 
   p <- ggally_count(
     as.data.frame(Titanic),
@@ -307,21 +307,21 @@ test_that("ggally_count", {
       fill = Class
     )
   )
-  vdiffr::expect_doppelganger("titanic-count-interaction", p)
+  ggally_expect_doppelganger("titanic-count-interaction", p)
 
   # check that y character vectors are rendering
   p <- ggally_count(
     as.data.frame(Titanic),
     ggplot2::aes(x = Class, y = toupper(Survived), weight = Freq, fill = Class)
   )
-  vdiffr::expect_doppelganger("titanic-count-toupper", p)
+  ggally_expect_doppelganger("titanic-count-toupper", p)
 
   # check countDiag
   p <- ggally_countDiag(
     as.data.frame(Titanic),
     ggplot2::aes(x = Survived, weight = Freq, fill = Class)
   )
-  vdiffr::expect_doppelganger("titanic-count-diag", p)
+  ggally_expect_doppelganger("titanic-count-diag", p)
 
   # change size of tiles
   p <- ggally_count(
@@ -329,7 +329,7 @@ test_that("ggally_count", {
     ggplot2::aes(x = Class, y = Survived, weight = Freq, fill = Class),
     x.width = .5
   )
-  vdiffr::expect_doppelganger("titanic-count-diag-class", p)
+  ggally_expect_doppelganger("titanic-count-diag-class", p)
 
   # no warnings expected if na.rm = TRUE
   p <- ggally_count(
@@ -342,7 +342,7 @@ test_that("ggally_count", {
     ),
     na.rm = TRUE
   )
-  vdiffr::expect_doppelganger("titanic-count-diag-interaction", p)
+  ggally_expect_doppelganger("titanic-count-diag-interaction", p)
 })
 
 

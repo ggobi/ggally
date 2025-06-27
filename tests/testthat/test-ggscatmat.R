@@ -12,18 +12,18 @@ test_that("example", {
     "Factor variables are omitted in plot"
   )
   expect_true(is.null(get_labs(p)$colour))
-  vdiffr::expect_doppelganger("flea", p)
+  ggally_expect_doppelganger("flea", p)
 
   p <- ggscatmat(flea, columns = 2:4, color = "species")
   expect_true(!is.null(get_labs(p)$colour))
-  vdiffr::expect_doppelganger("flea-color", p)
+  ggally_expect_doppelganger("flea-color", p)
 })
 
 test_that("corMethod", {
   p <- ggscatmat(flea, columns = 2:3, corMethod = "pearson")
-  vdiffr::expect_doppelganger("flea-pearson", p)
+  ggally_expect_doppelganger("flea-pearson", p)
   p <- ggscatmat(flea, columns = 2:3, corMethod = "rsquare")
-  vdiffr::expect_doppelganger("flea-rsquare", p)
+  ggally_expect_doppelganger("flea-rsquare", p)
 })
 
 test_that("stops", {

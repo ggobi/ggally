@@ -31,7 +31,7 @@ test_that("expression labels", {
   exprs <- c("alpha[0]", "gamma[x + y ^ z]")
 
   p <- ggpairs(tips, 1:2, columnLabels = exprs, labeller = "label_parsed")
-  vdiffr::expect_doppelganger("expression-labels", p)
+  ggally_expect_doppelganger("expression-labels", p)
 
   expect_error(
     print(ggpairs(tips, 1:2, columnLabels = expression(alpha, beta))),
@@ -98,7 +98,7 @@ test_that("missing plot", {
     byrow = TRUE
   )
   # reaches code where there are more cells than plots
-  vdiffr::expect_doppelganger("not-enough-plots", a)
+  ggally_expect_doppelganger("not-enough-plots", a)
 
   expect_equal(a[1, 1]$ggally_check_val, 1)
   expect_equal(a[1, 3]$ggally_check_val, 3)
@@ -125,10 +125,10 @@ test_that("str.ggmatrix", {
 test_that("blank", {
   pm <- ggpairs(tips, 1:2)
   pm[1, 2] <- "blank"
-  vdiffr::expect_doppelganger("blank-1_2", pm)
+  ggally_expect_doppelganger("blank-1_2", pm)
 
   pm[2, 1] <- NULL
-  vdiffr::expect_doppelganger("blank-1_2-2_1", pm)
+  ggally_expect_doppelganger("blank-1_2-2_1", pm)
 
   expect_equal(length(pm$plots), 4)
 
@@ -153,7 +153,7 @@ test_that("proportions", {
     yProportions = c(1, 2),
     title = "big plot, small marginals"
   )
-  vdiffr::expect_doppelganger("proportions", pm2)
+  ggally_expect_doppelganger("proportions", pm2)
 
   # turn on progress for a quick plot
   # TODO - turn test back on when it uses message properly
