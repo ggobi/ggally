@@ -28,6 +28,8 @@
 
 * Remove `gg` class from `ggmatrix` objects. This is no longer needed due to enhanced `+` S7 methods. (#549)
 
+* Bumped minimum required version of `R` to 4.3 due to S7 handling the `+` operations. (#615)
+
 
 # GGally 2.2.1
 
