@@ -122,7 +122,7 @@ add_to_ggmatrix <- function(
   rows = NULL,
   cols = NULL
 ) {
-  if (!is.ggmatrix(e1)) {
+  if (!is_ggmatrix(e1)) {
     stop("e1 should be a ggmatrix.")
   }
   if (!is_ggproto(e2)) {
@@ -217,7 +217,7 @@ ggmatrix_location <- function(
   rows = NULL,
   cols = NULL
 ) {
-  if (!is.ggmatrix(pm)) {
+  if (!is_ggmatrix(pm)) {
     stop("pm should be a ggmatrix.")
   }
 
@@ -349,7 +349,15 @@ add_list_to_ggmatrix <- function(e1, e2) {
 }
 
 
-is.ggmatrix <- function(x) {
+#' Check if an object is a ggmatrix
+#'
+#' @param x An object to check
+#' @return Logical value indicating if the object is a `ggmatrix`
+#' @export
+#' @examples
+#' is_ggmatrix(ggpairs(mtcars))
+#' is_ggmatrix(ggplot2::ggplot())
+is_ggmatrix <- function(x) {
   inherits(x, "ggmatrix")
 }
 

@@ -170,6 +170,7 @@ reference:
 
 - title: "ggmatrix() Helpers"
   contents:
+  - is_ggmatrix
   - add_to_ggmatrix
   - ggmatrix_location
   - wrap_fn_with_param_arg
