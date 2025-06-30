@@ -26,6 +26,8 @@
 
 * Added helper method `is_ggmatrix()` to check if an object is a `ggmatrix` object. (#548)
 
+* Remove `gg` class from `ggmatrix` objects. This is no longer needed due to enhanced `+` S7 methods. (#549)
+
 
 # GGally 2.2.1
 
