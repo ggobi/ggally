@@ -369,7 +369,7 @@ is_ggmatrix <- function(x) {
 NULL
 #' @exportS3Method NULL
 "+.ggmatrix" <- "+.gg" <- function(e1, e2) {
-  if (!is.ggmatrix(e1)) {
+  if (!is_ggmatrix(e1)) {
     if ("add_gg" %in% getNamespaceExports("ggplot2")) {
       fn <- utils::getFromNamespace("add_gg", "ggplot2")
     } else {
