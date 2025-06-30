@@ -24,6 +24,8 @@
 
 * Warn and return `"NA"` when less than 3 values are given to a combination in `ggally_cor()`. (Thank you @bk1n! #510)
 
+* Added helper method `is_ggmatrix()` to check if an object is a `ggmatrix` object. (#548)
+
 
 # GGally 2.2.1
 
