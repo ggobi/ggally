@@ -356,18 +356,12 @@ is.ggmatrix <- function(x) {
 
 # -------------------------
 
-#' @rawNamespace if (utils::packageVersion("ggplot2") < "3.5.2.9001") S3method("+",gg)
 #' @rawNamespace if (utils::packageVersion("ggplot2") < "3.5.2.9001") S3method("+",ggmatrix)
 NULL
 #' @exportS3Method NULL
-"+.ggmatrix" <- "+.gg" <- function(e1, e2) {
-  if (!is.ggmatrix(e1)) {
-    if ("add_gg" %in% getNamespaceExports("ggplot2")) {
-      fn <- utils::getFromNamespace("add_gg", "ggplot2")
-    } else {
-      fn <- ggplot2::`%+%`
-    }
-    return(fn(e1, e2))
+"+.ggmatrix" <- function(e1, e2) {
+  if (!is_ggmatrix(e1)) {
+    stop("e1 should be a ggmatrix.")
   }
 
   if (inherits(e2, c("labels", "ggplot2::labels"))) {

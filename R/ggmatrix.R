@@ -142,7 +142,7 @@ ggmatrix <- new_class(
         meta = list()
       )
     # Prefix with ggmatrix class
-    class(ret) <- c("ggmatrix", class(ret), "gg")
+    class(ret) <- c("ggmatrix", class(ret))
     ret
   }
 )
