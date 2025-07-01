@@ -25,17 +25,14 @@ jobs:
         config:
           # Regular CRAN checks
           - cache-version: "cran"
-            # * ggstats: needs R >= 4.2.0
-            minimum-r-version: "4.2.0"
 
           # Test with dev ggplot2
           - extra-packages: |
               tidyverse/ggplot2
             cache-version: "dev-ggplot2"
-            minimum-r-version: "4.3.0"
 
     with:
       check-timeout-minutes: 60
+      minimum-r-version: "4.3.0"
       extra-packages: ${{ matrix.config.extra-packages || '' }}
       cache-version: ${{ matrix.config.cache-version }}
-      minimum-r-version: ${{ matrix.config.minimum-r-version}}
