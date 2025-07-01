@@ -21,6 +21,7 @@ jobs:
   R-CMD-check:
     uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
     strategy:
+      fail-fast: false
       matrix:
         config:
           # Regular CRAN checks
