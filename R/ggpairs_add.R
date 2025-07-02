@@ -391,25 +391,25 @@ NULL
 }
 
 
-if (utils::packageVersion("ggplot2") >= "3.5.2.001") {
-  # ggplot2 3.5.2.9001 and later!
+if (utils::packageVersion("ggplot2") >= "3.5.2.002") {
+  # ggplot2 3.5.2.9002 and later!
 
-  class_gg <- ggplot2:::class_gg
+  # class_gg <- ggplot2::class_gg
 
-  class_ggproto <- ggplot2:::class_ggproto
+  class_ggproto <- ggplot2::class_ggproto
   # class_gtable <- ggplot2:::class_gtable
-  # class_scale <- ggplot2:::class_scale
-  # class_guides <- ggplot2:::class_guides
-  # class_coord <- ggplot2:::class_coord
-  # class_facet <- ggplot2:::class_facet
-  # class_layer <- ggplot2:::class_layer
-  # class_layout <- ggplot2:::class_layout
-  # class_scales_list <- ggplot2:::class_scales_list
-  class_theme <- ggplot2:::class_theme
-  class_labels <- ggplot2:::class_labels
-  # class_mapping <- ggplot2:::class_mapping
-  # class_ggplot <- ggplot2:::class_ggplot
-  # class_ggplot_built <- ggplot2:::class_ggplot_built
+  # class_scale <- ggplot2::class_scale
+  # class_guides <- ggplot2::class_guides
+  # class_coord <- ggplot2::class_coord
+  # class_facet <- ggplot2::class_facet
+  # class_layer <- ggplot2::class_layer
+  # class_layout <- ggplot2::class_layout
+  # class_scales_list <- ggplot2::class_scales_list
+  class_theme <- ggplot2::class_theme
+  class_labels <- ggplot2::class_labels
+  # class_mapping <- ggplot2::class_mapping
+  # class_ggplot <- ggplot2::class_ggplot
+  # class_ggplot_built <- ggplot2::class_ggplot_built
 
   method(`+`, list(ggmatrix, class_labels)) <-
     function(e1, e2) {
