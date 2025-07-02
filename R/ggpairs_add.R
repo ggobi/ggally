@@ -433,11 +433,7 @@ if (utils::packageVersion("ggplot2") >= "3.5.2.001") {
 
   method(`+`, list(ggmatrix, class_any)) <-
     function(e1, e2) {
-      stop(
-        "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
-        " Received object with class: '",
-        paste(class(e2), collapse = ", "),
-        "'"
-      )
+      # Fallback support for ggplot2 <= 3.5.2
+      `+.ggmatrix`(e1, e2)
     }
 }
