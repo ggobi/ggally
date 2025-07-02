@@ -123,7 +123,7 @@ Run `revdepcheck::cloud_details(, "rbioacc")` for more info
       `actual`:   FALSE
       `expected`: TRUE 
       
-      [ FAIL 5 | WARN 85 | SKIP 9 | PASS 75 ]
+      [ FAIL 5 | WARN 87 | SKIP 9 | PASS 75 ]
       Error: Test failures
       Execution halted
     ```
