@@ -396,6 +396,7 @@ if (utils::packageVersion("ggplot2") >= "3.5.2.001") {
 
   class_gg <- utils::getFromNamespace("class_gg", "ggplot2")
 
+  # Waiting for https://github.com/ggobi/ggally/pull/550
   class_ggproto <- utils::getFromNamespace("class_ggproto", "ggplot2")
   # class_gtable <- utils::getFromNamespace("class_gtable", "ggplot2")
   # class_scale <- utils::getFromNamespace("class_scale", "ggplot2")
