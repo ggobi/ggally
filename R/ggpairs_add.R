@@ -394,22 +394,23 @@ NULL
 if (utils::packageVersion("ggplot2") >= "3.5.2.001") {
   # ggplot2 3.5.2.9001 and later!
 
-  class_gg <- ggplot2:::class_gg
+  class_gg <- utils::getFromNamespace("class_gg", "ggplot2")
 
-  class_ggproto <- ggplot2:::class_ggproto
-  # class_gtable <- ggplot2:::class_gtable
-  # class_scale <- ggplot2:::class_scale
-  # class_guides <- ggplot2:::class_guides
-  # class_coord <- ggplot2:::class_coord
-  # class_facet <- ggplot2:::class_facet
-  # class_layer <- ggplot2:::class_layer
-  # class_layout <- ggplot2:::class_layout
-  # class_scales_list <- ggplot2:::class_scales_list
-  class_theme <- ggplot2:::class_theme
-  class_labels <- ggplot2:::class_labels
-  # class_mapping <- ggplot2:::class_mapping
-  # class_ggplot <- ggplot2:::class_ggplot
-  # class_ggplot_built <- ggplot2:::class_ggplot_built
+  # Waiting for https://github.com/ggobi/ggally/pull/550
+  class_ggproto <- utils::getFromNamespace("class_ggproto", "ggplot2")
+  # class_gtable <- utils::getFromNamespace("class_gtable", "ggplot2")
+  # class_scale <- utils::getFromNamespace("class_scale", "ggplot2")
+  # class_guides <- utils::getFromNamespace("class_guides", "ggplot2")
+  # class_coord <- utils::getFromNamespace("class_coord", "ggplot2")
+  # class_facet <- utils::getFromNamespace("class_facet", "ggplot2")
+  # class_layer <- utils::getFromNamespace("class_layer", "ggplot2")
+  # class_layout <- utils::getFromNamespace("class_layout", "ggplot2")
+  # class_scales_list <- utils::getFromNamespace("class_scales_list", "ggplot2")
+  class_theme <- utils::getFromNamespace("class_theme", "ggplot2")
+  class_labels <- utils::getFromNamespace("class_labels", "ggplot2")
+  # class_mapping <- utils::getFromNamespace("class_mapping", "ggplot2")
+  # class_ggplot <- utils::getFromNamespace("class_ggplot", "ggplot2")
+  # class_ggplot_built <- utils::getFromNamespace("class_ggplot_built", "ggplot2")
 
   method(`+`, list(ggmatrix, class_labels)) <-
     function(e1, e2) {

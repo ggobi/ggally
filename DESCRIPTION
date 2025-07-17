@@ -1,7 +1,7 @@
 Type: Package
 Package: GGally
 Title: Extension to 'ggplot2'
-Version: 2.2.1.9000
+Version: 2.3.0
 Authors@R: c(
     person("Barret", "Schloerke", , "schloerke@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9986-114X")),
