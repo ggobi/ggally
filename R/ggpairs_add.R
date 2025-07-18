@@ -392,8 +392,6 @@ NULL
 
 
 if (utils::packageVersion("ggplot2") >= "3.5.2.002") {
-  # ggplot2 3.5.2.9002 and later!
-
   class_ggproto <- ggplot2::class_ggproto
   class_theme <- ggplot2::class_theme
   class_labels <- ggplot2::class_labels
