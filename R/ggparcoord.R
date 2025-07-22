@@ -564,12 +564,12 @@ ggparcoord <- function(
 
   if (!is.null(shadeBox)) {
     # Fix so that if missing = "min10", the box only goes down to the true min
-    d.sum <- data.m %>%
+    d.sum <- data.m |>
       summarise(
         min = min(.data$value),
         max = max(.data$value),
         .by = "variable"
-      ) %>%
+      ) |>
       arrange(.data$variable)
     p <- p +
       geom_linerange(

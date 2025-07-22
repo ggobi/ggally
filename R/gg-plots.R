@@ -494,8 +494,8 @@ ggally_statistic <- function(
 
   # if there is a color grouping...
   if (!is.null(colorData) && !inherits(colorData, "AsIs")) {
-    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
-      summarise(text = text_fn(.data$x, .data$y), .by = "color") %>%
+    cord <- data.frame(x = xData, y = yData, color = colorData) |>
+      summarise(text = text_fn(.data$x, .data$y), .by = "color") |>
       arrange(.data$color)
 
     # put in correct order
@@ -1364,7 +1364,7 @@ ggally_ratio <- function(
       xvar = .data[[xName]],
       yvar = .data[[yName]],
       name = "freq"
-    ) %>%
+    ) |>
     rename(
       x = "xvar",
       y = "yvar"
@@ -1845,8 +1845,8 @@ ggally_summarise_by <- function(
       y = eval_data_col(data, mapping$y),
       weight = eval_data_col(data, mapping$weight) %||% 1,
       stringsAsFactors = FALSE
-    ) %>%
-      summarise(label = text_fn(.data$x, .data$weight), .by = "y") %>%
+    ) |>
+      summarise(label = text_fn(.data$x, .data$weight), .by = "y") |>
       arrange(.data$y)
     # keep colour if matching the discrete variable
     if (mapping_string(mapping$colour) == mapping_string(mapping$y)) {

@@ -219,13 +219,13 @@ ggcorr <- function(
 
   m$.ggally_ggcorr_row_names <- rownames(m)
   m_long <-
-    m %>%
+    m |>
     tidyr::pivot_longer(
       cols = -".ggally_ggcorr_row_names",
       names_to = "y",
       values_to = "coefficient"
-    ) %>%
-    dplyr::rename(x = ".ggally_ggcorr_row_names") %>%
+    ) |>
+    dplyr::rename(x = ".ggally_ggcorr_row_names") |>
     dplyr::mutate(y = factor(.data$y, levels = rownames(m)))
 
   # -- correlation quantiles ---------------------------------------------------
