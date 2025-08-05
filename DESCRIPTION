@@ -39,7 +39,6 @@ Imports:
     grid,
     gtable (>= 0.2.0),
     lifecycle,
-    magrittr,
     progress,
     RColorBrewer,
     rlang,
@@ -126,7 +125,6 @@ Collate:
     'ggsurv.R'
     'ggtable.R'
     'reexports.R'
-    'utils-pipe.R'
     'utils.R'
     'vig_ggally.R'
     'zzz.R'

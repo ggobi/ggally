@@ -369,11 +369,11 @@ ggnetworkmap <- function(
     }
 
     edges <-
-      edges %>%
+      edges |>
       reframe(
         .by = c("lat1", "lat2", "lon1", "lon2"),
         process_edges(.data$lat1, .data$lat2, .data$lon1, .data$lon2)
-      ) %>%
+      ) |>
       dplyr::select("lat", "lon", "group")
 
     edge_aes$x <- substitute(lon)

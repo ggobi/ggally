@@ -64,7 +64,7 @@ glyphs <- function(
   }
 
   if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
-    data <- data %>%
+    data <- data |>
       mutate(
         "{x_minor}" := x_scale(!!sym(x_minor)),
         "{y_minor}" := y_scale(!!sym(y_minor)),
@@ -123,8 +123,8 @@ ref_lines <- function(data) {
       )
     }
   }
-  cells %>%
-    reframe(ref_line(.data), .by = "gid") %>%
+  cells |>
+    reframe(ref_line(.data), .by = "gid") |>
     arrange(.data$gid)
 }
 
