@@ -57,9 +57,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggally-development-version">GGally (development version)<a class="anchor" aria-label="anchor" href="#ggally-development-version"></a></h2>
-</div>
+<ul><li>Remove re-export of <a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a> pipe (<code>%&gt;%</code>) and replace internal usage with the base pipe (<code>|&gt;</code>). (Thank you <a href="https://github.com/m-muecke" class="external-link">@m-muecke</a>! <a href="https://github.com/ggobi/ggally/issues/554" class="external-link">#554</a>)</li>
+</ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.3.0" id="ggally-230">GGally 2.3.0<a class="anchor" aria-label="anchor" href="#ggally-230"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.3.0" id="ggally-230">GGally 2.3.0<a class="anchor" aria-label="anchor" href="#ggally-230"></a></h2><p class="text-muted">CRAN release: 2025-07-18</p>
 <ul><li><p>With <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> v4.0.0, objects are now <code>+</code>’ed together using <a href="https://rconsortium.github.io/S7/" class="external-link">S7</a>. This means the startup message for <code>Registered S3 method overwritten by 'GGally'</code> has been removed. (Thank you <a href="https://github.com/teunbrand" class="external-link">@teunbrand</a> for the enhancement in ggplot2! <a href="https://github.com/ggobi/ggally/issues/545" class="external-link">#545</a>)</p></li>
 <li><p>Fixed bug where correlations of 0 in a <code>ggcor()</code> output were silently dropped. Now all correlations are always displayed. (Thank you <a href="https://github.com/winterstat" class="external-link">@winterstat</a>! <a href="https://github.com/ggobi/ggally/issues/536" class="external-link">#536</a>)</p></li>
 <li><p>Fixed correlations values <code>ggcor()</code> so that they are formatted to the same number of decimal places via <code>label_round</code>. Now <code>0.2</code> and <code>0.001</code> with <code>label_round = 2</code> will be displayed as <code>"0.20"</code> and <code>"0.00"</code> respectively. (Thank you <a href="https://github.com/winterstat" class="external-link">@winterstat</a>! <a href="https://github.com/ggobi/ggally/issues/536" class="external-link">#536</a>)</p></li>
