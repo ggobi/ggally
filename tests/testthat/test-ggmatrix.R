@@ -3,25 +3,25 @@ data(tips)
 test_that("stops", {
   expect_error(
     ggmatrix(plots = matrix(), nrow = 2, ncol = 3),
-    "'plots' must be a list()"
+    "`plots` must be a list()"
   )
 
   expect_error(
     ggmatrix(plots = list(), nrow = "2", ncol = 3),
-    "'nrow' must be a numeric value"
+    "`nrow` must be a numeric value"
   )
   expect_error(
     ggmatrix(plots = list(), nrow = 2, ncol = "3"),
-    "'ncol' must be a numeric value"
+    "`ncol` must be a numeric value"
   )
 
   expect_error(
     ggmatrix(plots = list(), nrow = c(2, 3), ncol = 3),
-    "'nrow' must be a single numeric value"
+    "`nrow` must be a single numeric value"
   )
   expect_error(
     ggmatrix(plots = list(), nrow = 2, ncol = c(2, 3)),
-    "'ncol' must be a single numeric value"
+    "`ncol` must be a single numeric value"
   )
 })
 

@@ -95,32 +95,32 @@ test_that("examples", {
   )
 
   # test arrow.size
-  expect_error(ggnet2(n, arrow.size = -1), "incorrect arrow.size")
-  expect_warning(ggnet2(n, arrow.size = 1), "arrow.size ignored")
+  expect_error(ggnet2(n, arrow.size = -1), "incorrect `arrow.size`")
+  expect_warning(ggnet2(n, arrow.size = 1), "`arrow.size` ignored")
 
   # test arrow.gap
 
   suppressWarnings(expect_error(
     ggnet(n, arrow.size = 12, arrow.gap = -1),
-    "incorrect arrow.gap"
+    "incorrect `arrow.gap`"
   ))
   suppressWarnings(expect_warning(
     ggnet(n, arrow.size = 12, arrow.gap = 0.1),
-    "arrow.gap ignored" # network is undirected; arrow.gap ignored
+    "`arrow.gap` ignored" # network is undirected; arrow.gap ignored
   ))
   suppressWarnings(expect_warning(
     ggnet(n, arrow.size = 12, arrow.gap = 0.1),
-    "arrow.size ignored" # network is undirected; arrow.size ignored
+    "`arrow.size` ignored" # network is undirected; arrow.size ignored
   ))
 
   m <- network::network(m, directed = TRUE)
   ggnet2(m, arrow.size = 12, arrow.gap = 0.05)
 
   # test max_size
-  expect_error(ggnet2(n, max_size = NA), "incorrect max_size")
+  expect_error(ggnet2(n, max_size = NA), "incorrect `max_size`")
 
   # test na.rm
-  expect_error(ggnet2(n, na.rm = 1:2), "incorrect na.rm")
+  expect_error(ggnet2(n, na.rm = 1:2), "incorrect `na.rm`")
   expect_error(ggnet2(n, na.rm = "xyz"), "not found")
 
   n %v% "missing" <- ifelse(n %v% "phono" == "vowel", NA, n %v% "phono")
@@ -135,16 +135,16 @@ test_that("examples", {
   ggnet2(n, size = "degree")
 
   # test size.min
-  expect_error(ggnet2(n, size = "degree", size.min = -1), "incorrect size.min")
-  expect_message(ggnet2(n, size = "degree", size.min = 1), "size.min removed")
+  expect_error(ggnet2(n, size = "degree", size.min = -1), "incorrect `size.min`")
+  expect_message(ggnet2(n, size = "degree", size.min = 1), "`size.min` removed")
   suppressMessages({
     expect_warning(ggnet2(n, size = "abc", size.min = 1), "not numeric")
     expect_warning(ggnet2(n, size = 4, size.min = 5), "removed all nodes")
   })
 
   # test size.max
-  expect_error(ggnet2(n, size = "degree", size.max = -1), "incorrect size.max")
-  expect_message(ggnet2(n, size = "degree", size.max = 99), "size.max removed")
+  expect_error(ggnet2(n, size = "degree", size.max = -1), "incorrect `size.max`")
+  expect_message(ggnet2(n, size = "degree", size.max = 99), "`size.max` removed")
   suppressMessages({
     expect_warning(ggnet2(n, size = "abc", size.max = 1), "not numeric")
     expect_warning(ggnet2(n, size = 4, size.max = 3), "removed all nodes")
@@ -153,8 +153,8 @@ test_that("examples", {
   # test size.cut
   ggnet2(n, size = 1:10, size.cut = 3)
   ggnet2(n, size = 1:10, size.cut = TRUE)
-  expect_error(ggnet2(n, size = 1:10, size.cut = NA), "incorrect size.cut")
-  expect_error(ggnet2(n, size = 1:10, size.cut = "xyz"), "incorrect size.cut")
+  expect_error(ggnet2(n, size = 1:10, size.cut = NA), "incorrect `size.cut`")
+  expect_error(ggnet2(n, size = 1:10, size.cut = "xyz"), "incorrect `size.cut`")
   expect_warning(ggnet2(n, size = "abc", size.cut = 3), "not numeric")
   expect_warning(ggnet2(n, size = 1, size.cut = 3), "ignored")
 
@@ -202,58 +202,58 @@ test_that("examples", {
   # test label.alpha
   expect_error(
     ggnet2(n, label = TRUE, label.alpha = "xyz"),
-    "incorrect label.alpha"
+    "incorrect `label.alpha`"
   )
 
   # test label.color
   expect_error(
     ggnet2(n, label = TRUE, label.color = "xyz"),
-    "incorrect label.color"
+    "incorrect `label.color`"
   )
 
   # test label.size
   expect_error(
     ggnet2(n, label = TRUE, label.size = "xyz"),
-    "incorrect label.size"
+    "incorrect `label.size`"
   )
 
   # test label.trim
   expect_error(
     ggnet2(n, label = TRUE, label.trim = "xyz"),
-    "incorrect label.trim"
+    "incorrect `label.trim`"
   )
   ggnet2(n, label = TRUE, label.trim = toupper)
 
   # test mode
   expect_error(ggnet2(n, mode = "xyz"), "unsupported")
-  expect_error(ggnet2(n, mode = letters[1:3]), "incorrect mode")
+  expect_error(ggnet2(n, mode = letters[1:3]), "incorrect `mode`")
 
   # test edge.node shared colors
   ggnet2(n, color = "phono", edge.color = c("color", "grey"))
 
   # test edge.color
-  expect_error(ggnet2(n, edge.color = "xyz"), "incorrect edge.color")
+  expect_error(ggnet2(n, edge.color = "xyz"), "incorrect `edge.color`")
 
   # test edge.label.alpha
   expect_error(
     ggnet2(n, edge.label = "xyz", edge.label.alpha = "xyz"),
-    "incorrect edge.label.alpha"
+    "incorrect `edge.label.alpha`"
   )
 
   # test edge.label.color
   expect_error(
     ggnet2(n, edge.label = "xyz", edge.label.color = "xyz"),
-    "incorrect edge.label.color"
+    "incorrect `edge.label.color`"
   )
 
   # test edge.label.size
   expect_error(
     ggnet2(n, edge.label = "xyz", edge.label.size = "xyz"),
-    "incorrect edge.label.size"
+    "incorrect `edge.label.size`"
   )
 
   # test edge.size
-  expect_error(ggnet2(n, edge.size = "xyz"), "incorrect edge.size")
+  expect_error(ggnet2(n, edge.size = "xyz"), "incorrect `edge.size`")
 
   # test layout.exp
   expect_error(ggnet2(n, layout.exp = "xyz"))

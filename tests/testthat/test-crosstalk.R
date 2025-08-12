@@ -29,7 +29,7 @@ test_that("crosstalk works with ggduo and ggpairs", {
     {
       pm <- ggduo(sd, c(1:2, 5), 3:5)
     },
-    "Make sure your numeric 'columnsX'"
+    "Make sure your numeric"
   )
   expect_error(
     {

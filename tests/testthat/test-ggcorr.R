@@ -84,7 +84,7 @@ test_that("further options", {
     "geom-tile-no-limits",
     ggcorr(flea[, -1], geom = "tile", limits = FALSE)
   )
-  expect_error(ggcorr(flea[, -1], layout.exp = "a"), "incorrect layout.exp")
+  expect_error(ggcorr(flea[, -1], layout.exp = "a"), "incorrect `layout.exp`")
   ggally_expect_doppelganger("layout.exp", ggcorr(flea[, -1], layout.exp = 1))
 })
 

@@ -46,7 +46,7 @@ putPlot <- function(pm, value, i, j) {
         funcArgName = "ggally_blank"
       ))
     } else {
-      stop(
+      cli::cli_abort(
         "character values (besides 'blank') are not allowed to be stored as plot values."
       )
     }
@@ -111,7 +111,10 @@ getPlot <- function(pm, i, j) {
       strObj <- capture.output({
         str(plotObj)
       })
-      stop(str_c("unknown plot object type.\n", firstNote, strObj))
+      cli::cli_abort(c(
+        "unknown plot object type.",
+        i = "{firstNote}{strObj}"
+      ))
     }
 
     p <- add_gg_info(p, pm$gg)
@@ -144,17 +147,17 @@ get_pos_rev <- function(pm, pos) {
 
 check_i_j <- function(pm, i, j) {
   if ((length(i) > 1) || (mode(i) != "numeric")) {
-    stop("'i' may only be a single numeric value")
+    cli::cli_abort("{.arg i} may only be a single numeric value")
   }
   if ((length(j) > 1) || (mode(j) != "numeric")) {
-    stop("'j' may only be a single numeric value")
+    cli::cli_abort("{.arg j} may only be a single numeric value")
   }
 
   if (i > pm$nrow || i < 1) {
-    stop("'i' may only be in the range from 1:", pm$nrow)
+    cli::cli_abort("{.arg i} may only be in the range from 1: {pm$nrow}")
   }
   if (j > pm$ncol || j < 1) {
-    stop("'j' may only be in the range from 1:", pm$ncol)
+    cli::cli_abort("{.arg j} may only be in the range from 1: {pm$ncol}")
   }
 
   invisible()

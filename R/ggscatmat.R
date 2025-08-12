@@ -312,7 +312,7 @@ scatmat <- function(data, columns = 1:ncol(data), color = NULL, alpha = 1) {
   data.choose <- data[columns]
   dn <- data.choose[sapply(data.choose, is.numeric)]
   if (ncol(dn) == 0) {
-    stop(
+    cli::cli_abort(
       "All of your variables are factors. Need numeric variables to make scatterplot matrix."
     )
   }
@@ -432,7 +432,7 @@ ggscatmat <- function(
   ## if 'color' is not a factor, mold it into one
   if (!is.null(color)) {
     if (is.null(data[[color]])) {
-      stop(paste0("Non-existent column <", color, "> requested"))
+      cli::cli_abort("Non-existent column <{color}> requested")
     }
     data[[color]] <- as.factor(data[[color]])
   }
@@ -442,12 +442,12 @@ ggscatmat <- function(
   dn <- data.choose[sapply(data.choose, is.numeric)]
 
   if (ncol(dn) == 0) {
-    stop(
+    cli::cli_abort(
       "All of your variables are factors. Need numeric variables to make scatterplot matrix."
     )
   }
   if (ncol(dn) < 2) {
-    stop("Not enough numeric variables to make a scatter plot matrix")
+    cli::cli_abort("Not enough numeric variables to make a scatter plot matrix")
   }
 
   a <- uppertriangle(
@@ -474,7 +474,7 @@ ggscatmat <- function(
   if (ncol(factor) == 0) {
     return(plot)
   } else {
-    warning("Factor variables are omitted in plot")
+    cli::cli_warn("Factor variables are omitted in plot")
     return(plot)
   }
 }

@@ -33,6 +33,7 @@ Depends:
     ggplot2 (>= 3.5.2),
     R (>= 4.3)
 Imports:
+    cli,
     dplyr (>= 1.1.0),
     ggstats (>= 0.9.0),
     grDevices,

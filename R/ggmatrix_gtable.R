@@ -54,12 +54,10 @@ ggmatrix_gtable <- function(
   # make a fake facet grid to fill in with proper plot panels
   get_labels <- function(labels, length_out, name) {
     if (is.expression(labels)) {
-      stop(
-        "'",
-        name,
-        "' can only be a character vector or NULL.",
-        "  Character values can be parsed using the 'labeller' parameter."
-      )
+      cli::cli_abort(c(
+        "{.arg {name}} can only be a character vector or {.code NULL}.",
+        i = "Character values can be parsed using the {.arg labeller} parameter."
+      ))
     }
     labels %||% as.character(seq_len(length_out))
   }
@@ -155,8 +153,8 @@ ggmatrix_gtable <- function(
       if (length(legend) == 1) {
         legend <- get_pos_rev(pm, legend)
       } else if (length(legend) > 2) {
-        stop(
-          "'legend' must be a single or double numberic value.  Or 'legend' must be an object produced from 'grab_legend()'"
+        cli::cli_abort(
+          "{.arg legend} must be a single or double numberic value. Or {.arg legend} must be an object produced from {.fn grab_legend}."
         )
       }
 
@@ -181,12 +179,9 @@ ggmatrix_gtable <- function(
       } else if (legend_position %in% c("top", "bottom")) {
         pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
       } else {
-        stop(paste(
-          "ggmatrix does not know how display a legend when legend.position with value: '",
-          legend_position,
-          "'. Valid values: c('right', 'left', 'bottom', 'top')",
-          sep = ""
-        ))
+        cli::cli_abort(
+          "ggmatrix does not know how display a legend when legend.position with value: {.val {legend_position}}. Valid values: c('right', 'left', 'bottom', 'top')"
+        )
       }
     } else {
       # From ggplot 3.5.0 onwards, a plot can have multiple legends

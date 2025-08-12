@@ -55,12 +55,12 @@ glyphs <- function(
 
   if (inherits(width, "rel")) {
     width <- resolution(data[[x_major]], zero = FALSE) * unclass(width)
-    message("Using width ", format(width, digits = 3))
+    cli::cli_inform("Using width {format(width, digits = 3)}")
   }
 
   if (inherits(height, "rel")) {
     height <- resolution(data[[y_major]], zero = FALSE) * unclass(height)
-    message("Using height ", format(height, digits = 3))
+    cli::cli_inform("Using height {format(height, digits = 3)}")
   }
 
   if (!identical(x_scale, identity) || !identical(y_scale, identity)) {

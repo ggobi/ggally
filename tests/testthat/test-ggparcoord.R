@@ -50,7 +50,7 @@ test_that("stops", {
       groupColumn = 2,
       scale = "notValid"
     ),
-    "invalid value for 'scale'"
+    "invalid value for `scale`"
   )
 
   expect_error(
@@ -70,7 +70,7 @@ test_that("stops", {
       groupColumn = 2,
       missing = "notValid"
     ),
-    "invalid value for 'missing'"
+    "invalid value for `missing`"
   )
 
   expect_error(
