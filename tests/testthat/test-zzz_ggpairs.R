@@ -592,8 +592,8 @@ test_that("user functions", {
     )
 
     if (packageVersion("ggplot2") > "3.5.2") {
-      x_built <- ggplot2::build_ggplot(x)
-      y_built <- ggplot2::build_ggplot(y)
+      x_built <- ggplot2::ggplot_build(x)
+      y_built <- ggplot2::ggplot_build(y)
       expect_equal(
         x_built@plot@labels[c("x", "y")],
         list(x = "total_bill", y = "tip")
