@@ -1,5 +1,8 @@
 # GGally (development version)
 
+* Remove re-export of `{magrittr}` pipe (`%>%`) and replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
+
+
 # GGally 2.3.0
 
 * With `{ggplot2}` v4.0.0, objects are now `+`'ed together using `{S7}`. This means the startup message for `Registered S3 method overwritten by 'GGally'` has been removed. (Thank you @teunbrand for the enhancement in ggplot2! #545)

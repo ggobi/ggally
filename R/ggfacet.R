@@ -117,13 +117,13 @@ ggfacet <- function(
     columnLabelsY <- columnLabelsY[!is_factor_y]
   }
 
-  tall_data <- expand.grid(.x_col = columnsX, .y_col = columnsY) %>%
+  tall_data <- expand.grid(.x_col = columnsX, .y_col = columnsY) |>
     reframe(
       .by = c(".x_col", ".y_col"),
       data,
       .x_val = data[[.data$.x_col]],
       .y_val = data[[.data$.y_col]]
-    ) %>%
+    ) |>
     arrange(.data$.x_col, .data$.y_col)
 
   if (is.null(mapping)) {

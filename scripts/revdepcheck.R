@@ -56,8 +56,8 @@ local({
           )
           capture.output({
             revdepcheck::revdep_report_cran(pkg_path_)
-          }) %>%
-            paste0(collapse = "\n") %>%
+          }) |>
+            paste0(collapse = "\n") |>
             cat(file = file.path(pkg_path_, "revdep/revdep_cran.md"))
           if (isTRUE(all_)) {
             message("Saving all report information (this may take a minute)")

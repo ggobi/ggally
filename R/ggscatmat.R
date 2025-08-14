@@ -154,8 +154,8 @@ uppertriangle <- function(
   b$xlab <- factor(b$xlab, levels = unique(b$xlab))
   b$ylab <- factor(b$ylab, levels = unique(b$ylab))
   if (is.null(color)) {
-    data.cor <- b %>%
-      dplyr::group_by(xlab, ylab) %>%
+    data.cor <- b |>
+      dplyr::group_by(xlab, ylab) |>
       dplyr::summarise(
         r = cor(
           .data$xvalue,
@@ -208,8 +208,8 @@ uppertriangle <- function(
     return(data.cor)
   } else {
     c <- b
-    data.cor1 <- c %>%
-      dplyr::group_by(xlab, ylab, colorcolumn) %>%
+    data.cor1 <- c |>
+      dplyr::group_by(xlab, ylab, colorcolumn) |>
       dplyr::summarise(
         r = cor(
           .data$xvalue,
@@ -255,8 +255,8 @@ uppertriangle <- function(
     #    )
 
     n <- nrow(data.frame(unique(b$colorcolumn)))
-    position <- b %>%
-      dplyr::group_by(xlab, ylab) %>%
+    position <- b |>
+      dplyr::group_by(xlab, ylab) |>
       dplyr::summarise(
         xvalue = min(.data$xvalue) +
           0.5 * (max(.data$xvalue) - min(.data$xvalue)),

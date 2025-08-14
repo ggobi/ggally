@@ -239,9 +239,9 @@ ggally_cor_v1_5 <- function(
     !is.null(colorData) &&
       !inherits(colorData, "AsIs")
   ) {
-    cord <- data.frame(x = xData, y = yData, color = colorData) %>%
-      summarise(correlation = cor_fn(.data$x, .data$y), .by = "color") %>%
-      arrange(.data$color) %>%
+    cord <- data.frame(x = xData, y = yData, color = colorData) |>
+      summarise(correlation = cor_fn(.data$x, .data$y), .by = "color") |>
+      arrange(.data$color) |>
       mutate(correlation = signif(as.numeric(.data$correlation), 3L))
 
     # put in correct order
