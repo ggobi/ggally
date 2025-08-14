@@ -142,7 +142,9 @@ brew_colors <- function(col) {
   brew_cols <- as.list(brew_cols)
   ret <- brew_cols[[col]]
   if (is.null(ret)) {
-    cli::cli_abort("color {.arg col} not found in: c({toString(names(brew_cols))})")
+    cli::cli_abort(
+      "color {.arg col} not found in: c({toString(names(brew_cols))})"
+    )
   }
   ret
 }

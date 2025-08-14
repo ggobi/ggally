@@ -213,7 +213,9 @@ ggparcoord <- function(
   }
 
   if (!(centerObsID %in% 1:dim(data)[1])) {
-    cli::cli_abort("invalid value for 'centerObsID'; must be a single numeric row index")
+    cli::cli_abort(
+      "invalid value for 'centerObsID'; must be a single numeric row index"
+    )
   }
 
   if (
@@ -301,7 +303,9 @@ ggparcoord <- function(
       splineFactor <- 0
     }
   } else if (!is.numeric(splineFactor)) {
-    cli::cli_abort("invalid value for 'splineFactor'; must be a logical or numeric value")
+    cli::cli_abort(
+      "invalid value for 'splineFactor'; must be a logical or numeric value"
+    )
   }
 
   ### Setup ###

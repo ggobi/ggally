@@ -161,7 +161,9 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
     return()
   }
   if (!is.numeric(threshold)) {
-    cli::cli_abort("{.arg cardinality_threshold} should be a numeric or {.code NULL}.")
+    cli::cli_abort(
+      "{.arg cardinality_threshold} should be a numeric or {.code NULL}."
+    )
   }
   for (col in names(data[columns])) {
     data_col <- data[[col]]
@@ -1069,7 +1071,7 @@ check_and_set_ggpairs_defaults <- function(
 
   if (!is.null(obj$aes_string)) {
     cli::cli_abort(
-      "'aes_string' is a deprecated element for the section {name}.\nPlease use 'mapping' instead." 
+      "'aes_string' is a deprecated element for the section {name}.\nPlease use 'mapping' instead."
     )
   }
 
@@ -1079,7 +1081,9 @@ check_and_set_ggpairs_defaults <- function(
       if (is.character(val)) {
         if (!str_detect(val, "Diag$")) {
           newVal <- paste(val, "Diag", sep = "")
-          cli::cli_warn("Changing diag${key} from {.val {val}} to {.val {newVal}}.")
+          cli::cli_warn(
+            "Changing diag${key} from {.val {val}} to {.val {newVal}}."
+          )
           obj[[key]] <- newVal
         }
       }

@@ -122,13 +122,19 @@ ggally_cor_v1_5 <- function(
     with = "ggally_cor()"
   )
   if (!is.null(corAlignPercent)) {
-    cli::cli_abort("{.arg corAlignPercent} is deprecated. Please use argument {.arg alignPercent}.")
+    cli::cli_abort(
+      "{.arg corAlignPercent} is deprecated. Please use argument {.arg alignPercent}."
+    )
   }
   if (!is.null(corMethod)) {
-    cli::cli_abort("{.arg corMethod} is deprecated. Please use argument {.arg method}.")
+    cli::cli_abort(
+      "{.arg corMethod} is deprecated. Please use argument {.arg method}."
+    )
   }
   if (!is.null(corUse)) {
-    cli::cli_abort("{.arg corUse} is deprecated. Please use argument {.arg use}.")
+    cli::cli_abort(
+      "{.arg corUse} is deprecated. Please use argument {.arg use}."
+    )
   }
 
   useOptions <- c(
@@ -140,7 +146,9 @@ ggally_cor_v1_5 <- function(
   )
   use <- pmatch(use, useOptions)
   if (is.na(use)) {
-    cli::cli_warn("correlation {.arg use} not found. Using default value of 'all.obs'")
+    cli::cli_warn(
+      "correlation {.arg use} not found. Using default value of 'all.obs'"
+    )
     use <- useOptions[1]
   } else {
     use <- useOptions[use]
@@ -181,7 +189,9 @@ ggally_cor_v1_5 <- function(
   }
   colorData <- eval_data_col(data, mapping$colour)
   if (is.numeric(colorData)) {
-    cli::cli_abort("ggally_cor: mapping color column must be categorical, not numeric")
+    cli::cli_abort(
+      "ggally_cor: mapping color column must be categorical, not numeric"
+    )
   }
 
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {

@@ -437,7 +437,9 @@ ggally_statistic <- function(
   colorData <- eval_data_col(data, mapping$colour)
 
   if (is.numeric(colorData)) {
-    cli::cli_abort("{.arg mapping} color column must be categorical, not numeric")
+    cli::cli_abort(
+      "{.arg mapping} color column must be categorical, not numeric"
+    )
   }
 
   display_na_rm <- is.na(na.rm)
@@ -1193,7 +1195,9 @@ ggally_diagAxis <- function(
   ...
 ) {
   if (is.null(mapping$x)) {
-    cli::cli_abort("mapping$x is null. There must be a column value in this location.")
+    cli::cli_abort(
+      "mapping$x is null. There must be a column value in this location."
+    )
   }
   mapping$y <- NULL
   numer <- !is_horizontal(data, mapping, "x")

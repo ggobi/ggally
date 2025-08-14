@@ -273,7 +273,9 @@ ggnet <- function(
   ) {
     net = intergraph::asNetwork(net)
   } else if (inherits(net, "igraph")) {
-    cli::cli_abort("install the {.pkg intergraph} package to use igraph objects with ggnet")
+    cli::cli_abort(
+      "install the {.pkg intergraph} package to use igraph objects with ggnet"
+    )
   }
 
   if (!network::is.network(net)) {
@@ -446,14 +448,18 @@ ggnet <- function(
     cli::cli_abort("incorrect {.arg weight.min} value")
   } else if (x > 0) {
     x = which(data$weight < x)
-    cli::cli_inform("{.arg weight.min} removed {length(x)} nodes out of {nrow(data)}")
+    cli::cli_inform(
+      "{.arg weight.min} removed {length(x)} nodes out of {nrow(data)}"
+    )
 
     if (length(x) > 0) {
       data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
-        cli::cli_warn("{.arg weight.min} removed all nodes; nothing left to plot")
+        cli::cli_warn(
+          "{.arg weight.min} removed all nodes; nothing left to plot"
+        )
         return(invisible(NULL))
       }
     }
@@ -465,14 +471,18 @@ ggnet <- function(
     cli::cli_abort("incorrect {.arg weight.max} value")
   } else if (x > 0) {
     x = which(data$weight > x)
-    cli::cli_inform("{.arg weight.max} removed {length(x)} nodes out of {nrow(data)}")
+    cli::cli_inform(
+      "{.arg weight.max} removed {length(x)} nodes out of {nrow(data)}"
+    )
 
     if (length(x) > 0) {
       data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
-        cli::cli_warn("{.arg weight.max} removed all nodes; nothing left to plot")
+        cli::cli_warn(
+          "{.arg weight.max} removed all nodes; nothing left to plot"
+        )
         return(invisible(NULL))
       }
     }

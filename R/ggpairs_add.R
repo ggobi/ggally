@@ -232,7 +232,9 @@ ggmatrix_location <- function(
         if (isTRUE(location)) {
           "all"
         } else {
-          cli::cli_warn("Not `TRUE` logical `location` value. Setting to `'none'`")
+          cli::cli_warn(
+            "Not `TRUE` logical `location` value. Setting to `'none'`"
+          )
           "none"
         }
     }
@@ -262,10 +264,14 @@ ggmatrix_location <- function(
         if (!identical(c("row", "col"), colnames(location))) {
           # using data.frame of locations as truthy vals
           if (ncol(location) != pm$ncol) {
-            cli::cli_abort("location provided does not have the same size of columns")
+            cli::cli_abort(
+              "location provided does not have the same size of columns"
+            )
           }
           if (nrow(location) != pm$nrow) {
-            cli::cli_abort("location provided does not have the same size of rows")
+            cli::cli_abort(
+              "location provided does not have the same size of rows"
+            )
           }
 
           # turn wide matrix into a tall data.frame of row/col combos

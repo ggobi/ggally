@@ -310,7 +310,9 @@ ggnet2 <- function(
   ) {
     net = intergraph::asNetwork(net)
   } else if (inherits(net, "igraph")) {
-    cli::cli_abort("install the {.fn intergraph} package to use igraph objects with ggnet2")
+    cli::cli_abort(
+      "install the {.fn intergraph} package to use igraph objects with ggnet2"
+    )
   }
 
   if (!network::is.network(net)) {
@@ -470,7 +472,9 @@ ggnet2 <- function(
     }
 
     x = which(is.na(get_v(net, na.rm)))
-    cli::cli_inform("{.arg na.rm} removed {length(x)} nodes out of {nrow(data)}")
+    cli::cli_inform(
+      "{.arg na.rm} removed {length(x)} nodes out of {nrow(data)}"
+    )
 
     if (length(x) > 0) {
       data = data[-x, ]
@@ -524,7 +528,9 @@ ggnet2 <- function(
     cli::cli_warn("{.arg node.size} is not numeric; {.arg size.min} ignored")
   } else if (x > 0) {
     x = which(data$size < x)
-    cli::cli_inform("{.arg size.min} removed {length(x)} nodes out of {nrow(data)}")
+    cli::cli_inform(
+      "{.arg size.min} removed {length(x)} nodes out of {nrow(data)}"
+    )
 
     if (length(x) > 0) {
       data = data[-x, ]
@@ -545,7 +551,9 @@ ggnet2 <- function(
     cli::cli_warn("{.arg node.size} is not numeric; {.arg size.max} ignored")
   } else if (x > 0) {
     x = which(data$size > x)
-    cli::cli_inform("{.arg size.max} removed {length(x)} nodes out of {nrow(data)}")
+    cli::cli_inform(
+      "{.arg size.max} removed {length(x)} nodes out of {nrow(data)}"
+    )
 
     if (length(x) > 0) {
       data = data[-x, ]
