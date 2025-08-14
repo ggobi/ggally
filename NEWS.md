@@ -2,6 +2,8 @@
 
 * Remove re-export of `{magrittr}` pipe (`%>%`) and replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
 
+* Namespace missing `ggplot2::` for `is_ggplot()` function. (#559)
+
 
 # GGally 2.3.0
 

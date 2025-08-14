@@ -270,7 +270,7 @@ ggmatrix_gtable <- function(
       }
 
       # if it's not a ggplot2 obj, insert it and pray it works
-      if (!is_ggplot(p)) {
+      if (!ggplot2::is_ggplot(p)) {
         pmg$grobs[[grob_pos_panel]] <- p
         next
       }
