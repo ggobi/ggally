@@ -1,5 +1,3 @@
-# nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
-
 data(flea)
 
 test_that("limits", {
