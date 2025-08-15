@@ -135,7 +135,10 @@ test_that("examples", {
   ggnet2(n, size = "degree")
 
   # test size.min
-  expect_error(ggnet2(n, size = "degree", size.min = -1), "incorrect `size.min`")
+  expect_error(
+    ggnet2(n, size = "degree", size.min = -1),
+    "incorrect `size.min`"
+  )
   expect_message(ggnet2(n, size = "degree", size.min = 1), "`size.min` removed")
   suppressMessages({
     expect_warning(ggnet2(n, size = "abc", size.min = 1), "not numeric")
@@ -143,8 +146,14 @@ test_that("examples", {
   })
 
   # test size.max
-  expect_error(ggnet2(n, size = "degree", size.max = -1), "incorrect `size.max`")
-  expect_message(ggnet2(n, size = "degree", size.max = 99), "`size.max` removed")
+  expect_error(
+    ggnet2(n, size = "degree", size.max = -1),
+    "incorrect `size.max`"
+  )
+  expect_message(
+    ggnet2(n, size = "degree", size.max = 99),
+    "`size.max` removed"
+  )
   suppressMessages({
     expect_warning(ggnet2(n, size = "abc", size.max = 1), "not numeric")
     expect_warning(ggnet2(n, size = 4, size.max = 3), "removed all nodes")
@@ -163,7 +172,7 @@ test_that("examples", {
   ggnet2(n, alpha = factor(1:10))
   expect_error(
     ggnet2(n, alpha = "phono", alpha.palette = c("vowel" = 1)),
-    "no alpha.palette value"
+    "no `alpha.palette` value"
   )
 
   # test color.palette
@@ -176,7 +185,7 @@ test_that("examples", {
   )
   expect_error(
     ggnet2(n, color = "phono", color.palette = c("vowel" = 1)),
-    "no color.palette value"
+    "no `color.palette` value"
   )
 
   # test shape.palette
@@ -184,7 +193,7 @@ test_that("examples", {
   expect_warning(ggnet2(n, shape = factor(1:10)), "discrete values")
   expect_error(
     ggnet2(n, shape = "phono", shape.palette = c("vowel" = 1)),
-    "no shape.palette value"
+    "no `shape.palette` value"
   )
 
   # test size.palette
@@ -192,7 +201,7 @@ test_that("examples", {
   ggnet2(n, size = factor(1:10))
   expect_error(
     ggnet2(n, size = "phono", size.palette = c("vowel" = 1)),
-    "no size.palette value"
+    "no `size.palette` value"
   )
 
   # test node.label

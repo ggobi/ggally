@@ -192,11 +192,10 @@ ggcorr <- function(
     x <- which(!sapply(data, is.numeric))
 
     if (length(x) > 0) {
-      cli::cli_warn(paste(
-        "data in column(s)",
-        paste0(paste0("'", names(data)[x], "'"), collapse = ", "),
-        "are not numeric and were ignored"
-      ))
+      ignored_cols <- names(data)[x]
+      cli::cli_warn(
+        "data in column{?s} {.field {ignored_cols}} {?is/are} not numeric and {?was/were} ignored"
+      )
 
       data <- data[, -x]
     }
@@ -250,7 +249,7 @@ ggcorr <- function(
   if (is.null(midpoint)) {
     midpoint <- median(m_long$coefficient, na.rm = TRUE)
     cli::cli_inform(
-      "Color gradient midpoint set at median correlation to {round(midpoint, 2)}"
+      "Color gradient midpoint set at median correlation to {.code {round(midpoint, 2)}}"
     )
   }
 

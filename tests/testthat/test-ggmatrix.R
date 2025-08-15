@@ -3,7 +3,8 @@ data(tips)
 test_that("stops", {
   expect_error(
     ggmatrix(plots = matrix(), nrow = 2, ncol = 3),
-    "`plots` must be a list()"
+    "`plots` must be a `list()`",
+    fixed = TRUE
   )
 
   expect_error(
@@ -136,7 +137,7 @@ test_that("blank", {
     {
       pm[2, 2] <- "not blank"
     },
-    "character values \\(besides 'blank'\\)"
+    "character values \\(besides `'blank'`\\)"
   )
 })
 

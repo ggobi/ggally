@@ -311,7 +311,7 @@ ggnet2 <- function(
     net = intergraph::asNetwork(net)
   } else if (inherits(net, "igraph")) {
     cli::cli_abort(
-      "install the {.fn intergraph} package to use igraph objects with ggnet2"
+      "install the {.fn intergraph} package to use {.pkg igraph} objects with {.fn ggnet2}"
     )
   }
 
@@ -320,7 +320,7 @@ ggnet2 <- function(
   }
 
   if (!network::is.network(net)) {
-    cli::cli_abort("could not coerce net to a network object")
+    cli::cli_abort("could not coerce {.arg net} to a {.pkg network} object")
   }
 
   # -- network functions -------------------------------------------------------
@@ -431,15 +431,15 @@ ggnet2 <- function(
   }
 
   if (network::is.hyper(net)) {
-    cli::cli_abort("ggnet2 cannot plot hyper graphs")
+    cli::cli_abort("{.fn ggnet2} cannot plot hyper graphs")
   }
 
   if (network::is.multiplex(net)) {
-    cli::cli_abort("ggnet2 cannot plot multiplex graphs")
+    cli::cli_abort("{.fn ggnet2} cannot plot multiplex graphs")
   }
 
   if (network::has.loops(net)) {
-    cli::cli_warn("{.pkg ggnet2} does not know how to handle self-loops")
+    cli::cli_warn("{.fn ggnet2} does not know how to handle self-loops")
   }
 
   # -- check max_size ----------------------------------------------------------
@@ -606,7 +606,7 @@ ggnet2 <- function(
     y = unique(na.omit(data$alpha[!data$alpha %in% names(x)]))
 
     if (length(y) > 0) {
-      cli::cli_abort("no alpha.palette value for {y}")
+      cli::cli_abort("no {.arg alpha.palette} value for {y}")
     }
   } else if (is.factor(data$alpha) || !is.numeric(x)) {
     data$alpha = factor(data$alpha)
@@ -652,7 +652,7 @@ ggnet2 <- function(
     y = unique(na.omit(data$color[!data$color %in% names(x)]))
 
     if (length(y) > 0) {
-      cli::cli_abort("no color.palette value for {y}")
+      cli::cli_abort("no {.arg color.palette} value for {y}")
     }
   } else if (is.factor(data$color) || !is_col(x)) {
     data$color = factor(data$color)
@@ -677,7 +677,7 @@ ggnet2 <- function(
     y = unique(na.omit(data$shape[!data$shape %in% names(x)]))
 
     if (length(y) > 0) {
-      cli::cli_abort("no shape.palette value for {y}")
+      cli::cli_abort("no {.arg shape.palette} value for {y}")
     }
   } else if (is.factor(data$shape) || !is.numeric(x)) {
     data$shape = factor(data$shape)
@@ -701,7 +701,7 @@ ggnet2 <- function(
     y = unique(na.omit(data$size[!data$size %in% names(x)]))
 
     if (length(y) > 0) {
-      cli::cli_abort("no size.palette value for {y}")
+      cli::cli_abort("no {.arg size.palette} value for {y}")
     }
   } else if (is.factor(data$size) || !is.numeric(x)) {
     data$size = factor(data$size)
@@ -730,7 +730,7 @@ ggnet2 <- function(
   if (is.character(mode) && length(mode) == 1) {
     mode = paste0("gplot.layout.", mode)
     if (!exists(mode, where = getNamespace("sna"))) {
-      cli::cli_abort("unsupported placement method: {mode}")
+      cli::cli_abort("unsupported placement method: {.code {mode}}")
     } else {
       mode <- get(mode, getNamespace("sna"))
     }

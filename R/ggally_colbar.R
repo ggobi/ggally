@@ -61,10 +61,10 @@ ggally_colbar <- function(
   geom_bar_args = NULL
 ) {
   if (is.null(mapping$x)) {
-    cli::cli_abort("'x' aesthetic is required.")
+    cli::cli_abort("{.field x} aesthetic is required.")
   }
   if (is.null(mapping$y)) {
-    cli::cli_abort("'y' aesthetic is required.")
+    cli::cli_abort("{.field y} aesthetic is required.")
   }
 
   # y should be mapped to fill and x to by

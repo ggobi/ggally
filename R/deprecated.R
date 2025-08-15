@@ -147,7 +147,7 @@ ggally_cor_v1_5 <- function(
   use <- pmatch(use, useOptions)
   if (is.na(use)) {
     cli::cli_warn(
-      "correlation {.arg use} not found. Using default value of 'all.obs'"
+      "correlation {.arg use} not found. Using default value of {.arg all.obs}"
     )
     use <- useOptions[1]
   } else {
@@ -167,7 +167,7 @@ ggally_cor_v1_5 <- function(
   # if (any(bad_rows)) {
   #   total <- sum(bad_rows)
   #   if (total > 1) {
-  #     cli::cli_warn("Removed {total} rows containing missing values")
+  #     cli::cli_warn("Removed {.val {total}} rows containing missing values")
   #   } else if (total == 1) {
   #     cli::cli_warn("Removing 1 row that contained a missing value")
   #   }
@@ -190,7 +190,7 @@ ggally_cor_v1_5 <- function(
   colorData <- eval_data_col(data, mapping$colour)
   if (is.numeric(colorData)) {
     cli::cli_abort(
-      "ggally_cor: mapping color column must be categorical, not numeric"
+      "{.fn ggally_cor}: mapping color column must be categorical, not numeric"
     )
   }
 
@@ -204,7 +204,7 @@ ggally_cor_v1_5 <- function(
     if (any(!rows)) {
       total <- sum(!rows)
       if (total > 1) {
-        cli::cli_warn("Removed {total} rows containing missing values")
+        cli::cli_warn("Removed {.val {total}} rows containing missing values")
       } else if (total == 1) {
         cli::cli_warn("Removing 1 row that contained a missing value")
       }

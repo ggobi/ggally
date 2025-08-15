@@ -99,7 +99,7 @@ ggfacet <- function(
   is_factor_x <- sapply(data[columnsX], is.factor)
   if (sum(is_factor_x) != 0) {
     cli::cli_warn(
-      "{sum(is_factor_x)} factor variables are being removed from X columns"
+      "{.val {sum(is_factor_x)}} factor variables are being removed from X columns"
     )
     columnsX <- columnsX[!is_factor_x]
     columnLabelsX <- columnLabelsX[!is_factor_x]
@@ -107,7 +107,7 @@ ggfacet <- function(
   is_factor_y <- sapply(data[columnsY], is.factor)
   if (sum(is_factor_y) != 0) {
     cli::cli_warn(
-      "{sum(is_factor_y)} factor variables are being removed from Y columns"
+      "{.val {sum(is_factor_y)}} factor variables are being removed from Y columns"
     )
     columnsY <- columnsY[!is_factor_y]
     columnLabelsY <- columnLabelsY[!is_factor_y]

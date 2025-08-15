@@ -52,10 +52,10 @@ ggally_trends <- function(
   include_zero = FALSE
 ) {
   if (is.null(mapping$x)) {
-    cli::cli_abort("{.arg x} aesthetic is required.")
+    cli::cli_abort("{.field x} aesthetic is required.")
   }
   if (is.null(mapping$y)) {
-    cli::cli_abort("{.arg y} aesthetic is required.")
+    cli::cli_abort("{.field y} aesthetic is required.")
   }
 
   # computing group

@@ -104,7 +104,7 @@ ggmatrix <- new_class(
     legend = NULL
   ) {
     if (!is.list(plots)) {
-      cli::cli_abort("{.arg plots} must be a list()")
+      cli::cli_abort("{.arg plots} must be a {.code list()}")
     }
     check_nrow_ncol(nrow, "nrow")
     check_nrow_ncol(ncol, "ncol")

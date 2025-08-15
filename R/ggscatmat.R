@@ -432,7 +432,9 @@ ggscatmat <- function(
   ## if 'color' is not a factor, mold it into one
   if (!is.null(color)) {
     if (is.null(data[[color]])) {
-      cli::cli_abort("Non-existent column <{color}> requested")
+      cli::cli_abort(
+        "Non-existent column {.field color} requested: {.val {color}}"
+      )
     }
     data[[color]] <- as.factor(data[[color]])
   }
@@ -443,7 +445,7 @@ ggscatmat <- function(
 
   if (ncol(dn) == 0) {
     cli::cli_abort(
-      "All of your variables are factors. Need numeric variables to make scatterplot matrix."
+      "All of your variables are factors. Need numeric variables to make scatter plot matrix."
     )
   }
   if (ncol(dn) < 2) {

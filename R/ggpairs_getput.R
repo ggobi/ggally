@@ -47,7 +47,7 @@ putPlot <- function(pm, value, i, j) {
       ))
     } else {
       cli::cli_abort(
-        "character values (besides 'blank') are not allowed to be stored as plot values."
+        "character values (besides {.code 'blank'}) are not allowed to be stored as plot values."
       )
     }
   } else {
@@ -154,10 +154,10 @@ check_i_j <- function(pm, i, j) {
   }
 
   if (i > pm$nrow || i < 1) {
-    cli::cli_abort("{.arg i} may only be in the range from 1: {pm$nrow}")
+    cli::cli_abort("{.arg i} may only be in the range from 1:{pm$nrow}")
   }
   if (j > pm$ncol || j < 1) {
-    cli::cli_abort("{.arg j} may only be in the range from 1: {pm$ncol}")
+    cli::cli_abort("{.arg j} may only be in the range from 1:{pm$ncol}")
   }
 
   invisible()

@@ -86,15 +86,13 @@ fix_column_values <- function(
     })
     isFound <- as.logical(unlist(lapply(colNumValues, length)))
     if (any(!isFound)) {
-      cli::cli_abort(str_c(
-        "Columns in '",
-        columnsName,
-        "' not found in data: c(",
-        toString(str_c("'", columns[!isFound], "'")),
-        "). Choices: c('",
-        paste(colnamesData, collapse = "', '"),
-        "')"
-      ))
+      cols_not_found <- toString(str_c("'", columns[!isFound], "'"))
+      cli::cli_abort(
+        c(
+          "Columns in {.code {columnsName}} not found in data: {.code {cols_not_found}}.",
+          "i" = "Choices: {.code {colnamesData}}"
+        )
+      )
     }
     columns <- unlist(colNumValues)
   }
@@ -496,8 +494,8 @@ ggduo <- function(
   if (!is.null(types[["combo"]])) {
     cli::cli_warn(c(
       "Setting:",
-      "*" = "types$comboHorizontal <- types$combo",
-      "*" = "types$comboVertical <- types$combo"
+      "*" = "{.code types$comboHorizontal <- types$combo}",
+      "*" = "{.code types$comboVertical <- types$combo}"
     ))
     types$comboHorizontal <- types$combo
     types$comboVertical <- types$combo
@@ -1071,7 +1069,7 @@ check_and_set_ggpairs_defaults <- function(
 
   if (!is.null(obj$aes_string)) {
     cli::cli_abort(
-      "'aes_string' is a deprecated element for the section {name}.\nPlease use 'mapping' instead."
+      "{.fn aes_string} is a deprecated element for the section {name}.\nPlease use 'mapping' instead."
     )
   }
 
@@ -1082,7 +1080,7 @@ check_and_set_ggpairs_defaults <- function(
         if (!str_detect(val, "Diag$")) {
           newVal <- paste(val, "Diag", sep = "")
           cli::cli_warn(
-            "Changing diag${key} from {.val {val}} to {.val {newVal}}."
+            "Changing {.code diag${key}} from {.val {val}} to {.val {newVal}}."
           )
           obj[[key]] <- newVal
         }
@@ -1108,7 +1106,7 @@ stop_if_params_exist <- function(params) {
   if (!is.null(params)) {
     cli::cli_abort(c(
       "{.arg params} is a deprecated argument.",
-      i = "Please 'wrap' the function to supply arguments. help(\"wrap\", package = \"GGally\")"
+      i = "Please {.fn wrap} the function to supply arguments. {.code help(\"wrap\", package = \"GGally\")}"
     ))
   }
 }
@@ -1144,7 +1142,7 @@ ggmatrix_proportions <- function(proportions, data, columns) {
     )
     if (!all(is_valid_type)) {
       cli::cli_abort(
-        "proportions need to be non-NA numeric values or 'auto'. proportions: {dput_val(proportions)}"
+        "{.arg proportions} need to be non-NA numeric values or {.code 'auto'}. proportions: {dput_val(proportions)}"
       )
     }
   }

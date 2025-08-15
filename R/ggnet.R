@@ -274,7 +274,7 @@ ggnet <- function(
     net = intergraph::asNetwork(net)
   } else if (inherits(net, "igraph")) {
     cli::cli_abort(
-      "install the {.pkg intergraph} package to use igraph objects with ggnet"
+      "install the {.pkg intergraph} package to use {.pkg igraph} objects with {.pkg ggnet}"
     )
   }
 
@@ -283,7 +283,7 @@ ggnet <- function(
   }
 
   if (!network::is.network(net)) {
-    cli::cli_abort("could not coerce net to a network object")
+    cli::cli_abort("could not coerce {.arg net} to a {.pkg network} object")
   }
 
   # -- network functions -------------------------------------------------------
@@ -377,15 +377,15 @@ ggnet <- function(
   }
 
   if (network::is.hyper(net)) {
-    cli::cli_abort("ggnet cannot plot hyper graphs")
+    cli::cli_abort("{.pkg ggnet} cannot plot hyper graphs")
   }
 
   if (network::is.multiplex(net)) {
-    cli::cli_abort("ggnet cannot plot multiplex graphs")
+    cli::cli_abort("{.pkg ggnet} cannot plot multiplex graphs")
   }
 
   if (network::has.loops(net)) {
-    cli::cli_warn("ggnet does not know how to handle self-loops")
+    cli::cli_warn("{.pkg ggnet} does not know how to handle self-loops")
   }
 
   # -- check size --------------------------------------------------------------
@@ -393,7 +393,7 @@ ggnet <- function(
   x = size
 
   if (!is.numeric(x) || is.infinite(x) || is.nan(x) || x < 0 || length(x) > 1) {
-    cli::cli_abort("incorrect size value")
+    cli::cli_abort("incorrect {.arg size} value")
   }
 
   # -- initialize dataset ------------------------------------------------------
@@ -569,7 +569,7 @@ ggnet <- function(
 
     snaNamespace = asNamespace("sna")
     if (!exists(mode, envir = snaNamespace)) {
-      cli::cli_abort("unsupported placement method: {mode}")
+      cli::cli_abort("unsupported placement method: {.val {mode}}")
     }
     mode = get(mode, envir = snaNamespace)
 
@@ -584,7 +584,7 @@ ggnet <- function(
     # fixed coordinates from matrix
     xy = data.frame(x = set_attr(mode[, 1]), y = set_attr(mode[, 2]))
   } else {
-    cli::cli_abort("incorrect mode value")
+    cli::cli_abort("incorrect {.arg mode} value")
   }
 
   xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[, 1]
@@ -718,7 +718,7 @@ ggnet <- function(
   x = range(data$x)
 
   if (!is.numeric(layout.exp) || layout.exp < 0) {
-    cli::cli_abort("incorrect layout.exp value")
+    cli::cli_abort("incorrect {.arg layout.exp} value")
   } else if (layout.exp > 0) {
     x = scales::expand_range(x, layout.exp / 2)
   }

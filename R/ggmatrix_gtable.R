@@ -179,9 +179,10 @@ ggmatrix_gtable <- function(
       } else if (legend_position %in% c("top", "bottom")) {
         pmg$heights[[legend_layout$t]] <- legend_obj$heights[1]
       } else {
-        cli::cli_abort(
-          "ggmatrix does not know how display a legend when legend.position with value: {.val {legend_position}}. Valid values: c('right', 'left', 'bottom', 'top')"
-        )
+        cli::cli_abort(c(
+          "{.fn ggmatrix} does not know how display a legend when {.arg legend.position} with value: {.val {legend_position}}.",
+          i = "Valid values: {.code c('right', 'left', 'bottom', 'top')}"
+        ))
       }
     } else {
       # From ggplot 3.5.0 onwards, a plot can have multiple legends

@@ -80,17 +80,17 @@ wrap_fn_with_param_arg <- function(
     if (length(params) > 0) {
       if (!is.list(params)) {
         cli::cli_abort(
-          "{.arg params} must be a named list, named vector, or NULL."
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
         )
       }
       if (is.null(names(params))) {
         cli::cli_abort(
-          "{.arg params} must be a named list, named vector, or NULL."
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
         )
       }
       if (any(nchar(names(params)) == 0)) {
         cli::cli_abort(
-          "{.arg params} must be a named list, named vector, or NULL."
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
         )
       }
     }

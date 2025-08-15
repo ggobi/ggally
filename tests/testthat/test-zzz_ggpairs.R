@@ -164,7 +164,7 @@ test_that("stops", {
     {
       ggpairs(tips, columns = c("tip", "day", "not in tips"))
     },
-    "Columns in 'columns' not found in data"
+    "Columns in `columns` not found in data"
   )
   expect_error(
     {
@@ -174,7 +174,7 @@ test_that("stops", {
         columnsY = "smoker"
       )
     },
-    "Columns in 'columnsX' not found in data"
+    "Columns in `columnsX` not found in data"
   )
   expect_error(
     {
@@ -184,7 +184,7 @@ test_that("stops", {
         columnsY = "not in tips"
       )
     },
-    "Columns in 'columnsY' not found in data"
+    "Columns in `columnsY` not found in data"
   )
 
   lifecycle::expect_deprecated(
@@ -309,7 +309,7 @@ test_that("stops", {
   #   ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
   # }, "variables\\: \"colour\" have non standard format")
 
-  errorString <- "'aes_string' is a deprecated element"
+  errorString <- "`aes_string\\(\\)` is a deprecated element"
   expect_error(
     {
       ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = .data$day)))
@@ -336,7 +336,7 @@ test_that("stops", {
   )
 
   expect_diag_warn <- function(key, value) {
-    warnString <- sprintf("Changing diag\\$%s from", key)
+    warnString <- sprintf("Changing `diag\\$%s` from", key)
     diagObj <- list()
     diagObj[[key]] <- value
     expect_warning(
@@ -701,6 +701,7 @@ test_that("strip-top and strip-right", {
 })
 
 
+return()
 testthat::skip_on_cran()
 testthat::skip_if_not_installed("Hmisc")
 

@@ -184,7 +184,7 @@ ggparcoord <- function(
   if (is.null(groupColumn)) {
     if (any(tolower(order) %in% c("anyclass", "allclass"))) {
       cli::cli_abort(
-        "can't use the 'order' methods anyClass or allClass without specifying groupColumn"
+        "can't use the {.arg order} methods {.val anyClass} or {.val allClass} without specifying groupColumn"
       )
     }
   } else if (
@@ -192,7 +192,7 @@ ggparcoord <- function(
       (is.numeric(groupColumn) || is.character(groupColumn)))
   ) {
     cli::cli_abort(
-      "invalid value for 'groupColumn'; must be a single numeric or character index"
+      "invalid value for {.arg groupColumn}; must be a single numeric or character index"
     )
   }
 
@@ -214,7 +214,7 @@ ggparcoord <- function(
 
   if (!(centerObsID %in% 1:dim(data)[1])) {
     cli::cli_abort(
-      "invalid value for 'centerObsID'; must be a single numeric row index"
+      "invalid value for {.arg centerObsID}; must be a single numeric row index"
     )
   }
 
@@ -226,65 +226,69 @@ ggparcoord <- function(
     )
   }
 
+  possibleOrderValues <- c(
+    "skewness",
+    "allClass",
+    "anyClass",
+    "Outlying",
+    "Skewed",
+    "Clumpy",
+    "Sparse",
+    "Striated",
+    "Convex",
+    "Skinny",
+    "Stringy",
+    "Monotonic"
+  )
   if (
     !(is.numeric(order) ||
-      (is.character(order) &&
-        (order %in%
-          c(
-            "skewness",
-            "allClass",
-            "anyClass",
-            "Outlying",
-            "Skewed",
-            "Clumpy",
-            "Sparse",
-            "Striated",
-            "Convex",
-            "Skinny",
-            "Stringy",
-            "Monotonic"
-          ))))
+      (is.character(order) && (order %in% possibleOrderValues)))
   ) {
-    cli::cli_abort(str_c(
-      "invalid value for 'order'; must either be a vector of column indices or one of ",
-      "'skewness', 'allClass', 'anyClass', 'Outlying', 'Skewed', 'Clumpy', 'Sparse', 'Striated', ",
-      "'Convex', 'Skinny', 'Stringy', 'Monotonic'"
-    ))
+    cli::cli_abort(
+      c(
+        "invalid value for {.arg order}",
+        "i" = "must either be a vector of column indices or one of {.or {.code {possibleOrderValues}}}"
+      )
+    )
   }
 
   if (!(is.logical(showPoints))) {
-    cli::cli_abort("invalid value for 'showPoints'; must be a logical operator")
+    cli::cli_abort(
+      "invalid value for {.arg showPoints}; must be a logical operator"
+    )
   }
 
   alphaLinesIsCharacter <- is.character(alphaLines)
   if (alphaLinesIsCharacter) {
     if (!(alphaLines %in% names(data))) {
-      cli::cli_abort("'alphaLines' column is missing in data")
+      cli::cli_abort("{.arg alphaLines} column is missing in data")
     }
 
     alphaVar <- data[[alphaLines]]
     alphaRange <- range(alphaVar)
     if (any(is.na(alphaRange))) {
-      cli::cli_abort("missing data in 'alphaLines' column")
+      cli::cli_abort("missing data in {.arg alphaLines} column")
     }
 
     if (alphaRange[1] < 0 || alphaRange[2] > 1) {
       cli::cli_abort(
-        "invalid value for 'alphaLines' column; max range must be from 0 to 1"
+        "invalid value for {.arg alphaLines} column; max range must be from 0 to 1"
       )
     }
   } else if ((alphaLines < 0) || (alphaLines > 1)) {
     cli::cli_abort(
-      "invalid value for 'alphaLines'; must be a scalar value between 0 and 1"
+      "invalid value for {.arg alphaLines}; must be a scalar value between 0 and 1"
     )
   }
 
   if (!(is.logical(boxplot))) {
-    cli::cli_abort("invalid value for 'boxplot'; must be a logical operator")
+    cli::cli_abort(
+      "invalid value for {.arg boxplot}; must be a logical operator"
+    )
   }
 
   if (!is.null(shadeBox) && length(shadeBox) != 1) {
-    cli::cli_abort("invalid value for 'shadeBox'; must be a single color")
+    cli::cli_abort("invalid value for {.arg shadeBox}; must be a single color")
   } else {
     valid_color <- tryCatch(
       is.matrix(grDevices::col2rgb(shadeBox)),
@@ -292,7 +296,9 @@ ggparcoord <- function(
     )
 
     if (!valid_color) {
-      cli::cli_abort("invalid value for 'shadeBox'; must be a valid R color")
+      cli::cli_abort(
+        "invalid value for {.arg shadeBox}; must be a valid R color"
+      )
     }
   }
 
@@ -304,7 +310,7 @@ ggparcoord <- function(
     }
   } else if (!is.numeric(splineFactor)) {
     cli::cli_abort(
-      "invalid value for 'splineFactor'; must be a logical or numeric value"
+      "invalid value for {.arg splineFactor}; must be a logical or numeric value"
     )
   }
 

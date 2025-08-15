@@ -250,7 +250,7 @@ test_that("examples", {
   ### --- test node placement
 
   expect_error(ggnet(n, mode = "xyz"), "unsupported")
-  expect_error(ggnet(n, mode = letters[1:3]), "incorrect mode")
+  expect_error(ggnet(n, mode = letters[1:3]), "incorrect `mode`")
 
   ### --- test label.trim
   expect_error(
