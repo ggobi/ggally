@@ -168,22 +168,22 @@ test_that("examples", {
 
   ### --- test arrow.size
 
-  expect_error(ggnet(n, arrow.size = -1), "incorrect arrow.size")
-  expect_warning(ggnet(n, arrow.size = 1), "arrow.size ignored")
+  expect_error(ggnet(n, arrow.size = -1), "incorrect `arrow.size`")
+  expect_warning(ggnet(n, arrow.size = 1), "`arrow.size` ignored")
 
   ### --- test arrow.gap
 
   suppressWarnings(expect_error(
     ggnet(n, arrow.size = 12, arrow.gap = -1),
-    "incorrect arrow.gap"
+    "incorrect `arrow.gap`"
   ))
   suppressWarnings(expect_warning(
     ggnet(n, arrow.size = 12, arrow.gap = 0.1),
-    "arrow.gap ignored" # network is undirected; arrow.gap ignored
+    "`arrow.gap` ignored" # network is undirected; arrow.gap ignored
   ))
   suppressWarnings(expect_warning(
     ggnet(n, arrow.size = 12, arrow.gap = 0.1),
-    "arrow.size ignored" # network is undirected; arrow.size ignored
+    "`arrow.size` ignored" # network is undirected; arrow.size ignored
   ))
 
   m <- network::network(m, directed = TRUE)
@@ -199,11 +199,11 @@ test_that("examples", {
   suppressMessages({
     expect_error(
       ggnet(n, weight = "degree", weight.min = -1),
-      "incorrect weight.min"
+      "incorrect `weight.min`"
     )
     expect_message(
       ggnet(n, weight = "degree", weight.min = 1),
-      "weight.min removed"
+      "`weight.min` removed"
     )
     expect_warning(
       ggnet(n, weight = "degree", weight.min = 99),
@@ -214,11 +214,11 @@ test_that("examples", {
   # test weight.max
   expect_error(
     ggnet(n, weight = "degree", weight.max = -1),
-    "incorrect weight.max"
+    "incorrect `weight.max`"
   )
   expect_message(
     ggnet(n, weight = "degree", weight.max = 99),
-    "weight.max removed"
+    "`weight.max` removed"
   )
   suppressMessages({
     expect_warning(
@@ -226,12 +226,12 @@ test_that("examples", {
       "removed all nodes"
     )
   })
-  expect_error(ggnet(n, weight = "abc"), "incorrect weight.method")
+  expect_error(ggnet(n, weight = "abc"), "incorrect `weight.method`")
 
   # test weight.cut
-  expect_error(ggnet(n, weight.cut = NA), "incorrect weight.cut")
-  expect_error(ggnet(n, weight.cut = "a"), "incorrect weight.cut")
-  expect_warning(ggnet(n, weight.cut = 3), "weight.cut ignored")
+  expect_error(ggnet(n, weight.cut = NA), "incorrect `weight.cut`")
+  expect_error(ggnet(n, weight.cut = "a"), "incorrect `weight.cut`")
+  expect_warning(ggnet(n, weight.cut = 3), "`weight.cut` ignored")
   ggnet(n, weight = "degree", weight.cut = 3)
 
   ### --- test node.group and node.color
@@ -244,18 +244,18 @@ test_that("examples", {
   ggnet(n, label = "abc", color = "white", label.size = 4, size = 12)
   expect_error(
     ggnet(n, label = letters[1:10], label.size = "abc"),
-    "incorrect label.size"
+    "incorrect `label.size`"
   )
 
   ### --- test node placement
 
   expect_error(ggnet(n, mode = "xyz"), "unsupported")
-  expect_error(ggnet(n, mode = letters[1:3]), "incorrect mode")
+  expect_error(ggnet(n, mode = letters[1:3]), "incorrect `mode`")
 
   ### --- test label.trim
   expect_error(
     ggnet(n, label = TRUE, label.trim = "xyz"),
-    "incorrect label.trim"
+    "incorrect `label.trim`"
   )
   ggnet(n, label = TRUE, color = "white", label.trim = 1)
   ggnet(n, label = TRUE, color = "white", label.trim = toupper)

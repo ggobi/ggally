@@ -106,6 +106,6 @@ test_that("error checking", {
       ".hat",
       ".cooksd"
     )),
-    "Could not match 'columnsY'"
+    "Could not match `columnsY`"
   )
 })

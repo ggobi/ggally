@@ -142,15 +142,9 @@ brew_colors <- function(col) {
   brew_cols <- as.list(brew_cols)
   ret <- brew_cols[[col]]
   if (is.null(ret)) {
-    stop(
-      paste(
-        "color '",
-        col,
-        "' not found in: c(",
-        paste(names(brew_cols), collapse = ", "),
-        ")",
-        sep = ""
-      )
+    missing_cols <- toString(names(brew_cols))
+    cli::cli_abort(
+      "color {.arg col} not found in: {.code {missing_cols}}"
     )
   }
   ret
@@ -553,12 +547,9 @@ fn_switch <- function(
     fn <- types[[var]] %||% types[["default"]]
 
     if (is.null(fn)) {
-      stop(str_c(
-        "function could not be found for ",
-        mapping_val,
-        " or 'default'.  ",
-        "Please include one of these two keys as a function."
-      ))
+      cli::cli_abort(
+        "function could not be found for {.code {mapping_val}} or {.code {'default'}}. Please include one of these two keys as a function."
+      )
     }
 
     fn(data = data, mapping = mapping, ...)
@@ -857,22 +848,11 @@ ggts <- function(
 match_nostic_columns <- function(columns, choices, name) {
   column_matches <- pmatch(columns, choices, nomatch = NA, duplicates.ok = TRUE)
   if (any(is.na(column_matches))) {
-    stop(paste(
-      "Could not match '",
-      name,
-      "': c(",
-      paste(
-        "'",
-        columns[is.na(column_matches)],
-        "'",
-        collapse = ", ",
-        sep = ""
-      ),
-      ") to choices: c(",
-      paste("'", choices, "'", collapse = ", ", sep = ""),
-      ")",
-      sep = ""
-    ))
+    extra_cols <- columns[is.na(column_matches)]
+    avail_cols <- choices
+    cli::cli_abort(
+      "Could not match {.arg {name}}: {.val {extra_cols}} to choices: {.val {avail_cols}}"
+    )
   }
   columns <- choices[column_matches]
   columns

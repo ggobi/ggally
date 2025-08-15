@@ -3,16 +3,16 @@ data(tips)
 test_that("stops", {
   pm <- ggpairs(tips)
   p <- ggally_blankDiag()
-  expect_error(pm["total_bill", 1], "'i' may only be a single")
-  expect_error(pm[1, "total_bill"], "'j' may only be a single")
-  expect_error(pm["total_bill", 1] <- p, "'i' may only be a single")
-  expect_error(pm[1, "total_bill"] <- p, "'j' may only be a single")
+  expect_error(pm["total_bill", 1], "`i` may only be a single")
+  expect_error(pm[1, "total_bill"], "`j` may only be a single")
+  expect_error(pm["total_bill", 1] <- p, "`i` may only be a single")
+  expect_error(pm[1, "total_bill"] <- p, "`j` may only be a single")
 
   pm <- ggduo(tips, 1:3, 1:4)
-  expect_error(pm[0, 1], "'i' may only be in the range")
-  expect_error(pm[1, 0], "'j' may only be in the range")
-  expect_error(pm[5, 1], "'i' may only be in the range")
-  expect_error(pm[1, 4], "'j' may only be in the range")
+  expect_error(pm[0, 1], "`i` may only be in the range")
+  expect_error(pm[1, 0], "`j` may only be in the range")
+  expect_error(pm[5, 1], "`i` may only be in the range")
+  expect_error(pm[1, 4], "`j` may only be in the range")
 
   for (i in 1:4) {
     for (j in 1:3) {

@@ -159,7 +159,7 @@ ggcorr <- function(
 ) {
   if (is.numeric(limits)) {
     if (length(limits) != 2) {
-      stop("'limits' must be of length 2 if numeric")
+      cli::cli_abort("{.arg limits} must be of length 2 if numeric")
     }
   }
   if (is.logical(limits)) {
@@ -173,7 +173,7 @@ ggcorr <- function(
   # -- check geom argument -----------------------------------------------------
 
   if (length(geom) > 1 || !geom %in% c("blank", "circle", "text", "tile")) {
-    stop("incorrect geom value")
+    cli::cli_abort("incorrect geom value")
   }
 
   # -- correlation method ------------------------------------------------------
@@ -192,11 +192,10 @@ ggcorr <- function(
     x <- which(!sapply(data, is.numeric))
 
     if (length(x) > 0) {
-      warning(paste(
-        "data in column(s)",
-        paste0(paste0("'", names(data)[x], "'"), collapse = ", "),
-        "are not numeric and were ignored"
-      ))
+      ignored_cols <- names(data)[x]
+      cli::cli_warn(
+        "data in column{?s} {.field {ignored_cols}} {?is/are} not numeric and {?was/were} ignored"
+      )
 
       data <- data[, -x]
     }
@@ -249,10 +248,9 @@ ggcorr <- function(
 
   if (is.null(midpoint)) {
     midpoint <- median(m_long$coefficient, na.rm = TRUE)
-    message(paste(
-      "Color gradient midpoint set at median correlation to",
-      round(midpoint, 2)
-    ))
+    cli::cli_inform(
+      "Color gradient midpoint set at median correlation to {.code {round(midpoint, 2)}}"
+    )
   }
 
   # -- plot structure ----------------------------------------------------------
@@ -451,7 +449,7 @@ ggcorr <- function(
   textData$diagLabel <- textData$x
 
   if (!is.numeric(layout.exp) || layout.exp < 0) {
-    stop("incorrect layout.exp value")
+    cli::cli_abort("incorrect {.arg layout.exp} value")
   } else if (layout.exp > 0) {
     layout.exp <- as.integer(layout.exp)
     # copy to fill in spacer info

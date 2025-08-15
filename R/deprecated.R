@@ -122,13 +122,19 @@ ggally_cor_v1_5 <- function(
     with = "ggally_cor()"
   )
   if (!is.null(corAlignPercent)) {
-    stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
+    cli::cli_abort(
+      "{.arg corAlignPercent} is deprecated. Please use argument {.arg alignPercent}."
+    )
   }
   if (!is.null(corMethod)) {
-    stop("'corMethod' is deprecated.  Please use argument 'method'")
+    cli::cli_abort(
+      "{.arg corMethod} is deprecated. Please use argument {.arg method}."
+    )
   }
   if (!is.null(corUse)) {
-    stop("'corUse' is deprecated.  Please use argument 'use'")
+    cli::cli_abort(
+      "{.arg corUse} is deprecated. Please use argument {.arg use}."
+    )
   }
 
   useOptions <- c(
@@ -140,7 +146,9 @@ ggally_cor_v1_5 <- function(
   )
   use <- pmatch(use, useOptions)
   if (is.na(use)) {
-    warning("correlation 'use' not found.  Using default value of 'all.obs'")
+    cli::cli_warn(
+      "correlation {.arg use} not found. Using default value of {.arg all.obs}"
+    )
     use <- useOptions[1]
   } else {
     use <- useOptions[use]
@@ -159,9 +167,9 @@ ggally_cor_v1_5 <- function(
   # if (any(bad_rows)) {
   #   total <- sum(bad_rows)
   #   if (total > 1) {
-  #     warning("Removed ", total, " rows containing missing values")
+  #     cli::cli_warn("Removed {.val {total}} rows containing missing values")
   #   } else if (total == 1) {
-  #     warning("Removing 1 row that contained a missing value")
+  #     cli::cli_warn("Removing 1 row that contained a missing value")
   #   }
   #
   #   xVar <- xVar[!bad_rows]
@@ -181,7 +189,9 @@ ggally_cor_v1_5 <- function(
   }
   colorData <- eval_data_col(data, mapping$colour)
   if (is.numeric(colorData)) {
-    stop("ggally_cor: mapping color column must be categorical, not numeric")
+    cli::cli_abort(
+      "{.fn ggally_cor}: mapping color column must be categorical, not numeric"
+    )
   }
 
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
@@ -194,9 +204,9 @@ ggally_cor_v1_5 <- function(
     if (any(!rows)) {
       total <- sum(!rows)
       if (total > 1) {
-        warning("Removed ", total, " rows containing missing values")
+        cli::cli_warn("Removed {.val {total}} rows containing missing values")
       } else if (total == 1) {
-        warning("Removing 1 row that contained a missing value")
+        cli::cli_warn("Removing 1 row that contained a missing value")
       }
     }
 

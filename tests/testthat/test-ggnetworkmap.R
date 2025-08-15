@@ -283,14 +283,14 @@ test_that("labels", {
 test_that("arrow.size", {
   expect_error(
     ggnetworkmap(net = flights, arrow.size = -1),
-    "incorrect arrow.size"
+    "incorrect `arrow.size`"
   )
   expect_warning(
     ggnetworkmap(
       net = network(as.matrix(flights), directed = FALSE),
       arrow.size = 1
     ),
-    "arrow.size ignored"
+    "`arrow.size` ignored"
   )
 })
 

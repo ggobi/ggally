@@ -176,7 +176,7 @@ ggnetworkmap <- function(
   }
 
   if (!network::is.network(net)) {
-    stop("could not coerce net to a network object")
+    cli::cli_abort("could not coerce {.arg net} to a {.pkg network} object")
   }
 
   # -- network functions -------------------------------------------------------
@@ -190,22 +190,22 @@ ggnetworkmap <- function(
   is_dir <- ifelse(network::is.directed(net), "digraph", "graph")
 
   if (!is.numeric(arrow.size) || arrow.size < 0) {
-    stop("incorrect arrow.size value")
+    cli::cli_abort("incorrect {.arg arrow.size} value")
   } else if (arrow.size > 0 && is_dir == "graph") {
-    warning("network is undirected; arrow.size ignored")
+    cli::cli_warn("network is undirected; {.arg arrow.size} ignored")
     arrow.size <- 0
   }
 
   if (network::is.hyper(net)) {
-    stop("ggnetworkmap cannot plot hyper graphs")
+    cli::cli_abort("{.fn ggnetworkmap} cannot plot hyper graphs")
   }
 
   if (network::is.multiplex(net)) {
-    stop("ggnetworkmap cannot plot multiplex graphs")
+    cli::cli_abort("{.fn ggnetworkmap} cannot plot multiplex graphs")
   }
 
   if (network::has.loops(net)) {
-    warning("ggnetworkmap does not know how to handle self-loops")
+    cli::cli_warn("{.fn ggnetworkmap} does not know how to handle self-loops")
   }
 
   # -- ... -------------------------------------------------------

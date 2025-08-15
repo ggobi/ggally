@@ -197,7 +197,7 @@ ggsurv_s <- function(
 
   if (identical(plot.cens, TRUE)) {
     if (nrow(dat.cens) == 0) {
-      stop("There are no censored observations")
+      cli::cli_abort("There are no censored observations")
     }
     col <- ifelse(cens.col == "gg.def", "red", cens.col)
 
@@ -348,7 +348,7 @@ ggsurv_m <- function(
     dat.cens <- dat.cens[!is.na(dat.cens$group) & dat.cens$group != "PKD", ]
 
     if (nrow(dat.cens) == 0) {
-      stop("There are no censored observations")
+      cli::cli_abort("There are no censored observations")
     }
     if (length(cens.col) == 1) {
       if (identical(cens.col, "gg.def")) {
@@ -374,12 +374,12 @@ ggsurv_m <- function(
       }
     } else if (length(cens.col) > 0) {
       # if (!(identical(cens.col, surv.col) || is.null(cens.col))) {
-      #   warning ("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
+      #   cli::cli_warn("Color scales for survival curves and censored points don't match.\nOnly one color scale can be used. Defaulting to surv.col")
       # }
 
       if (!identical(cens.col, "gg.def")) {
         if (length(cens.col) != strata) {
-          warning(
+          cli::cli_warn(
             "Color scales for censored points don't match the number of groups. Defaulting to ggplot2 default color scale"
           )
           cens.col <- "gg.def"
@@ -404,7 +404,7 @@ ggsurv_m <- function(
         }
 
         if (length(cens.shape) != strata) {
-          warning(
+          cli::cli_warn(
             "The length of the censored shapes does not match the number of groups (or 1). Defaulting shape = 3 (+)"
           )
           cens.shape <- rep(3, strata)

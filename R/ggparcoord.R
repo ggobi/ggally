@@ -183,16 +183,16 @@ ggparcoord <- function(
   ### Error Checking ###
   if (is.null(groupColumn)) {
     if (any(tolower(order) %in% c("anyclass", "allclass"))) {
-      stop(
-        "can't use the 'order' methods anyClass or allClass without specifying groupColumn"
+      cli::cli_abort(
+        "can't use the {.arg order} methods {.val anyClass} or {.val allClass} without specifying groupColumn"
       )
     }
   } else if (
     !((length(groupColumn) == 1) &&
       (is.numeric(groupColumn) || is.character(groupColumn)))
   ) {
-    stop(
-      "invalid value for 'groupColumn'; must be a single numeric or character index"
+    cli::cli_abort(
+      "invalid value for {.arg groupColumn}; must be a single numeric or character index"
     )
   }
 
@@ -207,83 +207,88 @@ ggparcoord <- function(
         "centerobs"
       ))
   ) {
-    stop(str_c(
-      "invalid value for 'scale'; must be one of ",
-      "'std', 'robust', 'uniminmax', 'globalminmax', 'center', or 'centerObs'"
+    cli::cli_abort(c(
+      "invalid value for {.arg scale}; must be one of {.val std}, {.val robust}, {.val uniminmax}, {.val globalminmax}, {.val center}, or {.val centerObs}."
     ))
   }
 
   if (!(centerObsID %in% 1:dim(data)[1])) {
-    stop("invalid value for 'centerObsID'; must be a single numeric row index")
+    cli::cli_abort(
+      "invalid value for {.arg centerObsID}; must be a single numeric row index"
+    )
   }
 
   if (
     !(tolower(missing) %in% c("exclude", "mean", "median", "min10", "random"))
   ) {
-    stop(
-      "invalid value for 'missing'; must be one of 'exclude', 'mean', 'median', 'min10', 'random'"
+    cli::cli_abort(
+      "invalid value for {.arg missing}; must be one of {.val exclude}, {.val mean}, {.val median}, {.val min10}, {.val random}."
     )
   }
 
+  possibleOrderValues <- c(
+    "skewness",
+    "allClass",
+    "anyClass",
+    "Outlying",
+    "Skewed",
+    "Clumpy",
+    "Sparse",
+    "Striated",
+    "Convex",
+    "Skinny",
+    "Stringy",
+    "Monotonic"
+  )
   if (
     !(is.numeric(order) ||
-      (is.character(order) &&
-        (order %in%
-          c(
-            "skewness",
-            "allClass",
-            "anyClass",
-            "Outlying",
-            "Skewed",
-            "Clumpy",
-            "Sparse",
-            "Striated",
-            "Convex",
-            "Skinny",
-            "Stringy",
-            "Monotonic"
-          ))))
+      (is.character(order) && (order %in% possibleOrderValues)))
   ) {
-    stop(str_c(
-      "invalid value for 'order'; must either be a vector of column indices or one of ",
-      "'skewness', 'allClass', 'anyClass', 'Outlying', 'Skewed', 'Clumpy', 'Sparse', 'Striated', ",
-      "'Convex', 'Skinny', 'Stringy', 'Monotonic'"
-    ))
+    cli::cli_abort(
+      c(
+        "invalid value for {.arg order}",
+        "i" = "must either be a vector of column indices or one of {.or {.code {possibleOrderValues}}}"
+      )
+    )
   }
 
   if (!(is.logical(showPoints))) {
-    stop("invalid value for 'showPoints'; must be a logical operator")
+    cli::cli_abort(
+      "invalid value for {.arg showPoints}; must be a logical operator"
+    )
   }
 
   alphaLinesIsCharacter <- is.character(alphaLines)
   if (alphaLinesIsCharacter) {
     if (!(alphaLines %in% names(data))) {
-      stop("'alphaLines' column is missing in data")
+      cli::cli_abort("{.arg alphaLines} column is missing in data")
     }
 
     alphaVar <- data[[alphaLines]]
     alphaRange <- range(alphaVar)
     if (any(is.na(alphaRange))) {
-      stop("missing data in 'alphaLines' column")
+      cli::cli_abort("missing data in {.arg alphaLines} column")
     }
 
     if (alphaRange[1] < 0 || alphaRange[2] > 1) {
-      stop(
-        "invalid value for 'alphaLines' column; max range must be from 0 to 1"
+      cli::cli_abort(
+        "invalid value for {.arg alphaLines} column; max range must be from 0 to 1"
       )
     }
   } else if ((alphaLines < 0) || (alphaLines > 1)) {
-    stop(
-      "invalid value for 'alphaLines'; must be a scalar value between 0 and 1"
+    cli::cli_abort(
+      "invalid value for {.arg alphaLines}; must be a scalar value between 0 and 1"
     )
   }
 
   if (!(is.logical(boxplot))) {
-    stop("invalid value for 'boxplot'; must be a logical operator")
+    cli::cli_abort(
+      "invalid value for {.arg boxplot}; must be a logical operator"
+    )
   }
 
   if (!is.null(shadeBox) && length(shadeBox) != 1) {
-    stop("invalid value for 'shadeBox'; must be a single color")
+    cli::cli_abort("invalid value for {.arg shadeBox}; must be a single color")
   } else {
     valid_color <- tryCatch(
       is.matrix(grDevices::col2rgb(shadeBox)),
@@ -291,7 +296,9 @@ ggparcoord <- function(
     )
 
     if (!valid_color) {
-      stop("invalid value for 'shadeBox'; must be a valid R color")
+      cli::cli_abort(
+        "invalid value for {.arg shadeBox}; must be a valid R color"
+      )
     }
   }
 
@@ -302,7 +309,9 @@ ggparcoord <- function(
       splineFactor <- 0
     }
   } else if (!is.numeric(splineFactor)) {
-    stop("invalid value for 'splineFactor'; must be a logical or numeric value")
+    cli::cli_abort(
+      "invalid value for {.arg splineFactor}; must be a logical or numeric value"
+    )
   }
 
   ### Setup ###
@@ -795,12 +804,9 @@ scag_order <- function(scag, vars, measure) {
   }
 
   if (length(ret) != length(vars)) {
-    stop(str_c(
-      "Could not compute a correct ordering: ",
-      length(vars) - length(ret),
-      " values are missing. ",
-      "Missing: ",
-      paste0(vars[!(vars %in% ret)], collapse = ", ")
+    cli::cli_abort(c(
+      "Could not compute a correct ordering: {length(vars) - length(ret)} values are missing.",
+      "Missing: {toString(vars[!(vars %in% ret)])}"
     ))
   }
 

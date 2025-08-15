@@ -22,7 +22,7 @@ test_that("add", {
   expect_true(!is.null(pm3$gg))
 
   # bad add
-  expect_error(pm + 3, "'ggmatrix' does not know how to add")
+  expect_error(pm + 3, "`ggmatrix()` does not know how to add", fixed = TRUE)
 
   # adding scale
   pm4 <- pm + ggplot2::scale_fill_brewer()

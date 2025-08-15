@@ -28,7 +28,9 @@ vig_ggally <- function(name) {
           )
         },
         error = function(e) {
-          message("Unknown vignette: ", name, ". Opening Vignette index page")
+          cli::cli_inform(
+            "Unknown vignette: {name}. Opening Vignette index page"
+          )
           "https://ggobi.github.io/ggally/articles/"
         }
       )

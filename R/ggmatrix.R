@@ -104,7 +104,7 @@ ggmatrix <- new_class(
     legend = NULL
   ) {
     if (!is.list(plots)) {
-      stop("'plots' must be a list()")
+      cli::cli_abort("{.arg plots} must be a {.code list()}")
     }
     check_nrow_ncol(nrow, "nrow")
     check_nrow_ncol(ncol, "ncol")
@@ -149,10 +149,10 @@ ggmatrix <- new_class(
 
 check_nrow_ncol <- function(x, title) {
   if (!is.numeric(x)) {
-    stop(paste("'", title, "' must be a numeric value", sep = ""))
+    cli::cli_abort("{.arg {title}} must be a numeric value")
   }
   if (length(x) != 1) {
-    stop(paste("'", title, "' must be a single numeric value", sep = ""))
+    cli::cli_abort("{.arg {title}} must be a single numeric value")
   }
 }
 

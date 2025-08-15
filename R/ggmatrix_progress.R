@@ -51,10 +51,10 @@ as_ggmatrix_progress <- function(x, total, ...) {
     return(x)
   }
 
-  stop(
-    "as_ggmatrix_progress only knows how to handle TRUE, FALSE, NULL, or a function.",
-    "  If a function, it must return a new progress_bar"
-  )
+  cli::cli_abort(c(
+    "{.fn as_ggmatrix_progress} only knows how to handle {.code TRUE}, {.code FALSE}, {.code NULL}, or a function.",
+    i = "If a function, it must return a new {.fn progress::progress_bar}."
+  ))
 }
 
 isFALSE <- function(x) {

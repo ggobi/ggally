@@ -2,6 +2,8 @@
 
 * Remove re-export of `{magrittr}` pipe (`%>%`) and replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
 
+* Enhance all error and warning output by using `{cli}`. (Thank you @m-muecke! #557)
+
 
 # GGally 2.3.0
 

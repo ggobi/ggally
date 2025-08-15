@@ -79,13 +79,19 @@ wrap_fn_with_param_arg <- function(
 
     if (length(params) > 0) {
       if (!is.list(params)) {
-        stop("'params' must be a named list, named vector, or NULL")
+        cli::cli_abort(
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
+        )
       }
       if (is.null(names(params))) {
-        stop("'params' must be a named list, named vector, or NULL")
+        cli::cli_abort(
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
+        )
       }
       if (any(nchar(names(params)) == 0)) {
-        stop("'params' must be a named list, named vector, or NULL")
+        cli::cli_abort(
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
+        )
       }
     }
   }
@@ -103,13 +109,12 @@ wrap_fn_with_param_arg <- function(
         )
       },
       error = function(e) {
-        stop(str_c(
-          "Error retrieving `GGally` function.\n",
-          "Please provide a string such as `'points'` for `ggally_points()`\n",
-          "For a list of all predefined functions, check out `vig_ggally(\"ggally_plots\")`\n",
-          "A custom function may be supplied directly: `wrap(my_fn, param = val)`\n",
-          "Function provided: ",
-          funcVal
+        cli::cli_abort(c(
+          "Error retrieving `GGally` function.",
+          "Please provide a string such as {.val points} for {.fn ggally_points}",
+          "For a list of all predefined functions, check out `vig_ggally(\"ggally_plots\")`",
+          "A custom function may be supplied directly: {.code wrap(my_fn, param = val)}",
+          "Function provided: {.fn {funcVal}}"
         ))
       }
     )
@@ -154,10 +159,10 @@ wrap <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
   params <- list(...)
   if (length(params) > 0) {
     if (is.null(names(params))) {
-      stop("all parameters must be named arguments")
+      cli::cli_abort("all parameters must be named arguments")
     }
     if (any(nchar(names(params)) == 0)) {
-      stop("all parameters must be named arguments")
+      cli::cli_abort("all parameters must be named arguments")
     }
   }
   wrap_fn_with_param_arg(funcVal, params = params, funcArgName = funcArgName)

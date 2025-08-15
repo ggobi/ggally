@@ -65,7 +65,7 @@ ggbivariate <- function(
   rowbar_args = NULL
 ) {
   if (length(outcome) != 1) {
-    stop("You should provide only one `outcome`.")
+    cli::cli_abort("You should provide only one {.arg outcome}.")
   }
   if (is.numeric(outcome)) {
     outcome <- names(data)[outcome]

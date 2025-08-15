@@ -359,7 +359,7 @@ ggally_cor <- function(
       }
 
       if (length(x) < 3 | length(y) < 3) {
-        warning("Less than 2 observations, returning NA")
+        cli::cli_warn("Less than 2 observations, returning {.code NA}")
         return("NA")
       }
 
@@ -437,7 +437,9 @@ ggally_statistic <- function(
   colorData <- eval_data_col(data, mapping$colour)
 
   if (is.numeric(colorData)) {
-    stop("`mapping` color column must be categorical, not numeric")
+    cli::cli_abort(
+      "{.arg mapping} color column must be categorical, not numeric"
+    )
   }
 
   display_na_rm <- is.na(na.rm)
@@ -461,9 +463,9 @@ ggally_statistic <- function(
       if (isTRUE(display_na_rm)) {
         total <- sum(!rows)
         if (total > 1) {
-          warning("Removed ", total, " rows containing missing values")
+          cli::cli_warn("Removed {.val {total}} rows containing missing values")
         } else if (total == 1) {
-          warning("Removing 1 row that contained a missing value")
+          cli::cli_warn("Removing 1 row that contained a missing value")
         }
       }
     }
@@ -1193,7 +1195,9 @@ ggally_diagAxis <- function(
   ...
 ) {
   if (is.null(mapping$x)) {
-    stop("mapping$x is null.  There must be a column value in this location.")
+    cli::cli_abort(
+      "mapping$x is null. There must be a column value in this location."
+    )
   }
   mapping$y <- NULL
   numer <- !is_horizontal(data, mapping, "x")
@@ -1467,10 +1471,10 @@ ggally_ratio <- function(
 ggally_count <- function(data, mapping, ...) {
   mapping <- mapping_color_to_fill(mapping)
   if (is.null(mapping$x)) {
-    stop("'x' aesthetic is required.")
+    cli::cli_abort("{.field x} aesthetic is required.")
   }
   if (is.null(mapping$y)) {
-    stop("'y' aesthetic is required.")
+    cli::cli_abort("{.field y} aesthetic is required.")
   }
   # for stat_ggally_count(), y should be mapped to base_y
   # and always be a factor
@@ -1531,10 +1535,8 @@ stat_ggally_count <- function(
     ...
   )
   if (!is.null(params$y)) {
-    stop(
-      "stat_ggally_count() must not be used with a y aesthetic,
-         but with a base_y aesthetic instead.",
-      call. = FALSE
+    cli::cli_abort(
+      "{.fn stat_ggally_count} must not be used with a {.field y} aesthetic, but with a {.field base_y} aesthetic instead."
     )
   }
 
@@ -1832,10 +1834,10 @@ ggally_summarise_by <- function(
   ...
 ) {
   if (is.null(mapping$x)) {
-    stop("'x' aesthetic is required.")
+    cli::cli_abort("{.field x} aesthetic is required.")
   }
   if (is.null(mapping$y)) {
-    stop("'y' aesthetic is required.")
+    cli::cli_abort("{.field y} aesthetic is required.")
   }
 
   horizontal <- is_horizontal(data, mapping)

@@ -123,10 +123,10 @@ add_to_ggmatrix <- function(
   cols = NULL
 ) {
   if (!is_ggmatrix(e1)) {
-    stop("e1 should be a ggmatrix.")
+    cli::cli_abort("{.arg e1} should be a {.fn ggmatrix}.")
   }
   if (!is_ggproto(e2)) {
-    stop("e2 should be a ggproto object.")
+    cli::cli_abort("{.arg e2} should be a {.cls ggproto} object.")
   }
 
   pm <- e1
@@ -218,7 +218,7 @@ ggmatrix_location <- function(
   cols = NULL
 ) {
   if (!is_ggmatrix(pm)) {
-    stop("pm should be a ggmatrix.")
+    cli::cli_abort("{.arg pm} should be a {.fn ggmatrix}.")
   }
 
   if (!is.null(location)) {
@@ -226,13 +226,15 @@ ggmatrix_location <- function(
       is.logical(location) && !(is.matrix(location) || is.data.frame(location))
     ) {
       if (length(location) != 1) {
-        stop("`location` logical value must be of length 1")
+        cli::cli_abort("{.arg location} logical value must be of length 1")
       }
       location <-
         if (isTRUE(location)) {
           "all"
         } else {
-          warning("Not `TRUE` logical `location` value. Setting to `'none'`")
+          cli::cli_warn(
+            "Not {.code TRUE} logical {.arg location} value. Setting to {.code 'none'}"
+          )
           "none"
         }
     }
@@ -252,7 +254,7 @@ ggmatrix_location <- function(
           "diag" = subset(locs, row == col),
           "upper" = subset(locs, col > row),
           "lower" = subset(locs, col < row),
-          stop(location, " not implemented")
+          cli::cli_abort("{location} not implemented")
         )
     } else {
       if (is.matrix(location)) {
@@ -262,10 +264,14 @@ ggmatrix_location <- function(
         if (!identical(c("row", "col"), colnames(location))) {
           # using data.frame of locations as truthy vals
           if (ncol(location) != pm$ncol) {
-            stop("location provided does not have the same size of columns")
+            cli::cli_abort(
+              "{.arg location} provided does not have the same size of columns"
+            )
           }
           if (nrow(location) != pm$nrow) {
-            stop("location provided does not have the same size of rows")
+            cli::cli_abort(
+              "{.arg location} provided does not have the same size of rows"
+            )
           }
 
           # turn wide matrix into a tall data.frame of row/col combos
@@ -289,13 +295,13 @@ ggmatrix_location <- function(
       rows <- seq_len(pm$nrow)
     }
     if (!is.numeric(rows)) {
-      stop("rows must be numeric")
+      cli::cli_abort("{.arg rows} must be numeric")
     }
     if (is.null(cols)) {
       cols <- seq_len(pm$ncol)
     }
     if (!is.numeric(cols)) {
-      stop("cols must be numeric")
+      cli::cli_abort("{.arg cols} must be numeric")
     }
     location <- expand.grid(row = rows, col = cols)
   }
@@ -304,35 +310,27 @@ ggmatrix_location <- function(
   locs <- as.data.frame(location)
   if (ncol(locs) < 2) {
     utils::str(locs)
-    stop("not enough columns to inspect for a location")
+    cli::cli_abort("not enough columns to inspect for a location")
   }
   if (!all(c("row", "col") %in% colnames(locs))) {
-    stop("invalid location row / col object")
+    cli::cli_abort("invalid location row / col object")
   }
 
   row <- locs$row
   if (any(row > pm$nrow) || any(row <= 0) || any(is.na(row))) {
-    stop(
-      "`row` must be non-NA / positive numeric values `<= pm$nrow`",
-      "\n",
-      "pm$nrow: ",
-      dput_val(pm$nrow),
-      "\n",
-      "row: ",
-      dput_val(row)
-    )
+    cli::cli_abort(c(
+      "{.code row} must be non-NA / positive numeric values {.code <= pm$nrow}",
+      "*" = "{.code pm$nrow}: {.val {pm$nrow}}",
+      "*" = "row: {.val {row}}"
+    ))
   }
   col <- locs$col
   if (any(col > pm$ncol) || any(col <= 0) || any(is.na(col))) {
-    stop(
-      "`col` must be non-NA / positive numeric values `<= pm$ncol`",
-      "\n",
-      "pm$ncol: ",
-      dput_val(pm$ncol),
-      "\n",
-      "col: ",
-      dput_val(col)
-    )
+    cli::cli_abort(c(
+      "{.code col} must be non-NA / positive numeric values {.code <= pm$ncol}",
+      "*" = "{.code pm$ncol}: {.val {pm$ncol}}",
+      "*" = "{.code col}: {.val {col}}"
+    ))
   }
 
   # typical case
@@ -369,7 +367,7 @@ NULL
 #' @exportS3Method NULL
 "+.ggmatrix" <- function(e1, e2) {
   if (!is_ggmatrix(e1)) {
-    stop("e1 should be a ggmatrix.")
+    cli::cli_abort("{.arg e1} should be a {.fn ggmatrix}.")
   }
 
   if (inherits(e2, c("labels", "ggplot2::labels"))) {
@@ -381,12 +379,10 @@ NULL
   } else if (is_ggproto(e2)) {
     add_to_ggmatrix(e1, e2)
   } else {
-    stop(
-      "'ggmatrix' does not know how to add objects that do not have class 'theme', 'labels' or 'ggproto'.",
-      " Received object with class: '",
-      paste(class(e2), collapse = ", "),
-      "'"
-    )
+    cli::cli_abort(c(
+      "{.fn ggmatrix} does not know how to add objects that do not have class {.cls theme}, {.cls labels} or {.cls ggproto}.",
+      i = "Received object with class: {.cls {class(e2)}}"
+    ))
   }
 }
 

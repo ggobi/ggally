@@ -273,7 +273,9 @@ ggnet <- function(
   ) {
     net = intergraph::asNetwork(net)
   } else if (inherits(net, "igraph")) {
-    stop("install the 'intergraph' package to use igraph objects with ggnet")
+    cli::cli_abort(
+      "install the {.pkg intergraph} package to use {.pkg igraph} objects with {.pkg ggnet}"
+    )
   }
 
   if (!network::is.network(net)) {
@@ -281,7 +283,7 @@ ggnet <- function(
   }
 
   if (!network::is.network(net)) {
-    stop("could not coerce net to a network object")
+    cli::cli_abort("could not coerce {.arg net} to a {.pkg network} object")
   }
 
   # -- network functions -------------------------------------------------------
@@ -298,13 +300,13 @@ ggnet <- function(
 
   set_node = function(x, value, mode = TRUE) {
     if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
-      stop(paste("incorrect", value, "value"))
+      cli::cli_abort("incorrect {value} value")
     } else if (is.numeric(x) && any(x < 0)) {
-      stop(paste("incorrect", value, "value"))
+      cli::cli_abort("incorrect {value} value")
     } else if (length(x) == n_nodes) {
       x
     } else if (length(x) > 1) {
-      stop(paste("incorrect", value, "length"))
+      cli::cli_abort("incorrect {value} length")
     } else if (any(x %in% v_attr)) {
       get_v(net, x)
     } else if (mode && identical(x, "mode") && is_bip) {
@@ -316,13 +318,13 @@ ggnet <- function(
 
   set_edge = function(x, value) {
     if (is.null(x) || any(is.na(x)) || any(is.infinite(x)) || any(is.nan(x))) {
-      stop(paste("incorrect", value, "value"))
+      cli::cli_abort("incorrect {value} value")
     } else if (is.numeric(x) && any(x < 0)) {
-      stop(paste("incorrect", value, "value"))
+      cli::cli_abort("incorrect {value} value")
     } else if (length(x) == n_edges) {
       x
     } else if (length(x) > 1) {
-      stop(paste("incorrect", value, "length"))
+      cli::cli_abort("incorrect {value} length")
     } else if (any(x %in% e_attr)) {
       get_e(net, x)
     } else {
@@ -334,11 +336,11 @@ ggnet <- function(
     if (length(x) == n_nodes) {
       x
     } else if (length(x) > 1) {
-      stop(paste("incorrect coordinates length"))
+      cli::cli_abort("incorrect coordinates length")
     } else if (!x %in% v_attr) {
-      stop(paste("vertex attribute", x, "was not found"))
+      cli::cli_abort("vertex attribute {x} was not found")
     } else if (!is.numeric(get_v(net, x))) {
-      stop(paste("vertex attribute", x, "is not numeric"))
+      cli::cli_abort("vertex attribute {x} is not numeric")
     } else {
       get_v(net, x)
     }
@@ -361,29 +363,29 @@ ggnet <- function(
   is_dir = ifelse(network::is.directed(net), "digraph", "graph")
 
   if (!is.numeric(arrow.size) || arrow.size < 0) {
-    stop("incorrect arrow.size value")
+    cli::cli_abort("incorrect {.arg arrow.size} value")
   } else if (arrow.size > 0 && is_dir == "graph") {
-    warning("network is undirected; arrow.size ignored")
+    cli::cli_warn("network is undirected; {.arg arrow.size} ignored")
     arrow.size = 0
   }
 
   if (!is.numeric(arrow.gap) || arrow.gap < 0 || arrow.gap > 1) {
-    stop("incorrect arrow.gap value")
+    cli::cli_abort("incorrect {.arg arrow.gap} value")
   } else if (arrow.gap > 0 && is_dir == "graph") {
-    warning("network is undirected; arrow.gap ignored")
+    cli::cli_warn("network is undirected; {.arg arrow.gap} ignored")
     arrow.gap = 0
   }
 
   if (network::is.hyper(net)) {
-    stop("ggnet cannot plot hyper graphs")
+    cli::cli_abort("{.pkg ggnet} cannot plot hyper graphs")
   }
 
   if (network::is.multiplex(net)) {
-    stop("ggnet cannot plot multiplex graphs")
+    cli::cli_abort("{.pkg ggnet} cannot plot multiplex graphs")
   }
 
   if (network::has.loops(net)) {
-    warning("ggnet does not know how to handle self-loops")
+    cli::cli_warn("{.pkg ggnet} does not know how to handle self-loops")
   }
 
   # -- check size --------------------------------------------------------------
@@ -391,7 +393,7 @@ ggnet <- function(
   x = size
 
   if (!is.numeric(x) || is.infinite(x) || is.nan(x) || x < 0 || length(x) > 1) {
-    stop("incorrect size value")
+    cli::cli_abort("incorrect {.arg size} value")
   }
 
   # -- initialize dataset ------------------------------------------------------
@@ -435,7 +437,7 @@ ggnet <- function(
   }
 
   if (!is.null(data$weight) && !is.numeric(data$weight)) {
-    stop("incorrect weight.method value")
+    cli::cli_abort("incorrect {.arg weight.method} value")
   }
 
   # -- weight thresholds -------------------------------------------------------
@@ -443,17 +445,21 @@ ggnet <- function(
   x = ifelse(is.na(weight.min), 0, weight.min)
 
   if (length(x) > 1 || !is.numeric(x) || is.infinite(x) || is.nan(x) || x < 0) {
-    stop("incorrect weight.min value")
+    cli::cli_abort("incorrect {.arg weight.min} value")
   } else if (x > 0) {
     x = which(data$weight < x)
-    message(paste("weight.min removed", length(x), "nodes out of", nrow(data)))
+    cli::cli_inform(
+      "{.arg weight.min} removed {length(x)} nodes out of {nrow(data)}"
+    )
 
     if (length(x) > 0) {
       data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
-        warning("weight.min removed all nodes; nothing left to plot")
+        cli::cli_warn(
+          "{.arg weight.min} removed all nodes; nothing left to plot"
+        )
         return(invisible(NULL))
       }
     }
@@ -462,17 +468,21 @@ ggnet <- function(
   x = ifelse(is.na(weight.max), 0, weight.max)
 
   if (length(x) > 1 || !is.numeric(x) || is.infinite(x) || is.nan(x) || x < 0) {
-    stop("incorrect weight.max value")
+    cli::cli_abort("incorrect {.arg weight.max} value")
   } else if (x > 0) {
     x = which(data$weight > x)
-    message(paste("weight.max removed", length(x), "nodes out of", nrow(data)))
+    cli::cli_inform(
+      "{.arg weight.max} removed {length(x)} nodes out of {nrow(data)}"
+    )
 
     if (length(x) > 0) {
       data = data[-x, ]
       network::delete.vertices(net, x)
 
       if (!nrow(data)) {
-        warning("weight.max removed all nodes; nothing left to plot")
+        cli::cli_warn(
+          "{.arg weight.max} removed all nodes; nothing left to plot"
+        )
         return(invisible(NULL))
       }
     }
@@ -483,13 +493,13 @@ ggnet <- function(
   x = weight.cut
 
   if (length(x) > 1 || is.null(x) || is.na(x) || is.infinite(x) || is.nan(x)) {
-    stop("incorrect weight.cut value")
+    cli::cli_abort("incorrect {.arg weight.cut} value")
   } else if (isTRUE(x)) {
     x = 4
   } else if (is.logical(x) && !x) {
     x = 0
   } else if (!is.numeric(x)) {
-    stop("incorrect weight.cut value")
+    cli::cli_abort("incorrect {.arg weight.cut} value")
   }
 
   if (x >= 1) {
@@ -498,7 +508,7 @@ ggnet <- function(
     if (length(x) > 1) {
       data$weight = cut(data$weight, unique(x), include.lowest = TRUE)
     } else {
-      warning("node weight is invariant; weight.cut ignored")
+      cli::cli_warn("node weight is invariant; {.arg weight.cut} ignored")
     }
   }
 
@@ -528,7 +538,7 @@ ggnet <- function(
 
     if (length(node.color) != x) {
       if (!is.null(node.color)) {
-        warning(
+        cli::cli_warn(
           "node groups and colors are of unequal length; using grayscale colors"
         )
       }
@@ -559,7 +569,7 @@ ggnet <- function(
 
     snaNamespace = asNamespace("sna")
     if (!exists(mode, envir = snaNamespace)) {
-      stop(paste("unsupported placement method:", mode))
+      cli::cli_abort("unsupported placement method: {.val {mode}}")
     }
     mode = get(mode, envir = snaNamespace)
 
@@ -574,7 +584,7 @@ ggnet <- function(
     # fixed coordinates from matrix
     xy = data.frame(x = set_attr(mode[, 1]), y = set_attr(mode[, 2]))
   } else {
-    stop("incorrect mode value")
+    cli::cli_abort("incorrect {.arg mode} value")
   }
 
   xy$x = scale(xy$x, min(xy$x), diff(range(xy$x)))[, 1]
@@ -679,7 +689,7 @@ ggnet <- function(
     label.size = set_node(label.size, "label.size", mode = FALSE)
 
     if (!is.numeric(label.size)) {
-      stop("incorrect label.size value")
+      cli::cli_abort("incorrect {.arg label.size} value")
     }
 
     x = label.trim
@@ -687,7 +697,7 @@ ggnet <- function(
     if (
       length(x) > 1 || (!is.logical(x) && !is.numeric(x) && !is.function(x))
     ) {
-      stop("incorrect label.trim value")
+      cli::cli_abort("incorrect {.arg label.trim} value")
     } else if (is.numeric(x) && x > 0) {
       l = substr(l, 1, x)
     } else if (is.function(x)) {
@@ -708,7 +718,7 @@ ggnet <- function(
   x = range(data$x)
 
   if (!is.numeric(layout.exp) || layout.exp < 0) {
-    stop("incorrect layout.exp value")
+    cli::cli_abort("incorrect {.arg layout.exp} value")
   } else if (layout.exp > 0) {
     x = scales::expand_range(x, layout.exp / 2)
   }

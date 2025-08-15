@@ -70,10 +70,10 @@ ggcoef <- function(
     )
   }
   if (!("term" %in% names(x))) {
-    stop("x doesn't contain a column names 'term'.")
+    cli::cli_abort("{.arg x} doesn't contain a column names {.val term}.")
   }
   if (!("estimate" %in% names(x))) {
-    stop("x doesn't contain a column names 'estimate'.")
+    cli::cli_abort("{.arg x} doesn't contain a column names {.val estimate}.")
   }
   if (exclude_intercept) {
     x <- x[x$term != "(Intercept)", ]

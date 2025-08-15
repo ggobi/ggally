@@ -18,7 +18,7 @@ test_that("stops", {
       groupColumn = NULL,
       order = "anyClass"
     ),
-    "can't use the 'order' methods "
+    "can't use the `order` methods "
   )
   expect_error(
     ggparcoord(
@@ -27,7 +27,7 @@ test_that("stops", {
       groupColumn = NULL,
       order = "allClass"
     ),
-    "can't use the 'order' methods "
+    "can't use the `order` methods "
   )
 
   expect_error(
@@ -36,11 +36,11 @@ test_that("stops", {
       columns = c(1, 5:10),
       groupColumn = c(1, 2)
     ),
-    "invalid value for 'groupColumn'"
+    "invalid value for `groupColumn`"
   )
   expect_error(
     ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 1i),
-    "invalid value for 'groupColumn'"
+    "invalid value for `groupColumn`"
   )
 
   expect_error(
@@ -50,7 +50,7 @@ test_that("stops", {
       groupColumn = 2,
       scale = "notValid"
     ),
-    "invalid value for 'scale'"
+    "invalid value for `scale`"
   )
 
   expect_error(
@@ -60,7 +60,7 @@ test_that("stops", {
       groupColumn = 2,
       centerObsID = nrow(diamonds.samp) + 10
     ),
-    "invalid value for 'centerObsID'"
+    "invalid value for `centerObsID`"
   )
 
   expect_error(
@@ -70,7 +70,7 @@ test_that("stops", {
       groupColumn = 2,
       missing = "notValid"
     ),
-    "invalid value for 'missing'"
+    "invalid value for `missing`"
   )
 
   expect_error(
@@ -80,7 +80,7 @@ test_that("stops", {
       groupColumn = 2,
       order = "notValid"
     ),
-    "invalid value for 'order'"
+    "invalid value for `order`"
   )
   expect_error(
     ggparcoord(
@@ -89,7 +89,7 @@ test_that("stops", {
       groupColumn = 2,
       order = 1i
     ),
-    "invalid value for 'order'"
+    "invalid value for `order`"
   )
 
   expect_error(
@@ -99,7 +99,7 @@ test_that("stops", {
       groupColumn = 2,
       showPoints = 1
     ),
-    "invalid value for 'showPoints'"
+    "invalid value for `showPoints`"
   )
 
   expect_error(
@@ -109,7 +109,7 @@ test_that("stops", {
       groupColumn = 2,
       alphaLines = "notAColumn"
     ),
-    "'alphaLines' column is missing in data"
+    "`alphaLines` column is missing in data"
   )
   tmpDt <- diamonds.samp
   tmpDt$price[1] <- NA
@@ -121,7 +121,7 @@ test_that("stops", {
       groupColumn = 2,
       alphaLines = "price"
     ),
-    "missing data in 'alphaLines' column"
+    "missing data in `alphaLines` column"
   )
   expect_error(
     ggparcoord(
@@ -130,7 +130,7 @@ test_that("stops", {
       groupColumn = 2,
       alphaLines = "price"
     ),
-    "invalid value for 'alphaLines' column; max range "
+    "invalid value for `alphaLines` column; max range "
   )
   expect_error(
     ggparcoord(
@@ -139,7 +139,7 @@ test_that("stops", {
       groupColumn = 2,
       alphaLines = -0.1
     ),
-    "invalid value for 'alphaLines'; must be a scalar value"
+    "invalid value for `alphaLines`; must be a scalar value"
   )
   expect_error(
     ggparcoord(
@@ -148,7 +148,7 @@ test_that("stops", {
       groupColumn = 2,
       alphaLines = 1.1
     ),
-    "invalid value for 'alphaLines'; must be a scalar value"
+    "invalid value for `alphaLines`; must be a scalar value"
   )
 
   expect_error(
@@ -158,7 +158,7 @@ test_that("stops", {
       groupColumn = 2,
       boxplot = 1
     ),
-    "invalid value for 'boxplot'"
+    "invalid value for `boxplot`"
   )
 
   expect_error(
@@ -168,7 +168,7 @@ test_that("stops", {
       groupColumn = 2,
       shadeBox = c(1, 2)
     ),
-    "invalid value for 'shadeBox'; must be a single color"
+    "invalid value for `shadeBox`; must be a single color"
   )
   expect_error(
     ggparcoord(
@@ -177,7 +177,7 @@ test_that("stops", {
       groupColumn = 2,
       shadeBox = "notacolor"
     ),
-    "invalid value for 'shadeBox'; must be a valid R color"
+    "invalid value for `shadeBox`; must be a valid R color"
   )
 
   expect_error(
@@ -187,7 +187,7 @@ test_that("stops", {
       groupColumn = 2,
       splineFactor = NULL
     ),
-    "invalid value for 'splineFactor'"
+    "invalid value for `splineFactor`"
   )
 })
 

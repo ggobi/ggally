@@ -86,77 +86,43 @@ fix_column_values <- function(
     })
     isFound <- as.logical(unlist(lapply(colNumValues, length)))
     if (any(!isFound)) {
-      stop(
-        "Columns in '",
-        columnsName,
-        "' not found in data: c(",
-        str_c(str_c("'", columns[!isFound], "'"), collapse = ", "),
-        "). Choices: c('",
-        paste(colnamesData, collapse = "', '"),
-        "')"
+      cols_not_found <- toString(str_c("'", columns[!isFound], "'"))
+      cli::cli_abort(
+        c(
+          "Columns in {.code {columnsName}} not found in data: {.code {cols_not_found}}.",
+          "i" = "Choices: {.code {colnamesData}}"
+        )
       )
     }
     columns <- unlist(colNumValues)
   }
 
   if (any(columns > ncol(data))) {
-    stop(
-      "Make sure your numeric '",
-      columnsName,
-      "'",
-      " values are less than or equal to ",
-      ncol(data),
-      ".\n",
-      "\t",
-      columnsName,
-      " = c(",
-      str_c(columns, collapse = ", "),
-      ")"
-    )
+    cli::cli_abort(c(
+      "Make sure your numeric {.val {columnsName}} values are less than or equal to {ncol(data)}.",
+      "*" = "{columnsName} = c({toString(columns)})"
+    ))
   }
   if (any(columns < 1)) {
-    stop(
-      "Make sure your numeric '",
-      columnsName,
-      "' values are positive.",
-      "\n",
-      "\t",
-      columnsName,
-      " = c(",
-      paste(columns, collapse = ", "),
-      ")"
-    )
+    cli::cli_abort(c(
+      "Make sure your numeric {.val {columnsName}} values are positive.",
+      "*" = "columnsName = c({toString(columns)})"
+    ))
   }
   if (any((columns %% 1) != 0)) {
-    stop(
-      "Make sure your numeric '",
-      columnsName,
-      "' values are integers.",
-      "\n",
-      "\t",
-      columnsName,
-      " = c(",
-      paste(columns, collapse = ", "),
-      ")"
-    )
+    cli::cli_abort(c(
+      "Make sure your numeric {.val {columnsName}} values are integers.",
+      "*" = "columnsName = c(toString(columns))"
+    ))
   }
 
   if (!is.null(columnLabels)) {
     if (length(columnLabels) != length(columns)) {
-      stop(
-        "The length of the '",
-        columnLabelsName,
-        "'",
-        " does not match the length of the '",
-        columnsName,
-        "' being used.",
-        " Labels: c('",
-        paste(columnLabels, collapse = ", "),
-        "')\n",
-        " Columns: c('",
-        paste(columns, collapse = ", "),
-        "')"
-      )
+      cli::cli_abort(c(
+        "The length of the {.arg {columnLabelsName}} does not match the length of the {.arg {columnsName}} being used.",
+        "*" = "Labels: c({toString(columnLabels)})",
+        "*" = "Columns: c({toString(columns)})"
+      ))
     }
   }
 
@@ -165,9 +131,8 @@ fix_column_values <- function(
 
 stop_if_bad_mapping <- function(mapping) {
   if (is.numeric(mapping)) {
-    stop(
-      "'mapping' should not be numeric",
-      " unless 'columns' is missing from function call."
+    cli::cli_abort(
+      "{.arg mapping} should not be numeric unless 'columns' is missing from function call."
     )
   }
 }
@@ -178,13 +143,9 @@ fix_axis_label_choice <- function(axisLabels, axisLabelChoices) {
   }
   axisLabelChoice <- pmatch(axisLabels, axisLabelChoices)
   if (is.na(axisLabelChoice)) {
-    warning(str_c(
-      "'axisLabels' not in c(",
-      str_c(str_c("'", axisLabelChoices, "'"), collapse = ", "),
-      ").  Reverting to '",
-      axisLabelChoices[1],
-      "'"
-    ))
+    cli::cli_warn(
+      "{.arg axisLabels} not in c({toString(str_c(\"'\", axisLabelChoices, \"'\"))}). Reverting to '{axisLabelChoices[1]}'."
+    )
     axisLabelChoice <- 1
   }
   axisLabels <- axisLabelChoices[axisLabelChoice]
@@ -198,24 +159,19 @@ stop_if_high_cardinality <- function(data, columns, threshold) {
     return()
   }
   if (!is.numeric(threshold)) {
-    stop("'cardinality_threshold' should be a numeric or NULL")
+    cli::cli_abort(
+      "{.arg cardinality_threshold} should be a numeric or {.code NULL}."
+    )
   }
   for (col in names(data[columns])) {
     data_col <- data[[col]]
     if (!is.numeric(data_col)) {
       level_length <- length(levels(data_col))
       if (level_length > threshold) {
-        stop(
-          "Column '",
-          col,
-          "' has more levels (",
-          level_length,
-          ")",
-          " than the threshold (",
-          threshold,
-          ") allowed.\n",
-          "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times"
-        )
+        cli::cli_abort(c(
+          "Column {.val {col}} has more levels ({level_length}) than the threshold ({threshold}) allowed.",
+          i = "Please remove the column or increase the 'cardinality_threshold' parameter. Increasing the cardinality_threshold may produce long processing times."
+        ))
       }
     }
   }
@@ -536,10 +492,10 @@ ggduo <- function(
   )
 
   if (!is.null(types[["combo"]])) {
-    warning(str_c(
-      "\nSetting:\n",
-      "\ttypes$comboHorizontal <- types$combo\n",
-      "\ttypes$comboVertical <- types$combo"
+    cli::cli_warn(c(
+      "Setting:",
+      "*" = "{.code types$comboHorizontal <- types$combo}",
+      "*" = "{.code types$comboVertical <- types$combo}"
     ))
     types$comboHorizontal <- types$combo
     types$comboVertical <- types$combo
@@ -1094,7 +1050,7 @@ check_and_set_ggpairs_defaults <- function(
   )
 
   if (!is.list(obj)) {
-    stop("'", name, "' is not a list")
+    cli::cli_abort("{.arg {name}} is not a list")
   }
   stop_if_params_exist(obj$params)
 
@@ -1112,11 +1068,8 @@ check_and_set_ggpairs_defaults <- function(
   }
 
   if (!is.null(obj$aes_string)) {
-    stop(
-      "'aes_string' is a deprecated element for the section ",
-      name,
-      ".\n",
-      "Please use 'mapping' instead. "
+    cli::cli_abort(
+      "{.fn aes_string} is a deprecated element for the section {name}.\nPlease use 'mapping' instead."
     )
   }
 
@@ -1126,16 +1079,9 @@ check_and_set_ggpairs_defaults <- function(
       if (is.character(val)) {
         if (!str_detect(val, "Diag$")) {
           newVal <- paste(val, "Diag", sep = "")
-          warning(paste(
-            "Changing diag$",
-            key,
-            " from '",
-            val,
-            "' to '",
-            newVal,
-            "'",
-            sep = ""
-          ))
+          cli::cli_warn(
+            "Changing {.code diag${key}} from {.val {val}} to {.val {newVal}}."
+          )
           obj[[key]] <- newVal
         }
       }
@@ -1158,11 +1104,10 @@ get_subtype_name <- function(.subType) {
 
 stop_if_params_exist <- function(params) {
   if (!is.null(params)) {
-    stop(
-      "'params' is a deprecated argument.  ",
-      "Please 'wrap' the function to supply arguments. ",
-      "help(\"wrap\", package = \"GGally\")"
-    )
+    cli::cli_abort(c(
+      "{.arg params} is a deprecated argument.",
+      i = "Please {.fn wrap} the function to supply arguments. {.code help(\"wrap\", package = \"GGally\")}"
+    ))
   }
 }
 
@@ -1196,9 +1141,8 @@ ggmatrix_proportions <- function(proportions, data, columns) {
       logical(1)
     )
     if (!all(is_valid_type)) {
-      stop(
-        "proportions need to be non-NA numeric values or 'auto'. proportions: ",
-        dput_val(proportions)
+      cli::cli_abort(
+        "{.arg proportions} need to be non-NA numeric values or {.code 'auto'}. proportions: {dput_val(proportions)}"
       )
     }
   }

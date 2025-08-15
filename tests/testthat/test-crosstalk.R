@@ -19,7 +19,7 @@ test_that("crosstalk works with ggduo and ggpairs", {
     {
       pm <- ggpairs(sd, c("Petal.Length", "Petal.Width", crosstalk_key()))
     },
-    "Columns in 'columns' not"
+    "Columns in `columns` not"
   )
 
   expect_silent({
@@ -29,7 +29,7 @@ test_that("crosstalk works with ggduo and ggpairs", {
     {
       pm <- ggduo(sd, c(1:2, 5), 3:5)
     },
-    "Make sure your numeric 'columnsX'"
+    "Make sure your numeric"
   )
   expect_error(
     {
@@ -39,7 +39,7 @@ test_that("crosstalk works with ggduo and ggpairs", {
         c("Petal.Length", "Petal.Width")
       )
     },
-    "Columns in 'columnsX' not"
+    "Columns in `columnsX` not"
   )
   expect_error(
     {
@@ -49,6 +49,6 @@ test_that("crosstalk works with ggduo and ggpairs", {
         c("Petal.Length", "Petal.Width", crosstalk_key())
       )
     },
-    "Columns in 'columnsY' not"
+    "Columns in `columnsY` not"
   )
 })

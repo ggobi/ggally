@@ -6,9 +6,9 @@ test_that("errors", {
   expect_error(wrap(fn, y = TRUE, 5), "all parameters")
 
   # named params to wrapp
-  expect_error(wrapp(fn, list(5)), "'params' must")
-  expect_error(wrapp(fn, table(1:10, 1:10)), "'params' must")
-  expect_error(wrapp(fn, list(A = 4, 5)), "'params' must")
+  expect_error(wrapp(fn, list(5)), "`params` must")
+  expect_error(wrapp(fn, table(1:10, 1:10)), "`params` must")
+  expect_error(wrapp(fn, list(A = 4, 5)), "`params` must")
 
   # if the character fn doesn't exist
   expect_error(wrap("does not exist", A = 5), "Function provided")
