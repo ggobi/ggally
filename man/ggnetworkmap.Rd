@@ -144,7 +144,8 @@ if (require(airports) && require(network) && require(sna)) {
     size = 4, great.circles = TRUE,
     node.group = mygroup, segment.color = "steelblue",
     ring.group = degree, weight = degree
-  )
+  ) +
+    coord_map("albers",  lat0 = 45.5, lat1 = 29.5)
   p_(p)
 
   ## Exploring a community of spambots found on Twitter
