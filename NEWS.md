@@ -4,6 +4,10 @@
 
 * Enhance all error and warning output by using `{cli}`. (Thank you @m-muecke! #557)
 
+* Add `nba_ppg_2008` dataset describing NBA Player Statistics for 2008-2009 Season. (#562)
+
+* Update `ggnetworkmap` to use `{airports}` package for airport data visualization. (#562)
+
 
 # GGally 2.3.0
 
