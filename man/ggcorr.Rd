@@ -151,17 +151,17 @@ supported by diverging ColorBrewer palettes.
 p_ <- GGally::print_if_interactive
 
 # Default output.
-p_(ggcorr(flea[, -1]))
+p_(ggcorr(nba_ppg_2008[, -1]))
 
 # Labeled output, with coefficient transparency.
-p_(ggcorr(flea[, -1],
+p_(ggcorr(nba_ppg_2008[, -1],
   label = TRUE,
   label_alpha = TRUE
 ))
 
 # Custom options.
 p_(ggcorr(
-  flea[, -1],
+  nba_ppg_2008[, -1],
   name = expression(rho),
   geom = "circle",
   max_size = 10,
@@ -176,7 +176,7 @@ p_(ggcorr(
 # Supply your own correlation matrix
 p_(ggcorr(
   data = NULL,
-  cor_matrix = cor(flea[, -1], use = "pairwise")
+  cor_matrix = cor(nba_ppg_2008[, -1], use = "pairwise")
 ))
 }
 \seealso{
