@@ -1,4 +1,4 @@
-# GGally (development version)
+# GGally 2.4.0
 
 * Remove re-export of `{magrittr}` pipe (`%>%`) and replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
 
