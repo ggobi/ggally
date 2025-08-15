@@ -36,3 +36,4 @@ ggduo_paper.txt
 ^vignettes$
 ^CRAN-SUBMISSION$
 .vscode
+^data-raw$

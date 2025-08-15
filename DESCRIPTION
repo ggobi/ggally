@@ -48,6 +48,7 @@ Imports:
     tidyr (>= 1.3.0),
     utils
 Suggests:
+    airports,
     broom (>= 0.7.0),
     broom.helpers (>= 1.3.0),
     chemometrics,
@@ -90,6 +91,7 @@ Collate:
     'data-flea.R'
     'data-happy.R'
     'data-nasa.R'
+    'data-nba_ppg_2008.R'
     'data-pigs.R'
     'data-psychademic.R'
     'data-tips.R'

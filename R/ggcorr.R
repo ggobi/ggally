@@ -99,21 +99,18 @@
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' # Basketball statistics provided by Nathan Yau at Flowing Data.
-#' dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
-#'
 #' # Default output.
-#' p_(ggcorr(dt[, -1]))
+#' p_(ggcorr(nba_ppg_2008[, -1]))
 #'
 #' # Labeled output, with coefficient transparency.
-#' p_(ggcorr(dt[, -1],
+#' p_(ggcorr(nba_ppg_2008[, -1],
 #'   label = TRUE,
 #'   label_alpha = TRUE
 #' ))
 #'
 #' # Custom options.
 #' p_(ggcorr(
-#'   dt[, -1],
+#'   nba_ppg_2008[, -1],
 #'   name = expression(rho),
 #'   geom = "circle",
 #'   max_size = 10,
@@ -128,7 +125,7 @@
 #' # Supply your own correlation matrix
 #' p_(ggcorr(
 #'   data = NULL,
-#'   cor_matrix = cor(dt[, -1], use = "pairwise")
+#'   cor_matrix = cor(nba_ppg_2008[, -1], use = "pairwise")
 #' ))
 ggcorr <- function(
   data,
