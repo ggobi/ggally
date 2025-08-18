@@ -76,6 +76,6 @@ When visiting the link manually, the link works as expected. I believe they have
 
 ## revdepcheck results
 
-We checked 142 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 141 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
