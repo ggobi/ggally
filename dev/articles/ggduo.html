@@ -120,9 +120,9 @@ series analysis, and regression analysis.</p>
 <span><span class="co">#&gt;  $ sex             : chr  "female" "female" "male" "male" ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "academic")= chr [1:5] "read" "write" "math" "science" ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "psychology")= chr [1:3] "locus_of_control" "self_concept" "motivation"</span></span>
-<span><span class="op">(</span><span class="va">psych_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="st">"psychology"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">psych_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/statnet.common/man/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="st">"psychology"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "locus_of_control" "self_concept"     "motivation"</span></span>
-<span><span class="op">(</span><span class="va">academic_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="st">"academic"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">academic_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/statnet.common/man/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="st">"academic"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "read"    "write"   "math"    "science" "sex"</span></span></code></pre></div>
 <p>First, look at the within correlation using
 <code><a href="../reference/ggpairs.html">ggpairs()</a></code>.</p>

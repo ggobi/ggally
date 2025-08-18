@@ -65,9 +65,9 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggnostic</span><span class="op">(</span></span>
 <span>  <span class="va">model</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  columnsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x"</span><span class="op">)</span>,</span>
+<span>  columnsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/statnet.common/man/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x"</span><span class="op">)</span>,</span>
 <span>  columnsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".resid"</span>, <span class="st">".sigma"</span>, <span class="st">".hat"</span>, <span class="st">".cooksd"</span><span class="op">)</span>,</span>
-<span>  columnLabelsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x_label"</span><span class="op">)</span>,</span>
+<span>  columnLabelsX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/statnet.common/man/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"var_x_label"</span><span class="op">)</span>,</span>
 <span>  columnLabelsY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"\\."</span>, <span class="st">" "</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^\\."</span>, <span class="st">""</span>, <span class="va">columnsY</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"explanatory variables"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"diagnostics"</span>,</span>
