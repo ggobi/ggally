@@ -1,8 +1,8 @@
-# GGally (development version)
+# GGally 2.4.0
 
-* Remove re-export of `{magrittr}` pipe (`%>%`) and replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
+* Replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
 
-* Enhance all error and warning output by using `{cli}`. (Thank you @m-muecke! #557)
+* Enhance all error and warning outputs by using `{cli}`. (Thank you @m-muecke! #557)
 
 * Add `nba_ppg_2008` dataset describing NBA Player Statistics for 2008-2009 Season. (#562)
 
