@@ -1,3 +1,5 @@
+# GGally (development version)
+
 # GGally 2.4.0
 
 * Replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
