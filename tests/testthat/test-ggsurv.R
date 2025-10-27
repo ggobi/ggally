@@ -43,11 +43,14 @@ test_that("stops", {
   lungNoCensor <- survival::survfit(Surv(time, status) ~ 1, data = noCensor)
 
   # check that the surv.col and lty.est are of the correct length
-  expect_error(ggsurv(lungNoCensor, surv.col = c("black", "red")))
-  expect_error(ggsurv(lungNoCensor, lty.est = 1:2))
+  expect_snapshot(
+    ggsurv(lungNoCensor, surv.col = c("black", "red")),
+    error = TRUE
+  )
+  expect_snapshot(ggsurv(lungNoCensor, lty.est = 1:2), error = TRUE)
 
   # must have censor to plot
-  expect_error(ggsurv(lungNoCensor, plot.cens = TRUE))
+  expect_snapshot(ggsurv(lungNoCensor, plot.cens = TRUE), error = TRUE)
 
   noCensor <- subset(kidney, status == 1)
   kidneyNoCensor <- survival::survfit(
@@ -56,11 +59,14 @@ test_that("stops", {
   )
 
   # check that the surv.col and lty.est are of the correct length.  should be 4
-  expect_error(ggsurv(kidneyNoCensor, surv.col = c("black", "red", "blue")))
-  expect_error(ggsurv(kidneyNoCensor, lty.est = 1:3))
+  expect_snapshot(
+    ggsurv(kidneyNoCensor, surv.col = c("black", "red", "blue")),
+    error = TRUE
+  )
+  expect_snapshot(ggsurv(kidneyNoCensor, lty.est = 1:3), error = TRUE)
 
   # must have censor to plot
-  expect_error(ggsurv(kidneyNoCensor, plot.cens = TRUE))
+  expect_snapshot(ggsurv(kidneyNoCensor, plot.cens = TRUE), error = TRUE)
 
   # must have censor to plot
   expect_silent(

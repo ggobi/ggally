@@ -2,17 +2,17 @@ test_that("errors", {
   fn <- ggally_points
 
   # named params
-  expect_error(wrap(fn, NA), "all parameters")
-  expect_error(wrap(fn, y = TRUE, 5), "all parameters")
+  expect_snapshot(wrap(fn, NA), error = TRUE)
+  expect_snapshot(wrap(fn, y = TRUE, 5), error = TRUE)
 
   # named params to wrapp
-  expect_error(wrapp(fn, list(5)), "`params` must")
-  expect_error(wrapp(fn, table(1:10, 1:10)), "`params` must")
-  expect_error(wrapp(fn, list(A = 4, 5)), "`params` must")
+  expect_snapshot(wrapp(fn, list(5)), error = TRUE)
+  expect_snapshot(wrapp(fn, table(1:10, 1:10)), error = TRUE)
+  expect_snapshot(wrapp(fn, list(A = 4, 5)), error = TRUE)
 
   # if the character fn doesn't exist
-  expect_error(wrap("does not exist", A = 5), "Function provided")
-  expect_error(wrapp("does not exist", list(A = 5)), "Function provided")
+  expect_snapshot(wrap("does not exist", A = 5), error = TRUE)
+  expect_snapshot(wrapp("does not exist", list(A = 5)), error = TRUE)
 })
 
 test_that("wrap", {

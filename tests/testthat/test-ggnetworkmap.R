@@ -259,7 +259,10 @@ test_that("arrows", {
 
 
 test_that("labels", {
-  expect_error(ggnetworkmap(usa, flights, label.nodes = c("A", "B")))
+  expect_snapshot(
+    ggnetworkmap(usa, flights, label.nodes = c("A", "B")),
+    error = TRUE
+  )
   testLabels <- paste("L", 1:network.size(flights), sep = "")
 
   # does logical check
@@ -281,10 +284,7 @@ test_that("labels", {
 ### --- test arrow.size
 
 test_that("arrow.size", {
-  expect_error(
-    ggnetworkmap(net = flights, arrow.size = -1),
-    "incorrect `arrow.size`"
-  )
+  expect_snapshot(ggnetworkmap(net = flights, arrow.size = -1), error = TRUE)
   expect_warning(
     ggnetworkmap(
       net = network(as.matrix(flights), directed = FALSE),
@@ -302,14 +302,14 @@ test_that("network coercion", {
     "self-loops"
   )
 
-  expect_error(ggnetworkmap(net = 1:2), "network object")
-  expect_error(
+  expect_snapshot(ggnetworkmap(net = 1:2), error = TRUE)
+  expect_snapshot(
     ggnetworkmap(net = network(data.frame(1:2, 3:4), hyper = TRUE)),
-    "hyper"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggnetworkmap(net = network(data.frame(1:2, 3:4), multiple = TRUE)),
-    "multiplex graphs"
+    error = TRUE
   )
 })
 

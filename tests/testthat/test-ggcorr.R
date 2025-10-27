@@ -82,7 +82,7 @@ test_that("further options", {
     "geom-tile-no-limits",
     ggcorr(flea[, -1], geom = "tile", limits = FALSE)
   )
-  expect_error(ggcorr(flea[, -1], layout.exp = "a"), "incorrect `layout.exp`")
+  expect_snapshot(ggcorr(flea[, -1], layout.exp = "a"), error = TRUE)
   ggally_expect_doppelganger("layout.exp", ggcorr(flea[, -1], layout.exp = 1))
 })
 
@@ -98,7 +98,7 @@ test_that("cor_matrix", {
 })
 
 test_that("other geoms", {
-  expect_error(ggcorr(flea[, -1], geom = "hexbin"), "incorrect geom")
+  expect_snapshot(ggcorr(flea[, -1], geom = "hexbin"), error = TRUE)
   ggally_expect_doppelganger(
     "geom-blank",
     ggcorr(flea[, -1], geom = "blank")
