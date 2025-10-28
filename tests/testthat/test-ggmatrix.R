@@ -1,28 +1,27 @@
 data(tips)
 
 test_that("stops", {
-  expect_error(
+  expect_snapshot(
     ggmatrix(plots = matrix(), nrow = 2, ncol = 3),
-    "`plots` must be a `list()`",
-    fixed = TRUE
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggmatrix(plots = list(), nrow = "2", ncol = 3),
-    "`nrow` must be a numeric value"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggmatrix(plots = list(), nrow = 2, ncol = "3"),
-    "`ncol` must be a numeric value"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggmatrix(plots = list(), nrow = c(2, 3), ncol = 3),
-    "`nrow` must be a single numeric value"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggmatrix(plots = list(), nrow = 2, ncol = c(2, 3)),
-    "`ncol` must be a single numeric value"
+    error = TRUE
   )
 })
 
@@ -34,9 +33,9 @@ test_that("expression labels", {
   p <- ggpairs(tips, 1:2, columnLabels = exprs, labeller = "label_parsed")
   ggally_expect_doppelganger("expression-labels", p)
 
-  expect_error(
+  expect_snapshot(
     print(ggpairs(tips, 1:2, columnLabels = expression(alpha, beta))),
-    "xAxisLabels"
+    error = TRUE
   )
 })
 
@@ -133,11 +132,11 @@ test_that("blank", {
 
   expect_equal(length(pm$plots), 4)
 
-  expect_error(
+  expect_snapshot(
     {
       pm[2, 2] <- "not blank"
     },
-    "character values \\(besides `'blank'`\\)"
+    error = TRUE
   )
 })
 
@@ -185,23 +184,17 @@ test_that("ggmatrix_gtable progress", {
 #
 
 test_that("ggmatrix proportions", {
-  expect_error(
-    {
-      ggmatrix_proportions("not auto", tips, 1:ncol(tips))
-    },
-    "need to be non-NA"
+  expect_snapshot(
+    ggmatrix_proportions("not auto", tips, 1:ncol(tips)),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggmatrix_proportions(NA, tips, 1:ncol(tips))
-    },
-    "need to be non-NA"
+  expect_snapshot(
+    ggmatrix_proportions(NA, tips, 1:ncol(tips)),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggmatrix_proportions(c(1, NA, 1, 1, 1, 1, 1), tips, 1:ncol(tips))
-    },
-    "need to be non-NA"
+  expect_snapshot(
+    ggmatrix_proportions(c(1, NA, 1, 1, 1, 1, 1), tips, 1:ncol(tips)),
+    error = TRUE
   )
 
   expect_equal(

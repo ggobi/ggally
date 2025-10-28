@@ -136,18 +136,18 @@ test_that("examples", {
 
   ### --- test errors in set_node
 
-  expect_error(ggnet(n, group = NA), "incorrect")
-  expect_error(ggnet(n, group = 1:3), "incorrect")
-  expect_error(ggnet(n, label = TRUE, label.size = -10:-1), "incorrect")
-  expect_error(ggnet(n, size = "phono"), "incorrect")
+  expect_snapshot(ggnet(n, group = NA), error = TRUE)
+  expect_snapshot(ggnet(n, group = 1:3), error = TRUE)
+  expect_snapshot(ggnet(n, label = TRUE, label.size = -10:-1), error = TRUE)
+  expect_snapshot(ggnet(n, size = "phono"), error = TRUE)
 
   ggnet(n, group = "weights")
 
   ### --- test errors in set_edges
 
-  expect_error(ggnet(n, segment.label = NA), "incorrect")
-  expect_error(ggnet(n, segment.label = 1:3), "incorrect")
-  expect_error(ggnet(n, segment.label = -11:-1), "incorrect") # unnecessary
+  expect_snapshot(ggnet(n, segment.label = NA), error = TRUE)
+  expect_snapshot(ggnet(n, segment.label = 1:3), error = TRUE)
+  expect_snapshot(ggnet(n, segment.label = -11:-1), error = TRUE) # unnecessary
   # expect_error(ggnet(n, size = "phono"), "incorrect")
 
   n %e% "weights" <- sample(1:2, network.edgecount(n), replace = TRUE)
@@ -158,24 +158,21 @@ test_that("examples", {
 
   ggnet(n, mode = matrix(1, ncol = 2, nrow = 10))
   ggnet(n, mode = c("lon", "lat"))
-  expect_error(ggnet(n, mode = c("xx", "yy")), "not found")
+  expect_snapshot(ggnet(n, mode = c("xx", "yy")), error = TRUE)
   n %v% "abc" <- "abc"
-  expect_error(ggnet(n, mode = c("abc", "abc")), "not numeric")
-  expect_error(
-    ggnet(n, mode = matrix(1, ncol = 2, nrow = 9)),
-    "coordinates length"
-  )
+  expect_snapshot(ggnet(n, mode = c("abc", "abc")), error = TRUE)
+  expect_snapshot(ggnet(n, mode = matrix(1, ncol = 2, nrow = 9)), error = TRUE)
 
   ### --- test arrow.size
 
-  expect_error(ggnet(n, arrow.size = -1), "incorrect `arrow.size`")
+  expect_snapshot(ggnet(n, arrow.size = -1), error = TRUE)
   expect_warning(ggnet(n, arrow.size = 1), "`arrow.size` ignored")
 
   ### --- test arrow.gap
 
-  suppressWarnings(expect_error(
+  suppressWarnings(expect_snapshot(
     ggnet(n, arrow.size = 12, arrow.gap = -1),
-    "incorrect `arrow.gap`"
+    error = TRUE
   ))
   suppressWarnings(expect_warning(
     ggnet(n, arrow.size = 12, arrow.gap = 0.1),
@@ -197,10 +194,7 @@ test_that("examples", {
 
   # test weight.min
   suppressMessages({
-    expect_error(
-      ggnet(n, weight = "degree", weight.min = -1),
-      "incorrect `weight.min`"
-    )
+    expect_snapshot(ggnet(n, weight = "degree", weight.min = -1), error = TRUE)
     expect_message(
       ggnet(n, weight = "degree", weight.min = 1),
       "`weight.min` removed"
@@ -212,10 +206,7 @@ test_that("examples", {
   })
 
   # test weight.max
-  expect_error(
-    ggnet(n, weight = "degree", weight.max = -1),
-    "incorrect `weight.max`"
-  )
+  expect_snapshot(ggnet(n, weight = "degree", weight.max = -1), error = TRUE)
   expect_message(
     ggnet(n, weight = "degree", weight.max = 99),
     "`weight.max` removed"
@@ -226,11 +217,11 @@ test_that("examples", {
       "removed all nodes"
     )
   })
-  expect_error(ggnet(n, weight = "abc"), "incorrect `weight.method`")
+  expect_snapshot(ggnet(n, weight = "abc"), error = TRUE)
 
   # test weight.cut
-  expect_error(ggnet(n, weight.cut = NA), "incorrect `weight.cut`")
-  expect_error(ggnet(n, weight.cut = "a"), "incorrect `weight.cut`")
+  expect_snapshot(ggnet(n, weight.cut = NA), error = TRUE)
+  expect_snapshot(ggnet(n, weight.cut = "a"), error = TRUE)
   expect_warning(ggnet(n, weight.cut = 3), "`weight.cut` ignored")
   ggnet(n, weight = "degree", weight.cut = 3)
 
@@ -242,26 +233,23 @@ test_that("examples", {
 
   ggnet(n, label = letters[1:10], color = "white")
   ggnet(n, label = "abc", color = "white", label.size = 4, size = 12)
-  expect_error(
+  expect_snapshot(
     ggnet(n, label = letters[1:10], label.size = "abc"),
-    "incorrect `label.size`"
+    error = TRUE
   )
 
   ### --- test node placement
 
-  expect_error(ggnet(n, mode = "xyz"), "unsupported")
-  expect_error(ggnet(n, mode = letters[1:3]), "incorrect `mode`")
+  expect_snapshot(ggnet(n, mode = "xyz"), error = TRUE)
+  expect_snapshot(ggnet(n, mode = letters[1:3]), error = TRUE)
 
   ### --- test label.trim
-  expect_error(
-    ggnet(n, label = TRUE, label.trim = "xyz"),
-    "incorrect `label.trim`"
-  )
+  expect_snapshot(ggnet(n, label = TRUE, label.trim = "xyz"), error = TRUE)
   ggnet(n, label = TRUE, color = "white", label.trim = 1)
   ggnet(n, label = TRUE, color = "white", label.trim = toupper)
 
   ### --- test layout.exp
-  expect_error(ggnet(n, layout.exp = "xyz"))
+  expect_snapshot(ggnet(n, layout.exp = "xyz"), error = TRUE)
   ggnet(n, layout.exp = 0.1)
 
   ### --- test bipartite functionality
@@ -292,11 +280,14 @@ test_that("examples", {
     "self-loops"
   )
 
-  expect_error(ggnet(1:2), "network object")
-  expect_error(ggnet(network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
-  expect_error(
+  expect_snapshot(ggnet(1:2), error = TRUE)
+  expect_snapshot(
+    ggnet(network(data.frame(1:2, 3:4), hyper = TRUE)),
+    error = TRUE
+  )
+  expect_snapshot(
     ggnet(network(data.frame(1:2, 3:4), multiple = TRUE)),
-    "multiplex graphs"
+    error = TRUE
   )
 
   ### --- test igraph functionality

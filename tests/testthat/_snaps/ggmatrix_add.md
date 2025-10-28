@@ -1,3 +1,12 @@
+# add
+
+    Code
+      pm + 3
+    Condition
+      Error in `+.ggmatrix`:
+      ! `ggmatrix()` does not know how to add objects that do not have class <theme>, <labels> or <ggproto>.
+      i Received object with class: <numeric>
+
 # v1_ggmatrix_theme
 
     Code

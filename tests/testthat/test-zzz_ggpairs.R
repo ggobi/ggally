@@ -160,31 +160,17 @@ test_that("stops", {
     "Setting:\n"
   )
 
-  expect_error(
-    {
-      ggpairs(tips, columns = c("tip", "day", "not in tips"))
-    },
-    "Columns in `columns` not found in data"
+  expect_snapshot(
+    ggpairs(tips, columns = c("tip", "day", "not in tips")),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggduo(
-        tips,
-        columnsX = c("tip", "day", "not in tips"),
-        columnsY = "smoker"
-      )
-    },
-    "Columns in `columnsX` not found in data"
+  expect_snapshot(
+    ggduo(tips, columnsX = c("tip", "day", "not in tips"), columnsY = "smoker"),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggduo(
-        tips,
-        columnsX = c("tip", "day", "smoker"),
-        columnsY = "not in tips"
-      )
-    },
-    "Columns in `columnsY` not found in data"
+  expect_snapshot(
+    ggduo(tips, columnsX = c("tip", "day", "smoker"), columnsY = "not in tips"),
+    error = TRUE
   )
 
   lifecycle::expect_deprecated(
@@ -199,106 +185,35 @@ test_that("stops", {
     }
   )
 
-  expect_error(
-    {
-      ggpairs(tips, columns = 1:10)
-    },
-    "Make sure your numeric "
+  expect_snapshot(ggpairs(tips, columns = 1:10), error = TRUE)
+  expect_snapshot(ggduo(tips, columnsX = 1:10), error = TRUE)
+  expect_snapshot(ggduo(tips, columnsY = 1:10), error = TRUE)
+
+  expect_snapshot(ggpairs(tips, columns = -5:5), error = TRUE)
+  expect_snapshot(ggduo(tips, columnsX = -5:5), error = TRUE)
+  expect_snapshot(ggduo(tips, columnsY = -5:5), error = TRUE)
+
+  expect_snapshot(ggpairs(tips, columns = (2:10) / 2), error = TRUE)
+  expect_snapshot(ggduo(tips, columnsX = (2:10) / 2), error = TRUE)
+  expect_snapshot(ggduo(tips, columnsY = (2:10) / 2), error = TRUE)
+
+  expect_snapshot(
+    ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra")),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggduo(tips, columnsX = 1:10)
-    },
-    "Make sure your numeric "
+  expect_snapshot(
+    ggduo(tips, columnsX = 1:3, columnLabelsX = c("A", "B", "C", "Extra")),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggduo(tips, columnsY = 1:10)
-    },
-    "Make sure your numeric "
+  expect_snapshot(
+    ggduo(tips, columnsY = 1:3, columnLabelsY = c("A", "B", "C", "Extra")),
+    error = TRUE
   )
 
-  expect_error(
-    {
-      ggpairs(tips, columns = -5:5)
-    },
-    "Make sure your numeric "
-  )
-  expect_error(
-    {
-      ggduo(tips, columnsX = -5:5)
-    },
-    "Make sure your numeric "
-  )
-  expect_error(
-    {
-      ggduo(tips, columnsY = -5:5)
-    },
-    "Make sure your numeric "
-  )
-
-  expect_error(
-    {
-      ggpairs(tips, columns = (2:10) / 2)
-    },
-    "Make sure your numeric "
-  )
-  expect_error(
-    {
-      ggduo(tips, columnsX = (2:10) / 2)
-    },
-    "Make sure your numeric "
-  )
-  expect_error(
-    {
-      ggduo(tips, columnsY = (2:10) / 2)
-    },
-    "Make sure your numeric "
-  )
-
-  expect_error(
-    {
-      ggpairs(tips, columns = 1:3, columnLabels = c("A", "B", "C", "Extra"))
-    },
-    "The length of the `columnLabels` does not match the length of the"
-  )
-  expect_error(
-    {
-      ggduo(tips, columnsX = 1:3, columnLabelsX = c("A", "B", "C", "Extra"))
-    },
-    "The length of the `columnLabelsX` does not match the length of the"
-  )
-  expect_error(
-    {
-      ggduo(tips, columnsY = 1:3, columnLabelsY = c("A", "B", "C", "Extra"))
-    },
-    "The length of the `columnLabelsY` does not match the length of the"
-  )
-
-  expect_error(
-    {
-      ggpairs(tips, upper = c("not_a_list"))
-    },
-    "`upper` is not a list"
-  )
-  expect_error(
-    {
-      ggpairs(tips, diag = c("not_a_list"))
-    },
-    "`diag` is not a list"
-  )
-  expect_error(
-    {
-      ggpairs(tips, lower = c("not_a_list"))
-    },
-    "`lower` is not a list"
-  )
-  expect_error(
-    {
-      ggduo(tips, types = c("not_a_list"))
-    },
-    "`types` is not a list"
-  )
+  expect_snapshot(ggpairs(tips, upper = c("not_a_list")), error = TRUE)
+  expect_snapshot(ggpairs(tips, diag = c("not_a_list")), error = TRUE)
+  expect_snapshot(ggpairs(tips, lower = c("not_a_list")), error = TRUE)
+  expect_snapshot(ggduo(tips, types = c("not_a_list")), error = TRUE)
 
   # # couldn't get correct error message
   # #  variables: 'colour' have non standard format: 'total_bill + tip'.
@@ -309,30 +224,21 @@ test_that("stops", {
   #   ggduo(tips, mapping = ggplot2::aes(color = total_bill + tip))
   # }, "variables\\: \"colour\" have non standard format")
 
-  errorString <- "`aes_string\\(\\)` is a deprecated element"
-  expect_error(
-    {
-      ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = .data$day)))
-    },
-    errorString
+  expect_snapshot(
+    ggpairs(tips, upper = list(aes_string = ggplot2::aes(color = .data$day))),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggpairs(tips, lower = list(aes_string = ggplot2::aes(color = .data$day)))
-    },
-    errorString
+  expect_snapshot(
+    ggpairs(tips, lower = list(aes_string = ggplot2::aes(color = .data$day))),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggpairs(tips, diag = list(aes_string = ggplot2::aes(color = .data$day)))
-    },
-    errorString
+  expect_snapshot(
+    ggpairs(tips, diag = list(aes_string = ggplot2::aes(color = .data$day))),
+    error = TRUE
   )
-  expect_error(
-    {
-      ggduo(tips, types = list(aes_string = ggplot2::aes(color = .data$day)))
-    },
-    errorString
+  expect_snapshot(
+    ggduo(tips, types = list(aes_string = ggplot2::aes(color = .data$day))),
+    error = TRUE
   )
 
   expect_diag_warn <- function(key, value) {
@@ -365,13 +271,13 @@ test_that("stops", {
 test_that("cardinality", {
   expect_silent(stop_if_high_cardinality(tips, 1:ncol(tips), NULL))
   expect_silent(stop_if_high_cardinality(tips, 1:ncol(tips), FALSE))
-  expect_error(
+  expect_snapshot(
     stop_if_high_cardinality(tips, 1:ncol(tips), "not numeric"),
-    "`cardinality_threshold` should"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     stop_if_high_cardinality(tips, 1:ncol(tips), 2),
-    "Column"
+    error = TRUE
   )
 })
 
@@ -564,12 +470,7 @@ test_that("mapping", {
   pm <- ggpairs(tips, columns = 1:3)
   expect_equal(pm$xAxisLabels, names(tips)[1:3])
 
-  expect_error(
-    {
-      ggpairs(tips, columns = 1:3, mapping = 1:3)
-    },
-    "`mapping` should not be numeric"
-  )
+  expect_snapshot(ggpairs(tips, columns = 1:3, mapping = 1:3), error = TRUE)
 })
 
 test_that("user functions", {
@@ -955,15 +856,16 @@ for (fn_info in list(
 test_that("bad types", {
   skip_on_cran()
 
-  expect_error({
+  expect_snapshot(
     ggpairs(
       tips,
       1:2,
       lower = "blank",
       diag = "blank",
       upper = list(continuous = "BAD_TYPE")
-    )
-  })
+    ),
+    error = TRUE
+  )
 })
 
 # pm <- ggpairs(tips, upper = "blank")

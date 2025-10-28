@@ -29,9 +29,9 @@ test_that("fn_switch", {
 
   fn <- fn_switch(list(A = fn1), "value")
   expect_equal(fn(dummy_dt, ggplot2::aes(value = !!as.name("A"))), 1)
-  expect_error(
+  expect_snapshot(
     fn(dummy_dt, ggplot2::aes(value = !!as.name("B"))),
-    "function could not be found"
+    error = TRUE
   )
 })
 
@@ -95,7 +95,7 @@ test_that("error checking", {
     c(".resid", ".sigma", ".hat", ".cooksd")
   )
 
-  expect_error(
+  expect_snapshot(
     get_cols(c(
       "not_there",
       ".fitted",
@@ -106,6 +106,6 @@ test_that("error checking", {
       ".hat",
       ".cooksd"
     )),
-    "Could not match `columnsY`"
+    error = TRUE
   )
 })

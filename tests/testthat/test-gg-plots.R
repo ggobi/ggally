@@ -90,12 +90,9 @@ test_that("cor", {
   expect_warn(ti2, "Removing 1 row that")
   expect_warn(ti3, "Removed 3 rows containing")
 
-  expect_error(
-    ggally_cor(
-      ti,
-      ggplot2::aes(x = total_bill, y = tip, color = size)
-    ),
-    "must be categorical"
+  expect_snapshot(
+    ggally_cor(ti, ggplot2::aes(x = total_bill, y = tip, color = size)),
+    error = TRUE
   )
   expect_silent(
     ggally_cor(
@@ -154,11 +151,9 @@ test_that("diagAxis", {
   )
   expect_equal(pDat2, testDt2)
 
-  expect_error(
-    {
-      ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length))
-    },
-    "mapping\\$x is null."
+  expect_snapshot(
+    ggally_diagAxis(iris, mapping = ggplot2::aes(y = Sepal.Length)),
+    error = TRUE
   )
 })
 

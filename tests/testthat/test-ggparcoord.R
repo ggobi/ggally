@@ -11,183 +11,183 @@ test_that("stops", {
   # basic parallel coordinate plot, using default settings
   # ggparcoord(data = diamonds.samp, columns = c(1, 5:10))
   # this time, color by diamond cut
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = NULL,
       order = "anyClass"
     ),
-    "can't use the `order` methods "
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = NULL,
       order = "allClass"
     ),
-    "can't use the `order` methods "
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = c(1, 2)
     ),
-    "invalid value for `groupColumn`"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 1i),
-    "invalid value for `groupColumn`"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       scale = "notValid"
     ),
-    "invalid value for `scale`"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       centerObsID = nrow(diamonds.samp) + 10
     ),
-    "invalid value for `centerObsID`"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       missing = "notValid"
     ),
-    "invalid value for `missing`"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       order = "notValid"
     ),
-    "invalid value for `order`"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       order = 1i
     ),
-    "invalid value for `order`"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       showPoints = 1
     ),
-    "invalid value for `showPoints`"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       alphaLines = "notAColumn"
     ),
-    "`alphaLines` column is missing in data"
+    error = TRUE
   )
   tmpDt <- diamonds.samp
   tmpDt$price[1] <- NA
   range(tmpDt$price)
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = tmpDt,
       columns = c(1, 5:10),
       groupColumn = 2,
       alphaLines = "price"
     ),
-    "missing data in `alphaLines` column"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       alphaLines = "price"
     ),
-    "invalid value for `alphaLines` column; max range "
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       alphaLines = -0.1
     ),
-    "invalid value for `alphaLines`; must be a scalar value"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       alphaLines = 1.1
     ),
-    "invalid value for `alphaLines`; must be a scalar value"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       boxplot = 1
     ),
-    "invalid value for `boxplot`"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       shadeBox = c(1, 2)
     ),
-    "invalid value for `shadeBox`; must be a single color"
+    error = TRUE
   )
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       data = diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       shadeBox = "notacolor"
     ),
-    "invalid value for `shadeBox`; must be a valid R color"
+    error = TRUE
   )
 
-  expect_error(
+  expect_snapshot(
     ggparcoord(
       diamonds.samp,
       columns = c(1, 5:10),
       groupColumn = 2,
       splineFactor = NULL
     ),
-    "invalid value for `splineFactor`"
+    error = TRUE
   )
 })
 

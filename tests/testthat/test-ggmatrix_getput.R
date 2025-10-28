@@ -3,16 +3,16 @@ data(tips)
 test_that("stops", {
   pm <- ggpairs(tips)
   p <- ggally_blankDiag()
-  expect_error(pm["total_bill", 1], "`i` may only be a single")
-  expect_error(pm[1, "total_bill"], "`j` may only be a single")
-  expect_error(pm["total_bill", 1] <- p, "`i` may only be a single")
-  expect_error(pm[1, "total_bill"] <- p, "`j` may only be a single")
+  expect_snapshot(pm["total_bill", 1], error = TRUE)
+  expect_snapshot(pm[1, "total_bill"], error = TRUE)
+  expect_snapshot(pm["total_bill", 1] <- p, error = TRUE)
+  expect_snapshot(pm[1, "total_bill"] <- p, error = TRUE)
 
   pm <- ggduo(tips, 1:3, 1:4)
-  expect_error(pm[0, 1], "`i` may only be in the range")
-  expect_error(pm[1, 0], "`j` may only be in the range")
-  expect_error(pm[5, 1], "`i` may only be in the range")
-  expect_error(pm[1, 4], "`j` may only be in the range")
+  expect_snapshot(pm[0, 1], error = TRUE)
+  expect_snapshot(pm[1, 0], error = TRUE)
+  expect_snapshot(pm[5, 1], error = TRUE)
+  expect_snapshot(pm[1, 4], error = TRUE)
 
   for (i in 1:4) {
     for (j in 1:3) {
@@ -37,12 +37,7 @@ test_that("get", {
 
   # test odd input and retrieve it
   a[2, 1] <- 1:4
-  expect_error(
-    {
-      a[2, 1]
-    },
-    "unknown plot object type"
-  )
+  expect_snapshot(a[2, 1], error = TRUE)
 })
 
 test_that("put", {
