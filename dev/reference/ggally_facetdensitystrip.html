@@ -115,17 +115,13 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; data(tips)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_(ggally_denstrip(tips, mapping = ggplot2::aes(x = total_bill, y = sex)))</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 15 rows containing missing values or values outside the scale</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> range (`geom_bar()`).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span>
 <span class="r-plt img"><img src="ggally_facetdensitystrip-3.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_&gt; p_(ggally_denstrip(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   tips,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+   mapping = ggplot2::aes(sex, tip), binwidth = 0.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gglly_+ ) + ggplot2::scale_fill_gradient(low = "grey80", high = "black"))</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 41 rows containing missing values or values outside the scale</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> range (`geom_bar()`).</span>
 <span class="r-plt img"><img src="ggally_facetdensitystrip-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

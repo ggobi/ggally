@@ -171,6 +171,11 @@ clearly.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a world map</span></span>
 <span><span class="va">world</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"world"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, fill <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: `fortify(&lt;map&gt;)` was deprecated in ggplot2 3.6.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `map_data()` instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">was generated.</span></span></span>
 <span><span class="va">world</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">world</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">long</span>, y <span class="op">=</span> <span class="va">lat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html" class="external-link">geom_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"grey65"</span>,</span>
@@ -178,7 +183,11 @@ clearly.</p>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># view global structure</span></span>
-<span><span class="fu"><a href="../reference/ggnetworkmap.html">ggnetworkmap</a></span><span class="op">(</span><span class="va">world</span>, <span class="va">twitter_spambots</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/ggnetworkmap.html">ggnetworkmap</a></span><span class="op">(</span><span class="va">world</span>, <span class="va">twitter_spambots</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">colour</span> : <span style="color: #0000BB;">""</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">""</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">size</span> : <span style="color: #0000BB;">""</span></span></span></code></pre></div>
 <p><img src="ggnetworkmap_files/figure-html/ggnetworkmap-world-1.png" width="700"></p>
 <p>Is the network really concentrated in the U.S.? Probably not. One of
 the odd things about the network, is a much higher proportion of the
@@ -186,7 +195,11 @@ users gave locations that could be geocoded, than Twitter users
 generally.</p>
 <p>Let’s see the network topology</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggnetworkmap.html">ggnetworkmap</a></span><span class="op">(</span>net <span class="op">=</span> <span class="va">twitter_spambots</span>, arrow.size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggnetworkmap.html">ggnetworkmap</a></span><span class="op">(</span>net <span class="op">=</span> <span class="va">twitter_spambots</span>, arrow.size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">colour</span> : <span style="color: #0000BB;">""</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">""</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">size</span> : <span style="color: #0000BB;">""</span></span></span></code></pre></div>
 <p><img src="ggnetworkmap_files/figure-html/ggnetworkmap-topology-1.png" width="700"></p>
 <p>Coloring nodes according to degree centrality can highlight network
 structures.</p>
@@ -202,7 +215,9 @@ structures.</p>
 <span>  ring.group <span class="op">=</span> <span class="va">outdegree</span>, size <span class="op">=</span> <span class="fl">4</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html" class="external-link">scale_fill_continuous</a></span><span class="op">(</span><span class="st">"Indegree"</span>, high <span class="op">=</span> <span class="st">"red"</span>, low <span class="op">=</span> <span class="st">"yellow"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Outdegree"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Outdegree"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">size</span> : <span style="color: #0000BB;">""</span></span></span></code></pre></div>
 <p><img src="ggnetworkmap_files/figure-html/ggnetworkmap-color-1.png" width="700"></p>
 <p>Some Twitter attributes have been included as vertex attributes.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">

@@ -128,15 +128,15 @@ series analysis, and regression analysis.</p>
 <code><a href="../reference/ggpairs.html">ggpairs()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="va">psych_variables</span>, title <span class="op">=</span> <span class="st">"Within Psychological Variables"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-within-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="va">academic_variables</span>, title <span class="op">=</span> <span class="st">"Within Academic Variables"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-within-2.png" width="700"></p>
 <p>Next, look at the between correlation using <code><a href="../reference/ggduo.html">ggduo()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -147,8 +147,8 @@ series analysis, and regression analysis.</p>
 <span>  xlab <span class="op">=</span> <span class="st">"Psychological"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"Academic"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-between-1.png" width="700"></p>
 <p>Since ggduo does not have a upper section to display the correlation
 values, we may use a custom function to add the information in the
@@ -183,9 +183,9 @@ recovered in the outer axis labels.</p>
 <span>  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></span></code></pre></div>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-lm-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -226,8 +226,7 @@ mixed variable types.</p>
 <span>  ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span>
-<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with</span></span>
-<span><span class="co">#&gt; `binwidth`.</span></span></code></pre></div>
+<span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-group-1.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove the binwidth warning</span></span>
@@ -266,7 +265,19 @@ strips.</p>
 <span>      fill <span class="op">=</span> <span class="st">"transparent"</span>, color <span class="op">=</span> <span class="st">"grey80"</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="va">pm</span></span></code></pre></div>
+<span><span class="va">pm</span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span>
+<span><span class="co">#&gt; Ignoring unknown labels:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span></code></pre></div>
 <p><img src="ggduo_files/figure-html/ggduo-mtsa-pretty-1.png" width="700"></p>
 </div>
 <div class="section level3">
