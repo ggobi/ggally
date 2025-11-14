@@ -42,8 +42,8 @@ Wraps a function with the supplied parameters to force different default behavio
 The \code{params} and \code{fn} attributes are there for debugging purposes.  If either attribute is altered, the function must be re-wrapped to have the changes take effect.
 }
 \examples{
- # small function to display plots only if it's interactive
- p_ <- GGally::print_if_interactive
+# small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
 
 # example function that prints 'val'
 fn <- function(data, mapping, val = 2) {

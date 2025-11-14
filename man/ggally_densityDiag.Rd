@@ -22,7 +22,7 @@ Displays a density plot for the diagonal of a \code{\link{ggpairs}} plot matrix.
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill)))
 p_(ggally_densityDiag(tips, mapping = ggplot2::aes(x = total_bill, color = day)))
 }

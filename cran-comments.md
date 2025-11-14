@@ -1,56 +1,81 @@
 
 ## Comments
-#### 2021-06-20
 
-I have fixed the failing tests due to an update in `network` package. `GGally` now requires the latest version of the `network` package and should pass the tests.
+#### 2025-08-18
 
-Thank you,
+The request has been fixed along with a couple other minor updates.
+
+Please let me know if I can provide any other information.
+
+Best,
 Barret
 
-#### 2021-06-08
+
+#### 2025-07-22
 
 Dear maintainer,
 
 Please see the problems shown on
 <https://cran.r-project.org/web/checks/check_results_GGally.html>.
 
-Please correct before 2021-06-22 to safely retain your package on CRAN.
+Please correct before 2025-08-25 to safely retain your package on CRAN.
 
-Best,
--k
+Do remember to look at any 'Additional issues'.
+
+It seems we need to remind you of the CRAN policy:
+
+'Packages which use Internet resources should fail gracefully with an informative message
+if the resource is not available or has changed (and not give a check warning nor error).'
+
+This needs correction whether or not the resource recovers.
+
+The CRAN Team
+
+
+For the record, the failure (on M1mac) is
+
+ > ### Name: ggcorr
+ > ### Title: Correlation matrix
+ > ### Aliases: ggcorr
+ >
+ > ### ** Examples
+ >
+ > # Small function to display plots only if it's interactive
+ > p_ <- GGally::print_if_interactive
+ >
+ > # Basketball statistics provided by Nathan Yau at Flowing Data.
+ > dt <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
+
+Warning in file(file, "rt") :
+   URL 'http://datasets.flowingdata.com/ppg2008.csv': status was
+'Couldn't resolve host name'
+Error in file(file, "rt") :
+   cannot open the connection to
+'http://datasets.flowingdata.com/ppg2008.csv'
+Calls: read.csv -> read.table -> file
+Execution halted
 
 
 
-## Test environments and R CMD check results
+## R CMD check results
 
-* local macOS install 11.3.1
-  * R 4.0
-* GitHub Actions - https://github.com/ggobi/ggally/pull/419/checks
-  * macOS, windows, ubuntu {16,20} - R release
-  * macOS, windows, ubuntu {16,20} - R oldrelease
+* 0 errors | 0 warnings | 1 note
 
-* win-builder
-  * devel
-  * release
-  * oldrelease
+```
+* checking CRAN incoming feasibility ... [16s] NOTE
+Maintainer: 'Barret Schloerke <schloerke@gmail.com>'
 
-#### R CMD check results
+Found the following (possibly) invalid URLs:
+  URL: https://www.oecd.org/en/data/datasets/pisa-2012-cba-database.html
+    From: man/australia_PISA2012.Rd
+    Status: 403
+    Message: Forbidden
+```
 
-* 0 errors | 0 warnings | 0 notes
-
+When visiting the link manually, the link works as expected. I believe they have a bot blocker that is causing this error.
 
 ## revdepcheck results
 
-We checked 125 reverse dependencies (100 from CRAN + 25 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 141 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
- * We failed to check 2 packages
-
-Issues with CRAN packages are summarised below.
-
-### Failed to check
-
-* egoTERGM    (NA)
-  * Package is archived. I believe this is a false positive
-* loon.ggplot (NA)
-  * Could not install `loon`. The changes made for this release should have a negative effect on their code.

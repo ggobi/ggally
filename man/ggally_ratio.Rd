@@ -6,7 +6,8 @@
 \usage{
 ggally_ratio(
   data,
-  mapping = do.call(ggplot2::aes_string, as.list(colnames(data)[1:2])),
+  mapping = ggplot2::aes(!!!stats::setNames(lapply(colnames(data)[1:2], as.name), c("x",
+    "y"))),
   ...,
   floor = 0,
   ceiling = NULL
@@ -30,14 +31,14 @@ Plots the mosaic plot by using fluctuation.
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-data(tips, package = "reshape")
+data(tips)
 p_(ggally_ratio(tips, ggplot2::aes(sex, day)))
 p_(ggally_ratio(tips, ggplot2::aes(sex, day)) + ggplot2::coord_equal())
 # only plot tiles greater or equal to 20 and scale to a max of 50
 p_(ggally_ratio(
   tips, ggplot2::aes(sex, day),
   floor = 20, ceiling = 50
-) + ggplot2::theme(aspect.ratio = 4/2))
+) + ggplot2::theme(aspect.ratio = 4 / 2))
 }
 \author{
 Barret Schloerke

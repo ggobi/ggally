@@ -6,7 +6,7 @@
 \usage{
 ggcoef(
   x,
-  mapping = aes_string(y = "term", x = "estimate"),
+  mapping = aes(!!as.name("estimate"), !!as.name("term")),
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
@@ -42,7 +42,7 @@ if \code{x} is not a data frame)}
 \item{vline}{print a vertical line?}
 
 \item{vline_intercept}{\code{xintercept} for the vertical line.
-\code{"auto"} for \code{x = 0} (or \code{x = 1} if {exponentiate} is \code{TRUE})}
+\code{"auto"} for \code{x = 0} (or \code{x = 1} if \code{exponentiate} is \code{TRUE})}
 
 \item{vline_color}{color of the vertical line}
 
@@ -73,11 +73,14 @@ p_ <- GGally::print_if_interactive
 library(broom)
 reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
 p_(ggcoef(reg))
-\donttest{d <- as.data.frame(Titanic)
+\donttest{
+d <- as.data.frame(Titanic)
 reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
 ggcoef(reg2, exponentiate = TRUE)
 ggcoef(
-  reg2, exponentiate = TRUE, exclude_intercept = TRUE,
+  reg2,
+  exponentiate = TRUE, exclude_intercept = TRUE,
   errorbar_height = .2, color = "blue", sort = "ascending"
-)}
+)
+}
 }

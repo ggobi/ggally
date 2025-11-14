@@ -68,7 +68,7 @@ the \code{ggplot2} graphics package.
 \details{
 \code{scale} is a character string that denotes how to scale the variables
 in the parallel coordinate plot. Options:
-\itemize{
+\describe{
 \item{\code{std}}{: univariately, subtract mean and divide by standard deviation}
 \item{\code{robust}}{: univariately, subtract median and divide by median absolute deviation}
 \item{\code{uniminmax}}{: univariately, scale so the minimum of the variable is zero, and the maximum is one}
@@ -82,7 +82,7 @@ center each variable at the value of the observation specified by the \code{cent
 
 \code{missing} is a character string that denotes how to handle missing
 missing values. Options:
-\itemize{
+\describe{
 \item{\code{exclude}}{: remove all cases with missing values}
 \item{\code{mean}}{: set missing values to the mean of the variable}
 \item{\code{median}}{: set missing values to the median of the variable}
@@ -92,7 +92,7 @@ missing values. Options:
 
 \code{order} is either a vector of indices or a character string that denotes how to
 order the axes (variables) of the parallel coordinate plot. Options:
-\itemize{
+\describe{
 \item{\code{(default)}}{: order by the vector denoted by \code{columns}}
 \item{\code{(given vector)}}{: order by the vector specified}
 \item{\code{anyClass}}{: order variables by their separation between any one class and
@@ -130,28 +130,36 @@ p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2)
 p_(p)
 
 # underlay univariate boxplots, add title, use uniminmax scaling
-p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
-  scale = "uniminmax", boxplot = TRUE, title = "Parallel Coord. Plot of Diamonds Data")
+p <- ggparcoord(
+  data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
+  scale = "uniminmax", boxplot = TRUE, title = "Parallel Coord. Plot of Diamonds Data"
+)
 p_(p)
 
 # utilize ggplot2 aes to switch to thicker lines
-p <- ggparcoord(data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
-  title ="Parallel Coord. Plot of Diamonds Data", mapping = ggplot2::aes(size = 1)) +
-  ggplot2::scale_size_identity()
+p <- ggparcoord(
+  data = diamonds.samp, columns = c(1, 5:10), groupColumn = 2,
+  title = "Parallel Coord. Plot of Diamonds Data", mapping = ggplot2::aes(linewidth = 1)
+) +
+  ggplot2::scale_linewidth_identity()
 p_(p)
 
 # basic parallel coord plot of the msleep data, using 'random' imputation and
 # coloring by diet (can also use variable names in the columns and groupColumn
 # arguments)
 data(msleep, package = "ggplot2")
-p <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", missing =
-  "random", scale = "uniminmax")
+p <- ggparcoord(
+  data = msleep, columns = 6:11, groupColumn = "vore", missing =
+    "random", scale = "uniminmax"
+)
 p_(p)
 
 # center each variable by its median, using the default missing value handler,
 # 'exclude'
-p <- ggparcoord(data = msleep, columns = 6:11, groupColumn = "vore", scale =
-  "center", scaleSummary = "median")
+p <- ggparcoord(
+  data = msleep, columns = 6:11, groupColumn = "vore", scale =
+    "center", scaleSummary = "median"
+)
 p_(p)
 
 # with the iris data, order the axes by overall class (Species) separation using
@@ -161,17 +169,21 @@ p_(p)
 
 # add points to the plot, add a title, and use an alpha scalar to make the lines
 # transparent
-p <- ggparcoord(data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
+p <- ggparcoord(
+  data = iris, columns = 1:4, groupColumn = 5, order = "anyClass",
   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
-  alphaLines = 0.3)
+  alphaLines = 0.3
+)
 p_(p)
 
 # color according to a column
 iris2 <- iris
 iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[iris2$Species]
-p <- ggparcoord(data = iris2, columns = 1:4, groupColumn = 5, order = "anyClass",
+p <- ggparcoord(
+  data = iris2, columns = 1:4, groupColumn = 5, order = "anyClass",
   showPoints = TRUE, title = "Parallel Coordinate Plot for the Iris Data",
-  alphaLines = "alphaLevel")
+  alphaLines = "alphaLevel"
+)
 p_(p)
 
 ## Use splines on values, rather than lines (all produce the same result)
@@ -180,10 +192,7 @@ p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = TRUE)
 p_(p)
 p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = 3)
 p_(p)
-splineFactor <- length(columns) * 3
-p <- ggparcoord(diamonds.samp, columns, groupColumn = 2, splineFactor = I(splineFactor))
-p_(p)
 }
 \author{
-Jason Crowley, Barret Schloerke, Di Cook, Heike Hofmann, Hadley Wickham
+Jason Crowley, Barret Schloerke, Dianne Cook, Heike Hofmann, Hadley Wickham
 }

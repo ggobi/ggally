@@ -30,7 +30,7 @@
 #'   p_(p)
 #'
 #'   # add a smoother
-#'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = 'smooth_loess')
+#'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = "smooth_loess")
 #'   p_(p)
 #'   # same output
 #'   p <- ggfacet(NIR_sub, x_cols, y_cols, fn = ggally_smooth_loess)
@@ -40,11 +40,14 @@
 #'   p <- ggfacet(NIR_sub, x_cols, y_cols, scales = "fixed")
 #'   p_(p)
 #' }
+#' @importFrom dplyr arrange .data reframe
 ggfacet <- function(
-  data, mapping = NULL,
+  data,
+  mapping = NULL,
   columnsX = 1:ncol(data),
   columnsY = 1:ncol(data),
-  fn = ggally_points, ...,
+  fn = ggally_points,
+  ...,
   columnLabelsX = names(data[columnsX]),
   columnLabelsY = names(data[columnsY]),
   xlab = NULL,
@@ -52,14 +55,15 @@ ggfacet <- function(
   title = NULL,
   scales = "free"
 ) {
-
   data <- fix_data(data)
   fn <- wrap(fn)
 
   # fix args
   if (
-    !missing(mapping) && !is.list(mapping) &&
-    !missing(columnsX) && missing(columnsY)
+    !missing(mapping) &&
+      !is.list(mapping) &&
+      !missing(columnsX) &&
+      missing(columnsY)
   ) {
     columnsY <- columnsX
     columnsX <- mapping
@@ -68,8 +72,20 @@ ggfacet <- function(
 
   stop_if_bad_mapping(mapping)
 
-  columnsX <- fix_column_values(data, columnsX, columnLabelsX, "columnsX", "columnLabelsX")
-  columnsY <- fix_column_values(data, columnsY, columnLabelsY, "columnsY", "columnLabelsY")
+  columnsX <- fix_column_values(
+    data,
+    columnsX,
+    columnLabelsX,
+    "columnsX",
+    "columnLabelsX"
+  )
+  columnsY <- fix_column_values(
+    data,
+    columnsY,
+    columnLabelsY,
+    "columnsY",
+    "columnLabelsY"
+  )
 
   # could theoretically work like
   # mtc <- mtcars
@@ -82,35 +98,34 @@ ggfacet <- function(
   # )
   is_factor_x <- sapply(data[columnsX], is.factor)
   if (sum(is_factor_x) != 0) {
-    warning(paste(sum(is_factor_x), " factor variables are being removed from X columns", sep = ""))
+    cli::cli_warn(
+      "{.val {sum(is_factor_x)}} factor variables are being removed from X columns"
+    )
     columnsX <- columnsX[!is_factor_x]
     columnLabelsX <- columnLabelsX[!is_factor_x]
   }
   is_factor_y <- sapply(data[columnsY], is.factor)
   if (sum(is_factor_y) != 0) {
-    warning(paste(sum(is_factor_y), " factor variables are being removed from Y columns", sep = ""))
+    cli::cli_warn(
+      "{.val {sum(is_factor_y)}} factor variables are being removed from Y columns"
+    )
     columnsY <- columnsY[!is_factor_y]
     columnLabelsY <- columnLabelsY[!is_factor_y]
   }
 
-  tall_data <- ddply(
-    expand.grid(.x_col = columnsX, .y_col = columnsY),
-    c(".x_col", ".y_col"),
-    function(row) {
-      x_var <- row$.x_col[1]
-      y_var <- row$.y_col[1]
-
-      ret <- data
-      ret[[".x_val"]] <- data[[x_var]]
-      ret[[".y_val"]] <- data[[y_var]]
-      ret
-    }
-  )
+  tall_data <- expand.grid(.x_col = columnsX, .y_col = columnsY) |>
+    reframe(
+      .by = c(".x_col", ".y_col"),
+      data,
+      .x_val = data[[.data$.x_col]],
+      .y_val = data[[.data$.y_col]]
+    ) |>
+    arrange(.data$.x_col, .data$.y_col)
 
   if (is.null(mapping)) {
     mapping <- aes()
   }
-  mapping[c("x", "y")] <- aes_string(x = ".x_val", y = ".y_val")
+  mapping[c("x", "y")] <- aes(x = !!as.name(".x_val"), y = !!as.name(".y_val"))
 
   names(columnLabelsX) <- as.character(columnsX)
   names(columnLabelsY) <- as.character(columnsY)

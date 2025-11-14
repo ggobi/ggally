@@ -1,30 +1,64 @@
 #' Modify a \code{\link{ggmatrix}} object by adding an \pkg{ggplot2} object to all
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-# \lifecycle{deprecated}
+#' This function allows cleaner axis labels for your plots, but is deprecated.
+#' You can achieve the same effect by specifying strip's background and placement
+#' properties (see Examples).
+#'
+#' @keywords internal
 #'
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
+#' # Cleaner axis labels with v1_ggmatrix_theme
 #' p_(ggpairs(iris, 1:2) + v1_ggmatrix_theme())
-#' # move the column names to the left and bottom
+#'
+#' # Move the column names to the left and bottom
 #' p_(ggpairs(iris, 1:2, switch = "both") + v1_ggmatrix_theme())
+#'
+#' # Manually specifying axis labels properties
+#' p_(
+#'   ggpairs(iris, 1:2) +
+#'   theme(
+#'     strip.background = element_rect(fill = "white"),
+#'     strip.placement = "outside"
+#'   )
+#')
+#'
+#' # This way you have even more control over how the final plot looks.
+#' # For example, if you want to set the background color to yellow:
+#' p_(
+#'   ggpairs(iris, 1:2) +
+#'   theme(
+#'     strip.background = element_rect(fill = "yellow"),
+#'     strip.placement = "outside"
+#'   )
+#')
 v1_ggmatrix_theme <- function() {
+  lifecycle::deprecate_soft(
+    when = "2.3.0",
+    what = "v1_ggmatrix_theme()",
+    details = "This function will be removed in future releases."
+  )
   theme(
     strip.background = element_rect(fill = "white"),
     strip.placement = "outside"
   )
 }
 
-
 #' Correlation value plot
 #'
-# \lifecycle{deprecated}
-#'
-#' (Deprecated. See \code{\link{ggally_cor}}.)
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Estimate correlation from the given data.
+#'
+#' This function is deprecated and will be removed in future releases.
+#'
+#' See \code{\link{ggally_cor}}.
 #'
 #' @param data data set using
 #' @param mapping aesthetics being used
@@ -37,21 +71,22 @@ v1_ggmatrix_theme <- function() {
 #' @param displayGrid if TRUE, display aligned panel gridlines
 #' @param ... other arguments being supplied to geom_text
 #' @author Barret Schloerke
+#' @importFrom dplyr arrange mutate summarise
 #' @importFrom stats complete.cases cor
 #' @seealso \code{\link{ggally_cor}}
 #' @export
-#' @keywords hplot
+#' @keywords internal
 #' @examples
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
-#' p_(ggally_cor_v1_5(tips, mapping = ggplot2::aes_string(x = "total_bill", y = "tip")))
+#' data(tips)
+#' p_(ggally_cor_v1_5(tips, mapping = ggplot2::aes(total_bill, tip)))
 #'
 #' # display with no grid
 #' p_(ggally_cor_v1_5(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip"),
+#'   mapping = ggplot2::aes(total_bill, tip),
 #'   displayGrid = FALSE
 #' ))
 #'
@@ -66,27 +101,40 @@ v1_ggmatrix_theme <- function() {
 #' # split by a variable
 #' p_(ggally_cor_v1_5(
 #'   tips,
-#'   mapping = ggplot2::aes_string(x = "total_bill", y = "tip", color = "sex"),
+#'   mapping = ggplot2::aes(total_bill, tip, color = sex),
 #'   size = 5
 #' ))
 ggally_cor_v1_5 <- function(
   data,
   mapping,
   alignPercent = 0.6,
-  method = "pearson", use = "complete.obs",
-  corAlignPercent = NULL, corMethod = NULL, corUse = NULL,
+  method = "pearson",
+  use = "complete.obs",
+  corAlignPercent = NULL,
+  corMethod = NULL,
+  corUse = NULL,
   displayGrid = TRUE,
   ...
 ) {
-
-  if (! is.null(corAlignPercent)) {
-    stop("'corAlignPercent' is deprecated.  Please use argument 'alignPercent'")
+  lifecycle::deprecate_soft(
+    when = "2.3.0",
+    what = "ggally_cor_v1_5()",
+    with = "ggally_cor()"
+  )
+  if (!is.null(corAlignPercent)) {
+    cli::cli_abort(
+      "{.arg corAlignPercent} is deprecated. Please use argument {.arg alignPercent}."
+    )
   }
-  if (! is.null(corMethod)) {
-    stop("'corMethod' is deprecated.  Please use argument 'method'")
+  if (!is.null(corMethod)) {
+    cli::cli_abort(
+      "{.arg corMethod} is deprecated. Please use argument {.arg method}."
+    )
   }
-  if (! is.null(corUse)) {
-    stop("'corUse' is deprecated.  Please use argument 'use'")
+  if (!is.null(corUse)) {
+    cli::cli_abort(
+      "{.arg corUse} is deprecated. Please use argument {.arg use}."
+    )
   }
 
   useOptions <- c(
@@ -98,14 +146,16 @@ ggally_cor_v1_5 <- function(
   )
   use <- pmatch(use, useOptions)
   if (is.na(use)) {
-    warning("correlation 'use' not found.  Using default value of 'all.obs'")
+    cli::cli_warn(
+      "correlation {.arg use} not found. Using default value of {.arg all.obs}"
+    )
     use <- useOptions[1]
   } else {
     use <- useOptions[use]
   }
 
   cor_fn <- function(x, y) {
-    # also do ddply below if fn is altered
+    # also do summarise below if fn is altered
     cor(x, y, method = method, use = use)
   }
 
@@ -117,9 +167,9 @@ ggally_cor_v1_5 <- function(
   # if (any(bad_rows)) {
   #   total <- sum(bad_rows)
   #   if (total > 1) {
-  #     warning("Removed ", total, " rows containing missing values")
+  #     cli::cli_warn("Removed {.val {total}} rows containing missing values")
   #   } else if (total == 1) {
-  #     warning("Removing 1 row that contained a missing value")
+  #     cli::cli_warn("Removing 1 row that contained a missing value")
   #   }
   #
   #   xVar <- xVar[!bad_rows]
@@ -139,7 +189,9 @@ ggally_cor_v1_5 <- function(
   }
   colorData <- eval_data_col(data, mapping$colour)
   if (is.numeric(colorData)) {
-    stop("ggally_cor: mapping color column must be categorical, not numeric")
+    cli::cli_abort(
+      "{.fn ggally_cor}: mapping color column must be categorical, not numeric"
+    )
   }
 
   if (use %in% c("complete.obs", "pairwise.complete.obs", "na.or.complete")) {
@@ -152,9 +204,9 @@ ggally_cor_v1_5 <- function(
     if (any(!rows)) {
       total <- sum(!rows)
       if (total > 1) {
-        warning("Removed ", total, " rows containing missing values")
+        cli::cli_warn("Removed {.val {total}} rows containing missing values")
       } else if (total == 1) {
-        warning("Removing 1 row that contained a missing value")
+        cli::cli_warn("Removing 1 row that contained a missing value")
       }
     }
 
@@ -169,7 +221,7 @@ ggally_cor_v1_5 <- function(
   yVal <- yData
 
   # if the mapping has to deal with the data, remove it
-  if (packageVersion("ggplot2") > "2.2.1") {
+  if (utils::packageVersion("ggplot2") > "2.2.1") {
     for (mappingName in names(mapping)) {
       itemData <- eval_data_col(data, mapping[[mappingName]])
       if (!inherits(itemData, "AsIs")) {
@@ -181,12 +233,13 @@ ggally_cor_v1_5 <- function(
       for (i in length(names(mapping)):1) {
         # find the last value of the aes, such as cyl of as.factor(cyl)
         tmp_map_val <- deparse(mapping[names(mapping)[i]][[1]])
-        if (tmp_map_val[length(tmp_map_val)] %in% colnames(data))
+        if (tmp_map_val[length(tmp_map_val)] %in% colnames(data)) {
           mapping[[names(mapping)[i]]] <- NULL
+        }
 
         if (length(names(mapping)) < 1) {
           mapping <- NULL
-          break;
+          break
         }
       }
     }
@@ -194,24 +247,17 @@ ggally_cor_v1_5 <- function(
 
   if (
     !is.null(colorData) &&
-    !inherits(colorData, "AsIs")
+      !inherits(colorData, "AsIs")
   ) {
-
-    cord <- ddply(
-      data.frame(x = xData, y = yData, color = colorData),
-      "color",
-      function(dt) {
-        cor_fn(dt$x, dt$y)
-      }
-    )
-    colnames(cord)[2] <- "correlation"
-
-    cord$correlation <- signif(as.numeric(cord$correlation), 3)
+    cord <- data.frame(x = xData, y = yData, color = colorData) |>
+      summarise(correlation = cor_fn(.data$x, .data$y), .by = "color") |>
+      arrange(.data$color) |>
+      mutate(correlation = signif(as.numeric(.data$correlation), 3L))
 
     # put in correct order
     lev <- levels(as.factor(colorData))
     ord <- rep(-1, nrow(cord))
-    for (i in 1:nrow(cord)) {
+    for (i in seq_len(nrow(cord))) {
       for (j in seq_along(lev)) {
         if (identical(as.character(cord$color[i]), as.character(lev[j]))) {
           ord[i] <- j
@@ -232,23 +278,25 @@ ggally_cor_v1_5 <- function(
     ymax <- max(yVal, na.rm = TRUE)
     yrange <- c(ymin - 0.01 * (ymax - ymin), ymax + 0.01 * (ymax - ymin))
 
-
     # print(cord)
     p <- ggally_text(
-      label   = str_c("Corr: ", signif(cor_fn(xVal, yVal), 3)),
+      label = str_c("Corr: ", signif(cor_fn(xVal, yVal), 3)),
       mapping = mapping,
-      xP      = 0.5,
-      yP      = 0.9,
-      xrange  = xrange,
-      yrange  = yrange,
+      xP = 0.5,
+      yP = 0.9,
+      xrange = xrange,
+      yrange = yrange,
       ...
     )
 
-    xPos <- rep(alignPercent, nrow(cord)) * diff(xrange) + min(xrange, na.rm = TRUE)
+    xPos <- rep(alignPercent, nrow(cord)) *
+      diff(xrange) +
+      min(xrange, na.rm = TRUE)
     yPos <- seq(
       from = 0.9,
       to = 0.2,
-      length.out = nrow(cord) + 1)
+      length.out = nrow(cord) + 1
+    )
     yPos <- yPos * diff(yrange) + min(yrange, na.rm = TRUE)
     yPos <- yPos[-1]
     # print(range(yVal))
@@ -259,18 +307,18 @@ ggally_cor_v1_5 <- function(
     # print(cordf)
     # print(str(cordf))
 
-    p <- p + geom_text(
-      data = cordf,
-      aes(
-        x = xPos,
-        y = yPos,
-        label = labelp,
-        color = labelp
-      ),
-      hjust = 1,
-      ...
-
-    )
+    p <- p +
+      geom_text(
+        data = cordf,
+        aes(
+          x = .data$xPos,
+          y = .data$yPos,
+          label = .data$labelp,
+          color = .data$labelp
+        ),
+        hjust = 1,
+        ...
+      )
   } else {
     # calculate variable ranges so the gridlines line up
     xmin <- min(xVal, na.rm = TRUE)
@@ -287,7 +335,8 @@ ggally_cor_v1_5 <- function(
           cor_fn(xVal, yVal),
           3
         ),
-        sep = "", collapse = ""
+        sep = "",
+        collapse = ""
       ),
       mapping,
       xP = 0.5,

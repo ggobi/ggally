@@ -13,7 +13,7 @@
 #' @param exclude_intercept should the intercept be excluded from the plot?
 #' @param vline print a vertical line?
 #' @param vline_intercept \code{xintercept} for the vertical line.
-#' \code{"auto"} for \code{x = 0} (or \code{x = 1} if {exponentiate} is \code{TRUE})
+#' \code{"auto"} for \code{x = 0} (or \code{x = 1} if \code{exponentiate} is \code{TRUE})
 #' @param vline_color color of the vertical line
 #' @param vline_linetype line type of the vertical line
 #' @param vline_size size of the vertical line
@@ -30,17 +30,20 @@
 #' library(broom)
 #' reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
 #' p_(ggcoef(reg))
-#' \donttest{d <- as.data.frame(Titanic)
+#' \donttest{
+#' d <- as.data.frame(Titanic)
 #' reg2 <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weights = d$Freq)
 #' ggcoef(reg2, exponentiate = TRUE)
 #' ggcoef(
-#'   reg2, exponentiate = TRUE, exclude_intercept = TRUE,
+#'   reg2,
+#'   exponentiate = TRUE, exclude_intercept = TRUE,
 #'   errorbar_height = .2, color = "blue", sort = "ascending"
-#' )}
+#' )
+#' }
 #' @export
 ggcoef <- function(
   x,
-  mapping = aes_string(y = "term", x = "estimate"),
+  mapping = aes(!!as.name("estimate"), !!as.name("term")),
   conf.int = TRUE,
   conf.level = 0.95,
   exponentiate = FALSE,
@@ -58,7 +61,7 @@ ggcoef <- function(
   ...
 ) {
   if (!is.data.frame(x)) {
-    require_namespaces("broom")
+    rlang::check_installed("broom")
     x <- broom::tidy(
       x,
       conf.int = conf.int,
@@ -67,10 +70,10 @@ ggcoef <- function(
     )
   }
   if (!("term" %in% names(x))) {
-    stop("x doesn't contain a column names 'term'.")
+    cli::cli_abort("{.arg x} doesn't contain a column names {.val term}.")
   }
   if (!("estimate" %in% names(x))) {
-    stop("x doesn't contain a column names 'estimate'.")
+    cli::cli_abort("{.arg x} doesn't contain a column names {.val estimate}.")
   }
   if (exclude_intercept) {
     x <- x[x$term != "(Intercept)", ]
@@ -97,8 +100,10 @@ ggcoef <- function(
       }
       p <- p +
         geom_vline(
-          xintercept = vline_intercept, color = vline_color,
-          linetype = vline_linetype, size = vline_size
+          xintercept = vline_intercept,
+          color = vline_color,
+          linetype = vline_linetype,
+          linewidth = vline_size
         ) +
         scale_x_log10()
     } else {
@@ -110,17 +115,19 @@ ggcoef <- function(
           xintercept = vline_intercept,
           color = vline_color,
           linetype = vline_linetype,
-          size = vline_size
+          linewidth = vline_size
         )
     }
   }
-  if (conf.int && "conf.low" %in% names(x) && "conf.high" %in% names(x))
-    p <- p + geom_errorbarh(
-      aes_string(xmin = "conf.low", xmax = "conf.high"),
-      color = errorbar_color,
-      height = errorbar_height,
-      linetype = errorbar_linetype,
-      size = errorbar_size
-    )
+  if (conf.int && "conf.low" %in% names(x) && "conf.high" %in% names(x)) {
+    p <- p +
+      geom_errorbar(
+        aes(xmin = !!as.name("conf.low"), xmax = !!as.name("conf.high")),
+        color = errorbar_color,
+        width = errorbar_height,
+        linetype = errorbar_linetype,
+        linewidth = errorbar_size
+      )
+  }
   p + geom_point(...)
 }

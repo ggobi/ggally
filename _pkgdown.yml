@@ -4,28 +4,24 @@ development:
   mode: auto
 
 template:
-  params:
-    docsearch:
-      api_key: "038759c28b1c284f4b637d2a8c366640"
-      index_name: "ggally"
+  package: tidytemplate
+  bootstrap: 5
 
 authors:
   Barret Schloerke:
-    href: http://schloerke.com/
+    href: https://schloerke.com/
   Di Cook:
-    href: http://www.dicook.org/
+    href: https://www.dicook.org/
   Joseph Larmarange:
     href: https://joseph.larmarange.net/
   Francois Briatte:
     href: https://f.briatte.org/
   Moritz Marbach:
-    href: http://moritz-marbach.com/
+    href: https://www.moritz-marbach.com/
   Edwin Thoen:
     href: https://edwinth.github.io/
   Heike Hofmann:
-    href: https://hofmann.public.iastate.edu/
-  Hadley Wickham:
-    href: http://hadley.nz/
+    href: https://heike.github.io/
 
 articles:
 - title: Generic plot matrix
@@ -174,7 +170,8 @@ reference:
 
 - title: "ggmatrix() Helpers"
   contents:
-  - +.gg
+  - is_ggmatrix
+  - add_to_ggmatrix
   - ggmatrix_location
   - wrap_fn_with_param_arg
   - getPlot
@@ -211,15 +208,17 @@ reference:
 - title: Datasets
   contents:
   - australia_PISA2012
+  - baseball
   - flea
   - happy
   - nasa
+  - nba_ppg_2008
   - pigs
   - psychademic
+  - tips
   - twitter_spambots
 
 - title: Legacy
   contents:
   - v1_ggmatrix_theme
   - ggally_cor_v1_5
-

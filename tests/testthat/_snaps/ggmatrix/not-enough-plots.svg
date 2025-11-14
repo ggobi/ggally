@@ -37,25 +37,7 @@
 <polyline points='137.43,287.18 137.43,22.13 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='187.39,287.18 187.39,22.13 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='237.34,287.18 237.34,22.13 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<text x='137.43' y='158.45' text-anchor='middle' style='font-size: 11.04px; fill: #F8766D; font-family: sans;' textLength='34.37px' lengthAdjust='spacingAndGlyphs'>Plot #1</text>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<defs>
-  <clipPath id='cpMjcuNTR8MjQ3LjMzfDI5Mi42Nnw1NTcuNzE='>
-    <rect x='27.54' y='292.66' width='219.79' height='265.05' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMjcuNTR8MjQ3LjMzfDI5Mi42Nnw1NTcuNzE=)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<defs>
-  <clipPath id='cpMjUyLjgxfDQ3Mi42MHwyMi4xM3wyODcuMTg='>
-    <rect x='252.81' y='22.13' width='219.79' height='265.05' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMjUyLjgxfDQ3Mi42MHwyMi4xM3wyODcuMTg=)'>
+<text x='137.43' y='158.44' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='34.25px' lengthAdjust='spacingAndGlyphs'>Plot #1</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
@@ -76,7 +58,7 @@
 <polyline points='362.70,557.71 362.70,292.66 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='412.66,557.71 412.66,292.66 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='462.61,557.71 462.61,292.66 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<text x='362.70' y='428.98' text-anchor='middle' style='font-size: 11.04px; fill: #F8766D; font-family: sans;' textLength='34.37px' lengthAdjust='spacingAndGlyphs'>Plot #5</text>
+<text x='362.70' y='428.97' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='34.25px' lengthAdjust='spacingAndGlyphs'>Plot #5</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
@@ -97,16 +79,7 @@
 <polyline points='587.98,287.18 587.98,22.13 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='637.93,287.18 637.93,22.13 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='687.88,287.18 687.88,22.13 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<text x='587.98' y='158.45' text-anchor='middle' style='font-size: 11.04px; fill: #F8766D; font-family: sans;' textLength='34.37px' lengthAdjust='spacingAndGlyphs'>Plot #3</text>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<defs>
-  <clipPath id='cpNDc4LjA4fDY5Ny44N3wyOTIuNjZ8NTU3Ljcx'>
-    <rect x='478.08' y='292.66' width='219.79' height='265.05' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpNDc4LjA4fDY5Ny44N3wyOTIuNjZ8NTU3Ljcx)'>
+<text x='587.98' y='158.44' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='34.25px' lengthAdjust='spacingAndGlyphs'>Plot #3</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>

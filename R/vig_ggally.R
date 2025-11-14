@@ -15,21 +15,25 @@
 #' vig_ggally()
 #' }
 vig_ggally <- function(name) {
-
   vig_url <-
     if (missing(name) || is.null(name)) {
       "https://ggobi.github.io/ggally/articles/"
     } else {
-      tryCatch({
-        paste0(
-          "https://ggobi.github.io/ggally/articles/",
-          match.arg(name, vignettes_for_ggally),
-          ".html"
-        )
-      }, error = function(e) {
-        message("Unknown vignette: ", name, ". Opening Vignette index page")
-        "https://ggobi.github.io/ggally/articles/"
-      })
+      tryCatch(
+        {
+          paste0(
+            "https://ggobi.github.io/ggally/articles/",
+            match.arg(name, vignettes_for_ggally),
+            ".html"
+          )
+        },
+        error = function(e) {
+          cli::cli_inform(
+            "Unknown vignette: {name}. Opening Vignette index page"
+          )
+          "https://ggobi.github.io/ggally/articles/"
+        }
+      )
     }
 
   browseURL(vig_url)

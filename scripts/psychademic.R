@@ -17,7 +17,11 @@ psychademic$sex <- (c("male", "female"))[c(psychademic$female + 1)]
 psychademic$female <- NULL
 
 attr(psychademic, "academic") <- c("read", "write", "math", "science", "sex")
-attr(psychademic, "psychology") <- c("locus_of_control", "self_concept", "motivation")
+attr(psychademic, "psychology") <- c(
+  "locus_of_control",
+  "self_concept",
+  "motivation"
+)
 
 
 devtools::use_data(psychademic, overwrite = TRUE)

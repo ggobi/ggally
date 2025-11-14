@@ -1,82 +1,139 @@
-Package: GGally
-Version: 2.1.2.9000
-License: GPL (>= 2.0)
-Title: Extension to 'ggplot2'
 Type: Package
-LazyLoad: yes
-LazyData: true
+Package: GGally
+Title: Extension to 'ggplot2'
+Version: 2.4.0.9000
+Authors@R: c(
+    person("Barret", "Schloerke", , "schloerke@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-9986-114X")),
+    person("Di", "Cook", , "dicook@monash.edu", role = c("aut", "ths"),
+           comment = c(ORCID = "0000-0002-3813-7155")),
+    person("Joseph", "Larmarange", , "joseph@larmarange.net", role = "aut",
+           comment = c(ORCID = "0000-0001-7097-700X")),
+    person("Francois", "Briatte", , "f.briatte@gmail.com", role = "aut"),
+    person("Moritz", "Marbach", , "mmarbach@mail.uni-mannheim.de", role = "aut"),
+    person("Edwin", "Thoen", , "edwinthoen@gmail.com", role = "aut"),
+    person("Amos", "Elberg", , "amos.elberg@gmail.com", role = "aut"),
+    person("Ott", "Toomet", , "otoomet@gmail.com", role = "ctb"),
+    person("Jason", "Crowley", , "crowley.jason.s@gmail.com", role = "aut"),
+    person("Heike", "Hofmann", , "hhofmann4@unl.edu", role = "ths",
+           comment = c(ORCID = "0000-0001-6216-5183")),
+    person("Hadley", "Wickham", , "h.wickham@gmail.com", role = "ths",
+           comment = c(ORCID = "0000-0003-4757-117X"))
+  )
+Description: The R package 'ggplot2' is a plotting system based on the
+    grammar of graphics.  'GGally' extends 'ggplot2' by adding several
+    functions to reduce the complexity of combining geometric objects with
+    transformed data.  Some of these functions include a pairwise plot
+    matrix, a two group pairwise plot matrix, a parallel coordinates plot,
+    a survival plot, and several functions to plot networks.
+License: GPL (>= 2.0)
 URL: https://ggobi.github.io/ggally/, https://github.com/ggobi/ggally
 BugReports: https://github.com/ggobi/ggally/issues
-Authors@R: c(
-    person("Barret", "Schloerke", role = c("aut", "cre"), email = "schloerke@gmail.com"),
-    person("Di", "Cook", role = c("aut", "ths"), email = "dicook@monash.edu"),
-    person("Joseph", "Larmarange", role = "aut", email = "joseph@larmarange.net"),
-    person("Francois", "Briatte", role = "aut", email = "f.briatte@gmail.com"),
-    person("Moritz", "Marbach", role = "aut", email = "mmarbach@mail.uni-mannheim.de"),
-    person("Edwin", "Thoen", role = "aut", email = "edwinthoen@gmail.com"),
-    person("Amos", "Elberg", role = "aut", email = "amos.elberg@gmail.com"),
-    person("Ott", "Toomet", role = "ctb", email = "otoomet@gmail.com"),
-    person("Jason", "Crowley", role = "aut", email = "crowley.jason.s@gmail.com"),
-    person("Heike", "Hofmann", role = "ths", email = "hofmann@iastate.edu"),
-    person("Hadley", "Wickham", role = "ths", email = "h.wickham@gmail.com")
-    )
-Description:
-    The R package 'ggplot2' is a plotting system based on the grammar of graphics.
-    'GGally' extends 'ggplot2' by adding several functions
-    to reduce the complexity of combining geometric objects with transformed data.
-    Some of these functions include a pairwise plot matrix, a two group pairwise plot
-    matrix, a parallel coordinates plot, a survival plot, and several functions to
-    plot networks.
 Depends:
-    R (>= 3.1),
-    ggplot2 (>= 3.3.4)
+    ggplot2 (>= 3.5.2),
+    R (>= 4.3)
 Imports:
-    dplyr (>= 1.0.0),
-    forcats,
+    cli,
+    dplyr (>= 1.1.0),
+    ggstats (>= 0.9.0),
     grDevices,
     grid,
     gtable (>= 0.2.0),
     lifecycle,
-    plyr (>= 1.8.3),
+    magrittr,
     progress,
     RColorBrewer,
-    reshape (>= 0.8.5),
     rlang,
-    scales (>= 1.1.0),
-    tidyr,
+    S7 (>= 0.2.0),
+    scales (>= 1.3.0),
+    tidyr (>= 1.3.0),
     utils
 Suggests:
+    airports,
     broom (>= 0.7.0),
     broom.helpers (>= 1.3.0),
     chemometrics,
+    crosstalk,
+    cubble,
+    emmeans,
     geosphere (>= 1.5-1),
     ggforce,
     Hmisc,
     igraph (>= 1.0.1),
     intergraph (>= 2.0-2),
+    knitr,
     labelled,
-    maps (>= 3.1.0),
     mapproj,
-    nnet,
+    maps (>= 3.1.0),
     network (>= 1.17.1),
+    nnet,
+    rmarkdown,
     scagnostics,
     sna (>= 2.3-2),
-    survival,
-    rmarkdown,
-    roxygen2,
-    testthat,
-    crosstalk,
-    knitr,
     spelling,
-    emmeans,
+    survival,
+    testthat (>= 3.0.0),
     tibble,
-    cubble,
     vdiffr
 Remotes:
     huizezhang-sherry/cubble
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
-SystemRequirements: openssl
+RdMacros:
+    lifecycle
+Config/Needs/website: tidyverse/tidytemplate
+Config/testthat/edition: 3
+Config/usethis/last-upkeep: 2025-06-13
 Encoding: UTF-8
 Language: en-US
-RdMacros: lifecycle
+LazyData: true
+LazyLoad: yes
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+SystemRequirements: openssl
+Collate:
+    'GGally-package.R'
+    'data-australia-pisa-2012.R'
+    'data-baseball.R'
+    'data-flea.R'
+    'data-happy.R'
+    'data-nasa.R'
+    'data-nba_ppg_2008.R'
+    'data-pigs.R'
+    'data-psychademic.R'
+    'data-tips.R'
+    'data-twitter_spambots.R'
+    'deprecated.R'
+    'find-combo.R'
+    'gg-plots.R'
+    'ggally_colbar.R'
+    'ggally_cross.R'
+    'ggaly_trends.R'
+    'ggbivariate.R'
+    'ggcoef.R'
+    'ggcorr.R'
+    'ggfacet.R'
+    'gglyph.R'
+    'ggpairs_getput.R'
+    'ggmatrix.R'
+    'ggmatrix_gtable.R'
+    'ggmatrix_gtable_helpers.R'
+    'ggmatrix_legend.R'
+    'ggmatrix_make_plot.R'
+    'ggmatrix_print.R'
+    'ggmatrix_progress.R'
+    'ggnet.R'
+    'ggnet2.R'
+    'ggnetworkmap.R'
+    'ggnostic.R'
+    'ggpairs.R'
+    'ggpairs_add.R'
+    'ggpairs_internal_plots.R'
+    'ggparcoord.R'
+    'ggsave.R'
+    'ggscatmat.R'
+    'ggsurv.R'
+    'ggtable.R'
+    'reexports.R'
+    'utils-pipe.R'
+    'utils.R'
+    'vig_ggally.R'
+    'zzz.R'

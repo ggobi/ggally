@@ -29,11 +29,11 @@
 #' data(nasa)
 #' nasaLate <- nasa[
 #'   nasa$date >= as.POSIXct("1998-01-01") &
-#'   nasa$lat >= 20 &
-#'   nasa$lat <= 40 &
-#'   nasa$long >= -80 &
-#'   nasa$long <= -60
-#' , ]
+#'     nasa$lat >= 20 &
+#'     nasa$lat <= 40 &
+#'     nasa$long >= -80 &
+#'     nasa$long <= -60,
+#' ]
 #' temp.gly <- glyphs(nasaLate, "long", "day", "lat", "surftemp", height = 2.5)
 #' p_(ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
 #'   add_ref_lines(temp.gly, color = "grey90") +
@@ -41,12 +41,17 @@
 #'   ggplot2::geom_path() +
 #'   ggplot2::theme_bw() +
 #'   ggplot2::labs(x = "", y = ""))
+#' @importFrom dplyr across arrange everything last_col summarise
+#' @importFrom rlang := sym
 glyphs <- function(
   data,
-  x_major, x_minor,
-  y_major, y_minor,
+  x_major,
+  x_minor,
+  y_major,
+  y_minor,
   polar = FALSE,
-  height = ggplot2::rel(0.95), width = ggplot2::rel(0.95),
+  height = ggplot2::rel(0.95),
+  width = ggplot2::rel(0.95),
   y_scale = identity,
   x_scale = identity
 ) {
@@ -70,7 +75,6 @@ glyphs <- function(
             x_minor = x_minor, y_minor = y_minor,
             class = "glyphplot")
 }
-
 
 
 glyph_layer <- function(
@@ -149,10 +153,20 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
     color = color, size = size, fill = fill, ...))
 }
 
+
+# For R 4.2 support only
+# https://github.com/wch/s3ops/blob/51c4a937025b5c3a19be766bd73db06ab574b1a0/README.md#a-solution-for-packages
+`_print_glyphplot` <- function(x, ...) {
+  print.glyphplot(x, ...)
+}
+
+# Rescaling functions --------------------------------------------------------
+
 #' Rescaling functions
 #'
 #' @param x numeric vector
 #' @param xlim value used in \code{range}
+
 #' @export
 #' @describeIn rescale01 Rescale all values to [0, 1]
 range01 <- function(x) {

@@ -1,7 +1,59 @@
 # GGally (development version)
 
+# GGally 2.4.0
+
+* Replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
+
+* Enhance all error and warning outputs by using `{cli}`. (Thank you @m-muecke! #557)
+
+* Add `nba_ppg_2008` dataset describing NBA Player Statistics for 2008-2009 Season. (#562)
+
+* Update `ggnetworkmap` to use `{airports}` package for airport data visualization. (#562)
+
+
+# GGally 2.3.0
+
+* With `{ggplot2}` v4.0.0, objects are now `+`'ed together using `{S7}`. This means the startup message for `Registered S3 method overwritten by 'GGally'` has been removed. (Thank you @teunbrand for the enhancement in ggplot2! #545)
+
+* Fixed bug where correlations of 0 in a `ggcor()` output were silently dropped. Now all correlations are always displayed. (Thank you @winterstat! #536)
+
+* Fixed correlations values `ggcor()` so that they are formatted to the same number of decimal places via `label_round`. Now `0.2` and `0.001` with `label_round = 2` will be displayed as `"0.20"` and `"0.00"` respectively. (Thank you @winterstat! #536)
+
+* Added parameter `ggally_cor(na.rm=)` which is passed directly to `ggally_statistic()`. (Thank you @vinouselouane! #516)
+
+* Deprecated parameter `ggally_cor(use=)`. The value was never leveraged within the code. Please use `ggally_cor(na.rm=)` instead. (Thank you @vinouselouane! #516)
+
+* Prepare GGally for `{ggplot2}` v4 (Thank you @teunbrand! #528)
+
+* Replace internal `{plyr}` usage with `{dplyr}`. (Thank you @MichaelChirico! #520, #521, #522, #523, #524, #525, #527, #530)
+
+* General package dependency cleanup. (Thank you @olivroy! #509)
+
+* Fix `anyClass` ordering in `ggparcoord()` when data has missing values (Thank you @92amartins! #500)
+
+* Use `{lifecycle}` for deprecation warnings (Thank you @92amartins! #494, #496)
+
+* Leverage `.data$` mask to remove all global variable declarations. (Thank you @MichaelChirico! #533)
+
+* Warn and return `"NA"` when less than 3 values are given to a combination in `ggally_cor()`. (Thank you @bk1n! #510)
+
+* Added helper method `is_ggmatrix()` to check if an object is a `ggmatrix` object. (#548)
+
+* Remove `gg` class from `ggmatrix` objects. This is no longer needed due to enhanced `+` S7 methods. (#549)
+
+* Bumped minimum required version of `R` to 4.3 due to S7 handling the `+` operations. (#549)
+
+
+# GGally 2.2.1
+
+* Fix compatibility with `{ggplot2}` 3.5.0 (Thank you @teunbrand! #481)
+
+
+# GGally 2.2.0
+
 ### Bug fixes
 
+* Removed dependency on reshape2 (#475)
 * Reverse ordering of y-axis in `ggally_count()` (#420)
 * Facets ordering in `ggcoef_compare()` (#426)
 * Fix in `ggcoef_compare()` when using tidy selectors for
@@ -10,6 +62,9 @@
 * Fix in `ggcoef_compare()` with an `include` argument (#447)
 * New default tidier for `ggcoef_model()`, now using
   `broom.helpers::tidy_with_broom_or_parameters()` (#432)
+* Re-export methods from and redirect vignettes to the `{ggstats}` package (#452, #457)
+* Replaced `..scaled..` with `after_stat(scaled)` in ggscatmat (#467)
+
 
 # GGally 2.1.2
 
@@ -17,6 +72,7 @@
 
 * Replace `ggplot2` usage of `*_guide = FALSE` with `*_guide = "none"` (@larmarange, #418)
 * Require `network >= 1.17.1` (#418)
+
 
 # GGally 2.1.1
 
@@ -26,6 +82,7 @@
 * Avoid all duplicates within `stat_cross()`. (@larmarange, #402)
 * Avoid an error when tidiers do not return p-values. (@larmarange, #400)
 * Suggest `emmeans` to allow `ggcoef()` example to execute. (#407)
+
 
 # GGally 2.1.0
 

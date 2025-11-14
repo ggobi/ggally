@@ -16,10 +16,10 @@
 #'
 #' custom_car <- ggpairs(mtcars[, c("mpg", "wt", "cyl")], upper = "blank", title = "Custom Example")
 #' # ggplot example taken from example(geom_text)
-#'   plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
-#'   plot <- plot +
-#'     ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
-#'     ggplot2::scale_colour_discrete(l = 40)
+#' plot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg, label = rownames(mtcars)))
+#' plot <- plot +
+#'   ggplot2::geom_text(ggplot2::aes(colour = factor(cyl)), size = 3) +
+#'   ggplot2::scale_colour_discrete(l = 40)
 #' custom_car[1, 2] <- plot
 #' personal_plot <- ggally_text(
 #'   "ggpairs allows you\nto put in your\nown plot.\nLike that one.\n <---"
@@ -35,12 +35,20 @@
 putPlot <- function(pm, value, i, j) {
   pos <- get_pos(pm, i, j)
   if (is.null(value)) {
-    pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
+    pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap(
+      "blank",
+      funcArgName = "ggally_blank"
+    ))
   } else if (mode(value) == "character") {
     if (value == "blank") {
-      pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap("blank", funcArgName = "ggally_blank"))
+      pm$plots[[pos]] <- make_ggmatrix_plot_obj(wrap(
+        "blank",
+        funcArgName = "ggally_blank"
+      ))
     } else {
-      stop("character values (besides 'blank') are not allowed to be stored as plot values.")
+      cli::cli_abort(
+        "character values (besides {.code 'blank'}) are not allowed to be stored as plot values."
+      )
     }
   } else {
     pm$plots[[pos]] <- value
@@ -65,7 +73,7 @@ putPlot <- function(pm, value, i, j) {
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' data(tips, package = "reshape")
+#' data(tips)
 #' plotMatrix2 <- ggpairs(tips[, 3:2], upper = list(combo = "denstrip"))
 #' p_(plotMatrix2[1, 2])
 getPlot <- function(pm, i, j) {
@@ -84,22 +92,29 @@ getPlot <- function(pm, i, j) {
   if (is.null(plotObj)) {
     p <- ggally_blank()
   } else {
-    if (ggplot2::is.ggplot(plotObj)) {
+    if (ggplot2::is_ggplot(plotObj)) {
       p <- plotObj
-
     } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
       fn <- plotObj$fn
       p <- fn(pm$data, plotObj$mapping)
-
     } else if (inherits(plotObj, "legend_guide_box")) {
       p <- plotObj
-
     } else {
-      firstNote <- str_c("Position: i = ", i, ", j = ", j, "\nstr(plotObj):\n", sep = "")
+      firstNote <- str_c(
+        "Position: i = ",
+        i,
+        ", j = ",
+        j,
+        "\nstr(plotObj):\n",
+        sep = ""
+      )
       strObj <- capture.output({
         str(plotObj)
       })
-      stop(str_c("unknown plot object type.\n", firstNote, strObj))
+      cli::cli_abort(c(
+        "unknown plot object type.",
+        i = "{firstNote}{strObj}"
+      ))
     }
 
     p <- add_gg_info(p, pm$gg)
@@ -132,17 +147,17 @@ get_pos_rev <- function(pm, pos) {
 
 check_i_j <- function(pm, i, j) {
   if ((length(i) > 1) || (mode(i) != "numeric")) {
-    stop("'i' may only be a single numeric value")
+    cli::cli_abort("{.arg i} may only be a single numeric value")
   }
   if ((length(j) > 1) || (mode(j) != "numeric")) {
-    stop("'j' may only be a single numeric value")
+    cli::cli_abort("{.arg j} may only be a single numeric value")
   }
 
   if (i > pm$nrow || i < 1) {
-    stop("'i' may only be in the range from 1:", pm$nrow)
+    cli::cli_abort("{.arg i} may only be in the range from 1:{pm$nrow}")
   }
   if (j > pm$ncol || j < 1) {
-    stop("'j' may only be in the range from 1:", pm$ncol)
+    cli::cli_abort("{.arg j} may only be in the range from 1:{pm$ncol}")
   }
 
   invisible()

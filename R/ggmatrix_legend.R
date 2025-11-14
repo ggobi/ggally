@@ -11,13 +11,9 @@
 #' p_ <- GGally::print_if_interactive
 #'
 #' library(ggplot2)
-#' histPlot <- qplot(
-#'   x = Sepal.Length,
-#'   data = iris,
-#'   fill = Species,
-#'   geom = "histogram",
-#'   binwidth = 1/4
-#' )
+#' histPlot <-
+#'   ggplot(iris, aes(Sepal.Length, fill = Species)) +
+#'   geom_histogram(binwidth = 1 / 4)
 #' (right <- histPlot)
 #' (bottom <- histPlot + theme(legend.position = "bottom"))
 #' (top <- histPlot + theme(legend.position = "top"))
@@ -38,8 +34,11 @@ grab_legend <- function(p) {
 get_legend_from_gtable <- function(pTable) {
   ret <- ggplot2::zeroGrob()
   if (inherits(pTable, "gtable")) {
-    if ("guide-box" %in% pTable$layout$name) {
+    if (any(grepl("guide-box", pTable$layout$name))) {
       ret <- gtable_filter(pTable, "guide-box")
+      keep <- !vapply(ret$grobs, inherits, what = "zeroGrob", logical(1))
+      keep <- paste0(ret$layout$name[keep], collapse = "|")
+      ret <- gtable_filter(ret, keep)
     }
   }
   class(ret) <- c("legend_guide_box", class(ret))
@@ -49,7 +48,7 @@ get_legend_from_gtable <- function(pTable) {
 #' @importFrom grid grid.newpage grid.draw gpar
 #' @importFrom gtable gtable_filter
 #' @rdname grab_legend
-#' @export
+#' @exportS3Method NULL
 print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
   if (identical(plotNew, TRUE)) {
     grid.newpage()
@@ -57,6 +56,11 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 
   grid::grid.rect(gp = grid::gpar(fill = "white", col = "white"))
   grid.draw(x)
+}
+# For R 4.2 only
+# https://github.com/wch/s3ops/blob/51c4a937025b5c3a19be766bd73db06ab574b1a0/README.md#a-solution-for-packages
+`_print_legend_guide_box` <- function(x, ..., plotNew = FALSE) {
+  print.legend_guide_box(x, ..., plotNew = plotNew)
 }
 
 
@@ -101,7 +105,6 @@ print.legend_guide_box <- function(x, ..., plotNew = FALSE) {
 #' pm[1, 2] <- points_legend(iris, ggplot2::aes(Sepal.Width, Sepal.Length, color = Species))
 #' p_(pm)
 gglegend <- function(fn) {
-
   # allows users to supply a character just like in ggpairs
   fn <- wrapp(fn, list())
   fn <- attr(fn, "fn")

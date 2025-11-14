@@ -1,13 +1,7 @@
-
-context("ggnetworkmap")
-
 if ("package:igraph" %in% search()) {
   detach("package:igraph")
 }
 
-rq <- function(...) {
-  require(..., quietly = TRUE)
-}
 skip_if(!rq(network))
 skip_if(!rq(sna))
 skip_if(!rq(maps))
@@ -34,8 +28,8 @@ flights <- data.frame(
 flights <- network(flights, directed = TRUE)
 
 # add geographic coordinates
-flights %v% "lat" <- airports[network.vertex.names(flights), "lat"] # nolint
-flights %v% "lon" <- airports[network.vertex.names(flights), "long"] # nolint
+flights %v% "lat" <- airports[network.vertex.names(flights), "lat"]
+flights %v% "lon" <- airports[network.vertex.names(flights), "long"]
 
 # drop isolated airports
 delete.vertices(flights, which(degree(flights) < 2))
@@ -44,12 +38,20 @@ delete.vertices(flights, which(degree(flights) < 2))
 flights %v% "degree" <- degree(flights, gmode = "digraph")
 
 # add random groups
-flights %v% "mygroup" <- sample(letters[1:4], network.size(flights), replace = TRUE)
+flights %v% "mygroup" <- sample(
+  letters[1:4],
+  network.size(flights),
+  replace = TRUE
+)
 
 # create a map of the USA
 usa <- ggplot(map_data("usa"), aes(x = long, y = lat)) +
-  geom_polygon(aes(group = group), color = "grey65",
-               fill = "#f9f9f9", size = 0.2)
+  geom_polygon(
+    aes(group = group),
+    color = "grey65",
+    fill = "#f9f9f9",
+    linewidth = 0.2
+  )
 
 test_that("basic drawing", {
   # no map
@@ -68,44 +70,87 @@ test_that("great circles", {
 })
 
 test_that("node groups", {
-  p <- ggnetworkmap(usa, flights, size = 2, great.circles = TRUE,
-                    node.group = degree)
+  p <- ggnetworkmap(
+    usa,
+    flights,
+    size = 2,
+    great.circles = TRUE,
+    node.group = degree
+  )
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".ngroup")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$colour),
+    ".ngroup"
+  )
 
-  p <- ggnetworkmap(usa, flights, size = 2, great.circles = TRUE, node.color = "red")
-  expect_equal(mapping_string(get("aes_params", envir = p$layers[[3]])$colour), "\"red\"")
+  p <- ggnetworkmap(
+    usa,
+    flights,
+    size = 2,
+    great.circles = TRUE,
+    node.color = "red"
+  )
+  expect_equal(
+    mapping_string(get("aes_params", envir = p$layers[[3]])$colour),
+    "\"red\""
+  )
 })
 
 test_that("ring groups", {
-  p <- ggnetworkmap(usa, flights, size = 2, great.circles = TRUE,
-                    node.group = degree, ring.group = mygroup)
+  p <- ggnetworkmap(
+    usa,
+    flights,
+    size = 2,
+    great.circles = TRUE,
+    node.group = degree,
+    ring.group = mygroup
+  )
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$colour),
+    ".rgroup"
+  )
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$fill),
+    ".ngroup"
+  )
 })
 
 test_that("segment color", {
-  p <- ggnetworkmap(usa, flights, size = 2,
-    great.circles = TRUE, node.group = degree,
+  p <- ggnetworkmap(
+    usa,
+    flights,
+    size = 2,
+    great.circles = TRUE,
+    node.group = degree,
     ring.group = mygroup,
     segment.color = "cornflowerblue"
   )
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$colour),
+    ".rgroup"
+  )
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$fill),
+    ".ngroup"
+  )
   expect_equal(
     mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
     "\"cornflowerblue\""
   )
-
 })
 
 test_that("weight", {
-  p <- ggnetworkmap(usa, flights, size = 2, great.circles = TRUE, node.group = degree,
+  p <- ggnetworkmap(
+    usa,
+    flights,
+    size = 2,
+    great.circles = TRUE,
+    node.group = degree,
     ring.group = mygroup,
     segment.color = "cornflowerblue",
     weight = degree
@@ -113,63 +158,111 @@ test_that("weight", {
 
   expect_equal(length(p$layers), 3)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$colour),
+    ".rgroup"
+  )
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$fill),
+    ".ngroup"
+  )
   expect_equal(
     mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
     "\"cornflowerblue\""
   )
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
-
-
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$size),
+    ".weight"
+  )
 })
 
 
 test_that("labels", {
-  p <- ggnetworkmap(usa, flights, size = 2, great.circles = TRUE,
-                    node.group = degree, ring.group = mygroup,
-                    segment.color = "cornflowerblue", weight = degree,
-                    label.nodes = TRUE)
+  p <- ggnetworkmap(
+    usa,
+    flights,
+    size = 2,
+    great.circles = TRUE,
+    node.group = degree,
+    ring.group = mygroup,
+    segment.color = "cornflowerblue",
+    weight = degree,
+    label.nodes = TRUE
+  )
 
   expect_equal(length(p$layers), 4)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$colour),
+    ".rgroup"
+  )
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$fill),
+    ".ngroup"
+  )
   expect_equal(
     mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
     "\"cornflowerblue\""
   )
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[4]])$label), ".label")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$size),
+    ".weight"
+  )
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[4]])$label),
+    ".label"
+  )
 
   expect_true(is.null(get("aes_params", envir = p$layers[[2]])$arrow))
 })
 
 test_that("arrows", {
-  p <- ggnetworkmap(usa, flights, size = 2, great.circles = TRUE,
-                    node.group = degree, ring.group = mygroup,
-                    segment.color = "cornflowerblue", weight = degree,
-                    label.nodes = TRUE, arrow.size = 0.2)
+  p <- ggnetworkmap(
+    usa,
+    flights,
+    size = 2,
+    great.circles = TRUE,
+    node.group = degree,
+    ring.group = mygroup,
+    segment.color = "cornflowerblue",
+    weight = degree,
+    label.nodes = TRUE,
+    arrow.size = 0.2
+  )
 
   expect_equal(length(p$layers), 4)
   expect_true(is.null(get("aes_params", envir = p$layers[[3]])$colour))
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$colour), ".rgroup")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$fill), ".ngroup")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$colour),
+    ".rgroup"
+  )
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$fill),
+    ".ngroup"
+  )
   expect_equal(
     mapping_string(get("aes_params", envir = p$layers[[2]])$colour),
     "\"cornflowerblue\""
   )
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[3]])$size), ".weight")
-  expect_equal(mapping_string(get("mapping", envir = p$layers[[4]])$label), ".label")
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[3]])$size),
+    ".weight"
+  )
+  expect_equal(
+    mapping_string(get("mapping", envir = p$layers[[4]])$label),
+    ".label"
+  )
 
   # look at geom_params for arrow info
   expect_true(is.list(get("geom_params", envir = p$layers[[2]])$arrow))
-
 })
 
 
 test_that("labels", {
-  expect_error(ggnetworkmap(usa, flights, label.nodes = c("A", "B")))
+  expect_snapshot(
+    ggnetworkmap(usa, flights, label.nodes = c("A", "B")),
+    error = TRUE
+  )
   testLabels <- paste("L", 1:network.size(flights), sep = "")
 
   # does logical check
@@ -191,9 +284,14 @@ test_that("labels", {
 ### --- test arrow.size
 
 test_that("arrow.size", {
-  expect_error(ggnetworkmap(net = flights, arrow.size = -1), "incorrect arrow.size")
-  expect_warning(ggnetworkmap(net = network(as.matrix(flights), directed = FALSE),
-                              arrow.size = 1), "arrow.size ignored")
+  expect_snapshot(ggnetworkmap(net = flights, arrow.size = -1), error = TRUE)
+  expect_warning(
+    ggnetworkmap(
+      net = network(as.matrix(flights), directed = FALSE),
+      arrow.size = 1
+    ),
+    "`arrow.size` ignored"
+  )
 })
 
 ### --- test network coercion
@@ -204,24 +302,23 @@ test_that("network coercion", {
     "self-loops"
   )
 
-  expect_error(ggnetworkmap(net = 1:2), "network object")
-  expect_error(ggnetworkmap(net = network(data.frame(1:2, 3:4), hyper = TRUE)), "hyper")
-  expect_error(
+  expect_snapshot(ggnetworkmap(net = 1:2), error = TRUE)
+  expect_snapshot(
+    ggnetworkmap(net = network(data.frame(1:2, 3:4), hyper = TRUE)),
+    error = TRUE
+  )
+  expect_snapshot(
     ggnetworkmap(net = network(data.frame(1:2, 3:4), multiple = TRUE)),
-    "multiplex graphs"
+    error = TRUE
   )
 })
 
 ### --- test igraph functionality
 
 test_that("igraph conversion", {
-
-  if (requireNamespace("igraph", quietly = TRUE)) {
-    library(igraph)
+  if (rq(igraph) && rq(intergraph)) {
     n <- asIgraph(flights)
     p <- ggnetworkmap(net = n)
     expect_equal(length(p$layers), 2)
   }
 })
-
-expect_true(TRUE)

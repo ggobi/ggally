@@ -1,13 +1,24 @@
 ## revdepcheck results
 
-We checked 125 reverse dependencies (100 from CRAN + 25 from BioConductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 141 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 0 new problems
- * We failed to check 2 packages
+ * We saw 4 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
-### Failed to check
+### New problems
+(This reports the first line of each new failure)
 
-* egoTERGM    (NA)
-* loon.ggplot (NA)
+* comparer
+  checking tests ... ERROR
+
+* ezEDA
+  checking tests ... ERROR
+
+* rbioacc
+  checking tests ... ERROR
+
+* tidycomm
+  checking tests ... ERROR
+

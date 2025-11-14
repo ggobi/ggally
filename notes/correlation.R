@@ -5,9 +5,18 @@ ggpairs(tips, columns = 1:2, params = c(corMethod = "kendall"), color = "sex")
 
 ggpairs(tips, columns = 1:2, upper = list(params = list(corMethod = "kendall")))
 ggpairs(tips, columns = 1:2, upper = list(params = list(corMethod = "pearson")))
-ggpairs(tips, columns = 1:2, upper = list(params = list(corMethod = "pearson")), color = "sex")
-ggpairs(tips, columns = 1:2, upper = list(params = list(corMethod = "kendall")), color = "sex")
-
+ggpairs(
+  tips,
+  columns = 1:2,
+  upper = list(params = list(corMethod = "pearson")),
+  color = "sex"
+)
+ggpairs(
+  tips,
+  columns = 1:2,
+  upper = list(params = list(corMethod = "kendall")),
+  color = "sex"
+)
 
 
 swM <- swiss
@@ -21,7 +30,6 @@ stopifnot(identical(C2, cov(swM, use = "na.or.complete")))
 range(eigen(C2, only.values = TRUE)$values) # 6.46   1930
 (C3 <- cov(swM, use = "pairwise"))
 range(eigen(C3, only.values = TRUE)$values) # 6.19   1938
-
 
 
 # using full data

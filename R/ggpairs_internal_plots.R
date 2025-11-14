@@ -1,4 +1,3 @@
-
 #' Wrap a function with different parameter values
 #'
 #' Wraps a function with the supplied parameters to force different default behavior.  This is useful for functions that are supplied to ggpairs.  It allows you to change the behavior of one function, rather than creating multiple functions with different parameter settings.
@@ -17,8 +16,8 @@
 #' @export
 #' @rdname wrap
 #' @examples
-#'  # small function to display plots only if it's interactive
-#'  p_ <- GGally::print_if_interactive
+#' # small function to display plots only if it's interactive
+#' p_ <- GGally::print_if_interactive
 #'
 #' # example function that prints 'val'
 #' fn <- function(data, mapping, val = 2) {
@@ -66,7 +65,6 @@ wrap_fn_with_param_arg <- function(
   params = NULL,
   funcArgName = deparse(substitute(funcVal))
 ) {
-
   if (missing(funcArgName)) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {
@@ -81,43 +79,48 @@ wrap_fn_with_param_arg <- function(
 
     if (length(params) > 0) {
       if (!is.list(params)) {
-        stop("'params' must be a named list, named vector, or NULL")
+        cli::cli_abort(
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
+        )
       }
       if (is.null(names(params))) {
-        stop("'params' must be a named list, named vector, or NULL")
+        cli::cli_abort(
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
+        )
       }
       if (any(nchar(names(params)) == 0)) {
-        stop("'params' must be a named list, named vector, or NULL")
+        cli::cli_abort(
+          "{.arg params} must be a named list, named vector, or {.val NULL}."
+        )
       }
     }
   }
 
   if (mode(funcVal) == "character") {
-
     if (missing(funcArgName)) {
       funcArgName <- str_c("ggally_", funcVal)
     }
 
-    tryCatch({
+    tryCatch(
+      {
         funcVal <- get(
           str_c("ggally_", funcVal),
           mode = "function"
         )
       },
       error = function(e) {
-        stop(str_c(
-          "Error retrieving `GGally` function.\n",
-          "Please provide a string such as `'points'` for `ggally_points()`\n",
-          "For a list of all predefined functions, check out `vig_ggally(\"ggally_plots\")`\n",
-          "A custom function may be supplied directly: `wrap(my_fn, param = val)`\n",
-          "Function provided: ", funcVal
+        cli::cli_abort(c(
+          "Error retrieving `GGally` function.",
+          "Please provide a string such as {.val points} for {.fn ggally_points}",
+          "For a list of all predefined functions, check out `vig_ggally(\"ggally_plots\")`",
+          "A custom function may be supplied directly: {.code wrap(my_fn, param = val)}",
+          "Function provided: {.fn {funcVal}}"
         ))
       }
     )
   }
 
-
-  allParams <- ifnull(attr(funcVal, "params"), list())
+  allParams <- attr(funcVal, "params") %||% list()
   allParams[names(params)] <- params
 
   original_fn <- funcVal
@@ -127,7 +130,7 @@ wrap_fn_with_param_arg <- function(
     allParams$mapping <- mapping
     argsList <- list(...)
     allParams[names(argsList)] <- argsList
-    do.call(original_fn, allParams)
+    rlang::inject(original_fn(!!!allParams))
   }
 
   class(ret_fn) <- "ggmatrix_fn_with_params"
@@ -143,7 +146,7 @@ wrapp <- wrap_fn_with_param_arg
 
 #' @export
 #' @rdname wrap
-wrap  <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
+wrap <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
   if (missing(funcArgName)) {
     fnName <- attr(funcVal, "name")
     if (!is.null(fnName)) {
@@ -156,10 +159,10 @@ wrap  <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
   params <- list(...)
   if (length(params) > 0) {
     if (is.null(names(params))) {
-      stop("all parameters must be named arguments")
+      cli::cli_abort("all parameters must be named arguments")
     }
     if (any(nchar(names(params)) == 0)) {
-      stop("all parameters must be named arguments")
+      cli::cli_abort("all parameters must be named arguments")
     }
   }
   wrap_fn_with_param_arg(funcVal, params = params, funcArgName = funcArgName)
@@ -169,6 +172,7 @@ wrap  <- function(funcVal, ..., funcArgName = deparse(substitute(funcVal))) {
 wrap_fn_with_params <- wrap
 
 
+#' @export
 as.character.ggmatrix_fn_with_params <- function(x, ...) {
   params <- attr(x, "params")
   fnName <- attr(x, "name")
@@ -176,18 +180,24 @@ as.character.ggmatrix_fn_with_params <- function(x, ...) {
   if (length(params) == 0) {
     txt <- str_c("wrap: '", fnName, "'")
   } else {
-    txt <- str_c("wrap: '", attr(x, "name"), "'; params: ", mapping_as_string(params))
+    txt <- str_c(
+      "wrap: '",
+      attr(x, "name"),
+      "'; params: ",
+      mapping_as_string(params)
+    )
   }
 
   txt
 }
 
 
-
-
-
-
-make_ggmatrix_plot_obj <- function(fn, mapping = ggplot2::aes(), dataPos = 1, gg = NULL) {
+make_ggmatrix_plot_obj <- function(
+  fn,
+  mapping = ggplot2::aes(),
+  dataPos = 1,
+  gg = NULL
+) {
   # nonCallVals <- which(lapply(mapping, mode) == "call")
   # if (length(nonCallVals) > 0) {
   #   nonCallNames <- names(mapping)[nonCallVals]
@@ -220,13 +230,22 @@ blank_plot_string <- function() {
 }
 
 mapping_as_string <- function(mapping) {
-  str_c("c(", str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "), ")")
+  str_c(
+    "c(",
+    str_c(names(mapping), as.character(mapping), sep = " = ", collapse = ", "),
+    ")"
+  )
 }
 
+#' @export
 as.character.ggmatrix_plot_obj <- function(x, ...) {
   hasGg <- (!is.null(x$gg))
   mappingTxt <- mapping_as_string(x$mapping)
-  fnTxt <- ifelse(inherits(x$fn, "ggmatrix_fn_with_params"), as.character(x$fn), "custom_function")
+  fnTxt <- ifelse(
+    inherits(x$fn, "ggmatrix_fn_with_params"),
+    as.character(x$fn),
+    "custom_function"
+  )
   if (inherits(x$fn, "ggmatrix_fn_with_params")) {
     if (attr(x$fn, "name") %in% c("ggally_blank", "ggally_blankDiag")) {
       return(blank_plot_string())
@@ -234,13 +253,16 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
   }
   str_c(
     "PM",
-    "; aes: ", mappingTxt,
-    "; fn: {", fnTxt, "}",
+    "; aes: ",
+    mappingTxt,
+    "; fn: {",
+    fnTxt,
+    "}",
     # "; dataPos: ", x$dataPos,
-    "; gg: ", as.character(hasGg)
+    "; gg: ",
+    as.character(hasGg)
   )
 }
-
 
 
 #' \code{\link{ggmatrix}} structure
@@ -250,27 +272,40 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #' @param object \code{\link{ggmatrix}} object to be viewed
 #' @param ... passed on to the default \code{str} method
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
-#' @method str ggmatrix
 #' @importFrom utils str
-#' @export
-str.ggmatrix <- function(object, ..., raw = FALSE) {
-  objName <- deparse(substitute(object))
-  obj <- object
-  if (identical(raw, FALSE)) {
-    cat(str_c(
-      "\nCustom str.ggmatrix output: \nTo view original object use ",
-      "'str(", objName, ", raw = TRUE)'\n\n"
-    ))
-    obj$plots <- lapply(obj$plots, function(plotObj) {
-      if (ggplot2::is.ggplot(plotObj)) {
-        str_c("PM; ggplot2 object; mapping: ", mapping_as_string(plotObj$mapping))
-      } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
-        as.character(plotObj)
-      } else {
-        plotObj
-      }
-    })
+#' @name str.ggmatrix
+method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
+  if (isTRUE(raw)) {
+    # S7's str method
+    NextMethod()
+    return()
   }
+
+  matched_call <- rlang::call_match(
+    sys.call(),
+    function(object, ..., raw = FALSE) {}
+  )
+  objName <- rlang::call_args(matched_call)$object
+
+  obj <- convert(object, class_list)
+  cat(str_c(
+    "\nCustom str.ggmatrix output: \nTo view original object use ",
+    "'str(",
+    objName,
+    ", raw = TRUE)'\n\n"
+  ))
+  obj$plots <- lapply(obj$plots, function(plotObj) {
+    if (ggplot2::is_ggplot(plotObj)) {
+      str_c(
+        "PM; ggplot2 object; mapping: ",
+        mapping_as_string(plotObj$mapping)
+      )
+    } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+      as.character(plotObj)
+    } else {
+      plotObj
+    }
+  })
   attr(obj, "_class") <- attr(obj, "class")
   class(obj) <- NULL
   str(obj, ...)

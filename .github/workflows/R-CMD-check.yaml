@@ -4,11 +4,10 @@
 # For most R packages it is better to use https://github.com/r-lib/actions
 on:
   push:
-    branches: [master, rc-**]
+    branches: [main, rc-**]
   pull_request:
-    branches: [master]
   schedule:
-    - cron: '0 5 * * 1' # every monday
+    - cron: "0 5 * * 1" # every monday
 
 name: Package checks
 
@@ -17,7 +16,24 @@ jobs:
     uses: rstudio/shiny-workflows/.github/workflows/website.yaml@v1
   routine:
     uses: rstudio/shiny-workflows/.github/workflows/routine.yaml@v1
+    with:
+      format-r-code: true
   R-CMD-check:
     uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          # Regular CRAN checks
+          - cache-version: "cran"
+
+          # Test with dev ggplot2
+          - extra-packages: |
+              tidyverse/ggplot2
+            cache-version: "dev-ggplot2"
+
     with:
-      minimum-r-version: "4.1.0"
+      check-timeout-minutes: 60
+      minimum-r-version: "4.3.0"
+      extra-packages: ${{ matrix.config.extra-packages || '' }}
+      cache-version: ${{ matrix.config.cache-version }}

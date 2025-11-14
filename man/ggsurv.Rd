@@ -89,13 +89,13 @@ if (require(survival) && require(scales)) {
   p_(pl.sex +
     ggplot2::guides(linetype = "none") +
     ggplot2::scale_colour_discrete(
-      name   = 'Sex',
+      name   = "Sex",
       breaks = c(1, 2),
-      labels = c('Male', 'Female')
+      labels = c("Male", "Female")
     ))
 
   # Multiple factors
-  lung2 <- plyr::mutate(lung, older = as.factor(age > 60))
+  lung2 <- dplyr::mutate(lung, older = as.factor(age > 60))
   sf.sex2 <- survival::survfit(Surv(time, status) ~ sex + older, data = lung2)
   pl.sex2 <- ggsurv(sf.sex2)
   p_(pl.sex2)
@@ -116,11 +116,11 @@ if (require(survival) && require(scales)) {
   p_(pl.kid +
     ggplot2::annotate(
       "text",
-      label  = c("PKD", "Other", "GN", "AN"),
-      x      = c(90, 125, 5, 60),
-      y      = c(0.8, 0.65, 0.55, 0.30),
-      size   = 5,
-      colour = scales::hue_pal(
+      label = c("PKD", "Other", "GN", "AN"),
+      x = c(90, 125, 5, 60),
+      y = c(0.8, 0.65, 0.55, 0.30),
+      size = 5,
+      colour = scales::pal_hue(
         h         = c(0, 360) + 15,
         c         = 100,
         l         = 65,

@@ -31,7 +31,7 @@ The purpose of this function is to quickly plot cross-tabulated tables of discre
 To display tables with the number of observations, simply indicate variables to present in columns and in rows.
 
 ```{r}
-data(tips, package = "reshape")
+data(tips)
 ggtable(tips, "smoker", c("day", "time", "sex"))
 ggtable(tips, c("smoker", "time"), c("day", "time", "sex"))
 ```
@@ -58,7 +58,7 @@ ggtable(tips, "smoker", c("day", "time", "sex"), fill = "std.resid")
 
 ## Using weights
 
-You can easily indicates weights to take into account with the **weight** aesthetic.
+You can easily indicate weights to take into account with the **weight** aesthetic.
 
 ```{r}
 d <- as.data.frame(Titanic)
@@ -74,7 +74,7 @@ ggtable(
 
 ## Missing with continuous variables
 
-Although `ggtable()` is mainly intended to be used with discrete variables, you can also indicates continuous variables. In such case, some summary statistics are displayed.
+Although `ggtable()` is mainly intended to be used with discrete variables, you can also indicate continuous variables. In such case, some summary statistics are displayed.
 
 ```{r}
 ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip"))

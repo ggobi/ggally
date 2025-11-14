@@ -25,7 +25,7 @@ p_ <- GGally::print_if_interactive
 data(flea)
 
 p_(scatmat(flea, columns = 2:4))
-p_(scatmat(flea, columns= 2:4, color = "species"))
+p_(scatmat(flea, columns = 2:4, color = "species"))
 }
 \author{
 Mengjia Ni, Di Cook

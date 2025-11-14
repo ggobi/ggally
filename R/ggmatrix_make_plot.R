@@ -1,5 +1,3 @@
-
-
 make_label_plot <- function(types, sectionAes, label) {
   sectionAes$y <- NULL
 
@@ -13,7 +11,6 @@ make_label_plot <- function(types, sectionAes, label) {
   )
   return(p)
 }
-
 
 
 ggmatrix_plot_list <- (function() {
@@ -48,7 +45,8 @@ ggmatrix_plot_list <- (function() {
   discrete_diag_fn <- make_diag_plot_wrapper("discrete")
 
   function(type) {
-    switch(type,
+    switch(
+      type,
       "na" = na_fn,
       "na-diag" = na_diag_fn,
       "continuous" = continuous_fn,

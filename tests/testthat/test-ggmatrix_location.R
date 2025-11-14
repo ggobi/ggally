@@ -1,4 +1,3 @@
-
 expect_loc_grid <- function(loc, to_loc) {
   testthat::expect_equal(
     colnames(loc),
@@ -25,7 +24,7 @@ expect_rows_cols <- function(loc, rows, cols) {
 }
 
 test_that("rows work", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
 
   expect_rows_cols(
     ggmatrix_location(pm, rows = c(3, 5)),
@@ -38,19 +37,13 @@ test_that("rows work", {
     cols = 1:7
   )
 
-  expect_error(
-    ggmatrix_location(pm, rows = TRUE),
-    "numeric"
-  )
-  expect_error(
-    ggmatrix_location(pm, rows = "1"),
-    "numeric"
-  )
+  expect_snapshot(ggmatrix_location(pm, rows = TRUE), error = TRUE)
+  expect_snapshot(ggmatrix_location(pm, rows = "1"), error = TRUE)
 })
 
 
 test_that("cols work", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
 
   expect_rows_cols(
     ggmatrix_location(pm, cols = c(3, 5)),
@@ -63,19 +56,13 @@ test_that("cols work", {
     cols = 1
   )
 
-  expect_error(
-    ggmatrix_location(pm, cols = TRUE),
-    "numeric"
-  )
-  expect_error(
-    ggmatrix_location(pm, cols = "1"),
-    "numeric"
-  )
+  expect_snapshot(ggmatrix_location(pm, cols = TRUE), error = TRUE)
+  expect_snapshot(ggmatrix_location(pm, cols = "1"), error = TRUE)
 })
 
 
 test_that("location logical", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
 
   expect_loc_grid(
     ggmatrix_location(pm, location = TRUE),
@@ -87,7 +74,7 @@ test_that("location logical", {
 })
 
 test_that("location character", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
   to_loc <- expand.grid(row = 1:7, col = 1:7)
 
   expect_loc_grid(
@@ -111,15 +98,16 @@ test_that("location character", {
     subset(to_loc, col == row)
   )
 
-  expect_error(
-    ggmatrix_location(pm, location = "unknown")
-  )
+  expect_snapshot(ggmatrix_location(pm, location = "unknown"), error = TRUE)
 })
 
 
 test_that("location matrix", {
-  pm <- ggpairs(reshape::tips)
-  to_loc <- subset(expand.grid(row = 1:7, col = 1:7), row %in% c(3, 5) | col %in% c(3, 5))
+  pm <- ggpairs(tips)
+  to_loc <- subset(
+    expand.grid(row = 1:7, col = 1:7),
+    row %in% c(3, 5) | col %in% c(3, 5)
+  )
 
   mat <- matrix(FALSE, nrow = 7, ncol = 7, byrow = TRUE)
   mat[, c(3, 5)] <- TRUE
@@ -141,24 +129,15 @@ test_that("location matrix", {
     subset(to_loc, FALSE)
   )
 
-  expect_error(
-    ggmatrix_location(pm, location = mat[, 1:6])
-  )
-  expect_error(
-    ggmatrix_location(pm, location = mat[1:6, ])
-  )
-  expect_error(
-    ggmatrix_location(pm, location = cbind(mat, 1))
-  )
-  expect_error(
-    ggmatrix_location(pm, location = rbind(mat, 1))
-  )
+  expect_snapshot(ggmatrix_location(pm, location = mat[, 1:6]), error = TRUE)
+  expect_snapshot(ggmatrix_location(pm, location = mat[1:6, ]), error = TRUE)
+  expect_snapshot(ggmatrix_location(pm, location = cbind(mat, 1)), error = TRUE)
+  expect_snapshot(ggmatrix_location(pm, location = rbind(mat, 1)), error = TRUE)
 })
 
 
-
 test_that("location matrix", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
   to_loc <- expand.grid(row = 1:7, col = 1:7)
 
   expect_loc_grid(
@@ -166,31 +145,37 @@ test_that("location matrix", {
     expand.grid(row = 1:7, col = 1:7)
   )
 
-  expect_error(
-    ggmatrix_location(pm, location = expand.grid(row = 1:7, col = 2:8))
+  expect_snapshot(
+    ggmatrix_location(pm, location = expand.grid(row = 1:7, col = 2:8)),
+    error = TRUE
   )
-  expect_error(
-    ggmatrix_location(pm, location = expand.grid(row = 2:8, col = 1:7))
-  )
-
-  expect_error(
-    ggmatrix_location(pm, location = expand.grid(row = 1:7, col = 0:6))
-  )
-  expect_error(
-    ggmatrix_location(pm, location = expand.grid(row = 0:6, col = 1:7))
+  expect_snapshot(
+    ggmatrix_location(pm, location = expand.grid(row = 2:8, col = 1:7)),
+    error = TRUE
   )
 
-  expect_error(
-    ggmatrix_location(pm, location = expand.grid(row = 1:7, col = c(1:6, NA)))
+  expect_snapshot(
+    ggmatrix_location(pm, location = expand.grid(row = 1:7, col = 0:6)),
+    error = TRUE
   )
-  expect_error(
-    ggmatrix_location(pm, location = expand.grid(row = c(1:6, NA), col = 1:7))
+  expect_snapshot(
+    ggmatrix_location(pm, location = expand.grid(row = 0:6, col = 1:7)),
+    error = TRUE
+  )
+
+  expect_snapshot(
+    ggmatrix_location(pm, location = expand.grid(row = 1:7, col = c(1:6, NA))),
+    error = TRUE
+  )
+  expect_snapshot(
+    ggmatrix_location(pm, location = expand.grid(row = c(1:6, NA), col = 1:7)),
+    error = TRUE
   )
 })
 
 
 test_that("location recursion", {
-  pm <- ggpairs(reshape::tips)
+  pm <- ggpairs(tips)
   to_loc <- expand.grid(row = 1:7, col = 1:7)
 
   expect_loc_grid(

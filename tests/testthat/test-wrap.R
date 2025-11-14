@@ -1,29 +1,26 @@
-
-context("wrap")
-
 test_that("errors", {
-
   fn <- ggally_points
 
   # named params
-  expect_error(wrap(fn, NA), "all parameters")
-  expect_error(wrap(fn, y = TRUE, 5), "all parameters")
+  expect_snapshot(wrap(fn, NA), error = TRUE)
+  expect_snapshot(wrap(fn, y = TRUE, 5), error = TRUE)
 
   # named params to wrapp
-  expect_error(wrapp(fn, list(5)), "'params' must")
-  expect_error(wrapp(fn, table(1:10, 1:10)), "'params' must")
-  expect_error(wrapp(fn, list(A = 4, 5)), "'params' must")
+  expect_snapshot(wrapp(fn, list(5)), error = TRUE)
+  expect_snapshot(wrapp(fn, table(1:10, 1:10)), error = TRUE)
+  expect_snapshot(wrapp(fn, list(A = 4, 5)), error = TRUE)
 
   # if the character fn doesn't exist
-  expect_error(wrap("does not exist", A = 5), "Function provided")
-  expect_error(wrapp("does not exist", list(A = 5)), "Function provided")
+  expect_snapshot(wrap("does not exist", A = 5), error = TRUE)
+  expect_snapshot(wrapp("does not exist", list(A = 5)), error = TRUE)
 })
 
 test_that("wrap", {
   (regularPlot <- ggally_points(
     iris,
     ggplot2::aes(Sepal.Length, Sepal.Width),
-    size = 5, color = "red"
+    size = 5,
+    color = "red"
   ))
 
   # Wrap ggally_points to have parameter values size = 5 and color = 'red'
@@ -34,5 +31,8 @@ test_that("wrap", {
   ))
 
   # Double check the aes parameters are the same for the geom_point layer
-  expect_true(identical(regularPlot$layers[[1]]$aes_params, wrappedPlot$layers[[1]]$aes_params))
+  expect_true(identical(
+    regularPlot$layers[[1]]$aes_params,
+    wrappedPlot$layers[[1]]$aes_params
+  ))
 })

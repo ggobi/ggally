@@ -1,4 +1,3 @@
-
 #' \pkg{ggplot2} plot matrix
 #'
 #' Make a generic matrix of \pkg{ggplot2} plots.
@@ -22,7 +21,7 @@
 #' @template ggmatrix-legend-param
 #' @keywords hplot
 #' @author Barret Schloerke
-#' @importFrom rlang %||%
+#' @importFrom rlang %||% .data
 #' @export
 #' @examples
 #' # Small function to display plots only if it's interactive
@@ -50,78 +49,173 @@
 #'   showXAxisPlotLabels = FALSE
 #' )
 #' p_(pm)
-ggmatrix <- function(
-  plots,
-  nrow,
-  ncol,
-  xAxisLabels = NULL,
-  yAxisLabels = NULL,
-  title = NULL,
-  xlab = NULL,
-  ylab = NULL,
-  byrow = TRUE,
-  showStrips = NULL,
-  showAxisPlotLabels = TRUE,
-  showXAxisPlotLabels = TRUE,
-  showYAxisPlotLabels = TRUE,
-  labeller = NULL,
-  switch = NULL,
-  xProportions = NULL,
-  yProportions = NULL,
-  progress = NULL,
-  data = NULL,
-  gg = NULL,
-  legend = NULL
-) {
+ggmatrix <- new_class(
+  "ggmatrix",
+  properties = list(
+    data = new_union(class_data.frame, NULL),
+    plots = class_list,
+    title = class_any,
+    xlab = class_any,
+    ylab = class_any,
+    showStrips = new_union(class_logical, NULL),
+    xAxisLabels = class_any,
+    yAxisLabels = class_any,
+    showXAxisPlotLabels = class_logical,
+    showYAxisPlotLabels = class_logical,
+    labeller = class_any,
+    switch = new_union(class_character, NULL),
+    # xProportions = new_union(class_numeric, class_grid_unit, NULL),
+    xProportions = class_any,
+    yProportions = class_any,
+    progress = new_union(
+      new_S3_class("progress_bar"),
+      class_function,
+      class_logical,
+      NULL
+    ),
+    legend = class_any,
+    gg = new_union(class_list, NULL),
+    nrow = class_numeric,
+    ncol = class_numeric,
+    byrow = class_logical,
+    meta = class_list
+  ),
+  constructor = function(
+    plots,
+    nrow,
+    ncol,
+    xAxisLabels = NULL,
+    yAxisLabels = NULL,
+    title = NULL,
+    xlab = NULL,
+    ylab = NULL,
+    byrow = TRUE,
+    showStrips = NULL,
+    showAxisPlotLabels = TRUE,
+    showXAxisPlotLabels = TRUE,
+    showYAxisPlotLabels = TRUE,
+    labeller = NULL,
+    switch = NULL,
+    xProportions = NULL,
+    yProportions = NULL,
+    progress = NULL,
+    data = NULL,
+    gg = NULL,
+    legend = NULL
+  ) {
+    if (!is.list(plots)) {
+      cli::cli_abort("{.arg plots} must be a {.code list()}")
+    }
+    check_nrow_ncol(nrow, "nrow")
+    check_nrow_ncol(ncol, "ncol")
 
-  if (!is.list(plots)) {
-    stop("'plots' must be a list()")
+    if (!missing(showAxisPlotLabels)) {
+      showXAxisPlotLabels <- showAxisPlotLabels
+      showYAxisPlotLabels <- showAxisPlotLabels
+    }
+
+    progress <- as_ggmatrix_progress(progress, nrow * ncol)
+
+    ret <-
+      new_object(
+        S7_object(),
+        data = data,
+        plots = plots,
+        title = title,
+        xlab = xlab,
+        ylab = ylab,
+        showStrips = showStrips,
+        xAxisLabels = xAxisLabels,
+        yAxisLabels = yAxisLabels,
+        showXAxisPlotLabels = showXAxisPlotLabels,
+        showYAxisPlotLabels = showYAxisPlotLabels,
+        labeller = labeller,
+        switch = switch,
+        xProportions = xProportions,
+        yProportions = yProportions,
+        progress = progress,
+        legend = legend,
+        gg = gg,
+        nrow = nrow,
+        ncol = ncol,
+        byrow = byrow,
+        meta = list()
+      )
+    # Prefix with ggmatrix class
+    class(ret) <- c("ggmatrix", class(ret))
+    ret
   }
-  check_nrow_ncol(nrow, "nrow")
-  check_nrow_ncol(ncol, "ncol")
-
-  if (!missing(showAxisPlotLabels)) {
-    showXAxisPlotLabels <- showAxisPlotLabels
-    showYAxisPlotLabels <- showAxisPlotLabels
-  }
-
-  progress <- as_ggmatrix_progress(progress, nrow * ncol)
-
-  plotMatrix <- list(
-    data = data,
-    plots = plots,
-    title = title,
-    xlab = xlab,
-    ylab = ylab,
-    showStrips = showStrips,
-    xAxisLabels = xAxisLabels,
-    yAxisLabels = yAxisLabels,
-    showXAxisPlotLabels = showXAxisPlotLabels,
-    showYAxisPlotLabels = showYAxisPlotLabels,
-    labeller = labeller,
-    switch = switch,
-    xProportions = xProportions,
-    yProportions = yProportions,
-    progress = progress,
-    legend = legend,
-    gg = gg,
-    nrow = nrow,
-    ncol = ncol,
-    byrow = byrow
-  )
-
-  attributes(plotMatrix)$class <- c("gg", "ggmatrix")
-
-  plotMatrix
-}
-
+)
 
 check_nrow_ncol <- function(x, title) {
   if (!is.numeric(x)) {
-    stop(paste("'", title, "' must be a numeric value", sep = ""))
+    cli::cli_abort("{.arg {title}} must be a numeric value")
   }
   if (length(x) != 1) {
-    stop(paste("'", title, "' must be a single numeric value", sep = ""))
+    cli::cli_abort("{.arg {title}} must be a single numeric value")
+  }
+}
+
+
+# ------------------------------------------------------
+
+# The following extractors and subassignment operators are for a smooth
+# transition and should be deprecated in the release cycle of choice
+
+#' @export
+`$.GGally::ggmatrix` <- function(x, i) {
+  if (!prop_exists(x, i) && prop_exists(x, "meta")) {
+    # This is a trick to bridge a gap between S3 and S7. We're allowing
+    # for arbitrary fields by reading/writing to the 'meta' field when the
+    # index does not point to an actual property.
+    # The proper way to go about this is to implement new fields as properties
+    # of a ggplot subclass.
+    prop(x, "meta")[[i]]
+  } else {
+    `[[`(props(x), i)
+  }
+}
+
+#' @export
+`$<-.GGally::ggmatrix` <- function(x, i, value) {
+  if (!prop_exists(x, i) && prop_exists(x, "meta")) {
+    # See explanation in `$.GGally::ggmatrix`
+    prop(x, "meta")[[i]] <- value
+  } else {
+    props(x) <- `[[<-`(props(x), i, value)
+  }
+  x
+}
+
+#' @include ggpairs_getput.R
+#' @export
+`[.GGally::ggmatrix` <- `[.ggmatrix`
+#' @export
+`[<-.GGally::ggmatrix` <- `[<-.ggmatrix`
+
+
+#' @export
+`[[.GGally::ggmatrix` <- `$.GGally::ggmatrix`
+
+#' @export
+`[[<-.GGally::ggmatrix` <- `$<-.GGally::ggmatrix`
+
+
+# https://github.com/RConsortium/S7/issues/529
+utils::globalVariables("properties")
+
+method(convert, list(from = ggmatrix, to = class_list)) <-
+  function(from, to) {
+    vals <- props(from)
+    meta <- vals$meta
+    # Remove meta from the list of properties
+    vals$meta <- NULL
+    # Collect the original values and the user added meta data
+    c(vals, meta)
   }
 
-}
+local({
+  method(as.list, ggmatrix) <- function(x, ...) {
+    convert(x, class_list)
+  }
+})

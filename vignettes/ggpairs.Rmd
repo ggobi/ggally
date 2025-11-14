@@ -34,7 +34,7 @@ There are many hidden features within `ggpairs()`.  Please take a look at the ex
 The `columns` displayed default to all columns of the provided `data`.  To subset to only a few columns, use the `columns` parameter.
 
 ```{r ggpairs_columns}
-data(tips, package = "reshape")
+data(tips)
 pm <- ggpairs(tips)
 pm
 ## too many plots for this example.
@@ -76,7 +76,8 @@ The list of current valid `ggally_NAME` functions is visible in `vig_ggally("gga
 ```{r ggpairs_section}
 library(ggplot2)
 pm <- ggpairs(
-  tips, columns = c("total_bill", "time", "tip"),
+  tips,
+  columns = c("total_bill", "time", "tip"),
   lower = list(
     continuous = "smooth",
     combo = "facetdensity",
@@ -90,7 +91,8 @@ A section list may be set to the character string `"blank"` or `NULL` if the sec
 
 ```{r ggpairs_blank}
 pm <- ggpairs(
-  tips, columns = c("total_bill", "time", "tip"),
+  tips,
+  columns = c("total_bill", "time", "tip"),
   upper = "blank",
   diag = NULL
 )
@@ -118,7 +120,8 @@ my_bin <- function(data, mapping, ..., low = "#132B43", high = "#56B1F7") {
     scale_fill_gradient(low = low, high = high)
 }
 pm <- ggpairs(
-  tips, columns = c("total_bill", "time", "tip"),
+  tips,
+  columns = c("total_bill", "time", "tip"),
   lower = list(
     continuous = my_bin
   )
@@ -134,7 +137,8 @@ To change the default parameter `binwidth` setting, we will `wrap()` the functio
 
 ```{r ggpairs_wrap}
 pm <- ggpairs(
-  tips, columns = c("total_bill", "time", "tip"),
+  tips,
+  columns = c("total_bill", "time", "tip"),
   lower = list(
     combo = wrap("facethist", binwidth = 1),
     continuous = wrap(my_bin, binwidth = c(5, 0.5), high = "red")

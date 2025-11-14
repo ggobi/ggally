@@ -5,7 +5,6 @@
 # sigma
 # how much of a problem it is to the model
 
-
 ## .hat: Diagonal of the hat matrix
 ## .sigma: Estimate of residual standard deviation when corresponding observation is dropped from model
 ## .fitted: Fitted values of model
@@ -28,22 +27,27 @@
 #' broomified_model <- broomify(model)
 #' str(broomified_model)
 broomify <- function(model, lmStars = TRUE) {
-
   if (inherits(model, "broomify")) {
     return(model)
   }
 
-  require_namespaces("broom")
+  rlang::check_installed("broom")
 
-  broom_glance_info  <- broom::glance(model)
-  broom_tidy_coef    <- broom::tidy(model)
+  broom_glance_info <- broom::glance(model)
+  broom_tidy_coef <- broom::tidy(model)
   broom_augment_rows <- broom::augment(model, se_fit = TRUE)
   attr(broom_augment_rows, "broom_glance") <- broom_glance_info
   attr(broom_augment_rows, "broom_tidy") <- broom_tidy_coef
-  attr(broom_augment_rows, "var_x") <- model_beta_variables(data = broom_augment_rows)
-  attr(broom_augment_rows, "var_y") <- model_response_variables(data = broom_augment_rows)
+  attr(broom_augment_rows, "var_x") <- model_beta_variables(
+    data = broom_augment_rows
+  )
+  attr(broom_augment_rows, "var_y") <- model_response_variables(
+    data = broom_augment_rows
+  )
   attr(broom_augment_rows, "var_x_label") <- model_beta_label(
-    model, data = broom_augment_rows, lmStars
+    model,
+    data = broom_augment_rows,
+    lmStars
   )
 
   class(broom_augment_rows) <- c(class(broom_augment_rows), "broomify")
@@ -91,10 +95,14 @@ beta_stars <- function(p_val) {
 #' @export
 #' @rdname model_terms
 #' @importFrom stats anova
-model_beta_label <- function(model, data = broom::augment(model), lmStars = TRUE) {
+model_beta_label <- function(
+  model,
+  data = broom::augment(model),
+  lmStars = TRUE
+) {
   beta_vars <- model_beta_variables(model, data = data)
 
-  if ((! identical(class(model), "lm")) || (!isTRUE(lmStars))) {
+  if ((!identical(class(model), "lm")) || (!isTRUE(lmStars))) {
     return(beta_vars)
   }
 
@@ -121,19 +129,26 @@ broom_columns <- function() {
 brew_colors <- function(col) {
   brew_cols <- RColorBrewer::brewer.pal(n = 9, "Set1")
   names(brew_cols) <- c(
-    "red", "blue", "green", "purple", "orange",
-    "yellow", "brown", "pink", "grey"
+    "red",
+    "blue",
+    "green",
+    "purple",
+    "orange",
+    "yellow",
+    "brown",
+    "pink",
+    "grey"
   )
   brew_cols <- as.list(brew_cols)
   ret <- brew_cols[[col]]
   if (is.null(ret)) {
-    stop(paste("color '", col, "' not found in: c(",
-      paste(names(brew_cols), collapse = ", "),
-    ")", sep = ""))
+    missing_cols <- toString(names(brew_cols))
+    cli::cli_abort(
+      "color {.arg col} not found in: {.code {missing_cols}}"
+    )
   }
   ret
 }
-
 
 
 #' \code{\link{ggnostic}} background line with geom
@@ -154,16 +169,18 @@ brew_colors <- function(col) {
 #' @return \pkg{ggplot2} plot object
 #' @rdname ggally_nostic_line
 ggally_nostic_line <- function(
-  data, mapping, ...,
+  data,
+  mapping,
+  ...,
   linePosition = NULL,
   lineColor = "red",
-  lineSize = 0.5, lineAlpha = 1,
+  lineSize = 0.5,
+  lineAlpha = 1,
   lineType = 1,
   continuous_geom = ggplot2::geom_point,
   combo_geom = ggplot2::geom_boxplot,
   mapColorToFill = TRUE
 ) {
-
   x_is_character <- is_character_column(data, mapping, "x")
 
   if (x_is_character && isTRUE(mapColorToFill)) {
@@ -177,7 +194,7 @@ ggally_nostic_line <- function(
       geom_hline(
         yintercept = linePosition,
         color = lineColor,
-        size = lineSize,
+        linewidth = lineSize,
         alpha = lineAlpha,
         linetype = lineType
       )
@@ -191,7 +208,6 @@ ggally_nostic_line <- function(
 
   p
 }
-
 
 
 #' \code{\link{ggnostic}} residuals
@@ -219,13 +235,17 @@ ggally_nostic_line <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_resid(dt, ggplot2::aes(wt, .resid)))
 ggally_nostic_resid <- function(
-  data, mapping, ...,
+  data,
+  mapping,
+  ...,
   linePosition = 0,
   lineColor = brew_colors("grey"),
-  lineSize = 0.5, lineAlpha = 1,
+  lineSize = 0.5,
+  lineAlpha = 1,
   lineType = 1,
   lineConfColor = brew_colors("grey"),
-  lineConfSize = lineSize, lineConfAlpha = lineAlpha,
+  lineConfSize = lineSize,
+  lineConfAlpha = lineAlpha,
   lineConfType = 2,
   pVal = c(0.025, 0.975),
   sigma = attr(data, "broom_glance")$sigma,
@@ -233,7 +253,6 @@ ggally_nostic_resid <- function(
   method = "auto",
   formula = y ~ x
 ) {
-
   if (!is.null(linePosition) && !is.null(pVal) && !is.null(sigma)) {
     scaled_sigmas <- qnorm(pVal, lower.tail = TRUE, sd = sigma)
 
@@ -245,7 +264,9 @@ ggally_nostic_resid <- function(
   }
 
   p <- ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     linePosition = linePosition,
     lineColor = lineColor,
     lineType = lineType,
@@ -253,7 +274,7 @@ ggally_nostic_resid <- function(
     lineAlpha = lineAlpha
   )
 
-  if (! is_character_column(data, mapping, "x")) {
+  if (!is_character_column(data, mapping, "x")) {
     p <- p + geom_smooth(se = se, method = method, formula = formula)
   }
 
@@ -264,9 +285,7 @@ ggally_nostic_resid <- function(
         na.rm = TRUE
       )
     )
-
 }
-
 
 
 #' \code{\link{ggnostic}} standardized residuals
@@ -286,11 +305,15 @@ ggally_nostic_resid <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
 ggally_nostic_std_resid <- function(
-  data, mapping, ...,
+  data,
+  mapping,
+  ...,
   sigma = 1
 ) {
   ggally_nostic_resid(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     sigma = sigma
   )
 }
@@ -321,12 +344,16 @@ ggally_nostic_std_resid <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
 ggally_nostic_se_fit <- function(
-  data, mapping, ...,
+  data,
+  mapping,
+  ...,
   lineColor = brew_colors("grey"),
   linePosition = NULL
 ) {
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     lineColor = lineColor,
     linePosition = linePosition
   )
@@ -356,12 +383,16 @@ ggally_nostic_se_fit <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
 ggally_nostic_sigma <- function(
-  data, mapping, ...,
+  data,
+  mapping,
+  ...,
   lineColor = brew_colors("grey"),
   linePosition = attr(data, "broom_glance")$sigma
 ) {
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     lineColor = lineColor,
     linePosition = linePosition
   )
@@ -373,7 +404,7 @@ ggally_nostic_sigma <- function(
 #' A function to display [stats::cooks.distance()].
 #'
 #' @details
-#' A line is added at F_{p, n - p}(0.5) to display the general cutoff point for Cook's Distance.
+#' A line is added at \eqn{F_{p,n-p}(0.5)}{F[p,n-p](0.5)} to display the general cutoff point for Cook's Distance.
 #'
 #' Reference: Michael H. Kutner, Christopher J. Nachtsheim, John Neter, and William Li. Applied linear statistical models. The McGraw-Hill / Irwin series operations and decision sciences. McGraw-Hill Irwin, 2005, p. 403
 #'
@@ -391,20 +422,26 @@ ggally_nostic_sigma <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd)))
 ggally_nostic_cooksd <- function(
-  data, mapping, ...,
-  linePosition = pf(0.5, length(attr(data, "var_x")), nrow(data) - length(attr(data, "var_x"))),
+  data,
+  mapping,
+  ...,
+  linePosition = pf(
+    0.5,
+    length(attr(data, "var_x")),
+    nrow(data) - length(attr(data, "var_x"))
+  ),
   lineColor = brew_colors("grey"),
   lineType = 2
 ) {
-
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     linePosition = linePosition,
     lineColor = lineColor,
     lineType = lineType
   )
 }
-
 
 
 #' \code{\link{ggnostic}} leverage points
@@ -437,17 +474,20 @@ ggally_nostic_cooksd <- function(
 #' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
 #' p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
 ggally_nostic_hat <- function(
-  data, mapping, ...,
+  data,
+  mapping,
+  ...,
   linePosition = 2 * sum(eval_data_col(data, mapping$y)) / nrow(data),
   lineColor = brew_colors("grey"),
-  lineSize = 0.5, lineAlpha = 1,
+  lineSize = 0.5,
+  lineAlpha = 1,
   lineType = 2,
   avgLinePosition = sum(eval_data_col(data, mapping$y)) / nrow(data),
   avgLineColor = brew_colors("grey"),
-  avgLineSize = lineSize, avgLineAlpha = lineAlpha,
+  avgLineSize = lineSize,
+  avgLineAlpha = lineAlpha,
   avgLineType = 1
 ) {
-
   if (is.null(linePosition)) {
     lineColor <- lineSize <- lineAlpha <- lineType <- NULL
   }
@@ -456,7 +496,9 @@ ggally_nostic_hat <- function(
   }
 
   ggally_nostic_line(
-    data, mapping, ...,
+    data,
+    mapping,
+    ...,
     linePosition = c(linePosition, avgLinePosition),
     lineColor = c(lineColor, avgLineColor),
     lineSize = c(lineSize, avgLineSize),
@@ -464,8 +506,6 @@ ggally_nostic_hat <- function(
     lineAlpha = c(lineAlpha, avgLineAlpha)
   )
 }
-
-
 
 
 #' Function switch
@@ -501,17 +541,15 @@ fn_switch <- function(
   types,
   mapping_val = "y"
 ) {
-
   function(data, mapping, ...) {
     var <- mapping_string(mapping[[mapping_val]])
 
-    fn <- ifnull(types[[var]], types[["default"]])
+    fn <- types[[var]] %||% types[["default"]]
 
     if (is.null(fn)) {
-      stop(str_c(
-        "function could not be found for ", mapping_val, " or 'default'.  ",
-        "Please include one of these two keys as a function."
-      ))
+      cli::cli_abort(
+        "function could not be found for {.code {mapping_val}} or {.code {'default'}}. Please include one of these two keys as a function."
+      )
     }
 
     fn(data = data, mapping = mapping, ...)
@@ -524,19 +562,18 @@ check_and_set_nostic_types <- function(
   default,
   .fitted,
   .resid,
-  .std.resid, # nolint
+  .std.resid,
   .sigma,
-  .se.fit, # nolint
+  .se.fit,
   .hat,
   .cooksd
 ) {
-
   types_names <- names(types)
   set_type_value <- function(name, value) {
     if (is.null(types[[name]])) {
       # value is not set
 
-      if (! (name %in% types_names)) {
+      if (!(name %in% types_names)) {
         # set suggested fn
         types[[name]] <<- value
       } else {
@@ -549,9 +586,9 @@ check_and_set_nostic_types <- function(
   set_type_value("default", default)
   set_type_value(".fitted", .fitted)
   set_type_value(".resid", .resid)
-  set_type_value(".std.resid", .std.resid) # nolint
+  set_type_value(".std.resid", .std.resid)
   set_type_value(".sigma", .sigma)
-  set_type_value(".se.fit", .se.fit) # nolint
+  set_type_value(".se.fit", .se.fit)
   set_type_value(".hat", .hat)
   set_type_value(".cooksd", .cooksd)
 
@@ -666,8 +703,6 @@ ggnostic <- function(
   progress = NULL,
   data = broomify(model)
 ) {
-
-
   continuous_types <- check_and_set_nostic_types(
     continuous,
     default = ggally_nostic_line,
@@ -715,7 +750,8 @@ ggnostic <- function(
 
   ggduo(
     data = data,
-    columnsX = columnsX, columnsY = columnsY,
+    columnsX = columnsX,
+    columnsY = columnsY,
     columnLabelsX = columnLabelsX,
     columnLabelsY = columnLabelsY,
     types = list(
@@ -730,10 +766,7 @@ ggnostic <- function(
     xlab = xlab,
     ylab = ylab
   )
-
 }
-
-
 
 
 # https://github.com/ggobi/ggobi/blob/master/data/pigs.xml
@@ -764,9 +797,6 @@ ggts <- function(
 
   pm
 }
-
-
-
 
 
 # if (!is.null(group)) {
@@ -815,18 +845,14 @@ ggts <- function(
 #   }
 # )
 
-
 match_nostic_columns <- function(columns, choices, name) {
   column_matches <- pmatch(columns, choices, nomatch = NA, duplicates.ok = TRUE)
   if (any(is.na(column_matches))) {
-    stop(paste(
-      "Could not match '", name, "': c(",
-      paste("'", columns[is.na(column_matches)], "'", collapse = ", ", sep = ""),
-      ") to choices: c(",
-      paste("'", choices, "'", collapse = ", ", sep = ""),
-      ")",
-      sep = ""
-    ))
+    extra_cols <- columns[is.na(column_matches)]
+    avail_cols <- choices
+    cli::cli_abort(
+      "Could not match {.arg {name}}: {.val {extra_cols}} to choices: {.val {avail_cols}}"
+    )
   }
   columns <- choices[column_matches]
   columns
