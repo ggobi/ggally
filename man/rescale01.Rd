@@ -31,7 +31,7 @@ Rescaling functions
 }
 \section{Functions}{
 \itemize{
-\item \code{range01()}: Rescale all values to \link{0, 1}
+\item \code{range01()}: Rescale all values to \verb{[0, 1]}
 
 \item \code{max1()}: Divide by the maximum value
 

@@ -55,9 +55,19 @@ glyphs <- function(
   y_scale = identity,
   x_scale = identity
 ) {
-  out <- glyph_layer(data, component = "glyph",
-                     x_major, x_minor, y_major, y_minor,
-                     polar, height, width, x_scale, y_scale)
+  out <- glyph_layer(
+    data,
+    component = "glyph",
+    x_major,
+    x_minor,
+    y_major,
+    y_minor,
+    polar,
+    height,
+    width,
+    x_scale,
+    y_scale
+  )
   new_cols <- out %>%
     dplyr::select(group, x, y) %>%
     dplyr::rename(gid = group, gx = x, gy = y)
@@ -69,11 +79,18 @@ glyphs <- function(
     data[[y_minor]] <- out$y_minor
   }
 
-  tibble::new_tibble(data, nrow = nrow(data),
-            width = width, height = height, polar = polar,
-            x_major = x_major, y_major = y_major,
-            x_minor = x_minor, y_minor = y_minor,
-            class = "glyphplot")
+  tibble::new_tibble(
+    data,
+    nrow = nrow(data),
+    width = width,
+    height = height,
+    polar = polar,
+    x_major = x_major,
+    y_major = y_major,
+    x_minor = x_minor,
+    y_minor = y_minor,
+    class = "glyphplot"
+  )
 }
 
 
@@ -141,16 +158,28 @@ add_ref_lines <- function(data, color = "white", size = 1.5, ...) {
 #' @param fill fill value used if \code{var_fill} is \code{NULL}
 #' @param ... other arguments passed onto [ggplot2::geom_rect()]
 #' @export
-add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
-                          fill = NA, ...) {
+add_ref_boxes <- function(
+  data,
+  var_fill = NULL,
+  color = "white",
+  size = 0.5,
+  fill = NA,
+  ...
+) {
   data <- glyph_layer(data, component = "box")
   data <- data %>% dplyr::select(gid, gx, gy, xmin:ymax)
 
-  if (!is.null(var_fill)) data$fill <- var_fill
+  if (!is.null(var_fill)) {
+    data$fill <- var_fill
+  }
   suppressWarnings(ggplot2::geom_rect(
     data = data,
     aes_all(names(data)),
-    color = color, size = size, fill = fill, ...))
+    color = color,
+    size = size,
+    fill = fill,
+    ...
+  ))
 }
 
 
@@ -168,7 +197,7 @@ add_ref_boxes <- function(data, var_fill = NULL, color = "white", size = 0.5,
 #' @param xlim value used in \code{range}
 
 #' @export
-#' @describeIn rescale01 Rescale all values to [0, 1]
+#' @describeIn rescale01 Rescale all values to `[0, 1]`
 range01 <- function(x) {
   rng <- range(x, na.rm = TRUE)
   (x - rng[1]) / (rng[2] - rng[1])
@@ -226,12 +255,28 @@ rescale11 <- function(x, xlim = NULL) {
 #    combination of \code{x_major} and \code{y_major} specifies a grid cell.
 #' @export
 #' @author Di Cook, Heike Hofmann, Hadley Wickham, Sherry Zhang
-glyphplot <- function(data, width, height, polar, x_major, y_major, x_minor, y_minor) {
-  tibble::new_tibble(data, nrow = nrow(data),
-            width = width, height = height, polar = polar,
-            x_major = x_major, y_major = y_major,
-            x_minor = x_minor, y_minor = y_minor,
-            class = "glyphplot")
+glyphplot <- function(
+  data,
+  width,
+  height,
+  polar,
+  x_major,
+  y_major,
+  x_minor,
+  y_minor
+) {
+  tibble::new_tibble(
+    data,
+    nrow = nrow(data),
+    width = width,
+    height = height,
+    polar = polar,
+    x_major = x_major,
+    y_major = y_major,
+    x_minor = x_minor,
+    y_minor = y_minor,
+    class = "glyphplot"
+  )
 }
 #' @export
 #' @rdname glyphplot
@@ -241,11 +286,16 @@ is.glyphplot <- function(x) {
 #' @export
 #' @rdname glyphplot
 "[.glyphplot" <- function(x, ...) {
-  glyphplot(NextMethod(),
-            width = attr(x, "width"), height = attr(x, "height"),
-            x_major = attr(x, "x_major"), y_major = attr(x, "y_major"),
-            x_minor = attr(x, "x_minor"), y_minor = attr(x, "y_minor"),
-            polar = attr(x, "polar"))
+  glyphplot(
+    NextMethod(),
+    width = attr(x, "width"),
+    height = attr(x, "height"),
+    x_major = attr(x, "x_major"),
+    y_major = attr(x, "y_major"),
+    x_minor = attr(x, "x_minor"),
+    y_minor = attr(x, "y_minor"),
+    polar = attr(x, "polar")
+  )
 }
 
 #' @param x glyphplot to be printed
@@ -265,9 +315,8 @@ tbl_sum.glyphplot <- function(x, ...) {
   width <- format(attr(x, "width"), digits = 3)
   height <- format(attr(x, "height"), digits = 3)
 
-  size <- paste0("[", width, ", ", height,  "]\n", sep = "")
-  axes <- paste0(attr(x, "x_major"), ", ", attr(x, "y_major"), "\n",
-      sep = "")
+  size <- paste0("[", width, ", ", height, "]\n", sep = "")
+  axes <- paste0(attr(x, "x_major"), ", ", attr(x, "y_major"), "\n", sep = "")
 
   c(glyphplot = dim, coord = coord, size = size, "major_axes" = axes)
 }
