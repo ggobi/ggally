@@ -4,16 +4,16 @@
 \alias{glyphplot}
 \alias{is.glyphplot}
 \alias{[.glyphplot}
-\alias{print.glyphplot}
+\alias{tbl_sum.glyphplot}
 \title{Glyph plot class}
 \usage{
-glyphplot(data, width, height, polar, x_major, y_major)
+glyphplot(data, width, height, polar, x_major, y_major, x_minor, y_minor)
 
 is.glyphplot(x)
 
 \method{[}{glyphplot}(x, ...)
 
-\method{print}{glyphplot}(x, ...)
+\method{tbl_sum}{glyphplot}(x, ...)
 }
 \arguments{
 \item{data}{A data frame containing variables named in \code{x_major},
@@ -26,7 +26,7 @@ absolutely by supplying a numeric vector of length 1, or relative to the}
 \item{polar}{A logical of length 1, specifying whether the glyphs should
 be drawn in polar coordinates.  Defaults to \code{FALSE}.}
 
-\item{x_major, y_major}{The name of the variable (as a
+\item{x_major, x_minor, y_major, y_minor}{The name of the variable (as a
 string) for the major x and y axes.  Together, the}
 
 \item{x}{glyphplot to be printed}
@@ -37,5 +37,5 @@ string) for the major x and y axes.  Together, the}
 Glyph plot class
 }
 \author{
-Di Cook, Heike Hofmann, Hadley Wickham
+Di Cook, Heike Hofmann, Hadley Wickham, Sherry Zhang
 }

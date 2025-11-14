@@ -20,7 +20,7 @@ ggally_cross(data, mapping, ..., scale_max_size = 20, geom_text_args = NULL)
 \description{
 Plot the number of observations by using square points
 with proportional areas. Could be filled according to chi-squared
-statistics computed by \code{\link[=stat_cross]{stat_cross()}}. Labels could also
+statistics computed by \code{\link[ggstats:stat_cross]{ggstats::stat_cross()}}. Labels could also
 be added (see examples).
 }
 \examples{

@@ -2,7 +2,7 @@
 #'
 #' Plot the number of observations by using square points
 #' with proportional areas. Could be filled according to chi-squared
-#' statistics computed by [stat_cross()]. Labels could also
+#' statistics computed by [ggstats::stat_cross()]. Labels could also
 #' be added (see examples).
 #'
 #' @param data data set using
