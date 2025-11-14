@@ -20,7 +20,6 @@
 #'  minor values within a grid cell.  Defaults to \code{\link{identity}} so
 #'  that no scaling is performed.
 #' @export
-#' @importFrom cubble geom_glyph geom_glyph_line geom_glyph_box
 #' @author Di Cook, Heike Hofmann, Hadley Wickham, Sherry Zhang
 #' @examples
 #' # Small function to display plots only if it's interactive

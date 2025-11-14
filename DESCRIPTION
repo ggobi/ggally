@@ -75,10 +75,10 @@ Suggests:
     testthat (>= 3.0.0),
     tibble,
     vdiffr
-Remotes:
-    huizezhang-sherry/cubble
 RdMacros:
     lifecycle
+Remotes:
+    huizezhang-sherry/cubble
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
 Config/usethis/last-upkeep: 2025-06-13
