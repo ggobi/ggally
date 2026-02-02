@@ -1,6 +1,6 @@
 set.seed(123)
 data(diamonds, package = "ggplot2")
-diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 100), ]
+diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
 
 iris2 <- iris
 iris2$alphaLevel <- c("setosa" = 0.2, "versicolor" = 0.3, "virginica" = 0)[
@@ -287,7 +287,7 @@ test_that("splineFactor as is", {
 
 test_that("groupColumn", {
   ds2 <- diamonds.samp
-  ds2$color <- mapping_string(ds2$color)
+  ds2$color <- as.character(ds2$color)
 
   # column 3 has a character
   # column 4 has a factor
