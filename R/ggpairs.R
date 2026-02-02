@@ -51,7 +51,12 @@ fix_data <- function(data) {
     data <- fortify_SharedData(data)
   }
 
-  data <- fortify(data)
+  data <-
+    if (packageVersion("ggplot2") >= "4.0.0") {
+      map_data(data)
+    } else {
+      fortify(data)
+    }
   data <- as.data.frame(data)
 
   for (i in 1:dim(data)[2]) {
