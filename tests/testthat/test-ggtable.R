@@ -1,3 +1,4 @@
+skip_if_not_installed("broom")
 suppressMessages(require(broom))
 
 test_that("example", {
