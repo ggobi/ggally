@@ -1,4 +1,12 @@
 ggally_expect_doppelganger <- function(name, plot) {
+  if (
+    identical(
+      tolower(Sys.getenv("_R_CHECK_DEPENDS_ONLY_", "false")),
+      "true"
+    )
+  ) {
+    skip("Skipping vdiffr tests on depends-only check")
+  }
   if (packageVersion("ggplot2") < "3.5.2.9001") {
     # Keep snapshot around, but skip the test
     vdiffr__str_standardise <- getFromNamespace("str_standardise", "vdiffr")
