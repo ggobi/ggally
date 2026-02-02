@@ -37,3 +37,4 @@ ggduo_paper.txt
 ^CRAN-SUBMISSION$
 .vscode
 ^data-raw$
+^\.claude$
