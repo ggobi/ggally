@@ -38,3 +38,4 @@ ggduo_paper.txt
 .vscode
 ^data-raw$
 ^\.claude$
+^_dev$
