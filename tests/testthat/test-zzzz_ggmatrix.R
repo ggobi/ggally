@@ -227,22 +227,22 @@ for (fn_info in list(
         )
       })
 
-      tryCatch(
-        {
-          set.seed(123456) # keep jitter consistent
-          suppressWarnings({
-            built_pm <- ggmatrix_gtable(pm)
-          })
-          ggally_expect_doppelganger(pm_name, built_pm)
-        },
-        error = function(e) {
-          if (interactive()) {
-            assign("barret", pm, envir = globalenv())
-          }
-          # Rethrow error
-          signalCondition(e)
-        }
-      )
+      # tryCatch(
+      #   {
+      set.seed(123456) # keep jitter consistent
+      suppressWarnings({
+        built_pm <- ggmatrix_gtable(pm)
+      })
+      ggally_expect_doppelganger(pm_name, built_pm)
+      #   },
+      #   error = function(e) {
+      #     if (interactive()) {
+      #       assign("barret", pm, envir = globalenv())
+      #     }
+      #     # Rethrow error
+      #     signalCondition(e)
+      #   }
+      # )
     })
   }
 }
