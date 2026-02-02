@@ -24,8 +24,10 @@
 #' @examples
 #' data(mtcars)
 #' model <- stats::lm(mpg ~ wt + qsec + am, data = mtcars)
-#' broomified_model <- broomify(model)
-#' str(broomified_model)
+#' if (require(broom)) {
+#'   broomified_model <- broomify(model)
+#'   str(broomified_model)
+#' }
 broomify <- function(model, lmStars = TRUE) {
   if (inherits(model, "broomify")) {
     return(model)
