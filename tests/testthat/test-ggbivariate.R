@@ -12,7 +12,10 @@ test_that("example", {
     title = "Custom title"
   ) +
     labs(fill = "Smoker ?")
-  ggally_expect_doppelganger("tips-title", p)
+  suppressMessages({
+    gmt <- ggmatrix_gtable(p)
+  })
+  ggally_expect_doppelganger("tips-title", gmt)
 
   # Customize fill colour scale
   p <- ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")) +
