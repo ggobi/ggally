@@ -1,6 +1,6 @@
 # GGally (development version)
 
-* Fixed duplicate aesthetics warning in `ggsurv()` with upcoming ggplot2 version. Removed duplicate `lty` aesthetic mapping from confidence interval bounds. (#XXX)
+* Fixed duplicate aesthetics warning in `ggsurv()` with upcoming ggplot2 version. Removed duplicate `lty` aesthetic mapping from confidence interval bounds.
 
 # GGally 2.4.0
 
