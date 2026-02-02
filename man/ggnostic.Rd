@@ -99,11 +99,13 @@ p_(pm)
 
 
 ## plot residuals vs fitted in a ggpairs plot matrix
-dt <- broomify(mod)
-pm <- ggpairs(
-  dt, c(".fitted", ".resid"),
-  columnLabels = c("fitted", "residuals"),
-  lower = list(continuous = ggally_nostic_resid)
-)
-p_(pm)
+if (require(broom)) {
+  dt <- broomify(mod)
+  pm <- ggpairs(
+    dt, c(".fitted", ".resid"),
+    columnLabels = c("fitted", "residuals"),
+    lower = list(continuous = ggally_nostic_resid)
+  )
+  p_(pm)
+}
 }
