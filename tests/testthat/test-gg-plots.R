@@ -26,6 +26,8 @@ test_that("denstrip", {
 
 
 test_that("density", {
+  skip_if_not_installed("MASS")
+
   p <- ggally_density(
     tips,
     mapping = ggplot2::aes(
