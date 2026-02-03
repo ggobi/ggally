@@ -85,7 +85,7 @@ p_ <- GGally::print_if_interactive
 invisible(lapply(c("ggplot2", "maps", "network", "sna"), base::library, character.only = TRUE))
 
 ## Example showing great circles on a simple map of the USA
-if (require(airports) && require(network) && require(sna)) {
+if (require(airports) && require(network) && require(sna) && require(maps)) {
   dms_to_number <- function(dms) {
     parts <- strsplit(dms, "-")[[1]]
     degrees <- as.numeric(parts[1])
@@ -154,7 +154,8 @@ if (require(airports) && require(network) && require(sna)) {
   data(twitter_spambots)
 
   # create a world map
-  world <- fortify(map("world", plot = FALSE, fill = TRUE))
+  map_data_fn <- if (packageVersion("ggplot2") >= "4.0.0") ggplot2::map_data else ggplot2::fortify
+  world <- map_data_fn(map("world", plot = FALSE, fill = TRUE))
   world <- ggplot(world, aes(x = long, y = lat)) +
     geom_polygon(aes(group = group),
       color = "grey65",
