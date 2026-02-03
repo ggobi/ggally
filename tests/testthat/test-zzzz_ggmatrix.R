@@ -233,7 +233,8 @@ for (fn_info in list(
       suppressWarnings({
         built_pm <- ggmatrix_gtable(pm)
       })
-      ggally_expect_doppelganger(pm_name, built_pm)
+      hashed_name <- cli::hash_xxhash64(pm_name)
+      ggally_expect_doppelganger(hashed_name, built_pm)
       #   },
       #   error = function(e) {
       #     if (interactive()) {

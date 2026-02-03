@@ -207,6 +207,6 @@
 <text x='676.86' y='277.36' style='font-size: 8.80px; font-family: sans;' textLength='25.94px' lengthAdjust='spacingAndGlyphs'>setosa</text>
 <text x='676.86' y='294.64' style='font-size: 8.80px; font-family: sans;' textLength='37.66px' lengthAdjust='spacingAndGlyphs'>versicolor</text>
 <text x='676.86' y='311.92' style='font-size: 8.80px; font-family: sans;' textLength='32.28px' lengthAdjust='spacingAndGlyphs'>virginica</text>
-<text x='30.83' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='187.10px' lengthAdjust='spacingAndGlyphs'>ggparcoord-splineFactor-as-is-8</text>
+<text x='30.83' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='182.71px' lengthAdjust='spacingAndGlyphs'>ggparcoord-splinefactor-as-is-8</text>
 </g>
 </svg>
