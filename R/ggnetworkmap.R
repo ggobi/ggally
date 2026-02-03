@@ -37,14 +37,11 @@
 #' @importFrom dplyr bind_rows
 #' @importFrom utils installed.packages
 #' @examples
-#' library(dplyr)
 #' # small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' invisible(lapply(c("ggplot2", "maps", "network", "sna"), base::library, character.only = TRUE))
-#'
-#' ## Example showing great circles on a simple map of the USA
-#' if (require(airports) && require(network) && require(sna) && require(maps)) {
+#' if (require(dplyr) && require(network) && require(sna) &&
+#'     require(airports) && require(maps)) {
 #'   dms_to_number <- function(dms) {
 #'     parts <- strsplit(dms, "-")[[1]]
 #'     degrees <- as.numeric(parts[1])
