@@ -1751,19 +1751,21 @@ ggally_naDiag <- function(...) {
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(tips)
-#' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9))
+#' if (require(ggforce)) {
+#'   p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9))
 #'
-#' p_(ggpairs(
-#'   tips,
-#'   mapping = aes(colour = sex),
-#'   upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
-#'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
-#' ))
+#'   p_(ggpairs(
+#'     tips,
+#'     mapping = aes(colour = sex),
+#'     upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
+#'     diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
+#'   ))
+#' }
 ggally_autopoint <- function(data, mapping, ...) {
   rlang::check_installed("ggforce")
 
