@@ -6,6 +6,13 @@
 # Remove tests/testthat/_snaps from .Rbuildignore
 # This ensures snapshot tests are included in R CMD check but not in the package build for a CRAN submission
 
+# If not on macOS, skip vdiffr tests
+# This logic is tied to `ggally_expect_doppelganger()` in
+# tests/testthat/helper-doppelganger.R
+if ((!identical(tolower(Sys.info()[["sysname"]]), "darwin"))) {
+  quit(status = 0)
+}
+
 rbuildignore_path <- ".Rbuildignore"
 
 if (!file.exists(rbuildignore_path)) {
@@ -15,13 +22,13 @@ if (!file.exists(rbuildignore_path)) {
 # Read the file
 lines <- readLines(rbuildignore_path)
 
-# Remove the line containing "tests/testthat/_snaps"
-lines_filtered <- lines[!grepl("^tests/testthat/_snaps\\s*$", lines)]
+# Remove the line containing "tests/testthat/_snaps/"
+lines_filtered <- lines[!grepl("^tests/testthat/_snaps/", lines)]
 
 # Write back only if changes were made
 if (length(lines) != length(lines_filtered)) {
   writeLines(lines_filtered, rbuildignore_path)
-  message("Removed 'tests/testthat/_snaps' from .Rbuildignore")
+  message("Removed 'tests/testthat/_snaps/' from .Rbuildignore")
 } else {
-  message("'tests/testthat/_snaps' not found in .Rbuildignore")
+  message("'tests/testthat/_snaps/' not found in .Rbuildignore")
 }

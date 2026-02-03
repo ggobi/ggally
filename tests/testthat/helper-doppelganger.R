@@ -9,6 +9,14 @@ vdiffr__str_standardise <- function(s) {
 ggally_expect_doppelganger <- function(name, plot) {
   name <- vdiffr__str_standardise(name)
 
+  skip_snapshot <- function(msg) {
+    file <- paste0(name, ".svg")
+    testthat::announce_snapshot_file(name = file)
+
+    message(msg)
+    expect_true(TRUE) # Avoid empty test
+  }
+
   # When testing locally, make sure the name is standardised with what vdiffr expects
   if (interactive()) {
     internal_str_standardise <- getFromNamespace("str_standardise", "vdiffr")
@@ -17,17 +25,26 @@ ggally_expect_doppelganger <- function(name, plot) {
     }
   }
 
+  # This logic is to skip tests in certain OS values.
+  # It is tied to .github/shiny-workflows/check.R
+  if (!on_mac()) {
+    skip_snapshot(paste0(
+      "Skipping vdiffr test on non-macOS: ",
+      name
+    ))
+    return()
+  }
+
   if (
     identical(
       tolower(Sys.getenv("_R_CHECK_DEPENDS_ONLY_", "false")),
       "true"
     )
   ) {
-    file <- paste0(name, ".svg")
-    testthat::announce_snapshot_file(name = file)
-
-    message("Skipping vdiffr tests on depends-only check")
-    expect_true(TRUE) # Avoid empty test
+    skip_snapshot(paste0(
+      "Skipping vdiffr tests on depends-only check: ",
+      name
+    ))
     return()
   }
 
