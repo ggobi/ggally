@@ -20,6 +20,8 @@ broom::augment a model and add broom::glance and broom::tidy output as attribute
 \examples{
 data(mtcars)
 model <- stats::lm(mpg ~ wt + qsec + am, data = mtcars)
-broomified_model <- broomify(model)
-str(broomified_model)
+if (require(broom)) {
+  broomified_model <- broomify(model)
+  str(broomified_model)
+}
 }

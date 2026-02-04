@@ -198,57 +198,57 @@
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' library(network)
+#' if (require(network) && require(sna)) {
+#'   # random adjacency matrix
+#'   x           <- 10
+#'   ndyads      <- x * (x - 1)
+#'   density     <- x / ndyads
+#'   m           <- matrix(0, nrow = x, ncol = x)
+#'   dimnames(m) <- list(letters[1:x], letters[1:x])
+#'   m[row(m) != col(m)] <- runif(ndyads) < density
+#'   m
 #'
-#' # random adjacency matrix
-#' x           <- 10
-#' ndyads      <- x * (x - 1)
-#' density     <- x / ndyads
-#' m           <- matrix(0, nrow = x, ncol = x)
-#' dimnames(m) <- list(letters[1:x], letters[1:x])
-#' m[row(m) != col(m)] <- runif(ndyads) < density
-#' m
+#'   # random undirected network
+#'   n <- network::network(m, directed = FALSE)
+#'   n
 #'
-#' # random undirected network
-#' n <- network::network(m, directed = FALSE)
-#' n
+#'   p_(ggnet2(n, label = TRUE))
+#'   p_(ggnet2(n, label = TRUE, shape = 15))
+#'   p_(ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white"))
 #'
-#' p_(ggnet2(n, label = TRUE))
-#' p_(ggnet2(n, label = TRUE, shape = 15))
-#' p_(ggnet2(n, label = TRUE, shape = 15, color = "black", label.color = "white"))
+#'   # add vertex attribute
+#'   x = network.vertex.names(n)
+#'   x = ifelse(x %in% c("a", "e", "i"), "vowel", "consonant")
+#'   n %v% "phono" = x
 #'
-#' # add vertex attribute
-#' x = network.vertex.names(n)
-#' x = ifelse(x %in% c("a", "e", "i"), "vowel", "consonant")
-#' n %v% "phono" = x
+#'   p_(ggnet2(n, color = "phono"))
+#'   p_(ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey")))
+#'   p_(ggnet2(n, shape = "phono", color = "phono"))
 #'
-#' p_(ggnet2(n, color = "phono"))
-#' p_(ggnet2(n, color = "phono", palette = c("vowel" = "gold", "consonant" = "grey")))
-#' p_(ggnet2(n, shape = "phono", color = "phono"))
+#'   if (require(RColorBrewer)) {
 #'
-#' if (require(RColorBrewer)) {
+#'     # random groups
+#'     n %v% "group" <- sample(LETTERS[1:3], 10, replace = TRUE)
 #'
-#'   # random groups
-#'   n %v% "group" <- sample(LETTERS[1:3], 10, replace = TRUE)
+#'     p_(ggnet2(n, color = "group", palette = "Set2"))
 #'
-#'   p_(ggnet2(n, color = "group", palette = "Set2"))
+#'   }
 #'
+#'   # random weights
+#'   n %e% "weight" <- sample(1:3, network.edgecount(n), replace = TRUE)
+#'   p_(ggnet2(n, edge.size = "weight", edge.label = "weight"))
+#'
+#'   # edge arrows on a directed network
+#'   p_(ggnet2(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10))
+#'
+#'   # Padgett's Florentine wedding data
+#'   data(flo, package = "network")
+#'   flo
+#'
+#'   p_(ggnet2(flo, label = TRUE))
+#'   p_(ggnet2(flo, label = TRUE, label.trim = 4, vjust = -1, size = 3, color = 1))
+#'   p_(ggnet2(flo, label = TRUE, size = 12, color = "white"))
 #' }
-#'
-#' # random weights
-#' n %e% "weight" <- sample(1:3, network.edgecount(n), replace = TRUE)
-#' p_(ggnet2(n, edge.size = "weight", edge.label = "weight"))
-#'
-#' # edge arrows on a directed network
-#' p_(ggnet2(network(m, directed = TRUE), arrow.gap = 0.05, arrow.size = 10))
-#'
-#' # Padgett's Florentine wedding data
-#' data(flo, package = "network")
-#' flo
-#'
-#' p_(ggnet2(flo, label = TRUE))
-#' p_(ggnet2(flo, label = TRUE, label.trim = 4, vjust = -1, size = 3, color = 1))
-#' p_(ggnet2(flo, label = TRUE, size = 12, color = "white"))
 ggnet2 <- function(
   net,
   mode = "fruchtermanreingold",

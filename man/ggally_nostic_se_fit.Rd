@@ -36,8 +36,10 @@ A base line of 0 is added to give reference to a perfect fit.
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
+if (require(broom)) {
+  dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+  p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
+}
 }
 \seealso{
 \code{\link[stats:lm.influence]{stats::influence()}}

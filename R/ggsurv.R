@@ -332,12 +332,12 @@ ggsurv_m <- function(
     }
     pl <- pl +
       geom_step(
-        aes(y = .data$up, lty = .data$group, col = .data$group),
+        aes(y = .data$up, col = .data$group),
         lty = stepLty,
         linewidth = size.ci
       ) +
       geom_step(
-        aes(y = .data$low, lty = .data$group, col = .data$group),
+        aes(y = .data$low, col = .data$group),
         lty = stepLty,
         linewidth = size.ci
       )

@@ -34,8 +34,10 @@ A line is added to display the overall model's sigma value. This gives a baselin
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
+if (require(broom)) {
+  dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+  p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
+}
 }
 \seealso{
 \code{\link[stats:lm.influence]{stats::influence()}}

@@ -49,8 +49,10 @@ If either \code{linePosition} or \code{avgLinePosition} is \code{NULL}, the resp
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
+if (require(broom)) {
+  dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+  p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
+}
 }
 \seealso{
 \code{\link[stats:lm.influence]{stats::influence()}}

@@ -32,7 +32,7 @@ ggmatrix_location(pm, location = NULL, rows = NULL, cols = NULL)
 Data frame with columns \code{c("row", "col")} containing locations for the plot matrix
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
 Convert many types of location values to a consistent \code{data.frame} of \code{row} and \code{col} values.

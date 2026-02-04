@@ -18,7 +18,7 @@ eval_data_col <- function(data, aes_col) {
 #' mapping <- ggplot2::aes(Petal.Length)
 #' mapping_string(mapping$x)
 mapping_string <- function(aes_col) {
-  gsub("^~(?:\\.data\\$)?", "", deparse(aes_col, 500L))
+  gsub("^~(?:\\.data\\$)?", "", paste0(deparse(aes_col, 500L), collapse = ""))
 }
 
 # is categories on the left?
@@ -208,15 +208,17 @@ ggally_smooth_lm <- function(data, mapping, ...) {
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(tips)
-#' p_(ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
-#' p_(ggally_density(
-#'   tips,
-#'   mapping = ggplot2::aes(total_bill, tip, fill = after_stat(level))
-#' ))
-#' p_(ggally_density(
-#'   tips,
-#'   mapping = ggplot2::aes(total_bill, tip, fill = after_stat(level))
-#' ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2)))
+#' if (require(MASS)) {
+#'   p_(ggally_density(tips, mapping = ggplot2::aes(x = total_bill, y = tip)))
+#'   p_(ggally_density(
+#'     tips,
+#'     mapping = ggplot2::aes(total_bill, tip, fill = after_stat(level))
+#'   ))
+#'   p_(ggally_density(
+#'     tips,
+#'     mapping = ggplot2::aes(total_bill, tip, fill = after_stat(level))
+#'   ) + ggplot2::scale_fill_gradient(breaks = c(0.05, 0.1, 0.15, 0.2)))
+#' }
 ggally_density <- function(data, mapping, ...) {
   rangeX <- range(eval_data_col(data, mapping$x), na.rm = TRUE)
   rangeY <- range(eval_data_col(data, mapping$y), na.rm = TRUE)
@@ -1751,19 +1753,21 @@ ggally_naDiag <- function(...) {
 #' p_ <- GGally::print_if_interactive
 #'
 #' data(tips)
-#' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day)))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8))
-#' p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9))
+#' if (require(ggforce)) {
+#'   p_(ggally_autopoint(tips, mapping = aes(x = tip, y = total_bill)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = tip, y = sex)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex, color = day)))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), size = 8))
+#'   p_(ggally_autopoint(tips, mapping = aes(x = smoker, y = sex), alpha = .9))
 #'
-#' p_(ggpairs(
-#'   tips,
-#'   mapping = aes(colour = sex),
-#'   upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
-#'   diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
-#' ))
+#'   p_(ggpairs(
+#'     tips,
+#'     mapping = aes(colour = sex),
+#'     upper = list(discrete = "autopoint", combo = "autopoint", continuous = "autopoint"),
+#'     diag = list(discrete = "autopointDiag", continuous = "autopointDiag")
+#'   ))
+#' }
 ggally_autopoint <- function(data, mapping, ...) {
   rlang::check_installed("ggforce")
 
