@@ -1,5 +1,7 @@
 # GGally (development version)
 
+* Fixed duplicate aesthetics warning in `ggsurv()` with upcoming ggplot2 version. Removed duplicate `lty` aesthetic mapping from confidence interval bounds. (#572)
+
 * Fixed `mapping_string()` to properly handle long aesthetic expressions by collapsing multi-line `deparse()` output. (#573)
 
 * Updated `fix_data()` to handle map objects correctly with ggplot2 >= 4.0.0 using `ggplot2::map_data()` instead of `fortify()`. (#573)
