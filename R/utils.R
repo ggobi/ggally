@@ -28,3 +28,11 @@ str_detect <- function(string, pattern, ...) {
 hf <- function(field) {
   eval(parse(text = read.dcf(".helper_functions", fields = field)))
 }
+
+system_os <- function() {
+  tolower(Sys.info()[["sysname"]])
+}
+
+on_mac <- function() {
+  identical(system_os(), "darwin")
+}

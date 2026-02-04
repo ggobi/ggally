@@ -12,7 +12,7 @@ figure
 ggmapTemp.png
 README.html
 notes/
-tests/testthat/_snaps
+tests/testthat/_snaps/*/*.svg
 tests/testthat/Rplots.pdf
 ^.*\.Rproj$
 ^\.Rproj\.user$
@@ -37,3 +37,5 @@ ggduo_paper.txt
 ^CRAN-SUBMISSION$
 .vscode
 ^data-raw$
+^\.claude$
+^_dev$

@@ -1,3 +1,5 @@
+skip_if_not_installed("broom")
+
 test_that("fn_switch", {
   fn1 <- function(data, mapping, ...) {
     return(1)

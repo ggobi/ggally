@@ -1,3 +1,5 @@
+skip_if_not_installed("survival")
+skip_if_not_installed("scales")
 suppressMessages(require(survival))
 suppressMessages(require(scales))
 lung <- survival::lung

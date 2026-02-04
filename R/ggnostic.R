@@ -24,8 +24,10 @@
 #' @examples
 #' data(mtcars)
 #' model <- stats::lm(mpg ~ wt + qsec + am, data = mtcars)
-#' broomified_model <- broomify(model)
-#' str(broomified_model)
+#' if (require(broom)) {
+#'   broomified_model <- broomify(model)
+#'   str(broomified_model)
+#' }
 broomify <- function(model, lmStars = TRUE) {
   if (inherits(model, "broomify")) {
     return(model)
@@ -232,8 +234,10 @@ ggally_nostic_line <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' p_(ggally_nostic_resid(dt, ggplot2::aes(wt, .resid)))
+#' if (require(broom)) {
+#'   dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#'   p_(ggally_nostic_resid(dt, ggplot2::aes(wt, .resid)))
+#' }
 ggally_nostic_resid <- function(
   data,
   mapping,
@@ -302,8 +306,10 @@ ggally_nostic_resid <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
+#' if (require(broom)) {
+#'   dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#'   p_(ggally_nostic_std_resid(dt, ggplot2::aes(wt, .std.resid)))
+#' }
 ggally_nostic_std_resid <- function(
   data,
   mapping,
@@ -341,8 +347,10 @@ ggally_nostic_std_resid <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
+#' if (require(broom)) {
+#'   dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#'   p_(ggally_nostic_se_fit(dt, ggplot2::aes(wt, .se.fit)))
+#' }
 ggally_nostic_se_fit <- function(
   data,
   mapping,
@@ -380,8 +388,10 @@ ggally_nostic_se_fit <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
+#' if (require(broom)) {
+#'   dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#'   p_(ggally_nostic_sigma(dt, ggplot2::aes(wt, .sigma)))
+#' }
 ggally_nostic_sigma <- function(
   data,
   mapping,
@@ -419,8 +429,10 @@ ggally_nostic_sigma <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' p_(ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd)))
+#' if (require(broom)) {
+#'   dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#'   p_(ggally_nostic_cooksd(dt, ggplot2::aes(wt, .cooksd)))
+#' }
 ggally_nostic_cooksd <- function(
   data,
   mapping,
@@ -471,8 +483,10 @@ ggally_nostic_cooksd <- function(
 #' # Small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
 #'
-#' dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-#' p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
+#' if (require(broom)) {
+#'   dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+#'   p_(ggally_nostic_hat(dt, ggplot2::aes(wt, .hat)))
+#' }
 ggally_nostic_hat <- function(
   data,
   mapping,
@@ -629,36 +643,39 @@ check_and_set_nostic_types <- function(
 #' @examples
 #' # small function to display plots only if it's interactive
 #' p_ <- GGally::print_if_interactive
-#' data(mtcars)
 #'
-#' # use mtcars dataset and alter the 'am' column to display actual name values
-#' mtc <- mtcars
-#' mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)]
+#' if (require(broom)) {
+#'   data(mtcars)
 #'
-#' # step the complete model down to a smaller model
-#' mod <- stats::step(stats::lm(mpg ~ ., data = mtc), trace = FALSE)
+#'   # use mtcars dataset and alter the 'am' column to display actual name values
+#'   mtc <- mtcars
+#'   mtc$am <- c("0" = "automatic", "1" = "manual")[as.character(mtc$am)]
 #'
-#' # display using defaults
-#' pm <- ggnostic(mod)
-#' p_(pm)
+#'   # step the complete model down to a smaller model
+#'   mod <- stats::step(stats::lm(mpg ~ ., data = mtc), trace = FALSE)
 #'
-#' # color by am value
-#' pm <- ggnostic(mod, mapping = ggplot2::aes(color = am))
-#' p_(pm)
+#'   # display using defaults
+#'   pm <- ggnostic(mod)
+#'   p_(pm)
 #'
-#' # turn resid smooth error ribbon off
-#' pm <- ggnostic(mod, continuous = list(.resid = wrap("nostic_resid", se = FALSE)))
-#' p_(pm)
+#'   # color by am value
+#'   pm <- ggnostic(mod, mapping = ggplot2::aes(color = am))
+#'   p_(pm)
+#'
+#'   # turn resid smooth error ribbon off
+#'   pm <- ggnostic(mod, continuous = list(.resid = wrap("nostic_resid", se = FALSE)))
+#'   p_(pm)
 #'
 #'
-#' ## plot residuals vs fitted in a ggpairs plot matrix
-#' dt <- broomify(mod)
-#' pm <- ggpairs(
-#'   dt, c(".fitted", ".resid"),
-#'   columnLabels = c("fitted", "residuals"),
-#'   lower = list(continuous = ggally_nostic_resid)
-#' )
-#' p_(pm)
+#'   ## plot residuals vs fitted in a ggpairs plot matrix
+#'   dt <- broomify(mod)
+#'   pm <- ggpairs(
+#'     dt, c(".fitted", ".resid"),
+#'     columnLabels = c("fitted", "residuals"),
+#'     lower = list(continuous = ggally_nostic_resid)
+#'   )
+#'   p_(pm)
+#' }
 ggnostic <- function(
   model,
   ...,

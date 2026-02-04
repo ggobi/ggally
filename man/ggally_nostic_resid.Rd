@@ -52,8 +52,10 @@ If non-null \code{pVal} and \code{sigma} values are given, confidence interval l
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
 
-dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
-p_(ggally_nostic_resid(dt, ggplot2::aes(wt, .resid)))
+if (require(broom)) {
+  dt <- broomify(stats::lm(mpg ~ wt + qsec + am, data = mtcars))
+  p_(ggally_nostic_resid(dt, ggplot2::aes(wt, .resid)))
+}
 }
 \seealso{
 \code{stats::\link[stats]{residuals}}
