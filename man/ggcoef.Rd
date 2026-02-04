@@ -64,7 +64,7 @@ if \code{x} is not a data frame)}
 }
 \description{
 Plot the coefficients of a model with \pkg{broom} and \pkg{ggplot2}.
-For an updated and improved version, see \code{\link[=ggcoef_model]{ggcoef_model()}}.
+For an updated and improved version, see \code{\link[ggstats:ggcoef_model]{ggstats::ggcoef_model()}}.
 }
 \examples{
 # Small function to display plots only if it's interactive

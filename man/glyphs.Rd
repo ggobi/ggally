@@ -2,7 +2,7 @@
 % Please edit documentation in R/gglyph.R
 \name{glyphs}
 \alias{glyphs}
-\title{Create \code{\link{glyphplot}} data}
+\title{Create data for glyph map}
 \usage{
 glyphs(
   data,
@@ -38,6 +38,10 @@ that no scaling is performed.}
 \description{
 Create the data needed to generate a glyph plot.
 }
+\details{
+The \code{glyphs} functions
+now extract the data object created with \code{\link[cubble]{geom_glyph}}
+}
 \examples{
 # Small function to display plots only if it's interactive
 p_ <- GGally::print_if_interactive
@@ -59,5 +63,5 @@ p_(ggplot2::ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
   ggplot2::labs(x = "", y = ""))
 }
 \author{
-Di Cook, Heike Hofmann, Hadley Wickham
+Di Cook, Heike Hofmann, Hadley Wickham, Sherry Zhang
 }
