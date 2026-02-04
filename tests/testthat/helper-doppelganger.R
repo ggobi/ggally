@@ -25,6 +25,14 @@ ggally_expect_doppelganger <- function(name, plot) {
     }
   }
 
+  if (!grepl("4.5.\\d", R.version.string)) {
+    skip_snapshot(paste0(
+      "Skipping vdiffr test on R version < 4.5: ",
+      name
+    ))
+    return()
+  }
+
   # This logic is to skip tests in certain OS values.
   # It is tied to .github/shiny-workflows/check.R
   if (!on_mac()) {
