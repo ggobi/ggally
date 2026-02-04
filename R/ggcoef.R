@@ -39,7 +39,8 @@
 #'     exponentiate = TRUE, exclude_intercept = TRUE,
 #'     errorbar_height = .2, color = "blue", sort = "ascending"
 #'   )
-#' }}
+#'   }
+#' }
 #' @export
 ggcoef <- function(
   x,
