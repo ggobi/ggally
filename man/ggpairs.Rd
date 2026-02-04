@@ -143,7 +143,8 @@ if (require(MASS)) {
     diamonds.samp[, 1:5],
     mapping = ggplot2::aes(color = cut),
     upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
-    lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
+    lower = list(continuous = wrap("points", alpha = 0.3),
+    combo = wrap("dot_no_facet", alpha = 0.4)),
     title = "Diamonds"
   )
   p_(pm)
