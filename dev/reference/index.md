@@ -1,0 +1,452 @@
+# Package index
+
+## Plot Matrix
+
+More details in
+[`vig_ggally("ggpairs")`](https://ggobi.github.io/ggally/articles/ggpairs.html),
+[`vig_ggally("ggmatrix")`](https://ggobi.github.io/ggally/articles/ggmatrix.html),
+and
+[`vig_ggally("ggscatmat")`](https://ggobi.github.io/ggally/articles/ggscatmat.html)
+
+- [`ggmatrix()`](https://ggobi.github.io/ggally/dev/reference/ggmatrix.md)
+  :
+
+  ggplot2 plot matrix
+
+- [`ggpairs()`](https://ggobi.github.io/ggally/dev/reference/ggpairs.md)
+  : ggplot2 generalized pairs plot
+
+- [`ggduo()`](https://ggobi.github.io/ggally/dev/reference/ggduo.md) :
+
+  ggplot2 generalized pairs plot for two columns sets of data
+
+- [`ggscatmat()`](https://ggobi.github.io/ggally/dev/reference/ggscatmat.md)
+  : Traditional scatterplot matrix for purely quantitative variables
+
+- [`ggfacet()`](https://ggobi.github.io/ggally/dev/reference/ggfacet.md)
+  :
+
+  Single ggplot2 plot matrix with
+  [`facet_grid`](https://ggplot2.tidyverse.org/reference/facet_grid.html)
+
+- [`ggts()`](https://ggobi.github.io/ggally/dev/reference/ggts.md) :
+  Multiple time series
+
+## High-Level Plots
+
+See
+[`vig_ggally("ggally_plots")`](https://ggobi.github.io/ggally/articles/ggally_plots.html)
+for a list with examples of all high-level plots.
+
+- [`ggally_autopoint()`](https://ggobi.github.io/ggally/dev/reference/ggally_autopoint.md)
+  [`ggally_autopointDiag()`](https://ggobi.github.io/ggally/dev/reference/ggally_autopoint.md)
+  : Scatterplot for continuous and categorical variables
+- [`ggally_barDiag()`](https://ggobi.github.io/ggally/dev/reference/ggally_barDiag.md)
+  : Bar plot
+- [`ggally_blank()`](https://ggobi.github.io/ggally/dev/reference/ggally_blank.md)
+  [`ggally_blankDiag()`](https://ggobi.github.io/ggally/dev/reference/ggally_blank.md)
+  : Blank plot
+- [`ggally_box()`](https://ggobi.github.io/ggally/dev/reference/ggally_box.md)
+  [`ggally_box_no_facet()`](https://ggobi.github.io/ggally/dev/reference/ggally_box.md)
+  : Box plot
+- [`ggally_colbar()`](https://ggobi.github.io/ggally/dev/reference/ggally_colbar.md)
+  [`ggally_rowbar()`](https://ggobi.github.io/ggally/dev/reference/ggally_colbar.md)
+  : Column and row bar plots
+- [`ggally_count()`](https://ggobi.github.io/ggally/dev/reference/ggally_count.md)
+  [`ggally_countDiag()`](https://ggobi.github.io/ggally/dev/reference/ggally_count.md)
+  : Display counts of observations
+- [`ggally_cor()`](https://ggobi.github.io/ggally/dev/reference/ggally_cor.md)
+  : Correlation value plot
+- [`ggally_cross()`](https://ggobi.github.io/ggally/dev/reference/ggally_cross.md)
+  : Plots the number of observations
+- [`ggally_crosstable()`](https://ggobi.github.io/ggally/dev/reference/ggally_crosstable.md)
+  : Display a cross-tabulated table
+- [`ggally_density()`](https://ggobi.github.io/ggally/dev/reference/ggally_density.md)
+  : Bivariate density plot
+- [`ggally_densityDiag()`](https://ggobi.github.io/ggally/dev/reference/ggally_densityDiag.md)
+  : Univariate density plot
+- [`ggally_denstrip()`](https://ggobi.github.io/ggally/dev/reference/ggally_denstrip.md)
+  : Tile plot with facets
+- [`ggally_diagAxis()`](https://ggobi.github.io/ggally/dev/reference/ggally_diagAxis.md)
+  : Internal axis labels for ggpairs
+- [`ggally_dot()`](https://ggobi.github.io/ggally/dev/reference/ggally_dot.md)
+  [`ggally_dot_no_facet()`](https://ggobi.github.io/ggally/dev/reference/ggally_dot.md)
+  : Grouped dot plot
+- [`ggally_facetbar()`](https://ggobi.github.io/ggally/dev/reference/ggally_facetbar.md)
+  : Faceted bar plot
+- [`ggally_facetdensity()`](https://ggobi.github.io/ggally/dev/reference/ggally_facetdensity.md)
+  : Faceted density plot
+- [`ggally_facetdensitystrip()`](https://ggobi.github.io/ggally/dev/reference/ggally_facetdensitystrip.md)
+  : Density or tiles plot with facets
+- [`ggally_facethist()`](https://ggobi.github.io/ggally/dev/reference/ggally_facethist.md)
+  : Faceted histogram
+- [`ggally_na()`](https://ggobi.github.io/ggally/dev/reference/ggally_na.md)
+  [`ggally_naDiag()`](https://ggobi.github.io/ggally/dev/reference/ggally_na.md)
+  : NA plot
+- [`ggally_points()`](https://ggobi.github.io/ggally/dev/reference/ggally_points.md)
+  : Scatter plot
+- [`ggally_ratio()`](https://ggobi.github.io/ggally/dev/reference/ggally_ratio.md)
+  : Mosaic plot
+- [`ggally_smooth()`](https://ggobi.github.io/ggally/dev/reference/ggally_smooth.md)
+  [`ggally_smooth_loess()`](https://ggobi.github.io/ggally/dev/reference/ggally_smooth.md)
+  [`ggally_smooth_lm()`](https://ggobi.github.io/ggally/dev/reference/ggally_smooth.md)
+  : Scatter plot with a smoothed line
+- [`ggally_statistic()`](https://ggobi.github.io/ggally/dev/reference/ggally_statistic.md)
+  : Generalized text display
+- [`ggally_summarise_by()`](https://ggobi.github.io/ggally/dev/reference/ggally_summarise_by.md)
+  [`weighted_median_iqr()`](https://ggobi.github.io/ggally/dev/reference/ggally_summarise_by.md)
+  [`weighted_mean_sd()`](https://ggobi.github.io/ggally/dev/reference/ggally_summarise_by.md)
+  : Summarize a continuous variable by each value of a discrete variable
+- [`ggally_table()`](https://ggobi.github.io/ggally/dev/reference/ggally_table.md)
+  [`ggally_tableDiag()`](https://ggobi.github.io/ggally/dev/reference/ggally_table.md)
+  : Display a table of the number of observations
+- [`ggally_text()`](https://ggobi.github.io/ggally/dev/reference/ggally_text.md)
+  : Text plot
+- [`ggally_trends()`](https://ggobi.github.io/ggally/dev/reference/ggally_trends.md)
+  : Trends line plot
+
+## Major Plotting Functions
+
+More details in
+[`vig_ggally("ggbivariate")`](https://ggobi.github.io/ggally/articles/ggbivariate.html),
+[`vig_ggally("ggcoef")`](https://ggobi.github.io/ggally/articles/ggcoef.html),
+[`vig_ggally("ggcoef_model")`](https://ggobi.github.io/ggally/articles/ggcoef_model.html),
+[`vig_ggally("ggsurv")`](https://ggobi.github.io/ggally/articles/ggsurv.html),
+and
+[`vig_ggally("ggtable")`](https://ggobi.github.io/ggally/articles/ggtable.html)
+
+- [`ggbivariate()`](https://ggobi.github.io/ggally/dev/reference/ggbivariate.md)
+  : Display an outcome using several potential explanatory variables
+
+- [`ggcoef()`](https://ggobi.github.io/ggally/dev/reference/ggcoef.md) :
+
+  Model coefficients with broom and ggplot2
+
+- [`reexports`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_model`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_compare`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_multinom`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_plot`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`signif_stars`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_cols`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_rows`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_cross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatCross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_prop`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatProp`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_weighted_mean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatWeightedMean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  : Objects exported from other packages
+
+- [`ggcorr()`](https://ggobi.github.io/ggally/dev/reference/ggcorr.md) :
+  Correlation matrix
+
+- [`ggparcoord()`](https://ggobi.github.io/ggally/dev/reference/ggparcoord.md)
+  : Parallel coordinate plot
+
+- [`ggsurv()`](https://ggobi.github.io/ggally/dev/reference/ggsurv.md) :
+  Survival curves
+
+- [`ggtable()`](https://ggobi.github.io/ggally/dev/reference/ggtable.md)
+  : Cross-tabulated tables of discrete variables
+
+## Modeling Diagnostics
+
+More details in
+[`vig_ggally("ggnostic")`](https://ggobi.github.io/ggally/articles/ggpairs.html)
+
+- [`ggnostic()`](https://ggobi.github.io/ggally/dev/reference/ggnostic.md)
+  : Plot matrix of statistical model diagnostics
+
+- [`broomify()`](https://ggobi.github.io/ggally/dev/reference/broomify.md)
+  : Broomify a model
+
+- [`ggally_nostic_cooksd()`](https://ggobi.github.io/ggally/dev/reference/ggally_nostic_cooksd.md)
+  :
+
+  `ggnostic` Cook's distance
+
+- [`ggally_nostic_hat()`](https://ggobi.github.io/ggally/dev/reference/ggally_nostic_hat.md)
+  :
+
+  `ggnostic` leverage points
+
+- [`ggally_nostic_line()`](https://ggobi.github.io/ggally/dev/reference/ggally_nostic_line.md)
+  :
+
+  `ggnostic` background line with geom
+
+- [`ggally_nostic_resid()`](https://ggobi.github.io/ggally/dev/reference/ggally_nostic_resid.md)
+  :
+
+  `ggnostic` residuals
+
+- [`ggally_nostic_se_fit()`](https://ggobi.github.io/ggally/dev/reference/ggally_nostic_se_fit.md)
+  :
+
+  `ggnostic` fitted value's standard error
+
+- [`ggally_nostic_sigma()`](https://ggobi.github.io/ggally/dev/reference/ggally_nostic_sigma.md)
+  :
+
+  `ggnostic` leave one out model sigma
+
+- [`ggally_nostic_std_resid()`](https://ggobi.github.io/ggally/dev/reference/ggally_nostic_std_resid.md)
+  :
+
+  `ggnostic` standardized residuals
+
+## Glyph Plot
+
+More details in
+[`vig_ggally("glyph")`](https://ggobi.github.io/ggally/articles/glyph.html)
+
+- [`glyphs()`](https://ggobi.github.io/ggally/dev/reference/glyphs.md) :
+
+  Create `glyphplot` data
+
+- [`add_ref_boxes()`](https://ggobi.github.io/ggally/dev/reference/add_ref_boxes.md)
+  : Add reference boxes around each cell of the glyphmap.
+
+- [`add_ref_lines()`](https://ggobi.github.io/ggally/dev/reference/add_ref_lines.md)
+  : Add reference lines for each cell of the glyphmap.
+
+- [`glyphplot()`](https://ggobi.github.io/ggally/dev/reference/glyphplot.md)
+  [`is.glyphplot()`](https://ggobi.github.io/ggally/dev/reference/glyphplot.md)
+  [`` `[`( ``*`<glyphplot>`*`)`](https://ggobi.github.io/ggally/dev/reference/glyphplot.md)
+  [`print(`*`<glyphplot>`*`)`](https://ggobi.github.io/ggally/dev/reference/glyphplot.md)
+  : Glyph plot class
+
+- [`range01()`](https://ggobi.github.io/ggally/dev/reference/rescale01.md)
+  [`max1()`](https://ggobi.github.io/ggally/dev/reference/rescale01.md)
+  [`mean0()`](https://ggobi.github.io/ggally/dev/reference/rescale01.md)
+  [`min0()`](https://ggobi.github.io/ggally/dev/reference/rescale01.md)
+  [`rescale01()`](https://ggobi.github.io/ggally/dev/reference/rescale01.md)
+  [`rescale11()`](https://ggobi.github.io/ggally/dev/reference/rescale01.md)
+  : Rescaling functions
+
+## Network Plots
+
+More details in
+[`vig_ggally("ggnetworkmap")`](https://ggobi.github.io/ggally/articles/ggnetworkmap.html)
+
+- [`ggnet()`](https://ggobi.github.io/ggally/dev/reference/ggnet.md)
+  **\[deprecated\]** : Network plot
+- [`ggnet2()`](https://ggobi.github.io/ggally/dev/reference/ggnet2.md) :
+  Network plot
+- [`ggnetworkmap()`](https://ggobi.github.io/ggally/dev/reference/ggnetworkmap.md)
+  : Network plot map overlay
+
+## Additional Statistics for `ggplot2`
+
+More details in
+[`vig_ggally("ggally_stats")`](https://ggobi.github.io/ggally/articles/ggally_stats.html)
+
+- [`reexports`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_model`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_compare`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_multinom`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_plot`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`signif_stars`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_cols`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_rows`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_cross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatCross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_prop`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatProp`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_weighted_mean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatWeightedMean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  : Objects exported from other packages
+
+## Additional Geometries for `ggplot2`
+
+- [`reexports`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_model`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_compare`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_multinom`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_plot`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`signif_stars`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_cols`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_rows`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_cross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatCross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_prop`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatProp`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_weighted_mean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatWeightedMean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  : Objects exported from other packages
+
+## ggmatrix() Helpers
+
+- [`is_ggmatrix()`](https://ggobi.github.io/ggally/dev/reference/is_ggmatrix.md)
+  : Check if an object is a ggmatrix
+
+- [`add_to_ggmatrix()`](https://ggobi.github.io/ggally/dev/reference/add_to_ggmatrix.md)
+  :
+
+  Modify a `ggmatrix` object by adding an ggplot2 object to all plots
+
+- [`ggmatrix_location()`](https://ggobi.github.io/ggally/dev/reference/ggmatrix_location.md)
+  **\[experimental\]** :
+
+  `ggmatrix` plot locations
+
+- [`wrap_fn_with_param_arg()`](https://ggobi.github.io/ggally/dev/reference/wrap.md)
+  [`wrapp()`](https://ggobi.github.io/ggally/dev/reference/wrap.md)
+  [`wrap()`](https://ggobi.github.io/ggally/dev/reference/wrap.md)
+  [`wrap_fn_with_params()`](https://ggobi.github.io/ggally/dev/reference/wrap.md)
+  : Wrap a function with different parameter values
+
+- [`getPlot()`](https://ggobi.github.io/ggally/dev/reference/getPlot.md)
+  [`` `[`( ``*`<ggmatrix>`*`)`](https://ggobi.github.io/ggally/dev/reference/getPlot.md)
+  :
+
+  Subset a `ggmatrix` object
+
+- [`putPlot()`](https://ggobi.github.io/ggally/dev/reference/putPlot.md)
+  [`` `[<-`( ``*`<ggmatrix>`*`)`](https://ggobi.github.io/ggally/dev/reference/putPlot.md)
+  :
+
+  Insert a plot into a `ggmatrix` object
+
+- [`fn_switch()`](https://ggobi.github.io/ggally/dev/reference/fn_switch.md)
+  : Function switch
+
+- [`grab_legend()`](https://ggobi.github.io/ggally/dev/reference/grab_legend.md)
+  [`print(`*`<legend_guide_box>`*`)`](https://ggobi.github.io/ggally/dev/reference/grab_legend.md)
+  : Grab the legend and print it as a plot
+
+- [`gglegend()`](https://ggobi.github.io/ggally/dev/reference/gglegend.md)
+  : Plot only legend of plot function
+
+- [`eval_data_col()`](https://ggobi.github.io/ggally/dev/reference/eval_data_col.md)
+  : Evaluate data column
+
+- [`mapping_swap_x_y()`](https://ggobi.github.io/ggally/dev/reference/mapping_swap_x_y.md)
+  : Swap x and y mapping
+
+- [`mapping_color_to_fill()`](https://ggobi.github.io/ggally/dev/reference/mapping_color_to_fill.md)
+  : Aesthetic mapping color fill
+
+- [`remove_color_unless_equal()`](https://ggobi.github.io/ggally/dev/reference/remove_color_unless_equal.md)
+  : Remove colour mapping unless found in select mapping keys
+
+- [`print.ggmatrix`](https://ggobi.github.io/ggally/dev/reference/print.ggmatrix.md)
+  :
+
+  Print `ggmatrix` object
+
+- [`ggmatrix_gtable()`](https://ggobi.github.io/ggally/dev/reference/ggmatrix_gtable.md)
+  :
+
+  `ggmatrix` gtable object
+
+- [`ggmatrix_progress()`](https://ggobi.github.io/ggally/dev/reference/ggmatrix_progress.md)
+  :
+
+  `ggmatrix` default progress bar
+
+- [`str.ggmatrix`](https://ggobi.github.io/ggally/dev/reference/str.ggmatrix.md)
+  :
+
+  `ggmatrix` structure
+
+- [`print_if_interactive()`](https://ggobi.github.io/ggally/dev/reference/print_if_interactive.md)
+  : Print if not CRAN
+
+## Utilities
+
+- [`brew_colors()`](https://ggobi.github.io/ggally/dev/reference/brew_colors.md)
+  : RColorBrewer Set1 colors
+
+- [`find_plot_type()`](https://ggobi.github.io/ggally/dev/reference/find_plot_type.md)
+  : Find plot types
+
+- [`is_horizontal()`](https://ggobi.github.io/ggally/dev/reference/is_horizontal.md)
+  [`is_character_column()`](https://ggobi.github.io/ggally/dev/reference/is_horizontal.md)
+  : Check if plot is horizontal
+
+- [`lowertriangle()`](https://ggobi.github.io/ggally/dev/reference/lowertriangle.md)
+  :
+
+  lowertriangle - rearrange dataset as the preparation of `ggscatmat`
+  function
+
+- [`mapping_string()`](https://ggobi.github.io/ggally/dev/reference/mapping_string.md)
+  : Aes name
+
+- [`model_response_variables()`](https://ggobi.github.io/ggally/dev/reference/model_terms.md)
+  [`model_beta_variables()`](https://ggobi.github.io/ggally/dev/reference/model_terms.md)
+  [`model_beta_label()`](https://ggobi.github.io/ggally/dev/reference/model_terms.md)
+  : Model term names
+
+- [`scag_order()`](https://ggobi.github.io/ggally/dev/reference/scag_order.md)
+  : Find order of variables
+
+- [`scatmat()`](https://ggobi.github.io/ggally/dev/reference/scatmat.md)
+  : Plots the lowertriangle and density plots of the scatter plot
+  matrix.
+
+- [`singleClassOrder()`](https://ggobi.github.io/ggally/dev/reference/singleClassOrder.md)
+  : Order axis variables
+
+- [`skewness()`](https://ggobi.github.io/ggally/dev/reference/skewness.md)
+  : Sample skewness
+
+- [`reexports`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_model`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_compare`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_multinom`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`ggcoef_plot`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`signif_stars`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_cols`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`geom_stripped_rows`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_cross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatCross`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_prop`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatProp`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`stat_weighted_mean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  [`StatWeightedMean`](https://ggobi.github.io/ggally/dev/reference/reexports.md)
+  : Objects exported from other packages
+
+- [`uppertriangle()`](https://ggobi.github.io/ggally/dev/reference/uppertriangle.md)
+  :
+
+  Rearrange dataset as the preparation of `ggscatmat` function
+
+- [`vig_ggally()`](https://ggobi.github.io/ggally/dev/reference/vig_ggally.md)
+  : View GGally vignettes
+
+## Datasets
+
+- [`australia_PISA2012`](https://ggobi.github.io/ggally/dev/reference/australia_PISA2012.md)
+  : Programme for International Student Assessment (PISA) 2012 Data for
+  Australia
+- [`baseball`](https://ggobi.github.io/ggally/dev/reference/baseball.md)
+  : Yearly batting records for all major league baseball players
+- [`flea`](https://ggobi.github.io/ggally/dev/reference/flea.md) :
+  Historical data used for classification examples.
+- [`happy`](https://ggobi.github.io/ggally/dev/reference/happy.md) :
+  Data related to happiness from the General Social Survey, 1972-2006.
+- [`nasa`](https://ggobi.github.io/ggally/dev/reference/nasa.md) : Data
+  from the Data Expo JSM 2006.
+- [`nba_ppg_2008`](https://ggobi.github.io/ggally/dev/reference/nba_ppg_2008.md)
+  : NBA Player Statistics for 2008-2009 Season
+- [`pigs`](https://ggobi.github.io/ggally/dev/reference/pigs.md) :
+  United Kingdom Pig Production
+- [`psychademic`](https://ggobi.github.io/ggally/dev/reference/psychademic.md)
+  : UCLA canonical correlation analysis data
+- [`tips`](https://ggobi.github.io/ggally/dev/reference/tips.md) :
+  Tipping data
+- [`twitter_spambots`](https://ggobi.github.io/ggally/dev/reference/twitter_spambots.md)
+  : Twitter spambots
+
+## Legacy
+
+- [`v1_ggmatrix_theme()`](https://ggobi.github.io/ggally/dev/reference/v1_ggmatrix_theme.md)
+  **\[deprecated\]** :
+
+  Modify a `ggmatrix` object by adding an ggplot2 object to all
+
+- [`ggally_cor_v1_5()`](https://ggobi.github.io/ggally/dev/reference/ggally_cor_v1_5.md)
+  **\[deprecated\]** : Correlation value plot

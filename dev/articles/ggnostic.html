@@ -259,7 +259,7 @@ correlation values and general interaction behavior.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># look at variables for high correlation (none)</span></span>
 <span><span class="fu"><a href="../reference/ggscatmat.html">ggscatmat</a></span><span class="op">(</span><span class="va">state</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Population"</span>, <span class="st">"Murder"</span>, <span class="st">"HS.Grad"</span>, <span class="st">"Frost"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggnostic_files/figure-html/nostic_scatmat-1.png" width="700"></p>
+<p><img src="ggnostic_files/figure-html/nostic_scatmat-1.png" class="r-plt" alt="" width="700"></p>
 <p>All variables appear to be ok. Next, we look at the model
 diagnostics.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -269,7 +269,7 @@ diagnostics.</p>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
-<p><img src="ggnostic_files/figure-html/nostic_diag-1.png" width="700"></p>
+<p><img src="ggnostic_files/figure-html/nostic_diag-1.png" class="r-plt" alt="" width="700"></p>
 <ul>
 <li>The residuals appear to be normally distributed. There are a couple
 residual outliers, but 2.5 outliers are expected.</li>
@@ -292,7 +292,7 @@ model.</p>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
-<p><img src="ggnostic_files/figure-html/nostic_no_hawaii-1.png" width="700"></p>
+<p><img src="ggnostic_files/figure-html/nostic_no_hawaii-1.png" class="r-plt" alt="" width="700"></p>
 <p>There are no more outrageous Cook’s distance values. The model
 without Hawaii appears to be a good fitting model.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -384,14 +384,14 @@ response variables.</p>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
-<p><img src="ggnostic_files/figure-html/nostic_flea-1.png" width="700"></p>
+<p><img src="ggnostic_files/figure-html/nostic_flea-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># color'ed output</span></span>
 <span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span><span class="va">flea_model</span>, mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
-<p><img src="ggnostic_files/figure-html/nostic_flea-2.png" width="700"></p>
+<p><img src="ggnostic_files/figure-html/nostic_flea-2.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># full color'ed output</span></span>
 <span><span class="fu"><a href="../reference/ggnostic.html">ggnostic</a></span><span class="op">(</span></span>
@@ -406,7 +406,7 @@ response variables.</p>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess'</span></span></code></pre></div>
-<p><img src="ggnostic_files/figure-html/nostic_flea-3.png" width="700"></p>
+<p><img src="ggnostic_files/figure-html/nostic_flea-3.png" class="r-plt" alt="" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -422,7 +422,7 @@ response variables.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
   </div></footer>

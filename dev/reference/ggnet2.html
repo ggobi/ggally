@@ -473,147 +473,70 @@ Pedro Jordano and Ming-Yu Liu</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Small function to display plots only if it's interactive</span></span></span>
 <span class="r-in"><span><span class="va">p_</span> <span class="op">&lt;-</span> <span class="fu">GGally</span><span class="fu">::</span><span class="va"><a href="print_if_interactive.html">print_if_interactive</a></span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://statnet.org/" class="external-link">network</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://statnet.org/" class="external-link">network</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://statnet.org" class="external-link">sna</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># random adjacency matrix</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span>           <span class="op">&lt;-</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span>  <span class="va">ndyads</span>      <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">density</span>     <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">ndyads</span></span></span>
+<span class="r-in"><span>  <span class="va">m</span>           <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">x</span>, ncol <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/row.html" class="external-link">row</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/col.html" class="external-link">col</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">ndyads</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">density</span></span></span>
+<span class="r-in"><span>  <span class="va">m</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># random adjacency matrix</span></span></span>
-<span class="r-in"><span><span class="va">x</span>           <span class="op">&lt;-</span> <span class="fl">10</span></span></span>
-<span class="r-in"><span><span class="va">ndyads</span>      <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">density</span>     <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">ndyads</span></span></span>
-<span class="r-in"><span><span class="va">m</span>           <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">x</span>, ncol <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">m</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/row.html" class="external-link">row</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/col.html" class="external-link">col</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">ndyads</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">density</span></span></span>
-<span class="r-in"><span><span class="va">m</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   a b c d e f g h i j</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a 0 0 0 0 0 0 0 0 1 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b 0 0 1 0 0 0 1 0 1 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> d 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> e 0 1 0 1 0 0 0 0 0 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f 0 1 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g 0 1 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> h 0 0 1 0 1 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j 0 0 0 0 0 0 1 0 0 0</span>
+<span class="r-in"><span>  <span class="co"># random undirected network</span></span></span>
+<span class="r-in"><span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu">network</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">n</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># random undirected network</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu">network</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">n</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Network attributes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vertices = 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   directed = FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   hyper = FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   loops = FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   multiple = FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   bipartite = FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   total edges= 11 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     missing edges= 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     non-missing edges= 11 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Vertex attribute names: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     vertex.names </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No edge attributes</span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span>, color <span class="op">=</span> <span class="st">"black"</span>, label.color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># add vertex attribute</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html" class="external-link">network.vertex.names</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span><span class="op">)</span>, <span class="st">"vowel"</span>, <span class="st">"consonant"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"phono"</span> <span class="op">=</span> <span class="va">x</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vowel"</span> <span class="op">=</span> <span class="st">"gold"</span>, <span class="st">"consonant"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="st">"phono"</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="co"># random groups</span></span></span>
+<span class="r-in"><span>    <span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"group"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"group"</span>, palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># random weights</span></span></span>
+<span class="r-in"><span>  <span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%e%</a></span> <span class="st">"weight"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.edgecount.html" class="external-link">network.edgecount</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, edge.size <span class="op">=</span> <span class="st">"weight"</span>, edge.label <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># edge arrows on a directed network</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, arrow.gap <span class="op">=</span> <span class="fl">0.05</span>, arrow.size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Padgett's Florentine wedding data</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flo</span>, package <span class="op">=</span> <span class="st">"network"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">flo</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, label.trim <span class="op">=</span> <span class="fl">4</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">12</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-plt img"><img src="ggnet2-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, shape <span class="op">=</span> <span class="fl">15</span>, color <span class="op">=</span> <span class="st">"black"</span>, label.color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># add vertex attribute</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/network/man/attribute.methods.html" class="external-link">network.vertex.names</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"e"</span>, <span class="st">"i"</span><span class="op">)</span>, <span class="st">"vowel"</span>, <span class="st">"consonant"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"phono"</span> <span class="op">=</span> <span class="va">x</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"phono"</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vowel"</span> <span class="op">=</span> <span class="st">"gold"</span>, <span class="st">"consonant"</span> <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="st">"phono"</span>, color <span class="op">=</span> <span class="st">"phono"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Duplicated `override.aes` is ignored.</span>
 <span class="r-plt img"><img src="ggnet2-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># random groups</span></span></span>
-<span class="r-in"><span>  <span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%v%</a></span> <span class="st">"group"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, color <span class="op">=</span> <span class="st">"group"</span>, palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: RColorBrewer</span>
 <span class="r-plt img"><img src="ggnet2-7.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># random weights</span></span></span>
-<span class="r-in"><span><span class="va">n</span> <span class="op"><a href="https://rdrr.io/pkg/network/man/network.extraction.html" class="external-link">%e%</a></span> <span class="st">"weight"</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/pkg/network/man/network.edgecount.html" class="external-link">network.edgecount</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">n</span>, edge.size <span class="op">=</span> <span class="st">"weight"</span>, edge.label <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-8.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># edge arrows on a directed network</span></span></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/network/man/network.html" class="external-link">network</a></span><span class="op">(</span><span class="va">m</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, arrow.gap <span class="op">=</span> <span class="fl">0.05</span>, arrow.size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-9.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Padgett's Florentine wedding data</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">flo</span>, package <span class="op">=</span> <span class="st">"network"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">flo</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Acciaiuoli Albizzi Barbadori Bischeri Castellani Ginori</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Acciaiuoli            0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Albizzi               0       0         0        0          0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Barbadori             0       0         0        0          1      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bischeri              0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Castellani            0       0         1        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ginori                0       1         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Guadagni              0       1         0        1          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lamberteschi          0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Medici                1       1         1        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pazzi                 0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Peruzzi               0       0         0        1          1      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pucci                 0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ridolfi               0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Salviati              0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Strozzi               0       0         0        1          1      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tornabuoni            0       0         0        0          0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Guadagni Lamberteschi Medici Pazzi Peruzzi Pucci Ridolfi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Acciaiuoli          0            0      1     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Albizzi             1            0      1     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Barbadori           0            0      1     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bischeri            1            0      0     0       1     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Castellani          0            0      0     0       1     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ginori              0            0      0     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Guadagni            0            1      0     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lamberteschi        1            0      0     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Medici              0            0      0     0       0     0       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pazzi               0            0      0     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Peruzzi             0            0      0     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pucci               0            0      0     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ridolfi             0            0      1     0       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Salviati            0            0      1     1       0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Strozzi             0            0      0     0       1     0       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tornabuoni          1            0      1     0       0     0       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              Salviati Strozzi Tornabuoni</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Acciaiuoli          0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Albizzi             0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Barbadori           0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bischeri            0       1          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Castellani          0       1          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ginori              0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Guadagni            0       0          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lamberteschi        0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Medici              1       0          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pazzi               1       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Peruzzi             0       1          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pucci               0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ridolfi             0       1          1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Salviati            0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Strozzi             0       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tornabuoni          0       0          0</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-10.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, label.trim <span class="op">=</span> <span class="fl">4</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-11.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">p_</span><span class="op">(</span><span class="fu">ggnet2</span><span class="op">(</span><span class="va">flo</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">12</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ggnet2-12.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -628,7 +551,7 @@ Pedro Jordano and Ming-Yu Liu</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
   </div></footer></body></html>

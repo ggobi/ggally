@@ -1,0 +1,49 @@
+# Scatter plot
+
+Make a scatter plot with a given data set.
+
+## Usage
+
+``` r
+ggally_points(data, mapping, ...)
+```
+
+## Arguments
+
+- data:
+
+  data set using
+
+- mapping:
+
+  aesthetics being used
+
+- ...:
+
+  other arguments are sent to geom_point
+
+## Author
+
+Barret Schloerke
+
+## Examples
+
+``` r
+# Small function to display plots only if it's interactive
+p_ <- GGally::print_if_interactive
+
+data(mtcars)
+p_(ggally_points(mtcars, mapping = ggplot2::aes(disp, hp)))
+
+p_(ggally_points(mtcars, mapping = ggplot2::aes(disp, hp)))
+
+p_(ggally_points(
+  mtcars,
+  mapping = ggplot2::aes(
+    x     = disp,
+    y     = hp,
+    color = as.factor(cyl),
+    size  = gear
+  )
+))
+```
