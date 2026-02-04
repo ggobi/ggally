@@ -1,5 +1,6 @@
 # This file takes too long
 testthat::skip_on_cran()
+testthat::skip_if_not_installed("MASS")
 testthat::skip_if_not_installed("Hmisc")
 
 # list of the different plot types to check

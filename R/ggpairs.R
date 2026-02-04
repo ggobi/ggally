@@ -671,34 +671,37 @@ ggduo <- function(
 #' p_(pm)
 #'
 #' ## Plot Types
-#' # Change default plot behavior
-#' pm <- ggpairs(
-#'   tips[, c(1, 3, 4, 2)],
-#'   upper = list(continuous = "density", combo = "box_no_facet"),
-#'   lower = list(continuous = "points", combo = "dot_no_facet")
-#' )
-#' p_(pm)
-#' # Supply Raw Functions (may be user defined functions!)
-#' pm <- ggpairs(
-#'   tips[, c(1, 3, 4, 2)],
-#'   upper = list(continuous = ggally_density, combo = ggally_box_no_facet),
-#'   lower = list(continuous = ggally_points, combo = ggally_dot_no_facet)
-#' )
-#' p_(pm)
+#' if (require(MASS)) {
+#'   # Change default plot behavior
+#'   pm <- ggpairs(
+#'     tips[, c(1, 3, 4, 2)],
+#'     upper = list(continuous = "density", combo = "box_no_facet"),
+#'     lower = list(continuous = "points", combo = "dot_no_facet")
+#'   )
+#'   p_(pm)
 #'
-#' # Use sample of the diamonds data
-#' data(diamonds, package = "ggplot2")
-#' diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
+#'   # Supply Raw Functions (may be user defined functions!)
+#'   pm <- ggpairs(
+#'     tips[, c(1, 3, 4, 2)],
+#'     upper = list(continuous = ggally_density, combo = ggally_box_no_facet),
+#'     lower = list(continuous = ggally_points, combo = ggally_dot_no_facet)
+#'   )
+#'   p_(pm)
 #'
-#' # Different aesthetics for different plot sections and plot types
-#' pm <- ggpairs(
-#'   diamonds.samp[, 1:5],
-#'   mapping = ggplot2::aes(color = cut),
-#'   upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
-#'   lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
-#'   title = "Diamonds"
-#' )
-#' p_(pm)
+#'   # Use sample of the diamonds data
+#'   data(diamonds, package = "ggplot2")
+#'   diamonds.samp <- diamonds[sample(1:dim(diamonds)[1], 1000), ]
+#'
+#'   # Different aesthetics for different plot sections and plot types
+#'   pm <- ggpairs(
+#'     diamonds.samp[, 1:5],
+#'     mapping = ggplot2::aes(color = cut),
+#'     upper = list(continuous = wrap("density", alpha = 0.5), combo = "box_no_facet"),
+#'     lower = list(continuous = wrap("points", alpha = 0.3), combo = wrap("dot_no_facet", alpha = 0.4)),
+#'     title = "Diamonds"
+#'   )
+#'   p_(pm)
+#' }
 #'
 #' ## Axis Label Variations
 #' # Only Variable Labels on the diagonal (no axis labels)

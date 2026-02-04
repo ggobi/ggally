@@ -64,6 +64,7 @@ Suggests:
     labelled,
     mapproj,
     maps (>= 3.1.0),
+    MASS,
     network (>= 1.17.1),
     nnet,
     rmarkdown,

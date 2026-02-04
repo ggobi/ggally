@@ -201,6 +201,8 @@ test_that("ggally_statistic handles factors", {
 })
 
 test_that("rescale", {
+  skip_if_not_installed("MASS")
+
   p <- ggally_densityDiag(
     tips,
     mapping = ggplot2::aes(x = day),
