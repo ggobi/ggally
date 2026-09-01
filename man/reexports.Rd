@@ -5,7 +5,6 @@
 \alias{reexports}
 \alias{ggcoef_model}
 \alias{ggcoef_compare}
-\alias{ggcoef_multinom}
 \alias{ggcoef_plot}
 \alias{signif_stars}
 \alias{geom_stripped_cols}
@@ -23,6 +22,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ggstats}{\code{\link[ggstats:geom_stripped_rows]{geom_stripped_cols}}, \code{\link[ggstats]{geom_stripped_rows}}, \code{\link[ggstats:ggcoef_model]{ggcoef_compare}}, \code{\link[ggstats]{ggcoef_model}}, \code{\link[ggstats:ggcoef_multicomponents]{ggcoef_multinom}}, \code{\link[ggstats:ggcoef_model]{ggcoef_plot}}, \code{\link[ggstats]{signif_stars}}, \code{\link[ggstats]{stat_cross}}, \code{\link[ggstats]{stat_prop}}, \code{\link[ggstats]{stat_weighted_mean}}, \code{\link[ggstats:stat_cross]{StatCross}}, \code{\link[ggstats:stat_prop]{StatProp}}, \code{\link[ggstats:stat_weighted_mean]{StatWeightedMean}}}
+  \item{ggstats}{\code{\link[ggstats:geom_stripped_cols]{geom_stripped_cols()}}, \code{\link[ggstats:geom_stripped_rows]{geom_stripped_rows()}}, \code{\link[ggstats:ggcoef_compare]{ggcoef_compare()}}, \code{\link[ggstats:ggcoef_model]{ggcoef_model()}}, \code{\link[ggstats:ggcoef_plot]{ggcoef_plot()}}, \code{\link[ggstats:signif_stars]{signif_stars()}}, \code{\link[ggstats:stat_cross]{stat_cross()}}, \code{\link[ggstats:stat_prop]{stat_prop()}}, \code{\link[ggstats:stat_weighted_mean]{stat_weighted_mean()}}, \code{\link[ggstats:StatCross]{StatCross}}, \code{\link[ggstats:StatProp]{StatProp}}, \code{\link[ggstats:StatWeightedMean]{StatWeightedMean}}}
 }}
 
