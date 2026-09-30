@@ -42,5 +42,5 @@ if (require(broom)) {
 }
 }
 \seealso{
-\code{\link[stats:lm.influence]{stats::influence()}}
+\code{\link[stats:influence]{stats::influence()}}
 }

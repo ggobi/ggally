@@ -48,7 +48,7 @@ ggnet(
 that can be coerced to this class, such as an adjacency or incidence matrix,
 or an edge list: see \link[network]{edgeset.constructors} and
 \link[network]{network} for details. If the object is of class
-\link[igraph:aaa-igraph-package]{igraph} and the
+\link[igraph:igraph-package]{igraph} and the
 \link[intergraph:intergraph-package]{intergraph} package is installed,
 it will be used to convert the object: see
 \code{\link[intergraph]{asNetwork}} for details.}

@@ -23,7 +23,7 @@ ggally_nostic_cooksd(
 \pkg{ggplot2} plot object
 }
 \description{
-A function to display \code{\link[stats:influence.measures]{stats::cooks.distance()}}.
+A function to display \code{\link[stats:cooks.distance]{stats::cooks.distance()}}.
 }
 \details{
 A line is added at \eqn{F_{p,n-p}(0.5)}{F[p,n-p](0.5)} to display the general cutoff point for Cook's Distance.
@@ -40,5 +40,5 @@ if (require(broom)) {
 }
 }
 \seealso{
-\code{\link[stats:influence.measures]{stats::cooks.distance()}}
+\code{\link[stats:cooks.distance]{stats::cooks.distance()}}
 }

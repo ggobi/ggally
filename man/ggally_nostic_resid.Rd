@@ -28,7 +28,7 @@ ggally_nostic_resid(
 \item{data, mapping, ...}{parameters supplied to \code{\link{ggally_nostic_line}}}
 
 \item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
-\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}}}
+\code{\link[ggplot2:geom_line]{ggplot2::geom_line()}}}
 
 \item{lineConfColor, lineConfSize, lineConfAlpha, lineConfType}{parameters supplied to the
 confidence interval lines}
