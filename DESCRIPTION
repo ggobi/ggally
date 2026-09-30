@@ -77,6 +77,7 @@ Suggests:
 RdMacros:
     lifecycle
 Config/Needs/website: tidyverse/tidytemplate
+Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
 Config/usethis/last-upkeep: 2025-06-13
 Encoding: UTF-8
@@ -133,4 +134,3 @@ Collate:
     'utils.R'
     'vig_ggally.R'
     'zzz.R'
-Config/roxygen2/version: 8.1.0
