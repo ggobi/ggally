@@ -76,7 +76,6 @@ export(ggbivariate)
 export(ggcoef)
 export(ggcoef_compare)
 export(ggcoef_model)
-export(ggcoef_multinom)
 export(ggcoef_plot)
 export(ggcorr)
 export(ggduo)
@@ -165,7 +164,6 @@ importFrom(ggstats,
   geom_stripped_rows,
   ggcoef_compare,
   ggcoef_model,
-  ggcoef_multinom,
   ggcoef_plot,
   signif_stars,
   stat_cross,
