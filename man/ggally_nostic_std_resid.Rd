@@ -27,5 +27,5 @@ if (require(broom)) {
 }
 }
 \seealso{
-\code{\link[stats:influence.measures]{stats::rstandard()}}
+\code{\link[stats:rstandard]{stats::rstandard()}}
 }

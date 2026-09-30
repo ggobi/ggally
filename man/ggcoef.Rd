@@ -25,16 +25,16 @@ ggcoef(
 )
 }
 \arguments{
-\item{x}{a model object to be tidied with \code{\link[broom:reexports]{broom::tidy()}} or a data frame (see Details)}
+\item{x}{a model object to be tidied with \code{\link[broom:tidy]{broom::tidy()}} or a data frame (see Details)}
 
 \item{mapping}{default aesthetic mapping}
 
 \item{conf.int}{display confidence intervals as error bars?}
 
-\item{conf.level}{level of confidence intervals (passed to \code{\link[broom:reexports]{broom::tidy()}}
+\item{conf.level}{level of confidence intervals (passed to \code{\link[broom:tidy]{broom::tidy()}}
 if \code{x} is not a data frame)}
 
-\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom:reexports]{broom::tidy()}}
+\item{exponentiate}{if \code{TRUE}, x-axis will be logarithmic (also passed to \code{\link[broom:tidy]{broom::tidy()}}
 if \code{x} is not a data frame)}
 
 \item{exclude_intercept}{should the intercept be excluded from the plot?}

@@ -7,7 +7,7 @@
 broomify(model, lmStars = TRUE)
 }
 \arguments{
-\item{model}{model to be sent to \code{\link[broom:reexports]{broom::augment()}}, \code{\link[broom:reexports]{broom::glance()}}, and \code{\link[broom:reexports]{broom::tidy()}}}
+\item{model}{model to be sent to \code{\link[broom:augment]{broom::augment()}}, \code{\link[broom:glance]{broom::glance()}}, and \code{\link[broom:tidy]{broom::tidy()}}}
 
 \item{lmStars}{boolean that determines if stars are added to labels}
 }

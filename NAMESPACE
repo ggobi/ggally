@@ -140,72 +140,88 @@ import(RColorBrewer)
 import(S7)
 import(ggplot2)
 import(utils)
-importFrom(dplyr,.data)
-importFrom(dplyr,across)
-importFrom(dplyr,all_of)
-importFrom(dplyr,arrange)
-importFrom(dplyr,bind_cols)
-importFrom(dplyr,bind_rows)
-importFrom(dplyr,everything)
-importFrom(dplyr,group_by)
-importFrom(dplyr,last_col)
-importFrom(dplyr,mutate)
-importFrom(dplyr,n)
-importFrom(dplyr,pick)
-importFrom(dplyr,reframe)
-importFrom(dplyr,rename)
-importFrom(dplyr,summarise)
-importFrom(ggstats,StatCross)
-importFrom(ggstats,StatProp)
-importFrom(ggstats,StatWeightedMean)
-importFrom(ggstats,geom_stripped_cols)
-importFrom(ggstats,geom_stripped_rows)
-importFrom(ggstats,ggcoef_compare)
-importFrom(ggstats,ggcoef_model)
-importFrom(ggstats,ggcoef_multinom)
-importFrom(ggstats,ggcoef_plot)
-importFrom(ggstats,signif_stars)
-importFrom(ggstats,stat_cross)
-importFrom(ggstats,stat_prop)
-importFrom(ggstats,stat_weighted_mean)
-importFrom(grDevices,colorRampPalette)
-importFrom(grDevices,gray.colors)
-importFrom(grid,gpar)
-importFrom(grid,grid.draw)
-importFrom(grid,grid.layout)
-importFrom(grid,grid.newpage)
-importFrom(grid,grid.rect)
-importFrom(grid,grid.text)
-importFrom(grid,popViewport)
-importFrom(grid,pushViewport)
-importFrom(grid,seekViewport)
-importFrom(grid,upViewport)
-importFrom(grid,viewport)
+importFrom(dplyr,
+  .data,
+  across,
+  all_of,
+  arrange,
+  bind_cols,
+  bind_rows,
+  everything,
+  group_by,
+  last_col,
+  mutate,
+  n,
+  pick,
+  reframe,
+  rename,
+  summarise
+)
+importFrom(ggstats,
+  StatCross,
+  StatProp,
+  StatWeightedMean,
+  geom_stripped_cols,
+  geom_stripped_rows,
+  ggcoef_compare,
+  ggcoef_model,
+  ggcoef_multinom,
+  ggcoef_plot,
+  signif_stars,
+  stat_cross,
+  stat_prop,
+  stat_weighted_mean
+)
+importFrom(grDevices,
+  colorRampPalette,
+  gray.colors
+)
+importFrom(grid,
+  gpar,
+  grid.draw,
+  grid.layout,
+  grid.newpage,
+  grid.rect,
+  grid.text,
+  popViewport,
+  pushViewport,
+  seekViewport,
+  upViewport,
+  viewport
+)
 importFrom(gtable,gtable_filter)
-importFrom(lifecycle,deprecate_soft)
-importFrom(lifecycle,deprecated)
+importFrom(lifecycle,
+  deprecate_soft,
+  deprecated
+)
 importFrom(magrittr,"%>%")
-importFrom(rlang,"%||%")
-importFrom(rlang,":=")
-importFrom(rlang,.data)
-importFrom(rlang,sym)
-importFrom(stats,anova)
-importFrom(stats,complete.cases)
-importFrom(stats,cor)
-importFrom(stats,lm)
-importFrom(stats,mad)
-importFrom(stats,median)
-importFrom(stats,na.omit)
-importFrom(stats,pf)
-importFrom(stats,qnorm)
-importFrom(stats,quantile)
-importFrom(stats,sd)
-importFrom(stats,spline)
-importFrom(stats,symnum)
-importFrom(stats,terms)
-importFrom(stats,time)
+importFrom(rlang,
+  "%||%",
+  ":=",
+  .data,
+  sym
+)
+importFrom(stats,
+  anova,
+  complete.cases,
+  cor,
+  lm,
+  mad,
+  median,
+  na.omit,
+  pf,
+  qnorm,
+  quantile,
+  sd,
+  spline,
+  symnum,
+  terms,
+  time
+)
 importFrom(tidyr,pivot_longer)
-importFrom(utils,capture.output)
-importFrom(utils,head)
-importFrom(utils,installed.packages)
-importFrom(utils,str)
+importFrom(utils,
+  capture.output,
+  head,
+  installed.packages,
+  str
+)

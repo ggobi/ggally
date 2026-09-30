@@ -24,7 +24,7 @@ ggally_nostic_line(
 \item{...}{parameters supplied to \code{continuous_geom} or \code{combo_geom}}
 
 \item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
-\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}}}
+\code{\link[ggplot2:geom_line]{ggplot2::geom_line()}}}
 
 \item{continuous_geom}{\pkg{ggplot2} geom that is executed after the line is (possibly)
 added and if the x data is continuous}
