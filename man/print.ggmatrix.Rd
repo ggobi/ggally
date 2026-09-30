@@ -3,10 +3,6 @@
 \name{print.ggmatrix}
 \alias{print.ggmatrix}
 \title{Print \code{\link{ggmatrix}} object}
-\usage{
-## S7 method for class <GGally::ggmatrix>
-print(x, newpage = TRUE, vp = NULL, ...)
-}
 \arguments{
 \item{x}{plot to display}
 

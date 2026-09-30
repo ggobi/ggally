@@ -3,10 +3,6 @@
 \name{str.ggmatrix}
 \alias{str.ggmatrix}
 \title{\code{\link{ggmatrix}} structure}
-\usage{
-## S7 method for class <GGally::ggmatrix>
-str(object, ..., raw = FALSE)
-}
 \arguments{
 \item{object}{\code{\link{ggmatrix}} object to be viewed}
 
