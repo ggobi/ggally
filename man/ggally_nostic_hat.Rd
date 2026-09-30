@@ -24,10 +24,10 @@ ggally_nostic_hat(
 \item{data, mapping, ...}{supplied directly to \code{\link{ggally_nostic_line}}}
 
 \item{linePosition, lineColor, lineSize, lineAlpha, lineType}{parameters supplied to
-\code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} for the cutoff line}
+\code{\link[ggplot2:geom_line]{ggplot2::geom_line()}} for the cutoff line}
 
 \item{avgLinePosition, avgLineColor, avgLineSize, avgLineAlpha, avgLineType}{parameters supplied
-to \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} for the average line}
+to \code{\link[ggplot2:geom_line]{ggplot2::geom_line()}} for the average line}
 }
 \value{
 \pkg{ggplot2} plot object
@@ -36,7 +36,7 @@ to \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} for the average line}
 A function to display stats::influence's hat information against a given explanatory variable.
 }
 \details{
-As stated in \code{\link[stats:lm.influence]{stats::influence()}} documentation:
+As stated in \code{\link[stats:influence]{stats::influence()}} documentation:
 
 hat: a vector containing the diagonal of the 'hat' matrix.
 
@@ -55,5 +55,5 @@ if (require(broom)) {
 }
 }
 \seealso{
-\code{\link[stats:lm.influence]{stats::influence()}}
+\code{\link[stats:influence]{stats::influence()}}
 }

@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Barret Schloerke \email{schloerke@gmail.com} (\href{https://orcid.org/0000-0001-9986-114X}{ORCID})
   \item Di Cook \email{dicook@monash.edu} (\href{https://orcid.org/0000-0002-3813-7155}{ORCID}) [thesis advisor]
   \item Joseph Larmarange \email{joseph@larmarange.net} (\href{https://orcid.org/0000-0001-7097-700X}{ORCID})
   \item Francois Briatte \email{f.briatte@gmail.com}

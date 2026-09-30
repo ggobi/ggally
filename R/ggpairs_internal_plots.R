@@ -274,6 +274,7 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #' @param raw boolean to determine if the plots should be converted to text or kept as original objects
 #' @importFrom utils str
 #' @name str.ggmatrix
+#' @usage NULL
 method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
   if (isTRUE(raw)) {
     # S7's str method
