@@ -14,10 +14,9 @@ broomify(model, lmStars = TRUE)
 - model:
 
   model to be sent to
-  [`broom::augment()`](https://broom.tidymodels.org/reference/reexports.html),
-  [`broom::glance()`](https://broom.tidymodels.org/reference/reexports.html),
-  and
-  [`broom::tidy()`](https://broom.tidymodels.org/reference/reexports.html)
+  [`broom::augment()`](https://generics.r-lib.org/reference/augment.html),
+  [`broom::glance()`](https://generics.r-lib.org/reference/glance.html),
+  and [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html)
 
 - lmStars:
 
@@ -63,7 +62,7 @@ if (require(broom)) {
 #>   .. ..- attr(*, "order")= int [1:3] 1 1 1
 #>   .. ..- attr(*, "intercept")= int 1
 #>   .. ..- attr(*, "response")= int 1
-#>   .. ..- attr(*, ".Environment")=<environment: 0x562403f269e8> 
+#>   .. ..- attr(*, ".Environment")=<environment: 0x55fdfa73d7e0> 
 #>   .. ..- attr(*, "predvars")= language list(mpg, wt, qsec, am)
 #>   .. ..- attr(*, "dataClasses")= Named chr [1:4] "numeric" "numeric" "numeric" "numeric"
 #>   .. .. ..- attr(*, "names")= chr [1:4] "mpg" "wt" "qsec" "am"

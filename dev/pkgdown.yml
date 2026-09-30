@@ -1,5 +1,5 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   ggally_plots: ggally_plots.html
@@ -16,7 +16,7 @@ articles:
   ggsurv: ggsurv.html
   ggtable: ggtable.html
   glyph: glyph.html
-last_built: 2026-02-04T03:40Z
+last_built: 2026-09-30T17:42Z
 urls:
   reference: https://ggobi.github.io/ggally/reference
   article: https://ggobi.github.io/ggally/articles

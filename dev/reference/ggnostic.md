@@ -55,7 +55,7 @@ ggnostic(
   one out sigma value, diagonal of the hat matrix, and Cook's Distance.
   The possible values are the response variables in the model and the
   added columns provided by
-  [`broom::augment()`](https://broom.tidymodels.org/reference/reexports.html).
+  [`broom::augment()`](https://generics.r-lib.org/reference/augment.html).
   See details for more information.
 
 - columnLabelsX, columnLabelsY:
@@ -91,7 +91,7 @@ ggnostic(
 
 ## `columnsY`
 
-[`broom::augment()`](https://broom.tidymodels.org/reference/reexports.html)
+[`broom::augment()`](https://generics.r-lib.org/reference/augment.html)
 collects data from the supplied model and returns a data.frame with the
 following columns (taken directly from broom documentation). These
 columns are the only allowed values in the `columnsY` parameter to
@@ -141,7 +141,7 @@ functions may be supplied to display the different column types.
 However, since the Y rows are fixed, each row has it's own corresponding
 function in each of the plot types: continuous, combo, and discrete.
 Each plot type list can have keys that correspond to the
-[`broom::augment()`](https://broom.tidymodels.org/reference/reexports.html)
+[`broom::augment()`](https://generics.r-lib.org/reference/augment.html)
 output: `".fitted"`, `".resid"`, `".std.resid"`, `".sigma"`,
 `".se.fit"`, `".hat"`, `".cooksd"`. An extra key, `"default"`, is used
 to plot the response variables of the model if they are included. Having

@@ -41,7 +41,9 @@ ggnetworkmap(
   incidence matrix, or an edge list: see
   [edgeset.constructors](https://rdrr.io/pkg/network/man/edgeset.constructors.html)
   and [network](https://rdrr.io/pkg/network/man/network.html) for
-  details. If the object is of class igraph and the
+  details. If the object is of class
+  [igraph](https://r.igraph.org/reference/aaa-igraph-package.html) and
+  the
   [intergraph](https://rdrr.io/pkg/intergraph/man/intergraph-package.html)
   package is installed, it will be used to convert the object: see
   [`asNetwork`](https://rdrr.io/pkg/intergraph/man/asNetwork.html) for

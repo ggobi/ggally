@@ -33,8 +33,8 @@ ggcoef(
 - x:
 
   a model object to be tidied with
-  [`broom::tidy()`](https://broom.tidymodels.org/reference/reexports.html)
-  or a data frame (see Details)
+  [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html) or a
+  data frame (see Details)
 
 - mapping:
 
@@ -47,14 +47,14 @@ ggcoef(
 - conf.level:
 
   level of confidence intervals (passed to
-  [`broom::tidy()`](https://broom.tidymodels.org/reference/reexports.html)
-  if `x` is not a data frame)
+  [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html) if
+  `x` is not a data frame)
 
 - exponentiate:
 
   if `TRUE`, x-axis will be logarithmic (also passed to
-  [`broom::tidy()`](https://broom.tidymodels.org/reference/reexports.html)
-  if `x` is not a data frame)
+  [`broom::tidy()`](https://generics.r-lib.org/reference/tidy.html) if
+  `x` is not a data frame)
 
 - exclude_intercept:
 

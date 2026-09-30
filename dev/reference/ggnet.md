@@ -62,7 +62,9 @@ ggnet(
   incidence matrix, or an edge list: see
   [edgeset.constructors](https://rdrr.io/pkg/network/man/edgeset.constructors.html)
   and [network](https://rdrr.io/pkg/network/man/network.html) for
-  details. If the object is of class igraph and the
+  details. If the object is of class
+  [igraph](https://r.igraph.org/reference/aaa-igraph-package.html) and
+  the
   [intergraph](https://rdrr.io/pkg/intergraph/man/intergraph-package.html)
   package is installed, it will be used to convert the object: see
   [`asNetwork`](https://rdrr.io/pkg/intergraph/man/asNetwork.html) for
@@ -329,7 +331,7 @@ if (require(network) && require(sna)) {
 }
 #> Loading required package: network
 #> 
-#> ‘network’ 1.19.0 (2024-12-08), part of the Statnet Project
+#> ‘network’ 1.20.0 (2026-02-06), part of the Statnet Project
 #> * ‘news(package="network")’ for changes since last version
 #> * ‘citation("network")’ for citation information
 #> * ‘https://statnet.org’ for help, support, and other information
@@ -355,9 +357,8 @@ if (require(network) && require(sna)) {
 #>  Type help(package="sna") to get started.
 #> Warning: `ggnet()` was deprecated in GGally 2.2.2.
 #> ℹ Please use `ggnet2()` instead.
+#> Warning: node groups and colors are of unequal length; using grayscale colors
 
-#> Warning: Removed 1 row containing missing values or values outside the scale
-#> range (`geom_segment()`).
 #> Warning: Removed 1 row containing missing values or values outside the scale
 #> range (`geom_segment()`).
 ```

@@ -267,27 +267,20 @@ p_(pm)
 #  the two sets of variables."
 data(psychademic)
 summary(psychademic)
-#>  locus_of_control    self_concept        motivation       
-#>  Min.   :-2.23000   Min.   :-2.620000   Length:600        
-#>  1st Qu.:-0.37250   1st Qu.:-0.300000   Class :character  
-#>  Median : 0.21000   Median : 0.030000   Mode  :character  
-#>  Mean   : 0.09653   Mean   : 0.004917                     
-#>  3rd Qu.: 0.51000   3rd Qu.: 0.440000                     
-#>  Max.   : 1.36000   Max.   : 1.190000                     
-#>       read          write            math          science     
-#>  Min.   :28.3   Min.   :25.50   Min.   :31.80   Min.   :26.00  
-#>  1st Qu.:44.2   1st Qu.:44.30   1st Qu.:44.50   1st Qu.:44.40  
-#>  Median :52.1   Median :54.10   Median :51.30   Median :52.60  
-#>  Mean   :51.9   Mean   :52.38   Mean   :51.85   Mean   :51.76  
-#>  3rd Qu.:60.1   3rd Qu.:59.90   3rd Qu.:58.38   3rd Qu.:58.65  
-#>  Max.   :76.0   Max.   :67.10   Max.   :75.50   Max.   :74.20  
-#>      sex           
-#>  Length:600        
-#>  Class :character  
-#>  Mode  :character  
-#>                    
-#>                    
-#>                    
+#>  locus_of_control    self_concept           motivation       read     
+#>  Min.   :-2.23000   Min.   :-2.620000   Length   :600   Min.   :28.3  
+#>  1st Qu.:-0.37250   1st Qu.:-0.300000   N.unique :  4   1st Qu.:44.2  
+#>  Median : 0.21000   Median : 0.030000   N.blank  :  0   Median :52.1  
+#>  Mean   : 0.09653   Mean   : 0.004917   Min.nchar:  1   Mean   :51.9  
+#>  3rd Qu.: 0.51000   3rd Qu.: 0.440000   Max.nchar:  1   3rd Qu.:60.1  
+#>  Max.   : 1.36000   Max.   : 1.190000                   Max.   :76.0  
+#>      write            math          science             sex     
+#>  Min.   :25.50   Min.   :31.80   Min.   :26.00   Length   :600  
+#>  1st Qu.:44.30   1st Qu.:44.50   1st Qu.:44.40   N.unique :  2  
+#>  Median :54.10   Median :51.30   Median :52.60   N.blank  :  0  
+#>  Mean   :52.38   Mean   :51.85   Mean   :51.76   Min.nchar:  4  
+#>  3rd Qu.:59.90   3rd Qu.:58.38   3rd Qu.:58.65   Max.nchar:  6  
+#>  Max.   :67.10   Max.   :75.50   Max.   :74.20                  
 
 (psych_variables <- attr(psychademic, "psychology"))
 #> [1] "locus_of_control" "self_concept"     "motivation"      

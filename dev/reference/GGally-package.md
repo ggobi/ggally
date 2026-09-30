@@ -24,6 +24,9 @@ Useful links:
 
 Authors:
 
+- Barret Schloerke <schloerke@gmail.com>
+  ([ORCID](https://orcid.org/0000-0001-9986-114X))
+
 - Di Cook <dicook@monash.edu>
   ([ORCID](https://orcid.org/0000-0002-3813-7155)) \[thesis advisor\]
 
