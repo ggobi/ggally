@@ -9,7 +9,7 @@
 ## usethis namespace: end
 NULL
 
-#' @rawNamespace import(S7, except = `:=`)
+#' @import S7
 # > ...import the S7 package into your namespace.
 # https://github.com/RConsortium/S7/issues/530#issuecomment-2730659813
 NULL

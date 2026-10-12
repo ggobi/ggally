@@ -38,7 +38,7 @@
 #'   ggplot2::theme_bw() +
 #'   ggplot2::labs(x = "", y = ""))
 #' @importFrom dplyr across arrange everything last_col summarise
-#' @importFrom rlang := sym
+#' @importFrom rlang sym
 glyphs <- function(
   data,
   x_major,

@@ -137,7 +137,7 @@ export(wrapp)
 if (getRversion() < "4.3.0") importFrom("S7", "@")
 if (utils::packageVersion("ggplot2") < "3.5.2.9001") S3method("+",ggmatrix)
 import(RColorBrewer)
-import(S7, except = `:=`)
+import(S7)
 import(ggplot2)
 import(utils)
 importFrom(dplyr,
@@ -197,7 +197,6 @@ importFrom(lifecycle,
 importFrom(magrittr,"%>%")
 importFrom(rlang,
   "%||%",
-  ":=",
   .data,
   sym
 )
