@@ -96,6 +96,34 @@ test_that("scales", {
   }
 })
 
+test_that("scales are applied within each glyph", {
+  dt <- do_glyph(x_scale = max1, y_scale = range01)
+
+  for (g in split(dt, dt$gid)) {
+    expect_equal(max(g$day), 1)
+    expect_equal(range(g$surftemp), c(0, 1))
+  }
+
+  # same column for both minor axes: y_scale is applied after x_scale
+  dt <- glyphs(
+    nasaLate,
+    "long",
+    "day",
+    "lat",
+    "day",
+    height = 2.37,
+    width = 2.38,
+    x_scale = function(x) x * 2,
+    y_scale = function(x) x + 1
+  )
+  dtm <- merge(
+    dt[c("long", "lat", "date", "day")],
+    nasaLate,
+    by = c("long", "lat", "date")
+  )
+  expect_equal(dtm$day.x, dtm$day.y * 2 + 1)
+})
+
 test_that("polar", {
   dt <- do_glyph(polar = TRUE)
 
