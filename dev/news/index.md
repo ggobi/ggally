@@ -41,6 +41,14 @@
   paths from `.Rbuildignore` for macOS testing.
   ([\#573](https://github.com/ggobi/ggally/issues/573))
 
+- `ggcoef_multinom()` has been removed. Simply use
+  [`ggstats::ggcoef_model()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html),
+  [`ggstats::ggcoef_table()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html),
+  [`ggstats::ggcoef_dodged()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html)
+  or
+  [`ggstats::ggcoef_faceted()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html).
+  ([\#575](https://github.com/ggobi/ggally/issues/575))
+
 ## GGally 2.4.0
 
 CRAN release: 2025-08-23
@@ -251,8 +259,7 @@ CRAN release: 2021-01-06
   redesign based on `broom.helpers` with four new functions:
   [`ggcoef_model()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html),
   [`ggcoef_compare()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html),
-  [`ggcoef_multinom()`](https://larmarange.github.io/ggstats/reference/ggcoef_multicomponents.html)
-  and
+  `ggcoef_multinom()` and
   [`ggcoef_plot()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html)
   (more informations in the dedicated vignette,
   [@larmarange](https://github.com/larmarange),
