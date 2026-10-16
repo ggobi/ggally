@@ -37,8 +37,7 @@
 #'   ggplot2::geom_path() +
 #'   ggplot2::theme_bw() +
 #'   ggplot2::labs(x = "", y = ""))
-#' @importFrom dplyr across arrange everything last_col summarise
-#' @importFrom rlang := sym
+#' @importFrom dplyr across all_of arrange everything last_col summarise
 glyphs <- function(
   data,
   x_major,
@@ -66,8 +65,8 @@ glyphs <- function(
   if (!identical(x_scale, identity) || !identical(y_scale, identity)) {
     data <- data |>
       mutate(
-        "{x_minor}" := x_scale(!!sym(x_minor)),
-        "{y_minor}" := y_scale(!!sym(y_minor)),
+        across(all_of(x_minor), x_scale),
+        across(all_of(y_minor), y_scale),
         .by = "gid"
       )
   }

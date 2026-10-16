@@ -195,9 +195,7 @@ importFrom(lifecycle,
 importFrom(magrittr,"%>%")
 importFrom(rlang,
   "%||%",
-  ":=",
-  .data,
-  sym
+  .data
 )
 importFrom(stats,
   anova,
