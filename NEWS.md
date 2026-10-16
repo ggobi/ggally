@@ -14,6 +14,8 @@
 
 * Added GitHub Actions check script to conditionally remove snapshot paths from `.Rbuildignore` for macOS testing. (#573)
 
+* `ggcoef_multinom()` has been removed. Simply use `ggstats::ggcoef_model()`, `ggstats::ggcoef_table()`, `ggstats::ggcoef_dodged()` or `ggstats::ggcoef_faceted()`. (#575)
+
 # GGally 2.4.0
 
 * Replace internal usage with the base pipe (`|>`). (Thank you @m-muecke! #554)
