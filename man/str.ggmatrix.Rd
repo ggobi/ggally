@@ -3,6 +3,9 @@
 \name{str.ggmatrix}
 \alias{str.ggmatrix}
 \title{\code{\link{ggmatrix}} structure}
+\usage{
+\method{str}{ggmatrix}(object, ..., raw = FALSE)
+}
 \arguments{
 \item{object}{\code{\link{ggmatrix}} object to be viewed}
 
