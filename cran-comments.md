@@ -18,6 +18,21 @@ Barret
 
 ## revdepcheck results
 
-We checked N reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 184 reverse dependencies (154 from CRAN + 30 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
+ * We failed to check 7 packages
+
+Issues with CRAN packages are summarised below.
+
+### Failed to check
+
+* airGR       (NA)
+* BAS         (NA)
+* fingerPro   (NA)
+* jarbes      (NA)
+* loon.ggplot (NA)
+* morseDR     (NA)
+* simmr       (NA)
+
+All 7 failed to install on my machine with both the CRAN and dev versions of GGally, due to local system setup (compiler flags, JAGS, Tcl/Tk). They are not caused by this release.
