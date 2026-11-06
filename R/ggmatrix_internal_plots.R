@@ -75,17 +75,13 @@ as.character.ggmatrix_plot_obj <- function(x, ...) {
 #'
 #' View the condensed version of the \code{\link{ggmatrix}} object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
 #'
-#' @details
-#' Arguments:
-#' \describe{
-#'   \item{\code{object}}{\code{\link{ggmatrix}} object to be viewed}
-#'   \item{\code{...}}{passed on to the default \code{str} method}
-#'   \item{\code{raw}}{boolean to determine if the plots should be converted to text or kept as original objects}
-#' }
+#' @param object \code{\link{ggmatrix}} object to be viewed
+#' @param ... passed on to the default \code{str} method
+#' @param raw boolean to determine if the plots should be converted to text or kept as original objects
 #' @importFrom utils str
 #' @name str.ggmatrix
-#' @usage NULL
-method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
+#' @usage \method{str}{ggmatrix}(object, ..., raw = FALSE)
+str.ggmatrix <- function(object, ..., raw = FALSE) {
   if (isTRUE(raw)) {
     # S7's str method
     NextMethod()
@@ -121,3 +117,4 @@ method(str, ggmatrix) <- function(object, ..., raw = FALSE) {
   class(obj) <- NULL
   str(obj, ...)
 }
+method(str, ggmatrix) <- str.ggmatrix
