@@ -26,6 +26,10 @@ library(GGally)
 This function rearranges data to be able to construct a glyph plot
 
 ```{r glyphs-basic-usage, fig.height=7, fig.width=7}
+#| fig.alt: >
+#|   Glyph map over a grid of longitude and latitude in Central America, where each grid cell holds a small
+#|   line of monthly surface temperature over 6 years inside a grey reference box. Many cells are nearly flat,
+#|   while cells in the top left over land show strong seasonal waves.
 library(ggplot2)
 data(nasa)
 temp.gly <- glyphs(nasa, "long", "day", "lat", "surftemp", height = 2.5)

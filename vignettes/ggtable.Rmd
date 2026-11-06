@@ -31,6 +31,7 @@ The purpose of this function is to quickly plot cross-tabulated tables of discre
 To display tables with the number of observations, simply indicate variables to present in columns and in rows.
 
 ```{r}
+#| fig.alt: !expr c("Column of three cross-tabulated count tables, with smoker status across the top and day, time, and sex as the stacked rows. Each cell shows the number of tips.", "Grid of cross-tabulated count tables with smoker status and time as the two columns and day, time, and sex as the three rows.")
 data(tips)
 ggtable(tips, "smoker", c("day", "time", "sex"))
 ggtable(tips, c("smoker", "time"), c("day", "time", "sex"))
@@ -41,9 +42,10 @@ ggtable(tips, c("smoker", "time"), c("day", "time", "sex"))
 The `cells` argument allows you to control what to display. For proportions of the total, row proportions or columns proportions, simply use `"prop"`, `"row.prop"` or `"col.prop"`.
 
 ```{r}
+#| fig.alt: !expr c("Column of three cross-tabulated tables of smoker status by day, time, and sex, titled 'Proportions of total', with each cell showing its percentage of all tips.", "Column of three cross-tabulated tables of smoker status by day, time, and sex, titled 'Row proportions', with each cell showing its percentage within its table row (one day, time, or sex).", "Column of three cross-tabulated tables of smoker status by day, time, and sex, titled 'Column proportions', with each cell showing its percentage within its smoker column.")
 ggtable(tips, "smoker", c("day", "time", "sex"), cells = "prop") + ggtitle("Proportions of total")
 ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop") + ggtitle("Row proportions")
-ggtable(tips, "smoker", c("day", "time", "sex"), cells = "prop") + ggtitle("Column proportions")
+ggtable(tips, "smoker", c("day", "time", "sex"), cells = "col.prop") + ggtitle("Column proportions")
 ```
 
 ## Filling cells with residuals
@@ -53,6 +55,8 @@ Chi-square standardized residuals indicates which cells are over- or underrepres
 To fill cells with standardized residuals, simply indicate `fill = "std.resid"`.
 
 ```{r}
+#| fig.alt: >
+#|   Column of three cross-tabulated count tables of smoker status by day, time, and sex, with cells filled by standardized residual from red (fewer than expected) to blue (more than expected). Smokers are over-represented on Friday and Saturday and under-represented on Thursday and Sunday, while time and sex cells stay near zero.
 ggtable(tips, "smoker", c("day", "time", "sex"), fill = "std.resid")
 ```
 
@@ -61,6 +65,8 @@ ggtable(tips, "smoker", c("day", "time", "sex"), fill = "std.resid")
 You can easily indicate weights to take into account with the **weight** aesthetic.
 
 ```{r}
+#| fig.alt: >
+#|   Column of three cross-tabulated tables of Titanic survival by age, class, and sex, showing row percentages weighted by passenger count and filled by standardized residual. Survivors are strongly over-represented among women, children, and first class, and under-represented among men, the crew, and third class.
 d <- as.data.frame(Titanic)
 ggtable(
   d,
@@ -77,6 +83,8 @@ ggtable(
 Although `ggtable()` is mainly intended to be used with discrete variables, you can also indicate continuous variables. In such case, some summary statistics are displayed.
 
 ```{r}
+#| fig.alt: >
+#|   Grid of panels with smoker status and total bill as the columns and day, time, sex, and tip as the rows. Discrete pairs show count tables, and pairs with a continuous variable show summary statistics as text.
 ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip"))
 ```
 

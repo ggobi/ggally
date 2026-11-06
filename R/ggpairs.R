@@ -32,20 +32,6 @@
 #     barDiag
 #     blankDiag
 
-crosstalk_key <- function() {
-  ".crossTalkKey"
-}
-
-fortify_SharedData <- function(model, data, ...) {
-  key <- model$key()
-  set <- model$groupName()
-  data <- model$origData()
-  # need a consistent name so we know how to access it in ggplotly()
-  # MUST be added last. can NOT be done first
-  data[[crosstalk_key()]] <- key
-  structure(data, set = set)
-}
-
 fix_data <- function(data) {
   if (inherits(data, "SharedData")) {
     data <- fortify_SharedData(data)
@@ -71,13 +57,6 @@ fix_data <- function(data) {
 
   data
 }
-fix_data_slim <- function(data, isSharedData) {
-  if (isSharedData) {
-    data[[crosstalk_key()]] <- NULL
-  }
-  data
-}
-
 
 fix_column_values <- function(
   data,
