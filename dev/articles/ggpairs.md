@@ -47,7 +47,12 @@ pm
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggpairs_files/figure-html/ggpairs_columns-1.png)
+![Pairs plot matrix of all seven tips columns: total_bill, tip, sex,
+smoker, day, time, and size. Upper panels show correlations, boxplots,
+or count tiles, lower panels show scatterplots, histograms, or bar
+charts, and the diagonal shows densities or bar counts; with 49 panels
+it is too crowded to
+read.](ggpairs_files/figure-html/ggpairs_columns-1.png)
 
 ``` r
 
@@ -62,7 +67,12 @@ pm
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggpairs_files/figure-html/ggpairs_columns-2.png)
+![Three-by-three pairs plot matrix of Total Bill, Time of Day, and Tip.
+The diagonal shows densities for the bill and tip and a bar chart for
+time; the upper panels show the bill-tip correlation (0.676) and
+boxplots by time, and the lower panels show a rising bill-tip
+scatterplot and histograms faceted by
+time.](ggpairs_files/figure-html/ggpairs_columns-2.png)
 
 Aesthetics can be applied to every subplot with the `mapping` parameter.
 
@@ -75,7 +85,11 @@ pm
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggpairs_files/figure-html/ggpairs_mapping-1.png)
+![Three-by-three pairs plot matrix of total_bill, time, and tip,
+coloured by sex. Every panel splits by sex: the bill-tip scatterplot
+uses coloured points, the time panels use filled boxes and bars, and the
+correlation panel lists overall, female, and male
+correlations.](ggpairs_files/figure-html/ggpairs_mapping-1.png)
 
 Since the plots are default plots (or are helper functions from GGally),
 the aesthetic color is altered to be appropriate. Looking at the example
@@ -126,7 +140,11 @@ pm <- ggpairs(
 pm
 ```
 
-![](ggpairs_files/figure-html/ggpairs_section-1.png)
+![Three-by-three pairs plot matrix of total_bill, time, and tip with a
+customised lower section coloured by time. The lower bill-tip panel is a
+scatterplot with a fitted smooth line, and the lower time panels show
+faceted density curves; the upper panels and diagonal keep the
+defaults.](ggpairs_files/figure-html/ggpairs_section-1.png)
 
 A section list may be set to the character string `"blank"` or `NULL` if
 the section should be skipped when printed.
@@ -144,7 +162,10 @@ pm
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggpairs_files/figure-html/ggpairs_blank-1.png)
+![Three-by-three pairs plot matrix of total_bill, time, and tip with the
+upper triangle and diagonal left empty. Only the lower panels are drawn:
+histograms of total_bill and tip faceted by time, and a scatterplot of
+tip versus total_bill.](ggpairs_files/figure-html/ggpairs_blank-1.png)
 
 ### Custom Functions
 
@@ -185,7 +206,11 @@ pm
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggpairs_files/figure-html/ggpairs_custom_function-1.png)
+![Three-by-three pairs plot matrix of total_bill, time, and tip where
+the lower continuous panel is a 2D binned heatmap of tip versus
+total_bill shaded from dark to light blue by count. The densest bins sit
+at low bills and low tips; the other panels use the
+defaults.](ggpairs_files/figure-html/ggpairs_custom_function-1.png)
 
 ### Function Wrapping
 
@@ -215,7 +240,11 @@ pm <- ggpairs(
 pm
 ```
 
-![](ggpairs_files/figure-html/ggpairs_wrap-1.png)
+![Three-by-three pairs plot matrix of total_bill, time, and tip with
+wrapped lower functions. The lower tip-versus-bill panel is a 2D binned
+heatmap with wider bins shaded dark blue to red, and the lower time
+panels are histograms with a bin width of
+1.](ggpairs_files/figure-html/ggpairs_wrap-1.png)
 
 To get finer control over parameters, please look into custom functions.
 
@@ -237,7 +266,10 @@ p <- p + aes(color = time)
 p
 ```
 
-![](ggpairs_files/figure-html/ggpairs_matrix-1.png)
+![Single scatterplot of tip versus total_bill, the third-row,
+first-column panel taken from the pairs matrix, with points coloured by
+time (Dinner or Lunch). Tips rise with the bill for both meal
+times.](ggpairs_files/figure-html/ggpairs_matrix-1.png)
 
 ``` r
 
@@ -247,7 +279,10 @@ pm
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggpairs_files/figure-html/ggpairs_matrix-2.png)
+![Three-by-three pairs plot matrix of total_bill, time, and tip with
+default panels, except the lower-left tip-versus-total_bill scatterplot,
+which now has points coloured by
+time.](ggpairs_files/figure-html/ggpairs_matrix-2.png)
 
 ### Themes
 
@@ -266,7 +301,11 @@ pmBW
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggpairs_files/figure-html/ggpairs_theme-1.png)
+![The same three-by-three pairs plot matrix of total_bill, time, and
+tip, with the lower-left scatterplot coloured by time, now drawn with
+the black-and-white theme: white panel backgrounds, grey grid lines, and
+a border around each
+panel.](ggpairs_files/figure-html/ggpairs_theme-1.png)
 
 ### References
 

@@ -146,7 +146,11 @@ correlation values and general interaction behavior.
 ggscatmat(state, columns = c("Population", "Murder", "HS.Grad", "Frost"))
 ```
 
-![](ggnostic_files/figure-html/nostic_scatmat-1.png)
+![Scatterplot matrix of state population, murder rate, high school
+graduation rate, and frost days, with density curves on the diagonal and
+correlations in the upper panels. No pair has a correlation above 0.8 in
+absolute value; the strongest is murder and frost at
+-0.54.](ggnostic_files/figure-html/nostic_scatmat-1.png)
 
 All variables appear to be ok. Next, we look at the model diagnostics.
 
@@ -160,7 +164,11 @@ ggnostic(model)
 #> `geom_smooth()` using method = 'loess'
 ```
 
-![](ggnostic_files/figure-html/nostic_diag-1.png)
+![Diagnostic plot matrix for the life expectancy model with columns for
+population, murder, high school graduation, and frost, and rows for
+residuals, leave-one-out sigma, leverage, and Cook's distance, each with
+reference lines. One point, Hawaii, has a Cook's distance far above all
+others.](ggnostic_files/figure-html/nostic_diag-1.png)
 
 - The residuals appear to be normally distributed. There are a couple
   residual outliers, but 2.5 outliers are expected.
@@ -186,7 +194,11 @@ ggnostic(model_no_hawaii)
 #> `geom_smooth()` using method = 'loess'
 ```
 
-![](ggnostic_files/figure-html/nostic_no_hawaii-1.png)
+![Diagnostic plot matrix for the life expectancy model without Hawaii,
+with columns for population, murder, high school graduation, and frost,
+and rows for residuals, leave-one-out sigma, leverage, and Cook's
+distance. No Cook's distance value now stands far apart from the
+rest.](ggnostic_files/figure-html/nostic_no_hawaii-1.png)
 
 There are no more outrageous Cook’s distance values. The model without
 Hawaii appears to be a good fitting model.
@@ -286,7 +298,10 @@ ggnostic(flea_model)
 #> `geom_smooth()` using method = 'loess'
 ```
 
-![](ggnostic_files/figure-html/nostic_flea-1.png)
+![Diagnostic plot matrix for the flea head model with columns for
+species, tars1, tars2, and aede1, and rows for residuals, leave-one-out
+sigma, leverage, and Cook's distance, with reference
+lines.](ggnostic_files/figure-html/nostic_flea-1.png)
 
 ``` r
 
@@ -297,7 +312,8 @@ ggnostic(flea_model, mapping = ggplot2::aes(color = species))
 #> `geom_smooth()` using method = 'loess'
 ```
 
-![](ggnostic_files/figure-html/nostic_flea-2.png)
+![The same flea model diagnostic plot matrix with points and box plots
+coloured by species.](ggnostic_files/figure-html/nostic_flea-2.png)
 
 ``` r
 
@@ -316,4 +332,8 @@ ggnostic(
 #> `geom_smooth()` using method = 'loess'
 ```
 
-![](ggnostic_files/figure-html/nostic_flea-3.png)
+![Larger flea model diagnostic plot matrix coloured by species, with
+rows for head, fitted values, standard error of fit, residuals,
+standardized residuals, leverage, sigma, and Cook's distance, and
+smoothed fit lines in the fitted value and response
+panels.](ggnostic_files/figure-html/nostic_flea-3.png)

@@ -32,7 +32,11 @@ reg <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
 ggcoef(reg)
 ```
 
-![](ggcoef_files/figure-html/ggcoef-reg-1.png)
+![Dot plot of linear model coefficients for predicting sepal length,
+with one row per term (intercept, sepal width, petal length, petal
+width) and horizontal confidence interval bars. A dotted vertical line
+marks zero; petal width is the only negative
+coefficient.](ggcoef_files/figure-html/ggcoef-reg-1.png)
 
 In the case of a logistic regression (or any other model for which
 coefficients are usually exponentiated), simply indicated
@@ -46,7 +50,11 @@ log.reg <- glm(Survived ~ Sex + Age + Class, family = binomial, data = d, weight
 ggcoef(log.reg, exponentiate = TRUE)
 ```
 
-![](ggcoef_files/figure-html/ggcoef-titanic-1.png)
+![Dot plot of odds ratios from a logistic regression of Titanic survival
+on sex, age, and class, on a log x-axis with confidence interval bars. A
+dotted line marks 1; being female raises the odds of survival about
+elevenfold, while adult age and every class other than first lower
+it.](ggcoef_files/figure-html/ggcoef-titanic-1.png)
 
 ### Customizing the plot
 
@@ -59,7 +67,10 @@ not confidence intervals as error bars, a vertical line for `x = 0` (or
 ggcoef(reg, vline = FALSE, conf.int = FALSE, exclude_intercept = TRUE)
 ```
 
-![](ggcoef_files/figure-html/ggcoef-reg-custom-1.png)
+![Dot plot of the sepal length model coefficients for sepal width, petal
+length, and petal width only, without confidence interval bars, without
+the intercept, and without a vertical reference
+line.](ggcoef_files/figure-html/ggcoef-reg-custom-1.png)
 
 See the help page of
 [`ggcoef()`](https://ggobi.github.io/ggally/dev/reference/ggcoef.md) for
@@ -78,7 +89,9 @@ ggcoef(
 )
 ```
 
-![](ggcoef_files/figure-html/ggcoef-full-args-1.png)
+![Dot plot of Titanic survival odds ratios on a log x-axis, with blue
+confidence interval bars that have tall end caps and a solid red
+vertical line at 1.](ggcoef_files/figure-html/ggcoef-full-args-1.png)
 
 Additional parameters will be passed to \[ggplot2::geom_point()\].
 
@@ -87,7 +100,9 @@ Additional parameters will be passed to \[ggplot2::geom_point()\].
 ggcoef(log.reg, exponentiate = TRUE, color = "purple", size = 5, shape = 18)
 ```
 
-![](ggcoef_files/figure-html/ggcoef-log.reg-1.png)
+![Dot plot of Titanic survival odds ratios on a log x-axis, with each
+estimate drawn as a large purple
+diamond.](ggcoef_files/figure-html/ggcoef-log.reg-1.png)
 
 Finally, you can also customize the aesthetic mapping of the points.
 
@@ -105,7 +120,10 @@ ggcoef(log.reg, exponentiate = TRUE, mapping = aes(x = estimate, y = term, size 
 #> was generated.
 ```
 
-![](ggcoef_files/figure-html/ggcoef-aes-1.png)
+![Dot plot of Titanic survival odds ratios on a log x-axis where point
+size shows the p-value on a reversed scale, so the most significant
+terms have the largest
+points.](ggcoef_files/figure-html/ggcoef-aes-1.png)
 
 ### Custom data frame
 
@@ -129,7 +147,11 @@ cust$term <- factor(cust$term, cust$term)
 ggcoef(cust, exponentiate = TRUE)
 ```
 
-![](ggcoef_files/figure-html/ggcoef-data-frame-1.png)
+![Dot plot of odds ratios from a custom data frame on a log x-axis, with
+confidence interval bars for four terms (male vs. female, 30-49 vs.
+18-29, 50+ vs. 18-29, and urban vs. rural). Male vs. female is below 1,
+both age terms are above 1, and urban vs. rural crosses
+1.](ggcoef_files/figure-html/ggcoef-data-frame-1.png)
 
 ``` r
 
@@ -141,6 +163,8 @@ ggcoef(
 )
 ```
 
-![](ggcoef_files/figure-html/ggcoef-data-frame-2.png)
+![The same odds ratio dot plot with large points coloured by variable
+group (sex, age, and
+residence).](ggcoef_files/figure-html/ggcoef-data-frame-2.png)
 
 [^1]: See <http://www.rdocumentation.org/packages/broom>.

@@ -26,7 +26,12 @@ data(flea)
 ggscatmat(flea, columns = 2:4, color = "species", alpha = 0.8)
 ```
 
-![](ggscatmat_files/figure-html/ggscatmat-basic-usage-1.png)
+![Scatterplot matrix of the flea measurements tars1, tars2, and head,
+coloured by species (Concinna, Heikert., Heptapot.). Lower panels show
+scatterplots, the diagonal shows density curves, and the upper panels
+list correlations by species; Heptapot. has clearly smaller tars1 values
+than the other two
+species.](ggscatmat_files/figure-html/ggscatmat-basic-usage-1.png)
 
 In this plot, you can see that the three different species vary a little
 from each other in these three variables. Heptapot (blue) has smaller

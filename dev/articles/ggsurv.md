@@ -32,7 +32,10 @@ sf.lung <- survival::survfit(Surv(time, status) ~ 1, data = lung)
 ggsurv(sf.lung)
 ```
 
-![](ggsurv_files/figure-html/basic-usage-1.png)
+![Kaplan-Meier step curve of survival over time for all lung cancer
+patients, with dashed confidence bands and crosses marking censored
+cases. Survival falls steadily toward zero by about 1000
+days.](ggsurv_files/figure-html/basic-usage-1.png)
 
 ### Multiple Stratum
 
@@ -47,7 +50,10 @@ pl.sex <- ggsurv(sf.sex)
 pl.sex
 ```
 
-![](ggsurv_files/figure-html/ggsurv-multiple-1.png)
+![Kaplan-Meier survival curves for lung cancer patients split by sex,
+with colour and line type by group and crosses for censored cases. The
+sex = 2 group (female) stays above the sex = 1 group
+(male).](ggsurv_files/figure-html/ggsurv-multiple-1.png)
 
 ### Alterations
 
@@ -70,7 +76,9 @@ pl.sex +
 #> scale.
 ```
 
-![](ggsurv_files/figure-html/ggsurv-legend-1.png)
+![The same survival curves by sex, now with a single colour legend
+titled Sex labelled Male and Female. Female survival stays above male
+survival.](ggsurv_files/figure-html/ggsurv-legend-1.png)
 
 #### Adjust the limits
 
@@ -84,7 +92,10 @@ pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
 pl.kid
 ```
 
-![](ggsurv_files/figure-html/ggsurv-limits-1.png)
+![Kaplan-Meier survival curves for kidney patients by disease type
+(Other, GN, AN, PKD), coloured by group, without censoring marks. GN and
+AN drop fastest, while Other and PKD last
+longest.](ggsurv_files/figure-html/ggsurv-limits-1.png)
 
 ``` r
 
@@ -93,7 +104,9 @@ pl.kid
 pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 ```
 
-![](ggsurv_files/figure-html/ggsurv-limits-2.png)
+![The same kidney survival curves zoomed in to the first 80 days and
+survival between 0.45 and 1, making the early drops by disease type
+easier to compare.](ggsurv_files/figure-html/ggsurv-limits-2.png)
 
 #### Add text and remove the legend
 
@@ -117,4 +130,6 @@ pl.kid +
   ggplot2::guides(color = "none", linetype = "none")
 ```
 
-![](ggsurv_files/figure-html/ggsurv-text-1.png)
+![Kaplan-Meier survival curves for kidney patients by disease type with
+no legend; instead each curve is labelled directly in its own colour
+with PKD, Other, GN and AN.](ggsurv_files/figure-html/ggsurv-text-1.png)

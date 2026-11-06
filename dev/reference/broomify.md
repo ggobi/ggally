@@ -62,7 +62,7 @@ if (require(broom)) {
 #>   .. ..- attr(*, "order")= int [1:3] 1 1 1
 #>   .. ..- attr(*, "intercept")= int 1
 #>   .. ..- attr(*, "response")= int 1
-#>   .. ..- attr(*, ".Environment")=<environment: 0x55f5eadb3200> 
+#>   .. ..- attr(*, ".Environment")=<environment: 0x563f79512fa0> 
 #>   .. ..- attr(*, "predvars")= language list(mpg, wt, qsec, am)
 #>   .. ..- attr(*, "dataClasses")= Named chr [1:4] "numeric" "numeric" "numeric" "numeric"
 #>   .. .. ..- attr(*, "names")= chr [1:4] "mpg" "wt" "qsec" "am"

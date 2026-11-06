@@ -51,7 +51,12 @@ ggpairs(psychademic, psych_variables, title = "Within Psychological Variables")
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggduo_files/figure-html/ggduo-within-1.png)
+![Pairs plot matrix titled Within Psychological Variables for
+locus_of_control, self_concept, and motivation. Diagonals show densities
+or bar counts, upper panels show correlations or boxplots, and lower
+panels show scatterplots or faceted histograms; locus_of_control and
+self_concept are only weakly correlated (about
+0.17).](ggduo_files/figure-html/ggduo-within-1.png)
 
 ``` r
 
@@ -62,7 +67,11 @@ ggpairs(psychademic, academic_variables, title = "Within Academic Variables")
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggduo_files/figure-html/ggduo-within-2.png)
+![Pairs plot matrix titled Within Academic Variables for read, write,
+math, science, and sex. The four test scores have scatterplots in the
+lower panels and correlations of about 0.57 to 0.69 in the upper panels,
+and sex appears as boxplots, histograms, and a bar
+chart.](ggduo_files/figure-html/ggduo-within-2.png)
 
 Next, look at the between correlation using
 [`ggduo()`](https://ggobi.github.io/ggally/dev/reference/ggduo.md).
@@ -80,7 +89,14 @@ ggduo(
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggduo_files/figure-html/ggduo-between-1.png)
+![Plot matrix titled Between Academic and Psychological Variable
+Correlation, with the psychological variables (locus_of_control,
+self_concept, motivation) across the columns and the academic variables
+(read, write, math, science, sex) down the rows. Continuous pairs show
+scatterplots with linear fits, mixed pairs show boxplots or faceted
+histograms; test scores rise with locus_of_control and with motivation
+level but barely change with
+self_concept.](ggduo_files/figure-html/ggduo-between-1.png)
 
 Since ggduo does not have a upper section to display the correlation
 values, we may use a custom function to add the information in the
@@ -122,7 +138,13 @@ ggduo(
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggduo_files/figure-html/ggduo-lm-1.png)
+![Plot matrix of psychological variables (motivation, self_concept,
+locus_of_control) across the columns against academic variables (read,
+write, math, science, sex) down the rows, coloured by sex with a legend
+at the bottom. Continuous panels show scatterplots with linear fits by
+sex and a bold label with the correlation in the top-left corner;
+locus_of_control shows the strongest positive link with test
+scores.](ggduo_files/figure-html/ggduo-lm-1.png)
 
 ### Multiple Time Series Analysis
 
@@ -149,7 +171,11 @@ ggplot(
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
-![](ggduo_files/figure-html/ggduo-mtsa-1.png)
+![Faceted time series of the pigs data from 1967 to 1979, one row per
+variable (gilts, herdsz, production, profit, profit_group, s_per_herdsz)
+with free y scales. Each row shows points with a smooth trend line; the
+0/1 profit_group row can only be shown as numbers on a continuous
+axis.](ggduo_files/figure-html/ggduo-mtsa-1.png)
 
 Instead, we may use `ggts` to display the data. `ggts` changes the
 default behavior of ggduo of `columnLabelsX` to equal `NULL` and allows
@@ -171,7 +197,11 @@ ggts(pigs_dt, "time", 2:7)
 #> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-![](ggduo_files/figure-html/ggduo-mtsa-group-1.png)
+![Time series plot matrix from ggts with time on the x axis and six
+rows: gilts, profit, s_per_herdsz, production, herdsz, and profit_group.
+The continuous rows show points with smooth trend lines, and the
+discrete profit_group row shows histograms of time split into high and
+low profit.](ggduo_files/figure-html/ggduo-mtsa-group-1.png)
 
 ``` r
 
@@ -182,7 +212,9 @@ pigs_types <- list(
 ggts(pigs_dt, "time", 2:7, types = pigs_types)
 ```
 
-![](ggduo_files/figure-html/ggduo-mtsa-group-2.png)
+![The same six-row ggts time series plot matrix of the pigs variables
+against time, with the profit_group histograms now using a bin width of
+1 year.](ggduo_files/figure-html/ggduo-mtsa-group-2.png)
 
 ``` r
 
@@ -191,7 +223,12 @@ pigs_mapping <- aes(color = profit_group)
 ggts(pigs_dt, pigs_mapping, "time", 2:7, types = pigs_types, legend = c(6, 1))
 ```
 
-![](ggduo_files/figure-html/ggduo-mtsa-group-3.png)
+![Six-row ggts time series plot matrix of the pigs variables against
+time, coloured by profit group (high or low) with a legend. Points and
+trend lines are split by group; high-profit quarters cluster before
+about 1974 and low-profit quarters after it, while production and herd
+size rise and then
+fall.](ggduo_files/figure-html/ggduo-mtsa-group-3.png)
 
 Produce more meaningful labels, add a legend, and remove profit group
 strips.
@@ -235,7 +272,12 @@ pm
 #> • fill : "profit group"
 ```
 
-![](ggduo_files/figure-html/ggduo-mtsa-pretty-1.png)
+![Six-row ggts time series plot matrix of the pigs data against time,
+coloured by profit group with a legend at the bottom. Rows have readable
+labels such as number of first birth sows, sell price over feed cost,
+and profit group, and the profit group strips are hidden; high-profit
+quarters mostly fall before about
+1974.](ggduo_files/figure-html/ggduo-mtsa-pretty-1.png)
 
 ### Regression Analysis
 
@@ -292,7 +334,13 @@ ggduo(
 )
 ```
 
-![](ggduo_files/figure-html/ggduo-reg-swiss-1.png)
+![Plot matrix of the swiss data with Agriculture, Examination,
+Education, Catholic, and Infant.Mortality across the columns and
+Fertility and Residual down the rows. The Fertility row shows
+scatterplots with linear fits, falling for Examination and Education and
+rising for the others; the Residual row shows each fit's residuals
+around a red line at zero on a shared y
+scale.](ggduo_files/figure-html/ggduo-reg-swiss-1.png)
 
 ``` r
 
@@ -311,7 +359,10 @@ ggduo(
 )
 ```
 
-![](ggduo_files/figure-html/ggduo-reg-swiss-2.png)
+![The same swiss regression plot matrix of Fertility and Residual
+against five predictors, with the zero line in the Residual row now
+thick and blue and the points slightly
+transparent.](ggduo_files/figure-html/ggduo-reg-swiss-2.png)
 
 ### Types of plots
 

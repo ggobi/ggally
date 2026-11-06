@@ -24,7 +24,11 @@ ggplot(temp.gly, ggplot2::aes(gx, gy, group = gid)) +
   labs(x = "", y = "")
 ```
 
-![](glyph_files/figure-html/glyphs-basic-usage-1.png)
+![Glyph map over a grid of longitude and latitude in Central America,
+where each grid cell holds a small line of monthly surface temperature
+over 6 years inside a grey reference box. Many cells are nearly flat,
+while cells in the top left over land show strong seasonal
+waves.](glyph_files/figure-html/glyphs-basic-usage-1.png)
 
 This shows a glyphplot of monthly surface temperature for 6 years over
 Central America. You can see differences from one location to another,

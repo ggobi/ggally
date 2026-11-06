@@ -115,7 +115,7 @@ single stratum and multiple strata objects.</p>
 <span><span class="co">#&gt; Warning in data(lung, package = "survival"): data set 'lung' not found</span></span>
 <span><span class="va">sf.lung</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggsurv.html">ggsurv</a></span><span class="op">(</span><span class="va">sf.lung</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggsurv_files/figure-html/basic-usage-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="ggsurv_files/figure-html/basic-usage-1.png" class="r-plt" alt="Kaplan-Meier step curve of survival over time for all lung cancer patients, with dashed confidence bands and crosses marking censored cases. Survival falls steadily toward zero by about 1000 days." width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="multiple-stratum">Multiple Stratum<a class="anchor" aria-label="anchor" href="#multiple-stratum"></a>
@@ -127,7 +127,7 @@ position that is lower in the legend.</p>
 <code class="sourceCode R"><span><span class="va">sf.sex</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">lung</span><span class="op">)</span></span>
 <span><span class="va">pl.sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggsurv.html">ggsurv</a></span><span class="op">(</span><span class="va">sf.sex</span><span class="op">)</span></span>
 <span><span class="va">pl.sex</span></span></code></pre></div>
-<p><img src="ggsurv_files/figure-html/ggsurv-multiple-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggsurv_files/figure-html/ggsurv-multiple-1.png" class="r-plt" alt="Kaplan-Meier survival curves for lung cancer patients split by sex, with colour and line type by group and crosses for censored cases. The sex = 2 group (female) stays above the sex = 1 group (male)." width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="alterations">Alterations<a class="anchor" aria-label="anchor" href="#alterations"></a>
@@ -148,7 +148,7 @@ the original creation.</p>
 <span><span class="co">#&gt; Scale for <span style="color: #00BB00;">colour</span> is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing</span></span>
 <span><span class="co">#&gt; scale.</span></span></code></pre></div>
-<p><img src="ggsurv_files/figure-html/ggsurv-legend-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggsurv_files/figure-html/ggsurv-legend-1.png" class="r-plt" alt="The same survival curves by sex, now with a single colour legend titled Sex labelled Male and Female. Female survival stays above male survival." width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="adjust-the-limits">Adjust the limits<a class="anchor" aria-label="anchor" href="#adjust-the-limits"></a>
@@ -160,12 +160,12 @@ the original creation.</p>
 <span><span class="va">sf.kid</span> <span class="op">&lt;-</span> <span class="fu">survival</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">disease</span>, data <span class="op">=</span> <span class="va">kidney</span><span class="op">)</span></span>
 <span><span class="va">pl.kid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggsurv.html">ggsurv</a></span><span class="op">(</span><span class="va">sf.kid</span>, plot.cens <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">pl.kid</span></span></code></pre></div>
-<p><img src="ggsurv_files/figure-html/ggsurv-limits-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggsurv_files/figure-html/ggsurv-limits-1.png" class="r-plt" alt="Kaplan-Meier survival curves for kidney patients by disease type (Other, GN, AN, PKD), coloured by group, without censoring marks. GN and AN drop fastest, while Other and PKD last longest." width="700"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Zoom in to first 80 days</span></span>
 <span><span class="va">pl.kid</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">80</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.45</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggsurv_files/figure-html/ggsurv-limits-2.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggsurv_files/figure-html/ggsurv-limits-2.png" class="r-plt" alt="The same kidney survival curves zoomed in to the first 80 days and survival between 0.45 and 1, making the early drops by disease type easier to compare." width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="add-text-and-remove-the-legend">Add text and remove the legend<a class="anchor" aria-label="anchor" href="#add-text-and-remove-the-legend"></a>
@@ -187,7 +187,7 @@ the original creation.</p>
 <span>    <span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span>, linetype <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggsurv_files/figure-html/ggsurv-text-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggsurv_files/figure-html/ggsurv-text-1.png" class="r-plt" alt="Kaplan-Meier survival curves for kidney patients by disease type with no legend; instead each curve is labelled directly in its own colour with PKD, Other, GN and AN." width="700"></p>
 </div>
 </div>
 </div>

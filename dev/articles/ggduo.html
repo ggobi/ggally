@@ -130,14 +130,14 @@ series analysis, and regression analysis.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="va">psych_variables</span>, title <span class="op">=</span> <span class="st">"Within Psychological Variables"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-within-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-within-1.png" class="r-plt" alt="Pairs plot matrix titled Within Psychological Variables for locus_of_control, self_concept, and motivation. Diagonals show densities or bar counts, upper panels show correlations or boxplots, and lower panels show scatterplots or faceted histograms; locus_of_control and self_concept are only weakly correlated (about 0.17)." width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">psychademic</span>, <span class="va">academic_variables</span>, title <span class="op">=</span> <span class="st">"Within Academic Variables"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-within-2.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-within-2.png" class="r-plt" alt="Pairs plot matrix titled Within Academic Variables for read, write, math, science, and sex. The four test scores have scatterplots in the lower panels and correlations of about 0.57 to 0.69 in the upper panels, and sex appears as boxplots, histograms, and a bar chart." width="700"></p>
 <p>Next, look at the between correlation using <code><a href="../reference/ggduo.html">ggduo()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggduo.html">ggduo</a></span><span class="op">(</span></span>
@@ -149,7 +149,7 @@ series analysis, and regression analysis.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-between-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-between-1.png" class="r-plt" alt="Plot matrix titled Between Academic and Psychological Variable Correlation, with the psychological variables (locus_of_control, self_concept, motivation) across the columns and the academic variables (read, write, math, science, sex) down the rows. Continuous pairs show scatterplots with linear fits, mixed pairs show boxplots or faceted histograms; test scores rise with locus_of_control and with motivation level but barely change with self_concept." width="700"></p>
 <p>Since ggduo does not have a upper section to display the correlation
 values, we may use a custom function to add the information in the
 continuous plots. The strips may be removed as each group name may be
@@ -186,7 +186,7 @@ recovered in the outer axis labels.</p>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-lm-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-lm-1.png" class="r-plt" alt="Plot matrix of psychological variables (motivation, self_concept, locus_of_control) across the columns against academic variables (read, write, math, science, sex) down the rows, coloured by sex with a legend at the bottom. Continuous panels show scatterplots with linear fits by sex and a bold label with the correlation in the top-left corner; locus_of_control shows the strongest positive link with test scores." width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="multiple-time-series-analysis">Multiple Time Series Analysis<a class="anchor" aria-label="anchor" href="#multiple-time-series-analysis"></a>
@@ -209,7 +209,7 @@ mix discrete and continuous data on the same axis.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">name</span> <span class="op">~</span> <span class="va">.</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-mtsa-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-mtsa-1.png" class="r-plt" alt="Faceted time series of the pigs data from 1967 to 1979, one row per variable (gilts, herdsz, production, profit, profit_group, s_per_herdsz) with free y scales. Each row shows points with a smooth trend line; the 0/1 profit_group row can only be shown as numbers on a continuous axis." width="700"></p>
 <p>Instead, we may use <code>ggts</code> to display the data.
 <code>ggts</code> changes the default behavior of ggduo of
 <code>columnLabelsX</code> to equal <code>NULL</code> and allows for
@@ -227,19 +227,19 @@ mixed variable types.</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value `binwidth`.</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-mtsa-group-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-mtsa-group-1.png" class="r-plt" alt="Time series plot matrix from ggts with time on the x axis and six rows: gilts, profit, s_per_herdsz, production, herdsz, and profit_group. The continuous rows show points with smooth trend lines, and the discrete profit_group row shows histograms of time split into high and low profit." width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove the binwidth warning</span></span>
 <span><span class="va">pigs_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  comboHorizontal <span class="op">=</span> <span class="fu"><a href="../reference/wrap.html">wrap</a></span><span class="op">(</span><span class="va">ggally_facethist</span>, binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, types <span class="op">=</span> <span class="va">pigs_types</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-mtsa-group-2.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-mtsa-group-2.png" class="r-plt" alt="The same six-row ggts time series plot matrix of the pigs variables against time, with the profit_group histograms now using a bin width of 1 year." width="700"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add color and legend</span></span>
 <span><span class="va">pigs_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">profit_group</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ggts.html">ggts</a></span><span class="op">(</span><span class="va">pigs_dt</span>, <span class="va">pigs_mapping</span>, <span class="st">"time"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, types <span class="op">=</span> <span class="va">pigs_types</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-mtsa-group-3.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-mtsa-group-3.png" class="r-plt" alt="Six-row ggts time series plot matrix of the pigs variables against time, coloured by profit group (high or low) with a legend. Points and trend lines are split by group; high-profit quarters cluster before about 1974 and low-profit quarters after it, while production and herd size rise and then fall." width="700"></p>
 <p>Produce more meaningful labels, add a legend, and remove profit group
 strips.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -278,7 +278,7 @@ strips.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span>
 <span><span class="co">#&gt; Ignoring unknown labels:</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"profit group"</span></span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-mtsa-pretty-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-mtsa-pretty-1.png" class="r-plt" alt="Six-row ggts time series plot matrix of the pigs data against time, coloured by profit group with a legend at the bottom. Rows have readable labels such as number of first birth sows, sell price over feed cost, and profit group, and the profit group strips are hidden; high-profit quarters mostly fall before about 1974." width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="regression-analysis">Regression Analysis<a class="anchor" aria-label="anchor" href="#regression-analysis"></a>
@@ -329,7 +329,7 @@ y_range is found to display all residuals on the same scale.</p>
 <span>  <span class="fl">2</span><span class="op">:</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">7</span><span class="op">)</span>,</span>
 <span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>continuous <span class="op">=</span> <span class="va">lm_or_resid</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-reg-swiss-1.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-reg-swiss-1.png" class="r-plt" alt="Plot matrix of the swiss data with Agriculture, Examination, Education, Catholic, and Infant.Mortality across the columns and Fertility and Residual down the rows. The Fertility row shows scatterplots with linear fits, falling for Examination and Education and rising for the others; the Residual row shows each fit's residuals around a red line at zero on a shared y scale." width="700"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># change line to be thicker and blue and the points to be slightly transparent</span></span>
@@ -344,7 +344,7 @@ y_range is found to display all residuals on the same scale.</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="ggduo_files/figure-html/ggduo-reg-swiss-2.png" class="r-plt" alt="" width="700"></p>
+<p><img src="ggduo_files/figure-html/ggduo-reg-swiss-2.png" class="r-plt" alt="The same swiss regression plot matrix of Fertility and Residual against five predictors, with the zero line in the Residual row now thick and blue and the points slightly transparent." width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="types-of-plots">Types of plots<a class="anchor" aria-label="anchor" href="#types-of-plots"></a>

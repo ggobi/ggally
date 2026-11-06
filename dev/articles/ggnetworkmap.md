@@ -18,6 +18,8 @@ use with `ggmap`.
 
 This example is based on a [tutorial by Nathan Yau at Flowing
 Data](http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/).
+The airport locations come from the FAA data in
+[`airports::usairports`](https://rdrr.io/pkg/airports/man/usairports.html).
 
 ``` r
 
@@ -26,14 +28,31 @@ suppressMessages(library(maps))
 suppressMessages(library(network))
 suppressMessages(library(sna))
 
-airports <- read.csv("http://datasets.flowingdata.com/tuts/maparcs/airports.csv", header = TRUE)
-rownames(airports) <- airports$iata
+# convert "DD-MM-SS.SSSSN" coordinates to decimal degrees
+dms_to_number <- function(dms) {
+  parts <- strsplit(dms, "-")[[1]]
+  degrees <- as.numeric(parts[1])
+  minutes <- as.numeric(parts[2]) / 60
+  seconds <- as.numeric(sub(parts[3], pattern = "N|W", replacement = "")) / 3600
+  direction <- if (grepl("W", parts[3])) -1 else 1
+  direction * (degrees + minutes + seconds)
+}
+
+# keep certified airports in the northern and western hemispheres
+airports <- as.data.frame(airports::usairports)
+airports <- subset(
+  airports,
+  !is.na(cert_type_date) & grepl("N", arp_latitude) & grepl("W", arp_longitude)
+)
+airports$lat <- vapply(airports$arp_latitude, dms_to_number, numeric(1))
+airports$long <- vapply(airports$arp_longitude, dms_to_number, numeric(1))
+rownames(airports) <- airports$location_id
 
 # select some random flights
 set.seed(123)
 flights <- data.frame(
-  origin = sample(airports[200:400, ]$iata, 200, replace = TRUE),
-  destination = sample(airports[200:400, ]$iata, 200, replace = TRUE)
+  origin = sample(airports[200:400, ]$location_id, 200, replace = TRUE),
+  destination = sample(airports[200:400, ]$location_id, 200, replace = TRUE)
 )
 
 # convert to network
@@ -73,7 +92,11 @@ ggnetworkmap(usa, flights,
 )
 ```
 
-![](ggnetworkmap_files/figure-html/ggnetworkmap-init-1.png)
+![Map of the continental USA with airports drawn as points and random
+flights drawn as steelblue great-circle arcs between them. Point fill
+shows one of four random groups, and point size and ring colour show
+degree. Most airports and flights are in the eastern half of the
+country.](ggnetworkmap_files/figure-html/ggnetworkmap-init-1.png)
 
 ### Example: Twitter spambots
 
@@ -110,7 +133,11 @@ ggnetworkmap(world, twitter_spambots)
 #> • size : ""
 ```
 
-![](ggnetworkmap_files/figure-html/ggnetworkmap-world-1.png)
+![World map with Twitter spambot accounts drawn as points at their
+geocoded locations and follow links drawn as lines between them. Almost
+all of the points sit in the United States and southern Canada, with one
+point in the Middle
+East.](ggnetworkmap_files/figure-html/ggnetworkmap-world-1.png)
 
 Is the network really concentrated in the U.S.? Probably not. One of the
 odd things about the network, is a much higher proportion of the users
@@ -127,7 +154,11 @@ ggnetworkmap(net = twitter_spambots, arrow.size = 0.5)
 #> • size : ""
 ```
 
-![](ggnetworkmap_files/figure-html/ggnetworkmap-topology-1.png)
+![Network diagram of the Twitter spambot accounts without a map, with
+nodes as points and follow links as arrows. Two hub accounts each link
+out to a fan of accounts, and a shared group of accounts sits between
+the two
+hubs.](ggnetworkmap_files/figure-html/ggnetworkmap-topology-1.png)
 
 Coloring nodes according to degree centrality can highlight network
 structures.
@@ -150,7 +181,11 @@ ggnetworkmap(
 #> • size : ""
 ```
 
-![](ggnetworkmap_files/figure-html/ggnetworkmap-color-1.png)
+![Network diagram of the Twitter spambot accounts with node fill showing
+indegree from yellow (low) to red (high) and ring colour showing
+outdegree. The two hubs are yellow (no incoming links), the accounts in
+the outer fans are orange, and the shared accounts between the hubs are
+red.](ggnetworkmap_files/figure-html/ggnetworkmap-color-1.png)
 
 Some Twitter attributes have been included as vertex attributes.
 
@@ -171,4 +206,7 @@ ggnetworkmap(
   scale_color_continuous(low = "lightgreen", high = "darkgreen")
 ```
 
-![](ggnetworkmap_files/figure-html/ggnetworkmap-twitter-attr-1.png)
+![Network diagram of the Twitter spambot accounts with node labels, node
+fill showing follower count from yellow to red, ring colour showing
+friend count from light to dark green, and node size showing
+indegree.](ggnetworkmap_files/figure-html/ggnetworkmap-twitter-attr-1.png)

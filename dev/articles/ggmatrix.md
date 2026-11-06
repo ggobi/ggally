@@ -30,7 +30,9 @@ pm <- ggmatrix(plotList, 2, 3)
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_genExample-1.png)
+![Two-by-three plot matrix of text panels labelled Plot \#1 to Plot \#6,
+filled row by row, with no axis labels or
+title.](ggmatrix_files/figure-html/ggmatrix_genExample-1.png)
 
 ``` r
 
@@ -46,7 +48,10 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_genExample-2.png)
+![Two-by-three plot matrix titled Matrix Title with column labels A, B,
+C and row labels D, E. Text panels Plot \#1 to Plot \#6 are filled row
+by row, so the top row reads 1, 2,
+3.](ggmatrix_files/figure-html/ggmatrix_genExample-2.png)
 
 ``` r
 
@@ -63,7 +68,10 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_genExample-3.png)
+![Two-by-three plot matrix titled Matrix Title with column labels A, B,
+C and row labels D, E. Text panels Plot \#1 to Plot \#6 are filled
+column by column, so the top row reads 1, 3,
+5.](ggmatrix_files/figure-html/ggmatrix_genExample-3.png)
 
 ### Matrix Subsetting
 
@@ -82,7 +90,9 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_place-1.png)
+![Two-by-three plot matrix titled Matrix Title with column labels A, B,
+C and row labels D, E, showing text panels Plot \#1 to Plot \#6 in row
+order.](ggmatrix_files/figure-html/ggmatrix_place-1.png)
 
 ``` r
 
@@ -91,14 +101,16 @@ p3 <- pm[1, 3]
 p2
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_place-2.png)
+![Single text panel reading Plot \#2, taken from row 1, column 2 of the
+matrix.](ggmatrix_files/figure-html/ggmatrix_place-2.png)
 
 ``` r
 
 p3
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_place-3.png)
+![Single text panel reading Plot \#3, taken from row 1, column 3 of the
+matrix.](ggmatrix_files/figure-html/ggmatrix_place-3.png)
 
 ``` r
 
@@ -107,7 +119,10 @@ pm[1, 3] <- p2
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_place-4.png)
+![Two-by-three plot matrix titled Matrix Title after swapping two
+panels: the top row now reads Plot \#1, Plot \#3, Plot \#2, and the
+bottom row is
+unchanged.](ggmatrix_files/figure-html/ggmatrix_place-4.png)
 
 ### Themes
 
@@ -126,7 +141,11 @@ pm <- pm + theme_bw()
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_theme-1.png)
+![Two-by-three plot matrix titled Matrix Title with column labels A, B,
+C and row labels D, E, showing text panels Plot \#1 to Plot \#6 in
+column order, drawn with the black-and-white theme (white backgrounds,
+grey grid lines, panel
+borders).](ggmatrix_files/figure-html/ggmatrix_theme-1.png)
 
 ### Axis Control
 
@@ -148,7 +167,10 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_axisControl-1.png)
+![Two-by-three plot matrix titled No Left Plot Axis showing text panels
+Plot \#1 to Plot \#6; the bottom axis tick labels are shown but the left
+axis tick labels are
+removed.](ggmatrix_files/figure-html/ggmatrix_axisControl-1.png)
 
 ``` r
 
@@ -163,7 +185,10 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_axisControl-2.png)
+![Two-by-three plot matrix titled No Bottom Plot Axis showing text
+panels Plot \#1 to Plot \#6; the left axis tick labels are shown but the
+bottom axis tick labels are
+removed.](ggmatrix_files/figure-html/ggmatrix_axisControl-2.png)
 
 ``` r
 
@@ -178,7 +203,9 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_axisControl-3.png)
+![Two-by-three plot matrix titled No Plot Axes showing text panels Plot
+\#1 to Plot \#6 with both the left and bottom axis tick labels
+removed.](ggmatrix_files/figure-html/ggmatrix_axisControl-3.png)
 
 ### Strips Control
 
@@ -217,7 +244,12 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_stripControl-1.png)
+![Two-by-two plot matrix titled Total Bill vs Tip with columns Non
+Smoker and Smoker and rows Female and Male. Each cell is a scatterplot
+of tip versus total bill faceted by time and day; with the default
+setting, day strips appear only on the top row and time strips only on
+the right
+column.](ggmatrix_files/figure-html/ggmatrix_stripControl-1.png)
 
 ``` r
 
@@ -232,7 +264,9 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_stripControl-2.png)
+![The same two-by-two Total Bill vs Tip plot matrix by smoker and sex,
+now with day and time facet strips shown on every
+panel.](ggmatrix_files/figure-html/ggmatrix_stripControl-2.png)
 
 ``` r
 
@@ -247,4 +281,6 @@ pm <- ggmatrix(
 pm
 ```
 
-![](ggmatrix_files/figure-html/ggmatrix_stripControl-3.png)
+![The same two-by-two Total Bill vs Tip plot matrix by smoker and sex
+with all facet strips hidden, so the day and time facets are
+unlabelled.](ggmatrix_files/figure-html/ggmatrix_stripControl-3.png)

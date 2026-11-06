@@ -22,14 +22,19 @@ data(tips)
 ggtable(tips, "smoker", c("day", "time", "sex"))
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-2-1.png)
+![Column of three cross-tabulated count tables, with smoker status
+across the top and day, time, and sex as the stacked rows. Each cell
+shows the number of
+tips.](ggtable_files/figure-html/unnamed-chunk-2-1.png)
 
 ``` r
 
 ggtable(tips, c("smoker", "time"), c("day", "time", "sex"))
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-2-2.png)
+![Grid of cross-tabulated count tables with smoker status and time as
+the two columns and day, time, and sex as the three
+rows.](ggtable_files/figure-html/unnamed-chunk-2-2.png)
 
 ### Proportions
 
@@ -42,21 +47,30 @@ use `"prop"`, `"row.prop"` or `"col.prop"`.
 ggtable(tips, "smoker", c("day", "time", "sex"), cells = "prop") + ggtitle("Proportions of total")
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-3-1.png)
+![Column of three cross-tabulated tables of smoker status by day, time,
+and sex, titled 'Proportions of total', with each cell showing its
+percentage of all
+tips.](ggtable_files/figure-html/unnamed-chunk-3-1.png)
 
 ``` r
 
 ggtable(tips, "smoker", c("day", "time", "sex"), cells = "row.prop") + ggtitle("Row proportions")
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-3-2.png)
+![Column of three cross-tabulated tables of smoker status by day, time,
+and sex, titled 'Row proportions', with each cell showing its percentage
+within its table row (one day, time, or
+sex).](ggtable_files/figure-html/unnamed-chunk-3-2.png)
 
 ``` r
 
-ggtable(tips, "smoker", c("day", "time", "sex"), cells = "prop") + ggtitle("Column proportions")
+ggtable(tips, "smoker", c("day", "time", "sex"), cells = "col.prop") + ggtitle("Column proportions")
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-3-3.png)
+![Column of three cross-tabulated tables of smoker status by day, time,
+and sex, titled 'Column proportions', with each cell showing its
+percentage within its smoker
+column.](ggtable_files/figure-html/unnamed-chunk-3-3.png)
 
 ### Filling cells with residuals
 
@@ -76,7 +90,12 @@ To fill cells with standardized residuals, simply indicate
 ggtable(tips, "smoker", c("day", "time", "sex"), fill = "std.resid")
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-4-1.png)
+![Column of three cross-tabulated count tables of smoker status by day,
+time, and sex, with cells filled by standardized residual from red
+(fewer than expected) to blue (more than expected). Smokers are
+over-represented on Friday and Saturday and under-represented on
+Thursday and Sunday, while time and sex cells stay near
+zero.](ggtable_files/figure-html/unnamed-chunk-4-1.png)
 
 ### Using weights
 
@@ -96,7 +115,12 @@ ggtable(
 )
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-5-1.png)
+![Column of three cross-tabulated tables of Titanic survival by age,
+class, and sex, showing row percentages weighted by passenger count and
+filled by standardized residual. Survivors are strongly over-represented
+among women, children, and first class, and under-represented among men,
+the crew, and third
+class.](ggtable_files/figure-html/unnamed-chunk-5-1.png)
 
 ### Missing with continuous variables
 
@@ -111,7 +135,10 @@ displayed.
 ggtable(tips, c("smoker", "total_bill"), c("day", "time", "sex", "tip"))
 ```
 
-![](ggtable_files/figure-html/unnamed-chunk-6-1.png)
+![Grid of panels with smoker status and total bill as the columns and
+day, time, sex, and tip as the rows. Discrete pairs show count tables,
+and pairs with a continuous variable show summary statistics as
+text.](ggtable_files/figure-html/unnamed-chunk-6-1.png)
 
 If you need more customization of the output, please refer to
 [`ggduo()`](https://ggobi.github.io/ggally/dev/reference/ggduo.md).
