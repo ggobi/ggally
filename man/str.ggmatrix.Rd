@@ -3,13 +3,14 @@
 \name{str.ggmatrix}
 \alias{str.ggmatrix}
 \title{\code{\link{ggmatrix}} structure}
-\arguments{
-\item{object}{\code{\link{ggmatrix}} object to be viewed}
-
-\item{...}{passed on to the default \code{str} method}
-
-\item{raw}{boolean to determine if the plots should be converted to text or kept as original objects}
-}
 \description{
 View the condensed version of the \code{\link{ggmatrix}} object. The attribute "class" is ALWAYS altered to "_class" to avoid recursion.
+}
+\details{
+Arguments:
+\describe{
+\item{\code{object}}{\code{\link{ggmatrix}} object to be viewed}
+\item{\code{...}}{passed on to the default \code{str} method}
+\item{\code{raw}}{boolean to determine if the plots should be converted to text or kept as original objects}
+}
 }

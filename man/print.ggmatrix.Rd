@@ -3,17 +3,17 @@
 \name{print.ggmatrix}
 \alias{print.ggmatrix}
 \title{Print \code{\link{ggmatrix}} object}
-\arguments{
-\item{x}{plot to display}
-
-\item{newpage}{draw new (empty) page first?}
-
-\item{vp}{viewport to draw plot in}
-
-\item{...}{arguments passed onto \code{\link{ggmatrix_gtable}}}
-}
 \description{
 Print method taken from \code{ggplot2:::print.ggplot} and altered for a \code{\link{ggmatrix}} object
+}
+\details{
+Arguments:
+\describe{
+\item{\code{x}}{plot to display}
+\item{\code{newpage}}{draw new (empty) page first?}
+\item{\code{vp}}{viewport to draw plot in}
+\item{\code{...}}{arguments passed onto \code{\link{ggmatrix_gtable}}}
+}
 }
 \examples{
 data(tips)

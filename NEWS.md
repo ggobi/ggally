@@ -1,20 +1,29 @@
-# GGally (development version)
+# GGally 2.5.0
 
-* Fixed duplicate aesthetics warning in `ggsurv()` with upcoming ggplot2 version. Removed duplicate `lty` aesthetic mapping from confidence interval bounds. (#572)
+## Lifecycle changes
 
-* Fixed `mapping_string()` to properly handle long aesthetic expressions by collapsing multi-line `deparse()` output. (#573)
+* `ggcoef_multinom()` has been removed. Use `ggstats::ggcoef_model()`,
+  `ggstats::ggcoef_table()`, `ggstats::ggcoef_dodged()`, or
+  `ggstats::ggcoef_faceted()` instead (#575).
 
-* Updated `fix_data()` to handle map objects correctly with ggplot2 >= 4.0.0 using `ggplot2::map_data()` instead of `fortify()`. (#573)
+## Bug fixes and minor improvements
 
-* Wrapped documentation examples requiring optional packages (`{MASS}`, `{broom}`, `{network}`, `{sna}`, `{ggforce}`) in `if (require(...))` blocks to prevent errors when packages are not installed. (#573)
+* GGally now loads without import warnings when used with the development
+  version of S7, and uses the S7 load, build, and unload hooks when they are
+  available (@t-kalinowski, #578).
 
-* Added `{MASS}` to Suggests in DESCRIPTION to support density plot examples. (#573)
+* Examples that need optional packages ({MASS}, {broom}, {network}, {sna},
+  {ggforce}) now run only when those packages are installed. {MASS} is now
+  listed in Suggests (#573).
 
-* Updated `.Rbuildignore` to exclude `{vdiffr}` snapshot SVG files more specifically. (#573)
+* `fix_data()` now uses `ggplot2::map_data()` instead of `fortify()` to handle
+  map objects with ggplot2 >= 4.0.0 (#573).
 
-* Added GitHub Actions check script to conditionally remove snapshot paths from `.Rbuildignore` for macOS testing. (#573)
+* `ggsurv()` now maps `lty` only once for the confidence interval bounds,
+  which avoids a duplicate aesthetics warning with upcoming ggplot2 (#572).
 
-* `ggcoef_multinom()` has been removed. Simply use `ggstats::ggcoef_model()`, `ggstats::ggcoef_table()`, `ggstats::ggcoef_dodged()` or `ggstats::ggcoef_faceted()`. (#575)
+* `mapping_string()` now handles long aesthetic expressions by collapsing
+  multi-line `deparse()` output (#573).
 
 # GGally 2.4.0
 

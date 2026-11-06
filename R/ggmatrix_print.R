@@ -7,10 +7,14 @@ ggplot2_set_last_plot <- utils::getFromNamespace("set_last_plot", "ggplot2")
 #'
 #' Print method taken from \code{ggplot2:::print.ggplot} and altered for a \code{\link{ggmatrix}} object
 #'
-#' @param x plot to display
-#' @param newpage draw new (empty) page first?
-#' @param vp viewport to draw plot in
-#' @param ... arguments passed onto \code{\link{ggmatrix_gtable}}
+#' @details
+#' Arguments:
+#' \describe{
+#'   \item{\code{x}}{plot to display}
+#'   \item{\code{newpage}}{draw new (empty) page first?}
+#'   \item{\code{vp}}{viewport to draw plot in}
+#'   \item{\code{...}}{arguments passed onto \code{\link{ggmatrix_gtable}}}
+#' }
 #' @author Barret Schloerke
 #' @import utils
 #' @importFrom grid grid.newpage grid.draw seekViewport pushViewport upViewport
