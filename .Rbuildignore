@@ -39,3 +39,4 @@ ggduo_paper.txt
 ^data-raw$
 ^\.claude$
 ^_dev$
+^\.context$
