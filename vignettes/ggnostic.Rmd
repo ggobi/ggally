@@ -85,12 +85,16 @@ summary(model)
 
 Next, we look at the variables for any high (|value| > 0.8) correlation values and general interaction behavior.
 ```{r nostic_scatmat}
+#| fig.alt: >
+#|   Scatterplot matrix of state population, murder rate, high school graduation rate, and frost days, with density curves on the diagonal and correlations in the upper panels. No pair has a correlation above 0.8 in absolute value; the strongest is murder and frost at -0.54.
 # look at variables for high correlation (none)
 ggscatmat(state, columns = c("Population", "Murder", "HS.Grad", "Frost"))
 ```
 
 All variables appear to be ok.  Next, we look at the model diagnostics.
 ```{r nostic_diag}
+#| fig.alt: >
+#|   Diagnostic plot matrix for the life expectancy model with columns for population, murder, high school graduation, and frost, and rows for residuals, leave-one-out sigma, leverage, and Cook's distance, each with reference lines. One point, Hawaii, has a Cook's distance far above all others.
 # look at model diagnostics
 ggnostic(model)
 ```
@@ -102,6 +106,8 @@ ggnostic(model)
 Let's remove the largest data point first to try and define a better model.
 
 ```{r nostic_no_hawaii}
+#| fig.alt: >
+#|   Diagnostic plot matrix for the life expectancy model without Hawaii, with columns for population, murder, high school graduation, and frost, and rows for residuals, leave-one-out sigma, leverage, and Cook's distance. No Cook's distance value now stands far apart from the rest.
 # very high life expectancy
 state[11, ]
 state_no_hawaii <- state[-11, ]
@@ -125,6 +131,7 @@ Since there is only a marginal improvement by removing Hawaii, the original mode
 The following lines of code will display different model diagnostic plot matrices for the same statistical model.  The first one is of the default settings. The second adds color according to the ``species``. Finally, the third displays all possible columns and uses `ggally_smooth()` to display the fitted points and response variables.
 
 ```{r nostic_flea}
+#| fig.alt: !expr c("Diagnostic plot matrix for the flea head model with columns for species, tars1, tars2, and aede1, and rows for residuals, leave-one-out sigma, leverage, and Cook's distance, with reference lines.", "The same flea model diagnostic plot matrix with points and box plots coloured by species.", "Larger flea model diagnostic plot matrix coloured by species, with rows for head, fitted values, standard error of fit, residuals, standardized residuals, leverage, sigma, and Cook's distance, and smoothed fit lines in the fitted value and response panels.")
 flea_model <- step(lm(head ~ ., data = flea), trace = FALSE)
 summary(flea_model)
 # default output

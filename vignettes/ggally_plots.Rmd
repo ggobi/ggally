@@ -35,6 +35,11 @@ data(tips)
 #### `ggally_autopoint()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Scatterplot of tip versus total bill. Tips rise with the bill.",
+#|     "Scatterplot of tip versus total bill, coloured by time (dinner or lunch). Tips rise with the bill at both meals."
+#|   )
 ggally_autopoint(tips, aes(x = total_bill, y = tip))
 ggally_autopoint(tips, aes(x = total_bill, y = tip, colour = time))
 ```
@@ -42,6 +47,11 @@ ggally_autopoint(tips, aes(x = total_bill, y = tip, colour = time))
 #### `ggally_cor()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Text panel showing the correlation between total bill and tip: Corr 0.676 with three significance stars.",
+#|     "Text panel showing the overall correlation between total bill and tip (0.676), then the dinner (0.633) and lunch (0.805) correlations in their own colours."
+#|   )
 ggally_cor(tips, aes(x = total_bill, y = tip))
 ggally_cor(tips, aes(x = total_bill, y = tip, colour = time))
 ```
@@ -51,6 +61,11 @@ See also `ggally_statistic()`.
 #### `ggally_density()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "2D density contour plot of tip versus total bill. Most bills sit near 15 dollars with tips near 2 dollars.",
+#|     "2D density contour plot of tip versus total bill, with separate contours coloured by time. Lunch contours sit at slightly lower bills than dinner."
+#|   )
 ggally_density(tips, aes(x = total_bill, y = tip))
 ggally_density(tips, aes(x = total_bill, y = tip, colour = time))
 ```
@@ -58,6 +73,11 @@ ggally_density(tips, aes(x = total_bill, y = tip, colour = time))
 #### `ggally_points()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Scatterplot of tip versus total bill. Tips rise with the bill.",
+#|     "Scatterplot of tip versus total bill, coloured by time. Tips rise with the bill at both meals."
+#|   )
 ggally_points(tips, aes(x = total_bill, y = tip))
 ggally_points(tips, aes(x = total_bill, y = tip, colour = time))
 ```
@@ -66,6 +86,13 @@ ggally_points(tips, aes(x = total_bill, y = tip, colour = time))
 #### `ggally_smooth()`, `ggally_smooth_lm()` & `ggally_smooth_loess()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Scatterplot of tip versus total bill with a straight linear fit and confidence band. The line slopes upward.",
+#|     "Scatterplot of tip versus total bill coloured by time, with a separate linear fit for dinner and lunch. Both lines slope upward.",
+#|     "Scatterplot of tip versus total bill with a curved loess fit and confidence band. The curve rises with the bill.",
+#|     "Scatterplot of tip versus total bill coloured by time, with a separate loess curve for dinner and lunch. Both curves rise with the bill."
+#|   )
 ggally_smooth_lm(tips, aes(x = total_bill, y = tip))
 ggally_smooth_lm(tips, aes(x = total_bill, y = tip, colour = time))
 
@@ -80,6 +107,8 @@ See also `ggally_smooth()` for more options.
 #### `ggally_colbar()`
 
 ```{r}
+#| fig.alt: >
+#|   Stacked bar chart of the percentage of smokers and non-smokers within each day, with percent labels. Friday has the most smokers (79 percent); Sunday and Thursday have the fewest.
 ggally_colbar(tips, aes(x = day, y = smoker))
 ```
 
@@ -88,6 +117,11 @@ Note: the **colour** aesthetic is not taken into account.
 #### `ggally_autopoint()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Jittered point plot of smoker versus day. Each point is one bill, and the clouds show how many bills fall in each day and smoker pair.",
+#|     "Jittered point plot of smoker versus day, coloured by time. Thursday is almost all lunch, while Saturday and Sunday are all dinner."
+#|   )
 ggally_autopoint(tips, aes(x = day, y = smoker))
 ggally_autopoint(tips, aes(x = day, y = smoker, colour = time))
 ```
@@ -96,6 +130,11 @@ ggally_autopoint(tips, aes(x = day, y = smoker, colour = time))
 #### `ggally_count()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Grid of grey rectangles for smoker versus day, sized by the number of bills. Friday non-smokers is the smallest cell.",
+#|     "Grid of rectangles for smoker versus day, sized by the number of bills and filled by time. Thursday is mostly lunch and the weekend is all dinner."
+#|   )
 ggally_count(tips, aes(x = day, y = smoker))
 ggally_count(tips, aes(x = day, y = smoker, colour = time))
 ```
@@ -103,6 +142,12 @@ ggally_count(tips, aes(x = day, y = smoker, colour = time))
 #### `ggally_cross()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Cross plot of smoker versus day with squares sized by the observed count. Friday non-smokers is the smallest square.",
+#|     "The same cross plot of smoker versus day; colouring by time is ignored, so it looks identical to the first.",
+#|     "Cross plot of smoker versus day with squares sized by count and coloured by smoker."
+#|   )
 ggally_cross(tips, aes(x = day, y = smoker))
 ggally_cross(tips, aes(x = day, y = smoker, colour = time))
 ggally_cross(tips, aes(x = day, y = smoker, colour = smoker))
@@ -113,6 +158,11 @@ Note: **colour** aesthetic is taken into account only if it corresponds to **x**
 #### `ggally_crosstable()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Table of counts of smoker versus day, with one number per cell. Sunday non-smokers is the largest count (57) and Friday non-smokers the smallest (4).",
+#|     "Table of column percentages of smoker versus day, with cells filled by standardized residuals. Friday smokers are much more common than expected; Sunday and Thursday smokers are less common."
+#|   )
 ggally_crosstable(tips, aes(x = day, y = smoker))
 ggally_crosstable(tips, aes(x = day, y = smoker), cells = "col.prop", fill = "std.resid")
 ```
@@ -122,6 +172,11 @@ Note: **colour** aesthetic is not taken into account.
 #### `ggally_facetbar()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Bar charts of bill counts by day, in one facet per smoker status. Non-smokers peak on Sunday; smokers peak on Saturday.",
+#|     "Bar charts of bill counts by day in one facet per smoker status, with bars stacked by time. Thursday bars are almost all lunch and weekend bars are all dinner."
+#|   )
 ggally_facetbar(tips, aes(x = day, y = smoker))
 ggally_facetbar(tips, aes(x = day, y = smoker, colour = time))
 ```
@@ -129,6 +184,11 @@ ggally_facetbar(tips, aes(x = day, y = smoker, colour = time))
 #### `ggally_ratio()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Mosaic plot of smoker versus day where each rectangle's area shows the number of bills. Saturday and Sunday have the largest areas.",
+#|     "The same mosaic plot of smoker versus day; colouring by time is ignored."
+#|   )
 ggally_ratio(tips, aes(x = day, y = smoker))
 ggally_ratio(tips, aes(x = day, y = smoker, colour = time))
 ```
@@ -136,6 +196,8 @@ ggally_ratio(tips, aes(x = day, y = smoker, colour = time))
 #### `ggally_rowbar()`
 
 ```{r}
+#| fig.alt: >
+#|   Stacked horizontal bar chart of the percentage of each day within each smoker group, with percent labels. Saturday is the largest share among smokers (45 percent); Sunday is the largest among non-smokers.
 ggally_rowbar(tips, aes(x = day, y = smoker))
 ```
 
@@ -144,6 +206,12 @@ Note: the **colour** aesthetic is not taken into account.
 #### `ggally_table()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Table of counts of smoker versus day, shown as numbers at each day and smoker position.",
+#|     "The same table of counts of smoker versus day; colouring by time is ignored.",
+#|     "Table of counts of smoker versus day, with numbers coloured by smoker."
+#|   )
 ggally_table(tips, aes(x = day, y = smoker))
 ggally_table(tips, aes(x = day, y = smoker, colour = time))
 ggally_table(tips, aes(x = day, y = smoker, colour = smoker))
@@ -154,6 +222,11 @@ Note: **colour** aesthetic is taken into account only if it corresponds to **x**
 #### `ggally_trends()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Line chart of the share of smokers by day. It drops from about 79 percent on Friday to about 25 percent on Sunday.",
+#|     "Line chart of the share of smokers by day, with one line per time (dinner or lunch). Both lines fall from Friday to Thursday."
+#|   )
 ggally_trends(tips, aes(x = day, y = smoker))
 ggally_trends(tips, aes(x = day, y = smoker, colour = time))
 ```
@@ -164,6 +237,11 @@ ggally_trends(tips, aes(x = day, y = smoker, colour = time))
 #### `ggally_autopoint()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Jittered point plot of day versus total bill. Each day spreads from about 5 to 50 dollars, with most bills between 10 and 25.",
+#|     "Jittered point plot of day versus total bill, coloured by time. Thursday is almost all lunch and the weekend is all dinner."
+#|   )
 ggally_autopoint(tips, aes(x = total_bill, y = day))
 ggally_autopoint(tips, aes(x = total_bill, y = day, colour = time))
 ```
@@ -172,6 +250,13 @@ ggally_autopoint(tips, aes(x = total_bill, y = day, colour = time))
 #### `ggally_box()` & `ggally_box_no_facet()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Horizontal boxplots of total bill, one facet per day. Sunday has the highest median bill and Friday the lowest.",
+#|     "Horizontal boxplots of total bill, one facet per day, split and filled by time. Lunch bills are lower than dinner bills.",
+#|     "Horizontal boxplots of total bill for each day on one shared panel. Sunday has the highest median bill.",
+#|     "Horizontal boxplots of total bill for each day on one shared panel, split and filled by time. Lunch bills are lower than dinner bills."
+#|   )
 ggally_box(tips, aes(x = total_bill, y = day))
 ggally_box(tips, aes(x = total_bill, y = day, colour = time))
 ggally_box_no_facet(tips, aes(x = total_bill, y = day))
@@ -181,6 +266,11 @@ ggally_box_no_facet(tips, aes(x = total_bill, y = day, colour = time))
 #### `ggally_denstrip()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Density strips of total bill, one facet per day, where lighter blue tiles mark denser ranges. Bills cluster between 10 and 25 dollars.",
+#|     "The same density strips of total bill by day; colouring by time is ignored."
+#|   )
 ggally_denstrip(tips, aes(x = total_bill, y = day))
 ggally_denstrip(tips, aes(x = total_bill, y = day, colour = time))
 ```
@@ -188,6 +278,13 @@ ggally_denstrip(tips, aes(x = total_bill, y = day, colour = time))
 #### `ggally_dot()` & `ggally_dot_no_facet()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Jittered dot plot of total bill, one facet per day. Bills cluster between 10 and 25 dollars on every day.",
+#|     "Jittered dot plot of total bill, one facet per day, coloured by time. Thursday is almost all lunch and the weekend is all dinner.",
+#|     "Jittered dot plot of day versus total bill on one shared panel. Bills cluster between 10 and 25 dollars on every day.",
+#|     "Jittered dot plot of day versus total bill on one shared panel, coloured by time."
+#|   )
 ggally_dot(tips, aes(x = total_bill, y = day))
 ggally_dot(tips, aes(x = total_bill, y = day, colour = time))
 ggally_dot_no_facet(tips, aes(x = total_bill, y = day))
@@ -197,6 +294,11 @@ ggally_dot_no_facet(tips, aes(x = total_bill, y = day, colour = time))
 #### `ggally_facetdensitystrip()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Density curves of total bill, one facet per day. Each curve peaks around 13 to 18 dollars with a long right tail.",
+#|     "Density curves of total bill, one facet per day, with one curve per time. Friday lunch bills are tightly grouped around 13 dollars."
+#|   )
 ggally_facetdensitystrip(tips, aes(x = total_bill, y = day))
 ggally_facetdensitystrip(tips, aes(x = total_bill, y = day, colour = time))
 ```
@@ -204,6 +306,11 @@ ggally_facetdensitystrip(tips, aes(x = total_bill, y = day, colour = time))
 #### `ggally_facethist()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Histograms of total bill, one facet per day. Saturday and Sunday have the most bills, Friday the fewest.",
+#|     "Histograms of total bill, one facet per day, with bars stacked by time. Thursday is almost all lunch and the weekend is all dinner."
+#|   )
 ggally_facethist(tips, aes(x = total_bill, y = day))
 ggally_facethist(tips, aes(x = total_bill, y = day, colour = time))
 ```
@@ -211,6 +318,11 @@ ggally_facethist(tips, aes(x = total_bill, y = day, colour = time))
 #### `ggally_summarise_by()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Text panel listing the median total bill and interquartile range for each day. Sunday has the highest median (19.6) and Friday the lowest (15.4).",
+#|     "The same median and interquartile range text for each day, with each day's text in its own colour."
+#|   )
 ggally_summarise_by(tips, aes(x = total_bill, y = day))
 ggally_summarise_by(tips, aes(x = total_bill, y = day, colour = day))
 ```
@@ -220,6 +332,11 @@ Note: colour aesthetic is kept only if corresponding to the discrete axis.
 #### `ggally_trends()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Line chart of mean total bill by day. It rises from about 17 dollars on Friday to about 21 on Sunday, then drops on Thursday.",
+#|     "Line chart of mean total bill by day, with one line per time. Dinner bills are higher than lunch bills on every day."
+#|   )
 ggally_trends(tips, aes(y = total_bill, x = day))
 ggally_trends(tips, aes(y = total_bill, x = day, colour = time))
 ```
@@ -232,6 +349,11 @@ ggally_trends(tips, aes(y = total_bill, x = day, colour = time))
 #### `ggally_autopointDiag()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Points of total bill plotted against itself, forming a straight diagonal line.",
+#|     "Points of total bill plotted against itself, forming a straight diagonal line, coloured by time."
+#|   )
 ggally_autopointDiag(tips, aes(x = total_bill))
 ggally_autopointDiag(tips, aes(x = total_bill, colour = time))
 ```
@@ -239,6 +361,11 @@ ggally_autopointDiag(tips, aes(x = total_bill, colour = time))
 #### `ggally_barDiag()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Histogram of total bill. It is right skewed, with most bills between 10 and 25 dollars.",
+#|     "Histogram of total bill with bars stacked by time. Lunch bills sit at the lower end."
+#|   )
 ggally_barDiag(tips, aes(x = total_bill))
 ggally_barDiag(tips, aes(x = total_bill, colour = time))
 ```
@@ -246,6 +373,11 @@ ggally_barDiag(tips, aes(x = total_bill, colour = time))
 #### `ggally_densityDiag()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Density curve of total bill. It peaks near 16 dollars and has a long right tail.",
+#|     "Density curves of total bill filled by time. The lunch curve peaks at a lower bill and is narrower than dinner."
+#|   )
 ggally_densityDiag(tips, aes(x = total_bill))
 ggally_densityDiag(tips, aes(x = total_bill, colour = time))
 ```
@@ -255,6 +387,11 @@ ggally_densityDiag(tips, aes(x = total_bill, colour = time))
 #### `ggally_autopointDiag()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Jittered point clouds of day against itself, placed along the diagonal. Saturday and Sunday have the largest clouds, Friday the smallest.",
+#|     "Jittered point clouds of day against itself along the diagonal, coloured by time. Thursday is lunch and the weekend is dinner."
+#|   )
 ggally_autopointDiag(tips, aes(x = day))
 ggally_autopointDiag(tips, aes(x = day, colour = time))
 ```
@@ -262,6 +399,11 @@ ggally_autopointDiag(tips, aes(x = day, colour = time))
 #### `ggally_barDiag()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Bar chart of bill counts by day. Saturday has the most bills and Friday the fewest.",
+#|     "Bar chart of bill counts by day, stacked by time. Thursday is almost all lunch and the weekend is all dinner."
+#|   )
 ggally_barDiag(tips, aes(x = day))
 ggally_barDiag(tips, aes(x = day, colour = time))
 ```
@@ -269,6 +411,11 @@ ggally_barDiag(tips, aes(x = day, colour = time))
 #### `ggally_countDiag()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Grey squares of day against itself along the diagonal, sized by count. Saturday is the largest and Friday the smallest.",
+#|     "Squares of day against itself along the diagonal, sized by count and filled by time. Thursday is lunch and the weekend is dinner."
+#|   )
 ggally_countDiag(tips, aes(x = day))
 ggally_countDiag(tips, aes(x = day, colour = time))
 ```
@@ -277,6 +424,11 @@ ggally_countDiag(tips, aes(x = day, colour = time))
 #### `ggally_densityDiag()`
 
 ```{r}
+#| fig.alt: !expr |
+#|   c(
+#|     "Density curves drawn over the day categories, one curve per day, each peaking at its own day.",
+#|     "Density curves over the day categories, stacked and filled by time. Lunch dominates Friday and Thursday, dinner dominates Saturday and Sunday."
+#|   )
 ggally_densityDiag(tips, aes(x = day))
 ggally_densityDiag(tips, aes(x = day, colour = time))
 ```

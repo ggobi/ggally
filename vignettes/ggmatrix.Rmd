@@ -30,6 +30,12 @@ library(GGally)
 The examples below use plots labeled 1 to 6 to distinguish where the plots are being placed.
 
 ```{r ggmatrix_genExample}
+#| fig.alt: !expr |
+#|   c(
+#|     "Two-by-three plot matrix of text panels labelled Plot #1 to Plot #6, filled row by row, with no axis labels or title.",
+#|     "Two-by-three plot matrix titled Matrix Title with column labels A, B, C and row labels D, E. Text panels Plot #1 to Plot #6 are filled row by row, so the top row reads 1, 2, 3.",
+#|     "Two-by-three plot matrix titled Matrix Title with column labels A, B, C and row labels D, E. Text panels Plot #1 to Plot #6 are filled column by column, so the top row reads 1, 3, 5."
+#|   )
 plotList <- list()
 for (i in 1:6) {
   plotList[[i]] <- ggally_text(paste("Plot #", i, sep = ""))
@@ -66,6 +72,13 @@ pm
 Individual plots may be retrieved from the plot matrix and can be placed in the plot matrix.
 
 ```{r ggmatrix_place}
+#| fig.alt: !expr |
+#|   c(
+#|     "Two-by-three plot matrix titled Matrix Title with column labels A, B, C and row labels D, E, showing text panels Plot #1 to Plot #6 in row order.",
+#|     "Single text panel reading Plot #2, taken from row 1, column 2 of the matrix.",
+#|     "Single text panel reading Plot #3, taken from row 1, column 3 of the matrix.",
+#|     "Two-by-three plot matrix titled Matrix Title after swapping two panels: the top row now reads Plot #1, Plot #3, Plot #2, and the bottom row is unchanged."
+#|   )
 pm <- ggmatrix(
   plotList,
   nrow = 2, ncol = 3,
@@ -86,6 +99,8 @@ pm
 ## Themes
 
 ```{r ggmatrix_theme}
+#| fig.alt: >
+#|   Two-by-three plot matrix titled Matrix Title with column labels A, B, C and row labels D, E, showing text panels Plot #1 to Plot #6 in column order, drawn with the black-and-white theme (white backgrounds, grey grid lines, panel borders).
 library(ggplot2)
 pm <- ggmatrix(
   plotList,
@@ -106,6 +121,12 @@ pm
 The X and Y axis have booleans to turn on/off the individual plot's axes on the bottom and left sides of the plot matrix.  To save time, `showAxisPlotLabels` can be set to override `showXAxisPlotLabels` and `showYAxisPlotLabels`.
 
 ```{r ggmatrix_axisControl}
+#| fig.alt: !expr |
+#|   c(
+#|     "Two-by-three plot matrix titled No Left Plot Axis showing text panels Plot #1 to Plot #6; the bottom axis tick labels are shown but the left axis tick labels are removed.",
+#|     "Two-by-three plot matrix titled No Bottom Plot Axis showing text panels Plot #1 to Plot #6; the left axis tick labels are shown but the bottom axis tick labels are removed.",
+#|     "Two-by-three plot matrix titled No Plot Axes showing text panels Plot #1 to Plot #6 with both the left and bottom axis tick labels removed."
+#|   )
 pm <- ggmatrix(
   plotList,
   nrow = 2, ncol = 3,
@@ -140,6 +161,12 @@ pm
 By default, the plots in the top row and the right most column will display top-side and right-side strips respectively (`showStrips = NULL`).  If all strips need to appear in each plot, `showStrips` may be set to `TRUE`. If all strips should not be displayed, `showStrips` may be set to `FALSE`.
 
 ```{r ggmatrix_stripControl}
+#| fig.alt: !expr |
+#|   c(
+#|     "Two-by-two plot matrix titled Total Bill vs Tip with columns Non Smoker and Smoker and rows Female and Male. Each cell is a scatterplot of tip versus total bill faceted by time and day; with the default setting, day strips appear only on the top row and time strips only on the right column.",
+#|     "The same two-by-two Total Bill vs Tip plot matrix by smoker and sex, now with day and time facet strips shown on every panel.",
+#|     "The same two-by-two Total Bill vs Tip plot matrix by smoker and sex with all facet strips hidden, so the day and time facets are unlabelled."
+#|   )
 data(tips)
 subPlot <- function(smoker_value, sex_value) {
   ggplot(

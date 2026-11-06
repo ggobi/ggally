@@ -30,17 +30,23 @@ The purpose of this function is to easily plot a visualization of the bivariate 
 Simply indicate the outcome and the explanatory variables. Both could be discrete or continuous.
 
 ```{r}
+#| fig.alt: >
+#|   Column of four plots showing smoker status against day, time, sex, and tip. Stacked percentage bars for day, time, and sex show Friday has the highest share of smokers, and a box plot shows tip by smoker status.
 data(tips)
 ggbivariate(tips, outcome = "smoker", explanatory = c("day", "time", "sex", "tip"))
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Column of four plots showing total bill against day, time, sex, and tip. Box plots show higher bills on weekends, at dinner, and for men, and a scatterplot shows tip rising with the total bill.
 ggbivariate(tips, outcome = "total_bill", explanatory = c("day", "time", "sex", "tip"))
 ```
 
 If no explanatory variables are provided, will take all available variables other than the outcome.
 
 ```{r}
+#| fig.alt: >
+#|   Column of six plots showing smoker status against every other tips variable: total bill, tip, sex, day, time, and size. Discrete variables are stacked percentage bars filled by smoker status and continuous variables are box plots split by smoker status.
 ggbivariate(tips, "smoker")
 ```
 
@@ -48,6 +54,8 @@ ggbivariate(tips, "smoker")
 ## Customize plot title and legend title
 
 ```{r}
+#| fig.alt: >
+#|   Column of four plots showing smoker status against day, time, sex, and tip, with the title "Custom title" and the legend titled "Smoker ?".
 ggbivariate(
   tips, "smoker", c("day", "time", "sex", "tip"),
   title = "Custom title"
@@ -58,6 +66,8 @@ ggbivariate(
 ## Customize fill colour scale
 
 ```{r}
+#| fig.alt: >
+#|   Column of four plots showing smoker status against day, time, sex, and tip, with the stacked percentage bars filled using a qualitative ColorBrewer palette.
 ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")) +
   scale_fill_brewer(type = "qual")
 ```
@@ -65,6 +75,8 @@ ggbivariate(tips, "smoker", c("day", "time", "sex", "tip")) +
 ## Customize labels
 
 ```{r}
+#| fig.alt: >
+#|   Column of four plots showing smoker status against day, time, sex, and tip, with the percentage labels on the stacked bars drawn in larger bold white text.
 ggbivariate(
   tips, "smoker", c("day", "time", "sex", "tip"),
   rowbar_args = list(
@@ -79,6 +91,7 @@ ggbivariate(
 ## Choose the sub-plot from which to get the legend
 
 ```{r}
+#| fig.alt: !expr c("Column of six plots showing smoker status against total bill, tip, sex, day, time, and size, with the legend taken from the first sub-plot.", "The same column of six plots showing smoker status against total bill, tip, sex, day, time, and size, with the legend taken from the third sub-plot.")
 ggbivariate(tips, "smoker")
 ggbivariate(tips, "smoker", legend = 3)
 ```
@@ -86,12 +99,16 @@ ggbivariate(tips, "smoker", legend = 3)
 ## Change theme
 
 ```{r}
+#| fig.alt: >
+#|   Column of six plots showing smoker status against total bill, tip, sex, day, time, and size, drawn with the light theme: white panels, grey borders, and grey strip labels.
 ggbivariate(tips, "smoker") + theme_light()
 ```
 
 ## Use mapping to indicate weights
 
 ```{r}
+#| fig.alt: >
+#|   Column of three stacked percentage bar charts showing Titanic survival against class, sex, and age, weighted by passenger count. Survival is highest in first class, for women, and for children, and lowest for the crew and third class.
 d <- as.data.frame(Titanic)
 ggbivariate(d, "Survived", mapping = aes(weight = Freq))
 ```
@@ -99,6 +116,8 @@ ggbivariate(d, "Survived", mapping = aes(weight = Freq))
 ## Use types to customize types of subplots
 
 ```{r}
+#| fig.alt: >
+#|   Column of four plots showing smoker status against day, time, sex, and tip. Day, time, and sex are stacked percentage bars, and tip is shown as jittered points for smokers and non-smokers instead of box plots.
 ggbivariate(
   tips,
   outcome = "smoker",
