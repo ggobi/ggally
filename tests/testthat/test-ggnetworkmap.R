@@ -10,18 +10,33 @@ skip_if(!rq(ggplot2))
 skip_if(!rq(intergraph)) # test igraph conversion
 
 skip_if_not_installed("geosphere")
+skip_if_not_installed("airports")
 
+# convert "DD-MM-SS.SSSSN" coordinates to decimal degrees
+dms_to_number <- function(dms) {
+  parts <- strsplit(dms, "-")[[1]]
+  degrees <- as.numeric(parts[1])
+  minutes <- as.numeric(parts[2]) / 60
+  seconds <- as.numeric(sub(parts[3], pattern = "N|W", replacement = "")) / 3600
+  direction <- if (grepl("W", parts[3])) -1 else 1
+  direction * (degrees + minutes + seconds)
+}
 
-# first 500 rows of http://datasets.flowingdata.com/tuts/maparcs/airports.csv
-# avoids downloading the dataset to test the package
-airports <- read.csv(test_path("data/airports.csv"), header = TRUE)
-rownames(airports) <- airports$iata
+# keep certified airports in the northern and western hemispheres
+airports <- as.data.frame(airports::usairports)
+airports <- subset(
+  airports,
+  !is.na(cert_type_date) & grepl("N", arp_latitude) & grepl("W", arp_longitude)
+)
+airports$lat <- vapply(airports$arp_latitude, dms_to_number, numeric(1))
+airports$long <- vapply(airports$arp_longitude, dms_to_number, numeric(1))
+rownames(airports) <- airports$location_id
 
 # select some random flights
 set.seed(123)
 flights <- data.frame(
-  origin = sample(airports[200:400, ]$iata, 200, replace = TRUE),
-  destination = sample(airports[200:400, ]$iata, 200, replace = TRUE)
+  origin = sample(airports[200:400, ]$location_id, 200, replace = TRUE),
+  destination = sample(airports[200:400, ]$location_id, 200, replace = TRUE)
 )
 
 # convert to network

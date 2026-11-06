@@ -47,6 +47,11 @@ str(psychademic)
 First, look at the within correlation using `ggpairs()`.
 
 ```{r ggduo-within}
+#| fig.alt: !expr |
+#|   c(
+#|     "Pairs plot matrix titled Within Psychological Variables for locus_of_control, self_concept, and motivation. Diagonals show densities or bar counts, upper panels show correlations or boxplots, and lower panels show scatterplots or faceted histograms; locus_of_control and self_concept are only weakly correlated (about 0.17).",
+#|     "Pairs plot matrix titled Within Academic Variables for read, write, math, science, and sex. The four test scores have scatterplots in the lower panels and correlations of about 0.57 to 0.69 in the upper panels, and sex appears as boxplots, histograms, and a bar chart."
+#|   )
 ggpairs(psychademic, psych_variables, title = "Within Psychological Variables")
 ggpairs(psychademic, academic_variables, title = "Within Academic Variables")
 ```
@@ -54,6 +59,8 @@ ggpairs(psychademic, academic_variables, title = "Within Academic Variables")
 Next, look at the between correlation using `ggduo()`.
 
 ```{r ggduo-between}
+#| fig.alt: >
+#|   Plot matrix titled Between Academic and Psychological Variable Correlation, with the psychological variables (locus_of_control, self_concept, motivation) across the columns and the academic variables (read, write, math, science, sex) down the rows. Continuous pairs show scatterplots with linear fits, mixed pairs show boxplots or faceted histograms; test scores rise with locus_of_control and with motivation level but barely change with self_concept.
 ggduo(
   psychademic, psych_variables, academic_variables,
   types = list(continuous = "smooth_lm"),
@@ -66,6 +73,8 @@ ggduo(
 Since ggduo does not have a upper section to display the correlation values, we may use a custom function to add the information in the continuous plots.  The strips may be removed as each group name may be recovered in the outer axis labels.
 
 ```{r ggduo-lm}
+#| fig.alt: >
+#|   Plot matrix of psychological variables (motivation, self_concept, locus_of_control) across the columns against academic variables (read, write, math, science, sex) down the rows, coloured by sex with a legend at the bottom. Continuous panels show scatterplots with linear fits by sex and a bold label with the correlation in the top-left corner; locus_of_control shows the strongest positive link with test scores.
 lm_with_cor <- function(data, mapping, ..., method = "pearson") {
   x <- eval_data_col(data, mapping$x)
   y <- eval_data_col(data, mapping$y)
@@ -103,6 +112,8 @@ While displaying multiple time series vertically over time, such as `+ ggplot2::
 
 
 ```{r ggduo-mtsa}
+#| fig.alt: >
+#|   Faceted time series of the pigs data from 1967 to 1979, one row per variable (gilts, herdsz, production, profit, profit_group, s_per_herdsz) with free y scales. Each row shows points with a smooth trend line; the 0/1 profit_group row can only be shown as numbers on a continuous axis.
 library(ggplot2)
 
 data(pigs)
@@ -120,6 +131,12 @@ ggplot(
 Instead, we may use `ggts` to display the data.  `ggts` changes the default behavior of ggduo of `columnLabelsX` to equal `NULL` and allows for mixed variable types.
 
 ```{r ggduo-mtsa-group}
+#| fig.alt: !expr |
+#|   c(
+#|     "Time series plot matrix from ggts with time on the x axis and six rows: gilts, profit, s_per_herdsz, production, herdsz, and profit_group. The continuous rows show points with smooth trend lines, and the discrete profit_group row shows histograms of time split into high and low profit.",
+#|     "The same six-row ggts time series plot matrix of the pigs variables against time, with the profit_group histograms now using a bin width of 1 year.",
+#|     "Six-row ggts time series plot matrix of the pigs variables against time, coloured by profit group (high or low) with a legend. Points and trend lines are split by group; high-profit quarters cluster before about 1974 and low-profit quarters after it, while production and herd size rise and then fall."
+#|   )
 # make the profit group as a factor value
 profit_groups <- c(
   "1" = "high",
@@ -144,6 +161,8 @@ ggts(pigs_dt, pigs_mapping, "time", 2:7, types = pigs_types, legend = c(6, 1))
 Produce more meaningful labels, add a legend, and remove profit group strips.
 
 ```{r ggduo-mtsa-pretty}
+#| fig.alt: >
+#|   Six-row ggts time series plot matrix of the pigs data against time, coloured by profit group with a legend at the bottom. Rows have readable labels such as number of first birth sows, sell price over feed cost, and profit group, and the profit group strips are hidden; high-profit quarters mostly fall before about 1974.
 pm <- ggts(
   pigs_dt, pigs_mapping,
   1, 2:7,
@@ -177,6 +196,11 @@ Since `ggduo()` may take custom functions just like `ggpairs()`, we will make a 
 Note: the marginal residuals are calculated before plotting and the y_range is found to display all residuals on the same scale.
 
 ```{r ggduo-reg-swiss}
+#| fig.alt: !expr |
+#|   c(
+#|     "Plot matrix of the swiss data with Agriculture, Examination, Education, Catholic, and Infant.Mortality across the columns and Fertility and Residual down the rows. The Fertility row shows scatterplots with linear fits, falling for Examination and Education and rising for the others; the Residual row shows each fit's residuals around a red line at zero on a shared y scale.",
+#|     "The same swiss regression plot matrix of Fertility and Residual against five predictors, with the zero line in the Residual row now thick and blue and the points slightly transparent."
+#|   )
 swiss <- datasets::swiss
 
 # add a 'fake' column

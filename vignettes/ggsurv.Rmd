@@ -30,6 +30,9 @@ Default settings differ for single stratum and multiple strata objects.
 
 ## Single Stratum
 ```{r basic-usage, fig.height=7, fig.width=7}
+#| fig.alt: >
+#|   Kaplan-Meier step curve of survival over time for all lung cancer patients, with dashed
+#|   confidence bands and crosses marking censored cases. Survival falls steadily toward zero by about 1000 days.
 require(ggplot2)
 require(survival)
 require(scales)
@@ -44,6 +47,9 @@ ggsurv(sf.lung)
 The legend color positions matches the survival order or each stratum, where the stratums that end at a lower value or time have a position that is lower in the legend.
 
 ```{r ggsurv-multiple}
+#| fig.alt: >
+#|   Kaplan-Meier survival curves for lung cancer patients split by sex, with colour and line type
+#|   by group and crosses for censored cases. The sex = 2 group (female) stays above the sex = 1 group (male).
 sf.sex <- survival::survfit(Surv(time, status) ~ sex, data = lung)
 pl.sex <- ggsurv(sf.sex)
 pl.sex
@@ -56,6 +62,9 @@ Since a ggplot2 object is returned, plot objects may be altered after the origin
 ### Adjusting the legend
 
 ```{r ggsurv-legend}
+#| fig.alt: >
+#|   The same survival curves by sex, now with a single colour legend titled Sex labelled Male and Female.
+#|   Female survival stays above male survival.
 pl.sex +
   ggplot2::guides(linetype = "none") +
   ggplot2::scale_colour_discrete(
@@ -68,6 +77,10 @@ pl.sex +
 ### Adjust the limits
 
 ```{r ggsurv-limits}
+#| fig.alt: !expr c(
+#|   "Kaplan-Meier survival curves for kidney patients by disease type (Other, GN, AN, PKD), coloured by group, without censoring marks. GN and AN drop fastest, while Other and PKD last longest.",
+#|   "The same kidney survival curves zoomed in to the first 80 days and survival between 0.45 and 1, making the early drops by disease type easier to compare."
+#|   )
 data(kidney, package = "survival")
 sf.kid <- survival::survfit(Surv(time, status) ~ disease, data = kidney)
 pl.kid <- ggsurv(sf.kid, plot.cens = FALSE)
@@ -79,6 +92,9 @@ pl.kid + ggplot2::coord_cartesian(xlim = c(0, 80), ylim = c(0.45, 1))
 
 ### Add text and remove the legend
 ```{r ggsurv-text}
+#| fig.alt: >
+#|   Kaplan-Meier survival curves for kidney patients by disease type with no legend; instead each curve
+#|   is labelled directly in its own colour with PKD, Other, GN and AN.
 pl.kid +
   ggplot2::annotate(
     "text",

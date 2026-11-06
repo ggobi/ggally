@@ -12,13 +12,13 @@ test_that("ggally_cor_v1_5() works", {
 })
 
 test_that("v1_ggmatrix_theme() is deprecated", {
-  skip_if(packageVersion("ggplot2") < "3.5.2.9001")
-
-  old_opts <- options(lifecycle_verbosity = "quiet")
-  on.exit(options(old_opts), add = TRUE)
-
-  expect_snapshot(
-    v1_ggmatrix_theme()
+  lifecycle::expect_deprecated(th <- v1_ggmatrix_theme())
+  expect_equal(
+    th,
+    theme(
+      strip.background = element_rect(fill = "white"),
+      strip.placement = "outside"
+    )
   )
 })
 

@@ -34,6 +34,11 @@ There are many hidden features within `ggpairs()`.  Please take a look at the ex
 The `columns` displayed default to all columns of the provided `data`.  To subset to only a few columns, use the `columns` parameter.
 
 ```{r ggpairs_columns}
+#| fig.alt: !expr |
+#|   c(
+#|     "Pairs plot matrix of all seven tips columns: total_bill, tip, sex, smoker, day, time, and size. Upper panels show correlations, boxplots, or count tiles, lower panels show scatterplots, histograms, or bar charts, and the diagonal shows densities or bar counts; with 49 panels it is too crowded to read.",
+#|     "Three-by-three pairs plot matrix of Total Bill, Time of Day, and Tip. The diagonal shows densities for the bill and tip and a bar chart for time; the upper panels show the bill-tip correlation (0.676) and boxplots by time, and the lower panels show a rising bill-tip scatterplot and histograms faceted by time."
+#|   )
 data(tips)
 pm <- ggpairs(tips)
 pm
@@ -49,6 +54,8 @@ pm
 Aesthetics can be applied to every subplot with the `mapping` parameter.
 
 ```{r ggpairs_mapping}
+#| fig.alt: >
+#|   Three-by-three pairs plot matrix of total_bill, time, and tip, coloured by sex. Every panel splits by sex: the bill-tip scatterplot uses coloured points, the time panels use filled boxes and bars, and the correlation panel lists overall, female, and male correlations.
 library(ggplot2)
 pm <- ggpairs(tips, mapping = aes(color = sex), columns = c("total_bill", "time", "tip"))
 pm
@@ -74,6 +81,8 @@ To make adjustments to each section, a list of information may be supplied.  The
 The list of current valid `ggally_NAME` functions is visible in `vig_ggally("ggally_plots")`.
 
 ```{r ggpairs_section}
+#| fig.alt: >
+#|   Three-by-three pairs plot matrix of total_bill, time, and tip with a customised lower section coloured by time. The lower bill-tip panel is a scatterplot with a fitted smooth line, and the lower time panels show faceted density curves; the upper panels and diagonal keep the defaults.
 library(ggplot2)
 pm <- ggpairs(
   tips,
@@ -90,6 +99,8 @@ pm
 A section list may be set to the character string `"blank"` or `NULL` if the section should be skipped when printed.
 
 ```{r ggpairs_blank}
+#| fig.alt: >
+#|   Three-by-three pairs plot matrix of total_bill, time, and tip with the upper triangle and diagonal left empty. Only the lower panels are drawn: histograms of total_bill and tip faceted by time, and a scatterplot of tip versus total_bill.
 pm <- ggpairs(
   tips,
   columns = c("total_bill", "time", "tip"),
@@ -114,6 +125,8 @@ custom_function <- function(data, mapping, ...) {
 There is no requirement to what happens within the function, as long as a ggplot2 object is returned.
 
 ```{r ggpairs_custom_function}
+#| fig.alt: >
+#|   Three-by-three pairs plot matrix of total_bill, time, and tip where the lower continuous panel is a 2D binned heatmap of tip versus total_bill shaded from dark to light blue by count. The densest bins sit at low bills and low tips; the other panels use the defaults.
 my_bin <- function(data, mapping, ..., low = "#132B43", high = "#56B1F7") {
   ggplot(data = data, mapping = mapping) +
     geom_bin2d(...) +
@@ -136,6 +149,8 @@ The examples above use default parameters to each of the subplots.  One of the i
 To change the default parameter `binwidth` setting, we will `wrap()` the function.  `wrap()` first parameter should be a character string or a custom function.  The remaining parameters supplied to wrap will be supplied to the function at run time.
 
 ```{r ggpairs_wrap}
+#| fig.alt: >
+#|   Three-by-three pairs plot matrix of total_bill, time, and tip with wrapped lower functions. The lower tip-versus-bill panel is a 2D binned heatmap with wider bins shaded dark blue to red, and the lower time panels are histograms with a bin width of 1.
 pm <- ggpairs(
   tips,
   columns = c("total_bill", "time", "tip"),
@@ -157,6 +172,11 @@ Please look at the [vignette for ggmatrix](#ggallyggmatrix) on plot matrix manip
 Small `ggpairs()` example:
 
 ```{r ggpairs_matrix}
+#| fig.alt: !expr |
+#|   c(
+#|     "Single scatterplot of tip versus total_bill, the third-row, first-column panel taken from the pairs matrix, with points coloured by time (Dinner or Lunch). Tips rise with the bill for both meal times.",
+#|     "Three-by-three pairs plot matrix of total_bill, time, and tip with default panels, except the lower-left tip-versus-total_bill scatterplot, which now has points coloured by time."
+#|   )
 pm <- ggpairs(tips, columns = c("total_bill", "time", "tip"))
 # retrieve the third row, first column plot
 p <- pm[3, 1]
@@ -173,6 +193,8 @@ Please look at the [vignette for ggmatrix](#ggallyggmatrix) on plot matrix manip
 Small `ggpairs()` example:
 
 ```{r ggpairs_theme}
+#| fig.alt: >
+#|   The same three-by-three pairs plot matrix of total_bill, time, and tip, with the lower-left scatterplot coloured by time, now drawn with the black-and-white theme: white panel backgrounds, grey grid lines, and a border around each panel.
 pmBW <- pm + theme_bw()
 pmBW
 ```

@@ -1,8 +1,8 @@
 # [GGally](http://ggobi.github.io/ggally/): Extension to [ggplot2](https://ggplot2.tidyverse.org/)
 
 <!-- badges: start -->
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/GGally)](https://cran.r-project.org/package=GGally)
-[![](http://cranlogs.r-pkg.org/badges/GGally)](https://cran.r-project.org/package=GGally)
+[![CRAN status](http://www.r-pkg.org/badges/version/GGally)](https://cran.r-project.org/package=GGally)
+[![CRAN downloads](http://cranlogs.r-pkg.org/badges/GGally)](https://cran.r-project.org/package=GGally)
 [![R-CMD-check](https://github.com/ggobi/ggally/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ggobi/ggally/actions/workflows/R-CMD-check.yaml)
 [![DOI](https://zenodo.org/badge/22529/ggobi/ggally.svg)](https://zenodo.org/badge/latestdoi/22529/ggobi/ggally)
 [![RStudio community](https://img.shields.io/badge/community-GGally-blue?style=social&logo=rstudio&logoColor=75AADB)](https://forum.posit.co/tags/c/general/17/ggally/747)
