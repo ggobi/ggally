@@ -187,7 +187,7 @@ check_nrow_ncol <- function(x, title) {
   x
 }
 
-#' @include ggpairs_getput.R
+#' @include ggmatrix_getput.R
 #' @export
 `[.GGally::ggmatrix` <- `[.ggmatrix`
 #' @export
