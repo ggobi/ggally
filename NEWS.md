@@ -1,3 +1,5 @@
+# GGally (development version)
+
 # GGally 2.5.0
 
 ## Lifecycle changes
