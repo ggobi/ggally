@@ -3,6 +3,9 @@
 \name{print.ggmatrix}
 \alias{print.ggmatrix}
 \title{Print \code{\link{ggmatrix}} object}
+\usage{
+\method{print}{ggmatrix}(x, newpage = TRUE, vp = NULL, ...)
+}
 \arguments{
 \item{x}{plot to display}
 

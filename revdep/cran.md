@@ -1,24 +1,18 @@
 ## revdepcheck results
 
-We checked 141 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 184 reverse dependencies (154 from CRAN + 30 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 4 new problems
- * We failed to check 0 packages
+ * We saw 0 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
-### New problems
-(This reports the first line of each new failure)
+### Failed to check
 
-* comparer
-  checking tests ... ERROR
-
-* ezEDA
-  checking tests ... ERROR
-
-* rbioacc
-  checking tests ... ERROR
-
-* tidycomm
-  checking tests ... ERROR
-
+* airGR       (NA)
+* BAS         (NA)
+* fingerPro   (NA)
+* jarbes      (NA)
+* loon.ggplot (NA)
+* morseDR     (NA)
+* simmr       (NA)

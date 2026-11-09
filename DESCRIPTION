@@ -1,7 +1,7 @@
 Type: Package
 Package: GGally
 Title: Extension to 'ggplot2'
-Version: 2.4.0.9000
+Version: 2.5.0
 Authors@R: c(
     person("Barret", "Schloerke", , "schloerke@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9986-114X")),
@@ -79,7 +79,7 @@ RdMacros:
 Config/Needs/website: tidyverse/tidytemplate
 Config/roxygen2/version: 8.1.1
 Config/testthat/edition: 3
-Config/usethis/last-upkeep: 2025-06-13
+Config/usethis/last-upkeep: 2026-11-06
 Encoding: UTF-8
 Language: en-US
 LazyData: true
