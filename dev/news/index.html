@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">GGally</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.4.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.5.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,15 +57,23 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggally-development-version">GGally (development version)<a class="anchor" aria-label="anchor" href="#ggally-development-version"></a></h2>
-<ul><li><p>Fixed duplicate aesthetics warning in <code><a href="../reference/ggsurv.html">ggsurv()</a></code> with upcoming ggplot2 version. Removed duplicate <code>lty</code> aesthetic mapping from confidence interval bounds. (<a href="https://github.com/ggobi/ggally/issues/572" class="external-link">#572</a>)</p></li>
-<li><p>Fixed <code><a href="../reference/mapping_string.html">mapping_string()</a></code> to properly handle long aesthetic expressions by collapsing multi-line <code><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse()</a></code> output. (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>)</p></li>
-<li><p>Updated <code>fix_data()</code> to handle map objects correctly with ggplot2 &gt;= 4.0.0 using <code><a href="https://ggplot2.tidyverse.org/reference/map_data.html" class="external-link">ggplot2::map_data()</a></code> instead of <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code>. (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>)</p></li>
-<li><p>Wrapped documentation examples requiring optional packages (<a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a>, <a href="https://broom.tidymodels.org/" class="external-link">broom</a>, <a href="https://statnet.org/" class="external-link">network</a>, <a href="https://statnet.org" class="external-link">sna</a>, <a href="https://ggforce.data-imaginist.com" class="external-link">ggforce</a>) in <code>if (require(...))</code> blocks to prevent errors when packages are not installed. (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>)</p></li>
-<li><p>Added <a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a> to Suggests in DESCRIPTION to support density plot examples. (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>)</p></li>
-<li><p>Updated <code>.Rbuildignore</code> to exclude <a href="https://vdiffr.r-lib.org/" class="external-link">vdiffr</a> snapshot SVG files more specifically. (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>)</p></li>
-<li><p>Added GitHub Actions check script to conditionally remove snapshot paths from <code>.Rbuildignore</code> for macOS testing. (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>)</p></li>
-<li><p><code>ggcoef_multinom()</code> has been removed. Simply use <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_model()</a></code>, <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_table()</a></code>, <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_dodged()</a></code> or <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_faceted()</a></code>. (<a href="https://github.com/ggobi/ggally/issues/575" class="external-link">#575</a>)</p></li>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.5.0" id="ggally-250">GGally 2.5.0<a class="anchor" aria-label="anchor" href="#ggally-250"></a></h2>
+<div class="section level3">
+<h3 id="lifecycle-changes-2-5-0">Lifecycle changes<a class="anchor" aria-label="anchor" href="#lifecycle-changes-2-5-0"></a></h3>
+<ul><li>
+<code>ggcoef_multinom()</code> has been removed. Use <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_model()</a></code>, <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_table()</a></code>, <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_dodged()</a></code>, or <code><a href="https://larmarange.github.io/ggstats/reference/ggcoef_model.html" class="external-link">ggstats::ggcoef_faceted()</a></code> instead (<a href="https://github.com/ggobi/ggally/issues/575" class="external-link">#575</a>).</li>
 </ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-and-minor-improvements-2-5-0">Bug fixes and minor improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-minor-improvements-2-5-0"></a></h3>
+<ul><li><p>GGally now loads without import warnings when used with the development version of S7, and uses the S7 load, build, and unload hooks when they are available (<a href="https://github.com/t-kalinowski" class="external-link">@t-kalinowski</a>, <a href="https://github.com/ggobi/ggally/issues/578" class="external-link">#578</a>).</p></li>
+<li><p>Examples that need optional packages ({MASS}, {broom}, {network}, {sna}, {ggforce}) now run only when those packages are installed. {MASS} is now listed in Suggests (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>).</p></li>
+<li><p><code>fix_data()</code> now uses <code><a href="https://ggplot2.tidyverse.org/reference/map_data.html" class="external-link">ggplot2::map_data()</a></code> instead of <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> to handle map objects with ggplot2 &gt;= 4.0.0 (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>).</p></li>
+<li><p><code><a href="../reference/ggsurv.html">ggsurv()</a></code> now maps <code>lty</code> only once for the confidence interval bounds, which avoids a duplicate aesthetics warning with upcoming ggplot2 (<a href="https://github.com/ggobi/ggally/issues/572" class="external-link">#572</a>).</p></li>
+<li><p><code><a href="../reference/mapping_string.html">mapping_string()</a></code> now handles long aesthetic expressions by collapsing multi-line <code><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse()</a></code> output (<a href="https://github.com/ggobi/ggally/issues/573" class="external-link">#573</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.4.0" id="ggally-240">GGally 2.4.0<a class="anchor" aria-label="anchor" href="#ggally-240"></a></h2><p class="text-muted">CRAN release: 2025-08-23</p>
 <ul><li><p>Replace internal usage with the base pipe (<code>|&gt;</code>). (Thank you <a href="https://github.com/m-muecke" class="external-link">@m-muecke</a>! <a href="https://github.com/ggobi/ggally/issues/554" class="external-link">#554</a>)</p></li>

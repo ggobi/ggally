@@ -5,6 +5,13 @@ View the condensed version of the
 object. The attribute "class" is ALWAYS altered to "\_class" to avoid
 recursion.
 
+## Usage
+
+``` r
+# S3 method for class 'ggmatrix'
+str(object, ..., raw = FALSE)
+```
+
 ## Arguments
 
 - object:

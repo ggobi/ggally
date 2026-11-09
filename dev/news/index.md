@@ -2,52 +2,47 @@
 
 ## GGally (development version)
 
-- Fixed duplicate aesthetics warning in
-  [`ggsurv()`](https://ggobi.github.io/ggally/dev/reference/ggsurv.md)
-  with upcoming ggplot2 version. Removed duplicate `lty` aesthetic
-  mapping from confidence interval bounds.
-  ([\#572](https://github.com/ggobi/ggally/issues/572))
+## GGally 2.5.0
 
-- Fixed
-  [`mapping_string()`](https://ggobi.github.io/ggally/dev/reference/mapping_string.md)
-  to properly handle long aesthetic expressions by collapsing multi-line
-  [`deparse()`](https://rdrr.io/r/base/deparse.html) output.
-  ([\#573](https://github.com/ggobi/ggally/issues/573))
+### Lifecycle changes
 
-- Updated `fix_data()` to handle map objects correctly with ggplot2 \>=
-  4.0.0 using
-  [`ggplot2::map_data()`](https://ggplot2.tidyverse.org/reference/map_data.html)
-  instead of
-  [`fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html).
-  ([\#573](https://github.com/ggobi/ggally/issues/573))
-
-- Wrapped documentation examples requiring optional packages
-  ([MASS](http://www.stats.ox.ac.uk/pub/MASS4/),
-  [broom](https://broom.tidymodels.org/),
-  [network](https://statnet.org/), [sna](https://statnet.org),
-  [ggforce](https://ggforce.data-imaginist.com)) in `if (require(...))`
-  blocks to prevent errors when packages are not installed.
-  ([\#573](https://github.com/ggobi/ggally/issues/573))
-
-- Added [MASS](http://www.stats.ox.ac.uk/pub/MASS4/) to Suggests in
-  DESCRIPTION to support density plot examples.
-  ([\#573](https://github.com/ggobi/ggally/issues/573))
-
-- Updated `.Rbuildignore` to exclude [vdiffr](https://vdiffr.r-lib.org/)
-  snapshot SVG files more specifically.
-  ([\#573](https://github.com/ggobi/ggally/issues/573))
-
-- Added GitHub Actions check script to conditionally remove snapshot
-  paths from `.Rbuildignore` for macOS testing.
-  ([\#573](https://github.com/ggobi/ggally/issues/573))
-
-- `ggcoef_multinom()` has been removed. Simply use
+- `ggcoef_multinom()` has been removed. Use
   [`ggstats::ggcoef_model()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html),
   [`ggstats::ggcoef_table()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html),
-  [`ggstats::ggcoef_dodged()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html)
+  [`ggstats::ggcoef_dodged()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html),
   or
-  [`ggstats::ggcoef_faceted()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html).
-  ([\#575](https://github.com/ggobi/ggally/issues/575))
+  [`ggstats::ggcoef_faceted()`](https://larmarange.github.io/ggstats/reference/ggcoef_model.html)
+  instead ([\#575](https://github.com/ggobi/ggally/issues/575)).
+
+### Bug fixes and minor improvements
+
+- GGally now loads without import warnings when used with the
+  development version of S7, and uses the S7 load, build, and unload
+  hooks when they are available
+  ([@t-kalinowski](https://github.com/t-kalinowski),
+  [\#578](https://github.com/ggobi/ggally/issues/578)).
+
+- Examples that need optional packages ({MASS}, {broom}, {network},
+  {sna}, {ggforce}) now run only when those packages are installed.
+  {MASS} is now listed in Suggests
+  ([\#573](https://github.com/ggobi/ggally/issues/573)).
+
+- `fix_data()` now uses
+  [`ggplot2::map_data()`](https://ggplot2.tidyverse.org/reference/map_data.html)
+  instead of
+  [`fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html) to
+  handle map objects with ggplot2 \>= 4.0.0
+  ([\#573](https://github.com/ggobi/ggally/issues/573)).
+
+- [`ggsurv()`](https://ggobi.github.io/ggally/dev/reference/ggsurv.md)
+  now maps `lty` only once for the confidence interval bounds, which
+  avoids a duplicate aesthetics warning with upcoming ggplot2
+  ([\#572](https://github.com/ggobi/ggally/issues/572)).
+
+- [`mapping_string()`](https://ggobi.github.io/ggally/dev/reference/mapping_string.md)
+  now handles long aesthetic expressions by collapsing multi-line
+  [`deparse()`](https://rdrr.io/r/base/deparse.html) output
+  ([\#573](https://github.com/ggobi/ggally/issues/573)).
 
 ## GGally 2.4.0
 

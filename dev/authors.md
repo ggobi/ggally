@@ -36,12 +36,12 @@ Source:
 
 Schloerke B, Cook D, Larmarange J, Briatte F, Marbach M, Thoen E, Elberg
 A, Crowley J (2026). *GGally: Extension to 'ggplot2'*. R package version
-2.4.0.9000, <https://ggobi.github.io/ggally/>.
+2.5.0.9000, <https://ggobi.github.io/ggally/>.
 
     @Manual{,
       title = {GGally: Extension to 'ggplot2'},
       author = {Barret Schloerke and Di Cook and Joseph Larmarange and Francois Briatte and Moritz Marbach and Edwin Thoen and Amos Elberg and Jason Crowley},
       year = {2026},
-      note = {R package version 2.4.0.9000},
+      note = {R package version 2.5.0.9000},
       url = {https://ggobi.github.io/ggally/},
     }

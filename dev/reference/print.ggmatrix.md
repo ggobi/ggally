@@ -4,6 +4,13 @@ Print method taken from `ggplot2:::print.ggplot` and altered for a
 [`ggmatrix`](https://ggobi.github.io/ggally/dev/reference/ggmatrix.md)
 object
 
+## Usage
+
+``` r
+# S3 method for class 'ggmatrix'
+print(x, newpage = TRUE, vp = NULL, ...)
+```
+
 ## Arguments
 
 - x:

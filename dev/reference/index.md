@@ -328,7 +328,7 @@ More details in
 - [`remove_color_unless_equal()`](https://ggobi.github.io/ggally/dev/reference/remove_color_unless_equal.md)
   : Remove colour mapping unless found in select mapping keys
 
-- [`print.ggmatrix`](https://ggobi.github.io/ggally/dev/reference/print.ggmatrix.md)
+- [`print(`*`<ggmatrix>`*`)`](https://ggobi.github.io/ggally/dev/reference/print.ggmatrix.md)
   :
 
   Print `ggmatrix` object
@@ -343,7 +343,7 @@ More details in
 
   `ggmatrix` default progress bar
 
-- [`str.ggmatrix`](https://ggobi.github.io/ggally/dev/reference/str.ggmatrix.md)
+- [`str(`*`<ggmatrix>`*`)`](https://ggobi.github.io/ggally/dev/reference/str.ggmatrix.md)
   :
 
   `ggmatrix` structure
