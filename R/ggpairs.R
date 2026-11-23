@@ -583,9 +583,14 @@ ggduo <- function(
 #'
 #' @details
 #' \code{upper} and \code{lower} are lists that may contain the variables
-#' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be a function or a string.  If a string is supplied, it must be a character string representing the tail end of a \code{ggally_NAME} function. The list of current valid \code{ggally_NAME} functions is visible in a dedicated vignette.
+#' 'continuous', 'combo', 'discrete', and 'na'. Each element of the list may be
+#' a function or a string. String values use the suffix of a \code{ggally_NAME}
+#' function. See \code{\link{vig_ggally}("ggally_plots")} for the built-in panel
+#' functions and examples.
 #' \describe{
-#'  \item{continuous}{This option is used for continuous X and Y data.}
+#'  \item{continuous}{Used when both variables are continuous. Built-in strings
+#'  include \code{"points"}, \code{"smooth"}, \code{"smooth_loess"},
+#'  \code{"smooth_lm"}, \code{"density"}, \code{"cor"}, and \code{"blank"}.}
 #'  \item{combo}{This option is used for either continuous X and categorical Y data or categorical X and continuous Y data.}
 #'  \item{discrete}{This option is used for categorical X and Y data.}
 #'  \item{na}{This option is used when all X data is \code{NA}, all Y data is \code{NA}, or either all X or Y data is \code{NA}.}
@@ -601,6 +606,16 @@ ggduo <- function(
 #' If 'blank' is ever chosen as an option, then ggpairs will produce an empty plot.
 #'
 #' If a function is supplied as an option to \code{upper}, \code{lower}, or \code{diag}, it should implement the function api of \code{function(data, mapping, ...){#make ggplot2 plot}}.  If a specific function needs its parameters set, \code{\link{wrap}(fn, param1 = val1, param2 = val2)} the function with its parameters.
+#'
+#' For hexagonal bins, supply a continuous panel function that adds
+#' \code{\link[ggplot2]{geom_hex}()}. This example requires the \pkg{hexbin}
+#' package.
+#' \preformatted{
+#' hex_panel <- function(data, mapping, ...) {
+#'   ggplot2::ggplot(data, mapping) + ggplot2::geom_hex(...)
+#' }
+#' ggpairs(mtcars, columns = c(1, 6, 7), lower = list(continuous = hex_panel))
+#' }
 #'
 #' @export
 #' @seealso wrap v1_ggmatrix_theme
