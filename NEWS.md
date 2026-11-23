@@ -1,5 +1,8 @@
 # GGally (development version)
 
+* `ggcorr()` preserves spaces and punctuation in variable labels and keeps
+  the corresponding correlation tiles (#465).
+
 # GGally 2.5.0
 
 ## Lifecycle changes
