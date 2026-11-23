@@ -97,6 +97,32 @@ test_that("cor_matrix", {
   expect_equal(length(p$layers), 2)
 })
 
+test_that("nonsyntactic variable names keep their labels and correlations", {
+  data <- flea[2:5]
+  labels <- c("e'", "E/e'", "two words", ".ggally_ggcorr_row_names")
+  names(data) <- labels
+  cor_matrix <- cor(data)
+  cells <- which(lower.tri(cor_matrix), arr.ind = TRUE)
+  cells <- cells[order(cells[, "row"], cells[, "col"]), ]
+
+  for (plot in list(ggcorr(data), ggcorr(NULL, cor_matrix = cor_matrix))) {
+    expect_identical(ggplot2::layer_data(plot, 2)$label, labels)
+    expect_identical(plot$data$x, labels[cells[, "row"]])
+    expect_identical(as.character(plot$data$y), labels[cells[, "col"]])
+    expect_equal(plot$data$coefficient, cor_matrix[cells])
+  }
+})
+
+test_that("missing variable labels keep their correlation tiles", {
+  cor_matrix <- cor(flea[2:4])
+  labels <- c("a", NA_character_, "c")
+  dimnames(cor_matrix) <- list(labels, labels)
+
+  plot <- ggcorr(NULL, cor_matrix = cor_matrix)
+  expect_identical(ggplot2::layer_data(plot, 2)$label, c("a", "NA.", "c"))
+  expect_equal(nrow(plot$data), 3L)
+})
+
 test_that("other geoms", {
   expect_snapshot(ggcorr(flea[, -1], geom = "hexbin"), error = TRUE)
   ggally_expect_doppelganger(

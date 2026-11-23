@@ -93,7 +93,6 @@
 #' Barret Schloerke
 #' @importFrom stats cor
 #' @importFrom dplyr rename
-#' @importFrom tidyr pivot_longer
 #' @importFrom grDevices colorRampPalette
 #' @examples
 #' # Small function to display plots only if it's interactive
@@ -204,25 +203,18 @@ ggcorr <- function(
     cor_matrix <- cor(data, use = method[1], method = method[2])
   }
 
-  m <- cor_matrix
-  colnames(m) <- rownames(m) <- gsub(" ", "_", colnames(m)) # protect spaces
-
   # -- correlation data.frame --------------------------------------------------
 
-  m[upper.tri(m, diag = T)] <- NA
-  rownames(m) <- colnames(m)
-  m <- data.frame(m)
-
-  m$.ggally_ggcorr_row_names <- rownames(m)
-  m_long <-
-    m |>
-    tidyr::pivot_longer(
-      cols = -".ggally_ggcorr_row_names",
-      names_to = "y",
-      values_to = "coefficient"
-    ) |>
-    dplyr::rename(x = ".ggally_ggcorr_row_names") |>
-    dplyr::mutate(y = factor(.data$y, levels = rownames(m)))
+  m <- cor_matrix
+  m[upper.tri(m, diag = TRUE)] <- NA
+  variables <- colnames(m) %||% as.character(seq_len(ncol(m)))
+  variables[is.na(variables)] <- "NA."
+  variables <- make.unique(variables)
+  m_long <- tidyr::expand_grid(
+    x = variables,
+    y = factor(variables, levels = variables)
+  )
+  m_long$coefficient <- as.vector(t(m))
 
   # -- correlation quantiles ---------------------------------------------------
 
