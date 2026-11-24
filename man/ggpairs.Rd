@@ -38,7 +38,9 @@ ggpairs(
 
 \item{title, xlab, ylab}{title, x label, and y label for the graph}
 
-\item{upper}{see Details}
+\item{upper}{see Details. By default, the upper panels for continuous pairs
+show Pearson correlations. Use \code{\link[=wrap]{wrap()}} to set a different correlation
+method for \code{\link[=ggally_cor]{ggally_cor()}}, as shown in the examples.}
 
 \item{lower}{see Details}
 
@@ -199,6 +201,14 @@ pm <- ggpairs(tips, 2:3, lower = list(combo = wrap("facethist", binwidth = 0.5))
 p_(pm)
 # no warning displayed with user supplied function
 pm <- ggpairs(tips, 2:3, lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
+p_(pm)
+
+## Use Spearman correlation in the upper panels
+cor_data <- data.frame(x = 1:5, y = c(1, 2, 3, 4, 20))
+pm <- ggpairs(
+  cor_data,
+  upper = list(continuous = wrap("cor", method = "spearman"))
+)
 p_(pm)
 
 ## Remove panel grid lines from correlation plots
