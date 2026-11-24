@@ -159,6 +159,24 @@ test_that("diagAxis", {
   )
 })
 
+test_that("diagAxis forwards text arguments to the variable label", {
+  mappings <- list(ggplot2::aes(x = Petal.Width), ggplot2::aes(x = Species))
+  for (mapping in mappings) {
+    original <- ggally_diagAxis(iris, mapping)
+    styled <- ggally_diagAxis(iris, mapping, colour = "black", angle = 45)
+
+    label <- ggplot2::layer_data(styled, 1)
+    expect_equal(label$colour, "black")
+    expect_equal(label$angle, 45)
+    expect_no_warning(sized <- ggally_diagAxis(iris, mapping, size = 6))
+    expect_equal(ggplot2::layer_data(sized, 1)$size, 6)
+    expect_equal(
+      ggplot2::layer_data(styled, 2),
+      ggplot2::layer_data(original, 2)
+    )
+  }
+})
+
 test_that("dates", {
   class(nas) <- c("NOTFOUND", "data.frame")
   p <- ggally_cor(nas, ggplot2::aes(x = date, y = ozone))
