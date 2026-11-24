@@ -36,7 +36,9 @@ ggally_diagAxis(
 
 \item{gridLabelSize}{size of grid labels}
 
-\item{...}{other arguments for geom_text}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} for the
+variable label. Supplied \code{size}, \code{hjust}, or \code{vjust} values override the
+corresponding label settings.}
 }
 \description{
 This function is used when \code{axisLabels == "internal"}.

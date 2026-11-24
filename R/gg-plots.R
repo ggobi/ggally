@@ -1174,7 +1174,9 @@ get_x_axis_labels <- function(p, xRange) {
 #' @param labelHJust hjust supplied to label
 #' @param labelVJust vjust supplied to label
 #' @param gridLabelSize size of grid labels
-#' @param ... other arguments for geom_text
+#' @param ... Additional arguments passed to [ggplot2::geom_text()] for the
+#'   variable label. Supplied `size`, `hjust`, or `vjust` values override the
+#'   corresponding label settings.
 #' @author Jason Crowley and Barret Schloerke
 #' @export
 #' @examples
@@ -1208,6 +1210,13 @@ ggally_diagAxis <- function(
     label <- mapping_string(mapping$x)
   }
 
+  label_args <- rlang::list2(...)
+  label_defaults <- list(size = labelSize, hjust = labelHJust, vjust = labelVJust)
+  label_args <- c(
+    label_defaults[setdiff(names(label_defaults), names(label_args))],
+    label_args
+  )
+
   xData <- eval_data_col(data, mapping$x)
 
   if (numer) {
@@ -1218,16 +1227,15 @@ ggally_diagAxis <- function(
     xrange <- c(xmin - .01 * (xmax - xmin), xmax + .01 * (xmax - xmin))
     # xrange <- c(xmin, xmax)
 
-    p <- ggally_text(
+    p <- rlang::exec(
+      ggally_text,
       label = label,
       mapping = aes(col = I("grey50")),
       xrange = xrange,
       yrange = xrange,
-      size = labelSize,
       xP = labelXPercent,
       yP = labelYPercent,
-      hjust = labelHJust,
-      vjust = labelVJust
+      !!!label_args
     )
 
     axisBreaks <- get_x_axis_labels(p, xrange)
@@ -1249,16 +1257,15 @@ ggally_diagAxis <- function(
     breakLabels <- levels(as.factor(xData))
     numLvls <- length(breakLabels)
 
-    p <- ggally_text(
+    p <- rlang::exec(
+      ggally_text,
       label = label,
       mapping = aes(col = I("grey50")),
       xrange = c(0, 1),
       yrange = c(0, 1),
-      size = labelSize,
       yP = labelYPercent,
       xP = labelXPercent,
-      hjust = labelHJust,
-      vjust = labelVJust
+      !!!label_args
     )
     # axisBreaks <- (1+2*0:(numLvls-1))/(2*numLvls)
     axisBreaks <- 0:(numLvls - 1) *
