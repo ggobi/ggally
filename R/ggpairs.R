@@ -608,7 +608,9 @@ ggduo <- function(
 #' @param mapping aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.
 #' @param columns which columns are used to make plots.  Defaults to all columns.
 #' @param title,xlab,ylab title, x label, and y label for the graph
-#' @param upper see Details
+#' @param upper see Details. By default, the upper panels for continuous pairs
+#'   show Pearson correlations. Use [wrap()] to set a different correlation
+#'   method for [ggally_cor()], as shown in the examples.
 #' @param lower see Details
 #' @param diag see Details
 #' @param params `r lifecycle::badge("deprecated")` see \code{\link{wrap_fn_with_param_arg}}
@@ -732,6 +734,14 @@ ggduo <- function(
 #' p_(pm)
 #' # no warning displayed with user supplied function
 #' pm <- ggpairs(tips, 2:3, lower = list(combo = wrap(ggally_facethist, binwidth = 0.5)))
+#' p_(pm)
+#'
+#' ## Use Spearman correlation in the upper panels
+#' cor_data <- data.frame(x = 1:5, y = c(1, 2, 3, 4, 20))
+#' pm <- ggpairs(
+#'   cor_data,
+#'   upper = list(continuous = wrap("cor", method = "spearman"))
+#' )
 #' p_(pm)
 #'
 #' ## Remove panel grid lines from correlation plots
